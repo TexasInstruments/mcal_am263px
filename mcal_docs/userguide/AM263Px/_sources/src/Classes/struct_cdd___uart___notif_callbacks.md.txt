@@ -1,0 +1,40 @@
+---
+orphan: true
+---
+
+---
+title: Cdd_Uart_NotifCallbacks
+summary: UART notification callbacks structure. 
+
+---
+
+# Cdd_Uart_NotifCallbacks
+
+
+
+UART notification callbacks structure.  [More...](#detailed-description)
+
+
+`#include <Cdd_Uart_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  void(*)(void) | uartNotificationReadHandler |  UART Read Notification Handler.  |
+|  void(*)(void) | uartNotificationWriteHandler |  UART Write Notification Handler.  |
+|  void(*)(void) | uartNotificationErrorHandler |  UART Error Notification Handler.  |
+
+## Detailed Description
+
+```cpp
+struct Cdd_Uart_NotifCallbacks;
+```
+
+
+**Brief**: 
+UART notification callbacks structure. 
+
+Design: MCAL-22583, MCAL-22590 
+
+

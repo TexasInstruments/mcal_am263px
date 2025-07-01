@@ -1,0 +1,538 @@
+<?xml version="1.0"?>
+<!-- Parameter Definition XML Data forMat (XDM) file for CDD UART -->
+<datamodel xmlns="http://www.tresos.de/_projects/DataModel2/08/root.xsd" xmlns:a="http://www.tresos.de/_projects/DataModel2/08/attribute.xsd" xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd" version="5.0">
+
+	<d:ctr xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd" type="AUTOSAR" factory="autosar">
+		<d:lst type="TOP-LEVEL-PACKAGES">
+			<d:ctr name="TI_AM263Px" type="AR-PACKAGE">
+				<a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000001"/>
+				<d:lst type="ELEMENTS">
+					<d:chc name="Cdd_Uart" type="AR-ELEMENT" value="MODULE-DEF">
+						<v:ctr type="MODULE-DEF">
+							<a:a name="ADMIN-DATA" type="ADMIN-DATA">
+								<ad:ADMIN-DATA>
+									<ad:DOC-REVISIONS>
+										<ad:DOC-REVISION>
+											<ad:REVISION-LABEL>4.6.0</ad:REVISION-LABEL>
+											<ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+											<ad:DATE>2016-12-05</ad:DATE>
+										</ad:DOC-REVISION>
+									</ad:DOC-REVISIONS>
+								</ad:ADMIN-DATA>
+							</a:a>
+							<!-- Architecture: MCAL-22105 -->
+							<a:a name="DESC" value="EN: Configuration of the CDD (Complex Device Driver) UART module."/>
+							<a:a name="LOWER-MULTIPLICITY" value="0"/>
+							<a:a name="POSTBUILDVARIANTSUPPORT" value="false"/>
+							<a:a name="RELEASE" value="asc:4.3.1"/>
+							<a:a name="UPPER-MULTIPLICITY" value="*"/>
+							<a:a name="UUID" value="3cfdede8-066e-473b-9b4b-40b57a8ca632"/>
+							<v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+								<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+									<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									<icc:v class="PostBuild">VariantPostBuild</icc:v>
+								</a:a>
+								<a:a name="LABEL" value="Config Variant"/>
+								<a:a name="UUID" value="ccf29ffd-fde7-41db-a5d8-4aeb7476d2e2"/>
+								<a:da name="RANGE">
+									<a:v>VariantPostBuild</a:v>
+									<a:v>VariantPreCompile</a:v>
+								</a:da>
+							</v:var>
+							<v:lst name="CddUartDriver" type="MULTIPLE-CONFIGURATION-CONTAINER">
+								<a:da name="MIN" value="1"/>
+								<a:da name="MAX" value="1"/>
+								<v:ctr name="CddUartDriver" type="MULTIPLE-CONFIGURATION-CONTAINER">
+									<a:a name="DESC" value="EN: This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module."/>
+									<a:a name="UUID" value="df0680b9-eda7-4110-9598-ce1b432c3066"/>
+									<v:lst name="CddUartChannel" type="MAP">
+										<a:da name="MIN" value="1"/>
+										<a:da name="MAX" value="6"/>
+										<v:ctr name="CddUartChannel" type="IDENTIFIABLE">
+											<a:a name="DESC" value="EN: Configuration of an individual UART channel."/>
+											<a:a name="UUID" value="ECUC:74f0ce69-2156-4784-bae9-57ea4699e6e4"/>
+											<v:var name="CddUartHwID" type="ENUMERATION">
+												<a:a name="DESC" value="EN: This parameter contains the Channel ID of UART port in the device."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="05606ae9-e8ca-46f8-a8b5-86e6ff8e0357"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_CHANNEL_ID_0</a:v>
+													<a:v>CDD_UART_CHANNEL_ID_1</a:v>
+													<a:v>CDD_UART_CHANNEL_ID_2</a:v>
+													<a:v>CDD_UART_CHANNEL_ID_3</a:v>
+													<a:v>CDD_UART_CHANNEL_ID_4</a:v>
+													<a:v>CDD_UART_CHANNEL_ID_5</a:v>
+												</a:da>
+												<a:da name="DEFAULT" value="CDD_UART_CHANNEL_ID_0"/>
+											</v:var>
+											<v:var name="CddUartClockFrequency" type="INTEGER">
+												<a:a name="DESC" value="EN: This parameter indicates the input clock frequency from the device."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="05606ae9-e8ca-46f8-a8b5-86e6ff8e0357"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="INVALID" type="Range">
+													<a:tst expr="&lt;=1000000000"/>
+													<a:tst expr="&gt;=32000"/>
+												</a:da>
+												<a:da name="DEFAULT" value="48000000"/>
+											</v:var>
+											<v:var name="CddUartBaudRate" type="INTEGER">
+												<!-- Design: MCAL-22573 -->
+												<a:a name="DESC" value="EN: This parameter contains the desired Baud Rate to be used for transmission of signals."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="05606ae9-e8ca-46f8-a8b5-86e6ff8e0357"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="INVALID" type="Range">
+													<a:tst expr="&lt;=12000000"/>
+													<a:tst expr="&gt;=2400"/>
+												</a:da>
+												<a:da name="DEFAULT" value="115200"/>
+											</v:var>
+											<v:var name="CddUartIOMode" type="ENUMERATION">
+												<!-- Design: MCAL-22580,MCAL-22581,MCAL-22582 -->
+												<a:a name="DESC" value="EN: This parameter identifies the UART operational mode for the configured IP."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_MODE_INTERRUPT"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_MODE_POLLING</a:v>
+													<a:v>CDD_UART_MODE_INTERRUPT</a:v>
+													<a:v>CDD_UART_MODE_DMA</a:v>
+												</a:da>
+											</v:var>
+											<v:var name="CddUartTXTriggerLevel" type="ENUMERATION">
+												<a:a name="DESC" value="EN: This parameter identifies the UART transmission trigger level threshold for the configured UART."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_TRIGGER_LEVEL_16"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_TRIGGER_LEVEL_1</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_8</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_16</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_32</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_56</a:v>
+												</a:da>
+											</v:var>
+											<v:var name="CddUartRXTriggerLevel" type="ENUMERATION">
+												<a:a name="DESC" value="EN: This parameter identifies the UART trigger level threshold during receival for the configured UART."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_TRIGGER_LEVEL_16"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_TRIGGER_LEVEL_1</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_8</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_16</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_56</a:v>
+													<a:v>CDD_UART_TRIGGER_LEVEL_60</a:v>
+												</a:da>
+											</v:var>
+											<v:var name="CddUartWordLength" type="ENUMERATION">
+												<!-- Design: MCAL-22574 -->
+												<a:a name="DESC" value="EN: This parameter identifies the word length for the packets used in data transmission with UART."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_WORD_LENGTH_8"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_WORD_LENGTH_5</a:v>
+													<a:v>CDD_UART_WORD_LENGTH_6</a:v>
+													<a:v>CDD_UART_WORD_LENGTH_7</a:v>
+													<a:v>CDD_UART_WORD_LENGTH_8</a:v>
+												</a:da>
+											</v:var>
+											<v:var name="CddUartParity" type="ENUMERATION">
+												<!-- Design: MCAL-22575,MCAL-22576,MCAL-22577 -->
+												<a:a name="DESC" value="EN: This parameter specifies the parity of the bits transferred."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_PARITY_NONE"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_PARITY_NONE</a:v>
+													<a:v>CDD_UART_PARITY_ODD</a:v>
+													<a:v>CDD_UART_PARITY_EVEN</a:v>
+												</a:da>
+											</v:var>
+											<v:var name="CddUartReadReturnModes" type="ENUMERATION">
+												<a:a name="DESC" value="EN: This parameter identifies the UART read return modes."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_FULL_READ_RETURN"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_FULL_READ_RETURN</a:v>
+													<a:v>CDD_UART_PARTIAL_READ_RETURN</a:v>
+												</a:da>
+											</v:var>
+											<v:var name="CddUartOperatingModes" type="ENUMERATION">
+												<a:a name="DESC" value="EN: This parameter identifies the UART operational mode for the configured channels."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_16x_OPER"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_13x_OPER</a:v>
+													<a:v>CDD_UART_16x_OPER</a:v>
+													<a:v>CDD_UART_16x_AUTO_OPER</a:v>
+												</a:da>
+											</v:var>
+											<v:var name="CddUartStopBits" type="ENUMERATION">
+												<!-- Design: MCAL-22578,MCAL-22579 -->
+												<a:a name="DESC" value="EN: This parameter specifies the size of stop bits to use in data packets."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:da name="DEFAULT" value="CDD_UART_STOP_BIT_1"/>
+												<a:da name="EDITABLE" value="true"/>
+												<a:da name="ENABLE" value="true"/>
+												<a:da name="RANGE">
+													<a:v>CDD_UART_STOP_BIT_1</a:v>
+													<a:v>CDD_UART_STOP_BITS_2</a:v>
+												</a:da>
+											</v:var>
+											<v:ref name="CddUartHwUnitCddDmaTxHandler" type="REFERENCE">
+												<a:a name="DESC" value="EN: References the CDD DMA handler used for CDD UART transmission"/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac781"/>
+												<a:da name="ENABLE" type="XPath" expr="../CddUartIOMode = 'CDD_UART_MODE_DMA'"/>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:da name="REF" value="ASPathDataOfSchema:/TI_AM263Px/Cdd_Dma/CddDmaDriverHandler"/>
+												<a:da name="INVALID" type="XPath" expr="node:refvalid(.)" false="The configured node does not exist or may not be referenced."/>
+											</v:ref>
+											<v:ref name="CddUartHwUnitCddDmaRxHandler" type="REFERENCE">
+												<a:a name="DESC" value="EN: References the CDD DMA handler used for CDD UART reception"/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac782"/>
+												<a:da name="ENABLE" type="XPath" expr="../CddUartIOMode = 'CDD_UART_MODE_DMA'"/>
+												<a:a name="OPTIONAL" value="false"/>
+												<a:da name="REF" value="ASPathDataOfSchema:/TI_AM263Px/Cdd_Dma/CddDmaDriverHandler"/>
+												<a:da name="INVALID" type="XPath" expr="node:refvalid(.)" false="The configured node does not exist or may not be referenced."/>
+											</v:ref>
+											<v:var name="CddUartReadNotificationHandler" type="FUNCTION-NAME">
+												<!-- Design: MCAL-22583 -->
+												<a:a name="DESC" value="EN: This parameter is a read notification handler function."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="66a5c4bb-390a-4a94-a6a7-056e4b06b39b"/>
+												<a:da name="DEFAULT" value="CddUart_CallbackReadNotify"/>
+											</v:var>
+											<v:var name="CddUartWriteNotificationHandler" type="FUNCTION-NAME">
+												<!-- Design: MCAL-22583 -->
+												<a:a name="DESC" value="EN: This parameter is a write notification handler function."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="66a5c4bb-390a-4a94-a6a7-056e4b06b39b"/>
+												<a:da name="DEFAULT" value="CddUart_CallbackWriteNotify"/>
+											</v:var>
+											<v:var name="CddUartErrorNotificationHandler" type="FUNCTION-NAME">
+												<!-- Design: MCAL-22583 -->
+												<a:a name="DESC" value="EN: This parameter is a error notification handler function."/>
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+													<icc:v class="PostBuild">VariantPostBuild</icc:v>
+													<icc:v class="PreCompile">VariantPreCompile</icc:v>
+												</a:a>
+												<a:a name="ORIGIN" value="Texas Instruments"/>
+												<a:a name="SCOPE" value="LOCAL"/>
+												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+												<a:a name="UUID" value="66a5c4bb-390a-4a94-a6a7-056e4b06b39b"/>
+												<a:da name="DEFAULT" value="CddUart_CallbackErrorNotify"/>
+											</v:var>
+										</v:ctr>
+									</v:lst>
+								</v:ctr>
+							</v:lst>
+							<v:ctr name="CddUartGeneral" type="IDENTIFIABLE">
+								<a:a name="DESC" value="EN: General configuration settings for the Complex Device Driver"/>
+								<a:a name="UUID" value="480086b4-53a1-4e67-ae4c-2063087d1dd3"/>
+								<v:var name="CddVersionInfoApi" type="BOOLEAN">
+									<!-- Design: MCAL-22636 -->
+									<a:a name="DESC" value="EN: Switches the Cdd_Uart_GetVersionInfo function ON or OFF."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="33e55d19-67fd-4fdd-8d16-37098753e356"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartRegisterReadbackApi" type="BOOLEAN">
+									<!-- Design: MCAL-22671 -->
+									<a:a name="DESC" value="EN: Switches the Cdd_Uart_RegisterReadback function ON or OFF."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="33e55d19-67fd-4fdd-8d16-37098753e356"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartDeinitApi" type="BOOLEAN">
+									<!-- Design: MCAL-22585 -->
+									<a:a name="DESC" value="EN: Switches the Cdd_Uart_DeInit function ON or OFF."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="33e55d19-67fd-4fdd-8d16-37098753e356"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartWriteApi" type="BOOLEAN">
+									<!-- Design: MCAL-22587 -->
+									<a:a name="DESC" value="EN: Switches the Cdd_Uart_Write function ON or OFF."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="33e55d19-67fd-4fdd-8d16-37098753e356"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartReadApi" type="BOOLEAN">
+									<!-- Design: MCAL-22586 -->
+									<a:a name="DESC" value="EN: Switches the Cdd_Uart_Read function ON or OFF."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="33e55d19-67fd-4fdd-8d16-37098753e356"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartCancelApi" type="BOOLEAN">
+									<!-- Design: MCAL-22589 -->
+									<a:a name="DESC" value="EN: Switches the Cdd_Uart_Cancel function ON or OFF."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="33e55d19-67fd-4fdd-8d16-37098753e356"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartGetRemainingWordsApi" type="BOOLEAN">
+									<!-- Design: MCAL-22588 -->
+									<a:a name="DESC" value="EN: Switches the Cdd_Uart_GetRemainingWords API which returns the remaining words to be transferred from the active device UART instance."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartDevErrorDetect" type="BOOLEAN">
+									<!-- Design: MCAL-22572 -->
+									<a:a name="DESC" value="EN: Switches the Development Error Detection and Notification ON or OFF."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="9afdaaa0-10cb-4fb7-9aa8-d7ba36be9e2c"/>
+									<a:da name="DEFAULT" value="true"/>
+								</v:var>
+								<v:var name="CddUartIrqType" type="ENUMERATION">
+									<!-- Design: MCAL-22583 -->
+									<a:a name="DESC" value="EN: This parameter specifies the category of Interrupt ReQuest for callbacks."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="OPTIONAL" value="false"/>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac781"/>
+									<a:da name="DEFAULT" value="CDD_UART_ISR_VOID"/>
+									<a:da name="EDITABLE" value="true"/>
+									<a:da name="ENABLE" value="true"/>
+									<a:da name="RANGE">
+										<a:v>CDD_UART_ISR_VOID</a:v>
+										<a:v>CDD_UART_ISR_CAT1</a:v>
+										<a:v>CDD_UART_ISR_CAT2</a:v>
+									</a:da>
+								</v:var>
+								<v:var name="CddDefaultOSCounterId" type="INTEGER">
+									<a:a name="DESC" value="EN: Default Os Counter Id if node reference to OsCounter ref CddOsCounterRef is not set"/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+									<a:da name="INVALID" type="Range">
+										<a:tst expr="&lt;=16"/>
+										<a:tst expr="&gt;=0"/>
+									</a:da>
+									<a:da name="DEFAULT" value="0"/>
+									<a:da name="ENABLE" type="XPath" expr="not(node:refexists(../CddOsCounterRef))"/>
+								</v:var>
+								<v:ref name="CddOsCounterRef" type="REFERENCE">
+									<a:a name="DESC" value="EN: This parameter contains a reference to the OsCounter, which is used by the UART driver."/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="OPTIONAL" value="true"/>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="UUID" value="26c9bdff-38cf-4f0b-8754-7472d0d41cb9"/>
+									<a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
+									<a:da name="ENABLE" value="true"/>
+									<a:da name="EDITABLE" value="true"/>
+									<a:da name="READONLY" value="false"/>
+									<a:da name="VISIBLE" value="true"/>
+								</v:ref>
+							</v:ctr>
+							<v:ctr name="CddUartPublishedInformation" type="IDENTIFIABLE">
+								<a:a name="DESC" value="EN: Container holding all Complex driver specific published information parameters"/>
+								<a:a name="UUID" value="f8059619-213b-455c-9706-745609dfcae6"/>
+								<v:var name="CddUartDeviceVariant" type="ENUMERATION">
+									<a:a name="DESC" value="EN: Device variant AM273X"/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PostBuild">VariantPostBuild</icc:v>
+										<icc:v class="PreCompile">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="7880ed70-3f2c-4330-b688-e84e9e811d66"/>
+									<a:da name="DEFAULT" value="AM263PX"/>
+									<a:da name="EDITABLE" value="true"/>
+									<a:da name="ENABLE" value="true"/>
+									<a:da name="RANGE">
+										<a:v>AM263PX</a:v>
+									</a:da>
+								</v:var>
+							</v:ctr>
+							<d:ref type="REFINED_MODULE_DEF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Cdd"/>
+						</v:ctr>
+					</d:chc>
+				</d:lst>
+			</d:ctr>
+		</d:lst>
+	</d:ctr>
+
+</datamodel>

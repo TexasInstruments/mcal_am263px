@@ -1,0 +1,1134 @@
+## FLS Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|BSW|Basic Software|
+|MCAL|Micro Controller Abstraction Layer|
+|API|Application Programming Interface|
+|DET|Default Error Tracer|
+|HW |Hardware|
+|SW |Software|
+|FLS|Flash Driver|
+|DMA|Direct Memory Access|
+|MCU|Micro Controller Unit|
+|OS|Operating System|
+|OSPI|Octal Serial Peripheral Interference|
+|DAC|Direct Access Mode|
+|INDAC|Indirect Access Mode|
+
+### Introduction
+
+This document describes MCAL **FLS Driver** functionality and configuration details as per AUTOSAR version **4.3.1** .
+
+|Supported AUTOSAR Release|**4.3.1**|
+|------|-------------|
+|**Supported Configuration Variants**  | **Pre-Compile, Post-build**|
+|**Vendor ID**                         | **FLS_VENDOR_ID (44)**|
+|**Module ID**                         | **FLS_MODULE_ID (92)**|
+|**Supported Platform**                | **AM263Px**|
+
+The Flash Driver provides services for reading, writing, erasing flash memory for external Flash device.
+
+### Functional Overview
+
+#### FLS Driver Architecture
+
+The FLS driver has architecture as shown in below figure from the
+AUTOSAR specification.
+
+```{figure} Assets/images/fls/fls_image2.png
+:alt: FLS in AUTOSAR architecture
+:align: center
+
+FLS in AUTOSAR architecture
+```
+
+The below figure shows typical connection of the OSPI module to the
+
+```{figure} Assets/images/fls/fls_design_blockdiagram.png
+:alt: OSPI connected to an external flash memory
+:align: center
+
+OSPI connected to an external flash memory
+```
+
+#### Initialization
+
+The driver FLS is initialized by calling Fls_Init() function and
+takes FlsConfigSet as input and Initializes Flash and OSPI. This will
+also make driver status to IDLE.
+
+#### States
+
+The Fls driver maintains states for:
+
+1. MEMIF_UNINIT: This is the state when hardware is not initialized.
+2. MEMIF_IDLE: when FLS driver initialized, it will go to IDLE state.
+3. MEMIF_BUSY: In case of any on-going operation i.e., Erase OR read OR
+   write, the state will be maintained as busy until the operation is completed.
+4. MEMIF_BUSY_INTERNAL: This is not supported.
+
+#### Assumptions
+
+For using DMA feature, driver assumes that cache initialization is done in application only and not done by the driver.
+
+#### Constraints
+
+1. **For read and write operation offset should be page aligned**
+2. **For read and write operation length of operation should be byte aligned.**
+3. **For interrupt mode to be enabled, indac mode should be enabled.**
+4. **For interrupt mode to be enabled, maxReadNormalMode and maxWriteNormalMode should be set to pagesize.**
+5. **For interrupt mode to be enabled, FLS_ERASE_VERIFICATION_ENABLED, FLS_WRITE_VERIFICATION_ENABLED, FLS_TIMEOUT_SUPERVISION_ENABLED macros should be STD_OFF.**
+
+#### Design overview
+
+Will be available in future release.
+
+### Hardware Features
+
+#### AUTOSAR Features supported
+
+* Only one OSPI instance will support
+* Perform storage mode applications\
+      1. Read from flash.\
+      2. Write to flash.\
+      3. Erase Flash.\
+      4. Cancel job is supported.\
+      5. Compare and Blank Check flash memory location.
+* Configure error detection (DET)
+* Only polling mode is supported.
+* DAC and INDAC mode of operation are supported.
+* Interrupt mode is supported (only in INDAC Mode)
+* DMA mode is supported for Flash Read. (Only in DAC mode)
+
+#### Not supported Features
+
+* XIP Mode is not supported.
+* PHY Tune Module is not supported.
+
+#### IP specific Features supported
+
+##### DAC Mode
+
+Direct Access Controller (or DAC) refers to the operation where data interface accesses directly trigger a read or write to Flash memory. It is memory mapped and can be used to both access and directly execute code from external Flash memory. Access that use DAC do not use the embedded SRAM within the OSPI module. DAC mode does not support interrupt handling as it does not involve SRAM for data transfer.
+
+##### INDAC Mode
+
+Indirect Access Controller (INDAC) uses the internal SRAM of the OSPI module. Data transfers then happen between the SRAM and Flash memory or SRAM and system memory, so no memory mapping is needed. The aim of the indirect mode of operation is to transfer significant numbers of bytes to/from Flash memory. Indirect operations are controlled and triggered by software via specific read/write transfer registers. Bulk transfers take place between system and flash memory in the most efficient manner. Fewest possible write cycles carried out inside flash device to maximize life of device. INDAC supports poll and interrupt based implementation. The embedded SRAM used by INDAC provides interrupt mechanism. Interrupts are triggered when SRAM levels fall below a watermark, and also when a write/read operation finishes from within the SRAM. Design implementation is non-blocking and allows the control to return to the application (CPU) while the data is still transferring in hardware.
+
+##### STIG
+
+Software Triggered Instruction Generator - While DAC and INDAC are used for data transfer, STIG is used to access the volatile and non-volatile configuration registers, status registers, and for erase functions. This Flash Driver Module Write, Read, Erase, BlankCheck and Compare APIs are asynchronous such that control will return to the application after the job from one of the APIs has been accepted. A "job" describes the action that will perform actual transactions to the hardware. The driver's Fls_MainFunction () API will do the job processing internally, after the APIs have been called and the job has been accepted. During job processing, the module will perform the programming of the flash device, and will make data transfers between system and flash device.
+
+The below figure shows typical connection of the OSPI module to the
+flash memory
+
+```{figure} Assets/images/fls/fls_OSPI_blk_diag.png
+:alt: OSPI connected to an external flash memory
+:align: center
+
+OSPI connected to an external flash memory
+```
+
+#### Non compliance
+
+##### Deviations to requirements (Requirement Traceability)
+
+###### Deviation of requirements against AUTOSAR specification requirements
+
+Will be updated in next release
+
+### Source files
+
+Static source C Files are defined below
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Fls**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Fls.h** : *Contains the APIs of the FLS driver to be used by upper layers.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Cbk.h** : *Contains the callback functions.*\
+ ┃ ┃ ┃ ┗ 📜**Fls_Irq.h** : *Contains ISR function declarations.*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Fls.c** : *Contains the pre-complier switches.*\
+ ┃ ┃ ┃ ┗ 📜**Fls_Irq.c** : *Contains ISR function definitions..*\
+ ┃ ┃ ┣ 📂**V2**\
+ ┃ ┃ ┃ ┣ 📜**Fls_Brd_Nor.h** : *Contains internal functions and data structures.*\
+ ┃ ┃ ┃ ┗ 📜**Fls_Brd_Nor_Ospi.c** : *Contains internal functions and data structures.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Nor_config.c** : *Contains flash specific commands*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Nor_config.h** : *Contains device specific configuration parameters.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Ospi.c** : *Contains internal functions definitions.*\
+ ┃ ┃ ┃ ┗ 📜**Fls_Ospi.h** : *Contains internal functions definitions and data structures.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Ospi_Edma.c** : *Contains internal functions definitions for dma support.*\
+ ┃ ┃ ┃ ┗ 📜**Fls_Ospi_Edma.h** : *Contains internal functions definitions and data structures for dma support.*\
+structures.*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┣ 📂mcal_config\
+ ┣ 📂mcal_docs\
+ ┗ 📜README.txt
+
+Plugin files are defined below in the table.
+
+|Plugin Files|Description|
+|------|------|
+|Fls_Cfg.h|Contains the Precompile switches|
+|Fls_PBcfg.c|Contains all Post-Build Configured parameters |
+|Fls_Cfg.c|Contains all Pre-Compile Configured parameters|
+
+```{figure} Assets/images/fls/Fls_filestructure.png
+:alt: FLS header file include structure
+:align: center
+FLS header file include structure
+```
+
+### Module requirements
+
+Will be updated in future release
+
+#### Memory Mapping
+
+| Memory Mapping Sections                       | Compiler Abstraction Definitions |              |                 |          |
+|------------------------------------------------|----------------------------------|--------------|-----------------|----------|
+|    | FLS_CODE     | FLS_CODE_ISR | FLS_VAR_NO_INIT | FLS_CFG  |
+| FLS_START_SEC_ISR_CODE (.text)   |       | x       |    |      |
+| FLS_STOP_SEC_ISR_CODE   |     | x     |      |      |
+| FLS_START_SEC_VAR_NO_INIT_UNSPECIFIED (.data)  |      |       | x     |          |
+| FLS_STOP_SEC_VAR_NO_INIT_UNSPECIFIED |    |    | x    |       |
+| FLS_START_SEC_CODE (.text)    | x    |     |     |     |
+| FLS_STOP_SEC_CODE  |x|      |      |    |
+| FLS_START_SEC_CONFIG_DATA (.data)   |    |       |     | x        |
+| FLS_STOP_SEC_CONFIG_DATA   |   |       |     | x    |
+
+#### Scheduling
+
+|Schedule Function API|Description|
+|------------|---------------|
+|Fls_MainFunction|This function shall perform the processing of the flash read, write, erase and compare jobs.|
+
+#### Error handling
+
+##### DET Errors
+
+The errors reported to DET module are described in the following table:
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-------|-----|
+|API service called with wrong parameter|FLS_E_PARAM_CONFIG|0x01|
+|API service called with wrong parameter|FLS_E_PARAM_ADDRESS|0x02|
+|API service called with wrong parameter|FLS_E_PARAM_LENGTH|0x03|
+|API service called with wrong parameter|FLS_E_PARAM_DATA|0x04|
+|API service used without module initialization|FLS_E_UNINIT|0x05|
+|API called when module is busy|FLS_E_BUSY|0x06|
+|API called with a Null Pointer|FLS_E_PARAM_POINTER|0x0A|
+
+The run time errors reported to DET module are described in the following table:
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-------|-----|
+|Erase verification (blank check) failed|FLS_E_VERIFY_ERASE_FAILED|0x07|
+|Write verification (compare) failed|FLS_E_VERIFY_WRITE_FAILED|0x08|
+
+AUTOSAR requires that API functions check the validity of their
+parameters. The check in below table shows the various Development
+Error Reporting: Assignment of checks to services are internal
+parameter checks of the API functions. These checks are for
+development error reporting and can be enabled or disabled. The
+following table shows which parameter checks are performed on which
+services:
+
+| Check Services     | FLS_E_PARAM_CONFIG | FLS_E_PARAM_ADDRESS | FLS_E_PARAM_LENGTH | FLS_E_PARAM_DATA | FLS_E_UNINIT | FLS_E_BUSY | FLS_E_PARAM_POINTER  |
+|--------------------|--------------------|---------------------|--------------------|------------------|--------------|------------|----------------------|
+| Fls_Init           | x        |                     |                    |                  |              | x          |                      |
+| Fls_Erase          |        | x                   | x                  |                  | x            | x          |                      |
+| Fls_Read           |          | x                   | x                  | x                | x            | x          |                      |
+| Fls_Write          |          | x                   | x                  | x                | x            | x          |                      |
+| Fls_Compare        |            | x                   | x                  | x                | x            | x          |                      |
+| Fls_BlankCheck     |          | x                   | x                  |                  | x            | x          |                      |
+| Fls_GetJobResult   |          |                     |                    |                  | x            |            |                      |
+| Fls_GetVersionInfo |          |                     |                    |                  |              |            | x                    |
+| Fls_MainFunction   |           |                     |                    |                  | x            |            |                      |
+| Fls_Cancel         |       |               |                    |                  | x            |            |                      |
+
+### Used resources
+
+#### Interrupt Handling
+
+FLS uses Interrupt line R5FSS0_CORE0_INTR_QSPI0_INT (interrupt number 54) and Fls_Hdlr shall be called when the interrupt occurs
+
+| Interrupt Number| ISR API Mapped  |
+|----------------|----------------|
+| R5FSS0_CORE0_INTR_QSPI0_INT | Fls_Hdlr |
+
+### Integration description
+
+#### Dependent modules
+
+##### MCU
+
+The Fls Modules expects the MCU modules to enable the OSPI clock
+through the configuration. Required parameter for clock enabling:
+
+1. Module ID: MCU_CLKSRC_MODULE_ID_OSPI
+2. Source ID: MCU_CLKSRC_4
+3. Divider value: 2
+
+##### PORT
+
+The Fls Modules expects that pinmux is set correctly to configure the
+Data line, Chip select and Clock pins for OSPI module. This is done
+by the PORT driver.
+
+##### MemIf
+
+This implementation depends on MemIf module and uses its imported
+types such as MemIf_JobResultType, MemIf_ModeType and
+MemIf_StatusType.
+
+##### Fee
+
+This implementation depends on Fee module for callback notification
+to notify the module environment about job end and job error.
+
+##### DET
+
+The module FLS depends on the DET (by default) in order to report
+development errors.
+
+The following table represents the service IDs:
+
+| Service ID           | Code | Service                |
+|-------------------------------------------|------|------------------------|
+| FLS_SID_INIT         | 0x00 | Fls_Init               |
+| FLS_SID_ERASE        | 0x01 | Fls_Erase              |
+| FLS_SID_WRITE          | 0x02 | FLS_Write()            |
+| FLS_SID_CANCEL          | 0x03 | FLS_Cancel()           |
+| FLS_SID_GET_STATUS     | 0x04 | FLS_GetStatus()        |
+| FLS_SID_GET_JOB_RESULT                    | 0x05 | Fls_GetJobResult()     |
+| FLS_SID_READ           | 0x07 | FLS_Read()             |
+| FLS_SID_COMPARE       | 0x08 | FLS_Compare()          |
+| FLS_SID_GET_VERSION_INFO     | 0x10 | Fls_GetVersionInfo()   |
+| FLS_SID_BLANK_CHECK   | 0x0A | FLS_BlankCheck()       |
+| FLS_SID_MAIN_FUNCTION       | 0x06 | FLS_MainFunction()     |
+
+##### DEM
+
+FLS modules does not report DEM errors.
+
+##### Callback Functions
+
+The FLS driver does not provide any callback functions.
+##### DMA
+
+Accessing flash memory via DMA controller can avoid intervention of CPU so that the CPU can perform other critical operations. Data transfer through DMA is efficient and faster.
+
+##### Main Functions
+
+The function Fls_MainFunction perform the processing of the flash
+read, write, erase and compare jobs. When a job has been initiated,
+the FLS module’s environment shall call the function Fls_MainFunction
+cyclically until the job is finished.
+
+##### Fls Set Erase Function
+
+This function is called from example app based on the macros enabled in application itself.
+Implementation of this function is done to allow user to select one or more erase types based on the requirement.
+The function Fls_SetEraseType sets the parameters like data size, data_value, erase type(sector/block/chip),
+"typeoferase" for Fls_DrvObj, based on the erase type parameter passed to this function while calling from example app.
+These parameters are required in example app.
+
+##### Callback Notification
+
+This implementation depends on Fee module for callback notification
+to notify the module environment about job end and job error
+
+##### SchM
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that FLS module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator. For FLS Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | FLS Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|FLS_EXCLUSIVE_AREA_0 | Fls_Interrupt_Enable | To protect against multiple access for shared resources |ALL_INTERRUPT_BLOCKING : All interrupts should be blocked as this API’s can be called in the interrupts |
+
+#### Multi-core support
+
+Not supported
+
+### Configuration
+
+
+#### FlsConfigSet
+Container for runtime configuration parameters of the flash driver.
+
+##### FlsAcErase
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsAcErase |
+| **Description** | Instance Id of OSPI. In this variant only one is supported |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 0 |
+| **Min-value** | 0 |
+
+##### FlsAcWrite
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsAcWrite |
+| **Description** | Address offset in RAM to which the write flash access code shall be loaded. Currenly, Flash Access code Erase/Write functionality is not supported. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsCallCycle
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCallCycle |
+| **Description** | Cycle time of calls of the flash driver's main function (in seconds). |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1.0 |
+| **Max-value** | INF |
+| **Min-value** | 0.0 |
+
+##### FlsDefaultMode
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDefaultMode |
+| **Description** | This parameter is the default FLS device mode after initialization. Currently, not supported as different modes are not available is Hardware. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | MEMIF_MODE_SLOW |
+| **Range** | MEMIF_MODE_FAST<br>MEMIF_MODE_SLOW |
+
+##### FlsEnableDMA
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsEnableDMA |
+| **Description** | This parameter is used to specify if the flash read operation should occur using DMA. Only applicable in DAC mode. |
+| **Origin** | Texas Instruments |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsJobEndNotification
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsJobEndNotification |
+| **Description** | Mapped to the job end notification routine provided by some upper layer module, typically the Fee module. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | true |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsJobErrorNotification
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsJobErrorNotification |
+| **Description** | Mapped to the job error notification routine provided by some upper layer module, typically the Fee module. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | true |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsMaxReadFastMode
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsMaxReadFastMode |
+| **Description** | The maximum number of bytes to read or compare in one cycle of the flash driver's job processing function in fast mode. Currenly not supported as different modes are not available in hardware. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 768 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsMaxReadNormalMode
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsMaxReadNormalMode |
+| **Description** | The maximum number of bytes to read or compare in one cycle of the flash driver's job processing function in normal mode. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 768 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsMaxWriteFastMode
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsMaxWriteFastMode |
+| **Description** | The maximum number of bytes to write in one cycle of the flash driver's job processing function in fast mode. Currenly not supported as different modes are not available in hardware. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 256 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsMaxWriteNormalMode
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsMaxWriteNormalMode |
+| **Description** | The maximum number of bytes to write in one cycle of the flash driver's job processing function in normal mode. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 768 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsProtection
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtection |
+| **Description** | Erase/write protection settings. Only relevant if supported by hardware. Currently, not supported by Hardware. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsBaudRateDiv
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsBaudRateDiv |
+| **Description** | To Select the baud rate divider values |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsProtocol
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocol |
+| **Description** | This parameter is used to select different modes                         for command, address and data transfer. First parameter denotes                         number of lines to transfer command, second parameter denotes                         number of lines to transfer address and third parameter denotes data lines                         S(Single) and D(Dual) are used denote data rates  |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | FLS_8D_8D_8D |
+| **Range** | FLS_1S_1S_1S<br>FLS_1S_1S_2S<br>FLS_1S_1S_4S<br>FLS_1S_1S_8S<br>FLS_4S_4S_4S<br>FLS_4S_4D_4D<br>FLS_8S_8S_8S<br>FLS_8D_8D_8D |
+
+##### FlsDacEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDacEnable |
+| **Description** | The driver shall enable Direct Access Mode for OSPI. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### FlsOspiClkSpeed
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsOspiClkSpeed |
+| **Description** | The driver shall specify the OSPI Clk speed to be used. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 133333333 |
+
+##### FlsPhyEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsPhyEnable |
+| **Description** | The driver shall enable Phy Speed mode for DAC. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsHwUnitCddDmaHandler
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsHwUnitCddDmaHandler |
+| **Description** | Configures the Cdd Dma handler used for FLS transmission |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | Texas Instruments |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsExternalDriver
+This container is present for external Flash drivers only. Internal Flash drivers do not use the parameter listed in this container, hence its multiplicity is 0 for internal drivers. Currently, not supported as only one external driver present.
+
+###### FlsSpiReference
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsSpiReference |
+| **Description** | Reference to SPI sequence (required for external Flash drivers). |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsSectorList
+List of flashable sectors and pages.The maximum number of sectors/sector size/pages/pagesize that can be configured, is based on external flash used, and care must be taken to configure these parameters as per the external flash used
+
+##### FlsSector
+Configuration description of a flashable sector
+
+###### FlsNumberOfSectors
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsNumberOfSectors |
+| **Description** | Number of continuous sectors with identical configuration |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 32 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsPageSize
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsPageSize |
+| **Description** | Size of one page of this sector. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 256 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+###### FlsSectorSize
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsSectorSize |
+| **Description** | Size of this sector. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 4096 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+###### FlsSectorStartaddress
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsSectorStartaddress |
+| **Description** | Start address of this sector. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+#### FlsGeneral
+Container for general parameters of the flash driver. These parameters are always pre-compile.
+
+##### FlsAcLoadOnJobStart
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsAcLoadOnJobStart |
+| **Description** | The flash driver shall load the flash access code to RAM whenever an erase or write job is started and unload (overwrite) it after that job has been finished or canceled. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsBaseAddress
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsBaseAddress |
+| **Description** | The flash memory start address (see also SWS_Fls_00208 and SWS_Fls_00209). |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1610612736 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsBlankCheckApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsBlankCheckApi |
+| **Description** | Compile switch to enable/disable the Fls_BlankCheck function. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsCancelApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCancelApi |
+| **Description** | Compile switch to enable and disable the Fls_Cancel function. Cancel API currently not supported. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsCompareApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCompareApi |
+| **Description** | Compile switch to enable and disable the Fls_Compare function. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDevErrorDetect |
+| **Description** | Switches the development error detection and notification on or off. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsDriverIndex
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDriverIndex |
+| **Description** | Index of the driver, used by FEE. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 254 |
+| **Min-value** | 0 |
+
+##### FlsEraseVerificationEnabled
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsEraseVerificationEnabled |
+| **Description** | Compile switch to enable erase verification. Currently not supported. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### FlsGetJobResultApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsGetJobResultApi |
+| **Description** | Compile switch to enable and disable the Fls_GetJobResult function. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsGetStatusApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsGetStatusApi |
+| **Description** | Compile switch to enable and disable the Fls_GetStatus function. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsSetModeApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsSetModeApi |
+| **Description** | Compile switch to enable and disable the Fls_SetMode function. Not relevant as only one mode supported. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### FlsTimeoutSupervisionEnabled
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsTimeoutSupervisionEnabled |
+| **Description** | Compile switch to enable timeout supervision. Currently, not supported. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsTotalSize
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsTotalSize |
+| **Description** | The total amount of flash memory in bytes (see also SWS_Fls_00208 and SWS_Fls_00209). |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 16777215 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### FlsUseInterrupts
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsUseInterrupts |
+| **Description** | Job processing triggered by hardware interrupt. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsVersionInfoApi |
+| **Description** | Pre-processor switch to enable / disable the API to read out the modules version information. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### FlsWriteVerificationEnabled
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsWriteVerificationEnabled |
+| **Description** | Compile switch to enable write verification. Currenly, not supported. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### FlsOspiCtrlBaseAddr
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsOspiCtrlBaseAddr |
+| **Description** | This parameter used to select the OSPI base Address |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1400930304 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 1 |
+
+##### FlsIrqType
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsIrqType |
+| **Description** | Type of Isr function:<br>                          void functionname(void)<br>                          CAT1  see description in oil tool : interrupt void func(void)<br>                          CAT2  see description in oil tool : ISR(func) |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | FLS_ISR_CAT1 |
+| **Range** | FLS_ISR_VOID<br>FLS_ISR_CAT1<br>FLS_ISR_CAT2 |
+
+##### FlsDefaultOSCounterId
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDefaultOSCounterId |
+| **Description** | Default Os Counter Id if node reference to OsCounter ref FlsOsCounterRef is not set |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 16 |
+| **Min-value** | 0 |
+
+##### FlsOsCounterRef
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsOsCounterRef |
+| **Description** | This parameter contains a reference to the OsCounter, which is used by the FLS driver. |
+| **Origin** | Texas Instruments |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+#### Configuration changes with DMA mode
+
+1. Flash configuration should include Cdd_Dma in module configurations to use DMA.
+
+```{figure} Assets/images/fls/flsdmamodules.png
+:alt: FLS Module Configurations
+:align: center
+FLS Module Configurations
+```
+
+2. Flash DMA handler is required for Flash DMA support in DMA configurations and CDD_TRANSFER_MODE_CHAINING should be used in Flash DMA Handler.
+
+```{figure} Assets/images/fls/dmahandlerfls.png
+:alt: FLS Handler in Cdd_Dma configuration
+:align: center
+FLS Handler in Cdd_Dma configuration
+```
+
+3. Flash Dma Handler should have two channels because it uses CDD_TRANSFER_MODE_CHAINING mode.
+
+```{figure} Assets/images/fls/flsdmachannels.png
+:alt: FLS Handler Channels in Cdd_Dma configuration
+:align: center
+FLS Handler Channels in Cdd_Dma configuration
+```
+
+4. Flash configuration should enable DAC mode and DMA. 
+DMA works only in DAC mode.
+As DAC mode doesn't support FLS interrupt, polling shall be used for FLS whereas DMA interrupt can be used
+
+```{figure} Assets/images/fls/flsconfig1.png
+:alt: Dma in FLS configuration (FlsConfigSet)
+:align: center
+Dma in FLS configuration (FlsConfigSet)
+```
+
+```{figure} Assets/images/fls/flsconfig2.png
+:alt: DAC mode in FLS configuration (FlsSectorList)
+:align: center
+DAC mode in FLS configuration (FlsSectorList)
+```
+
+##### Program changes with DMA mode
+
+For DMA mode support, DMA TPCC0 Interrupt aggregation (INTR) line number 72 gets used to register ISR (CDD_EDMA_lld_transferCompletionMasterIsrFxn) with EDMA and Cache invalidation on destination buffers should happen using Mcal_CacheP_inv APIs before using Flash DMA support for read.
+
+### Examples
+
+#### Overview
+
+* Fls Example
+  * Initializes clock using Mcu_Init()
+  * Initialize port using Port_Init()
+  * Initialize Fls using Fls_Init()
+  * Get Fls Version using Fls_GetVersionInfo()
+  * Erase flash sector using Fls_Erase()
+  * Perform the processing of jobs using Fls_MainFunction()
+  * Read the result of the last job using Fls_GetJobResult()
+  * Verify, whether a given memory area has been erased but not (yet) programmed using Fls_BlankCheck()
+  * Write complete flash pages using Fls_Write()
+  * Reads the flash memory using Fls_Read()
+  * Check if the write operation was successful by comparing txBuf_test (hardcoded) with the actual data in flash using Fls_Compare()
+  * Check if the read operation was successful by comparing rxBuf_test (previously read) with the actual data in flash
+#### Hardware Software Setup and Tools
+
+None
+
+#### Steps to build and run example
+
+1. FLS example application demonstrating the MCAL Fls driver features is in folder *<MCAL_ROOT>/examples/Fls*.
+
+2. This application can be built from the root folder by giving *gmake –s fls_app PLATFORM=am263px*.
+
+3. after the build is completed we get a binary file,which is loaded in our controller and executed.
+
+#### Example Logs
+
+```
+
+ FlsApp: Sample Application - STARTS !!!
+ FLS_APP: Variant - Pre Compile being used !!!
+ FLS MCAL version info:9.1.0
+ FLS MCAL Module/Driver:92.44 
+ FLS_APP:Executing Sector configuration number :  1 
+ FLS_APP:Number of sector/blocks to erase/read/write: 1 
+ FLS_APP:Total data size: 0x1000 
+ FLS_APP:Offset is 0x0 
+ FLS_APP: Erasing 
+ FLS_APP: Job Processing in Progress.
+ FLS_APP: Job Ends: SUCCESS
+ FLS_APP: Blank Checking 
+ FLS_APP: Job Processing in Progress.
+ FLS_APP: Job Ends: SUCCESS
+ FLS_APP: Writing 
+ FLS_APP: Job Processing in Progress.
+ FLS_APP: Job Ends: SUCCESS
+ FLS_APP: Reading 
+ FLS_APP: Job Processing in Progress.
+ FLS_APP: Job Ends: SUCCESS
+ FLS_APP: Write Compare 
+ FLS_APP: Job Processing in Progress.
+ FLS_APP: Job Ends: SUCCESS
+ FLS_APP: Read Compare 
+ FLS_APP: Job Processing in Progress.
+ FLS_APP: Job Ends: SUCCESS
+ FLS_APP: 
+ FLS_APP: Job Cancel 
+ FLS_APP:         1. Writing 
+ FLS_APP:         2. Canceling 
+ FLS_APP: Job Canceled (SUCCESS) ! 
+ FLS_APP: 
+ FLS_APP: 
+ FLS_APP: ---------- FLS Sample application Done !! ----------  
+ FLS_APP:
+      
+```
+
+#### File Structure
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Fls**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┣ 📜**Flsapp.c** : *Contains Fls test example*\
+ ┃ ┃ ┃ ┗ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Fls_Demo_Cfg**\
+ ┃ ┃ ┃ ┗ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Fls_Cfg.h** : *Contains the configuration parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣📜**Fls_Cfg.c** : *Contains all Pre-Compile Configured parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜**Fls_PBcfg.c** : *contains all Post build configured parameters*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┗ 📜README.txt
+
+### FAQ's
+
+Q1. What if some flashes also support write enable for non-volatile registers?
+
+ Before writing to any register in flash, write enable command is issued to the flash.  The Write enable can be issued to both volatile and non volatile registers depending on     what the flash supports. Currently the existing flash in the device supports write enable to volatile registers. In case any external flash (e.g. S25FL064LABMFB01X) supports write enable to both volatile and non volatile registers, the user can issue write enable command for non volatile registers using Nor_OspiCmdWrite API. User can also update the fls_config_sfdp_1.cmdWren parameter in Flash_sfdpParams_init API in V2/Fls_Nor_config.c file by following the flash datasheet.
+
+Q2. How to enable interrupt mode in Flash?
+
+ To enable interrupt mode, FLS_USE_INTERRUPTS should be set to STD_ON. INDAC mode should be enabled in interrupt mode as ospi controller uses SRAM level to trigger interrupt and INDAC mode of operation uses SRAM for data transfer. Also maxReadNormalMode and maxWriteNormalMode should be set to page size of the flash. Further, FLS_ERASE_VERIFICATION_ENABLED,FLS_WRITE_VERIFICATION_ENABLED and FLS_TIMEOUT_SUPERVISION_ENABLED should be disabled in interrupt mode.
+
+### References
+
+[AUTOSAR_SWS_FlashDriver](https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_FlashDriver.pdf)\
+[Technical Reference Manual](https://www.ti.com/am263px)

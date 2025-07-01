@@ -1,0 +1,36 @@
+---
+orphan: true
+---
+
+---
+title: Cdd_Dma_ParamEntry
+summary: Param entry. 
+
+---
+
+# Cdd_Dma_ParamEntry
+
+
+
+Param entry. 
+
+
+`#include <Cdd_Dma.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | opt |  OPT field of PaRAM Set.  |
+|  void * | srcPtr |  Starting byte address of Source.  |
+|  uint16 | aCnt |  Number of bytes in each Array (ACNT)  |
+|  uint16 | bCnt |  Number of Arrays in each Frame (BCNT)  |
+|  void * | destPtr |  Starting byte address of destination i.e. 5 LSBs should be 0.  |
+|  sint16 | srcBIdx |  Index between consec. arrays of a Source Frame (SRCBIDX)  |
+|  sint16 | destBIdx |  Index between consec. arrays of a Destination Frame (DSTBIDX)  |
+|  uint16 | bCntReload |  Reload value of the numArrInFrame (BCNT). Relevant only for A-sync transfers.  |
+|  sint16 | srcCIdx |  Index between consecutive frames of a Source Block (SRCCIDX)  |
+|  sint16 | destCIdx |  Index between consecutive frames of a Dest Block (DSTCIDX)  |
+|  uint16 | cCnt |  Number of Frames in a block (CCNT)  |
+
+

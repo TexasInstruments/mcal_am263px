@@ -1,0 +1,1981 @@
+<?xml version='1.0'?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="00000000-0000-0000-0000-000000000000">
+      <SHORT-NAME>TI_AM263Px</SHORT-NAME>
+      <ELEMENTS>
+        <ECUC-MODULE-DEF UUID="00000000-0000-0000-0000-000000000001">
+          <SHORT-NAME>Cdd_Dma</SHORT-NAME>
+          <DESC>
+            <L-2 L="EN">Configuration of the CDD (Complex Device Driver) DMA module.</L-2>
+          </DESC>
+          <ADMIN-DATA>
+            <DOC-REVISIONS>
+              <DOC-REVISION>
+                <REVISION-LABEL>4.6.0</REVISION-LABEL>
+                <ISSUED-BY>AUTOSAR</ISSUED-BY>
+                <DATE>2016-12-05</DATE>
+              </DOC-REVISION>
+            </DOC-REVISIONS>
+          </ADMIN-DATA>
+          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+          <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+          <REFINED-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/AUTOSAR/EcucDefs/Cdd</REFINED-MODULE-DEF-REF>
+          <SUPPORTED-CONFIG-VARIANTS>
+            <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
+          </SUPPORTED-CONFIG-VARIANTS>
+          <CONTAINERS>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="00000000-0000-0000-0000-000000000004">
+              <SHORT-NAME>CddDmaDriverHandler</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module.</L-2>
+              </DESC>
+              <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+              <UPPER-MULTIPLICITY>64</UPPER-MULTIPLICITY>
+              <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+              <REQUIRES-INDEX>true</REQUIRES-INDEX>
+              <PARAMETERS>
+                <ECUC-ENUMERATION-PARAM-DEF UUID="00000000-0000-0000-0000-000000000012">
+                  <SHORT-NAME>CddDmaTransferType</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter selects the desired Transfer Type.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_TYPE_UART_TX</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_TYPE_UART_RX</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_TYPE_ADC</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_TYPE_MCSPI</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_TYPE_FLS</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
+                <ECUC-ENUMERATION-PARAM-DEF UUID="00000000-0000-0000-0000-000000000012">
+                  <SHORT-NAME>CddDmaInstance</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter selects the desired instance for DMA.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>CDD_DMA_MSS_A</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_MSS_A</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="00000000-0000-0000-0000-000000000009">
+                  <SHORT-NAME>CddDmaRegionID</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter specifies the Region ID for EDMA.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                  <MAX>7</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="00000000-0000-0000-0000-000000000009">
+                  <SHORT-NAME>CddDmaTccNumber</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter specifies the TCC number for EDMA.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                  <MAX>63</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="00000000-0000-0000-0000-00000000000a">
+                  <SHORT-NAME>CddDmaQueueNumber</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter specifies the Default Queue Number for EDMA.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                  <MAX>1</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="00000000-0000-0000-0000-00000000000c">
+                  <SHORT-NAME>CddDmaEnableInterrupt</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This determines whether interrupt needs to be registered.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-ENUMERATION-PARAM-DEF UUID="00000000-0000-0000-0000-000000000012">
+                  <SHORT-NAME>CddDmaTransferModeSelect</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter selects the desired Transfer Modeselect either normal or linking or chaining.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>CDD_DMA_TRANSFER_MODE_NORMAL</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_MODE_NORMAL</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_MODE_LINKING</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_TRANSFER_MODE_CHAINING</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
+              </PARAMETERS>
+              <SUB-CONTAINERS>
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="00000000-0000-0000-0000-00000000002a">
+                  <SHORT-NAME>CddDmaChannelGroup</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This container contains the DMA Channel Group.</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>64</UPPER-MULTIPLICITY>
+                  <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+                  <PARAMETERS>
+                    <ECUC-INTEGER-PARAM-DEF UUID="00000000-0000-0000-0000-000000000012">
+                      <SHORT-NAME>CddDmaChannel</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">This parameter select the channel number to be used.</L-2>
+                      </DESC>
+                      <SCOPE>LOCAL</SCOPE>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                      <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                      <VALUE-CONFIG-CLASSES>
+                        <ECUC-VALUE-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                        </ECUC-VALUE-CONFIGURATION-CLASS>
+                      </VALUE-CONFIG-CLASSES>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                      <MAX>63</MAX>
+                      <MIN>0</MIN>
+                    </ECUC-INTEGER-PARAM-DEF>
+                  </PARAMETERS>
+                  <SUB-CONTAINERS>
+                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="00000000-0000-0000-0000-00000000002a">
+                      <SHORT-NAME>CddDmaParamSets</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">This container contains the DMA params.</L-2>
+                      </DESC>
+                      <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
+                      <UPPER-MULTIPLICITY>256</UPPER-MULTIPLICITY>
+                      <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+                      <PARAMETERS>
+                        <ECUC-INTEGER-PARAM-DEF UUID="00000000-0000-0000-0000-000000000012">
+                          <SHORT-NAME>CddDmaPramNumber</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">This parameter select the param number to be used.</L-2>
+                          </DESC>
+                          <SCOPE>LOCAL</SCOPE>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                          <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                          <VALUE-CONFIG-CLASSES>
+                            <ECUC-VALUE-CONFIGURATION-CLASS>
+                              <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                              <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                            </ECUC-VALUE-CONFIGURATION-CLASS>
+                          </VALUE-CONFIG-CLASSES>
+                          <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                          <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                          <MAX>255</MAX>
+                          <MIN>0</MIN>
+                        </ECUC-INTEGER-PARAM-DEF>
+                      </PARAMETERS>
+                    </ECUC-PARAM-CONF-CONTAINER-DEF>
+                  </SUB-CONTAINERS>
+                </ECUC-PARAM-CONF-CONTAINER-DEF>
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="00000000-0000-0000-0000-00000000002a">
+                  <SHORT-NAME>CddDmaChannelTriggerConfiguration</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This container contains the DMA Channel Trigger reasource.</L-2>
+                  </DESC>
+                  <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>64</UPPER-MULTIPLICITY>
+                  <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+                  <PARAMETERS>
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="00000000-0000-0000-0000-00000000002b">
+                      <SHORT-NAME>CddDmaDmaChannelModule</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">The DMA channel selected for module.</L-2>
+                      </DESC>
+                      <SCOPE>LOCAL</SCOPE>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                      <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                      <VALUE-CONFIG-CLASSES>
+                        <ECUC-VALUE-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                        </ECUC-VALUE-CONFIGURATION-CLASS>
+                      </VALUE-CONFIG-CLASSES>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>CDD_DMA_TRIG_XBAR_EDMA_MODULE_0</DEFAULT-VALUE>
+                      <LITERALS>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_7</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_8</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_9</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_10</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_11</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_12</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_13</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_14</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_15</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_16</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_17</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_18</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_19</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_20</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_21</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_22</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_23</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_24</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_25</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_26</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_27</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_28</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_29</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_30</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_31</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_32</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_33</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_34</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_35</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_36</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_37</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_38</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_39</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_40</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_41</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_42</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_43</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_44</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_45</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_46</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_47</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_48</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_49</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_50</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_51</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_52</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_53</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_54</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_55</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_56</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_57</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_58</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_59</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_60</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_61</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_62</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_EDMA_MODULE_63</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                      </LITERALS>
+                    </ECUC-ENUMERATION-PARAM-DEF>
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="00000000-0000-0000-0000-00000000002b">
+                      <SHORT-NAME>CddDmaChannelTriggerSource</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">Source to Trigger DMA Channel.</L-2>
+                      </DESC>
+                      <SCOPE>LOCAL</SCOPE>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                      <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                      <VALUE-CONFIG-CLASSES>
+                        <ECUC-VALUE-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                        </ECUC-VALUE-CONFIGURATION-CLASS>
+                      </VALUE-CONFIG-CLASSES>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_0</DEFAULT-VALUE>
+                      <LITERALS>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN0_RXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN0_TXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN1_RXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN1_TXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN2_RXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN2_TXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN3_RXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN3_TXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN4_RXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_LIN4_TXDMA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C0_TX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C0_RX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C1_TX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C1_RX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C2_TX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C2_RX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C3_TX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_I2C3_RX</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI0_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI0_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI0_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI0_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI1_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI1_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI1_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI1_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI2_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI2_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI2_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI2_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI3_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI3_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI3_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_RTI3_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART0_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART0_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART1_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART1_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART2_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART2_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART3_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART3_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART4_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART4_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART5_DMA_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_USART5_DMA_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_QSPI_INTR</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR1_OUT_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR1_OUT_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR0_OUT_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR0_OUT_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_7</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_8</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_9</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_10</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_11</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_12</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_13</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_14</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_15</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MMC_DMA_RD</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MMC_DMA_WR</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ7</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_FE_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_FE_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_FE_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_FE_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_FE_4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_FE_5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS0_FE_6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_FE_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_FE_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_FE_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_FE_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_FE_4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_FE_5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS1_FE_6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_FE_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_FE_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_FE_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_FE_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_FE_4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_FE_5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS2_FE_6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_FE_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_FE_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_FE_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_FE_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_FE_4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_FE_5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_MCANSS3_FE_6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_TRIG_XBAR_GPMC_SDMAREQ</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                      </LITERALS>
+                    </ECUC-ENUMERATION-PARAM-DEF>
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="00000000-0000-0000-0000-00000000002b">
+                      <SHORT-NAME>CddDmaDmaChannelXbar</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">DMA Channel Cross bar source.</L-2>
+                      </DESC>
+                      <SCOPE>LOCAL</SCOPE>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                      <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                      <VALUE-CONFIG-CLASSES>
+                        <ECUC-VALUE-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                        </ECUC-VALUE-CONFIGURATION-CLASS>
+                      </VALUE-CONFIG-CLASSES>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>CDD_DMA_XBAR_DMA_TRIG_XBAR_0</DEFAULT-VALUE>
+                      <LITERALS>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_0</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_5</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_6</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_7</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_8</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_9</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_10</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_11</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_12</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_13</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_14</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_DMA_TRIG_XBAR_15</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                      </LITERALS>
+                    </ECUC-ENUMERATION-PARAM-DEF>
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="00000000-0000-0000-0000-00000000002b">
+                      <SHORT-NAME>CddDmaDmaChannelXbarMap</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">DMA Channel Cross bar source.</L-2>
+                      </DESC>
+                      <SCOPE>LOCAL</SCOPE>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                      <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                      <VALUE-CONFIG-CLASSES>
+                        <ECUC-VALUE-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                        </ECUC-VALUE-CONFIGURATION-CLASS>
+                      </VALUE-CONFIG-CLASSES>
+                      <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>CDD_DMA_XBAR_ADC0_INT1</DEFAULT-VALUE>
+                      <LITERALS>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM0_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM1_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM2_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM3_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM4_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM5_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM6_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM7_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM8_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM9_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM10_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM11_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM12_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM13_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM14_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM15_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM16_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM17_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM18_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM19_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM20_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM21_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM22_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM23_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM24_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM25_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM26_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM27_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM28_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM29_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM30_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM31_SOCA</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM0_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM1_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM2_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM3_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM4_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM5_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM6_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM7_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM8_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM9_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM10_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM11_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM12_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM13_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM14_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM15_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM16_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM17_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM18_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM19_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM20_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM21_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM22_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM23_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM24_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM25_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM26_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM27_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM28_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM29_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM30_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_EPWM31_SOCB</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC0_INT1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC0_INT2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC0_INT3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC0_INT4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC0_EVTINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC1_INT1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC1_INT2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC1_INT3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC1_INT4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC1_EVTINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC2_INT1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC2_INT2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC2_INT3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC2_INT4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC2_EVTINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC3_INT1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC3_INT2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC3_INT3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC3_INT4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC3_EVTINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC4_INT1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC4_INT2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC4_INT3</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC4_INT4</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ADC4_EVTINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI0_RX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI0_DMA_TRIG1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI0_DMA_TRIG2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI1_RX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI1_DMA_TRIG1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI1_DMA_TRIG2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI2_RX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI2_DMA_TRIG1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI2_DMA_TRIG2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI3_RX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI3_DMA_TRIG1</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI3_DMA_TRIG2</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI0_TX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI1_TX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI2_TX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_FSI3_TX_DMA_EVT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD0_FILT0_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD0_FILT1_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD0_FILT2_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD0_FILT3_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD1_FILT0_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD1_FILT1_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD1_FILT2_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_SD1_FILT3_DRINT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP0_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP1_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP2_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP3_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP4_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP5_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP6_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP7_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP8_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                        <ECUC-ENUMERATION-LITERAL-DEF>
+                          <SHORT-NAME>CDD_DMA_XBAR_ECAP9_DMA_INT</SHORT-NAME>
+                          <ORIGIN>Texas Instruments</ORIGIN>
+                        </ECUC-ENUMERATION-LITERAL-DEF>
+                      </LITERALS>
+                    </ECUC-ENUMERATION-PARAM-DEF>
+                  </PARAMETERS>
+                </ECUC-PARAM-CONF-CONTAINER-DEF>
+              </SUB-CONTAINERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="00000000-0000-0000-0000-000000000023">
+              <SHORT-NAME>CddDmaGeneral</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">General configuration settings for the Complex Device Driver</L-2>
+              </DESC>
+              <PARAMETERS>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="00000000-0000-0000-0000-000000000024">
+                  <SHORT-NAME>CddDmaVersionInfoApi</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Switches the Cdd_Dma_GetVersionInfo function ON or OFF.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="00000000-0000-0000-0000-000000000026">
+                  <SHORT-NAME>CddDmaDeinitApi</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Switches the Cdd_Dma_DeInit function ON or OFF.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="00000000-0000-0000-0000-000000000027">
+                  <SHORT-NAME>CddDmaDevErrorDetect</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Switches the Development Error Detection and Notification ON or OFF.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-ENUMERATION-PARAM-DEF UUID="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac781">
+                  <SHORT-NAME>CddDmaIrqType</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter specifies the category of Interrupt ReQuest for callbacks.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>CDD_DMA_ISR_VOID</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_ISR_VOID</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_ISR_CAT1</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>CDD_DMA_ISR_CAT2</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
+              </PARAMETERS>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="00000000-0000-0000-0000-000000000030">
+              <SHORT-NAME>CddPublishedInformation</SHORT-NAME>
+              <DESC>
+                <L-2 L="EN">Container holding all Complex driver specific published information parameters</L-2>
+              </DESC>
+            </ECUC-PARAM-CONF-CONTAINER-DEF>
+          </CONTAINERS>
+        </ECUC-MODULE-DEF>
+      </ELEMENTS>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

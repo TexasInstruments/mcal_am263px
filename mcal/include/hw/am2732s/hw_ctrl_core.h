@@ -1,0 +1,3542 @@
+/* ======================================================================
+ *   Copyright (c) 2022 Texas Instruments Incorporated
+ *
+ *   All rights reserved. Property of Texas Instruments Incorporated.
+ *   Restricted rights to use, duplicate or disclose this code are
+ *   granted through contract.
+ *
+ *   The program may not be used without the written permission
+ *   of Texas Instruments Incorporated or against the terms and conditions
+ *   stipulated in the agreement under which this program has been
+ *   supplied.
+ * ==================================================================== */
+
+/*
+ * hw_ctrl_core.h
+ *
+ * Register-level header file for CTRL_CORE
+ */
+
+#ifndef HW_CTRL_CORE_H_
+#define HW_CTRL_CORE_H_
+
+#include "sys_common.h"
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
+
+
+/* Gpio Register Frame Definition */
+/** @struct gpioBase
+*   @brief GpIO Base Register Definition
+*
+*   This structure is used to access the GIO module registers.
+*/
+/** @typedef gioBASE_t
+*   @brief GIO Register Frame Type Definition
+*
+*   This type is used to access the GIO Registers.
+*/
+typedef struct
+{
+    uint32 GCR0;      /**< 0x0000: Global Control Register */
+    uint32 rsvd;      /**< 0x0004: Reserved*/
+    uint32 INTDET;    /**< 0x0008: Interrupt Detect Register*/
+    uint32 POL;       /**< 0x000C: Interrupt Polarity Register */
+    uint32 ENASET;    /**< 0x0010: Interrupt Enable Set Register */
+    uint32 ENACLR;    /**< 0x0014: Interrupt Enable Clear Register */
+    uint32 LVLSET;    /**< 0x0018: Interrupt Priority Set Register */
+    uint32 LVLCLR;    /**< 0x001C: Interrupt Priority Clear Register */
+    uint32 FLG;       /**< 0x0020: Interrupt Flag Register */
+    uint32 OFF1;      /**< 0x0024: Interrupt Offset A Register */
+    uint32 OFF2;      /**< 0x0028: Interrupt Offset B Register */
+} gpioBASE_t;
+
+
+/** @struct gioPort
+*   This type is used to access the GIO Port Registers.
+*/
+typedef volatile struct
+{
+    uint32 DIR;    /**< 0x0000: Data Direction Register */
+    uint32 DIN;    /**< 0x0004: Data Input Register */
+    uint32 DOUT;   /**< 0x0008: Data Output Register */
+    uint32 DSET;   /**< 0x000C: Data Output Set Register */
+    uint32 DCLR;   /**< 0x0010: Data Output Clear Register */
+    uint32 PDR;    /**< 0x0014: Open Drain Register */
+    uint32 PULDIS; /**< 0x0018: Pullup Disable Register */
+    uint32 PSL;    /**< 0x001C: Pull Up/Down Selection Register */
+} gpioPORT_t;
+
+/*---------------------------------------------------------------------------------------
+ * MSS_IOMUX_REGS
+ *---------------------------------------------------------------------------------------
+ */
+
+/** @typedef pinMuxBase_t
+*   @brief Pinmux Register Frame Type Definition
+*
+*   This type is used to access the Pinmux Registers.
+*/
+typedef volatile struct
+{
+    uint32     PADAA_CFG_REG;
+    uint32     PADAB_CFG_REG;
+    uint32     PADAC_CFG_REG;
+    uint32     PADAD_CFG_REG;
+    uint32     PADAE_CFG_REG;
+    uint32     PADAF_CFG_REG;
+    uint32     PADAG_CFG_REG;
+    uint32     PADAH_CFG_REG;
+    uint32     PADAI_CFG_REG;
+    uint32     PADAJ_CFG_REG;
+    uint32     PADAK_CFG_REG;
+    uint32     PADAL_CFG_REG;
+    uint32     PADAM_CFG_REG;
+    uint32     PADAN_CFG_REG;
+    uint32     PADAO_CFG_REG;
+    uint32     PADAP_CFG_REG;
+    uint32     PADAQ_CFG_REG;
+    uint32     PADAR_CFG_REG;
+    uint32     PADAS_CFG_REG;
+    uint32     PADAT_CFG_REG;
+    uint32     PADAU_CFG_REG;
+    uint32     PADAV_CFG_REG;
+    uint32     PADAW_CFG_REG;
+    uint32     PADAX_CFG_REG;
+    uint32     PADAY_CFG_REG;
+    uint32     PADAZ_CFG_REG;
+    uint32     PADBA_CFG_REG;
+    uint32     PADBB_CFG_REG;
+    uint32     PADBC_CFG_REG;
+    uint32     PADBD_CFG_REG;
+    uint32     PADBE_CFG_REG;
+    uint32     PADBF_CFG_REG;
+    uint32     PADBG_CFG_REG;
+    uint32     PADBH_CFG_REG;
+    uint32     PADBI_CFG_REG;
+    uint32     PADBJ_CFG_REG;
+    uint32     PADBK_CFG_REG;
+    uint32     PADBL_CFG_REG;
+    uint32     PADBM_CFG_REG;
+    uint32     PADBN_CFG_REG;
+    uint32     PADBO_CFG_REG;
+    uint32     PADBP_CFG_REG;
+    uint32     PADBQ_CFG_REG;
+    uint32     PADBR_CFG_REG;
+    uint32     PADBS_CFG_REG;
+    uint32     PADBT_CFG_REG;
+    uint32     PADBU_CFG_REG;
+    uint32     PADBV_CFG_REG;
+    uint32     PADBW_CFG_REG;
+    uint32     PADBX_CFG_REG;
+    uint32     PADBY_CFG_REG;
+    uint32     PADBZ_CFG_REG;
+    uint32     PADCA_CFG_REG;
+    uint32     PADCB_CFG_REG;
+    uint32     PADCC_CFG_REG;
+    uint32     PADCD_CFG_REG;
+    uint32     PADCE_CFG_REG;
+    uint32     PADCF_CFG_REG;
+    uint32     PADCG_CFG_REG;
+    uint32     PADCH_CFG_REG;
+    uint32     PADCI_CFG_REG;
+    uint32     PADCJ_CFG_REG;
+    uint32     PADCK_CFG_REG;
+    uint32     PADCL_CFG_REG;
+    uint32     PADCM_CFG_REG;
+    uint32     PADCN_CFG_REG;
+    uint32     PADCO_CFG_REG;
+    uint32     PADCP_CFG_REG;
+    uint32     PADCQ_CFG_REG;
+    uint32     PADCR_CFG_REG;
+    uint32     PADCS_CFG_REG;
+    uint32     PADCT_CFG_REG;
+    uint32     PADCU_CFG_REG;
+    uint32     PADCV_CFG_REG;
+    uint32     PADCW_CFG_REG;
+    uint32     PADCX_CFG_REG;
+    uint32     PADCY_CFG_REG;
+    uint32     PADCZ_CFG_REG;
+    uint32     PADDA_CFG_REG;
+    uint32     PADDB_CFG_REG;
+    uint32     PADDC_CFG_REG;
+    uint32     PADDD_CFG_REG;
+    uint32     PADDE_CFG_REG;
+    uint32     PADDF_CFG_REG;
+    uint32     PADDG_CFG_REG;
+    uint32     PADDH_CFG_REG;
+    uint32     PADDI_CFG_REG;
+    uint32     PADDJ_CFG_REG;
+    uint32     PADDK_CFG_REG;
+    uint32     PADDL_CFG_REG;
+    uint32     PADDM_CFG_REG;
+    uint32     PADDN_CFG_REG;
+    uint32     PADDO_CFG_REG;
+    uint32     PADDP_CFG_REG;
+    uint32     PADDQ_CFG_REG;
+    uint32     PADDR_CFG_REG;
+    uint32     PADDS_CFG_REG;
+    uint32     PADDT_CFG_REG;
+    uint32     PADDU_CFG_REG;
+    uint32     PADDV_CFG_REG;
+    uint32     PADDW_CFG_REG;
+    uint8      Resv_496[92];
+    uint32     USERMODEEN;
+    uint32     PADGLBLCFGREG;
+    uint32     IOCFGKICK0;
+    uint32     IOCFGKICK1;
+} pinMuxBase_t;
+
+/*---------------------------------------------------------------------------------------
+ * MSS_TOPRCM_REGS
+ *---------------------------------------------------------------------------------------
+ */
+typedef volatile struct {
+    uint32 PID;
+    uint32 HW_REG0;
+    uint32 HW_REG1;
+    uint32 HW_REG2;
+    uint32 HW_REG3;
+    uint32 HSI_CLK_SRC_SEL;
+    uint32 CSIRX_CLK_SRC_SEL;
+    uint32 MCUCLKOUT_CLK_SRC_SEL;
+    uint32 PMICCLKOUT_CLK_SRC_SEL;
+    uint32 OBSCLKOUT_CLK_SRC_SEL;
+    uint32 TRCCLKOUT_CLK_SRC_SEL;
+    uint8  Resv_64[20];
+    uint32 HSI_DIV_VAL;
+    uint32 CSIRX_DIV_VAL;
+    uint32 MCUCLKOUT_DIV_VAL;
+    uint32 PMICCLKOUT_DIV_VAL;
+    uint32 OBSCLKOUT_DIV_VAL;
+    uint32 TRCCLKOUT_DIV_VAL;
+    uint8  Resv_128[40];
+    uint32 HSI_CLK_GATE;
+    uint32 CSIRX_CLK_GATE;
+    uint32 MCUCLKOUT_CLK_GATE;
+    uint32 PMICCLKOUT_CLK_GATE;
+    uint32 OBSCLKOUT_CLK_GATE;
+    uint32 TRCCLKOUT_CLK_GATE;
+    uint32 DSS_CLK_GATE;
+    uint8  Resv_192[36];
+    uint32 HSI_CLK_STATUS;
+    uint32 CSIRX_CLK_STATUS;
+    uint32 MCUCLKOUT_CLK_STATUS;
+    uint32 PMICCLKOUT_CLK_STATUS;
+    uint32 OBSCLKOUT_CLK_STATUS;
+    uint32 TRCCLKOUT_CLK_STATUS;
+    uint8  Resv_256[40];
+    uint32 WARM_RESET_CONFIG;
+    uint32 SYS_RST_CAUSE;
+    uint32 SYS_RST_CAUSE_CLR;
+    uint32 DSS_RST_CTRL;
+    uint8  Resv_516[244];
+    uint32 RS232_BITINTERVAL;
+    uint32 LVDS_PAD_CTRL0;
+    uint32 LVDS_PAD_CTRL1;
+    uint32 DFT_DMLED_EXEC;
+    uint32 DFT_DMLED_STATUS;
+    uint32 LIMP_MODE_EN;
+    uint32 PMICCLKOUT_DCDC_CTRL;
+    uint32 PMICCLKOUT_DCDC_SLOPE;
+    uint32 RCOSC32K_CTRL;
+    uint8  Resv_1024[472];
+    uint32 PLL_CORE_PWRCTRL;
+    uint32 PLL_CORE_CLKCTRL;
+    uint32 PLL_CORE_TENABLE;
+    uint32 PLL_CORE_TENABLEDIV;
+    uint32 PLL_CORE_M2NDIV;
+    uint32 PLL_CORE_MN2DIV;
+    uint32 PLL_CORE_FRACDIV;
+    uint32 PLL_CORE_BWCTRL;
+    uint32 PLL_CORE_FRACCTRL;
+    uint32 PLL_CORE_STATUS;
+    uint32 PLL_CORE_HSDIVIDER;
+    uint32 PLL_CORE_HSDIVIDER_CLKOUT0;
+    uint32 PLL_CORE_HSDIVIDER_CLKOUT1;
+    uint32 PLL_CORE_HSDIVIDER_CLKOUT2;
+    uint32 PLL_CORE_HSDIVIDER_CLKOUT3;
+    uint32 MSS_CR5_CLK_SRC_SEL;
+    uint32 MSS_CR5_DIV_VAL;
+    uint32 SYS_CLK_DIV_VAL;
+    uint32 MSS_CR5_CLK_GATE;
+    uint32 SYS_CLK_GATE;
+    uint32 SYS_CLK_STATUS;
+    uint32 MSS_CR5_CLK_STATUS;
+    uint32 PLL_CORE_RSTCTRL;
+    uint32 PLL_CORE_HSDIVIDER_RSTCTRL;
+    uint8  Resv_2048[928];
+    uint32 PLL_DSP_PWRCTRL;
+    uint32 PLL_DSP_CLKCTRL;
+    uint32 PLL_DSP_TENABLE;
+    uint32 PLL_DSP_TENABLEDIV;
+    uint32 PLL_DSP_M2NDIV;
+    uint32 PLL_DSP_MN2DIV;
+    uint32 PLL_DSP_FRACDIV;
+    uint32 PLL_DSP_BWCTRL;
+    uint32 PLL_DSP_FRACCTRL;
+    uint32 PLL_DSP_STATUS;
+    uint32 PLL_DSP_HSDIVIDER;
+    uint32 PLL_DSP_HSDIVIDER_CLKOUT0;
+    uint32 PLL_DSP_HSDIVIDER_CLKOUT1;
+    uint32 PLL_DSP_HSDIVIDER_CLKOUT2;
+    uint32 PLL_DSP_HSDIVIDER_CLKOUT3;
+    uint32 PLL_PER_PWRCTRL;
+    uint32 PLL_PER_CLKCTRL;
+    uint32 PLL_PER_TENABLE;
+    uint32 PLL_PER_TENABLEDIV;
+    uint32 PLL_PER_M2NDIV;
+    uint32 PLL_PER_MN2DIV;
+    uint32 PLL_PER_FRACDIV;
+    uint32 PLL_PER_BWCTRL;
+    uint32 PLL_PER_FRACCTRL;
+    uint32 PLL_PER_STATUS;
+    uint32 PLL_PER_HSDIVIDER;
+    uint32 PLL_PER_HSDIVIDER_CLKOUT0;
+    uint32 PLL_PER_HSDIVIDER_CLKOUT1;
+    uint32 PLL_PER_HSDIVIDER_CLKOUT2;
+    uint32 PLL_PER_HSDIVIDER_CLKOUT3;
+    uint32 PLL_DSP_RSTCTRL;
+    uint32 PLL_DSP_HSDIVIDER_RSTCTRL;
+    uint32 PLL_PER_RSTCTRL;
+    uint32 PLL_PER_HSDIVIDER_RSTCTRL;
+    uint8  Resv_3072[888];
+    uint32 ANA_REG_CLK_CTRL_REG1_XO_SLICER;
+    uint32 ANA_REG_CLK_CTRL_REG1_CLKTOP;
+    uint32 ANA_REG_CLK_CTRL_REG2_CLKTOP;
+    uint32 ANA_REG_CLK_CTRL_REG1_LDO_CLKTOP;
+    uint32 ANA_REG_CLK_CTRL_REG2_LDO_CLKTOP;
+    uint8  Resv_3096[4];
+    uint32 ANA_REG_CLK_STATUS_REG;
+    uint32 ANA_REG_REFSYS_CTRL_REG_LOWV;
+    uint32 ANA_REG_REFSYS_TMUX_CTRL_LOWV;
+    uint32 ANA_REG_REFSYS_SPARE_REG_LOWV;
+    uint32 ANA_REG_WU_CTRL_REG_LOWV;
+    uint32 ANA_REG_WU_TMUX_CTRL_LOWV;
+    uint32 ANA_REG_TW_CTRL_REG_LOWV;
+    uint32 ANA_REG_TW_ANA_TMUX_CTRL_LOWV;
+    uint32 ANA_REG_TW_SPARE_LOWV;
+    uint32 ANA_REG_WU_MODE_REG_LOWV;
+    uint32 ANA_REG_WU_STATUS_REG_LOWV;
+    uint32 ANA_REG_WU_SPARE_OUT_LOWV;
+    uint8  Resv_4048[904];
+    uint32 HW_SPARE_RW0;
+    uint32 HW_SPARE_RW1;
+    uint32 HW_SPARE_RW2;
+    uint32 HW_SPARE_RW3;
+    uint32 HW_SPARE_RO0;
+    uint32 HW_SPARE_RO1;
+    uint32 HW_SPARE_RO2;
+    uint32 HW_SPARE_RO3;
+    uint32 HW_SPARE_WPH;
+    uint32 HW_SPARE_REC;
+    uint8  Resv_4104[16];
+    uint32 LOCK0_KICK0;
+    uint32 LOCK0_KICK1;
+    uint32 INTR_RAW_STATUS;
+    uint32 INTR_ENABLED_STATUS_CLEAR;
+    uint32 INTR_ENABLE;
+    uint32 INTR_ENABLE_CLEAR;
+    uint32 EOI;
+    uint32 FAULT_ADDRESS;
+    uint32 FAULT_TYPE_STATUS;
+    uint32 FAULT_ATTR_STATUS;
+    uint32 FAULT_CLEAR;
+} toprcmBASE_t;
+
+
+/*---------------------------------------------------------------------------------------
+ * MSS_RCM_REGS
+ *---------------------------------------------------------------------------------------
+ */
+typedef volatile struct {
+    uint32 PID;
+    uint32 MSS_RST_CAUSE_CLR;
+    uint32 MSS_RST_STATUS;
+    uint32 SYSRST_BY_DBG_RST;
+    uint32 RST_ASSERDLY;
+    uint32 RST2ASSERTDLY;
+    uint32 RST_WFICHECK;
+    uint32 MSS_MCANA_CLK_SRC_SEL;
+    uint32 MSS_MCANB_CLK_SRC_SEL;
+    uint32 MSS_QSPI_CLK_SRC_SEL;
+    uint32 MSS_RTIA_CLK_SRC_SEL;
+    uint32 MSS_RTIB_CLK_SRC_SEL;
+    uint32 MSS_RTIC_CLK_SRC_SEL;
+    uint32 MSS_WDT_CLK_SRC_SEL;
+    uint32 MSS_SPIA_CLK_SRC_SEL;
+    uint32 MSS_SPIB_CLK_SRC_SEL;
+    uint32 MSS_I2C_CLK_SRC_SEL;
+    uint32 MSS_SCIA_CLK_SRC_SEL;
+    uint32 MSS_SCIB_CLK_SRC_SEL;
+    uint32 MSS_CPTS_CLK_SRC_SEL;
+    uint32 MSS_CPSW_CLK_SRC_SEL;
+    uint32 MSS_MCANA_CLK_DIV_VAL;
+    uint32 MSS_MCANB_CLK_DIV_VAL;
+    uint32 MSS_QSPI_CLK_DIV_VAL;
+    uint32 MSS_RTIA_CLK_DIV_VAL;
+    uint32 MSS_RTIB_CLK_DIV_VAL;
+    uint32 MSS_RTIC_CLK_DIV_VAL;
+    uint32 MSS_WDT_CLK_DIV_VAL;
+    uint32 MSS_SPIA_CLK_DIV_VAL;
+    uint32 MSS_SPIB_CLK_DIV_VAL;
+    uint32 MSS_I2C_CLK_DIV_VAL;
+    uint32 MSS_SCIA_CLK_DIV_VAL;
+    uint32 MSS_SCIB_CLK_DIV_VAL;
+    uint32 MSS_CPTS_CLK_DIV_VAL;
+    uint32 MSS_CPSW_CLK_DIV_VAL;
+    uint32 MSS_RGMII_CLK_DIV_VAL;
+    uint32 MSS_MII100_CLK_DIV_VAL;
+    uint32 MSS_MII10_CLK_DIV_VAL;
+    uint32 MSS_GPADC_CLK_DIV_VAL;
+    uint32 MSS_MCANA_CLK_GATE;
+    uint32 MSS_MCANB_CLK_GATE;
+    uint32 MSS_QSPI_CLK_GATE;
+    uint32 MSS_RTIA_CLK_GATE;
+    uint32 MSS_RTIB_CLK_GATE;
+    uint32 MSS_RTIC_CLK_GATE;
+    uint32 MSS_WDT_CLK_GATE;
+    uint32 MSS_SPIA_CLK_GATE;
+    uint32 MSS_SPIB_CLK_GATE;
+    uint32 MSS_I2C_CLK_GATE;
+    uint32 MSS_SCIA_CLK_GATE;
+    uint32 MSS_SCIB_CLK_GATE;
+    uint32 MSS_CPTS_CLK_GATE;
+    uint32 MSS_CPSW_CLK_GATE;
+    uint32 MSS_RGMII_CLK_GATE;
+    uint32 MSS_MII100_CLK_GATE;
+    uint32 MSS_MII10_CLK_GATE;
+    uint32 MSS_GPADC_CLK_GATE;
+    uint32 MSS_MCANA_CLK_STATUS;
+    uint32 MSS_MCANB_CLK_STATUS;
+    uint32 MSS_QSPI_CLK_STATUS;
+    uint32 MSS_RTIA_CLK_STATUS;
+    uint32 MSS_RTIB_CLK_STATUS;
+    uint32 MSS_RTIC_CLK_STATUS;
+    uint32 MSS_WDT_CLK_STATUS;
+    uint32 MSS_SPIA_CLK_STATUS;
+    uint32 MSS_SPIB_CLK_STATUS;
+    uint32 MSS_I2C_CLK_STATUS;
+    uint32 MSS_SCIA_CLK_STATUS;
+    uint32 MSS_SCIB_CLK_STATUS;
+    uint32 MSS_CPTS_CLK_STATUS;
+    uint32 MSS_CPSW_CLK_STATUS;
+    uint32 MSS_RGMII_CLK_STATUS;
+    uint32 MSS_MII100_CLK_STATUS;
+    uint32 MSS_MII10_CLK_STATUS;
+    uint32 MSS_GPADC_CLK_STATUS;
+    uint32 MSS_CR5SS_POR_RST_CTRL;
+    uint32 MSS_CR5SSA_RST_CTRL;
+    uint32 MSS_CR5SSB_RST_CTRL;
+    uint32 MSS_CR5A_RST_CTRL;
+    uint32 MSS_CR5B_RST_CTRL;
+    uint32 MSS_VIMA_RST_CTRL;
+    uint32 MSS_VIMB_RST_CTRL;
+    uint32 MSS_CRC_RST_CTRL;
+    uint32 MSS_RTIA_RST_CTRL;
+    uint32 MSS_RTIB_RST_CTRL;
+    uint32 MSS_RTIC_RST_CTRL;
+    uint32 MSS_WDT_RST_CTRL;
+    uint32 MSS_ESM_RST_CTRL;
+    uint32 MSS_DCCA_RST_CTRL;
+    uint32 MSS_DCCB_RST_CTRL;
+    uint32 MSS_DCCC_RST_CTRL;
+    uint32 MSS_DCCD_RST_CTRL;
+    uint32 MSS_GIO_RST_CTRL;
+    uint32 MSS_SPIA_RST_CTRL;
+    uint32 MSS_SPIB_RST_CTRL;
+    uint32 MSS_QSPI_RST_CTRL;
+    uint32 MSS_PWM1_RST_CTRL;
+    uint32 MSS_PWM2_RST_CTRL;
+    uint32 MSS_PWM3_RST_CTRL;
+    uint32 MSS_MCANA_RST_CTRL;
+    uint32 MSS_MCANB_RST_CTRL;
+    uint32 MSS_I2C_RST_CTRL;
+    uint32 MSS_SCIA_RST_CTRL;
+    uint32 MSS_SCIB_RST_CTRL;
+    uint32 MSS_EDMA_RST_CTRL;
+    uint32 MSS_INFRA_RST_CTRL;
+    uint32 MSS_CPSW_RST_CTRL;
+    uint32 MSS_GPADC_RST_CTRL;
+    uint32 MSS_DMM_RST_CTRL;
+    uint32 R5_COREA_GATE;
+    uint32 R5_COREB_GATE;
+    uint32 MSS_L2_BANKA_PD_CTRL;
+    uint32 MSS_L2_BANKB_PD_CTRL;
+    uint32 MSS_L2_BANKA_PD_STATUS;
+    uint32 MSS_L2_BANKB_PD_STATUS;
+    uint32 HW_REG0;
+    uint32 HW_REG1;
+    uint32 HW_REG2;
+    uint32 HW_REG3;
+    uint8  Resv_1024[548];
+    uint32 HSM_RTIA_CLK_SRC_SEL;
+    uint32 HSM_WDT_CLK_SRC_SEL;
+    uint32 HSM_RTC_CLK_SRC_SEL;
+    uint32 HSM_DMTA_CLK_SRC_SEL;
+    uint32 HSM_DMTB_CLK_SRC_SEL;
+    uint32 HSM_RTI_CLK_DIV_VAL;
+    uint32 HSM_WDT_CLK_DIV_VAL;
+    uint32 HSM_RTC_CLK_DIV_VAL;
+    uint32 HSM_DMTA_CLK_DIV_VAL;
+    uint32 HSM_DMTB_CLK_DIV_VAL;
+    uint32 HSM_RTI_CLK_GATE;
+    uint32 HSM_WDT_CLK_GATE;
+    uint32 HSM_RTC_CLK_GATE;
+    uint32 HSM_DMTA_CLK_GATE;
+    uint32 HSM_DMTB_CLK_GATE;
+    uint32 HSM_RTI_CLK_STATUS;
+    uint32 HSM_WDT_CLK_STATUS;
+    uint32 HSM_RTC_CLK_STATUS;
+    uint32 HSM_DMTA_CLK_STATUS;
+    uint32 HSM_DMTB_CLK_STATUS;
+    uint8  Resv_4104[3000];
+    uint32 LOCK0_KICK0;
+    uint32 LOCK0_KICK1;
+    uint32 INTR_RAW_STATUS;
+    uint32 INTR_ENABLED_STATUS_CLEAR;
+    uint32 INTR_ENABLE;
+    uint32 INTR_ENABLE_CLEAR;
+    uint32 EOI;
+    uint32 FAULT_ADDRESS;
+    uint32 FAULT_TYPE_STATUS;
+    uint32 FAULT_ATTR_STATUS;
+    uint32 FAULT_CLEAR;
+} mssrcmBASE_t;
+
+
+/*---------------------------------------------------------------------------------------
+ * DSS_RCM_REGS
+ *---------------------------------------------------------------------------------------
+ */
+
+typedef volatile struct {
+    uint32 PID;
+    uint32 HW_REG0;
+    uint32 HW_REG1;
+    uint32 HW_REG2;
+    uint32 HW_REG3;
+    uint32 DSP_PD_CTRL;
+    uint32 DSP_PD_TRIGGER_WAKUP;
+    uint32 DSP_PD_TRIGGER_SLEEP;
+    uint32 DSP_PD_STATUS;
+    uint32 DSP_PD_CTRL_MISC0;
+    uint32 DSP_PD_CTRL_MISC1;
+    uint32 DSP_PD_STATUS_MISC0;
+    uint32 DSP_PD_WAKEUP_MASK0;
+    uint32 DSP_PD_WAKEUP_MASK1;
+    uint32 DSP_PD_WAKEUP_MASK2;
+    uint32 DSP_PD_WAKEUP_STATUS0;
+    uint32 DSP_PD_WAKEUP_STATUS1;
+    uint32 DSP_PD_WAKEUP_STATUS2;
+    uint32 DSP_PD_WAKEUP_STATUS0_CLR;
+    uint32 DSP_PD_WAKEUP_STATUS1_CLR;
+    uint32 DSP_PD_WAKEUP_STATUS2_CLR;
+    uint32 DSP_PD_MISSED_EVENT_MASK0;
+    uint32 DSP_PD_MISSED_EVENT_MASK1;
+    uint32 DSP_PD_MISSED_EVENT_MASK2;
+    uint32 DSP_PD_MISSED_EVENT_STATUS0;
+    uint32 DSP_PD_MISSED_EVENT_STATUS1;
+    uint32 DSP_PD_MISSED_EVENT_STATUS2;
+    uint32 DSP_RST_CAUSE;
+    uint32 DSP_RST_CAUSE_CLR;
+    uint32 DSP_STC_PBIST_CTRL;
+    uint32 DSP_STC_PBIST_STATUS;
+    uint32 DSP_STC_PBIST_CTRL_MISC0;
+    uint32 DSP_STC_PBIST_CTRL_MISC1;
+    uint32 DSP_STC_PBIST_START;
+    uint32 DSP_STC_PBIST_STATUS_CLR;
+    uint32 DSS_DSP_CLK_SRC_SEL;
+    uint32 DSS_HWA_CLK_SRC_SEL;
+    uint32 DSS_RTIA_CLK_SRC_SEL;
+    uint32 DSS_RTIB_CLK_SRC_SEL;
+    uint32 DSS_WDT_CLK_SRC_SEL;
+    uint32 DSS_SCIA_CLK_SRC_SEL;
+    uint32 DSS_DSP_CLK_DIV_VAL;
+    uint32 DSS_RTIA_CLK_DIV_VAL;
+    uint32 DSS_RTIB_CLK_DIV_VAL;
+    uint32 DSS_WDT_CLK_DIV_VAL;
+    uint32 DSS_SCIA_CLK_DIV_VAL;
+    uint32 DSS_DSP_CLK_GATE;
+    uint32 DSS_HWA_CLK_GATE;
+    uint32 DSS_RTIA_CLK_GATE;
+    uint32 DSS_RTIB_CLK_GATE;
+    uint32 DSS_WDT_CLK_GATE;
+    uint32 DSS_SCIA_CLK_GATE;
+    uint32 DSS_CBUFF_CLK_GATE;
+    uint32 DSS_DSP_CLK_STATUS;
+    uint32 DSS_HWA_CLK_STATUS;
+    uint32 DSS_RTIA_CLK_STATUS;
+    uint32 DSS_RTIB_CLK_STATUS;
+    uint32 DSS_WDT_CLK_STATUS;
+    uint32 DSS_SCIA_CLK_STATUS;
+    uint32 DSS_DSP_RST_CTRL;
+    uint32 DSS_ESM_RST_CTRL;
+    uint32 DSS_SCIA_RST_CTRL;
+    uint32 DSS_RTIA_RST_CTRL;
+    uint32 DSS_RTIB_RST_CTRL;
+    uint32 DSS_WDT_RST_CTRL;
+    uint32 DSS_DCCA_RST_CTRL;
+    uint32 DSS_DCCB_RST_CTRL;
+    uint32 DSS_MCRC_RST_CTRL;
+    uint32 DSP_DFT_DIV_CTRL;
+    uint32 DSS_DSP_L2_PD_CTRL;
+    uint32 DSS_L3_BANKA0_PD_CTRL;
+    uint32 DSS_L3_BANKA1_PD_CTRL;
+    uint32 DSS_L3_BANKA2_PD_CTRL;
+    uint8  DSS_L3_BANKA3_PD_CTRL;
+    uint32 DSS_L3_BANKB0_PD_CTRL;
+    uint32 DSS_L3_BANKB1_PD_CTRL;
+    uint32 DSS_L3_BANKB2_PD_CTRL;
+    uint8  DSS_L3_BANKB3_PD_CTRL;
+    uint32 DSS_L3_BANKC0_PD_CTRL;
+    uint32 DSS_L3_BANKC1_PD_CTRL;
+    uint8  DSS_L3_BANKC2_PD_CTRL;
+    uint8  DSS_L3_BANKC3_PD_CTRL;
+    uint32 DSS_L3_BANKD0_PD_CTRL;
+    uint32 DSS_L3_BANKD1_PD_CTRL;
+    uint32 DSS_L3_BANKD2_PD_CTRL;
+    uint8 	rsvd4[4];
+    uint32 DSS_HWA_PD_CTRL;
+    uint32 DSS_DSP_L2_PD_STATUS;
+    uint32 DSS_L3_BANKA0_PD_STATUS;
+    uint32 DSS_L3_BANKA1_PD_STATUS;
+    uint32 DSS_L3_BANKA2_PD_STATUS;
+    uint32 DSS_L3_BANKA3_PD_STATUS;
+    uint32 DSS_L3_BANKB0_PD_STATUS;
+    uint32 DSS_L3_BANKB1_PD_STATUS;
+    uint32 DSS_L3_BANKB2_PD_STATUS;
+    uint32 DSS_L3_BANKB3_PD_STATUS;
+    uint32 DSS_L3_BANKC0_PD_STATUS;
+    uint32 DSS_L3_BANKC1_PD_STATUS;
+    uint32 DSS_L3_BANKC2_PD_STATUS;
+    uint32 DSS_L3_BANKC3_PD_STATUS;
+    uint32 DSS_L3_BANKD0_PD_STATUS;
+    uint32 DSS_L3_BANKD1_PD_STATUS;
+    uint32 DSS_L3_BANKD2_PD_STATUS;
+    uint8	rsvd8[4];
+    uint32 DSS_HWA_PD_STATUS;
+    uint32 DSS_DSP_TRCCLK_DIVRATIO;
+    uint32 DSS_DSP_TCLK_DIVRATIO;
+    uint32 DSS_DSP_DITHERED_CLK_CTRL;
+    uint32 DSS_L3_PD_CTRL_STICKYBIT;
+    uint32 DSP_PD_CTRL_MISC2;
+    uint32 DSP_PD_CTRL_MISC3;
+    uint32 DSP_PD_CTRL_OVERRIDE0;
+    uint32 DSP_PD_CTRL_OVERRIDE1;
+    uint32 DSP_PD_CTRL_OVERRIDE2;
+    uint32 DSS_HWA_RST_CTRL;
+    uint8	rsvd9[4];
+    uint32 DSS_EDMA_RST_CTRL;
+    uint8	rsvd10[12];
+    uint32 DSS_TPTCC_RST_CTRL;
+    uint8	rsvd11[3564];
+    uint32 HW_SPARE_RW0;
+    uint32 HW_SPARE_RW1;
+    uint32 HW_SPARE_RW2;
+    uint32 HW_SPARE_RW3;
+    uint32 HW_SPARE_RO0;
+    uint32 HW_SPARE_RO1;
+    uint32 HW_SPARE_RO2;
+    uint32 HW_SPARE_RO3;
+    uint32 HW_SPARE_WPH;
+    uint32 HW_SPARE_REC;
+    uint8	rsvd12[16];
+    uint32 LOCK0_KICK0;
+    uint32 LOCK0_KICK1;
+    uint32 INTR_RAW_STATUS;
+    uint32 INTR_ENABLED_STATUS_CLEAR;
+    uint32 INTR_ENABLE;
+    uint32 INTR_ENABLE_CLEAR;
+    uint32 EOI;
+    uint32 FAULT_ADDRESS;
+    uint32 FAULT_TYPE_STATUS;
+    uint32 FAULT_ATTR_STATUS;
+    uint32 FAULT_CLEAR;
+} dssrcmBASE_t;
+
+
+typedef volatile struct {
+    uint32 PID;
+    uint32 MSS_SW_INT;
+    uint32 MSS_CAPEVNT_SEL;
+    uint32 MSS_DMA_REQ_SEL;
+    uint32 MSS_DMA1_REQ_SEL;
+    uint32 MSS_IRQ_REQ_SEL;
+    uint32 MSS_SPI_TRIG_SRC;
+    uint32 MSS_ATCM_MEM_INIT;
+    uint32 MSS_ATCM_MEM_INIT_DONE;
+    uint32 MSS_ATCM_MEM_INIT_STATUS;
+    uint32 MSS_BTCM_MEM_INIT;
+    uint32 MSS_BTCM_MEM_INIT_DONE;
+    uint32 MSS_BTCM_MEM_INIT_STATUS;
+    uint32 MSS_L2_MEM_INIT;
+    uint32 MSS_L2_MEM_INIT_DONE;
+    uint32 MSS_L2_MEM_INIT_STATUS;
+    uint32 MSS_MAILBOX_MEM_INIT;
+    uint32 MSS_MAILBOX_MEM_INIT_DONE;
+    uint32 MSS_MAILBOX_MEM_INIT_STATUS;
+    uint32 MSS_RETRAM_MEM_INIT;
+    uint32 MSS_RETRAM_MEM_INIT_DONE;
+    uint32 MSS_RETRAM_MEM_INIT_STATUS;
+    uint32 MSS_SPIA_MEM_INIT;
+    uint32 MSS_SPIA_MEM_INIT_DONE;
+    uint32 MSS_SPIA_MEM_INIT_STATUS;
+    uint32 MSS_SPIB_MEM_INIT;
+    uint32 MSS_SPIB_MEM_INIT_DONE;
+    uint32 MSS_SPIB_MEM_INIT_STATUS;
+    uint32 MSS_TPCC_MEMINIT_START;
+    uint32 MSS_TPCC_MEMINIT_DONE;
+    uint32 MSS_TPCC_MEMINIT_STATUS;
+    uint32 MSS_GPADC_MEM_INIT;
+    uint32 MSS_GPADC_MEM_INIT_DONE;
+    uint32 MSS_GPADC_MEM_INIT_STATUS;
+    uint32 MSS_SPIA_CFG;
+    uint32 MSS_SPIB_CFG;
+    uint32 MSS_EPWM_CFG;
+    uint32 MSS_GIO_CFG;
+    uint32 MSS_MCAN_FE_SELECT;
+    uint32 MSS_MCAN_DISABLE;
+    uint32 MSS_MCANA_INT_CLR;
+    uint32 MSS_MCANA_INT_MASK;
+    uint32 MSS_MCANA_INT_STAT;
+    uint32 MSS_MCANA_DMA_ACK;
+    uint32 CCC_ERR_STATUS;
+    uint32 CCCA_CFG0;
+    uint32 CCCA_CFG1;
+    uint32 CCCA_CFG2;
+    uint32 CCCA_CFG3;
+    uint32 CCCA_CNTVAL;
+    uint32 CCCB_CFG0;
+    uint32 CCCB_CFG1;
+    uint32 CCCB_CFG2;
+    uint32 CCCB_CFG3;
+    uint32 CCCB_CNTVAL;
+    uint32 CCC_DCC_COMMON;
+    uint32 R5_GLOBAL_CONFIG;
+    uint32 R5_AHB_EN;
+    uint32 R5A_AHB_BASE;
+    uint32 R5A_AHB_SIZE;
+    uint32 R5B_AHB_BASE;
+    uint32 R5B_AHB_SIZE;
+    uint32 R5_TCM_EXT_ERR_EN;
+    uint32 R5_TCM_ERR_EN;
+    uint32 R5_INIT_TCM;
+    uint32 R5_TCM_ECC_WRENZ_EN;
+    uint32 ESM_GATING0;
+    uint32 ESM_GATING1;
+    uint32 ESM_GATING2;
+    uint32 ESM_GATING3;
+    uint32 ESM_GATING4;
+    uint32 ESM_GATING5;
+    uint32 ESM_GATING6;
+    uint32 ESM_GATING7;
+    uint32 ERR_PARITY_ATCM0;
+    uint32 ERR_PARITY_ATCM1;
+    uint32 ERR_PARITY_B0TCM0;
+    uint32 ERR_PARITY_B0TCM1;
+    uint32 ERR_PARITY_B1TCM0;
+    uint32 ERR_PARITY_B1TCM1;
+    uint32 TCM_PARITY_CTRL;
+    uint32 TCM_PARITY_ERRFRC;
+    uint32 R5_CORE_EVENT;
+    uint32 SPIA_IO_CFG;
+    uint32 SPIB_IO_CFG;
+    uint32 SPI_HOST_IRQ;
+    uint32 TPTC_DBS_CONFIG;
+    uint32 TPCC_PARITY_CTRL;
+    uint32 TPCC_PARITY_STATUS;
+    uint32 MSS_DBG_ACK_CTL0;
+    uint32 MSS_DBG_ACK_CTL1;
+    uint32 CPSW_CONTROL;
+    uint32 MSS_TPCC_A_ERRAGG_MASK;
+    uint32 MSS_TPCC_A_ERRAGG_STATUS;
+    uint32 MSS_TPCC_A_ERRAGG_STATUS_RAW;
+    uint32 MSS_TPCC_A_INTAGG_MASK;
+    uint32 MSS_TPCC_A_INTAGG_STATUS;
+    uint32 MSS_TPCC_A_INTAGG_STATUS_RAW;
+    uint32 MSS_TPCC_B_ERRAGG_MASK;
+    uint32 MSS_TPCC_B_ERRAGG_STATUS;
+    uint32 MSS_TPCC_B_ERRAGG_STATUS_RAW;
+    uint32 MSS_TPCC_B_INTAGG_MASK;
+    uint32 MSS_TPCC_B_INTAGG_STATUS;
+    uint32 MSS_TPCC_B_INTAGG_STATUS_RAW;
+    uint32 MSS_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5A_AXI_RD_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5A_AXI_RD_BUS_SAFETY_FI;
+    uint32 MSS_CR5A_AXI_RD_BUS_SAFETY_ERR;
+    uint32 MSS_CR5A_AXI_RD_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5A_AXI_RD_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5A_AXI_RD_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_CR5B_AXI_RD_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5B_AXI_RD_BUS_SAFETY_FI;
+    uint32 MSS_CR5B_AXI_RD_BUS_SAFETY_ERR;
+    uint32 MSS_CR5B_AXI_RD_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5B_AXI_RD_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5B_AXI_RD_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_CR5A_AXI_WR_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5A_AXI_WR_BUS_SAFETY_FI;
+    uint32 MSS_CR5A_AXI_WR_BUS_SAFETY_ERR;
+    uint32 MSS_CR5A_AXI_WR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5A_AXI_WR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5A_AXI_WR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_CR5A_AXI_WR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_CR5B_AXI_WR_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5B_AXI_WR_BUS_SAFETY_FI;
+    uint32 MSS_CR5B_AXI_WR_BUS_SAFETY_ERR;
+    uint32 MSS_CR5B_AXI_WR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5B_AXI_WR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5B_AXI_WR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_CR5B_AXI_WR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_FI;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_ERR;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_CR5A_AXI_S_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_FI;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_ERR;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_CR5B_AXI_S_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_TPTC_A0_RD_BUS_SAFETY_CTRL;
+    uint32 MSS_TPTC_A0_RD_BUS_SAFETY_FI;
+    uint32 MSS_TPTC_A0_RD_BUS_SAFETY_ERR;
+    uint32 MSS_TPTC_A0_RD_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_TPTC_A0_RD_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_TPTC_A0_RD_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_TPTC_A1_RD_BUS_SAFETY_CTRL;
+    uint32 MSS_TPTC_A1_RD_BUS_SAFETY_FI;
+    uint32 MSS_TPTC_A1_RD_BUS_SAFETY_ERR;
+    uint32 MSS_TPTC_A1_RD_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_TPTC_A1_RD_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_TPTC_A1_RD_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_TPTC_B0_RD_BUS_SAFETY_CTRL;
+    uint32 MSS_TPTC_B0_RD_BUS_SAFETY_FI;
+    uint32 MSS_TPTC_B0_RD_BUS_SAFETY_ERR;
+    uint32 MSS_TPTC_B0_RD_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_TPTC_B0_RD_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_TPTC_B0_RD_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_TPTC_A0_WR_BUS_SAFETY_CTRL;
+    uint32 MSS_TPTC_A0_WR_BUS_SAFETY_FI;
+    uint32 MSS_TPTC_A0_WR_BUS_SAFETY_ERR;
+    uint32 MSS_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_TPTC_A1_WR_BUS_SAFETY_CTRL;
+    uint32 MSS_TPTC_A1_WR_BUS_SAFETY_FI;
+    uint32 MSS_TPTC_A1_WR_BUS_SAFETY_ERR;
+    uint32 MSS_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_TPTC_B0_WR_BUS_SAFETY_CTRL;
+    uint32 MSS_TPTC_B0_WR_BUS_SAFETY_FI;
+    uint32 MSS_TPTC_B0_WR_BUS_SAFETY_ERR;
+    uint32 MSS_TPTC_B0_WR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_TPTC_B0_WR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_TPTC_B0_WR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_TPTC_B0_WR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 HSM_TPTC_A0_RD_BUS_SAFETY_CTRL;
+    uint32 HSM_TPTC_A0_RD_BUS_SAFETY_FI;
+    uint32 HSM_TPTC_A0_RD_BUS_SAFETY_ERR;
+    uint32 HSM_TPTC_A0_RD_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 HSM_TPTC_A0_RD_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 HSM_TPTC_A0_RD_BUS_SAFETY_ERR_STAT_READ;
+    uint32 HSM_TPTC_A1_RD_BUS_SAFETY_CTRL;
+    uint32 HSM_TPTC_A1_RD_BUS_SAFETY_FI;
+    uint32 HSM_TPTC_A1_RD_BUS_SAFETY_ERR;
+    uint32 HSM_TPTC_A1_RD_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 HSM_TPTC_A1_RD_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 HSM_TPTC_A1_RD_BUS_SAFETY_ERR_STAT_READ;
+    uint32 HSM_TPTC_A0_WR_BUS_SAFETY_CTRL;
+    uint32 HSM_TPTC_A0_WR_BUS_SAFETY_FI;
+    uint32 HSM_TPTC_A0_WR_BUS_SAFETY_ERR;
+    uint32 HSM_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 HSM_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 HSM_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 HSM_TPTC_A0_WR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 HSM_TPTC_A1_WR_BUS_SAFETY_CTRL;
+    uint32 HSM_TPTC_A1_WR_BUS_SAFETY_FI;
+    uint32 HSM_TPTC_A1_WR_BUS_SAFETY_ERR;
+    uint32 HSM_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 HSM_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 HSM_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 HSM_TPTC_A1_WR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_QSPI_BUS_SAFETY_CTRL;
+    uint32 MSS_QSPI_BUS_SAFETY_FI;
+    uint32 MSS_QSPI_BUS_SAFETY_ERR;
+    uint32 MSS_QSPI_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_QSPI_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_QSPI_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_QSPI_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_QSPI_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 HSM_DTHE_BUS_SAFETY_CTRL;
+    uint32 HSM_DTHE_BUS_SAFETY_FI;
+    uint32 HSM_DTHE_BUS_SAFETY_ERR;
+    uint32 HSM_DTHE_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 HSM_DTHE_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 HSM_DTHE_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 HSM_DTHE_BUS_SAFETY_ERR_STAT_READ;
+    uint32 HSM_DTHE_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_CPSW_BUS_SAFETY_CTRL;
+    uint32 MSS_CPSW_BUS_SAFETY_FI;
+    uint32 MSS_CPSW_BUS_SAFETY_ERR;
+    uint32 MSS_CPSW_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CPSW_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CPSW_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_CPSW_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_CPSW_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_MCRC_BUS_SAFETY_CTRL;
+    uint32 MSS_MCRC_BUS_SAFETY_FI;
+    uint32 MSS_MCRC_BUS_SAFETY_ERR;
+    uint32 MSS_MCRC_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_MCRC_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_MCRC_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_MCRC_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_MCRC_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_PCR_BUS_SAFETY_CTRL;
+    uint32 MSS_PCR_BUS_SAFETY_FI;
+    uint32 MSS_PCR_BUS_SAFETY_ERR;
+    uint32 MSS_PCR_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_PCR_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_PCR_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_PCR_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_PCR_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_PCR2_BUS_SAFETY_CTRL;
+    uint32 MSS_PCR2_BUS_SAFETY_FI;
+    uint32 MSS_PCR2_BUS_SAFETY_ERR;
+    uint32 MSS_PCR2_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_PCR2_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_PCR2_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_PCR2_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_PCR2_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 HSM_M_BUS_SAFETY_CTRL;
+    uint32 HSM_M_BUS_SAFETY_FI;
+    uint32 HSM_M_BUS_SAFETY_ERR;
+    uint32 HSM_M_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 HSM_M_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 HSM_M_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 HSM_M_BUS_SAFETY_ERR_STAT_READ;
+    uint32 HSM_M_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 HSM_S_BUS_SAFETY_CTRL;
+    uint32 HSM_S_BUS_SAFETY_FI;
+    uint32 HSM_S_BUS_SAFETY_ERR;
+    uint32 HSM_S_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 HSM_S_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 HSM_S_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 HSM_S_BUS_SAFETY_ERR_STAT_READ;
+    uint32 HSM_S_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 DAP_R232_BUS_SAFETY_CTRL;
+    uint32 DAP_R232_BUS_SAFETY_FI;
+    uint32 DAP_R232_BUS_SAFETY_ERR;
+    uint32 DAP_R232_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 DAP_R232_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 DAP_R232_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 DAP_R232_BUS_SAFETY_ERR_STAT_READ;
+    uint32 DAP_R232_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_L2_A_BUS_SAFETY_CTRL;
+    uint32 MSS_L2_A_BUS_SAFETY_FI;
+    uint32 MSS_L2_A_BUS_SAFETY_ERR;
+    uint32 MSS_L2_A_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_L2_A_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_L2_A_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_L2_A_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_L2_A_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_L2_B_BUS_SAFETY_CTRL;
+    uint32 MSS_L2_B_BUS_SAFETY_FI;
+    uint32 MSS_L2_B_BUS_SAFETY_ERR;
+    uint32 MSS_L2_B_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_L2_B_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_L2_B_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_L2_B_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_L2_B_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_MBOX_BUS_SAFETY_CTRL;
+    uint32 MSS_MBOX_BUS_SAFETY_FI;
+    uint32 MSS_MBOX_BUS_SAFETY_ERR;
+    uint32 MSS_MBOX_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_MBOX_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_MBOX_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_MBOX_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_MBOX_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_SWBUF_BUS_SAFETY_CTRL;
+    uint32 MSS_SWBUF_BUS_SAFETY_FI;
+    uint32 MSS_SWBUF_BUS_SAFETY_ERR;
+    uint32 MSS_SWBUF_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_SWBUF_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_SWBUF_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_SWBUF_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_SWBUF_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_GPADC_BUS_SAFETY_CTRL;
+    uint32 MSS_GPADC_BUS_SAFETY_FI;
+    uint32 MSS_GPADC_BUS_SAFETY_ERR;
+    uint32 MSS_GPADC_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_GPADC_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_GPADC_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_GPADC_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_GPADC_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_BUS_SAFETY_SEC_ERR_STAT0;
+    uint32 MSS_BUS_SAFETY_SEC_ERR_STAT1;
+    uint32 HW_REG0;
+    uint32 HW_REG1;
+    uint32 HW_REG2;
+    uint32 HW_REG3;
+    uint32 HW_REG4;
+    uint32 HW_REG5;
+    uint32 HW_REG6;
+    uint32 HW_REG7;
+    uint32 MSS_DMM_BUS_SAFETY_CTRL;
+    uint32 MSS_DMM_BUS_SAFETY_FI;
+    uint32 MSS_DMM_BUS_SAFETY_ERR;
+    uint32 MSS_DMM_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_DMM_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_DMM_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_DMM_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_DMM_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_CTRL;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_FI;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_ERR;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_DMM_SLV_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_TO_MDO_BUS_SAFETY_CTRL;
+    uint32 MSS_TO_MDO_BUS_SAFETY_FI;
+    uint32 MSS_TO_MDO_BUS_SAFETY_ERR;
+    uint32 MSS_TO_MDO_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_TO_MDO_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_TO_MDO_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_TO_MDO_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_TO_MDO_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_SCRP_BUS_SAFETY_CTRL;
+    uint32 MSS_SCRP_BUS_SAFETY_FI;
+    uint32 MSS_SCRP_BUS_SAFETY_ERR;
+    uint32 MSS_SCRP_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_SCRP_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_SCRP_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_SCRP_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_SCRP_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_FI;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_ERR;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_CR5A_AHB_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_CTRL;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_FI;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_ERR;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_ERR_STAT_DATA0;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_ERR_STAT_CMD;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_ERR_STAT_WRITE;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_ERR_STAT_READ;
+    uint32 MSS_CR5B_AHB_BUS_SAFETY_ERR_STAT_WRITERESP;
+    uint32 DMM_CTRL_REG;
+    uint32 MSS_CR5A_MBOX_WRITE_DONE;
+    uint32 MSS_CR5A_MBOX_READ_REQ;
+    uint32 MSS_CR5A_MBOX_READ_DONE;
+    uint32 MSS_CR5B_MBOX_WRITE_DONE;
+    uint32 MSS_CR5B_MBOX_READ_REQ;
+    uint32 MSS_CR5B_MBOX_READ_DONE;
+    uint32 MSS_PBIST_KEY_RST;
+    uint32 MSS_PBIST_REG0;
+    uint32 MSS_PBIST_REG1;
+    uint32 MSS_PBIST_REG2;
+    uint32 MSS_QSPI_CONFIG;
+    uint32 MSS_STC_CONTROL;
+    uint32 MSS_CTI_TRIG_SEL;
+    uint32 MSS_DBGSS_CTI_TRIG_SEL;
+    uint32 MSS_BOOT_INFO_REG0;
+    uint32 MSS_BOOT_INFO_REG1;
+    uint32 MSS_BOOT_INFO_REG2;
+    uint32 MSS_BOOT_INFO_REG3;
+    uint32 MSS_BOOT_INFO_REG4;
+    uint32 MSS_BOOT_INFO_REG5;
+    uint32 MSS_BOOT_INFO_REG6;
+    uint32 MSS_BOOT_INFO_REG7;
+    uint32 MSS_TPTC_ECCAGGR_CLK_CNTRL;
+    uint32 MSS_PERIPH_ERRAGG_MASK0;
+    uint32 MSS_PERIPH_ERRAGG_STATUS0;
+    uint32 MSS_PERIPH_ERRAGG_STATUS_RAW0;
+    uint32 MSS_PERIPH_ERRAGG_MASK1;
+    uint32 MSS_PERIPH_ERRAGG_STATUS1;
+    uint32 MSS_PERIPH_ERRAGG_STATUS_RAW1;
+    uint32 MSS_DMM_EVENT0_REG;
+    uint32 MSS_DMM_EVENT1_REG;
+    uint32 MSS_DMM_EVENT2_REG;
+    uint32 MSS_DMM_EVENT3_REG;
+    uint32 MSS_DMM_EVENT4_REG;
+    uint32 MSS_DMM_EVENT5_REG;
+    uint32 MSS_DMM_EVENT6_REG;
+    uint32 MSS_DMM_EVENT7_REG;
+    uint32 MSS_DMM_EVENT8_REG;
+    uint32 MSS_DMM_EVENT9_REG;
+    uint32 MSS_DMM_EVENT10_REG;
+    uint32 MSS_DMM_EVENT11_REG;
+    uint32 MSS_DMM_EVENT12_REG;
+    uint32 MSS_DMM_EVENT13_REG;
+    uint32 MSS_DMM_EVENT14_REG;
+    uint32 MSS_DMM_EVENT15_REG;
+    uint8  Resv_2048[336];
+    uint32 R5_CONTROL;
+    uint32 R5_ROM_ECLIPSE;
+    uint32 R5_COREA_HALT;
+    uint32 R5_COREB_HALT;
+    uint32 R5_STATUS_REG;
+    uint8  Resv_4104[2036];
+    uint32 LOCK0_KICK0;
+    uint32 LOCK0_KICK1;
+    uint32 INTR_RAW_STATUS;
+    uint32 INTR_ENABLED_STATUS_CLEAR;
+    uint32 INTR_ENABLE;
+    uint32 INTR_ENABLE_CLEAR;
+    uint32 EOI;
+    uint32 FAULT_ADDRESS;
+    uint32 FAULT_TYPE_STATUS;
+    uint32 FAULT_ATTR_STATUS;
+    uint32 FAULT_CLEAR;
+} ctrlBASE_t;
+
+typedef volatile struct
+{
+    uint32 PID;
+    uint32 INFO;
+    uint32 PRIIRQ;
+    uint32 PRIFIQ;
+    uint32 IRQGSTS;
+    uint32 FIQGSTS;
+    uint32 IRQVEC;
+    uint32 FIQVEC;
+    uint32 ACTIRQ;
+    uint32 ACTFIQ;
+    uint8  Resv_48[8];
+    uint32 DEDVEC;
+    uint8  Resv_1024[972];
+    uint32 RAW;
+    uint32 STS;
+    uint32 INTR_EN_SET;
+    uint32 INTER_EN_CLR;
+    uint32 IRQSTS;
+    uint32 FIQSTS;
+    uint32 INTMAP;
+    uint32 INTTYPE;
+    uint32 RAW_1;
+    uint32 STS_1;
+    uint32 INTR_EN_SET_1;
+    uint32 INTER_EN_CLR_1;
+    uint32 IRQSTS_1;
+    uint32 FIQSTS_1;
+    uint32 INTMAP_1;
+    uint32 INTTYPE_1;
+    uint32 RAW_2;
+    uint32 STS_2;
+    uint32 INTR_EN_SET_2;
+    uint32 INTER_EN_CLR_2;
+    uint32 IRQSTS_2;
+    uint32 FIQSTS_2;
+    uint32 INTMAP_2;
+    uint32 INTTYPE_2;
+    uint32 RAW_3;
+    uint32 STS_3;
+    uint32 INTR_EN_SET_3;
+    uint32 INTER_EN_CLR_3;
+    uint32 IRQSTS_3;
+    uint32 FIQSTS_3;
+    uint32 INTMAP_3;
+    uint32 INTTYPE_3;
+    uint32 RAW_4;
+    uint32 STS_4;
+    uint32 INTR_EN_SET_4;
+    uint32 INTER_EN_CLR_4;
+    uint32 IRQSTS_4;
+    uint32 FIQSTS_4;
+    uint32 INTMAP_4;
+    uint32 INTTYPE_4;
+    uint32 RAW_5;
+    uint32 STS_5;
+    uint32 INTR_EN_SET_5;
+    uint32 INTER_EN_CLR_5;
+    uint32 IRQSTS_5;
+    uint32 FIQSTS_5;
+    uint32 INTMAP_5;
+    uint32 INTTYPE_5;
+    uint32 RAW_6;
+    uint32 STS_6;
+    uint32 INTR_EN_SET_6;
+    uint32 INTER_EN_CLR_6;
+    uint32 IRQSTS_6;
+    uint32 FIQSTS_6;
+    uint32 INTMAP_6;
+    uint32 INTTYPE_6;
+    uint32 RAW_7;
+    uint32 STS_7;
+    uint32 INTR_EN_SET_7;
+    uint32 INTER_EN_CLR_7;
+    uint32 IRQSTS_7;
+    uint32 FIQSTS_7;
+    uint32 INTMAP_7;
+    uint32 INTTYPE_7;
+    uint8  Resv_4096[2816];
+    uint32 INTPRIORITY;
+    uint32 INTPRIORITY_1;
+    uint32 INTPRIORITY_2;
+    uint32 INTPRIORITY_3;
+    uint32 INTPRIORITY_4;
+    uint32 INTPRIORITY_5;
+    uint32 INTPRIORITY_6;
+    uint32 INTPRIORITY_7;
+    uint32 INTPRIORITY_8;
+    uint32 INTPRIORITY_9;
+    uint32 INTPRIORITY_10;
+    uint32 INTPRIORITY_11;
+    uint32 INTPRIORITY_12;
+    uint32 INTPRIORITY_13;
+    uint32 INTPRIORITY_14;
+    uint32 INTPRIORITY_15;
+    uint32 INTPRIORITY_16;
+    uint32 INTPRIORITY_17;
+    uint32 INTPRIORITY_18;
+    uint32 INTPRIORITY_19;
+    uint32 INTPRIORITY_20;
+    uint32 INTPRIORITY_21;
+    uint32 INTPRIORITY_22;
+    uint32 INTPRIORITY_23;
+    uint32 INTPRIORITY_24;
+    uint32 INTPRIORITY_25;
+    uint32 INTPRIORITY_26;
+    uint32 INTPRIORITY_27;
+    uint32 INTPRIORITY_28;
+    uint32 INTPRIORITY_29;
+    uint32 INTPRIORITY_30;
+    uint32 INTPRIORITY_31;
+    uint32 INTPRIORITY_32;
+    uint32 INTPRIORITY_33;
+    uint32 INTPRIORITY_34;
+    uint32 INTPRIORITY_35;
+    uint32 INTPRIORITY_36;
+    uint32 INTPRIORITY_37;
+    uint32 INTPRIORITY_38;
+    uint32 INTPRIORITY_39;
+    uint32 INTPRIORITY_40;
+    uint32 INTPRIORITY_41;
+    uint32 INTPRIORITY_42;
+    uint32 INTPRIORITY_43;
+    uint32 INTPRIORITY_44;
+    uint32 INTPRIORITY_45;
+    uint32 INTPRIORITY_46;
+    uint32 INTPRIORITY_47;
+    uint32 INTPRIORITY_48;
+    uint32 INTPRIORITY_49;
+    uint32 INTPRIORITY_50;
+    uint32 INTPRIORITY_51;
+    uint32 INTPRIORITY_52;
+    uint32 INTPRIORITY_53;
+    uint32 INTPRIORITY_54;
+    uint32 INTPRIORITY_55;
+    uint32 INTPRIORITY_56;
+    uint32 INTPRIORITY_57;
+    uint32 INTPRIORITY_58;
+    uint32 INTPRIORITY_59;
+    uint32 INTPRIORITY_60;
+    uint32 INTPRIORITY_61;
+    uint32 INTPRIORITY_62;
+    uint32 INTPRIORITY_63;
+    uint32 INTPRIORITY_64;
+    uint32 INTPRIORITY_65;
+    uint32 INTPRIORITY_66;
+    uint32 INTPRIORITY_67;
+    uint32 INTPRIORITY_68;
+    uint32 INTPRIORITY_69;
+    uint32 INTPRIORITY_70;
+    uint32 INTPRIORITY_71;
+    uint32 INTPRIORITY_72;
+    uint32 INTPRIORITY_73;
+    uint32 INTPRIORITY_74;
+    uint32 INTPRIORITY_75;
+    uint32 INTPRIORITY_76;
+    uint32 INTPRIORITY_77;
+    uint32 INTPRIORITY_78;
+    uint32 INTPRIORITY_79;
+    uint32 INTPRIORITY_80;
+    uint32 INTPRIORITY_81;
+    uint32 INTPRIORITY_82;
+    uint32 INTPRIORITY_83;
+    uint32 INTPRIORITY_84;
+    uint32 INTPRIORITY_85;
+    uint32 INTPRIORITY_86;
+    uint32 INTPRIORITY_87;
+    uint32 INTPRIORITY_88;
+    uint32 INTPRIORITY_89;
+    uint32 INTPRIORITY_90;
+    uint32 INTPRIORITY_91;
+    uint32 INTPRIORITY_92;
+    uint32 INTPRIORITY_93;
+    uint32 INTPRIORITY_94;
+    uint32 INTPRIORITY_95;
+    uint32 INTPRIORITY_96;
+    uint32 INTPRIORITY_97;
+    uint32 INTPRIORITY_98;
+    uint32 INTPRIORITY_99;
+    uint32 INTPRIORITY_100;
+    uint32 INTPRIORITY_101;
+    uint32 INTPRIORITY_102;
+    uint32 INTPRIORITY_103;
+    uint32 INTPRIORITY_104;
+    uint32 INTPRIORITY_105;
+    uint32 INTPRIORITY_106;
+    uint32 INTPRIORITY_107;
+    uint32 INTPRIORITY_108;
+    uint32 INTPRIORITY_109;
+    uint32 INTPRIORITY_110;
+    uint32 INTPRIORITY_111;
+    uint32 INTPRIORITY_112;
+    uint32 INTPRIORITY_113;
+    uint32 INTPRIORITY_114;
+    uint32 INTPRIORITY_115;
+    uint32 INTPRIORITY_116;
+    uint32 INTPRIORITY_117;
+    uint32 INTPRIORITY_118;
+    uint32 INTPRIORITY_119;
+    uint32 INTPRIORITY_120;
+    uint32 INTPRIORITY_121;
+    uint32 INTPRIORITY_122;
+    uint32 INTPRIORITY_123;
+    uint32 INTPRIORITY_124;
+    uint32 INTPRIORITY_125;
+    uint32 INTPRIORITY_126;
+    uint32 INTPRIORITY_127;
+    uint32 INTPRIORITY_128;
+    uint32 INTPRIORITY_129;
+    uint32 INTPRIORITY_130;
+    uint32 INTPRIORITY_131;
+    uint32 INTPRIORITY_132;
+    uint32 INTPRIORITY_133;
+    uint32 INTPRIORITY_134;
+    uint32 INTPRIORITY_135;
+    uint32 INTPRIORITY_136;
+    uint32 INTPRIORITY_137;
+    uint32 INTPRIORITY_138;
+    uint32 INTPRIORITY_139;
+    uint32 INTPRIORITY_140;
+    uint32 INTPRIORITY_141;
+    uint32 INTPRIORITY_142;
+    uint32 INTPRIORITY_143;
+    uint32 INTPRIORITY_144;
+    uint32 INTPRIORITY_145;
+    uint32 INTPRIORITY_146;
+    uint32 INTPRIORITY_147;
+    uint32 INTPRIORITY_148;
+    uint32 INTPRIORITY_149;
+    uint32 INTPRIORITY_150;
+    uint32 INTPRIORITY_151;
+    uint32 INTPRIORITY_152;
+    uint32 INTPRIORITY_153;
+    uint32 INTPRIORITY_154;
+    uint32 INTPRIORITY_155;
+    uint32 INTPRIORITY_156;
+    uint32 INTPRIORITY_157;
+    uint32 INTPRIORITY_158;
+    uint32 INTPRIORITY_159;
+    uint32 INTPRIORITY_160;
+    uint32 INTPRIORITY_161;
+    uint32 INTPRIORITY_162;
+    uint32 INTPRIORITY_163;
+    uint32 INTPRIORITY_164;
+    uint32 INTPRIORITY_165;
+    uint32 INTPRIORITY_166;
+    uint32 INTPRIORITY_167;
+    uint32 INTPRIORITY_168;
+    uint32 INTPRIORITY_169;
+    uint32 INTPRIORITY_170;
+    uint32 INTPRIORITY_171;
+    uint32 INTPRIORITY_172;
+    uint32 INTPRIORITY_173;
+    uint32 INTPRIORITY_174;
+    uint32 INTPRIORITY_175;
+    uint32 INTPRIORITY_176;
+    uint32 INTPRIORITY_177;
+    uint32 INTPRIORITY_178;
+    uint32 INTPRIORITY_179;
+    uint32 INTPRIORITY_180;
+    uint32 INTPRIORITY_181;
+    uint32 INTPRIORITY_182;
+    uint32 INTPRIORITY_183;
+    uint32 INTPRIORITY_184;
+    uint32 INTPRIORITY_185;
+    uint32 INTPRIORITY_186;
+    uint32 INTPRIORITY_187;
+    uint32 INTPRIORITY_188;
+    uint32 INTPRIORITY_189;
+    uint32 INTPRIORITY_190;
+    uint32 INTPRIORITY_191;
+    uint32 INTPRIORITY_192;
+    uint32 INTPRIORITY_193;
+    uint32 INTPRIORITY_194;
+    uint32 INTPRIORITY_195;
+    uint32 INTPRIORITY_196;
+    uint32 INTPRIORITY_197;
+    uint32 INTPRIORITY_198;
+    uint32 INTPRIORITY_199;
+    uint32 INTPRIORITY_200;
+    uint32 INTPRIORITY_201;
+    uint32 INTPRIORITY_202;
+    uint32 INTPRIORITY_203;
+    uint32 INTPRIORITY_204;
+    uint32 INTPRIORITY_205;
+    uint32 INTPRIORITY_206;
+    uint32 INTPRIORITY_207;
+    uint32 INTPRIORITY_208;
+    uint32 INTPRIORITY_209;
+    uint32 INTPRIORITY_210;
+    uint32 INTPRIORITY_211;
+    uint32 INTPRIORITY_212;
+    uint32 INTPRIORITY_213;
+    uint32 INTPRIORITY_214;
+    uint32 INTPRIORITY_215;
+    uint32 INTPRIORITY_216;
+    uint32 INTPRIORITY_217;
+    uint32 INTPRIORITY_218;
+    uint32 INTPRIORITY_219;
+    uint32 INTPRIORITY_220;
+    uint32 INTPRIORITY_221;
+    uint32 INTPRIORITY_222;
+    uint32 INTPRIORITY_223;
+    uint32 INTPRIORITY_224;
+    uint32 INTPRIORITY_225;
+    uint32 INTPRIORITY_226;
+    uint32 INTPRIORITY_227;
+    uint32 INTPRIORITY_228;
+    uint32 INTPRIORITY_229;
+    uint32 INTPRIORITY_230;
+    uint32 INTPRIORITY_231;
+    uint32 INTPRIORITY_232;
+    uint32 INTPRIORITY_233;
+    uint32 INTPRIORITY_234;
+    uint32 INTPRIORITY_235;
+    uint32 INTPRIORITY_236;
+    uint32 INTPRIORITY_237;
+    uint32 INTPRIORITY_238;
+    uint32 INTPRIORITY_239;
+    uint32 INTPRIORITY_240;
+    uint32 INTPRIORITY_241;
+    uint32 INTPRIORITY_242;
+    uint32 INTPRIORITY_243;
+    uint32 INTPRIORITY_244;
+    uint32 INTPRIORITY_245;
+    uint32 INTPRIORITY_246;
+    uint32 INTPRIORITY_247;
+    uint32 INTPRIORITY_248;
+    uint32 INTPRIORITY_249;
+    uint32 INTPRIORITY_250;
+    uint32 INTPRIORITY_251;
+    uint32 INTPRIORITY_252;
+    uint32 INTPRIORITY_253;
+    uint32 INTPRIORITY_254;
+    uint32 INTPRIORITY_255;
+    uint8  Resv_8192[3072];
+    uint32 INTVECTOR;
+    uint32 INTVECTOR_1;
+    uint32 INTVECTOR_2;
+    uint32 INTVECTOR_3;
+    uint32 INTVECTOR_4;
+    uint32 INTVECTOR_5;
+    uint32 INTVECTOR_6;
+    uint32 INTVECTOR_7;
+    uint32 INTVECTOR_8;
+    uint32 INTVECTOR_9;
+    uint32 INTVECTOR_10;
+    uint32 INTVECTOR_11;
+    uint32 INTVECTOR_12;
+    uint32 INTVECTOR_13;
+    uint32 INTVECTOR_14;
+    uint32 INTVECTOR_15;
+    uint32 INTVECTOR_16;
+    uint32 INTVECTOR_17;
+    uint32 INTVECTOR_18;
+    uint32 INTVECTOR_19;
+    uint32 INTVECTOR_20;
+    uint32 INTVECTOR_21;
+    uint32 INTVECTOR_22;
+    uint32 INTVECTOR_23;
+    uint32 INTVECTOR_24;
+    uint32 INTVECTOR_25;
+    uint32 INTVECTOR_26;
+    uint32 INTVECTOR_27;
+    uint32 INTVECTOR_28;
+    uint32 INTVECTOR_29;
+    uint32 INTVECTOR_30;
+    uint32 INTVECTOR_31;
+    uint32 INTVECTOR_32;
+    uint32 INTVECTOR_33;
+    uint32 INTVECTOR_34;
+    uint32 INTVECTOR_35;
+    uint32 INTVECTOR_36;
+    uint32 INTVECTOR_37;
+    uint32 INTVECTOR_38;
+    uint32 INTVECTOR_39;
+    uint32 INTVECTOR_40;
+    uint32 INTVECTOR_41;
+    uint32 INTVECTOR_42;
+    uint32 INTVECTOR_43;
+    uint32 INTVECTOR_44;
+    uint32 INTVECTOR_45;
+    uint32 INTVECTOR_46;
+    uint32 INTVECTOR_47;
+    uint32 INTVECTOR_48;
+    uint32 INTVECTOR_49;
+    uint32 INTVECTOR_50;
+    uint32 INTVECTOR_51;
+    uint32 INTVECTOR_52;
+    uint32 INTVECTOR_53;
+    uint32 INTVECTOR_54;
+    uint32 INTVECTOR_55;
+    uint32 INTVECTOR_56;
+    uint32 INTVECTOR_57;
+    uint32 INTVECTOR_58;
+    uint32 INTVECTOR_59;
+    uint32 INTVECTOR_60;
+    uint32 INTVECTOR_61;
+    uint32 INTVECTOR_62;
+    uint32 INTVECTOR_63;
+    uint32 INTVECTOR_64;
+    uint32 INTVECTOR_65;
+    uint32 INTVECTOR_66;
+    uint32 INTVECTOR_67;
+    uint32 INTVECTOR_68;
+    uint32 INTVECTOR_69;
+    uint32 INTVECTOR_70;
+    uint32 INTVECTOR_71;
+    uint32 INTVECTOR_72;
+    uint32 INTVECTOR_73;
+    uint32 INTVECTOR_74;
+    uint32 INTVECTOR_75;
+    uint32 INTVECTOR_76;
+    uint32 INTVECTOR_77;
+    uint32 INTVECTOR_78;
+    uint32 INTVECTOR_79;
+    uint32 INTVECTOR_80;
+    uint32 INTVECTOR_81;
+    uint32 INTVECTOR_82;
+    uint32 INTVECTOR_83;
+    uint32 INTVECTOR_84;
+    uint32 INTVECTOR_85;
+    uint32 INTVECTOR_86;
+    uint32 INTVECTOR_87;
+    uint32 INTVECTOR_88;
+    uint32 INTVECTOR_89;
+    uint32 INTVECTOR_90;
+    uint32 INTVECTOR_91;
+    uint32 INTVECTOR_92;
+    uint32 INTVECTOR_93;
+    uint32 INTVECTOR_94;
+    uint32 INTVECTOR_95;
+    uint32 INTVECTOR_96;
+    uint32 INTVECTOR_97;
+    uint32 INTVECTOR_98;
+    uint32 INTVECTOR_99;
+    uint32 INTVECTOR_100;
+    uint32 INTVECTOR_101;
+    uint32 INTVECTOR_102;
+    uint32 INTVECTOR_103;
+    uint32 INTVECTOR_104;
+    uint32 INTVECTOR_105;
+    uint32 INTVECTOR_106;
+    uint32 INTVECTOR_107;
+    uint32 INTVECTOR_108;
+    uint32 INTVECTOR_109;
+    uint32 INTVECTOR_110;
+    uint32 INTVECTOR_111;
+    uint32 INTVECTOR_112;
+    uint32 INTVECTOR_113;
+    uint32 INTVECTOR_114;
+    uint32 INTVECTOR_115;
+    uint32 INTVECTOR_116;
+    uint32 INTVECTOR_117;
+    uint32 INTVECTOR_118;
+    uint32 INTVECTOR_119;
+    uint32 INTVECTOR_120;
+    uint32 INTVECTOR_121;
+    uint32 INTVECTOR_122;
+    uint32 INTVECTOR_123;
+    uint32 INTVECTOR_124;
+    uint32 INTVECTOR_125;
+    uint32 INTVECTOR_126;
+    uint32 INTVECTOR_127;
+    uint32 INTVECTOR_128;
+    uint32 INTVECTOR_129;
+    uint32 INTVECTOR_130;
+    uint32 INTVECTOR_131;
+    uint32 INTVECTOR_132;
+    uint32 INTVECTOR_133;
+    uint32 INTVECTOR_134;
+    uint32 INTVECTOR_135;
+    uint32 INTVECTOR_136;
+    uint32 INTVECTOR_137;
+    uint32 INTVECTOR_138;
+    uint32 INTVECTOR_139;
+    uint32 INTVECTOR_140;
+    uint32 INTVECTOR_141;
+    uint32 INTVECTOR_142;
+    uint32 INTVECTOR_143;
+    uint32 INTVECTOR_144;
+    uint32 INTVECTOR_145;
+    uint32 INTVECTOR_146;
+    uint32 INTVECTOR_147;
+    uint32 INTVECTOR_148;
+    uint32 INTVECTOR_149;
+    uint32 INTVECTOR_150;
+    uint32 INTVECTOR_151;
+    uint32 INTVECTOR_152;
+    uint32 INTVECTOR_153;
+    uint32 INTVECTOR_154;
+    uint32 INTVECTOR_155;
+    uint32 INTVECTOR_156;
+    uint32 INTVECTOR_157;
+    uint32 INTVECTOR_158;
+    uint32 INTVECTOR_159;
+    uint32 INTVECTOR_160;
+    uint32 INTVECTOR_161;
+    uint32 INTVECTOR_162;
+    uint32 INTVECTOR_163;
+    uint32 INTVECTOR_164;
+    uint32 INTVECTOR_165;
+    uint32 INTVECTOR_166;
+    uint32 INTVECTOR_167;
+    uint32 INTVECTOR_168;
+    uint32 INTVECTOR_169;
+    uint32 INTVECTOR_170;
+    uint32 INTVECTOR_171;
+    uint32 INTVECTOR_172;
+    uint32 INTVECTOR_173;
+    uint32 INTVECTOR_174;
+    uint32 INTVECTOR_175;
+    uint32 INTVECTOR_176;
+    uint32 INTVECTOR_177;
+    uint32 INTVECTOR_178;
+    uint32 INTVECTOR_179;
+    uint32 INTVECTOR_180;
+    uint32 INTVECTOR_181;
+    uint32 INTVECTOR_182;
+    uint32 INTVECTOR_183;
+    uint32 INTVECTOR_184;
+    uint32 INTVECTOR_185;
+    uint32 INTVECTOR_186;
+    uint32 INTVECTOR_187;
+    uint32 INTVECTOR_188;
+    uint32 INTVECTOR_189;
+    uint32 INTVECTOR_190;
+    uint32 INTVECTOR_191;
+    uint32 INTVECTOR_192;
+    uint32 INTVECTOR_193;
+    uint32 INTVECTOR_194;
+    uint32 INTVECTOR_195;
+    uint32 INTVECTOR_196;
+    uint32 INTVECTOR_197;
+    uint32 INTVECTOR_198;
+    uint32 INTVECTOR_199;
+    uint32 INTVECTOR_200;
+    uint32 INTVECTOR_201;
+    uint32 INTVECTOR_202;
+    uint32 INTVECTOR_203;
+    uint32 INTVECTOR_204;
+    uint32 INTVECTOR_205;
+    uint32 INTVECTOR_206;
+    uint32 INTVECTOR_207;
+    uint32 INTVECTOR_208;
+    uint32 INTVECTOR_209;
+    uint32 INTVECTOR_210;
+    uint32 INTVECTOR_211;
+    uint32 INTVECTOR_212;
+    uint32 INTVECTOR_213;
+    uint32 INTVECTOR_214;
+    uint32 INTVECTOR_215;
+    uint32 INTVECTOR_216;
+    uint32 INTVECTOR_217;
+    uint32 INTVECTOR_218;
+    uint32 INTVECTOR_219;
+    uint32 INTVECTOR_220;
+    uint32 INTVECTOR_221;
+    uint32 INTVECTOR_222;
+    uint32 INTVECTOR_223;
+    uint32 INTVECTOR_224;
+    uint32 INTVECTOR_225;
+    uint32 INTVECTOR_226;
+    uint32 INTVECTOR_227;
+    uint32 INTVECTOR_228;
+    uint32 INTVECTOR_229;
+    uint32 INTVECTOR_230;
+    uint32 INTVECTOR_231;
+    uint32 INTVECTOR_232;
+    uint32 INTVECTOR_233;
+    uint32 INTVECTOR_234;
+    uint32 INTVECTOR_235;
+    uint32 INTVECTOR_236;
+    uint32 INTVECTOR_237;
+    uint32 INTVECTOR_238;
+    uint32 INTVECTOR_239;
+    uint32 INTVECTOR_240;
+    uint32 INTVECTOR_241;
+    uint32 INTVECTOR_242;
+    uint32 INTVECTOR_243;
+    uint32 INTVECTOR_244;
+    uint32 INTVECTOR_245;
+    uint32 INTVECTOR_246;
+    uint32 INTVECTOR_247;
+    uint32 INTVECTOR_248;
+    uint32 INTVECTOR_249;
+    uint32 INTVECTOR_250;
+    uint32 INTVECTOR_251;
+    uint32 INTVECTOR_252;
+    uint32 INTVECTOR_253;
+    uint32 INTVECTOR_254;
+    uint32 INTVECTOR_255;
+} vimBASE_t;
+
+
+typedef volatile struct
+{
+    uint32 EEPAPR1;           /* 0x0000                 */
+    uint32 DEPAPR1;           /* 0x0004                 */
+    uint32 IESR1;             /* 0x0008                 */
+    uint32 IECR1;             /* 0x000C                 */
+    uint32 ILSR1;             /* 0x0010                 */
+    uint32 ILCR1;             /* 0x0014                 */
+    uint32 SR1[3U];           /* 0x0018, 0x001C, 0x0020 */
+    uint32 EPSR;              /* 0x0024                 */
+    uint32 IOFFHR;            /* 0x0028                 */
+    uint32 IOFFLR;            /* 0x002C                 */
+    uint32 LTCR;              /* 0x0030                 */
+    uint32 LTCPR;             /* 0x0034                 */
+    uint32 EKR;               /* 0x0038                 */
+    uint32 SSR2;              /* 0x003C                 */
+    uint32 IEPSR4;            /* 0x0040                 */
+    uint32 IEPCR4;            /* 0x0044                 */
+    uint32 IESR4;             /* 0x0048                 */
+    uint32 IECR4;             /* 0x004C                 */
+    uint32 ILSR4;             /* 0x0050                 */
+    uint32 ILCR4;             /* 0x0054                 */
+    uint32 SR4[3U];           /* 0x0058, 0x005C, 0x0060 */
+    uint32 ESTATUS5EMU;       /* 0x0064                 */
+    uint32 reserv1[6U];       /* 0x0068, 0x006C, 0x0070, 0x0074, 0x0078, 0x007C */
+    uint32 IEPSR7;            /* 0x0080                 */
+    uint32 IEPCR7;            /* 0x0084                 */
+    uint32 IESR7;             /* 0x0088                 */
+    uint32 IECR7;             /* 0x008C                 */
+    uint32 ILSR7;             /* 0x0090                 */
+    uint32 ILCR7;             /* 0x0094                 */
+    uint32 SR7[3U];           /* 0x0098, 0x009C, 0x00A0 */
+    uint32 ESTATUS8EMU;       /* 0x00A4                 */
+    uint32 reserv2[6U];       /* 0x00A8, 0x00AC, 0x00B0, 0x00B4, 0x00B8, 0x00BC */
+    uint32 IEPSR10;           /* 0x00C0                 */
+    uint32 IEPCR10;           /* 0x00C4                 */
+    uint32 IESR10;            /* 0x00C8                 */
+    uint32 IECR10;            /* 0x00CC                 */
+    uint32 ILSR10;            /* 0x00D0                 */
+    uint32 ILCR10;            /* 0x00D4                 */
+    uint32 SR10[3U];          /* 0x00D8, 0x00DC, 0x00E0 */
+    uint32 ESTATUS10EMU;      /* 0x00E4                 */
+} esmBASE_t;
+
+typedef volatile struct
+{
+    uint32  CCCCFG0             ;        /* Offset = 0x0D0 */
+    uint32  CCCCFG1             ;        /* Offset = 0x0D4 */
+    uint32  CCCCFG2             ;        /* Offset = 0x0D8 */
+    uint32  CCCCFG3             ;        /* Offset = 0x0DC */
+} cccBASE_t;
+
+
+/** @typedef rtiBASE_t
+*   @brief RTI Register Frame Type Definition
+*
+*   This type is used to access the RTI Registers.
+*/
+typedef volatile struct
+{
+    uint32 GCTRL;          /**< 0x0000: Global Control Register   */
+    uint32 TBCTRL;         /**< 0x0004: Timebase Control Register */
+    uint32 CAPCTRL;        /**< 0x0008: Capture Control Register  */
+    uint32 COMPCTRL;       /**< 0x000C: Compare Control Register  */
+    struct
+    {
+        uint32 FRCx;       /**< 0x0010,0x0030: Free Running Counter x Register         */
+        uint32 UCx;        /**< 0x0014,0x0034: Up Counter x Register                   */
+        uint32 CPUCx;      /**< 0x0018,0x0038: Compare Up Counter x Register           */
+        uint32   rsvd1;    /**< 0x001C,0x003C: Reserved                                */
+        uint32 CAFRCx;     /**< 0x0020,0x0040: Capture Free Running Counter x Register */
+        uint32 CAUCx;      /**< 0x0024,0x0044: Capture Up Counter x Register           */
+        uint32   rsvd2[2U]; /**< 0x0028,0x0048: Reserved                                */
+    } CNT[2U];               /**< Counter x selection:
+                                    - 0: Counter 0
+                                    - 1: Counter 1                                       */
+    struct
+    {
+        uint32 COMPx;      /**< 0x0050,0x0058,0x0060,0x0068: Compare x Register        */
+        uint32 UDCPx;      /**< 0x0054,0x005C,0x0064,0x006C: Update Compare x Register */
+    } CMP[4U];               /**< Compare x selection:
+                                    - 0: Compare 0
+                                    - 1: Compare 1
+                                    - 2: Compare 2
+                                    - 3: Compare 3                                       */
+    uint32 TBLCOMP;        /**< 0x0070: External Clock Timebase Low Compare Register   */
+    uint32 TBHCOMP;        /**< 0x0074: External Clock Timebase High Compare Register  */
+    uint32   rsvd3[2U];    /**< 0x0078: Reserved                                       */
+    uint32 SETINTENA;      /**< 0x0080: Set/Status Interrupt Register                  */
+    uint32 CLEARINTENA;    /**< 0x0084: Clear/Status Interrupt Register                */
+    uint32 INTFLAG;        /**< 0x0088: Interrupt Flag Register                        */
+    uint32   rsvd4;        /**< 0x008C: Reserved                                       */
+    uint32 DWDCTRL;        /**< 0x0090: Digital Watchdog Control Register   */
+    uint32 DWDPRLD;        /**< 0x0094: Digital Watchdog Preload Register */
+    uint32 WDSTATUS;       /**< 0x0098: Watchdog Status Register  */
+    uint32 WDKEY;          /**< 0x009C: Watchdog Key Register  */
+    uint32 DWDCNTR;        /**< 0x00A0: Digital Watchdog Down Counter   */
+    uint32 WWDRXNCTRL;     /**< 0x00A4: Digital Windowed Watchdog Reaction Control */
+    uint32 WWDSIZECTRL;    /**< 0x00A8: Digital Windowed Watchdog Window Size Control  */
+    uint32 INTCLRENABLE;   /**< 0x00AC: RTI Compare Interrupt Clear Enable Register  */
+    uint32 COMP0CLR;       /**< 0x00B0: RTI Compare 0 Clear Register   */
+    uint32 COMP1CLR;       /**< 0x00B4: RTI Compare 1 Clear Register */
+    uint32 COMP2CLR;       /**< 0x00B8: RTI Compare 2 Clear Register  */
+    uint32 COMP3CLR;       /**< 0x00BC: RTI Compare 3 Clear Register  */
+} rtiBASE_t;
+
+typedef volatile struct
+{
+    uint32 PID;
+    uint32 rsvd1[3U];
+    uint32 SYSCONFIG;
+    uint32 rsvd2[3U];
+    uint32 INTSTARAWSET;
+    uint32 INTSTAENBCLR;
+    uint32 INTENSET;
+    uint32 INTENCLR;
+    uint32 EOI;
+    uint32 rsvd3[3U];
+    uint32 SPICLKCTRL;
+    uint32 SPIDC;
+    uint32 SPICMD;
+    uint32 SPISTATUS;
+    uint32 SPIDATA;
+    uint32 SPISTUP0;
+    uint32 SPISTUP1;
+    uint32 SPISTUP2;
+    uint32 SPISTUP3;
+    uint32 SPISWITCH;
+    uint32 SPIDATA1;
+    uint32 SPIDATA2;
+    uint32 SPIDATA3;
+} qspiBASE_t;
+
+typedef volatile struct
+{
+    volatile uint32 INTMASK;       /* offset 0x00 */
+    volatile uint32 rsvd1;
+    volatile uint32 INTMASKSET;    /* offset 0x08 */
+    volatile uint32 rsvd2;
+    volatile uint32 INTMASKCLR;    /* offset 0x10 */
+    volatile uint32 rsvd3;
+    volatile uint32 INTSTSCLR;     /* offset 0x18 */
+    volatile uint32 rsvd4;
+    volatile uint32 INTACK;        /* offset 0x20 */
+    volatile uint32 rsvd5;
+    volatile uint32 INTTRIG;       /* offset 0x28 */
+    volatile uint32 rsvd6;
+    volatile uint32 INTSTSMSKD;    /* offset 0x30 */
+    volatile uint32 rsvd7;
+    volatile uint32 INTSTSRAW;     /* offset 0x38 */
+    volatile uint32 rsvd8;
+    volatile uint32 SEMAPHORE0;    /* offset 0x40 */
+    volatile uint32 rsvd9;
+    volatile uint32 SEMAPHORE1;    /* offset 0x48 */
+} MailboxReg_t;
+
+/************************************************************************************/
+/*                            PBIST registers                                       */
+/************************************************************************************/
+typedef volatile struct
+{
+    uint32 PADREG0;        /* AddrOffset = 0x000 */
+    uint32 PADREG1;        /* AddrOffset = 0x004 */
+    uint32 PADREG2;        /* AddrOffset = 0x008 */
+    uint32 PADREG3;        /* AddrOffset = 0x00C */
+    uint32 PADREG4;        /* AddrOffset = 0x010 */
+    uint32 PADREG5;        /* AddrOffset = 0x014 */
+    uint32 PADREG6;        /* AddrOffset = 0x018 */
+    uint32 PADREG7;        /* AddrOffset = 0x01C */
+    uint32 PADREG8;        /* AddrOffset = 0x020 */
+    uint32 PADREG9;        /* AddrOffset = 0x024 */
+    uint32 PADREG10;        /* AddrOffset = 0x028 */
+    uint32 PADREG11;        /* AddrOffset = 0x02C */
+    uint32 PADREG12;        /* AddrOffset = 0x030 */
+    uint32 PADREG13;        /* AddrOffset = 0x034 */
+    uint32 PADREG14;        /* AddrOffset = 0x038 */
+    uint32 PADREG15;        /* AddrOffset = 0x03C */
+    uint32 PADREG16;        /* AddrOffset = 0x040 */
+    uint32 PADREG17;        /* AddrOffset = 0x044 */
+    uint32 PADREG18;        /* AddrOffset = 0x048 */
+    uint32 PADREG19;        /* AddrOffset = 0x04C */
+    uint32 PADREG20;        /* AddrOffset = 0x050 */
+    uint32 PADREG21;        /* AddrOffset = 0x054 */
+    uint32 PADREG22;        /* AddrOffset = 0x058 */
+    uint32 PADREG23;        /* AddrOffset = 0x05C */
+    uint32 PADREG24;        /* AddrOffset = 0x060 */
+    uint32 PADREG25;        /* AddrOffset = 0x064 */
+    uint32 PADREG26;        /* AddrOffset = 0x068 */
+    uint32 PADREG27;        /* AddrOffset = 0x06C */
+    uint32 PADREG28;        /* AddrOffset = 0x070 */
+    uint32 PADREG29;        /* AddrOffset = 0x074 */
+    uint32 PADREG30;        /* AddrOffset = 0x078 */
+    uint32 PADREG31;        /* AddrOffset = 0x07C */
+    uint32 PADREG32;        /* AddrOffset = 0x080 */
+    uint32 PADREG33;        /* AddrOffset = 0x084 */
+    uint32 PADREG34;        /* AddrOffset = 0x088 */
+    uint32 PADREG35;        /* AddrOffset = 0x08C */
+    uint32 PADREG36;        /* AddrOffset = 0x090 */
+    uint32 PADREG37;        /* AddrOffset = 0x094 */
+    uint32 PADREG38;        /* AddrOffset = 0x098 */
+    uint32 PADREG39;        /* AddrOffset = 0x09C */
+    uint32 PADREG40;        /* AddrOffset = 0x0A0 */
+    uint32 PADREG41;        /* AddrOffset = 0x0A4 */
+    uint32 PADREG42;        /* AddrOffset = 0x0A8 */
+    uint32 PADREG43;        /* AddrOffset = 0x0AC */
+    uint32 PADREG44;        /* AddrOffset = 0x0B0 */
+    uint32 PADREG45;        /* AddrOffset = 0x0B4 */
+    uint32 PADREG46;        /* AddrOffset = 0x0B8 */
+    uint32 PADREG47;        /* AddrOffset = 0x0BC */
+    uint32 PADREG48;        /* AddrOffset = 0x0C0 */
+    uint32 PADREG49;        /* AddrOffset = 0x0C4 */
+    uint32 PADREG50;        /* AddrOffset = 0x0C8 */
+    uint32 PADREG51;        /* AddrOffset = 0x0CC */
+    uint32 PADREG52;        /* AddrOffset = 0x0D0 */
+    uint32 PADREG53;        /* AddrOffset = 0x0D4 */
+    uint32 PADREG54;        /* AddrOffset = 0x0D8 */
+    uint32 PADREG55;        /* AddrOffset = 0x0DC */
+    uint32 PADREG56;        /* AddrOffset = 0x0E0 */
+    uint32 PADREG57;        /* AddrOffset = 0x0E4 */
+    uint32 PADREG58;        /* AddrOffset = 0x0E8 */
+    uint32 PADREG59;        /* AddrOffset = 0x0EC */
+    uint32 PADREG60;        /* AddrOffset = 0x0F0 */
+    uint32 PADREG61;        /* AddrOffset = 0x0F4 */
+    uint32 PADREG62;        /* AddrOffset = 0x0F8 */
+    uint32 PADREG63;        /* AddrOffset = 0x0FC */
+    uint32 PBIST_A0;        /* AddrOffset = 0x100 */
+    uint32 PBIST_A1;        /* AddrOffset = 0x104 */
+    uint32 PBIST_A2;        /* AddrOffset = 0x108 */
+    uint32 PBIST_A3;        /* AddrOffset = 0x10C */
+    uint32 PBIST_L0;        /* AddrOffset = 0x110 */
+    uint32 PBIST_L1;        /* AddrOffset = 0x114 */
+    uint32 PBIST_L2;        /* AddrOffset = 0x118 */
+    uint32 PBIST_L3;        /* AddrOffset = 0x11C */
+    uint32 PBIST_DD10;      /* AddrOffset = 0x120 */
+    uint32 PBIST_DE10;      /* AddrOffset = 0x124 */
+    uint32 PADREG64;        /* AddrOffset = 0x128 */
+    uint32 PADREG65;        /* AddrOffset = 0x12C */
+    uint32 PBIST_CA0;       /* AddrOffset = 0x130 */
+    uint32 PBIST_CA1;       /* AddrOffset = 0x134 */
+    uint32 PBIST_CA2;       /* AddrOffset = 0x138 */
+    uint32 PBIST_CA3;       /* AddrOffset = 0x13C */
+    uint32 PBIST_CL0;       /* AddrOffset = 0x140 */
+    uint32 PBIST_CL1;       /* AddrOffset = 0x144 */
+    uint32 PBIST_CL2;       /* AddrOffset = 0x148 */
+    uint32 PBIST_CL3;       /* AddrOffset = 0x14C */
+    uint32 PBIST_CI0;       /* AddrOffset = 0x150 */
+    uint32 PBIST_CI1;       /* AddrOffset = 0x154 */
+    uint32 PBIST_CI2;       /* AddrOffset = 0x158 */
+    uint32 PBIST_CI3;       /* AddrOffset = 0x15C */
+    uint32 PBIST_RAMT;      /* AddrOffset = 0x160 */
+    uint32 PBIST_DLR;       /* AddrOffset = 0x164 */
+    uint32 PBIST_CMS;       /* AddrOffset = 0x168 */
+    uint32 PBIST_PC;        /* AddrOffset = 0x16C */
+    uint32 PBIST_SCR1;      /* AddrOffset = 0x170 */
+    uint32 PBIST_SCR4;      /* AddrOffset = 0x174 */
+    uint32 PBIST_CS;        /* AddrOffset = 0x178 */
+    uint32 PBIST_FDLY;      /* AddrOffset = 0x17C */
+    uint32 PBIST_PACT;      /* AddrOffset = 0x180 */
+    uint32 PBIST_ID;        /* AddrOffset = 0x184 */
+    uint32 PBIST_OVR;       /* AddrOffset = 0x188 */
+    uint32 PADREG66;        /* AddrOffset = 0x18C */
+    uint32 PBIST_FSFR0;     /* AddrOffset = 0x190 */
+    uint32 PBIST_FSFR1;     /* AddrOffset = 0x194 */
+    uint32 PBIST_FSRCR0;    /* AddrOffset = 0x198 */
+    uint32 PBIST_FSRCR1;    /* AddrOffset = 0x19C */
+    uint32 PBIST_FSRA0;     /* AddrOffset = 0x1A0 */
+    uint32 PBIST_FSRA1;     /* AddrOffset = 0x1A4 */
+    uint32 PBIST_FSRDL0;    /* AddrOffset = 0x1A8 */
+    uint32 PADREG67;        /* AddrOffset = 0x1AC */
+    uint32 PBIST_FSRDL1;    /* AddrOffset = 0x1B0 */
+    uint32 PBIST_MARGIN;    /* AddrOffset = 0x1B4 */
+    uint32 PBIST_WRENZ;     /* AddrOffset = 0x1B8 */
+    uint32 PBIST_PGS;       /* AddrOffset = 0x1BC */
+    uint32 PBIST_ROM;       /* AddrOffset = 0x1C0 */
+    uint32 PBIST_ALGO;      /* AddrOffset = 0x1C4 */
+    uint32 PBIST_RINFOL;    /* AddrOffset = 0x1C8 */
+    uint32 PBIST_RINFOU;    /* AddrOffset = 0x1CC */
+} pbistBASE_t;
+
+/* Crc Register Frame Definition */
+/** @struct crcBase
+*   @brief CRC Register Frame Definition
+*
+*   This type is used to access the CRC Registers.
+*/
+/** @typedef crcBASE_t
+*   @brief CRC Register Frame Type Definition
+*
+*   This type is used to access the CRC Registers.
+*/
+/*LDRA_INSPECTED 4 X : MISRAC_2012_R.5.7 */
+/* "Reason - Tool issue " */
+typedef volatile struct crcBaseReg
+{
+    uint32     CTRL0;           /**< 0x0000: Global Control Register 0                           */
+    uint32     rvd1;            /**< 0x0004: reserved                                            */
+    uint32     CTRL1;           /**< 0x0008: Global Control Register 1                           */
+    uint32     rvd2;            /**< 0x000C: reserved                                            */
+    uint32     CTRL2;           /**< 0x0010: Global Control Register 2                           */
+    uint32     rvd3;            /**< 0x0014: reserved                                            */
+    uint32     INTS;            /**< 0x0018: Interrupt Enable Set Register                       */
+    uint32     rvd4;            /**< 0x001C: reserved                                            */
+    uint32     INTR;            /**< 0x0020: Interrupt Enable Reset Register                     */
+    uint32     rvd5;            /**< 0x0024: reserved                                            */
+    uint32     STATUS;          /**< 0x0028: Interrupt Status Register                           */
+    uint32     rvd6;            /**< 0x002C: reserved                                            */
+    uint32     INT_OFFSET_REG;  /**< 0x0030: Interrupt Offset                                    */
+    uint32     rvd7;            /**< 0x0034: reserved                                            */
+    uint32     CRC_BUSY;        /**< 0x0038: CRC Busy Register                                   */
+    uint32     rvd8;            /**< 0x003C: reserved                                            */
+    uint32     PCOUNT_REG1;     /**< 0x0040: Pattern Counter Preload Register1                   */
+    uint32     SCOUNT_REG1;     /**< 0x0044: Sector Counter Preload Register1                    */
+    uint32     CURSEC_REG1;     /**< 0x0048: Current Sector Register 1                           */
+    uint32     WDTOPLD1;        /**< 0x004C: Channel 1 Watchdog Timeout Preload Register A       */
+    uint32     BCTOPLD1;        /**< 0x0050: Channel 1 Block Complete Timeout Preload Register B */
+    uint32     rvd9[3];         /**< 0x0054: reserved                                            */
+    uint32     PSA_SIGREGL1;    /**< 0x0060: Channel 1 PSA signature low register                */
+    uint32     PSA_SIGREGH1;    /**< 0x0064: Channel 1 PSA signature high register               */
+    uint32     REGL1;           /**< 0x0068: Channel 1 CRC value low register                    */
+    uint32     REGH1;           /**< 0x006C: Channel 1 CRC value high register                   */
+    uint32     PSA_SECSIGREGL1; /**< 0x0070: Channel 1 PSA sector signature low register         */
+    uint32     PSA_SECSIGREGH1; /**< 0x0074: Channel 1 PSA sector signature high register        */
+    uint32     RAW_DATAREGL1;   /**< 0x0078: Channel 1 Raw Data Low Register                     */
+    uint32     RAW_DATAREGH1;   /**< 0x007C: Channel 1 Raw Data High Register                    */
+    uint32     PCOUNT_REG2;     /**< 0x0080: CRC Pattern Counter Preload Register2               */
+    uint32     SCOUNT_REG2;     /**< 0x0084: Sector Counter Preload Register2                    */
+    uint32     CURSEC_REG2;     /**< 0x0088: Current Sector Register 2                           */
+    uint32     WDTOPLD2;        /**< 0x008C: Channel 2 Watchdog Timeout Preload Register A       */
+    uint32     BCTOPLD2;        /**< 0x0090: Channel 2 Block Complete Timeout Preload Register B */
+    uint32     rvd10[3];        /**< 0x0094: reserved                                            */
+    uint32     PSA_SIGREGL2;    /**< 0x00A0: Channel 2 PSA signature low register                */
+    uint32     PSA_SIGREGH2;    /**< 0x00A4: Channel 2 PSA signature high register               */
+    uint32     REGL2;           /**< 0x00A8: Channel 2 CRC value low register                    */
+    uint32     REGH2;           /**< 0x00AC: Channel 2 CRC value high register                   */
+    uint32     PSA_SECSIGREGL2; /**< 0x00B0: Channel 2 PSA sector signature low register         */
+    uint32     PSA_SECSIGREGH2; /**< 0x00B4: Channel 2 PSA sector signature high register        */
+    uint32     RAW_DATAREGL2;   /**< 0x00B8: Channel 2 Raw Data Low Register                     */
+    uint32     RAW_DATAREGH2;   /**< 0x00BC: Channel 2 Raw Data High Register                    */
+    uint32     PCOUNT_REG3;     /**< 0x00C0: CRC Pattern Counter Preload Register3               */
+    uint32     SCOUNT_REG3;     /**< 0x00C4: Sector Counter Preload Register3                    */
+    uint32     CURSEC_REG3;     /**< 0x00C8: Current Sector Register3                            */
+    uint32     WDTOPLD3;        /**< 0x00CC: Channel 3 Watchdog Timeout Preload Register A       */
+    uint32     BCTOPLD3;        /**< 0x00D0: Channel 3 Block Complete Timeout Preload Register B */
+    uint32     rvd11[3];        /**< 0x00D4: reserved                                            */
+    uint32     PSA_SIGREGL3;    /**< 0x00E0: Channel 3 PSA signature low register                */
+    uint32     PSA_SIGREGH3;    /**< 0x00E4: Channel 3 PSA signature high register               */
+    uint32     REGL3;           /**< 0x00E8: Channel 3 CRC value low register                    */
+    uint32     REGH3;           /**< 0x00EC: Channel 3 CRC value high register                   */
+    uint32     PSA_SECSIGREGL3; /**< 0x00F0: Channel 3 PSA sector signature low register         */
+    uint32     PSA_SECSIGREGH3; /**< 0x00F4: Channel 3 PSA sector signature high register        */
+    uint32     RAW_DATAREGL3;   /**< 0x00F8: Channel 3 Raw Data Low Register                     */
+    uint32     RAW_DATAREGH3;   /**< 0x00FC: Channel 3 Raw Data High Register                    */
+    uint32     PCOUNT_REG4;     /**< 0x0100: CRC Pattern Counter Preload Register4               */
+    uint32     SCOUNT_REG4;     /**< 0x0104: Sector Counter Preload Register4                    */
+    uint32     CURSEC_REG4;     /**< 0x0108: Current Sector Register4                            */
+    uint32     WDTOPLD4;        /**< 0x010C: Channel 4 Watchdog Timeout Preload Register A       */
+    uint32     BCTOPLD4;        /**< 0x0110: Channel 4 Block Complete Timeout Preload Register B */
+    uint32     rvd12[3];        /**< 0x0114: reserved                                            */
+    uint32     PSA_SIGREGL4;    /**< 0x0120: Channel 4 PSA signature low register                */
+    uint32     PSA_SIGREGH4;    /**< 0x0124: Channel 4 PSA signature high register               */
+    uint32     REGL4;           /**< 0x0128: Channel 4 CRC value low register                    */
+    uint32     REGH4;           /**< 0x012C: Channel 4 CRC value high register                   */
+    uint32     PSA_SECSIGREGL4; /**< 0x0130: Channel 4 PSA sector signature low register         */
+    uint32     PSA_SECSIGREGH4; /**< 0x0134: Channel 4 PSA sector signature high register        */
+    uint32     RAW_DATAREGL4;   /**< 0x0138: Channel 4 Raw Data Low Register                     */
+    uint32     RAW_DATAREGH4;   /**< 0x013C: Channel 4 Raw Data High Register                    */
+    uint32     BUS_SEL;         /**< 0x0140: CRC bus select                                      */
+
+}crcBASE_t;
+
+/** @typedef gpadcBASE_t
+*   @brief GPADC Register Type Definition
+*
+*   This type is used to access the GPADC Registers.
+*/
+typedef volatile struct gpadcBaseReg
+{
+	uint32 r_Reg0;        /* Offset = 0x000 */
+	uint32 r_Reg1;        /* Offset = 0x004 */
+	uint32 r_Reg2;        /* Offset = 0x008 */
+	uint32 r_Reg3;        /* Offset = 0x00C */
+	uint32 r_PacketRamAdd[4];        /* Offset = 0x010 - 0x1C */
+	uint32 r_Reg8;        /* Offset = 0x020 */
+	uint32 r_Reg9;        /* Offset = 0x024 */
+	uint32 r_Reg10;        /* Offset = 0x028 */
+	uint32 r_Reg11;        /* Offset = 0x02C */
+	uint32 r_Reg12;        /* Offset = 0x030 */
+	uint32 r_Reg13;        /* Offset = 0x034 */
+	uint32 r_Reg14;        /* Offset = 0x038 */
+	uint32 r_Reg15;        /* Offset = 0x03C */
+	uint32 r_Reg16;        /* Offset = 0x040 */
+	uint32 r_Reg17;        /* Offset = 0x044 */
+	uint32 r_Reg18;        /* Offset = 0x048 */
+	uint32 r_Reg19;        /* Offset = 0x04C */
+	uint32 r_Reg20;        /* Offset = 0x050 */
+	uint32 r_Reg21;        /* Offset = 0x054 */
+	uint32 r_Reg22;        /* Offset = 0x058 */
+} gpadcBASE_t;
+
+typedef struct {
+    uint32 PID;
+    uint32 MDO_CTRL;
+    uint32 PROBE_BUS_SEL0;
+    uint32 PROBE_BUS_SEL1;
+    uint8  Resv_512[496];
+    uint32 EFUSE_DIEID0;
+    uint32 EFUSE_DIEID1;
+    uint32 EFUSE_DIEID2;
+    uint32 EFUSE_DIEID3;
+    uint32 EFUSE_UID0;
+    uint32 EFUSE_UID1;
+    uint32 EFUSE_UID2;
+    uint32 EFUSE_UID3;
+    uint32 EFUSE_DEVICE_TYPE;
+    uint32 EFUSE_FROM0_CHECKSUM;
+    uint32 EFUSE_ROM_SEQ_UPDATE0;
+    uint32 EFUSE_ROM_SEQ_UPDATE1;
+    uint32 EFUSE_ROM_SEQ_UPDATE2;
+    uint32 EFUSE_ROM_SEQ_UPDATE3;
+    uint32 EFUSE_ROM_SEQ_UPDATE4;
+    uint32 EFUSE_ROM_SEQ_UPDATE5;
+    uint32 EFUSE_ROM_SEQ_UPDATE6;
+    uint32 EFUSE_ROM_SEQ_UPDATE7;
+    uint32 EFUSE_ROM_SEQ_UPDATE8;
+    uint8  Resv_1024[436];
+    uint32 EFUSE0_ROW_61;
+    uint32 EFUSE0_ROW_62;
+    uint32 EFUSE0_ROW_63;
+    uint32 EFUSE1_ROW_5;
+    uint32 EFUSE1_ROW_6;
+    uint32 EFUSE1_ROW_7;
+    uint32 EFUSE1_ROW_8;
+    uint32 EFUSE1_ROW_9;
+    uint32 EFUSE1_ROW_10;
+    uint32 EFUSE1_ROW_11;
+    uint32 EFUSE1_ROW_12;
+    uint32 EFUSE1_ROW_13;
+    uint32 EFUSE1_ROW_14;
+    uint32 EFUSE1_ROW_15;
+    uint32 EFUSE1_ROW_16;
+    uint32 EFUSE1_ROW_17;
+    uint32 EFUSE1_ROW_18;
+    uint32 EFUSE1_ROW_19;
+    uint32 EFUSE1_ROW_20;
+    uint32 EFUSE1_ROW_21;
+    uint32 EFUSE1_ROW_22;
+    uint32 EFUSE1_ROW_23;
+    uint32 EFUSE1_ROW_24;
+    uint32 EFUSE1_ROW_25;
+    uint32 EFUSE1_ROW_26;
+    uint32 EFUSE1_ROW_27;
+    uint32 EFUSE1_ROW_28;
+    uint32 EFUSE1_ROW_29;
+    uint32 EFUSE1_ROW_30;
+    uint32 EFUSE1_ROW_31;
+    uint32 EFUSE1_ROW_32;
+    uint32 EFUSE1_ROW_33;
+    uint32 EFUSE1_ROW_34;
+    uint32 EFUSE1_ROW_35;
+    uint32 EFUSE1_ROW_36;
+    uint32 EFUSE1_ROW_37;
+    uint32 EFUSE1_ROW_38;
+    uint32 EFUSE1_ROW_39;
+    uint32 EFUSE1_ROW_40;
+    uint32 EFUSE1_ROW_41;
+    uint32 EFUSE1_ROW_42;
+    uint32 EFUSE1_ROW_43;
+    uint8  Resv_2048[856];
+    uint32 EFUSE_OVERRIDE_HSM_HALT_ON_ROM_ECC_ERR_EN;
+    uint32 EFUSE_OVERRIDE_MEM_MARGINCTRL;
+    uint32 EFUSE_OVERRIDE_LVDS_BGAP_TRIM;
+    uint32 EFUSE_OVERRIDE_XTAL_STABLIZATION_WAIT;
+    uint32 EFUSE_OVERRIDE_SLICER_BIAS_RTRIM;
+    uint32 EFUSE_OVERRIDE_XO_OUTPUT_DRIVE;
+    uint32 EFUSE_OVERRIDE_RCOSC_TRIM_CODE;
+    uint32 EFUSE_OVERRIDE_IP1_BG1_RTRIM;
+    uint32 EFUSE_OVERRIDE_IP1_BG1_SLOPE;
+    uint32 EFUSE_OVERRIDE_IP1_BG1_MAG;
+    uint32 EFUSE_OVERRIDE_RS232_CLKMODE;
+    uint32 EFUSE_OVERRIDE_VMON_VDD_OV_UV_TRIM;
+    uint32 EFUSE_OVERRIDE_VMON_VDDS_3P3_UV_TRIM;
+    uint32 EFUSE_OVERRIDE_VMON_VDDA_OSC_TRIM;
+    uint32 EFUSE_OVERRIDE_VDD_VT_DET;
+    uint32 EFUSE_OVERRIDE_MASK_CPU_CLK_OUT_CTRL_LOWV_VAL;
+    uint32 EFUSE_OVERRIDE_MASK_CPU_CLK_OUT_CTRL_LOWV_SEL;
+    uint32 EFUSE_OVERRIDE_EN_VOL_MON_FUNC;
+    uint32 EFUSE_OVERRIDE_BYPASS_HOLDBUFFER_ENABLE;
+    uint8  Resv_4048[1924];
+    uint32 HW_SPARE_RW0;
+    uint32 HW_SPARE_RW1;
+    uint32 HW_SPARE_RW2;
+    uint32 HW_SPARE_RW3;
+    uint32 HW_SPARE_RO0;
+    uint32 HW_SPARE_RO1;
+    uint32 HW_SPARE_RO2;
+    uint32 HW_SPARE_RO3;
+    uint32 HW_SPARE_WPH;
+    uint32 HW_SPARE_REC;
+    uint8  Resv_4104[16];
+    uint32 LOCK0_KICK0;
+    uint32 LOCK0_KICK1;
+    uint32 INTR_RAW_STATUS;
+    uint32 INTR_ENABLED_STATUS_CLEAR;
+    uint32 INTR_ENABLE;
+    uint32 INTR_ENABLE_CLEAR;
+    uint32 EOI;
+    uint32 FAULT_ADDRESS;
+    uint32 FAULT_TYPE_STATUS;
+    uint32 FAULT_ATTR_STATUS;
+    uint32 FAULT_CLEAR;
+} topCtrlBASE_t;
+/************************************************************************************************/
+/*                          Macro definitions                                                       */
+/*                                                                                              */
+/************************************************************************************************/
+
+
+/************************************************************************************************/
+/*              Register Base                                               */
+/*                                                                                              */
+/************************************************************************************************/
+#define toprcmREG   ((toprcmBASE_t*)0x2140000U)
+#define mssrcmREG   ((mssrcmBASE_t*)0x2100000U)
+#define dssrcmREG   ((dssrcmBASE_t*)0x06000000)
+#define ctrlREG     ((ctrlBASE_t*)0x2120000U)
+#ifdef SAFE_IPC
+#define vimREG      ((vimBASE_t *)0x020A0000U)
+#else
+#define vimREG      ((vimBASE_t *)0x02080000U)
+#endif
+#define esmREG      ((esmBASE_t *)0x02F7A400U)
+#define cccAREG     ((cccBASE_t *)0xFFFFF8D0U)
+#define cccBREG     ((cccBASE_t *)0xFFFFF8E0U)
+#define qspiAREG    ((qspiBASE_t *)0xC0800000U)
+#define pbistREG    ((pbistBASE_t *)0xFFFFE400U)
+#define crcREG      ((crcBASE_t *)0xFE000000U)
+#define gpadcREG    ((gpadcBASE_t *)0x3F79800U)
+#define topctrlREG  ((topCtrlBASE_t *)0x030E0000)
+
+#define KICK0_LOCK_VAL                   (0x00000000U)
+#define KICK1_LOCK_VAL                   (0x00000000U)
+#define KICK0_UNLOCK_VAL                 (0x01234567U)
+#define KICK1_UNLOCK_VAL                 (0x0FEDCBA8U)
+
+#define MSS_CPSW_CONTROL_REG             (0x16CU)
+#define MSS_IOCFGKICK0                   (0x00001008U)
+#define MSS_IOCFGKICK1                   (0x0000100CU)
+#define XTAL_CLKINP_50MHZ                (0x02FAF080U)  /* XTALCLK - 50 MHz */
+#define XTAL_CLKINP                      (0x02625A00U)    /* XTALCLK - 40 MHz */
+
+/* PIN E18, PADAA functionality */
+#define PINC15_PADAA                          0X0U
+#define PINC15_PADAA_GPIO_12                  0X0U
+#define PINC15_PADAA_MIBSPIA_HOSTIRQ          0X1U
+#define PINC15_PADAA_MIBSPIB_CS1              0X6U
+
+/* PIN H1, PADAB functionality */
+#define PINF3_PADAB                           0X4U
+#define PINF3_PADAB_GPIO_13                   0X0U
+#define PINF3_PADAB_GPIO_0                    0X1U
+#define PINF3_PADAB_PMIC_CLKOUT               0X2U
+#define PINF3_PADAB_EPWM_TZ2                  0X3U
+#define PINF3_PADAB_FE1_REFCLK                0X7U
+#define PINF3_PADAB_EPWMA1                    0XAU
+#define PINF3_PADAB_EPWMB0                    0XBU
+
+/* PIN J2, PADAC functionality */
+#define PINF2_PADAC                           0X8U
+#define PINF2_PADAC_GPIO_16                   0X0U
+#define PINF2_PADAC_GPIO_1                    0X1U
+#define PINF2_PADAC_EPWM_TZ1                  0X3U
+#define PINF2_PADAC_FE2_REFCLK                0X7U
+#define PINF2_PADAC_DMM_MUX_IN                0XCU
+#define PINF2_PADAC_MIBSPIB_CS1               0XDU
+#define PINF2_PADAC_MIBSPIB_CS2               0XEU
+
+/* PIN C1, PADAD functionality */
+#define PINA3_PADAD                           0XCU
+#define PINA3_PADAD_GPIO_19                   0X0U
+#define PINA3_PADAD_MIBSPIA_MOSI              0X1U
+#define PINA3_PADAD_MCANA_RX                  0X2U
+#define PINA3_PADAD_DSS_UARTA_TX              0X8U
+#define PINA3_PADAD_MCANB_RX                  0X9U
+#define PINA3_PADAD_I2CA_SCL                  0XAU
+
+/* PIN B1, PADAE functionality */
+#define PINA4_PADAE                           0X10U
+#define PINA4_PADAE_GPIO_20                   0X0U
+#define PINA4_PADAE_MIBSPIA_MISO              0X1U
+#define PINA4_PADAE_MCANA_TX                  0X2U
+#define PINA4_PADAE_MCANB_TX                  0X9U
+#define PINA4_PADAE_I2CA_SDA                  0XAU
+
+/* PIN B2, PADAF functionality */
+#define PINB3_PADAF                           0X14U
+#define PINB3_PADAF_GPIO_3                    0X0U
+#define PINB3_PADAF_MIBSPIA_CLK               0X1U
+#define PINB3_PADAF_RCOSC_CLK                 0X2U
+#define PINB3_PADAF_MCANB_RX                  0X6U
+#define PINB3_PADAF_DSS_UARTA_TX              0X7U
+#define PINB3_PADAF_MCANA_RX                  0X9U
+
+/* PIN A2, PADAG functionality */
+#define PINC3_PADAG                           0X18U
+#define PINC3_PADAG_GPIO_30                   0X0U
+#define PINC3_PADAG_MIBSPIA_CS0               0X1U
+#define PINC3_PADAG_RCOSC_CLK                 0X2U
+#define PINC3_PADAG_MCANB_TX                  0X6U
+#define PINC3_PADAG_MCANA_TX                  0X9U
+
+/* PIN C18, PADAH functionality */
+#define PINB13_PADAH                          0X1CU
+#define PINB13_PADAH_GPIO_21                  0X0U
+#define PINB13_PADAH_MIBSPIB_MOSI             0X1U
+#define PINB13_PADAH_I2CA_SDA                 0X2U
+#define PINB13_PADAH_EPWMA0                   0X3U
+#define PINB13_PADAH_MCANB_RX                 0X7U
+
+/* PIN C19, PADAI functionality */
+#define PINA14_PADAI                          0X20U
+#define PINA14_PADAI_GPIO_22                  0X0U
+#define PINA14_PADAI_MIBSPIB_MISO             0X1U
+#define PINA14_PADAI_I2CA_SCL                 0X2U
+#define PINA14_PADAI_EPWMB0                   0X3U
+#define PINA14_PADAI_DSS_UARTA_TX             0X6U
+#define PINA14_PADAI_MCANB_TX                 0X7U
+
+/* PIN D18, PADAJ functionality */
+#define PINB14_PADAJ                          0X24U
+#define PINB14_PADAJ_GPIO_5                   0X0U
+#define PINB14_PADAJ_MIBSPIB_CLK              0X1U
+#define PINB14_PADAJ_UARTA_RX                 0X2U
+#define PINB14_PADAJ_EPWMC0                   0X3U
+#define PINB14_PADAJ_UARTB_TX                 0X6U
+#define PINB14_PADAJ_MCANA_RX                 0X8U
+
+/* PIN D19, PADAK functionality */
+#define PINB15_PADAK                          0X28U
+#define PINB15_PADAK_GPIO_4                   0X0U
+#define PINB15_PADAK_MIBSPIB_CS0              0X1U
+#define PINB15_PADAK_UARTA_TX                 0X2U
+#define PINB15_PADAK_UARTB_TX                 0X6U
+#define PINB15_PADAK_MCANA_TX                 0X9U
+
+/* PIN C2, PADAL functionality */
+#define PINB2_PADAL                           0X2CU
+#define PINB2_PADAL_GPIO_8                    0X0U
+#define PINB2_PADAL_QSPI_0                    0X1U
+#define PINB2_PADAL_MIBSPIB_MISO              0X2U
+
+/* PIN D2, PADAM functionality */
+#define PINA2_PADAM                           0X30U
+#define PINA2_PADAM_GPIO_9                    0X0U
+#define PINA2_PADAM_QSPI_1                    0X1U
+#define PINA2_PADAM_MIBSPIB_MOSI              0X2U
+#define PINA2_PADAM_MIBSPIB_CS2               0X8U
+
+/* PIN D1, PADAN functionality */
+#define PINC2_PADAN                           0X34U
+#define PINC2_PADAN_GPIO_10                   0X0U
+#define PINC2_PADAN_QSPI_2                    0X1U
+#define PINC2_PADAN_MCANA_TX                  0X8U
+
+/* PIN E2, PADAO functionality */
+#define PINB1_PADAO                           0X38U
+#define PINB1_PADAO_GPIO_11                   0X0U
+#define PINB1_PADAO_QSPI_3                    0X1U
+#define PINB1_PADAO_MCANA_RX                  0X8U
+
+/* PIN E1, PADAP functionality */
+#define PIND1_PADAP                           0X3CU
+#define PIND1_PADAP_GPIO_7                    0X0U
+#define PIND1_PADAP_QSPI_CLK                  0X1U
+#define PIND1_PADAP_MIBSPIB_CLK               0X2U
+#define PIND1_PADAP_DSS_UARTA_TX              0X6U
+
+/* PIN F2, PADAQ functionality */
+#define PINC1_PADAQ                           0X40U
+#define PINC1_PADAQ_GPIO_6                    0X0U
+#define PINC1_PADAQ_QSPI_CS                   0X1U
+#define PINC1_PADAQ_MIBSPIB_CS0               0X2U
+
+/* PIN L3, PADAR functionality */
+#define PINH2_PADAR                           0X44U
+#define PINH2_PADAR_NERROR_IN                 0X0U
+
+/* PIN K1, PADAS functionality */
+#define PINH3_PADAS                           0X48U
+#define PINH3_PADAS_WARM_RESET                0X0U
+
+/* PIN L1, PADAT functionality */
+#define PINH1_PADAT                           0X4CU
+#define PINH1_PADAT_NERROR_OUT                0X0U
+
+/* PIN C3, PADAU functionality */
+#define PIND4_PADAU                           0X50U
+#define PIND4_PADAU_GPIO_17                   0X0U
+#define PIND4_PADAU_TCK                       0X1U
+#define PIND4_PADAU_UARTB_TX                  0X2U
+#define PIND4_PADAU_MCANA_TX                  0X8U
+
+/* PIN D4, PADAV functionality */
+#define PINC4_PADAV                           0X54U
+#define PINC4_PADAV_GPIO_18                   0X0U
+#define PINC4_PADAV_TMS                       0X1U
+#define PINC4_PADAV_MCANA_RX                  0X6U
+
+/* PIN C5, PADAW functionality */
+#define PINC5_PADAW                           0X58U
+#define PINC5_PADAW_GPIO_23                   0X0U
+#define PINC5_PADAW_TDI                       0X1U
+#define PINC5_PADAW_UARTA_RX                  0X2U
+#define PINC5_PADAW_DSS_UARTA_RX              0X7U
+
+/* PIN D6, PADAX functionality */
+#define PINC6_PADAX                           0X5CU
+#define PINC6_PADAX_GPIO_24                   0X0U
+#define PINC6_PADAX_TDO                       0X1U
+#define PINC6_PADAX_UARTA_TX                  0X2U
+#define PINC6_PADAX_UARTB_TX                  0X6U
+#define PINC6_PADAX_NDMM_EN                   0X9U
+
+/* PIN E3, PADAY functionality */
+#define PIND2_PADAY                           0X60U
+#define PIND2_PADAY_GPIO_25                   0X0U
+#define PIND2_PADAY_MCU_CLKOUT                0X1U
+#define PIND2_PADAY_EPWMA0                    0XCU
+
+/* PIN H2, PADAZ functionality */
+#define PINF1_PADAZ                           0X64U
+#define PINF1_PADAZ_GPIO_26                   0X0U
+#define PINF1_PADAZ_GPIO_2                    0X1U
+#define PINF1_PADAZ_UARTB_TX                  0X7U
+#define PINF1_PADAZ_RCSS_GPIO_34              0X8U
+#define PINF1_PADAZ_PMIC_CLKOUT               0XAU
+#define PINF1_PADAZ_EPWM_TZ0                  0XEU
+
+/* PIN F1, PADBA functionality */
+#define PIND3_PADBA                           0X68U
+#define PIND3_PADBA_GPIO_27                   0X0U
+#define PIND3_PADBA_PMIC_CLKOUT               0X1U
+#define PIND3_PADBA_OBS_CLKOUT                0X2U
+#define PIND3_PADBA_EPWMA1                    0XBU
+#define PIND3_PADBA_EPWMB0                    0XCU
+
+/* PIN G3, PADBB functionality */
+#define PINE2_PADBB                           0X6CU
+#define PINE2_PADBB_GPIO_28                   0X0U
+#define PINE2_PADBB_SYNC_IN                   0X1U
+#define PINE2_PADBB_RCSS_MCASPB_AHCLKR        0X3U
+#define PINE2_PADBB_UARTB_RX                  0X6U
+#define PINE2_PADBB_DMM_MUX_IN                0X7U
+#define PINE2_PADBB_DSS_UARTA_RX              0X8U
+
+/* PIN E17, PADBC functionality */
+#define PINC14_PADBC                          0X70U
+#define PINC14_PADBC_GPIO_29                  0X0U
+#define PINC14_PADBC_RCOSC_CLK                0X2U
+#define PINC14_PADBC_DMM_MUX_IN               0X9U
+#define PINC14_PADBC_MIBSPIB_CS1              0XAU
+#define PINC14_PADBC_MIBSPIB_CS2              0XBU
+#define PINC14_PADBC_EPWMB0                   0XCU
+#define PINC14_PADBC_EPWMB1                   0XDU
+
+/* PIN G2, PADBD functionality */
+#define PINE1_PADBD                           0X74U
+#define PINE1_PADBD_GPIO_15                   0X0U
+#define PINE1_PADBD_RS232_RX                  0X1U
+#define PINE1_PADBD_UARTA_RX                  0X2U
+#define PINE1_PADBD_UARTB_RX                  0X7U
+#define PINE1_PADBD_MCANA_RX                  0X8U
+#define PINE1_PADBD_I2CA_SCL                  0X9U
+#define PINE1_PADBD_EPWMB0                    0XAU
+#define PINE1_PADBD_EPWMB1                    0XBU
+#define PINE1_PADBD_EPWMC0                    0XCU
+
+/* PIN G1, PADBE functionality */
+#define PINE3_PADBE                           0X78U
+#define PINE3_PADBE_GPIO_14                   0X0U
+#define PINE3_PADBE_RS232_TX                  0X1U
+#define PINE3_PADBE_UARTA_TX                  0X5U
+#define PINE3_PADBE_UARTB_TX                  0X6U
+#define PINE3_PADBE_MCANA_TX                  0XAU
+#define PINE3_PADBE_I2CA_SDA                  0XBU
+#define PINE3_PADBE_EPWMA0                    0XCU
+#define PINE3_PADBE_EPWMA1                    0XDU
+#define PINE3_PADBE_NDMM_EN                   0XEU
+
+/* PIN V16, PADBF functionality */
+#define PINP11_PADBF                          0X7CU
+#define PINP11_PADBF_TRACE_DATA_0             0X0U
+#define PINP11_PADBF_GPIO_31                  0X1U
+#define PINP11_PADBF_DMM0                     0X2U
+#define PINP11_PADBF_UARTA_TX                 0X4U
+#define PINP11_PADBF_RCSS_MCASPC_DAT1         0X7U
+#define PINP11_PADBF_I2CA_SDA                 0XAU
+
+/* PIN U15, PADBG functionality */
+#define PINR11_PADBG                          0X80U
+#define PINR11_PADBG_TRACE_DATA_1             0X0U
+#define PINR11_PADBG_RCSS_GPIO_32             0X1U
+#define PINR11_PADBG_DMM1                     0X2U
+#define PINR11_PADBG_EPWMC_SYNCI              0X3U
+#define PINR11_PADBG_UARTA_RX                 0X4U
+#define PINR11_PADBG_RCSS_MCASPC_DAT0         0X7U
+#define PINR11_PADBG_I2CA_SCL                 0XAU
+
+/* PIN W16, PADBH functionality */
+#define PINP10_PADBH                          0X84U
+#define PINP10_PADBH_TRACE_DATA_2             0X0U
+#define PINP10_PADBH_RCSS_GPIO_33             0X1U
+#define PINP10_PADBH_DMM2                     0X2U
+#define PINP10_PADBH_EPWMB_SYNCI              0X3U
+#define PINP10_PADBH_RCSS_MCASPC_FSR          0X7U
+
+/* PIN V15, PADBI functionality */
+#define PINR10_PADBI                          0X88U
+#define PINR10_PADBI_TRACE_DATA_3             0X0U
+#define PINR10_PADBI_RCSS_GPIO_34             0X1U
+#define PINR10_PADBI_DMM3                     0X2U
+#define PINR10_PADBI_EPWMC_SYNCO              0X4U
+#define PINR10_PADBI_RCSS_MCASPC_ACLKR        0X7U
+
+/* PIN W15, PADBJ functionality */
+#define PINN9_PADBJ                          0X8CU
+#define PINN9_PADBJ_TRACE_DATA_4             0X0U
+#define PINN9_PADBJ_RCSS_GPIO_35             0X1U
+#define PINN9_PADBJ_DMM4                     0X2U
+#define PINN9_PADBJ_EPWMB_SYNCO              0X4U
+#define PINN9_PADBJ_RCSS_MCASPC_FSX          0X7U
+
+/* PIN V14, PADBK functionality */
+#define PINR9_PADBK                          0X90U
+#define PINR9_PADBK_TRACE_DATA_5             0X0U
+#define PINR9_PADBK_RCSS_GPIO_36             0X1U
+#define PINR9_PADBK_DMM5                     0X2U
+#define PINR9_PADBK_EPWM_TZ2                 0X4U
+#define PINR9_PADBK_UARTB_TX                 0X5U
+#define PINR9_PADBK_RCSS_MCASPC_ACLKX        0X7U
+
+/* PIN U13, PADBL functionality */
+#define PINP9_PADBL                          0X94U
+#define PINP9_PADBL_TRACE_DATA_6             0X0U
+#define PINP9_PADBL_RCSS_GPIO_37             0X1U
+#define PINP9_PADBL_DMM6                     0X2U
+#define PINP9_PADBL_EPWM_TZ1                 0X4U
+#define PINP9_PADBL_RCSS_MCASPC_AHCLKX       0X7U
+
+/* PIN W14, PADBM functionality */
+#define PINR8_PADBM                          0X98U
+#define PINR8_PADBM_TRACE_DATA_7             0X0U
+#define PINR8_PADBM_RCSS_GPIO_38             0X1U
+#define PINR8_PADBM_DMM7                     0X2U
+#define PINR8_PADBM_EPWM_TZ0                 0X4U
+#define PINR8_PADBM_DSS_UARTA_TX             0X5U
+#define PINR8_PADBM_RCSS_MCASPB_ACLKX        0X7U
+
+/* PIN V13, PADBN functionality */
+#define PINP8_PADBN                          0X9CU
+#define PINP8_PADBN_TRACE_DATA_8             0X0U
+#define PINP8_PADBN_RCSS_GPIO_39             0X1U
+#define PINP8_PADBN_DMM8                     0X2U
+#define PINP8_PADBN_MCANA_TX                 0X4U
+#define PINP8_PADBN_EPWMA_SYNCI              0X5U
+#define PINP8_PADBN_RCSS_MCASPB_FSX          0X7U
+
+/* PIN W13, PADBO functionality */
+#define PINP7_PADBO                          0XA0U
+#define PINP7_PADBO_TRACE_DATA_9             0X0U
+#define PINP7_PADBO_RCSS_GPIO_40             0X1U
+#define PINP7_PADBO_DMM9                     0X2U
+#define PINP7_PADBO_MCANA_RX                 0X4U
+#define PINP7_PADBO_EPWMA_SYNCO              0X5U
+#define PINP7_PADBO_RCSS_MCASPB_ACLKR        0X7U
+
+/* PIN U11, PADBP functionality */
+#define PINP6_PADBP                          0XA4U
+#define PINP6_PADBP_TRACE_DATA_10            0X0U
+#define PINP6_PADBP_RCSS_GPIO_41             0X1U
+#define PINP6_PADBP_DMM10                    0X2U
+#define PINP6_PADBP_EPWMC0                   0X4U
+#define PINP6_PADBP_RCSS_MCASPB_FSR          0X7U
+
+/* PIN V11, PADBQ functionality */
+#define PINR6_PADBQ                          0XA8U
+#define PINR6_PADBQ_TRACE_DATA_11            0X0U
+#define PINR6_PADBQ_RCSS_GPIO_42             0X1U
+#define PINR6_PADBQ_DMM11                    0X2U
+#define PINR6_PADBQ_EPWMC1                   0X4U
+#define PINR6_PADBQ_RCSS_MCASPB_DAT0         0X7U
+
+/* PIN W11, PADBR functionality */
+#define PINN5_PADBR                          0XACU
+#define PINN5_PADBR_TRACE_DATA_12            0X0U
+#define PINN5_PADBR_RCSS_GPIO_43             0X1U
+#define PINN5_PADBR_DMM12                    0X2U
+#define PINN5_PADBR_EPWMA0                   0X4U
+#define PINN5_PADBR_MCANB_TX                 0X5U
+#define PINN5_PADBR_RCSS_MCASPB_DAT1         0X7U
+
+/* PIN V10, PADBS functionality */
+#define PINP5_PADBS                          0XB0U
+#define PINP5_PADBS_TRACE_DATA_13            0X0U
+#define PINP5_PADBS_RCSS_GPIO_44             0X1U
+#define PINP5_PADBS_DMM13                    0X2U
+#define PINP5_PADBS_EPWMA1                   0X4U
+#define PINP5_PADBS_MCANB_RX                 0X5U
+#define PINP5_PADBS_RCSS_MCASPB_DAT2         0X7U
+
+/* PIN W10, PADBT functionality */
+#define PINR5_PADBT                          0XB4U
+#define PINR5_PADBT_TRACE_DATA_14            0X0U
+#define PINR5_PADBT_RCSS_GPIO_45             0X1U
+#define PINR5_PADBT_DMM14                    0X2U
+#define PINR5_PADBT_EPWMB0                   0X4U
+#define PINR5_PADBT_RCSS_MCASPB_DAT3         0X7U
+
+/* PIN T10, PADBU functionality */
+#define PINN4_PADBU                          0XB8U
+#define PINN4_PADBU_TRACE_DATA_15            0X0U
+#define PINN4_PADBU_RCSS_GPIO_46             0X1U
+#define PINN4_PADBU_DMM15                    0X2U
+#define PINN4_PADBU_EPWMB1                   0X4U
+#define PINN4_PADBU_RCSS_MCASPB_DAT4         0X7U
+#define PINN4_PADBU_RCSS_I2CA_SDA            0XBU
+
+/* PIN W12, PADBV functionality */
+#define PINN6_PADBV                          0XBCU
+#define PINN6_PADBV_TRACE_CLK                0X0U
+#define PINN6_PADBV_RCSS_GPIO_47             0X1U
+#define PINN6_PADBV_DMM_CLK                  0X2U
+#define PINN6_PADBV_HW_SYNC_FE1              0X3U
+#define PINN6_PADBV_HW_SYNC_FE2              0X4U
+#define PINN6_PADBV_RCSS_MCASPB_DAT5         0X7U
+#define PINN6_PADBV_DSS_UARTA_RX             0XAU
+#define PINN6_PADBV_RCSS_I2CA_SCL            0XBU
+
+/* PIN V12, PADBW functionality */
+#define PINR7_PADBW                          0XC0U
+#define PINR7_PADBW_TRACE_CTL                0X0U
+#define PINR7_PADBW_RCSS_GPIO_48             0X1U
+#define PINR7_PADBW_DMM_SYNC                 0X2U
+#define PINR7_PADBW_HW_SYNC_FE2              0X3U
+#define PINR7_PADBW_HW_SYNC_FE1              0X4U
+#define PINR7_PADBW_RCSS_MCASPB_AHCLKX       0X7U
+#define PINR7_PADBW_DSS_UARTA_TX             0XAU
+
+/* PIN E19, PADBX functionality */
+#define PINC13_PADBX                          0XC4U
+#define PINC13_PADBX_RCSS_GPIO_49             0X0U
+#define PINC13_PADBX_MII_COL                  0X1U
+#define PINC13_PADBX_RMII_REFCLK              0X2U
+#define PINC13_PADBX_RCSS_MCASPA_DAT3         0X4U
+#define PINC13_PADBX_EPWMA1                   0X6U
+
+/* PIN F16, PADBY functionality */
+#define PIND14_PADBY                          0XC8U
+#define PIND14_PADBY_RCSS_GPIO_50             0X0U
+#define PIND14_PADBY_MII_CRS                  0X1U
+#define PIND14_PADBY_RMII_CRS_DV              0X2U
+#define PIND14_PADBY_I2CA_SDA                 0X3U
+#define PIND14_PADBY_RCSS_MCASPA_DAT2         0X4U
+#define PIND14_PADBY_EPWMB1                   0X6U
+
+/* PIN F18, PADBZ functionality */
+#define PIND13_PADBZ                          0XCCU
+#define PIND13_PADBZ_RCSS_GPIO_51             0X0U
+#define PIND13_PADBZ_MII_RXER                 0X1U
+#define PIND13_PADBZ_RMII_RXER                0X2U
+#define PIND13_PADBZ_I2CA_SCL                 0X3U
+#define PIND13_PADBZ_RCSS_MCASPA_DAT1         0X4U
+#define PIND13_PADBZ_EPWMC1                   0X6U
+
+/* PIN J18, PADCA functionality */
+#define PING15_PADCA                          0XD0U
+#define PING15_PADCA_RCSS_GPIO_52             0X0U
+#define PING15_PADCA_MII_TXEN                 0X1U
+#define PING15_PADCA_RMII_TXEN                0X2U
+#define PING15_PADCA_RGMII_TCTL               0X3U
+#define PING15_PADCA_RCSS_MCASPA_DAT0         0X4U
+#define PING15_PADCA_EPWMA0                   0X6U
+
+/* PIN J17, PADCB functionality */
+#define PING13_PADCB                          0XD4U
+#define PING13_PADCB_RCSS_GPIO_53             0X0U
+#define PING13_PADCB_MII_RXDV                 0X1U
+#define PING13_PADCB_RGMII_RCTL               0X3U
+#define PING13_PADCB_RCSS_MCASPA_FSR          0X4U
+#define PING13_PADCB_UARTB_RX                 0X5U
+#define PING13_PADCB_EPWMB0                   0X6U
+
+/* PIN K18, PADCC functionality */
+#define PINH14_PADCC                          0XD8U
+#define PINH14_PADCC_RCSS_GPIO_54             0X0U
+#define PINH14_PADCC_MII_TXD3                 0X1U
+#define PINH14_PADCC_RGMII_TD3                0X3U
+#define PINH14_PADCC_RCSS_MCASPA_ACLKR        0X4U
+#define PINH14_PADCC_UARTB_TX                 0X5U
+#define PINH14_PADCC_EPWMC0                   0X6U
+
+/* PIN K16, PADCD functionality */
+#define PINH13_PADCD                          0XDCU
+#define PINH13_PADCD_RCSS_GPIO_55             0X0U
+#define PINH13_PADCD_MII_TXD2                 0X1U
+#define PINH13_PADCD_RGMII_TD2                0X3U
+#define PINH13_PADCD_RCSS_MCASPA_FSX          0X4U
+
+/* PIN L17, PADCE functionality */
+#define PINJ15_PADCE                          0XE0U
+#define PINJ15_PADCE_RCSS_GPIO_56             0X0U
+#define PINJ15_PADCE_MII_TXD1                 0X1U
+#define PINJ15_PADCE_RMII_TXD1                0X2U
+#define PINJ15_PADCE_RGMII_TD1                0X3U
+#define PINJ15_PADCE_RCSS_MCASPA_ACLKX        0X4U
+
+/* PIN L18, PADCF functionality */
+#define PINJ14_PADCF                          0XE4U
+#define PINJ14_PADCF_RCSS_GPIO_57             0X0U
+#define PINJ14_PADCF_MII_TXD0                 0X1U
+#define PINJ14_PADCF_RMII_TXD0                0X2U
+#define PINJ14_PADCF_RGMII_TD0                0X3U
+#define PINJ14_PADCF_RCSS_MCASPA_AHCLKX       0X4U
+
+/* PIN K19, PADCG functionality */
+#define PINH15_PADCG                          0XE8U
+#define PINH15_PADCG_RCSS_GPIO_58             0X0U
+#define PINH15_PADCG_MII_TXCLK                0X1U
+#define PINH15_PADCG_RGMII_TCLK               0X3U
+#define PINH15_PADCG_RCSS_MCASPB_AHCLKX       0X4U
+#define PINH15_PADCG_RCSS_I2CA_SDA            0X5U
+
+/* PIN M19, PADCH functionality */
+#define PINK15_PADCH                          0XECU
+#define PINK15_PADCH_RCSS_GPIO_59             0X0U
+#define PINK15_PADCH_MII_RXCLK                0X1U
+#define PINK15_PADCH_RGMII_RCLK               0X3U
+#define PINK15_PADCH_RCSS_MCASPB_AHCLKR       0X4U
+#define PINK15_PADCH_RCSS_I2CA_SCL            0X5U
+
+/* PIN L19, PADCI functionality */
+#define PINJ13_PADCI                          0XF0U
+#define PINJ13_PADCI_RCSS_GPIO_60             0X0U
+#define PINJ13_PADCI_MII_RXD3                 0X1U
+#define PINJ13_PADCI_RGMII_RD3                0X3U
+#define PINJ13_PADCI_RCSS_MCASPB_ACLKX        0X4U
+#define PINJ13_PADCI_RCSS_I2CB_SDA            0X5U
+
+/* PIN M18, PADCJ functionality */
+#define PINL14_PADCJ                          0XF4U
+#define PINL14_PADCJ_RCSS_GPIO_61             0X0U
+#define PINL14_PADCJ_MII_RXD2                 0X1U
+#define PINL14_PADCJ_RGMII_RD2                0X3U
+#define PINL14_PADCJ_RCSS_MCASPB_FSX          0X4U
+#define PINL14_PADCJ_RCSS_I2CB_SCL            0X5U
+
+/* PIN N19, PADCK functionality */
+#define PINL15_PADCK                          0XF8U
+#define PINL15_PADCK_RCSS_GPIO_62             0X0U
+#define PINL15_PADCK_MII_RXD1                 0X1U
+#define PINL15_PADCK_RMII_RXD1                0X2U
+#define PINL15_PADCK_RGMII_RD1                0X3U
+#define PINL15_PADCK_RCSS_MCASPB_ACLKR        0X4U
+
+/* PIN P18, PADCL functionality */
+#define PINM13_PADCL                          0XFCU
+#define PINM13_PADCL_RCSS_GPIO_63             0X0U
+#define PINM13_PADCL_MII_RXD0                 0X1U
+#define PINM13_PADCL_RMII_RXD0                0X2U
+#define PINM13_PADCL_RGMII_RD0                0X3U
+#define PINM13_PADCL_RCSS_MCASPB_FSR          0X4U
+
+/* PIN P19, PADCM functionality */
+#define PINM14_PADCM                          0X100U
+#define PINM14_PADCM_GPIO_30                  0X0U
+#define PINM14_PADCM_MDIO_DATA                0X1U
+#define PINM14_PADCM_RCSS_MCASPB_DAT0         0X4U
+
+/* PIN R19, PADCN functionality */
+#define PINM15_PADCN                          0X104U
+#define PINM15_PADCN_GPIO_31                  0X0U
+#define PINM15_PADCN_MDIO_CLK                 0X1U
+#define PINM15_PADCN_RCSS_MCASPB_DAT1         0X4U
+
+/* PIN R18, PADCO functionality */
+#define PINN15_PADCO                          0X108U
+#define PINN15_PADCO_RCSS_GPIO_32             0X0U
+#define PINN15_PADCO_RCSS_MIBSPIA_MOSI        0X1U
+#define PINN15_PADCO_RCSS_I2CA_SDA            0X2U
+#define PINN15_PADCO_MIBSPIA_MOSI             0X5U
+
+/* PIN R17, PADCP functionality */
+#define PINN14_PADCP                          0X10CU
+#define PINN14_PADCP_RCSS_GPIO_33             0X0U
+#define PINN14_PADCP_RCSS_MIBSPIA_MISO        0X1U
+#define PINN14_PADCP_RCSS_I2CA_SCL            0X2U
+#define PINN14_PADCP_MIBSPIA_MISO             0X5U
+
+/* PIN T18, PADCQ functionality */
+#define PINP15_PADCQ                          0X110U
+#define PINP15_PADCQ_RCSS_GPIO_34             0X0U
+#define PINP15_PADCQ_RCSS_MIBSPIA_CLK         0X1U
+#define PINP15_PADCQ_RCSS_I2CB_SDA            0X2U
+#define PINP15_PADCQ_MIBSPIA_CLK              0X5U
+
+/* PIN T19, PADCR functionality */
+#define PINP14_PADCR                          0X114U
+#define PINP14_PADCR_RCSS_GPIO_35             0X0U
+#define PINP14_PADCR_RCSS_MIBSPIA_CS0         0X1U
+#define PINP14_PADCR_RCSS_I2CB_SCL            0X2U
+#define PINP14_PADCR_MIBSPIA_CS0              0X5U
+
+/* PIN U18, PADCS functionality */
+#define PINN13_PADCS                          0X118U
+#define PINN13_PADCS_RCSS_GPIO_36             0X0U
+#define PINN13_PADCS_RCSS_MIBSPIA_CS1         0X1U
+#define PINN13_PADCS_GPIO_2                   0X2U
+#define PINN13_PADCS_GPIO_8                   0X3U
+#define PINN13_PADCS_MIBSPIA_HOSTIRQ          0X5U
+#define PINN13_PADCS_MIBSPIB_CS2              0X6U
+#define PINN13_PADCS_RCSS_GPIO_34             0X7U
+#define PINN13_PADCS_RCSS_GPIO_40             0XAU
+
+/* PIN U19, PADCT functionality */
+#define PINP13_PADCT                          0X11CU
+#define PINP13_PADCT_RCSS_GPIO_37             0X0U
+#define PINP13_PADCT_RCSS_MIBSPIB_MOSI        0X1U
+#define PINP13_PADCT_RCSS_I2CA_SDA            0X2U
+#define PINP13_PADCT_CPTS0_HW1TSPUSH          0X3U
+#define PINP13_PADCT_MIBSPIB_MOSI             0X5U
+
+/* PIN V18, PADCU functionality */
+#define PINR13_PADCU                          0X120U
+#define PINR13_PADCU_RCSS_GPIO_38             0X0U
+#define PINR13_PADCU_RCSS_MIBSPIB_MISO        0X1U
+#define PINR13_PADCU_RCSS_I2CA_SCL            0X2U
+#define PINR13_PADCU_CPTS0_HW2TSPUSH          0X3U
+#define PINR13_PADCU_MIBSPIB_MISO             0X5U
+
+/* PIN V19, PADCV functionality */
+#define PINR14_PADCV                          0X124U
+#define PINR14_PADCV_RCSS_GPIO_39             0X0U
+#define PINR14_PADCV_RCSS_MIBSPIB_CLK         0X1U
+#define PINR14_PADCV_RCSS_I2CB_SDA            0X2U
+#define PINR14_PADCV_CPTS0_TS_SYNC            0X3U
+#define PINR14_PADCV_MIBSPIB_CLK              0X5U
+
+/* PIN U17, PADCW functionality */
+#define PINN12_PADCW                          0X128U
+#define PINN12_PADCW_RCSS_GPIO_40             0X0U
+#define PINN12_PADCW_RCSS_MIBSPIB_CS0         0X1U
+#define PINN12_PADCW_RCSS_I2CB_SCL            0X2U
+#define PINN12_PADCW_CPTS0_TS_COMP            0X3U
+#define PINN12_PADCW_RCSS_MCASPC_DAT5         0X4U
+#define PINN12_PADCW_MIBSPIB_CS0              0X5U
+
+/* PIN W18, PADCX functionality */
+#define PINP12_PADCX                          0X12CU
+#define PINP12_PADCX_RCSS_GPIO_41             0X0U
+#define PINP12_PADCX_RCSS_MIBSPIB_CS1         0X1U
+#define PINP12_PADCX_CPTS0_TS_GENF            0X3U
+#define PINP12_PADCX_RCSS_MCASPC_DAT4         0X4U
+#define PINP12_PADCX_MIBSPIB_CS1              0X5U
+#define PINP12_PADCX_GPIO_3                   0X6U
+#define PINP12_PADCX_GPIO_9                   0X7U
+#define PINP12_PADCX_RCSS_GPIO_35             0XAU
+
+/* PIN V17, PADCY functionality */
+#define PINR12_PADCY                          0X130U
+#define PINR12_PADCY_RCSS_GPIO_42             0X0U
+#define PINR12_PADCY_CPTS0_TS_GENF            0X1U
+#define PINR12_PADCY_HW_SYNC_FE2              0X2U
+#define PINR12_PADCY_HW_SYNC_FE1              0X3U
+#define PINR12_PADCY_RCSS_MCASPC_DAT3         0X4U
+
+/* PIN W17, PADCZ functionality */
+#define PINN11_PADCZ                          0X134U
+#define PINN11_PADCZ_RCSS_GPIO_43             0X0U
+#define PINN11_PADCZ_CPTS0_TS_COMP            0X1U
+#define PINN11_PADCZ_HW_SYNC_FE1              0X2U
+#define PINN11_PADCZ_HW_SYNC_FE2              0X3U
+#define PINN11_PADCZ_RCSS_MCASPC_DAT2         0X4U
+
+/* PIN U3, PADDA functionality */
+#define PINR3_PADDA                           0X138U
+#define PINR3_PADDA_RCSS_GPIO_44              0X0U
+#define PINR3_PADDA_CPTS0_TS_SYNC             0X1U
+#define PINR3_PADDA_UARTB_TX                  0X4U
+#define PINR3_PADDA_UARTA_RX                  0X5U
+#define PINR3_PADDA_DSS_UARTA_TX              0X6U
+
+/* PIN W2, PADDB functionality */
+#define PINR4_PADDB                           0X13CU
+#define PINR4_PADDB_RCSS_GPIO_45              0X0U
+#define PINR4_PADDB_CPTS0_HW2TSPUSH           0X1U
+#define PINR4_PADDB_UARTB_RX                  0X4U
+#define PINR4_PADDB_UARTA_TX                  0X5U
+#define PINR4_PADDB_DSS_UARTA_RX              0X6U
+
+/* PIN J19, PADDC functionality */
+#define PING14_PADDC                          0X140U
+#define PING14_PADDC_RCSS_GPIO_46             0X0U
+#define PING14_PADDC_CPTS0_HW1TSPUSH          0X1U
+#define PING14_PADDC_DSS_UARTA_TX             0X4U
+#define PING14_PADDC_RCSS_UARTA_RX            0X5U
+#define PING14_PADDC_UARTA_RX                 0X6U
+
+/* PIN H19, PADDD functionality */
+#define PINF14_PADDD                          0X144U
+#define PINF14_PADDD_RCSS_GPIO_47             0X0U
+#define PINF14_PADDD_DSS_UARTA_RX             0X1U
+#define PINF14_PADDD_RCSS_UARTA_TX            0X5U
+#define PINF14_PADDD_UARTA_TX                 0X6U
+
+/* PIN V9, PADDE functionality */
+#define PINP4_PADDE                           0X148U
+#define PINP4_PADDE_GPIO_0                    0X0U
+#define PINP4_PADDE_DSS_UARTA_TX              0X1U
+#define PINP4_PADDE_EPWMB_SYNCI               0X3U
+#define PINP4_PADDE_FE1_REFCLK                0X4U
+#define PINP4_PADDE_UARTA_TX                  0X5U
+#define PINP4_PADDE_UARTB_TX                  0X6U
+#define PINP4_PADDE_RCSS_GPIO_32              0XCU
+
+/* PIN J1, PADDF functionality */
+#define PING1_PADDF                           0X14CU
+#define PING1_PADDF_GPIO_1                    0X0U
+#define PING1_PADDF_XREF_CLK0                 0X1U
+#define PING1_PADDF_FE2_REFCLK                0X4U
+#define PING1_PADDF_MCU_CLKOUT                0X6U
+#define PING1_PADDF_RCSS_GPIO_33              0XCU
+
+/* PIN K2, PADDG functionality */
+#define PING2_PADDG                           0X150U
+#define PING2_PADDG_GPIO_2                    0X0U
+#define PING2_PADDG_XREF_CLK1                 0X1U
+#define PING2_PADDG_RCSS_ECAPA_CAPIN_PWMO     0X3U
+#define PING2_PADDG_PMIC_CLKOUT               0X7U
+#define PING2_PADDG_RCSS_GPIO_34              0XCU
+
+/* PIN H18, PADDH functionality */
+#define PINF15_PADDH                          0X154U
+#define PINF15_PADDH_GPIO_3                   0X0U
+#define PINF15_PADDH_OBS_CLKOUT               0X1U
+#define PINF15_PADDH_RCSS_ATL_CLK0            0X2U
+#define PINF15_PADDH_RCSS_I2CB_SDA            0X4U
+#define PINF15_PADDH_EPWMA1                   0X5U
+#define PINF15_PADDH_RCSS_UARTA_RTS           0X9U
+#define PINF15_PADDH_MIBSPIA_MOSI             0XAU
+#define PINF15_PADDH_RCSS_GPIO_35             0XCU
+
+/* PIN G17, PADDI functionality */
+#define PINE13_PADDI                          0X158U
+#define PINE13_PADDI_GPIO_4                   0X0U
+#define PINE13_PADDI_HW_SYNC_FE1              0X1U
+#define PINE13_PADDI_CPTS0_TS_GENF            0X2U
+#define PINE13_PADDI_RCSS_ATL_CLK1            0X3U
+#define PINE13_PADDI_RCSS_I2CB_SCL            0X4U
+#define PINE13_PADDI_EPWMB1                   0X5U
+#define PINE13_PADDI_EPWMB0                   0X6U
+#define PINE13_PADDI_HW_SYNC_FE2              0X7U
+#define PINE13_PADDI_OBS_CLKOUT               0X8U
+#define PINE13_PADDI_RCSS_UARTA_CTS           0X9U
+#define PINE13_PADDI_MIBSPIA_MISO             0XAU
+#define PINE13_PADDI_RCSS_GPIO_36             0XCU
+
+/* PIN G19, PADDJ functionality */
+#define PINE14_PADDJ                          0X15CU
+#define PINE14_PADDJ_GPIO_5                   0X0U
+#define PINE14_PADDJ_HW_SYNC_FE2              0X1U
+#define PINE14_PADDJ_CPTS0_TS_COMP            0X2U
+#define PINE14_PADDJ_EPWMB1                   0X3U
+#define PINE14_PADDJ_RCSS_ECAPA_CAPIN_PWMO    0X4U
+#define PINE14_PADDJ_RCSS_I2CA_SDA            0X5U
+#define PINE14_PADDJ_UARTB_TX                 0X6U
+#define PINE14_PADDJ_HW_SYNC_FE1              0X7U
+#define PINE14_PADDJ_MIBSPIA_CLK              0XAU
+#define PINE14_PADDJ_RCSS_GPIO_37             0XCU
+
+/* PIN F19, PADDK functionality */
+#define PIND15_PADDK                          0X160U
+#define PIND15_PADDK_GPIO_6                   0X0U
+#define PIND15_PADDK_EPWMA_SYNCI              0X1U
+#define PIND15_PADDK_HW_SYNC_FE1              0X3U
+#define PIND15_PADDK_EPWMA0                   0X4U
+#define PIND15_PADDK_RCSS_I2CA_SCL            0X5U
+#define PIND15_PADDK_UARTB_RX                 0X6U
+#define PIND15_PADDK_CPTS0_TS_GENF            0X7U
+#define PIND15_PADDK_HW_SYNC_FE2              0X9U
+#define PIND15_PADDK_MIBSPIA_CS0              0XAU
+#define PIND15_PADDK_RCSS_GPIO_38             0XCU
+
+/* PIN G18, PADDL functionality */
+#define PINE15_PADDL                          0X164U
+#define PINE15_PADDL_GPIO_7                   0X0U
+#define PINE15_PADDL_EPWMA_SYNCO              0X1U
+#define PINE15_PADDL_EPWMC1                   0X2U
+#define PINE15_PADDL_HW_SYNC_FE2              0X3U
+#define PINE15_PADDL_EPWMB0                   0X4U
+#define PINE15_PADDL_RCSS_I2CB_SDA            0X5U
+#define PINE15_PADDL_UARTA_RX                 0X6U
+#define PINE15_PADDL_CPTS0_TS_COMP            0X7U
+#define PINE15_PADDL_RCSS_ECAPA_SYNCIN        0X8U
+#define PINE15_PADDL_HW_SYNC_FE1              0X9U
+#define PINE15_PADDL_MIBSPIA_HOSTIRQ          0XAU
+#define PINE15_PADDL_RCSS_GPIO_39             0XCU
+
+/* PIN B3, PADDM functionality */
+#define PINB4_PADDM                           0X168U
+#define PINB4_PADDM_GPIO_8                    0X0U
+#define PINB4_PADDM_FE1_REFCLK                0X1U
+#define PINB4_PADDM_EPWMA_SYNCO               0X2U
+#define PINB4_PADDM_EPWMB_SYNCI               0X3U
+#define PINB4_PADDM_EPWMC0                    0X4U
+#define PINB4_PADDM_RCSS_I2CB_SCL             0X5U
+#define PINB4_PADDM_UARTA_TX                  0X6U
+#define PINB4_PADDM_CPTS0_TS_SYNC             0X7U
+#define PINB4_PADDM_RCSS_ECAPA_SYNCOUT        0X8U
+#define PINB4_PADDM_RCSS_GPIO_40              0XCU
+
+/* SYS_RST_CAUSE_CLR */
+
+#define MSS_TOPRCM_SYS_RST_CAUSE_CLR_SYS_RST_CAUSE_CLR_CLEAR_MASK          (0x00000001U)
+#define MSS_TOPRCM_SYS_RST_CAUSE_CLR_SYS_RST_CAUSE_CLR_CLEAR_SHIFT         (0x00000000U)
+#define MSS_TOPRCM_SYS_RST_CAUSE_CLR_SYS_RST_CAUSE_CLR_CLEAR_RESETVAL      (0x00000000U)
+#define MSS_TOPRCM_SYS_RST_CAUSE_CLR_SYS_RST_CAUSE_CLR_CLEAR_MAX           (0x00000001U)
+
+#define MSS_TOPRCM_SYS_RST_CAUSE_CLR_RESETVAL                              (0x00000000U)
+
+/* PIN B19, PADDN functionality */
+#define PINA13_PADDN                          0X16CU
+#define PINA13_PADDN_GPIO_9                   0X0U
+#define PINA13_PADDN_FE2_REFCLK               0X1U
+#define PINA13_PADDN_RCSS_UARTA_TX            0X2U
+#define PINA13_PADDN_EPWMB_SYNCO              0X3U
+#define PINA13_PADDN_EPWMA1                   0X4U
+#define PINA13_PADDN_DSS_UARTA_TX             0X6U
+#define PINA13_PADDN_CPTS0_HW2TSPUSH          0X7U
+#define PINA13_PADDN_RCSS_MCASPA_AHCLKX       0X8U
+#define PINA13_PADDN_RCSS_ATL_CLK0            0XBU
+#define PINA13_PADDN_RCSS_GPIO_41             0XCU
+
+/* PIN B18, PADDO functionality */
+#define PINA12_PADDO                          0X170U
+#define PINA12_PADDO_GPIO_10                  0X0U
+#define PINA12_PADDO_RCSS_UARTA_RX            0X2U
+#define PINA12_PADDO_EPWMC_SYNCI              0X3U
+#define PINA12_PADDO_EPWMB1                   0X4U
+#define PINA12_PADDO_DSS_UARTA_RX             0X6U
+#define PINA12_PADDO_CPTS0_HW1TSPUSH          0X7U
+#define PINA12_PADDO_RCSS_MCASPA_ACLKX        0X8U
+#define PINA12_PADDO_RCSS_GPIO_42             0XCU
+
+/* PIN C17, PADDP functionality */
+#define PINC12_PADDP                          0X174U
+#define PINC12_PADDP_GPIO_11                  0X0U
+#define PINC12_PADDP_RCSS_UARTA_RTS           0X2U
+#define PINC12_PADDP_EPWMC_SYNCO              0X3U
+#define PINC12_PADDP_EPWMC1                   0X4U
+#define PINC12_PADDP_I2CA_SDA                 0X5U
+#define PINC12_PADDP_UARTB_TX                 0X6U
+#define PINC12_PADDP_RCSS_MCASPA_FSX          0X8U
+#define PINC12_PADDP_RCSS_GPIO_43             0XCU
+
+/* PIN A18, PADDQ functionality */
+#define PINB12_PADDQ                          0X178U
+#define PINB12_PADDQ_GPIO_12                  0X0U
+#define PINB12_PADDQ_I2CA_SCL                 0X1U
+#define PINB12_PADDQ_RCSS_UARTA_CTS           0X2U
+#define PINB12_PADDQ_HW_SYNC_FE1              0X3U
+#define PINB12_PADDQ_RCSS_ECAPA_CAPIN_PWMO    0X4U
+#define PINB12_PADDQ_CPTS0_TS_GENF            0X5U
+#define PINB12_PADDQ_UARTB_RX                 0X6U
+#define PINB12_PADDQ_RCSS_ECAPA_CAPIN_PWMO2   0X7U
+#define PINB12_PADDQ_RCSS_MCASPA_ACLKR        0X8U
+#define PINB12_PADDQ_RS232_RX                 0XBU
+#define PINB12_PADDQ_RCSS_GPIO_44             0XCU
+
+/* PIN B17, PADDR functionality */
+#define PINA11_PADDR                          0X17CU
+#define PINA11_PADDR_GPIO_13                  0X0U
+#define PINA11_PADDR_I2CA_SDA                 0X1U
+#define PINA11_PADDR_CPTS0_TS_COMP            0X2U
+#define PINA11_PADDR_HW_SYNC_FE2              0X3U
+#define PINA11_PADDR_RCSS_UARTA_TX            0X4U
+#define PINA11_PADDR_UARTA_TX                 0X5U
+#define PINA11_PADDR_UARTB_TX                 0X6U
+#define PINA11_PADDR_DSS_UARTA_TX             0X7U
+#define PINA11_PADDR_RCSS_MCASPA_FSR          0X8U
+#define PINA11_PADDR_RS232_TX                 0XBU
+#define PINA11_PADDR_RCSS_GPIO_45             0XCU
+
+/* PIN A17, PADDS functionality */
+#define PINB11_PADDS                          0X180U
+#define PINB11_PADDS_GPIO_14                  0X0U
+#define PINB11_PADDS_RCSS_UARTA_TX            0X2U
+#define PINB11_PADDS_RCSS_I2CB_SDA            0X3U
+#define PINB11_PADDS_RCSS_MCASPA_DAT8         0X7U
+#define PINB11_PADDS_RCSS_MCASPA_DAT0         0X8U
+#define PINB11_PADDS_RCSS_GPIO_46             0XCU
+
+/* PIN B16, PADDT functionality */
+#define PINC11_PADDT                          0X184U
+#define PINC11_PADDT_GPIO_15                  0X0U
+#define PINC11_PADDT_RCSS_UARTA_RX            0X2U
+#define PINC11_PADDT_RCSS_I2CB_SCL            0X3U
+#define PINC11_PADDT_RCSS_MCASPA_DAT9         0X7U
+#define PINC11_PADDT_RCSS_MCASPA_DAT1         0X8U
+#define PINC11_PADDT_RCSS_GPIO_47             0XCU
+
+/* PIN C15, PADDU functionality */
+#define PINB7_PADDU                          0X188U
+#define PINB7_PADDU_GPIO_16                  0X0U
+#define PINB7_PADDU_RCSS_MCASPA_DAT10        0X7U
+#define PINB7_PADDU_RCSS_MCASPA_DAT2         0X8U
+#define PINB7_PADDU_RCSS_GPIO_48             0XCU
+
+/* PIN A16, PADDV functionality */
+#define PINC7_PADDV                          0X18CU
+#define PINC7_PADDV_GPIO_17                  0X0U
+#define PINC7_PADDV_RCSS_MCASPA_DAT11        0X7U
+#define PINC7_PADDV_RCSS_MCASPA_DAT3         0X8U
+#define PINC7_PADDV_RCSS_GPIO_49             0XCU
+
+/* PIN B15, PADDW functionality */
+#define PINB6_PADDW                          0X190U
+#define PINB6_PADDW_GPIO_18                  0X0U
+#define PINB6_PADDW_RCSS_MCASPA_DAT12        0X7U
+#define PINB6_PADDW_RCSS_MCASPA_DAT4         0X8U
+#define PINB6_PADDW_RCSS_GPIO_50             0XCU
+
+/* PIN A15, PADDX functionality */
+#define PINA6_PADDX                          0X194U
+#define PINA6_PADDX_GPIO_19                  0X0U
+#define PINA6_PADDX_RCSS_I2CA_SDA            0X3U
+#define PINA6_PADDX_RCSS_MCASPA_DAT13        0X7U
+#define PINA6_PADDX_RCSS_MCASPA_DAT5         0X8U
+#define PINA6_PADDX_RCSS_GPIO_51             0XCU
+
+/* PIN B14, PADDY functionality */
+#define PINB5_PADDY                          0X198U
+#define PINB5_PADDY_GPIO_20                  0X0U
+#define PINB5_PADDY_RCSS_I2CA_SCL            0X3U
+#define PINB5_PADDY_RCSS_MCASPA_DAT14        0X7U
+#define PINB5_PADDY_RCSS_MCASPA_DAT6         0X8U
+#define PINB5_PADDY_RCSS_GPIO_52             0XCU
+
+/* PIN C13, PADDZ functionality */
+#define PINA5_PADDZ                          0X19CU
+#define PINA5_PADDZ_GPIO_21                  0X0U
+#define PINA5_PADDZ_RCSS_ECAPA_CAPIN_PWMO    0X4U
+#define PINA5_PADDZ_RCSS_MCASPA_DAT15        0X7U
+#define PINA5_PADDZ_RCSS_MCASPA_DAT7         0X8U
+#define PINA5_PADDZ_RCSS_GPIO_53             0XCU
+
+/* PIN B10, PADEA functionality */
+#define PINB10_PADEA                          0X1A0U
+#define PINB10_PADEA_GPIO_22                  0X0U
+#define PINB10_PADEA_UARTA_RX                 0X1U
+#define PINB10_PADEA_GPIO_0                   0X2U
+#define PINE10_PADEA_RCSS_ECAPA_SYNCIN        0X4U
+#define PINB10_PADEA_RCSS_I2CA_SDA            0X5U
+#define PINB10_PADEA_RCSS_MCASPA_DAT8         0X8U
+#define PINB10_PADEA_RCSS_GPIO_54             0XCU
+
+/* PIN A10, PADEB functionality */
+#define PINA10_PADEB                          0X1A4U
+#define PINA10_PADEB_GPIO_23                  0X0U
+#define PINA10_PADEB_UARTA_TX                 0X1U
+#define PINA10_PADEB_GPIO_1                   0X2U
+#define PINA10_PADEB_RCSS_ECAPA_SYNCOUT       0X4U
+#define PINA10_PADEB_RCSS_I2CA_SCL            0X5U
+#define PINA10_PADEB_RCSS_MCASPA_DAT9        0X8U
+#define PINA10_PADEB_RCSS_GPIO_55             0XCU
+
+/* PIN A9, PADEC functionality */
+#define PINA9_PADEC                          0X1A8U
+#define PINA9_PADEC_GPIO_24                  0X0U
+#define PINA9_PADEC_UARTB_TX                 0X1U
+#define PINA9_PADEC_GPIO_2                   0X2U
+#define PINA9_PADEC_RCSS_ECAPA_CAPIN_PWMO    0X4U
+#define PINA9_PADEC_RCSS_I2CB_SDA            0X5U
+#define PINA9_PADEC_RCSS_MCASPA_DAT10        0X8U
+#define PINA9_PADEC_RCSS_GPIO_56             0XCU
+
+/* PIN C9, PADED functionality */
+#define PINC9_PADED                          0X1ACU
+#define PINC9_PADED_GPIO_25                  0X0U
+#define PINC9_PADED_UARTB_RX                 0X1U
+#define PINC9_PADED_GPIO_3                   0X2U
+#define PINC9_PADED_RCSS_ECAPA_SYNCIN        0X4U
+#define PINC9_PADED_RCSS_I2CB_SCL            0X5U
+#define PINC9_PADED_RCSS_MCASPA_DAT11        0X8U
+#define PINC9_PADED_RCSS_GPIO_57             0XCU
+
+/* PIN B9, PADEE functionality */
+#define PINB9_PADEE                          0X1B0U
+#define PINB9_PADEE_GPIO_26                  0X0U
+#define PINB9_PADEE_RCSS_UARTA_RTS           0X1U
+#define PINB9_PADEE_GPIO_8                   0X2U
+#define PINB9_PADEE_DSS_UARTA_TX             0X3U
+#define PINB9_PADEE_RCSS_ECAPA_SYNCOUT       0X4U
+#define PINB9_PADEE_RCSS_MCASPA_DAT12        0X8U
+#define PINB9_PADEE_RCSS_GPIO_58             0XCU
+
+/* PIN A8, PADEF functionality */
+#define PINA8_PADEF                          0X1B4U
+#define PINA8_PADEF_GPIO_27                  0X0U
+#define PINA8_PADEF_RCSS_UARTA_CTS           0X1U
+#define PINA8_PADEF_GPIO_9                   0X2U
+#define PINA8_PADEF_DSS_UARTA_RX             0X3U
+#define PINA8_PADEF_RCSS_MCASPA_DAT13        0X8U
+#define PINA8_PADEF_RCSS_GPIO_59             0XCU
+
+/* PIN B8, PADEG functionality */
+#define PINB8_PADEG                          0X1B8U
+#define PINB8_PADEG_GPIO_28                  0X0U
+#define PINB8_PADEG_RCSS_UARTA_TX            0X1U
+#define PINB8_PADEG_GPIO_10                  0X2U
+#define PINB8_PADEG_I2CA_SDA                 0X5U
+#define PINB8_PADEG_RCSS_MCASPA_DAT14        0X8U
+#define PINB8_PADEG_RCSS_GPIO_60             0XCU
+
+/* PIN A7, PADEH functionality */
+#define PINA7_PADEH                          0X1BCU
+#define PINA7_PADEH_GPIO_29                  0X0U
+#define PINA7_PADEH_RCSS_UARTA_RX            0X1U
+#define PINA7_PADEH_GPIO_11                  0X2U
+#define PINA7_PADEH_I2CA_SCL                 0X5U
+#define PINA7_PADEH_RCSS_MCASPA_DAT15        0X8U
+#define PINA7_PADEH_RCSS_GPIO_61             0XCU
+/* General pin configurations */
+#define PIN_SLEW_BITPOS                 10U
+#define PIN_SLEW_CONTROL_MASK          (~(uint32)((uint32)0x1U << PIN_SLEW_BITPOS))
+#define SLEW_HIGH                      ((uint32)((uint32)0x1U << PIN_SLEW_BITPOS))
+#define SLEW_LOW                       ((uint32)((uint32)0x0U << PIN_SLEW_BITPOS))
+
+#define PIN_PULL_BITPOS                 0x9U
+#define PIN_PULL_SELECT_MASK            (~(uint32)((uint32)0x1U << PIN_PULL_BITPOS))
+#define PULLUP_EN                       ((uint32)((uint32)0x1U << PIN_PULL_BITPOS))
+#define PULLDOWN_EN                     ((uint32)((uint32)0x0U << PIN_PULL_BITPOS))
+
+
+#define PIN_PULL_INHIBIT_BITPOS         0x8U
+#define PIN_PULL_INHIBIT_MASK           (~(uint32)((uint32)0x1U << PIN_PULL_INHIBIT_BITPOS))
+#define PIN_PULL_INHIBIT_DISABLE         ((uint32)((uint32)0x1U << PIN_PULL_INHIBIT_BITPOS))
+#define PIN_PULL_INHIBIT_ENABLE        ((uint32)((uint32)0x0U << PIN_PULL_INHIBIT_BITPOS))
+
+#define OUTPUT_EN_BITPOS                0x7U
+#define PIN_OUTEN_MASK                  (~(uint32)((uint32)0x1U << OUTPUT_EN_BITPOS))
+#define OUTPUT_EN                       ((uint32)((uint32)0x1U << OUTPUT_EN_BITPOS))
+#define OUTPUT_DIS                      ((uint32)((uint32)0x0U << OUTPUT_EN_BITPOS))
+#define OUTEN_RETAIN_HW_CTRL            0x2U
+
+#define OUTEN_OVRRIDE_BITPOS            0x6U
+#define PIN_OUTEN_OVRRIDE_MASK          (~(uint32)((uint32)0x1U << OUTEN_OVRRIDE_BITPOS))
+#define OUTEN_OVRRIDE_EN                ((uint32)((uint32)0x1U << OUTEN_OVRRIDE_BITPOS))
+
+
+#define INPUT_EN_BITPOS                 0x5U
+#define PIN_INPUTEN_MASK                (~(uint32)((uint32)0x1U << INPUT_EN_BITPOS))
+#define INPUT_EN                        ((uint32)((uint32)0x1U << INPUT_EN_BITPOS))
+#define INPUT_DIS                       ((uint32)((uint32)0x0U << INPUT_EN_BITPOS))
+#define INPEN_RETAIN_HW_CTRL            0x2U
+
+#define INPEN_OVRRIDE_BITPOS            0x4U
+#define PIN_INPEN_OVRRIDE_MASK          (~(uint32)((uint32)0x1U << INPEN_OVRRIDE_BITPOS))
+#define INPEN_OVRRIDE_EN                ((uint32)((uint32)0x1U << INPEN_OVRRIDE_BITPOS))
+
+
+#define PIN_FUNCTION_SEL_MASK          (~(uint32)((uint32)0xFU))
+
+/*MCU Reset Reason Value*/
+
+#define MCU_RST_CAUSE_NRST                  (uint32)0x09U
+#define MCU_RST_CAUSE_EXT_WARM_RST          (uint32)0x08U
+#define MCU_RST_CAUSE_MSS_WARM_RST          (uint32)0xAU
+#define MCU_RST_CAUSE_SW_TRIG_WARM_RST      (uint32)0xCU
+#define MCU_RST_CAUSE_POWER_ON_RST          (uint32)0x0U
+
+
+/*! \brief
+* SCI BAUD RATE CONST enum
+* Baud value = (Clock/(16*(baud rate))) - 1
+* 1e6/(30*16*baud_rate)*2^18
+*/
+#define M_SCI_BAUD_CONST_19200_S18      (28444U)
+#define M_SCI_BAUD_CONST_38400_S18      (14222U)
+#define M_SCI_BAUD_CONST_57600_S18      (9481U)
+#define M_SCI_BAUD_CONST_115200_S18     (4741U)
+#define M_SCI_BAUD_CONST_460800_S18     (1185U)
+#define M_SCI_BAUD_CONST_921600_S18     (593U)
+
+
+#define MIBSPI_START_MSG_WR_OFFSET           (0U)
+#define FILETYPE_BSS_BUILD                   (0U)
+#define FILETYPE_CALIB_DATA                  (1U)
+#define FILETYPE_CONFIG_INFO                 (2U)
+#define FILETYPE_MSS_BUILD                   (3U)
+
+#define MAGIC_HEADER_BSS_ROM                 (0xB55A03D1U)
+#define MAGIC_HEADER_BSS_PATCH               (0xB559A71FU)
+#define MAGIC_HEADER_MSS_ROM                 (0x355A03D1U)
+#define MAGIC_HEADER_MSS_PATCH               (0x3559A71FU)
+
+#define MAGIC_HEADER_CALIB_DATA              (0xCA11BDA7U)
+#define MAGIC_HEADER_CONFIG_INFO             (0xC0F1618FU)
+
+
+#define MSG_RX_MAX_SIZE                (512U)
+
+
+/* Memory initialization selections - MSS */
+#define INIT_CR4TCMAMEM                         (uint32)((uint32)1U << 0U)
+#define INIT_CR4TCMBMEM                         (uint32)((uint32)1U << 1U)
+#define INIT_DMAMEM                             (uint32)((uint32)1U << 2U)
+#define INIT_VIMMEM                             (uint32)((uint32)1U << 3U)
+#define INIT_SPIAMEM                            (uint32)((uint32)1U << 4U)
+#define INIT_SPIBMEM                            (uint32)((uint32)1U << 5U)
+#define INIT_MSSMBOX4BSSMEM                     (uint32)((uint32)1U << 7U)
+#define INIT_BSSMBOX4MSSMEM                     (uint32)((uint32)1U << 8U)
+#define INIT_DMA2MEM                            (uint32)((uint32)1U << 9U)
+#define INIT_GEMMBOX4BSSMEM                     (uint32)((uint32)1U << 14U)
+#define INIT_GEMMBOX4MSSMEM                     (uint32)((uint32)1U << 15U)
+#define INIT_MSSMBOX4GEMMEM                     (uint32)((uint32)1U << 16U)
+#define INIT_BSSMBOX4GEMMEM                     (uint32)((uint32)1U << 17U)
+
+
+#define SPANSION_DEV                  0x01U
+#define MACRONIX_DEV                  0xC2U
+
+/** @def QSPI clock control
+*   @brief qspi dclock on off
+*   @note This value used for clock settings
+*/
+#define QSPI_CLK_CTRL_CLKEN_DCLOCK_OFF        (0U)
+
+/** @def QSPI_CLK_CTRL_CLKEN_DCLOCK_ON
+*   @brief Alias for QSPI clock control dclock on
+*/
+#define QSPI_CLK_CTRL_CLKEN_DCLOCK_ON         (1U)
+
+/** @def QSPI_CC_REG_DCLK_DIVISOR
+*   @brief Alias for QSPI clock divisor
+*   @note This value used for QSPI clock settings
+*/
+#define QSPI_CC_REG_DCLK_DIVISOR              (0x9U)  /* div value = div + 1 */
+
+
+/** @def QSPI_WLEN_1_BIT
+*   @brief Alias for QSPI data word length selection - 1 bit
+*/
+#define QSPI_WLEN_1_BIT    (0x0U)
+
+/** @def QSPI_WLEN_8_BITS
+*   @brief Alias for QSPI data word length selection - 8 bit
+*/
+#define QSPI_WLEN_8_BITS   (0x7U)
+
+/** @def QSPI_WLEN_16_BITS
+*   @brief Alias for QSPI data word length selection - 16 bit
+*/
+#define QSPI_WLEN_16_BITS  (0xFU)
+
+/** @def QSPI_WLEN_24_BITS
+*   @brief Alias for QSPI data word length selection - 24 bit
+*/
+#define QSPI_WLEN_24_BITS  (0x17U)
+
+/** @def QSPI_WLEN_32_BITS
+*   @brief Alias for QSPI data word length selection - 32 bit
+*/
+#define QSPI_WLEN_32_BITS  (0x1FU)
+
+/** @def QSPI_WLEN_128_BITS
+*   @brief Alias for QSPI data word length selection - 128 bit
+*/
+#define QSPI_WLEN_128_BITS (0x7FU)
+
+/** @def TRANS_CMD_RSV
+*   @brief Alias for QSPI PIN Mode Read-Write Command - Reserved
+*/
+#define TRANS_CMD_RSV      (0x0U)
+
+/** @def TRANS_CMD_4RDS
+*   @brief Alias for QSPI PIN Mode Read-Write Command - 4 Pin Read Single
+*/
+#define TRANS_CMD_4RDS     (0x1U)
+
+/** @def TRANS_CMD_4WRS
+*   @brief Alias for QSPI PIN Mode Read-Write Command - 4 Pin Write Single
+*/
+#define TRANS_CMD_4WRS     (0x2U)
+
+/** @def TRANS_CMD_4RDD
+*   @brief Alias for QSPI PIN Mode Read-Write Command - 4 Pin Read Dual
+*/
+#define TRANS_CMD_4RDD     (0x3U)
+
+/** @def TRANS_CMD_RSV1
+*   @brief Alias for QSPI PIN Mode Read-Write Command - Reserved
+*/
+#define TRANS_CMD_RSV1     (0x4U)
+
+/** @def TRANS_CMD_3RDS
+*   @brief Alias for QSPI PIN Mode Read-Write Command - 3 Pin Read Single
+*/
+#define TRANS_CMD_3RDS     (0x5U)
+
+/** @def TRANS_CMD_3WRS
+*   @brief Alias for QSPI PIN Mode Read-Write Command - 3 Pin Write Single
+*/
+#define TRANS_CMD_3WRS     (0x6U)
+
+/** @def TRANS_CMD_6RDQ
+*   @brief Alias for QSPI PIN Mode Read-Write Command - 3 Pin Write Single
+*/
+#define TRANS_CMD_6RDQ     (0x7U)
+
+/** @def QSPI_FLEN_1_WORD
+*   @brief Alias for QSPI data frame length selection - 1 word
+*/
+#define QSPI_FLEN_1_WORD  (0x0U)
+
+/** @def QSPI_FLEN_2_WORDS
+*   @brief Alias for QSPI data frame length selection - 2 word
+*/
+#define QSPI_FLEN_2_WORDS (0x1U)
+
+/** @def QSPI_FLEN_3_WORDS
+*   @brief Alias for QSPI data frame length selection - 3 word
+*/
+#define QSPI_FLEN_3_WORDS (0x2U)
+
+/** @def QSPI_FLEN_4_WORDS
+*   @brief Alias for QSPI data frame length selection - 4 word
+*/
+#define QSPI_FLEN_4_WORDS (0x3U)
+
+/** @def QSPI_FLEN_5_WORDS
+*   @brief Alias for QSPI data frame length selection - 5 word
+*/
+#define QSPI_FLEN_5_WORDS (0x4U)
+
+/** @def QSPI_FLEN_6_WORDS
+*   @brief Alias for QSPI data frame length selection - 6 word
+*/
+#define QSPI_FLEN_6_WORDS (0x5U)
+
+/** @def QSPI_FLEN_7_WORDS
+*   @brief Alias for QSPI data frame length selection - 7 word
+*/
+#define QSPI_FLEN_7_WORDS (0x6U)
+
+/** @def QSPI_FLEN_8_WORDS
+*   @brief Alias for QSPI data frame length selection - 8 word
+*/
+#define QSPI_FLEN_8_WORDS (0x7U)
+
+/** @enum qspiAddressSpace
+*   @brief qspi address space
+*   @note This is used for config and memmap mode switch
+*/
+typedef enum qspiAddressSpace{
+    QSPI_CFG_MODE = 0x0U,
+    QSPI_MM_MODE  = 0x1U
+}qspiAddressSpace_t;
+
+/** @enum qspiRdWrWLen_t
+*   @brief QSPI data transfer word length deff
+*/
+typedef enum{
+    QSPI_RDWR_WLEN_1TO32     = 0x1U,
+    QSPI_RDWR_WLEN_33TO64    = 0x2U,
+    QSPI_RDWR_WLEN_65TO96    = 0x3U,
+    QSPI_RDWR_WLEN_97TO128   = 0x4U
+}qspiRdWrWLen_t;
+
+/** @struct qspiMEMSETUP
+*   @brief used to configure memorymap operation
+*
+*/
+typedef struct
+{
+    uint32 NUMDBITS;    /* No of dummy bits */
+    uint32 WRITECMD;    /* Write mode command */
+    uint32 READTYP;        /* normal or dual or quad dead */
+    uint32 NUMDBYTES;    /* No of dummy bytes */
+    uint32 NUMABYTES;    /* No of address byte for fast read */
+    uint32 READCMD;        /* Read mode command */
+}qspiMMSetupReg_t;
+
+/** @struct qspi_config_reg
+*   @brief used to configure qspi
+*
+*/
+typedef struct
+{
+    uint32 CONFIG_SPICLKCTRL;
+    uint32 CONFIG_SPIDC;
+} qspiConfigReg_t;
+
+/** @def QSPI_SPICLKCTRL_CONFIGVALUE
+*   @brief Alias for default registers configurations
+*
+*/
+#define QSPI_SPICLKCTRL_CONFIGVALUE     (((uint32)((uint32)QSPI_CLK_CTRL_CLKEN_DCLOCK_ON << 31U)) \
+                                        | ((uint32)QSPI_CC_REG_DCLK_DIVISOR))
+
+/** @def QSPI_SPIDC_CONFIGVALUE
+*   @brief Alias for
+*/
+#define QSPI_SPIDC_CONFIGVALUE          ((uint32)((uint32)0U << 27U) \
+                                        | (uint32)((uint32)0U << 26U) \
+                                        | (uint32)((uint32)0U << 25U) \
+                                        | (uint32)((uint32)0U << 24U) \
+                                        | (uint32)((uint32)0U << 19U) \
+                                        | (uint32)((uint32)0U << 18U) \
+                                        | (uint32)((uint32)0U << 17U) \
+                                        | (uint32)((uint32)0U << 16U) \
+                                        | (uint32)((uint32)0U << 11U) \
+                                        | (uint32)((uint32)0U << 10U) \
+                                        | (uint32)((uint32)0U << 9U) \
+                                        | (uint32)((uint32)0U << 8U) \
+                                        | (uint32)((uint32)0U << 3U) \
+                                        | (uint32)((uint32)0U << 2U) \
+                                        | (uint32)((uint32)0U << 1U) \
+                                        | (uint32)((uint32)0U << 0 ))
+
+
+
+#ifdef __cplusplus
+}
+#endif
+#endif  /* HW_CTRL_CORE_H_ */
+
+

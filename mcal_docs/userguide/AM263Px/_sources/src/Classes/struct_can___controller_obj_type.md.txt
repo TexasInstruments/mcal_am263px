@@ -1,0 +1,37 @@
+---
+orphan: true
+---
+
+---
+title: Can_ControllerObjType
+summary: Can controller object strucuture. 
+
+---
+
+# Can_ControllerObjType
+
+
+
+Can controller object strucuture. 
+
+
+`#include <Can_Priv.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  boolean | canBusOffRecoveryStatus |  |
+|  uint8 | canInterruptCounter |  |
+|  uint32 | canInterruptMask |  |
+|  uint16 | canBaud |  |
+|  uint8[(64U)] | canSduPtr |  |
+|  [Can_ControllerType](../Classes/struct_can___controller_type.md) | canControllerConfig |  |
+|  [Can_ControllerType_PC](../Classes/struct_can___controller_type___p_c.md) | canControllerConfig_PC |  |
+|  uint32 | maxBaudConfigID |  |
+|  Can_ControllerStateType | canState |  |
+|  Can_HwType | mailboxCfg |  |
+|  PduInfoType | pduInfo |  |
+|  [Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) | canFDMsgRamConfig |  |
+
+

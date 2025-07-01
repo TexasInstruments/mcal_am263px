@@ -1,0 +1,104 @@
+---
+title: APIs for SOC Xbars
+
+---
+
+# DRV_SOC_XBAR_MODULE
+
+ [More...](#detailed-description)
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_DMA_CSL_CONTROLSS_DMAXBAR_STEP   |  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Cdd_Dma_Soc_xbarSelectDmaXBarInputSource](../Modules/group___d_r_v___s_o_c___x_b_a_r___m_o_d_u_l_e.md#function-cdd_dma_soc_xbarselectdmaxbarinputsource)**(uint32 base, uint8 out, uint8 group_select, uint8 group0_muxctl, uint8 group1_muxctl, uint8 group2_muxctl, uint8 group3_muxctl, uint8 group4_muxctl, uint8 group5_muxctl)| Trip & Sync xbar: API to select input source of DMA XBar.  |
+| void | **[Cdd_Dma_Soc_xbarSelectEdmaTrigXbarInputSource](../Modules/group___d_r_v___s_o_c___x_b_a_r___m_o_d_u_l_e.md#function-cdd_dma_soc_xbarselectedmatrigxbarinputsource)**(uint32 base, uint8 out, uint8 mux_control)| SoC level xbars: API to select input source of EDMA Trigger XBar.  |
+
+
+
+### function Cdd_Dma_Soc_xbarSelectDmaXBarInputSource
+
+```
+static inline void Cdd_Dma_Soc_xbarSelectDmaXBarInputSource(
+    uint32 base,
+    uint8 out,
+    uint8 group_select,
+    uint8 group0_muxctl,
+    uint8 group1_muxctl,
+    uint8 group2_muxctl,
+    uint8 group3_muxctl,
+    uint8 group4_muxctl,
+    uint8 group5_muxctl
+)
+```
+
+
+**Brief**: 
+Trip & Sync xbar: API to select input source of DMA XBar. 
+
+**Parameters**: 
+
+  
+* **base** [in] DMA XBar base address 
+  
+* **out** [in] Instance of DMA XBar 
+  
+* **group0_muxctl** [in] Mux control to select input from group 0 mux 
+  
+* **group1_muxctl** [in] Mux control to select input from group 1 mux 
+  
+* **group2_muxctl** [in] Mux control to select input from group 2 mux 
+  
+* **group3_muxctl** [in] Mux control to select input from group 3 mux 
+  
+* **group4_muxctl** [in] Mux control to select input from group 4 mux 
+  
+* **group5_muxctl** [in] Mux control to select input from group 5 mux 
+  
+* **group_select** [in] Mux control to select group 0/1/2/3/4/5 
+
+
+### function Cdd_Dma_Soc_xbarSelectEdmaTrigXbarInputSource
+
+```
+static inline void Cdd_Dma_Soc_xbarSelectEdmaTrigXbarInputSource(
+    uint32 base,
+    uint8 out,
+    uint8 mux_control
+)
+```
+
+
+**Brief**: 
+SoC level xbars: API to select input source of EDMA Trigger XBar. 
+
+**Parameters**: 
+
+  
+* **base** [in] EDMA Trigger XBar base address 
+  
+* **out** [in] Instance of EDMA Trigger XBar 
+  
+* **mux_control** [in] Mux control to select input source 
+
+
+
+## Detailed Description
+
+
+For more details and example usage, see DRIVERS_SOC_PAGE 
+
+
+
+

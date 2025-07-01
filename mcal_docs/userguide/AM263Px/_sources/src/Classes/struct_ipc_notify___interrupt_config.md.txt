@@ -1,0 +1,42 @@
+---
+orphan: true
+---
+
+---
+title: IpcNotify_InterruptConfig
+summary: This structure describes the information related to one interrupt that is setup for receiving mailbox messages. 
+
+---
+
+# IpcNotify_InterruptConfig
+
+
+
+This structure describes the information related to one interrupt that is setup for receiving mailbox messages.  [More...](#detailed-description)
+
+
+`#include <ipc_notify_v1_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | intNum |  |
+|  uint32 | eventId |  |
+|  uint8 | numCores |  |
+|  uint8[MCAL_CSL_CORE_ID_MAX] | coreIdList |  |
+|  uint32 | clearIntOnInit |  |
+
+## Detailed Description
+
+```cpp
+struct IpcNotify_InterruptConfig;
+```
+
+
+**Brief**: 
+This structure describes the information related to one interrupt that is setup for receiving mailbox messages. 
+
+One interrupt can be used to handle messages from multiple cores. 
+
+

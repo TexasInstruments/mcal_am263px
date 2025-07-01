@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.14. ICU &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.15. LIN" href="group___l_i_n.html" />
+    <link rel="prev" title="5.13. GPT" href="group___g_p_t.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                10.02.01
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">5.8. CDD_IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.14. ICU</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types">5.14.1. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-modetype">5.14.1.1. enum Icu_ModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-inputstatetype">5.14.1.2. enum Icu_InputStateType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-activationtype">5.14.1.3. enum Icu_ActivationType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-xbarselect">5.14.1.4. enum Icu_XbarSelect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-intrcapselect">5.14.1.5. enum Icu_IntrCapSelect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-measurementmodetype">5.14.1.6. enum Icu_MeasurementModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-signalmeasurementpropertytype">5.14.1.7. enum Icu_SignalMeasurementPropertyType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-icu-timestampbuffertype">5.14.1.8. enum Icu_TimestampBufferType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-icu-valuetype">5.14.1.9. typedef Icu_ValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-icu-indextype">5.14.1.10. typedef Icu_IndexType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-icu-edgenumbertype">5.14.1.11. typedef Icu_EdgeNumberType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-icu-notifyfunctype">5.14.1.12. typedef Icu_NotifyFuncType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-icu-channeltype">5.14.1.13. typedef Icu_ChannelType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-icu-channelprescalertype">5.14.1.14. typedef Icu_ChannelPrescalerType</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">5.14.2. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.14.3. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.14.4. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-init">5.14.4.1. function Icu_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-deinit">5.14.4.2. function Icu_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-setactivationcondition">5.14.4.3. function Icu_SetActivationCondition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-disablenotification">5.14.4.4. function Icu_DisableNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-enablenotification">5.14.4.5. function Icu_EnableNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-getinputstate">5.14.4.6. function Icu_GetInputState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-starttimestamp">5.14.4.7. function Icu_StartTimestamp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-stoptimestamp">5.14.4.8. function Icu_StopTimestamp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-gettimestampindex">5.14.4.9. function Icu_GetTimestampIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-resetedgecount">5.14.4.10. function Icu_ResetEdgeCount</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-enableedgecount">5.14.4.11. function Icu_EnableEdgeCount</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-disableedgecount">5.14.4.12. function Icu_DisableEdgeCount</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-getedgenumbers">5.14.4.13. function Icu_GetEdgeNumbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-enableedgedetection">5.14.4.14. function Icu_EnableEdgeDetection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-disableedgedetection">5.14.4.15. function Icu_DisableEdgeDetection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-startsignalmeasurement">5.14.4.16. function Icu_StartSignalMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-stopsignalmeasurement">5.14.4.17. function Icu_StopSignalMeasurement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-gettimeelapsed">5.14.4.18. function Icu_GetTimeElapsed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-getdutycyclevalues">5.14.4.19. function Icu_GetDutyCycleValues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-checkwakeup">5.14.4.20. function Icu_CheckWakeup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-disablewakeup">5.14.4.21. function Icu_DisableWakeup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-enablewakeup">5.14.4.22. function Icu_EnableWakeup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-setmode">5.14.4.23. function Icu_SetMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-icu-registerreadback">5.14.4.24. function Icu_RegisterReadback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">5.14. </span>ICU</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="icu">
+<h1><span class="section-number">5.14. </span>ICU<a class="headerlink" href="#icu" title="Link to this heading"></a></h1>
+<section id="types">
+<h2><span class="section-number">5.14.1. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base type</p></th>
+<th class="head"><p>Type Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-modetype"><span class="std std-ref">Icu_ModeType</span></a></strong></p></td>
+<td><p>This type defines a range of mode type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-inputstatetype"><span class="std std-ref">Icu_InputStateType</span></a></strong></p></td>
+<td><p>This type defines a input state of ICU driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-activationtype"><span class="std std-ref">Icu_ActivationType</span></a></strong></p></td>
+<td><p>This type defines Activation range.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-xbarselect"><span class="std std-ref">Icu_XbarSelect</span></a></strong></p></td>
+<td><p>This type defines Input XBAR.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-intrcapselect"><span class="std std-ref">Icu_IntrCapSelect</span></a></strong></p></td>
+<td><p>This type defines ECAP selection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-measurementmodetype"><span class="std std-ref">Icu_MeasurementModeType</span></a></strong></p></td>
+<td><p>This type defines available measurement modes.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-signalmeasurementpropertytype"><span class="std std-ref">Icu_SignalMeasurementPropertyType</span></a></strong></p></td>
+<td><p>This type defines Signal Measurement Property range.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-icu-timestampbuffertype"><span class="std std-ref">Icu_TimestampBufferType</span></a></strong></p></td>
+<td><p>This type defines TimeStamp Property range.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef uint16</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-icu-valuetype"><span class="std std-ref">Icu_ValueType</span></a></strong></p></td>
+<td><p>This type defines Value type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef uint32</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-icu-indextype"><span class="std std-ref">Icu_IndexType</span></a></strong></p></td>
+<td><p>This type defines return value Icu_GetTimeStampIndex.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef uint32</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-icu-edgenumbertype"><span class="std std-ref">Icu_EdgeNumberType</span></a></strong></p></td>
+<td><p>This type defines return value of Icu-Icu_GetEdgeNumbers.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef void(*)(void)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-icu-notifyfunctype"><span class="std std-ref">Icu_NotifyFuncType</span></a></strong></p></td>
+<td><p>Notification callback function pointer.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef uint8</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a></strong></p></td>
+<td><p>This type defines Channel type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef uint8</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-icu-channelprescalertype"><span class="std std-ref">Icu_ChannelPrescalerType</span></a></strong></p></td>
+<td><p>This type defines Prescaler type.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="enum-icu-modetype">
+<h3><span class="section-number">5.14.1.1. </span>enum Icu_ModeType<a class="headerlink" href="#enum-icu-modetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICU_MODE_NORMAL</p></td>
+<td><p></p></td>
+<td><p>Normal Mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_MODE_SLEEP</p></td>
+<td><p></p></td>
+<td><p>Sleep Mode.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines a range of mode type.</p>
+</section>
+<section id="enum-icu-inputstatetype">
+<h3><span class="section-number">5.14.1.2. </span>enum Icu_InputStateType<a class="headerlink" href="#enum-icu-inputstatetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICU_ACTIVE</p></td>
+<td><p></p></td>
+<td><p>Module is in active state.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_IDLE</p></td>
+<td><p></p></td>
+<td><p>Module is in idle state.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines a input state of ICU driver.</p>
+</section>
+<section id="enum-icu-activationtype">
+<h3><span class="section-number">5.14.1.3. </span>enum Icu_ActivationType<a class="headerlink" href="#enum-icu-activationtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICU_RISING_EDGE</p></td>
+<td><p></p></td>
+<td><p>Rising Edge Activation type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_FALLING_EDGE</p></td>
+<td><p></p></td>
+<td><p>Falling Edge Activation type.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_BOTH_EDGES</p></td>
+<td><p></p></td>
+<td><p>Both Edge Activation type.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines Activation range.</p>
+</section>
+<section id="enum-icu-xbarselect">
+<h3><span class="section-number">5.14.1.4. </span>enum Icu_XbarSelect<a class="headerlink" href="#enum-icu-xbarselect" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>INPUT_XBAR_0</p></td>
+<td><p>202</p></td>
+<td><p>XBAR 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_1</p></td>
+<td><p></p></td>
+<td><p>XBAR 1.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_2</p></td>
+<td><p></p></td>
+<td><p>XBAR 2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_3</p></td>
+<td><p></p></td>
+<td><p>XBAR 3.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_4</p></td>
+<td><p></p></td>
+<td><p>XBAR 4.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_5</p></td>
+<td><p></p></td>
+<td><p>XBAR 5.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_6</p></td>
+<td><p></p></td>
+<td><p>XBAR 6.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_7</p></td>
+<td><p></p></td>
+<td><p>XBAR 7.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_8</p></td>
+<td><p></p></td>
+<td><p>XBAR 8.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_9</p></td>
+<td><p></p></td>
+<td><p>XBAR 9.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_10</p></td>
+<td><p></p></td>
+<td><p>XBAR 10.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_11</p></td>
+<td><p></p></td>
+<td><p>XBAR 11.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_12</p></td>
+<td><p></p></td>
+<td><p>XBAR 12.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_13</p></td>
+<td><p></p></td>
+<td><p>XBAR 13.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_14</p></td>
+<td><p></p></td>
+<td><p>XBAR 14.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_15</p></td>
+<td><p></p></td>
+<td><p>XBAR 15.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_16</p></td>
+<td><p></p></td>
+<td><p>XBAR 16.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_17</p></td>
+<td><p></p></td>
+<td><p>XBAR 17.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_18</p></td>
+<td><p></p></td>
+<td><p>XBAR 18.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_19</p></td>
+<td><p></p></td>
+<td><p>XBAR 19.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_20</p></td>
+<td><p></p></td>
+<td><p>XBAR 20.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_21</p></td>
+<td><p></p></td>
+<td><p>XBAR 21.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_22</p></td>
+<td><p></p></td>
+<td><p>XBAR 22.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_23</p></td>
+<td><p></p></td>
+<td><p>XBAR 23.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_24</p></td>
+<td><p></p></td>
+<td><p>XBAR 24.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_25</p></td>
+<td><p></p></td>
+<td><p>XBAR 25.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_26</p></td>
+<td><p></p></td>
+<td><p>XBAR 26.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_27</p></td>
+<td><p></p></td>
+<td><p>XBAR 27.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_28</p></td>
+<td><p></p></td>
+<td><p>XBAR 28.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_29</p></td>
+<td><p></p></td>
+<td><p>XBAR 29.</p></td>
+</tr>
+<tr class="row-even"><td><p>INPUT_XBAR_30</p></td>
+<td><p></p></td>
+<td><p>XBAR 30.</p></td>
+</tr>
+<tr class="row-odd"><td><p>INPUT_XBAR_31</p></td>
+<td><p></p></td>
+<td><p>XBAR 31.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines Input XBAR.</p>
+</section>
+<section id="enum-icu-intrcapselect">
+<h3><span class="section-number">5.14.1.5. </span>enum Icu_IntrCapSelect<a class="headerlink" href="#enum-icu-intrcapselect" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ECAP_CEVT1_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ECAP_CEVT2_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ECAP_CEVT3_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ECAP_CEVT4_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ECAP_CEVT1_CEVT2_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ECAP_CEVT1_CEVT3_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ECAP_CEVT1_CEVT4_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ECAP_CEVT2_CEVT3_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ECAP_CEVT2_CEVT4_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ECAP_CEVT3_CEVT4_INT</p></td>
+<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ECAP_CEVT1_CEVT2_CEVT3_INT</p></td>
+<td><p>=</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK \| CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK \| CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK|   |
+</pre></div>
+</div>
+<p>| ECAP_CEVT1_CEVT2_CEVT4_INT | =
+CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |
+| ECAP_CEVT1_CEVT3_CEVT4_INT | =
+CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |
+| ECAP_CEVT2_CEVT3_CEVT4_INT | =
+CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |
+| ECAP_INT_ALLCAPS | CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK |
+CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |</p>
+<p><strong>Brief</strong>:
+This type defines ECAP selection.</p>
+</section>
+<section id="enum-icu-measurementmodetype">
+<h3><span class="section-number">5.14.1.6. </span>enum Icu_MeasurementModeType<a class="headerlink" href="#enum-icu-measurementmodetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICU_MODE_SIGNAL_EDGE_DETECT</p></td>
+<td><p></p></td>
+<td><p>Signal Edge Detect Mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_MODE_SIGNAL_MEASUREMENT</p></td>
+<td><p></p></td>
+<td><p>Signal measurement Mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_MODE_TIMESTAMP</p></td>
+<td><p></p></td>
+<td><p>Signal Timestamp Mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_MODE_EDGE_COUNTER</p></td>
+<td><p></p></td>
+<td><p>Signal Edge counter Mode.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines available measurement modes.</p>
+</section>
+<section id="enum-icu-signalmeasurementpropertytype">
+<h3><span class="section-number">5.14.1.7. </span>enum Icu_SignalMeasurementPropertyType<a class="headerlink" href="#enum-icu-signalmeasurementpropertytype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICU_LOW_TIME</p></td>
+<td><p></p></td>
+<td><p>Signal Low time.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_HIGH_TIME</p></td>
+<td><p></p></td>
+<td><p>Signal High time.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_PERIOD_TIME</p></td>
+<td><p></p></td>
+<td><p>Signal Period time.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_DUTY_CYCLE</p></td>
+<td><p></p></td>
+<td><p>Signal Duty Cycle time.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines Signal Measurement Property range.</p>
+</section>
+<section id="enum-icu-timestampbuffertype">
+<h3><span class="section-number">5.14.1.8. </span>enum Icu_TimestampBufferType<a class="headerlink" href="#enum-icu-timestampbuffertype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICU_LINEAR_BUFFER</p></td>
+<td><p></p></td>
+<td><p>Linear Buffer to be used in Timestamp.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_CIRCULAR_BUFFER</p></td>
+<td><p></p></td>
+<td><p>Circular Buffer to be used in Timestamp.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines TimeStamp Property range.</p>
+</section>
+<section id="typedef-icu-valuetype">
+<h3><span class="section-number">5.14.1.9. </span>typedef Icu_ValueType<a class="headerlink" href="#typedef-icu-valuetype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">Icu_ValueType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type defines Value type.</p>
+</section>
+<section id="typedef-icu-indextype">
+<h3><span class="section-number">5.14.1.10. </span>typedef Icu_IndexType<a class="headerlink" href="#typedef-icu-indextype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Icu_IndexType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type defines return value Icu_GetTimeStampIndex.</p>
+</section>
+<section id="typedef-icu-edgenumbertype">
+<h3><span class="section-number">5.14.1.11. </span>typedef Icu_EdgeNumberType<a class="headerlink" href="#typedef-icu-edgenumbertype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Icu_EdgeNumberType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type defines return value of Icu-Icu_GetEdgeNumbers.</p>
+</section>
+<section id="typedef-icu-notifyfunctype">
+<h3><span class="section-number">5.14.1.12. </span>typedef Icu_NotifyFuncType<a class="headerlink" href="#typedef-icu-notifyfunctype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Icu_NotifyFuncType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Notification callback function pointer.</p>
+</section>
+<section id="typedef-icu-channeltype">
+<h3><span class="section-number">5.14.1.13. </span>typedef Icu_ChannelType<a class="headerlink" href="#typedef-icu-channeltype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Icu_ChannelType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type defines Channel type.</p>
+</section>
+<section id="typedef-icu-channelprescalertype">
+<h3><span class="section-number">5.14.1.14. </span>typedef Icu_ChannelPrescalerType<a class="headerlink" href="#typedef-icu-channelprescalertype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Icu_ChannelPrescalerType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type defines Prescaler type.</p>
+</section>
+</section>
+<section id="structures">
+<h2><span class="section-number">5.14.2. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_icu___duty_cycle_type.html"><span class="std std-doc">Icu_DutyCycleType</span></a></strong></p></td>
+<td><p>This type defines Duty Cycle struct.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_icu___channel_config_type___p_c.html"><span class="std std-doc">Icu_ChannelConfigType_PC</span></a></strong></p></td>
+<td><p>ICU Channel Config Structure of Pre-Compile only.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_icu___config_type___p_c.html"><span class="std std-doc">Icu_ConfigType_PC</span></a></strong></p></td>
+<td><p>ICU Config Structure of Pre-Compile only.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_icu___channel_config_type.html"><span class="std std-doc">Icu_ChannelConfigType</span></a></strong></p></td>
+<td><p>ICU Channel Config Structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_icu___config_type.html"><span class="std std-doc">Icu_ConfigType</span></a></strong></p></td>
+<td><p>ICU Config Structure.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="defines">
+<h2><span class="section-number">5.14.3. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ICU_VENDOR_ID</p></td>
+<td><p>Texas Instruments Vendor ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_MODULE_ID</p></td>
+<td><p>ICU Driver Module ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_INSTANCE_ID</p></td>
+<td><p>ICU Driver Instance ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_SW_MAJOR_VERSION</p></td>
+<td><p>Driver Implementation Major Version.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_SW_MINOR_VERSION</p></td>
+<td><p>Driver Implementation Minor Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_SW_PATCH_VERSION</p></td>
+<td><p>Driver Implementation Patch Version.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_AR_RELEASE_MAJOR_VERSION</p></td>
+<td><p>AUTOSAR Major version specification implemented by ICU Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_AR_RELEASE_MINOR_VERSION</p></td>
+<td><p>AUTOSAR Minor version specification implemented by ICU Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_AR_RELEASE_REVISION_VERSION</p></td>
+<td><p>AUTOSAR Patch version specification implemented by ICU Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_ISR_VOID</p></td>
+<td><p>void ISR type</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_ISR_CAT1</p></td>
+<td><p>Category 1 ISR type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_ISR_CAT2</p></td>
+<td><p>Category 2 ISR type.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_INIT_ID</p></td>
+<td><p>Icu_Init() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_DEINIT_ID</p></td>
+<td><p>Icu_DeInit() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_SETMODE_ID</p></td>
+<td><p>Icu_SetMode() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_SETACTIVATIONCONDITION_ID</p></td>
+<td><p>Icu_SetActivationCondition() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_DISABLENOTIFICATION_ID</p></td>
+<td><p>Icu_DisableNotification() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_ENABLENOTIFICATION_ID</p></td>
+<td><p>Icu_EnableNotification() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_GETINPUTSTATE_ID</p></td>
+<td><p>Icu_GetInputState() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_STARTTIMESTAMP_ID</p></td>
+<td><p>Icu_StartTimestamp() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_STOPTIMESTAMP_ID</p></td>
+<td><p>Icu_StopTimestamp() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_GETTIMESTAMPINDEX_ID</p></td>
+<td><p>Icu_GetTimeStampIndex() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_RESETEDGECOUNT_ID</p></td>
+<td><p>Icu_ResetEdgeCount() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_ENABLEEDGECOUNT_ID</p></td>
+<td><p>Icu_EnableEdgeCount() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_ENABLEEDGEDETECTION_ID</p></td>
+<td><p>Icu_EnableEdgeDetection() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_DISABLEEDGEDETECTION_ID</p></td>
+<td><p>Icu_DisableEdgeDetection() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_DISABLEEDGECOUNT_ID</p></td>
+<td><p>Icu_DisableEdgeCount() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_GETEDGENUMBERS_ID</p></td>
+<td><p>Icu_GetEdgeNumbers() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_STARTSIGNALMEASUREMENT_ID</p></td>
+<td><p>Icu_StartSignalMeasurement() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_STOPSIGNALMEASUREMENT_ID</p></td>
+<td><p>Icu_StopSignalMeasurement() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_GETTIMEELAPSED_ID</p></td>
+<td><p>Icu_GetTimeElapsed() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_GETDUTYCYCLEVALUES_ID</p></td>
+<td><p>Icu_GetDutyCycleValues() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_GETVERSIONINFO_ID</p></td>
+<td><p>Icu_GetVersionInfo() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_REGISTERREADBACK_ID</p></td>
+<td><p>Icu_RegisterReadback() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_E_PARAM_POINTER</p></td>
+<td><p>API service called with invalid pointer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_E_PARAM_CHANNEL</p></td>
+<td><p>API service called with invalid channel identifier or channel not configured.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_E_PARAM_ACTIVATION</p></td>
+<td><p>API service calleed with an invalid or not feasible activation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_E_INIT_FAILED</p></td>
+<td><p>Init Function Failed.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_E_PARAM_BUFFER_SIZE</p></td>
+<td><p>API service used with invalid Buffer size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_E_PARAM_MODE</p></td>
+<td><p>API service called with invalid mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_E_UNINIT</p></td>
+<td><p>API service calleed without module initialisation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_E_NOT_STARTED</p></td>
+<td><p>Icu_StopTimestamp called on channel not started or already stopped.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_E_BUSY_OPERATION</p></td>
+<td><p>API service called while a running operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_E_ALREADY_INITIALIZED</p></td>
+<td><p>API service Icu_Init called when module already initialized.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_E_PARAM_NOTIFY_INTERVAL</p></td>
+<td><p>API service called when notify interval is invalid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_E_PARAM_VINFO</p></td>
+<td><p>API service Icu_GetVersionInfo called and parameter is invalid.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_STATUS_UNINIT</p></td>
+<td><p>ICU driver Status uninitialized.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_STATUS_INIT</p></td>
+<td><p>ICU driver Status Initialized.</p></td>
+</tr>
+<tr class="row-even"><td><p>ICU_FALLING</p></td>
+<td><p>Capture regsiter configuration for FALLING edge.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU_RISING</p></td>
+<td><p>Capture regsiter configuration for RISING edge.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2><span class="section-number">5.14.4. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-init"><span class="std std-ref">Icu_Init</span></a></strong>(const <a class="reference internal" href="../Classes/struct_icu___config_type.html"><span class="std std-doc">Icu_ConfigType</span></a> * ConfigPtr)</p></td>
+<td><p>Service for ICU initialization.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-deinit"><span class="std std-ref">Icu_DeInit</span></a></strong>(void )</p></td>
+<td><p>Service for ICU de-initialization.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-setactivationcondition"><span class="std std-ref">Icu_SetActivationCondition</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel, <a class="reference internal" href="#enum-icu-activationtype"><span class="std std-ref">Icu_ActivationType</span></a> Activation)</p></td>
+<td><p>Service for setting Activation Condition.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-disablenotification"><span class="std std-ref">Icu_DisableNotification</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for disabling notification.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-enablenotification"><span class="std std-ref">Icu_EnableNotification</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for enabling notification.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-icu-inputstatetype"><span class="std std-ref">Icu_InputStateType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-getinputstate"><span class="std std-ref">Icu_GetInputState</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for getting the ICU input status.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-starttimestamp"><span class="std std-ref">Icu_StartTimestamp</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel, <a class="reference internal" href="#typedef-icu-valuetype"><span class="std std-ref">Icu_ValueType</span></a> * BufferPtr, uint16 BufferSize, uint16 NotifyInterval)</p></td>
+<td><p>Service for starts the captuing of timer values on the edges.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-stoptimestamp"><span class="std std-ref">Icu_StopTimestamp</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for stopping the timestamp measurement.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#typedef-icu-indextype"><span class="std std-ref">Icu_IndexType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-gettimestampindex"><span class="std std-ref">Icu_GetTimestampIndex</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for reading the timestamp index of a givem channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-resetedgecount"><span class="std std-ref">Icu_ResetEdgeCount</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for resets the value of the counted edges to zero.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-enableedgecount"><span class="std std-ref">Icu_EnableEdgeCount</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service enabling the counting of edges of a given channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-disableedgecount"><span class="std std-ref">Icu_DisableEdgeCount</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for disabling the couting of edges of the given channel.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#typedef-icu-edgenumbertype"><span class="std std-ref">Icu_EdgeNumberType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-getedgenumbers"><span class="std std-ref">Icu_GetEdgeNumbers</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for reading the number of counted edges.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-enableedgedetection"><span class="std std-ref">Icu_EnableEdgeDetection</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for enabling/re-enabling the detection of edges of the given channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-disableedgedetection"><span class="std std-ref">Icu_DisableEdgeDetection</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for disabling the detection of edges of the given channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-startsignalmeasurement"><span class="std std-ref">Icu_StartSignalMeasurement</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for starting the measurement of signals.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-stopsignalmeasurement"><span class="std std-ref">Icu_StopSignalMeasurement</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for stopping the measurement of signals.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#typedef-icu-valuetype"><span class="std std-ref">Icu_ValueType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-gettimeelapsed"><span class="std std-ref">Icu_GetTimeElapsed</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>Service for reading the elasped time for the given channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-getdutycyclevalues"><span class="std std-ref">Icu_GetDutyCycleValues</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel, <a class="reference internal" href="../Classes/struct_icu___duty_cycle_type.html"><span class="std std-doc">Icu_DutyCycleType</span></a> * DutyCycleValues)</p></td>
+<td><p>Service for reading the coherent active time and period time of given channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-checkwakeup"><span class="std std-ref">Icu_CheckWakeup</span></a></strong>(EcuM_WakeupSourceType WakeupSource)</p></td>
+<td><p>This function checks if a wakeup capable ICU channel is the source for a wakeup event and calls the ECU state manager service EcuM_SetWakeupEvent in case of a valid ICU channel wakeup event.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-disablewakeup"><span class="std std-ref">Icu_DisableWakeup</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>This function disables the wakeup capability of a single ICU channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-enablewakeup"><span class="std std-ref">Icu_EnableWakeup</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel)</p></td>
+<td><p>This function (re-)enables the wakeup capability of the given ICU channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-setmode"><span class="std std-ref">Icu_SetMode</span></a></strong>(<a class="reference internal" href="#enum-icu-modetype"><span class="std std-ref">Icu_ModeType</span></a> Mode)</p></td>
+<td><p>This function sets the ICU mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-icu-registerreadback"><span class="std std-ref">Icu_RegisterReadback</span></a></strong>(<a class="reference internal" href="#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Channel, Icu_RegisterReadbackType * RegRbPtr)</p></td>
+<td><p>This function reads the important registers of the hardware unit and returns the value in the structure.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-icu-init">
+<h3><span class="section-number">5.14.4.1. </span>function Icu_Init<a class="headerlink" href="#function-icu-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_Init</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Icu_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for ICU initialization.</p>
+<p>Initializes internal variables and the ECAP unit of the micro controller. The function can be called on task level.</p>
+<p>Service ID[hex] - 0x00</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>CfgPtr</strong> Pointer to configuration</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-deinit">
+<h3><span class="section-number">5.14.4.2. </span>function Icu_DeInit<a class="headerlink" href="#function-icu-deinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_DeInit</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for ICU de-initialization.</p>
+<p>DeInit ECAP module</p>
+<p>Service ID[hex] - 0x01</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-setactivationcondition">
+<h3><span class="section-number">5.14.4.3. </span>function Icu_SetActivationCondition<a class="headerlink" href="#function-icu-setactivationcondition" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_SetActivationCondition</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Icu_ActivationType</span><span class="w"> </span><span class="n">Activation</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for setting Activation Condition.</p>
+<p>This service sets the Activation edge for channel Type of activation (if supported by hardware) ICU_RISING_EDGE, ICU_FALLING_EDGE, ICU_BOTH_EDGES.</p>
+<p>Service ID[hex] - 0x05</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+<li><p><strong>Activation</strong> - activation edge to be used by ICU module</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-disablenotification">
+<h3><span class="section-number">5.14.4.4. </span>function Icu_DisableNotification<a class="headerlink" href="#function-icu-disablenotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_DisableNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for disabling notification.</p>
+<p>This service disables the notificaiton of a channel</p>
+<p>Service ID[hex] - 0x06</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-enablenotification">
+<h3><span class="section-number">5.14.4.5. </span>function Icu_EnableNotification<a class="headerlink" href="#function-icu-enablenotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_EnableNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for enabling notification.</p>
+<p>This service enables the notificaiton of a channel</p>
+<p>Service ID[hex] - 0x07</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-getinputstate">
+<h3><span class="section-number">5.14.4.6. </span>function Icu_GetInputState<a class="headerlink" href="#function-icu-getinputstate" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Icu_InputStateType</span><span class="w"> </span><span class="n">Icu_GetInputState</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for getting the ICU input status.</p>
+<p>This service returns the status of the ICU input</p>
+<p>Service ID[hex] - 0x08</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>ICU_ACTIVE</strong> - Module is in active state
+<br></p></li>
+<li><p><strong>ICU_IDLE</strong> - Module is in idle state
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Icu_InputStateType</p>
+</section>
+<section id="function-icu-starttimestamp">
+<h3><span class="section-number">5.14.4.7. </span>function Icu_StartTimestamp<a class="headerlink" href="#function-icu-starttimestamp" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_StartTimestamp</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Icu_ValueType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">BufferPtr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">BufferSize</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">NotifyInterval</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for starts the captuing of timer values on the edges.</p>
+<p>This service starts the capturing of timer values on the edges</p>
+<p>Service ID[hex] - 0x09</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>BufferSize</strong></p></li>
+<li><p><strong>NotifyInterval</strong></p></li>
+<li><p><strong>BufferPtr</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-stoptimestamp">
+<h3><span class="section-number">5.14.4.8. </span>function Icu_StopTimestamp<a class="headerlink" href="#function-icu-stoptimestamp" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_StopTimestamp</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for stopping the timestamp measurement.</p>
+<p>This service stops timestamp measurement of the given channel.</p>
+<p>Service ID[hex] - 0x0A</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-gettimestampindex">
+<h3><span class="section-number">5.14.4.9. </span>function Icu_GetTimestampIndex<a class="headerlink" href="#function-icu-gettimestampindex" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Icu_IndexType</span><span class="w"> </span><span class="n">Icu_GetTimestampIndex</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for reading the timestamp index of a givem channel.</p>
+<p>This service reads the timestamp index of a given channel.</p>
+<p>Service ID[hex] - 0x0B</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>timestamp</strong> index value
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Icu_IndexType</p>
+</section>
+<section id="function-icu-resetedgecount">
+<h3><span class="section-number">5.14.4.10. </span>function Icu_ResetEdgeCount<a class="headerlink" href="#function-icu-resetedgecount" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_ResetEdgeCount</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for resets the value of the counted edges to zero.</p>
+<p>This service resets the value of the counted edges to zero.</p>
+<p>Service ID[hex] - 0x0C</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-enableedgecount">
+<h3><span class="section-number">5.14.4.11. </span>function Icu_EnableEdgeCount<a class="headerlink" href="#function-icu-enableedgecount" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_EnableEdgeCount</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service enabling the counting of edges of a given channel.</p>
+<p>This service enables the couting of edges of the given channel.</p>
+<p>Service ID[hex] - 0x0D</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-disableedgecount">
+<h3><span class="section-number">5.14.4.12. </span>function Icu_DisableEdgeCount<a class="headerlink" href="#function-icu-disableedgecount" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_DisableEdgeCount</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for disabling the couting of edges of the given channel.</p>
+<p>This service disables the couting of edges of a given channel.</p>
+<p>Service ID[hex] - 0x0E</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-getedgenumbers">
+<h3><span class="section-number">5.14.4.13. </span>function Icu_GetEdgeNumbers<a class="headerlink" href="#function-icu-getedgenumbers" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Icu_EdgeNumberType</span><span class="w"> </span><span class="n">Icu_GetEdgeNumbers</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for reading the number of counted edges.</p>
+<p>This service reads the number of counted edges.</p>
+<p>Service ID[hex] - 0x0F</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>Number</strong> of counted edges
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Icu_EdgeNumberType</p>
+</section>
+<section id="function-icu-enableedgedetection">
+<h3><span class="section-number">5.14.4.14. </span>function Icu_EnableEdgeDetection<a class="headerlink" href="#function-icu-enableedgedetection" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_EnableEdgeDetection</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for enabling/re-enabling the detection of edges of the given channel.</p>
+<p>This service enables/re-enables the detection of edges of a channel.</p>
+<p>Service ID[hex] - 0x16</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-disableedgedetection">
+<h3><span class="section-number">5.14.4.15. </span>function Icu_DisableEdgeDetection<a class="headerlink" href="#function-icu-disableedgedetection" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_DisableEdgeDetection</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for disabling the detection of edges of the given channel.</p>
+<p>This service disables the detection of edges of a channel.</p>
+<p>Service ID[hex] - 0x17</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-startsignalmeasurement">
+<h3><span class="section-number">5.14.4.16. </span>function Icu_StartSignalMeasurement<a class="headerlink" href="#function-icu-startsignalmeasurement" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_StartSignalMeasurement</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for starting the measurement of signals.</p>
+<p>This service starts the measurement of signals of a given channel.</p>
+<p>Service ID[hex] - 0x13</p>
+<p>Sync/Async - Asynchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-stopsignalmeasurement">
+<h3><span class="section-number">5.14.4.17. </span>function Icu_StopSignalMeasurement<a class="headerlink" href="#function-icu-stopsignalmeasurement" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_StopSignalMeasurement</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for stopping the measurement of signals.</p>
+<p>This service stops the measurement of signals of a given channel.</p>
+<p>Service ID[hex] - 0x14</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-gettimeelapsed">
+<h3><span class="section-number">5.14.4.18. </span>function Icu_GetTimeElapsed<a class="headerlink" href="#function-icu-gettimeelapsed" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Icu_ValueType</span><span class="w"> </span><span class="n">Icu_GetTimeElapsed</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for reading the elasped time for the given channel.</p>
+<p>This service reads elasped time for a given channel.</p>
+<p>Service ID[hex] - 0x10</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>Elapsed</strong> time for the given channel
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Icu_ValueType</p>
+</section>
+<section id="function-icu-getdutycyclevalues">
+<h3><span class="section-number">5.14.4.19. </span>function Icu_GetDutyCycleValues<a class="headerlink" href="#function-icu-getdutycyclevalues" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_GetDutyCycleValues</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Icu_DutyCycleType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DutyCycleValues</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for reading the coherent active time and period time of given channel.</p>
+<p>This service reads active time and period of given channel.</p>
+<p>Service ID[hex] - 0x11</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+<li><p><strong>DutyCycleValues</strong> - pointer to store dutycycle</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-checkwakeup">
+<h3><span class="section-number">5.14.4.20. </span>function Icu_CheckWakeup<a class="headerlink" href="#function-icu-checkwakeup" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_CheckWakeup</span><span class="p">(</span>
+<span class="w">    </span><span class="n">EcuM_WakeupSourceType</span><span class="w"> </span><span class="n">WakeupSource</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function checks if a wakeup capable ICU channel is the source for a wakeup event and calls the ECU state manager service EcuM_SetWakeupEvent in case of a valid ICU channel wakeup event.</p>
+<p>Service ID[hex] - 0x15</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant(limited according to ICU050)</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>WakeupSource</strong> - Informatin on wakeup source to be checked. The associated ICU channel can be determined from configuration data</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-disablewakeup">
+<h3><span class="section-number">5.14.4.21. </span>function Icu_DisableWakeup<a class="headerlink" href="#function-icu-disablewakeup" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_DisableWakeup</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function disables the wakeup capability of a single ICU channel.</p>
+<p>Service ID[hex] - 0x03</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant(limited according to ICU050)</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-enablewakeup">
+<h3><span class="section-number">5.14.4.22. </span>function Icu_EnableWakeup<a class="headerlink" href="#function-icu-enablewakeup" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_EnableWakeup</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function (re-)enables the wakeup capability of the given ICU channel.</p>
+<p>Service ID[hex] - 0x04</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant(limited according to ICU050)</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Numeric identifier of the ICU channel</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-setmode">
+<h3><span class="section-number">5.14.4.23. </span>function Icu_SetMode<a class="headerlink" href="#function-icu-setmode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_SetMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ModeType</span><span class="w"> </span><span class="n">Mode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function sets the ICU mode.</p>
+<p>Service ID[hex] - 0x02</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Mode</strong> - ICU_MODE_NORMAL: Normal operation, all used interrupts are enabled according to the notification requests, ICU_MODE_SLEEP: Reduced power mode. In sleep mode only those notifications are available which are configured as wakeup capable.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-icu-registerreadback">
+<h3><span class="section-number">5.14.4.24. </span>function Icu_RegisterReadback<a class="headerlink" href="#function-icu-registerreadback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Icu_RegisterReadback</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Icu_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function reads the important registers of the hardware unit and returns the value in the structure.</p>
+<p>This API is used to check the status of critical registers which donot change during program execution.</p>
+<p>Service ID[hex] - 0x15</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - Numeric identifier of the ICU channel</p></li>
+<li><p><strong>RegRbPtr</strong> - Pointer to where to store the readback values. If this pointer is NULL, then the API will return E_NOT_OK.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Register read back has been done successfully
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Register read back failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="group___g_p_t.html" class="btn btn-neutral float-left" title="5.13. GPT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___l_i_n.html" class="btn btn-neutral float-right" title="5.15. LIN" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Jul 01, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 10.02.01
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

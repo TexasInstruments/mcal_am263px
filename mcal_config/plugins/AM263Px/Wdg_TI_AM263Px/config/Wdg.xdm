@@ -1,0 +1,523 @@
+<?xml version='1.0'?>
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="TI_AM263Px" type="AR-PACKAGE">
+        <a:a name="UUID" value="ECUC:AUTOSAR"/>
+        <d:lst type="ELEMENTS">
+          <d:chc name="Wdg" type="AR-ELEMENT" value="MODULE-DEF">
+            <v:ctr type="MODULE-DEF">
+              <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                <ad:ADMIN-DATA>
+                  <ad:DOC-REVISIONS>
+                    <ad:DOC-REVISION>
+                      <ad:REVISION-LABEL>4.6.0</ad:REVISION-LABEL>
+                      <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      <ad:DATE>2020-07-10</ad:DATE>
+                    </ad:DOC-REVISION>
+                  </ad:DOC-REVISIONS>
+                </ad:ADMIN-DATA>
+              </a:a>
+              <a:a name="DESC"
+                   value="EN: Configuration of the Wdg (Watchdog driver) module."/>
+              <a:a name="RELEASE" value="asc:4.3.1"/>
+              <a:a name="UUID" value="10d6c7ea-9b0f-4b56-b49f-743ede9d6115"/>
+              <d:ref type="REFINED_MODULE_DEF"
+                     value="ASPath:/AUTOSAR/EcucDefs/Wdg"/>
+              <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                     type="IMPLEMENTATIONCONFIGCLASS">
+                  <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
+                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                </a:a>
+                <a:a name="LABEL" value="Config Variant"/>
+                <a:da name="DEFAULT" value="VariantLinkTime"/>
+                <a:da name="RANGE">
+                  <a:v>VariantLinkTime</a:v>
+                  <a:v>VariantPostBuild</a:v>
+                  <a:v>VariantPreCompile</a:v>
+                </a:da>
+              </v:var>
+              <v:ctr name="WdgDemEventParameterRefs" type="IDENTIFIABLE">
+				        <a:a name="DESC"
+                     value="EN: Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter&apos;s DemEventId value."/>
+                <a:a name="OPTIONAL" value="true"/>
+                <a:a name="UUID" value="49d0862b-6b6a-49b8-8b77-bc1e7ea8500b"/>
+                <a:da name="ENABLE" value="false"/>
+		  		       <!--Requirements: ECUC_Wdg_00150 -->
+                    <v:ref name="WDG_E_DISABLE_REJECTED"
+                          type="SYMBOLIC-NAME-REFERENCE">
+                     <a:a name="DESC"
+                          value="EN: Reference to the DemEventParameter which shall be issued when the error &quot;Initialization or mode switch failed because it would disable the watchdog&quot; has occurred."/>
+                     <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                          type="IMPLEMENTATIONCONFIGCLASS">
+                       <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                     </a:a>
+                     <a:a name="OPTIONAL" value="true"/>
+                     <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                     <a:a name="UUID"
+                          value="ECUC:48a148f3-55ae-4fc2-9159-68566b6da4de"/>
+                     <a:da name="ENABLE" value="false"/>
+                     <a:da name="REF"
+                           value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"/>
+                   </v:ref>
+		  		   <!--Requirements: ECUC_Wdg_00149 -->
+                <v:ref name="WDG_E_MODE_FAILED" type="SYMBOLIC-NAME-REFERENCE">
+		  			      <a:a name="DESC" value="EN: Reference to the DemEventParameter which shall be issued when the error &quot;Setting a watchdog mode failed (during initialization or mode switch)&quot; has occurred."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+		  				        <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="UUID" value="380f65b3-cf5e-4351-8f03-38acee0f8c80"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"/>
+		  		      </v:ref>
+                <v:ref name="WDG_E_HARDWARE_ERROR" type="SYMBOLIC-NAME-REFERENCE">
+                  <a:a name="DESC" value="EN: Reference to the DemEventParameter which shall be issued when the error &quot;Timeout on blocking API call occurs &quot; has occurred."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+							      <icc:v class="PreCompile">VariantLinkTime</icc:v>
+							      <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:da name="ENABLE" value="false"/>
+                  <a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"/>
+                </v:ref>
+		  	      </v:ctr>
+              <v:ctr name="WdgGeneral" type="IDENTIFIABLE">
+                <a:a name="DESC"
+                     value="EN: All general parameters of the watchdog driver are collected here."/>
+                <a:a name="UUID" value="fa73adff-423e-4b2a-bfc6-82fd9a4be172"/>
+                <v:var name="WdgDevErrorDetect" type="BOOLEAN">
+                  <a:a name="DESC"
+                       value="EN: Compile switch to enable / disable development error detection for this module."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="a32bf778-dbcc-441e-bbb1-383b9b7228f6"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="WdgDisableAllowed" type="BOOLEAN">
+                  <a:a name="DESC"
+                       value="EN: Compile switch to allow / forbid disabling the watchdog driver during runtime."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="3654c6ad-92fd-4f19-9c42-1f2fdd437746"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="WdgIndex" type="INTEGER">
+                  <a:a name="DESC"
+                       value="EN: Represents the watchdog driver&apos;s ID so that it can be referenced by the watchdog interface."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                  <a:a name="UUID" value="4178c37a-0945-46cb-8f33-28f66e1f6834"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=255"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="WdgInitialTimeout" type="FLOAT">
+                  <a:a name="DESC"
+                       value="EN: The initial timeout (seconds) for the trigger condition to be initialized during Init function. It shall be not larger than WdgMaxTimeout."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID"
+                       value="ECUC:c20d7853-9f81-4e43-84e4-e8378cdc3ba4"/>
+                  <a:da name="DEFAULT" value="1.0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=65.535"/>
+                    <a:tst expr="&gt;=0.0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="WdgMaxTimeout" type="FLOAT">
+                  <a:a name="DESC"
+                       value="EN: The maximum timeout (seconds) to which the watchdog trigger condition can be initialized."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID"
+                       value="ECUC:fc6fa127-3b50-43b7-b660-6ee4ed01a755"/>
+                  <a:da name="DEFAULT" value="65.535"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=65.535"/>
+                    <a:tst expr="&gt;=0.0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="WdgWindowSize" type="ENUMERATION">
+                  <a:a name="DESC"
+                       value="EN: The Digital Windowed Watchdog window size. Selecting 100% enables standard watchdod (not windowed)"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID"
+                       value="ECUC:79ec3273-8bec-4688-9880-d605a6ec1aca"/>
+                  <a:da name="DEFAULT" value="WINDOW_SIZE_100_PERCENT"/>
+                  <a:da name="RANGE">
+                    <a:v>WINDOW_SIZE_3_125_PERCENT</a:v>
+                    <a:v>WINDOW_SIZE_6_25_PERCENT</a:v>
+                    <a:v>WINDOW_SIZE_12_5_PERCENT</a:v>
+                    <a:v>WINDOW_SIZE_25_PERCENT</a:v>
+                    <a:v>WINDOW_SIZE_50_PERCENT</a:v>
+                    <a:v>WINDOW_SIZE_100_PERCENT</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="WdgRunArea" type="ENUMERATION">
+                  <a:a name="DESC"
+                       value="EN: Represents the watchdog driver execution area is either from ROM(Flash) or RAM as required with the particular microcontroller."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="9c48baee-e401-4a42-907b-6f01f183e5c1"/>
+                  <a:da name="DEFAULT" value="RAM"/>
+                  <a:da name="RANGE">
+                    <a:v>RAM</a:v>
+                    <a:v>ROM</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="WdgTriggerLocation" type="FUNCTION-NAME">
+                  <a:a name="DESC"
+                       value="EN: Location (memory address) of the watchdog trigger routine."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="9b75f16e-0602-4758-8a57-dcd6a2ce9a9f"/>
+                  <a:da name="DEFAULT" value="NULL_PTR"/>
+				        </v:var>
+                <v:var name="WdgVersionInfoApi" type="BOOLEAN">
+                  <a:a name="DESC"
+                       value="EN: Compile switch to enable / disable the version information API"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="4d786fe8-7a83-444c-aa62-7909351859d3"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="WdgRegisterReadbackApi" type="BOOLEAN">
+                  <a:a name="DESC"
+                       value="EN: Compile switch to enable / disable the Register Readback API"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="61736e2d-8200-4cf8-8c06-7231a725d9df"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+                <v:var name="WdgRtiFrequency" type="INTEGER">
+                  <a:a name="DESC" value="EN: RTI Clock Frequency (MHz)"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="ad6b24d9-2700-40d2-a0cf-cd8b0e012519"/>
+                  <a:da name="DEFAULT" value="200"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=200"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:var name="WdgSkipForceReset" type="BOOLEAN">
+                  <a:a name="DESC"
+                       value="EN: Compile switch to enable / disable skipping force reset of WDG when 0 timeout is passed in Wdg_SetTriggerCondition"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="cd8c9964-a6ef-4006-9704-4dc599598127"/>
+                  <a:da name="DEFAULT" value="false"/>
+                </v:var>
+              </v:ctr>
+              <v:ctr name="WdgPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="DESC"
+                     value="EN: Container holding all Wdg specific published information parameters"/>
+                <a:a name="UUID" value="a3df7e1c-ccbd-461f-986d-bfc1f697d6b7"/>
+                <v:var name="WdgTriggerMode" type="ENUMERATION_LABEL">
+                  <a:a name="DESC"
+                       value="EN: Watchdog trigger mode (toggle/window/both)"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="e8725585-9d05-45cb-92a1-4bbf5cd58fb9"/>
+                  <a:da name="DEFAULT" value="WDG_WINDOW"/>
+                  <a:da name="RANGE">
+                    <a:v>WDG_BOTH</a:v>
+                    <a:v>WDG_TOGGLE</a:v>
+                    <a:v>WDG_WINDOW</a:v>
+                  </a:da>
+                </v:var>
+				        <v:var name="WdgDeviceVariant" type="ENUMERATION">
+									<a:a name="DESC" value="EN: Select SOC AM263Px variant "/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v class="PublishedInformation">VariantPostBuild</icc:v>
+                      <icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="OPTIONAL" value="true"/>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+									<a:da name="ENABLE" value="true"/>
+									<a:da name="DEFAULT" value="AM263Px"/>
+									<a:da name="RANGE">
+										<a:v>AM263Px</a:v>
+									</a:da>
+								</v:var>
+              </v:ctr>
+              <v:ctr name="WdgSettingsConfig" type="IDENTIFIABLE">
+                <a:a name="DESC"
+                     value="EN: Configuration items for the different watchdog settings, including those for external watchdog hardware."/>
+                <a:a name="UUID" value="0ef49ba7-43cf-44cf-9759-01c33e430f5b"/>
+                <v:var name="WdgDefaultMode" type="ENUMERATION">
+                  <a:a name="DESC" value="EN: Default mode for watchdog driver initialization."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="46b8175a-1c95-4bee-a28a-aab35e2fd64b"/>
+                  <a:da name="DEFAULT" value="WDGIF_FAST_MODE"/>
+                  <a:da name="RANGE">
+                    <a:v>WDGIF_FAST_MODE</a:v>
+                    <a:v>WDGIF_OFF_MODE</a:v>
+                    <a:v>WDGIF_SLOW_MODE</a:v>
+                  </a:da>
+                </v:var>
+                <v:var name="WdgInstanceId" type="INTEGER">
+                  <a:a name="DESC" value="EN: Watchdog HW instance id.  0 - R5FSS0 Core0, 1 - R5FSS0 Core1, 2 - R5FSS1 Core0, 3 - R5FSS1 Core1"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+                  <a:da name="DEFAULT" value="0"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=3"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
+                <v:lst name="WdgExternalConfiguration" type="MAP">
+                  <a:da name="MAX" value="1"/>
+                  <v:ctr name="WdgExternalConfiguration" type="IDENTIFIABLE">
+                    <a:a name="DESC"
+                         value="EN: Configuration items for an external watchdog hardware"/>
+                    <a:a name="UUID"
+                         value="59700a67-83dd-4f02-9204-cae85d020d7c"/>
+                    <v:lst name="WdgExternalContainerRef">
+                      <a:da name="MAX" value="1"/>
+                      <v:ref name="WdgExternalContainerRef"
+                             type="CHOICE-REFERENCE">
+                        <a:a name="DESC" value="EN: Reference to either"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v mclass="PostBuild">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                        <a:a name="SCOPE" value="LOCAL"/>
+                        <a:a name="UUID"
+                             value="d4e2d98c-c3a5-42b9-a285-11a322d0e557"/>
+                        <a:da name="REF">
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannelGroup</a:v>
+                          <a:v>ASPathDataOfSchema:/AUTOSAR/EcucDefs/Spi/SpiDriver/SpiSequence</a:v>
+                        </a:da>
+                      </v:ref>
+                    </v:lst>
+                  </v:ctr>
+                </v:lst>
+                <v:ctr name="WdgSettingsFast" type="IDENTIFIABLE">
+                  <a:a name="DESC"
+                       value="EN: Hardware dependent settings for the watchdog driver&apos;s &quot;fast&quot; mode."/>
+                  <a:a name="UUID"
+                       value="ECUC:8b2ff9f0-4ec8-4fbb-9089-eff1c3aad425"/>
+                  <v:var name="WdgPreloadValue" type="INTEGER">
+                    <a:a name="DESC"
+                         value="EN: Watchdog preload value to be set in RTIDWDPRLD register. Expiration time is calculated using this function: texp = (WdgPreloadValue + 1) x 2^13 / RTICLK1"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID"
+                         value="ECUC:7882b5ab-05f4-4551-9bf3-b4203f852840"/>
+                    <a:da name="DEFAULT" value="4095"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4095"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="WdgReaction" type="ENUMERATION">
+                    <a:a name="DESC"
+                         value="EN: Watchdog reaction for timer expiration or incorrect service."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID"
+                         value="ECUC:806556f0-0ce6-49b0-b0de-017576d24c0e"/>
+                    <a:da name="DEFAULT" value="WDG_GENERATE_NMI"/>
+                    <a:da name="RANGE">
+                      <a:v>WDG_GENERATE_RESET</a:v>
+                      <a:v>WDG_GENERATE_NMI</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="WdgWindowSize" type="ENUMERATION">
+                    <a:a name="DESC"
+                         value="EN: The Digital Windowed Watchdog window size. Selecting 100% enables standard watchdod (not windowed)"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID"
+                         value="ECUC:79ec3273-8bec-4688-9880-d605a6ec1aca"/>
+                    <a:da name="DEFAULT" value="WINDOW_SIZE_100_PERCENT"/>
+                    <a:da name="RANGE">
+                      <a:v>WINDOW_SIZE_3_125_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_6_25_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_12_5_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_25_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_50_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_100_PERCENT</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+                <v:ctr name="WdgSettingsOff" type="IDENTIFIABLE">
+                  <a:a name="DESC"
+                       value="EN: Hardware dependent settings for the watchdog driver&apos;s &quot;off&quot; mode."/>
+                  <a:a name="EXISTING" value="false"/>
+                  <a:a name="UUID" value="8c56da3a-c464-4066-b9ab-609c9f180c73"/>
+                </v:ctr>
+                <v:ctr name="WdgSettingsSlow" type="IDENTIFIABLE">
+                  <a:a name="DESC"
+                       value="EN: Hardware dependent settings for the watchdog driver&apos;s &quot;slow&quot; mode."/>
+                  <a:a name="UUID"
+                       value="ECUC:82e6dd1d-aa7e-40af-b0db-7ff521f64749"/>
+                  <v:var name="WdgPreloadValue" type="INTEGER">
+                    <a:a name="DESC"
+                         value="EN: Watchdog preload value to be set in RTIDWDPRLD register. Expiration time is calculated using this function: texp = (WdgPreloadValue + 1) x 2^13 / RTICLK1"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID"
+                         value="ECUC:7882b5ab-05f4-4551-9bf3-b4203f852840"/>
+                    <a:da name="DEFAULT" value="4095"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=4095"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+                  </v:var>
+                  <v:var name="WdgReaction" type="ENUMERATION">
+                    <a:a name="DESC"
+                         value="EN: Watchdog reaction for timer expiration or incorrect service."/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID"
+                         value="ECUC:806556f0-0ce6-49b0-b0de-017576d24c0e"/>
+                    <a:da name="DEFAULT" value="WDG_GENERATE_NMI"/>
+                    <a:da name="RANGE">
+                      <a:v>WDG_GENERATE_RESET</a:v>
+                      <a:v>WDG_GENERATE_NMI</a:v>
+                    </a:da>
+                  </v:var>
+                  <v:var name="WdgWindowSize" type="ENUMERATION">
+                    <a:a name="DESC"
+                         value="EN: The Digital Windowed Watchdog window size. Selecting 100% enables standard watchdod (not windowed)"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID"
+                         value="ECUC:79ec3273-8bec-4688-9880-d605a6ec1aca"/>
+                    <a:da name="DEFAULT" value="WINDOW_SIZE_100_PERCENT"/>
+                    <a:da name="RANGE">
+                      <a:v>WINDOW_SIZE_3_125_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_6_25_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_12_5_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_25_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_50_PERCENT</a:v>
+                      <a:v>WINDOW_SIZE_100_PERCENT</a:v>
+                    </a:da>
+                  </v:var>
+                </v:ctr>
+              </v:ctr>
+            </v:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

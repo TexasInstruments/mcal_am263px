@@ -1,0 +1,1582 @@
+## GPT Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|GPT|General Purpose Timer|
+|BSW|Basic Software|
+|MCAL|Micro Controller Abstraction Layer|
+|API|Application Programming Interface|
+|DET|Default Error Tracer|
+|SW |Software|
+|MCU|Micro Controller Unit|
+|OS|Operating System|
+
+|Definitions|Descriptions|
+|-----------|------------|
+|Timer channel|Represents a logical timer entity assigned to a timer hardware|
+|Target Time|Something as per requirement occurs once this time value reached|
+|Ticks|Defines the timer resolution, the duration of a timer increment|
+
+### Introduction
+
+This document describes the functionality, API and configuration of the AUTOSAR BSW module GPT.
+
+| | |
+|------|-------------|
+|**Supported AUTOSAR Release**|4.3.1|
+| **Supported Configuration Variants** | Pre-Compile & Post Build|
+| **Vendor ID**                      |   GPT_VENDOR_ID (44)|
+| **Module ID**                      |   GPT_MODULE_ID (100)|
+| **Supported Platform**             |   AM263Px|
+
+### Functional Overview
+
+The GPT module initializes and controls the internal General Purpose Timer(s) (GPT) of the
+microcontroller. The GPT driver provides services and configuration parameters for
+
+1. Starting and stopping hardware timers
+2. Getting timer values
+3. Controlling time triggered interrupt notifications
+
+Note that the conversion between timer ticks provided by GPT and actual time value is not done by GPT. User software must take care of it. The tick duration of a timer channel depends on channel specific settings (part of GPT driver) as well as on system clock and settings of the clock tree controlled by the MCU module.
+The brief overview on GPT module is given below:
+
+#### GPT Driver Architecture
+
+The following figure shows where the GPT is in the AUTOSAR architecture.
+
+```{figure} Assets/images/gpt/gpt_image2.jpg
+:alt: GPT in AUTOSAR architecture
+:align: center
+
+GPT in AUTOSAR architecture
+```
+
+#### Initialization
+
+The driver GPT is initialized by calling Gpt_Init(), with parameter ConfigPtr referencing a runtime configuration set. After de-initializing the module, that is calling Gpt_DeInit(), it can be initialized again.
+
+#### States
+
+Each GPT channel has up to five different states, depending on its configuration and running state as described below
+
+1. GPT_UNINITIALIZED: GPT channel is not initialized and not counting.
+2. GPT_INITIALIZED: GPT channel is initialized with Gpt_Init() and not counting.
+3. GPT_RUNNING: GPT channel is initialized and running (counting).
+4. GPT_STOPPED: GPT channel is initialized but not counting (stopped).
+5. GPT_EXPIRED: GPT channel is expired (timer overflowed). This state will be applicable in timer one shot mode where after encountering overflow timer stops.
+
+The figure below taken from the AUTOSAR specification shows the state transitions for different
+function calls and events:
+
+```{figure} Assets/images/gpt/gpt_image3.jpg
+:alt: GPT channel states and state transitions
+:align: center
+
+GPT channel states and state transitions
+```
+
+#### GPT channel modes
+
+The GPT channel can be configured in "one-shot mode" or in "continuous mode".
+
+1. **One-shot mode**: In one-shot mode timer stops counting after overflow (when timer value matches to target value set by Gpt_StartTimer).
+
+2. **Continuous mode**: In continuous mode if the timer has reached the target time (timer value = target time), the timer will continue running with the value "0" at next timer tick.
+
+GPT channel mode can be selected through configuration structure Gpt_ConfigType.
+
+#### GPT operating modes
+
+The GPT channels can be configured in normal mode. In this mode, GPT channel will be initialized with Gpt_Init(). In this mode, interrupt notifications will be allowed if enabled through configuration.
+
+```{figure} Assets/images/gpt/gpt_image4.jpg
+:alt: GPT driver modes
+:align: center
+
+GPT driver modes
+```
+
+#### GPT starting/stopping channel counting and reading count
+
+The GPT channel starts counting after calling Gpt_Init() . The count value (target time in ticks) is passed to Gpt_StartTimer() function. GPT channel will start counting till target time is reached. Depending on channel mode it will stop (one-shot mode) or roll over (continuous mode) after target time is reached. GPT channel can be explicitly stopped by calling function Gpt_StopTimer(). This will stop channel from counting and disable all its interrupts notifications.
+
+To read channel count when channel is running functions Gpt_GetTimeElapsed() and
+Gpt_GetTimeRemaining() can be used. As name suggests these give time elapsed after starting timer and time remaining to reach target time respectively. Below snapshot from GPT MCAL spec shows working of these two functions.
+
+Please note that general-purpose timers doesn’t keep track on amount of time that has overflowed by above two functions and the time overflow is always considered absolute and not relative.
+
+```{figure} Assets/images/gpt/gpt_image5.jpg
+:alt: Time Elapsed and Time remaining for a timer channel
+:align: center
+
+Time Elapsed and Time remaining for a timer channel
+```
+
+#### GPT interrupt notifications
+
+GPT driver supports enabling and disabling interrupt notifications for GPT channels through Gpt_EnableNotification() and Gpt_DisableNotification() functions. For getting notification from channel, a pointer to notification function should be passed through configuration structure during initialization. In case notification function not available Gpt_EnableNotification() will return an error. Also, it is important to note that interrupt notifications are only enabled when device is in normal mode. In sleep mode interrupt notifications are disabled if they are not wakeup capable (and not enabled for wakeup).
+
+Once interrupt notifications are enabled GPT channel after counting till target time will generate interrupt and channel ISR will be called. This ISR will determine whether to call notification function or wakeup function depending on which one is enabled beforehand. It is responsibility of user software to register these ISR with MCU before starting channel.
+
+#### Assumptions
+
+None
+
+#### Limitations
+
+None
+
+#### Design overview
+
+
+**Will be updated in future releases:**
+
+### Hardware Features
+
+#### IP Supported Features
+
+* Free running 32 bit up counter
+* Auto reload mode (can be used for continuous counter operation)
+* Support dynamic Start / Stop counter operation
+* Programmable clock dividers (2n, where n = [0-8])
+* 2 timers modules could be operated in cascaded mode to provide 64bit counter
+* Programmable interrupt generation on overflow, compare and capture
+* Programmable clock source
+* Supports 3 basic functional modes Timer mode, Capture mode & Compare mode
+
+#### AUTOSAR Supported Features
+
+* Initialization and de-initialization of all GPT channels.
+* Starting and stopping of counting for individual channels.
+* Getting elapsed and remaining counter value
+* Enabling/disabling counter triggered interrupt notifications
+* One shot and continuous mode.
+
+#### Not supported Features
+
+* Predefined timers are not supported
+* Sleep and wakeup is not supported.
+
+### Source files
+
+Description of static files is provided below:
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Gpt**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Gpt.h** : *Contains the API’s of the GPT driver to be used by upper layers*\
+ ┃ ┃ ┃ ┗ 📜**Gpt_Irq.h** : *Contains ISR function declaration*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Gpt.c** : *Implementation of the API’s for GPT driver*\
+ ┃ ┃ ┃ ┗ 📜**Gpt_Irq.c** : *Contains ISR function definitions*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┣ 📜**Gpt_Priv.h** : *Contains data structures and Internal function declarations*\
+ ┃ ┃ ┃ ┗ 📜**Gpt_Priv.c** : *Contains Internal Functions Definitions*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┣ 📂mcal_config\
+ ┣ 📂mcal_docs\
+ ┗ 📜README.txt
+
+Description of generated files is provided below:
+
+|Plugin Files |Description|
+|-------|------|
+|Gpt_Cfg.h|Contains the base addresses, Precompile switches, Macros for channels, counters etc|
+|Gpt_PBcfg.c|Contains all channels Post-Build Configuration parameters|
+|Gpt_Cfg.c|Contains all channels Pre-Compile Configuration parameters|
+
+The below diagram shows the files structure for the GPT driver.
+
+```{figure} Assets/images/gpt/gpt_image6.jpg
+:alt: GPT header file include structure
+:align: center
+
+GPT header file include structure
+```
+
+### Module requirements
+
+**Will be updated in future release:**
+
+#### Memory Mapping
+
+|Memory Mapping Sections|GPT_CODE|GPT_VAR|GPT_VAR_NOINIT|GPT_CONST|GPT_APPL_CODE|GPT_PBCFG|
+|-----|-----|-----|-----|-----|----|------|
+| GPT_START_SEC_VAR_INIT_UNSPECIFIED (.data)| |x| | | | |
+| GPT_STOP_SEC_VAR_INIT_UNSPECIFIED| |x| | | | |
+| GPT_START_SEC_CODE (.text)|x| | | | | |
+| GPT_STOP_SEC_CODE|x| | | | | |
+| GPT_START_SEC_VAR_NO_INIT_UNSPECIFIED (.bss)| | |x| | | |
+| GPT_STOP_SEC_VAR_NO_INIT_UNSPECIFIED| | |x| | | |
+| GPT_START_SEC_CONST_UNSPECIFIED(.rodata)| | | |x| | |
+| GPT_STOP_SEC_CONST_UNSPECIFIED| | | |x| | |
+| GPT_START_SEC_ISR_CODE (.text)|x| | | | | |
+| GPT_STOP_SEC_ISR_CODE|x| | | | | |
+| GPT_START_SEC_CONST_PTR (.rodata)| | | |x| | |
+| GPT_STOP_SEC_CONST_PTR| | | |x| | |
+| GPT_START_SEC_VAR_INIT_PTR  (.data)| | | | | |x|
+| GPT_STOP_SEC_VAR_INIT_PTR| | | | | |x|
+|For application code used by GPT (like callback functions)| | | | |x| |
+
+#### Scheduling
+
+There is no scheduling functions in Gpt.  
+
+#### Error handling
+
+##### Development Error Reporting
+
+The module GPT depends on the DET (by default) to report development errors. The DET can be replaced optionally by an equivalent component which is responsible to recognize development errors, if no DET component is available.
+
+AUTOSAR requires that API functions shall check the validity of their respective parameters.
+These checks are for development error reporting and can be enabled or disabled.
+
+#### Error codes
+
+##### Development Errors
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-----|-------|
+|API service called without module initialization|GPT_E_UINIT|0x0A|
+|API service for initialization is called when already initialized |GPT_E_ALREADY_INITIALIZED|0x0D|
+|API error return code: Init function failed|GPT_E_INIT_FAILED|0x0E|
+|API parameter checking: invalid channel|GPT_E_PARAM_CHANNEL|0x14|
+|API parameter checking: invalid value|GPT_E_PARAM_VALUE|0x15|
+|API parameter checking: invalid pointer|GPT_E_PARAM_POINTER|0x16|
+|API parameter checking: invalid Predef Time|GPT_E_PARAM_PREDEF_TIMER|0x17|
+|API parameter checking: invalid mode|GPT_E_PARAM_MODE |0x1F|
+
+##### Runtime Errors
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-----|-------|
+|API service called when timer channel is still busy (running)|GPT_E_BUSY|0x0B|
+|API service called when driver is in wrong mode|GPT_E_MODE|0x0C|
+
+##### DEM Errors
+
+The errors reported to DEM are described in the following table:
+
+| |Error Code|Description|
+|---|-----|------|
+|Assigned by DEM|GPT_E_HARDWARE_ERROR|This error is raised when issued when GPT Timer register reset fails|
+
+### Used resources
+
+#### Interrupt Handling
+
+For interrupt notification and wakeup, ISR are provided in GPT driver. There is one ISR for each timer channel. Depending on mode of timer it will call notify function. The interrupt service routines shall be mapped to the interrupt sources of the respective GPT unit interrupt. The supported ISR’s are part of the Gpt_Irq.h file.
+
+
+Following are timer modules with its respective ISRs and counter blocks for each channel in AM263Px:
+
+|Timer|ISR|Counter Blocks|GptChannelTickFrequency(Prescaler value)|
+|----|----|-----|-----------|
+|RTI0|Gpt_Ch0Isr()|GPT_RTI_COUNTER0|GptModule0CounterBlk0Frequency|
+|RTI0|Gpt_Ch1Isr()|GPT_RTI_COUNTER0|GptModule0CounterBlk0Frequency|
+|RTI0|Gpt_Ch2Isr()|GPT_RTI_COUNTER1|GptModule0CounterBlk1Frequency|
+|RTI0|Gpt_Ch3Isr()|GPT_RTI_COUNTER1|GptModule0CounterBlk1Frequency|
+|RTI1|Gpt_Ch4Isr()|GPT_RTI_COUNTER0|GptModule1CounterBlk0Frequency|
+|RTI1|Gpt_Ch5Isr()|GPT_RTI_COUNTER0|GptModule1CounterBlk0Frequency|  
+|RTI1|Gpt_Ch6Isr()|GPT_RTI_COUNTER1|GptModule1CounterBlk1Frequency|
+|RTI1|Gpt_Ch7Isr()|GPT_RTI_COUNTER1|GptModule1CounterBlk1Frequency|
+|RTI2|Gpt_Ch8Isr()|GPT_RTI_COUNTER0|GptModule2CounterBlk0Frequency|
+|RTI2|Gpt_Ch9Isr()|GPT_RTI_COUNTER0|GptModule2CounterBlk0Frequency|
+|RTI2|Gpt_Ch10Isr()|GPT_RTI_COUNTER1|GptModule2CounterBlk1Frequency|
+|RTI2|Gpt_Ch11Isr()|GPT_RTI_COUNTER1|GptModule2CounterBlk1Frequency|
+|RTI3|Gpt_Ch12Isr()|GPT_RTI_COUNTER0|GptModule3CounterBlk0Frequency|
+|RTI3|Gpt_Ch13Isr()|GPT_RTI_COUNTER0|GptModule3CounterBlk0Frequency|
+|RTI3|Gpt_Ch14Isr()|GPT_RTI_COUNTER1|GptModule3CounterBlk1Frequency|
+|RTI3|Gpt_Ch15Isr()|GPT_RTI_COUNTER1|GptModule3CounterBlk1Frequency|
+|RTI4|Gpt_Ch16sr()|GPT_RTI_COUNTER0|GptModule0CounterBlk0Frequency|
+|RTI4|Gpt_Ch17Isr()|GPT_RTI_COUNTER0|GptModule0CounterBlk0Frequency|
+|RTI4|Gpt_Ch18Isr()|GPT_RTI_COUNTER1|GptModule0CounterBlk1Frequency|
+|RTI4|Gpt_Ch19Isr()|GPT_RTI_COUNTER1|GptModule0CounterBlk1Frequency|
+|RTI5|Gpt_Ch20Isr()|GPT_RTI_COUNTER0|GptModule1CounterBlk0Frequency|
+|RTI5|Gpt_Ch21Isr()|GPT_RTI_COUNTER0|GptModule1CounterBlk0Frequency|  
+|RTI5|Gpt_Ch22Isr()|GPT_RTI_COUNTER1|GptModule1CounterBlk1Frequency|
+|RTI5|Gpt_Ch23Isr()|GPT_RTI_COUNTER1|GptModule1CounterBlk1Frequency|
+|RTI6|Gpt_Ch24Isr()|GPT_RTI_COUNTER0|GptModule2CounterBlk0Frequency|
+|RTI6|Gpt_Ch25Isr()|GPT_RTI_COUNTER0|GptModule2CounterBlk0Frequency|
+|RTI6|Gpt_Ch26Isr()|GPT_RTI_COUNTER1|GptModule2CounterBlk1Frequency|
+|RTI6|Gpt_Ch27Isr()|GPT_RTI_COUNTER1|GptModule2CounterBlk1Frequency|
+|RTI7|Gpt_Ch28Isr()|GPT_RTI_COUNTER0|GptModule3CounterBlk0Frequency|
+|RTI7|Gpt_Ch29Isr()|GPT_RTI_COUNTER0|GptModule3CounterBlk0Frequency|
+|RTI7|Gpt_Ch30Isr()|GPT_RTI_COUNTER1|GptModule3CounterBlk1Frequency|
+|RTI7|Gpt_Ch31Isr()|GPT_RTI_COUNTER1|GptModule3CounterBlk1Frequency|
+
+Gpt-channel tick frequency is considered to be as prescaler value.It needs to be configured under GptDriverConfiguration container of configuration file. It is defined as GptModule<module_number>CounterBlk0Frequency and GptModule<module_number>CounterBlk1Frequency.
+Here "module_number" defines the rti register number.
+
+There are 2 counter blocks GPT_RTI_COUNTER0 and GPT_RTI_COUNTER1 which can be mapped as shown above. Detailed description on the above parameters are explained in Configuration Section.
+
+For example,if we are configuring 5th channel,then channel id shall be 4 and it belongs to RTI1 timer section and counter block is GPT_RTI_COUNTER0. So the respective prescaler value,i.e.,GptChannelTickFrequency shall be "GptModule1CounterBlk0Frequency" in configuration file.Here 'Module1' defined for RTI1 timer and 'CounterBlk0' defined for GPT_RTI_COUNTER0 counter block.
+
+### Integration description
+
+#### Dependent modules
+
+##### MCU
+
+The module MCU powers up the microcontroller’s peripherals at startup time and initializes the PLL as well as the internal clock domains which is connected to the GPT unit. The GPT module also supports an internal divider which can be changed at configuration time using the ‘prescale’ member of Gpt_ChannelConfigType structure to configure the actual GPT functional clock.
+
+Note that Module GPT will not take care of settings which configure the clock and PLL for channels in its init function. This must be done by the MCU module.
+
+##### PORT
+
+The GPT module does not require any PORT configuration. Hence there is no dependency on PORT module.
+
+##### OS
+
+An operating system can be used for task scheduling, interrupt handling, global suspend and restore of interrupts and creating of the Interrupt Vector Table.The GPT module may use AUTOSAR OS to suspend and restore global interrupts.
+
+##### DET
+
+This implementation depends on the DET in order to report development errors The detection of development errors is configurable (ON / OFF), The switch GPT_CFG_DEV_ERROR_DETECT will activate or deactivate the detection of all development errors.
+
+##### DEM
+
+By  default,  production  code  related  errors  are  reported  to  the  DEM  using  the  service DEM_ReportErrorStatus().
+
+```{Note}
+ Dem Event is enable only if `$(Module_Name)DemEventParameterRefs` is enabled.
+
+```
+
+##### SchM
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that GPT module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator.
+
+For GPT Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | GPT Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|GPT_EXCLUSIVE_AREA_0 | Gpt_StartTimer<br>Gpt_StopTimer<br>Gpt_EnableNotification<br>Gpt_DisableNotification | To protect against multiple access for shared resources|**ALL_INTERRUPT_BLOCKING** : All interrupts should be blocked as this API's can be called in the interrupts |
+
+##### Callback Notification
+
+This section describes notification functions which are passed to GPT driver as a target function. The target function is usually a call-back function. The names of these functions are not fixed and can be changed. At its configurable interfaces the GPT defines notifications that can be mapped to callback functions to respective channels. Function pointer to callback function (for non-wakeup notification) should be defined in Gpt.h with Gpt_NotifyType datatype. There should be separate notification call back function for each timer channel which is configured as Gpt_Channel_Notify\<channelnumber>.
+Example: Gpt_Channel_Notify5 for channel 5
+
+#### Multi-core support
+
+Not Supported
+
+### Configuration
+
+
+
+#### GptChannelConfigSet
+This container is the base of a Configuration Set which contains the configured GPT channels. This way, different configuration sets can be defined for post-build process.
+
+##### GptChannelConfiguration
+Configuration of an individual GPT channel.
+
+###### GptChannelId
+
+| Item ||
+|--------|---------------|
+| **Name** | GptChannelId |
+| **Description** | Channel Id of the GPT channel. This value will be assigned to the symbolic name derived of the GptChannelConfiguration container short name.              Channel 0 -Channel 3 are associated with RTI Module 0,               Channel 4 -Channel 7 are associated with RTI Module 1,               Channel 8 -Channel 11 are associated with RTI Module 2,              Channel 12 -Channel 15 are associated with RTI Module 3,              Channel 16 -Channel 19 are associated with RTI Module 4,               Channel 20 -Channel 23 are associated with RTI Module 5,               Channel 24 -Channel 27 are associated with RTI Module 6,              Channel 28 -Channel 31 are associated with RTI Module 7  |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 31 |
+| **Min-value** | 0 |
+
+###### GptChannelMode
+
+| Item ||
+|--------|---------------|
+| **Name** | GptChannelMode |
+| **Description** | Specifies the behavior of the timer channel after the target time is reached. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | GPT_CH_MODE_CONTINUOUS |
+| **Range** | GPT_CH_MODE_CONTINUOUS<br>GPT_CH_MODE_ONESHOT |
+
+###### GptCounterBlkId
+
+| Item ||
+|--------|---------------|
+| **Name** | GptCounterBlkId |
+| **Description** | This is the Counter block ID for the RTI modules. Each RTI module has 2 counter blocks that are defined in this configuration parameter.  |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | GPT_RTI_COUNTER1 |
+| **Range** | GPT_RTI_COUNTER0<br>GPT_RTI_COUNTER1 |
+
+###### GptEnableWakeup
+
+| Item ||
+|--------|---------------|
+| **Name** | GptEnableWakeup |
+| **Description** | Enables wakeup capability of MCU for a channel. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+###### GptNotification
+
+| Item ||
+|--------|---------------|
+| **Name** | GptNotification |
+| **Description** | Function pointer to callback function (for non-wakeup notification) |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | NULL_PTR |
+
+###### GptChannelClkSrcRef
+
+| Item ||
+|--------|---------------|
+| **Name** | GptChannelClkSrcRef |
+| **Description** | Reference to the GptClockReferencePoint from which the channel |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### GptWakeupConfiguration
+Function pointer to callback function (for wakeup notification).
+
+###### GptWakeupSourceRef
+
+| Item ||
+|--------|---------------|
+| **Name** | GptWakeupSourceRef |
+| **Description** | In case the wakeup-capability is true this value is transmitted to the Ecu State Manager. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+#### GptConfigurationOfOptApiServices
+This container contains all configuration switches for configuring optional API services of the GPT driver.
+
+##### GptDeinitApi
+
+| Item ||
+|--------|---------------|
+| **Name** | GptDeinitApi |
+| **Description** | Adds / removes the service Gpt_DeInit() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### GptEnableDisableNotificationApi
+
+| Item ||
+|--------|---------------|
+| **Name** | GptEnableDisableNotificationApi |
+| **Description** | Adds / removes the services Gpt_EnableNotification() and Gpt_DisableNotification from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### GptTimeElapsedApi
+
+| Item ||
+|--------|---------------|
+| **Name** | GptTimeElapsedApi |
+| **Description** | Adds / removes the service Gpt_GetTimeElapsed() from the code |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### GptTimeRemainingApi
+
+| Item ||
+|--------|---------------|
+| **Name** | GptTimeRemainingApi |
+| **Description** | Adds / removes the service Gpt_GetTimeRemaining() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### GptVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | GptVersionInfoApi |
+| **Description** | Adds / removes the service Gpt_GetVersionInfo() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### GptRegisterReadback
+
+| Item ||
+|--------|---------------|
+| **Name** | GptRegisterReadback |
+| **Description** | Adds / removes the service Gpt_ConfigRegReadBack() from the code. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### GptWakeupFunctionalityApi
+
+| Item ||
+|--------|---------------|
+| **Name** | GptWakeupFunctionalityApi |
+| **Description** | Adds / removes the services Gpt_SetMode(), Gpt_EnableWakeup() Gpt_DisableWakeup() and Gpt_CheckWakeup() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+#### GptDriverConfiguration
+This container contains the module-wide configuration (parameters) of the GPT Driver
+
+##### GptDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | GptDevErrorDetect |
+| **Description** | Enables/Disables development error detection. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### GptPredefTimer100us32bitEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | GptPredefTimer100us32bitEnable |
+| **Description** | Enables/disables the GPT Predef Timer 100us32bit. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### GptPredefTimer1usEnablingGrade
+
+| Item ||
+|--------|---------------|
+| **Name** | GptPredefTimer1usEnablingGrade |
+| **Description** | Specifies the grade of enabling the GPT Predef Timers with 1us tick duration. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | GPT_PREDEF_UNDEFINED |
+| **Range** | GPT_PREDEF_UNDEFINED |
+
+##### GptReportWakeupSource
+
+| Item ||
+|--------|---------------|
+| **Name** | GptReportWakeupSource |
+| **Description** | Enables/Disables wakeup source reporting. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### GptTypeofInterruptFunction
+
+| Item ||
+|--------|---------------|
+| **Name** | GptTypeofInterruptFunction |
+| **Description** | Type of ISR function |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | GPT_ISR_CAT1 |
+| **Range** | GPT_ISR_VOID<br>GPT_ISR_CAT1<br>GPT_ISR_CAT2 |
+
+##### GptPrescaler
+
+| Item ||
+|--------|---------------|
+| **Name** | GptPrescaler |
+| **Description** | Prescaler value defined to get the desired frequency. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule0CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule0CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule0CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule0CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule1CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule1CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule1CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule1CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule2CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule2CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule2CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule2CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule3CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule3CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule3CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule3CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule4CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule4CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule4CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule4CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule5CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule5CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule5CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule5CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule6CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule6CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule6CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule6CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule7CounterBlk0Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule7CounterBlk0Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptModule7CounterBlk1Frequency
+
+| Item ||
+|--------|---------------|
+| **Name** | GptModule7CounterBlk1Frequency |
+| **Description** | Specifies the tick frequency of the timer channel in Hz. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 2147483647 |
+| **Min-value** | 0 |
+
+##### GptDefaultOSCounterId
+
+| Item ||
+|--------|---------------|
+| **Name** | GptDefaultOSCounterId |
+| **Description** | Default Os Counter Id if node reference to OsCounter ref GptOsCounterRef is not set |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | Texas Instruments |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 32 |
+| **Min-value** | 0 |
+
+##### GptTimeoutDuration
+
+| Item ||
+|--------|---------------|
+| **Name** | GptTimeoutDuration |
+| **Description** | GPT timeout - used in GPT busy wait |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 32000 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 1 |
+
+##### GptOsCounterRef
+
+| Item ||
+|--------|---------------|
+| **Name** | GptOsCounterRef |
+| **Description** | This parameter contains a reference to the OsCounter, which is used by the GPT driver. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | Texas Instruments |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### GptClockReferencePoint
+This container contains a parameter, which represents a reference to a container of the type McuClockReferencePoint (defined in module MCU).
+
+###### GptClockReference
+
+| Item ||
+|--------|---------------|
+| **Name** | GptClockReference |
+| **Description** | Reference to a container of the type McuClockReferencePoint, to select an input clock. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+#### Steps To Configure Gpt Module
+
+1. Open EB Tresos configurator tool, load Gpt. Select the Config Variant ( Precompile/Post-Build)
+2. Go to GptChannelConfiguration Container tab and create a new container.
+3. Configure the channels parameters for all channels.
+4. Save the configuration and generate the configuration.
+
+### Examples
+
+The example applications demonstrates use of Gpt module, the list below identifies key steps performed in the example.
+
+#### Overview
+
+* Gpt Example:
+  * Initialize clock using Mcu_Init()
+  * Initialize port using Port_Init()
+  * Get Gpt Version using Gpt_GetVersionInfo()
+  * Initialize Gpt using Gpt_Init()
+  * Configure GPT interrupt using GptApp_interruptConfig()
+  * Start Gpt timer using Gpt_StartTimer()
+  * Enable channel notification for a GPT channel using Gpt_EnableNotification()
+  * Read the time already elapsed using Gpt_GetTimeElapsed()
+  * Read the time remaining until the target time is reached using Gpt_GetTimeRemaining()
+
+##### Flow of the example application
+
+1. After initialization of timer followed by starting of timer, a channel waits until the interrupt is received.    Interrupt indicates that 2sec is completed for respective channel.
+2. After receiving interrupt notification, it stops the current channel and starts next channel to execute the same process.
+3. The provided example application of GPT is configured with a preload value of 1 which equates to around 10ns/tick for a 200 MHz RTI Clock input.
+
+#### Setup required to run example
+
+None
+
+#### How to run examples
+
+##### Steps to build and run example
+
+1. GPT example application demonstrates the MCAL GPT driver features, which is referred from folder <MCAL_ROOT>/examples/Gpt.
+
+2. This application can be built from the build folder by giving "gmake –s gpt_app PLATFORM=am263px".
+3. Once the build is completed we get a binary file,which is loaded in our controller and executed.
+
+##### Configuration used to test this example
+
+
+
+1. In Example program,total 32 channels are configured in AM263px.
+2. Channels 5, 6, 9, 12, 13, 16, 17, 20, 21, 24, 25, 28, 29, 32 are configured in Continuous mode in AM263px
+3. Channels 7, 8, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27, 30, 31 are configured in one-shot mode in AM263px
+
+4. Channels 1, 2, 3, 4 are not configured as RTI0 timer is being used for delay and OS counter purpose.
+5. Each channel is configured to run for 2sec.
+
+```{code-block}
+Assuming Source Clock Signal input for RTI is 200MHz and the preload value is set as '1', to achieve the desired tick frequency for the particular gpt channel, use the below mentioned formula: 
+ Tick Frequency = RTI Clock Input/(1 + Preload Value)
+ 
+ Here as the RTI Clock Input = 200 MHz = 200 * (10^6) Hz
+ 
+ Hence the Tick frequency shall be,
+ 
+ Tick frequency = (200*10^6)/(1+1) = (200*10^6)/2 = 100 * 10^6 
+ 
+ Tick frequency = 100MHz
+  
+ Accordingly, the time Period shall be,
+ 
+ Time period = 1/Tick Frequency = 1/100Mhz =10ns 
+ 
+ This defines that for every 10 ns time period, counter will increase by 1 tick.
+ 
+ In order to get 1 sec time period,the number of ticks can be defined in counter upto 1/10ns times, i.e., 100*10^6 ticks.
+ 
+ So, 100*10^6 = 0x05F5E100 shall be passed to Gpt_StartTimer in order to produce 1 sec delay.
+
+
+```
+
+#### Sample Log
+
+
+**AM263Px**
+
+```{code-block}
+
+GPT_APP: Sample Application - STARTS !!!
+     
+    GPT MCAL Version Info
+    ---------------------
+    Vendor ID           : 44
+    Module ID           : 100
+    SW Major Version    : 9
+    SW Minor Version    : 1
+    SW Patch Version    : 0
+     
+    ----------------------------------------------------------------------------------
+    GPT_APP: GPTIMER Test Configuration
+    ----------------------------------------------------------------------------------
+    Initializing channels
+    Post-Build variant is being used .. 
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 4
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 77
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 5 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27bfdb
+    GPT_APP: Time Remaining Value = 0xba06f6f
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =4 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 5
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 48
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 6 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27bf79
+    GPT_APP: Time Remaining Value = 0xba06fde
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =5 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 6
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 42
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 7 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =6 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 7
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 44
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 8 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =7 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 8
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 44
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 9 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27bf68
+    GPT_APP: Time Remaining Value = 0xba06fef
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =8 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 9
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 42
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 10 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =9 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 10
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 49
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 11 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =10 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 11
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4f
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 12 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e178
+    GPT_APP: Time Remaining Value = 0xba04de5
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =11 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 12
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 47
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 13 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e169
+    GPT_APP: Time Remaining Value = 0xba04e04
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =12 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 13
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4e
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 14 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =13 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 14
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4e
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 15 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =14 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 15
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 46
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 16 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e191
+    GPT_APP: Time Remaining Value = 0xba04dc9
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =15 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 16
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4b
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 17 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e17f
+    GPT_APP: Time Remaining Value = 0xba04e3f
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =16 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 17
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4b
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 18 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =17 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 18
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4e
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 19 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =18 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 19
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 46
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 20 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e172
+    GPT_APP: Time Remaining Value = 0xba04df8
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =19 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 20
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 42
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 21 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e16f
+    GPT_APP: Time Remaining Value = 0xba04df7
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =20 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 21
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4b
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 22 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =21 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 22
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 46
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 23 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =22 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 23
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 46
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 24 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e184
+    GPT_APP: Time Remaining Value = 0xba04dda
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =23 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 24
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 42
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 25 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e179
+    GPT_APP: Time Remaining Value = 0xba04df0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =24 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 25
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4b
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 26 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e172
+    GPT_APP: Time Remaining Value = 0xba04de0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =25 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 26
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 42
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 27 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =26 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 27
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4e
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 28 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =27 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 28
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4e
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 29 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e170
+    GPT_APP: Time Remaining Value = 0xba04df3
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =28 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 29
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 50
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 5 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =29 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 30
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 4e
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 30 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0xbebc200
+    GPT_APP: Time Remaining Value = 0x0
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =30 !!!
+    ------------------------------------------
+    GPT_APP: Running GPT Test for channel 31
+    ------------------------------------------
+    GPT_APP: Starting timer for 2 s 
+    GPT_APP: Time Elapsed Value = 46
+    GPT_APP: Enable channel notification for this channel
+    GPT_APP: Wait for notification(approx. 2 seconds)
+    GPT_APP: GPT Test Notification Receiver channel 31 :)!!!
+    
+    GPT_APP: Disable channel notification for this channel
+    GPT_APP: Wait till timer overflows, no notification should be received
+    GPT_APP: Time Elapsed Value = 0x27e170
+    GPT_APP: Time Remaining Value = 0xba04df7
+    Waiting for timer to overflow
+    Overflow happened no notification received
+    GPT_APP: Stop timer 
+    GPT Test Passed for channel =31 !!!
+    GPT Test Passed for configuration!!
+    GPT Test Completed, njoy life!!!
+    GPT_APP: Sample Application - DONE !!!
+     GPT Stack Usage: 872 bytes
+     All tests have Passed!!!
+
+```
+
+
+#### File Structure
+
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Gpt**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┣ 📜**GptApp.c** : *Contains GPT test example*\
+ ┃ ┃ ┃ ┣ 📜**GptApp.h** : *Contains GPT test example header file*\
+ ┃ ┃ ┃ ┗ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Gpt_Demo_Cfg**\
+ ┃ ┃ ┃ ┗ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Gpt_Cfg.h** : *Contains the configuration parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣📜**Gpt_Cfg.c** : *Contains all Pre-Compile Configured parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜**Gpt_PBcfg.c** : *contains all Post build configured parameters*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┗ 📜README.txt
+
+### References
+
+
+[Autosar SWS 4.3.1](<https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_GPTDriver.pdf>)\
+[Technical Reference Manual](<https://www.ti.com/product/AM263P4#tech-docs>)

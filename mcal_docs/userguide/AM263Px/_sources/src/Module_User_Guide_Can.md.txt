@@ -1,0 +1,1656 @@
+## CAN Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|RTE|Runtime Environment|
+|BSW|Basic Software|
+|GPIO|General Purpose Input Output|
+|MCAL|Micro Controller Abstraction Layer|
+|API|Application Programming Interface|
+|DET|Default Error Tracer|
+|HW |Hardware|
+|SW |Software|
+|I/O|Input/Output|
+|CAN|Controller Area Network|
+|CanIf|Can Interface|
+|L-PDU|Data Link Layer Protocol Data Unit. Consists of Identifier, Data Length and Data (SDU).|
+|DLC|Data Length Code|
+|OS|Operating System|
+
+### Introduction
+
+This document details AUTOSAR BSW CAN module implementation
+
+|Supported AUTOSAR Release|**4.3.1**|
+|------|-------------|
+|**Supported Configuration Variants**  | **Post-build, Pre-Compile**|
+|**Vendor ID**                         | **CAN_VENDOR_ID (44)**|
+|**Module ID**                         | **CAN_MODULE_ID (80)**|
+|**Supported Platform**                | **AM263Px**|
+
+The CAN driver provides services for basic transmission and reception of CAN frames in both interrupt and polling mode.
+These components can be used by an application.
+
+```{figure} Assets/images/can/Can_Autosar_MCAL.png
+:alt: CAN MCAL AUTOSAR
+:align: center
+
+Can MCAL AUTOSAR
+```
+
+### Functional Overview
+
+The CAN module initializes and controls the internal CAN Controllers of the microcontroller.
+It provides services to write, read, and configure mailboxes of the Can controllers
+
+#### Initialization
+
+Can_Init () must be called to initialize the CAN driver at power on and sets controller independent init values. This
+will also set the controllers to CAN_CS_STOPPED.
+
+#### States
+
+There are 4 states in which the CAN hardware/driver can be:
+
+- **CAN_CS_UNINT**: This is the state when the Hardware is just started.
+- **CAN_CS_STOPPED**: This is the state in which Hardware is in when after the initialization routine is called. CAN controller be fully initialized but does not participate in the bus transactions.
+- **CAN_CS_STARTED**: This is the state in which hardware is in when it is fully operational i.e.., it is sending and receive messages from the bus on CAN network.
+- **CAN_CS_SLEEP**: This is the state in which the hardware is in when the controller is sleeping. Changing the mode via Can_SetControllerMode ().
+
+Following modes changes are supported:
+
+1. **CAN_CS_STARTED**
+2. **CAN_CS_STOPPED**
+3. **CAN_CS_SLEEP**
+
+The figure below taken from the AUTOSAR specification shows the state transitions for different function calls and events:
+
+```{figure} Assets/images/can/can_image7.png
+:alt: CAN channel states and state transitions
+:align: center
+
+CAN channel states and state transitions
+```
+
+#### CAN operating modes
+
+The CAN module has a very simple state machine, with the two states CAN_UNINIT and CAN_READY. After power-up/reset, the CAN module shall be in the state
+CAN_UNINIT.
+
+```{figure} Assets/images/can/can_image8.png
+:alt: CAN driver modes
+:align: center
+
+CAN driver modes
+```
+
+#### Assumptions
+
+None
+
+#### Limitations
+
+CAN Wake mode is not supported.
+
+#### Design overview
+
+
+Will be updated in future release
+
+### Hardware Features
+
+#### Hardware Features supported
+
+* Conforms with CAN Protocol 2.0 A, B and ISO 11898-1:2015
+* Full CAN FD support (up to 64 data bytes)
+* 1-Mbps nominal bit rate, 5-Mbps data bit rate
+* Loop-back mode for self-test
+* AUTOSAR and SAE J1939 support
+* Maskable interrupt (two configurable interrupt lines and clock stop or wakeup)
+* Two clock domains (CAN clock and host clock)
+* Clock stop and wakeup support
+* Up to 32 dedicated transmit buffers
+* Configurable transmit FIFO, up to 32 elements
+* Configurable transmit queue, up to 32 elements
+* Configurable transmit Event FIFO, up to 32 elements
+* Up to 64 dedicated receive buffers
+* Two configurable receive FIFOs, up to 64 elements each
+* Up to 128 filter elements
+* Parity/ECC support - Message RAM single error correction and double error detection (SECDED) mechanism.
+
+#### AUTOSAR Features supported
+
+
+* 8 CAN Controllers for AM263Px.
+
+
+* Supports transmission and reception of Classic.
+* Frames through CAN (CAN FD Controller).
+* Initialization of CAN controller HW.
+* Transmitting of CAN Frames and confirmation.
+* Reception of the CAN Frames.
+* Polling modes for Read / Write / BusOff confirmations.
+* Mailbox objects – Full and Basic filters for Rx.  
+* Use of Software Delays according to configured timeout and number of ticks to check for timeouts.
+* Mixed Mode Operation.
+* Triggered transmission API.
+* LPDU Callback function.
+
+#### Not supported Features
+
+* Support for pretend networking
+* CAN Wake mode is not supported.
+* Timestamp Counter.
+
+#### Non compliance
+
+##### Deviations to requirements (Requirement Traceability)
+
+###### Deviation of requirements against AUTOSAR specification requirements
+
+Will be updated in future release
+
+### Source files
+
+Static source C Files are defined below
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Can**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Can.h** : *Contains the API’s of the Can driver to be used by upper layers.*\
+ ┃ ┃ ┃ ┣ 📜**Can_Irq.h** : *Contains ISR function declaration.*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Can.c** : *Contains the implementation of the API's for Can driver.*\
+ ┃ ┃ ┃ ┣ 📜**Can_Irq.c** : *contains the implementation for Can interrupts handlers.*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┗ 📜**Can_Mcan.c** : *Contains Internal Functions Definitions*\
+ ┃ ┃ ┃ ┗ 📜**Can_Priv.c** : *Contains Functions that support the API's for Can driver*\
+ ┃ ┃ ┃ ┣ 📜**Can_Priv.h** : *Contains data structures and Internal function declarations.*\
+ ┃ ┃ ┃ ┗ 📜**mcan.c** : *Contains hardware Functions Definitions*\
+ ┃ ┃ ┃ ┗ 📜**mcan.h** : *Contains hardware Functions declarations and structures*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┃ 📜README.txt
+
+Plugin files are defined below in the table.
+
+|Plugin Files|Description|
+|------|------|
+|Can_Cfg.h|Contains the Precompile switches, Macros for CAN controllers, Hardware Objects etc.|
+|Can_PBcfg.c|Contains all controllers Post-Build Configuration parameters |
+|Can_Cfg.c|Contains all controllers Pre-Compile Configuration parameters|
+
+```{figure} Assets/images/can/can_image4.jpg
+:alt: Can Header File Structure
+:align: center
+
+Can Header File Structure
+```
+
+### Module requirements
+
+Please refer **Software Product Specification** document provided as part of CSP.
+
+#### Memory Mapping
+
+| Memory Mapping Sections| CAN_CODE | CAN_CODE_ISR | CAN_VAR_NO_INIT | CAN_VAR_ZERO_INIT | CAN_PBCFG | CAN_PBCFG_ROOT |
+|------------|----------|--------------|-----------------|-------------------|-----------|----------------|
+| CAN_START_SEC_VAR_INIT_UNSPECIFIED (.bss) | |   |        | X                 |           |                |
+| CAN_STOP_SEC_VAR_INIT_UNSPECIFIED    |          |   |    | X                 |           |                |
+| CAN_START_SEC_CODE_APPL (.text)  |  | X            |                 |                   |           |                |
+| CAN_STOP_SEC_CODE_APPL   |          | X            |                 |                   |           |                |
+| CAN_START_SEC_VAR_UNSPECIFIED (.bss) |    |    | x              |                   |           |                |
+| CAN_STOP_SEC_VAR_UNSPECIFIED  |   |       | x               |                   |           |                |
+| CAN_START_SEC_CODE(.text) |    x     |   |           |                   |           |                |
+| CAN_STOP_SEC_CODE       |    x     |              |                 |                   |           |                |
+| CAN_START_SEC_PBCFG (.data)  |  |      |                 |                   | X         |                |
+| CAN_STOP_SEC_PBCFG    |          |              |                 |                   | X         |                |
+| CAN_START_SEC_PBCFG_ROOT (.const)  |    |       |         |                   |           | X              |
+| CAN_STOP_SEC_PBCFG_ROOT   |       |              |                 |                   |           | X              |
+
+#### Scheduling
+
+|Schedule Function API|Description|
+|------------|---------------|
+|Can_MainFunction_Write|This function performs the polling of TX confirmation when CAN_TX_PROCESSING is set to POLLING|
+|Can_MainFunction_Read|This function performs the polling of RX indications when CAN_RX_PROCESSING is set to POLLING.|
+|Can_MainFunction_BusOff|This function performs the polling of bus-off events that are configured statically as 'to be polled'.|
+|Can_MainFunction_Wakeup|This function performs the polling of wake-up events that are configured statically as 'to be polled'.|
+|Can_MainFunction_Mode|This function performs the polling of CAN controller mode transitions.|
+
+#### Error handling
+
+##### Development Error Reporting
+
+Development errors are reported to the DET using the service Det_ReportError(),when enabled. The driver interface contains the MACRO declaration of the error codes to be returned.
+
+###### Error codes
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-------|-----|
+|API service called with wrong parameter pointer|CAN_E_PARAM_POINTER|0x01|
+|API service called with wrong hardware handle|CAN_E_PARAM_HANDLE|0x02|
+|API service called with wrong data length|CAN_E_PARAM_DATA_LENGTH|0x03|
+|API service called with wrong parameter Controller|CAN_E_PARAM_CONTROLLER|0x04|
+|API service used without initialization|CAN_E_UNINIT|0x05|
+|Invalid transition for the current mode.|CAN_E_TRANSITION|0x06|
+|Parameter baud rate has an invalid value.|CAN_E_PARAM_BAUDRATE|0x07|
+|invalid ICOM configuration Id|CAN_E_ICOM_CONFIG_INVALID|0x08|
+|Invalid Configuration set selection.|CAN_E_INIT_FAILED|0x09|
+
+###### Runtime Error
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-------|-----|
+|Received CAN message is lost|CAN_E_DATALOST|0x01|
+
+##### DEM Error
+
+|Type of Error|Related Error Code|Description|
+|----|-----|-------|
+|Assigned by DEM|CAN_E_HARDWARE_ERROR|This error is raised when CAN register setting timeout occurs.|
+
+### Used resources
+
+#### Interrupt Handling
+
+The Driver doesn’t register any interrupts handler (ISR), it’s expected that consumer of this driver registers the required interrupt handler.
+
+[AUTOSAR_SWS_CANDriver section: 10 Configuration specification](https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_CANDriver.pdf), details the expected behavior and control flow for ISR implementation, please refer the same.
+
+For every CAN Instance, an ISR requires to be registered. The Interrupt number associated with instance of the CAN is detailed in TRM (also, please refer the Example application).
+Interrupt type should be selected in CAN plugin.
+
+Two interrupt routines are provided by the CAN driver. The ISR’s are in the file Can_Irq.c User might edit it for adapting for the suitable OS. The current support is for the NON-OS Interrupts structure. CAN interrupts are hooked up on the Interrupt 0 line (IE0).
+
+
+
+Following are the CAN controllers, its respective ISRs for each CAN Controller in AM263Px:
+
+| Can Controllers| ISR Routines|
+|-----------------|--------------|
+| MCAN0   | Can_0_Int0ISR() |
+| MCAN0 Error | Can_0_Int1ISR() |
+| MCAN1     | Can_1_Int0ISR() |
+| MCAN1 Error   | Can_1_Int1ISR() |
+| MCAN2    | Can_2_Int0ISR() |
+| MCAN2 Error     | Can_2_Int1ISR() |
+| MCAN3     | Can_3_Int0ISR() |
+| MCAN3 Error     | Can_3_Int1ISR() |
+| MCAN4  | Can_4_Int0ISR() |
+| MCAN4 Error     | Can_4_Int1ISR() |
+| MCAN5     | Can_5_Int0ISR() |
+| MCAN5 Error     | Can_5_Int1ISR() |
+| MCAN6       | Can_6_Int0ISR() |
+| MCAN6 Error     | Can_6_Int1ISR() |
+| MCAN7    | Can_7_Int0ISR() |
+| MCAN7 Error     | Can_7_Int1ISR() |
+
+1. **Can_0_Int0ISR**
+    For AM263Px device, this ISR is called on detection of an event on interrupt line 0 for the MCAN0/MCANA controller. Transmission and reception related events including error events and ECC error events are managed in this ISR.
+
+2. **Can_0_Int1ISR**
+    For AM263Px device, This function manages the ECC related events for MCAN0/MCANA module. The ECC events for MCAN1 can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN0/MCANA module the application needs to register and configure the ESM to generate interrupt for ECC Errors. This function can then be called to manage the ECC related events.
+    **Note:** MCAN0/MCANA Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+3. **Can_1_Int0ISR**
+    For AM263Px device, This ISR is called on detection of an event on interrupt line 0 of the MCAN1/MCANB controller.Transmission and reception related events including error events are managed in this ISR.
+
+4. **Can_1_Int1ISR**
+    For AM263Px device, This function manages the ECC related events for MCAN1/MCANB module. The ECC events for MCAN can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN module, the application needs to register and configure the ESM to generate interrupt for ECC Errors. This function can then be called to manage the ECC related events.
+    **Note:** MCAN1/MCANB Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+5. **Can_2_Int0ISR**
+    For AM263Px device, This ISR is called on detection of an event on interrupt line 0 of the MCAN2 controller.Transmission and reception related events including error events are managed in this ISR.
+
+6. **Can_2_Int1ISR_Fun**
+    For AM263Px device, This function manages the ECC related events for MCAN2 module. The ECC events for MCAN can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN module, the application needs to register and configure the ESM to generate interrupt for ECC Errors (for MCAN module). This function can then be called to manage the ECC related events.
+    **Note:** MCAN2 Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+7. **Can_3_Int0ISR**
+    For AM263Px device, This ISR is called on detection of an event on interrupt line 0 of the MCAN3 controller.Transmission and reception related events including error events are managed in this ISR.
+
+8. **Can_3_Int1ISR_Fun**
+    For AM263Px device, This function manages the ECC related events for MCAN3 module. The ECC events for MCAN can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN module, the application needs to register and configure the ESM to generate interrupt for ECC Errors (for MCAN module). This function can then be called to manage the ECC related events.
+    **Note:** MCAN3 Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+9. **Can_4_Int0ISR**
+    For AM263Px device, This ISR is called on detection of an event on interrupt line 0 of the MCAN4 controller.
+    Transmission and reception related events including error events are managed in this ISR.
+
+10. **Can_4_Int1ISR_Fun**
+    For AM263Px device, This function manages the ECC related events for MCAN4 module. The ECC events for MCAN can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN module, the application needs to register and configure the ESM to generate interrupt for ECC Errors (for MCAN module). This function can then be called to manage the ECC related events.
+    **Note:** MCAN4 Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+11. **Can_5_Int0ISR**
+    For AM263Px device, This ISR is called on detection of an event on interrupt line 0 of the MCAN5 controller.
+    Transmission and reception related events including error events are managed in this ISR.
+
+12. **Can_5_Int1ISR_Fun**
+    For AM263Px device, This function manages the ECC related events for MCAN5 module. The ECC events for MCAN can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN module, the application needs to register and configure the ESM to generate interrupt for ECC Errors (for MCAN module). This function can then be called to manage the ECC related events.
+    **Note:** MCAN5 Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+13. **Can_6_Int0ISR**
+    For AM263Px device, This ISR is called on detection of an event on interrupt line 0 of the MCAN6 controller.
+    Transmission and reception related events including error events are managed in this ISR.
+
+14. **Can_6_Int1ISR_Fun**
+    For AM263Px device, This function manages the ECC related events for MCAN2 module. The ECC events for MCAN can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN module, the application needs to register and configure the ESM to generate interrupt for ECC Errors (for MCAN module). This function can then be called to manage the ECC related events.
+    **Note:** MCAN6 Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+15. **Can_7_Int0ISR**
+    For AM263Px device, This ISR is called on detection of an event on interrupt line 0 of the MCAN7 controller.
+    Transmission and reception related events including error events are managed in this ISR.
+
+16. **Can_7_Int1ISR_Fun**
+    For AM263Px device, This function manages the ECC related events for MCAN2 module. The ECC events for MCAN can only be configured and detected via ESM module. So, for detecting the ECC errors for the MCAN module, the application needs to register and configure the ESM to generate interrupt for ECC Errors (for MCAN module). This function can then be called to manage the ECC related events.
+    **Note:** MCAN7 Interrupt line 1 can only be used for ECC and is not supported for normal interrupt functionality in the configurator
+
+
+### Integration description
+
+#### Dependent modules
+
+##### MCU
+
+The CAN Modules expects the MCU modules to enable the MCAN controller.
+The Clock configuration should be configured in CAN module to select the correct clock source in the parameter " CanCpuClockRef ".
+
+```{figure} Assets/images/can/can_image5.jpg
+:alt: Clock Reference in MCU module
+:align: center
+
+Clock Reference in MCU module
+```
+
+##### Port
+
+The CAN Modules expects that pinmux is set correctly to configure the MCAN TX/RX pins for
+CAN mode. This is done by the PORT driver.
+
+##### OS
+
+An operating system can be used for task scheduling, interrupt handling, global suspend and restore of
+interrupts and creating of the Interrupt Vector Table. The CAN module may use AUTOSAR OS to suspend and
+restore global interrupts.
+
+##### DET
+
+The CAN module depends on the DET (by default) to report development errors.The DET can be replaced optionally by an equivalent component which is responsible to recognize development errors, if no DET component is available.
+
+##### DEM
+
+By  default,  production  code  related  errors  are  reported  to  the  DEM  using  the  service
+DEM_ReportErrorStatus().
+
+**Note:** Dem Event is enable only if `$(Module_Name)DemEventParameterRefs` is enabled.
+
+##### Callback Notification
+
+At its configurable interfaces the CAN defines notifications that can be mapped to callback functions provided by other modules. The mapping is not statically defined by the CAN but can be performed at configuration time. The function prototypes that can be used for the configuration have to match the appropriate function prototype signatures, which are described in the following.
+
+Can_ErrorNotification:
+This is of type Can_ErrNotifyType which is defined in Can.h file. This is called to report back the ECC error status to the application when ECC error interrupt happens.
+
+##### SchM
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that CAN module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator. For CAN Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | CAN Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|CAN_EXCLUSIVE_AREA_0 | Can_Write_Internal<br>Can_SetBaudrate<br>Can_DisableControllerInterrupts<br>Can_EnableControllerInterrupts<br>Can_MainFunction_Write<br>Can_MainFunction_Read | To protect against multiple access for shared resources |ALL_INTERRUPT_BLOCKING : All interrupts should be blocked as this API’s can be called in the interrupts |
+
+#### Multi-core support
+
+Not Supported
+
+### Configuration
+
+The Can Driver implementation supports multiple configuration variants
+The driver expects generated **Can_Cfg.h** to be present as input file.
+The associated Can driver configuration generated source files are **Can_Cfg.c** and **Can_PBcfg.c** if Post-Build config variant is selected, only **Can_Cfg.c** if Pre-Compile variant is selected
+
+The generated configuration files should not be modified manually. The config tool [Elektrobit Tresos](https://www.elektrobit.com/products/ecu/eb-tresos/studio/) should be used to modify the configuration files.
+
+Refer [AUTOSAR_SWS_CANDriver section: 10 Configuration specification](https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_CANDriver.pdf) for configuration parameters details
+
+
+
+
+#### CanConfigSet
+This container contains the multiple configuration container and sub containers of the AUTOSAR Can module.
+
+##### CanController
+This container contains the configuration parameters of the CAN controller(s).
+
+###### CanControllerId
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerId |
+| **Description** | This parameter provides the controller ID which is unique in a given CAN Driver. The value for this parameter starts with 0 and continue without any gaps. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerInstance
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerInstance |
+| **Description** | Selects Can Controller Instance. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | MCAN0 |
+| **Range** | MCAN0<br>MCAN1<br>MCAN2<br>MCAN3<br>MCAN4<br>MCAN5<br>MCAN6<br>MCAN7 |
+
+###### CanControllerActivation
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerActivation |
+| **Description** | Defines if a CAN controller is used in the configuration. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+###### CanControllerBaseAddress
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerBaseAddress |
+| **Description** | Specifies the CAN controller base address. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1382023168 |
+| **Max-value** | 1382481920 |
+| **Min-value** | 1382023168 |
+
+###### CanErrorNotification
+
+| Item ||
+|--------|---------------|
+| **Name** | CanErrorNotification |
+| **Description** | Callback function for ECC Error and Parity error in case of AM263Px |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | NULL_PTR |
+
+###### CanBusoffProcessing
+
+| Item ||
+|--------|---------------|
+| **Name** | CanBusoffProcessing |
+| **Description** | Enables / disables API Can_MainFunction_BusOff() for handling busoff events in polling mode. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | INTERRUPT |
+| **Range** | INTERRUPT<br>POLLING |
+
+###### CanRxProcessing
+
+| Item ||
+|--------|---------------|
+| **Name** | CanRxProcessing |
+| **Description** | Enables / disables API Can_MainFunction_Read() for handling PDU reception events in polling mode. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | INTERRUPT |
+| **Range** | INTERRUPT<br>MIXED<br>POLLING |
+
+###### CanTxProcessing
+
+| Item ||
+|--------|---------------|
+| **Name** | CanTxProcessing |
+| **Description** | Enables / disables API Can_MainFunction_Write() for handling PDU transmission events in polling mode. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | INTERRUPT |
+| **Range** | INTERRUPT<br>MIXED<br>POLLING |
+
+###### CanWakeupFunctionalityAPI
+
+| Item ||
+|--------|---------------|
+| **Name** | CanWakeupFunctionalityAPI |
+| **Description** | Adds / removes the service Can_CheckWakeup() from the code. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+###### CanDisableAutoRetranmission
+
+| Item ||
+|--------|---------------|
+| **Name** | CanDisableAutoRetranmission |
+| **Description** | Disable auto retransmission on xmit error |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+###### CanWakeupProcessing
+
+| Item ||
+|--------|---------------|
+| **Name** | CanWakeupProcessing |
+| **Description** | Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | INTERRUPT |
+| **Range** | INTERRUPT<br>POLLING |
+
+###### CanWakeupSupport
+
+| Item ||
+|--------|---------------|
+| **Name** | CanWakeupSupport |
+| **Description** | CAN driver support for wakeup over CAN Bus. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+###### CanControllerDefaultBaudrate
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerDefaultBaudrate |
+| **Description** | Reference to baudrate configuration container configured for the Can Controller. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+###### CanCpuClockRef
+
+| Item ||
+|--------|---------------|
+| **Name** | CanCpuClockRef |
+| **Description** | Reference to the CPU clock configuration, which is set in the MCU driver configuration |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+###### CanWakeupSourceRef
+
+| Item ||
+|--------|---------------|
+| **Name** | CanWakeupSourceRef |
+| **Description** | This parameter contains a reference to the Wakeup Source for this controller as defined in the ECU State Manager. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### CanControllerBaudrateConfig
+This container contains bit timing related configuration parameters of the CAN controller(s).
+
+###### CanControllerBaudRate
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerBaudRate |
+| **Description** | Specifies the baudrate of the controller in kbps. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 500 |
+| **Max-value** | 2000 |
+| **Min-value** | 0 |
+
+###### CanControllerBaudRateConfigID
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerBaudRateConfigID |
+| **Description** | Uniquely identifies a specific baud rate configuration. This ID is used by SetBaudrate API. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### CanControllerPropSeg
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerPropSeg |
+| **Description** | Specifies propagation delay in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 8 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerSeg1
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerSeg1 |
+| **Description** | Specifies phase segment 1 in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 5 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerSeg2
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerSeg2 |
+| **Description** | Specifies phase segment 2 in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 4 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerSyncJumpWidth
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerSyncJumpWidth |
+| **Description** | Specifies the synchronization jump width for the controller in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+##### CanControllerFdBaudrateConfig
+This optional container contains bit timing related configuration parameters of the CAN controller(s) for payload and CRC of a CAN FD frame. If this container exists the controller supports CAN FD frames.
+
+###### CanControllerFdBaudRate
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerFdBaudRate |
+| **Description** | Specifies the data segment baud rate of the controller in kbps. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 5000 |
+| **Max-value** | 16000 |
+| **Min-value** | 0 |
+
+###### CanControllerPropSeg
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerPropSeg |
+| **Description** | Specifies propagation delay in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 2 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerSeg1
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerSeg1 |
+| **Description** | Specifies phase segment 1 in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 2 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerSeg2
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerSeg2 |
+| **Description** | Specifies phase segment 2 in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 3 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerSyncJumpWidth
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerSyncJumpWidth |
+| **Description** | Specifies the synchronization jump width for the controller in time quantas. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 2 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanControllerTrcvDelayCompensationOffset
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerTrcvDelayCompensationOffset |
+| **Description** | Specifies the Transceiver Delay Compensation Offset in ns. If not specified Transceiver Delay Compensation is disabled. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 180 |
+| **Max-value** | 400 |
+| **Min-value** | 0 |
+
+###### CanControllerTxBitRateSwitch
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerTxBitRateSwitch |
+| **Description** | Specifies if the bit rate switching shall be used for transmissions. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CanTTController
+This container is only included and valid if TTCAN SWS is used and TTCAN is enabled.
+
+###### CanTTControllerGlobalTimeFiltering
+
+| Item ||
+|--------|---------------|
+| **Name** | CanTTControllerGlobalTimeFiltering |
+| **Description** | Enables/disables the global time filtering. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+###### CanTTControllerLevel2
+
+| Item ||
+|--------|---------------|
+| **Name** | CanTTControllerLevel2 |
+| **Description** | Defines whether Level 2 or Level 1 is used. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### CanHardwareObject
+This container contains the configuration (parameters) of CAN Hardware Objects.
+
+###### CanFdPaddingValue
+
+| Item ||
+|--------|---------------|
+| **Name** | CanFdPaddingValue |
+| **Description** | Specifies the value which is used to pad unspecified data in CAN FD frames > 8 bytes for transmission. This is necessary due to the discrete possible values of the DLC if > 8 bytes. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### CanHandleType
+
+| Item ||
+|--------|---------------|
+| **Name** | CanHandleType |
+| **Description** | Specifies the type (Full-CAN or Basic-CAN) of a hardware object. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | FULL |
+| **Range** | BASIC<br>FULL |
+
+###### CanHardwareObjectUsesPolling
+
+| Item ||
+|--------|---------------|
+| **Name** | CanHardwareObjectUsesPolling |
+| **Description** | Enables polling of this hardware object. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Default-value** | false |
+
+###### CanHwObjectCount
+
+| Item ||
+|--------|---------------|
+| **Name** | CanHwObjectCount |
+| **Description** | Number of hardware objects used to implement one HOH. In case of a HRH this parameter defines the number of elements in the hardware FIFO or the number of shadow buffers, in case of a HTH it defines the number of hardware objects used for multiplexed transmission or for a hardware FIFO used by a FullCAN HTH. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 1 |
+
+###### CanIdType
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIdType |
+| **Description** | Specifies whether the IdValue is of type |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | STANDARD |
+| **Range** | EXTENDED<br>MIXED<br>STANDARD |
+
+###### CanObjectId
+
+| Item ||
+|--------|---------------|
+| **Name** | CanObjectId |
+| **Description** | Holds the handle ID of HRH or HTH. The value of this parameter is unique in a given CAN Driver, and it should start with 0 and continue without any gaps. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### CanObjectType
+
+| Item ||
+|--------|---------------|
+| **Name** | CanObjectType |
+| **Description** | Specifies if the HardwareObject is used as Transmit or as Receive object |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | TRANSMIT |
+| **Range** | RECEIVE<br>TRANSMIT |
+
+###### CanTriggerTransmitEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CanTriggerTransmitEnable |
+| **Description** | This parameter defines if or if not Can supports the trigger-transmit API for this handle. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+###### CanControllerRef
+
+| Item ||
+|--------|---------------|
+| **Name** | CanControllerRef |
+| **Description** | Reference to CAN Controller to which the HOH is associated to. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+###### CanMainFunctionRWPeriodRef
+
+| Item ||
+|--------|---------------|
+| **Name** | CanMainFunctionRWPeriodRef |
+| **Description** | Reference to CanMainFunctionPeriod |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### CanHwFilter
+This container is only valid for HRHs and contains the configuration (parameters) of one hardware filter.
+
+###### CanHwFilterCode
+
+| Item ||
+|--------|---------------|
+| **Name** | CanHwFilterCode |
+| **Description** | Specifies (together with the filter mask) the identifiers range that passes the hardware filter. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+###### CanHwFilterMask
+
+| Item ||
+|--------|---------------|
+| **Name** | CanHwFilterMask |
+| **Description** | Describes a mask for hardware-based filtering of CAN identifiers. The CAN identifiers of incoming messages are masked with the appropriate CanFilterMaskValue. Bits holding a 0 mean don't care, i.e. do not compare the message's identifier in the respective bit position. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### CanTTHardwareObjectTrigger
+This container is only included and valid if TTCAN SWS is used and TTCAN is enabled.
+
+##### CanIcom
+This container contains the parameters for configuring pretended networking
+
+##### CanIcomConfig
+This container contains the configuration parameters of the ICOM Configuration.
+
+###### CanIcomConfigId
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomConfigId |
+| **Description** | This parameter identifies the ID of the ICOM configuration. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 255 |
+| **Min-value** | 1 |
+
+###### CanIcomWakeOnBusOff
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomWakeOnBusOff |
+| **Description** | This parameter defines that the MCU shall wake if the bus off is detected or not. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CanIcomWakeupCauses
+This container contains the configuration parameters of the wakeup causes to leave the power saving mode.
+
+##### CanIcomRxMessage
+This container contains the configuration parameters for the wakeup causes for matching received messages. It has to be configured as often as received messages are defined as wakeup cause.
+
+###### CanIcomMessageId
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomMessageId |
+| **Description** | This parameter defines the message ID the wakeup causes of this CanIcomRxMessage are configured for. In addition a mask (CanIcomMessageIdMask) can be defined, in that case it is possible to define a range of rx messages, which can create a wakeup condition. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 536870912 |
+| **Min-value** | 0 |
+
+###### CanIcomPayloadLengthError
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomPayloadLengthError |
+| **Description** | This parameter defines that the MCU shall wake if a payload error occurs |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### CanIcomRxMessageSignalConfig
+This container contains the configuration parameters for the wakeup causes for matching signals.
+
+###### CanIcomSignalMask
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomSignalMask |
+| **Description** | This parameter shall be used to mask a signal in the payload of a CAN message. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 18446744073709551615 |
+| **Min-value** | 0 |
+
+###### CanIcomSignalOperation
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomSignalOperation |
+| **Description** | This parameter defines the operation, which shall be used to verify the signal value creates a wakeup condition. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Range** | AND<br>EQUAL<br>GREATER<br>SMALLER<br>XOR |
+
+###### CanIcomSignalValue
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomSignalValue |
+| **Description** | This parameter shall be used to define a signal value which shall be compared (CanIcomSignalOperation) with the masked CanIcomSignalMask value of the received signal (CanIcomSignalRef). |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 18446744073709551615 |
+| **Min-value** | 0 |
+
+###### CanIcomSignalRef
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomSignalRef |
+| **Description** | This parameter defines a reference to the signal which shall be checked additional to the message id (CanIcomMessageId). |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+#### CanGeneral
+This container contains the parameters related each CAN Driver Unit.
+
+##### CanDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | CanDevErrorDetect |
+| **Description** | Switches the Development Error Detection and Notification ON or OFF. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### CanDeInitApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CanDeInitApi |
+| **Description** | Adds / removes the service Can_DeInit() from the code. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CanIndex
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIndex |
+| **Description** | Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+##### CanLPduReceiveCalloutFunction
+
+| Item ||
+|--------|---------------|
+| **Name** | CanLPduReceiveCalloutFunction |
+| **Description** | This parameter defines the existence and the name of a callout function that is called after a successful reception of a received CAN Rx L-PDU. If this parameter is omitted no callout shall take place. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### CanMainFunctionBusoffPeriod
+
+| Item ||
+|--------|---------------|
+| **Name** | CanMainFunctionBusoffPeriod |
+| **Description** | This parameter describes the period for cyclic call to Can_MainFunction_Busoff. Unit is seconds. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 10.0 |
+| **Max-value** | 65.535 |
+| **Min-value** | 0.001 |
+
+##### CanMainFunctionModePeriod
+
+| Item ||
+|--------|---------------|
+| **Name** | CanMainFunctionModePeriod |
+| **Description** | This parameter describes the period for cyclic call to Can_MainFunction_Mode. Unit is seconds. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 10.0 |
+| **Max-value** | 65.535 |
+| **Min-value** | 0.001 |
+
+##### CanMainFunctionReadPeriod
+
+| Item ||
+|--------|---------------|
+| **Name** | CanMainFunctionReadPeriod |
+| **Description** | This parameter describes the period for cyclic call to Can_MainFunction_Read. Unit is seconds. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 65.535 |
+| **Min-value** | 0.001 |
+
+##### CanMainFunctionWritePeriod
+
+| Item ||
+|--------|---------------|
+| **Name** | CanMainFunctionWritePeriod |
+| **Description** | This parameter describes the period for cyclic call to Can_MainFunction_Write. Unit is seconds. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 65.535 |
+| **Min-value** | 0.001 |
+
+##### CanSetBaudrateApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CanSetBaudrateApi |
+| **Description** | The support of the Can_SetBaudrate API is optional.If this parameter is set to true the Can_SetBaudrate API shall be supported. Otherwise the API is not supported. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CanTimeoutDuration
+
+| Item ||
+|--------|---------------|
+| **Name** | CanTimeoutDuration |
+| **Description** | Specifies the maximum time for blocking function until a timeout is detected. Unit is in clock ticks. Configure the timeout according to r5f clock frequency(200MHz/400MHz) |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 10.0 |
+| **Max-value** | 65.535 |
+| **Min-value** | 0.001 |
+
+##### CanDefaultOSCounterId
+
+| Item ||
+|--------|---------------|
+| **Name** | CanDefaultOSCounterId |
+| **Description** | Default Os Counter Id if node reference to OsCounter ref CanOsCounterRef is not set |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | Texas Instruments |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 16 |
+| **Min-value** | 0 |
+
+##### CanVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CanVersionInfoApi |
+| **Description** | Switches the Can_GetVersionInfo() API ON or OFF. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CanMaxNrOfTxObjects
+
+| Item ||
+|--------|---------------|
+| **Name** | CanMaxNrOfTxObjects |
+| **Description** | Number of Transmit Objects |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 3 |
+| **Max-value** | 3 |
+| **Min-value** | 0 |
+
+##### CanTypeofInterruptFunction
+
+| Item ||
+|--------|---------------|
+| **Name** | CanTypeofInterruptFunction |
+| **Description** | Type of ISR function |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CAN_ISR_CAT2 |
+| **Range** | CAN_ISR_VOID<br>CAN_ISR_CAT1<br>CAN_ISR_CAT2 |
+
+##### CanLoopBackTest_Enable
+
+| Item ||
+|--------|---------------|
+| **Name** | CanLoopBackTest_Enable |
+| **Description** | Enable/Disable LoopBack test API.If this parameter is set to true the LoopBack mode shall be supported which is used for internal testing. Otherwise the API is not supported. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CanOsCounterRef
+
+| Item ||
+|--------|---------------|
+| **Name** | CanOsCounterRef |
+| **Description** | This parameter contains a reference to the OsCounter, which is used by the CAN driver. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### CanSupportTTCANRef
+
+| Item ||
+|--------|---------------|
+| **Name** | CanSupportTTCANRef |
+| **Description** | The parameter refers to CanIfSupportTTCAN parameter in the CAN Interface Module configuration. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### CanIcomGeneral
+This container contains the general configuration parameters of the ICOM Configuration.
+
+###### CanIcomVariant
+
+| Item ||
+|--------|---------------|
+| **Name** | CanIcomVariant |
+| **Description** | Defines the variant, which is supported by this CanController |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CAN_ICOM_VARIANT_NONE |
+| **Range** | CAN_ICOM_VARIANT_HW<br>CAN_ICOM_VARIANT_NONE<br>CAN_ICOM_VARIANT_SW |
+
+##### CanMainFunctionRWPeriods
+This container contains the parameter for configuring the period for cyclic call to Can_MainFunction_Read or Can_MainFunction_Write depending on the referring item.
+
+###### CanMainFunctionPeriod
+
+| Item ||
+|--------|---------------|
+| **Name** | CanMainFunctionPeriod |
+| **Description** | This parameter describes the period for cyclic call to Can_MainFunction_Read or Can_MainFunction_Write depending on the referring item. Unit is seconds |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0.001 |
+| **Max-value** | 65.535 |
+| **Min-value** | 0.001 |
+
+#### Steps To Configure Can Module
+
+1. Open EB Tresos configurator tool and load Port, Mcu and Can modules
+2. Open PORT module plugin and configure required pins as CAN-TX, CAN-RX
+3. Open CAN module plugin, Select the Config Variant (Pre-compile/Link-Time)
+4. In CAN module plugin configure required parameters.
+5. Save the configuration and generate the configuration.
+
+### Examples
+
+#### Overview
+
+1. By default, the CAN example runs in Loop Back mode.
+
+
+
+2. For AM263Px:
+
+    - All 5 CAN Controllers transmit the data and then receive it through the Interrupt Service Routine (ISR).
+    - After receiving the data, it is compared with the transmitted data.
+
+3. If the received data mismatches the transmitted data, then the application fails.
+4. External Loop back mode can be enabled by setting "CAN_LOOPBACK_ENABLE" in Can_Cfg.h to STD_OFF.
+5. In External Loop Back mode, CAN communication can be tested using the PCAN debugger.
+6. For AM263Px board:
+
+    - MCAN4 pins are popped out, and MCAN4 is configured with a 1Mbps nominal bit-rate and 5 Mbps data bit-rate.
+
+7. While running the example code in External Loop back mode:
+
+    - First, it asks to select the CAN instance, where "f" corresponds to MCAN4.
+    - Then it asks to select the interrupt or polling method.
+    - If interrupts are enabled for the instance in Can_PBcfg.c, then select the interrupt ("i") method; otherwise, choose the Polling ("p") method.
+    - After selecting the method, options for transmission and reception will appear.
+    - If the user chooses the transmit option, they are further prompted to select between standard and extended frames.
+    - Selecting the standard option transmits a Standard CAN frame, while choosing the extended option transmits an extended frame to PCAN.
+8. In receive mode, the controller is ready to receive CAN frames from PCAN.
+
+
+#### Hardware Software Setup and Tools
+
+
+1. PMIC Settings should be initialized for AM263Px CC board.
+Select line default state for MCAN/FSI Mux is changed from low to high, which means by default FSI is enabled.
+In order to use MCAN, this IOMUX need to be updated to select as default low and it will ensure MCAN is enabled.
+
+
+1. Locate the CAN-H and CAN-L pins on both the PCAN device and the board. Refer to the documentation or user manual for both the PCAN device and the board to find the correct pins.
+2. Select appropriate cables with the necessary connectors to connect between the PCAN device and the board. Ensure the cables have the correct connectors to fit securely into both the PCAN device and board's connectors.
+
+```{figure} Assets/images/can/am263x_mcan_external_hw_connect.png
+:alt: CAN Hardware Connectivity with PCAN USB
+:align: center
+CAN Hardware Connectivity with PCAN USB
+```
+
+3. Connect the CAN-H pin from the PCAN device to the corresponding CAN-H pin on the board using the chosen cable.
+4. Connect the CAN-L pin from the PCAN device to the corresponding CAN-L pin on the board using the chosen cable.
+5. Place a 120-ohm resistor between the CAN-H and CAN-L lines at the board end.
+6. The resistor should be connected in parallel between the CAN-H and CAN-L lines, creating a termination point.
+7. Open the PCAN configuration software on your PC. The software is usually provided by the manufacturer of the PCAN device.
+8. Locate the settings for bit rate configuration.
+9. Set the nominal bit rate to 1 Mbps and the data bit rate to 5 Mbps.
+10. Apply the changes and save the configuration.
+11. Ensure all connections are secure and properly plugged into their respective connectors on both the PCAN device and the board.
+12. Before powering on the system, double-check all connections to ensure they are correctly made, and there are no loose or improperly connected cables.
+13. After making the connections and configuring the PCAN device, power on both the board and the PCAN device.
+14. Once the system is powered on, verify that the CAN communication is established between the board and the PCAN device.
+
+#### Steps to build and run example
+
+1. CAN example application demonstrating the MCAL CAN driver features is in folder <MCAL_ROOT>/examples/Can.
+2. This application can be built from the build folder by giving "gmake –s can_app PLATFORM=am263px."
+3. Once the build is completed we get a binary file, which is loaded in our controller and executed.
+
+#### Configuration used to test this example
+
+
+
+1. 5 Instances of CAN are configured.
+2. All CAN controllers are configured with 1Mbps Arbitration bit rate and 5 Mbps of Data bit rate.
+3. In total 20 Hardware Objects are configured, For each CAN controller 2 HTH and 2 HRH.
+4. In Default example for Reception 0xC1 ID filter is configured for Polling Mode and 0xC0 ID filter is configured for Interrupt mode.
+5. Please refer configuration parameters in below images for baudrate update
+
+
+**For 1Mbps and 5Mpbs:**
+
+```{figure} Assets/images/can/can_image9.png
+```
+
+```{figure} Assets/images/can/can_image10.png
+```
+
+**For 500Kbps and 2.5Mpbs:**
+
+```{figure} Assets/images/can/can_image11.png
+```
+
+```{figure} Assets/images/can/can_image12.png
+```
+
+#### Example Logs
+
+```
+
+
+    CanApp: Sample Application - STARTS !!!
+    CanApp: CAN Loopback test 
+    CanApp: Can Controller: MCAN0
+    CanAppCalling Can_Write 
+    CanAppCan_Write ok 
+    CanApp: Test Passed
+    CanApp: Can Controller: MCAN1
+    CanAppCalling Can_Write 
+    CanAppCan_Write ok 
+    CanApp: Test Passed
+    CanApp: Can Controller: MCAN2
+    CanAppCalling Can_Write 
+    CanAppCan_Write ok 
+    CanApp: Test Passed
+    CanApp: Can Controller: MCAN3
+    CanAppCalling Can_Write 
+    CanAppCan_Write ok 
+    CanApp: Test Passed
+    CanApp: Can Controller: MCAN4
+    CanAppCalling Can_Write 
+    CanAppCan_Write ok 
+    CanApp: Test Passed
+    CAN Stack Usage: 832 bytes
+    CAN Test Passed!!!
+
+
+```
+
+#### File Structure
+
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Can**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┣ 📜**CanApp.c** : *Contains CAN test example.*\
+ ┃ ┃ ┃ ┣ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Can_Demo_Cfg**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Can_Cfg.h** : *Contains the Precompile switches, Macros for CAN controllers, Hardware Objects etc.*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Can_Cfg.c** : *Contains all controllers Pre-Compile Configuration parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Can_PBcfg.c** : *Contains all controllers Post-Build Configuration parameters*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┣ 📜README.txt
+
+```{Note}
+    Can_PBcfg.c and Can_Cfg.c will be present if Post-Build config variant is selected, only Can_Cfg.c will be present if Pre-Compile variant is selected
+```
+
+
+### FAQ's
+
+[Bit rate Calculation](<https://e2e.ti.com/support/processors-group/processors/f/processors-forum/920090/faq-tda4vm-can-how-is-bit-rate-calculated-for-can>)
+
+### References
+
+[AUTOSAR_SWS_CANDriver](https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_CANDriver.pdf)\
+[Technical Reference Manual](https://www.ti.com/product/AM263P4#tech-docs)

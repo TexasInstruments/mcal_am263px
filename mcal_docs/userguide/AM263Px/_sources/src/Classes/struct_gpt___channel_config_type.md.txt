@@ -1,0 +1,34 @@
+---
+orphan: true
+---
+
+---
+title: Gpt_ChannelConfigType
+summary: Configuration per channel. 
+
+---
+
+# Gpt_ChannelConfigType
+
+
+
+Configuration per channel. 
+
+
+`#include <Gpt.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  [Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) | ChannelId |  Channel Id.  |
+|  [Gpt_ChannelMode](../Modules/group___g_p_t.md#enum-gpt_channelmode) | ChannelMode |  Channel mode.  |
+|  [Gpt_CntId](../Modules/group___g_p_t.md#typedef-gpt_cntid) | CounterBlk |  GPT Counter Block.  |
+|  uint32 | GptChannelTickFrequency |  Specifies the tick frequency of the timer channel in Hz.  |
+|  uint32 | tickValueMax |  Maximum value in ticks, the timer channel is able to count. With the next tick, the timer rolls over to zero TODO: ECUC_Gpt_00332 how to implement this with current HW?  |
+|  uint8 | GptEnableWakeup |  Enables wakeup capability of MCU for a channel.  |
+|  [Gpt_NotifyType](../Modules/group___g_p_t.md#typedef-gpt_notifytype) | Notification_pt |  Function pointer to callback function (for non-wakeup notification)  |
+|  [Gpt_ClockSourceType](../Modules/group___g_p_t.md#typedef-gpt_clocksourcetype) | GptChannelClksrcRef |  Reference to the GptClockReferencePoint from which the channel clock is derived.  |
+|  uint8 | GptWakeupSourceRef |  Channel wakeup source, in case the wakeup-capability is true this value is transmitted to the EcuState Manager.  |
+
+

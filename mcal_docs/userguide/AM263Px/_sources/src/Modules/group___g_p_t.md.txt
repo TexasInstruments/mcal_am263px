@@ -1,0 +1,754 @@
+---
+title: Gpt API GUIDE Header file
+
+---
+
+# GPT
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Gpt_ModeType](../Modules/group___g_p_t.md#enum-gpt_modetype)** | List of process modes.  | 
+|enum| **[Gpt_PredefTimerType](../Modules/group___g_p_t.md#enum-gpt_predeftimertype)** | Type for GPT Predefined(free running) Timers.  | 
+|enum| **[Gpt_ChannelMode](../Modules/group___g_p_t.md#enum-gpt_channelmode)** | GPT channel mode macros.  | 
+|enum| **[Gpt_PrescaleValueType](../Modules/group___g_p_t.md#enum-gpt_prescalevaluetype)** | List of Prescale values for General purpose timer channels The timer counter is prescaled with the value 2^(PTV+1). Example: PTV = 3, counter increases value (if started) after 16 functional clock periods Note: Not applicable to GPT Predef timers.  | 
+|enum| **[Gpt_ChannelStateType](../Modules/group___g_p_t.md#enum-gpt_channelstatetype)** | GPT channel state GPT will be in one of this state during its lifetime.  | 
+|typedef uint32  | **[Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype)** | Type describing the Gpt channel.  | 
+|typedef uint32  | **[Gpt_ValueType](../Modules/group___g_p_t.md#typedef-gpt_valuetype)** | Type describing the timeout value.  | 
+|typedef uint32  | **[Gpt_CntId](../Modules/group___g_p_t.md#typedef-gpt_cntid)** | Type describing the counter block to use for GPT.  | 
+|typedef void(*)(void)  | **[Gpt_NotifyType](../Modules/group___g_p_t.md#typedef-gpt_notifytype)** | Notification callback function pointer.  | 
+|typedef uint32  | **[Gpt_ClockSourceType](../Modules/group___g_p_t.md#typedef-gpt_clocksourcetype)** | Type for specifying source clock selection.  | 
+
+
+
+### enum Gpt_ModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| GPT_MODE_UNITIALIZED | 0U| GPT initialized.   |
+| GPT_MODE_NORMAL | | Normal operation mode of the GPT.   |
+| GPT_MODE_SLEEP | | Operation for reduced power operation mode. In sleep mode only wakeup capable channels are available.   |
+
+
+
+
+**Brief**: 
+List of process modes. 
+
+
+
+### enum Gpt_PredefTimerType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| GPT_PREDEF_UNDEFINED | 0U| GPT Predef Timer is undefined.   |
+| GPT_PREDEF_TIMER_1US_16BIT | 1U| GPT Predef Timer with tick duration 1us and range 16bit.   |
+| GPT_PREDEF_TIMER_1US_24BIT | 2U| GPT Predef Timer with tick duration 1us and range 24bit.   |
+| GPT_PREDEF_TIMER_1US_32BIT | 3U| GPT Predef Timer with tick duration 1us and range 32bit.   |
+| GPT_PREDEF_TIMER_100US_32BIT | 4U| GPT Predef Timer with tick duration 100us and range 32bit.   |
+
+
+
+
+**Brief**: 
+Type for GPT Predefined(free running) Timers. 
+
+
+
+### enum Gpt_ChannelMode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| GPT_CH_MODE_CONTINUOUS | 0U| After reaching the target time, the timer continues running with the value "zero" again.   |
+| GPT_CH_MODE_ONESHOT | | After reaching the target time, the timer stops automatically (timer expired).   |
+| GPT_CH_MODE_CONT_WAKEUP | |   |
+| GPT_CH_MODE_ONESHOT_WAKEUP | |   |
+
+
+
+
+**Brief**: 
+GPT channel mode macros. 
+
+
+
+### enum Gpt_PrescaleValueType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| GPT_PRESCALE_UNDEFINED | |   |
+
+
+
+
+**Brief**: 
+List of Prescale values for General purpose timer channels The timer counter is prescaled with the value 2^(PTV+1). Example: PTV = 3, counter increases value (if started) after 16 functional clock periods Note: Not applicable to GPT Predef timers. 
+
+
+
+### enum Gpt_ChannelStateType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| GPT_UNINITIALIZED | 0U| GPT is uninitialized.   |
+| GPT_INITIALIZED | | GPT is initialized.   |
+| GPT_RUNNING | | GPT is running.   |
+| GPT_STOPPED | | GPT is stopped.   |
+| GPT_EXPIRED | | GPT is expired.   |
+
+
+
+
+**Brief**: 
+GPT channel state GPT will be in one of this state during its lifetime. 
+
+
+
+### typedef Gpt_ChannelType
+```
+typedef uint32 Gpt_ChannelType;
+```
+
+
+**Brief**: 
+Type describing the Gpt channel. 
+
+
+
+### typedef Gpt_ValueType
+```
+typedef uint32 Gpt_ValueType;
+```
+
+
+**Brief**: 
+Type describing the timeout value. 
+
+
+
+### typedef Gpt_CntId
+```
+typedef uint32 Gpt_CntId;
+```
+
+
+**Brief**: 
+Type describing the counter block to use for GPT. 
+
+
+
+### typedef Gpt_NotifyType
+```
+typedef void(* Gpt_NotifyType) (void);
+```
+
+
+**Brief**: 
+Notification callback function pointer. 
+
+
+
+### typedef Gpt_ClockSourceType
+```
+typedef uint32 Gpt_ClockSourceType;
+```
+
+
+**Brief**: 
+Type for specifying source clock selection. 
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[GptConfigReg](../Classes/struct_gpt_config_reg.md)** | GPT register readback structure.  |
+| **[Gpt_ChannelConfigType](../Classes/struct_gpt___channel_config_type.md)** | Configuration per channel.  |
+| **[Gpt_ConfigType](../Classes/struct_gpt___config_type.md)** | global configuration of the driver  |
+| **[Gpt_DriverObjType](../Classes/struct_gpt___driver_obj_type.md)** | Driver object.  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| GPT_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| GPT_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| GPT_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| GPT_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by GPT Driver.  |
+| GPT_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by GPT Driver.  |
+| GPT_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by GPT Driver.  |
+| GPT_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| GPT_MODULE_ID   | GPT Driver Module ID.  |
+| GPT_INSTANCE_ID   | GPT Driver Instance ID.  |
+| GPT_CH_ISR_MODE_CONTINUOUS   | GPT continuous mode index.  |
+| GPT_CH_ISR_MODE_ONESHOT   | GPT oneshot mode index.  |
+| GPT_CH_ISR_MODE_CONT_WAKEUP   | GPT continuous wakeup mode index.  |
+| GPT_CH_ISR_MODE_ONESHOT_WAKEUP   | GPT oneshot wakeup mode index.  |
+| GPT_E_UNINIT   | API service used without module initialization.  |
+| GPT_E_BUSY   | API service called during ongoing process (Timer is already running)  |
+| GPT_E_MODE   | API service called when driver is in wrong mode.  |
+| GPT_E_ALREADY_INITIALIZED   | API Gpt_Init is called but the module is already initialized.  |
+| GPT_E_INIT_FAILED   | API Gpt_Init is called but the module is already initialized.  |
+| GPT_E_PARAM_CHANNEL   | API called with invalid channel.  |
+| GPT_E_PARAM_VALUE   | API servcie called with invalid start timer parameter.  |
+| GPT_E_PARAM_POINTER   | API servcie called with invalid(Null_Ptr) data buffer pointer.  |
+| GPT_E_PARAM_PREDEF_TIMER   | API service called with invalid Predef Timer.  |
+| GPT_E_PARAM_MODE   | Gpt_SetMode is called with wrong mode parameter.  |
+| GPT_E_INVALID_ISR   | Invalid entry to ISR.  |
+| GPT_SID_GET_VERSION_INFO   | Gpt_GetVersionInfo() API Service ID.  |
+| GPT_SID_INIT   | Gpt_Init() API Service ID.  |
+| GPT_SID_DEINIT   | Gpt_DeInit() API Service ID.  |
+| GPT_SID_GET_TIME_ELAPSED   | Gpt_GetTimeElapsed() API Service ID.  |
+| GPT_SID_GET_TIME_REMAINING   | Gpt_GetTimeRemaining() API Service ID.  |
+| GPT_SID_START_TIMER   | Gpt_StartTimer() API Service ID.  |
+| GPT_SID_STOP_TIMER   | Gpt_StopTimer() API Service ID.  |
+| GPT_SID_ENABLE_NOTIFY   | Gpt_EnableNotification() API Service ID.  |
+| GPT_SID_DISABLE_NOTIFY   | Gpt_DisableNotification() API Service ID.  |
+| GPT_SID_SET_MODE   | Gpt_SetMode() API Service ID.  |
+| GPT_SID_DISABLE_WAKEUP   | Gpt_DisableWakeup() API Service ID.  |
+| GPT_SID_ENABLE_WAKEUP   | Gpt_EnableWakeup() API Service ID.  |
+| GPT_SID_CHECK_WAKEUP   | Gpt_CheckWakeup() API Service ID.  |
+| GPT_SID_GET_PREDEFTIMERVALUE   | Gpt_GetPredefTimerValue() API Service ID.  |
+| GPT_SID_GET_GETHWUNITOBJ   | GPT Get Hw Unit Obj API Service ID.  |
+| GPT_SID_GET_CONFIG_REG_READBACK   | GPT Gpt_ConfigRegReadBack API Service ID.  |
+| GPT_DRIVER_UNINITIALIZED   | Driver status UN INITIALIZED.  |
+| GPT_DRIVER_INITIALIZED   | Driver status INITIALIZED.  |
+| CH_COMP_MASK   | Masks the higher order bits to evaluate compare block (lsb0 and lsb1)  |
+| MAX_RESOLUTION   | Maximum resolution for the timer.  |
+| SET (type, var, bit)  | Set a bit.  |
+| CLEAR (type, var, bit)  | Clear a bit.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Gpt_GetVersionInfo](../Modules/group___g_p_t.md#function-gpt_getversioninfo)**(Std_VersionInfoType * VersionInfoPtr)| This service returns the version information of this module.  |
+| void | **[Gpt_Init](../Modules/group___g_p_t.md#function-gpt_init)**(const [Gpt_ConfigType](../Classes/struct_gpt___config_type.md) * configPtr)| This service Initializes the GPT driver.  |
+| void | **[Gpt_DeInit](../Modules/group___g_p_t.md#function-gpt_deinit)**(void )| This service deinitializes the GPT driver.  |
+| [Gpt_ValueType](../Modules/group___g_p_t.md#typedef-gpt_valuetype) | **[Gpt_GetTimeRemaining](../Modules/group___g_p_t.md#function-gpt_gettimeremaining)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) channel)| This service returns the time remaining until the target time is reached.  |
+| void | **[Gpt_StartTimer](../Modules/group___g_p_t.md#function-gpt_starttimer)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) channel, [Gpt_ValueType](../Modules/group___g_p_t.md#typedef-gpt_valuetype) value)| This service starts a timer channel.  |
+| void | **[Gpt_StopTimer](../Modules/group___g_p_t.md#function-gpt_stoptimer)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) channel)| This service stops a timer channel.  |
+| void | **[Gpt_EnableNotification](../Modules/group___g_p_t.md#function-gpt_enablenotification)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) channel)| This service enables the interrupt notification for a channel (relevant in normal mode).  |
+| void | **[Gpt_DisableNotification](../Modules/group___g_p_t.md#function-gpt_disablenotification)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) channel)| This service disables the interrupt notification for a channel (relevant in normal mode).  |
+| Std_ReturnType | **[Gpt_ConfigRegReadBack](../Modules/group___g_p_t.md#function-gpt_configregreadback)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) channel, [GptConfigReg](../Classes/struct_gpt_config_reg.md) * GptConfigReg_pt)| This function reads the important registers of the hardware unit and returns the value in the structure.  |
+| void | **[Gpt_CheckWakeup](../Modules/group___g_p_t.md#function-gpt_checkwakeup)**(EcuM_WakeupSourceType WakeupSource)| This function checks if a wakeup capable GPT channel is the source for a wakeup event and calls the ECU state manager service EcuM_SetWakeupEvent in case of a valid GPT channel wakeup event.  |
+| void | **[Gpt_DisableWakeup](../Modules/group___g_p_t.md#function-gpt_disablewakeup)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) Channel)| This service disables the wakeup interrupt of a channel (relevant in sleep mode)  |
+| void | **[Gpt_EnableWakeup](../Modules/group___g_p_t.md#function-gpt_enablewakeup)**([Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype) Channel)| This Function enables the wakeup interrupt of a channel (relevant in sleep mode)  |
+| Std_ReturnType | **[Gpt_GetPredefTimerValue](../Modules/group___g_p_t.md#function-gpt_getpredeftimervalue)**([Gpt_PredefTimerType](../Modules/group___g_p_t.md#enum-gpt_predeftimertype) PredefTimer, uint32 * TimeValuePtr)| This Function delivers the current value of the desired GPT Predef Timer.  |
+| void | **[Gpt_SetMode](../Modules/group___g_p_t.md#function-gpt_setmode)**([Gpt_ModeType](../Modules/group___g_p_t.md#enum-gpt_modetype) Mode)| This Function sets the operation mode of the GPT.  |
+
+
+
+### function Gpt_GetVersionInfo
+
+```
+void Gpt_GetVersionInfo(
+    Std_VersionInfoType * VersionInfoPtr
+)
+```
+
+
+**Brief**: 
+This service returns the version information of this module. 
+
+Returns the version information of this module
+
+Service ID[hex] - 0x00
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **VersionInfoPtr** - Pointer to where to store the version information of this module 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_Init
+
+```
+void Gpt_Init(
+    const Gpt_ConfigType * configPtr
+)
+```
+
+
+**Brief**: 
+This service Initializes the GPT driver. 
+
+This service initializes all the configured Gpt channels. This will set the state of the each channel to"initialized", also set the Gpt driver state to "Normal".
+
+Service ID[hex] - 0x01
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ConfigPtr** - configuration structure for initializing the module. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_DeInit
+
+```
+void Gpt_DeInit(
+    void 
+)
+```
+
+
+**Brief**: 
+This service deinitializes the GPT driver. 
+
+This service deinitializes the RTI used by Gpt driver to the power on reset state. The Gpt driver state is changed to "Uninitialized" state". All the channel registers are cleared to stop the timer channels. API will disable all interrupt notifications, wakeup interrupts.
+
+Service ID[hex] - 0x02
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_GetTimeRemaining
+
+```
+Gpt_ValueType Gpt_GetTimeRemaining(
+    Gpt_ChannelType channel
+)
+```
+
+
+**Brief**: 
+This service returns the time remaining until the target time is reached. 
+
+Gpt_GetTimeRemaining will return the timer value remaining until the target time will be reached next time. The remaining time is target time minus time already elapsed. In one shot mode, if the timer is in stopped state, the function will return remaining time value at the moment of stopping. If the timer is expired, the function will return 0.
+
+Service ID[hex] - 0x04
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - ChannelId of the Gpt channel. 
+
+
+**Returns**: 
+
+  
+* **Remaining** timer value (in number of ticks) 
+<br> 
+
+
+**Return**: Gpt_ValueType 
+
+### function Gpt_StartTimer
+
+```
+void Gpt_StartTimer(
+    Gpt_ChannelType channel,
+    Gpt_ValueType value
+)
+```
+
+
+**Brief**: 
+This service starts a timer channel. 
+
+Gpt_StartTimer will start the selected timer channel with defined target time. If the timer channel is enabled for interrupt notification, then interrupt notification will be triggered after expiration of the selected timer channel. In one shot mode, if the timer is expired then the channel will be stopped in interrupt subroutine. The selected channel will be moved to "Running" state after calling this function.
+
+Service ID[hex] - 0x05
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - ChannelId of the Gpt channel. 
+  
+* **value** - Target time in number of ticks. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_StopTimer
+
+```
+void Gpt_StopTimer(
+    Gpt_ChannelType channel
+)
+```
+
+
+**Brief**: 
+This service stops a timer channel. 
+
+Gpt_StopTimer will stop the selected timer channel.This will clear all the registers corresponding to the selected channel. The state of the timer channel will be changed to "Stopped".If the channel is in state "Initialized","Expired","Stopped" before calling this function, the function will be left without any action.
+
+Service ID[hex] - 0x06
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(but not for the same timer channel)
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the GPT channel. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_EnableNotification
+
+```
+void Gpt_EnableNotification(
+    Gpt_ChannelType channel
+)
+```
+
+
+**Brief**: 
+This service enables the interrupt notification for a channel (relevant in normal mode). 
+
+Gpt_EnableNotification will enable the interrupt notification for the selected channel. The SETINT bit in RTI Set interrupt register will be Set to enable the Compare interrupt. The interrupt is triggered when Free running counter value matches with compare register value.
+
+Service ID[hex] - 0x07
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(but not for the same timer channel)
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the GPT channel. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_DisableNotification
+
+```
+void Gpt_DisableNotification(
+    Gpt_ChannelType channel
+)
+```
+
+
+**Brief**: 
+This service disables the interrupt notification for a channel (relevant in normal mode). 
+
+Gpt_DisableNotification will disable the compare interrupt notification for the selected channel. The SETINT bit in RTI Set interrupt register will be cleared to disable the Compare interrupt. The interrupt is triggered when Free running counter value matches with compare register value.
+
+Service ID[hex] - 0x08
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(but not for the same timer channel)
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the GPT channel. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_ConfigRegReadBack
+
+```
+Std_ReturnType Gpt_ConfigRegReadBack(
+    Gpt_ChannelType channel,
+    GptConfigReg * GptConfigReg_pt
+)
+```
+
+
+**Brief**: 
+This function reads the important registers of the hardware unit and returns the value in the structure. 
+
+This API should be called after Gpt_Init is called. Otherwise this API will return E_NOT_OK.
+
+This API could be used to readback the register contents after Gpt_Init and then the readback value could be compared during GPT execution to check the correctness of the HW unit. Since this API is used for this purpose, the register returned are the ones which doesn't change after init based on conv or channel config.
+
+Service ID[hex] - 0x0F
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(but not for the same timer channel)
+
+
+**Parameters**: 
+
+  
+* **GptChannel** - Numeric identifier of the GPT channel. If this is invalid, then the API will return E_NOT_OK. 
+  
+* **RegRbPtr** - Pointer to where to store the readback values. If this pointer is NULL_PTR, then the API will return E_NOT_OK. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Register read back has been done 
+<br> 
+  
+* **E_NOT_OK** - Register read back failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Gpt_CheckWakeup
+
+```
+void Gpt_CheckWakeup(
+    EcuM_WakeupSourceType WakeupSource
+)
+```
+
+
+**Brief**: 
+This function checks if a wakeup capable GPT channel is the source for a wakeup event and calls the ECU state manager service EcuM_SetWakeupEvent in case of a valid GPT channel wakeup event. 
+
+Service ID[hex] - 0x0C
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **WakeupSource** - Information on wakeup source to be checked. The associated GPT channel can be determined from configuration data. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_DisableWakeup
+
+```
+void Gpt_DisableWakeup(
+    Gpt_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+This service disables the wakeup interrupt of a channel (relevant in sleep mode) 
+
+Service ID[hex] - 0x0A
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(but not for the same timer channel)
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric Identifier of the GPT Channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_EnableWakeup
+
+```
+void Gpt_EnableWakeup(
+    Gpt_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+This Function enables the wakeup interrupt of a channel (relevant in sleep mode) 
+
+Service ID[hex] - 0x0B
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(but not for the same timer channel)
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric Identifier of the GPT Channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Gpt_GetPredefTimerValue
+
+```
+Std_ReturnType Gpt_GetPredefTimerValue(
+    Gpt_PredefTimerType PredefTimer,
+    uint32 * TimeValuePtr
+)
+```
+
+
+**Brief**: 
+This Function delivers the current value of the desired GPT Predef Timer. 
+
+Service ID[hex] - 0x0D
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **PredefTimer** - GPT Predef Timer 
+  
+* **TimeValuePtr** - Pointer to time value destination data in RAM 
+
+
+**Returns**: 
+
+  
+* **E_OK** no error has been detected 
+<br> 
+  
+* **E_NOT_OK** aborted due to errors 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Gpt_SetMode
+
+```
+void Gpt_SetMode(
+    Gpt_ModeType Mode
+)
+```
+
+
+**Brief**: 
+This Function sets the operation mode of the GPT. 
+
+Service ID[hex] - 0x09
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Mode** -GPT_MODE_NORMAL: Normal operation mode of the GPT driver. GPT_MODE_SLEEP: Sleep mode of the GPT driver (wakeup capable). See also Gpt_ModeType 
+  
+* **TimeValuePtr** - Pointer to time value destination data in RAM 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+
+
+
+

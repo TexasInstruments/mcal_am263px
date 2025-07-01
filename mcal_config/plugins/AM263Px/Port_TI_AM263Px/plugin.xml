@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+  <!--
+    AUTOSAR Port_TI_AM263Px plugin
+    Project: TI Sitara Mcu MCAL Drivers
+
+    Copyright 2023 by Texas Instruments, Inc.
+    All rights exclusively reserved for Texas Instruments Inc,
+    unless expressly agreed to otherwise.
+  -->
+<plugin>
+    <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="Port_TI_AM263Px_ModuleId"
+             name="Port_TI_AM263Px Module">
+
+    <module id="Port_TI_AM263Px"
+            label="S:Port_TI_AM263Px"
+            mandatory="false"
+            allowMultiple="false"
+            description="TI Sitara Port plug-in for AM263Px "
+            copyright="(c) 2023 Texas Instruments Incorporated"
+            swVersionMajor="10"
+            swVersionMinor="2"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            specVersionMajor="4"
+            specVersionMinor="6"
+            specVersionPatch="0"
+            specVersionSuffix=""
+            relVersionPrefix="AUTOSAR"
+            relVersionMajor="4"
+            relVersionMinor="3"
+            relVersionPatch="1"
+            relVersionSuffix="0"
+            categoryType="Port"
+            categoryLayer="I/O Drivers"
+            categoryCategory="PORT"
+            categoryComponent="ECUC">
+      <ecuType target="ARM" derivate="AM263Px"/>
+    </module>
+  </extension>
+
+
+    <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+             id="Port_TI_AM263Px_ConfigId"
+             name="Port_TI_AM263Px Configuration">
+    <configuration moduleId="Port_TI_AM263Px">
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+        <resource value="config/Port_AM263Px.xdm" type="xdm" id="res_default"/>
+
+		<resource value="config_ext/Port_Rec.xdm" type="xdm" id="res_recconf"/>
+
+		<recconfig name="Default Recommended Configuration"
+                   default="true"
+                   description="Default Recommended Configuration"
+                   resourceId="res_recconf"
+                   path="ASPath:/TI_AM263Px/Port_Rec"/>
+
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TI_AM263Px/Port"/>
+      </data>
+
+      <editor id="Port_TI_AM263Px_EditorId"
+              label="Default"
+              tooltip="TI Sitara Port plug-in for AM263Px">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TI_AM263Px/Port"/>
+          <parameter name="title" value="Port"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="Port_TI_AM263Px_GeneratorId"
+              name="Port_TI_AM263Px Generator">
+    <generator
+          class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator"
+          id="PortGenerator"
+          moduleId="Port_TI_AM263Px">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate,generate_swcd"/>
+
+    </generator>
+  </extension>
+  <extension
+        id="Port_TI_AM263Px_EcuResourceId"
+        name="Port_TI_AM263Px EcuResource"
+        point="dreisoft.tresos.autosar2.api.plugin.ecuresource">
+     <ecuresource
+           derivate="AM263Px"
+           file="resources/AM263Px.properties"
+           target="ARM">
+         <parameter
+               name="subderivate"
+               value="AM263Px">
+         </parameter>
+     </ecuresource>
+  </extension>
+  <extension
+        id="DefaultEcuResourceFinder"
+        name="DefaultEcuResourceFinder"
+        point="dreisoft.tresos.autosar2.api.plugin.ecuresourcefinder">
+     <ecuresourcefinder>
+        <finder
+              class="dreisoft.tresos.autosar2.api.ecuresource.DefaultEcuResourceFinder">
+            <parameter
+                  name="name"
+                  value="subderivate">
+            </parameter>
+            <!-- parameter "path" must contain a schema path! -->
+            <parameter
+                  name="path"
+                  value="/AUTOSAR/TOP-LEVEL-PACKAGES/TI_AM263Px/ELEMENTS/Port/PortGeneral/PortDeviceVariant">
+            </parameter>
+        </finder>
+     </ecuresourcefinder>
+  </extension>
+
+</plugin>
+
