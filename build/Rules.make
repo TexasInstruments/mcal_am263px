@@ -57,10 +57,10 @@ export BUILD_OS_TYPE ?= baremetal
 
 ifeq ($(OS),Windows_NT)
   # Paths for windows machine
-    CCS_PATH := C:/ti/ccs1250/ccs
+    CCS_PATH := C:/ti/ccs1281/ccs
     export EB_PATH?=C:/EB
 else
-    CCS_PATH := /opt/ti/ccs1250/ccs
+    CCS_PATH := /opt/ti/ccs1281/ccs
     export EB_PATH?=/opt/EB
 endif
 
@@ -70,7 +70,7 @@ ifeq ($(OS),Windows_NT)
     TOOLCHAIN_PATH_R5 := $(CCS_PATH)/tools/compiler/ti-cgt-arm_20.2.7.LTS
   else
     ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am263px am261))
-      TOOLCHAIN_PATH_R5 := C:/ti/ti-cgt-armllvm_4.0.0.LTS
+      TOOLCHAIN_PATH_R5 := C:/ti/ti-cgt-armllvm_4.0.1.LTS
     else
       TOOLCHAIN_PATH_R5 := C:/ti/ti-cgt-armllvm_2.1.3.LTS
     endif
@@ -81,7 +81,7 @@ else
     TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-arm_18.12.2.LTS
   else
     ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am263px am261))
-      TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-armllvm_4.0.0.LTS
+      TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-armllvm_4.0.1.LTS
     else
       TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-armllvm_2.1.3.LTS
     endif

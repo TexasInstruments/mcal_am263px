@@ -175,7 +175,7 @@ Std_ReturnType CddFsiTx_hwUnitInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
 
         if (hwUnitObj->hwUnitCfg.transmitMode == CDD_FSI_TX_INTERRUPT_MODE)
         {
-            CddFsiTx_enableInterrupt(baseAddr, CDD_FSI_TX_INT_TYPE);
+            (void)CddFsiTx_enableInterrupt(baseAddr, CDD_FSI_TX_INT_TYPE);
         }
 
 #if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
@@ -329,7 +329,7 @@ Std_ReturnType CddFsiTx_DMABufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_Fs
     uint32 Data             = userData;
     Data                    = (Data << 8U) + Cdd_FsiTx_frametag;
     uint32 *dataPtr         = &Data;
-    CddFsiTx_setFrameType(baseAddr, CDD_FSI_TX_DATA_N_WORD);
+    (void)CddFsiTx_setFrameType(baseAddr, CDD_FSI_TX_DATA_N_WORD);
     retVal = CddFsiTx_setTxSoftwareFrameSize(baseAddr, TxDatalength);
 
     if (TRUE == Cdd_Dma_GetInitStatus())
@@ -373,7 +373,7 @@ Std_ReturnType CddFsiTx_Transmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj, uint8 UserD
     Std_ReturnType retVal   = E_OK;
     /* Assign base address */
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
-    CddFsiTx_setFrameType(baseAddr, CDD_FSI_TX_DATA_N_WORD);
+    (void)CddFsiTx_setFrameType(baseAddr, CDD_FSI_TX_DATA_N_WORD);
     retVal = CddFsiTx_setTxSoftwareFrameSize(baseAddr, txDataLength);
 #if (STD_OFF == CDD_FSI_TX_DMA_ENABLE)
     retVal = CddFsiTx_setTxUserDefinedData(baseAddr, UserData);
@@ -394,29 +394,29 @@ void CddFsiTx_IrqTx(Cdd_FsiTx_HwUnitObjType *hwUnitObj, CddFsiTx_McalIntNumberTy
     uint32 baseAddr;
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
     {
-        CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_PING_TRIGGERED);
+        (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_PING_TRIGGERED);
     }
     if ((EvtFlag & CDD_FSI_TX_FRAME_DONE_MASK) == 1U)
     {
         Cdd_FsiTx_DrvObj.CddFsiTxNotificationPtr(hwUnitObj->hwUnitCfg.hwId);
-        CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_FRAME_DONE);
+        (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_FRAME_DONE);
     }
     if ((EvtFlag & CDD_FSI_TX_BUFFER_UNDERRUN) >> CDD_FSI_TX_BUFFER_UNDERRUN_SHIFT == 1U)
     {
         /*call DEM Error*/
 #ifdef CDD_FSI_TX_E_BUFFER_UNDERRUN
-        Dem_SetEventStatus(CDD_FSI_TX_E_BUFFER_UNDERRUN, DEM_EVENT_STATUS_FAILED);
+        (void)Dem_SetEventStatus(CDD_FSI_TX_E_BUFFER_UNDERRUN, DEM_EVENT_STATUS_FAILED);
 #endif
         Cdd_FsiTx_DrvObj.CddFsiTxUnderRunNotificationPtr(hwUnitObj->hwUnitCfg.hwId);
-        CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_BUFFER_UNDERRUN);
+        (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_BUFFER_UNDERRUN);
     }
     if ((EvtFlag & CDD_FSI_TX_BUFFER_OVERRUN) >> CDD_FSI_TX_BUFFER_OVERRUN_SHIFT == 1U)
     {
 #ifdef CDD_FSI_TX_E_BUFFER_OVERRUN
-        Dem_SetEventStatus(CDD_FSI_TX_E_BUFFER_OVERRUN, DEM_EVENT_STATUS_FAILED);
+        (void)Dem_SetEventStatus(CDD_FSI_TX_E_BUFFER_OVERRUN, DEM_EVENT_STATUS_FAILED);
 #endif
         Cdd_FsiTx_DrvObj.CddFsiTxOverRunNotificationPtr(hwUnitObj->hwUnitCfg.hwId);
-        CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_BUFFER_OVERRUN);
+        (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_BUFFER_OVERRUN);
     }
 }
 
@@ -558,7 +558,7 @@ void CddFsiTx_MainFunction(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     if ((eventStatus & CDD_FSI_TX_FRAME_DONE_MASK) == 1U)
     {
         Cdd_FsiTx_DrvObj.CddFsiTxNotificationPtr(hwUnitObj->hwUnitCfg.hwId);
-        CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_FRAME_DONE);
+        (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_FRAME_DONE);
     }
 
     return;

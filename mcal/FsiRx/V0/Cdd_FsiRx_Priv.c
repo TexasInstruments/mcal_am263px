@@ -140,13 +140,13 @@ void CddFsiRx_hwUnitInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
     CddFsiRx_delayWait(10U);
 
     {
-        CddFsiRx_setRxDataWidth(baseAddr, CDD_FSI_RX_SINGLE_DATA_LANE);
+        (void)CddFsiRx_setRxDataWidth(baseAddr, CDD_FSI_RX_SINGLE_DATA_LANE);
     }
 #if (STD_OFF == CDD_FSI_RX_MAIN_FUNCTION_API)
     if (hwUnitObj->hwUnitCfg.receptionMode == CDD_FSI_RX_INTERRUPT_MODE)
     {
-        CddFsiRx_disableInterrupt(baseAddr, CDD_FSI_RX_INT_TYPE);
-        CddFsiRx_clearAllRxEvents(baseAddr);
+        (void)CddFsiRx_disableInterrupt(baseAddr, CDD_FSI_RX_INT_TYPE);
+        (void)CddFsiRx_clearAllRxEvents(baseAddr);
     }
 #endif
 #if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
@@ -162,7 +162,7 @@ void CddFsiRx_hwUnitInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 #if (STD_OFF == CDD_FSI_RX_MAIN_FUNCTION_API)
     if (hwUnitObj->hwUnitCfg.receptionMode == CDD_FSI_RX_INTERRUPT_MODE)
     {
-        CddFsiRx_enableInterrupt(baseAddr, CDD_FSI_RX_INT_TYPE);
+        (void)CddFsiRx_enableInterrupt(baseAddr, CDD_FSI_RX_INT_TYPE);
     }
 #endif
 
@@ -283,7 +283,7 @@ void CddFsiRx_IrqRx(Cdd_FsiRx_HwUnitObjType *hwUnitObj, uint16 flag)
     {
 /*call DEM Error*/
 #ifdef CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR
-        Dem_SetEventStatus(CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR, DEM_EVENT_STATUS_FAILED);
+        (void)Dem_SetEventStatus(CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
         Cdd_FsiRx_DrvObj.CddFsiRxUnderRunNotificationPtr(hwUnitObj->hwUnitCfg.hwUnitId);
         CddFsiRx_clearRxEvents(baseAddr, CDD_FSI_RX_BUFFER_UNDERRUN);
@@ -292,7 +292,7 @@ void CddFsiRx_IrqRx(Cdd_FsiRx_HwUnitObjType *hwUnitObj, uint16 flag)
     {
 /*call DEM Error*/
 #ifdef CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR
-        Dem_SetEventStatus(CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR, DEM_EVENT_STATUS_FAILED);
+        (void)Dem_SetEventStatus(CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
         Cdd_FsiRx_DrvObj.CddFsiRxOverRunNotificationPtr(hwUnitObj->hwUnitCfg.hwUnitId);
         CddFsiRx_clearRxEvents(baseAddr, CDD_FSI_RX_BUFFER_OVERRUN);
@@ -377,7 +377,7 @@ Std_ReturnType CddFsiRx_DMAdataReceive(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
            to be copied from rx internal buffer cCount:  CDD_FSI_RX_DMA_C_COUNT- Number of times
            Count*bCount to be transferred. (Here it is 1 as only single iteration happens) */
             retVal = CddFsiRxDma_ModuleChannelConfigure(
-                hwUnitObj, hwUnitObj->rxBuffer, CDD_FSI_TX_BUFF_SIZE_16_WORD_LENGTH,
+                hwUnitObj, hwUnitObj->rxBuffer, CDD_FSI_RX_DATA_16_WORD_LENGTH + 1U,
                 (void *)(baseAddr + CSL_CDD_FSI_RX_CFG_RX_BUF_BASE(bufIdx)), CDD_FSI_RX_SIZEOF_BYTE,
                 CDD_FSI_RX_DMA_C_COUNT, CDD_EDMA_TRIG_MODE_MANUAL);
         }

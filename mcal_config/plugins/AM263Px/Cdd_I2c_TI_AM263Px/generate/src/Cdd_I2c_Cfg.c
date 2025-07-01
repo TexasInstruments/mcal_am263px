@@ -100,6 +100,7 @@ CONST(Cdd_I2c_Sequence_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cSequenceContainer[CDD
     [!WS "8"!].SeqResult                = CDD_I2C_SEQ_OK,
     [!WS "8"!].SequenceCompleteNotify   = [!"CddI2cSequenceCompleteNotify"!],
     [!WS "8"!].SequenceErrorNotify      = [!"CddI2cSequenceErrorNotify"!],
+    [!WS "8"!].RestartMode              = [!"CddI2cRestartModeType"!],
     [!WS "8"!].ChannelList              =
     [!WS "8"!]{
     [!AUTOSPACING!]

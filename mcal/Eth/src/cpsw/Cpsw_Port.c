@@ -120,6 +120,9 @@ void CpswPort_hostPortopen(uint32 baseAddr)
 
     /* CPSW_CONTROL_REG */
     reg = CPSW_RD_REG(CONTROL);
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+    CPSW_SET_FIELD(reg, CONTROL, S_CN_SWITCH, 1U);
+#endif
     CPSW_SET_FIELD(reg, CONTROL, VLAN_AWARE, 0U);
     CPSW_SET_FIELD(reg, CONTROL, P0_RX_PAD, 1U);
     CPSW_SET_FIELD(reg, CONTROL, P0_ENABLE, 1U);
@@ -134,13 +137,18 @@ void CpswPort_hostPortopen(uint32 baseAddr)
     CPPI_SET_FIELD(reg, P0_CONTROL, DSCP_IPV6_EN, 1U);
     CPPI_SET_FIELD(reg, P0_CONTROL, DSCP_IPV4_EN, 1U);
     CPPI_SET_FIELD(reg, P0_CONTROL, RX_REMAP_VLAN, 1U);
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+    CPPI_SET_FIELD(reg, P0_CONTROL, RX_CHECKSUM_EN, 1U);
+    CPPI_SET_FIELD(reg, P0_CONTROL, TX_CHECKSUM_EN, 1U);
+#endif
     CPPI_WR_REG(P0_CONTROL, reg);
 
     /* Assign all priority to switch queue priority 0 */
     CPPI_WR_REG(P0_TX_PRI_MAP, 0);
 
-    /* Port 0 max len */
-    CPPI_WR_FIELD(P0_RX_MAXLEN, RX_MAXLEN, ETH_BUF_LEN_BYTE);
+    /* Port 0 max len, beside configured MTU, need to add pass_crc
+     * and encap checksum so set to max frame size for simplicity */
+    CPPI_WR_FIELD(P0_RX_MAXLEN, RX_MAXLEN, ETH_MAX_FRAME_LEN);
 }
 
 void CpswPort_setDMATXPtype(uint32 baseAddr, uint32 TXPtype)

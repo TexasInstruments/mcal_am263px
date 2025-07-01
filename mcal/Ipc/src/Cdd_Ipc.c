@@ -234,7 +234,7 @@ FUNC(void, CDD_IPC_CODE) Cdd_Ipc_Init(P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_
  */
 FUNC(void, CDD_IPC_CODE) Cdd_Ipc_Notify_Sync_All(void)
 {
-    IpcNotifyUtils_lld_syncAll(CddIpc_NotifyUtilsHandle, (uint32)MCAL_SystemP_TIMEOUT);
+    (void)IpcNotifyUtils_lld_syncAll(CddIpc_NotifyUtilsHandle, (uint32)MCAL_SystemP_TIMEOUT);
 }
 
 #if (STD_ON == CDD_IPC_DEINIT_API)

@@ -308,7 +308,7 @@ Reset Reason Config
 /*********************************************************************************************************************
  * Exported Type Declarations
  *********************************************************************************************************************/
- 
+
  /* Requirements: SWS_Mcu_00252,SWS_Mcu_00234 */
 /**
  *  \brief  This is the type of the reset enumerator containing the subset of
@@ -320,59 +320,59 @@ typedef enum
 {
     /* Requirements: SWS_Mcu_00134 */
     /** \brief Reset Reason Cleared */
-    MCU_RESET_CLEAR,             
-    /** \brief POR Reset */  
-    MCU_POWER_ON_RESET,   
-    /** \brief Warm Reset due to MSS_WDT0 */         
-    MCU_WARM_RESET_WDT0,        
-    /** \brief Warm Reset due to MSS_WDT1 */   
-	MCU_WARM_RESET_WDT1,           
+    MCU_RESET_CLEAR,
+    /** \brief POR Reset */
+    MCU_POWER_ON_RESET,
+    /** \brief Warm Reset due to MSS_WDT0 */
+    MCU_WARM_RESET_WDT0,
+    /** \brief Warm Reset due to MSS_WDT1 */
+	MCU_WARM_RESET_WDT1,
     /** \brief Warm Reset due to TOPRCM WARM_RESET_CONFIG */
-    MCU_WARM_RESET,   
-    /** \brief External Pad Reset */             
-    MCU_EXT_PAD_RESET,        
-    /** \brief Warm Reset due to HSM WDT */     
-    MCU_HSM_WDT_RESET,             
+    MCU_WARM_RESET,
+    /** \brief External Pad Reset */
+    MCU_EXT_PAD_RESET,
+    /** \brief Warm Reset due to HSM WDT */
+    MCU_HSM_WDT_RESET,
     /** \brief Warm Reset due to Debugger reset */
-	MCU_DEBUGGER_RESET,    
-    /** \brief Warm Reset due to Temperature sensor 0 */        
-	MCU_WARM_RESET_TEMP0,        
-    /** \brief Warm Reset due to Temperature sensor 1 */  
-	MCU_WARM_RESET_TEMP1,          
+	MCU_DEBUGGER_RESET,
+    /** \brief Warm Reset due to Temperature sensor 0 */
+	MCU_WARM_RESET_TEMP0,
+    /** \brief Warm Reset due to Temperature sensor 1 */
+	MCU_WARM_RESET_TEMP1,
     /** \brief Warm Reset due to Voltage monitor1_oV */
-	MCU_WARM_RESET_VMON1_oV,   
-    /** \brief Warm Reset due to Voltage monitor2_oV */    
-    MCU_WARM_RESET_VMON2_oV,       
+	MCU_WARM_RESET_VMON1_oV,
+    /** \brief Warm Reset due to Voltage monitor2_oV */
+    MCU_WARM_RESET_VMON2_oV,
     /** \brief Warm Reset due to Voltage monitor3_oV */
-    MCU_WARM_RESET_VMON3_oV,       
+    MCU_WARM_RESET_VMON3_oV,
     /** \brief Warm Reset due to Voltage monitor5_oV */
-    MCU_WARM_RESET_VMON5_oV,       
+    MCU_WARM_RESET_VMON5_oV,
     /** \brief Warm Reset due to Voltage monitor0_uV */
-    MCU_WARM_RESET_VMON0_uV,       
+    MCU_WARM_RESET_VMON0_uV,
     /** \brief Warm Reset due to Voltage monitor1_uV */
-    MCU_WARM_RESET_VMON1_uV,    
-    /** \brief Warm Reset due to Voltage monitor2_uV */   
-    MCU_WARM_RESET_VMON2_uV,       
+    MCU_WARM_RESET_VMON1_uV,
+    /** \brief Warm Reset due to Voltage monitor2_uV */
+    MCU_WARM_RESET_VMON2_uV,
     /** \brief Warm Reset due to Voltage monitor3_uV */
-    MCU_WARM_RESET_VMON3_uV,       
+    MCU_WARM_RESET_VMON3_uV,
     /** \brief Warm Reset due to Voltage monitor5_uV */
-    MCU_WARM_RESET_VMON5_uV,       
+    MCU_WARM_RESET_VMON5_uV,
     /** \brief Warm Reset due to Voltage monitor7_uV */
-    MCU_WARM_RESET_VMON7_uV,       
+    MCU_WARM_RESET_VMON7_uV,
     /** \brief Warm Reset due to Voltage monitor8_uV */
-    MCU_WARM_RESET_VMON8_uV,       
+    MCU_WARM_RESET_VMON8_uV,
     /** \brief Warm Reset due to Sys clock loss */
-    MCU_WARM_RESET_SYS_CLK_LOSS,   
-    /** \brief Warm Reset due to esm critical priority interrupt */ 
-    MCU_WARM_RESET_ESM_INTERRUPT,  
+    MCU_WARM_RESET_SYS_CLK_LOSS,
+    /** \brief Warm Reset due to esm critical priority interrupt */
+    MCU_WARM_RESET_ESM_INTERRUPT,
     /** \brief Warm Reset due to esm high priority watchdog interrupt */
-    MCU_WARM_RESET_ESM_WDG_INTERRUPT, 
+    MCU_WARM_RESET_ESM_WDG_INTERRUPT,
     /** \brief Warm Reset due to esm error pin monitor interrupt */
-    MCU_WARM_RESET_ESM_ERR_INTERRUPT, 
+    MCU_WARM_RESET_ESM_ERR_INTERRUPT,
     /** \brief  POR assert from SW */
-    MCU_POWER_ON_RESET_ASSERT_SW,  
+    MCU_POWER_ON_RESET_ASSERT_SW,
     /** \brief UNDEFINED  reset */
-    MCU_RESET_UNDEFINED,           
+    MCU_RESET_UNDEFINED,
 } Mcu_ResetType;
 
 
@@ -386,70 +386,70 @@ typedef enum
 typedef enum
 {
     /** \brief System Clock, clock select is ignored */
-    MCU_CLKSRC_MODULE_ID_SYSCLK,  
-    /** \brief MSS MCAN0 clock */          
-    MCU_CLKSRC_MODULE_ID_MCAN0,     
-    /** \brief MSS MCAN1 clock */        
-    MCU_CLKSRC_MODULE_ID_MCAN1,     
-    /** \brief MSS RTI0 clock */        
+    MCU_CLKSRC_MODULE_ID_SYSCLK,
+    /** \brief MSS MCAN0 clock */
+    MCU_CLKSRC_MODULE_ID_MCAN0,
+    /** \brief MSS MCAN1 clock */
+    MCU_CLKSRC_MODULE_ID_MCAN1,
+    /** \brief MSS RTI0 clock */
     MCU_CLKSRC_MODULE_ID_RTI0,
-    /** \brief MSS RTI1 clock */              
-    MCU_CLKSRC_MODULE_ID_RTI1,            
-    /** \brief MSS RTI2 clock */  
-    MCU_CLKSRC_MODULE_ID_RTI2,       
-    /** \brief MSS RTI3 clock */       
-	MCU_CLKSRC_MODULE_ID_RTI3,   
-    /** \brief MSS WDT0 clock */           
-    MCU_CLKSRC_MODULE_ID_WDT0,  
-    /** \brief MSS WDT1 clock */             
-	MCU_CLKSRC_MODULE_ID_WDT1,      
-    /** \brief MSS OSPI0 clock */         
-    MCU_CLKSRC_MODULE_ID_OSPI0,    
-    /** \brief MSS OSPI1 clock */          
-    MCU_CLKSRC_MODULE_ID_OSPI1,  
-    /** \brief MSS SPI0 clock */            
-    MCU_CLKSRC_MODULE_ID_MCSPI0,  
-    /** \brief MSS SPI1 clock */           
-	MCU_CLKSRC_MODULE_ID_MCSPI1,      
-    /** \brief MSS SPI2 clock */       
-	MCU_CLKSRC_MODULE_ID_MCSPI2,   
-    /** \brief MSS SPI3 clock */          
-	MCU_CLKSRC_MODULE_ID_MCSPI3,   
-    /** \brief MSS SPIB clock */          
-    MCU_CLKSRC_MODULE_ID_SPIB, 
-    /** \brief MSS I2C clock */             
-    MCU_CLKSRC_MODULE_ID_I2C,       
-    /** \brief MSS SCIA clock */        
-    MCU_CLKSRC_MODULE_ID_SCI0,      
-    /** \brief MSS SCIB clock */        
-    MCU_CLKSRC_MODULE_ID_SCI1,      
-    /** \brief MSS SCIB clock */        
-	MCU_CLKSRC_MODULE_ID_SCI2,   
-    /** \brief MSS SCIB clock */           
-	MCU_CLKSRC_MODULE_ID_SCI3,   
-    /** \brief MSS SCIB clock */           
-	MCU_CLKSRC_MODULE_ID_SCI4,    
-    /** \brief MSS SCIB clock */          
-	MCU_CLKSRC_MODULE_ID_SCI5,     
-    /** \brief MSS CPSW clock */         
-    MCU_CLKSRC_MODULE_ID_CPSW,   
-    /** \brief MSS CPTS clock */           
-    MCU_CLKSRC_MODULE_ID_CPTS,     
-    /** \brief MSS MCU CLKOUT0 clock */         
-    MCU_CLKSRC_MODULE_ID_MCU_CLKOUT0,        
+    /** \brief MSS RTI1 clock */
+    MCU_CLKSRC_MODULE_ID_RTI1,
+    /** \brief MSS RTI2 clock */
+    MCU_CLKSRC_MODULE_ID_RTI2,
+    /** \brief MSS RTI3 clock */
+	MCU_CLKSRC_MODULE_ID_RTI3,
+    /** \brief MSS WDT0 clock */
+    MCU_CLKSRC_MODULE_ID_WDT0,
+    /** \brief MSS WDT1 clock */
+	MCU_CLKSRC_MODULE_ID_WDT1,
+    /** \brief MSS OSPI0 clock */
+    MCU_CLKSRC_MODULE_ID_OSPI0,
+    /** \brief MSS OSPI1 clock */
+    MCU_CLKSRC_MODULE_ID_OSPI1,
+    /** \brief MSS SPI0 clock */
+    MCU_CLKSRC_MODULE_ID_MCSPI0,
+    /** \brief MSS SPI1 clock */
+	MCU_CLKSRC_MODULE_ID_MCSPI1,
+    /** \brief MSS SPI2 clock */
+	MCU_CLKSRC_MODULE_ID_MCSPI2,
+    /** \brief MSS SPI3 clock */
+	MCU_CLKSRC_MODULE_ID_MCSPI3,
+    /** \brief MSS SPIB clock */
+    MCU_CLKSRC_MODULE_ID_SPIB,
+    /** \brief MSS I2C clock */
+    MCU_CLKSRC_MODULE_ID_I2C,
+    /** \brief MSS SCIA clock */
+    MCU_CLKSRC_MODULE_ID_SCI0,
+    /** \brief MSS SCIB clock */
+    MCU_CLKSRC_MODULE_ID_SCI1,
+    /** \brief MSS SCIB clock */
+	MCU_CLKSRC_MODULE_ID_SCI2,
+    /** \brief MSS SCIB clock */
+	MCU_CLKSRC_MODULE_ID_SCI3,
+    /** \brief MSS SCIB clock */
+	MCU_CLKSRC_MODULE_ID_SCI4,
+    /** \brief MSS SCIB clock */
+	MCU_CLKSRC_MODULE_ID_SCI5,
+    /** \brief MSS CPSW clock */
+    MCU_CLKSRC_MODULE_ID_CPSW,
+    /** \brief MSS CPTS clock */
+    MCU_CLKSRC_MODULE_ID_CPTS,
+    /** \brief MSS MCU CLKOUT0 clock */
+    MCU_CLKSRC_MODULE_ID_MCU_CLKOUT0,
     /** \brief MSS MCU CLKOUT1 clock */
-    MCU_CLKSRC_MODULE_ID_MCU_CLKOUT1, 
-    /** \brief MSS PMIC CLKOUT clock */       
-    MCU_CLKSRC_MODULE_ID_PMIC_CLKOUT,      
-    /** \brief MSS MII 100 CLK clock */ 
-    MCU_CLKSRC_MODULE_ID_MII100_CLK,    
-    /** \brief MSS MII 10 CLK clock */       
-    MCU_CLKSRC_MODULE_ID_MII10_CLK,     
-    /** \brief MSS RGMI CLK clock */     
-    MCU_CLKSRC_MODULE_ID_RGMI_CLK,         
-    /** \brief MSS CONTROLSS CLK clock */ 
-	MCU_CLKSRC_MODULE_ID_CONTROLSS_CLK,    
-    /** \brief MSS Module ID max */ 
+    MCU_CLKSRC_MODULE_ID_MCU_CLKOUT1,
+    /** \brief MSS PMIC CLKOUT clock */
+    MCU_CLKSRC_MODULE_ID_PMIC_CLKOUT,
+    /** \brief MSS MII 100 CLK clock */
+    MCU_CLKSRC_MODULE_ID_MII100_CLK,
+    /** \brief MSS MII 10 CLK clock */
+    MCU_CLKSRC_MODULE_ID_MII10_CLK,
+    /** \brief MSS RGMI CLK clock */
+    MCU_CLKSRC_MODULE_ID_RGMI_CLK,
+    /** \brief MSS CONTROLSS CLK clock */
+	MCU_CLKSRC_MODULE_ID_CONTROLSS_CLK,
+    /** \brief MSS Module ID max */
     MCU_CLKSRC_MODULE_ID_MAX
 } Mcu_ClkModuleIdType;
 
@@ -459,7 +459,7 @@ typedef enum
  */
 typedef enum
 {
-    /** \brief Clock source 0 */ 
+    /** \brief Clock source 0 */
     MCU_CLKSRC_0 = 0,
     /** \brief Clock source 1 */
     MCU_CLKSRC_1,
@@ -491,7 +491,7 @@ typedef struct
     uint8  Mcu_RamDefaultValue;
     /** \brief Section Size */
     uint32 Mcu_RamSectionBytes;
-    
+
 } Mcu_RamSectionConfigType;
 
 /* Requirements: SWS_Mcu_00031 */
@@ -508,7 +508,7 @@ typedef struct
     uint32              Mcu_ClockDiv;
     /** \brief Apply this configuration at Mcu_init time*/
     boolean             Mcu_InitCfg;
-    
+
 } Mcu_ClockConfigType;
 
 
@@ -521,7 +521,7 @@ typedef struct
     uint8 Mcu_PwmChannelId;
     /** \brief Group id of PWM */
     uint8 Mcu_PwmGroupId;
-    
+
 } Mcu_PwmConfigType;
 
 /**
@@ -531,7 +531,7 @@ typedef struct
 {
     /** \brief HW id of ADC */
     uint8 Mcu_AdcHWUniId;
-    
+
 } Mcu_AdcConfigType;
 
 /**
@@ -543,7 +543,7 @@ typedef struct
     uint8 Mcu_RcmModuleId;
     /** \brief Moudle mode to set @sa MCAL_MCU_API:RCM modules mode defines */
     uint8 Mcu_RcmModuleMode;
-    
+
 } Mcu_RCMConfigType;
 
 /**
@@ -617,7 +617,7 @@ typedef struct Mcu_ConfigType_s
 	#if (STD_ON == MCU_ADC_ENABLE)
     /** \brief ADC Configuration */
 	Mcu_AdcConfigPtrType     Mcu_AdcConfig;
-	
+
 	#endif
 } Mcu_ConfigType;
 
@@ -632,9 +632,9 @@ typedef struct Mcu_ConfigType_s
 /*Clock and reset MMRs partition*/
 #define MCU_TOP_RCM_PARTITION0                                 (5U)
 
-#define MCU_CSL_CONTROLSS_CTRL_EPWM_STATICXBAR_SEL0                          (0x00000004U)
+#define MCU_CSL_CONTROLSS_CTRL_EPWM_STATICXBAR_SEL0                          (0x00000138U)
 
-#define MCU_CSL_TOP_RCM_U_BASE                                                   (0x53200000ul)
+#define MCU_CSL_TOP_RCM_U_BASE                                               (0x53200000ul)
 #define MCU_CSL_TOP_CTRL_U_BASE                                              (0x50D80000ul)
 #define MCU_CSL_CONTROLSS_CTRL_U_BASE                                        (0x502F0000ul)
 #define MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK0                                   (0x00001008U)
@@ -667,12 +667,9 @@ typedef struct Mcu_ConfigType_s
 #define MCU_PWM_CHANNEL_8   8U
 #define MCU_PWM_CHANNEL_9   9U
 
-
 /* EPWM_GROUPS */
 #define MCU_PWM_CONTROLSS_G0   0U
 #define MCU_PWM_CONTROLSS_G1   1U
-#define MCU_PWM_CONTROLSS_G2   2U
-#define MCU_PWM_CONTROLSS_G3   3U
 
 /* ADC_GROUPS */
 #define MCU_ADC_HWUNIT_0   0U
@@ -680,11 +677,9 @@ typedef struct Mcu_ConfigType_s
 #define MCU_ADC_HWUNIT_2   2U
 
 /* ADC BUFFER CONTROL */
-#define MCU_CSL_TOP_CTRL_ADC_REFBUF0_CTRL                                     (0x00000C00U)
-#define MCU_CSL_TOP_CTRL_ADC_REFBUF1_CTRL                                     (0x00000C04U)
-		 
-#define MCU_CSL_TOP_CTRL_ADC_REF_COMP_CTRL                                    (0x00000C08U)
-	
+#define MCU_CSL_TOP_CTRL_ADC_REFBUF0_CTRL                                     (0x00000B00U)
+#define MCU_CSL_TOP_CTRL_ADC_REF_COMP_CTRL                                    (0x00000B10U)
+
 void Mcu_IntXbar(void);
 void Mcu_InputXbar(void);
 void Mcu_GpioXbarConfig(void);

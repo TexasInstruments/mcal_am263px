@@ -144,6 +144,12 @@ extern "C" {
 /** \brief PTP EtherType */
 #define ETHERTYPE_PTP (0x88F7U)
 
+/** \brief IPV4  Protocol Identifier  */
+#define ETHERTYPE_IPV4 (0x0800U)
+
+/** \brief IPV4  Protocol Identifier  */
+#define ETHERTYPE_IPV6 (0x86DDU)
+
 /** \brief MAC address length in bytes */
 #define ETH_HW_ADDR_LEN (6U)
 
@@ -152,6 +158,9 @@ extern "C" {
 
 /** \brief Max octets in payload */
 #define ETH_PAYLOAD_LEN (1500U)
+
+/** \brief Max octets in payload */
+#define ETH_CHECKSUM_PAYLOAD_LEN (1500U)
 
 /** \brief VLAN tag length in bytes */
 #define ETH_VLAN_TAG_LEN (4U)
@@ -323,6 +332,15 @@ typedef struct
     uint8_t  timestampSecond[6];
     uint8_t  timestampNs[4];
 } __attribute__((packed)) ptpSyncPayload;
+
+typedef struct
+{
+    uint16_t proto;
+    uint16_t checkSumPos;
+    uint16_t validCheckSum;
+    uint16_t length;
+    uint8_t *payload;
+} Eth_ChecksumTestType;
 
 /* ========================================================================== */
 /*                         Global Variables Declarations                      */

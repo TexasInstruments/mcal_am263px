@@ -16,6 +16,7 @@ title: I2c API GUIDE Header file
 |enum| **[Cdd_I2c_HandlingType](../Modules/group___c_d_d___i2_c.md#enum-cdd_i2c_handlingtype)** | This is an enum containing the possible variants of arbitration loss timeout handling.  | 
 |enum| **[Cdd_I2c_ChannelResultType](../Modules/group___c_d_d___i2_c.md#enum-cdd_i2c_channelresulttype)** | This is an enum containing all the possible channel results The default channel state is CDD_I2C_CH_RESULT_OK.  | 
 |enum| **[Cdd_I2c_SeqResultType](../Modules/group___c_d_d___i2_c.md#enum-cdd_i2c_seqresulttype)** | This is an enum containing all the possible results The default sequence result is CDD_I2C_SEQ_OK.  | 
+|enum| **[Cdd_I2c_RestartModeType](../Modules/group___c_d_d___i2_c.md#enum-cdd_i2c_restartmodetype)** | This is an enum containaining the possible restart modes, the default mode is CDD_I2C_RESTART_MODE_NOSTOP.  | 
 |typedef void(*)(uint8 ErrorCode)  | **[Cdd_I2c_SequenceErrorNotification](../Modules/group___c_d_d___i2_c.md#typedef-cdd_i2c_sequenceerrornotification)** | Function pointer for sequence error notify.  | 
 |typedef void(*)(void)  | **[Cdd_I2c_SequenceEndNotification](../Modules/group___c_d_d___i2_c.md#typedef-cdd_i2c_sequenceendnotification)** | Function pointer for sequence complete notify.  | 
 |typedef uint8  | **[Cdd_I2c_SequenceType](../Modules/group___c_d_d___i2_c.md#typedef-cdd_i2c_sequencetype)** | I2c_SequenceType used to pass Sequence ID.  | 
@@ -106,6 +107,20 @@ This is an enum containing all the possible channel results The default channel 
 
 **Brief**: 
 This is an enum containing all the possible results The default sequence result is CDD_I2C_SEQ_OK. 
+
+
+
+### enum Cdd_I2c_RestartModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CDD_I2C_RESTART_MODE_STOP | | I2C restart mode with stop at end of each transaction/channel write/read.   |
+| CDD_I2C_RESTART_MODE_NOSTOP | | I2C restart mode with no stop at end of each transaction/channel write/read, by default there is start at begining of each transaction.   |
+
+
+
+
+**Brief**: 
+This is an enum containaining the possible restart modes, the default mode is CDD_I2C_RESTART_MODE_NOSTOP. 
 
 
 

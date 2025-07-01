@@ -85,7 +85,7 @@ void Can_mcanWkUp(Can_ControllerObjType *controllerObj)
     if (timeOut == (boolean)TRUE)
     {
 #ifdef CAN_E_HARDWARE_ERROR
-        Dem_SetEventStatus(CAN_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
+        (void)Dem_SetEventStatus(CAN_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
     controllerObj->canState = CAN_CS_STOPPED;

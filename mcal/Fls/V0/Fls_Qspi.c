@@ -215,7 +215,7 @@ void Fls_QspiHwInit(void)
 {
     QSPI_Object *qspi_Obj;
     qspi_Obj = Fls_QspiConfig[0].object;
-    memset(qspi_Obj, 0, sizeof(QSPI_Object));
+    (void)memset(qspi_Obj, 0, sizeof(QSPI_Object));
     qspi_Obj->isOpen = FALSE;
 }
 /**

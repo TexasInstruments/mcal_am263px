@@ -152,7 +152,7 @@ Cdd_FsiRx_DeInit(void)
         /* Deinit the hardware modules */
         for (HwUnitId = 0U; HwUnitId < Cdd_FsiRx_DrvObj.maxHwUnit; HwUnitId++)
         {
-            CddFsiRx_hwUnitDeInit(&Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId]);
+            (void)CddFsiRx_hwUnitDeInit(&Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId]);
         }
     CddFsiRx_resetDrvObj(&Cdd_FsiRx_DrvObj);
 
@@ -236,8 +236,8 @@ Cdd_FsiRx_Reset(Cdd_FsiRx_HWUnitType HwUnitId, VAR(Cdd_FsiRx_ResetSubModuleType,
         CddFsiRx_ReportDetError(CDD_FSI_RX_RESET_SID, CDD_FSI_RX_E_UNINIT);
     }
 #endif
-    CddFsiRx_ResetRxSubModules(&Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
-    CddFsiRx_ClearResetRxSubModules(&Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
+    (void)CddFsiRx_ResetRxSubModules(&Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
+    (void)CddFsiRx_ClearResetRxSubModules(&Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
 }
 #endif /*(STD_ON == CDD_FSI_RX_RESET_API)*/
 

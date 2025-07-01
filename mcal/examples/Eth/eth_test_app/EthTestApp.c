@@ -251,6 +251,31 @@ boolean EthApp_test_0010(void);
 boolean EthApp_test_0011(void);
 
 /**
+ * \brief Test basic frame reception for checksum hw offload
+ *
+ * Basic DUT frame reception test.  The target side performs these operations:
+ * - Send START command
+ * - Receive frames until the STOP is detected
+ *
+ * The number of frames expected to be received is ETH_TEST_ITER_M_COUNT.
+ *
+ * \return PASS or FAIL  Test result
+ */
+boolean EthApp_test_0012(void);
+
+/**
+ * \brief Test basic frame transmission for checksum hw offload
+ *
+ * Basic DUT frame transmission test for checksum validation.
+ * The target side performs these operations:
+ * - Send START command
+ * - Transmit ETH_TEST_ITER_M_COUNT non-VLAN tagged frames without confirmation
+ *
+ * \return PASS or FAIL  Test result
+ */
+boolean EthApp_test_0013(void);
+
+/**
  * \brief Measure DUT transmit throughput
  *
  * Measure DUT transmit throughput over "frames" frames with frame size is "size"
@@ -378,9 +403,12 @@ static TestFunc testFuncs[] = {
 #if (STD_ON == ETH_UPDATE_PHYS_ADDR_FILTER_API)
     &EthApp_test_0005,
 #endif
-    &EthApp_test_0006, &EthApp_test_0007, &EthApp_test_0008, &EthApp_test_0009, &EthApp_test_0010,
-    &EthApp_test_0011, &EthApp_test_0300, &EthApp_test_0301, &EthApp_test_0302, &EthApp_test_0110,
-    &EthApp_test_0101, &EthApp_test_0201, &EthApp_test_0202,
+    &EthApp_test_0006, &EthApp_test_0007, &EthApp_test_0008, &EthApp_test_0009, &EthApp_test_0010, &EthApp_test_0011,
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) && (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+    &EthApp_test_0012, &EthApp_test_0013,
+#endif
+    &EthApp_test_0300, &EthApp_test_0301, &EthApp_test_0302, &EthApp_test_0110, &EthApp_test_0101, &EthApp_test_0201,
+    &EthApp_test_0202,
 /* host independent test case */
 #if (STD_ON == ETHTRCV_GETLINKSTATE_API)
     &EthApp_test_0500,
@@ -1193,6 +1221,98 @@ boolean EthApp_test_0011(void)
     return status;
 }
 
+boolean EthApp_test_0012(void)
+{
+    uint16  expectedFrame = ETH_TEST_ITER_S_COUNT;
+    uint32  num           = 0U, t;
+    boolean status;
+
+    EthUtils_printf("test_0012: START\r\n");
+
+    gEthUtilsApp.checkSumTest = TRUE;
+    for (t = 0u; t < 4u; ++t)
+    {
+        gEthUtilsApp.stats.rxIpChecksumCnt = 0u;
+        /* Send START cmd */
+        EthApp_sendCmd(gEthUtilsApp.ctrlIdx, CTRL_FRAME_CMD_START);
+
+        /* Receive frames until STOP cmd is detected */
+        status = EthApp_receive(gEthUtilsApp.ctrlIdx, num);
+        if (FAIL == status)
+        {
+            EthUtils_printf("test_0012: failed while receiving frames\r\n");
+            break;
+        }
+
+        if (gEthUtilsApp.stats.rxIpChecksumCnt != expectedFrame)
+        {
+            EthUtils_printf("test_0012: received frame count mismatch (exp=%d, got=%d)\r\n", expectedFrame,
+                            gEthUtilsApp.stats.rxIpChecksumCnt);
+            status = FAIL;
+        }
+    }
+
+    gEthUtilsApp.checkSumTest = FALSE;
+
+    EthUtils_printf("test_0012: END\r\n");
+
+    return status;
+}
+
+boolean EthApp_test_0013(void)
+{
+    uint32                      iterations  = ETH_TEST_ITER_S_COUNT;
+    uint16                      len         = ETH_CHECKSUM_PAYLOAD_LEN;
+    uint8                       vlan_enable = 0u;
+    boolean                     status      = PASS;
+    uint32                      i = 0U, t = 0U;
+    uint8                      *bufPtr;
+    Eth_BufIdxType              bufIdx;
+    VlanDataFramePayload       *vlanPtr;
+    Eth_FrameType               etherType = ETHERTYPE_IPV4;
+    uint16                      vid       = 1000;
+    uint16                      pcp       = 5;
+    extern Eth_ChecksumTestType Eth_CheckSumList[4u];
+
+    EthUtils_printf("test_0013: START\r\n");
+
+    /* Send START cmd */
+    EthApp_sendCmd(gEthUtilsApp.ctrlIdx, CTRL_FRAME_CMD_START);
+
+    for (vlan_enable = 0; vlan_enable < 2u; vlan_enable++)
+    {
+        for (t = 0u; t < 4u; ++t)
+        {
+            len = vlan_enable ? (ETH_CHECKSUM_PAYLOAD_LEN + ETH_VLAN_TAG_LEN) : ETH_CHECKSUM_PAYLOAD_LEN;
+            for (i = 0; i < iterations; ++i)
+            {
+                (void)EthApp_provideTxBuffer(gEthUtilsApp.ctrlIdx, ETH_DEFAULT_TX_PRIORITY, &bufIdx, &bufPtr, &len);
+
+                if (vlan_enable == 1u)
+                {
+                    vlanPtr            = (VlanDataFramePayload *)bufPtr;
+                    vlanPtr->tci       = htons((pcp << 13) | vid);
+                    vlanPtr->etherType = htons(Eth_CheckSumList[t].proto);
+                    memcpy((void *)(&vlanPtr->payload), (void *)Eth_CheckSumList[t].payload, ETH_CHECKSUM_PAYLOAD_LEN);
+                    etherType = ETHERTYPE_VLAN_TAG;
+                }
+                else
+                {
+                    etherType = Eth_CheckSumList[t].proto;
+                    memcpy(bufPtr, (void *)Eth_CheckSumList[t].payload, ETH_CHECKSUM_PAYLOAD_LEN);
+                }
+
+                (void)EthApp_Transmit(gEthUtilsApp.ctrlIdx, bufIdx, (Eth_FrameType)etherType, TRUE, len, BcastAddr);
+
+                EthApp_delay(100);
+            }
+        }
+    }
+
+    EthUtils_printf("test_0013: END\r\n");
+
+    return status;
+}
 boolean EthApp_test_0200(void)
 {
     uint32   iterations = ETH_TEST_ITER_M_COUNT;

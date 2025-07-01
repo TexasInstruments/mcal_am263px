@@ -872,28 +872,28 @@ static void Fls_JobErrorNotification1(Fls_JobType job, Std_ReturnType retVal)
     {
         Fls_DrvObj.jobResultType = MEMIF_BLOCK_INCONSISTENT;
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
 #else
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
 #endif
     }
     else if (FLS_JOB_ERASE == job)
     {
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
 #else
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
 #endif
     }
     else /*if (FLS_JOB_COMPARE == job)*/
     {
         Fls_DrvObj.jobResultType = MEMIF_BLOCK_INCONSISTENT;
 #if ((STD_OFF == FLS_MEM_MAP_MODE) && (STD_ON == FLS_DMA_ENABLE))
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_READ, FLS_E_MEMAP_INTERRUPT_OFF_DMA_ON);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_READ, FLS_E_MEMAP_INTERRUPT_OFF_DMA_ON);
 #elif (STD_OFF == FLS_USE_INTERRUPTS)
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_WRITE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_WRITE_FAILED);
 #else
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_COMPARE, FLS_E_VERIFY_WRITE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_COMPARE, FLS_E_VERIFY_WRITE_FAILED);
 #endif
     }
     if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)
@@ -902,8 +902,8 @@ static void Fls_JobErrorNotification1(Fls_JobType job, Std_ReturnType retVal)
     }
 #if (STD_ON == FLS_USE_INTERRUPTS)
     /* disable and clear the interrupts */
-    Fls_QspiIntDisable((QSPI_INTR_ENABLE_SET_REG_FIRQ_ENA_SET_MASK | QSPI_INTR_ENABLE_SET_REG_WIRQ_ENA_SET_MASK));
-    Fls_QspiIntClear((QSPI_INTR_ENABLE_SET_REG_FIRQ_ENA_SET_MASK | QSPI_INTR_ENABLE_SET_REG_WIRQ_ENA_SET_MASK));
+    (void)Fls_QspiIntDisable((QSPI_INTR_ENABLE_SET_REG_FIRQ_ENA_SET_MASK | QSPI_INTR_ENABLE_SET_REG_WIRQ_ENA_SET_MASK));
+    (void)Fls_QspiIntClear((QSPI_INTR_ENABLE_SET_REG_FIRQ_ENA_SET_MASK | QSPI_INTR_ENABLE_SET_REG_WIRQ_ENA_SET_MASK));
 #endif
 }
 /**

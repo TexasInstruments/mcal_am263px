@@ -333,6 +333,30 @@ bool HostApp_test_0010(void);
 bool HostApp_test_0011(void);
 
 /**
+ * \brief Test basic frame reception for checksum offload
+ *
+ * Basic DUT frame reception test.  The host side performs these operations:
+ * - Wait for START command from DUT
+ * - Transmit ETH_TEST_ITER_M_COUNT frames
+ *
+ * \return PASS or FAIL  Test result
+ */
+bool HostApp_test_0012(void);
+
+/**
+ * \brief Test basic frame transmission for checksum offload
+ *
+ * Basic DUT frame transmission test.  The host side performs these operations:
+ * - Wait for START command from DUT
+ * - Receive frames until STOP command is detected
+ *
+ * The number of frames expected to be received is ETH_TEST_ITER_M_COUNT.
+ *
+ * \return PASS or FAIL  Test result
+ */
+bool HostApp_test_0013(void);
+
+/**
  * \brief Measure DUT transmit throughput
  *
  * Measure DUT transmit throughput over frames number and packet lenght is size.
@@ -389,9 +413,12 @@ TestFunc testFuncs[] = {&HostApp_test_0001, &HostApp_test_0002, &HostApp_test_00
                         &HostApp_test_0005,
 #endif /* (STD_ON == ETH_UPDATE_PHYS_ADDR_FILTER_API) */
                         &HostApp_test_0006, &HostApp_test_0007, &HostApp_test_0008, &HostApp_test_0009,
-                        &HostApp_test_0010, &HostApp_test_0011, &HostApp_test_0300, &HostApp_test_0301,
-                        &HostApp_test_0302, &HostApp_test_0110, &HostApp_test_0101, &HostApp_test_0201,
-                        &HostApp_test_0202};
+                        &HostApp_test_0010, &HostApp_test_0011,
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) && (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+                        &HostApp_test_0012, &HostApp_test_0013,
+#endif
+                        &HostApp_test_0300, &HostApp_test_0301, &HostApp_test_0302, &HostApp_test_0110,
+                        &HostApp_test_0101, &HostApp_test_0201, &HostApp_test_0202};
 
 HostApp gHostApp = {
     .dutAddr = {0xf4, 0x84, 0x4c, 0xeb, 0x95, 0x09},
@@ -1061,6 +1088,161 @@ bool HostApp_test_0011(void)
     return status;
 }
 
+bool HostApp_test_0012(void)
+{
+    uint32_t                    iterations = ETH_TEST_ITER_S_COUNT;
+    TestFrame                   frames[1];
+    DataFramePayload           *payload;
+    uint16_t                    len;
+    uint32_t                    i, t;
+    int32_t                     ret;
+    bool                        status = PASS;
+    uint8_t                    *ptr;
+    uint16_t                    checkSumPos;
+    extern Eth_ChecksumTestType Eth_CheckSumList[4u];
+
+    printf("test_0012: START\n");
+
+    for (t = 0; t < 4; ++t)
+    {
+        /* Unicast packet with DUT's MAC address */
+        frames[0].len = ETH_CHECKSUM_PAYLOAD_LEN + ETH_HDR_LEN;
+        memcpy(&frames[0].frame.hdr, &hdrUcastCtrl, ETH_HDR_LEN);
+        frames[0].frame.hdr.etherType = htons(Eth_CheckSumList[t].proto);
+
+        memcpy(frames[0].frame.payload, Eth_CheckSumList[t].payload, ETH_CHECKSUM_PAYLOAD_LEN);
+
+        /* Wait for DUT to start the test when it's ready */
+        HostApp_waitForCmd(CTRL_FRAME_CMD_START);
+
+        /* Transmit one frame per iteration */
+        for (i = 0; i < iterations; i++)
+        {
+            if (gHostApp.verbose)
+            {
+                printf("test_0012: iteration: %d of %d\n", i + 1, iterations);
+            }
+
+            /* Transmit one frame */
+            HostApp_transmit(frames, ARRAY_SIZE(frames), 1);
+        }
+
+        printf("test_0012: transmitted invalid checksum %d of %d frames\n", i, iterations);
+
+        ptr                  = (uint8_t *)frames[0].frame.payload;
+        checkSumPos          = Eth_CheckSumList[t].checkSumPos;
+        ptr[checkSumPos]     = (Eth_CheckSumList[t].validCheckSum >> 8);
+        ptr[checkSumPos + 1] = (Eth_CheckSumList[t].validCheckSum & 0xff);
+        /* Transmit one frame per iteration */
+        for (i = 0; i < iterations; i++)
+        {
+            if (gHostApp.verbose)
+            {
+                printf("test_0012: iteration: %d of %d\n", i + 1, iterations);
+            }
+            /* Transmit one frame */
+            HostApp_transmit(frames, ARRAY_SIZE(frames), 1);
+        }
+
+        printf("test_0012: transmitted valid checksum %d of %d frames\n", i, iterations);
+
+        /* Indicate to the DUT that the test is complete */
+        HostApp_sendCmd(CTRL_FRAME_CMD_STOP);
+    }
+
+    printf("test_0012: END\n");
+
+    return status;
+}
+
+bool HostApp_test_0013(void)
+{
+    uint32_t                    recvNum = ETH_TEST_ITER_S_COUNT;
+    bool                        status  = PASS;
+    int                         i = 0U, t = 0U;
+    uint16_t                    etherType = ETHERTYPE_IPV4;
+    uint16_t                    frame     = ETH_TEST_ITER_S_COUNT;
+    uint16_t                    checkSumPos;
+    uint16_t                    rxCheckSum;
+    uint8_t                    *pktPtr;
+    uint32_t                    len;
+    uint8_t                     vlan_pkt = 0u;
+    extern Eth_ChecksumTestType Eth_CheckSumList[4u];
+
+    printf("test_0013: START\n");
+
+    /* Wait for DUT to start the test when it's ready */
+    HostApp_waitForCmd(CTRL_FRAME_CMD_START);
+
+    for (vlan_pkt = 0; vlan_pkt < 2; ++vlan_pkt)
+    {
+        for (t = 0; t < 4; t++)
+        {
+            i = 0;
+            /* Receive frames */
+            while (true)
+            {
+                /* Receive one frame */
+                status = HostApp_recv(&gHostApp.rxFrame, &len);
+                if (status == FAIL)
+                {
+                    printf("receive: failed to receive packet\n");
+                    break;
+                }
+
+                if (gHostApp.veryVerbose)
+                {
+                    EthUtils_printFrame(&gHostApp.rxFrame, HOST_APP_VERBOSE_OCTETS);
+                }
+
+                /* Ignore frames with other EtherTypes */
+                if (gHostApp.rxFrame.hdr.etherType != htons(Eth_CheckSumList[t].proto))
+                {
+                    continue;
+                }
+
+                /* Check if it's a STOP cmd */
+                if (EthFrame_isStopCmd(&gHostApp.rxFrame))
+                {
+                    if (gHostApp.verbose)
+                    {
+                        printf("receive: STOP command received\n");
+                    }
+                    break;
+                }
+
+                /* Verify checksum */
+                checkSumPos = ETH_HDR_LEN + Eth_CheckSumList[t].checkSumPos;
+                pktPtr      = (uint8_t *)&gHostApp.rxFrame;
+                rxCheckSum  = (uint16_t)((pktPtr[checkSumPos] << 8u) | pktPtr[checkSumPos + 1u]);
+                if (Eth_CheckSumList[t].validCheckSum != rxCheckSum)
+                {
+                    status = FAIL;
+                    printf("checksum failed vlan_pkt=%d t=%d rx 0x%x expect 0x%x\n", vlan_pkt, t, rxCheckSum,
+                           Eth_CheckSumList[t].validCheckSum);
+                    break;
+                }
+
+                if ((++i == recvNum))
+                {
+                    break;
+                }
+            }
+
+            /* Check that all packets were received */
+            if (i != ETH_TEST_ITER_S_COUNT && status == PASS)
+            {
+                printf("test_0002: received frame count mismatch (exp=%d, got=%d)\n", ETH_TEST_ITER_S_COUNT, i);
+                status = FAIL;
+                break;
+            }
+        }
+    }
+
+    printf("test_0013: END\n");
+
+    return status;
+}
 bool HostApp_test_0100(uint32_t frames, uint32_t size)
 {
     bool status;

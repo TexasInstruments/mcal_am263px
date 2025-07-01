@@ -104,7 +104,6 @@ static void           Cdd_I2c_Isr_Handler_channelUpdate(uint8 HwUnit, uint8 Chan
 #if (STD_ON == CDD_I2C_POLLING_MODE)
 static void Cdd_I2c_Polling_Mode_Receive_BusBusyCheck(uint8 HwUnit, uint8 ChannelId, uint8 SequenceId, uint32 Timeout);
 static void Cdd_I2c_Polling_Mode_Receive_ReadStatusRegister(uint8 HwUnit, uint8 ChannelId, uint8 SequenceId);
-static void Cdd_I2c_Polling_Mode_Receive_sequencestatus(uint8 ChannelId, uint8 SequenceId);
 static void Cdd_I2c_PollingModeProcessingFromQueue_channelupdate(uint8 SequenceId);
 #endif /* (STD_ON == CDD_I2C_POLLING_MODE) */
 
@@ -547,7 +546,8 @@ void Cdd_I2c_Write(uint8 HwInstance, uint8 Data)
 void Cdd_I2c_Polling_Mode_Receive(uint8 HwUnit, uint8 ChannelId, uint8 SequenceId)
 {
     uint32 Timeout = 0;
-
+    /*Disable global interrupts*/
+    SchM_Enter_Cdd_I2c_I2C_EXCLUSIVE_AREA_0();
     /*Function call to disable all interrupts*/
     Cdd_I2c_Disable_interrupts(HwUnit, (uint16) ~(CDD_I2C_ALL_INTERRUPTS));
     /*Function call to clear all interrupts*/
@@ -559,33 +559,64 @@ void Cdd_I2c_Polling_Mode_Receive(uint8 HwUnit, uint8 ChannelId, uint8 SequenceI
     Cdd_I2cChannelContainerLocal[ChannelId].ChannelResult = CDD_I2C_CH_RESULT_IN_PROGRESS;
     /*Get initial value for timeout period*/
     (void)GetCounterValue(CDD_I2C_OS_COUNTER_ID, &Timeout);
-    /*Wait till bus is free*/
-    Cdd_I2c_Polling_Mode_Receive_BusBusyCheck(HwUnit, ChannelId, SequenceId, Timeout);
+    /*Wait till bus is free in case of restart mode stop, as bus is released at the end of each channel in this mode*/
+    if (CDD_I2C_RESTART_MODE_STOP == Cdd_I2cSequenceContainerLocal[SequenceId].RestartMode)
+    {
+        Cdd_I2c_Polling_Mode_Receive_BusBusyCheck(HwUnit, ChannelId, SequenceId, Timeout);
+    }
 
     Timeout = 0;
     if (CDD_I2C_SEQ_FAILED != Cdd_I2cSequenceContainerLocal[SequenceId].SeqResult)
     {
         /*Send start signal on the bus*/
         Cdd_I2c_Start(HwUnit);
+        /*Poll and read buffer when ready*/
         Cdd_I2c_Polling_Mode_Receive_ReadStatusRegister(HwUnit, ChannelId, SequenceId);
-
-        /*Function call to disable all interrupts*/
-        Cdd_I2c_Disable_interrupts(HwUnit, (uint16) ~(CDD_I2C_ALL_INTERRUPTS));
-
-        /*Function call to clear all interrupts*/
-        Cdd_I2c_Clear_interrupts(HwUnit, CDD_I2C_ALL_INTERRUPTS_CLEAR);
-    }
-    if (CDD_I2C_SEQ_FAILED != Cdd_I2cSequenceContainerLocal[SequenceId].SeqResult)
-    {
-        if ((ChannelId == Cdd_I2cSequenceContainerLocal[SequenceId]
-                              .ChannelList[Cdd_I2cSequenceContainerLocal[SequenceId].MaxChannels - 1U]) &&
-            (Cdd_I2cChannelContainerLocal[ChannelId].DataBufferLength == 0U))
+        /*Stop in case of restart mode as CDD_I2C_RESTART_MODE_STOP*/
+        if (CDD_I2C_RESTART_MODE_STOP == Cdd_I2cSequenceContainerLocal[SequenceId].RestartMode)
         {
-            /*Function call to send a stop signal on the I2C bus*/
             Cdd_I2c_Stop(HwUnit);
-            Cdd_I2c_Polling_Mode_Receive_sequencestatus(ChannelId, SequenceId);
         }
+
+        // If last channel of sequence, do a hard stop
+        if (ChannelId == Cdd_I2cSequenceContainerLocal[SequenceId]
+                             .ChannelList[Cdd_I2cSequenceContainerLocal[SequenceId].MaxChannels - 1u] &&
+            (CDD_I2C_SEQ_PENDING == Cdd_I2cSequenceContainerLocal[SequenceId].SeqResult))
+        {
+            /*Check if sequence complete notify function is not passed as NULL*/
+            if (NULL_PTR != Cdd_I2cSequenceContainer[SequenceId].SequenceCompleteNotify)
+            {
+                /*Execute sequence complete notify callback function*/
+                Cdd_I2cSequenceContainer[SequenceId].SequenceCompleteNotify();
+            }
+            else
+            {
+#if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
+                /*Sequence complete notify callback function passed an NULL*/
+                Cdd_I2cReportDetError(CDD_I2C_SID_ASYNC_TRANSMIT, CDD_I2C_E_PARAM_NOTIFY_CALLBACK);
+#endif
+            }
+            /*If restart mode is restart, then stop, else stop is done above for stop-start slave transmission mode*/
+            if (CDD_I2C_RESTART_MODE_STOP != Cdd_I2cSequenceContainerLocal[SequenceId].RestartMode)
+            {
+                /*Stop at the end of sequence if restart mode is no-stop*/
+                Cdd_I2c_Stop(HwUnit);
+            }
+            /*Mark the sequence as OK and free the hardware instance*/
+            Cdd_I2cSequenceContainerLocal[SequenceId].SeqResult                      = CDD_I2C_SEQ_OK;
+            CddI2cHwUnitStatus[Cdd_I2cSequenceContainerLocal[SequenceId].HwInstance] = CDD_I2C_HW_UNIT_FREE;
+        }
+
+        /*Function call to disable local interrupts*/
+        Cdd_I2c_Disable_interrupts(HwUnit, (uint16) ~(CDD_I2C_ALL_INTERRUPTS));
+        /*Function call to clear all I2C related interrupts*/
+        Cdd_I2c_Clear_interrupts(HwUnit, CDD_I2C_ALL_INTERRUPTS_CLEAR);
+        /*Function call to enable configurator selected interrupts*/
+        Cdd_I2c_Enable_interrupts(HwUnit);
+        /*Enable global interrupts*/
+        SchM_Exit_Cdd_I2c_I2C_EXCLUSIVE_AREA_0();
     }
+
     Cdd_I2cChannelContainerLocal[ChannelId].ChannelResult    = CDD_I2C_CH_RESULT_OK;
     Cdd_I2cChannelContainerLocal[ChannelId].DataBufferLength = Cdd_I2cChannelContainer[ChannelId].DataBufferLength;
     Cdd_I2cChannelContainerLocal[ChannelId].DataBuffer       = Cdd_I2cChannelContainer[ChannelId].DataBuffer;
@@ -655,26 +686,6 @@ static void Cdd_I2c_Polling_Mode_Receive_ReadStatusRegister(uint8 HwUnit, uint8 
             /*Do Nothing*/
         }
     }
-}
-
-static void Cdd_I2c_Polling_Mode_Receive_sequencestatus(uint8 ChannelId, uint8 SequenceId)
-{
-    if (NULL_PTR != Cdd_I2cSequenceContainer[SequenceId].SequenceCompleteNotify)
-    {
-        if (ChannelId == Cdd_I2cSequenceContainerLocal[SequenceId]
-                             .ChannelList[Cdd_I2cSequenceContainerLocal[SequenceId].MaxChannels - 1U])
-        {
-            Cdd_I2cSequenceContainer[SequenceId].SequenceCompleteNotify();
-            Cdd_I2cSequenceContainerLocal[SequenceId].SeqResult = CDD_I2C_SEQ_OK;
-        }
-    }
-#if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
-    else
-    {
-        Cdd_I2cReportDetError(CDD_I2C_SID_POLLING_MODE_PROCESSING, CDD_I2C_E_PARAM_NOTIFY_CALLBACK);
-        /*Sequence complete notify callback function passed as NULL_PTR*/
-    }
-#endif
 }
 
 #endif /*#if(STD_ON == CDD_I2C_POLLING_MODE)*/

@@ -1088,7 +1088,7 @@ Eth_EnableEgressTimeStamp(VAR(uint8, AUTOMATIC) CtrlIdx, VAR(Eth_BufIdxType, AUT
     if ((Std_ReturnType)E_OK == retVal)
     {
         /* time stamping is always enabled */
-        Eth_BufObjType *pTempBufObj        = &(Eth_DrvObj.portObj.txBufObjArray[BufIdx]);
+        Eth_TxBufObjType *pTempBufObj      = &(Eth_DrvObj.portObj.txBufObjArray[BufIdx]);
         pTempBufObj->enableEgressTimeStamp = (boolean)TRUE;
     }
 }

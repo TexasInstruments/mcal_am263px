@@ -191,6 +191,9 @@ typedef struct EthUtilsApp_Stats_s
     volatile uint32 rxVlanPktCnt;
     /**< Number of data received packets with VLAN tag (EthIf_RxIndication()) */
 
+    volatile uint32 rxIpChecksumCnt;
+    /**< Number of data received packets with ipv4 type (EthIf_RxIndication()) */
+
     volatile uint32 rxPktNotRecv;
     /**< Number of times Eth_Receive() returned packet not received */
 
@@ -365,6 +368,9 @@ typedef struct EthUtilsApp_State_s
 
     boolean qosTest;
     /* Enable Qos test to calculate QOS bandwidth */
+
+    boolean checkSumTest;
+    /* Enable checksum test */
 
     boolean sendMultipleStopCmd;
     /* enable/disable multiple tx of STOP CMD in EthApp_transmit */

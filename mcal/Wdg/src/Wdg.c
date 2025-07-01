@@ -38,6 +38,7 @@ MCAL-15072
 /* ========================================================================== */
 
 #include "Wdg.h"
+#include "Wdg_Cbk.h"
 #include "Dem.h"
 #include "Wdg_Priv.h"
 
@@ -137,8 +138,7 @@ FUNC(void, WDG_CODE) Wdg_GetVersionInfo(Std_VersionInfoType *versioninfo)
  */
 FUNC(void, WDG_CODE) Wdg_Init(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST) ConfigPtr)
 {
-    Std_ReturnType retVal;
-
+    Std_ReturnType        retVal;
     const Wdg_ConfigType *Wdg_Config_pt = (Wdg_ConfigType *)NULL_PTR;
 
 #if (STD_ON == WDG_VARIANT_PRE_COMPILE)
@@ -153,7 +153,6 @@ FUNC(void, WDG_CODE) Wdg_Init(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST)
         Wdg_Config_pt = ConfigPtr;
     }
 #endif /* (STD_ON == WDG_VARIANT_POST_BUILD) */
-
 #if (STD_ON == WDG_VARIANT_LINK_TIME)
     if (NULL_PTR != ConfigPtr)
     {
@@ -301,15 +300,15 @@ FUNC(void, WDG_CODE) Wdg_SetTriggerCondition(uint16 timeout)
         if (0U == timeout)
         {
             /* Skip force resetting the device only when this compilation flag is set to OFF */
-#if (STD_OFF == WDG_SKIP_FORCE_RESET)
             if (Wdg_DrvObj.timeOutCounter != 0U)
             {
                 /* Update trigger condition */
                 Wdg_DrvObj.timeOutCounter = timeout;
+#if (STD_OFF == WDG_SKIP_FORCE_RESET)
                 /* Cause a WD reset if timeout is set as 0 */
                 Wdg_generateSysReset(Wdg_DrvObj.baseAddr);
-            }
 #endif
+            }
         }
         else
         {

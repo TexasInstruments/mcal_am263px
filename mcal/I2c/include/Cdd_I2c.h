@@ -492,6 +492,18 @@ typedef enum
     CDD_I2C_SEQ_CANCELLED
 } Cdd_I2c_SeqResultType;
 
+/** \brief  This is an enum containaining the possible restart
+ * modes, the default mode is CDD_I2C_RESTART_MODE_NOSTOP
+ */
+typedef enum
+{
+    /** \brief I2C restart mode with stop at end of each transaction/channel write/read*/
+    CDD_I2C_RESTART_MODE_STOP,
+    /** \brief I2C restart mode with no stop at end of each transaction/channel write/read,
+     * by default there is start at begining of each transaction*/
+    CDD_I2C_RESTART_MODE_NOSTOP
+} Cdd_I2c_RestartModeType;
+
 /** \brief  This is a structure for CDD_I2C which contains the HW unit
 initialization parameters */
 typedef struct
@@ -542,6 +554,8 @@ typedef struct __attribute__((packed))
     Cdd_I2c_SequenceErrorNotification SequenceErrorNotify;
     /** \brief This element indicates the channel numbers used by a sequence*/
     Cdd_I2c_SequenceType              ChannelList[CDD_I2C_MAXIMUM_CHANNEL_NUMBER];
+    /** \brief This element indicates the transmission mode for the slave*/
+    Cdd_I2c_RestartModeType           RestartMode;
 } Cdd_I2c_Sequence_Config;
 
 /** \brief This is a structure for CDD_I2C Channel which is a part of the sequence

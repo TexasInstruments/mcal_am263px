@@ -1,64 +1,29 @@
 APP_NAME = cdd_cmpss_app
 
-SRCDIR = . ../Utils/$(COMPILER) ../Utils/$(COMPILER)/$(SOC) ../Utils/$(SOC)
-SRCDIR += $(autosarConfigSrc_PATH)/Mcu_Demo_Cfg/soc/$(SOC)/$(CORE)/src
-SRCDIR += $(autosarConfigSrc_PATH)/Port_Demo_Cfg/soc/$(PLATFORM)/$(CORE)/src
-SRCDIR += soc/$(SOC)/$(CORE)
+# Get the list of src dir, include dir and source files to compile using module mk files
+include $(mcal_PATH)/include/hw/inc.mk
+include $(mcal_PATH)/include/memmap/inc.mk
+include $(mcal_PATH)/Cdd_Cmpss/srcs.mk
+include $(mcal_PATH)/Epwm/srcs.mk
+include $(mcal_PATH)/Mcu/srcs.mk
+include $(mcal_PATH)/Port/srcs.mk
+include $(mcal_PATH)/examples/Utils/srcs_autosar_stub.mk
+include $(mcal_PATH)/examples/Utils/srcs_startup.mk
+include $(mcal_PATH)/examples_config/Cdd_Cmpss_Demo_Cfg/srcs.mk
+include $(mcal_PATH)/examples_config/Mcu_Demo_Cfg/srcs.mk
+include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs.mk
+include soc/srcs.mk
 
-INCDIR = . ../Utils/$(COMPILER) ../Utils/$(COMPILER)/$(SOC) ../Utils/$(SOC)
-INCDIR += $(autosarConfigSrc_PATH)/Cdd_Cmpss_Demo_Cfg/soc/$(SOC)/$(CORE)/include
-INCDIR += $(autosarConfigSrc_PATH)/Mcu_Demo_Cfg/soc/$(SOC)/$(CORE)/include
-INCDIR += $(autosarConfigSrc_PATH)/Epwm_Demo_Cfg/soc/$(SOC)/$(CORE)/include
-INCDIR += soc soc/$(SOC)
+# List all the components/interfaces/libraries required by the application
+INCLUDE_EXTERNAL_INTERFACES = app_utils
+COMP_LIST_COMMON = app_utils
 
-# List all the external components/interfaces, whose interface header files
-# need to be included for this component
-INCLUDE_EXTERNAL_INTERFACES = autoSARBSW autosarConfig cdd_cmpss epwm mcu port app_utils
+SRCDIR += .
+INCDIR += . $(autosarConfigSrc_PATH)/Epwm_Demo_Cfg/soc/$(SOC)/$(CORE)/include
+SRCS_COMMON += CddCmpssApp.c Cdd_Pwm_PBcfg.c
 
-INCLUDE_INTERNAL_INTERFACES = cddCmpssAppPriv
-cddCmpssAppPriv_INCLUDE = $(mcal_PATH)/include/hw/$(SOCFAMILY) $(mcal_PATH)/include/hw
-
-# List all the components required by the application
-COMP_LIST_COMMON = cdd_cmpss epwm mcu port app_utils
-
-# Common source files and CFLAGS across all platforms and cores
-SRCS_COMMON = CddCmpssApp.c CddCmpssApp_Platform.c
-SRCS_COMMON += Mcu_PBcfg.c Mcu_Cfg.c Port_Cfg.c Cdd_Pwm_PBcfg.c
-SRCS_COMMON += Det.c
-ifeq ($(SOC), $(filter $(SOC), am263 am261))
-  SRCS_COMMON += Port_PBcfg.c
-endif
-ifeq ($(SOC), $(filter $(SOC), am263px))
-  ifeq ($(PACKAGE), SIP)
-    SRCS_COMMON += Port_PBcfg_SIP.c
-  else
-    ifeq ($(PACKAGE), C)
-      SRCS_COMMON += Port_PBcfg_C.c
-    else
-      SRCS_COMMON += Port_PBcfg.c
-    endif
-  endif
-endif
-
-SRCS_ASM_COMMON += sys_intvecs.asm sys_startup.asm
-
-CFLAGS_LOCAL_COMMON = $(MCAL_CFLAGS) -D$(SOCFAMILY)
-LNKCMD_FILE = ../lnk_r5_$(SOCFAMILY)_$(COMPILER).cmd
-
-# Core/SoC/platform specific source files and CFLAGS
-# Example:
-# SRCS_<core/SoC/platform-name> =
-# CFLAGS_LOCAL_<core/SoC/platform-name> =
+CFLAGS_LOCAL_COMMON = $(MCAL_CFLAGS)
+LNKCMD_FILE = $(mcal_PATH)/examples/lnk_r5_$(SOC)_$(COMPILER).cmd
 
 # Include common make files
-ifeq ($(MAKERULEDIR), )
-  #Makerule path not defined, define this and assume relative path from ROOTDIR
-  MAKERULEDIR := $(ROOTDIR)/build/makerules
-  export MAKERULEDIR
-endif
 include $(MAKERULEDIR)/common.mk
-
-# OBJs and libraries are built by using rule defined in rules_<target>.mk
-# and need not be explicitly specified here
-
-# Nothing beyond this point

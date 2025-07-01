@@ -45,6 +45,8 @@
 #define MSS_RCM_LOCK0_KICK1  (0x5320900CU)
 #define RCM_KICK0_UNLOCK_VAL (0x01234567U)
 #define RCM_KICK1_UNLOCK_VAL (0x0FEDCBA8U)
+#define RCM_KICK0_LOCK_VAL   (0x00000000U)
+#define RCM_KICK1_LOCK_VAL   (0x00000000U)
 
 /* ========================================================================== */
 /*                         Structure Declarations                             */
@@ -208,7 +210,6 @@ FUNC(uint32, WDG_CODE) Wdg_getCurrentDownCounter(uint32 baseAddr)
 FUNC(void, WDG_CODE) Wdg_generateSysReset(uint32 baseAddr)
 {
     ((rtiBASE_t*)baseAddr)->WDKEY = WDG_TRIGGER_FIRST_KEY;
-
     ((rtiBASE_t*)baseAddr)->WDKEY = WDG_TRIGGER_RESET_KEY;
 }
 
@@ -222,7 +223,6 @@ FUNC(void, WDG_CODE) Wdg_generateSysReset(uint32 baseAddr)
 FUNC(void, WDG_CODE) Wdg_service(uint32 baseAddr)
 {
     ((rtiBASE_t*)baseAddr)->WDKEY = WDG_TRIGGER_FIRST_KEY;
-
     ((rtiBASE_t*)baseAddr)->WDKEY = WDG_TRIGGER_SECOND_KEY;
 }
 
@@ -266,20 +266,8 @@ Wdg_platformInit(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST) ConfigPtr)
 #endif
     {
         status = wdg_platforminit_internal(ConfigPtr);
-
         if ((Std_ReturnType)E_OK == status)
         {
-#ifdef MCAL_DYNAMIC_BUILD
-            Mcal_Libs_Utils_unlockTopRcmMMR();
-            regWriteStatus = regWriteReadback(&toprcmREG->WARM_RESET_CONFIG, M_EIGHTEEN, M_SIXTEEN, 0x0U);
-            Mcal_Libs_Utils_lockTopRcmMMR();
-            if (regWriteStatus != MCAL_REGWR_E_OK)
-            {
-#ifdef WDG_E_HARDWARE_ERROR
-                (void)Dem_SetEventStatus((Dem_EventIdType)WDG_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
-#endif
-            }
-#else
             Mcal_Libs_Utils_unlockTopRcmMMR();
             regWriteStatus = regWriteReadback(&toprcmREG->WARM_RESET_CONFIG, M_EIGHTEEN, M_SIXTEEN, 0x7U);
             Mcal_Libs_Utils_lockTopRcmMMR();
@@ -289,7 +277,6 @@ Wdg_platformInit(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST) ConfigPtr)
                 (void)Dem_SetEventStatus((Dem_EventIdType)WDG_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
             }
-#endif
         }
         else
         {
@@ -298,6 +285,7 @@ Wdg_platformInit(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST) ConfigPtr)
 #endif
         }
     }
+
     return (status);
 }
 
@@ -330,6 +318,7 @@ static FUNC(Std_ReturnType, WDG_CODE)
                                       ConfigPtr->slowModeCfg.preloadValue, (uint32)ConfigPtr->slowModeCfg.windowSize);
         }
     }
+
     return status;
 }
 
@@ -372,15 +361,22 @@ Wdg_HWRegisterReadback(P2VAR(Wdg_RegisterReadbackType, AUTOMATIC, WDG_APPL_DATA)
 static FUNC(void, WDG_CODE) Wdg_reset(void)
 {
     uint32 resetAddr;
-    /* get the address of WDG instance to reset*/
+
+    /* get the address of WDG instance to reset */
     resetAddr = Wdg_DrvObj.WdgResetAddress;
-    /* unclock to write to the MSS_RCM register*/
+
+    /* unlock to write to the MSS_RCM register */
     HW_WR_REG32(MSS_RCM_LOCK0_KICK0, RCM_KICK0_UNLOCK_VAL);
     HW_WR_REG32(MSS_RCM_LOCK0_KICK1, RCM_KICK1_UNLOCK_VAL);
+
     /* Reset the wdg : 3'b111 */
     HW_WR_REG32(resetAddr, 0x7);
     /* De-assert the reset: 3'b000 */
     HW_WR_REG32(resetAddr, 0x0);
+
+    /* lock the MSS_RCM register */
+    HW_WR_REG32(MSS_RCM_LOCK0_KICK0, RCM_KICK0_LOCK_VAL);
+    HW_WR_REG32(MSS_RCM_LOCK0_KICK1, RCM_KICK1_LOCK_VAL);
 }
 
 /** @fn FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) Mode)
@@ -410,14 +406,14 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) 
             Wdg_reset();
             if (Mode == WDGIF_FAST_MODE)
             {
-                /*  DWD Expiration Period */
+                /* DWD Expiration Period */
                 retVal =
                     Wdg_windowConfig(baseAddr, (uint32)Wdg_DrvObj.fastModeCfg.reaction,
                                      Wdg_DrvObj.fastModeCfg.preloadValue, (uint32)Wdg_DrvObj.fastModeCfg.windowSize);
             }
-            else if (Mode == WDGIF_SLOW_MODE)
+            else
             {
-                /*  DWD Expiration Period */
+                /* DWD Expiration Period */
                 retVal =
                     Wdg_windowConfig(baseAddr, (uint32)Wdg_DrvObj.slowModeCfg.reaction,
                                      Wdg_DrvObj.slowModeCfg.preloadValue, (uint32)Wdg_DrvObj.slowModeCfg.windowSize);

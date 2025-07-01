@@ -30,9 +30,7 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 
-#include "Std_Types.h"
 #include "WdgIf_Types.h"
-#include "mcal_hw_soc_baseaddress.h"
 #include "Wdg_Cfg.h"
 
 #ifdef __cplusplus
@@ -311,7 +309,6 @@ FUNC(void, WDG_CODE) Wdg_SetTriggerCondition(uint16 timeout);
 FUNC(void, WDG_CODE) Wdg_Trigger(void);
 
 #if (STD_ON == WDG_REGISTER_READBACK_API)
-
 /** \brief This method is Wdg_RegisterReadback Api.
  *
  *
@@ -331,8 +328,8 @@ FUNC(void, WDG_CODE) Wdg_Trigger(void);
  *****************************************************************************/
 FUNC(Std_ReturnType, WDG_CODE)
 Wdg_RegisterReadback(P2VAR(Wdg_RegisterReadbackType, AUTOMATIC, WDG_APPL_DATA) RegisterReadbackPtr);
-
 #endif
+
 #ifdef __cplusplus
 }
 #endif

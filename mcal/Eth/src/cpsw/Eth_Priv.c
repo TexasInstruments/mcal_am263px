@@ -112,6 +112,7 @@ typedef Eth_PortObject *Eth_PortObjectPtrType;
 #define ETH_GMII_SEL_RGMII_MODE (0x2U)
 
 #define ntohs(a) ((((a) >> 8) & 0xffU) + (((a) << 8) & 0xff00U))
+#define htons(a) (ntohs(a))
 
 /* Port mode in MSS_CPSW_CONTROL register */
 #define MSS_CPSW_CONTROL_REG_P1_MODE_SEL_SHIFT (0x0U)
@@ -120,11 +121,153 @@ typedef Eth_PortObject *Eth_PortObjectPtrType;
 #define MSS_CPSW_CONTROL_REG_P2_MODE_SEL_SHIFT (0x10U)
 #define MSS_CPSW_CONTROL_REG_P2_MODE_SEL_MASK  (0x00070000U)
 
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+/* CPSW Checksum offload Encap Info length */
+#define ENET_CPDMA_ENCAPINFO_CHECKSUM_INFO_LEN (4U)
+
+#define ENETDMA_RXCSUMINFO_CHKSUM_ADD_SHIFT (0U)
+#define ENETDMA_RXCSUMINFO_CHKSUM_ADD_MASK  (0x0000FFFFU)
+
+#define ENETDMA_RXCSUMINFO_CHKSUM_ERR_SHIFT (16U)
+#define ENETDMA_RXCSUMINFO_CHKSUM_ERR_MASK  (0x00010000U)
+
+#define ENETDMA_RXCSUMINFO_FRAGMENT_SHIFT (17U)
+#define ENETDMA_RXCSUMINFO_FRAGMENT_MASK  (0x00020000U)
+
+#define ENETDMA_RXCSUMINFO_TCP_UDP_N_SHIFT (18U)
+#define ENETDMA_RXCSUMINFO_TCP_UDP_N_MASK  (0x00040000U)
+
+#define ENETDMA_RXCSUMINFO_IPV6_VALID_SHIFT (19U)
+#define ENETDMA_RXCSUMINFO_IPV6_VALID_MASK  (0x00080000U)
+
+#define ENETDMA_RXCSUMINFO_IPV4_VALID_SHIFT (20U)
+#define ENETDMA_RXCSUMINFO_IPV4_VALID_MASK  (0x00100000U)
+
+#define ENETDMA_TXCSUMINFO_CHKSUM_BYTECNT_SHIFT (0U)
+#define ENETDMA_TXCSUMINFO_CHKSUM_BYTECNT_MASK  (0x00003FFFU)
+
+#define ENETDMA_TXCSUMINFO_CHKSUM_INV_SHIFT (15U)
+#define ENETDMA_TXCSUMINFO_CHKSUM_INV_MASK  (0x00008000U)
+
+#define ENETDMA_TXCSUMINFO_CHKSUM_STARTBYTE_SHIFT (16U)
+#define ENETDMA_TXCSUMINFO_CHKSUM_STARTBYTE_MASK  (0x00FF0000U)
+
+#define ENETDMA_TXCSUMINFO_CHKSUM_RESULT_SHIFT (24U)
+#define ENETDMA_TXCSUMINFO_CHKSUM_RESULT_MASK  (0xFF000000U)
+
+/* Internet Protocol Version 4 (IPv4)   */
+#define ETH_P_IP (0x0800U)
+/* Internet Protocol Version 6 (IPv6)   */
+#define ETH_P_IPV6 (0x86DDU)
+/* 802.1Q VLAN Extended Header          */
+#define ETH_P_8021Q (0x8100U)
+
+/* User Datagram Protocol (UDP)         */
+#define IPPROTO_UDP (17U)
+/* Transmission Control Protocol (TCP)  */
+#define IPPROTO_TCP (6U)
+
+/* Size of 802.1Q VLAN Extended Header  */
+#define SIZEOF_VLAN_HDR (4U)
+
+/* IPv6 Header Length */
+#define IPV6_HDR_LEN (40U)
+#endif /* CHECKSUM_OFFLOAD */
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+/* Eth VLAN Frame Header */
+typedef struct
+{
+    uint8  dstMac[ETH_MAC_ADDR_LEN];
+    /**< Destination MAC address */
+    uint8  srcMac[ETH_MAC_ADDR_LEN];
+    /**< Source MAC address */
+    uint16 tpid;
+    /**< Tag Protocol Identifier */
+    uint16 tci;
+    /**< Tag Control Information */
+    uint16 etherType;
+    /**< EtherType field */
+} __attribute__((packed)) Eth_vlanFrameHdr;
 
-/* None */
+/* IPv4 Header */
+typedef struct
+{
+    uint8  v_hl;
+    /**< IP version and Header Length */
+    uint8  tos;
+    /**< Type Of Service */
+    uint16 len;
+    /**< Total Length */
+    uint16 id;
+    /**< Identification */
+    uint16 offset;
+    /**< Flags + Fragment offset field */
+    uint8  ttl;
+    /**< Time to live */
+    uint8  protocol;
+    /**< Protocol */
+    uint16 checksum;
+    /**< IP Header Checksum */
+    uint32 src_addr;
+    /**< Source address */
+    uint32 dst_addr;
+    /**< Destination address */
+} __attribute__((packed)) Eth_Ip4Hdr;
+
+/* IPv6 Header */
+typedef struct
+{
+    uint32 v_tc_fl;
+    /**< IP version + Traffic Class + Flow Label */
+    uint16 pay_len;
+    /**< Payload Length */
+    uint8  next_hdr;
+    /**< Next Header */
+    uint8  hop_limit;
+    /**< Hop Limit */
+    uint32 src_addr[4];
+    /**< Source address */
+    uint32 dst_addr[4];
+    /**< Destination address */
+} __attribute__((packed)) Eth_Ip6Hdr;
+
+/* UDP Header */
+typedef struct
+{
+    uint16 src_port;
+    /**< UDP Source Port */
+    uint16 dst_port;
+    /**< UDP Destination Port */
+    uint16 len;
+    /**< Length (Header + Payload) */
+    uint16 checksum;
+    /**< UDP Frame Checksum of IP Header + UDP Header + Payload */
+} __attribute__((packed)) Eth_UdpHdr;
+
+/* TCP Header */
+typedef struct
+{
+    uint16 src_port;
+    /**< TCP Source Port */
+    uint16 dst_port;
+    /**< TCP Destination Port */
+    uint32 seq_num;
+    /**< Sequence Number */
+    uint32 ack_num;
+    /**< Acknowledgment number */
+    uint16 hl_flags;
+    /**< TCP Header Lengh + Flags */
+    uint16 window_size;
+    /**< Window Size */
+    uint16 checksum;
+    /**< TCP Frame Checksum of IP Header + TCP Header + Payload */
+    uint16 urgent_pointer;
+    /**< Urgent Pointer */
+} __attribute__((packed)) Eth_TcpHdr;
+#endif /* CHECKSUM_OFFLOAD */
 
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
@@ -137,7 +280,7 @@ static void Eth_updateGmiiField(uint8 macNum, uint32 gmiiModeVal);
 
 static void EthRxChTearDown(uint32 chNum);
 
-static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaBuffDescType *pCurrRxBuffDesc);
+static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc);
 
 static void Eth_configureSwitch(const uint8 macAddr[6]);
 
@@ -155,13 +298,13 @@ static void Eth_CpdmaTxChTearDownAck(uint32 baseAddr, uint32 chNum);
 
 static void Eth_CpdmaRxChTearDownAck(uint32 baseAddr, uint32 chNum);
 
-static void EthTxBuffProcess(uint8 ctrlIdx, Eth_BufObjType *pBufObj);
+static void EthTxBuffProcess(uint8 ctrlIdx, Eth_TxBufObjType *pBufObj);
 
-static void EthRxBuffDescEnqueue(Eth_CpdmaBuffDescQueue *pRxDescRing, Eth_CpdmaBuffDescType *pNewTail);
+static void EthRxBuffDescEnqueue(Eth_CpdmaRxBuffDescQueue *pRxDescRing, Eth_CpdmaRxBuffDescType *pNewTail);
 
 static uint32 EthCheckNullMACAddr(const uint8 macAddr[ETH_MAC_ADDR_LEN]);
 
-static void Eth_freeBuffers(Eth_BufObjType *bufObjArray, uint32 numBuffers);
+static void Eth_freeTxBuffers(Eth_TxBufObjType *bufObjArray, uint32 numBuffers);
 
 static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
                                                   P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
@@ -173,11 +316,11 @@ static void EthCpswInstInit(uint32 portNum);
 
 static void Eth_macSetConfig(uint8 portNum, const Eth_MacConfigType *pMACConfig);
 
-static void EthTxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr);
+static void EthTxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaTxBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr);
 
-static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr);
+static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaRxBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr);
 
-static void EthRxBuffDescRxStatus(const Eth_CpdmaBuffDescType *pCurrRxBuffDesc, Eth_RxStatusType *rxStatus);
+static void EthRxBuffDescRxStatus(const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc, Eth_RxStatusType *rxStatus);
 
 static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum);
 
@@ -187,6 +330,12 @@ static boolean Eth_isMcastMacAddr(const uint8 *addr);
 
 static boolean Eth_isUcastMacAddr(const uint8 *addr);
 
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+static uint16        Eth_genPseudoCheckSumIPv4(uint8 *ipPktStart, uint16 ipPktPayLen);
+static uint16        Eth_genPseudoCheckSumIPv6(uint8 *ipPktStart, uint16 ipPktPayLen);
+static uint32        Eth_setPseudoCheckSum(Eth_FrameHeaderType *pEthPkt, Eth_FrameType frameType);
+static inline uint8 *Eth_getIpPktStart(uint8 *frameBuffer);
+#endif
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -218,7 +367,9 @@ static uint8 Eth_RxPacketMemoryPool[ETH_MAX_FRAME_LEN * ETH_NUM_RX_BUFFERS];
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Eth_MemMap.h"
 
-uint8 Eth_DescMem[(ETH_NUM_TX_BUFFERS + ETH_NUM_RX_BUFFERS) * sizeof(Eth_CpdmaBuffDescType)]
+uint8 Eth_RxDescMem[ETH_NUM_RX_BUFFERS * sizeof(Eth_CpdmaRxBuffDescType)]
+    __attribute__((aligned(128), section(".bss.ENET_CPPI_DESC")));
+uint8 Eth_TxDescMem[ETH_NUM_TX_BUFFERS * sizeof(Eth_CpdmaTxBuffDescType)]
     __attribute__((aligned(128), section(".bss.ENET_CPPI_DESC")));
 
 #define ETH_START_SEC_VAR_INIT_32
@@ -282,7 +433,8 @@ FUNC(void, ETH_CODE) Eth_initHw(const Eth_ConfigType *CfgPtr)
     Eth_DrvObj.ctrlIdx            = CfgPtr->ctrlIdx;
     Eth_DrvObj.portIdx            = CfgPtr->portIdx;
     Eth_DrvObj.baseAddr           = SOC_MSS_CPSW_BASE;
-    Eth_DrvObj.descMemBaseAddr    = (uint32)Eth_DescMem;
+    Eth_DrvObj.rxDescMemBaseAddr  = (uint32)Eth_RxDescMem;
+    Eth_DrvObj.txDescMemBaseAddr  = (uint32)Eth_TxDescMem;
     Eth_DrvObj.activeMACPortCount = (uint8)1U;
 
     /* Copy controller configuration into driver object*/
@@ -307,7 +459,7 @@ FUNC(void, ETH_CODE) Eth_initHw(const Eth_ConfigType *CfgPtr)
     for (i = 0U; i < (uint16)ETH_NUM_TX_BUFFERS; i++)
     {
         portObj->txBufObjArray[i].bufIdx         = i;
-        portObj->txBufObjArray[i].payload        = (Eth_FrameObjType *)&Eth_TxPacketMemoryPool[i * ETH_MAX_FRAME_LEN];
+        portObj->txBufObjArray[i].payload        = (Eth_TxFrameObjType *)&Eth_TxPacketMemoryPool[i * ETH_MAX_FRAME_LEN];
         portObj->txBufObjArray[i].len            = ETH_MAX_FRAME_LEN;
         portObj->txBufObjArray[i].type           = ETH_FRAME_DEFAULT_TYPE;
         portObj->txBufObjArray[i].bufState       = ETH_BUF_STATE_FREE;
@@ -319,12 +471,10 @@ FUNC(void, ETH_CODE) Eth_initHw(const Eth_ConfigType *CfgPtr)
     /* Copy RX buffer information into driver object */
     for (i = 0U; i < (uint16)ETH_NUM_RX_BUFFERS; i++)
     {
-        portObj->rxBufObjArray[i].bufIdx   = i;
-        portObj->rxBufObjArray[i].payload  = (Eth_FrameObjType *)&Eth_RxPacketMemoryPool[i * (uint16)ETH_MAX_FRAME_LEN];
-        portObj->rxBufObjArray[i].len      = ETH_MAX_FRAME_LEN;
-        portObj->rxBufObjArray[i].type     = ETH_FRAME_DEFAULT_TYPE;
-        portObj->rxBufObjArray[i].bufState = ETH_BUF_STATE_FREE;
-        portObj->rxBufObjArray[i].txConfirmation = (boolean)FALSE;
+        portObj->rxBufObjArray[i].bufIdx = i;
+        portObj->rxBufObjArray[i].payload =
+            (Eth_RxFrameObjType *)&Eth_RxPacketMemoryPool[i * (uint16)ETH_MAX_FRAME_LEN];
+        portObj->rxBufObjArray[i].len = ETH_MAX_FRAME_LEN;
     }
 
     currPort = (uint32)Eth_DrvObj.portObj.portNum;
@@ -397,7 +547,8 @@ static void EthResetDrvObj(Eth_DrvObject *pEthDrvObj)
     (void)memset(&(pEthDrvObj->statsObj), 0, sizeof(pEthDrvObj->statsObj));
 
     pEthDrvObj->baseAddr           = 0U;
-    pEthDrvObj->descMemBaseAddr    = 0U;
+    pEthDrvObj->rxDescMemBaseAddr  = 0U;
+    pEthDrvObj->txDescMemBaseAddr  = 0U;
     pEthDrvObj->activeMACPortCount = 0x1U;
 }
 
@@ -755,11 +906,10 @@ static void Eth_CpdmaRxChTearDownAck(uint32 baseAddr, uint32 chNum)
 FUNC(Std_ReturnType, ETH_CODE)
 Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
 {
-    Std_ReturnType retVal        = E_NOT_OK;
-    uint32         descStartAddr = 0U;
-    uint32         rxChNum       = ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM;
-    uint32         txChNum       = ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM;
-    uint8          portIdx       = Eth_DrvObj.portObj.portNum;
+    Std_ReturnType retVal  = E_NOT_OK;
+    uint32         rxChNum = ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM;
+    uint32         txChNum = ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM;
+    uint8          portIdx = Eth_DrvObj.portObj.portNum;
 
     /* Only process if input CtrlMode differs with current mode */
     if (Eth_DrvObj.ctrlMode != CtrlMode)
@@ -794,8 +944,7 @@ Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
              * the controller is disabled via Eth_SetControllerMod
              */
             SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
-            Eth_freeBuffers(Eth_DrvObj.portObj.rxBufObjArray, ETH_NUM_RX_BUFFERS);
-            Eth_freeBuffers(Eth_DrvObj.portObj.txBufObjArray, ETH_NUM_TX_BUFFERS);
+            Eth_freeTxBuffers(Eth_DrvObj.portObj.txBufObjArray, ETH_NUM_TX_BUFFERS);
             Eth_DrvObj.portObj.lastTxIdx = ETH_NUM_TX_BUFFERS - 1U;
 
             /* Disable the transmission and reception */
@@ -822,12 +971,11 @@ Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
              */
             SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
 
-            descStartAddr =
-                ((uint32)(Eth_DrvObj.descMemBaseAddr) + (Eth_DrvObj.maxRxBuffDesc * sizeof(Eth_CpdmaBuffDescType)));
-            EthTxBuffDescInit(CtrlIdx, &(Eth_DrvObj.txDescRing), Eth_DrvObj.maxTxBuffDesc, descStartAddr);
+            EthTxBuffDescInit(CtrlIdx, &(Eth_DrvObj.txDescRing), Eth_DrvObj.maxTxBuffDesc,
+                              Eth_DrvObj.txDescMemBaseAddr);
 
-            descStartAddr = (uint32)(Eth_DrvObj.descMemBaseAddr);
-            EthRxBuffDescInit(CtrlIdx, &(Eth_DrvObj.rxDescRing), Eth_DrvObj.maxRxBuffDesc, descStartAddr);
+            EthRxBuffDescInit(CtrlIdx, &(Eth_DrvObj.rxDescRing), Eth_DrvObj.maxRxBuffDesc,
+                              Eth_DrvObj.rxDescMemBaseAddr);
 
             /* Enable all transmit and receive buffers */
             CpswCpdma_writeRxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)Eth_DrvObj.rxDescRing.pHead),
@@ -1051,7 +1199,7 @@ static uint32 EthCheckNullMACAddr(const uint8 macAddr[ETH_MAC_ADDR_LEN])
     return retVal;
 }
 
-static void Eth_freeBuffers(Eth_BufObjType *bufObjArray, uint32 numBuffers)
+static void Eth_freeTxBuffers(Eth_TxBufObjType *bufObjArray, uint32 numBuffers)
 {
     uint32 i = 0U;
 
@@ -1104,14 +1252,14 @@ static void Eth_enableControllerToTransmitAndReceiveBuffers(const Eth_CpdmaConfi
     return;
 }
 
-static void EthTxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr)
+static void EthTxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaTxBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr)
 {
-    Eth_CpdmaBuffDescType *pCurrBuffDesc   = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    Eth_CpdmaBuffDescType *pLastBuffDesc   = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    uint32                 numBufDescCount = 0U;
+    Eth_CpdmaTxBuffDescType *pCurrBuffDesc   = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    Eth_CpdmaTxBuffDescType *pLastBuffDesc   = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    uint32                   numBufDescCount = 0U;
     (void)ctrlIdx; /* MISRA C Compliance - Reserved for future use */
 
-    pRing->pFreeHead = (Eth_CpdmaBuffDescType *)startAddr;
+    pRing->pFreeHead = (Eth_CpdmaTxBuffDescType *)startAddr;
 
     pRing->pHead      = pRing->pFreeHead;
     pRing->pQueueHead = NULL;
@@ -1149,26 +1297,22 @@ static void EthTxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaBuffDescQueue *pRing, uint
     }
 }
 
-static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr)
+static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaRxBuffDescQueue *pRing, uint32 numBuffDesc, uint32 startAddr)
 {
-    Eth_CpdmaBuffDescType *pCurrBuffDesc = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    Eth_CpdmaBuffDescType *pLastBuffDesc = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    Eth_BufObjType        *pEthBufObj    = (Eth_BufObjType *)NULL_PTR;
-    uint32                 bufIdx        = 0;
+    Eth_CpdmaRxBuffDescType *pCurrBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+    Eth_CpdmaRxBuffDescType *pLastBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+    Eth_RxBufObjType        *pEthBufObj    = (Eth_RxBufObjType *)NULL_PTR;
+    uint32                   bufIdx        = 0;
     (void)ctrlIdx; /* MISRA C Compliance - Reserved for future use */
 
-    pRing->pHead  = (Eth_CpdmaBuffDescType *)startAddr;
+    pRing->pHead  = (Eth_CpdmaRxBuffDescType *)startAddr;
     pCurrBuffDesc = pRing->pHead;
 
     /* Init and allocate buffer desc */
     for (bufIdx = 0; bufIdx < numBuffDesc; bufIdx++)
     {
         /* Allocate and init buffer object */
-        pEthBufObj           = &Eth_DrvObj.portObj.rxBufObjArray[bufIdx];
-        pEthBufObj->bufState = ETH_BUF_STATE_IN_USE;
-#if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
-        pEthBufObj->enableEgressTimeStamp = (boolean)FALSE;
-#endif
+        pEthBufObj = &Eth_DrvObj.portObj.rxBufObjArray[bufIdx];
         /* Init desc pointer */
         pCurrBuffDesc->pNextBuffDesc         = pCurrBuffDesc + 0x1U;
         pCurrBuffDesc->globalNextDescPointer = Eth_locToGlobAddr((uintptr_t)(pCurrBuffDesc->pNextBuffDesc));
@@ -1207,8 +1351,8 @@ static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaBuffDescQueue *pRing, uint
     }
     else
     {
-        pRing->pHead        = (Eth_CpdmaBuffDescType *)NULL_PTR;
-        pRing->pTail        = (Eth_CpdmaBuffDescType *)NULL_PTR;
+        pRing->pHead        = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+        pRing->pTail        = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
         pRing->freeBuffDesc = 0;
     }
 }
@@ -1217,12 +1361,11 @@ static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATI
                                                   P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
                                                   P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr)
 {
-    Eth_BufIdxType    bufIdx       = 0;
-    uint16            allocBuffLen = 0U;
-    Eth_PortObject   *pPortObj     = &(Eth_DrvObj.portObj);
-    BufReq_ReturnType retVal       = BUFREQ_OK;
-    Eth_FrameObjType *ethFrame     = (Eth_FrameObjType *)NULL_PTR;
-    ;
+    Eth_BufIdxType      bufIdx       = 0;
+    uint16              allocBuffLen = 0U;
+    Eth_PortObject     *pPortObj     = &(Eth_DrvObj.portObj);
+    BufReq_ReturnType   retVal       = BUFREQ_OK;
+    Eth_TxFrameObjType *ethFrame     = (Eth_TxFrameObjType *)NULL_PTR;
 
     /* Each port is considered as one controller */
     pPortObj = &(Eth_DrvObj.portObj);
@@ -1312,6 +1455,119 @@ Eth_provideHwTxBuffer(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
     return retVal;
 }
 
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+static uint16 Eth_genPseudoCheckSumIPv4(uint8 *ipPktStart, uint16 ipPktPayLen)
+{
+    Eth_Ip4Hdr *pIp4Hdr = (Eth_Ip4Hdr *)ipPktStart;
+    uint32      sum =
+        ((pIp4Hdr->src_addr & 0XFFFFU) + ((pIp4Hdr->src_addr >> 16U) & 0XFFFFU) + (pIp4Hdr->dst_addr & 0XFFFFU) +
+         ((pIp4Hdr->dst_addr >> 16U) & 0XFFFFU) + (htons((uint16)(pIp4Hdr->protocol))) + (htons(ipPktPayLen)));
+
+    /* Split the 32-bit sum into two 16-bit num and add them up
+     * until the sum is reduced to 16bits */
+    while (sum >> 16U)
+    {
+        sum = (sum & 0XFFFFU) + (sum >> 16U);
+    }
+
+    return (uint16) ~(sum & 0XFFFFU);
+}
+
+static uint16 Eth_genPseudoCheckSumIPv6(uint8 *ipPktStart, uint16 ipPktPayLen)
+{
+    Eth_Ip6Hdr *pIp6Hdr = (Eth_Ip6Hdr *)ipPktStart;
+    uint32      sum     = 0U;
+    uint32      idx     = 0U;
+
+    for (idx = 0U; idx < 4U; idx++)
+    {
+        sum += ((pIp6Hdr->src_addr[idx] & 0XFFFFU) + ((pIp6Hdr->src_addr[idx] >> 16U) & 0XFFFFU) +
+                (pIp6Hdr->dst_addr[idx] & 0XFFFFUL) + ((pIp6Hdr->dst_addr[idx] >> 16U) & 0XFFFFU));
+    }
+    sum += ((htons((uint16)(pIp6Hdr->next_hdr))) + (htons(ipPktPayLen)));
+
+    /* Split the 32-bit sum into two 16-bit num and add them up
+     * until the sum is reduced to 16bits */
+    while (sum >> 16U)
+    {
+        sum = (sum & 0XFFFFU) + (sum >> 16U);
+    }
+
+    return (uint16) ~(sum & 0XFFFFUL);
+}
+static uint32 Eth_setPseudoCheckSum(Eth_FrameHeaderType *pEthPkt, Eth_FrameType frameType)
+{
+    uint32 chksumInfo = 0U;
+    uint8 *ipPktStart = Eth_getIpPktStart((uint8 *)pEthPkt);
+    uint16 (*pseudo_chksum)(uint8 *, uint16);
+    Eth_UdpHdr *pUdpHdr     = (Eth_UdpHdr *)NULL_PTR;
+    Eth_TcpHdr *pTcpHdr     = (Eth_TcpHdr *)NULL_PTR;
+    uint8       ipPktHdrLen = 0U;
+    uint8       protocol    = 0U;
+
+    uint16 ipPktPayloadLen       = 0U;
+    uint8  csumCoverageStartByte = 0U;
+    uint8  csumResultByte        = 0U;
+
+    if (ETH_P_IPV6 == frameType)
+    {
+        ipPktHdrLen     = IPV6_HDR_LEN;
+        ipPktPayloadLen = htons(((Eth_Ip6Hdr *)ipPktStart)->pay_len);
+        pseudo_chksum   = &Eth_genPseudoCheckSumIPv6;
+        protocol        = ((Eth_Ip6Hdr *)ipPktStart)->next_hdr;
+    }
+    else
+    {
+        ipPktHdrLen     = ((((Eth_Ip4Hdr *)ipPktStart)->v_hl & 0x0FU) << 2U);
+        ipPktPayloadLen = htons(((Eth_Ip4Hdr *)ipPktStart)->len) - ipPktHdrLen;
+        pseudo_chksum   = &Eth_genPseudoCheckSumIPv4;
+        protocol        = ((Eth_Ip4Hdr *)ipPktStart)->protocol;
+    }
+
+#if (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP)
+    if (IPPROTO_TCP == protocol)
+    {
+        pTcpHdr               = (Eth_TcpHdr *)(ipPktStart + ipPktHdrLen);
+        csumCoverageStartByte = (uint8 *)pTcpHdr - (uint8 *)pEthPkt + 1U;
+        csumResultByte        = (uint8 *)(&(pTcpHdr->checksum)) - (uint8 *)pEthPkt + 1U;
+        pTcpHdr->checksum     = ~(pseudo_chksum(ipPktStart, ipPktPayloadLen));
+
+        /* Update encap checksum info value */
+        chksumInfo  = ipPktPayloadLen << ENETDMA_TXCSUMINFO_CHKSUM_BYTECNT_SHIFT;
+        chksumInfo += csumCoverageStartByte << ENETDMA_TXCSUMINFO_CHKSUM_STARTBYTE_SHIFT;
+        chksumInfo += csumResultByte << ENETDMA_TXCSUMINFO_CHKSUM_RESULT_SHIFT;
+    }
+#endif
+
+#if (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP)
+    if (IPPROTO_UDP == protocol)
+    {
+        pUdpHdr               = (Eth_UdpHdr *)(ipPktStart + ipPktHdrLen);
+        csumCoverageStartByte = (uint8 *)pUdpHdr - (uint8 *)pEthPkt + 1U;
+        csumResultByte        = (uint8 *)(&(pUdpHdr->checksum)) - (uint8 *)pEthPkt + 1U;
+        pUdpHdr->checksum     = ~(pseudo_chksum(ipPktStart, ipPktPayloadLen));
+
+        /* Update encap checksum info value */
+        chksumInfo  = ipPktPayloadLen << ENETDMA_TXCSUMINFO_CHKSUM_BYTECNT_SHIFT;
+        chksumInfo += csumCoverageStartByte << ENETDMA_TXCSUMINFO_CHKSUM_STARTBYTE_SHIFT;
+        chksumInfo += csumResultByte << ENETDMA_TXCSUMINFO_CHKSUM_RESULT_SHIFT;
+        chksumInfo += 1U << ENETDMA_TXCSUMINFO_CHKSUM_INV_SHIFT;
+    }
+#endif
+
+    return chksumInfo;
+}
+
+static inline uint8 *Eth_getIpPktStart(uint8 *frameBuffer)
+{
+    Eth_FrameHeaderType *header = (Eth_FrameHeaderType *)frameBuffer;
+    const uint32         ipPacketStartOffset =
+        (header->h_proto == htons(ETH_P_8021Q)) ? (ETH_HLEN + SIZEOF_VLAN_HDR) : (ETH_HLEN);
+
+    return &frameBuffer[ipPacketStartOffset];
+}
+#endif /* CHECKSUM_OFFLOAD */
+
 FUNC(Std_ReturnType, ETH_CODE)
 Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMATIC) FrameType,
                VAR(boolean, AUTOMATIC) TxConfirmation, VAR(uint16, AUTOMATIC) LenByte,
@@ -1336,10 +1592,10 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
     }
     else
     {
-        Eth_FrameObjType       *pDataBuffer;
-        Eth_CpdmaBuffDescType  *pXmitTxBuffDesc;
-        Eth_BufObjType         *pTempBufObj = &(pPortObj->txBufObjArray[BufIdx]);
-        Eth_CpdmaBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing);
+        Eth_TxFrameObjType       *pDataBuffer;
+        Eth_CpdmaTxBuffDescType  *pXmitTxBuffDesc;
+        Eth_TxBufObjType         *pTempBufObj = &(pPortObj->txBufObjArray[BufIdx]);
+        Eth_CpdmaTxBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing);
 
         /* Take packet from Tx Buffer ring using BufIdx */
         pDataBuffer = pTempBufObj->payload;
@@ -1384,6 +1640,28 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
         pDataBuffer->header.h_proto =
             ((FrameType & (Eth_FrameType)0xFFU) << 8U) | ((FrameType & (Eth_FrameType)0xFF00U) >> 8U);
 
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+        uint32 chksumInfo = 0U;
+
+        /* For VLAN Tagged packet, get the payload ethertype */
+        if (ETH_P_8021Q == FrameType)
+        {
+            FrameType = ntohs(((Eth_vlanFrameHdr *)&(pDataBuffer->header))->etherType);
+        }
+
+        /* HW Checksum Offload is only supported on IP frames */
+        if (ETH_P_IP == FrameType || ETH_P_IPV6 == FrameType)
+        {
+            chksumInfo = Eth_setPseudoCheckSum(&(pDataBuffer->header), FrameType);
+        }
+
+        /* Append checksum info and increase packet length */
+        if (0U != chksumInfo)
+        {
+            pDataBuffer->chksumInfo = chksumInfo;
+            totalLen                = totalLen + ENET_CPDMA_ENCAPINFO_CHECKSUM_INFO_LEN;
+        }
+#endif
         /* Flush buffers */
         if ((Eth_DrvObj.enableCacheOps == (uint32)TRUE) && (Eth_DrvObj.cacheFlushFnPtr != (Eth_CacheFlushType)NULL))
         {
@@ -1400,11 +1678,20 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
          * each desc will have both SOP and EOP flag */
         pXmitTxBuffDesc->flagsAndPacketLength =
             totalLen | CPSW_CPDMA_WRD3_OWN_MASK | CPSW_CPDMA_WRD3_SOP_MASK | CPSW_CPDMA_WRD3_EOP_MASK;
-
-        /* Intialize the buffer pointer and length */
-        pXmitTxBuffDesc->pDataBuffer             = pDataBuffer;
-        pXmitTxBuffDesc->globalDataBufferPointer = Eth_locToGlobAddr((uintptr_t)pDataBuffer);
-        pXmitTxBuffDesc->bufferOffsetAndLength   = totalLen;
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+        if (0U != chksumInfo) /* Encap checksum at start of CPDMA data buffer */
+        {
+            pXmitTxBuffDesc->flagsAndPacketLength |= CPSW_CPDMA_WRD3_CHKSUM_ENCAP_MASK;
+            pXmitTxBuffDesc->globalDataBufferPointer = (uint32)Eth_locToGlobAddr((uintptr_t)&(pDataBuffer->chksumInfo));
+        }
+        else /* no checksum encap, start of CPDMA databuffer is Eth frame */
+#endif
+        {
+            pXmitTxBuffDesc->globalDataBufferPointer = (uint32)Eth_locToGlobAddr((uintptr_t)&(pDataBuffer->header));
+        }
+        /* Initialize the buffer pointer and length */
+        pXmitTxBuffDesc->pDataBuffer           = pDataBuffer;
+        pXmitTxBuffDesc->bufferOffsetAndLength = totalLen;
 
         /* Update Transmit ring head */
         pTxDescRing->pFreeHead = pXmitTxBuffDesc->pNextBuffDesc;
@@ -1494,7 +1781,7 @@ Eth_receiveHw(P2VAR(Eth_RxStatusType, AUTOMATIC, ETH_APPL_DATA) RxStatusPtr)
     return;
 }
 
-static void EthRxBuffDescRxStatus(const Eth_CpdmaBuffDescType *pCurrRxBuffDesc, Eth_RxStatusType *rxStatus)
+static void EthRxBuffDescRxStatus(const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc, Eth_RxStatusType *rxStatus)
 {
     if (CPSW_CPDMA_WRD3_OWN_DISABLE == (uint32)HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_OWN))
     {
@@ -1510,11 +1797,11 @@ static void EthRxBuffDescRxStatus(const Eth_CpdmaBuffDescType *pCurrRxBuffDesc, 
 
 static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
 {
-    Eth_CpdmaBuffDescType  *pCurrRxBuffDesc = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    Eth_CpdmaBuffDescQueue *pRxDescRing     = &(Eth_DrvObj.rxDescRing);
-    uint32                  cp              = 0U;
-    Eth_RxStatusType        rxStatus        = ETH_NOT_RECEIVED;
-    uint32                  endOfQueueFlag  = 0U;
+    Eth_CpdmaRxBuffDescType  *pCurrRxBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+    Eth_CpdmaRxBuffDescQueue *pRxDescRing     = &(Eth_DrvObj.rxDescRing);
+    uint32                    cp              = 0U;
+    Eth_RxStatusType          rxStatus        = ETH_NOT_RECEIVED;
+    uint32                    endOfQueueFlag  = 0U;
 
     cp = CpswCpdma_readRxChCp(Eth_DrvObj.baseAddr, chNum);
 
@@ -1589,15 +1876,19 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
     return rxStatus;
 }
 
-static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaBuffDescType *pCurrRxBuffDesc)
+static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc)
 {
-    uint16            totLen = 0U, dataLen = 0U;
-    uint8             srcMacAddr[ETH_MAC_ADDR_LEN] = {0U, 0U, 0U, 0U, 0U, 0U};
-    boolean           isBroadcast                  = FALSE;
-    Eth_FrameType     frameType                    = 0U;
-    Eth_FrameObjType *pFrameBuffer                 = (Eth_FrameObjType *)NULL_PTR;
-    uint8            *frameDataPtr                 = (uint8 *)NULL_PTR;
+    uint16              totLen = 0U, dataLen = 0U;
+    uint8               srcMacAddr[ETH_MAC_ADDR_LEN] = {0U, 0U, 0U, 0U, 0U, 0U};
+    boolean             isBroadcast                  = FALSE;
+    Eth_FrameType       frameType                    = 0U;
+    Eth_RxFrameObjType *pFrameBuffer                 = (Eth_RxFrameObjType *)NULL_PTR;
+    uint8              *frameDataPtr                 = (uint8 *)NULL_PTR;
 
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+    uint32  chkSumInfo    = 0U;
+    boolean isChkSumValid = TRUE;
+#endif
     /* Get the total length of the packet */
 
     /*
@@ -1644,37 +1935,66 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaBuffDescType *pCurr
     }
 #endif
 
-    /* Release SchM before notify upper layer */
-    /* Both RX IRQ and RX Threshold IRQ handler may call EthIf_Rxindication(),
-     * disable both RX IRQs here to avoid race condition */
-    CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
-    if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount != (uint32)0U)
+#if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
+    if (0U != HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_RX_WRD3_CHKSUM_ENCAP))
     {
-        CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+        /* Get 4 bytes checksum info from last data packet */
+        memcpy(&chkSumInfo, &frameDataPtr[dataLen], ENET_CPDMA_ENCAPINFO_CHECKSUM_INFO_LEN);
+
+        /* Check for checksum error and raise flag for TCP/UDP packet */
+        if (0U != HW_GET_FIELD(chkSumInfo, ENETDMA_RXCSUMINFO_CHKSUM_ERR))
+        {
+            if ((0U != HW_GET_FIELD(chkSumInfo, ENETDMA_RXCSUMINFO_IPV4_VALID)) ||
+                (0U != HW_GET_FIELD(chkSumInfo, ENETDMA_RXCSUMINFO_IPV6_VALID)))
+            {
+                /* check TCP detected */
+                if (0U != HW_GET_FIELD(chkSumInfo, ENETDMA_RXCSUMINFO_TCP_UDP_N))
+                {
+#if (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP)
+                    isChkSumValid = FALSE;
+#endif
+                }
+                else /* UDP detected */
+                {
+#if (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP)
+                    isChkSumValid = FALSE;
+#endif
+                }
+            }
+        }
+
+        /* Remove checksum info from data packet */
+        dataLen = dataLen - ENET_CPDMA_ENCAPINFO_CHECKSUM_INFO_LEN;
     }
-    SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-    EthIf_RxIndication(ctrlIdx, frameType, isBroadcast, &srcMacAddr[0U], (Eth_DataType *)frameDataPtr, dataLen);
-    SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
-    CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
-    if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount != (uint32)0U)
+
+    if (TRUE == isChkSumValid)
+#endif
     {
-        CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+        /* Release SchM before notify upper layer */
+        /* Both RX IRQ and RX Threshold IRQ handler may call EthIf_Rxindication(),
+         * disable both RX IRQs here to avoid race condition */
+        CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
+        if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount != (uint32)0U)
+        {
+            CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+        }
+        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
+        EthIf_RxIndication(ctrlIdx, frameType, isBroadcast, &srcMacAddr[0U], (Eth_DataType *)frameDataPtr, dataLen);
+        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
+        CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
+        if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount != (uint32)0U)
+        {
+            CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+        }
     }
 }
 
 static void EthRxChTearDown(uint32 chNum)
 {
-    Eth_PortObject *pPortObj = (Eth_PortObject *)NULL_PTR;
-
-    /* Each port is considered as one controller */
-    pPortObj = &Eth_DrvObj.portObj;
-
     /* The software should acknowledge a teardown interrupt with a
      * FFFF_FFFCh Acknowledge value */
     CpswCpdma_writeRxChCp(Eth_DrvObj.baseAddr, chNum, (uint32)CPSW_CPDMA_TEAR_DWN_ACK);
     CpswCpdma_disableRxCh(Eth_DrvObj.baseAddr);
-
-    Eth_freeBuffers(pPortObj->rxBufObjArray, ETH_NUM_RX_BUFFERS);
 
     /*
      * Set Eth controller mode to disabled if both RX and TX
@@ -1694,7 +2014,7 @@ static void EthRxChTearDown(uint32 chNum)
     }
 }
 
-static void EthRxBuffDescEnqueue(Eth_CpdmaBuffDescQueue *pRxDescRing, Eth_CpdmaBuffDescType *pNewTail)
+static void EthRxBuffDescEnqueue(Eth_CpdmaRxBuffDescQueue *pRxDescRing, Eth_CpdmaRxBuffDescType *pNewTail)
 {
     /* Enqueue if new tail differ with current tail */
     if (pNewTail != pRxDescRing->pTail)
@@ -1707,7 +2027,7 @@ static void EthRxBuffDescEnqueue(Eth_CpdmaBuffDescQueue *pRxDescRing, Eth_CpdmaB
 
         /* Update head pointers to next of last processed buffer */
         pRxDescRing->pHead = pNewTail->pNextBuffDesc;
-        pRxDescRing->pTail = (Eth_CpdmaBuffDescType *)pNewTail;
+        pRxDescRing->pTail = (Eth_CpdmaRxBuffDescType *)pNewTail;
     }
     else
     {
@@ -1717,11 +2037,11 @@ static void EthRxBuffDescEnqueue(Eth_CpdmaBuffDescQueue *pRxDescRing, Eth_CpdmaB
 
 void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
 {
-    Eth_CpdmaBuffDescType  *pCurrRxBuffDesc = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    Eth_CpdmaBuffDescType  *pLastBuffDesc   = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    Eth_CpdmaBuffDescQueue *pRxDescRing     = &(Eth_DrvObj.rxDescRing);
-    uint32                  cp = 0U, packetCount = 0U;
-    uint32                  endOfQueueFlag = 0U;
+    Eth_CpdmaRxBuffDescType  *pCurrRxBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+    Eth_CpdmaRxBuffDescType  *pLastBuffDesc   = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+    Eth_CpdmaRxBuffDescQueue *pRxDescRing     = &(Eth_DrvObj.rxDescRing);
+    uint32                    cp = 0U, packetCount = 0U;
+    uint32                    endOfQueueFlag = 0U;
 
     cp = CpswCpdma_readRxChCp(Eth_DrvObj.baseAddr, chNum);
 
@@ -1793,7 +2113,7 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
     }
 }
 
-static void EthTxBuffProcess(uint8 ctrlIdx, Eth_BufObjType *pBufObj)
+static void EthTxBuffProcess(uint8 ctrlIdx, Eth_TxBufObjType *pBufObj)
 {
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
     uint32 loopCnt = 0U;
@@ -1859,10 +2179,10 @@ static void EthTxBuffProcess(uint8 ctrlIdx, Eth_BufObjType *pBufObj)
 
 void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
 {
-    Eth_CpdmaBuffDescType  *pCurrTxBuffDesc = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    Eth_CpdmaBuffDescType  *pLastBuffDesc   = (Eth_CpdmaBuffDescType *)NULL_PTR;
-    uint32                  endOfQueueFlag  = 0U;
-    Eth_CpdmaBuffDescQueue *pTxDescRing     = &(Eth_DrvObj.txDescRing);
+    Eth_CpdmaTxBuffDescType  *pCurrTxBuffDesc = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    Eth_CpdmaTxBuffDescType  *pLastBuffDesc   = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    uint32                    endOfQueueFlag  = 0U;
+    Eth_CpdmaTxBuffDescQueue *pTxDescRing     = &(Eth_DrvObj.txDescRing);
 
     if (NULL != pTxDescRing->pQueueHead) /*only check if TX in progress */
     {
@@ -1940,7 +2260,7 @@ void Eth_processTxTearDown(uint32 chNum)
     CpswCpdma_writeTxChCp(Eth_DrvObj.baseAddr, chNum, (uint32)CPSW_CPDMA_TEAR_DWN_ACK);
     CpswCpdma_disableTxCh(Eth_DrvObj.baseAddr);
 
-    Eth_freeBuffers(portObj->txBufObjArray, ETH_NUM_TX_BUFFERS);
+    Eth_freeTxBuffers(portObj->txBufObjArray, ETH_NUM_TX_BUFFERS);
     portObj->lastTxIdx = ETH_NUM_TX_BUFFERS - 1U;
 
     /*
@@ -2076,9 +2396,9 @@ void Eth_getHwEgressTimeStamp(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx,
     CpswCpts_StateObj *pCptsStateObj = &(Eth_DrvObj.cptsObj);
     CpswCpts_Event     eventTemplate;
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
-    Eth_PortObject *pPortObj    = (Eth_PortObject *)NULL_PTR;
-    pPortObj                    = &(Eth_DrvObj.portObj);
-    Eth_BufObjType *pTempBufObj = &(pPortObj->txBufObjArray[BufIdx]);
+    Eth_PortObject *pPortObj      = (Eth_PortObject *)NULL_PTR;
+    pPortObj                      = &(Eth_DrvObj.portObj);
+    Eth_TxBufObjType *pTempBufObj = &(pPortObj->txBufObjArray[BufIdx]);
 #endif
 
     /* We set timeStampPtr to zero so if TS read fails it returns zero */

@@ -158,28 +158,34 @@ extern "C" {
 #define CPSW_CPDMA_WRD3_HOST_EVENT_MASK        (0x00008000U)
 #define CPSW_CPDMA_WRD3_HOST_EVENT_SHIFT       (15U)
 #define CPSW_CPDMA_WRD3_HOST_EVENT_ENABLE      (1U)
+#define CPSW_CPDMA_WRD3_CHKSUM_ENCAP_MASK      (0x00004000U)
+#define CPSW_CPDMA_WRD3_CHKSUM_ENCAP_SHIFT     (14U)
+#define CPSW_CPDMA_WRD3_CHKSUM_ENCAP_ENABLE    (1U)
 #define CPSW_CPDMA_WRD3_PKT_LEN_MASK           (0x000007FFU)
 #define CPSW_CPDMA_WRD3_PKT_LEN_SHIFT          (0U)
 
 /** \brief Multicast MAC address upper byte mask. */
-#define CPSW_CPDMA_RX_WRD2_BUFF_LEN_MASK    (0x000007FFU)
-#define CPSW_CPDMA_RX_WRD2_BUFF_LEN_SHIFT   (0U)
-#define CPSW_CPDMA_RX_WRD2_BUFF_OFF_MASK    (0x07FF0000U)
-#define CPSW_CPDMA_RX_WRD2_BUFF_OFF_SHIFT   (16U)
-#define CPSW_CPDMA_RX_WRD3_FROM_PORT_MASK   (0x00070000U)
-#define CPSW_CPDMA_RX_WRD3_FROM_PORT_SHIFT  (16U)
-#define CPSW_CPDMA_RX_WRD3_VLAN_ENCAP_MASK  (0x00080000U)
-#define CPSW_CPDMA_RX_WRD3_VLAN_ENCAP_SHIFT (19U)
-#define CPSW_CPDMA_RX_WRD3_PKT_ERR_MASK     (0x00300000U)
-#define CPSW_CPDMA_RX_WRD3_PKT_ERR_SHIFT    (20U)
-#define CPSW_CPDMA_RX_WRD3_OVERRUN_MASK     (0x00400000U)
-#define CPSW_CPDMA_RX_WRD3_OVERRUN_SHIFT    (22U)
-#define CPSW_CPDMA_RX_WRD3_MAC_CTRL_MASK    (0x00800000U)
-#define CPSW_CPDMA_RX_WRD3_MAC_CTRL_SHIFT   (23U)
-#define CPSW_CPDMA_RX_WRD3_SHORT_MASK       (0x01000000U)
-#define CPSW_CPDMA_RX_WRD3_SHORT_SHIFT      (24U)
-#define CPSW_CPDMA_RX_WRD3_LONG_MASK        (0x02000000U)
-#define CPSW_CPDMA_RX_WRD3_LONG_SHIFT       (25U)
+#define CPSW_CPDMA_RX_WRD2_BUFF_LEN_MASK       (0x000007FFU)
+#define CPSW_CPDMA_RX_WRD2_BUFF_LEN_SHIFT      (0U)
+#define CPSW_CPDMA_RX_WRD2_BUFF_OFF_MASK       (0x07FF0000U)
+#define CPSW_CPDMA_RX_WRD2_BUFF_OFF_SHIFT      (16U)
+#define CPSW_CPDMA_RX_WRD3_CHKSUM_ENCAP_MASK   (0x00001000U)
+#define CPSW_CPDMA_RX_WRD3_CHKSUM_ENCAP_SHIFT  (12U)
+#define CPSW_CPDMA_RX_WRD3_CHKSUM_ENCAP_ENABLE (1U)
+#define CPSW_CPDMA_RX_WRD3_FROM_PORT_MASK      (0x00070000U)
+#define CPSW_CPDMA_RX_WRD3_FROM_PORT_SHIFT     (16U)
+#define CPSW_CPDMA_RX_WRD3_VLAN_ENCAP_MASK     (0x00080000U)
+#define CPSW_CPDMA_RX_WRD3_VLAN_ENCAP_SHIFT    (19U)
+#define CPSW_CPDMA_RX_WRD3_PKT_ERR_MASK        (0x00300000U)
+#define CPSW_CPDMA_RX_WRD3_PKT_ERR_SHIFT       (20U)
+#define CPSW_CPDMA_RX_WRD3_OVERRUN_MASK        (0x00400000U)
+#define CPSW_CPDMA_RX_WRD3_OVERRUN_SHIFT       (22U)
+#define CPSW_CPDMA_RX_WRD3_MAC_CTRL_MASK       (0x00800000U)
+#define CPSW_CPDMA_RX_WRD3_MAC_CTRL_SHIFT      (23U)
+#define CPSW_CPDMA_RX_WRD3_SHORT_MASK          (0x01000000U)
+#define CPSW_CPDMA_RX_WRD3_SHORT_SHIFT         (24U)
+#define CPSW_CPDMA_RX_WRD3_LONG_MASK           (0x02000000U)
+#define CPSW_CPDMA_RX_WRD3_LONG_SHIFT          (25U)
 
 /** \brief Multicast MAC address upper byte mask. */
 #define CPSW_CPDMA_TX_WRD2_BUFF_LEN_MASK      (0x0000FFFFU)
@@ -256,6 +262,17 @@ typedef struct
     /**< The frame type */
 } __attribute__((packed)) Eth_FrameHeaderType;
 
+/** \brief Structure holding Eth TX frame format (header and data) and encap checksum offload */
+typedef struct
+{
+    uint32              chksumInfo;
+    /**< Encapsulated checksum */
+    Eth_FrameHeaderType header;
+    /**< Header */
+    uint8               payload[ETH_MAX_FRAME_LEN - ETH_HLEN - 4U];
+    /**< The generic data payload */
+} __attribute__((packed)) Eth_TxFrameObjType;
+
 /** \brief Structure holding Eth frame format (header and data)*/
 typedef struct
 {
@@ -263,7 +280,7 @@ typedef struct
     Eth_FrameHeaderType header;
     /**< The generic data payload */
     uint8               payload[ETH_MAX_FRAME_LEN - ETH_HLEN];
-} __attribute__((packed)) Eth_FrameObjType;
+} __attribute__((packed)) Eth_RxFrameObjType;
 
 /** \brief Enumeration for buffer states */
 typedef enum
@@ -280,17 +297,17 @@ typedef enum
 /* Requirements : SWS_Eth_00004 */
 typedef struct
 {
-    uint16            bufIdx;
+    uint16              bufIdx;
     /**< Buffer index */
-    Eth_FrameObjType *payload;
+    Eth_TxFrameObjType *payload;
     /**< pointer to the actual data in the buffer */
-    uint16            len;
+    uint16              len;
     /**< length of this buffer */
-    Eth_FrameType     type;
+    Eth_FrameType       type;
     /**< Eth FrameType */
-    Eth_Buf_StateType bufState;
+    Eth_Buf_StateType   bufState;
     /**< Buffer use status */
-    boolean           txConfirmation;
+    boolean             txConfirmation;
     /**< Callback enable/disable */
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
     boolean        enableEgressTimeStamp;
@@ -300,44 +317,82 @@ typedef struct
      *   Used when event lookup is done in subsequent Eth_GetEgressTimeStamp
      *   call after Eth_EnableEgressTimeStamp */
 #endif
+} Eth_TxBufObjType;
 
-} Eth_BufObjType;
-
-/** \brief Buffer descriptor data structure. */
-typedef struct Eth_CpdmaBuffDesc
+typedef struct
 {
-    uint32                    globalNextDescPointer;
+    uint16              bufIdx;
+    /**< Buffer index */
+    Eth_RxFrameObjType *payload;
+    /**< pointer to the actual data in the buffer */
+    uint16              len;
+    /**< length of this buffer */
+} Eth_RxBufObjType;
+
+/** \brief Rx Buffer descriptor data structure. */
+typedef struct Eth_CpdmaRxBuffDesc
+{
+    uint32                      globalNextDescPointer;
     /**< Next descriptor pointer. */
-    uint32                    globalDataBufferPointer;
+    uint32                      globalDataBufferPointer;
     /**< Global Buffer Pointer address of current buffer desc. */
-    uint32                    bufferOffsetAndLength;
+    uint32                      bufferOffsetAndLength;
     /**< Buffer length and offset. */
-    uint32                    flagsAndPacketLength;
+    uint32                      flagsAndPacketLength;
     /**< Packet length and configuration flags. */
-    struct Eth_CpdmaBuffDesc *pNextBuffDesc;
+    struct Eth_CpdmaRxBuffDesc *pNextBuffDesc;
     /**< Next buffer descriptor. */
-    Eth_FrameObjType         *pDataBuffer;
+    Eth_RxFrameObjType         *pDataBuffer;
     /**< Associated packet buffer. */
-    Eth_BufObjType           *pBufObj;
-    /**< Associated buffer descriptor(mostly used for Transmit logging */
-} Eth_CpdmaBuffDescType;
+    Eth_RxBufObjType           *pBufObj;
+    /**< Associated buffer descriptor */
+} Eth_CpdmaRxBuffDescType;
+
+/** \brief Tx Buffer descriptor data structure. */
+typedef struct Eth_CpdmaTxBuffDesc
+{
+    uint32                      globalNextDescPointer;
+    /**< Next descriptor pointer. */
+    uint32                      globalDataBufferPointer;
+    /**< Global Buffer Pointer address of current buffer desc. */
+    uint32                      bufferOffsetAndLength;
+    /**< Buffer length and offset. */
+    uint32                      flagsAndPacketLength;
+    /**< Packet length and configuration flags. */
+    struct Eth_CpdmaTxBuffDesc *pNextBuffDesc;
+    /**< Next buffer descriptor. */
+    Eth_TxFrameObjType         *pDataBuffer;
+    /**< Associated packet buffer. */
+    Eth_TxBufObjType           *pBufObj;
+    /**< Associated buffer descriptor */
+} Eth_CpdmaTxBuffDescType;
 
 /** \brief Hold the data used to operate on the buffer descriptor ring. */
 typedef struct
 {
-    Eth_CpdmaBuffDescType *pFreeHead;
-    /**< The head of the bd chain which can be allocated for transmission. */
-    Eth_CpdmaBuffDescType *pHead;
+    Eth_CpdmaRxBuffDescType *pHead;
     /**< The head of the bd chain which is having transmitting data. */
-    Eth_CpdmaBuffDescType *pTail;
+    Eth_CpdmaRxBuffDescType *pTail;
     /**< The tail of the bd chain which is having transmitting data. */
-    Eth_CpdmaBuffDescType *pQueueHead;
-    /**< The head of the bd queue which is transmitting data. */
-    Eth_CpdmaBuffDescType *pQueueTail;
-    /**< The tail of the bd queue which is transmitting data. */
-    volatile uint32        freeBuffDesc;
+    volatile uint32          freeBuffDesc;
     /**< The number of free bd's, which can be allocated for transmission. */
-} Eth_CpdmaBuffDescQueue;
+} Eth_CpdmaRxBuffDescQueue;
+
+typedef struct
+{
+    Eth_CpdmaTxBuffDescType *pFreeHead;
+    /**< The head of the bd chain which can be allocated for transmission. */
+    Eth_CpdmaTxBuffDescType *pHead;
+    /**< The head of the bd chain which is having transmitting data. */
+    Eth_CpdmaTxBuffDescType *pTail;
+    /**< The tail of the bd chain which is having transmitting data. */
+    Eth_CpdmaTxBuffDescType *pQueueHead;
+    /**< The head of the bd queue which is transmitting data. */
+    Eth_CpdmaTxBuffDescType *pQueueTail;
+    /**< The tail of the bd queue which is transmitting data. */
+    volatile uint32          freeBuffDesc;
+    /**< The number of free bd's, which can be allocated for transmission. */
+} Eth_CpdmaTxBuffDescQueue;
 
 /** \brief Eth port object
  *         This structure will contain information provided by
@@ -349,9 +404,9 @@ typedef struct
     /**< Port configuration */
     uint8              portNum;
     /**< CPSW port number in the device*/
-    Eth_BufObjType     rxBufObjArray[ETH_NUM_RX_BUFFERS];
+    Eth_RxBufObjType   rxBufObjArray[ETH_NUM_RX_BUFFERS];
     /**< Buffer object for Receive buffer ring */
-    Eth_BufObjType     txBufObjArray[ETH_NUM_TX_BUFFERS];
+    Eth_TxBufObjType   txBufObjArray[ETH_NUM_TX_BUFFERS];
     /**< Buffer object for Transmit buffer ring */
     uint32             lastTxIdx;
     /**< Last used TX buffer index */
@@ -452,13 +507,13 @@ typedef struct
  *         and common information shared by ports */
 typedef struct
 {
-    uint8                   ctrlIdx;
+    uint8                    ctrlIdx;
     /**< Controller index */
-    uint8                   portIdx;
+    uint8                    portIdx;
     /**< Port >*/
-    Eth_ConfigType          ethConfig;
+    Eth_ConfigType           ethConfig;
     /**< Eth driver Init Configuration */
-    uint32                  enableCacheOps;
+    uint32                   enableCacheOps;
     /**< Since the Eth driver is updating (writing/reading) the packet header,
      *   if the packets are in cached region, then cache flush should be done
      *   for transmit and cache invalidate should be done for receive.
@@ -467,31 +522,32 @@ typedef struct
      *   or not. If enabled, then the below two callback will be called to
      *   perform the cache operation
      */
-    Eth_CacheFlushType      cacheFlushFnPtr;
+    Eth_CacheFlushType       cacheFlushFnPtr;
     /**< Cache flush function pointer */
-    Eth_CacheInvalidateType cacheInvalidateFnPtr;
+    Eth_CacheInvalidateType  cacheInvalidateFnPtr;
     /**< Cache invalidate function pointer */
-    Eth_ModeType            ctrlMode;
+    Eth_ModeType             ctrlMode;
     /**< CPSW instance in the device  */
-    uint32                  baseAddr;
+    uint32                   baseAddr;
     /**< Base address */
-    uint32                  descMemBaseAddr __attribute__((aligned(128)));
+    uint32                   rxDescMemBaseAddr;
+    uint32                   txDescMemBaseAddr;
     /**< CPPI RAM Base address */
-    uint8                   activeMACPortCount;
+    uint8                    activeMACPortCount;
     /**< Total number active ports */
-    Eth_PortObject          portObj;
+    Eth_PortObject           portObj;
     /**< Port interface */
-    Eth_CpdmaBuffDescQueue  rxDescRing;
+    Eth_CpdmaRxBuffDescQueue rxDescRing;
     /**< Receive buffer descriptor queue*/
-    uint32                  maxRxBuffDesc;
+    uint32                   maxRxBuffDesc;
     /**< Maximum Rx buffer descriptors */
-    Eth_CpdmaBuffDescQueue  txDescRing;
+    Eth_CpdmaTxBuffDescQueue txDescRing;
     /**< Transmit buffer descriptor queue */
-    uint32                  maxTxBuffDesc;
+    uint32                   maxTxBuffDesc;
     /**< Maximum Tx buffer descriptors */
-    Eth_StatsObj            statsObj;
+    Eth_StatsObj             statsObj;
     /**< Statistics object */
-    CpswCpts_StateObj       cptsObj;
+    CpswCpts_StateObj        cptsObj;
     /**< CPTS object */
 } Eth_DrvObject;
 

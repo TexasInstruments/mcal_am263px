@@ -124,6 +124,11 @@ extern "C" {
 #define ETH_GETTX_STATS_API        [!IF "as:modconf('Eth')[1]/EthGeneral/EthGetTxStatsApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 /* @} */
 
+/** \brief Enable/disable Hardware offloading for TCP checksums */
+#define ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP    [!IF "as:modconf('Eth')[1]/EthGeneral/EthCtrlOffloading/EthCtrlEnableOffloadChecksumTCP = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+/** \brief Enable/disable Hardware offloading for UDP checksums */
+#define ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP    [!IF "as:modconf('Eth')[1]/EthGeneral/EthCtrlOffloading/EthCtrlEnableOffloadChecksumUDP = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+
 /** \brief Enable/disable Eth traffic shaping  */
 #define ETH_TRAFFIC_SHAPING_API   [!IF "as:modconf('Eth')[1]/EthGeneral/EthTrafficShapingSupport = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 

@@ -1837,9 +1837,9 @@ void Can_mcanProcessTx(Can_ControllerObjType *canController, const Can_MailboxOb
         HwHandle                         = mailboxCfg->HwHandle;
         if (CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir)
         {
+            canTxMessageObj[HwHandle].freeHwObjectCount++;
             /* clear for next transmission. */
             CanIf_TxConfirmation(CanTxPduId);
-            canTxMessageObj[HwHandle].freeHwObjectCount++;
         }
     }
 }

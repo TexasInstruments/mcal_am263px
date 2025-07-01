@@ -117,6 +117,11 @@ extern "C" {
 #define ETH_GETTX_STATS_API        (STD_ON)
 /* @} */
 
+/** \brief Enable/disable Hardware offloading for TCP checksums */
+#define ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP    (STD_OFF)
+/** \brief Enable/disable Hardware offloading for UDP checksums */
+#define ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP    (STD_OFF)
+
 /** \brief Enable/disable Eth traffic shaping  */
 #define ETH_TRAFFIC_SHAPING_API   (STD_OFF)
 

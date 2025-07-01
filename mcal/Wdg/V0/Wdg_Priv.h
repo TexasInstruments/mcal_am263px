@@ -24,13 +24,13 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 
-#include "Std_Types.h"
 #include "Wdg.h"
 #include "Mcal_Libs_Utils.h"
 #if (WDG_DEV_ERROR_DETECT == STD_ON)
 #include "Det.h"
 #endif
 #include "hw_ctrl_core.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

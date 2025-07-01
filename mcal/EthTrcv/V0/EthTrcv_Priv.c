@@ -318,13 +318,13 @@ Std_ReturnType EthTrcv_configAndStartAutoNegotiation(EthTrcv_CtrlObjType *pEthTr
                 retVal =
                     EthTrcv_regWrite(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_AUTO_NEG_ADV, regVal);
 #if (STD_ON == ETHTRCV_1000MBPS_MACRO)
-                EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, &regVal);
+                (void)EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, &regVal);
                 /* Disabling 1000 Mbps Half Duplex as controller does not support */
                 regVal &= ETHTRCV_DISABLE_1000M_HALF_Duplex;
                 retVal = EthTrcv_regWrite(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, regVal);
 #else /* #if(STD_ON == ETHTRCV_1000MBPS_MACRO) */
 
-                EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, &regVal);
+                (void)EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, &regVal);
                 regVal &= ETHTRCV_DISABLE_1000M;
                 retVal = EthTrcv_regWrite(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, regVal);
 #endif

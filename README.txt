@@ -8,19 +8,18 @@ Steps to build
 
   In case of windows machine edit below paths,
 
-  TOOLCHAIN_PATH_R5 := $(abspath ../../../..)/Compilers/ti-cgt-armllvm_2.1.3.LTS
+  TOOLCHAIN_PATH_R5 := $(abspath ../../../..)/Compilers/ti-cgt-armllvm_4.0.1.LTS
   mcal_PATH := $(abspath ..)/$(mcal_RELPATH)
   mcal_demo_PATH := $(abspath ..)/$(mcal_demo_RELPATH)
-  UTILS_INSTALL_DIR := $(abspath ../../../..)/ccs1250/ccs/utils/cygwin
-  GMAKE_DIR := $(abspath ../../../..)/ccs1250/ccs/utils/cygwin
+  UTILS_INSTALL_DIR := $(abspath ../../../..)/ccs1281/ccs/utils/cygwin
+  GMAKE_DIR := $(abspath ../../../..)/ccs1281/ccs/utils/cygwin
 
   By default the above are for CLANG compiler, modify respective paths accordingly for using other compilers.
 
   In case of linux machine edit the similar linux path
 
   NOTE:
-  For AM263 use ti-cgt-armllvm_2.1.3.LTS
-  For AM263Px and AM261 use ti-cgt-armllvm_4.0.0.LTS
+  For AM263x, AM263Px and AM261 use ti-cgt-armllvm_4.0.1.LTS
 
   IMPORTANT:
   Make sure the paths specified above DO NOT have any spaces in them.

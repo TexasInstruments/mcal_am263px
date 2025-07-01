@@ -947,6 +947,16 @@ void EthUtilsApp_RxIndication(uint8 ctrlIdx, Eth_FrameType FrameType, boolean Is
             gEthUtilsApp.stats.rxPtpPktCnt++;
         }
         break;
+
+        case ETHERTYPE_IPV4:
+        case ETHERTYPE_IPV6: /* fall through */
+            if (gEthUtilsApp.checkSumTest == TRUE)
+            {
+                gEthUtilsApp.stats.rxPktCnt++;
+                gEthUtilsApp.stats.rxIpChecksumCnt++;
+            }
+            break;
+
         default:
             gEthUtilsApp.stats.rxEtherTypeErr++;
             break;

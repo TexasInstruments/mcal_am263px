@@ -122,13 +122,13 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
     {
         CddFsiTx_resetDrvObj(&Cdd_FsiTx_DrvObj);
         /* Copy the configuration */
-        CddFsiTx_copyConfig(&Cdd_FsiTx_DrvObj, ConfigPtr);
+        (void)CddFsiTx_copyConfig(&Cdd_FsiTx_DrvObj, ConfigPtr);
 
         /* Init HW once all config is copied */
         for (hwUnitId = 0U; hwUnitId < Cdd_FsiTx_DrvObj.maxHwUnit; hwUnitId++)
         {
             hwObj = &(Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId]);
-            CddFsiTx_hwUnitInit(hwObj);
+            (void)CddFsiTx_hwUnitInit(hwObj);
         }
     }
 #if (STD_ON == CDD_FSI_TX_NOTIFICATION_ENABLE)
@@ -175,14 +175,14 @@ Cdd_FsiTx_DeInit(void)
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
     if (Cdd_FsiTx_DriverStatus == CDD_FSI_TX_UNINIT)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_DEINIT_SID, CDD_FSI_TX_E_UNINIT);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_DEINIT_SID, CDD_FSI_TX_E_UNINIT);
     }
     else
 #endif /* #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT) */
         /* Deinit the hardware modules */
         for (hwUnitId = 0U; hwUnitId < Cdd_FsiTx_DrvObj.maxHwUnit; hwUnitId++)
         {
-            CddFsiTx_hwUnitDeInit(&Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId]);
+            (void)CddFsiTx_hwUnitDeInit(&Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId]);
         }
     CddFsiTx_resetDrvObj(&Cdd_FsiTx_DrvObj);
     Cdd_FsiTx_DriverStatus = CDD_FSI_TX_UNINIT;
@@ -208,11 +208,11 @@ Cdd_FsiTx_Reset(Cdd_FsiTx_HWUnitType HwUnitId, VAR(Cdd_FsiTx_ResetSubModuleType,
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
     if (Cdd_FsiTx_DriverStatus == CDD_FSI_TX_UNINIT)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_RESET_SID, CDD_FSI_TX_E_UNINIT);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_RESET_SID, CDD_FSI_TX_E_UNINIT);
     }
 #endif
-    CddFsiTx_ResetTxSubModules(&Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
-    CddFsiTx_ClearResetTxSubModules(&Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
+    (void)CddFsiTx_ResetTxSubModules(&Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
+    (void)CddFsiTx_ClearResetTxSubModules(&Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId], ResetModule);
 }
 #endif /*CDD_FSI_TX_RESET_API*/
 
@@ -233,12 +233,12 @@ Cdd_FsiTx_Ping(Cdd_FsiTx_HWUnitType HwUnitId)
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
     if (CDD_FSI_TX_UNINIT == Cdd_FsiTx_DriverStatus)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_UNINIT);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_UNINIT);
         retVal = E_NOT_OK;
     }
     else if (HwUnitId >= CDD_FSI_TX_HW_UNIT_CNT)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_PARAM_VALUE);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_PARAM_VALUE);
         retVal = E_NOT_OK;
     }
 
@@ -284,15 +284,15 @@ Cdd_FsiTx_BufferLoad(Cdd_FsiTx_HWUnitType HwUnitId,
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
     if (CDD_FSI_TX_UNINIT == Cdd_FsiTx_DriverStatus)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_UNINIT);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_UNINIT);
     }
     else if (CDD_FSI_TX_BUSY == Cdd_FsiTx_DriverStatus)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_BUSY);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_BUSY);
     }
     else if (NULL_PTR == SrcBufferPtr)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_PARAM_POINTER);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_PARAM_POINTER);
     }
     else
 #endif
@@ -329,7 +329,7 @@ Cdd_FsiTx_Transmit(Cdd_FsiTx_HWUnitType HwUnitId, Cdd_FsiTx_UserDataType userDat
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
     if (HwUnitId >= Cdd_FsiTx_DrvObj.maxHwUnit)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_TRANSMIT_SID, CDD_FSI_TX_E_PARAM_VALUE);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_TRANSMIT_SID, CDD_FSI_TX_E_PARAM_VALUE);
     }
 #endif
     SchM_Enter_Cdd_FsiTx_FSI_TX_EXCLUSIVE_AREA_0();
@@ -362,7 +362,7 @@ Cdd_FsiTx_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_FSI_TX_APPL_D
     if (NULL_PTR == VersionInfoPtr)
     {
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
-        CddFsiTx_ReportDetError(CDD_FSI_TX_GETVERSIONINFO_SID, CDD_FSI_TX_E_PARAM_POINTER);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_GETVERSIONINFO_SID, CDD_FSI_TX_E_PARAM_POINTER);
 #endif
     }
     else
@@ -397,7 +397,7 @@ Cdd_FsiTx_MainFunction(void)
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
     if (hwUnitId >= Cdd_FsiTx_DrvObj.maxHwUnit)
     {
-        CddFsiTx_ReportDetError(CDD_FSI_TX_MAIN_FUNCTION_SID, CDD_FSI_TX_E_PARAM_VALUE);
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_MAIN_FUNCTION_SID, CDD_FSI_TX_E_PARAM_VALUE);
     }
 #endif
     SchM_Enter_Cdd_FsiTx_FSI_TX_EXCLUSIVE_AREA_0();

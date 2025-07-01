@@ -794,26 +794,26 @@ static void Fls_JobErrorNotification1(Fls_JobType job, Std_ReturnType retVal)
     if (FLS_JOB_BLANKCHECK == job)
     {
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
 #else
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
 #endif
     }
     else if (FLS_JOB_ERASE == job)
     {
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_ERASE_FAILED);
 #else
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_VERIFY_ERASE_FAILED);
 #endif
     }
     else /*if (FLS_JOB_COMPARE == job)*/
     {
         Fls_DrvObj.jobResultType = MEMIF_BLOCK_INCONSISTENT;
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_WRITE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_VERIFY_WRITE_FAILED);
 #else
-        Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_COMPARE, FLS_E_VERIFY_WRITE_FAILED);
+        (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_COMPARE, FLS_E_VERIFY_WRITE_FAILED);
 #endif
     }
     if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)

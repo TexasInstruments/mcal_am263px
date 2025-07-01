@@ -5,22 +5,24 @@ export MCAL_PATH?=$(abspath ..)
 PROFILE?=Release
 
 # Define the CCS Eclipse executable path (assuming CCS is being used)
-CCS_ECLIPSE?=/home/gtbldadm/ti/ccs1260/ccs/eclipse/eclipse
+CCS_ECLIPSE?=/home/gtbldadm/ti/ccs1281/ccs/eclipse/eclipse
 
 # List of example projects with standard path structure
-STANDARD_EXAMPLES := Can Cdd_Cmpss Cdd_Flc Dio Fls Flsdiag FsiRx Gpt I2c Icu Lin Mcu Port Pwm Wdg
+STANDARD_EXAMPLES := Can Cdd_Cmpss Cdd_Flc Dio Fls Flsdiag FsiRx Gpt Icu Lin Mcu Port Pwm
 
 # Define the relative path to the examples directory
 EXAMPLES_DIR := $(MCAL_PATH)/mcal/examples
 
 # Custom examples and their subdirectories
-CUSTOM_EXAMPLES := Adc Dma Eth Spi Uart
+CUSTOM_EXAMPLES := Adc Dma Eth I2c Spi Uart Wdg
 Adc_SUBDIRS := adc_app
 Dma_SUBDIRS := Dma_ChainingMode Dma_InterruptMode Dma_LinkingMode Dma_PollingMode
+I2c_SUBDIRS := i2c_app
 Ipc_SUBDIRS :=
 Eth_SUBDIRS := eth_app eth_test_app
 Spi_SUBDIRS := mcspi_app
 Uart_SUBDIRS := uart_echo_dma_app
+Wdg_SUBDIRS := wdg_app
 
 # Special case examples with different path structures
 SPECIAL_EXAMPLES := Epwm
