@@ -78,9 +78,10 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.12. FLS</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#types">5.12.1. Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#enum-fls-erasetype">5.12.1.1. enum Fls_EraseType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-fls-ospi-modes">5.12.1.2. enum Fls_OSPI_Modes</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-fls-addresstype">5.12.1.3. typedef Fls_AddressType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-fls-lengthtype">5.12.1.4. typedef Fls_LengthType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-fls-resetpinmode">5.12.1.2. enum Fls_ResetPinMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-fls-ospi-modes">5.12.1.3. enum Fls_OSPI_Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-fls-addresstype">5.12.1.4. typedef Fls_AddressType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-fls-lengthtype">5.12.1.5. typedef Fls_LengthType</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#structures">5.12.2. Structures</a></li>
@@ -101,6 +102,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#function-fls-seterasetype">5.12.4.13. function Fls_SetEraseType</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-fls-registerreadback">5.12.4.14. function Fls_RegisterReadback</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-fls-set3byteaddressmode">5.12.4.15. function Fls_Set3ByteAddressMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-fls-setresetpinmode">5.12.4.16. function Fls_setResetPinMode</a></li>
 </ul>
 </li>
 </ul>
@@ -161,14 +163,18 @@
 <td><p>ENUM for erase type names.</p></td>
 </tr>
 <tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-fls-resetpinmode"><span class="std std-ref">Fls_ResetPinMode</span></a></strong></p></td>
+<td><p>ENUM for Reset pin states.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-fls-ospi-modes"><span class="std std-ref">Fls_OSPI_Modes</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>typedef uint32</p></td>
+<tr class="row-odd"><td><p>typedef uint32</p></td>
 <td><p><strong><a class="reference internal" href="#typedef-fls-addresstype"><span class="std std-ref">Fls_AddressType</span></a></strong></p></td>
 <td><p>FLS Address type.</p></td>
 </tr>
-<tr class="row-odd"><td><p>typedef uint32</p></td>
+<tr class="row-even"><td><p>typedef uint32</p></td>
 <td><p><strong><a class="reference internal" href="#typedef-fls-lengthtype"><span class="std std-ref">Fls_LengthType</span></a></strong></p></td>
 <td><p>FLS Length type.</p></td>
 </tr>
@@ -201,8 +207,31 @@
 <p><strong>Brief</strong>:
 ENUM for erase type names.</p>
 </section>
+<section id="enum-fls-resetpinmode">
+<h3><span class="section-number">5.12.1.2. </span>enum Fls_ResetPinMode<a class="headerlink" href="#enum-fls-resetpinmode" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FLS_RESET_PIN_STATE_LOW</p></td>
+<td><p></p></td>
+<td><p>Reset pin state low.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FLS_RESET_PIN_STATE_HIGH</p></td>
+<td><p></p></td>
+<td><p>Reset pin state high.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+ENUM for Reset pin states.</p>
+</section>
 <section id="enum-fls-ospi-modes">
-<h3><span class="section-number">5.12.1.2. </span>enum Fls_OSPI_Modes<a class="headerlink" href="#enum-fls-ospi-modes" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.12.1.3. </span>enum Fls_OSPI_Modes<a class="headerlink" href="#enum-fls-ospi-modes" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -247,7 +276,7 @@ ENUM for erase type names.</p>
 </table>
 </section>
 <section id="typedef-fls-addresstype">
-<h3><span class="section-number">5.12.1.3. </span>typedef Fls_AddressType<a class="headerlink" href="#typedef-fls-addresstype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.12.1.4. </span>typedef Fls_AddressType<a class="headerlink" href="#typedef-fls-addresstype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Fls_AddressType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -255,7 +284,7 @@ ENUM for erase type names.</p>
 FLS Address type.</p>
 </section>
 <section id="typedef-fls-lengthtype">
-<h3><span class="section-number">5.12.1.4. </span>typedef Fls_LengthType<a class="headerlink" href="#typedef-fls-lengthtype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.12.1.5. </span>typedef Fls_LengthType<a class="headerlink" href="#typedef-fls-lengthtype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Fls_LengthType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -494,6 +523,10 @@ FLS Length type.</p>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
 <td><p><strong><a class="reference internal" href="#function-fls-set3byteaddressmode"><span class="std std-ref">Fls_Set3ByteAddressMode</span></a></strong>(void )</p></td>
 <td><p>Sets the Flash Addressing Mode to 3 byte.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-setresetpinmode"><span class="std std-ref">Fls_setResetPinMode</span></a></strong>(<a class="reference internal" href="#enum-fls-resetpinmode"><span class="std std-ref">Fls_ResetPinMode</span></a> pinMode)</p></td>
+<td><p>Updates the Flash Pin Value. Use this API to Reset Flash Step1: pinMode = FLS_RESET_PIN_STATE_HIGH Step2: pinMode = FLS_RESET_PIN_STATE_LOW Works for Am263Px-SIP and AM263Px- Rev A board.</p></td>
 </tr>
 </tbody>
 </table>
@@ -873,6 +906,25 @@ Sets the Flash Addressing Mode to 3 byte.</p>
 </ul>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
+<section id="function-fls-setresetpinmode">
+<h3><span class="section-number">5.12.4.16. </span>function Fls_setResetPinMode<a class="headerlink" href="#function-fls-setresetpinmode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Fls_setResetPinMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Fls_ResetPinMode</span><span class="w"> </span><span class="n">pinMode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Updates the Flash Pin Value. Use this API to Reset Flash Step1: pinMode = FLS_RESET_PIN_STATE_HIGH Step2: pinMode = FLS_RESET_PIN_STATE_LOW Works for Am263Px-SIP and AM263Px- Rev A board.</p>
+<p>Service ID[hex] : NA</p>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> success
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> failure
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
 </section>
 </section>
 
@@ -888,7 +940,7 @@ Sets the Flash Addressing Mode to 3 byte.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Jul 01, 2025.
+          <span class="lastupdated" >Last updated on Jul 03, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

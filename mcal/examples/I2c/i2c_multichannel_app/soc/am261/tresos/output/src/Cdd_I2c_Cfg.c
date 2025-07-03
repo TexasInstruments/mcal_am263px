@@ -81,7 +81,7 @@ VAR(Cdd_I2c_Channel_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cChannelContainer[CDD_I2C
     [0] =
     {
         .Dir                = CDD_I2C_WRITE,
-        .SlaveAddress       = 32U,
+        .SlaveAddress       = 76U,
         .SlaveAddressScheme = CDD_I2C_7_BIT_ADDRESS,
         .DataBufferLength   = 0U,
         .DataBuffer         = NULL_PTR,
@@ -90,25 +90,7 @@ VAR(Cdd_I2c_Channel_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cChannelContainer[CDD_I2C
     [1] =
     {
         .Dir                = CDD_I2C_READ,
-        .SlaveAddress       = 32U,
-        .SlaveAddressScheme = CDD_I2C_7_BIT_ADDRESS,
-        .DataBufferLength   = 0U,
-        .DataBuffer         = NULL_PTR,
-        .ChannelResult      = CDD_I2C_CH_RESULT_OK,
-    },
-    [2] =
-    {
-        .Dir                = CDD_I2C_WRITE,
-        .SlaveAddress       = 80U,
-        .SlaveAddressScheme = CDD_I2C_7_BIT_ADDRESS,
-        .DataBufferLength   = 0U,
-        .DataBuffer         = NULL_PTR,
-        .ChannelResult      = CDD_I2C_CH_RESULT_OK,
-    },
-    [3] =
-    {
-        .Dir                = CDD_I2C_READ,
-        .SlaveAddress       = 80U,
+        .SlaveAddress       = 76U,
         .SlaveAddressScheme = CDD_I2C_7_BIT_ADDRESS,
         .DataBufferLength   = 0U,
         .DataBuffer         = NULL_PTR,
@@ -122,30 +104,16 @@ CONST(Cdd_I2c_Sequence_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cSequenceContainer[CDD
     [0] =
     {
         .HwInstance               = CDD_I2C_HW_UNIT_0,
-        .MaxChannels              = 1U,
+        .MaxChannels              = 2U,
         .SeqResult                = CDD_I2C_SEQ_OK,
-        .SequenceCompleteNotify   = I2c_Seq0_Complete,
-        .SequenceErrorNotify      = I2c_Seq0_Fail,
-        .RestartMode              = CDD_I2C_RESTART_MODE_STOP,
+        .SequenceCompleteNotify   = I2c_Temperature_Data_Write_Read_Complete,
+        .SequenceErrorNotify      = I2c_Temperature_Data_Write_Read_Fail,
+        .RestartMode              = CDD_I2C_RESTART_MODE_NOSTOP,
         .ChannelList              =
         {
     /* The Number Of Channels generated below are equal to the variable "CddI2cNumberOfChannelsInSequence" */
-            2U,
-
-        },
-    },
-    [1] =
-    {
-        .HwInstance               = CDD_I2C_HW_UNIT_0,
-        .MaxChannels              = 1U,
-        .SeqResult                = CDD_I2C_SEQ_OK,
-        .SequenceCompleteNotify   = I2c_Seq1_Complete,
-        .SequenceErrorNotify      = I2c_Seq1_Fail,
-        .RestartMode              = CDD_I2C_RESTART_MODE_STOP,
-        .ChannelList              =
-        {
-    /* The Number Of Channels generated below are equal to the variable "CddI2cNumberOfChannelsInSequence" */
-            3U,
+            0U,
+            1U,
 
         },
     },

@@ -61,11 +61,17 @@ void Cdd_I2c_InterruptConfig(void)
 #else
     interruptCfg.map      = VIM_INTTYPE_IRQ;
     interruptCfg.type     = VIM_INTTRIGTYPE_PULSE;
+    interruptCfg.intNum   = I2C0_INT;
+    interruptCfg.handler  = &Cdd_I2c_HwUnit0_ISR;
+    interruptCfg.priority = VIM_PRIORITY_2;
+    vimRegisterInterrupt(&interruptCfg);
+#endif
+    interruptCfg.map      = VIM_INTTYPE_IRQ;
+    interruptCfg.type     = VIM_INTTRIGTYPE_PULSE;
     interruptCfg.intNum   = I2C2_INT;
     interruptCfg.handler  = &Cdd_I2c_HwUnit2_ISR;
     interruptCfg.priority = VIM_PRIORITY_2;
     vimRegisterInterrupt(&interruptCfg);
-#endif
 }
 #endif
 

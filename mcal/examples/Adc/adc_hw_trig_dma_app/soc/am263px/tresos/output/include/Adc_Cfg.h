@@ -190,7 +190,7 @@ extern "C" {
 
 
 /** \brief Maximum group across all hwunit */
-#define ADC_MAX_GROUP                   ((uint8)1U)
+#define ADC_MAX_GROUP                   ((uint8)2U)
 
 
 /**
@@ -255,6 +255,9 @@ extern "C" {
 #define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0   (0)
 #define ADC_GROUP_ID_0 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0
 
+#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_1   (1)
+#define ADC_GROUP_ID_1 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_1
+
 
 /* @} */
 
@@ -277,8 +280,14 @@ extern "C" {
  */
 /** \brief Channel Ids for each group*/
 
-#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0_AdcChannel_AdcChannel_0 (2U)
+#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0_AdcChannel_AdcChannel_0 (0U)
 #define ADC_HW_UNIT_ID_ADCHWUNIT_0_GROUP_ID_AdcGroup_0_CHANNEL_ID_ADCCHANNEL_0 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0_AdcChannel_AdcChannel_0
+
+#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0_AdcChannel_AdcChannel_1 (1U)
+#define ADC_HW_UNIT_ID_ADCHWUNIT_0_GROUP_ID_AdcGroup_0_CHANNEL_ID_ADCCHANNEL_1 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0_AdcChannel_AdcChannel_1
+
+#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_1_AdcChannel_AdcChannel_2 (2U)
+#define ADC_HW_UNIT_ID_ADCHWUNIT_0_GROUP_ID_AdcGroup_1_CHANNEL_ID_ADCCHANNEL_2 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_1_AdcChannel_AdcChannel_2
 
 /* @} */
 
@@ -290,8 +299,14 @@ extern "C" {
  */
 /** \brief Channel Ids for all channels */
 
-#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcChannel_AdcChannel_0 (2U)
+#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcChannel_AdcChannel_0 (0U)
 #define ADC_HW_UNIT_ID_ADCHWUNIT_0_CHANNEL_ID_ADCCHANNEL_0 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcChannel_AdcChannel_0
+
+#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcChannel_AdcChannel_1 (1U)
+#define ADC_HW_UNIT_ID_ADCHWUNIT_0_CHANNEL_ID_ADCCHANNEL_1 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcChannel_AdcChannel_1
+
+#define AdcConf_AdcHwUnit_AdcHwUnit_0_AdcChannel_AdcChannel_2 (2U)
+#define ADC_HW_UNIT_ID_ADCHWUNIT_0_CHANNEL_ID_ADCCHANNEL_2 AdcConf_AdcHwUnit_AdcHwUnit_0_AdcChannel_AdcChannel_2
 
 /* @} */
 

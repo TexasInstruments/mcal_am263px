@@ -1637,8 +1637,29 @@
                     </d:var>
                   </d:ctr>
                 </d:lst>
-                <d:lst name="McuPwmConfiguration" type="MAP"/>
-                <d:lst name="McuCddPwmConfiguration" type="MAP"/>
+                <d:lst name="McuPwmConfiguration" type="MAP">
+                  <d:ctr name="McuPwmConfiguration_0" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:ref name="McuPwmChannelId" type="REFERENCE" 
+                           value="ASPath:/Pwm/Pwm/PwmChannelConfigSet/PwmChannel_0">
+                      <a:a name="ENABLE" value="false"/>
+                    </d:ref>
+                    <d:ref name="McuPwmGroupId" type="REFERENCE" 
+                           value="ASPath:/Pwm/Pwm/PwmChannelConfigSet/PwmChannel_0">
+                      <a:a name="ENABLE" value="false"/>
+                    </d:ref>
+                  </d:ctr>
+                </d:lst>
+                <d:lst name="McuCddPwmConfiguration" type="MAP">
+                  <d:ctr name="McuCddPwmConfiguration_0" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:ref name="McuCddPwmChannelId" type="REFERENCE" 
+                           value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmChannel_0">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                  </d:ctr>
+                </d:lst>
                 <d:lst name="McuAdcConfiguration" type="MAP">
                   <d:ctr name="McuAdcConfiguration_0" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>

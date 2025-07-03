@@ -1042,7 +1042,13 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
         obj->currentprotocol          = FLS_OSPI_RX_1S_1S_1S;
         addrnumBytesInput             = fls_config_sfdp->addrnumBytes;
         fls_config_sfdp->addrnumBytes = 3;
+        /* Now configure the flash for the 1s_1s_1s protocol */
+        retVal = Fls_Ospi_setProtocol(handle, FLS_OSPI_RX_1S_1S_1S);
 
+#ifdef AM263PX_SIP_PACKAGE
+        Fls_setResetPinMode(FLS_RESET_PIN_STATE_HIGH);
+        Fls_setResetPinMode(FLS_RESET_PIN_STATE_LOW);
+#endif
         /* Now configure the flash for the selected protocol */
         retVal               = Fls_Ospi_setProtocol(handle, Fls_DrvObj.Fls_Mode);
         obj->currentprotocol = Fls_DrvObj.Fls_Mode;
@@ -1172,6 +1178,21 @@ Std_ReturnType Fls_OspiSet3ByteAddress(void)
 
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_SIZE_CONFIG_REG, OSPI_DEV_SIZE_CONFIG_REG_NUM_ADDR_BYTES_FLD, 2);
     fls_config_sfdp->addrnumBytes = 3;
+
+    return retVal;
+}
+
+/**
+ *  \Function Name: Fls_OspiSetResetPinMode
+ *
+ *  This function Updates Reset Pin value.
+ *
+ */
+Std_ReturnType Fls_OspiSetResetPinMode(Fls_ResetPinMode pinMode)
+{
+    Std_ReturnType retVal = E_OK;
+
+    HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR, OSPI_CONFIG_REG_RESET_PIN_FLD, pinMode);
 
     return retVal;
 }

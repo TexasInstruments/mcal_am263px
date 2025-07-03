@@ -136,7 +136,7 @@ CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) FlsConfigSet =
                 .numberOfSectors = 1U,
                 .sectorPageSize = 256U,
                 .sectorSize = 4096U,
-                .sectorStartaddress = 1610612736U,
+                .sectorStartaddress = 0x60200000UL,
             },
         },
     .flsBaudRateDiv = 4U,

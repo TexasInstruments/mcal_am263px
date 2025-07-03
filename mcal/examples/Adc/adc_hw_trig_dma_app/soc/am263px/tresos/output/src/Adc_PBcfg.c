@@ -94,12 +94,11 @@ extern "C" {
 
 
 
-extern void AdcApp_Group0EndNotification(void);
 
 /* Create runtime configurations. */
 CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
 {
-    .maxGroup = 1U,
+    .maxGroup = 2U,
     .maxHwUnit = 1U,
     .groupCfg  =
     {
@@ -108,7 +107,55 @@ CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
             .groupId = AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_0,
             .groupPriority =0U,
             .hwUnitId = 0,
-            .Adc_GroupEndNotification = AdcApp_Group0EndNotification,
+            .Adc_GroupEndNotification =NULL_PTR,
+            .streamNumSamples = (Adc_StreamNumSampleType)1,
+            .resolution = ADC_DEF_CHANNEL_RESOLUTION,/* This is not configurable and should be set to ADC_DEF_CHANNEL_RESOLUTION */
+            .convMode = ADC_CONV_MODE_ONESHOT,
+            .triggSrc = ADC_TRIGG_SRC_HW,
+            .accessMode = ADC_ACCESS_MODE_SINGLE,
+            .streamBufMode = ADC_STREAM_BUFFER_LINEAR,
+            .hwTrigSignal = ADC_HW_TRIG_BOTH_EDGES,
+            .hwTrigTimer =ADC_TRIGGER_EPWM0_SOCA,
+            .groupReplacement = (Adc_GroupReplacementType)ADC_GROUP_REPL_SUSPEND_RESUME,
+            .groupChannelMask = 0x3,
+#if (STD_ON == ADC_ENABLE_LIMIT_CHECK)
+            .grouplimitcheck = FALSE,
+#endif
+            .groupDataAccessMode = ADC_GROUP_POLLING_ACCESS,
+            .numChannels = 2U,
+#if (STD_ON == ADC_DMA_MODE)
+            .groupDmaChannelId = 0xFFU,
+#endif
+            .channelConfig =
+            {
+                [0] =
+                {
+                    .hwChannelId = 0U,
+                    .samplewindow = 16U,
+#if (STD_ON == ADC_ENABLE_LIMIT_CHECK)
+                    .channelEnableLimitCheck =(FALSE),
+                    .highRange =4095,
+                    .lowRange =0,
+#endif
+                },
+                [1] =
+                {
+                    .hwChannelId = 1U,
+                    .samplewindow = 16U,
+#if (STD_ON == ADC_ENABLE_LIMIT_CHECK)
+                    .channelEnableLimitCheck =(FALSE),
+                    .highRange =4095,
+                    .lowRange =0,
+#endif
+                },
+            },
+        },
+        [1] =
+        {
+            .groupId = AdcConf_AdcHwUnit_AdcHwUnit_0_AdcGroup_AdcGroup_1,
+            .groupPriority =2U,
+            .hwUnitId = 0,
+            .Adc_GroupEndNotification =NULL_PTR,
             .streamNumSamples = (Adc_StreamNumSampleType)1,
             .resolution = ADC_DEF_CHANNEL_RESOLUTION,/* This is not configurable and should be set to ADC_DEF_CHANNEL_RESOLUTION */
             .convMode = ADC_CONV_MODE_ONESHOT,
@@ -135,8 +182,8 @@ CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
                     .samplewindow = 16U,
 #if (STD_ON == ADC_ENABLE_LIMIT_CHECK)
                     .channelEnableLimitCheck =(FALSE),
-                    .highRange =2482,
-                    .lowRange =1241,
+                    .highRange =4095,
+                    .lowRange =0,
 #endif
                 },
             },

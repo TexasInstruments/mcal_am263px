@@ -73,6 +73,7 @@ title: Epwm API GUIDE Header file
 | CDD_PWM_SID_HR_SET_HRPWM_API   | CDD_PWM driver service ID to enable HRPWM module.  |
 | CDD_PWM_SID_HR_SFO_CAL_API   | CDD_PWM driver service ID to enable HRPWM SFO calibration.  |
 | CDD_PWM_SID_HR_SFO_STATUS_API   | CDD_PWM driver service ID to check HRPWM SFO Cal. Status.  |
+| CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE   | CDD_PWM driver service ID to set Time base counter mode.  |
 | CDD_PWM_STATUS_UNINIT   | CDD_PWM driver Status uninitialized.  |
 | CDD_PWM_STATUS_INIT   | CDD_PWM driver Status Initialized.  |
 | CDD_PWM_STATUS_STOPPED   | CDD_PWM driver Status stopped.  |
@@ -113,6 +114,7 @@ title: Epwm API GUIDE Header file
 | Std_ReturnType | **[Cdd_Pwm_DeadbandBypass](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_deadbandbypass)**(uint32 Channel)| Function bypasses the Dead-band sub-module.  |
 | Std_ReturnType | **[Cdd_Pwm_ChopperCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_choppercfg)**(uint32 Channel, const CDD_PWM_ChopperCfgType * pCfg)| Performs the configuration of the chopper sub-module.  |
 | Std_ReturnType | **[Cdd_Pwm_ChopperEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_chopperenable)**(uint32 Channel, uint32 enableChopper)| Function controls the enabling or disabling of chopper sub-module.  |
+| Std_ReturnType | **[Cdd_Pwm_SetTimeBaseCounterMode](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_settimebasecountermode)**(uint32 Channel, EPWM_TimeBaseCountMode Mode)| Function sets the mode of Time base counter.  |
 | Std_ReturnType | **[Cdd_Pwm_TzTripEventEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tztripeventenable)**(uint32 Channel, uint32 tzEventType)| Function enables the trip event.  |
 | Std_ReturnType | **[Cdd_Pwm_TzTripEventDisable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tztripeventdisable)**(uint32 Channel, uint32 tzEventType)| Function disable the trip event. The disabled trip events will be ignored.  |
 | Std_ReturnType | **[Cdd_Pwm_TzIntrEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tzintrenable)**(uint32 Channel, uint32 tzEventType)| Function enables the trip interrupt.  |
@@ -943,6 +945,46 @@ Reentrancy - Non Reentrant
 <br> 
   
 * **E_NOT_OK** - enabling or disabling of chopper sub-module is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_SetTimeBaseCounterMode
+
+```
+Std_ReturnType Cdd_Pwm_SetTimeBaseCounterMode(
+    uint32 Channel,
+    EPWM_TimeBaseCountMode Mode
+)
+```
+
+
+**Brief**: 
+Function sets the mode of Time base counter. 
+
+This function is used to set the mode for Time base counter.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **Mode.** Refer counterMode parameter. Example CDD_PWM_COUNTER_MODE_UP defined in Epwm\V0\Cdd_Pwm_Types.h
+
+
+**Returns**: 
+
+  
+* **E_OK** - Operation successful 
+<br> 
+  
+* **E_NOT_OK** - Operation failed 
 <br> 
 
 

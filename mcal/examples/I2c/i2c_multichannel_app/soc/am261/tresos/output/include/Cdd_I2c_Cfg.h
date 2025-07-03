@@ -78,7 +78,7 @@ extern "C" {
 #define CDD_I2C_DEV_ERROR_DETECT                                                (STD_ON)
 
 /** \brief Enable/disable Interrupts  */
-#define CDD_I2C_POLLING_MODE                                                    (STD_OFF)
+#define CDD_I2C_POLLING_MODE                                                    (STD_ON)
 
 /** \brief Enable/disable version info API */
 #define CDD_I2C_VERSION_INFO_API                                                (STD_ON)
@@ -98,9 +98,6 @@ extern "C" {
 /** \brief CDD_I2C check to process same sequence ID multiple times in queue */
 #define CDD_I2C_PROCESS_SAME_SEQUENCE_MULTIPLE_TIMES_IN_QUEUE                   (STD_ON)
 
-/** \brief ISR type (Only include if polling mode is off) */
-#define CDD_I2C_ISR_TYPE                        (CDD_I2C_ISR_CAT2)
-
 /** \brief Counter ID for counter used to count wait ticks */
 #define CDD_I2C_OS_COUNTER_ID     (0U)
 
@@ -117,29 +114,20 @@ extern "C" {
 #define CDD_I2C_MAX_QUEUE_SIZE                  (10U)
 
 /** \brief CDD_I2C maximum number of Cdd_I2c_Sequence, user configurable */
-#define CDD_I2C_MAXIMUM_SEQUENCE_NUMBER          (2U)
+#define CDD_I2C_MAXIMUM_SEQUENCE_NUMBER          (1U)
 
 /** \brief Symbolic Name for I2c Sequence 0 */
 #define CddI2cConf_CddI2cSequence_CddI2cSequence_0   (0U)
 
-/** \brief Symbolic Name for I2c Sequence 1 */
-#define CddI2cConf_CddI2cSequence_CddI2cSequence_1   (1U)
-
 
 /** \brief CDD_I2C maximum number of channels available, user configurable */
-#define CDD_I2C_MAXIMUM_CHANNEL_NUMBER          (4U)
+#define CDD_I2C_MAXIMUM_CHANNEL_NUMBER          (2U)
 
 /** \brief Symbolic Name for I2c Channel 0 */
 #define CddI2cConf_CddI2cChannel_CddI2cChannel_0   (0U)
 
 /** \brief Symbolic Name for I2c Channel 1 */
 #define CddI2cConf_CddI2cChannel_CddI2cChannel_1   (1U)
-
-/** \brief Symbolic Name for I2c Channel 2 */
-#define CddI2cConf_CddI2cChannel_CddI2cChannel_2   (2U)
-
-/** \brief Symbolic Name for I2c Channel 3 */
-#define CddI2cConf_CddI2cChannel_CddI2cChannel_3   (3U)
 
 
 /** \brief CDD_I2C Transmission buffer maximum size, user configurable */
@@ -179,11 +167,9 @@ extern const struct Cdd_I2c_ConfigType_s CddI2cInitParams;
 /* ========================================================================== */
 /*                           Callback functions                               */
 /* ========================================================================== */
-extern void I2c_Seq0_Complete(void);
-extern void I2c_Seq1_Complete(void);
+extern void I2c_Temperature_Data_Write_Read_Complete(void);
 
-extern void I2c_Seq0_Fail(uint8 Error_Code);
-extern void I2c_Seq1_Fail(uint8 Error_Code);
+extern void I2c_Temperature_Data_Write_Read_Fail(uint8 Error_Code);
 
 #ifdef __cplusplus
 }

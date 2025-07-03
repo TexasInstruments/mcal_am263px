@@ -346,6 +346,15 @@ typedef struct
 } Fls_RegisterReadbackType;
 #endif /* #if (STD_ON == FLS_REGISTER_READBACK_API) */
 
+/** \brief ENUM for Reset pin states */
+typedef enum
+{
+    /** \brief Reset pin state low */
+    FLS_RESET_PIN_STATE_LOW,
+    /** \brief Reset pin state high */
+    FLS_RESET_PIN_STATE_HIGH,
+} Fls_ResetPinMode;
+
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
@@ -627,6 +636,22 @@ Fls_RegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) R
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, FLS_CODE) Fls_Set3ByteAddressMode(void);
+#endif
+
+#ifdef FLS_OSPI_CTRL_BASE_ADDR
+/** \brief Updates the Flash Pin Value.
+ * Use this API to Reset Flash
+ * Step1: pinMode = FLS_RESET_PIN_STATE_HIGH  Step2: pinMode = FLS_RESET_PIN_STATE_LOW
+ * Works for Am263Px-SIP and AM263Px- Rev A board
+ *
+ * Service ID[hex]   : NA
+ *
+ * \return Std_ReturnType
+ * \retval E_OK: success
+ * \retval E_NOT_OK: failure
+ *
+ *****************************************************************************/
+FUNC(Std_ReturnType, FLS_CODE) Fls_setResetPinMode(Fls_ResetPinMode pinMode);
 #endif
 
 #ifdef __cplusplus

@@ -7,6 +7,7 @@ include $(mcal_PATH)/Adc/srcs.mk
 include $(mcal_PATH)/Dma/srcs.mk
 include $(mcal_PATH)/Mcu/srcs.mk
 include $(mcal_PATH)/Port/srcs.mk
+include $(mcal_PATH)/Epwm/srcs.mk
 include $(mcal_PATH)/examples/Utils/srcs_autosar_stub.mk
 include $(mcal_PATH)/examples/Utils/srcs_startup.mk
 include $(mcal_PATH)/examples/Utils/srcs_pmic.mk

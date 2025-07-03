@@ -36,6 +36,10 @@ ifeq ($(SOC), am261)
 APP_SOC_FILES = V2
 endif
 
+ifeq ($(SOC), $(filter $(SOC), am263px))
+  I2C_DRV_SOC_FILES = V0
+endif
+
 SRCDIR = . ../Utils ../Utils/$(COMPILER) ../Utils/$(COMPILER)/$(SOC) ../Utils/$(SOC)
 SRCDIR += $(autosarConfigSrc_PATH)/Fls_Demo_Cfg/soc/$(SOC)/$(CORE)/src
 SRCDIR += $(autosarConfigSrc_PATH)/Port_Demo_Cfg/soc/$(PLATFORM)/$(CORE)/src
@@ -53,6 +57,11 @@ INCDIR += $(autosarConfigSrc_PATH)/../examples/Fls
 INCDIR += $(mcal_PATH)/Dma/include 
 INCDIR += $(mcal_PATH)/include/hw/$(PLATFORM) 
 INCDIR += $(mcal_PATH)/include/hw
+
+ifeq ($(SOC), am263px)
+SRCDIR += $(mcal_PATH)/I2c/src $(mcal_PATH)/I2c/$(I2C_DRV_SOC_FILES)
+INCDIR += $(mcal_PATH)/I2c/include $(mcal_PATH)/I2c/src $(mcal_PATH)/I2c/$(I2C_DRV_SOC_FILES)
+endif
 # List all the external components/interfaces, whose interface header files
 # need to be included for this component
 INCLUDE_EXTERNAL_INTERFACES = autoSARBSW autosarConfig fls mcu port app_utils dma
@@ -61,12 +70,16 @@ INCLUDE_INTERNAL_INTERFACES = flsAppPriv
 flsAppPriv_INCLUDE =  $(mcal_PATH)/include $(mcal_PATH)/include/hw/$(SOCFAMILY) $(mcal_PATH)/include/hw
 
 # List all the components required by the application
-COMP_LIST_COMMON  =  fls mcu port app_utils dma
+COMP_LIST_COMMON  =  fls mcu port app_utils dma i2c
 
 # Common source files and CFLAGS across all platforms and cores
 SRCS_COMMON = FlsApp.c FlsApp_Startup.c
 SRCS_COMMON += Fls_Cfg.c Fls_PBcfg.c 
 SRCS_COMMON += Dem.c
+ifeq ($(SOC), am263px)
+SRCS_COMMON += Cdd_I2c.c Cdd_I2c_Irq.c Cdd_I2c_priv.c
+SRCS_COMMON += ioexp_tca6416_6424.c
+endif
 
 #ifeq ($(SOC), am273)
 
@@ -90,13 +103,21 @@ endif
 
 ifeq ($(SOC), am263px)
   SRCS_COMMON += Mcu_PBcfg.c Mcu_Cfg.c Port_Cfg.c Cdd_Dma_Cfg.c
+  SRCDIR += $(mcal_PATH)/examples/Utils/am263px/IoMux
+  INCDIR += $(mcal_PATH)/examples/Utils/am263px/IoMux
   ifeq ($(PACKAGE), SIP)
-    SRCS_COMMON += Port_PBcfg_SIP.c
+    SRCS_COMMON += Port_PBcfg_SIP.c  Cdd_I2c_Cfg.c
+    SRCDIR += $(mcal_PATH)/examples/Fls/soc/am263px/tresos/output/src
+    INCDIR += soc/$(SOC)/tresos/output/include
   else
     ifeq ($(PACKAGE), C)
-      SRCS_COMMON += Port_PBcfg_C.c
+      SRCS_COMMON += Port_PBcfg_C.c  Cdd_I2c_Cfg.c
+      SRCDIR += $(mcal_PATH)/examples/Fls/soc/am263px/tresos_lp/output/src
+      INCDIR += soc/$(SOC)/tresos_lp/output/include
     else
-      SRCS_COMMON += Port_PBcfg_Ospi.c
+      SRCS_COMMON += Port_PBcfg_Ospi.c  Cdd_I2c_Cfg.c
+      SRCDIR += $(mcal_PATH)/examples/Fls/soc/am263px/tresos/output/src
+      INCDIR += soc/$(SOC)/tresos/output/include
     endif
   endif
 endif

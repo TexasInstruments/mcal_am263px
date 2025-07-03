@@ -30,13 +30,12 @@
  *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef MCAN_TRANSCEIVER_H_
-#define MCAN_TRANSCEIVER_H_
+#ifndef IOEXP_TCA6416_6424_H_
+#define IOEXP_TCA6416_6424_H_
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Std_Types.h"
-#include "Cdd_I2c.h"
 #include "app_utils.h"
 
 #ifdef __cplusplus
@@ -58,11 +57,12 @@ extern "C" {
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
-
-uint32 TCA6424_Transceiver(void);
+uint32 EEPROM_CAT24M_read(uint32 offset, uint32 state);
+void   board_flash_reset(void);
+uint32 TCA6416_6424_Transceiver(void);
 void   mcanEnableTransceiver(void);
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* #ifndef MCAN_TRANSCEIVER_H_ */
+#endif /* #ifndef IOEXP_TCA6416_6424_H_ */

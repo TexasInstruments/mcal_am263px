@@ -28,7 +28,7 @@ SRCDIR += $(autosarConfigSrc_PATH)/Mcu_Demo_Cfg/soc/$(SOC)/$(CORE)/src
 SRCDIR += soc/$(SOC)/$(CORE)
 ifeq ($(SOC), am263px)
   SRCDIR += $(mcal_PATH)/examples/Utils/am263px/Pmic
-  SRCDIR += $(mcal_PATH)/examples/Utils/am263px/Mcan
+  SRCDIR += $(mcal_PATH)/examples/Utils/am263px/IoMux
 endif
 INCDIR = .
 INCDIR = ../Utils/$(SOC)
@@ -40,7 +40,7 @@ INCDIR += $(autosarConfigSrc_PATH)/Mcu_Demo_Cfg/soc/$(SOC)/$(CORE)/include
 
 ifeq ($(SOC), am263px)
   INCDIR += $(mcal_PATH)/examples/Utils/am263px/Pmic
-  INCDIR += $(mcal_PATH)/examples/Utils/am263px/Mcan
+  INCDIR += $(mcal_PATH)/examples/Utils/am263px/IoMux
 endif
 INCDIR += $(mcal_PATH)/include/memmap
 INCDIR += $(mcal_PATH)/include/hw/$(PLATFORM)
@@ -48,7 +48,7 @@ INCDIR += $(mcal_PATH)/include/hw
 
 # List all the external components/interfaces, whose interface header files
 # need to be included for this component
-INCLUDE_EXTERNAL_INTERFACES = autoSARBSW can mcu port app_utils
+INCLUDE_EXTERNAL_INTERFACES = autoSARBSW can mcu port app_utils fls
 
 INCLUDE_INTERNAL_INTERFACES = canAppPriv
 canAppPriv_INCLUDE = $(mcal_PATH)/include $(mcal_PATH)/include/hw/$(SOCFAMILY) $(mcal_PATH)/include/hw
@@ -57,7 +57,7 @@ canAppPriv_INCLUDE = $(mcal_PATH)/include $(mcal_PATH)/include/hw/$(SOCFAMILY) $
 COMP_LIST_COMMON = can mcu port app_utils
 
 ifeq ($(SOC), am263px)
-  SRCS_COMMON = mcan_transceiver.c
+  SRCS_COMMON = ioexp_tca6416_6424.c
 endif
 
 # Common source files and CFLAGS across all platforms and cores
@@ -92,6 +92,7 @@ endif
 ifeq ($(SOC), am263px)
   SRCS_COMMON += Mcu_PBcfg.c Mcu_Cfg.c Port_Cfg.c
   SRCS_COMMON += AppPimc.c mcspi_v0.c
+  INCDIR += $(autosarConfigSrc_PATH)/Fls_Demo_Cfg/soc/$(SOC)/$(CORE)/include
   ifeq ($(PACKAGE), SIP)
     SRCDIR += soc/$(SOC)/tresos/output/src
     INCDIR += soc/$(SOC)/tresos/output/include

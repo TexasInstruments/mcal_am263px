@@ -35,6 +35,7 @@
 #include "SchM_Mcu.h"
 #include "Port.h"
 #include "SchM_Port.h"
+#include "Cdd_Pwm.h"
 #include "Cdd_Dma.h"
 #include "Cdd_Dma_Irq.h"
 #include "CacheP.h"

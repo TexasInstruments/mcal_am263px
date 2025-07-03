@@ -1181,5 +1181,15 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Set3ByteAddressMode(void)
 }
 #endif
 
+#ifdef FLS_OSPI_CTRL_BASE_ADDR
+FUNC(Std_ReturnType, FLS_CODE) Fls_setResetPinMode(Fls_ResetPinMode pinMode)
+{
+    Std_ReturnType retVal = E_NOT_OK;
+    retVal                = Fls_OspiSetResetPinMode(pinMode);
+
+    return retVal;
+}
+#endif
+
 #define FLS_STOP_SEC_CODE
 #include "Fls_MemMap.h"

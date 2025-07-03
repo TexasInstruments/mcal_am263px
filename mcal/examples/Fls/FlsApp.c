@@ -110,6 +110,15 @@ uint8          rxBuf_test[DATA_SIZE_TEST] = {0};
 int main(void)
 {
     FlsApp_Startup();
+#if defined(AM263PX_PLATFORM)
+#if defined AM263PX_R_PACKAGE || defined AM263PX_C_PACKAGE
+#if (STD_OFF == CDD_I2C_POLLING_MODE)
+    Cdd_I2c_InterruptConfig();
+#endif  // #if(STD_OFF == CDD_I2C_POLLING_MODE)
+    Cdd_I2c_Init(I2cConfigSet);
+    board_flash_reset();
+#endif                        // #if defined AM263PX_R_PACKAGE || defined AM263PX_C_PACKAGE
+#endif                        // if defined(AM263PX_PLATFORM)
     Flash_sfdpParams_init();  // initialise sfdp parameters
 
     if (SECTOR_ERASE == 1)

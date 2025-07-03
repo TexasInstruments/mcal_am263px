@@ -109,6 +109,24 @@ VAR(Cdd_I2c_Channel_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cChannelContainer[CDD_I2C
         .DataBuffer         = NULL_PTR,
         .ChannelResult      = CDD_I2C_CH_RESULT_OK,
     },
+    [3] =
+    {
+        .Dir                = CDD_I2C_READ,
+        .SlaveAddress       = 80U,
+        .SlaveAddressScheme = CDD_I2C_7_BIT_ADDRESS,
+        .DataBufferLength   = 0U,
+        .DataBuffer         = NULL_PTR,
+        .ChannelResult      = CDD_I2C_CH_RESULT_OK,
+    },
+    [4] =
+    {
+        .Dir                = CDD_I2C_WRITE,
+        .SlaveAddress       = 80U,
+        .SlaveAddressScheme = CDD_I2C_7_BIT_ADDRESS,
+        .DataBufferLength   = 0U,
+        .DataBuffer         = NULL_PTR,
+        .ChannelResult      = CDD_I2C_CH_RESULT_OK,
+    },
 
 };
 
@@ -156,6 +174,36 @@ CONST(Cdd_I2c_Sequence_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cSequenceContainer[CDD
         {
     /* The Number Of Channels generated below are equal to the variable "CddI2cNumberOfChannelsInSequence" */
             2U,
+
+        },
+    },
+    [3] =
+    {
+        .HwInstance               = CDD_I2C_HW_UNIT_0,
+        .MaxChannels              = 1U,
+        .SeqResult                = CDD_I2C_SEQ_OK,
+        .SequenceCompleteNotify   = I2c_Eeprom_Read_Callback,
+        .SequenceErrorNotify      = I2c_Eeprom_Read_Callback_Fail,
+        .RestartMode              = CDD_I2C_RESTART_MODE_STOP,
+        .ChannelList              =
+        {
+    /* The Number Of Channels generated below are equal to the variable "CddI2cNumberOfChannelsInSequence" */
+            3U,
+
+        },
+    },
+    [4] =
+    {
+        .HwInstance               = CDD_I2C_HW_UNIT_0,
+        .MaxChannels              = 1U,
+        .SeqResult                = CDD_I2C_SEQ_OK,
+        .SequenceCompleteNotify   = I2c_Eeprom_Address_Ptr_Reset,
+        .SequenceErrorNotify      = I2c_Eeprom_Address_Ptr_Fail,
+        .RestartMode              = CDD_I2C_RESTART_MODE_STOP,
+        .ChannelList              =
+        {
+    /* The Number Of Channels generated below are equal to the variable "CddI2cNumberOfChannelsInSequence" */
+            4U,
 
         },
     },

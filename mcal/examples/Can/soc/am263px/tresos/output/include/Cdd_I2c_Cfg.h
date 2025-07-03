@@ -119,7 +119,7 @@ extern "C" {
 #define CDD_I2C_MAX_QUEUE_SIZE                  (10U)
 
 /** \brief CDD_I2C maximum number of Cdd_I2c_Sequence, user configurable */
-#define CDD_I2C_MAXIMUM_SEQUENCE_NUMBER          (3U)
+#define CDD_I2C_MAXIMUM_SEQUENCE_NUMBER          (5U)
 
 /** \brief Symbolic Name for I2c Sequence 0 */
 #define CddI2cConf_CddI2cSequence_CddI2cSequence_0   (0U)
@@ -130,9 +130,15 @@ extern "C" {
 /** \brief Symbolic Name for I2c Sequence 2 */
 #define CddI2cConf_CddI2cSequence_CddI2cSequence_2   (2U)
 
+/** \brief Symbolic Name for I2c Sequence 3 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_3   (3U)
+
+/** \brief Symbolic Name for I2c Sequence 4 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_4   (4U)
+
 
 /** \brief CDD_I2C maximum number of channels available, user configurable */
-#define CDD_I2C_MAXIMUM_CHANNEL_NUMBER          (3U)
+#define CDD_I2C_MAXIMUM_CHANNEL_NUMBER          (5U)
 
 /** \brief Symbolic Name for I2c Channel 0 */
 #define CddI2cConf_CddI2cChannel_CddI2cChannel_0   (0U)
@@ -142,6 +148,12 @@ extern "C" {
 
 /** \brief Symbolic Name for I2c Channel 2 */
 #define CddI2cConf_CddI2cChannel_CddI2cChannel_2   (2U)
+
+/** \brief Symbolic Name for I2c Channel 3 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_3   (3U)
+
+/** \brief Symbolic Name for I2c Channel 4 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_4   (4U)
 
 
 /** \brief CDD_I2C Transmission buffer maximum size, user configurable */
@@ -190,10 +202,14 @@ extern const struct Cdd_I2c_ConfigType_s CddI2cInitParams;
 extern void I2c_Iomux_Read_Callback(void);
 extern void I2c_Iomux_Write_Callback_Ptr(void);
 extern void I2c_Iomux_Write_Callback(void);
+extern void I2c_Eeprom_Read_Callback(void);
+extern void I2c_Eeprom_Address_Ptr_Reset(void);
 
 extern void I2c_Iomux_Read_Callback_Fail(uint8 Error_Code);
 extern void I2c_Iomux_Write_Callback_Ptr_Fail(uint8 Error_Code);
 extern void I2c_Iomux_Write_Callback_Fail(uint8 Error_Code);
+extern void I2c_Eeprom_Read_Callback_Fail(uint8 Error_Code);
+extern void I2c_Eeprom_Address_Ptr_Fail(uint8 Error_Code);
 
 #ifdef __cplusplus
 }

@@ -33,8 +33,18 @@ extern "C" {
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
+/*Temperature result registers*/
+#define TMP10X_RESULT_REG (0x0000U)
 
-/* None */
+/*EEPROM start address*/
+#define EEPROM_START_ADDRESS (0x00U)
+
+/*EEPROM start message length*/
+#define EEPROM_START_MESSAGE_LENGTH (0x01U)
+
+#define EEPROM_MEM_ADDRESS (0x00U)
+
+#define EEPROM_ADDR_SIZE (2U)
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */
@@ -46,9 +56,12 @@ extern "C" {
 /*                          Function Declarations                             */
 /* ========================================================================== */
 
-void I2c_appPlatformInit(void);
-void I2c_appPlatformDeInit(void);
-
+void           I2c_appPlatformInit(void);
+void           I2c_appPlatformDeInit(void);
+Std_ReturnType I2c_Buffer_Setup(void);
+Std_ReturnType I2cExample_ExternalTest_Data_Write_To_Slaves(Std_ReturnType BufferSetupReturnValue);
+Std_ReturnType I2cExample_ExternalTest_Eeprom_address_pointer_reset(Std_ReturnType BufferSetupReturnValue);
+Std_ReturnType I2cExample_ExternalTest_Receive_Data(void);
 #ifdef __cplusplus
 }
 #endif

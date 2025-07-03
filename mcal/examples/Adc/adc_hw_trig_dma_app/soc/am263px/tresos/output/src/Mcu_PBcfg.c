@@ -382,6 +382,15 @@ static CONST(Mcu_ClockConfigType, MCU_CONFIG_DATA) Mcu_ClockConfiguration[] =
     }
 };
 
+static CONST(Mcu_PwmConfigType, MCU_PBCFG) Mcu_PwmConfiguration[MCU_PWM_CHANNEL] =
+{
+    /* CDD PWM Module Channel Configuration. */
+    [0] =
+    {
+        .Mcu_PwmChannelId = 0U,
+        .Mcu_PwmGroupId = 0U,
+    }
+};
 
 static CONST(Mcu_AdcConfigType, MCU_PBCFG) Mcu_AdcConfiguration[MCU_ADC_HWUNIT] =
 {

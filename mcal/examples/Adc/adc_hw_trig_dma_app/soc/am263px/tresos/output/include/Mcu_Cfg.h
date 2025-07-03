@@ -108,7 +108,7 @@ enum
 /** \brief Enable/Disable MCU Input Crossbar */
 #define MCU_INPUT_CROSSBAR_ENABLE      (STD_ON)
 /** \brief Enable/Disable MCU PWM Enable */
-#define MCU_PWM_ENABLE (STD_OFF)
+#define MCU_PWM_ENABLE (STD_ON)
 /** \brief Enable/Disable MCU ADC Enable */
 #define MCU_ADC_ENABLE (STD_ON)
 
@@ -291,13 +291,13 @@ Reset Reason Config
 #define MCU_CLOCK_CONFIG (41U)
 
 /* MCU CDD PWM Channel */
-#define MCU_NUM_OF_CDD_PWM_CHANNELS (0U)
+#define MCU_NUM_OF_CDD_PWM_CHANNELS (1U)
 
 /* MCU CDD PWM Channel */
 #define MCU_NUM_OF_ASR_PWM_CHANNELS (0U)
 
 /* MCU PWM Channel */
-#define MCU_PWM_CHANNEL (0U)
+#define MCU_PWM_CHANNEL (1U)
 
 /* MCU ADC Channel */
 #define MCU_ADC_HWUNIT (1U)

@@ -1429,6 +1429,36 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(uint32 Channel, uint32 
 }
 #endif /*#if (STD_ON == CDD_PWM_CHOPPER)*/
 
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel, EPWM_TimeBaseCountMode Mode)
+{
+    uint32         baseAddr;
+    Std_ReturnType returnValue = E_OK;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE))
+#endif
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Enter Critical Section. */
+            SchM_Enter_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
+
+            /* Set Time base counter mode */
+            EPWM_setTimeBaseCounterMode(baseAddr, Mode);
+
+            /* Exit Critical Section. */
+            SchM_Exit_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
+        }
+        else
+        {
+            returnValue = E_NOT_OK;
+        }
+    }
+
+    return (returnValue);
+}
+
 /*
  *Design: MCAL-23465, MCAL-23466
  */

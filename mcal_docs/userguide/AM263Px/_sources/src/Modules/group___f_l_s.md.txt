@@ -12,6 +12,7 @@ title: Fls
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
 |enum| **[Fls_EraseType](../Modules/group___f_l_s.md#enum-fls_erasetype)** | ENUM for erase type names.  | 
+|enum| **[Fls_ResetPinMode](../Modules/group___f_l_s.md#enum-fls_resetpinmode)** | ENUM for Reset pin states.  | 
 |enum| **[Fls_OSPI_Modes](../Modules/group___f_l_s.md#enum-fls_ospi_modes)** 
 |typedef uint32  | **[Fls_AddressType](../Modules/group___f_l_s.md#typedef-fls_addresstype)** | FLS Address type.  | 
 |typedef uint32  | **[Fls_LengthType](../Modules/group___f_l_s.md#typedef-fls_lengthtype)** | FLS Length type.  | 
@@ -30,6 +31,20 @@ title: Fls
 
 **Brief**: 
 ENUM for erase type names. 
+
+
+
+### enum Fls_ResetPinMode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| FLS_RESET_PIN_STATE_LOW | | Reset pin state low.   |
+| FLS_RESET_PIN_STATE_HIGH | | Reset pin state high.   |
+
+
+
+
+**Brief**: 
+ENUM for Reset pin states. 
 
 
 
@@ -150,6 +165,7 @@ FLS Length type.
 | uint32 | **[Fls_SetEraseType](../Modules/group___f_l_s.md#function-fls_seterasetype)**([Fls_EraseType](../Modules/group___f_l_s.md#enum-fls_erasetype) erasetype)| Sets the parameters for required erase type. Sets the parameters required in application, based on the erase type parameter passed to this function while calling from Application.  |
 | Std_ReturnType | **[Fls_RegisterReadback](../Modules/group___f_l_s.md#function-fls_registerreadback)**([Fls_RegisterReadbackType](../Classes/struct_fls___register_readback_type.md) * RegRbPtr)| Register readback function.  |
 | Std_ReturnType | **[Fls_Set3ByteAddressMode](../Modules/group___f_l_s.md#function-fls_set3byteaddressmode)**(void )| Sets the Flash Addressing Mode to 3 byte.  |
+| Std_ReturnType | **[Fls_setResetPinMode](../Modules/group___f_l_s.md#function-fls_setresetpinmode)**([Fls_ResetPinMode](../Modules/group___f_l_s.md#enum-fls_resetpinmode) pinMode)| Updates the Flash Pin Value. Use this API to Reset Flash Step1: pinMode = FLS_RESET_PIN_STATE_HIGH Step2: pinMode = FLS_RESET_PIN_STATE_LOW Works for Am263Px-SIP and AM263Px- Rev A board.  |
 
 
 
@@ -695,6 +711,33 @@ Std_ReturnType Fls_Set3ByteAddressMode(
 
 **Brief**: 
 Sets the Flash Addressing Mode to 3 byte. 
+
+Service ID[hex] : NA
+
+
+**Returns**: 
+
+  
+* **E_OK** success 
+<br> 
+  
+* **E_NOT_OK** failure 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Fls_setResetPinMode
+
+```
+Std_ReturnType Fls_setResetPinMode(
+    Fls_ResetPinMode pinMode
+)
+```
+
+
+**Brief**: 
+Updates the Flash Pin Value. Use this API to Reset Flash Step1: pinMode = FLS_RESET_PIN_STATE_HIGH Step2: pinMode = FLS_RESET_PIN_STATE_LOW Works for Am263Px-SIP and AM263Px- Rev A board. 
 
 Service ID[hex] : NA
 

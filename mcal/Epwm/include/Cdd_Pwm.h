@@ -285,6 +285,8 @@ extern "C" {
 #define CDD_PWM_SID_HR_SFO_CAL_API ((uint8)(0x22U))
 /** \brief CDD_PWM driver service ID to check HRPWM SFO Cal. Status */
 #define CDD_PWM_SID_HR_SFO_STATUS_API ((uint8)(0x23U))
+/** \brief CDD_PWM driver service ID to set Time base counter mode */
+#define CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE ((uint8)(0x24U))
 
 /**   @} */
 
@@ -855,6 +857,25 @@ Cdd_Pwm_ChopperCfg(uint32 Channel, const CDD_PWM_ChopperCfgType *pCfg);
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(uint32 Channel, uint32 enableChopper);
 #endif /*#if (STD_ON == CDD_PWM_CHOPPER)*/
+
+/*===============================================================================================*/
+/** \brief  Function sets the mode of Time base counter
+ *
+ * This function is used to set the mode for Time base counter.
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non Reentrant
+ *
+ * \param[in] Channel
+ * \param[in] Mode. Refer \ref counterMode parameter. Example CDD_PWM_COUNTER_MODE_UP defined in Epwm\V0\Cdd_Pwm_Types.h
+ *
+ * \return Std_ReturnType
+ * \retval E_OK - Operation successful
+ * \retval E_NOT_OK - Operation failed
+ *
+ *****************************************************************************/
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel, EPWM_TimeBaseCountMode Mode);
 
 #if (STD_ON == CDD_PWM_TRIP_ZONE)
 /*===============================================================================================*/

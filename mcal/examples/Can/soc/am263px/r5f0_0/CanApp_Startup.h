@@ -69,7 +69,7 @@
 /* ========================================================================== */
 #include "app_utils.h"
 #include "sys_common.h"
-#include "mcan_transceiver.h"
+#include "ioexp_tca6416_6424.h"
 #if (STD_OFF == CDD_I2C_POLLING_MODE)
 #include "Cdd_I2c_Irq.h"
 #endif

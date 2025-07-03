@@ -27,32 +27,43 @@
 /* ========================================================================== */
 
 #include "AdcApp.h"
-#include "Epwm_Platform.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 
-/** \brief Number of channels to test */
-#define ADC_APP_NUM_CHANNEL (1U)
+/** \brief Number of channels to test
+ * In this example application, there are 2 groups configured.
+ * ADC Group 0 have 2 channels and Group 1 have 1 channel.
+ * Here the maximum number of channels from the group is used
+ */
+#define ADC_APP_MAX_CHANNELS_PER_GROUP (2U)
 
 /** \brief Default stream samples per channel to test - match this to streamNumSamples config parameter */
 #define ADC_APP_DEFAULT_STREAM_SAMPLES (1U)
 /** \brief Each group read buffer size in samples */
-#define ADC_APP_READ_BUF_SIZE_WORD (ADC_APP_DEFAULT_STREAM_SAMPLES * ADC_APP_NUM_CHANNEL)
+#define ADC_APP_READ_BUF_SIZE_WORD (ADC_APP_DEFAULT_STREAM_SAMPLES * ADC_APP_MAX_CHANNELS_PER_GROUP)
 
 /* Number of iteration to run test */
-#define ADC_APP_LOOPCNT (10U)
+#define ADC_APP_LOOPCNT (3U)
 
-/* DMA group and channel used for testing */
-#define ADC_APP_DMA_CHANNEL (0U)
-#define ADC_APP_GROUP_ID    (0U)
+/* DMA channel used for testing of ADC groups
+ * This example uses 2 ADC groups and thus 2 DMA channels used
+ * Group 0 - DMA Channel 0, Group 1 - DMA Channel 1
+ */
+#define ADC_APP_GROUP0_DMA_CH (0U)
+#define ADC_APP_GROUP1_DMA_CH (1U)
 
-/* EPWM used for testing */
-#define ADC_APP_EPWM_BASE_ADDR (0x50000000U)
+/* EPWM Channel used for testing*/
+#define ADC_APP_EPWM_CHANNEL (0U)
+
+/* EPWM Period
+ * PWM Clock 200MHz. PWM period is TBPRD = 25000U. Corresponds to 1 millisecond
+ */
+#define ADC_APP_EPWM_PERIOD (25000U)
 
 /* Log size */
-#define ADC_APP_LOG_SIZE (10U)
+#define ADC_APP_LOG_SIZE (5U)
 
 /* Trace mask */
 #define ADC_APP_TRACE_MASK (GT_INFO1 | GT_TraceState_Enable)
@@ -63,9 +74,9 @@
 
 typedef struct
 {
-    Adc_ValueGroupType dmaBuff;  /* Log buffer used for DMA*/
-    Adc_ValueGroupType hwResult; /* Log ADC HW result*/
-    Adc_StatusType     status;   /* Log ADC group status*/
+    Adc_ValueGroupType dmaBuff[ADC_MAX_GROUP][ADC_APP_READ_BUF_SIZE_WORD];  /* Log buffer used for DMA*/
+    Adc_ValueGroupType hwResult[ADC_MAX_GROUP][ADC_APP_READ_BUF_SIZE_WORD]; /* Log ADC HW result*/
+    Adc_StatusType     status;                                              /* Log ADC group status*/
 } Adc_AppLog_t;
 
 /* ========================================================================== */
@@ -78,10 +89,11 @@ static void Adc_appDeInit(void);
 static void Adc_appInterruptConfig(void);
 static void Adc_appPrintResult(uint32 loopcnt);
 static void Adc_appPrintStatus(uint32 grpIdx, Adc_StatusType status);
-static void Adc_appEpwmEnable(uint32 baseAddr);
-static void Adc_appDisableTrigger(uint32 baseAddr);
 static void Adc_appDmaTransferCallback(void *appData);
-static void Adc_appDmaConfigure(const uint16 *destPtr, uint16 length, uint32 dmaCh, uint32 srcAddr);
+static void Adc_appDmaConfigure(const uint16 *destPtr, uint16 length, uint32 dmaCh, uint32 *srcAddr, sint16 srcBIdx,
+                                sint16 destBIdx);
+static void Adc_appEpwmConfigureTrigger(uint16 period, uint16 channel);
+static void Adc_appEpwmDisableTrigger(uint16 channel);
 
 /* ========================================================================== */
 /*                            Global Variables                                */
@@ -90,13 +102,19 @@ static void Adc_appDmaConfigure(const uint16 *destPtr, uint16 length, uint32 dma
 /* Test pass flag */
 static uint32 gTestPassed = E_OK;
 
-/* Setup result buffer passed to driver - otherwise Adc_EnableHardwareTrigger will return error */
-static Adc_ValueGroupType gAdcAppSetupBuffer[ADC_MAX_GROUP][ADC_APP_READ_BUF_SIZE_WORD];
 /* Result buffer used by DMA */
 static Adc_ValueGroupType gAdcAppDmaBuffer[ADC_MAX_GROUP][ADC_APP_READ_BUF_SIZE_WORD];
 
+/* DMA channel allocated to each ADC group
+ *  In this example, DMA channel 0 is allocated for Group 0 and DMA channel 1 is allocated to Group 1
+ */
+static uint32 gAdcAppDmaChannel[ADC_MAX_GROUP] = {ADC_APP_GROUP0_DMA_CH, ADC_APP_GROUP1_DMA_CH};
+
 /* DMA callback counter */
-static volatile uint32 gAdcAppDmaCallbackCount = 0;
+static volatile uint32 gAdcAppDmaCallbackCount[ADC_MAX_GROUP];
+
+/* CDD PWM ADC SOC */
+static Cdd_Pwm_AdcSocType gAdcAppPwmAdcSocConfig;
 
 /* Application log */
 Adc_AppLog_t gAdcAppLog[ADC_APP_LOG_SIZE];
@@ -119,7 +137,7 @@ static void Adc_appTest(void)
     uint32         testPassed = E_OK;
     Adc_StatusType status;
     Std_ReturnType retVal;
-    uint32         dmaDataAddr;
+    uint32         dmaDataAddr[ADC_MAX_GROUP];
 
     /* Setup all groups */
     for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
@@ -135,7 +153,7 @@ static void Adc_appTest(void)
             GT_1trace(ADC_APP_TRACE_MASK, GT_ERR, " ADC Group %d is not IDLE!!\r\n", grpIdx);
         }
 
-        retVal = Adc_SetupResultBuffer(grpIdx, &gAdcAppSetupBuffer[grpIdx][0U]);
+        retVal = Adc_SetupResultBuffer(grpIdx, &gAdcAppDmaBuffer[grpIdx][0U]);
         if (retVal != E_OK)
         {
             testPassed = E_NOT_OK;
@@ -148,39 +166,41 @@ static void Adc_appTest(void)
         /* Reset buffers and perform a cache write back */
         memset((void *)&gAdcAppDmaBuffer, 0U, sizeof(gAdcAppDmaBuffer));
         Mcal_CacheP_wb((void *)&gAdcAppDmaBuffer, sizeof(gAdcAppDmaBuffer), Mcal_CacheP_TYPE_ALL);
+
         for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
         {
-            Adc_EnableGroupNotification(grpIdx);
+            /* Enable hardware trigger */
+            Adc_EnableHardwareTrigger(grpIdx);
+            /* Enable continue to interrupt mode */
+            Adc_SetInterruptContinuousMode(grpIdx);
+
+            /* Configure DMA channel */
+            dmaDataAddr[grpIdx] = Adc_GetReadResultBaseAddress(grpIdx);
         }
 
-        /* Enable hardware trigger */
-        Adc_EnableHardwareTrigger(ADC_APP_GROUP_ID);
-        /* Enable continue to interrupt mode */
-        Adc_SetInterruptContinuousMode(ADC_APP_GROUP_ID);
+        /* DMA configuration for ADC group 0 */
+        /* For Group 0, 2 channels used in this example. So, srcBIdx and destBIdx shall be set to 2 to read after every
+         * 2 bytes of result to move to the next consecutive result register. Also DMA update the destination buffer at
+         * gAdcAppDmaBuffer[0][0] */
+        Adc_appDmaConfigure(&gAdcAppDmaBuffer[0U][0U], AdcConfigSet.groupCfg[0].numChannels * 2U, gAdcAppDmaChannel[0],
+                            &dmaDataAddr[0], 2, 2);
 
-        /* Configure DMA channel */
-        dmaDataAddr = Adc_GetReadResultBaseAddress(ADC_APP_GROUP_ID);
-        Adc_appDmaConfigure(&gAdcAppDmaBuffer[0U][0U], ADC_APP_NUM_CHANNEL * 2U, ADC_APP_DMA_CHANNEL, dmaDataAddr);
+        /* DMA configuration for ADC group 1 */
+        /* For Group 1, Only 1 channel used. So, srcBIdx and destBIdx shall be set to 1
+         * Also DMA update the destination buffer at gAdcAppDmaBuffer[1][0]*/
+        Adc_appDmaConfigure(&gAdcAppDmaBuffer[1U][0U], AdcConfigSet.groupCfg[1].numChannels * 2U, gAdcAppDmaChannel[1],
+                            &dmaDataAddr[1], 1, 1);
 
-        /* Configure EPWM for ADC trigger */
-        Adc_appEpwmEnable(ADC_APP_EPWM_BASE_ADDR);
-        EPWM_setTimeBaseCounterMode(ADC_APP_EPWM_BASE_ADDR, EPWM_COUNTER_MODE_UP);
-
-        /* FIXME: Enable EPWM TBCLK SYNC in CONTROLSS_CTRL to start EPWM. Replace with proper macros/APIs */
-        *((volatile uint32 *)(0x502F0000 + 0x1008)) = 0x01234567;
-        *((volatile uint32 *)(0x502F0000 + 0x100C)) = 0xFEDCBA8;
-        *((volatile uint32 *)(0x502F0000 + 0x0010)) = 0x00000001;
+        /* EPWM Configuration to start the time base counter and trigger ADC SOC*/
+        Adc_appEpwmConfigureTrigger(ADC_APP_EPWM_PERIOD, ADC_APP_EPWM_CHANNEL);
 
         Adc_appPrintResult(loopcnt);
 
-        /* Disable hardware trigger for Group 0*/
-        Adc_appDisableTrigger(ADC_APP_EPWM_BASE_ADDR);
-        Adc_DisableHardwareTrigger(ADC_APP_GROUP_ID);
-
         for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
         {
-            Adc_DisableGroupNotification(grpIdx);
+            Adc_DisableHardwareTrigger(grpIdx);
         }
+        Adc_appEpwmDisableTrigger(ADC_APP_EPWM_CHANNEL);
     }
 
     if (testPassed != E_OK)
@@ -191,21 +211,20 @@ static void Adc_appTest(void)
     return;
 }
 
-void AdcApp_Group0EndNotification(void)
-{
-    /* We never get this as we are using DMA to read the data */
-    return;
-}
-
 static void Adc_appInit(void)
 {
     Std_VersionInfoType versioninfo;
 
     Adc_appPlatformInit();
+    Cdd_Pwm_Init(&CddPwmConfigSet_0);
     Cdd_Dma_Init(NULL_PTR);
     Adc_Init(&AdcConfigSet);
     Adc_appInterruptConfig();
-    Cdd_Dma_CbkRegister(ADC_APP_DMA_CHANNEL, NULL_PTR, &Adc_appDmaTransferCallback);
+    for (uint8_t grpIdx = 0; grpIdx < ADC_MAX_GROUP; grpIdx++)
+    {
+        Cdd_Dma_CbkRegister(gAdcAppDmaChannel[grpIdx], (void *)&AdcConfigSet.groupCfg[grpIdx].groupId,
+                            &Adc_appDmaTransferCallback);
+    }
 
     AppUtils_printf(APP_NAME ": STARTS !!!\r\n");
 
@@ -225,6 +244,18 @@ static void Adc_appInit(void)
     Cdd_Dma_GetVersionInfo(&versioninfo);
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " DMA MCAL Version Info\r\n");
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " ---------------------\r\n");
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " Vendor ID           : %d\r\n", versioninfo.vendorID);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " Module ID           : %d\r\n", versioninfo.moduleID);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " SW Major Version    : %d\r\n", versioninfo.sw_major_version);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " SW Minor Version    : %d\r\n", versioninfo.sw_minor_version);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " SW Patch Version    : %d\r\n", versioninfo.sw_patch_version);
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
+
+    /* CDD PWM - Get and print version */
+    Cdd_Pwm_GetVersionInfo(&versioninfo);
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " CDD PWM MCAL Version Info\r\n");
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " ---------------------\r\n");
     GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " Vendor ID           : %d\r\n", versioninfo.vendorID);
     GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " Module ID           : %d\r\n", versioninfo.moduleID);
@@ -311,6 +342,7 @@ static void Adc_appDeInit(void)
 
     Adc_DeInit();
     Cdd_Dma_DeInit();
+    Cdd_Pwm_DeInit();
     Adc_appPlatformDeInit();
 
     return;
@@ -343,36 +375,54 @@ static void Adc_appPrintResult(uint32 loopcnt)
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
     GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " Read Buffer Content (Loop %d)\r\n", loopcnt);
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " ----------------------------\r\n");
-    for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
-    {
-        grpCfg    = &AdcConfigSet.groupCfg[grpIdx];
-        hwUnitCfg = &AdcConfigSet.hwUnitCfg[grpCfg->hwUnitId];
-
-        GT_3trace(ADC_APP_TRACE_MASK, GT_INFO, " ADC Group %d, HW Unit %d, Base 0x%08X:\r\n", grpIdx,
-                  hwUnitCfg->hwUnitId, hwUnitCfg->baseAddr);
-        GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " ----------------------------------------\r\n");
-    }
-
-    dmaDataAddr = Adc_GetReadResultBaseAddress(ADC_APP_GROUP_ID);
     for (uint16_t logIndex = 0U; logIndex < ADC_APP_LOG_SIZE; logIndex++)
     {
-        Mcal_CacheP_inv((void *)gAdcAppDmaBuffer, sizeof(gAdcAppDmaBuffer), Mcal_CacheP_TYPE_ALL);
+        for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
+        {
+            grpCfg = &AdcConfigSet.groupCfg[grpIdx];
 
-        gAdcAppLog[logIndex].dmaBuff  = gAdcAppDmaBuffer[0U][0U];
-        gAdcAppLog[logIndex].hwResult = *((volatile uint16 *)(dmaDataAddr));
-        gAdcAppLog[logIndex].status   = Adc_GetGroupStatus(0);
+            /* Store the buffer data*/
+            dmaDataAddr = Adc_GetReadResultBaseAddress(grpIdx);
 
+            for (uint8 chIdx = 0U; chIdx < grpCfg->numChannels; chIdx++)
+            {
+                Mcal_CacheP_inv((void *)gAdcAppDmaBuffer, sizeof(gAdcAppDmaBuffer), Mcal_CacheP_TYPE_ALL);
+
+                gAdcAppLog[logIndex].dmaBuff[grpIdx][chIdx]  = gAdcAppDmaBuffer[grpIdx][chIdx];
+                gAdcAppLog[logIndex].hwResult[grpIdx][chIdx] = *((volatile uint16 *)(dmaDataAddr));
+                dmaDataAddr                                  = dmaDataAddr + 2; /* Move to next result address*/
+                gAdcAppLog[logIndex].status                  = Adc_GetGroupStatus(grpIdx);
+            }
+        }
         AppUtils_delay(100); /* Capture log every 100ms */
     }
 
+    hwUnitCfg = &AdcConfigSet.hwUnitCfg[grpCfg->hwUnitId];
+
+    GT_2trace(ADC_APP_TRACE_MASK, GT_INFO, " HW Unit %d, Base 0x%08X:\r\n", hwUnitCfg->hwUnitId, hwUnitCfg->baseAddr);
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " -------------------------\r\n");
+
+    /* Print the hardware result and dma buffer */
     for (uint16_t logIndex = 0U; logIndex < ADC_APP_LOG_SIZE; logIndex++)
     {
-        GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " [Log %d] ", logIndex);
-        GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " dmaBuff: %d,", gAdcAppLog[logIndex].dmaBuff);
-        GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " HWResult: %d,", gAdcAppLog[logIndex].hwResult);
-        GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, "     ");
-        Adc_appPrintStatus(0, gAdcAppLog[logIndex].status);
+        GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " [Log %d]\r\n", logIndex);
         GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
+
+        for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
+        {
+            grpCfg = &AdcConfigSet.groupCfg[grpIdx];
+            GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  ADC Group %d\r\n", grpIdx);
+
+            for (uint8 chIdx = 0; chIdx < grpCfg->numChannels; chIdx++)
+            {
+                GT_3trace(ADC_APP_TRACE_MASK, GT_INFO, " dmaBuff[%d][%d]: %d\t", grpIdx, chIdx,
+                          gAdcAppLog[logIndex].dmaBuff[grpIdx][chIdx]);
+                GT_3trace(ADC_APP_TRACE_MASK, GT_INFO, " HWResult[%d][%d]: %d\r\n", grpIdx, chIdx,
+                          gAdcAppLog[logIndex].hwResult[grpIdx][chIdx]);
+            }
+            Adc_appPrintStatus(grpIdx, gAdcAppLog[logIndex].status);
+            GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n\r\n");
+        }
     }
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
 
@@ -399,155 +449,38 @@ static void Adc_appPrintStatus(uint32 grpIdx, Adc_StatusType status)
     }
 }
 
-static void Adc_appEpwmEnable(uint32 baseAddr)
-{
-    /* Time Base - EPWM Clock 200 MHz */
-    EPWM_setClockPrescaler(baseAddr, EPWM_CLOCK_DIVIDER_8, EPWM_HSCLOCK_DIVIDER_1);
-    EPWM_setTimeBasePeriod(baseAddr, 25000);
-
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_TBPRD_TBPRDHR);
-    EPWM_setPeriodLoadMode(baseAddr, EPWM_PERIOD_SHADOW_LOAD);
-    EPWM_setTimeBaseCounter(baseAddr, 0);
-    EPWM_setTimeBaseCounterMode(baseAddr, EPWM_COUNTER_MODE_STOP_FREEZE);
-    EPWM_setCountModeAfterSync(baseAddr, EPWM_COUNT_MODE_DOWN_AFTER_SYNC);
-    EPWM_disablePhaseShiftLoad(baseAddr);
-    EPWM_setPhaseShift(baseAddr, 0);
-    EPWM_enableSyncOutPulseSource(baseAddr, 0);
-    EPWM_setSyncInPulseSource(baseAddr, EPWM_SYNC_IN_PULSE_SRC_DISABLE);
-    EPWM_setOneShotSyncOutTrigger(baseAddr, EPWM_OSHT_SYNC_OUT_TRIG_SYNC);
-
-    /* Counter Compare */
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_A, 12500);
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_CMPA_CMPAHR);
-
-    EPWM_setCounterCompareShadowLoadMode(baseAddr, EPWM_COUNTER_COMPARE_A, EPWM_COMP_LOAD_ON_CNTR_ZERO);
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_B, 0);
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_CMPB_CMPBHR);
-
-    EPWM_setCounterCompareShadowLoadMode(baseAddr, EPWM_COUNTER_COMPARE_B, EPWM_COMP_LOAD_ON_CNTR_ZERO);
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_C, 0);
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_CMPC);
-
-    EPWM_setCounterCompareShadowLoadMode(baseAddr, EPWM_COUNTER_COMPARE_C, EPWM_COMP_LOAD_ON_CNTR_ZERO);
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_D, 0);
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_CMPD);
-
-    EPWM_setCounterCompareShadowLoadMode(baseAddr, EPWM_COUNTER_COMPARE_D, EPWM_COMP_LOAD_ON_CNTR_ZERO);
-
-    /* Action Qualifier */
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_AQCSFRC);
-    EPWM_setActionQualifierContSWForceShadowMode(baseAddr, EPWM_AQ_SW_SH_LOAD_ON_CNTR_ZERO);
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_AQCTLA_AQCTLA2);
-    EPWM_disableActionQualifierShadowLoadMode(baseAddr, EPWM_ACTION_QUALIFIER_A);
-    EPWM_setActionQualifierShadowLoadMode(baseAddr, EPWM_ACTION_QUALIFIER_A, EPWM_AQ_LOAD_ON_CNTR_ZERO);
-    EPWM_setActionQualifierT1TriggerSource(baseAddr, EPWM_AQ_TRIGGER_EVENT_TRIG_DCA_1);
-    EPWM_setActionQualifierT2TriggerSource(baseAddr, EPWM_AQ_TRIGGER_EVENT_TRIG_DCA_1);
-    EPWM_setActionQualifierSWAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE);
-    EPWM_setActionQualifierContSWForceAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_SW_DISABLED);
-    EPWM_disableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_AQCTLB_AQCTLB2);
-    EPWM_disableActionQualifierShadowLoadMode(baseAddr, EPWM_ACTION_QUALIFIER_B);
-    EPWM_setActionQualifierShadowLoadMode(baseAddr, EPWM_ACTION_QUALIFIER_B, EPWM_AQ_LOAD_ON_CNTR_ZERO);
-    EPWM_setActionQualifierT1TriggerSource(baseAddr, EPWM_AQ_TRIGGER_EVENT_TRIG_DCA_1);
-    EPWM_setActionQualifierT2TriggerSource(baseAddr, EPWM_AQ_TRIGGER_EVENT_TRIG_DCA_1);
-    EPWM_setActionQualifierSWAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE);
-    EPWM_setActionQualifierContSWForceAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_SW_DISABLED);
-
-    /* Events */
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_PERIOD);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE, EPWM_AQ_OUTPUT_ON_T1_COUNT_UP);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_T1_COUNT_DOWN);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE, EPWM_AQ_OUTPUT_ON_T2_COUNT_UP);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_T2_COUNT_DOWN);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_PERIOD);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE, EPWM_AQ_OUTPUT_ON_T1_COUNT_UP);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_T1_COUNT_DOWN);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE, EPWM_AQ_OUTPUT_ON_T2_COUNT_UP);
-    EPWM_setActionQualifierAction(baseAddr, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_NO_CHANGE,
-                                  EPWM_AQ_OUTPUT_ON_T2_COUNT_DOWN);
-
-    /* Event Trigger */
-    EPWM_disableInterrupt(baseAddr);
-    EPWM_setInterruptSource(baseAddr, EPWM_INT_TBCTR_ZERO, EPWM_INT_TBCTR_ZERO);
-    EPWM_setInterruptEventCount(baseAddr, 0);
-    EPWM_disableInterruptEventCountInit(baseAddr);
-    EPWM_setInterruptEventCountInitValue(baseAddr, 0);
-
-    EPWM_enableADCTrigger(baseAddr, EPWM_SOC_A);
-    EPWM_setADCTriggerSource(baseAddr, EPWM_SOC_A, EPWM_SOC_TBCTR_U_CMPA, EPWM_SOC_TBCTR_U_CMPA);
-    EPWM_setADCTriggerEventPrescale(baseAddr, EPWM_SOC_A, 1);
-    EPWM_disableADCTriggerEventCountInit(baseAddr, EPWM_SOC_A);
-    EPWM_setADCTriggerEventCountInitValue(baseAddr, EPWM_SOC_A, 0);
-
-    EPWM_disableADCTrigger(baseAddr, EPWM_SOC_B);
-    EPWM_setADCTriggerSource(baseAddr, EPWM_SOC_B, EPWM_SOC_DCxEVT1, EPWM_SOC_DCxEVT1);
-    EPWM_setADCTriggerEventPrescale(baseAddr, EPWM_SOC_B, 0);
-    EPWM_disableADCTriggerEventCountInit(baseAddr, EPWM_SOC_B);
-    EPWM_setADCTriggerEventCountInitValue(baseAddr, EPWM_SOC_B, 0);
-
-    /* Global Load */
-    EPWM_disableGlobalLoad(baseAddr);
-    EPWM_setGlobalLoadTrigger(baseAddr, EPWM_GL_LOAD_PULSE_CNTR_ZERO);
-    EPWM_setGlobalLoadEventPrescale(baseAddr, 0);
-    EPWM_disableGlobalLoadOneShotMode(baseAddr);
-
-    /* EPWM Module */
-    EPWM_lockRegisters(baseAddr, 0);
-
-    return;
-}
-
-static void Adc_appDisableTrigger(uint32 baseAddr)
-{
-    EPWM_disableADCTrigger(baseAddr, EPWM_SOC_A);
-    EPWM_disableADCTrigger(baseAddr, EPWM_SOC_B);
-    EPWM_setTimeBaseCounterMode(baseAddr, EPWM_COUNTER_MODE_STOP_FREEZE);
-
-    return;
-}
-
 static void Adc_appDmaTransferCallback(void *appData)
 {
-    /* DMA callback function for the application to handle */
-    gAdcAppDmaCallbackCount++;
+    /* DMA callback function for the application to handle .
+     * Here only 2 groups used in this example. So, check whether the appData is ADC_GROUP_ID_0 else ADC_GROUP_ID_1
+     * and increment the corresponding array index value */
+
+    uint8 groupId = *(uint8 *)appData;
+    if (groupId == ADC_GROUP_ID_0)
+    {
+        gAdcAppDmaCallbackCount[groupId]++;
+    }
+    else
+    {
+        gAdcAppDmaCallbackCount[groupId]++;
+    }
 
     return;
 }
 
-static void Adc_appDmaConfigure(const uint16 *destPtr, uint16 length, uint32 dmaCh, uint32 srcAddr)
+static void Adc_appDmaConfigure(const uint16 *destPtr, uint16 length, uint32 dmaCh, uint32 *srcAddr, sint16 srcBIdx,
+                                sint16 destBIdx)
 {
     Cdd_Dma_ParamEntry edmaParam;
 
-    edmaParam.srcPtr     = (void *)(srcAddr);
+    edmaParam.srcPtr     = (void *)(srcAddr[0]);
     edmaParam.destPtr    = (void *)(destPtr);
     edmaParam.aCnt       = (uint16)length;
     edmaParam.bCnt       = (uint16)1U;
     edmaParam.cCnt       = (uint16)1U;
     edmaParam.bCntReload = 0U;
-    edmaParam.srcBIdx    = (sint16)0;
-    edmaParam.destBIdx   = (sint16)0;
+    edmaParam.srcBIdx    = (sint16)srcBIdx;
+    edmaParam.destBIdx   = (sint16)destBIdx;
     edmaParam.srcCIdx    = (sint16)0;
     edmaParam.destCIdx   = (sint16)2;
     /* Note: Static mask will result in rearming the EDMA with the same set of param config for every transfer */
@@ -558,6 +491,38 @@ static void Adc_appDmaConfigure(const uint16 *destPtr, uint16 length, uint32 dma
     Cdd_Dma_EnableTransferRegion(dmaCh, CDD_EDMA_TRIG_MODE_EVENT);
 
     return;
+}
+
+static void Adc_appEpwmConfigureTrigger(uint16 period, uint16 channel)
+{
+    Cdd_Pwm_channelParametertype Cdd_Pwm_Param;
+
+    Cdd_Pwm_Param.ChannelNumber = channel;
+    Cdd_Pwm_Param.Period        = period;
+    Cdd_Pwm_Param.DutyCycle     = CDD_PWM_DUTYCYCLE_MAX - 1U;
+    Cdd_Pwm_Param.Phase         = 0U;
+    Cdd_Pwm_Param.Output        = CDD_PWM_OUTPUT_CH_A;
+    Cdd_Pwm_SetPeriodDutyPhase(Cdd_Pwm_Param);
+
+    /* Enable and set ADC trigger source */
+    gAdcAppPwmAdcSocConfig.channelEnable           = TRUE;
+    gAdcAppPwmAdcSocConfig.adcSocSource            = CDD_PWM_SOC_A;
+    gAdcAppPwmAdcSocConfig.adcInterruptSource      = CDD_PWM_SOC_TBCTR_ZERO;
+    gAdcAppPwmAdcSocConfig.adcMixedInterruptSource = CDD_PWM_SOC_TBCTR_ZERO;
+    Cdd_Pwm_SetAdcTrigger(channel, gAdcAppPwmAdcSocConfig);
+
+    /* Start the counter */
+    Cdd_Pwm_SetTimeBaseCounterMode(channel, CDD_PWM_COUNTER_MODE_UP);
+}
+
+static void Adc_appEpwmDisableTrigger(uint16 channel)
+{
+    /* Disable PWM adc trigger*/
+    gAdcAppPwmAdcSocConfig.channelEnable = FALSE;
+    Cdd_Pwm_SetAdcTrigger(channel, gAdcAppPwmAdcSocConfig);
+
+    /* Stop the EPWM time base counter */
+    Cdd_Pwm_SetTimeBaseCounterMode(channel, CDD_PWM_COUNTER_MODE_STOP_FREEZE);
 }
 
 void SchM_Enter_Mcu_MCU_EXCLUSIVE_AREA_0(void)
@@ -596,6 +561,16 @@ void SchM_Enter_Cdd_Dma_DMA_EXCLUSIVE_AREA_0(void)
 }
 
 void SchM_Exit_Cdd_Dma_DMA_EXCLUSIVE_AREA_0(void)
+{
+    AppUtils_SchM_Exit_EXCLUSIVE_AREA_0();
+}
+
+void SchM_Enter_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0(void)
+{
+    AppUtils_SchM_Enter_EXCLUSIVE_AREA_0();
+}
+
+void SchM_Exit_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0(void)
 {
     AppUtils_SchM_Exit_EXCLUSIVE_AREA_0();
 }
