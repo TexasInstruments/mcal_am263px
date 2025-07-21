@@ -464,13 +464,13 @@ export epwm_SOCLIST
 ############################
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app flsdiag_app epwm_app epwm_tz_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app cdd_cmpss_app
+mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app flsdiag_app epwm_app epwm_tz_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app cdd_cmpss_app
 mcal_mcal_APP_LIB_LIST += app_utils
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwepwm kwuart kwwdg kwport kwfsirx kwfsitx kwlin
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app adc_app adc_resolver_app adc_hw_trig_dma_app eth_app eth_test_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app fls_app flsdiag_ospi_app epwm_app epwm_tz_app cdd_flc_app cdd_cmpss_app
+mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app adc_app adc_resolver_app adc_resolver_dma_app adc_hw_trig_dma_app eth_app eth_test_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app fls_app flsdiag_ospi_app epwm_app epwm_tz_app cdd_flc_app cdd_cmpss_app
 mcal_mcal_APP_LIB_LIST += app_utils
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwepwm kwuart kwwdg kwport kwfsirx kwfsitx kwlin
 endif
@@ -482,7 +482,7 @@ mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwgpt kwi2c kwicu kw
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_interrupt_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app flsdiag_ospi_app lin_app epwm_app fsirx_app cdd_flc_app cdd_cmpss_app
+mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_interrupt_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app flsdiag_ospi_app lin_app epwm_app fsirx_app cdd_flc_app cdd_cmpss_app
 mcal_mcal_APP_LIB_LIST += app_utils
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwuart kwwdg kwport kwlin kwepwm kwfsirx kwfsitx
 endif
@@ -649,10 +649,17 @@ adc_resolver_app_SOCLIST = am263px
 export adc_resolver_app_SOCLIST
 export adc_resolver_app_PLATFORM_DEPENDENCY
 
+adc_resolver_dma_app_RELPATH = examples/Adc/adc_resolver_dma_app
+adc_resolver_dma_app_PATH = $(mcal_PATH)/$(adc_resolver_dma_app_RELPATH)
+adc_resolver_dma_app_PLATFORM_DEPENDENCY = yes
+adc_resolver_dma_app_SOCLIST = am263px
+export adc_resolver_dma_app_SOCLIST
+export adc_resolver_dma_app_PLATFORM_DEPENDENCY
+
 adc_hw_trig_dma_app_RELPATH = examples/Adc/adc_hw_trig_dma_app
 adc_hw_trig_dma_app_PATH = $(mcal_PATH)/$(adc_hw_trig_dma_app_RELPATH)
 adc_hw_trig_dma_app_PLATFORM_DEPENDENCY = yes
-adc_hw_trig_dma_app_SOCLIST = am263px
+adc_hw_trig_dma_app_SOCLIST = $(DEFAULT_SOCLIST)
 export adc_hw_trig_dma_app_SOCLIST
 export adc_hw_trig_dma_app_PLATFORM_DEPENDENCY
 

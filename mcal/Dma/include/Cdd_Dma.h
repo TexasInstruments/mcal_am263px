@@ -64,7 +64,7 @@ extern "C" {
 /** \brief Driver Implementation Major Version */
 #define CDD_DMA_SW_MAJOR_VERSION (10U)
 /** \brief Driver Implementation Minor Version */
-#define CDD_DMA_SW_MINOR_VERSION (1U)
+#define CDD_DMA_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
 #define CDD_DMA_SW_PATCH_VERSION (0U)
 /** @} */

@@ -56,6 +56,9 @@
 /* Number of iteration to run test */
 #define ADC_APP_LOOPCNT (10U)
 
+/* Trace mask */
+#define ADC_APP_TRACE_MASK (GT_INFO1 | GT_TraceState_Enable)
+
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -117,14 +120,14 @@ static void Adc_appTest(void)
         if (status != ADC_IDLE)
         {
             testPassed = E_NOT_OK;
-            GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, " ADC Group %d is not IDLE!!\r\n", grpIdx);
+            GT_1trace(ADC_APP_TRACE_MASK, GT_ERR, " ADC Group %d is not IDLE!!\r\n", grpIdx);
         }
 
         retVal = Adc_SetupResultBuffer(grpIdx, &gAdcAppSetupBuffer[grpIdx][0U]);
         if (retVal != E_OK)
         {
             testPassed = E_NOT_OK;
-            GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, " ADC Group %d setup buffer failed!!\r\n", grpIdx);
+            GT_1trace(ADC_APP_TRACE_MASK, GT_ERR, " ADC Group %d setup buffer failed!!\r\n", grpIdx);
         }
     }
 
@@ -157,7 +160,7 @@ static void Adc_appTest(void)
                     if (status != ADC_IDLE)
                     {
                         testPassed = E_NOT_OK;
-                        GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, " ADC Group %d is not IDLE!!\r\n", grpIdx);
+                        GT_1trace(ADC_APP_TRACE_MASK, GT_ERR, " ADC Group %d is not IDLE!!\r\n", grpIdx);
                     }
                     break;
                 }
@@ -230,17 +233,18 @@ static void Adc_appInit(void)
     RDC_disableResolver(MCAL_CSL_CONTROLSS_HW_RESOLVER_U_BASE, FALSE);
 
     Adc_Init(&AdcConfigSet);
+
     /* Get and print version */
     Adc_GetVersionInfo(&versioninfo);
-    GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " \r\n");
-    GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " ADC MCAL Version Info\r\n");
-    GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " ---------------------\r\n");
-    GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " Vendor ID           : %d\r\n", versioninfo.vendorID);
-    GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " Module ID           : %d\r\n", versioninfo.moduleID);
-    GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " SW Major Version    : %d\r\n", versioninfo.sw_major_version);
-    GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " SW Minor Version    : %d\r\n", versioninfo.sw_minor_version);
-    GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " SW Patch Version    : %d\r\n", versioninfo.sw_patch_version);
-    GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, " \r\n");
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " ADC MCAL Version Info\r\n");
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " ---------------------\r\n");
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " Vendor ID           : %d\r\n", versioninfo.vendorID);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " Module ID           : %d\r\n", versioninfo.moduleID);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " SW Major Version    : %d\r\n", versioninfo.sw_major_version);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " SW Minor Version    : %d\r\n", versioninfo.sw_minor_version);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, " SW Patch Version    : %d\r\n", versioninfo.sw_patch_version);
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
 
     retVal = Adc_appIoMuxSetup();
     if (retVal != E_OK)
@@ -253,12 +257,11 @@ static void Adc_appInit(void)
 
 static void Adc_appDeInit(void)
 {
-    GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO, APP_NAME ": Stack Usage: %d bytes\n\r",
-              AppUtils_getStackUsage());
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, APP_NAME ": Stack Usage: %d bytes\n\r", AppUtils_getStackUsage());
     if (AppUtils_checkStackAndSectionCorruption() != E_OK)
     {
         gTestPassed = E_NOT_OK;
-        GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, APP_NAME ": Stack/section corruption!!!\n\r");
+        GT_0trace(ADC_APP_TRACE_MASK, GT_ERR, APP_NAME ": Stack/section corruption!!!\n\r");
     }
 
     if (E_OK == gTestPassed)
@@ -312,23 +315,22 @@ static void Adc_appPrintResult(uint32 loopcnt)
     const Adc_GroupConfigType  *grpCfg;
     const Adc_HwUnitConfigType *hwUnitCfg;
 
-    GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO1, " \r\n");
-    GT_1trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO1, " Read Buffer Content (Loop %d)\r\n", loopcnt);
-    GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO1, " ----------------------------\r\n");
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO1, " \r\n");
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO1, " Read Buffer Content (Loop %d)\r\n", loopcnt);
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO1, " ----------------------------\r\n");
     for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
     {
         grpCfg    = &AdcConfigSet.groupCfg[grpIdx];
         hwUnitCfg = &AdcConfigSet.hwUnitCfg[grpCfg->hwUnitId];
 
-        GT_3trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO1, " ADC Group %d, HW Unit %d, Base 0x%08X:\r\n", grpIdx,
+        GT_3trace(ADC_APP_TRACE_MASK, GT_INFO1, " ADC Group %d, HW Unit %d, Base 0x%08X:\r\n", grpIdx,
                   hwUnitCfg->hwUnitId, hwUnitCfg->baseAddr);
-        GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO1, " ----------------------------------------\r\n");
+        GT_0trace(ADC_APP_TRACE_MASK, GT_INFO1, " ----------------------------------------\r\n");
         for (uint32 chIdx = 0U; chIdx < grpCfg->numChannels; chIdx++)
         {
-            GT_2trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO1, " CH%d: 0x%08X\r\n", chIdx,
-                      gAdcAppReadBuffer[grpIdx][chIdx]);
+            GT_2trace(ADC_APP_TRACE_MASK, GT_INFO1, " CH%d: 0x%08X\r\n", chIdx, gAdcAppReadBuffer[grpIdx][chIdx]);
         }
-        GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_INFO1, " \r\n");
+        GT_0trace(ADC_APP_TRACE_MASK, GT_INFO1, " \r\n");
     }
 
     return;

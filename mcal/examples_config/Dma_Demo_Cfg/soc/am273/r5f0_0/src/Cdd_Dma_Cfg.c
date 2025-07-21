@@ -37,7 +37,7 @@
  *  VERSION CHECK
  *********************************************************************************************************************/
 #if ( (CDD_DMA_MAJOR_VERSION != (10U)) \
-    ||(CDD_DMA_MINOR_VERSION != (1U)))
+    ||(CDD_DMA_MINOR_VERSION != (2U)))
   #error "Version numbers of Cdd_Dma_Cfg.c and Cdd_Dma_Cfg.h are inconsistent!"
 #endif
 

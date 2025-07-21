@@ -104,6 +104,20 @@ static inline void Cdd_Dma_Soc_xbarSelectDmaXBarInputSource(uint32 base, uint8 o
                 (uint32)group5_muxctl & CDD_DMA_CSL_CONTROLSS_DMAXBAR_DMAXBAR0_G5_SEL_MASK);
 }
 
+#if defined(AM263PX_PLATFORM)
+static inline void Cdd_Dma_Soc_xbarSelectDmaXBarInputSourceExt(uint32 base, uint8 out, uint8 group_select,
+                                                               uint8 group0_muxctl, uint8 group1_muxctl,
+                                                               uint8 group2_muxctl, uint8 group3_muxctl,
+                                                               uint8 group4_muxctl, uint8 group5_muxctl,
+                                                               uint8 group6_muxctl)
+{
+    Cdd_Dma_Soc_xbarSelectDmaXBarInputSource(base, out, group_select, group0_muxctl, group1_muxctl, group2_muxctl,
+                                             group3_muxctl, group4_muxctl, group5_muxctl);
+    HW_WR_REG32(base + (out * CDD_DMA_CSL_CONTROLSS_DMAXBAR_STEP) + CDD_DMA_CSL_CONTROLSS_DMAXBAR_DMAXBAR0_G6,
+                (uint32)group6_muxctl & CDD_DMA_CSL_CONTROLSS_DMAXBAR_DMAXBAR0_G6_SEL_MASK);
+}
+#endif
+
 /**
  * \brief SoC level xbars: API to select input source of EDMA Trigger XBar
  *

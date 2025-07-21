@@ -61,7 +61,7 @@ extern "C" {
 /** \brief CDD DMA configuration Major Version */
 #define CDD_DMA_MAJOR_VERSION                 (10U)
 /** \brief CDD DMA configuration Minor Version */
-#define CDD_DMA_MINOR_VERSION    (1U)
+#define CDD_DMA_MINOR_VERSION    (2U)
 /** \brief CDD DMA configuration Patch Version */
 #define CDD_DMA_PATCH_VERSION                 (0U)
 /* @} */
@@ -150,9 +150,9 @@ extern "C" {
 #define CDD_DMA_CSL_MSS_CTRL_R5_STATUS_REG_R5_STATUS_REG_LOCK_STEP_RESETVAL   (0x00000000U)
 #define CDD_DMA_CSL_MSS_CTRL_R5_STATUS_REG_R5_STATUS_REG_LOCK_STEP_MAX        (0x00000001U)
 
-/** \brief CDD DMA RAM Size and address. */ 
-#define CDD_DMA_CSL_MSS_TCMA_RAM_SIZE               (0x00008000U)  
-#define CDD_DMA_CSL_MSS_TCMB_RAM_SIZE               (0x00008000U) 
+/** \brief CDD DMA RAM Size and address. */
+#define CDD_DMA_CSL_MSS_TCMA_RAM_SIZE               (0x00008000U)
+#define CDD_DMA_CSL_MSS_TCMB_RAM_SIZE               (0x00008000U)
 #define CDD_DMA_CSL_MSS_TCMA_RAM_BASE               (0x00000000U)
 #define CDD_DMA_CSL_MSS_TCMB_RAM_BASE               (0x00080000U)
 
@@ -163,7 +163,7 @@ extern "C" {
 #define CDD_DMA_CSL_MSS_L2_U_BASE                   (0x10200000U)
 #define CDD_DMA_CSL_MSS_L2_RAM_BASE                 CDD_DMA_CSL_MSS_L2_U_BASE
 #define CDD_DMA_CSL_MSS_L2_U_SIZE                   (0x000F0000U)
-#define CDD_DMA_CSL_MSS_L2_RAM_SIZE                 CDD_DMA_CSL_MSS_L2_U_SIZE 
+#define CDD_DMA_CSL_MSS_L2_RAM_SIZE                 CDD_DMA_CSL_MSS_L2_U_SIZE
 #define CDD_DMA_CSL_GLOB_MSS_L2_RAM_BASE            (0xC0200000U)
 
 /* PRE-COMPLIE variant related macro(s) */

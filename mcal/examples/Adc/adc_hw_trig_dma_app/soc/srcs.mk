@@ -1,6 +1,6 @@
 #App SOC files
 SRCDIR += soc/$(SOC)/$(CORE)
-INCDIR += soc
+INCDIR += soc/$(SOC)/$(CORE)
 SRCS_COMMON += AdcApp_Platform.c
 
 #App config files

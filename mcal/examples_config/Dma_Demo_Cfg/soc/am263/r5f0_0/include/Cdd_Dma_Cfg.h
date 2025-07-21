@@ -61,7 +61,7 @@ extern "C" {
 /** \brief CDD DMA configuration Major Version */
 #define CDD_DMA_MAJOR_VERSION                 (10U)
 /** \brief CDD DMA configuration Minor Version */
-#define CDD_DMA_MINOR_VERSION                 (1U)
+#define CDD_DMA_MINOR_VERSION                 (2U)
 /** \brief CDD DMA configuration Patch Version */
 #define CDD_DMA_PATCH_VERSION                 (0U)
 /* @} */
@@ -132,7 +132,7 @@ extern "C" {
 
 /** \brief CDD DMA RAM Size and address. */
 #define CDD_DMA_CSL_MSS_TCMA_RAM_BASE               (0x00000000U)
-#define CDD_DMA_CSL_MSS_TCMA_RAM_SIZE               (0x00008000U)  
+#define CDD_DMA_CSL_MSS_TCMA_RAM_SIZE               (0x00008000U)
 #define CDD_DMA_CSL_MSS_TCMB_RAM_BASE               (0x00080000U)
 #define CDD_DMA_CSL_MSS_TCMB_RAM_SIZE               (0x00008000U)
 

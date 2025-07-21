@@ -13,33 +13,33 @@
 
 		<module id="Cdd_Dma_TI_AM263Px"
 			label="Cdd_Dma"
-			mandatory="false" 
+			mandatory="false"
 			allowMultiple="false"
-			description="TI SitaraMCU CDD DMA plug-in" 
+			description="TI SitaraMCU CDD DMA plug-in"
 			copyright="(C) 2023 Texas Instruments Incorporated"
 			swVersionMajor="10"
-			swVersionMinor="1"
-			swVersionPatch="0" 
-			swVersionSuffix="" 
-			specVersionMajor="4" 
-			specVersionMinor="6" 
-			specVersionPatch="0" 
-			specVersionSuffix="" 
-			relVersionPrefix="AUTOSAR" 
-			relVersionMajor="4" 
-			relVersionMinor="3" 
-			relVersionPatch="1" 
-			relVersionSuffix="0" 
-			categoryType="Cdd_Dma" 
-			categoryLayer="Complex Device Driver" 
-			categoryCategory="CDD" 
+			swVersionMinor="2"
+			swVersionPatch="0"
+			swVersionSuffix=""
+			specVersionMajor="4"
+			specVersionMinor="6"
+			specVersionPatch="0"
+			specVersionSuffix=""
+			relVersionPrefix="AUTOSAR"
+			relVersionMajor="4"
+			relVersionMinor="3"
+			relVersionPatch="1"
+			relVersionSuffix="0"
+			categoryType="Cdd_Dma"
+			categoryLayer="Complex Device Driver"
+			categoryCategory="CDD"
 			categoryComponent="ECUC">
 			<ecuType target="ARM" derivate="AM263Px"/>
 		</module>
 	</extension>
 
-	<extension point="dreisoft.tresos.launcher2.plugin.configuration" 
-		id="Cdd_Dma_TI_AM263Px_ConfigId" 
+	<extension point="dreisoft.tresos.launcher2.plugin.configuration"
+		id="Cdd_Dma_TI_AM263Px_ConfigId"
 		name="Cdd_Dma_TI_AM263Px Configuration">
 		<configuration moduleId="Cdd_Dma_TI_AM263Px">
 			<schema>
@@ -68,8 +68,8 @@
 			</editor>
 		</configuration>
 	</extension>
-	<extension point="dreisoft.tresos.launcher2.plugin.generator" 
-		id="Cdd_Dma_TI_AM263Px_GeneratorId" 
+	<extension point="dreisoft.tresos.launcher2.plugin.generator"
+		id="Cdd_Dma_TI_AM263Px_GeneratorId"
 		name="Cdd_Dma_TI_AM263Px Generator">
 		<generator class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator" id="CDDDmaGenerator_AM263Px" moduleId="Cdd_Dma_TI_AM263Px">
 

@@ -1,0 +1,1549 @@
+<?xml version='1.0'?>
+<datamodel version="8.0" 
+           xmlns="http://www.tresos.de/_projects/DataModel2/18/root.xsd" 
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/18/attribute.xsd" 
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar" 
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
+         xmlns:ce="http://www.tresos.de/_projects/DataModel2/18/childenable.xsd" 
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="Cdd_Pwm" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+          <d:chc name="Cdd_Pwm" type="AR-ELEMENT" value="MODULE-CONFIGURATION">
+            <d:ctr type="MODULE-CONFIGURATION">
+              <a:a name="DEF" value="ASPath:/TI_AM261x/Cdd_Pwm"/>
+              <a:a name="IMPORTER_INFO" value="@REC"/>
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION" 
+                     value="VariantPostBuild">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+              </d:var>
+              <d:ctr name="CddPwmConfigurationOfOptionalApis" 
+                     type="IDENTIFIABLE">
+                <a:a name="ENABLE" value="true"/>
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddPwmDeInitApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmGetCounterApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmVersionInfoApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmEnableRegisterReadbackApi" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmSetRelativeThreshold" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmSetAbsoluteThreshold" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmSetPinAction" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmSetPeriodDutyPhase" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmSetOutputToIdle" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmGetCounterStatus" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmCounterComparatorCfg" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmSetAdcTriggerApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmNotificationSupported" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:ctr name="CddPwmGeneral" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddPwmDevErrorDetect" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmEventTriggerEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmTripZoneEnable" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmDigitalCompareEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmDeadBandEnable" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmChopperEnable" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmActionQualifierEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmChannelTimerBaseSyncEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmChannelHighResPwmEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmHrSetPeriodDutyEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmHrSfoCalibrationEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmHrSfoStatusEnable" type="BOOLEAN" 
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmTypeofInterruptFunction" type="ENUMERATION" 
+                       value="CDD_PWM_ISR_VOID">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmSystemClock" type="INTEGER" value="200000000">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmMaxDutyCycle" type="INTEGER" value="65536">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:ctr name="CddPwmPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddPwmDeviceVariant" type="ENUMERATION" 
+                       value="AM261X">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddPwmNumberofChannel" type="INTEGER" value="10">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:lst name="CddPwmConfigSet" type="MAP">
+                <d:ctr name="CddPwmConfigSet_0" type="IDENTIFIABLE">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                  <d:lst name="CddPwmChannel" type="MAP">
+                    <d:ctr name="CddPwmChannel_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmChannelId" type="INTEGER" value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmHwChannel" type="ENUMERATION" 
+                             value="CDD_PWM_CHANNEL_0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmGroupUnit" type="ENUMERATION" 
+                             value="CDD_PWM_CONTROLSS_G0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmOutPutChannelSelection" 
+                             type="ENUMERATION" 
+                             value="CDD_PWM_OUTPUT_CH_BOTH_A_AND_B">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmPolarity" type="ENUMERATION" 
+                             value="CDD_PWM_HIGH">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmNotification" type="FUNCTION-NAME" 
+                             value="NULL_PTR">
+                        <a:a name="IMPORTER_INFO" value="@DEF"/>
+                      </d:var>
+                      <d:var name="CddPwmTzNotification" type="FUNCTION-NAME" 
+                             value="NULL_PTR">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="CddPwmChannelTimerBaseRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmTimerBase_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmChannelTimerBaseSyncRef" 
+                             type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmTimerBaseSync_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmCounterCompareRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmCounterCompare_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmActionQualifierRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmActionQualifier_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmEventTriggerRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmEventTrigger_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmAdcEventTriggerRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmAdcEventTrigger_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmTripZoneRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmTripZone_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmDigitalCompareRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmDigitalCompare_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmDeadBandRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmDeadBand_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmChopperRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmChopper_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddPwmHighResolutionPwmRef" type="REFERENCE" 
+                             value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmHighResolutionPwm_0">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmTimerBase" type="MAP">
+                    <d:ctr name="CddPwmTimerBase_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmTimerBaseId" type="INTEGER" value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmTimerBaseGlobalLoad" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmTimerBaseShadowMode" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmEmulationMode" type="ENUMERATION" 
+                             value="CDD_PWM_EMULATION_FREE_RUN">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmClockDivider" type="ENUMERATION" 
+                             value="CDD_PWM_CLOCK_DIVIDER_8"/>
+                      <d:var name="CddPwmHSClockDivider" type="ENUMERATION" 
+                             value="CDD_PWM_HSCLOCK_DIVIDER_1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmTbPeriod" type="FLOAT" value="0.0"/>
+                      <d:var name="CddPwmTbPeriodInitValue" type="FLOAT" 
+                             value="0.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmCounterMode" type="ENUMERATION" 
+                             value="CDD_PWM_COUNTER_MODE_STOP_FREEZE"/>
+                      <d:var name="CddPwmEnablePhaseShift" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmEnablePhaseShiftValue" type="INTEGER" 
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmPeriodLoadMode" type="ENUMERATION" 
+                             value="CDD_PWM_PERIOD_DIRECT_LOAD">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmTbprdlink" type="ENUMERATION" 
+                             value="CDD_PWM_LINK_DISABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmPeriodShadowLoadMode" 
+                             type="ENUMERATION" 
+                             value="CDD_PWM_SHADOW_LOAD_MODE_COUNTER_ZERO">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmTimerBaseSync" type="MAP">
+                    <d:ctr name="CddPwmTimerBaseSync_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmTimerBaseSyncId" type="INTEGER" 
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmOneShotSyncOutTrigger" 
+                             type="ENUMERATION" 
+                             value="CDD_PWM_OSHT_SYNC_OUT_TRIG_SYNC">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmForceSync" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmTbprdlink" type="ENUMERATION" 
+                             value="CDD_PWM_LINK_DISABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmSyncOutPulseOn" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmSyncOutPulseOnSoftware" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutPulseOnCntrZero" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutPulseOnCntCmpB" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutPulseOnCntCmpC" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutPulseOnCntCmpD" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutPulseOnDCAEVT1SYNC" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutPulseOnDCBEVT1SYNC" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutPulseOnALL" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:var name="CddPwmSyncOutPulseSource" type="ENUMERATION" 
+                             value="CDD_PWM_SYNC_IN_PULSE_SRC_DISABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmCounterCompare" type="MAP">
+                    <d:ctr name="CddPwmCounterCompare_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmCounterCompareId" type="INTEGER" 
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmCounterCompareA" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmCounterBlockCmpA" type="ENUMERATION" 
+                               value="CDD_PWM_CMP_A">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCompareValueCmpA" type="INTEGER" 
+                               value="1"/>
+                        <d:var name="CddPwmCounterCompareGlobalLoadCmpA" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowModeCmpA" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowEventCmpA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_COMP_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTbprdlinkCmpA" type="ENUMERATION" 
+                               value="CDD_PWM_LINK_DISABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmCounterCompareB" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmCounterBlockCmpB" type="ENUMERATION" 
+                               value="CDD_PWM_CMP_B">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCompareValueCmpB" type="INTEGER" 
+                               value="1"/>
+                        <d:var name="CddPwmCounterCompareGlobalLoadCmpB" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowModeCmpB" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowEventCmpB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_COMP_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTbprdlinkCmpB" type="ENUMERATION" 
+                               value="CDD_PWM_LINK_DISABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmCounterCompareC" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmCounterBlockCmpC" type="ENUMERATION" 
+                               value="CDD_PWM_CMP_C">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCompareValueCmpC" type="INTEGER" 
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareGlobalLoadCmpC" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowModeCmpC" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowEventCmpC" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_COMP_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTbprdlinkCmpC" type="ENUMERATION" 
+                               value="CDD_PWM_LINK_DISABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmCounterCompareD" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmCounterBlockCmpD" type="ENUMERATION" 
+                               value="CDD_PWM_CMP_D">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCompareValueCmpD" type="INTEGER" 
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareGlobalLoadCmpD" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowModeCmpD" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCounterCompareShadowEventCmpD" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_COMP_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTbprdlinkCmpD" type="ENUMERATION" 
+                               value="CDD_PWM_LINK_DISABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmActionQualifier" type="MAP">
+                    <d:ctr name="CddPwmActionQualifier_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmActionQualifierId" type="INTEGER" 
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmActionQualifierA" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmOutptEPWMA" type="ENUMERATION" 
+                               value="CDD_PWM_E_A">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionGlobalLoadEPWMA" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionShadowModeEPWMA" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionShadowEventEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmT1TriggerSourceEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_TRIGGER_EVENT_TRIG_DCA_1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmT2TriggerSourceEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_TRIGGER_EVENT_TRIG_DCA_1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionQualifierOneTimeSwOutputEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var 
+                               name="CddPwmActionQualifierContinuousSwOutputEPWMA" 
+                               type="ENUMERATION" value="CDD_PWM_AQ_SW_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebaseZEROEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebasePERIODEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebaseUPCMPAEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE"/>
+                        <d:var name="CddPwmAqOutputOnTimebaseDOWNCMPAEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE"/>
+                        <d:var name="CddPwmAqOutputOnTimebaseUPCMPBEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebaseDOWNCMPBEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnT1COUNTUPEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnT1COUNTDOWNEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnT2COUNTUPEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnT2COUNTDOWNEPWMA" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmActionQualifierB" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmOutptEPWMB" type="ENUMERATION" 
+                               value="CDD_PWM_E_B">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionGlobalLoadEPWMB" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionShadowModeEPWMB" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionShadowEventEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmT1TriggerSourceEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_TRIGGER_EVENT_TRIG_DCA_1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmT2TriggerSourceEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_TRIGGER_EVENT_TRIG_DCA_1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmActionQualifierOneTimeSwOutputEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var 
+                               name="CddPwmActionQualifierContinuousSwOutputEPWMB" 
+                               type="ENUMERATION" value="CDD_PWM_AQ_SW_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebaseZEROEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebasePERIODEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebaseUPCMPAEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebaseDOWNCMPAEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnTimebaseUPCMPBEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE"/>
+                        <d:var name="CddPwmAqOutputOnTimebaseDOWNCMPBEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE"/>
+                        <d:var name="CddPwmAqOutputOnT1COUNTUPEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnT1COUNTDOWNEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnT2COUNTUPEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAqOutputOnT2COUNTDOWNEPWMB" 
+                               type="ENUMERATION" 
+                               value="CDD_PWM_AQ_OUTPUT_NO_CHANGE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmEventTrigger" type="MAP">
+                    <d:ctr name="CddPwmEventTrigger_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmEventTriggerId" type="INTEGER" 
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmForceEventValue" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmEnableEventCountInitialValue" 
+                             type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmEventCountInitialValue" type="INTEGER" 
+                             value="1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmInterruptCount" type="INTEGER" 
+                             value="1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmInterruptEventSources" 
+                             type="ENUMERATION" value="CDD_PWM_INT_TBCTR_ZERO">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmInterruptMixedSources" 
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmIntMixTbctrZero" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrPeriod" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrUCmpA" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrDCmpA" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrUCmpB" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrDCmpB" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrUCmpC" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrDCmpC" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrUCmpD" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixTbctrDCmpD" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmIntMixDCAEvt1" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmAdcEventTrigger" type="MAP">
+                    <d:ctr name="CddPwmAdcEventTrigger_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmAdcEventTriggerId" type="INTEGER" 
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmAdcEventTriggerSocA" 
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmSocAEpwmEvent" type="BOOLEAN" 
+                               value="true"/>
+                        <d:var name="CddPwmSocAForceEventValue" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocAEventCountInitialValueEnable" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocAEventCountInitialValue" 
+                               type="INTEGER" value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocAInterruptCount" type="INTEGER" 
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocAInterruptEventSources" 
+                               type="ENUMERATION" value="CDD_PWM_SOC_TBCTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:ctr name="CddPwmSocAMixedSources" 
+                               type="IDENTIFIABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                          <d:var name="CddPwmIntSocAMixTbctrZero" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrPeriod" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrUCmpA" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrDCmpA" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrUCmpB" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrDCmpB" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrUCmpC" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrDCmpC" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrUCmpD" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocAMixTbctrDCmpD" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmSocAIntMixDCAEvt1" type="BOOLEAN" 
+                                 value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                        </d:ctr>
+                      </d:ctr>
+                      <d:ctr name="CddPwmAdcEventTriggerSocB" 
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmSocBEpwmEvent" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocBForceEventValue" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocBEventCountInitialValueEnable" 
+                               type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocBEventCountInitialValue" 
+                               type="INTEGER" value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocBInterruptCount" type="INTEGER" 
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSocBInterruptEventSources" 
+                               type="ENUMERATION" value="CDD_PWM_SOC_TBCTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:ctr name="CddPwmSocBMixedSources" 
+                               type="IDENTIFIABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                          <d:var name="CddPwmIntSocBMixTbctrZero" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrPeriod" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrUCmpA" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrDCmpA" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrUCmpB" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrDCmpB" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrUCmpC" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrDCmpC" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrUCmpD" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmIntSocBMixTbctrDCmpD" 
+                                 type="BOOLEAN" value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                          <d:var name="CddPwmSocBIntMixDCAEvt1" type="BOOLEAN" 
+                                 value="false">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                          </d:var>
+                        </d:ctr>
+                      </d:ctr>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmTripZone" type="MAP">
+                    <d:ctr name="CddPwmTripZone_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmTripZoneId" type="INTEGER" value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmAdvancedTripZoneAction" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmTZA" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmTZAEvent" type="ENUMERATION" 
+                               value="CDD_PWM_HZ_STATE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTZAAdvUEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTZAAdvDEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmTZB" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmTZBEvent" type="ENUMERATION" 
+                               value="CDD_PWM_HZ_STATE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTZBAdvUEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTZBAdvDEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmDCA" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmDCAEVT1Event" type="ENUMERATION" 
+                               value="CDD_PWM_HZ_STATE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAEVT1AdvUEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAEVT1AdvDEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAEVT2Event" type="ENUMERATION" 
+                               value="CDD_PWM_HZ_STATE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAEVT2AdvUEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAEVT2AdvDEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmDCB" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmDCBEVT1Event" type="ENUMERATION" 
+                               value="CDD_PWM_HZ_STATE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBEVT1AdvUEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBEVT1AdvDEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBEVT2Event" type="ENUMERATION" 
+                               value="CDD_PWM_HZ_STATE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBEVT2AdvUEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBEVT2AdvDEvent" type="ENUMERATION" 
+                               value="CDD_PWM_TZ_ADV_ACTION_HIGH_Z">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmOneShotTZ" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmOneShotTZ1" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmOneShotTZ2" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmOneShotTZ3" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmOneShotTZ4" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmOneShotTZ5" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmOneShotTZ6" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmOneShotDCAEVT1" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmOneShotDCBEVT1" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmCBCTZ" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmCBCTZ1" type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCTZ2" type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCTZ3" type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCTZ4" type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCTZ5" type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCTZ6" type="BOOLEAN" value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCDCAEVT2" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCDCBEVT2" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmInterrupt" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmTZCBCInterrupt" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmTZOneShotInterrupt" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAEVT1Interrupt" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAEVT2Interrupt" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBEVT1Interrupt" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBEVT2Interrupt" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:var name="CddPwmCycleByCycleTripZoneClearMode" 
+                             type="ENUMERATION" 
+                             value="CDD_PWM_TZ_CBC_PULSE_CLR_CNTR_ZERO">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmDeadBand" type="MAP">
+                    <d:ctr name="CddPwmDeadBand_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmDeadBandId" type="INTEGER" value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmDeadBandClockMode" type="ENUMERATION" 
+                             value="CDD_PWM_DB_COUNTER_CLOCK_FULL_CYCLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmDeadBandGlobalLoad" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmDeadBandShadowMode" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmDeadBandSwapOutputA" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmDeadBandSwapOutputB" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmDeadBandDelayLoadMode" 
+                             type="ENUMERATION" 
+                             value="CDD_PWM_RED_LOAD_ON_CNTR_ZERO">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmRedSetting" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmRedGlobalLoad" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmRedShadowMode" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmREDEnable" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmREDDelayValue" type="INTEGER" 
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmRedDelayLoadMode" type="ENUMERATION" 
+                               value="CDD_PWM_RED_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmRedBandPolarity" type="ENUMERATION" 
+                               value="CDD_PWM_DB_POLARITY_ACTIVE_HIGH">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmREDDelayInput" type="ENUMERATION" 
+                               value="CDD_PWM_DB_INPUT_EPWMA">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmFedSetting" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmFedGlobalLoad" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFedShadowMode" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFEDEnable" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFEDDelayValue" type="INTEGER" 
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFedDelayLoadMode" type="ENUMERATION" 
+                               value="CDD_PWM_RED_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFedBandPolarity" type="ENUMERATION" 
+                               value="CDD_PWM_DB_POLARITY_ACTIVE_HIGH">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFEDDelayInput" type="ENUMERATION" 
+                               value="CDD_PWM_DB_INPUT_EPWMA">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmDigitalCompare" type="MAP">
+                    <d:ctr name="CddPwmDigitalCompare_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmDigitalCompareId" type="INTEGER" 
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmDigitalCompareAEVT" 
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CombinationInputSource(DCAHigh)" 
+                               type="ENUMERATION" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAHigh" type="ENUMERATION" 
+                               value="EPWM_DC_TRIP_TRIPIN1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CombinationInputSource(DCALow)" 
+                               type="ENUMERATION" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCALow" type="ENUMERATION" 
+                               value="EPWM_DC_TRIP_TRIPIN1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAOutputHigh1A" type="ENUMERATION" 
+                               value="EPWM_TZ_EVENT_DC_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCAOutputHigh2A" type="ENUMERATION" 
+                               value="EPWM_TZ_EVENT_DC_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAdcSocEventA" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutEventA" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncModeAEVT1" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_INPUT_SYNCED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSignalSoureAEVT1" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_SOURCE_ORIG_SIGNAL">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchModeDCAEVT1" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchClearModeDCAEVT1" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_CLR_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncModeAEVT2" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_INPUT_SYNCED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSignalSoureAEVT2" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_SOURCE_ORIG_SIGNAL">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchModeDCAEVT2" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchClearModeDCAEVT2" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_CLR_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmDigitalCompareBEVT" 
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CombinationInputSource(DCBHigh)" 
+                               type="ENUMERATION" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBHigh" type="ENUMERATION" 
+                               value="EPWM_DC_TRIP_TRIPIN1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CombinationInputSource(DCBLow)" 
+                               type="ENUMERATION" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBLow" type="ENUMERATION" 
+                               value="EPWM_DC_TRIP_TRIPIN1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBOutputHigh1B" type="ENUMERATION" 
+                               value="EPWM_TZ_EVENT_DC_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDCBOutputHigh2B" type="ENUMERATION" 
+                               value="EPWM_TZ_EVENT_DC_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmAdcSocEventB" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncOutEventB" type="BOOLEAN" 
+                               value="false">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncModeBEVT1" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_INPUT_SYNCED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSignalSoureBEVT1" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_SOURCE_ORIG_SIGNAL">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchModeDCBEVT1" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchClearModeDCBEVT1" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_CLR_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSyncModeBEVT2" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_INPUT_SYNCED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSignalSoureBEVT2" type="ENUMERATION" 
+                               value="EPWM_DC_EVENT_SOURCE_ORIG_SIGNAL">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchModeDCBEVT2" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_DISABLED">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCBCLatchClearModeDCBEVT2" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_CBC_LATCH_CLR_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmUseBlankingWindow" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="BlankingWindowStartMixedEvent" 
+                               type="ENUMERATION" value="EPWM_DC_TBCTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="BlankingWindowStartEvent" 
+                               type="ENUMERATION" 
+                               value="EPWM_DC_WINDOW_START_TBCTR_BLANK_PULSE_MIX">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="BlankingWindowOffset" type="INTEGER" 
+                               value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="BlankingWindowLength" type="INTEGER" 
+                               value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmUseBlankingWindow" type="BOOLEAN" 
+                               value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmUseDCCounterCapture" 
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmDCCounterCaptureShadowMode" 
+                               type="BOOLEAN" value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmUseDCCounterCapture" type="BOOLEAN" 
+                               value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmUseEdgeFilter" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmStopValleyCapture" 
+                               type="ENUMERATION" value="Events_0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmStartValleyCapture" 
+                               type="ENUMERATION" value="Events_0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmUseEdgeFilterCounterCaptureSignal" 
+                               type="ENUMERATION" 
+                               value="EPWM_VALLEY_TRIGGER_EVENT_SOFTWARE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmEdgeFilterCount" type="ENUMERATION" 
+                               value="EPWM_DC_EDGEFILT_EDGECNT_0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmEdgeFilterMode" type="ENUMERATION" 
+                               value="EPWM_DC_EDGEFILT_MODE_RISING">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmValleyDelayDivider" 
+                               type="ENUMERATION" 
+                               value="EPWM_VALLEY_DELAY_MODE_SW_DELAY">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="SoftwareValleyDelayValue" type="INTEGER" 
+                               value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmEdgeFilterValleyCapture" 
+                               type="BOOLEAN" value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmStartValleyCaptureLogic" 
+                               type="BOOLEAN" value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmDelayedOutputEdgeFilter" 
+                               type="BOOLEAN" value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmUseEdgeFilter" type="BOOLEAN" 
+                               value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:var name="CddPwmDcFilterInputEventSource" 
+                             type="ENUMERATION" 
+                             value="EPWM_DC_WINDOW_SOURCE_DCBEVT1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmChopper" type="MAP">
+                    <d:ctr name="CddPwmChopper_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmChopperId" type="INTEGER" value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmChopperEnable" type="BOOLEAN" 
+                             value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmChopperDuty" type="INTEGER" value="1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmChopperFreqency" type="INTEGER" 
+                             value="1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmChopperFirstPulseWidth" type="INTEGER" 
+                             value="1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:lst>
+                  <d:lst name="CddPwmHighResolutionPwm" type="MAP">
+                    <d:ctr name="CddPwmHighResolutionPwm_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddPwmHRPwmId" type="INTEGER" value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmEnableHRPWM" type="BOOLEAN" 
+                             value="true">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddPwmAutoHRMStepScaling" type="BOOLEAN" 
+                             value="true">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ctr name="CddPwmDutyPeriodPhaseCtrl" 
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmCtrlModeHRPWMA" type="ENUMERATION" 
+                               value="HRPWM_MEP_DUTY_PERIOD_CTRL">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCtrlModeHRPWMB" type="ENUMERATION" 
+                               value="HRPWM_MEP_DUTY_PERIOD_CTRL">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmEdgeModeHRPWMA" type="ENUMERATION" 
+                               value="HRPWM_MEP_CTRL_DISABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCmpHRPWMA" type="INTEGER" value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmShadowActiveLoadEventHRPWMA" 
+                               type="ENUMERATION" 
+                               value="HRPWM_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmEdgeModeHRPWMB" type="ENUMERATION" 
+                               value="HRPWM_MEP_CTRL_DISABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmCmpHRPWMB" type="INTEGER" value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmShadowActiveLoadEventHRPWMB" 
+                               type="ENUMERATION" 
+                               value="HRPWM_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmEnableHRPeriodCtrl" type="BOOLEAN" 
+                               value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmHRPeriod" type="INTEGER" value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmEnableHRPhaseCtrl" type="BOOLEAN" 
+                               value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmHRPhase" type="INTEGER" value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmPWMSyncSelect" type="ENUMERATION" 
+                               value="HRPWM_PWMSYNC_SOURCE_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CddPwmDeadbandCtrl" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CddPwmDeadbandEdgeMode" type="ENUMERATION" 
+                               value="HRPWM_DB_MEP_CTRL_DISABLE">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmRisingEdgeDelay" type="INTEGER" 
+                               value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmRisEdgeShadowActiveLoad" 
+                               type="ENUMERATION" 
+                               value="HRPWM_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFallingEdgeDelay" type="INTEGER" 
+                               value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmFalEdgeShadowActiveLoad" 
+                               type="ENUMERATION" 
+                               value="HRPWM_LOAD_ON_CNTR_ZERO">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmSwapOutputCtrl" type="BOOLEAN" 
+                               value="true">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CddPwmHROutputCtrlPWMB" type="ENUMERATION" 
+                               value="HRPWM_OUTPUT_ON_B_NORMAL">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:ctr>
+                  </d:lst>
+                </d:ctr>
+              </d:lst>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>
