@@ -1,8 +1,7 @@
 export MCAL_PATH?=$(abspath ../)
 export CCS_VERSION?=ccs1281
-export AUTOSAR_VERSION?=4.3.1
+export AUTOSAR_VERSION?=431
 
-AUTOSAR_VERSION_NO_DOT=$(subst .,,$(AUTOSAR_VERSION))
 ifeq ($(OS),Windows_NT)
     export ECHO=@echo
     export MAKE=gmake
@@ -22,7 +21,7 @@ ifeq ($(OS),Windows_NT)
     export TOUCH=$(CYGWIN_PATH)/touch
     export PATHSEP=\\
     export CHMOD=$(CYGWIN_PATH)/echo
-    export SHELL="cmd.exe"
+    export SHELL=cmd.exe
     export PWD=cd
     export PYTHON=python
     DOT=$(shell where dot 2>NUL)
