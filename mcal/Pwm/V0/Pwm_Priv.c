@@ -812,6 +812,7 @@ FUNC(void, PWM_CODE) PWM_ConfigureSignal(uint32 base, const EPWM_SignalParams *s
 FUNC(void, PWM_CODE)
 Pwm_ConfigHR_epwm(uint32 baseAddr, float32 sysClk, float32 peroid, float32 Duty, uint32 outputCh)
 {
+    (void)peroid;
     uint32  Ctrladdr = 0;
     float32 abduty   = 0;
     uint32  intduty  = 0;

@@ -168,6 +168,7 @@ int main(void)
     AppUtils_printf("DmaPollingModeApp: Sample Application - STARTS !!!\n\r ");
 
     Cdd_Dma_PollingModeApp_mainTest();
+    return 0;
 }
 
 #if (defined CLANG) || (defined DIAB)

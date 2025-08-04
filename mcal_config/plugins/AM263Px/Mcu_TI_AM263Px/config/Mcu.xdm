@@ -1543,6 +1543,7 @@
                 <a:a name="DESC" 
                      value="EN: Container holding all MCU specific published information parameters"/>
                 <a:a name="UUID" value="a2392182-1cc0-4791-9127-b84190c623ec"/>
+                <a:a name="REQUIRES-INDEX" value="true"/>
                 <v:lst name="McuResetReasonConf" type="MAP">
                   <a:da name="MIN" value="1"/>
                   <v:ctr name="McuResetReasonConf" type="IDENTIFIABLE">
@@ -1550,6 +1551,7 @@
                          value="EN: This container contains the configuration for the different type of reset reason that can be retrieved from Mcu_GetResetReason Api."/>
                     <a:a name="UUID" 
                          value="1fe8d66e-983f-4dc7-95dc-82d273d295c6"/>
+                    <a:a name="REQUIRES-INDEX" value="true"/>
                     <v:var name="McuResetReason" type="INTEGER">
                       <a:a name="DESC" 
                            value="EN: The parameter represents the different type of reset that a Micro supports. This parameter is referenced by the parameter EcuMResetReason in the ECU State manager module."/>
@@ -1564,6 +1566,7 @@
                       <a:a name="EDITABLE" value="true"/>
                       <a:a name="UUID" 
                            value="3c8ae31f-1aa5-4bc0-aba0-6f1ede22819b"/>
+                      <a:a name="REQUIRES-INDEX" value="true"/>
                                     <a:da name="DEFAULT" type="XPath"
                                                 expr="string(text:split('1 2 3 4 5 6 7 8 9 10 11 12')[var:set('idx',position()) and normalize-space(text:split('MCU_POWER_ON_RESET MCU_WARM_RESET_WDT0 MCU_WARM_RESET_WDT1 MCU_WARM_RESET_WDT2 MCU_WARM_RESET_WDT3 MCU_WARM_RESET MCU_EXT_PAD_RESET MCU_HSM_WDT_RESET MCU_DEBUGGER_RESET MCU_WARM_RESET_TEMP0 MCU_WARM_RESET_TEMP1 MCU_RESET_UNDEFINED')[position() = $idx]) = name(node:fallback(node:current()/..,''))])"/>
                       <a:da name="INVALID" type="Range">

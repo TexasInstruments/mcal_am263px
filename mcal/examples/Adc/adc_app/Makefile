@@ -6,6 +6,7 @@ include $(mcal_PATH)/include/memmap/inc.mk
 include $(mcal_PATH)/Adc/srcs.mk
 include $(mcal_PATH)/Mcu/srcs.mk
 include $(mcal_PATH)/Port/srcs.mk
+include $(mcal_PATH)/examples/Utils/srcs.mk
 include $(mcal_PATH)/examples/Utils/srcs_autosar_stub.mk
 include $(mcal_PATH)/examples/Utils/srcs_startup.mk
 include $(mcal_PATH)/examples_config/Adc_Demo_Cfg/srcs.mk
@@ -17,10 +18,6 @@ ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   include $(mcal_PATH)/examples/Utils/srcs_pmic.mk
   include $(mcal_PATH)/examples_config/Dma_Demo_Cfg/srcs.mk
 endif
-
-# List all the components/interfaces/libraries required by the application
-INCLUDE_EXTERNAL_INTERFACES = app_utils
-COMP_LIST_COMMON = app_utils
 
 SRCDIR += .
 INCDIR += .

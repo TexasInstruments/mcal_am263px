@@ -251,6 +251,10 @@ static void IcuApp_mainTest(void)
         Icu_SetActivationCondition(ICU_CHANNEL, activation);
 
         Icu_EnableNotification(ICU_CHANNEL);
+        for (uint16 i = 0U; i < bufferSize; i++)
+        {
+            timestampArray[i] = 0U;
+        }
         Icu_StartTimestamp(ICU_CHANNEL, &timestampArray[0], bufferSize, 6);
         AppUtils_delay(100);
 
@@ -372,6 +376,7 @@ int main(void)
     AppUtils_printf("IcuApp: Sample Application - STARTS !!!\n\r ");
 
     IcuApp_mainTest();
+    return 0;
 }
 
 #if (defined CLANG) || (defined DIAB)

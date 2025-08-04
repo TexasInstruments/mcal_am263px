@@ -220,7 +220,8 @@ clean :
 	$(RM) -rf $(OBJDIR)/* $(DEPDIR)/* $(BINDIR)/*
 
 # Create dependencies list to ultimately create application executable binary
-$(CORE) : $(OBJDIR) $(BINDIR) $(DEPDIR) $(PKG_LIST) $(EXE_NAME)
+$(CORE) : $(OBJDIR) $(BINDIR) $(DEPDIR) $(PKG_LIST)
+	$(MAKE) $(EXE_NAME)
 
 endif
 

@@ -1834,15 +1834,16 @@ static void Mcu_setEpwmTbClk(uint32 epwmInstance, uint32 enable)
             HW_WR_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC,
                         ((HW_RD_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC) &
                           MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC_BIT_MASK) |
-                         (1 << epwmInstance)));
+                         (1U << epwmInstance)));
         }
         else
         {
             /* Disable Time base clock in CTRL MMR */
+            uint32 epwmShiftInv = ~(1U << epwmInstance);
             HW_WR_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC,
                         ((HW_RD_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC) &
                           MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC_BIT_MASK) &
-                         ~(1 << epwmInstance)));
+                         epwmShiftInv));
         }
 
         /* Lock CONTROLSS_CTRL registers */

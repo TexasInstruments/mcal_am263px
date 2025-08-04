@@ -61,8 +61,7 @@ static void FlashAppDma_interruptConfig(void);
 #define FLSEXAMPLE_ARRAYSIZE(x) (sizeof((x)) / sizeof(x[0]))
 uint32 gTestPassed;
 
-sint32                TestState    = TRUE;
-Cdd_I2c_ConfigPtrType I2cConfigSet = NULL_PTR;
+sint32 TestState = TRUE;
 
 #if (STD_OFF == MCU_NO_PLL)
 extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration;

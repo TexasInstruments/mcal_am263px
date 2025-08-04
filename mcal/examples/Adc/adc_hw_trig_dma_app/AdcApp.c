@@ -44,6 +44,11 @@
 /** \brief Each group read buffer size in samples */
 #define ADC_APP_READ_BUF_SIZE_WORD (ADC_APP_DEFAULT_STREAM_SAMPLES * ADC_APP_MAX_CHANNELS_PER_GROUP)
 
+/** \brief Each group buffer allocation to match cache line aligned - assumes this is greater than
+ *  ADC_APP_READ_BUF_SIZE_WORD */
+#define ADC_APP_READ_BUF_SIZE_ALIGNED      (Mcal_CacheP_CACHELINE_ALIGNMENT)
+#define ADC_APP_READ_BUF_SIZE_WORD_ALIGNED (ADC_APP_READ_BUF_SIZE_ALIGNED / sizeof(Adc_ValueGroupType))
+
 /* Number of iteration to run test */
 #define ADC_APP_LOOPCNT (3U)
 
@@ -103,7 +108,8 @@ static void Adc_appEpwmDisableTrigger(uint16 channel);
 static uint32 gTestPassed = E_OK;
 
 /* Result buffer used by DMA */
-static Adc_ValueGroupType gAdcAppDmaBuffer[ADC_MAX_GROUP][ADC_APP_READ_BUF_SIZE_WORD];
+static Adc_ValueGroupType gAdcAppDmaBuffer[ADC_MAX_GROUP][ADC_APP_READ_BUF_SIZE_WORD_ALIGNED]
+    __attribute__((aligned(Mcal_CacheP_CACHELINE_ALIGNMENT)));
 
 /* DMA channel allocated to each ADC group
  *  In this example, DMA channel 0 is allocated for Group 0 and DMA channel 1 is allocated to Group 1
@@ -153,6 +159,9 @@ static void Adc_appTest(void)
             GT_1trace(ADC_APP_TRACE_MASK, GT_ERR, " ADC Group %d is not IDLE!!\r\n", grpIdx);
         }
 
+        /* Reset buffers and perform a cache write back */
+        memset(&gAdcAppDmaBuffer[grpIdx][0U], 0U, (sizeof(Adc_ValueGroupType) * ADC_APP_READ_BUF_SIZE_WORD));
+        Mcal_CacheP_wb((void *)&gAdcAppDmaBuffer[grpIdx][0U], ADC_APP_READ_BUF_SIZE_ALIGNED, Mcal_CacheP_TYPE_ALL);
         retVal = Adc_SetupResultBuffer(grpIdx, &gAdcAppDmaBuffer[grpIdx][0U]);
         if (retVal != E_OK)
         {
@@ -163,10 +172,6 @@ static void Adc_appTest(void)
 
     for (uint32 loopcnt = 0U; loopcnt < ADC_APP_LOOPCNT; loopcnt++)
     {
-        /* Reset buffers and perform a cache write back */
-        memset((void *)&gAdcAppDmaBuffer, 0U, sizeof(gAdcAppDmaBuffer));
-        Mcal_CacheP_wb((void *)&gAdcAppDmaBuffer, sizeof(gAdcAppDmaBuffer), Mcal_CacheP_TYPE_ALL);
-
         for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
         {
             /* Enable hardware trigger */
@@ -384,10 +389,10 @@ static void Adc_appPrintResult(uint32 loopcnt)
             /* Store the buffer data*/
             dmaDataAddr = Adc_GetReadResultBaseAddress(grpIdx);
 
+            Mcal_CacheP_inv((void *)&gAdcAppDmaBuffer[grpIdx][0U], ADC_APP_READ_BUF_SIZE_ALIGNED, Mcal_CacheP_TYPE_ALL);
+
             for (uint8 chIdx = 0U; chIdx < grpCfg->numChannels; chIdx++)
             {
-                Mcal_CacheP_inv((void *)gAdcAppDmaBuffer, sizeof(gAdcAppDmaBuffer), Mcal_CacheP_TYPE_ALL);
-
                 gAdcAppLog[logIndex].dmaBuff[grpIdx][chIdx]  = gAdcAppDmaBuffer[grpIdx][chIdx];
                 gAdcAppLog[logIndex].hwResult[grpIdx][chIdx] = *((volatile uint16 *)(dmaDataAddr));
                 dmaDataAddr                                  = dmaDataAddr + 2; /* Move to next result address*/

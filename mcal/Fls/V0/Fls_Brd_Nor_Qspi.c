@@ -928,6 +928,8 @@ boolean Fls_VerifyData_priv(const uint8 *expData, const uint8 *rxData, uint32 le
             if (*expData_local != *rxData_local)
             {
                 match = FALSE;
+                /*Stop after first mismatch*/
+                break;
             }
             expData_local++;
             rxData_local++;

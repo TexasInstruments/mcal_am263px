@@ -159,10 +159,10 @@ Std_ReturnType CddFsiTx_hwUnitInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     CddFsiTx_selectTxPLLClock(baseAddr, CSL_CDD_FSI_TX_CLK_SELECT);
     CddFsiTx_resetTxModule(baseAddr);
     /* include 5 clock pulse delay*/
-    CddFsiTx_delayWait(10U * (hwUnitObj->hwUnitCfg.Prescalar));
+    CddFsiTx_delayWait((uint32)10U * (hwUnitObj->hwUnitCfg.Prescalar));
     CddFsiTx_clearTxModuleReset(baseAddr);
     /* include 5 clock pulse delay*/
-    CddFsiTx_delayWait(10U * (hwUnitObj->hwUnitCfg.Prescalar));
+    CddFsiTx_delayWait((uint32)10U * (hwUnitObj->hwUnitCfg.Prescalar));
     CddFsiTx_setPrescaler(baseAddr, hwUnitObj->hwUnitCfg.Prescalar);
     CddFsiTx_enableClock(baseAddr);
     retVal = CddFsiTx_setTxDataLane(baseAddr, CDD_FSI_TX_SINGLE_DATA_LANE);
@@ -185,7 +185,7 @@ Std_ReturnType CddFsiTx_hwUnitInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
         CddFsiTx_ForceTxBufferPtr(baseAddr, 0);
         CddFsiTx_sendFlushSequence(baseAddr);
         /* include 5 clock pulse delay*/
-        CddFsiTx_delayWait(10U * (hwUnitObj->hwUnitCfg.Prescalar));
+        CddFsiTx_delayWait((uint32)10U * (hwUnitObj->hwUnitCfg.Prescalar));
         CddFsiTx_stopFlushSequence(baseAddr);
     }
     return retVal;
@@ -391,6 +391,7 @@ Std_ReturnType CddFsiTx_Transmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj, uint8 UserD
 
 void CddFsiTx_IrqTx(Cdd_FsiTx_HwUnitObjType *hwUnitObj, CddFsiTx_McalIntNumberType InterruptNum, uint16 EvtFlag)
 {
+    (void)InterruptNum;
     uint32 baseAddr;
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
     {
@@ -568,6 +569,7 @@ Std_ReturnType CddFsiTx_ClearResetTxSubModules(Cdd_FsiTx_HwUnitObjType     *hwUn
                                                Cdd_FsiTx_ResetSubModuleType subModule)
 {
     uint16 regVal;
+    uint16 regBase;
     uint8  retVal   = E_OK;
     uint16 baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
 
@@ -581,19 +583,22 @@ Std_ReturnType CddFsiTx_ClearResetTxSubModules(Cdd_FsiTx_HwUnitObjType     *hwUn
             regVal = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL);
             regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_CORE_RST_MASK)) |
                      (CDD_FSI_TX_CTRL_REG_KEY << CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_KEY_SHIFT);
-            HW_WR_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL, regVal);
+            regBase = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL;
+            HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_CLOCK_RESET:
-            regVal  = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL);
-            regVal &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_CLK_RST_MASK);
-            HW_WR_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL, regVal);
+            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL));
+            regVal  &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_CLK_RST_MASK);
+            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL;
+            HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_PING_TIMEOUT_CNT_RESET:
-            regVal  = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1);
-            regVal &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1_CNT_RST_MASK);
-            HW_WR_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1, regVal);
+            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1));
+            regVal  &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1_CNT_RST_MASK);
+            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1;
+            HW_WR_REG16(regBase, regVal);
             break;
 
         default:
@@ -606,6 +611,7 @@ Std_ReturnType CddFsiTx_ClearResetTxSubModules(Cdd_FsiTx_HwUnitObjType     *hwUn
 Std_ReturnType CddFsiTx_ResetTxSubModules(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_FsiTx_ResetSubModuleType SubModule)
 {
     uint16 regVal;
+    uint16 regBase;
     uint8  retVal   = E_OK;
     uint16 baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
 
@@ -618,19 +624,22 @@ Std_ReturnType CddFsiTx_ResetTxSubModules(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cd
         case CDD_FSI_TX_MAIN_CORE_RESET:
             regVal = (uint16)CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_CORE_RST_MASK |
                      (CDD_FSI_TX_CTRL_REG_KEY << CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_KEY_SHIFT);
-            HW_WR_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL, regVal);
+            regBase = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL;
+            HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_CLOCK_RESET:
-            regVal  = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL);
-            regVal |= CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_CLK_RST_MASK;
-            HW_WR_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL, regVal);
+            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL));
+            regVal  |= CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_CLK_RST_MASK;
+            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL;
+            HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_PING_TIMEOUT_CNT_RESET:
-            regVal  = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1);
-            regVal |= CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1_CNT_RST_MASK;
-            HW_WR_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1, regVal);
+            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1));
+            regVal  |= CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1_CNT_RST_MASK;
+            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1;
+            HW_WR_REG16(regBase, regVal);
             break;
 
         default:

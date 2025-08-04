@@ -107,7 +107,7 @@ CDD_IPC_SAFE_ENABLE ?= no
 CDD_IPC_SAFE_EXCEPTION_ENABLE ?= no
 # Get config path for each component
 ifeq ($(CDD_IPC_SAFE_ENABLE),no)
-  MCAL_COMP_DIR_LIST = Mcu Port Gpt Spi Can Cdd_Cmpss Cdd_Flc Ipc Dio Wdg Fls Eth EthTrcv Adc Pwm Icu Uart Dma I2c FsiTx FsiRx Lin Epwm
+  MCAL_COMP_DIR_LIST = Mcu Port Gpt Spi Can Cdd_Cmpss Cdd_Flc Ipc Dio Wdg Fls Eth EthTrcv Adc Pwm Icu Uart Dma Cdd_I2c FsiTx FsiRx Lin Epwm
   define GET_MCAL_COMP_CONFIG_PATH
     # MCAL_MODULE is passing through gmake command as argument
     ifeq ($(MCAL_MODULE),$(1))

@@ -319,9 +319,9 @@
                     <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:6e106a4a-0d7f-40c9-9efd-aa7601b73e9d">
                       <SHORT-NAME>CanWakeupFunctionalityAPI</SHORT-NAME>
                       <DESC>
-                        <L-2 L="EN">Adds / removes the service Can_CheckWakeup() from the code.</L-2>
+                        <L-2 L="EN">Adds / removes the service Can_CheckWakeup() from the code. To use this parameter, enable CanWakeupSupport</L-2>
                       </DESC>
-                      <!-- @Calculated /TI_AM263Px/Can/CanConfigSet/CanController/CanWakeupFunctionalityAPI: ENABLE(XPath: (node:value(..) =&apos;false&apos;))-->
+                      <!-- @Calculated /TI_AM263Px/Can/CanConfigSet/CanController/CanWakeupFunctionalityAPI: ENABLE(XPath: ../CanWakeupSupport = &apos;true&apos;)-->
                       <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
                       <!-- @CalculatedEnd -->
                       <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
@@ -376,9 +376,9 @@
                     <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:debb536b-36ed-4f65-818a-8752ab789f74">
                       <SHORT-NAME>CanWakeupProcessing</SHORT-NAME>
                       <DESC>
-                        <L-2 L="EN">Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode.</L-2>
+                        <L-2 L="EN">Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode. To use this parameter, enable CanWakeupSupport</L-2>
                       </DESC>
-                      <!-- @Calculated /TI_AM263Px/Can/CanConfigSet/CanController/CanWakeupProcessing: ENABLE(XPath: (node:value(..) =&apos;INTERRUPT&apos;))-->
+                      <!-- @Calculated /TI_AM263Px/Can/CanConfigSet/CanController/CanWakeupProcessing: ENABLE(XPath: ../CanWakeupSupport = &apos;true&apos;)-->
                       <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
                       <!-- @CalculatedEnd -->
                       <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
@@ -424,22 +424,7 @@
                       <DESC>
                         <L-2 L="EN">CAN driver support for wakeup over CAN Bus.</L-2>
                       </DESC>
-                      <!-- @Calculated /TI_AM263Px/Can/CanConfigSet/CanController/CanWakeupSupport: ENABLE(XPath: (node:value(..) =&apos;false&apos;))-->
-                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
-                      <!-- @CalculatedEnd -->
-                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
-                      <MULTIPLICITY-CONFIG-CLASSES>
-                        <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
-                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
-                        </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
-                        <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
-                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                        </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
-                      </MULTIPLICITY-CONFIG-CLASSES>
                       <ORIGIN>AUTOSAR_ECUC</ORIGIN>
-                      <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                       <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
                       <VALUE-CONFIG-CLASSES>
                         <ECUC-VALUE-CONFIGURATION-CLASS>

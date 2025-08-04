@@ -163,9 +163,11 @@ extern "C" {
 //! \brief Lin Channel ISR Type Selection.
 //
 //*****************************************************************************
-[!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!][!//
+[!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!]
+[!IF "node:refvalid(LinChannelEcuMWakeupSource)"!]
 #define LIN_WAKEUP_SOURCE_[!"LinChannelId"!]           EcuMConf_EcuMWakeupSource_[!"node:name(node:ref(LinChannelEcuMWakeupSource))"!]
-[!ENDLOOP!][!//
+[!ENDIF!]
+[!ENDLOOP!]
 
 
 //*****************************************************************************

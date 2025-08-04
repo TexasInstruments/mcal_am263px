@@ -71,7 +71,7 @@
                   <a:a name="ORIGIN" value="Texas Instruments"/>
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" value="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84"/>
+                  <a:a name="UUID" value="1ca8ab74-453c-440a-b02f-a8301b5be55d"/>
                   <a:da name="DEFAULT" value="false"/>
                 </v:var>
                 <v:var name="CddI2cVersionInfoApi" type="BOOLEAN">
@@ -86,32 +86,6 @@
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" value="7ef17aaa-3480-4b34-be74-ab79ea6e2a97"/>
                   <a:da name="DEFAULT" value="true"/>
-                </v:var>
-                <v:var name="CddI2cArbitrationLossCheck" type="BOOLEAN">
-                  <a:a name="DESC"
-                       value="EN: Switches to activate or deactivate Arbitration loss interrupt(ON/OFF)."/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="LOCAL"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" value="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84"/>
-                  <a:da name="DEFAULT" value="false"/>
-                </v:var>
-                <v:var name="CddI2cNackAsErrorCheck" type="BOOLEAN">
-                  <a:a name="DESC"
-                       value="EN: Switches to activate or deactivate NACK error check(ON/OFF)."/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="LOCAL"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" value="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84"/>
-                  <a:da name="DEFAULT" value="false"/>
                 </v:var>
                 <v:var name="CddI2cCancelCheck" type="BOOLEAN">
                   <a:a name="DESC"
@@ -136,176 +110,28 @@
                   <a:a name="ORIGIN" value="Texas Instruments"/>
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" value="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84"/>
+                  <a:a name="UUID" value="a8698380-0a3a-4330-ab47-f71a741033c2"/>
                   <a:da name="DEFAULT" value="false"/>
                 </v:var>
-                <v:var name="CddI2cMultipleSequenceInQueueProcessCheck" type="BOOLEAN">
-                  <a:a name="DESC"
-                       value="EN: Switches to activate or deactivate functionality to process same sequence in queue multiple times (ON/OFF)."/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="LOCAL"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" value="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84"/>
-                  <a:da name="DEFAULT" value="false"/>
-                </v:var>
-				<v:var name="CddI2cArbitrationLossParam" type="ENUMERATION">
-						<!--Requirements: AUTORADAR_MCAL-144 -->
-				<a:a name="DESC" value="CDD_I2C Arbitration loss condition parameter, possible values are CDD_I2C_BURST_MODE (for detaching from bus) or CDD_I2C_RECURRENT_MODE (For sending 9 clock pulses to the slave in order to synchronize the bus) "/>
-						<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-							<icc:v class="PreCompile">VariantPreCompile</icc:v>
-						</a:a>
-						<a:a name="ORIGIN" value="Texas Instruments"/>
-						<a:a name="SCOPE" value="LOCAL"/>
-						<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-						<a:a name="UUID" value="ECUC:4a5a7170-fc8d-49ff-b270-2c2b24b3a21f"/>
-						<a:da name="DEFAULT" value="CDD_I2C_BURST_MODE"/>
-						<a:da name="EDITABLE" value="true"/>
-					    <a:da name="ENABLE" value="true"/>
-						<a:da name="RANGE">
-							<a:v>CDD_I2C_BURST_MODE</a:v>
-							<a:v>CDD_I2C_RECURRENT_MODE</a:v>
-						</a:da>
-				</v:var>
                 <v:var name="CddIrqType" type="ENUMERATION">
                   <a:a name="DESC"
                        value="EN: Type of Isr function: void functionname(void) CAT1 : interrupt void func(void) CAT2 : ISR(func)"/>
                   <a:a name="IMPLEMENTATIONCONFIGCLASS"
                        type="IMPLEMENTATIONCONFIGCLASS">
                     <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
                   </a:a>
                   <a:a name="ORIGIN" value="Texas Instruments"/>
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" value="9b1f91d5-fbf9-40cd-b58d-a55eac793943"/>
-				  <a:da name="ENABLE" type = "XPath" expr = "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cUseInterrupts = 'true'"/>
+                  <a:da name="ENABLE" type = "XPath" expr = "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cUseInterrupts = 'true'"/>
                   <a:da name="DEFAULT" value="CDD_I2C_ISR_VOID"/>
-					<a:da name="RANGE">
-						<a:v>CDD_I2C_ISR_VOID</a:v>
-						<a:v>CDD_I2C_ISR_CAT1</a:v>
-						<a:v>CDD_I2C_ISR_CAT2</a:v>
-					</a:da>
-				</v:var>
-                <!--Design: MCAL-5641 -->
-					<v:ref name="CddI2cOsCounterRef" type="REFERENCE">
-						<a:a name="DESC"
-						value="EN: This parameter contains a reference to the OsCounter, which is used by the CddI2c driver."/>
-						<a:a name="IMPLEMENTATIONCONFIGCLASS"
-							type="IMPLEMENTATIONCONFIGCLASS">
-							<icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-						</a:a>
-						<a:a name="OPTIONAL" value="true"/>
-						<a:a name="ORIGIN" value="Texas Instruments"/>
-						<a:a name="SCOPE" value="LOCAL"/>
-						<a:a name="UUID" value="ECUC:26c9bdff-38cf-4f0b-8754-7472d0d41cb9"/>
-						<a:da name="REF"
-						value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
-					</v:ref>
-					<!--Design: MCAL-5652 -->
-					<v:var name="CddI2cDefaultOSCounterId" type="INTEGER">
-					  <a:a name="DESC" value="EN: Default Os Counter Id if node reference to OsCounter ref CddI2cOsCounterRef is not set"/>
-					  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-						<icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-					  </a:a>
-					  <a:a name="ORIGIN" value="Texas Instruments"/>
-					  <a:a name="UUID" value="ECUC:6dc462ec-a924-4633-b6ac-2d00ef0d3965"/>
-					  <a:da name="INVALID" type="Range">
-						<a:tst expr="&lt;=16"/>
-						<a:tst expr="&gt;=0"/>
-					  </a:da>
-					  <a:da name="DEFAULT" value="0"/>
-					</v:var>
-                <v:var name="CddI2cArbitrationLossTimeout" type="INTEGER">
-                  <a:a name="DESC"
-                       value="EN: I2C timeout - used for timing I2C arbitration loss wait wait"/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="ECU"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID"
-                       value="ECUC:e734173d-b67f-40ec-8016-b06b1e6c60b2"/>
-                  <a:da name="DEFAULT" value="1000"/>
-                  <a:da name="INVALID" type="Range">
-                    <a:tst expr="&lt;=4294967295"/>
-                    <a:tst expr="&gt;=1"/>
-                  </a:da>
-                </v:var>
-                <v:var name="CddI2cPollTimeout" type="INTEGER">
-                  <a:a name="DESC"
-                       value="EN: I2C timeout - used for I2C polling timeouts"/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="ECU"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID"
-                       value="ECUC:e734173d-b67f-40ec-8016-b06b1e6c60b2"/>
-                  <a:da name="DEFAULT" value="1000"/>
-                  <a:da name="INVALID" type="Range">
-                    <a:tst expr="&lt;=4294967295"/>
-                    <a:tst expr="&gt;=1"/>
-                  </a:da>
-                </v:var>
-                <v:var name="CddI2cQueueTimeout" type="INTEGER">
-                  <a:a name="DESC"
-                       value="EN: I2C timeout - used for queue timeouts. Unit is in clock ticks. Configure the timeout according to r5f clock frequency(400MHz/200MHz)"/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="ECU"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID"
-                       value="ECUC:e734173d-b67f-40ec-8016-b06b1e6c60b2"/>
-                  <a:da name="DEFAULT" value="1000"/>
-                  <a:da name="INVALID" type="Range">
-                    <a:tst expr="&lt;=4294967295"/>
-                    <a:tst expr="&gt;=1"/>
-                  </a:da>
-                </v:var>
-                <v:var name="CddI2cQueueSize" type="INTEGER">
-                  <a:a name="DESC" value="EN: Define I2c driver max queue size."/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="ECU"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID"
-                       value="ECUC:e734173d-b67f-40ec-8016-b06b1e6c61b2"/>
-                  <a:da name="DEFAULT" value="10"/>
-                  <a:da name="INVALID" type="Range">
-                    <a:tst expr="&lt;=255"/>
-                    <a:tst expr="&gt;=0"/>
-                  </a:da>
-                </v:var>
-                <v:var name="CddI2cMaxlengthByte" type="INTEGER">
-                  <a:a name="DESC"
-                       value="EN: Maximum Length of byte to be write or read "/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="LOCAL"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID"
-                       value="ECUC:70edc491-c59b-4376-bc8a-ecac559250c7"/>
-                  <a:da name="DEFAULT" value="1"/>
-                  <a:da name="INVALID" type="Range">
-                    <a:tst expr="&lt;=255"/>
-                    <a:tst expr="&gt;=0"/>
-                  </a:da>
+                    <a:da name="RANGE">
+                        <a:v>CDD_I2C_ISR_VOID</a:v>
+                        <a:v>CDD_I2C_ISR_CAT1</a:v>
+                        <a:v>CDD_I2C_ISR_CAT2</a:v>
+                    </a:da>
                 </v:var>
                 <v:var name="CddI2cHwUnitsUsed" type="INTEGER">
                   <a:a name="DESC"
@@ -325,15 +151,32 @@
                     <a:tst expr="&gt;=1"/>
                   </a:da>
                 </v:var>
+                <v:var name="CddI2cEnableRegisterReadbackApi" type="BOOLEAN">
+                  <a:a name="DESC"
+                       value="EN: Switch to indicate that the Cdd_I2c_RegisterReadBack is supported"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID"
+                       value="ECUC:34bfc216-9d93-4694-90c5-39741e73c648"/>
+                <a:da name="DEFAULT" value="true"/>
+                </v:var>
               </v:ctr>
-    		<v:lst name="CddI2cHwConfig" type="MAP">
-                    <a:da name="MAX" value="3"/>
+            <v:lst name="CddI2cHwConfig" type="MAP">
+                    <a:da name="MAX" value="4"/>
                     <a:da name="MIN" value="1"/>
                     <v:ctr name="CddI2cHwConfig" type="IDENTIFIABLE">
                       <a:a name="DESC"
                            value="EN: This container contains the HW unit initialization parameters"/>
-                      <a:a name="UUID"
-                           value="ECUC:ea0b3275-57db-4645-bf46-8baa9a2e3bd5"/>
+                      <a:a name="UUID" value="ECUC:ea0b3275-57db-4645-bf46-8baa9a2e3bd5"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
                       <v:var name="CddI2cHwUnitType" type="ENUMERATION">
                         <a:a name="DESC" value="EN: I2c HW unit to use."/>
                         <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -343,11 +186,10 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a"/>
+                        <a:a name="UUID" value="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a"/>
                         <a:da name="DEFAULT" value="CDD_I2C_HW_UNIT_0"/>
-						<a:da name="INVALID" type="XPath" expr="text:uniq((../../../..//*[@name='CddI2cHwUnitType']),node:value(.))"
-						false="The HW Units should be unique"/>
+                        <a:da name="INVALID" type="XPath" expr="text:uniq((../../../..//*[@name='CddI2cHwUnitType']),node:value(.))"
+                        false="The HW Units should be unique"/>
                         <a:da name="RANGE">
                           <a:v>CDD_I2C_HW_UNIT_0</a:v>
                           <a:v>CDD_I2C_HW_UNIT_1</a:v>
@@ -365,19 +207,16 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a"/>
+                        <a:a name="UUID" value="1acefcc0-3ecd-4071-a2e1-8becf702d89b"/>
                         <a:da name="DEFAULT" value="CDD_I2C_100KHZ"/>
                         <a:da name="RANGE">
                           <a:v>CDD_I2C_100KHZ</a:v>
                           <a:v>CDD_I2C_400KHZ</a:v>
-                          <a:v>CDD_I2C_1P0MHZ</a:v>
-                          <a:v>CDD_I2C_3P4MHZ</a:v>
                         </a:da>
                       </v:var>
                       <v:var name="CddI2cHwUnitFrequency" type="INTEGER">
                         <a:a name="DESC"
-                             value="EN: Frequency which the HW unit will utilise, please note that this differs from the bus frequency used for communication"/>
+                             value="EN: Frequency which the HW unit will utilize(Range = 6.7 MHz - 13.3 MHz), please note that this differs from the bus frequency used for communication"/>
                         <a:a name="IMPLEMENTATIONCONFIGCLASS"
                              type="IMPLEMENTATIONCONFIGCLASS">
                           <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -385,10 +224,13 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb"/>
-                        <a:da name="DEFAULT" value="96000000"/>
+                        <a:a name="UUID" value="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb"/>
+                        <a:da name="DEFAULT" value="8000000"/>
                         <a:da name="EDITABLE" value="false"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=13300000"/>
+                          <a:tst expr="&gt;=6700000"/>
+                        </a:da>
                       </v:var>
                       <v:var name="CddI2cClkInputSrc" type="INTEGER">
                         <a:a name="DESC"
@@ -400,23 +242,41 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb"/>
+                        <a:a name="UUID" value="0167f448-375e-4c53-9057-146e3ff63e99"/>
                         <a:da name="DEFAULT" value="200000000"/>
                         <a:da name="INVALID" type="Range">
                           <a:tst expr="&lt;=4294967295"/>
                           <a:tst expr="&gt;=0"/>
                         </a:da>
                       </v:var>
+                      <v:var name="CddI2cOwnAddress" type="INTEGER">
+                        <a:a name="DESC" value="EN: Own address - used in both 7 and 10-bit address mode."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="Texas Instruments"/>
+                        <a:a name="SCOPE" value="ECU"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" value="ECUC:efb1a8d3-e084-4c1c-af6a-271e5d8356c7"/>
+                        <a:da name="DEFAULT" value="127"/>
+                        <a:da name="INVALID" type="Range">
+                          <a:tst expr="&lt;=1023"/>
+                          <a:tst expr="&gt;=0"/>
+                        </a:da>
+                      </v:var>
                     </v:ctr>
                   </v:lst>
-				<v:lst name="CddI2cChannelConfig" type="MAP">
+                <v:lst name="CddI2cChannelConfig" type="MAP">
                     <a:da name="MIN" value="0"/>
                     <v:ctr name="CddI2cChannelConfig" type="IDENTIFIABLE">
                       <a:a name="DESC"
                            value="EN: This container contains the Channel configurations"/>
-                      <a:a name="UUID"
-                           value="ECUC:ea0b3275-57db-4645-bf46-8baa9a2e3bd5"/>
+                      <a:a name="UUID" value="80ffcca1-5b11-4d00-8313-f12d9a481946"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
                       <v:var name="CddI2cChannelDirection" type="ENUMERATION">
                         <a:a name="DESC"
                              value="EN: Selection of Channel direction."/>
@@ -427,8 +287,7 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a"/>
+                        <a:a name="UUID" value="78c95e58-3610-4832-93a5-d714156bd570"/>
                         <a:da name="DEFAULT" value="CDD_I2C_WRITE"/>
                         <a:da name="RANGE">
                           <a:v>CDD_I2C_WRITE</a:v>
@@ -445,8 +304,7 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb"/>
+                        <a:a name="UUID" value="7e958ca1-91ce-4d46-b9cf-39b4b503241e"/>
                         <a:da name="DEFAULT" value="50"/>
                         <a:da name="INVALID" type="Range">
                           <a:tst expr="&lt;=65535"/>
@@ -463,8 +321,7 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a"/>
+                        <a:a name="UUID" value="fa6221cb-e600-47b3-bdbf-a1a99d315e34"/>
                         <a:da name="DEFAULT" value="CDD_I2C_7_BIT_ADDRESS"/>
                         <a:da name="RANGE">
                           <a:v>CDD_I2C_7_BIT_ADDRESS</a:v>
@@ -473,13 +330,16 @@
                       </v:var>
                     </v:ctr>
                   </v:lst>
-				<v:lst name="CddI2cSequenceConfig" type="MAP">
+                <v:lst name="CddI2cSequenceConfig" type="MAP">
                     <a:da name="MIN" value="0"/>
                     <v:ctr name="CddI2cSequenceConfig" type="IDENTIFIABLE">
                       <a:a name="DESC"
                            value="EN: This container contains the Sequence configurations"/>
-                      <a:a name="UUID"
-                           value="ECUC:ea0b3275-57db-4645-bf46-8baa9a2e3bd5"/>
+                      <a:a name="UUID" value="bf4112fa-99c7-42e6-a425-3d17b6e92249"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
                       <v:var name="CddI2cSequenceHwUnitType" type="ENUMERATION">
                         <a:a name="DESC" value="EN: I2c HW unit to use."/>
                         <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -489,8 +349,7 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a"/>
+                        <a:a name="UUID" value="967ab9c8-5ef0-4fa4-8f81-9dcbdf2add98"/>
                         <a:da name="DEFAULT" value="CDD_I2C_HW_UNIT_0"/>
                         <a:da name="RANGE">
                           <a:v>CDD_I2C_HW_UNIT_0</a:v>
@@ -509,8 +368,7 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                        <a:a name="UUID"
-                             value="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb"/>
+                        <a:a name="UUID" value="dcad4671-7e7e-4c78-9dce-f66e059191ce"/>
                         <a:da name="DEFAULT" value="1"/>
                         <a:da name="INVALID" type="Range">
                           <a:tst expr="&lt;=255"/>
@@ -528,8 +386,7 @@
                           <a:a name="ORIGIN" value="Texas Instruments"/>
                           <a:a name="SCOPE" value="LOCAL"/>
                           <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                          <a:a name="UUID"
-                                    value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
+                          <a:a name="UUID" value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
                         <a:da name="ENABLE" value="true"/>
                         <a:da name="DEFAULT" value="NULL_PTR"/>
                       </v:var>
@@ -544,8 +401,7 @@
                             <a:a name="ORIGIN" value="Texas Instruments"/>
                             <a:a name="SCOPE" value="LOCAL"/>
                             <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                            <a:a name="UUID"
-                                      value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
+                            <a:a name="UUID" value="6b287ea4-8841-4852-b665-1c6c36098448"/>
                           <a:da name="ENABLE" value="true"/>
                           <a:da name="DEFAULT" value="NULL_PTR"/>
                       </v:var>
@@ -570,15 +426,20 @@
                         <v:ctr name="I2cChannelList" type="IDENTIFIABLE">
                                     <a:a name="DESC" value="EN: References to I2c channels and their order within the Sequence."/>
                         <a:a name="UUID" value="6a4113e1-75fa-4cac-a818-cce8010ab1e2"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
                         <v:var name="I2cChannelIndex" type="INTEGER">
                         <a:a name="DESC" value="EN: This parameter specifies the order of Channels within the Sequence."/>
                         <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                        <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
                         </a:a>
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                         <a:a name="UUID" value="0b4c064e-8dde-419a-8b44-42a4407dd983"/>
+                        <a:da name="DEFAULT" value="0"/>
                         <a:da name="INVALID" type="Range">
                           <a:tst expr="&lt;=255"/>
                           <a:tst expr="&gt;=0"/>
@@ -598,7 +459,7 @@
                         </v:lst>
                     </v:ctr>
                   </v:lst>
-			  <d:ref type="REFINED_MODULE_DEF" value="ASPath:/AUTOSAR/EcucDefs/Cdd"/>
+              <d:ref type="REFINED_MODULE_DEF" value="ASPath:/AUTOSAR/EcucDefs/Cdd"/>
             </v:ctr>
           </d:chc>
         </d:lst>

@@ -73,9 +73,8 @@
         -I${MCAL_MCAL_Mcu_Cfg}
         -I${MCAL_MCAL_Port_Cfg}
 
-
-
         -I${MCAL_MCAL_I2c_V0}
+        -I${MCAL_MCAL_I2c_SRC}
         -I${MCAL_MCAL_Mcu_V2}
         -I${MCAL_MCAL_Port_V0}
         "
@@ -121,10 +120,11 @@
         <pathVariable name="MCAL_sys_asm" path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" scope="project"/>
 
         <pathVariable name="MCAL_MCAL_I2c_V0" path="${MCAL_MCAL}/I2c/V0" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_SRC" path="${MCAL_MCAL}/I2c/src" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu_V2" path="${MCAL_MCAL}/Mcu/V2" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port_V0" path="${MCAL_MCAL}/Port/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_I2c_eg" path="${MCAL_MCAL}/examples/I2c/i2c_app/soc/am263px/r5f0_0/" scope="project"/>
-        <pathVariable name="MCAL_MCAL_I2c_Cfg" path="${PROJECT_LOC}/examples_config/I2c_Demo_Cfg/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_Cfg" path="${PROJECT_LOC}/examples/I2c/i2c_app/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu_Cfg" path="${PROJECT_LOC}/examples_config/Mcu_Demo_Cfg/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port_Cfg" path="${PROJECT_LOC}/examples_config/Port_Demo_Cfg/include" scope="project"/>
 
@@ -137,8 +137,8 @@
         <file path="${MCAL_MCAL}/Port/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
         <file path="${MCAL_MCAL}/Port/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
         <file path="${MCAL_MCAL}/Port/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
-        <file path="${MCAL_MCAL}/examples_config/I2c_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/I2c_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples_config/I2c_Demo_Cfg/soc/am263px/r5f0_0/src/Cdd_I2c_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/I2c_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples/I2c/i2c_app/soc/am263px/tresos/output/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples/I2c/i2c_app"></file>
+        <file path="${MCAL_MCAL}/examples/I2c/i2c_app/soc/am263px/tresos/output/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples/I2c/i2c_app"></file>
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263px/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
@@ -163,6 +163,7 @@
         <file path="${MCAL_MCAL}/examples/Utils/am263px/sci.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
 
         <file path="${MCAL_MCAL}/examples/Utils/Dem.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/Det.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_core.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_pmu_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/boot_armv7r_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
@@ -185,8 +186,9 @@
 
 
         <file path="${MCAL_MCAL}/examples/I2c/i2c_app/I2cApp.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
-        <file path="${MCAL_MCAL}/examples/I2c/i2c_app/soc/am263px/r5f0_0/I2cApp_Startup.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
-        <file path="${MCAL_MCAL}/examples/I2c/i2c_app/soc/am263px/r5f0_0/I2cApp_Startup.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
+        <file path="${MCAL_MCAL}/examples/I2c/i2c_app/I2cApp.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
+        <file path="${MCAL_MCAL}/examples/I2c/i2c_app/soc/am263px/r5f0_0/I2cApp_Platform.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
+        <file path="${MCAL_MCAL}/examples/I2c/i2c_app/soc/am263px/r5f0_0/I2cApp_Platform.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
     </project>
 </projectSpec>
 

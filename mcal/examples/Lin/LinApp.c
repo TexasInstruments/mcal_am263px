@@ -317,6 +317,7 @@ int main(void)
     AppUtils_printf(APP_NAME ": Sample Application - STARTS !!!\n\r ");
 
     LinApp_mainTest();
+    return 0;
 }
 
 #if (defined CLANG) || (defined DIAB)

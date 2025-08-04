@@ -371,6 +371,9 @@ void RPMessage_coreDeInit(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId)
 void RPMessage_controlEndPtHandler(void *rpMsgHandle, RPMessage_EpObject *epObj, void *arg, void *data, uint16 dataLen,
                                    sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)
 {
+    (void)crcStatus;
+    (void)epObj;
+    (void)arg;
     RPMessageLLD_Handle hRpMsg = (RPMessageLLD_Handle)rpMsgHandle;
 
     if ((hRpMsg->controlEndPtCallback) != NULL_PTR)

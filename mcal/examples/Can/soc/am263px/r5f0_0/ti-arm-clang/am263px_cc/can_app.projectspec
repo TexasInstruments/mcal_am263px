@@ -82,6 +82,7 @@
         -I${MCAL_MCAL_Mcu_V2}
         -I${MCAL_MCAL_Port_V0}
         -I${MCAL_MCAL_I2c_V0}
+        -I${MCAL_MCAL_I2c_SRC}
         -I${MCAL_MCAL_Fls_V2}
         "
         postBuildStep="$(MAKE) -C ${CCS_PROJECT_DIR} -f makefile_ccs_bootimage_gen OUTNAME=can_app PROFILE=${ConfigName} MCAL_SITARA_MCU_PATH=${MCAL_MCAL}/.. CG_TOOL_ROOT=${CG_TOOL_ROOT} CCS_INSTALL_DIR=${CCS_INSTALL_DIR} CCS_NODE=${CCS_INSTALL_DIR}/tools/node/node CYGWIN_PATH=${CCS_UTILS_DIR}/cygwin DEVICE=am263px"
@@ -132,6 +133,7 @@
         <pathVariable name="MCAL_MCAL_Mcu_V2" path="${MCAL_MCAL}/Mcu/V2" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port_V0" path="${MCAL_MCAL}/Port/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_I2c_V0" path="${MCAL_MCAL}/I2c/V0" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_SRC" path="${MCAL_MCAL}/I2c/src" scope="project"/>
         <pathVariable name="MCAL_MCAL_Fls_V2" path="${MCAL_MCAL}/Fls/V2" scope="project"/>
         <pathVariable name="MCAL_MCAL_Can_eg" path="${MCAL_MCAL}/examples/Can/soc/am263px/r5f0_0/" scope="project"/>
         <pathVariable name="MCAL_MCAL_Can_Cfg" path="${PROJECT_LOC}/examples_config/Can_Demo_Cfg/include" scope="project"/>
@@ -159,8 +161,8 @@
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/src/Port_PBcfg_CAN.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/src/Port_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos/output/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/I2c_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos/output/src/Cdd_I2c_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/I2c_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos/output/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos/output/src/Cdd_I2c_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Fls_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Fls_Demo_Cfg"></file>
 
         <file path="${MCAL_MCAL}/examples/Utils/am263px/IoMux/ioexp_tca6416_6424.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px/IoMux"></file>

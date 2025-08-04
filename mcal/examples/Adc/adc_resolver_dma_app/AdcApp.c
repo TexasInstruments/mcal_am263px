@@ -130,7 +130,7 @@ static void Adc_appTest(void)
         }
 
         memset(&gAdcAppSetupBuffer[grpIdx][0U], 0U, (sizeof(Adc_ValueGroupType) * ADC_APP_READ_BUF_SIZE_WORD));
-        Mcal_CacheP_inv((void *)&gAdcAppSetupBuffer[grpIdx][0U], ADC_APP_READ_BUF_SIZE_ALIGNED, Mcal_CacheP_TYPE_ALL);
+        Mcal_CacheP_wb((void *)&gAdcAppSetupBuffer[grpIdx][0U], ADC_APP_READ_BUF_SIZE_ALIGNED, Mcal_CacheP_TYPE_ALL);
         retVal = Adc_SetupResultBuffer(grpIdx, &gAdcAppSetupBuffer[grpIdx][0U]);
         if (retVal != E_OK)
         {

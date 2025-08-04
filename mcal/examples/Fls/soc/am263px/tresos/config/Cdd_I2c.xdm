@@ -35,53 +35,16 @@
                 <d:var name="CddI2cVersionInfoApi" type="BOOLEAN" value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="CddI2cArbitrationLossCheck" type="BOOLEAN"
-                       value="true">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:var name="CddI2cNackAsErrorCheck" type="BOOLEAN" value="true">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
                 <d:var name="CddI2cCancelCheck" type="BOOLEAN" value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
                 <d:var name="CddI2cStatusCheck" type="BOOLEAN" value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="CddI2cMultipleSequenceInQueueProcessCheck"
-                       type="BOOLEAN" value="true">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:var name="CddI2cArbitrationLossParam" type="ENUMERATION"
-                       value="CDD_I2C_BURST_MODE">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddI2cEnableRegisterReadbackApi" type="BOOLEAN" value="false">
                 </d:var>
                 <d:var name="CddIrqType" type="ENUMERATION"
-                       value="CDD_I2C_ISR_CAT2">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:ref name="CddI2cOsCounterRef" type="REFERENCE" >
-                  <a:a name="ENABLE" value="false"/>
-                  <a:a name="IMPORTER_INFO" value="@DEF"/>
-                </d:ref>
-                <d:var name="CddI2cDefaultOSCounterId" type="INTEGER" value="0">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:var name="CddI2cArbitrationLossTimeout" type="INTEGER"
-                       value="400000000">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:var name="CddI2cPollTimeout" type="INTEGER" value="400000000">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:var name="CddI2cQueueTimeout" type="INTEGER"
-                       value="800000000">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:var name="CddI2cQueueSize" type="INTEGER" value="10">
-                  <a:a name="IMPORTER_INFO" value="@REC"/>
-                </d:var>
-                <d:var name="CddI2cMaxlengthByte" type="INTEGER" value="255">
+                       value="CDD_I2C_ISR_CAT1">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
                 <d:var name="CddI2cHwUnitsUsed" type="INTEGER" value="2">
@@ -100,11 +63,15 @@
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                   <d:var name="CddI2cHwUnitFrequency" type="INTEGER"
-                         value="96000000">
+                         value="8000000">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                   <d:var name="CddI2cClkInputSrc" type="INTEGER"
                          value="200000000">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                  </d:var>
+                  <d:var name="CddI2cOwnAddress" type="INTEGER"
+                         value="127">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                 </d:ctr>
@@ -119,11 +86,15 @@
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                   <d:var name="CddI2cHwUnitFrequency" type="INTEGER"
-                         value="96000000">
+                         value="8000000">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                   <d:var name="CddI2cClkInputSrc" type="INTEGER"
                          value="200000000">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                  </d:var>
+                  <d:var name="CddI2cOwnAddress" type="INTEGER"
+                         value="127">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                 </d:ctr>
@@ -170,26 +141,26 @@
                 </d:ctr>
                 <d:ctr name="CddI2cChannelConfig_3" type="IDENTIFIABLE">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
-                  <d:var name="CddI2cChannelDirection" type="ENUMERATION" 
+                  <d:var name="CddI2cChannelDirection" type="ENUMERATION"
                          value="CDD_I2C_READ">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
-                  <d:var name="CddI2cChannelSlaveAddress" type="INTEGER" 
+                  <d:var name="CddI2cChannelSlaveAddress" type="INTEGER"
                          value="80"/>
-                  <d:var name="I2cSlaveAddressScheme" type="ENUMERATION" 
+                  <d:var name="I2cSlaveAddressScheme" type="ENUMERATION"
                          value="CDD_I2C_7_BIT_ADDRESS">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                 </d:ctr>
                 <d:ctr name="CddI2cChannelConfig_4" type="IDENTIFIABLE">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
-                  <d:var name="CddI2cChannelDirection" type="ENUMERATION" 
+                  <d:var name="CddI2cChannelDirection" type="ENUMERATION"
                          value="CDD_I2C_WRITE"/>
-                  <d:var name="CddI2cChannelSlaveAddress" type="INTEGER" 
+                  <d:var name="CddI2cChannelSlaveAddress" type="INTEGER"
                          value="80">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
-                  <d:var name="I2cSlaveAddressScheme" type="ENUMERATION" 
+                  <d:var name="I2cSlaveAddressScheme" type="ENUMERATION"
                          value="CDD_I2C_7_BIT_ADDRESS">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
@@ -210,6 +181,10 @@
                          type="FUNCTION-NAME" value="I2c_Iomux_Read_Callback"/>
                   <d:var name="CddI2cSequenceErrorNotify" type="FUNCTION-NAME"
                          value="I2c_Iomux_Read_Callback_Fail"/>
+                  <d:var name="CddI2cRestartModeType" type="ENUMERATION"
+                         value="CDD_I2C_RESTART_MODE_STOP">
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                  </d:var>
                   <d:lst name="I2cChannelList" type="MAP">
                     <d:ctr name="I2cChannelList_0" type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -235,6 +210,10 @@
                          type="FUNCTION-NAME" value="I2c_Iomux_Write_Callback_Ptr"/>
                   <d:var name="CddI2cSequenceErrorNotify" type="FUNCTION-NAME"
                          value="I2c_Iomux_Write_Callback_Ptr_Fail"/>
+                  <d:var name="CddI2cRestartModeType" type="ENUMERATION"
+                         value="CDD_I2C_RESTART_MODE_STOP">
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                  </d:var>
                   <d:lst name="I2cChannelList" type="MAP">
                     <d:ctr name="I2cChannelList_1" type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -262,6 +241,10 @@
                          type="FUNCTION-NAME" value="I2c_Iomux_Write_Callback"/>
                   <d:var name="CddI2cSequenceErrorNotify" type="FUNCTION-NAME"
                          value="I2c_Iomux_Write_Callback_Fail"/>
+                  <d:var name="CddI2cRestartModeType" type="ENUMERATION"
+                         value="CDD_I2C_RESTART_MODE_STOP">
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                  </d:var>
                   <d:lst name="I2cChannelList" type="MAP">
                     <d:ctr name="I2cChannelList_2" type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -277,49 +260,57 @@
                 </d:ctr>
                 <d:ctr name="CddI2cSequenceConfig_3" type="IDENTIFIABLE">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
-                  <d:var name="CddI2cSequenceHwUnitType" type="ENUMERATION" 
+                  <d:var name="CddI2cSequenceHwUnitType" type="ENUMERATION"
                          value="CDD_I2C_HW_UNIT_0"/>
-                  <d:var name="CddI2cNumberOfChannelsInSequence" type="INTEGER" 
+                  <d:var name="CddI2cNumberOfChannelsInSequence" type="INTEGER"
                          value="1">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
-                  <d:var name="CddI2cSequenceCompleteNotify" 
+                  <d:var name="CddI2cSequenceCompleteNotify"
                          type="FUNCTION-NAME" value="I2c_Eeprom_Read_Callback"/>
-                  <d:var name="CddI2cSequenceErrorNotify" type="FUNCTION-NAME" 
+                  <d:var name="CddI2cSequenceErrorNotify" type="FUNCTION-NAME"
                          value="I2c_Eeprom_Read_Callback_Fail"/>
+                  <d:var name="CddI2cRestartModeType" type="ENUMERATION"
+                         value="CDD_I2C_RESTART_MODE_STOP">
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                  </d:var>
                   <d:lst name="I2cChannelList" type="MAP">
                     <d:ctr name="I2cChannelList_3" type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                       <d:var name="I2cChannelIndex" type="INTEGER" value="3">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:ref name="I2cChannelAssignment" type="REFERENCE" 
+                      <d:ref name="I2cChannelAssignment" type="REFERENCE"
                              value="ASPath:/Cdd_I2c/Cdd_I2c/CddI2cChannelConfig_3"/>
                     </d:ctr>
                   </d:lst>
                 </d:ctr>
                 <d:ctr name="CddI2cSequenceConfig_4" type="IDENTIFIABLE">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
-                  <d:var name="CddI2cSequenceHwUnitType" type="ENUMERATION" 
+                  <d:var name="CddI2cSequenceHwUnitType" type="ENUMERATION"
                          value="CDD_I2C_HW_UNIT_0">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
-                  <d:var name="CddI2cNumberOfChannelsInSequence" type="INTEGER" 
+                  <d:var name="CddI2cNumberOfChannelsInSequence" type="INTEGER"
                          value="1">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
-                  <d:var name="CddI2cSequenceCompleteNotify" 
-                         type="FUNCTION-NAME" 
+                  <d:var name="CddI2cSequenceCompleteNotify"
+                         type="FUNCTION-NAME"
                          value="I2c_Eeprom_Address_Ptr_Reset"/>
-                  <d:var name="CddI2cSequenceErrorNotify" type="FUNCTION-NAME" 
+                  <d:var name="CddI2cSequenceErrorNotify" type="FUNCTION-NAME"
                          value="I2c_Eeprom_Address_Ptr_Fail"/>
+                  <d:var name="CddI2cRestartModeType" type="ENUMERATION"
+                         value="CDD_I2C_RESTART_MODE_STOP">
+                    <a:a name="IMPORTER_INFO" value="@DEF"/>
+                  </d:var>
                   <d:lst name="I2cChannelList" type="MAP">
                     <d:ctr name="I2cChannelList_4" type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                       <d:var name="I2cChannelIndex" type="INTEGER" value="4">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:ref name="I2cChannelAssignment" type="REFERENCE" 
+                      <d:ref name="I2cChannelAssignment" type="REFERENCE"
                              value="ASPath:/Cdd_I2c/Cdd_I2c/CddI2cChannelConfig_4">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:ref>

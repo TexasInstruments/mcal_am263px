@@ -319,6 +319,16 @@ SECTIONS
         . += FILL_LENGTH;
         __linker_ipc_text_end = .;
 
+        .=align(4);
+        __linker_i2c_text_start = .;
+        . += FILL_LENGTH;
+        *(I2C_TEXT_SECTION)
+        *(I2C_ISR_TEXT_SECTION)
+        *(I2C_CALLOUT_TEXT_SECTION)
+        .=align(4);
+        . += FILL_LENGTH;
+        __linker_i2c_text_end = .;
+
 		.=align(8);
         __linker_eth_text_start = .;
         . += FILL_LENGTH;
@@ -556,6 +566,16 @@ SECTIONS
         . += FILL_LENGTH;
         __linker_ipc_const_end = .;
 
+        .=align(4);
+        __linker_i2c_const_start = .;
+        . += FILL_LENGTH;
+        *(I2C_CONST_32_SECTION)
+        *(I2C_CONST_UNSPECIFIED_SECTION)
+        *(I2C_CONFIG_SECTION)
+        .=align(4);
+        . += FILL_LENGTH;
+        __linker_i2c_const_end = .;
+
 		.=align(8);
         __linker_eth_const_start = .;
         . += FILL_LENGTH;
@@ -770,6 +790,17 @@ SECTIONS
         . += FILL_LENGTH;
         __linker_ipc_init_end = .;
 
+        .=align(4);
+        __linker_i2c_init_start = .;
+        . += FILL_LENGTH;
+        *(I2C_DATA_INIT_UNSPECIFIED_SECTION)
+        *(I2C_DATA_INIT_32_SECTION)
+        *(I2C_DATA_INIT_16_SECTION)
+        *(I2C_DATA_INIT_8_SECTION)
+        .=align(4);
+        . += FILL_LENGTH;
+        __linker_i2c_init_end = .;
+
 		  .=align(8);
         __linker_eth_init_start = .;
         . += FILL_LENGTH;
@@ -980,6 +1011,17 @@ SECTIONS
         .=align(8);
         . += FILL_LENGTH;
         __linker_ipc_no_init_end = .;
+
+        .=align(4);
+        __linker_i2c_no_init_start = .;
+        . += FILL_LENGTH;
+        *(I2C_DATA_NO_INIT_UNSPECIFIED_SECTION)
+        *(I2C_DATA_NO_INIT_32_SECTION)
+        *(I2C_DATA_NO_INIT_16_SECTION)
+        *(I2C_DATA_NO_INIT_8_SECTION)
+        .=align(4);
+        . += FILL_LENGTH;
+        __linker_i2c_no_init_end = .;
 
 		     .=align(8);
         __linker_eth_no_init_start = .;

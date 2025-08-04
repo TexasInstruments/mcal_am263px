@@ -51,7 +51,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="1ca8ab74-453c-440a-b02f-a8301b5be55d">
                   <SHORT-NAME>CddI2cUseInterrupts</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches to activate or deactivate interrupt controlled job processing(ON/OFF).</L-2>
@@ -86,40 +86,6 @@
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
                 <ECUC-BOOLEAN-PARAM-DEF UUID="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84">
-                  <SHORT-NAME>CddI2cArbitrationLossCheck</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Switches to activate or deactivate Arbitration loss interrupt(ON/OFF).</L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
-                </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84">
-                  <SHORT-NAME>CddI2cNackAsErrorCheck</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Switches to activate or deactivate NACK error check(ON/OFF).</L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
-                </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84">
                   <SHORT-NAME>CddI2cCancelCheck</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches to activate or deactivate the Cancel channel transmission API(ON/OFF).</L-2>
@@ -136,7 +102,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="a8698380-0a3a-4330-ab47-f71a741033c2">
                   <SHORT-NAME>CddI2cStatusCheck</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches to activate or deactivate Cdd_I2c_GetStatus API(ON/OFF).</L-2>
@@ -153,50 +119,6 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="9cdfff86-3705-4d7f-a1a2-ed7e8f825c84">
-                  <SHORT-NAME>CddI2cMultipleSequenceInQueueProcessCheck</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Switches to activate or deactivate functionality to process same sequence in queue multiple times (ON/OFF).</L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>false</DEFAULT-VALUE>
-                </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4a5a7170-fc8d-49ff-b270-2c2b24b3a21f">
-                  <SHORT-NAME>CddI2cArbitrationLossParam</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="FOR-ALL">CDD_I2C Arbitration loss condition parameter, possible values are CDD_I2C_BURST_MODE (for detaching from bus) or CDD_I2C_RECURRENT_MODE (For sending 9 clock pulses to the slave in order to synchronize the bus) </L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>CDD_I2C_BURST_MODE</DEFAULT-VALUE>
-                  <LITERALS>
-                    <ECUC-ENUMERATION-LITERAL-DEF>
-                      <SHORT-NAME>CDD_I2C_BURST_MODE</SHORT-NAME>
-                      <ORIGIN>Texas Instruments</ORIGIN>
-                    </ECUC-ENUMERATION-LITERAL-DEF>
-                    <ECUC-ENUMERATION-LITERAL-DEF>
-                      <SHORT-NAME>CDD_I2C_RECURRENT_MODE</SHORT-NAME>
-                      <ORIGIN>Texas Instruments</ORIGIN>
-                    </ECUC-ENUMERATION-LITERAL-DEF>
-                  </LITERALS>
-                </ECUC-ENUMERATION-PARAM-DEF>
                 <ECUC-ENUMERATION-PARAM-DEF UUID="9b1f91d5-fbf9-40cd-b58d-a55eac793943">
                   <SHORT-NAME>CddIrqType</SHORT-NAME>
                   <DESC>
@@ -207,6 +129,12 @@
                   <!-- @CalculatedEnd -->
                   <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
                   <SCOPE>LOCAL</SCOPE>
+                  <MULTIPLICITY-CONFIG-CLASSES>
+                    <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                  </MULTIPLICITY-CONFIG-CLASSES>
                   <ORIGIN>Texas Instruments</ORIGIN>
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
@@ -233,118 +161,6 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6dc462ec-a924-4633-b6ac-2d00ef0d3965">
-                  <SHORT-NAME>CddI2cDefaultOSCounterId</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Default Os Counter Id if node reference to OsCounter ref CddI2cOsCounterRef is not set</L-2>
-                  </DESC>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <DEFAULT-VALUE>0</DEFAULT-VALUE>
-                  <MAX>16</MAX>
-                  <MIN>0</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:e734173d-b67f-40ec-8016-b06b1e6c60b2">
-                  <SHORT-NAME>CddI2cArbitrationLossTimeout</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">I2C timeout - used for timing I2C arbitration loss wait wait</L-2>
-                  </DESC>
-                  <SCOPE>ECU</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>1000</DEFAULT-VALUE>
-                  <MAX>4294967295</MAX>
-                  <MIN>1</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:e734173d-b67f-40ec-8016-b06b1e6c60b2">
-                  <SHORT-NAME>CddI2cPollTimeout</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">I2C timeout - used for I2C polling timeouts</L-2>
-                  </DESC>
-                  <SCOPE>ECU</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>1000</DEFAULT-VALUE>
-                  <MAX>4294967295</MAX>
-                  <MIN>1</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:e734173d-b67f-40ec-8016-b06b1e6c60b2">
-                  <SHORT-NAME>CddI2cQueueTimeout</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">I2C timeout - used for queue timeouts. Unit is in clock ticks. Configure the timeout according to r5f clock frequency(400MHz/200MHz)</L-2>
-                  </DESC>
-                  <SCOPE>ECU</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>1000</DEFAULT-VALUE>
-                  <MAX>4294967295</MAX>
-                  <MIN>1</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:e734173d-b67f-40ec-8016-b06b1e6c61b2">
-                  <SHORT-NAME>CddI2cQueueSize</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Define I2c driver max queue size.</L-2>
-                  </DESC>
-                  <SCOPE>ECU</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>10</DEFAULT-VALUE>
-                  <MAX>255</MAX>
-                  <MIN>0</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:70edc491-c59b-4376-bc8a-ecac559250c7">
-                  <SHORT-NAME>CddI2cMaxlengthByte</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Maximum Length of byte to be write or read </L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>1</DEFAULT-VALUE>
-                  <MAX>255</MAX>
-                  <MIN>0</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
                 <ECUC-INTEGER-PARAM-DEF UUID="ECUC:70edc491-c59b-4376-bc8a-ecac559250c7">
                   <SHORT-NAME>CddI2cHwUnitsUsed</SHORT-NAME>
                   <DESC>
@@ -364,18 +180,13 @@
                   <MAX>4</MAX>
                   <MIN>1</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-              </PARAMETERS>
-              <REFERENCES>
-                <ECUC-REFERENCE-DEF UUID="ECUC:26c9bdff-38cf-4f0b-8754-7472d0d41cb9">
-                  <SHORT-NAME>CddI2cOsCounterRef</SHORT-NAME>
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:34bfc216-9d93-4694-90c5-39741e73c648">
+                  <SHORT-NAME>CddI2cEnableRegisterReadbackApi</SHORT-NAME>
                   <DESC>
-                    <L-2 L="EN">This parameter contains a reference to the OsCounter, which is used by the CddI2c driver.</L-2>
+                    <L-2 L="EN">Switch to indicate that the Cdd_I2c_RegisterReadBack is supported</L-2>
                   </DESC>
-                  <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
-                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
                   <SCOPE>LOCAL</SCOPE>
                   <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
                   <VALUE-CONFIG-CLASSES>
                     <ECUC-VALUE-CONFIGURATION-CLASS>
@@ -383,9 +194,10 @@
                       <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
                     </ECUC-VALUE-CONFIGURATION-CLASS>
                   </VALUE-CONFIG-CLASSES>
-                  <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Os/OsCounter</DESTINATION-REF>
-                </ECUC-REFERENCE-DEF>
-              </REFERENCES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
+                </ECUC-BOOLEAN-PARAM-DEF>
+              </PARAMETERS>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
             <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:ea0b3275-57db-4645-bf46-8baa9a2e3bd5">
               <SHORT-NAME>CddI2cHwConfig</SHORT-NAME>
@@ -393,7 +205,13 @@
                 <L-2 L="EN">This container contains the HW unit initialization parameters</L-2>
               </DESC>
               <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
-              <UPPER-MULTIPLICITY>3</UPPER-MULTIPLICITY>
+              <UPPER-MULTIPLICITY>4</UPPER-MULTIPLICITY>
+              <MULTIPLICITY-CONFIG-CLASSES>
+                <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                  <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+              </MULTIPLICITY-CONFIG-CLASSES>
               <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
               <PARAMETERS>
                 <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a">
@@ -431,7 +249,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="1acefcc0-3ecd-4071-a2e1-8becf702d89b">
                   <SHORT-NAME>CddI2cChannelBitRate</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Selection of Channel Bit Rate.</L-2>
@@ -456,20 +274,12 @@
                       <SHORT-NAME>CDD_I2C_400KHZ</SHORT-NAME>
                       <ORIGIN>Texas Instruments</ORIGIN>
                     </ECUC-ENUMERATION-LITERAL-DEF>
-                    <ECUC-ENUMERATION-LITERAL-DEF>
-                      <SHORT-NAME>CDD_I2C_1P0MHZ</SHORT-NAME>
-                      <ORIGIN>Texas Instruments</ORIGIN>
-                    </ECUC-ENUMERATION-LITERAL-DEF>
-                    <ECUC-ENUMERATION-LITERAL-DEF>
-                      <SHORT-NAME>CDD_I2C_3P4MHZ</SHORT-NAME>
-                      <ORIGIN>Texas Instruments</ORIGIN>
-                    </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
                 <ECUC-INTEGER-PARAM-DEF UUID="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb">
                   <SHORT-NAME>CddI2cHwUnitFrequency</SHORT-NAME>
                   <DESC>
-                    <L-2 L="EN">Frequency which the HW unit will utilise, please note that this differs from the bus frequency used for communication</L-2>
+                    <L-2 L="EN">Frequency which the HW unit will utilize(Range = 6.7 MHz - 13.3 MHz), please note that this differs from the bus frequency used for communication</L-2>
                   </DESC>
                   <SCOPE>ECU</SCOPE>
                   <ORIGIN>Texas Instruments</ORIGIN>
@@ -481,9 +291,11 @@
                     </ECUC-VALUE-CONFIGURATION-CLASS>
                   </VALUE-CONFIG-CLASSES>
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>96000000</DEFAULT-VALUE>
+                  <DEFAULT-VALUE>8000000</DEFAULT-VALUE>
+                  <MAX>13300000</MAX>
+                  <MIN>6700000</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb">
+                <ECUC-INTEGER-PARAM-DEF UUID="0167f448-375e-4c53-9057-146e3ff63e99">
                   <SHORT-NAME>CddI2cClkInputSrc</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Please ensure that the frequency used here should be the same as mcu clk settings for I2c, as this is required internally to calculate pre-scalar which is needed to set the bus frequency</L-2>
@@ -502,18 +314,43 @@
                   <MAX>4294967295</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:efb1a8d3-e084-4c1c-af6a-271e5d8356c7">
+                  <SHORT-NAME>CddI2cOwnAddress</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Own address - used in both 7 and 10-bit address mode.</L-2>
+                  </DESC>
+                  <SCOPE>ECU</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>127</DEFAULT-VALUE>
+                  <MAX>1023</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
               </PARAMETERS>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:ea0b3275-57db-4645-bf46-8baa9a2e3bd5">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="80ffcca1-5b11-4d00-8313-f12d9a481946">
               <SHORT-NAME>CddI2cChannelConfig</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">This container contains the Channel configurations</L-2>
               </DESC>
               <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
               <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+              <MULTIPLICITY-CONFIG-CLASSES>
+                <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                  <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+              </MULTIPLICITY-CONFIG-CLASSES>
               <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
               <PARAMETERS>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="78c95e58-3610-4832-93a5-d714156bd570">
                   <SHORT-NAME>CddI2cChannelDirection</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Selection of Channel direction.</L-2>
@@ -540,7 +377,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb">
+                <ECUC-INTEGER-PARAM-DEF UUID="7e958ca1-91ce-4d46-b9cf-39b4b503241e">
                   <SHORT-NAME>CddI2cChannelSlaveAddress</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Set slave address for channel</L-2>
@@ -559,7 +396,7 @@
                   <MAX>65535</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="fa6221cb-e600-47b3-bdbf-a1a99d315e34">
                   <SHORT-NAME>I2cSlaveAddressScheme</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Specifies whether channel is 7 bit or 10 bit.</L-2>
@@ -588,16 +425,22 @@
                 </ECUC-ENUMERATION-PARAM-DEF>
               </PARAMETERS>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:ea0b3275-57db-4645-bf46-8baa9a2e3bd5">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="bf4112fa-99c7-42e6-a425-3d17b6e92249">
               <SHORT-NAME>CddI2cSequenceConfig</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">This container contains the Sequence configurations</L-2>
               </DESC>
               <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
               <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+              <MULTIPLICITY-CONFIG-CLASSES>
+                <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                  <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+              </MULTIPLICITY-CONFIG-CLASSES>
               <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
               <PARAMETERS>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="967ab9c8-5ef0-4fa4-8f81-9dcbdf2add98">
                   <SHORT-NAME>CddI2cSequenceHwUnitType</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">I2c HW unit to use.</L-2>
@@ -632,7 +475,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:81d4832b-f85a-47ff-9b5e-3e549ccc15bb">
+                <ECUC-INTEGER-PARAM-DEF UUID="dcad4671-7e7e-4c78-9dce-f66e059191ce">
                   <SHORT-NAME>CddI2cNumberOfChannelsInSequence</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Set the number of channels in the sequence</L-2>
@@ -672,7 +515,7 @@
                     </ECUC-FUNCTION-NAME-DEF-CONDITIONAL>
                   </ECUC-FUNCTION-NAME-DEF-VARIANTS>
                 </ECUC-FUNCTION-NAME-DEF>
-                <ECUC-FUNCTION-NAME-DEF UUID="354621cb-2f1c-4667-9bc1-a72ce7e28a06">
+                <ECUC-FUNCTION-NAME-DEF UUID="6b287ea4-8841-4852-b665-1c6c36098448">
                   <SHORT-NAME>CddI2cSequenceErrorNotify</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Function pointer to callback function sequence complete notify</L-2>
@@ -729,6 +572,12 @@
                   </DESC>
                   <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
                   <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+                  <MULTIPLICITY-CONFIG-CLASSES>
+                    <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                  </MULTIPLICITY-CONFIG-CLASSES>
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <PARAMETERS>
                     <ECUC-INTEGER-PARAM-DEF UUID="0b4c064e-8dde-419a-8b44-42a4407dd983">
@@ -746,6 +595,7 @@
                         </ECUC-VALUE-CONFIGURATION-CLASS>
                       </VALUE-CONFIG-CLASSES>
                       <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>0</DEFAULT-VALUE>
                       <MAX>255</MAX>
                       <MIN>0</MIN>
                     </ECUC-INTEGER-PARAM-DEF>

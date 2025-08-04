@@ -2406,10 +2406,11 @@ static void Mcu_setEpwmTbClk(uint32 epwmInstance, uint32 enable)
         else
         {
             /* Disable Time base clock in CTRL MMR */
+            uint32 epwmShiftInv = ~(1U << epwmInstance);
             HW_WR_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC,
                         ((HW_RD_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC) &
                           MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC_BIT_MASK) &
-                         ~(1 << epwmInstance)));
+                         epwmShiftInv));
         }
 
         /* Lock CONTROLSS_CTRL registers */
@@ -2468,7 +2469,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
     uint32           baseAddr;
     volatile uint32 *kickAddr;
 
-    if (partition == MCU_TOP_CTRL_PARTITION0)
+    if (partition == (uint32)MCU_TOP_CTRL_PARTITION0)
     {
         /*Unlock TOP_CTRL*/
         baseAddr = (uint32)MCU_CSL_TOP_CTRL_U_BASE;
@@ -2477,7 +2478,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
-    if (partition == MCU_TOP_RCM_PARTITION0)
+    if (partition == (uint32)MCU_TOP_RCM_PARTITION0)
     {
         /*Unlock TOP_RCM*/
         baseAddr = (uint32)MCU_CSL_TOP_RCM_U_BASE;
@@ -2486,7 +2487,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_RCM_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
-    if (partition == MCU_CONTROLSS_CTRL_PARTITION0)
+    if (partition == (uint32)MCU_CONTROLSS_CTRL_PARTITION0)
     {
         /*Unlock CONTROLSS_CTRL*/
         baseAddr = (uint32)MCU_CSL_CONTROLSS_CTRL_U_BASE;
@@ -2504,7 +2505,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
     uint32           baseAddr;
     volatile uint32 *kickAddr;
 
-    if (partition == MCU_TOP_CTRL_PARTITION0)
+    if (partition == (uint32)MCU_TOP_CTRL_PARTITION0)
     {
         /*Unlock TOP_CTRL*/
         baseAddr = (uint32)MCU_CSL_TOP_CTRL_U_BASE;
@@ -2513,7 +2514,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
-    if (partition == MCU_TOP_RCM_PARTITION0)
+    if (partition == (uint32)MCU_TOP_RCM_PARTITION0)
     {
         /*Unlock TOP_RCM*/
         baseAddr = (uint32)MCU_CSL_TOP_RCM_U_BASE;
@@ -2522,7 +2523,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_RCM_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
-    if (partition == MCU_CONTROLSS_CTRL_PARTITION0)
+    if (partition == (uint32)MCU_CONTROLSS_CTRL_PARTITION0)
     {
         /*Lock CONTROLSS_CTRL*/
         baseAddr = (uint32)MCU_CSL_CONTROLSS_CTRL_U_BASE;

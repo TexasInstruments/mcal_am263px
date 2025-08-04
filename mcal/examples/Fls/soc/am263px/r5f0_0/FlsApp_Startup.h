@@ -49,6 +49,4 @@ static void FlsApp_PlatformInit(void);
 #if (STD_OFF == CDD_I2C_POLLING_MODE)
 void Cdd_I2c_InterruptConfig(void);
 #endif
-/* Global pointer pointing to NULL to be passed as argument in Cdd_I2c_Init */
-extern Cdd_I2c_ConfigPtrType I2cConfigSet;
 #endif

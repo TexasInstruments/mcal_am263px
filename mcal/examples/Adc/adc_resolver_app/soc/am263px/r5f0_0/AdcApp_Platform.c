@@ -65,6 +65,8 @@
 #define ADC_APP_I2C_EEPROM_WR_CH  (CddI2cConf_CddI2cChannel_CddI2cChannel_2)
 #define ADC_APP_I2C_EEPROM_RD_CH  (CddI2cConf_CddI2cChannel_CddI2cChannel_3)
 
+/* Slave address for IO Expander TCA6416 available in E1 version board*/
+#define TCA6416_SLAVE_ADDRESS (32U)
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -78,7 +80,7 @@
 extern void           Pmic_Enable(void);
 static boolean        Adc_appIsIoMuxTCA6424(void);
 static Std_ReturnType Adc_appI2cWrite(Cdd_I2c_SequenceType wrSeqId, Cdd_I2c_ChannelType wrChId, uint8 *pWrBuf,
-                                      uint16 size);
+                                      uint16 size, boolean boardVerE1);
 static Std_ReturnType Adc_appI2cRead(Cdd_I2c_SequenceType rdSeqId, Cdd_I2c_ChannelType rdChId, uint8 *pRdBuf,
                                      uint16 size);
 
@@ -154,17 +156,20 @@ Std_ReturnType Adc_appIoMuxSetup(void)
     Cdd_I2c_SequenceType iomuxWrSeqId;
     Cdd_I2c_ChannelType  iomuxWrChId;
     uint8                outPortOffset, configPortOffset;
+    boolean              isBoardVerE1 = FALSE;
 
     AppUtils_printf(APP_NAME ": Configuring IO Mux on the board ...\r\n");
 
     /* Check which version of board and decide which IO mux is connected */
     if (Adc_appIsIoMuxTCA6424() == TRUE)
     {
+        isBoardVerE1     = FALSE;
         outPortOffset    = TCA6424_REG_OUTPUT_PORT_0;
         configPortOffset = TCA6424_REG_CONFIG_PORT_0;
     }
     else
     {
+        isBoardVerE1     = TRUE;
         outPortOffset    = TCA6416_REG_OUTPUT_PORT_0;
         configPortOffset = TCA6416_REG_CONFIG_PORT_0;
     }
@@ -179,7 +184,7 @@ Std_ReturnType Adc_appIoMuxSetup(void)
      */
     wrBuf[0U] = outPortOffset;
     wrBuf[1U] = 0xDFU;
-    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U);
+    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U, isBoardVerE1);
     if (retVal != E_OK)
     {
         GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, APP_NAME ": I2C Write failed!!!\n\r");
@@ -194,7 +199,7 @@ Std_ReturnType Adc_appIoMuxSetup(void)
      */
     wrBuf[0U] = outPortOffset + 1U;
     wrBuf[1U] = 0x7FU;
-    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U);
+    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U, isBoardVerE1);
     if (retVal != E_OK)
     {
         GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, APP_NAME ": I2C Write failed!!!\n\r");
@@ -203,7 +208,7 @@ Std_ReturnType Adc_appIoMuxSetup(void)
     /* Port 0 - Config */
     wrBuf[0U] = configPortOffset;
     wrBuf[1U] = 0x97U; /* Sets bits 5 and 6 to zero */
-    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U);
+    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U, isBoardVerE1);
     if (retVal != E_OK)
     {
         GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, APP_NAME ": I2C Write failed!!!\n\r");
@@ -212,7 +217,7 @@ Std_ReturnType Adc_appIoMuxSetup(void)
     /* Port 1 - Config */
     wrBuf[0U] = configPortOffset + 1U;
     wrBuf[1U] = 0x3EU; /* Sets bits 0, 6 and 7 to zero */
-    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U);
+    retVal    = Adc_appI2cWrite(iomuxWrSeqId, iomuxWrChId, &wrBuf[0U], 2U, isBoardVerE1);
     if (retVal != E_OK)
     {
         GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, APP_NAME ": I2C Write failed!!!\n\r");
@@ -236,7 +241,7 @@ static boolean Adc_appIsIoMuxTCA6424(void)
 
     wrBuf[0U] = 0x00U; /* 16-bit offset */
     wrBuf[1U] = 0x1AU; /* Revision offset */
-    retVal    = Adc_appI2cWrite(eepromWrSeqId, eepromWrChId, &wrBuf[0U], 2U);
+    retVal    = Adc_appI2cWrite(eepromWrSeqId, eepromWrChId, &wrBuf[0U], 2U, FALSE);
     if (retVal != E_OK)
     {
         GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, APP_NAME ": I2C Write failed!!!\n\r");
@@ -255,6 +260,7 @@ static boolean Adc_appIsIoMuxTCA6424(void)
 
     if (retVal == E_OK)
     {
+        /* Default slave address of IO Expander configured -> 34U */
         if (boardVer[0] == 'A' && boardVer[1] == '\0')
         {
             /* boardVer is REV A */
@@ -265,6 +271,7 @@ static boolean Adc_appIsIoMuxTCA6424(void)
         else if (boardVer[1] == '1' && boardVer[0] == 'E')
         {
             /* boardVer is E1 */
+            /*IO expander for E1 version board have slave address 32U.*/
             AppUtils_printf(APP_NAME
                             ": Detected CC version is E1. Calling TCA6416 Drivers for io expander configurations\r\n");
             result = FALSE;
@@ -279,7 +286,7 @@ static boolean Adc_appIsIoMuxTCA6424(void)
         else
         {
             /* boardVer is invalid */
-            /* Do nothing and default to latest board */
+            /* Do nothing and default to latest board as latest board use TCA6424 IO Expander */
         }
     }
 
@@ -287,11 +294,21 @@ static boolean Adc_appIsIoMuxTCA6424(void)
 }
 
 static Std_ReturnType Adc_appI2cWrite(Cdd_I2c_SequenceType wrSeqId, Cdd_I2c_ChannelType wrChId, uint8 *pWrBuf,
-                                      uint16 size)
+                                      uint16 size, boolean boardVerE1)
 {
     Std_ReturnType retVal = E_OK;
 
-    retVal = Cdd_I2c_SetupEB(wrChId, pWrBuf, NULL_PTR, size);
+    if (boardVerE1 == TRUE)
+    {
+        /* Update slave address as 32U for E1 board */
+        retVal = Cdd_I2c_SetupEBDynamic(wrChId, TCA6416_SLAVE_ADDRESS, pWrBuf, NULL_PTR, size);
+    }
+    else
+    {
+        /*Default slave address 34U */
+        retVal = Cdd_I2c_SetupEB(wrChId, pWrBuf, NULL_PTR, size);
+    }
+
     if (retVal != E_OK)
     {
         GT_0trace(GT_INFO1 | GT_TraceState_Enable, GT_ERR, APP_NAME ": I2C Setup EB failed!!!\n\r");

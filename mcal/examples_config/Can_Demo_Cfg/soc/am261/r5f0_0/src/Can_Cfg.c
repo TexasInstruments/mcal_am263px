@@ -67,7 +67,7 @@ const struct Can_ControllerStruct_PC
     CAN_TX_RX_PROCESSING_MIXED,  /* Can Rx Processing Type */
     CAN_TX_RX_PROCESSING_MIXED,  /* Can Tx Processing Type */
     (boolean)FALSE,/* BusOff  TRUE = Interrupt FALSE = Polling */
-	(boolean)FALSE,    /* TRUE = Interrupt FALSE = Polling */
+	(boolean)TRUE,    /* TRUE = Interrupt FALSE = Polling */
 	(boolean)TRUE,    /* Auto retransmission on Tx error Enable/Disable */
 	NULL_PTR,
 	    CAN_CONTROLLER_INSTANCE_MCAN0,  /* Controller Instance */
@@ -82,7 +82,7 @@ const struct Can_ControllerStruct_PC
     CAN_TX_RX_PROCESSING_MIXED,  /* Can Rx Processing Type */
     CAN_TX_RX_PROCESSING_MIXED,  /* Can Tx Processing Type */
     (boolean)FALSE,/* BusOff  TRUE = Interrupt FALSE = Polling */
-	(boolean)FALSE,    /* TRUE = Interrupt FALSE = Polling */
+	(boolean)TRUE,    /* TRUE = Interrupt FALSE = Polling */
 	(boolean)TRUE,    /* Auto retransmission on Tx error Enable/Disable */
 	NULL_PTR,
 	    CAN_CONTROLLER_INSTANCE_MCAN1,  /* Controller Instance */

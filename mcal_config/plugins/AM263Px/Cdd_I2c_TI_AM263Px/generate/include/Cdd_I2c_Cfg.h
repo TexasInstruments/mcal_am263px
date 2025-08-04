@@ -1,5 +1,5 @@
 /* ======================================================================
- *   Copyright (C) 2023 Texas Instruments Incorporated
+ *   Copyright (C) 2025 Texas Instruments Incorporated
  *
  *   All rights reserved. Property of Texas Instruments Incorporated.
  *   Restricted rights to use, duplicate or disclose this code are
@@ -11,14 +11,6 @@
  *   supplied.
  * ==================================================================== */
 
-/**
- *  \file     Cdd_I2c_Cfg.h
- *
- *  \brief    This file contains generated pre compile configurations
- *            for CDD I2C MCAL driver
- *
- */
-
 /******************************************************************************
     Project         : [!"$project"!]
     SW Ver          : [!"$moduleSoftwareVer"!]
@@ -28,146 +20,132 @@
     Do not modify this file,otherwise the software may behave in unexpected way.
 ******************************************************************************/
 
+/**
+ *  \file     Cdd_I2c_Cfg.h
+ *
+ *  \brief    This file contains pre compile configurations for the I2C MCAL
+ */
+
+/**
+ *  \addtogroup CDD_I2C I2C Configuration Header file
+ *
+ *  This files defines I2C configuration structures
+ *  @{
+ */
 
 #ifndef CDD_I2C_CFG_H_
 #define CDD_I2C_CFG_H_
-
-/**
- * \addtogroup CDD_I2C I2c API GUIDE Header file
- * @{
- */
 
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
 
-#include "Dem.h"
-
-[!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cDevErrorDetect = 'true'"!]#include "Det.h"[!ENDIF!]
+#include "Std_Types.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 
 /**
- *  \name I2c Driver Configuration SW Version Info
+ *  \name I2C Driver Configuration SW Version Info
  *
- *  Defines for I2c Driver configuration version
+ *  Defines for I2C Driver configuration version
  *  @{
  */
-/** \brief I2c configuration Major Version */
-#define CDD_I2C_CFG_MAJOR_VERSION           ([!"substring-before($moduleSoftwareVer,'.')"!]U)
-/** \brief I2c configuration Minor Version */
-#define CDD_I2C_CFG_MINOR_VERSION           ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
-/** \brief I2c configuration Patch Version */
-#define CDD_I2C_CFG_PATCH_VERSION           ([!"substring-after(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
+/** \brief I2C configuration Major Version */
+#define CDD_I2C_CFG_MAJOR_VERSION       ([!"substring-before($moduleSoftwareVer,'.')"!]U)
+/** \brief I2C configuration Minor Version */
+#define CDD_I2C_CFG_MINOR_VERSION       ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
+/** \brief I2C configuration Patch Version */
+#define CDD_I2C_CFG_PATCH_VERSION       ([!"substring-after(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
+/** @} */
+[!IF "as:modconf('Cdd_I2c')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
+/**
+ *  \brief I2C Build Variant.
+ *   Build variants.(i.e Pre Compile and Post Build)
+ */
+#define CDD_I2C_PRE_COMPILE_VARIANT     (STD_ON)[!//
 
+[!ENDIF!]
+/** \brief Enable/disable Interrupts */
+#define CDD_I2C_POLLING_MODE            [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cUseInterrupts = 'true'"!](STD_OFF)[!ELSE!](STD_ON)[!ENDIF!]
+
+/** \brief Enable/Disable I2C dev detect error */
+#define CDD_I2C_DEV_ERROR_DETECT        [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cDevErrorDetect = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+
+/** \brief Version info API macro */
+#define CDD_I2C_VERSION_INFO_API        [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cVersionInfoApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+
+/** \brief Check to enable cancel API */
+#define CDD_I2C_CANCEL_API              [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cCancelCheck = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+
+/** \brief Check to enable get driver status API */
+#define CDD_I2C_GET_STATUS_API          [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cStatusCheck = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+
+/** \brief Check to readback register API */
+#define CDD_I2C_REGISTER_READBACK_API   [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cEnableRegisterReadbackApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 /**
-*  \brief I2c Build Variant.
-*   Build variants.(i.e Pre Compile and Post Build)
-*/
-[!IF "as:modconf('Cdd_I2c')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
-#define CDD_I2C_PRE_COMPILE_VARIANT (STD_ON)[!//
-[!ENDIF!]
+ *  \name I2C HW Unit ID
+ *
+ *  Specifies the HW identification (ID) for I2C
+ *  @{
+ */
+/** \brief HW unit 0 */
+#define CDD_I2C_HW_UNIT_0               ((Cdd_I2c_HwUnitType)0U)
+/** \brief HW unit 1 */
+#define CDD_I2C_HW_UNIT_1               ((Cdd_I2c_HwUnitType)1U)
+/** \brief HW unit 2 */
+#define CDD_I2C_HW_UNIT_2               ((Cdd_I2c_HwUnitType)2U)
+/** \brief HW unit 3 */
+#define CDD_I2C_HW_UNIT_3               ((Cdd_I2c_HwUnitType)3U)
+/** @} */
+/** \brief Maximum supported HW units for the SOC */
+#define CDD_I2C_HW_UNIT_MAX             (4U)
 
-/** \brief Enable/disable CDD I2c dev detect error */
-#define CDD_I2C_DEV_ERROR_DETECT                                                [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cDevErrorDetect = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-/** \brief Enable/disable Interrupts  */
-#define CDD_I2C_POLLING_MODE                                                    [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cUseInterrupts = 'true'"!](STD_OFF)[!ELSE!](STD_ON)[!ENDIF!]
-
-/** \brief Enable/disable version info API */
-#define CDD_I2C_VERSION_INFO_API                                                [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cVersionInfoApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-/** \brief Arbitration loss mode interrupt enabled/disabled */
-#define CDD_I2C_ARBITRATION_LOSS                                                [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cArbitrationLossCheck = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-/** \brief CDD_I2C check to treat NACK as errors */
-#define CDD_I2C_TREAT_NACK_AS_ERROR                                             [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cNackAsErrorCheck = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-/** \brief CDD_I2C check to enable deque API */
-#define CDD_I2C_CANCEL_API                                                      [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cCancelCheck = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-/** \brief CDD_I2C check to enable get driver status API */
-#define CDD_I2C_GET_STATUS_API                                                  [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cStatusCheck = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-/** \brief CDD_I2C check to process same sequence ID multiple times in queue */
-#define CDD_I2C_PROCESS_SAME_SEQUENCE_MULTIPLE_TIMES_IN_QUEUE                   [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cMultipleSequenceInQueueProcessCheck = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 [!IF "as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cUseInterrupts = 'true' "!]
-/** \brief ISR type (Only include if polling mode is off) */
-#define CDD_I2C_ISR_TYPE                        ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddIrqType"!])
+/** \brief ISR type */
+#define CDD_I2C_ISR_TYPE                ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddIrqType"!])
+
 [!ENDIF!]
-/** \brief Counter ID for counter used to count wait ticks */
-#define CDD_I2C_OS_COUNTER_ID               ([!IF "not(node:empty(as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cOsCounterRef))"!][!"node:name(node:ref(as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cOsCounterRef))"!][!ELSE!][!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cDefaultOSCounterId"!]U[!ENDIF!])
-
-/** \brief CDD_I2C arbitration loss timeout period in ticks */
-#define CDD_I2C_RESET_TIMEOUT                   ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cArbitrationLossTimeout"!]U)
-
-/** \brief CDD_I2C poll timeout period in ticks */
-#define CDD_I2C_POLL_TIMEOUT                    ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cPollTimeout"!]U)
-
-/** \brief CDD_I2C queue timeout period in ticks */
-#define CDD_I2C_QUEUE_TIMEOUT                   ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cQueueTimeout"!]U)
-
-/** \brief CDD_I2C maximum queue size to store message pointers for reception or transmission */
-#define CDD_I2C_MAX_QUEUE_SIZE                  ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cQueueSize"!]U)
-
-/** \brief CDD_I2C maximum number of Cdd_I2c_Sequence, user configurable */
 [!VAR "varmax" = "0"!][!//
 [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
-[!VAR "varmax" = "$varmax+1"!][!//
+[!VAR "temp" = "num:i(CddI2cNumberOfChannelsInSequence)"!][!//
+[!IF "$varmax < $temp"!][!//
+[!VAR "varmax" = "$temp"!][!//
+[!ENDIF!][!//
 [!ENDLOOP!][!//
-#define CDD_I2C_MAXIMUM_SEQUENCE_NUMBER          ([!"num:i($varmax)"!]U)
+/*
+ * All below macros are used for static memory allocation and can be changed to
+ * match the usecase requirements.
+ */
+/** \brief Maximum channels allowed per sequence */
+#define CDD_I2C_MAX_CH_PER_SEQ          ([!"num:i($varmax)"!]U)
 
-[!SELECT "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
-/** \brief Symbolic Name for I2c Sequence [!"node:pos(.)"!] */
-#define CddI2cConf_CddI2cSequence_CddI2cSequence_[!"node:pos(.)"!]   ([!"node:pos(.)"!]U)
-
-[!ENDSELECT!][!//
-
-/** \brief CDD_I2C maximum number of channels available, user configurable */
 [!VAR "varmax" = "0"!][!//
 [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cChannelConfig/*"!][!//
 [!VAR "varmax" = "$varmax+1"!][!//
 [!ENDLOOP!][!//
-#define CDD_I2C_MAXIMUM_CHANNEL_NUMBER          ([!"num:i($varmax)"!]U)
+/** \brief Maximum channels across all sequence/hwunit */
+#define CDD_I2C_MAX_CH                  ([!"num:i($varmax)"!]U)
 
-[!SELECT "as:modconf('Cdd_I2c')[1]/CddI2cChannelConfig/*"!][!//
-/** \brief Symbolic Name for I2c Channel [!"node:pos(.)"!] */
-#define CddI2cConf_CddI2cChannel_CddI2cChannel_[!"node:pos(.)"!]   ([!"node:pos(.)"!]U)
+[!VAR "varmax" = "0"!][!//
+[!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
+[!VAR "varmax" = "$varmax+1"!][!//
+[!ENDLOOP!][!//
+/** \brief Maximum sequence across all hwunit */
+#define CDD_I2C_MAX_SEQ                 ([!"num:i($varmax)"!]U)
 
-[!ENDSELECT!][!//
+/** \brief Maximum HW unit */
+#define CDD_I2C_MAX_HW_UNIT             ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cHwUnitsUsed"!]U)
 
-/** \brief CDD_I2C Transmission buffer maximum size, user configurable */
-#define CDD_I2C_TX_RX_BUFFER_MAXIMUM_SIZE       ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cMaxlengthByte"!]U)
-
-/** \brief CDD_I2C maximum Number of hardware units available, SOC specific */
-#define CDD_I2C_HW_UNITS_MAX                    (4U)
-
-/** \brief CDD_I2C Number of hardware units used, user configurable */
-#define CDD_I2C_HW_UNITS_USED                   ([!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cHwUnitsUsed"!]U)
-
-/** \brief CDD_I2C HW unit 0, SOC specific */
-#define CDD_I2C_HW_UNIT_0                       (0U)
-
-/** \brief CDD_I2C HW unit 1, SOC specific */
-#define CDD_I2C_HW_UNIT_1                       (1U)
-
-/** \brief CDD_I2C HW unit 2, SOC specific */
-#define CDD_I2C_HW_UNIT_2                       (2U)
-
-/** \brief CDD_I2C HW unit 3, SOC specific */
-#define CDD_I2C_HW_UNIT_3                       (3U)
-
-/** \brief List of the channels used to enable the respective IRQ's*/
-
+/*
+ * All below macros are used for enabling a particular hardware.
+ */
 [!VAR "numChannelsUsed" = "num:i(as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cHwUnitsUsed)"!][!//
 [!VAR "countFromHwConfigContainer" = "num:i(count(as:modconf('Cdd_I2c')[1]/CddI2cHwConfig/*))"!][!//
 [!IF "$numChannelsUsed != $countFromHwConfigContainer"!][!//
@@ -176,26 +154,36 @@ extern "C" {
     [!ENDERROR!][!//
 [!ELSE!][!//
 [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cHwConfig/*"!][!//
-#define USED_[!"CddI2cHwUnitType"!]
-
+#define [!"CddI2cHwUnitType"!]_ACTIVE
 [!ENDLOOP!][!//
 [!ENDIF!][!//
 
-#endif /* DOXYGEN_SHOULD_SKIP_THIS */
+[!SELECT "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
+/** \brief Symbolic Name for I2c Sequence [!"node:pos(.)"!] */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_[!"node:pos(.)"!]      ([!"node:pos(.)"!]U)
+[!ENDSELECT!][!//
 
-/**
- * @}
- */
-
-/* ========================================================================== */
-/*                           Global variables                                 */
-/* ========================================================================== */
-
-extern const struct Cdd_I2c_ConfigType_s CddI2cInitParams;
+[!SELECT "as:modconf('Cdd_I2c')[1]/CddI2cChannelConfig/*"!][!//
+/** \brief Symbolic Name for I2c Channel [!"node:pos(.)"!] */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_[!"node:pos(.)"!]        ([!"node:pos(.)"!]U)
+[!ENDSELECT!][!//
 
 /* ========================================================================== */
-/*                           Callback functions                               */
+/*                         Structures and Enums                               */
 /* ========================================================================== */
+
+/* None */
+
+/* ========================================================================== */
+/*                      Exported Object Declarations                          */
+/* ========================================================================== */
+
+extern CONST(uint32, CDD_I2C_CONST) Cdd_I2c_HwUnitBaseAddr[CDD_I2C_HW_UNIT_MAX];
+
+/* ========================================================================== */
+/*                          Function Declarations                             */
+/* ========================================================================== */
+
 [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
 [!IF "not(node:empty(CddI2cSequenceCompleteNotify)) and not((text:match(CddI2cSequenceCompleteNotify,'NULL_PTR')))"!][!//
 extern void [!"CddI2cSequenceCompleteNotify"!](void);
@@ -204,7 +192,7 @@ extern void [!"CddI2cSequenceCompleteNotify"!](void);
 
 [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
 [!IF "not(node:empty(CddI2cSequenceErrorNotify)) and not((text:match(CddI2cSequenceErrorNotify,'NULL_PTR')))"!][!//
-extern void [!"CddI2cSequenceErrorNotify"!](uint8 Error_Code);
+extern void [!"CddI2cSequenceErrorNotify"!](uint8 errorCode);
 [!ENDIF!][!//
 [!ENDLOOP!][!//
 
@@ -212,5 +200,6 @@ extern void [!"CddI2cSequenceErrorNotify"!](uint8 Error_Code);
 }
 #endif
 
+#endif  /* #ifndef I2C_CFG_H_ */
 
-#endif  /* #ifndef Cdd_I2C_CFG_H_ */
+/** @} */

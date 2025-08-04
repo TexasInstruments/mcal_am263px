@@ -2334,24 +2334,31 @@ uint32 Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpTyp
 
 void Cdd_Pwm_deadbandCfg(uint32 baseAddr, const CDD_PWM_DeadbandCfgType *pCfg)
 {
-    uint32 base = baseAddr;
+    uint32 base   = baseAddr;
+    uint16 regval = 0U;
     /*
      Configure the output mode
     */
-    HW_WR_REG16(base + PWM_EPWM_DBCTL,
-                ((HW_RD_REG16(base + PWM_EPWM_DBCTL) & ~(1U << 0U)) | ((uint16)pCfg->outputMode << 0U)));
+    regval  = HW_RD_REG16(base + (uint32)PWM_EPWM_DBCTL);
+    regval &= (uint16)(~((uint16)1U << 0U));
+    regval |= ((uint16)pCfg->outputMode << 0U);
+    HW_WR_REG16(base + (uint32)PWM_EPWM_DBCTL, regval);
 
     /*
      Configure the input source for dead-band
     */
-    HW_WR_REG16(base + PWM_EPWM_DBCTL,
-                ((HW_RD_REG16(base + PWM_EPWM_DBCTL) & ~(1U << 4U)) | ((uint16)pCfg->inputMode << 4)));
+    regval  = HW_RD_REG16(base + (uint32)PWM_EPWM_DBCTL);
+    regval &= (uint16)(~((uint16)1U << 4U));
+    regval |= ((uint16)pCfg->inputMode << 4U);
+    HW_WR_REG16(base + (uint32)PWM_EPWM_DBCTL, regval);
 
     /*
      Configure the polarity selection
     */
-    HW_WR_REG16(base + PWM_EPWM_DBCTL,
-                ((HW_RD_REG16(base + PWM_EPWM_DBCTL) & ~(1U << 2U)) | ((uint16)pCfg->polaritySelect << 2)));
+    regval  = HW_RD_REG16(base + (uint32)PWM_EPWM_DBCTL);
+    regval &= (uint16)(~((uint16)1U << 2U));
+    regval |= ((uint16)pCfg->polaritySelect << 2U);
+    HW_WR_REG16(base + (uint32)PWM_EPWM_DBCTL, regval);
 
     /* Set the RED (Rising Edge Delay) count */
     HW_WR_REG16(base + CSL_EPWM_DBRED, (uint16)pCfg->fallingEdgeDelay);

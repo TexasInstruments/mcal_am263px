@@ -91,11 +91,11 @@ extern "C" {
     (MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR1_GSEL - MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL)
 
 /* Global addresses in unified address space */
-#define MCU_CSL_CONTROLSS_INTXBAR_U_BASE   (0x502D5000ul)
-#define MCU_CSL_CONTROLSS_INPUTXBAR_U_BASE (0x502D0000ul)
+#define MCU_CSL_CONTROLSS_INTXBAR_U_BASE   (0x502D5000UL)
+#define MCU_CSL_CONTROLSS_INPUTXBAR_U_BASE (0x502D0000UL)
 
 /* GPIO_XBAR_INTR Macros */
-#define MCU_CSL_GPIO_INTR_XBAR_U_BASE                  (0x52E02000ul)
+#define MCU_CSL_GPIO_INTR_XBAR_U_BASE                  (0x52E02000UL)
 #define MCU_CSL_GPIO_INTR_XBAR_MUXCNTL_INT_ENABLE_MASK (0x00010000U)
 #define MCU_CSL_GPIO_INTR_XBAR_MUXCNTL_ENABLE_MASK     (0x000000FFU)
 #define MCU_CSL_GPIO_INTR_XBAR_MUXCNTL(MUXCNTL)        (0x00000004U + ((MUXCNTL) * 0x4U))
@@ -850,12 +850,12 @@ static inline void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, u
 {
     MCU_xbarSelectInterruptXBarInputSource(base, out, group0_mask, group1_mask, group2_mask, group3_mask, group4_mask,
                                            group5_mask, group6_mask);
-    HW_WR_REG32(base + out * MCU_CSL_CONTROLSS_INTXBAR_STEP + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7,
-                group7_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7_SEL_MASK);
+    HW_WR_REG32(base + (uint32)(out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + (uint32)MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7,
+                (uint32)(group7_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7_SEL_MASK));
     HW_WR_REG32(base + out * MCU_CSL_CONTROLSS_INTXBAR_STEP + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G8,
                 group8_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G8_SEL_MASK);
-    HW_WR_REG32(base + out * MCU_CSL_CONTROLSS_INTXBAR_STEP + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G9,
-                group9_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G9_SEL_MASK);
+    HW_WR_REG32(base + (uint32)(out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + (uint32)MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G9,
+                (uint32)(group9_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G9_SEL_MASK));
 }
 
 /**
@@ -871,12 +871,15 @@ static inline void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, u
 static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint8 out, uint8 group_select, uint32 group0_mask,
                                                       uint32 group1_mask)
 {
-    HW_WR_REG32(base + MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL + (out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
-                group_select & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL_GSEL_MASK);
-    HW_WR_REG32(base + MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G0 + (out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
-                group0_mask & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G0_SEL_MASK);
-    HW_WR_REG32(base + MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G1 + (out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
-                group1_mask & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G1_SEL_MASK);
+    HW_WR_REG32(
+        (base + (uint32)MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL) + (uint32)(out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
+        (uint32)(group_select & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL_GSEL_MASK));
+    HW_WR_REG32(
+        (base + (uint32)MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G0) + (uint32)(out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
+        group0_mask & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G0_SEL_MASK);
+    HW_WR_REG32(
+        (base + (uint32)MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G1) + (uint32)(out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
+        (uint32)(group1_mask & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G1_SEL_MASK));
 }
 
 static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint8 out, uint8 mux_control)

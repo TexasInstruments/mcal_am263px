@@ -77,8 +77,6 @@
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
-void                         CanApp_Startup(void);
-void                         Cdd_I2c_InterruptConfig(void);
-/* Global pointer pointing to NULL to be passed as argument in Cdd_I2c_Init */
-extern Cdd_I2c_ConfigPtrType I2cConfigSet;
+void CanApp_Startup(void);
+void Cdd_I2c_InterruptConfig(void);
 #endif

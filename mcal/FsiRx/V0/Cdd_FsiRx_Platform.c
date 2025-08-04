@@ -169,25 +169,27 @@ FUNC(void, CDD_FSIRX_CODE)
 CddFsiRx_dataReceive(uint8 hwUnitId, uint32 base, volatile Cdd_FsiRx_DataBufferType *databuffer, uint8 length,
                      uint8 bufOffset)
 {
-    uint32           baseAddr   = base;
-    uint8            dataLength = length;
-    volatile uint16 *pSrc16     = NULL;
-    uint8            wordLength = 0;
-    uint8            offset     = bufOffset;
-    pSrc16                      = (volatile uint16 *)(base + CSL_CDD_FSI_RX_CFG_RX_BUF_BASE(offset));
-    wordLength                  = CddFsiRx_getRxWordLength(baseAddr, dataLength);
+    uint32           baseAddr                          = base;
+    uint8            dataLength                        = length;
+    volatile uint16 *pSrc16                            = NULL;
+    uint8            wordLength                        = 0;
+    uint8            offset                            = bufOffset;
+    volatile uint16  regBase                           = CSL_CDD_FSI_RX_CFG_RX_BUF_BASE(offset);
+    pSrc16                                             = (volatile uint16 *)(base + (uint32)regBase);
+    wordLength                                         = CddFsiRx_getRxWordLength(baseAddr, dataLength);
+    volatile Cdd_FsiRx_DataBufferType *localDatabuffer = databuffer;
 
     while (wordLength > 0U)
     {
-        *databuffer = *pSrc16;
+        *localDatabuffer = *pSrc16;
         pSrc16++;
-        databuffer++;
+        localDatabuffer++;
         offset++;
         /*Check for BufferPtr Offset*/
         if (offset > (CDD_FSI_RX_MAX_VALUE_BUF_PTR_OFF))
         {
             offset = 0U;
-            pSrc16 = (volatile uint16 *)(base + CSL_CDD_FSI_RX_CFG_RX_BUF_BASE(offset));
+            pSrc16 = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_RX_CFG_RX_BUF_BASE(offset));
         }
         wordLength--;
 
@@ -202,6 +204,7 @@ CddFsiRx_dataReceive(uint8 hwUnitId, uint32 base, volatile Cdd_FsiRx_DataBufferT
 FUNC(uint8, CDD_FSIRX_CODE)
 CddFsiRx_getRxWordLength(uint32 base, uint16 length)
 {
+    (void)base;
     uint8 WordLength = 0;
     switch (length)
     {
@@ -281,7 +284,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 
     /* Check the arguments */
 #if (STD_ON == CDD_FSI_RX_PING_WDG_TIMEOUT_INTERRUPT)
-    if (intRxNum == CDD_FSI_RX_INT1)
+    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -291,7 +294,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else if (intRxNum == CDD_FSI_RX_INT2)
+    else if (intRxNum == (uint8)CDD_FSI_RX_INT2)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -303,7 +306,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 #endif /*STD_ON == CDD_FSI_RX_PING_WDG_TIMEOUT_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_RX_FRAME_WDG_TIMEOUT_INTERRUPT)
-    if (intRxNum == CDD_FSI_RX_INT1)
+    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -313,7 +316,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else if (intRxNum == CDD_FSI_RX_INT2)
+    else if (intRxNum == (uint8)CDD_FSI_RX_INT2)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -325,7 +328,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 #endif /*STD_ON == CDD_FSI_RX_FRAME_WDG_TIMEOUT_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_RX_CRC_ERROR_INTERRUPT)
-    if (intRxNum == CDD_FSI_RX_INT1)
+    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -335,7 +338,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else if (intRxNum == CDD_FSI_RX_INT2)
+    else if (intRxNum == (uint8)CDD_FSI_RX_INT2)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -347,7 +350,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 #endif /*STD_ON == CDD_FSI_RX_CRC_ERROR_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_RX_BUFFER_OVERRUN_INTERRUPT)
-    if (intRxNum == CDD_FSI_RX_INT1)
+    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -357,7 +360,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else if (intRxNum == CDD_FSI_RX_INT2)
+    else if (intRxNum == (uint8)CDD_FSI_RX_INT2)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -369,7 +372,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 #endif /*STD_ON == CDD_FSI_RX_BUFFER_OVERRUN_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_RX_BUFFER_UNDERRUN_INTERRUPT)
-    if (intRxNum == CDD_FSI_RX_INT1)
+    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -379,7 +382,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else if (intRxNum == CDD_FSI_RX_INT2)
+    else if (intRxNum == (uint8)CDD_FSI_RX_INT2)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -391,7 +394,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 #endif /*STD_ON == CDD_FSI_RX_BUFFER_UNDERRUN_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_RX_PING_RECEIVED_INTERRUPT)
-    if (intRxNum == CDD_FSI_RX_INT1)
+    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -401,7 +404,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else if (intRxNum == CDD_FSI_RX_INT2)
+    else if (intRxNum == (uint8)CDD_FSI_RX_INT2)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -413,7 +416,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 #endif /*STD_ON == CDD_FSI_RX_PING_RECEIVED_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_RX_DATA_RECEIVED_INTERRUPT)
-    if (intRxNum == CDD_FSI_RX_INT1)
+    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -423,7 +426,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else if (intRxNum == CDD_FSI_RX_INT2)
+    else if (intRxNum == (uint8)CDD_FSI_RX_INT2)
     {
         uint16 regVal      = 0;
         uint32 baseAdress  = 0;
@@ -477,14 +480,14 @@ CddFsiRx_disableInterrupt(uint32 base, uint8 RxIntNum)
     uint16 regVal;
     uint32 baseAddr = 0;
 
-    if (RxIntNum == CDD_FSI_RX_INT1)
+    if (RxIntNum == (uint8)CDD_FSI_RX_INT1)
     {
         baseAddr  = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
         regVal    = HW_RD_REG16(baseAddr);
         regVal   &= ~rxflags;
         HW_WR_REG16(baseAddr, regVal);
     }
-    else if (RxIntNum == CDD_FSI_RX_INT2)
+    else if (RxIntNum == (uint8)CDD_FSI_RX_INT2)
     {
         baseAddr  = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
         regVal    = HW_RD_REG16(baseAddr);
@@ -544,6 +547,7 @@ CddFsiRx_enableRxFrameWatchdogTimer(uint32 base, uint32 wdRef)
 }
 /******************************************************************************/
 #define CDD_FSIRX_STOP_SEC_CODE
+
 #include "Cdd_FsiRx_MemMap.h"
 
 /*******************************************************************************

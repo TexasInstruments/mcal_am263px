@@ -205,8 +205,9 @@ Std_ReturnType Nor_OspiWaitDAC(OSPI_Handle handle, uint32 timeOut)
  */
 Std_ReturnType Nor_OspiWaitReady(OSPI_Handle handle, uint32 timeOut)
 {
-    OSPI_Object   *obj    = ((OSPI_Config *)handle)->object;
-    Std_ReturnType retVal = E_OK;
+    OSPI_Object   *obj          = ((OSPI_Config *)handle)->object;
+    Std_ReturnType retVal       = E_OK;
+    uint32         localtimeOut = timeOut;
 
     uint8  readStatus[2]  = {0};
     uint8  numAddrBytes   = OSPI_CMD_INVALID_OPCODE;
@@ -217,7 +218,7 @@ Std_ReturnType Nor_OspiWaitReady(OSPI_Handle handle, uint32 timeOut)
     uint8  dummyBits      = 0;
 
     /* Do RDSR based on xspi WIP status */
-    if ((fls_config_sfdp->xspiWipRdCmd != 0x00) && (obj->currentprotocol == FLS_OSPI_RX_8D_8D_8D))
+    if ((fls_config_sfdp->xspiWipRdCmd != 0x00U) && (obj->currentprotocol == (uint32)FLS_OSPI_RX_8D_8D_8D))
     {
         /* Check XSPI WIP configuration */
         cmd            = fls_config_sfdp->xspiWipRdCmd;
@@ -228,17 +229,17 @@ Std_ReturnType Nor_OspiWaitReady(OSPI_Handle handle, uint32 timeOut)
         dummyBits      = fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].dummyClksCmd;
     }
 
-    while (timeOut > 0)
+    while (localtimeOut > 0)
     {
         retVal = Nor_OspiCmdRead(handle, cmd, cmdAddr, numAddrBytes, dummyBits, readStatus, numBytesToRead);
         if ((retVal == (Std_ReturnType)E_OK) && ((readStatus[0] & bitMask) == 0U))
         {
             break;
         }
-        timeOut--;
+        localtimeOut--;
     }
 
-    if ((readStatus[0] & bitMask) == 0)
+    if ((readStatus[0] & bitMask) == (uint8)0U)
     {
         retVal = (Std_ReturnType)E_OK;
     }
@@ -257,8 +258,9 @@ Std_ReturnType Nor_OspiWaitReady(OSPI_Handle handle, uint32 timeOut)
  */
 Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
 {
-    OSPI_Object   *obj    = ((OSPI_Config *)handle)->object;
-    Std_ReturnType retVal = (Std_ReturnType)E_OK;
+    OSPI_Config   *pHandle = (OSPI_Config *)handle;
+    OSPI_Object   *obj     = pHandle->object;
+    Std_ReturnType retVal  = (Std_ReturnType)E_OK;
 
     uint8  idCode[3]    = {0};
     uint32 cmdAddr      = OSPI_CMD_INVALID_ADDR;
@@ -266,7 +268,7 @@ Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
     uint32 idNumBytes   = 3;
     uint32 numAddrBytes = 0;
 
-    if (obj->currentprotocol == FLS_OSPI_RX_8D_8D_8D)
+    if (obj->currentprotocol == (uint32)FLS_OSPI_RX_8D_8D_8D)
     {
         dummyBits  = fls_config_sfdp->idCfg.dummy8;
         cmdAddr    = 0U;
@@ -336,22 +338,23 @@ Std_ReturnType Nor_OspiRead(OSPI_Handle handle, uint32 offset, uint8 *buf, uint3
  */
 Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint32 len)
 {
-    Std_ReturnType retVal = E_OK;
+    Std_ReturnType retVal      = E_OK;
+    uint32         localoffset = offset;
     if (handle == NULL_PTR)
     {
         retVal = E_NOT_OK;
     }
     /* Validate address input */
-    if ((offset + len) > (fls_config_sfdp->flashSize))
+    if ((localoffset + len) > (fls_config_sfdp->flashSize))
     {
         retVal = E_NOT_OK;
     }
     /* Check if the offset is aligned to page */
-    if (0 != (offset % fls_config_sfdp->pageSize))
+    if (0 != (localoffset % fls_config_sfdp->pageSize))
     {
         retVal = E_NOT_OK;
     }
-    if (E_OK == retVal && Fls_WriteStage == FLS_S_INIT_STAGE)
+    if ((E_OK == retVal) && (Fls_WriteStage == FLS_S_INIT_STAGE))
     {
         uint32           pageSize, chunkLen, actual;
         OSPI_Transaction transaction;
@@ -381,7 +384,7 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
                 }
 
                 Fls_Ospi_TransactionInit(&transaction);
-                transaction.addrOffset = offset;
+                transaction.addrOffset = localoffset;
                 transaction.buf        = (void *)(buf + actual);
                 transaction.count      = chunkLen;
                 if (FLS_OSPI_DAC_ENABLE == STD_ON)
@@ -401,7 +404,7 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
 
             if (retVal == E_OK)
             {
-                offset += chunkLen;
+                localoffset += chunkLen;
             }
             else
             {
@@ -434,7 +437,7 @@ Std_ReturnType Fls_norBlockErase(OSPI_Handle handle, uint32 offset)
     uint32 cmdAddr = OSPI_CMD_INVALID_ADDR;
 
     cmdAddr = blkNum * fls_config_sfdp->eraseCfg.blockSize;
-    if (fls_config_sfdp->addrnumBytes == 3)
+    if (fls_config_sfdp->addrnumBytes == (uint8)3U)
     {
         cmd = fls_config_sfdp->eraseCfg.cmdBlockErase3B;
     }
@@ -479,7 +482,7 @@ Std_ReturnType Fls_norSectorErase(OSPI_Handle handle, uint32 offset)
     uint8  cmd     = OSPI_CMD_INVALID_OPCODE;
     uint32 cmdAddr = OSPI_CMD_INVALID_ADDR;
     cmdAddr        = sectorNum * fls_config_sfdp->eraseCfg.sectorSize;
-    if (fls_config_sfdp->addrnumBytes == 3)
+    if (fls_config_sfdp->addrnumBytes == (uint8)3U)
     {
         cmd = fls_config_sfdp->eraseCfg.cmdSectorErase3B;
     }
@@ -518,6 +521,7 @@ Std_ReturnType Fls_norSectorErase(OSPI_Handle handle, uint32 offset)
  */
 Std_ReturnType Fls_norChipErase(OSPI_Handle handle, uint32 offset)
 {
+    (void)offset;
     Std_ReturnType retVal  = E_OK;
     uint8          cmd     = fls_config_sfdp->cmdChipErase;
     uint32         cmdAddr = OSPI_CMD_INVALID_ADDR;
@@ -574,7 +578,7 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 retVal += Nor_OspiCmdRead(handle, fls_config_sfdp->cmdRdsr2, OSPI_CMD_INVALID_ADDR,
                                           fls_config_sfdp->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr2, 1);
 
-                if ((sr2 & bitPos) != 0)
+                if ((sr2 & bitPos) != (uint8)0U)
                 {
                     /* QE bit already set */
                 }
@@ -582,7 +586,7 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 {
                     uint16 sr  = 0;
                     sr2       |= bitPos;
-                    sr         = ((sr2 << 8) | sr1);
+                    sr         = (uint16)(((uint16)sr2 << 8) | (uint16)sr1);
 
                     retVal = Nor_OspiCmdWrite(handle, fls_config_sfdp->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
                     if (retVal == E_OK)
@@ -602,7 +606,7 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 retVal = Nor_OspiCmdRead(handle, fls_config_sfdp->cmdRdsr, OSPI_CMD_INVALID_ADDR,
                                          fls_config_sfdp->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr1, 1);
 
-                if ((sr1 & bitPos) != 0)
+                if ((sr1 & bitPos) != (uint8)0U)
                 {
                     /* QE is already set */
                 }
@@ -626,7 +630,7 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 retVal = Nor_OspiCmdRead(handle, 0x3F, OSPI_CMD_INVALID_ADDR, fls_config_sfdp->addrnumBytes,
                                          OSPI_CMD_INVALID_DUMMY, &sr2, 1);
 
-                if ((sr2 & bitPos) != 0)
+                if ((sr2 & bitPos) != (uint8)0U)
                 {
                     /* QE is already set */
                 }
@@ -649,7 +653,7 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 retVal = Nor_OspiCmdRead(handle, fls_config_sfdp->cmdRdsr2, OSPI_CMD_INVALID_ADDR,
                                          fls_config_sfdp->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr2, 1);
 
-                if ((sr2 & bitPos) != 0)
+                if ((sr2 & bitPos) != (uint8)0U)
                 {
                     /* QE bit already set */
                 }
@@ -698,7 +702,7 @@ Std_ReturnType Nor_OspiSetOeBit(OSPI_Handle handle, uint8 oeType)
             bitPos = (uint8)(1 << 3);
             retVal = Nor_OspiCmdRead(handle, 0x65, OSPI_CMD_INVALID_ADDR, 2, 1, &sr2, 1);
 
-            if ((sr2 & bitPos) != 0)
+            if ((sr2 & bitPos) != (uint8)0U)
             {
                 /* QE is already set */
             }
@@ -855,9 +859,12 @@ void processJobs(Fls_JobType job)
                 {
                     retVal = Fls_norBlockErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
                 }
-                else if (Fls_DrvObj.typeoferase == FLS_CHIP_ERASE)
+                else
                 {
-                    retVal = Fls_norChipErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
+                    if (Fls_DrvObj.typeoferase == FLS_CHIP_ERASE)
+                    {
+                        retVal = Fls_norChipErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
+                    }
                 }
             }
 
@@ -945,37 +952,58 @@ void processJobs(Fls_JobType job)
  */
 void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
 {
+    bool isNotify = FALSE;
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-    if (((job == FLS_JOB_WRITE) && (Fls_WriteStage == FLS_S_WRITE_DONE)) ||
-        ((job == FLS_JOB_ERASE) && (Fls_EraseStage == FLS_S_DEFAULT)) || (job == FLS_JOB_COMPARE) ||
-        (job == FLS_JOB_READ) || (job == FLS_JOB_BLANKCHECK))
-#endif
+    if ((job == FLS_JOB_WRITE) && (Fls_WriteStage == FLS_S_WRITE_DONE))
     {
-        Fls_DrvObj.ramAddr = &Fls_DrvObj.ramAddr[chunkSize];
-        if ((job != FLS_JOB_ERASE) || ((job == FLS_JOB_ERASE) && (STD_OFF == FLS_ERASE_VERIFICATION_ENABLED)))
-        {
-            Fls_DrvObj.flashAddr += chunkSize;
-        }
-        Fls_DrvObj.flsDmaStage  = FLS_S_READ_DMA_INIT_STAGE;
-        Fls_DrvObj.length      -= chunkSize;
-        Fls_DrvObj.transferred += chunkSize;
-        Fls_WriteStage          = FLS_S_INIT_STAGE;
-
-        if ((Fls_LengthType)0U == Fls_DrvObj.length)
-        {
-            Fls_DrvObj.jobResultType = MEMIF_JOB_OK;
-            Fls_DrvObj.status        = MEMIF_IDLE;
-            Fls_DrvObj.jobType       = FLS_JOB_NONE;
-            Fls_DrvObj.transferred   = 0U;
-        }
-
-        if (((Fls_LengthType)0U == Fls_DrvObj.length) && (Fls_DrvObj.Fls_JobEndNotification != NULL_PTR))
-        {
-            Fls_DrvObj.Fls_JobEndNotification();
-        }
+        isNotify = TRUE;
     }
+    if ((job == FLS_JOB_ERASE) && (Fls_EraseStage == FLS_S_DEFAULT))
+    {
+        isNotify = TRUE;
+    }
+    if (job == FLS_JOB_COMPARE)
+    {
+        isNotify = TRUE;
+    }
+    if (job == FLS_JOB_READ)
+    {
+        isNotify = TRUE;
+    }
+    if (job == FLS_JOB_BLANKCHECK)
+    {
+        isNotify = TRUE;
+    }
+#endif
+    if (isNotify == TRUE)
+    {
+        {
+            Fls_DrvObj.ramAddr = &Fls_DrvObj.ramAddr[chunkSize];
+            if ((job != FLS_JOB_ERASE) || ((job == FLS_JOB_ERASE) && (STD_OFF == FLS_ERASE_VERIFICATION_ENABLED)))
+            {
+                Fls_DrvObj.flashAddr += chunkSize;
+            }
+            Fls_DrvObj.flsDmaStage  = FLS_S_READ_DMA_INIT_STAGE;
+            Fls_DrvObj.length      -= chunkSize;
+            Fls_DrvObj.transferred += chunkSize;
+            Fls_WriteStage          = FLS_S_INIT_STAGE;
 
-    return;
+            if ((Fls_LengthType)0U == Fls_DrvObj.length)
+            {
+                Fls_DrvObj.jobResultType = MEMIF_JOB_OK;
+                Fls_DrvObj.status        = MEMIF_IDLE;
+                Fls_DrvObj.jobType       = FLS_JOB_NONE;
+                Fls_DrvObj.transferred   = 0U;
+            }
+
+            if (((Fls_LengthType)0U == Fls_DrvObj.length) && (Fls_DrvObj.Fls_JobEndNotification != NULL_PTR))
+            {
+                Fls_DrvObj.Fls_JobEndNotification();
+            }
+        }
+
+        return;
+    }
 }
 /**
  *  \Function Name: Fls_ErrorNotification
@@ -1216,12 +1244,12 @@ Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle)
 {
     Std_ReturnType retVal = E_OK;
 
-    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 0)) != 0)
+    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 0)) != (uint8)0U)
     {
         /* Issue instruction 0xB7 without WREN */
         retVal = Nor_OspiCmdWrite(handle, 0xB7, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
     }
-    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 1)) != 0)
+    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 1)) != (uint8)0U)
     {
         /* Issue instruction 0xB7 with WREN */
         retVal = Nor_OspiCmdWrite(handle, fls_config_sfdp->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
@@ -1235,19 +1263,19 @@ Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle)
             retVal = Nor_OspiWaitReady(handle, fls_config_sfdp->flashBusyTimeout);
         }
     }
-    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 2)) != 0)
+    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 2)) != (uint8)0U)
     {
         /* Extended Register read with instr 0xC8, write with instr 0xC5 to set
          * the MSByte of addr. To be taken care during read and write.
          */
     }
-    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 3)) != 0)
+    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 3)) != (uint8)0U)
     {
         /* Volatile bank register used to define 4 byte mode. To be taken care
          * during read and write
          */
     }
-    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 4)) != 0)
+    if ((fls_config_sfdp->fourByteAddrEnSeq & (uint8)(1 << 4)) != (uint8)0U)
     {
         /* Dedicated 4 byte address instruction set, consider 4 bytes always ON */
     }
@@ -1264,7 +1292,7 @@ Std_ReturnType Ospi_SetRegCfg(OSPI_Handle handle, Flash_RegEnConfig *rCfg)
     Std_ReturnType retVal = E_OK;
 
     /* Check if parameter is configured with addressed registers */
-    if ((rCfg->cmdRegRd != 0) || (rCfg->cmdRegWr != 0))
+    if ((rCfg->cmdRegRd != 0U) || (rCfg->cmdRegWr != 0U))
     {
         uint8 cfgReg = 0;
         if (rCfg->isAddrReg == TRUE)
@@ -1332,13 +1360,14 @@ Std_ReturnType Nor_OspiRegWrite(OSPI_Handle handle, uint8 cmd, uint32 addr, uint
  */
 Std_ReturnType Nor_OspiRegRead(OSPI_Handle handle, uint8 cmd, uint32 addr, uint8 *data)
 {
-    OSPI_Object   *obj       = ((OSPI_Config *)handle)->object;
+    OSPI_Config   *pHandle   = (OSPI_Config *)handle;
+    OSPI_Object   *obj       = pHandle->object;
     Std_ReturnType retVal    = E_OK;
     uint8          reg[2]    = {0};
     uint8          numBytes  = 1;
     uint8          dummyBits = OSPI_CMD_INVALID_DUMMY;
 
-    if (obj->currentprotocol == FLS_OSPI_RX_8D_8D_8D)
+    if (obj->currentprotocol == (uint32)FLS_OSPI_RX_8D_8D_8D)
     {
         numBytes  = 2; /* Octal DDR can't read odd number of bytes */
         dummyBits = fls_config_sfdp->protos[FLS_OSPI_RX_8D_8D_8D].dummyClksCmd;
@@ -1438,7 +1467,7 @@ Std_ReturnType Fls_norCompare(uint32 actualChunkSize)
         retVal = Nor_OspiRead(Fls_DrvObj.spiHandle, addr, (uint8 *)readData_buf, len);
         if ((Std_ReturnType)E_OK == retVal)
         {
-            if (Fls_VerifyData_priv(expData_Buf, (const uint8 *)((void *)readData_buf), len) == TRUE)
+            if (Fls_VerifyData_priv(expData_Buf, (const uint8 *)readData_buf, len) == TRUE)
             {
                 retVal = (Std_ReturnType)E_OK;
             }

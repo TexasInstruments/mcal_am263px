@@ -259,7 +259,7 @@
                                             <!--Requirements: ECUC_Can_00466 -->
                                             <v:var name="CanWakeupFunctionalityAPI" type="BOOLEAN">
                                                 <a:a name="DESC"
-                           value="EN: Adds / removes the service Can_CheckWakeup() from the code."/>
+                           value="EN: Adds / removes the service Can_CheckWakeup() from the code. To use this parameter, enable CanWakeupSupport"/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
                            type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPostBuild</icc:v>
@@ -271,7 +271,7 @@
                                                 <a:a name="UUID"
                            value="ECUC:6e106a4a-0d7f-40c9-9efd-aa7601b73e9d"/>
                                                 <a:da name="DEFAULT" value="false"/>
-												<a:da name="ENABLE" type="XPath" expr="(node:value(..) ='false')" />
+												<a:da name="ENABLE" type="XPath" expr="../CanWakeupSupport = 'true'" />
                                             </v:var>
                                             <v:var name="CanDisableAutoRetranmission" type="BOOLEAN">
                                                 <a:a name="DESC" value="EN: Disable auto retransmission on xmit error"/>
@@ -288,7 +288,7 @@
                                             <!--Requirements: ECUC_Can_00319 -->
                                             <v:var name="CanWakeupProcessing" type="ENUMERATION">
                                                 <a:a name="DESC"
-                             value="EN: Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode."/>
+                             value="EN: Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode. To use this parameter, enable CanWakeupSupport"/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
                              type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPostBuild</icc:v>
@@ -304,7 +304,7 @@
                                                     <a:v>POLLING</a:v>
                                                 </a:da>
                                                 <a:da name="DEFAULT" value="INTERRUPT"/>
-												<a:da name="ENABLE" type="XPath" expr="(node:value(..) ='INTERRUPT')" />
+												<a:da name="ENABLE" type="XPath" expr="../CanWakeupSupport = 'true'" />
                                             </v:var>
                                             <!--Requirements: ECUC_Can_00330 -->
                                             <v:var name="CanWakeupSupport" type="BOOLEAN">
@@ -320,7 +320,6 @@
                                                 <a:a name="UUID"
                              value="ECUC:8d6a7d41-3a58-4b65-917f-6db873a8a044"/>
                                                 <a:da name="DEFAULT" value="false"/>
-												<a:da name="ENABLE" type="XPath" expr="(node:value(..) ='false')" />
                                             </v:var>
                                             <!--Requirements: ECUC_Can_00435 -->
                                             <v:ref name="CanControllerDefaultBaudrate" type="REFERENCE">

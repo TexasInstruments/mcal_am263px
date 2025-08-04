@@ -32,6 +32,7 @@
                 <L-2 L="EN">This container is the base of a Configuration Set which contains the configured GPT channels. This way, different configuration sets can be defined for post-build process.</L-2>
               </DESC>
               <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+              <REQUIRES-INDEX>true</REQUIRES-INDEX>
               <SUB-CONTAINERS>
                 <ECUC-PARAM-CONF-CONTAINER-DEF UUID="02e06c2d-653e-4e8d-b313-3a2b73c44cb6">
                   <SHORT-NAME>GptChannelConfiguration</SHORT-NAME>
@@ -41,11 +42,12 @@
                   <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
                   <UPPER-MULTIPLICITY>32</UPPER-MULTIPLICITY>
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+                  <REQUIRES-INDEX>true</REQUIRES-INDEX>
                   <PARAMETERS>
                     <ECUC-INTEGER-PARAM-DEF UUID="e74acd8c-1885-4cfc-8289-55610f555f8e">
                       <SHORT-NAME>GptChannelId</SHORT-NAME>
                       <DESC>
-                        <L-2 L="EN">Channel Id of the GPT channel. This value will be assigned to the symbolic name derived of the GptChannelConfiguration container short name.              Channel 0 -Channel 3 are associated with RTI Module 0,               Channel 4 -Channel 7 are associated with RTI Module 1,               Channel 8 -Channel 11 are associated with RTI Module 2,              Channel 12 -Channel 15 are associated with RTI Module 3,              Channel 16 -Channel 19 are associated with RTI Module 4,               Channel 20 -Channel 23 are associated with RTI Module 5,               Channel 24 -Channel 27 are associated with RTI Module 6,              Channel 28 -Channel 31 are associated with RTI Module 7 </L-2>
+                        <L-2 L="EN">Channel Id of the GPT channel. This value will be assigned to the symbolic name derived of the GptChannelConfiguration container short name.              Channel 0 -Channel 3 are associated with RTI Module 0,              Channel 4 -Channel 7 are associated with RTI Module 1,              Channel 8 -Channel 11 are associated with RTI Module 2,              Channel 12 -Channel 15 are associated with RTI Module 3,              Channel 16 -Channel 19 are associated with RTI Module 4,              Channel 20 -Channel 23 are associated with RTI Module 5,              Channel 24 -Channel 27 are associated with RTI Module 6,              Channel 28 -Channel 31 are associated with RTI Module 7 </L-2>
                       </DESC>
                       <SCOPE>ECU</SCOPE>
                       <ORIGIN>AUTOSAR_ECUC</ORIGIN>

@@ -104,9 +104,9 @@ volatile VAR(uint8, DET_VAR_CLEARED) Det_FaultIdTransFlt;
 /* ========================================================================== */
 /*              Service Name : Det_ReportError                                */
 /* ========================================================================== */
-FUNC(Std_ReturnType, DET_CODE)
-Det_ReportError(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceId, VAR(uint8, AUTOMATIC) ApiId,
-                VAR(uint8, AUTOMATIC) ErrorId)
+__attribute__((weak)) FUNC(Std_ReturnType, DET_CODE)
+    Det_ReportError(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceId, VAR(uint8, AUTOMATIC) ApiId,
+                    VAR(uint8, AUTOMATIC) ErrorId)
 {
     Det_ModuleId   = ModuleId;
     Det_InstanceId = InstanceId;
@@ -119,9 +119,9 @@ Det_ReportError(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceI
 /* ========================================================================== */
 /*              Service Name : Det_ReportRuntimeError                         */
 /* ========================================================================== */
-FUNC(Std_ReturnType, DET_CODE)
-Det_ReportRuntimeError(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceId, VAR(uint8, AUTOMATIC) ApiId,
-                       VAR(uint8, AUTOMATIC) ErrorId)
+__attribute__((weak)) FUNC(Std_ReturnType, DET_CODE)
+    Det_ReportRuntimeError(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceId,
+                           VAR(uint8, AUTOMATIC) ApiId, VAR(uint8, AUTOMATIC) ErrorId)
 {
     Det_ModuleIdRunErr   = ModuleId;
     Det_InstanceIdRunErr = InstanceId;
@@ -134,9 +134,9 @@ Det_ReportRuntimeError(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) In
 /* ========================================================================== */
 /*              Service Name : Det_ReportTransientFault                       */
 /* ========================================================================== */
-FUNC(Std_ReturnType, DET_CODE)
-Det_ReportTransientFault(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceId, VAR(uint8, AUTOMATIC) ApiId,
-                         VAR(uint8, AUTOMATIC) FaultId)
+__attribute__((weak)) FUNC(Std_ReturnType, DET_CODE)
+    Det_ReportTransientFault(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceId,
+                             VAR(uint8, AUTOMATIC) ApiId, VAR(uint8, AUTOMATIC) FaultId)
 {
     Det_ModuleIdTransFlt   = ModuleId;
     Det_InstanceIdTransFlt = InstanceId;

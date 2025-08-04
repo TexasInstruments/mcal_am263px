@@ -1,143 +1,114 @@
-# Define the path to the MCAL SDK
-export MCAL_PATH?=$(abspath ..)
+include imports.mk
 
-# Define the build profile (e.g., Release, Debug)
+# Build profile: Release, Debug
 PROFILE?=Release
 
-# Define the CCS Eclipse executable path (assuming CCS is being used)
-CCS_ECLIPSE?=/home/gtbldadm/ti/ccs1281/ccs/eclipse/eclipse
+# List of platforms: am263, am263px, am261
+PLATFORM?=am263
 
-# List of example projects with standard path structure
-STANDARD_EXAMPLES := Can Cdd_Cmpss Cdd_Flc Dio Fls Flsdiag FsiRx Gpt Icu Lin Mcu Port Pwm
-
-# Define the relative path to the examples directory
+# Relative path to the examples directory
 EXAMPLES_DIR := $(MCAL_PATH)/mcal/examples
+EXAMPLES =
 
-# Custom examples and their subdirectories
-CUSTOM_EXAMPLES := Adc Dma Eth I2c Spi Uart Wdg
-Adc_SUBDIRS := adc_app adc_hw_trig_dma_app adc_resolver_app adc_resolver_dma_app
-Dma_SUBDIRS := Dma_ChainingMode Dma_InterruptMode Dma_LinkingMode Dma_PollingMode
-I2c_SUBDIRS := i2c_app
-Ipc_SUBDIRS :=
-Eth_SUBDIRS := eth_app eth_test_app
-Spi_SUBDIRS := mcspi_app
-Uart_SUBDIRS := uart_echo_dma_app
-Wdg_SUBDIRS := wdg_app
+# List of examples applicable to all platforms
+EXAMPLES += Adc/adc_app Adc/adc_hw_trig_dma_app
+EXAMPLES += Can
+EXAMPLES += Cdd_Cmpss
+EXAMPLES += Dio
+EXAMPLES += Dma/Dma_ChainingMode Dma/Dma_InterruptMode Dma/Dma_LinkingMode Dma/Dma_PollingMode
+EXAMPLES += Epwm
+EXAMPLES += Fls
+EXAMPLES += FsiRx
+EXAMPLES += Gpt
+EXAMPLES += I2c/i2c_app I2c/i2c_intr_app I2c/i2c_multichannel_app
+EXAMPLES += Icu
+EXAMPLES += Lin
+EXAMPLES += Mcu
+EXAMPLES += Port
+EXAMPLES += Pwm
+EXAMPLES += Spi/mcspi_app
+EXAMPLES += Wdg/wdg_app Wdg/wdg_skip_reset_app
 
-# Special case examples with different path structures
-SPECIAL_EXAMPLES := Epwm
-Epwm_PATH := Epwm
-Ipc_PROJECTS := Ipc_notify_app Ipc_rpmsg_app Ipc_rpmsg_callback_app
+#Platform specific examples
+ifeq ($(PLATFORM),$(filter $(PLATFORM), am263))
+  EXAMPLES += Eth/eth_app Eth/eth_test_app
+  EXAMPLES += Flsdiag
+  EXAMPLES += Uart/uart_echo_dma_app
+endif
+ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
+  EXAMPLES += Adc/adc_resolver_app Adc/adc_resolver_dma_app
+  EXAMPLES += Cdd_Flc
+  EXAMPLES += Eth/eth_app Eth/eth_test_app
+  EXAMPLES += Flsdiag_ospi
+  EXAMPLES += Uart/uart_echo_dma_app
+endif
+ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
+  EXAMPLES += Cdd_Flc
+  EXAMPLES += Flsdiag_ospi
+  EXAMPLES += Uart/uart_interrupt_app
+endif
 
-# Default target: Print a help message
-all:
-	@echo "Usage: make -f ccs_makefile ccs PLATFORM=<platform> [PROFILE=<profile>]"
-	@echo "       make -f ccs_makefile clean PLATFORM=<platform> [PROFILE=<profile>]"
-	@echo "Options:"
-	@echo "  PLATFORM=<platform> Specify the platform (e.g., am263)."
-	@echo "  PROFILE=<profile> Specify the build profile (default: Release)."
-
-# Define the target for building all projects
-ccs: build_standard build_custom build_special
-
-# Define the target for building standard examples
-build_standard:
-	@for example in $(STANDARD_EXAMPLES); do \
-		if [ "$(PLATFORM)" = "am263px" ]; then \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/am263px/r5f0_0/ti-arm-clang/am263px_lp -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/am263px/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-		else \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-		fi \
-	done
-
-# Define the target for building custom examples
-build_custom:
-	$(foreach example, $(CUSTOM_EXAMPLES), \
-		$(eval subdirs := $($(example)_SUBDIRS)) \
-		$(foreach subdir, $(subdirs), \
-			if [ "$(PLATFORM)" = "am263px" ]; then \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/am263px/r5f0_0/ti-arm-clang/am263px_lp -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/am263px/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-			else \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-			fi; \
-		) \
-	)
-
-# Define the target for building special examples
-build_special:
-	@for example in $(SPECIAL_EXAMPLES); do \
-		if [ "$$example" = "Epwm" ]; then \
-			echo "Building Epwm"; \
-			if [ "$(PLATFORM)" = "am263px" ]; then \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/am263px/r5f0_0/ti-arm-clang/am263px_lp -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/am263px/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-			else \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-			fi \
-		elif [ "$$example" = "Ipc" ]; then \
-			for ipc_proj in $(Ipc_PROJECTS); do \
-				echo "Building $$ipc_proj"; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Ipc/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f $$ipc_proj.projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
-			done \
-		fi \
-	done
-
-# Define a rule to clean all projects
-clean: clean_standard clean_custom clean_special
-
-# Define the target for cleaning standard examples
-clean_standard:
-	@for example in $(STANDARD_EXAMPLES); do \
-		if [ "$(PLATFORM)" = "am263px" ]; then \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/am263px/r5f0_0/ti-arm-clang/am263px_lp -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/am263px/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-		else \
-			$(MAKE) -C $(EXAMPLES_DIR)/$$example/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-		fi \
-	done
-
-# Define the target for cleaning custom examples
-clean_custom:
-	$(foreach example, $(CUSTOM_EXAMPLES), \
-		$(eval subdirs := $($(example)_SUBDIRS)) \
-		$(foreach subdir, $(subdirs), \
-			if [ "$(PLATFORM)" = "am263px" ]; then \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/am263px/r5f0_0/ti-arm-clang/am263px_lp -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/am263px/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-			else \
-				$(MAKE) -C $(EXAMPLES_DIR)/$(example)/$(subdir)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-			fi; \
-		) \
-	)
-
-# Define the target for cleaning special examples
-clean_special:
-	@for example in $(SPECIAL_EXAMPLES); do \
-		if [ "$$example" = "Epwm" ]; then \
-			echo "Cleaning Epwm"; \
-			if [ "$(PLATFORM)" = "am263px" ]; then \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/am263px/r5f0_0/ti-arm-clang/am263px_lp -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/am263px/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-			else \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-			fi \
-		elif [ "$$example" = "Ipc" ]; then \
-			for ipc_proj in $(Ipc_PROJECTS); do \
-				echo "Cleaning $$ipc_proj"; \
-				$(MAKE) -C $(EXAMPLES_DIR)/Ipc/soc/$(PLATFORM)/r5f0_0/ti-arm-clang -f $$ipc_proj.projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
-			done \
-		fi \
-	done
+EXAMPLES_CLEAN=$(addsuffix _clean, $(EXAMPLES))
 
 # Phony targets
-.PHONY: all ccs build_standard build_custom build_special clean clean_standard clean_custom clean_special
+.PHONY: all ccs clean help $(EXAMPLES) $(EXAMPLES_CLEAN) build_special build_$(PLATFORM) clean_special clean_$(PLATFORM)
+
+# Define the target for building all projects
+all: $(EXAMPLES) build_special
+
+# Provided for backward compatibility
+ccs: all
+
+# Define a rule to clean all projects
+clean: $(EXAMPLES_CLEAN) clean_special
+
+# Default target: Print a help message
+help:
+	$(ECHO) "Usage: make -s -f ccs_makefile all PLATFORM=<platform> [PROFILE=<profile>]"
+	$(ECHO) "Options:"
+	$(ECHO)   "PLATFORM=<platform> Specify the platform: am263, am263px, am261"
+	$(ECHO)   "PROFILE=<profile> Specify the build profile (default: Release or debug)"
+
+$(EXAMPLES):
+	if [ "$(PLATFORM)" = "am263px" ]; then \
+		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_cc                   -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
+		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_lp                   -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
+		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_sip                  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
+	else \
+		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang                                  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
+	fi \
+
+$(EXAMPLES_CLEAN):
+	if [ "$(PLATFORM)" = "am263px" ]; then \
+		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_cc  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
+		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_lp  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
+		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_sip -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
+	else \
+		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang                 -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
+	fi \
+
+build_special: build_$(PLATFORM)
+
+clean_special: clean_$(PLATFORM)
+
+build_am263:
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang             -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project
+
+build_am263px:
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/am263px_cc  -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/am263px_lp  -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project
+
+build_am261:
+	$(ECHO) "Nothing to be done for AM261x"
+
+clean_am263:
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang             -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean
+
+clean_am263px:
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/am263px_cc  -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/am263px_lp  -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean
+	$(MAKE) -C $(EXAMPLES_DIR)/Epwm/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/am263px_sip -f makefile_projectspec_tz_app CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean
+
+clean_am261:
+	$(ECHO) "Nothing to be done for AM261x"

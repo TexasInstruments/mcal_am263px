@@ -909,6 +909,214 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPeriodDutyPhase(Cdd_Pwm_channelParametertype
 }
 #endif /*(STD_ON == CDD_PWM_SET_PERIOD_DUTY_PHASE_API)*/
 
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(uint32 Channel, uint16 PhaseShiftValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_PHASE_SHIFT, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_PHASE_SHIFT);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Phase shift value is passed here */
+            EPWM_setPhaseShift(baseAddr, PhaseShiftValue);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(uint32 Channel, uint16 Period)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_TIMEBASE_PERIOD, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_TIMEBASE_PERIOD);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Period value is passed here */
+            EPWM_setTimeBasePeriod(baseAddr, Period);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_SetCounterCompareValue(uint32 Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_COUNTER_COMPARE_VALUE, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_COUNTER_COMPARE_VALUE);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Compare module and value is passed here */
+            EPWM_setCounterCompareValue(baseAddr, CompModule, DutyValue);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(uint32 Channel, uint16 RedCount)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_RISING_EDGE_DELAY_COUNT, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_RISING_EDGE_DELAY_COUNT);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Rising Edge Delay value is passed here */
+            EPWM_setRisingEdgeDelayCount(baseAddr, RedCount);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(uint32 Channel, uint16 FedCount)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Falling Edge Delay value is passed here */
+            EPWM_setFallingEdgeDelayCount(baseAddr, FedCount);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(uint32 Channel, uint32 Block, uint32 Delay)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_MIN_DEADBAND_DELAY, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_MIN_DEADBAND_DELAY);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Block and minimum deadband delay value is passed here */
+            EPWM_setMinDeadBandDelay(baseAddr, Block, Delay);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(uint32 Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_XCMP_REG_VALUE, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_XCMP_REG_VALUE);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* XCMP reg and value is passed here */
+            EPWM_setXCMPRegValue(baseAddr, XcmpReg, XcmpValue);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXMinMaxRegValue(uint32 Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_XMINMAP_REG_VALUE, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_XMINMAP_REG_VALUE);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* MinMax value is passed here */
+            EPWM_setXMINMAXRegValue(baseAddr, XminmaxReg, XcmpValue);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetCmpShadowRegValue(uint32 Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_CMP_SHADOW_REG_VALUE, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_CMP_SHADOW_REG_VALUE);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* CMP shadow reg value is passed here */
+            EPWM_setCMPShadowRegValue(baseAddr, CmpReg, CmpValue);
+        }
+    }
+
+    return;
+}
+
 /*===============================================================================================*/
 /*
  *Design: MCAL-23424, MCAL-23425
@@ -1119,6 +1327,145 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_HrSfoStatus(uint32 ChannelNumber)
     return (status);
 }
 #endif /* #if (STD_ON == CDD_PWM_HR_SFO_STATUS_API) */
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(uint32 Channel, uint32 PhaseShiftValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_HR_SET_PHASE_SHIFT, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_PHASE_SHIFT);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Phase shift value is passed here */
+            HRPWM_setPhaseShift(baseAddr, PhaseShiftValue);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(uint32 Channel, uint16 Period)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Period value is passed here */
+            HRPWM_setHiResTimeBasePeriod(baseAddr, Period);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_HrSetCounterCompareValue(uint32 Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Compare module and value is passed here */
+            HRPWM_setCounterCompareValue(baseAddr, CompModule, DutyValue);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(uint32 Channel, uint16 RedCount)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Rising Edge Delay value is passed here */
+            HRPWM_setHiResRisingEdgeDelay(baseAddr, RedCount);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(uint32 Channel, uint16 FedCount)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_HR_SET_FALLING_EDGE_DELAY_COUNT, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_FALLING_EDGE_DELAY_COUNT);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* Falling Edge Delay value is passed here */
+            HRPWM_setHiResFallingEdgeDelayOnly(baseAddr, FedCount);
+        }
+    }
+
+    return;
+}
+
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetXcmpRegValue(uint32 Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue)
+{
+    uint32 baseAddr;
+
+#if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
+    if (CDD_PWM_STATUS_INIT != Cdd_Pwm_DrvStatus)
+    {
+        (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_HR_SET_XCMP_REG_VALUE, CDD_PWM_E_UNINIT);
+    }
+    else
+#endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
+    {
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_XCMP_REG_VALUE);
+        if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
+        {
+            /* XCMP reg and value is passed here */
+            HRPWM_setXCMPRegValue(baseAddr, HrXcmpReg, HrXcmpValue);
+        }
+    }
+
+    return;
+}
 
 /*
  *Design: MCAL-23447, MCAL-23448

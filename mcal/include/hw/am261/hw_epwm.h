@@ -2161,6 +2161,56 @@ typedef enum
 
 /******************************************************************************
 
+ Values that can be passed to EPWM_setXMINMAXRegValue() as the
+ \e xminmaxReg parameter.
+
+*******************************************************************************/
+typedef enum
+{
+    /*! XMAX_ACTIVE*/
+    EPWM_XMAX_ACTIVE = 0x0U,
+    /*! XMIN_ACTIVE*/
+    EPWM_XMIN_ACTIVE = 0x2U,
+    /*! XMAX_SHADOW1*/
+    EPWM_XMAX_SHADOW1 = 0x80U,
+    /*! XMIN_SHADOW1*/
+    EPWM_XMIN_SHADOW1 = 0x82U,
+    /*! XMAX_SHADOW2*/
+    EPWM_XMAX_SHADOW2 = 0x100U,
+    /*! XMIN_SHADOW2*/
+    EPWM_XMIN_SHADOW2 = 0x102U,
+    /*! XMAX_SHADOW3*/
+    EPWM_XMAX_SHADOW3 = 0x180U,
+    /*! XMIN_SHADOW3*/
+    EPWM_XMIN_SHADOW3 = 0x182U
+
+}EPWM_XMinMaxReg;
+
+/******************************************************************************
+
+ Values that can be passed to EPWM_setCMPShadowRegValue() as the
+ \e cmpReg parameter.
+
+*******************************************************************************/
+typedef enum
+{
+    /*! CMPC_SHADOW1*/
+    EPWM_CMPC_SHADOW1 = 0x0U,
+    /*! CMPD_SHADOW1*/
+    EPWM_CMPD_SHADOW1 = 0x4U,
+    /*! CMPC_SHADOW2*/
+    EPWM_CMPC_SHADOW2 = 0x80U,
+    /*! CMPD_SHADOW2*/
+    EPWM_CMPD_SHADOW2 = 0x84U,
+    /*! CMPC_SHADOW3*/
+    EPWM_CMPC_SHADOW3 = 0x100U,
+    /*! CMPD_SHADOW3*/
+    EPWM_CMPD_SHADOW3 = 0x104U
+
+}EPWM_XCompareReg;
+
+/******************************************************************************
+
  Values that can be passed to EPWM_setXCMPActionQualifierAction() as the \e event parameter.
 
 *******************************************************************************/
@@ -9596,6 +9646,69 @@ EPWM_setXCMPRegValue(uint32 base, EPWM_XCMPReg xcmpReg,
      Write to the xcmp registers.
     */
     HW_WR_REG16(registerOffset + 0x2U, xcmpvalue);
+}
+
+/******************************************************************************
+ Writes values to XMINMAX registers
+
+ \param base is the base address of the EPWM module.
+ \param xminmaxReg is the XCMP register offset
+ \param xcmpvalue is the value to be written to XCMP registers
+ This function writes xcmpvalue to XCMP registers.
+ Valid values for xminmaxReg are:
+    EPWM_XMIN_ACTIVE                              -XMIN_ACTIVE
+    EPWM_XMAX_ACTIVE                              -XMAX_ACTIVE
+    EPWM_XMIN_SHADOW1                             -XMIN_SHADOW1
+    EPWM_XMAX_SHADOW1                             -XMAX_SHADOW1
+    EPWM_XMIN_SHADOW2                             -XMIN_SHADOW2
+    EPWM_XMAX_SHADOW2                             -XMAX_SHADOW2
+    EPWM_XMIN_SHADOW3                             -XMIN_SHADOW3
+    EPWM_XMAX_SHADOW3                             -XMAX_SHADOW3
+ \return None.
+
+ *******************************************************************************/
+static inline FUNC(void, PWM_CODE)
+EPWM_setXMINMAXRegValue(uint32 base, EPWM_XMinMaxReg xminmaxReg,
+                            uint16 xcmpvalue)
+{
+    uint32 registerOffset;
+    registerOffset = base +  PWM_EPWM_XMINMAX_ACTIVE + (uint16)xminmaxReg;
+
+    /*
+    / Write to the XMINMAX register.
+    */
+    HW_WR_REG16(registerOffset, xcmpvalue);
+}
+
+/******************************************************************************
+ Writes values to CMPx Shadow registers
+
+ \param base is the base address of the EPWM module.
+ \param cmpReg is the CMP register offset
+ \param cmpvalue is the value to be written to CMPC/D shadow registers
+ This function writes cmpvalue to CMPC/D shadow registers.
+ Valid values for cmpReg are:
+   EPWM_CMPC_SHADOW1                             -CMPC_SHADOW1
+   EPWM_CMPD_SHADOW1                             -CMPD_SHADOW1
+   EPWM_CMPC_SHADOW2                             -CMPC_SHADOW2
+   EPWM_CMPD_SHADOW2                             -CMPD_SHADOW2
+   EPWM_CMPC_SHADOW3                             -CMPC_SHADOW3
+   EPWM_CMPD_SHADOW3                             -CMPD_SHADOW3
+ \return None.
+
+ *******************************************************************************/
+static inline FUNC(void, PWM_CODE)
+EPWM_setCMPShadowRegValue(uint32 base, EPWM_XCompareReg cmpReg,
+                            uint16 cmpvalue)
+{
+
+    uint32 registerOffset;
+    registerOffset = base + PWM_EPWM_CMPC_SHDW1 + (uint32)cmpReg;
+
+    /*
+     Write to the CMPC/D Shadow registers.
+    */
+    HW_WR_REG16(registerOffset, cmpvalue);
 }
 
 /******************************************************************************

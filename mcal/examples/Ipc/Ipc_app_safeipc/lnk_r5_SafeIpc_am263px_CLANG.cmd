@@ -241,6 +241,14 @@ SECTIONS
         __linker_cdd_cmpss_text_end = .;
 
         .=align(8);
+        __linker_cdd_flc_text_start = .;
+        . += FILL_LENGTH;
+        *(CDD_FLC_TEXT_SECTION)
+        .=align(8);
+        . += FILL_LENGTH;
+        __linker_cdd_flc_text_end = .;
+
+        .=align(8);
         __linker_lin_text_start = .;
         . += FILL_LENGTH;
         *(LIN_TEXT_SECTION)
@@ -456,6 +464,14 @@ SECTIONS
         .=align(8);
         . += FILL_LENGTH;
         __linker_cdd_cmpss_const_end = .;
+
+        .=align(8);
+        __linker_cdd_flc_const_start = .;
+        . += FILL_LENGTH;
+        *(CDD_FLC_CONST_UNSPECIFIED_SECTION)
+        .=align(8);
+        . += FILL_LENGTH;
+        __linker_cdd_flc_const_end = .;
 
         .=align(8);
         __linker_lin_const_start = .;

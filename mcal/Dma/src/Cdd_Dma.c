@@ -188,7 +188,7 @@ uint32 Cdd_Dma_CbkRegister(uint32 handleId, void *appdata, Cdd_Edma_EventCallbac
     {
         Cdd_Dma_ReportDetError(CDD_DMA_CBKREGISTER_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_CBKREGISTER_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }
@@ -218,7 +218,7 @@ void Cdd_Dma_ParamSet(uint32 handleId, uint32 channelIdx, uint32 paramIndex, Cdd
     {
         Cdd_Dma_ReportDetError(CDD_DMA_PARAMSET_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_PARAMSET_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }
@@ -271,7 +271,7 @@ void Cdd_Dma_LinkChannel(uint32 handleId, uint32 paramIndex0, uint32 paramIndex1
     {
         Cdd_Dma_ReportDetError(CDD_DMA_LINKCHANNEL_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_LINKCHANNEL_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }
@@ -319,7 +319,7 @@ void Cdd_Dma_ChainChannel(uint32 handleId, uint32 channelIdx0, uint32 paramIndex
     {
         Cdd_Dma_ReportDetError(CDD_DMA_CHAINCHANNEL_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_CHAINCHANNEL_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }
@@ -354,7 +354,7 @@ boolean Cdd_Dma_EnableTransferRegion(uint32 handleId, uint32 trigMode)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_ENABLETRANSFERREGION_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_ENABLETRANSFERREGION_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }
@@ -381,7 +381,7 @@ boolean Cdd_Dma_GetStatus(uint32 handleId)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_GETSTATUS_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_GETSTATUS_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }
@@ -473,7 +473,7 @@ boolean Cdd_Dma_DisableTransferRegion(uint32 handleId, uint32 trigMode)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_DISABLETRANSFERREGION_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_DISABLETRANSFERREGION_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }
@@ -630,7 +630,7 @@ static boolean Cdd_Dma_GetParamDetCheck(uint32 handleId, uint32 channelIdx, uint
     {
         Cdd_Dma_ReportDetError(CDD_DMA_GETPARAM_SERVICE_ID, CDD_DMA_E_UNINIT);
     }
-    else if (handleId >= CDD_DMA_MAX_HANDLER)
+    else if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
     {
         Cdd_Dma_ReportDetError(CDD_DMA_GETPARAM_SERVICE_ID, CDD_DMA_E_PARAM_VALUE);
     }

@@ -115,7 +115,7 @@ int main(void)
 #if (STD_OFF == CDD_I2C_POLLING_MODE)
     Cdd_I2c_InterruptConfig();
 #endif  // #if(STD_OFF == CDD_I2C_POLLING_MODE)
-    Cdd_I2c_Init(I2cConfigSet);
+    Cdd_I2c_Init(NULL_PTR);
     board_flash_reset();
 #endif                        // #if defined AM263PX_R_PACKAGE || defined AM263PX_C_PACKAGE
 #endif                        // if defined(AM263PX_PLATFORM)

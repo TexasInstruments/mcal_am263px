@@ -131,6 +131,7 @@ static uint8          Fls_DetCheckInit(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CO
 #endif
 static Std_ReturnType Fls_checkSectorAlignment(Fls_AddressType SourceAddress);
 static Std_ReturnType Fls_checkPageAlignment(Fls_AddressType SourceAddress);
+static Std_ReturnType checkBlockAlignment(Fls_AddressType SourceAddress);
 static void           Fls_TimeoutVerification_sub(void);
 static void           Fls_TimeoutVerification(TickType startCount);
 static void           Fls_MainFunction_sub(void);
@@ -300,6 +301,7 @@ static Std_ReturnType checkBlockAlignment(Fls_AddressType SourceAddress)
     }
     return retVal;
 }
+
 #endif /*#if (STD_ON == FLS_DEV_ERROR_DETECT)*/
 
 /**
@@ -325,14 +327,12 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
 #if (STD_ON == FLS_DEV_ERROR_DETECT)
     uint8 detFlag = 0U;
 #endif
-
 #if (STD_ON == FLS_PRE_COMPILE_VARIANT)
     if (NULL_PTR == ConfigPtr)
     {
         CfgPtr = &FLS_INIT_CONFIG_PC;
     }
 #endif /* (STD_ON == FLS_PRE_COMPILE_VARIANT) */
-
 #if (STD_ON == FLS_POST_BUILD_VARIANT)
     if (NULL_PTR != ConfigPtr)
     {
@@ -363,6 +363,7 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
         else
         {
             Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_UNEXPECTED_FLASH_ID);
+            Fls_DrvObj.status = MEMIF_UNINIT;
         }
     }
     return;
@@ -1142,6 +1143,7 @@ FUNC(uint32, FLS_CODE) Fls_SetEraseType(Fls_EraseType erasetype)
 #if (STD_ON == FLS_SETMODE_API)
 FUNC(void, FLS_CODE) Fls_SetMode(MemIf_ModeType Mode)
 {
+    (void)Mode;
     return;
 }
 #endif

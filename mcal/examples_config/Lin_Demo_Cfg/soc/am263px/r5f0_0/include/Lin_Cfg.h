@@ -148,7 +148,11 @@ extern "C" {
 //! \brief Lin Channel ISR Type Selection.
 //
 //*****************************************************************************
+
+
 #define LIN_WAKEUP_SOURCE_0           EcuMConf_EcuMWakeupSource_LIN1
+
+
 
 
 //*****************************************************************************

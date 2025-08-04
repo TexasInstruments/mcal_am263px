@@ -130,7 +130,6 @@ uint8 rxBufferIomux[2];
 uint8 txBufferEeprom[2];
 /*Buffer to store reception data for Eeprom*/
 uint8 boardVerEeprom[2];
-// Cdd_I2c_ConfigPtrType I2cConfigSet = NULL_PTR;
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
@@ -511,6 +510,8 @@ uint32      EEPROM_CAT24M_read(uint32 offset, uint32 state)
 }
 #endif
 
+// TODO
+#if 0
 void updateSlaveAddress()
 {
     /* For E1 board IOexpander I2c slave address is 32U, so update it if Board is E1
@@ -520,11 +521,11 @@ void updateSlaveAddress()
     Cdd_I2cChannelContainerLocal[1].SlaveAddress = 32U;
     Cdd_I2cChannelContainerLocal[2].SlaveAddress = 32U;
 }
+#endif
 
 void board_flash_reset(void)
 {
     uint32 status = E_OK;
-    // Cdd_I2c_Init(I2cConfigSet);
     I2c_Buffer_Setup();
 
     /* check if part type is SIP (internal flash) or non-SIP (external flash)
@@ -546,7 +547,7 @@ void board_flash_reset(void)
         else if (boardVerEeprom[1] == '1' && boardVerEeprom[0] == 'E')
         {
             /* boardVer is E1 */
-            updateSlaveAddress();
+            // updateSlaveAddress();
             status += TCA6416_Flash_reset();
         }
         else

@@ -140,10 +140,10 @@ void Fls_Ospi_TransactionInit(OSPI_Transaction *trans)
 static uint32 Fls_Ospi_ExecCmd(void)
 {
     uint32 retry    = OSPI_READ_WRITE_TIMEOUT;
-    uint32 retVal   = 0;
-    uint32 idleFlag = 0;
+    uint32 retVal   = 0U;
+    uint32 idleFlag = 0U;
 
-    while (idleFlag == 0)
+    while (idleFlag == 0U)
     {
         idleFlag = HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_IDLE_FLD);
     }
@@ -159,13 +159,15 @@ static uint32 Fls_Ospi_ExecCmd(void)
         uint32 execCompleteFlag = HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG,
                                                 OSPI_FLASH_CMD_CTRL_REG_CMD_EXEC_STATUS_FLD);
 
-        if (execCompleteFlag == 0)
+        if (execCompleteFlag == 0U)
         {
             break;
         }
         uint32 delay = OSPI_CHECK_IDLE_DELAY;
-        while (delay--)
-            ;
+        while (delay != 0U)
+        {
+            delay--;
+        };
         retry--;
     }
 
@@ -174,8 +176,8 @@ static uint32 Fls_Ospi_ExecCmd(void)
         retVal = -1;
     }
 
-    idleFlag = 0;
-    while (idleFlag == 0)
+    idleFlag = 0U;
+    while (idleFlag == 0U)
     {
         idleFlag = HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_IDLE_FLD);
     }
@@ -190,10 +192,11 @@ static uint32 Fls_Ospi_ExecCmd(void)
  */
 Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams)
 {
-    Std_ReturnType retVal = E_OK;
-    OSPI_Object   *obj    = ((OSPI_Config *)handle)->object;
-    uint8         *pBuf   = (uint8 *)rdParams->rxDataBuf;
-    uint32         rxLen  = rdParams->rxDataLen;
+    Std_ReturnType retVal  = E_OK;
+    OSPI_Config   *pHandle = (OSPI_Config *)handle;
+    OSPI_Object   *obj     = pHandle->object;
+    uint8         *pBuf    = (uint8 *)rdParams->rxDataBuf;
+    uint32         rxLen   = rdParams->rxDataLen;
 
     /* Clear flash command control register */
     HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, 0U);
@@ -207,7 +210,7 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
 
     /* Set number of read data bytes */
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, OSPI_FLASH_CMD_CTRL_REG_NUM_RD_DATA_BYTES_FLD,
-                  rxLen - 1);
+                  rxLen - 1U);
 
     /* Set dummyCycles for the command */
     if (rdParams->dummyBits != OSPI_CMD_INVALID_DUMMY)
@@ -224,7 +227,7 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
     uint32 dualOpCode =
         HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_DUAL_BYTE_OPCODE_EN_FLD);
 
-    if (dualOpCode == 1)
+    if (dualOpCode == 1U)
     {
         uint8 cmdExt = OSPI_CMD_INVALID_OPCODE;
         /* Get the extended opcode type for read and Write */
@@ -236,6 +239,7 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
         {
             cmdExt = ~(rdParams->cmd);
         }
+
         /* Set extended STIG opcode */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_OPCODE_EXT_LOWER_REG,
                       OSPI_OPCODE_EXT_LOWER_REG_EXT_STIG_OPCODE_FLD, cmdExt);
@@ -245,7 +249,7 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
         /* do nothing */
     }
 
-    if ((rdParams->cmdAddr != OSPI_CMD_INVALID_ADDR) && (rdParams->numAddrBytes > 0))
+    if ((rdParams->cmdAddr != OSPI_CMD_INVALID_ADDR) && (rdParams->numAddrBytes > 0U))
     {
         /* Enable Command address in command control register */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, OSPI_FLASH_CMD_CTRL_REG_ENB_COMD_ADDR_FLD,
@@ -259,7 +263,7 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
         HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_ADDR_REG, rdParams->cmdAddr);
     }
 
-    if (Fls_Ospi_ExecCmd() == 0)
+    if (Fls_Ospi_ExecCmd() == 0U)
     {
         uint32 regVal = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_RD_DATA_LOWER_REG);
         uint32 rdLen  = (rxLen > 4U) ? 4U : rxLen;
@@ -381,6 +385,7 @@ Std_ReturnType Fls_Ospi_readDirect(OSPI_Handle handle, OSPI_Transaction *trans)
     return E_OK;
 #else
 
+    (void)handle;
     Std_ReturnType retVal = E_OK;
 
     uint8 *pSrc;
@@ -421,8 +426,9 @@ Std_ReturnType Fls_Ospi_readDirect(OSPI_Handle handle, OSPI_Transaction *trans)
  */
 Std_ReturnType Fls_Ospi_readIndirect(OSPI_Handle handle, OSPI_Transaction *trans)
 {
-    OSPI_Object   *obj    = ((OSPI_Config *)handle)->object;
-    Std_ReturnType retVal = E_OK;
+    OSPI_Config   *pHandle = (OSPI_Config *)handle;
+    OSPI_Object   *obj     = pHandle->object;
+    Std_ReturnType retVal  = E_OK;
     uint8         *pDst;
     uint32         addrOffset;
     uint32         remainingSize;
@@ -470,8 +476,10 @@ Std_ReturnType Fls_Ospi_readIndirect(OSPI_Handle handle, OSPI_Transaction *trans
                     break;
                 }
                 delay = OSPI_CHECK_IDLE_DELAY;
-                while (delay--)
-                    ;
+                while (delay != 0U)
+                {
+                    delay--;
+                };
                 retry--;
             }
             if (retry == 0U)
@@ -497,7 +505,7 @@ Std_ReturnType Fls_Ospi_readIndirect(OSPI_Handle handle, OSPI_Transaction *trans
                 destPtr++;
             }
 
-            if (remainingFIFO > 0)
+            if (remainingFIFO > 0U)
             {
                 temp = HW_RD_REG32((uintptr_t)FLS_BASE_ADDRESS);
                 (void)memcpy(destPtr, &temp, remainingFIFO);
@@ -519,8 +527,10 @@ Std_ReturnType Fls_Ospi_readIndirect(OSPI_Handle handle, OSPI_Transaction *trans
                 break;
             }
             delay = OSPI_CHECK_IDLE_DELAY;
-            while (delay--)
-                ;
+            while (delay != 0U)
+            {
+                delay--;
+            };
             retry--;
         }
 
@@ -551,6 +561,7 @@ Std_ReturnType Fls_Ospi_readIndirect(OSPI_Handle handle, OSPI_Transaction *trans
  */
 Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, OSPI_WriteCmdParams *wrParams)
 {
+    (void)handle;
     Std_ReturnType retVal = E_OK;
     uint8         *txBuf  = (uint8 *)wrParams->txDataBuf;
     uint32         txLen  = wrParams->txDataLen;
@@ -571,7 +582,7 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, OSPI_WriteCmdParams *wrPara
 
         /* Set number of address bytes */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, OSPI_FLASH_CMD_CTRL_REG_NUM_ADDR_BYTES_FLD,
-                      wrParams->numAddrBytes - 1);
+                      wrParams->numAddrBytes - (uint8)1U);
 
         /* Update the flash cmd address register */
         HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_ADDR_REG, wrParams->cmdAddr);
@@ -584,7 +595,7 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, OSPI_WriteCmdParams *wrPara
     uint32 dualOpCode =
         HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_DUAL_BYTE_OPCODE_EN_FLD);
 
-    if (dualOpCode == 1)
+    if (dualOpCode == 1U)
     {
         uint8 cmdExt = OSPI_CMD_INVALID_OPCODE;
         /* Get the extended opcode type for read and Write */
@@ -592,9 +603,12 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, OSPI_WriteCmdParams *wrPara
         {
             cmdExt = wrParams->cmd;
         }
-        else if (fls_config_sfdp->cmdExtType == OSPI_CMD_EXT_TYPE_INVERSE)
+        else
         {
-            cmdExt = ~(wrParams->cmd);
+            if (fls_config_sfdp->cmdExtType == OSPI_CMD_EXT_TYPE_INVERSE)
+            {
+                cmdExt = ~(wrParams->cmd);
+            }
         }
         /* Set extended STIG opcode */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_OPCODE_EXT_LOWER_REG,
@@ -616,17 +630,17 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, OSPI_WriteCmdParams *wrPara
 
         /* Set number of data bytes to write */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, OSPI_FLASH_CMD_CTRL_REG_NUM_WR_DATA_BYTES_FLD,
-                      txLen - 1);
+                      txLen - 1U);
 
         wrLen = txLen > 4U ? 4U : txLen;
-        (void)memcpy(&wrData, txBuf, wrLen);
+        (void)memcpy((void *)&wrData, (void *)txBuf, wrLen);
         HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_WR_DATA_LOWER_REG, wrData);
 
         if (txLen > 4U)
         {
             txBuf += wrLen;
             wrLen  = txLen - wrLen;
-            (void)memcpy(&wrData, txBuf, wrLen);
+            (void)memcpy((void *)&wrData, (void *)txBuf, wrLen);
             HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_WR_DATA_UPPER_REG, wrData);
         }
     }
@@ -694,9 +708,10 @@ Std_ReturnType Fls_Ospi_writeIndirect(OSPI_Handle handle, OSPI_Transaction *tran
     uint8         *pSrc;
     uint32         remainingSize, sramLevel, wrBytes, wrFlag = 0;
 
-    uint32       retry = OSPI_REG_RETRY;
-    OSPI_Object *obj   = ((OSPI_Config *)handle)->object;
-    pSrc               = (uint8 *)trans->buf;
+    uint32       retry   = OSPI_REG_RETRY;
+    OSPI_Config *pHandle = (OSPI_Config *)handle;
+    OSPI_Object *obj     = pHandle->object;
+    pSrc                 = (uint8 *)trans->buf;
 
     /* Disable DAC Mode */
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_ENB_DIR_ACC_CTLR_FLD, 0U);
@@ -734,8 +749,10 @@ Std_ReturnType Fls_Ospi_writeIndirect(OSPI_Handle handle, OSPI_Transaction *tran
                     break;
                 }
                 uint32 delay = OSPI_POLL_IDLE_DELAY;
-                while (delay--)
-                    ;
+                while (delay != 0U)
+                {
+                    delay--;
+                };
                 retry--;
             }
 
@@ -759,7 +776,7 @@ Std_ReturnType Fls_Ospi_writeIndirect(OSPI_Handle handle, OSPI_Transaction *tran
                 HW_WR_REG32((uintptr_t)FLS_BASE_ADDRESS, *srcPtr);
                 srcPtr++;
             }
-            if (remainingFIFO > 0)
+            if (remainingFIFO > 0U)
             {
                 /* dangling bytes */
                 (void)memcpy(&temp, srcPtr, remainingFIFO);
@@ -778,13 +795,15 @@ Std_ReturnType Fls_Ospi_writeIndirect(OSPI_Handle handle, OSPI_Transaction *tran
         {
             regVal = HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_INDIRECT_WRITE_XFER_CTRL_REG,
                                    OSPI_INDIRECT_WRITE_XFER_CTRL_REG_IND_OPS_DONE_STATUS_FLD);
-            if (regVal == 1)
+            if (regVal == (uint32)1U)
             {
                 break;
             }
             uint32 delay = OSPI_CHECK_IDLE_DELAY;
-            while (delay--)
-                ;
+            while (delay != 0U)
+            {
+                delay--;
+            };
             retry--;
         }
 
@@ -930,8 +949,10 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
             retry = 0U;
         }
         uint32 delay = OSPI_CHECK_IDLE_DELAY;
-        while (delay--)
-            ;
+        while (delay != 0U)
+        {
+            delay--;
+        };
         timeOutVal--;
     }
 
@@ -955,7 +976,7 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
         }
         /* Chip Select */
         regVal            = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG);
-        uint32 chipSelect = OSPI_CHIP_SELECT(Fls_DrvObj.chipSelect);
+        uint32 chipSelect = (uint32)OSPI_CHIP_SELECT(Fls_DrvObj.chipSelect);
         uint32 decSelect  = Fls_DrvObj.decChipSelect;
 
         regVal &= ~(OSPI_CONFIG_REG_PERIPH_SEL_DEC_FLD_MASK | OSPI_CONFIG_REG_PERIPH_CS_LINES_FLD_MASK);
@@ -978,7 +999,7 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
              (delays[2] << OSPI_DEV_DELAY_REG_D_BTWN_FLD_SHIFT) | (delays[3] << OSPI_DEV_DELAY_REG_D_NSS_FLD_SHIFT));
         HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_DELAY_REG, devDelay);
 
-        if (Fls_DrvObj.baudRateDiv)
+        if (Fls_DrvObj.baudRateDiv != 0U)
         {
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_MSTR_BAUD_DIV_FLD,
                           OSPI_BAUD_RATE_DIVISOR(Fls_DrvObj.baudRateDiv));
@@ -1055,7 +1076,7 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
 
         fls_config_sfdp->addrnumBytes = addrnumBytesInput;
         /* Set address bytes to 3 */
-        if (Fls_DrvObj.Fls_Mode == FLS_OSPI_RX_1S_1S_1S)
+        if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_1S_1S_1S)
         {
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_SIZE_CONFIG_REG,
                           OSPI_DEV_SIZE_CONFIG_REG_NUM_ADDR_BYTES_FLD, 2);
@@ -1063,7 +1084,7 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
         else
         {
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_SIZE_CONFIG_REG,
-                          OSPI_DEV_SIZE_CONFIG_REG_NUM_ADDR_BYTES_FLD, fls_config_sfdp->addrnumBytes - 1);
+                          OSPI_DEV_SIZE_CONFIG_REG_NUM_ADDR_BYTES_FLD, fls_config_sfdp->addrnumBytes - 1U);
         }
         /* Set opcodes in OSPI controller */
         Fls_Ospi_setXferOpCodes(handle, fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].cmdRd,
@@ -1133,7 +1154,7 @@ Std_ReturnType Nor_OspiSetAddressBytes(OSPI_Handle handle)
             /* Both 3 and 4 byte addressing supported. Configure flash to switch to
              * 4 byte addressing if that's selected
              * */
-            if (fls_config_sfdp->addrnumBytes == (uint8)4)
+            if (fls_config_sfdp->addrnumBytes == (uint8)4U)
             {
                 (void)Nor_OspiSet4ByteAddrMode(handle);
                 HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_SIZE_CONFIG_REG,
@@ -1321,6 +1342,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
  */
 void Fls_Ospi_SetProtocolCmds(OSPI_Handle handle, uint32 cmd, uint32 addr, uint32 data, uint32 dtr)
 {
+    (void)handle;
     /* Transfer lines for Read */
     /* Set transfer lines for sending command */
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG, OSPI_DEV_INSTR_RD_CONFIG_REG_INSTR_TYPE_FLD,
@@ -1340,16 +1362,16 @@ void Fls_Ospi_SetProtocolCmds(OSPI_Handle handle, uint32 cmd, uint32 addr, uint3
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_WR_CONFIG_REG,
                   OSPI_DEV_INSTR_WR_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD, data);
 
-    if (dtr)
+    if (dtr != 0U)
     {
-        if ((cmd == 3) && (data == 3) && (addr == 3))
+        if ((cmd == 3U) && (data == 3U) && (addr == 3U))
         {
             /* Enable DDR Mode */
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_ENABLE_DTR_PROTOCOL_FLD, TRUE);
             /* Enable dual byte opcode */
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_DUAL_BYTE_OPCODE_EN_FLD, TRUE);
         }
-        if ((cmd == 2) && (data == 2) && (addr == 2))
+        if ((cmd == 2U) && (data == 2U) && (addr == 2U))
         {
             /* Enable DDR EN commands */
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG,
@@ -1381,12 +1403,14 @@ void Fls_Ospi_setXferOpCodes(OSPI_Handle handle, uint8 readCmd, uint8 pageProgCm
             cmdExtRead  = ~readCmd;
             cmdExtWrite = ~pageProgCmd;
         }
-        else if (fls_config_sfdp->cmdExtType == OSPI_CMD_EXT_TYPE_NONE)
+        else
         {
-            cmdExtRead  = OSPI_CMD_INVALID_OPCODE;
-            cmdExtWrite = OSPI_CMD_INVALID_OPCODE;
+            if (fls_config_sfdp->cmdExtType == OSPI_CMD_EXT_TYPE_NONE)
+            {
+                cmdExtRead  = OSPI_CMD_INVALID_OPCODE;
+                cmdExtWrite = OSPI_CMD_INVALID_OPCODE;
+            }
         }
-
         /* Set opcode for read */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG,
                       OSPI_DEV_INSTR_RD_CONFIG_REG_RD_OPCODE_NON_XIP_FLD, readCmd);
@@ -1420,10 +1444,11 @@ void Fls_Ospi_setXferOpCodes(OSPI_Handle handle, uint8 readCmd, uint8 pageProgCm
  */
 Std_ReturnType Fls_Ospi_SetModeDummy(OSPI_Handle handle)
 {
-    OSPI_Object   *obj    = ((OSPI_Config *)handle)->object;
-    Std_ReturnType retVal = E_OK;
+    OSPI_Config   *pHandle = (OSPI_Config *)handle;
+    OSPI_Object   *obj     = pHandle->object;
+    Std_ReturnType retVal  = E_OK;
 
-    if (fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].modeClksCmd != 0)
+    if (fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].modeClksCmd != 0U)
     {
         /* Enable mode bits transmission while sending CMDs*/
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, OSPI_FLASH_CMD_CTRL_REG_ENB_MODE_BIT_FLD, 1);
@@ -1450,8 +1475,8 @@ Std_ReturnType Fls_Ospi_SetModeDummy(OSPI_Handle handle)
 
     obj->cmdDummyCycles = fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].dummyClksCmd;
 
-    if ((fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].dummyClksCmd != 0) ||
-        (fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].dummyClksRd != 0))
+    if ((fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].dummyClksCmd != 0U) ||
+        (fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].dummyClksRd != 0U))
     {
         retVal = Ospi_SetRegCfg(handle, &(fls_config_sfdp->protos[Fls_DrvObj.Fls_Mode].dummyCfg));
 
@@ -1764,13 +1789,14 @@ void Fls_Interrupt_Enable(void)
  */
 Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
 {
-    OSPI_Object   *obj    = ((OSPI_Config *)handle)->object;
-    Std_ReturnType retVal = E_OK;
+    OSPI_Config   *pHandle = (OSPI_Config *)handle;
+    OSPI_Object   *obj     = pHandle->object;
+    Std_ReturnType retVal  = E_OK;
 
-    if ((seq & (1 << 1)) != 0)
+    if ((seq & (1 << 1)) != 0U)
     {
         retVal = Nor_OspiCmdWrite(handle, 0xE8, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
-        if (Fls_DrvObj.Fls_Mode == FLS_OSPI_RX_8D_8D_8D)
+        if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
         {
             Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
         }
@@ -1784,7 +1810,7 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
             retVal = Nor_OspiWaitReady(handle, fls_config_sfdp->flashBusyTimeout);
         }
     }
-    if ((seq & (1 << 2)) != 0)
+    if ((seq & (1 << 2)) != 0U)
     {
         retVal = Nor_OspiCmdWrite(handle, fls_config_sfdp->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
         if (retVal == E_OK)
@@ -1792,7 +1818,7 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
             retVal = Nor_OspiWaitReady(handle, fls_config_sfdp->flashBusyTimeout);
         }
         retVal = Nor_OspiCmdWrite(handle, 0x72, 0, 0, NULL, 0);
-        if (Fls_DrvObj.Fls_Mode == FLS_OSPI_RX_8D_8D_8D)
+        if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
         {
             Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
         }
@@ -1819,7 +1845,7 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
         if (E_OK == retVal)
         {
             /* Octal DDR is special. Check if it is already enabled */
-            if ((((reg >> octCfg->shift) & 0x01) == 1) && (((reg >> dCfg->shift) & 0x01) == 1))
+            if ((((reg >> octCfg->shift) & 0x01) == (uint8)1U) && (((reg >> dCfg->shift) & 0x01) == (uint8)1U))
             {
                 /* Already 8D */
             }
@@ -1829,14 +1855,14 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
                 reg &= ~(uint8)(octCfg->mask | dCfg->mask);
                 /* Bitwise OR the bit pattern for setting the dummyCycle selected */
                 reg |= (octCfg->cfgRegBitP << octCfg->shift);
-                if (Fls_DrvObj.Fls_Mode == FLS_OSPI_RX_8D_8D_8D)
+                if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
                 {
                     reg |= (dCfg->cfgRegBitP << dCfg->shift);
                 }
                 retVal += Nor_OspiRegWrite(handle, octCfg->cmdRegWr, octCfg->cfgReg, reg);
             }
         }
-        if (Fls_DrvObj.Fls_Mode == FLS_OSPI_RX_8D_8D_8D)
+        if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
         {
             Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
         }
@@ -1850,7 +1876,7 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
         (void)Ospi_SetRegCfg(handle, octCfg);
         retVal = Nor_OspiWaitReady(handle, fls_config_sfdp->flashBusyTimeout);
         (void)Ospi_SetRegCfg(handle, dCfg);
-        if (Fls_DrvObj.Fls_Mode == FLS_OSPI_RX_8D_8D_8D)
+        if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
         {
             obj->currentprotocol = Fls_DrvObj.Fls_Mode;
         }
@@ -1875,59 +1901,59 @@ Std_ReturnType Fls_set444mode(OSPI_Handle handle, uint8 seq)
     Std_ReturnType retVal   = E_OK;
     uint32         seqFound = 0U;
 
-    if ((seq & (uint8)(1 << 0)) != 0)
+    if ((seq & (uint8)(1 << 0)) != 0U)
     {
         /* Issue instruction 0x38 */
         retVal   = Nor_OspiCmdWrite(handle, 0x38, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
         seqFound = 1U;
     }
-    if ((seq & (uint8)(1 << 1)) != 0)
+    if ((seq & (uint8)(1 << 1)) != 0U)
     {
         /* Issue instruction 0x38 */
         retVal   = Nor_OspiCmdWrite(handle, 0x38, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
         seqFound = 1U;
     }
-    if ((seq & (uint8)(1 << 2)) != 0)
+    if ((seq & (uint8)(1 << 2)) != 0U)
     {
         /* Issue instruction 0x35 */
         retVal   = Nor_OspiCmdWrite(handle, 0x35, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
         seqFound = 1U;
     }
-    if ((seq & (uint8)(1 << 3)) != 0)
+    if ((seq & (uint8)(1 << 3)) != 0U)
     {
         /* Read modify write of reg, set bit 6 */
         uint8 reg = 0;
         (void)Nor_OspiRegRead(handle, 0x65, 0x800003, &reg);
 
-        if ((reg & (1 << 6)) != 0)
+        if ((reg & (1 << 6)) != 0U)
         {
             /* 444 mode already set */
         }
         else
         {
-            reg |= (1 << 6);
+            reg |= (uint8)(1 << 6);
             (void)Nor_OspiRegWrite(handle, 0x71, 0x800003, reg);
         }
         seqFound = 1U;
     }
-    if ((seq & (uint8)(1 << 4)) != 0)
+    if ((seq & (uint8)(1 << 4)) != 0U)
     {
         /* Read modify write of reg, clear bit 7 */
         uint8 reg = 0;
         (void)Nor_OspiRegRead(handle, 0x65, OSPI_CMD_INVALID_ADDR, &reg);
 
-        if ((reg >> 7) == 0)
+        if ((reg >> 7) == 0U)
         {
             /* 444 mode already set */
         }
         else
         {
-            reg &= ~(1 << 7);
+            reg &= (uint8)(~(uint8)(1U << 7));
             (void)Nor_OspiRegWrite(handle, 0x61, OSPI_CMD_INVALID_ADDR, reg);
         }
         seqFound = 1U;
     }
-    if (seqFound)
+    if (seqFound != 0U)
     {
         if (Fls_DrvObj.Fls_Mode == FLS_OSPI_RX_4S_4D_4D)
         {
@@ -1951,6 +1977,7 @@ Std_ReturnType Fls_set444mode(OSPI_Handle handle, uint8 seq)
  */
 Std_ReturnType Fls_set111mode(OSPI_Handle handle, uint8 rdCmd, uint8 wrCmd, uint8 eraseCmd)
 {
+    (void)eraseCmd;
     Std_ReturnType retVal = E_OK;
     uint32         regVal = 0U;
 
@@ -1961,7 +1988,7 @@ Std_ReturnType Fls_set111mode(OSPI_Handle handle, uint8 rdCmd, uint8 wrCmd, uint
     retVal = Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RST, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
 
     uint32 waitMicro = 500U * 1000U;
-    while (waitMicro)
+    while (waitMicro != 0)
     {
         waitMicro--;
     };
@@ -1984,32 +2011,34 @@ Std_ReturnType Fls_set111mode(OSPI_Handle handle, uint8 rdCmd, uint8 wrCmd, uint
     /* Set RD and WR Config register */
     regVal = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG);
     /* Configure the Device Read Instruction Configuration Register */
-    regVal &=
-        ~(OSPI_DEV_INSTR_RD_CONFIG_REG_INSTR_TYPE_FLD_MASK | OSPI_DEV_INSTR_RD_CONFIG_REG_RD_OPCODE_NON_XIP_FLD_MASK |
-          OSPI_DEV_INSTR_RD_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_MASK |
-          OSPI_DEV_INSTR_RD_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_MASK | OSPI_DEV_INSTR_RD_CONFIG_REG_DDR_EN_FLD_MASK |
-          OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD_MASK);
-    regVal |= ((uint32)rdCmd << OSPI_DEV_INSTR_RD_CONFIG_REG_RD_OPCODE_NON_XIP_FLD_SHIFT) |
-              (xferLines << OSPI_DEV_INSTR_RD_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_SHIFT) |
-              (xferLines << OSPI_DEV_INSTR_RD_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_SHIFT) |
-              (xferLines << OSPI_DEV_INSTR_RD_CONFIG_REG_INSTR_TYPE_FLD_SHIFT) |
-              (0U << OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD_SHIFT);
+    regVal &= ~((uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_INSTR_TYPE_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_RD_OPCODE_NON_XIP_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DDR_EN_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD_MASK);
+
+    regVal |= ((uint32)rdCmd << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_RD_OPCODE_NON_XIP_FLD_SHIFT) |
+              (xferLines << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_SHIFT) |
+              (xferLines << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_SHIFT) |
+              (xferLines << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_INSTR_TYPE_FLD_SHIFT) |
+              (0U << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD_SHIFT);
     HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG, regVal);
 
     regVal = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_WR_CONFIG_REG);
 
     /* Configure the Device Write Instruction Configuration Register */
-    regVal &= ~(OSPI_DEV_INSTR_WR_CONFIG_REG_WR_OPCODE_FLD_MASK |
-                OSPI_DEV_INSTR_WR_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_MASK |
-                OSPI_DEV_INSTR_WR_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_MASK |
-                OSPI_DEV_INSTR_WR_CONFIG_REG_DUMMY_WR_CLK_CYCLES_FLD_MASK);
-    regVal |= ((uint32)wrCmd << OSPI_DEV_INSTR_WR_CONFIG_REG_WR_OPCODE_FLD_SHIFT) |
-              (xferLines << OSPI_DEV_INSTR_WR_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_SHIFT) |
-              (xferLines << OSPI_DEV_INSTR_WR_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_SHIFT);
-    HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_WR_CONFIG_REG, regVal);
+    regVal &= ~((uint32)OSPI_DEV_INSTR_WR_CONFIG_REG_WR_OPCODE_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_WR_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_WR_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_MASK |
+                (uint32)OSPI_DEV_INSTR_WR_CONFIG_REG_DUMMY_WR_CLK_CYCLES_FLD_MASK);
+    regVal |= ((uint32)wrCmd << (uint32)OSPI_DEV_INSTR_WR_CONFIG_REG_WR_OPCODE_FLD_SHIFT) |
+              (xferLines << (uint32)OSPI_DEV_INSTR_WR_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_SHIFT) |
+              (xferLines << (uint32)OSPI_DEV_INSTR_WR_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_SHIFT);
+    HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + (uint32)OSPI_DEV_INSTR_WR_CONFIG_REG, regVal);
 
     /* Set read capture delay */
-    HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD, 0);
+    HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD, 0U);
 
     return retVal;
 }

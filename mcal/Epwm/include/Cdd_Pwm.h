@@ -285,8 +285,41 @@ extern "C" {
 #define CDD_PWM_SID_HR_SFO_CAL_API ((uint8)(0x22U))
 /** \brief CDD_PWM driver service ID to check HRPWM SFO Cal. Status */
 #define CDD_PWM_SID_HR_SFO_STATUS_API ((uint8)(0x23U))
+
 /** \brief CDD_PWM driver service ID to set Time base counter mode */
 #define CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE ((uint8)(0x24U))
+/** \brief CDD_PWM driver service ID to set the phase shift in runtime */
+#define CDD_PWM_SID_SET_PHASE_SHIFT ((uint8)(0x25U))
+/** \brief CDD_PWM driver service ID to set the period in runtime */
+#define CDD_PWM_SID_SET_TIMEBASE_PERIOD ((uint8)(0x26U))
+/** \brief CDD_PWM driver service ID to set the Counter Compare value in runtime */
+#define CDD_PWM_SID_SET_COUNTER_COMPARE_VALUE ((uint8)(0x27U))
+/** \brief CDD_PWM driver service ID to set the rising edge delay in runtime */
+#define CDD_PWM_SID_SET_RISING_EDGE_DELAY_COUNT ((uint8)(0x28U))
+/** \brief CDD_PWM driver service ID to set the falling edge delay in runtime */
+#define CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT ((uint8)(0x29U))
+
+/** \brief CDD_PWM driver service ID to set the HRPWM phase shift in runtime */
+#define CDD_PWM_SID_HR_SET_PHASE_SHIFT ((uint8)(0x2AU))
+/** \brief CDD_PWM driver service ID to set the HRPWM period in runtime */
+#define CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD ((uint8)(0x2BU))
+/** \brief CDD_PWM driver service ID to set the HRPWM Counter Compare value in runtime */
+#define CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE ((uint8)(0x2CU))
+/** \brief CDD_PWM driver service ID to set the HRPWM rising edge delay in runtime */
+#define CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT ((uint8)(0x2DU))
+/** \brief CDD_PWM driver service ID to set the HRPWM falling edge delay in runtime */
+#define CDD_PWM_SID_HR_SET_FALLING_EDGE_DELAY_COUNT ((uint8)(0x2EU))
+
+/** \brief CDD_PWM driver service ID to set the minimum deadband delay value in runtime */
+#define CDD_PWM_SID_SET_MIN_DEADBAND_DELAY ((uint8)(0x2FU))
+/** \brief CDD_PWM driver service ID to set theXCMP reg value in runtime */
+#define CDD_PWM_SID_SET_XCMP_REG_VALUE ((uint8)(0x30U))
+/** \brief CDD_PWM driver service ID to set the HRPWM XCMP reg value in runtime */
+#define CDD_PWM_SID_HR_SET_XCMP_REG_VALUE ((uint8)(0x31U))
+/** \brief CDD_PWM driver service ID to set the Xminmax reg value in runtime */
+#define CDD_PWM_SID_SET_XMINMAP_REG_VALUE ((uint8)(0x32U))
+/** \brief CDD_PWM driver service ID to set the CMP shadow reg value in runtime */
+#define CDD_PWM_SID_SET_CMP_SHADOW_REG_VALUE ((uint8)(0x33U))
 
 /**   @} */
 
@@ -877,6 +910,174 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(uint32 Channel, uint32 
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel, EPWM_TimeBaseCountMode Mode);
 
+/*========================================================================================================*/
+/** \brief  Function to set the Phase shift value in runtime.
+ *
+ *
+ * Cdd_Pwm_SetPhaseShift set the Phase shift value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] PhaseShiftValue - Phase shift value
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(uint32 Channel, uint16 PhaseShiftValue);
+
+/*========================================================================================================*/
+/** \brief  Function to set the time base period in runtime.
+ *
+ *
+ * Cdd_Pwm_SetTimeBasePeriod set the time base period in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] Period - Period
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(uint32 Channel, uint16 Period);
+
+/*========================================================================================================*/
+/** \brief  Function to set the Compare value in runtime.
+ *
+ *
+ * Cdd_Pwm_SetCounterCompareValue set the Compare value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] CompModule - Compare Module. Refer \e compModule parameter
+ * \param[in] DutyValue - Duty cycle value
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_SetCounterCompareValue(uint32 Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue);
+
+/*========================================================================================================*/
+/** \brief  Function to set the rising edge delay in runtime.
+ *
+ *
+ * Cdd_Pwm_SetRisingEdgeDelay set the rising edge delay in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] RedCount - Rising Edge delay count
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(uint32 Channel, uint16 RedCount);
+
+/*========================================================================================================*/
+/** \brief  Function to set the falling edge delay in runtime.
+ *
+ *
+ * Cdd_Pwm_SetFallingEdgeDelay set the falling edge delay in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] FedCount - Falling Edge delay count
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(uint32 Channel, uint16 FedCount);
+
+/*========================================================================================================*/
+/** \brief  Function to set the minimum deadband delay in runtime.
+ *
+ *
+ * Cdd_Pwm_SetMinDeadbandDelay set the minimum deadband delay in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] Block - Block. Possible values EPWM_MINDB_BLOCK_A, EPWM_MINDB_BLOCK_B
+ * \param[in] Delay - Delay value
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(uint32 Channel, uint32 Block, uint32 Delay);
+
+/*========================================================================================================*/
+/** \brief  Function to set the XCMP register value in runtime.
+ *
+ *
+ * Cdd_Pwm_SetXcmpRegValue set the XCMP register value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] XcmpReg - XCMP register. Refer \e xcmpReg parameter
+ * \param[in] XcmpValue - XCMP Value to be passed
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(uint32 Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue);
+
+/*========================================================================================================*/
+/** \brief  Function to set the XMINMAX register value in runtime.
+ *
+ *
+ * Cdd_Pwm_SetXMinMaxRegValue set the XMINMAX register value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] XminmaxReg - XMINMAX register. Refer \e xminmaxReg parameter
+ * \param[in] XcmpValue - XCMP Value to be passed
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXMinMaxRegValue(uint32 Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue);
+
+/*========================================================================================================*/
+/** \brief  Function to set the CMP shadow register value in runtime.
+ *
+ *
+ * Cdd_Pwm_SetCmpShadowRegValue set the CMP shadow register value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] CmpReg - CMP register. Refer \e cmpReg parameter
+ * \param[in] CmpValue - CMP Value to be passed
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetCmpShadowRegValue(uint32 Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue);
+
 #if (STD_ON == CDD_PWM_TRIP_ZONE)
 /*===============================================================================================*/
 /** \brief  Function enables the trip event.
@@ -1158,6 +1359,116 @@ FUNC(void, PWM_CODE) Cdd_Pwm_HrSfoCalibration(Cdd_Pwm_channelParametertype Chann
  *****************************************************************************/
 FUNC(uint32, PWM_CODE) Cdd_Pwm_HrSfoStatus(uint32 ChannelNumber);
 #endif /* #if (STD_ON == CDD_PWM_HR_SFO_STATUS_API) */
+
+/*========================================================================================================*/
+/** \brief  Function to set the HRPWM Phase shift value in runtime.
+ *
+ *
+ * Cdd_Pwm_HrSetPhaseShift set the HRPWM Phase shift value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] PhaseShiftValue - Phase shift value
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(uint32 Channel, uint32 PhaseShiftValue);
+
+/*========================================================================================================*/
+/** \brief  Function to set the HRPWM time base period in runtime.
+ *
+ *
+ * Cdd_Pwm_HrSetTimeBasePeriod set the HRPWM time base period in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] Period - Period
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(uint32 Channel, uint16 Period);
+
+/*========================================================================================================*/
+/** \brief  Function to set the HRPWM Compare value in runtime.
+ *
+ * Cdd_Pwm_HrSetCounterCompareValue set the HRPWM Compare value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] CompModule - Compare Module. Refer \e compModule parameter
+ * \param[in] DutyValue - Duty cycle value
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_HrSetCounterCompareValue(uint32 Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue);
+
+/*========================================================================================================*/
+/** \brief  Function to set the HRPWM rising edge delay in runtime.
+ *
+ *
+ * Cdd_Pwm_HrSetRisingEdgeDelay set the HRPWM rising edge delay in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] RedCount - Rising Edge delay count
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(uint32 Channel, uint16 RedCount);
+
+/*========================================================================================================*/
+/** \brief  Function to set the HRPWM falling edge delay in runtime.
+ *
+ *
+ * Cdd_Pwm_HrSetFallingEdgeDelay set the HRPWM falling edge delay in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] FedCount - Falling Edge delay count
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(uint32 Channel, uint16 FedCount);
+
+/*========================================================================================================*/
+/** \brief  Function to set the HRPWM XCMP register value in runtime.
+ *
+ *
+ * Cdd_Pwm_SetHrXcmpRegValue set the HRPWM XCMP register value in runtime
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Non-Reentrant
+ *
+ * \param[in] Channel - Channel information
+ * \param[in] HrXcmpReg - XCMP register. Refer \e xcmpReg parameter
+ * \param[in] HrXcmpValue - XCMP Value to be passed
+ *
+ * \return void
+ *
+ *********************************************************************************************************/
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetXcmpRegValue(uint32 Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue);
 
 /** \brief End Memory section tag */
 #define CDD_PWM_STOP_SEC_CODE

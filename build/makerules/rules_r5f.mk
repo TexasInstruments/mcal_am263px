@@ -146,8 +146,7 @@ $(OBJ_PATHS): $(OBJDIR)/%.$(OBJEXT): %.c
 #	$(ECHO) All flags $(_CFLAGS)
 	$(ECHO) \# Compiling $(PLATFORM):$(CORE):$(PROFILE_$(CORE)):$(APP_NAME)$(MODULE_NAME): $<
 	$(CC) -M -MF$(DEPFILE).P $(_CFLAGS) $(INCLUDES) $(EXT_CFLAGS) $(EXT_INCS) $(CFLAGS_DIROPTS) $(COMPILEMODE) $<
-	$(CC) $(_CFLAGS) $(INCLUDES) $(EXT_CFLAGS) $(EXT_INCS) $(CFLAGS_DIROPTS) $(COMPILEMODE) $<
-	$(MV) $*.o $(OBJDIR)/$*.$(OBJEXT)
+	$(CC) $(_CFLAGS) $(INCLUDES) $(EXT_CFLAGS) $(EXT_INCS) $(CFLAGS_DIROPTS) $(COMPILEMODE) -o $(OBJDIR)/$*.$(OBJEXT) $<
 
 # Implicitly called with --abi=eabi --object_format=elf --silicon_version=7M4 --float_support=FPv4SPD16 --endian=little --code_state=16 --unaligned_access=on --arm_vmrs_si_workaround=off --embedded_constants=on --hll_source=asm --symdebug:none
 ASMFLAGS1 = -mcpu=$(CGT_CPU) -mfloat-abi=hard -mfpu=vfpv3-d16 $(ENDIAN_NESS) -mthumb -save-temps -c
@@ -156,8 +155,7 @@ ASMFLAGS2 = -Wti-a,-d=CLANG
 # Object file creation
 $(OBJ_PATHS_ASM): $(OBJDIR)/%.$(OBJEXT): %.asm
 	$(ECHO) \# Compiling $(PLATFORM):$(CORE):$(PROFILE_$(CORE)):$(APP_NAME)$(MODULE_NAME): $<
-	$(CC) $(ASMFLAGS1) -x ti-asm $< $(ASMFLAGS2)
-	$(MV) $*.o $(OBJDIR)/$*.$(OBJEXT)
+	$(CC) $(ASMFLAGS1) -x ti-asm $< $(ASMFLAGS2) -o $(OBJDIR)/$*.$(OBJEXT)
 
 $(PACKAGE_PATHS): $(PACKAGEDIR)/%: %
 	$(ECHO) \# Copying $(PACKAGE_NAME)/$($(MODULE_NAME)_RELPATH)/$<

@@ -85,7 +85,7 @@ FUNC(void, CDD_FSITX_CODE)
 CddFsiTx_setPrescaler(uint32 base, Cdd_FsiTx_ClkPrescaleType preScaleValue)
 {
     HW_WR_REG16((base + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL),
-                ((HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL) &
+                ((HW_RD_REG16(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL) &
                   (uint16)(~CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_PRESCALE_VAL_MASK)) |
                  (preScaleValue << CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_PRESCALE_VAL_SHIFT)));
     return;
@@ -210,7 +210,7 @@ FUNC(Std_ReturnType, CDD_FSITX_CODE)
 CddFsiTx_setFrameType(uint32 base, uint16 frameType)
 {
     Std_ReturnType retVal = E_OK;
-    if (frameType > 0x000F)
+    if (frameType > (uint16)0x000FU)
     {
         retVal = E_NOT_OK;
     }
@@ -238,9 +238,10 @@ CddFsiTx_startTxTransmit(uint32 base)
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
 CddFsiTx_dataBufferLoad(uint32 base, volatile P2VAR(uint16, AUTOMATIC, CDD_FSI_TX_APPL_DATA) databuffer, uint8 length)
 {
-    Std_ReturnType retVal = E_OK;
+    Std_ReturnType retVal       = E_OK;
+    uint8          local_length = length;
 
-    if ((databuffer == NULL_PTR) || (length > (CDD_FSI_TX_MAX_VALUE_BUF_PTR_OFF + (uint8)1U)))
+    if ((databuffer == NULL_PTR) || (local_length > (CDD_FSI_TX_MAX_VALUE_BUF_PTR_OFF + (uint8)1U)))
     {
         retVal = E_NOT_OK;
     }
@@ -249,9 +250,9 @@ CddFsiTx_dataBufferLoad(uint32 base, volatile P2VAR(uint16, AUTOMATIC, CDD_FSI_T
         volatile uint16 *pSrc16, *pDst16;
         uint16           offset = 0;
         pSrc16                  = (volatile uint16 *)databuffer;
-        pDst16                  = (volatile uint16 *)(base + CSL_CDD_FSI_TX_CFG_TX_BUF_BASE(offset));
+        pDst16                  = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_BUF_BASE(offset));
 
-        while (length > 0U)
+        while (local_length > 0U)
         {
             *pDst16 = *pSrc16;
             pSrc16++;
@@ -264,9 +265,9 @@ CddFsiTx_dataBufferLoad(uint32 base, volatile P2VAR(uint16, AUTOMATIC, CDD_FSI_T
             if (offset > CDD_FSI_TX_MAX_VALUE_BUF_PTR_OFF)
             {
                 offset = 0U;
-                pDst16 = (volatile uint16 *)(base + CSL_CDD_FSI_TX_CFG_TX_BUF_BASE(offset));
+                pDst16 = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_BUF_BASE(offset));
             }
-            length--;
+            local_length--;
         }
     }
     return retVal;
@@ -301,7 +302,7 @@ CddFsiTx_setTxUserDefinedData(uint32 base, uint8 userData)
     {
         regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA);
         regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_MASK)) |
-                 (userData << CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
+                 (uint16)(userData << CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
         HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA, regVal);
     }
 
@@ -353,6 +354,7 @@ CddFsiTx_setTxSoftwareFrameSize(uint32 base, uint16 dataLength)
 FUNC(uint8, CDD_FSITX_CODE)
 CddFsiTx_getTxWordLength(uint32 base, uint16 length)
 {
+    (void)base;
     uint8 WordLength = 0;
     switch (length)
     {
@@ -476,7 +478,7 @@ CddFsiTx_enableInterrupt(uint32 base, uint8 intTxNum)
     regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_INT_CTRL);
 
 #if (STD_ON == CDD_FSI_TX_BUFFER_OVERRUN_INTERRUPT)
-    if (intTxNum == CDD_FSI_TX_INT1)
+    if (intTxNum == (uint8)CDD_FSI_TX_INT1)
     {
         regVal |= FSI_TX_EVT_BUF_UNDERRUN;
     }
@@ -488,7 +490,7 @@ CddFsiTx_enableInterrupt(uint32 base, uint8 intTxNum)
 #endif /*CDD_FSI_TX_BUFFER_OVERRUN_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_TX_BUFFER_UNDERRUN_INTERRUPT)
-    if (intTxNum == CDD_FSI_TX_INT1)
+    if (intTxNum == (uint8)CDD_FSI_TX_INT1)
     {
         regVal |= FSI_TX_EVT_BUF_OVERRUN;
     }
@@ -500,7 +502,7 @@ CddFsiTx_enableInterrupt(uint32 base, uint8 intTxNum)
 #endif /*CDD_FSI_TX_BUFFER_UNDERRUN_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_TX_PING_TIMEOUT_INTERRUPT)
-    if (intTxNum == CDD_FSI_TX_INT1)
+    if (intTxNum == (uint8)CDD_FSI_TX_INT1)
     {
         regVal |= FSI_TX_EVT_PING_TIMEOUT;
     }
@@ -512,7 +514,7 @@ CddFsiTx_enableInterrupt(uint32 base, uint8 intTxNum)
 #endif /*CDD_FSI_TX_PING_TIMEOUT_INTERRUPT*/
 
 #if (STD_ON == CDD_FSI_TX_FRAME_DONE_INTERRUPT)
-    if (intTxNum == CDD_FSI_TX_INT1)
+    if (intTxNum == (uint8)CDD_FSI_TX_INT1)
     {
         regVal |= FSI_TX_EVT_FRAME_DONE;
     }
@@ -545,7 +547,7 @@ CddFsiTx_disableInterrupt(uint32 base, uint8 TxIntNum)
     uint16 txFlags = CDD_FSI_TX_INT2_MASK;
     uint16 regVal;
     regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_INT_CTRL);
-    if (TxIntNum == CDD_FSI_TX_INT1)
+    if (TxIntNum == (uint8)CDD_FSI_TX_INT1)
     {
         regVal &= ~flags;
     }

@@ -83,6 +83,7 @@
         -I${MCAL_MCAL_Mcu_V2}
         -I${MCAL_MCAL_Port_V0}
         -I${MCAL_MCAL_I2c_V0}
+        -I${MCAL_MCAL_I2c_SRC}
         -I${MCAL_MCAL_Dma_V0}
         "
         postBuildStep="$(MAKE) -C ${CCS_PROJECT_DIR} -f makefile_ccs_bootimage_gen OUTNAME=adc_resolver_dma_app_sip PROFILE=${ConfigName} MCAL_SITARA_MCU_PATH=${MCAL_MCAL}/.. CG_TOOL_ROOT=${CG_TOOL_ROOT} CCS_INSTALL_DIR=${CCS_INSTALL_DIR} CCS_NODE=${CCS_INSTALL_DIR}/tools/node/node CYGWIN_PATH=${CCS_UTILS_DIR}/cygwin DEVICE=am263px"
@@ -135,6 +136,7 @@
         <pathVariable name="MCAL_MCAL_Mcu_V2" path="${MCAL_MCAL}/Mcu/V2" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port_V0" path="${MCAL_MCAL}/Port/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_I2c_V0" path="${MCAL_MCAL}/I2c/V0" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_SRC" path="${MCAL_MCAL}/I2c/src" scope="project"/>
         <pathVariable name="MCAL_MCAL_Dma_V0" path="${MCAL_MCAL}/Dma/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_Adc_Cfg" path="${MCAL_MCAL}/examples/Adc/adc_resolver_dma_app/soc/am263px/tresos/output/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu_Cfg" path="${MCAL_MCAL}/examples/Adc/adc_resolver_dma_app/soc/am263px/tresos/output/include" scope="project"/>

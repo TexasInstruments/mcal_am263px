@@ -44,8 +44,6 @@ extern void Pmic_Enable(void);
 #define CANFD2_ESM_MASK (uint64)(0x3000000000000)
 #endif
 
-Cdd_I2c_ConfigPtrType I2cConfigSet = NULL_PTR;
-
 #if (STD_OFF == CDD_I2C_POLLING_MODE)
 void Cdd_I2c_InterruptConfig(void)
 {

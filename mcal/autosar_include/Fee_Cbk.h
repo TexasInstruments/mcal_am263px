@@ -57,15 +57,15 @@
 * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
-*
+* 
 */
+
+#ifndef FEE_CBK_H_
+#define FEE_CBK_H_
 
 #include "Fee.h"
 #include "Platform_Types.h"
 
-
-#ifndef FEE_CBK_H_
-#define FEE_CBK_H_
 
 void Fee_JobEndNotification(void);
 void Fee_JobErrorNotification(void);

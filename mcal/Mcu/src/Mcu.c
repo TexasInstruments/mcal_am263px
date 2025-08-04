@@ -340,6 +340,7 @@ FUNC(Mcu_ResetType, MCU_CODE) Mcu_GetResetReason(void)
  */
 FUNC(void, MCU_CODE) Mcu_SetMode(Mcu_ModeType McuMode)
 {
+    (void)McuMode;
 #if (STD_ON == MCU_DEV_ERROR_DETECT)
 
     if (Mcu_DrvStatus == MCU_STATE_UNINIT)

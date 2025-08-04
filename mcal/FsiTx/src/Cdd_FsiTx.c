@@ -130,18 +130,18 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
             hwObj = &(Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId]);
             (void)CddFsiTx_hwUnitInit(hwObj);
         }
-    }
 #if (STD_ON == CDD_FSI_TX_NOTIFICATION_ENABLE)
-    /* Initialize configured Interrupt Index. */
-    for (hwUnitId = 0U; hwUnitId < Cdd_FsiTx_DrvObj.maxHwUnit; hwUnitId++)
-    {
-        if (hwUnitId == Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId].hwUnitCfg.hwId)
+        /* Initialize configured Interrupt Index. */
+        for (hwUnitId = 0U; hwUnitId < Cdd_FsiTx_DrvObj.maxHwUnit; hwUnitId++)
         {
-            Cdd_FsiTx_IsrIndex[hwUnitId] = hwUnitId;
+            if (hwUnitId == Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId].hwUnitCfg.hwId)
+            {
+                Cdd_FsiTx_IsrIndex[hwUnitId] = hwUnitId;
+            }
         }
-    }
 #endif
-    Cdd_FsiTx_DriverStatus = CDD_FSI_TX_INIT;
+        Cdd_FsiTx_DriverStatus = CDD_FSI_TX_INIT;
+    }
 }
 
 /*******************************************************************************
@@ -278,7 +278,7 @@ Cdd_FsiTx_BufferLoad(Cdd_FsiTx_HWUnitType HwUnitId,
                      P2VAR(Cdd_FsiTx_DataBufferType, AUTOMATIC, CDD_FSI_TX_APPL_DATA) SrcBufferPtr,
                      Cdd_FsiTx_DataType Cdd_FsiTx_userData, Cdd_FsiTx_BufferLengthType TxDataLength)
 {
-    Std_ReturnType            BufferStatus = E_OK;
+    Std_ReturnType            BufferStatus = E_NOT_OK;
     Cdd_FsiTx_DataBufferType *srcbuffer    = NULL;
 
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
@@ -296,15 +296,17 @@ Cdd_FsiTx_BufferLoad(Cdd_FsiTx_HWUnitType HwUnitId,
     }
     else
 #endif
-
-        srcbuffer = SrcBufferPtr;
-    Cdd_FsiTx_HwUnitObjType *hwObj;
-    hwObj        = &(Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId]);
-    BufferStatus = CddFsiTx_BufferLoad(hwObj, srcbuffer, Cdd_FsiTx_userData, TxDataLength);
-    if (BufferStatus != E_OK)
     {
-        CddFsiTx_ReportRuntimeError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_INVALID_EVENT);
+        srcbuffer = SrcBufferPtr;
+        Cdd_FsiTx_HwUnitObjType *hwObj;
+        hwObj        = &(Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId]);
+        BufferStatus = CddFsiTx_BufferLoad(hwObj, srcbuffer, Cdd_FsiTx_userData, TxDataLength);
+        if (BufferStatus != E_OK)
+        {
+            CddFsiTx_ReportRuntimeError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_INVALID_EVENT);
+        }
     }
+
     return BufferStatus;
 }
 #endif /* (STD_ON == CDD_FSI_TX_BUFFER_LOAD_API) */

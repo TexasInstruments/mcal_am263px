@@ -179,16 +179,13 @@ export dio_SOCLIST
 ############################
 # i2c mcal lib
 ############################
-i2c_COMP_LIST = i2c
+export i2c_COMP_LIST = i2c
 i2c_RELPATH = I2c
 i2c_PATH = $(mcal_PATH)/$(i2c_RELPATH)
-i2c_PLATFORM_DEPENDENCY = yes
-export i2c_COMP_LIST
-export i2c_PLATFORM_DEPENDENCY
+export i2c_PLATFORM_DEPENDENCY = yes
 i2c_PKG_LIST = i2c
-i2c_INCLUDE = $(i2c_PATH)/include $(i2c_PATH)/$(MCAL_SOC_FILES)
-i2c_SOCLIST = $(DEFAULT_SOCLIST)
-export i2c_SOCLIST
+i2c_INCLUDE = $(i2c_PATH)/include
+export i2c_SOCLIST = $(DEFAULT_SOCLIST)
 
 ############################
 # port mcal lib
@@ -464,13 +461,13 @@ export epwm_SOCLIST
 ############################
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app flsdiag_app epwm_app epwm_tz_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app cdd_cmpss_app
+mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app flsdiag_app epwm_app epwm_tz_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app cdd_cmpss_app
 mcal_mcal_APP_LIB_LIST += app_utils
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwepwm kwuart kwwdg kwport kwfsirx kwfsitx kwlin
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app adc_app adc_resolver_app adc_resolver_dma_app adc_hw_trig_dma_app eth_app eth_test_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app fls_app flsdiag_ospi_app epwm_app epwm_tz_app cdd_flc_app cdd_cmpss_app
+mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app adc_app adc_resolver_app adc_resolver_dma_app adc_hw_trig_dma_app eth_app eth_test_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app fls_app flsdiag_ospi_app epwm_app epwm_tz_app cdd_flc_app cdd_cmpss_app
 mcal_mcal_APP_LIB_LIST += app_utils
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwepwm kwuart kwwdg kwport kwfsirx kwfsitx kwlin
 endif
@@ -482,7 +479,7 @@ mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwgpt kwi2c kwicu kw
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_multichannel_app uart_interrupt_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app flsdiag_ospi_app lin_app epwm_app fsirx_app cdd_flc_app cdd_cmpss_app
+mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_interrupt_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app flsdiag_ospi_app lin_app epwm_app fsirx_app cdd_flc_app cdd_cmpss_app
 mcal_mcal_APP_LIB_LIST += app_utils
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwuart kwwdg kwport kwlin kwepwm kwfsirx kwfsitx
 endif
@@ -515,10 +512,13 @@ export gpt_app_PLATFORM_DEPENDENCY
 
 i2c_app_RELPATH = examples/I2c/i2c_app
 i2c_app_PATH = $(mcal_PATH)/$(i2c_app_RELPATH)
-i2c_app_PLATFORM_DEPENDENCY = yes
-i2c_app_SOCLIST = $(DEFAULT_SOCLIST)
-export i2c_app_SOCLIST
-export i2c_app_PLATFORM_DEPENDENCY
+export i2c_app_PLATFORM_DEPENDENCY = yes
+export i2c_app_SOCLIST = $(DEFAULT_SOCLIST)
+
+i2c_intr_app_RELPATH = examples/I2c/i2c_intr_app
+i2c_intr_app_PATH = $(mcal_PATH)/$(i2c_intr_app_RELPATH)
+export i2c_intr_app_PLATFORM_DEPENDENCY = yes
+export i2c_intr_app_SOCLIST = $(DEFAULT_SOCLIST)
 
 i2c_multichannel_app_RELPATH = examples/I2c/i2c_multichannel_app
 i2c_multichannel_app_PATH = $(mcal_PATH)/$(i2c_multichannel_app_RELPATH)

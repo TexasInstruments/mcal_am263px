@@ -96,8 +96,8 @@ volatile VAR(Dem_EventStatusType, DEM_VAR_CLEARED) Dem_EventStatus;
 /*              Service Name : Dem_ReportErrorStatus                          */
 /* ========================================================================== */
 #if defined(AUTOSAR_421)
-FUNC(void, DEM_CODE)
-Dem_ReportErrorStatus(VAR(Dem_EventIdType, AUTOMATIC) EventId, VAR(Dem_EventStatusType, AUTOMATIC) EventStatus)
+__attribute__((weak)) FUNC(void, DEM_CODE)
+    Dem_ReportErrorStatus(VAR(Dem_EventIdType, AUTOMATIC) EventId, VAR(Dem_EventStatusType, AUTOMATIC) EventStatus)
 {
     Dem_EventId     = EventId;
     Dem_EventStatus = EventStatus;
@@ -111,8 +111,8 @@ Dem_ReportErrorStatus(VAR(Dem_EventIdType, AUTOMATIC) EventId, VAR(Dem_EventStat
 /* ========================================================================== */
 /*              Service Name : Dem_SetEventStatus                             */
 /* ========================================================================== */
-FUNC(Std_ReturnType, DEM_CODE)
-Dem_SetEventStatus(VAR(Dem_EventIdType, AUTOMATIC) EventId, VAR(Dem_EventStatusType, AUTOMATIC) EventStatus)
+__attribute__((weak)) FUNC(Std_ReturnType, DEM_CODE)
+    Dem_SetEventStatus(VAR(Dem_EventIdType, AUTOMATIC) EventId, VAR(Dem_EventStatusType, AUTOMATIC) EventStatus)
 {
     Dem_EventId     = EventId;
     Dem_EventStatus = EventStatus;

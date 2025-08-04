@@ -1,16 +1,8 @@
 export MCAL_PATH := $(abspath ../../)
-include $(MCAL_PATH)/build/imports.mk
 
+#Default platform
 export PLATFORM?=am263px
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am263x))
-  export TI_MCAL_DEVICE?=AM263x
-endif
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
-  export TI_MCAL_DEVICE?=AM263Px
-endif
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am261 am261x))
-  export TI_MCAL_DEVICE?=AM261x
-endif
+include $(MCAL_PATH)/build/imports.mk
 
 MCAL_PLUGIN_PATH=$(MCAL_PATH)/mcal_config/plugins/$(TI_MCAL_DEVICE)
 AMDC_PATH=$(MCAL_PATH)/mcal_misc/MCAL_Automation/Vector_AMDC_1.1/AMDC

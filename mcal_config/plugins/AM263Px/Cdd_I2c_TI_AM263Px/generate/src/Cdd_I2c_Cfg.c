@@ -1,6 +1,6 @@
 [!IF "as:modconf('Cdd_I2c')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 /* ======================================================================
- *   Copyright (C) 2023 Texas Instruments Incorporated
+ *   Copyright (C) 2025 Texas Instruments Incorporated
  *
  *   All rights reserved. Property of Texas Instruments Incorporated.
  *   Restricted rights to use, duplicate or disclose this code are
@@ -12,14 +12,6 @@
  *   supplied.
  * ==================================================================== */
 
-/**
- *  \file     Cdd_I2c_Cfg.c
- *
- *  \brief    This file contains generated pre compile configurations
- *            for CDD I2C MCAL driver
- *
- */
-
 /******************************************************************************
     Project         : [!"$project"!]
     SW Ver          : [!"$moduleSoftwareVer"!]
@@ -29,130 +21,113 @@
     Do not modify this file,otherwise the software may behave in unexpected way.
 ******************************************************************************/
 
-/*******************************************************************************
- *  INCLUDES
- ******************************************************************************/
+/**
+ *  \file     Cdd_I2c_Cfg.c
+ *
+ *  \brief    This file contains generated pre compile configurations
+ *            for I2C MCAL driver
+ *
+ */
+
+/* ========================================================================== */
+/*                             Include Files                                  */
+/* ========================================================================== */
+
 #include "Cdd_I2c.h"
-#include "Cdd_I2c_Cfg.h"
+
+/* ========================================================================== */
+/*                           Macros & Typedefs                                */
+/* ========================================================================== */
 
 /** \brief Version checking  */
-#if ((CDD_I2C_CFG_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U))||(CDD_I2C_CFG_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
+#if ((CDD_I2C_CFG_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U)) || (CDD_I2C_CFG_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
     #error "Version numbers of Cdd_I2c_Cfg.c and Cdd_I2c.h are inconsistent!"
 #endif
 
-/*******************************************************************************
- *  Local Data
- ******************************************************************************/
+/* ========================================================================== */
+/*                         Structures and Enums                               */
+/* ========================================================================== */
 
-/*******************************************************************************
- *  Global Data
- ******************************************************************************/
-/**
- *  \brief Notification
- *
- */
+/* None */
+
+/* ========================================================================== */
+/*                          Function Declarations                             */
+/* ========================================================================== */
+
+/* None */
+
+/* ========================================================================== */
+/*                        Global Object Definitions                           */
+/* ========================================================================== */
 
 #define CDD_I2C_START_SEC_CONFIG_DATA
 #include "Cdd_I2c_MemMap.h"
 
-CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) CddI2cInitParams =
+CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config =
 {
-    .CddI2cHwCfgPtr =
+    .hwUnitCfg =
     {
-    [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cHwConfig/*"!][!//
-    [[!"num:i(@index)"!]] =
-    [!WS "4"!]{
-    [!WS "8"!].HwInstance         = [!"CddI2cHwUnitType"!],
-    [!WS "8"!].BaudRate           = [!"CddI2cChannelBitRate"!],
-    [!WS "8"!].HwUnitFrequency    = [!"CddI2cHwUnitFrequency"!]U,
-    [!WS "8"!].SysClk             = [!"CddI2cClkInputSrc"!]U,
-    [!WS "4"!]},
-    [!ENDLOOP!][!CR!][!//
-},
-
+[!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cHwConfig/*"!][!//
+        [[!"num:i(@index)"!]U] =
+        {
+            .hwUnitId = [!"CddI2cHwUnitType"!],
+            .baudRate = [!"CddI2cChannelBitRate"!],
+            .hwUnitFrequency = [!"CddI2cHwUnitFrequency"!]U,
+            .sysClk = [!"CddI2cClkInputSrc"!]U,
+            .ownAddress = [!"CddI2cOwnAddress"!]U,
+        },
+[!ENDLOOP!][!CR!][!//
+    },
+    .seqCfg =
+    {
+[!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
+        [[!"num:i(@index)"!]U] =
+        {
+            .hwUnitId = [!"CddI2cSequenceHwUnitType"!],
+            .completeNotify = [!"CddI2cSequenceCompleteNotify"!],
+            .errorNotify = [!"CddI2cSequenceErrorNotify"!],
+            .restartMode = [!"CddI2cRestartModeType"!],
+            .chPerSeq = [!"CddI2cNumberOfChannelsInSequence"!]U,
+            .chList =
+            {
+                [!FOR "x" = "1" TO "num:i(CddI2cNumberOfChannelsInSequence)"!]
+                [!"./I2cChannelList/*[num:i($x)]/I2cChannelIndex"!]U,
+                [!ENDFOR!][!CR!][!//
+            },
+        },
+[!ENDLOOP!][!CR!][!//
+    },
+    .chCfg =
+    {
+[!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cChannelConfig/*"!][!//
+        [[!"num:i(@index)"!]U] =
+        {
+            .deviceAddress = [!"CddI2cChannelSlaveAddress"!]U,
+            .direction = [!"CddI2cChannelDirection"!],
+            .addressScheme = [!"I2cSlaveAddressScheme"!],
+        },
+[!ENDLOOP!][!CR!][!//
+    },
 };
-
-/** \brief Pointer to CddI2cInitParams */
-CONST(Cdd_I2c_ConfigPtrType, CDD_I2C_CONFIG_DATA) pCddI2cInitParams = (Cdd_I2c_ConfigType *)&CddI2cInitParams;
-
-VAR(Cdd_I2c_Channel_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cChannelContainer[CDD_I2C_MAXIMUM_CHANNEL_NUMBER] =
-{
-    [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cChannelConfig/*"!][!//
-    [[!"num:i(@index)"!]] =
-    [!WS "4"!]{
-    [!WS "8"!].Dir                = [!"CddI2cChannelDirection"!],
-    [!WS "8"!].SlaveAddress       = [!"CddI2cChannelSlaveAddress"!]U,
-    [!WS "8"!].SlaveAddressScheme = [!"I2cSlaveAddressScheme"!],
-    [!WS "8"!].DataBufferLength   = 0U,
-    [!WS "8"!].DataBuffer         = NULL_PTR,
-    [!WS "8"!].ChannelResult      = CDD_I2C_CH_RESULT_OK,
-    [!WS "4"!]},
-    [!ENDLOOP!][!CR!][!//
-};
-
-CONST(Cdd_I2c_Sequence_Config, CDD_I2C_CONFIG_DATA) Cdd_I2cSequenceContainer[CDD_I2C_MAXIMUM_SEQUENCE_NUMBER] =
-{
-    [!LOOP "as:modconf('Cdd_I2c')[1]/CddI2cSequenceConfig/*"!][!//
-    [[!"num:i(@index)"!]] =
-    [!WS "4"!]{
-    [!WS "8"!].HwInstance               = [!"CddI2cSequenceHwUnitType"!],
-    [!WS "8"!].MaxChannels              = [!"CddI2cNumberOfChannelsInSequence"!]U,
-    [!WS "8"!].SeqResult                = CDD_I2C_SEQ_OK,
-    [!WS "8"!].SequenceCompleteNotify   = [!"CddI2cSequenceCompleteNotify"!],
-    [!WS "8"!].SequenceErrorNotify      = [!"CddI2cSequenceErrorNotify"!],
-    [!WS "8"!].RestartMode              = [!"CddI2cRestartModeType"!],
-    [!WS "8"!].ChannelList              =
-    [!WS "8"!]{
-    [!AUTOSPACING!]
-    /* The Number Of Channels generated below are equal to the variable "CddI2cNumberOfChannelsInSequence" */
-    [!FOR "x" = "1" TO "num:i(CddI2cNumberOfChannelsInSequence)"!]
-    [!WS "12"!][!"./I2cChannelList/*[num:i($x)]/I2cChannelIndex"!]U,
-    [!ENDFOR!][!CR!][!//
-    [!WS "8"!]},
-    [!WS "4"!]},
-    [!ENDLOOP!][!CR!][!//
-};
-
-/** \brief CDD_I2C Arbitration loss condition parameter, possible values are CDD_I2C_BURST_MODE
- * (for detaching from bus) or CDD_I2C_RECURRENT_MODE
- * (For sending 9 clock pulses to the slave in order to synchronize the bus)
-*/
-CONST(Cdd_I2c_HandlingType, CDD_I2C_CONFIG_DATA) CddI2cArbitrationLossParam = [!"as:modconf('Cdd_I2c')[1]/I2cGeneral/CddI2cArbitrationLossParam"!];
 
 #define CDD_I2C_STOP_SEC_CONFIG_DATA
 #include "Cdd_I2c_MemMap.h"
 
-#define CDD_I2C_START_SEC_VAR_INIT_32
+#define CDD_I2C_START_SEC_CONST_32
 #include "Cdd_I2c_MemMap.h"
-/**
- * I2C register base address, SOC specific
-*/
-CONST(uint32,CDD_I2C_CONST)
-    CddI2cHwUnitBaseAddr[CDD_I2C_HW_UNITS_MAX]    =
-    {
-        0x52500000U,     /*I2C0_BASE_ADDR*/
-        0x52501000U,     /*I2C1_BASE_ADDR*/
-        0x52502000U,     /*I2C2_BASE_ADDR*/
-        0x52503000U      /*I2C3_BASE_ADDR */
-    };
-#define CDD_I2C_STOP_SEC_VAR_INIT_32
+CONST(uint32, CDD_I2C_CONST) Cdd_I2c_HwUnitBaseAddr[CDD_I2C_HW_UNIT_MAX] = {
+    0x52500000U, /* I2C0_BASE_ADDR */
+    0x52501000U, /* I2C1_BASE_ADDR */
+    0x52502000U, /* I2C2_BASE_ADDR */
+    0x52503000U  /* I2C3_BASE_ADDR */
+};
+#define CDD_I2C_STOP_SEC_CONST_32
 #include "Cdd_I2c_MemMap.h"
 
-#define CDD_I2C_START_SEC_VAR_NO_INIT_UNSPECIFIED
-#include "Cdd_I2c_MemMap.h"
-/**
- * I2C transmission queue array
-*/
-VAR(Cdd_I2c_Queue_obj,CDD_I2C_VAR_INIT) CddI2cTransmissionQueue[CDD_I2C_MAX_QUEUE_SIZE];
+/* ========================================================================== */
+/*                          Function Definitions                              */
+/* ========================================================================== */
 
-/**
- * Pointer to I2C queue
-*/
-VAR(Cdd_I2c_Queue_obj *,CDD_I2C_VAR_INIT) pCddI2cTransmissionQueue = &CddI2cTransmissionQueue[0];
+/* None */
 
-#define CDD_I2C_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
-#include "Cdd_I2c_MemMap.h"
-
-/* The last generated configuration variant is not
-PRE-COMPILE variant. Refer Cdd_I2c_PBcfg.c. */
 [!ENDIF!]

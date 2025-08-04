@@ -286,7 +286,7 @@ static void CanExample_ExternalTest()
     Can_ControllerStateType Controller_Satus;
 #if defined(AM263PX_PLATFORM)
     Cdd_I2c_InterruptConfig();
-    Cdd_I2c_Init(I2cConfigSet);
+    Cdd_I2c_Init(NULL_PTR);
     mcanEnableTransceiver();
 #endif
 
