@@ -1,0 +1,33 @@
+---
+orphan: true
+---
+
+---
+title: Spi_JobConfigType
+summary: SPI Job configuration structure. 
+
+---
+
+# Spi_JobConfigType
+
+
+
+SPI Job configuration structure. 
+
+
+`#include <Spi_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  [Spi_JobPriorityType](../Modules/group___s_p_i.md#enum-spi_jobprioritytype) | jobPriority |  Job priority.  |
+|  Spi_HWUnitType | hwUnitId |  HWUnit associated with this job.  |
+|  Spi_JobEndNotifyType | Spi_JobEndNotification |  Job end notification callback fxn pointer.  |
+|  uint32 | channelPerJob |  Number of channels for this job. Should not be more than SPI_MAX_CHANNELS_PER_JOB.  |
+|  Spi_ChannelType[SPI_MAX_CHANNELS_PER_JOB] | channelList |  Channel index list.  |
+|  uint8 | jobId |  Job ID.  |
+|  [Spi_CsPinType](../Modules/group___s_p_i.md#enum-spi_cspintype) | csPin |  Chip select pin to use.  |
+|  uint8 | externalDeviceCfgId |  index into SpiConfig.extDevCfg[] indicating the devCfg associated with the job  |
+
+

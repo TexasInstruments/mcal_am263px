@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.8. CDD_IPC &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.9. CDD_PWM" href="group___c_d_d___p_w_m.html" />
+    <link rel="prev" title="5.7. CDD_I2C" href="group___c_d_d___i2_c.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.8. CDD_IPC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types">5.8.1. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-cdd-ipcstatustype">5.8.1.1. enum Cdd_IpcStatusType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-ipcnotifyutils-inithandle">5.8.1.2. typedef IpcNotifyUtils_InitHandle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-ipcnotifyutils-handle">5.8.1.3. typedef IpcNotifyUtils_Handle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvcallback">5.8.1.4. typedef Cdd_Ipc_RPMessage_lld_recvCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvnotifycallback">5.8.1.5. typedef Cdd_Ipc_RPMessage_lld_recvNotifyCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-crchookcallback">5.8.1.6. typedef Cdd_Ipc_CrcHookCallback</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">5.8.2. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.8.3. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.8.4. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-mutex-resourcetrylock">5.8.4.1. function Cdd_Ipc_Mutex_resourceTryLock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-mutex-resourceunlock">5.8.4.2. function Cdd_Ipc_Mutex_resourceUnlock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-msghandler">5.8.4.3. function Cdd_Ipc_notify_MsgHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-getversioninfo">5.8.4.4. function Cdd_Ipc_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-init">5.8.4.5. function Cdd_Ipc_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-deinit">5.8.4.6. function Cdd_Ipc_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-registerclient">5.8.4.7. function Cdd_Ipc_Notify_RegisterClient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-write">5.8.4.8. function Cdd_Ipc_Notify_Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-unregisterclient">5.8.4.9. function Cdd_Ipc_Notify_UnregisterClient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-construct">5.8.4.10. function Cdd_Ipc_Construct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-rpmsg-sendmsg">5.8.4.11. function Cdd_Ipc_RpMsg_SendMsg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-rpmsg-recvmsg">5.8.4.12. function Cdd_Ipc_RpMsg_RecvMsg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-destruct">5.8.4.13. function Cdd_Ipc_Destruct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-sync-all">5.8.4.14. function Cdd_Ipc_Notify_Sync_All</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-init">5.8.4.15. function IpcNotifyUtils_lld_init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-sendsync">5.8.4.16. function IpcNotifyUtils_lld_sendSync</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-waitsync">5.8.4.17. function IpcNotifyUtils_lld_waitSync</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-syncall">5.8.4.18. function IpcNotifyUtils_lld_syncAll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-synccallback">5.8.4.19. function IpcNotifyUtils_lld_syncCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-vringmemallocation">5.8.4.20. function Cdd_Ipc_VringMemAllocation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">5.8. </span>CDD_IPC</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cdd-ipc">
+<h1><span class="section-number">5.8. </span>CDD_IPC<a class="headerlink" href="#cdd-ipc" title="Link to this heading"></a></h1>
+<section id="types">
+<h2><span class="section-number">5.8.1. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base type</p></th>
+<th class="head"><p>Type Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-ipcstatustype"><span class="std std-ref">Cdd_IpcStatusType</span></a></strong></p></td>
+<td><p>This type defines a range of specific status for Complex driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef struct <a class="reference internal" href="../Classes/struct_ipc_notify_utils___init_object.html"><span class="std std-doc">IpcNotifyUtils_InitObject</span></a> *</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-ipcnotifyutils-inithandle"><span class="std std-ref">IpcNotifyUtils_InitHandle</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>typedef struct <a class="reference internal" href="../Classes/struct_ipc_notify_utils___object.html"><span class="std std-doc">IpcNotifyUtils_Object</span></a> *</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-ipcnotifyutils-handle"><span class="std std-ref">IpcNotifyUtils_Handle</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef void(*)(void *handle, Cdd_Ipc_RPMessage_EpObject *obj, void *arg, void *data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvcallback"><span class="std std-ref">Cdd_Ipc_RPMessage_lld_recvCallback</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>typedef void(*)(void *handle, Cdd_Ipc_RPMessage_EpObject *obj, void *arg)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvnotifycallback"><span class="std std-ref">Cdd_Ipc_RPMessage_lld_recvNotifyCallback</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef sint32(*)(uint8 *data, uint16 dataLen, uint8 crcSize, void *crc)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-cdd-ipc-crchookcallback"><span class="std std-ref">Cdd_Ipc_CrcHookCallback</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<section id="enum-cdd-ipcstatustype">
+<h3><span class="section-number">5.8.1.1. </span>enum Cdd_IpcStatusType<a class="headerlink" href="#enum-cdd-ipcstatustype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_IPC_UNINIT</p></td>
+<td><p>0U</p></td>
+<td><p>The Complex Driver is not initialized or not usable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_IDLE</p></td>
+<td><p>1U</p></td>
+<td><p>The Complex Driver is not currently writing.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_ALLOW_ACCESS</p></td>
+<td><p>2U</p></td>
+<td><p>The Complex Driver is currently open.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_BUSY</p></td>
+<td><p>3U</p></td>
+<td><p>The Complex Driver is performing a Write.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_CLOSE</p></td>
+<td><p>4U</p></td>
+<td><p>The Complex Driver is currently open.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This type defines a range of specific status for Complex driver.</p>
+<p>Requirements : AUTORADAR_MCAL-70</p>
+</section>
+<section id="typedef-ipcnotifyutils-inithandle">
+<h3><span class="section-number">5.8.1.2. </span>typedef IpcNotifyUtils_InitHandle<a class="headerlink" href="#typedef-ipcnotifyutils-inithandle" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">IpcNotifyUtils_InitObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">IpcNotifyUtils_InitHandle</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="typedef-ipcnotifyutils-handle">
+<h3><span class="section-number">5.8.1.3. </span>typedef IpcNotifyUtils_Handle<a class="headerlink" href="#typedef-ipcnotifyutils-handle" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">IpcNotifyUtils_Object</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">IpcNotifyUtils_Handle</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="typedef-cdd-ipc-rpmessage-lld-recvcallback">
+<h3><span class="section-number">5.8.1.4. </span>typedef Cdd_Ipc_RPMessage_lld_recvCallback<a class="headerlink" href="#typedef-cdd-ipc-rpmessage-lld-recvcallback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_lld_recvCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span><span class="w"> </span><span class="n">sint32</span><span class="w"> </span><span class="n">crcStatus</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteEndPt</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="typedef-cdd-ipc-rpmessage-lld-recvnotifycallback">
+<h3><span class="section-number">5.8.1.5. </span>typedef Cdd_Ipc_RPMessage_lld_recvNotifyCallback<a class="headerlink" href="#typedef-cdd-ipc-rpmessage-lld-recvnotifycallback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_lld_recvNotifyCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="typedef-cdd-ipc-crchookcallback">
+<h3><span class="section-number">5.8.1.6. </span>typedef Cdd_Ipc_CrcHookCallback<a class="headerlink" href="#typedef-cdd-ipc-crchookcallback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">sint32</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_CrcHookCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">uint8</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">crcSize</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">crc</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="structures">
+<h2><span class="section-number">5.8.2. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_ipc_notify_utils___init_object.html"><span class="std std-doc">IpcNotifyUtils_InitObject</span></a></strong></p></td>
+<td><p>IPC Notify Utils driver initialization object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_ipc_notify_utils___object.html"><span class="std std-doc">IpcNotifyUtils_Object</span></a></strong></p></td>
+<td><p>IPC Notify Utils driver object.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___ipc___r_p_message___ep_object.html"><span class="std std-doc">Cdd_Ipc_RPMessage_EpObject</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___ipc_create_params.html"><span class="std std-doc">Cdd_IpcCreateParams</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___ipc_config_type.html"><span class="std std-doc">Cdd_IpcConfigType</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="defines">
+<h2><span class="section-number">5.8.3. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_IPC_MODULE_ID</p></td>
+<td><p>CDD Module ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_VENDOR_ID</p></td>
+<td><p>Texas Instruments Vendor ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_INSTANCE_ID</p></td>
+<td><p>Texas Instruments Vendor ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_SW_MAJOR_VERSION</p></td>
+<td><p>Driver Implementation Major Version.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_SW_MINOR_VERSION</p></td>
+<td><p>Driver Implementation Minor Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_SW_PATCH_VERSION</p></td>
+<td><p>Driver Implementation patch Version.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_AR_RELEASE_MAJOR_VERSION</p></td>
+<td><p>AUTOSAR Major version specification implemented by CDD Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_AR_RELEASE_MINOR_VERSION</p></td>
+<td><p>AUTOSAR Minor version specification implemented by CDD Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_AR_RELEASE_REVISION_VERSION</p></td>
+<td><p>AUTOSAR Patch version specification implemented by CDD Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_ISR_VOID</p></td>
+<td><p>void ISR type</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_ISR_CAT1</p></td>
+<td><p>Category 1 ISR type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_ISR_CAT2</p></td>
+<td><p>Category 2 ISR type.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_INIT_SERVICE_ID</p></td>
+<td><p>API Service ID for initialization.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_GETVERSIONINFO_SERVICE_ID</p></td>
+<td><p>API Service ID for get version info.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_READDATA_SERVICE_ID</p></td>
+<td><p>API Service ID for read API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_WRITEDATA_SERVICE_ID</p></td>
+<td><p>API Service ID for write API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_ERROR_SERVICE_ID</p></td>
+<td><p>API Service ID for error API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_RPMSG_READ_SERVICE_ID</p></td>
+<td><p>API Service ID for read cancel API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_RPMSG_WRITE_SERVICE_ID</p></td>
+<td><p>API Service ID for write cancel API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_NOTIFY_REGISTER_CLIENT_SERVICE_ID</p></td>
+<td><p>API Service ID for get remaining bytes API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_CONSTRUCT_SERVICE_ID</p></td>
+<td><p>API Service ID for get remaining read bytes API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_READNOTIF_SERVICE_ID</p></td>
+<td><p>API Service ID for read notification han dler.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_WRITENOTIF_SERVICE_ID</p></td>
+<td><p>API Service ID for write notification handler.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_ERRORNOTIF_SERVICE_ID</p></td>
+<td><p>API Service ID for error notification handler.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_DEINIT_SERVICE_ID</p></td>
+<td><p>API Service ID for deinitialization.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_INTERNAL_ISR_ID</p></td>
+<td><p>API Service ID for ISR.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_NOTIFY_UNREGISTER_CLIENT_SERVICE_ID</p></td>
+<td><p>API Service ID for get remaining bytes API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_DESTRUCT_SERVICE_ID</p></td>
+<td><p>API Service ID for Destructing the RpMsg Endpoint Obj.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_NOTIFY_SYNCALL_SERVICE_ID</p></td>
+<td><p>API Service ID for Destructing the RpMsg Endpoint Obj.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_UNINIT</p></td>
+<td><p>Error code indicating the IPC is uninitialized.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_REGISTER_CLIENT_FAILED</p></td>
+<td><p>Error code indicating register client failed event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_INIT_FAILED</p></td>
+<td><p>Error code indicating IPC reading mode ongoing.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_DEINIT_FAILED</p></td>
+<td><p>Error code indicating IPC writing mode ongoing.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_PARAM_POINTER</p></td>
+<td><p>Error code indicating invalid parameter.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_ALREADY_INITIALIZED</p></td>
+<td><p>Error code indicating IPC already initialized.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_PARAM_VALUE</p></td>
+<td><p>Error code indicating Service called with wrong param.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_PARAM_LENGTH</p></td>
+<td><p>Error code indicating Service called with invalid length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_INVALID_CHANNEL</p></td>
+<td><p>Error code indicating invalid IPC configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_INVALID_CONFIG</p></td>
+<td><p>Error code indicating invalid IPC configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_WRITE_FAILED</p></td>
+<td><p>Error code indicating IPC Write Failed configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_UNREGISTER_CLIENT_FAILED</p></td>
+<td><p>Error code indicating unregister client failed event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_CONSTRUCT_FAILED</p></td>
+<td><p>Error code indicating construct failed event.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_RPMSG_WRITE_FAILED</p></td>
+<td><p>Error code indicating RpMsg Write failed event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_E_RPMSG_READ_FAILED</p></td>
+<td><p>Error code indicating Rpmsg read failed event.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_E_DESTRUCT_FAILED</p></td>
+<td><p>Error code indicating destruct failed event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>IP_VERSION_IPC_V0</p></td>
+<td><p>Selecting IPC Version based on target platform (AM263X corresponding to V0)</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_LOCK</p></td>
+<td><p>IPC Lock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_UNLOCK</p></td>
+<td><p>IPC Unlock.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_IPC_MUTEX_ARM_LOCKED</p></td>
+<td><p>Mutex Arm Lock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_IPC_MUTEX_ARM_UNLOCKED</p></td>
+<td><p>Mutex Arm Unlock.</p></td>
+</tr>
+<tr class="row-even"><td><p>IPC_NOTIFY_CLIENT_ID_SYNC</p></td>
+<td><p>Client ID used for sync messages, this client ID should not be used by other users.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2><span class="section-number">5.8.4. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-mutex-resourcetrylock"><span class="std std-ref">Cdd_Ipc_Mutex_resourceTryLock</span></a></strong>(uint32 * lock)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-mutex-resourceunlock"><span class="std std-ref">Cdd_Ipc_Mutex_resourceUnlock</span></a></strong>(uint32 * lock)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-notify-msghandler"><span class="std std-ref">Cdd_Ipc_notify_MsgHandler</span></a></strong>(void * ipcNotifyHandle, uint32 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteClientId, uint32 Cdd_Ipc_msgValue, uint32 timeout, sint32 crcStatus, void * args)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-getversioninfo"><span class="std std-ref">Cdd_Ipc_GetVersionInfo</span></a></strong>(Std_VersionInfoType * VersionInfoPtr)</p></td>
+<td><p>Service for getting CDD version.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-init"><span class="std std-ref">Cdd_Ipc_Init</span></a></strong>(const Cdd_IpcConfigType * ConfigPtr)</p></td>
+<td><p>Service for CDD IPC Initialization.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-deinit"><span class="std std-ref">Cdd_Ipc_DeInit</span></a></strong>(const Cdd_IpcConfigType * ConfigPtr)</p></td>
+<td><p>Service for deinitializing CDD IPC.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-notify-registerclient"><span class="std std-ref">Cdd_Ipc_Notify_RegisterClient</span></a></strong>(uint32 Cdd_Ipc_localClientId, IpcNotify_FxnCallback Cdd_Ipc_notify_msgHandler, void * args)</p></td>
+<td><p>Service to register a client for IPC.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-notify-write"><span class="std std-ref">Cdd_Ipc_Notify_Write</span></a></strong>(uint32 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteClientId, uint32 Cdd_Ipc_msgValue, uint32 Cdd_Ipc_waitForFifoNotFull)</p></td>
+<td><p>Service to write ipc notify message.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-notify-unregisterclient"><span class="std std-ref">Cdd_Ipc_Notify_UnregisterClient</span></a></strong>(uint32 Cdd_Ipc_localClientId)</p></td>
+<td><p>Service to un-register a client for IPC.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-construct"><span class="std std-ref">Cdd_Ipc_Construct</span></a></strong>(const Cdd_IpcConfigType * ConfigPtr)</p></td>
+<td><p>Service for CDD Ipc RpMsg Construct.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-rpmsg-sendmsg"><span class="std std-ref">Cdd_Ipc_RpMsg_SendMsg</span></a></strong>(void * data, uint16 dataLen, uint16 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteEndPt, uint16 Cdd_Ipc_localEndPtId, uint32 timeout)</p></td>
+<td><p>Service for CDD Ipc RpMsg GetLoclEndPoint.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-rpmsg-recvmsg"><span class="std std-ref">Cdd_Ipc_RpMsg_RecvMsg</span></a></strong>(void * data, uint16 * dataLen, uint16 Cdd_Ipc_localEndPtId, uint16 * Cdd_Ipc_remoteCoreId, uint16 * Cdd_Ipc_remoteEndPt, uint32 timeout)</p></td>
+<td><p>Service for CDD Ipc RpMsg GetLoclEndPoint.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-destruct"><span class="std std-ref">Cdd_Ipc_Destruct</span></a></strong>(uint16 Cdd_Ipc_localEndPtId)</p></td>
+<td><p>Service to delete a previously created RPMessage object.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-notify-sync-all"><span class="std std-ref">Cdd_Ipc_Notify_Sync_All</span></a></strong>(void )</p></td>
+<td><p>Service for CDD Ipc Notify SyncAll.</p></td>
+</tr>
+<tr class="row-even"><td><p>sint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-ipcnotifyutils-lld-init"><span class="std std-ref">IpcNotifyUtils_lld_init</span></a></strong>(<a class="reference internal" href="../Classes/struct_ipc_notify_utils___object.html"><span class="std std-doc">IpcNotifyUtils_Handle</span></a> hIpcNotifyUtils)</p></td>
+<td><p>Initialize IPC Notify Utils module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-ipcnotifyutils-lld-sendsync"><span class="std std-ref">IpcNotifyUtils_lld_sendSync</span></a></strong>(<a class="reference internal" href="../Classes/struct_ipc_notify_utils___object.html"><span class="std std-doc">IpcNotifyUtils_Handle</span></a> hIpcNotifyUtils, uint32 remoteCoreId)</p></td>
+<td><p>Send a sync message to specific core.</p></td>
+</tr>
+<tr class="row-even"><td><p>sint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-ipcnotifyutils-lld-waitsync"><span class="std std-ref">IpcNotifyUtils_lld_waitSync</span></a></strong>(<a class="reference internal" href="../Classes/struct_ipc_notify_utils___object.html"><span class="std std-doc">IpcNotifyUtils_Handle</span></a> hIpcNotifyUtils, uint32 remoteCoreId, uint32 timeout)</p></td>
+<td><p>Wait for a sync message to be received from the specified core.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-ipcnotifyutils-lld-syncall"><span class="std std-ref">IpcNotifyUtils_lld_syncAll</span></a></strong>(<a class="reference internal" href="../Classes/struct_ipc_notify_utils___object.html"><span class="std std-doc">IpcNotifyUtils_Handle</span></a> hIpcNotifyUtils, uint32 timeout)</p></td>
+<td><p>Send a message to all enabled cores and wait for sync message from all enabled cores.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-ipcnotifyutils-lld-synccallback"><span class="std std-ref">IpcNotifyUtils_lld_syncCallback</span></a></strong>(void * hIpcNotify, uint32 remoteCoreId, uint16 localClientId, uint32 msgValue, uint32 timeout, sint32 crcStatus, void * args)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-vringmemallocation"><span class="std std-ref">Cdd_Ipc_VringMemAllocation</span></a></strong>(void )</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-cdd-ipc-mutex-resourcetrylock">
+<h3><span class="section-number">5.8.4.1. </span>function Cdd_Ipc_Mutex_resourceTryLock<a class="headerlink" href="#function-cdd-ipc-mutex-resourcetrylock" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_Mutex_resourceTryLock</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lock</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-cdd-ipc-mutex-resourceunlock">
+<h3><span class="section-number">5.8.4.2. </span>function Cdd_Ipc_Mutex_resourceUnlock<a class="headerlink" href="#function-cdd-ipc-mutex-resourceunlock" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Mutex_resourceUnlock</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lock</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-cdd-ipc-notify-msghandler">
+<h3><span class="section-number">5.8.4.3. </span>function Cdd_Ipc_notify_MsgHandler<a class="headerlink" href="#function-cdd-ipc-notify-msghandler" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_notify_MsgHandler</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ipcNotifyHandle</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteCoreId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteClientId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_msgValue</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sint32</span><span class="w"> </span><span class="n">crcStatus</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">args</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-cdd-ipc-getversioninfo">
+<h3><span class="section-number">5.8.4.4. </span>function Cdd_Ipc_GetVersionInfo<a class="headerlink" href="#function-cdd-ipc-getversioninfo" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_GetVersionInfo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">VersionInfoPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for getting CDD version.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>VersionInfoPtr</strong> - Pointer to where to store the version information</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-ipc-init">
+<h3><span class="section-number">5.8.4.5. </span>function Cdd_Ipc_Init<a class="headerlink" href="#function-cdd-ipc-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Init</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_IpcConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for CDD IPC Initialization.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ConfigPtr</strong> - Pointer to configuration set</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-ipc-deinit">
+<h3><span class="section-number">5.8.4.6. </span>function Cdd_Ipc_DeInit<a class="headerlink" href="#function-cdd-ipc-deinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_DeInit</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_IpcConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for deinitializing CDD IPC.</p>
+<p>Service for deinitializing the CDD IPC and change driver state to uninitialized</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ConfigPtr</strong> - Pointer to configuration set</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-ipc-notify-registerclient">
+<h3><span class="section-number">5.8.4.7. </span>function Cdd_Ipc_Notify_RegisterClient<a class="headerlink" href="#function-cdd-ipc-notify-registerclient" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_RegisterClient</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_localClientId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">IpcNotify_FxnCallback</span><span class="w"> </span><span class="n">Cdd_Ipc_notify_msgHandler</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">args</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service to register a client for IPC.</p>
+<p>Service to register client at a specified client ID.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Cdd_Ipc_localClientId</strong> - Local core client ID</p></li>
+<li><p><strong>Cdd_Ipc_notify_msgHandler</strong> - Pointer to the function that handles the Ipc notify message arrives on that above client ID</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong>
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-ipc-notify-write">
+<h3><span class="section-number">5.8.4.8. </span>function Cdd_Ipc_Notify_Write<a class="headerlink" href="#function-cdd-ipc-notify-write" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_Write</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteCoreId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteClientId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_msgValue</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_waitForFifoNotFull</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service to write ipc notify message.</p>
+<p>Service to Write message from the IPC instance.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Cdd_Ipc_remoteCoreId</strong> - Core ID to which you need to sent the message to</p></li>
+<li><p><strong>Cdd_Ipc_remoteClientId</strong> - Remote client ID registered for the to send the message to</p></li>
+<li><p><strong>Cdd_Ipc_msgValue</strong> - Message value to be sent</p></li>
+<li><p><strong>Cdd_Ipc_waitForFifoNotFull</strong> - 1: wait for message to be inserted into HW or SW FIFO, 0: if FIFO is full, dont send message and return with error.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong>
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-ipc-notify-unregisterclient">
+<h3><span class="section-number">5.8.4.9. </span>function Cdd_Ipc_Notify_UnregisterClient<a class="headerlink" href="#function-cdd-ipc-notify-unregisterclient" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_UnregisterClient</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_localClientId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service to un-register a client for IPC.</p>
+<p>Service to unregister client at a specified client ID.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Cdd_Ipc_localClientId</strong> - Local core client ID</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong>
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-ipc-construct">
+<h3><span class="section-number">5.8.4.10. </span>function Cdd_Ipc_Construct<a class="headerlink" href="#function-cdd-ipc-construct" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Construct</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_IpcConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for CDD Ipc RpMsg Construct.</p>
+<p>Create a RPMessage object to receive messages at a specified end-point</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ConfigPtr</strong> - Pointer to configuration set</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-ipc-rpmsg-sendmsg">
+<h3><span class="section-number">5.8.4.11. </span>function Cdd_Ipc_RpMsg_SendMsg<a class="headerlink" href="#function-cdd-ipc-rpmsg-sendmsg" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_RpMsg_SendMsg</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteCoreId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteEndPt</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_localEndPtId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for CDD Ipc RpMsg GetLoclEndPoint.</p>
+<p>Service to Send a message to a remote core at a specified remote end point</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>dataLen</strong> – Length of buffer</p></li>
+<li><p><strong>data</strong> – pointer to data buffer</p></li>
+<li><p><strong>Cdd_Ipc_remoteCoreId</strong> - Core ID to which you need to send the message to.</p></li>
+<li><p><strong>Cdd_Ipc_remoteEndPt</strong> – Unique end point value on the remote core.</p></li>
+<li><p><strong>timeout</strong> – Time in system ticks to block for a message receive.</p></li>
+<li><p><strong>Cdd_Ipc_localEndPtId</strong> - localEndPt, is strictly not needed, however this is available to the user on the remote core  * and can be used as a reply end point</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong>
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-ipc-rpmsg-recvmsg">
+<h3><span class="section-number">5.8.4.12. </span>function Cdd_Ipc_RpMsg_RecvMsg<a class="headerlink" href="#function-cdd-ipc-rpmsg-recvmsg" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_RpMsg_RecvMsg</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_localEndPtId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteCoreId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteEndPt</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for CDD Ipc RpMsg GetLoclEndPoint.</p>
+<p>Blocking API to wait till a message is received from any CPU at the specified local end point</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>dataLen</strong> – Length of buffer</p></li>
+<li><p><strong>data</strong> – pointer to data buffer</p></li>
+<li><p><strong>Cdd_Ipc_remoteCoreId</strong> - Core ID to which you need to send the message to.</p></li>
+<li><p><strong>Cdd_Ipc_remoteEndPt</strong> – Pointer to Unique end point value on the remote core.</p></li>
+<li><p><strong>timeout</strong> – Time in system ticks to block for a message receive.</p></li>
+<li><p><strong>Cdd_Ipc_localEndPtId</strong> – localEndPt need to be passed to retrieve the endpoint message object internally in the driver</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong>
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-ipc-destruct">
+<h3><span class="section-number">5.8.4.13. </span>function Cdd_Ipc_Destruct<a class="headerlink" href="#function-cdd-ipc-destruct" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Destruct</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_localEndPtId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service to delete a previously created RPMessage object.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-ipc-notify-sync-all">
+<h3><span class="section-number">5.8.4.14. </span>function Cdd_Ipc_Notify_Sync_All<a class="headerlink" href="#function-cdd-ipc-notify-sync-all" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_Sync_All</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Service for CDD Ipc Notify SyncAll.</p>
+<p>Service to sync all the cores that are participating the IPC.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-ipcnotifyutils-lld-init">
+<h3><span class="section-number">5.8.4.15. </span>function IpcNotifyUtils_lld_init<a class="headerlink" href="#function-ipcnotifyutils-lld-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_init</span><span class="p">(</span>
+<span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Initialize IPC Notify Utils module.</p>
+<p>This API will initialize the Utils module for IPC.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>hIpcNotifyUtils</strong> - IPC Notify LLD utils handle</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>MCAL_SystemP_SUCCESS</strong> if successful; else error on failure
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: sint32</p>
+</section>
+<section id="function-ipcnotifyutils-lld-sendsync">
+<h3><span class="section-number">5.8.4.16. </span>function IpcNotifyUtils_lld_sendSync<a class="headerlink" href="#function-ipcnotifyutils-lld-sendsync" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_sendSync</span><span class="p">(</span>
+<span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">remoteCoreId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Send a sync message to specific core.</p>
+<p>This API can be used to send sync message’s to very specific core’s For most users recommend to use the more simpler IpcNotify_syncAll() API.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>remoteCoreId</strong> - Core ID, see CSL_CoreID for valid values.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>MCAL_SystemP_SUCCESSsync</strong> message was sent successfully, else failure
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: sint32</p>
+</section>
+<section id="function-ipcnotifyutils-lld-waitsync">
+<h3><span class="section-number">5.8.4.17. </span>function IpcNotifyUtils_lld_waitSync<a class="headerlink" href="#function-ipcnotifyutils-lld-waitsync" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_waitSync</span><span class="p">(</span>
+<span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Wait for a sync message to be received from the specified core.</p>
+<p>This API can be used to recevice sync message from very specific core’s For most users recommend to use the more simpler IpcNotify_syncAll() API.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>remoteCoreId</strong> - Core ID, see CSL_CoreID for valid values.</p></li>
+<li><p><strong>timeout</strong> - Amount of time in units of ticks to wait</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>MCAL_SystemP_SUCCESSsync</strong> message was received successfully
+<br></p></li>
+<li><p><strong>SystemP_TIMEOUTsync</strong> message was NOT received after <code class="docutils literal notranslate"><span class="pre">timeout</span></code> ticks
+<br></p></li>
+<li><p><strong>SystemP_FAILUREinvalid</strong> arguments
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: sint32</p>
+</section>
+<section id="function-ipcnotifyutils-lld-syncall">
+<h3><span class="section-number">5.8.4.18. </span>function IpcNotifyUtils_lld_syncAll<a class="headerlink" href="#function-ipcnotifyutils-lld-syncall" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_syncAll</span><span class="p">(</span>
+<span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Send a message to all enabled cores and wait for sync message from all enabled cores.</p>
+<p>This API when called on all CPUs, make sure all CPUs execute upto a certain and then proceed only when all other CPUs have also executed to the same point.</p>
+<p>This is useful esp during system init to make sure message exchange can be started only after all CPUs have finished their system initialization.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>timeout</strong> - Amount of time in units of ticks to wait for the sync</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>MCAL_SystemP_SUCCESSall</strong> sync messages recevied successfully
+<br></p></li>
+<li><p><strong>SystemP_TIMEOUTsome</strong> sync messages was NOT recevied after <code class="docutils literal notranslate"><span class="pre">timeout</span></code> ticks
+<br></p></li>
+<li><p><strong>SystemP_FAILUREinvalid</strong> arguments
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: sint32</p>
+</section>
+<section id="function-ipcnotifyutils-lld-synccallback">
+<h3><span class="section-number">5.8.4.19. </span>function IpcNotifyUtils_lld_syncCallback<a class="headerlink" href="#function-ipcnotifyutils-lld-synccallback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_syncCallback</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hIpcNotify</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">localClientId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">msgValue</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span>
+<span class="w">    </span><span class="n">sint32</span><span class="w"> </span><span class="n">crcStatus</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">args</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-cdd-ipc-vringmemallocation">
+<h3><span class="section-number">5.8.4.20. </span>function Cdd_Ipc_VringMemAllocation<a class="headerlink" href="#function-cdd-ipc-vringmemallocation" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_VringMemAllocation</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="group___c_d_d___i2_c.html" class="btn btn-neutral float-left" title="5.7. CDD_I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___c_d_d___p_w_m.html" class="btn btn-neutral float-right" title="5.9. CDD_PWM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Aug 04, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.00.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

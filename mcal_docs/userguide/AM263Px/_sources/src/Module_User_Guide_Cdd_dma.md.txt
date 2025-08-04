@@ -1,0 +1,661 @@
+## CDD DMA Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|BSW|Basic Software|
+|DET|Default Error Tracer|
+|CDD |Complex Device Driver|
+|DMA |Direct Memory Access|
+|ISR |Interrupt Service Routine|
+|INT |Interrupt|
+|HW |Hardware|
+|SW |Software|
+|MCU|Micro Controller Unit|
+|OS|Operating System|
+|API|Application Programming Interface|
+
+### Introduction
+
+This document describes the functionality and configuration of the
+Cdd_Dma module.
+
+|Supported AUTOSAR Release|**4.3.1**|
+|------|-------------|
+|**Supported Configuration Variants**  | **Pre-Compile**|
+|**Vendor ID**                         | **DMA_VENDOR_ID (44)**|
+|**Module ID**                         | **DMA_MODULE_ID (255)**|
+|**Supported Platform**                | **AM263Px**|
+
+The Cdd_Dma module initiates memory transfer without the intervention of the CPU and used in data transfer within peripheral, based on DMA channel configured.
+
+### Functional Overview
+
+Cdd_Dma Driver using HW IP "EDMA"(Enhanced DMA). EDMA performs high-performance data transfer between two target endpoints, memories and peripheral devices without microcontroller support during transfer. EDMA transfer is programmed through a logical EDMA channel which allows the transfer to be optimally tailored to the requirements of the application.
+
+The EDMA controller is based on two major principal blocks:
+
+• EDMA third-party channel controller (EDMA_TPCC)
+
+• EDMA third-party transfer controller (EDMA_TPTC)
+
+```{figure} Assets/images/dma/dma1.png
+:alt: Basic Working Principle
+:align: center
+Basic Working Principle
+```
+
+The TPCC is a high flexible channel controller that serves as both a user interface and an event interface for the EDMA controller. The EDMA_TPCC serves to prioritize incoming software requests or events from peripherals, and submits transfer requests (TRs) to the transfer controller.
+
+The TPTC performs read and write transfers by EDMA ports to the target peripherals, as programmed in the Active and Pending set of the registers. The transfer controllers are responsible for data movement, and issue read/write commands to the source and destination addresses programmed for a given transfer in the EDMA_TPCC.
+
+The Cdd_Dma module has 64 EDMA channels, which serves the purpose of driving transferring of data.
+
+#### Initialization
+
+Cdd_Dma_Init() has to be called to initialize the Cdd_Dma driver.
+
+#### States
+
+None
+
+#### Assumptions
+
+
+None
+
+#### Limitations
+
+Below are the IP’s that needed software workaround with EDMA because of the HW Limitations  -
+
+   1. UART : A dummy PaRAM needs to be linked to the actual TX PaRAM. This is because UART generates TX empty event after the last character is transferred and it results in an event miss error being set in EDMA (since the TX PaRAM has already been used up for the transfer). A dummy PaRAM set is linked to the actual TX PaRAM to service the extra event generated.
+
+   2. McSpi : Above scenario also applies to McSPI. A dummy PaRAM set is linked to solve the issue.
+
+NOTE: Both of these above limitations are taken care internally by UART and McSpi driver respectively.
+
+#### Design overview
+
+
+Will be updated in future release
+
+### Hardware Features
+
+#### IP Supported Features
+
+* EDMA channels are supported.
+* Both memory transfer and transfer within peripheral is supported.
+* Both interrupt mode and polling mode are supported.
+* Linking of multiple params are supported.
+* Chaining of multiple channels are supported.
+
+#### Not supported Features
+
+* QDMA is not supported.
+
+#### Non compliance
+
+##### Deviations to requirements (Requirement Traceability)
+
+###### Deviation of requirements against AUTOSAR specification requirements
+
+None
+
+### Source files
+
+Static source C Files are defined below
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Dma**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma.h** : *Contains the API’s of the Cdd_Dma driver to be used by upper layers.*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_cslr_tpcc.h** : *Contains Internal functions definition and initialization of Cdd_Dma driver.*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_cslr_tptc.h** : *Contains Internal functions definition and initialization of Cdd_Dma driver.*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_edma.h** : *Contains Internal functions definition and initialization of Cdd_Dma driver.*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_Irq.h** : *Contains ISR function declaration.*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_Dma_Priv.h** : *Contains Internal functions definition and initialization of Cdd_Dma driver.*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma.c** : *Contains the implementation of the API’s for Cdd_Dma driver.*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_Irq.c** : *Contains ISR function definitions.*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_Dma_Priv.c** : *Contains Internal functions definition and initialization of Cdd_Dma driver.*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┗ 📜**Cdd_Dma_dmaxbar.h** : *Contains DMA cross bar interrupt information.*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_soc.c** : *Contains device specific a function definition, data types and definitions.*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_Dma_trig_xbar.h** : *Contains DMA cross bar interrupt information.*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_xbar.h** : *Contains DMA cross bar interrupt information.*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┃ 📜README.txt
+
+Plugin files are defined below in the table.
+
+|Plugin Files|Description|
+|------|------|
+|CDD_Dma_Cfg.h|Contains the Precompile switches, Symbolic names of the handles and xbar, HW units|
+|CDD_Dma_Cfg.c|contains the configuration parameters|
+
+<!-- File structure diagram-->
+
+### Module requirements
+
+Please refer **Software Product Specification** document provided as part of CSP.
+
+#### Memory Mapping
+
+| Memory Mapping Sections    | CDD_DMA_CODE | CDD_DMA_CODE_ISR | CDD_DMA_VAR_NO_INIT | CDD_DMA_VAR | CDD_DMA_CFG  |
+|--------------------------------------------------|--------------|------------------|---------------------|-------------|--------------|
+| CDD_DMA_START_SEC_VAR_INIT_8 (.bss)    |       |    |         |      x      |          |
+| CDD_DMA_STOP_SEC_VAR_INIT_8       |          |                  |         |      x      |              |
+| CDD_DMA_START_SEC_CONFIG_DATA (.const)    |              |         |              |       |      x       |
+| CDD_DMA_STOP_SEC_CONFIG_DATA   |              |      |          |             |      x       |
+| CDD_DMA_START_SEC_CODE (.text)   |      x       |    |     |             |              |
+| CDD_DMA_STOP_SEC_CODE     |      x       |                  |        |      |      |
+| CDD_DMA_START_SEC_VAR_INIT_32 (.bss)   |      |    |      |      x      |      |
+| CDD_DMA_STOP_SEC_VAR_INIT_32    |      |        |      |      x      |       |
+| CDD_DMA_START_SEC_VAR_NO_INIT_UNSPECIFIED (.data)|     |        |          x          |        |        |
+| CDD_DMA_STOP_SEC_VAR_NO_INIT_UNSPECIFIED     |       |     |          x          |             |              |
+| CDD_DMA_START_SEC_ISR_CODE      |       |        x         |         |         |          |
+| CDD_DMA_STOP_SEC_ISR_CODE            |      |        x         |        |      |         |
+
+#### Scheduling
+
+There are no scheduled functions within the CDD DMA driver
+
+#### Error handling
+
+##### Development Error Reporting (DET)
+
+In development mode, the Cdd_Dma module reports development error through the Det_ReportError function of module DET.
+The errors reported to DET are described in the following table
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-------|-----|
+|API service called without module initialization.|CDD_DMA_E_UNINIT|0x01|
+|API service for initialization is called when already initialized.|CDD_DMA_E_ALREADY_INITIALIZED|0x02|
+|API parameter checking: invalid value.|CDD_DMA_E_PARAM_VALUE|0x03|
+|API parameter checking: invalid pointer.|CDD_DMA_E_PARAM_POINTER|0x04|
+|API service for indicating callback is already registered|CDD_DMA_E_ALREADY_REGISTERED|0x05|
+|API service for indicating DMA handle already in use|CDD_DMA_E_ALREADY_IN_PROGRESS|0x06|
+
+##### Runtime Errors
+
+None
+
+### Used resources
+
+#### Interrupt Handling
+
+Cdd_Dma driver provides ISR for transfer completion detection.
+The interrupt category must be configured in Cdd_Dma Driver and OS modules.
+
+
+Respective ISR for each Cdd_Dma Instance in AM263Px are as follows:
+
+| Cdd_Dma Instances| ISR Routines  |
+|----------------|-----------------------------|
+| CDD_DMA_MSS_A     | CDD_EDMA_lld_transferCompletionMasterIsrFxn()   |
+
+
+CDD_DMA_MSS_A instance of Cdd_Dma has interrupt number as "72" in AM263Px.
+
+### Integration description
+
+#### Dependent modules
+
+##### MCU
+
+The module MCU powers up the microcontroller’s peripherals at startup time and initializes the PLL as well as the internal clock domains which is connected to the Cdd_Dma unit.
+
+The Cdd_Dma module will not take care of settings which configure the clock and PLL for channels in its init function. This must be done by the MCU module.
+
+##### PORT
+
+The Port driver configures the port pins used for the Cdd_Dma driver as input or output. Hence, the Port driver has to be initialized prior to the use of Cdd_Dma functions. Otherwise, Cdd_Dma driver functions will exhibit undefined behavior.
+
+##### OS
+
+An operating system can be used for task scheduling, interrupt handling, global suspend and restore of interrupts and creating of the Interrupt Vector Table.The Cdd_Dma module may use AUTOSAR OS to suspend and restore global interrupts.
+
+##### DET
+
+The module PWM depends on the DET (by default) in order to report
+development errors.
+
+##### DEM
+
+None
+
+##### Callback Functions
+
+None
+
+##### Callback Notification
+
+None
+
+##### SchM (Optional)
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that DMA module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator. For DMA Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | DMA Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|DMA_EXCLUSIVE_AREA_0 | Cdd_Edma_lld_intrRegister | To protect against multiple access for shared resources |ALL_INTERRUPT_BLOCKING : All interrupts should be blocked as this API’s can be called in the interrupts |
+
+#### Multi-core support
+
+Not supported
+
+### Configuration
+
+
+
+#### CddDmaDriverHandler
+This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module.
+
+##### CddDmaTransferType
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaTransferType |
+| **Description** | This parameter selects the desired Transfer Type. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER |
+| **Range** | CDD_DMA_TRANSFER_TYPE_UART_TX<br>CDD_DMA_TRANSFER_TYPE_UART_RX<br>CDD_DMA_TRANSFER_TYPE_ADC<br>CDD_DMA_TRANSFER_TYPE_MCSPI<br>CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER<br>CDD_DMA_TRANSFER_TYPE_FLS |
+
+##### CddDmaInstance
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaInstance |
+| **Description** | This parameter selects the desired instance for DMA. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_MSS_A |
+| **Range** | CDD_DMA_MSS_A |
+
+##### CddDmaRegionID
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaRegionID |
+| **Description** | This parameter specifies the Region ID for EDMA. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 7 |
+| **Min-value** | 0 |
+
+##### CddDmaTccNumber
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaTccNumber |
+| **Description** | This parameter specifies the TCC number for EDMA. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 63 |
+| **Min-value** | 0 |
+
+##### CddDmaQueueNumber
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaQueueNumber |
+| **Description** | This parameter specifies the Default Queue Number for EDMA. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 1 |
+| **Min-value** | 0 |
+
+##### CddDmaEnableInterrupt
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaEnableInterrupt |
+| **Description** | This determines whether interrupt needs to be registered. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CddDmaTransferModeSelect
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaTransferModeSelect |
+| **Description** | This parameter selects the desired Transfer Modeselect either normal or linking or chaining. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_TRANSFER_MODE_NORMAL |
+| **Range** | CDD_DMA_TRANSFER_MODE_NORMAL<br>CDD_DMA_TRANSFER_MODE_LINKING<br>CDD_DMA_TRANSFER_MODE_CHAINING |
+
+##### CddDmaChannelGroup
+This container contains the DMA Channel Group.
+
+###### CddDmaChannel
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaChannel |
+| **Description** | This parameter select the channel number to be used. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 63 |
+| **Min-value** | 0 |
+
+##### CddDmaParamSets
+This container contains the DMA params.
+
+###### CddDmaPramNumber
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaPramNumber |
+| **Description** | This parameter select the param number to be used. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+##### CddDmaChannelTriggerConfiguration
+This container contains the DMA Channel Trigger reasource.
+
+###### CddDmaDmaChannelModule
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaDmaChannelModule |
+| **Description** | The DMA channel selected for module. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_TRIG_XBAR_EDMA_MODULE_0 |
+| **Range** | CDD_DMA_TRIG_XBAR_EDMA_MODULE_0<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_1<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_2<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_3<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_4<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_5<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_6<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_7<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_8<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_9<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_10<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_11<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_12<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_13<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_14<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_15<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_16<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_17<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_18<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_19<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_20<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_21<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_22<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_23<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_24<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_25<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_26<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_27<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_28<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_29<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_30<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_31<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_32<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_33<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_34<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_35<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_36<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_37<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_38<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_39<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_40<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_41<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_42<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_43<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_44<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_45<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_46<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_47<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_48<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_49<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_50<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_51<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_52<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_53<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_54<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_55<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_56<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_57<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_58<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_59<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_60<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_61<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_62<br>CDD_DMA_TRIG_XBAR_EDMA_MODULE_63 |
+
+###### CddDmaChannelTriggerSource
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaChannelTriggerSource |
+| **Description** | Source to Trigger DMA Channel. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_0 |
+| **Range** | CDD_DMA_TRIG_XBAR_LIN0_RXDMA<br>CDD_DMA_TRIG_XBAR_LIN0_TXDMA<br>CDD_DMA_TRIG_XBAR_LIN1_RXDMA<br>CDD_DMA_TRIG_XBAR_LIN1_TXDMA<br>CDD_DMA_TRIG_XBAR_LIN2_RXDMA<br>CDD_DMA_TRIG_XBAR_LIN2_TXDMA<br>CDD_DMA_TRIG_XBAR_LIN3_RXDMA<br>CDD_DMA_TRIG_XBAR_LIN3_TXDMA<br>CDD_DMA_TRIG_XBAR_LIN4_RXDMA<br>CDD_DMA_TRIG_XBAR_LIN4_TXDMA<br>CDD_DMA_TRIG_XBAR_I2C0_TX<br>CDD_DMA_TRIG_XBAR_I2C0_RX<br>CDD_DMA_TRIG_XBAR_I2C1_TX<br>CDD_DMA_TRIG_XBAR_I2C1_RX<br>CDD_DMA_TRIG_XBAR_I2C2_TX<br>CDD_DMA_TRIG_XBAR_I2C2_RX<br>CDD_DMA_TRIG_XBAR_I2C3_TX<br>CDD_DMA_TRIG_XBAR_I2C3_RX<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI0_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI1_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI2_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI3_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI4_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_RTI0_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI0_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI0_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI0_DMA_3<br>CDD_DMA_TRIG_XBAR_RTI1_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI1_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI1_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI1_DMA_3<br>CDD_DMA_TRIG_XBAR_RTI2_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI2_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI2_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI2_DMA_3<br>CDD_DMA_TRIG_XBAR_RTI3_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI3_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI3_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI3_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS0_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS1_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS2_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS3_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_USART0_DMA_0<br>CDD_DMA_TRIG_XBAR_USART0_DMA_1<br>CDD_DMA_TRIG_XBAR_USART1_DMA_0<br>CDD_DMA_TRIG_XBAR_USART1_DMA_1<br>CDD_DMA_TRIG_XBAR_USART2_DMA_0<br>CDD_DMA_TRIG_XBAR_USART2_DMA_1<br>CDD_DMA_TRIG_XBAR_USART3_DMA_0<br>CDD_DMA_TRIG_XBAR_USART3_DMA_1<br>CDD_DMA_TRIG_XBAR_USART4_DMA_0<br>CDD_DMA_TRIG_XBAR_USART4_DMA_1<br>CDD_DMA_TRIG_XBAR_USART5_DMA_0<br>CDD_DMA_TRIG_XBAR_USART5_DMA_1<br>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_0<br>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_1<br>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_2<br>CDD_DMA_TRIG_XBAR_MCRC_DMA_EVENT_3<br>CDD_DMA_TRIG_XBAR_QSPI_INTR<br>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_0<br>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_1<br>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_2<br>CDD_DMA_TRIG_XBAR_GPIO_INT_XBAR_OUT_3<br>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR1_OUT_0<br>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR1_OUT_1<br>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR0_OUT_0<br>CDD_DMA_TRIG_XBAR_SOC_TIMESYNC_XBAR0_OUT_1<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_0<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_1<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_2<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_3<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_4<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_5<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_6<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_7<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_8<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_9<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_10<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_11<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_12<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_13<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_14<br>CDD_DMA_TRIG_XBAR_DMA_XBAR_OUT_15<br>CDD_DMA_TRIG_XBAR_MMC_DMA_RD<br>CDD_DMA_TRIG_XBAR_MMC_DMA_WR<br>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ0<br>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ1<br>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ2<br>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ3<br>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ4<br>CDD_DMA_TRIG_XBAR_DTHE_SHA_DMA_REQ5<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ0<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ1<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ2<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ3<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ4<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ5<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ6<br>CDD_DMA_TRIG_XBAR_DTHE_AES_DMA_REQ7<br>CDD_DMA_TRIG_XBAR_MCANSS0_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS0_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS0_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS0_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS0_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS0_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS0_FE_6<br>CDD_DMA_TRIG_XBAR_MCANSS1_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS1_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS1_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS1_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS1_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS1_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS1_FE_6<br>CDD_DMA_TRIG_XBAR_MCANSS2_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS2_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS2_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS2_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS2_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS2_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS2_FE_6<br>CDD_DMA_TRIG_XBAR_MCANSS3_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS3_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS3_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS3_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS3_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS3_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS3_FE_6<br>CDD_DMA_TRIG_XBAR_GPMC_SDMAREQ<br>CDD_DMA_TRIG_XBAR_MCANSS4_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS4_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS4_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS4_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS5_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS5_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS5_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS5_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS6_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS6_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS6_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS6_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS7_TX_DMA_0<br>CDD_DMA_TRIG_XBAR_MCANSS7_TX_DMA_1<br>CDD_DMA_TRIG_XBAR_MCANSS7_TX_DMA_2<br>CDD_DMA_TRIG_XBAR_MCANSS7_TX_DMA_3<br>CDD_DMA_TRIG_XBAR_MCANSS4_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS4_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS4_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS4_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS4_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS4_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS4_FE_6<br>CDD_DMA_TRIG_XBAR_MCANSS5_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS5_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS5_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS5_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS5_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS5_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS5_FE_6<br>CDD_DMA_TRIG_XBAR_MCANSS6_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS6_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS6_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS6_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS6_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS6_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS6_FE_6<br>CDD_DMA_TRIG_XBAR_MCANSS7_FE_0<br>CDD_DMA_TRIG_XBAR_MCANSS7_FE_1<br>CDD_DMA_TRIG_XBAR_MCANSS7_FE_2<br>CDD_DMA_TRIG_XBAR_MCANSS7_FE_3<br>CDD_DMA_TRIG_XBAR_MCANSS7_FE_4<br>CDD_DMA_TRIG_XBAR_MCANSS7_FE_5<br>CDD_DMA_TRIG_XBAR_MCANSS7_FE_6<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI5_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI6_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_READ_REQ0<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_READ_REQ1<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_READ_REQ2<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_READ_REQ3<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_WRITE_REQ0<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_WRITE_REQ1<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_WRITE_REQ2<br>CDD_DMA_TRIG_XBAR_SPI7_DMA_WRITE_REQ3<br>CDD_DMA_TRIG_XBAR_RTI4_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI4_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI4_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI4_DMA_3<br>CDD_DMA_TRIG_XBAR_RTI5_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI5_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI5_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI5_DMA_3<br>CDD_DMA_TRIG_XBAR_RTI6_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI6_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI6_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI6_DMA_3<br>CDD_DMA_TRIG_XBAR_RTI7_DMA_0<br>CDD_DMA_TRIG_XBAR_RTI7_DMA_1<br>CDD_DMA_TRIG_XBAR_RTI7_DMA_2<br>CDD_DMA_TRIG_XBAR_RTI7_DMA_3 |
+
+###### CddDmaDmaChannelXbar
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaDmaChannelXbar |
+| **Description** | DMA Channel Cross bar source. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_XBAR_DMA_TRIG_XBAR_0 |
+| **Range** | CDD_DMA_XBAR_DMA_TRIG_XBAR_0<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_1<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_2<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_3<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_4<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_5<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_6<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_7<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_8<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_9<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_10<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_11<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_12<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_13<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_14<br>CDD_DMA_XBAR_DMA_TRIG_XBAR_15 |
+
+###### CddDmaDmaChannelXbarMap
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaDmaChannelXbarMap |
+| **Description** | DMA Channel Cross bar source. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_XBAR_ADC0_INT1 |
+| **Range** | CDD_DMA_XBAR_EPWM0_SOCA<br>CDD_DMA_XBAR_EPWM1_SOCA<br>CDD_DMA_XBAR_EPWM2_SOCA<br>CDD_DMA_XBAR_EPWM3_SOCA<br>CDD_DMA_XBAR_EPWM4_SOCA<br>CDD_DMA_XBAR_EPWM5_SOCA<br>CDD_DMA_XBAR_EPWM6_SOCA<br>CDD_DMA_XBAR_EPWM7_SOCA<br>CDD_DMA_XBAR_EPWM8_SOCA<br>CDD_DMA_XBAR_EPWM9_SOCA<br>CDD_DMA_XBAR_EPWM10_SOCA<br>CDD_DMA_XBAR_EPWM11_SOCA<br>CDD_DMA_XBAR_EPWM12_SOCA<br>CDD_DMA_XBAR_EPWM13_SOCA<br>CDD_DMA_XBAR_EPWM14_SOCA<br>CDD_DMA_XBAR_EPWM15_SOCA<br>CDD_DMA_XBAR_EPWM16_SOCA<br>CDD_DMA_XBAR_EPWM17_SOCA<br>CDD_DMA_XBAR_EPWM18_SOCA<br>CDD_DMA_XBAR_EPWM19_SOCA<br>CDD_DMA_XBAR_EPWM20_SOCA<br>CDD_DMA_XBAR_EPWM21_SOCA<br>CDD_DMA_XBAR_EPWM22_SOCA<br>CDD_DMA_XBAR_EPWM23_SOCA<br>CDD_DMA_XBAR_EPWM24_SOCA<br>CDD_DMA_XBAR_EPWM25_SOCA<br>CDD_DMA_XBAR_EPWM26_SOCA<br>CDD_DMA_XBAR_EPWM27_SOCA<br>CDD_DMA_XBAR_EPWM28_SOCA<br>CDD_DMA_XBAR_EPWM29_SOCA<br>CDD_DMA_XBAR_EPWM30_SOCA<br>CDD_DMA_XBAR_EPWM31_SOCA<br>CDD_DMA_XBAR_EPWM0_SOCB<br>CDD_DMA_XBAR_EPWM1_SOCB<br>CDD_DMA_XBAR_EPWM2_SOCB<br>CDD_DMA_XBAR_EPWM3_SOCB<br>CDD_DMA_XBAR_EPWM4_SOCB<br>CDD_DMA_XBAR_EPWM5_SOCB<br>CDD_DMA_XBAR_EPWM6_SOCB<br>CDD_DMA_XBAR_EPWM7_SOCB<br>CDD_DMA_XBAR_EPWM8_SOCB<br>CDD_DMA_XBAR_EPWM9_SOCB<br>CDD_DMA_XBAR_EPWM10_SOCB<br>CDD_DMA_XBAR_EPWM11_SOCB<br>CDD_DMA_XBAR_EPWM12_SOCB<br>CDD_DMA_XBAR_EPWM13_SOCB<br>CDD_DMA_XBAR_EPWM14_SOCB<br>CDD_DMA_XBAR_EPWM15_SOCB<br>CDD_DMA_XBAR_EPWM16_SOCB<br>CDD_DMA_XBAR_EPWM17_SOCB<br>CDD_DMA_XBAR_EPWM18_SOCB<br>CDD_DMA_XBAR_EPWM19_SOCB<br>CDD_DMA_XBAR_EPWM20_SOCB<br>CDD_DMA_XBAR_EPWM21_SOCB<br>CDD_DMA_XBAR_EPWM22_SOCB<br>CDD_DMA_XBAR_EPWM23_SOCB<br>CDD_DMA_XBAR_EPWM24_SOCB<br>CDD_DMA_XBAR_EPWM25_SOCB<br>CDD_DMA_XBAR_EPWM26_SOCB<br>CDD_DMA_XBAR_EPWM27_SOCB<br>CDD_DMA_XBAR_EPWM28_SOCB<br>CDD_DMA_XBAR_EPWM29_SOCB<br>CDD_DMA_XBAR_EPWM30_SOCB<br>CDD_DMA_XBAR_EPWM31_SOCB<br>CDD_DMA_XBAR_ADC0_INT1<br>CDD_DMA_XBAR_ADC0_INT2<br>CDD_DMA_XBAR_ADC0_INT3<br>CDD_DMA_XBAR_ADC0_INT4<br>CDD_DMA_XBAR_ADC0_EVTINT<br>CDD_DMA_XBAR_ADC1_INT1<br>CDD_DMA_XBAR_ADC1_INT2<br>CDD_DMA_XBAR_ADC1_INT3<br>CDD_DMA_XBAR_ADC1_INT4<br>CDD_DMA_XBAR_ADC1_EVTINT<br>CDD_DMA_XBAR_ADC2_INT1<br>CDD_DMA_XBAR_ADC2_INT2<br>CDD_DMA_XBAR_ADC2_INT3<br>CDD_DMA_XBAR_ADC2_INT4<br>CDD_DMA_XBAR_ADC2_EVTINT<br>CDD_DMA_XBAR_ADC3_INT1<br>CDD_DMA_XBAR_ADC3_INT2<br>CDD_DMA_XBAR_ADC3_INT3<br>CDD_DMA_XBAR_ADC3_INT4<br>CDD_DMA_XBAR_ADC3_EVTINT<br>CDD_DMA_XBAR_ADC4_INT1<br>CDD_DMA_XBAR_ADC4_INT2<br>CDD_DMA_XBAR_ADC4_INT3<br>CDD_DMA_XBAR_ADC4_INT4<br>CDD_DMA_XBAR_ADC4_EVTINT<br>CDD_DMA_XBAR_FSI0_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI0_DMA_TRIG1<br>CDD_DMA_XBAR_FSI0_DMA_TRIG2<br>CDD_DMA_XBAR_FSI1_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI1_DMA_TRIG1<br>CDD_DMA_XBAR_FSI1_DMA_TRIG2<br>CDD_DMA_XBAR_FSI2_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI2_DMA_TRIG1<br>CDD_DMA_XBAR_FSI2_DMA_TRIG2<br>CDD_DMA_XBAR_FSI3_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI3_DMA_TRIG1<br>CDD_DMA_XBAR_FSI3_DMA_TRIG2<br>CDD_DMA_XBAR_FSI0_TX_DMA_EVT<br>CDD_DMA_XBAR_FSI1_TX_DMA_EVT<br>CDD_DMA_XBAR_FSI2_TX_DMA_EVT<br>CDD_DMA_XBAR_FSI3_TX_DMA_EVT<br>CDD_DMA_XBAR_SD0_FILT0_DRINT<br>CDD_DMA_XBAR_SD0_FILT1_DRINT<br>CDD_DMA_XBAR_SD0_FILT2_DRINT<br>CDD_DMA_XBAR_SD0_FILT3_DRINT<br>CDD_DMA_XBAR_SD1_FILT0_DRINT<br>CDD_DMA_XBAR_SD1_FILT1_DRINT<br>CDD_DMA_XBAR_SD1_FILT2_DRINT<br>CDD_DMA_XBAR_SD1_FILT3_DRINT<br>CDD_DMA_XBAR_ECAP0_DMA_INT<br>CDD_DMA_XBAR_ECAP1_DMA_INT<br>CDD_DMA_XBAR_ECAP2_DMA_INT<br>CDD_DMA_XBAR_ECAP3_DMA_INT<br>CDD_DMA_XBAR_ECAP4_DMA_INT<br>CDD_DMA_XBAR_ECAP5_DMA_INT<br>CDD_DMA_XBAR_ECAP6_DMA_INT<br>CDD_DMA_XBAR_ECAP7_DMA_INT<br>CDD_DMA_XBAR_ECAP8_DMA_INT<br>CDD_DMA_XBAR_ECAP9_DMA_INT<br>CDD_DMA_XBAR_ADCR0_INT1<br>CDD_DMA_XBAR_ADCR0_INT2<br>CDD_DMA_XBAR_ADCR0_INT3<br>CDD_DMA_XBAR_ADCR0_INT4<br>CDD_DMA_XBAR_ADCR0_EVTINT<br>CDD_DMA_XBAR_ADCR1_INT1<br>CDD_DMA_XBAR_ADCR1_INT2<br>CDD_DMA_XBAR_ADCR1_INT3<br>CDD_DMA_XBAR_ADCR1_INT4<br>CDD_DMA_XBAR_ADCR1_EVTINT |
+
+#### CddDmaGeneral
+General configuration settings for the Complex Device Driver
+
+##### CddDmaVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaVersionInfoApi |
+| **Description** | Switches the Cdd_Dma_GetVersionInfo function ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CddDmaDeinitApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaDeinitApi |
+| **Description** | Switches the Cdd_Dma_DeInit function ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CddDmaDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaDevErrorDetect |
+| **Description** | Switches the Development Error Detection and Notification ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CddDmaRegisterReadBackApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaRegisterReadBackApi |
+| **Description** | Switches the Cdd_Dma_RegisterReadback function ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+### Examples
+
+#### Overview
+
+Below 4 modes shall be verified using the examples
+
+* Chaining Mode
+* Interrupt Mode
+* Linking Mode
+* Polling Mode
+
+1. Initialize the Timer using AppUtils_TimerInit()
+2. Initialize the MCU for Clock configuration using Mcu_Init() and port using Port_Init()
+3. Initialize the interrupt using Cdd_Dma_InterruptConfig() (Not applicable for Polling mode)
+4. Start the timer using API start_timer()
+5. Get the DMA version using Cdd_Dma_GetVersionInfo()
+6. Initialize the DMA using Cdd_Dma_Init()
+7. Set the DMA parameters using Cdd_Dma_ParamSet()
+8. For Chaining Mode example,
+   * Configure the Chaining Option
+   * Link multiple DMA channels using Cdd_Dma_ChainChannel()
+9. For Linking Mode example, link the DMA channels using Cdd_Dma_LinkChannel()
+10. Register the callback function to be called once the transfer completed using Cdd_Dma_CbkRegister() (Not applicable for Polling Mode)
+11. Enable the transfer region of the DMA transfer using API Cdd_Dma_EnableTransferRegion()
+12. For Polling Mode example, status of the transfer is polled using API Cdd_Dma_GetStatus()
+13. Verify the transfer status
+
+#### Hardware Software Setup and Tools
+
+None
+
+#### Steps to build and run example
+
+1. Cdd_Dma example applications demonstrates the MCAL CDD_DMA driver features, which is referred from folder <MCAL_ROOT>/examples/Dma.
+2. There are 4 example applications provided to verify all the features of the module.
+3. These applications can be built from the build folder by giving :
+
+
+   "gmake –s dma_pollingmode_app PLATFORM=am263px" for polling mode example
+
+   "gmake –s dma_interruptmode_app PLATFORM=am263px" for interrupt mode example
+
+   "gmake –s dma_linkingmode_app PLATFORM=am263px" for linking mode example
+
+   "gmake –s dma_chainingmode_app PLATFORM=am263px" for chaining mode example
+
+   - In case of linking mode example multiple params are configured within the channel and once the execution gets completed with first paramSet then automatically second paramSet data will be loaded.
+
+   - In case of chaining mode example multiple channels are chained together so in this case once the trigger for first channel happen for transmission it will internally trigger for second channel as well.So in this way with less number of trigger transmission happens.
+
+4. Once the build is completed we get a binary file,which is loaded in our controller and executed.
+
+#### Example Logs
+
+```
+
+=================================
+DmaInterruptModeApp: Sample Application - STARTS !!!
+  
+DMA_CHAININGMODE_APP: DMA MCAL Version Info
+---------------------
+DMA_CHAININGMODE_APP: Vendor ID: 44
+DMA_CHAININGMODE_APP: Module ID: 255
+DMA_CHAININGMODE_APP: SW Major Version: 10
+DMA_CHAININGMODE_APP: SW Minor Version: 0
+DMA_CHAININGMODE_APP: SW Patch Version: 0
+ 
+DMA_CHAININGMODE_APP: Variant - Pre Compile being used !!!
+                                                           
+DMA_CHAININGMODE_APP: All tests have passed
+
+===============================================
+DmaInterruptModeApp: Sample Application - STARTS !!!
+  
+DMA_INTERRUPTMODE_APP: DMA MCAL Version Info
+---------------------
+DMA_INTERRUPTMODE_APP: Vendor ID: 44
+DMA_INTERRUPTMODE_APP: Module ID: 255
+DMA_INTERRUPTMODE_APP: SW Major Version: 10
+DMA_INTERRUPTMODE_APP: SW Minor Version: 0
+DMA_INTERRUPTMODE_APP: SW Patch Version: 0
+ 
+DMA_INTERRUPTMODE_APP: Variant - Pre Compile being used !!!
+                                                            
+DMA_INTERRUPTMODE_APP: All tests have passed
+
+========================================
+DmaInterruptModeApp: Sample Application - STARTS !!!
+  
+DMA_LINKINGMODE_APP: DMA MCAL Version Info
+---------------------
+DMA_LINKINGMODE_APP: Vendor ID: 44
+DMA_LINKINGMODE_APP: Module ID: 255
+DMA_LINKINGMODE_APP: SW Major Version: 10
+DMA_LINKINGMODE_APP: SW Minor Version: 0
+DMA_LINKINGMODE_APP: SW Patch Version: 0
+ 
+DMA_LINKINGMODE_APP: Variant - Pre Compile being used !!!
+                                                          
+DMA_LINKINGMODE_APP: All tests have passed
+
+==============================================
+DmaPollingModeApp: Sample Application - STARTS !!!
+  
+DMA_POLLINGMODE_APP: DMA MCAL Version Info
+---------------------
+DMA_POLLINGMODE_APP: Vendor ID: 44
+DMA_POLLINGMODE_APP: Module ID: 255
+DMA_POLLINGMODE_APP: SW Major Version: 10
+DMA_POLLINGMODE_APP: SW Minor Version: 0
+DMA_POLLINGMODE_APP: SW Patch Version: 0
+ 
+DMA_POLLINGMODE_APP: Variant - Pre Compile being used !!!
+                                                          
+DMA_POLLINGMODE_APP: All tests have passed
+
+=================================================
+
+```
+
+#### File Structure
+
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Dma**\
+ ┃ ┃ ┃ ┣ 📂**Dma_ChainingMode**\
+ ┃ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaChainingModeApp.c** : *Contains DMA test example.*\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaChainingModeApp.h** : *Contains DMA test example header.*\
+ ┃ ┃ ┃ ┃ ┣ 📜Makefile\
+ ┃ ┃ ┃ ┣ 📂**Dma_InterruptMode**\
+ ┃ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaInterruptModeApp.c** : *Contains DMA test example.*\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaInterruptModeApp.h** : *Contains DMA test example header.*\
+ ┃ ┃ ┃ ┃ ┣ 📜Makefile\
+ ┃ ┃ ┃ ┣ 📂**Dma_LinkingMode**\
+ ┃ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaLinkingModeApp.c** : *Contains DMA test example.*\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaLinkingModeApp.h** : *Contains DMA test example header.*\
+ ┃ ┃ ┃ ┃ ┣ 📜Makefile\
+ ┃ ┃ ┃ ┣ 📂**Dma_PollingMode**\
+ ┃ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaPollingModeApp.c** : *Contains DMA test example.*\
+ ┃ ┃ ┃ ┃ ┣ 📜**DmaPollingModeApp.h** : *Contains DMA test example header.*\
+ ┃ ┃ ┃ ┃ ┣ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Dma_Demo_Cfg**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_Cfg.h** : *Contains the Precompile switches, Symbolic names.*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Cdd_Dma_Cfg.c** : *Contains all Pre-Compile Configured parameters*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┣ 📜README.txt
+
+### FAQ's
+
+None
+
+### References
+
+[Technical Reference Manual](https://www.ti.com/product/AM263P4#tech-docs)

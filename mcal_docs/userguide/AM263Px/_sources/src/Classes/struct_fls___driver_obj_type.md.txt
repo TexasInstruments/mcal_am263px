@@ -1,0 +1,67 @@
+---
+orphan: true
+---
+
+---
+title: Fls_DriverObjType
+
+---
+
+# Fls_DriverObjType
+
+
+
+ [More...](#detailed-description)
+
+
+`#include <Fls_Brd_Nor.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | Fls_Mode |  |
+|  [Fls_JobEndNotifyType](../Files/_fls___cbk_8h.md#typedef-fls_jobendnotifytype) | Fls_JobEndNotification |  |
+|  [Fls_JobErrorNotifyType](../Files/_fls___cbk_8h.md#typedef-fls_joberrornotifytype) | Fls_JobErrorNotification |  |
+|  uint32 | maxReadNormalMode |  |
+|  uint32 | maxWriteNormalMode |  |
+|  [Fls_SectorType](../Classes/struct_fls___sector_type.md)[FLS_NUMBER_OF_SECTOR_CFG] | sectorList |  |
+|  MemIf_StatusType | status |  |
+|  MemIf_JobResultType | jobResultType |  |
+|  Fls_JobType | jobType |  |
+|  [Fls_AddressType](../Modules/group___f_l_s.md#typedef-fls_addresstype) | flashAddr |  |
+|  uint8 * | ramAddr |  |
+|  [Fls_LengthType](../Modules/group___f_l_s.md#typedef-fls_lengthtype) | length |  |
+|  MemIf_ModeType | mode |  |
+|  uint32 | jobChunkSize |  |
+|  uint32 | offset |  |
+|  uint32 | actual |  |
+|  uint32 | postBlankCheckFlashaddr |  |
+|  uint32 | prevFlashaddr |  |
+|  [QSPI_Handle](../Files/_v0_2_fls___qspi_8h.md#typedef-qspi_handle) | spiHandle |  |
+|  [Fls_LengthType](../Modules/group___f_l_s.md#typedef-fls_lengthtype) | transferred |  |
+|  uint32 | flsBaudRateDiv |  |
+|  [Fls_EraseType](../Modules/group___f_l_s.md#enum-fls_erasetype) | typeoferase |  |
+|  uint32 | flsDmaStage |  |
+|  boolean | flsEdmaReadEnabled |  |
+|  boolean | flsDmaConfigError |  |
+|  volatile uint32 | flsDmaLength |  |
+|  volatile uint8 * | flsDmaDstBuf |  |
+|  uint8 * | compareAddr |  |
+|  [OSPI_Handle](../Files/_fls___ospi_8h.md#typedef-ospi_handle) | spiHandle |  |
+|  uint32 | baudRateDiv |  |
+|  uint32 | chipSelect |  |
+|  uint32 | decChipSelect |  |
+|  uint32 | dmaEnable |  |
+|  uint32 | frmFmt |  |
+
+## Detailed Description
+
+```cpp
+struct Fls_DriverObjType;
+```
+
+
+\breif FLS Driver Object, global information used by module. 
+
+

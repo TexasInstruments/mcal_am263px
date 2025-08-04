@@ -1,0 +1,74 @@
+---
+title: Configuration
+
+---
+
+# CDD_FLC_CFG
+
+ [More...](#detailed-description)
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype)** | Specifies the HW identification (ID) for a FLC unit.  | 
+|enum| **[Cdd_Flc_RegionId](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_regionid)** | FLC Region ID.  | 
+
+
+
+### enum Cdd_Flc_HwUnitType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CDD_FLC_RL2_R5SS0_CORE0 | 0U|  FLC instance present in R5SS0 CORE0 RL2  |
+| CDD_FLC_RL2_R5SS0_CORE1 | 1U|  FLC instance present in R5SS0 CORE1 RL2  |
+| CDD_FLC_RL2_R5SS1_CORE0 | 2U|  FLC instance present in R5SS1 CORE0 RL2  |
+| CDD_FLC_RL2_R5SS1_CORE1 | 3U|  FLC instance present in R5SS1 CORE1 RL2  |
+| CDD_FLC_RL2_MAX | 4U|  Maximum supported HW units for the SOC  |
+
+
+
+
+**Brief**: 
+Specifies the HW identification (ID) for a FLC unit. 
+
+
+
+### enum Cdd_Flc_RegionId
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CDD_FLC_REGION_ID_0 | |  FLC Region 0 ID  |
+| CDD_FLC_REGION_ID_1 | |  FLC Region 1 ID  |
+| CDD_FLC_REGION_ID_2 | |  FLC Region 2 ID  |
+| CDD_FLC_REGION_ID_3 | |  FLC Region 3 ID  |
+| CDD_FLC_REGION_ID_MAX | |  Total FLC Regions  |
+
+
+
+
+**Brief**: 
+FLC Region ID. 
+
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_FLC_CFG_MAJOR_VERSION   | CDD FLC configuration Major Version.  |
+| CDD_FLC_CFG_MINOR_VERSION   | CDD FLC configuration Minor Version.  |
+| CDD_FLC_CFG_PATCH_VERSION   | CDD FLC configuration Patch Version.  |
+| CDD_FLC_DEV_ERROR_DETECT   | Enable/Disable CDD FLC dev detect error.  |
+| CDD_FLC_VERSION_INFO_API   | Version info Api macro.  |
+
+## Detailed Description
+
+
+This files defines CDD FLC configuration structures 
+
+
+
+

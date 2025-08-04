@@ -1,0 +1,38 @@
+---
+orphan: true
+---
+
+---
+title: Spi_RegisterReadbackType
+summary: SPI register readback structure. 
+
+---
+
+# Spi_RegisterReadbackType
+
+
+
+SPI register readback structure. 
+
+
+`#include <Spi_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | mcspiHlRev |  IP revision identifier.  |
+|  uint32 | mcspiHlHwInfo |  Information about the IP module's hardware configuration.  |
+|  uint32 | mcspiHlSysConfig |  Clock management configuration.  |
+|  uint32 | mcspiRev |  IP revision number.  |
+|  uint32 | mcspiSysStatus |  IP status information.  |
+|  uint32 | mcspiSyst |  System config.  |
+|  uint32 | mcspiModulctrl |  module ctrl register MCSPI_MODULCTRL  |
+|  uint32 | mcspiSysConfig |  sysconfig register MCSPI_SYSCONFIG  |
+|  uint32 | mcspiCh0config |  module Channel config Register MCSPI_CHCONF_0  |
+|  uint32 | mcspiCh1config |  module Channel config Register MCSPI_CHCONF_1  |
+|  uint32 | mcspiCh2config |  module Channel config Register MCSPI_CHCONF_2  |
+|  uint32 | mcspiCh3config |  module Channel config Register MCSPI_CHCONF_3  |
+|  uint32 | mcspiIrqenable |  Irqenable MCSPI_IRQENABLE.  |
+
+

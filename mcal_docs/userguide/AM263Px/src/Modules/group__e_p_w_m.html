@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ePWM &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_guide.html">5. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ePWM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="epwm">
+<h1>ePWM<a class="headerlink" href="#epwm" title="Link to this heading"></a></h1>
+<p>Enhanced Pulse Width Modulator.  <a class="reference internal" href="#detailed-description">More…</a></p>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PWM_Handle</p></td>
+<td><p><strong><a class="reference internal" href="#function-init-epwm"><span class="std std-ref">Init_EPWM</span></a></strong>(Pwm_ChannelType pwmAddrIdx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setclkdiv"><span class="std std-ref">Pwm_SetCLKDIV</span></a></strong>(PWM_Obj * etpwm, uint32 clkdiv)</p></td>
+<td><p>Sets prescale value of timebase counter.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-sethspclkdiv"><span class="std std-ref">Pwm_SetHSPCLKDIV</span></a></strong>(PWM_Obj * etpwm, uint32 hspclkdiv)</p></td>
+<td><p>Sets prescale value of timebase counter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setactionqualzeropwma"><span class="std std-ref">PWM_SetActionQualZeroPwmA</span></a></strong>(PWM_Obj * etpwm, const <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmactionqual_t"><span class="xref myst">etpwmActionQual_t</span></a> actionQual, uint16 pol)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setactionqualcntupcmpapwma"><span class="std std-ref">PWM_SetActionQualCntUpCmpAPwmA</span></a></strong>(PWM_Obj * etpwm, const <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmactionqual_t"><span class="xref myst">etpwmActionQual_t</span></a> actionQual)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setactionqualcntdowncmpapwma"><span class="std std-ref">PWM_SetActionQualCntDownCmpAPwmA</span></a></strong>(PWM_Obj * etpwm, const <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmactionqual_t"><span class="xref myst">etpwmActionQual_t</span></a> actionQual)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setactionqualcontswforce-pwma"><span class="std std-ref">PWM_SetActionQualContSWForce_PwmA</span></a></strong>(PWM_Obj * etpwm, const ActionQualContSWForce_e actionQualContSWForce)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-enablecmpashadowmode"><span class="std std-ref">PWM_EnableCmpAShadowMode</span></a></strong>(PWM_Obj * etpwm, PWM_ShadowMode_e shdwmode)</p></td>
+<td><p>Enable shadow mode for Compare A register.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setloadmodecmpa"><span class="std std-ref">PWM_SetLoadModeCmpA</span></a></strong>(PWM_Obj * etpwm, const <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmloadmode_t"><span class="xref myst">etpwmLoadMode_t</span></a> loadMode)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-enableinterrupt"><span class="std std-ref">PWM_EnableInterrupt</span></a></strong>(PWM_Obj * etpwm, <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmeventsrc_t"><span class="xref myst">etpwmEventSrc_t</span></a> eventsource, <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmeventperiod_t"><span class="xref myst">etpwmEventPeriod_t</span></a> eventperiod)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setcmpa"><span class="std std-ref">PWM_SetCmpA</span></a></strong>(PWM_Obj * etpwm, uint16 value)</p></td>
+<td><p>Set the Compare A value.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-settimebaseperiod"><span class="std std-ref">Pwm_SetTimebasePeriod</span></a></strong>(PWM_Obj * etpwm, uint16 period)</p></td>
+<td><p>Sets period of timebase counter.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint16</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-getactionqualcontswforce-pwma"><span class="std std-ref">PWM_GetActionQualContSWForce_PwmA</span></a></strong>(const PWM_Obj * etpwm)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PWM_Handle</p></td>
+<td><p><strong><a class="reference internal" href="#function-getpwmchannelobj"><span class="std std-ref">GetPwmChannelObj</span></a></strong>(Pwm_ChannelType channel)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-disableint"><span class="std std-ref">PWM_DisableInt</span></a></strong>(PWM_Obj * etpwm)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-cleareventflag"><span class="std std-ref">PWM_ClearEventFlag</span></a></strong>(PWM_Obj * etpwm, <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmevent_t"><span class="xref myst">etpwmEvent_t</span></a> events)</p></td>
+<td><p>Clear event status flag.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint16</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-gettimebaseperiod"><span class="std std-ref">Pwm_GetTimebasePeriod</span></a></strong>(const PWM_Obj * etpwm)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setintmode"><span class="std std-ref">PWM_SetIntMode</span></a></strong>(PWM_Obj * etpwm, const <a class="reference internal" href="#../Files/_v1_2_pwm___priv_8h.md#enum-etpwmeventsrc_t"><span class="xref myst">etpwmEventSrc_t</span></a> intMode)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-initpwm"><span class="std std-ref">InitPwm</span></a></strong>(PWM_Obj * pwmHnd)</p></td>
+<td><p>Initializes the eTPWM Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-enintr"><span class="std std-ref">Pwm_EnIntr</span></a></strong>(uint8 channel)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-notifysetintmode"><span class="std std-ref">PWM_NotifySetIntMode</span></a></strong>(Pwm_ChannelType Channel, <a class="reference internal" href="group___p_w_m.html#enum-pwm-edgenotificationtype"><span class="std std-ref">Pwm_EdgeNotificationType</span></a> Notification)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-hwregisterreadback"><span class="std std-ref">Pwm_HwRegisterReadback</span></a></strong>(<a class="reference internal" href="../Classes/struct_pwm___register_readback_type.html"><span class="std std-doc">Pwm_RegisterReadbackType</span></a> * RegRbPtr, Pwm_ChannelType Channel)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setprdcmpacq"><span class="std std-ref">Pwm_SetPrdCmpAcq</span></a></strong>(Pwm_ChannelType hwChannel, uint32 hwPeriod, uint32 Dutycycle_t, uint8 idx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-handledutyboundry"><span class="std std-ref">Pwm_HandleDutyBoundry</span></a></strong>(uint16 configDuty, Pwm_ChannelType hwChannel, uint8 idx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setdutycycle-internal"><span class="std std-ref">Pwm_SetDutyCycle_Internal</span></a></strong>(Pwm_ChannelType Channel, uint16 DutyCycle)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systeminit"><span class="std std-ref">Pwm_SystemInit</span></a></strong>(const <a class="reference internal" href="../Classes/struct_pwm___config_type.html"><span class="std std-doc">Pwm_ConfigType</span></a> * CfgPtr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systemdeinit"><span class="std std-ref">Pwm_SystemDeInit</span></a></strong>(void )</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systemsetoutputtoidle"><span class="std std-ref">Pwm_SystemSetOutputToIdle</span></a></strong>(Pwm_ChannelType ChannelNumber)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systemenablenotification"><span class="std std-ref">Pwm_SystemEnableNotification</span></a></strong>(Pwm_ChannelType ChannelNumber, <a class="reference internal" href="group___p_w_m.html#enum-pwm-edgenotificationtype"><span class="std std-ref">Pwm_EdgeNotificationType</span></a> Notification)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systemdisablenotification"><span class="std std-ref">Pwm_SystemDisableNotification</span></a></strong>(Pwm_ChannelType ChannelNumber)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systemsetperiodandduty"><span class="std std-ref">Pwm_SystemSetPeriodAndDuty</span></a></strong>(Pwm_ChannelType ChannelNumber, Pwm_PeriodType Period, uint16 DutyCycle)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systemsetdutycycle-internal"><span class="std std-ref">Pwm_SystemSetDutyCycle_Internal</span></a></strong>(Pwm_ChannelType ChannelNumber, uint16 DutyCycle)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setdutycycle-deterror"><span class="std std-ref">Pwm_SetDutyCycle_Deterror</span></a></strong>(Pwm_ChannelType ChannelNumber, uint16 DutyCycle)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setperiodandduty-deterror"><span class="std std-ref">Pwm_SetPeriodAndDuty_Deterror</span></a></strong>(Pwm_ChannelType ChannelNumber, uint16 DutyCycle)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-enablenotify-deterror"><span class="std std-ref">Pwm_EnableNotify_Deterror</span></a></strong>(Pwm_ChannelType ChannelNumber)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-disablenotify-deterror"><span class="std std-ref">Pwm_DisableNotify_Deterror</span></a></strong>(Pwm_ChannelType ChannelNumber)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-setoutputtoidle-deterror"><span class="std std-ref">Pwm_SetOutputToIdle_Deterror</span></a></strong>(Pwm_ChannelType ChannelNumber)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-hwregreadback-deterror"><span class="std std-ref">Pwm_HwRegReadback_Deterror</span></a></strong>(Pwm_ChannelType ChannelNumber, <a class="reference internal" href="../Classes/struct_pwm___register_readback_type.html"><span class="std std-doc">Pwm_RegisterReadbackType</span></a> * RegRbPtr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-deinit-deterror"><span class="std std-ref">Pwm_Deinit_Deterror</span></a></strong>(void )</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-getversioninfo-deterror"><span class="std std-ref">Pwm_GetVersionInfo_Deterror</span></a></strong>(Std_VersionInfoType * VersionInfoPtr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-init-deterror"><span class="std std-ref">Pwm_Init_Deterror</span></a></strong>(const <a class="reference internal" href="../Classes/struct_pwm___config_type.html"><span class="std std-doc">Pwm_ConfigType</span></a> * ConfigPtr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="group___p_w_m.html#enum-pwm-outputstatetype"><span class="std std-ref">Pwm_OutputStateType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-systemgetoutputstate"><span class="std std-ref">Pwm_SystemGetOutputState</span></a></strong>(Pwm_ChannelType ChannelNumber)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-getoutputstate-deterror"><span class="std std-ref">Pwm_GetOutputstate_Deterror</span></a></strong>(Pwm_ChannelType ChannelNumber)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-init-epwm">
+<h3>function Init_EPWM<a class="headerlink" href="#function-init-epwm" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PWM_Handle</span><span class="w"> </span><span class="n">Init_EPWM</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">pwmAddrIdx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setclkdiv">
+<h3>function Pwm_SetCLKDIV<a class="headerlink" href="#function-pwm-setclkdiv" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetCLKDIV</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">clkdiv</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Sets prescale value of timebase counter.</p>
+<p>This function sets the Time-base Clock Prescale Bits of timebase counter</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>etpwm</strong> The pulse width modulation (ETPWM) object handle (etpwmREG1..3)</p></li>
+<li><p><strong>clkdiv</strong> These bits determine the time-base clock prescale value</p></li>
+</ul>
+</section>
+<section id="function-pwm-sethspclkdiv">
+<h3>function Pwm_SetHSPCLKDIV<a class="headerlink" href="#function-pwm-sethspclkdiv" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetHSPCLKDIV</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">hspclkdiv</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Sets prescale value of timebase counter.</p>
+<p>This function sets the High Speed Time-base Clock Prescale Bits of timebase counter</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>etpwm</strong> The pulse width modulation (ETPWM) object handle (etpwmREG1..3)</p></li>
+<li><p><strong>hsclkdiv</strong> These bits determine the time-base clock prescale value</p></li>
+</ul>
+</section>
+<section id="function-pwm-setactionqualzeropwma">
+<h3>function PWM_SetActionQualZeroPwmA<a class="headerlink" href="#function-pwm-setactionqualzeropwma" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_SetActionQualZeroPwmA</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">etpwmActionQual_t</span><span class="w"> </span><span class="n">actionQual</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">pol</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setactionqualcntupcmpapwma">
+<h3>function PWM_SetActionQualCntUpCmpAPwmA<a class="headerlink" href="#function-pwm-setactionqualcntupcmpapwma" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_SetActionQualCntUpCmpAPwmA</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">etpwmActionQual_t</span><span class="w"> </span><span class="n">actionQual</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setactionqualcntdowncmpapwma">
+<h3>function PWM_SetActionQualCntDownCmpAPwmA<a class="headerlink" href="#function-pwm-setactionqualcntdowncmpapwma" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_SetActionQualCntDownCmpAPwmA</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">etpwmActionQual_t</span><span class="w"> </span><span class="n">actionQual</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setactionqualcontswforce-pwma">
+<h3>function PWM_SetActionQualContSWForce_PwmA<a class="headerlink" href="#function-pwm-setactionqualcontswforce-pwma" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_SetActionQualContSWForce_PwmA</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">ActionQualContSWForce_e</span><span class="w"> </span><span class="n">actionQualContSWForce</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-enablecmpashadowmode">
+<h3>function PWM_EnableCmpAShadowMode<a class="headerlink" href="#function-pwm-enablecmpashadowmode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_EnableCmpAShadowMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="n">PWM_ShadowMode_e</span><span class="w"> </span><span class="n">shdwmode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enable shadow mode for Compare A register.</p>
+<p>This function enables shadow mode for Compare A register</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>etpwm</strong> The pulse width modulation (ETPWM) object handle (etpwmREG1..3)</p></li>
+<li><p><strong>shdwmode</strong> Load From Shadow Select Mode</p></li>
+<li><p>ShadowMode_Shadow : Load on CTR = Zero</p></li>
+<li><p>ShadowMode_Immediate : Load on CTR = 1</p></li>
+</ul>
+</section>
+<section id="function-pwm-setloadmodecmpa">
+<h3>function PWM_SetLoadModeCmpA<a class="headerlink" href="#function-pwm-setloadmodecmpa" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_SetLoadModeCmpA</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">etpwmLoadMode_t</span><span class="w"> </span><span class="n">loadMode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-enableinterrupt">
+<h3>function PWM_EnableInterrupt<a class="headerlink" href="#function-pwm-enableinterrupt" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_EnableInterrupt</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="n">etpwmEventSrc_t</span><span class="w"> </span><span class="n">eventsource</span><span class="p">,</span>
+<span class="w">    </span><span class="n">etpwmEventPeriod_t</span><span class="w"> </span><span class="n">eventperiod</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setcmpa">
+<h3>function PWM_SetCmpA<a class="headerlink" href="#function-pwm-setcmpa" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_SetCmpA</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">value</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Set the Compare A value.</p>
+<p>This function sets the compare A value</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>etpwm</strong> The pulse width modulation (ETPWM) object handle (etpwmREG1..3)</p></li>
+<li><p><strong>value</strong> 16-bit Compare A value</p></li>
+</ul>
+</section>
+<section id="function-pwm-settimebaseperiod">
+<h3>function Pwm_SetTimebasePeriod<a class="headerlink" href="#function-pwm-settimebaseperiod" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetTimebasePeriod</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">period</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Sets period of timebase counter.</p>
+<p>This function sets period of timebase counter</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>etpwm</strong> The pulse width modulation (ETPWM) object handle (etpwmREG1..3)</p></li>
+<li><p><strong>period</strong> 16-bit Time-base period</p></li>
+</ul>
+</section>
+<section id="function-pwm-getactionqualcontswforce-pwma">
+<h3>function PWM_GetActionQualContSWForce_PwmA<a class="headerlink" href="#function-pwm-getactionqualcontswforce-pwma" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">PWM_GetActionQualContSWForce_PwmA</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-getpwmchannelobj">
+<h3>function GetPwmChannelObj<a class="headerlink" href="#function-getpwmchannelobj" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">PWM_Handle</span><span class="w"> </span><span class="n">GetPwmChannelObj</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-disableint">
+<h3>function PWM_DisableInt<a class="headerlink" href="#function-pwm-disableint" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_DisableInt</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-cleareventflag">
+<h3>function PWM_ClearEventFlag<a class="headerlink" href="#function-pwm-cleareventflag" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_ClearEventFlag</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="n">etpwmEvent_t</span><span class="w"> </span><span class="n">events</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Clear event status flag.</p>
+<p>This function clears the event status flags</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>etpwm</strong> The pulse width modulation (ETPWM) object handle (etpwmREG1..3)</p></li>
+<li><p><strong>events</strong> status flag (flags can be ORed)</p></li>
+<li><p>Event_Interrupt</p></li>
+<li><p>Event_SOCA</p></li>
+<li><p>Event_SOCB</p></li>
+</ul>
+</section>
+<section id="function-pwm-gettimebaseperiod">
+<h3>function Pwm_GetTimebasePeriod<a class="headerlink" href="#function-pwm-gettimebaseperiod" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Pwm_GetTimebasePeriod</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setintmode">
+<h3>function PWM_SetIntMode<a class="headerlink" href="#function-pwm-setintmode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_SetIntMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">etpwm</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">etpwmEventSrc_t</span><span class="w"> </span><span class="n">intMode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-initpwm">
+<h3>function InitPwm<a class="headerlink" href="#function-initpwm" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">InitPwm</span><span class="p">(</span>
+<span class="w">    </span><span class="n">PWM_Obj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pwmHnd</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Initializes the eTPWM Driver.</p>
+<p>This function initializes the eTPWM module.</p>
+<p><strong>Note</strong>: This function sets the time-base counters in up-count mode. Application can configure the module in a different mode using other functions in this driver.(Sample code provided in the examples folder) In that case, application need not call InitPwm function. pinmuxInit needs to be called before this function.</p>
+<p><strong>initialize****ETPWM1</strong></p>
+<ul class="simple">
+<li><p>Sets high speed time-base clock prescale bits</p></li>
+<li><p>Sets time-base clock prescale bits</p></li>
+<li><p>Mode setting for Dead Band Module -Select the input mode for Dead Band Module -Select the output mode for Dead Band Module -Select Polarity of the output PWMs</p></li>
+<li><p>Set the rising edge delay</p></li>
+<li><p>Set the falling edge delay</p></li>
+<li><p>Enable the chopper module for ETPWMx -Sets the One shot pulse width in a chopper modulated wave -Sets the dutycycle for the subsequent pulse train -Sets the period for the subsequent pulse train</p></li>
+<li><p>Set trip source enable</p></li>
+<li><p>Enable/Disable TZ1 as a one-shot trip source</p></li>
+<li><p>Enable/Disable TZ2 as a one-shot trip source</p></li>
+<li><p>Enable/Disable TZ3 as a one-shot trip source</p></li>
+<li><p>Enable/Disable TZ4 as a one-shot trip source</p></li>
+<li><p>Enable/Disable TZ5 as a one-shot trip source</p></li>
+<li><p>Enable/Disable TZ6 as a one-shot trip source</p></li>
+<li><p>Enable/Disable TZ1 as a CBC trip source</p></li>
+<li><p>Enable/Disable TZ2 as a CBC trip source</p></li>
+<li><p>Enable/Disable TZ3 as a CBC trip source</p></li>
+<li><p>Enable/Disable TZ4 as a CBC trip source</p></li>
+<li><p>Enable/Disable TZ5 as a CBC trip source</p></li>
+<li><p>Enable/Disable TZ6 as a CBC trip source</p></li>
+<li><p>Set interrupt enable</p></li>
+<li><p>Enable/Disable Digital Comparator Output A Event 1</p></li>
+<li><p>Enable/Disable Digital Comparator Output A Event 2</p></li>
+<li><p>Enable/Disable Digital Comparator Output A Event 1</p></li>
+<li><p>Enable/Disable Digital Comparator Output A Event 2</p></li>
+<li><p>Enable/Disable one-shot interrupt generation</p></li>
+<li><p>Enable/Disable cycle-by-cycle interrupt generation</p></li>
+<li><p>Sets up the event for interrupt</p></li>
+<li><p>Setup the frequency of the interrupt generation</p></li>
+<li><p>Sets up the ADC SOC interrupt</p></li>
+<li><p>Sets up the ADC SOC period</p></li>
+</ul>
+<p><strong>initialize****ETPWM3</strong></p>
+</section>
+<section id="function-pwm-enintr">
+<h3>function Pwm_EnIntr<a class="headerlink" href="#function-pwm-enintr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_EnIntr</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-notifysetintmode">
+<h3>function PWM_NotifySetIntMode<a class="headerlink" href="#function-pwm-notifysetintmode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">PWM_NotifySetIntMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Pwm_EdgeNotificationType</span><span class="w"> </span><span class="n">Notification</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-hwregisterreadback">
+<h3>function Pwm_HwRegisterReadback<a class="headerlink" href="#function-pwm-hwregisterreadback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_HwRegisterReadback</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setprdcmpacq">
+<h3>function Pwm_SetPrdCmpAcq<a class="headerlink" href="#function-pwm-setprdcmpacq" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetPrdCmpAcq</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">hwChannel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">hwPeriod</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Dutycycle_t</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">idx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-handledutyboundry">
+<h3>function Pwm_HandleDutyBoundry<a class="headerlink" href="#function-pwm-handledutyboundry" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_HandleDutyBoundry</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">configDuty</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">hwChannel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">idx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setdutycycle-internal">
+<h3>function Pwm_SetDutyCycle_Internal<a class="headerlink" href="#function-pwm-setdutycycle-internal" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetDutyCycle_Internal</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DutyCycle</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systeminit">
+<h3>function Pwm_SystemInit<a class="headerlink" href="#function-pwm-systeminit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SystemInit</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Pwm_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">CfgPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systemdeinit">
+<h3>function Pwm_SystemDeInit<a class="headerlink" href="#function-pwm-systemdeinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SystemDeInit</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systemsetoutputtoidle">
+<h3>function Pwm_SystemSetOutputToIdle<a class="headerlink" href="#function-pwm-systemsetoutputtoidle" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SystemSetOutputToIdle</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systemenablenotification">
+<h3>function Pwm_SystemEnableNotification<a class="headerlink" href="#function-pwm-systemenablenotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SystemEnableNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Pwm_EdgeNotificationType</span><span class="w"> </span><span class="n">Notification</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systemdisablenotification">
+<h3>function Pwm_SystemDisableNotification<a class="headerlink" href="#function-pwm-systemdisablenotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SystemDisableNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systemsetperiodandduty">
+<h3>function Pwm_SystemSetPeriodAndDuty<a class="headerlink" href="#function-pwm-systemsetperiodandduty" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SystemSetPeriodAndDuty</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Pwm_PeriodType</span><span class="w"> </span><span class="n">Period</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DutyCycle</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systemsetdutycycle-internal">
+<h3>function Pwm_SystemSetDutyCycle_Internal<a class="headerlink" href="#function-pwm-systemsetdutycycle-internal" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SystemSetDutyCycle_Internal</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DutyCycle</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setdutycycle-deterror">
+<h3>function Pwm_SetDutyCycle_Deterror<a class="headerlink" href="#function-pwm-setdutycycle-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_SetDutyCycle_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DutyCycle</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setperiodandduty-deterror">
+<h3>function Pwm_SetPeriodAndDuty_Deterror<a class="headerlink" href="#function-pwm-setperiodandduty-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_SetPeriodAndDuty_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DutyCycle</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-enablenotify-deterror">
+<h3>function Pwm_EnableNotify_Deterror<a class="headerlink" href="#function-pwm-enablenotify-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_EnableNotify_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-disablenotify-deterror">
+<h3>function Pwm_DisableNotify_Deterror<a class="headerlink" href="#function-pwm-disablenotify-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_DisableNotify_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-setoutputtoidle-deterror">
+<h3>function Pwm_SetOutputToIdle_Deterror<a class="headerlink" href="#function-pwm-setoutputtoidle-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_SetOutputToIdle_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-hwregreadback-deterror">
+<h3>function Pwm_HwRegReadback_Deterror<a class="headerlink" href="#function-pwm-hwregreadback-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_HwRegReadback_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Pwm_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-deinit-deterror">
+<h3>function Pwm_Deinit_Deterror<a class="headerlink" href="#function-pwm-deinit-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_Deinit_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-getversioninfo-deterror">
+<h3>function Pwm_GetVersionInfo_Deterror<a class="headerlink" href="#function-pwm-getversioninfo-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_GetVersionInfo_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">VersionInfoPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-init-deterror">
+<h3>function Pwm_Init_Deterror<a class="headerlink" href="#function-pwm-init-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_Init_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Pwm_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-systemgetoutputstate">
+<h3>function Pwm_SystemGetOutputState<a class="headerlink" href="#function-pwm-systemgetoutputstate" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Pwm_OutputStateType</span><span class="w"> </span><span class="n">Pwm_SystemGetOutputState</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-pwm-getoutputstate-deterror">
+<h3>function Pwm_GetOutputstate_Deterror<a class="headerlink" href="#function-pwm-getoutputstate-deterror" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_GetOutputstate_Deterror</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Link to this heading"></a></h2>
+<p><strong>Brief</strong>:
+Enhanced Pulse Width Modulator.</p>
+<p>The enhanced pulse width modulator (ePWM) peripheral is a key element in controlling many of the power electronic systems found in both commercial and industrial equipments. The features supported by the ePWM make it especially suitable for digital motor control.</p>
+<p>Related Files</p>
+<ul class="simple">
+<li><p>HL_reg_etpwm.h</p></li>
+<li><p>HL_etpwm.h</p></li>
+<li><p>HL_etpwm.c</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Aug 04, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.00.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

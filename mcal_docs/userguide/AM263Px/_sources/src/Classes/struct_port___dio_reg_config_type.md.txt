@@ -1,0 +1,29 @@
+---
+orphan: true
+---
+
+---
+title: Port_DioRegConfigType
+summary: Port GPIO initialization configuration. 
+
+---
+
+# Port_DioRegConfigType
+
+
+
+Port GPIO initialization configuration. 
+
+
+`#include <Port_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint8 | Port_DioPinNumber |  GPIO Pin number.  |
+|  [Port_EdgeTrig](../Modules/group___p_o_r_t.md#enum-port_edgetrig) | Port_PinSelectEdgeTrigger |  GPIO Edge Trigger Interrupt (Rising/Falling)  |
+|  [Port_IntrType](../Modules/group___p_o_r_t.md#enum-port_intrtype) | Port_PinSelectInterruptType |  Select GPIO Interrupt Type.  |
+|  [Port_IsrNotificationType](../Modules/group___p_o_r_t.md#typedef-port_isrnotificationtype) | Port_DioInterruptNotification |  ISR callback function pointer.  |
+
+

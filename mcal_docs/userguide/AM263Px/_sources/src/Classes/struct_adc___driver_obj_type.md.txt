@@ -1,0 +1,31 @@
+---
+orphan: true
+---
+
+---
+title: Adc_DriverObjType
+summary: ADC driver object structure. 
+
+---
+
+# Adc_DriverObjType
+
+
+
+ADC driver object structure. 
+
+
+`#include <Adc_Priv.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint8 | maxGroup |  |
+|  uint8 | maxHwUnit |  |
+|  [Adc_GroupObjType](../Classes/struct_adc___group_obj_type.md)[ADC_MAX_GROUP] | groupObj |  |
+|  Adc_HwUnitObjType[ADC_MAX_HW_UNIT] | hwUnitObj |  |
+|  uint8 | maxChannel |  |
+|  [Adc_ChannelObjType](../Classes/struct_adc___channel_obj_type.md)[ADC_NUM_CHANNEL] | channelObj |  |
+
+

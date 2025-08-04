@@ -1,0 +1,166 @@
+---
+title: I2C Configuration Header file
+
+---
+
+# CDD_I2C
+
+ [More...](#detailed-description)
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_I2C_CFG_MAJOR_VERSION   | I2C configuration Major Version.  |
+| CDD_I2C_CFG_MINOR_VERSION   | I2C configuration Minor Version.  |
+| CDD_I2C_CFG_PATCH_VERSION   | I2C configuration Patch Version.  |
+| CDD_I2C_HW_UNIT_0   | HW unit 0.  |
+| CDD_I2C_HW_UNIT_1   | HW unit 1.  |
+| CDD_I2C_HW_UNIT_2   | HW unit 2.  |
+| CDD_I2C_HW_UNIT_3   | HW unit 3.  |
+| CDD_I2C_PRE_COMPILE_VARIANT   | I2C Build Variant. Build variants.(i.e Pre Compile and Post Build)  |
+| CDD_I2C_POLLING_MODE   | Enable/disable Interrupts.  |
+| CDD_I2C_DEV_ERROR_DETECT   | Enable/Disable I2C dev detect error.  |
+| CDD_I2C_VERSION_INFO_API   | Version info API macro.  |
+| CDD_I2C_CANCEL_API   | Check to enable cancel API.  |
+| CDD_I2C_GET_STATUS_API   | Check to enable get driver status API.  |
+| CDD_I2C_REGISTER_READBACK_API   | Check to readback register API.  |
+| CDD_I2C_HW_UNIT_MAX   | Maximum supported HW units for the SOC.  |
+| CDD_I2C_MAX_CH_PER_SEQ   | Maximum channels allowed per sequence.  |
+| CDD_I2C_MAX_CH   | Maximum channels across all sequence/hwunit.  |
+| CDD_I2C_MAX_SEQ   | Maximum sequence across all hwunit.  |
+| CDD_I2C_MAX_HW_UNIT   | Maximum HW unit.  |
+| CDD_I2C_HW_UNIT_0_ACTIVE   |  |
+| CDD_I2C_HW_UNIT_2_ACTIVE   |  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_0   | Symbolic Name for I2c Sequence 0.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_1   | Symbolic Name for I2c Sequence 1.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_2   | Symbolic Name for I2c Sequence 2.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_3   | Symbolic Name for I2c Sequence 3.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_4   | Symbolic Name for I2c Sequence 4.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_0   | Symbolic Name for I2c Channel 0.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_1   | Symbolic Name for I2c Channel 1.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_2   | Symbolic Name for I2c Channel 2.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_3   | Symbolic Name for I2c Channel 3.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_4   | Symbolic Name for I2c Channel 4.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[I2c_Temperature_Data_Write_Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_temperature_data_write_complete)**(void )|  |
+| void | **[I2c_Eeprom_Data_Write_Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_eeprom_data_write_complete)**(void )|  |
+| void | **[I2c_Eeprom_Address_Ptr_Reset](../Modules/group___c_d_d___i2_c.md#function-i2c_eeprom_address_ptr_reset)**(void )|  |
+| void | **[I2c_Temperature_Read_Callback](../Modules/group___c_d_d___i2_c.md#function-i2c_temperature_read_callback)**(void )|  |
+| void | **[I2c_Eeprom_Read_Callback](../Modules/group___c_d_d___i2_c.md#function-i2c_eeprom_read_callback)**(void )|  |
+| void | **[I2c_Temperature_Data_Write_Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_temperature_data_write_fail)**(uint8 errorCode)|  |
+| void | **[I2c_Eeprom_Data_Write_Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_eeprom_data_write_fail)**(uint8 errorCode)|  |
+| void | **[I2c_Eeprom_Address_Ptr_Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_eeprom_address_ptr_fail)**(uint8 errorCode)|  |
+| void | **[I2c_Temperature_Read_Callback_Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_temperature_read_callback_fail)**(uint8 errorCode)|  |
+| void | **[I2c_Eeprom_Read_Callback_Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_eeprom_read_callback_fail)**(uint8 errorCode)|  |
+
+
+
+### function I2c_Temperature_Data_Write_Complete
+
+```
+void I2c_Temperature_Data_Write_Complete(
+    void 
+)
+```
+
+
+### function I2c_Eeprom_Data_Write_Complete
+
+```
+void I2c_Eeprom_Data_Write_Complete(
+    void 
+)
+```
+
+
+### function I2c_Eeprom_Address_Ptr_Reset
+
+```
+void I2c_Eeprom_Address_Ptr_Reset(
+    void 
+)
+```
+
+
+### function I2c_Temperature_Read_Callback
+
+```
+void I2c_Temperature_Read_Callback(
+    void 
+)
+```
+
+
+### function I2c_Eeprom_Read_Callback
+
+```
+void I2c_Eeprom_Read_Callback(
+    void 
+)
+```
+
+
+### function I2c_Temperature_Data_Write_Fail
+
+```
+void I2c_Temperature_Data_Write_Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_Eeprom_Data_Write_Fail
+
+```
+void I2c_Eeprom_Data_Write_Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_Eeprom_Address_Ptr_Fail
+
+```
+void I2c_Eeprom_Address_Ptr_Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_Temperature_Read_Callback_Fail
+
+```
+void I2c_Temperature_Read_Callback_Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_Eeprom_Read_Callback_Fail
+
+```
+void I2c_Eeprom_Read_Callback_Fail(
+    uint8 errorCode
+)
+```
+
+
+
+## Detailed Description
+
+
+This files defines I2C configuration structures 
+
+
+
+

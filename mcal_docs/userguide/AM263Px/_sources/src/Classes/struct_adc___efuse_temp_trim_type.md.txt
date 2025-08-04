@@ -1,0 +1,31 @@
+---
+orphan: true
+---
+
+---
+title: Adc_EfuseTempTrimType
+summary: The Temperature sensor trim parameters structure. 
+
+---
+
+# Adc_EfuseTempTrimType
+
+
+
+The Temperature sensor trim parameters structure. 
+
+
+`#include <Adc_Temp.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint16 | FuseROMVer |  |
+|  uint16 | TrimPrecisionTemp |  |
+|  uint16 | TrimTemp30C |  |
+|  uint16 | TrimTemp125C |  |
+|  uint16[MAX_ADC_TEMP_SENSORS] | TrimIntercept30C |  |
+|  uint16[MAX_ADC_TEMP_SENSORS] | TrimIntercept125C |  |
+
+

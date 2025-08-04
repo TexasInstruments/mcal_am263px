@@ -1,0 +1,34 @@
+---
+orphan: true
+---
+
+---
+title: __attribute__
+
+---
+
+# __attribute__
+
+
+
+
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | opt |  |
+|  uint32 | srcAddr |  Starting byte address of Source For FIFO mode, srcAddr must be a 256-bit aligned address.  |
+|  uint16 | aCnt |  |
+|  uint16 | bCnt |  |
+|  uint32 | destAddr |  Starting byte address of destination For FIFO mode, destAddr must be a 256-bit aligned address. i.e. 5 LSBs should be 0.  |
+|  sint16 | srcBIdx |  |
+|  sint16 | destBIdx |  |
+|  uint16 | linkAddr |  Address for linking (AutoReloading of a PaRAM Set) This must point to a valid aligned 32-byte PaRAM set A value of 0xFFFF means no linking.  |
+|  uint16 | bCntReload |  Reload value of the numArrInFrame (BCNT) Relevant only for A-sync transfers.  |
+|  sint16 | srcCIdx |  |
+|  sint16 | destCIdx |  |
+|  uint16 | cCnt |  |
+|  uint16 | reserved |  |
+
+
