@@ -1,6 +1,7 @@
 export MCAL_PATH?=$(abspath ../)
 export CCS_VERSION?=ccs1281
-export AUTOSAR_VERSION?=431
+export AUTOSAR_VERSION_DOT?=4.3.1
+export AUTOSAR_VERSION?=$(subst .,,$(AUTOSAR_VERSION_DOT))
 
 ifeq ($(OS),Windows_NT)
     export ECHO=@echo
