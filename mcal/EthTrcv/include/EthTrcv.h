@@ -20,8 +20,7 @@
  *
  * \defgroup MCAL_ETHTRCV_API EthTrcv Driver API
  *
- * The EthTrcv Driver MCAL provides low level access to Ethernet transceiver
- * present on AM273 Device platform.<br>
+ * The EthTrcv Driver MCAL provides low level access to Ethernet transceiver<br>
  * The EthTrcv Driver implements a standardized interface specified in the
  * AUTOSAR_SWS_EthernetTransceiverDriver document.<br>
  * The EthTrcv Driver is part of the Communication Stack in the AUTOSAR Basic

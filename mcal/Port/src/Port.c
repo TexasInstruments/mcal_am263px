@@ -208,7 +208,7 @@ static boolean Port_ValidateSetPinDirection(const Port_PinConfigType *pinConfig,
 FUNC(void, PORT_CODE) Port_SetPinDirection(Port_PinType Pin, Port_PinDirectionType Direction)
 {
     const Port_PinConfigType *pinConfig;
-    Port_PinModeType          curMode = (Port_PinModeType)0U;
+    Port_PinModeType          curMode = PORT_PIN_MODE_INVALID;
 #if (STD_ON == PORT_DEV_ERROR_DETECT)
     boolean validConfig = FALSE;
     uint8   errId;
@@ -279,7 +279,7 @@ static void Port_RefreshPortDirection_Internal(void)
 {
     uint16                    idx = 0U;
     const Port_PinConfigType *pinConfig;
-    Port_PinModeType          curMode = (Port_PinModeType)0U;
+    Port_PinModeType          curMode = PORT_PIN_MODE_INVALID;
 
     uint32 gpioPortAddr = 0U;
     for (idx = 0U; idx < Port_DrvObj.NumberOfPortPins; idx++)

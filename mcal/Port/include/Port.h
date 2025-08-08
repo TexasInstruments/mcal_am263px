@@ -198,7 +198,7 @@ extern "C" {
 #define PORT_DIO_INVALID_CH_ID (0xFFU)
 /**   @} */
 
-/** \brief Valid Port width for the AM273x devices */
+/** \brief Valid Port width */
 #define PORT_GPIO_PORT_WIDTH (0x8U)
 
 /**

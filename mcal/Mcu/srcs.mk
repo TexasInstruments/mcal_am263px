@@ -17,7 +17,3 @@ ifeq ($(SOC), $(filter $(SOC), am261))
   SRCDIR += $(MCU_PATH)/V3
   INCDIR += $(MCU_PATH)/V3
 endif
-ifeq ($(SOC), $(filter $(SOC), am273 am2732s))
-  SRCDIR += $(MCU_PATH)/V1
-  INCDIR += $(MCU_PATH)/V1
-endif

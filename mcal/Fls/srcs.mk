@@ -25,10 +25,3 @@ ifeq ($(SOC), $(filter $(SOC), am263px am261))
   endif
   SRCS_COMMON += Fls_Brd_Nor_Ospi.c Fls_Ospi.c Fls_Ospi_Edma.c
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCDIR += $(FLS_PATH)/V1
-  INCDIR += $(FLS_PATH)/V1
-  # For CacheP APIs
-  INCDIR += $(mcal_PATH)/examples/Utils/CLANG/am273
-  SRCS_COMMON += Fls_Brd_Nor_Qspi.c Fls_Qspi.c
-endif

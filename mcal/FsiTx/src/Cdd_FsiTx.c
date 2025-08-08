@@ -142,6 +142,8 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
 #endif
         Cdd_FsiTx_DriverStatus = CDD_FSI_TX_INIT;
     }
+
+    return;
 }
 
 /*******************************************************************************
@@ -179,13 +181,16 @@ Cdd_FsiTx_DeInit(void)
     }
     else
 #endif /* #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT) */
+    {
         /* Deinit the hardware modules */
         for (hwUnitId = 0U; hwUnitId < Cdd_FsiTx_DrvObj.maxHwUnit; hwUnitId++)
         {
             (void)CddFsiTx_hwUnitDeInit(&Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId]);
         }
-    CddFsiTx_resetDrvObj(&Cdd_FsiTx_DrvObj);
-    Cdd_FsiTx_DriverStatus = CDD_FSI_TX_UNINIT;
+        CddFsiTx_resetDrvObj(&Cdd_FsiTx_DrvObj);
+        Cdd_FsiTx_DriverStatus = CDD_FSI_TX_UNINIT;
+    }
+
     return;
 }
 #endif /*(STD_ON == CDD_FSI_TX_DEINIT_API)*/
@@ -236,10 +241,13 @@ Cdd_FsiTx_Ping(Cdd_FsiTx_HWUnitType HwUnitId)
         (void)CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_UNINIT);
         retVal = E_NOT_OK;
     }
-    else if (HwUnitId >= CDD_FSI_TX_HW_UNIT_CNT)
-    {
-        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_PARAM_VALUE);
-        retVal = E_NOT_OK;
+    else 
+    {    
+        if (HwUnitId >= CDD_FSI_TX_HW_UNIT_CNT)
+        {
+            (void)CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_PARAM_VALUE);
+            retVal = E_NOT_OK;
+        }
     }
 
 #endif

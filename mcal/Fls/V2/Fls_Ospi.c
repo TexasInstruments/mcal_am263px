@@ -235,9 +235,12 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
         {
             cmdExt = rdParams->cmd;
         }
-        else if (fls_config_sfdp->cmdExtType == OSPI_CMD_EXT_TYPE_INVERSE)
+        else 
         {
-            cmdExt = ~(rdParams->cmd);
+            if (fls_config_sfdp->cmdExtType == OSPI_CMD_EXT_TYPE_INVERSE)
+            {
+                cmdExt = ~(rdParams->cmd);
+            }
         }
 
         /* Set extended STIG opcode */
@@ -256,8 +259,8 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
                       TRUE);
 
         /* Set number of address bytes */
-        HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, OSPI_FLASH_CMD_CTRL_REG_NUM_ADDR_BYTES_FLD,
-                      rdParams->numAddrBytes - 1);
+        HW_WR_FIELD32((uint32)FLS_OSPI_CTRL_BASE_ADDR + (uint32)OSPI_FLASH_CMD_CTRL_REG,
+                      (uint32)OSPI_FLASH_CMD_CTRL_REG_NUM_ADDR_BYTES_FLD, (uint32)(rdParams->numAddrBytes - 1U));
 
         /* Update the flash cmd address register */
         HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_ADDR_REG, rdParams->cmdAddr);
@@ -2022,7 +2025,7 @@ Std_ReturnType Fls_set111mode(OSPI_Handle handle, uint8 rdCmd, uint8 wrCmd, uint
               (xferLines << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DATA_XFER_TYPE_EXT_MODE_FLD_SHIFT) |
               (xferLines << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_ADDR_XFER_TYPE_STD_MODE_FLD_SHIFT) |
               (xferLines << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_INSTR_TYPE_FLD_SHIFT) |
-              (0U << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD_SHIFT);
+              (uint32)(0U << (uint32)OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD_SHIFT);
     HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG, regVal);
 
     regVal = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_WR_CONFIG_REG);

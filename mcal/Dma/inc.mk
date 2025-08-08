@@ -6,6 +6,3 @@ INCDIR += $(DMA_PATH)/include
 ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   INCDIR += $(DMA_PATH)/V0
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  INCDIR += $(DMA_PATH)/V1
-endif

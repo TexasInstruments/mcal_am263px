@@ -1,9 +1,7 @@
 ifeq ($(Rules_make_include), )
 
 #Default build environment, Windows_NT or Linux
-ifeq ($(OS), )
-  OS := Windows_NT
-endif
+OS?=Windows_NT
 
 ifeq ($(COMPILER_SELECT), )
   COMPILER :=CLANG
@@ -11,9 +9,11 @@ else
   COMPILER :=$(COMPILER_SELECT)
 endif
 
-ifeq ($(SOC), )
-  SOC := am263px
-  PLATFORM := am263px
+# Default platform. Supported values: am263, am263px, am261
+PLATFORM?=am263
+
+ifeq ($(PLATFORM),$(filter $(PLATFORM), am263))
+  SOC = am263
   export EB_PLATFORM?=AM263Px
 endif
 
@@ -31,20 +31,12 @@ ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
   endif
 endif
 
-
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am273 am2732s))
-  SOC = am273
-endif
-
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
   SOC = am261
   export EB_PLATFORM?=AM261x
 endif
 
-ifeq ($(CORE), )
-  CORE := r5f0_0
-endif
-export CORE
+export CORE?=r5f0_0
 
 mcal_RELPATH = mcal
 mcal_test_RELPATH = mcal_test
@@ -69,22 +61,14 @@ ifeq ($(OS),Windows_NT)
   ifeq ($(COMPILER),TI_COMPILER)
     TOOLCHAIN_PATH_R5 := $(CCS_PATH)/tools/compiler/ti-cgt-arm_20.2.7.LTS
   else
-    ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am263px am261))
-      TOOLCHAIN_PATH_R5 := C:/ti/ti-cgt-armllvm_4.0.1.LTS
-    else
-      TOOLCHAIN_PATH_R5 := C:/ti/ti-cgt-armllvm_2.1.3.LTS
-    endif
+    TOOLCHAIN_PATH_R5 := C:/ti/ti-cgt-armllvm_4.0.1.LTS
   endif
 else
   #Paths for linux machine
   ifeq ($(COMPILER),TI_COMPILER)
     TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-arm_18.12.2.LTS
   else
-    ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am263px am261))
-      TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-armllvm_4.0.1.LTS
-    else
-      TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-armllvm_2.1.3.LTS
-    endif
+    TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-armllvm_4.0.1.LTS
   endif
 endif
 
@@ -111,17 +95,10 @@ ifeq ($(CDD_IPC_SAFE_ENABLE),no)
   define GET_MCAL_COMP_CONFIG_PATH
     # MCAL_MODULE is passing through gmake command as argument
     ifeq ($(MCAL_MODULE),$(1))
-  	$(1)_CONFIG_PATH = $(mcal_test_PATH)/ut_config/$(1)/soc/$(SOC)/$(CORE)/config_$(MCAL_CONFIG)
+  	  $(1)_CONFIG_PATH = $(mcal_test_PATH)/ut_config/$(1)/soc/$(SOC)/$(CORE)/config_$(MCAL_CONFIG)
     else
-  	ifeq ($(PLATFORM),am2732s)
-  	  ifeq ($(1),Port)
-  	    $(1)_CONFIG_PATH += $(autosarConfigSrc_PATH)/$(1)_Demo_Cfg/soc/$(PLATFORM)/$(CORE)/include
-        else
+  	  ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am263px am261))
   	    $(1)_CONFIG_PATH += $(autosarConfigSrc_PATH)/$(1)_Demo_Cfg/soc/$(SOC)/$(CORE)/include
-        endif
-      endif
-  	ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am273 am263px am261))
-  	  $(1)_CONFIG_PATH += $(autosarConfigSrc_PATH)/$(1)_Demo_Cfg/soc/$(SOC)/$(CORE)/include
       endif
     endif
   endef
@@ -159,11 +136,6 @@ else
 endif
 
 ROOTDIR := $(abspath ..)
-
-# Default platform
-  PLATFORM := am263px
-# Supported values: am263
-
 
 # Default Profile
 # Supported Values: debug | release | prod_release
@@ -245,9 +217,9 @@ ifeq ($(MAKERULEDIR), )
 endif
 
 ifeq ($(COMPILER),CLANG)
-include $(MAKERULEDIR)/build_config_CLANG.mk
+  include $(MAKERULEDIR)/build_config_CLANG.mk
 else
-include $(MAKERULEDIR)/build_config.mk
+  include $(MAKERULEDIR)/build_config.mk
 endif
 include $(MAKERULEDIR)/platform.mk
 include $(MAKERULEDIR)/env.mk

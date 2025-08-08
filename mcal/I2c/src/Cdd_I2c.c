@@ -297,6 +297,7 @@ FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_AsyncTransmit(Cdd_I2c_SequenceType se
 FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_Cancel(Cdd_I2c_SequenceType sequenceId)
 {
     Std_ReturnType retVal = E_NOT_OK;
+    (void)sequenceId;
 
     // TODO
     return retVal;
@@ -451,6 +452,7 @@ static Std_ReturnType Cdd_I2c_SetupEBParamCheck(uint8 apiId, Cdd_I2c_ChannelType
 {
     Std_ReturnType         retVal = E_OK;
     Cdd_I2c_DriverObjType *drvObj = &Cdd_I2c_DrvObj;
+    (void)length;
 
     if (CDD_I2C_UNINIT == Cdd_I2c_DrvState)
     {

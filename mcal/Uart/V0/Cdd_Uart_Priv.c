@@ -21,7 +21,7 @@
  *  FILE DESCRIPTION
  *  -------------------------------------------------------------------------------------------------------------------
  *         File:  Cdd_Uart_Priv.c
- *    Component:  UART Complex Device Driver for AM273X
+ *    Component:  UART Complex Device Driver
  *       Module:  UART
  *    Generator:  None
  *

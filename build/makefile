@@ -5,7 +5,7 @@ include Rules.make
 
 MCAL_EXAMPLES = $(mcal_PATH)/examples
 
-SOCFAMILY_LIST_DEFAULT = am263 am273 am263px am261
+SOCFAMILY_LIST_DEFAULT = am263 am263px am261
 
 mcal_LIB_LIST_CLEAN = $(addsuffix _clean, $(mcal_LIB_LIST))
 mcal_APP_LIB_LIST_CLEAN = $(addsuffix _clean, $(mcal_APP_LIB_LIST))
@@ -72,7 +72,7 @@ help:
 	$(ECHO) ""
 	$(ECHO) "Optional make variables:"
 	$(ECHO) "------------------------"
-	$(ECHO) "PLATFORM=[am263, am273, am2732s, am263px, am261]"
+	$(ECHO) "PLATFORM=[am263, am263px, am261]"
 	$(ECHO) "    Default: $(PLATFORM)"
 	$(ECHO) "CORE=[r4 / r5f]"
 	$(ECHO) "    Default: r5f"
@@ -89,15 +89,11 @@ help:
 
 platforms:
 	$(MAKE) all PLATFORM=am263
-	$(MAKE) all PLATFORM=am273
-	$(MAKE) all PLATFORM=am2732s
 	$(MAKE) all PLATFORM=am263px
 	$(MAKE) all PLATFORM=am261
 
 platformsclean:
 	$(MAKE) clean PLATFORM=am263
-	$(MAKE) clean PLATFORM=am273
-	$(MAKE) clean PLATFORM=am2732s
 	$(MAKE) clean PLATFORM=am263px
 	$(MAKE) clean PLATFORM=am261
 

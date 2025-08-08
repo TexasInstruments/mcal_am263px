@@ -8,6 +8,3 @@ SRCS_COMMON += Mcu_Cfg.c
 ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   SRCS_COMMON += Mcu_PBcfg.c
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCS_COMMON += Mcu_PBcfg_am273x.c
-endif

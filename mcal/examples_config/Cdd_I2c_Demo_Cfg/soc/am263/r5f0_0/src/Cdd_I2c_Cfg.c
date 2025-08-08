@@ -77,7 +77,23 @@ CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config =
         },
         [1U] =
         {
+            .hwUnitId = CDD_I2C_HW_UNIT_1,
+            .baudRate = CDD_I2C_400KHZ,
+            .hwUnitFrequency = 8000000U,
+            .sysClk = 200000000U,
+            .ownAddress = 127U,
+        },
+        [2U] =
+        {
             .hwUnitId = CDD_I2C_HW_UNIT_2,
+            .baudRate = CDD_I2C_400KHZ,
+            .hwUnitFrequency = 8000000U,
+            .sysClk = 200000000U,
+            .ownAddress = 127U,
+        },
+        [3U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_3,
             .baudRate = CDD_I2C_400KHZ,
             .hwUnitFrequency = 8000000U,
             .sysClk = 200000000U,
@@ -89,9 +105,9 @@ CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config =
     {
         [0U] =
         {
-            .hwUnitId = CDD_I2C_HW_UNIT_2,
-            .completeNotify = I2c_Temperature_Data_Write_Complete,
-            .errorNotify = I2c_Temperature_Data_Write_Fail,
+            .hwUnitId = CDD_I2C_HW_UNIT_0,
+            .completeNotify = I2c_utilsSeq0Complete,
+            .errorNotify = I2c_utilsSeq0Fail,
             .restartMode = CDD_I2C_RESTART_MODE_STOP,
             .chPerSeq = 1U,
             .chList =
@@ -104,8 +120,8 @@ CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config =
         [1U] =
         {
             .hwUnitId = CDD_I2C_HW_UNIT_0,
-            .completeNotify = I2c_Eeprom_Data_Write_Complete,
-            .errorNotify = I2c_Eeprom_Data_Write_Fail,
+            .completeNotify = I2c_utilsSeq1Complete,
+            .errorNotify = I2c_utilsSeq1Fail,
             .restartMode = CDD_I2C_RESTART_MODE_STOP,
             .chPerSeq = 1U,
             .chList =
@@ -118,42 +134,212 @@ CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config =
         [2U] =
         {
             .hwUnitId = CDD_I2C_HW_UNIT_0,
-            .completeNotify = I2c_Eeprom_Address_Ptr_Reset,
-            .errorNotify = I2c_Eeprom_Address_Ptr_Fail,
+            .completeNotify = I2c_utilsSeq2Complete,
+            .errorNotify = I2c_utilsSeq2Fail,
             .restartMode = CDD_I2C_RESTART_MODE_STOP,
-            .chPerSeq = 1U,
+            .chPerSeq = 2U,
             .chList =
             {
                 
                 2U,
                 
+                3U,
+                
             },
         },
         [3U] =
         {
-            .hwUnitId = CDD_I2C_HW_UNIT_2,
-            .completeNotify = I2c_Temperature_Read_Callback,
-            .errorNotify = I2c_Temperature_Read_Callback_Fail,
-            .restartMode = CDD_I2C_RESTART_MODE_STOP,
-            .chPerSeq = 1U,
+            .hwUnitId = CDD_I2C_HW_UNIT_0,
+            .completeNotify = I2c_utilsSeq3Complete,
+            .errorNotify = I2c_utilsSeq3Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_NOSTOP,
+            .chPerSeq = 2U,
             .chList =
             {
                 
-                3U,
+                4U,
+                
+                5U,
                 
             },
         },
         [4U] =
         {
-            .hwUnitId = CDD_I2C_HW_UNIT_0,
-            .completeNotify = I2c_Eeprom_Read_Callback,
-            .errorNotify = I2c_Eeprom_Read_Callback_Fail,
+            .hwUnitId = CDD_I2C_HW_UNIT_1,
+            .completeNotify = I2c_utilsSeq4Complete,
+            .errorNotify = I2c_utilsSeq4Fail,
             .restartMode = CDD_I2C_RESTART_MODE_STOP,
             .chPerSeq = 1U,
             .chList =
             {
                 
-                4U,
+                6U,
+                
+            },
+        },
+        [5U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_1,
+            .completeNotify = I2c_utilsSeq5Complete,
+            .errorNotify = I2c_utilsSeq5Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 1U,
+            .chList =
+            {
+                
+                7U,
+                
+            },
+        },
+        [6U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_1,
+            .completeNotify = I2c_utilsSeq6Complete,
+            .errorNotify = I2c_utilsSeq6Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 2U,
+            .chList =
+            {
+                
+                8U,
+                
+                9U,
+                
+            },
+        },
+        [7U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_1,
+            .completeNotify = I2c_utilsSeq7Complete,
+            .errorNotify = I2c_utilsSeq7Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_NOSTOP,
+            .chPerSeq = 2U,
+            .chList =
+            {
+                
+                10U,
+                
+                11U,
+                
+            },
+        },
+        [8U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_2,
+            .completeNotify = I2c_utilsSeq8Complete,
+            .errorNotify = I2c_utilsSeq8Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 1U,
+            .chList =
+            {
+                
+                12U,
+                
+            },
+        },
+        [9U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_2,
+            .completeNotify = I2c_utilsSeq9Complete,
+            .errorNotify = I2c_utilsSeq9Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 1U,
+            .chList =
+            {
+                
+                13U,
+                
+            },
+        },
+        [10U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_2,
+            .completeNotify = I2c_utilsSeq10Complete,
+            .errorNotify = I2c_utilsSeq10Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 2U,
+            .chList =
+            {
+                
+                14U,
+                
+                15U,
+                
+            },
+        },
+        [11U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_2,
+            .completeNotify = I2c_utilsSeq11Complete,
+            .errorNotify = I2c_utilsSeq11Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_NOSTOP,
+            .chPerSeq = 2U,
+            .chList =
+            {
+                
+                16U,
+                
+                17U,
+                
+            },
+        },
+        [12U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_3,
+            .completeNotify = I2c_utilsSeq12Complete,
+            .errorNotify = I2c_utilsSeq12Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 1U,
+            .chList =
+            {
+                
+                18U,
+                
+            },
+        },
+        [13U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_3,
+            .completeNotify = I2c_utilsSeq13Complete,
+            .errorNotify = I2c_utilsSeq13Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 1U,
+            .chList =
+            {
+                
+                19U,
+                
+            },
+        },
+        [14U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_3,
+            .completeNotify = I2c_utilsSeq14Complete,
+            .errorNotify = I2c_utilsSeq14Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_STOP,
+            .chPerSeq = 2U,
+            .chList =
+            {
+                
+                20U,
+                
+                21U,
+                
+            },
+        },
+        [15U] =
+        {
+            .hwUnitId = CDD_I2C_HW_UNIT_3,
+            .completeNotify = I2c_utilsSeq15Complete,
+            .errorNotify = I2c_utilsSeq15Fail,
+            .restartMode = CDD_I2C_RESTART_MODE_NOSTOP,
+            .chPerSeq = 2U,
+            .chList =
+            {
+                
+                22U,
+                
+                23U,
                 
             },
         },
@@ -163,31 +349,145 @@ CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config =
     {
         [0U] =
         {
-            .deviceAddress = 76U,
+            .deviceAddress = 127U,
             .direction = CDD_I2C_WRITE,
             .addressScheme = CDD_I2C_7_BIT_ADDRESS,
         },
         [1U] =
         {
-            .deviceAddress = 80U,
-            .direction = CDD_I2C_WRITE,
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
             .addressScheme = CDD_I2C_7_BIT_ADDRESS,
         },
         [2U] =
         {
-            .deviceAddress = 80U,
+            .deviceAddress = 127U,
             .direction = CDD_I2C_WRITE,
             .addressScheme = CDD_I2C_7_BIT_ADDRESS,
         },
         [3U] =
         {
-            .deviceAddress = 76U,
+            .deviceAddress = 127U,
             .direction = CDD_I2C_READ,
             .addressScheme = CDD_I2C_7_BIT_ADDRESS,
         },
         [4U] =
         {
-            .deviceAddress = 80U,
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [5U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [6U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [7U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [8U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [9U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [10U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [11U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [12U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [13U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [14U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [15U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [16U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [17U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [18U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [19U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [20U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [21U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_READ,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [22U] =
+        {
+            .deviceAddress = 127U,
+            .direction = CDD_I2C_WRITE,
+            .addressScheme = CDD_I2C_7_BIT_ADDRESS,
+        },
+        [23U] =
+        {
+            .deviceAddress = 127U,
             .direction = CDD_I2C_READ,
             .addressScheme = CDD_I2C_7_BIT_ADDRESS,
         },

@@ -71,7 +71,7 @@ extern "C" {
 #define CDD_I2C_PRE_COMPILE_VARIANT     (STD_ON)
 
 /** \brief Enable/disable Interrupts */
-#define CDD_I2C_POLLING_MODE            (STD_ON)
+#define CDD_I2C_POLLING_MODE            (STD_OFF)
 
 /** \brief Enable/Disable I2C dev detect error */
 #define CDD_I2C_DEV_ERROR_DETECT        (STD_ON)
@@ -105,26 +105,32 @@ extern "C" {
 #define CDD_I2C_HW_UNIT_MAX             (3U)
 
 
+/** \brief ISR type */
+#define CDD_I2C_ISR_TYPE                (CDD_I2C_ISR_CAT1)
+
+
 /*
  * All below macros are used for static memory allocation and can be changed to
  * match the usecase requirements.
  */
 /** \brief Maximum channels allowed per sequence */
-#define CDD_I2C_MAX_CH_PER_SEQ          (1U)
+#define CDD_I2C_MAX_CH_PER_SEQ          (2U)
 
 /** \brief Maximum channels across all sequence/hwunit */
-#define CDD_I2C_MAX_CH                  (3U)
+#define CDD_I2C_MAX_CH                  (18U)
 
 /** \brief Maximum sequence across all hwunit */
-#define CDD_I2C_MAX_SEQ                 (3U)
+#define CDD_I2C_MAX_SEQ                 (12U)
 
 /** \brief Maximum HW unit */
-#define CDD_I2C_MAX_HW_UNIT             (1U)
+#define CDD_I2C_MAX_HW_UNIT             (3U)
 
 /*
  * All below macros are used for enabling a particular hardware.
  */
 #define CDD_I2C_HW_UNIT_0_ACTIVE
+#define CDD_I2C_HW_UNIT_1_ACTIVE
+#define CDD_I2C_HW_UNIT_2_ACTIVE
 
 /** \brief Symbolic Name for I2c Sequence 0 */
 #define CddI2cConf_CddI2cSequence_CddI2cSequence_0      (0U)
@@ -132,6 +138,24 @@ extern "C" {
 #define CddI2cConf_CddI2cSequence_CddI2cSequence_1      (1U)
 /** \brief Symbolic Name for I2c Sequence 2 */
 #define CddI2cConf_CddI2cSequence_CddI2cSequence_2      (2U)
+/** \brief Symbolic Name for I2c Sequence 3 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_3      (3U)
+/** \brief Symbolic Name for I2c Sequence 4 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_4      (4U)
+/** \brief Symbolic Name for I2c Sequence 5 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_5      (5U)
+/** \brief Symbolic Name for I2c Sequence 6 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_6      (6U)
+/** \brief Symbolic Name for I2c Sequence 7 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_7      (7U)
+/** \brief Symbolic Name for I2c Sequence 8 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_8      (8U)
+/** \brief Symbolic Name for I2c Sequence 9 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_9      (9U)
+/** \brief Symbolic Name for I2c Sequence 10 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_10      (10U)
+/** \brief Symbolic Name for I2c Sequence 11 */
+#define CddI2cConf_CddI2cSequence_CddI2cSequence_11      (11U)
 
 /** \brief Symbolic Name for I2c Channel 0 */
 #define CddI2cConf_CddI2cChannel_CddI2cChannel_0        (0U)
@@ -139,6 +163,36 @@ extern "C" {
 #define CddI2cConf_CddI2cChannel_CddI2cChannel_1        (1U)
 /** \brief Symbolic Name for I2c Channel 2 */
 #define CddI2cConf_CddI2cChannel_CddI2cChannel_2        (2U)
+/** \brief Symbolic Name for I2c Channel 3 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_3        (3U)
+/** \brief Symbolic Name for I2c Channel 4 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_4        (4U)
+/** \brief Symbolic Name for I2c Channel 5 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_5        (5U)
+/** \brief Symbolic Name for I2c Channel 6 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_6        (6U)
+/** \brief Symbolic Name for I2c Channel 7 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_7        (7U)
+/** \brief Symbolic Name for I2c Channel 8 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_8        (8U)
+/** \brief Symbolic Name for I2c Channel 9 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_9        (9U)
+/** \brief Symbolic Name for I2c Channel 10 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_10        (10U)
+/** \brief Symbolic Name for I2c Channel 11 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_11        (11U)
+/** \brief Symbolic Name for I2c Channel 12 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_12        (12U)
+/** \brief Symbolic Name for I2c Channel 13 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_13        (13U)
+/** \brief Symbolic Name for I2c Channel 14 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_14        (14U)
+/** \brief Symbolic Name for I2c Channel 15 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_15        (15U)
+/** \brief Symbolic Name for I2c Channel 16 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_16        (16U)
+/** \brief Symbolic Name for I2c Channel 17 */
+#define CddI2cConf_CddI2cChannel_CddI2cChannel_17        (17U)
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */
@@ -156,13 +210,31 @@ extern CONST(uint32, CDD_I2C_CONST) Cdd_I2c_HwUnitBaseAddr[CDD_I2C_HW_UNIT_MAX];
 /*                          Function Declarations                             */
 /* ========================================================================== */
 
-extern void I2c_Eeprom_Data_Write_Complete(void);
-extern void I2c_Eeprom_Address_Ptr_Reset(void);
-extern void I2c_Eeprom_Read_Callback(void);
+extern void I2c_utilsSeq0Complete(void);
+extern void I2c_utilsSeq1Complete(void);
+extern void I2c_utilsSeq2Complete(void);
+extern void I2c_utilsSeq3Complete(void);
+extern void I2c_utilsSeq4Complete(void);
+extern void I2c_utilsSeq5Complete(void);
+extern void I2c_utilsSeq6Complete(void);
+extern void I2c_utilsSeq7Complete(void);
+extern void I2c_utilsSeq8Complete(void);
+extern void I2c_utilsSeq9Complete(void);
+extern void I2c_utilsSeq10Complete(void);
+extern void I2c_utilsSeq11Complete(void);
 
-extern void I2c_Eeprom_Data_Write_Fail(uint8 errorCode);
-extern void I2c_Eeprom_Address_Ptr_Fail(uint8 errorCode);
-extern void I2c_Eeprom_Read_Callback_Fail(uint8 errorCode);
+extern void I2c_utilsSeq0Fail(uint8 errorCode);
+extern void I2c_utilsSeq1Fail(uint8 errorCode);
+extern void I2c_utilsSeq2Fail(uint8 errorCode);
+extern void I2c_utilsSeq3Fail(uint8 errorCode);
+extern void I2c_utilsSeq4Fail(uint8 errorCode);
+extern void I2c_utilsSeq5Fail(uint8 errorCode);
+extern void I2c_utilsSeq6Fail(uint8 errorCode);
+extern void I2c_utilsSeq7Fail(uint8 errorCode);
+extern void I2c_utilsSeq8Fail(uint8 errorCode);
+extern void I2c_utilsSeq9Fail(uint8 errorCode);
+extern void I2c_utilsSeq10Fail(uint8 errorCode);
+extern void I2c_utilsSeq11Fail(uint8 errorCode);
 
 #ifdef __cplusplus
 }

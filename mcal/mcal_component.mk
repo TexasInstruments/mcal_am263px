@@ -55,13 +55,6 @@ MCAL_MCU_SOC_FILES = V2
 MCAL_FLS_SOC_FILES = V2
 endif
 
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am273 am2732s))
-DEFAULT_SOCLIST = am273
-MCAL_SOC_FILES = V1
-MCAL_MCU_SOC_FILES = V1
-MCAL_FLS_SOC_FILES = V1
-endif
-
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
 DEFAULT_SOCLIST = am261
 MCAL_SOC_FILES = V0
@@ -124,10 +117,6 @@ endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
 mcal_mcal_LIB_LIST = mcu port gpt spi can cdd_cmpss cdd_flc wdg adc pwm icu ipc dma eth ethtrcv i2c uart fsitx fsirx lin fls epwm dio
-endif
-
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am273 am2732s))
-mcal_mcal_LIB_LIST = mcu port gpt dio wdg spi pwm can ipc adc icu fls eth ethtrcv uart dma i2c
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
@@ -470,12 +459,6 @@ ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
 mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app adc_app adc_resolver_app adc_resolver_dma_app adc_hw_trig_dma_app eth_app eth_test_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app fls_app flsdiag_ospi_app epwm_app epwm_tz_app cdd_flc_app cdd_cmpss_app
 mcal_mcal_APP_LIB_LIST += app_utils
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwepwm kwuart kwwdg kwport kwfsirx kwfsitx kwlin
-endif
-
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am273 am2732s))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mibspi_app qspi_flash_app can_app port_app dio_app wdg_app fls_app eth_app eth_test_app adc_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app uart_echo_dma_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app flsdiag_app
-mcal_mcal_APP_LIB_LIST += app_utils
-mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwuart kwwdg kwport kwfls
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))

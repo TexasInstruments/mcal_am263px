@@ -192,7 +192,7 @@ int main(void)
     Mcal_CacheP_init();
     Cdd_Dma_InterruptConfig();
 
-    AppUtils_printf("DmaInterruptModeApp: Sample Application - STARTS !!!\n\r ");
+    AppUtils_printf("DmaLinkingModeApp: Sample Application - STARTS !!!\n\r ");
 
     Cdd_Dma_LinkingModeApp_mainTest();
     return 0;

@@ -101,6 +101,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#enum-spi-datalinereceivetype">5.19.1.15. enum Spi_DataLineReceiveType</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#enum-spi-datalinetransmittype">5.19.1.16. enum Spi_DataLineTransmitType</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#enum-mcspi-irqstatustype">5.19.1.17. enum Mcspi_IrqStatusType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-spi-jobendnotifytype">5.19.1.18. typedef Spi_JobEndNotifyType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-spi-seqendnotifytype">5.19.1.19. typedef Spi_SeqEndNotifyType</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#structures">5.19.2. Structures</a></li>
@@ -239,6 +241,14 @@
 <tr class="row-even"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-mcspi-irqstatustype"><span class="std std-ref">Mcspi_IrqStatusType</span></a></strong></p></td>
 <td><p>Irq status and std return type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef void(*)(void)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-spi-jobendnotifytype"><span class="std std-ref">Spi_JobEndNotifyType</span></a></strong></p></td>
+<td><p>Typedef for job end notification function pointer.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef void(*)(void)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-spi-seqendnotifytype"><span class="std std-ref">Spi_SeqEndNotifyType</span></a></strong></p></td>
+<td><p>Typedef for sequence end notification function pointer.</p></td>
 </tr>
 </tbody>
 </table>
@@ -515,7 +525,7 @@ SPI Chip Select Pin.</p>
 <tbody>
 <tr class="row-even"><td><p>SPI_CLK_MODE_0</p></td>
 <td><p>0x00U</p></td>
-<td><p>SPI Clock Phase = 0 (rising edge latch),    Polarity = 0 (Active HIGH)</p></td>
+<td><p>SPI Clock Phase = 0 (rising edge latch), Polarity = 0 (Active HIGH)</p></td>
 </tr>
 <tr class="row-odd"><td><p>SPI_CLK_MODE_1</p></td>
 <td><p>0x01U</p></td>
@@ -523,7 +533,7 @@ SPI Chip Select Pin.</p>
 </tr>
 <tr class="row-even"><td><p>SPI_CLK_MODE_2</p></td>
 <td><p>0x02U</p></td>
-<td><p>SPI Clock Phase = 0 (rising edge latch),    Polarity = 1 (Active LOW)</p></td>
+<td><p>SPI Clock Phase = 0 (rising edge latch), Polarity = 1 (Active LOW)</p></td>
 </tr>
 <tr class="row-odd"><td><p>SPI_CLK_MODE_3</p></td>
 <td><p>0x03U</p></td>
@@ -727,6 +737,22 @@ Spi_DataLineTransmitType defines the lines selected for transmission.</p>
 </table>
 <p><strong>Brief</strong>:
 Irq status and std return type.</p>
+</section>
+<section id="typedef-spi-jobendnotifytype">
+<h3><span class="section-number">5.19.1.18. </span>typedef Spi_JobEndNotifyType<a class="headerlink" href="#typedef-spi-jobendnotifytype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Spi_JobEndNotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Typedef for job end notification function pointer.</p>
+</section>
+<section id="typedef-spi-seqendnotifytype">
+<h3><span class="section-number">5.19.1.19. </span>typedef Spi_SeqEndNotifyType<a class="headerlink" href="#typedef-spi-seqendnotifytype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Spi_SeqEndNotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Typedef for sequence end notification function pointer.</p>
 </section>
 </section>
 <section id="structures">
@@ -1455,7 +1481,7 @@ This function enables or disables the internal loopback mode of SPI. Note: Only 
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Aug 05, 2025.
+          <span class="lastupdated" >Last updated on Aug 09, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

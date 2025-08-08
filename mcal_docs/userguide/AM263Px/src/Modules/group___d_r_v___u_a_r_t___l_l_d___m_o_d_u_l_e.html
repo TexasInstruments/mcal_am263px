@@ -113,9 +113,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="#../Files/_v0_2_uart_8h.md#file-v0/uart.h"><span class="xref myst">V0/V0/Uart.h</span></a></strong> <br>This file contains the prototype of UART driver APIs.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="#../Files/_v1_2_uart_8h.md#file-v1/uart.h"><span class="xref myst">V1/V1/Uart.h</span></a></strong> <br>This file contains the prototype of UART driver APIs.</p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="#../Files/_uart_8h.md#file-uart.h"><span class="xref myst">V0/Uart.h</span></a></strong> <br>This file contains the prototype of UART driver APIs.</p></td>
 </tr>
 </tbody>
 </table>
@@ -142,18 +140,6 @@
 <td><p><strong><a class="reference internal" href="#typedef-cdduart-handle"><span class="std std-ref">CddUart_Handle</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>typedef void *</p></td>
-<td><p><strong><a class="reference internal" href="#typedef-cdduart-dmahandle"><span class="std std-ref">CddUart_DmaHandle</span></a></strong></p></td>
-<td><p>A handle that is used by UART with EDMA.</p></td>
-</tr>
-<tr class="row-even"><td><p>typedef struct <a class="reference internal" href="../Classes/struct_cdd_uart___init_object.html"><span class="std std-doc">CddUart_InitObject</span></a> *</p></td>
-<td><p><strong><a class="reference internal" href="#typedef-cdduart-inithandle"><span class="std std-ref">CddUart_InitHandle</span></a></strong></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>typedef struct <a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Object</span></a> *</p></td>
-<td><p><strong><a class="reference internal" href="#typedef-cdduart-handle"><span class="std std-ref">CddUart_Handle</span></a></strong></p></td>
-<td><p></p></td>
-</tr>
 </tbody>
 </table>
 <section id="typedef-cdduart-dmahandle">
@@ -176,26 +162,6 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 </pre></div>
 </div>
 </section>
-<section id="id1">
-<h3>typedef CddUart_DmaHandle<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">CddUart_DmaHandle</span><span class="p">;</span>
-</pre></div>
-</div>
-<p><strong>Brief</strong>:
-A handle that is used by UART with EDMA.</p>
-</section>
-<section id="id2">
-<h3>typedef CddUart_InitHandle<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">CddUart_InitObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">CddUart_InitHandle</span><span class="p">;</span>
-</pre></div>
-</div>
-</section>
-<section id="id3">
-<h3>typedef CddUart_Handle<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">CddUart_Object</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">CddUart_Handle</span><span class="p">;</span>
-</pre></div>
-</div>
-</section>
 </section>
 <section id="structures">
 <h2>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
@@ -214,9 +180,6 @@ A handle that is used by UART with EDMA.</p>
 </tr>
 <tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Object</span></a></strong></p></td>
 <td><p>UART driver object.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_m_c_a_l___c_s_l__sci_regs.html"><span class="std std-doc">MCAL_CSL_sciRegs</span></a></strong></p></td>
-<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -263,2723 +226,2663 @@ A handle that is used by UART with EDMA.</p>
 <tr class="row-even"><td><p>UART_TRANSFER_STATUS_ERROR_OTH</p></td>
 <td><p>Other errors.</p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TRANSFER_STATUS_SUCCESS</p></td>
-<td><p>Transaction success.</p></td>
-</tr>
-<tr class="row-even"><td><p>UART_TRANSFER_STATUS_TIMEOUT</p></td>
-<td><p>Time out error.</p></td>
-</tr>
-<tr class="row-odd"><td><p>UART_TRANSFER_STATUS_ERROR_BI</p></td>
-<td><p>Break condition error.</p></td>
-</tr>
-<tr class="row-even"><td><p>UART_TRANSFER_STATUS_ERROR_FE</p></td>
-<td><p>Framing error.</p></td>
-</tr>
-<tr class="row-odd"><td><p>UART_TRANSFER_STATUS_ERROR_PE</p></td>
-<td><p>Parity error.</p></td>
-</tr>
-<tr class="row-even"><td><p>UART_TRANSFER_STATUS_ERROR_OE</p></td>
-<td><p>Overrun error.</p></td>
-</tr>
-<tr class="row-odd"><td><p>UART_TRANSFER_STATUS_CANCELLED</p></td>
-<td><p>Cancelled.</p></td>
-</tr>
-<tr class="row-even"><td><p>UART_TRANSFER_STATUS_STARTED</p></td>
-<td><p>Transaction started.</p></td>
-</tr>
-<tr class="row-odd"><td><p>UART_TRANSFER_STATUS_READ_TIMEOUT</p></td>
-<td><p>Read timeout error.</p></td>
-</tr>
-<tr class="row-even"><td><p>UART_TRANSFER_STATUS_ERROR_INUSE</p></td>
-<td><p>UART is currently in use.</p></td>
-</tr>
-<tr class="row-odd"><td><p>UART_TRANSFER_STATUS_ERROR_OTH</p></td>
-<td><p>Other errors.</p></td>
-</tr>
-<tr class="row-even"><td><p>UART_READ_TRANSFER_TYPE</p></td>
+<tr class="row-odd"><td><p>UART_READ_TRANSFER_TYPE</p></td>
 <td><p>UART Read Transfer Types.</p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WRITE_TRANSFER_TYPE</p></td>
+<tr class="row-even"><td><p>UART_WRITE_TRANSFER_TYPE</p></td>
 <td><p>UART Write Transfer Types.</p></td>
 </tr>
-<tr class="row-even"><td><p>UART_READ_TRANSFER_TYPE</p></td>
-<td><p>UART Read Transfer Types.</p></td>
-</tr>
-<tr class="row-odd"><td><p>UART_WRITE_TRANSFER_TYPE</p></td>
-<td><p>UART Write Transfer Types.</p></td>
-</tr>
-<tr class="row-even"><td><p>UART_REG_CONFIG_MODE_A</p></td>
+<tr class="row-odd"><td><p>UART_REG_CONFIG_MODE_A</p></td>
 <td><p>Values to be used while switching between register configuration modes.</p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_REG_CONFIG_MODE_B</p></td>
+<tr class="row-even"><td><p>UART_REG_CONFIG_MODE_B</p></td>
 <td><p>Values to be used while switching between register configuration modes.</p></td>
 </tr>
-<tr class="row-even"><td><p>UART_REG_OPERATIONAL_MODE</p></td>
+<tr class="row-odd"><td><p>UART_REG_OPERATIONAL_MODE</p></td>
 <td><p>Values to be used while switching between register configuration modes.</p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_OPER_MODE_SIR</p></td>
+<tr class="row-even"><td><p>UART_OPER_MODE_SIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_OPER_MODE_MIR</p></td>
+<tr class="row-odd"><td><p>UART_OPER_MODE_MIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_OPER_MODE_FIR</p></td>
+<tr class="row-even"><td><p>UART_OPER_MODE_FIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_OPER_MODE_CIR</p></td>
+<tr class="row-odd"><td><p>UART_OPER_MODE_CIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_OPER_MODE_DISABLED</p></td>
+<tr class="row-even"><td><p>UART_OPER_MODE_DISABLED</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RHR</p></td>
+<tr class="row-odd"><td><p>UART_RHR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_THR</p></td>
+<tr class="row-even"><td><p>UART_THR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER</p></td>
+<tr class="row-odd"><td><p>UART_IER</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR</p></td>
+<tr class="row-even"><td><p>UART_IIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR</p></td>
+<tr class="row-odd"><td><p>UART_FCR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR</p></td>
+<tr class="row-even"><td><p>UART_LCR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR</p></td>
+<tr class="row-odd"><td><p>UART_MCR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR</p></td>
+<tr class="row-even"><td><p>UART_LSR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR</p></td>
+<tr class="row-odd"><td><p>UART_MSR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SPR</p></td>
+<tr class="row-even"><td><p>UART_SPR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1</p></td>
+<tr class="row-odd"><td><p>UART_MDR1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2</p></td>
+<tr class="row-even"><td><p>UART_MDR2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFLL</p></td>
+<tr class="row-even"><td><p>UART_TXFLL</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RESUME</p></td>
+<tr class="row-odd"><td><p>UART_RESUME</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFLH</p></td>
+<tr class="row-even"><td><p>UART_TXFLH</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFREGL</p></td>
+<tr class="row-odd"><td><p>UART_SFREGL</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFLL</p></td>
+<tr class="row-even"><td><p>UART_RXFLL</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFREGH</p></td>
+<tr class="row-odd"><td><p>UART_SFREGH</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFLH</p></td>
+<tr class="row-even"><td><p>UART_RXFLH</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BLR</p></td>
+<tr class="row-odd"><td><p>UART_BLR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG</p></td>
+<tr class="row-even"><td><p>UART_ACREG</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR</p></td>
+<tr class="row-odd"><td><p>UART_SCR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR</p></td>
+<tr class="row-even"><td><p>UART_SSR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EBLR</p></td>
+<tr class="row-odd"><td><p>UART_EBLR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR</p></td>
+<tr class="row-even"><td><p>UART_MVR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC</p></td>
+<tr class="row-odd"><td><p>UART_SYSC</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSS</p></td>
+<tr class="row-even"><td><p>UART_SYSS</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER</p></td>
+<tr class="row-odd"><td><p>UART_WER</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_CFPS</p></td>
+<tr class="row-even"><td><p>UART_CFPS</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFIFO_LVL</p></td>
+<tr class="row-odd"><td><p>UART_RXFIFO_LVL</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFIFO_LVL</p></td>
+<tr class="row-even"><td><p>UART_TXFIFO_LVL</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER2</p></td>
+<tr class="row-odd"><td><p>UART_IER2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ISR2</p></td>
+<tr class="row-even"><td><p>UART_ISR2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FREQ_SEL</p></td>
+<tr class="row-odd"><td><p>UART_FREQ_SEL</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ABAUD_1ST_CHAR</p></td>
+<tr class="row-even"><td><p>UART_ABAUD_1ST_CHAR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BAUD_2ND_CHAR</p></td>
+<tr class="row-odd"><td><p>UART_BAUD_2ND_CHAR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3</p></td>
+<tr class="row-even"><td><p>UART_MDR3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TX_DMA_THRESHOLD</p></td>
+<tr class="row-odd"><td><p>UART_TX_DMA_THRESHOLD</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_DLL</p></td>
+<tr class="row-even"><td><p>UART_DLL</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_DLH</p></td>
+<tr class="row-odd"><td><p>UART_DLH</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR</p></td>
+<tr class="row-even"><td><p>UART_EFR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XON1_ADDR1</p></td>
+<tr class="row-odd"><td><p>UART_XON1_ADDR1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XON2_ADDR2</p></td>
+<tr class="row-even"><td><p>UART_XON2_ADDR2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XOFF1</p></td>
+<tr class="row-odd"><td><p>UART_XOFF1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TCR</p></td>
+<tr class="row-even"><td><p>UART_TCR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XOFF2</p></td>
+<tr class="row-odd"><td><p>UART_XOFF2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TLR</p></td>
+<tr class="row-even"><td><p>UART_TLR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR</p></td>
+<tr class="row-odd"><td><p>UART_UASR</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RHR_RHR_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_RHR_RHR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RHR_RHR_MASK</p></td>
+<tr class="row-odd"><td><p>UART_RHR_RHR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RHR_RESERVED_24_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_RHR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RHR_RESERVED_24_MASK</p></td>
+<tr class="row-odd"><td><p>UART_RHR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_THR_THR_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_THR_THR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_THR_THR_MASK</p></td>
+<tr class="row-odd"><td><p>UART_THR_THR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_THR_RESERVED_24_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_THR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_THR_RESERVED_24_MASK</p></td>
+<tr class="row-odd"><td><p>UART_THR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_RHR_IT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_RHR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_RHR_IT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_RHR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_RHR_IT_RHR_IT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_RHR_IT_RHR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_RHR_IT_RHR_IT_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_RHR_IT_RHR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_THR_IT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_THR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_THR_IT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_THR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_THR_IT_THR_IT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_THR_IT_THR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_THR_IT_THR_IT_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_THR_IT_THR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_LINE_STS_IT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_LINE_STS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_LINE_STS_IT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_LINE_STS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_LINE_STS_IT_LINE_STS_IT_U_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_LINE_STS_IT_LINE_STS_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_LINE_STS_IT_LINE_STS_IT_U_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_LINE_STS_IT_LINE_STS_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_MODEM_STS_IT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_MODEM_STS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_MODEM_STS_IT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_MODEM_STS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_MODEM_STS_IT_MODEM_STS_IT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_MODEM_STS_IT_MODEM_STS_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_MODEM_STS_IT_MODEM_STS_IT_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_MODEM_STS_IT_MODEM_STS_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_SLEEP_MODE_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_SLEEP_MODE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_SLEEP_MODE_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_SLEEP_MODE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_SLEEP_MODE_SLEEP_MODE_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_SLEEP_MODE_SLEEP_MODE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_SLEEP_MODE_SLEEP_MODE_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_SLEEP_MODE_SLEEP_MODE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_XOFF_IT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_XOFF_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_XOFF_IT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_XOFF_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_XOFF_IT_XOFF_IT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_XOFF_IT_XOFF_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_XOFF_IT_XOFF_IT_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_XOFF_IT_XOFF_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_RTS_IT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_RTS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_RTS_IT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_RTS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_RTS_IT_RTS_IT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_RTS_IT_RTS_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_RTS_IT_RTS_IT_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_RTS_IT_RTS_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CTS_IT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_CTS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CTS_IT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_CTS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CTS_IT_CTS_IT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_IER_CTS_IT_CTS_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CTS_IT_CTS_IT_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_IER_CTS_IT_CTS_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_RESERVED_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IER_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_RESERVED_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IER_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IT_PENDING_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IIR_IT_PENDING_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IT_PENDING_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IT_PENDING_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IT_PENDING_IT_PENDING_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IT_PENDING_IT_PENDING_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IT_PENDING_IT_PENDING_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IT_PENDING_IT_PENDING_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_IIR_IT_TYPE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IT_TYPE_MASK</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_8</p></td>
+<tr class="row-even"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_8</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_6</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_6</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_3</p></td>
+<tr class="row-even"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_10</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_10</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IT_TYPE_IT_TYPE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_FCR_MIRROR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_FCR_MIRROR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_FCR_MIRROR_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_FCR_MIRROR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_FIFO_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FCR_FIFO_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_FIFO_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_FCR_FIFO_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_FIFO_EN_FIFO_EN_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_FCR_FIFO_EN_FIFO_EN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_FIFO_EN_FIFO_EN_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_FCR_FIFO_EN_FIFO_EN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_RX_FIFO_CLEAR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FCR_RX_FIFO_CLEAR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_RX_FIFO_CLEAR_MASK</p></td>
+<tr class="row-even"><td><p>UART_FCR_RX_FIFO_CLEAR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_RX_FIFO_CLEAR_RX_FIFO_CLEAR_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_FCR_RX_FIFO_CLEAR_RX_FIFO_CLEAR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_RX_FIFO_CLEAR_RX_FIFO_CLEAR_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_FCR_RX_FIFO_CLEAR_RX_FIFO_CLEAR_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_TX_FIFO_CLEAR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FCR_TX_FIFO_CLEAR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_TX_FIFO_CLEAR_MASK</p></td>
+<tr class="row-even"><td><p>UART_FCR_TX_FIFO_CLEAR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_TX_FIFO_CLEAR_TX_FIFO_CLEAR_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_FCR_TX_FIFO_CLEAR_TX_FIFO_CLEAR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_TX_FIFO_CLEAR_TX_FIFO_CLEAR_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_FCR_TX_FIFO_CLEAR_TX_FIFO_CLEAR_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_DMA_MODE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FCR_DMA_MODE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_DMA_MODE_MASK</p></td>
+<tr class="row-even"><td><p>UART_FCR_DMA_MODE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_DMA_MODE_DMA_MODE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_FCR_DMA_MODE_DMA_MODE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_DMA_MODE_DMA_MODE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_FCR_DMA_MODE_DMA_MODE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_TX_FIFO_TRIG_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FCR_TX_FIFO_TRIG_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_TX_FIFO_TRIG_MASK</p></td>
+<tr class="row-even"><td><p>UART_FCR_TX_FIFO_TRIG_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_RX_FIFO_TRIG_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FCR_RX_FIFO_TRIG_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_RX_FIFO_TRIG_MASK</p></td>
+<tr class="row-even"><td><p>UART_FCR_RX_FIFO_TRIG_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FCR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FCR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FCR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_FCR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_CHAR_LENGTH_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_CHAR_LENGTH_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_CHAR_LENGTH_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_CHAR_LENGTH_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_3</p></td>
+<tr class="row-odd"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LCR_CHAR_LENGTH_CHAR_LENGTH_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_NB_STOP_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_NB_STOP_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_NB_STOP_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_NB_STOP_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_NB_STOP_NB_STOP_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LCR_NB_STOP_NB_STOP_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_NB_STOP_NB_STOP_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LCR_NB_STOP_NB_STOP_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_PARITY_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_PARITY_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_PARITY_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_PARITY_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_PARITY_EN_PARITY_EN_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LCR_PARITY_EN_PARITY_EN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_PARITY_EN_PARITY_EN_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LCR_PARITY_EN_PARITY_EN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_PARITY_TYPE1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_PARITY_TYPE1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_PARITY_TYPE1_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_PARITY_TYPE1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_PARITY_TYPE1_PARITY_TYPE1_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LCR_PARITY_TYPE1_PARITY_TYPE1_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_PARITY_TYPE1_PARITY_TYPE1_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LCR_PARITY_TYPE1_PARITY_TYPE1_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_PARITY_TYPE2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_PARITY_TYPE2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_PARITY_TYPE2_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_PARITY_TYPE2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_BREAK_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_BREAK_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_BREAK_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_BREAK_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_BREAK_EN_BREAK_EN_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LCR_BREAK_EN_BREAK_EN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_BREAK_EN_BREAK_EN_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LCR_BREAK_EN_BREAK_EN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_DIV_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_DIV_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_DIV_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_DIV_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_DIV_EN_DIV_EN_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_LCR_DIV_EN_DIV_EN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_DIV_EN_DIV_EN_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_LCR_DIV_EN_DIV_EN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LCR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LCR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LCR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_LCR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_LOOPBACK_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_LOOPBACK_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_LOOPBACK_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_LOOPBACK_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_LOOPBACK_EN_LOOPBACK_EN_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MCR_LOOPBACK_EN_LOOPBACK_EN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_LOOPBACK_EN_LOOPBACK_EN_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MCR_LOOPBACK_EN_LOOPBACK_EN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_XON_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_XON_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_XON_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_XON_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_XON_EN_XON_EN_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MCR_XON_EN_XON_EN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_XON_EN_XON_EN_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MCR_XON_EN_XON_EN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_TCR_TLR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_TCR_TLR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_TCR_TLR_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_TCR_TLR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_TCR_TLR_TCR_TLR_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MCR_TCR_TLR_TCR_TLR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_TCR_TLR_TCR_TLR_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MCR_TCR_TLR_TCR_TLR_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_DTR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_DTR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_DTR_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_DTR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_DTR_DTR_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MCR_DTR_DTR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_DTR_DTR_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MCR_DTR_DTR_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_RTS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_RTS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_RTS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_RTS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_RTS_RTS_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MCR_RTS_RTS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_RTS_RTS_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MCR_RTS_RTS_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_RI_STS_CH_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_RI_STS_CH_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_RI_STS_CH_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_RI_STS_CH_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_RI_STS_CH_RI_STS_CH_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MCR_RI_STS_CH_RI_STS_CH_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_RI_STS_CH_RI_STS_CH_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MCR_RI_STS_CH_RI_STS_CH_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_CD_STS_CH_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_CD_STS_CH_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_CD_STS_CH_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_CD_STS_CH_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_CD_STS_CH_CD_STS_CH_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MCR_CD_STS_CH_CD_STS_CH_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_CD_STS_CH_CD_STS_CH_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MCR_CD_STS_CH_CD_STS_CH_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MCR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MCR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MCR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_MCR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_FIFO_E_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_E_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_E_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_FIFO_E_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_OE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_OE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_OE_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_OE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_OE_RX_OE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_OE_RX_OE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_OE_RX_OE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_OE_RX_OE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_PE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_PE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_PE_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_PE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_PE_RX_PE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_PE_RX_PE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_PE_RX_PE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_PE_RX_PE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_FE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_FE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_FE_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_FE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_FE_RX_FE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_FE_RX_FE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_FE_RX_FE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_FE_RX_FE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_BI_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_BI_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_BI_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_BI_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_BI_RX_BI_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_BI_RX_BI_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_BI_RX_BI_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_BI_RX_BI_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_TX_FIFO_E_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_TX_FIFO_E_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_TX_FIFO_E_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_TX_FIFO_E_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_TX_FIFO_E_TX_FIFO_E_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_TX_FIFO_E_TX_FIFO_E_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_TX_FIFO_E_TX_FIFO_E_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_TX_FIFO_E_TX_FIFO_E_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_TX_SR_E_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_TX_SR_E_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_TX_SR_E_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_TX_SR_E_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_TX_SR_E_TX_SR_E_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_TX_SR_E_TX_SR_E_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_TX_SR_E_TX_SR_E_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_TX_SR_E_TX_SR_E_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_FIFO_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_FIFO_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RX_FIFO_STS_RX_FIFO_STS_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_STS_RX_FIFO_STS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RX_FIFO_STS_RX_FIFO_STS_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_RX_FIFO_STS_RX_FIFO_STS_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_CTS_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_CTS_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_CTS_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_CTS_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_CTS_STS_CTS_STS_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MSR_CTS_STS_CTS_STS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_DSR_STS_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_MSR_DSR_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_DSR_STS_MASK</p></td>
+<tr class="row-odd"><td><p>UART_MSR_DSR_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_DSR_STS_DSR_STS_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_MSR_DSR_STS_DSR_STS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_RI_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_RI_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_RI_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_RI_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_DCD_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_DCD_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_DCD_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_DCD_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_NCTS_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_NCTS_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_NCTS_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_NCTS_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_NDSR_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_NDSR_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_NDSR_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_NDSR_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_NRI_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_NRI_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_NRI_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_NRI_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_NCD_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_NCD_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_NCD_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_NCD_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MSR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MSR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MSR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_MSR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SPR_SPR_WORD_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SPR_SPR_WORD_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SPR_SPR_WORD_MASK</p></td>
+<tr class="row-even"><td><p>UART_SPR_SPR_WORD_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SPR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SPR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SPR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SPR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_7</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_7</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_6</p></td>
+<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_6</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_5</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_5</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_4</p></td>
+<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_4</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_3</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR1_MODE_SELECT_MODE_SELECT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_IR_SLEEP_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_IR_SLEEP_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_IR_SLEEP_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR1_IR_SLEEP_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_IR_SLEEP_IR_SLEEP_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_IR_SLEEP_IR_SLEEP_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_IR_SLEEP_IR_SLEEP_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR1_IR_SLEEP_IR_SLEEP_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_SET_TXIR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_SET_TXIR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_SET_TXIR_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR1_SET_TXIR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_SET_TXIR_SET_TXIR_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_SET_TXIR_SET_TXIR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_SET_TXIR_SET_TXIR_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR1_SET_TXIR_SET_TXIR_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_SCT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_SCT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_SCT_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR1_SCT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_SCT_SCT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_SCT_SCT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_SCT_SCT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR1_SCT_SCT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_SIP_MODE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_SIP_MODE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_SIP_MODE_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR1_SIP_MODE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_SIP_MODE_SIP_MODE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_SIP_MODE_SIP_MODE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_SIP_MODE_SIP_MODE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR1_SIP_MODE_SIP_MODE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_FRAME_END_MODE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_FRAME_END_MODE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_FRAME_END_MODE_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR1_FRAME_END_MODE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_FRAME_END_MODE_FRAME_END_MODE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_FRAME_END_MODE_FRAME_END_MODE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_FRAME_END_MODE_FRAME_END_MODE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR1_FRAME_END_MODE_FRAME_END_MODE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR1_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR1_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR1_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR1_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_IRTX_UNDERRUN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_IRTX_UNDERRUN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_IRTX_UNDERRUN_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR2_IRTX_UNDERRUN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_IRTX_UNDERRUN_IRTX_UNDERRUN_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_IRTX_UNDERRUN_IRTX_UNDERRUN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_IRTX_UNDERRUN_IRTX_UNDERRUN_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR2_IRTX_UNDERRUN_IRTX_UNDERRUN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_STS_FIFO_TRIG_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_STS_FIFO_TRIG_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_STS_FIFO_TRIG_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR2_STS_FIFO_TRIG_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_3</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR2_STS_FIFO_TRIG_STS_FIFO_TRIG_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_UART_PULSE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_UART_PULSE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_UART_PULSE_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR2_UART_PULSE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_UART_PULSE_UART_PULSE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_UART_PULSE_UART_PULSE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_UART_PULSE_UART_PULSE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR2_UART_PULSE_UART_PULSE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_CIR_PULSE_MODE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_CIR_PULSE_MODE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_CIR_PULSE_MODE_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR2_CIR_PULSE_MODE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_3</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR2_CIR_PULSE_MODE_CIR_PULSE_MODE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_IRRXINVERT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_IRRXINVERT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_IRRXINVERT_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR2_IRRXINVERT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_IRRXINVERT_IRRXINVERT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_IRRXINVERT_IRRXINVERT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_IRRXINVERT_IRRXINVERT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_MDR2_IRRXINVERT_IRRXINVERT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_SET_TXIR_ALT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_SET_TXIR_ALT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_SET_TXIR_ALT_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR2_SET_TXIR_ALT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_SET_TXIR_ALT_SET_TXIR_ALT_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_SET_TXIR_ALT_SET_TXIR_ALT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_SET_TXIR_ALT_SET_TXIR_ALT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_MDR2_SET_TXIR_ALT_SET_TXIR_ALT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR2_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR2_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR2_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR2_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_RESERVED0_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_RESERVED0_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_RESERVED0_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_RESERVED0_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_CRC_ERROR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_CRC_ERROR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_CRC_ERROR_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_CRC_ERROR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_CRC_ERROR_CRC_ERROR_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_CRC_ERROR_CRC_ERROR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_ABORT_DETECT_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_ABORT_DETECT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_ABORT_DETECT_MASK</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_ABORT_DETECT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_ABORT_DETECT_ABORT_DETECT_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_ABORT_DETECT_ABORT_DETECT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_FRAME_TOO_LONG_ERROR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_FRAME_TOO_LONG_ERROR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_FRAME_TOO_LONG_ERROR_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_FRAME_TOO_LONG_ERROR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_FRAME_TOO_LONG_ERROR_FRAME_TOO_LONG_ERROR_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_FRAME_TOO_LONG_ERROR_FRAME_TOO_LONG_ERROR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_OE_ERROR_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_OE_ERROR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_OE_ERROR_MASK</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_OE_ERROR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_OE_ERROR_OE_ERROR_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_OE_ERROR_OE_ERROR_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_RESERVED5_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_RESERVED5_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_RESERVED5_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_RESERVED5_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFLSR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFLSR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFLSR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFLSR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TXFLL_TXFLL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TXFLL_TXFLL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFLL_TXFLL_MASK</p></td>
+<tr class="row-even"><td><p>UART_TXFLL_TXFLL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TXFLL_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TXFLL_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFLL_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_TXFLL_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RESUME_RESUME_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RESUME_RESUME_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RESUME_RESUME_MASK</p></td>
+<tr class="row-even"><td><p>UART_RESUME_RESUME_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RESUME_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RESUME_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RESUME_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_RESUME_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TXFLH_TXFLH_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TXFLH_TXFLH_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFLH_TXFLH_MASK</p></td>
+<tr class="row-even"><td><p>UART_TXFLH_TXFLH_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TXFLH_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TXFLH_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFLH_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_TXFLH_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TXFLH_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TXFLH_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFLH_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_TXFLH_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFREGL_SFREGL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFREGL_SFREGL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFREGL_SFREGL_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFREGL_SFREGL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFREGL_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFREGL_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFREGL_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFREGL_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFLL_RXFLL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RXFLL_RXFLL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFLL_RXFLL_MASK</p></td>
+<tr class="row-even"><td><p>UART_RXFLL_RXFLL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFLL_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RXFLL_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFLL_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_RXFLL_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFREGH_SFREGH_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFREGH_SFREGH_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFREGH_SFREGH_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFREGH_SFREGH_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFREGH_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFREGH_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFREGH_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFREGH_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SFREGH_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SFREGH_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SFREGH_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SFREGH_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFLH_RXFLH_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RXFLH_RXFLH_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFLH_RXFLH_MASK</p></td>
+<tr class="row-even"><td><p>UART_RXFLH_RXFLH_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFLH_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RXFLH_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFLH_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_RXFLH_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFLH_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RXFLH_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFLH_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_RXFLH_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BLR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_BLR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_BLR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_BLR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BLR_XBOF_TYPE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_BLR_XBOF_TYPE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_BLR_XBOF_TYPE_MASK</p></td>
+<tr class="row-even"><td><p>UART_BLR_XBOF_TYPE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BLR_XBOF_TYPE_XBOF_TYPE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_BLR_XBOF_TYPE_XBOF_TYPE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_BLR_XBOF_TYPE_XBOF_TYPE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_BLR_XBOF_TYPE_XBOF_TYPE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BLR_STS_FIFO_RESET_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_BLR_STS_FIFO_RESET_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_BLR_STS_FIFO_RESET_MASK</p></td>
+<tr class="row-even"><td><p>UART_BLR_STS_FIFO_RESET_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BLR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_BLR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_BLR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_BLR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_EOT_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_EOT_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_EOT_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_EOT_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_ABORT_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_ABORT_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_ABORT_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_ABORT_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_SCTX_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_SCTX_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_SCTX_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_SCTX_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_SEND_SIP_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_SEND_SIP_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_SEND_SIP_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_SEND_SIP_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_SEND_SIP_SEND_SIP_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_SEND_SIP_SEND_SIP_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_SEND_SIP_SEND_SIP_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_ACREG_SEND_SIP_SEND_SIP_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_DIS_TX_UNDERRUN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_DIS_TX_UNDERRUN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_DIS_TX_UNDERRUN_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_DIS_TX_UNDERRUN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_DIS_TX_UNDERRUN_DIS_TX_UNDERRUN_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_DIS_TX_UNDERRUN_DIS_TX_UNDERRUN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_DIS_TX_UNDERRUN_DIS_TX_UNDERRUN_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_ACREG_DIS_TX_UNDERRUN_DIS_TX_UNDERRUN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_DIS_IR_RX_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_DIS_IR_RX_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_DIS_IR_RX_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_DIS_IR_RX_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_DIS_IR_RX_DIS_IR_RX_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_DIS_IR_RX_DIS_IR_RX_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_DIS_IR_RX_DIS_IR_RX_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_ACREG_DIS_IR_RX_DIS_IR_RX_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_SD_MOD_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_SD_MOD_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_SD_MOD_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_SD_MOD_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_SD_MOD_SD_MOD_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_SD_MOD_SD_MOD_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_SD_MOD_SD_MOD_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_ACREG_SD_MOD_SD_MOD_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_PULSE_TYPE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_PULSE_TYPE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_PULSE_TYPE_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_PULSE_TYPE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_PULSE_TYPE_PULSE_TYPE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_PULSE_TYPE_PULSE_TYPE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_PULSE_TYPE_PULSE_TYPE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_ACREG_PULSE_TYPE_PULSE_TYPE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ACREG_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ACREG_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ACREG_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_ACREG_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_DMA_MODE_CTL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_CTL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_CTL_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_DMA_MODE_CTL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_DMA_MODE_CTL_DMA_MODE_CTL_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_CTL_DMA_MODE_CTL_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_CTL_DMA_MODE_CTL_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SCR_DMA_MODE_CTL_DMA_MODE_CTL_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_DMA_MODE_2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_2_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_DMA_MODE_2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_3</p></td>
+<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SCR_DMA_MODE_2_DMA_MODE_2_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_TX_EMPTY_CTL_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_TX_EMPTY_CTL_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_TX_EMPTY_CTL_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_TX_EMPTY_CTL_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_TX_EMPTY_CTL_IT_TX_EMPTY_CTL_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SCR_TX_EMPTY_CTL_IT_TX_EMPTY_CTL_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_TX_EMPTY_CTL_IT_TX_EMPTY_CTL_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SCR_TX_EMPTY_CTL_IT_TX_EMPTY_CTL_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_RX_CTS_DSR_WAKE_UP_ENABLE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_RX_CTS_DSR_WAKE_UP_ENABLE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_RX_CTS_DSR_WAKE_UP_ENABLE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SCR_RX_CTS_DSR_WAKE_UP_ENABLE_RX_CTS_DSR_WAKE_UP_ENABLE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_DSR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_DSR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_DSR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_DSR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_DSR_IT_DSR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SCR_DSR_IT_DSR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_DSR_IT_DSR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SCR_DSR_IT_DSR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_TX_TRIG_GRANU1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_TX_TRIG_GRANU1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_TX_TRIG_GRANU1_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_TX_TRIG_GRANU1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_TX_TRIG_GRANU1_TX_TRIG_GRANU1_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SCR_TX_TRIG_GRANU1_TX_TRIG_GRANU1_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_TX_TRIG_GRANU1_TX_TRIG_GRANU1_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SCR_TX_TRIG_GRANU1_TX_TRIG_GRANU1_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_RX_TRIG_GRANU1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_RX_TRIG_GRANU1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_RX_TRIG_GRANU1_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_RX_TRIG_GRANU1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_RX_TRIG_GRANU1_RX_TRIG_GRANU1_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SCR_RX_TRIG_GRANU1_RX_TRIG_GRANU1_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_RX_TRIG_GRANU1_RX_TRIG_GRANU1_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SCR_RX_TRIG_GRANU1_RX_TRIG_GRANU1_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SCR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SCR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SCR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SCR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_TX_FIFO_FULL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SSR_TX_FIFO_FULL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_TX_FIFO_FULL_MASK</p></td>
+<tr class="row-even"><td><p>UART_SSR_TX_FIFO_FULL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_TX_FIFO_FULL_TX_FIFO_FULL_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SSR_TX_FIFO_FULL_TX_FIFO_FULL_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_TX_FIFO_FULL_TX_FIFO_FULL_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SSR_TX_FIFO_FULL_TX_FIFO_FULL_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_RX_CTS_DSR_WAKE_UP_STS_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_RX_CTS_DSR_WAKE_UP_STS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_RX_CTS_DSR_WAKE_UP_STS_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SSR_RX_CTS_DSR_WAKE_UP_STS_RX_CTS_DSR_WAKE_UP_STS_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SSR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_SSR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SSR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SSR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_DMA_COUNTER_RST_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SSR_DMA_COUNTER_RST_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_DMA_COUNTER_RST_MASK</p></td>
+<tr class="row-even"><td><p>UART_SSR_DMA_COUNTER_RST_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SSR_DMA_COUNTER_RST_DMA_COUNTER_RST_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_SSR_DMA_COUNTER_RST_DMA_COUNTER_RST_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SSR_DMA_COUNTER_RST_DMA_COUNTER_RST_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_SSR_DMA_COUNTER_RST_DMA_COUNTER_RST_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EBLR_EBLR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EBLR_EBLR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EBLR_EBLR_MASK</p></td>
+<tr class="row-even"><td><p>UART_EBLR_EBLR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EBLR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EBLR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EBLR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_EBLR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MVR_MINOR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MVR_MINOR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR_MINOR_MASK</p></td>
+<tr class="row-even"><td><p>UART_MVR_MINOR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MVR_CUSTOM_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MVR_CUSTOM_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR_CUSTOM_MASK</p></td>
+<tr class="row-even"><td><p>UART_MVR_CUSTOM_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MVR_MAJOR_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MVR_MAJOR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR_MAJOR_MASK</p></td>
+<tr class="row-even"><td><p>UART_MVR_MAJOR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MVR_RTL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MVR_RTL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR_RTL_MASK</p></td>
+<tr class="row-even"><td><p>UART_MVR_RTL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MVR_FUNC_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MVR_FUNC_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR_FUNC_MASK</p></td>
+<tr class="row-even"><td><p>UART_MVR_FUNC_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MVR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MVR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_MVR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MVR_SCHEME_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MVR_SCHEME_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MVR_SCHEME_MASK</p></td>
+<tr class="row-even"><td><p>UART_MVR_SCHEME_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_AUTOIDLE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_AUTOIDLE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_AUTOIDLE_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSC_AUTOIDLE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_AUTOIDLE_AUTOIDLE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_AUTOIDLE_AUTOIDLE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_AUTOIDLE_AUTOIDLE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SYSC_AUTOIDLE_AUTOIDLE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_SOFTRESET_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_SOFTRESET_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_SOFTRESET_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSC_SOFTRESET_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_SOFTRESET_SOFTRESET_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_SOFTRESET_SOFTRESET_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_SOFTRESET_SOFTRESET_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SYSC_SOFTRESET_SOFTRESET_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_ENAWAKEUP_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_ENAWAKEUP_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_ENAWAKEUP_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSC_ENAWAKEUP_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_ENAWAKEUP_ENAWAKEUP_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_ENAWAKEUP_ENAWAKEUP_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_ENAWAKEUP_ENAWAKEUP_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SYSC_ENAWAKEUP_ENAWAKEUP_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_IDLEMODE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_IDLEMODE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_IDLEMODE_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSC_IDLEMODE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_3</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SYSC_IDLEMODE_IDLEMODE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSC_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSC_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSC_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSC_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSC_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSS_RESETDONE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSS_RESETDONE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSS_RESETDONE_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSS_RESETDONE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSS_RESETDONE_RESETDONE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_SYSS_RESETDONE_RESETDONE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSS_RESETDONE_RESETDONE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_SYSS_RESETDONE_RESETDONE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSS_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSS_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSS_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSS_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_SYSS_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_SYSS_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_SYSS_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_SYSS_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_EVENT_0_CTS_ACTIVITY_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_EVENT_0_CTS_ACTIVITY_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_EVENT_0_CTS_ACTIVITY_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_0_CTS_ACTIVITY_EVENT_0_CTS_ACTIVITY_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_EVENT_1_DSR_ACTIVITY_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_EVENT_1_DSR_ACTIVITY_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_EVENT_1_DSR_ACTIVITY_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_1_DSR_ACTIVITY_EVENT_1_DSR_ACTIVITY_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_EVENT_2_RI_ACTIVITY_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_EVENT_2_RI_ACTIVITY_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_EVENT_2_RI_ACTIVITY_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_2_RI_ACTIVITY_EVENT_2_RI_ACTIVITY_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_EVENT_3_DCD_CD_ACTIVITY_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_EVENT_3_DCD_CD_ACTIVITY_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_EVENT_3_DCD_CD_ACTIVITY_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_3_DCD_CD_ACTIVITY_EVENT_3_DCD_CD_ACTIVITY_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_EVENT_4_RX_ACTIVITY_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_EVENT_4_RX_ACTIVITY_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_EVENT_4_RX_ACTIVITY_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_4_RX_ACTIVITY_EVENT_4_RX_ACTIVITY_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_EVENT_5_RHR_INTERRUPT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_EVENT_5_RHR_INTERRUPT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_EVENT_5_RHR_INTERRUPT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_5_RHR_INTERRUPT_EVENT_5_RHR_INTERRUPT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_EVENT_6_RECEIVER_LINE_STATUS_INTERRUPT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_EVENT_7_TX_WAKEUP_EN_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_EVENT_7_TX_WAKEUP_EN_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_EVENT_7_TX_WAKEUP_EN_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_WER_EVENT_7_TX_WAKEUP_EN_EVENT_7_TX_WAKEUP_EN_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_WER_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_WER_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_WER_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_WER_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_CFPS_CFPS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_CFPS_CFPS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_CFPS_CFPS_MASK</p></td>
+<tr class="row-even"><td><p>UART_CFPS_CFPS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_CFPS_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_CFPS_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_CFPS_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_CFPS_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFIFO_LVL_RXFIFO_LVL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RXFIFO_LVL_RXFIFO_LVL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFIFO_LVL_RXFIFO_LVL_MASK</p></td>
+<tr class="row-even"><td><p>UART_RXFIFO_LVL_RXFIFO_LVL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_RXFIFO_LVL_RESERVED24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_RXFIFO_LVL_RESERVED24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_RXFIFO_LVL_RESERVED24_MASK</p></td>
+<tr class="row-even"><td><p>UART_RXFIFO_LVL_RESERVED24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TXFIFO_LVL_TXFIFO_LVL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TXFIFO_LVL_TXFIFO_LVL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFIFO_LVL_TXFIFO_LVL_MASK</p></td>
+<tr class="row-even"><td><p>UART_TXFIFO_LVL_TXFIFO_LVL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TXFIFO_LVL_RESERVED24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TXFIFO_LVL_RESERVED24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TXFIFO_LVL_RESERVED24_MASK</p></td>
+<tr class="row-even"><td><p>UART_TXFIFO_LVL_RESERVED24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER2_EN_RXFIFO_EMPTY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER2_EN_RXFIFO_EMPTY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER2_EN_RXFIFO_EMPTY_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER2_EN_RXFIFO_EMPTY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER2_EN_TXFIFO_EMPTY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER2_EN_TXFIFO_EMPTY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER2_EN_TXFIFO_EMPTY_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER2_EN_TXFIFO_EMPTY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER2_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER2_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER2_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER2_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER2_RESERVED1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER2_RESERVED1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER2_RESERVED1_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER2_RESERVED1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_RXFIFO_EMPTY_STS_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_RXFIFO_EMPTY_STS_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_RXFIFO_EMPTY_STS_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_ISR2_RXFIFO_EMPTY_STS_RXFIFO_EMPTY_STS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_MASK</p></td>
+<tr class="row-even"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_TXFIFO_EMPTY_STS_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_TXFIFO_EMPTY_STS_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_TXFIFO_EMPTY_STS_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_ISR2_TXFIFO_EMPTY_STS_TXFIFO_EMPTY_STS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ISR2_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ISR2_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ISR2_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_ISR2_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ISR2_RESERVED1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ISR2_RESERVED1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ISR2_RESERVED1_MASK</p></td>
+<tr class="row-even"><td><p>UART_ISR2_RESERVED1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FREQ_SEL_FREQ_SEL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FREQ_SEL_FREQ_SEL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FREQ_SEL_FREQ_SEL_MASK</p></td>
+<tr class="row-even"><td><p>UART_FREQ_SEL_FREQ_SEL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_FREQ_SEL_RESERVED2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_FREQ_SEL_RESERVED2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_FREQ_SEL_RESERVED2_MASK</p></td>
+<tr class="row-even"><td><p>UART_FREQ_SEL_RESERVED2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_ABAUD_1ST_CHAR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_ABAUD_1ST_CHAR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ABAUD_1ST_CHAR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_ABAUD_1ST_CHAR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_BAUD_2ND_CHAR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_BAUD_2ND_CHAR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_BAUD_2ND_CHAR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_BAUD_2ND_CHAR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_DISABLE_CIR_RX_DEMOD_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_DISABLE_CIR_RX_DEMOD_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_DISABLE_CIR_RX_DEMOD_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_MDR3_DISABLE_CIR_RX_DEMOD_DISABLE_CIR_RX_DEMOD_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_NONDEFAULT_FREQ_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_NONDEFAULT_FREQ_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_NONDEFAULT_FREQ_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR3_NONDEFAULT_FREQ_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_SET_DMA_TX_THRESHOLD_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_SET_DMA_TX_THRESHOLD_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_SET_DMA_TX_THRESHOLD_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR3_SET_DMA_TX_THRESHOLD_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_DIR_POL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_DIR_POL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_DIR_POL_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR3_DIR_POL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_DIR_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_DIR_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_DIR_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR3_DIR_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_RESERVED1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_RESERVED1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_RESERVED1_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR3_RESERVED1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_MDR3_RESERVED2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_MDR3_RESERVED2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_MDR3_RESERVED2_MASK</p></td>
+<tr class="row-even"><td><p>UART_MDR3_RESERVED2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TX_DMA_THRESHOLD_TX_DMA_THRESHOLD_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TX_DMA_THRESHOLD_TX_DMA_THRESHOLD_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TX_DMA_THRESHOLD_TX_DMA_THRESHOLD_MASK</p></td>
+<tr class="row-even"><td><p>UART_TX_DMA_THRESHOLD_TX_DMA_THRESHOLD_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TX_DMA_THRESHOLD_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TX_DMA_THRESHOLD_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TX_DMA_THRESHOLD_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_TX_DMA_THRESHOLD_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TX_DMA_THRESHOLD_RESERVED1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TX_DMA_THRESHOLD_RESERVED1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TX_DMA_THRESHOLD_RESERVED1_MASK</p></td>
+<tr class="row-even"><td><p>UART_TX_DMA_THRESHOLD_RESERVED1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_DLL_CLOCK_LSB_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_DLL_CLOCK_LSB_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_DLL_CLOCK_LSB_MASK</p></td>
+<tr class="row-even"><td><p>UART_DLL_CLOCK_LSB_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_DLL_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_DLL_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_DLL_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_DLL_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_RHR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_RHR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_RHR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_RHR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_RHR_IT_RHR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_RHR_IT_RHR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_RHR_IT_RHR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_RHR_IT_RHR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_THR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_THR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_THR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_THR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_THR_IT_THR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_THR_IT_THR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_THR_IT_THR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_THR_IT_THR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_LAST_RX_BYTE_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_LAST_RX_BYTE_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_LAST_RX_BYTE_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_LAST_RX_BYTE_IT_LAST_RX_BYTE_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_RX_OVERRUN_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_RX_OVERRUN_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_RX_OVERRUN_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_RX_OVERRUN_IT_RX_OVERRUN_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_STS_FIFO_TRIG_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_STS_FIFO_TRIG_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_STS_FIFO_TRIG_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_STS_FIFO_TRIG_IT_STS_FIFO_TRIG_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_TX_STATUS_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_TX_STATUS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_TX_STATUS_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_TX_STATUS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_TX_STATUS_IT_TX_STATUS_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_TX_STATUS_IT_TX_STATUS_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_TX_STATUS_IT_TX_STATUS_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_TX_STATUS_IT_TX_STATUS_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_LINE_STS_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_LINE_STS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_LINE_STS_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_LINE_STS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_EOF_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_EOF_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_EOF_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_EOF_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_EOF_IT_EOF_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_EOF_IT_EOF_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_EOF_IT_EOF_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_EOF_IT_EOF_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_IRDA_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_IRDA_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_IRDA_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_IRDA_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RHR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RHR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RHR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RHR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RHR_IT_RHR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RHR_IT_RHR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RHR_IT_RHR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RHR_IT_RHR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_THR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_THR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_THR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_THR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_THR_IT_THR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_THR_IT_THR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_THR_IT_THR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_THR_IT_THR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RX_STOP_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RX_STOP_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RX_STOP_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RX_STOP_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RX_OVERRUN_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RX_OVERRUN_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RX_OVERRUN_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RX_OVERRUN_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RX_OVERRUN_IT_RX_OVERRUN_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RX_OVERRUN_IT_RX_OVERRUN_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RX_OVERRUN_IT_RX_OVERRUN_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RX_OVERRUN_IT_RX_OVERRUN_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RESERVED_1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RESERVED_1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RESERVED_1_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RESERVED_1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_TX_STATUS_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_TX_STATUS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_TX_STATUS_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_TX_STATUS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RESERVED_2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RESERVED_2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RESERVED_2_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RESERVED_2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IER_CIR_RESERVED_3_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IER_CIR_RESERVED_3_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IER_CIR_RESERVED_3_MASK</p></td>
+<tr class="row-even"><td><p>UART_IER_CIR_RESERVED_3_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_DLH_CLOCK_MSB_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_DLH_CLOCK_MSB_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_DLH_CLOCK_MSB_MASK</p></td>
+<tr class="row-even"><td><p>UART_DLH_CLOCK_MSB_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_DLH_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_DLH_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_DLH_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_DLH_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_RHR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_RHR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_RHR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_RHR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_RHR_IT_RHR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_RHR_IT_RHR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_RHR_IT_RHR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_RHR_IT_RHR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_THR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_THR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_THR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_THR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_THR_IT_THR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_THR_IT_THR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_THR_IT_THR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_THR_IT_THR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_RX_FIFO_LAST_BYTE_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_RX_FIFO_LAST_BYTE_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_RX_FIFO_LAST_BYTE_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_RX_FIFO_LAST_BYTE_IT_RX_FIFO_LAST_BYTE_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_RX_OE_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_OE_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_OE_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_RX_OE_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_RX_OE_IT_RX_OE_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_OE_IT_RX_OE_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_RX_OE_IT_RX_OE_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_RX_OE_IT_RX_OE_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_STS_FIFO_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_STS_FIFO_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_STS_FIFO_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_STS_FIFO_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_STS_FIFO_IT_STS_FIFO_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_STS_FIFO_IT_STS_FIFO_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_STS_FIFO_IT_STS_FIFO_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_STS_FIFO_IT_STS_FIFO_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_TX_STATUS_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_TX_STATUS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_TX_STATUS_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_TX_STATUS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_LINE_STS_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_LINE_STS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_LINE_STS_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_LINE_STS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_LINE_STS_IT_LINE_STS_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_EOF_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_EOF_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_EOF_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_EOF_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_EOF_IT_EOF_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_EOF_IT_EOF_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_EOF_IT_EOF_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_EOF_IT_EOF_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_IRDA_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_IRDA_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_IRDA_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_IRDA_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RHR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RHR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RHR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RHR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RHR_IT_RHR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RHR_IT_RHR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RHR_IT_RHR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RHR_IT_RHR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_THR_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_THR_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_THR_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_THR_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_THR_IT_THR_IT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_THR_IT_THR_IT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_THR_IT_THR_IT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_THR_IT_THR_IT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RX_STOP_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RX_STOP_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RX_STOP_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RX_STOP_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RX_STOP_IT_RX_STOP_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RX_OE_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RX_OE_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RX_OE_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RX_OE_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RX_OE_IT_RX_OE_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RX_OE_IT_RX_OE_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RX_OE_IT_RX_OE_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RX_OE_IT_RX_OE_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RESERVED_1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RESERVED_1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RESERVED_1_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RESERVED_1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_TX_STATUS_IT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_TX_STATUS_IT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_TX_STATUS_IT_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_TX_STATUS_IT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_TX_STATUS_IT_TX_STATUS_IT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RESERVED_2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RESERVED_2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RESERVED_2_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RESERVED_2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_IIR_CIR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_IIR_CIR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_IIR_CIR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_IIR_CIR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_MASK</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_15</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_15</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_14</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_14</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_13</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_13</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_12</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_12</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_11</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_11</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_10</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_10</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_9</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_9</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_8</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_8</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_7</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_7</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_6</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_6</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_5</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_5</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_4</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_4</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_3</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_2</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_EFR_SW_FLOW_CONTROL_SW_FLOW_CONTROL_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_HW_FLOW_CONTROL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EFR_HW_FLOW_CONTROL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_HW_FLOW_CONTROL_MASK</p></td>
+<tr class="row-even"><td><p>UART_EFR_HW_FLOW_CONTROL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_HW_NO_FLOW_CONTROL_VALUE</p></td>
+<tr class="row-odd"><td><p>UART_EFR_HW_NO_FLOW_CONTROL_VALUE</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_HW_ENABLE_RTS_FLOW_CONTROL_VALUE</p></td>
+<tr class="row-even"><td><p>UART_EFR_HW_ENABLE_RTS_FLOW_CONTROL_VALUE</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_HW_ENALE_CTS_FLOW_CONTROL_VALUE</p></td>
+<tr class="row-odd"><td><p>UART_EFR_HW_ENALE_CTS_FLOW_CONTROL_VALUE</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_HW_ENABLE_RTS_CTS_FLOW_CONTROL_VALUE</p></td>
+<tr class="row-even"><td><p>UART_EFR_HW_ENABLE_RTS_CTS_FLOW_CONTROL_VALUE</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_ENHANCED_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EFR_ENHANCED_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_ENHANCED_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_EFR_ENHANCED_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_ENHANCED_EN_ENHANCED_EN_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_EFR_ENHANCED_EN_ENHANCED_EN_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_ENHANCED_EN_ENHANCED_EN_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_EFR_ENHANCED_EN_ENHANCED_EN_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_MASK</p></td>
+<tr class="row-even"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_SPECIAL_CHAR_DETECT_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_SPECIAL_CHAR_DETECT_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_SPECIAL_CHAR_DETECT_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_EFR_SPECIAL_CHAR_DETECT_SPECIAL_CHAR_DETECT_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_AUTO_RTS_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EFR_AUTO_RTS_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_AUTO_RTS_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_EFR_AUTO_RTS_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_AUTO_RTS_EN_AUTO_RTS_EN_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_EFR_AUTO_RTS_EN_AUTO_RTS_EN_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_AUTO_RTS_EN_AUTO_RTS_EN_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_EFR_AUTO_RTS_EN_AUTO_RTS_EN_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_AUTO_CTS_EN_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EFR_AUTO_CTS_EN_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_AUTO_CTS_EN_MASK</p></td>
+<tr class="row-even"><td><p>UART_EFR_AUTO_CTS_EN_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_AUTO_CTS_EN_AUTO_CTS_EN_U_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_EFR_AUTO_CTS_EN_AUTO_CTS_EN_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_AUTO_CTS_EN_AUTO_CTS_EN_U_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_EFR_AUTO_CTS_EN_AUTO_CTS_EN_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_EFR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_EFR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_EFR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_EFR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XON1_ADDR1_XON_WORD1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XON1_ADDR1_XON_WORD1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XON1_ADDR1_XON_WORD1_MASK</p></td>
+<tr class="row-even"><td><p>UART_XON1_ADDR1_XON_WORD1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XON1_ADDR1_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XON1_ADDR1_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XON1_ADDR1_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_XON1_ADDR1_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_RX_FIFO_E_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_FIFO_E_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_FIFO_E_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_RX_FIFO_E_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_RX_FIFO_E_RX_FIFO_E_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_FIFO_E_RX_FIFO_E_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_FIFO_E_RX_FIFO_E_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_RX_FIFO_E_RX_FIFO_E_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_E_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_E_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_E_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_E_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_E_STS_FIFO_E_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_E_STS_FIFO_E_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_E_STS_FIFO_E_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_E_STS_FIFO_E_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_CRC_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_CRC_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_CRC_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_CRC_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_CRC_CRC_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_CRC_CRC_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_CRC_CRC_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_CRC_CRC_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_ABORT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_ABORT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_ABORT_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_ABORT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_ABORT_ABORT_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_ABORT_ABORT_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_ABORT_ABORT_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_ABORT_ABORT_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_FRAME_TOO_LONG_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_FRAME_TOO_LONG_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_FRAME_TOO_LONG_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_FRAME_TOO_LONG_FRAME_TOO_LONG_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_RX_LAST_BYTE_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_RX_LAST_BYTE_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_RX_LAST_BYTE_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_RX_LAST_BYTE_RX_LAST_BYTE_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_STS_FIFO_FULL_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_STS_FIFO_FULL_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_STS_FIFO_FULL_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_STS_FIFO_FULL_STS_FIFO_FULL_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_THR_EMPTY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_THR_EMPTY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_THR_EMPTY_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_THR_EMPTY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_THR_EMPTY_THR_EMPTY_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_THR_EMPTY_THR_EMPTY_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_THR_EMPTY_THR_EMPTY_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_THR_EMPTY_THR_EMPTY_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_IRDA_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_IRDA_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_IRDA_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_IRDA_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_RX_FIFO_E_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_RX_FIFO_E_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_RX_FIFO_E_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_RX_FIFO_E_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_RX_FIFO_E_RX_FIFO_E_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_RX_FIFO_E_RX_FIFO_E_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_RX_FIFO_E_RX_FIFO_E_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_RX_FIFO_E_RX_FIFO_E_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_RESERVED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_RESERVED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_RESERVED_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_RESERVED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_RX_STOP_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_RX_STOP_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_RX_STOP_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_RX_STOP_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_RX_STOP_RX_STOP_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_RX_STOP_RX_STOP_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_RX_STOP_RX_STOP_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_RX_STOP_RX_STOP_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_RESERVED_1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_RESERVED_1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_RESERVED_1_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_RESERVED_1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_THR_EMPTY_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_THR_EMPTY_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_THR_EMPTY_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_THR_EMPTY_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_THR_EMPTY_THR_EMPTY_VALUE_1</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_THR_EMPTY_THR_EMPTY_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_THR_EMPTY_THR_EMPTY_VALUE_0</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_THR_EMPTY_THR_EMPTY_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_LSR_CIR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_LSR_CIR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_LSR_CIR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_LSR_CIR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XON2_ADDR2_XON_WORD2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XON2_ADDR2_XON_WORD2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XON2_ADDR2_XON_WORD2_MASK</p></td>
+<tr class="row-even"><td><p>UART_XON2_ADDR2_XON_WORD2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XON2_ADDR2_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XON2_ADDR2_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XON2_ADDR2_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_XON2_ADDR2_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XOFF1_XOFF_WORD1_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XOFF1_XOFF_WORD1_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XOFF1_XOFF_WORD1_MASK</p></td>
+<tr class="row-even"><td><p>UART_XOFF1_XOFF_WORD1_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XOFF1_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XOFF1_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XOFF1_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_XOFF1_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TCR_RX_FIFO_TRIG_HALT_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TCR_RX_FIFO_TRIG_HALT_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TCR_RX_FIFO_TRIG_HALT_MASK</p></td>
+<tr class="row-even"><td><p>UART_TCR_RX_FIFO_TRIG_HALT_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TCR_RX_FIFO_TRIG_START_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TCR_RX_FIFO_TRIG_START_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TCR_RX_FIFO_TRIG_START_MASK</p></td>
+<tr class="row-even"><td><p>UART_TCR_RX_FIFO_TRIG_START_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TCR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TCR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TCR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_TCR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XOFF2_XOFF_WORD2_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XOFF2_XOFF_WORD2_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XOFF2_XOFF_WORD2_MASK</p></td>
+<tr class="row-even"><td><p>UART_XOFF2_XOFF_WORD2_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_XOFF2_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_XOFF2_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_XOFF2_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_XOFF2_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TLR_TX_FIFO_TRIG_DMA_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TLR_TX_FIFO_TRIG_DMA_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TLR_TX_FIFO_TRIG_DMA_MASK</p></td>
+<tr class="row-even"><td><p>UART_TLR_TX_FIFO_TRIG_DMA_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TLR_RX_FIFO_TRIG_DMA_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TLR_RX_FIFO_TRIG_DMA_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TLR_RX_FIFO_TRIG_DMA_MASK</p></td>
+<tr class="row-even"><td><p>UART_TLR_RX_FIFO_TRIG_DMA_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_TLR_RESERVED_24_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_TLR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_TLR_RESERVED_24_MASK</p></td>
+<tr class="row-even"><td><p>UART_TLR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_SPEED_SHIFT</p></td>
+<tr class="row-odd"><td><p>UART_UASR_SPEED_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_SPEED_MASK</p></td>
+<tr class="row-even"><td><p>UART_UASR_SPEED_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_10</p></td>
+<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_10</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_9</p></td>
+<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_9</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_8</p></td>
+<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_8</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_7</p></td>
+<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_7</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_6</p></td>
+<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_6</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_5</p></td>
+<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_5</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_4</p></td>
+<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_4</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_3</p></td>
+<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_2</p></td>
+<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_SPEED_SPEED_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_UASR_SPEED_SPEED_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_BIT_BY_CHAR_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_UASR_BIT_BY_CHAR_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_BIT_BY_CHAR_MASK</p></td>
+<tr class="row-odd"><td><p>UART_UASR_BIT_BY_CHAR_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_BIT_BY_CHAR_BIT_BY_CHAR_U_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_UASR_BIT_BY_CHAR_BIT_BY_CHAR_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_BIT_BY_CHAR_BIT_BY_CHAR_U_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_UASR_BIT_BY_CHAR_BIT_BY_CHAR_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_PARITY_TYPE_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_UASR_PARITY_TYPE_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_PARITY_TYPE_MASK</p></td>
+<tr class="row-odd"><td><p>UART_UASR_PARITY_TYPE_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_3</p></td>
+<tr class="row-even"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_3</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_2</p></td>
+<tr class="row-odd"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_2</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_1</p></td>
+<tr class="row-even"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_1</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_0</p></td>
+<tr class="row-odd"><td><p>UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_0</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_UASR_RESERVED_24_SHIFT</p></td>
+<tr class="row-even"><td><p>UART_UASR_RESERVED_24_SHIFT</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>UART_UASR_RESERVED_24_MASK</p></td>
+<tr class="row-odd"><td><p>UART_UASR_RESERVED_24_MASK</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>UART_ERROR_COUNT</p></td>
+<tr class="row-even"><td><p>UART_ERROR_COUNT</p></td>
 <td><p>Count Value to check error in the recieved byte.</p></td>
-</tr>
-<tr class="row-even"><td><p>IS_DATA_LENGTH_VALID (dataLength)</p></td>
-<td><p>Macro to check if the Data length is valid.</p></td>
-</tr>
-<tr class="row-odd"><td><p>IS_STOP_BITS_VALID (stopBits)</p></td>
-<td><p>Macro to check if the Number of stop bits is valid.</p></td>
-</tr>
-<tr class="row-even"><td><p>IS_PARITY_TYPE_VALID (parityType)</p></td>
-<td><p>Macro to check if the Parity type is valid.</p></td>
-</tr>
-<tr class="row-odd"><td><p>MCAL_STATE_RESET</p></td>
-<td><p>MCAL Driver states.</p></td>
-</tr>
-<tr class="row-even"><td><p>MCAL_STATE_READY</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>MCAL_STATE_BUSY</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p>MCAL_STATE_ERROR</p></td>
-<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -3003,8 +2906,8 @@ A handle that is used by UART with EDMA.</p>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>boolean</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-writecancelnocb"><span class="std std-ref">UART_writeCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
-<td><p>Function to flush a TX FIFO of peripheral specified by the UART handle.</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-writecancelnocb"><span class="std std-ref">UART_writeCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>boolean</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-writecanceldmanocb"><span class="std std-ref">UART_writeCancelDmaNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
@@ -3019,8 +2922,8 @@ A handle that is used by UART with EDMA.</p>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>boolean</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-readcancelnocb"><span class="std std-ref">UART_readCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
-<td><p>Function to flush a TX FIFO of peripheral specified by the UART handle.</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-readcancelnocb"><span class="std std-ref">UART_readCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>boolean</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-readcanceldmanocb"><span class="std std-ref">UART_readCancelDmaNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
@@ -3131,18 +3034,10 @@ A handle that is used by UART with EDMA.</p>
 <section id="function-uart-writecancelnocb">
 <h3>function UART_writeCancelNoCB<a class="headerlink" href="#function-uart-writecancelnocb" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">UART_writeCancelNoCB</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Brief</strong>:
-Function to flush a TX FIFO of peripheral specified by the UART handle.</p>
-<p><strong>Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>handle</strong> UART_Handle returned from UART_open()</p></li>
-</ul>
-<p><strong>See</strong>: UART_open()</p>
-<p><strong>Precondition</strong>: UART_open() has to be called first</p>
 </section>
 <section id="function-uart-writecanceldmanocb">
 <h3>function UART_writeCancelDmaNoCB<a class="headerlink" href="#function-uart-writecanceldmanocb" title="Link to this heading"></a></h3>
@@ -3172,18 +3067,10 @@ Function to flush a TX FIFO of peripheral specified by the UART handle.</p>
 <section id="function-uart-readcancelnocb">
 <h3>function UART_readCancelNoCB<a class="headerlink" href="#function-uart-readcancelnocb" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">UART_readCancelNoCB</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Brief</strong>:
-Function to flush a TX FIFO of peripheral specified by the UART handle.</p>
-<p><strong>Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>handle</strong> UART_Handle returned from UART_open()</p></li>
-</ul>
-<p><strong>See</strong>: UART_open()</p>
-<p><strong>Precondition</strong>: UART_open() has to be called first</p>
 </section>
 <section id="function-uart-readcanceldmanocb">
 <h3>function UART_readCancelDmaNoCB<a class="headerlink" href="#function-uart-readcanceldmanocb" title="Link to this heading"></a></h3>
@@ -3488,11 +3375,8 @@ Function to flush a TX FIFO of peripheral specified by the UART handle.</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
 <li><p><strong>hUart</strong> Handle to the UART instance used</p></li>
-<li><p><strong>handle</strong> UART_Handle returned from UART_open()</p></li>
 </ul>
-<p><strong>See</strong>: UART_open()</p>
 <p><strong>Return</strong>: MCAL_SystemP_SUCCESS if successful; else error on failure</p>
-<p><strong>Precondition</strong>: UART_open() has to be called first</p>
 </section>
 <section id="function-uart-proclinestatuserr">
 <h3>function UART_procLineStatusErr<a class="headerlink" href="#function-uart-proclinestatuserr" title="Link to this heading"></a></h3>
@@ -3525,7 +3409,7 @@ Function to check various error conditions in uart.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Aug 05, 2025.
+          <span class="lastupdated" >Last updated on Aug 09, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

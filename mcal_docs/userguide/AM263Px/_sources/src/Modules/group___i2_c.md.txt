@@ -351,8 +351,7 @@ Type to define the number of data elements to be sent and/or received during a t
 | Std_ReturnType | **[Cdd_I2c_AsyncTransmit](../Modules/group___i2_c.md#function-cdd_i2c_asynctransmit)**([Cdd_I2c_SequenceType](../Modules/group___i2_c.md#typedef-cdd_i2c_sequencetype) sequenceId)| The service conducts an asynchronous data transmission according to the parameters provided to the Cdd_I2c_SetupEB() service. The callback Cdd_I2c_SequenceErrorNotification() is called, when the asynchronous operation has finished.  |
 | Std_ReturnType | **[Cdd_I2c_Cancel](../Modules/group___i2_c.md#function-cdd_i2c_cancel)**([Cdd_I2c_SequenceType](../Modules/group___i2_c.md#typedef-cdd_i2c_sequencetype) sequenceId)| Cancel a transmission.  |
 | void | **[Cdd_I2c_MainFunction](../Modules/group___i2_c.md#function-cdd_i2c_mainfunction)**(void )| Makes a target channel available for processing requests (addressing). When called, the target channel becomes available for starting incoming or outgoing transfers.  |
-| void | **[Cdd_I2c_PollingModeProcessing](../Modules/group___i2_c.md#function-cdd_i2c_pollingmodeprocessing)**(void )| Ensures proper processing of I2c communication in the case of disabled interrupts.  |
-| [Cdd_I2c_SequenceResultType](../Modules/group___i2_c.md#enum-cdd_i2c_sequenceresulttype) | **[Cdd_I2c_GetSequenceResult](../Modules/group___i2_c.md#function-cdd_i2c_getsequenceresult)**([Cdd_I2c_SequenceType](../Modules/group___i2_c.md#typedef-cdd_i2c_sequencetype) sequenceId)| This service returns the current status of the given SequenceId.  |
+| [Cdd_I2c_SequenceResultType](../Modules/group___i2_c.md#enum-cdd_i2c_sequenceresulttype) | **[Cdd_I2c_GetSequenceResult](../Modules/group___i2_c.md#function-cdd_i2c_getsequenceresult)**([Cdd_I2c_SequenceType](../Modules/group___i2_c.md#typedef-cdd_i2c_sequencetype) sequenceId)| Ensures proper processing of I2c communication in the case of disabled interrupts.  |
 | [Cdd_I2c_ChannelResultType](../Modules/group___i2_c.md#enum-cdd_i2c_channelresulttype) | **[Cdd_I2c_GetResult](../Modules/group___i2_c.md#function-cdd_i2c_getresult)**([Cdd_I2c_ChannelType](../Modules/group___i2_c.md#typedef-cdd_i2c_channeltype) chId)| This service returns the current status of the given channel.  |
 | [Cdd_I2c_ComponentStatusType](../Modules/group___i2_c.md#enum-cdd_i2c_componentstatustype) | **[Cdd_I2c_GetStatus](../Modules/group___i2_c.md#function-cdd_i2c_getstatus)**(void )| This service returns the module's status.  |
 | Std_ReturnType | **[Cdd_I2c_RegisterReadback](../Modules/group___i2_c.md#function-cdd_i2c_registerreadback)**(uint8 hwUnitId, [Cdd_I2c_RegisterReadbackType](../Classes/struct_cdd___i2c___register_readback_type.md) * regRbPtr)| This service reads the key I2C registers and returns their value.  |
@@ -552,21 +551,6 @@ Makes a target channel available for processing requests (addressing). When call
 Service ID[hex] - CDD_I2C_SID_MAIN_FUNCTION Sync/Async - Asynchronous Reentrancy - Reentrant 
 
 
-### function Cdd_I2c_PollingModeProcessing
-
-```
-void Cdd_I2c_PollingModeProcessing(
-    void 
-)
-```
-
-
-**Brief**: 
-Ensures proper processing of I2c communication in the case of disabled interrupts. 
-
-Service ID[hex] - CDD_I2C_SID_POLLING_MODE_PROCESSING Sync/Async - Asynchronous Reentrancy - Reentrant 
-
-
 ### function Cdd_I2c_GetSequenceResult
 
 ```
@@ -577,7 +561,11 @@ Cdd_I2c_SequenceResultType Cdd_I2c_GetSequenceResult(
 
 
 **Brief**: 
-This service returns the current status of the given SequenceId. 
+Ensures proper processing of I2c communication in the case of disabled interrupts. 
+
+Service ID[hex] - CDD_I2C_SID_POLLING_MODE_PROCESSING Sync/Async - Asynchronous Reentrancy - Reentrant
+
+This service returns the current status of the given SequenceId.
 
 Service ID[hex] - CDD_I2C_SID_GET_SEQUENCE_RESULT Sync/Async - Synchronous Reentrancy - Reentrant
 

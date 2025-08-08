@@ -104,8 +104,8 @@ extern "C" {
 #define CDD_DMA_DSS_C                                                     5U
 
 /** \brief CSL Base Addresses for Sitara AM263x */
-#define MCAL_MSS_CTRL_U_BASE                                              (0x50D00000ul)
-#define MCAL_MSS_TPCC_A_U_BASE                                            (0x52A00000ul)
+#define MCAL_MSS_CTRL_U_BASE                                              (0x50D00000UL)
+#define MCAL_MSS_TPCC_A_U_BASE                                            (0x52A00000UL)
 
 /** \brief CDD DMA Completion Interrupt Number */
 #define MCAL_MSS_INTR_MSS_TPCC_A_INTAGG                                   72
@@ -121,7 +121,7 @@ extern "C" {
 #define CDD_DMA_CSL_R5_MPIDR_AFF1_SHIFT                                  (8U)
 
 /** \brief CDD DMA  Base address. */
-#define CDD_DMA_CSL_MSS_CTRL_U_BASE                                      (0x50D00000ul)
+#define CDD_DMA_CSL_MSS_CTRL_U_BASE                                      (0x50D00000UL)
 
 /** \brief CDD DMA Lock Step. */
 #define CDD_DMA_CSL_MSS_CTRL_R5_STATUS_REG_R5_STATUS_REG_LOCK_STEP_MASK                (0x00000100U)

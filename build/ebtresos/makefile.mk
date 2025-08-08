@@ -9,6 +9,7 @@ export EB_WORKSPACE?=$(MCAL_PATH)/build/ebtresos/eb_workspace/$(EB_PROJECT_NAME)
 export EB_BACKUP?=$(MCAL_PATH)/build/ebtresos/eb_backup
 export EB_OUTPUT_PATH?=$(EB_PROJECT_PATH)
 export EB_EXTRA_OUTPUT_PATH?=$(EB_OUTPUT_PATH)
+export PACKAGE?=None
 
 all: build_project
 
@@ -19,10 +20,20 @@ build_project: generate_project delete_project
 copy_plugins: delete_plugins
 	$(ECHO) Copying TI Plugins to EB Tresos plugins folder for $(EB_PLATFORM) ...
 	$(COPY) -rf $(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)/*_TI_$(EB_PLATFORM) $(EB_PATH)/tresos/plugins/
+ifeq ($(PACKAGE),$(filter $(PACKAGE), C))
+	$(RMDIR) $(EB_PATH)/tresos/plugins/Port_TI_$(EB_PLATFORM)
+	$(RMDIR) $(EB_PATH)/tresos/plugins/EthTrcv_TI_$(EB_PLATFORM)
+	$(COPY) -rf $(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)/Port_TI_$(EB_PLATFORM)_C $(EB_PATH)/tresos/plugins/
+	$(COPY) -rf $(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)/EthTrcv_TI_$(EB_PLATFORM)_C $(EB_PATH)/tresos/plugins/
+endif
+ifeq ($(PACKAGE),$(filter $(PACKAGE), SIP))
+	$(RMDIR) $(EB_PATH)/tresos/plugins/Port_TI_$(EB_PLATFORM)
+	$(COPY) -rf $(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)/Port_TI_$(EB_PLATFORM)_SIP $(EB_PATH)/tresos/plugins/
+endif
 
 delete_plugins:
 	$(ECHO) Deleting TI Plugins from EB Tresos plugins folder for $(EB_PLATFORM) ...
-	$(RMDIR) $(EB_PATH)/tresos/plugins/*_TI_$(EB_PLATFORM)
+	$(RMDIR) $(EB_PATH)/tresos/plugins/*_TI_$(EB_PLATFORM)*
 
 #TBD: Move not working if there are no folders to backup - find an alternative
 move_plugins:

@@ -10,7 +10,3 @@ ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   SRCDIR += $(UART_PATH)/V0
   INCDIR += $(UART_PATH)/V0
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCDIR += $(UART_PATH)/V1
-  INCDIR += $(UART_PATH)/V1
-endif

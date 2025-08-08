@@ -45,6 +45,9 @@
 #include "app_utils.h"
 #include "soc.h"
 #include "hw_ctrl_core.h"
+#if defined(AM263PX_PLATFORM)
+#include "app_utilsI2c.h"
+#endif
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
@@ -112,9 +115,7 @@ int main(void)
     FlsApp_Startup();
 #if defined(AM263PX_PLATFORM)
 #if defined AM263PX_R_PACKAGE || defined AM263PX_C_PACKAGE
-#if (STD_OFF == CDD_I2C_POLLING_MODE)
-    Cdd_I2c_InterruptConfig();
-#endif  // #if(STD_OFF == CDD_I2C_POLLING_MODE)
+    I2c_utilsInterruptConfig();
     Cdd_I2c_Init(NULL_PTR);
     board_flash_reset();
 #endif                        // #if defined AM263PX_R_PACKAGE || defined AM263PX_C_PACKAGE

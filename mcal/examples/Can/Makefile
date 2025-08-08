@@ -6,7 +6,6 @@ include $(mcal_PATH)/include/memmap/inc.mk
 include $(mcal_PATH)/Can/srcs.mk
 include $(mcal_PATH)/Dma/inc.mk
 include $(mcal_PATH)/Fls/srcs.mk
-include $(mcal_PATH)/I2c/srcs.mk
 include $(mcal_PATH)/Mcu/srcs.mk
 include $(mcal_PATH)/Port/srcs.mk
 include $(mcal_PATH)/examples/Utils/srcs.mk
@@ -15,13 +14,13 @@ include $(mcal_PATH)/examples/Utils/srcs_startup.mk
 include $(mcal_PATH)/examples_config/Can_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Dma_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Fls_Demo_Cfg/srcs.mk
-include $(mcal_PATH)/examples_config/Cdd_I2c_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Mcu_Demo_Cfg/srcs.mk
-include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs.mk
 include soc/srcs.mk
 ifeq ($(SOC), am263px)
-  include $(mcal_PATH)/examples/Utils/srcs_pmic.mk
+  include $(mcal_PATH)/I2c/srcs.mk
+  include $(mcal_PATH)/examples/Utils/srcs_i2c.mk
   include $(mcal_PATH)/examples/Utils/srcs_iomux.mk
+  include $(mcal_PATH)/examples/Utils/srcs_pmic.mk
 endif
 
 SRCDIR += .

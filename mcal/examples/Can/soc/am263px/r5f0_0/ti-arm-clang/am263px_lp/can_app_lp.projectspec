@@ -74,9 +74,9 @@
         -I${MCAL_MCAL_Utils_Mcan}
         -I${MCAL_MCAL_Can_Cfg}
         -I${MCAL_MCAL_Mcu_Cfg}
-        -I${MCAL_MCAL_Port_Cfg}
         -I${MCAL_MCAL_I2c_Cfg}
         -I${MCAL_MCAL_Fls_Cfg}
+        -I${MCAL_MCAL_App_Cfg}
 
         -I${MCAL_MCAL_Can_V0}
         -I${MCAL_MCAL_Mcu_V2}
@@ -138,9 +138,9 @@
         <pathVariable name="MCAL_MCAL_Can_eg" path="${MCAL_MCAL}/examples/Can/soc/am263px/r5f0_0/" scope="project"/>
         <pathVariable name="MCAL_MCAL_Can_Cfg" path="${PROJECT_LOC}/examples_config/Can_Demo_Cfg/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu_Cfg" path="${PROJECT_LOC}/examples_config/Mcu_Demo_Cfg/include" scope="project"/>
-        <pathVariable name="MCAL_MCAL_Port_Cfg" path="${PROJECT_LOC}/examples_config/Port_Demo_Cfg/include" scope="project"/>
-        <pathVariable name="MCAL_MCAL_I2c_Cfg" path="${PROJECT_LOC}/examples_config/Cdd_I2c_Demo_Cfg_Lp/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_Cfg" path="${PROJECT_LOC}/examples_config/Cdd_I2c_Demo_Cfg/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Fls_Cfg" path="${PROJECT_LOC}/examples_config/Fls_Demo_Cfg/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_App_Cfg" path="${PROJECT_LOC}/examples/Can/include" scope="project"/>
 
         <file path="${MCAL_MCAL}/Can/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Can"></file>
         <file path="${MCAL_MCAL}/Can/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Can"></file>
@@ -154,15 +154,14 @@
         <file path="${MCAL_MCAL}/I2c/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/I2c"></file>
         <file path="${MCAL_MCAL}/I2c/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/I2c"></file>
         <file path="${MCAL_MCAL}/I2c/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/I2c"></file>
+        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos/am263px_lp/output/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples/Can"></file>
+        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos/am263px_lp/output/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples/Can"></file>
         <file path="${MCAL_MCAL}/examples_config/Can_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Can_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Can_Demo_Cfg/soc/am263px/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Can_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263px/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/src/Port_PBcfg_C.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/src/Port_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos_lp/output/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg_Lp"></file>
-        <file path="${MCAL_MCAL}/examples/Can/soc/am263px/tresos_lp/output/src/Cdd_I2c_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg_Lp"></file>
+        <file path="${MCAL_MCAL}/examples_config/Cdd_I2c_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}//examples_config/Cdd_I2c_Demo_Cfg/soc/am263px/r5f0_0/src/Cdd_I2c_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Fls_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Fls_Demo_Cfg"></file>
 
         <file path="${MCAL_MCAL}/examples/Utils/am263px/IoMux/ioexp_tca6416_6424.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px/IoMux"></file>
@@ -206,11 +205,12 @@
         <file path="${MCAL_MCAL}/examples/Utils/sys_vim.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/trace.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/trace.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/app_utilsI2c.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/app_utilsI2c.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/am263px/Pmic/AppPimc.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/am263px/Pmic/mcspi_v0.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/am263px/Pmic/sdk_cslr_mcspi.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/am263px/Pmic/cslr.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-
 
         <file path="${MCAL_MCAL}/examples/Can/CanApp.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
         <file path="${MCAL_MCAL}/examples/Can/soc/am263px/r5f0_0/CanApp_Startup.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>

@@ -10,10 +10,6 @@ ifeq ($(SOC), $(filter $(SOC), am263 am263px))
   SRCDIR += $(IPC_PATH)/V0
   INCDIR += $(IPC_PATH)/V0
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCDIR += $(IPC_PATH)/V1
-  INCDIR += $(IPC_PATH)/V1
-endif
 ifeq ($(SOC), $(filter $(SOC), am261))
   SRCDIR += $(IPC_PATH)/V2
   INCDIR += $(IPC_PATH)/V2

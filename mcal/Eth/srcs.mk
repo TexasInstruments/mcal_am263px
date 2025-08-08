@@ -10,7 +10,3 @@ ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   SRCDIR += $(ETH_PATH)/V0
   INCDIR += $(ETH_PATH)/V0
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCDIR += $(ETH_PATH)/V1
-  INCDIR += $(ETH_PATH)/V1
-endif

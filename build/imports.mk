@@ -3,6 +3,18 @@ export CCS_VERSION?=ccs1281
 export AUTOSAR_VERSION_DOT?=4.3.1
 export AUTOSAR_VERSION?=$(subst .,,$(AUTOSAR_VERSION_DOT))
 
+# Build profile: Release, Debug
+export PROFILE?=Release
+
+# List of platforms: am263, am263px, am261
+export PLATFORM?=am263
+ifeq ($(PLATFORM),$(filter $(PLATFORM), am263x))
+  export PLATFORM=am263
+endif
+ifeq ($(PLATFORM),$(filter $(PLATFORM), am261x))
+  export PLATFORM=am261
+endif
+
 ifeq ($(OS),Windows_NT)
     export ECHO=@echo
     export MAKE=gmake
@@ -22,7 +34,6 @@ ifeq ($(OS),Windows_NT)
     export TOUCH=$(CYGWIN_PATH)/touch
     export PATHSEP=\\
     export CHMOD=$(CYGWIN_PATH)/echo
-    export SHELL=cmd.exe
     export PWD=cd
     export PYTHON=python
     DOT=$(shell where dot 2>NUL)
@@ -54,13 +65,10 @@ endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263 am263x))
   export EB_PLATFORM?=AM263x
-  export TI_MCAL_DEVICE?=AM263x
 endif
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
   export EB_PLATFORM?=AM263Px
-  export TI_MCAL_DEVICE?=AM263Px
 endif
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261 am261x))
   export EB_PLATFORM?=AM261x
-  export TI_MCAL_DEVICE?=AM261x
 endif

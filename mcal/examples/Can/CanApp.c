@@ -39,6 +39,9 @@
 #include "sys_vim.h"
 #include "app_utils.h"
 #include "trace.h"
+#if defined(AM263PX_PLATFORM)
+#include "app_utilsI2c.h"
+#endif
 
 /* ========================================================================== */
 /*              Internal Function Declarations                                */
@@ -285,7 +288,7 @@ static void CanExample_ExternalTest()
     uint8                   operationMode = 1;
     Can_ControllerStateType Controller_Satus;
 #if defined(AM263PX_PLATFORM)
-    Cdd_I2c_InterruptConfig();
+    I2c_utilsInterruptConfig();
     Cdd_I2c_Init(NULL_PTR);
     mcanEnableTransceiver();
 #endif

@@ -110,14 +110,6 @@
 <td><p><strong><a class="reference internal" href="#enum-ecap-syncinpulsesource"><span class="std std-ref">ECAP_SyncInPulseSource</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>enum</p></td>
-<td><p><strong><a class="reference internal" href="#enum-ecap-emulationmode"><span class="std std-ref">ECAP_EmulationMode</span></a></strong></p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>enum</p></td>
-<td><p><strong><a class="reference internal" href="#enum-ecap-syncinpulsesource"><span class="std std-ref">ECAP_SyncInPulseSource</span></a></strong></p></td>
-<td><p></p></td>
-</tr>
 </tbody>
 </table>
 <section id="enum-ecap-emulationmode">
@@ -290,176 +282,6 @@
 </tbody>
 </table>
 </section>
-<section id="id1">
-<h3>enum ECAP_EmulationMode<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
-<th class="head"><p>Value</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>ECAP_EMULATION_STOP</p></td>
-<td><p>0x0U</p></td>
-<td><p>TSCTR is stopped on emulation suspension.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_EMULATION_RUN_TO_ZERO</p></td>
-<td><p>0x1U</p></td>
-<td><p>TSCTR runs until 0 before stopping on emulation suspension.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_EMULATION_FREE_RUN</p></td>
-<td><p>0x2U</p></td>
-<td><p>TSCTR is not affected by emulation suspension.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="id2">
-<h3>enum ECAP_SyncInPulseSource<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
-<th class="head"><p>Value</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_DISABLE</p></td>
-<td><p>0x0</p></td>
-<td><p>Disable Sync-in.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM0</p></td>
-<td><p>0x1</p></td>
-<td><p>Sync-in source is EPWM0 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM1</p></td>
-<td><p>0x2</p></td>
-<td><p>Sync-in source is EPWM1 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM2</p></td>
-<td><p>0x3</p></td>
-<td><p>Sync-in source is EPWM2 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM3</p></td>
-<td><p>0x4</p></td>
-<td><p>Sync-in source is EPWM3 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM4</p></td>
-<td><p>0x5</p></td>
-<td><p>Sync-in source is EPWM4 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM5</p></td>
-<td><p>0x6</p></td>
-<td><p>Sync-in source is EPWM5 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM6</p></td>
-<td><p>0x7</p></td>
-<td><p>Sync-in source is EPWM6 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM7</p></td>
-<td><p>0x8</p></td>
-<td><p>Sync-in source is EPWM7 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM8</p></td>
-<td><p>0x9</p></td>
-<td><p>Sync-in source is EPWM8 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM9</p></td>
-<td><p>0xA</p></td>
-<td><p>Sync-in source is EPWM9 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM10</p></td>
-<td><p>0xB</p></td>
-<td><p>Sync-in source is EPWM10 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM11</p></td>
-<td><p>0xC</p></td>
-<td><p>Sync-in source is EPWM11 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM12</p></td>
-<td><p>0xD</p></td>
-<td><p>Sync-in source is EPWM12 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM13</p></td>
-<td><p>0xE</p></td>
-<td><p>Sync-in source is EPWM13 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM14</p></td>
-<td><p>0xF</p></td>
-<td><p>Sync-in source is EPWM14 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM15</p></td>
-<td><p>0x10</p></td>
-<td><p>Sync-in source is EPWM15 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM16</p></td>
-<td><p>0x11</p></td>
-<td><p>Sync-in source is EPWM16 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM17</p></td>
-<td><p>0x12</p></td>
-<td><p>Sync-in source is EPWM17 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM18</p></td>
-<td><p>0x13</p></td>
-<td><p>Sync-in source is EPWM18 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM19</p></td>
-<td><p>0x14</p></td>
-<td><p>Sync-in source is EPWM19 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM20</p></td>
-<td><p>0x15</p></td>
-<td><p>Sync-in source is EPWM20 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM21</p></td>
-<td><p>0x16</p></td>
-<td><p>Sync-in source is EPWM21 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM22</p></td>
-<td><p>0x17</p></td>
-<td><p>Sync-in source is EPWM22 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM23</p></td>
-<td><p>0x18</p></td>
-<td><p>Sync-in source is EPWM23 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM24</p></td>
-<td><p>0x19</p></td>
-<td><p>Sync-in source is EPWM24 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM25</p></td>
-<td><p>0x1A</p></td>
-<td><p>Sync-in source is EPWM25 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM26</p></td>
-<td><p>0x1B</p></td>
-<td><p>Sync-in source is EPWM26 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM27</p></td>
-<td><p>0x1C</p></td>
-<td><p>Sync-in source is EPWM27 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM28</p></td>
-<td><p>0x1D</p></td>
-<td><p>Sync-in source is EPWM28 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM29</p></td>
-<td><p>0x1E</p></td>
-<td><p>Sync-in source is EPWM29 sync-out signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM30</p></td>
-<td><p>0x1F</p></td>
-<td><p>Sync-in source is EPWM30 sync-out signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM31</p></td>
-<td><p>0x20</p></td>
-<td><p>Sync-in source is EPWM31 sync-out signal.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 </section>
 <section id="defines">
 <h2>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
@@ -476,24 +298,6 @@
 <tr class="row-odd"><td><p>ECAP_APWM_MODE</p></td>
 <td><p>Auxiliary PWM Mode.</p></td>
 </tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_MODE</p></td>
-<td><p>Capture Mode.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_APWM_MODE</p></td>
-<td><p>Auxiliary PWM Mode.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_1</p></td>
-<td><p>Time stamp capture on event 1.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_2</p></td>
-<td><p>Time stamp capture on event 2.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_3</p></td>
-<td><p>Time stamp capture on event 3.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_4</p></td>
-<td><p>Time stamp capture on event 4.</p></td>
-</tr>
 <tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_1</p></td>
 <td><p>Time stamp capture on event 1.</p></td>
 </tr>
@@ -518,24 +322,6 @@
 <tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT4_STOP</p></td>
 <td><p>Stop capture after event 4.</p></td>
 </tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT1_STOP</p></td>
-<td><p>Stop capture after event 1.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT2_STOP</p></td>
-<td><p>Stop capture after event 2.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT3_STOP</p></td>
-<td><p>Stop capture after event 3.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT4_STOP</p></td>
-<td><p>Stop capture after event 4.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_APWM_ACTIVE_HIGH</p></td>
-<td><p>Output Polarity HIGH.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_APWM_ACTIVE_LOW</p></td>
-<td><p>Output Polarity LOW.</p></td>
-</tr>
 <tr class="row-even"><td><p>ECAP_APWM_ACTIVE_HIGH</p></td>
 <td><p>Output Polarity HIGH.</p></td>
 </tr>
@@ -547,18 +333,6 @@
 </tr>
 <tr class="row-odd"><td><p>ECAP_COUNTER_FREE_RUNNING</p></td>
 <td><p>Counter Mode Free Running.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_COUNTER_STOP</p></td>
-<td><p>Counter Mode Stop.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_COUNTER_FREE_RUNNING</p></td>
-<td><p>Counter Mode Free Running.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_SYNC_IN_DISABLE</p></td>
-<td><p>Disable SyncIn option.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_ENABLE_COUNTER</p></td>
-<td><p>Enable Counter to be loaded from the ECAP_CNTPHS register upon SYNCI signal.</p></td>
 </tr>
 <tr class="row-even"><td><p>ECAP_SYNC_IN_DISABLE</p></td>
 <td><p>Disable SyncIn option.</p></td>
@@ -574,36 +348,6 @@
 </tr>
 <tr class="row-even"><td><p>ECAP_SYNC_OUT_DISABLE</p></td>
 <td><p>Disable SyncOut Signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_IN</p></td>
-<td><p>Select SyncIn event to be the SyncOut signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_PRD_EQ</p></td>
-<td><p>Select PRD event to be the SyncOut signal.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_SYNC_OUT_DISABLE</p></td>
-<td><p>Disable SyncOut Signal.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CEVT1_INT</p></td>
-<td><p>Capture Event 1 Interrupt Enable.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CEVT2_INT</p></td>
-<td><p>Capture Event 2 Interrupt Enable.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CEVT3_INT</p></td>
-<td><p>Capture Event 3 Interrupt Enable.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CEVT4_INT</p></td>
-<td><p>Capture Event 4 Interrupt Enable.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CNTOVF_INT</p></td>
-<td><p>Counter Overflow Interrupt Enable.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_PRDEQ_INT</p></td>
-<td><p>Period Equal Interrupt Enable.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CMPEQ_INT</p></td>
-<td><p>Compare Equal Interrupt Enable.</p></td>
 </tr>
 <tr class="row-odd"><td><p>ECAP_CEVT1_INT</p></td>
 <td><p>Capture Event 1 Interrupt Enable.</p></td>
@@ -629,50 +373,32 @@
 <tr class="row-even"><td><p>ECAP_GLOBAL_INT</p></td>
 <td><p>Global Interrupt Source Clear Flag.</p></td>
 </tr>
-<tr class="row-odd"><td><p>ECAP_GLOBAL_INT</p></td>
-<td><p>Global Interrupt Source Clear Flag.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_RISING</p></td>
+<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_RISING</p></td>
 <td><p>Capture Event Rising Edge.</p></td>
 </tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_FALLING</p></td>
+<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_FALLING</p></td>
 <td><p>Capture Event Falling Edge.</p></td>
 </tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_RISING</p></td>
-<td><p>Capture Event Rising Edge.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_FALLING</p></td>
-<td><p>Capture Event Falling Edge.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_RESET_COUNTER_NO_RESET</p></td>
+<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_RESET_COUNTER_NO_RESET</p></td>
 <td><p>No counter reset upon Capture Event.</p></td>
 </tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_RESET_COUNTER_RESET</p></td>
+<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_RESET_COUNTER_RESET</p></td>
 <td><p>Counter reset upon Capture Event.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_EVENT_RESET_COUNTER_NO_RESET</p></td>
-<td><p>No counter reset upon Capture Event.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ECAP_CAPTURE_EVENT_RESET_COUNTER_RESET</p></td>
-<td><p>Counter reset upon Capture Event.</p></td>
-</tr>
-<tr class="row-even"><td><p>ECAP_CAPTURE_INPUT_SOURCE_SELECT_0</p></td>
-<td><p>Capture input source select input is ECAPxINPU[0].</p></td>
-</tr>
-<tr class="row-odd"><td><p>CSL_ECAP_ECCLR_INT_MASK</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p>CSL_ECAP_ECCLR</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>CSL_ECAP_ECCTL2</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-even"><td><p>CSL_ECAP_ECCTL2_REARM_MASK</p></td>
-<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>ECAP_CAPTURE_INPUT_SOURCE_SELECT_0</p></td>
 <td><p>Capture input source select input is ECAPxINPU[0].</p></td>
+</tr>
+<tr class="row-even"><td><p>CSL_ECAP_ECCLR_INT_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CSL_ECAP_ECCLR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CSL_ECAP_ECCTL2</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CSL_ECAP_ECCTL2_REARM_MASK</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -778,14 +504,6 @@
 <tr class="row-even"><td><p>void</p></td>
 <td><p><strong><a class="reference internal" href="#function-icu-ecap-setsyncinpulsesource"><span class="std std-ref">ICU_ECAP_setSyncInPulseSource</span></a></strong>(uint32 base, <a class="reference internal" href="#enum-ecap-syncinpulsesource"><span class="std std-ref">ECAP_SyncInPulseSource</span></a> source)</p></td>
 <td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-icu-ecap-intrenable"><span class="std std-ref">ICU_ECAP_intrEnable</span></a></strong>(uint32 baseAddr, uint32 flag)</p></td>
-<td><p>This function enables the specified interrupts.</p></td>
-</tr>
-<tr class="row-even"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-icu-ecap-captureinputsourceselect"><span class="std std-ref">ICU_ECAP_captureInputSourceSelect</span></a></strong>(uint32 baseAddr, uint8 srcSelect)</p></td>
-<td><p>This function configures the capture input source select bits.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1173,42 +891,6 @@ This function clears of the status specified interrupts.</p>
 </pre></div>
 </div>
 </section>
-<section id="id3">
-<h3>function ICU_ECAP_intrEnable<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ICU_ECAP_intrEnable</span><span class="p">(</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">flag</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Brief</strong>:
-This function enables the specified interrupts.</p>
-<p><strong>Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>baseAddr</strong> It is the Memory address of the ECAP instance used.</p></li>
-<li><p><strong>flag</strong> It is the value which specifies the interrupts to be enabled.</p></li>
-</ul>
-<p>flag can take one of the following macros.</p>
-<ul class="simple">
-<li><p>[Ecap_IntrSrc_t].</p></li>
-</ul>
-</section>
-<section id="function-icu-ecap-captureinputsourceselect">
-<h3>function ICU_ECAP_captureInputSourceSelect<a class="headerlink" href="#function-icu-ecap-captureinputsourceselect" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ICU_ECAP_captureInputSourceSelect</span><span class="p">(</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">srcSelect</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Brief</strong>:
-This function configures the capture input source select bits.</p>
-<p><strong>Parameters</strong>:</p>
-<ul class="simple">
-<li><p><strong>baseAddr</strong> It is the Memory address of the ECAP instance used.</p></li>
-<li><p><strong>srcSelect</strong> Capture input select 0x0 capture input is ECAPxINPUT[0] 0x1 capture input is ECAPxINPUT[1] 0x7F capture input is ECAPxINPUT[127]</p></li>
-</ul>
-</section>
 </section>
 <section id="detailed-description">
 <h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Link to this heading"></a></h2>
@@ -1225,7 +907,7 @@ This function configures the capture input source select bits.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Aug 05, 2025.
+          <span class="lastupdated" >Last updated on Aug 09, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

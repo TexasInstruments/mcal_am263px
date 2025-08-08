@@ -10,8 +10,3 @@ ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   INCDIR += $(SPI_PATH)/V0
   SRCS_COMMON += Spi_Mcspi.c Spi_Dma.c
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCDIR += $(SPI_PATH)/V1
-  INCDIR += $(SPI_PATH)/V1
-  SRCS_COMMON += Spi_Mibspi.c Spi_Qspi.c
-endif

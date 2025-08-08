@@ -28,6 +28,8 @@ title: Spi API GUIDE Header file
 |enum| **[Spi_DataLineReceiveType](../Modules/group___s_p_i.md#enum-spi_datalinereceivetype)** | Spi_DataLineReceiveType defines the lines selected for reception.  | 
 |enum| **[Spi_DataLineTransmitType](../Modules/group___s_p_i.md#enum-spi_datalinetransmittype)** | Spi_DataLineTransmitType defines the lines selected for transmission.  | 
 |enum| **[Mcspi_IrqStatusType](../Modules/group___s_p_i.md#enum-mcspi_irqstatustype)** | Irq status and std return type.  | 
+|typedef void(*)(void)  | **[Spi_JobEndNotifyType](../Modules/group___s_p_i.md#typedef-spi_jobendnotifytype)** | Typedef for job end notification function pointer.  | 
+|typedef void(*)(void)  | **[Spi_SeqEndNotifyType](../Modules/group___s_p_i.md#typedef-spi_seqendnotifytype)** | Typedef for sequence end notification function pointer.  | 
 
 
 
@@ -171,9 +173,9 @@ SPI Chip Select Pin.
 ### enum Spi_ClkMode
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
-| SPI_CLK_MODE_0 | 0x00U| SPI Clock Phase = 0 (rising edge latch),    Polarity = 0 (Active HIGH)   |
+| SPI_CLK_MODE_0 | 0x00U| SPI Clock Phase = 0 (rising edge latch), Polarity = 0 (Active HIGH)   |
 | SPI_CLK_MODE_1 | 0x01U| SPI Clock Phase = 1 (falling edge latch), Polarity = 0 (Active HIGH)   |
-| SPI_CLK_MODE_2 | 0x02U| SPI Clock Phase = 0 (rising edge latch),    Polarity = 1 (Active LOW)   |
+| SPI_CLK_MODE_2 | 0x02U| SPI Clock Phase = 0 (rising edge latch), Polarity = 1 (Active LOW)   |
 | SPI_CLK_MODE_3 | 0x03U| SPI Clock Phase = 1 (falling edge latch), Polarity = 1 (Active LOW)   |
 
 
@@ -292,6 +294,28 @@ Spi_DataLineTransmitType defines the lines selected for transmission.
 
 **Brief**: 
 Irq status and std return type. 
+
+
+
+### typedef Spi_JobEndNotifyType
+```
+typedef void(* Spi_JobEndNotifyType) (void);
+```
+
+
+**Brief**: 
+Typedef for job end notification function pointer. 
+
+
+
+### typedef Spi_SeqEndNotifyType
+```
+typedef void(* Spi_SeqEndNotifyType) (void);
+```
+
+
+**Brief**: 
+Typedef for sequence end notification function pointer. 
 
 
 

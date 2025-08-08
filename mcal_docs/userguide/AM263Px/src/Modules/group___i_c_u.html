@@ -460,43 +460,43 @@ This type defines Input XBAR.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>ECAP_CEVT1_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK</p></td>
+<td><p>(0x00000002U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>ECAP_CEVT2_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK</p></td>
+<td><p>(0x00000004U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>ECAP_CEVT3_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK</p></td>
+<td><p>(0x00000008U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>ECAP_CEVT4_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p>(0x00000010U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>ECAP_CEVT1_CEVT2_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK</p></td>
+<td><p>(0x00000002U) | (0x00000004U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>ECAP_CEVT1_CEVT3_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK</p></td>
+<td><p>(0x00000002U) | (0x00000008U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>ECAP_CEVT1_CEVT4_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p>(0x00000002U) | (0x00000010U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>ECAP_CEVT2_CEVT3_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK</p></td>
+<td><p>(0x00000004U) | (0x00000008U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>ECAP_CEVT2_CEVT4_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p>(0x00000004U) | (0x00000010U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>ECAP_CEVT3_CEVT4_INT</p></td>
-<td><p>CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK</p></td>
+<td><p>(0x00000008U) | (0x00000010U)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>ECAP_CEVT1_CEVT2_CEVT3_INT</p></td>
@@ -505,17 +505,17 @@ This type defines Input XBAR.</p>
 </tr>
 </tbody>
 </table>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK \| CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK \| CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK|   |
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    (0x00000002U) \| (0x00000004U) \| (0x00000008U)|   |
 </pre></div>
 </div>
 <p>| ECAP_CEVT1_CEVT2_CEVT4_INT | =
-CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |
+(0x00000002U) | (0x00000004U) | (0x00000010U)|   |
 | ECAP_CEVT1_CEVT3_CEVT4_INT | =
-CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |
+(0x00000002U) | (0x00000008U) | (0x00000010U)|   |
 | ECAP_CEVT2_CEVT3_CEVT4_INT | =
-CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |
-| ECAP_INT_ALLCAPS | CSL_ECAP_ECEINT_ECFLG_CEVT1_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT2_MASK |
-CSL_ECAP_ECEINT_ECFLG_CEVT3_MASK | CSL_ECAP_ECEINT_ECFLG_CEVT4_MASK|   |</p>
+(0x00000004U) | (0x00000008U) | (0x00000010U)|   |
+| ECAP_INT_ALLCAPS | (0x00000002U) | (0x00000004U) |
+(0x00000008U) | (0x00000010U)|   |</p>
 <p><strong>Brief</strong>:
 This type defines ECAP selection.</p>
 </section>
@@ -1549,7 +1549,7 @@ This function reads the important registers of the hardware unit and returns the
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Aug 05, 2025.
+          <span class="lastupdated" >Last updated on Aug 09, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

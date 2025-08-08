@@ -10,7 +10,3 @@ ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   INCDIR += $(PWM_PATH)/V0
   SRCS_COMMON += Pwm_Sfo.c
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCDIR += $(PWM_PATH)/V1
-  INCDIR += $(PWM_PATH)/V1
-endif

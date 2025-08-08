@@ -8,7 +8,3 @@ SRCS_COMMON += Adc.c Adc_Priv.c Adc_Utils.c Adc_Platform.c Adc_Irq.c
 ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   SRCDIR += $(ADC_PATH)/V0
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCDIR += $(ADC_PATH)/V1
-  SRCS_COMMON += Adc_Temp.c
-endif

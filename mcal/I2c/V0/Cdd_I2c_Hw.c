@@ -533,7 +533,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitOnBusBusy(uint32 baseAddr)
     uint32                    intrStatus;
 
     // TODO: Implement timeout
-    while (1U)
+    while (TRUE)
     {
         intrStatus = Cdd_I2c_hwGetIntrStatus(baseAddr);
         if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) != CDD_I2C_ICSTR_BB_MASK)
@@ -551,7 +551,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitForBusBusy(uint32 baseAddr)
     uint32                    intrStatus;
 
     // TODO: Implement timeout
-    while (1U)
+    while (TRUE)
     {
         intrStatus = Cdd_I2c_hwGetIntrStatus(baseAddr);
         if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) == CDD_I2C_ICSTR_BB_MASK)
@@ -569,7 +569,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitForTxReady(uint32 baseAddr)
     uint32                    intrStatus;
 
     // TODO: Implement timeout
-    while (1U)
+    while (TRUE)
     {
         intrStatus = Cdd_I2c_hwGetIntrStatus(baseAddr);
         if ((intrStatus & CDD_I2C_ICSTR_ICXRDY_MASK) == CDD_I2C_ICSTR_ICXRDY_MASK)
@@ -579,15 +579,15 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitForTxReady(uint32 baseAddr)
         if ((intrStatus & (CDD_I2C_ICSTR_AL_MASK | CDD_I2C_ICSTR_NACK_MASK | CDD_I2C_ICSTR_SCD_MASK)) != 0U)
         {
             chResult = CDD_I2C_CH_RESULT_NOT_OK;
-            if (intrStatus & CDD_I2C_ICSTR_AL_MASK)
+            if ((intrStatus & CDD_I2C_ICSTR_AL_MASK) != 0U)
             {
                 chResult = CDD_I2C_CH_RESULT_ARBFAIL;
             }
-            if (intrStatus & CDD_I2C_ICSTR_NACK_MASK)
+            if ((intrStatus & CDD_I2C_ICSTR_NACK_MASK) != 0U)
             {
                 chResult = CDD_I2C_CH_RESULT_NACKFAIL;
             }
-            if (intrStatus & CDD_I2C_ICSTR_SCD_MASK)
+            if ((intrStatus & CDD_I2C_ICSTR_SCD_MASK) != 0U)
             {
                 chResult = CDD_I2C_CH_RESULT_BUSFAIL;
             }
@@ -604,7 +604,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitForRxReady(uint32 baseAddr)
     uint32                    intrStatus;
 
     // TODO: Implement timeout
-    while (1U)
+    while (TRUE)
     {
         intrStatus = Cdd_I2c_hwGetIntrStatus(baseAddr);
         if ((intrStatus & CDD_I2C_ICSTR_ICRRDY_MASK) == CDD_I2C_ICSTR_ICRRDY_MASK)
@@ -614,15 +614,15 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitForRxReady(uint32 baseAddr)
         if ((intrStatus & (CDD_I2C_ICSTR_AL_MASK | CDD_I2C_ICSTR_NACK_MASK | CDD_I2C_ICSTR_SCD_MASK)) != 0U)
         {
             chResult = CDD_I2C_CH_RESULT_NOT_OK;
-            if (intrStatus & CDD_I2C_ICSTR_AL_MASK)
+            if ((intrStatus & CDD_I2C_ICSTR_AL_MASK) != 0U)
             {
                 chResult = CDD_I2C_CH_RESULT_ARBFAIL;
             }
-            if (intrStatus & CDD_I2C_ICSTR_NACK_MASK)
+            if ((intrStatus & CDD_I2C_ICSTR_NACK_MASK) != 0U)
             {
                 chResult = CDD_I2C_CH_RESULT_NACKFAIL;
             }
-            if (intrStatus & CDD_I2C_ICSTR_SCD_MASK)
+            if ((intrStatus & CDD_I2C_ICSTR_SCD_MASK) != 0U)
             {
                 chResult = CDD_I2C_CH_RESULT_BUSFAIL;
             }
@@ -639,7 +639,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitForAccessReady(uint32 baseAddr)
     uint32                    intrStatus;
 
     // TODO: Implement timeout
-    while (1U)
+    while (TRUE)
     {
         intrStatus = Cdd_I2c_hwGetIntrStatus(baseAddr);
         if ((intrStatus & CDD_I2C_ICSTR_ARDY_MASK) == CDD_I2C_ICSTR_ARDY_MASK)
@@ -657,7 +657,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_hwWaitForStop(uint32 baseAddr)
     uint32                    intrStatus;
 
     // TODO: Implement timeout
-    while (1U)
+    while (TRUE)
     {
         intrStatus = Cdd_I2c_hwGetIntrStatus(baseAddr);
         /* Wait for both stop to complete and bus to become free */

@@ -149,14 +149,17 @@ Cdd_FsiRx_DeInit(void)
     }
     else
 #endif /* #if (STD_ON == CDD_FSI_RX_DEV_ERROR_DETECT) */
+    {
         /* Deinit the hardware modules */
         for (HwUnitId = 0U; HwUnitId < Cdd_FsiRx_DrvObj.maxHwUnit; HwUnitId++)
         {
             (void)CddFsiRx_hwUnitDeInit(&Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId]);
         }
-    CddFsiRx_resetDrvObj(&Cdd_FsiRx_DrvObj);
+        CddFsiRx_resetDrvObj(&Cdd_FsiRx_DrvObj);
 
-    Cdd_FsiRx_DriverStatus = CDD_FSI_RX_UNINIT;
+        Cdd_FsiRx_DriverStatus = CDD_FSI_RX_UNINIT;
+    }
+
     return;
 }
 #endif /*(STD_ON == CDD_FSI_RX_DEINIT_API)*/

@@ -354,7 +354,8 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
     {
         retVal = E_NOT_OK;
     }
-    if ((E_OK == retVal) && (Fls_WriteStage == FLS_S_INIT_STAGE))
+    bool isFlsWriteInitStage = (Fls_WriteStage == FLS_S_INIT_STAGE);
+    if ((E_OK == retVal) && isFlsWriteInitStage)
     {
         uint32           pageSize, chunkLen, actual;
         OSPI_Transaction transaction;
@@ -954,11 +955,13 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
 {
     bool isNotify = FALSE;
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-    if ((job == FLS_JOB_WRITE) && (Fls_WriteStage == FLS_S_WRITE_DONE))
+    bool isFlsWriteStageDone = (Fls_WriteStage == FLS_S_WRITE_DONE);
+    bool isFlsEraseStage     = (Fls_EraseStage == FLS_S_DEFAULT);
+    if ((job == FLS_JOB_WRITE) && isFlsWriteStageDone)
     {
         isNotify = TRUE;
     }
-    if ((job == FLS_JOB_ERASE) && (Fls_EraseStage == FLS_S_DEFAULT))
+    if ((job == FLS_JOB_ERASE) && isFlsEraseStage)
     {
         isNotify = TRUE;
     }
@@ -1001,9 +1004,8 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
                 Fls_DrvObj.Fls_JobEndNotification();
             }
         }
-
-        return;
     }
+    return;
 }
 /**
  *  \Function Name: Fls_ErrorNotification

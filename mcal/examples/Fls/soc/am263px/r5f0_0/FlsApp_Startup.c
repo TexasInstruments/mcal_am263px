@@ -101,35 +101,6 @@ static void FlsApp_InterruptConfig(void)
     vimRegisterInterrupt(&intCfg);
 }
 
-#if (STD_OFF == CDD_I2C_POLLING_MODE)
-void Cdd_I2c_InterruptConfig(void)
-{
-    vimInit();
-    Vim_IntCfg interruptCfg;
-#ifdef AM263PX_C_PACKAGE
-    interruptCfg.map      = VIM_INTTYPE_IRQ;
-    interruptCfg.type     = VIM_INTTRIGTYPE_PULSE;
-    interruptCfg.intNum   = I2C1_INT;
-    interruptCfg.handler  = &Cdd_I2c_HwUnit1_ISR;
-    interruptCfg.priority = VIM_PRIORITY_2;
-    vimRegisterInterrupt(&interruptCfg);
-#else
-    interruptCfg.map      = VIM_INTTYPE_IRQ;
-    interruptCfg.type     = VIM_INTTRIGTYPE_PULSE;
-    interruptCfg.intNum   = I2C0_INT;
-    interruptCfg.handler  = &Cdd_I2c_HwUnit0_ISR;
-    interruptCfg.priority = VIM_PRIORITY_2;
-    vimRegisterInterrupt(&interruptCfg);
-#endif
-    interruptCfg.map      = VIM_INTTYPE_IRQ;
-    interruptCfg.type     = VIM_INTTRIGTYPE_PULSE;
-    interruptCfg.intNum   = I2C2_INT;
-    interruptCfg.handler  = &Cdd_I2c_HwUnit2_ISR;
-    interruptCfg.priority = VIM_PRIORITY_2;
-    vimRegisterInterrupt(&interruptCfg);
-}
-#endif
-
 #if (STD_ON == FLS_DMA_ENABLE)
 static void FlashAppDma_interruptConfig(void)
 {

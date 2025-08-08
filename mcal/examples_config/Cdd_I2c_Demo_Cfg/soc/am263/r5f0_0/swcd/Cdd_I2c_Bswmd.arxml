@@ -30,13 +30,22 @@
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_GetVersionInfo</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit0_ISR</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit1_ISR</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit2_ISR</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit3_ISR</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_Init</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_MainFunction</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_PollingModeProcessing</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_RegisterReadback</BSW-MODULE-ENTRY-REF>
@@ -146,6 +155,54 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
+                <BSW-INTERRUPT-ENTITY UUID="36f34213-1fad-4610-a13d-4e73fd10bded">
+                  <SHORT-NAME>Cdd_I2c_HwUnit0_ISR</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit0_ISR</IMPLEMENTED-ENTRY-REF>
+                  <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                </BSW-INTERRUPT-ENTITY>
+                <BSW-INTERRUPT-ENTITY UUID="bc7e7fa3-f05e-41cf-bb0a-4d01954fa92c">
+                  <SHORT-NAME>Cdd_I2c_HwUnit1_ISR</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit1_ISR</IMPLEMENTED-ENTRY-REF>
+                  <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                </BSW-INTERRUPT-ENTITY>
+                <BSW-INTERRUPT-ENTITY UUID="41873a95-d00b-48f6-bc1a-7fac5cea8de6">
+                  <SHORT-NAME>Cdd_I2c_HwUnit2_ISR</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit2_ISR</IMPLEMENTED-ENTRY-REF>
+                  <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                </BSW-INTERRUPT-ENTITY>
+                <BSW-INTERRUPT-ENTITY UUID="69f47805-d5cc-4caf-958b-a57512e07ae8">
+                  <SHORT-NAME>Cdd_I2c_HwUnit3_ISR</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_HwUnit3_ISR</IMPLEMENTED-ENTRY-REF>
+                  <INTERRUPT-CATEGORY>CAT-2</INTERRUPT-CATEGORY>
+                </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="077420f2-90f2-4729-b2d5-22a33ff2cde3">
                   <SHORT-NAME>Cdd_I2c_Init</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -170,17 +227,6 @@
                     </BSW-DIRECT-CALL-POINT>
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_MainFunction</IMPLEMENTED-ENTRY-REF>
-                </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="df053cff-01bc-4cce-b79a-a971c0bb8a54">
-                  <SHORT-NAME>Cdd_I2c_PollingModeProcessing</SHORT-NAME>
-                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  <CALL-POINTS>
-                    <BSW-DIRECT-CALL-POINT>
-                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
-                    </BSW-DIRECT-CALL-POINT>
-                  </CALL-POINTS>
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_I2c_TI_AM263x/Cdd_I2c_ModuleEntry/Cdd_I2c_PollingModeProcessing</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="5eadd01a-497c-407a-8e51-6cae225563b9">
                   <SHORT-NAME>Cdd_I2c_RegisterReadback</SHORT-NAME>
@@ -437,7 +483,7 @@
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
               <CALL-TYPE>INTERRUPT</CALL-TYPE>
-              <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+              <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
@@ -446,7 +492,7 @@
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
               <CALL-TYPE>INTERRUPT</CALL-TYPE>
-              <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+              <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
@@ -455,7 +501,7 @@
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
               <CALL-TYPE>INTERRUPT</CALL-TYPE>
-              <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+              <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
@@ -464,7 +510,7 @@
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
               <CALL-TYPE>INTERRUPT</CALL-TYPE>
-              <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+              <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>

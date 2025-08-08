@@ -13,7 +13,7 @@ SRCDIR = . Intc/$(ARCH) ./$(SOCFAMILY) ./$(COMPILER) ./$(COMPILER)/$(SOC) ./$(SO
 ifeq ($(PLATFORM), am263)
 SRCDIR += $(mcal_PATH)/include/hw/am263
 endif
-INCDIR = . 
+INCDIR = .
 INCDIR += ./$(COMPILER)
 INCDIR += ./$(COMPILER)/$(SOC)
 INCDIR += ./$(SOC)
@@ -39,10 +39,6 @@ ifeq ($(PLATFORM), am263px)
 SRCS_COMMON += app_utilsEth.c
 endif
 
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am273 am2732s))
-SRCS_COMMON +=appUtils_QSpiFlashLib.c app_utilsEth.c
-endif
-
 ifeq ($(MCAL_DYNAMIC_BUILD),TRUE)
   SRCS_COMMON += hw_types.c
   SRCS_COMMON += sys_common.c
@@ -53,7 +49,7 @@ SRCS_ASM_COMMON +=sys_startup.asm
 SRCS_ASM_COMMON +=sys_intvecs.asm
 SRCS_ASM_COMMON +=crt0.asm
 else
-SRCS_ASM_COMMON +=sys_core.asm boot_armv7r_asm.asm MpuP_armv7r_asm.asm sys_pmu_asm.asm 
+SRCS_ASM_COMMON +=sys_core.asm boot_armv7r_asm.asm MpuP_armv7r_asm.asm sys_pmu_asm.asm
 
 endif
 PACKAGE_SRCS_COMMON = .

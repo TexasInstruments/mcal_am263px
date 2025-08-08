@@ -852,8 +852,8 @@ static inline void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, u
                                            group5_mask, group6_mask);
     HW_WR_REG32(base + (uint32)(out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + (uint32)MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7,
                 (uint32)(group7_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7_SEL_MASK));
-    HW_WR_REG32(base + out * MCU_CSL_CONTROLSS_INTXBAR_STEP + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G8,
-                group8_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G8_SEL_MASK);
+    HW_WR_REG32(base + (uint32)(out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + (uint32)MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G8,
+                (uint32)(group8_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G8_SEL_MASK));
     HW_WR_REG32(base + (uint32)(out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + (uint32)MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G9,
                 (uint32)(group9_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G9_SEL_MASK));
 }

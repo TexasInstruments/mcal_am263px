@@ -13,62 +13,6 @@ title: APIs for ECAP
 | -------------| -----------| ----- |
 |enum| **[ECAP_EmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_emulationmode)** 
 |enum| **[ECAP_SyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_syncinpulsesource)** 
-|enum| **[ECAP_EmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_emulationmode)** 
-|enum| **[ECAP_SyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_syncinpulsesource)** 
-
-
-
-### enum ECAP_EmulationMode
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| ECAP_EMULATION_STOP | 0x0U| TSCTR is stopped on emulation suspension.   |
-| ECAP_EMULATION_RUN_TO_ZERO | 0x1U| TSCTR runs until 0 before stopping on emulation suspension.   |
-| ECAP_EMULATION_FREE_RUN | 0x2U| TSCTR is not affected by emulation suspension.   |
-
-
-
-
-
-
-### enum ECAP_SyncInPulseSource
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| ECAP_SYNC_IN_PULSE_SRC_DISABLE | 0x0| Disable Sync-in.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM0 | 0x1| Sync-in source is EPWM0 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM1 | 0x2| Sync-in source is EPWM1 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM2 | 0x3| Sync-in source is EPWM2 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM3 | 0x4| Sync-in source is EPWM3 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM4 | 0x5| Sync-in source is EPWM4 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM5 | 0x6| Sync-in source is EPWM5 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM6 | 0x7| Sync-in source is EPWM6 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM7 | 0x8| Sync-in source is EPWM7 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM8 | 0x9| Sync-in source is EPWM8 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM9 | 0xA| Sync-in source is EPWM9 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM10 | 0xB| Sync-in source is EPWM10 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM11 | 0xC| Sync-in source is EPWM11 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM12 | 0xD| Sync-in source is EPWM12 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM13 | 0xE| Sync-in source is EPWM13 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM14 | 0xF| Sync-in source is EPWM14 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM15 | 0x10| Sync-in source is EPWM15 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM16 | 0x11| Sync-in source is EPWM16 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM17 | 0x12| Sync-in source is EPWM17 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM18 | 0x13| Sync-in source is EPWM18 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM19 | 0x14| Sync-in source is EPWM19 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM20 | 0x15| Sync-in source is EPWM20 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM21 | 0x16| Sync-in source is EPWM21 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM22 | 0x17| Sync-in source is EPWM22 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM23 | 0x18| Sync-in source is EPWM23 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM24 | 0x19| Sync-in source is EPWM24 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM25 | 0x1A| Sync-in source is EPWM25 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM26 | 0x1B| Sync-in source is EPWM26 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM27 | 0x1C| Sync-in source is EPWM27 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM28 | 0x1D| Sync-in source is EPWM28 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM29 | 0x1E| Sync-in source is EPWM29 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM30 | 0x1F| Sync-in source is EPWM30 sync-out signal.   |
-| ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM31 | 0x20| Sync-in source is EPWM31 sync-out signal.   |
-
-
-
 
 
 
@@ -136,12 +80,6 @@ title: APIs for ECAP
 | -------------- | ---------- |
 | ECAP_CAPTURE_MODE   | Capture Mode.  |
 | ECAP_APWM_MODE   | Auxiliary PWM Mode.  |
-| ECAP_CAPTURE_MODE   | Capture Mode.  |
-| ECAP_APWM_MODE   | Auxiliary PWM Mode.  |
-| ECAP_CAPTURE_EVENT_1   | Time stamp capture on event 1.  |
-| ECAP_CAPTURE_EVENT_2   | Time stamp capture on event 2.  |
-| ECAP_CAPTURE_EVENT_3   | Time stamp capture on event 3.  |
-| ECAP_CAPTURE_EVENT_4   | Time stamp capture on event 4.  |
 | ECAP_CAPTURE_EVENT_1   | Time stamp capture on event 1.  |
 | ECAP_CAPTURE_EVENT_2   | Time stamp capture on event 2.  |
 | ECAP_CAPTURE_EVENT_3   | Time stamp capture on event 3.  |
@@ -150,25 +88,12 @@ title: APIs for ECAP
 | ECAP_CAPTURE_EVENT2_STOP   | Stop capture after event 2.  |
 | ECAP_CAPTURE_EVENT3_STOP   | Stop capture after event 3.  |
 | ECAP_CAPTURE_EVENT4_STOP   | Stop capture after event 4.  |
-| ECAP_CAPTURE_EVENT1_STOP   | Stop capture after event 1.  |
-| ECAP_CAPTURE_EVENT2_STOP   | Stop capture after event 2.  |
-| ECAP_CAPTURE_EVENT3_STOP   | Stop capture after event 3.  |
-| ECAP_CAPTURE_EVENT4_STOP   | Stop capture after event 4.  |
-| ECAP_APWM_ACTIVE_HIGH   | Output Polarity HIGH.  |
-| ECAP_APWM_ACTIVE_LOW   | Output Polarity LOW.  |
 | ECAP_APWM_ACTIVE_HIGH   | Output Polarity HIGH.  |
 | ECAP_APWM_ACTIVE_LOW   | Output Polarity LOW.  |
 | ECAP_COUNTER_STOP   | Counter Mode Stop.  |
 | ECAP_COUNTER_FREE_RUNNING   | Counter Mode Free Running.  |
-| ECAP_COUNTER_STOP   | Counter Mode Stop.  |
-| ECAP_COUNTER_FREE_RUNNING   | Counter Mode Free Running.  |
 | ECAP_SYNC_IN_DISABLE   | Disable SyncIn option.  |
 | ECAP_ENABLE_COUNTER   | Enable Counter to be loaded from the ECAP_CNTPHS register upon SYNCI signal.  |
-| ECAP_SYNC_IN_DISABLE   | Disable SyncIn option.  |
-| ECAP_ENABLE_COUNTER   | Enable Counter to be loaded from the ECAP_CNTPHS register upon SYNCI signal.  |
-| ECAP_SYNC_IN   | Select SyncIn event to be the SyncOut signal.  |
-| ECAP_PRD_EQ   | Select PRD event to be the SyncOut signal.  |
-| ECAP_SYNC_OUT_DISABLE   | Disable SyncOut Signal.  |
 | ECAP_SYNC_IN   | Select SyncIn event to be the SyncOut signal.  |
 | ECAP_PRD_EQ   | Select PRD event to be the SyncOut signal.  |
 | ECAP_SYNC_OUT_DISABLE   | Disable SyncOut Signal.  |
@@ -179,21 +104,9 @@ title: APIs for ECAP
 | ECAP_CNTOVF_INT   | Counter Overflow Interrupt Enable.  |
 | ECAP_PRDEQ_INT   | Period Equal Interrupt Enable.  |
 | ECAP_CMPEQ_INT   | Compare Equal Interrupt Enable.  |
-| ECAP_CEVT1_INT   | Capture Event 1 Interrupt Enable.  |
-| ECAP_CEVT2_INT   | Capture Event 2 Interrupt Enable.  |
-| ECAP_CEVT3_INT   | Capture Event 3 Interrupt Enable.  |
-| ECAP_CEVT4_INT   | Capture Event 4 Interrupt Enable.  |
-| ECAP_CNTOVF_INT   | Counter Overflow Interrupt Enable.  |
-| ECAP_PRDEQ_INT   | Period Equal Interrupt Enable.  |
-| ECAP_CMPEQ_INT   | Compare Equal Interrupt Enable.  |
-| ECAP_GLOBAL_INT   | Global Interrupt Source Clear Flag.  |
 | ECAP_GLOBAL_INT   | Global Interrupt Source Clear Flag.  |
 | ECAP_CAPTURE_EVENT_RISING   | Capture Event Rising Edge.  |
 | ECAP_CAPTURE_EVENT_FALLING   | Capture Event Falling Edge.  |
-| ECAP_CAPTURE_EVENT_RISING   | Capture Event Rising Edge.  |
-| ECAP_CAPTURE_EVENT_FALLING   | Capture Event Falling Edge.  |
-| ECAP_CAPTURE_EVENT_RESET_COUNTER_NO_RESET   | No counter reset upon Capture Event.  |
-| ECAP_CAPTURE_EVENT_RESET_COUNTER_RESET   | Counter reset upon Capture Event.  |
 | ECAP_CAPTURE_EVENT_RESET_COUNTER_NO_RESET   | No counter reset upon Capture Event.  |
 | ECAP_CAPTURE_EVENT_RESET_COUNTER_RESET   | Counter reset upon Capture Event.  |
 | ECAP_CAPTURE_INPUT_SOURCE_SELECT_0   | Capture input source select input is ECAPxINPU[0].  |
@@ -201,7 +114,6 @@ title: APIs for ECAP
 | CSL_ECAP_ECCLR   |  |
 | CSL_ECAP_ECCTL2   |  |
 | CSL_ECAP_ECCTL2_REARM_MASK   |  |
-| ECAP_CAPTURE_INPUT_SOURCE_SELECT_0   | Capture input source select input is ECAPxINPU[0].  |
 
 ## Functions
 
@@ -230,8 +142,6 @@ title: APIs for ECAP
 | void | **[ICU_ECAP_intrStatusClear](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_intrstatusclear)**(uint32 baseAddr, uint32 flag)| This function clears of the status specified interrupts.  |
 | void | **[ICU_ECAP_setEmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setemulationmode)**(uint32 baseAddr, [ECAP_EmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_emulationmode) srcSelect)|  |
 | void | **[ICU_ECAP_setSyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setsyncinpulsesource)**(uint32 base, [ECAP_SyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_syncinpulsesource) source)|  |
-| void | **[ICU_ECAP_intrEnable](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_intrenable)**(uint32 baseAddr, uint32 flag)| This function enables the specified interrupts.  |
-| void | **[ICU_ECAP_captureInputSourceSelect](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_captureinputsourceselect)**(uint32 baseAddr, uint8 srcSelect)| This function configures the capture input source select bits.  |
 
 
 
@@ -728,52 +638,6 @@ static inline void ICU_ECAP_setSyncInPulseSource(
     ECAP_SyncInPulseSource source
 )
 ```
-
-
-### function ICU_ECAP_intrEnable
-
-```
-void ICU_ECAP_intrEnable(
-    uint32 baseAddr,
-    uint32 flag
-)
-```
-
-
-**Brief**: 
-This function enables the specified interrupts. 
-
-**Parameters**: 
-
-  
-* **baseAddr** It is the Memory address of the ECAP instance used. 
-  
-* **flag** It is the value which specifies the interrupts to be enabled.
-
- flag can take one of the following macros.
-
-* [Ecap_IntrSrc_t]. 
-
-
-### function ICU_ECAP_captureInputSourceSelect
-
-```
-void ICU_ECAP_captureInputSourceSelect(
-    uint32 baseAddr,
-    uint8 srcSelect
-)
-```
-
-
-**Brief**: 
-This function configures the capture input source select bits. 
-
-**Parameters**: 
-
-  
-* **baseAddr** It is the Memory address of the ECAP instance used. 
-  
-* **srcSelect** Capture input select 0x0 capture input is ECAPxINPUT[0] 0x1 capture input is ECAPxINPUT[1] 0x7F capture input is ECAPxINPUT[127] 
 
 
 

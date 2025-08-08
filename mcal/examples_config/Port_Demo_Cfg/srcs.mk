@@ -22,9 +22,3 @@ endif
 ifeq ($(SOC), $(filter $(SOC), am261))
   SRCS_COMMON += Port_PBcfg.c
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  SRCS_COMMON += Port_PBcfg_am273x.c
-endif
-ifeq ($(SOC), $(filter $(SOC), am2732s))
-  SRCS_COMMON += Port_PBcfg_am2732s.c
-endif

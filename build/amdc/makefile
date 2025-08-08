@@ -1,10 +1,7 @@
 export MCAL_PATH := $(abspath ../../)
-
-#Default platform
-export PLATFORM?=am263px
 include $(MCAL_PATH)/build/imports.mk
 
-MCAL_PLUGIN_PATH=$(MCAL_PATH)/mcal_config/plugins/$(TI_MCAL_DEVICE)
+MCAL_PLUGIN_PATH=$(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)
 AMDC_PATH=$(MCAL_PATH)/mcal_misc/MCAL_Automation/Vector_AMDC_1.1/AMDC
 
 # List of standard MCAL modules separate by space
@@ -14,7 +11,7 @@ TARGET_MODULE_LIST_AMDC=$(addsuffix _amdc, $(MODULE_LIST_AMDC))
 
 # Output directory where the generated log is stored.
 # The log files are checked-in as we have false positive with this tool and any new violation can be easily checked and approved.
-AMDC_LOG_DIR=output/$(TI_MCAL_DEVICE)
+AMDC_LOG_DIR=output/$(EB_PLATFORM)
 
 .PHONY : all clean amdc_check $(TARGET_MODULE_LIST_AMDC) special_targets_AM263x special_targets_AM263Px special_targets_AM261x
 
@@ -25,11 +22,11 @@ all: clean
 clean:
 	$(RMDIR) $(AMDC_LOG_DIR)
 
-amdc_check: $(TARGET_MODULE_LIST_AMDC) special_targets_$(TI_MCAL_DEVICE)
+amdc_check: $(TARGET_MODULE_LIST_AMDC) special_targets_$(EB_PLATFORM)
 
 $(TARGET_MODULE_LIST_AMDC):
 	$(ECHO) AMDC Check for $(subst _amdc,,$@) ...
-	$(AMDC_PATH) -s $(MCAL_PLUGIN_PATH)/$(subst _amdc,,$@)_TI_$(TI_MCAL_DEVICE)/config/$(subst _amdc,,$@).arxml -o $(AMDC_LOG_DIR)
+	$(AMDC_PATH) -s $(MCAL_PLUGIN_PATH)/$(subst _amdc,,$@)_TI_$(EB_PLATFORM)/config/$(subst _amdc,,$@).arxml -o $(AMDC_LOG_DIR)
 	$(ECHO) AMDC Check for $(subst _amdc,,$@) Completed!!!
 
 special_targets_AM263x:

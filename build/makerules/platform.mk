@@ -36,13 +36,6 @@ SOC = am261
 SOCFAMILY = am261
 endif
 
-# AM273
-ifeq ($(PLATFORM),$(filter $(PLATFORM), am273 am2732s))
-SOC = am273
-SOCFAMILY = am273
-endif
-
-
 # Derive Target/ISA from CORE
 
 # r5f

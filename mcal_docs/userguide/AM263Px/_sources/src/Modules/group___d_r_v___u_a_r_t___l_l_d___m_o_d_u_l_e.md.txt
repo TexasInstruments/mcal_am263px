@@ -17,17 +17,13 @@ title: APIs for UART
 
 | Name           |
 | -------------- |
-| **[V0/V0/Uart.h](../Files/_v0_2_uart_8h.md#file-v0/uart.h)** <br>This file contains the prototype of UART driver APIs.  |
-| **[V1/V1/Uart.h](../Files/_v1_2_uart_8h.md#file-v1/uart.h)** <br>This file contains the prototype of UART driver APIs.  |
+| **[V0/Uart.h](../Files/_uart_8h.md#file-uart.h)** <br>This file contains the prototype of UART driver APIs.  |
 
 ## Types
 
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
 |typedef void *  | **[CddUart_DmaHandle](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#typedef-cdduart_dmahandle)** | A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.  | 
-|typedef struct [CddUart_InitObject](../Classes/struct_cdd_uart___init_object.md) *  | **[CddUart_InitHandle](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#typedef-cdduart_inithandle)** 
-|typedef struct [CddUart_Object](../Classes/struct_cdd_uart___object.md) *  | **[CddUart_Handle](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#typedef-cdduart_handle)** 
-|typedef void *  | **[CddUart_DmaHandle](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#typedef-cdduart_dmahandle)** | A handle that is used by UART with EDMA.  | 
 |typedef struct [CddUart_InitObject](../Classes/struct_cdd_uart___init_object.md) *  | **[CddUart_InitHandle](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#typedef-cdduart_inithandle)** 
 |typedef struct [CddUart_Object](../Classes/struct_cdd_uart___object.md) *  | **[CddUart_Handle](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#typedef-cdduart_handle)** 
 
@@ -60,33 +56,6 @@ typedef  struct CddUart_Object * CddUart_Handle;
 
 
 
-### typedef CddUart_DmaHandle
-```
-typedef void* CddUart_DmaHandle;
-```
-
-
-**Brief**: 
-A handle that is used by UART with EDMA. 
-
-
-
-### typedef CddUart_InitHandle
-```
-typedef  struct CddUart_InitObject * CddUart_InitHandle;
-```
-
-
-
-
-### typedef CddUart_Handle
-```
-typedef  struct CddUart_Object * CddUart_Handle;
-```
-
-
-
-
 
 ## Structures
 |   Name         | Brief          |
@@ -94,7 +63,6 @@ typedef  struct CddUart_Object * CddUart_Handle;
 | **[CddUart_Transaction](../Classes/struct_cdd_uart___transaction.md)** | Data structure used with UART_read() and UART_write()  |
 | **[CddUart_InitObject](../Classes/struct_cdd_uart___init_object.md)** | UART driver initialization object.  |
 | **[CddUart_Object](../Classes/struct_cdd_uart___object.md)** | UART driver object.  |
-| **[MCAL_CSL_sciRegs](../Classes/struct_m_c_a_l___c_s_l__sci_regs.md)** |  |
 
 
 
@@ -114,19 +82,6 @@ typedef  struct CddUart_Object * CddUart_Handle;
 | UART_TRANSFER_STATUS_READ_TIMEOUT   | Read timeout error.  |
 | UART_TRANSFER_STATUS_ERROR_INUSE   | UART is currently in use.  |
 | UART_TRANSFER_STATUS_ERROR_OTH   | Other errors.  |
-| UART_TRANSFER_STATUS_SUCCESS   | Transaction success.  |
-| UART_TRANSFER_STATUS_TIMEOUT   | Time out error.  |
-| UART_TRANSFER_STATUS_ERROR_BI   | Break condition error.  |
-| UART_TRANSFER_STATUS_ERROR_FE   | Framing error.  |
-| UART_TRANSFER_STATUS_ERROR_PE   | Parity error.  |
-| UART_TRANSFER_STATUS_ERROR_OE   | Overrun error.  |
-| UART_TRANSFER_STATUS_CANCELLED   | Cancelled.  |
-| UART_TRANSFER_STATUS_STARTED   | Transaction started.  |
-| UART_TRANSFER_STATUS_READ_TIMEOUT   | Read timeout error.  |
-| UART_TRANSFER_STATUS_ERROR_INUSE   | UART is currently in use.  |
-| UART_TRANSFER_STATUS_ERROR_OTH   | Other errors.  |
-| UART_READ_TRANSFER_TYPE   | UART Read Transfer Types.  |
-| UART_WRITE_TRANSFER_TYPE   | UART Write Transfer Types.  |
 | UART_READ_TRANSFER_TYPE   | UART Read Transfer Types.  |
 | UART_WRITE_TRANSFER_TYPE   | UART Write Transfer Types.  |
 | UART_REG_CONFIG_MODE_A   | Values to be used while switching between register configuration modes.  |
@@ -1013,13 +968,6 @@ typedef  struct CddUart_Object * CddUart_Handle;
 | UART_UASR_RESERVED_24_SHIFT   |  |
 | UART_UASR_RESERVED_24_MASK   |  |
 | UART_ERROR_COUNT   | Count Value to check error in the recieved byte.  |
-| IS_DATA_LENGTH_VALID (dataLength)  | Macro to check if the Data length is valid.  |
-| IS_STOP_BITS_VALID (stopBits)  | Macro to check if the Number of stop bits is valid.  |
-| IS_PARITY_TYPE_VALID (parityType)  | Macro to check if the Parity type is valid.  |
-| MCAL_STATE_RESET   | MCAL Driver states.  |
-| MCAL_STATE_READY   |  |
-| MCAL_STATE_BUSY   |  |
-| MCAL_STATE_ERROR   |  |
 
 ## Functions
 
@@ -1027,11 +975,11 @@ typedef  struct CddUart_Object * CddUart_Handle;
 | -------------- | ----------------------- | ----------------- |
 | void | **[UART_configInstance](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_configinstance)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
 | sint32 | **[UART_checkTransaction](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_checktransaction)**([CddUart_Transaction](../Classes/struct_cdd_uart___transaction.md) * trans)|  |
-| boolean | **[UART_writeCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writecancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)| Function to flush a TX FIFO of peripheral specified by the UART handle.  |
+| boolean | **[UART_writeCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writecancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
 | boolean | **[UART_writeCancelDmaNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writecanceldmanocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
 | sint32 | **[UART_writePolling](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writepolling)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle, [CddUart_Transaction](../Classes/struct_cdd_uart___transaction.md) * trans)|  |
 | sint32 | **[UART_writeInterrupt](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writeinterrupt)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
-| boolean | **[UART_readCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readcancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)| Function to flush a TX FIFO of peripheral specified by the UART handle.  |
+| boolean | **[UART_readCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readcancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
 | boolean | **[UART_readCancelDmaNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readcanceldmanocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
 | uint32 | **[UART_spaceAvail](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_spaceavail)**(uint32 baseAddr)|  |
 | uint32 | **[UART_operatingModeSelect](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_operatingmodeselect)**(uint32 baseAddr, uint32 modeFlag)|  |
@@ -1079,23 +1027,10 @@ static sint32 UART_checkTransaction(
 
 ```
 boolean UART_writeCancelNoCB(
-    CddUart_Handle hUart
+    CddUart_Handle handle
 )
 ```
 
-
-**Brief**: 
-Function to flush a TX FIFO of peripheral specified by the UART handle. 
-
-**Parameters**: 
-
-  
-* **handle** UART_Handle returned from UART_open()
-
-
-**See**: UART_open() 
-
-**Precondition**: UART_open() has to be called first
 
 ### function UART_writeCancelDmaNoCB
 
@@ -1129,23 +1064,10 @@ sint32 UART_writeInterrupt(
 
 ```
 boolean UART_readCancelNoCB(
-    CddUart_Handle hUart
+    CddUart_Handle handle
 )
 ```
 
-
-**Brief**: 
-Function to flush a TX FIFO of peripheral specified by the UART handle. 
-
-**Parameters**: 
-
-  
-* **handle** UART_Handle returned from UART_open()
-
-
-**See**: UART_open() 
-
-**Precondition**: UART_open() has to be called first
 
 ### function UART_readCancelDmaNoCB
 
@@ -1533,15 +1455,9 @@ Function to flush a TX FIFO of peripheral specified by the UART handle.
 
   
 * **hUart** Handle to the UART instance used
-  
-* **handle** UART_Handle returned from UART_open()
 
 
-**See**: UART_open() 
-
-**Return**: MCAL_SystemP_SUCCESS if successful; else error on failure
-
-**Precondition**: UART_open() has to be called first
+**Return**: MCAL_SystemP_SUCCESS if successful; else error on failure 
 
 ### function UART_procLineStatusErr
 

@@ -33,11 +33,12 @@
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
+
 #include "ioexp_tca6416_6424.h"
 #include "hw_types.h"
 #include "Mcu.h"
-#include "Cdd_I2c.h"
 #include "Fls.h"
+#include "app_utilsI2c.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
@@ -48,7 +49,7 @@
 
 #define IO_MUX_OSPI_RST_SEL_PORT_LINE (0U)  // PORT 0, PIN 0    -> ioIndex : 0*8 + 0 = 0
 
-#define EEPROM_OFFSET_READ_PCB_REV   (0x0022U)
+#define EEPROM_OFFSET_READ_PCB_REV   (0x1AU)
 #define EEPROM_READ_PCB_REV_DATA_LEN (0x2U)
 #define SIP_FLASH_CFG_VALUE          (0x55)
 #ifndef AM263PX_C_PACKAGE
@@ -115,12 +116,15 @@
 #define TCA6424_OUT_STATE_HIGH (1U)
 /** @} */
 
+#define I2C_APP_EEPROM_HW_UNIT   (CDD_I2C_HW_UNIT_0)
+#define I2C_APP_EEPROM_ADDRESS   (0x50U)
+#define I2C_APP_IOMUX_HW_UNIT    (CDD_I2C_HW_UNIT_2)
+#define I2C_APP_IOMUX_ADDRESS_E1 (0x20U)
+#define I2C_APP_IOMUX_ADDRESS    (0x22U)
+
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
-
-volatile boolean rxDoneIomux  = FALSE;
-volatile boolean rxDoneEeprom = FALSE;
 
 /*Buffer to store transmission data for IOMUX*/
 uint8 txBufferIomux[2];
@@ -130,6 +134,8 @@ uint8 rxBufferIomux[2];
 uint8 txBufferEeprom[2];
 /*Buffer to store reception data for Eeprom*/
 uint8 boardVerEeprom[2];
+
+Cdd_I2c_AddressType ioMuxDeviceAddress = I2C_APP_IOMUX_ADDRESS;
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
@@ -152,26 +158,8 @@ uint32 TCA6416_setOutput(uint32 ioIndex, uint32 state)
         portPin = ioIndex & 0x07U; /* %8 gives pin within port */
 
         txBufferIomux[0] = TCA6416_REG_OUTPUT_PORT_0 + port;
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-        /* Start transmission */
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_1);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-            ;
-        /*Read data*/
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_0);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-        {
-        }
-        while (TRUE != rxDoneIomux)
-        {
-            /*Wait till above sequence is completed*/
-        }
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 1U);
+        I2c_utilsRead(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &rxBufferIomux[0], 1U);
 
         if (TCA6416_OUT_STATE_HIGH == state)
         {
@@ -182,13 +170,7 @@ uint32 TCA6416_setOutput(uint32 ioIndex, uint32 state)
             txBufferIomux[1] = (rxBufferIomux[0]) & (~(0x01 << portPin));
         }
         txBufferIomux[0] = TCA6416_REG_OUTPUT_PORT_0 + port;
-
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_2);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 2U);
     }
 
     return (status);
@@ -211,27 +193,8 @@ uint32 TCA6424_setOutput(uint32 ioIndex, uint32 state)
         portPin = ioIndex & 0x07U; /* %8 gives pin within port */
 
         txBufferIomux[0] = TCA6424_REG_OUTPUT_PORT_0 + port;
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-        /* Start transmission */
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_1);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-
-        /* Read config register value */
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-            ;
-        /*Read data*/
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_0);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-        {
-        }
-        while (TRUE != rxDoneIomux)
-        {
-            /*Wait till above sequence is completed*/
-        }
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 1U);
+        I2c_utilsRead(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &rxBufferIomux[0], 1U);
 
         if (TCA6424_OUT_STATE_HIGH == state)
         {
@@ -242,13 +205,7 @@ uint32 TCA6424_setOutput(uint32 ioIndex, uint32 state)
             txBufferIomux[1] = (rxBufferIomux[0]) & (~(0x01 << portPin));
         }
         txBufferIomux[0] = TCA6424_REG_OUTPUT_PORT_0 + port;
-
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_2);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 2U);
     }
 
     return (status);
@@ -273,26 +230,8 @@ uint32 TCA6416_config(uint32 ioIndex, uint32 mode)
 
         /* Set config register address - needed for next read */
         txBufferIomux[0] = TCA6416_REG_CONFIG_PORT_0 + port;
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-        /* Start transmission */
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_1);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-
-        /* Read config register value */
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-            ;
-        /*Read data*/
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_0);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-            ;
-        while (TRUE != rxDoneIomux)
-        {
-            /*Wait till above sequence is completed*/
-        }
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 1U);
+        I2c_utilsRead(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &rxBufferIomux[0], 1U);
 
         /* Set output or input mode to particular IO pin - read/modify/write */
         if (TCA6416_MODE_INPUT == mode)
@@ -304,13 +243,7 @@ uint32 TCA6416_config(uint32 ioIndex, uint32 mode)
             txBufferIomux[1] = rxBufferIomux[0] & ~(0x01 << portPin);
         }
         txBufferIomux[0] = TCA6416_REG_CONFIG_PORT_0 + port;
-
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_2);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 2U);
     }
 
     return (status);
@@ -335,26 +268,8 @@ uint32 TCA6424_config(uint32 ioIndex, uint32 mode)
 
         /* Set config register address - needed for next read */
         txBufferIomux[0] = TCA6424_REG_CONFIG_PORT_0 + port;
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-        /* Start transmission */
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_1);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_1))
-            ;
-
-        /* Read config register value */
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-            ;
-        /*Read data*/
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_0);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_0))
-            ;
-        while (TRUE != rxDoneIomux)
-        {
-            /*Wait till above sequence is completed*/
-        }
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 1U);
+        I2c_utilsRead(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &rxBufferIomux[0], 1U);
 
         /* Set output or input mode to particular IO pin - read/modify/write */
         if (TCA6424_MODE_INPUT == mode)
@@ -366,13 +281,7 @@ uint32 TCA6424_config(uint32 ioIndex, uint32 mode)
             txBufferIomux[1] = rxBufferIomux[0] & ~(0x01 << portPin);
         }
         txBufferIomux[0] = TCA6424_REG_CONFIG_PORT_0 + port;
-
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_2);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_2))
-            ;
+        I2c_utilsWrite(I2C_APP_IOMUX_HW_UNIT, ioMuxDeviceAddress, &txBufferIomux[0], 2U);
     }
 
     return (status);
@@ -400,50 +309,32 @@ uint32 TCA6416_6424_Transceiver(void)
     return status;
 }
 
-uint8 I2c_Buffer_Setup(void)
-{
-    uint8 returnValue = E_OK;
-
-    /* Setup I2c channels */
-    /* channel0: read value, channel1: set address Iomux, Iomux channel2: write Iomux*/
-    returnValue |= Cdd_I2c_SetupEB(CddI2cConf_CddI2cChannel_CddI2cChannel_0, NULL_PTR, &rxBufferIomux[0], 1);
-    returnValue |= Cdd_I2c_SetupEB(CddI2cConf_CddI2cChannel_CddI2cChannel_1, &txBufferIomux[0], NULL_PTR, 1);
-    returnValue |= Cdd_I2c_SetupEB(CddI2cConf_CddI2cChannel_CddI2cChannel_2, &txBufferIomux[0], NULL_PTR, 2);
-
-#if defined AM263PX_SIP_PACKAGE || defined AM263PX_R_PACKAGE
-    /* channel4: set address EEPROM, channel3: read value EEPROM */
-    returnValue |= Cdd_I2c_SetupEB(CddI2cConf_CddI2cChannel_CddI2cChannel_3, NULL_PTR, &boardVerEeprom[0], 2);
-    returnValue |= Cdd_I2c_SetupEB(CddI2cConf_CddI2cChannel_CddI2cChannel_4, &txBufferEeprom[0], NULL_PTR, 2);
-#endif
-    return returnValue;
-}
-
 void mcanEnableTransceiver(void)
 {
     uint32 status = E_OK;
 
-    I2c_Buffer_Setup();
 #if defined AM263PX_C_PACKAGE
     status += TCA6416_6424_Transceiver();
 #else
     status += EEPROM_CAT24M_read(EEPROM_OFFSET_READ_PCB_REV, EEPROM_READ_PCB_REV_DATA_LEN);
     if (status == E_OK)
     {
-        if (boardVerEeprom[1] == '2' && boardVerEeprom[0] == 'E')
+        if ((boardVerEeprom[1] == '2') && (boardVerEeprom[0] == 'E'))
         {
             /* boardVer is E2 */
             status = TCA6416_6424_Transceiver();
         }
-    }
-    else if (boardVerEeprom[1] == '1' && boardVerEeprom[0] == 'E')
-    {
-        /* boardVer is E1 */
-        /* MCAN Transceiver is enabled by default in E1*/
-    }
-    else
-    {
-        /* boardVer is REV A */
-        status = TCA6416_6424_Transceiver();
+        else if ((boardVerEeprom[1] == '1') && (boardVerEeprom[0] == 'E'))
+        {
+            /* boardVer is E1 */
+            ioMuxDeviceAddress = I2C_APP_IOMUX_ADDRESS_E1;
+            /* MCAN Transceiver is enabled by default in E1*/
+        }
+        else
+        {
+            /* boardVer is REV A */
+            status = TCA6416_6424_Transceiver();
+        }
     }
 #endif
     if (status == E_OK)
@@ -484,49 +375,18 @@ uint32      EEPROM_CAT24M_read(uint32 offset, uint32 state)
     {
         txBufferEeprom[0]  = (readOffset & 0xFF00U) >> 8U;
         txBufferEeprom[1U] = (readOffset & 0x00FFU);
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_4))
-            ;
-        /* Start transmission */
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_4);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_4))
-            ;
-
-        /* Wait for sequence to be ready */
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_3))
-            ;
+        I2c_utilsWrite(I2C_APP_EEPROM_HW_UNIT, I2C_APP_EEPROM_ADDRESS, &txBufferEeprom[0], 2U);
         /*Read data*/
-        Cdd_I2c_AsyncTransmit(CddI2cConf_CddI2cSequence_CddI2cSequence_3);
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(CddI2cConf_CddI2cSequence_CddI2cSequence_3))
-        {
-        }
-        while (TRUE != rxDoneEeprom)
-        {
-            /*Wait till above sequence is completed*/
-        }
+        I2c_utilsRead(I2C_APP_EEPROM_HW_UNIT, I2C_APP_EEPROM_ADDRESS, &boardVerEeprom[0], 2U);
     }
 
     return (status);
 }
 #endif
 
-// TODO
-#if 0
-void updateSlaveAddress()
-{
-    /* For E1 board IOexpander I2c slave address is 32U, so update it if Board is E1
-     * Default configuration (E2 board) have I2c slave address as 34U
-     */
-    Cdd_I2cChannelContainerLocal[0].SlaveAddress = 32U;
-    Cdd_I2cChannelContainerLocal[1].SlaveAddress = 32U;
-    Cdd_I2cChannelContainerLocal[2].SlaveAddress = 32U;
-}
-#endif
-
 void board_flash_reset(void)
 {
     uint32 status = E_OK;
-    I2c_Buffer_Setup();
 
     /* check if part type is SIP (internal flash) or non-SIP (external flash)
      * if SIP or C package, directly do flash reset using driver API irrespective of board revision, there is no IO
@@ -539,16 +399,16 @@ void board_flash_reset(void)
     status += EEPROM_CAT24M_read(EEPROM_OFFSET_READ_PCB_REV, EEPROM_READ_PCB_REV_DATA_LEN);
     if (status == E_OK)
     {
-        if (boardVerEeprom[1] == '2' && boardVerEeprom[0] == 'E')
+        if ((boardVerEeprom[1] == '2') && (boardVerEeprom[0] == 'E'))
         {
             /* boardVer is E2 */
             status += TCA6424_Flash_reset();
         }
-        else if (boardVerEeprom[1] == '1' && boardVerEeprom[0] == 'E')
+        else if ((boardVerEeprom[1] == '1') && (boardVerEeprom[0] == 'E'))
         {
             /* boardVer is E1 */
-            // updateSlaveAddress();
-            status += TCA6416_Flash_reset();
+            ioMuxDeviceAddress  = I2C_APP_IOMUX_ADDRESS_E1;
+            status             += TCA6416_Flash_reset();
         }
         else
         {
@@ -560,100 +420,8 @@ void board_flash_reset(void)
         }
     }
 #endif
-
     if (status != E_OK)
     {
         AppUtils_printf("RESET for Flash failed \n\r");
     }
-}
-
-void I2c_Eeprom_Read_Callback(void)
-{
-    rxDoneEeprom = TRUE;
-}
-
-void I2c_Eeprom_Address_Ptr_Reset(void)
-{
-    AppUtils_printf("Eeprom address reset SuccessFul \n\r");
-}
-
-void I2c_Iomux_Read_Callback(void)
-{
-    rxDoneIomux = TRUE;
-}
-void I2c_Iomux_Write_Callback(void)
-{
-    AppUtils_printf("Iomux write SuccessFul \n\r");
-}
-void I2c_Iomux_Write_Callback_Ptr(void)
-{
-    AppUtils_printf("Iomux address reset SuccessFul \n\r");
-}
-
-void I2c_Sequence_Error_Report(uint8 Error_code)
-{
-    if (CDD_I2C_E_HW_UNIT_BUSY == Error_code)
-    {
-        AppUtils_printf("Hardware unit busy\n\r");
-    }
-    else if (CDD_I2C_E_CHANNEL_BUSY == Error_code)
-    {
-        AppUtils_printf("Channels busy\n\r");
-    }
-    else if (CDD_I2C_E_ARBITRATION_LOSS == Error_code)
-    {
-        AppUtils_printf("Arbitration lost\n\r");
-    }
-    else if (CDD_I2C_E_NACK == Error_code)
-    {
-        AppUtils_printf("No Acknowledgement\n\r");
-    }
-    else if (CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL == Error_code)
-    {
-        AppUtils_printf("Receive shift register full\n\r");
-    }
-    else if (CDD_I2C_E_PARAM_QUEUE_FULL == Error_code)
-    {
-        AppUtils_printf("Queue full\n\r");
-    }
-}
-
-void I2c_Eeprom_Read_Callback_Fail(uint8 Error_Code)
-{
-    AppUtils_printf("Sequence failed while trying to read data from Eeprom\n\r");
-    I2c_Sequence_Error_Report(Error_Code);
-}
-
-void I2c_Eeprom_Address_Ptr_Fail(uint8 Error_Code)
-{
-    AppUtils_printf("Sequence failed while trying to reset Eeprom address pointer\n\r");
-    I2c_Sequence_Error_Report(Error_Code);
-}
-
-void I2c_Iomux_Read_Callback_Fail(uint8 Error_Code)
-{
-    AppUtils_printf("Sequence failed while trying to read data from IOMUX\n\r");
-    I2c_Sequence_Error_Report(Error_Code);
-}
-
-void I2c_Iomux_Write_Callback_Ptr_Fail(uint8 Error_Code)
-{
-    AppUtils_printf("Sequence failed while trying to reset Iomux address pointer\n\r");
-    I2c_Sequence_Error_Report(Error_Code);
-}
-
-void I2c_Iomux_Write_Callback_Fail(uint8 Error_Code)
-{
-    AppUtils_printf("Sequence failed while trying to write to Iomux\n\r");
-    I2c_Sequence_Error_Report(Error_Code);
-}
-
-void SchM_Enter_Cdd_I2c_I2C_EXCLUSIVE_AREA_0()
-{
-    AppUtils_SchM_Enter_EXCLUSIVE_AREA_0();
-}
-
-void SchM_Exit_Cdd_I2c_I2C_EXCLUSIVE_AREA_0()
-{
-    AppUtils_SchM_Exit_EXCLUSIVE_AREA_0();
 }

@@ -67,6 +67,7 @@
 
 /* Slave address for IO Expander TCA6416 available in E1 version board*/
 #define TCA6416_SLAVE_ADDRESS (32U)
+
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -261,14 +262,14 @@ static boolean Adc_appIsIoMuxTCA6424(void)
     if (retVal == E_OK)
     {
         /* Default slave address of IO Expander configured -> 34U */
-        if (boardVer[0] == 'A' && boardVer[1] == '\0')
+        if ((boardVer[0] == 'A') && (boardVer[1] == '\0'))
         {
             /* boardVer is REV A */
             AppUtils_printf(
                 APP_NAME ": Detected CC version is REV A. Calling TCA6424 Drivers for io expander configurations\r\n");
             result = TRUE;
         }
-        else if (boardVer[1] == '1' && boardVer[0] == 'E')
+        else if ((boardVer[0] == 'E') && (boardVer[1] == '1'))
         {
             /* boardVer is E1 */
             /*IO expander for E1 version board have slave address 32U.*/
@@ -276,7 +277,7 @@ static boolean Adc_appIsIoMuxTCA6424(void)
                             ": Detected CC version is E1. Calling TCA6416 Drivers for io expander configurations\r\n");
             result = FALSE;
         }
-        else if (boardVer[1] == '2' && boardVer[0] == 'E')
+        else if ((boardVer[0] == 'E') && (boardVer[1] == '2'))
         {
             /* boardVer is E2 */
             AppUtils_printf(APP_NAME
@@ -305,7 +306,7 @@ static Std_ReturnType Adc_appI2cWrite(Cdd_I2c_SequenceType wrSeqId, Cdd_I2c_Chan
     }
     else
     {
-        /*Default slave address 34U */
+        /* Default slave address 34U */
         retVal = Cdd_I2c_SetupEB(wrChId, pWrBuf, NULL_PTR, size);
     }
 
@@ -316,10 +317,6 @@ static Std_ReturnType Adc_appI2cWrite(Cdd_I2c_SequenceType wrSeqId, Cdd_I2c_Chan
 
     if (retVal == E_OK)
     {
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(wrSeqId))
-        {
-            /* Wait for sequence to be ready */
-        }
         Cdd_I2c_AsyncTransmit(wrSeqId);
         while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(wrSeqId))
         {
@@ -343,10 +340,6 @@ static Std_ReturnType Adc_appI2cRead(Cdd_I2c_SequenceType rdSeqId, Cdd_I2c_Chann
 
     if (retVal == E_OK)
     {
-        while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(rdSeqId))
-        {
-            /* Wait for sequence to be ready */
-        }
         Cdd_I2c_AsyncTransmit(rdSeqId);
         while (CDD_I2C_SEQ_OK != Cdd_I2c_GetSequenceResult(rdSeqId))
         {

@@ -270,14 +270,17 @@ Std_ReturnType CddFsiTx_PingTransmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
             }
             Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ZERO_SENT;
         }
-        else if (Cdd_FsiTx_PingStatus == CDD_FSI_TX_PING_ZERO_SENT)
+        else 
         {
-            CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG1);
-            if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
+            if (Cdd_FsiTx_PingStatus == CDD_FSI_TX_PING_ZERO_SENT)
             {
-                CddFsiTx_startTxTransmit(baseAddr);
+                CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG1);
+                if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
+                {
+                    CddFsiTx_startTxTransmit(baseAddr);
+                }
+                Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ONE_SENT;
             }
-            Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ONE_SENT;
         }
     }
     else
@@ -310,6 +313,7 @@ Std_ReturnType CddFsiTx_BufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj,
     }
     else
     {
+        (void)userData;
         retVal = CddFsiTx_dataBufferLoad(baseAddr, databuffer, Cdd_FsiTx_wordLength);
     }
     return (retVal);

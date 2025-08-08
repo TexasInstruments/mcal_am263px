@@ -84,7 +84,7 @@
 FUNC(void, CDD_FSITX_CODE)
 CddFsiTx_setPrescaler(uint32 base, Cdd_FsiTx_ClkPrescaleType preScaleValue)
 {
-    HW_WR_REG16((base + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL),
+    HW_WR_REG16((base + (uint32)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL),
                 ((HW_RD_REG16(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL) &
                   (uint16)(~CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_PRESCALE_VAL_MASK)) |
                  (preScaleValue << CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_PRESCALE_VAL_SHIFT)));
@@ -302,7 +302,7 @@ CddFsiTx_setTxUserDefinedData(uint32 base, uint8 userData)
     {
         regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA);
         regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_MASK)) |
-                 (uint16)(userData << CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
+                 (uint16)(userData << (uint16)CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
         HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA, regVal);
     }
 

@@ -37,16 +37,12 @@ extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration_0;
 #endif
 
 #include "ioexp_tca6416_6424.h"
-#if (STD_OFF == CDD_I2C_POLLING_MODE)
-#include "Cdd_I2c_Irq.h"
-#endif
+
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 void        FlsApp_Startup(void);
 static void FlsApp_InterruptConfig(void);
 static void FlsApp_PlatformInit(void);
-#if (STD_OFF == CDD_I2C_POLLING_MODE)
-void Cdd_I2c_InterruptConfig(void);
-#endif
+
 #endif

@@ -22,6 +22,3 @@ endif
 ifeq ($(SOC), $(filter $(SOC), am261))
   SRCS_COMMON += EthTrcv_PBcfg.c
 endif
-ifeq ($(SOC), $(filter $(SOC), am273 am2732s))
-  SRCS_COMMON += EthTrcv_PBcfg.c
-endif

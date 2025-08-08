@@ -6,6 +6,3 @@ INCDIR += $(ETHTRCV_PATH)/include
 ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
   INCDIR += $(ETHTRCV_PATH)/V0
 endif
-ifeq ($(SOC), $(filter $(SOC), am273))
-  INCDIR += $(ETHTRCV_PATH)/V1
-endif

@@ -17,6 +17,7 @@ include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs_fls.mk
 include soc/srcs.mk
 ifeq ($(SOC), am263px)
   include $(mcal_PATH)/I2c/srcs.mk
+  include $(mcal_PATH)/examples/Utils/srcs_i2c.mk
   include $(mcal_PATH)/examples/Utils/srcs_iomux.mk
 endif
 

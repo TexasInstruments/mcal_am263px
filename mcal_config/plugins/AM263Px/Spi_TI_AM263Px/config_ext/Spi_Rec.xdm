@@ -1,16 +1,16 @@
 <?xml version='1.0'?>
-<datamodel version="6.0" 
-           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd" 
-           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd" 
-           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
            xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
 
-  <d:ctr type="AUTOSAR" factory="autosar" 
-         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
-         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
-         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
-         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
-         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
          xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
     <d:lst type="TOP-LEVEL-PACKAGES">
       <d:ctr name="TI_AM263Px" type="AR-PACKAGE">
@@ -19,7 +19,7 @@
             <d:ctr type="MODULE-CONFIGURATION">
               <a:a name="DEF" value="ASPath:/TI_AM263Px/Spi"/>
               <a:a name="IMPORTER_INFO" value="@REC"/>
-              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION" 
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION"
                      value="VariantPostBuild">
                 <a:a name="IMPORTER_INFO" value="@REC"/>
               </d:var>
@@ -27,7 +27,7 @@
                 <d:ctr name="SpiDemEventParameterRefs" type="IDENTIFIABLE">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                   <d:lst name="SPI_E_HARDWARE_ERROR">
-                    <d:ref type="REFERENCE" 
+                    <d:ref type="REFERENCE"
                            value="ASPath:/Dem/Dem/DemConfigSet/SPI_E_HARDWARE_ERROR">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
@@ -54,7 +54,7 @@
                 <d:var name="SpiMaxHwUnit" type="INTEGER" value="8">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="SpiMaxExternalDeviceConfig" type="INTEGER" 
+                <d:var name="SpiMaxExternalDeviceConfig" type="INTEGER"
                        value="5">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
@@ -81,7 +81,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -108,7 +108,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -135,7 +135,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -162,7 +162,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -189,7 +189,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -216,7 +216,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -243,7 +243,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -270,7 +270,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -297,7 +297,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -324,7 +324,7 @@
                     <d:var name="SpiIbNBuffers" type="INTEGER" value="10">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiTransferStart" type="ENUMERATION" 
+                    <d:var name="SpiTransferStart" type="ENUMERATION"
                            value="MSB">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -345,7 +345,7 @@
                     <d:var name="SpiCsPolarity" type="ENUMERATION" value="HIGH">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiDataShiftEdge" type="ENUMERATION" 
+                    <d:var name="SpiDataShiftEdge" type="ENUMERATION"
                            value="TRAILING">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -355,42 +355,42 @@
                     <d:var name="SpiHwUnit" type="ENUMERATION" value="CSIB0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION" 
+                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION"
                            value="LOW">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsMode" type="ENUMERATION" 
+                    <d:var name="SpiCsMode" type="ENUMERATION"
                            value="SPI_CONTINUOUS">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsIdleTime" type="ENUMERATION" 
+                    <d:var name="SpiCsIdleTime" type="ENUMERATION"
                            value="SPI_DATADELAY_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER" 
+                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER"
                            value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ctr name="SpiExternalDeviceConfigMCSPI" 
+                    <d:ctr name="SpiExternalDeviceConfigMCSPI"
                            type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
-                      <d:var name="SpiExtDeviceMCSPITxRxMode" 
+                      <d:var name="SpiExtDeviceMCSPITxRxMode"
                              type="ENUMERATION" value="SPI_TX_RX_MODE_BOTH">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitEnable" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitEnable"
                              type="BOOLEAN" value="false">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitLevel" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitLevel"
                              type="ENUMERATION" value="SPI_LOW">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception"
                              type="ENUMERATION" value="DATA_LINE_1_RECEPTION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission"
                              type="ENUMERATION" value="DATA_LINE_1_TRANSMISSION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -410,7 +410,7 @@
                     <d:var name="SpiCsPolarity" type="ENUMERATION" value="HIGH">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiDataShiftEdge" type="ENUMERATION" 
+                    <d:var name="SpiDataShiftEdge" type="ENUMERATION"
                            value="TRAILING">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -420,42 +420,42 @@
                     <d:var name="SpiHwUnit" type="ENUMERATION" value="CSIB1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION" 
+                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION"
                            value="LOW">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsMode" type="ENUMERATION" 
+                    <d:var name="SpiCsMode" type="ENUMERATION"
                            value="SPI_CONTINUOUS">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsIdleTime" type="ENUMERATION" 
+                    <d:var name="SpiCsIdleTime" type="ENUMERATION"
                            value="SPI_DATADELAY_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER" 
+                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER"
                            value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ctr name="SpiExternalDeviceConfigMCSPI" 
+                    <d:ctr name="SpiExternalDeviceConfigMCSPI"
                            type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
-                      <d:var name="SpiExtDeviceMCSPITxRxMode" 
+                      <d:var name="SpiExtDeviceMCSPITxRxMode"
                              type="ENUMERATION" value="SPI_TX_RX_MODE_BOTH">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitEnable" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitEnable"
                              type="BOOLEAN" value="false">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitLevel" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitLevel"
                              type="ENUMERATION" value="SPI_LOW">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception"
                              type="ENUMERATION" value="DATA_LINE_1_RECEPTION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission"
                              type="ENUMERATION" value="DATA_LINE_1_TRANSMISSION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -475,7 +475,7 @@
                     <d:var name="SpiCsPolarity" type="ENUMERATION" value="LOW">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiDataShiftEdge" type="ENUMERATION" 
+                    <d:var name="SpiDataShiftEdge" type="ENUMERATION"
                            value="TRAILING">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -485,42 +485,42 @@
                     <d:var name="SpiHwUnit" type="ENUMERATION" value="CSIB2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION" 
+                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION"
                            value="LOW">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsMode" type="ENUMERATION" 
+                    <d:var name="SpiCsMode" type="ENUMERATION"
                            value="SPI_CONTINUOUS">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsIdleTime" type="ENUMERATION" 
+                    <d:var name="SpiCsIdleTime" type="ENUMERATION"
                            value="SPI_DATADELAY_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER" 
+                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER"
                            value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ctr name="SpiExternalDeviceConfigMCSPI" 
+                    <d:ctr name="SpiExternalDeviceConfigMCSPI"
                            type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
-                      <d:var name="SpiExtDeviceMCSPITxRxMode" 
+                      <d:var name="SpiExtDeviceMCSPITxRxMode"
                              type="ENUMERATION" value="SPI_TX_RX_MODE_BOTH">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitEnable" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitEnable"
                              type="BOOLEAN" value="false">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitLevel" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitLevel"
                              type="ENUMERATION" value="SPI_LOW">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception"
                              type="ENUMERATION" value="DATA_LINE_1_RECEPTION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission"
                              type="ENUMERATION" value="DATA_LINE_1_TRANSMISSION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -540,7 +540,7 @@
                     <d:var name="SpiCsPolarity" type="ENUMERATION" value="HIGH">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiDataShiftEdge" type="ENUMERATION" 
+                    <d:var name="SpiDataShiftEdge" type="ENUMERATION"
                            value="TRAILING">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -550,42 +550,42 @@
                     <d:var name="SpiHwUnit" type="ENUMERATION" value="CSIB3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION" 
+                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION"
                            value="LOW">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsMode" type="ENUMERATION" 
+                    <d:var name="SpiCsMode" type="ENUMERATION"
                            value="SPI_CONTINUOUS">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsIdleTime" type="ENUMERATION" 
+                    <d:var name="SpiCsIdleTime" type="ENUMERATION"
                            value="SPI_DATADELAY_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER" 
+                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER"
                            value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ctr name="SpiExternalDeviceConfigMCSPI" 
+                    <d:ctr name="SpiExternalDeviceConfigMCSPI"
                            type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
-                      <d:var name="SpiExtDeviceMCSPITxRxMode" 
+                      <d:var name="SpiExtDeviceMCSPITxRxMode"
                              type="ENUMERATION" value="SPI_TX_RX_MODE_BOTH">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitEnable" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitEnable"
                              type="BOOLEAN" value="false">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitLevel" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitLevel"
                              type="ENUMERATION" value="SPI_LOW">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception"
                              type="ENUMERATION" value="DATA_LINE_1_RECEPTION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission"
                              type="ENUMERATION" value="DATA_LINE_1_TRANSMISSION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -605,7 +605,7 @@
                     <d:var name="SpiCsPolarity" type="ENUMERATION" value="HIGH">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiDataShiftEdge" type="ENUMERATION" 
+                    <d:var name="SpiDataShiftEdge" type="ENUMERATION"
                            value="TRAILING">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -615,42 +615,42 @@
                     <d:var name="SpiHwUnit" type="ENUMERATION" value="CSIB4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION" 
+                    <d:var name="SpiShiftClockIdleLevel" type="ENUMERATION"
                            value="LOW">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsMode" type="ENUMERATION" 
+                    <d:var name="SpiCsMode" type="ENUMERATION"
                            value="SPI_CONTINUOUS">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiCsIdleTime" type="ENUMERATION" 
+                    <d:var name="SpiCsIdleTime" type="ENUMERATION"
                            value="SPI_DATADELAY_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER" 
+                    <d:var name="SpiExtDeviceClockDivider" type="INTEGER"
                            value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ctr name="SpiExternalDeviceConfigMCSPI" 
+                    <d:ctr name="SpiExternalDeviceConfigMCSPI"
                            type="IDENTIFIABLE">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
-                      <d:var name="SpiExtDeviceMCSPITxRxMode" 
+                      <d:var name="SpiExtDeviceMCSPITxRxMode"
                              type="ENUMERATION" value="SPI_TX_RX_MODE_BOTH">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitEnable" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitEnable"
                              type="BOOLEAN" value="false">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIStartBitLevel" 
+                      <d:var name="SpiExtDeviceMCSPIStartBitLevel"
                              type="ENUMERATION" value="SPI_LOW">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectReception"
                              type="ENUMERATION" value="DATA_LINE_1_RECEPTION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission" 
+                      <d:var name="SpiExtDeviceMCSPIDataLineSelectTransmission"
                              type="ENUMERATION" value="DATA_LINE_1_TRANSMISSION">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -666,7 +666,7 @@
                       </d:var>
                     </d:lst>
                     <d:lst name="SpiJobEndNotification">
-                      <d:var type="FUNCTION-NAME" 
+                      <d:var type="FUNCTION-NAME"
                              value="SpiApp_McspiJob0EndNotification">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -677,11 +677,11 @@
                     <d:var name="SpiJobPriority" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ref name="SpiDeviceAssignment" type="REFERENCE" 
+                    <d:ref name="SpiDeviceAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiExternalDevice_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
-                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE" 
+                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiHwUnitConfig_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
@@ -691,7 +691,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -701,7 +701,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="1">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_1">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -712,7 +712,7 @@
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:lst name="SpiHwUnitSynchronous"/>
                     <d:lst name="SpiJobEndNotification">
-                      <d:var type="FUNCTION-NAME" 
+                      <d:var type="FUNCTION-NAME"
                              value="SpiApp_McspiJob1EndNotification">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -723,11 +723,11 @@
                     <d:var name="SpiJobPriority" type="INTEGER" value="1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ref name="SpiDeviceAssignment" type="REFERENCE" 
+                    <d:ref name="SpiDeviceAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiExternalDevice_1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
-                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE" 
+                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiHwUnitConfig_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
@@ -737,7 +737,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_2">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -747,7 +747,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="1">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_3">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -762,7 +762,7 @@
                       </d:var>
                     </d:lst>
                     <d:lst name="SpiJobEndNotification">
-                      <d:var type="FUNCTION-NAME" 
+                      <d:var type="FUNCTION-NAME"
                              value="SpiApp_McspiJob2EndNotification">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -773,11 +773,11 @@
                     <d:var name="SpiJobPriority" type="INTEGER" value="2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ref name="SpiDeviceAssignment" type="REFERENCE" 
+                    <d:ref name="SpiDeviceAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiExternalDevice_1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
-                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE" 
+                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiHwUnitConfig_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
@@ -787,7 +787,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_4">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -797,7 +797,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="1">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_5">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -812,7 +812,7 @@
                       </d:var>
                     </d:lst>
                     <d:lst name="SpiJobEndNotification">
-                      <d:var type="FUNCTION-NAME" 
+                      <d:var type="FUNCTION-NAME"
                              value="SpiApp_McspiJob3EndNotification">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -823,11 +823,11 @@
                     <d:var name="SpiJobPriority" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ref name="SpiDeviceAssignment" type="REFERENCE" 
+                    <d:ref name="SpiDeviceAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiExternalDevice_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
-                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE" 
+                    <d:ref name="SpiHwUnitAssignment" type="REFERENCE"
                            value="ASPath:/Spi/Spi/SpiDriver/SpiHwUnitConfig_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
@@ -837,7 +837,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_6">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -847,7 +847,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="1">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -857,7 +857,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="2">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -867,7 +867,7 @@
                         <d:var name="SpiChannelIndex" type="INTEGER" value="3">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
-                        <d:ref name="SpiChannelAssignment" type="REFERENCE" 
+                        <d:ref name="SpiChannelAssignment" type="REFERENCE"
                                value="ASPath:/Spi/Spi/SpiDriver/SpiChannel_9">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:ref>
@@ -878,12 +878,12 @@
                 <d:lst name="SpiSequence" type="MAP">
                   <d:ctr name="SpiSequence_0" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiInterruptibleSequence" type="BOOLEAN" 
+                    <d:var name="SpiInterruptibleSequence" type="BOOLEAN"
                            value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="SpiSeqEndNotification">
-                      <d:var type="FUNCTION-NAME" 
+                      <d:var type="FUNCTION-NAME"
                              value="SpiApp_McspiSeq0EndNotification">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -892,7 +892,7 @@
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="SpiJobAssignment">
-                      <d:ref type="REFERENCE" 
+                      <d:ref type="REFERENCE"
                              value="ASPath:/Spi/Spi/SpiDriver/SpiJob_0">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:ref>
@@ -900,12 +900,12 @@
                   </d:ctr>
                   <d:ctr name="SpiSequence_1" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiInterruptibleSequence" type="BOOLEAN" 
+                    <d:var name="SpiInterruptibleSequence" type="BOOLEAN"
                            value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="SpiSeqEndNotification">
-                      <d:var type="FUNCTION-NAME" 
+                      <d:var type="FUNCTION-NAME"
                              value="SpiApp_McspiSeq1EndNotification">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -914,11 +914,11 @@
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="SpiJobAssignment">
-                      <d:ref type="REFERENCE" 
+                      <d:ref type="REFERENCE"
                              value="ASPath:/Spi/Spi/SpiDriver/SpiJob_1">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:ref>
-                      <d:ref type="REFERENCE" 
+                      <d:ref type="REFERENCE"
                              value="ASPath:/Spi/Spi/SpiDriver/SpiJob_2">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:ref>
@@ -926,12 +926,12 @@
                   </d:ctr>
                   <d:ctr name="SpiSequence_2" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiInterruptibleSequence" type="BOOLEAN" 
+                    <d:var name="SpiInterruptibleSequence" type="BOOLEAN"
                            value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="SpiSeqEndNotification">
-                      <d:var type="FUNCTION-NAME" 
+                      <d:var type="FUNCTION-NAME"
                              value="SpiApp_McspiSeq2EndNotification">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -940,7 +940,7 @@
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="SpiJobAssignment">
-                      <d:ref type="REFERENCE" 
+                      <d:ref type="REFERENCE"
                              value="ASPath:/Spi/Spi/SpiDriver/SpiJob_3">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:ref>
@@ -950,11 +950,11 @@
                 <d:lst name="SpiHwUnitConfig" type="MAP">
                   <d:ctr name="SpiHwUnitConfig_0" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" 
+                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN"
                            value="false">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -967,29 +967,29 @@
                   </d:ctr>
                   <d:ctr name="SpiHwUnitConfig_1" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:ref name="SpiHwUnitCddDmaTxHandler" type="REFERENCE" 
+                    <d:ref name="SpiHwUnitCddDmaTxHandler" type="REFERENCE"
                            value="ASPath:/Cdd_Dma/Cdd_Dma/CddDmaDriverHandler_Spi_1_Tx">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
-                    <d:ref name="SpiHwUnitCddDmaRxHandler" type="REFERENCE" 
+                    <d:ref name="SpiHwUnitCddDmaRxHandler" type="REFERENCE"
                            value="ASPath:/Cdd_Dma/Cdd_Dma/CddDmaDriverHandler_Spi_1_Rx">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitConfig_2" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" 
+                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN"
                            value="false">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1002,11 +1002,11 @@
                   </d:ctr>
                   <d:ctr name="SpiHwUnitConfig_3" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" 
+                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN"
                            value="false">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1019,11 +1019,11 @@
                   </d:ctr>
                   <d:ctr name="SpiHwUnitConfig_4" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" 
+                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN"
                            value="false">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1036,11 +1036,11 @@
                   </d:ctr>
                   <d:ctr name="SpiHwUnitConfig_5" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI5">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" 
+                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN"
                            value="false">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1053,11 +1053,11 @@
                   </d:ctr>
                   <d:ctr name="SpiHwUnitConfig_6" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI6">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" 
+                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN"
                            value="false">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1070,11 +1070,11 @@
                   </d:ctr>
                   <d:ctr name="SpiHwUnitConfig_7" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitType" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitType" type="ENUMERATION"
                            value="SPI_UNIT_MCSPI7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN" 
+                    <d:var name="SpiHwUnitDmaEnable" type="BOOLEAN"
                            value="false">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1128,7 +1128,7 @@
                 <d:var name="SpiHwStatusApi" type="BOOLEAN" value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="SpiInterruptibleSeqAllowed" type="BOOLEAN" 
+                <d:var name="SpiInterruptibleSeqAllowed" type="BOOLEAN"
                        value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
@@ -1144,56 +1144,56 @@
                 <d:lst name="SpiHwUnitEnabled" type="MAP">
                   <d:ctr name="SpiHwUnitEnabled_0" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitEnabled_1" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitEnabled_2" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitEnabled_3" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitEnabled_4" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitEnabled_5" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI5">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitEnabled_6" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI6">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                   <d:ctr name="SpiHwUnitEnabled_7" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION" 
+                    <d:var name="SpiHwUnitEnabledFlag" type="ENUMERATION"
                            value="SPI_HWUNIT_MCSPI7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1202,13 +1202,13 @@
                 <d:var name="SpiLevelDelivered" type="INTEGER" value="2">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="SpiSupportConcurrentSyncTransmit" type="BOOLEAN" 
+                <d:var name="SpiSupportConcurrentSyncTransmit" type="BOOLEAN"
                        value="false">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
                 <d:lst name="SpiUserCallbackHeaderFile">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
-                  <d:var type="STRING" value="Spi_Cbk.h">
+                  <d:var type="STRING" value="Spi_Cfg.h">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:var>
                 </d:lst>
@@ -1221,19 +1221,19 @@
                 <d:var name="SpiTimeoutDuration" type="INTEGER" value="64000">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="SpiDeviceVariant" type="ENUMERATION" 
+                <d:var name="SpiDeviceVariant" type="ENUMERATION"
                        value="AM263Px">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="SpiRegisterReadbackApi" type="BOOLEAN" 
+                <d:var name="SpiRegisterReadbackApi" type="BOOLEAN"
                        value="false">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="SpiChannelInternalBufferMaxLength" type="INTEGER" 
+                <d:var name="SpiChannelInternalBufferMaxLength" type="INTEGER"
                        value="64">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:ref name="SpiOsCounterRef" type="REFERENCE" 
+                <d:ref name="SpiOsCounterRef" type="REFERENCE"
                        value="ASPath:/Os/Os/OsCounter_0">
                   <a:a name="ENABLE" value="true"/>
                   <a:a name="IMPORTER_INFO" value="@REC"/>
