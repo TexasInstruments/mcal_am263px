@@ -294,7 +294,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else 
+    else
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
@@ -319,7 +319,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else 
+    else
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
@@ -344,7 +344,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else 
+    else
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
@@ -369,7 +369,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else 
+    else
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
@@ -394,7 +394,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else 
+    else
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
@@ -419,7 +419,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else 
+    else
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
@@ -444,7 +444,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
-    else 
+    else
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
@@ -508,7 +508,7 @@ CddFsiRx_disableInterrupt(uint32 base, uint8 RxIntNum)
         regVal   &= ~rxflags;
         HW_WR_REG16(baseAddr, regVal);
     }
-    else 
+    else
     {
         if (RxIntNum == (uint8)CDD_FSI_RX_INT2)
         {

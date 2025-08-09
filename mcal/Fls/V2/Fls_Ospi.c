@@ -235,7 +235,7 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
         {
             cmdExt = rdParams->cmd;
         }
-        else 
+        else
         {
             if (fls_config_sfdp->cmdExtType == OSPI_CMD_EXT_TYPE_INVERSE)
             {

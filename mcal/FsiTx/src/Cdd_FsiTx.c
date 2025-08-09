@@ -241,8 +241,8 @@ Cdd_FsiTx_Ping(Cdd_FsiTx_HWUnitType HwUnitId)
         (void)CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_UNINIT);
         retVal = E_NOT_OK;
     }
-    else 
-    {    
+    else
+    {
         if (HwUnitId >= CDD_FSI_TX_HW_UNIT_CNT)
         {
             (void)CddFsiTx_ReportDetError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_PARAM_VALUE);

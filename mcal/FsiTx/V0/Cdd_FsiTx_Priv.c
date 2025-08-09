@@ -270,7 +270,7 @@ Std_ReturnType CddFsiTx_PingTransmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
             }
             Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ZERO_SENT;
         }
-        else 
+        else
         {
             if (Cdd_FsiTx_PingStatus == CDD_FSI_TX_PING_ZERO_SENT)
             {

@@ -7,7 +7,7 @@ export AUTOSAR_VERSION?=$(subst .,,$(AUTOSAR_VERSION_DOT))
 export PROFILE?=Release
 
 # List of platforms: am263, am263px, am261
-export PLATFORM?=am263
+export PLATFORM?=am263px
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263x))
   export PLATFORM=am263
 endif

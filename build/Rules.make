@@ -10,11 +10,11 @@ else
 endif
 
 # Default platform. Supported values: am263, am263px, am261
-PLATFORM?=am263
+PLATFORM?=am263px
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263))
   SOC = am263
-  export EB_PLATFORM?=AM263Px
+  export EB_PLATFORM?=AM263x
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
