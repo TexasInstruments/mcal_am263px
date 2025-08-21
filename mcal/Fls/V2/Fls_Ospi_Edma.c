@@ -62,10 +62,10 @@ void FLS_DmaRxIsrHandler(void *args);
 #include "Fls_MemMap.h"
 
 /* Requirements : MCAL-____ */
-sint32 Fls_Ospi_dmaChInit(Fls_DriverObjType Fls_DrvObj)
+sint32 Fls_Ospi_dmaChInit(Fls_DriverObjType *drvObj)
 {
     sint32 status  = MCAL_SystemP_SUCCESS;
-    void  *appdata = (void *)&Fls_DrvObj;
+    void  *appdata = (void *)drvObj;
     status         = Cdd_Dma_CbkRegister(FLS_UNIT_EDMA_HANDLER, appdata, &FLS_DmaRxIsrHandler);
     return status;
 }

@@ -41,9 +41,9 @@
 /*                          Function Declarations                   */
 /* ================================================================ */
 
-static void Cdd_I2c_utilsLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
+static void Cdd_I2c_UtilsLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
                                        const Cdd_I2c_UtilsParams *params, uint8 currSeqId);
-static void Cdd_I2c_utilsUnLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node);
+static void Cdd_I2c_UtilsUnLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node);
 
 /* ================================================================ */
 /*                            Global Variables                      */
@@ -58,7 +58,7 @@ static void Cdd_I2c_utilsUnLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2
 #define CDD_I2C_START_SEC_CODE
 #include "Cdd_I2c_MemMap.h"
 
-void Cdd_I2c_utilsInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj)
+void Cdd_I2c_UtilsInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj)
 {
     /* Initialize the variables */
     llobj->headNode = (Cdd_I2c_UtilsNode *)NULL_PTR;
@@ -67,7 +67,7 @@ void Cdd_I2c_utilsInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj)
     return;
 }
 
-void Cdd_I2c_utilsDeInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj)
+void Cdd_I2c_UtilsDeInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj)
 {
     llobj->headNode = (Cdd_I2c_UtilsNode *)NULL_PTR;
     llobj->tailNode = (Cdd_I2c_UtilsNode *)NULL_PTR;
@@ -75,22 +75,22 @@ void Cdd_I2c_utilsDeInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj)
     return;
 }
 
-void Cdd_I2c_utilsLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
+void Cdd_I2c_UtilsLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
                               const Cdd_I2c_UtilsParams *params, uint8 currSeqId)
 {
-    Cdd_I2c_utilsLinkDoublePri(llobj, node, params, currSeqId);
+    Cdd_I2c_UtilsLinkDoublePri(llobj, node, params, currSeqId);
 
     return;
 }
 
-void Cdd_I2c_utilsUnLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node)
+void Cdd_I2c_UtilsUnLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node)
 {
-    Cdd_I2c_utilsUnLinkDoublePri(llobj, node);
+    Cdd_I2c_UtilsUnLinkDoublePri(llobj, node);
 
     return;
 }
 
-void Cdd_I2c_utilsInitNodeObject(Cdd_I2c_UtilsNode *node)
+void Cdd_I2c_UtilsInitNodeObject(Cdd_I2c_UtilsNode *node)
 {
     node->next                    = (Cdd_I2c_UtilsNode *)NULL_PTR;
     node->prev                    = (Cdd_I2c_UtilsNode *)NULL_PTR;
@@ -102,18 +102,18 @@ void Cdd_I2c_utilsInitNodeObject(Cdd_I2c_UtilsNode *node)
     return;
 }
 
-Cdd_I2c_UtilsNode *Cdd_I2c_utilsGetHeadNode(const Cdd_I2c_UtilsLinkListObj *llobj)
+Cdd_I2c_UtilsNode *Cdd_I2c_UtilsGetHeadNode(const Cdd_I2c_UtilsLinkListObj *llobj)
 {
     return (llobj->headNode);
 }
 
 /**
- *  Cdd_I2c_utilsLinkDoublePri
+ *  Cdd_I2c_UtilsLinkDoublePri
  *  \brief Links a node to a double link list based on priority.
  *  For nodes with same priority, the new node will be added to the
  *  last.
  */
-static void Cdd_I2c_utilsLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
+static void Cdd_I2c_UtilsLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
                                        const Cdd_I2c_UtilsParams *params, uint8 currSeqId)
 {
     uint32             interruptible = 0U;
@@ -176,10 +176,10 @@ static void Cdd_I2c_utilsLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_
 }
 
 /**
- *  Cdd_I2c_utilsUnLinkDoublePri
+ *  Cdd_I2c_UtilsUnLinkDoublePri
  *  \brief Unlinks a node from a double link list.
  */
-static void Cdd_I2c_utilsUnLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node)
+static void Cdd_I2c_UtilsUnLinkDoublePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node)
 {
     if (NULL_PTR == node->prev)
     {

@@ -308,7 +308,7 @@ Cdd_FsiTx_BufferLoad(Cdd_FsiTx_HWUnitType HwUnitId,
         srcbuffer = SrcBufferPtr;
         Cdd_FsiTx_HwUnitObjType *hwObj;
         hwObj        = &(Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId]);
-        BufferStatus = CddFsiTx_BufferLoad(hwObj, srcbuffer, Cdd_FsiTx_userData, TxDataLength);
+        BufferStatus = CddFsiTx_BufferLoad(hwObj, srcbuffer, Cdd_FsiTx_userData, (uint32)TxDataLength);
         if (BufferStatus != E_OK)
         {
             CddFsiTx_ReportRuntimeError(CDD_FSI_TX_BUFFER_LOAD_SID, CDD_FSI_TX_E_INVALID_EVENT);

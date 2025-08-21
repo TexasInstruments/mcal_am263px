@@ -69,6 +69,12 @@ extern "C" {
  *   Alias for pmu event counter
  */
 #define pmuCYCLE_COUNTER 0x80000000U
+/** @def MCAL_PMUCYCLE_COUNTER
+ *   @brief pmu cycle counter
+ *
+ *   Alias for pmu event counter
+ */
+#define MCAL_PMUCYCLE_COUNTER 0x80000000U
 
 /** @enum pmuEvent
  *   @brief pmu event
@@ -209,6 +215,20 @@ uint32 Mcal_pmuGetEventCount(uint32 counter);
  *   @return overflow flags.
  */
 uint32 Mcal_pmuGetOverflow(void);
+
+/** @fn void Mcal_GetCycleCounterValue(uint32  *Value)
+ *   @brief Get the number of cpu clock cycles
+ *   @param[in] Value - number of clock cycles
+ */
+void Mcal_GetCycleCounterValue(uint32 *Value);
+
+/** @fn void Mcal_GetElapsedCycleCountValue(uint32 *Value, uint32 *ElapsedValue)
+ *   @brief Get the number of cpu clock cycles elapsed
+ *   @param[in] Value - Current number of clock cycles
+ *   @param[in] ElapsedValue - Elapsed number of clock cycles
+ */
+void Mcal_GetElapsedCycleCountValue(uint32 *Value, uint32 *ElapsedValue);
+
 #ifdef __cplusplus
 }
 #endif /*extern "C" */

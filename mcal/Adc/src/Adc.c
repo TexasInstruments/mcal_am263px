@@ -1013,9 +1013,8 @@ FUNC(uint32, ADC_CODE) Adc_GetReadResultBaseAddress(VAR(Adc_GroupType, AUTOMATIC
 #endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
     if (retVal == E_OK)
     {
-        groupObj = &Adc_DrvObj.groupObj[Group];
-        resultBaseAddr =
-            ADC_readResultbaseaddr(groupObj->hwUnitObj->resultBaseAddr, (Adc_mcalSOCNumber_t)groupObj->socAssigned);
+        groupObj       = &Adc_DrvObj.groupObj[Group];
+        resultBaseAddr = ADC_readResultbaseaddr(groupObj->hwUnitObj->resultBaseAddr, groupObj->socAssigned);
     }
 
     return resultBaseAddr;

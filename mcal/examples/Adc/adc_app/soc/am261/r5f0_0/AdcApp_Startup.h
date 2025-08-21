@@ -123,7 +123,7 @@ static AdcApp_TestParams gAdcAppTestPrms[] = {{
 
 #define CSL_TOP_CTRL_LOCK0_KICK1_RESETVAL (0x00000000U)
 
-#define CSL_CONTROLSS_CTRL_U_BASE      (0x502F0000ul)
+#define CSL_CONTROLSS_CTRL_U_BASE      (0x502F0000UL)
 #define CSL_CONTROLSS_CTRL_LOCK0_KICK0 (0x00001008U)
 #define CSL_CONTROLSS_CTRL_LOCK0_KICK1 (0x0000100CU)
 
@@ -155,7 +155,7 @@ static AdcApp_TestParams gAdcAppTestPrms[] = {{
 #define TOP_RCM_PARTITION0 (5)
 
 #define CSL_CONTROLSS_CTRL_EPWM_STATICXBAR_SEL0 (0x00000004U)
-#define CSL_CONTROLSS_INTXBAR_U_BASE            (0x502D5000ul)
+#define CSL_CONTROLSS_INTXBAR_U_BASE            (0x502D5000UL)
 
 /* define the unlock and lock values for MSS_CTRL, TOP_CTRL, MSS_RCM, TOP_RCM*/
 #define TEST_KICK_LOCK_VAL    (0x00000000U)

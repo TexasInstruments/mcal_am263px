@@ -104,19 +104,8 @@ CddFsiRx_clearRxModuleReset(uint32 base)
 FUNC(Std_ReturnType, CDD_FSIRX_CODE)
 CddFsiRx_clearAllRxEvents(uint32 base)
 {
-    Std_ReturnType retVal  = E_OK;
-    uint16         flags   = 0;
-    flags                 |= CDD_FSI_RX_EVTMASK;
-
-    /* Check the arguments */
-    if (flags != CDD_FSI_RX_EVTMASK)
-    {
-        retVal = E_NOT_OK;
-    }
-    else
-    {
-        HW_WR_REG16(base + CSL_CDD_FSI_RX_CFG_RX_EVT_CLR_ALT1, CDD_FSI_RX_EVTMASK);
-    }
+    Std_ReturnType retVal = E_OK;
+    HW_WR_REG16(base + CSL_CDD_FSI_RX_CFG_RX_EVT_CLR_ALT1, CDD_FSI_RX_EVTMASK);
     return (retVal);
 }
 
@@ -169,14 +158,14 @@ FUNC(void, CDD_FSIRX_CODE)
 CddFsiRx_dataReceive(uint8 hwUnitId, uint32 base, volatile Cdd_FsiRx_DataBufferType *databuffer, uint8 length,
                      uint8 bufOffset)
 {
-    uint32           baseAddr                          = base;
-    uint8            dataLength                        = length;
-    volatile uint16 *pSrc16                            = NULL;
-    uint8            wordLength                        = 0;
-    uint8            offset                            = bufOffset;
-    volatile uint16  regBase                           = (uint16)CSL_CDD_FSI_RX_CFG_RX_BUF_BASE(offset);
-    pSrc16                                             = (volatile uint16 *)(base + (uint32)regBase);
-    wordLength                                         = CddFsiRx_getRxWordLength(baseAddr, dataLength);
+    uint32           baseAddr   = base;
+    uint8            dataLength = length;
+    volatile uint16 *pSrc16     = NULL;
+    uint8            wordLength = 0;
+    uint8            offset     = bufOffset;
+    uint32           regBase    = (uint32)CSL_CDD_FSI_RX_CFG_RX_BUF_BASE((uint32)offset);
+    pSrc16                      = (volatile uint16 *)(base + regBase);
+    wordLength                  = CddFsiRx_getRxWordLength(baseAddr, (CddFsiRx_DataLengthType)dataLength);
     volatile Cdd_FsiRx_DataBufferType *localDatabuffer = databuffer;
 
     while (wordLength > 0U)
@@ -189,7 +178,7 @@ CddFsiRx_dataReceive(uint8 hwUnitId, uint32 base, volatile Cdd_FsiRx_DataBufferT
         if (offset > (CDD_FSI_RX_MAX_VALUE_BUF_PTR_OFF))
         {
             offset = 0U;
-            pSrc16 = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_RX_CFG_RX_BUF_BASE(offset));
+            pSrc16 = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_RX_CFG_RX_BUF_BASE((uint32)offset));
         }
         wordLength--;
 
@@ -202,7 +191,7 @@ CddFsiRx_dataReceive(uint8 hwUnitId, uint32 base, volatile Cdd_FsiRx_DataBufferT
 }
 /******************************************************************************/
 FUNC(uint8, CDD_FSIRX_CODE)
-CddFsiRx_getRxWordLength(uint32 base, uint16 length)
+CddFsiRx_getRxWordLength(uint32 base, CddFsiRx_DataLengthType length)
 {
     (void)base;
     uint8 WordLength = 0;
@@ -535,10 +524,10 @@ CddFsiRx_disableDMA(uint32 base)
 FUNC(uint16, CDD_FSIRX_CODE)
 CddFsiRx_getRxPingTag(uint32 base)
 {
-    uint32 regVal = HW_RD_REG16(base + CSL_CDD_FSI_RX_CFG_RX_PING_TAG);
-    uint16 PingTagValue =
-        ((regVal & CSL_CDD_FSI_RX_CFG_RX_PING_TAG_PING_TAG_MASK) >> CSL_CDD_FSI_RX_CFG_RX_PING_TAG_PING_TAG_SHIFT);
-    uint16 *PingTag = &PingTagValue;
+    uint32  regVal       = HW_RD_REG16(base + CSL_CDD_FSI_RX_CFG_RX_PING_TAG);
+    uint16  PingTagValue = (uint16)((regVal & CSL_CDD_FSI_RX_CFG_RX_PING_TAG_PING_TAG_MASK) >>
+                                   CSL_CDD_FSI_RX_CFG_RX_PING_TAG_PING_TAG_SHIFT);
+    uint16 *PingTag      = &PingTagValue;
     return (*PingTag);
 }
 

@@ -441,10 +441,14 @@ uint32 UART_checkCharsAvailInFifo(uint32 baseAddr)
     HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
 
     /* Checking if the Transmitter FIFO and Transmitter Shift Register are empty. */
-    uint32 hwRdReg       = HW_RD_REG32(baseAddr + UART_LSR);
-    uint32 uartLsrTxMask = (UART_LSR_TX_SR_E_MASK | UART_LSR_TX_FIFO_E_MASK);
-    bool   maskVal       = (uartLsrTxMask == (hwRdReg & uartLsrTxMask));
-    if (maskVal)
+    uint32  hwRdReg       = HW_RD_REG32(baseAddr + UART_LSR);
+    uint32  uartLsrTxMask = (UART_LSR_TX_SR_E_MASK | UART_LSR_TX_FIFO_E_MASK);
+    boolean maskVal       = FALSE;
+    if (uartLsrTxMask == (hwRdReg & uartLsrTxMask))
+    {
+        maskVal = TRUE;
+    }
+    if (maskVal == TRUE)
     {
         retVal = (uint32)TRUE;
     }

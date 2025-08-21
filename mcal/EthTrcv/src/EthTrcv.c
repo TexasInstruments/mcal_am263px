@@ -422,9 +422,9 @@ FUNC(Std_ReturnType, ETHTRCV_CODE) EthTrcv_StartAutoNegotiation(uint8 TrcvIdx)
         pEthTrcvObj = (EthTrcv_CtrlObjType *)EthTrcv_getCurrCtrlObj(TrcvIdx);
 #if (STD_ON == ETHTRCV_1000MBPS_MACRO)
         /* Checking advertiseCapab for 1000 half NULL or not */
-        if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_1000_HALF))
+        if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_1000_HALF))
         {
-            pEthTrcvCfg->advertiseCapab &= ~ETHERNET_ADV_CAPAB_1000_HALF;
+            pEthTrcvCfg->advertiseCapab &= ~((uint32)ETHERNET_ADV_CAPAB_1000_HALF);
         }
 #endif /* #if (STD_ON == ETHTRCV_1000MBPS_MACRO) */
         if (0U != pEthTrcvCfg->advertiseCapab)
@@ -488,23 +488,20 @@ EthTrcv_GetLinkState(uint8 TrcvIdx, EthTrcv_LinkStateType *LinkStatePtr)
         (void)Det_ReportError(ETHTRCV_MODULE_ID, ETHTRCV_INSTANCE_ID, ETHTRCV_GETLNKSTATE_ID, ETHTRCV_E_PARAM_POINTER);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
+    else
 #endif /* #if (STD_ON == ETHTRCV_DEV_ERROR_DETECT) */
-    if (retVal == E_OK)
     {
-        retVal = (Std_ReturnType)E_NOT_OK;
         /* Calling getLinkSatus function */
         linkUpStatus = EthTrcv_getLinkStatus(EthTrcv_DrvObj.ctrlIdx, TrcvIdx);
         if (((uint32)TRUE) == linkUpStatus)
         {
             /* if linkupstatus true then assigning link status as ACTIVE */
             *LinkStatePtr = ETHTRCV_LINK_STATE_ACTIVE;
-            retVal        = (Std_ReturnType)E_OK;
         }
         else
         {
             /* if linkupstatus false then assigning link status as DOWN */
             *LinkStatePtr = ETHTRCV_LINK_STATE_DOWN;
-            retVal        = (Std_ReturnType)E_OK;
         }
     }
     return retVal;
@@ -557,10 +554,9 @@ EthTrcv_GetBaudRate(uint8 TrcvIdx, EthTrcv_BaudRateType *BaudRatePtr)
         (void)Det_ReportError(ETHTRCV_MODULE_ID, ETHTRCV_INSTANCE_ID, ETHTRCV_GETBAUD_ID, ETHTRCV_E_PARAM_POINTER);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
+    else
 #endif /* #if (STD_ON == ETHTRCV_DEV_ERROR_DETECT) */
-    if (retVal == E_OK)
     {
-        retVal      = (Std_ReturnType)E_NOT_OK;
         pEthTrcvObj = &(EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx]);
         if ((Std_ReturnType)E_OK ==
             EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, ETHTRCV_PHYSTS, &data))
@@ -645,8 +641,8 @@ EthTrcv_GetDuplexMode(uint8 TrcvIdx, EthTrcv_DuplexModeType *DuplexModePtr)
         (void)Det_ReportError(ETHTRCV_MODULE_ID, ETHTRCV_INSTANCE_ID, ETHTRCV_GETDPLXMODE_ID, ETHTRCV_E_PARAM_POINTER);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
+    else
 #endif /* #if (STD_ON == ETHTRCV_DEV_ERROR_DETECT) */
-    if (retVal == E_OK)
     {
         pEthTrcvObj = &(EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx]);
         if ((Std_ReturnType)E_OK ==
@@ -767,7 +763,6 @@ FUNC(void, ETHTRCV_CODE) EthTrcv_MainFunction(void)
                 {
                     EthIf_TrcvModeIndication(trcvIdx, ctrlMode);
                     EthTrcv_ControllerModeChangeFlag[trcvIdx] = (uint32)FALSE;
-                    retVal                                    = (Std_ReturnType)E_OK;
                 }
             }
             else

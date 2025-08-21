@@ -33,6 +33,7 @@
 #include "ipc_notify_v1_cfg_lld.h"
 #include "Cdd_Ipc.h" /* Included to bring the Clock related functions. */
 #include "string.h"
+#include "sys_pmu.h"
 
 extern IpcNotify_Object          CddIpc_NotifyObject;
 extern IpcNotify_InitObject      CddIpcInit_Config;
@@ -180,17 +181,11 @@ sint32 IpcNotify_lld_sendMsg(IpcNotify_Handle hIpcNotify, uint32 remoteCoreId, u
 {
     sint32 status = MCAL_SystemP_SUCCESS;
 
-    if (hIpcNotify != NULL_PTR)
+    if ((hIpcNotify != NULL_PTR) && (remoteCoreId < MCAL_CSL_CORE_ID_MAX) &&
+        (remoteClientId < IPC_NOTIFY_CLIENT_ID_MAX))
     {
-        if ((remoteCoreId < MCAL_CSL_CORE_ID_MAX) && (remoteClientId < IPC_NOTIFY_CLIENT_ID_MAX))
-        {
-            status = IpcNotify_lld_sendMsg_mailboxWrite(hIpcNotify, remoteCoreId, remoteClientId, messageValue,
-                                                        waitForFifoNotFull, timeout);
-        }
-        else
-        {
-            status = MCAL_SystemP_INVALID_PARAM;
-        }
+        status = IpcNotify_lld_sendMsg_mailboxWrite(hIpcNotify, remoteCoreId, remoteClientId, messageValue,
+                                                    waitForFifoNotFull, timeout);
     }
     else
     {
@@ -207,6 +202,7 @@ sint32 IpcNotify_lld_registerClient(IpcNotify_Handle hIpcNotify, uint16 localCli
 
     if ((hIpcNotify != NULL_PTR) && (localClientId < IPC_NOTIFY_CLIENT_ID_MAX))
     {
+        SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
         if (hIpcNotify->callback[localClientId] == NULL_PTR)
         {
             hIpcNotify->callback[localClientId]     = msgCallback;
@@ -216,6 +212,7 @@ sint32 IpcNotify_lld_registerClient(IpcNotify_Handle hIpcNotify, uint16 localCli
         {
             status = MCAL_SystemP_INVALID_PARAM;
         }
+        SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
     }
     else
     {
@@ -231,8 +228,10 @@ sint32 IpcNotify_lld_unregisterClient(IpcNotify_Handle hIpcNotify, uint16 localC
 
     if ((hIpcNotify != NULL_PTR) && (localClientId < IPC_NOTIFY_CLIENT_ID_MAX))
     {
+        SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
         hIpcNotify->callback[localClientId]     = (IpcNotify_FxnCallback)NULL_PTR;
         hIpcNotify->callbackArgs[localClientId] = NULL_PTR;
+        SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
     }
     else
     {
@@ -262,6 +261,8 @@ __attribute__((weak)) void IpcNotify_lld_isr(void *args)
     pendingIntr = IpcNotify_mailboxGetPendingIntr(mailboxBaseAddr);
     do
     {
+        IpcNotify_wait();
+
         /* We clear pending interrupt unconditional here, and read all the SW queues later */
         IpcNotify_mailboxClearPendingIntr(mailboxBaseAddr, pendingIntr);
 
@@ -299,18 +300,11 @@ uint32 IpcNotify_lld_isCoreEnabled(IpcNotify_Handle hIpcNotify, uint32 coreId)
     return isEnabled;
 }
 
-uint32 Cdd_Ipc_Clock_getTicks(void)
-{
-    TickType startCount = 0U;
-    startCount          = GetCounterValue(CDD_IPC_OS_COUNTER_ID, &startCount);
-    return ((uint32)startCount);
-}
-
 void Cdd_Ipc_Clock_uSleep(uint32 usec) __attribute__((optnone))
 {
-    volatile uint32 i     = 0;
+    volatile uint32 i     = 0U;
     uint32          value = usec * 400U;
-    for (i = 0; i < value;)
+    for (i = 0U; i < value;)
     {
         i = i + 1U;
     }
@@ -329,7 +323,7 @@ static void IpcNotify_lld_init_clearIntOn(IpcNotify_Handle hIpcNotify, uint32 se
     uint32               mailboxBaseAddr;
     IpcNotify_InitHandle hIpcNotifyInit;
     hIpcNotifyInit = hIpcNotify->hIpcNotifyInit;
-    for (core = 0; core < MCAL_CSL_CORE_ID_MAX; core++)
+    for (core = 0U; core < MCAL_CSL_CORE_ID_MAX; core++)
     {
         hIpcNotify->isCoreEnabled[core] = 0U;
     }
@@ -337,9 +331,9 @@ static void IpcNotify_lld_init_clearIntOn(IpcNotify_Handle hIpcNotify, uint32 se
     for (core = 0U; core < hIpcNotifyInit->numCores; core++)
     {
         /* mark core as enabled for IPC */
-        hIpcNotify->isCoreEnabled[hIpcNotifyInit->coreIdList[core]] = 1;
+        hIpcNotify->isCoreEnabled[hIpcNotifyInit->coreIdList[core]] = 1U;
     }
-    for (intConfigNum = 0; intConfigNum < hIpcNotify->interruptConfigNum; intConfigNum++)
+    for (intConfigNum = 0U; intConfigNum < hIpcNotify->interruptConfigNum; intConfigNum++)
     {
         IpcNotify_InterruptConfig *pInterruptConfig;
 
@@ -360,8 +354,9 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, ui
 {
     uint32             mailboxBaseAddr, intrBitPos;
     IpcNotify_SwQueue *swQ;
-    sint32             status = MCAL_SystemP_SUCCESS;
-    uint32             elapsedTicks, startTicks, tempTicks;
+    sint32             status       = MCAL_SystemP_SUCCESS;
+    uint32             elapsedTicks = 0U, startTicks = 0U, tempTicks = 0U;
+
     if ((hIpcNotify->isCoreEnabled[remoteCoreId]) != 0U)
     {
         uint32 value = IpcNotify_makeMsg(hIpcNotify, remoteClientId, messageValue);
@@ -369,18 +364,29 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, ui
         IpcNotify_getWriteMailbox(hIpcNotify->hIpcNotifyInit->selfCoreId, remoteCoreId, &mailboxBaseAddr, &intrBitPos,
                                   &swQ);
 
-        startTicks = Cdd_Ipc_Clock_getTicks();
+        SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
+        Mcal_GetCycleCounterValue(&startTicks);
+
         do
         {
-            status    = IpcNotify_mailboxWrite(mailboxBaseAddr, intrBitPos, swQ, value);
-            tempTicks = startTicks;
-            GetElapsedValue(CDD_IPC_OS_COUNTER_ID, &tempTicks, &elapsedTicks);
+            status = IpcNotify_mailboxWrite(hIpcNotify->hIpcNotifyInit->selfCoreId, remoteCoreId, mailboxBaseAddr,
+                                            intrBitPos, swQ, value);
+            if ((status != MCAL_SystemP_SUCCESS) && (waitForFifoNotFull != 0U))
+            {
+                SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+                SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+                tempTicks = startTicks;
+                Mcal_GetElapsedCycleCountValue(&tempTicks, &elapsedTicks);
+            }
         } while ((status != MCAL_SystemP_SUCCESS) && (waitForFifoNotFull != 0U) && (elapsedTicks < timeout));
 
-        if (status != MCAL_SystemP_SUCCESS)
+        if (elapsedTicks >= timeout)
         {
             status = MCAL_SystemP_TIMEOUT;
         }
+
+        SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
     }
     else
     {

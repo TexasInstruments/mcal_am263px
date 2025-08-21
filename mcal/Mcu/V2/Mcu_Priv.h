@@ -134,16 +134,12 @@ Std_ReturnType      Mcu_ClockSetSourceSCI5(Mcu_ClkSourceIdType clk_srcId, uint32
 Std_ReturnType      Mcu_ClockSetSourceCPTS(Mcu_ClkSourceIdType clk_srcId, uint32 clkDivId);
 Std_ReturnType      Mcu_ClockSetSourceMcuClkout0(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
 Std_ReturnType      Mcu_ClockSetSourceMcuClkout1(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
-#if 0
-Std_ReturnType Mcu_ClockSetSourcePmicClkout(Mcu_ClkSourceIdType clk_srcId, 
-                                                              uint32 clk_divId);
-#endif
-Std_ReturnType Mcu_ClockSetSourceMII100Clk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
-Std_ReturnType Mcu_ClockSetSourceMII10Clk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
-Std_ReturnType Mcu_ClockSetSourceRGMIClk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
-
-Std_ReturnType Mcu_ClockSetSourceCONTROLSS(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
-Std_ReturnType Mcu_SetUpDCDC_Contrl(void);
+Std_ReturnType      Mcu_ClockSetSourcePmicClkout(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
+Std_ReturnType      Mcu_ClockSetSourceMII100Clk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
+Std_ReturnType      Mcu_ClockSetSourceMII10Clk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
+Std_ReturnType      Mcu_ClockSetSourceRGMIClk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
+Std_ReturnType      Mcu_ClockSetSourceCONTROLSS(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
+Std_ReturnType      Mcu_SetUpDCDC_Contrl(void);
 
 FUNC(void, MCU_CODE) Mcu_SystemInit(void);
 

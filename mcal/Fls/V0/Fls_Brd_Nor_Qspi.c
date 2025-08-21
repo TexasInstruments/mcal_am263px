@@ -923,18 +923,14 @@ boolean Fls_VerifyData_priv(const uint8 *expData, const uint8 *rxData, uint32 le
 
     while (idx < length)
     {
-        if (match != 0U)
+        if (*expData_local != *rxData_local)
         {
-            if (*expData_local != *rxData_local)
-            {
-                match = FALSE;
-                /*Stop after first mismatch*/
-                break;
-            }
-            expData_local++;
-            rxData_local++;
+            match = FALSE;
+            /*Stop after first mismatch*/
+            break;
         }
-        idx++;
+        expData_local++;
+        rxData_local++;
     }
     if (match == TRUE)
     {

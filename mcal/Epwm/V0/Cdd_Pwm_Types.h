@@ -2021,7 +2021,7 @@ typedef struct Cdd_Pwm_AdcSocType_s
     /*!<   SOC Enable or Disable.  */
     CDD_PWM_ADCStartOfConversionType adcSocSource;
     /*!<   SOCA / SOCB.  */
-    uint32                           adcInterruptSource;
+    EPWM_ADCStartOfConversionSource  adcInterruptSource;
     /*!<   ADC Interrupt Source.  */
     uint32                           adcMixedInterruptSource;
     /*!<   ADC Mixed Interrupt Source.  */

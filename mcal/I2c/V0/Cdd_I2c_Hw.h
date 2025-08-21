@@ -53,21 +53,23 @@ extern "C" {
 /*                            Global Variables                      */
 /* ================================================================ */
 
-void Cdd_I2c_hwInit(uint32 baseAddr, uint32 baudRate, uint32 hwUnitFrequency, uint32 sysClk,
+void Cdd_I2c_HwInit(uint32 baseAddr, uint32 baudRate, uint32 hwUnitFrequency, uint32 sysClk,
                     Cdd_I2c_AddressType ownAddress);
-void Cdd_I2c_hwDeInit(uint32 baseAddr);
+void Cdd_I2c_HwDeInit(uint32 baseAddr);
 
-Cdd_I2c_ChannelResultType Cdd_I2c_hwTxPolling(Cdd_I2c_ChObjType *chObj);
-Cdd_I2c_ChannelResultType Cdd_I2c_hwRxPolling(Cdd_I2c_ChObjType *chObj);
-Cdd_I2c_ChannelResultType Cdd_I2c_hwTxIntr(Cdd_I2c_ChObjType *chObj);
-Cdd_I2c_ChannelResultType Cdd_I2c_hwRxIntr(Cdd_I2c_ChObjType *chObj);
-Cdd_I2c_ChannelResultType Cdd_I2c_hwContinueTxRxIntr(Cdd_I2c_ChObjType *chObj);
+Cdd_I2c_ChannelResultType Cdd_I2c_HwTxPolling(Cdd_I2c_ChObjType *chObj);
+Cdd_I2c_ChannelResultType Cdd_I2c_HwTxPollingContinue(Cdd_I2c_ChObjType *chObj);
+Cdd_I2c_ChannelResultType Cdd_I2c_HwRxPolling(Cdd_I2c_ChObjType *chObj);
+Cdd_I2c_ChannelResultType Cdd_I2c_HwRxPollingContinue(Cdd_I2c_ChObjType *chObj);
+Cdd_I2c_ChannelResultType Cdd_I2c_HwTxIntr(Cdd_I2c_ChObjType *chObj);
+Cdd_I2c_ChannelResultType Cdd_I2c_HwRxIntr(Cdd_I2c_ChObjType *chObj);
+Cdd_I2c_ChannelResultType Cdd_I2c_HwTxRxIntrContinue(Cdd_I2c_ChObjType *chObj);
 
-void Cdd_I2c_hwDisableAllIntr(uint32 baseAddr);
-void Cdd_I2c_hwClearAllStatus(uint32 baseAddr);
+void Cdd_I2c_HwDisableAllIntr(uint32 baseAddr);
+void Cdd_I2c_HwClearAllStatus(uint32 baseAddr);
 
 #if (STD_ON == CDD_I2C_REGISTER_READBACK_API)
-void Cdd_I2c_hwRegReadback(uint32 baseAddr, Cdd_I2c_RegisterReadbackType *regRbPtr);
+void Cdd_I2c_HwRegReadback(uint32 baseAddr, Cdd_I2c_RegisterReadbackType *regRbPtr);
 #endif
 
 #ifdef __cplusplus

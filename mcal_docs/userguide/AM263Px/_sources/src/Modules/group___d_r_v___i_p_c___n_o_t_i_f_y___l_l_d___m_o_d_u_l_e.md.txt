@@ -83,8 +83,7 @@ typedef IpcNotify_Object* IpcNotify_Handle;
 | sint32 | **[IpcNotify_lld_unregisterClient](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-ipcnotify_lld_unregisterclient)**([IpcNotify_Handle](../Classes/struct_ipc_notify___object.md) hIpcNotify, uint16 localClientId)| Un-register a previously registered callback.  |
 | | **[__attribute__](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-__attribute__)**((weak) )| IPC Notify LLD ISR which can be registered in the application.  |
 | uint32 | **[IpcNotify_lld_getSelfCoreId](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-ipcnotify_lld_getselfcoreid)**([IpcNotify_Handle](../Classes/struct_ipc_notify___object.md) hIpcNotify)| Return current core ID.  |
-| uint32 | **[Cdd_Ipc_Clock_getTicks](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-cdd_ipc_clock_getticks)**(void )| Check if a core is enabled for IPC.  |
-| uint32 | **[Cdd_Ipc_Clock_ticksToUsec](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-cdd_ipc_clock_tickstousec)**(uint32 ticks)|  |
+| uint32 | **[Cdd_Ipc_Clock_ticksToUsec](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-cdd_ipc_clock_tickstousec)**(uint32 ticks)| Check if a core is enabled for IPC.  |
 | void | **[Cdd_Ipc_Clock_uSleep](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-cdd_ipc_clock_usleep)**(uint32 usec)|  |
 | uint32 | **[IpcNotify_lld_isCoreEnabled](../Modules/group___d_r_v___i_p_c___n_o_t_i_f_y___l_l_d___m_o_d_u_l_e.md#function-ipcnotify_lld_iscoreenabled)**([IpcNotify_Handle](../Classes/struct_ipc_notify___object.md) hIpcNotify, uint32 coreId)|  |
 
@@ -279,11 +278,11 @@ Return current core ID.
 
 **Return**: Core ID, see CSL_CoreID for valid values. 
 
-### function Cdd_Ipc_Clock_getTicks
+### function Cdd_Ipc_Clock_ticksToUsec
 
 ```
-uint32 Cdd_Ipc_Clock_getTicks(
-    void 
+uint32 Cdd_Ipc_Clock_ticksToUsec(
+    uint32 ticks
 )
 ```
 
@@ -300,15 +299,6 @@ Check if a core is enabled for IPC.
 
 
 **Return**: 1: core is enabled for IPC, 0: core is not enabled for IPC 
-
-### function Cdd_Ipc_Clock_ticksToUsec
-
-```
-uint32 Cdd_Ipc_Clock_ticksToUsec(
-    uint32 ticks
-)
-```
-
 
 ### function Cdd_Ipc_Clock_uSleep
 

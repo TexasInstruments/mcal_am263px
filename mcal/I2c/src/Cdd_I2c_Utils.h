@@ -103,14 +103,14 @@ typedef struct
  *
  *  \param llobj            Link list object.
  */
-void Cdd_I2c_utilsInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj);
+void Cdd_I2c_UtilsInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj);
 
 /**
  *  \brief De-init a link list object.
  *
  *  \param llobj            Link list object.
  */
-void Cdd_I2c_utilsDeInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj);
+void Cdd_I2c_UtilsDeInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj);
 
 /**
  *  \brief Links a node to the linked list.
@@ -128,7 +128,7 @@ void Cdd_I2c_utilsDeInitLinkList(Cdd_I2c_UtilsLinkListObj *llobj);
  *
  *  \Note
  */
-void Cdd_I2c_utilsLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
+void Cdd_I2c_UtilsLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node,
                               const Cdd_I2c_UtilsParams *params, uint8 currSeqId);
 
 /**
@@ -138,14 +138,14 @@ void Cdd_I2c_utilsLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode
  *  \param llobj            Link list object.
  *  \param node             Node pointer to be unlinked from the list.
  */
-void Cdd_I2c_utilsUnLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node);
+void Cdd_I2c_UtilsUnLinkNodePri(Cdd_I2c_UtilsLinkListObj *llobj, Cdd_I2c_UtilsNode *node);
 
 /**
  *  \brief Initialize the node object with default value.
  *
  *  \param node             Node pointer to initialize.
  */
-void Cdd_I2c_utilsInitNodeObject(Cdd_I2c_UtilsNode *node);
+void Cdd_I2c_UtilsInitNodeObject(Cdd_I2c_UtilsNode *node);
 
 /**
  *  \brief Returns the reference to the head node.
@@ -153,7 +153,7 @@ void Cdd_I2c_utilsInitNodeObject(Cdd_I2c_UtilsNode *node);
  *
  *  \param llobj            Link list object.
  */
-Cdd_I2c_UtilsNode *Cdd_I2c_utilsGetHeadNode(const Cdd_I2c_UtilsLinkListObj *llobj);
+Cdd_I2c_UtilsNode *Cdd_I2c_UtilsGetHeadNode(const Cdd_I2c_UtilsLinkListObj *llobj);
 
 /* ================================================================ */
 /*                       Static Function Definitions                */

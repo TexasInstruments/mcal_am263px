@@ -1,5 +1,6 @@
 IPC_PATH=$(mcal_PATH)/Ipc
 
+include $(mcal_PATH)/Mcal_Lib/inc.mk
 SRCDIR += $(IPC_PATH)/src
 INCDIR += $(IPC_PATH)/include
 SRCS_COMMON += Cdd_Ipc.c Cdd_Ipc_Irq.c ipc_notify_v1_cfg_lld.c ipc_notify_v1_lld.c

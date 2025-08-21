@@ -177,6 +177,15 @@ int main(void)
 #if (STD_ON == CDD_IPC_RPMSG_ENABLE_API)
         retval = Cdd_Ipc_RpMsg_SendMsg(msgBuf, msgSize, gRemoteCoreId[i], gRemoteServiceEndPt,
                                        CddIpcConf_CddIpclocalEndPt_CddIpcEndPtConfig_0, CDD_IPC_TIMEOUT);
+        if (retval != E_OK)
+        {
+            volatile uint32 myTmp = 1U;
+            AppUtils_printf(APP_NAME ": Send message to Remote core Id %u is failed \r\n", gRemoteCoreId[i]);
+            while (myTmp)
+            {
+                /* code */
+            }
+        }
 #endif
     }
 

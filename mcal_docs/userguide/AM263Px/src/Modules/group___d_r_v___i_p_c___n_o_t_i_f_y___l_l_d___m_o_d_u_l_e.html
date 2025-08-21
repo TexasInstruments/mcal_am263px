@@ -235,18 +235,14 @@
 <td><p>Return current core ID.</p></td>
 </tr>
 <tr class="row-odd"><td><p>uint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-ipc-clock-getticks"><span class="std std-ref">Cdd_Ipc_Clock_getTicks</span></a></strong>(void )</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-ipc-clock-tickstousec"><span class="std std-ref">Cdd_Ipc_Clock_ticksToUsec</span></a></strong>(uint32 ticks)</p></td>
 <td><p>Check if a core is enabled for IPC.</p></td>
 </tr>
-<tr class="row-even"><td><p>uint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-ipc-clock-tickstousec"><span class="std std-ref">Cdd_Ipc_Clock_ticksToUsec</span></a></strong>(uint32 ticks)</p></td>
-<td><p></p></td>
-</tr>
-<tr class="row-odd"><td><p>void</p></td>
+<tr class="row-even"><td><p>void</p></td>
 <td><p><strong><a class="reference internal" href="#function-cdd-ipc-clock-usleep"><span class="std std-ref">Cdd_Ipc_Clock_uSleep</span></a></strong>(uint32 usec)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>uint32</p></td>
+<tr class="row-odd"><td><p>uint32</p></td>
 <td><p><strong><a class="reference internal" href="#function-ipcnotify-lld-iscoreenabled"><span class="std std-ref">IpcNotify_lld_isCoreEnabled</span></a></strong>(<a class="reference internal" href="../Classes/struct_ipc_notify___object.html"><span class="std std-doc">IpcNotify_Handle</span></a> hIpcNotify, uint32 coreId)</p></td>
 <td><p></p></td>
 </tr>
@@ -393,10 +389,10 @@ Return current core ID.</p>
 </ul>
 <p><strong>Return</strong>: Core ID, see CSL_CoreID for valid values.</p>
 </section>
-<section id="function-cdd-ipc-clock-getticks">
-<h3>function Cdd_Ipc_Clock_getTicks<a class="headerlink" href="#function-cdd-ipc-clock-getticks" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_Clock_getTicks</span><span class="p">(</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<section id="function-cdd-ipc-clock-tickstousec">
+<h3>function Cdd_Ipc_Clock_ticksToUsec<a class="headerlink" href="#function-cdd-ipc-clock-tickstousec" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_Clock_ticksToUsec</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">ticks</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -408,14 +404,6 @@ Check if a core is enabled for IPC.</p>
 <li><p><strong>coreId</strong> [in] Core ID, see CSL_CoreID for valid values.</p></li>
 </ul>
 <p><strong>Return</strong>: 1: core is enabled for IPC, 0: core is not enabled for IPC</p>
-</section>
-<section id="function-cdd-ipc-clock-tickstousec">
-<h3>function Cdd_Ipc_Clock_ticksToUsec<a class="headerlink" href="#function-cdd-ipc-clock-tickstousec" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_Clock_ticksToUsec</span><span class="p">(</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">ticks</span>
-<span class="p">)</span>
-</pre></div>
-</div>
 </section>
 <section id="function-cdd-ipc-clock-usleep">
 <h3>function Cdd_Ipc_Clock_uSleep<a class="headerlink" href="#function-cdd-ipc-clock-usleep" title="Link to this heading"></a></h3>
@@ -450,7 +438,7 @@ Check if a core is enabled for IPC.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Aug 09, 2025.
+          <span class="lastupdated" >Last updated on Aug 22, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

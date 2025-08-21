@@ -838,7 +838,7 @@ Typedef for group end notification function pointer.
 | boolean | **[ADC_getInterruptOverflowStatus](../Modules/group___a_d_c.md#function-adc_getinterruptoverflowstatus)**(uint32 base, uint16 adcIntNum)| Gets the current ADC interrupt overflow status.  |
 | void | **[ADC_clearInterruptOverflowStatus](../Modules/group___a_d_c.md#function-adc_clearinterruptoverflowstatus)**(uint32 base, uint16 adcIntNum)| Clears ADC interrupt overflow sources.  |
 | uint16 | **[ADC_readResult](../Modules/group___a_d_c.md#function-adc_readresult)**(uint32 resultBase, uint32 socNumber)| Reads the conversion result.  |
-| uint32 | **[ADC_readResultbaseaddr](../Modules/group___a_d_c.md#function-adc_readresultbaseaddr)**(uint32 resultBase, [Adc_mcalSOCNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalsocnumber_t) socNumber)| Reads the address of the conversion result register.  |
+| uint32 | **[ADC_readResultbaseaddr](../Modules/group___a_d_c.md#function-adc_readresultbaseaddr)**(uint32 resultBase, uint16 socNumber)| Reads the address of the conversion result register.  |
 | boolean | **[ADC_isBusy](../Modules/group___a_d_c.md#function-adc_isbusy)**(uint32 base)| Determines whether the ADC is busy or not.  |
 | void | **[ADC_setBurstModeConfig](../Modules/group___a_d_c.md#function-adc_setburstmodeconfig)**(uint32 base, [Adc_mcalTrigger_t](../Modules/group___a_d_c.md#enum-adc_mcaltrigger_t) trigger, uint16 burstSize)| Set SOC burst mode.  |
 | void | **[ADC_enableBurstMode](../Modules/group___a_d_c.md#function-adc_enableburstmode)**(uint32 base)| Enables SOC burst mode.  |
@@ -2102,7 +2102,7 @@ This function returns the conversion result that corresponds to the base address
 ```
 static inline uint32 ADC_readResultbaseaddr(
     uint32 resultBase,
-    Adc_mcalSOCNumber_t socNumber
+    uint16 socNumber
 )
 ```
 

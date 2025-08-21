@@ -1817,6 +1817,10 @@ Suppose the PWM channel 0 is configured for PWM module as shown in figure:</p>
 <td><p>MCU_E_CLOCK_FAILURE</p></td>
 <td><p>This error is raised when there is an MCU Clock Source Failure</p></td>
 </tr>
+<tr class="row-odd"><td><p>Assigned by DEM</p></td>
+<td><p>MCU_E_HARDWARE_ERROR</p></td>
+<td><p>This error is raised when register write failure occurs. (Hardware Failure)</p></td>
+</tr>
 </tbody>
 </table>
 <p><strong>Note:</strong> MCU_E_MODE_FAILURE should be always disabled. Since Mcu_SetMode is not supported, MCU_E_MODE_FAILURE should always be disabled.</p>
@@ -3592,7 +3596,7 @@ values need to be configured accordingly.</p>
 <h3><span class="section-number">4.19.10.4. </span>Example Logs<a class="headerlink" href="#example-logs" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
 <span class="w">   </span><span class="nl">Mcu_App</span><span class="p">:</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Post</span><span class="w"> </span><span class="n">Build</span><span class="w"> </span><span class="n">being</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="o">!!!</span>
-<span class="w">   </span>
+
 <span class="w">   </span><span class="nl">McuApp</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
 <span class="w">   </span><span class="n">Mcu</span><span class="w"> </span><span class="n">Driver</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">info</span><span class="o">:</span><span class="mf">9.1.0</span>
 <span class="w">   </span><span class="n">Mcu</span><span class="w"> </span><span class="n">Driver</span><span class="w"> </span><span class="n">Module</span><span class="o">/</span><span class="n">Driver</span><span class="o">:</span><span class="mf">101.44</span>
@@ -3658,7 +3662,7 @@ values need to be configured accordingly.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Aug 09, 2025.
+          <span class="lastupdated" >Last updated on Aug 22, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

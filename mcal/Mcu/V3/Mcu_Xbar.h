@@ -628,14 +628,14 @@ extern "C" {
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
 
-static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint8 out, uint32 group0_mask,
+static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out, uint32 group0_mask,
                                                           uint32 group1_mask, uint32 group2_mask, uint32 group3_mask,
                                                           uint32 group4_mask, uint32 group5_mask, uint32 group6_mask);
 
-static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint8 out, uint32 group_select, uint32 group0_mask,
+static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint32 out, uint32 group_select, uint32 group0_mask,
                                                       uint32 group1_mask);
 
-static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint8 out, uint8 mux_control);
+static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out, uint32 mux_control);
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
@@ -655,7 +655,7 @@ static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint8 out,
  * \param group6_mask [in] Mask to OR inputs from group 6
  *
  */
-static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint8 out, uint32 group0_mask,
+static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out, uint32 group0_mask,
                                                           uint32 group1_mask, uint32 group2_mask, uint32 group3_mask,
                                                           uint32 group4_mask, uint32 group5_mask, uint32 group6_mask)
 {
@@ -686,7 +686,7 @@ static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint8 out
  * \param group_select [in] Mux control to select group 0 or 1
  *
  */
-static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint8 out, uint32 group_select, uint32 group0_mask,
+static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint32 out, uint32 group_select, uint32 group0_mask,
                                                       uint32 group1_mask)
 {
     HW_WR_REG32(base + MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL + (out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
@@ -697,7 +697,7 @@ static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint8 out, ui
                 group1_mask & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G1_SEL_MASK);
 }
 
-static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint8 out, uint8 mux_control)
+static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out, uint32 mux_control)
 {
     HW_WR_REG32(
         base + MCU_CSL_GPIO_INTR_XBAR_MUXCNTL(out),

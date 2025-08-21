@@ -96,11 +96,6 @@ static Std_ReturnType CddFsiRxDma_ModuleChannelConfigure(Cdd_FsiRx_HwUnitObjType
 /* ========================================================================== */
 #define CDD_FSIRX_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Cdd_FsiRx_MemMap.h"
-
-#if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
-/** \brief CDD_FSI_RX DMA object */
-VAR(Cdd_FsiRx_HwUnitObjType, CDD_FSIRX_VAR_CLEARED) * Cdd_FsiRx_DmaConfigObj;
-#endif /* #if (STD_ON == CDD_FSI_RX_DMA_ENABLE) */
 VAR(CddFsiRx_DriverObjType, CDD_FSIRX_VAR_CLEARED) Cdd_FsiRx_DrvObj;
 #define CDD_FSIRX_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Cdd_FsiRx_MemMap.h"
@@ -130,7 +125,7 @@ volatile VAR(uint16, CDD_FSIRX_VAR_CLEARED) Cdd_FsiRx_PingTag;
 /*
  * Design:
  */
-void CddFsiRx_hwUnitInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
+void CddFsiRx_hwUnitInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 {
     uint32 baseAddr;
     /* Assign base address */
@@ -145,13 +140,9 @@ void CddFsiRx_hwUnitInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 #if (STD_OFF == CDD_FSI_RX_MAIN_FUNCTION_API)
     if (hwUnitObj->hwUnitCfg.receptionMode == CDD_FSI_RX_INTERRUPT_MODE)
     {
-        (void)CddFsiRx_disableInterrupt(baseAddr, CDD_FSI_RX_INT_TYPE);
+        (void)CddFsiRx_disableInterrupt(baseAddr, (uint8)CDD_FSI_RX_INT_TYPE);
         (void)CddFsiRx_clearAllRxEvents(baseAddr);
     }
-#endif
-#if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
-
-    Cdd_FsiRx_DmaConfigObj = hwUnitObj;
 #endif
     /* Set the rx buffer pointer to initial index to receive data from first position*/
     CddFsiRx_ForceRxBufferPtr(baseAddr, 0U);
@@ -162,7 +153,7 @@ void CddFsiRx_hwUnitInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 #if (STD_OFF == CDD_FSI_RX_MAIN_FUNCTION_API)
     if (hwUnitObj->hwUnitCfg.receptionMode == CDD_FSI_RX_INTERRUPT_MODE)
     {
-        (void)CddFsiRx_enableInterrupt(baseAddr, CDD_FSI_RX_INT_TYPE);
+        (void)CddFsiRx_enableInterrupt(baseAddr, (uint8)CDD_FSI_RX_INT_TYPE);
     }
 #endif
 
@@ -172,7 +163,7 @@ void CddFsiRx_hwUnitInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 /*
  * Design:
  */
-Std_ReturnType CddFsiRx_hwUnitDeInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
+Std_ReturnType CddFsiRx_hwUnitDeInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 {
     uint32 baseAddr;
     uint8  retVal = E_OK;
@@ -183,7 +174,7 @@ Std_ReturnType CddFsiRx_hwUnitDeInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 #if (STD_OFF == CDD_FSI_RX_MAIN_FUNCTION_API)
     if (hwUnitObj->hwUnitCfg.receptionMode == CDD_FSI_RX_INTERRUPT_MODE)
     {
-        CddFsiRx_disableInterrupt(baseAddr, CDD_FSI_RX_INT_TYPE);
+        CddFsiRx_disableInterrupt(baseAddr, (uint8)CDD_FSI_RX_INT_TYPE);
     }
 #endif
 #if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
@@ -412,7 +403,7 @@ static Std_ReturnType CddFsiRxDma_ModuleChannelConfigure(Cdd_FsiRx_HwUnitObjType
                                                          volatile Cdd_FsiRx_DataBufferType *buffrPtr, uint16 table_size,
                                                          uint16 *rx_databuffer, uint8 bCnt, uint8 cCnt, uint32 mode)
 {
-    bool               result = FALSE;
+    boolean            result = FALSE;
     Cdd_Dma_ParamEntry edmaParam0;
     uint32             handleId = hwUnitObj->hwUnitCfg.edmaRxInstance;
 
@@ -457,8 +448,8 @@ static void CddFsiRx_IrqDmaRx(void *hwUnitObj)
 #endif /* #if (STD_ON == CDD_FSI_RX_DMA_ENABLE) */
 /***********************************************************************************************************/
 
-Std_ReturnType CddFsiRx_ClearResetRxSubModules(Cdd_FsiRx_HwUnitObjType     *hwUnitObj,
-                                               Cdd_FsiRx_ResetSubModuleType subModule)
+Std_ReturnType CddFsiRx_ClearResetRxSubModules(const Cdd_FsiRx_HwUnitObjType *hwUnitObj,
+                                               Cdd_FsiRx_ResetSubModuleType   subModule)
 {
     uint16 regVal;
     uint8  retVal   = E_OK;
@@ -495,7 +486,8 @@ Std_ReturnType CddFsiRx_ClearResetRxSubModules(Cdd_FsiRx_HwUnitObjType     *hwUn
     return retVal;
 }
 /*************************************************************************************************************/
-Std_ReturnType CddFsiRx_ResetRxSubModules(Cdd_FsiRx_HwUnitObjType *hwUnitObj, Cdd_FsiRx_ResetSubModuleType SubModule)
+Std_ReturnType CddFsiRx_ResetRxSubModules(const Cdd_FsiRx_HwUnitObjType *hwUnitObj,
+                                          Cdd_FsiRx_ResetSubModuleType   SubModule)
 {
     uint16 regVal;
     uint8  retVal   = E_OK;
@@ -554,8 +546,8 @@ CddFsiRx_SetRxSoftwareFrameSize(uint32 base, CddFsiRx_DataLengthType dataWidth)
     uint32 regVal;
 
     regVal = HW_RD_REG16(base + CSL_CDD_FSI_RX_CFG_RX_OPER_CTRL);
-    regVal = (regVal & (uint16)(~CSL_CDD_FSI_RX_CFG_RX_OPER_CTRL_N_WORDS_MASK)) |
-             (dataWidth << CSL_CDD_FSI_RX_CFG_RX_OPER_CTRL_N_WORDS_SHIFT);
+    regVal = (regVal & (uint32)(~CSL_CDD_FSI_RX_CFG_RX_OPER_CTRL_N_WORDS_MASK)) |
+             ((uint32)dataWidth << CSL_CDD_FSI_RX_CFG_RX_OPER_CTRL_N_WORDS_SHIFT);
     HW_WR_REG16(base + CSL_CDD_FSI_RX_CFG_RX_OPER_CTRL, regVal);
 
     return;

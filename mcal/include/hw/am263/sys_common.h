@@ -198,7 +198,7 @@ typedef enum config_value_type
 */
 #define GET_BIT_VALUE(data, noOfBits, location)     ((((uint32)(data)) >> (location)) & (((uint32)((uint32)1U << (noOfBits))) - (uint32)1U))
 
-#define MCAL_SW_DELAY(count)  (count = count - 1 )
+#define MCAL_SW_DELAY(count)  (count = count - 1U )
 #define DMA_CH_MAX  32U
 
 /*

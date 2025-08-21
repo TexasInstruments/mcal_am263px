@@ -118,7 +118,7 @@ VAR(uint16, PWM_VAR_NO_INIT) Pwm_IsrIndex[PWM_HW_MAX_NUM_CHANNELS];
 #define PWM_START_SEC_VAR_INIT_32
 #include "Pwm_MemMap.h"
 
-VAR(uint32, PWM_VAR_INIT) Pwm_gOttoCal_base = MCAL_CSL_CONTROLSS_OTTOCAL0_U_BASE;
+VAR(uint32, PWM_VAR_INIT) Pwm_gOttoCal_base = (uint32)MCAL_CSL_CONTROLSS_OTTOCAL0_U_BASE;
 
 #define PWM_STOP_SEC_VAR_INIT_32
 #include "Pwm_MemMap.h"

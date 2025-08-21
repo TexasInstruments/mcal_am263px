@@ -157,6 +157,7 @@
         <file path="${MCAL_MCAL}/include/hw/hal_stdtypes.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/sys_startup.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/lnk_r5_am263_CLANG.cmd" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory=""></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/CacheP.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/CacheP.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
@@ -164,7 +165,6 @@
         <file path="${MCAL_MCAL}/examples/Utils/am263/" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/Dem.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_core.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_pmu_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/boot_armv7r_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/boot_armv7r.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/MpuP_armv7r_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
@@ -173,8 +173,8 @@
 
         <file path="${MCAL_MCAL}/examples/Utils/sys_core.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_exception.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        <file path="${MCAL_MCAL}/examples/Utils/sys_pmu.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        <file path="${MCAL_MCAL}/examples/Utils/sys_pmu.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Mcal_Lib"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Mcal_Lib"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_startup.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_vim.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_vim.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>

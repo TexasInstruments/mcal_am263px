@@ -52,14 +52,14 @@ sint32 RPMessage_vringGetEmptyTxBuf(RPMessageLLD_Handle handle, uint16 remoteCor
                                     uint32 timeout);
 uint8 *RPMessage_vringGetTxBufAddr(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId);
 uint32 RPMessage_vringGetTxBufLen(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId);
-void   RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId, uint16 dataLen,
+sint32 RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId, uint16 dataLen,
                                    uint32 timeout);
 
 /* functions for VRING RX handling and initialization */
 uint32 RPMessage_vringIsFullRxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId);
 sint32 RPMessage_vringGetFullRxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 *vringBufId);
 uint8 *RPMessage_vringGetRxBufAddr(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId);
-void   RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId, uint32 timeout);
+sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId, uint32 timeout);
 
 /* functions for VRING initialization and other utility functions */
 void RPMessage_vringReset(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 isTx);

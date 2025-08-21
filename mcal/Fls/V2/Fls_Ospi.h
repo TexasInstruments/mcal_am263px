@@ -214,7 +214,7 @@ typedef void *OSPI_Handle;
 #define OSPI_CS2 (2U)
 #define OSPI_CS3 (3U)
 
-#define OSPI_CHIP_SELECT(x) ((~((1U) << (x))) & 0xFU)
+#define OSPI_CHIP_SELECT(x) ((~(((uint32)1U) << ((uint32)x))) & ((uint32)0xFU))
 /** @} */
 
 #define OSPI_RESETPIN_DQ3       (0U)
@@ -252,9 +252,6 @@ typedef void *OSPI_Handle;
 #define OSPI_POLL_IDLE_RETRY   (3U)
 #define OSPI_REG_RETRY         (10U)
 #define OSPI_FIFO_WIDTH        (4U)
-
-/** \brief OSPI Chip select macro */
-#define OSPI_CHIP_SELECT(x) ((~((1U) << (x))) & 0xFU)
 
 /**
  * \brief   OSPI controller controller mode baud rate divisor.
@@ -435,7 +432,7 @@ static uint32  Fls_Ospi_ExecCmd(void);
  *
  *  \return #SystemP_SUCCESS if command read was successful; else error on failure
  */
-Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams);
+Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, const OSPI_ReadCmdParams *rdParams);
 /**
  *  \brief  Function to read from flash in DAC mod
  *
@@ -444,7 +441,7 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, OSPI_ReadCmdParams *rdParams
  *
  *  \return #SystemP_SUCCESS if read was successful; else error on failure
  */
-Std_ReturnType Fls_Ospi_readDirect(OSPI_Handle handle, OSPI_Transaction *trans);
+Std_ReturnType Fls_Ospi_readDirect(OSPI_Handle handle, const OSPI_Transaction *trans);
 /**
  *  \brief  Function to read from flash in INDAC mode
  *
@@ -462,7 +459,7 @@ Std_ReturnType Fls_Ospi_readIndirect(OSPI_Handle handle, OSPI_Transaction *trans
  *
  *  \return #SystemP_SUCCESS if command write was successful; else error on failure
  */
-Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, OSPI_WriteCmdParams *wrParams);
+Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, const OSPI_WriteCmdParams *wrParams);
 /**
  *  \brief  Function to write in DAC mode
  *
@@ -471,7 +468,7 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, OSPI_WriteCmdParams *wrPara
  *
  *  \return #SystemP_SUCCESS if write was successful; else error on failure
  */
-Std_ReturnType Fls_Ospi_writeDirect(OSPI_Handle handle, OSPI_Transaction *trans);
+Std_ReturnType Fls_Ospi_writeDirect(OSPI_Handle handle, const OSPI_Transaction *trans);
 /**
  *  \brief  Function to write in INDAC mode
  *

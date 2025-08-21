@@ -142,8 +142,7 @@ static FUNC(Gpt_ValueType, GPT_CODE) Gpt_GetTimeMaxLevel(Gpt_ChannelType channel
 #endif
 
 #if (STD_ON == GPT_DEV_ERROR_DETECT)
-static FUNC(Std_ReturnType, GPT_CODE)
-    Gpt_CheckInitDetErrors(P2CONST(Gpt_ConfigType, AUTOMATIC, GPT_CONST) Gpt_Config_pt);
+static FUNC(Std_ReturnType, GPT_CODE) Gpt_CheckInitDetErrors(P2CONST(Gpt_ConfigType, AUTOMATIC, GPT_CONST) pConfig);
 #endif
 /* ========================================================================== */
 /*                          Function Definitions                              */
@@ -788,12 +787,11 @@ FUNC(void, GPT_CODE) Gpt_SetMode(Gpt_ModeType Mode)
 #endif /* if(GPT_WAKEUP_FUNCTIONALITY_API == STD_ON) */
 
 #if (STD_ON == GPT_DEV_ERROR_DETECT)
-static FUNC(Std_ReturnType, GPT_CODE)
-    Gpt_CheckInitDetErrors(P2CONST(Gpt_ConfigType, AUTOMATIC, GPT_CONST) Gpt_Config_pt)
+static FUNC(Std_ReturnType, GPT_CODE) Gpt_CheckInitDetErrors(P2CONST(Gpt_ConfigType, AUTOMATIC, GPT_CONST) pConfig)
 {
     Std_ReturnType status = E_OK;
 
-    if (NULL_PTR == Gpt_Config_pt)
+    if (NULL_PTR == pConfig)
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_INIT, GPT_E_PARAM_POINTER);
         status = E_NOT_OK;

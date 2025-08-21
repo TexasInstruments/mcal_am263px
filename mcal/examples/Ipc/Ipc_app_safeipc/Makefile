@@ -6,7 +6,7 @@ include $(mcal_PATH)/include/memmap/inc.mk
 include $(mcal_PATH)/Ipc/srcs.mk
 include $(mcal_PATH)/Mcu/srcs.mk
 include $(mcal_PATH)/Port/srcs.mk
-include $(mcal_PATH)/examples/Utils/srcs.mk
+include $(mcal_PATH)/examples/Utils/srcs_ipc.mk
 include $(mcal_PATH)/examples/Utils/srcs_autosar_stub.mk
 include $(mcal_PATH)/examples/Utils/srcs_startup.mk
 include $(mcal_PATH)/examples_config/Mcu_Demo_Cfg/srcs.mk

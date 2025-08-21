@@ -1460,7 +1460,6 @@ static FUNC(BufReq_ReturnType, ETH_CODE) Eth_checkProvideTxBufferErrors(uint8 ct
                                                                         uint8 **bufPtr, const uint16 *lenBytePtr)
 {
     VAR(BufReq_ReturnType, AUTOMATIC) retVal = BUFREQ_OK;
-    (void)bufPtr; /* MISRA C Compliance */
 
     /*  ETH_NOT_INITIALIZED */
     if (Eth_DrvStatus == ETH_STATE_UNINIT)

@@ -126,7 +126,7 @@ static Std_ReturnType EthTrcv_configsetBaudRateAndDuplexMode(EthTrcv_ConfigType 
 static Std_ReturnType EthTrcv_setBaudRateAndDuplexMode(const EthTrcv_CtrlObjType *pEthTrcvObj,
                                                        EthTrcv_ConfigType *pEthTrcvCfg, uint32 *ptrAutoNegRetries);
 
-static Std_ReturnType EthTrcv_SetMiiMode(EthTrcv_CtrlObjType *pEthTrcvObj);
+static Std_ReturnType EthTrcv_SetMiiMode(const EthTrcv_CtrlObjType *pEthTrcvObj);
 
 static Std_ReturnType EthTrcv_WriteMMDIndirect(uint8 ctrlIdx, uint8 trcvIdx, uint32 regIdx, uint16 regVal);
 
@@ -162,7 +162,7 @@ static Std_ReturnType EthTrcv_WriteMMDIndirect(uint8 ctrlIdx, uint8 trcvIdx, uin
 
     retVal = EthTrcv_regWrite(ctrlIdx, trcvIdx, 0x0D, 0x001F);
 
-    retVal += EthTrcv_regWrite(ctrlIdx, trcvIdx, 0x0E, regIdx);
+    retVal += EthTrcv_regWrite(ctrlIdx, trcvIdx, 0x0E, (uint16)regIdx);
 
     retVal += EthTrcv_regWrite(ctrlIdx, trcvIdx, 0x0D, 0x401F);
 
@@ -182,7 +182,7 @@ static Std_ReturnType EthTrcv_WriteMMDIndirect(uint8 ctrlIdx, uint8 trcvIdx, uin
     return retVal;
 }
 
-static Std_ReturnType EthTrcv_SetMiiMode(EthTrcv_CtrlObjType *pEthTrcvObj)
+static Std_ReturnType EthTrcv_SetMiiMode(const EthTrcv_CtrlObjType *pEthTrcvObj)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
 
@@ -201,7 +201,7 @@ Std_ReturnType EthTrcv_ConfigInit(EthTrcv_ConfigType *pEthTrcvCfg, EthTrcv_CtrlO
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
 
-    if (((uint32)MII) == pEthTrcvCfg->MiiSel)
+    if (MII == pEthTrcvCfg->MiiSel)
     {
         retVal = EthTrcv_SetMiiMode(pEthTrcvObj);
     }
@@ -211,10 +211,10 @@ Std_ReturnType EthTrcv_ConfigInit(EthTrcv_ConfigType *pEthTrcvCfg, EthTrcv_CtrlO
         if (((uint32)TRUE) == pEthTrcvCfg->enableAutoNeg)
         {
 #if (STD_ON == ETHTRCV_1000MBPS_MACRO)
-            if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_1000_HALF))
+            if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_1000_HALF))
             {
                 /* Gigabit Half duplex is not supported */
-                pEthTrcvCfg->advertiseCapab &= ~ETHERNET_ADV_CAPAB_1000_HALF;
+                pEthTrcvCfg->advertiseCapab &= ~((uint32)ETHERNET_ADV_CAPAB_1000_HALF);
             }
 #endif /* #if(STD_ON == ETHTRCV_1000MBPS_MACRO) */
             if (0U != pEthTrcvCfg->advertiseCapab)
@@ -321,12 +321,14 @@ Std_ReturnType EthTrcv_configAndStartAutoNegotiation(EthTrcv_CtrlObjType *pEthTr
                 (void)EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, &regVal);
                 /* Disabling 1000 Mbps Half Duplex as controller does not support */
                 regVal &= ETHTRCV_DISABLE_1000M_HALF_Duplex;
-                retVal = EthTrcv_regWrite(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, regVal);
+                retVal +=
+                    EthTrcv_regWrite(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, regVal);
 #else /* #if(STD_ON == ETHTRCV_1000MBPS_MACRO) */
 
                 (void)EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, &regVal);
                 regVal &= ETHTRCV_DISABLE_1000M;
-                retVal = EthTrcv_regWrite(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, regVal);
+                retVal +=
+                    EthTrcv_regWrite(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, regVal);
 #endif
             }
         }
@@ -450,7 +452,7 @@ Std_ReturnType EthTrcv_enableLoopBack(uint8 CtrlIdx, uint8 trcvIdx, uint32 enabl
             HW_SET_FIELD16(regVal, ETHTRCV_BMC_LOOPBACK, ETHTRCV_BMC_LOOPBACK_DISABLE);
         }
         /*Disable Auto-negotiation */
-        regVal &= (~ETHTRCV_BMC_AUTONEG_ENABLE_MASK);
+        regVal &= (uint16)(~ETHTRCV_BMC_AUTONEG_ENABLE_MASK);
 
         retVal = EthTrcv_regWrite(CtrlIdx, trcvIdx, (uint8)ETHTRCV_BMC, regVal);
     }
@@ -724,12 +726,12 @@ static void EthTrcv_updatePartnerAbility(uint32 *pPartnerAblty, uint16 regVal)
 {
     if (ETHTRCV_STS1_LINK_1000_HALF_CAPABLE == (uint32)HW_GET_FIELD(regVal, ETHTRCV_STS1_LINK_1000_HALF))
     {
-        *pPartnerAblty |= ETHERNET_ADV_CAPAB_1000_HALF;
+        *pPartnerAblty |= (uint32)ETHERNET_ADV_CAPAB_1000_HALF;
     }
 
     if (ETHTRCV_STS1_LINK_1000_FULL_CAPABLE == (uint32)HW_GET_FIELD(regVal, ETHTRCV_STS1_LINK_1000_FULL))
     {
-        *pPartnerAblty |= ETHERNET_ADV_CAPAB_1000_FULL;
+        *pPartnerAblty |= (uint32)ETHERNET_ADV_CAPAB_1000_FULL;
     }
     return;
 }
@@ -749,25 +751,25 @@ static Std_ReturnType EthTrcv_getPartnerAbility(uint8 CtrlIdx, uint8 trcvIdx, ui
         if (ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_10_T_HALF_CAPABLE ==
             (uint32)HW_GET_FIELD(regVal, ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_10_T_HALF))
         {
-            *pPartnerAblty |= ETHERNET_ADV_CAPAB_10_HALF;
+            *pPartnerAblty |= (uint32)ETHERNET_ADV_CAPAB_10_HALF;
         }
 
         if (ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_10_T_FULL_CAPABLE ==
             (uint32)HW_GET_FIELD(regVal, ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_10_T_FULL))
         {
-            *pPartnerAblty |= ETHERNET_ADV_CAPAB_10_FULL;
+            *pPartnerAblty |= (uint32)ETHERNET_ADV_CAPAB_10_FULL;
         }
 
         if (ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_100_TX_HALF_CAPABLE ==
             (uint32)HW_GET_FIELD(regVal, ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_100_TX_HALF))
         {
-            *pPartnerAblty |= ETHERNET_ADV_CAPAB_100_HALF;
+            *pPartnerAblty |= (uint32)ETHERNET_ADV_CAPAB_100_HALF;
         }
 
         if (ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_100_TX_FULL_CAPABLE ==
             (uint32)HW_GET_FIELD(regVal, ETHTRCV_AUTO_NEG_LINK_PARTNER_ABILITY_100_TX_FULL))
         {
-            *pPartnerAblty |= ETHERNET_ADV_CAPAB_100_FULL;
+            *pPartnerAblty |= (uint32)ETHERNET_ADV_CAPAB_100_FULL;
         }
     }
 #if (STD_ON == ETHTRCV_1000MBPS_MACRO)
@@ -846,7 +848,7 @@ static Std_ReturnType EthTrcv_checkPhyConfig(const EthTrcv_ConfigType *pEthTrcvC
 
 static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ConfigType *pEthTrcvCfg, uint16 *ptrData)
 {
-    if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_10_HALF))
+    if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_10_HALF))
     {
         HW_SET_FIELD16(*ptrData, ETHTRCV_AUTO_NEG_ADV_10_T_HALF, ETHTRCV_AUTO_NEG_ADV_10_T_HALF_CAPABLE);
     }
@@ -855,7 +857,7 @@ static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ConfigT
         HW_SET_FIELD16(*ptrData, ETHTRCV_AUTO_NEG_ADV_10_T_HALF, ETHTRCV_AUTO_NEG_ADV_10_T_HALF_NOT_CAPABLE);
     }
 
-    if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_10_FULL))
+    if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_10_FULL))
     {
         HW_SET_FIELD16(*ptrData, ETHTRCV_AUTO_NEG_ADV_10_T_FULL, ETHTRCV_AUTO_NEG_ADV_10_T_FULL_CAPABLE);
     }
@@ -864,7 +866,7 @@ static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ConfigT
         HW_SET_FIELD16(*ptrData, ETHTRCV_AUTO_NEG_ADV_10_T_FULL, ETHTRCV_AUTO_NEG_ADV_10_T_FULL_NOT_CAPABLE);
     }
 
-    if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_100_HALF))
+    if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_100_HALF))
     {
         HW_SET_FIELD16(*ptrData, ETHTRCV_AUTO_NEG_ADV_100_TX_HALF, ETHTRCV_AUTO_NEG_ADV_100_TX_HALF_CAPABLE);
     }
@@ -873,7 +875,7 @@ static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ConfigT
         HW_SET_FIELD16(*ptrData, ETHTRCV_AUTO_NEG_ADV_100_TX_HALF, ETHTRCV_AUTO_NEG_ADV_100_TX_HALF_NOT_CAPABLE);
     }
 
-    if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_100_FULL))
+    if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_100_FULL))
     {
         HW_SET_FIELD16(*ptrData, ETHTRCV_AUTO_NEG_ADV_100_TX_FULL, ETHTRCV_AUTO_NEG_ADV_100_TX_FULL_CAPABLE);
     }
@@ -893,7 +895,7 @@ static Std_ReturnType EthTrcv_setAutoNeg(const EthTrcv_CtrlObjType *pEthTrcvObj,
         if ((Std_ReturnType)E_OK ==
             EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_GENCFG1, ptrData))
         {
-            if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_1000_HALF))
+            if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_1000_HALF))
             {
                 HW_SET_FIELD16(*ptrData, ETHTRCV_GENCFG1_ADV_1000_HALF, ETHTRCV_GENCFG1_ADV_1000_HALF_CAPABLE);
             }
@@ -901,7 +903,7 @@ static Std_ReturnType EthTrcv_setAutoNeg(const EthTrcv_CtrlObjType *pEthTrcvObj,
             {
                 HW_SET_FIELD16(*ptrData, ETHTRCV_GENCFG1_ADV_1000_HALF, ETHTRCV_GENCFG1_ADV_1000_HALF_NOT_CAPABLE);
             }
-            if (0U != (pEthTrcvCfg->advertiseCapab & ETHERNET_ADV_CAPAB_1000_FULL))
+            if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_1000_FULL))
             {
                 HW_SET_FIELD16(*ptrData, ETHTRCV_GENCFG1_ADV_1000_FULL, ETHTRCV_GENCFG1_ADV_1000_FULL_CAPABLE);
             }
@@ -938,34 +940,34 @@ static Std_ReturnType EthTrcv_configsetBaudRateAndDuplexMode(EthTrcv_ConfigType 
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
     if (0U !=
 #if (STD_ON == ETHTRCV_1000MBPS_MACRO)
-        ((pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab) & ETHERNET_ADV_CAPAB_1000_FULL))
+        ((pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab) & (uint32)ETHERNET_ADV_CAPAB_1000_FULL))
     {
         pEthTrcvCfg->baudRate   = ETHTRCV_BAUD_RATE_1000MBIT;
         pEthTrcvCfg->duplexMode = ETHTRCV_DUPLEX_MODE_FULL;
     }
-    else if (0U != ((pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab) & ETHERNET_ADV_CAPAB_1000_HALF))
+    else if (0U != ((pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab) & (uint32)ETHERNET_ADV_CAPAB_1000_HALF))
     {
         pEthTrcvCfg->baudRate   = ETHTRCV_BAUD_RATE_1000MBIT;
         pEthTrcvCfg->duplexMode = ETHTRCV_DUPLEX_MODE_HALF;
     }
     else if (0U !=
 #endif /* #if (STD_ON == ETHTRCV_1000MBPS_MACRO) */
-             ((pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab) & ETHERNET_ADV_CAPAB_100_FULL))
+             ((pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab) & (uint32)ETHERNET_ADV_CAPAB_100_FULL))
     {
         pEthTrcvCfg->baudRate   = ETHTRCV_BAUD_RATE_100MBIT;
         pEthTrcvCfg->duplexMode = ETHTRCV_DUPLEX_MODE_FULL;
     }
-    else if (0U != (pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab & ETHERNET_ADV_CAPAB_100_HALF))
+    else if (0U != (pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab & (uint32)ETHERNET_ADV_CAPAB_100_HALF))
     {
         pEthTrcvCfg->baudRate   = ETHTRCV_BAUD_RATE_100MBIT;
         pEthTrcvCfg->duplexMode = ETHTRCV_DUPLEX_MODE_HALF;
     }
-    else if (0U != (pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab & ETHERNET_ADV_CAPAB_10_FULL))
+    else if (0U != (pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab & (uint32)ETHERNET_ADV_CAPAB_10_FULL))
     {
         pEthTrcvCfg->baudRate   = ETHTRCV_BAUD_RATE_10MBIT;
         pEthTrcvCfg->duplexMode = ETHTRCV_DUPLEX_MODE_FULL;
     }
-    else if (0U != (pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab & ETHERNET_ADV_CAPAB_10_HALF))
+    else if (0U != (pEthTrcvCfg->advertiseCapab & pEthTrcvCfg->linkPartCapab & (uint32)ETHERNET_ADV_CAPAB_10_HALF))
     {
         pEthTrcvCfg->baudRate   = ETHTRCV_BAUD_RATE_10MBIT;
         pEthTrcvCfg->duplexMode = ETHTRCV_DUPLEX_MODE_HALF;

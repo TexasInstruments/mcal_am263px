@@ -66,7 +66,7 @@ FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit0_ISR(void)
 ISR(Cdd_I2c_HwUnit0_ISR)
 #endif
 {
-    Cdd_I2c_processIsr(CDD_I2C_HW_UNIT_0);
+    Cdd_I2c_ProcessIsr(CDD_I2C_HW_UNIT_0);
     return;
 }
 #endif
@@ -79,7 +79,7 @@ FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit1_ISR(void)
 ISR(Cdd_I2c_HwUnit1_ISR)
 #endif
 {
-    Cdd_I2c_processIsr(CDD_I2C_HW_UNIT_1);
+    Cdd_I2c_ProcessIsr(CDD_I2C_HW_UNIT_1);
     return;
 }
 #endif
@@ -92,7 +92,7 @@ FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit2_ISR(void)
 ISR(Cdd_I2c_HwUnit2_ISR)
 #endif
 {
-    Cdd_I2c_processIsr(CDD_I2C_HW_UNIT_2);
+    Cdd_I2c_ProcessIsr(CDD_I2C_HW_UNIT_2);
     return;
 }
 #endif
@@ -105,7 +105,7 @@ FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit3_ISR(void)
 ISR(Cdd_I2c_HwUnit3_ISR)
 #endif
 {
-    Cdd_I2c_processIsr(CDD_I2C_HW_UNIT_3);
+    Cdd_I2c_ProcessIsr(CDD_I2C_HW_UNIT_3);
     return;
 }
 #endif

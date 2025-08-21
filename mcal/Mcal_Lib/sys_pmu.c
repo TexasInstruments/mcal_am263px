@@ -35,6 +35,7 @@
 /* NOTE: CycleCounterP_getCount32 is implmented in sys_pmu_asm.asm */
 
 #define PmuP_CYCLE_COUNTER_ENABLE_CLOCK_DIV64 0
+#define MCAL_CYCLE_COUNTER_MAX_COUNT          (0xFFFFFFFFU)
 
 #if PmuP_CYCLE_COUNTER_ENABLE_CLOCK_DIV64
 #define PmuP_SETUP_COUNTER_DIVIDER_VAL      (64ULL)
@@ -103,4 +104,27 @@ uint32 Mcal_pmuGetOverflow(void)
     uint32 overflow_Status = 0;
     overflow_Status        = PmuP_getOverflowStatus();
     return overflow_Status;
+}
+
+void Mcal_GetCycleCounterValue(uint32 *Value)
+{
+    *Value = Mcal_CycleCounterP_getCount32();
+}
+
+void Mcal_GetElapsedCycleCountValue(uint32 *Value, uint32 *ElapsedValue)
+{
+    uint32 currVal;
+
+    currVal = Mcal_CycleCounterP_getCount32();
+    if (currVal < *Value)
+    {
+        /* Counter overflow occurred */
+        currVal       = (MCAL_CYCLE_COUNTER_MAX_COUNT - *Value) + currVal + 1U;
+        *ElapsedValue = currVal;
+    }
+    else
+    {
+        *ElapsedValue = currVal - *Value;
+    }
+    *Value = currVal;
 }

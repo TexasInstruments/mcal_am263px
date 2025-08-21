@@ -242,7 +242,7 @@ Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle);
 Std_ReturnType Nor_OspiSetAddressBytes(OSPI_Handle handle);
 Std_ReturnType Fls_OspiSet3ByteAddress(void);
 Std_ReturnType Fls_OspiSetResetPinMode(Fls_ResetPinMode pinMode);
-Std_ReturnType Ospi_SetRegCfg(OSPI_Handle handle, Flash_RegEnConfig *rCfg);
+Std_ReturnType Ospi_SetRegCfg(OSPI_Handle handle, const Flash_RegEnConfig *rCfg);
 Std_ReturnType Nor_OspiRegWrite(OSPI_Handle handle, uint8 cmd, uint32 addr, uint8 data);
 Std_ReturnType Nor_OspiRegRead(OSPI_Handle handle, uint8 cmd, uint32 addr, uint8 *data);
 boolean        Fls_VerifyData_priv(const uint8 *expData, const uint8 *rxData, uint32 length);

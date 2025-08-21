@@ -31,13 +31,14 @@
  */
 
 #include "ipc_rpmsg_lld_priv.h"
+#include "sys_pmu.h"
 
 static inline sint32 RPMessage_lld_init_Copy_Values(RPMessageLLD_Handle hRpMsg);
 static inline sint32 RPMessage_lld_init_Enable_Core(RPMessageLLD_Handle hRpMsg);
 static sint32  RPMessage_lld_init_lldInitParamsCheck(RPMessageLLD_Handle hRpMsg, RPMessageLLD_InitHandle hRpMsgInit,
                                                      sint32 status);
 static sint32  RPMessage_lld_ParamsCheck(RPMessageLLD_InitHandle hRpMsgInit, sint32 value);
-static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint32 *status, boolean done, uint32 tryLoop,
+static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint32 *status, boolean done,
                                                   uint32 startTime, uint32 timeout);
 static sint32  RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle hRpMsg, RPMessage_LocalMsg *pMsg,
                                                    uint16 localEndPt, uint8 *vringBufAddr, RPMessage_Header *header,
@@ -49,9 +50,9 @@ static sint32 RPMessage_lldSend_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, ui
                                                   uint16 dataLen, uint16 remoteEndPt, uint16 localEndPt, void *data,
                                                   uint32 timeout, sint32 status);
 static uint32 RPMessage_getEndPtMsg_mutexResourceTryLock(RPMessage_Struct *epObj, sint32 *status, uint32 tryLoop,
-                                                         uint32 startTicks, uint32 startTime, uint32 timeout);
+                                                         uint32 startTicks, uint32 timeout);
 static void   RPMessage_lld_recvdataLenCheck(RPMessage_Header *header, uint16 *dataLen);
-static void   RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(RPMessageLLD_Handle hRpMsg, sint32 retVal,
+static sint32 RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(RPMessageLLD_Handle hRpMsg, sint32 retVal,
                                                              uint32 remoteCoreId, uint16 vringBufId, uint32 timeout);
 static sint32 RPMessage_lld_recv_statusCheck(sint32 status);
 static void RPMessage_lld_recvHandlerEndPtCheck_recvNotifyCallback(RPMessageLLD_Handle hRpMsg, RPMessage_Struct *epObj);
@@ -64,6 +65,7 @@ RPMessage_LocalMsg *RPMessage_allocEndPtMsg(RPMessage_Core *coreObj, uint32 remo
 {
     RPMessage_LocalMsg *pMsg;
 
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
     pMsg = (RPMessage_LocalMsg *)RPMessage_queueGet(&coreObj->freeQ);
     if (pMsg == NULL_PTR)
     {
@@ -73,6 +75,7 @@ RPMessage_LocalMsg *RPMessage_allocEndPtMsg(RPMessage_Core *coreObj, uint32 remo
     {
         coreObj->freeQAllocPending = 0U;
     }
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     return pMsg;
 }
@@ -81,39 +84,47 @@ uint32 RPMessage_freeEndPtMsg(RPMessage_Core *coreObj, uint16 remoteCoreId, RPMe
 {
     uint32 isAllocPending;
 
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
     isAllocPending = coreObj->freeQAllocPending;
     RPMessage_queuePut(&coreObj->freeQ, &pMsg->elem);
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     return isAllocPending;
 }
 
 void RPMessage_putEndPtMsg(RPMessage_Struct *epObj, RPMessage_LocalMsg *pMsg)
 {
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
     RPMessage_queuePut(&epObj->endPtQ, &pMsg->elem);
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     Cdd_Ipc_Mutex_resourceUnlock(&epObj->newEndPtMsgSem);
 }
 
 sint32 RPMessage_getEndPtMsg(RPMessage_Struct *epObj, RPMessage_LocalMsg **pMsg, uint32 timeout)
 {
-    uint32  tryLoop;
-    sint32  status = MCAL_SystemP_TIMEOUT;
-    uint32  startTicks, startTime;
+    uint32  tryLoop    = 0U;
+    sint32  status     = MCAL_SystemP_TIMEOUT;
+    uint32  startTicks = 0U, startTime = 0U;
     boolean done = FALSE;
-    tryLoop      = 0U;
-    startTime    = Cdd_Ipc_Clock_getTicks();
+
+    Mcal_GetCycleCounterValue(&startTime);
+
     do
     {
-        *pMsg               = (RPMessage_LocalMsg *)RPMessage_queueGet(&epObj->endPtQ);
-        sint32 *statusValue = &status;
+        SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+        *pMsg = (RPMessage_LocalMsg *)RPMessage_queueGet(&epObj->endPtQ);
+        SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
         if (*pMsg == NULL_PTR)
         {
-            startTicks = Cdd_Ipc_Clock_getTicks();
-            tryLoop =
-                RPMessage_getEndPtMsg_mutexResourceTryLock(epObj, statusValue, tryLoop, startTicks, startTime, timeout);
-            sint32 *statusLocal = &status;
-            done = RPMessage_getEndPtMsg_timeoutCheck(epObj, statusLocal, done, tryLoop, startTime, timeout);
+            Mcal_GetCycleCounterValue(&startTicks);
+
+            tryLoop = RPMessage_getEndPtMsg_mutexResourceTryLock(epObj, &status, tryLoop, startTicks, timeout);
+            if (tryLoop != 1U)
+            {
+                done = RPMessage_getEndPtMsg_timeoutCheck(epObj, &status, done, startTime, timeout);
+            }
         }
         else
         {
@@ -251,10 +262,15 @@ sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObje
                     }
                 }
 #endif
-
-                RPMessage_vringPutEmptyRxBuf(hRpMsg, *remoteCoreId, vringBufId, timeout);
-                isAllocPending = RPMessage_freeEndPtMsg(&hRpMsg->coreObj[*remoteCoreId], *remoteCoreId, pMsg);
-                RPMessage_lld_recv_Notify_Callback(hRpMsg, remoteCoreId, timeout, isAllocPending);
+                if (status == MCAL_SystemP_SUCCESS)
+                {
+                    status = RPMessage_vringPutEmptyRxBuf(hRpMsg, *remoteCoreId, vringBufId, timeout);
+                    if (status == MCAL_SystemP_SUCCESS)
+                    {
+                        isAllocPending = RPMessage_freeEndPtMsg(&hRpMsg->coreObj[*remoteCoreId], *remoteCoreId, pMsg);
+                        RPMessage_lld_recv_Notify_Callback(hRpMsg, remoteCoreId, timeout, isAllocPending);
+                    }
+                }
             }
             else
             {
@@ -552,11 +568,12 @@ static sint32 RPMessage_lld_ParamsCheck(RPMessageLLD_InitHandle hRpMsgInit, sint
     return status;
 }
 
-static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint32 *status, boolean done, uint32 tryLoop,
+static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint32 *status, boolean done,
                                                   uint32 startTime, uint32 timeout)
 {
     uint32  tempTime, endTime;
     boolean isDone = done;
+
     if (*status == MCAL_SystemP_TIMEOUT)
     {
         isDone = TRUE;
@@ -566,16 +583,16 @@ static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint3
         *status = MCAL_SystemP_TIMEOUT;
         isDone  = TRUE;
     }
-    if (tryLoop == 1U)
+
+    tempTime = startTime;
+    Mcal_GetElapsedCycleCountValue(&tempTime, &endTime);
+
+    if (endTime > timeout)
     {
-        tempTime = startTime;
-        GetElapsedValue(CDD_IPC_OS_COUNTER_ID, &tempTime, &endTime);
-        if (endTime > timeout)
-        {
-            *status = MCAL_SystemP_TIMEOUT;
-            isDone  = TRUE;
-        }
+        *status = MCAL_SystemP_TIMEOUT;
+        isDone  = TRUE;
     }
+
     return isDone;
 }
 
@@ -610,12 +627,11 @@ static sint32 RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle hRpMsg, RP
                 epObj->recvCallback(hRpMsg, (RPMessage_EpObject *)epObj, epObj->recvCallbackArgs,
                                     &vringBufAddr[sizeof(RPMessage_Header)], header->dataLen, crcStatus,
                                     (uint16)remoteCoreId, (uint16)header->srcEndPt);
-                retVal = MCAL_SystemP_SUCCESS;
 
                 /* pMsg is not used, free it */
                 RPMessage_freeEndPtMsg(&hRpMsg->coreObj[remoteCoreId], (uint16)remoteCoreId, pMsg);
                 /* done using vring buf, free it */
-                RPMessage_vringPutEmptyRxBuf(hRpMsg, (uint16)remoteCoreId, vringBufId, timeout);
+                retVal = RPMessage_vringPutEmptyRxBuf(hRpMsg, (uint16)remoteCoreId, vringBufId, timeout);
             }
             else
             {
@@ -629,7 +645,11 @@ static sint32 RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle hRpMsg, RP
             }
         }
     }
-    RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(hRpMsg, retVal, remoteCoreId, vringBufId, timeout);
+    if (retVal == MCAL_SystemP_SUCCESS)
+    {
+        retVal = RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(hRpMsg, retVal, remoteCoreId, vringBufId, timeout);
+    }
+
     return retVal;
 }
 
@@ -688,17 +708,20 @@ static sint32 RPMessage_lldSend_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, ui
         header->flags = 0;
     }
 #endif
-    header->dataLen = dataLength;
 
-    memcpy((void *)&vringBufAddr[sizeof(RPMessage_Header)], (void *)data, (uint32)dataLength);
+    if (retVal == MCAL_SystemP_SUCCESS)
+    {
+        header->dataLen = dataLength;
+        memcpy((void *)&vringBufAddr[sizeof(RPMessage_Header)], (void *)data, (uint32)dataLength);
+        retVal = RPMessage_vringPutFullTxBuf(hRpMsg, remoteCoreId, vringBufId,
+                                             dataLength + (uint16)sizeof(RPMessage_Header), timeout);
+    }
 
-    RPMessage_vringPutFullTxBuf(hRpMsg, remoteCoreId, vringBufId, dataLength + (uint16)sizeof(RPMessage_Header),
-                                timeout);
     return retVal;
 }
 
 static uint32 RPMessage_getEndPtMsg_mutexResourceTryLock(RPMessage_Struct *epObj, sint32 *status, uint32 tryLoop,
-                                                         uint32 startTicks, uint32 startTime, uint32 timeout)
+                                                         uint32 startTicks, uint32 timeout)
 {
     uint32 tempTicks, elapsedTicks;
     uint32 tryLoopLocal = tryLoop;
@@ -709,8 +732,11 @@ static uint32 RPMessage_getEndPtMsg_mutexResourceTryLock(RPMessage_Struct *epObj
             tryLoopLocal = 1U;
             *status      = MCAL_SystemP_SUCCESS;
         }
-        tempTicks = startTicks;
-        GetElapsedValue(CDD_IPC_OS_COUNTER_ID, &tempTicks, &elapsedTicks);
+        else
+        {
+            tempTicks = startTicks;
+            Mcal_GetElapsedCycleCountValue(&tempTicks, &elapsedTicks);
+        }
     } while ((elapsedTicks < timeout) && (tryLoopLocal == 0U));
 
     return tryLoopLocal;
@@ -727,17 +753,20 @@ static void RPMessage_lld_recvdataLenCheck(RPMessage_Header *header, uint16 *dat
         *dataLen = header->dataLen;
     }
 }
-static void RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(RPMessageLLD_Handle hRpMsg, sint32 retVal,
-                                                           uint32 remoteCoreId, uint16 vringBufId, uint32 timeout)
+static sint32 RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(RPMessageLLD_Handle hRpMsg, sint32 retVal,
+                                                             uint32 remoteCoreId, uint16 vringBufId, uint32 timeout)
 {
+    sint32 status = MCAL_SystemP_SUCCESS;
     if (retVal != MCAL_SystemP_SUCCESS)
     {
         /* invalid vring message header or invalid endpt
          * or no object registered for local end pt, so no need handle the message pointer,
          * free it
          */
-        RPMessage_vringPutEmptyRxBuf(hRpMsg, (uint16)remoteCoreId, vringBufId, timeout);
+        status = RPMessage_vringPutEmptyRxBuf(hRpMsg, (uint16)remoteCoreId, vringBufId, timeout);
     }
+
+    return status;
 }
 
 static void RPMessage_lld_recvHandlerEndPtCheck_recvNotifyCallback(RPMessageLLD_Handle hRpMsg, RPMessage_Struct *epObj)

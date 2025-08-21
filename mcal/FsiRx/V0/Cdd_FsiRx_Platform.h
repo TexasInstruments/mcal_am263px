@@ -79,10 +79,8 @@ extern "C" {
 
 #define CDD_FSI_RX_DATA_WIDTH_1_LANE ((uint32)0x0U)
 /**< 1 lane data width */
-#define CDD_FSI_RX_DATA_WIDTH_2_LANE  ((uint32)0x1U)
-#define CDD_FSI_RX_MAX_LEN_WORDS_DATA ((uint16)0xFU)
-#define CDD_FSI_RX_MIN_LEN_WORDS_DATA ((uint16)0x0U)
-#define CDD_FSI_RX_INT2_CTRL_SHIFT    ((uint16)0x08U)
+#define CDD_FSI_RX_DATA_WIDTH_2_LANE ((uint32)0x1U)
+#define CDD_FSI_RX_INT2_CTRL_SHIFT   ((uint16)0x08U)
 
 /* Macros for CDD_FSI_RX ISR. */
 #define CDD_FSI_RX_INTERRUPT_REGISTER_OFFSET  ((uint32)0x0020)
@@ -195,7 +193,7 @@ FUNC(void, CDD_FSIRX_CODE)
 CddFsiRx_disableRxDMAEvent(uint32 base);
 
 FUNC(uint8, CDD_FSIRX_CODE)
-CddFsiRx_getRxWordLength(uint32 base, uint16 length);
+CddFsiRx_getRxWordLength(uint32 base, CddFsiRx_DataLengthType length);
 
 FUNC(void, CDD_FSIRX_CODE)
 CddFsiRx_dataReceive(uint8 hwUnitId, uint32 base, volatile Cdd_FsiRx_DataBufferType *databuffer, uint8 length,

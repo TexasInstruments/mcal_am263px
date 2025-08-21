@@ -1363,9 +1363,9 @@ static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATI
 {
     Eth_BufIdxType      bufIdx       = 0;
     uint16              allocBuffLen = 0U;
-    Eth_PortObject     *pPortObj     = &(Eth_DrvObj.portObj);
-    BufReq_ReturnType   retVal       = BUFREQ_OK;
-    Eth_TxFrameObjType *ethFrame     = (Eth_TxFrameObjType *)NULL_PTR;
+    Eth_PortObject     *pPortObj;
+    BufReq_ReturnType   retVal   = BUFREQ_OK;
+    Eth_TxFrameObjType *ethFrame = (Eth_TxFrameObjType *)NULL_PTR;
 
     /* Each port is considered as one controller */
     pPortObj = &(Eth_DrvObj.portObj);

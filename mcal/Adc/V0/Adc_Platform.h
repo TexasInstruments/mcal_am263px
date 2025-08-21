@@ -953,7 +953,7 @@ static inline FUNC(uint16, ADC_CODE) ADC_readResult(uint32 resultBase, uint32 so
  * \retval Returns the conversion result.
  *
  *****************************************************************************/
-static inline FUNC(uint32, ADC_CODE) ADC_readResultbaseaddr(uint32 resultBase, Adc_mcalSOCNumber_t socNumber)
+static inline FUNC(uint32, ADC_CODE) ADC_readResultbaseaddr(uint32 resultBase, uint16 socNumber)
 {
     /*
      * Return the ADC result for the selected SOC.

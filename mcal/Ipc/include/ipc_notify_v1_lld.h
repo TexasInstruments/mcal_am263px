@@ -36,7 +36,6 @@
 #include "Platform_Types.h"
 #include "stdint.h"
 #include "ipc_notify_v1_mailbox.h"
-
 #include "sys_common.h"
 
 #ifdef __cplusplus
@@ -107,8 +106,8 @@ typedef struct IpcNotify_InterruptConfig_s
                                               *
                                               *   See \ref CSL_CoreID for valid values for this field.
                                               */
-    uint32 clearIntOnInit;                   /* 0: do not clear pending interrupts during IpcNotify_init, 1: clear
-                                                pending interrupts */
+    uint32 clearIntOnInit; /* 0: do not clear pending interrupts during IpcNotify_init, 1: clear pending interrupts */
+    void (*callback)(void *args); /**< Callback associated with every interrupt */
 } IpcNotify_InterruptConfig;
 
 /**
@@ -193,33 +192,29 @@ sint32 IpcNotify_lld_deInit(IpcNotify_Handle hIpcNotify);
  *
  * \param hIpcNotify     IPC Notify LLD handle
  * \param remoteCoreId   [in] Remote core to sent message to, see \ref CSL_CoreID for valid values.
- * \param remoteClientId [in] Remote core client ID to send message to, MUST be < \ref
- * IPC_NOTIFY_CLIENT_ID_MAX
+ * \param remoteClientId [in] Remote core client ID to send message to, MUST be < \ref IPC_NOTIFY_CLIENT_ID_MAX
  * \param msgValue       [in] Message value to send, MUST be < IPC_NOTIFY_MSG_VALUE_MAX
  * \param waitForFifoNotFull [in] 1: wait for message to be inserted into HW or SW FIFO,
  *                                0: if FIFO is full, dont send message and return with error.
  * \param timeout        [in] Amount of time in units of ticks to wait until timeout
  *
  * \return MCAL_SystemP_SUCCESS, message sent successfully
- * \return SystemP_FAILURE, message could not be sent since HW or SW FIFO for holding the message is
- * full.
+ * \return SystemP_FAILURE, message could not be sent since HW or SW FIFO for holding the message is full.
  */
 sint32 IpcNotify_lld_sendMsg(IpcNotify_Handle hIpcNotify, uint32 remoteCoreId, uint16 remoteClientId,
                              uint32 messageValue, uint32 waitForFifoNotFull, uint32 timeout);
 
 /**
- * \brief Register a callback to handle messages received from a specific remote core and for a
- * specific local client ID
+ * \brief Register a callback to handle messages received from a specific remote core and for a specific local client ID
  *
  * \param hIpcNotify IPC Notify LLD handle
  * \param localClientId [in] Client ID to which the message has been sent
- * \param msgCallback [in] Callback to invoke, if callback is already registered, error will be
- * returned.
+ * \param msgCallback [in] Callback to invoke, if callback is already registered, error will be returned.
  * \param args [in] User arguments, that are passed back to user when the callback is invoked
  *
  * \return MCAL_SystemP_SUCCESS, callback registered sucessfully
- * \return SystemP_FAILURE, callback registration failed, either remoteCoreId or localClientId is
- * invalid or callback already registered.
+ * \return SystemP_FAILURE, callback registration failed, either remoteCoreId or localClientId is invalid or callback
+ * already registered.
  */
 sint32 IpcNotify_lld_registerClient(IpcNotify_Handle hIpcNotify, uint16 localClientId,
                                     IpcNotify_FxnCallback msgCallback, void *args);
@@ -260,7 +255,7 @@ uint32 IpcNotify_lld_getSelfCoreId(IpcNotify_Handle hIpcNotify);
  *
  * \return 1: core is enabled for IPC, 0: core is not enabled for IPC
  */
-uint32 Cdd_Ipc_Clock_getTicks(void);
+
 uint32 Cdd_Ipc_Clock_ticksToUsec(uint32 ticks);
 void   Cdd_Ipc_Clock_uSleep(uint32 usec) __attribute__((optnone));
 uint32 IpcNotify_lld_isCoreEnabled(IpcNotify_Handle hIpcNotify, uint32 coreId);

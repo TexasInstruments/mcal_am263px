@@ -1607,7 +1607,7 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
             {
                 mssrcmREG->RCM_MCAN5_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            RetVal = Mcu_ClockSetSourceMCAN5(clkSrcId, clkDivId);
+            RetVal += Mcu_ClockSetSourceMCAN5(clkSrcId, clkDivId);
             break;
         }
         case MCU_CLKSRC_MODULE_ID_MCAN6:
@@ -2401,7 +2401,7 @@ static void Mcu_setEpwmTbClk(uint32 epwmInstance, uint32 enable)
             HW_WR_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC,
                         ((HW_RD_REG32(MCU_CSL_CONTROLSS_CTRL_U_BASE + MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC) &
                           MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC_BIT_MASK) |
-                         (1 << epwmInstance)));
+                         (1U << epwmInstance)));
         }
         else
         {

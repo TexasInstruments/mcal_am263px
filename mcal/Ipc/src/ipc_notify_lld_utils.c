@@ -31,10 +31,10 @@
  */
 
 #include "ipc_notify_lld_utils.h"
+#include "sys_pmu.h"
 
 static boolean IpcNotifyUtils_lld_waitSync_msgPend(IpcNotifyUtils_Handle hIpcNotifyUtils, sint32 *statusLocal,
-                                                   uint32 remoteCoreId, boolean Done, uint32 timeout,
-                                                   uint32 startTicks);
+                                                   uint32 remoteCoreId, uint32 timeout, uint32 startTicks);
 
 #define CDD_IPC_START_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
@@ -70,29 +70,32 @@ sint32 IpcNotifyUtils_lld_sendSync(IpcNotifyUtils_Handle hIpcNotifyUtils, uint32
 {
     return IpcNotify_lld_sendMsg(hIpcNotifyUtils->hIpcNotifyUtilsInit->hIpcNotify, remoteCoreId,
                                  IPC_NOTIFY_CLIENT_ID_SYNC, 0xFF, /* message value is dont care */
-                                 1 /* wait for messahe to be put in the HwFifo */, CDD_IPC_TIMEOUT);
+                                 1U /* wait for messahe to be put in the HwFifo */, CDD_IPC_TIMEOUT);
 }
 
 sint32 IpcNotifyUtils_lld_waitSync(IpcNotifyUtils_Handle hIpcNotifyUtils, uint32 remoteCoreId, uint32 timeout)
 {
-    sint32  status = MCAL_SystemP_FAILURE;
-    uint32  startTicks;
-    boolean isDone;
-    uint32  isCoreEnabled = 0;
+    sint32  status        = MCAL_SystemP_FAILURE;
+    uint32  startTicks    = 0U;
+    boolean isDone        = FALSE;
+    uint32  isCoreEnabled = 0U;
 
     isCoreEnabled = IpcNotify_lld_isCoreEnabled(hIpcNotifyUtils->hIpcNotifyUtilsInit->hIpcNotify, remoteCoreId);
 
     if ((remoteCoreId < MCAL_CSL_CORE_ID_MAX) && (isCoreEnabled != 0U))
     {
-        startTicks          = Cdd_Ipc_Clock_getTicks();
-        sint32 *statusLocal = &status;
-        isDone              = FALSE;
+        Mcal_GetCycleCounterValue(&startTicks);
+
         while (isDone == FALSE)
         {
-            isDone = IpcNotifyUtils_lld_waitSync_msgPend(hIpcNotifyUtils, statusLocal, remoteCoreId, isDone, timeout,
-                                                         startTicks);
+            isDone = IpcNotifyUtils_lld_waitSync_msgPend(hIpcNotifyUtils, &status, remoteCoreId, timeout, startTicks);
         }
     }
+    else
+    {
+        status = MCAL_SystemP_INVALID_PARAM;
+    }
+
     return status;
 }
 
@@ -129,14 +132,16 @@ sint32 IpcNotifyUtils_lld_syncAll(IpcNotifyUtils_Handle hIpcNotifyUtils, uint32 
 }
 
 static boolean IpcNotifyUtils_lld_waitSync_msgPend(IpcNotifyUtils_Handle hIpcNotifyUtils, sint32 *statusLocal,
-                                                   uint32 remoteCoreId, boolean Done, uint32 timeout, uint32 startTicks)
+                                                   uint32 remoteCoreId, uint32 timeout, uint32 startTicks)
 {
-    uint32  elapsedTicks, tempTicks;
-    boolean isDone = Done;
+    uint32  elapsedTicks = 0U, tempTicks = 0U;
+    boolean isDone = FALSE;
+
     if (hIpcNotifyUtils->syncMsgPend[remoteCoreId] == 0U)
     {
         tempTicks = startTicks;
-        GetElapsedValue(CDD_IPC_OS_COUNTER_ID, &tempTicks, &elapsedTicks);
+        Mcal_GetElapsedCycleCountValue(&tempTicks, &elapsedTicks);
+
         if (elapsedTicks >= timeout)
         {
             *statusLocal = MCAL_SystemP_TIMEOUT;
@@ -145,12 +150,14 @@ static boolean IpcNotifyUtils_lld_waitSync_msgPend(IpcNotifyUtils_Handle hIpcNot
         else
         {
             /* check again after 1 tick  */
-            Cdd_Ipc_Clock_uSleep(Cdd_Ipc_Clock_ticksToUsec(1));
+            Cdd_Ipc_Clock_uSleep(Cdd_Ipc_Clock_ticksToUsec(1U));
         }
     }
     else
     {
+        SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
         hIpcNotifyUtils->syncMsgPend[remoteCoreId]--;
+        SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
         *statusLocal = MCAL_SystemP_SUCCESS;
         isDone       = TRUE;

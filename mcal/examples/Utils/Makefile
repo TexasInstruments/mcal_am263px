@@ -24,7 +24,8 @@ INCLUDE_EXTERNAL_INTERFACES = autoSARBSW autosarConfig port spi eth ethtrcv mcu
 INCLUDE_INTERNAL_INTERFACES = UtilsPriv
 UtilsPriv_INCLUDE =  $(mcal_PATH)/include $(mcal_PATH)/include/hw/$(PLATFORM) $(mcal_PATH)/include/hw
 
-SRCS_COMMON += app_utils.c app_utils_uart.c sci.c trace.c esm.c sys_vim.c Os.c CacheP.c Dem.c boot_armv7r.c MpuP_armv7r.c sys_pmu.c
+include $(mcal_PATH)/Mcal_Lib/srcs.mk
+SRCS_COMMON += app_utils.c app_utils_uart.c sci.c trace.c esm.c sys_vim.c Os.c CacheP.c Dem.c boot_armv7r.c MpuP_armv7r.c
 
 ifeq ($(PLATFORM), am263)
 SRCS_COMMON += app_utilsEth.c
@@ -49,7 +50,7 @@ SRCS_ASM_COMMON +=sys_startup.asm
 SRCS_ASM_COMMON +=sys_intvecs.asm
 SRCS_ASM_COMMON +=crt0.asm
 else
-SRCS_ASM_COMMON +=sys_core.asm boot_armv7r_asm.asm MpuP_armv7r_asm.asm sys_pmu_asm.asm
+SRCS_ASM_COMMON +=sys_core.asm boot_armv7r_asm.asm MpuP_armv7r_asm.asm
 
 endif
 PACKAGE_SRCS_COMMON = .

@@ -46,6 +46,21 @@ extern "C" {
 /** \brief Maximum possible 7 bit address */
 #define CDD_I2C_ADDRESS_7_BIT_MAX (127U)
 
+/*
+ * I2C driver transfer stages - used in polling mode
+ */
+typedef enum
+{
+    CDD_I2C_STATE_INIT,
+    CDD_I2C_STATE_WAIT_FOR_BUS_FREE,
+    CDD_I2C_STATE_SETUP,
+    CDD_I2C_STATE_WAIT_FOR_BUS_BUSY,
+    CDD_I2C_STATE_DATA_TRANSFER,
+    CDD_I2C_STATE_WAIT_FOR_ACCESS_READY,
+    CDD_I2C_STATE_WAIT_FOR_STOP,
+    CDD_I2C_STATE_COMPLETE
+} Cdd_I2c_StateType;
+
 /* ================================================================ */
 /*                         Structures and Enums                     */
 /* ================================================================ */
@@ -115,6 +130,8 @@ typedef struct
     /**< Flag to indicate whether to perform stop at end of channel transfer */
     boolean                     doBusyCheck;
     /**< Flag to indicate whether to perform bus busy check at start of channel transfer */
+    Cdd_I2c_StateType           state;
+    /**< Flag to indicate the current stage of data transfer */
 } Cdd_I2c_ChObjType;
 
 /**
@@ -158,19 +175,20 @@ typedef struct
 /*                          Function Declarations                   */
 /* ================================================================ */
 
-Std_ReturnType Cdd_I2c_startSeqAsync(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj);
+Std_ReturnType Cdd_I2c_StartSeqAsync(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj);
+Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj);
 
 #if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
-Std_ReturnType Cdd_I2c_checkConfig(const Cdd_I2c_ConfigType *configPtr);
+Std_ReturnType Cdd_I2c_CheckConfig(const Cdd_I2c_ConfigType *configPtr);
 #endif
-void Cdd_I2c_resetDrvObj(Cdd_I2c_DriverObjType *drvObj);
-void Cdd_I2c_copyConfig(Cdd_I2c_DriverObjType *drvObj, const Cdd_I2c_ConfigType *configPtr);
+void Cdd_I2c_ResetDrvObj(Cdd_I2c_DriverObjType *drvObj);
+void Cdd_I2c_CopyConfig(Cdd_I2c_DriverObjType *drvObj, const Cdd_I2c_ConfigType *configPtr);
 
-void Cdd_I2c_processIsr(Cdd_I2c_HwUnitType hwUnitId);
-void Cdd_I2c_processEvents(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitObjType *hwUnitObj);
+void Cdd_I2c_ProcessIsr(Cdd_I2c_HwUnitType hwUnitId);
+void Cdd_I2c_ProcessEvents(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitObjType *hwUnitObj);
 
-uint32                 Cdd_I2c_getHwUnitBaseAddr(Cdd_I2c_HwUnitType hwUnitId);
-Cdd_I2c_HwUnitObjType *Cdd_I2c_getHwUnitObj(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitType hwUnitId);
+uint32                 Cdd_I2c_GetHwUnitBaseAddr(Cdd_I2c_HwUnitType hwUnitId);
+Cdd_I2c_HwUnitObjType *Cdd_I2c_GetHwUnitObj(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitType hwUnitId);
 
 /* ================================================================ */
 /*                            Global Variables                      */

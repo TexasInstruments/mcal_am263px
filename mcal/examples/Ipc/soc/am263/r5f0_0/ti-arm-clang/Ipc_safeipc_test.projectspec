@@ -34,11 +34,11 @@
         -mfpu=vfpv3-d16
         -Wno-unused-command-line-argument
         -mthumb
-        -save-temps 
+        -save-temps
         -c
         "
-        artifactExtension="xer5f" 
-        compilerBuildOptions_c=" 
+        artifactExtension="xer5f"
+        compilerBuildOptions_c="
         -mlittle-endian
         -mcpu=cortex-r5
         -gdwarf-3
@@ -46,15 +46,15 @@
         -mfpu=vfpv3-d16
         -mthumb
         -Wall
-        -Werror            
+        -Werror
         -Wno-gnu-variable-sized-type-not-at-end
         -Wno-unused-function
         -DAM263X_PLATFORM
         -ffunction-sections
-        -DCLANG 
-        -DTRACE_ENABLE 
-        -DRELEASE_BUILD 
-        -DASSERT_ENABLE 
+        -DCLANG
+        -DTRACE_ENABLE
+        -DRELEASE_BUILD
+        -DASSERT_ENABLE
         -DAUTOSAR_431
         -I${MCAL_MCAL_autosar_include}
         -I${MCAL_MCAL_Include_hw}
@@ -64,14 +64,14 @@
         -I${MCAL_MCAL_Mcu}
         -I${MCAL_MCAL_Port}
         -I${MCAL_MCAL_Ipc}
-        
+
         -I${MCAL_MCAL_Ipc_eg}
         -I${MCAL_MCAL_Utils_am263}
         -I${MCAL_MCAL_Utils}
         -I${MCAL_MCAL_Mcu_Cfg}
         -I${MCAL_MCAL_Port_Cfg}
         -I${MCAL_MCAL_Ipc_Cfg}
-       
+
         -I${MCAL_MCAL_Mcu_V0}
         -I${MCAL_MCAL_Port_V0}
         -I${MCAL_MCAL_Ipc_V0}
@@ -101,7 +101,7 @@
             --reread_libs
             "
         ></configuration>
-            
+
         <pathVariable name="MCAL_MCAL" path="../../../../../../../mcal" scope="project"/>
         <pathVariable name="MCAL_MCAL_autosar_include" path="${MCAL_MCAL}/autosar_include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu" path="${MCAL_MCAL}/Mcu/include" scope="project"/>
@@ -109,7 +109,7 @@
         <pathVariable name="MCAL_MCAL_Ipc" path="${MCAL_MCAL}/Ipc/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_makefile" path="${MCAL_MCAL}/examples/Ipc/soc/am263/r5f0_0/ti-arm-clang" scope="project"/>
 
-        <pathVariable name="MCAL_MCAL_Include_hw" path="${MCAL_MCAL}/include/hw/am263" scope="project"/>        
+        <pathVariable name="MCAL_MCAL_Include_hw" path="${MCAL_MCAL}/include/hw/am263" scope="project"/>
         <pathVariable name="MCAL_MCAL_Include_memmap" path="${MCAL_MCAL}/include/memmap" scope="project"/>
         <pathVariable name="MCAL_MCAL_Include_hw_types" path="${MCAL_MCAL}/include/hw/" scope="project"/>
         <pathVariable name="MCAL_MCAL_Include_hal_stdtypes" path="${MCAL_MCAL}/include/hw/hal_stdtypes.h" scope="project"/>
@@ -134,7 +134,7 @@
         <file path="${MCAL_MCAL}/Mcu/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
         <file path="${MCAL_MCAL}/Port/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
         <file path="${MCAL_MCAL}/Port/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
-        <file path="${MCAL_MCAL}/Port/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>        
+        <file path="${MCAL_MCAL}/Port/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
@@ -150,23 +150,23 @@
         <file path="${MCAL_MCAL}/include/hw/hal_stdtypes.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/sys_startup.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/lnk_r5_am263_CLANG.cmd" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory=""></file>
         <file path="${MCAL_MCAL}/examples/Utils/esm.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/am263/" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/Dem.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/Det.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_core.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_pmu_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/boot_armv7r_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/boot_armv7r.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/MpuP_armv7r_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/MpuP_armv7r.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>  
-        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/MpuP_armv7r.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file> 
-        
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/MpuP_armv7r.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/MpuP_armv7r.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+
         <file path="${MCAL_MCAL}/examples/Utils/sys_core.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_exception.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        <file path="${MCAL_MCAL}/examples/Utils/sys_pmu.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        <file path="${MCAL_MCAL}/examples/Utils/sys_pmu.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Mcal_Lib"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Mcal_Lib"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_startup.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_vim.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/sys_vim.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
@@ -174,7 +174,7 @@
         <file path="${MCAL_MCAL}/examples/Utils/trace.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/CacheP.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263/CacheP.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
-        
+
         <file path="${MCAL_MCAL}/examples/Ipc/Ipc_test_safeipc/Cdd_Ipc_safeipc_test.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
         <file path="${MCAL_MCAL}/examples/Ipc/Ipc_test_safeipc/Cdd_Ipc_app.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
         <file path="${MCAL_MCAL}/examples/Ipc/soc/am263/r5f0_0/Cdd_Ipc_App_Startup.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>

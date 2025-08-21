@@ -128,7 +128,7 @@ FUNC(void, CDD_FSITX_CODE) CddFsiTx_enableHwCRC(uint32 base);
 FUNC(Std_ReturnType, CDD_FSITX_CODE) CddFsiTx_setTxDataLane(uint32 base, uint16 DataLane);
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
 CddFsiTx_setTxSoftwareFrameSize(uint32 base, uint16 dataLength);
-FUNC(uint8, CDD_FSITX_CODE) CddFsiTx_getTxWordLength(uint32 base, uint16 length);
+FUNC(uint16, CDD_FSITX_CODE) CddFsiTx_getTxWordLength(uint32 base, Cdd_FsiTx_DataLengthType length);
 FUNC(void, CDD_FSITX_CODE)
 CddFsiTx_enableTxPingTimer(uint32 base, uint32 refValue, uint16 pingFrameTag);
 FUNC(uint32, CDD_FSITX_CODE) CddFsiTx_clearTxAllEvents(uint32 base);

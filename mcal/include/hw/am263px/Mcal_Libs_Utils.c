@@ -32,11 +32,11 @@
 
 #include "Mcal_Libs_Utils.h"
 
-static void Mcu_MMR_lock(uint32 *kick0, uint32 *kick1);
-static void Mcal_Libs_Utils_MMR_unlock(uint32 *kick0, uint32 *kick1);
+static void Mcu_MMR_lock(volatile uint32 *kick0, volatile uint32 *kick1);
+static void Mcal_Libs_Utils_MMR_unlock(volatile uint32 *kick0, volatile uint32 *kick1);
 
 /* MMR Unlock Functions */
-static void Mcal_Libs_Utils_MMR_unlock(uint32 *kick0, uint32 *kick1)
+static void Mcal_Libs_Utils_MMR_unlock(volatile uint32 *kick0, volatile uint32 *kick1)
 {
     *kick0 = KICK0_UNLOCK_VAL_MCU;
     *kick1 = KICK1_UNLOCK_VAL_MCU;
@@ -47,17 +47,17 @@ static void Mcal_Libs_Utils_MMR_unlock(uint32 *kick0, uint32 *kick1)
  */
 void Mcal_Libs_Utils_unlockMMR(void)
 {
-    uint32 *lock0;
-    uint32 *lock1;
+    volatile uint32 *lock0;
+    volatile uint32 *lock1;
 
     Mcal_Libs_Utils_unlockTopRcmMMR();
 
-    lock0 = (uint32 *)(&mssrcmREG->RCM_LOCK0_KICK0);
-    lock1 = (uint32 *)(&mssrcmREG->RCM_LOCK0_KICK1);
+    lock0 = (volatile uint32 *)(&mssrcmREG->RCM_LOCK0_KICK0);
+    lock1 = (volatile uint32 *)(&mssrcmREG->RCM_LOCK0_KICK1);
     Mcal_Libs_Utils_MMR_unlock(lock0, lock1);
 
-    lock0 = (uint32 *)(&ctrlREG->LOCK0_KICK0);
-    lock1 = (uint32 *)(&ctrlREG->LOCK0_KICK1);
+    lock0 = (volatile uint32 *)(&ctrlREG->LOCK0_KICK0);
+    lock1 = (volatile uint32 *)(&ctrlREG->LOCK0_KICK1);
     Mcal_Libs_Utils_MMR_unlock(lock0, lock1);
 }
 
@@ -66,16 +66,16 @@ void Mcal_Libs_Utils_unlockMMR(void)
  */
 void Mcal_Libs_Utils_unlockTopRcmMMR(void)
 {
-    uint32 *lock0;
-    uint32 *lock1;
+    volatile uint32 *lock0;
+    volatile uint32 *lock1;
 
-    lock0 = (uint32 *)(&toprcmREG->LOCK0_KICK0);
-    lock1 = (uint32 *)(&toprcmREG->LOCK0_KICK1);
+    lock0 = (volatile uint32 *)(&toprcmREG->LOCK0_KICK0);
+    lock1 = (volatile uint32 *)(&toprcmREG->LOCK0_KICK1);
     Mcal_Libs_Utils_MMR_unlock(lock0, lock1);
 }
 
 /* MMR lock Functions */
-static void Mcal_Libs_Utils_MMR_lock(uint32 *kick0, uint32 *kick1)
+static void Mcal_Libs_Utils_MMR_lock(volatile uint32 *kick0, volatile uint32 *kick1)
 {
     *kick0 = KICK0_LOCK_VAL_MCU;
     *kick1 = KICK1_LOCK_VAL_MCU;
@@ -86,17 +86,17 @@ static void Mcal_Libs_Utils_MMR_lock(uint32 *kick0, uint32 *kick1)
  */
 void Mcal_Libs_Utils_lockMMR(void)
 {
-    uint32 *lock0;
-    uint32 *lock1;
+    volatile uint32 *lock0;
+    volatile uint32 *lock1;
 
     Mcal_Libs_Utils_lockTopRcmMMR();
 
-    lock0 = (uint32 *)(&mssrcmREG->RCM_LOCK0_KICK0);
-    lock1 = (uint32 *)(&mssrcmREG->RCM_LOCK0_KICK1);
+    lock0 = (volatile uint32 *)(&mssrcmREG->RCM_LOCK0_KICK0);
+    lock1 = (volatile uint32 *)(&mssrcmREG->RCM_LOCK0_KICK1);
     Mcal_Libs_Utils_MMR_lock(lock0, lock1);
 
-    lock0 = (uint32 *)(&ctrlREG->LOCK0_KICK0);
-    lock1 = (uint32 *)(&ctrlREG->LOCK0_KICK1);
+    lock0 = (volatile uint32 *)(&ctrlREG->LOCK0_KICK0);
+    lock1 = (volatile uint32 *)(&ctrlREG->LOCK0_KICK1);
     Mcal_Libs_Utils_MMR_lock(lock0, lock1);
 }
 
@@ -105,10 +105,10 @@ void Mcal_Libs_Utils_lockMMR(void)
  */
 void Mcal_Libs_Utils_lockTopRcmMMR(void)
 {
-    uint32 *lock0;
-    uint32 *lock1;
+    volatile uint32 *lock0;
+    volatile uint32 *lock1;
 
-    lock0 = (uint32 *)(&toprcmREG->LOCK0_KICK0);
-    lock1 = (uint32 *)(&toprcmREG->LOCK0_KICK1);
+    lock0 = (volatile uint32 *)(&toprcmREG->LOCK0_KICK0);
+    lock1 = (volatile uint32 *)(&toprcmREG->LOCK0_KICK1);
     Mcal_Libs_Utils_MMR_lock(lock0, lock1);
 }

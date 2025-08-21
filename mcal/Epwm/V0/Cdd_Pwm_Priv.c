@@ -481,7 +481,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HwUnitInit(Cdd_Pwm_ChObjType *chObj)
     Cdd_Pwm_TripZone(chObj->channelID);
 #endif
 #if (STD_ON == CDD_PWM_DIGITALCOMPARE)
-    Cdd_Pwm_DigitalCompare(chObj->channelID);
+    Cdd_Pwm_DigitalCompare((uint16)chObj->channelID);
 #endif
 
 #if (STD_ON == CDD_PWM_CHOPPER)
@@ -2065,8 +2065,8 @@ Cdd_Pwm_EnableInterrupt(Cdd_Pwm_ChannelType ChannelParameter, Cdd_Pwm_InterruptT
 
     if (EdgeInterruptSource.interruptSource != 0U)
     {
-        EPWM_setInterruptSource(baseAddr, EdgeInterruptSource.interruptSource,
-                                EdgeInterruptSource.mixedInterruptSource);
+        EPWM_setInterruptSource(baseAddr, (uint16)EdgeInterruptSource.interruptSource,
+                                (uint16)EdgeInterruptSource.mixedInterruptSource);
     }
 
     EPWM_enableInterrupt(baseAddr);
@@ -2224,8 +2224,7 @@ void Cdd_Pwm_EnableAdcTrigger(uint32 baseAddr, Cdd_Pwm_AdcSocType adcSoc)
     if (TRUE == adcSoc.channelEnable)
     {
         EPWM_enableADCTrigger(baseAddr, adcSoc.adcSocSource);
-        EPWM_setADCTriggerSource(baseAddr, adcSoc.adcSocSource,
-                                 (EPWM_ADCStartOfConversionSource)adcSoc.adcInterruptSource,
+        EPWM_setADCTriggerSource(baseAddr, adcSoc.adcSocSource, adcSoc.adcInterruptSource,
                                  adcSoc.adcMixedInterruptSource);
     }
     else

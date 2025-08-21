@@ -269,8 +269,7 @@ Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
     {
         CddFsiRx_ReportDetError(CDD_FSI_RX_SETUP_BUFFER_SID, CDD_FSI_RX_E_PARAM_VALUE);
     }
-    else if ((RxDataLength < (uint16)CDD_FSI_RX_MIN_LEN_WORDS_DATA) ||
-             (RxDataLength > (uint16)(CDD_FSI_RX_MAX_LEN_WORDS_DATA)))
+    else if ((RxDataLength < CDD_FSI_RX_DATA_1_WORD_LENGTH) || (RxDataLength > CDD_FSI_RX_DATA_16_WORD_LENGTH))
     {
         CddFsiRx_ReportDetError(CDD_FSI_RX_SETUP_BUFFER_SID, CDD_FSI_RX_E_PARAM_VALUE);
     }
@@ -283,7 +282,7 @@ Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
         /*Application Buffer adress is copied to th internal hardware unit buffer so that data will
         get copied from Rx internal buffer to Application buffer directly*/
         hwObj->rxBuffer    = DataBufferPtr;
-        hwObj->rxDataWidth = RxDataLength;
+        hwObj->rxDataWidth = (uint8)RxDataLength;
         baseAddr           = hwObj->hwUnitCfg.baseAddr;
         CddFsiRx_SetRxSoftwareFrameSize(baseAddr, RxDataLength);
         SchM_Exit_Cdd_FsiRx_FSI_RX_EXCLUSIVE_AREA_0();

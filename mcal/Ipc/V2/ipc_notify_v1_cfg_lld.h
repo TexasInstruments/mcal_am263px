@@ -15,6 +15,13 @@
 #define R5FSS0_0_MBOX_READ_REQ_INTR (158U)
 #define R5FSS0_1_MBOX_READ_REQ_INTR (158U)
 
+/* A delay of 60-70 clock cycle is recommended before clear pending read request from remote core
+ * This delay is implemented as a loop
+ */
+#define IPC_NOTIFY_WAIT_CYCLES (5U)
+
+/* A counter that restricts the loop to pend in isr forever and also avoid any race around condtion between the cores */
+#define IPC_NOTIFY_LOOP_COUNTER_MAX (1000U)
 /* dedicated mailbox memories address and size */
 #define MSS_MBOX_MEM      (MCAL_CSL_MBOX_SRAM_U_BASE)
 #define MSS_MBOX_MEM_SIZE (16U * 1024U)
@@ -41,3 +48,5 @@
 IpcNotify_InterruptConfig* IpcNotifyCfg_getInterruptConfig(uint32 coreId);
 uint32                     IpcNotifyCfg_getInterruptConfigNum(uint32 coreId);
 IpcNotify_MailboxConfig*   IpcNotifyCfg_getMailboxConfig(uint32 selfCoreId, uint32 remoteCoreId);
+sint32 IpcNotify_trigInterrupt(uint32 selfCoreId, uint32 remoteCoreId, uint32 mailboxBaseAddr, uint32 intrBitPos);
+void   IpcNotify_wait(void);

@@ -87,7 +87,7 @@ CddFsiTx_setPrescaler(uint32 base, Cdd_FsiTx_ClkPrescaleType preScaleValue)
     HW_WR_REG16((base + (uint32)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL),
                 ((HW_RD_REG16(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL) &
                   (uint16)(~CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_PRESCALE_VAL_MASK)) |
-                 (preScaleValue << CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_PRESCALE_VAL_SHIFT)));
+                 (uint16)((uint16)preScaleValue << CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_PRESCALE_VAL_SHIFT)));
     return;
 }
 /******************************************************************************/
@@ -110,7 +110,7 @@ CddFsiTx_selectTxPLLClock(uint32 base, uint16 clkSel)
         /* Set PLLCLK as source for clock divider */
         regVal  = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1);
         regVal &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1_SEL_PLLCLK_MASK);
-        regVal  = (clkSel << CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1_SEL_PLLCLK_SHIFT);
+        regVal |= (clkSel << CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1_SEL_PLLCLK_SHIFT);
         HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1, regVal);
     }
 
@@ -250,7 +250,7 @@ CddFsiTx_dataBufferLoad(uint32 base, volatile P2VAR(uint16, AUTOMATIC, CDD_FSI_T
         volatile uint16 *pSrc16, *pDst16;
         uint16           offset = 0;
         pSrc16                  = (volatile uint16 *)databuffer;
-        pDst16                  = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_BUF_BASE(offset));
+        pDst16                  = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_BUF_BASE((uint32)offset));
 
         while (local_length > 0U)
         {
@@ -265,7 +265,7 @@ CddFsiTx_dataBufferLoad(uint32 base, volatile P2VAR(uint16, AUTOMATIC, CDD_FSI_T
             if (offset > CDD_FSI_TX_MAX_VALUE_BUF_PTR_OFF)
             {
                 offset = 0U;
-                pDst16 = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_BUF_BASE(offset));
+                pDst16 = (volatile uint16 *)(base + (uint32)CSL_CDD_FSI_TX_CFG_TX_BUF_BASE((uint32)offset));
             }
             local_length--;
         }
@@ -302,11 +302,11 @@ CddFsiTx_setTxUserDefinedData(uint32 base, uint8 userData)
     {
         regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA);
         regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_MASK)) |
-                 (uint16)(userData << (uint16)CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
+                 (uint16)((uint16)userData << (uint16)CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
         HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA, regVal);
     }
 
-    return (retVal);
+    return ((Std_ReturnType)retVal);
 }
 /******************************************************************************/
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
@@ -327,7 +327,7 @@ CddFsiTx_setTxDataLane(uint32 base, uint16 DataLane)
         HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1, regVal);
     }
 
-    return (retVal);
+    return ((Std_ReturnType)retVal);
 }
 /******************************************************************************/
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
@@ -351,11 +351,11 @@ CddFsiTx_setTxSoftwareFrameSize(uint32 base, uint16 dataLength)
     return (retVal);
 }
 /******************************************************************************/
-FUNC(uint8, CDD_FSITX_CODE)
-CddFsiTx_getTxWordLength(uint32 base, uint16 length)
+FUNC(uint16, CDD_FSITX_CODE)
+CddFsiTx_getTxWordLength(uint32 base, Cdd_FsiTx_DataLengthType length)
 {
     (void)base;
-    uint8 WordLength = 0;
+    uint16 WordLength = 0;
     switch (length)
     {
         case CDD_FSI_TX_DATA_1_WORD_LENGTH:
@@ -466,7 +466,7 @@ CddFsiTx_enableHwTrigger(uint32 base, uint16 frameTriggInput)
         HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_HI_ALT1, regVal);
     }
 
-    return (retVal);
+    return ((Std_ReturnType)retVal);
 }
 /******************************************************************************/
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
@@ -605,7 +605,7 @@ CddFsiTx_enableHwCRC(uint32 base)
     uint16 regVal = 0;
 
     regVal  = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1);
-    regVal &= ~(CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1_SW_CRC_MASK);
+    regVal &= (uint16)(~(CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1_SW_CRC_MASK));
     HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1, regVal);
     return;
 }

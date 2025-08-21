@@ -78,7 +78,7 @@ Refer to figure below :
 ```
 
 2. Per_Pll shall be set for **1920MHz** and is divided into two *HSDIV* values such as:
-  
+
    **DPLL_PER_HSDIV0_CLKOUT0: 160MHz** and **DPLL_PER_HSDIV0_CLKOUT1: 192MHz**
 
 Refer to figure below :
@@ -193,7 +193,7 @@ None
 #### Hardware Features supported
 
 * Initialization of Core clock, PLL Clock and peripheral clocks.
-* Initialization of RAM sections.  
+* Initialization of RAM sections.
 * Activation of a µC reset.
 * Provides a service to get the reset reason from hardware.
 * ADC & PWM Enable from MCU.
@@ -296,6 +296,7 @@ The extended production errors reported to DEM module are described in the follo
 |Type of Error|Related Error Code|Description|
 |----|-----|-------|
 |Assigned by DEM|MCU_E_CLOCK_FAILURE|This error is raised when there is an MCU Clock Source Failure|
+|Assigned by DEM|MCU_E_HARDWARE_ERROR|This error is raised when register write failure occurs. (Hardware Failure)  |
 
 **Note:** MCU_E_MODE_FAILURE should be always disabled. Since Mcu_SetMode is not supported, MCU_E_MODE_FAILURE should always be disabled.
 
@@ -1000,7 +1001,7 @@ Once the build is completed we get a binary file, which is loaded in our control
 ```
 
    Mcu_App: Variant - Post Build being used !!!
-   
+
    McuApp: Sample Application - STARTS !!!
    Mcu Driver version info:9.1.0
    Mcu Driver Module/Driver:101.44

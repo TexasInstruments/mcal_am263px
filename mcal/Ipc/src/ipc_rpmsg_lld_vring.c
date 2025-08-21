@@ -32,6 +32,7 @@
 
 #include <ipc_rpmsg_lld_priv.h>
 #include <Cdd_Ipc.h>
+#include "sys_pmu.h"
 
 /* NOTE:
  * For RTOS to RTOS IPC RPMessage
@@ -52,23 +53,25 @@
 
 #define VRING_USED_F_NO_NOTIFY (1U)
 static inline void RPMessage_vringPutFullTxBuf_asm(void);
-static boolean     RPMessage_vringGetEmptyTxBufTimeOut(sint32 *status, boolean done, uint32 startTime, uint32 tryLoop,
-                                                       uint32 timeout);
+static boolean     RPMessage_vringGetEmptyTxBufTimeOut(sint32 *status, boolean done);
 static uint32 RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(sint32 *status, RPMessage_Core *coreObj, uint32 tryLoop,
-                                                                uint32 startTicks, uint32 startTime, uint32 timeout);
+                                                                uint32 startTicks, uint32 timeout);
 #define CDD_IPC_START_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
+#include "sys_pmu.h"
 
 sint32 RPMessage_vringGetEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 *vringBufId, uint32 timeout)
 {
-    RPMessage_Core  *coreObj  = &hRpMsg->coreObj[remoteCoreId];
-    RPMessage_Vring *vringObj = &coreObj->vringTxObj;
-    uint32           startTicks, startTime;
+    RPMessage_Core  *coreObj    = &hRpMsg->coreObj[remoteCoreId];
+    RPMessage_Vring *vringObj   = &coreObj->vringTxObj;
+    uint32           startTicks = 0U;
     uint16           head;
     sint32           status  = MCAL_SystemP_TIMEOUT;
     boolean          done    = FALSE;
     uint32           tryLoop = 0U;
-    startTime                = Cdd_Ipc_Clock_getTicks();
+
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
     do
     {
         /* There's nothing available */
@@ -76,12 +79,17 @@ sint32 RPMessage_vringGetEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCor
         {
             /* We need to know about added buffers */
             vringObj->used->flags &= (uint16)~VRING_USED_F_NO_NOTIFY;
-            sint32 *statusValue    = &status;
-            startTicks             = Cdd_Ipc_Clock_getTicks();
-            tryLoop = RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(statusValue, coreObj, tryLoop, startTicks,
-                                                                        startTime, timeout);
-            sint32 *statusLocal = &status;
-            done                = RPMessage_vringGetEmptyTxBufTimeOut(statusLocal, done, startTime, tryLoop, timeout);
+            SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
+            Mcal_GetCycleCounterValue(&startTicks);
+
+            tryLoop = RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(&status, coreObj, tryLoop, startTicks, timeout);
+            if (tryLoop != 1U)
+            {
+                done = RPMessage_vringGetEmptyTxBufTimeOut(&status, done);
+            }
+
+            SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
         }
         else
         {
@@ -94,16 +102,19 @@ sint32 RPMessage_vringGetEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCor
         }
     } while (done == FALSE);
 
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
     return status;
 }
 
-void RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId, uint16 dataLen,
-                                 uint32 timeout)
+sint32 RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId, uint16 dataLen,
+                                   uint32 timeout)
 {
     RPMessage_Core         *coreObj  = &hRpMsg->coreObj[remoteCoreId];
     RPMessage_Vring        *vringObj = &coreObj->vringTxObj;
     struct vring_used_elem *used;
     uint32                  txMsgValue = RPMESSAGE_MSG_VRING_NEW_FULL;
+    sint32                  status     = MCAL_SystemP_FAILURE;
 
     if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
     {
@@ -111,13 +122,20 @@ void RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId
         txMsgValue = RPMESSAGE_LINUX_TX_VRING_ID;
     }
 
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
     used      = &vringObj->used->ring[vringObj->used->idx % vringObj->vringNumBuf];
     used->id  = vringBufId;
     used->len = dataLen;
     vringObj->used->idx++;
     RPMessage_vringPutFullTxBuf_asm();
-    IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, remoteCoreId, IPC_NOTIFY_CLIENT_ID_RPMSG, txMsgValue,
-                          1 /* wait for message to be posted */, timeout);
+
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
+    status = IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, remoteCoreId, IPC_NOTIFY_CLIENT_ID_RPMSG, txMsgValue,
+                                   1 /* wait for message to be posted */, timeout);
+
+    return status;
 }
 
 void RPMessage_vringCheckEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId)
@@ -126,10 +144,14 @@ void RPMessage_vringCheckEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCor
     RPMessage_Vring *vringObj      = &coreObj->vringTxObj;
     uint32           isNewEmptyBuf = 1U;
 
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
     if (vringObj->lastAvailIdx == vringObj->avail->idx)
     {
         isNewEmptyBuf = 0U;
     }
+
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     if (isNewEmptyBuf != 0U)
     {
@@ -160,6 +182,8 @@ sint32 RPMessage_vringGetFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCore
     uint16           head;
     sint32           status = MCAL_SystemP_TIMEOUT;
 
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
     if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
     {
         /* There's nothing available */
@@ -189,14 +213,19 @@ sint32 RPMessage_vringGetFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCore
         }
     }
 
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
     return status;
 }
 
-void RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId, uint32 timeout)
+sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId, uint32 timeout)
 {
     RPMessage_Core  *coreObj  = &hRpMsg->coreObj[remoteCoreId];
     RPMessage_Vring *vringObj = &coreObj->vringRxObj;
     uint32           rxMsgValue;
+    sint32           status = MCAL_SystemP_SUCCESS;
+
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
     {
@@ -222,8 +251,12 @@ void RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreI
 
     IpcNotify_mailbox_asm();
 
-    IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, remoteCoreId, IPC_NOTIFY_CLIENT_ID_RPMSG, rxMsgValue,
-                          1U /* wait for message to be posted */, timeout);
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
+
+    status = IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, remoteCoreId, IPC_NOTIFY_CLIENT_ID_RPMSG, rxMsgValue,
+                                   1U /* wait for message to be posted */, timeout);
+
+    return status;
 }
 
 uint32 RPMessage_vringIsFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId)
@@ -231,6 +264,8 @@ uint32 RPMessage_vringIsFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreI
     RPMessage_Core  *coreObj      = &hRpMsg->coreObj[remoteCoreId];
     RPMessage_Vring *vringObj     = &coreObj->vringRxObj;
     uint32           isNewFullBuf = 1;
+
+    SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
     {
@@ -246,6 +281,8 @@ uint32 RPMessage_vringIsFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreI
             isNewFullBuf = 0;
         }
     }
+
+    SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     return isNewFullBuf;
 }
@@ -372,32 +409,20 @@ static inline void RPMessage_vringPutFullTxBuf_asm(void)
 #endif
 }
 
-static boolean RPMessage_vringGetEmptyTxBufTimeOut(sint32 *status, boolean done, uint32 startTime, uint32 tryLoop,
-                                                   uint32 timeout)
+static boolean RPMessage_vringGetEmptyTxBufTimeOut(sint32 *status, boolean done)
 {
-    uint32  endTime, tempTime;
     boolean isDone = done;
-    if (*status == MCAL_SystemP_TIMEOUT)
+    if ((*status == MCAL_SystemP_TIMEOUT) || (*status == MCAL_SystemP_FAILURE))
     {
         isDone = TRUE;
-    }
-    if (tryLoop == 1U)
-    {
-        tempTime = startTime;
-        GetElapsedValue(CDD_IPC_OS_COUNTER_ID, &tempTime, &endTime);
-        if (endTime > timeout)
-        {
-            *status = MCAL_SystemP_TIMEOUT;
-            isDone  = TRUE;
-        }
     }
     return isDone;
 }
 
 static uint32 RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(sint32 *status, RPMessage_Core *coreObj, uint32 tryLoop,
-                                                                uint32 startTicks, uint32 startTime, uint32 timeout)
+                                                                uint32 startTicks, uint32 timeout)
 {
-    uint32 tempTicks, elapsedTicks;
+    uint32 tempTicks = 0U, elapsedTicks = 0U;
     uint32 tryLoopLocal = tryLoop;
 
     do
@@ -407,8 +432,11 @@ static uint32 RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(sint32 *status, 
             tryLoopLocal = 1U;
             *status      = MCAL_SystemP_SUCCESS;
         }
-        tempTicks = startTicks;
-        GetElapsedValue(CDD_IPC_OS_COUNTER_ID, &tempTicks, &elapsedTicks);
+        else
+        {
+            tempTicks = startTicks;
+            Mcal_GetElapsedCycleCountValue(&tempTicks, &elapsedTicks);
+        }
     } while ((elapsedTicks < timeout) && (tryLoopLocal == 0U));
 
     return tryLoopLocal;

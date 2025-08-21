@@ -104,7 +104,7 @@ static void Adc_checkAndSchedule(Adc_HwUnitObjType *hwUnitObj);
 static void Adc_procIsr(Adc_HwUnitObjType *hwUnitObj, Adc_GroupObjType *groupObj);
 static void Adc_resetGroupObjOnResume(Adc_GroupObjType *groupObj);
 
-static void Adc_hwConfig(Adc_GroupObjType *groupObj, uint32 baseAddr);
+static void Adc_hwConfig(const Adc_GroupObjType *groupObj, uint32 baseAddr);
 static void Adc_hwStart(uint32 baseAddr);
 static void Adc_hwStop(uint32 baseAddr, const Adc_GroupObjType *groupObj);
 static void Adc_hwSetDefReg(uint32 baseAddr);
@@ -122,7 +122,7 @@ static void           Adc_procIsr_Internal(uint32 *convComplete, Adc_GroupObjTyp
 static Std_ReturnType Adc_checkAndSchedule_Internal(Adc_HwUnitObjType *hwUnitObj, Adc_GroupObjType *nextGroupObj);
 static void           Adc_copyConfig_Internal(const Adc_GroupConfigType *groupCfg);
 static boolean Adc_IrqTxRx_Internal(uint32 baseAddr, Adc_GroupObjType **groupObj, uint16 InterruptNum, uint8 adcSoc);
-static void    Adc_hwConfig_check_accessMode(Adc_GroupObjType *groupObj, uint32 baseAddr, uint16 groupMask,
+static void    Adc_hwConfig_check_accessMode(const Adc_GroupObjType *groupObj, uint32 baseAddr, uint16 groupMask,
                                              uint16 adcLastSoc, const Adc_GroupConfigType *groupCfg);
 static void    Adc_copyConfig_ExplicitStopMode(Adc_GroupObjType *groupObj, const Adc_GroupConfigType *groupCfg);
 
@@ -131,7 +131,7 @@ static Std_ReturnType Adc_checkGroupCfgRangeParameters(const Adc_GroupConfigType
 static Std_ReturnType Adc_checkGroupParameters(const Adc_GroupConfigType *groupCfg, const Adc_ConfigType *cfgPtr);
 static boolean        Adc_checkGroupParametersDet_HW(const Adc_GroupConfigType *groupCfg);
 static Std_ReturnType Adc_checkGroupParametersDet_SW(const Adc_GroupConfigType *groupCfg);
-static boolean        Adc_CheckPass(Adc_GroupObjType *groupObjCurrent, Adc_GroupObjType *groupObj);
+static boolean        Adc_CheckPass(const Adc_GroupObjType *groupObjCurrent, const Adc_GroupObjType *groupObj);
 #endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
 
 #if (STD_ON == ADC_DMA_MODE)
@@ -308,7 +308,7 @@ Std_ReturnType Adc_startGroup(Adc_GroupObjType *groupObj)
     return (retVal);
 }
 
-static boolean Adc_CheckPass(Adc_GroupObjType *groupObjCurrent, Adc_GroupObjType *groupObj)
+static boolean Adc_CheckPass(const Adc_GroupObjType *groupObjCurrent, const Adc_GroupObjType *groupObj)
 {
     boolean ret = FALSE;
 
@@ -1612,7 +1612,7 @@ static void Adc_resetGroupObjOnResume(Adc_GroupObjType *groupObj)
     return;
 }
 
-static void Adc_hwConfig(Adc_GroupObjType *groupObj, uint32 baseAddr)
+static void Adc_hwConfig(const Adc_GroupObjType *groupObj, uint32 baseAddr)
 {
     uint32                       chnlId, socInc, adcSoc;
     uint32                       threshold;
@@ -1733,7 +1733,7 @@ static void Adc_hwConfig(Adc_GroupObjType *groupObj, uint32 baseAddr)
             ADC_enableInterrupt(baseAddr, groupObj->groupInterruptSrc);
 
             /* Get the Address. */
-            dmaDataAddr = ADC_readResultbaseaddr(adchwUnitObj->resultBaseAddr, (uint32)groupObj->socAssigned);
+            dmaDataAddr = ADC_readResultbaseaddr(adchwUnitObj->resultBaseAddr, groupObj->socAssigned);
 
             /* Check if, CDD is Initialized. */
             if (ADC_TRUE == Cdd_Dma_GetInitStatus())
@@ -1763,7 +1763,7 @@ static void Adc_hwConfig(Adc_GroupObjType *groupObj, uint32 baseAddr)
     return;
 }
 
-static void Adc_hwConfig_check_accessMode(Adc_GroupObjType *groupObj, uint32 baseAddr, uint16 groupMask,
+static void Adc_hwConfig_check_accessMode(const Adc_GroupObjType *groupObj, uint32 baseAddr, uint16 groupMask,
                                           uint16 adcLastSoc, const Adc_GroupConfigType *groupCfg)
 {
     ADC_clearInterruptStatus(baseAddr, (uint16)groupObj->groupInterruptSrc);

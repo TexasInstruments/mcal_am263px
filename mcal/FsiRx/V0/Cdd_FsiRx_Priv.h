@@ -155,19 +155,20 @@ typedef struct
 /*                          Function Declarations                             */
 /* ========================================================================== */
 
-void CddFsiRx_hwUnitInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj);
+void CddFsiRx_hwUnitInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj);
 #if (STD_ON == CDD_FSI_RX_DEV_ERROR_DETECT)
 void CddFsiRx_ReportDetError(uint8 moduleId, uint8 instanceId);
 #endif
 void           CddFsiRx_ReportRuntimeError(uint8 moduleId, uint8 instanceId);
-Std_ReturnType CddFsiRx_hwUnitDeInit(Cdd_FsiRx_HwUnitObjType *hwUnitObj);
+Std_ReturnType CddFsiRx_hwUnitDeInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj);
 void           CddFsiRx_resetDrvObj(CddFsiRx_DriverObjType *drvObj);
 void           CddFsiRx_copyConfig(CddFsiRx_DriverObjType *drvObj, const Cdd_FsiRx_ConfigType *cfgPtr);
 void           CddFsiRx_Receive(Cdd_FsiRx_HwUnitObjType *hwUnitObj);
 void           CddFsiRx_IrqRx(Cdd_FsiRx_HwUnitObjType *hwUnitObj, uint16 evntflag);
-Std_ReturnType CddFsiRx_ClearResetRxSubModules(Cdd_FsiRx_HwUnitObjType     *hwUnitObj,
-                                               Cdd_FsiRx_ResetSubModuleType subModule);
-Std_ReturnType CddFsiRx_ResetRxSubModules(Cdd_FsiRx_HwUnitObjType *hwUnitObj, Cdd_FsiRx_ResetSubModuleType SubModule);
+Std_ReturnType CddFsiRx_ClearResetRxSubModules(const Cdd_FsiRx_HwUnitObjType *hwUnitObj,
+                                               Cdd_FsiRx_ResetSubModuleType   subModule);
+Std_ReturnType CddFsiRx_ResetRxSubModules(const Cdd_FsiRx_HwUnitObjType *hwUnitObj,
+                                          Cdd_FsiRx_ResetSubModuleType   SubModule);
 Std_ReturnType CddFsiRx_DMAdataReceive(Cdd_FsiRx_HwUnitObjType *hwUnitObj);
 
 FUNC(void, CDD_FSIRX_CODE)

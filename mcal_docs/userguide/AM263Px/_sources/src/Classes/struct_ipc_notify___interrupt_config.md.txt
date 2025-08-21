@@ -26,6 +26,7 @@ This structure describes the information related to one interrupt that is setup 
 |  uint8 | numCores |  |
 |  uint8[MCAL_CSL_CORE_ID_MAX] | coreIdList |  |
 |  uint32 | clearIntOnInit |  |
+|  void(*)(void *args) | callback |  |
 
 ## Detailed Description
 

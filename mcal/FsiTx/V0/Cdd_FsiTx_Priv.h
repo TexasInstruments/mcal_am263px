@@ -184,27 +184,28 @@ typedef struct
 /*                          Function Declarations                             */
 /* ========================================================================== */
 
-Std_ReturnType CddFsiTx_hwUnitInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj);
+Std_ReturnType CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj);
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
 void CddFsiTx_ReportDetError(uint8 moduleId, uint8 instanceId);
 #endif
 void           CddFsiTx_ReportRuntimeError(uint8 moduleId, uint8 instanceId);
-Std_ReturnType CddFsiTx_hwUnitDeInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj);
+Std_ReturnType CddFsiTx_hwUnitDeInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj);
 void           CddFsiTx_resetDrvObj(Cdd_FsiTx_DriverObjType *drvObj);
 Std_ReturnType CddFsiTx_copyConfig(Cdd_FsiTx_DriverObjType *drvObj, const Cdd_FsiTx_ConfigType *cfgPtr);
-Std_ReturnType CddFsiTx_BufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+Std_ReturnType CddFsiTx_BufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
                                    P2VAR(uint16, AUTOMATIC, CDD_FSI_TX_APPL_DATA) databuffer, uint32 userData,
                                    uint32 txDatalength);
-Std_ReturnType CddFsiTx_PingTransmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj);
-Std_ReturnType CddFsiTx_Transmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj, uint8 UserData,
+Std_ReturnType CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj);
+Std_ReturnType CddFsiTx_Transmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj, uint8 UserData,
                                  Cdd_FsiTx_DataLengthType txDataLength);
 void CddFsiTx_IrqTx(Cdd_FsiTx_HwUnitObjType *hwUnitObj, CddFsiTx_McalIntNumberType InterruptNum, uint16 EvtFlag);
-Std_ReturnType CddFsiTx_DMABufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_FsiTx_DataBufferType *databuffer,
+Std_ReturnType CddFsiTx_DMABufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_FsiTx_DataBufferType *databuffer,
                                       uint32 userData, uint32 TxDatalength);
 void           CddFsiTx_MainFunction(Cdd_FsiTx_HwUnitObjType *hwUnitObj);
-Std_ReturnType CddFsiTx_ClearResetTxSubModules(Cdd_FsiTx_HwUnitObjType     *hwUnitObj,
-                                               Cdd_FsiTx_ResetSubModuleType subModule);
-Std_ReturnType CddFsiTx_ResetTxSubModules(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_FsiTx_ResetSubModuleType SubModule);
+Std_ReturnType CddFsiTx_ClearResetTxSubModules(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+                                               Cdd_FsiTx_ResetSubModuleType   subModule);
+Std_ReturnType CddFsiTx_ResetTxSubModules(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+                                          Cdd_FsiTx_ResetSubModuleType   SubModule);
 #ifdef __cplusplus
 }
 #endif

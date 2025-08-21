@@ -95,8 +95,8 @@
 static void CddFsiTx_delayWait(uint32 delaycount);
 #if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
 static void           CddFsiTx_IrqDmaTx(void *hwUnitObj);
-static Std_ReturnType CddFsiTxDma_ModuleChannelConfigure(Cdd_FsiTx_HwUnitObjType *hwUnitObj, const uint16 *tx_buffrPtr,
-                                                         uint16                    table_size,
+static Std_ReturnType CddFsiTxDma_ModuleChannelConfigure(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+                                                         const uint16 *tx_buffrPtr, uint16 table_size,
                                                          Cdd_FsiTx_DataBufferType *srcaddr_databuffer, uint8 bCnt,
                                                          uint8 cCount, uint32 mode, const uint16 *tx_tag_udataPtr,
                                                          uint32 *tag_udata);
@@ -105,15 +105,6 @@ static Std_ReturnType CddFsiTxDma_ModuleChannelConfigure(Cdd_FsiTx_HwUnitObjType
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
-
-#if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
-#define CDD_FSITX_START_SEC_VAR_NO_INIT_UNSPECIFIED
-#include "Cdd_FsiTx_MemMap.h"
-/** \brief CDD_FSI_TX DMA object */
-VAR(Cdd_FsiTx_HwUnitObjType, CDD_FSITX_VAR_CLEARED) * Cdd_FsiTx_DmaConfigObj;
-#define CDD_FSITX_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
-#include "Cdd_FsiTx_MemMap.h"
-#endif /* #if (STD_ON == CDD_FSI_TX_DMA_ENABLE) */
 
 #define CDD_FSITX_START_SEC_VAR_INIT_UNSPECIFIED
 #include "Cdd_FsiTx_MemMap.h"
@@ -149,7 +140,7 @@ extern VAR(Cdd_FsiTx_DriverObjType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DrvObj;
 /*
  * Design:
  */
-Std_ReturnType CddFsiTx_hwUnitInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
+Std_ReturnType CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
 {
     uint32 baseAddr = 0;
     uint32 retVal   = E_OK;
@@ -159,42 +150,39 @@ Std_ReturnType CddFsiTx_hwUnitInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     CddFsiTx_selectTxPLLClock(baseAddr, CSL_CDD_FSI_TX_CLK_SELECT);
     CddFsiTx_resetTxModule(baseAddr);
     /* include 5 clock pulse delay*/
-    CddFsiTx_delayWait((uint32)10U * (hwUnitObj->hwUnitCfg.Prescalar));
+    CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
     CddFsiTx_clearTxModuleReset(baseAddr);
     /* include 5 clock pulse delay*/
-    CddFsiTx_delayWait((uint32)10U * (hwUnitObj->hwUnitCfg.Prescalar));
+    CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
     CddFsiTx_setPrescaler(baseAddr, hwUnitObj->hwUnitCfg.Prescalar);
     CddFsiTx_enableClock(baseAddr);
-    retVal = CddFsiTx_setTxDataLane(baseAddr, CDD_FSI_TX_SINGLE_DATA_LANE);
+    retVal = CddFsiTx_setTxDataLane(baseAddr, (uint16)CDD_FSI_TX_SINGLE_DATA_LANE);
     CddFsiTx_setStartMode(baseAddr, CDD_FSI_TX_SW_START_MODE);
 
     if (retVal == E_OK)
     {
-        CddFsiTx_disableInterrupt(hwUnitObj->hwUnitCfg.baseAddr, CDD_FSI_TX_INT_TYPE);
+        CddFsiTx_disableInterrupt(hwUnitObj->hwUnitCfg.baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
         CddFsiTx_clearAllTxEvents(baseAddr);
 
         if (hwUnitObj->hwUnitCfg.transmitMode == CDD_FSI_TX_INTERRUPT_MODE)
         {
-            (void)CddFsiTx_enableInterrupt(baseAddr, CDD_FSI_TX_INT_TYPE);
+            (void)CddFsiTx_enableInterrupt(baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
         }
 
-#if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
-        Cdd_FsiTx_DmaConfigObj = hwUnitObj;
-#endif
         /* The Transmit buffer pointer keeps at initial position*/
         CddFsiTx_ForceTxBufferPtr(baseAddr, 0);
         CddFsiTx_sendFlushSequence(baseAddr);
         /* include 5 clock pulse delay*/
-        CddFsiTx_delayWait((uint32)10U * (hwUnitObj->hwUnitCfg.Prescalar));
+        CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
         CddFsiTx_stopFlushSequence(baseAddr);
     }
-    return retVal;
+    return ((Std_ReturnType)retVal);
 }
 
 /*
  * Design:
  */
-Std_ReturnType CddFsiTx_hwUnitDeInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
+Std_ReturnType CddFsiTx_hwUnitDeInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
 {
     uint32 baseAddr;
     uint8  retVal = E_OK;
@@ -203,7 +191,7 @@ Std_ReturnType CddFsiTx_hwUnitDeInit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     retVal = CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_EVTMASK);
     if (hwUnitObj->hwUnitCfg.transmitMode == CDD_FSI_TX_INTERRUPT_MODE)
     {
-        CddFsiTx_disableInterrupt(baseAddr, CDD_FSI_TX_INT_TYPE);
+        CddFsiTx_disableInterrupt(baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
     }
 #if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
     CddFsiTx_disableTxDMAEvent(baseAddr);
@@ -248,13 +236,13 @@ Std_ReturnType CddFsiTx_copyConfig(Cdd_FsiTx_DriverObjType *drvObj, const Cdd_Fs
 
 /*  Design:
  *  Requirement(s): SITARAMCU_MCAL-___    */
-Std_ReturnType CddFsiTx_PingTransmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
+Std_ReturnType CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
 {
     uint32         baseAddr;
     Std_ReturnType retVal = E_NOT_OK;
     /* Assign base address */
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
-    retVal   = CddFsiTx_setFrameType(baseAddr, CDD_FSI_TX_DATA_PING_FRAME);
+    retVal   = CddFsiTx_setFrameType(baseAddr, (uint16)CDD_FSI_TX_DATA_PING_FRAME);
 
     CddFsiTx_enableTxPingTimer(baseAddr, hwUnitObj->hwUnitCfg.pingTriggerTimeout, CDD_FSI_TX_PING_TAG0);
 
@@ -289,7 +277,7 @@ Std_ReturnType CddFsiTx_PingTransmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     }
     return retVal;
 }
-Std_ReturnType CddFsiTx_BufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+Std_ReturnType CddFsiTx_BufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
                                    P2VAR(uint16, AUTOMATIC, CDD_FSI_TX_APPL_DATA) databuffer, uint32 userData,
                                    uint32 txDatalength)
 {
@@ -314,7 +302,7 @@ Std_ReturnType CddFsiTx_BufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj,
     else
     {
         (void)userData;
-        retVal = CddFsiTx_dataBufferLoad(baseAddr, databuffer, Cdd_FsiTx_wordLength);
+        retVal = CddFsiTx_dataBufferLoad(baseAddr, databuffer, (uint8)Cdd_FsiTx_wordLength);
     }
     return (retVal);
 }
@@ -323,7 +311,7 @@ Std_ReturnType CddFsiTx_BufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj,
  *  Requirement(s): SITARAMCU_MCAL-___    */
 
 #if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
-Std_ReturnType CddFsiTx_DMABufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_FsiTx_DataBufferType *databuffer,
+Std_ReturnType CddFsiTx_DMABufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_FsiTx_DataBufferType *databuffer,
                                       uint32 userData, uint32 TxDatalength)
 {
     uint32         baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
@@ -370,18 +358,18 @@ Std_ReturnType CddFsiTx_DMABufferLoad(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_Fs
 
 /*  Design:
  *  Requirement(s): SITARAMCU_MCAL-___    */
-Std_ReturnType CddFsiTx_Transmit(Cdd_FsiTx_HwUnitObjType *hwUnitObj, uint8 UserData,
+Std_ReturnType CddFsiTx_Transmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj, uint8 UserData,
                                  Cdd_FsiTx_DataLengthType txDataLength)
 {
     uint32         baseAddr = 0;
     Std_ReturnType retVal   = E_OK;
     /* Assign base address */
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
-    (void)CddFsiTx_setFrameType(baseAddr, CDD_FSI_TX_DATA_N_WORD);
-    retVal = CddFsiTx_setTxSoftwareFrameSize(baseAddr, txDataLength);
+    (void)CddFsiTx_setFrameType(baseAddr, (uint16)CDD_FSI_TX_DATA_N_WORD);
+    retVal = CddFsiTx_setTxSoftwareFrameSize(baseAddr, (uint16)txDataLength);
 #if (STD_OFF == CDD_FSI_TX_DMA_ENABLE)
-    retVal = CddFsiTx_setTxUserDefinedData(baseAddr, UserData);
-    CddFsiTx_setTxFrameTag(baseAddr, Cdd_FsiTx_frametag);
+    retVal += CddFsiTx_setTxUserDefinedData(baseAddr, UserData);
+    CddFsiTx_setTxFrameTag(baseAddr, (uint8)Cdd_FsiTx_frametag);
 #endif
     /* Check whether the trigger source is SW and initiate transmission*/
     if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
@@ -406,7 +394,7 @@ void CddFsiTx_IrqTx(Cdd_FsiTx_HwUnitObjType *hwUnitObj, CddFsiTx_McalIntNumberTy
         Cdd_FsiTx_DrvObj.CddFsiTxNotificationPtr(hwUnitObj->hwUnitCfg.hwId);
         (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_FRAME_DONE);
     }
-    if ((EvtFlag & CDD_FSI_TX_BUFFER_UNDERRUN) >> CDD_FSI_TX_BUFFER_UNDERRUN_SHIFT == 1U)
+    if (((EvtFlag & CDD_FSI_TX_BUFFER_UNDERRUN) >> CDD_FSI_TX_BUFFER_UNDERRUN_SHIFT) == 1U)
     {
         /*call DEM Error*/
 #ifdef CDD_FSI_TX_E_BUFFER_UNDERRUN
@@ -415,7 +403,7 @@ void CddFsiTx_IrqTx(Cdd_FsiTx_HwUnitObjType *hwUnitObj, CddFsiTx_McalIntNumberTy
         Cdd_FsiTx_DrvObj.CddFsiTxUnderRunNotificationPtr(hwUnitObj->hwUnitCfg.hwId);
         (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_BUFFER_UNDERRUN);
     }
-    if ((EvtFlag & CDD_FSI_TX_BUFFER_OVERRUN) >> CDD_FSI_TX_BUFFER_OVERRUN_SHIFT == 1U)
+    if (((EvtFlag & CDD_FSI_TX_BUFFER_OVERRUN) >> CDD_FSI_TX_BUFFER_OVERRUN_SHIFT) == 1U)
     {
 #ifdef CDD_FSI_TX_E_BUFFER_OVERRUN
         (void)Dem_SetEventStatus(CDD_FSI_TX_E_BUFFER_OVERRUN, DEM_EVENT_STATUS_FAILED);
@@ -487,13 +475,13 @@ void CddFsiTx_resetDrvObj(Cdd_FsiTx_DriverObjType *drvObj)
  *  \param[out]  void
  *  \context
  ******************************************************************************/
-static Std_ReturnType CddFsiTxDma_ModuleChannelConfigure(Cdd_FsiTx_HwUnitObjType *hwUnitObj, const uint16 *tx_buffrPtr,
-                                                         uint16                    table_size,
+static Std_ReturnType CddFsiTxDma_ModuleChannelConfigure(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+                                                         const uint16 *tx_buffrPtr, uint16 table_size,
                                                          Cdd_FsiTx_DataBufferType *srcaddr_databuffer, uint8 bCnt,
                                                          uint8 cCount, uint32 mode, const uint16 *tx_tag_udataPtr,
                                                          uint32 *tag_udata)
 {
-    bool               result = FALSE;
+    boolean            result = FALSE;
     uint32             opt0, opt1, chainOption;
     Cdd_Dma_ParamEntry edmaParam0, edmaParam1;
     opt0 = (CDD_EDMA_OPT_SYNCDIM_MASK);
@@ -569,13 +557,13 @@ void CddFsiTx_MainFunction(Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     return;
 }
 
-Std_ReturnType CddFsiTx_ClearResetTxSubModules(Cdd_FsiTx_HwUnitObjType     *hwUnitObj,
-                                               Cdd_FsiTx_ResetSubModuleType subModule)
+Std_ReturnType CddFsiTx_ClearResetTxSubModules(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+                                               Cdd_FsiTx_ResetSubModuleType   subModule)
 {
     uint16 regVal;
     uint16 regBase;
     uint8  retVal   = E_OK;
-    uint16 baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
+    uint32 baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
 
     switch (subModule)
     {
@@ -587,21 +575,21 @@ Std_ReturnType CddFsiTx_ClearResetTxSubModules(Cdd_FsiTx_HwUnitObjType     *hwUn
             regVal = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL);
             regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_CORE_RST_MASK)) |
                      (CDD_FSI_TX_CTRL_REG_KEY << CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_KEY_SHIFT);
-            regBase = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL;
+            regBase = baseAddr + CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL;
             HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_CLOCK_RESET:
-            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL));
+            regVal   = HW_RD_REG16((baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL));
             regVal  &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_CLK_RST_MASK);
-            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL;
+            regBase  = (uint16)(baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL);
             HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_PING_TIMEOUT_CNT_RESET:
-            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1));
+            regVal   = HW_RD_REG16((baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1));
             regVal  &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1_CNT_RST_MASK);
-            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1;
+            regBase  = (uint16)(baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1);
             HW_WR_REG16(regBase, regVal);
             break;
 
@@ -612,12 +600,13 @@ Std_ReturnType CddFsiTx_ClearResetTxSubModules(Cdd_FsiTx_HwUnitObjType     *hwUn
     return retVal;
 }
 /*****************************************************/
-Std_ReturnType CddFsiTx_ResetTxSubModules(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cdd_FsiTx_ResetSubModuleType SubModule)
+Std_ReturnType CddFsiTx_ResetTxSubModules(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
+                                          Cdd_FsiTx_ResetSubModuleType   SubModule)
 {
     uint16 regVal;
     uint16 regBase;
     uint8  retVal   = E_OK;
-    uint16 baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
+    uint32 baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
 
     switch (SubModule)
     {
@@ -628,21 +617,21 @@ Std_ReturnType CddFsiTx_ResetTxSubModules(Cdd_FsiTx_HwUnitObjType *hwUnitObj, Cd
         case CDD_FSI_TX_MAIN_CORE_RESET:
             regVal = (uint16)CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_CORE_RST_MASK |
                      (CDD_FSI_TX_CTRL_REG_KEY << CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL_KEY_SHIFT);
-            regBase = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL;
+            regBase = baseAddr + CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL;
             HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_CLOCK_RESET:
-            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL));
+            regVal   = HW_RD_REG16((baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL));
             regVal  |= CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL_CLK_RST_MASK;
-            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL;
+            regBase  = (uint16)(baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL);
             HW_WR_REG16(regBase, regVal);
             break;
 
         case CDD_FSI_TX_PING_TIMEOUT_CNT_RESET:
-            regVal   = HW_RD_REG16((baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1));
+            regVal   = HW_RD_REG16((baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1));
             regVal  |= CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1_CNT_RST_MASK;
-            regBase  = baseAddr + (uint16)CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1;
+            regBase  = (uint16)baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1;
             HW_WR_REG16(regBase, regVal);
             break;
 

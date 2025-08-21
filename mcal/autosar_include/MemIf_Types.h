@@ -50,7 +50,7 @@
 /**<
  *  @brief  MemIf Module Status Types.
  */
-typedef enum MemIf_StatusType {
+typedef enum {
     MEMIF_UNINIT = 0U,
     /**< Module/Device Driver has not been initialized yet */
     MEMIF_IDLE,
@@ -64,7 +64,7 @@ typedef enum MemIf_StatusType {
 /**<
  *  @brief  MemIf Mode Types.
  */
-typedef enum MemIf_ModeType {
+typedef enum {
     MEMIF_MODE_SLOW = 0U,
     /**< Module/Device Driver are working in slow mode */
     MEMIF_MODE_FAST,
@@ -74,7 +74,7 @@ typedef enum MemIf_ModeType {
 /**<
  *  @brief  MemIf Job Results Types.
  */
-typedef enum MemIf_JobResultType {
+typedef enum {
     MEMIF_JOB_OK = 0U,
     /**< The job has been finished successfully */
     MEMIF_JOB_FAILED,

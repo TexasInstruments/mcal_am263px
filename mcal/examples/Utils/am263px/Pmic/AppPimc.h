@@ -35,7 +35,7 @@ extern "C" {
 #define CONFIG_MCSPI_NUM_DMA_INSTANCES     (0U)
 #define CONFIG_MCSPI0_NUM_CH               (1U)
 #define CSLR_R5FSS0_CORE0_INTR_MCSPI1_INTR 79
-#define CSL_MCSPI1_U_BASE                  (0x52201000ul)
+#define CSL_MCSPI1_U_BASE                  (0x52201000UL)
 
 int32_t pmic_test(void);
 

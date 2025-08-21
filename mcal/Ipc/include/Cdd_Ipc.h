@@ -49,12 +49,12 @@
 /* ========================================================================== */
 
 #include "Std_Types.h"
+#include "Cdd_Ipc_Cfg.h"
 #include "ipc_notify_lld_utils.h"
 #include "ipc_notify_v1_lld.h"
 #include "ipc_notify_v1_cfg_lld.h"
 #include "ipc_rpmsg_lld.h"
 #include "SchM_Cdd_Ipc.h"
-#include "Cdd_Ipc_Cfg.h"
 
 #ifdef __cplusplus
 extern "C" {

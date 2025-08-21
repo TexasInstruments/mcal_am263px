@@ -144,5 +144,47 @@ IpcNotify_MailboxConfig* IpcNotifyCfg_getMailboxConfig(uint32 selfCoreId, uint32
     return &gIpcNotifyMailboxConfig[selfCoreId][remoteCoreId];
 }
 
+sint32 IpcNotify_trigInterrupt(uint32 selfCoreId, uint32 remoteCoreId, uint32 mailboxBaseAddr, uint32 intrBitPos)
+{
+    uint32           pendingIntr, counter = 0U;
+    volatile uint32* addr   = (uint32*)mailboxBaseAddr;
+    sint32           status = MCAL_SystemP_SUCCESS;
+
+    /* Keep polling for READ_REQ register bit of Receiver */
+    IpcNotify_MailboxConfig* pReceiverMailboxConfig;
+    pReceiverMailboxConfig = &gIpcNotifyMailboxConfig[remoteCoreId][selfCoreId];
+    do
+    {
+        counter++;
+        /* trigger interrupt to other core */
+        *addr       = ((uint32)1U << intrBitPos);
+        pendingIntr = IpcNotify_mailboxGetPendingIntr(pReceiverMailboxConfig->readReqMailboxBaseAddr);
+        pendingIntr = (pendingIntr >> (pReceiverMailboxConfig->intrBitPos)) &
+                      (0x1U); /* Get the READ_REQ reg. value w.r.t Core bit pos. */
+    } while ((pendingIntr != 1U) && (counter < IPC_NOTIFY_LOOP_COUNTER_MAX));
+    if (counter >= IPC_NOTIFY_LOOP_COUNTER_MAX)
+    {
+        status = MCAL_SystemP_TIMEOUT;
+    }
+
+    return status;
+}
+
+void IpcNotify_wait(void)
+{
+    volatile uint32 loopCounter = 0U;
+
+    /* Processor sending will trigger read request multiple times and ensure
+     * that read request is reached to receiving processor. The delay implemented
+     * here is not to clear the interrupt while sending processor is reading back
+     * and verifying the interrupt is triggered at receving Processor
+     */
+    for (loopCounter = 0U; loopCounter < IPC_NOTIFY_WAIT_CYCLES; loopCounter += 1U)
+    {
+        ;
+    }
+    return;
+}
+
 #define CDD_IPC_STOP_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
