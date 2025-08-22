@@ -210,8 +210,8 @@ static Std_ReturnType I2c_appEepromRead(uint32 offset, uint8 *pRdBuf, uint16 siz
     }
     txBuf[0U] = (uint8)(offset >> 8U);
     txBuf[1U] = (uint8)offset;
-    // TODO: Restart mode not working in interrupt mode. Enable write/read with restart after the fix
-    retVal = I2c_writeRead(I2C_APP_EEPROM_HW_UNIT, deviceAddress, &txBuf[0U], pRdBuf, I2C_APP_EEPROM_ADDR_SIZE, size);
+    retVal =
+        I2c_writeReadRestart(I2C_APP_EEPROM_HW_UNIT, deviceAddress, &txBuf[0U], pRdBuf, I2C_APP_EEPROM_ADDR_SIZE, size);
 
     return retVal;
 }

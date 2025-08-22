@@ -17,8 +17,8 @@ title: IpcNotify_SwQueue
 
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
-|  uint32 | rdIdx |  |
-|  uint32 | wrIdx |  |
+|  volatile uint32 | rdIdx |  |
+|  volatile uint32 | wrIdx |  |
 |  uint32[(4U)] | fifo |  |
 
 

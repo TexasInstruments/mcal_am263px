@@ -96,12 +96,58 @@ Std_ReturnType Cdd_I2c_StartSeqAsync(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqO
 
 Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj)
 {
-    Std_ReturnType retVal;
+    Std_ReturnType     retVal      = E_OK;
+    Cdd_I2c_ChObjType *chObjActive = NULL_PTR;
 
-    // TODO
-    (void)drvObj;
-    (void)seqObj;
-    retVal = E_NOT_OK;
+    /* Check all channels in the sequence and cancel them */
+    for (uint32 chIdx = 0U; chIdx < seqObj->seqCfg->chPerSeq; chIdx++)
+    {
+        Cdd_I2c_ChannelType    chId;
+        Cdd_I2c_ChObjType     *chObj;
+        Cdd_I2c_HwUnitObjType *hwUnitObj;
+
+        chId      = seqObj->seqCfg->chList[chIdx];
+        chObj     = &drvObj->chObj[chId];
+        hwUnitObj = chObj->hwUnitObj;
+
+        /* Check if the channel is in progress */
+        if (chObj == hwUnitObj->curChObj)
+        {
+            /* Stop the on going transfer */
+#if (STD_ON == CDD_I2C_POLLING_MODE)
+            Cdd_I2c_HwCancelPolling(chObj);
+#else
+            Cdd_I2c_HwCancelIntr(chObj);
+#endif
+            hwUnitObj->curChObj = NULL_PTR;
+            chObjActive         = chObj;
+        }
+        else
+        {
+            /* Channel is not active. Just remove from queue */
+            Cdd_I2c_UtilsUnLinkNodePri(&hwUnitObj->llobj, &chObj->nodeObj);
+        }
+
+        /* Set channel results */
+        chObj->chResult = CDD_I2C_CH_RESULT_OK;
+        chObj->state    = CDD_I2C_STATE_COMPLETE;
+    }
+
+    /* Set sequence status */
+    seqObj->seqResult     = CDD_I2C_SEQ_CANCELLED;
+    seqObj->seqErrorCode  = CDD_I2C_E_NO_ERROR;
+    seqObj->numChsPending = 0U;
+
+    /*
+     * Check if any active channel was cancelled and if so consume any pending channels
+     * Note: This step is done after all the channels in the sequence is cancelled. Otherwise
+     * we will end-up scheduling the subsequent channels in the same sequence.
+     */
+    if (chObjActive != NULL_PTR)
+    {
+        Cdd_I2c_HwUnitObjType *hwUnitObj = chObjActive->hwUnitObj;
+        Cdd_I2c_CheckAndScheduleHw(drvObj, hwUnitObj);
+    }
 
     return retVal;
 }
@@ -345,7 +391,7 @@ static void Cdd_I2c_CheckAndScheduleHw(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_Hw
 
         /* Some channel pending - schedule it */
         nextChObj = (Cdd_I2c_ChObjType *)headNodeObj->params.data;
-        Cdd_I2c_UtilsUnLinkNodePri((&(hwUnitObj->llobj)), headNodeObj);
+        Cdd_I2c_UtilsUnLinkNodePri(&hwUnitObj->llobj, headNodeObj);
 
         hwUnitObj->curChObj     = nextChObj;
         hwUnitObj->hwUnitStatus = CDD_I2C_HW_UNIT_BUSY;

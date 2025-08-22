@@ -65,6 +65,9 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwTxIntr(Cdd_I2c_ChObjType *chObj);
 Cdd_I2c_ChannelResultType Cdd_I2c_HwRxIntr(Cdd_I2c_ChObjType *chObj);
 Cdd_I2c_ChannelResultType Cdd_I2c_HwTxRxIntrContinue(Cdd_I2c_ChObjType *chObj);
 
+void Cdd_I2c_HwCancelPolling(Cdd_I2c_ChObjType *chObj);
+void Cdd_I2c_HwCancelIntr(Cdd_I2c_ChObjType *chObj);
+
 void Cdd_I2c_HwDisableAllIntr(uint32 baseAddr);
 void Cdd_I2c_HwClearAllStatus(uint32 baseAddr);
 

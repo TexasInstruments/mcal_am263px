@@ -60,9 +60,9 @@ extern "C" {
  */
 typedef struct
 {
-    uint32 rdIdx;
-    uint32 wrIdx;
-    uint32 fifo[MAILBOX_MAX_MSGS_IN_SW_FIFO];
+    volatile uint32 rdIdx;
+    volatile uint32 wrIdx;
+    uint32          fifo[MAILBOX_MAX_MSGS_IN_SW_FIFO];
 
 } IpcNotify_SwQueue;
 extern sint32        IpcNotify_trigInterrupt(uint32 selfCoreId, uint32 remoteCoreId, uint32 mailboxBaseAddr,
@@ -76,8 +76,8 @@ static inline sint32 IpcNotify_mailboxReadSwQ(IpcNotify_SwQueue *swQ, uint32 *va
 {
     sint32 status = MCAL_SystemP_FAILURE;
 
-    volatile uint32 rdIdx = swQ->rdIdx;
-    volatile uint32 wrIdx = swQ->wrIdx;
+    uint32 rdIdx = swQ->rdIdx;
+    uint32 wrIdx = swQ->wrIdx;
 
     if ((rdIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO) && (wrIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO))
     {
@@ -105,8 +105,8 @@ static inline sint32 IpcNotify_mailboxWrite(uint32 selfCoreId, uint32 remoteCore
 {
     sint32 status = MCAL_SystemP_FAILURE;
 
-    volatile uint32 rdIdx = swQ->rdIdx;
-    volatile uint32 wrIdx = swQ->wrIdx;
+    uint32 rdIdx = swQ->rdIdx;
+    uint32 wrIdx = swQ->wrIdx;
 
     if ((rdIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO) && (wrIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO))
     {

@@ -69,6 +69,8 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Cdd_Ipc_App_Startup.h"
+#include "sys_pmu.h"
+
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -100,6 +102,7 @@ void Cdd_Ipc_App_Startup(void)
     AppUtils_defaultInit();
     AppUtils_sectionInit();
     AppUtils_TimerInit();
+    Mcal_pmuInit();
 }
 
 #if (STD_OFF == MCU_VARIANT_PRE_COMPILE)
