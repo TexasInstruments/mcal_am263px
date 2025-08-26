@@ -1148,8 +1148,9 @@ uint8 Fls_norBlankCheck(uint32 actualChunkSize)
     uint32 addr         = Fls_DrvObj.flashAddr;
     uint32 len          = actualChunkSize;
     uint8 *readData_buf = Fls_BlankCheckRxDataBuf;
+    uint8  max_len      = sizeof(Fls_BlankCheckRxDataBuf) / sizeof(Fls_BlankCheckRxDataBuf[0]);
 
-    if ((Fls_DrvObj.spiHandle != NULL_PTR) && (actualChunkSize <= (sizeof(Fls_BlankCheckRxDataBuf))))
+    if ((Fls_DrvObj.spiHandle != NULL_PTR) && (len <= max_len))
     {
         retVal = Nor_OspiRead(Fls_DrvObj.spiHandle, addr, (uint8 *)readData_buf, len);
         if ((uint8)E_OK == retVal)
@@ -1489,8 +1490,9 @@ Std_ReturnType Fls_norCompare(uint32 actualChunkSize)
     uint32 len          = actualChunkSize;
     uint8 *readData_buf = Fls_CompareRxDataBuf;
     uint8 *expData_Buf  = Fls_DrvObj.ramAddr;
+    uint8  max_len      = sizeof(Fls_CompareRxDataBuf) / sizeof(Fls_CompareRxDataBuf[0]);
 
-    if ((Fls_DrvObj.spiHandle != NULL_PTR) && (actualChunkSize <= (sizeof(Fls_CompareRxDataBuf))))
+    if ((Fls_DrvObj.spiHandle != NULL_PTR) && (len <= max_len))
     {
         retVal = Nor_OspiRead(Fls_DrvObj.spiHandle, addr, (uint8 *)readData_buf, len);
         if ((Std_ReturnType)E_OK == retVal)

@@ -60,15 +60,15 @@ extern "C" {
  */
 typedef enum Mcal_CacheP_Type_
 {
-    Mcal_CacheP_TYPE_L1P  = (0x0001u),                                     /**< L1 program cache */
-    Mcal_CacheP_TYPE_L1D  = (0x0002u),                                     /**< L1 data cache */
-    Mcal_CacheP_TYPE_L2P  = (0x0004u),                                     /**< L2 program cache */
-    Mcal_CacheP_TYPE_L2D  = (0x0008u),                                     /**< L2 data cache */
-    Mcal_CacheP_TYPE_L1   = (Mcal_CacheP_TYPE_L1P | Mcal_CacheP_TYPE_L1D), /**< All L1 cache's */
-    Mcal_CacheP_TYPE_L2   = (Mcal_CacheP_TYPE_L2P | Mcal_CacheP_TYPE_L2D), /**< All L2 cache's */
-    Mcal_CacheP_TYPE_ALLP = (Mcal_CacheP_TYPE_L1P | Mcal_CacheP_TYPE_L2P), /**< All program cache's */
-    Mcal_CacheP_TYPE_ALLD = (Mcal_CacheP_TYPE_L1D | Mcal_CacheP_TYPE_L2D), /**< All data cache's */
-    Mcal_CacheP_TYPE_ALL  = (Mcal_CacheP_TYPE_L1 | Mcal_CacheP_TYPE_L2)    /**< All cache's */
+    Mcal_CacheP_TYPE_L1P  = (0x0001u),                                                     /**< L1 program cache */
+    Mcal_CacheP_TYPE_L1D  = (0x0002u),                                                     /**< L1 data cache */
+    Mcal_CacheP_TYPE_L2P  = (0x0004u),                                                     /**< L2 program cache */
+    Mcal_CacheP_TYPE_L2D  = (0x0008u),                                                     /**< L2 data cache */
+    Mcal_CacheP_TYPE_L1   = ((uint32)Mcal_CacheP_TYPE_L1P | (uint32)Mcal_CacheP_TYPE_L1D), /**< All L1 cache's */
+    Mcal_CacheP_TYPE_L2   = ((uint32)Mcal_CacheP_TYPE_L2P | (uint32)Mcal_CacheP_TYPE_L2D), /**< All L2 cache's */
+    Mcal_CacheP_TYPE_ALLP = ((uint32)Mcal_CacheP_TYPE_L1P | (uint32)Mcal_CacheP_TYPE_L2P), /**< All program cache's */
+    Mcal_CacheP_TYPE_ALLD = ((uint32)Mcal_CacheP_TYPE_L1D | (uint32)Mcal_CacheP_TYPE_L2D), /**< All data cache's */
+    Mcal_CacheP_TYPE_ALL  = ((uint32)Mcal_CacheP_TYPE_L1 | (uint32)Mcal_CacheP_TYPE_L2)    /**< All cache's */
 } Mcal_CacheP_Type;
 
 /**
@@ -176,7 +176,7 @@ void Mcal_CacheP_wbInv(void *addr, uint32 size, uint32 type);
  * \brief Initialize Cache sub-system, called by SysConfig, not to be called by end users
  *
  */
-void Mcal_CacheP_init();
+void Mcal_CacheP_init(void);
 
 /** @} */
 

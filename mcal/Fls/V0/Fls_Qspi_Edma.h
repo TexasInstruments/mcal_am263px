@@ -97,7 +97,7 @@
 /**
  *  \brief  This function initializes the FLS dma channel module
  */
-sint32 Fls_Qspi_dmaChInit(Fls_DriverObjType Fls_DrvObj);
+sint32 Fls_Qspi_dmaChInit(Fls_DriverObjType DrvObj);
 /**
  *  \brief  This function enables dma to start transmission for FLS READ
  */

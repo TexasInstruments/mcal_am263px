@@ -1231,9 +1231,15 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
 {
     Std_ReturnType retVal = E_OK;
     uint32         cmd, data, addr, dtr;
-    dtr = 0;
+    dtr                          = 0;
+    Fls_OSPI_Modes protocol_mode = FLS_OSPI_RX_1S_1S_1S;
 
-    switch ((Fls_OSPI_Modes)protocol) /* Explicitly cast from uint32 to Fls_OSPI_Modes for MISRA compliance */
+    if ((protocol >= (uint32)FLS_OSPI_RX_1S_1S_1S) && (protocol <= (uint32)FLS_OSPI_RX_8D_8D_8D))
+    {
+        protocol_mode = (Fls_OSPI_Modes)protocol;
+    }
+
+    switch (protocol_mode)
     {
         case FLS_OSPI_RX_1S_1S_1S:
             /*Set cmd, address, data and dtr*/
@@ -1331,6 +1337,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
                                     fls_config_sfdp->protos[FLS_OSPI_RX_1S_1S_1S].cmdWr);
             break;
     }
+
     Fls_Ospi_SetProtocolCmds(handle, cmd, addr, data, dtr);
 
     return retVal;

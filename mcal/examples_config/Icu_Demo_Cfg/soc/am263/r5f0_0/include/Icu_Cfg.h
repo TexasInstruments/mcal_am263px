@@ -1,4 +1,3 @@
-#include "Std_Types.h"
 /*
 *
 * Copyright (c) 2022 Texas Instruments Incorporated
@@ -94,6 +93,7 @@ extern "C" {
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
+#include "Std_Types.h"
 #include "Os.h"
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS

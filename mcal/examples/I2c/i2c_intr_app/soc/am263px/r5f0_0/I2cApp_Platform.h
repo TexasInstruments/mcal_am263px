@@ -35,8 +35,7 @@ extern "C" {
 /* ========================================================================== */
 
 /* Flag to indicate if various I2C slaves are present in the board */
-// TODO: Restart mode not working in interrupt mode. Enable temp sensor after the fix
-#define I2C_APP_TMP_PRESENT      (STD_OFF)
+#define I2C_APP_TMP_PRESENT      (STD_ON)
 #define I2C_APP_TMP_HW_UNIT      (CDD_I2C_HW_UNIT_2)
 #define I2C_APP_TMP_ADDRESS      (0x4CU)
 #define I2C_APP_EEPROM_PRESENT   (STD_ON)

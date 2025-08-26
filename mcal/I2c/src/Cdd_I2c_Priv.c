@@ -97,7 +97,7 @@ Std_ReturnType Cdd_I2c_StartSeqAsync(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqO
 Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj)
 {
     Std_ReturnType     retVal      = E_OK;
-    Cdd_I2c_ChObjType *chObjActive = NULL_PTR;
+    Cdd_I2c_ChObjType *chObjActive = (Cdd_I2c_ChObjType *)NULL_PTR;
 
     /* Check all channels in the sequence and cancel them */
     for (uint32 chIdx = 0U; chIdx < seqObj->seqCfg->chPerSeq; chIdx++)
@@ -119,7 +119,7 @@ Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjTy
 #else
             Cdd_I2c_HwCancelIntr(chObj);
 #endif
-            hwUnitObj->curChObj = NULL_PTR;
+            hwUnitObj->curChObj = (Cdd_I2c_ChObjType *)NULL_PTR;
             chObjActive         = chObj;
         }
         else

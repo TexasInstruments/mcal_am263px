@@ -65,6 +65,7 @@ static Std_ReturnType I2c_appEepromRead(uint32 offset, uint8 *pRdBuf, uint16 siz
 static Std_ReturnType I2c_appEepromPageWrite(uint32 offset, const uint8 *pWrBuf, uint16 size);
 #endif
 #if (STD_ON == I2C_APP_TMP_PRESENT)
+static boolean        I2c_appTempSensorIsValidOffset(uint16 offset);
 static Std_ReturnType I2c_appTempSensorTest(void);
 #endif
 
@@ -247,6 +248,36 @@ static Std_ReturnType I2c_appEepromPageWrite(uint32 offset, const uint8 *pWrBuf,
 #endif
 
 #if (STD_ON == I2C_APP_TMP_PRESENT)
+/* All offsets of temp sensor is not valid for read/write.
+ * For invalid offsets, the temp sensor NACKs any operation */
+static boolean I2c_appTempSensorIsValidOffset(uint16 offset)
+{
+    boolean isValid = FALSE;
+
+    if ((offset >= 0x00U) && (offset <= 0x08U))
+    {
+        isValid = TRUE;
+    }
+    if ((offset >= 0x10U) && (offset <= 0x1AU))
+    {
+        isValid = TRUE;
+    }
+    if ((offset >= 0x20U) && (offset <= 0x22U))
+    {
+        isValid = TRUE;
+    }
+    if ((offset >= 0x30U) && (offset <= 0x37U))
+    {
+        isValid = TRUE;
+    }
+    if ((offset >= 0xFEU) && (offset <= 0xFFU))
+    {
+        isValid = TRUE;
+    }
+
+    return isValid;
+}
+
 static Std_ReturnType I2c_appTempSensorTest(void)
 {
     Std_ReturnType retVal = E_OK;
@@ -259,20 +290,25 @@ static Std_ReturnType I2c_appTempSensorTest(void)
     /* Read all the register and store */
     for (uint16 offset = 0U; offset < I2C_APP_TMP_RD_BUF_SIZE; offset++)
     {
-        txBuf[0U]      = (uint8)offset;
-        rxBuf[offset]  = 0xDEU;
-        retVal        += I2c_write(I2C_APP_TMP_HW_UNIT, I2C_APP_TMP_ADDRESS, &txBuf[0U], 1U);
-        retVal        += I2c_read(I2C_APP_TMP_HW_UNIT, I2C_APP_TMP_ADDRESS, &rxBuf[offset], 1U);
+        txBuf[0U]     = (uint8)offset;
+        rxBuf[offset] = 0xDEU;
+        if (I2c_appTempSensorIsValidOffset(offset) == TRUE)
+        {
+            retVal += I2c_write(I2C_APP_TMP_HW_UNIT, I2C_APP_TMP_ADDRESS, &txBuf[0U], 1U);
+            retVal += I2c_read(I2C_APP_TMP_HW_UNIT, I2C_APP_TMP_ADDRESS, &rxBuf[offset], 1U);
+        }
     }
 
     /* Check correctness of data for every iteration */
     if (rxBuf[I2C_APP_TMP_REG_MANUFACTURER_ID] != I2C_APP_TMP_REG_MANUFACTURER_ID_EXPECTED)
     {
         GT_0trace(I2C_APP_TRACE_MASK, GT_ERR, " Temperature sensor manufacturer ID mismatch!!\n\r");
+        retVal = E_NOT_OK;
     }
     if (rxBuf[I2C_APP_TMP_REG_DEVICE_ID] != I2C_APP_TMP_REG_DEVICE_ID_EXPECTED)
     {
         GT_0trace(I2C_APP_TRACE_MASK, GT_ERR, " Temperature sensor device ID mismatch!!\n\r");
+        retVal = E_NOT_OK;
     }
 
     /* Test with write+read API with restart */
@@ -282,17 +318,23 @@ static Std_ReturnType I2c_appTempSensorTest(void)
     {
         txBuf[0U]     = (uint8)offset;
         rxBuf[offset] = 0xDEU;
-        retVal += I2c_writeReadRestart(I2C_APP_TMP_HW_UNIT, I2C_APP_TMP_ADDRESS, &txBuf[0U], &rxBuf[offset], 1U, 1U);
+        if (I2c_appTempSensorIsValidOffset(offset) == TRUE)
+        {
+            retVal +=
+                I2c_writeReadRestart(I2C_APP_TMP_HW_UNIT, I2C_APP_TMP_ADDRESS, &txBuf[0U], &rxBuf[offset], 1U, 1U);
+        }
     }
 
     /* Check correctness of data for every iteration */
     if (rxBuf[I2C_APP_TMP_REG_MANUFACTURER_ID] != I2C_APP_TMP_REG_MANUFACTURER_ID_EXPECTED)
     {
         GT_0trace(I2C_APP_TRACE_MASK, GT_ERR, " Temperature sensor manufacturer ID mismatch!!\n\r");
+        retVal = E_NOT_OK;
     }
     if (rxBuf[I2C_APP_TMP_REG_DEVICE_ID] != I2C_APP_TMP_REG_DEVICE_ID_EXPECTED)
     {
         GT_0trace(I2C_APP_TRACE_MASK, GT_ERR, " Temperature sensor device ID mismatch!!\n\r");
+        retVal = E_NOT_OK;
     }
 
     return retVal;
