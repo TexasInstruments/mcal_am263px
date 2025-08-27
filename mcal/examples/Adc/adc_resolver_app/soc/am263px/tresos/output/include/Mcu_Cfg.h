@@ -629,7 +629,7 @@ typedef struct Mcu_ConfigType_s
 
 #define MCU_CSL_CONTROLSS_CTRL_EPWM_STATICXBAR_SEL0                          (0x00000004U)
 
-#define MCU_CSL_TOP_RCM_U_BASE                                                   (0x53200000UL)
+#define MCU_CSL_TOP_RCM_U_BASE                                               (0x53200000UL)
 #define MCU_CSL_TOP_CTRL_U_BASE                                              (0x50D80000UL)
 #define MCU_CSL_CONTROLSS_CTRL_U_BASE                                        (0x502F0000UL)
 #define MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK0                                   (0x00001008U)
