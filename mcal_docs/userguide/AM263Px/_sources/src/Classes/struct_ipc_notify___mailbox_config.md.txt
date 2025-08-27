@@ -1,0 +1,29 @@
+---
+orphan: true
+---
+
+---
+title: IpcNotify_MailboxConfig
+summary: This structure describes the mailbox information to send a message from core A to core B. 
+
+---
+
+# IpcNotify_MailboxConfig
+
+
+
+This structure describes the mailbox information to send a message from core A to core B. 
+
+
+`#include <ipc_notify_v1_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | writeDoneMailboxBaseAddr |  |
+|  uint32 | readReqMailboxBaseAddr |  |
+|  uint8 | intrBitPos |  |
+|  IpcNotify_SwQueue * | swQ |  |
+
+

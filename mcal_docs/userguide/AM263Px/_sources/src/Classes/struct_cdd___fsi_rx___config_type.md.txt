@@ -1,0 +1,32 @@
+---
+orphan: true
+---
+
+---
+title: Cdd_FsiRx_ConfigType
+summary: CDD FSI RX config structure. 
+
+---
+
+# Cdd_FsiRx_ConfigType
+
+
+
+CDD FSI RX config structure. 
+
+
+`#include <Cdd_FsiRx_Types.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint8 | maxHwUnit |  Maximum number of HW unit Should not be more than CDD_FSI_RX_MAX_NUM_HW_UNIT.  |
+|  [Cdd_FsiRx_BufferNotifyType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_buffernotifytype) | cddFsiRxResetNotification |  callback notification fxn pointer to reset driver  |
+|  [Cdd_FsiRx_BufferNotifyType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_buffernotifytype) | cddFsiRxOverRunNotification |  callback notification fxn pointer for buffer overrun  |
+|  [Cdd_FsiRx_BufferNotifyType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_buffernotifytype) | cddFsiRxUnderRunNotification |  callback notification fxn pointer for buffer underrun  |
+|  [Cdd_FsiRx_BufferNotifyType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_buffernotifytype) | cddFsiRxPingFrameReceivedNotification |  callback notification fxn pointer for ping frame reception  |
+|  [Cdd_FsiRx_BufferNotifyType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_buffernotifytype) | cddFsiRxDataFrameReceivedNotification |  callback notification fxn pointer for data frame reception  |
+|  [CddFsiRx_HwUnitConfigType](../Classes/struct_cdd_fsi_rx___hw_unit_config_type.md)[CDD_FSI_RX_HW_UNIT_CNT] | hwUnitCfg |  Fsi Rx Driver config.  |
+
+

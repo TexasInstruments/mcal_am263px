@@ -1,0 +1,1246 @@
+## CDD_PWM Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|BSW|Basic Software|
+|MCAL|Micro Controller Abstraction Layer|
+|API|Application Programming Interface|
+|PWM|Pulse Width Modulation|
+|DET|Default Error Tracer|
+|PLL |Phase Locked loop|
+|MCU|Micro Controller Unit|
+|CDD|Complex Device Driver|
+|OS|Operating System|
+|SW |Software|
+
+### Introduction
+
+This document describes the functionality, API and configuration of the AUTOSAR BSW CDD module PWM.
+
+| | |
+|------|-------------|
+|**Supported AUTOSAR Release**|4.3.1|
+| **Supported Configuration Variants** | Pre-Compile & Post Build|
+| **Vendor ID**                      |   CDD_PWM_VENDOR_ID (44)|
+| **Module ID**                      |   CDD_PWM_MODULE_ID (255)|
+| **Supported Platform**             |   AM263Px|
+
+
+This document describes the functionality and the API of the CDD_PWM (Complex Device Driver_Pulse Width Modulation) driver for the AM263Px.
+
+### Functional Overview
+
+The CDD PWM driver depends on other modules like DET for error handling, OSEK/AUTOSAR OS for interrupt handling, MCU module for system clock settings and SchM module which is BSW Scheduler provides functions that module CDD PWM calls at begin and end of critical sections.
+
+#### Driver Architecture
+
+The following figure shows where the CDD is located in the AUTOSAR architecture.
+
+```{figure} Assets/images/epwm/epwm_image1.jpeg
+:alt: CDD in AUTOSAR architecture
+:align: center
+
+CDD in AUTOSAR architecture
+```
+
+The AUTOSAR Architecture distinguishes on the highest abstraction level between three software layers Application, Runtime Environment and Basic Software which run on a Microcontroller.
+
+*CDD PWM Driver*: The Cdd_Pwm driver is part of the Complex Device Driver layer (CDD). The driver provides special functions and features with direct access to the microcontroller using specific interrupts and/or complex microcontroller peripherals, external devices to fulfill the special functional and timing requirements.
+
+```{figure} Assets/images/epwm/epwm_image3.jpeg
+:alt: Standard alignment left and right, expressed by high and low priority level
+:align: center
+
+Standard alignment left and right, expressed by high and low priority level
+```
+
+The CDD PWM module generates pulses with variable pulse width, allows the selection of the duty cycle and the signal period time and offers services to,
+
+1. Start output of a PWM signal.
+
+2. Stop output of a PWM signal.
+
+3. Set parameters of a PWM channel’s waveform.
+
+4. Set compare value for Events.
+
+5. Enable/disable notifications.
+
+6. Allows the selection of duty cycle and signal period time.
+
+#### Initialization
+
+The driver CDD_PWM is initialized by calling Cdd_Pwm_Init() with a pointer to a configuration as parameter. To re-initialize call Cdd_Pwm_DeInit() first and then Cdd_Pwm_Init() with a different configuration.
+
+#### States
+
+The below table represents the various states of CDD PWM Channel  
+
+|States|Module state|
+|-----|------|
+|CDD_PWM driver Status uninitialized|CDD_PWM_STATUS_UNINIT|
+|CDD_PWM driver Status Initialized|CDD_PWM_STATUS_INIT|
+|CDD_PWM driver Status stopped|CDD_PWM_STATUS_STOPPED|
+|CDD_PWM driver Status running|CDD_PWM_STATUS_RUNNING|
+
+#### CDD PWM Channel 0 and Channel 1 Duty Cycle configuration
+
+For each channel, "CddPwmCounterCompareRef" needs to be configured as shown below:
+
+Channel 0
+
+```{figure} Assets/images/epwm/epwm_image10.JPG
+:align: center
+
+```
+
+Channel 1
+
+```{figure} Assets/images/epwm/epwm_image12.JPG
+:align: center
+
+```
+
+Then, for each CounterCompare, "CompareValue" needs to be selected as shown below:
+
+CounterCompare 0
+
+```{figure} Assets/images/epwm/epwm_image11.JPG
+:align: center
+
+```
+
+CounterCompare 1
+
+```{figure} Assets/images/epwm/epwm_image13.JPG
+:align: center
+
+```
+
+This "CompareValue" parameter is used to set Duty Cycle into register.
+
+CDD PWM supports addition of various submodules which have additional features like,
+
+#### Time-Base submodule
+
+The time-base submodule consists of a dedicated 16-bit counter, along with built-in synchronization logic to allow multiple ePWM modules to work together as a single system.
+
+A clock pre-scaler divides the EPWM clock to the counter and a period register is used to control the frequency and period of the generated waveform.
+
+The period register has a shadow register, which acts like a buffer to allow the register updates to be synchronized with the counter, thus avoiding corruption or spurious operation from the register being modified asynchronously by the software.
+
+The time-base counter operates in three modes: up-count, down-count, and up-down-count.
+
+In up-count mode the time-base counter starts counting from zero and increments until it reaches the period register value, then the time-base counter resets to zero and the count sequence starts again.
+
+In down-count mode the time-base counter starts counting from the period register value and decrements until it reaches zero, then the time-base counter is loaded with the period value and the count sequence starts again.
+
+In up-down-count mode the time-base counter starts counting from zero and increments until it reaches the period register value, then the time base counter decrements until it reaches zero and the count sequence repeats. The up-count and down-count modes are used to generate asymmetrical waveforms, and the up-down-count mode is used to generate symmetrical waveforms.
+
+```{figure} Assets/images/epwm/epwm_tb1.png
+:alt: Time-Base Submodule
+:align: center
+
+Time-Base Submodule
+```
+
+#### Compare submodule
+
+The counter-compare submodule continuously compares the time-base count value to four counter compare registers (CMPA, CMPB, CMPC, and CMPD) and generates four independent compare events (i.e. time-base counter equals a compare register value) which are fed to the action-qualifier and event-trigger submodules.
+
+The counter compare registers are shadowed to prevent corruption or glitches during the active PWM cycle.
+
+Typically CMPA and CMPB are used to control the duty cycle of the generated PWM waveform.
+
+All four compare registers can be used to start an ADC conversion or generate an ePWM interrupt.
+
+For the up-count and down count modes, a counter match occurs only once per cycle, however for the up-down-count mode a counter match occurs twice per cycle since there is a match on the up count and down count.
+
+```{figure} Assets/images/epwm/epwm_cc.png
+:alt: Compare Submodule
+:align: center
+
+Compare Submodule
+```
+
+The counter-compare registers CMPA and CMPB each have an associated shadow register. Shadowing provides a way to keep updates to the registers synchronized with the hardware. When shadowing is used,updates to the active registers only occur at strategic points. This prevents corruption or spurious operation due to the register being asynchronously modified by software. The memory address of the active register and the shadow register is identical.
+
+#### Action Qualifier submodule
+
+The action-qualifier submodule is the key element in the ePWM module which is responsible for constructing and generating the switched PWM waveforms. It utilizes match events from the time-base and counter-compare submodules for performing actions on the EPWMxA and EPWMxB output pins. These first three submodules are the main blocks which are used for generating a basic PWM waveform.
+
+The Action Qualifier actions are setting the pin high, clearing the pin low, toggling the pin, or do nothing to the pin, based independently on count-up and count-down time-base match event.
+
+The match events occur when the time-base counter equals the period register value, the time-base counter is zero, the time-base counter equals CMPA, the time-base counter equals CMPB, or for a Trigger event (T1 and T2) based on a comparator, trip, or sync signal.
+
+Zero and period actions are fixed in time, whereas CMPA and CMPB actions are moveable in time by programming their respective registers. Actions are configured independently for each output using shadowed registers, and any or all events can be configured to generate actions on either output. Also, the output pins can be forced to any action using software.
+
+The next few figures show how the setting of the action qualifier with the compare matches are used to modulate the output pins.
+
+```{figure} Assets/images/epwm/epwm_asym_waveform.png
+:align: center
+
+```
+
+The output pins for EPWMA and EPWMB are completely independent.
+
+In above figure , the EPWMA output is being set high on the zero match and cleared low on the compare A match. The EPWMB output is being set high on the zero match and cleared low on the compare B match.
+
+```{figure} Assets/images/epwm/epwm_asym_waveform_A.png
+:align: center
+
+```
+
+In the above figure , the EPWMA output is being set high on the compare A match and being cleared low on the compare B match, while the EPWMB output is being toggled on the zero match.
+
+```{figure} Assets/images/epwm/epwm_sym_waveform.png
+:align: center
+
+```
+
+In the above figure , the EPWMA output is being set high on the compare A match and being cleared low on the compare B match, while the EPWMB output is being toggled on the zero match.
+
+```{figure} Assets/images/epwm/epwm_sym_waveform_A.png
+:alt: Action Qualifier Waveforms using different output actions on the up-count and down count
+:align: center
+
+Action Qualifier Waveforms using different output actions on the up-count and down count
+```
+
+And finally in the above figure, again using different output actions on the up-count and down count, the EPWMA output is being set high on the compare A up-count match and being cleared low on the compare B down-count match. The EPWMB output is being cleared low on the zero match and being set high on the period match.
+
+**Asymmetric and Symmetric Waveform Generation using the ePWM:**
+
+**Count Mode Timing Waveforms:**
+
+The counter-compare module can generate compare events in all three count modes:
+
+• Up-count mode: used to generate an **Asymmetric PWM** waveform.
+
+• Down-count mode: used to generate an **Asymmetric PWM** waveform.
+
+• Up-down-count mode: used to generate a **Symmetric PWM** PWM waveform.
+
+**PWM Switching Frequency:**
+
+The PWM carrier frequency is determined by the value contained in the time-base period register, and the frequency of the clocking signal. The value needed in the period register is:
+
+  **Asymmetric PWM:**
+
+- Period register = (TPWM/ TTBCLK) - 1
+
+  **Symmetric PWM:**
+
+- Period register = TPWM/ 2(TTBCLK)
+
+    where,
+    TPWM is the period of the PWM events, called as Switching Period.
+    TTBCLK is the period of the time-base clock, called as timer period.
+
+    It is as shown below:
+
+```{figure} Assets/images/epwm/epwm_image9.JPG
+:align: center
+
+```
+
+Note that in the symmetric case, the period value is half that of the asymmetric case. This is because for up/down counting, the actual timer period is twice that specified in the period register (i.e. the timer counts up to the period register value, and then counts back down).
+
+**PWM Resolution:**
+
+The PWM compare function resolution can be computed once the period register value is determined. The largest power of 2 that is less than (or close to) the period value is used for the function resolution. As an example, if asymmetric was 1000, and symmetric was 500, then:
+
+  Asymmetric PWM: approx. 10 bit resolution since 2^10 = 1024, approximately equal to 1000
+
+  Symmetric PWM: approx. 9 bit resolution since 2^9 = 512, approximately equal to 500
+
+**PWM Duty Cycle:**
+
+Duty cycle calculations are used to define where CMP registers are set. These calculations are simple, provided one remembers that the PWM signal is initially inactive during any particular timer period, and becomes active after the (first) compare match occurs. The timer compare register should be loaded with the value as follows:
+
+  Asymmetric PWM: CMPX = (100% - duty cycle)*TBPRD
+
+  Symmetric PWM: CMPX = (100% - duty cycle)*TBPRD
+
+**PWM Computation Example:**
+
+Determine TBPRD and CMPA for 100 kHz, 25% duty symmetric PWM from a 100 MHz time base clock.
+
+ TBPRD = 0.5* (FTBCLK/FPWM) = 0.5 (100 MHz/ 100 kHz) = 500
+
+ CMPA = (100% - duty cycle) TBPRD = 0.75*500=375
+
+ Determine TBPRD and CMPA for 100 kHz, 25% duty asymmetric PWM from a 100 MHz time base clock.
+
+ TBPRD = (FTBCLK/FPWM) -1 = (100 MHz/ 100 kHz) -1 = 999
+
+ CMPA = (100% - duty cycle) (TBPRD +1) -1 = 0.75 * (999 + 1) -1 = 749
+
+#### Dead-Band submodule
+
+The dead-band sub-module provides a means to delay the switching of a gate signal,
+thereby allowing time for gates to turn off and preventing a short circuit.
+
+This sub-module supports independently programmable rising-edge and falling-edge delays with
+various options for generating the appropriate signal outputs on EPWMxA and EPWMxB.
+
+The key functions of the dead-band module are:
+
+1. Generating appropriate signal pairs (EPWMxA and EPWMxB) with dead-band relationship from a single EPWMxA input
+2. Programming signal pairs for:
+
+    – Active high (AH)
+
+    – Active low (AL)
+
+    – Active high complementary (AHC)
+
+    – Active low complementary (ALC)
+
+3. Adding programmable delay to rising edges (RED)
+4. Adding programmable delay to falling edges (FED)
+5. Can be totally bypassed from the signal path
+
+```{figure} Assets/images/epwm/epwm_db.png
+:alt: Dead-Band Waveforms for Typical Cases (0% < Duty < 100%)
+:align: center
+
+Dead-Band Waveforms for Typical Cases (0% < Duty < 100%)
+```
+
+Dead-band control provides a convenient means of combating current shoot-through problems in a power converter. Shoot-through occurs when both the upper and lower gates in the same phase of a power converter are open simultaneously. This condition shorts the power supply and results in a large current draw. Shoot-through problems occur because transistors open faster than they close, and because high-side and low-side power converter gates are typically switched in a complimentary fashion. Although the duration of the shoot-through current path is finite during PWM cycling, (i.e. the closing gate will eventually shut), even brief periods of a short circuit condition can produce excessive heating and overstress in the power converter and power supply.
+
+#### Trip-Zone submodule
+
+Trip-Zone has a fast, clock-independent logic path to high-impedance the EPWMxA/B output pins.
+
+Interrupt latency may not protect hardware when responding to over current conditions or short-circuits through ISR software.
+
+It supports:
+
+1. One-shot trip for major short circuits or over current conditions and
+2. Cycle-by-cycle trip for current limiting operation.
+
+```{figure} Assets/images/epwm/epwm_tz.png
+:alt: Trip-Zone Submodule
+:align: center
+
+Trip-Zone Submodule
+```
+
+The trip-zone submodule utilizes a fast clock-independent logic mechanism to quickly handle fault conditions by forcing the EPWMxA and EPWMxB outputs to a safe state, such as high, low, or high-impedance.
+
+The trip-zone signals can be generated externally from any GPIO pin which is mapped through the Input X-Bar (TZ1 – TZ3), internally from an inverted eQEP error signal (TZ4), system clock failure (TZ5), or from an emulation stop output from the CPU (TZ6). Additionally, numerous trip-zone source signals can be generated from the digital-compare subsystem.
+
+#### Advance Trip-Zone Submodule
+
+Advance TripZone is similar to normal Trip Zone.
+
+It also Supports :
+
+1. One-shot trip for major short circuits or over current conditions and
+2. Cycle-by-cycle trip for current limiting operation.
+
+Advance  TripZone also provides same fault Conditions similar to Tripzone but it provide one extra safe state i.e Toggle
+
+#### Chopper submodule
+
+The PWM chopper submodule is used with pulse transformer-based gate drives to control the power switching devices.
+
+This submodule modulates a high-frequency carrier signal with the PWM waveform that is generated by the action-qualifier and dead-band submodules.
+The key functions of the PWM chopper submodule are:
+
+1. Programmable chopping (carrier) frequency
+2. Programmable pulse width of first pulse
+3. Programmable duty cycle of second and subsequent pulses
+4. Can be fully bypassed if not required.
+5. Programmable options are available to support the magnetic properties and characteristics of the transformer and associated circuitry.
+
+Shown in the figure below, a high-frequency carrier signal is ANDed with the ePWM outputs. Also, this circuit provides an option to include a larger, one-shot pulse width before the sustaining pulses.
+
+```{figure} Assets/images/epwm/epwm_c.png
+:alt: Chopper Submodule
+:align: center
+
+Chopper Submodule
+```
+
+#### Event-trigger submodule
+
+The event-trigger submodule manages the events generated by the time-base, counter-compare, and digital-compare submodules to generate an interrupt to the CPU and/or a start of conversion pulse to the ADC when a selected event occurs. It provides full visibility of event generation using event counters and flags. The event-trigger submodule also incorporates pre-scaling logic to issue an interrupt request or ADC start of conversion at every event or up to every fifteenth event.
+
+```{figure} Assets/images/epwm/epwm_et.png
+:alt: Event Trigger Submodule
+:align: center
+
+Event Trigger Submodule
+```
+
+These event triggers can occur when the time-base counter equals zero, period, zero or period,
+the up/down count match of a compare register.
+It also enable/disable ADC Trigger.
+
+#### Digital Compare(DC) Submodule
+
+The digital compare (DC) submodule compares signals external to the ePWM module (for instance, CMPSSx signals from the analog comparators) to directly generate PWM events/actions which then feed to the event trigger, trip-zone, and time-base submodules.Additionally, blanking window functionality is supported to filter noise or unwanted pulses from the DC event signals.
+
+#### High-Resolution Pulse Width Modulator (HRPWM)
+
+This module extends the time resolution capabilities of the conventionally derived digital pulse width modulator (PWM). HRPWM is typically used when PWM resolution falls below approximately 9-10 bits.
+
+The key features of HRPWM are:
+• Extended time resolution capability
+• Used in both duty cycle and phase-shift control methods
+• Finer time granularity control or edge positioning using extensions to the Compare A, Compare B and Phase registers
+• Implemented using the A and B signal path of PWM, that is, on the EPWMxA and EPWMxB output
+• Dead band high-resolution control for falling and rising edge delay in half cycle clocking operation
+• Enables high-resolution output swapping on the EPWMxA and EPWMxB output
+• Enables high-resolution output on EPWMxB signal output using inversion of EPWMxA signal output
+• Enables high-resolution period, duty and phase control on the EPWMxA and EPWMxB output on devices with an ePWM module
+
+#### Assumptions
+
+None
+
+#### Limitations
+
+```{Note}
+Depending on specific use case, either the CDD PWM or MCAL PWM module should be selected.Both should not be used together.
+
+```
+
+#### Design overview
+
+Please refer **SITARA MCU MCAL Architecture Document** and **MCAL: CDD PWM Detailed Design Document** provided as part of CSP.
+
+### Hardware Features
+
+#### Supported Features
+
+- Dedicated 16-bit time-base counter with period and frequency control
+- Time-base counter three modes of operation
+     (i)Up-Down Count Mode
+     (ii)Up-Count Mode
+     (iii)Down-Count Mode
+- Generates events based on programmable time stamps using the CMPA, CMPB, CMPC, and CMPD registers(Counter Compare)
+- Two PWM outputs (EPWMxA and EPWMxB) that can be used in the following configurations
+    – Two independent PWM outputs with single edge operation.
+    – Two independent PWM outputs with dual- edge symmetric operation.
+- All events can trigger both CPU interrupts and ADC start of conversion. (SOC).
+- Programmable Trip zone and Advance Trip Zone allocation of both cycle-by-cycle trip and one-shot trip on fault conditions.
+- A trip condition can force either high, low,or high-impedance state logic levels at PWM outputs.
+- Dead-band generation with independent rising and falling edge delay control.
+- Digital Compare
+- PWM chopping by high-frequency carrier signal, useful for pulse transformer gate drives
+- The HRPWM is based on micro edge positioner(MEP) technology.
+- HRPWM feature should use the TI-supplied MEP scale factor optimizer (SFO) software function.The SFO function helps to dynamically determine the number of MEP steps per SYSCLKOUT period.
+- Provide services to start and stop the output of pulse-width-modulated wave forms/signal.
+- Changing of frequency and duty cycle for a PWM channel at runtime besides the default configuration.
+- Enable/disable notifications. Allows the selection of duty cycle and signal period time.
+- There are a number of waveforms, which are supported by the PWM driver. The most widely used is standard PWM. Each period begins with an active state and changes to idle after the duty cycle has ended. Idle output is configurable allowing high or low for idle state according to requirement.
+- Minimum dead band logic(MDL) block which provides the ability to configure the minimum dead band duration between a complimentary set of PWMs.
+
+#### Not supported Features
+
+- Enhanced Pulse Width Modulator XCMP Mode Operation.(EPWM XCMP)
+- Asynchronous override control of PWM signals through software.
+- Programmable phase-control support for lag or lead operation relative to other ePWM modules
+- Hardware-locked (synchronized) phase relationship on a cycle-by-cycle basis
+- Programmable event prescaling minimizes CPU overhead on interrupts
+- Illegal Combo Logic(ICL)
+- Diode Emulation which provides hardware features and the necessary hooks into other IPs to implement robust diode mode sense and control in noisy environment.
+- Enhanced Pulse Width Modulator Global Load Configuration(EPWM Global Load).
+
+### Source files
+
+Description of static files is provided below:
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Epwm**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Pwm.h** : *Contains the API's of the CDD_PWM driver to be used by upper layers*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_Pwm_Irq.h** : *Contains ISR function declaration*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Pwm.c** : *Implementation of the API's for CDD_PWM driver*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_Pwm_Irq.c** : *Contains ISR function definitions*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Pwm_Priv.h** : *Contains data structures and Internal function declarations*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Pwm_Priv.c** : *Contains Internal Functions Definition*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Pwm_Sfo.c** : *Contains the SFO functionality*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_Pwm_Sfo.h** : *Contains the header file for SFO functionality*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_Pwm_Types.h** : *Contains the data types of CDD PWM*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┣ 📂mcal_config\
+ ┣ 📂mcal_docs\
+ ┗ 📜README.txt
+
+Description of generated files is provided below:
+
+|Plugin Structure |Descriptions|
+|-------|------|
+|Cdd_Pwm_Cfg.h |Contains the base addresses, Precompile switches, Macros for channels, counters etc|
+|Cdd_Pwm_PBcfg.c|Contains all channels Post-Build Configuration parameters|
+|Cdd_Pwm_Cfg.c|Contains all channels Pre-Compile Configuration parameters|
+
+The below diagram shows the files structure for the PWM driver.Similarly is the strcuture for CDD PWM
+
+```{figure} Assets/images/epwm/epwm_image4.JPG
+:alt: Reference : Header file structure of the PWM driver
+:align: center
+
+Reference : Header file structure of the ePWM driver
+```
+
+### Module requirements
+
+**Will be updated in future release:**
+
+#### Memory Mapping
+
+|Memory Mapping Sections|CDD_PWM_CODE|CDD_PWM_CODE_ISR|CDD_PWM_VAR_INIT|CDD_PWM_VAR_NO_INIT|CDD_PWM_PBCFG|
+|-----|-----|-----|-----|-----|----|
+| CDD_PWM_START_SEC_VAR_INIT_8(.bss)| | |x| | |
+| CDD_PWM_STOP_SEC_VAR_INIT_8| | |x| | |
+| CDD_PWM_START_SEC_CONFIG_DATA (.const)| | | | |x|
+| CDD_PWM_STOP_SEC_CONFIG_DATA| | | | |x|
+| CDD_PWM_START_SEC_CODE(.text)|x| | | | |
+| CDD_PWM_STOP_SEC_CODE|x| | | | |
+| CDD_PWM_START_SEC_VAR_NO_INIT_16(.bss)| | | |x| |
+| CDD_PWM_STOP_SEC_VAR_NO_INIT_16| | | |x| |
+| CDD_PWM_START_SEC_VAR_NO_INIT_32(.bss)| | | |x| |
+| CDD_PWM_STOP_SEC_VAR_NO_INIT_32| | | |x| |
+| CDD_PWM_START_SEC_ISR_CODE (.rodata)| |x| | | |
+| CDD_PWM_STOP_SEC_ISR_CODE| |x| | | |
+| CDD_PWM_START_SEC_VAR_NO_INIT_UNSPECIFIED  (.data)| | | |x| |
+| CDD_PWM_STOP_SEC_VAR_NO_INIT_UNSPECIFIED| | | |x| |
+
+#### Scheduling
+
+There is no scheduling functions in CDD PWM.
+
+#### Error handling
+
+##### Development Error Reporting
+
+By default, development errors are reported to the Development Error Tracer (DET) using the service Det_ReportError() if detection and reporting of development errors is enabled in the configuration tool. If another module is used for development error reporting, the function
+name for reporting the error can be configured by the integrator, but must have the same signature as the service Det_ReportError().
+
+AUTOSAR requires that API functions shall check the validity of their respective parameters.
+
+#### Error codes
+
+##### Development Errors
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-----|-------|
+|API service used without module initialization|CDD_PWM_E_UNINIT|0x02|
+|API Cdd_Pwm_Init service called with wrong parameter|CDD_PWM_E_INIT_FAILED|0x0B|
+|API service used with an invalid channel Identifier|CDD_PWM_E_PARAM_INVALID_CHANNEL|0x03|
+|API Cdd_Pwm_SetPinAction() called with an invalid pin action|CDD_PWM_E_PARAM_INVALID_ACTION|0x05|
+|Usage of Cdd_Pwm_DisableNotification() or Cdd_Pwm_EnableNotification on a channel where a NULL pointer is configured as the notification function|CDD_PWM_E_NO_VALID_NOTIF|0x06|
+|API Cdd_Pwm_Init() called while the CDD_PWM driver has already been initialized|CDD_PWM_E_ALREADY_INITIALIZED|0x07|
+|API Cdd_Pwm_GetVersionInfo() is called with a NULL parameter|CDD_PWM_E_PARAM_POINTER|0x08|
+|Cdd_Pwm_StartChannelCounter() called on a channel that is in state RUNNING|CDD_PWM_E_BUSY |0x09|
+|Cdd_Pwm_SetPinAction() called for a channel that doesn’t have an associated output pin|CDD_PWM_E_PARAM_NO_PIN|0x0A|
+|Cdd_Pwm_SetRelativeThreshold() called for with a compare match parameter greater than maximum|CDD_PWM_E_PARAM_INVALID_VALUE|0x1A|
+|Invalid Channel parameter|CDD_PWM_E_PARAM_CHANNEL |0x1B|
+
+##### Runtime Errors
+
+None
+
+### Used resources
+
+#### Interrupt Handling
+
+For each of the configured hardware units, one interrupt service routine has to be mapped. The Integrator has to map the interrupt service routines to the interrupt sources of the respective CDD_PWM unit interrupt. The supported ISR’s are part of the *Cdd_Pwm_Irq.h* file.
+
+For interrupt notification, ISR's are provided in CDD PWM driver.
+There is one ISR for each CDD PWM hardware unit. Depending on hardware unit configured, it will call group notify function. The interrupt service routines shall be mapped to the interrupt sources of the respective cross bar interrupt.
+There are 4 Groups and each has 32 Channels:
+
+ISR for PWM Interrupt:
+
+   **Cdd_Pwm_\<GROUP>_Ch\<n>Isr**
+
+   Here, *\<GROUP>* represents the GROUP number, which can be G0, G1, G2, G3.
+
+   *\<n>* represents the EPWM Channel number, which can be from 0 to 31.
+
+ISR for PWM Trip Zone:
+
+   **Cdd_Pwm_\<GROUP>_TzCh\<n>Isr**
+
+   Here, *\<GROUP>* represents the GROUP number, which can be G0, G1, G2, G3.
+
+   *\<n>* represents the EPWM Channel number, which can be from 0 to 31.
+
+### Integration description
+
+#### Dependent modules
+
+##### MCU
+
+The module MCU powers up the microcontroller’s peripherals at startup time and initializes the PLL(not directly) and the internal clock domains.
+
+The CDD_PWM module depends on MCU module for enabling CDD_PWM clock for channel and crossbar interrupt mapping of CDD_PWM interrupts depending on the CDD_PWM channel configured.
+
+Suppose the CDD_PWM channel 0 is configured for CDD_PWM module as shown in below figure:
+
+```{figure} Assets/images/epwm/epwm_image5.JPG
+:align: center
+
+```
+
+Then, the MCU module container **McuCddPwmConfiguration** should also be configured as shown in below figure:
+
+```{figure} Assets/images/epwm/epwm_image6.JPG
+:align: center
+
+```
+
+Similarly, the crossbar interrupts also need to be mapped in MCU module according to CDD_PWM channel configured. The CDD_PWM interrupts needs to be mapped to the corresponding cross bar interrupt.
+
+```{figure} Assets/images/epwm/epwm_image7.JPG
+:align: center
+
+```
+
+Also, the input crossbar interrupts also need to be mapped in MCU module according to CDD_PWM channel configured. The CDD_PWM interrupts needs to be mapped to the corresponding cross bar interrupt.
+
+```{figure} Assets/images/epwm/epwm_image8.JPG
+:align: center
+
+```
+
+```{Note}
+**McuCddPwmConfiguration** and **McuPwmConfiguration** cannot be used together.
+
+```
+
+##### PORT
+
+Module PORT configures the port pins that are used for output of CDD_PWM signal. For details see Technical Reference of Port.
+
+##### OSEK / AUTOSAR OS (Optional)
+
+An operating system can be used fortask scheduling, interrupt handling, global suspend and restore of interrupts and creating of the Interrupt Vector Table.
+The CDD_PWM module may use OSEK/AUTOSAR OS to suspend and restore global interrupts.
+
+##### DET
+
+The module CDD_PWM depends on the DET (by default) in order to report development errors. Detection and reporting of development errors can be enabled or disabled by the switch.
+
+"Enable Development Error Detection".
+
+The DET can be replaced optionally by an equivalent component which is responsible to recognize development errors, if no DET component is available.
+
+##### Callback Notification
+
+The Cdd_Pwm driver provide configured notification call back for each interrupt occurred and Trip Zone notification.
+
+#### Multi-core support
+
+Not Supported
+
+### Configuration
+
+
+
+#### CddPwmConfigurationOfOptionalApis
+Configuration of optional APIs.
+
+##### CddPwmDeInitApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmDeInitApi |
+| **Description** | Adds / removes the service CddPwmDeInit() from the code. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmGetCounterApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmGetCounterApi |
+| **Description** | Adds / removes the service CddPwmGetCounter() from the code. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmVersionInfoApi |
+| **Description** | Switch to indicate that the CddPwmGetVersionInfo() is supported. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmEnableRegisterReadbackApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmEnableRegisterReadbackApi |
+| **Description** | Switch to indicate that the CddPwmRegisterReadBack is supported. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmSetRelativeThreshold
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmSetRelativeThreshold |
+| **Description** | Switches the API Cdd_Pwm_SetRelativeThreshold. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmSetAbsoluteThreshold
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmSetAbsoluteThreshold |
+| **Description** | Switches the API Cdd_Pwm_SetAbsoluteThreshold. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmSetPinAction
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmSetPinAction |
+| **Description** | Switches the API Cdd_Pwm_SetPinAction. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmSetPeriodDutyPhase
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmSetPeriodDutyPhase |
+| **Description** | Switches the API Cdd_Pwm_SetPeriodDutyPhase. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmSetOutputToIdle
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmSetOutputToIdle |
+| **Description** | Switches the API Cdd_Pwm_SetOutputToIdle. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmGetCounterStatus
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmGetCounterStatus |
+| **Description** | Switches the API Cdd_Pwm_GetCounterStatus. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmCounterComparatorCfg
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmCounterComparatorCfg |
+| **Description** | Switches the API Cdd_Pwm_CounterComparatorCfg. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmSetAdcTriggerApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmSetAdcTriggerApi |
+| **Description** | Switch to indicate that the ADC enable API is supported. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmNotificationSupported
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmNotificationSupported |
+| **Description** | Adds / removes the services CddPwmEnableNotification() and CddPwmDisableNotification() from the code. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+#### CddPwmGeneral
+This container contains the module-wide configuration parameters of the CDD PWM Driver
+
+##### CddPwmDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmDevErrorDetect |
+| **Description** | Switches the Development Error Detection ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmEventTriggerEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmEventTriggerEnable |
+| **Description** | Switches the Pwm event trigger functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmTripZoneEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmTripZoneEnable |
+| **Description** | Switches the Pwm Trip zone functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmDigitalCompareEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmDigitalCompareEnable |
+| **Description** | Switches the Pwm Digital Compare functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | false |
+
+##### CddPwmDeadBandEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmDeadBandEnable |
+| **Description** | Switches the PWM dead band functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmChopperEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmChopperEnable |
+| **Description** | Switches the PWM chopper functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmActionQualifierEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmActionQualifierEnable |
+| **Description** | Switches the Pwm Action Qualifier functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmChannelTimerBaseSyncEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmChannelTimerBaseSyncEnable |
+| **Description** | Switches the PWM timer base sync functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmChannelHighResPwmEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmChannelHighResPwmEnable |
+| **Description** | Switches the High Resolution PWM functionality ON or OFF. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmHrSetPeriodDutyEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmHrSetPeriodDutyEnable |
+| **Description** | Enable/Disable switch the API Cdd_Pwm_HrSetPeriodDutyPhase. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmHrSfoCalibrationEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmHrSfoCalibrationEnable |
+| **Description** | Enable/disable switch to the API Cdd_Pwm_HrSfoCalibration. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmHrSfoStatusEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmHrSfoStatusEnable |
+| **Description** | Enable/disable switch to the API Cdd_Pwm_HrSfoStatus. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+##### CddPwmTypeofInterruptFunction
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmTypeofInterruptFunction |
+| **Description** | Type of ISR function |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | CDD_PWM_ISR_VOID |
+| **Range** | CDD_PWM_ISR_VOID<br>CDD_PWM_ISR_CAT1<br>CDD_PWM_ISR_CAT2 |
+
+##### CddPwmSystemClock
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmSystemClock |
+| **Description** | This parameter specifies the starting parameter of the EDMA channel for use as own resource. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | 200000000 |
+| **Max-value** | 200000000 |
+| **Min-value** | 0 |
+
+##### CddPwmMaxDutyCycle
+
+| Item ||
+|--------|---------------|
+| **Name** | CddPwmMaxDutyCycle |
+| **Description** | The physical hardware channel that is assigned to this logical channel. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | 65536 |
+| **Max-value** | 65536 |
+| **Min-value** | 0 |
+### Examples
+
+#### Overview
+
+Cdd_PWM supports so many other features listed below :
+
+##### CddPwm_DeadBand
+
+1. The DeadBand feature can be tested by following Points
+
+   - Invoke Cdd_Pwm_Init() with necessary configurtion Parameters
+
+   - Make pwm signal to idle by calling Cdd_Pwm_SetOutputToIdle()
+
+   - Configure the necessary deadband related parametrs and Invoke Cdd_Pwm_DeadbandCfg()
+
+   - Invoke Cdd_Pwm_SetPeriodDutyPhase() and observe the filterd signgal in CRO
+
+##### Cdd_Pwm_ChopperCfg
+
+1. The Chopper feature can be tested by following Points
+
+   - Invoke Cdd_Pwm_Init() with necessary configurtion Parameters
+
+   - Configure dutyCycle by Invoking Cdd_Pwm_SetPeriodDutyPhase().
+
+   - Configure the necessary chopper related parametrs and Invoke Cdd_Pwm_ChopperCfg().
+
+   - Enable chopper feature by invoking Cdd_Pwm_ChopperEnable() with enablechopper parameter as TRUE and observe the signgal in CRO showing chopping action.
+
+   - Chopping action can be disabled by invoking Cdd_Pwm_ChopperEnable() with enablechopper parameter as FALSE.
+
+##### CddPwm_HrDutyCycle
+
+1. The CddPwm HRdutyCycle feature can be tested by following Points
+
+    - Invoke Cdd_Pwm_Init() by enabling HRPWM in Configuartion Parametrs  
+
+    - Invoke Cdd_Pwm_HrSetPeriodDutyPhase() with Proper DutyCycle.
+
+    - Observe the DutyCycle value in CRO matches with the configured dutyCycle or not.
+
+##### CddPwm_HrUpDown
+
+1. The CddPwm HRdutyCycle feature can be tested by following Points
+
+    - Invoke Cdd_Pwm_Init() by enabling HRPWM and setting the updown mode in Configuartion Parametrs  
+
+    - Invoke Cdd_Pwm_HrSetPeriodDutyPhase() with Proper DutyCycle.
+
+    - Observe the DutyCycle value in CRO matches with the configured dutyCycle or not in Updown mode.
+
+##### Cdd_PWM_AdvanceTripzone
+
+1. The CddPwm Advance TripZone feature can be tested by following Points
+
+     - Invoke Cdd_Pwm_Init() by enabling Advance Tripzone and digital compare  in Configuartion Parametrs
+
+     - Configure dutyCycle by Invoking Cdd_Pwm_SetPeriodDutyPhase().
+
+     - Enable the TripZone Interrupt for particular by Invoking Cdd_Pwm_TzIntrEnable().
+
+     - Add Delay and make GPIO122 pin high to low to generate Advance TripZone Interrupt to take configured action.
+
+     - That Action we can observe In CRO (i.e high state ,Low state , High Impendence , No change , Toggle state)
+
+     - Place the GPIO122 Pin to normal state low to high to observe normal pwm signal.
+
+#### Setup required to run example
+
+##### CDD PWM Signal verification Application
+
+1. Module is tested in AM263-CC board.
+
+2. Oscilloscope is used to monitor CDD PWM dutycycle and frequency Variation
+
+3. The CDD PWM module example is configured with channel ID 0 and 1 , which is mapped to physical channel EPWM0 and EPWM1
+
+4. Connect EPWM output pin of 0 and 1st channel to Oscilloscope and check the output in CRO
+
+ Example code is tested for:
+
+- Frequency and DutyCycle Variation.
+- PWM Interrupt Verification.
+- PWM module triggering ADC module.
+
+##### Trip- Zone Application
+
+1. Trip Zone Signal is tested on GPIO 122 Pin.
+
+2. Connect  Jumper Wire to GPIO 122 pin and keep it open
+
+3. when in terminal it shows to move  the state from high to low, move the GPIO122 pin to high to low then tripzone interrupt occur to take configured action i.e high  , low , high Impendence , No change
+
+4. The Coressponding action we can observe in CRO
+
+5. Change the GPIO 122 to low to high state and observe normal pwm signal
+
+#### How to run examples
+
+Cdd_Pwm example applications demonstrating the MCAL CDD PWM driver features is in folder <MCAL_ROOT>/examples/Epwm.
+
+These application can be built from the build folder by giving :
+
+
+"gmake -s epwm_app PLATFORM= am263px"
+
+"gmake -s epwm_app_tz PLATFORM= am263px"
+
+#### Sample Log
+
+##### Example Logs CDD PWM Signal
+
+```{code-block}
+
+ CDD_PWM_APP: Sample Application - STARTS !!!
+ 
+    CDD PWM MCAL Version Info
+    ---------------------
+    Vendor ID           : 44
+    Module ID           : 255
+    SW Major Version    : 9
+    SW Minor Version    : 2
+    SW Patch Version    : 0
+ 
+    PWM Signal is generated with default configured parameters. 
+    PWM Signal is generated with below parameters on Channel A and B Pins. 
+    : PERIOD 2500 : FREQUENCY 10000 : DUTYCYCLE in percentage 75 : DUTYCYCLE in Count 49152 : 
+    PWM Signal is generated with below parameters on Channel A. 
+    : PERIOD 5000 : FREQUENCY 5000 : DUTYCYCLE in percentage 50 : DUTYCYCLE in Count 32768 : 
+    PWM Signal is generated with below parameters on Channel B. 
+    :  PERIOD 5000 : FREQUENCY 5000 : DUTYCYCLE in percentage 25 : DUTYCYCLE in Count 16384 : 
+    ADC Test Application In Progress. 
+    ADC Test Application Passed. 
+    Edge Interrupt is enable. 
+    Wait till interrupt is recived. 
+    Interrupts Recieved are : 40480 
+    CDD_PWM_APP: Sample Application - DONE !!!
+    CDD Stack Usage: 960 bytes
+    All tests have passed
+
+
+```
+
+##### Tripzone Application Testing
+
+```{code-block}
+
+CDD_PWM_APP: Sample Application - STARTS !!!
+ 
+    CDD PWM MCAL Version Info
+    ---------------------
+    Vendor ID           : 44
+    Module ID           : 255
+    SW Major Version    : 9
+    SW Minor Version    : 2
+    SW Patch Version    : 0
+ 
+    Keep the GPIO 122 to High State. 
+    PWM Signal is generated with default configured parameters. 
+    Wait for sometime and Change the GPIO 122 to Low State from High State. 
+
+
+    Trip zone signal occurred 
+
+    new GPIO122 state : 1
+    PWM Signal is generated with below parameters on Channel A and B Pins. 
+    : PERIOD 2500 : FREQUENCY 10000 : DUTYCYCLE in percentage 75 : DUTYCYCLE in Count 49152 : 
+    Wait for sometime and Change the GPIO 122 to Low State from High State. 
+
+
+    Trip zone signal occurred 
+
+    PWM Signal is generated with below parameters on Channel A and B Pins. 
+    : PERIOD 25000 : FREQUENCY 1000 : DUTYCYCLE in percentage 50 : DUTYCYCLE in Count 32768 : 
+    CDD_PWM_APP: Sample Application - DONE !!!
+    CDD Stack Usage: 792 bytes
+    All tests have passed
+
+```
+
+#### File Structure
+
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Epwm**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┣ 📂**epwm_app**\
+ ┃ ┃ ┃ ┃  ┣ 📜**Cdd_Pwm_App.h** : *Contains CDD PWM example header file*\
+ ┃ ┃ ┃ ┃  ┣ 📜**Cdd_Pwm_App.c** : *Contains the CDD PWM test example*\
+ ┃ ┃ ┃ ┃  ┗ 📜Makefile\
+ ┃ ┃ ┃ ┣ 📂**epwm_tz_app**\
+ ┃ ┃ ┃ ┃  ┣ 📜**Cdd_Ipc_app.h** : *Contains CDD PWM example header file*\
+ ┃ ┃ ┃ ┃  ┣ 📜**Cdd_Ipc_rpmsg_app.c** : *Contains CDD PWM Trip zone feature test example*\
+ ┃ ┃ ┃ ┃  ┗ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Epwm_Demo_Cfg**\
+ ┃ ┃ ┃ ┗ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Cdd_Pwm_Cfg.h** : *Contains the configuration parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣📜**Cdd_Pwm_Cfg.c** : *Contains all Pre-Compile Configured parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Cdd_Pwm_Cfg_Tz.c** : *Contains all Pre-Compile Configured parameters for Trip zone*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣📜**Cdd_Pwm_PBcfg.c** : *Contains all Post build Configured parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Cdd_Pwm_PBcfg_Tz.c** : *Contains all Post build Configured parameters for Trip zone*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┗ 📜README.txt
+
+### References
+
+
+[Technical Reference Manual](<https://www.ti.com/product/AM263P4#tech-docs>)

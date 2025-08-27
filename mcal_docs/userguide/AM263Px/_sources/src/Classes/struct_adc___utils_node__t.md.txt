@@ -1,0 +1,41 @@
+---
+orphan: true
+---
+
+---
+title: Adc_UtilsNode_t
+summary: Self referential structure for double link list. 
+
+---
+
+# Adc_UtilsNode_t
+
+
+
+Self referential structure for double link list.  [More...](#detailed-description)
+
+
+`#include <Adc_Utils.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  Adc_UtilsNode * | next |  Pointer to the next node.  |
+|  Adc_UtilsNode * | prev |  Pointer to the previous node.  |
+|  void * | data |  Node data pointer.  |
+|  [Adc_GroupPriorityType](../Modules/group___a_d_c.md#typedef-adc_groupprioritytype) | priority |  Priority of the node. Used for priority based linked list.  |
+
+## Detailed Description
+
+```cpp
+struct Adc_UtilsNode_t;
+```
+
+
+**Brief**: 
+Self referential structure for double link list. 
+
+Typedef for Node structure. 
+
+

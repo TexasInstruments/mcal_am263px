@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!--
+	AUTOSAR Cdd_Dma_TI_AM263Px plugin
+	Project: TI SitaraMCU Complex Device Driver
+
+	Copyright (C) 2023 by Texas Instruments Inc.
+	All rights exclusively reserved for Texas Instruments Inc,
+	unless expressly agreed to otherwise.
+-->
+<plugin>
+	<extension point="dreisoft.tresos.launcher2.plugin.module" id="Cdd_Dma_TI_AM263Px_ModuleId" name="Cdd_Dma_TI_AM263Px Module">
+
+		<module id="Cdd_Dma_TI_AM263Px"
+			label="Cdd_Dma"
+			mandatory="false"
+			allowMultiple="false"
+			description="TI SitaraMCU CDD DMA plug-in"
+			copyright="(C) 2023 Texas Instruments Incorporated"
+			swVersionMajor="10"
+			swVersionMinor="2"
+			swVersionPatch="0"
+			swVersionSuffix=""
+			specVersionMajor="4"
+			specVersionMinor="6"
+			specVersionPatch="0"
+			specVersionSuffix=""
+			relVersionPrefix="AUTOSAR"
+			relVersionMajor="4"
+			relVersionMinor="3"
+			relVersionPatch="1"
+			relVersionSuffix="0"
+			categoryType="Cdd_Dma"
+			categoryLayer="Complex Device Driver"
+			categoryCategory="CDD"
+			categoryComponent="ECUC">
+			<ecuType target="ARM" derivate="AM263Px"/>
+		</module>
+	</extension>
+
+	<extension point="dreisoft.tresos.launcher2.plugin.configuration"
+		id="Cdd_Dma_TI_AM263Px_ConfigId"
+		name="Cdd_Dma_TI_AM263Px Configuration">
+		<configuration moduleId="Cdd_Dma_TI_AM263Px">
+			<schema>
+				<manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+				<resource value="config/Cdd_Dma.xdm" type="xdm" id="res_default"/>
+				<resource value="config_ext/Cdd_Dma_Rec.xdm" type="xdm" id="res_recconf"/>
+				<recconfig name="Default Recommended Configuration" default="true" description="Default Recommended Configuration" resourceId="res_recconf" path="ASPath:/TI_AM263Px/Cdd_Dma_Rec"/>
+			</schema>
+
+			<data>
+				<manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+				<schemaNode path="ASPath:/TI_AM263Px/Cdd_Dma"/>
+			</data>
+
+			<editor id="Cdd_Dma_TI_AM263Px_EditorId" label="Default" tooltip="TI SitaraMCU CDD DMA plug-in">
+				<class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+					<parameter name="schema" value="ASPath:/TI_AM263Px/Cdd_Dma"/>
+					<parameter name="title" value="Cdd_Dma"/>
+					<parameter name="noTabs" value="false"/>
+					<parameter name="noLinks" value="true"/>
+					<parameter name="groupLinks" value="false"/>
+					<parameter name="groupContainers" value="false"/>
+					<parameter name="groupTables" value="true"/>
+					<parameter name="optionalGeneralTab" value="true"/>
+				</class>
+			</editor>
+		</configuration>
+	</extension>
+	<extension point="dreisoft.tresos.launcher2.plugin.generator"
+		id="Cdd_Dma_TI_AM263Px_GeneratorId"
+		name="Cdd_Dma_TI_AM263Px Generator">
+		<generator class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator" id="CDDDmaGenerator_AM263Px" moduleId="Cdd_Dma_TI_AM263Px">
+
+			<!-- common template path parameters -->
+			<parameter name="templates" mode="generate,verify" value="generate,generate_swcd"/>
+
+		</generator>
+	</extension>
+
+	<extension point="org.eclipse.help.toc">
+		<toc file="anchors.xml" primary="true"/>
+	</extension>
+
+</plugin>

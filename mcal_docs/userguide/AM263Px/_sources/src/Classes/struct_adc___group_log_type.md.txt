@@ -1,0 +1,28 @@
+---
+orphan: true
+---
+
+---
+title: Adc_GroupLogType
+summary: ADC group log structure. 
+
+---
+
+# Adc_GroupLogType
+
+
+
+ADC group log structure. 
+
+
+`#include <Adc_Dbg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | logIndex |  Current log index. This -1 points to the last log entry.  |
+|  uint32 | totalLog |  Total log including wrapper around.  |
+|  [Adc_GroupLogEntryType](../Classes/struct_adc___group_log_entry_type.md)[ADC_MAX_GROUP_LOG] | logEntry |  Log entries.  |
+
+

@@ -1,0 +1,900 @@
+<?xml version='1.0'?>
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="TI_AM263Px" type="AR-PACKAGE">
+        <a:a name="UUID" value="ECUC:AUTOSAR"/>
+            <d:lst type="ELEMENTS">
+              <d:chc name="Pwm" type="AR-ELEMENT" value="MODULE-DEF">
+                <v:ctr type="MODULE-DEF">
+                  <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                    <ad:ADMIN-DATA>
+                      <ad:DOC-REVISIONS>
+                        <ad:DOC-REVISION>
+                          <ad:REVISION-LABEL>4.3.1</ad:REVISION-LABEL>
+                          <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                      <ad:DATE>2014-10-31</ad:DATE>
+                        </ad:DOC-REVISION>
+                      </ad:DOC-REVISIONS>
+                    </ad:ADMIN-DATA>
+                  </a:a>
+                  <a:a name="DESC"
+                       value="EN: Configuration of Pwm (Pulse Width Modulation) module."/>
+                  <a:a name="LOWER-MULTIPLICITY" value="0"/>
+                  <a:a name="POSTBUILDVARIANTSUPPORT" value="true"/>
+                  <a:a name="RELEASE" value="asc:4.3.1"/>
+                  <a:a name="UPPER-MULTIPLICITY" value="*"/>
+                  <a:a name="UUID"
+                       value="ECUC:13aa2440-e790-4121-9e12-3a380efb0d6b"/>
+                  <v:var name="IMPLEMENTATION_CONFIG_VARIANT"
+                         type="ENUMERATION">
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="LABEL" value="Config Variant"/>
+                    <a:da name="DEFAULT" value="VariantPostBuild"/>
+                    <a:da name="RANGE">
+                      <a:v>VariantPostBuild</a:v>
+                      <a:v>VariantPreCompile</a:v>
+                    </a:da>
+                  </v:var>
+              <!--Requirements: ECUC_Pwm_00140 -->
+                  <v:ctr name="PwmChannelConfigSet" type="IDENTIFIABLE">
+                    <a:a name="DESC"
+                         value="EN: This container contains the configuration parameters and sub containers of the AUTOSAR Pwm module."/>
+                    <a:a name="UUID"
+                         value="ECUC:64be7cd3-9cb3-4e87-b679-3a43aaf7f82c"/>
+                     <!--Requirements: ECUC_Pwm_00027 -->
+                    <v:lst name="PwmChannel" type="MAP">
+                      <a:da name="MIN" value="1"/>
+                      <a:da name="MAX" value="128"/>
+                      <v:ctr name="PwmChannel" type="IDENTIFIABLE">
+                        <a:a name="DESC"
+                         value="EN: Configuration of an individual PWM channel."/>
+                        <a:a name="UUID"
+                             value="ECUC:c2253a76-e0d8-4a8f-b383-ce80ffc0e870"/>
+                         <!--Requirements: ECUC_Pwm_00136 -->
+                        <v:lst name="PwmChannelClass">
+                          <a:da name="MAX" value="1"/>
+                          <v:var name="PwmChannelClass" type="ENUMERATION">
+                            <a:a name="DESC" value="EN: Class of PWM Channel."/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                              <icc:v mclass="PostBuild">VariantPostBuild</icc:v>
+                              <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                              <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                              <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                   
+                            <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="POSTBUILDVARIANTMULTIPLICITY"
+                                 value="true"/>
+                            <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                            <a:a name="UUID"
+                               value="ECUC:31505abb-2296-4c99-bdb7-d0909f0440f2"/>
+                            <a:da name="ENABLE" value="true"/>
+                            <a:da name="DEFAULT" value="PWM_FIXED_PERIOD"/>
+                            <a:da name="RANGE">
+                              <a:v>PWM_FIXED_PERIOD</a:v>
+                              <a:v>PWM_FIXED_PERIOD_SHIFTED</a:v>
+                              <a:v>PWM_VARIABLE_PERIOD</a:v>
+                            </a:da>
+                          </v:var>
+		 	</v:lst>
+                    <!--Requirements: ECUC_Pwm_00137 -->
+                        <v:var name="PwmChannelId" type="INTEGER">
+                          <a:a name="DESC"
+                           value="EN: Channel Id of the PWM channel. This value will be assigned to the symbolic name derived of the PwmChannel container short name."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                          <a:a name="UUID"
+                               value="ECUC:3a0e3f14-a2b9-428e-9b76-6a361c8b2ea4"/>
+                        <a:da name="DEFAULT" type="XPath" expr="node:fallback(node:current()/../@index,'0')"/>
+                        <a:a name="INVALID" type="Multi">
+                            <mt:range>
+                                <mt:tst expr="&lt;=255"/>
+                                <mt:tst expr="&gt;=0"/>
+                            </mt:range>
+                            <mt:xpath>
+                                <mt:tst expr="text:uniq(../../*/PwmChannelId, .)" false="channel id of PWM Channel should not repeated"/>
+                                <mt:tst expr="node:fallback(., 0) &lt; count(node:fallback(../../*, text:split('1 2 3')))" false="channel id higher than the number of defined channels can't be assigned"/>
+                            </mt:xpath>
+                        </a:a>
+                      </v:var>
+					 <v:var name="PwmHWChannelId" type="INTEGER">
+                          <a:a name="DESC"
+                           value="EN: Channel Id of the PWM channel. This value will be assigned to the symbolic name derived of the PwmChannel container short name."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Texas Instruments"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:3a0e3f14-a2b9-428e-9b76-6a361c8b2ea4"/>
+                          <a:da name="DEFAULT" value="0"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=31"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+						 <v:var name="PwmHwUnit" type="ENUMERATION">
+                          <a:a name="DESC"
+                               value="EN: The parameter PWM_IDLE_STATE represents the output state of the PWM after the signal is stopped (e.g. call of Pwm_SetOutputToIdle)."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Texas Instruments"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:7cc25f83-b89c-4ba0-8766-7ba087185c98"/>
+                          <a:da name="DEFAULT" value="PWM_CONTROLSS_G0"/>
+                          <a:da name="RANGE">
+                            <a:v>PWM_CONTROLSS_G0</a:v>
+                            <a:v>PWM_CONTROLSS_G1</a:v>
+							<a:v>PWM_CONTROLSS_G2</a:v>
+							<a:v>PWM_CONTROLSS_G3</a:v>
+                          </a:da>
+                        </v:var>
+                    <!--Requirements: ECUC_Pwm_00138 -->
+                        <v:var name="PwmDutycycleDefault" type="INTEGER">
+                          <a:a name="DESC"
+                               value="EN: Value of duty cycle used for Initialization"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:daa5c051-75d5-4a20-8b6a-ca34afab3ddd"/>
+                          <a:da name="DEFAULT" value="16384"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=32768"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+						 
+                        <!--Design: DES_PWM_007 -->
+                    <!--Requirements: ECUC_Pwm_00122 -->
+                        <v:var name="PwmIdleState" type="ENUMERATION">
+                          <a:a name="DESC"
+                               value="EN: The parameter PWM_IDLE_STATE represents the output state of the PWM after the signal is stopped (e.g. call of Pwm_SetOutputToIdle)."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:7cc25f83-b89c-4ba0-8766-7ba087185c97"/>
+                          <a:da name="DEFAULT" value="PWM_HIGH"/>
+                          <a:da name="RANGE">
+                            <a:v>PWM_HIGH</a:v>
+                            <a:v>PWM_LOW</a:v>
+                          </a:da>
+                        </v:var>
+                        <!--Design: DES_PWM_007 -->
+                    <!--Requirements: ECUC_Pwm_00123 -->
+                        <v:lst name="PwmNotification">
+                          <a:da name="MAX" value="1"/>
+                        <v:var name="PwmNotification" type="FUNCTION-NAME">
+                          <a:a name="DESC"
+                               value="EN: Definition of the Callback function."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v mclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                            <a:a name="POSTBUILDVARIANTMULTIPLICITY"
+                                 value="true"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:44bb38ac-d409-4b1d-96be-ec84466c1019"/>
+                          <a:da name="DEFAULT" value="NULL_PTR"/>
+                          <a:da name="ENABLE" value="true"/>
+                        </v:var>
+						</v:lst>
+                    <!--Requirements: ECUC_Pwm_00124 -->
+                        <v:var name="PwmPeriodDefault" type="FLOAT">
+                          <a:a name="DESC"
+                               value="EN: Value of period used for Initialization.(in seconds)."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:2e258b97-f1d8-4dc0-ad1a-dbdc0445568b"/>
+                           <a:da name="DEFAULT" value="1"/>
+                           <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=Infinity"/>
+                            <a:tst expr="&gt;=0.0"/>
+                          </a:da>
+                        </v:var>
+                    <!--Design: DES_PWM_007 -->
+                    <!--Requirements: MCAL-3652 -->
+                    <v:var name="PwmOutputChSelect" type="ENUMERATION">
+                      <a:a name="DESC"
+                           value="EN: PWM Output Channel select EPWMxA or EPWMxB or Both. Both Outputs available with same duty cycle, period and polarity."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Texas Instruments"/>
+                          <a:a name="UUID"
+                               value="ECUC:6e0c1ab4-57c8-428c-b790-54c0ace91a1e"/>
+                          <a:da name="ENABLE" value="true"/>
+                          <a:da name="EDITABLE" value="true"/>
+                          <a:da name="VISIBLE" value="true"/>
+                          <a:da name="RANGE">
+                            <a:v>PWM_OUTPUT_CH_A</a:v>
+                            <a:v>PWM_OUTPUT_CH_B</a:v>
+                            <a:v>PWM_OUTPUT_CH_BOTH_A_AND_B</a:v>
+                          </a:da>
+                        <a:da name="DEFAULT" value="PWM_OUTPUT_CH_A"/>
+                    </v:var>
+                    <!--Design: DES_PWM_008 -->
+                    <!--Requirements:MCAL-3653 -->
+                    <v:var name="PwmFunctionalClock" type="INTEGER">
+                          <a:a name="DESC"
+                               value="EN: Value of the System clock frequency in Hz Default frequency is 125MHz for EPWM, and 25Mhz for GPT."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="Texas Instruments"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                           value="ECUC:da8053d5-b4f7-45c6-a06c-ab873f15af81"/>
+                        <a:da name="EDITABLE" value="true"/>
+                        <a:da name="DEFAULT" value="19200000"/>
+                     </v:var>
+                        <v:var name="PwmPolarity" type="ENUMERATION">
+                          <a:a name="DESC"
+                               value="EN: Defines the starting polarity of each PWM channel."/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:a31896f1-a4ab-4dc8-a116-aff3df41810f"/>
+                          <a:da name="DEFAULT" value="PWM_HIGH"/>
+                          <a:da name="RANGE">
+                            <a:v>PWM_HIGH</a:v>
+                            <a:v>PWM_LOW</a:v>
+                          </a:da>
+                        </v:var>
+                        <v:ref name="PwmMcuClockReferencePoint" type="REFERENCE">
+                          <a:a name="DESC"
+                               value="EN: This parameter contains reference to the McuClockReferencePoint"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                          <a:a name="SCOPE" value="ECU"/>
+                          <a:a name="UUID"
+                               value="ECUC:c945dd5e-1a5b-4bcc-a8ab-0a4d19ec3585"/>
+                        <a:da name="EDITABLE" value="false"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="VISIBLE" value="false"/>
+                          <a:da name="REF"
+                                value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Mcu/McuModuleConfiguration/McuClockSettingConfig/McuClockReferencePoint"/>
+                        </v:ref>
+                    <!--Design: DES_PWM_008 -->
+                    <!--Requirements: MCAL-3654 -->
+                    <v:var name="PwmClkPrescaler" type="INTEGER">
+                      <a:a name="DESC"
+                           value="EN: The clock to Timer module is divided by the value specified here
+                           TBCLK = SYSCLKOUT / PwmClkPrescaler
+                           0x0 = div by 1, 0x1 = div by 2, 0x2 = div by 4, 0x3 = div by 8, 0x4 = div by 16, 0x5 = div by 32
+                           0x6 = div by 64, 0x7 = div by 128"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Texas Instruments"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="UUID" value="ECUC:fdeb4137-7512-493e-b50f-ededcaf53a5b"/>
+                      <a:da name="DEFAULT" value="0"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=7"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <!--Design: DES_PWM_008 -->
+                    <!--Requirements: MCAL-3660 -->
+                    <v:var name="PwmHSClkPrescaler" type="INTEGER">
+                      <a:a name="DESC"
+                           value="EN: High-Speed Time-base Clock Prescale Bits. These bits determine
+                        part of the time-base clock prescale value and acts as a clock divider for the time-base clock.
+                        TBCLK = SYSCLKOUT/(PwmHSClkPrescaler x PwmClkPrescaler)
+                        0x0 = div by 1, 0x1 = div by 2, 0x2 = div by 4, 0x3 = div by 6, 0x4 = div by 8, 0x5 = div by 10
+                        0x6 = div by 12, 0x7 = div by 14"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Texas Instruments"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                     <a:a name="UUID"
+                          value="ECUC:b1691bdf-e530-4ee3-83ff-c3c7c91432fd"/>
+                     <a:da name="EDITABLE" value="true"/>
+                     <a:da name="ENABLE" value="true"/>
+                     <a:da name="VISIBLE" value="true"/>
+                     <a:da name="DEFAULT" value="0"/>
+                     <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=7"/>
+                        <a:tst expr="&gt;=0"/>
+                     </a:da>
+                    </v:var>
+                    <v:var name="PwmEnableHighRes" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="This parameter will be a switch to enable or disable high resolution (HRPWM) capability of EPWM module."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Texas Instruments"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                     <a:a name="UUID"
+                          value="ECUC:b1691bdf-e530-4ee3-83ff-c3c7c91432fd"/>
+                     <a:da name="EDITABLE" value="true"/>
+                     <a:da name="ENABLE" value="true"/>
+                     <a:da name="VISIBLE" value="true"/>
+                     <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+                  </v:ctr>
+                </v:lst>
+              </v:ctr>
+
+                  <v:ctr name="PwmConfigurationOfOptApiServices"
+                         type="IDENTIFIABLE">
+                    <a:a name="UUID"
+                         value="ECUC:946d9f33-9bb7-48d7-8278-0f6efdacfaeb"/>
+                     <!--Requirements: ECUC_Pwm_00141 -->
+                    <v:var name="PwmDeInitApi" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Adds / removes the service Pwm_DeInit() from the code."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:3e3da645-2c56-4fd5-9fe6-2b2cd88ed6d8"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                <!--Requirements: ECUC_Pwm_00127 -->
+                    <v:var name="PwmGetOutputState" type="BOOLEAN">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:8a7eb9e8-f5d3-4585-855b-72634c98da24"/>
+                      <a:da name="ENABLE" value="true"/>
+                      <a:da name="EDITABLE" value="true"/>
+                      <a:da name="VISIBLE" value="true"/>
+					  <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+                <!--Requirements: ECUC_Pwm_00128 -->
+                    <v:var name="PwmSetDutyCycle" type="BOOLEAN">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:bf14870c-ef7a-4d27-a6c0-4ebd02c8fdfe"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                <!--Requirements: ECUC_Pwm_00129 -->
+                    <v:var name="PwmSetOutputToIdle" type="BOOLEAN">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:45d9cbcc-c5b7-4c76-8469-5b65f7e9d6cd"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                <!--Requirements: ECUC_Pwm_00130 -->
+                    <v:var name="PwmSetPeriodAndDuty" type="BOOLEAN">
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:bbb4cf88-5a3a-4053-8eae-023f3990279e"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                <!--Requirements: ECUC_Pwm_00135 -->
+                    <v:var name="PwmVersionInfoApi" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Switch to indicate that the Pwm_ GetVersionInfo is supported"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:33bfc216-9d93-4694-90c5-39340e82c758"/>
+                      <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+                <!--Design: DES_PWM_007 -->
+                <!--Requirements: MCAL-3651 -->
+                <v:var name="PwmEnableRegisterReadbackApi" type="BOOLEAN">
+                  <a:a name="DESC"
+                       value="EN: Switch to indicate that the Pwm_RegisterReadBack is supported"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID"
+                       value="ECUC:34bfc216-9d93-4694-90c5-39340e82c758"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                  </v:ctr>
+              <!--Requirements: ECUC_Pwm_00004 -->
+                  <v:ctr name="PwmGeneral" type="IDENTIFIABLE">
+                    <a:a name="UUID"
+                         value="ECUC:9e045944-b70f-48ae-9745-0344fa64c653"/>
+                <!--Design: DES_PWM_008 -->
+                <!--Requirements: MCAL-3657 -->
+              
+                   <!--Requirements: ECUC_Pwm_00131 -->
+                    <v:var name="PwmDevErrorDetect" type="BOOLEAN">
+                      <a:a name="DESC"
+                       value="EN: Switch for enabling the development error detection."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:7ee4dbf7-92ca-43f8-bedf-cd012b1d5f01"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                <v:var name="PwmSysClockFrequency" type="INTEGER">
+                      <a:a name="DESC" 
+                           value="EN: Value of the System clock frequency in Hz Default frequency is 200MHz"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Texas Instruments"/>
+                      <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID" 
+                           value="ECUC:daa5c051-75d5-4a20-8b6a-ca34afab3ddd"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=200000000"/>
+                        <a:tst expr="&gt;=1"/>
+                      </a:da>
+                    </v:var>
+                    <v:var name="PwmDutycycleUpdatedEndperiod" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Switch for enabling the update of the duty cycle parameter at the end of the current period."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:873477b1-c07e-4208-b92e-4e1875570984"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+					<v:var name="PwmSfoSupportEnable" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Switch for enabling the SFO Inclusion for HRPWM ,If HRPWM is enabled."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Texas Instrument"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:873477b1-c07e-4208-b92e-4e1875770984"/>
+                      <a:da name="DEFAULT" value="false"/>
+                    </v:var>
+					<v:var name="PwmDefaultOSCounterId" type="INTEGER">
+				  <a:a name="DESC" value="EN: Default Os Counter Id if node reference to OsCounter ref PwmOsCounterRef is not set"/>
+					<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                      <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+				  <a:a name="UUID" value="ECUC:32c56ea6-2b57-4968-83a2-357d467db908"/>
+                    <a:da name="INVALID" type="Range">
+                      <a:tst expr="&lt;=16"/>
+                      <a:tst expr="&gt;=0"/>
+                    </a:da>
+				  <a:da name="DEFAULT" value="0"/>
+				  <a:da name="ENABLE" type="XPath" expr="not(node:refexists(../PwmOsCounterRef))"/>
+                  </v:var>
+				<v:ref name="PwmOsCounterRef" type="REFERENCE">
+					<a:a name="DESC"
+	   value="EN: This parameter contains a reference to the OsCounter, which is used by the PWM driver."/>
+					<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+						<icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+						<icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+					</a:a>
+					<a:a name="OPTIONAL" value="true"/>
+					<a:a name="ORIGIN" value="Texas Instruments"/>
+					<a:a name="SCOPE" value="LOCAL"/>
+					<a:a name="UUID" value="ECUC:26c9bdff-38cf-4f0b-8754-7472d0d41cb9"/>
+					<a:da name="REF"
+		value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
+					<a:da name="ENABLE" value="true"/>
+					<a:da name="EDITABLE" value="true"/>
+					<a:da name="READONLY" value="false"/>
+					<a:da name="VISIBLE" value="true"/>
+				</v:ref>
+				<v:var name="PwmMaxTimeoutDuration" type="INTEGER">
+                  <a:a name="DESC" 
+                       value="EN: Maximum time duration for PWM SFO status. Unit is in clock ticks. Configure the timeout according to r5f clock frequency(400MHz/200MHz)"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SCOPE" value="LOCAL"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" 
+                       value="ECUC:0ae36278-6ef3-4b83-89ae-02358da5042c"/>
+                  <a:da name="DEFAULT" value="10000"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=4294967295"/>
+                    <a:tst expr="&gt;=1"/>
+                  </a:da>
+                </v:var>
+                <!--Requirements: ECUC_Pwm_00139 -->
+                    <v:var name="PwmIndex" type="INTEGER">
+                      <a:a name="DESC"
+                       value="EN: Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:1559f6dc-e859-4216-8c88-0f8836ae115e"/>
+                      <a:da name="DEFAULT" value="1"/>
+                      <a:da name="INVALID" type="Range">
+                        <a:tst expr="&lt;=1"/>
+                        <a:tst expr="&gt;=0"/>
+                      </a:da>
+                    </v:var>
+                    <v:lst name="PwmLowPowerStatesSupport">
+                      <a:da name="MAX" value="1"/>
+                    <v:var name="PwmLowPowerStatesSupport" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Adds / removes all power state management related APIs (PWM_SetPowerState, PWM_GetCurrentPowerState, PWM_GetTargetPowerState, PWM_PreparePowerState, PWM_Main_PowerTransitionManager), indicating if the HW offers low power state management.This Feature is not supported"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:2abff61e-374e-4c26-bcc6-6486e894e765"/>
+                      <a:da name="DEFAULT" value="false"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="VISIBLE" value="false"/>
+                    </v:var>
+		    </v:lst>
+                  
+               <!--Requirements: ECUC_Pwm_00133 -->
+                    <v:var name="PwmNotificationSupported" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Switch to indicate that the notifications are supported"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:39804e4a-209d-4df8-ade1-4e0cd88cc57d"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                    <v:var name="PwmPeriodUpdatedEndperiod" type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Switch for enabling the update of the period parameter at the end of the current period."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:da85e8d7-af3c-4ad4-a700-43ea0462bee4"/>
+                      <a:da name="DEFAULT" value="true"/>
+                    </v:var>
+                    <v:lst name="PwmPowerStateAsynchTransitionMode">
+                      <a:da name="MAX" value="1"/>
+                    <v:var name="PwmPowerStateAsynchTransitionMode"
+                           type="BOOLEAN">
+                      <a:a name="DESC"
+                           value="EN: Enables / disables support of the PWM Driver to the asynchronous power state transition."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v mclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="ECUC:a510f93f-3393-467e-8c07-090d589c89f6"/>
+                      <a:da name="DEFAULT" value="false"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="VISIBLE" value="false"/>
+                    </v:var>
+					</v:lst>
+                <v:var name="PwmErrorHook" type="FUNCTION-NAME">
+                  <a:a name="DESC" 
+                       value="EN: Used to report development errors."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="LONG-NAME" value="EN: ErrorHook Function"/>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="UUID" 
+                       value="ECUC:1bc7646f-810f-466d-848b-3aec14754b89"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="Det_ReportError"/>
+                    </v:var>
+                <v:var name="PwmDetIncludeFile" type="STRING">
+                  <a:a name="DESC" 
+                       value="EN: Includes the header file where the Error hook function is defined."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="LONG-NAME" value="EN: Include File"/>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="UUID" 
+                       value="ECUC:451fe01c-e647-4164-b25c-f078321c627a"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="Det.h"/>
+                </v:var>
+                <v:var name="PwmNotificationsIncludeFile" type="STRING">
+                  <a:a name="DESC" 
+                       value="EN: Includes the header file where the notification functions are defined."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                  </a:a>
+                  <a:a name="LONG-NAME" value="EN: Include File"/>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="UUID" 
+                       value="ECUC:648312e9-4a84-4b62-b124-989921efe023"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value=""/>
+                </v:var>
+                <v:var name="PwmCfgDebugReporting" type="BOOLEAN">
+                  <a:a name="DESC" 
+                       value="EN: Switch to Enable/disable debug support."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="UUID" 
+                       value="ECUC:3fa0b831-73c3-4c75-89ec-a11c92b70e76"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="PwmTypeofInterruptFunction" type="ENUMERATION">
+                  <a:a name="DESC" value="EN: Type of ISR function"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="UUID"
+                       value="ECUC:4eb7f9f4-bf82-4bb1-94ee-df7aa92c3d16"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:da name="DEFAULT" value="PWM_ISR_CAT1"/>
+                  <a:da name="RANGE">
+                    <a:v>PWM_ISR_VOID</a:v>
+                    <a:v>PWM_ISR_CAT1</a:v>
+                    <a:v>PWM_ISR_CAT2</a:v>
+                  </a:da>
+                </v:var>
+                    <v:lst name="PwmPowerStateConfig" type="MAP">
+                      <v:ctr name="PwmPowerStateConfig" type="IDENTIFIABLE">
+                        <a:a name="DESC"
+                             value="EN: Each instance of this parameter defines a power state and the callback to be called when this power state is reached."/>
+                        <a:a name="UUID"
+                             value="ECUC:32734417-2e9b-48db-930e-3df1591c3887"/>
+                        <a:da name="ENABLE" value="false"/>
+                        <a:da name="EDITABLE" value="false"/>
+                        <a:da name="VISIBLE" value="false"/>
+                        <v:var name="PwmPowerState" type="INTEGER">
+                          <a:a name="DESC"
+                               value="EN: Each instance of this parameter describes a different power state supported by the PWM HW. It should be defined by the HW supplier and used by the PWMDriver to reference specific HW configurations which set the PWM HW module in the referenced power state.This Feature is not supported"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="true"/>
+                          <a:da name="ENABLE" value="false"/>
+                          <a:da name="EDITABLE" value="false"/>
+                          <a:da name="VISIBLE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:ee4c6090-0034-4736-bdd2-7ad86f21e9d3"/>
+                          <a:da name="INVALID" type="Range">
+                            <a:tst expr="&lt;=9223372036854775807"/>
+                            <a:tst expr="&gt;=0"/>
+                          </a:da>
+                        </v:var>
+                        <v:var name="PwmPowerStateReadyCbkRef"
+                               type="FUNCTION-NAME">
+                          <a:a name="DESC"
+                               value="EN: Each instance of this parameter contains a reference to a power mode callback defined in a CDD or IoHwAbs component.This Feature is not supported"/>
+                          <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                               type="IMPLEMENTATIONCONFIGCLASS">
+                            <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                            <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          </a:a>
+                          <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                          <a:a name="SCOPE" value="LOCAL"/>
+                          <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:da name="ENABLE" value="false"/>
+                      <a:da name="VISIBLE" value="false"/>
+                          <a:a name="UUID"
+                               value="ECUC:6e8869ff-d465-40bf-9296-d75dce548e58"/>
+                        </v:var>
+                  </v:ctr>
+                </v:lst>
+                </v:ctr>
+				<v:ctr name="PwmPublishedInformation" type="IDENTIFIABLE">
+								<a:a name="DESC"
+									 value="EN: Additional published parameters not covered by &quot;Common&quot; Published Information. Note that these parameters have &quot;PUBLISHED-INFORMATION&quot; configuration class setting, since they are published information."/>
+								<a:a name="UUID"
+									 value="ECUC:e435c52c-58b2-4506-ae6c-da9a9b76ad99"/>
+                                <v:var name="PwmDeviceVariant" type="ENUMERATION">
+									<a:a name="DESC" value="EN: Select SOC AM263Px variant "/>
+									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+										<icc:v class="PublishedInformation">VariantPostBuild</icc:v>
+										<icc:v class="PublishedInformation">VariantPreCompile</icc:v>
+									</a:a>
+									<a:a name="OPTIONAL" value="true"/>
+									<a:a name="ORIGIN" value="Texas Instruments"/>
+									<a:a name="SCOPE" value="LOCAL"/>
+									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
+									<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+									<a:da name="ENABLE" value="true"/>
+									<a:da name="DEFAULT" value="AM263Px"/>
+									<a:da name="RANGE">
+										<a:v>AM263Px</a:v>
+									</a:da>
+								</v:var>
+							</v:ctr>
+              <d:ref type="REFINED_MODULE_DEF" value="ASPath:/AUTOSAR/EcucDefs/Pwm"/>
+            </v:ctr>
+              </d:chc>
+            </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

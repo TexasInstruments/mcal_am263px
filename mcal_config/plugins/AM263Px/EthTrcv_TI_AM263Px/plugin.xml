@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+  <!--
+    AUTOSAR EthTrcv_TI_AM263Px plugin
+    Project: TI Sitara AM263Px MCAL Drivers
+
+    Copyright 2022-2024 by Texas Instruments, Inc.
+    All rights exclusively reserved for Texas Instruments Inc,
+    unless expressly agreed to otherwise.
+  -->
+<plugin>
+    <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="EthTrcv_TI_AM263Px_ModuleId"
+             name="EthTrcv_TI_AM263Px Module">
+
+    <module id="EthTrcv_TI_AM263Px"
+            label="EthTrcv"
+            mandatory="false"
+            allowMultiple="false"
+            description="TI Sitara EthTrcv plug-in"
+            copyright="(c) 2022-2024 Texas Instruments Incorporated"
+            swVersionMajor="10"
+            swVersionMinor="1"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            specVersionMajor="4"
+            specVersionMinor="6"
+            specVersionPatch="0"
+            specVersionSuffix=""
+            relVersionPrefix="AUTOSAR"
+            relVersionMajor="4"
+            relVersionMinor="3"
+            relVersionPatch="1"
+            relVersionSuffix="0"
+            categoryType="EthTrcv"
+            categoryLayer="Communication Drivers"
+            categoryCategory="ETHTRCV"
+            categoryComponent="ECUC">
+      <ecuType target="ARM" derivate="AM263Px"/>
+    </module>
+  </extension>
+
+
+    <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+             id="EthTrcv_TI_AM263Px_ConfigId"
+             name="EthTrcv_TI_AM263Px Configuration">
+    <configuration moduleId="EthTrcv_TI_AM263Px">
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+        <resource value="config/EthTrcv.xdm" type="xdm" id="res_default"/>
+		<resource value="config_ext/EthTrcv_Rec.xdm" type="xdm" id="res_recconf"/>
+        
+		<recconfig name="Default Recommended Configuration"
+                   default="true"
+                   description="Default Recommended Configuration"
+                   resourceId="res_recconf"
+                   path="ASPath:/TI_AM263Px/EthTrcv_Rec"/>
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TI_AM263Px/EthTrcv"/>
+      </data>
+
+      <editor id="EthTrcv_TI_AM263Px_EditorId"
+              label="Default"
+              tooltip="TI Sitara AM263Px MCAL EthTrcv plug-in">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TI_AM263Px/EthTrcv"/>
+          <parameter name="title" value="EthTrcv"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="EthTrcv_TI_AM263Px_GeneratorId"
+              name="EthTrcv_TI_AM263Px Generator">
+    <generator
+          class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator"
+          id="EthTrcvGenerator_AM263Px"
+          moduleId="EthTrcv_TI_AM263Px">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate,generate_swcd"/>
+
+    </generator>
+  </extension>
+
+
+  <extension point="org.eclipse.help.toc">
+    <toc file="anchors.xml" primary="true"/>
+  </extension>
+
+</plugin>
+

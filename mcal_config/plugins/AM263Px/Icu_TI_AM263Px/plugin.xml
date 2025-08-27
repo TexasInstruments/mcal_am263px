@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+  <!--
+    AUTOSAR Icu_TI_AM263Px _plugin
+    Pro ject: TI ADAS MCAL Drivers
+
+    Copyright 2023 by Texas Instruments, Inc.
+    All rights exclusively reserved for Texas Instruments Inc,
+    unless expressly agreed to otherwise.
+  -->
+<plugin>
+    <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="Icu_TI_AM263Px_ModuleId"
+             name="Icu_TI_AM263Px Module">
+
+    <module id="Icu_TI_AM263Px"
+            label="Icu"
+            mandatory="false"
+            allowMultiple="false"
+            description="TI Icu plug-in"
+            copyright="(c) 2023 Texas Instruments Incorporated"
+            swVersionMajor="10"
+            swVersionMinor="1"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            specVersionMajor="4"
+            specVersionMinor="6"
+            specVersionPatch="0"
+            specVersionSuffix=""
+            relVersionPrefix="AUTOSAR"
+            relVersionMajor="4"
+            relVersionMinor="3"
+            relVersionPatch="1"
+            relVersionSuffix="0"
+            categoryType="Icu"
+            categoryLayer="IO Drivers"
+            categoryCategory="ICU"
+            categoryComponent="ECUC">
+      <ecuType target="ARM" derivate="AM263Px"/>
+    </module>
+  </extension>
+
+
+    <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+             id="Icu_TI_AM263Px_ConfigId"
+             name="Icu_TI_AM263Px Configuration">
+    <configuration moduleId="Icu_TI_AM263Px">
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+        <resource value="config/Icu.xdm" type="xdm" id="res_default"/>
+        <resource value="config_ext/Icu_Rec.xdm" type="xdm" id="res_recconf"/>
+        <recconfig name="Default Recommended Configuration"
+                   default="true"
+                   description="Default Recommended Configuration"
+                   resourceId="res_recconf"
+                   path="ASPath:/TI_AM263Px/Icu_Rec"/>
+      </schema>
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TI_AM263Px/Icu"/>
+      </data>
+
+      <editor id="Icu_TI_AM263Px_EditorId"
+              label="Default"
+              tooltip="TI Icu plug-in">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TI_AM263Px/Icu"/>
+          <parameter name="title" value="Icu"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="Icu_TI_AM263Px_GeneratorId"
+              name="Icu_TI_AM263Px Generator">
+    <generator
+          class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator"
+          id="IcuGenerator_AM263Px"
+          moduleId="Icu_TI_AM263Px">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate,generate_swcd"/>
+
+    </generator>
+  </extension>
+
+<!-- 
+  <extension point="org.eclipse.help.toc">
+    <toc file="anchors.xml" primary="true"/>
+  </extension> -->
+
+</plugin>

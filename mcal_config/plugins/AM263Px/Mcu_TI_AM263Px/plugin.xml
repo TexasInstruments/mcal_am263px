@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+  <!--
+    AUTOSAR Mcu_TI_AM263Px plugin
+    Project: TI Sitara MCAL Driver Development
+
+    Copyright 2023 by Texas Instruments, Inc.
+    All rights exclusively reserved for Texas Instruments Inc,
+    unless expressly agreed to otherwise.
+  -->
+<plugin>
+    <extension point="dreisoft.tresos.launcher2.plugin.module"
+             id="Mcu_TI_AM263Px_ModuleId"
+             name="Mcu_TI_AM263Px Module">
+
+    <module id="Mcu_TI_AM263Px"
+            label="Mcu"
+            mandatory="false"
+            allowMultiple="false"
+            description="TI Sitara MCU AM263Px MCU Plugin"
+            copyright="(c) 2023 Texas Instruments Incorporated"
+            swVersionMajor="10"
+            swVersionMinor="1"
+            swVersionPatch="0"
+            swVersionSuffix=""
+            specVersionMajor="1"
+            specVersionMinor="0"
+            specVersionPatch="0"
+            specVersionSuffix=""
+            relVersionPrefix="AUTOSAR"
+            relVersionMajor="4"
+            relVersionMinor="3"
+            relVersionPatch="1"
+            relVersionSuffix="0"
+            categoryType="Mcu"
+            categoryLayer="Microcontroller Drivers"
+            categoryCategory="MCU"
+            categoryComponent="ECUC">
+      <ecuType target="ARM" derivate="AM263Px"/>
+    </module>
+  </extension>
+
+
+    <extension point="dreisoft.tresos.launcher2.plugin.configuration"
+             id="Mcu_TI_AM263Px_ConfigId"
+             name="Mcu_TI_AM263Px Configuration">
+    <configuration moduleId="Mcu_TI_AM263Px">
+      <schema>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarSchemaManager"/>
+        <resource value="config/Mcu.xdm" type="xdm" id="res_default"/>
+		
+		<resource value="config_ext/Mcu_Rec.xdm" type="xdm" id="res_recconf"/>
+        
+		<recconfig name="Default Recommended Configuration"
+                   default="true"
+                   description="Default Recommended Configuration"
+                   resourceId="res_recconf"
+                   path="ASPath:/TI_AM263Px/Mcu_Rec"/>
+				   
+		<!-- register the Pre-configuration Mcu_PreConfiguration -->
+		<resource value="config_ext/Mcu_PreConfiguration.xdm"
+                  id="res_McuPreConfiguration"
+                  type="xdm"/>
+		<preconfig name="McuPreConfiguration"
+                   default="true"
+                   description="Mcu reset reasons"
+                   resourceId="res_McuPreConfiguration"
+                   path="ASPath:/TI_AM263Px/McuPreConfiguration"/>		   
+      </schema>
+
+      <data>
+        <manager class="dreisoft.tresos.autosar2.resourcehandling.AutosarConfigManager"/>
+        <schemaNode path="ASPath:/TI_AM263Px/Mcu"/>
+      </data>
+
+      <editor id="Mcu_TI_AM263Px_EditorId"
+              label="Default"
+              tooltip="TI AR Mcu plug-in">
+        <class class="dreisoft.tresos.launcher2.editor.GenericConfigEditor">
+          <parameter name="schema" value="ASPath:/TI_AM263Px/Mcu"/>
+          <parameter name="title" value="Mcu"/>
+          <parameter name="noTabs" value="false"/>
+          <parameter name="noLinks" value="true"/>
+          <parameter name="groupLinks" value="false"/>
+          <parameter name="groupContainers" value="false"/>
+          <parameter name="groupTables" value="true"/>
+          <parameter name="optionalGeneralTab" value="true"/>
+        </class>
+      </editor>
+    </configuration>
+  </extension>
+  <extension point="dreisoft.tresos.launcher2.plugin.generator"
+              id="Mcu_TI_AM263Px_GeneratorId"
+              name="Mcu_TI_AM263Px Generator">
+    <generator
+          class="dreisoft.tresos.launcher2.generator.TemplateBasedCodeGenerator"
+          id="McuGenerator_AM263Px"
+          moduleId="Mcu_TI_AM263Px">
+
+      <!-- common template path parameters -->
+      <parameter name="templates"
+                 mode="generate,verify" value="generate,generate_swcd"/>
+
+    </generator>
+  </extension>
+</plugin>
+

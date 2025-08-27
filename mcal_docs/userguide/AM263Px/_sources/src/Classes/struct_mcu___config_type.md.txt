@@ -1,0 +1,34 @@
+---
+orphan: true
+---
+
+---
+title: Mcu_ConfigType
+summary: MCU CONFIG ROOT structure. 
+
+---
+
+# Mcu_ConfigType
+
+
+
+MCU CONFIG ROOT structure. 
+
+
+`#include <Mcu_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint8 | Mcu_ResetMode |  Reset mode to be used.  |
+|  [Mcu_RamConfigPtrType](../Modules/group___m_c_u.md#typedef-mcu_ramconfigptrtype) | Mcu_ConfigRamSection |  Configration of Ram Sections.  |
+|  uint8 | Mcu_NumberOfRamSectors |  Number of entries in Mcu_ConfigRamSection.  |
+|  [Mcu_ClockConfigPtrType](../Modules/group___m_c_u.md#typedef-mcu_clockconfigptrtype) | Mcu_ClockConfig |  Configuration of Module functional clock source.  |
+|  uint8 | Mcu_NumberOfClockConfig |  Number of entries in Mcu_ClockConfig.  |
+|  Mcu_PllConfigPtrType | Mcu_PllConfig |  PLL Configuration.  |
+|  Mcu_PllSourceIdType | Mcu_PllSourceId |  PLL source selection.  |
+|  [Mcu_PwmConfigPtrType](../Modules/group___m_c_u.md#typedef-mcu_pwmconfigptrtype) | Mcu_Pwmconfig |  PWM Configuration.  |
+|  [Mcu_AdcConfigPtrType](../Modules/group___m_c_u.md#typedef-mcu_adcconfigptrtype) | Mcu_AdcConfig |  ADC Configuration.  |
+
+

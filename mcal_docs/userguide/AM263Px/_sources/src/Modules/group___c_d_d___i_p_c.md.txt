@@ -1,0 +1,793 @@
+---
+title: IPC API GUIDE Header file
+
+---
+
+# CDD_IPC
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Cdd_IpcStatusType](../Modules/group___c_d_d___i_p_c.md#enum-cdd_ipcstatustype)** | This type defines a range of specific status for Complex driver.  | 
+|typedef struct [IpcNotifyUtils_InitObject](../Classes/struct_ipc_notify_utils___init_object.md) *  | **[IpcNotifyUtils_InitHandle](../Modules/group___c_d_d___i_p_c.md#typedef-ipcnotifyutils_inithandle)** 
+|typedef struct [IpcNotifyUtils_Object](../Classes/struct_ipc_notify_utils___object.md) *  | **[IpcNotifyUtils_Handle](../Modules/group___c_d_d___i_p_c.md#typedef-ipcnotifyutils_handle)** 
+|typedef void(*)(void *handle, Cdd_Ipc_RPMessage_EpObject *obj, void *arg, void *data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)  | **[Cdd_Ipc_RPMessage_lld_recvCallback](../Modules/group___c_d_d___i_p_c.md#typedef-cdd_ipc_rpmessage_lld_recvcallback)** 
+|typedef void(*)(void *handle, Cdd_Ipc_RPMessage_EpObject *obj, void *arg)  | **[Cdd_Ipc_RPMessage_lld_recvNotifyCallback](../Modules/group___c_d_d___i_p_c.md#typedef-cdd_ipc_rpmessage_lld_recvnotifycallback)** 
+|typedef sint32(*)(uint8 *data, uint16 dataLen, uint8 crcSize, void *crc)  | **[Cdd_Ipc_CrcHookCallback](../Modules/group___c_d_d___i_p_c.md#typedef-cdd_ipc_crchookcallback)** 
+
+
+
+### enum Cdd_IpcStatusType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CDD_IPC_UNINIT | 0U| The Complex Driver is not initialized or not usable.   |
+| CDD_IPC_IDLE | 1U| The Complex Driver is not currently writing.   |
+| CDD_IPC_ALLOW_ACCESS | 2U| The Complex Driver is currently open.   |
+| CDD_IPC_BUSY | 3U| The Complex Driver is performing a Write.   |
+| CDD_IPC_CLOSE | 4U| The Complex Driver is currently open.   |
+
+
+
+
+**Brief**: 
+This type defines a range of specific status for Complex driver. 
+
+Requirements : AUTORADAR_MCAL-70 
+
+
+
+
+### typedef IpcNotifyUtils_InitHandle
+```
+typedef  struct IpcNotifyUtils_InitObject * IpcNotifyUtils_InitHandle;
+```
+
+
+
+
+### typedef IpcNotifyUtils_Handle
+```
+typedef  struct IpcNotifyUtils_Object * IpcNotifyUtils_Handle;
+```
+
+
+
+
+### typedef Cdd_Ipc_RPMessage_lld_recvCallback
+```
+typedef void(* Cdd_Ipc_RPMessage_lld_recvCallback) (void *handle, Cdd_Ipc_RPMessage_EpObject *obj, void *arg, void *data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt);
+```
+
+
+
+
+### typedef Cdd_Ipc_RPMessage_lld_recvNotifyCallback
+```
+typedef void(* Cdd_Ipc_RPMessage_lld_recvNotifyCallback) (void *handle, Cdd_Ipc_RPMessage_EpObject *obj, void *arg);
+```
+
+
+
+
+### typedef Cdd_Ipc_CrcHookCallback
+```
+typedef sint32(* Cdd_Ipc_CrcHookCallback) (uint8 *data, uint16 dataLen, uint8 crcSize, void *crc);
+```
+
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[IpcNotifyUtils_InitObject](../Classes/struct_ipc_notify_utils___init_object.md)** | IPC Notify Utils driver initialization object.  |
+| **[IpcNotifyUtils_Object](../Classes/struct_ipc_notify_utils___object.md)** | IPC Notify Utils driver object.  |
+| **[Cdd_Ipc_RPMessage_EpObject](../Classes/struct_cdd___ipc___r_p_message___ep_object.md)** |  |
+| **[Cdd_IpcCreateParams](../Classes/struct_cdd___ipc_create_params.md)** |  |
+| **[Cdd_IpcConfigType](../Classes/struct_cdd___ipc_config_type.md)** |  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_IPC_MODULE_ID   | CDD Module ID.  |
+| CDD_IPC_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| CDD_IPC_INSTANCE_ID   | Texas Instruments Vendor ID.  |
+| CDD_IPC_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| CDD_IPC_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| CDD_IPC_SW_PATCH_VERSION   | Driver Implementation patch Version.  |
+| CDD_IPC_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by CDD Driver.  |
+| CDD_IPC_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by CDD Driver.  |
+| CDD_IPC_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by CDD Driver.  |
+| CDD_IPC_ISR_VOID   | void ISR type  |
+| CDD_IPC_ISR_CAT1   | Category 1 ISR type.  |
+| CDD_IPC_ISR_CAT2   | Category 2 ISR type.  |
+| CDD_IPC_INIT_SERVICE_ID   | API Service ID for initialization.  |
+| CDD_IPC_GETVERSIONINFO_SERVICE_ID   | API Service ID for get version info.  |
+| CDD_IPC_READDATA_SERVICE_ID   | API Service ID for read API.  |
+| CDD_IPC_WRITEDATA_SERVICE_ID   | API Service ID for write API.  |
+| CDD_IPC_ERROR_SERVICE_ID   | API Service ID for error API.  |
+| CDD_IPC_RPMSG_READ_SERVICE_ID   | API Service ID for read cancel API.  |
+| CDD_IPC_RPMSG_WRITE_SERVICE_ID   | API Service ID for write cancel API.  |
+| CDD_IPC_NOTIFY_REGISTER_CLIENT_SERVICE_ID   | API Service ID for get remaining bytes API.  |
+| CDD_IPC_CONSTRUCT_SERVICE_ID   | API Service ID for get remaining read bytes API.  |
+| CDD_IPC_READNOTIF_SERVICE_ID   | API Service ID for read notification han dler.  |
+| CDD_IPC_WRITENOTIF_SERVICE_ID   | API Service ID for write notification handler.  |
+| CDD_IPC_ERRORNOTIF_SERVICE_ID   | API Service ID for error notification handler.  |
+| CDD_IPC_DEINIT_SERVICE_ID   | API Service ID for deinitialization.  |
+| CDD_IPC_INTERNAL_ISR_ID   | API Service ID for ISR.  |
+| CDD_IPC_NOTIFY_UNREGISTER_CLIENT_SERVICE_ID   | API Service ID for get remaining bytes API.  |
+| CDD_IPC_DESTRUCT_SERVICE_ID   | API Service ID for Destructing the RpMsg Endpoint Obj.  |
+| CDD_IPC_NOTIFY_SYNCALL_SERVICE_ID   | API Service ID for Destructing the RpMsg Endpoint Obj.  |
+| CDD_IPC_E_UNINIT   | Error code indicating the IPC is uninitialized.  |
+| CDD_IPC_E_REGISTER_CLIENT_FAILED   | Error code indicating register client failed event.  |
+| CDD_IPC_E_INIT_FAILED   | Error code indicating IPC reading mode ongoing.  |
+| CDD_IPC_E_DEINIT_FAILED   | Error code indicating IPC writing mode ongoing.  |
+| CDD_IPC_E_PARAM_POINTER   | Error code indicating invalid parameter.  |
+| CDD_IPC_E_ALREADY_INITIALIZED   | Error code indicating IPC already initialized.  |
+| CDD_IPC_E_PARAM_VALUE   | Error code indicating Service called with wrong param.  |
+| CDD_IPC_E_PARAM_LENGTH   | Error code indicating Service called with invalid length.  |
+| CDD_IPC_E_INVALID_CHANNEL   | Error code indicating invalid IPC configuration.  |
+| CDD_IPC_E_INVALID_CONFIG   | Error code indicating invalid IPC configuration.  |
+| CDD_IPC_E_WRITE_FAILED   | Error code indicating IPC Write Failed configuration.  |
+| CDD_IPC_E_UNREGISTER_CLIENT_FAILED   | Error code indicating unregister client failed event.  |
+| CDD_IPC_E_CONSTRUCT_FAILED   | Error code indicating construct failed event.  |
+| CDD_IPC_E_RPMSG_WRITE_FAILED   | Error code indicating RpMsg Write failed event.  |
+| CDD_IPC_E_RPMSG_READ_FAILED   | Error code indicating Rpmsg read failed event.  |
+| CDD_IPC_E_DESTRUCT_FAILED   | Error code indicating destruct failed event.  |
+| IP_VERSION_IPC_V0   | Selecting IPC Version based on target platform (AM263X corresponding to V0)  |
+| CDD_IPC_LOCK   | IPC Lock.  |
+| CDD_IPC_UNLOCK   | IPC Unlock.  |
+| CDD_IPC_MUTEX_ARM_LOCKED   | Mutex Arm Lock.  |
+| CDD_IPC_MUTEX_ARM_UNLOCKED   | Mutex Arm Unlock.  |
+| IPC_NOTIFY_CLIENT_ID_SYNC   | Client ID used for sync messages, this client ID should not be used by other users.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| uint32 | **[Cdd_Ipc_Mutex_resourceTryLock](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_mutex_resourcetrylock)**(uint32 * lock)|  |
+| void | **[Cdd_Ipc_Mutex_resourceUnlock](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_mutex_resourceunlock)**(uint32 * lock)|  |
+| void | **[Cdd_Ipc_notify_MsgHandler](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_notify_msghandler)**(void * ipcNotifyHandle, uint32 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteClientId, uint32 Cdd_Ipc_msgValue, uint32 timeout, sint32 crcStatus, void * args)|  |
+| void | **[Cdd_Ipc_GetVersionInfo](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_getversioninfo)**(Std_VersionInfoType * VersionInfoPtr)| Service for getting CDD version.  |
+| void | **[Cdd_Ipc_Init](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_init)**(const Cdd_IpcConfigType * ConfigPtr)| Service for CDD IPC Initialization.  |
+| void | **[Cdd_Ipc_DeInit](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_deinit)**(const Cdd_IpcConfigType * ConfigPtr)| Service for deinitializing CDD IPC.  |
+| Std_ReturnType | **[Cdd_Ipc_Notify_RegisterClient](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_notify_registerclient)**(uint32 Cdd_Ipc_localClientId, IpcNotify_FxnCallback Cdd_Ipc_notify_msgHandler, void * args)| Service to register a client for IPC.  |
+| Std_ReturnType | **[Cdd_Ipc_Notify_Write](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_notify_write)**(uint32 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteClientId, uint32 Cdd_Ipc_msgValue, uint32 Cdd_Ipc_waitForFifoNotFull)| Service to write ipc notify message.  |
+| Std_ReturnType | **[Cdd_Ipc_Notify_UnregisterClient](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_notify_unregisterclient)**(uint32 Cdd_Ipc_localClientId)| Service to un-register a client for IPC.  |
+| void | **[Cdd_Ipc_Construct](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_construct)**(const Cdd_IpcConfigType * ConfigPtr)| Service for CDD Ipc RpMsg Construct.  |
+| Std_ReturnType | **[Cdd_Ipc_RpMsg_SendMsg](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_rpmsg_sendmsg)**(void * data, uint16 dataLen, uint16 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteEndPt, uint16 Cdd_Ipc_localEndPtId, uint32 timeout)| Service for CDD Ipc RpMsg GetLoclEndPoint.  |
+| Std_ReturnType | **[Cdd_Ipc_RpMsg_RecvMsg](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_rpmsg_recvmsg)**(void * data, uint16 * dataLen, uint16 Cdd_Ipc_localEndPtId, uint16 * Cdd_Ipc_remoteCoreId, uint16 * Cdd_Ipc_remoteEndPt, uint32 timeout)| Service for CDD Ipc RpMsg GetLoclEndPoint.  |
+| void | **[Cdd_Ipc_Destruct](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_destruct)**(uint16 Cdd_Ipc_localEndPtId)| Service to delete a previously created RPMessage object.  |
+| void | **[Cdd_Ipc_Notify_Sync_All](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_notify_sync_all)**(void )| Service for CDD Ipc Notify SyncAll.  |
+| sint32 | **[IpcNotifyUtils_lld_init](../Modules/group___c_d_d___i_p_c.md#function-ipcnotifyutils_lld_init)**([IpcNotifyUtils_Handle](../Classes/struct_ipc_notify_utils___object.md) hIpcNotifyUtils)| Initialize IPC Notify Utils module.  |
+| sint32 | **[IpcNotifyUtils_lld_sendSync](../Modules/group___c_d_d___i_p_c.md#function-ipcnotifyutils_lld_sendsync)**([IpcNotifyUtils_Handle](../Classes/struct_ipc_notify_utils___object.md) hIpcNotifyUtils, uint32 remoteCoreId)| Send a sync message to specific core.  |
+| sint32 | **[IpcNotifyUtils_lld_waitSync](../Modules/group___c_d_d___i_p_c.md#function-ipcnotifyutils_lld_waitsync)**([IpcNotifyUtils_Handle](../Classes/struct_ipc_notify_utils___object.md) hIpcNotifyUtils, uint32 remoteCoreId, uint32 timeout)| Wait for a sync message to be received from the specified core.  |
+| sint32 | **[IpcNotifyUtils_lld_syncAll](../Modules/group___c_d_d___i_p_c.md#function-ipcnotifyutils_lld_syncall)**([IpcNotifyUtils_Handle](../Classes/struct_ipc_notify_utils___object.md) hIpcNotifyUtils, uint32 timeout)| Send a message to all enabled cores and wait for sync message from all enabled cores.  |
+| void | **[IpcNotifyUtils_lld_syncCallback](../Modules/group___c_d_d___i_p_c.md#function-ipcnotifyutils_lld_synccallback)**(void * hIpcNotify, uint32 remoteCoreId, uint16 localClientId, uint32 msgValue, uint32 timeout, sint32 crcStatus, void * args)|  |
+| void | **[Cdd_Ipc_VringMemAllocation](../Modules/group___c_d_d___i_p_c.md#function-cdd_ipc_vringmemallocation)**(void )|  |
+
+
+
+### function Cdd_Ipc_Mutex_resourceTryLock
+
+```
+uint32 Cdd_Ipc_Mutex_resourceTryLock(
+    uint32 * lock
+)
+```
+
+
+### function Cdd_Ipc_Mutex_resourceUnlock
+
+```
+void Cdd_Ipc_Mutex_resourceUnlock(
+    uint32 * lock
+)
+```
+
+
+### function Cdd_Ipc_notify_MsgHandler
+
+```
+void Cdd_Ipc_notify_MsgHandler(
+    void * ipcNotifyHandle,
+    uint32 Cdd_Ipc_remoteCoreId,
+    uint16 Cdd_Ipc_remoteClientId,
+    uint32 Cdd_Ipc_msgValue,
+    uint32 timeout,
+    sint32 crcStatus,
+    void * args
+)
+```
+
+
+### function Cdd_Ipc_GetVersionInfo
+
+```
+void Cdd_Ipc_GetVersionInfo(
+    Std_VersionInfoType * VersionInfoPtr
+)
+```
+
+
+**Brief**: 
+Service for getting CDD version. 
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **VersionInfoPtr** - Pointer to where to store the version information 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Ipc_Init
+
+```
+void Cdd_Ipc_Init(
+    const Cdd_IpcConfigType * ConfigPtr
+)
+```
+
+
+**Brief**: 
+Service for CDD IPC Initialization. 
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ConfigPtr** - Pointer to configuration set 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Ipc_DeInit
+
+```
+void Cdd_Ipc_DeInit(
+    const Cdd_IpcConfigType * ConfigPtr
+)
+```
+
+
+**Brief**: 
+Service for deinitializing CDD IPC. 
+
+Service for deinitializing the CDD IPC and change driver state to uninitialized
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ConfigPtr** - Pointer to configuration set 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Ipc_Notify_RegisterClient
+
+```
+Std_ReturnType Cdd_Ipc_Notify_RegisterClient(
+    uint32 Cdd_Ipc_localClientId,
+    IpcNotify_FxnCallback Cdd_Ipc_notify_msgHandler,
+    void * args
+)
+```
+
+
+**Brief**: 
+Service to register a client for IPC. 
+
+Service to register client at a specified client ID.
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Cdd_Ipc_localClientId** - Local core client ID 
+  
+* **Cdd_Ipc_notify_msgHandler** - Pointer to the function that handles the Ipc notify message arrives on that above client ID 
+
+
+**Returns**: 
+
+  
+* **E_OK** 
+<br> 
+  
+* **E_NOT_OK** 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Ipc_Notify_Write
+
+```
+Std_ReturnType Cdd_Ipc_Notify_Write(
+    uint32 Cdd_Ipc_remoteCoreId,
+    uint16 Cdd_Ipc_remoteClientId,
+    uint32 Cdd_Ipc_msgValue,
+    uint32 Cdd_Ipc_waitForFifoNotFull
+)
+```
+
+
+**Brief**: 
+Service to write ipc notify message. 
+
+Service to Write message from the IPC instance.
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Cdd_Ipc_remoteCoreId** - Core ID to which you need to sent the message to 
+  
+* **Cdd_Ipc_remoteClientId** - Remote client ID registered for the to send the message to 
+  
+* **Cdd_Ipc_msgValue** - Message value to be sent 
+  
+* **Cdd_Ipc_waitForFifoNotFull** - 1: wait for message to be inserted into HW or SW FIFO, 0: if FIFO is full, dont send message and return with error. 
+
+
+**Returns**: 
+
+  
+* **E_OK** 
+<br> 
+  
+* **E_NOT_OK** 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Ipc_Notify_UnregisterClient
+
+```
+Std_ReturnType Cdd_Ipc_Notify_UnregisterClient(
+    uint32 Cdd_Ipc_localClientId
+)
+```
+
+
+**Brief**: 
+Service to un-register a client for IPC. 
+
+Service to unregister client at a specified client ID.
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Cdd_Ipc_localClientId** - Local core client ID 
+
+
+**Returns**: 
+
+  
+* **E_OK** 
+<br> 
+  
+* **E_NOT_OK** 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Ipc_Construct
+
+```
+void Cdd_Ipc_Construct(
+    const Cdd_IpcConfigType * ConfigPtr
+)
+```
+
+
+**Brief**: 
+Service for CDD Ipc RpMsg Construct. 
+
+Create a RPMessage object to receive messages at a specified end-point
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **ConfigPtr** - Pointer to configuration set 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Ipc_RpMsg_SendMsg
+
+```
+Std_ReturnType Cdd_Ipc_RpMsg_SendMsg(
+    void * data,
+    uint16 dataLen,
+    uint16 Cdd_Ipc_remoteCoreId,
+    uint16 Cdd_Ipc_remoteEndPt,
+    uint16 Cdd_Ipc_localEndPtId,
+    uint32 timeout
+)
+```
+
+
+**Brief**: 
+Service for CDD Ipc RpMsg GetLoclEndPoint. 
+
+Service to Send a message to a remote core at a specified remote end point
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **dataLen** – Length of buffer 
+  
+* **data** – pointer to data buffer 
+  
+* **Cdd_Ipc_remoteCoreId** - Core ID to which you need to send the message to. 
+  
+* **Cdd_Ipc_remoteEndPt** – Unique end point value on the remote core. 
+  
+* **timeout** – Time in system ticks to block for a message receive. 
+  
+* **Cdd_Ipc_localEndPtId** - localEndPt, is strictly not needed, however this is available to the user on the remote core  * and can be used as a reply end point 
+
+
+**Returns**: 
+
+  
+* **E_OK** 
+<br> 
+  
+* **E_NOT_OK** 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Ipc_RpMsg_RecvMsg
+
+```
+Std_ReturnType Cdd_Ipc_RpMsg_RecvMsg(
+    void * data,
+    uint16 * dataLen,
+    uint16 Cdd_Ipc_localEndPtId,
+    uint16 * Cdd_Ipc_remoteCoreId,
+    uint16 * Cdd_Ipc_remoteEndPt,
+    uint32 timeout
+)
+```
+
+
+**Brief**: 
+Service for CDD Ipc RpMsg GetLoclEndPoint. 
+
+Blocking API to wait till a message is received from any CPU at the specified local end point
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **dataLen** – Length of buffer 
+  
+* **data** – pointer to data buffer 
+  
+* **Cdd_Ipc_remoteCoreId** - Core ID to which you need to send the message to. 
+  
+* **Cdd_Ipc_remoteEndPt** – Pointer to Unique end point value on the remote core. 
+  
+* **timeout** – Time in system ticks to block for a message receive. 
+  
+* **Cdd_Ipc_localEndPtId** – localEndPt need to be passed to retrieve the endpoint message object internally in the driver 
+
+
+**Returns**: 
+
+  
+* **E_OK** 
+<br> 
+  
+* **E_NOT_OK** 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Ipc_Destruct
+
+```
+void Cdd_Ipc_Destruct(
+    uint16 Cdd_Ipc_localEndPtId
+)
+```
+
+
+**Brief**: 
+Service to delete a previously created RPMessage object. 
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Ipc_Notify_Sync_All
+
+```
+void Cdd_Ipc_Notify_Sync_All(
+    void 
+)
+```
+
+
+**Brief**: 
+Service for CDD Ipc Notify SyncAll. 
+
+Service to sync all the cores that are participating the IPC.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function IpcNotifyUtils_lld_init
+
+```
+sint32 IpcNotifyUtils_lld_init(
+    IpcNotifyUtils_Handle hIpcNotifyUtils
+)
+```
+
+
+**Brief**: 
+Initialize IPC Notify Utils module. 
+
+This API will initialize the Utils module for IPC.
+
+
+**Parameters**: 
+
+  
+* **hIpcNotifyUtils** - IPC Notify LLD utils handle 
+
+
+**Returns**: 
+
+  
+* **MCAL_SystemP_SUCCESS** if successful; else error on failure 
+<br> 
+
+
+**Return**: sint32 
+
+### function IpcNotifyUtils_lld_sendSync
+
+```
+sint32 IpcNotifyUtils_lld_sendSync(
+    IpcNotifyUtils_Handle hIpcNotifyUtils,
+    uint32 remoteCoreId
+)
+```
+
+
+**Brief**: 
+Send a sync message to specific core. 
+
+This API can be used to send sync message's to very specific core's For most users recommend to use the more simpler IpcNotify_syncAll() API.
+
+
+**Parameters**: 
+
+  
+* **remoteCoreId** - Core ID, see CSL_CoreID for valid values. 
+
+
+**Returns**: 
+
+  
+* **MCAL_SystemP_SUCCESSsync** message was sent successfully, else failure 
+<br> 
+
+
+**Return**: sint32 
+
+### function IpcNotifyUtils_lld_waitSync
+
+```
+sint32 IpcNotifyUtils_lld_waitSync(
+    IpcNotifyUtils_Handle hIpcNotifyUtils,
+    uint32 remoteCoreId,
+    uint32 timeout
+)
+```
+
+
+**Brief**: 
+Wait for a sync message to be received from the specified core. 
+
+This API can be used to recevice sync message from very specific core's For most users recommend to use the more simpler IpcNotify_syncAll() API.
+
+
+**Parameters**: 
+
+  
+* **remoteCoreId** - Core ID, see CSL_CoreID for valid values. 
+  
+* **timeout** - Amount of time in units of ticks to wait 
+
+
+**Returns**: 
+
+  
+* **MCAL_SystemP_SUCCESSsync** message was received successfully 
+<br> 
+  
+* **SystemP_TIMEOUTsync** message was NOT received after `timeout` ticks 
+<br> 
+  
+* **SystemP_FAILUREinvalid** arguments 
+<br> 
+
+
+**Return**: sint32 
+
+### function IpcNotifyUtils_lld_syncAll
+
+```
+sint32 IpcNotifyUtils_lld_syncAll(
+    IpcNotifyUtils_Handle hIpcNotifyUtils,
+    uint32 timeout
+)
+```
+
+
+**Brief**: 
+Send a message to all enabled cores and wait for sync message from all enabled cores. 
+
+This API when called on all CPUs, make sure all CPUs execute upto a certain and then proceed only when all other CPUs have also executed to the same point.
+
+This is useful esp during system init to make sure message exchange can be started only after all CPUs have finished their system initialization.
+
+
+**Parameters**: 
+
+  
+* **timeout** - Amount of time in units of ticks to wait for the sync 
+
+
+**Returns**: 
+
+  
+* **MCAL_SystemP_SUCCESSall** sync messages recevied successfully 
+<br> 
+  
+* **SystemP_TIMEOUTsome** sync messages was NOT recevied after `timeout` ticks 
+<br> 
+  
+* **SystemP_FAILUREinvalid** arguments 
+<br> 
+
+
+**Return**: sint32 
+
+### function IpcNotifyUtils_lld_syncCallback
+
+```
+void IpcNotifyUtils_lld_syncCallback(
+    void * hIpcNotify,
+    uint32 remoteCoreId,
+    uint16 localClientId,
+    uint32 msgValue,
+    uint32 timeout,
+    sint32 crcStatus,
+    void * args
+)
+```
+
+
+### function Cdd_Ipc_VringMemAllocation
+
+```
+void Cdd_Ipc_VringMemAllocation(
+    void 
+)
+```
+
+
+
+
+
+

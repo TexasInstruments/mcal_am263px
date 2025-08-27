@@ -1,0 +1,32 @@
+---
+orphan: true
+---
+
+---
+title: Pwm_ChObjType
+summary: Pwm configuration structure internal to driver. 
+
+---
+
+# Pwm_ChObjType
+
+
+
+Pwm configuration structure internal to driver. 
+
+
+`#include <Pwm_Priv.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  boolean | channelForcedIdle |  |
+|  uint32 | baseAddr |  |
+|  [Pwm_ChannelConfigType](../Classes/struct_pwm___channel_config_type.md) | chCfg |  |
+|  [Pwm_ChannelConfigType_PC](../Classes/struct_pwm___channel_config_type___p_c.md) | chCfg_PC |  |
+|  uint32 | channelNotifyActiveFlag |  |
+|  [Pwm_EdgeNotificationType](../Modules/group___p_w_m.md#enum-pwm_edgenotificationtype) | Notification |  |
+|  uint8 | channelState |  |
+
+

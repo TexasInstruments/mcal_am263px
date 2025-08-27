@@ -1,0 +1,893 @@
+<?xml version='1.0'?>
+<datamodel version="6.0"
+     xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+     xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+     xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+     xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+     <d:ctr type="AUTOSAR" factory="autosar"
+          xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+          xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+          xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+          xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+          xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
+          xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+          <d:lst type="TOP-LEVEL-PACKAGES">
+               <d:ctr name="TI_AM263Px" type="AR-PACKAGE">
+                    <a:a name="UUID" value="ECUC:AUTOSAR" />
+                    <d:lst type="ELEMENTS">
+                         <d:chc name="Cdd_FsiTx" type="AR-ELEMENT" value="MODULE-DEF">
+                              <v:ctr type="MODULE-DEF">
+                                   <a:a name="ADMIN-DATA" type="ADMIN-DATA">
+                                        <ad:ADMIN-DATA>
+                                             <ad:DOC-REVISIONS>
+                                                  <ad:DOC-REVISION>
+                                                       <ad:REVISION-LABEL>4.3.1</ad:REVISION-LABEL>
+                                                       <ad:ISSUED-BY>AUTOSAR</ad:ISSUED-BY>
+                                                  </ad:DOC-REVISION>
+                                             </ad:DOC-REVISIONS>
+                                        </ad:ADMIN-DATA>
+                                   </a:a>
+                                   <a:a name="DESC" value="EN: Configuration of the Cdd Fsi Tx (Fast serial Interface -Transmitter) module." />
+                                   <a:a name="LOWER-MULTIPLICITY" value="0" />
+                                   <a:a name="POSTBUILDVARIANTSUPPORT" value="true" />
+                                   <a:a name="RELEASE" value="asc:4.3.1" />
+                                   <a:a name="UPPER-MULTIPLICITY" value="1" />
+                                   <a:a name="UUID" value="ECUC:c03234fe-4dca-445e-a47c-1bc11e6c1832" />
+                                   <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
+                                        <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                             <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                             <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                        </a:a>
+                                        <a:a name="LABEL" value="Config Variant" />
+                                        <a:da name="DEFAULT" value="VariantPostBuild" />
+                                        <a:da name="RANGE">
+                                             <a:v>VariantPostBuild</a:v>
+                                             <a:v>VariantPreCompile</a:v>
+                                        </a:da>
+                                   </v:var>
+                                   <!--Design:
+                              MCAL-  -->
+
+                                   <v:ctr name="CddFsiTxConfigSet" type="IDENTIFIABLE">
+                                        <a:a name="DESC" value="EN: This container contains the configuration parameters and sub containers of the AUTOSAR Cdd Fsi Tx module." />
+                                        <a:a name="UUID" value="ECUC:fc6e2317-8c73-4b71-b09e-dfb54b76e50d" />
+                                         <v:var name="CddFsiTxNotification" type="FUNCTION-NAME">
+                                             <a:a name="DESC"
+                                                  value="EN: Callback function for Transmission" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                                                  type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                                                  <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="OPTIONAL" value="false" />
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID"
+                                                  value="ECUC:f43bffda-8d3a-4520-b424-b558fcbe752c" />
+                                             <a:da name="ENABLE" type="XPath"
+                                                  expr="as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxNotifyCapability = 'true'" />
+                                             <a:da name="DEFAULT" value="NULL_PTR" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxOverRunNotification"
+                                             type="FUNCTION-NAME">
+                                             <a:a name="DESC"
+                                                  value="EN: Callback function for Tx Buffer OverRun" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                                                  type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                                                  <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="OPTIONAL" value="false" />
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID"
+                                                  value="ECUC:f43bffda-8d3a-4520-b424-b558fcbe752c" />
+                                             <a:da name="ENABLE" type="XPath"
+                                                  expr="as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxNotifyCapability = 'true'" />
+                                             <a:da name="DEFAULT"
+                                                  value="NULL_PTR" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxUnderRunNotification"
+                                             type="FUNCTION-NAME">
+                                             <a:a name="DESC"
+                                                  value="EN: Callback function for Tx Buffer UnderRun" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                                                  type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PostBuild">VariantPostBuild</icc:v>
+                                                  <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="OPTIONAL" value="false" />
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID"
+                                                  value="ECUC:f43bffda-8d3a-4520-b424-b558fcbe752c" />
+                                             <a:da name="ENABLE" type="XPath"
+                                                  expr="as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxNotifyCapability = 'true'" />
+                                             <a:da name="DEFAULT"
+                                                  value="NULL_PTR" />
+                                        </v:var>
+                                        <v:lst name="CddFsiTxHwUnit" type="MAP">
+                                             <a:da name="MIN" value="1" />
+                                             <a:da name="MAX" type="XPath" expr="num:i(node:value(as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxMaxHwUnitCount))"/>
+                                             <v:ctr name="CddFsiTxHwUnit" type="IDENTIFIABLE">
+                                                  <a:a name="DESC" value="EN: This container contains the Driver configuration (parameters) depending on which FSI Hw unit is get configured" />
+                                                  <a:a name="UUID" value="ECUC:c67e7c58-3daf-457n-a213-95ae89b248d8" />
+                                             
+                                                  <v:var name="CddFsiTxHwUnitId" type="ENUMERATION">
+                                                       <a:a name="DESC" value="EN: Description: Numeric ID of the HW Unit. This symbolic name allows accessing Fsi Hw Unit data. Enumeration literals are defined vendor specific.
+                                                       Number of instances can vary depending on SOC variant.Corresponding error checks are added in template files" />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v vclass="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v vclass="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                                       <a:a name="SCOPE" value="LOCAL" />
+                                                       <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                       <a:a name="UUID" value="ECUC:7aa65640-e385-4037-v799-40ce3e785755" />
+                                                       <a:da name="RANGE">
+                                                            <a:v>CDD_FSI_TX_HWUNIT_0</a:v>
+                                                            <a:v>CDD_FSI_TX_HWUNIT_1</a:v>
+                                                            <a:v>CDD_FSI_TX_HWUNIT_2</a:v>
+                                                            <a:v>CDD_FSI_TX_HWUNIT_3</a:v>
+                                                       </a:da>
+                                                       <a:da name="DEFAULT" value="CDD_FSI_TX_HWUNIT_0" />
+                                                  </v:var>
+
+                                                  <v:var name="CddFsiTxPrescale" type="ENUMERATION">
+                                                       <a:a name="DESC" value="EN:Selects the Prescale value ." />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v vclass="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v vclass="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                                       <a:a name="SCOPE" value="LOCAL" />
+                                                       <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                       <a:a name="UUID" value="ECUC:1fb3e387-c03a-4a29-35d2-f8d71778a6fc" />
+                                                       <a:da name="RANGE">
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_0</a:v>
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_1</a:v>
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_2</a:v>
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_3</a:v>
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_4</a:v>
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_5</a:v>
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_10</a:v>
+                                                            <a:v>CDD_FSI_TX_CLK_DIV_20</a:v>
+                                                       </a:da>
+                                                       <a:a name="DEFAULT" value="CDD_FSI_TX_CLK_DIV_2" />
+                                                  </v:var>
+                                                  <!--Design:
+                                                   MCAL- -->
+                                                  <v:var name="CddFsiTxPingTimerTimeout" type="INTEGER">
+                                                       <a:a name="DESC" value="EN: Timeout value for CddFsiTx Ping Timer." />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v vclass="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v vclass="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="OPTIONAL" value="true" />
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="POSTBUILDVARIANTMULTIPLICITY" value="true" />
+                                                       <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                                       <a:a name="SCOPE" value="LOCAL" />
+                                                       <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                       <a:a name="UUID" value="ECUC:ea7f8f6a-5c34-4bc4-808e-dc02c4c233ac" />
+                                                       <a:da name="DEFAULT" value="20000" />
+                                                       <a:da name="INVALID" type="Range">
+                                                            <a:tst expr="&lt;=4294967295" />
+                                                            <a:tst expr="&gt;=0" />
+                                                       </a:da>
+                                                  </v:var>
+
+                                                  <!--Design:
+                                                                 MCAL- -->
+                                                  <v:var name="CddFsiTxTriggerSrc" type="ENUMERATION">
+                                                       <a:a name="DESC" value="EN: Type of source event that starts a transmission." />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v vclass="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v vclass="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                                       <a:a name="SCOPE" value="LOCAL" />
+                                                       <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                       <a:a name="UUID" value="ECUC:1fb3e387-c03a-4a29-v5d2-f8d71778t6fc" />
+                                                       <a:da name="RANGE">
+                                                            <a:v>CDD_FSI_TX_TRIGG_SRC_SW</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGG_SRC_HW</a:v>
+                                                       </a:da>
+                                                       <a:da name="DEFAULT" value="CDD_FSI_TX_TRIGG_SRC_SW" />
+                                                  </v:var>
+                                                  <!--Design:
+                                                                 MCAL- -->
+                                                  <v:var name="CddFsiTxTransmissionMethod" type="ENUMERATION">
+                                                       <a:a name="DESC" value="EN: Selects the method of frame transmission." />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v vclass="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v vclass="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="OPTIONAL" value="true" />
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="POSTBUILDVARIANTMULTIPLICITY" value="true" />
+                                                       <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                                       <a:a name="SCOPE" value="LOCAL" />
+                                                       <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                       <a:a name="UUID" value="ECUC:f348b1e4-aabc-46ee-a71a-02cc6e76tca6" />
+                                                       <a:da name="ENABLE" value="true" />
+                                                       <a:da name="RANGE">
+                                                            <a:v>CDD_FSI_TX_INTERRUPT_MODE</a:v>
+                                                            <a:v>CDD_FSI_TX_POLLING_MODE</a:v>
+                                                            <a:v>CDD_FSI_TX_DMA_MODE</a:v>
+                                                       </a:da>
+                                                       <a:da name="DEFAULT" value="CDD_FSI_TX_INTERRUPT_MODE" />
+                                                  </v:var>
+                                                  <!--Design:
+                                                                 MCAL- -->
+                                                  <v:var name="CddFsiTxExtHwTrigSrc" type="ENUMERATION">
+                                                       <a:a name="DESC" value="EN: Configure the external trigger source for data frame and data frame " />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v vclass="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v vclass="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                                       <a:a name="SCOPE" value="LOCAL" />
+                                                       <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                       <a:a name="UUID" value="ECUC:ac85f589-5cf6-43f3-a6a7-d824eed384518" />
+                                                       <a:da name="ENABLE" type="XPath"
+                                                            expr="as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxExtTriggerEnable = 'true'" />
+                                                       <a:da name="RANGE">
+                                                            <a:v>
+                                                                 CDD_FSI_TX_TRIGGER_FSI_RX_PING_FRAME_TAG_MATCH</a:v>
+                                                            <a:v>
+                                                                 CDD_FSI_TX_TRIGGER_FSI_RX_ERROR_FRAME_TAG_MATCH</a:v>
+                                                            <a:v>
+                                                                 CDD_FSI_TX_TRIGGER_FSI_RX_DATA_FRAME_TAG_MATCH</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG0</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG1</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG2</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG3</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM0_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM1_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM2_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM3_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM4_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM5_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM6_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM7_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM8_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM9_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM10_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM11_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM12_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM13_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM14_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM15_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM16_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM17_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM18_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM19_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM20_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM21_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM22_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM23_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_16</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_17</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_18</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_19</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_16</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_17</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_18</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_19</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT0</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT1</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT2</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT3</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT4</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT5</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT6</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT7</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT8</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT9</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT10</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT11</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT12</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT13</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT14</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT15</a:v>
+                                                       </a:da>
+                                                       <a:da name="DEFAULT" value="CDD_FSI_TX_TRIGGER_FSI_RX_TRIG0" />
+                                                  </v:var>
+                                                  <!--Design:
+                                                                 MCAL- -->
+                                                  <v:var name="CddFsiTxExtPingTrigSrc" type="ENUMERATION">
+                                                       <a:a name="DESC" value="EN: Configure the external trigger source for ping frame and data frame " />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v vclass="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v vclass="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="POSTBUILDVARIANTVALUE" value="true" />
+                                                       <a:a name="SCOPE" value="LOCAL" />
+                                                       <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                       <a:a name="UUID" value="ECUC:ac85f589-5cf6-43f3-a6a7-d824eed384518" />
+                                                       <a:da name="ENABLE" type="XPath"
+                                                            expr="as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxExtTriggerEnable = 'true'" />
+                                                       <a:da name="RANGE">
+                                                            <a:v>
+                                                                 CDD_FSI_TX_TRIGGER_FSI_RX_PING_FRAME_TAG_MATCH</a:v>
+                                                            <a:v>
+                                                                 CDD_FSI_TX_TRIGGER_FSI_RX_ERROR_FRAME_TAG_MATCH</a:v>
+                                                            <a:v>
+                                                                 CDD_FSI_TX_TRIGGER_FSI_RX_DATA_FRAME_TAG_MATCH</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG0</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG1</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG2</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_FSI_RX_TRIG3</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM0_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM1_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM2_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM3_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM4_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM5_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM6_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM7_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM8_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM9_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM10_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM11_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM12_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM13_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM14_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM15_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM16_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM17_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM18_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM19_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM20_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM21_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM22_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_EPWM23_SOCB</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_16</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_17</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_18</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT0_19</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_16</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_17</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_18</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_ICSM_PORT1_19</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT0</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT1</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT2</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT3</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT4</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT5</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT6</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT7</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT8</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT9</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT10</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT11</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT12</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT13</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT14</a:v>
+                                                            <a:v>CDD_FSI_TX_TRIGGER_OUTPUTXBAR_OUT15</a:v>
+                                                       </a:da>
+                                                       <a:da name="DEFAULT"
+                                                            value="CDD_FSI_TX_TRIGGER_FSI_RX_TRIG0" />
+                                                  </v:var>
+                                                  <v:ref name="CddFsiTxDmaReference"
+                                                       type="REFERENCE">
+                                                       <a:a name="DESC"
+                                                            value="EN: Reference to the DMA Group Channel" />
+                                                       <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                                                            type="IMPLEMENTATIONCONFIGCLASS">
+                                                            <icc:v class="PostBuild">
+                                                                 VariantPostBuild</icc:v>
+                                                            <icc:v class="PreCompile">
+                                                                 VariantPreCompile</icc:v>
+                                                       </a:a>
+                                                       <a:a name="ORIGIN" value="Texas Instruments" />
+                                                       <a:a name="UUID"
+                                                            value="0bc2d871-1004-44a2-8934-8fb46a095dqc" />
+                                                       <a:da name="ENABLE" type="XPath"
+                                                            expr="as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxDMAEnable = 'true'" />
+                                                       <a:da name="REF"
+                                                            value="ASPathDataOfSchema:/TI_AM263Px/Cdd_Dma/CddDmaDriverHandler" />
+                                                  </v:ref>
+                                             </v:ctr>
+                                        </v:lst>
+                                   </v:ctr>
+
+
+                                   <!--Design:
+                                        MCAL- -->
+                                   <v:ctr name="CddFsiTxGeneral" type="IDENTIFIABLE">
+                                        <a:a name="DESC" value="EN: General configuration (parameters) of the Cdd Fsi Tx Driver software module." />
+                                        <a:a name="UUID" value="ECUC:da0aaff6-3eew-4a15-824e-dc56f3a8bd93" />
+                                        <!--Design:
+                                             MCAL-5659 -->
+                                        <v:var name="CddFsiTxDeInitApi" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Adds / removes the service CddFsiTx_DeInit() from the code." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:32c0e8fd-6160-4ffb-V4a0-0fa22757dbae" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxTransmitApi" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enable/disable the service CddFsiTx_Transmit() from the code." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:16c0e8fd-6160-4ffb-b6s0-0fa22757dbae" />
+                                             <a:da name="DEFAULT" value="false" />
+                                             <a:da name="VISIBLE" value="true" />
+                                        </v:var>
+                                        <!--Design:
+                                             MCAL- -->
+                                        <v:var name="CddFsiTxDevErrorDetectApi" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Switches the development error detection and notification on or off." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:db321b92-871a-4a62-8778-09b8848d8f2c" />
+                                             <a:da name="DEFAULT" value="true" />
+                                             <a:da name="VISIBLE" value="true" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxPingApi" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enable/disable the service CddFsiTx_Ping() from the code." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:37643fc4-cdc1-453b-9706-877d76e6fa30" />
+                                             <a:da name="DEFAULT" value="false" />
+                                        </v:var>
+
+                                        <v:var name="CddFsiTxExtTriggerEnable" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enable/disable the service CddFsiTx_Ping() from the code.." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:37643fc4-cdc1-453b-9706-877d76e6fa30" />
+                                             <a:da name="DEFAULT" value="false" />
+                                        </v:var>
+                                        <!--Design:
+                                             MCAL- -->
+                                        <v:var name="CddFsiTxBuffLoadApi" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Adds / removes the services CddFsiTx_BuffLoad()  from the code." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:94b12c2c-4276-424c-90c9-a55ee72883fe" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+                                        <!--Design:
+                                             MCAL-5649 -->
+                                             <v:var name="CddFsiTxResetDriver" type="BOOLEAN">
+                                                  <a:a name="DESC" value="EN: Adds / removes the service Cdd_FsiTx_ResetDriver() and from the code." />
+                                                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                       <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                       <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                                  </a:a>
+                                                  <a:a name="ORIGIN" value="Texas Instruments" />
+                                                  <a:a name="SCOPE" value="LOCAL" />
+                                                  <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                                  <a:a name="UUID" value="ECUC:6fe4295d-06n9-4c34-b9f2-339S2df6bd58" />
+                                                  <a:da name="DEFAULT" value="true" />
+                                             </v:var>
+
+                                        <v:var name="CddFsiTxTypeofInterruptFunction" type="ENUMERATION">
+                                             <a:a name="DESC" value="EN: Type of ISR function" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:240a9eb6-7a1b-4f43-bfab-bb6a15457d0d" />
+                                             <a:da name="DEFAULT" value="CDD_FSI_TX_ISR_CAT1" />
+                                             <a:da name="RANGE">
+                                                  <a:v>CDD_FSI_TX_ISR_VOID</a:v>
+                                                  <a:v>CDD_FSI_TX_ISR_CAT1</a:v>
+                                                  <a:v>CDD_FSI_TX_ISR_CAT2</a:v>
+                                             </a:da>
+                                        </v:var>
+
+                                        <v:var name="CddFsiTxInterruptVector" type="ENUMERATION">
+                                             <a:a name="DESC" value="EN: Type of ISR function" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:240a9eb6-7a1b-4f43-bfab-bb6a15457d0d" />
+                                             <a:da name="DEFAULT" value="CDD_FSI_TX_INT1" />
+                                             <a:da name="RANGE">
+                                                  <a:v>CDD_FSI_TX_INT1</a:v>
+                                                  <a:v>CDD_FSI_TX_INT2</a:v>
+
+                                             </a:da>
+                                        </v:var>
+
+                                        <!--Design:
+                                        MCAL-5686 -->
+                                        <v:var name="CddFsiTxDeviceVariant" type="ENUMERATION">
+                                             <a:a name="DESC" value="EN: Select SOC variant .This parameter shall be used by driver to impose device specific constraints. The user guide shall detail the device specific constraints " />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                             </a:a>
+                                             <a:a name="OPTIONAL" value="false" />
+                                             <a:a name="UUID" value="ECUC:4745b6cf-b46f-4fe4-8bfa-c1a47fdd7412" />
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:da name="ENABLE" value="true" />
+                                             <a:da name="DEFAULT" value="AM263Px" />
+                                             <a:da name="RANGE">
+                                                  <a:v>AM263Px</a:v>
+                                             </a:da>
+                                        </v:var>
+                                        <!--Design:
+                                        MCAL-5690 -->
+                                        <v:var name="CddFsiTxMaxHwUnitCount" type="INTEGER">
+                                             <a:a name="DESC" value="EN: Maximum hw count across all hwunits configured" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:ab0f7a27-9247-49c3-a48e-a8409ef7fd65" />
+                                             <a:da name="DEFAULT" value="1" />
+                                             <a:da name="INVALID" type="Range">
+                                                  <a:tst expr="&lt;=4" />
+                                                  <a:tst expr="&gt;=1" />
+                                             </a:da>
+                                        </v:var>
+                                        <!--Design:
+                                             MCAL- -->
+                                        <v:var name="CddFsiTxNotifyCapability" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Determines, if the notification mechanism (the functions to enable and disable the notifications) is available at runtime." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:b2cfcb7b-0a84-7r50-bebd-32ee405e4398" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxBufferOverRunInterrupt" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enable/disable the Interrupt service for Tx Buffer OverRun." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:b2cfcb7b-0a84-7r50-bebd-32ee405e4398" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxBufferUnderRunInterrupt" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enable/disable the Interrupt service for Tx Buffer UnderRun." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:b2cfcb7b-0a84-7r50-bebd-32ee405e4398" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxPingTimeOutInterrupt" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enable/disable the Interrupt service for Ping Timeout." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:b2cfcb7b-0a84-7r50-bebd-32ee405e4398" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxFrameDoneInterrupt" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enable/disable the Interrupt service for Tx Frame Done." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:b2cfcb7b-0a84-7r50-bebd-32ee405e4398" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+
+                                        <!--Design:
+                                             MCAL-5649 -->
+                                        <v:var name="CddFsiTxMainApi" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Adds / removes the service CddFsiTx_Main() and from the code." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:6fe4295d-06n9-4c34-b9f2-339S2df6bd58" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+                                        <!--Design:
+                                             MCAL-5691 -->
+                                        <v:var name="CddFsiTxGetVersionInfoApi" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Adds / removes the service CddFsiTx_GetVersionInfo() from the code." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:8ea4cb89-cf5e-4afc-95ce-cebac08ac0e6" />
+                                             <a:da name="DEFAULT" value="true" />
+                                        </v:var>
+
+                                        <v:var name="CddFsiTxDMAEnable" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enables DMA Access method for CddFsiTx Transmission." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:0217b971-6fd9-4486-bd96-94b91a14fedd" />
+                                             <a:da name="DEFAULT" value="false" />
+                                        </v:var> 
+                                        <v:var name="CddFsiTxMultiLaneEnable" type="BOOLEAN">
+                                             <a:a name="DESC" value="EN: Enables MultiLane Transmission for CddFsiTx." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false" />
+                                             <a:a name="UUID" value="ECUC:0217b971-6fd9-4486-bd96-94b91a14fedd" />
+                                             <a:da name="DEFAULT" value="false" />
+                                        </v:var>
+                                        <v:var name="CddFsiTxMaxDmaChannelId" type="INTEGER">
+                                             <a:a name="DESC" value="EN: Number of actual DMA channels. This is of type published information and not editable" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPostBuild</icc:v>
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="ECUC:272c9c43-c3dc-45e3-88cd-2ab19c61dfea" />
+                                             <a:da name="DEFAULT" value="63" />
+                                             <a:da name="EDITABLE" value="false" />
+                                             <a:da name="READONLY" value="false" />
+                                        </v:var>										
+                                          <!--Design:  -->
+                                         <v:ref name="CddFsiTxOsCounterRef" type="REFERENCE">
+                                             <a:a name="DESC"
+                                             value="EN: This parameter contains a reference to the OsCounter, which is used by the CddFsiTx driver."/>
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                                                 type="IMPLEMENTATIONCONFIGCLASS">
+                                                 <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="OPTIONAL" value="true"/>
+                                             <a:a name="ORIGIN" value="Texas Instruments"/>
+                                             <a:a name="SCOPE" value="LOCAL"/>
+                                             <a:a name="UUID" value="ECUC:26c9bdff-38cf-4f0b-8754-7472d0d41cb9"/>
+                                             <a:da name="REF"
+                                             value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
+                                         </v:ref>
+								         
+                                         <!--Design:  -->
+                                         <v:var name="CddFsiTxDefaultOSCounterId" type="INTEGER">
+                                           <a:a name="DESC" value="EN: Default Os Counter Id if node reference to OsCounter ref CddFsiTxOsCounterRef is not set"/>
+                                           <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                             <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                             <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                           </a:a>
+                                           <a:a name="ORIGIN" value="Texas Instruments"/>
+                                           <a:a name="UUID" value="ECUC:6dc462ec-a924-4633-b6ac-2d00ef0d3965"/>
+                                           <a:da name="INVALID" type="Range">
+                                             <a:tst expr="&lt;=16"/>
+                                             <a:tst expr="&gt;=0"/>
+                                           </a:da>
+                                           <a:da name="DEFAULT" value="0"/>
+                                         </v:var>
+                                   </v:ctr>
+                                   <!--Requirements:
+                                   SITARAMCU_MCAL-___ -->
+                                   <!--Design:
+                                   SITARAMCU_MCAL-___ -->
+                                   <v:ctr name="CddFsiTxDemEventParameterRefs" type="IDENTIFIABLE">
+                                        <!--Requirements:
+                                        SITARAMCU_MCAL-___ -->
+                                        <!--Design:
+                                        SITARAMCU_MCAL-___ -->
+                                        <a:a name="DESC" value="EN: Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter's DemEventId value. The standardized errors are provided in the container and can be extended by vendor specific error references" />
+                                        <a:a name="OPTIONAL" value="true" />
+                                        <a:a name="UUID" value="00000000-0000-0000-0000-000000000003" />
+                                        <a:da name="ENABLE" value="true" />
+                                        <v:ref name="CDD_FSI_TX_E_BUFFER_UNDERRUN" type="SYMBOLIC-NAME-REFERENCE">
+                                             <a:a name="DESC" value="EN: Reference to configured DEM event to report &quot;Tx buffer underrun&quot;." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="OPTIONAL" value="true" />
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="f4f8b845-61f2-40eb-8aa9-fd78fa11ebc5" />
+                                             <a:da name="ENABLE" value="true" />
+                                             <a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter" />
+                                        </v:ref>
+                                        <v:ref name="CDD_FSI_TX_E_BUFFER_OVERRUN" type="SYMBOLIC-NAME-REFERENCE">
+                                             <a:a name="DESC" value="EN: Reference to configured DEM event to report &quot;Tx buffer overrun&quot;." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="OPTIONAL" value="true" />
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="f4f8b845-61f2-40eb-8aa9-fd78fa11ebc5" />
+                                             <a:da name="ENABLE" value="true" />
+                                             <a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter" />
+                                        </v:ref>
+                                   </v:ctr>
+                                   <!--Design:
+                                   MCAL- -->
+                                   <v:ctr name="CddFsiTxPublishedInformation" type="IDENTIFIABLE">
+                                        <a:a name="DESC" value="EN: Additional published parameters not covered by &quot;Common&quot; Published Information. Note that these parameters have &quot;PUBLISHED-INFORMATION&quot; configuration class setting, since they are published information." />
+                                        <a:a name="UUID" value="ECUC:e435c51b-58b2-4506-ae6c-da9a9b76ad99" />
+                                        <!--Design:  -->
+                                        <v:var name="CddFsiTxMinPrescaleValue" type="INTEGER">
+                                             <a:a name="DESC" value="EN: Minimum value of Prescalar value that can be selected for Cdd Fsi. This is of type published information and not editable." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPostBuild</icc:v>
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="ECUC:248e0e6d-94c7-4836-b879-b29edd1d9a90" />
+                                             <a:da name="DEFAULT" value="1" />
+                                             <a:da name="EDITABLE" value="false" />
+                                             <a:da name="READONLY" value="false" />
+                                        </v:var>
+                                        <!--Design:  -->
+                                        <v:var name="CddFsiTxMaxPrescaleValue" type="INTEGER">
+                                             <a:a name="DESC" value="EN: Minimum value of Prescalar value that can be selected for Cdd Fsi. This is of type published information and not editable." />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPostBuild</icc:v>
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="ECUC:248e0e6d-94c7-4836-b879-b29edd1d9a90" />
+                                             <a:da name="DEFAULT" value="255" />
+                                             <a:da name="EDITABLE" value="false" />
+                                             <a:da name="READONLY" value="false" />
+                                        </v:var>
+                                        <!--Design:
+                                        MCAL-5695 -->
+                                        <v:var name="CddFsiTxMaxNumTxModules" type="INTEGER">
+                                             <a:a name="DESC" value="EN: Number of Transmission modules in a FSI hw unit.This is a fixed value  and can't be changed. This is of type published information and not editable" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPostBuild</icc:v>
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="ECUC:179c2cda-8fn3-43ab-b973-6aa3d42d9g33" />
+                                             <a:da name="DEFAULT" value="4" />
+                                             <a:da name="EDITABLE" value="false" />
+                                             <a:da name="READONLY" value="false" />
+                                        </v:var>
+                                        <!--Design:
+                                        MCAL-5650 -->
+                                        <v:var name="CddFsiTxMaxHwChannelId" type="INTEGER">
+                                             <a:a name="DESC" value="EN: Number of actual HW channels for each Tx module. This is of type published information and not editable" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPostBuild</icc:v>
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="ECUC:272c9c43-c3dc-45e3-88cd-2ab19c61dfea" />
+                                             <a:da name="DEFAULT" value="2" />
+                                             <a:da name="EDITABLE" value="false" />
+                                             <a:da name="READONLY" value="false" />
+                                        </v:var>
+                                        <!--Design:
+                                        MCAL-5640 -->
+                                        <v:var name="CddFsiTxMinHwChannelId" type="INTEGER">
+                                             <a:a name="DESC" value="EN: Number of actual HW channels for each Tx module. This is of type published information and not editable" />
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPostBuild</icc:v>
+                                                  <icc:v class="PublishedInformation">
+                                                       VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments" />
+                                             <a:a name="SCOPE" value="LOCAL" />
+                                             <a:a name="UUID" value="ECUC:31ce48fb-6756-41c0-80ea-cf17a4273hh9" />
+                                             <a:da name="DEFAULT" value="1" />
+                                             <a:da name="EDITABLE" value="false" />
+                                             <a:da name="READONLY" value="false" />
+                                        </v:var>
+                                   </v:ctr>
+                              </v:ctr>
+                         </d:chc>
+                    </d:lst>
+               </d:ctr>
+          </d:lst>
+     </d:ctr>
+</datamodel>

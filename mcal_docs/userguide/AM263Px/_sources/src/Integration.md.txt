@@ -1,0 +1,1604 @@
+# AUTOSAR Integration Guide
+
+## Introduction
+
+MCAL and CDD drivers offered by TI are compatible with AUTOSAR basic software provided by different AUTOSAR vendors.
+These drivers are specific to MCU hardware and work as abstraction layer which makes rest of BSW independent of MCAL.
+The intention of this document is to provide information on integrating TI MCALs/CDDs to AUTOSAR BSW provided by different vendors to ensure smooth interfacing.
+
+## How to use TI MCAL with Vector Stack
+
+This chapter explains how TI MCAL can be integrated into Vector stack with respect to different use cases.
+
+### Board Bring-up with Vector's startup code
+
+#### Objective for Board Bring-up
+
+The intention of this use case is to bring the program flow at the start of application, perform the startup activities such as but not limited to initialization of Interrupt Vector Table, Exception Vector Table, initialization of data, initialization of default clocks etc. This is achieved by integrating Vector startup code and Vector stack. Vector startup code has some dependencies on TI SDK which are explained in detail in subsequent chapter.
+Further, the required BSW modules are initialized and periodic scheduling is started via OS and RTE.
+
+#### List of Modules
+
+##### Vector Modules
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| EcuC (Autosar EcuC module), <br> vSet (Vector Common Settings module)| EcuC and vSet are virtual modules that collect the global and ECU specific configuration information. | In this use case, this module is necessary to provide the partition and core information <br> along with default global configurations for ECU.|
+|2| vBaseEnv (Vector Base Environment), <br> vBRS (Vector Basic Runtime System) | These modules together constitute Vector startup code that provide basic hardware setup options <br> such as memory init, PLL init, Port init and Watchdog init etc. in order to set up the environment <br> for cyclic runtime behavior. These modules can be configured to select which of its features shall <br> be enabled and executed during startup to setup the environment based on use case.| In this use case, these modules are used to initialize memory, interrupt vector tables, exception vector tables. <br> It initializes OS and EcuM and hands over control to EcuM for further processing|
+|3| vLinkGen (Vector Linkers-script Generator) | The MICROSAR linker script generator provides a way to create a linker file in order to place the <br> code, constants and data in intended memory location.| In this use case, this module is used to setup the application entry point, IVT etc. |
+|4| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling of tasks and interrupts.| In this use case, it used to define a periodic task. |
+|5| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between <br> Software Components (SWCs), BSW and CDDs.|In this use case, it is used to schedule the periodic task defined in OS. |
+|6| EcuM (MICROSAR Ecu State Manager) | The Ecu State Manager starts/stops OS, SchM, BswM and other BSW modules. <br> It is responsible for startup, shutdown, sleep modes and wakeup sources of the ECU. |In this use case, it used to start/stop OS and scheduler.|
+
+```{Note}
+For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector for each of these modules
+```
+
+##### TI SDK
+
+Vector startup code requires some low level functions that can interact directly with hardware e.g. to setup the interrupt vector table and interrupt controller, to set the clock etc. These kind of low level functions can be take from TI Software Development Kit (SDK).
+
+SDK : [MCU-PLUS-SDK-AM263](https://www.ti.com/tool/MCU-PLUS-SDK-AM263X)
+
+From downloaded SDK package copy following to your workspace -
+
+| Sl. No. | TI Modules | Description |
+|----|--------|----------|
+|1.|kernel | Include all the headers files from path {sdk_installation_dir}/source/kernel |
+|2.|drivers | Include all the headers files from path {sdk_installation_dir}/source/drivers |
+
+#### Configuration of modules in Board Bring-up
+
+This chapter explains the minimum configurations that must be applied on top of the default configuration for each module, to realize this use case:
+
+##### EcuC
+
+This module contains the information of different partitions on each core. For this use case, we only require one partition on one core to run the OS. This partition is configured as below -
+
+```{figure} Assets/images/fig19MicroMentionInEcuc.png
+:alt: Microcontroller mentioned in the vBaseEnvDerivativeInformation
+:align: center
+
+EcuC Module Configuration
+```
+
+Configure the ASIL level as per the requirement. For this use case, ASIL Level is configured as QM.
+
+##### vBaseEnv and vBRS
+
+In vBaseEnv module the derivative of MCU being used is selected as shown below. Once this derivative is selected all MCU specific information is automatically set -
+
+```{figure} Assets/images/fig19MicroMentionInVbaseEnv1.png
+:alt: Microcontroller mentioned in the vBaseEnvDerivativeInformation
+:align: center
+
+Microcontroller mentioned in the vBaseEnvDerivativeInformation
+```
+
+```{figure} Assets/images/fig19MicroMentionInVbaseEnv.png
+:alt: Microcontroller mentioned in the vBaseEnvDerivativeInformation
+:align: center
+
+Microcontroller mentioned in the vBaseEnvDerivativeInformation
+```
+
+vBRS module is configured to enable features offered by startup code that are needed for this use case.
+The default configuration settings offered by vBRS are enough to achieve this use case.
+In this use case, we configure the vBRS to set the application entry point, clock frequencies, define the user code for make support, define the initialization pattern for data etc.
+Please ensure that configurations shown in below screenshots are intact:
+
+As this use case is an application category, execution instance is selected as Application -
+
+```{figure} Assets/images/fig20vBrsGen.png
+:alt: vBRSGeneral Configuration
+:align: center
+
+vBRSGeneral Configuration
+```
+
+##### vLinkGen
+
+vLinkGen configurations are done to generate a linker script that will store data/code/constants in desired memory location.
+By default vLinkGen will populate some variable/constant groups and memory regions based on other configured modules.
+The mandatory parameters in the default configurations shall be updated with the help of TechnicalReference_vLinkGen.
+To define the entry point to vector startup code, you add the entry point in generated linker file as shown below:
+
+--entry_point=intvect_CoreExceptions             /*ENTRY POINT*/
+
+The entry point can be defined in multiple ways:
+The option --entry_point can be set to either intvect_CoreException OR _start in linker file. When entry point is set to intvect_CoreExceptions, the program counter points to the start of interrupt vector table after reset vector. Entry point is set to _start only when using debugger to preset the start address. In this use case we use the entry_point as intvect_CoreExceptions.
+
+If the entry point is not set in linker file, then the default entry point (_cinit) is used, which uses a compiler based startup code instead of vector startup code -
+
+```{figure} Assets/images/fig25CINT.png
+:alt: CINIT memory section configuration
+:align: center
+
+CINIT memory section configuration
+```
+
+```{Note}
+ entry_point generation is not supported in the current Vector package. Hence, the –entry_point needs to be set to intvect_CoreExceptions in the linker file manually.
+```
+
+For details about vLinkGen configuration please refer Vector document TechnicalReference_vLinkGen.
+
+##### OS
+
+To achieve an OS task with 10 ms as the period. The following are the main parameters to be configured in OS module. Task Period should be 0.01s in OS tasks container. Which is shown in the below figure -
+
+```{figure} Assets/images/fig27OsCounter.png
+:alt: Os_Task_10ms configuration
+:align: center
+
+Counter configuration
+```
+
+Default auto-start tasks are created as shown below. These tasks participate in startup process. The default definition of task is present in startup code. For this use case, it is used as-is, however it can be modified as need be -
+
+```{figure} Assets/images/fig27OsAutoStart.png
+:alt: Auto-start task configuration
+:align: center
+
+Auto start task configuration1
+```
+
+```{figure} Assets/images/fig27OsAutoStart1.png
+:alt: Auto-start task configuration
+:align: center
+
+Auto start task configuration2
+```
+
+Then we can configure a periodic task (10 ms) as shown below. This task is used to schedule the periodic runnable. In this use case, there is only one BSW module with a schedulable periodic runnable, which is EcuM -
+
+```{figure} Assets/images/fig27OsTask10ms.png
+:alt: Auto-start task configuration
+:align: center
+
+10 ms task configuration
+```
+
+##### Rte
+
+ECUM main function is mapped to 10ms task and position is given as shown. Importance of position parameter come into picture if more than more function is mapped in the TASK. Position parameter determines which mapped function will execute first within the particular task -
+
+```{figure} Assets/images/fig28MappingECUm.png
+:alt: Mapping of EcuM main function
+:align: center
+
+Mapping of EcuM main function
+```
+
+Thus, the Rte generates the mapping of the runnable to the task.
+
+##### EcuM
+
+In this use case, EcuM is used to start the OS and scheduler via EcuM_Init and EcuM_StartupTwo function calls in startup code. It also manages all the wakeup events associated with ECU. The mandatory configurations related to wakeup/sleep can be updated as shown below, however wakeup scenario is not part of this use case -
+
+```{figure} Assets/images/fig29MCUmode.png
+:alt: MCU mode setting of EcuM
+:align: center
+
+MCU mode setting of EcuM
+```
+
+```{figure} Assets/images/fig30OsResourceAddedin.png
+:alt: OsResource added in the OS module is mapped in EcuM.
+:align: center
+
+OsResource added in the OS module is mapped in EcuM.
+```
+
+```{Note}
+ Reference to Mcu Mode Setting Configuration is provided as placeholder because it is a mandatory parameter. This configuration is not used in this use case. Any MCU module definition can be used as reference. (e.g. Autosar standard definition of MCU already available in Vector Modules list).
+```
+
+### Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator
+
+#### Objective
+
+The TI MCAL modules are configured using EB Tresos tool. When Vector DaVinci Configurator is used for BSW stack configuration, we may require to import the MCAL modules to DaVinci Configurator so that Vector modules can have reference to MCAL modules e.g. The clock references from MCU module may be required by other module to derive their own clock. This chapter explains how TI MCAL modules can be imported to Vector DaVinci Configurator.
+
+#### Files required for import
+
+1. Export of MCAL from EB Tresos (ARXML): The MCAL modules can be exported from EB Tresos into an ARXML file as instructed in [Run Export](./MCAL_Configuration_and_EB_Tresos.md#run-export). This ARXML contains ECU configuration of MCAL modules.
+2. Vendor Specific Module Definition (ARXML): TI defines Vendor Specific Module Definition for each MCAL module based on AUTOSAR Standard Module definition. This file is needed by Vector DaVinci Configurator to understand the parameters in MCAL modules. This ARXML file can be found as given in [Module Plugin Directory Structure](./MCAL_Configuration_and_EB_Tresos.md#module-plugin-directory-structure).
+3. BSW Module Description File (ARXML): The BSWMD is a formal notation of all information belonging to a certain BSW module in addition to the implementation of the artifact. Each MCAL module generates it's BSWMD file. Please refer [Generate BSWMD](./MCAL_Configuration_and_EB_Tresos.md#generate-bswmd) for details.
+
+#### Steps to import
+
+1. Provide the path of Vendor Specific Module Definition (ARXML) and BSW Module Description File (ARXML) in Additional Definitions settings in DaVinci project settings as shown below -
+
+```{figure} Assets/images/Davinci_Project_Setting.png
+:alt: Additional Definition Settings
+:align: center
+Additional Definition Settings
+```
+
+2. Import the MCAL Module Export from EB Tresos, e.g. -
+
+```{figure} Assets/images/Importing_the_MCAL_Module.png
+:alt: Importing MCAL module from EB Tresos
+:align: center
+Importing MCAL module from EB Tresos
+```
+
+3. Provide the path of ARXML export of MCAL modules from EB Tresos, e.g. -
+
+```{figure} Assets/images/Path_ARXML_MCAL_module.png
+:alt: Import File Selection
+:align: center
+Import File Selection
+```
+
+4. Select the MCAL modules to be imported. If there are any stubs/unwanted modules in export, they can be deselected -
+
+```{figure} Assets/images/Module_Selection.png
+:alt: Import MCAL module Selection
+:align: center
+Import MCAL module Selection
+```
+
+5. The imported modules can be seen in DaVinci Configurator as shown below -
+
+```{figure} Assets/images/Imported_Modules.png
+:alt: DaVinci Basic Editor View
+:align: center
+DaVinci Basic Editor View
+```
+
+6. As shown in below image, the TI MCAL driver and it's vendor specific module definition file are mapped to the respective driver -
+
+```{figure} Assets/images/Import_final.png
+:alt: DaVinci Basic Editor View
+:align: center
+DaVinci Basic Editor View
+```
+
+```{Note}
+ This import of MCAL modules to DaVinci configurator is only for reference to other modules. The MCAL modules can't be updated/generated from DaVinci configurator.
+```
+
+### CAN Integration
+
+#### Objective for CAN Integration
+
+The intention of CAN Integration is to have successful CAN communication by configuring TI MCAL modules along with Vector BSW Modules. Further details are explained in the subsequent chapter.
+
+#### List Of Modules for CAN
+
+##### MCAL Modules for CAN Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Can Driver | The CAN module initializes and controls the internal CAN Controllers of the microcontroller. It provides services to write, read, and configure mailboxes of the CAN controllers. |In this use case , this module is responsible for configuring the CAN hardware unit, hardware mailboxes, scheduled functions etc.|
+|2| Mcu| The MCU module manages microcontroller features such as power modes, clock settings, and interrupts. |In this use case, this module is responsible for providing the clock for CAN communication. |
+|3| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for CAN communication. |
+
+```{Note}
+For detailed information, please refer to the section [CAN Module](./Module_User_Guide_Can.md#can-module).
+```
+
+##### Vector Modules for CAN Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| EcuC (Autosar EcuC module)| EcuC is a virtual module that collect the global and ECU specific configuration information. | In this use case, this module is necessary to provide the partition and core information <br> along with default global configurations for ECU.|
+|2| CanIf | The CanIf module provides an interface between the CAN driver and upper layers. It handles message transmission and reception, manages hardware object, and offers error handling.|In this use case, CanIf module mainly acts as interface between CAN driver and upper layers of communication stack, configures transmit/receive hardware objects etc.|
+|3| PduR | PduR routes protocol data units between communication modules and ensures that the correct Pdus are transmitted to the appropriate destination.| In this use case, PduR module handles the routing of Pdus to and from Com layer and CAN driver. |
+|4| Com | Com is responsible to provide a signal-based interface to the upper layer. It handles signal conversion, transmission and reception.|In this use case, Com module handles packing of AUTOSAR signals to I-Pdus to be transmitted and unpacking of received I-Pdus.|
+|5| CanSM | The CAN State Manager (CanSM) realizes a software layer between the Communication Manager (ComM) and the CAN Interface (CanIf). The CanSM handles the startup and shutdown of the communication of a CAN network. The CAN State Manager maps the CAN State Manager states to the states of the ComM and causes the necessary actions to change the CAN State Manager state to those requested by the ComM. | In this use case, CanSM module manages the state transitions of the CAN controller, mainly from NO COMMUNICATION to FULL COMMUNICATION.|
+|6| ComM | The Communication Manager is a resource manager, which encapsulates the control of the underlying communication services. It controls more than one communication bus channel of an ECU by implementing a channel state machine for every channel.|In this use case, ComM provides a mechanism for users to request communication modes, coordinating requests from multiple independent users.|
+|7| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling tasks and interrupts.|In this use case, OS module is used to define periodic tasks needed for CAN communication such as processing transmit and receive message. |
+|8| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in CAN Integration
+
+This chapter explains the basic configurations that are needed to realize CAN communication.
+
+##### Can Configuration
+
+TI CAN driver is configured using EB Tresos tool. It is then imported to Vector DaVinci configurator for integration with CAN stack. Following containers and parameters shall be configured.
+
+**CanController:**
+
+The CanController container defines the configuration parameters for individual CAN controllers within hardware. It manages essential settings like baud rate, timing segments, and hardware addressing, ensuring proper communication between the CAN bus and the application layer. The following figure shows the configuration of MCAN4 with Can Bus off and Can Reception/Transmission in polling mode -
+
+```{figure} Assets/images/Can_controller.png
+:alt: Can Controller configuration.
+:align: center
+
+Can Controller configuration.
+```
+
+Configuration of CAN controller with 1000kbps of baudrate is shown below -
+
+```{figure} Assets/images/Can_controllerBaudrate.png
+:alt: Configuration of CancontrollerBaudrate
+:align: center
+
+Configuration of CancontrollerBaudrate
+```
+
+**CanHwObject:**
+
+The CanHwObject container configures hardware objects (HOHs) used for transmitting and receiving CAN messages. It defines the type, direction, and identifier settings for each hardware object, ensuring proper handling of CAN message.
+
+The configuration of a transmitting CAN signal with basic standard Id is shown below -
+
+```{figure} Assets/images/Can_HwObjectType.png
+:alt: Can message configuration
+:align: center
+
+Can message configuration
+```
+
+**CanHwFilter:**
+
+The CanHwFilter container defines the hardware based message filtering mechanism for received CAN message. It ensures that only relevant messages matching a specified identifier pattern are accepted, reducing the load on the CPU.
+
+The configuration of CAN signal Id filter which will be able to accept a CAN message of ID 0x9A(154) and mask code is shown below -
+
+```{figure} Assets/images/Can_HwFilter.png
+:alt: Configuration for Can_HwFilter
+:align: center
+
+Configuration for Can_HwFilter
+```
+
+```{Note}
+Can driver doesn't support Sleep / Wakeup modes and ICOM functionality, hence the related parameters like partial networking shall not be configured in BSW modules.
+```
+
+##### MCU Configuration
+
+The CAN module has dependencies on MCU module to provide the CAN clock setting reference.
+The MCU clock configuration for CAN controller is shown below -
+
+```{figure} Assets/images/Mcu_ClockSettingConfig.png
+:alt: Configuration of McuClockSettingconfig
+:align: center
+Configuration of McuClockSettingconfig
+```
+
+CAN clock should be derived from MCU clock reference point. The configuration for clock reference point is shown below -
+
+```{figure} Assets/images/Mcu_ClockReferencePoint.png
+:alt: Configuration for Mcu_ClockReferencePoint
+:align: center
+
+Configuration for Mcu_ClockReferencePoint
+```
+
+##### Port Configuration in CAN Module
+
+CAN module has dependency on Port module to configure transmit, receive, standby and enable pins of hardware. Configuration of receive pin is as shown below -
+
+```{figure} Assets/images/Port_Can.png
+:alt: Port Pin Configuration for Can module
+:align: center
+
+Port Pin Configuration for Can module
+```
+
+##### EcuC Configuration in CAN Module
+
+EcuC is a virtual module to collect ECU Configuration specific global configuration information. EcuCPduCollection container collects all the Pdus flowing through the COM Stack as shown below -
+
+```{figure} Assets/images/CanEcuCPduCollection.png
+:alt: EcuC Pdu Collection
+:align: center
+
+EcuC Pdu Collection
+```
+
+##### CanIf Configuration in CAN Module
+
+CanIf module abstracts the CAN driver from the rest of the Can stack. CAN driver and dependent MCAL modules must be imported to Vector DaVinci configurator before configuring Vector modules.
+
+CanIf configures transmit and receive Pdus.
+
+For a transmit message:
+
+**CanIfHthCfgs:**
+
+Hardware Transmit Handle shall be configured which is shown in below figure. It contains the reference to CAN controller and HTH object in the CAN driver module configuration -
+
+```{figure} Assets/images/CANReferrence.png
+:alt: Reference from TI's MCAL module imported in DaVinci
+:align: center
+
+Reference from TI's MCAL module imported in DaVinci
+```
+
+From the available reference, CAN Controller and HTH object shall be selected as shown below -
+
+```{figure} Assets/images/CanIf_HthCfgs.png
+:alt: Configuration for CanIfHthCfgs
+:align: center
+
+Configuration for CanIfHthCfgs
+```
+
+**CanIfTxPduCfgs:**
+
+CanIf Tx Pdu container contains the configuration (parameters) of a transmit CAN L-Pdu. CanIf Tx Pdu configuration is shown below -
+
+```{figure} Assets/images/CanIf_TxPduCfgs.png
+:alt: Configuration for CanIfTxPduCfgs
+:align: center
+
+Configuration for CanIfTxPduCfgs
+```
+
+**CANIfBufferCfgs:**
+
+CANIfBufferCfgs container contains the Tx-buffer configuration. Multiple buffers with different sizes could be configured. CANIfBufferCfgs configuration is shown below -
+
+```{figure} Assets/images/CanIf_BufferCfgs.png
+:alt: Configuration for CanIfBufferCfgs
+:align: center
+
+Configuration for CanIfBufferCfgs
+```
+
+For a Receive message:
+
+**CanIfHrhCfgs:**
+
+CanIfHrhCfgs container contains configuration parameters for each hardware receive object (HRH). CanIfHrhCfgs configuration is shown below. It contains the reference to CAN controller and HRH object in the CAN driver module configuration -
+
+```{figure} Assets/images/CanIf_HrhCfgs.png
+:alt: Configuration for CanIfHrhCfgs
+:align: center
+
+Configuration for CanIfHrhCfgs
+```
+
+**CanIfRxpduCfgs:**
+
+CanIfRxpduCfgs container contains the configuration (parameters) of each receive CAN L-Pdu. Filters and delivers incoming messages to the upper layers. CanIfRxpduCfgs configuration is shown below -
+
+```{figure} Assets/images/CanIf_RxPduCfgs.png
+:alt: Configuration for CanIfRxPduCfgs
+:align: center
+
+Configuration for CanIfRxPduCfgs
+```
+
+##### PduR Configuration in CAN Module
+
+The primary function of the Pdu Router module is to abstract the bus access type (Interface layer) and the bus type itself. The Pdu Router routing tables are configured with source and destination parameters. Pdu Router configuration to send and receive CAN message to and from CAN driver and Com module is shown below -
+
+```{figure} Assets/images/PduR_Configuration.png
+:alt: PduR configuration
+:align: center
+
+PduR configuration
+```
+
+##### Com Configuration in CAN Module
+
+The Com provides a signal-based communication interface to the upper layer (Rte). Also it is responsible for Packing and unpacking of signals in I-Pdus. Com configuration with different I-Pdus are shown below -
+
+```{figure} Assets/images/Com_Configuration.png
+:alt: Com Configuration
+:align: center
+
+Com Configuration
+```
+
+##### CanSM Configuration in CAN Module
+
+CanSM changes the communication modes of the configured CAN networks according to requests from the ComM module and and performs a bus-specific error handling (BusOff). CanSM configuration is shown below -
+
+```{figure} Assets/images/CanSm_Configuration.png
+:alt: CanSM Configuration
+:align: center
+
+CanSM Configuration
+```
+
+##### ComM Configuration in CAN Module
+
+The ComM is a resource manager, which encapsulates the control of the underlying services. The main purpose is controlling of multiple communication requests by the application independent of the used bus system -
+
+```{figure} Assets/images/ComM_Configuration.png
+:alt: ComM configuration
+:align: center
+
+ComM configuration
+```
+
+##### Os Configuration in CAN Module
+
+The OS module is responsible for task scheduling. Tasks such as 10ms and 1s are created to schedule different schedulable functions for CAN and respective BSW modules. The figure below illustrates the OS configuration -
+
+```{figure} Assets/images/Os_Configuration.png
+:alt: Os configuration
+:align: center
+
+Os configuration
+```
+
+##### Rte Configuration in CAN Module
+
+Runtime Environment (RTE) manages communication between the software components (SWC), assures consistency of the overall information flow between basic software (BSW). It also maps a BswSchedulableEntity onto a OsTask.
+
+The scheduling of the CAN_MainFunction Read is shown below -
+
+```{figure} Assets/images/Can_Readfunction.png
+:alt: Scheduling of Periodic Function - Read
+:align: center
+Scheduling of Periodic Function - Read
+```
+
+The scheduling of Can_MainFunction Write is shown below -
+
+```{figure} Assets/images/Can_writeFunction.png
+:alt: Scheduling of Periodic Function - Write
+:align: center
+Scheduling of Periodic Functions - Write
+```
+
+All runnable in the 10ms task are shown below -
+
+```{figure} Assets/images/Rte_All_task.png
+:alt: All Runnable in 10ms task
+:align: center
+
+All Runnable in 10ms task
+```
+
+In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used to communication between software components.
+
+The port connection to software component is shown below -
+
+```{figure} Assets/images/Can_PortConnection.png
+:alt: Port connection to software component
+:align: center
+
+Port connection to software component
+```
+
+### ADC Integration
+
+#### Objective for ADC Integration
+
+The purpose of ADC integration is to get digital voltage value from analog inputs by configuring TI MCAL modules along with Vector BSW Modules. Further details are explained in the subsequent chapter.
+
+#### List Of Modules for ADC
+
+##### MCAL Modules for ADC Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| ADC | The ADC module handles analog-to-digital conversions for external monitoring channels and internal temperature sensors, allowing start, stop, and result reading for configurable channel groups.| In this use-case, this module is used to convert analog voltage value to digital value.|
+|2| Mcu| The MCU module manages microcontroller features such as power modes, clock settings, and interrupts. |In this use case, this module is responsible for providing the clock for ADC communication. |
+
+```{Note}
+ For detailed information, please refer to the section [ADC Module](./Module_User_Guide_Adc.md#adc-module).
+```
+
+##### Vector Modules for ADC Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components.|In this use case, IoHwAb layer provides wrapper function for each of the underlying ADC API's, so that the application is independent on the hardware.|
+|2| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling tasks and interrupts.| In this use case, OS module is used to define periodic tasks needed for ADC communication such as processing transmit and receive message. |
+|3| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+
+```{Note}
+For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in ADC Integration
+
+This chapter explains the basic configurations that are needed to realize ADC communication
+
+##### ADC Configuration
+
+TI ADC driver is configured using EB Tresos tool. It is then imported to Vector DaVinci configurator for integration with BSW stack. Following containers and parameters shall be configured.
+
+**AdcGeneral:**
+
+The AdcGeneral container defines the generic configuration parameters for ADC and provide provisions to enable disable API's. The following figure shows the configuration of parameters interrupt as ADC_ISR_CAT2 and result alignment as ADC_ALIGN_RIGHT -
+
+```{figure} Assets/images/Adc_General.png
+:alt: Configuration for Adc_General
+:align: center
+
+Configuration for Adc_General
+```
+
+**AdcHwUnit:**
+
+The AdcHwUnit container defines the configuration of individual ADC hardware units. It defines hardware related settings such as hardware unit to be used and resolution. The following figure shows the ADCHwUnit configurations -
+
+```{figure} Assets/images/Adc_HwUnit.png
+:alt: Configuration for AdcHWUnit
+:align: center
+
+Configuration for AdcHWUnit
+```
+
+**AdcChannel:**
+
+The AdcChannel container defines the channel configuration depending on the hardware capabilities. The following figure shows the configuration of AdcChannel high/low limit and channel ID and channel range -
+
+```{figure} Assets/images/Adc_Channel.png
+:alt: Configuration for Adc channel
+:align: center
+
+Configuration for Adc channel
+```
+
+**AdcChannelGroup:**
+
+The AdcChannelGroup configures multiple channels together, and it defines group-specific settings such as conversion mode and trigger source. The following figure shows the configuration of ADC_CONV_MODE_ONESHOT mode -
+
+```{figure} Assets/images/Adc_ChannelGroup.png
+:alt: Configuration for AdcChannelGroup
+:align: center
+
+Configuration for AdcChannelGroup
+```
+
+**AdcGroupDefinition:**
+
+The AdcChannelGroupDefinition configures AdcChannel reference. AdcChannel_0 reference provided in AdcGroup_0 is shown below -
+
+```{figure} Assets/images/Adc_GroupDefinition.png
+:alt: Configuration for AdcGroupDefinition
+:align: center
+
+Configuration for AdcGroupDefinition
+```
+
+##### Mcu Configuration in ADC Module
+
+The McuInterruptChannelXbar configuration is set to 'MCU_INTRXBAR0_OUT_1' and mapped to 'MCU_INT_XBAR_ADC1_INT1.
+
+The ADC interruption channel configuration is shown below -
+
+```{figure} Assets/images/Adc_Mcuxbar.png
+:alt: Configuration for AdcInterrupt
+:align: center
+
+Configuration for AdcInterrupt
+```
+
+ADC hardware unit reference in MCU module is shown below -
+
+```{figure} Assets/images/Mcu_AdcHWUnitId.png
+:alt: Configuration for McuAdcHWUnitId
+:align: center
+
+Configuration for McuAdcHWUnitId
+```
+
+##### IoHwAb Configuration in ADC Module
+
+IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers. It bridges the gap between hardware peripherals (like ADCs, GPIOs, etc.) and software components, ensuring hardware independence for application layers.
+
+The configuration process for creating IoHwAb_AdcReadResultBuffer API in the IoHwAbCSPortInterfaces container is shown below -
+
+```{figure} Assets/images/IoHwAb_AdcResultBuffer.png
+:alt: Configuration for IoHwAb_AdcReadResultBuffer
+:align: center
+
+Configuration for IoHwAb_AdcReadResultBuffer
+```
+
+The configuration process for creating IoHwAbAdcReadResultBuffer API in the IoHwAbCSPortPrototypes container is shown below -
+
+```{figure} Assets/images/IoHwAb_AdcResultBuffer1.png
+:alt: Configuration for IoHwAbAdcReadResultBuffer
+:align: center
+
+Configuration for IoHwAb_AdcReadResultBuffer
+```
+
+The interface between IoHwAb module and Mcal module API is shown below -
+
+```{figure} Assets/images/Adc_readbuffer.png
+:alt: Function call between IoHwAb and Adc
+:align: center
+
+Function call between IoHwAb and Adc
+```
+
+In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used to communication between software components.
+
+The port connection to software component is shown below -
+
+```{figure} Assets/images/Adc_PortConnection.png
+:alt: Port connection to software component
+:align: center
+
+Port connection to software component
+```
+
+##### Os Configuration in ADC Module
+
+The OS module is responsible for task scheduling. The mapping of ADC Mainfunction to the 10ms event is shown below -
+
+```{figure} Assets/images/Os_AdcMainFunction.png
+:alt: Os configuration
+:align: center
+
+Os configuration
+```
+
+##### Rte Configuration in ADC Module
+
+The ADC main function is mapped to a 10ms task as shown in the below -
+
+```{figure} Assets/images/ADC_Mainfunction.png
+:alt: Mapping Adc main function to 10ms task
+:align: center
+
+Mapping Adc main function to 10ms task
+```
+
+### SPI Integration
+
+#### Objective for SPI Integration
+
+The intention of SPI integration is to establish successful SPI communication by configuring the SPI MCAL and dependent Vector modules. It will facilitate communication between the MCAL modules, transmitting and receiving data from the Vector module, which will be explained in the subsequent chapter.
+
+#### List of Modules for SPI
+
+##### MCAL Modules for SPI Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Can Driver | The CAN module initializes and controls the internal CAN Controllers of the microcontroller. It provides services to write, read, and configure mailboxes of the CAN controllers. |In this use case , this module is responsible for configuring the CAN hardware unit, hardware mailboxes, scheduled functions etc.|
+|2| Mcu| The MCU module manages microcontroller features such as power modes, clock settings, and interrupts. | In this use case, this module is responsible for providing the clock for SPI communication. |
+|3| SPI (Serial Peripheral Interface) | The main tasks of the SPI are Handle data transmission to the components connected via SPI, take care of the settings required by external components (baud rate etc.)| In this use case, this module is responsible for configuring spi channel, job and sequence.|
+|4| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for Spi communication. |
+
+```{Note}
+ For detailed information, please refer to the section [SPI Module](./Module_User_Guide_Spi.md#spi-module).
+```
+
+##### Vector Modules for SPI Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components. |In this use case, IoHwAb layer provides wrapper function for each of the underlying SPI API's, so that the application is independent on the hardware.|
+|2| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling tasks and interrupts.| In this use case, OS module is used to define periodic tasks needed for SPI communication such as processing transmit and receive message. |
+|3| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving spi messages from application. |
+
+```{Note}
+For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in Spi Integration
+
+This chapter explains the basic configurations that are needed to realize SPI communication.
+
+##### Spi configuration
+
+TI SPI driver is configured using EB Tresos tool. It is then imported to Vector DaVinci configurator for integration with SPI stack. Following containers and parameters shall be configured.
+
+**SpiGeneral:**
+
+The SpiGeneral container is used to configure SPI-related global settings that affect the SPI driver as a whole. It manages essential settings like enabling Apis and setting timeout duration, maxjobs and maxSequences etc. The following figure shows the configuration of SpiMainFunctionPeriod with 10ms -
+
+```{figure} Assets/images/Spi_General.png
+:alt: Configuration for SpiGeneral
+:align: center
+
+Configuration for SpiGeneral
+```
+
+**SpiMaxChannel:**
+
+The SpiMaxChannel container Specifies the maximum number of SPI channels that can be configured and used by the SPI driver in the system. The configuration of max channels is shown below -
+
+```{figure} Assets/images/Spi_MaxChannel.png
+:alt: Configuration for spiMaxChannel
+:align: center
+
+Configuration for spiMaxChannel
+```
+
+**SpiJob:**
+
+The SpiJob container specifies the Spi job priority, Device assignment and HW unit assignment. The configuration of Spijob is shown below -
+
+```{figure} Assets/images/Spi_Job.png
+:alt: Configuration for SpiJob
+:align: center
+
+Configuration for SpiJob
+```
+
+**SpiHwUnitSynchronous:**
+
+The SpiHwUnitSynchronous container is set to "SYNCHRONOUS", the SpiJob uses its contained SpiDriver in a synchronous manner. If it is set to "ASYNCHRONOUS", it uses the driver in an asynchronous way. The configuration of SYNCHRONOUS is shown below -
+
+```{figure} Assets/images/SpiJob_Sync.png
+:alt: Configuration for SpiHwUnitsynchronous
+:align: center
+
+Configuration for SpiHwUnitsynchronous
+```
+
+**SpiJobEndNotification:**
+
+The SpiJobEndNotification parameter is a reference to a notification function. The configuration of NULL_PTR is shown below -
+
+```{figure} Assets/images/Spi_JobEndnotification.png
+:alt: Configuration for SpiJobEndNotification
+:align: center
+
+Configuration for SpiJobEndNotification
+```
+
+**SpiChannelList:**
+
+The SpiChannelList container references spi channels and their order within the job. The configuration of spi channel order is shown below -
+
+```{figure} Assets/images/Spi_ChannelList.png
+:alt: Configuration of SpiChannelList
+:align: center
+
+Configuration of SpiChannelList
+```
+
+**SpiMaxSequence:**
+
+The SpiMaxSequence configures the maximum number of SPI sequences that the SPI driver can handle concurrently or sequentially in the system. The configuration of the Max sequence is shown below -
+
+```{figure} Assets/images/Spi_MaxSequnce.png
+:alt: Configuration for SpiMaxSequence
+:align: center
+
+Configuration for SpiMaxSequence
+```
+
+**SpiChannel:**
+
+The SpiChannel configuration defines the parameters for a specific SPI channelId, channeltype, data width and transfer start, etc. The configuration of SpiChannel is shown below -
+
+```{figure} Assets/images/Spi_Channel.png
+:alt: Configuration of SpiChannel
+:align: center
+
+Configuration of SpiChannel
+```
+
+**SpiExternalDevice:**
+
+The SpiExternalDevice container is used to define the properties and configuration settings for an SPI peripheral device that is external to the ECU. It specifies how the ECU (master) will communicate with an external device (slave) via the SPI interface. This configuration includes details about the device's requirements for communication, such as timing, data format, and the SPI mode -
+
+```{figure} Assets/images/Spi_externalDevice.png
+:alt: Configuration for SpiExternalDevice
+:align: center
+
+Configuration for SpiExternalDevice
+```
+
+**SpiSequence:**
+
+The SpiSequence configuration defines a series of SpiJobs that are executed in a particular order to achieve a complete communication task. The configuration of spi sequence Id is shown below -
+
+```{figure} Assets/images/Spi_Sequnce.png
+:alt: Configuration of SpiSequence
+:align: center
+
+Configuration of SpiSequence
+```
+
+**SpiSeqEndNotification:**
+
+The SpiSeqEndNotification contains a reference to a notification function. The following figure is shown below -
+
+```{figure} Assets/images/Spi_Endjobnotification.png
+:alt: Configuration for SpiSeqEndNotification
+:align: center
+
+Configuration for SpiSeqEndNotification
+```
+
+**SpiJobAssignment:**
+
+The SpiJobAssignment container references several jobs, which are executed during a communication sequence. The following figure is show below -
+
+```{figure} Assets/images/Spi_Assignment.png
+:alt: Configuration for SpiJobAssignment
+:align: center
+
+Configuration for SpiJobAssignment
+```
+
+**SpiHwUnitConfig:**
+
+The SpiHwUnitConfig is used to define the hardware settings to initialize and control the physical SPI hardware unit (such as SPI0, SPI1, etc.) on the microcontroller -
+
+```{figure} Assets/images/Spi_Hwunit.png
+:alt: Configuration of SpiHwUnitConfig
+:align: center
+
+Configuration of SpiHwUnitConfig
+```
+
+**SpiUserCallbackHeaderFile:**
+
+The SpiUserCallbackHeaderFile specifies the header file that contains user-defined callback functions that the SPI driver can call at various stages of the SPI communication process -
+
+```{figure} Assets/images/Spi_Usecallbackheader.png
+:alt: Configuration for SpiUserCallbackHeaderFile
+:align: center
+
+Configuration for SpiUserCallbackHeaderFile
+```
+
+**SpiHwUnitEnabled:**
+
+The SpiHwUnitEnabled is used for storing enabled SPI HW units -
+
+```{figure} Assets/images/Spi_HwunitEnabled.png
+:alt: Configuration for SpiHwUnitEnabled
+:align: center
+
+Configuration for SpiHwUnitEnabled
+```
+
+##### Port Configuration in SPI Module
+
+In the configuration of the SPI module, the port pins are used to facilitate the transmission (Tx) and reception (Rx) of data. The pin configurations for both SPI0 and SPI1 are shown below -
+
+```{figure} Assets/images/SPI_Port.png
+:alt: Port pin configuration for spi
+:align: center
+
+Port pin configuration for spi
+```
+
+The SPI0 clock pin configuration is shown below -
+
+```{figure} Assets/images/Spi_clockpin.png
+:alt: Configuration for Spi clock pin
+:align: center
+
+Configuration for Spi clock pin
+```
+
+##### IoHwAb configuration in SPI Module
+
+The configuration process for determining the IoHwAb_Async_Transmit API in the IoHwAbCSPortInterfaces container is shown below -
+
+```{figure} Assets/images/Spi_AsyncTransmit.png
+:alt: Configuration for IoHwAbCSPortInterface
+:align: center
+
+Configuration for IoHwAbCSPortInterface
+```
+
+The configuration process for determining IoHwAbCSAsyncTransmit API in the IoHwAbCSPortPrototypes container is shown below -
+
+```{figure} Assets/images/Spi_AsyncTransmit1.png
+:alt: Configuration for IoHwAbCSPortPrototypes
+:align: center
+
+Configuration for IoHwAbCSPortPrototypes
+```
+
+The function call interaction between the IoHwAb module and the Mcal module API is shown below -
+
+```{figure} Assets/images/Spi_IohwAbApi.png
+:alt: Function call between IoHwAb and SPI
+:align: center
+
+Function call between IoHwAb and SPI
+```
+
+In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used to communication between software components.
+
+The port connection to software component is shown below -
+
+```{figure} Assets/images/Spi_PortConnection.png
+:alt: Port connection to software component
+:align: center
+
+Port connection to software component
+```
+
+##### Rte Configuration in SPI Module
+
+The SPI main function timing event handling is mapped to a 10ms task, and its position is specified as shown below. The importance of the position parameter comes into play when more than one function is mapped to the same task. The position parameter determines the execution order of the mapped functions within that particular task, with lower values executing first -
+
+```{figure} Assets/images/Spi_RteMainfunction.png
+:alt: Configuring 10ms task to spi_mainfunctionTimingEvent_Handling
+:align: center
+
+Configuring 10ms task to spi_mainfunctionTimingEvent_Handling
+```
+
+### PWM Integration
+
+#### Objective for PWM Integration
+
+The intention of PWM Integration is to enable successful PWM signal generation by configuring TI MCAL modules along with Vector BSW Modules. Further details are explained in the subsequent chapter.
+
+#### List of Modules for PWM
+
+##### MCAL Modules for PWM Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Mcu| The MCU module manages microcontroller features for PWM, such as power modes and clock settings.|In this use case, this module is responsible for providing the clock for PWM signal generation. |
+|2| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for PWM signal generation. |
+|3| Pwm | The PWM module initializes and controls the internal PWM peripherals of the microcontroller. It provides services to configure, start, and stop PWM channels used for generating variable duty cycle signals|In this use case, PWM is used to generate PWM signal with different duty cycle.|
+
+```{Note}
+For detailed information, please refer to the section [PWM Module](./Module_User_Guide_Pwm.md#pwm-module).
+```
+
+##### Vector Modules for PWM Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components. |It provides an abstraction for the PWM driver and enables communication with the application layer.|
+|2| OS | The Operating System is mainly responsible for handling tasks. | In this use case, it is used to initialize PWM. |
+|3| Rte | The Runtime Environment module manages the information flow | In this use case, it is used to schedule the periodic task defined in OS. |
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in PWM Integration
+
+##### PWM Configuration
+
+The PWM driver is configured using the EB Tresos tool and then imported into the Vector DaVinci Configurator for integration with the application software. The following containers and parameters should be configured.
+
+**PwmGeneral:**
+
+The PwmGeneral container provides general configuration settings for the PWM module.
+
+In PWM general settings, PWMSetDutyCycle API is enabled as shown below -
+
+```{figure} Assets/images/PWM_General_Settings.png
+:alt: PWM General Settings
+:align: center
+
+PWM General Settings
+```
+
+**PwmChannel:**
+
+The PwmChannel configuration container specifies the settings for a specific PWM channel.
+
+In the PWM channel configuration, the channel ID is set to 3, the default duty cycle is configured as 16384, and the PWM polarity is set to high, as shown below -
+
+```{figure} Assets/images/Configuration_of_PWM_Channel.png
+:alt: Configuration for Pwm Channel
+:align: center
+
+Configuration of PWM Channel
+```
+
+##### Mcu Configuration in PWM Module
+
+The PWM module has dependencies on MCU module to provide the PWM clock setting reference.
+
+The MCU clock configuration for PWM controller is shown below -
+
+```{figure} Assets/images/Configuration_of_McuClockSettingconfig.png
+:alt: Configuration of McuClockSettingconfig
+:align: center
+
+Configuration of McuClockSettingconfig
+```
+
+PWM clock should be derived from MCU clock reference point.
+
+The MCU clock reference point is shown below -
+
+```{figure} Assets/images/Configuration_of_McuClockReferencePoint.png
+:alt: Configuration of McuClockReferencePoint
+:align: center
+Configuration of McuClockReferencePoint
+```
+
+##### Port Configuration in PWM Module
+
+The PWM module has a dependency on the Port module to configure the output pins used for generating PWM signals. Each PWM channel is mapped to a specific physical pin on the microcontroller, which must be configured as an output using the Port module.
+
+In the port pin configuration, EPWM3 is configured as a PWM output, as shown below -
+
+```{figure} Assets/images/Port_pin_configuration_for_Pwm.png
+:alt: Port pin configuration for Pwm
+:align: center
+Port Pin configuration for Pwm
+```
+
+##### IoHwAb Configuration in PWM Module
+
+ IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers.
+
+To configure a Client/Server Port Interface, the container IoHwAb_PWM_DutyCycle holds the configuration elements for a Client/Server template interface. This interface is instantiated by a Client/Server Port Prototype.
+
+The container IoHwAbOperationArguments contains the configuration of Operation Elements, such as ChannelID and DutyCycle, for a Client/Server Operation. These Operation Elements will be generated as function parameters in the I/O Hardware Abstraction (IoHwAb) implementation.
+
+Similarly, it is possible to enable communication between the I/O Client/Server interface and the MCAL APIs.
+
+Configuration of pwm IoHwAbCS port interface as shown below -
+
+```{figure} Assets/images/Configuration_of_PWM_IoHwAb_CS_Port_Interface.png
+:alt: Configuration for Pwm IoHwAbCSPortInterface
+:align: center
+Configuration for Pwm IoHwAbCSPortInterface
+```
+
+The container IoHwAbPWMDutyCycle is used for configuring a Client/Server Port Prototype. This container represents an instantiation of a Client/Server Port Interface.
+
+Configuration of pwm IoHwAbCS port prototype as shown below -
+
+```{figure} Assets/images/Configuration_of_PWM_IoHwAb_CS_Port_Prototype.png
+:alt: Configuration for Pwm IoHwAbCSPortPrototypes
+:align: center
+Configuration for Pwm IoHwAbCSPortPrototypes
+```
+
+The function IoHwAb_IoHwAbPWMDutyCycle_IoHwAbOperation is generated, and then the MCAL API function Pwm_SetDutyCycle is called -
+
+```{figure} Assets/images/IOHWAB_set_Duty_Cycle.png
+:alt: Invoking MCAL API SetDutyCycle
+:align: center
+ Invoking MCAL API SetDutyCycle
+```
+
+In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used to communication between software components.
+
+The port connection to software component is shown below -
+
+```{figure} Assets/images/Pwm_PortConnection.png
+:alt: Port connection to software component
+:align: center
+
+Port connection to software component
+```
+
+### LIN Integration
+
+#### Objective for LIN Integration
+
+The intention of LIN integration is to establish successful LIN communication by configuring the MCAL and Vector modules. To achieve effective communication between the LIN master and slave, proper configurations are implemented, which will be explained in the subsequent chapter.
+
+#### List of Modules for LIN
+
+##### MCAL Modules for LIN Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Mcu| Manages microcontroller features such as power modes, clock settings, and interrupts. | In this use case this module is used to provide clock for CAN communication. |
+|2| Port | Provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case allows application software to interact with hardware pins, making it transmit and receive LIN Message. |
+|3| Lin | A communication protocol for low-speed communication between ECUs (Electronic Control Units) in automotive applications.|In this use case, it is used for communication between the MCAL layer and the Application layer to transmit and receive data.|
+
+```{Note}
+ For detailed information, please refer to the section [LIN Module](./Module_User_Guide_Lin.md#lin-module).
+```
+
+##### Vector Modules for LIN Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| EcuC | Virtual module to collect ECU Configuration specific / global configuration information.|In this use case, EcuC collects all Pdu objects flowing through the Com-Stack.|
+|2| LinIf | Provides an interface for handling communication over the LIN (Local Interconnect Network) protocol.|In this use case, LinIf ensures communication between application software and the LIN hardware.|
+|3| LinSm| Manages the state machine for the LIN communication stack.|In this use case, LinSM manages the state transitions of the Lin controller to error recovery and maintain reliable communication.|
+|4| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling of tasks and interrupts.| In this use case, it used to define a periodic task. |
+|5| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between <br> Software Components (SWCs), BSW and CDDs.|In this use case, it is used to schedule the periodic task defined in OS. |
+|6| Com | Com is responsible to provide a signal-based <br> interface to the upper layer. It handles signal <br> conversion, transmission and reception. |In this use case, Com module handles packing of AUTOSAR signals to I-Pdus to be transmitted <br> and unpacking of received I-Pdus. |
+|7| ComM | The Communication Manager is a resource manager, which encapsulates the control of the underlying <br> communication services. It controls more than one communication bus channel of an ECU by implementing a channel state machine for every <br> channel.|In this use case, ComM provides a mechanism for users to request communication modes, coordinating requests from multiple <br> independent users. |
+|8| EcuM | EcuM is responsible for initialization of BSW (Basic Software) modules that are needed to start <br> the operating system and preparation of the microcontroller for a sleep phase and the following wake up|In this use case, EcuM is used <br> to wake up the LIN channel by configuring the EcuM wakeup sources |
+|9| PduR | PduR routes protocol data units between communication modules and ensures that the correct Pdus <br> are transmitted to the appropriate destination.|In this use case, PduR module handles the routing of Pdus to and from Com layer and <br> LIN driver. |
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in LIN Integration
+
+This chapter explains the basic configurations that are needed to realize LIN communication.
+
+##### Lin Configuration
+
+**LinGeneral:**
+
+The LinGeneral container is responsible for configuring the global settings of the LIN protocol in the system.
+
+Follow the configuration of Lin General settings as shown below -
+
+```{figure} Assets/images/Lin_General.png
+:alt: Lin General configuration
+:align: center
+
+Lin General configuration
+```
+
+**LinChannel:**
+
+This container holds the configuration parameters for the LIN Controller(s). It defines critical settings such as the baud rate, which is essential for enabling proper communication between the LIN bus and the application layer.
+
+Select LIN1 hardware unit, with loopback mode disabled and baud rate configuration as shown below -
+
+```{figure} Assets/images/Lin_Ch_Config.png
+:alt: Lin Channel Configuration
+:align: center
+
+Lin Channel Configuration
+```
+
+##### MCU Configuration for LIN Module
+
+The LIN module has dependence on MCU module. Hence, we need to provide clock setting reference in MCU module. Please refer to TechnicalReference_Mcu was used to configure this module.
+
+Lin clock reference point is configured as shown below -
+
+```{figure} Assets/images/LinMcuClockReferenceConfiguration.png
+:alt: Lin Mcu Clock reference configuration
+:align: center
+
+Lin Mcu Clock reference configuration
+```
+
+##### Port Configuration in LIN Module
+
+In the configuration of the port for the LIN module, the port pins are used to facilitate the transmission (Tx) and reception (Rx) of messages.
+
+LIN1 Rx is configured on pin A9 and LIN1 Tx is configured on pin B9 as shown below -
+
+```{figure} Assets/images/PortPin.png
+:alt: Port pin configuration for Lin
+:align: center
+
+Port pin configuration for Lin
+```
+
+##### EcuC Configuration in LIN Module
+
+EcuC is a virtual module to collect ECU Configuration specific global configuration information. EcuCPduCollection container collects all the Pdus flowing through the COM Stack as shown below -
+
+```{figure} Assets/images/LinEcuCPduCollection.png
+:alt: EcuC Pdu Collection
+:align: center
+
+EcuC Pdu Collection
+```
+
+##### LinIf Configuration in LIN Module
+
+LinIf is responsible for managing the interaction between the application layer and the underlying LIN driver.
+
+**LinIfChannels:**
+
+LinIfChannels define the communication channels for the LIN (Local Interconnect Network) protocol.
+
+The configuration of the LinIf channel is done with the startup state set to NORMAL and the wake-up confirmation timeout period configured as 2 seconds as shown below -
+
+```{figure} Assets/images/LinIfChannelConfiguration.png
+:alt: LinIf channel configuration
+:align: center
+
+LinIf channel configuration
+```
+
+**LinIfFrames:**
+
+LinIfFrames represent the actual message format used in LIN communication, specifying message IDs, data length, and content.
+
+Both LINIf Tx and Rx frames are configured as Unconditional frames as shown below -
+
+```{figure} Assets/images/LinIfTxRxframe.png
+:alt: LinIf Tx and Rx frame configuration
+:align: center
+
+LinIf Tx and Rx frame configuration
+```
+
+The configuration of LinIf Tx Pdu frame is as shown below -
+
+```{figure} Assets/images/LinIfTxFrame.png
+:alt: LinIf Tx frame configuration
+:align: center
+
+LinIf Tx frame configuration
+```
+
+The configuration of LinIf Rx Pdu frame is as shown below -
+
+```{figure} Assets/images/LinIfRxFrame.png
+:alt: LinIf Rx frame configuration
+:align: center
+
+LinIf Rx frame configuration
+```
+
+**LinIfScheduleTables:**
+
+The schedule table allows for time-based control of message exchanges, ensuring that messages are sent at the correct intervals, such as periodically requesting sensor data or controlling actuators.
+
+The configuration of LinIfScheduleTable for both master and slave response where both are configured with runmode as RUN_ONCE as shown below -
+
+```{figure} Assets/images/LinIfScheduleTables.png
+:alt: Configuration for LinIfScheduleTables
+:align: center
+
+Configuration for LinIfScheduleTables
+```
+
+The configuration of LinIfEntry is shown below -
+
+```{figure} Assets/images/LinIfEntry.png
+:alt: Configuration for LinIfEntry
+:align: center
+
+Configuration for LinIfEntry
+```
+
+**LinIfNodeType:**
+
+LinIfNodeType specifies the role of a LIN node (communication endpoint) in the network.
+Master Node: Initiates communication controls the flow of data, and requests data from slave nodes.
+Slave Node: Responds to requests from the master node, providing data or status information.
+
+The configuration of LinIfNodeType is shown as below -
+
+```{figure} Assets/images/LinIfNodeType.png
+:alt: configuration for LinIfNodeType
+:align: center
+
+configuration for LinIfNodeType 
+```
+
+##### LinSM Configuration in LIN Module
+
+The LinSM (LIN State Manager) is responsible for controlling the communication states of the LIN network, such as initialization, sleep, and wake-up.
+
+**LinSMChannel:**
+
+LinSMChannel configures the LIN State Manager channel, managing state transitions (e.g., from sleep to active) for LIN communication.
+
+The configuration of LinSM channel is done as shown below by selecting appropriate node type -
+
+```{figure} Assets/images/LinSMChannelConfiguration.png
+:alt: LinSM Channel Configuration
+:align: center
+
+LinSM Channel Configuration
+```
+
+**LinSMSchedule:**
+
+LinSMSchedule defines the schedule for the LIN State Manager (LinSM), specifying the timing and sequence for state transitions (such as wake-up and communication states).
+
+Two LinSM Schedules are created with different schedule index as shown below -
+
+```{figure} Assets/images/LinSMSchedulesConfiguration.png
+:alt: LinSM Schedules Configuration
+:align: center
+
+LinSM Schedules Configuration
+```
+
+**LinSMGeneral:**
+
+LinSMGeneral is used to configure general settings for the LIN State Manager (LinSM), which controls the state transitions of the LIN communication.
+
+The configuration of LinSM is configured as shown below, by setting the main Processing period as 10ms -
+
+```{figure} Assets/images/LinSMGeneralConfiguration.png
+:alt: LinSM general configuration
+:align: center
+
+LinSM general configuration
+```
+
+##### EcuM Configuration in LIN Module
+
+The EcuM is used to wake up the LIN channel by configuring the EcuM wakeup source ID and setting the parameters that reference the LinWakeupChannel parameter.
+
+Follow the configuration of EcuM with EcuM wakeup source ID as 4 and EcuM wakeup source enabled in Polling mode as shown below -
+
+```{figure} Assets/images/LinWakeupEcuM.png
+:alt: Lin wakeup configuration in EcuM
+:align: center
+
+Lin wakeup configuration in EcuM
+```
+
+##### PduR Configuration in LIN Module
+
+The primary function of the Pdu Router module is to abstract the bus access type (Interface layer) and the bus type itself. The Pdu Router routing tables are configured with source and destination parameters. Pdu Router configuration to send and receive LIN message to and from LIN driver and Com module, is shown below -
+
+```{figure} Assets/images/PduRConfiguration.png
+:alt: PduR configuration
+:align: center
+
+PduR Configuration
+```
+
+##### Com Configuration in LIN Module
+
+Com module provides the configuration for ComIpdus and ComIpdugroups. It also provides Tx and Rx main function. Below figure illustrates the com configuration
+
+To configure Lin in DaVinci Configurator the following containers need to be set up.
+
+**ComSignal:**
+
+The ComSignal container is used to define individual signals within a communication protocol (e.g., CAN, LIN) in the system.
+
+The configuration of the Com Signal for the LIN master response is done with the transfer property set to TRIGGERED and the signal access set to ACCESS_NEEDED_BY_OTHER, as shown in the figure below -
+
+```{figure} Assets/images/ConfigurationLinTx.png
+:alt: Configuration for Lin Tx signal
+:align: center
+
+Configuration for Lin Tx signal
+```
+
+Configuration of Lin Slave signal is done with signal access set to ACCESS_NEEDED_BY_OTHER as shown below -
+
+```{figure} Assets/images/ConfigurationLinRx.png
+:alt: Configuration of Lin Rx signal
+:align: center
+
+Configuration of Lin Rx signal
+```
+
+**ComIPuds:**
+
+The ComIPuds container simplifies the definition of data transfer mechanisms between ECUs, especially when communication involves multiple protocols or complex mappings of signals and messages.
+
+Configuration of a Lin Master comIpdu is configured with Ipdu signal processing as IMMEDIATE as shown below -
+
+```{figure} Assets/images/ConfigurationLinTxIpdu.png
+:alt: configuration for Lin Tx Ipdu
+:align: center
+
+configuration for Lin Tx Ipdu
+```
+
+Configuration of a Lin Slave comIpdu is done with Ipdu signal processing as DEFERRED, as shown below -
+
+```{figure} Assets/images/ConfigurationLinRxIpdu.png
+:alt: Configuration for Lin Rx Ipdu
+:align: center
+
+Configuration for Lin Rx Ipdu
+```
+
+**ComIPduGroup:**
+
+The ComIPduGroup container is used to group related IPdus together, which can represent different sets of data that need to be communicated within the same context or for the same functional block.
+
+The configuration of ComIPduGroup associated with the LIN Master is shown below -
+
+```{figure} Assets/images/ConfigurationLinTxIpduGroup.png
+:alt: Configuration for Lin Tx IpduGroup
+:align: center
+
+Configuration for Lin Tx IpduGroup
+```
+
+The configuration of ComIPduGroup associated with the LIN Slave is shown below -
+
+```{figure} Assets/images/ConfigurationLinRxIpduGroup.png
+:alt: Configuration for Lin Rx IpduGroup
+:align: center
+
+Configuration for Lin Rx IpduGroup
+```
+
+##### ComM Configuration in LIN Module
+
+The ComM module allows the system to operate in different communication modes. Lin Controller channel reference shall be given in the ComM module.
+
+**ComMUser:**
+
+The ComMUser configuration is used to specify user-defined settings related to Communication Management (ComM).
+
+The configuration of ComMUser for LIN is shown below -
+
+```{figure} Assets/images/ConfigurationLinRteSwComponentInstances.png
+:alt: Configuration for Lin RteSwComponentInstances
+:align: center
+
+Configuration for Lin RteSwComponentInstances
+```
+
+**ComMChannel:**
+
+The ComMChannel container is responsible for configuring communication channels within the ComM (Communication Management) module.
+
+The Configuration of ComMChannels for LIN is as shown below -
+
+```{figure} Assets/images/ConfigurationLinComMChannel.png
+:alt: Configuration for Lin ComM channel
+:align: center
+
+Configuration for Lin ComM channel
+```
+
+The configuration of ComMUserPerChannels for Lin is as shown below -
+
+```{figure} Assets/images/ConfigurationLinComMUserPerChannels.png
+:alt: Configuration for lin ComMUserPerChannels
+:align: center
+
+Configuration for lin ComMUserPerChannels
+```
+
+##### OS Configuration in LIN Module
+
+The OS module is responsible for task scheduling. Tasks such as 10ms and 1s are created to schedule different schedulable functions for LIN and respective BSW modules. The figure below illustrates the OS configuration -
+
+```{figure} Assets/images/OSConfiguration.png
+:alt: OS Configuration
+:align: center
+
+OS Configuration
+```
+
+##### Rte Configuration in LIN Module
+
+Runtime Environment (RTE) manages communication between the software components (SWC), assures consistency of the overall information flow between basic software (BSW). It also maps a BswSchedulableEntity onto a OsTask.
+
+The scheduling of the LinIf_MainFunction is shown below -
+
+```{figure} Assets/images/SchedulingLinIfMainFunction.png
+:alt: Scheduling of LinIf main function
+:align: center
+
+Scheduling of LinIf main function
+```
+
+All runnable in the 10ms task are shown below -
+
+```{figure} Assets/images/LinRteAllTaskMapped.png
+:alt: Rte all task mapped
+:align: center
+
+Rte all task mapped
+```
+
+In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used to communication between software components.
+
+The port connection to software component is shown below -
+
+```{figure} Assets/images/Lin_PortConnection.png
+:alt: Port connection to software component
+:align: center
+
+Port connection to software component
+```
