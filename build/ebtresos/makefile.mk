@@ -32,8 +32,8 @@ ifeq ($(PACKAGE),$(filter $(PACKAGE), SIP))
 endif
 
 delete_plugins:
-	$(ECHO) Deleting TI Plugins from EB Tresos plugins folder for $(EB_PLATFORM) ...
-	$(RMDIR) $(EB_PATH)/tresos/plugins/*_TI_$(EB_PLATFORM)*
+	$(ECHO) Deleting All TI Plugins from EB Tresos plugins folder ...
+	$(RMDIR) $(EB_PATH)/tresos/plugins/*_TI_*
 
 #TBD: Move not working if there are no folders to backup - find an alternative
 move_plugins:
