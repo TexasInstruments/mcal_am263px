@@ -1,5 +1,0 @@
-ETH_DEMO_LCFG_PATH=$(mcal_PATH)/examples_config/Eth_Demo_Lcfg
-
-SRCDIR += $(ETH_DEMO_LCFG_PATH)/soc/$(SOC)/r5f0_0/src
-INCDIR += $(ETH_DEMO_LCFG_PATH)/soc/$(SOC)/r5f0_0/include
-SRCS_COMMON += Eth_Cfg.c Eth_Lcfg.c Eth_PBcfg.c
