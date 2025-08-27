@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.17. PORT &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.18. PWM" href="group___p_w_m.html" />
+    <link rel="prev" title="5.16. MCU" href="group___m_c_u.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">5.8. CDD_IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.17. PORT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types">5.17.1. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-diodatadir">5.17.1.1. enum Port_DioDataDir</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-diodatain">5.17.1.2. enum Port_DioDataIn</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-diodataout">5.17.1.3. enum Port_DioDataOut</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-dioopendrain-mode">5.17.1.4. enum Port_DioOpenDrain_Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-diointrdet">5.17.1.5. enum Port_DioIntrDET</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-diointrpol">5.17.1.6. enum Port_DioIntrPol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-diointrlvl">5.17.1.7. enum Port_DioIntrLvl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-dioidlemodetype">5.17.1.8. enum Port_DioIdleModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-dioclockgatingratiotype">5.17.1.9. enum Port_DioClockGatingRatioType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pindirectiontype">5.17.1.10. enum Port_PinDirectionType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pinlevelvaluetype">5.17.1.11. enum Port_PinLevelValueType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pinslewcontroltype">5.17.1.12. enum Port_PinSlewControlType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pinoutputoverridectrl">5.17.1.13. enum Port_PinOutputOverrideCtrl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pininputoverridectrl">5.17.1.14. enum Port_PinInputOverrideCtrl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pinpullselecttype">5.17.1.15. enum Port_PinPullSelectType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pinpullinhibitenabletype">5.17.1.16. enum Port_PinPullInhibitEnableType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-inputinversion">5.17.1.17. enum Port_InputInversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-inputqualtype">5.17.1.18. enum Port_InputQualType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-pinmodetype">5.17.1.19. enum Port_PinModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-gpiobank">5.17.1.20. enum Port_GpioBank</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-gpiochannel">5.17.1.21. enum Port_GpioChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-edgetrig">5.17.1.22. enum Port_EdgeTrig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-port-intrtype">5.17.1.23. enum Port_IntrType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-port-pintype">5.17.1.24. typedef Port_PinType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-port-isrnotificationtype">5.17.1.25. typedef Port_IsrNotificationType</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">5.17.2. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.17.3. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.17.4. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-init">5.17.4.1. function Port_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-setpindirection">5.17.4.2. function Port_SetPinDirection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-refreshportdirection">5.17.4.3. function Port_RefreshPortDirection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-setpinmode">5.17.4.4. function Port_SetPinMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-getversioninfo">5.17.4.5. function Port_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-deinit">5.17.4.6. function Port_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-getconfigregvalues">5.17.4.7. function Port_GetConfigRegValues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-pinenableintrnotification">5.17.4.8. function Port_PinEnableIntrNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-pindisableintrnotification">5.17.4.9. function Port_PinDisableIntrNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-getinterruptstatus">5.17.4.10. function Port_GetInterruptStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-port-clearinterruptstatus">5.17.4.11. function Port_ClearInterruptStatus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">5.17. </span>PORT</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="port">
+<h1><span class="section-number">5.17. </span>PORT<a class="headerlink" href="#port" title="Link to this heading"></a></h1>
+<section id="types">
+<h2><span class="section-number">5.17.1. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base type</p></th>
+<th class="head"><p>Type Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-diodatadir"><span class="std std-ref">Port_DioDataDir</span></a></strong></p></td>
+<td><p>Enum of Dio module data direction control.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-diodatain"><span class="std std-ref">Port_DioDataIn</span></a></strong></p></td>
+<td><p>Enum of DIO module Data Input register that reflects the current state of the pins.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-diodataout"><span class="std std-ref">Port_DioDataOut</span></a></strong></p></td>
+<td><p>Enum of DIO module Data Output register that specify the output state of the pins when configured as output.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-dioopendrain-mode"><span class="std std-ref">Port_DioOpenDrain_Mode</span></a></strong></p></td>
+<td><p>Enum of DIO module Open drain capability.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-diointrdet"><span class="std std-ref">Port_DioIntrDET</span></a></strong></p></td>
+<td><p>Enum of DIO module SINGLE/BOTH Edge trigger interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-diointrpol"><span class="std std-ref">Port_DioIntrPol</span></a></strong></p></td>
+<td><p>Enum of DIO module Rising/Falling edge interrupt.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-diointrlvl"><span class="std std-ref">Port_DioIntrLvl</span></a></strong></p></td>
+<td><p>Enum of DIO module high/low level interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-dioidlemodetype"><span class="std std-ref">Port_DioIdleModeType</span></a></strong></p></td>
+<td><p>Enum of DIO module idle mode configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-dioclockgatingratiotype"><span class="std std-ref">Port_DioClockGatingRatioType</span></a></strong></p></td>
+<td><p>Enum of DIO module Clock gating ratio for event detection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pindirectiontype"><span class="std std-ref">Port_PinDirectionType</span></a></strong></p></td>
+<td><p>Enum of Port Direction used in Port_SetPinDirection()</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pinlevelvaluetype"><span class="std std-ref">Port_PinLevelValueType</span></a></strong></p></td>
+<td><p>Enum of Port Level.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pinslewcontroltype"><span class="std std-ref">Port_PinSlewControlType</span></a></strong></p></td>
+<td><p>Enum of Port Slew Control.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pinoutputoverridectrl"><span class="std std-ref">Port_PinOutputOverrideCtrl</span></a></strong></p></td>
+<td><p>Enum of Port Pin Output override selection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pininputoverridectrl"><span class="std std-ref">Port_PinInputOverrideCtrl</span></a></strong></p></td>
+<td><p>Enum of Port Pin Input override selection.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pinpullselecttype"><span class="std std-ref">Port_PinPullSelectType</span></a></strong></p></td>
+<td><p>Enum of Port Pin Up/Down Type selection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pinpullinhibitenabletype"><span class="std std-ref">Port_PinPullInhibitEnableType</span></a></strong></p></td>
+<td><p>Enum of Port Pin pull inihibit selection.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-inputinversion"><span class="std std-ref">Port_InputInversion</span></a></strong></p></td>
+<td><p>Enum of Port input inversion.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-inputqualtype"><span class="std std-ref">Port_InputQualType</span></a></strong></p></td>
+<td><p>Enum of Port input qualifier type select.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-pinmodetype"><span class="std std-ref">Port_PinModeType</span></a></strong></p></td>
+<td><p>Enum of Port Pin Mode selection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-gpiobank"><span class="std std-ref">Port_GpioBank</span></a></strong></p></td>
+<td><p>GPIO Bank Details.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-gpiochannel"><span class="std std-ref">Port_GpioChannel</span></a></strong></p></td>
+<td><p>GPIO channels details.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-edgetrig"><span class="std std-ref">Port_EdgeTrig</span></a></strong></p></td>
+<td><p>GPIO Pin Edge trigger intruppt selection.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-port-intrtype"><span class="std std-ref">Port_IntrType</span></a></strong></p></td>
+<td><p>GPIO Interrupt Type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef uint16</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-port-pintype"><span class="std std-ref">Port_PinType</span></a></strong></p></td>
+<td><p>Type for symbolic name of Port pins.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef void(*)(uint8 PortBankNum, uint8 PortBankChNum, Port_EdgeTrig Edge)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-port-isrnotificationtype"><span class="std std-ref">Port_IsrNotificationType</span></a></strong></p></td>
+<td><p>Notification callback function pointer.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="enum-port-diodatadir">
+<h3><span class="section-number">5.17.1.1. </span>enum Port_DioDataDir<a class="headerlink" href="#enum-port-diodatadir" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_DATA_DIRECTION_INPUT</p></td>
+<td><p></p></td>
+<td><p>Input direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_DATA_DIRECTION_OUTPUT</p></td>
+<td><p></p></td>
+<td><p>Output direction.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_DATA_DIRECTION_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Default direction.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Dio module data direction control.</p>
+</section>
+<section id="enum-port-diodatain">
+<h3><span class="section-number">5.17.1.2. </span>enum Port_DioDataIn<a class="headerlink" href="#enum-port-diodatain" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_DATA_INPUT_LOW</p></td>
+<td><p></p></td>
+<td><p>Input Low state.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_DATA_INPUT_HIGH</p></td>
+<td><p></p></td>
+<td><p>Input High state.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_DATA_INPUT_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Input default state.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module Data Input register that reflects the current state of the pins.</p>
+</section>
+<section id="enum-port-diodataout">
+<h3><span class="section-number">5.17.1.3. </span>enum Port_DioDataOut<a class="headerlink" href="#enum-port-diodataout" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_DATA_OUTPUT_LOW</p></td>
+<td><p></p></td>
+<td><p>Output Low state.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_DATA_OUTPUT_HIGH</p></td>
+<td><p></p></td>
+<td><p>Output Low state.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_DATA_OUTPUT_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Output Low state.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module Data Output register that specify the output state of the pins when configured as output.</p>
+</section>
+<section id="enum-port-dioopendrain-mode">
+<h3><span class="section-number">5.17.1.4. </span>enum Port_DioOpenDrain_Mode<a class="headerlink" href="#enum-port-dioopendrain-mode" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_PDR_PUSHPULL_MODE</p></td>
+<td><p></p></td>
+<td><p>Push Pull Mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_PDR_OPEN_DRAIN_MODE</p></td>
+<td><p></p></td>
+<td><p>Open drain Mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_PDR_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Default Mode.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module Open drain capability.</p>
+</section>
+<section id="enum-port-diointrdet">
+<h3><span class="section-number">5.17.1.5. </span>enum Port_DioIntrDET<a class="headerlink" href="#enum-port-diointrdet" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_SINGLE_EDGE_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Single edge trigger interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_BOTH_EDGE_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Both edge trigger interrupt.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_DEFAULT_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Default interrupt.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module SINGLE/BOTH Edge trigger interrupt.</p>
+</section>
+<section id="enum-port-diointrpol">
+<h3><span class="section-number">5.17.1.6. </span>enum Port_DioIntrPol<a class="headerlink" href="#enum-port-diointrpol" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_FALLING_EDGE_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Falling edge interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_RISING_EDGE_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Rising edge interrupt.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_DEFAULT_EDGE_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Default edge interrupt.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module Rising/Falling edge interrupt.</p>
+</section>
+<section id="enum-port-diointrlvl">
+<h3><span class="section-number">5.17.1.7. </span>enum Port_DioIntrLvl<a class="headerlink" href="#enum-port-diointrlvl" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_LOW_LEVEL_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Low level interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_HIGH_LEVEL_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>High level interrupt.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_DEFAULT_LEVEL_INTERRUPT</p></td>
+<td><p></p></td>
+<td><p>Default level interrupt.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module high/low level interrupt.</p>
+</section>
+<section id="enum-port-dioidlemodetype">
+<h3><span class="section-number">5.17.1.8. </span>enum Port_DioIdleModeType<a class="headerlink" href="#enum-port-dioidlemodetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_IDLEMODE_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>IdleMode : Do not configure IDLEMODE. Retains default configuration.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module idle mode configuration.</p>
+</section>
+<section id="enum-port-dioclockgatingratiotype">
+<h3><span class="section-number">5.17.1.9. </span>enum Port_DioClockGatingRatioType<a class="headerlink" href="#enum-port-dioclockgatingratiotype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_DIO_UNGATE</p></td>
+<td><p>0xFFFF</p></td>
+<td><p>Clock gating ratio for event detection.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of DIO module Clock gating ratio for event detection.</p>
+</section>
+<section id="enum-port-pindirectiontype">
+<h3><span class="section-number">5.17.1.10. </span>enum Port_PinDirectionType<a class="headerlink" href="#enum-port-pindirectiontype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_OUT</p></td>
+<td><p></p></td>
+<td><p>PORT_PIN_OUT.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_IN</p></td>
+<td><p></p></td>
+<td><p>PORT_PIN_IN.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>PORT_PIN_DEFAULT.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Direction used in Port_SetPinDirection()</p>
+</section>
+<section id="enum-port-pinlevelvaluetype">
+<h3><span class="section-number">5.17.1.11. </span>enum Port_PinLevelValueType<a class="headerlink" href="#enum-port-pinlevelvaluetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_LEVEL_LOW</p></td>
+<td><p></p></td>
+<td><p>Port Low level.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_LEVEL_HIGH</p></td>
+<td><p></p></td>
+<td><p>Port High level.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Level.</p>
+</section>
+<section id="enum-port-pinslewcontroltype">
+<h3><span class="section-number">5.17.1.12. </span>enum Port_PinSlewControlType<a class="headerlink" href="#enum-port-pinslewcontroltype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_SLEWCONTROL_FAST_SLEW</p></td>
+<td><p></p></td>
+<td><p>Fast slew control.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_SLEWCONTROL_SLOW_SLEW</p></td>
+<td><p></p></td>
+<td><p>Slow slew control.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_SLEWCONTROL_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Default slew control.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Slew Control.</p>
+</section>
+<section id="enum-port-pinoutputoverridectrl">
+<h3><span class="section-number">5.17.1.13. </span>enum Port_PinOutputOverrideCtrl<a class="headerlink" href="#enum-port-pinoutputoverridectrl" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_DISABLE_OUTPUT_OVERRIDE</p></td>
+<td><p></p></td>
+<td><p>Disable Output override.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_ENABLE_OUTPUT_OVERRIDE</p></td>
+<td><p></p></td>
+<td><p>Enable Output override.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_OUTPUT_RETAIN_HW_CTRL</p></td>
+<td><p></p></td>
+<td><p>Retain HW control.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Pin Output override selection.</p>
+</section>
+<section id="enum-port-pininputoverridectrl">
+<h3><span class="section-number">5.17.1.14. </span>enum Port_PinInputOverrideCtrl<a class="headerlink" href="#enum-port-pininputoverridectrl" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_DISABLE_INPUT_OVERRIDE</p></td>
+<td><p></p></td>
+<td><p>Disable Input override.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_ENABLE_INPUT_OVERRIDE</p></td>
+<td><p></p></td>
+<td><p>Enable Input override.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_INPUT_RETAIN_HW_CTRL</p></td>
+<td><p></p></td>
+<td><p>Retain HW control.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Pin Input override selection.</p>
+</section>
+<section id="enum-port-pinpullselecttype">
+<h3><span class="section-number">5.17.1.15. </span>enum Port_PinPullSelectType<a class="headerlink" href="#enum-port-pinpullselecttype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_PULLTYPE_PULLDOWN</p></td>
+<td><p></p></td>
+<td><p>Port pull down.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_PULLTYPE_PULLUP</p></td>
+<td><p></p></td>
+<td><p>Port pull up.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_PULLTYPE_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Port Default.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Pin Up/Down Type selection.</p>
+</section>
+<section id="enum-port-pinpullinhibitenabletype">
+<h3><span class="section-number">5.17.1.16. </span>enum Port_PinPullInhibitEnableType<a class="headerlink" href="#enum-port-pinpullinhibitenabletype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_PULL_INHIBIT_ENABLE</p></td>
+<td><p></p></td>
+<td><p>Enable inhibit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_PULL_INHIBIT_DISABLE</p></td>
+<td><p></p></td>
+<td><p>Disable inhibit.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_PULL_INHIBIT_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Default inhibit.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Pin pull inihibit selection.</p>
+</section>
+<section id="enum-port-inputinversion">
+<h3><span class="section-number">5.17.1.17. </span>enum Port_InputInversion<a class="headerlink" href="#enum-port-inputinversion" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_NONINV</p></td>
+<td><p></p></td>
+<td><p>Port Non inversion.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_INV</p></td>
+<td><p></p></td>
+<td><p>Port inversion.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_INVTYPE_DEFAULT</p></td>
+<td><p></p></td>
+<td><p>Port Default.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port input inversion.</p>
+</section>
+<section id="enum-port-inputqualtype">
+<h3><span class="section-number">5.17.1.18. </span>enum Port_InputQualType<a class="headerlink" href="#enum-port-inputqualtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_SYNC_QUAL</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_THREE_SAMPLE_QUAL</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_SIX_SAMPLE_QUAL</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_ASYNC_QUAL</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_QUALTYPE_DEFAULT</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port input qualifier type select.</p>
+</section>
+<section id="enum-port-pinmodetype">
+<h3><span class="section-number">5.17.1.19. </span>enum Port_PinModeType<a class="headerlink" href="#enum-port-pinmodetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_PIN_MODE_GPIOAB</p></td>
+<td><p></p></td>
+<td><p>Set Pin for GPIO Port AB mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_GPIOCD</p></td>
+<td><p></p></td>
+<td><p>Set Pin for GPIO Port CD mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_GPIOEF</p></td>
+<td><p></p></td>
+<td><p>Set Pin for GPIO Port EF mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_GPIOGH</p></td>
+<td><p></p></td>
+<td><p>Set Pin for GPIO Port GH mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_GPIOI</p></td>
+<td><p></p></td>
+<td><p>Set Pin for GPIO mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_MCAN0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN0 (CAN FD) mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_MCAN1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN1 (CAN FD) mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_MCAN2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN2(CAN FD) mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_MCAN3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN3(CAN FD) mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_MCAN4</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN4 (CAN FD) mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_MCAN5</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN5 (CAN FD) mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_MCAN6</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN6(CAN FD) mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_MCAN7</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MCAN7(CAN FD) mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_SPI0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI0 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_SPI1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI1 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_SPI2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI2 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_SPI3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI3 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_SPI4</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI4 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_SPI5</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI2 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_SPI6</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI3 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_SPI7</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MIBSPI4 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_OSPI0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for OSPI0 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_JTAG</p></td>
+<td><p></p></td>
+<td><p>Set Pin for JTAG mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_TRACE</p></td>
+<td><p></p></td>
+<td><p>Set Pin for TRACE mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_I2C0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for I2C0 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_I2C1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for I2C1 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_I2C2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for I2C2 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_I2C3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for I2C3 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_MII</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MII mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_RMII1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for RMII1 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_RMII2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for RMII2 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_RGMII1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for RGMII1 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_RGMII2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for RGMII2 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_MDIO</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MDIO mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_CPTS0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for CPTS0 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_UART0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for UART0 modes.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_UART1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for UART1 modes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_UART2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for UART2 modes.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_UART3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for UART3 modes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_UART4</p></td>
+<td><p></p></td>
+<td><p>Set Pin for UART3 modes.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_UART5</p></td>
+<td><p></p></td>
+<td><p>Set Pin for UART5 modes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_PRU_ICSS</p></td>
+<td><p></p></td>
+<td><p>Set Pin for ECAP0 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_PRU_ICSS_UART</p></td>
+<td><p></p></td>
+<td><p>Set Pin for UART0 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_LIN0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for LIN0 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_LIN1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for LIN1 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_LIN2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for LIN2 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_LIN3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for LIN3 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_LIN4</p></td>
+<td><p></p></td>
+<td><p>Set Pin for LIN mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM0 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM1 mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM2 mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM3A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM4</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM1A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM5</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM5A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM6</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM6A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM7</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM7A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM8</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM8A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM9</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM9A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM10</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM510. mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM11</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM11A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM12</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM12A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM13</p></td>
+<td><p></p></td>
+<td><p>\briefSet Pin for EPWM13A mode</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM14</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM14A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM15</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM15A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM16</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM16A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM17</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM17A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM18</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM18A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM19</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM19A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM20</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM20A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM21</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM21A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM22</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPW22A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM23</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM23A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM24</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM24A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM25</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM25A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM26</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM26A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM27</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM27A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM28</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM28A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM29</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM29A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EPWM30</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM30A mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EPWM31</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EPWM31A mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_OUTPUTXBAR</p></td>
+<td><p></p></td>
+<td><p>Set Pin for XBAR mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_XBAROUT</p></td>
+<td><p></p></td>
+<td><p>Set Pin for XBAR mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_TRC</p></td>
+<td><p></p></td>
+<td><p>Set Pin for TRC.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_SDFM0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for SDFM0.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_SDFM1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for SDFM1.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_MMC</p></td>
+<td><p></p></td>
+<td><p>Set Pin for MMC0.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_FSIRX0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSIRX0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_FSIRX1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSIRX1.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_FSIRX2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSIRX2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_FSIRX3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSIRX3.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_FSITX0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSITX0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_FSITX1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSITX1.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_FSITX2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSITX2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_FSITX3</p></td>
+<td><p></p></td>
+<td><p>Set Pin for FSITX3.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EQEP0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EQEP0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EQEP1</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EQEP1.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_EQEP2</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EQEP2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_PRU_ICSS_IEP</p></td>
+<td><p></p></td>
+<td><p>Set Pin for IEP0.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_SYSTEM</p></td>
+<td><p></p></td>
+<td><p>Set Pin for SYSTEM.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_EXT_REFCLK</p></td>
+<td><p></p></td>
+<td><p>Set Pin for EXT_REFCLK.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_PRU_ICSS_MDIO</p></td>
+<td><p></p></td>
+<td><p>Set Pin for PRU_ICSS_MDIO.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_INVALID</p></td>
+<td><p></p></td>
+<td><p>Invalid pin mode. For internal use.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_PR0_UART0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for PR0_UART0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_PR0_MDIO</p></td>
+<td><p></p></td>
+<td><p>Set Pin for PR0_MDIO.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_PR0_IEP0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for PR0_IEP0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_PR0_ECAP0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for PR0_ECAP0.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_PR0_PRU0</p></td>
+<td><p></p></td>
+<td><p>Set Pin for PR0_PRU0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_PIN_MODE_PR0_PRU1</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_PIN_MODE_CLKOUT</p></td>
+<td><p></p></td>
+<td><p>Set Pin for CLKOUT.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enum of Port Pin Mode selection.</p>
+</section>
+<section id="enum-port-gpiobank">
+<h3><span class="section-number">5.17.1.20. </span>enum Port_GpioBank<a class="headerlink" href="#enum-port-gpiobank" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_GPIO_BANK_0</p></td>
+<td><p>0</p></td>
+<td><p>Bank A.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_BANK_1</p></td>
+<td><p>1</p></td>
+<td><p>Bank B.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_BANK_2</p></td>
+<td><p>2</p></td>
+<td><p>Bank C.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_BANK_3</p></td>
+<td><p>3</p></td>
+<td><p>Bank D.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_BANK_4</p></td>
+<td><p>4</p></td>
+<td><p>Bank E.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_BANK_5</p></td>
+<td><p>5</p></td>
+<td><p>Bank F.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_BANK_6</p></td>
+<td><p>6</p></td>
+<td><p>Bank G.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_BANK_7</p></td>
+<td><p>7</p></td>
+<td><p>Bank H.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_BANK_8</p></td>
+<td><p>8</p></td>
+<td><p>Bank I.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+GPIO Bank Details.</p>
+</section>
+<section id="enum-port-gpiochannel">
+<h3><span class="section-number">5.17.1.21. </span>enum Port_GpioChannel<a class="headerlink" href="#enum-port-gpiochannel" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_GPIO_CH_0</p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_1</p></td>
+<td><p>1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_2</p></td>
+<td><p>2</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_3</p></td>
+<td><p>3</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_4</p></td>
+<td><p>4</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_5</p></td>
+<td><p>5</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_6</p></td>
+<td><p>6</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_7</p></td>
+<td><p>7</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_8</p></td>
+<td><p>8</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_9</p></td>
+<td><p>9</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_10</p></td>
+<td><p>10</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_11</p></td>
+<td><p>11</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_12</p></td>
+<td><p>12</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_13</p></td>
+<td><p>13</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_14</p></td>
+<td><p>14</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_15</p></td>
+<td><p>15</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_16</p></td>
+<td><p>16</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_17</p></td>
+<td><p>17</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_18</p></td>
+<td><p>18</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_19</p></td>
+<td><p>19</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_20</p></td>
+<td><p>20</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_21</p></td>
+<td><p>21</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_22</p></td>
+<td><p>22</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_23</p></td>
+<td><p>23</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_24</p></td>
+<td><p>24</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_25</p></td>
+<td><p>25</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_26</p></td>
+<td><p>26</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_27</p></td>
+<td><p>27</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_28</p></td>
+<td><p>28</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_29</p></td>
+<td><p>29</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_30</p></td>
+<td><p>30</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_31</p></td>
+<td><p>31</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_32</p></td>
+<td><p>32</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_33</p></td>
+<td><p>33</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_34</p></td>
+<td><p>34</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_35</p></td>
+<td><p>35</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_36</p></td>
+<td><p>36</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_37</p></td>
+<td><p>37</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_38</p></td>
+<td><p>38</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_39</p></td>
+<td><p>39</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_40</p></td>
+<td><p>40</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_41</p></td>
+<td><p>41</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_42</p></td>
+<td><p>42</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_43</p></td>
+<td><p>43</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_44</p></td>
+<td><p>44</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_45</p></td>
+<td><p>45</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_46</p></td>
+<td><p>46</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_47</p></td>
+<td><p>47</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_48</p></td>
+<td><p>48</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_49</p></td>
+<td><p>49</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_50</p></td>
+<td><p>50</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_51</p></td>
+<td><p>51</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_52</p></td>
+<td><p>52</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_53</p></td>
+<td><p>53</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_54</p></td>
+<td><p>54</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_55</p></td>
+<td><p>55</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_56</p></td>
+<td><p>56</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_57</p></td>
+<td><p>57</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_58</p></td>
+<td><p>58</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_59</p></td>
+<td><p>59</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_60</p></td>
+<td><p>60</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_61</p></td>
+<td><p>61</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_62</p></td>
+<td><p>62</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_63</p></td>
+<td><p>63</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_64</p></td>
+<td><p>64</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_65</p></td>
+<td><p>65</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_66</p></td>
+<td><p>66</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_67</p></td>
+<td><p>67</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_68</p></td>
+<td><p>68</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_69</p></td>
+<td><p>69</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_70</p></td>
+<td><p>70</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_71</p></td>
+<td><p>71</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_72</p></td>
+<td><p>72</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_73</p></td>
+<td><p>73</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_74</p></td>
+<td><p>74</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_75</p></td>
+<td><p>75</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_76</p></td>
+<td><p>76</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_77</p></td>
+<td><p>77</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_78</p></td>
+<td><p>78</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_79</p></td>
+<td><p>79</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_80</p></td>
+<td><p>80</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_81</p></td>
+<td><p>81</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_82</p></td>
+<td><p>82</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_83</p></td>
+<td><p>83</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_84</p></td>
+<td><p>84</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_85</p></td>
+<td><p>85</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_86</p></td>
+<td><p>86</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_87</p></td>
+<td><p>87</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_88</p></td>
+<td><p>88</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_89</p></td>
+<td><p>89</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_90</p></td>
+<td><p>90</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_91</p></td>
+<td><p>91</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_92</p></td>
+<td><p>92</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_93</p></td>
+<td><p>93</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_94</p></td>
+<td><p>94</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_95</p></td>
+<td><p>95</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_96</p></td>
+<td><p>96</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_97</p></td>
+<td><p>97</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_98</p></td>
+<td><p>98</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_99</p></td>
+<td><p>99</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_100</p></td>
+<td><p>100</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_101</p></td>
+<td><p>101</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_102</p></td>
+<td><p>102</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_103</p></td>
+<td><p>103</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_104</p></td>
+<td><p>104</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_105</p></td>
+<td><p>105</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_106</p></td>
+<td><p>106</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_107</p></td>
+<td><p>107</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_108</p></td>
+<td><p>108</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_109</p></td>
+<td><p>109</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_110</p></td>
+<td><p>110</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_111</p></td>
+<td><p>111</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_112</p></td>
+<td><p>112</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_113</p></td>
+<td><p>113</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_114</p></td>
+<td><p>114</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_115</p></td>
+<td><p>115</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_116</p></td>
+<td><p>116</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_117</p></td>
+<td><p>117</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_118</p></td>
+<td><p>118</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_119</p></td>
+<td><p>119</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_120</p></td>
+<td><p>120</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_121</p></td>
+<td><p>121</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_122</p></td>
+<td><p>122</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_123</p></td>
+<td><p>123</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_124</p></td>
+<td><p>124</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_125</p></td>
+<td><p>125</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_126</p></td>
+<td><p>126</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_127</p></td>
+<td><p>127</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_128</p></td>
+<td><p>128</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_129</p></td>
+<td><p>129</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_130</p></td>
+<td><p>130</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_131</p></td>
+<td><p>131</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_132</p></td>
+<td><p>132</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_133</p></td>
+<td><p>133</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_134</p></td>
+<td><p>134</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_135</p></td>
+<td><p>135</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_136</p></td>
+<td><p>136</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_CH_137</p></td>
+<td><p>137</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_GPIO_CH_138</p></td>
+<td><p>138</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+GPIO channels details.</p>
+</section>
+<section id="enum-port-edgetrig">
+<h3><span class="section-number">5.17.1.22. </span>enum Port_EdgeTrig<a class="headerlink" href="#enum-port-edgetrig" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_FALLING_EDGE</p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_RISING_EDGE</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_BOTH_EDGE</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+GPIO Pin Edge trigger intruppt selection.</p>
+</section>
+<section id="enum-port-intrtype">
+<h3><span class="section-number">5.17.1.23. </span>enum Port_IntrType<a class="headerlink" href="#enum-port-intrtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_CHANNEL_INTR</p></td>
+<td><p>0</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_BANK_INTR</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+GPIO Interrupt Type.</p>
+</section>
+<section id="typedef-port-pintype">
+<h3><span class="section-number">5.17.1.24. </span>typedef Port_PinType<a class="headerlink" href="#typedef-port-pintype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">Port_PinType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Type for symbolic name of Port pins.</p>
+</section>
+<section id="typedef-port-isrnotificationtype">
+<h3><span class="section-number">5.17.1.25. </span>typedef Port_IsrNotificationType<a class="headerlink" href="#typedef-port-isrnotificationtype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Port_IsrNotificationType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">uint8</span><span class="w"> </span><span class="n">PortBankNum</span><span class="p">,</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">PortBankChNum</span><span class="p">,</span><span class="w"> </span><span class="n">Port_EdgeTrig</span><span class="w"> </span><span class="n">Edge</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Notification callback function pointer.</p>
+<p>PortBankNum –&gt; GPIO bank numbers[A(0) to I(8)] , If configured as bank interrupt else value PORT_INTR_ERROR_ID</p>
+<p>PortBankChNum –&gt; GPIO Channel numbers[0 to 138] , If configured as channel interrupt else value PORT_INTR_ERROR_ID</p>
+</section>
+</section>
+<section id="structures">
+<h2><span class="section-number">5.17.2. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_port___config_regs_type.html"><span class="std std-doc">Port_ConfigRegsType</span></a></strong></p></td>
+<td><p>Structure for Cfg Registers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_port___intr_status.html"><span class="std std-doc">Port_IntrStatus</span></a></strong></p></td>
+<td><p>GPIO Pin Intruppt Registers Status.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_port___pin_mode_config_type.html"><span class="std std-doc">Port_PinModeConfigType</span></a></strong></p></td>
+<td><p>Pin Mode map structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_port___pin_config_type.html"><span class="std std-doc">Port_PinConfigType</span></a></strong></p></td>
+<td><p>Pin Configuration structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_port___dio_reg_config_type.html"><span class="std std-doc">Port_DioRegConfigType</span></a></strong></p></td>
+<td><p>Port GPIO initialization configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_port___config_type.html"><span class="std std-doc">Port_ConfigType</span></a></strong></p></td>
+<td><p>PORT Module ROOT configuration.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="defines">
+<h2><span class="section-number">5.17.3. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PORT_SW_MAJOR_VERSION</p></td>
+<td><p>Driver Implementation Major Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_SW_MINOR_VERSION</p></td>
+<td><p>Driver Implementation Minor Version.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_SW_PATCH_VERSION</p></td>
+<td><p>Driver Implementation Patch Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_AR_RELEASE_MAJOR_VERSION</p></td>
+<td><p>AUTOSAR Major version specification implemented by PORT Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_AR_RELEASE_MINOR_VERSION</p></td>
+<td><p>AUTOSAR Minor version specification implemented by PORT Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_AR_RELEASE_REVISION_VERSION</p></td>
+<td><p>AUTOSAR Patch version specification implemented by PORT Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_VENDOR_ID</p></td>
+<td><p>Texas Instruments Vendor ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_MODULE_ID</p></td>
+<td><p>PORT Driver Module ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_INSTANCE_ID</p></td>
+<td><p>PORT Driver Instance ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_E_PARAM_PIN</p></td>
+<td><p>ERROR: Invalid Port Pin ID requested.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_E_DIRECTION_UNCHANGEABLE</p></td>
+<td><p>ERROR:Port Pin not configured as changeable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_E_INIT_FAILED</p></td>
+<td><p>ERROR:Init service called with wrong parameter.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_E_PARAM_INVALID_MODE</p></td>
+<td><p>ERROR:Invalid mode setting for PORT pin.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_E_MODE_UNCHANGEABLE</p></td>
+<td><p>ERROR:PORT pin disallows mode change.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_E_UNINIT</p></td>
+<td><p>ERROR:PORT API called without init being invoked.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_E_PARAM_POINTER</p></td>
+<td><p>ERROR:API invoked with NULL_PTR.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_E_INVALID_GPIO_PORT_ADDRESS</p></td>
+<td><p>ERROR:API invoked with INVALID gpio port address.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_SID_INIT</p></td>
+<td><p>Port_Init()</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_SID_SET_PIN_DIR</p></td>
+<td><p>Port_SetPinDirection()</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_SID_REFRESH_PORT_DIR</p></td>
+<td><p>Port_RefreshPortDirection()</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_SID_GET_VERSION_INFO</p></td>
+<td><p>Port_GetVersionInfo()</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_SID_SET_PIN_MODE</p></td>
+<td><p>Port_SetPinMode()</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_SID_ENABLE_INTR</p></td>
+<td><p>Port_PinEnableIntrNotification()</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_SID_DISABLE_INTR</p></td>
+<td><p>Port_PinDisableIntrNotification()</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_SID_GET_INTR_ST</p></td>
+<td><p>Port_GetInterruptStatus()</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_SID_CLR_INTR_ST</p></td>
+<td><p>Port_ClearInterruptStatus()</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_DIO_INVALID_REG_ID</p></td>
+<td><p>PORT DIO Invalid GPIO register Id.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_DIO_INVALID_CH_ID</p></td>
+<td><p>PORT DIO Invalid GPIO Channel Id.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_ISR_VOID</p></td>
+<td><p>void ISR type</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_ISR_CAT1</p></td>
+<td><p>Category 1 ISR type.</p></td>
+</tr>
+<tr class="row-even"><td><p>PORT_ISR_CAT2</p></td>
+<td><p>Category 2 ISR type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT_GPIO_PORT_WIDTH</p></td>
+<td><p>Valid Port width.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2><span class="section-number">5.17.4. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-init"><span class="std std-ref">Port_Init</span></a></strong>(const <a class="reference internal" href="../Classes/struct_port___config_type.html"><span class="std std-doc">Port_ConfigType</span></a> * ConfigPtr)</p></td>
+<td><p>Initializes the Port Driver module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-setpindirection"><span class="std std-ref">Port_SetPinDirection</span></a></strong>(<a class="reference internal" href="#typedef-port-pintype"><span class="std std-ref">Port_PinType</span></a> Pin, <a class="reference internal" href="#enum-port-pindirectiontype"><span class="std std-ref">Port_PinDirectionType</span></a> Direction)</p></td>
+<td><p>Sets the port pin direction.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-refreshportdirection"><span class="std std-ref">Port_RefreshPortDirection</span></a></strong>(void )</p></td>
+<td><p>Refreshes port direction.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-setpinmode"><span class="std std-ref">Port_SetPinMode</span></a></strong>(<a class="reference internal" href="#typedef-port-pintype"><span class="std std-ref">Port_PinType</span></a> Pin, <a class="reference internal" href="#enum-port-pinmodetype"><span class="std std-ref">Port_PinModeType</span></a> Mode)</p></td>
+<td><p>Sets the port pin mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-getversioninfo"><span class="std std-ref">Port_GetVersionInfo</span></a></strong>(Std_VersionInfoType * versioninfo)</p></td>
+<td><p>Returns the version information of this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-deinit"><span class="std std-ref">Port_DeInit</span></a></strong>(void )</p></td>
+<td><p>This service sets the internal PORT initDone flag to FALSE so that Port_Init can be invoked again. This is required for negative UT test cases.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-getconfigregvalues"><span class="std std-ref">Port_GetConfigRegValues</span></a></strong>(uint8 initial, <a class="reference internal" href="../Classes/struct_port___config_regs_type.html"><span class="std std-doc">Port_ConfigRegsType</span></a> * ConfigRegPtr)</p></td>
+<td><p>This service returns current/initial configuration items as from the GUI.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-pinenableintrnotification"><span class="std std-ref">Port_PinEnableIntrNotification</span></a></strong>(<a class="reference internal" href="#typedef-port-pintype"><span class="std std-ref">Port_PinType</span></a> Pin)</p></td>
+<td><p>Enable Port Interrupt Functionality.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-pindisableintrnotification"><span class="std std-ref">Port_PinDisableIntrNotification</span></a></strong>(<a class="reference internal" href="#typedef-port-pintype"><span class="std std-ref">Port_PinType</span></a> Pin)</p></td>
+<td><p>Disable Port Interrupt Functionality.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-getinterruptstatus"><span class="std std-ref">Port_GetInterruptStatus</span></a></strong>(<a class="reference internal" href="#typedef-port-pintype"><span class="std std-ref">Port_PinType</span></a> bankIdx)</p></td>
+<td><p>Get Interrupt Status.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-port-clearinterruptstatus"><span class="std std-ref">Port_ClearInterruptStatus</span></a></strong>(<a class="reference internal" href="#typedef-port-pintype"><span class="std std-ref">Port_PinType</span></a> bankIdx, uint32 maskValue)</p></td>
+<td><p>Clear Interrupt Status.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-port-init">
+<h3><span class="section-number">5.17.4.1. </span>function Port_Init<a class="headerlink" href="#function-port-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_Init</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Port_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Initializes the Port Driver module.</p>
+<p>Service ID[hex] - 0x00</p>
+<p>Sync/Async - Asynchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ConfigPtr</strong> - Pointer to configuration set.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-setpindirection">
+<h3><span class="section-number">5.17.4.2. </span>function Port_SetPinDirection<a class="headerlink" href="#function-port-setpindirection" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_SetPinDirection</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Port_PinType</span><span class="w"> </span><span class="n">Pin</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Port_PinDirectionType</span><span class="w"> </span><span class="n">Direction</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Sets the port pin direction.</p>
+<p>Service ID[hex] - 0x01</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Pin</strong> - Port Pin ID number</p></li>
+<li><p><strong>Direction</strong> - Port_SetPinDirection</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-refreshportdirection">
+<h3><span class="section-number">5.17.4.3. </span>function Port_RefreshPortDirection<a class="headerlink" href="#function-port-refreshportdirection" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_RefreshPortDirection</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Refreshes port direction.</p>
+<p>Service ID[hex] - 0x02</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-setpinmode">
+<h3><span class="section-number">5.17.4.4. </span>function Port_SetPinMode<a class="headerlink" href="#function-port-setpinmode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_SetPinMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Port_PinType</span><span class="w"> </span><span class="n">Pin</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Port_PinModeType</span><span class="w"> </span><span class="n">Mode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Sets the port pin mode.</p>
+<p>Service ID[hex] - 0x04</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Pin</strong> - Port Pin ID number</p></li>
+<li><p><strong>Mode</strong> - New Port Pin mode to be set on port pin</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-getversioninfo">
+<h3><span class="section-number">5.17.4.5. </span>function Port_GetVersionInfo<a class="headerlink" href="#function-port-getversioninfo" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_GetVersionInfo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">versioninfo</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Returns the version information of this module.</p>
+<p>Service ID[hex] - 0x03</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>versioninfo</strong> - Pointer to where to store the version information of this module</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-deinit">
+<h3><span class="section-number">5.17.4.6. </span>function Port_DeInit<a class="headerlink" href="#function-port-deinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_DeInit</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service sets the internal PORT initDone flag to FALSE so that Port_Init can be invoked again. This is required for negative UT test cases.</p>
+<p>This service is only used for UT testing and not for app use</p>
+<p>Service ID[hex] - None</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p>This service sets the internal PORT initDone flag to FALSE so that Port_Init can be invoked again. This is required for negative UT test cases.</p>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-getconfigregvalues">
+<h3><span class="section-number">5.17.4.7. </span>function Port_GetConfigRegValues<a class="headerlink" href="#function-port-getconfigregvalues" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_GetConfigRegValues</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">initial</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Port_ConfigRegsType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigRegPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service returns current/initial configuration items as from the GUI.</p>
+<p>Function could be called from interrupt level or from task level, Output parameter must not be NULL_PTR, TRUE/FALSE should be passed as initial parameter.</p>
+<p>Service ID[hex] - None</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>initial</strong></p></li>
+<li><p><strong>ConfigRegPtr</strong> - pointer to store the configuration read from GUI</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-pinenableintrnotification">
+<h3><span class="section-number">5.17.4.8. </span>function Port_PinEnableIntrNotification<a class="headerlink" href="#function-port-pinenableintrnotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_PinEnableIntrNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Port_PinType</span><span class="w"> </span><span class="n">Pin</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enable Port Interrupt Functionality.</p>
+<p>Service ID[hex] - None</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Pin</strong> - GPIO Pin Number</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-pindisableintrnotification">
+<h3><span class="section-number">5.17.4.9. </span>function Port_PinDisableIntrNotification<a class="headerlink" href="#function-port-pindisableintrnotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_PinDisableIntrNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Port_PinType</span><span class="w"> </span><span class="n">Pin</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Disable Port Interrupt Functionality.</p>
+<p>Service ID[hex] - None</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Pin</strong> - GPIO Pin Number</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-port-getinterruptstatus">
+<h3><span class="section-number">5.17.4.10. </span>function Port_GetInterruptStatus<a class="headerlink" href="#function-port-getinterruptstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Port_GetInterruptStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Port_PinType</span><span class="w"> </span><span class="n">bankIdx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Get Interrupt Status.</p>
+<p>Read Bank Interrupt Status Register (INTSTAT)</p>
+<p>Service ID[hex] - None</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>bankIdx</strong> - GPIO Bank Number (BankA_0 to BankI_8)</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>INTSTAT</strong> Register Value
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: uint32</p>
+</section>
+<section id="function-port-clearinterruptstatus">
+<h3><span class="section-number">5.17.4.11. </span>function Port_ClearInterruptStatus<a class="headerlink" href="#function-port-clearinterruptstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Port_ClearInterruptStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Port_PinType</span><span class="w"> </span><span class="n">bankIdx</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">maskValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Clear Interrupt Status.</p>
+<p>Clear Bank Interrupt Status Register (INTSTAT)</p>
+<p>Service ID[hex] - None</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>bankIdx</strong> - GPIO Bank Number (BankA_0 to BankI_8)</p></li>
+<li><p><strong>maskValue</strong> - Bits Mask Value</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="group___m_c_u.html" class="btn btn-neutral float-left" title="5.16. MCU" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___p_w_m.html" class="btn btn-neutral float-right" title="5.18. PWM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Aug 27, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.00.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

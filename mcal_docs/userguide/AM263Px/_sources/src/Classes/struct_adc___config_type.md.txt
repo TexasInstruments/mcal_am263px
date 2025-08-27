@@ -1,0 +1,29 @@
+---
+orphan: true
+---
+
+---
+title: Adc_ConfigType
+summary: ADC config structure. 
+
+---
+
+# Adc_ConfigType
+
+
+
+ADC config structure. 
+
+
+`#include <Adc_Types.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint8 | maxGroup |  Maximum number of group Should not be more than ADC_MAX_GROUP.  |
+|  uint8 | maxHwUnit |  Maximum number of HW unit Should not be more than ADC_MAX_HW_UNIT.  |
+|  [Adc_GroupConfigType](../Classes/struct_adc___group_config_type.md)[ADC_MAX_GROUP] | groupCfg |  Group configurations.  |
+|  [Adc_HwUnitConfigType](../Classes/struct_adc___hw_unit_config_type.md)[ADC_MAX_HW_UNIT] | hwUnitCfg |  HW Unit configurations.  |
+
+

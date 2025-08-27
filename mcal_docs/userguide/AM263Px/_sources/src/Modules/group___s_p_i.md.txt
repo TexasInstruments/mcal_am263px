@@ -1,0 +1,1069 @@
+---
+title: Spi API GUIDE Header file
+
+---
+
+# SPI
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Spi_HwUnitType](../Modules/group___s_p_i.md#enum-spi_hwunittype)** | This type defines a range of specific status for SPI Handler/Driver.  | 
+|enum| **[Spi_StatusType](../Modules/group___s_p_i.md#enum-spi_statustype)** 
+|enum| **[Spi_JobResultType](../Modules/group___s_p_i.md#enum-spi_jobresulttype)** | This type defines a range of specific Jobs status for SPI Handler/Driver.  | 
+|enum| **[Spi_SeqResultType](../Modules/group___s_p_i.md#enum-spi_seqresulttype)** | This type defines a range of specific Sequences status for SPI Handler/Driver.  | 
+|enum| **[Spi_HwUnitResultType](../Modules/group___s_p_i.md#enum-spi_hwunitresulttype)** | This type defines a range of specific HW unit status for SPI Handler/Driver.  | 
+|enum| **[Spi_AsyncModeType](../Modules/group___s_p_i.md#enum-spi_asyncmodetype)** | Specifies the asynchronous mechanism mode for SPI busses handled asynchronously in LEVEL 2.  | 
+|enum| **[Spi_TransferType](../Modules/group___s_p_i.md#enum-spi_transfertype)** | Word transfer order - MSB first or LSB first.  | 
+|enum| **[Spi_LevelType](../Modules/group___s_p_i.md#enum-spi_leveltype)** | Type for SPI Chip Select Polarity and Clock Idle Level.  | 
+|enum| **[Spi_CsPinType](../Modules/group___s_p_i.md#enum-spi_cspintype)** | SPI Chip Select Pin.  | 
+|enum| **[Spi_ClkMode](../Modules/group___s_p_i.md#enum-spi_clkmode)** | SPI Clock Mode - sets the clock polarity and phase. Note: These values are a direct register mapping. So don't change value.  | 
+|enum| **[Spi_TxRxMode](../Modules/group___s_p_i.md#enum-spi_txrxmode)** | SPI TX/RX Mode.  | 
+|enum| **[Spi_JobPriorityType](../Modules/group___s_p_i.md#enum-spi_jobprioritytype)** | SPI Job Priority.  | 
+|enum| **[Spi_CsModeType](../Modules/group___s_p_i.md#enum-spi_csmodetype)** | SPI Chip Select Mode.  | 
+|enum| **[Spi_DataDelayType](../Modules/group___s_p_i.md#enum-spi_datadelaytype)** | Spi_DataDelayType defines the number of interface clock cycles between CS toggling and first or last edge of MCSPI clock.  | 
+|enum| **[Spi_DataLineReceiveType](../Modules/group___s_p_i.md#enum-spi_datalinereceivetype)** | Spi_DataLineReceiveType defines the lines selected for reception.  | 
+|enum| **[Spi_DataLineTransmitType](../Modules/group___s_p_i.md#enum-spi_datalinetransmittype)** | Spi_DataLineTransmitType defines the lines selected for transmission.  | 
+|enum| **[Mcspi_IrqStatusType](../Modules/group___s_p_i.md#enum-mcspi_irqstatustype)** | Irq status and std return type.  | 
+|typedef void(*)(void)  | **[Spi_JobEndNotifyType](../Modules/group___s_p_i.md#typedef-spi_jobendnotifytype)** | Typedef for job end notification function pointer.  | 
+|typedef void(*)(void)  | **[Spi_SeqEndNotifyType](../Modules/group___s_p_i.md#typedef-spi_seqendnotifytype)** | Typedef for sequence end notification function pointer.  | 
+
+
+
+### enum Spi_HwUnitType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CSIB0 | 0U| MCSPI0 instance.   |
+| CSIB1 | | MCSPI1 instance.   |
+| CSIB2 | | MCSPI2 instance.   |
+| CSIB3 | | MCSPI3 instance.   |
+| CSIB4 | | MCSPI4 instance.   |
+| CSIB5 | | MCSPI5 instance.   |
+| CSIB6 | | MCSPI6 instance.   |
+| CSIB7 | | MCSPI7 instance.   |
+
+
+
+
+**Brief**: 
+This type defines a range of specific status for SPI Handler/Driver. 
+
+
+
+### enum Spi_StatusType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_UNINIT | 0U| The SPI Handler/Driver is not initialized or not usable.   |
+| SPI_IDLE | 1U| The SPI Handler/Driver is not currently transmitting any Job.   |
+| SPI_BUSY | 2U| The SPI Handler/Driver is performing a SPI Job (transmit)   |
+
+
+
+
+
+
+### enum Spi_JobResultType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_JOB_OK | 0U| The last transmission of the Job has been finished successfully.   |
+| SPI_JOB_PENDING | 1U| The SPI Handler/Driver is performing a SPI Job. The meaning of this status is equal to SPI_BUSY.   |
+| SPI_JOB_FAILED | 2U| The last transmission of the Job has failed.   |
+| SPI_JOB_QUEUED | 3U| An asynchronous transmit Job has been accepted, while actual transmission for this Job has not started yet.   |
+
+
+
+
+**Brief**: 
+This type defines a range of specific Jobs status for SPI Handler/Driver. 
+
+
+
+### enum Spi_SeqResultType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_SEQ_OK | 0U| The last transmission of the Sequence has been finished successfully.   |
+| SPI_SEQ_PENDING | 1U| The SPI Handler/Driver is performing a SPI Sequence. The meaning of this status is equal to SPI_BUSY.   |
+| SPI_SEQ_FAILED | 2U| The last transmission of the Sequence has failed.   |
+| SPI_SEQ_CANCELLED | 3U| The last transmission of the Sequence has been canceled by user.   |
+
+
+
+
+**Brief**: 
+This type defines a range of specific Sequences status for SPI Handler/Driver. 
+
+
+
+### enum Spi_HwUnitResultType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_HW_UNIT_OK | 0U| HW unit result is ok.   |
+| SPI_HW_UNIT_PENDING | 1U| HW unit result is pending.   |
+| SPI_HW_UNIT_FAILED | 2U| HW unit result is failed.   |
+
+
+
+
+**Brief**: 
+This type defines a range of specific HW unit status for SPI Handler/Driver. 
+
+
+
+### enum Spi_AsyncModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_POLLING_MODE | 0U| The asynchronous mechanism is ensured by polling, so interrupts related to SPI busses handled asynchronously are disabled.   |
+| SPI_INTERRUPT_MODE | 1U| The asynchronous mechanism is ensured by interrupt, so interrupts related to SPI busses handled asynchronously are enabled.   |
+
+
+
+
+**Brief**: 
+Specifies the asynchronous mechanism mode for SPI busses handled asynchronously in LEVEL 2. 
+
+
+
+### enum Spi_TransferType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_MSB | 0U| MSB is transferred first. Only this is supported.   |
+| SPI_LSB | 1U| LSB is transferred first. This is not supported.   |
+
+
+
+
+**Brief**: 
+Word transfer order - MSB first or LSB first. 
+
+
+
+### enum Spi_LevelType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_LOW | (0x00U)| Low clock or chip select.   |
+| SPI_HIGH | | High clock or chip select.   |
+
+
+
+
+**Brief**: 
+Type for SPI Chip Select Polarity and Clock Idle Level. 
+
+
+
+### enum Spi_CsPinType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_CS0 | 0U| Chip select 0.   |
+| SPI_CS1 | | Chip select 1.   |
+| SPI_CS2 | | Chip select 2.   |
+| SPI_CS3 | | Chip select 3.   |
+
+
+
+
+**Brief**: 
+SPI Chip Select Pin. 
+
+
+
+### enum Spi_ClkMode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_CLK_MODE_0 | 0x00U| SPI Clock Phase = 0 (rising edge latch), Polarity = 0 (Active HIGH)   |
+| SPI_CLK_MODE_1 | 0x01U| SPI Clock Phase = 1 (falling edge latch), Polarity = 0 (Active HIGH)   |
+| SPI_CLK_MODE_2 | 0x02U| SPI Clock Phase = 0 (rising edge latch), Polarity = 1 (Active LOW)   |
+| SPI_CLK_MODE_3 | 0x03U| SPI Clock Phase = 1 (falling edge latch), Polarity = 1 (Active LOW)   |
+
+
+
+
+**Brief**: 
+SPI Clock Mode - sets the clock polarity and phase. Note: These values are a direct register mapping. So don't change value. 
+
+
+
+### enum Spi_TxRxMode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_TX_RX_MODE_BOTH | 0x00U| Both TX and RX are enabled.   |
+| SPI_TX_RX_MODE_TX_ONLY | 0x02U| Only TX is enabled.   |
+
+
+
+
+**Brief**: 
+SPI TX/RX Mode. 
+
+Note:
+
+1. These values are a direct register mapping. So don't change value
+2. RX only mode doesn't make sense in master mode because to receive data the master has to generate clock, which means it should transmit. Hence this mode is not supported. The user can alternatively set the TX buffer pointer to NULL and set the default TX value (defaultTxData) to make TX data line at the desired level. 
+
+
+
+
+### enum Spi_JobPriorityType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_JOB_PRIORITY_0 | 0U| Job priority 0 - low.   |
+| SPI_JOB_PRIORITY_1 | | Job priority 1.   |
+| SPI_JOB_PRIORITY_2 | | Job priority 2.   |
+| SPI_JOB_PRIORITY_3 | | Job priority 3 - High.   |
+
+
+
+
+**Brief**: 
+SPI Job Priority. 
+
+
+
+### enum Spi_CsModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_SINGLE | 0U| Chip select mode - single. Active only when transfer is on.   |
+| SPI_CONTINUOUS | 1U| Chip select mode - continuous. Active throughout.   |
+
+
+
+
+**Brief**: 
+SPI Chip Select Mode. 
+
+
+
+### enum Spi_DataDelayType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_DATADELAY_0 | 0U| 0.5 clock cycles delay   |
+| SPI_DATADELAY_1 | 1U| 1.5 clock cycles delay   |
+| SPI_DATADELAY_2 | 2U| 2.5 clock cycles delay   |
+| SPI_DATADELAY_3 | 3U| 3.5 clock cycles delay   |
+
+
+
+
+**Brief**: 
+Spi_DataDelayType defines the number of interface clock cycles between CS toggling and first or last edge of MCSPI clock. 
+
+
+
+### enum Spi_DataLineReceiveType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| DATA_LINE_0_RECEPTION | 0U| Data line 0 (SPIDAT[0]) selected for reception.   |
+| DATA_LINE_1_RECEPTION | 1U| Data line 1 (SPIDAT[1]) selected for reception.   |
+
+
+
+
+**Brief**: 
+Spi_DataLineReceiveType defines the lines selected for reception. 
+
+
+
+### enum Spi_DataLineTransmitType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| DATA_LINE_NO_TRANSMISSION | 0x3U| No transmission on data lines.   |
+| DATA_LINE_0_TRANSMISSION | 0x2U| Data line 0 (SPIDAT[0]) selected for transmission.   |
+| DATA_LINE_1_TRANSMISSION | 0x1U| Data line 1 (SPIDAT[1]) selected for transmission.   |
+| DATA_LINE_BOTH_TRANSMISSION | 0x0U| Data line 0 and 1 (SPIDAT[0] & SPIDAT[1]) selected for transmission.   |
+
+
+
+
+**Brief**: 
+Spi_DataLineTransmitType defines the lines selected for transmission. 
+
+
+
+### enum Mcspi_IrqStatusType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_NO_EVENT | 0U| No event ocuurs in Overflow/Under flow.   |
+| SPI_EVENT_PENDING | 1U| Event occurs in Overflow/Under flow.   |
+| SPI_STATUS_READ_FAIL | 2U| The status reading fails.   |
+
+
+
+
+**Brief**: 
+Irq status and std return type. 
+
+
+
+### typedef Spi_JobEndNotifyType
+```
+typedef void(* Spi_JobEndNotifyType) (void);
+```
+
+
+**Brief**: 
+Typedef for job end notification function pointer. 
+
+
+
+### typedef Spi_SeqEndNotifyType
+```
+typedef void(* Spi_SeqEndNotifyType) (void);
+```
+
+
+**Brief**: 
+Typedef for sequence end notification function pointer. 
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[Spi_ChannelConfigType](../Classes/struct_spi___channel_config_type.md)** | SPI Channel configuration structure.  |
+| **[Spi_McspiExternalDeviceConfigType](../Classes/struct_spi___mcspi_external_device_config_type.md)** | SPI Job configuration structure specific to McSPI peripheral.  |
+| **[Spi_ExternalDeviceConfigType](../Classes/struct_spi___external_device_config_type.md)** | SPI external device specific configuration structure .  |
+| **[Spi_JobConfigType](../Classes/struct_spi___job_config_type.md)** | SPI Job configuration structure.  |
+| **[Spi_SeqConfigType](../Classes/struct_spi___seq_config_type.md)** | SPI Sequence configuration structure.  |
+| **[Spi_HwUnitConfigType](../Classes/struct_spi___hw_unit_config_type.md)** | SPI Hardware unit configuration structure.  |
+| **[Spi_ConfigType](../Classes/struct_spi___config_type.md)** | SPI config structure.  |
+| **[Spi_ChannelConfigType_PC](../Classes/struct_spi___channel_config_type___p_c.md)** | SPI channel config structure parameters Pre-Compile only.  |
+| **[Spi_JobConfigType_PC](../Classes/struct_spi___job_config_type___p_c.md)** | SPI job config structure parameters Pre-Compile only.  |
+| **[Spi_SeqConfigType_PC](../Classes/struct_spi___seq_config_type___p_c.md)** | SPI sequence config structure parameters Pre-Compile only.  |
+| **[Spi_RegisterReadbackType](../Classes/struct_spi___register_readback_type.md)** | SPI register readback structure.  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| SPI_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| SPI_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| SPI_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| SPI_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by SPI Driver.  |
+| SPI_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by SPI Driver.  |
+| SPI_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by SPI Driver.  |
+| SPI_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| SPI_MODULE_ID   | SPI Driver Module ID.  |
+| SPI_INSTANCE_ID   | SPI Driver Instance ID.  |
+| SPI_IB_ALIGNMENGT   | SPI IB.  |
+| SPI_IB   | Buffer definitions IB - internal buffers.  |
+| SPI_EB   | Buffer definitions EB - external buffers. Only this is supported.  |
+| SPI_IB_EB   | Buffer definitions IB/EB - internal/external buffers.  |
+| SPI_ISR_VOID   | void ISR type  |
+| SPI_ISR_CAT1   | Category 1 ISR type.  |
+| SPI_ISR_CAT2   | Category 2 ISR type.  |
+| SPI_E_PARAM_CHANNEL   | API service called with wrong parameter.  |
+| SPI_E_PARAM_JOB   | API service called with wrong parameter.  |
+| SPI_E_PARAM_SEQ   | API service called with wrong parameter.  |
+| SPI_E_PARAM_LENGTH   | API service called with wrong parameter.  |
+| SPI_E_PARAM_UNIT   | API service called with wrong parameter.  |
+| SPI_E_PARAM_POINTER   | APIs called with a Null Pointer.  |
+| SPI_E_UNINIT   | API service used without module initiali-zation.  |
+| SPI_E_SEQ_PENDING   | Services called in a wrong sequence.  |
+| SPI_E_SEQ_IN_PROCESS   | Synchronous transmission service called at wrong time.  |
+| SPI_E_ALREADY_INITIALIZED   | API Spi_Init service called while the SPI driver has already been initialized.  |
+| SPI_E_SEQUENCE_NOT_OK   | Sequence did not complete successfully.  |
+| SPI_SID_INIT   | Spi_Init() API Service ID.  |
+| SPI_SID_DEINIT   | Spi_DeInit() API Service ID.  |
+| SPI_SID_WRITE_IB   | Spi_WriteIB() API Service ID.  |
+| SPI_SID_ASYNC_TRANSMIT   | Spi_AsyncTransmit() API Service ID.  |
+| SPI_SID_READ_IB   | Spi_ReadIB() API Service ID.  |
+| SPI_SID_SETUP_EB   | Spi_SetupEB() API Service ID.  |
+| SPI_SID_GET_STATUS   | Spi_GetStatus() API Service ID.  |
+| SPI_SID_GET_JOB_RESULT   | Spi_GetJobResult() API Service ID.  |
+| SPI_SID_GET_SEQ_RESULT   | Spi_GetSequenceResult() API Service ID.  |
+| SPI_SID_GET_VERSION_INFO   | Spi_GetVersionInfo() API Service ID.  |
+| SPI_SID_SYNC_TRANSMIT   | Spi_SyncTransmit() API Service ID.  |
+| SPI_SID_GET_HW_UNIT_STATUS   | Spi_GetHWUnitStatus() API Service ID.  |
+| SPI_SID_CANCEL   | Spi_Cancel() API Service ID.  |
+| SPI_SID_SET_ASYNC_MODE   | Spi_SetAsyncMode() API Service ID.  |
+| SPI_SID_MAINFUNCTION_HANDLING   | Spi_MainFunction_Handling() API Service ID.  |
+| SPI_MCSPI_FCLK   | MCSPI functional clock input in Hz. This clock is used to generate the serial clock output after the divider. Note: This is given here for reference and can't be changed.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Spi_Init](../Modules/group___s_p_i.md#function-spi_init)**(const [Spi_ConfigType](../Classes/struct_spi___config_type.md) * CfgPtr)| Service for SPI initialization.  |
+| Std_ReturnType | **[Spi_DeInit](../Modules/group___s_p_i.md#function-spi_deinit)**(void )| Service for SPI de-initialization.  |
+| [Spi_StatusType](../Modules/group___s_p_i.md#enum-spi_statustype) | **[Spi_GetStatus](../Modules/group___s_p_i.md#function-spi_getstatus)**(void )| Service returns the SPI Handler/Driver software module status.  |
+| [Spi_JobResultType](../Modules/group___s_p_i.md#enum-spi_jobresulttype) | **[Spi_GetJobResult](../Modules/group___s_p_i.md#function-spi_getjobresult)**(Spi_JobType Job)| This service returns the last transmission result of the specified Job.  |
+| [Spi_SeqResultType](../Modules/group___s_p_i.md#enum-spi_seqresulttype) | **[Spi_GetSequenceResult](../Modules/group___s_p_i.md#function-spi_getsequenceresult)**(Spi_SequenceType Sequence)| This service returns the last transmission result of the specified Sequence.  |
+| void | **[Spi_GetVersionInfo](../Modules/group___s_p_i.md#function-spi_getversioninfo)**(Std_VersionInfoType * versioninfo)| This service returns the version information of this module.  |
+| [Spi_StatusType](../Modules/group___s_p_i.md#enum-spi_statustype) | **[Spi_GetHWUnitStatus](../Modules/group___s_p_i.md#function-spi_gethwunitstatus)**(Spi_HWUnitType HWUnit)| This service returns the status of the specified SPI Hardware microcontroller peripheral.  |
+| Std_ReturnType | **[Spi_WriteIB](../Modules/group___s_p_i.md#function-spi_writeib)**(Spi_ChannelType Channel, const Spi_DataBufferType * DataBufferPtr)| Service for writing one or more data to an IB SPI Handler/Driver Channel specified by parameter.  |
+| Std_ReturnType | **[Spi_ReadIB](../Modules/group___s_p_i.md#function-spi_readib)**(Spi_ChannelType Channel, Spi_DataBufferType * DataBufferPointer)| Service for reading synchronously one or more data from an IB SPI SPI Handler/Driver Channel specified by parameter.  |
+| Std_ReturnType | **[Spi_SetupEB](../Modules/group___s_p_i.md#function-spi_setupeb)**(Spi_ChannelType Channel, const Spi_DataBufferType * SrcDataBufferPtr, Spi_DataBufferType * DesDataBufferPtr, Spi_NumberOfDataType Length)| Service to setup the buffers and the length of data for the EB SPI Handler/Driver Channel specified.  |
+| Std_ReturnType | **[Spi_AsyncTransmit](../Modules/group___s_p_i.md#function-spi_asynctransmit)**(Spi_SequenceType Sequence)| Service to transmit data on the SPI bus.  |
+| void | **[Spi_Cancel](../Modules/group___s_p_i.md#function-spi_cancel)**(Spi_SequenceType Sequence)| Service cancels the specified ongoing sequence transmission.  |
+| Std_ReturnType | **[Spi_SyncTransmit](../Modules/group___s_p_i.md#function-spi_synctransmit)**(Spi_SequenceType Sequence)| Service to transmit data on the SPI bus.  |
+| Std_ReturnType | **[Spi_SetAsyncMode](../Modules/group___s_p_i.md#function-spi_setasyncmode)**([Spi_AsyncModeType](../Modules/group___s_p_i.md#enum-spi_asyncmodetype) Mode)| Service to set the asynchronous mechanism mode for SPI busses handled asynchronously.  |
+| void | **[Spi_MainFunction_Handling](../Modules/group___s_p_i.md#function-spi_mainfunction_handling)**(void )| This function polls the SPI interrupts linked to HW Units allocated to the transmission of SPI sequences to enable the evolution of transmission state machine.  |
+| Std_ReturnType | **[Spi_RegisterReadback](../Modules/group___s_p_i.md#function-spi_registerreadback)**(Spi_HWUnitType HWUnit, [Spi_RegisterReadbackType](../Classes/struct_spi___register_readback_type.md) * RegRbPtr)| This function reads the important registers of the hardware unit and returns the value in the structure.  |
+| Std_ReturnType | **[Spi_SetLoopbackMode](../Modules/group___s_p_i.md#function-spi_setloopbackmode)**(Spi_HWUnitType HWUnit, boolean LoopbkEn)| This function enables or disables the internal loopback mode of SPI. Note: Only MiBSPI HW units supports this feature.  |
+| void | **[Spi_reportDetRuntimeError](../Modules/group___s_p_i.md#function-spi_reportdetruntimeerror)**(uint8 apiId, uint8 errorId)|  |
+
+
+
+### function Spi_Init
+
+```
+void Spi_Init(
+    const Spi_ConfigType * CfgPtr
+)
+```
+
+
+**Brief**: 
+Service for SPI initialization. 
+
+Service ID[hex] - 0x00
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **CfgPtr** - Pointer to configuration set 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Spi_DeInit
+
+```
+Std_ReturnType Spi_DeInit(
+    void 
+)
+```
+
+
+**Brief**: 
+Service for SPI de-initialization. 
+
+Service ID[hex] - 0x01
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **E_OK** - de-initialisation command has been accepted 
+<br> 
+  
+* **E_NOT_OK** - de-initialisation command has not been accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_GetStatus
+
+```
+Spi_StatusType Spi_GetStatus(
+    void 
+)
+```
+
+
+**Brief**: 
+Service returns the SPI Handler/Driver software module status. 
+
+Status of register can be either SPI_UNINIT ,SPI_IDLE or SPI_BUSY
+
+Service ID[hex] - 0x06
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Returns**: 
+
+  
+* **Service** for SPI de-initialization 
+<br> 
+
+
+**Return**: Spi_StatusType 
+
+### function Spi_GetJobResult
+
+```
+Spi_JobResultType Spi_GetJobResult(
+    Spi_JobType Job
+)
+```
+
+
+**Brief**: 
+This service returns the last transmission result of the specified Job. 
+
+Service ID[hex] - 0x07
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Job** - Job ID. An invalid job ID will return an undefined result 
+
+
+**Returns**: 
+
+  
+* **SPI_JOB_OK** - last transmission of the Job has been finished successfully 
+<br> 
+  
+* **SPI_JOB_PENDING** - Driver is performing a SPI Job(Busy) 
+<br> 
+  
+* **SPI_JOB_FAILED** - last transmission of the Job has failed 
+<br> 
+  
+* **SPI_JOB_QUEUED** - transmission for this Job has not started yet 
+<br> 
+
+
+**Return**: Spi_JobResultType 
+
+### function Spi_GetSequenceResult
+
+```
+Spi_SeqResultType Spi_GetSequenceResult(
+    Spi_SequenceType Sequence
+)
+```
+
+
+**Brief**: 
+This service returns the last transmission result of the specified Sequence. 
+
+Service ID[hex] - 0x08
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Sequence** - Sequence ID. An invalid job ID will return an undefined result 
+
+
+**Returns**: 
+
+  
+* **SPI_SEQ_OK** - last transmission of the Sequence has been finished successfully 
+<br> 
+  
+* **SPI_SEQ_PENDING** - Driver is performing a SPI Sequence (Busy) 
+<br> 
+  
+* **SPI_SEQ_FAILED** - last transmission of the Sequence has failed 
+<br> 
+  
+* **SPI_SEQ_CANCELLED** - transmission for this Sequence has been canceled by user 
+<br> 
+
+
+**Return**: Spi_JobResultType 
+
+### function Spi_GetVersionInfo
+
+```
+void Spi_GetVersionInfo(
+    Std_VersionInfoType * versioninfo
+)
+```
+
+
+**Brief**: 
+This service returns the version information of this module. 
+
+Service ID[hex] - 0x09
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **versioninfo** - Pointer to where to store the version information of this module 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Spi_GetHWUnitStatus
+
+```
+Spi_StatusType Spi_GetHWUnitStatus(
+    Spi_HWUnitType HWUnit
+)
+```
+
+
+**Brief**: 
+This service returns the status of the specified SPI Hardware microcontroller peripheral. 
+
+Service ID[hex] - 0x0B
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **HWUnit** - SPI Hardware microcontroller peripheral unit ID. information of this module 
+
+
+**Returns**: 
+
+  
+* **SPI_UNINIT** - not initialized or not usable 
+<br> 
+  
+* **SPI_IDLE** - not currently transmitting any Job 
+<br> 
+  
+* **SPI_BUSY** - is performing a SPI Job (transmit) 
+<br> 
+
+
+**Return**: Spi_StatusType 
+
+### function Spi_WriteIB
+
+```
+Std_ReturnType Spi_WriteIB(
+    Spi_ChannelType Channel,
+    const Spi_DataBufferType * DataBufferPtr
+)
+```
+
+
+**Brief**: 
+Service for writing one or more data to an IB SPI Handler/Driver Channel specified by parameter. 
+
+Service ID[hex] - 0x02
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel ID 
+  
+* **DataBufferPtr-Pointer** to source data buffer. If this pointer is null, it is assumed that the data to be transmitted is not relevant and the default transmit value of this channel will be used instead. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Write command has been accepted 
+<br> 
+  
+* **E_NOT_OK** - Write command has not been accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_ReadIB
+
+```
+Std_ReturnType Spi_ReadIB(
+    Spi_ChannelType Channel,
+    Spi_DataBufferType * DataBufferPointer
+)
+```
+
+
+**Brief**: 
+Service for reading synchronously one or more data from an IB SPI SPI Handler/Driver Channel specified by parameter. 
+
+Service ID[hex] - 0x04
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel ID 
+  
+* **DataBufferPtr-Pointer** to destination data buffer. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Read command has been accepted 
+<br> 
+  
+* **E_NOT_OK** - Read command has not been accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_SetupEB
+
+```
+Std_ReturnType Spi_SetupEB(
+    Spi_ChannelType Channel,
+    const Spi_DataBufferType * SrcDataBufferPtr,
+    Spi_DataBufferType * DesDataBufferPtr,
+    Spi_NumberOfDataType Length
+)
+```
+
+
+**Brief**: 
+Service to setup the buffers and the length of data for the EB SPI Handler/Driver Channel specified. 
+
+Service ID[hex] - 0x05
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel ID 
+  
+* **SrcDataBufferPtr-Pointer** to source data buffer. 
+  
+* **DesDataBufferPtr-Pointer** to destination data buffer. 
+  
+* **Length** - Length (number of data elements) of the data to be transmitted from SrcDataBufferPtr and/or received from DesDataBufferPtr Min.: 1 Max.: Max of data specified at configuration for this channel. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Setup command has been accepted 
+<br> 
+  
+* **E_NOT_OK** - Setup command has not been accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_AsyncTransmit
+
+```
+Std_ReturnType Spi_AsyncTransmit(
+    Spi_SequenceType Sequence
+)
+```
+
+
+**Brief**: 
+Service to transmit data on the SPI bus. 
+
+Service ID[hex] - 0x03
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Sequence** - Sequence ID 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Transmission command has been accepted 
+<br> 
+  
+* **E_NOT_OK** - Transmission command has not been accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_Cancel
+
+```
+void Spi_Cancel(
+    Spi_SequenceType Sequence
+)
+```
+
+
+**Brief**: 
+Service cancels the specified ongoing sequence transmission. 
+
+Service ID[hex] - 0x0C
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Sequence** - Sequence ID 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Spi_SyncTransmit
+
+```
+Std_ReturnType Spi_SyncTransmit(
+    Spi_SequenceType Sequence
+)
+```
+
+
+**Brief**: 
+Service to transmit data on the SPI bus. 
+
+Service ID[hex] - 0x0A
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Sequence** - Sequence ID 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Transmission command has been completed 
+<br> 
+  
+* **E_NOT_OK** - Transmission command has not been completed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_SetAsyncMode
+
+```
+Std_ReturnType Spi_SetAsyncMode(
+    Spi_AsyncModeType Mode
+)
+```
+
+
+**Brief**: 
+Service to set the asynchronous mechanism mode for SPI busses handled asynchronously. 
+
+Service ID[hex] - 0x0D
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Mode** - New mode required. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Setting command has been done 
+<br> 
+  
+* **E_NOT_OK** - Setting command has not been accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_MainFunction_Handling
+
+```
+void Spi_MainFunction_Handling(
+    void 
+)
+```
+
+
+**Brief**: 
+This function polls the SPI interrupts linked to HW Units allocated to the transmission of SPI sequences to enable the evolution of transmission state machine. 
+
+Service ID[hex] - 0x10
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Spi_RegisterReadback
+
+```
+Std_ReturnType Spi_RegisterReadback(
+    Spi_HWUnitType HWUnit,
+    Spi_RegisterReadbackType * RegRbPtr
+)
+```
+
+
+**Brief**: 
+This function reads the important registers of the hardware unit and returns the value in the structure. 
+
+This API should be called after Spi_Init is called. Otherwise this API will return E_NOT_OK.
+
+This API could be used to readback the register contents after Spi_Init and then the readback value could be compared during SPI execution to check the correctness of the HW unit. Since this API is used for this purpose, the register returned are the ones which doesn't change after init based on job or channel config.
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **HWUnit** - SPI Hardware microcontroller peripheral unit ID. If this is invalid, then the API will return E_NOT_OK. 
+  
+* **RegRbPtr** - Pointer to where to store the readback values. If If this pointer is NULL_PTR, then the API will return E_NOT_OK. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Register read back has been done 
+<br> 
+  
+* **E_NOT_OK** - Register read back failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_SetLoopbackMode
+
+```
+Std_ReturnType Spi_SetLoopbackMode(
+    Spi_HWUnitType HWUnit,
+    boolean LoopbkEn
+)
+```
+
+
+**Brief**: 
+This function enables or disables the internal loopback mode of SPI. Note: Only MiBSPI HW units supports this feature. 
+
+This API should be called after Spi_Init is called. Otherwise this API will return E_NOT_OK. Also this API should not be called when the HW unit is busy.
+
+This API could be used to check the integrity of the SPI module. When the loopback mode is enabled, the data transferred is received back and hence the caller can verify and compare the TX buffer with RX buffer for any HW failures.
+
+Service ID[hex] - None
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **HWUnit** - SPI Hardware microcontroller peripheral unit ID. If this is invalid, then the API will return E_NOT_OK. 
+  
+* **LpbkEnable** - Loopback enable/disable: TRUE - Enable loopback, FALSE - Disable loopback 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Loop back mode done 
+<br> 
+  
+* **E_NOT_OK** - Loop back mode failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Spi_reportDetRuntimeError
+
+```
+void Spi_reportDetRuntimeError(
+    uint8 apiId,
+    uint8 errorId
+)
+```
+
+
+
+
+
+

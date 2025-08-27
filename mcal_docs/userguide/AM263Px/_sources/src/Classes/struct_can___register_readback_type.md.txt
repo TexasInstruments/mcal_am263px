@@ -1,0 +1,44 @@
+---
+orphan: true
+---
+
+---
+title: Can_RegisterReadbackType
+summary: Register Readback Structure The Safety API to readback CAN register vales will populate this structure. 
+
+---
+
+# Can_RegisterReadbackType
+
+
+
+Register Readback Structure The Safety API to readback CAN register vales will populate this structure. 
+
+
+`#include <Can.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | CanReadBackRegPID |  MCANSS PID Register.  |
+|  uint32 | CanReadBackRegSTAT |  MCANSS STAT Register.  |
+|  uint32 | CanReadBackRegCREL |  Auto Bus On Time Register.  |
+|  uint32 | CanReadBackRegENDN |  Endianess MCAN_TEST value Constant "0x8765 4321".  |
+|  uint32 | CanReadBackRegCTRL |  MCAN CTRL Register.  |
+|  uint32 | CanReadBackRegDBTP |  MCAN DBTB Register.  |
+|  uint32 | CanReadBackRegRWD |  MCAN RWD Register.  |
+|  uint32 | CanReadBackRegCCCR |  MCAN CCCR Register.  |
+|  uint32 | CanReadBackRegNBTP |  MCAN NBTP Register.  |
+|  uint32 | CanReadBackRegTDCR |  MCAN TDCR Register.  |
+|  uint32 | CanReadBackRegGFC |  MCAN GFC Register.  |
+|  uint32 | CanReadBackRegSIDFC |  MCAN SIDFC Register.  |
+|  uint32 | CanReadBackRegXIDFC |  MCAN XIDFC Register.  |
+|  uint32 | CanReadBackRegRXF0C |  MCAN RXF0C Register.  |
+|  uint32 | CanReadBackRegRXBC |  MCAN RXBC Register.  |
+|  uint32 | CanReadBackRegRXF1C |  MCAN RXF1C Register.  |
+|  uint32 | CanReadBackRegTXBC |  MCAN TXBC Register.  |
+|  uint32 | CanReadBackRegTXESC |  MCAN TXESC Register.  |
+|  uint32 | CanReadBackRegTXEFC |  MCAN TXEFC Register.  |
+
+

@@ -1,0 +1,34 @@
+---
+orphan: true
+---
+
+---
+title: Icu_ChannelConfigType
+summary: ICU Channel Config Structure. 
+
+---
+
+# Icu_ChannelConfigType
+
+
+
+ICU Channel Config Structure. 
+
+
+`#include <Icu.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  [Icu_ActivationType](../Modules/group___i_c_u.md#enum-icu_activationtype) | defaultStartEdge |  Default activation edge to be used by ICU module.  |
+|  [Icu_XbarSelect](../Modules/group___i_c_u.md#enum-icu_xbarselect) | xbarSelect |  xbar to used for input  |
+|  [Icu_IntrCapSelect](../Modules/group___i_c_u.md#enum-icu_intrcapselect) | intrcapSelect |  capture event for interupt enable  |
+|  [Icu_MeasurementModeType](../Modules/group___i_c_u.md#enum-icu_measurementmodetype) | measurementMode |  Measurement Mode to be used.  |
+|  [Icu_SignalMeasurementPropertyType](../Modules/group___i_c_u.md#enum-icu_signalmeasurementpropertytype) | signalMeasurementProperty |  Signal Measurmenet property to be used if mode choosen.  |
+|  [Icu_NotifyFuncType](../Modules/group___i_c_u.md#typedef-icu_notifyfunctype) | notificationHandler |  Notification handler for notifications.  |
+|  [Icu_TimestampBufferType](../Modules/group___i_c_u.md#enum-icu_timestampbuffertype) | bufferType |  Buffer Type for Timestamp API mode.  |
+|  uint32 | instanceClkMHz |  Clk src for ICU module in MHz.  |
+|  uint32 | prescaler |  Prescaler value to be used for ICU module.  |
+
+

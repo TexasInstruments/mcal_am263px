@@ -1,0 +1,547 @@
+## DIO Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|LSB|Least Significant Bit|
+|MSB|Most Significant Bit|
+|DIO|Digital Input Output|
+|ID|Identifier|
+|ADC|Analog to Digital Converter|
+|SPI|Serial Peripheral Interface|
+|PWM|Pulse Width Modulation|
+|ICU |Input Capture Unit|
+|DET |Default Error Tracer|
+|DEM |Diagnostic Event Manager|
+
+|Definitions|Descriptions|
+|------|------|
+|DIO channel|Represents a single general-purpose digital input/output pin|
+|DIO port|Represents several DIO channels that are grouped by hardware|
+|DIO channel group|Represents several adjoining DIO channels represented by a logical group|
+|Physical Level(Input)|Two states possible: LOW/HIGH. A bit value '0' represents a LOW, a bit value '1' represents a HIGH|
+|Physical Level(Output)|Two states possible: LOW/HIGH. A bit value '0' represents a LOW, a bit value '1' represents a HIGH |
+
+### Introduction
+
+This document describes the functionality, API and configuration of the AUTOSAR BSW module DIO.
+
+|  |  |
+|------|------|
+|**Supported AUTOSAR Release**|4.3.1|
+|**Supported Configuration Variants**|Link-time, Pre-compile|
+|**Vendor ID**|DIO_VENDOR_ID (44)|
+|**Module ID**|DIO_MODULE_ID (120)|
+| **Supported Platform**             |   AM263Px|
+
+### Functional Overview
+
+The DIO driver provides port and channel based read and write access to the internal general purpose I/O ports. The read and write behaviour is unbuffered. The basic behaviour of this driver is synchronous.
+
+The DIO Driver provides services for reading and writing to/from
+
+1. DIO Channels (Pins)
+
+2. DIO Ports
+
+3. DIO Channel Groups
+
+#### DIO Driver Architecture
+
+The DIO driver has architecture as shown in below figure from the AUTOSAR spec
+
+```{figure} Assets/images/dio/dio_image2.png
+:alt: DIO in AUTOSAR architecture
+:align: center
+
+
+DIO in AUTOSAR architecture
+```
+
+#### Initialization
+
+The DIO module shall not provide an interface for initialization of the hardware. The Port Driver performs this.
+
+#### States
+
+No state is maintained in the DIO driver
+
+#### Assumptions
+
+
+None
+
+#### Limitations
+
+None
+
+#### Design overview
+
+
+**Will be updated in future release:**
+
+### Hardware Features
+
+#### IP Supported Features
+
+* Dedicated general-purpose pins that can be configured as either inputs or outputs
+* Programmable pull up/pull down function
+* Supports GPIO output in push/pull or open-drain modes
+* The GPIO peripheral can produce host CPU interrupts and DMA synchronization events
+
+#### AUTOSAR Supported Features
+
+* Read/write of individual GPIO pins
+* Read/write of GPIO registers
+* Read/write of GPIO registers with configurable mask
+* Flip the level of a particular GPIO pin
+
+#### Not Supported Features
+
+
+Reporting of Dem events on pin write
+
+### Source files
+
+Static source C Files are defined below in the table.
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Dio**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┗ 📜**Dio.h** : *Contains the API’s of the DIO driver to be used by upper layers*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┗ 📜**Dio.c** : *Implementation of the API’s for DIO driver*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┣ 📜**Dio_Priv.h** : *Contains data structures and Internal function declarations*\
+ ┃ ┃ ┃ ┗ 📜**Dio_Priv.c** : *Contains Functions that support the API's for DIO driver*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┣ 📂mcal_config\
+ ┣ 📂mcal_docs\
+ ┗ 📜README.txt
+
+Plugin files are defined below in the table.
+
+|Plugin Structure|Descriptions|
+|----------|----------|
+|Dio_Cfg.h |Contains the base addresses, Precompile switches, Macros for channels, counters etc.|
+|Dio_Lcfg.c|Contains all channels Link time Configuration parameters|
+|Dio_Cfg.c|Contains all channels Pre-Compile Configuration parameters|
+
+The below diagram shows the files structure for the DIO driver. The Dio.c and Dio.h are the 2 files that contain the DIO driver’s API’s.
+
+```{figure} Assets/images/dio/dio_image3.png
+:alt: DIO Driver File Structure
+:align: center
+
+
+DIO Driver File Structure
+```
+
+```{figure} Assets/images/dio/dio_image4.jpg
+:alt: DIO header file include structure
+:align: center
+
+
+DIO header file include structure
+```
+
+### Module requirements
+
+**Will be updated in future release:**
+
+#### Memory Mapping
+
+|Memory Mapping Sections|DIO_CODE|DIO_CODE_ISR|DIO_VAR_NO_INIT|DIO_VAR_ZERO_INIT|DIO_PBCFG|DIO_PBCFG_ROOT|
+|-----------------------|--------|------------|---------------|-----------------|---------|--------------|
+| DIO_START_SEC_VAR_INIT_UNSPECIFIED(.bss)|   |   |   | x |   |   |
+| DIO_STOP_SEC_VAR_INIT_UNSPECIFIED       |   |   |   | x |   |   |
+| DIO_START_SEC_CODE_APPL(.text)          |   | x |   |   |   |   |
+| DIO_STOP_SEC_CODE_APPL                  |   | x |   |   |   |   |
+| DIO_START_SEC_VAR_UNSPECIFIED(.data)    |   |   | x |   |   |   |
+| DIO_STOP_SEC_VAR_UNSPECIFIED            |   |   | x |   |   |   |
+| DIO_START_SEC_CODE(.text)               | x |   |   |   |   |   |
+| DIO_STOP_SEC_CODE                       | x |   |   |   |   |   |
+| DIO_START_SEC_PBCFG(.data)              |   |   |   |   | x |   |
+| DIO_STOP_SEC_PBCFG                      |   |   |   |   | x |   |
+| DIO_START_SEC_PBCFG_ROOT(.const)        |   |   |   |   |   | x |
+| DIO_STOP_SEC_PBCFG_ROOT                 |   |   |   |   |   | x |
+
+#### Scheduling
+
+There is no scheduling functions in Dio.
+
+#### Error handling
+
+##### Development Error Reporting
+
+By default, development errors are reported to the Development Error Tracer (DET) using the service Det_ReportError() if detection and reporting of development errors is enabled in the configuration tool. If another module is used for development error reporting, the function name for reporting the error can be configured by the integrator, but must have the same signature as the service Det_ReportError().
+
+#### Error Code
+
+##### Development Errors
+
+|Type of Error|Related Error Code|Value|
+|----|-------|-----|
+|API parameter checking: Invalid channel requested|DIO_E_PARAM_INVALID_CHANNEL_ID|0x0A|
+|API parameter checking: Invalid port requested|DIO_E_PARAM_INVALID_PORT_ID|0x14|  
+|API parameter checking: Invalid channel group requested|DIO_E_PARAM_INVALID_GROUP|0x1F|
+|API service called with a NULL pointer|DIO_E_PARAM_POINTER|0x20|
+
+##### DEM Errors
+
+The extended production errors reported to DEM module are described in the following table:
+
+|Error Code|   |Description|
+|----|-----|-------|
+|Assigned by DEM|DIO_WRITE_CHANNEL_EVENT_ID|This error is raised when IO check for the DIO channel fails|
+|Assigned by DEM|DIO_WRITE_PORT_EVENT_ID|This error is raised when DIO write to port fails|
+|Assigned by DEM|DIO_E_HARDWARE_ERROR|This error is raised when register write failure occurs(Hardware Failure)|
+
+### Used resources
+
+#### Interrupt Handling
+
+The DIO modules doesn't implement any Interrupt Service Routines.
+
+#### Hardware-Software Mapping
+
+* GPIO Channels Mapping
+
+AM263x have total 139 GPIO pins available​ which allocated from Bank A(Bank 0) to Bank I(Bank 8).
+
+Each Bank contains 16 channels except Bank I​(Bank 8).
+
+Bank I​ contains 11 channels.
+
+|GPIO Banks| GPIO Channels|
+|----|-----|
+|BankA / Bank0|Channel 0 to channel 15|
+|BankB / Bank1|Channel 16 to channel 31|
+|BankC / Bank2|Channel 32 to channel 47|
+|BankD / Bank3|Channel 48 to channel 63|
+|BankE / Bank4|Channel 64 to channel 79|
+|BankF / Bank5|Channel 80 to channel 95|
+|BankG / Bank6|Channel 96 to channel 111|
+|BankH / Bank7|Channel 112 to channel 127|
+|BankI / Bank8|Channel 128 to channel 138|
+
+### Integration description
+
+#### Dependent modules
+
+##### DET
+
+This implementation depends on the DET in order to report development errors
+The detection of development errors is configurable (ON / OFF), The switch DIO_DEV_ERROR_DETECT will activate or deactivate the detection of all development errors.
+
+##### DEM
+
+By default, production code related errors are reported to the DEM using the service
+DEM_ReportErrorStatus ().
+
+```{Note}
+ Dem Event is enable only if `$(Module_Name)DemEventParameterRefs` is enabled.
+
+```
+
+##### PORT
+
+The DIO Modules expects that pinmux is set correctly to configure the GPIO pins for GPIO mode. This is done by the PORT driver. The pin direction shall also be set by the PORT driver.
+
+##### SchM
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that DIO module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator.
+
+For DIO Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | Dio Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|DIO_EXCLUSIVE_AREA_0 | Dio_WritePort<br>Dio_WriteChannelGroup<br>Dio_WriteChannel | To protect against multiple access for shared resources|**ALL_INTERRUPT_BLOCKING** : All interrupts should be blocked as this API's can be called in the interrupts |
+
+##### Dio Callback Functions
+
+The DIO driver does not provide any call back functions
+
+#### Multi-core support
+
+Not Supported
+
+### Configuration
+
+
+
+#### DioConfig
+This container contains the configuration parameters and sub containers of the AUTOSAR DIO module. This container is a MultipleConfigurationContainer, i.e. this container and its sub-containers exist once per configuration set.
+
+##### DioPort
+Configuration of individual DIO ports, consisting of channels and possible channel groups.
+
+###### DioPortId
+
+| Item ||
+|--------|---------------|
+| **Name** | DioPortId |
+| **Description** | Numeric identifier of the DIO port. Not all MCU ports may be used for DIO, thus there may be "gaps" in the list of all IDs. This value will be |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 4 |
+| **Min-value** | 0 |
+
+##### DioChannel
+Configuration of an individual DIO channel. Besides a HW specific channel name which is typically fixed for a specific micro controller, additional symbolic names can be defined per channel.
+
+###### DioChannelId
+
+| Item ||
+|--------|---------------|
+| **Name** | DioChannelId |
+| **Description** | Channel Id of the DIO channel. This value will be assigned to the symbolic names. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 138 |
+| **Min-value** | 0 |
+
+##### DioChannelGroup
+Definition and configuration of DIO channel groups. A channel group represents several adjoining DIO channels represented by a logical group.
+
+###### DioChannelGroupIdentification
+
+| Item ||
+|--------|---------------|
+| **Name** | DioChannelGroupIdentification |
+| **Description** | The DIO channel group is identified in DIO API by a pointer to a data structure (of type Dio_ChannelGroupType). That data structure contains the channel group information. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+###### DioPortMask
+
+| Item ||
+|--------|---------------|
+| **Name** | DioPortMask |
+| **Description** | This shall be the mask which defines the positions of the channel |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+###### DioPortOffset
+
+| Item ||
+|--------|---------------|
+| **Name** | DioPortOffset |
+| **Description** | The position of the Channel Group on the port, counted |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 31 |
+| **Min-value** | 0 |
+
+#### DioGeneral
+General DIO module configuration parameters.
+
+##### DioDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | DioDevErrorDetect |
+| **Description** | Switches the Development Error Detection and Notification |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### DioDemEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | DioDemEnable |
+| **Description** | Switches the Diagnostic event manager Notification |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### DioFlipChannelApi
+
+| Item ||
+|--------|---------------|
+| **Name** | DioFlipChannelApi |
+| **Description** | Adds / removes the service Dio_FlipChannel() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### DioVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | DioVersionInfoApi |
+| **Description** | Adds / removes the service Dio_ GetVersionInfo() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### DioHostCoreId
+
+| Item ||
+|--------|---------------|
+| **Name** | DioHostCoreId |
+| **Description** | R5F CPU ownership of GPIO. 0 - R5FSS0 Core0, 1 - R5FSS0 Core1, 2 - R5FSS1 Core0, 3 - R5FSS1 Core1 |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Link-Time | VARIANT-LINK-TIME |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 3 |
+| **Min-value** | 0 |
+
+```{Note}
+GPIO usage for the cores other than R5F0_0
+   If AUTOSAR MCAL is running on cores other than R5F0_0, user need to take care of following configuration
+   
+   DioHostCoreId: R5F CPU ownership of GPIO.
+   
+    0 -> R5FSS0 Core0 
+    1 -> R5FSS0 Core1 
+    2 -> R5FSS1 Core0 
+    3 -> R5FSS1 Core1
+
+
+```{figure} Assets/images/dio/dio_image5.jpg
+:align: center
+
+
+```
+
+### Examples
+
+#### Overview
+
+* Dio Example
+  * Initialize clock using Mcu_Init()
+  * Initialize port using Port_Init()
+  * Get Dio Version using Dio_GetVersionInfo()
+  * Set Port Pin direction of GPIOGH_128 to PORT_PIN_OUT using Port_SetPinDirection()
+  * Read the Port pin channel level using Dio_ReadChannel()
+  * Toggle the channel level using Dio_FlipChannel()
+  * Change the channel level using Dio_WriteChannel()
+  * Set a value to the Port using Dio_WritePort()
+  * Read the port level using Dio_ReadPort()
+  * Change a subset of the adjoining bits of a port using Dio_WriteChannelGroup()
+  * Read a subset of the adjoining bits of a port using Dio_ReadChannelGroup()
+  * Verify the read result.
+
+#### Setup required to run example
+
+None
+
+#### How to run examples
+
+1.DIO example application demonstrating the MCAL DIO driver features is in folder <MCAL_ROOT>/examples/Dio.
+
+
+2.This application can be built from the build folder by giving "gmake –s dio_app PLATFORM=am263px" command in command prompt.
+
+3.Once the build is completed we get a binary file, which is loaded in our controller and executed.
+
+##### Configuration used to test this example
+
+1.The DIO example app used to verify the port pin (High/Low) functionalities.
+
+2.GPIOI_128(Ball number A15) these pins are configured as a GPIO.
+
+3.Pin Configurations are provided in mcal/example/Config/Port_PBcfg.c File.
+
+4.Read the channel level before and after Dio_FlipChannel
+
+5.Read the Port value before and after Dio_FlipChannel
+
+#### Sample Log
+
+```{code-block}
+CLANG compiled : DioApp: Sample Application - STARTS !!!
+DIO Driver version info:9.1.0
+DIO Driver Module/Driver:120.44 
+Port Value:1 
+Port Value for GPIOGH channel 2 :1 
+Dio_FlipChannel - GPIOGH
+Port Value:0 
+Dio_FlipChannel - GPIOGH
+Port Value:1 
+Port Value for GPIOGH :1 
+Dio_FlipChannel - GPIOGH 
+Port Value:0 
+Dio_FlipChannel -GPIOGH
+Port Value:1 
+Dio_WriteChannel -GPIOGH
+Port Value:0 
+Dio_WriteChannel -GPIOGH
+Port Value:1 
+Port Value Before Flip:1c1 
+After Flip Port Value:0 
+Read channel grp Port Value:1 
+DIO Test Passed!!!
+
+```
+
+#### File Structure
+
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Dio**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┣ 📜**Dioapp.c** : *Contains Dio test example*\
+ ┃ ┃ ┃ ┗ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Dio_Demo_Cfg**\
+ ┃ ┃ ┃ ┗ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Dio_Cfg.h** : *Contains the configuration parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Dio_Cfg.c** : *Contains all Pre-Compile configured parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜**Dio_Lcfg.c** : *contains all Link time configured parameters*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┗ 📜README.txt
+
+### References
+
+[AUTOSAR_SWS_DIODriver](<https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_DIODriver.pdf>)\
+[Technical Reference Manual](<https://www.ti.com/product/AM263P4#tech-docs>)

@@ -1,0 +1,29 @@
+---
+orphan: true
+---
+
+---
+title: Port_ConfigType
+summary: PORT Module ROOT configuration. 
+
+---
+
+# Port_ConfigType
+
+
+
+PORT Module ROOT configuration. 
+
+
+`#include <Port_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint16 | NumberOfPortPins |  Number of pins individually configure. Should not conflict with pins enabled by selecting module enable.  |
+|  const [Port_PinConfigType](../Classes/struct_port___pin_config_type.md) * | PinConfig_pt |  Pointer to pin configuration structure.  |
+|  uint32 | NumberOfGPIORegs |  Number of GPIO registers to configure.  |
+|  const [Port_DioRegConfigType](../Classes/struct_port___dio_reg_config_type.md) * | DioConfig_pt |  DIO config structure.  |
+
+

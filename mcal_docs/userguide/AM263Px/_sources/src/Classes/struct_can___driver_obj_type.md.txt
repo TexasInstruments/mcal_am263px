@@ -1,0 +1,31 @@
+---
+orphan: true
+---
+
+---
+title: Can_DriverObjType
+summary: Can Driver object type strucuture. 
+
+---
+
+# Can_DriverObjType
+
+
+
+Can Driver object type strucuture. 
+
+
+`#include <Can_Priv.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md)[CAN_NUM_CONTROLLER] | canController |  |
+|  [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md)[CAN_NUM_MAILBOXES] | canMailbox |  |
+|  uint8 | canMaxControllerCount |  |
+|  uint32 | maxMbCnt |  |
+|  uint32[CAN_MAX_CONTROLLER] | controllerIDMap |  |
+|  [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md)[CAN_NUM_TX_MAILBOXES] | canTxMessageObj |  |
+
+

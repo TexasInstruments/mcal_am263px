@@ -1,0 +1,1360 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.16. MCU &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.17. PORT" href="group___p_o_r_t.html" />
+    <link rel="prev" title="5.15. LIN" href="group___l_i_n.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.00.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">5.8. CDD_IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.16. MCU</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#types">5.16.1. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-mcu-pllstatustype">5.16.1.1. enum Mcu_PllStatusType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-mcu-ramstatetype">5.16.1.2. enum Mcu_RamStateType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-mcu-resettype">5.16.1.3. enum Mcu_ResetType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-mcu-clkmoduleidtype">5.16.1.4. enum Mcu_ClkModuleIdType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-mcu-clksourceidtype">5.16.1.5. enum Mcu_ClkSourceIdType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-clocktype">5.16.1.6. typedef Mcu_ClockType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-rawresettype">5.16.1.7. typedef Mcu_RawResetType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-ramsectiontype">5.16.1.8. typedef Mcu_RamSectionType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-modetype">5.16.1.9. typedef Mcu_ModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-ramconfigptrtype">5.16.1.10. typedef Mcu_RamConfigPtrType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-rcmconfigptrtype">5.16.1.11. typedef Mcu_RCMConfigPtrType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-clockconfigptrtype">5.16.1.12. typedef Mcu_ClockConfigPtrType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-pwmconfigptrtype">5.16.1.13. typedef Mcu_PwmConfigPtrType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-mcu-adcconfigptrtype">5.16.1.14. typedef Mcu_AdcConfigPtrType</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">5.16.2. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.16.3. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.16.4. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-init">5.16.4.1. function Mcu_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-initramsection">5.16.4.2. function Mcu_InitRamSection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-initclock">5.16.4.3. function Mcu_InitClock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-performreset">5.16.4.4. function Mcu_PerformReset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-distributepllclock">5.16.4.5. function Mcu_DistributePllClock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-getpllstatus">5.16.4.6. function Mcu_GetPllStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-getresetreason">5.16.4.7. function Mcu_GetResetReason</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-getresetrawvalue">5.16.4.8. function Mcu_GetResetRawValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-setmode">5.16.4.9. function Mcu_SetMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-getramstate">5.16.4.10. function Mcu_GetRamState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-getversioninfo">5.16.4.11. function Mcu_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-deinit">5.16.4.12. function Mcu_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-mcu-registerreadback">5.16.4.13. function Mcu_RegisterReadback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">5.16. </span>MCU</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mcu">
+<h1><span class="section-number">5.16. </span>MCU<a class="headerlink" href="#mcu" title="Link to this heading"></a></h1>
+<section id="types">
+<h2><span class="section-number">5.16.1. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base type</p></th>
+<th class="head"><p>Type Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-mcu-pllstatustype"><span class="std std-ref">Mcu_PllStatusType</span></a></strong></p></td>
+<td><p>This is a status value returned by the function Mcu_GetPllStatus() of the MCU module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-mcu-ramstatetype"><span class="std std-ref">Mcu_RamStateType</span></a></strong></p></td>
+<td><p>Enumeration of ranstate queried by Mcu_GetRamState()</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-mcu-resettype"><span class="std std-ref">Mcu_ResetType</span></a></strong></p></td>
+<td><p>This is the type of the reset enumerator containing the subset of reset types.    It is not required that all reset types are supported by hardware.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-mcu-clkmoduleidtype"><span class="std std-ref">Mcu_ClkModuleIdType</span></a></strong></p></td>
+<td><p>Clock source config modules id enum.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-mcu-clksourceidtype"><span class="std std-ref">Mcu_ClkSourceIdType</span></a></strong></p></td>
+<td><p>This is the type of the clock source in clock tree that is selectable for peripheral. Please see TRM to map clock source to module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef uint8</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-clocktype"><span class="std std-ref">Mcu_ClockType</span></a></strong></p></td>
+<td><p>This type specifies the identification (ID) for a ClockType status used by Mcu_InitClock()</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef uint32</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-rawresettype"><span class="std std-ref">Mcu_RawResetType</span></a></strong></p></td>
+<td><p>This type specifies the identification (ID) for a RAW MCU reset status returned by Mcu_GetResetRawValue()</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef uint8</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-ramsectiontype"><span class="std std-ref">Mcu_RamSectionType</span></a></strong></p></td>
+<td><p>This type specifies the identification (ID) for a RAM section used in Mcu_InitRamSection()</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef uint8</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-modetype"><span class="std std-ref">Mcu_ModeType</span></a></strong></p></td>
+<td><p>This type specifies the identification (ID) for a MCU mode used in Mcu_SetMode()</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef const <a class="reference internal" href="../Classes/struct_mcu___ram_section_config_type.html"><span class="std std-doc">Mcu_RamSectionConfigType</span></a> *</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-ramconfigptrtype"><span class="std std-ref">Mcu_RamConfigPtrType</span></a></strong></p></td>
+<td><p>Pointer to RamConfig structure.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef const <a class="reference internal" href="../Classes/struct_mcu___r_c_m_config_type.html"><span class="std std-doc">Mcu_RCMConfigType</span></a> *</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-rcmconfigptrtype"><span class="std std-ref">Mcu_RCMConfigPtrType</span></a></strong></p></td>
+<td><p>Pointer to PrcmConfig structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef const <a class="reference internal" href="../Classes/struct_mcu___clock_config_type.html"><span class="std std-doc">Mcu_ClockConfigType</span></a> *</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-clockconfigptrtype"><span class="std std-ref">Mcu_ClockConfigPtrType</span></a></strong></p></td>
+<td><p>Pointer to Clock Config structure.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef const <a class="reference internal" href="../Classes/struct_mcu___pwm_config_type.html"><span class="std std-doc">Mcu_PwmConfigType</span></a> *</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-pwmconfigptrtype"><span class="std std-ref">Mcu_PwmConfigPtrType</span></a></strong></p></td>
+<td><p>Pointer to PWM Clock Config structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef const <a class="reference internal" href="../Classes/struct_mcu___adc_config_type.html"><span class="std std-doc">Mcu_AdcConfigType</span></a> *</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-mcu-adcconfigptrtype"><span class="std std-ref">Mcu_AdcConfigPtrType</span></a></strong></p></td>
+<td><p>Pointer to ADC buffer Config structure.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="enum-mcu-pllstatustype">
+<h3><span class="section-number">5.16.1.1. </span>enum Mcu_PllStatusType<a class="headerlink" href="#enum-mcu-pllstatustype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU_PLL_LOCKED</p></td>
+<td><p>0</p></td>
+<td><p>PLL locked.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_PLL_UNLOCKED</p></td>
+<td><p></p></td>
+<td><p>PLL unlocked.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_PLL_STATUS_UNDEFINED</p></td>
+<td><p></p></td>
+<td><p>PLL status undefined.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This is a status value returned by the function Mcu_GetPllStatus() of the MCU module.</p>
+</section>
+<section id="enum-mcu-ramstatetype">
+<h3><span class="section-number">5.16.1.2. </span>enum Mcu_RamStateType<a class="headerlink" href="#enum-mcu-ramstatetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU_RAMSTATE_INVALID</p></td>
+<td><p></p></td>
+<td><p>RAM state invalid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_RAMSTATE_VALID</p></td>
+<td><p></p></td>
+<td><p>RAM state valid.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Enumeration of ranstate queried by Mcu_GetRamState()</p>
+</section>
+<section id="enum-mcu-resettype">
+<h3><span class="section-number">5.16.1.3. </span>enum Mcu_ResetType<a class="headerlink" href="#enum-mcu-resettype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU_RESET_CLEAR</p></td>
+<td><p></p></td>
+<td><p>Reset Reason Cleared.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_POWER_ON_RESET</p></td>
+<td><p></p></td>
+<td><p>POR Reset.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_WDT0</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to MSS_WDT0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_WDT1</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to MSS_WDT1.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_WDT2</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to MSS_WDT2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_WDT3</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to MSS_WDT3.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to TOPRCM WARM_RESET_CONFIG.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_EXT_PAD_RESET</p></td>
+<td><p></p></td>
+<td><p>External Pad Reset.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_HSM_WDT_RESET</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to HSM WDT.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_DEBUGGER_RESET</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Debugger reset.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_TEMP0</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Temperature sensor 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_TEMP1</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Temperature sensor 1.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_RESET_UNDEFINED</p></td>
+<td><p></p></td>
+<td><p>UNDEFINED reset.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_VMON1_oV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor1_oV.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_VMON2_oV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor2_oV.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_VMON3_oV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor3_oV.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_VMON5_oV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor5_oV.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_VMON0_uV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor0_uV.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_VMON1_uV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor1_uV.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_VMON2_uV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor2_uV.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_VMON3_uV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor3_uV.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_VMON5_uV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor5_uV.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_VMON7_uV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor7_uV.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_VMON8_uV</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Voltage monitor8_uV.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_WARM_RESET_ESM</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to ESM.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_WARM_RESET_SYS_CLK_LOSS</p></td>
+<td><p></p></td>
+<td><p>Warm Reset due to Sys clock loss.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This is the type of the reset enumerator containing the subset of reset types.    It is not required that all reset types are supported by hardware.</p>
+</section>
+<section id="enum-mcu-clkmoduleidtype">
+<h3><span class="section-number">5.16.1.4. </span>enum Mcu_ClkModuleIdType<a class="headerlink" href="#enum-mcu-clkmoduleidtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_SYSCLK</p></td>
+<td><p></p></td>
+<td><p>System Clock, clock select is ignored.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCAN0</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN0 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCAN1</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN1 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCAN2</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN2 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCAN3</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN3 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCAN4</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN4 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCAN5</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN5 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCAN6</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN6 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCAN7</p></td>
+<td><p></p></td>
+<td><p>MSS MCAN7 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_RTI0</p></td>
+<td><p></p></td>
+<td><p>MSS RTI0 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_RTI1</p></td>
+<td><p></p></td>
+<td><p>MSS RTI1 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_RTI2</p></td>
+<td><p></p></td>
+<td><p>MSS RTI2 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_RTI3</p></td>
+<td><p></p></td>
+<td><p>MSS RTI3 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_RTI4</p></td>
+<td><p></p></td>
+<td><p>MSS RTI4 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_RTI5</p></td>
+<td><p></p></td>
+<td><p>MSS RTI5 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_RTI6</p></td>
+<td><p></p></td>
+<td><p>MSS RTI6 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_RTI7</p></td>
+<td><p></p></td>
+<td><p>MSS RTI7 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_WDT0</p></td>
+<td><p></p></td>
+<td><p>MSS WDT clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_WDT1</p></td>
+<td><p></p></td>
+<td><p>MSS WDT clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_WDT2</p></td>
+<td><p></p></td>
+<td><p>MSS WDT clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_WDT3</p></td>
+<td><p></p></td>
+<td><p>MSS WDT clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_OSPI</p></td>
+<td><p></p></td>
+<td><p>MSS OSPI clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI0</p></td>
+<td><p></p></td>
+<td><p>MSS SPI0 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI1</p></td>
+<td><p></p></td>
+<td><p>MSS SPI1 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI2</p></td>
+<td><p></p></td>
+<td><p>MSS SPI2 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI3</p></td>
+<td><p></p></td>
+<td><p>MSS SPI3 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI4</p></td>
+<td><p></p></td>
+<td><p>MSS SPI4 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI5</p></td>
+<td><p></p></td>
+<td><p>MSS SPI5 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI6</p></td>
+<td><p></p></td>
+<td><p>MSS SPI6 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCSPI7</p></td>
+<td><p></p></td>
+<td><p>MSS SPI7 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_SPIB</p></td>
+<td><p></p></td>
+<td><p>MSS SPIB clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_I2C</p></td>
+<td><p></p></td>
+<td><p>MSS I2C clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_SCI0</p></td>
+<td><p></p></td>
+<td><p>MSS SCIA clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_SCI1</p></td>
+<td><p></p></td>
+<td><p>MSS SCIB clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_SCI2</p></td>
+<td><p></p></td>
+<td><p>MSS SCIB clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_SCI3</p></td>
+<td><p></p></td>
+<td><p>MSS SCIB clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_SCI4</p></td>
+<td><p></p></td>
+<td><p>MSS SCIB clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_SCI5</p></td>
+<td><p></p></td>
+<td><p>MSS SCIB clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_CPSW</p></td>
+<td><p></p></td>
+<td><p>MSS CPSW clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_CPTS</p></td>
+<td><p></p></td>
+<td><p>MSS CPTS clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MCU_CLKOUT0</p></td>
+<td><p></p></td>
+<td><p>MSS MCU CLKOUT0 clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MCU_CLKOUT1</p></td>
+<td><p></p></td>
+<td><p>MSS MCU CLKOUT1 clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_PMIC_CLKOUT</p></td>
+<td><p></p></td>
+<td><p>MSS PMIC CLKOUT clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MII100_CLK</p></td>
+<td><p></p></td>
+<td><p>MSS MII 100 CLK clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_MII10_CLK</p></td>
+<td><p></p></td>
+<td><p>MSS MII 10 CLK clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_RGMI_CLK</p></td>
+<td><p></p></td>
+<td><p>MSS RGMI CLK clock.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MODULE_ID_CONTROLSS_CLK</p></td>
+<td><p></p></td>
+<td><p>MSS CONTROLSS CLK clock.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_MODULE_ID_MAX</p></td>
+<td><p></p></td>
+<td><p>MSS Module ID max.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Clock source config modules id enum.</p>
+<p>Clock source config ids defines are used to set clock source for specific modules</p>
+</section>
+<section id="enum-mcu-clksourceidtype">
+<h3><span class="section-number">5.16.1.5. </span>enum Mcu_ClkSourceIdType<a class="headerlink" href="#enum-mcu-clksourceidtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU_CLKSRC_0</p></td>
+<td><p>0</p></td>
+<td><p>Clocksource 0.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_1</p></td>
+<td><p></p></td>
+<td><p>Clocksource 1.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_2</p></td>
+<td><p></p></td>
+<td><p>Clocksource 2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_3</p></td>
+<td><p></p></td>
+<td><p>Clocksource 3.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_4</p></td>
+<td><p></p></td>
+<td><p>Clocksource 4.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_5</p></td>
+<td><p></p></td>
+<td><p>Clocksource 5.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_6</p></td>
+<td><p></p></td>
+<td><p>Clocksource 6.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_CLKSRC_7</p></td>
+<td><p></p></td>
+<td><p>Clocksource 7.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_CLKSRC_MAX</p></td>
+<td><p></p></td>
+<td><p>Clocksource max.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+This is the type of the clock source in clock tree that is selectable for peripheral. Please see TRM to map clock source to module.</p>
+</section>
+<section id="typedef-mcu-clocktype">
+<h3><span class="section-number">5.16.1.6. </span>typedef Mcu_ClockType<a class="headerlink" href="#typedef-mcu-clocktype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Mcu_ClockType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type specifies the identification (ID) for a ClockType status used by Mcu_InitClock()</p>
+</section>
+<section id="typedef-mcu-rawresettype">
+<h3><span class="section-number">5.16.1.7. </span>typedef Mcu_RawResetType<a class="headerlink" href="#typedef-mcu-rawresettype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Mcu_RawResetType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type specifies the identification (ID) for a RAW MCU reset status returned by Mcu_GetResetRawValue()</p>
+</section>
+<section id="typedef-mcu-ramsectiontype">
+<h3><span class="section-number">5.16.1.8. </span>typedef Mcu_RamSectionType<a class="headerlink" href="#typedef-mcu-ramsectiontype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Mcu_RamSectionType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type specifies the identification (ID) for a RAM section used in Mcu_InitRamSection()</p>
+</section>
+<section id="typedef-mcu-modetype">
+<h3><span class="section-number">5.16.1.9. </span>typedef Mcu_ModeType<a class="headerlink" href="#typedef-mcu-modetype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Mcu_ModeType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This type specifies the identification (ID) for a MCU mode used in Mcu_SetMode()</p>
+</section>
+<section id="typedef-mcu-ramconfigptrtype">
+<h3><span class="section-number">5.16.1.10. </span>typedef Mcu_RamConfigPtrType<a class="headerlink" href="#typedef-mcu-ramconfigptrtype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Mcu_RamSectionConfigType</span><span class="o">*</span><span class="w"> </span><span class="n">Mcu_RamConfigPtrType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Pointer to RamConfig structure.</p>
+</section>
+<section id="typedef-mcu-rcmconfigptrtype">
+<h3><span class="section-number">5.16.1.11. </span>typedef Mcu_RCMConfigPtrType<a class="headerlink" href="#typedef-mcu-rcmconfigptrtype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Mcu_RCMConfigType</span><span class="o">*</span><span class="w"> </span><span class="n">Mcu_RCMConfigPtrType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Pointer to PrcmConfig structure.</p>
+</section>
+<section id="typedef-mcu-clockconfigptrtype">
+<h3><span class="section-number">5.16.1.12. </span>typedef Mcu_ClockConfigPtrType<a class="headerlink" href="#typedef-mcu-clockconfigptrtype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Mcu_ClockConfigType</span><span class="o">*</span><span class="w"> </span><span class="n">Mcu_ClockConfigPtrType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Pointer to Clock Config structure.</p>
+</section>
+<section id="typedef-mcu-pwmconfigptrtype">
+<h3><span class="section-number">5.16.1.13. </span>typedef Mcu_PwmConfigPtrType<a class="headerlink" href="#typedef-mcu-pwmconfigptrtype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Mcu_PwmConfigType</span><span class="o">*</span><span class="w"> </span><span class="n">Mcu_PwmConfigPtrType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Pointer to PWM Clock Config structure.</p>
+</section>
+<section id="typedef-mcu-adcconfigptrtype">
+<h3><span class="section-number">5.16.1.14. </span>typedef Mcu_AdcConfigPtrType<a class="headerlink" href="#typedef-mcu-adcconfigptrtype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Mcu_AdcConfigType</span><span class="o">*</span><span class="w"> </span><span class="n">Mcu_AdcConfigPtrType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Pointer to ADC buffer Config structure.</p>
+</section>
+</section>
+<section id="structures">
+<h2><span class="section-number">5.16.2. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_mcu___ram_section_config_type.html"><span class="std std-doc">Mcu_RamSectionConfigType</span></a></strong></p></td>
+<td><p>Structure for data pre-setting to be initialized.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_mcu___clock_config_type.html"><span class="std std-doc">Mcu_ClockConfigType</span></a></strong></p></td>
+<td><p>Structure for module clock setting.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_mcu___pwm_config_type.html"><span class="std std-doc">Mcu_PwmConfigType</span></a></strong></p></td>
+<td><p>Structure for PWM clock configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_mcu___adc_config_type.html"><span class="std std-doc">Mcu_AdcConfigType</span></a></strong></p></td>
+<td><p>Structure for ADC Buffer configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_mcu___r_c_m_config_type.html"><span class="std std-doc">Mcu_RCMConfigType</span></a></strong></p></td>
+<td><p>Structure for PRCM configuration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_mcu___register_readback_type.html"><span class="std std-doc">Mcu_RegisterReadbackType</span></a></strong></p></td>
+<td><p>MCU CONFIG Register READBACK structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_mcu___config_type.html"><span class="std std-doc">Mcu_ConfigType</span></a></strong></p></td>
+<td><p>MCU CONFIG ROOT structure.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="defines">
+<h2><span class="section-number">5.16.3. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU_SW_MAJOR_VERSION</p></td>
+<td><p>Driver Implementation Major Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SW_MINOR_VERSION</p></td>
+<td><p>Driver Implementation Minor Version.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_SW_PATCH_VERSION</p></td>
+<td><p>Driver Implementation Patch Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_AR_RELEASE_MAJOR_VERSION</p></td>
+<td><p>AUTOSAR Major version specification implemented by MCU Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_AR_RELEASE_MINOR_VERSION</p></td>
+<td><p>AUTOSAR Minor version specification implemented by MCU Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_AR_RELEASE_REVISION_VERSION</p></td>
+<td><p>AUTOSAR Patch version specification implemented by MCU Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_VENDOR_ID</p></td>
+<td><p>Texas Instruments Vendor ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_MODULE_ID</p></td>
+<td><p>MCU Driver Module ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_INSTANCE_ID</p></td>
+<td><p>MCU Driver Instance ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SID_INIT</p></td>
+<td><p>Mcu_Init() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_SID_INIT_RAMSECTION</p></td>
+<td><p>Mcu_InitRamSection() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SID_INIT_CLOCK</p></td>
+<td><p>Mcu_InitClock() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_SID_DISTRIBUTE_PLL_CLOCK</p></td>
+<td><p>Mcu_DistributePllClock() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SID_GET_PLL_STATUS</p></td>
+<td><p>Mcu_GetPllStatus() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_SID_GET_RESET_REASON</p></td>
+<td><p>Mcu_GetResetReason() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SID_GET_RESET_RAW_VALUE</p></td>
+<td><p>Mcu_GetResetRawValue() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_SID_PERFORM_RESET</p></td>
+<td><p>Mcu_PerformReset() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SID_SET_MODE</p></td>
+<td><p>Mcu_SetMode() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_SID_GET_VERSION_INFO</p></td>
+<td><p>Mcu_GetVersionInfo() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SID_GET_RAM_STATE</p></td>
+<td><p>Mcu_GetRamState() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_SID_PLL_INIT_ALL</p></td>
+<td><p>Mcu_PLLInitAll() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_SID_REGISTER_READBACK</p></td>
+<td><p>Mcu_RegisterReadback() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_E_PARAM_CONFIG</p></td>
+<td><p>ERROR:Mcu_init config param invalid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_E_PARAM_CLOCK</p></td>
+<td><p>ERROR:Mcu_InitClock clockid param invalid.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_E_PARAM_MODE</p></td>
+<td><p>ERROR:Mcu_SetMode modeid param invalid.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_E_PARAM_RAMSECTION</p></td>
+<td><p>ERROR:Mcu_InitRamSection ramSect param invalid.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_E_PLL_NOT_LOCKED</p></td>
+<td><p>ERROR:PLL not locked.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_E_UNINIT</p></td>
+<td><p>ERROR:API invoked without performing Mcu_Init.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_E_PARAM_POINTER</p></td>
+<td><p>ERROR:NULL_PTR passed to MCU driver APIs.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_E_RUNTIME_ASSERT</p></td>
+<td><p>ERROR:Runtime assert failure.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_PERFORM_RESET_MODE_WARM</p></td>
+<td><p>Initiate SW WARM RESET sequence.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_ERRORRST_MASK</p></td>
+<td><p>Reset Reason Error Mask.</p></td>
+</tr>
+<tr class="row-even"><td><p>RESETREASON_NRESET</p></td>
+<td><p>Reset Reason.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_RCM_MODULE_ID_FIRST</p></td>
+<td><p>ModuleId for First.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_RCM_MODULE_ID_DCAN</p></td>
+<td><p>ModuleId for DCAN.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_RCM_MODULE_ID_MIBSPI1</p></td>
+<td><p>ModuleId for MIBSPI1.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_RCM_MODULE_ID_MIBSPI2</p></td>
+<td><p>ModuleId for MIBSPI2.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_RCM_MODULE_ID_QSPI</p></td>
+<td><p>ModuleId for QSPI.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_RCM_MODULE_ID_GPIOA</p></td>
+<td><p>ModuleId for GPIOA.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_RCM_MODULE_ID_WDTIMER</p></td>
+<td><p>ModuleId for Watchdog.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_RCM_MODULE_ID_UART</p></td>
+<td><p>ModuleId for UART.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_RCM_MODULE_ID_GPTIMER</p></td>
+<td><p>ModuleId for GPTIMER.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_RCM_MODULE_ID_LAST</p></td>
+<td><p>ModuleId for Last.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_STATE_UNINIT</p></td>
+<td><p>Specifief the status of un-initialization.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU_STATE_INIT</p></td>
+<td><p>Specifief the status of un-initialization.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCU_INCORRECT_DSP_FREQ_SEL</p></td>
+<td><p>Specifies the DSP SoC supported frequency vs Selected frequency from configuration Cfg.h file Mismatch This Error is thrown when user selects more frequency for DSP core than what the SoC supports. Ex: In the configuration if McuDSPDPLLClockout_HSDIV1 is selected as 550Mhz but if SoC supports only 300MHz as the maximum frequency this error is thrown.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2><span class="section-number">5.16.4. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-init"><span class="std std-ref">Mcu_Init</span></a></strong>(const <a class="reference internal" href="../Classes/struct_mcu___config_type.html"><span class="std std-doc">Mcu_ConfigType</span></a> * ConfigPtr)</p></td>
+<td><p>This service initializes the MCU driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-initramsection"><span class="std std-ref">Mcu_InitRamSection</span></a></strong>(<a class="reference internal" href="#typedef-mcu-ramsectiontype"><span class="std std-ref">Mcu_RamSectionType</span></a> RamSection)</p></td>
+<td><p>This service initializes the RAM section wise.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-initclock"><span class="std std-ref">Mcu_InitClock</span></a></strong>(<a class="reference internal" href="#typedef-mcu-clocktype"><span class="std std-ref">Mcu_ClockType</span></a> ClockSetting)</p></td>
+<td><p>This service initializes the PLL and other MCU specific clock options.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-performreset"><span class="std std-ref">Mcu_PerformReset</span></a></strong>(void )</p></td>
+<td><p>The service performs a microcontroller reset.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-distributepllclock"><span class="std std-ref">Mcu_DistributePllClock</span></a></strong>(void )</p></td>
+<td><p>This service provides the lock status of the PLL. This function is provided as dummy. All PLL distribution activities are being performed in Mcu_Init() to improve performance.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-mcu-pllstatustype"><span class="std std-ref">Mcu_PllStatusType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-getpllstatus"><span class="std std-ref">Mcu_GetPllStatus</span></a></strong>(void )</p></td>
+<td><p>This service provides the lock status of the PLL.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#enum-mcu-resettype"><span class="std std-ref">Mcu_ResetType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-getresetreason"><span class="std std-ref">Mcu_GetResetReason</span></a></strong>(void )</p></td>
+<td><p>The service reads the reset type from the hardware, if supported.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#typedef-mcu-rawresettype"><span class="std std-ref">Mcu_RawResetType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-getresetrawvalue"><span class="std std-ref">Mcu_GetResetRawValue</span></a></strong>(void )</p></td>
+<td><p>The service reads the reset type from the hardware register, if supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-setmode"><span class="std std-ref">Mcu_SetMode</span></a></strong>(<a class="reference internal" href="#typedef-mcu-modetype"><span class="std std-ref">Mcu_ModeType</span></a> McuMode)</p></td>
+<td><p>This service activates the MCU power modes. Supported low power modes - None.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-mcu-ramstatetype"><span class="std std-ref">Mcu_RamStateType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-getramstate"><span class="std std-ref">Mcu_GetRamState</span></a></strong>(void )</p></td>
+<td><p>This service provides the actual status of the microcontroller Ram, if supported.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-getversioninfo"><span class="std std-ref">Mcu_GetVersionInfo</span></a></strong>(Std_VersionInfoType * versioninfo)</p></td>
+<td><p>This service returns the version information of this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-deinit"><span class="std std-ref">Mcu_DeInit</span></a></strong>(void )</p></td>
+<td><p>This service is only used for UT testing and not for app use This service sets the internal MCU initDone flag to FALSE so that Mcu_Init can be invoked again. This is required for negative UT test cases.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-mcu-registerreadback"><span class="std std-ref">Mcu_RegisterReadback</span></a></strong>(<a class="reference internal" href="../Classes/struct_mcu___register_readback_type.html"><span class="std std-doc">Mcu_RegisterReadbackType</span></a> * RegisterReadbackPtr)</p></td>
+<td><p>This service is to read some of the config registers.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-mcu-init">
+<h3><span class="section-number">5.16.4.1. </span>function Mcu_Init<a class="headerlink" href="#function-mcu-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Mcu_Init</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Mcu_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service initializes the MCU driver.</p>
+<p>Service ID[hex] : 0x0</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ConfigPtr</strong> - Pointer to MCU driver configuration set.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-mcu-initramsection">
+<h3><span class="section-number">5.16.4.2. </span>function Mcu_InitRamSection<a class="headerlink" href="#function-mcu-initramsection" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Mcu_InitRamSection</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Mcu_RamSectionType</span><span class="w"> </span><span class="n">RamSection</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service initializes the RAM section wise.</p>
+<p>Service ID[hex] : 0x01</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>RamSection</strong> - Selects RAM memory section provided in configuration set</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - command has been accepted
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - command has not been accepted e.g. due to parameter error
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-mcu-initclock">
+<h3><span class="section-number">5.16.4.3. </span>function Mcu_InitClock<a class="headerlink" href="#function-mcu-initclock" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Mcu_InitClock</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Mcu_ClockType</span><span class="w"> </span><span class="n">ClockSetting</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service initializes the PLL and other MCU specific clock options.</p>
+<p>Service ID[hex] : 0x02</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ClockSetting</strong> - Clock setting</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - command has been accepted
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - command has not been accepted
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-mcu-performreset">
+<h3><span class="section-number">5.16.4.4. </span>function Mcu_PerformReset<a class="headerlink" href="#function-mcu-performreset" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Mcu_PerformReset</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+The service performs a microcontroller reset.</p>
+<p>This function is the watchdog trigger and is invoked from WdgIsr</p>
+<p>Service ID[hex] : 0x07</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-mcu-distributepllclock">
+<h3><span class="section-number">5.16.4.5. </span>function Mcu_DistributePllClock<a class="headerlink" href="#function-mcu-distributepllclock" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Mcu_DistributePllClock</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service provides the lock status of the PLL. This function is provided as dummy. All PLL distribution activities are being performed in Mcu_Init() to improve performance.</p>
+<p>Service ID[hex] : 0x03</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Success
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Failure
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-mcu-getpllstatus">
+<h3><span class="section-number">5.16.4.6. </span>function Mcu_GetPllStatus<a class="headerlink" href="#function-mcu-getpllstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Mcu_PllStatusType</span><span class="w"> </span><span class="n">Mcu_GetPllStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service provides the lock status of the PLL.</p>
+<p>Service ID[hex] : 0x04</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>Refer</strong> enum Mcu_PllStatusType
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Mcu_PllStatusType - PLL Status</p>
+</section>
+<section id="function-mcu-getresetreason">
+<h3><span class="section-number">5.16.4.7. </span>function Mcu_GetResetReason<a class="headerlink" href="#function-mcu-getresetreason" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Mcu_ResetType</span><span class="w"> </span><span class="n">Mcu_GetResetReason</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+The service reads the reset type from the hardware, if supported.</p>
+<p>Service ID[hex] : 0x05</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>Refer</strong> enum Mcu_ResetType
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Mcu_ResetType</p>
+</section>
+<section id="function-mcu-getresetrawvalue">
+<h3><span class="section-number">5.16.4.8. </span>function Mcu_GetResetRawValue<a class="headerlink" href="#function-mcu-getresetrawvalue" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Mcu_RawResetType</span><span class="w"> </span><span class="n">Mcu_GetResetRawValue</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+The service reads the reset type from the hardware register, if supported.</p>
+<p>Service ID[hex] : 0x06</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>Refer</strong> Mcu_RawResetType
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Mcu_RawResetType - Reset raw value</p>
+</section>
+<section id="function-mcu-setmode">
+<h3><span class="section-number">5.16.4.9. </span>function Mcu_SetMode<a class="headerlink" href="#function-mcu-setmode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Mcu_SetMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Mcu_ModeType</span><span class="w"> </span><span class="n">McuMode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service activates the MCU power modes. Supported low power modes - None.</p>
+<p>Service ID[hex] : 0x08</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>McuMode</strong> - MCU mode</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-mcu-getramstate">
+<h3><span class="section-number">5.16.4.10. </span>function Mcu_GetRamState<a class="headerlink" href="#function-mcu-getramstate" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Mcu_RamStateType</span><span class="w"> </span><span class="n">Mcu_GetRamState</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service provides the actual status of the microcontroller Ram, if supported.</p>
+<p>Service ID[hex] : 0x0a</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>Refer</strong> enum Mcu_RamStateType
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Mcu_RamStateType - Status of the Ram Content</p>
+</section>
+<section id="function-mcu-getversioninfo">
+<h3><span class="section-number">5.16.4.11. </span>function Mcu_GetVersionInfo<a class="headerlink" href="#function-mcu-getversioninfo" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Mcu_GetVersionInfo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">versioninfo</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service returns the version information of this module.</p>
+<p>Service ID[hex] : 0x0B</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>versioninfo</strong> - Pointer to where to store the version information of this module.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-mcu-deinit">
+<h3><span class="section-number">5.16.4.12. </span>function Mcu_DeInit<a class="headerlink" href="#function-mcu-deinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Mcu_DeInit</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service is only used for UT testing and not for app use This service sets the internal MCU initDone flag to FALSE so that Mcu_Init can be invoked again. This is required for negative UT test cases.</p>
+<p>Service ID[hex] : 0x09</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-mcu-registerreadback">
+<h3><span class="section-number">5.16.4.13. </span>function Mcu_RegisterReadback<a class="headerlink" href="#function-mcu-registerreadback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Mcu_RegisterReadback</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Mcu_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegisterReadbackPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This service is to read some of the config registers.</p>
+<p>Service ID[hex] : N/A</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>RegisterReadbackPtr</strong> - Pointer to Register readback data</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> Success
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> Failure
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="group___l_i_n.html" class="btn btn-neutral float-left" title="5.15. LIN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___p_o_r_t.html" class="btn btn-neutral float-right" title="5.17. PORT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Aug 27, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.00.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

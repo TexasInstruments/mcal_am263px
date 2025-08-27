@@ -1,0 +1,1115 @@
+---
+title: Port API GUIDE Header file
+
+---
+
+# PORT
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Port_DioDataDir](../Modules/group___p_o_r_t.md#enum-port_diodatadir)** | Enum of Dio module data direction control.  | 
+|enum| **[Port_DioDataIn](../Modules/group___p_o_r_t.md#enum-port_diodatain)** | Enum of DIO module Data Input register that reflects the current state of the pins.  | 
+|enum| **[Port_DioDataOut](../Modules/group___p_o_r_t.md#enum-port_diodataout)** | Enum of DIO module Data Output register that specify the output state of the pins when configured as output.  | 
+|enum| **[Port_DioOpenDrain_Mode](../Modules/group___p_o_r_t.md#enum-port_dioopendrain_mode)** | Enum of DIO module Open drain capability.  | 
+|enum| **[Port_DioIntrDET](../Modules/group___p_o_r_t.md#enum-port_diointrdet)** | Enum of DIO module SINGLE/BOTH Edge trigger interrupt.  | 
+|enum| **[Port_DioIntrPol](../Modules/group___p_o_r_t.md#enum-port_diointrpol)** | Enum of DIO module Rising/Falling edge interrupt.  | 
+|enum| **[Port_DioIntrLvl](../Modules/group___p_o_r_t.md#enum-port_diointrlvl)** | Enum of DIO module high/low level interrupt.  | 
+|enum| **[Port_DioIdleModeType](../Modules/group___p_o_r_t.md#enum-port_dioidlemodetype)** | Enum of DIO module idle mode configuration.  | 
+|enum| **[Port_DioClockGatingRatioType](../Modules/group___p_o_r_t.md#enum-port_dioclockgatingratiotype)** | Enum of DIO module Clock gating ratio for event detection.  | 
+|enum| **[Port_PinDirectionType](../Modules/group___p_o_r_t.md#enum-port_pindirectiontype)** | Enum of Port Direction used in Port_SetPinDirection()  | 
+|enum| **[Port_PinLevelValueType](../Modules/group___p_o_r_t.md#enum-port_pinlevelvaluetype)** | Enum of Port Level.  | 
+|enum| **[Port_PinSlewControlType](../Modules/group___p_o_r_t.md#enum-port_pinslewcontroltype)** | Enum of Port Slew Control.  | 
+|enum| **[Port_PinOutputOverrideCtrl](../Modules/group___p_o_r_t.md#enum-port_pinoutputoverridectrl)** | Enum of Port Pin Output override selection.  | 
+|enum| **[Port_PinInputOverrideCtrl](../Modules/group___p_o_r_t.md#enum-port_pininputoverridectrl)** | Enum of Port Pin Input override selection.  | 
+|enum| **[Port_PinPullSelectType](../Modules/group___p_o_r_t.md#enum-port_pinpullselecttype)** | Enum of Port Pin Up/Down Type selection.  | 
+|enum| **[Port_PinPullInhibitEnableType](../Modules/group___p_o_r_t.md#enum-port_pinpullinhibitenabletype)** | Enum of Port Pin pull inihibit selection.  | 
+|enum| **[Port_InputInversion](../Modules/group___p_o_r_t.md#enum-port_inputinversion)** | Enum of Port input inversion.  | 
+|enum| **[Port_InputQualType](../Modules/group___p_o_r_t.md#enum-port_inputqualtype)** | Enum of Port input qualifier type select.  | 
+|enum| **[Port_PinModeType](../Modules/group___p_o_r_t.md#enum-port_pinmodetype)** | Enum of Port Pin Mode selection.  | 
+|enum| **[Port_GpioBank](../Modules/group___p_o_r_t.md#enum-port_gpiobank)** | GPIO Bank Details.  | 
+|enum| **[Port_GpioChannel](../Modules/group___p_o_r_t.md#enum-port_gpiochannel)** | GPIO channels details.  | 
+|enum| **[Port_EdgeTrig](../Modules/group___p_o_r_t.md#enum-port_edgetrig)** | GPIO Pin Edge trigger intruppt selection.  | 
+|enum| **[Port_IntrType](../Modules/group___p_o_r_t.md#enum-port_intrtype)** | GPIO Interrupt Type.  | 
+|typedef uint16  | **[Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype)** | Type for symbolic name of Port pins.  | 
+|typedef void(*)(uint8 PortBankNum, uint8 PortBankChNum, Port_EdgeTrig Edge)  | **[Port_IsrNotificationType](../Modules/group___p_o_r_t.md#typedef-port_isrnotificationtype)** | Notification callback function pointer.  | 
+
+
+
+### enum Port_DioDataDir
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_DATA_DIRECTION_INPUT | | Input direction.   |
+| PORT_DIO_DATA_DIRECTION_OUTPUT | | Output direction.   |
+| PORT_DIO_DATA_DIRECTION_DEFAULT | | Default direction.   |
+
+
+
+
+**Brief**: 
+Enum of Dio module data direction control. 
+
+
+
+### enum Port_DioDataIn
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_DATA_INPUT_LOW | | Input Low state.   |
+| PORT_DIO_DATA_INPUT_HIGH | | Input High state.   |
+| PORT_DIO_DATA_INPUT_DEFAULT | | Input default state.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module Data Input register that reflects the current state of the pins. 
+
+
+
+### enum Port_DioDataOut
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_DATA_OUTPUT_LOW | | Output Low state.   |
+| PORT_DIO_DATA_OUTPUT_HIGH | | Output Low state.   |
+| PORT_DIO_DATA_OUTPUT_DEFAULT | | Output Low state.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module Data Output register that specify the output state of the pins when configured as output. 
+
+
+
+### enum Port_DioOpenDrain_Mode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_PDR_PUSHPULL_MODE | | Push Pull Mode.   |
+| PORT_DIO_PDR_OPEN_DRAIN_MODE | | Open drain Mode.   |
+| PORT_DIO_PDR_DEFAULT | | Default Mode.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module Open drain capability. 
+
+
+
+### enum Port_DioIntrDET
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_SINGLE_EDGE_INTERRUPT | | Single edge trigger interrupt.   |
+| PORT_DIO_BOTH_EDGE_INTERRUPT | | Both edge trigger interrupt.   |
+| PORT_DIO_DEFAULT_INTERRUPT | | Default interrupt.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module SINGLE/BOTH Edge trigger interrupt. 
+
+
+
+### enum Port_DioIntrPol
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_FALLING_EDGE_INTERRUPT | | Falling edge interrupt.   |
+| PORT_DIO_RISING_EDGE_INTERRUPT | | Rising edge interrupt.   |
+| PORT_DIO_DEFAULT_EDGE_INTERRUPT | | Default edge interrupt.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module Rising/Falling edge interrupt. 
+
+
+
+### enum Port_DioIntrLvl
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_LOW_LEVEL_INTERRUPT | | Low level interrupt.   |
+| PORT_DIO_HIGH_LEVEL_INTERRUPT | | High level interrupt.   |
+| PORT_DIO_DEFAULT_LEVEL_INTERRUPT | | Default level interrupt.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module high/low level interrupt. 
+
+
+
+### enum Port_DioIdleModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_IDLEMODE_DEFAULT | | IdleMode : Do not configure IDLEMODE. Retains default configuration.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module idle mode configuration. 
+
+
+
+### enum Port_DioClockGatingRatioType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_UNGATE | 0xFFFF| Clock gating ratio for event detection.   |
+
+
+
+
+**Brief**: 
+Enum of DIO module Clock gating ratio for event detection. 
+
+
+
+### enum Port_PinDirectionType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_OUT | | PORT_PIN_OUT.   |
+| PORT_PIN_IN | | PORT_PIN_IN.   |
+| PORT_PIN_DEFAULT | | PORT_PIN_DEFAULT.   |
+
+
+
+
+**Brief**: 
+Enum of Port Direction used in Port_SetPinDirection() 
+
+
+
+### enum Port_PinLevelValueType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_LEVEL_LOW | | Port Low level.   |
+| PORT_PIN_LEVEL_HIGH | | Port High level.   |
+
+
+
+
+**Brief**: 
+Enum of Port Level. 
+
+
+
+### enum Port_PinSlewControlType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_SLEWCONTROL_FAST_SLEW | | Fast slew control.   |
+| PORT_PIN_SLEWCONTROL_SLOW_SLEW | | Slow slew control.   |
+| PORT_PIN_SLEWCONTROL_DEFAULT | | Default slew control.   |
+
+
+
+
+**Brief**: 
+Enum of Port Slew Control. 
+
+
+
+### enum Port_PinOutputOverrideCtrl
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_DISABLE_OUTPUT_OVERRIDE | | Disable Output override.   |
+| PORT_PIN_ENABLE_OUTPUT_OVERRIDE | | Enable Output override.   |
+| PORT_PIN_OUTPUT_RETAIN_HW_CTRL | | Retain HW control.   |
+
+
+
+
+**Brief**: 
+Enum of Port Pin Output override selection. 
+
+
+
+### enum Port_PinInputOverrideCtrl
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_DISABLE_INPUT_OVERRIDE | | Disable Input override.   |
+| PORT_PIN_ENABLE_INPUT_OVERRIDE | | Enable Input override.   |
+| PORT_PIN_INPUT_RETAIN_HW_CTRL | | Retain HW control.   |
+
+
+
+
+**Brief**: 
+Enum of Port Pin Input override selection. 
+
+
+
+### enum Port_PinPullSelectType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_PULLTYPE_PULLDOWN | | Port pull down.   |
+| PORT_PIN_PULLTYPE_PULLUP | | Port pull up.   |
+| PORT_PIN_PULLTYPE_DEFAULT | | Port Default.   |
+
+
+
+
+**Brief**: 
+Enum of Port Pin Up/Down Type selection. 
+
+
+
+### enum Port_PinPullInhibitEnableType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_PULL_INHIBIT_ENABLE | | Enable inhibit.   |
+| PORT_PIN_PULL_INHIBIT_DISABLE | | Disable inhibit.   |
+| PORT_PIN_PULL_INHIBIT_DEFAULT | | Default inhibit.   |
+
+
+
+
+**Brief**: 
+Enum of Port Pin pull inihibit selection. 
+
+
+
+### enum Port_InputInversion
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_NONINV | | Port Non inversion.   |
+| PORT_INV | | Port inversion.   |
+| PORT_INVTYPE_DEFAULT | | Port Default.   |
+
+
+
+
+**Brief**: 
+Enum of Port input inversion. 
+
+
+
+### enum Port_InputQualType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_SYNC_QUAL | |   |
+| PORT_THREE_SAMPLE_QUAL | |   |
+| PORT_SIX_SAMPLE_QUAL | |   |
+| PORT_ASYNC_QUAL | |   |
+| PORT_QUALTYPE_DEFAULT | |   |
+
+
+
+
+**Brief**: 
+Enum of Port input qualifier type select. 
+
+
+
+### enum Port_PinModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_PIN_MODE_GPIOAB | | Set Pin for GPIO Port AB mode.   |
+| PORT_PIN_MODE_GPIOCD | | Set Pin for GPIO Port CD mode.   |
+| PORT_PIN_MODE_GPIOEF | | Set Pin for GPIO Port EF mode.   |
+| PORT_PIN_MODE_GPIOGH | | Set Pin for GPIO Port GH mode.   |
+| PORT_PIN_MODE_GPIOI | | Set Pin for GPIO mode.   |
+| PORT_PIN_MODE_MCAN0 | | Set Pin for MCAN0 (CAN FD) mode.   |
+| PORT_PIN_MODE_MCAN1 | | Set Pin for MCAN1 (CAN FD) mode.   |
+| PORT_PIN_MODE_MCAN2 | | Set Pin for MCAN2(CAN FD) mode.   |
+| PORT_PIN_MODE_MCAN3 | | Set Pin for MCAN3(CAN FD) mode.   |
+| PORT_PIN_MODE_MCAN4 | | Set Pin for MCAN4 (CAN FD) mode.   |
+| PORT_PIN_MODE_MCAN5 | | Set Pin for MCAN5 (CAN FD) mode.   |
+| PORT_PIN_MODE_MCAN6 | | Set Pin for MCAN6(CAN FD) mode.   |
+| PORT_PIN_MODE_MCAN7 | | Set Pin for MCAN7(CAN FD) mode.   |
+| PORT_PIN_MODE_SPI0 | | Set Pin for MIBSPI0 mode.   |
+| PORT_PIN_MODE_SPI1 | | Set Pin for MIBSPI1 mode.   |
+| PORT_PIN_MODE_SPI2 | | Set Pin for MIBSPI2 mode.   |
+| PORT_PIN_MODE_SPI3 | | Set Pin for MIBSPI3 mode.   |
+| PORT_PIN_MODE_SPI4 | | Set Pin for MIBSPI4 mode.   |
+| PORT_PIN_MODE_SPI5 | | Set Pin for MIBSPI2 mode.   |
+| PORT_PIN_MODE_SPI6 | | Set Pin for MIBSPI3 mode.   |
+| PORT_PIN_MODE_SPI7 | | Set Pin for MIBSPI4 mode.   |
+| PORT_PIN_MODE_OSPI0 | | Set Pin for OSPI0 mode.   |
+| PORT_PIN_MODE_JTAG | | Set Pin for JTAG mode.   |
+| PORT_PIN_MODE_TRACE | | Set Pin for TRACE mode.   |
+| PORT_PIN_MODE_I2C0 | | Set Pin for I2C0 mode.   |
+| PORT_PIN_MODE_I2C1 | | Set Pin for I2C1 mode.   |
+| PORT_PIN_MODE_I2C2 | | Set Pin for I2C2 mode.   |
+| PORT_PIN_MODE_I2C3 | | Set Pin for I2C3 mode.   |
+| PORT_PIN_MODE_MII | | Set Pin for MII mode.   |
+| PORT_PIN_MODE_RMII1 | | Set Pin for RMII1 mode.   |
+| PORT_PIN_MODE_RMII2 | | Set Pin for RMII2 mode.   |
+| PORT_PIN_MODE_RGMII1 | | Set Pin for RGMII1 mode.   |
+| PORT_PIN_MODE_RGMII2 | | Set Pin for RGMII2 mode.   |
+| PORT_PIN_MODE_MDIO | | Set Pin for MDIO mode.   |
+| PORT_PIN_MODE_CPTS0 | | Set Pin for CPTS0 mode.   |
+| PORT_PIN_MODE_UART0 | | Set Pin for UART0 modes.   |
+| PORT_PIN_MODE_UART1 | | Set Pin for UART1 modes.   |
+| PORT_PIN_MODE_UART2 | | Set Pin for UART2 modes.   |
+| PORT_PIN_MODE_UART3 | | Set Pin for UART3 modes.   |
+| PORT_PIN_MODE_UART4 | | Set Pin for UART3 modes.   |
+| PORT_PIN_MODE_UART5 | | Set Pin for UART5 modes.   |
+| PORT_PIN_MODE_PRU_ICSS | | Set Pin for ECAP0 mode.   |
+| PORT_PIN_MODE_PRU_ICSS_UART | | Set Pin for UART0 mode.   |
+| PORT_PIN_MODE_LIN0 | | Set Pin for LIN0 mode.   |
+| PORT_PIN_MODE_LIN1 | | Set Pin for LIN1 mode.   |
+| PORT_PIN_MODE_LIN2 | | Set Pin for LIN2 mode.   |
+| PORT_PIN_MODE_LIN3 | | Set Pin for LIN3 mode.   |
+| PORT_PIN_MODE_LIN4 | | Set Pin for LIN mode.   |
+| PORT_PIN_MODE_EPWM0 | | Set Pin for EPWM0 mode.   |
+| PORT_PIN_MODE_EPWM1 | | Set Pin for EPWM1 mode.   |
+| PORT_PIN_MODE_EPWM2 | | Set Pin for EPWM2 mode.   |
+| PORT_PIN_MODE_EPWM3 | | Set Pin for EPWM3A mode.   |
+| PORT_PIN_MODE_EPWM4 | | Set Pin for EPWM1A mode.   |
+| PORT_PIN_MODE_EPWM5 | | Set Pin for EPWM5A mode.   |
+| PORT_PIN_MODE_EPWM6 | | Set Pin for EPWM6A mode.   |
+| PORT_PIN_MODE_EPWM7 | | Set Pin for EPWM7A mode.   |
+| PORT_PIN_MODE_EPWM8 | | Set Pin for EPWM8A mode.   |
+| PORT_PIN_MODE_EPWM9 | | Set Pin for EPWM9A mode.   |
+| PORT_PIN_MODE_EPWM10 | | Set Pin for EPWM510. mode.   |
+| PORT_PIN_MODE_EPWM11 | | Set Pin for EPWM11A mode.   |
+| PORT_PIN_MODE_EPWM12 | | Set Pin for EPWM12A mode.   |
+| PORT_PIN_MODE_EPWM13 | |  \briefSet Pin for EPWM13A mode  |
+| PORT_PIN_MODE_EPWM14 | | Set Pin for EPWM14A mode.   |
+| PORT_PIN_MODE_EPWM15 | | Set Pin for EPWM15A mode.   |
+| PORT_PIN_MODE_EPWM16 | | Set Pin for EPWM16A mode.   |
+| PORT_PIN_MODE_EPWM17 | | Set Pin for EPWM17A mode.   |
+| PORT_PIN_MODE_EPWM18 | | Set Pin for EPWM18A mode.   |
+| PORT_PIN_MODE_EPWM19 | | Set Pin for EPWM19A mode.   |
+| PORT_PIN_MODE_EPWM20 | | Set Pin for EPWM20A mode.   |
+| PORT_PIN_MODE_EPWM21 | | Set Pin for EPWM21A mode.   |
+| PORT_PIN_MODE_EPWM22 | | Set Pin for EPW22A mode.   |
+| PORT_PIN_MODE_EPWM23 | | Set Pin for EPWM23A mode.   |
+| PORT_PIN_MODE_EPWM24 | | Set Pin for EPWM24A mode.   |
+| PORT_PIN_MODE_EPWM25 | | Set Pin for EPWM25A mode.   |
+| PORT_PIN_MODE_EPWM26 | | Set Pin for EPWM26A mode.   |
+| PORT_PIN_MODE_EPWM27 | | Set Pin for EPWM27A mode.   |
+| PORT_PIN_MODE_EPWM28 | | Set Pin for EPWM28A mode.   |
+| PORT_PIN_MODE_EPWM29 | | Set Pin for EPWM29A mode.   |
+| PORT_PIN_MODE_EPWM30 | | Set Pin for EPWM30A mode.   |
+| PORT_PIN_MODE_EPWM31 | | Set Pin for EPWM31A mode.   |
+| PORT_PIN_MODE_OUTPUTXBAR | | Set Pin for XBAR mode.   |
+| PORT_PIN_MODE_XBAROUT | | Set Pin for XBAR mode.   |
+| PORT_PIN_MODE_TRC | | Set Pin for TRC.   |
+| PORT_PIN_MODE_SDFM0 | | Set Pin for SDFM0.   |
+| PORT_PIN_MODE_SDFM1 | | Set Pin for SDFM1.   |
+| PORT_PIN_MODE_MMC | | Set Pin for MMC0.   |
+| PORT_PIN_MODE_FSIRX0 | | Set Pin for FSIRX0.   |
+| PORT_PIN_MODE_FSIRX1 | | Set Pin for FSIRX1.   |
+| PORT_PIN_MODE_FSIRX2 | | Set Pin for FSIRX2.   |
+| PORT_PIN_MODE_FSIRX3 | | Set Pin for FSIRX3.   |
+| PORT_PIN_MODE_FSITX0 | | Set Pin for FSITX0.   |
+| PORT_PIN_MODE_FSITX1 | | Set Pin for FSITX1.   |
+| PORT_PIN_MODE_FSITX2 | | Set Pin for FSITX2.   |
+| PORT_PIN_MODE_FSITX3 | | Set Pin for FSITX3.   |
+| PORT_PIN_MODE_EQEP0 | | Set Pin for EQEP0.   |
+| PORT_PIN_MODE_EQEP1 | | Set Pin for EQEP1.   |
+| PORT_PIN_MODE_EQEP2 | | Set Pin for EQEP2.   |
+| PORT_PIN_MODE_PRU_ICSS_IEP | | Set Pin for IEP0.   |
+| PORT_PIN_MODE_SYSTEM | | Set Pin for SYSTEM.   |
+| PORT_PIN_MODE_EXT_REFCLK | | Set Pin for EXT_REFCLK.   |
+| PORT_PIN_MODE_PRU_ICSS_MDIO | | Set Pin for PRU_ICSS_MDIO.   |
+| PORT_PIN_MODE_INVALID | | Invalid pin mode. For internal use.   |
+| PORT_PIN_MODE_PR0_UART0 | | Set Pin for PR0_UART0.   |
+| PORT_PIN_MODE_PR0_MDIO | | Set Pin for PR0_MDIO.   |
+| PORT_PIN_MODE_PR0_IEP0 | | Set Pin for PR0_IEP0.   |
+| PORT_PIN_MODE_PR0_ECAP0 | | Set Pin for PR0_ECAP0.   |
+| PORT_PIN_MODE_PR0_PRU0 | | Set Pin for PR0_PRU0.   |
+| PORT_PIN_MODE_PR0_PRU1 | |   |
+| PORT_PIN_MODE_CLKOUT | | Set Pin for CLKOUT.   |
+
+
+
+
+**Brief**: 
+Enum of Port Pin Mode selection. 
+
+
+
+### enum Port_GpioBank
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_GPIO_BANK_0 | 0| Bank A.   |
+| PORT_GPIO_BANK_1 | 1| Bank B.   |
+| PORT_GPIO_BANK_2 | 2| Bank C.   |
+| PORT_GPIO_BANK_3 | 3| Bank D.   |
+| PORT_GPIO_BANK_4 | 4| Bank E.   |
+| PORT_GPIO_BANK_5 | 5| Bank F.   |
+| PORT_GPIO_BANK_6 | 6| Bank G.   |
+| PORT_GPIO_BANK_7 | 7| Bank H.   |
+| PORT_GPIO_BANK_8 | 8| Bank I.   |
+
+
+
+
+**Brief**: 
+GPIO Bank Details. 
+
+
+
+### enum Port_GpioChannel
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_GPIO_CH_0 | 0|   |
+| PORT_GPIO_CH_1 | 1|   |
+| PORT_GPIO_CH_2 | 2|   |
+| PORT_GPIO_CH_3 | 3|   |
+| PORT_GPIO_CH_4 | 4|   |
+| PORT_GPIO_CH_5 | 5|   |
+| PORT_GPIO_CH_6 | 6|   |
+| PORT_GPIO_CH_7 | 7|   |
+| PORT_GPIO_CH_8 | 8|   |
+| PORT_GPIO_CH_9 | 9|   |
+| PORT_GPIO_CH_10 | 10|   |
+| PORT_GPIO_CH_11 | 11|   |
+| PORT_GPIO_CH_12 | 12|   |
+| PORT_GPIO_CH_13 | 13|   |
+| PORT_GPIO_CH_14 | 14|   |
+| PORT_GPIO_CH_15 | 15|   |
+| PORT_GPIO_CH_16 | 16|   |
+| PORT_GPIO_CH_17 | 17|   |
+| PORT_GPIO_CH_18 | 18|   |
+| PORT_GPIO_CH_19 | 19|   |
+| PORT_GPIO_CH_20 | 20|   |
+| PORT_GPIO_CH_21 | 21|   |
+| PORT_GPIO_CH_22 | 22|   |
+| PORT_GPIO_CH_23 | 23|   |
+| PORT_GPIO_CH_24 | 24|   |
+| PORT_GPIO_CH_25 | 25|   |
+| PORT_GPIO_CH_26 | 26|   |
+| PORT_GPIO_CH_27 | 27|   |
+| PORT_GPIO_CH_28 | 28|   |
+| PORT_GPIO_CH_29 | 29|   |
+| PORT_GPIO_CH_30 | 30|   |
+| PORT_GPIO_CH_31 | 31|   |
+| PORT_GPIO_CH_32 | 32|   |
+| PORT_GPIO_CH_33 | 33|   |
+| PORT_GPIO_CH_34 | 34|   |
+| PORT_GPIO_CH_35 | 35|   |
+| PORT_GPIO_CH_36 | 36|   |
+| PORT_GPIO_CH_37 | 37|   |
+| PORT_GPIO_CH_38 | 38|   |
+| PORT_GPIO_CH_39 | 39|   |
+| PORT_GPIO_CH_40 | 40|   |
+| PORT_GPIO_CH_41 | 41|   |
+| PORT_GPIO_CH_42 | 42|   |
+| PORT_GPIO_CH_43 | 43|   |
+| PORT_GPIO_CH_44 | 44|   |
+| PORT_GPIO_CH_45 | 45|   |
+| PORT_GPIO_CH_46 | 46|   |
+| PORT_GPIO_CH_47 | 47|   |
+| PORT_GPIO_CH_48 | 48|   |
+| PORT_GPIO_CH_49 | 49|   |
+| PORT_GPIO_CH_50 | 50|   |
+| PORT_GPIO_CH_51 | 51|   |
+| PORT_GPIO_CH_52 | 52|   |
+| PORT_GPIO_CH_53 | 53|   |
+| PORT_GPIO_CH_54 | 54|   |
+| PORT_GPIO_CH_55 | 55|   |
+| PORT_GPIO_CH_56 | 56|   |
+| PORT_GPIO_CH_57 | 57|   |
+| PORT_GPIO_CH_58 | 58|   |
+| PORT_GPIO_CH_59 | 59|   |
+| PORT_GPIO_CH_60 | 60|   |
+| PORT_GPIO_CH_61 | 61|   |
+| PORT_GPIO_CH_62 | 62|   |
+| PORT_GPIO_CH_63 | 63|   |
+| PORT_GPIO_CH_64 | 64|   |
+| PORT_GPIO_CH_65 | 65|   |
+| PORT_GPIO_CH_66 | 66|   |
+| PORT_GPIO_CH_67 | 67|   |
+| PORT_GPIO_CH_68 | 68|   |
+| PORT_GPIO_CH_69 | 69|   |
+| PORT_GPIO_CH_70 | 70|   |
+| PORT_GPIO_CH_71 | 71|   |
+| PORT_GPIO_CH_72 | 72|   |
+| PORT_GPIO_CH_73 | 73|   |
+| PORT_GPIO_CH_74 | 74|   |
+| PORT_GPIO_CH_75 | 75|   |
+| PORT_GPIO_CH_76 | 76|   |
+| PORT_GPIO_CH_77 | 77|   |
+| PORT_GPIO_CH_78 | 78|   |
+| PORT_GPIO_CH_79 | 79|   |
+| PORT_GPIO_CH_80 | 80|   |
+| PORT_GPIO_CH_81 | 81|   |
+| PORT_GPIO_CH_82 | 82|   |
+| PORT_GPIO_CH_83 | 83|   |
+| PORT_GPIO_CH_84 | 84|   |
+| PORT_GPIO_CH_85 | 85|   |
+| PORT_GPIO_CH_86 | 86|   |
+| PORT_GPIO_CH_87 | 87|   |
+| PORT_GPIO_CH_88 | 88|   |
+| PORT_GPIO_CH_89 | 89|   |
+| PORT_GPIO_CH_90 | 90|   |
+| PORT_GPIO_CH_91 | 91|   |
+| PORT_GPIO_CH_92 | 92|   |
+| PORT_GPIO_CH_93 | 93|   |
+| PORT_GPIO_CH_94 | 94|   |
+| PORT_GPIO_CH_95 | 95|   |
+| PORT_GPIO_CH_96 | 96|   |
+| PORT_GPIO_CH_97 | 97|   |
+| PORT_GPIO_CH_98 | 98|   |
+| PORT_GPIO_CH_99 | 99|   |
+| PORT_GPIO_CH_100 | 100|   |
+| PORT_GPIO_CH_101 | 101|   |
+| PORT_GPIO_CH_102 | 102|   |
+| PORT_GPIO_CH_103 | 103|   |
+| PORT_GPIO_CH_104 | 104|   |
+| PORT_GPIO_CH_105 | 105|   |
+| PORT_GPIO_CH_106 | 106|   |
+| PORT_GPIO_CH_107 | 107|   |
+| PORT_GPIO_CH_108 | 108|   |
+| PORT_GPIO_CH_109 | 109|   |
+| PORT_GPIO_CH_110 | 110|   |
+| PORT_GPIO_CH_111 | 111|   |
+| PORT_GPIO_CH_112 | 112|   |
+| PORT_GPIO_CH_113 | 113|   |
+| PORT_GPIO_CH_114 | 114|   |
+| PORT_GPIO_CH_115 | 115|   |
+| PORT_GPIO_CH_116 | 116|   |
+| PORT_GPIO_CH_117 | 117|   |
+| PORT_GPIO_CH_118 | 118|   |
+| PORT_GPIO_CH_119 | 119|   |
+| PORT_GPIO_CH_120 | 120|   |
+| PORT_GPIO_CH_121 | 121|   |
+| PORT_GPIO_CH_122 | 122|   |
+| PORT_GPIO_CH_123 | 123|   |
+| PORT_GPIO_CH_124 | 124|   |
+| PORT_GPIO_CH_125 | 125|   |
+| PORT_GPIO_CH_126 | 126|   |
+| PORT_GPIO_CH_127 | 127|   |
+| PORT_GPIO_CH_128 | 128|   |
+| PORT_GPIO_CH_129 | 129|   |
+| PORT_GPIO_CH_130 | 130|   |
+| PORT_GPIO_CH_131 | 131|   |
+| PORT_GPIO_CH_132 | 132|   |
+| PORT_GPIO_CH_133 | 133|   |
+| PORT_GPIO_CH_134 | 134|   |
+| PORT_GPIO_CH_135 | 135|   |
+| PORT_GPIO_CH_136 | 136|   |
+| PORT_GPIO_CH_137 | 137|   |
+| PORT_GPIO_CH_138 | 138|   |
+
+
+
+
+**Brief**: 
+GPIO channels details. 
+
+
+
+### enum Port_EdgeTrig
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_FALLING_EDGE | 0|   |
+| PORT_RISING_EDGE | |   |
+| PORT_BOTH_EDGE | |   |
+
+
+
+
+**Brief**: 
+GPIO Pin Edge trigger intruppt selection. 
+
+
+
+### enum Port_IntrType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_CHANNEL_INTR | 0|   |
+| PORT_BANK_INTR | |   |
+
+
+
+
+**Brief**: 
+GPIO Interrupt Type. 
+
+
+
+### typedef Port_PinType
+```
+typedef uint16 Port_PinType;
+```
+
+
+**Brief**: 
+Type for symbolic name of Port pins. 
+
+
+
+### typedef Port_IsrNotificationType
+```
+typedef void(* Port_IsrNotificationType) (uint8 PortBankNum, uint8 PortBankChNum, Port_EdgeTrig Edge);
+```
+
+
+**Brief**: 
+Notification callback function pointer. 
+
+PortBankNum --> GPIO bank numbers[A(0) to I(8)] , If configured as bank interrupt else value PORT_INTR_ERROR_ID
+
+PortBankChNum --> GPIO Channel numbers[0 to 138] , If configured as channel interrupt else value PORT_INTR_ERROR_ID 
+
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[Port_ConfigRegsType](../Classes/struct_port___config_regs_type.md)** | Structure for Cfg Registers.  |
+| **[Port_IntrStatus](../Classes/struct_port___intr_status.md)** | GPIO Pin Intruppt Registers Status.  |
+| **[Port_PinModeConfigType](../Classes/struct_port___pin_mode_config_type.md)** | Pin Mode map structure.  |
+| **[Port_PinConfigType](../Classes/struct_port___pin_config_type.md)** | Pin Configuration structure.  |
+| **[Port_DioRegConfigType](../Classes/struct_port___dio_reg_config_type.md)** | Port GPIO initialization configuration.  |
+| **[Port_ConfigType](../Classes/struct_port___config_type.md)** | PORT Module ROOT configuration.  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| PORT_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| PORT_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| PORT_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| PORT_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by PORT Driver.  |
+| PORT_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by PORT Driver.  |
+| PORT_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by PORT Driver.  |
+| PORT_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| PORT_MODULE_ID   | PORT Driver Module ID.  |
+| PORT_INSTANCE_ID   | PORT Driver Instance ID.  |
+| PORT_E_PARAM_PIN   | ERROR: Invalid Port Pin ID requested.  |
+| PORT_E_DIRECTION_UNCHANGEABLE   | ERROR:Port Pin not configured as changeable.  |
+| PORT_E_INIT_FAILED   | ERROR:Init service called with wrong parameter.  |
+| PORT_E_PARAM_INVALID_MODE   | ERROR:Invalid mode setting for PORT pin.  |
+| PORT_E_MODE_UNCHANGEABLE   | ERROR:PORT pin disallows mode change.  |
+| PORT_E_UNINIT   | ERROR:PORT API called without init being invoked.  |
+| PORT_E_PARAM_POINTER   | ERROR:API invoked with NULL_PTR.  |
+| PORT_E_INVALID_GPIO_PORT_ADDRESS   | ERROR:API invoked with INVALID gpio port address.  |
+| PORT_SID_INIT   | Port_Init()  |
+| PORT_SID_SET_PIN_DIR   | Port_SetPinDirection()  |
+| PORT_SID_REFRESH_PORT_DIR   | Port_RefreshPortDirection()  |
+| PORT_SID_GET_VERSION_INFO   | Port_GetVersionInfo()  |
+| PORT_SID_SET_PIN_MODE   | Port_SetPinMode()  |
+| PORT_SID_ENABLE_INTR   | Port_PinEnableIntrNotification()  |
+| PORT_SID_DISABLE_INTR   | Port_PinDisableIntrNotification()  |
+| PORT_SID_GET_INTR_ST   | Port_GetInterruptStatus()  |
+| PORT_SID_CLR_INTR_ST   | Port_ClearInterruptStatus()  |
+| PORT_DIO_INVALID_REG_ID   | PORT DIO Invalid GPIO register Id.  |
+| PORT_DIO_INVALID_CH_ID   | PORT DIO Invalid GPIO Channel Id.  |
+| PORT_ISR_VOID   | void ISR type  |
+| PORT_ISR_CAT1   | Category 1 ISR type.  |
+| PORT_ISR_CAT2   | Category 2 ISR type.  |
+| PORT_GPIO_PORT_WIDTH   | Valid Port width.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Port_Init](../Modules/group___p_o_r_t.md#function-port_init)**(const [Port_ConfigType](../Classes/struct_port___config_type.md) * ConfigPtr)| Initializes the Port Driver module.  |
+| void | **[Port_SetPinDirection](../Modules/group___p_o_r_t.md#function-port_setpindirection)**([Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) Pin, [Port_PinDirectionType](../Modules/group___p_o_r_t.md#enum-port_pindirectiontype) Direction)| Sets the port pin direction.  |
+| void | **[Port_RefreshPortDirection](../Modules/group___p_o_r_t.md#function-port_refreshportdirection)**(void )| Refreshes port direction.  |
+| void | **[Port_SetPinMode](../Modules/group___p_o_r_t.md#function-port_setpinmode)**([Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) Pin, [Port_PinModeType](../Modules/group___p_o_r_t.md#enum-port_pinmodetype) Mode)| Sets the port pin mode.  |
+| void | **[Port_GetVersionInfo](../Modules/group___p_o_r_t.md#function-port_getversioninfo)**(Std_VersionInfoType * versioninfo)| Returns the version information of this module.  |
+| void | **[Port_DeInit](../Modules/group___p_o_r_t.md#function-port_deinit)**(void )| This service sets the internal PORT initDone flag to FALSE so that Port_Init can be invoked again. This is required for negative UT test cases.  |
+| void | **[Port_GetConfigRegValues](../Modules/group___p_o_r_t.md#function-port_getconfigregvalues)**(uint8 initial, [Port_ConfigRegsType](../Classes/struct_port___config_regs_type.md) * ConfigRegPtr)| This service returns current/initial configuration items as from the GUI.  |
+| void | **[Port_PinEnableIntrNotification](../Modules/group___p_o_r_t.md#function-port_pinenableintrnotification)**([Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) Pin)| Enable Port Interrupt Functionality.  |
+| void | **[Port_PinDisableIntrNotification](../Modules/group___p_o_r_t.md#function-port_pindisableintrnotification)**([Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) Pin)| Disable Port Interrupt Functionality.  |
+| uint32 | **[Port_GetInterruptStatus](../Modules/group___p_o_r_t.md#function-port_getinterruptstatus)**([Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) bankIdx)| Get Interrupt Status.  |
+| void | **[Port_ClearInterruptStatus](../Modules/group___p_o_r_t.md#function-port_clearinterruptstatus)**([Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) bankIdx, uint32 maskValue)| Clear Interrupt Status.  |
+
+
+
+### function Port_Init
+
+```
+void Port_Init(
+    const Port_ConfigType * ConfigPtr
+)
+```
+
+
+**Brief**: 
+Initializes the Port Driver module. 
+
+Service ID[hex] - 0x00
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **ConfigPtr** - Pointer to configuration set. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_SetPinDirection
+
+```
+void Port_SetPinDirection(
+    Port_PinType Pin,
+    Port_PinDirectionType Direction
+)
+```
+
+
+**Brief**: 
+Sets the port pin direction. 
+
+Service ID[hex] - 0x01
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Pin** - Port Pin ID number 
+  
+* **Direction** - Port_SetPinDirection 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_RefreshPortDirection
+
+```
+void Port_RefreshPortDirection(
+    void 
+)
+```
+
+
+**Brief**: 
+Refreshes port direction. 
+
+Service ID[hex] - 0x02
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_SetPinMode
+
+```
+void Port_SetPinMode(
+    Port_PinType Pin,
+    Port_PinModeType Mode
+)
+```
+
+
+**Brief**: 
+Sets the port pin mode. 
+
+Service ID[hex] - 0x04
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Pin** - Port Pin ID number 
+  
+* **Mode** - New Port Pin mode to be set on port pin 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_GetVersionInfo
+
+```
+void Port_GetVersionInfo(
+    Std_VersionInfoType * versioninfo
+)
+```
+
+
+**Brief**: 
+Returns the version information of this module. 
+
+Service ID[hex] - 0x03
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **versioninfo** - Pointer to where to store the version information of this module 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_DeInit
+
+```
+void Port_DeInit(
+    void 
+)
+```
+
+
+**Brief**: 
+This service sets the internal PORT initDone flag to FALSE so that Port_Init can be invoked again. This is required for negative UT test cases. 
+
+This service is only used for UT testing and not for app use
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+This service sets the internal PORT initDone flag to FALSE so that Port_Init can be invoked again. This is required for negative UT test cases. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_GetConfigRegValues
+
+```
+void Port_GetConfigRegValues(
+    uint8 initial,
+    Port_ConfigRegsType * ConfigRegPtr
+)
+```
+
+
+**Brief**: 
+This service returns current/initial configuration items as from the GUI. 
+
+Function could be called from interrupt level or from task level, Output parameter must not be NULL_PTR, TRUE/FALSE should be passed as initial parameter.
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **initial** 
+  
+* **ConfigRegPtr** - pointer to store the configuration read from GUI 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_PinEnableIntrNotification
+
+```
+void Port_PinEnableIntrNotification(
+    Port_PinType Pin
+)
+```
+
+
+**Brief**: 
+Enable Port Interrupt Functionality. 
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Pin** - GPIO Pin Number 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_PinDisableIntrNotification
+
+```
+void Port_PinDisableIntrNotification(
+    Port_PinType Pin
+)
+```
+
+
+**Brief**: 
+Disable Port Interrupt Functionality. 
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Pin** - GPIO Pin Number 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Port_GetInterruptStatus
+
+```
+uint32 Port_GetInterruptStatus(
+    Port_PinType bankIdx
+)
+```
+
+
+**Brief**: 
+Get Interrupt Status. 
+
+Read Bank Interrupt Status Register (INTSTAT)
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **bankIdx** - GPIO Bank Number (BankA_0 to BankI_8) 
+
+
+**Returns**: 
+
+  
+* **INTSTAT** Register Value 
+<br> 
+
+
+**Return**: uint32 
+
+### function Port_ClearInterruptStatus
+
+```
+void Port_ClearInterruptStatus(
+    Port_PinType bankIdx,
+    uint32 maskValue
+)
+```
+
+
+**Brief**: 
+Clear Interrupt Status. 
+
+Clear Bank Interrupt Status Register (INTSTAT)
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **bankIdx** - GPIO Bank Number (BankA_0 to BankI_8) 
+  
+* **maskValue** - Bits Mask Value 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+
+
+
+

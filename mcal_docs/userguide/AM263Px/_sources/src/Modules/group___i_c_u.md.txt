@@ -1,0 +1,1238 @@
+---
+title: Icu API GUIDE Header file
+
+---
+
+# ICU
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Icu_ModeType](../Modules/group___i_c_u.md#enum-icu_modetype)** | This type defines a range of mode type.  | 
+|enum| **[Icu_InputStateType](../Modules/group___i_c_u.md#enum-icu_inputstatetype)** | This type defines a input state of ICU driver.  | 
+|enum| **[Icu_ActivationType](../Modules/group___i_c_u.md#enum-icu_activationtype)** | This type defines Activation range.  | 
+|enum| **[Icu_XbarSelect](../Modules/group___i_c_u.md#enum-icu_xbarselect)** | This type defines Input XBAR.  | 
+|enum| **[Icu_IntrCapSelect](../Modules/group___i_c_u.md#enum-icu_intrcapselect)** | This type defines ECAP selection.  | 
+|enum| **[Icu_MeasurementModeType](../Modules/group___i_c_u.md#enum-icu_measurementmodetype)** | This type defines available measurement modes.  | 
+|enum| **[Icu_SignalMeasurementPropertyType](../Modules/group___i_c_u.md#enum-icu_signalmeasurementpropertytype)** | This type defines Signal Measurement Property range.  | 
+|enum| **[Icu_TimestampBufferType](../Modules/group___i_c_u.md#enum-icu_timestampbuffertype)** | This type defines TimeStamp Property range.  | 
+|typedef uint16  | **[Icu_ValueType](../Modules/group___i_c_u.md#typedef-icu_valuetype)** | This type defines Value type.  | 
+|typedef uint32  | **[Icu_IndexType](../Modules/group___i_c_u.md#typedef-icu_indextype)** | This type defines return value Icu_GetTimeStampIndex.  | 
+|typedef uint32  | **[Icu_EdgeNumberType](../Modules/group___i_c_u.md#typedef-icu_edgenumbertype)** | This type defines return value of Icu-Icu_GetEdgeNumbers.  | 
+|typedef void(*)(void)  | **[Icu_NotifyFuncType](../Modules/group___i_c_u.md#typedef-icu_notifyfunctype)** | Notification callback function pointer.  | 
+|typedef uint8  | **[Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype)** | This type defines Channel type.  | 
+|typedef uint8  | **[Icu_ChannelPrescalerType](../Modules/group___i_c_u.md#typedef-icu_channelprescalertype)** | This type defines Prescaler type.  | 
+
+
+
+### enum Icu_ModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ICU_MODE_NORMAL | | Normal Mode.   |
+| ICU_MODE_SLEEP | | Sleep Mode.   |
+
+
+
+
+**Brief**: 
+This type defines a range of mode type. 
+
+
+
+### enum Icu_InputStateType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ICU_ACTIVE | | Module is in active state.   |
+| ICU_IDLE | | Module is in idle state.   |
+
+
+
+
+**Brief**: 
+This type defines a input state of ICU driver. 
+
+
+
+### enum Icu_ActivationType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ICU_RISING_EDGE | | Rising Edge Activation type.   |
+| ICU_FALLING_EDGE | | Falling Edge Activation type.   |
+| ICU_BOTH_EDGES | | Both Edge Activation type.   |
+
+
+
+
+**Brief**: 
+This type defines Activation range. 
+
+
+
+### enum Icu_XbarSelect
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| INPUT_XBAR_0 | 202| XBAR 0.   |
+| INPUT_XBAR_1 | | XBAR 1.   |
+| INPUT_XBAR_2 | | XBAR 2.   |
+| INPUT_XBAR_3 | | XBAR 3.   |
+| INPUT_XBAR_4 | | XBAR 4.   |
+| INPUT_XBAR_5 | | XBAR 5.   |
+| INPUT_XBAR_6 | | XBAR 6.   |
+| INPUT_XBAR_7 | | XBAR 7.   |
+| INPUT_XBAR_8 | | XBAR 8.   |
+| INPUT_XBAR_9 | | XBAR 9.   |
+| INPUT_XBAR_10 | | XBAR 10.   |
+| INPUT_XBAR_11 | | XBAR 11.   |
+| INPUT_XBAR_12 | | XBAR 12.   |
+| INPUT_XBAR_13 | | XBAR 13.   |
+| INPUT_XBAR_14 | | XBAR 14.   |
+| INPUT_XBAR_15 | | XBAR 15.   |
+| INPUT_XBAR_16 | | XBAR 16.   |
+| INPUT_XBAR_17 | | XBAR 17.   |
+| INPUT_XBAR_18 | | XBAR 18.   |
+| INPUT_XBAR_19 | | XBAR 19.   |
+| INPUT_XBAR_20 | | XBAR 20.   |
+| INPUT_XBAR_21 | | XBAR 21.   |
+| INPUT_XBAR_22 | | XBAR 22.   |
+| INPUT_XBAR_23 | | XBAR 23.   |
+| INPUT_XBAR_24 | | XBAR 24.   |
+| INPUT_XBAR_25 | | XBAR 25.   |
+| INPUT_XBAR_26 | | XBAR 26.   |
+| INPUT_XBAR_27 | | XBAR 27.   |
+| INPUT_XBAR_28 | | XBAR 28.   |
+| INPUT_XBAR_29 | | XBAR 29.   |
+| INPUT_XBAR_30 | | XBAR 30.   |
+| INPUT_XBAR_31 | | XBAR 31.   |
+
+
+
+
+**Brief**: 
+This type defines Input XBAR. 
+
+
+
+### enum Icu_IntrCapSelect
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ECAP_CEVT1_INT | (0x00000002U)|   |
+| ECAP_CEVT2_INT | (0x00000004U)|   |
+| ECAP_CEVT3_INT | (0x00000008U)|   |
+| ECAP_CEVT4_INT | (0x00000010U)|   |
+| ECAP_CEVT1_CEVT2_INT | (0x00000002U) \| (0x00000004U)|   |
+| ECAP_CEVT1_CEVT3_INT | (0x00000002U) \| (0x00000008U)|   |
+| ECAP_CEVT1_CEVT4_INT | (0x00000002U) \| (0x00000010U)|   |
+| ECAP_CEVT2_CEVT3_INT | (0x00000004U) \| (0x00000008U)|   |
+| ECAP_CEVT2_CEVT4_INT | (0x00000004U) \| (0x00000010U)|   |
+| ECAP_CEVT3_CEVT4_INT | (0x00000008U) \| (0x00000010U)|   |
+| ECAP_CEVT1_CEVT2_CEVT3_INT | =
+        (0x00000002U) \| (0x00000004U) \| (0x00000008U)|   |
+| ECAP_CEVT1_CEVT2_CEVT4_INT | =
+        (0x00000002U) \| (0x00000004U) \| (0x00000010U)|   |
+| ECAP_CEVT1_CEVT3_CEVT4_INT | =
+        (0x00000002U) \| (0x00000008U) \| (0x00000010U)|   |
+| ECAP_CEVT2_CEVT3_CEVT4_INT | =
+        (0x00000004U) \| (0x00000008U) \| (0x00000010U)|   |
+| ECAP_INT_ALLCAPS | (0x00000002U) \| (0x00000004U) \|
+                       (0x00000008U) \| (0x00000010U)|   |
+
+
+
+
+**Brief**: 
+This type defines ECAP selection. 
+
+
+
+### enum Icu_MeasurementModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ICU_MODE_SIGNAL_EDGE_DETECT | | Signal Edge Detect Mode.   |
+| ICU_MODE_SIGNAL_MEASUREMENT | | Signal measurement Mode.   |
+| ICU_MODE_TIMESTAMP | | Signal Timestamp Mode.   |
+| ICU_MODE_EDGE_COUNTER | | Signal Edge counter Mode.   |
+
+
+
+
+**Brief**: 
+This type defines available measurement modes. 
+
+
+
+### enum Icu_SignalMeasurementPropertyType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ICU_LOW_TIME | | Signal Low time.   |
+| ICU_HIGH_TIME | | Signal High time.   |
+| ICU_PERIOD_TIME | | Signal Period time.   |
+| ICU_DUTY_CYCLE | | Signal Duty Cycle time.   |
+
+
+
+
+**Brief**: 
+This type defines Signal Measurement Property range. 
+
+
+
+### enum Icu_TimestampBufferType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ICU_LINEAR_BUFFER | | Linear Buffer to be used in Timestamp.   |
+| ICU_CIRCULAR_BUFFER | | Circular Buffer to be used in Timestamp.   |
+
+
+
+
+**Brief**: 
+This type defines TimeStamp Property range. 
+
+
+
+### typedef Icu_ValueType
+```
+typedef uint16 Icu_ValueType;
+```
+
+
+**Brief**: 
+This type defines Value type. 
+
+
+
+### typedef Icu_IndexType
+```
+typedef uint32 Icu_IndexType;
+```
+
+
+**Brief**: 
+This type defines return value Icu_GetTimeStampIndex. 
+
+
+
+### typedef Icu_EdgeNumberType
+```
+typedef uint32 Icu_EdgeNumberType;
+```
+
+
+**Brief**: 
+This type defines return value of Icu-Icu_GetEdgeNumbers. 
+
+
+
+### typedef Icu_NotifyFuncType
+```
+typedef void(* Icu_NotifyFuncType) (void);
+```
+
+
+**Brief**: 
+Notification callback function pointer. 
+
+
+
+### typedef Icu_ChannelType
+```
+typedef uint8 Icu_ChannelType;
+```
+
+
+**Brief**: 
+This type defines Channel type. 
+
+
+
+### typedef Icu_ChannelPrescalerType
+```
+typedef uint8 Icu_ChannelPrescalerType;
+```
+
+
+**Brief**: 
+This type defines Prescaler type. 
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[Icu_DutyCycleType](../Classes/struct_icu___duty_cycle_type.md)** | This type defines Duty Cycle struct.  |
+| **[Icu_ChannelConfigType_PC](../Classes/struct_icu___channel_config_type___p_c.md)** | ICU Channel Config Structure of Pre-Compile only.  |
+| **[Icu_ConfigType_PC](../Classes/struct_icu___config_type___p_c.md)** | ICU Config Structure of Pre-Compile only.  |
+| **[Icu_ChannelConfigType](../Classes/struct_icu___channel_config_type.md)** | ICU Channel Config Structure.  |
+| **[Icu_ConfigType](../Classes/struct_icu___config_type.md)** | ICU Config Structure.  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| ICU_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| ICU_MODULE_ID   | ICU Driver Module ID.  |
+| ICU_INSTANCE_ID   | ICU Driver Instance ID.  |
+| ICU_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| ICU_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| ICU_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| ICU_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by ICU Driver.  |
+| ICU_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by ICU Driver.  |
+| ICU_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by ICU Driver.  |
+| ICU_ISR_VOID   | void ISR type  |
+| ICU_ISR_CAT1   | Category 1 ISR type.  |
+| ICU_ISR_CAT2   | Category 2 ISR type.  |
+| ICU_INIT_ID   | Icu_Init() API Service ID.  |
+| ICU_DEINIT_ID   | Icu_DeInit() API Service ID.  |
+| ICU_SETMODE_ID   | Icu_SetMode() API Service ID.  |
+| ICU_SETACTIVATIONCONDITION_ID   | Icu_SetActivationCondition() API Service ID.  |
+| ICU_DISABLENOTIFICATION_ID   | Icu_DisableNotification() API Service ID.  |
+| ICU_ENABLENOTIFICATION_ID   | Icu_EnableNotification() API Service ID.  |
+| ICU_GETINPUTSTATE_ID   | Icu_GetInputState() API Service ID.  |
+| ICU_STARTTIMESTAMP_ID   | Icu_StartTimestamp() API Service ID.  |
+| ICU_STOPTIMESTAMP_ID   | Icu_StopTimestamp() API Service ID.  |
+| ICU_GETTIMESTAMPINDEX_ID   | Icu_GetTimeStampIndex() API Service ID.  |
+| ICU_RESETEDGECOUNT_ID   | Icu_ResetEdgeCount() API Service ID.  |
+| ICU_ENABLEEDGECOUNT_ID   | Icu_EnableEdgeCount() API Service ID.  |
+| ICU_ENABLEEDGEDETECTION_ID   | Icu_EnableEdgeDetection() API Service ID.  |
+| ICU_DISABLEEDGEDETECTION_ID   | Icu_DisableEdgeDetection() API Service ID.  |
+| ICU_DISABLEEDGECOUNT_ID   | Icu_DisableEdgeCount() API Service ID.  |
+| ICU_GETEDGENUMBERS_ID   | Icu_GetEdgeNumbers() API Service ID.  |
+| ICU_STARTSIGNALMEASUREMENT_ID   | Icu_StartSignalMeasurement() API Service ID.  |
+| ICU_STOPSIGNALMEASUREMENT_ID   | Icu_StopSignalMeasurement() API Service ID.  |
+| ICU_GETTIMEELAPSED_ID   | Icu_GetTimeElapsed() API Service ID.  |
+| ICU_GETDUTYCYCLEVALUES_ID   | Icu_GetDutyCycleValues() API Service ID.  |
+| ICU_GETVERSIONINFO_ID   | Icu_GetVersionInfo() API Service ID.  |
+| ICU_REGISTERREADBACK_ID   | Icu_RegisterReadback() API Service ID.  |
+| ICU_E_PARAM_POINTER   | API service called with invalid pointer.  |
+| ICU_E_PARAM_CHANNEL   | API service called with invalid channel identifier or channel not configured.  |
+| ICU_E_PARAM_ACTIVATION   | API service calleed with an invalid or not feasible activation.  |
+| ICU_E_INIT_FAILED   | Init Function Failed.  |
+| ICU_E_PARAM_BUFFER_SIZE   | API service used with invalid Buffer size.  |
+| ICU_E_PARAM_MODE   | API service called with invalid mode.  |
+| ICU_E_UNINIT   | API service calleed without module initialisation.  |
+| ICU_E_NOT_STARTED   | Icu_StopTimestamp called on channel not started or already stopped.  |
+| ICU_E_BUSY_OPERATION   | API service called while a running operation.  |
+| ICU_E_ALREADY_INITIALIZED   | API service Icu_Init called when module already initialized.  |
+| ICU_E_PARAM_NOTIFY_INTERVAL   | API service called when notify interval is invalid.  |
+| ICU_E_PARAM_VINFO   | API service Icu_GetVersionInfo called and parameter is invalid.  |
+| ICU_STATUS_UNINIT   | ICU driver Status uninitialized.  |
+| ICU_STATUS_INIT   | ICU driver Status Initialized.  |
+| ICU_FALLING   | Capture regsiter configuration for FALLING edge.  |
+| ICU_RISING   | Capture regsiter configuration for RISING edge.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Icu_Init](../Modules/group___i_c_u.md#function-icu_init)**(const [Icu_ConfigType](../Classes/struct_icu___config_type.md) * ConfigPtr)| Service for ICU initialization.  |
+| void | **[Icu_DeInit](../Modules/group___i_c_u.md#function-icu_deinit)**(void )| Service for ICU de-initialization.  |
+| void | **[Icu_SetActivationCondition](../Modules/group___i_c_u.md#function-icu_setactivationcondition)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel, [Icu_ActivationType](../Modules/group___i_c_u.md#enum-icu_activationtype) Activation)| Service for setting Activation Condition.  |
+| void | **[Icu_DisableNotification](../Modules/group___i_c_u.md#function-icu_disablenotification)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for disabling notification.  |
+| void | **[Icu_EnableNotification](../Modules/group___i_c_u.md#function-icu_enablenotification)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for enabling notification.  |
+| [Icu_InputStateType](../Modules/group___i_c_u.md#enum-icu_inputstatetype) | **[Icu_GetInputState](../Modules/group___i_c_u.md#function-icu_getinputstate)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for getting the ICU input status.  |
+| void | **[Icu_StartTimestamp](../Modules/group___i_c_u.md#function-icu_starttimestamp)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel, [Icu_ValueType](../Modules/group___i_c_u.md#typedef-icu_valuetype) * BufferPtr, uint16 BufferSize, uint16 NotifyInterval)| Service for starts the captuing of timer values on the edges.  |
+| void | **[Icu_StopTimestamp](../Modules/group___i_c_u.md#function-icu_stoptimestamp)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for stopping the timestamp measurement.  |
+| [Icu_IndexType](../Modules/group___i_c_u.md#typedef-icu_indextype) | **[Icu_GetTimestampIndex](../Modules/group___i_c_u.md#function-icu_gettimestampindex)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for reading the timestamp index of a givem channel.  |
+| void | **[Icu_ResetEdgeCount](../Modules/group___i_c_u.md#function-icu_resetedgecount)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for resets the value of the counted edges to zero.  |
+| void | **[Icu_EnableEdgeCount](../Modules/group___i_c_u.md#function-icu_enableedgecount)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service enabling the counting of edges of a given channel.  |
+| void | **[Icu_DisableEdgeCount](../Modules/group___i_c_u.md#function-icu_disableedgecount)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for disabling the couting of edges of the given channel.  |
+| [Icu_EdgeNumberType](../Modules/group___i_c_u.md#typedef-icu_edgenumbertype) | **[Icu_GetEdgeNumbers](../Modules/group___i_c_u.md#function-icu_getedgenumbers)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for reading the number of counted edges.  |
+| void | **[Icu_EnableEdgeDetection](../Modules/group___i_c_u.md#function-icu_enableedgedetection)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for enabling/re-enabling the detection of edges of the given channel.  |
+| void | **[Icu_DisableEdgeDetection](../Modules/group___i_c_u.md#function-icu_disableedgedetection)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for disabling the detection of edges of the given channel.  |
+| void | **[Icu_StartSignalMeasurement](../Modules/group___i_c_u.md#function-icu_startsignalmeasurement)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for starting the measurement of signals.  |
+| void | **[Icu_StopSignalMeasurement](../Modules/group___i_c_u.md#function-icu_stopsignalmeasurement)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for stopping the measurement of signals.  |
+| [Icu_ValueType](../Modules/group___i_c_u.md#typedef-icu_valuetype) | **[Icu_GetTimeElapsed](../Modules/group___i_c_u.md#function-icu_gettimeelapsed)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| Service for reading the elasped time for the given channel.  |
+| void | **[Icu_GetDutyCycleValues](../Modules/group___i_c_u.md#function-icu_getdutycyclevalues)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel, [Icu_DutyCycleType](../Classes/struct_icu___duty_cycle_type.md) * DutyCycleValues)| Service for reading the coherent active time and period time of given channel.  |
+| void | **[Icu_CheckWakeup](../Modules/group___i_c_u.md#function-icu_checkwakeup)**(EcuM_WakeupSourceType WakeupSource)| This function checks if a wakeup capable ICU channel is the source for a wakeup event and calls the ECU state manager service EcuM_SetWakeupEvent in case of a valid ICU channel wakeup event.  |
+| void | **[Icu_DisableWakeup](../Modules/group___i_c_u.md#function-icu_disablewakeup)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| This function disables the wakeup capability of a single ICU channel.  |
+| void | **[Icu_EnableWakeup](../Modules/group___i_c_u.md#function-icu_enablewakeup)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel)| This function (re-)enables the wakeup capability of the given ICU channel.  |
+| void | **[Icu_SetMode](../Modules/group___i_c_u.md#function-icu_setmode)**([Icu_ModeType](../Modules/group___i_c_u.md#enum-icu_modetype) Mode)| This function sets the ICU mode.  |
+| Std_ReturnType | **[Icu_RegisterReadback](../Modules/group___i_c_u.md#function-icu_registerreadback)**([Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype) Channel, Icu_RegisterReadbackType * RegRbPtr)| This function reads the important registers of the hardware unit and returns the value in the structure.  |
+
+
+
+### function Icu_Init
+
+```
+void Icu_Init(
+    const Icu_ConfigType * ConfigPtr
+)
+```
+
+
+**Brief**: 
+Service for ICU initialization. 
+
+Initializes internal variables and the ECAP unit of the micro controller. The function can be called on task level.
+
+Service ID[hex] - 0x00
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **CfgPtr** Pointer to configuration 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_DeInit
+
+```
+void Icu_DeInit(
+    void 
+)
+```
+
+
+**Brief**: 
+Service for ICU de-initialization. 
+
+DeInit ECAP module
+
+Service ID[hex] - 0x01
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_SetActivationCondition
+
+```
+void Icu_SetActivationCondition(
+    Icu_ChannelType Channel,
+    Icu_ActivationType Activation
+)
+```
+
+
+**Brief**: 
+Service for setting Activation Condition. 
+
+This service sets the Activation edge for channel Type of activation (if supported by hardware) ICU_RISING_EDGE, ICU_FALLING_EDGE, ICU_BOTH_EDGES.
+
+Service ID[hex] - 0x05
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+  
+* **Activation** - activation edge to be used by ICU module 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_DisableNotification
+
+```
+void Icu_DisableNotification(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for disabling notification. 
+
+This service disables the notificaiton of a channel
+
+Service ID[hex] - 0x06
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_EnableNotification
+
+```
+void Icu_EnableNotification(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for enabling notification. 
+
+This service enables the notificaiton of a channel
+
+Service ID[hex] - 0x07
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_GetInputState
+
+```
+Icu_InputStateType Icu_GetInputState(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for getting the ICU input status. 
+
+This service returns the status of the ICU input
+
+Service ID[hex] - 0x08
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **ICU_ACTIVE** - Module is in active state 
+<br> 
+  
+* **ICU_IDLE** - Module is in idle state 
+<br> 
+
+
+**Return**: Icu_InputStateType 
+
+### function Icu_StartTimestamp
+
+```
+void Icu_StartTimestamp(
+    Icu_ChannelType Channel,
+    Icu_ValueType * BufferPtr,
+    uint16 BufferSize,
+    uint16 NotifyInterval
+)
+```
+
+
+**Brief**: 
+Service for starts the captuing of timer values on the edges. 
+
+This service starts the capturing of timer values on the edges
+
+Service ID[hex] - 0x09
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **BufferSize** 
+  
+* **NotifyInterval** 
+  
+* **BufferPtr** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_StopTimestamp
+
+```
+void Icu_StopTimestamp(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for stopping the timestamp measurement. 
+
+This service stops timestamp measurement of the given channel.
+
+Service ID[hex] - 0x0A
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_GetTimestampIndex
+
+```
+Icu_IndexType Icu_GetTimestampIndex(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for reading the timestamp index of a givem channel. 
+
+This service reads the timestamp index of a given channel.
+
+Service ID[hex] - 0x0B
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **timestamp** index value 
+<br> 
+
+
+**Return**: Icu_IndexType 
+
+### function Icu_ResetEdgeCount
+
+```
+void Icu_ResetEdgeCount(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for resets the value of the counted edges to zero. 
+
+This service resets the value of the counted edges to zero.
+
+Service ID[hex] - 0x0C
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_EnableEdgeCount
+
+```
+void Icu_EnableEdgeCount(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service enabling the counting of edges of a given channel. 
+
+This service enables the couting of edges of the given channel.
+
+Service ID[hex] - 0x0D
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_DisableEdgeCount
+
+```
+void Icu_DisableEdgeCount(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for disabling the couting of edges of the given channel. 
+
+This service disables the couting of edges of a given channel.
+
+Service ID[hex] - 0x0E
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_GetEdgeNumbers
+
+```
+Icu_EdgeNumberType Icu_GetEdgeNumbers(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for reading the number of counted edges. 
+
+This service reads the number of counted edges.
+
+Service ID[hex] - 0x0F
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **Number** of counted edges 
+<br> 
+
+
+**Return**: Icu_EdgeNumberType 
+
+### function Icu_EnableEdgeDetection
+
+```
+void Icu_EnableEdgeDetection(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for enabling/re-enabling the detection of edges of the given channel. 
+
+This service enables/re-enables the detection of edges of a channel.
+
+Service ID[hex] - 0x16
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_DisableEdgeDetection
+
+```
+void Icu_DisableEdgeDetection(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for disabling the detection of edges of the given channel. 
+
+This service disables the detection of edges of a channel.
+
+Service ID[hex] - 0x17
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_StartSignalMeasurement
+
+```
+void Icu_StartSignalMeasurement(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for starting the measurement of signals. 
+
+This service starts the measurement of signals of a given channel.
+
+Service ID[hex] - 0x13
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_StopSignalMeasurement
+
+```
+void Icu_StopSignalMeasurement(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for stopping the measurement of signals. 
+
+This service stops the measurement of signals of a given channel.
+
+Service ID[hex] - 0x14
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_GetTimeElapsed
+
+```
+Icu_ValueType Icu_GetTimeElapsed(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+Service for reading the elasped time for the given channel. 
+
+This service reads elasped time for a given channel.
+
+Service ID[hex] - 0x10
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **Elapsed** time for the given channel 
+<br> 
+
+
+**Return**: Icu_ValueType 
+
+### function Icu_GetDutyCycleValues
+
+```
+void Icu_GetDutyCycleValues(
+    Icu_ChannelType Channel,
+    Icu_DutyCycleType * DutyCycleValues
+)
+```
+
+
+**Brief**: 
+Service for reading the coherent active time and period time of given channel. 
+
+This service reads active time and period of given channel.
+
+Service ID[hex] - 0x11
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+  
+* **DutyCycleValues** - pointer to store dutycycle 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_CheckWakeup
+
+```
+void Icu_CheckWakeup(
+    EcuM_WakeupSourceType WakeupSource
+)
+```
+
+
+**Brief**: 
+This function checks if a wakeup capable ICU channel is the source for a wakeup event and calls the ECU state manager service EcuM_SetWakeupEvent in case of a valid ICU channel wakeup event. 
+
+Service ID[hex] - 0x15
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(limited according to ICU050)
+
+
+**Parameters**: 
+
+  
+* **WakeupSource** - Informatin on wakeup source to be checked. The associated ICU channel can be determined from configuration data 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_DisableWakeup
+
+```
+void Icu_DisableWakeup(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+This function disables the wakeup capability of a single ICU channel. 
+
+Service ID[hex] - 0x03
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(limited according to ICU050)
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_EnableWakeup
+
+```
+void Icu_EnableWakeup(
+    Icu_ChannelType Channel
+)
+```
+
+
+**Brief**: 
+This function (re-)enables the wakeup capability of the given ICU channel. 
+
+Service ID[hex] - 0x04
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant(limited according to ICU050)
+
+
+**Parameters**: 
+
+  
+* **Channel** - Numeric identifier of the ICU channel 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_SetMode
+
+```
+void Icu_SetMode(
+    Icu_ModeType Mode
+)
+```
+
+
+**Brief**: 
+This function sets the ICU mode. 
+
+Service ID[hex] - 0x02
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Mode** - ICU_MODE_NORMAL: Normal operation, all used interrupts are enabled according to the notification requests, ICU_MODE_SLEEP: Reduced power mode. In sleep mode only those notifications are available which are configured as wakeup capable. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Icu_RegisterReadback
+
+```
+Std_ReturnType Icu_RegisterReadback(
+    Icu_ChannelType Channel,
+    Icu_RegisterReadbackType * RegRbPtr
+)
+```
+
+
+**Brief**: 
+This function reads the important registers of the hardware unit and returns the value in the structure. 
+
+This API is used to check the status of critical registers which donot change during program execution.
+
+Service ID[hex] - 0x15
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - Numeric identifier of the ICU channel 
+  
+* **RegRbPtr** - Pointer to where to store the readback values. If this pointer is NULL, then the API will return E_NOT_OK. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Register read back has been done successfully 
+<br> 
+  
+* **E_NOT_OK** - Register read back failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+
+
+
+

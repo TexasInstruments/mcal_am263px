@@ -1,0 +1,30 @@
+---
+orphan: true
+---
+
+---
+title: IpcNotify_InitObject
+summary: IPC Notify driver initialization object. 
+
+---
+
+# IpcNotify_InitObject
+
+
+
+IPC Notify driver initialization object. 
+
+
+`#include <ipc_notify_v1_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | intrPriority |  |
+|  uint32 | selfCoreId |  |
+|  uint32 | numCores |  |
+|  uint32[MCAL_CSL_CORE_ID_MAX] | coreIdList |  |
+|  IpcCrcHookFxn | Cdd_Ipc_CrcHookFunc |  |
+
+

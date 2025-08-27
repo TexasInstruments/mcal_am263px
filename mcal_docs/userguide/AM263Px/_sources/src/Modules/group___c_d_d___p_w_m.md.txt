@@ -1,0 +1,2070 @@
+---
+title: Epwm API GUIDE Header file
+
+---
+
+# CDD_PWM
+
+
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_PWM_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| CDD_PWM_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| CDD_PWM_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| CDD_PWM_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by CDD_PWM Driver.  |
+| CDD_PWM_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by CDD_PWM Driver.  |
+| CDD_PWM_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by CDD_PWM Driver.  |
+| CDD_PWM_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| CDD_PWM_MODULE_ID   | CDD_PWM Driver Module ID.  |
+| CDD_PWM_INSTANCE_ID   | CDD_PWM Driver Instance ID.  |
+| CDD_PWM_E_UNINIT   | API service used without module initialization.  |
+| CDD_PWM_E_INIT_FAILED   | API Cdd_Pwm_Init service called with wrong parameter.  |
+| CDD_PWM_E_PARAM_INVALID_CHANNEL   | API service used with an invalid channel Identifier.  |
+| CDD_PWM_E_PARAM_INVALID_STATE   | API Cdd_Pwm_SetPinState() called with an invalid pin state or when the channel is in the RUNNING state..  |
+| CDD_PWM_E_PARAM_INVALID_ACTION   | API Cdd_Pwm_SetPinAction() called with an invalid pin action.  |
+| CDD_PWM_E_NO_VALID_NOTIF   | Usage of Cdd_Pwm_DisableNotification() or Cdd_Pwm_EnableNotification() on a channel where a NULL pointer is configured as the notification function.  |
+| CDD_PWM_E_ALREADY_INITIALIZED   | API Cdd_Pwm_Init() called while the CDD_PWM driver has already been initialized.  |
+| CDD_PWM_E_PARAM_POINTER   | API Cdd_Pwm_GetVersionInfo() is called with a NULL parameter.  |
+| CDD_PWM_E_BUSY   | API Cdd_Pwm_StartChannel() called on a channel that is in state RUNNING.  |
+| CDD_PWM_E_PARAM_NO_PIN   | Cdd_Pwm_SetPinState() or Cdd_Pwm_SetPinAction() called for a channel that doesn’t have an associated output pin.  |
+| CDD_PWM_E_PARAM_INVALID_VALUE   | Cdd_Pwm_SetAbsoluteThreshold() or Cdd_Pwm_SetRelativeThreshold() called for with a compare match parameter greater than maximum supported counter value for a given channel.  |
+| CDD_PWM_E_PARAM_CHANNEL   | Invalid Channel parameter.  |
+| CDD_PWM_SID_INIT   | CDD_PWM driver service ID for Initialization API.  |
+| CDD_PWM_SID_DEINIT   | CDD_PWM driver service ID for De-Initialization API.  |
+| CDD_PWM_SID_STARTCHANNEL   | CDD_PWM driver service ID for Cdd_Pwm_StartChannel API.  |
+| CDD_PWM_SID_STOPCHANNEL   | CDD_PWM driver service ID for Cdd_Pwm_StopChannel API.  |
+| CDD_PWM_SID_GETCOUNTER_STATUS   | CDD_PWM driver service ID for Cdd_Pwm_SetPinState API.  |
+| CDD_PWM_SID_SET_PIN_ACTION   | CDD_PWM driver service ID for Cdd_Pwm_SetPinAction API.  |
+| CDD_PWM_SID_GETCOUNTER   | CDD_PWM driver service ID for Cdd_Pwm_GetCounter API.  |
+| CDD_PWM_SID_SET_ABSOLUTE_THRESHOLD   | CDD_PWM driver service ID for Cdd_Pwm_SetAbsoluteThreshold API.  |
+| CDD_PWM_SID_SET_RELATIVE_THRESHOLD   | CDD_PWM driver service ID for Cdd_Pwm_SetRelativeThreshold API.  |
+| CDD_PWM_SID_DISABLE_NOTIFICATION   | CDD_PWM driver service ID for Cdd_Pwm_DisableNotification API.  |
+| CDD_PWM_SID_ENABLE_NOTIFICATION   | CDD_PWM driver service ID for Cdd_Pwm_EnableNotification API.  |
+| CDD_PWM_SID_GET_VERSION_INFO   | CDD_PWM driver service ID for Cdd_Pwm_GetVersionInfo API.  |
+| CDD_PWM_SID_REGISTER_READBACK   | CDD_PWM driver service ID for Critical register read back API.  |
+| CDD_PWM_SID_SET_PERIOD_AND_DUTY   | CDD_PWM driver service ID for set duty cycle and period API.  |
+| CDD_PWM_SID_SET_OUTPUT_TO_IDLE   | CDD_PWM driver service ID for get output state API.  |
+| CDD_PWM_SID_CONFIGURE_DEADBAND   | CDD_PWM driver service ID for configuration of DeadBand module.  |
+| CDD_PWM_SID_BYPASS_DEADBAND   | CDD_PWM driver service ID to bypass DeadBand module.  |
+| CDD_PWM_SID_CONFIGURE_CHOPPER   | CDD_PWM driver service ID for configuration of Chopper module.  |
+| CDD_PWM_SID_ENABLE_CHOPPER   | CDD_PWM driver service ID to enable Chopper module.  |
+| CDD_PWM_SID_CLEAR_COUNTER_STATUS   | CDD_PWM driver service ID to Cdd_Pwm_ClearCounterStatus.  |
+| CDD_PWM_SID_INTR_STATUS   | CDD_PWM driver service ID to Cdd_Pwm_EtIntrStatus.  |
+| CDD_PWM_SID_INTR_CLEAR_STATUS   | CDD_PWM driver service ID to Cdd_Pwm_EtIntrClear.  |
+| CDD_PWM_SID_GET_EVENT_COUNT   | CDD_PWM driver service ID to Cdd_Pwm_EtGetEventCount.  |
+| CDD_PWM_SID_SET_ADC_TRIGGER   | CDD_PWM driver service ID to Cdd_Pwm_SetAdcTrigger.  |
+| CDD_PWM_SID_SYNC_ENABLE   | CDD_PWM driver service ID to Cdd_Pwm_SyncEnable.  |
+| CDD_PWM_SID_SYNC_DISABLE   | CDD_PWM driver service ID to Cdd_Pwm_SyncDisable.  |
+| CDD_PWM_SID_COUNTER_CMP_CFG   | CDD_PWM driver service ID to Cdd_Pwm_CounterComparatorCfg.  |
+| CDD_PWM_SID_TZ_EVENT_ENABLE   | CDD_PWM driver service ID to Cdd_Pwm_TzTripEventEnable.  |
+| CDD_PWM_SID_TZ_EVENT_DISABLE   | CDD_PWM driver service ID to Cdd_Pwm_TzTripEventDisable.  |
+| CDD_PWM_SID_TZ_INTR_ENABLE   | CDD_PWM driver service ID to Cdd_Pwm_TzIntrEnable.  |
+| CDD_PWM_SID_TZ_INTR_DISABLE   | CDD_PWM driver service ID to Cdd_Pwm_TzIntrDisable.  |
+| CDD_PWM_SID_TZ_GET_EVENT_STATUS   | CDD_PWM driver service ID to Cdd_Pwm_TzGetEventStatus.  |
+| CDD_PWM_SID_TZ_EVENT_STATUS_CLEAR   | CDD_PWM driver service ID to Cdd_Pwm_TzEventStatusClear.  |
+| CDD_PWM_SID_HR_SET_HRPWM_API   | CDD_PWM driver service ID to enable HRPWM module.  |
+| CDD_PWM_SID_HR_SFO_CAL_API   | CDD_PWM driver service ID to enable HRPWM SFO calibration.  |
+| CDD_PWM_SID_HR_SFO_STATUS_API   | CDD_PWM driver service ID to check HRPWM SFO Cal. Status.  |
+| CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE   | CDD_PWM driver service ID to set Time base counter mode.  |
+| CDD_PWM_SID_SET_PHASE_SHIFT   | CDD_PWM driver service ID to set the phase shift in runtime.  |
+| CDD_PWM_SID_SET_TIMEBASE_PERIOD   | CDD_PWM driver service ID to set the period in runtime.  |
+| CDD_PWM_SID_SET_COUNTER_COMPARE_VALUE   | CDD_PWM driver service ID to set the Counter Compare value in runtime.  |
+| CDD_PWM_SID_SET_RISING_EDGE_DELAY_COUNT   | CDD_PWM driver service ID to set the rising edge delay in runtime.  |
+| CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT   | CDD_PWM driver service ID to set the falling edge delay in runtime.  |
+| CDD_PWM_SID_HR_SET_PHASE_SHIFT   | CDD_PWM driver service ID to set the HRPWM phase shift in runtime.  |
+| CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD   | CDD_PWM driver service ID to set the HRPWM period in runtime.  |
+| CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE   | CDD_PWM driver service ID to set the HRPWM Counter Compare value in runtime.  |
+| CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT   | CDD_PWM driver service ID to set the HRPWM rising edge delay in runtime.  |
+| CDD_PWM_SID_HR_SET_FALLING_EDGE_DELAY_COUNT   | CDD_PWM driver service ID to set the HRPWM falling edge delay in runtime.  |
+| CDD_PWM_SID_SET_MIN_DEADBAND_DELAY   | CDD_PWM driver service ID to set the minimum deadband delay value in runtime.  |
+| CDD_PWM_SID_SET_XCMP_REG_VALUE   | CDD_PWM driver service ID to set theXCMP reg value in runtime.  |
+| CDD_PWM_SID_HR_SET_XCMP_REG_VALUE   | CDD_PWM driver service ID to set the HRPWM XCMP reg value in runtime.  |
+| CDD_PWM_SID_SET_XMINMAP_REG_VALUE   | CDD_PWM driver service ID to set the Xminmax reg value in runtime.  |
+| CDD_PWM_SID_SET_CMP_SHADOW_REG_VALUE   | CDD_PWM driver service ID to set the CMP shadow reg value in runtime.  |
+| CDD_PWM_STATUS_UNINIT   | CDD_PWM driver Status uninitialized.  |
+| CDD_PWM_STATUS_INIT   | CDD_PWM driver Status Initialized.  |
+| CDD_PWM_STATUS_STOPPED   | CDD_PWM driver Status stopped.  |
+| CDD_PWM_STATUS_RUNNING   | CDD_PWM driver Status running.  |
+| CDD_PWM_ISR_VOID   | void ISR type  |
+| CDD_PWM_ISR_CAT1   | Category 1 ISR type.  |
+| CDD_PWM_ISR_CAT2   | Category 2 ISR type.  |
+| CDD_PWM_INDEX   | Instance ID of this CDD_PWM driver.  |
+| CDD_PWM_INVALID_BASE_ADDR   | InValid Base Address.  |
+| CDD_PWM_START_SEC_VAR_INIT_8   | Start Memory section tag.  |
+| CDD_PWM_STOP_SEC_VAR_INIT_8   | End Memory section tag.  |
+| CDD_PWM_START_SEC_CODE   | Start Memory section tag.  |
+| CDD_PWM_STOP_SEC_CODE   | End Memory section tag.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Cdd_Pwm_Init](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_init)**(const Cdd_Pwm_ConfigType * ConfigPtr)| Function Initializes CDD_PWM unit.  |
+| void | **[Cdd_Pwm_DeInit](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_deinit)**(void )| Function for PWM De-Initialization.  |
+| void | **[Cdd_Pwm_StartChannelCounter](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_startchannelcounter)**(Cdd_Pwm_ChannelType ChannelNumber)| Function to start a PWM channel.  |
+| void | **[Cdd_Pwm_StopChannelCounter](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_stopchannelcounter)**(Cdd_Pwm_ChannelType ChannelNumber)| Function to stop a PWM channel.  |
+| void | **[Cdd_Pwm_SetPinAction](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setpinaction)**(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_PinActionType PinAction)| Function to indicate the driver what shall be done automatically by hardware (if supported) upon compare match.  |
+| Cdd_Pwm_ValueType | **[Cdd_Pwm_GetCounter](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_getcounter)**(Cdd_Pwm_ChannelType ChannelNumber)| Function to read the current value of the counter.  |
+| Cdd_Pwm_ReturnType | **[Cdd_Pwm_SetRelativeThreshold](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setrelativethreshold)**(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_ValueType RelativeValue)| Function to set the value of the channel threshold relative to the current value of the counter.  |
+| void | **[Cdd_Pwm_DisableNotification](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_disablenotification)**(Cdd_Pwm_ChannelType ChannelNumber)| Function to disable the PWM signal edge notification.  |
+| void | **[Cdd_Pwm_EnableNotification](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_enablenotification)**(Cdd_Pwm_ChannelType ChannelParameter, Cdd_Pwm_InterruptType EdgeInterruptSource)| Function to enable the PWM signal edge notification according to notification parameter.  |
+| void | **[Cdd_Pwm_GetVersionInfo](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_getversioninfo)**(Std_VersionInfoType * versioninfo)| Function to return the version information of this module.  |
+| Std_ReturnType | **[Cdd_Pwm_RegisterReadback](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_registerreadback)**(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_RegisterReadbackType * RegRbPtr)| Function to read the important registers of the hardware unit and returns the value in the structure.  |
+| void | **[Cdd_Pwm_SetPeriodDutyPhase](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setperioddutyphase)**(Cdd_Pwm_channelParametertype ChannelParameter)| Function sets the period and the duty cycle of a PWM channel.  |
+| void | **[Cdd_Pwm_SetOutputToIdle](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setoutputtoidle)**(Cdd_Pwm_ChannelType ChannelNumber)| Function sets the PWM output to the configured Idle state.  |
+| Std_ReturnType | **[Cdd_Pwm_SyncEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_syncenable)**(uint32 Channel, uint32 tbPhsValue, uint32 counterDir)| Function enables the synchronization of time base sub-module and also configures the phase count value to be loaded after sync event, counter direction after sync event.  |
+| Std_ReturnType | **[Cdd_Pwm_SyncDisable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_syncdisable)**(uint32 Channel)| Function disables the synchronization. Even if sync-in event occurs the count value will not be reloaded.  |
+| uint16 | **[Cdd_Pwm_GetCounterStatus](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_getcounterstatus)**(uint32 Channel, uint32 tbStatusMask)| Function gets the Time Base status as indicated by the tbStatusMask parameter.  |
+| Std_ReturnType | **[Cdd_Pwm_ClearCounterStatus](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_clearcounterstatus)**(uint32 Channel, uint32 tbStatusClrMask)| Function clears the Time base status bits indicated by the tbStatusClrMask parameter.  |
+| Std_ReturnType | **[Cdd_Pwm_CounterComparatorCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_countercomparatorcfg)**(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)| Function configures the counter comparator and loads the comparator value.  |
+| Std_ReturnType | **[Cdd_Pwm_DeadbandCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_deadbandcfg)**(uint32 Channel, const CDD_PWM_DeadbandCfgType * pCfg)| Function performs the configuration of the dead band sub-module.  |
+| Std_ReturnType | **[Cdd_Pwm_DeadbandBypass](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_deadbandbypass)**(uint32 Channel)| Function bypasses the Dead-band sub-module.  |
+| Std_ReturnType | **[Cdd_Pwm_ChopperCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_choppercfg)**(uint32 Channel, const CDD_PWM_ChopperCfgType * pCfg)| Performs the configuration of the chopper sub-module.  |
+| Std_ReturnType | **[Cdd_Pwm_ChopperEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_chopperenable)**(uint32 Channel, uint32 enableChopper)| Function controls the enabling or disabling of chopper sub-module.  |
+| Std_ReturnType | **[Cdd_Pwm_SetTimeBaseCounterMode](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_settimebasecountermode)**(uint32 Channel, EPWM_TimeBaseCountMode Mode)| Function sets the mode of Time base counter.  |
+| void | **[Cdd_Pwm_SetPhaseShift](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setphaseshift)**(uint32 Channel, uint16 PhaseShiftValue)| Function to set the Phase shift value in runtime.  |
+| void | **[Cdd_Pwm_SetTimeBasePeriod](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_settimebaseperiod)**(uint32 Channel, uint16 Period)| Function to set the time base period in runtime.  |
+| void | **[Cdd_Pwm_SetCounterCompareValue](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setcountercomparevalue)**(uint32 Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue)| Function to set the Compare value in runtime.  |
+| void | **[Cdd_Pwm_SetRisingEdgeDelay](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setrisingedgedelay)**(uint32 Channel, uint16 RedCount)| Function to set the rising edge delay in runtime.  |
+| void | **[Cdd_Pwm_SetFallingEdgeDelay](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setfallingedgedelay)**(uint32 Channel, uint16 FedCount)| Function to set the falling edge delay in runtime.  |
+| void | **[Cdd_Pwm_SetMinDeadbandDelay](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setmindeadbanddelay)**(uint32 Channel, uint32 Block, uint32 Delay)| Function to set the minimum deadband delay in runtime.  |
+| void | **[Cdd_Pwm_SetXcmpRegValue](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setxcmpregvalue)**(uint32 Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue)| Function to set the XCMP register value in runtime.  |
+| void | **[Cdd_Pwm_SetXMinMaxRegValue](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setxminmaxregvalue)**(uint32 Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue)| Function to set the XMINMAX register value in runtime.  |
+| void | **[Cdd_Pwm_SetCmpShadowRegValue](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setcmpshadowregvalue)**(uint32 Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue)| Function to set the CMP shadow register value in runtime.  |
+| Std_ReturnType | **[Cdd_Pwm_TzTripEventEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tztripeventenable)**(uint32 Channel, uint32 tzEventType)| Function enables the trip event.  |
+| Std_ReturnType | **[Cdd_Pwm_TzTripEventDisable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tztripeventdisable)**(uint32 Channel, uint32 tzEventType)| Function disable the trip event. The disabled trip events will be ignored.  |
+| Std_ReturnType | **[Cdd_Pwm_TzIntrEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tzintrenable)**(uint32 Channel, uint32 tzEventType)| Function enables the trip interrupt.  |
+| Std_ReturnType | **[Cdd_Pwm_TzIntrDisable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tzintrdisable)**(uint32 Channel, uint32 tzEventType)| Function disables the trip interrupt.  |
+| boolean | **[Cdd_Pwm_TzGetEventStatus](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tzgeteventstatus)**(uint32 Channel, uint32 eventMask)| Function returns the selected trip zone event status.  |
+| Std_ReturnType | **[Cdd_Pwm_TzEventStatusClear](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tzeventstatusclear)**(uint32 Channel, uint32 eventMask, uint32 tzFlags)| Function clears the selected trip zone event status.  |
+| Std_ReturnType | **[Cdd_Pwm_TzTriggerSwEvent](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_tztriggerswevent)**(uint32 Channel, uint32 tzEventType)| Function enables to generate Software forced trip condition.  |
+| uint16 | **[Cdd_Pwm_EtIntrStatus](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_etintrstatus)**(uint32 Channel)| Function returns the ePWM event interrupt status.  |
+| Std_ReturnType | **[Cdd_Pwm_EtIntrClear](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_etintrclear)**(uint32 Channel)| Function clears the interrupt.  |
+| Std_ReturnType | **[Cdd_Pwm_EtIntrTrigger](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_etintrtrigger)**(uint32 Channel)| Function forces interrupt to be generated.  |
+| uint16 | **[Cdd_Pwm_EtGetEventCount](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_etgeteventcount)**(uint32 Channel)| Function returns the number of events occurred.  |
+| Std_ReturnType | **[Cdd_Pwm_SetAdcTrigger](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setadctrigger)**(uint32 Channel, Cdd_Pwm_AdcSocType adcSoc)| Function Enables/Disables the ADC Trigger.  |
+| void | **[Cdd_Pwm_HrSetPeriodDutyPhase](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsetperioddutyphase)**(Cdd_Pwm_channelParametertype ChannelParameter)| Function generates High Resolution PWM Signal.  |
+| void | **[Cdd_Pwm_HrSfoCalibration](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsfocalibration)**(Cdd_Pwm_channelParametertype ChannelParameter)| Function calibrate the HR PWM signal.  |
+| uint32 | **[Cdd_Pwm_HrSfoStatus](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsfostatus)**(uint32 ChannelNumber)| Function returns the SFO calibration status.  |
+| void | **[Cdd_Pwm_HrSetPhaseShift](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsetphaseshift)**(uint32 Channel, uint32 PhaseShiftValue)| Function to set the HRPWM Phase shift value in runtime.  |
+| void | **[Cdd_Pwm_HrSetTimeBasePeriod](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsettimebaseperiod)**(uint32 Channel, uint16 Period)| Function to set the HRPWM time base period in runtime.  |
+| void | **[Cdd_Pwm_HrSetCounterCompareValue](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsetcountercomparevalue)**(uint32 Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue)| Function to set the HRPWM Compare value in runtime.  |
+| void | **[Cdd_Pwm_HrSetRisingEdgeDelay](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsetrisingedgedelay)**(uint32 Channel, uint16 RedCount)| Function to set the HRPWM rising edge delay in runtime.  |
+| void | **[Cdd_Pwm_HrSetFallingEdgeDelay](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsetfallingedgedelay)**(uint32 Channel, uint16 FedCount)| Function to set the HRPWM falling edge delay in runtime.  |
+| void | **[Cdd_Pwm_HrSetXcmpRegValue](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_hrsetxcmpregvalue)**(uint32 Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue)| Function to set the HRPWM XCMP register value in runtime.  |
+
+
+
+### function Cdd_Pwm_Init
+
+```
+void Cdd_Pwm_Init(
+    const Cdd_Pwm_ConfigType * ConfigPtr
+)
+```
+
+
+**Brief**: 
+Function Initializes CDD_PWM unit. 
+
+Cdd_Pwm_Init shall initialize all internals variables and the used PWM structure of the microcontroller according to the parameters specified in ConfigPtr.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ConfigPtr** - Pointer to driver configuration. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_DeInit
+
+```
+void Cdd_Pwm_DeInit(
+    void 
+)
+```
+
+
+**Brief**: 
+Function for PWM De-Initialization. 
+
+Cdd_Pwm_DeInit shall de-initialize CDD_PWM.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_StartChannelCounter
+
+```
+void Cdd_Pwm_StartChannelCounter(
+    Cdd_Pwm_ChannelType ChannelNumber
+)
+```
+
+
+**Brief**: 
+Function to start a PWM channel. 
+
+Cdd_Pwm_StartChannelCounter shall start a PWM channel.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - configured channel number 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_StopChannelCounter
+
+```
+void Cdd_Pwm_StopChannelCounter(
+    Cdd_Pwm_ChannelType ChannelNumber
+)
+```
+
+
+**Brief**: 
+Function to stop a PWM channel. 
+
+Cdd_Pwm_StopChannelCounter shall stop a PWM channel.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - configured channel number 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_SetPinAction
+
+```
+void Cdd_Pwm_SetPinAction(
+    Cdd_Pwm_ChannelType ChannelNumber,
+    Cdd_Pwm_PinActionType PinAction
+)
+```
+
+
+**Brief**: 
+Function to indicate the driver what shall be done automatically by hardware (if supported) upon compare match. 
+
+Cdd_Pwm_SetPinAction indicate the driver what shall be done automatically by hardware (if supported) upon compare match.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - configured channel number 
+  
+* **PinAction** - Actions Can be:PWM_SET_LOW, PWM_SET_HIGH, PWM_TOGGLE, PWM_DISABLE. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_GetCounter
+
+```
+Cdd_Pwm_ValueType Cdd_Pwm_GetCounter(
+    Cdd_Pwm_ChannelType ChannelNumber
+)
+```
+
+
+**Brief**: 
+Function to read the current value of the counter. 
+
+Cdd_Pwm_GetCounter read the current value of the counter.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - configured channel number 
+
+
+**Returns**: 
+
+  
+* **current** value of the counter 
+<br> 
+
+
+**Return**: Cdd_Pwm_ValueType 
+
+### function Cdd_Pwm_SetRelativeThreshold
+
+```
+Cdd_Pwm_ReturnType Cdd_Pwm_SetRelativeThreshold(
+    Cdd_Pwm_ChannelType ChannelNumber,
+    Cdd_Pwm_ValueType RelativeValue
+)
+```
+
+
+**Brief**: 
+Function to set the value of the channel threshold relative to the current value of the counter. 
+
+Cdd_Pwm_SetRelativeThreshold set the value of the channel threshold relative to the current value of the counter.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** 
+  
+* **RelativeValue** 
+
+
+**Returns**: 
+
+  
+* **CDD_PWM_CM_IN_REF_INTERVAL** - The compare match will occur inside the current Reference Interval 
+<br> 
+  
+* **CDD_PWM_CM_OUT_REF_INTERVAL** - The compare match will not occur inside the current Reference Interval 
+<br> 
+
+
+**Return**: Cdd_Pwm_ReturnType 
+
+### function Cdd_Pwm_DisableNotification
+
+```
+void Cdd_Pwm_DisableNotification(
+    Cdd_Pwm_ChannelType ChannelNumber
+)
+```
+
+
+**Brief**: 
+Function to disable the PWM signal edge notification. 
+
+Cdd_Pwm_DisableNotification disable the PWM signal edge notification.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_EnableNotification
+
+```
+void Cdd_Pwm_EnableNotification(
+    Cdd_Pwm_ChannelType ChannelParameter,
+    Cdd_Pwm_InterruptType EdgeInterruptSource
+)
+```
+
+
+**Brief**: 
+Function to enable the PWM signal edge notification according to notification parameter. 
+
+Cdd_Pwm_EnableNotification to enable the PWM signal edge notification according to notification parameter.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelParameter** 
+  
+* **EdgeInterruptSource** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_GetVersionInfo
+
+```
+void Cdd_Pwm_GetVersionInfo(
+    Std_VersionInfoType * versioninfo
+)
+```
+
+
+**Brief**: 
+Function to return the version information of this module. 
+
+Cdd_Pwm_GetVersionInfo returns the version information of this module.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **versioninfo** - Pointer to where to store the version information of this module. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_RegisterReadback
+
+```
+Std_ReturnType Cdd_Pwm_RegisterReadback(
+    Cdd_Pwm_ChannelType ChannelNumber,
+    Cdd_Pwm_RegisterReadbackType * RegRbPtr
+)
+```
+
+
+**Brief**: 
+Function to read the important registers of the hardware unit and returns the value in the structure. 
+
+Cdd_Pwm_RegisterReadback reads the important registers of the hardware unit and returns the value in the structure.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - configured channel number 
+  
+* **RegRbPtr** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Register read back has been done successfully 
+<br> 
+  
+* **E_NOT_OK** - Register read back failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_SetPeriodDutyPhase
+
+```
+void Cdd_Pwm_SetPeriodDutyPhase(
+    Cdd_Pwm_channelParametertype ChannelParameter
+)
+```
+
+
+**Brief**: 
+Function sets the period and the duty cycle of a PWM channel. 
+
+Cdd_Pwm_SetPeriodDutyPhase sets the period and the duty cycle of a PWM channel.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelParameter** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_SetOutputToIdle
+
+```
+void Cdd_Pwm_SetOutputToIdle(
+    Cdd_Pwm_ChannelType ChannelNumber
+)
+```
+
+
+**Brief**: 
+Function sets the PWM output to the configured Idle state. 
+
+Cdd_Pwm_SetOutputToIdle sets the PWM output to the configured Idle state.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - configured channel number 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_SyncEnable
+
+```
+Std_ReturnType Cdd_Pwm_SyncEnable(
+    uint32 Channel,
+    uint32 tbPhsValue,
+    uint32 counterDir
+)
+```
+
+
+**Brief**: 
+Function enables the synchronization of time base sub-module and also configures the phase count value to be loaded after sync event, counter direction after sync event. 
+
+Cdd_Pwm_SyncEnable enables the synchronization of time base sub-module and also configures the phase count value to be loaded after sync event, counter direction after sync event.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **tbPhsValue** 
+  
+* **counterDir** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Synchronization enabled successfully 
+<br> 
+  
+* **E_NOT_OK** - Synchronization enabled failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_SyncDisable
+
+```
+Std_ReturnType Cdd_Pwm_SyncDisable(
+    uint32 Channel
+)
+```
+
+
+**Brief**: 
+Function disables the synchronization. Even if sync-in event occurs the count value will not be reloaded. 
+
+Cdd_Pwm_SyncDisable disables the synchronization. Even if sync-in event occurs the count value will not be reloaded.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Synchronization disabled successfully 
+<br> 
+  
+* **E_NOT_OK** - Synchronization disabled failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_GetCounterStatus
+
+```
+uint16 Cdd_Pwm_GetCounterStatus(
+    uint32 Channel,
+    uint32 tbStatusMask
+)
+```
+
+
+**Brief**: 
+Function gets the Time Base status as indicated by the tbStatusMask parameter. 
+
+Cdd_Pwm_tbGetStatus gets the Time Base status as indicated by the tbStatusMask parameter.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **tbStatusMask** 
+
+
+**Returns**: 
+
+  
+* **** 
+<br> 
+
+
+**Return**: uint16 
+
+### function Cdd_Pwm_ClearCounterStatus
+
+```
+Std_ReturnType Cdd_Pwm_ClearCounterStatus(
+    uint32 Channel,
+    uint32 tbStatusClrMask
+)
+```
+
+
+**Brief**: 
+Function clears the Time base status bits indicated by the tbStatusClrMask parameter. 
+
+Cdd_Pwm_tbStatusClear clears the Time base status bits indicated by the tbStatusClrMask parameter.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **tbStatusClrMask** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Time base status cleared successfully 
+<br> 
+  
+* **E_NOT_OK** - Time base status cleared failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_CounterComparatorCfg
+
+```
+Std_ReturnType Cdd_Pwm_CounterComparatorCfg(
+    uint32 Channel,
+    Cdd_Pwm_OutputChType cmpType,
+    uint32 cmpVal,
+    uint32 shadowToActiveLoadTrigger,
+    uint32 overwriteShadow
+)
+```
+
+
+**Brief**: 
+Function configures the counter comparator and loads the comparator value. 
+
+Cdd_Pwm_counterComparatorCfg configures the counter comparator and loads the comparator value. When Counter comparator value equals the counter value, then an event is generated both in the up direction and down direction.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **cmpType** 
+  
+* **cmpVal** 
+  
+* **shadowToActiveLoadTrigger** 
+  
+* **overwriteShadow** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Configuration of counter comparator is successful 
+<br> 
+  
+* **E_NOT_OK** - Configuration of counter comparator is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_DeadbandCfg
+
+```
+Std_ReturnType Cdd_Pwm_DeadbandCfg(
+    uint32 Channel,
+    const CDD_PWM_DeadbandCfgType * pCfg
+)
+```
+
+
+**Brief**: 
+Function performs the configuration of the dead band sub-module. 
+
+Cdd_Pwm_deadbandCfgperforms the configuration of the dead band sub-module. This API configures the input source, output mode, polarity, rising and falling edge delays.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **pCfg** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Configuration of dead band sub-module is successful 
+<br> 
+  
+* **E_NOT_OK** - Configuration of dead band sub-module is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_DeadbandBypass
+
+```
+Std_ReturnType Cdd_Pwm_DeadbandBypass(
+    uint32 Channel
+)
+```
+
+
+**Brief**: 
+Function bypasses the Dead-band sub-module. 
+
+Cdd_Pwm_deadbandBypass bypasses the Dead-band sub-module.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Dead-band sub-module bypass is successful 
+<br> 
+  
+* **E_NOT_OK** - Dead-band sub-module bypass is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_ChopperCfg
+
+```
+Std_ReturnType Cdd_Pwm_ChopperCfg(
+    uint32 Channel,
+    const CDD_PWM_ChopperCfgType * pCfg
+)
+```
+
+
+**Brief**: 
+Performs the configuration of the chopper sub-module. 
+
+Cdd_Pwm_chopperCfg performs the configuration of the chopper sub-module. This API configures chopping clock duty cycle, chopping clock frequency and pulse width of first pulse of chopping clock.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **pCfg** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - configuration of the chopper sub-module is successful 
+<br> 
+  
+* **E_NOT_OK** - configuration of the chopper sub-module is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_ChopperEnable
+
+```
+Std_ReturnType Cdd_Pwm_ChopperEnable(
+    uint32 Channel,
+    uint32 enableChopper
+)
+```
+
+
+**Brief**: 
+Function controls the enabling or disabling of chopper sub-module. 
+
+Cdd_Pwm_chopperEnable controls the enabling or disabling of chopper sub-module.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **enableChopper** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - enabling or disabling of chopper sub-module is successful 
+<br> 
+  
+* **E_NOT_OK** - enabling or disabling of chopper sub-module is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_SetTimeBaseCounterMode
+
+```
+Std_ReturnType Cdd_Pwm_SetTimeBaseCounterMode(
+    uint32 Channel,
+    EPWM_TimeBaseCountMode Mode
+)
+```
+
+
+**Brief**: 
+Function sets the mode of Time base counter. 
+
+This function is used to set the mode for Time base counter.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **Mode.** Refer counterMode parameter. Example CDD_PWM_COUNTER_MODE_UP defined in Epwm\V0\Cdd_Pwm_Types.h
+
+
+**Returns**: 
+
+  
+* **E_OK** - Operation successful 
+<br> 
+  
+* **E_NOT_OK** - Operation failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_SetPhaseShift
+
+```
+void Cdd_Pwm_SetPhaseShift(
+    uint32 Channel,
+    uint16 PhaseShiftValue
+)
+```
+
+
+**Brief**: 
+Function to set the Phase shift value in runtime. 
+
+Cdd_Pwm_SetPhaseShift set the Phase shift value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **PhaseShiftValue** - Phase shift value
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetTimeBasePeriod
+
+```
+void Cdd_Pwm_SetTimeBasePeriod(
+    uint32 Channel,
+    uint16 Period
+)
+```
+
+
+**Brief**: 
+Function to set the time base period in runtime. 
+
+Cdd_Pwm_SetTimeBasePeriod set the time base period in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **Period** - Period
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetCounterCompareValue
+
+```
+void Cdd_Pwm_SetCounterCompareValue(
+    uint32 Channel,
+    EPWM_CounterCompareModule CompModule,
+    uint16 DutyValue
+)
+```
+
+
+**Brief**: 
+Function to set the Compare value in runtime. 
+
+Cdd_Pwm_SetCounterCompareValue set the Compare value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **CompModule** - Compare Module. Refer _compModule_ parameter 
+  
+* **DutyValue** - Duty cycle value
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetRisingEdgeDelay
+
+```
+void Cdd_Pwm_SetRisingEdgeDelay(
+    uint32 Channel,
+    uint16 RedCount
+)
+```
+
+
+**Brief**: 
+Function to set the rising edge delay in runtime. 
+
+Cdd_Pwm_SetRisingEdgeDelay set the rising edge delay in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **RedCount** - Rising Edge delay count
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetFallingEdgeDelay
+
+```
+void Cdd_Pwm_SetFallingEdgeDelay(
+    uint32 Channel,
+    uint16 FedCount
+)
+```
+
+
+**Brief**: 
+Function to set the falling edge delay in runtime. 
+
+Cdd_Pwm_SetFallingEdgeDelay set the falling edge delay in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **FedCount** - Falling Edge delay count
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetMinDeadbandDelay
+
+```
+void Cdd_Pwm_SetMinDeadbandDelay(
+    uint32 Channel,
+    uint32 Block,
+    uint32 Delay
+)
+```
+
+
+**Brief**: 
+Function to set the minimum deadband delay in runtime. 
+
+Cdd_Pwm_SetMinDeadbandDelay set the minimum deadband delay in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **Block** - Block. Possible values EPWM_MINDB_BLOCK_A, EPWM_MINDB_BLOCK_B 
+  
+* **Delay** - Delay value
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetXcmpRegValue
+
+```
+void Cdd_Pwm_SetXcmpRegValue(
+    uint32 Channel,
+    EPWM_XCMPReg XcmpReg,
+    uint16 XcmpValue
+)
+```
+
+
+**Brief**: 
+Function to set the XCMP register value in runtime. 
+
+Cdd_Pwm_SetXcmpRegValue set the XCMP register value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **XcmpReg** - XCMP register. Refer _xcmpReg_ parameter 
+  
+* **XcmpValue** - XCMP Value to be passed
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetXMinMaxRegValue
+
+```
+void Cdd_Pwm_SetXMinMaxRegValue(
+    uint32 Channel,
+    EPWM_XMinMaxReg XminmaxReg,
+    uint16 XcmpValue
+)
+```
+
+
+**Brief**: 
+Function to set the XMINMAX register value in runtime. 
+
+Cdd_Pwm_SetXMinMaxRegValue set the XMINMAX register value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **XminmaxReg** - XMINMAX register. Refer _xminmaxReg_ parameter 
+  
+* **XcmpValue** - XCMP Value to be passed
+
+
+**Return**: void 
+
+### function Cdd_Pwm_SetCmpShadowRegValue
+
+```
+void Cdd_Pwm_SetCmpShadowRegValue(
+    uint32 Channel,
+    EPWM_XCompareReg CmpReg,
+    uint16 CmpValue
+)
+```
+
+
+**Brief**: 
+Function to set the CMP shadow register value in runtime. 
+
+Cdd_Pwm_SetCmpShadowRegValue set the CMP shadow register value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **CmpReg** - CMP register. Refer _cmpReg_ parameter 
+  
+* **CmpValue** - CMP Value to be passed
+
+
+**Return**: void 
+
+### function Cdd_Pwm_TzTripEventEnable
+
+```
+Std_ReturnType Cdd_Pwm_TzTripEventEnable(
+    uint32 Channel,
+    uint32 tzEventType
+)
+```
+
+
+**Brief**: 
+Function enables the trip event. 
+
+Cdd_Pwm_tzTripEventEnable enables the trip event.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **tzEventType** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - enabling of trip event is successful 
+<br> 
+  
+* **E_NOT_OK** - enabling of trip event is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_TzTripEventDisable
+
+```
+Std_ReturnType Cdd_Pwm_TzTripEventDisable(
+    uint32 Channel,
+    uint32 tzEventType
+)
+```
+
+
+**Brief**: 
+Function disable the trip event. The disabled trip events will be ignored. 
+
+Cdd_Pwm_tzTripEventDisable disable the trip event. The The disabled trip events will be ignored.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **tzEventType** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - disabling of trip event is successful 
+<br> 
+  
+* **E_NOT_OK** - disabling of trip event is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_TzIntrEnable
+
+```
+Std_ReturnType Cdd_Pwm_TzIntrEnable(
+    uint32 Channel,
+    uint32 tzEventType
+)
+```
+
+
+**Brief**: 
+Function enables the trip interrupt. 
+
+Cdd_Pwm_tzIntrEnable enables the trip interrupt. When trip event occurs the sub-module can be configured to interrupt CPU.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **tzEventType** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - enabling of trip interrupt is successful 
+<br> 
+  
+* **E_NOT_OK** - enabling of trip interrupt is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_TzIntrDisable
+
+```
+Std_ReturnType Cdd_Pwm_TzIntrDisable(
+    uint32 Channel,
+    uint32 tzEventType
+)
+```
+
+
+**Brief**: 
+Function disables the trip interrupt. 
+
+Cdd_Pwm_tzIntrDisable disables the trip interrupt.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **tzEventType** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - disabling of trip interrupt is successful 
+<br> 
+  
+* **E_NOT_OK** - disabling of trip interrupt is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_TzGetEventStatus
+
+```
+boolean Cdd_Pwm_TzGetEventStatus(
+    uint32 Channel,
+    uint32 eventMask
+)
+```
+
+
+**Brief**: 
+Function returns the selected trip zone event status. 
+
+Cdd_Pwm_tzEventStatus returns the selected trip zone event status.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **eventMask** 
+
+
+**Returns**: 
+
+  
+* **TRUE** 
+<br> 
+  
+* **FALSE** 
+<br> 
+
+
+**Return**: boolean 
+
+### function Cdd_Pwm_TzEventStatusClear
+
+```
+Std_ReturnType Cdd_Pwm_TzEventStatusClear(
+    uint32 Channel,
+    uint32 eventMask,
+    uint32 tzFlags
+)
+```
+
+
+**Brief**: 
+Function clears the selected trip zone event status. 
+
+Cdd_Pwm_tzEventStatusClear clears the selected trip zone event status.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **eventMask** 
+  
+* **tzFlags** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - selected trip zone event status is cleared successfully 
+<br> 
+  
+* **E_NOT_OK** - clearing of selected trip zone event status is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_TzTriggerSwEvent
+
+```
+Std_ReturnType Cdd_Pwm_TzTriggerSwEvent(
+    uint32 Channel,
+    uint32 tzEventType
+)
+```
+
+
+**Brief**: 
+Function enables to generate Software forced trip condition. 
+
+Cdd_Pwm_tzTriggerSwEvent enables to generate Software forced trip condition.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **eventMask** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - 
+<br> 
+  
+* **E_NOT_OK** - 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_EtIntrStatus
+
+```
+uint16 Cdd_Pwm_EtIntrStatus(
+    uint32 Channel
+)
+```
+
+
+**Brief**: 
+Function returns the ePWM event interrupt status. 
+
+Cdd_Pwm_etIntrStatus returns the ePWM event interrupt status.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+
+
+**Returns**: 
+
+  
+* **ePWM** event interrupt status. 
+<br> 
+
+
+**Return**: uint16 
+
+### function Cdd_Pwm_EtIntrClear
+
+```
+Std_ReturnType Cdd_Pwm_EtIntrClear(
+    uint32 Channel
+)
+```
+
+
+**Brief**: 
+Function clears the interrupt. 
+
+Cdd_Pwm_etIntrClear clears the interrupt. This will clear the interrupt flag bit and enable further interrupts pulses to be generated.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Interrupt cleared successfully 
+<br> 
+  
+* **E_NOT_OK** - Interrupt cleared failed. 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_EtIntrTrigger
+
+```
+Std_ReturnType Cdd_Pwm_EtIntrTrigger(
+    uint32 Channel
+)
+```
+
+
+**Brief**: 
+Function forces interrupt to be generated. 
+
+Cdd_Pwm_etIntrTrigger forces interrupt to be generated. This API is used for testing purpose.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - 
+<br> 
+  
+* **E_NOT_OK** - 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_EtGetEventCount
+
+```
+uint16 Cdd_Pwm_EtGetEventCount(
+    uint32 Channel
+)
+```
+
+
+**Brief**: 
+Function returns the number of events occurred. 
+
+Cdd_Pwm_etGetEventCount returns the number of events occurred.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+
+
+**Returns**: 
+
+  
+* **number** of events occurred. 
+<br> 
+
+
+**Return**: uint16 
+
+### function Cdd_Pwm_SetAdcTrigger
+
+```
+Std_ReturnType Cdd_Pwm_SetAdcTrigger(
+    uint32 Channel,
+    Cdd_Pwm_AdcSocType adcSoc
+)
+```
+
+
+**Brief**: 
+Function Enables/Disables the ADC Trigger. 
+
+Cdd_Pwm_SetAdcTrigger enables/disables the ADC Trigger.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** 
+  
+* **adcSoc** 
+
+
+**Returns**: 
+
+  
+* **E_OK** - enabling/disabling of ADC Trigger is successful 
+<br> 
+  
+* **E_NOT_OK** - enabling/disabling of ADC Trigger is failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Cdd_Pwm_HrSetPeriodDutyPhase
+
+```
+void Cdd_Pwm_HrSetPeriodDutyPhase(
+    Cdd_Pwm_channelParametertype ChannelParameter
+)
+```
+
+
+**Brief**: 
+Function generates High Resolution PWM Signal. 
+
+Enable the HR PWM functionality.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelParameter** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_HrSfoCalibration
+
+```
+void Cdd_Pwm_HrSfoCalibration(
+    Cdd_Pwm_channelParametertype ChannelParameter
+)
+```
+
+
+**Brief**: 
+Function calibrate the HR PWM signal. 
+
+Cdd_Pwm_HrSfoCalibration calibrate the HR PWM signal.
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelParameter** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Cdd_Pwm_HrSfoStatus
+
+```
+uint32 Cdd_Pwm_HrSfoStatus(
+    uint32 ChannelNumber
+)
+```
+
+
+**Brief**: 
+Function returns the SFO calibration status. 
+
+Cdd_Pwm_HrSfoStatus Get SFO Calibration Status
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **ChannelNumber** - configured channel number 
+
+
+**Returns**: 
+
+  
+* **0** &ndash; Incomplete SFO Cal. 
+<br> 
+  
+* **1** &ndash; Complete SFO Cal. 
+<br> 
+  
+* **2** &ndash; Error in SFO Cal. 
+<br> 
+
+
+**Return**: uint32 
+
+### function Cdd_Pwm_HrSetPhaseShift
+
+```
+void Cdd_Pwm_HrSetPhaseShift(
+    uint32 Channel,
+    uint32 PhaseShiftValue
+)
+```
+
+
+**Brief**: 
+Function to set the HRPWM Phase shift value in runtime. 
+
+Cdd_Pwm_HrSetPhaseShift set the HRPWM Phase shift value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **PhaseShiftValue** - Phase shift value
+
+
+**Return**: void 
+
+### function Cdd_Pwm_HrSetTimeBasePeriod
+
+```
+void Cdd_Pwm_HrSetTimeBasePeriod(
+    uint32 Channel,
+    uint16 Period
+)
+```
+
+
+**Brief**: 
+Function to set the HRPWM time base period in runtime. 
+
+Cdd_Pwm_HrSetTimeBasePeriod set the HRPWM time base period in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **Period** - Period
+
+
+**Return**: void 
+
+### function Cdd_Pwm_HrSetCounterCompareValue
+
+```
+void Cdd_Pwm_HrSetCounterCompareValue(
+    uint32 Channel,
+    HRPWM_CounterCompareModule CompModule,
+    uint32 DutyValue
+)
+```
+
+
+**Brief**: 
+Function to set the HRPWM Compare value in runtime. 
+
+Cdd_Pwm_HrSetCounterCompareValue set the HRPWM Compare value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **CompModule** - Compare Module. Refer _compModule_ parameter 
+  
+* **DutyValue** - Duty cycle value
+
+
+**Return**: void 
+
+### function Cdd_Pwm_HrSetRisingEdgeDelay
+
+```
+void Cdd_Pwm_HrSetRisingEdgeDelay(
+    uint32 Channel,
+    uint16 RedCount
+)
+```
+
+
+**Brief**: 
+Function to set the HRPWM rising edge delay in runtime. 
+
+Cdd_Pwm_HrSetRisingEdgeDelay set the HRPWM rising edge delay in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **RedCount** - Rising Edge delay count
+
+
+**Return**: void 
+
+### function Cdd_Pwm_HrSetFallingEdgeDelay
+
+```
+void Cdd_Pwm_HrSetFallingEdgeDelay(
+    uint32 Channel,
+    uint16 FedCount
+)
+```
+
+
+**Brief**: 
+Function to set the HRPWM falling edge delay in runtime. 
+
+Cdd_Pwm_HrSetFallingEdgeDelay set the HRPWM falling edge delay in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **FedCount** - Falling Edge delay count
+
+
+**Return**: void 
+
+### function Cdd_Pwm_HrSetXcmpRegValue
+
+```
+void Cdd_Pwm_HrSetXcmpRegValue(
+    uint32 Channel,
+    HRPWM_XCMPReg HrXcmpReg,
+    uint16 HrXcmpValue
+)
+```
+
+
+**Brief**: 
+Function to set the HRPWM XCMP register value in runtime. 
+
+Cdd_Pwm_SetHrXcmpRegValue set the HRPWM XCMP register value in runtime
+
+Sync/Async - Synchronous
+
+Reentrancy - Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Channel** - Channel information 
+  
+* **HrXcmpReg** - XCMP register. Refer _xcmpReg_ parameter 
+  
+* **HrXcmpValue** - XCMP Value to be passed
+
+
+**Return**: void 
+
+
+
+
+

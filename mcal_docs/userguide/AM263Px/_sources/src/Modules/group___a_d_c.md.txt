@@ -1,0 +1,3260 @@
+---
+title: Adc API GUIDE Header file
+
+---
+
+# ADC
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Adc_mcalClkPrescale_t](../Modules/group___a_d_c.md#enum-adc_mcalclkprescale_t)** | Values that can be passed to ADC_setPrescaler() as the _clkPrescale_ parameter.  | 
+|enum| **[Adc_mcalResolution_t](../Modules/group___a_d_c.md#enum-adc_mcalresolution_t)** | Values that can be passed to ADC_setMode() as the _resolution_ parameter.  | 
+|enum| **[Adc_mcalSignalMode_t](../Modules/group___a_d_c.md#enum-adc_mcalsignalmode_t)** | Values that can be passed to ADC_setMode() as the _signalMode_ parameter.  | 
+|enum| **[Adc_mcalTrigger_t](../Modules/group___a_d_c.md#enum-adc_mcaltrigger_t)** | Values that can be passed to ADC_setupSOC() as the _trigger_ parameter to specify the event that will trigger a conversion to start. It is also used with ADC_setBurstModeConfig().  | 
+|enum| **[Adc_mcalChannel_t](../Modules/group___a_d_c.md#enum-adc_mcalchannel_t)** | Values that can be passed to ADC_setupSOC() as the _channel_ parameter. This is the input pin on which the signal to be converted is located.  | 
+|enum| **[Adc_mcalPulseMode_t](../Modules/group___a_d_c.md#enum-adc_mcalpulsemode_t)** | Values that can be passed to ADC_setInterruptPulseMode() as the _pulseMode_ parameter.  | 
+|enum| **[Adc_mcalIntNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalintnumber_t)** | Values that can be passed to ADC_enableInterrupt(), ADC_disableInterrupt(), ADC_clearInterruptStatus(), ADC_getInterruptOverflowStatus(), ADC_clearInterruptOverflowStatus(), ADC_setInterruptSource(), ADC_enableContinuousMode(), ADC_disableContinuousMode() and ADC_getInterruptStatus() as the _adcIntNum_ parameter.  | 
+|enum| **[Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t)** | Values that can be passed in as the _ppbNumber_ parameter for several functions.  | 
+|enum| **[Adc_mcalSOCNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalsocnumber_t)** | Values that can be passed in as the _socNumber_ parameter for several functions. This value identifies the start-of-conversion (SOC) that a function is configuring or accessing. Note that in some cases (for example, ADC_setInterruptSource()) _socNumber_ is used to refer to the corresponding end-of-conversion (EOC).  | 
+|enum| **[Adc_mcalIntSOCTrigger_t](../Modules/group___a_d_c.md#enum-adc_mcalintsoctrigger_t)** | Values that can be passed in as the _trigger_ parameter for the ADC_setInterruptSOCTrigger() function.  | 
+|enum| **[Adc_mcalPriorityMode_t](../Modules/group___a_d_c.md#enum-adc_mcalprioritymode_t)** | Values that can be passed to ADC_setSOCPriority() as the _priMode_ parameter.  | 
+|enum| **[Adc_StatusType](../Modules/group___a_d_c.md#enum-adc_statustype)** | Current status of the conversion of the requested ADC Channel group.  | 
+|enum| **[Adc_TriggerSourceType](../Modules/group___a_d_c.md#enum-adc_triggersourcetype)** | Type for configuring the trigger source for an ADC Channel group.  | 
+|enum| **[Adc_GroupConvModeType](../Modules/group___a_d_c.md#enum-adc_groupconvmodetype)** | Type for configuring the conversion mode of an ADC Channel group.  | 
+|enum| **[Adc_StreamBufferModeType](../Modules/group___a_d_c.md#enum-adc_streambuffermodetype)** | Type for configuring the streaming access mode buffer type.  | 
+|enum| **[Adc_GroupAccessModeType](../Modules/group___a_d_c.md#enum-adc_groupaccessmodetype)** | Type for configuring the access mode to group conversion results.  | 
+|enum| **[Adc_HwTriggerSignalType](../Modules/group___a_d_c.md#enum-adc_hwtriggersignaltype)** | Type for configuring on which edge of the hardware trigger signal the driver should react, i.e. start the conversion.  | 
+|enum| **[Adc_GroupReplacementType](../Modules/group___a_d_c.md#enum-adc_groupreplacementtype)** | Replacement mechanism, which is used on ADC group level, if a group conversion is interrupted by a group which has a higher priority.  | 
+|enum| **[Adc_ChannelRangeSelectType](../Modules/group___a_d_c.md#enum-adc_channelrangeselecttype)** | In case of active limit checking: defines which conversion values are taken into account related to the boardes defined with AdcChannelLowLimit and AdcChannelHighLimit.  | 
+|enum| **[Adc_GroupDataAccessType](../Modules/group___a_d_c.md#enum-adc_groupdataaccesstype)** | Type of ADC Data access method.  | 
+|enum| **[Adc_PowerStateType](../Modules/group___a_d_c.md#enum-adc_powerstatetype)** | Power state currently active or set as target power state.  | 
+|enum| **[Adc_PowerStateRequestResultType](../Modules/group___a_d_c.md#enum-adc_powerstaterequestresulttype)** | Result of the requests related to power state transitions.  | 
+|enum| **[Adc_AveragingMode](../Modules/group___a_d_c.md#enum-adc_averagingmode)** | Enum to number of samplings to average. ADC allows user to program the number of samplings to average.  | 
+|typedef uint8  | **[Adc_ChannelType](../Modules/group___a_d_c.md#typedef-adc_channeltype)** | Numeric ID of an ADC channel.  | 
+|typedef uint8  | **[Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype)** | Numeric ID of an ADC channel group.  | 
+|typedef uint16  | **[Adc_ValueGroupType](../Modules/group___a_d_c.md#typedef-adc_valuegrouptype)** | Type for reading the converted values of a channel group (raw, without further scaling, right aligned).  | 
+|typedef uint32  | **[Adc_PrescaleType](../Modules/group___a_d_c.md#typedef-adc_prescaletype)** | Type of clock prescaler factor.  | 
+|typedef uint16  | **[Adc_ConversionTimeType](../Modules/group___a_d_c.md#typedef-adc_conversiontimetype)** | Type of conversion time, i.e. the time during which the sampled analogue value is converted into digital representation.  | 
+|typedef uint16  | **[Adc_SamplingTimeType](../Modules/group___a_d_c.md#typedef-adc_samplingtimetype)** | Type of sampling time, i.e. the time during which the value is sampled (in clockcycles).  | 
+|typedef uint8  | **[Adc_ResolutionType](../Modules/group___a_d_c.md#typedef-adc_resolutiontype)** | Type of channel resolution in number of bits.  | 
+|typedef uint8  | **[Adc_GroupPriorityType](../Modules/group___a_d_c.md#typedef-adc_groupprioritytype)** | Priority level of the channel. Lowest priority is 0.  | 
+|typedef uint32  | **[Adc_GroupDefType](../Modules/group___a_d_c.md#typedef-adc_groupdeftype)** | Type of assignment of channels to a channel group.  | 
+|typedef uint16  | **[Adc_StreamNumSampleType](../Modules/group___a_d_c.md#typedef-adc_streamnumsampletype)** | Type for configuring the number of group conversions in streaming access mode (in single access mode, parameter is 1).  | 
+|typedef [Adc_mcalTrigger_t](../Modules/group___a_d_c.md#enum-adc_mcaltrigger_t)  | **[Adc_HwTriggerTimerType](../Modules/group___a_d_c.md#typedef-adc_hwtriggertimertype)** | Type for the value of the ADC module embedded timer.  | 
+|typedef uint8  | **[Adc_HWUnitType](../Modules/group___a_d_c.md#typedef-adc_hwunittype)** | Specifies the identification (ID) for a ADC Hardware microcontroller peripheral (unit)  | 
+|typedef void(*)(void)  | **[Adc_GroupEndNotifyType](../Modules/group___a_d_c.md#typedef-adc_groupendnotifytype)** | Typedef for group end notification function pointer.  | 
+|typedef [Cdd_Edma_EventCallback](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#typedef-cdd_edma_eventcallback)  | **[Adc_DmaCallBackFunctionType](../Modules/group___a_d_c.md#typedef-adc_dmacallbackfunctiontype)** | Typedef for group end notification function pointer.  | 
+
+
+
+### enum Adc_mcalClkPrescale_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_CLK_DIV_1_0 | 0| ADCCLK = (input clock) / 1.0.   |
+| ADC_CLK_DIV_2_0 | 2| ADCCLK = (input clock) / 2.0.   |
+| ADC_CLK_DIV_2_5 | 3| ADCCLK = (input clock) / 2.5.   |
+| ADC_CLK_DIV_3_0 | 4| ADCCLK = (input clock) / 3.0.   |
+| ADC_CLK_DIV_3_5 | 5| ADCCLK = (input clock) / 3.5.   |
+| ADC_CLK_DIV_4_0 | 6| ADCCLK = (input clock) / 4.0.   |
+| ADC_CLK_DIV_4_5 | 7| ADCCLK = (input clock) / 4.5.   |
+| ADC_CLK_DIV_5_0 | 8| ADCCLK = (input clock) / 5.0.   |
+| ADC_CLK_DIV_5_5 | 9| ADCCLK = (input clock) / 5.5.   |
+| ADC_CLK_DIV_6_0 | 10| ADCCLK = (input clock) / 6.0.   |
+| ADC_CLK_DIV_6_5 | 11| ADCCLK = (input clock) / 6.5.   |
+| ADC_CLK_DIV_7_0 | 12| ADCCLK = (input clock) / 7.0.   |
+| ADC_CLK_DIV_7_5 | 13| ADCCLK = (input clock) / 7.5.   |
+| ADC_CLK_DIV_8_0 | 14| ADCCLK = (input clock) / 8.0.   |
+| ADC_CLK_DIV_8_5 | 15| ADCCLK = (input clock) / 8.5.   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_setPrescaler() as the _clkPrescale_ parameter. 
+
+
+
+### enum Adc_mcalResolution_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_RESOLUTION_12BIT | 0| 12-bit conversion resolution   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_setMode() as the _resolution_ parameter. 
+
+
+
+### enum Adc_mcalSignalMode_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_MODE_SINGLE_ENDED | 0| Sample on single pin with VREFLO.   |
+| ADC_MODE_DIFFERENTIAL | 1| Sample on pair of pins.   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_setMode() as the _signalMode_ parameter. 
+
+
+
+### enum Adc_mcalTrigger_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_TRIGGER_SW_ONLY | 0x00| Software only.   |
+| ADC_TRIGGER_RTI0 | 0x01| RTI Timer 0.   |
+| ADC_TRIGGER_RTI1 | 0x02| RTI Timer 1.   |
+| ADC_TRIGGER_RTI2 | 0x03| RTI Timer 2.   |
+| ADC_TRIGGER_RTI3 | 0x04| RTI Timer 3.   |
+| ADC_TRIGGER_INPUT_XBAR_OUT5 | 0x05| InputXBar.Out[5].   |
+| ADC_TRIGGER_EPWM0_SOCA | 0x08| ePWM0, ADCSOCA   |
+| ADC_TRIGGER_EPWM0_SOCB | 0x09| ePWM0, ADCSOCB   |
+| ADC_TRIGGER_EPWM1_SOCA | 0x0A| ePWM1, ADCSOCA   |
+| ADC_TRIGGER_EPWM1_SOCB | 0x0B| ePWM1, ADCSOCB   |
+| ADC_TRIGGER_EPWM2_SOCA | 0x0C| ePWM2, ADCSOCA   |
+| ADC_TRIGGER_EPWM2_SOCB | 0x0D| ePWM2, ADCSOCB   |
+| ADC_TRIGGER_EPWM3_SOCA | 0x0E| ePWM3, ADCSOCA   |
+| ADC_TRIGGER_EPWM3_SOCB | 0x0F| ePWM3, ADCSOCB   |
+| ADC_TRIGGER_EPWM4_SOCA | 0x10| ePWM4, ADCSOCA   |
+| ADC_TRIGGER_EPWM4_SOCB | 0x11| ePWM4, ADCSOCB   |
+| ADC_TRIGGER_EPWM5_SOCA | 0x12| ePWM5, ADCSOCA   |
+| ADC_TRIGGER_EPWM5_SOCB | 0x13| ePWM5, ADCSOCB   |
+| ADC_TRIGGER_EPWM6_SOCA | 0x14| ePWM6, ADCSOCA   |
+| ADC_TRIGGER_EPWM6_SOCB | 0x15| ePWM6, ADCSOCB   |
+| ADC_TRIGGER_EPWM7_SOCA | 0x16| ePWM7, ADCSOCA   |
+| ADC_TRIGGER_EPWM7_SOCB | 0x17| ePWM7, ADCSOCB   |
+| ADC_TRIGGER_EPWM8_SOCA | 0x18| ePWM8, ADCSOCA   |
+| ADC_TRIGGER_EPWM8_SOCB | 0x19| ePWM8, ADCSOCB   |
+| ADC_TRIGGER_EPWM9_SOCA | 0x1A| ePWM9, ADCSOCA   |
+| ADC_TRIGGER_EPWM9_SOCB | 0x1B| ePWM9, ADCSOCB   |
+| ADC_TRIGGER_EPWM10_SOCA | 0x1C| ePWM10, ADCSOCA   |
+| ADC_TRIGGER_EPWM10_SOCB | 0x1D| ePWM10, ADCSOCB   |
+| ADC_TRIGGER_EPWM11_SOCA | 0x1E| ePWM11, ADCSOCA   |
+| ADC_TRIGGER_EPWM11_SOCB | 0x1F| ePWM11, ADCSOCB   |
+| ADC_TRIGGER_EPWM12_SOCA | 0x20| ePWM12, ADCSOCA   |
+| ADC_TRIGGER_EPWM12_SOCB | 0x21| ePWM12, ADCSOCB   |
+| ADC_TRIGGER_EPWM13_SOCA | 0x22| ePWM13, ADCSOCA   |
+| ADC_TRIGGER_EPWM13_SOCB | 0x23| ePWM13, ADCSOCB   |
+| ADC_TRIGGER_EPWM14_SOCA | 0x24| ePWM14, ADCSOCA   |
+| ADC_TRIGGER_EPWM14_SOCB | 0x25| ePWM14, ADCSOCB   |
+| ADC_TRIGGER_EPWM15_SOCA | 0x26| ePWM15, ADCSOCA   |
+| ADC_TRIGGER_EPWM15_SOCB | 0x27| ePWM15, ADCSOCB   |
+| ADC_TRIGGER_EPWM16_SOCA | 0x28| ePWM16, ADCSOCA   |
+| ADC_TRIGGER_EPWM16_SOCB | 0x29| ePWM16, ADCSOCB   |
+| ADC_TRIGGER_EPWM17_SOCA | 0x2A| ePWM17, ADCSOCA   |
+| ADC_TRIGGER_EPWM17_SOCB | 0x2B| ePWM17, ADCSOCB   |
+| ADC_TRIGGER_EPWM18_SOCA | 0x2C| ePWM18, ADCSOCA   |
+| ADC_TRIGGER_EPWM18_SOCB | 0x2D| ePWM18, ADCSOCB   |
+| ADC_TRIGGER_EPWM19_SOCA | 0x2E| ePWM19, ADCSOCA   |
+| ADC_TRIGGER_EPWM19_SOCB | 0x2F| ePWM19, ADCSOCB   |
+| ADC_TRIGGER_EPWM20_SOCA | 0x30| ePWM20, ADCSOCA   |
+| ADC_TRIGGER_EPWM20_SOCB | 0x31| ePWM20, ADCSOCB   |
+| ADC_TRIGGER_EPWM21_SOCA | 0x32| ePWM21, ADCSOCA   |
+| ADC_TRIGGER_EPWM21_SOCB | 0x33| ePWM21, ADCSOCB   |
+| ADC_TRIGGER_EPWM22_SOCA | 0x34| ePWM22, ADCSOCA   |
+| ADC_TRIGGER_EPWM22_SOCB | 0x35| ePWM22, ADCSOCB   |
+| ADC_TRIGGER_EPWM23_SOCA | 0x36| ePWM23, ADCSOCA   |
+| ADC_TRIGGER_EPWM23_SOCB | 0x37| ePWM23, ADCSOCB   |
+| ADC_TRIGGER_EPWM24_SOCA | 0x38| ePWM24, ADCSOCA   |
+| ADC_TRIGGER_EPWM24_SOCB | 0x39| ePWM24, ADCSOCB   |
+| ADC_TRIGGER_EPWM25_SOCA | 0x3A| ePWM25, ADCSOCA   |
+| ADC_TRIGGER_EPWM25_SOCB | 0x3B| ePWM25, ADCSOCB   |
+| ADC_TRIGGER_EPWM26_SOCA | 0x3C| ePWM26, ADCSOCA   |
+| ADC_TRIGGER_EPWM26_SOCB | 0x3D| ePWM26, ADCSOCB   |
+| ADC_TRIGGER_EPWM27_SOCA | 0x3E| ePWM27, ADCSOCA   |
+| ADC_TRIGGER_EPWM27_SOCB | 0x3F| ePWM27, ADCSOCB   |
+| ADC_TRIGGER_EPWM28_SOCA | 0x40| ePWM28, ADCSOCA   |
+| ADC_TRIGGER_EPWM28_SOCB | 0x41| ePWM28, ADCSOCB   |
+| ADC_TRIGGER_EPWM29_SOCA | 0x42| ePWM29, ADCSOCA   |
+| ADC_TRIGGER_EPWM29_SOCB | 0x43| ePWM29, ADCSOCB   |
+| ADC_TRIGGER_EPWM30_SOCA | 0x44| ePWM30, ADCSOCA   |
+| ADC_TRIGGER_EPWM30_SOCB | 0x45| ePWM30, ADCSOCB   |
+| ADC_TRIGGER_EPWM31_SOCA | 0x46| ePWM31, ADCSOCA   |
+| ADC_TRIGGER_EPWM31_SOCB | 0x47| ePWM31, ADCSOCB   |
+| ADC_TRIGGER_ECAP0 | 0x48| ECAP0.   |
+| ADC_TRIGGER_ECAP1 | 0x49| ECAP1.   |
+| ADC_TRIGGER_ECAP2 | 0x4A| ECAP2.   |
+| ADC_TRIGGER_ECAP3 | 0x4B| ECAP3.   |
+| ADC_TRIGGER_ECAP4 | 0x4C| ECAP4.   |
+| ADC_TRIGGER_ECAP5 | 0x4D| ECAP5.   |
+| ADC_TRIGGER_ECAP6 | 0x4E| ECAP6.   |
+| ADC_TRIGGER_ECAP7 | 0x4F| ECAP7.   |
+| ADC_TRIGGER_ECAP8 | 0x50| ECAP8.   |
+| ADC_TRIGGER_ECAP9 | 0x51| ECAP9.   |
+| ADC_TRIGGER_NONE | 0x7F| Spare.   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_setupSOC() as the _trigger_ parameter to specify the event that will trigger a conversion to start. It is also used with ADC_setBurstModeConfig(). 
+
+
+
+### enum Adc_mcalChannel_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_CH_ADCIN0 | 0| single-ended, ADCIN0   |
+| ADC_CH_ADCIN1 | 1| single-ended, ADCIN1   |
+| ADC_CH_ADCIN2 | 2| single-ended, ADCIN2   |
+| ADC_CH_ADCIN3 | 3| single-ended, ADCIN3   |
+| ADC_CH_ADCIN4 | 4| single-ended, ADCIN4   |
+| ADC_CH_ADCIN5 | 5| single-ended, ADCIN5   |
+| ADC_CH_CAL0 | 6| single-ended, CAL0   |
+| ADC_CH_CAL1 | 7| single-ended, CAL1   |
+| ADC_CH_ADCIN0_ADCIN1 | 0| differential, ADCIN0 and ADCIN1   |
+| ADC_CH_ADCIN1_ADCIN0 | 1| differential, ADCIN1 and ADCIN0   |
+| ADC_CH_ADCIN2_ADCIN3 | 2| differential, ADCIN2 and ADCIN3   |
+| ADC_CH_ADCIN3_ADCIN2 | 3| differential, ADCIN3 and ADCIN2   |
+| ADC_CH_ADCIN4_ADCIN5 | 4| differential, ADCIN4 and ADCIN5   |
+| ADC_CH_ADCIN5_ADCIN4 | 5| differential, ADCIN5 and ADCIN4   |
+| ADC_CH_CAL0_CAL1 | 6| differential, CAL0 and CAL1   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_setupSOC() as the _channel_ parameter. This is the input pin on which the signal to be converted is located. 
+
+
+
+### enum Adc_mcalPulseMode_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_PULSE_END_OF_ACQ_WIN | 0| Occurs at the end of the acquisition window.   |
+| ADC_PULSE_END_OF_CONV | 1| Occurs at the end of the conversion.   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_setInterruptPulseMode() as the _pulseMode_ parameter. 
+
+
+
+### enum Adc_mcalIntNumber_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_INT_NUMBER1 | 0| ADCINT1 Interrupt.   |
+| ADC_INT_NUMBER2 | 1| ADCINT2 Interrupt.   |
+| ADC_INT_NUMBER3 | 2| ADCINT3 Interrupt.   |
+| ADC_INT_NUMBER4 | 3| ADCINT4 Interrupt.   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_enableInterrupt(), ADC_disableInterrupt(), ADC_clearInterruptStatus(), ADC_getInterruptOverflowStatus(), ADC_clearInterruptOverflowStatus(), ADC_setInterruptSource(), ADC_enableContinuousMode(), ADC_disableContinuousMode() and ADC_getInterruptStatus() as the _adcIntNum_ parameter. 
+
+
+
+### enum Adc_mcalPPBNumber_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_PPB_NUMBER1 | 0| Post-processing block 1.   |
+| ADC_PPB_NUMBER2 | 1| Post-processing block 2.   |
+| ADC_PPB_NUMBER3 | 2| Post-processing block 3.   |
+| ADC_PPB_NUMBER4 | 3| Post-processing block 4.   |
+
+
+
+
+**Brief**: 
+Values that can be passed in as the _ppbNumber_ parameter for several functions. 
+
+
+
+### enum Adc_mcalSOCNumber_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_SOC_NUMBER0 | 0| SOC/EOC number 0.   |
+| ADC_SOC_NUMBER1 | 1| SOC/EOC number 1.   |
+| ADC_SOC_NUMBER2 | 2| SOC/EOC number 2.   |
+| ADC_SOC_NUMBER3 | 3| SOC/EOC number 3.   |
+| ADC_SOC_NUMBER4 | 4| SOC/EOC number 4.   |
+| ADC_SOC_NUMBER5 | 5| SOC/EOC number 5.   |
+| ADC_SOC_NUMBER6 | 6| SOC/EOC number 6.   |
+| ADC_SOC_NUMBER7 | 7| SOC/EOC number 7.   |
+| ADC_SOC_NUMBER8 | 8| SOC/EOC number 8.   |
+| ADC_SOC_NUMBER9 | 9| SOC/EOC number 9.   |
+| ADC_SOC_NUMBER10 | 10| SOC/EOC number 10.   |
+| ADC_SOC_NUMBER11 | 11| SOC/EOC number 11.   |
+| ADC_SOC_NUMBER12 | 12| SOC/EOC number 12.   |
+| ADC_SOC_NUMBER13 | 13| SOC/EOC number 13.   |
+| ADC_SOC_NUMBER14 | 14| SOC/EOC number 14.   |
+| ADC_SOC_NUMBER15 | 15| SOC/EOC number 15.   |
+| ADC_INVALID_HW_SOC | 16| SOC/EOC number 16.   |
+
+
+
+
+**Brief**: 
+Values that can be passed in as the _socNumber_ parameter for several functions. This value identifies the start-of-conversion (SOC) that a function is configuring or accessing. Note that in some cases (for example, ADC_setInterruptSource()) _socNumber_ is used to refer to the corresponding end-of-conversion (EOC). 
+
+
+
+### enum Adc_mcalIntSOCTrigger_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_INT_SOC_TRIGGER_NONE | 0| No ADCINT will trigger the SOC.   |
+| ADC_INT_SOC_TRIGGER_ADCINT1 | 1| ADCINT1 will trigger the SOC.   |
+| ADC_INT_SOC_TRIGGER_ADCINT2 | 2| ADCINT2 will trigger the SOC.   |
+
+
+
+
+**Brief**: 
+Values that can be passed in as the _trigger_ parameter for the ADC_setInterruptSOCTrigger() function. 
+
+
+
+### enum Adc_mcalPriorityMode_t
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_PRI_ALL_ROUND_ROBIN | 0| Round robin mode is used for all.   |
+| ADC_PRI_SOC0_HIPRI | 1| SOC 0 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC1_HIPRI | 2| SOC 0-1 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC2_HIPRI | 3| SOC 0-2 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC3_HIPRI | 4| SOC 0-3 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC4_HIPRI | 5| SOC 0-4 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC5_HIPRI | 6| SOC 0-5 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC6_HIPRI | 7| SOC 0-6 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC7_HIPRI | 8| SOC 0-7 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC8_HIPRI | 9| SOC 0-8 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC9_HIPRI | 10| SOC 0-9 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC10_HIPRI | 11| SOC 0-10 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC11_HIPRI | 12| SOC 0-11 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC12_HIPRI | 13| SOC 0-12 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC13_HIPRI | 14| SOC 0-13 hi pri, others in round robin.   |
+| ADC_PRI_THRU_SOC14_HIPRI | 15| SOC 0-14 hi pri, others in round robin.   |
+| ADC_PRI_ALL_HIPRI | 16| All priorities based on SOC number.   |
+
+
+
+
+**Brief**: 
+Values that can be passed to ADC_setSOCPriority() as the _priMode_ parameter. 
+
+
+
+### enum Adc_StatusType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_IDLE | | The conversion of the specified group has not been started. No result is available.   |
+| ADC_BUSY | | The conversion of the specified group has been started and is still going on. So far no result is available.   |
+| ADC_COMPLETED | | A conversion round (which is not the final one) of the specified group has been finished. A result is available for all channels of the group.   |
+| ADC_STREAM_COMPLETED | | The result buffer is completely filled. For each channel of the selected group the number of samples to be acquired is available.   |
+
+
+
+
+**Brief**: 
+Current status of the conversion of the requested ADC Channel group. 
+
+
+
+### enum Adc_TriggerSourceType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_TRIGG_SRC_SW | | Group is triggered by a software API call.   |
+| ADC_TRIGG_SRC_HW | | Group is triggered by a hardware event Note: This feature is not supported in this driver.   |
+
+
+
+
+**Brief**: 
+Type for configuring the trigger source for an ADC Channel group. 
+
+
+
+### enum Adc_GroupConvModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_CONV_MODE_ONESHOT | | Exactly one conversion of each channel in an ADC channel group is performed after the configured trigger event.   |
+| ADC_CONV_MODE_CONTINUOUS | | Repeated conversions of each ADC channel in an ADC channel group are performed.   |
+
+
+
+
+**Brief**: 
+Type for configuring the conversion mode of an ADC Channel group. 
+
+
+
+### enum Adc_StreamBufferModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_STREAM_BUFFER_LINEAR | | he ADC Driver stops the conversion as soon as the stream buffer is full (number of samples reached)   |
+| ADC_STREAM_BUFFER_CIRCULAR | | The ADC Driver continues the conversion even if the stream buffer is full (number of samples reached) by wrapping around the stream buffer itself.   |
+
+
+
+
+**Brief**: 
+Type for configuring the streaming access mode buffer type. 
+
+
+
+### enum Adc_GroupAccessModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_ACCESS_MODE_SINGLE | | Single value access mode.   |
+| ADC_ACCESS_MODE_STREAMING | | Streaming access mode.   |
+
+
+
+
+**Brief**: 
+Type for configuring the access mode to group conversion results. 
+
+
+
+### enum Adc_HwTriggerSignalType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_HW_TRIG_RISING_EDGE | | React on the rising edge of the hardware trigger signal.   |
+| ADC_HW_TRIG_FALLING_EDGE | | React on the falling edge of the hardware trigger signal.   |
+| ADC_HW_TRIG_BOTH_EDGES | | React on both edges of the hardware trigger signal.   |
+
+
+
+
+**Brief**: 
+Type for configuring on which edge of the hardware trigger signal the driver should react, i.e. start the conversion. 
+
+Note: This feature is not supported in this driver 
+
+
+
+
+### enum Adc_GroupReplacementType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_GROUP_REPL_ABORT_RESTART | | Abort/Restart mechanism is used on group level, if a group is interrupted by a higher priority group.   |
+| ADC_GROUP_REPL_SUSPEND_RESUME | | Suspend/Resume mechanism is used on group level, if a group is interrupted by a higher priority group. Note: The implementation is same as abort/restart i.e. when a group is started again, previous intermediate results are discarded and the driver always starts from first channel of the group.   |
+
+
+
+
+**Brief**: 
+Replacement mechanism, which is used on ADC group level, if a group conversion is interrupted by a group which has a higher priority. 
+
+
+
+### enum Adc_ChannelRangeSelectType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_RANGE_UNDER_LOW | | Range below low limit - low limit value included.   |
+| ADC_RANGE_BETWEEN | | Range between low limit and high limit - high limit value included.   |
+| ADC_RANGE_OVER_HIGH | | Range above high limit.   |
+| ADC_RANGE_ALWAYS | | Complete range - independent from channel limit settings.   |
+| ADC_RANGE_NOT_UNDER_LOW | | Range above low limit.   |
+| ADC_RANGE_NOT_BETWEEN | | Range above high limit or below low limit - low limit value included.   |
+| ADC_RANGE_NOT_OVER_HIGH | | Range below high limit - high limit value included.   |
+
+
+
+
+**Brief**: 
+In case of active limit checking: defines which conversion values are taken into account related to the boardes defined with AdcChannelLowLimit and AdcChannelHighLimit. 
+
+Note: This feature is not supported yet. 
+
+
+
+
+### enum Adc_GroupDataAccessType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_GROUP_INTERRUPT_ACCESS | | Interrupt Provides the data.   |
+| ADC_GROUP_POLLING_ACCESS | | Polling method to get the data.   |
+| ADC_GROUP_DMA_ACCESS | | DMA method to get the data.   |
+
+
+
+
+**Brief**: 
+Type of ADC Data access method. 
+
+
+
+### enum Adc_PowerStateType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_FULL_POWER | | Full Power (0)   |
+| ADC_ZERO_POWER | | Power modes with decreasing power consumptions.   |
+
+
+
+
+**Brief**: 
+Power state currently active or set as target power state. 
+
+
+
+### enum Adc_PowerStateRequestResultType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_SERVICE_ACCEPTED | | Power state change executed.   |
+| ADC_NOT_INIT | | ADC Module not initialized.   |
+| ADC_SEQUENCE_ERROR | | Wrong API call sequence.   |
+| ADC_HW_FAILURE | | The HW module has a failure which prevents it to enter the required power state.   |
+| ADC_POWER_STATE_NOT_SUPP | | ADC Module does not support the requested power state.   |
+| ADC_TRANS_NOT_POSSIBLE | | ADC Module cannot transition directly from the current power state to the requested power state or the HW peripheral is still busy.   |
+
+
+
+
+**Brief**: 
+Result of the requests related to power state transitions. 
+
+
+
+### enum Adc_AveragingMode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| ADC_AVERAGING_MODE_NONE | | Disable averaging.   |
+| ADC_AVERAGING_MODE_2_SAMPLES | | Set number of samplings to average to 2.   |
+| ADC_AVERAGING_MODE_4_SAMPLES | | Set number of samplings to average to 4.   |
+| ADC_AVERAGING_MODE_8_SAMPLES | | Set number of samplings to average to 8.   |
+| ADC_AVERAGING_MODE_16_SAMPLES | | Set number of samplings to average to 16.   |
+
+
+
+
+**Brief**: 
+Enum to number of samplings to average. ADC allows user to program the number of samplings to average. 
+
+
+
+### typedef Adc_ChannelType
+```
+typedef uint8 Adc_ChannelType;
+```
+
+
+**Brief**: 
+Numeric ID of an ADC channel. 
+
+
+
+### typedef Adc_GroupType
+```
+typedef uint8 Adc_GroupType;
+```
+
+
+**Brief**: 
+Numeric ID of an ADC channel group. 
+
+
+
+### typedef Adc_ValueGroupType
+```
+typedef uint16 Adc_ValueGroupType;
+```
+
+
+**Brief**: 
+Type for reading the converted values of a channel group (raw, without further scaling, right aligned). 
+
+Note: Even though the resolution for this ADC HW is 10-bit, we set this to 32-bit integer as the register read access is 32-bit. 
+
+
+
+
+### typedef Adc_PrescaleType
+```
+typedef uint32 Adc_PrescaleType;
+```
+
+
+**Brief**: 
+Type of clock prescaler factor. 
+
+
+
+### typedef Adc_ConversionTimeType
+```
+typedef uint16 Adc_ConversionTimeType;
+```
+
+
+**Brief**: 
+Type of conversion time, i.e. the time during which the sampled analogue value is converted into digital representation. 
+
+
+
+### typedef Adc_SamplingTimeType
+```
+typedef uint16 Adc_SamplingTimeType;
+```
+
+
+**Brief**: 
+Type of sampling time, i.e. the time during which the value is sampled (in clockcycles). 
+
+
+
+### typedef Adc_ResolutionType
+```
+typedef uint8 Adc_ResolutionType;
+```
+
+
+**Brief**: 
+Type of channel resolution in number of bits. 
+
+
+
+### typedef Adc_GroupPriorityType
+```
+typedef uint8 Adc_GroupPriorityType;
+```
+
+
+**Brief**: 
+Priority level of the channel. Lowest priority is 0. 
+
+
+
+### typedef Adc_GroupDefType
+```
+typedef uint32 Adc_GroupDefType;
+```
+
+
+**Brief**: 
+Type of assignment of channels to a channel group. 
+
+
+
+### typedef Adc_StreamNumSampleType
+```
+typedef uint16 Adc_StreamNumSampleType;
+```
+
+
+**Brief**: 
+Type for configuring the number of group conversions in streaming access mode (in single access mode, parameter is 1). 
+
+
+
+### typedef Adc_HwTriggerTimerType
+```
+typedef Adc_mcalTrigger_t Adc_HwTriggerTimerType;
+```
+
+
+**Brief**: 
+Type for the value of the ADC module embedded timer. 
+
+
+
+### typedef Adc_HWUnitType
+```
+typedef uint8 Adc_HWUnitType;
+```
+
+
+**Brief**: 
+Specifies the identification (ID) for a ADC Hardware microcontroller peripheral (unit) 
+
+
+
+### typedef Adc_GroupEndNotifyType
+```
+typedef void(* Adc_GroupEndNotifyType) (void);
+```
+
+
+**Brief**: 
+Typedef for group end notification function pointer. 
+
+
+
+### typedef Adc_DmaCallBackFunctionType
+```
+typedef Cdd_Edma_EventCallback Adc_DmaCallBackFunctionType;
+```
+
+
+**Brief**: 
+Typedef for group end notification function pointer. 
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[Adc_GroupLogEntryType](../Classes/struct_adc___group_log_entry_type.md)** | ADC log structure per group entry.  |
+| **[Adc_GroupLogType](../Classes/struct_adc___group_log_type.md)** | ADC group log structure.  |
+| **[Adc_FifoErrLogEntryType](../Classes/struct_adc___fifo_err_log_entry_type.md)** | ADC log structure per FIFO error entry.  |
+| **[Adc_ErrLogType](../Classes/struct_adc___err_log_type.md)** | ADC FIFO error log structure.  |
+| **[Adc_ChannelConfigType](../Classes/struct_adc___channel_config_type.md)** | Structure containing parameters for ADC MCAL channel configuration. In term of ADC hardware, this represents the step configuration. There are ADC_NUM_CHANNEL steps in the ADC hardware and each step could be mapped to an actual hardware input channel.  |
+| **[Adc_GroupConfigType](../Classes/struct_adc___group_config_type.md)** | ADC Group configuration structure.  |
+| **[Adc_HwUnitConfigType](../Classes/struct_adc___hw_unit_config_type.md)** | ADC Hardware unit configuration structure.  |
+| **[Adc_RegisterReadbackType](../Classes/struct_adc___register_readback_type.md)** | ADC register readback structure.  |
+| **[Adc_ConfigType](../Classes/struct_adc___config_type.md)** | ADC config structure.  |
+| **[Adc_UtilsNode_t](../Classes/struct_adc___utils_node__t.md)** | Self referential structure for double link list.  |
+| **[Adc_UtilsLinkListObj](../Classes/struct_adc___utils_link_list_obj.md)** | Structure to the link list object information.  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| ADC_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| ADC_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| ADC_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| ADC_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by ADC Driver.  |
+| ADC_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by ADC Driver.  |
+| ADC_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by ADC Driver.  |
+| ADC_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| ADC_MODULE_ID   | ADC Driver Module ID.  |
+| ADC_INSTANCE_ID   | ADC Driver Instance ID.  |
+| ADC_TRUE   | Boolean Macros for ADC module.  |
+| ADC_FALSE   | Boolean Macros for ADC module.  |
+| ADC_ISR_VOID   | void ISR type  |
+| ADC_ISR_CAT1   | Category 1 ISR type.  |
+| ADC_ISR_CAT2   | Category 2 ISR type.  |
+| ADC_E_UNINIT   | API service used without module initialization.  |
+| ADC_E_BUSY   | API service called during ongoing process.  |
+| ADC_E_IDLE   | API service called while no conversion is ongoing.  |
+| ADC_E_ALREADY_INITIALIZED   | API Adc_Init service called while the ADC driver has already been initialized.  |
+| ADC_E_PARAM_CONFIG   | API service called with incorrect configuration parameter.  |
+| ADC_E_PARAM_POINTER   | API servcie called with invalid data buffer pointer.  |
+| ADC_E_PARAM_GROUP   | API servcie called with invalid group ID.  |
+| ADC_E_WRONG_CONV_MODE   | API service called on a group with conversion mode configured as continuous.  |
+| ADC_E_WRONG_TRIGG_SRC   | API servcie called for group with wrong trigger source.  |
+| ADC_E_NOTIF_CAPABILITY   | Enable/disable notification function for a group whose configuration set has no notification available.  |
+| ADC_E_BUFFER_UNINIT   | Conversion started and result buffer pointer is not initialized.  |
+| ADC_E_NOT_DISENGAGED   | One or more ADC group/channel not in IDLE state.  |
+| ADC_E_POWER_STATE_NOT_SUPPORTED   | Unsupported power state request.  |
+| ADC_E_TRANSITION_NOT_POSSIBLE   | Requested power state can not be reached directly.  |
+| ADC_E_PERIPHERAL_NOT_PREPARED   | ADC not prepared for target power state.  |
+| ADC_SID_INIT   | Adc_Init() API Service ID.  |
+| ADC_SID_DEINIT   | Adc_DeInit() API Service ID.  |
+| ADC_SID_START_GROUP_CONVERSION   | Adc_StartGroupConversion() API Service ID.  |
+| ADC_SID_STOP_GROUP_CONVERSION   | Adc_StopGroupConversion() API Service ID.  |
+| ADC_SID_READ_GROUP   | Adc_ReadGroup() API Service ID.  |
+| ADC_SID_ENABLE_HARDWARE_TRIGGER   | Adc_EnableHardwareTrigger() API Service ID.  |
+| ADC_SID_DISABLE_HARDWARE_TRIGGER   | Adc_DisableHardwareTrigger() API Service ID.  |
+| ADC_SID_ENABLE_GROUP_NOTIFICATION   | Adc_EnableGroupNotification() API Service ID.  |
+| ADC_SID_DISABLE_GROUP_NOTIFICATION   | Adc_DisableGroupNotification() API Service ID.  |
+| ADC_SID_GET_GROUP_STATUS   | Adc_GetGroupStatus() API Service ID.  |
+| ADC_SID_GET_VERSION_INFO   | Adc_GetVersionInfo() API Service ID.  |
+| ADC_SID_GET_STREAM_LAST_POINTER   | Adc_GetStreamLastPointer() API Service ID.  |
+| ADC_SID_SETUP_RESULT_BUFFER   | Adc_SetupResultBuffer() API Service ID.  |
+| ADC_SID_SET_POWER_STATE   | Adc_SetPowerState() API Service ID.  |
+| ADC_SID_GET_CURRENT_POWER_STATE   | Adc_GetCurrentPowerState() API Service ID.  |
+| ADC_SID_GET_TARGET_POWER_STATE   | Adc_GetTargetPowerState() API Service ID.  |
+| ADC_SID_PREPARE_POWER_STATE   | Adc_PreparePowerState() API Service ID.  |
+| ADC_SID_MAIN_POWER_TRANSITION_MANAGER   | Adc_Main_PowerTransitionManager() API Service ID.  |
+| ADC_SID_IOHWAB_NOTIFICATION   | IoHwAb_AdcNotification() API Service ID.  |
+| ADC_SID_IOHWAB_NOTIFY_READY_FOR_POWER_STATE   | IoHwAb_Adc_NotifyReadyForPowerState() API Service ID.  |
+| ADC_SID_READ_TEMPERATURE   | IoHwAb_Adc_NotifyReadyForPowerState() API Service ID.  |
+| ADC_SID_READ_TEMPERATURE_RESULT   | IoHwAb_Adc_NotifyReadyForPowerState() API Service ID.  |
+| ADC_SID_POLLING_MAINFUNCTION   | Adc_PollingMainFunction() API Service ID.  |
+| ADC_SID_REGISTER_READBACK   | Adc_RegisterReadback() API Service ID.  |
+| ADC_SID_GET_READ_RESULT_BASE_ADDRESS   | Adc_GetReadResultBaseAddress() API Service ID.  |
+| ADC_SID_SET_INTERRUPT_CONTINUOUS_MODE   | Adc_SetInterruptContinuousMode() API Service ID.  |
+| ADC_EVT_TRIPHI   | Trip High Event.  |
+| ADC_EVT_TRIPLO   | Trip Low Event.  |
+| ADC_EVT_ZERO   | Zero Crossing Event.  |
+| ADC_FORCE_SOC0   | SW trigger ADC SOC 0.  |
+| ADC_FORCE_SOC1   | SW trigger ADC SOC 1.  |
+| ADC_FORCE_SOC2   | SW trigger ADC SOC 2.  |
+| ADC_FORCE_SOC3   | SW trigger ADC SOC 3.  |
+| ADC_FORCE_SOC4   | SW trigger ADC SOC 4.  |
+| ADC_FORCE_SOC5   | SW trigger ADC SOC 5.  |
+| ADC_FORCE_SOC6   | SW trigger ADC SOC 6.  |
+| ADC_FORCE_SOC7   | SW trigger ADC SOC 7.  |
+| ADC_FORCE_SOC8   | SW trigger ADC SOC 8.  |
+| ADC_FORCE_SOC9   | SW trigger ADC SOC 9.  |
+| ADC_FORCE_SOC10   | SW trigger ADC SOC 10.  |
+| ADC_FORCE_SOC11   | SW trigger ADC SOC 11.  |
+| ADC_FORCE_SOC12   | SW trigger ADC SOC 12.  |
+| ADC_FORCE_SOC13   | SW trigger ADC SOC 13.  |
+| ADC_FORCE_SOC14   | SW trigger ADC SOC 14.  |
+| ADC_FORCE_SOC15   | SW trigger ADC SOC 15.  |
+| MCAL_ADC_ADCSOCxCTL_STEP   | Register offset difference between 2 ADCSOCxCTL registers.  |
+| MCAL_ADC_ADCINTSELxNy_STEP   | Register offset difference between 2 ADCINTSELxNy registers.  |
+| MCAL_ADC_ADCPPBx_STEP   | Register offset difference between 2 ADCPPBxCONFIG registers.  |
+| MCAL_ADC_ADCPPBTRIP_MASK   | ADC PPB Trip Mask.  |
+| MCAL_ADC_RESULT_ADCPPBxRESULT_STEP   | Register offset difference between 2 ADCPPBxRESULT registers.  |
+| MCAL_ADC_RESULT_ADCRESULTx_STEP   | Register offset difference between 2 ADCRESULTx registers.  |
+| ADC_START_SEC_CODE   | Start Memory section tag.  |
+| ADC_STOP_SEC_CODE   | End Memory section tag.  |
+| ADC_NUM_CHANNEL   | Number of MCAL channels - in terms of ADC HW, this represents the number of hardware steps. Note: In terms of ADC IP number of steps is 16. Due to AUTOSAR specification, the channel ID's should be unique i.e each channel Id and actual HW channel should have one to one mapping. So ADC_NUM_CHANNEL is fixed to 9 as number of actual HW channels available is also 9.  |
+| ADC_MIN_CHANNEL_ID   | Minimum value of channel ID.  |
+| ADC_MAX_CHANNEL_ID   | Maximum value of channel ID.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Adc_Init](../Modules/group___a_d_c.md#function-adc_init)**(const [Adc_ConfigType](../Classes/struct_adc___config_type.md) * CfgPtr)| Service for ADC initialization.  |
+| void | **[Adc_DeInit](../Modules/group___a_d_c.md#function-adc_deinit)**(void )| This service sets all ADC HW Units to a state comparable to their power on reset state.  |
+| Std_ReturnType | **[Adc_SetupResultBuffer](../Modules/group___a_d_c.md#function-adc_setupresultbuffer)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group, const [Adc_ValueGroupType](../Modules/group___a_d_c.md#typedef-adc_valuegrouptype) * DataBufferPtr)| This service initializes ADC driver with the group specific result buffer start address where the conversion results will be stored.  |
+| [Adc_StatusType](../Modules/group___a_d_c.md#enum-adc_statustype) | **[Adc_GetGroupStatus](../Modules/group___a_d_c.md#function-adc_getgroupstatus)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Returns the conversion status of the requested ADC Channel group.  |
+| [Adc_StreamNumSampleType](../Modules/group___a_d_c.md#typedef-adc_streamnumsampletype) | **[Adc_GetStreamLastPointer](../Modules/group___a_d_c.md#function-adc_getstreamlastpointer)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group, [Adc_ValueGroupType](../Modules/group___a_d_c.md#typedef-adc_valuegrouptype) ** PtrToSamplePtr)| Returns the number of valid samples per channel, stored in the result buffer.  |
+| void | **[Adc_StartGroupConversion](../Modules/group___a_d_c.md#function-adc_startgroupconversion)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Starts the conversion of all channels of the requested ADC Channel group.  |
+| void | **[Adc_StopGroupConversion](../Modules/group___a_d_c.md#function-adc_stopgroupconversion)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Stops the conversion of the requested ADC Channel group.  |
+| Std_ReturnType | **[Adc_ReadGroup](../Modules/group___a_d_c.md#function-adc_readgroup)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group, [Adc_ValueGroupType](../Modules/group___a_d_c.md#typedef-adc_valuegrouptype) * DataBufferPtr)| Reads the group conversion result of the last completed conversion round of the requested group and stores the channel values starting at the DataBufferPtr address.  |
+| void | **[Adc_EnableGroupNotification](../Modules/group___a_d_c.md#function-adc_enablegroupnotification)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Enables the notification mechanism for the requested ADC Channel group.  |
+| void | **[Adc_DisableGroupNotification](../Modules/group___a_d_c.md#function-adc_disablegroupnotification)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Disables the notification mechanism for the requested ADC Channel group.  |
+| void | **[Adc_GetVersionInfo](../Modules/group___a_d_c.md#function-adc_getversioninfo)**(Std_VersionInfoType * versioninfo)| This service returns the version information of this module.  |
+| Std_ReturnType | **[Adc_RegisterReadback](../Modules/group___a_d_c.md#function-adc_registerreadback)**([Adc_HWUnitType](../Modules/group___a_d_c.md#typedef-adc_hwunittype) HWUnit, [Adc_RegisterReadbackType](../Classes/struct_adc___register_readback_type.md) * RegRbPtr)| This function reads the important registers of the hardware unit and returns the value in the structure.  |
+| void | **[Adc_EnableHardwareTrigger](../Modules/group___a_d_c.md#function-adc_enablehardwaretrigger)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Enables the hardware trigger for the requested ADC Channel group.  |
+| void | **[Adc_DisableHardwareTrigger](../Modules/group___a_d_c.md#function-adc_disablehardwaretrigger)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Disables the hardware trigger for the requested ADC Channel group.  |
+| void | **[Adc_InitTemperatureRead](../Modules/group___a_d_c.md#function-adc_inittemperatureread)**(void )| This service initializes the efuse parameters for temperature calculation. This is a non-autosar, TI defined API This API is not applicable for AM263x.  |
+| void | **[Adc_ReadTemperature](../Modules/group___a_d_c.md#function-adc_readtemperature)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group, uint8 NumAverages, Adc_TempSensValueType * TempValuesPtr)| This service starts temperature conversion, waits for completion and reads the temperature sensors group configured as part of Adc_Init and returns the temperature values. This is a non-autosar, TI defined API. This API is not applicable for AM263x.  |
+| void | **[Adc_ReadTemperatureResult](../Modules/group___a_d_c.md#function-adc_readtemperatureresult)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group, Adc_TempSensValueType * TempValuesPtr)| This service reads only the results of the temperature sensors group configured as part of Adc_Init, Adc_StartGroupConversion and returns the temperature values. This is a non-autosar, TI defined API. This API is not applicable for AM263x.  |
+| void | **[Adc_PollingMainFunction](../Modules/group___a_d_c.md#function-adc_pollingmainfunction)**(void )| This service is used for Polling Group data.  |
+| uint32 | **[Adc_GetReadResultBaseAddress](../Modules/group___a_d_c.md#function-adc_getreadresultbaseaddress)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Returns the HW result register base address.  |
+| Std_ReturnType | **[Adc_SetInterruptContinuousMode](../Modules/group___a_d_c.md#function-adc_setinterruptcontinuousmode)**([Adc_GroupType](../Modules/group___a_d_c.md#typedef-adc_grouptype) Group)| Sets the continue to interrupt mode of ADC.  |
+| void | **[ADC_setPrescaler](../Modules/group___a_d_c.md#function-adc_setprescaler)**(uint32 base, [Adc_mcalClkPrescale_t](../Modules/group___a_d_c.md#enum-adc_mcalclkprescale_t) clkPrescale)| Configures the analog-to-digital converter module prescaler.  |
+| void | **[ADC_setupSOC](../Modules/group___a_d_c.md#function-adc_setupsoc)**(uint32 base, uint32 socNumber, [Adc_mcalTrigger_t](../Modules/group___a_d_c.md#enum-adc_mcaltrigger_t) trigger, uint32 channel, uint32 sampleWindow)| Configures a start-of-conversion (SOC) in the ADC.  |
+| void | **[ADC_setInterruptSOCTrigger](../Modules/group___a_d_c.md#function-adc_setinterruptsoctrigger)**(uint32 base, uint16 socNumber, [Adc_mcalIntSOCTrigger_t](../Modules/group___a_d_c.md#enum-adc_mcalintsoctrigger_t) trigger)| Configures the interrupt SOC trigger of an SOC.  |
+| void | **[ADC_setInterruptPulseMode](../Modules/group___a_d_c.md#function-adc_setinterruptpulsemode)**(uint32 base, [Adc_mcalPulseMode_t](../Modules/group___a_d_c.md#enum-adc_mcalpulsemode_t) pulseMode)| Sets the timing of the end-of-conversion pulse.  |
+| void | **[ADC_setInterruptCycleOffset](../Modules/group___a_d_c.md#function-adc_setinterruptcycleoffset)**(uint32 base, uint16 cycleOffset)| Sets the timing of early interrupt generation.  |
+| void | **[ADC_enableConverter](../Modules/group___a_d_c.md#function-adc_enableconverter)**(uint32 base)| Powers up the analog-to-digital converter core.  |
+| void | **[ADC_disableConverter](../Modules/group___a_d_c.md#function-adc_disableconverter)**(uint32 base)| Powers down the analog-to-digital converter module.  |
+| void | **[ADC_forceSOC](../Modules/group___a_d_c.md#function-adc_forcesoc)**(uint32 base, [Adc_mcalSOCNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalsocnumber_t) socNumber)| Forces a SOC flag to a 1 in the analog-to-digital converter.  |
+| void | **[ADC_forceMultipleSOC](../Modules/group___a_d_c.md#function-adc_forcemultiplesoc)**(uint32 base, uint16 socMask)| Forces multiple SOC flags to 1 in the analog-to-digital converter.  |
+| boolean | **[ADC_getInterruptStatus](../Modules/group___a_d_c.md#function-adc_getinterruptstatus)**(uint32 base, uint16 adcIntNum)| Gets the current ADC interrupt status.  |
+| void | **[ADC_clearInterruptStatus](../Modules/group___a_d_c.md#function-adc_clearinterruptstatus)**(uint32 base, uint16 adcIntNum)| Clears ADC interrupt sources.  |
+| boolean | **[ADC_getInterruptOverflowStatus](../Modules/group___a_d_c.md#function-adc_getinterruptoverflowstatus)**(uint32 base, uint16 adcIntNum)| Gets the current ADC interrupt overflow status.  |
+| void | **[ADC_clearInterruptOverflowStatus](../Modules/group___a_d_c.md#function-adc_clearinterruptoverflowstatus)**(uint32 base, uint16 adcIntNum)| Clears ADC interrupt overflow sources.  |
+| uint16 | **[ADC_readResult](../Modules/group___a_d_c.md#function-adc_readresult)**(uint32 resultBase, uint32 socNumber)| Reads the conversion result.  |
+| uint32 | **[ADC_readResultbaseaddr](../Modules/group___a_d_c.md#function-adc_readresultbaseaddr)**(uint32 resultBase, uint16 socNumber)| Reads the address of the conversion result register.  |
+| boolean | **[ADC_isBusy](../Modules/group___a_d_c.md#function-adc_isbusy)**(uint32 base)| Determines whether the ADC is busy or not.  |
+| void | **[ADC_setBurstModeConfig](../Modules/group___a_d_c.md#function-adc_setburstmodeconfig)**(uint32 base, [Adc_mcalTrigger_t](../Modules/group___a_d_c.md#enum-adc_mcaltrigger_t) trigger, uint16 burstSize)| Set SOC burst mode.  |
+| void | **[ADC_enableBurstMode](../Modules/group___a_d_c.md#function-adc_enableburstmode)**(uint32 base)| Enables SOC burst mode.  |
+| void | **[ADC_disableBurstMode](../Modules/group___a_d_c.md#function-adc_disableburstmode)**(uint32 base)| Disables SOC burst mode.  |
+| void | **[ADC_setSOCPriority](../Modules/group___a_d_c.md#function-adc_setsocpriority)**(uint32 base, uint16 priMode)| Sets the priority mode of the SOCs.  |
+| void | **[ADC_setupPPB](../Modules/group___a_d_c.md#function-adc_setupppb)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, uint16 socNumber)| Configures a post-processing block (PPB) in the ADC.  |
+| void | **[ADC_enablePPBEvent](../Modules/group___a_d_c.md#function-adc_enableppbevent)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, uint16 evtFlags)| Enables individual ADC PPB event sources.  |
+| void | **[ADC_disablePPBEvent](../Modules/group___a_d_c.md#function-adc_disableppbevent)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, uint16 evtFlags)| Disables individual ADC PPB event sources.  |
+| void | **[ADC_enablePPBEventInterrupt](../Modules/group___a_d_c.md#function-adc_enableppbeventinterrupt)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, uint16 intFlags)| Enables individual ADC PPB event interrupt sources.  |
+| void | **[ADC_disablePPBEventInterrupt](../Modules/group___a_d_c.md#function-adc_disableppbeventinterrupt)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, uint16 intFlags)| Disables individual ADC PPB event interrupt sources.  |
+| uint16 | **[ADC_getPPBEventStatus](../Modules/group___a_d_c.md#function-adc_getppbeventstatus)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber)| Gets the current ADC event status.  |
+| void | **[ADC_clearPPBEventStatus](../Modules/group___a_d_c.md#function-adc_clearppbeventstatus)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, uint16 evtFlags)| Clears ADC event flags.  |
+| sint32 | **[ADC_readPPBResult](../Modules/group___a_d_c.md#function-adc_readppbresult)**(uint32 resultBase, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber)| Reads the processed conversion result from the PPB.  |
+| uint16 | **[ADC_getPPBDelayTimeStamp](../Modules/group___a_d_c.md#function-adc_getppbdelaytimestamp)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber)| Reads sample delay time stamp from a PPB.  |
+| void | **[ADC_setPPBCalibrationOffset](../Modules/group___a_d_c.md#function-adc_setppbcalibrationoffset)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, sint16 offset)| Sets the post processing block offset correction.  |
+| void | **[ADC_setPPBReferenceOffset](../Modules/group___a_d_c.md#function-adc_setppbreferenceoffset)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, uint16 offset)| Sets the post processing block reference offset.  |
+| void | **[ADC_enablePPBTwosComplement](../Modules/group___a_d_c.md#function-adc_enableppbtwoscomplement)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber)| Enables two's complement capability in the PPB.  |
+| void | **[ADC_disablePPBTwosComplement](../Modules/group___a_d_c.md#function-adc_disableppbtwoscomplement)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber)| Disables two's complement capability in the PPB.  |
+| void | **[ADC_enablePPBEventCBCClear](../Modules/group___a_d_c.md#function-adc_enableppbeventcbcclear)**(uint32 base, uint32 ppbNumber)| Enables cycle-by-cycle clear of ADC PPB event flags.  |
+| void | **[ADC_disablePPBEventCBCClear](../Modules/group___a_d_c.md#function-adc_disableppbeventcbcclear)**(uint32 base, uint32 ppbNumber)| Disables cycle-by-cycle clear of ADC PPB event flags.  |
+| void | **[ADC_enableInterrupt](../Modules/group___a_d_c.md#function-adc_enableinterrupt)**(uint32 base, uint16 adcIntNum)| Enables an ADC interrupt source.  |
+| void | **[ADC_disableInterrupt](../Modules/group___a_d_c.md#function-adc_disableinterrupt)**(uint32 base, uint16 adcIntNum)| Disables an ADC interrupt source.  |
+| void | **[ADC_setInterruptSource](../Modules/group___a_d_c.md#function-adc_setinterruptsource)**(uint32 base, uint16 adcIntNum, uint16 socNumber)| Sets the source EOC for an analog-to-digital converter interrupt.  |
+| void | **[ADC_enableContinuousMode](../Modules/group___a_d_c.md#function-adc_enablecontinuousmode)**(uint32 base, uint16 adcIntNum)| Enables continuous mode for an ADC interrupt.  |
+| void | **[ADC_disableContinuousMode](../Modules/group___a_d_c.md#function-adc_disablecontinuousmode)**(uint32 base, uint32 adcIntNum)| Disables continuous mode for an ADC interrupt.  |
+| void | **[ADC_setMode](../Modules/group___a_d_c.md#function-adc_setmode)**(uint32 base, [Adc_mcalResolution_t](../Modules/group___a_d_c.md#enum-adc_mcalresolution_t) resolution, [Adc_mcalSignalMode_t](../Modules/group___a_d_c.md#enum-adc_mcalsignalmode_t) signalMode)| Configures the analog-to-digital converter resolution and signal mode.  |
+| void | **[ADC_setPPBTripLimits](../Modules/group___a_d_c.md#function-adc_setppbtriplimits)**(uint32 base, [Adc_mcalPPBNumber_t](../Modules/group___a_d_c.md#enum-adc_mcalppbnumber_t) ppbNumber, sint32 tripHiLimit, sint32 tripLoLimit)| Sets the windowed trip limits for a PPB.  |
+| void | **[Adc_utilsInitLinkList](../Modules/group___a_d_c.md#function-adc_utilsinitlinklist)**([Adc_UtilsLinkListObj](../Classes/struct_adc___utils_link_list_obj.md) * llobj)| Init a link list object.  |
+| void | **[Adc_utilsDeInitLinkList](../Modules/group___a_d_c.md#function-adc_utilsdeinitlinklist)**([Adc_UtilsLinkListObj](../Classes/struct_adc___utils_link_list_obj.md) * llobj)| De-init a link list object.  |
+| void | **[Adc_utilsLinkNodePri](../Modules/group___a_d_c.md#function-adc_utilslinknodepri)**([Adc_UtilsLinkListObj](../Classes/struct_adc___utils_link_list_obj.md) * llobj, Adc_UtilsNode * node, void * data, [Adc_GroupPriorityType](../Modules/group___a_d_c.md#typedef-adc_groupprioritytype) priority, uint32 isPaused)| Links a node to the linked list.  |
+| void | **[Adc_utilsUnLinkNodePri](../Modules/group___a_d_c.md#function-adc_utilsunlinknodepri)**([Adc_UtilsLinkListObj](../Classes/struct_adc___utils_link_list_obj.md) * llobj, Adc_UtilsNode * node)| Unlinks the node from the list. Used for the priority link lists.  |
+| void | **[Adc_utilsInitNodeObject](../Modules/group___a_d_c.md#function-adc_utilsinitnodeobject)**(Adc_UtilsNode * node)| Initialize the node object with default value.  |
+| Adc_UtilsNode * | **[Adc_utilsGetHeadNode](../Modules/group___a_d_c.md#function-adc_utilsgetheadnode)**(const [Adc_UtilsLinkListObj](../Classes/struct_adc___utils_link_list_obj.md) * llobj)| Returns the reference to the head node. This does not remove the node from the head.  |
+
+
+
+### function Adc_Init
+
+```
+void Adc_Init(
+    const Adc_ConfigType * CfgPtr
+)
+```
+
+
+**Brief**: 
+Service for ADC initialization. 
+
+Initializes the ADC hardware units and driver
+
+Service ID[hex] - 0x00
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **CfgPtr** Pointer to configuration set in Variant PB (Variant PC requires a NULL_PTR). 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_DeInit
+
+```
+void Adc_DeInit(
+    void 
+)
+```
+
+
+**Brief**: 
+This service sets all ADC HW Units to a state comparable to their power on reset state. 
+
+Returns all ADC HW Units to a state comparable to their power on reset state
+
+Service ID[hex] - 0x01
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_SetupResultBuffer
+
+```
+Std_ReturnType Adc_SetupResultBuffer(
+    Adc_GroupType Group,
+    const Adc_ValueGroupType * DataBufferPtr
+)
+```
+
+
+**Brief**: 
+This service initializes ADC driver with the group specific result buffer start address where the conversion results will be stored. 
+
+Initializes ADC driver with the group specific result buffer start address where the conversion results will be stored. The application has to ensure that the application buffer, where DataBufferPtr points to, can hold all the conversion results of the specified group. The initialization with Adc_SetupResultBuffer is required after reset, before a group conversion can be started.
+
+Service ID[hex] - 0x0C
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+  
+* **DataBufferPtr** pointer to result data buffer 
+
+
+**Returns**: 
+
+  
+* **E_OK** - result buffer pointer initialized correctly 
+<br> 
+  
+* **E_NOT_OK** - operation failed or development error occurred 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Adc_GetGroupStatus
+
+```
+Adc_StatusType Adc_GetGroupStatus(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Returns the conversion status of the requested ADC Channel group. 
+
+Returns the conversion status of the requested ADC Channel group.
+
+Service ID[hex] - 0x09
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+
+
+**Returns**: 
+
+  
+* **ADC_IDLE** The conversion of the specified group has not been started 
+<br> 
+  
+* **ADC_BUSY** The conversion of the specified group has been started and is still going on. 
+<br> 
+  
+* **ADC_COMPLETED** The conversion of the specified group has been finished. 
+<br> 
+  
+* **ADC_STREAM_COMPLETED** The result buffer is completely filled. 
+<br> 
+
+
+**Return**: Adc_StatusType - Conversion status for the requested group. 
+
+### function Adc_GetStreamLastPointer
+
+```
+Adc_StreamNumSampleType Adc_GetStreamLastPointer(
+    Adc_GroupType Group,
+    Adc_ValueGroupType ** PtrToSamplePtr
+)
+```
+
+
+**Brief**: 
+Returns the number of valid samples per channel, stored in the result buffer. 
+
+Returns the number of valid samples per channel, stored in the result buffer. Reads a pointer, pointing to a position in the group result buffer. With the pointer position, the results of all group channels of the last completed conversion round can be accessed. With the pointer and the return value, all valid group conversion results can be accessed (the user has to take the layout of the result buffer into account).
+
+Service ID[hex] - 0x0B
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+  
+* **PtrToSamplePtr** Pointer to result buffer pointer. 
+
+
+**Returns**: 
+
+  
+* **Number** of valid samples per channel 
+<br> 
+
+
+**Return**: Adc_StreamNumSampleType 
+
+### function Adc_StartGroupConversion
+
+```
+void Adc_StartGroupConversion(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Starts the conversion of all channels of the requested ADC Channel group. 
+
+Starts the conversion of all channels of the requested ADC Channel group.
+
+Service ID[hex] - 0x02
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_StopGroupConversion
+
+```
+void Adc_StopGroupConversion(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Stops the conversion of the requested ADC Channel group. 
+
+Stops the conversion of the requested ADC Channel group.
+
+Service ID[hex] - 0x03
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_ReadGroup
+
+```
+Std_ReturnType Adc_ReadGroup(
+    Adc_GroupType Group,
+    Adc_ValueGroupType * DataBufferPtr
+)
+```
+
+
+**Brief**: 
+Reads the group conversion result of the last completed conversion round of the requested group and stores the channel values starting at the DataBufferPtr address. 
+
+Reads the group conversion result of the last completed conversion round of the requested group and stores the channel values starting at the DataBufferPtr address. The group channel values are stored in ascending channel number order (in contrast to the storage layout of the result buffer if streaming access is configured).
+
+Service ID[hex] - 0x04
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+  
+* **DataBufferPtr** ADC results of all channels of the selected group are stored in the data buffer addressed with the pointer 
+
+
+**Returns**: 
+
+  
+* **E_OK** - results are available and written to the data buffer 
+<br> 
+  
+* **E_NOT_OK** - no results are available or development error occurred 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Adc_EnableGroupNotification
+
+```
+void Adc_EnableGroupNotification(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Enables the notification mechanism for the requested ADC Channel group. 
+
+Enables the notification mechanism for the requested ADC Channel group.
+
+Service ID[hex] - 0x07
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_DisableGroupNotification
+
+```
+void Adc_DisableGroupNotification(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Disables the notification mechanism for the requested ADC Channel group. 
+
+Disables the notification mechanism for the requested ADC Channel group.
+
+Service ID[hex] - 0x08
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_GetVersionInfo
+
+```
+void Adc_GetVersionInfo(
+    Std_VersionInfoType * versioninfo
+)
+```
+
+
+**Brief**: 
+This service returns the version information of this module. 
+
+Returns the version information of this module
+
+Service ID[hex] - 0x0A
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **versioninfo** Pointer to where to store the version information of this module 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_RegisterReadback
+
+```
+Std_ReturnType Adc_RegisterReadback(
+    Adc_HWUnitType HWUnit,
+    Adc_RegisterReadbackType * RegRbPtr
+)
+```
+
+
+**Brief**: 
+This function reads the important registers of the hardware unit and returns the value in the structure. 
+
+This API should be called after Adc_Init is called. Otherwise this API will return E_NOT_OK. This API could be used to readback the register contents after Adc_Init and then the readback value could be compared during ADC execution to check the correctness of the HW unit. Since this API is used for this purpose, the register returned are the ones which doesn't change after init based on conv or channel config.
+
+Service ID[hex] - 0x16
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **HWUnit** ADC Hardware microcontroller peripheral unit ID If this is invalid, then the API will return E_NOT_OK. 
+  
+* **RegRbPtr** Pointer to where to store the readback values. If this pointer is NULL_PTR, then the API will return E_NOT_OK. 
+
+
+**Returns**: 
+
+  
+* **E_OK** - Register read back has been done 
+<br> 
+  
+* **E_NOT_OK** - Register read back failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Adc_EnableHardwareTrigger
+
+```
+void Adc_EnableHardwareTrigger(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Enables the hardware trigger for the requested ADC Channel group. 
+
+This function will enable the HW trigger source for the requested ADC channel group.
+
+Service ID[hex] - 0x05
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC Channel group. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_DisableHardwareTrigger
+
+```
+void Adc_DisableHardwareTrigger(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Disables the hardware trigger for the requested ADC Channel group. 
+
+This function will disable the HW trigger source for the requested ADC channel group.
+
+Service ID[hex] - 0x06
+
+Sync/Async - Asynchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC Channel group. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_InitTemperatureRead
+
+```
+void Adc_InitTemperatureRead(
+    void 
+)
+```
+
+
+**Brief**: 
+This service initializes the efuse parameters for temperature calculation. This is a non-autosar, TI defined API This API is not applicable for AM263x. 
+
+Initializes the Driver to read temperature sensors and do the conversion.
+
+Service ID[hex] - None
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_ReadTemperature
+
+```
+void Adc_ReadTemperature(
+    Adc_GroupType Group,
+    uint8 NumAverages,
+    Adc_TempSensValueType * TempValuesPtr
+)
+```
+
+
+**Brief**: 
+This service starts temperature conversion, waits for completion and reads the temperature sensors group configured as part of Adc_Init and returns the temperature values. This is a non-autosar, TI defined API. This API is not applicable for AM263x. 
+
+Returns the temperature sensor values for three digital temperature sensors.
+
+Service ID[hex] - 0x0D
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC Channel group. 
+  
+* **NumAverages** Number of samples for averaging the temp value 
+  
+* **TempValuesPtr** Temperature values for three available digital sensors are stored in this structure 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_ReadTemperatureResult
+
+```
+void Adc_ReadTemperatureResult(
+    Adc_GroupType Group,
+    Adc_TempSensValueType * TempValuesPtr
+)
+```
+
+
+**Brief**: 
+This service reads only the results of the temperature sensors group configured as part of Adc_Init, Adc_StartGroupConversion and returns the temperature values. This is a non-autosar, TI defined API. This API is not applicable for AM263x. 
+
+Returns the temperature sensor values for three digital temperature sensors.
+
+Service ID[hex] - 0x0E
+
+Sync/Async - Synchronous
+
+Reentrancy - Non Reentrant
+
+
+This service reads only the results of the temperature sensors group configured as part of Adc_Init, Adc_StartGroupConversion and returns the temperature values. This is a non-autosar, TI defined API. This API is not applicable for AM263x. 
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC Channel group. 
+  
+* **TempValuesPtr** Temperature values for three available digital sensors are stored in this structure 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_PollingMainFunction
+
+```
+void Adc_PollingMainFunction(
+    void 
+)
+```
+
+
+**Brief**: 
+This service is used for Polling Group data. 
+
+This service is used for Polling Group data.
+
+Service ID[hex] - 0x15
+
+Sync/Async - Asynchronous
+
+Reentrancy - Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC Channel group. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_GetReadResultBaseAddress
+
+```
+uint32 Adc_GetReadResultBaseAddress(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Returns the HW result register base address. 
+
+This service returns the Hardware result register address of the first channel of the ADC group. Hardware result registers of consecutive channels are contiguous. If there are multiple (n) channels in a group, read 'n' contiguous values from this base address
+
+Service ID[hex] - 0x17
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+
+
+**Return**: uint32 Result base address 
+
+### function Adc_SetInterruptContinuousMode
+
+```
+Std_ReturnType Adc_SetInterruptContinuousMode(
+    Adc_GroupType Group
+)
+```
+
+
+**Brief**: 
+Sets the continue to interrupt mode of ADC. 
+
+By enabling this function, Interrupt pulses are generated whenever an EOC pulse is generated irrespective of whether the flag bit is cleared or not.
+
+Service ID[hex] - 0x18
+
+Sync/Async - Synchronous
+
+Reentrancy - Reentrant
+
+
+**Parameters**: 
+
+  
+* **Group** Numeric ID of requested ADC channel group. 
+
+
+**Return**: Std_ReturnType. E_OK - success, E_NOT_OK - operation failed 
+
+### function ADC_setPrescaler
+
+```
+static inline void ADC_setPrescaler(
+    uint32 base,
+    Adc_mcalClkPrescale_t clkPrescale
+)
+```
+
+
+**Brief**: 
+Configures the analog-to-digital converter module prescaler. 
+
+This function configures the ADC module's ADCCLK.
+
+
+**Parameters**: 
+
+  
+* **base** base address of the ADC module. 
+  
+* **clkPrescale** specifies the value by which the input clock is divided to make the ADCCLK. The clkPrescale value can be specified with any of the following variables: **ADC_CLK_DIV_1_0**, **ADC_CLK_DIV_2_0**, **ADC_CLK_DIV_2_5**, ..., **ADC_CLK_DIV_7_5**, **ADC_CLK_DIV_8_0**, or **ADC_CLK_DIV_8_5**. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setupSOC
+
+```
+static inline void ADC_setupSOC(
+    uint32 base,
+    uint32 socNumber,
+    Adc_mcalTrigger_t trigger,
+    uint32 channel,
+    uint32 sampleWindow
+)
+```
+
+
+**Brief**: 
+Configures a start-of-conversion (SOC) in the ADC. 
+
+This function configures the a start-of-conversion (SOC) in the ADC module.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **socNumber** - number of the start-of-conversion. The _socNumber_ number is a value **ADC_SOC_NUMBERX** where X is a number from 0 to 15 specifying which SOC is to be configured on the ADC module specified by _base_. 
+  
+* **trigger** - the source that will cause the SOC. The _trigger_ specifies the event that causes the SOC such as software, a timer interrupt, an ePWM event, or an ADC interrupt. It should be a value in the format of **ADC_TRIGGER_XXXX** where XXXX is the event such as **ADC_TRIGGER_SW_ONLY**, **ADC_TRIGGER_EPWM1_SOCA**, and so on. 
+  
+* **channel** - number associated with the input signal. The _channel_ parameter specifies the channel to be converted. In single-ended mode this is a single pin given by **ADC_CH_ADCINx** where x is the number identifying the pin between 0 and 5 inclusive. In differential mode, two pins are used as inputs and are passed in the _channel_ parameter as **ADC_CH_ADCIN0_ADCIN1**, **ADC_CH_ADCIN2_ADCIN3**, ..., or **ADC_CH_ADCIN14_ADCIN5**. 
+  
+* **sampleWindow** - acquisition window duration. The _sampleWindow_ parameter is the acquisition window duration in SYSCLK cycles. It should be a value between 1 and 512 cycles inclusive. The selected duration must be at least as long as one ADCCLK cycle. Also, the datasheet will specify a minimum window duration requirement in nanoseconds. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setInterruptSOCTrigger
+
+```
+static inline void ADC_setInterruptSOCTrigger(
+    uint32 base,
+    uint16 socNumber,
+    Adc_mcalIntSOCTrigger_t trigger
+)
+```
+
+
+**Brief**: 
+Configures the interrupt SOC trigger of an SOC. 
+
+This function configures the interrupt start-of-conversion trigger in the ADC module. This functionality is useful for creating continuous conversions.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **socNumber** - number of the start-of-conversion. The _socNumber_ number is a value **ADC_SOC_NUMBERX** where X is a number from 0 to 15 specifying which SOC is to be configured on the ADC module specified by _base_. 
+  
+* **trigger** - the interrupt source that will cause the SOC. The _trigger_ specifies the interrupt that causes a start of conversion or none. It should be one of the following values.
+
+* **ADC_INT_SOC_TRIGGER_NONE**
+* **ADC_INT_SOC_TRIGGER_ADCINT1**
+* **ADC_INT_SOC_TRIGGER_ADCINT2**
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setInterruptPulseMode
+
+```
+static inline void ADC_setInterruptPulseMode(
+    uint32 base,
+    Adc_mcalPulseMode_t pulseMode
+)
+```
+
+
+**Brief**: 
+Sets the timing of the end-of-conversion pulse. 
+
+This function configures the end-of-conversion (EOC) pulse generated by ADC. This pulse will be generated either at the end of the acquisition window plus a number of SYSCLK cycles configured by ADC_setInterruptCycleOffset() (pass **ADC_PULSE_END_OF_ACQ_WIN** into _pulseMode_) or at the end of the voltage conversion, one cycle prior to the ADC result latching into it's result register (pass **ADC_PULSE_END_OF_CONV** into _pulseMode_).
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **pulseMode** - generation mode of the EOC pulse. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setInterruptCycleOffset
+
+```
+static inline void ADC_setInterruptCycleOffset(
+    uint32 base,
+    uint16 cycleOffset
+)
+```
+
+
+**Brief**: 
+Sets the timing of early interrupt generation. 
+
+This function configures cycle offset between the negative edge of a sample pulse and an early interrupt pulse being generated. This number of cycles is specified with the _cycleOffset_ parameter.
+
+This function only applies when early interrupt generation is enabled. That means the ADC_setInterruptPulseMode() function _pulseMode_ parameter is configured as **ADC_PULSE_END_OF_ACQ_WIN**.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **cycleOffset** - cycles from an SOC falling edge to an early interrupt pulse 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_enableConverter
+
+```
+static inline void ADC_enableConverter(
+    uint32 base
+)
+```
+
+
+**Brief**: 
+Powers up the analog-to-digital converter core. 
+
+This function powers up the analog circuitry inside the analog core.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+**Note**: Allow at least a 500us delay before sampling after calling this API. If you enable multiple ADCs, you can delay after they all have begun powering up.
+
+### function ADC_disableConverter
+
+```
+static inline void ADC_disableConverter(
+    uint32 base
+)
+```
+
+
+**Brief**: 
+Powers down the analog-to-digital converter module. 
+
+This function powers down the analog circuitry inside the analog core..
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_forceSOC
+
+```
+static inline void ADC_forceSOC(
+    uint32 base,
+    Adc_mcalSOCNumber_t socNumber
+)
+```
+
+
+**Brief**: 
+Forces a SOC flag to a 1 in the analog-to-digital converter. 
+
+This function forces the SOC flag associated with the SOC specified by _socNumber_. This initiates a conversion once that SOC is given priority. This software trigger can be used whether or not the SOC has been configured to accept some other specific trigger.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **socNumber** - number of the start-of-conversion. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_forceMultipleSOC
+
+```
+static inline void ADC_forceMultipleSOC(
+    uint32 base,
+    uint16 socMask
+)
+```
+
+
+**Brief**: 
+Forces multiple SOC flags to 1 in the analog-to-digital converter. 
+
+This function forces the SOCFRC1 flags associated with the SOCs specified by _socMask_. This initiates a conversion once the desired SOCs are given priority. This software trigger can be used whether or not the SOC has been configured to accept some other specific trigger. Valid values for _socMask_ parameter can be any of the individual ADC_FORCE_SOCx values or any of their OR'd combination to trigger multiple SOCs.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **socMask** - SOCs to be forced through software 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+**Note**: To trigger SOC0, SOC1 and SOC2, value (ADC_FORCE_SOC0 | ADC_FORCE_SOC1 | ADC_FORCE_SOC2) should be passed as socMask.
+
+### function ADC_getInterruptStatus
+
+```
+static inline boolean ADC_getInterruptStatus(
+    uint32 base,
+    uint16 adcIntNum
+)
+```
+
+
+**Brief**: 
+Gets the current ADC interrupt status. 
+
+This function returns the interrupt status for the analog-to-digital converter.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ takes a one of the values **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module should be cleared. 
+
+
+**Returns**: 
+
+  
+* **ADC_TRUE** - if the interrupt flag for the specified interrupt number is set 
+<br> 
+  
+* **ADC_FALSE** - if the interrupt flag for the specified interrupt number is not set 
+<br> 
+
+
+**Return**: boolean 
+
+### function ADC_clearInterruptStatus
+
+```
+static inline void ADC_clearInterruptStatus(
+    uint32 base,
+    uint16 adcIntNum
+)
+```
+
+
+**Brief**: 
+Clears ADC interrupt sources. 
+
+This function clears the specified ADC interrupt sources so that they no longer assert. If not in continuous mode, this function must be called before any further interrupt pulses may occur.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ takes a one of the values **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module should be cleared. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_getInterruptOverflowStatus
+
+```
+static inline boolean ADC_getInterruptOverflowStatus(
+    uint32 base,
+    uint16 adcIntNum
+)
+```
+
+
+**Brief**: 
+Gets the current ADC interrupt overflow status. 
+
+This function returns the interrupt overflow status for the analog-to-digital converter. An overflow condition is generated irrespective of the continuous mode.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ takes a one of the values **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module should be cleared. 
+
+
+**Returns**: 
+
+  
+* **ADC_TRUE** - if the interrupt overflow flag for the specified interrupt number is set 
+<br> 
+  
+* **ADC_FALSE** - if the interrupt overflow flag for the specified interrupt number is not set 
+<br> 
+
+
+**Return**: boolean 
+
+### function ADC_clearInterruptOverflowStatus
+
+```
+static inline void ADC_clearInterruptOverflowStatus(
+    uint32 base,
+    uint16 adcIntNum
+)
+```
+
+
+**Brief**: 
+Clears ADC interrupt overflow sources. 
+
+This function clears the specified ADC interrupt overflow sources so that they no longer assert. If software tries to clear the overflow in the same cycle that hardware tries to set the overflow, then hardware has priority.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ takes a one of the values **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module should be cleared. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_readResult
+
+```
+static inline uint16 ADC_readResult(
+    uint32 resultBase,
+    uint32 socNumber
+)
+```
+
+
+**Brief**: 
+Reads the conversion result. 
+
+This function returns the conversion result that corresponds to the base address passed into _resultBase_ and the SOC passed into _socNumber_.
+
+
+**Parameters**: 
+
+  
+* **resultBase** - base address of the ADC results. 
+  
+* **socNumber** - number of the start-of-conversion The _socNumber_ number is a value **ADC_SOC_NUMBERX** where X is a number from 0 to 15 specifying which SOC's result is to be read. 
+
+
+**Returns**: 
+
+  
+* **Returns** the conversion result. 
+<br> 
+
+
+**Return**: uint16 
+
+**Note**: Take care that you are using a base address for the result registers (ADCxRESULT_BASE) and not a base address for the control registers.
+
+### function ADC_readResultbaseaddr
+
+```
+static inline uint32 ADC_readResultbaseaddr(
+    uint32 resultBase,
+    uint16 socNumber
+)
+```
+
+
+**Brief**: 
+Reads the address of the conversion result register. 
+
+This function returns the conversion result that corresponds to the base address passed into _resultBase_ and the SOC passed into _socNumber_.
+
+
+**Parameters**: 
+
+  
+* **resultBase** - base address of the ADC results. 
+  
+* **socNumber** - number of the start-of-conversion The _socNumber_ number is a value **ADC_SOC_NUMBERX** where X is a number from 0 to 15 specifying which SOC's result is to be read. 
+
+
+**Returns**: 
+
+  
+* **Returns** the conversion result. 
+<br> 
+
+
+**Return**: uint32 
+
+**Note**: Take care that you are using a base address for the result registers (ADCxRESULT_BASE) and not a base address for the control registers.
+
+### function ADC_isBusy
+
+```
+static inline boolean ADC_isBusy(
+    uint32 base
+)
+```
+
+
+**Brief**: 
+Determines whether the ADC is busy or not. 
+
+This function allows the caller to determine whether or not the ADC is busy and can sample another channel.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+
+
+**Returns**: 
+
+  
+* **ADC_TRUE** - if the ADC is sampling 
+<br> 
+  
+* **ADC_FALSE** - if all samples are complete 
+<br> 
+
+
+**Return**: boolean 
+
+### function ADC_setBurstModeConfig
+
+```
+static inline void ADC_setBurstModeConfig(
+    uint32 base,
+    Adc_mcalTrigger_t trigger,
+    uint16 burstSize
+)
+```
+
+
+**Brief**: 
+Set SOC burst mode. 
+
+This function configures the burst trigger and burstSize of an ADC module. Burst mode allows a single trigger to walk through the round-robin SOCs one or more at a time. When burst mode is enabled, the trigger selected by the ADC_setupSOC() API will no longer have an effect on the SOCs in round-robin mode. Instead, the source specified through the _trigger_ parameter will cause a burst of _burstSize_ conversions to occur.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **trigger** - the source that will cause the burst conversion sequence. The _trigger_ parameter takes the same values as the ADC_setupSOC() API 
+  
+* **burstSize** - the number of SOCs converted during a burst sequence. The _burstSize_ parameter should be a value between 1 and 16 inclusive. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_enableBurstMode
+
+```
+static inline void ADC_enableBurstMode(
+    uint32 base
+)
+```
+
+
+**Brief**: 
+Enables SOC burst mode. 
+
+This function enables SOC burst mode operation of the ADC. Burst mode allows a single trigger to walk through the round-robin SOCs one or more at a time. When burst mode is enabled, the trigger selected by the ADC_setupSOC() API will no longer have an effect on the SOCs in round-robin mode. Use ADC_setBurstMode() to configure the burst trigger and size.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_disableBurstMode
+
+```
+static inline void ADC_disableBurstMode(
+    uint32 base
+)
+```
+
+
+**Brief**: 
+Disables SOC burst mode. 
+
+This function disables SOC burst mode operation of the ADC. SOCs in round-robin mode will be triggered by the trigger configured using the ADC_setupSOC() API.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setSOCPriority
+
+```
+static inline void ADC_setSOCPriority(
+    uint32 base,
+    uint16 priMode
+)
+```
+
+
+**Brief**: 
+Sets the priority mode of the SOCs. 
+
+This function sets the priority mode of the SOCs. There are three main modes that can be passed in the _priMode_ parameter
+
+
+
+* All SOCs are in round-robin mode. This means no SOC has an inherent higher priority over another. This is selected by passing in the value **ADC_PRI_ALL_ROUND_ROBIN**.
+* All priorities are in high priority mode. This means that the priority of the SOC is determined by its SOC number. This option is selected by passing in the value **ADC_PRI_ALL_HIPRI**.
+* A range of SOCs are assigned high priority, with all others in round robin mode. High priority mode means that an SOC with high priority will interrupt the round robin wheel and insert itself as the next conversion. Passing in the value **ADC_PRI_SOC0_HIPRI** will make SOC0 highest priority, **ADC_PRI_THRU_SOC1_HIPRI** will put SOC0 and SOC 1 in high priority, and so on up to **ADC_PRI_THRU_SOC14_HIPRI** where SOCs 0 through 14 are in high priority.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **priMode** - priority mode of the SOCs. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setupPPB
+
+```
+static inline void ADC_setupPPB(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    uint16 socNumber
+)
+```
+
+
+**Brief**: 
+Configures a post-processing block (PPB) in the ADC. 
+
+This function associates a post-processing block with a SOC.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **ppbNumber** - number of the post-processing block. The _ppbNumber_ is a value **ADC_PPB_NUMBERX** where X is a value from 1 to 4 inclusive that identifies a PPB to be configured. 
+  
+* **socNumber** - number of the start-of-conversion. The _socNumber_ number is a value **ADC_SOC_NUMBERX** where X is a number from 0 to 15 specifying which SOC is to be configured on the ADC module specified by _base_. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+**Note**: You can have more that one PPB associated with the same SOC, but a PPB can only be configured to correspond to one SOC at a time. Also note that when you have multiple PPBs for the same SOC, the calibration offset that actually gets applied will be that of the PPB with the highest number. Since SOC0 is the default for all PPBs, look out for unintentional overwriting of a lower numbered PPB's offset.
+
+### function ADC_enablePPBEvent
+
+```
+static inline void ADC_enablePPBEvent(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    uint16 evtFlags
+)
+```
+
+
+**Brief**: 
+Enables individual ADC PPB event sources. 
+
+This function enables the indicated ADC PPB event sources. This will allow the specified events to propagate through the X-BAR to a pin or to an ePWM module.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **ppbNumber** - number of the post-processing block. 
+  
+* **evtFlags** - bit mask of the event sources to be enabled. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_disablePPBEvent
+
+```
+static inline void ADC_disablePPBEvent(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    uint16 evtFlags
+)
+```
+
+
+**Brief**: 
+Disables individual ADC PPB event sources. 
+
+This function disables the indicated ADC PPB event sources. This will stop the specified events from propagating through the X-BAR to other modules.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **ppbNumber** - number of the post-processing block. 
+  
+* **evtFlags** - bit mask of the event sources to be disabled. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_enablePPBEventInterrupt
+
+```
+static inline void ADC_enablePPBEventInterrupt(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    uint16 intFlags
+)
+```
+
+
+**Brief**: 
+Enables individual ADC PPB event interrupt sources. 
+
+This function enables the indicated ADC PPB interrupt sources. Only the sources that are enabled can be reflected to the processor interrupt. Disabled sources have no effect on the processor.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **ppbNumber** - number of the post-processing block. 
+  
+* **intFlags** - bit mask of the interrupt sources to be enabled. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_disablePPBEventInterrupt
+
+```
+static inline void ADC_disablePPBEventInterrupt(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    uint16 intFlags
+)
+```
+
+
+**Brief**: 
+Disables individual ADC PPB event interrupt sources. 
+
+This function disables the indicated ADC PPB interrupt sources. Only the sources that are enabled can be reflected to the processor interrupt. Disabled sources have no effect on the processor.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **ppbNumber** - number of the post-processing block. 
+  
+* **intFlags** - bit mask of the interrupt sources to be disabled. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_getPPBEventStatus
+
+```
+static inline uint16 ADC_getPPBEventStatus(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber
+)
+```
+
+
+**Brief**: 
+Gets the current ADC event status. 
+
+This function returns the event status for the analog-to-digital converter.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **ppbNumber** - number of the post-processing block. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_clearPPBEventStatus
+
+```
+static inline void ADC_clearPPBEventStatus(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    uint16 evtFlags
+)
+```
+
+
+**Brief**: 
+Clears ADC event flags. 
+
+This function clears the indicated ADC PPB event flags. After an event occurs this function must be called to allow additional events to be produced.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC. 
+  
+* **ppbNumber** - number of the post-processing block. 
+  
+* **evtFlags** - bit mask of the event source to be cleared. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_readPPBResult
+
+```
+static inline sint32 ADC_readPPBResult(
+    uint32 resultBase,
+    Adc_mcalPPBNumber_t ppbNumber
+)
+```
+
+
+**Brief**: 
+Reads the processed conversion result from the PPB. 
+
+This function returns the processed conversion result that corresponds to the base address passed into _resultBase_ and the PPB passed into _ppbNumber_.
+
+
+**Parameters**: 
+
+  
+* **resultBase** - base address of the ADC results. 
+  
+* **ppbNumber** - number of the post-processing block. 
+
+
+**Returns**: 
+
+  
+* **Returns** the signed 32-bit conversion result. 
+<br> 
+
+
+**Return**: sint32 
+
+**Note**: Take care that you are using a base address for the result registers (ADCxRESULT_BASE) and not a base address for the control registers.
+
+### function ADC_getPPBDelayTimeStamp
+
+```
+static inline uint16 ADC_getPPBDelayTimeStamp(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber
+)
+```
+
+
+**Brief**: 
+Reads sample delay time stamp from a PPB. 
+
+This function returns the sample delay time stamp. This delay is the number of system clock cycles between the SOC being triggered and when it began converting.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. 
+
+
+**Returns**: 
+
+  
+* **Returns** the delay time stamp. 
+<br> 
+
+
+**Return**: uint16 
+
+### function ADC_setPPBCalibrationOffset
+
+```
+static inline void ADC_setPPBCalibrationOffset(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    sint16 offset
+)
+```
+
+
+**Brief**: 
+Sets the post processing block offset correction. 
+
+This function sets the PPB offset correction value. This value can be used to digitally remove any system-level offset inherent in the ADCIN circuit before it is stored in the appropriate result register. The _offset_ parameter is **subtracted** from the ADC output and is a signed value from -512 to 511 inclusive. For example, when _offset_ = 1, ADCRESULT = ADC output - 1. When _offset_ = -512, ADCRESULT = ADC output - (-512) or ADC output + 512.
+
+Passing a zero in to the _offset_ parameter will effectively disable the calculation, allowing the raw ADC result to be passed unchanged into the result register.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. 
+  
+* **offset** - 10-bit signed value subtracted from ADC the output. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+**Note**: If multiple PPBs are applied to the same SOC, the offset that will be applied will be that of the PPB with the highest number.
+
+### function ADC_setPPBReferenceOffset
+
+```
+static inline void ADC_setPPBReferenceOffset(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    uint16 offset
+)
+```
+
+
+**Brief**: 
+Sets the post processing block reference offset. 
+
+This function sets the PPB reference offset value. This can be used to either calculate the feedback error or convert a unipolar signal to bipolar by subtracting a reference value. The result will be stored in the appropriate PPB result register which can be read using ADC_readPPBResult().
+
+Passing a zero in to the _offset_ parameter will effectively disable the calculation and will pass the ADC result to the PPB result register unchanged.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. 
+  
+* **offset** - 12-bit unsigned value subtracted from ADC the output. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+**Note**: If in 12-bit mode, you may only pass a 12-bit value into the _offset_ parameter.
+
+### function ADC_enablePPBTwosComplement
+
+```
+static inline void ADC_enablePPBTwosComplement(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber
+)
+```
+
+
+**Brief**: 
+Enables two's complement capability in the PPB. 
+
+This function enables two's complement in the post-processing block specified by the _ppbNumber_ parameter. When enabled, a two's complement will be performed on the output of the offset subtraction before it is stored in the appropriate PPB result register. In other words, the PPB result will be the reference offset value minus the the ADC result value (ADCPPBxRESULT = ADCSOCxOFFREF - ADCRESULTx).
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_disablePPBTwosComplement
+
+```
+static inline void ADC_disablePPBTwosComplement(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber
+)
+```
+
+
+**Brief**: 
+Disables two's complement capability in the PPB. 
+
+This function disables two's complement in the post-processing block specified by the _ppbNumber_ parameter. When disabled, a two's complement will **NOT** be performed on the output of the offset subtraction before it is stored in the appropriate PPB result register. In other words, the PPB result will be the ADC result value minus the reference offset value (ADCPPBxRESULT = ADCRESULTx - ADCSOCxOFFREF).
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_enablePPBEventCBCClear
+
+```
+static inline void ADC_enablePPBEventCBCClear(
+    uint32 base,
+    uint32 ppbNumber
+)
+```
+
+
+**Brief**: 
+Enables cycle-by-cycle clear of ADC PPB event flags. 
+
+This function enables the automatic cycle-by-cycle clear of ADC PPB event flags. When enabled, the desired PPB event flags are automatically cleared on the next PPBxRESULT load, unless a set condition is also occurring at the same time, in which case the set takes precedence.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_disablePPBEventCBCClear
+
+```
+static inline void ADC_disablePPBEventCBCClear(
+    uint32 base,
+    uint32 ppbNumber
+)
+```
+
+
+**Brief**: 
+Disables cycle-by-cycle clear of ADC PPB event flags. 
+
+This function disables the cycle-by-cycle clear of ADC PPB event flags. When disabled, the desired PPB event flags are to be cleared explicitly in software inorder to generate next set of interrupts/events
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_enableInterrupt
+
+```
+static inline void ADC_enableInterrupt(
+    uint32 base,
+    uint16 adcIntNum
+)
+```
+
+
+**Brief**: 
+Enables an ADC interrupt source. 
+
+This function enables the indicated ADC interrupt source. Only the sources that are enabled can be reflected to the processor interrupt. Disabled sources have no effect on the processor.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ can take the value **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module should be enabled. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_disableInterrupt
+
+```
+static inline void ADC_disableInterrupt(
+    uint32 base,
+    uint16 adcIntNum
+)
+```
+
+
+**Brief**: 
+Disables an ADC interrupt source. 
+
+This function disables the indicated ADC interrupt source. Only the sources that are enabled can be reflected to the processor interrupt. Disabled sources have no effect on the processor.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ can take the value **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module should be disabled. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setInterruptSource
+
+```
+static inline void ADC_setInterruptSource(
+    uint32 base,
+    uint16 adcIntNum,
+    uint16 socNumber
+)
+```
+
+
+**Brief**: 
+Sets the source EOC for an analog-to-digital converter interrupt. 
+
+This function sets which conversion is the source of an ADC interrupt.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ can take the value **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module is being configured. 
+  
+* **socNumber** - number of the start-of-conversion. The _socNumber_ number is a value **ADC_SOC_NUMBERX** where X is a number from 0 to 15 specifying which EOC is to be configured on the ADC module specified by _base_. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_enableContinuousMode
+
+```
+static inline void ADC_enableContinuousMode(
+    uint32 base,
+    uint16 adcIntNum
+)
+```
+
+
+**Brief**: 
+Enables continuous mode for an ADC interrupt. 
+
+This function enables continuous mode for the ADC interrupt passed into _adcIntNum_. This means that pulses will be generated for the specified ADC interrupt whenever an EOC pulse is generated irrespective of whether or not the flag bit is set.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ can take the value **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module is being configured. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_disableContinuousMode
+
+```
+static inline void ADC_disableContinuousMode(
+    uint32 base,
+    uint32 adcIntNum
+)
+```
+
+
+**Brief**: 
+Disables continuous mode for an ADC interrupt. 
+
+This function disables continuous mode for the ADC interrupt passed into _adcIntNum_. This means that pulses will not be generated for the specified ADC interrupt until the corresponding interrupt flag for the previous interrupt occurrence has been cleared using ADC_clearInterruptStatus().
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **adcIntNum** - interrupt number within the ADC wrapper. _adcIntNum_ can take the value **ADC_INT_NUMBER1**, **ADC_INT_NUMBER2**, **ADC_INT_NUMBER3**, or **ADC_INT_NUMBER4** to express which of the four interrupts of the ADC module is being configured. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setMode
+
+```
+void ADC_setMode(
+    uint32 base,
+    Adc_mcalResolution_t resolution,
+    Adc_mcalSignalMode_t signalMode
+)
+```
+
+
+**Brief**: 
+Configures the analog-to-digital converter resolution and signal mode. 
+
+This function configures the ADC module's conversion resolution and input signal mode and ensures that the corresponding trims are loaded.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **resolution** - resolution of the converter (12 bits). The _resolution_ parameter specifies the resolution of the conversion. It can be 12-bit specified by **ADC_RESOLUTION_12BIT**
+  
+* **signalMode** - input signal mode of the converter. The _signalMode_ parameter specifies the signal mode. In single-ended mode, which is indicated by **ADC_MODE_SINGLE_ENDED**, the input voltage is sampled on a single pin referenced to VREFLO. In differential mode, which is indicated by **ADC_MODE_DIFFERENTIAL**, the input voltage to the converter is sampled on a pair of input pins, a positive and a negative. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function ADC_setPPBTripLimits
+
+```
+void ADC_setPPBTripLimits(
+    uint32 base,
+    Adc_mcalPPBNumber_t ppbNumber,
+    sint32 tripHiLimit,
+    sint32 tripLoLimit
+)
+```
+
+
+**Brief**: 
+Sets the windowed trip limits for a PPB. 
+
+This function sets the windowed trip limits for a PPB. These values set the digital comparator so that when one of the values is exceeded, either a high or low trip event will occur. In 12-bit mode, only bits 12:0 will be compared against bits 12:0 of the PPB result.
+
+
+**Parameters**: 
+
+  
+* **base** - base address of the ADC module. 
+  
+* **ppbNumber** - number of the post-processing block. The _ppbNumber_ is a value **ADC_PPB_NUMBERX** where X is a value from 1 to 4 inclusive that identifies a PPB to be configured. 
+  
+* **tripHiLimit** - value is the digital comparator trip high limit. 
+  
+* **tripLoLimit** - value is the digital comparator trip low limit. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_utilsInitLinkList
+
+```
+void Adc_utilsInitLinkList(
+    Adc_UtilsLinkListObj * llobj
+)
+```
+
+
+**Brief**: 
+Init a link list object. 
+
+**Parameters**: 
+
+  
+* **llobj** Link list object. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_utilsDeInitLinkList
+
+```
+void Adc_utilsDeInitLinkList(
+    Adc_UtilsLinkListObj * llobj
+)
+```
+
+
+**Brief**: 
+De-init a link list object. 
+
+**Parameters**: 
+
+  
+* **llobj** Link list object. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_utilsLinkNodePri
+
+```
+void Adc_utilsLinkNodePri(
+    Adc_UtilsLinkListObj * llobj,
+    Adc_UtilsNode * node,
+    void * data,
+    Adc_GroupPriorityType priority,
+    uint32 isPaused
+)
+```
+
+
+**Brief**: 
+Links a node to the linked list. 
+
+The memory to the node object should be allocated by the caller. This is used for link list with priority.
+
+
+**Parameters**: 
+
+  
+* **llobj** Link list object. 
+  
+* **node** Node object pointer used for linking. 
+  
+* **data** Data pointer to add to node. 
+  
+* **priority** Priority of the node used for priority based addition of nodes. Priority is in ascending order of the value. So 0 is the lowest priority and is added to the bottom of the node. Nodes with the same priority are always added to the bottom of the existing nodes with same priority. For non-priority based modes, this parameter is ignored and could be set to 0. 
+  
+* **isPaused** Flag to indiate if this group is paused mid way and is queued back. This is required to put this group ahead of the groups with the same priority as this group so that this group is given precedence to restart ahead of other groups of same priority 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_utilsUnLinkNodePri
+
+```
+void Adc_utilsUnLinkNodePri(
+    Adc_UtilsLinkListObj * llobj,
+    Adc_UtilsNode * node
+)
+```
+
+
+**Brief**: 
+Unlinks the node from the list. Used for the priority link lists. 
+
+**Parameters**: 
+
+  
+* **llobj** Link list object. 
+  
+* **node** Node pointer to be unlinked from the list. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_utilsInitNodeObject
+
+```
+void Adc_utilsInitNodeObject(
+    Adc_UtilsNode * node
+)
+```
+
+
+**Brief**: 
+Initialize the node object with default value. 
+
+**Parameters**: 
+
+  
+* **node** Node pointer to be unlinked from the list. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Adc_utilsGetHeadNode
+
+```
+Adc_UtilsNode * Adc_utilsGetHeadNode(
+    const Adc_UtilsLinkListObj * llobj
+)
+```
+
+
+**Brief**: 
+Returns the reference to the head node. This does not remove the node from the head. 
+
+**Parameters**: 
+
+  
+* **llobj** Link list object. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+
+
+
+

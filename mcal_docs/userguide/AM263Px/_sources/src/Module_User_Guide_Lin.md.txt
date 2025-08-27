@@ -1,0 +1,634 @@
+## LIN Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|BSW|Basic Software|
+|MCAL|Micro Controller Abstraction Layer|
+|DET|Default Error Tracer|
+|HW |Hardware|
+|SW |Software|
+|EcuM|ECU Manager|
+|LIN|Local Interconnect Network|
+|MCU|Micro Controller Unit|
+|OS|Operating System|
+
+### Introduction
+
+This document describes the functionality and configuration of the AUTOSAR BSW module LIN.
+
+|Supported AUTOSAR Release|**4.3.1**|
+|------|-------------|
+|**Supported Configuration Variants**  | **Pre-Compile, Post-build**|
+|**Vendor ID**                         | **LIN_VENDOR_ID (44)**|
+|**Module ID**                         | **LIN_MODULE_ID (82)**|
+| **Supported Platform**             |   **AM263Px**|
+
+The LIN module initializes and controls the Lin peripheral. It provides services to send, receive data, sleep and wakeup of the Lin peripheral.
+
+### Functional Overview
+
+#### Initialization
+
+Lin_Init () must be called to initialize the LIN driver at power on and sets controller independent init values. This
+will also set the Lin controllers to IDLE state.
+
+#### States
+
+Refer Chapter 7.3.3 State Diagrams in AUTOSAR_SWS_LINDriver for more details.
+
+#### Assumptions
+
+Only one LIN channel of an ECU is allowed to connect to a particular LIN cluster.
+
+#### Limitations
+
+1. Abort of current ongoing transmission [SWS_Lin_00021].
+2. Automatic transmission of Goto Sleep command [SWS_Lin_00089].
+
+#### Design overview
+
+**Will be updated in future release**
+
+### Hardware Features
+
+#### IP Supported Features
+
+* Compatibility with LIN 1.3 protocols
+* Configurable baud rate up to 20 kpbs  
+* Two external pins: LINRX and LINTX.
+* Multibuffered receive and transmit units
+* Identification masks for message filtering
+* Automatic commander header generation
+* Wake up on LINRX dominant level from transceiver
+* Automatic wake up support
+* Error detection
+* 2 interrupt lines with priority encoding
+* Support for LIN 2.0 checksum
+* Enhanced baud rate generator
+
+#### AUTOSAR Supported Features
+
+* Conformance to LIN 2.1 protocol; operation in Master Mode only.
+* Support of upto 5 Lin Channels
+* Sleep / wakeup functionality
+* Enhanced and Classic checksum model
+* Transmission / Reception of upto 8 bytes of Data
+* PDU Directions supported : LIN_MASTER_RESPONSE, LIN_SLAVE_RESPONSE, LIN_SLAVE_TO_SLAVE
+* Use of EcuM wakeup source
+* Use of Det for reporting of development errors
+
+#### Not supported Features
+
+* Abort of ongoing transmission
+* Automatic transmission of Goto Sleep command
+
+#### Non compliance
+
+##### Deviations to requirements (Requirement Traceability)
+
+###### Deviation of requirements against AUTOSAR specification requirements
+
+Will be updated in next release
+
+### Source files
+
+Static source C Files are defined below
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Lin**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Lin.h** : *Contains interface header for Lin Drv functions.*\
+ ┃ ┃ ┃ ┣ 📜**Lin_Irq.h** : *Contains ISR function declarations for LIN Drv.*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Lin.c** : *Contains interface for Lin Drv functions.*\
+ ┃ ┃ ┃ ┣ 📜**Lin_Irq.c** : *Contains Interrupt Service Routines for Lin Drv.*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┗ 📜**cslr_lin.h** : *Contains Register definitions required for accessing Lin peripherals.*\
+ ┃ ┃ ┃ ┣ 📜**Lin_Priv.c** : *Contains controller dependent local functions and private functions to be used in Lin.c*\
+ ┃ ┃ ┃ ┗ 📜**Lin_Priv.h** : *Contains interface header for Lin private functions.*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┃ 📜README.txt
+
+Plugin files are defined below in the table.
+
+|Plugin Files|Description|
+|------|------|
+|Lin_Cfg.h|Contains the Precompile switches, Macros for LIN channels etc.|
+|Lin_PBcfg.c|Contains all channels Post-Build Configuration parameters |
+|Lin_Cfg.c|Contains all channels Pre-Compile Configuration parameters|
+
+```{figure} Assets/images/lin/lin_image1.jpg
+:alt: Lin header file include structure
+:align: center
+Lin header file include structure
+```
+
+### Module requirements
+
+Please refer **Software Product Specification** document provided as part of CSP.
+
+#### Memory Mapping
+
+| Memory Mapping Sections     | LIN_CODE | LIN_CODE_ISR | LIN_VAR_NO_INIT | LIN_VAR | LIN_CONST | LIN_PBCFG  |
+|----------------------------------------------|----------|--------------|-----------------|---------|-----------|------------|
+| LIN_START_SEC_VAR_INIT_UNSPECIFIED(.bss)     |          |              |                 | x       |           |            |
+| LIN_STOP_SEC_VAR_INIT_UNSPECIFIED   |          |              |                 | x       |           |            |
+| LIN_START_SEC_CONFIG_DATA (.const)     |          |              |                 |         |           | x          |
+| LIN_STOP_SEC_CONFIG_DATA     |          |              |                 |         |           | x          |
+| LIN_START_SEC_CODE(.text)       | x        |              |                 |         |           |            |
+| LIN_STOP_SEC_CODE            | x        |              |                 |         |           |            |
+| LIN_START_SEC_VAR_INIT_32(.bss)     |          |              |                 | x       |           |            |
+| LIN_STOP_SEC_VAR_INIT_32        |          |              |                 | x       |           |            |
+| LIN_START_SEC_VAR_NO_INIT_UNSPECIFIED(.data) |          |              | x               |         |           |            |
+| LIN_STOP_SEC_VAR_NO_INIT_UNSPECIFIED     |          |              | x               |         |           |            |
+| LIN_START_SEC_ISR_CODE          |          | x            |                 |         |           |            |
+| LIN_STOP_SEC_ISR_CODE          |          | x            |                 |         |           |            |
+
+#### Scheduling
+
+There are no scheduled functions within the LIN driver
+
+#### Error handling
+
+##### DET Errors
+
+The errors reported to DET module are described in the following table:
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-------|-----|
+|API service used without module initialization|LIN_E_UNINIT|0x00|
+|API service used with an invalid or inactive channel parameter|LIN_E_INVALID_CHANNEL|0x02|
+|API service called with invalid configuration pointer|LIN_E_INVALID_POINTER|0x03|
+|Invalid state transition for the current state|LIN_E_STATE_TRANSITION|0x04|
+|API service called with a NULL pointer|LIN_E_PARAM_POINTER|0x05|
+
+##### Runtime Errors
+
+None
+
+### Used resources
+
+#### Interrupt Handling
+
+The Driver doesn’t register any interrupts handler (ISR), it’s expected that consumer of this driver registers the required interrupt handler.
+
+[AUTOSAR_SWS_LINDriver section: 10 Configuration specification](https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_LINDriver.pdf), details the expected behavior and control flow for ISR implementation, please refer the same.
+
+Lin driver provides ISR for wakeup detection. The interrupt vector lines to be used is configurable in Lin driver.
+The interrupt category must be configured in Lin Driver and OS modules. The ISR’s are implemented in the file Lin_Irq.c.
+
+Respective ISRs for each Lin Instances in AM263Px are as follows:
+
+| Lin Instances   | ISR Routines  |
+|--------------------------|-----------------|
+| LIN0 Wakeup Line 0 (IE0)| Lin_0_Int0ISR() |
+| LIN0 Wakeup Line 1 (IE1)| Lin_0_Int1ISR() |
+| LIN1 Wakeup Line 0 (IE0)| Lin_1_Int0ISR() |
+| LIN1 Wakeup Line 1 (IE1)| Lin_1_Int1ISR() |
+| LIN2 Wakeup Line 0 (IE0)| Lin_2_Int0ISR() |
+| LIN2 Wakeup Line 1 (IE1)| Lin_2_Int1ISR() |
+| LIN3 Wakeup Line 0 (IE0)| Lin_3_Int0ISR() |
+| LIN3 Wakeup Line 1 (IE1)| Lin_3_Int1ISR() |
+| LIN4 Wakeup Line 0 (IE0)| Lin_4_Int0ISR() |
+| LIN4 Wakeup Line 1 (IE1) | Lin_4_Int1ISR() |
+
+1. **Lin_0_Int0ISR**
+    For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN0 controller.
+
+2. **Lin_0_Int1ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN0 controller
+
+3. **Lin_1_Int0ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN1 controller.
+
+4. **Lin_1_Int1ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN1 controller.
+
+5. **Lin_2_Int0ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN2 controller.
+
+6. **Lin_2_Int1ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN2 controller.
+
+7. **Lin_3_Int0ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN3 controller.
+
+8. **Lin_3_Int1ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN3 controller.
+
+9. **Lin_4_Int0ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN4 controller.
+
+10. **Lin_4_Int1ISR**
+   For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN4 controller.
+
+### Integration description
+
+#### Dependent modules
+
+##### MCU
+
+The hardware of the internal LIN hardware unit depends on the system clock, prescaler(s) and PLL. Hence, the length of the LIN bit timing depends on the clock settings made in module MCU.
+The LIN driver module will not take care of setting the registers that configure the clock, prescaler(s) and PLL (e.g. switching on/off the PLL) in its init functions. The MCU module must do this.
+
+##### PORT
+
+The Port driver configures the port pins used for the LIN driver as input or output. Hence, the Port driver has to be initialized prior to the use of LIN functions. Otherwise, LIN driver functions will exhibit undefined behavior.
+
+##### OS
+
+The LIN driver uses interrupts and therefore there is a dependency on the OS, which configures the interrupt sources.
+
+##### LIN Driver Users
+
+The LIN Interface is the only user of the LIN driver services.
+
+##### DET
+
+In development mode, the Lin module reports development error through the Det_ReportError function of module DET.
+
+AUTOSAR requires that API functions shall check the validity of their respective parameters.
+These checks are for development error reporting and can be enabled or disabled.
+
+##### Callback Notification
+
+None
+
+##### SchM
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that LIN module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator. For LIN Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | LIN Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|LIN_EXCLUSIVE_AREA_0 | Lin_SendFrame<br>Lin_GoToSleep<br>Lin_GoToSleepInternal<br>Lin_WakeupProcess<br>Lin_WakeupInternalProcess<br>Lin_GetStatus| To protect against multiple access for shared resources |ALL_INTERRUPT_BLOCKING : All interrupts should be blocked as this API’s can be called in the interrupts |
+
+#### Multi-core support
+
+Not supported
+
+### Configuration
+
+
+
+#### LinDemEventParameterRefs
+
+| Item ||
+|--------|---------------|
+| **Name** | LinDemEventParameterRefs |
+| **Description** | Reference to the DemEventParameter which shall be issued when the error "Timeout caused by hardware error" has occurred. If the reference is not configured the error shall be reported as DET error. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+#### LinGeneral
+This container contains the parameters related to each LIN Driver Unit.
+
+##### LinDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | LinDevErrorDetect |
+| **Description** | Switches the development error detection and notification on or off. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### LinIndex
+
+| Item ||
+|--------|---------------|
+| **Name** | LinIndex |
+| **Description** | Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 255 |
+| **Min-value** | 0 |
+
+##### LinVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | LinVersionInfoApi |
+| **Description** | Switches the Lin_GetVersionInfo function ON or OFF. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### LinEnableRegisterReadbackApi
+
+| Item ||
+|--------|---------------|
+| **Name** | LinEnableRegisterReadbackApi |
+| **Description** | Switch to indicate that the Lin_RegisterReadBack is supported |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+#### LinGlobalConfig
+This container contains the global configuration parameter of the Lin driver.
+
+##### LinChannel
+This container contains the configuration (parameters) of the LIN Controller(s).
+
+###### LinChannelId
+
+| Item ||
+|--------|---------------|
+| **Name** | LinChannelId |
+| **Description** | Identifies the LIN channel. Replaces LIN_CHANNEL_INDEX_NAME from the LIN SWS. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 4 |
+| **Min-value** | 0 |
+
+###### LinInstance
+
+| Item ||
+|--------|---------------|
+| **Name** | LinInstance |
+| **Description** | Selects Lin Instance. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | LIN_INSTANCE_0 |
+| **Range** | LIN_INSTANCE_0<br>LIN_INSTANCE_1<br>LIN_INSTANCE_2<br>LIN_INSTANCE_3<br>LIN_INSTANCE_4 |
+
+###### LinLoopbackMode
+
+| Item ||
+|--------|---------------|
+| **Name** | LinLoopbackMode |
+| **Description** | Select loopback mode to be used for this Lin instance. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | LIN_LOOPBACK_DISABLED |
+| **Range** | LIN_LOOPBACK_DISABLED<br>LIN_LOOPBACK_INTERNAL<br>LIN_LOOPBACK_EXTERNAL |
+
+###### LinChannelWakeupSupport
+
+| Item ||
+|--------|---------------|
+| **Name** | LinChannelWakeupSupport |
+| **Description** | Specifies if the LIN hardware channel supports wake up functionality |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+###### LinISRType
+
+| Item ||
+|--------|---------------|
+| **Name** | LinISRType |
+| **Description** | Select ISR type to be used for this Lin instance. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | LIN_ISR_CAT2 |
+| **Range** | LIN_ISR_VOID<br>LIN_ISR_CAT1<br>LIN_ISR_CAT2 |
+
+###### LinInterruptLineSelect
+
+| Item ||
+|--------|---------------|
+| **Name** | LinInterruptLineSelect |
+| **Description** | Select interrupt line to be used for this Lin instance. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | LIN_INTERRUPT_LINE_NUM_0 |
+| **Range** | LIN_INTERRUPT_LINE_NUM_0<br>LIN_INTERRUPT_LINE_NUM_1 |
+
+###### LinChannelEcuMWakeupSource
+
+| Item ||
+|--------|---------------|
+| **Name** | LinChannelEcuMWakeupSource |
+| **Description** | This parameter contains a reference to the Wakeup Source for this controller as defined in the ECU State Manager. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+###### LinClockRef
+
+| Item ||
+|--------|---------------|
+| **Name** | LinClockRef |
+| **Description** | Reference to the LIN clock source configuration, which is set in the MCU driver configuration. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### LinBaudrateConfig
+This container contains the baudrate configuration parameter of the Lin driver.
+
+###### LinChannelPrescalar
+
+| Item ||
+|--------|---------------|
+| **Name** | LinChannelPrescalar |
+| **Description** | Prescalar to derive LINCLK from VCLK |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 155 |
+| **Max-value** | 16777215 |
+| **Min-value** | 0 |
+### Examples
+
+#### Overview
+
+
+1. PMIC Settings should be initialized for AM263Px CC board.
+
+2. For AM263Px "PROC110E2A" board:
+
+
+
+    - LIN1 pins are exposed and LIN1 is configured with a 19200 baud.
+
+2. While running the example code :
+
+    - First, it asks to select the example to run.
+    - For Master Response example 8 Lin Frames are transmitted with varying PIDs, length and data.
+    - For Slave Response example LIN1 will transmit header with PID (0x20h) and slave will respond with data. Received data will be printed on screen and user can confirm if the data is correct.
+    - For Slave to Slave example LIN1 will transmit header with PID (0x30h); then one of the slaves will send response with data which should be received by the other slave connected on same cluster. User can confirm if the second slave receives the data.
+    - User can also select 'a' in console to run all examples sequentially.
+
+#### Hardware Software Setup and Tools
+
+1. Locate SW9 on the board and set it to ON.
+2. Locate the LIN, LIN-GND and VBat-LIN pins on both the PLIN device and the board. Refer to the documentation or user manual for both the PLIN device and the board to find the correct pins.
+3. Select appropriate cables with the necessary connectors to connect between the PLIN device and the board. Ensure the cables have the correct connectors to fit securely into both the PCAN device and board's connectors.
+
+
+```{figure} Assets/images/lin/lin_image3.PNG
+:alt: LIN Hardware Connectivity with PLIN USB
+:align: center
+LIN Hardware Connectivity with PLIN USB
+```
+
+
+4. Open the PLIN configuration software on your PC. The software is usually provided by the manufacturer of the PLIN device.
+5. Locate the settings for baud rate configuration.
+6. Set the baud rate to 19200 and select mode as Slave.
+7. Apply the changes and save the configuration.
+8. Ensure all connections are secure and properly plugged into their respective connectors on both the PLIN device and the board.
+9. Before powering on the system, double-check all connections to ensure they are correctly made, and there are no loose or improperly connected cables.
+10. After making the connections and configuring the PLIN device, power on both the board and the PLIN device.
+11. Once the system is powered on, verify that the LIN communication is established between the board and the PLIN device.
+12. If Slave to Slave mode example needs to be run; we would need 2 PLIN channels to be connected to the same LIN bus.
+13. Reference PLIN configs are placed at path (mcal/examples/Lin/Peak_PLIN_Config); these can be loaded for ease of use.
+
+#### Steps to build and run example
+
+1. LIN example application demonstrating the MCAL LIN driver features is in folder <MCAL_ROOT>/examples/Lin.
+2. This application can be built from the build folder by giving "gmake –s lin_app PLATFORM=am263px."
+
+3. Once the build is completed we get a binary file, which is loaded in our controller and executed.
+
+#### Configuration used to test this example
+
+1. LIN1 instance is configured as Channel_1.
+2. Baudrate of 19200 is configured.
+
+#### Example Logs
+
+```
+
+    LIN_APP: Sample Application - STARTS !!!
+  
+    LIN_APP: LIN MCAL Version Info
+    ---------------------
+    LIN_APP: Vendor ID: 44
+    LIN_APP: Module ID: 124
+    LIN_APP: SW Major Version: 9
+    LIN_APP: SW Minor Version: 1
+    LIN_APP: SW Patch Version: 0
+    
+    LIN_APP: Variant - Post Build being used !!!
+    
+    LIN_APP: Using LinChannel_1 -> LIN_INSTANCE_1 
+    LIN_APP: Waking LinChannel_1 from sleep 
+    LIN_APP: LinChannel_1 Wakeup Successful 
+    
+    LIN_APP: Enter one of the following
+    LIN_APP: m - Send Master Response Lin Request
+    LIN_APP: s - Send Slave Response Lin Request
+    LIN_APP: x - Send Slave to Slave Lin Request
+    LIN_APP: a - Send all types Lin Request
+    LIN_APP: q - to quit the application
+
+    LIN_APP: LinChannel_1 operating in Master Response mode 
+    LIN_APP: LinChannel_1 Transmission successful for 0 data frame 
+    LIN_APP: LinChannel_1 Transmission successful for 1 data frame 
+    LIN_APP: LinChannel_1 Transmission successful for 2 data frame 
+    LIN_APP: LinChannel_1 Transmission successful for 3 data frame 
+    LIN_APP: LinChannel_1 Transmission successful for 4 data frame 
+    LIN_APP: LinChannel_1 Transmission successful for 5 data frame 
+    LIN_APP: LinChannel_1 Transmission successful for 6 data frame 
+    LIN_APP: LinChannel_1 Transmission successful for 7 data frame 
+    
+    LIN_APP: LinChannel_1 operating in Slave Response mode 
+    LIN_APP: Received Data :  0xa5  0x55  0xaa  0x55  0xaa  0x55  0xaa  0x55  
+    
+    LIN_APP: Does the data received match the data sent by the Slave? (y/n) 
+    
+    LIN_APP: LinChannel_1 Reception successful 
+    LIN_APP: LinChannel_1 operating in Slave to Slave mode 
+    
+    LIN_APP: Did Slave to Slave communication happen? (y/n) 
+    
+    LIN_APP: LinChannel_1 Slave to Slave communication successful 
+    LIN_APP: Enter one of the following
+    LIN_APP: m - Send Master Response Lin Request
+    LIN_APP: s - Send Slave Response Lin Request
+    LIN_APP: x - Send Slave to Slave Lin Request
+    LIN_APP: a - Send all types Lin Request
+    LIN_APP: q - to quit the application
+
+    LIN_APP:All sample test case pass 
+
+```
+
+#### File Structure
+
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Lin**\
+ ┃ ┃ ┃ ┣ 📂**Peak_PLIN_Config**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┣ 📜**LinApp.c** : *Contains LIN test example.*\
+ ┃ ┃ ┃ ┣ 📜**LinApp.h** : *Contains LIN test example headers.*\
+ ┃ ┃ ┃ ┣ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Lin_Demo_Cfg**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┣ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Lin_Cfg.h** : *Contains the Precompile switches, Macros for LIN controllers, Hardware Objects etc.*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Lin_Cfg.c** : *Contains all controllers Pre-Compile Configuration parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜**Lin_PBcfg.c** : *Contains all controllers Post-Build Configuration parameters*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┣ 📜README.txt
+
+### FAQ's
+
+None
+
+### References
+
+[AUTOSAR_SWS_LINDriver](https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_LINDriver.pdf)\
+[Technical Reference Manual](<https://www.ti.com/product/AM263P4#tech-docs>)
