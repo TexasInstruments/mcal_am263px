@@ -1,0 +1,391 @@
+# Tresos Studio Logfile, created on 25-08-27,18:10:12
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE APPC_2
+SEVERITY WARNING
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:12
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED The following message severities are filtered and will not be logged: INFO
+SHORTMESSAGENONLOCALIZED The following message severities are filtered and will not be logged: INFO
+LONGMESSAGELOCALIZED The following message severities are filtered and will not be logged: INFO
+LONGMESSAGENONLOCALIZED The following message severities are filtered and will not be logged: INFO
+SHORTMESSAGEENRICHEDLOCALIZED The following message severities are filtered and will not be logged: INFO
+SHORTMESSAGEENRICHEDNONLOCALIZED The following message severities are filtered and will not be logged: INFO
+LONGMESSAGEENRICHEDLOCALIZED The following message severities are filtered and will not be logged: INFO
+LONGMESSAGEENRICHEDNONLOCALIZED The following message severities are filtered and will not be logged: INFO
+STACKTRACE 
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 11136
+SEVERITY INFO
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:12
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+SHORTMESSAGENONLOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+LONGMESSAGELOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+LONGMESSAGENONLOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+SHORTMESSAGEENRICHEDLOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+SHORTMESSAGEENRICHEDNONLOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+LONGMESSAGEENRICHEDLOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+LONGMESSAGEENRICHEDNONLOCALIZED Project "i2c_intr_app" was created with different version of the tool. Migrating project.
+STACKTRACE 
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 18006
+SEVERITY ERROR
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGENONLOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGELOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGENONLOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDLOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDNONLOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDLOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDNONLOCALIZED The plugin Adc_TI_AM261x defines the attribute "AdcGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+STACKTRACE dreisoft.tresos.lib2.util.OperationStatus.<init>(OperationStatus.java:226)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.<init>(PlatformOperationStatus.java:60)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.DUPLICATE_ATTRIBUTE(PlatformOperationStatus.java:172)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.checkUniqueGeneratorId(CodeGeneratorRegistry.java:192)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.loadRegistrations(CodeGeneratorRegistry.java:100)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.startSession(CodeGeneratorRegistry.java:381)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.startGenerationSession(ECUCGeneratorProject.java:227)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.run(ECUCGeneratorProject.java:155)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.runGenerators(ECUCGeneratorProject.java:139)
+  dreisoft.tresos.application.launcher2.handlers.ECUCCommandLineArgHandler.process(ECUCCommandLineArgHandler.java:201)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:403)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:338)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:323)
+  dreisoft.tresos.application.launcher2.application.TresosHeadlessRunnable.run(TresosHeadlessRunnable.java:46)
+  dreisoft.tresos.lib2.platform.Startup.launchHeadless(Startup.java:291)
+  dreisoft.tresos.application.launcher2.application.ApplicationTresosCmd.run(ApplicationTresosCmd.java:80)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:587)
+  org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:198)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
+  org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
+  org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+  org.eclipse.equinox.launcher.Main.main(Main.java:1492)
+
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 18006
+SEVERITY ERROR
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGENONLOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGELOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGENONLOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDLOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDNONLOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDLOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDNONLOCALIZED The plugin Cdd_FsiTx_TI_AM261x defines the attribute "CddFsiTxGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+STACKTRACE dreisoft.tresos.lib2.util.OperationStatus.<init>(OperationStatus.java:226)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.<init>(PlatformOperationStatus.java:60)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.DUPLICATE_ATTRIBUTE(PlatformOperationStatus.java:172)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.checkUniqueGeneratorId(CodeGeneratorRegistry.java:192)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.loadRegistrations(CodeGeneratorRegistry.java:100)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.startSession(CodeGeneratorRegistry.java:381)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.startGenerationSession(ECUCGeneratorProject.java:227)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.run(ECUCGeneratorProject.java:155)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.runGenerators(ECUCGeneratorProject.java:139)
+  dreisoft.tresos.application.launcher2.handlers.ECUCCommandLineArgHandler.process(ECUCCommandLineArgHandler.java:201)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:403)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:338)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:323)
+  dreisoft.tresos.application.launcher2.application.TresosHeadlessRunnable.run(TresosHeadlessRunnable.java:46)
+  dreisoft.tresos.lib2.platform.Startup.launchHeadless(Startup.java:291)
+  dreisoft.tresos.application.launcher2.application.ApplicationTresosCmd.run(ApplicationTresosCmd.java:80)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:587)
+  org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:198)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
+  org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
+  org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+  org.eclipse.equinox.launcher.Main.main(Main.java:1492)
+
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 18006
+SEVERITY ERROR
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGENONLOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGELOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGENONLOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDLOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDNONLOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDLOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDNONLOCALIZED The plugin Cdd_Pwm_TI_AM261x defines the attribute "CddPwmGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+STACKTRACE dreisoft.tresos.lib2.util.OperationStatus.<init>(OperationStatus.java:226)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.<init>(PlatformOperationStatus.java:60)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.DUPLICATE_ATTRIBUTE(PlatformOperationStatus.java:172)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.checkUniqueGeneratorId(CodeGeneratorRegistry.java:192)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.loadRegistrations(CodeGeneratorRegistry.java:100)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.startSession(CodeGeneratorRegistry.java:381)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.startGenerationSession(ECUCGeneratorProject.java:227)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.run(ECUCGeneratorProject.java:155)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.runGenerators(ECUCGeneratorProject.java:139)
+  dreisoft.tresos.application.launcher2.handlers.ECUCCommandLineArgHandler.process(ECUCCommandLineArgHandler.java:201)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:403)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:338)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:323)
+  dreisoft.tresos.application.launcher2.application.TresosHeadlessRunnable.run(TresosHeadlessRunnable.java:46)
+  dreisoft.tresos.lib2.platform.Startup.launchHeadless(Startup.java:291)
+  dreisoft.tresos.application.launcher2.application.ApplicationTresosCmd.run(ApplicationTresosCmd.java:80)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:587)
+  org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:198)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
+  org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
+  org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+  org.eclipse.equinox.launcher.Main.main(Main.java:1492)
+
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 18006
+SEVERITY ERROR
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGENONLOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGELOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGENONLOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDLOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDNONLOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDLOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDNONLOCALIZED The plugin Eth_TI_AM261x defines the attribute "EthGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+STACKTRACE dreisoft.tresos.lib2.util.OperationStatus.<init>(OperationStatus.java:226)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.<init>(PlatformOperationStatus.java:60)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.DUPLICATE_ATTRIBUTE(PlatformOperationStatus.java:172)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.checkUniqueGeneratorId(CodeGeneratorRegistry.java:192)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.loadRegistrations(CodeGeneratorRegistry.java:100)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.startSession(CodeGeneratorRegistry.java:381)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.startGenerationSession(ECUCGeneratorProject.java:227)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.run(ECUCGeneratorProject.java:155)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.runGenerators(ECUCGeneratorProject.java:139)
+  dreisoft.tresos.application.launcher2.handlers.ECUCCommandLineArgHandler.process(ECUCCommandLineArgHandler.java:201)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:403)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:338)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:323)
+  dreisoft.tresos.application.launcher2.application.TresosHeadlessRunnable.run(TresosHeadlessRunnable.java:46)
+  dreisoft.tresos.lib2.platform.Startup.launchHeadless(Startup.java:291)
+  dreisoft.tresos.application.launcher2.application.ApplicationTresosCmd.run(ApplicationTresosCmd.java:80)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:587)
+  org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:198)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
+  org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
+  org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+  org.eclipse.equinox.launcher.Main.main(Main.java:1492)
+
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 18006
+SEVERITY ERROR
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGENONLOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGELOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGENONLOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDLOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+SHORTMESSAGEENRICHEDNONLOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDLOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+LONGMESSAGEENRICHEDNONLOCALIZED The plugin Fls_TI_AM261x defines the attribute "FlsGenerator" twice for its extension "dreisoft.tresos.launcher2.plugin.generator/generator" (see plugin.xml)
+STACKTRACE dreisoft.tresos.lib2.util.OperationStatus.<init>(OperationStatus.java:226)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.<init>(PlatformOperationStatus.java:60)
+  dreisoft.tresos.lib2.generated.operationstatus.PlatformOperationStatus.DUPLICATE_ATTRIBUTE(PlatformOperationStatus.java:172)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.checkUniqueGeneratorId(CodeGeneratorRegistry.java:192)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.loadRegistrations(CodeGeneratorRegistry.java:100)
+  dreisoft.tresos.launcher2.generator.CodeGeneratorRegistry.startSession(CodeGeneratorRegistry.java:381)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.startGenerationSession(ECUCGeneratorProject.java:227)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.run(ECUCGeneratorProject.java:155)
+  dreisoft.tresos.launcher2.generator.ECUCGeneratorProject.runGenerators(ECUCGeneratorProject.java:139)
+  dreisoft.tresos.application.launcher2.handlers.ECUCCommandLineArgHandler.process(ECUCCommandLineArgHandler.java:201)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:403)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:338)
+  dreisoft.tresos.application.core.commandline.CommandlineManager.runCommand(CommandlineManager.java:323)
+  dreisoft.tresos.application.launcher2.application.TresosHeadlessRunnable.run(TresosHeadlessRunnable.java:46)
+  dreisoft.tresos.lib2.platform.Startup.launchHeadless(Startup.java:291)
+  dreisoft.tresos.application.launcher2.application.ApplicationTresosCmd.run(ApplicationTresosCmd.java:80)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:587)
+  org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:198)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+  org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+  org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+  sun.reflect.NativeMethodAccessorImpl.invoke0(NativeMethodAccessorImpl.java:-2)
+  sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+  sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+  java.lang.reflect.Method.invoke(Method.java:498)
+  org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
+  org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
+  org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+  org.eclipse.equinox.launcher.Main.main(Main.java:1492)
+
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 13030
+SEVERITY INFO
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+SHORTMESSAGENONLOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+LONGMESSAGELOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+LONGMESSAGENONLOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+SHORTMESSAGEENRICHEDLOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+SHORTMESSAGEENRICHEDNONLOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+LONGMESSAGEENRICHEDLOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+LONGMESSAGEENRICHEDNONLOCALIZED Running generator "CddI2CGenerator_AM263Px" in mode "generate" for module "Cdd_I2c_TI_AM263Px"
+STACKTRACE 
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 13014
+SEVERITY INFO
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+SHORTMESSAGENONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+LONGMESSAGELOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+LONGMESSAGENONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+SHORTMESSAGEENRICHEDLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+SHORTMESSAGEENRICHEDNONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+LONGMESSAGEENRICHEDLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+LONGMESSAGEENRICHEDNONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\swcd\Cdd_I2c_Bswmd.arxml"
+STACKTRACE 
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 13014
+SEVERITY INFO
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+SHORTMESSAGENONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+LONGMESSAGELOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+LONGMESSAGENONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+SHORTMESSAGEENRICHEDLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+SHORTMESSAGEENRICHEDNONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+LONGMESSAGEENRICHEDLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+LONGMESSAGEENRICHEDNONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\src\Cdd_I2c_Cfg.c"
+STACKTRACE 
+[ENDENTRY]
+
+[ENTRY]
+TYPE Tresos Status
+VERSION 1.0
+CODE 13014
+SEVERITY INFO
+ORIGIN Tresos
+TIMESTAMP 25-08-27,18:10:13
+VARIANT Invariant
+ADDITIONALINFO 
+SHORTMESSAGELOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+SHORTMESSAGENONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+LONGMESSAGELOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+LONGMESSAGENONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+SHORTMESSAGEENRICHEDLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+SHORTMESSAGEENRICHEDNONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+LONGMESSAGEENRICHEDLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+LONGMESSAGEENRICHEDNONLOCALIZED Generated "C:\Jenkins_out_2\workspace\MCAL_AM26xx\am263px\release_area\mcal_sitara_mcu\mcal\examples\I2c\i2c_intr_app\soc\am263px\tresos\output\include\Cdd_I2c_Cfg.h"
+STACKTRACE 
+[ENDENTRY]
