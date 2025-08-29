@@ -1148,7 +1148,7 @@ uint8 Fls_norBlankCheck(uint32 actualChunkSize)
     uint32 addr         = Fls_DrvObj.flashAddr;
     uint32 len          = actualChunkSize;
     uint8 *readData_buf = Fls_BlankCheckRxDataBuf;
-    uint32 max_len      = sizeof(Fls_BlankCheckRxDataBuf) / sizeof(Fls_BlankCheckRxDataBuf[0]);
+    uint32 max_len      = (uint32)(sizeof(Fls_BlankCheckRxDataBuf) / sizeof(Fls_BlankCheckRxDataBuf[0]));
 
     if ((Fls_DrvObj.spiHandle != NULL_PTR) && (len <= max_len))
     {
@@ -1460,6 +1460,8 @@ boolean Fls_VerifyData_priv(const uint8 *expData, const uint8 *rxData, uint32 le
         if (*expData_local != *rxData_local)
         {
             match = FALSE;
+            /*Stop after first mismatch*/
+            break;
         }
         expData_local++;
         rxData_local++;
@@ -1490,7 +1492,7 @@ Std_ReturnType Fls_norCompare(uint32 actualChunkSize)
     uint32 len          = actualChunkSize;
     uint8 *readData_buf = Fls_CompareRxDataBuf;
     uint8 *expData_Buf  = Fls_DrvObj.ramAddr;
-    uint32 max_len      = sizeof(Fls_CompareRxDataBuf) / sizeof(Fls_CompareRxDataBuf[0]);
+    uint32 max_len      = (uint32)(sizeof(Fls_CompareRxDataBuf) / sizeof(Fls_CompareRxDataBuf[0]));
 
     if ((Fls_DrvObj.spiHandle != NULL_PTR) && (len <= max_len))
     {

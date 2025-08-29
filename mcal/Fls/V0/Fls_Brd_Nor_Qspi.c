@@ -94,7 +94,7 @@
 /* ========================================================================== */
 static void           Fls_JobDoneNotification(Fls_JobType job, uint32 chunkSize);
 static void           Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize);
-static void           Fls_JobErrorNotification(Fls_JobType job, Std_ReturnType retVal);
+static void           Fls_JobErrorNotificationFxn(Fls_JobType job, Std_ReturnType retVal);
 static void           Fls_JobErrorNotification1(Fls_JobType job, Std_ReturnType retVal);
 static Std_ReturnType Fls_CallNorErase(uint32 chunkSize);
 static uint32         Fls_setchuncksize(void);
@@ -228,12 +228,12 @@ Std_ReturnType Nor_QspiCmdWrite(QSPI_Handle handle, uint8 cmd, uint32 cmdAddr, u
  */
 Std_ReturnType Nor_QspiWriteEnableLatched(QSPI_Handle handle, uint32 timeOut)
 {
-    Std_ReturnType  retVal     = (Std_ReturnType)E_NOT_OK;
-    uint8           stepcmd    = 0U;
-    uint8           readStatus = 0U;
-    uint8           cmd        = 0U;
-    volatile uint32 tempCount  = timeOut * 16U;
-    cmd                        = fls_config_sfdp->cmdRdsr;
+    Std_ReturnType  retVal         = (Std_ReturnType)E_NOT_OK;
+    uint8           stepcmd        = 0U;
+    uint8           readStatus[4U] = {0U};
+    uint8           cmd            = 0U;
+    volatile uint32 tempCount      = timeOut * 16U;
+    cmd                            = fls_config_sfdp->cmdRdsr;
     do
     {
         if (tempCount <= 0U)
@@ -242,7 +242,7 @@ Std_ReturnType Nor_QspiWriteEnableLatched(QSPI_Handle handle, uint32 timeOut)
         }
         if (stepcmd == 0U)
         {
-            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus, 1);
+            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus[0U], 1);
             if (retVal != (Std_ReturnType)E_OK)
             {
                 stepcmd = 1U;
@@ -253,14 +253,14 @@ Std_ReturnType Nor_QspiWriteEnableLatched(QSPI_Handle handle, uint32 timeOut)
             break;
         }
         MCAL_SW_DELAY(tempCount);
-    } while ((readStatus & FLS_QSPI_NOR_SR_WEL) == 0U);
+    } while ((readStatus[0U] & FLS_QSPI_NOR_SR_WEL) == 0U);
 
     if (tempCount == (uint32)0U)
     {
         retVal = (Std_ReturnType)E_NOT_OK;
     }
 
-    if ((readStatus & FLS_QSPI_NOR_SR_WEL) != (uint8)0U)
+    if ((readStatus[0U] & FLS_QSPI_NOR_SR_WEL) != (uint8)0U)
     {
         retVal = (Std_ReturnType)E_OK;
     }
@@ -288,9 +288,9 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
         tempCount = timeOut / 9U;
     }
     /* each unit of SW_delay equals to 9 clockcycle, so divided by 9U*/
-    uint8 stepcmd    = 0U;
-    uint8 readStatus = 0U;
-    uint8 cmd        = 0U;
+    uint8 stepcmd        = 0U;
+    uint8 readStatus[4U] = {0U};
+    uint8 cmd            = 0U;
 
     cmd = fls_config_sfdp->cmdRdsr;
 
@@ -302,7 +302,7 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
         }
         if (stepcmd == 0U)
         {
-            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus, 1);
+            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus[0U], 1);
             if (retVal == (Std_ReturnType)E_NOT_OK)
             {
                 stepcmd = 1U;
@@ -313,9 +313,9 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
             break;
         }
         MCAL_SW_DELAY(tempCount);
-    } while ((readStatus & FLS_QSPI_NOR_SR_WIP) != (uint32)0);
+    } while ((readStatus[0U] & FLS_QSPI_NOR_SR_WIP) != (uint32)0);
 
-    if ((readStatus & FLS_QSPI_NOR_SR_WIP) == 0U)
+    if ((readStatus[0U] & FLS_QSPI_NOR_SR_WIP) == 0U)
     {
         retVal = (Std_ReturnType)E_OK;
     }
@@ -336,14 +336,14 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
  */
 Fls_InternalStateType Nor_QspiAsyncWaitReady(QSPI_Handle handle, uint32 timeOut)
 {
-    Std_ReturnType        retVal1    = E_OK;
-    Fls_InternalStateType retVal     = FLS_INTERNAL_JOB_WAIT;
-    uint8                 readStatus = 0U;
-    uint8                 cmd        = 0U;
+    Std_ReturnType        retVal1        = E_OK;
+    Fls_InternalStateType retVal         = FLS_INTERNAL_JOB_WAIT;
+    uint8                 readStatus[4U] = {0U};
+    uint8                 cmd            = 0U;
 
     cmd = fls_config_sfdp->cmdRdsr;
 
-    retVal1 = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus, 1);
+    retVal1 = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus[0U], 1);
 
     if (retVal1 == E_NOT_OK)
     {
@@ -352,7 +352,7 @@ Fls_InternalStateType Nor_QspiAsyncWaitReady(QSPI_Handle handle, uint32 timeOut)
     else
     {
         /* Check for Status. */
-        if ((readStatus & FLS_QSPI_NOR_SR_WIP) == (uint8)0U)
+        if ((readStatus[0U] & FLS_QSPI_NOR_SR_WIP) == (uint8)0U)
         {
             retVal = FLS_INTERNAL_JOB_DONE;
         }
@@ -715,7 +715,7 @@ static void Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 c
     }
     else /*if retval == E_NOT_OK or E_COMPARE_MISMATCH*/
     {
-        Fls_JobErrorNotification(job, retVal);
+        Fls_JobErrorNotificationFxn(job, retVal);
     }
 }
 
@@ -831,7 +831,7 @@ static void Fls_JobDoneNotification(Fls_JobType job, uint32 chunkSize)
     }
 }
 
-static void Fls_JobErrorNotification(Fls_JobType job, Std_ReturnType retVal)
+static void Fls_JobErrorNotificationFxn(Fls_JobType job, Std_ReturnType retVal)
 {
     if (E_BLANKCHECK_MISMATCH == retVal)
     {
@@ -921,7 +921,7 @@ boolean Fls_VerifyData_priv(const uint8 *expData, const uint8 *rxData, uint32 le
     uint8  *expData_local = (uint8 *)expData;
     uint8  *rxData_local  = (uint8 *)rxData;
 
-    while (idx < length)
+    for (idx = (uint32)0; ((idx < length)); idx++)
     {
         if (*expData_local != *rxData_local)
         {

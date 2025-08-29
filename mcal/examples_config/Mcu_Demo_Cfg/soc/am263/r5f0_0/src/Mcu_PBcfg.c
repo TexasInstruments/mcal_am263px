@@ -336,6 +336,18 @@ static CONST(Mcu_AdcConfigType, MCU_PBCFG) Mcu_AdcConfiguration[MCU_ADC_HWUNIT] 
     }
 };
 
+
+static CONST(Mcu_EthConfigType, MCU_PBCFG) Mcu_EthConfiguration[MCU_ETH_PORTS] =
+{
+    [0] =
+    {
+        .macNum = 1U,
+        .rmiiClkOutDisable =  1U,
+        .idModeEnable =  0U,
+        .macConnectionType = MCU_ETH_MAC_CONN_TYPE_RGMII_DETECT_INBAND,		   
+    }
+};
+
 #define  MCU_STOP_SEC_CONFIG_DATA
 #include "Mcu_MemMap.h"
 
@@ -370,6 +382,10 @@ CONST(Mcu_ConfigType, MCU_CONFIG_DATA) McuModuleConfiguration =
 #if (STD_ON == MCU_ADC_ENABLE)
     .Mcu_AdcConfig = Mcu_AdcConfiguration,
     /**< ADC Configuration */
+#endif
+#if (STD_ON == MCU_ETH_ENABLE)
+    .Mcu_EthConfig = Mcu_EthConfiguration,
+    /**< Eth Configuration */
 #endif
 };
 

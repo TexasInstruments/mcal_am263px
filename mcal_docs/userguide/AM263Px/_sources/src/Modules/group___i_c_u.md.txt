@@ -22,7 +22,7 @@ title: Icu API GUIDE Header file
 |typedef uint16  | **[Icu_ValueType](../Modules/group___i_c_u.md#typedef-icu_valuetype)** | This type defines Value type.  | 
 |typedef uint32  | **[Icu_IndexType](../Modules/group___i_c_u.md#typedef-icu_indextype)** | This type defines return value Icu_GetTimeStampIndex.  | 
 |typedef uint32  | **[Icu_EdgeNumberType](../Modules/group___i_c_u.md#typedef-icu_edgenumbertype)** | This type defines return value of Icu-Icu_GetEdgeNumbers.  | 
-|typedef void(*)(void)  | **[Icu_NotifyFuncType](../Modules/group___i_c_u.md#typedef-icu_notifyfunctype)** | Notification callback function pointer.  | 
+|typedef void(*)(void)  | **[Icu_NotifyFuncType](../Modules/group___i_c_u.md#typedef-icu_notifyfunctype)** | Notification callback function pointer  | 
 |typedef uint8  | **[Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype)** | This type defines Channel type.  | 
 |typedef uint8  | **[Icu_ChannelPrescalerType](../Modules/group___i_c_u.md#typedef-icu_channelprescalertype)** | This type defines Prescaler type.  | 
 
@@ -233,7 +233,7 @@ typedef void(* Icu_NotifyFuncType) (void);
 
 
 **Brief**: 
-Notification callback function pointer. 
+Notification callback function pointer 
 
 
 
@@ -324,8 +324,8 @@ This type defines Prescaler type.
 | ICU_E_PARAM_VINFO   | API service Icu_GetVersionInfo called and parameter is invalid.  |
 | ICU_STATUS_UNINIT   | ICU driver Status uninitialized.  |
 | ICU_STATUS_INIT   | ICU driver Status Initialized.  |
-| ICU_FALLING   | Capture regsiter configuration for FALLING edge.  |
-| ICU_RISING   | Capture regsiter configuration for RISING edge.  |
+| ICU_FALLING   | Capture regsiter configuration for FALLING edge  |
+| ICU_RISING   | Capture regsiter configuration for RISING edge  |
 
 ## Functions
 

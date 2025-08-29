@@ -11,26 +11,26 @@ title: Pwm
 
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
-|enum| **[Pwm_EdgeNotificationType](../Modules/group___p_w_m.md#enum-pwm_edgenotificationtype)** | Possible edge notification.  | 
+|enum| **[Pwm_EdgeNotificationType](../Modules/group___p_w_m.md#enum-pwm_edgenotificationtype)** | Possible edge notification  | 
 |enum| **[Pwm_OutputStateType](../Modules/group___p_w_m.md#enum-pwm_outputstatetype)** | Output state type.  | 
 |enum| **[Pwm_ChannelClassType](../Modules/group___p_w_m.md#enum-pwm_channelclasstype)** | Channel class type.  | 
 |enum| **[Pwm_epwmOutputCh_t](../Modules/group___p_w_m.md#enum-pwm_epwmoutputch_t)** | EPWM outputs in a single epwm channel.  | 
-|typedef void(*)(void)  | **[Pwm_NotifyFuncType](../Modules/group___p_w_m.md#typedef-pwm_notifyfunctype)** | Notification callback function pointer.  | 
+|typedef void(*)(void)  | **[Pwm_NotifyFuncType](../Modules/group___p_w_m.md#typedef-pwm_notifyfunctype)** | Notification callback function pointer  | 
 
 
 
 ### enum Pwm_EdgeNotificationType
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
-| PWM_RISING_EDGE | 1U| Rising edges issue notification.   |
+| PWM_RISING_EDGE | 1U| Rising edges issue notification   |
 | PWM_FALLING_EDGE | 2U| Falling edges issue notification.   |
-| PWM_BOTH_EDGES | 3U| Both edges issue notification.   |
+| PWM_BOTH_EDGES | 3U| Both edges issue notification   |
 
 
 
 
 **Brief**: 
-Possible edge notification. 
+Possible edge notification 
 
 
 
@@ -51,9 +51,9 @@ Output state type.
 ### enum Pwm_ChannelClassType
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
-| PWM_FIXED_PERIOD | 0U| Period is immutable.   |
-| PWM_FIXED_PERIOD_SHIFTED | | Period is immutable with phase shift.   |
-| PWM_VARIABLE_PERIOD | | Period is variable.   |
+| PWM_FIXED_PERIOD | 0U| Period is immutable   |
+| PWM_FIXED_PERIOD_SHIFTED | | Period is immutable with phase shift   |
+| PWM_VARIABLE_PERIOD | | Period is variable   |
 
 
 
@@ -85,7 +85,7 @@ typedef void(* Pwm_NotifyFuncType) (void);
 
 
 **Brief**: 
-Notification callback function pointer. 
+Notification callback function pointer 
 
 
 
@@ -106,8 +106,8 @@ Notification callback function pointer.
 
 | Name           |  Brief     |
 | -------------- | ---------- |
-| PWM_START_SEC_VAR_INIT_8   | Possible edge notification.  |
-| PWM_STOP_SEC_VAR_INIT_8   | Possible edge notification.  |
+| PWM_START_SEC_VAR_INIT_8   | Possible edge notification  |
+| PWM_STOP_SEC_VAR_INIT_8   | Possible edge notification  |
 | PWM_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
 | PWM_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
 | PWM_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |

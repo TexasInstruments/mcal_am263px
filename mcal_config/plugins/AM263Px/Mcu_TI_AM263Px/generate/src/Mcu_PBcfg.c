@@ -194,6 +194,24 @@ static CONST(Mcu_AdcConfigType, MCU_PBCFG) Mcu_AdcConfiguration[MCU_ADC_HWUNIT] 
 };
 [!ENDIF!][!//
 [!ENDIF!]
+
+[!IF "(node:exists(as:modconf('Eth')[1]/EthGeneral))"!][!//
+[!IF "num:i(count(as:modconf('Mcu')[1]/McuModuleConfiguration/McuEthConfiguration/*)) > 0"!][!//
+static CONST(Mcu_EthConfigType, MCU_PBCFG) Mcu_EthConfiguration[MCU_ETH_PORTS] =
+{
+[!LOOP "as:modconf('Mcu')[1]/McuModuleConfiguration/McuEthConfiguration/*"!][!//
+[!WS "4"!][[!"@index"!]] =
+[!WS "4"!]{
+[!VAR "MacNumber" = "node:ref(./McuEthCtrConfig)/EthPort"!][!//
+[!WS "8"!].macNum = [!"num:i(substring-after($MacNumber,'ETH_PORT'))"!]U,
+[!WS "8"!].rmiiClkOutDisable = [!IF "node:ref(./McuEthCtrConfig)/EthPortConfig/EthMacConfig/EthMiiClkOutDisable = 'true'"!] 1U,[!ELSE!] 0U,[!ENDIF!]
+[!WS "8"!].idModeEnable = [!IF "node:ref(./McuEthCtrConfig)/EthPortConfig/EthMacConfig/EthIdModeEnable = 'true'"!] 1U,[!ELSE!] 0U,[!ENDIF!]
+[!WS "8"!].macConnectionType = MCU_[!"node:ref(./McuEthCtrConfig)/EthPortConfig/EthMacConfig/EthMacConnectionType"!],		   
+[!WS "4"!]}[!IF "not(node:islast())"!],[!ENDIF!]
+[!ENDLOOP!][!//
+};
+[!ENDIF!][!//
+[!ENDIF!]
 #define  MCU_STOP_SEC_CONFIG_DATA
 #include "Mcu_MemMap.h"
 
@@ -264,6 +282,10 @@ CONST(Mcu_ConfigType, MCU_CONFIG_DATA) [!"@name"!] =
 #if (STD_ON == MCU_ADC_ENABLE)
 [!WS "4"!].Mcu_AdcConfig = Mcu_AdcConfiguration,
 [!WS "4"!]/**< ADC Configuration */
+#endif
+#if (STD_ON == MCU_ETH_ENABLE)
+[!WS "4"!].Mcu_EthConfig = Mcu_EthConfiguration,
+[!WS "4"!]/**< Eth Configuration */
 #endif
 };
 [!ENDLOOP!][!//

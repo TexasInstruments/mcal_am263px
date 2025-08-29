@@ -117,6 +117,8 @@ enum
 #define MCU_PWM_ENABLE (STD_ON)
 /** \brief Enable/Disable MCU ADC Enable */
 #define MCU_ADC_ENABLE (STD_ON)
+/** \brief Enable/Disable MCU ETH Enable */
+#define MCU_ETH_ENABLE (STD_ON)
 /* @} */
 
 /**
@@ -289,6 +291,9 @@ enum
 /* MCU ADC Channel */
 #define MCU_ADC_HWUNIT (1U)
 
+/* MCU ETH Port */
+#define MCU_ETH_PORTS (1U)
+
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
 /*********************************************************************************************************************
@@ -444,6 +449,45 @@ typedef enum
     MCU_CLKSRC_MAX
 }Mcu_ClkSourceIdType;
 
+/**
+ *  \brief  Type/Speed/Duplex Connection Config Options
+ *
+ *  Connection Config Options
+ *
+ */
+typedef enum
+{
+    MCU_ETH_MAC_CONN_TYPE_MII_10_HALF = 0x00U,
+    /**< MAC connection type for half-duplex 10Mbps MII mode */
+    MCU_ETH_MAC_CONN_TYPE_MII_10_FULL = 0x01U,
+    /**< MAC connection type for full-duplex 10Mbps MII mode */
+    MCU_ETH_MAC_CONN_TYPE_MII_100_HALF = 0x02U,
+    /**< MAC connection type for half-duplex 100Mbps MII mode */
+    MCU_ETH_MAC_CONN_TYPE_MII_100_FULL = 0x03U,
+    /**< MAC connection type for full-duplex 100Mbps MII mode */
+    MCU_ETH_MAC_CONN_TYPE_RMII_10_HALF = 0x04U,
+    /**< MAC connection type for half-duplex 10Mbps RMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RMII_10_FULL = 0x05U,
+    /**< MAC connection type for full-duplex 10Mbps RMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RMII_100_HALF = 0x06U,
+    /**< MAC connection type for half-duplex 100Mbps RMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RMII_100_FULL = 0x07U,
+    /**< MAC connection type for full-duplex 100Mbps RMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_10_HALF = 0x08U,
+    /**< MAC connection type for forced half-duplex 10Mbps RGMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_10_FULL = 0x09U,
+    /**< MAC connection type for forced full-duplex 10Mbps RGMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_100_HALF = 0x0AU,
+    /**< MAC connection type for forced half-duplex 100Mbps RGMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_100_FULL = 0x0BU,
+    /**< MAC connection type for forced full-duplex 100Mbps RGMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_1000 = 0x0CU,
+    /**< MAC connection type for forced 1000Mbps RGMII mode */
+    MCU_ETH_MAC_CONN_TYPE_RGMII_DETECT_INBAND = 0x0DU,
+    /**< MAC connection type for RGMII inband detection mode (speed determined
+     *   based on received RGMII Rx clock) */
+} Mcu_MacConnectionType;
+
 /* Requirements: SWS_Mcu_00030 */
 /**
  *  \brief Structure for data pre-setting to be initialized
@@ -500,6 +544,21 @@ typedef struct
 } Mcu_AdcConfigType;
 
 /**
+ *  \brief Structure for Eth CPSW Control configuration
+ */
+typedef struct
+{
+    /** \brief ETH MAC port number */
+    uint8 macNum;
+    /** \brief ETH MII Clock output disable */
+    uint8 rmiiClkOutDisable;
+    /** \brief ETH enable ID mode */
+    uint8 idModeEnable;
+    /** \brief ETH MII MAC connection type */
+    Mcu_MacConnectionType macConnectionType;
+} Mcu_EthConfigType;
+
+/**
  *  \brief Structure for PRCM configuration
  */
 typedef struct
@@ -543,6 +602,12 @@ typedef P2CONST (Mcu_AdcConfigType, AUTOMATIC, MCU_PBCFG)
 Mcu_AdcConfigPtrType;
 
 /**
+ *  \brief Pointer to Eth CPSW Control configuration
+ */
+typedef P2CONST (Mcu_EthConfigType, AUTOMATIC, MCU_PBCFG)
+Mcu_EthConfigPtrType;
+
+/**
  *  \brief MCU CONFIG Register READBACK structure
  */
 typedef struct
@@ -583,6 +648,12 @@ typedef struct Mcu_ConfigType_s
     /** \brief ADC Configuration */
 	Mcu_AdcConfigPtrType     Mcu_AdcConfig;
 	#endif
+	
+    #if (STD_ON == MCU_ETH_ENABLE)
+    /** \brief ETH Configuration */
+    Mcu_EthConfigPtrType     Mcu_EthConfig;
+    #endif
+	
 } Mcu_ConfigType;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -596,6 +667,12 @@ typedef struct Mcu_ConfigType_s
 /*Clock and reset MMRs partition*/
 #define MCU_TOP_RCM_PARTITION0                                 (5U)
 
+/* MSS CTRL partition */
+#define MCU_MSS_CTRL_PARTITION0                                (6U)
+
+/* MSS CTRL base address */
+#define MCU_CSL_MSS_CTRL_BASE   (0x50D00000U)
+
 #define MCU_CSL_CONTROLSS_CTRL_EPWM_STATICXBAR_SEL0                          (0x00000004U)
 
 #define MCU_CSL_TOP_RCM_U_BASE                                                   (0x53200000UL)
@@ -603,6 +680,8 @@ typedef struct Mcu_ConfigType_s
 #define MCU_CSL_CONTROLSS_CTRL_U_BASE                                        (0x502F0000UL)
 #define MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK0                                   (0x00001008U)
 #define MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK1                                   (0x0000100CU)
+
+
 
 #define MCU_CSL_CONTROLSS_CTRL_EPWM_CLKSYNC                                  (0x00000010U)
 
@@ -613,6 +692,8 @@ typedef struct Mcu_ConfigType_s
 #define MCU_CSL_TOP_CTRL_LOCK0_KICK1                                          (0x0000100CU)
 #define MCU_CSL_TOP_RCM_LOCK0_KICK0                                           (0x00001008U)
 #define MCU_CSL_TOP_RCM_LOCK0_KICK1                                           (0x0000100CU)
+#define MCU_CSL_MSS_CTRL_LOCK0_KICK0                                          (0x00001008U)
+#define MCU_CSL_MSS_CTRL_LOCK0_KICK1                                          (0x0000100CU)
 
 /* define the unlock and lock values for MSS_CTRL, TOP_CTRL, MSS_RCM, TOP_RCM*/
 #define MCU_TEST_KICK_LOCK_VAL                           (0x00000000U)

@@ -90,7 +90,11 @@ static inline sint32 IpcNotify_mailboxReadSwQ(IpcNotify_SwQueue *swQ, uint32 *va
 
             swQ->rdIdx = rdIdx;
 
-            rdIdx = swQ->rdIdx; /* read back to ensure the update has reached the memory */
+            rdIdx = swQ->rdIdx;      /* read back to ensure the update has reached the memory */
+            if (rdIdx == swQ->rdIdx) /*To suppress MISRA warning*/
+            {
+                /*Do nothing*/
+            }
             IpcNotify_mailbox_asm();
             status = MCAL_SystemP_SUCCESS;
         }
@@ -119,7 +123,11 @@ static inline sint32 IpcNotify_mailboxWrite(uint32 selfCoreId, uint32 remoteCore
 
             swQ->wrIdx = wrIdx;
 
-            wrIdx = swQ->wrIdx; /* read back to ensure the update has reached the memory */
+            wrIdx = swQ->wrIdx;      /* read back to ensure the update has reached the memory */
+            if (wrIdx == swQ->wrIdx) /*To suppress MISRA warning*/
+            {
+                /*Do nothing*/
+            }
             IpcNotify_mailbox_asm();
 
             /* trigger interrupt to other core */

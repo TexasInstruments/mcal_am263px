@@ -44,6 +44,23 @@
 #include "hw_types.h"
 
 /* ========================================================================== */
+/*                           Macros & Typedefs                                */
+/* ========================================================================== */
+/* Port mode in MSS_CPSW_CONTROL register */
+#define ETH_GMII_SEL_GMII_MODE  (0x0U)
+#define ETH_GMII_SEL_RMII_MODE  (0x1U)
+#define ETH_GMII_SEL_RGMII_MODE (0x2U)
+
+#define ETH_GMII_RMII_REF_CLK_DISABLE (0x10U)
+#define ETH_GMII_ID_MODE_ENABLE       (0x100U)
+
+#define MSS_CPSW_CONTROL_REG_P1_GMII_FIELD_SHIFT (0x0U)
+#define MSS_CPSW_CONTROL_REG_P1_GMII_FIELD_MASK  (0x00000117U)
+
+#define MSS_CPSW_CONTROL_REG_P2_GMII_FIELD_SHIFT (0x10U)
+#define MSS_CPSW_CONTROL_REG_P2_GMII_FIELD_MASK  (0x01170000U)
+
+/* ========================================================================== */
 /*                         Structure Declarations                             */
 /* ========================================================================== */
 /* None */
@@ -70,6 +87,9 @@ static void Mcu_setEpwmGroup(uint32 epwmInstance, uint32 group);
 #endif
 #if (STD_ON == MCU_ADC_ENABLE)
 static inline void Mcu_enableAdcReference(uint32 adcInstance);
+#endif
+#if (STD_ON == MCU_ETH_ENABLE)
+static void Mcu_updateGmiiField(const Mcu_EthConfigType *ethCfg);
 #endif
 static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition);
 static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition);
@@ -318,7 +338,9 @@ FUNC(void, MCU_CODE) Mcu_SystemInit(void)
         Mcu_enableAdcReference(Mcu_DrvObj->Mcu_AdcConfig[adc_instance].Mcu_AdcHWUniId);
     }
 #endif
-
+#if (STD_ON == MCU_ETH_ENABLE)
+    Mcu_updateGmiiField(Mcu_DrvObj->Mcu_EthConfig);
+#endif
 #if (STD_ON == MCU_INTRCROSSBAR_ENABLE)
     Mcu_IntXbar();
 #endif
@@ -1929,7 +1951,17 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
-
+#if (STD_ON == MCU_ETH_ENABLE)
+    if (partition == MCU_MSS_CTRL_PARTITION0)
+    {
+        /*Unlock MSS_CTRL*/
+        baseAddr = (uint32)MCU_CSL_MSS_CTRL_BASE;
+        kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK0);
+        HW_WR_REG32(kickAddr, MCU_TEST_KICK0_UNLOCK_VAL); /* KICK 0 */
+        kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK1);
+        HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
+    }
+#endif
     return;
 }
 
@@ -1965,7 +1997,17 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
-
+#if (STD_ON == MCU_ETH_ENABLE)
+    if (partition == MCU_MSS_CTRL_PARTITION0)
+    {
+        /*Lock MSS_CTRL*/
+        baseAddr = (uint32)MCU_CSL_MSS_CTRL_BASE;
+        kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK0);
+        HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 0 */
+        kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK1);
+        HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
+    }
+#endif
     return;
 }
 
@@ -2002,6 +2044,87 @@ static inline void Mcu_enableAdcReference(uint32 adcInstance)
     Mcu_controlModuleLockMMR(0, MCU_TOP_CTRL_PARTITION0);
 }
 
+#endif
+
+#if (STD_ON == MCU_ETH_ENABLE)
+static void Mcu_updateGmiiField(const Mcu_EthConfigType *ethCfg)
+{
+    uint32 portIdx   = 0U;
+    uint32 gmiiField = 0U;
+
+    for (portIdx = 0; portIdx < MCU_ETH_PORTS; portIdx++)
+    {
+        /* PORT_MODE_SEL */
+        switch (ethCfg[portIdx].macConnectionType)
+        {
+            case MCU_ETH_MAC_CONN_TYPE_MII_10_HALF:
+            case MCU_ETH_MAC_CONN_TYPE_MII_10_FULL:
+            case MCU_ETH_MAC_CONN_TYPE_MII_100_HALF:
+            case MCU_ETH_MAC_CONN_TYPE_MII_100_FULL:
+                /* MII modes */
+                /* Eth mode select */
+                gmiiField = ETH_GMII_SEL_GMII_MODE;
+                break;
+
+            case MCU_ETH_MAC_CONN_TYPE_RMII_10_HALF:
+            case MCU_ETH_MAC_CONN_TYPE_RMII_10_FULL:
+            case MCU_ETH_MAC_CONN_TYPE_RMII_100_HALF:
+            case MCU_ETH_MAC_CONN_TYPE_RMII_100_FULL:
+                /* RMII modes */
+                gmiiField = ETH_GMII_SEL_RMII_MODE;
+                break;
+
+            case MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_10_HALF:
+            case MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_10_FULL:
+            case MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_100_HALF:
+            case MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_100_FULL:
+            case MCU_ETH_MAC_CONN_TYPE_RGMII_FORCE_1000:
+            case MCU_ETH_MAC_CONN_TYPE_RGMII_DETECT_INBAND:
+                /* RGMII modes */
+                gmiiField = ETH_GMII_SEL_RGMII_MODE;
+                break;
+
+            default:
+                /* Wrong configuration */
+                break;
+        }
+
+        /* RMII_REF_CLK_OE_N */
+        if (0U != ethCfg[portIdx].rmiiClkOutDisable)
+        {
+            gmiiField |= ETH_GMII_RMII_REF_CLK_DISABLE;
+        }
+
+        /* ID_MODE */
+        if (0U != ethCfg[portIdx].idModeEnable)
+        {
+            gmiiField |= ETH_GMII_ID_MODE_ENABLE;
+        }
+
+        /* Unlock MSS_CTRL */
+        Mcu_controlModuleUnlockMMR(0, MCU_MSS_CTRL_PARTITION0);
+
+        if ((uint8)1U == ethCfg[portIdx].macNum)
+        {
+            HW_WR_FIELD32(MCU_CSL_MSS_CTRL_BASE + MSS_CPSW_CONTROL_REG, MSS_CPSW_CONTROL_REG_P1_GMII_FIELD,
+                          (gmiiField));
+        }
+        else if ((uint8)2U == ethCfg[portIdx].macNum)
+        {
+            HW_WR_FIELD32(MCU_CSL_MSS_CTRL_BASE + MSS_CPSW_CONTROL_REG, MSS_CPSW_CONTROL_REG_P2_GMII_FIELD,
+                          (gmiiField));
+        }
+        else
+        {
+            /* wrong port */
+        }
+
+        /* Lock MSS_CTRL */
+        Mcu_controlModuleLockMMR(0, MCU_MSS_CTRL_PARTITION0);
+    }
+
+    return;
+}
 #endif
 
 #if (STD_ON == MCU_REGISTER_READBACK_API)

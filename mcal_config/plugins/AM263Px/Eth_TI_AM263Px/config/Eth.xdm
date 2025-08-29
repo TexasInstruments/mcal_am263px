@@ -1047,6 +1047,38 @@
                             <a:v>ETH_MAC_CONN_TYPE_RGMII_DETECT_INBAND</a:v>
                           </a:da>
                         </v:var>
+                      <v:var name="EthMiiClkOutDisable" type="BOOLEAN">
+                        <a:a name="DESC" 
+                             value="EN: Disable/Enable MII reference clock output."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="Texas Instruments"/>
+                        <a:a name="SCOPE" value="LOCAL"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="ECUC:15c01650-098c-430e-868f-fa37b2a8e22b"/>
+                        <a:da name="DEFAULT" value="true"/>
+                      </v:var>
+                      <v:var name="EthIdModeEnable" type="BOOLEAN">
+                        <a:a name="DESC" 
+                             value="EN: Enable/Disable internal delay mode (TX only)."/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                          <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                          <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
+                          <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        </a:a>
+                        <a:a name="ORIGIN" value="Texas Instruments"/>
+                        <a:a name="SCOPE" value="LOCAL"/>
+                        <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                        <a:a name="UUID" 
+                             value="ECUC:e58d6962-6eea-4106-9091-531cb7de4926"/>
+                        <a:da name="DEFAULT" value="true"/>
+                      </v:var>					  
                       </v:ctr>
                     </v:ctr>
                     <v:ctr name="EthCpdmaConfig" type="IDENTIFIABLE">

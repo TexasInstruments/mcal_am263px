@@ -107,19 +107,8 @@ typedef Eth_PortObject *Eth_PortObjectPtrType;
  * Note - This is fixed, dont change */
 #define ETH_HOST_PORT_ID (0U)
 
-#define ETH_GMII_SEL_GMII_MODE  (0x0U)
-#define ETH_GMII_SEL_RMII_MODE  (0x1U)
-#define ETH_GMII_SEL_RGMII_MODE (0x2U)
-
 #define ntohs(a) ((((a) >> 8) & 0xffU) + (((a) << 8) & 0xff00U))
 #define htons(a) (ntohs(a))
-
-/* Port mode in MSS_CPSW_CONTROL register */
-#define MSS_CPSW_CONTROL_REG_P1_MODE_SEL_SHIFT (0x0U)
-#define MSS_CPSW_CONTROL_REG_P1_MODE_SEL_MASK  (0x00000007U)
-
-#define MSS_CPSW_CONTROL_REG_P2_MODE_SEL_SHIFT (0x10U)
-#define MSS_CPSW_CONTROL_REG_P2_MODE_SEL_MASK  (0x00070000U)
 
 #if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
 /* CPSW Checksum offload Encap Info length */
@@ -272,11 +261,7 @@ typedef struct
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
-static void Eth_updateGiiModeVal(const Eth_MacConfigType *pMACConfig, uint32 *pGmiiModeVal);
-
 static void Eth_updateMacControlVal(const Eth_MacConfigType *pMACConfig, uint32 *pMacControlVal);
-
-static void Eth_updateGmiiField(uint8 macNum, uint32 gmiiModeVal);
 
 static void EthRxChTearDown(uint32 chNum);
 
@@ -634,11 +619,6 @@ static void EthCpswInstInit(uint32 portNum)
 static void Eth_macSetConfig(uint8 portNum, const Eth_MacConfigType *pMACConfig)
 {
     uint32 macControlVal = 0U;
-    uint32 gmiiModeVal   = 0U;
-
-    /* Update GMII_SEL in Control Module */
-    Eth_updateGiiModeVal(pMACConfig, &gmiiModeVal);
-    Eth_updateGmiiField(portNum, gmiiModeVal);
 
     /* If PASSCONTROL is set, enable control frames */
     if ((pMACConfig->macModeFlags & (uint32)MAC_CONFIG_MODEFLG_PASSCONTROL) != (uint32)0U)
@@ -700,71 +680,6 @@ static void Eth_MacControlEnable(uint32 *macControlVal, const Eth_MacConfigType 
 
     /* Update MACCONTROL with speed/duplex/type settings */
     Cpsw_setMacCtrl(Eth_DrvObj.baseAddr, portNum, *macControlVal);
-}
-
-/*
- * \brief Mac configuration function.
- *
- * \param  pMACConfig - MAC configuration structure.
- *                      Refer #Eth_MacConfigType
- *
- * \return none
- */
-static void Eth_updateGiiModeVal(const Eth_MacConfigType *pMACConfig, uint32 *pGmiiModeVal)
-{
-    switch (pMACConfig->macConnectionType)
-    {
-        case ETH_MAC_CONN_TYPE_MII_10_HALF:
-        case ETH_MAC_CONN_TYPE_MII_10_FULL:
-        case ETH_MAC_CONN_TYPE_MII_100_HALF:
-        case ETH_MAC_CONN_TYPE_MII_100_FULL:
-            /* MII modes */
-            /* Eth mode select */
-            *pGmiiModeVal = ETH_GMII_SEL_GMII_MODE;
-            break;
-
-        case ETH_MAC_CONN_TYPE_RMII_10_HALF:
-        case ETH_MAC_CONN_TYPE_RMII_10_FULL:
-        case ETH_MAC_CONN_TYPE_RMII_100_HALF:
-        case ETH_MAC_CONN_TYPE_RMII_100_FULL:
-            /* RMII modes */
-            *pGmiiModeVal = ETH_GMII_SEL_RMII_MODE;
-            break;
-
-        case ETH_MAC_CONN_TYPE_RGMII_FORCE_10_HALF:
-        case ETH_MAC_CONN_TYPE_RGMII_FORCE_10_FULL:
-        case ETH_MAC_CONN_TYPE_RGMII_FORCE_100_HALF:
-        case ETH_MAC_CONN_TYPE_RGMII_FORCE_100_FULL:
-        case ETH_MAC_CONN_TYPE_RGMII_FORCE_1000:
-        case ETH_MAC_CONN_TYPE_RGMII_DETECT_INBAND:
-            /* RGMII modes */
-            *pGmiiModeVal = ETH_GMII_SEL_RGMII_MODE;
-            break;
-
-        default:
-            /* Wrong configuration */
-            break;
-    }
-
-    return;
-}
-
-static void Eth_updateGmiiField(uint8 macNum, uint32 gmiiModeVal)
-{
-    if ((uint8)1U == macNum)
-    {
-        HW_WR_FIELD32(SOC_MSS_CTRL_BASE + MSS_CPSW_CONTROL_REG, MSS_CPSW_CONTROL_REG_P1_MODE_SEL, (gmiiModeVal));
-    }
-    else if ((uint8)2U == macNum)
-    {
-        HW_WR_FIELD32(SOC_MSS_CTRL_BASE + MSS_CPSW_CONTROL_REG, MSS_CPSW_CONTROL_REG_P2_MODE_SEL, (gmiiModeVal));
-    }
-    else
-    {
-        /* wrong port */
-    }
-
-    return;
 }
 
 static void Eth_updateMacControlVal(const Eth_MacConfigType *pMACConfig, uint32 *pMacControlVal)

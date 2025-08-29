@@ -36,14 +36,6 @@
 static void EthApp_PlatformInit();
 static void EthApp_InterruptConfig(void);
 
-#define MSS_CPSW_CONTROL_REG_P1_RGMII_ID_MODE_SHIFT (0x8U)
-#define MSS_CPSW_CONTROL_REG_P1_RGMII_ID_MODE_MASK  (0x00000100U)
-
-#define MSS_CPSW_CONTROL_REG_P2_RGMII_ID_MODE_SHIFT (0x24U)
-#define MSS_CPSW_CONTROL_REG_P2_RGMII_ID_MODE_MASK  (0x01000000U)
-
-extern void Mcal_Libs_Utils_unlockMMR(void);
-
 static void EthApp_PlatformInit()
 {
 #if (STD_ON == MCU_VARIANT_PRE_COMPILE)
@@ -51,9 +43,6 @@ static void EthApp_PlatformInit()
 #else
     Mcu_Init(&McuModuleConfiguration);
 #endif /*(STD_ON == MCU_VARIANT_PRE_COMPILE)*/
-
-    /* Temporary Unlock MSS */
-    Mcal_Libs_Utils_unlockMMR();
 
 #if (STD_ON == PORT_PRE_COMPILE_VARIANT)
     Port_Init((const Port_ConfigType *)NULL_PTR);
@@ -108,17 +97,6 @@ static void EthApp_InterruptConfig(void)
 
 /* =========================Function separator========================= */
 
-static void EthApp_UpdateRGMIIMode(void)
-{
-    HW_WR_FIELD32(SOC_MSS_CTRL_BASE + MSS_CPSW_CONTROL_REG, MSS_CPSW_CONTROL_REG_P1_RGMII_ID_MODE, (0U));
-
-    HW_WR_FIELD32(SOC_MSS_CTRL_BASE + MSS_CPSW_CONTROL_REG, MSS_CPSW_CONTROL_REG_P2_RGMII_ID_MODE, (0U));
-}
-
-/* =========================Function separator========================= */
-
-/* =========================Function separator========================= */
-
 static void EthApp_UpdateRGMIIMux(void)
 {
     uint16 gpio_pin = 150U;
@@ -136,7 +114,6 @@ void EthApp_Startup()
     AppUtils_TimerInit();
     EthApp_InterruptConfig();
     EthApp_UpdateRGMIIMux();
-    EthApp_UpdateRGMIIMode();
 }
 
 /* =========================Function separator========================= */

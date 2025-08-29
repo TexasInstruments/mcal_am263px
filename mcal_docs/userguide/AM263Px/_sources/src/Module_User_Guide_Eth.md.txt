@@ -863,6 +863,34 @@ MAC Init Configurations
 
 ###### EthMacConnectionType
 
+###### EthMiiClkOutDisable
+
+| Item ||
+|--------|---------------|
+| **Name** | EthMiiClkOutDisable |
+| **Description** | Disable/Enable MII reference clock output. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Link-Time | VARIANT-LINK-TIME |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
+###### EthIdModeEnable
+
+| Item ||
+|--------|---------------|
+| **Name** | EthIdModeEnable |
+| **Description** | Enable/Disable internal delay mode (TX only). |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Link-Time | VARIANT-LINK-TIME |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | true |
+
 ##### EthCpdmaConfig
 
 ###### EthPacingClkFreq

@@ -39,8 +39,6 @@ static void I2C();
 static void I2C_Write(uint32 cmd, uint32 reg);
 static void I2C_Read(uint32 cmd, uint32 *reg);
 
-extern void Mcal_Libs_Utils_unlockMMR(void);
-
 static void EthApp_PlatformInit()
 {
 #if (STD_ON == MCU_VARIANT_PRE_COMPILE)
@@ -48,9 +46,6 @@ static void EthApp_PlatformInit()
 #else
     Mcu_Init(&McuModuleConfiguration);
 #endif /*(STD_ON == MCU_VARIANT_PRE_COMPILE)*/
-
-    /* Temporary Unlock MSS */
-    Mcal_Libs_Utils_unlockMMR();
 
 #if (STD_ON == PORT_PRE_COMPILE_VARIANT)
     Port_Init((const Port_ConfigType *)NULL_PTR);

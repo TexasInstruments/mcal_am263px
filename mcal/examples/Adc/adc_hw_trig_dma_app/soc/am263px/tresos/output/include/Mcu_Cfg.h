@@ -111,6 +111,9 @@ enum
 #define MCU_PWM_ENABLE (STD_ON)
 /** \brief Enable/Disable MCU ADC Enable */
 #define MCU_ADC_ENABLE (STD_ON)
+/** \brief Enable/Disable MCU ETH Enable */
+#define MCU_ETH_ENABLE (STD_OFF)
+/* @} */
 
 /*
 Reset Reason Config
@@ -301,6 +304,9 @@ Reset Reason Config
 
 /* MCU ADC Channel */
 #define MCU_ADC_HWUNIT (1U)
+
+/* MCU ETH Port */
+#define MCU_ETH_PORTS (0U)
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
@@ -645,6 +651,7 @@ typedef struct Mcu_ConfigType_s
     /** \brief ADC Configuration */
 	Mcu_AdcConfigPtrType     Mcu_AdcConfig;
 	#endif
+	
 } Mcu_ConfigType;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -656,7 +663,13 @@ typedef struct Mcu_ConfigType_s
 #define MCU_TOP_CTRL_PARTITION0                                (2)
 #define MCU_CONTROLSS_CTRL_PARTITION0                          (3)
 /*Clock and reset MMRs partition*/
-#define MCU_TOP_RCM_PARTITION0                                 (5)
+#define MCU_TOP_RCM_PARTITION0                                 (5U)
+
+/* MSS CTRL partition */
+#define MCU_MSS_CTRL_PARTITION0                                (6U)
+
+/* MSS CTRL base address */
+#define MCU_CSL_MSS_CTRL_BASE   (0x50D00000U)
 
 #define MCU_CSL_CONTROLSS_CTRL_EPWM_STATICXBAR_SEL0                          (0x00000004U)
 
@@ -675,6 +688,8 @@ typedef struct Mcu_ConfigType_s
 #define MCU_CSL_TOP_CTRL_LOCK0_KICK1                                          (0x0000100CU)
 #define MCU_CSL_TOP_RCM_LOCK0_KICK0                                           (0x00001008U)
 #define MCU_CSL_TOP_RCM_LOCK0_KICK1                                           (0x0000100CU)
+#define MCU_CSL_MSS_CTRL_LOCK0_KICK0                                          (0x00001008U)
+#define MCU_CSL_MSS_CTRL_LOCK0_KICK1                                          (0x0000100CU)
 
 /* define the unlock and lock values for MSS_CTRL, TOP_CTRL, MSS_RCM, TOP_RCM*/
 #define MCU_TEST_KICK_LOCK_VAL                           (0x00000000U)

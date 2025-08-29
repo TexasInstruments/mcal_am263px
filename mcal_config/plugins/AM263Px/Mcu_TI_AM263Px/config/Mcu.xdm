@@ -1366,6 +1366,33 @@
                    </v:ctr>
                  </v:lst>
 				 
+		<v:lst name="McuEthConfiguration" type="MAP">
+                  <v:ctr name="McuEthConfiguration" type="IDENTIFIABLE">
+                    <a:a name="DESC" 
+                         value="EN: This container contains the Eth CPSW Control configuration."/>
+                    <a:a name="REQUIRES-INDEX" value="true"/>
+                    <a:a name="UUID" 
+                         value="8adf1e37-7c7f-44d6-be3c-dc341fb63f03"/>
+						 <v:ref name="McuEthCtrConfig" 
+                             type="SYMBOLIC-NAME-REFERENCE">
+                        <a:a name="DESC" 
+                             value="EN: McuEthCtrConfig"/>
+                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                             type="IMPLEMENTATIONCONFIGCLASS">
+                             <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                             <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                        </a:a>
+                                            <a:a name="OPTIONAL" value="true"/>
+                        <a:a name="ORIGIN" value="Texas Instruments"/>
+                        <a:a name="SCOPE" value="LOCAL"/>
+                        <a:a name="UUID" 
+                             value="5d35cfd1-64ba-474b-a20c-ca53d230ee18"/>
+                                            <a:da name="ENABLE" value="false"/>
+                        <a:da name="REF" 
+                              value="ASPathDataOfSchema:/TI_AM263Px/Eth/EthConfigSet/EthCtrlConfig"/>
+                      </v:ref>
+                   </v:ctr>
+                 </v:lst>
 				 
                   <v:ctr name="McuDemEventParameterRefs" type="IDENTIFIABLE">
                     <a:a name="DESC" value="EN: Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter&apos;s DemEventId value. The standardized errors are provided in the container and can be extended by vendor specific error references."/>

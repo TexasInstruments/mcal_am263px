@@ -712,19 +712,23 @@ Type to define the number of data elements to be sent and/or received during a t
 <td><p><strong><a class="reference internal" href="#function-cdd-i2c-mainfunction"><span class="std std-ref">Cdd_I2c_MainFunction</span></a></strong>(void )</p></td>
 <td><p>Makes a target channel available for processing requests (addressing). When called, the target channel becomes available for starting incoming or outgoing transfers.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#enum-cdd-i2c-sequenceresulttype"><span class="std std-ref">Cdd_I2c_SequenceResultType</span></a></p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-i2c-getsequenceresult"><span class="std std-ref">Cdd_I2c_GetSequenceResult</span></a></strong>(<a class="reference internal" href="#typedef-cdd-i2c-sequencetype"><span class="std std-ref">Cdd_I2c_SequenceType</span></a> sequenceId)</p></td>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-i2c-pollingmodeprocessing"><span class="std std-ref">Cdd_I2c_PollingModeProcessing</span></a></strong>(void )</p></td>
 <td><p>Ensures proper processing of I2c communication in the case of disabled interrupts.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#enum-cdd-i2c-channelresulttype"><span class="std std-ref">Cdd_I2c_ChannelResultType</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-cdd-i2c-sequenceresulttype"><span class="std std-ref">Cdd_I2c_SequenceResultType</span></a></p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-i2c-getsequenceresult"><span class="std std-ref">Cdd_I2c_GetSequenceResult</span></a></strong>(<a class="reference internal" href="#typedef-cdd-i2c-sequencetype"><span class="std std-ref">Cdd_I2c_SequenceType</span></a> sequenceId)</p></td>
+<td><p>This service returns the current status of the given SequenceId.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#enum-cdd-i2c-channelresulttype"><span class="std std-ref">Cdd_I2c_ChannelResultType</span></a></p></td>
 <td><p><strong><a class="reference internal" href="#function-cdd-i2c-getresult"><span class="std std-ref">Cdd_I2c_GetResult</span></a></strong>(<a class="reference internal" href="#typedef-cdd-i2c-channeltype"><span class="std std-ref">Cdd_I2c_ChannelType</span></a> chId)</p></td>
 <td><p>This service returns the current status of the given channel.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#enum-cdd-i2c-componentstatustype"><span class="std std-ref">Cdd_I2c_ComponentStatusType</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#enum-cdd-i2c-componentstatustype"><span class="std std-ref">Cdd_I2c_ComponentStatusType</span></a></p></td>
 <td><p><strong><a class="reference internal" href="#function-cdd-i2c-getstatus"><span class="std std-ref">Cdd_I2c_GetStatus</span></a></strong>(void )</p></td>
 <td><p>This service returns the module’s status.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
 <td><p><strong><a class="reference internal" href="#function-cdd-i2c-registerreadback"><span class="std std-ref">Cdd_I2c_RegisterReadback</span></a></strong>(uint8 hwUnitId, <a class="reference internal" href="../Classes/struct_cdd___i2c___register_readback_type.html"><span class="std std-doc">Cdd_I2c_RegisterReadbackType</span></a> * regRbPtr)</p></td>
 <td><p>This service reads the key I2C registers and returns their value.</p></td>
 </tr>
@@ -864,6 +868,17 @@ Cancel a transmission.</p>
 Makes a target channel available for processing requests (addressing). When called, the target channel becomes available for starting incoming or outgoing transfers.</p>
 <p>Service ID[hex] - CDD_I2C_SID_MAIN_FUNCTION Sync/Async - Asynchronous Reentrancy - Reentrant</p>
 </section>
+<section id="function-cdd-i2c-pollingmodeprocessing">
+<h3>function Cdd_I2c_PollingModeProcessing<a class="headerlink" href="#function-cdd-i2c-pollingmodeprocessing" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_I2c_PollingModeProcessing</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Ensures proper processing of I2c communication in the case of disabled interrupts.</p>
+<p>Service ID[hex] - CDD_I2C_SID_POLLING_MODE_PROCESSING Sync/Async - Asynchronous Reentrancy - Reentrant</p>
+</section>
 <section id="function-cdd-i2c-getsequenceresult">
 <h3>function Cdd_I2c_GetSequenceResult<a class="headerlink" href="#function-cdd-i2c-getsequenceresult" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Cdd_I2c_SequenceResultType</span><span class="w"> </span><span class="n">Cdd_I2c_GetSequenceResult</span><span class="p">(</span>
@@ -872,9 +887,7 @@ Makes a target channel available for processing requests (addressing). When call
 </pre></div>
 </div>
 <p><strong>Brief</strong>:
-Ensures proper processing of I2c communication in the case of disabled interrupts.</p>
-<p>Service ID[hex] - CDD_I2C_SID_POLLING_MODE_PROCESSING Sync/Async - Asynchronous Reentrancy - Reentrant</p>
-<p>This service returns the current status of the given SequenceId.</p>
+This service returns the current status of the given SequenceId.</p>
 <p>Service ID[hex] - CDD_I2C_SID_GET_SEQUENCE_RESULT Sync/Async - Synchronous Reentrancy - Reentrant</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
@@ -940,7 +953,7 @@ This service reads the key I2C registers and returns their value.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Aug 27, 2025.
+          <span class="lastupdated" >Last updated on Aug 30, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

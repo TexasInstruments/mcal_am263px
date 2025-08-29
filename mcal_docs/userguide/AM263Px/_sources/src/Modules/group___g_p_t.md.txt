@@ -11,16 +11,16 @@ title: Gpt API GUIDE Header file
 
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
-|enum| **[Gpt_ModeType](../Modules/group___g_p_t.md#enum-gpt_modetype)** | List of process modes.  | 
+|enum| **[Gpt_ModeType](../Modules/group___g_p_t.md#enum-gpt_modetype)** | List of process modes  | 
 |enum| **[Gpt_PredefTimerType](../Modules/group___g_p_t.md#enum-gpt_predeftimertype)** | Type for GPT Predefined(free running) Timers.  | 
 |enum| **[Gpt_ChannelMode](../Modules/group___g_p_t.md#enum-gpt_channelmode)** | GPT channel mode macros.  | 
 |enum| **[Gpt_PrescaleValueType](../Modules/group___g_p_t.md#enum-gpt_prescalevaluetype)** | List of Prescale values for General purpose timer channels The timer counter is prescaled with the value 2^(PTV+1). Example: PTV = 3, counter increases value (if started) after 16 functional clock periods Note: Not applicable to GPT Predef timers.  | 
 |enum| **[Gpt_ChannelStateType](../Modules/group___g_p_t.md#enum-gpt_channelstatetype)** | GPT channel state GPT will be in one of this state during its lifetime.  | 
 |typedef uint32  | **[Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype)** | Type describing the Gpt channel.  | 
-|typedef uint32  | **[Gpt_ValueType](../Modules/group___g_p_t.md#typedef-gpt_valuetype)** | Type describing the timeout value.  | 
+|typedef uint32  | **[Gpt_ValueType](../Modules/group___g_p_t.md#typedef-gpt_valuetype)** | Type describing the timeout value  | 
 |typedef uint32  | **[Gpt_CntId](../Modules/group___g_p_t.md#typedef-gpt_cntid)** | Type describing the counter block to use for GPT.  | 
-|typedef void(*)(void)  | **[Gpt_NotifyType](../Modules/group___g_p_t.md#typedef-gpt_notifytype)** | Notification callback function pointer.  | 
-|typedef uint32  | **[Gpt_ClockSourceType](../Modules/group___g_p_t.md#typedef-gpt_clocksourcetype)** | Type for specifying source clock selection.  | 
+|typedef void(*)(void)  | **[Gpt_NotifyType](../Modules/group___g_p_t.md#typedef-gpt_notifytype)** | Notification callback function pointer  | 
+|typedef uint32  | **[Gpt_ClockSourceType](../Modules/group___g_p_t.md#typedef-gpt_clocksourcetype)** | Type for specifying source clock selection  | 
 
 
 
@@ -35,7 +35,7 @@ title: Gpt API GUIDE Header file
 
 
 **Brief**: 
-List of process modes. 
+List of process modes 
 
 
 
@@ -120,7 +120,7 @@ typedef uint32 Gpt_ValueType;
 
 
 **Brief**: 
-Type describing the timeout value. 
+Type describing the timeout value 
 
 
 
@@ -142,7 +142,7 @@ typedef void(* Gpt_NotifyType) (void);
 
 
 **Brief**: 
-Notification callback function pointer. 
+Notification callback function pointer 
 
 
 
@@ -153,7 +153,7 @@ typedef uint32 Gpt_ClockSourceType;
 
 
 **Brief**: 
-Type for specifying source clock selection. 
+Type for specifying source clock selection 
 
 
 
@@ -161,10 +161,10 @@ Type for specifying source clock selection.
 ## Structures
 |   Name         | Brief          |
 | -------------- | -------------- |
-| **[GptConfigReg](../Classes/struct_gpt_config_reg.md)** | GPT register readback structure.  |
+| **[GptConfigReg](../Classes/struct_gpt_config_reg.md)** | GPT register readback structure  |
 | **[Gpt_ChannelConfigType](../Classes/struct_gpt___channel_config_type.md)** | Configuration per channel.  |
 | **[Gpt_ConfigType](../Classes/struct_gpt___config_type.md)** | global configuration of the driver  |
-| **[Gpt_DriverObjType](../Classes/struct_gpt___driver_obj_type.md)** | Driver object.  |
+| **[Gpt_DriverObjType](../Classes/struct_gpt___driver_obj_type.md)** | Driver object  |
 
 
 
@@ -217,8 +217,8 @@ Type for specifying source clock selection.
 | GPT_DRIVER_INITIALIZED   | Driver status INITIALIZED.  |
 | CH_COMP_MASK   | Masks the higher order bits to evaluate compare block (lsb0 and lsb1)  |
 | MAX_RESOLUTION   | Maximum resolution for the timer.  |
-| SET (type, var, bit)  | Set a bit.  |
-| CLEAR (type, var, bit)  | Clear a bit.  |
+| SET (type, var, bit)  | Set a bit  |
+| CLEAR (type, var, bit)  | Clear a bit  |
 
 ## Functions
 
