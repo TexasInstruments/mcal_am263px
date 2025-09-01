@@ -40,10 +40,10 @@
  *  Version Check
  ******************************************************************************/
 /*  Version checking  */
- #if ((ETHTRCV_SW_MAJOR_VERSION != (10U))||(ETHTRCV_SW_MINOR_VERSION != (1U)))
+ #if ((ETHTRCV_SW_MAJOR_VERSION != (10U))||(ETHTRCV_SW_MINOR_VERSION != (2U)))
   #error "Version numbers of EthTrcv_PBcfg.c and EthTrcv.h are inconsistent!"
 #endif
-#if ((ETHTRCV_CFG_MAJOR_VERSION != (10U)) || (ETHTRCV_CFG_MINOR_VERSION != (1U)))
+#if ((ETHTRCV_CFG_MAJOR_VERSION != (10U)) || (ETHTRCV_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of EthTrcv_PBcfg.c and EthTrcv_Cfg.h are inconsistent!"
 #endif
 /*******************************************************************************

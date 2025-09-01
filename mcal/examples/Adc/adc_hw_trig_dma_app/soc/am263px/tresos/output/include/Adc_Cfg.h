@@ -106,9 +106,9 @@ extern "C" {
 /** \brief ADC configuration Major Version */
 #define ADC_CFG_MAJOR_VERSION                 (10U)
 /** \brief CDD DMA configuration Minor Version */
-#define ADC_CFG_MINOR_VERSION                 (1U)
+#define ADC_CFG_MINOR_VERSION                 (2U)
 /** \brief CDD DMA configuration Patch Version */
-#define ADC_CFG_PATCH_VERSION                 (1U)
+#define ADC_CFG_PATCH_VERSION                 (0U)
 /* @} */
 
 

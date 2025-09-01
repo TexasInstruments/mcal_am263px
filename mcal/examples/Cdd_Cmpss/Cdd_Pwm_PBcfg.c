@@ -26,11 +26,11 @@ extern "C" {
 #endif
 
 /* ---- Perform version checking  ----------------------------------------- */
-#if ((CDD_PWM_SW_MAJOR_VERSION != (10U)) || (CDD_PWM_SW_MINOR_VERSION != (1U)))
+#if ((CDD_PWM_SW_MAJOR_VERSION != (10U)) || (CDD_PWM_SW_MINOR_VERSION != (2U)))
 #error "Version numbers of Cdd_Pwm_PBcfg.c and Cdd_Pwm_Cfg.h are inconsistent!"
 #endif
 
-#if ((CDD_PWM_CFG_MAJOR_VERSION != (10U)) || (CDD_PWM_CFG_MINOR_VERSION != (1U)))
+#if ((CDD_PWM_CFG_MAJOR_VERSION != (10U)) || (CDD_PWM_CFG_MINOR_VERSION != (2U)))
 #error "Version numbers of Cdd_Pwm_PBcfg.c and Cdd_Pwm_Cfg.h are inconsistent!"
 #endif
 

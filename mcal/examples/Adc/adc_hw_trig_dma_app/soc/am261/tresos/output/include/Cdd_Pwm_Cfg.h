@@ -66,7 +66,7 @@ extern "C" {
 /** \brief Cdd_Pwm configuration Major Version */
 #define CDD_PWM_CFG_MAJOR_VERSION           (10U)
 /** \brief Cdd_Pwm configuration Minor Version */
-#define CDD_PWM_CFG_MINOR_VERSION           (1U)
+#define CDD_PWM_CFG_MINOR_VERSION           (2U)
 /** \brief Cdd_Pwm configuration Patch Version */
 #define CDD_PWM_CFG_PATCH_VERSION           (0U)
 /* @} */

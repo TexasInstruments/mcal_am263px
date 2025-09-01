@@ -78,7 +78,7 @@
  *  VERSION CHECK
  ******************************************************************************/
 #if ( (ADC_CFG_MAJOR_VERSION != (10U)) \
-    ||(ADC_CFG_MINOR_VERSION != (1U)))
+    ||(ADC_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Adc_PBcfg.c and Adc_Cfg.h are inconsistent!"
 #endif
 

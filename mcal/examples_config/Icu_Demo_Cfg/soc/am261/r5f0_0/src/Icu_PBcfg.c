@@ -78,12 +78,12 @@ extern "C" {
 
 /* ---- Perform version checking  ----------------------------------------- */
 #if ((ICU_SW_MAJOR_VERSION != (10U)) || \
- (ICU_SW_MINOR_VERSION != (1U)))
+ (ICU_SW_MINOR_VERSION != (2U)))
   #error "Version numbers of Icu_Cfg.c and Icu.h are inconsistent!"
 #endif
 
 #if ((ICU_CFG_MAJOR_VERSION != (10U)) || \
-    (ICU_CFG_MINOR_VERSION != (1U)))
+    (ICU_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Icu_Cfg.c and Icu_Cfg.h are inconsistent!"
 #endif
 

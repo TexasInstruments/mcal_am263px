@@ -46,11 +46,11 @@ extern "C" {
 
 
 /* ---- Perform version checking  ----------------------------------------- */
- #if ((PWM_SW_MAJOR_VERSION != (10U))||(PWM_SW_MINOR_VERSION != (1U)))
+ #if ((PWM_SW_MAJOR_VERSION != (10U))||(PWM_SW_MINOR_VERSION != (2U)))
   #error "Version numbers of Pwm_PBcfg.c and Pwm_Cfg.h are inconsistent!"
 #endif
 
-#if ((PWM_CFG_MAJOR_VERSION != (10U))||(PWM_CFG_MINOR_VERSION != (1U)))
+#if ((PWM_CFG_MAJOR_VERSION != (10U))||(PWM_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Pwm_PBcfg.c and Pwm_Cfg.h are inconsistent!"
 #endif
 

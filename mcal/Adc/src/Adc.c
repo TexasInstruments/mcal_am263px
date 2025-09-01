@@ -92,7 +92,7 @@
 #endif
 
 /* AUTOSAR version information check has to match definition in header file */
-#if ((ADC_SW_MAJOR_VERSION != (10U)) || (ADC_SW_MINOR_VERSION != (1U)))
+#if ((ADC_SW_MAJOR_VERSION != (10U)) || (ADC_SW_MINOR_VERSION != (2U)))
 #error "Adc: Software Version Numbers are inconsistent!!"
 #endif
 

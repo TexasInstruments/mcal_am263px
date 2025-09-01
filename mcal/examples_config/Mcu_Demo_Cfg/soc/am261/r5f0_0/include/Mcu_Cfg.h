@@ -68,7 +68,7 @@ extern "C" {
 /** \brief Mcu configuration Major Version */
 #define MCU_CFG_MAJOR_VERSION           (10U)
 /** \brief Mcu configuration Minor Version */
-#define MCU_CFG_MINOR_VERSION           (1U)
+#define MCU_CFG_MINOR_VERSION           (2U)
 /** \brief Mcu configuration Patch Version */
 #define MCU_CFG_PATCH_VERSION           (0U)
 /* @} */

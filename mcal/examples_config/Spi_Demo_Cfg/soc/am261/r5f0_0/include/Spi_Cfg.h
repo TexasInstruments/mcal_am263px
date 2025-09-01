@@ -105,7 +105,7 @@ extern "C" {
 /** \brief Spi configuration Major Version */
 #define SPI_CFG_MAJOR_VERSION           (10U)
 /** \brief Spi configuration Minor Version */
-#define SPI_CFG_MINOR_VERSION           (1U)
+#define SPI_CFG_MINOR_VERSION           (2U)
 /** \brief Spi configuration Patch Version */
 #define SPI_CFG_PATCH_VERSION           (0U)
 

@@ -52,11 +52,11 @@ MCAL-15072
 #endif
 
 /* vendor specific version information is BCD coded */
-#if ((WDG_SW_MAJOR_VERSION != (10U)) || (WDG_SW_MINOR_VERSION != (1U)))
+#if ((WDG_SW_MAJOR_VERSION != (10U)) || (WDG_SW_MINOR_VERSION != (2U)))
 #error "Version numbers of Wdg.c and Wdg.h are inconsistent!"
 #endif
 
-#if ((WDG_CFG_MAJOR_VERSION != (10U)) || (WDG_CFG_MINOR_VERSION != (1U)))
+#if ((WDG_CFG_MAJOR_VERSION != (10U)) || (WDG_CFG_MINOR_VERSION != (2U)))
 #error "Version numbers of Wdg.c and Wdg_Cfg.h are inconsistent!"
 #endif
 

@@ -40,8 +40,8 @@
 /**********************************************************************************************************************
  *  VERSION CHECK
  *********************************************************************************************************************/
-#if ( (CDD_UART_MAJOR_VERSION != (10U)) \
-    ||(CDD_UART_MINOR_VERSION != (1U)))
+#if ( (CDD_UART_CFG_MAJOR_VERSION != (10U)) \
+    ||(CDD_UART_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Cdd_Uart_Cfg.c and Cdd_Uart_Cfg.h are inconsistent!"
 #endif
 

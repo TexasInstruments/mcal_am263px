@@ -83,7 +83,7 @@
 /*******************************************************************************
  *  VERSION CHECK
  ******************************************************************************/
-#if ((SPI_SW_MAJOR_VERSION != (10U)) || (SPI_SW_MINOR_VERSION != (1U)))
+#if ((SPI_SW_MAJOR_VERSION != (10U)) || (SPI_SW_MINOR_VERSION != (2U)))
   #error "Version numbers of Spi_PBcfg.c and Spi.h are inconsistent!"
 #endif
 /*******************************************************************************

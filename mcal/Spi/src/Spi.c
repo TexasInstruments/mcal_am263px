@@ -42,7 +42,7 @@ extern "C" {
 
 /* Driver version information check has to match definition
                                                      in header file */
-#if ((SPI_SW_MAJOR_VERSION != (10U)) || (SPI_SW_MINOR_VERSION != (1U)) || (SPI_SW_PATCH_VERSION != (0U)))
+#if ((SPI_SW_MAJOR_VERSION != (10U)) || (SPI_SW_MINOR_VERSION != (2U)) || (SPI_SW_PATCH_VERSION != (0U)))
 #error "Spi: Software Version Numbers are inconsistent!!"
 #endif
 

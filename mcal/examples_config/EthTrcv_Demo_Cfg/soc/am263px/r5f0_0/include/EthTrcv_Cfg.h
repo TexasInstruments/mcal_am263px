@@ -70,7 +70,7 @@ extern "C" {
  *  @{
  */
 #define ETHTRCV_CFG_MAJOR_VERSION           (10U)
-#define ETHTRCV_CFG_MINOR_VERSION           (1U)
+#define ETHTRCV_CFG_MINOR_VERSION           (2U)
 #define ETHTRCV_CFG_PATCH_VERSION           (0U)
 /* @} */
 

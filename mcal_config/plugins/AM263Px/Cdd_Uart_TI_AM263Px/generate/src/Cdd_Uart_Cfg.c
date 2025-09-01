@@ -41,8 +41,8 @@
 /**********************************************************************************************************************
  *  VERSION CHECK
  *********************************************************************************************************************/
-#if ( (CDD_UART_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U)) \
-    ||(CDD_UART_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
+#if ( (CDD_UART_CFG_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U)) \
+    ||(CDD_UART_CFG_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
   #error "Version numbers of Cdd_Uart_Cfg.c and Cdd_Uart_Cfg.h are inconsistent!"
 #endif
 

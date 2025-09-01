@@ -55,9 +55,9 @@ extern "C" {
  *  @{
  */
 /** \brief CDD UART configuration Major Version */
-#define CDD_UART_MAJOR_VERSION                     ([!"substring-before($moduleSoftwareVer,'.')"!]U)
+#define CDD_UART_CFG_MAJOR_VERSION                 ([!"substring-before($moduleSoftwareVer,'.')"!]U)
 /** \brief CDD UART configuration Minor Version */
-#define CDD_UART_MINOR_VERSION                     ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
+#define CDD_UART_CFG_MINOR_VERSION                 ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
 /** \brief CDD UART configuration Patch Version */
 #define CDD_UART_CFG_PATCH_VERSION                 ([!"substring-after(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
 /* @} */

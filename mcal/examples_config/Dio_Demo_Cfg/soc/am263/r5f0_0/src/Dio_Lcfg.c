@@ -38,7 +38,7 @@
 /**********************************************************************************************************************
  *  VERSION CHECK
  *********************************************************************************************************************/
-#if ((DIO_CFG_MAJOR_VERSION != (10U))||(DIO_CFG_MINOR_VERSION != (1U)))
+#if ((DIO_CFG_MAJOR_VERSION != (10U))||(DIO_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Dio_Lcfg.c and Dio_Cfg.h are inconsistent!"
 #endif
 

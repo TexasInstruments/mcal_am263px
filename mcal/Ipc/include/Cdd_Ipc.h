@@ -65,14 +65,14 @@ extern "C" {
 /* ========================================================================== */
 
 /** \brief IPC Lock */
-#define CDD_IPC_LOCK 1U
+#define CDD_IPC_LOCK (1U)
 /** \brief IPC Unlock */
-#define CDD_IPC_UNLOCK 0U
+#define CDD_IPC_UNLOCK (0U)
 
 /** \brief Mutex Arm Lock */
-#define CDD_IPC_MUTEX_ARM_LOCKED 1U
+#define CDD_IPC_MUTEX_ARM_LOCKED (1U)
 /** \brief Mutex Arm Unlock */
-#define CDD_IPC_MUTEX_ARM_UNLOCKED 0U
+#define CDD_IPC_MUTEX_ARM_UNLOCKED (0U)
 
 /**
  *  \name CDD IPC Driver ID Info
@@ -80,11 +80,11 @@ extern "C" {
  */
 
 /** \brief CDD Module ID */
-#define CDD_IPC_MODULE_ID 255U
+#define CDD_IPC_MODULE_ID (255U)
 /** \brief Texas Instruments Vendor ID */
-#define CDD_IPC_VENDOR_ID 44U
+#define CDD_IPC_VENDOR_ID (44U)
 /** \brief Texas Instruments Vendor ID */
-#define CDD_IPC_INSTANCE_ID 0U
+#define CDD_IPC_INSTANCE_ID (0U)
 /**   @} */
 
 /**
@@ -94,11 +94,11 @@ extern "C" {
  * @{
  */
 /** \brief Driver Implementation Major Version */
-#define CDD_IPC_SW_MAJOR_VERSION 10U
+#define CDD_IPC_SW_MAJOR_VERSION (10U)
 /** \brief Driver Implementation Minor Version */
-#define CDD_IPC_SW_MINOR_VERSION 1U
+#define CDD_IPC_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation patch Version */
-#define CDD_IPC_SW_PATCH_VERSION 0U
+#define CDD_IPC_SW_PATCH_VERSION (0U)
 /**   @} */
 /**
  *  \name CDD IPC Driver Module AUTOSAR Version Info
@@ -108,11 +108,11 @@ extern "C" {
  */
 
 /** \brief AUTOSAR Major version specification implemented by CDD Driver */
-#define CDD_IPC_AR_RELEASE_MAJOR_VERSION 4U
+#define CDD_IPC_AR_RELEASE_MAJOR_VERSION (4U)
 /** \brief AUTOSAR Minor version specification implemented by CDD Driver */
-#define CDD_IPC_AR_RELEASE_MINOR_VERSION 3U
+#define CDD_IPC_AR_RELEASE_MINOR_VERSION (3U)
 /** \brief AUTOSAR Patch version specification implemented by CDD Driver */
-#define CDD_IPC_AR_RELEASE_REVISION_VERSION 1U
+#define CDD_IPC_AR_RELEASE_REVISION_VERSION (1U)
 /**   @} */
 /**
  *  \name CDD Driver ISR category level

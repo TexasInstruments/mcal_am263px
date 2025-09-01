@@ -70,10 +70,11 @@
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
-#define CDD_FSI_TX_HWUNIT_INSTANCE_NUMBER    0U
-#define CDD_FSI_RX_HWUNIT_INSTANCE_NUMBER    0U
+#define CDD_FSI_TX_HWUNIT_INSTANCE_IDX       (CddFsiTxConf_CddFsiTxHwUnit_CddFsiTxHwUnit_0)
+#define CDD_FSI_RX_HWUNIT_INSTANCE_IDX       (CddFsiRxConf_CddFsiRxHwUnit_CddFsiRxHwUnit_0)
 #define CSL_CDD_FSI_RX_CFG_RX_PING_TAG_MATCH (0x1000U)
 #define CSL_CDD_FSI_RX_CFG_RX_DATA_TAG_MATCH (0x2000U)
+
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */

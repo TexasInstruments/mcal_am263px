@@ -40,7 +40,7 @@
  *  VERSION CHECK
  *********************************************************************************************************************/
 #if (   (CDD_IPC_CFG_MAJOR_VERSION != (10U)) \
-    || (CDD_IPC_CFG_MINOR_VERSION != (1U)))
+    || (CDD_IPC_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Cdd_Ipc_PbCfg.c and Cdd_Ipc_Cfg.h are inconsistent!"
 #endif
 /**********************************************************************************************************************

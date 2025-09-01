@@ -89,10 +89,13 @@
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
 
+static Cdd_FsiRx_HwUnitObjType *CddFsiRx_GetHwUnitObj(Cdd_FsiRx_HWUnitType HwUnitId);
+
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
 extern VAR(CddFsiRx_DriverObjType, CDD_FSIRX_VAR_CLEARED) Cdd_FsiRx_DrvObj;
+
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
@@ -114,10 +117,13 @@ ISR(CddFsiRx_FSIINT1_IrqUnit0)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_0];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_0);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_0) */
 
@@ -136,10 +142,13 @@ ISR(CddFsiRx_FSIINT2_IrqUnit0)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_0];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_0);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_0) */
 
@@ -158,10 +167,13 @@ ISR(CddFsiRx_FSIINT1_IrqUnit1)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_1];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_1);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_1) */
 
@@ -180,10 +192,13 @@ ISR(CddFsiRx_FSIINT2_IrqUnit1)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_1];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_1);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_1) */
 
@@ -202,10 +217,13 @@ ISR(CddFsiRx_FSIINT1_IrqUnit2)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_2];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_2);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_2) */
 
@@ -224,10 +242,13 @@ ISR(CddFsiRx_FSIINT2_IrqUnit2)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_2];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_2);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_2) */
 
@@ -246,10 +267,13 @@ ISR(CddFsiRx_FSIINT1_IrqUnit3)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_3];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_3);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_3) */
 
@@ -268,12 +292,31 @@ ISR(CddFsiRx_FSIINT2_IrqUnit3)
     uint16                   cddFsiRxIntFlagNum;
     uint32                   RxintStatusRegAddr;
 
-    hwUnitObj          = &Cdd_FsiRx_DrvObj.hwUnitObj[CDD_FSI_RX_HWUNIT_3];
-    RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
-    cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
-    CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    hwUnitObj = CddFsiRx_GetHwUnitObj(CDD_FSI_RX_HWUNIT_3);
+    if (hwUnitObj != NULL_PTR)
+    {
+        RxintStatusRegAddr = hwUnitObj->hwUnitCfg.baseAddr | CSL_CDD_FSI_RX_CFG_RX_EVT_STS_ALT1;
+        cddFsiRxIntFlagNum = (HW_RD_REG16(RxintStatusRegAddr) & CDD_FSI_RX_EVTMASK);
+        CddFsiRx_IrqRx(hwUnitObj, cddFsiRxIntFlagNum);
+    }
 }
 #endif /* #if defined (CDD_FSI_RX_INSTANCE_3) */
+
+static Cdd_FsiRx_HwUnitObjType *CddFsiRx_GetHwUnitObj(Cdd_FsiRx_HWUnitType HwUnitId)
+{
+    Cdd_FsiRx_HwUnitObjType *hwUnitObj = (Cdd_FsiRx_HwUnitObjType *)NULL_PTR;
+
+    for (uint8 HwUnitIdx = 0U; HwUnitIdx < Cdd_FsiRx_DrvObj.maxHwUnit; HwUnitIdx++)
+    {
+        if (Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitIdx].hwUnitCfg.hwUnitId == HwUnitId)
+        {
+            hwUnitObj = &Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitIdx];
+            break;
+        }
+    }
+
+    return hwUnitObj;
+}
 
 #define CDD_FSIRX_STOP_SEC_ISR_CODE
 #include "Cdd_FsiRx_MemMap.h"

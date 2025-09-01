@@ -58,11 +58,11 @@
 #error "CAN: AUTOSAR Version Numbers of CAN are different"
 #endif
 
-#if ((CAN_SW_MAJOR_VERSION != (10U)) || (CAN_SW_MINOR_VERSION != (1U)))
+#if ((CAN_SW_MAJOR_VERSION != (10U)) || (CAN_SW_MINOR_VERSION != (2U)))
 #error "Vendor specific version numbers of Can.c and Can.h are inconsistent"
 #endif
 
-#if ((CAN_CFG_MAJOR_VERSION != (10U)) || (CAN_CFG_MINOR_VERSION != (1U)))
+#if ((CAN_CFG_MAJOR_VERSION != (10U)) || (CAN_CFG_MINOR_VERSION != (2U)))
 #error "Version numbers of Can.c and Can_Cfg.h are inconsistent!"
 #endif
 

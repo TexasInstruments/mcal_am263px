@@ -131,7 +131,7 @@ extern "C" {
 /** \brief Driver Implementation Major Version */
 #define ETH_SW_MAJOR_VERSION (10U)
 /** \brief Driver Implementation Minor Version */
-#define ETH_SW_MINOR_VERSION (1U)
+#define ETH_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
 #define ETH_SW_PATCH_VERSION (0U)
 /* @} */

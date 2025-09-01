@@ -82,7 +82,7 @@ extern "C" {
 /** \brief Driver Implementation Major Version */
 #define DIO_SW_MAJOR_VERSION (10U)
 /** \brief Driver Implementation Minor Version */
-#define DIO_SW_MINOR_VERSION (1U)
+#define DIO_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
 #define DIO_SW_PATCH_VERSION (0U)
 /**   @} */

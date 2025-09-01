@@ -65,7 +65,7 @@ extern "C" {
 /** \brief Gpt configuration Major Version */
 #define GPT_CFG_MAJOR_VERSION           (10U)
 /** \brief Gpt configuration Minor Version */
-#define GPT_CFG_MINOR_VERSION           (1U)
+#define GPT_CFG_MINOR_VERSION           (2U)
 /** \brief Gpt configuration Patch Version */
 #define GPT_CFG_PATCH_VERSION           (0U)
 /* @} */

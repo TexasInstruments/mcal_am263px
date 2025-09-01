@@ -61,7 +61,7 @@
 #endif
 
 /* Software version information check has to match definition in header file */
-#if ((GPT_SW_MAJOR_VERSION != (10U)) || (GPT_SW_MINOR_VERSION != (1U)))
+#if ((GPT_SW_MAJOR_VERSION != (10U)) || (GPT_SW_MINOR_VERSION != (2U)))
 #error "Gpt: Software Version Numbers are inconsistent!!"
 #endif
 

@@ -119,7 +119,7 @@ FLS_OSPI_RX_8D_8D_8D = 8
 /** \brief Fls configuration Major Version */
 #define FLS_CFG_MAJOR_VERSION           (10U)
 /** \brief Fls configuration Minor Version */
-#define FLS_CFG_MINOR_VERSION           (1U)
+#define FLS_CFG_MINOR_VERSION           (2U)
 /** \brief Fls configuration Patch Version */
 #define FLS_CFG_PATCH_VERSION           (0U)
 /* @} */

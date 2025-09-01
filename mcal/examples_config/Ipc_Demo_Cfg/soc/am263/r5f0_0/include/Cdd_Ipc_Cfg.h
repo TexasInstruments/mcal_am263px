@@ -61,7 +61,7 @@ extern "C" {
 /** \brief CDD configuration Major Version */
 #define CDD_IPC_CFG_MAJOR_VERSION           (10U)
 /** \brief CDD configuration Minor Version */
-#define CDD_IPC_CFG_MINOR_VERSION           (1U)
+#define CDD_IPC_CFG_MINOR_VERSION           (2U)
 /** \brief CDD configuration Patch Version */
 #define CDD_IPC_CFG_PATCH_VERSION           (0U)
 /* @} */

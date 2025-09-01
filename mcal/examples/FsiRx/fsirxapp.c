@@ -214,7 +214,7 @@ static void Cdd_FsiRxApp_mainTest(void)
 #endif
 #if (CDD_FSI_RX_VARIANT_POST_BUILD == STD_ON)
     const Cdd_FsiRx_ConfigType *Cdd_FsiRx_ConfigPtr = &CddFsiRxConfigSet;
-    Cdd_Fsi_rxbase = Cdd_FsiRx_ConfigPtr->hwUnitCfg[CDD_FSI_RX_HWUNIT_INSTANCE_NUMBER].baseAddr;
+    Cdd_Fsi_rxbase = Cdd_FsiRx_ConfigPtr->hwUnitCfg[CDD_FSI_RX_HWUNIT_INSTANCE_IDX].baseAddr;
 #endif
 #if (STD_ON == CDD_FSI_TX_DMA_MODE)
     Cdd_Dma_Init(NULL_PTR);
@@ -275,20 +275,19 @@ static void Cdd_FsiRxApp_mainTest(void)
         {
             Cdd_Fsi_isDataReceived = E_NOT_OK;
             Cdd_Fsi_isDataSent     = E_NOT_OK;
-            Cdd_Fsi_PingStatus     = Cdd_FsiTx_Ping(CDD_FSI_TX_HWUNIT_INSTANCE_NUMBER);
+            Cdd_Fsi_PingStatus     = Cdd_FsiTx_Ping(CDD_FSI_TX_HWUNIT_INSTANCE_IDX);
             AppUtils_printf(CDD_FSI_APP_NAME ": Ping Frame Transmission completed!!\n\r");
             for (uint8 count = 0; count < 5; count++)
             {
                 Cdd_Fsi_bufferstatus =
-                    Cdd_FsiTx_BufferLoad(CDD_FSI_TX_HWUNIT_INSTANCE_NUMBER, &SrcPtr[Cdd_Fsi_array_index],
+                    Cdd_FsiTx_BufferLoad(CDD_FSI_TX_HWUNIT_INSTANCE_IDX, &SrcPtr[Cdd_Fsi_array_index],
                                          Cdd_FsiTx_userdata, CDD_FSI_TX_BUFF_SIZE_16_WORD_LENGTH);
 
                 if (Cdd_Fsi_bufferstatus == E_OK)
                 {
-                    Cdd_FsiRx_setUpBuffer(CDD_FSI_RX_HWUNIT_INSTANCE_NUMBER, &DstBffr[0],
-                                          CDD_FSI_RX_DATA_16_WORD_LENGTH);
+                    Cdd_FsiRx_setUpBuffer(CDD_FSI_RX_HWUNIT_INSTANCE_IDX, &DstBffr[0], CDD_FSI_RX_DATA_16_WORD_LENGTH);
                     AppUtils_delay(200U);
-                    Cdd_Fsi_transmitstatus = Cdd_FsiTx_Transmit(CDD_FSI_TX_HWUNIT_INSTANCE_NUMBER, Cdd_FsiTx_userdata,
+                    Cdd_Fsi_transmitstatus = Cdd_FsiTx_Transmit(CDD_FSI_TX_HWUNIT_INSTANCE_IDX, Cdd_FsiTx_userdata,
                                                                 CDD_FSI_TX_DATA_16_WORD_LENGTH);
 
                     while (Cdd_Fsi_isDataSent == E_NOT_OK)

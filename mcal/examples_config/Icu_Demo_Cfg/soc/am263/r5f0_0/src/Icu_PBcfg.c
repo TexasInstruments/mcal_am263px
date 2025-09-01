@@ -75,7 +75,7 @@ extern "C" {
 
 
 /* ---- Perform version checking  ----------------------------------------- */
- #if ((ICU_SW_MAJOR_VERSION != (10U))||(ICU_SW_MINOR_VERSION != (1U)))
+ #if ((ICU_SW_MAJOR_VERSION != (10U))||(ICU_SW_MINOR_VERSION != (2U)))
   #error "Version numbers of Icu_PBcfg.c and Icu_Cfg.h are inconsistent!"
 #endif
 

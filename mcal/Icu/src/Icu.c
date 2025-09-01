@@ -99,7 +99,7 @@
 #endif
 
 /* AUTOSAR version information check has to match definition in header file */
-#if ((ICU_SW_MAJOR_VERSION != (10U)) || (ICU_SW_MINOR_VERSION != (1U)) || (ICU_SW_PATCH_VERSION != (0U)))
+#if ((ICU_SW_MAJOR_VERSION != (10U)) || (ICU_SW_MINOR_VERSION != (2U)) || (ICU_SW_PATCH_VERSION != (0U)))
 #error "Icu: Software Version Numbers are inconsistent!!"
 #endif
 

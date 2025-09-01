@@ -40,11 +40,11 @@
 
 /* ---- Perform version checking  ----------------------------------------- */
 
-#if ((GPT_SW_MAJOR_VERSION != (10U))||(GPT_SW_MINOR_VERSION != (1U)))
+#if ((GPT_SW_MAJOR_VERSION != (10U))||(GPT_SW_MINOR_VERSION != (2U)))
     #error "Version numbers of Gpt_PBcfg.c and Gpt.h are inconsistent!"
 #endif
 
-#if ((GPT_CFG_MAJOR_VERSION != (10U))||(GPT_CFG_MINOR_VERSION != (1U)))
+#if ((GPT_CFG_MAJOR_VERSION != (10U))||(GPT_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Gpt_PBcfg.c and Gpt_Cfg.h are inconsistent!"
 #endif
 

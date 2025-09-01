@@ -1,0 +1,206 @@
+<?xml version='1.0'?>
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+          <d:ctr name="Cdd_FsiTx" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+              <d:chc name="Cdd_FsiTx" type="AR-ELEMENT" value="MODULE-CONFIGURATION">
+            <d:ctr type="MODULE-CONFIGURATION">
+              <a:a name="DEF" value="ASPath:/TI_AM263Px/Cdd_FsiTx"/>
+              <a:a name="IMPORTER_INFO" value="@REC"/>
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION"
+                     value="VariantPostBuild">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+              </d:var>
+              <d:ctr name="CddFsiTxConfigSet" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddFsiTxNotification" type="FUNCTION-NAME"
+                       value="Cdd_FsiTxApp_Notification">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxOverRunNotification" type="FUNCTION-NAME"
+                       value="Cdd_FsiTxApp_OverRunNotification">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxUnderRunNotification" type="FUNCTION-NAME"
+                       value="Cdd_FsiTxApp_UnderRunNotification">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:lst name="CddFsiTxHwUnit" type="MAP">
+                  <d:ctr name="CddFsiTxHwUnit_1" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:var name="CddFsiTxHwUnitId" type="ENUMERATION"
+                           value="CDD_FSI_TX_HWUNIT_1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CddFsiTxPrescale" type="ENUMERATION"
+                           value="CDD_FSI_TX_CLK_DIV_2">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CddFsiTxPingTimerTimeout" type="INTEGER"
+                           value="20000">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CddFsiTxTriggerSrc" type="ENUMERATION"
+                           value="CDD_FSI_TX_TRIGG_SRC_SW">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CddFsiTxTransmissionMethod" type="ENUMERATION"
+                           value="CDD_FSI_TX_INTERRUPT_MODE">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CddFsiTxExtHwTrigSrc" type="ENUMERATION"
+                           value="CDD_FSI_TX_TRIGGER_FSI_RX_TRIG0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CddFsiTxExtPingTrigSrc" type="ENUMERATION"
+                           value="CDD_FSI_TX_TRIGGER_FSI_RX_TRIG0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:ref name="CddFsiTxDmaReference" type="REFERENCE" >
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                  </d:ctr>
+                </d:lst>
+              </d:ctr>
+              <d:ctr name="CddFsiTxGeneral" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddFsiTxDeInitApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxTransmitApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxDevErrorDetectApi" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxPingApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxExtTriggerEnable" type="BOOLEAN"
+                       value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxBuffLoadApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxResetDriver" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxTypeofInterruptFunction"
+                       type="ENUMERATION" value="CDD_FSI_TX_ISR_CAT1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxInterruptVector" type="ENUMERATION"
+                       value="CDD_FSI_TX_INT1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxDeviceVariant" type="ENUMERATION"
+                       value="AM263Px">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMaxHwUnitCount" type="INTEGER" value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxNotifyCapability" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxBufferOverRunInterrupt" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxBufferUnderRunInterrupt" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxPingTimeOutInterrupt" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxFrameDoneInterrupt" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMainApi" type="BOOLEAN" value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxGetVersionInfoApi" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxDMAEnable" type="BOOLEAN" value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMultiLaneEnable" type="BOOLEAN"
+                       value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMaxDmaChannelId" type="INTEGER" value="63">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:ref name="CddFsiTxOsCounterRef" type="REFERENCE"
+                       value="ASPath:/Os/Os/OsCounter_0">
+                  <a:a name="ENABLE" value="false"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+                <d:var name="CddFsiTxDefaultOSCounterId" type="INTEGER"
+                       value="0">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:ctr name="CddFsiTxDemEventParameterRefs" type="IDENTIFIABLE">
+                <a:a name="ENABLE" value="true"/>
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:ref name="CDD_FSI_TX_E_BUFFER_UNDERRUN" type="REFERENCE"
+                       value="ASPath:/Dem/Dem/DemConfigSet/CDD_FSI_TX_E_BUFFER_UNDERRUN">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+                <d:ref name="CDD_FSI_TX_E_BUFFER_OVERRUN" type="REFERENCE"
+                       value="ASPath:/Dem/Dem/DemConfigSet/CDD_FSI_TX_E_BUFFER_OVERRUN">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+              </d:ctr>
+              <d:ctr name="CddFsiTxPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddFsiTxMinPrescaleValue" type="INTEGER" value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMaxPrescaleValue" type="INTEGER"
+                       value="255">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMaxNumTxModules" type="INTEGER" value="4">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMaxHwChannelId" type="INTEGER" value="2">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddFsiTxMinHwChannelId" type="INTEGER" value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

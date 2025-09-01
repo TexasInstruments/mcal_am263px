@@ -66,7 +66,7 @@ extern "C" {
 /** \brief Port configuration Minor Version */
 #define PORT_CFG_MINOR_VERSION           (2U)
 /** \brief Port configuration Patch Version */
-#define PORT_CFG_PATCH_VERSION           (0U)
+#define PORT_CFG_PATCH_VERSION           (1U)
 /* @} */
 
 /**
