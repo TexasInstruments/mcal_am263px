@@ -47,7 +47,7 @@
 /*******************************************************************************
  * Other Header Files
  ******************************************************************************/
-[!IF "not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/*))"!][!//
+[!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*))"!][!//
 #include "Dem.h"
 [!ENDIF!][!//
 
@@ -72,17 +72,17 @@ extern "C" {
 #define WDG_CFG_PATCH_VERSION           ([!"substring-after(substring-after($moduleSoftwareVer,'.'),'.')"!]U)
 /* @} */
 
-#define WDG_VARIANT_PRE_COMPILE       [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_VARIANT_PRE_COMPILE       [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
-#define WDG_VARIANT_POST_BUILD        [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPostBuild'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_VARIANT_POST_BUILD        [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPostBuild'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
-#define WDG_VARIANT_LINK_TIME         [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantLinkTime'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_VARIANT_LINK_TIME         [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/IMPLEMENTATION_CONFIG_VARIANT = 'VariantLinkTime'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
-[!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
+[!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 /**
 *  \brief Pre Compile config macro name.
 */
-[!LOOP "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgSettingsConfig"!]
+[!LOOP "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgSettingsConfig"!]
 #define WDG_INIT_CONFIG_PC		[!"@name"!]
 [!ENDLOOP!]
 [!ENDIF!]
@@ -95,69 +95,69 @@ extern "C" {
  * Exported Preprocessor #define Constants
  ******************************************************************************/
 /** \brief Enable/Disable Development Error Detection */
-#define WDG_DEV_ERROR_DETECT       [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_DEV_ERROR_DETECT       [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 /** \brief Enable/Disable Version Info API */
-#define WDG_GET_VERSION_INFO_API   [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgVersionInfoApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_GET_VERSION_INFO_API   [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgVersionInfoApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 /** \brief Enable/Disable Register Readback API */
-#define WDG_REGISTER_READBACK_API  [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgRegisterReadbackApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_REGISTER_READBACK_API  [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgRegisterReadbackApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 /** \brief Watchdog Initial Timeout */
-#define WDG_INITIAL_TIMEOUT        ([!"num:i(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgInitialTimeout)"!] * 1000)
+#define WDG_INITIAL_TIMEOUT        ([!"num:i(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgInitialTimeout)"!] * 1000)
 
 /** \brief Watchdog Maximum Timeout */
-#define WDG_MAX_TIMEOUT            ([!"num:i(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgMaxTimeout)"!] * 1000)
-[!VAR "Test1" = "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgInitialTimeout"!][!VAR "Test2" = "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgMaxTimeout"!][!IF "num:i($Test1 * 1000 ) > num:i($Test2 * 1000)"!][!ERROR "WdgInitialTimeout can't be greater than WdgMaxTimeout"!][!ENDIF!]
+#define WDG_MAX_TIMEOUT            ([!"num:i(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgMaxTimeout)"!] * 1000)
+[!VAR "Test1" = "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgInitialTimeout"!][!VAR "Test2" = "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgMaxTimeout"!][!IF "num:i($Test1 * 1000 ) > num:i($Test2 * 1000)"!][!ERROR "WdgInitialTimeout can't be greater than WdgMaxTimeout"!][!ENDIF!]
 
 /** \brief Watchdog Maximum preload value */
 #define WDG_MAX_PRELOAD_VALUE       (0xFFFU)
 
 /** \brief RTI Clock Frequency */
-#define WDG_RTI_FREQUENCY          ((uint32)[!"as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgRtiFrequency"!])
+#define WDG_RTI_FREQUENCY          ((uint32)[!"as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgRtiFrequency"!])
 
 
 /** \brief Watchdog Disable Allowed*/
-#define WDG_DISABLE_ALLOWED        [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDisableAllowed = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_DISABLE_ALLOWED        [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDisableAllowed = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 /** \brief Enable/Disable skipping force reset of WDG when 0 timeout is passed in Wdg_SetTriggerCondition */
-#define WDG_SKIP_FORCE_RESET       [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgSkipForceReset = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+#define WDG_SKIP_FORCE_RESET       [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgSkipForceReset = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 [!NOCODE!][!//
- [!IF "node:exists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs)"!][!//
-[!IF "not(node:refexists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) and not(node:refexists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)) and not(node:refexists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)) "!]
+ [!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs)"!][!//
+[!IF "not(node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) and not(node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)) and not(node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)) "!]
 [!WARNING "DEM enabled but no DEM error configured"!]
 [!ENDIF!]
 [!ENDIF!][!//
 [!ENDNOCODE!][!//
 
-[!IF "node:exists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/*)"!][!//
+[!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*)"!][!//
 /** \brief DEM Error Definitions */
- [!IF "node:exists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)"!][!//
+ [!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)"!][!//
 /** \brief  WDG failed */
 #ifndef WDG_E_MODE_FAILED
-#define WDG_E_MODE_FAILED           ([!IF "node:refexists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_MODE_FAILED))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
+#define WDG_E_MODE_FAILED           ([!IF "node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
 #endif
 [!ENDIF!][!//
 
-[!IF "node:exists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)"!][!//
+[!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)"!][!//
 /** \brief  WDG disable rejected */
 #ifndef WDG_E_DISABLE_REJECTED
-#define WDG_E_DISABLE_REJECTED     ([!IF "node:refexists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
+#define WDG_E_DISABLE_REJECTED     ([!IF "node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
 #endif
 [!ENDIF!][!//
 
-[!IF "node:exists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)"!][!//
+[!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)"!][!//
 #ifndef WDG_E_HARDWARE_ERROR
 /** \brief Hardware failed */
-#define WDG_E_HARDWARE_ERROR          ([!IF "node:refexists(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
+#define WDG_E_HARDWARE_ERROR          ([!IF "node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
 #endif
 [!ENDIF!][!//
 [!ENDIF!][!//
 /*******************************************************************************
  * Exported Preprocessor #define Macros
  ******************************************************************************/
-[!LOOP "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgSettingsConfig"!]
+[!LOOP "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgSettingsConfig"!]
 /** \brief WDG Configuration struct declaration */
 extern const struct Wdg_ConfigType_s [!"@name"!];
 [!ENDLOOP!]

@@ -548,12 +548,8 @@ This container contains the configuration parameters of the CAN controller(s).
 | Item ||
 |--------|---------------|
 | **Name** | CanWakeupFunctionalityAPI |
-| **Description** | Adds / removes the service Can_CheckWakeup() from the code. To use this parameter, enable CanWakeupSupport |
-| **Multiplicity-Configuration-Class** | -- |
-| Post-Build Time | VARIANT-POST-BUILD |
-| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Description** | Adds / removes the service Can_CheckWakeup() from the code. This feature is not supported |
 | **Origin** | AUTOSAR_ECUC |
-| **Post-build-variant-multiplicity** | false |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |
@@ -578,12 +574,8 @@ This container contains the configuration parameters of the CAN controller(s).
 | Item ||
 |--------|---------------|
 | **Name** | CanWakeupProcessing |
-| **Description** | Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode. To use this parameter, enable CanWakeupSupport |
-| **Multiplicity-Configuration-Class** | -- |
-| Post-Build Time | VARIANT-POST-BUILD |
-| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Description** | Enables / disables API Can_MainFunction_Wakeup() for handling wakeup events in polling mode. This feature is not supported |
 | **Origin** | AUTOSAR_ECUC |
-| **Post-build-variant-multiplicity** | false |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |
@@ -596,7 +588,7 @@ This container contains the configuration parameters of the CAN controller(s).
 | Item ||
 |--------|---------------|
 | **Name** | CanWakeupSupport |
-| **Description** | CAN driver support for wakeup over CAN Bus. |
+| **Description** | CAN driver support for wakeup over CAN Bus. This feature is not supported |
 | **Origin** | AUTOSAR_ECUC |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |

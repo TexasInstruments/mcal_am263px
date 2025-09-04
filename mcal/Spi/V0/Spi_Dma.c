@@ -289,8 +289,7 @@ void Spi_DmaTxIsrHandler(void *args)
 {
     Spi_HwUnitObjType *hwUnitObj = (Spi_HwUnitObjType *)args;
     if ((NULL_PTR != hwUnitObj) && (NULL_PTR != hwUnitObj->curJobObj) &&
-        ((hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode == SPI_TX_RX_MODE_TX_ONLY) ||
-         (hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode == SPI_TX_RX_MODE_BOTH)))
+        (hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode == SPI_TX_RX_MODE_TX_ONLY))
     {
         Spi_dmaTxIsrHandler_StatusCheck(hwUnitObj);
 

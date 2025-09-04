@@ -9,7 +9,7 @@
           <SHORT-NAME>Wdg</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
           <EXPECTED-ENTRYS>
-            [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgVersionInfoApi = 'true'"!]
+            [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgVersionInfoApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Wdg_TI_AM263px/Wdg_ModuleEntry/Wdg_GetVersionInfo</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -17,7 +17,7 @@
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Wdg_TI_AM263px/Wdg_ModuleEntry/Wdg_Init</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-            [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgRegisterReadbackApi = 'true'"!]
+            [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgRegisterReadbackApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Wdg_TI_AM263px/Wdg_ModuleEntry/Wdg_RegisterReadback</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -33,9 +33,9 @@
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
           </EXPECTED-ENTRYS>
           <MODULE-ID>102</MODULE-ID>
-          [!IF "((as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/*)) = 'true'))"!]
+          [!IF "((as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*)) = 'true'))"!]
           <BSW-MODULE-DEPENDENCYS>
-            [!IF "not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/*)) = 'true'"!]
+            [!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*)) = 'true'"!]
             <BSW-MODULE-DEPENDENCY UUID="3b02aced-ef6e-46a6-829c-860126d88df7">
               <SHORT-NAME>Dem</SHORT-NAME>
               <TARGET-MODULE-ID>54</TARGET-MODULE-ID>
@@ -46,7 +46,7 @@
               </TARGET-MODULE-REFS>
             </BSW-MODULE-DEPENDENCY>
             [!ENDIF!]
-            [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true'"!]
+            [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true'"!]
             <BSW-MODULE-DEPENDENCY UUID="42e30882-42d4-4c1e-8fed-be16e3b69703">
               <SHORT-NAME>Det</SHORT-NAME>
               <TARGET-MODULE-ID>15</TARGET-MODULE-ID>
@@ -63,11 +63,11 @@
             <BSW-INTERNAL-BEHAVIOR UUID="5a050bc9-815e-493f-a1e5-3bcbced90d21">
               <SHORT-NAME>Wdg_Behavior</SHORT-NAME>
               <ENTITYS>
-                [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgVersionInfoApi = 'true'"!]
+                [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgVersionInfoApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="c156cbbe-989c-45bc-a8e7-246256283937">
                   <SHORT-NAME>Wdg_GetVersionInfo</SHORT-NAME>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
-                  [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true'"!]
+                  [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true'"!]
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
@@ -81,15 +81,15 @@
                 <BSW-CALLED-ENTITY UUID="2f6373a5-ac03-4cb7-aff7-055e119cc27c">
                   <SHORT-NAME>Wdg_Init</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  [!IF "((as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/*)) = 'true'))"!]
+                  [!IF "((as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*)) = 'true'))"!]
                   <CALL-POINTS>
-                    [!IF "not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/*))"!]
+                    [!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*))"!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
-                    [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true'"!]
+                    [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true'"!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
@@ -99,7 +99,7 @@
                   [!ENDIF!]
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Wdg_TI_AM263px/Wdg_ModuleEntry/Wdg_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgRegisterReadbackApi = 'true'"!]
+                [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgRegisterReadbackApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="887be79e-97ed-4734-9130-289f881ec3a5">
                   <SHORT-NAME>Wdg_RegisterReadback</SHORT-NAME>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
@@ -109,15 +109,15 @@
                 <BSW-CALLED-ENTITY UUID="98fe91f4-5f37-4ced-90a9-1540c12defa9">
                   <SHORT-NAME>Wdg_SetMode</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  [!IF "((as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) = 'true') or (not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))='true'))"!]
+                  [!IF "((as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))='true'))"!]
                   <CALL-POINTS>
-                    [!IF "((not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) = 'true') or (not(node:empty(as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))='true'))"!]
+                    [!IF "((not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))='true'))"!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
-                    [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true'"!]
+                    [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true'"!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
@@ -130,7 +130,7 @@
                 <BSW-CALLED-ENTITY UUID="efc248e3-ed91-4864-bf9a-eb57c5b85cd7">
                   <SHORT-NAME>Wdg_SetTriggerCondition</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true'"!]
+                  [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true'"!]
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
@@ -143,7 +143,7 @@
                 <BSW-CALLED-ENTITY UUID="1e4beec7-5652-4f04-b713-a47b33f8ad48">
                   <SHORT-NAME>Wdg_Trigger</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  [!IF "as:modconf('Wdg')[node:exists(.//WdgDeviceVariant)]/WdgGeneral/WdgDevErrorDetect = 'true'"!]
+                  [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true'"!]
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
