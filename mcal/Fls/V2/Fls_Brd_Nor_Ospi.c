@@ -967,8 +967,8 @@ void processJobs(Fls_JobType job)
  */
 void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
 {
-    boolean isNotify = FALSE;
 #if (STD_OFF == FLS_USE_INTERRUPTS)
+    boolean isNotify = FALSE;
     boolean isFlsWriteStageDone = FALSE;
     boolean isFlsEraseStage     = FALSE;
 
@@ -1000,8 +1000,8 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
     {
         isNotify = TRUE;
     }
-#endif
     if (isNotify == TRUE)
+#endif
     {
         {
             Fls_DrvObj.ramAddr = &Fls_DrvObj.ramAddr[chunkSize];
