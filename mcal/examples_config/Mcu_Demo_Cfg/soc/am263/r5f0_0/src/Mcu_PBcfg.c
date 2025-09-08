@@ -357,7 +357,7 @@ static CONST(Mcu_EthConfigType, MCU_PBCFG) Mcu_EthConfiguration[MCU_ETH_PORTS] =
 /*<MCU_CFG_CONFIG>*/
 /* SourceId : MCU_SourceId_041 */
 
-CONST(Mcu_ConfigType, MCU_CONFIG_DATA) McuModuleConfiguration =
+CONST(Mcu_ConfigType, MCU_CONFIG_DATA) Mcu_Config =
 {
     .Mcu_ResetMode = MCU_PERFORM_RESET_MODE_WARM,
     /**< Reset mode to be used @sa  MCAL_MCU_API:ResetModes */

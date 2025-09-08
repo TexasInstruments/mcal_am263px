@@ -86,7 +86,7 @@ typedef void (*Gpt_AppFxn_t)(void);
 /*                            Global Variables                                */
 /* ========================================================================== */
 
-extern const struct Gpt_ConfigType_s Gpt_ChannelConfigSet_0;
+extern const struct Gpt_ConfigType_s Gpt_Config;
 volatile uint32                      Gpt_notifyRecvFlag         = 0xFFFF;
 uint8                                validWakeupSrcDetectedFlag = (uint8)FALSE;
 
@@ -175,16 +175,16 @@ void Gpt_App_mainTest(void)
     Gpt_Init((const Gpt_ConfigType *)NULL_PTR);
 #else
     AppUtils_printf("Post-Build variant is being used .. \n\r");
-    Gpt_Init(&Gpt_ChannelConfigSet_0);
+    Gpt_Init(&Gpt_Config);
 #endif
 
     /* change this once debug is done */
     countVal = 1 * GPTIMER_1_SECOND;
 
-    for (j = 0U; j < Gpt_ChannelConfigSet_0.ChannelCount; j++)
+    for (j = 0U; j < Gpt_Config.ChannelCount; j++)
     {
         /* Take each channel configuration in configuration set */
-        pChannelCfg = (Gpt_ChannelConfigType *)(Gpt_ChannelConfigSet_0.ChannelConfig_pt + j);
+        pChannelCfg = (Gpt_ChannelConfigType *)(Gpt_Config.ChannelConfig_pt + j);
         ChannelId   = pChannelCfg->ChannelId;
         tickFreq    = pChannelCfg->GptChannelTickFrequency;
         AppUtils_printf("------------------------------------------\n\r");

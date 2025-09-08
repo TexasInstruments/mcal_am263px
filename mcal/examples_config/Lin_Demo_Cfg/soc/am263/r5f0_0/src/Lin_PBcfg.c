@@ -29,7 +29,7 @@
  * Version        Date         Author               Change ID        Description
  *--------------------------------------------------------------------------------------------------------------------
  * 00.01.00       11Nov2012    Author's name        0000000000000    Initial version
- *                                                                     
+ *
  *********************************************************************************************************************/
 
 /*********************************************************************************************************************
@@ -41,7 +41,7 @@
 /*********************************************************************************************************************
  * Other Header Files
  *********************************************************************************************************************/
- 
+
 /*********************************************************************************************************************
  * Version Check (if required)
  *********************************************************************************************************************/
@@ -75,7 +75,7 @@
  *********************************************************************************************************************/
 #define  LIN_START_SEC_CONFIG_DATA
 #include "Lin_MemMap.h"
-CONST(Lin_ConfigType, LIN_CFG) LinGlobalConfig =
+CONST(Lin_ConfigType, LIN_CFG) Lin_Config =
 {
    .linChannelCfg[0] =
    {
@@ -85,14 +85,14 @@ CONST(Lin_ConfigType, LIN_CFG) LinGlobalConfig =
          .IntrLineNum = LIN_INTERRUPT_LINE_NUM_0,
          .LoopbackMode = LIN_LOOPBACK_DISABLED
       },
-      .linBaudConfig = 
+      .linBaudConfig =
       {
          .Prescalar = 155U,
          .FractionalDivider = 4U
       },
       .linWakeupSource = (LIN_WAKEUP_SOURCE_0),
-      .linChannelWakeupSupport =TRUE   
-   }   
+      .linChannelWakeupSupport =TRUE
+   }
 };
 #define  LIN_STOP_SEC_CONFIG_DATA
 #include "Lin_MemMap.h"

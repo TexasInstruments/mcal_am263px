@@ -123,7 +123,7 @@ extern "C" {
 /* Icu Channel Configuration parameters */
 [!LOOP "as:modconf('Icu')[1]/IcuConfigSet"!]
  CONST(struct Icu_ConfigType_s, ICU_CONFIG_DATA)
-     [!"@name"!] =
+     Icu_Config =
 {
     .icuMaxChannel = [!"num:i(count(as:modconf('Icu')[1]/IcuConfigSet/IcuChannel/*))"!]U,
     .chCfg =

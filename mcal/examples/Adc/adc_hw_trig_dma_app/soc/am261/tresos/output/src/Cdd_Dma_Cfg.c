@@ -231,7 +231,7 @@ static Cdd_Dma_Handler
   };
 
 
-CONST(Cdd_Dma_ConfigType, CDD_DMA_CFG) CddDmaDriverHandler =
+CONST(Cdd_Dma_ConfigType, CDD_DMA_CFG) Cdd_Dma_Config =
 {
         CddDmaDriverHandlerList     
 };

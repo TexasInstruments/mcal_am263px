@@ -236,7 +236,7 @@ static CONST(Mcu_PllConfigType, MCU_PBCFG) Mcu_PLLConfiguration[] =
 /* SourceId : MCU_SourceId_041 */
 
 [!LOOP "as:modconf('Mcu')[1]/McuModuleConfiguration/."!][!//
-CONST(Mcu_ConfigType, MCU_CONFIG_DATA) [!"@name"!] =
+CONST(Mcu_ConfigType, MCU_CONFIG_DATA) Mcu_Config =
 {
 [!WS "4"!].Mcu_ResetMode = [!"McuResetMode"!],
 [!WS "4"!]/**< Reset mode to be used @sa  MCAL_MCU_API:ResetModes */

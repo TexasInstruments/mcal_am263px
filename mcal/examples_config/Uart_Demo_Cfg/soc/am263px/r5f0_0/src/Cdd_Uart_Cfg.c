@@ -86,7 +86,7 @@ extern void CddUart_CallbackWriteNotify(void);
 extern void CddUart_CallbackErrorNotify(void);
 
 /* Generation of runtime configuration */
-CONST(Cdd_Uart_CfgType, CDD_UART_CFG) CddUartDriver_0 =
+CONST(Cdd_Uart_CfgType, CDD_UART_CFG) Cdd_Uart_Config =
 {
   .netChannels = 1,
   .channelCfg = {

@@ -4,7 +4,7 @@
 *
 * All rights reserved not granted herein.
 *
-* Limited License. 
+* Limited License.
 *
 * Texas Instruments Incorporated grants a world-wide, royalty-free, non-exclusive
 * license under copyrights and patents it now or hereafter owns or controls to make,
@@ -101,7 +101,7 @@ extern void Cdd_FsiTxApp_OverRunNotification(Cdd_FsiTx_HWUnitType hwUnitId);
 extern void Cdd_FsiTxApp_UnderRunNotification(Cdd_FsiTx_HWUnitType hwUnitId);
 
 /* Create runtime configurations. */
-CONST(struct Cdd_FsiTx_ConfigType_s, CDD_FSI_TX_CONFIG_DATA) CddFsiTxConfigSet =
+CONST(struct Cdd_FsiTx_ConfigType_s, CDD_FSI_TX_CONFIG_DATA) Cdd_FsiTx_Config =
 {
     .maxHwUnit = 1U,
     .cddFsiTxNotification = Cdd_FsiTxApp_Notification,
@@ -119,7 +119,7 @@ CONST(struct Cdd_FsiTx_ConfigType_s, CDD_FSI_TX_CONFIG_DATA) CddFsiTxConfigSet =
             .transmitMode = CDD_FSI_TX_INTERRUPT_MODE,
             .pingTriggerTimeout = 20000,
         },
-    },       
+    },
 };
 
 

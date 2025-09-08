@@ -134,7 +134,7 @@ FLS_OSPI_RX_8D_8D_8D = 8
 #define FLS_POST_BUILD_VARIANT     (STD_OFF)
 
 /**  \brief Pre Compile config macro name. */
-#define FLS_INIT_CONFIG_PC       FlsConfigSet
+#define FLS_INIT_CONFIG_PC       Fls_Config
        
 
 /** \brief instance Id of ospi*/
@@ -228,7 +228,7 @@ FLS_OSPI_RX_8D_8D_8D = 8
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 /** \brief FLS Configuration struct declaration */
-extern const struct Fls_ConfigType_s FlsConfigSet;
+extern const struct Fls_ConfigType_s Fls_Config;
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 /* ========================================================================== */

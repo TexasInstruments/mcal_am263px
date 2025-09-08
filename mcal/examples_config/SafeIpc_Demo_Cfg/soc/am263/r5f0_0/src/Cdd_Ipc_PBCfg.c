@@ -72,7 +72,7 @@ extern sint32 App_CrcHookFxn(uint8 *data, uint16 dataLen, uint8 crcSize, void* c
  * Requirements : AUTORADAR_MCAL-66, AUTORADAR_MCAL-65
 */
 
-CONST(Cdd_IpcConfigType, CDD_PBCFG) CddIpcDriver_0 =
+CONST(Cdd_IpcConfigType, CDD_PBCFG) Cdd_Ipc_Config =
 {
     .Cdd_Ipc_SelfCoreId = CDD_IPC_R5FSS0_1_ID,
     .Cdd_Ipc_numCores = 1,
@@ -95,7 +95,7 @@ CONST(Cdd_IpcConfigType, CDD_PBCFG) CddIpcDriver_0 =
     .Cdd_Ipc_CrcHookFunc = App_CrcHookFxn
 };
 
-P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr = &CddIpcDriver_0;
+P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr = &Cdd_Ipc_Config;
 
 #define  CDD_IPC_STOP_SEC_CONFIG_DATA
 #include "Cdd_Ipc_MemMap.h"

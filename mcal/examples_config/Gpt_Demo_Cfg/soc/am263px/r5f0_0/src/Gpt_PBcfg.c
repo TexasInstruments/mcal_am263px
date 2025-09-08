@@ -107,7 +107,7 @@ extern void Gpt_Channel_Notify31(void);
 extern void Gpt_Channel_Notify32(void);
 
 /* Gpt Channel Configuration parameters */
-static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_ChannelConfigSet_0_ChannelConfig[28] =
+static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
 {
     [0] =
     {	
@@ -364,9 +364,9 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_ChannelConfigSet_0_ChannelCon
 };
 
 /*<GPT_CONFIGURATION>*/
-CONST(Gpt_ConfigType, GPT_PBCFG) Gpt_ChannelConfigSet_0 =
+CONST(Gpt_ConfigType, GPT_PBCFG) Gpt_Config =
 {
-    Gpt_ChannelConfigSet_0_ChannelConfig,/*Pointer to Channel Configuration*/
+    Gpt_Config_ChannelConfig,/*Pointer to Channel Configuration*/
     28/*Number of Channels*/
 };
 

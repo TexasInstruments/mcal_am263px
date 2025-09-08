@@ -67,7 +67,7 @@ Std_VersionInfoType Dio_VersionInfo;
 sint32 Dio_TestState = TRUE;
 
 #if (STD_OFF == MCU_NO_PLL)
-extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration;
+extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config;
 #endif
 
 Dio_LevelType        Dio_PinLevel[64];

@@ -242,7 +242,7 @@ static void Adc_appInit(void)
     RDC_disableResolver(MCAL_CSL_CONTROLSS_HW_RESOLVER_U_BASE, FALSE);
 
     Cdd_Dma_Init(NULL_PTR);
-    Adc_Init(&AdcConfigSet);
+    Adc_Init(&Adc_Config);
 
     /* Get and print version */
     Adc_GetVersionInfo(&versioninfo);
@@ -350,8 +350,8 @@ static void Adc_appPrintResult(uint32 loopcnt)
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO1, " ----------------------------\r\n");
     for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
     {
-        grpCfg    = &AdcConfigSet.groupCfg[grpIdx];
-        hwUnitCfg = &AdcConfigSet.hwUnitCfg[grpCfg->hwUnitId];
+        grpCfg    = &Adc_Config.groupCfg[grpIdx];
+        hwUnitCfg = &Adc_Config.hwUnitCfg[grpCfg->hwUnitId];
 
         GT_3trace(ADC_APP_TRACE_MASK, GT_INFO1, " ADC Group %d, HW Unit %d, Base 0x%08X:\r\n", grpIdx,
                   hwUnitCfg->hwUnitId, hwUnitCfg->baseAddr);

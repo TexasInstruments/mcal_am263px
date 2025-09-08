@@ -89,18 +89,17 @@ uint32 frc;
 /*                            Global Variables                                */
 /* ========================================================================== */
 
-App_State                        gAppObj;
-volatile uint32                  gTestPassed                  = E_OK;
-volatile uint32                  gStopTestFlag                = FALSE;
-volatile uint32                  gEthcontrollerModeChangeFlag = FALSE;
-uint8                            gTestMacAddr[ETH_MAC_ADDR_LEN];
-uint8                            MainFunc_Execution;
-float32                          ExecutimeTime;
-static sint32                    i2        = 0U;
-volatile uint32                  gLoopCntr = 1U;
-extern const Mcu_ConfigType      McuModuleConfiguration;
-extern AppUtilsPinMux_ConfigType Port_Config;
-uint8                            _gDstBuff[MAX_BUFFER_SIZE] __attribute__((aligned(128), section(".bss")));
+App_State                   gAppObj;
+volatile uint32             gTestPassed                  = E_OK;
+volatile uint32             gStopTestFlag                = FALSE;
+volatile uint32             gEthcontrollerModeChangeFlag = FALSE;
+uint8                       gTestMacAddr[ETH_MAC_ADDR_LEN];
+uint8                       MainFunc_Execution;
+float32                     ExecutimeTime;
+static sint32               i2        = 0U;
+volatile uint32             gLoopCntr = 1U;
+extern const Mcu_ConfigType Mcu_Config;
+uint8                       _gDstBuff[MAX_BUFFER_SIZE] __attribute__((aligned(128), section(".bss")));
 
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
 volatile uint32 tsyncGetTsStress                      = 0;

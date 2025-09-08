@@ -231,7 +231,7 @@ static void LinApp_mainTest(void)
 #if (STD_ON == LIN_PRE_COMPILE_VARIANT)
     Lin_Init(NULL_PTR);
 #else
-    const Lin_ConfigType* pCfgPtr = &LinGlobalConfig;
+    const Lin_ConfigType* pCfgPtr = &Lin_Config;
     Lin_Init(pCfgPtr);
 #endif
 

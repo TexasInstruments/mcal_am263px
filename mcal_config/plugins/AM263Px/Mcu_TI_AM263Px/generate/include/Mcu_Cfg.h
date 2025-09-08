@@ -153,7 +153,7 @@ Reset Reason Config
 * \brief Pre Compile config macro name.
 */
 [!LOOP "as:modconf('Mcu')[1]/McuModuleConfiguration"!]
-#define MCU_INIT_CONFIG_PC        [!"@name"!]
+#define MCU_INIT_CONFIG_PC        Mcu_Config
 [!ENDLOOP!]
 [!ENDIF!]
 
@@ -761,12 +761,12 @@ typedef struct Mcu_ConfigType_s
     /** \brief ADC Configuration */
 	Mcu_AdcConfigPtrType     Mcu_AdcConfig;
 	#endif
-[!IF "(node:exists(as:modconf('Eth')[1]/EthGeneral))"!]	
+[!IF "(node:exists(as:modconf('Eth')[1]/EthGeneral))"!]
     #if (STD_ON == MCU_ETH_ENABLE)
     /** \brief ETH Configuration */
     Mcu_EthConfigPtrType     Mcu_EthConfig;
     #endif
-[!ENDIF!]	
+[!ENDIF!]
 } Mcu_ConfigType;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -876,7 +876,7 @@ void Mcu_GpioXbarConfig(void);
  *********************************************************************************************************************/
 [!LOOP "as:modconf('Mcu')[1]/McuModuleConfiguration/."!]
 /** \brief MCU Configuration struct declaration */
-extern const struct Mcu_ConfigType_s [!"@name"!];
+extern const struct Mcu_ConfigType_s Mcu_Config;
 [!ENDLOOP!]
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

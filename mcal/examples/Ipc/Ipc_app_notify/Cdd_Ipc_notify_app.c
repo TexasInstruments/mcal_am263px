@@ -98,7 +98,7 @@ int main(void)
 
     Cdd_Ipc_App_PlatformInit();
 
-    Cdd_Ipc_Init(&CddIpcDriver_0);
+    Cdd_Ipc_Init(&Cdd_Ipc_Config);
 
     Cdd_Ipc_Notify_RegisterClient(gClientId, Cdd_Ipc_notify_MsgHandler, NULL_PTR);
 
@@ -140,7 +140,7 @@ int main(void)
     Cdd_Ipc_Notify_UnregisterClient(gClientId);
 
 #if (STD_ON == CDD_IPC_DEINIT_API)
-    Cdd_Ipc_DeInit(&CddIpcDriver_0);
+    Cdd_Ipc_DeInit(&Cdd_Ipc_Config);
 #endif
 
     AppUtils_TimerDeinit();

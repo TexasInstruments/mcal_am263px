@@ -152,7 +152,7 @@ extern "C" {
 [!ENDLOOP!][!//
 
 [!LOOP "as:modconf('Spi')[1]/SpiDriver"!][!//
-CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) [!"@name"!] =
+CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) Spi_Config =
 {
 [!WS "4"!].maxChannels = [!"SpiMaxChannel/*"!]U,
 [!WS "4"!].maxJobs = [!"SpiMaxJob/*"!]U,

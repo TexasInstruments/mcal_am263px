@@ -304,8 +304,8 @@ typedef struct
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 /** \brief PWM Configuration structure declaration */
-extern const struct Pwm_ConfigType_PC_s PwmChannelConfigSet_PC;
-extern const struct Pwm_ConfigType_s PwmChannelConfigSet;
+extern const struct Pwm_ConfigType_PC_s Pwm_Config_PC;
+extern const struct Pwm_ConfigType_s Pwm_Config;
 
 extern void Pwm_Notification_Channel1 (void);
 

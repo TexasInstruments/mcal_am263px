@@ -98,20 +98,21 @@ extern "C" {
 /* ========================================================================== */
 /*                         Glo and Enums                               */
 /* ========================================================================== */
-extern const struct Cdd_FsiRx_ConfigType_s CddFsiRxConfigSet_0;
-extern const struct Cdd_FsiTx_ConfigType_s CddFsiTxConfigSet_0;
+
+/* None */
+
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
-void                                       _enable_interrupt_(void);
-void                                       Cdd_FsiTxApp_Notification(Cdd_FsiTx_HWUnitType hwUnitId);
-void                                       Cdd_FsiTxApp_OverRunNotification(Cdd_FsiTx_HWUnitType hwUnitId);
-void                                       Cdd_FsiTxApp_UnderRunNotification(Cdd_FsiTx_HWUnitType hwUnitId);
-void                                       Cdd_FsiRxApp_ResetNotification(Cdd_FsiRx_HWUnitType hwUnitId);
-void                                       Cdd_FsiRxApp_OverrunNotification(Cdd_FsiRx_HWUnitType hwUnitId);
-void                                       Cdd_FsiRxApp_UnderrunNotification(Cdd_FsiRx_HWUnitType hwUnitId);
-void                                       Cdd_FsiRxApp_PingReceivedNotification(Cdd_FsiRx_HWUnitType hwUnitId);
-void                                       Cdd_FsiRxApp_dataReceivedNotification(Cdd_FsiRx_HWUnitType hwUnitId);
+void _enable_interrupt_(void);
+void Cdd_FsiTxApp_Notification(Cdd_FsiTx_HWUnitType hwUnitId);
+void Cdd_FsiTxApp_OverRunNotification(Cdd_FsiTx_HWUnitType hwUnitId);
+void Cdd_FsiTxApp_UnderRunNotification(Cdd_FsiTx_HWUnitType hwUnitId);
+void Cdd_FsiRxApp_ResetNotification(Cdd_FsiRx_HWUnitType hwUnitId);
+void Cdd_FsiRxApp_OverrunNotification(Cdd_FsiRx_HWUnitType hwUnitId);
+void Cdd_FsiRxApp_UnderrunNotification(Cdd_FsiRx_HWUnitType hwUnitId);
+void Cdd_FsiRxApp_PingReceivedNotification(Cdd_FsiRx_HWUnitType hwUnitId);
+void Cdd_FsiRxApp_dataReceivedNotification(Cdd_FsiRx_HWUnitType hwUnitId);
 
 #ifdef __cplusplus
 }

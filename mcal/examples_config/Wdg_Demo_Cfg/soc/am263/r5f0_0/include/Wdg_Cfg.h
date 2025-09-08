@@ -149,7 +149,7 @@ extern "C" {
  ******************************************************************************/
 
 /** \brief WDG Configuration struct declaration */
-extern const struct Wdg_ConfigType_s WdgSettingsConfig;
+extern const struct Wdg_ConfigType_s Wdg_Config;
 
 #ifdef __cplusplus
 }

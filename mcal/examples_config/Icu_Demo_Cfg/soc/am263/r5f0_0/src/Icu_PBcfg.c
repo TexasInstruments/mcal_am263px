@@ -91,7 +91,7 @@ extern "C" {
 
 /* Icu Channel Configuration parameters */
  CONST(struct Icu_ConfigType_s, ICU_CONFIG_DATA)
-     IcuConfigSet =
+     Icu_Config =
 {
     .icuMaxChannel = 1U,
     .chCfg =

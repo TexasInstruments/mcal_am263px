@@ -62,10 +62,10 @@ int main(void)
 
     Cdd_Ipc_App_PlatformInit();
 
-    Cdd_Ipc_Init(&CddIpcDriver_0);
+    Cdd_Ipc_Init(&Cdd_Ipc_Config);
 
 #if (CDD_IPC_RPMSG_ENABLE_API == STD_ON)
-    Cdd_Ipc_Construct(&CddIpcDriver_0);
+    Cdd_Ipc_Construct(&Cdd_Ipc_Config);
 #endif
 
     /* Interrupt Configuration (Registering Interrupt to R5 core, ISR) */

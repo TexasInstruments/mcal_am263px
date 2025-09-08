@@ -63,7 +63,7 @@ extern void Pwm_Notification_Channel1 (void);
 
 /* Pwm Channel Configuration parameters */
 CONST(struct Pwm_ConfigType_PC_s, PWM_CONFIG_DATA)
-    PwmChannelConfigSet_PC =
+    Pwm_Config_PC =
 {
     .chCfg =
     {

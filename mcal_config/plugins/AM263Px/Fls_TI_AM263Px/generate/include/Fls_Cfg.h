@@ -135,10 +135,10 @@ FLS_OSPI_RX_8D_8D_8D = 8
 /**  \brief Pre Compile config macro name. */
 [!IF "as:modconf('Fls')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 [!LOOP "as:modconf('Fls')[1]/FlsConfigSet"!]
-#define FLS_INIT_CONFIG_PC       [!"@name"!]
+#define FLS_INIT_CONFIG_PC       Fls_Config
 [!ENDLOOP!]
 [!ENDIF!]
-       
+
 
 /** \brief instance Id of ospi*/
 #define OSPI_INSTANCE_ID                ([!"as:modconf('Fls')[1]/FlsConfigSet/OspiInstanceId"!])
@@ -200,7 +200,7 @@ FLS_OSPI_RX_8D_8D_8D = 8
 
 /** \brief Number of Sectorlist configured */
 [!LOOP "as:modconf('Fls')[1]/FlsConfigSet"!][!//
-[!VAR "NumOfSectorCfg" = "0"!]  
+[!VAR "NumOfSectorCfg" = "0"!]
 [!WS "4"!][!LOOP "FlsSectorList/FlsSector/*"!]
 [!VAR "NumOfSectorCfg" = "$NumOfSectorCfg + 1"!]
 [!WS "4"!][!ENDLOOP!]
@@ -219,8 +219,8 @@ FLS_OSPI_RX_8D_8D_8D = 8
 [!ERROR!][!//
         "Reference to the DMA handler cannot be NULL"[!//
 [!ENDERROR!][!//
-[!ENDIF!][!// 
-[!ENDIF!][!// 
+[!ENDIF!][!//
+[!ENDIF!][!//
 
 /* @} */
 
@@ -248,7 +248,7 @@ FLS_OSPI_RX_8D_8D_8D = 8
 /* ========================================================================== */
 [!LOOP "as:modconf('Fls')[1]/FlsConfigSet"!]
 /** \brief FLS Configuration struct declaration */
-extern const struct Fls_ConfigType_s [!"@name"!];
+extern const struct Fls_ConfigType_s Fls_Config;
 [!ENDLOOP!]
 
 

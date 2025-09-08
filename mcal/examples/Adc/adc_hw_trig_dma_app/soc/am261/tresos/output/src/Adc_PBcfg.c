@@ -96,7 +96,7 @@ extern "C" {
 
 
 /* Create runtime configurations. */
-CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
+CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) Adc_Config =
 {
     .maxGroup = 2U,
     .maxHwUnit = 1U,
@@ -115,7 +115,7 @@ CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
             .accessMode = ADC_ACCESS_MODE_SINGLE,
             .streamBufMode = ADC_STREAM_BUFFER_LINEAR,
             .hwTrigSignal = ADC_HW_TRIG_BOTH_EDGES,
-            .hwTrigTimer =ADC_TRIGGER_EPWM0_SOCA,            
+            .hwTrigTimer =ADC_TRIGGER_EPWM0_SOCA,
             .groupReplacement = (Adc_GroupReplacementType)ADC_GROUP_REPL_SUSPEND_RESUME,
             .groupChannelMask = 0x3,
 #if (STD_ON == ADC_ENABLE_LIMIT_CHECK)
@@ -163,7 +163,7 @@ CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
             .accessMode = ADC_ACCESS_MODE_SINGLE,
             .streamBufMode = ADC_STREAM_BUFFER_LINEAR,
             .hwTrigSignal = ADC_HW_TRIG_BOTH_EDGES,
-            .hwTrigTimer =ADC_TRIGGER_EPWM0_SOCA,            
+            .hwTrigTimer =ADC_TRIGGER_EPWM0_SOCA,
             .groupReplacement = (Adc_GroupReplacementType)ADC_GROUP_REPL_SUSPEND_RESUME,
             .groupChannelMask = 0x4,
 #if (STD_ON == ADC_ENABLE_LIMIT_CHECK)

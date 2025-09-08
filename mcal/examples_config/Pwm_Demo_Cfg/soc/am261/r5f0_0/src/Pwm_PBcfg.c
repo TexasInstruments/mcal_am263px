@@ -58,7 +58,7 @@ extern "C" {
 
 
 /* Pwm Channel Configuration parameters */
-CONST(struct Pwm_ConfigType_PC_s, PWM_CONFIG_DATA) PwmChannelConfigSet_PC =
+CONST(struct Pwm_ConfigType_PC_s, PWM_CONFIG_DATA) Pwm_Config_PC =
 {
     .chCfg =
     {
@@ -72,7 +72,7 @@ CONST(struct Pwm_ConfigType_PC_s, PWM_CONFIG_DATA) PwmChannelConfigSet_PC =
 };
 
 /* Pwm Channel Configuration parameters */
-CONST(struct Pwm_ConfigType_s, PWM_CONFIG_DATA) PwmChannelConfigSet =
+CONST(struct Pwm_ConfigType_s, PWM_CONFIG_DATA) Pwm_Config =
 {
     .chCfg =
     {

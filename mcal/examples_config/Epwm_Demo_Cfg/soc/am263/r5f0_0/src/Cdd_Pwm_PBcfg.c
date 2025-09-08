@@ -440,7 +440,7 @@ Cdd_Pwm_TripZoneRef[CDD_PWM_TIMER_TRIP_ZONE_NUM_CHANNELS] =
         }
 };
 
-static CONST(struct Cdd_Pwm_DigitalCompareType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_DigitalCompareType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
 {
         [0] =
@@ -477,7 +477,7 @@ Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
            .channelPwmCddPwmBlankingWindow               = TRUE,
            .channelPwmCddPwmBlankingWindowStartEvent     = EPWM_DC_WINDOW_START_TBCTR_BLANK_PULSE_MIX,
            .channelPwmCddPwmBlankingWindowOffset         = 0,
-           .channelPwmCddPwmBlankingWindowLength         = 0, 
+           .channelPwmCddPwmBlankingWindowLength         = 0,
            .channelPwmCddPwmBlankingWindowMixedEvent     = EPWM_DC_TBCTR_ZERO,
            .channelPwmCddPwmDCCounterCapture             = TRUE,
            .channelPwmCddPwmDCCounterCaptureShadowMode   = TRUE,
@@ -645,7 +645,7 @@ Cdd_Pwm_HrPwmRef[CDD_PWM_TIMER_HRPWM_NUM_CHANNELS] =
 
 /* Cdd_Pwm Channel Configuration parameters */
 CONST(Cdd_Pwm_ConfigType, CDD_PWM_CONFIG_DATA)
-     CddPwmConfigSet_0 =
+     Cdd_Pwm_Config =
 {
     .chCfg =
     {

@@ -206,7 +206,7 @@ static CONST(Mcu_EthConfigType, MCU_PBCFG) Mcu_EthConfiguration[MCU_ETH_PORTS] =
 [!WS "8"!].macNum = [!"num:i(substring-after($MacNumber,'ETH_PORT'))"!]U,
 [!WS "8"!].rmiiClkOutDisable = [!IF "node:ref(./McuEthCtrConfig)/EthPortConfig/EthMacConfig/EthMiiClkOutDisable = 'true'"!] 1U,[!ELSE!] 0U,[!ENDIF!]
 [!WS "8"!].idModeEnable = [!IF "node:ref(./McuEthCtrConfig)/EthPortConfig/EthMacConfig/EthIdModeEnable = 'true'"!] 1U,[!ELSE!] 0U,[!ENDIF!]
-[!WS "8"!].macConnectionType = MCU_[!"node:ref(./McuEthCtrConfig)/EthPortConfig/EthMacConfig/EthMacConnectionType"!],		   
+[!WS "8"!].macConnectionType = MCU_[!"node:ref(./McuEthCtrConfig)/EthPortConfig/EthMacConfig/EthMacConnectionType"!],
 [!WS "4"!]}[!IF "not(node:islast())"!],[!ENDIF!]
 [!ENDLOOP!][!//
 };
@@ -253,7 +253,7 @@ static CONST(Mcu_PllConfigType, MCU_PBCFG) Mcu_PLLConfiguration[] =
 /* SourceId : MCU_SourceId_041 */
 
 [!LOOP "as:modconf('Mcu')[1]/McuModuleConfiguration/."!][!//
-CONST(Mcu_ConfigType, MCU_CONFIG_DATA) [!"@name"!] =
+CONST(Mcu_ConfigType, MCU_CONFIG_DATA) Mcu_Config =
 {
 [!WS "4"!].Mcu_ResetMode = [!"McuResetMode"!],
 [!WS "4"!]/**< Reset mode to be used @sa  MCAL_MCU_API:ResetModes */

@@ -148,7 +148,7 @@ extern "C" {
 /* Create runtime configurations. */
 [!LOOP "as:modconf('Adc')[1]/AdcConfigSet"!]
 [!VAR "GrpLpCnt" = "0"!]
-CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) [!"@name"!] =
+CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) Adc_Config =
 {
     .maxGroup = [!"num:i(count(AdcHwUnit/*/AdcGroup/*))"!]U,
     .maxHwUnit = [!"num:i(count(AdcHwUnit/*))"!]U,

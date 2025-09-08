@@ -241,7 +241,7 @@ static CONST( Port_DioRegConfigType, PORT_PBCFG) [!"@name"!]_DioConfig[] =
 [!ENDIF!][!//
 
 /*</PORT_PIN_CONFIGURATION>*/
-CONST(Port_ConfigType, PORT_PBCFG) [!"@name"!] =
+CONST(Port_ConfigType, PORT_PBCFG) Port_Config =
 {
     .NumberOfPortPins = [!"num:i($NumPortPins)"!],
     .PinConfig_pt = [!"@name"!]_PinConfig,

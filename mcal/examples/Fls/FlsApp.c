@@ -172,7 +172,7 @@ uint8 fls_sampleapp_configinput(void)
     Fls_Init((const Fls_ConfigType *)NULL_PTR);
 #else
     AppUtils_printf(APP_NAME ": Variant - Post Build being used !!!\n\r");
-    Fls_Init(&FlsConfigSet);
+    Fls_Init(&Fls_Config);
 #endif /* #if (STD_ON == FLS_PRE_COMPILE_VARIANT) */
 
 #if (STD_ON == FLS_VERSION_INFO_API)
@@ -194,9 +194,9 @@ uint8 fls_sampleapp_configinput(void)
 
     for (numofseccfg = 0; numofseccfg < FLS_NUMBER_OF_SECTOR_CFG; numofseccfg++)
     {
-        offset               = FlsConfigSet.sectorList[numofseccfg].sectorStartaddress - FLS_BASE_ADDRESS;
-        CfgSectorOrBlockSize = FlsConfigSet.sectorList[numofseccfg].sectorSize;
-        numOfSectorsOrBlocks = FlsConfigSet.sectorList[numofseccfg].numberOfSectors;
+        offset               = Fls_Config.sectorList[numofseccfg].sectorStartaddress - FLS_BASE_ADDRESS;
+        CfgSectorOrBlockSize = Fls_Config.sectorList[numofseccfg].sectorSize;
+        numOfSectorsOrBlocks = Fls_Config.sectorList[numofseccfg].numberOfSectors;
         /* Make sure to call "Fls_SetEraseType" function with parameter as per the sectorsize
          * configuration done in sectorlist*/
         /*FLS_SECTOR_ERASE to be passed for sectorsize = 4096, FLS_BLOCK_ERASE for sectorsize =

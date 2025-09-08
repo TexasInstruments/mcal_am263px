@@ -24,7 +24,7 @@
  *
  *********************************************************************************************************************/
 [!MACRO "GetPeriodValue", "PwmFunctionalClock", "PwmHSClkPrescaler", "PwmClkPrescaler","PwmPeriodDefault","PwmCounter"!][!//
-[!NOCODE!][!//  
+[!NOCODE!][!//
 [!IF "PwmPeriodDefault != num:f('0')"!]
 [!VAR "Ticks" = "0"!]
 [!VAR "Sys_ClkFreq" = "$PwmFunctionalClock"!]
@@ -51,76 +51,76 @@
 [!ENDMACRO!][!//
 
 [!MACRO "GetAddress", "ChannelNumber", "HWNumber"!][!//
-[!NOCODE!][!//    
+[!NOCODE!][!//
     [!VAR "BaseAddr" = "BaseAddr + 1342177280"!][!//
     [!VAR "Channeloffset" = "Channeloffset + 4096"!][!//
     [!VAR "HWunitOffset" = "HWunitOffset + 262144"!][!//
-    [!VAR "bkId" = "num:i(substring-after($ChannelNumber,'CDD_PWM_CHANNEL_'))"!][!//  
-    [!VAR "bkId1" = "num:i(substring-after($HWNumber,'CDD_PWM_CONTROLSS_G'))"!][!//  
-    [!VAR "ChannelBase"  = "$Channeloffset*$bkId"!][!//  
-    [!VAR "HWunitBase"   = "$HWunitOffset*$bkId1"!][!//    
+    [!VAR "bkId" = "num:i(substring-after($ChannelNumber,'CDD_PWM_CHANNEL_'))"!][!//
+    [!VAR "bkId1" = "num:i(substring-after($HWNumber,'CDD_PWM_CONTROLSS_G'))"!][!//
+    [!VAR "ChannelBase"  = "$Channeloffset*$bkId"!][!//
+    [!VAR "HWunitBase"   = "$HWunitOffset*$bkId1"!][!//
     [!CODE!][!"num:inttohex($BaseAddr+$ChannelBase+$HWunitBase)"!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpression", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]TRUE[!ELSE!]FALSE[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]TRUE[!ELSE!]FALSE[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_ZERO", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_ZERO[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_ZERO[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_PERIOD", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_PERIOD[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_PERIOD[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 
 [!MACRO "GetBooleanExpressionMIX_TBCTR_U_CMPA", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPA[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPA[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_D_CMPA", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPA[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPA[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_U_CMPB", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPB[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPB[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_D_CMPB", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPB[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPB[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_U_CMPC", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPC[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPC[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_D_CMPC", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPC[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPC[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_U_CMPD", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPD[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_U_CMPD[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_TBCTR_D_CMPD", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPD[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_TBCTR_D_CMPD[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 [!MACRO "GetBooleanExpressionMIX_DCAEVT1", "Parameter"!][!//
-[!NOCODE!][!//    
-    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_DCAEVT1[!ELSE!]0U[!ENDIF!][!ENDCODE!][!// 
+[!NOCODE!][!//
+    [!CODE!][!IF "$Parameter = 'true'"!]CDD_PWM_INT_MIX_DCAEVT1[!ELSE!]0U[!ENDIF!][!ENDCODE!][!//
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 /**********************************************************************************************************************
@@ -153,7 +153,7 @@ extern "C" {
 #define CDD_PWM_START_SEC_CONFIG_DATA
 #include "Cdd_Pwm_MemMap.h"
 
-[!NOCODE!][!// 
+[!NOCODE!][!//
 [!VAR "notifyFxnList" = "' '"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*/CddPwmChannel/*"!][!//
 [!IF "not(node:empty(CddPwmNotification)) and not(text:match(CddPwmNotification,'NULL_PTR'))"!][!//
@@ -167,7 +167,7 @@ extern "C" {
 [!ENDLOOP!][!//
 [!ENDNOCODE!][!//
 
-[!NOCODE!][!// 
+[!NOCODE!][!//
 [!VAR "notifyFxnList" = "' '"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*/CddPwmChannel/*"!][!//
 [!IF "not(node:empty(CddPwmTzNotification)) and not(text:match(CddPwmTzNotification,'NULL_PTR'))"!][!//
@@ -186,15 +186,15 @@ extern "C" {
 [!VAR "Index1" = "0"!][!//
 [!VAR "Index" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_timerBaseConfigType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_timerBaseConfigType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_TimerBaseRef[CDD_PWM_TIMER_BASE_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmTimerBase/*"!][!/*Channel Loop */!][!//
     [[!"num:i($Index1)"!]] =
     {
-       .channelPwmTimerBasePeriodGlobalLoad = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmTimerBaseGlobalLoad"!], 
+       .channelPwmTimerBasePeriodGlobalLoad = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmTimerBaseGlobalLoad"!],
        .channelPwmEmulationMode = [!"CddPwmEmulationMode"!],
-       .channelPwmClockDivider = [!"CddPwmClockDivider"!], 
+       .channelPwmClockDivider = [!"CddPwmClockDivider"!],
        .channelPwmHSClockDivider = [!"CddPwmHSClockDivider"!],
        .channelPwmTbPeriod = [!CALL "GetPeriodValue", "PwmFunctionalClock" = "$Sys_ClkFreq", "PwmHSClkPrescaler" = "CddPwmHSClockDivider", "PwmClkPrescaler" = "CddPwmClockDivider", "PwmPeriodDefault" = "CddPwmTbPeriod", "PwmCounter" = "CddPwmCounterMode"!]U - 1U,
        .channelPwmTbPeriodInitValue = [!"CddPwmTbPeriodInitValue"!],
@@ -210,7 +210,7 @@ Cdd_Pwm_TimerBaseRef[CDD_PWM_TIMER_BASE_NUM_CHANNELS] =
 [!VAR "Index1" = "0"!][!//
 [!VAR "Index" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_CompareType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_CompareType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmCounterCompare/*"!][!/*CddPwmCounterCompare Loop */!][!//
@@ -223,7 +223,7 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpA = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmCounterCompareA/CddPwmCounterCompareShadowModeCmpA"!],
            .channelCddPwmCounterCompareShadowEventCmpA = [!"CddPwmCounterCompareA/CddPwmCounterCompareShadowEventCmpA"!],
            .channelCddPwmTbprdlinkCmpA = [!"CddPwmCounterCompareA/CddPwmTbprdlinkCmpA"!],
-           
+
            /* Compare B */
            .channelCddPwmCounterBlockB = [!"CddPwmCounterCompareB/CddPwmCounterBlockCmpB"!],
            .channelCddPwmCompareValueCmpB = [!"CddPwmCounterCompareB/CddPwmCompareValueCmpB"!]U,
@@ -231,7 +231,7 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpB = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmCounterCompareB/CddPwmCounterCompareShadowModeCmpB"!],
            .channelCddPwmCounterCompareShadowEventCmpB = [!"CddPwmCounterCompareB/CddPwmCounterCompareShadowEventCmpB"!],
            .channelCddPwmTbprdlinkCmpB = [!"CddPwmCounterCompareB/CddPwmTbprdlinkCmpB"!],
-                      
+
            /* Compare C */
            .channelCddPwmCounterBlockC = [!"CddPwmCounterCompareC/CddPwmCounterBlockCmpC"!],
            .channelCddPwmCompareValueCmpC = [!"CddPwmCounterCompareC/CddPwmCompareValueCmpC"!]U,
@@ -239,14 +239,14 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpC = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmCounterCompareC/CddPwmCounterCompareShadowModeCmpC"!],
            .channelCddPwmCounterCompareShadowEventCmpC = [!"CddPwmCounterCompareC/CddPwmCounterCompareShadowEventCmpC"!],
            .channelCddPwmTbprdlinkCmpC = [!"CddPwmCounterCompareC/CddPwmTbprdlinkCmpC"!],
-           
+
            /* Compare D */
            .channelCddPwmCounterBlockD = [!"CddPwmCounterCompareD/CddPwmCounterBlockCmpD"!],
            .channelCddPwmCompareValueCmpD = [!"CddPwmCounterCompareD/CddPwmCompareValueCmpD"!]U,
            .channelCddPwmCounterCompareGlobalLoadCmpD = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmCounterCompareD/CddPwmCounterCompareGlobalLoadCmpD"!],
            .channelCddPwmCounterCompareShadowModeCmpD = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmCounterCompareD/CddPwmCounterCompareShadowModeCmpD"!],
            .channelCddPwmCounterCompareShadowEventCmpD = [!"CddPwmCounterCompareD/CddPwmCounterCompareShadowEventCmpD"!],
-           .channelCddPwmTbprdlinkCmpD = [!"CddPwmCounterCompareD/CddPwmTbprdlinkCmpD"!],       
+           .channelCddPwmTbprdlinkCmpD = [!"CddPwmCounterCompareD/CddPwmTbprdlinkCmpD"!],
         }[!VAR "Index1" = "$Index1+1"!][!IF "not(node:islast())"!],[!ENDIF!][!CR!][!ENDLOOP!]
 };
 [!VAR "Index" = "$Index+1"!][!ENDLOOP!][!/*End of Cdd_Pwm_CounterCompareRef Loop*/!][!//
@@ -254,7 +254,7 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
 [!VAR "Index1" = "0"!][!//
 [!VAR "Index" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_TimerBaseSync_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_TimerBaseSync_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_TimerBaseSyncRef[CDD_PWM_TIMER_BASE_SYNC_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmTimerBaseSync/*"!][!/*CddPwmTimerBaseSync Loop */!][!//
@@ -279,12 +279,12 @@ Cdd_Pwm_TimerBaseSyncRef[CDD_PWM_TIMER_BASE_SYNC_NUM_CHANNELS] =
 [!VAR "Index1" = "0"!][!//
 [!VAR "Index" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_ActionConfigType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_ActionConfigType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmActionQualifier/*"!][!/*CddPwmActionQualifier Loop */!][!//
         [[!"num:i($Index1)"!]] =
-        {           
+        {
             /* Actions for EPWMA  */
            .channelPwmOutptEPWMA = [!"CddPwmActionQualifierA/CddPwmOutptEPWMA"!],
            .channelPwmActionGlobalLoadEPWMA = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmActionQualifierA/CddPwmActionGlobalLoadEPWMA"!],
@@ -304,7 +304,7 @@ Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
            .channelPwmAqOutputOnT1COUNTDOWNEPWMA = [!"CddPwmActionQualifierA/CddPwmAqOutputOnT1COUNTDOWNEPWMA"!],
            .channelPwmAqOutputOnT2COUNTUPEPWMA = [!"CddPwmActionQualifierA/CddPwmAqOutputOnT2COUNTUPEPWMA"!],
            .channelPwmAqOutputOnT2COUNTDOWNEPWMA = [!"CddPwmActionQualifierA/CddPwmAqOutputOnT2COUNTDOWNEPWMA"!],
-           
+
            /* Actions for EPWMB  */
            .channelPwmOutptEPWMB = [!"CddPwmActionQualifierB/CddPwmOutptEPWMB"!],
            .channelPwmActionGlobalLoadEPWMB = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmActionQualifierB/CddPwmActionGlobalLoadEPWMB"!],
@@ -331,7 +331,7 @@ Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
 
 [!VAR "Index1" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_EventConfigType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_EventConfigType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_EventTriggerRef[CDD_PWM_TIMER_EVENT_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmEventTrigger/*"!][!/*CddPwmEventTrigger Loop */!][!//
@@ -341,7 +341,7 @@ Cdd_Pwm_EventTriggerRef[CDD_PWM_TIMER_EVENT_NUM_CHANNELS] =
            .channelPwmEnableEventCountInitialValue = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmEnableEventCountInitialValue"!],
            .channelPwmEventCountInitialValue  = [!"CddPwmEventCountInitialValue"!],
            .channelPwmInterruptCount          = [!"CddPwmInterruptCount"!],
-           .channelPwmInterruptEventSources   = [!"CddPwmInterruptEventSources"!], 
+           .channelPwmInterruptEventSources   = [!"CddPwmInterruptEventSources"!],
            .channelPwmInterruptMixedSources   = [!CALL "GetBooleanExpressionMIX_TBCTR_ZERO", "Parameter" = "CddPwmInterruptMixedSources/CddPwmIntMixTbctrZero"!] | [!//
                                                 [!CALL "GetBooleanExpressionMIX_TBCTR_PERIOD", "Parameter" = "CddPwmInterruptMixedSources/CddPwmIntMixTbctrPeriod"!] |[!//
                                                 [!CALL "GetBooleanExpressionMIX_TBCTR_U_CMPA", "Parameter" = "CddPwmInterruptMixedSources/CddPwmIntMixTbctrUCmpA"!] |[!//
@@ -359,7 +359,7 @@ Cdd_Pwm_EventTriggerRef[CDD_PWM_TIMER_EVENT_NUM_CHANNELS] =
 
 [!VAR "Index1" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_AdcEventTriggerType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_AdcEventTriggerType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmAdcEventTrigger/*"!][!/*CddPwmAdcEventTrigger Loop */!][!//
@@ -383,7 +383,7 @@ Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
                                                 [!CALL "GetBooleanExpressionMIX_TBCTR_U_CMPD", "Parameter" = "CddPwmAdcEventTriggerSocA/CddPwmSocAMixedSources/CddPwmIntSocAMixTbctrUCmpD"!] | [!//
                                                 [!CALL "GetBooleanExpressionMIX_TBCTR_D_CMPD", "Parameter" = "CddPwmAdcEventTriggerSocA/CddPwmSocAMixedSources/CddPwmIntSocAMixTbctrDCmpD"!] | [!//
                                                 [!CALL "GetBooleanExpressionMIX_DCAEVT1", "Parameter" = "CddPwmAdcEventTriggerSocA/CddPwmSocAMixedSources/CddPwmSocAIntMixDCAEvt1"!],
-           
+
            /* SOC B Event for ADC. */
            .channelPwmSocBEvent         = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmAdcEventTriggerSocB/CddPwmSocBEpwmEvent"!],
            .channelPwmSocBForceEventValue         = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmAdcEventTriggerSocB/CddPwmSocBForceEventValue"!],
@@ -401,7 +401,7 @@ Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
                                                 [!CALL "GetBooleanExpressionMIX_TBCTR_D_CMPC", "Parameter" = "CddPwmAdcEventTriggerSocB/CddPwmSocBMixedSources/CddPwmIntSocBMixTbctrDCmpC"!] | [!//
                                                 [!CALL "GetBooleanExpressionMIX_TBCTR_U_CMPD", "Parameter" = "CddPwmAdcEventTriggerSocB/CddPwmSocBMixedSources/CddPwmIntSocBMixTbctrUCmpD"!] | [!//
                                                 [!CALL "GetBooleanExpressionMIX_TBCTR_D_CMPD", "Parameter" = "CddPwmAdcEventTriggerSocB/CddPwmSocBMixedSources/CddPwmIntSocBMixTbctrDCmpD"!] | [!//
-                                                [!CALL "GetBooleanExpressionMIX_DCAEVT1", "Parameter" = "CddPwmAdcEventTriggerSocB/CddPwmSocBMixedSources/CddPwmSocBIntMixDCAEvt1"!],           
+                                                [!CALL "GetBooleanExpressionMIX_DCAEVT1", "Parameter" = "CddPwmAdcEventTriggerSocB/CddPwmSocBMixedSources/CddPwmSocBIntMixDCAEvt1"!],
         }[!VAR "Index1" = "$Index1+1"!][!IF "not(node:islast())"!],[!ENDIF!][!CR!][!ENDLOOP!]
 };
 [!VAR "Index" = "$Index+1"!][!ENDLOOP!][!/*End of CddPwmAdcEventTrigger Loop*/!][!//
@@ -410,7 +410,7 @@ Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
 
 [!VAR "Index1" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_TripZoneType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_TripZoneType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_TripZoneRef[CDD_PWM_TIMER_TRIP_ZONE_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmTripZone/*"!][!/*Cdd_Pwm_TripZoneRef Loop */!][!//
@@ -465,7 +465,7 @@ Cdd_Pwm_TripZoneRef[CDD_PWM_TIMER_TRIP_ZONE_NUM_CHANNELS] =
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmDigitalCompareEnable"!][!//
 [!VAR "Index1" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_DigitalCompareType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_DigitalCompareType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmDigitalCompare/*"!][!/*CddPwmDigitalCompareRef Loop */!][!//
@@ -504,7 +504,7 @@ Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
            [!IF "CddPwmUseBlankingWindow/CddPwmUseBlankingWindow = 'true'"!][!//
            .channelPwmCddPwmBlankingWindowStartEvent     = [!"CddPwmUseBlankingWindow/BlankingWindowStartEvent"!],
            .channelPwmCddPwmBlankingWindowOffset         = [!"CddPwmUseBlankingWindow/BlankingWindowOffset"!],
-           .channelPwmCddPwmBlankingWindowLength         = [!"CddPwmUseBlankingWindow/BlankingWindowLength"!], 
+           .channelPwmCddPwmBlankingWindowLength         = [!"CddPwmUseBlankingWindow/BlankingWindowLength"!],
            [!IF "CddPwmUseBlankingWindow/BlankingWindowStartEvent = 'EPWM_DC_WINDOW_START_TBCTR_BLANK_PULSE_MIX'"!][!//
            .channelPwmCddPwmBlankingWindowMixedEvent     = [!"CddPwmUseBlankingWindow/BlankingWindowStartMixedEvent"!],
            [!ENDIF!][!//
@@ -529,15 +529,15 @@ Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
            .channelPwmValleyDelayDivider                = [!"CddPwmUseEdgeFilter/CddPwmValleyDelayDivider"!],
            [!ENDIF!][!//
            [!ENDIF!][!//
-           [!ENDIF!][!//   
+           [!ENDIF!][!//
         }[!VAR "Index1" = "$Index1+1"!][!IF "not(node:islast())"!],[!ENDIF!][!CR!][!ENDLOOP!]
 };
-[!VAR "Index" = "$Index+1"!][!ENDLOOP!][!/*End of Cdd_Pwm_DigitalCompare Loop*/!][!//       
+[!VAR "Index" = "$Index+1"!][!ENDLOOP!][!/*End of Cdd_Pwm_DigitalCompare Loop*/!][!//
 [!ENDIF!][!//
 
 [!VAR "Index1" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_DeadBandType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_DeadBandType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_DeadBandRef[CDD_PWM_TIMER_DEAD_BAND_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmDeadBand/*"!][!/*Cdd_Pwm_DeadBandRef Loop */!][!//
@@ -569,7 +569,7 @@ Cdd_Pwm_DeadBandRef[CDD_PWM_TIMER_DEAD_BAND_NUM_CHANNELS] =
 
 [!VAR "Index1" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_ChopperType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_ChopperType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_ChopperRef[CDD_PWM_TIMER_CHOPPER_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmChopper/*"!][!/*Cdd_Pwm_ChopperRef Loop */!][!//
@@ -586,7 +586,7 @@ Cdd_Pwm_ChopperRef[CDD_PWM_TIMER_CHOPPER_NUM_CHANNELS] =
 
 [!VAR "Index1" = "0"!][!//
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
-static CONST(struct Cdd_Pwm_HrPwmType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_HrPwmType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_HrPwmRef[CDD_PWM_TIMER_HRPWM_NUM_CHANNELS] =
 {
     [!LOOP "CddPwmHighResolutionPwm/*"!][!/*Cdd_Pwm_HRPWMRef Loop */!][!//
@@ -596,34 +596,34 @@ Cdd_Pwm_HrPwmRef[CDD_PWM_TIMER_HRPWM_NUM_CHANNELS] =
             .channelAutoHRMStepScalingEnable = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmAutoHRMStepScaling"!],
             .channelHrCtrlModeEPWMA          = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmCtrlModeHRPWMA"!],
             .channelHrCtrlModeEPWMB          = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmCtrlModeHRPWMB"!],
-            
+
             /* HPWM  Duty , Period  and Phase control */
             .channelHrSelEdgeModeEPWMA       = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmEdgeModeHRPWMA"!],
             .channelHrCmpHRPWMA              = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmCmpHRPWMA"!],
             .channelHrShadowActiveLoadPwmA   = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmShadowActiveLoadEventHRPWMA"!],
-            
+
             .channelHrSelEdgeModeEPWMB       = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmEdgeModeHRPWMB"!],
             .channelHrCmpHRPWMB              = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmCmpHRPWMB"!],
             .channelHrShadowActiveLoadPwmB   = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmShadowActiveLoadEventHRPWMB"!],
-            
+
             .channelHrPeriodCtrlEnable       = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmDutyPeriodPhaseCtrl/CddPwmEnableHRPeriodCtrl"!],
             .channelHrPeriod                 = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmHRPeriod"!],
-            
+
             .channelHrPhaseCtrlEnable        = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmDutyPeriodPhaseCtrl/CddPwmEnableHRPhaseCtrl"!],
             .channelHrPhase                  = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmHRPhase"!],
             .channelPwmSyncSelect            = [!"CddPwmDutyPeriodPhaseCtrl/CddPwmPWMSyncSelect"!],
-            
+
             /* HPWM  Deadband Control */
             .channelHrDeadbandEdgeMode       = [!"CddPwmDeadbandCtrl/CddPwmDeadbandEdgeMode"!],
             .channelHrRisEdgeDelay           = [!"CddPwmDeadbandCtrl/CddPwmRisingEdgeDelay"!],
             .channelHrDbRisShadowActiveLoad  = [!"CddPwmDeadbandCtrl/CddPwmRisEdgeShadowActiveLoad"!],
-            
+
             .channelHrFalEdgeDelay           = [!"CddPwmDeadbandCtrl/CddPwmFallingEdgeDelay"!],
             .channelHrDbFalShadowActiveLoad  = [!"CddPwmDeadbandCtrl/CddPwmFalEdgeShadowActiveLoad"!],
-            
+
             .channelHrSwapOutputCtrl         = [!CALL "GetBooleanExpression", "Parameter" = "CddPwmDeadbandCtrl/CddPwmSwapOutputCtrl"!],
             .channelHrOutputCtrl              = [!"CddPwmDeadbandCtrl/CddPwmHROutputCtrlPWMB"!],
-            
+
         }[!VAR "Index1" = "$Index1+1"!][!IF "not(node:islast())"!],[!ENDIF!][!CR!][!ENDLOOP!]
 };
 [!VAR "Index" = "$Index+1"!][!ENDLOOP!][!/*End of Cdd_Pwm_HRPWMRef Loop*/!][!//
@@ -636,7 +636,7 @@ Cdd_Pwm_HrPwmRef[CDD_PWM_TIMER_HRPWM_NUM_CHANNELS] =
 /* Cdd_Pwm Channel Configuration parameters */
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!][!//
 CONST(Cdd_Pwm_ConfigType, CDD_PWM_CONFIG_DATA)
-     [!"@name"!] =
+     Cdd_Pwm_Config =
 {
     .chCfg =
     {
@@ -644,66 +644,66 @@ CONST(Cdd_Pwm_ConfigType, CDD_PWM_CONFIG_DATA)
         [[!"num:i($Index1)"!]] =
         {
 #if (CDD_PWM_NOTIFICATION_SUPPORTED == STD_ON)
-            .notificationHandler = (Cdd_Pwm_NotifyFuncType)[!IF "CddPwmNotification != ''"!] [!"CddPwmNotification"!][!ELSE!]NULL_PTR[!ENDIF!], /*Notification Function*/           
+            .notificationHandler = (Cdd_Pwm_NotifyFuncType)[!IF "CddPwmNotification != ''"!] [!"CddPwmNotification"!][!ELSE!]NULL_PTR[!ENDIF!], /*Notification Function*/
             [!IF "node:empty(CddPwmNotification) = 'true'"!][!ERROR "PwmNotification is not configured"!][!ENDIF!][!//
 #endif
-            .notificationTzHandler = (Cdd_Pwm_TzNotifyFuncType)[!IF "CddPwmTzNotification   != ''"!] [!"CddPwmTzNotification  "!][!ELSE!]NULL_PTR[!ENDIF!], /*Notification Function*/           
+            .notificationTzHandler = (Cdd_Pwm_TzNotifyFuncType)[!IF "CddPwmTzNotification   != ''"!] [!"CddPwmTzNotification  "!][!ELSE!]NULL_PTR[!ENDIF!], /*Notification Function*/
             [!IF "node:empty(CddPwmTzNotification  ) = 'true'"!][!ERROR "PwmTzNotification is not configured"!][!ENDIF!][!//
-            .baseaddr = [!CALL "GetAddress", "ChannelNumber" = "CddPwmHwChannel", "HWNumber" = "CddPwmGroupUnit"!]UL,            
-            .channelID = [!"CddPwmChannelId"!], /* CddPwmChannelId */       
-            .channelHwID = CDD_PWM_[!"(substring-after(CddPwmGroupUnit,'CDD_PWM_CONTROLSS_'))"!]_[!"(substring-after(CddPwmHwChannel,'CDD_PWM_'))"!], /* CddPwmHwChannel */ 
-            .outputCh = [!"CddPwmOutPutChannelSelection"!], /* CddPwmOutPutChannelSelection */ 
-            .polarity = [!"CddPwmPolarity"!], /* CddPwmPolarity */ 
-            [!IF "node:empty(CddPwmChannelTimerBaseRef) = 'true'"!][!ERROR "Pwm Channel Timer Base container is not configured or linked."!][!ENDIF!][!//           
-            .channelTimerBase = &Cdd_Pwm_TimerBaseRef[[!"node:ref(./CddPwmChannelTimerBaseRef)/CddPwmTimerBaseId"!]], /* CddPwmChannelTimerBaseRef */      
+            .baseaddr = [!CALL "GetAddress", "ChannelNumber" = "CddPwmHwChannel", "HWNumber" = "CddPwmGroupUnit"!]UL,
+            .channelID = [!"CddPwmChannelId"!], /* CddPwmChannelId */
+            .channelHwID = CDD_PWM_[!"(substring-after(CddPwmGroupUnit,'CDD_PWM_CONTROLSS_'))"!]_[!"(substring-after(CddPwmHwChannel,'CDD_PWM_'))"!], /* CddPwmHwChannel */
+            .outputCh = [!"CddPwmOutPutChannelSelection"!], /* CddPwmOutPutChannelSelection */
+            .polarity = [!"CddPwmPolarity"!], /* CddPwmPolarity */
+            [!IF "node:empty(CddPwmChannelTimerBaseRef) = 'true'"!][!ERROR "Pwm Channel Timer Base container is not configured or linked."!][!ENDIF!][!//
+            .channelTimerBase = &Cdd_Pwm_TimerBaseRef[[!"node:ref(./CddPwmChannelTimerBaseRef)/CddPwmTimerBaseId"!]], /* CddPwmChannelTimerBaseRef */
             [!IF "node:empty(CddPwmCounterCompareRef) = 'true'"!][!ERROR "Pwm Channel Counter Compare container is not configured or linked."!][!ENDIF!][!//
-            .channelCounterCompare = &Cdd_Pwm_CounterCompareRef[[!"node:ref(./CddPwmCounterCompareRef)/CddPwmCounterCompareId"!]], /* CddPwmCounterCompareRef */      
+            .channelCounterCompare = &Cdd_Pwm_CounterCompareRef[[!"node:ref(./CddPwmCounterCompareRef)/CddPwmCounterCompareId"!]], /* CddPwmCounterCompareRef */
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmChannelTimerBaseSyncEnable"!][!//
-            .channelTimerBaseSync = &Cdd_Pwm_TimerBaseSyncRef[[!"node:ref(./CddPwmChannelTimerBaseSyncRef)/CddPwmTimerBaseSyncId"!]], /* CddPwmChannelTimerBaseSyncRef */  
-[!ELSE!][!//    
-            .channelTimerBaseSync = NULL_PTR, /* CddPwmActionQualifierRef */        
+            .channelTimerBaseSync = &Cdd_Pwm_TimerBaseSyncRef[[!"node:ref(./CddPwmChannelTimerBaseSyncRef)/CddPwmTimerBaseSyncId"!]], /* CddPwmChannelTimerBaseSyncRef */
+[!ELSE!][!//
+            .channelTimerBaseSync = NULL_PTR, /* CddPwmActionQualifierRef */
 [!ENDIF!][!//
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmActionQualifierEnable"!][!//
             .channelActionQualifier = &Cdd_Pwm_ActionQualifierRef[[!"node:ref(./CddPwmActionQualifierRef)/CddPwmActionQualifierId"!]], /* CddPwmActionQualifierRef */
-[!ELSE!][!//    
-            .channelActionQualifier = NULL_PTR, /* CddPwmActionQualifierRef */      
+[!ELSE!][!//
+            .channelActionQualifier = NULL_PTR, /* CddPwmActionQualifierRef */
 [!ENDIF!][!//
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmEventTriggerEnable"!][!//
             .channelEventTrigger = &Cdd_Pwm_EventTriggerRef[[!"node:ref(./CddPwmEventTriggerRef)/CddPwmEventTriggerId"!]], /* CddPwmEventTriggerRef */
-[!ELSE!][!//    
-            .channelEventTrigger = NULL_PTR, /* CddPwmEventTriggerRef */        
+[!ELSE!][!//
+            .channelEventTrigger = NULL_PTR, /* CddPwmEventTriggerRef */
 [!ENDIF!][!//
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmConfigurationOfOptionalApis/CddPwmSetAdcTriggerApi"!][!//
             .channelAdcEventTrigger = &Cdd_Pwm_AdcEventTriggerRefSoc[[!"node:ref(./CddPwmAdcEventTriggerRef)/CddPwmAdcEventTriggerId"!]], /* Cdd_Pwm_AdcEventTriggerRefSoc */
-[!ELSE!][!//    
-            .channelAdcEventTrigger = NULL_PTR, /* CddPwmEventTriggerRef */        
+[!ELSE!][!//
+            .channelAdcEventTrigger = NULL_PTR, /* CddPwmEventTriggerRef */
 [!ENDIF!][!//Cdd_Pwm_AdcEventTriggerRefSoc
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmTripZoneEnable"!][!//
-            .channelTripZone = &Cdd_Pwm_TripZoneRef[[!"node:ref(./CddPwmTripZoneRef)/CddPwmTripZoneId"!]], /* CddPwmTripZone */  
-[!ELSE!][!//    
-            .channelTripZone = NULL_PTR, /* CddPwmTripZoneRef */        
+            .channelTripZone = &Cdd_Pwm_TripZoneRef[[!"node:ref(./CddPwmTripZoneRef)/CddPwmTripZoneId"!]], /* CddPwmTripZone */
+[!ELSE!][!//
+            .channelTripZone = NULL_PTR, /* CddPwmTripZoneRef */
 [!ENDIF!][!//
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmDigitalCompareEnable"!][!//
-            .channelDigitalCompare = &Cdd_Pwm_DigitalCompareRef[[!"node:ref(./CddPwmDigitalCompareRef)/CddPwmDigitalCompareId"!]], /* CddDigitalCompare */  
-[!ELSE!][!//    
-            .channelDigitalCompare = NULL_PTR, /* CddPwmDigitalCompareRef */        
+            .channelDigitalCompare = &Cdd_Pwm_DigitalCompareRef[[!"node:ref(./CddPwmDigitalCompareRef)/CddPwmDigitalCompareId"!]], /* CddDigitalCompare */
+[!ELSE!][!//
+            .channelDigitalCompare = NULL_PTR, /* CddPwmDigitalCompareRef */
 [!ENDIF!][!//
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmDeadBandEnable"!][!//
-            .channelDeadBand = &Cdd_Pwm_DeadBandRef[[!"node:ref(./CddPwmDeadBandRef)/CddPwmDeadBandId"!]], /* CddPwmDeadBand */  
-[!ELSE!][!//    
-            .channelDeadBand = NULL_PTR, /* CddPwmDeadBandRef */        
+            .channelDeadBand = &Cdd_Pwm_DeadBandRef[[!"node:ref(./CddPwmDeadBandRef)/CddPwmDeadBandId"!]], /* CddPwmDeadBand */
+[!ELSE!][!//
+            .channelDeadBand = NULL_PTR, /* CddPwmDeadBandRef */
 [!ENDIF!][!//
 [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmChopperEnable"!][!//
-            .channelChopper = &Cdd_Pwm_ChopperRef[[!"node:ref(./CddPwmChopperRef)/CddPwmChopperId"!]], /* CddPwmChopper */   
-[!ELSE!][!//    
-            .channelChopper = NULL_PTR, /* CddPwmChopperRef */     
-[!ENDIF!][!//  
-[!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmChannelHighResPwmEnable"!][!//
-            .channelHrPwm = &Cdd_Pwm_HrPwmRef[[!"node:ref(./CddPwmHighResolutionPwmRef)/CddPwmHRPwmId"!]], /* CddPwmHrPwm - */   
-[!ELSE!][!//    
-            .channelHrPwm = NULL_PTR, /* CddPwmHrPwm */        
+            .channelChopper = &Cdd_Pwm_ChopperRef[[!"node:ref(./CddPwmChopperRef)/CddPwmChopperId"!]], /* CddPwmChopper */
+[!ELSE!][!//
+            .channelChopper = NULL_PTR, /* CddPwmChopperRef */
 [!ENDIF!][!//
- 
+[!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmChannelHighResPwmEnable"!][!//
+            .channelHrPwm = &Cdd_Pwm_HrPwmRef[[!"node:ref(./CddPwmHighResolutionPwmRef)/CddPwmHRPwmId"!]], /* CddPwmHrPwm - */
+[!ELSE!][!//
+            .channelHrPwm = NULL_PTR, /* CddPwmHrPwm */
+[!ENDIF!][!//
+
         }[!VAR "Index1" = "$Index1+1"!][!IF "not(node:islast())"!],[!ENDIF!][!CR!][!ENDLOOP!][!//
     }[!IF "not(node:islast())"!],[!ENDIF!][!CR!]
 };
@@ -721,6 +721,6 @@ CONST(Cdd_Pwm_ConfigType, CDD_PWM_CONFIG_DATA)
  *  END OF FILE: Cdd_Pwm_Cfg.c                                                                                          *
  *********************************************************************************************************************/
 [!ELSE!]
-/* The last generated configuration variant is not 
+/* The last generated configuration variant is not
        PRECOMPILE variant. Refer Cdd_Pwm_PBcfg.c */
 [!ENDIF!]

@@ -100,7 +100,7 @@ extern Adc_ValueGroupType Adc_AppBuffer[ADC_MAX_GROUP][ADC_APP_BUF_SIZE_WORD];
 extern Adc_ValueGroupType Adc_AppReadBuffer[ADC_MAX_GROUP][ADC_APP_READ_BUF_SIZE_WORD];
 
 #if (STD_OFF == MCU_NO_PLL)
-extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration;
+extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config;
 #endif
 
 /* ========================================================================== */
@@ -131,13 +131,13 @@ static void AdcApp_PlatformInit(void)
 #if (STD_ON == MCU_VARIANT_PRE_COMPILE)
     Mcu_Init((const Mcu_ConfigType *)NULL_PTR);
 #else
-    Mcu_Init(&McuModuleConfiguration);
+    Mcu_Init(&Mcu_Config);
 #endif /*(STD_ON == MCU_VARIANT_PRE_COMPILE)*/
 
 #if (STD_ON == PORT_PRE_COMPILE_VARIANT)
     Port_Init((const Port_ConfigType *)NULL_PTR);
 #else
-    Port_Init(&PortConfigSet_0);
+    Port_Init(&Port_Config);
 #endif /*#if (STD_ON == PORT_PRE_COMPILE_VARIANT)*/
 
     Enable_Uart();

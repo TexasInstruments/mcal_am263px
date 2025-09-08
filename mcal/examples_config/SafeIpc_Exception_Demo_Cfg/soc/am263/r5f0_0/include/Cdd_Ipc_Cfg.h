@@ -218,7 +218,7 @@ typedef struct
 
 
 /** \brief Cdd Configuration struct declaration */
-extern CONST(Cdd_IpcConfigType, CDD_PBCFG)CddIpcDriver_0; 
+extern CONST(Cdd_IpcConfigType, CDD_PBCFG)Cdd_Ipc_Config; 
 
 extern P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr;
 /* ========================================================================== */

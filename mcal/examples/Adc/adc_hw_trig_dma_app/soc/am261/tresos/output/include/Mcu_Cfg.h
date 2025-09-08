@@ -689,7 +689,7 @@ void Mcu_GpioXbarConfig(void);
  *********************************************************************************************************************/
 
 /** \brief MCU Configuration struct declaration */
-extern const struct Mcu_ConfigType_s McuModuleConfiguration;
+extern const struct Mcu_ConfigType_s Mcu_Config;
 
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

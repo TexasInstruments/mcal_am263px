@@ -74,10 +74,8 @@ sint32 Uart_Cdd_dmaInit(CddUart_Handle hUart)
     boolean isEdmaInterruptEnabled;
 
     isEdmaInterruptEnabled =
-        (boolean)(((uint32)TRUE ==
-                   CddDmaDriverHandler.CddDmaDriverHandler[hUart->dmaTxHandleId]->edmaConfig.intrEnable) &&
-                  ((uint32)TRUE ==
-                   CddDmaDriverHandler.CddDmaDriverHandler[hUart->dmaRxHandleId]->edmaConfig.intrEnable));
+        (boolean)(((uint32)TRUE == Cdd_Dma_Config.CddDmaDriverHandler[hUart->dmaTxHandleId]->edmaConfig.intrEnable) &&
+                  ((uint32)TRUE == Cdd_Dma_Config.CddDmaDriverHandler[hUart->dmaRxHandleId]->edmaConfig.intrEnable));
 
     if ((boolean)TRUE == (boolean)isEdmaInterruptEnabled)
     {
@@ -103,10 +101,8 @@ sint32 Uart_Cdd_dmaDeInit(CddUart_Handle hUart)
 {
     sint32  status = MCAL_SystemP_FAILURE;
     boolean isEdmaInterruptEnabled =
-        (boolean)(((uint32)TRUE ==
-                   CddDmaDriverHandler.CddDmaDriverHandler[hUart->dmaTxHandleId]->edmaConfig.intrEnable) &&
-                  ((uint32)TRUE ==
-                   CddDmaDriverHandler.CddDmaDriverHandler[hUart->dmaRxHandleId]->edmaConfig.intrEnable));
+        (boolean)(((uint32)TRUE == Cdd_Dma_Config.CddDmaDriverHandler[hUart->dmaTxHandleId]->edmaConfig.intrEnable) &&
+                  ((uint32)TRUE == Cdd_Dma_Config.CddDmaDriverHandler[hUart->dmaRxHandleId]->edmaConfig.intrEnable));
 
     if ((boolean)TRUE == isEdmaInterruptEnabled)
     {
@@ -195,9 +191,9 @@ sint32 Uart_Cdd_dmaWrite(CddUart_Handle hUart, const CddUart_Transaction *transa
      * by further UART events.
      */
 
-    if (CDD_EDMA_lld_readEventStatusRegion(
-            CddDmaDriverHandler.CddDmaDriverHandler[hUart->dmaTxHandleId]->baseAddr,
-            CddDmaDriverHandler.CddDmaDriverHandler[hUart->dmaTxHandleId]->edmaConfig.tcc) == TRUE)
+    if (CDD_EDMA_lld_readEventStatusRegion(Cdd_Dma_Config.CddDmaDriverHandler[hUart->dmaTxHandleId]->baseAddr,
+                                           Cdd_Dma_Config.CddDmaDriverHandler[hUart->dmaTxHandleId]->edmaConfig.tcc) ==
+        TRUE)
     {
         isEdmaEventPending = TRUE;
     }

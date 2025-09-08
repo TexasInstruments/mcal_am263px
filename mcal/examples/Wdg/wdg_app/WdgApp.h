@@ -368,7 +368,7 @@ typedef struct
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
-extern CONST(Wdg_ConfigType, WDG_PBCFG) WdgSettingsConfig;
+extern CONST(Wdg_ConfigType, WDG_PBCFG) Wdg_Config;
 void TimerDeinit();
 void Check_McuReset();
 void Wdg_App_wdgTest(const Wdg_App_TestParams *testPrms);

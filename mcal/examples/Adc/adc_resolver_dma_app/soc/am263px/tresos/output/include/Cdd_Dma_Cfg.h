@@ -131,7 +131,7 @@ extern "C" {
 
 /** \brief CDD DMA RAM Size and address. */
 #define CDD_DMA_CSL_MSS_TCMA_RAM_BASE               (0x00000000U)
-#define CDD_DMA_CSL_MSS_TCMA_RAM_SIZE               (0x00008000U)  
+#define CDD_DMA_CSL_MSS_TCMA_RAM_SIZE               (0x00008000U)
 #define CDD_DMA_CSL_MSS_TCMB_RAM_BASE               (0x00080000U)
 #define CDD_DMA_CSL_MSS_TCMB_RAM_SIZE               (0x00008000U)
 
@@ -172,7 +172,7 @@ typedef enum
 #define CddDmaConf_CddDmaDriverHandler_1_Adc  1
 
 /** \brief Cdd Configuration struct declaration */
-extern CONST(Cdd_Dma_ConfigType, CDD_DMA_CFG) CddDmaDriverHandler;
+extern CONST(Cdd_Dma_ConfigType, CDD_DMA_CFG) Cdd_Dma_Config;
 extern volatile uint8 Cdd_Dma_handleAlreadyInUse[CDD_DMA_MAX_HANDLER];
 
 /**

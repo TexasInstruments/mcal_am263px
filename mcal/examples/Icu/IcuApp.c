@@ -150,7 +150,7 @@ static void IcuApp_mainTest(void)
 #endif
     Icu_Init(NULL_PTR);
 #else
-    const Icu_ConfigType *pCfgPtr = &IcuConfigSet;
+    const Icu_ConfigType *pCfgPtr = &Icu_Config;
     Icu_Init(pCfgPtr);
 #endif
 

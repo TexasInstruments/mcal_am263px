@@ -136,7 +136,7 @@ extern "C" {
  *  \brief Pre Compile config macro name.
  */
 [!LOOP "as:modconf('Adc')[1]/AdcConfigSet"!]
-#define ADC_INIT_CONFIG_PC       [!"@name"!]
+#define ADC_INIT_CONFIG_PC       Adc_Config
 [!ENDLOOP!]
 [!ENDIF!]
 
@@ -407,7 +407,7 @@ extern "C" {
 /* ========================================================================== */
 [!LOOP "as:modconf('Adc')[1]/AdcConfigSet"!]
 /** \brief ADC Configuration struct declaration */
-extern const struct Adc_ConfigType_s [!"@name"!];
+extern const struct Adc_ConfigType_s Adc_Config;
 [!ENDLOOP!]
 
 #ifdef __cplusplus

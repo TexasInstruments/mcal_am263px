@@ -968,7 +968,7 @@ void processJobs(Fls_JobType job)
 void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
 {
 #if (STD_OFF == FLS_USE_INTERRUPTS)
-    boolean isNotify = FALSE;
+    boolean isNotify            = FALSE;
     boolean isFlsWriteStageDone = FALSE;
     boolean isFlsEraseStage     = FALSE;
 

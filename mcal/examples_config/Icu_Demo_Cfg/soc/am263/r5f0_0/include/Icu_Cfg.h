@@ -190,8 +190,8 @@ extern CONST(uint32, ICU_CONST)
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 /** \brief ICU Configuration structure declaration */
-extern const struct Icu_ConfigType_PC_s IcuConfigSet_PC;
-extern const struct Icu_ConfigType_s IcuConfigSet;
+extern const struct Icu_ConfigType_PC_s Icu_Config_PC;
+extern const struct Icu_ConfigType_s Icu_Config;
 
 #if (STD_ON == ICU_REGISTER_READBACK_API)
 /**

@@ -200,7 +200,7 @@ extern "C" {
 #define CddUartConf_CddUartChannelConfiguration_CddUartChannel_0 (0U)
 
 #define CDD_UART_PRE_COMPILE_VARIANT               STD_ON
-#define CDD_UART_INIT_CONFIG_PC                    CddUartDriver_0
+#define CDD_UART_INIT_CONFIG_PC                    Cdd_Uart_Config
 
 /** \brief Enable/disable UART per-channel ISR */
 #define CDD_UART_UNIT_UART0_ACTIVE
@@ -305,7 +305,7 @@ typedef struct
 } Cdd_Uart_CfgType;
 
 /** \brief CDD Uart Configuration struct declaration */
-extern CONST(Cdd_Uart_CfgType, CDD_UART_CFG)CddUartDriver_0;
+extern CONST(Cdd_Uart_CfgType, CDD_UART_CFG)Cdd_Uart_Config;
 
 
 

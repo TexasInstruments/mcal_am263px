@@ -279,7 +279,7 @@ extern "C" {
 /* ========================================================================== */
 
 /** \brief CDD FSI RX Configuration struct declaration */
-extern const struct Cdd_FsiRx_ConfigType_s CddFsiRxConfigSet;
+extern const struct Cdd_FsiRx_ConfigType_s Cdd_FsiRx_Config;
 
 
 #ifdef __cplusplus
@@ -289,7 +289,7 @@ extern const struct Cdd_FsiRx_ConfigType_s CddFsiRxConfigSet;
 
 
 /**
-* @} 
+* @}
 */
 
 #endif  /* #ifndef CDD_FSI_RX_CFG_H_ */

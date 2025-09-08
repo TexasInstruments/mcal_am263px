@@ -3814,7 +3814,7 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
 
 
 /*</PORT_PIN_CONFIGURATION>*/
-CONST(Port_ConfigType, PORT_PBCFG) PortConfigSet_0 =
+CONST(Port_ConfigType, PORT_PBCFG) Port_Config =
 {
     .NumberOfPortPins = 117,
     .PinConfig_pt = PortConfigSet_0_PinConfig,

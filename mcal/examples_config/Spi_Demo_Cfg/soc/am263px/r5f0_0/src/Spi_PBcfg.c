@@ -124,7 +124,7 @@ extern void SpiApp_McspiSeq0EndNotification(void);
 extern void SpiApp_McspiSeq1EndNotification(void);
 extern void SpiApp_McspiSeq2EndNotification(void);
 
-CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) SpiDriver =
+CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) Spi_Config =
 {
     .maxChannels = 10U,
     .maxJobs = 4U,

@@ -14,7 +14,7 @@
 /**
  *  \file     Cdd_Uart_Cfg.h
  *
- *  \brief    This file contains generated configuration file for 
+ *  \brief    This file contains generated configuration file for
  *            UART Complex Device Driver
  */
 
@@ -206,7 +206,7 @@ extern "C" {
 [!IF "as:modconf('Cdd_Uart')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!][!//
 #define CDD_UART_PRE_COMPILE_VARIANT               STD_ON
 [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*"!][!//
-#define CDD_UART_INIT_CONFIG_PC                    [!"@name"!]
+#define CDD_UART_INIT_CONFIG_PC                    Cdd_Uart_Config
 [!ENDLOOP!][!//
 [!ELSE!][!//
 #define CDD_UART_PRE_COMPILE_VARIANT               STD_OFF
@@ -322,7 +322,7 @@ typedef struct
 
 [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*"!][!//
 /** \brief CDD Uart Configuration struct declaration */
-extern CONST(Cdd_Uart_CfgType, CDD_UART_CFG)[!"@name"!];
+extern CONST(Cdd_Uart_CfgType, CDD_UART_CFG)Cdd_Uart_Config;
 [!ENDLOOP!][!//
 
 #ifdef __cplusplus

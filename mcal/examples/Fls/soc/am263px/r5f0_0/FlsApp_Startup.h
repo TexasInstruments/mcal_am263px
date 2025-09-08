@@ -33,7 +33,7 @@
 #include "Cdd_Dma_Irq.h"
 
 #if (STD_OFF == MCU_NO_PLL)
-extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration_0;
+extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config_0;
 #endif
 
 #include "ioexp_tca6416_6424.h"

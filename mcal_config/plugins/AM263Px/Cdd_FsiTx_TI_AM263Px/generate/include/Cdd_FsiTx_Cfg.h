@@ -84,7 +84,7 @@
  * \addtogroup CDD_FSITX FsiTx API GUIDE Header file
  * @{
  */
- 
+
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
@@ -140,7 +140,7 @@ extern "C" {
  *  \brief Pre Compile config macro name.
  */
 [!LOOP "as:modconf('Cdd_FsiTx')[1]/CddFsiTxConfigSet"!]
-#define CDD_FSI_TX_INIT_CONFIG_PC       [!"@name"!]
+#define CDD_FSI_TX_INIT_CONFIG_PC       Cdd_FsiTx_Config
 [!ENDLOOP!]
 [!ENDIF!]
 
@@ -222,7 +222,7 @@ extern "C" {
 
 
 /** \brief Maximum CDD FSI TX channels Configured. */
-#define CDD_FSI_TX_DMA_CHANNELS_CONFIGURED   ((uint8)[!" as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxMaxDmaChannelId"!]U) 
+#define CDD_FSI_TX_DMA_CHANNELS_CONFIGURED   ((uint8)[!" as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxMaxDmaChannelId"!]U)
 
 
 /**
@@ -325,7 +325,7 @@ extern "C" {
 /* ========================================================================== */
 [!LOOP "as:modconf('Cdd_FsiTx')[1]/CddFsiTxConfigSet"!]
 /** \brief CDD FSI TX Configuration struct declaration */
-extern const struct Cdd_FsiTx_ConfigType_s [!"@name"!];
+extern const struct Cdd_FsiTx_ConfigType_s Cdd_FsiTx_Config;
 [!ENDLOOP!]
 
 #ifdef __cplusplus
@@ -412,7 +412,7 @@ extern const struct Cdd_FsiTx_ConfigType_s [!"@name"!];
 [!ENDNOCODE!][!//
 
 /**
-* @} 
+* @}
 */
 
 #endif  /* #ifndef CDD_FSI_TX_CFG_H_ */

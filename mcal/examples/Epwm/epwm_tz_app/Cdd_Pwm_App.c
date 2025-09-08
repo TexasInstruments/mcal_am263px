@@ -72,7 +72,7 @@ uint32          gTestPassed              = E_OK;
 uint32          Cdd_Pwm_App_NotifyCnt    = 0U;
 volatile uint32 Cdd_Pwm_App_Tz_NotifyCnt = 0U;
 
-extern const struct Adc_ConfigType_s AdcConfigSet;
+extern const struct Adc_ConfigType_s Adc_Config;
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
@@ -194,7 +194,7 @@ static uint32 Cdd_Pwm_App_mainTest(void)
     Cdd_Pwm_Init(NULL_PTR);
 #else
     AppUtils_printf(APP_NAME ": Variant - CDD_PWM PostBuild variant being used !!!\n\r");
-    Cdd_Pwm_Init(&CddPwmConfigSet_0);
+    Cdd_Pwm_Init(&Cdd_Pwm_Config);
 #endif
     AppUtils_delay(1000);
     AppUtils_printf(" PWM Signal is generated with default configured parameters. \r\n\r");

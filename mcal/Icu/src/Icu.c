@@ -204,7 +204,7 @@ FUNC(void, ICU_CODE) Icu_Init(P2CONST(Icu_ConfigType, AUTOMATIC, ICU_PBCFG) Conf
         for (chNum = 0U; chNum < maxCh; chNum++)
         {
 #if (STD_ON == ICU_DEV_ERROR_DETECT)
-            if (((&IcuConfigSet_PC)->chCfg[chNum].channelId) > (uint32)ICU_MAX_NUM_CHANNELS)
+            if (((&Icu_Config_PC)->chCfg[chNum].channelId) > (uint32)ICU_MAX_NUM_CHANNELS)
             {
                 /*Invalid channel */
                 (void)Icu_reportDetError(ICU_INIT_ID, ICU_E_PARAM_CHANNEL);
@@ -953,12 +953,12 @@ static FUNC(void, ICU_CODE) Icu_CheckInit_Internal(uint32 chNum, const Icu_Confi
     uint32 chIdx;
     for (chIdx = 0; chIdx < ICU_MAX_NUM_CHANNELS; chIdx++)
     {
-        if (chIdx == ((&IcuConfigSet_PC)->chCfg[chNum].channelId))
+        if (chIdx == ((&Icu_Config_PC)->chCfg[chNum].channelId))
         {
             /* Reset Channel object */
             Icu_ResetChObj(&Icu_ChObj[chIdx]);
             /* Copy the configuration */
-            Icu_CopyConfig(&Icu_ChObj[chIdx], &IcuConfigPtr->chCfg[chNum], &IcuConfigSet_PC.chCfg[chNum]);
+            Icu_CopyConfig(&Icu_ChObj[chIdx], &IcuConfigPtr->chCfg[chNum], &Icu_Config_PC.chCfg[chNum]);
             /* HW Channel Init */
             Icu_HwUnitInit(&Icu_ChObj[chIdx]);
 

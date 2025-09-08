@@ -96,7 +96,7 @@ extern "C" {
 
 
 /* Create runtime configurations. */
-CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
+CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) Adc_Config =
 {
     .maxGroup = 2U,
     .maxHwUnit = 1U,

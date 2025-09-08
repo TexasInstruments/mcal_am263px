@@ -182,7 +182,7 @@ void Cdd_Ipc_App_PlatformInit(void)
 #if (STD_ON == PORT_PRE_COMPILE_VARIANT)
     Port_Init((const Port_ConfigType *)NULL_PTR);
 #else
-    Port_Init(&PortConfigSet_0);
+    Port_Init(&Port_Config);
 #endif /*#if (STD_ON == PORT_PRE_COMPILE_VARIANT)*/
 
     Enable_Uart();

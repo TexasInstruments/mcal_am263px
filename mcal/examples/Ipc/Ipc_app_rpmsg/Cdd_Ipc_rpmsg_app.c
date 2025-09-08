@@ -67,10 +67,10 @@ int main(void)
 
     Cdd_Ipc_App_PlatformInit();
 
-    Cdd_Ipc_Init(&CddIpcDriver_0);
+    Cdd_Ipc_Init(&Cdd_Ipc_Config);
 
 #if (CDD_IPC_RPMSG_ENABLE_API == STD_ON)
-    Cdd_Ipc_Construct(&CddIpcDriver_0);
+    Cdd_Ipc_Construct(&Cdd_Ipc_Config);
 #endif
 
     numRemoteCores = 0U;
@@ -150,7 +150,7 @@ int main(void)
 #endif
 
 #if (STD_ON == CDD_IPC_DEINIT_API)
-    Cdd_Ipc_DeInit(&CddIpcDriver_0);
+    Cdd_Ipc_DeInit(&Cdd_Ipc_Config);
 #endif
 
     AppUtils_TimerDeinit();

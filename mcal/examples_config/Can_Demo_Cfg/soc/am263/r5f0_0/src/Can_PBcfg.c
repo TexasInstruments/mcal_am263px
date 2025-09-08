@@ -355,7 +355,7 @@ static Can_HwFilterType
     &CanConfigSet_CanHardwareObject_15_CanHwFilter_0,
 };
 /* All the Mailbox objects(MB's) will be defined here for all config sets */
-            
+
 static Can_MailboxType
     CanConfigSet_CanHardwareObject_0 =
 {
@@ -643,7 +643,7 @@ static Can_MailboxType
 #include "Can_MemMap.h"
 
 /*Can Config struct */
-const struct Can_ConfigType_s CanConfigSet =
+const struct Can_ConfigType_s Can_Config =
 {
     CanConfigSet_CanController_List,    /* List of all controllers in this config set */
     (4U),    /* max Controllers */

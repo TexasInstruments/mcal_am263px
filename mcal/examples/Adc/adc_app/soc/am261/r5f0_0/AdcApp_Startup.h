@@ -74,7 +74,7 @@
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
-extern const struct Adc_ConfigType_s AdcConfigSet;
+extern const struct Adc_ConfigType_s Adc_Config;
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
@@ -96,7 +96,7 @@ static AdcApp_TestParams gAdcAppTestPrms[] = {{
             "CHANNEL 1,2 -> One-shot -> Priority - 3\n",
     ADC_APP_LOOP_COUNT, /* loopCount             */
     TRUE,               /* Enable Print          */
-    &AdcConfigSet,      /* pointer to adcConfig  */
+    &Adc_Config,        /* pointer to adcConfig  */
 }};
 
 /* ========================================================================== */

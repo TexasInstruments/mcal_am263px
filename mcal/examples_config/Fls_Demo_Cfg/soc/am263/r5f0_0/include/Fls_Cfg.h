@@ -128,7 +128,7 @@ extern "C" {
 #define FLS_POST_BUILD_VARIANT     (STD_OFF)
 
 /**  \brief Pre Compile config macro name. */
-#define FLS_INIT_CONFIG_PC       FlsConfigSet
+#define FLS_INIT_CONFIG_PC       Fls_Config
        
 
 /** \brief Enable/disable FLS Blank Check API */
@@ -216,7 +216,7 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 /** \brief FLS Configuration struct declaration */
-extern const struct Fls_ConfigType_s FlsConfigSet;
+extern const struct Fls_ConfigType_s Fls_Config;
 
 
 /* ========================================================================== */

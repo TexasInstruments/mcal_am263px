@@ -4,7 +4,7 @@
 *
 * All rights reserved not granted herein.
 *
-* Limited License. 
+* Limited License.
 *
 * Texas Instruments Incorporated grants a world-wide, royalty-free, non-exclusive
 * license under copyrights and patents it now or hereafter owns or controls to make,
@@ -100,17 +100,17 @@ extern "C" {
    Tx2 Base address - 0x502A 0000h
    Tx3 Base address - 0x502A 1000h
   The offset here given is 4096 which is 1000 in hex.
-  
+
   So for the first instance (TX0), offset is not needed. Base adress will be 1344798720 itself.
   [That is why HWunitBase"   = "$HWunitOffset*0". which gives HWunitOffset=0 which will added to
   1344798720. So base adress for Tx0 is same.]
-  
+
   For Instance TX1 offset will be 1000. so   HWunitBase"   = "$HWunitOffset*1"
   which gives HWunitOffset=4096 which will added to   1344798720. So base adress for Tx1 will be 0x5028 1000h.
-  
+
   For Instance TX2 offset will be 20000 (502A0000-50280000),. so offset will be  HWunitBase"   = "$HWunitOffset*32" (which is equal to 4096*32)
   Hwhich gives HWunitOffset=131072 which will added to   1344798720. So base adress for TX2 will be 0x502A 0000h.
-  
+
   For Instance TX3 offset will be 21000 (502A1000-50280000),. so offset will be  HWunitBase"   = "$HWunitOffset*33" (which is equal to 4096*33)
   Hwhich gives HWunitOffset=135168 which will added to   1344798720. So base adress for TX2 will be 0x502A 1000h.
 
@@ -178,7 +178,7 @@ extern "C" {
 /* Create runtime configurations. */
 [!LOOP "as:modconf('Cdd_FsiTx')[1]/CddFsiTxConfigSet"!]
 [!VAR "HwLpCnt" = "0"!]
-CONST(struct Cdd_FsiTx_ConfigType_s, CDD_FSI_TX_CONFIG_DATA) [!"@name"!] =
+CONST(struct Cdd_FsiTx_ConfigType_s, CDD_FSI_TX_CONFIG_DATA) Cdd_FsiTx_Config =
 {
     .maxHwUnit = [!"num:i(count(CddFsiTxHwUnit/*))"!]U,
     .cddFsiTxNotification = [!IF "not(node:empty(CddFsiTxNotification))"!] [!"CddFsiTxNotification"!][!ELSE!]NULL_PTR[!ENDIF!],
@@ -200,8 +200,8 @@ CONST(struct Cdd_FsiTx_ConfigType_s, CDD_FSI_TX_CONFIG_DATA) [!"@name"!] =
             [!NOCODE!][!//
             [!IF "CddFsiTxTriggerSrc = 'CDD_FSI_TX_TRIGG_SRC_HW'"!]
             [!CODE!]
-            #if (STD_ON == CDD_FSI_TX_EXTERNAL_TRIGGER_ENABLE)   
-            .extFrameTriggsrc  =  [!"CddFsiTxExtHwTrigSrc"!], 
+            #if (STD_ON == CDD_FSI_TX_EXTERNAL_TRIGGER_ENABLE)
+            .extFrameTriggsrc  =  [!"CddFsiTxExtHwTrigSrc"!],
             .extPingsrc  =  [!"CddFsiTxExtPingTrigSrc"!],
             #endif
              [!ENDCODE!]
@@ -218,8 +218,8 @@ CONST(struct Cdd_FsiTx_ConfigType_s, CDD_FSI_TX_CONFIG_DATA) [!"@name"!] =
           [!ENDNOCODE!][!//
         },
          [!VAR "HwLpCnt" = "$HwLpCnt+1"!]
-        [!ENDLOOP!]  
-    },       
+        [!ENDLOOP!]
+    },
 };
 
 [!ENDLOOP!]

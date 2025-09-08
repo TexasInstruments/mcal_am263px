@@ -244,7 +244,7 @@ extern "C" {
 extern const uint32 Gpt_RTIChannelAddr[GPT_RTI_MODULES];
  
  
-extern const struct Gpt_ConfigType_s Gpt_ChannelConfigSet_0;
+extern const struct Gpt_ConfigType_s Gpt_Config;
 
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

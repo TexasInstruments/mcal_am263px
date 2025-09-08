@@ -55,14 +55,14 @@ extern "C" {
 extern void Cdd_Pwm_Notification_Channel (void);
 
 
-static CONST(struct Cdd_Pwm_timerBaseConfigType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_timerBaseConfigType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_TimerBaseRef[CDD_PWM_TIMER_BASE_NUM_CHANNELS] =
 {
     [0] =
     {
-       .channelPwmTimerBasePeriodGlobalLoad =FALSE, 
+       .channelPwmTimerBasePeriodGlobalLoad =FALSE,
        .channelPwmEmulationMode = CDD_PWM_EMULATION_FREE_RUN,
-       .channelPwmClockDivider = CDD_PWM_CLOCK_DIVIDER_4, 
+       .channelPwmClockDivider = CDD_PWM_CLOCK_DIVIDER_4,
        .channelPwmHSClockDivider = CDD_PWM_HSCLOCK_DIVIDER_1,
        .channelPwmTbPeriod =2500U - 1U,
        .channelPwmTbPeriodInitValue = 0.0,
@@ -74,7 +74,7 @@ Cdd_Pwm_TimerBaseRef[CDD_PWM_TIMER_BASE_NUM_CHANNELS] =
     }
 };
 
-static CONST(struct Cdd_Pwm_CompareType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_CompareType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
 {
         [0] =
@@ -86,7 +86,7 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpA =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpA = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
            .channelCddPwmTbprdlinkCmpA = CDD_PWM_LINK_DISABLE,
-           
+
            /* Compare B */
            .channelCddPwmCounterBlockB = CDD_PWM_CMP_B,
            .channelCddPwmCompareValueCmpB = 12500U,
@@ -94,7 +94,7 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpB =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpB = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
            .channelCddPwmTbprdlinkCmpB = CDD_PWM_LINK_DISABLE,
-                      
+
            /* Compare C */
            .channelCddPwmCounterBlockC = CDD_PWM_CMP_C,
            .channelCddPwmCompareValueCmpC = 1U,
@@ -102,14 +102,14 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpC =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpC = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
            .channelCddPwmTbprdlinkCmpC = CDD_PWM_LINK_DISABLE,
-           
+
            /* Compare D */
            .channelCddPwmCounterBlockD = CDD_PWM_CMP_D,
            .channelCddPwmCompareValueCmpD = 1U,
            .channelCddPwmCounterCompareGlobalLoadCmpD =FALSE,
            .channelCddPwmCounterCompareShadowModeCmpD =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpD = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
-           .channelCddPwmTbprdlinkCmpD = CDD_PWM_LINK_DISABLE,       
+           .channelCddPwmTbprdlinkCmpD = CDD_PWM_LINK_DISABLE,
         },
         [1] =
         {
@@ -120,7 +120,7 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpA =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpA = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
            .channelCddPwmTbprdlinkCmpA = CDD_PWM_LINK_DISABLE,
-           
+
            /* Compare B */
            .channelCddPwmCounterBlockB = CDD_PWM_CMP_B,
            .channelCddPwmCompareValueCmpB = 1U,
@@ -128,7 +128,7 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpB =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpB = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
            .channelCddPwmTbprdlinkCmpB = CDD_PWM_LINK_WITH_PWM_2,
-                      
+
            /* Compare C */
            .channelCddPwmCounterBlockC = CDD_PWM_CMP_C,
            .channelCddPwmCompareValueCmpC = 12500U,
@@ -136,18 +136,18 @@ Cdd_Pwm_CounterCompareRef[CDD_PWM_COUNTER_NUM_CHANNELS] =
            .channelCddPwmCounterCompareShadowModeCmpC =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpC = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
            .channelCddPwmTbprdlinkCmpC = CDD_PWM_LINK_DISABLE,
-           
+
            /* Compare D */
            .channelCddPwmCounterBlockD = CDD_PWM_CMP_D,
            .channelCddPwmCompareValueCmpD = 12500U,
            .channelCddPwmCounterCompareGlobalLoadCmpD =FALSE,
            .channelCddPwmCounterCompareShadowModeCmpD =FALSE,
            .channelCddPwmCounterCompareShadowEventCmpD = CDD_PWM_COMP_LOAD_ON_CNTR_ZERO,
-           .channelCddPwmTbprdlinkCmpD = CDD_PWM_LINK_DISABLE,       
+           .channelCddPwmTbprdlinkCmpD = CDD_PWM_LINK_DISABLE,
         }
 };
 
-static CONST(struct Cdd_Pwm_TimerBaseSync_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_TimerBaseSync_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_TimerBaseSyncRef[CDD_PWM_TIMER_BASE_SYNC_NUM_CHANNELS] =
 {
         [0] =
@@ -182,11 +182,11 @@ Cdd_Pwm_TimerBaseSyncRef[CDD_PWM_TIMER_BASE_SYNC_NUM_CHANNELS] =
         }
 };
 
-static CONST(struct Cdd_Pwm_ActionConfigType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_ActionConfigType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
 {
         [0] =
-        {           
+        {
             /* Actions for EPWMA  */
            .channelPwmOutptEPWMA = CDD_PWM_E_A,
            .channelPwmActionGlobalLoadEPWMA =FALSE,
@@ -206,7 +206,7 @@ Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
            .channelPwmAqOutputOnT1COUNTDOWNEPWMA = CDD_PWM_AQ_OUTPUT_NO_CHANGE,
            .channelPwmAqOutputOnT2COUNTUPEPWMA = CDD_PWM_AQ_OUTPUT_NO_CHANGE,
            .channelPwmAqOutputOnT2COUNTDOWNEPWMA = CDD_PWM_AQ_OUTPUT_NO_CHANGE,
-           
+
            /* Actions for EPWMB  */
            .channelPwmOutptEPWMB = CDD_PWM_E_B,
            .channelPwmActionGlobalLoadEPWMB =FALSE,
@@ -229,7 +229,7 @@ Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
 
         },
         [1] =
-        {           
+        {
             /* Actions for EPWMA  */
            .channelPwmOutptEPWMA = CDD_PWM_E_A,
            .channelPwmActionGlobalLoadEPWMA =FALSE,
@@ -249,7 +249,7 @@ Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
            .channelPwmAqOutputOnT1COUNTDOWNEPWMA = CDD_PWM_AQ_OUTPUT_NO_CHANGE,
            .channelPwmAqOutputOnT2COUNTUPEPWMA = CDD_PWM_AQ_OUTPUT_NO_CHANGE,
            .channelPwmAqOutputOnT2COUNTDOWNEPWMA = CDD_PWM_AQ_OUTPUT_NO_CHANGE,
-           
+
            /* Actions for EPWMB  */
            .channelPwmOutptEPWMB = CDD_PWM_E_B,
            .channelPwmActionGlobalLoadEPWMB =FALSE,
@@ -273,7 +273,7 @@ Cdd_Pwm_ActionQualifierRef[CDD_PWM_TIMER_AQ_NUM_CHANNELS] =
         }
 };
 
-static CONST(struct Cdd_Pwm_EventConfigType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_EventConfigType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_EventTriggerRef[CDD_PWM_TIMER_EVENT_NUM_CHANNELS] =
 {
         [0] =
@@ -282,7 +282,7 @@ Cdd_Pwm_EventTriggerRef[CDD_PWM_TIMER_EVENT_NUM_CHANNELS] =
            .channelPwmEnableEventCountInitialValue =FALSE,
            .channelPwmEventCountInitialValue  = 1,
            .channelPwmInterruptCount          = 1,
-           .channelPwmInterruptEventSources   = CDD_PWM_INT_TBCTR_ZERO, 
+           .channelPwmInterruptEventSources   = CDD_PWM_INT_TBCTR_ZERO,
            .channelPwmInterruptMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,
         },
         [1] =
@@ -291,12 +291,12 @@ Cdd_Pwm_EventTriggerRef[CDD_PWM_TIMER_EVENT_NUM_CHANNELS] =
            .channelPwmEnableEventCountInitialValue =FALSE,
            .channelPwmEventCountInitialValue  = 1,
            .channelPwmInterruptCount          = 1,
-           .channelPwmInterruptEventSources   = CDD_PWM_INT_TBCTR_ZERO, 
+           .channelPwmInterruptEventSources   = CDD_PWM_INT_TBCTR_ZERO,
            .channelPwmInterruptMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,
         }
 };
 
-static CONST(struct Cdd_Pwm_AdcEventTriggerType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_AdcEventTriggerType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
 {
         [0] =
@@ -309,7 +309,7 @@ Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
            .channelPwmSocAInterruptCount          = 1,
            .channelPwmSocAInterruptEventSources   = CDD_PWM_SOC_TBCTR_ZERO,
            .channelPwmSocAMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,
-           
+
            /* SOC B Event for ADC. */
            .channelPwmSocBEvent         =FALSE,
            .channelPwmSocBForceEventValue         =FALSE,
@@ -317,7 +317,7 @@ Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
            .channelPwmSocBEventCountInitialValue  = 1,
            .channelPwmSocBInterruptCount          = 1,
            .channelPwmSocBInterruptEventSources   = CDD_PWM_SOC_TBCTR_ZERO,
-           .channelPwmSocBMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,           
+           .channelPwmSocBMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,
         },
         [1] =
         {
@@ -329,7 +329,7 @@ Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
            .channelPwmSocAInterruptCount          = 1,
            .channelPwmSocAInterruptEventSources   = CDD_PWM_SOC_TBCTR_ZERO,
            .channelPwmSocAMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,
-           
+
            /* SOC B Event for ADC. */
            .channelPwmSocBEvent         =FALSE,
            .channelPwmSocBForceEventValue         =FALSE,
@@ -337,13 +337,13 @@ Cdd_Pwm_AdcEventTriggerRefSoc[CDD_PWM_TIMER_ADC_EVENT_NUM_CHANNELS] =
            .channelPwmSocBEventCountInitialValue  = 1,
            .channelPwmSocBInterruptCount          = 1,
            .channelPwmSocBInterruptEventSources   = CDD_PWM_SOC_DCxEVT1,
-           .channelPwmSocBMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,           
+           .channelPwmSocBMixedSources   =0U | 0U |0U |0U | 0U | 0U | 0U | 0U | 0U | 0U | 0U,
         }
 };
 
 
 
-static CONST(struct Cdd_Pwm_TripZoneType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_TripZoneType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_TripZoneRef[CDD_PWM_TIMER_TRIP_ZONE_NUM_CHANNELS] =
 {
         [0] =
@@ -440,7 +440,7 @@ Cdd_Pwm_TripZoneRef[CDD_PWM_TIMER_TRIP_ZONE_NUM_CHANNELS] =
         }
 };
 
-static CONST(struct Cdd_Pwm_DigitalCompareType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_DigitalCompareType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
 {
         [0] =
@@ -477,7 +477,7 @@ Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
            .channelPwmCddPwmBlankingWindow               =TRUE,
            .channelPwmCddPwmBlankingWindowStartEvent     = EPWM_DC_WINDOW_START_TBCTR_BLANK_PULSE_MIX,
            .channelPwmCddPwmBlankingWindowOffset         = 0,
-           .channelPwmCddPwmBlankingWindowLength         = 0, 
+           .channelPwmCddPwmBlankingWindowLength         = 0,
            .channelPwmCddPwmBlankingWindowMixedEvent     = EPWM_DC_TBCTR_ZERO,
            .channelPwmCddPwmDCCounterCapture             =TRUE,
            .channelPwmCddPwmDCCounterCaptureShadowMode   =TRUE,
@@ -495,7 +495,7 @@ Cdd_Pwm_DigitalCompareRef[CDD_PWM_DIGITAL_COMPARE_NUM_CHANNELS] =
         }
 };
 
-static CONST(struct Cdd_Pwm_DeadBandType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_DeadBandType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_DeadBandRef[CDD_PWM_TIMER_DEAD_BAND_NUM_CHANNELS] =
 {
         [0] =
@@ -546,7 +546,7 @@ Cdd_Pwm_DeadBandRef[CDD_PWM_TIMER_DEAD_BAND_NUM_CHANNELS] =
         }
 };
 
-static CONST(struct Cdd_Pwm_ChopperType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_ChopperType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_ChopperRef[CDD_PWM_TIMER_CHOPPER_NUM_CHANNELS] =
 {
         [0] =
@@ -566,7 +566,7 @@ Cdd_Pwm_ChopperRef[CDD_PWM_TIMER_CHOPPER_NUM_CHANNELS] =
 };
 
 
-static CONST(struct Cdd_Pwm_HrPwmType_s, CDD_PWM_CONFIG_DATA) 
+static CONST(struct Cdd_Pwm_HrPwmType_s, CDD_PWM_CONFIG_DATA)
 Cdd_Pwm_HrPwmRef[CDD_PWM_TIMER_HRPWM_NUM_CHANNELS] =
 {
         [0] =
@@ -575,34 +575,34 @@ Cdd_Pwm_HrPwmRef[CDD_PWM_TIMER_HRPWM_NUM_CHANNELS] =
             .channelAutoHRMStepScalingEnable =TRUE,
             .channelHrCtrlModeEPWMA          = HRPWM_MEP_DUTY_PERIOD_CTRL,
             .channelHrCtrlModeEPWMB          = HRPWM_MEP_DUTY_PERIOD_CTRL,
-            
+
             /* HPWM  Duty , Period  and Phase control */
             .channelHrSelEdgeModeEPWMA       = HRPWM_MEP_CTRL_DISABLE,
             .channelHrCmpHRPWMA              = 0,
             .channelHrShadowActiveLoadPwmA   = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrSelEdgeModeEPWMB       = HRPWM_MEP_CTRL_DISABLE,
             .channelHrCmpHRPWMB              = 0,
             .channelHrShadowActiveLoadPwmB   = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrPeriodCtrlEnable       =TRUE,
             .channelHrPeriod                 = 0,
-            
+
             .channelHrPhaseCtrlEnable        =TRUE,
             .channelHrPhase                  = 0,
             .channelPwmSyncSelect            = HRPWM_PWMSYNC_SOURCE_ZERO,
-            
+
             /* HPWM  Deadband Control */
             .channelHrDeadbandEdgeMode       = HRPWM_DB_MEP_CTRL_DISABLE,
             .channelHrRisEdgeDelay           = 0,
             .channelHrDbRisShadowActiveLoad  = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrFalEdgeDelay           = 0,
             .channelHrDbFalShadowActiveLoad  = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrSwapOutputCtrl         =TRUE,
             .channelHrOutputCtrl              = HRPWM_OUTPUT_ON_B_NORMAL,
-            
+
         },
         [1] =
         {
@@ -610,91 +610,91 @@ Cdd_Pwm_HrPwmRef[CDD_PWM_TIMER_HRPWM_NUM_CHANNELS] =
             .channelAutoHRMStepScalingEnable =TRUE,
             .channelHrCtrlModeEPWMA          = HRPWM_MEP_DUTY_PERIOD_CTRL,
             .channelHrCtrlModeEPWMB          = HRPWM_MEP_DUTY_PERIOD_CTRL,
-            
+
             /* HPWM  Duty , Period  and Phase control */
             .channelHrSelEdgeModeEPWMA       = HRPWM_MEP_CTRL_DISABLE,
             .channelHrCmpHRPWMA              = 0,
             .channelHrShadowActiveLoadPwmA   = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrSelEdgeModeEPWMB       = HRPWM_MEP_CTRL_DISABLE,
             .channelHrCmpHRPWMB              = 0,
             .channelHrShadowActiveLoadPwmB   = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrPeriodCtrlEnable       =TRUE,
             .channelHrPeriod                 = 0,
-            
+
             .channelHrPhaseCtrlEnable        =TRUE,
             .channelHrPhase                  = 0,
             .channelPwmSyncSelect            = HRPWM_PWMSYNC_SOURCE_ZERO,
-            
+
             /* HPWM  Deadband Control */
             .channelHrDeadbandEdgeMode       = HRPWM_DB_MEP_CTRL_DISABLE,
             .channelHrRisEdgeDelay           = 0,
             .channelHrDbRisShadowActiveLoad  = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrFalEdgeDelay           = 0,
             .channelHrDbFalShadowActiveLoad  = HRPWM_LOAD_ON_CNTR_ZERO,
-            
+
             .channelHrSwapOutputCtrl         =TRUE,
             .channelHrOutputCtrl              = HRPWM_OUTPUT_ON_B_NORMAL,
-            
+
         }
 };
 
 
 /* Cdd_Pwm Channel Configuration parameters */
 CONST(Cdd_Pwm_ConfigType, CDD_PWM_CONFIG_DATA)
-     CddPwmConfigSet_0 =
+     Cdd_Pwm_Config =
 {
     .chCfg =
     {
         [0] =
         {
 #if (CDD_PWM_NOTIFICATION_SUPPORTED == STD_ON)
-            .notificationHandler = (Cdd_Pwm_NotifyFuncType) Cdd_Pwm_Notification_Channel, /*Notification Function*/           
+            .notificationHandler = (Cdd_Pwm_NotifyFuncType) Cdd_Pwm_Notification_Channel, /*Notification Function*/
 #endif
-            .notificationTzHandler = (Cdd_Pwm_TzNotifyFuncType) NULL_PTR, /*Notification Function*/           
-            .baseaddr =0x50000000UL,            
-            .channelID = 0, /* CddPwmChannelId */       
-            .channelHwID = CDD_PWM_G0_CHANNEL_0, /* CddPwmHwChannel */ 
-            .outputCh = CDD_PWM_OUTPUT_CH_BOTH_A_AND_B, /* CddPwmOutPutChannelSelection */ 
-            .polarity = CDD_PWM_HIGH, /* CddPwmPolarity */ 
-            .channelTimerBase = &Cdd_Pwm_TimerBaseRef[0], /* CddPwmChannelTimerBaseRef */      
-            .channelCounterCompare = &Cdd_Pwm_CounterCompareRef[0], /* CddPwmCounterCompareRef */      
-            .channelTimerBaseSync = &Cdd_Pwm_TimerBaseSyncRef[0], /* CddPwmChannelTimerBaseSyncRef */  
+            .notificationTzHandler = (Cdd_Pwm_TzNotifyFuncType) NULL_PTR, /*Notification Function*/
+            .baseaddr =0x50000000UL,
+            .channelID = 0, /* CddPwmChannelId */
+            .channelHwID = CDD_PWM_G0_CHANNEL_0, /* CddPwmHwChannel */
+            .outputCh = CDD_PWM_OUTPUT_CH_BOTH_A_AND_B, /* CddPwmOutPutChannelSelection */
+            .polarity = CDD_PWM_HIGH, /* CddPwmPolarity */
+            .channelTimerBase = &Cdd_Pwm_TimerBaseRef[0], /* CddPwmChannelTimerBaseRef */
+            .channelCounterCompare = &Cdd_Pwm_CounterCompareRef[0], /* CddPwmCounterCompareRef */
+            .channelTimerBaseSync = &Cdd_Pwm_TimerBaseSyncRef[0], /* CddPwmChannelTimerBaseSyncRef */
             .channelActionQualifier = &Cdd_Pwm_ActionQualifierRef[0], /* CddPwmActionQualifierRef */
             .channelEventTrigger = &Cdd_Pwm_EventTriggerRef[0], /* CddPwmEventTriggerRef */
             .channelAdcEventTrigger = &Cdd_Pwm_AdcEventTriggerRefSoc[0], /* Cdd_Pwm_AdcEventTriggerRefSoc */
-            .channelTripZone = &Cdd_Pwm_TripZoneRef[0], /* CddPwmTripZone */  
-            .channelDigitalCompare = &Cdd_Pwm_DigitalCompareRef[0U], /* CddDigitalCompare */  
-            .channelDeadBand = &Cdd_Pwm_DeadBandRef[0], /* CddPwmDeadBand */  
-            .channelChopper = &Cdd_Pwm_ChopperRef[0], /* CddPwmChopper */   
-            .channelHrPwm = &Cdd_Pwm_HrPwmRef[0], /* CddPwmHrPwm - */   
- 
+            .channelTripZone = &Cdd_Pwm_TripZoneRef[0], /* CddPwmTripZone */
+            .channelDigitalCompare = &Cdd_Pwm_DigitalCompareRef[0U], /* CddDigitalCompare */
+            .channelDeadBand = &Cdd_Pwm_DeadBandRef[0], /* CddPwmDeadBand */
+            .channelChopper = &Cdd_Pwm_ChopperRef[0], /* CddPwmChopper */
+            .channelHrPwm = &Cdd_Pwm_HrPwmRef[0], /* CddPwmHrPwm - */
+
         },
         [1] =
         {
 #if (CDD_PWM_NOTIFICATION_SUPPORTED == STD_ON)
-            .notificationHandler = (Cdd_Pwm_NotifyFuncType) NULL_PTR, /*Notification Function*/           
+            .notificationHandler = (Cdd_Pwm_NotifyFuncType) NULL_PTR, /*Notification Function*/
 #endif
-            .notificationTzHandler = (Cdd_Pwm_TzNotifyFuncType) NULL_PTR, /*Notification Function*/           
-            .baseaddr =0x50001000UL,            
-            .channelID = 1, /* CddPwmChannelId */       
-            .channelHwID = CDD_PWM_G0_CHANNEL_1, /* CddPwmHwChannel */ 
-            .outputCh = CDD_PWM_OUTPUT_CH_BOTH_A_AND_B, /* CddPwmOutPutChannelSelection */ 
-            .polarity = CDD_PWM_HIGH, /* CddPwmPolarity */ 
-            .channelTimerBase = &Cdd_Pwm_TimerBaseRef[0], /* CddPwmChannelTimerBaseRef */      
-            .channelCounterCompare = &Cdd_Pwm_CounterCompareRef[0], /* CddPwmCounterCompareRef */      
-            .channelTimerBaseSync = &Cdd_Pwm_TimerBaseSyncRef[0], /* CddPwmChannelTimerBaseSyncRef */  
+            .notificationTzHandler = (Cdd_Pwm_TzNotifyFuncType) NULL_PTR, /*Notification Function*/
+            .baseaddr =0x50001000UL,
+            .channelID = 1, /* CddPwmChannelId */
+            .channelHwID = CDD_PWM_G0_CHANNEL_1, /* CddPwmHwChannel */
+            .outputCh = CDD_PWM_OUTPUT_CH_BOTH_A_AND_B, /* CddPwmOutPutChannelSelection */
+            .polarity = CDD_PWM_HIGH, /* CddPwmPolarity */
+            .channelTimerBase = &Cdd_Pwm_TimerBaseRef[0], /* CddPwmChannelTimerBaseRef */
+            .channelCounterCompare = &Cdd_Pwm_CounterCompareRef[0], /* CddPwmCounterCompareRef */
+            .channelTimerBaseSync = &Cdd_Pwm_TimerBaseSyncRef[0], /* CddPwmChannelTimerBaseSyncRef */
             .channelActionQualifier = &Cdd_Pwm_ActionQualifierRef[0], /* CddPwmActionQualifierRef */
             .channelEventTrigger = &Cdd_Pwm_EventTriggerRef[0], /* CddPwmEventTriggerRef */
             .channelAdcEventTrigger = &Cdd_Pwm_AdcEventTriggerRefSoc[0], /* Cdd_Pwm_AdcEventTriggerRefSoc */
-            .channelTripZone = &Cdd_Pwm_TripZoneRef[0], /* CddPwmTripZone */  
-            .channelDigitalCompare = &Cdd_Pwm_DigitalCompareRef[0U], /* CddDigitalCompare */  
-            .channelDeadBand = &Cdd_Pwm_DeadBandRef[0], /* CddPwmDeadBand */  
-            .channelChopper = &Cdd_Pwm_ChopperRef[0], /* CddPwmChopper */   
-            .channelHrPwm = &Cdd_Pwm_HrPwmRef[0], /* CddPwmHrPwm - */   
- 
+            .channelTripZone = &Cdd_Pwm_TripZoneRef[0], /* CddPwmTripZone */
+            .channelDigitalCompare = &Cdd_Pwm_DigitalCompareRef[0U], /* CddDigitalCompare */
+            .channelDeadBand = &Cdd_Pwm_DeadBandRef[0], /* CddPwmDeadBand */
+            .channelChopper = &Cdd_Pwm_ChopperRef[0], /* CddPwmChopper */
+            .channelHrPwm = &Cdd_Pwm_HrPwmRef[0], /* CddPwmHrPwm - */
+
         }
     }
 };

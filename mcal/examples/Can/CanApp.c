@@ -59,7 +59,7 @@ uint8 MainFunc_Execution;
 #define APP_NAME                "CanApp"
 #define CANEXAMPLE_ARRAYSIZE(x) (sizeof((x)) / sizeof(x[0U]))
 
-extern const Can_ConfigType CanConfigSet;
+extern const Can_ConfigType Can_Config;
 #ifdef CAN_LPDU_CALLOUT
 boolean Can_LPdu_Callout(uint8 Hrh, Can_IdType CanId, uint8 CanDataLegth, const uint8* CanSduPtr);
 #endif
@@ -91,7 +91,7 @@ static void CanExample_LoopbackTest()
     uint8                 loopCnt = 0U, hth = 0U;
     Std_ReturnType        status;
 
-    Can_ConfigPtr = &CanConfigSet;
+    Can_ConfigPtr = &Can_Config;
     /* Message for CAN-FD(MCAN module) */
     PduInfo = &Pdu;
     /* Setting Up CAN FD Frame*/
@@ -296,7 +296,7 @@ static void CanExample_ExternalTest()
 #if (STD_ON == CAN_VARIANT_PRE_COMPILE)
     Can_ConfigPtr = &CAN_INIT_CONFIG_PC;
 #else
-    Can_ConfigPtr = &CanConfigSet;
+    Can_ConfigPtr = &Can_Config;
 #endif
     /* Message for CAN-FD(MCAN module) */
     PduInfo = &Pdu;
@@ -859,7 +859,7 @@ static void CanApp_SafetyApiTest(void)
 #if (STD_ON == CAN_VARIANT_PRE_COMPILE)
     Can_ConfigPtr = &CAN_INIT_CONFIG_PC;
 #else
-    Can_ConfigPtr = &CanConfigSet;
+    Can_ConfigPtr = &Can_Config;
 #endif
 
     canMaxControllerCnt = Can_ConfigPtr->CanMaxControllerCount;

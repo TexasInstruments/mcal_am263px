@@ -234,7 +234,7 @@ extern "C" {
 
 /* DEM Error Definitions */
 
- 
+
 #ifndef CAN_E_HARDWARE_ERROR
 /** \brief Hardware failed */
 #define CAN_E_HARDWARE_ERROR          (DemConf_DemEventParameter_CAN_E_HARDWARE_ERROR)
@@ -267,12 +267,12 @@ typedef enum
     CAN_CONTROLLER_INSTANCE_MCAN6 = 0x6U,
     /** \brief MCAN7 Controller Instance */
     CAN_CONTROLLER_INSTANCE_MCAN7 = 0x7U
-    
+
 } Can_ControllerInstance;
 
 
 /** \brief CAN Configuration struct declaration */
-extern const struct Can_ConfigType_s CanConfigSet;
+extern const struct Can_ConfigType_s Can_Config;
 
 extern const struct Can_ControllerStruct_PC CanConfigSet_PC_CanController_0;
 

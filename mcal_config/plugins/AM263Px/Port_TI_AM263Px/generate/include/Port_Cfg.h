@@ -82,7 +82,7 @@ extern "C" {
 
 [!IF "as:modconf('Port')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 [!LOOP "as:modconf('Port')[1]/PortConfigSet/*"!]
-#define PORT_INIT_CONFIG_PC       [!"@name"!]
+#define PORT_INIT_CONFIG_PC       Port_Config
 [!ENDLOOP!]
 [!ENDIF!]
 
@@ -115,7 +115,7 @@ extern "C" {
  *  @{
  */
 #define PORT_MAX_MUXMODE ([!"num:max(text:split($maxMuxMode))"!]U)
-/* @} */	
+/* @} */
 
 /** \brief Interrupt Error ID */
 #define PORT_INTR_ERROR_ID 			255U
@@ -193,7 +193,7 @@ extern "C" {
 [!NOCODE!][!//
 [!IF "node:exists(as:modconf('Port')[1]/PortDemEventParameterRefs)"!][!//
 [!IF "not(node:exists(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR))"!][!WARNING "DEM enabled but no DEM error configured"!][!ENDIF!]
-[!ENDIF!][!// 
+[!ENDIF!][!//
 [!ENDNOCODE!][!//
 
 [!IF "node:exists(as:modconf('Port')[1]/PortDemEventParameterRefs/*)"!][!//
@@ -336,19 +336,19 @@ typedef enum
 {
 	/** \brief Set Pin for  GPIO Port AB mode */
     PORT_PIN_MODE_GPIOAB,
-    
+
     /** \brief Set Pin for GPIO Port CD mode */
     PORT_PIN_MODE_GPIOCD,
-    
+
     /** \brief Set Pin for  GPIO Port EF mode */
     PORT_PIN_MODE_GPIOEF,
-    
+
     /** \brief Set Pin for GPIO Port GH mode */
     PORT_PIN_MODE_GPIOGH,
-    
+
    /** \brief Set Pin for GPIO mode */
     PORT_PIN_MODE_GPIOI,
-    
+
     /** \brief Set Pin for MCAN0 (CAN FD) mode */
     PORT_PIN_MODE_MCAN0,
     /** \brief Set Pin for MCAN1 (CAN FD) mode */
@@ -365,7 +365,7 @@ typedef enum
     PORT_PIN_MODE_MCAN6,
     /** \brief Set Pin for MCAN7(CAN FD) mode */
     PORT_PIN_MODE_MCAN7,
-    
+
     /** \brief Set Pin for MIBSPI0 mode */
     PORT_PIN_MODE_SPI0,
     /** \brief Set Pin for MIBSPI1 mode */
@@ -388,7 +388,7 @@ typedef enum
     PORT_PIN_MODE_JTAG,
     /** \brief Set Pin for TRACE mode */
     PORT_PIN_MODE_TRACE,
-    
+
     /** \brief Set Pin for I2C0 mode */
     PORT_PIN_MODE_I2C0,
     /** \brief Set Pin for I2C1 mode */
@@ -397,7 +397,7 @@ typedef enum
     PORT_PIN_MODE_I2C2,
    /** \brief Set Pin for I2C3 mode */
     PORT_PIN_MODE_I2C3,
-    
+
     /** \brief Set Pin for MII mode */
     PORT_PIN_MODE_MII,
     /** \brief Set Pin for RMII1 mode */
@@ -506,7 +506,7 @@ typedef enum
     PORT_PIN_MODE_EPWM31,
     /** \brief Set Pin for XBAR mode */
     PORT_PIN_MODE_OUTPUTXBAR,
-    /** \brief Set Pin for XBAR mode */ 
+    /** \brief Set Pin for XBAR mode */
     PORT_PIN_MODE_XBAROUT,
 
     /** \brief Set Pin for TRC */
@@ -521,7 +521,7 @@ typedef enum
     PORT_PIN_MODE_FSIRX0,
     /** \brief Set Pin for FSIRX1 */
     PORT_PIN_MODE_FSIRX1,
-    /** \brief Set Pin for FSIRX2 */    
+    /** \brief Set Pin for FSIRX2 */
     PORT_PIN_MODE_FSIRX2,
     /** \brief Set Pin for FSIRX3 */
     PORT_PIN_MODE_FSIRX3,
@@ -575,20 +575,20 @@ typedef enum
 	PORT_GPIO_BANK_0 = 0,
   	/** \brief Bank B */
 	PORT_GPIO_BANK_1 = 1,
-    /** \brief Bank C */	
+    /** \brief Bank C */
 	PORT_GPIO_BANK_2 = 2,
-    /** \brief Bank D */	
-	PORT_GPIO_BANK_3 = 3,	
+    /** \brief Bank D */
+	PORT_GPIO_BANK_3 = 3,
 	/** \brief Bank E */
-	PORT_GPIO_BANK_4 = 4,	
+	PORT_GPIO_BANK_4 = 4,
 	/** \brief Bank F */
 	PORT_GPIO_BANK_5 = 5,
-    /** \brief Bank G */	
-	PORT_GPIO_BANK_6 = 6,	
+    /** \brief Bank G */
+	PORT_GPIO_BANK_6 = 6,
 	/** \brief Bank H */
-	PORT_GPIO_BANK_7 = 7,	
-	/** \brief Bank I */	
-	PORT_GPIO_BANK_8 = 8,	
+	PORT_GPIO_BANK_7 = 7,
+	/** \brief Bank I */
+	PORT_GPIO_BANK_8 = 8,
 }Port_GpioBank;
 
 /**
@@ -660,7 +660,7 @@ typedef enum
     PORT_GPIO_CH_60 = 60,
     PORT_GPIO_CH_61 = 61,
     PORT_GPIO_CH_62 = 62,
-    PORT_GPIO_CH_63 = 63,		
+    PORT_GPIO_CH_63 = 63,
     PORT_GPIO_CH_64 = 64,	/* Bank E */
     PORT_GPIO_CH_65 = 65,
     PORT_GPIO_CH_66 = 66,
@@ -697,7 +697,7 @@ typedef enum
     PORT_GPIO_CH_97 = 97,
     PORT_GPIO_CH_98 = 98,
     PORT_GPIO_CH_99 = 99,
-    PORT_GPIO_CH_100 = 100,		
+    PORT_GPIO_CH_100 = 100,
     PORT_GPIO_CH_101 = 101,
     PORT_GPIO_CH_102 = 102,
     PORT_GPIO_CH_103 = 103,
@@ -739,7 +739,7 @@ typedef enum
 }Port_GpioChannel;
 
 /**
- *  \brief GPIO Pin Edge trigger intruppt selection 
+ *  \brief GPIO Pin Edge trigger intruppt selection
  */
 typedef enum
 {
@@ -758,7 +758,7 @@ typedef enum
 } Port_IntrType;
 
 /**
- *  \brief  Notification callback function pointer 
+ *  \brief  Notification callback function pointer
  *
  *  PortBankNum --> GPIO bank numbers[A(0) to I(8)] , If configured as bank interrupt else value PORT_INTR_ERROR_ID
  *
@@ -772,7 +772,7 @@ typedef void (*Port_IsrNotificationType)(uint8 PortBankNum, uint8 PortBankChNum,
 typedef struct
 {
     volatile uint8 IntrIdxNum[ PORT_INTR_BUF_SIZE ];
-	
+
 } Port_IntrStatus;
 
 /**
@@ -830,21 +830,21 @@ typedef struct
     /** \brief  Pin signal name.Just for information. Not used internally.Can be NULL
     **/
     const sint8             *Port_PinSignalName;
-    
+
 	/** \brief Pin name.Just for information. Not used internally.Can be NULL */
     const sint8             *Port_PinName;
-    
+
     /** \brief  HSMASTER bit value **/
     boolean                 Port_PinHSmasterEnable;
-    
+
     /** \brief  HSMODE bit value **/
     boolean                 Port_PinHSmodeEnable;
-    
+
     /** \brief  select value for choosing inverted version of PAD input for chip**/
     Port_InputInversion     Port_InversionSelect;
-    
+
     /** \brief  select value for choosing input qualifer type for PAD. **/
-    Port_InputQualType      Port_QualifierTypeSelect;  
+    Port_InputQualType      Port_QualifierTypeSelect;
 } Port_PinConfigType;
 
 
@@ -861,7 +861,7 @@ typedef struct
     Port_IntrType			   Port_PinSelectInterruptType;
 	/** \brief  ISR callback function pointer*/
     Port_IsrNotificationType   Port_DioInterruptNotification;
-	
+
 } Port_DioRegConfigType;
 
 /**
@@ -878,12 +878,12 @@ typedef struct Port_ConfigType_s
     uint32 NumberOfGPIORegs;
     /** \brief  DIO config structure */
     P2CONST(Port_DioRegConfigType, AUTOMATIC, PORT_PBCFG) DioConfig_pt;
-	
+
 } Port_ConfigType;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 /**
- *  \GPIO XBAR out pins mapping 
+ *  \GPIO XBAR out pins mapping
  *   Below macros stores inforamtion about xbarout Intr. pin configuration which is done in MCU Driver.
  *  @{
  */[!//
@@ -908,7 +908,7 @@ typedef struct Port_ConfigType_s
 [!IF "$portstr2 = 3 and $GPIO_xbar_0_3 = 0"!]#define  PORT_GPIO_BANK_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'BANK_INTR_'))"!]_ACTIVE             /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ELSE!][!ENDIF!][!//
 [!IF "$portstr2 = 0"!][!VAR "GPIO_xbar_0_0"="$GPIO_xbar_0_0+1"!] [!ELSEIF "$portstr2 = 1"!] [!VAR "GPIO_xbar_0_1"="$GPIO_xbar_0_1+1"!] [!ELSEIF "$portstr2 = 2"!] [!VAR "GPIO_xbar_0_2"="$GPIO_xbar_0_2+1"!] [!ELSEIF "$portstr2 = 3"!] [!VAR "GPIO_xbar_0_3"="$GPIO_xbar_0_3+1"!] [!ELSE!] [!ENDIF!][!//
 [!ELSE!][!//
-[!IF "$portstr2 = 0 and $GPIO_xbar_0_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//	
+[!IF "$portstr2 = 0 and $GPIO_xbar_0_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 1 and $GPIO_xbar_0_1 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 2 and $GPIO_xbar_0_2 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 3 and $GPIO_xbar_0_3 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
@@ -925,7 +925,7 @@ typedef struct Port_ConfigType_s
 [!IF "$portstr2 = 3 and $GPIO_xbar_1_3 = 0"!]#define  PORT_GPIO_BANK_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'BANK_INTR_'))"!]_ACTIVE             /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ELSE!][!ENDIF!][!//
 [!IF "$portstr2 = 0"!][!VAR "GPIO_xbar_1_0"="$GPIO_xbar_1_0+1"!] [!ELSEIF "$portstr2 = 1"!] [!VAR "GPIO_xbar_1_1"="$GPIO_xbar_1_1+1"!] [!ELSEIF "$portstr2 = 2"!] [!VAR "GPIO_xbar_1_2"="$GPIO_xbar_1_2+1"!] [!ELSEIF "$portstr2 = 3"!] [!VAR "GPIO_xbar_1_3"="$GPIO_xbar_1_3+1"!] [!ELSE!] [!ENDIF!][!//
 [!ELSE!][!//
-[!IF "$portstr2 = 0 and $GPIO_xbar_1_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//	
+[!IF "$portstr2 = 0 and $GPIO_xbar_1_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 1 and $GPIO_xbar_1_1 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 2 and $GPIO_xbar_1_2 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 3 and $GPIO_xbar_1_3 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
@@ -942,7 +942,7 @@ typedef struct Port_ConfigType_s
 [!IF "$portstr2 = 3 and $GPIO_xbar_2_3 = 0"!]#define  PORT_GPIO_BANK_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'BANK_INTR_'))"!]_ACTIVE             /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ELSE!][!ENDIF!][!//
 [!IF "$portstr2 = 0"!][!VAR "GPIO_xbar_2_0"="$GPIO_xbar_2_0+1"!] [!ELSEIF "$portstr2 = 1"!] [!VAR "GPIO_xbar_2_1"="$GPIO_xbar_2_1+1"!] [!ELSEIF "$portstr2 = 2"!] [!VAR "GPIO_xbar_2_2"="$GPIO_xbar_2_2+1"!] [!ELSEIF "$portstr2 = 3"!] [!VAR "GPIO_xbar_2_3"="$GPIO_xbar_2_3+1"!] [!ELSE!] [!ENDIF!][!//
 [!ELSE!][!//
-[!IF "$portstr2 = 0 and $GPIO_xbar_2_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//	
+[!IF "$portstr2 = 0 and $GPIO_xbar_2_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 1 and $GPIO_xbar_2_1 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 2 and $GPIO_xbar_2_2 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 3 and $GPIO_xbar_2_3 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
@@ -959,7 +959,7 @@ typedef struct Port_ConfigType_s
 [!IF "$portstr2 = 3 and $GPIO_xbar_3_3 = 0"!]#define  PORT_GPIO_BANK_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'BANK_INTR_'))"!]_ACTIVE             /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ELSE!][!ENDIF!][!//
 [!IF "$portstr2 = 0"!][!VAR "GPIO_xbar_3_0"="$GPIO_xbar_3_0+1"!] [!ELSEIF "$portstr2 = 1"!] [!VAR "GPIO_xbar_3_1"="$GPIO_xbar_3_1+1"!] [!ELSEIF "$portstr2 = 2"!] [!VAR "GPIO_xbar_3_2"="$GPIO_xbar_3_2+1"!] [!ELSEIF "$portstr2 = 3"!] [!VAR "GPIO_xbar_3_3"="$GPIO_xbar_3_3+1"!] [!ELSE!] [!ENDIF!][!//
 [!ELSE!][!//
-[!IF "$portstr2 = 0 and $GPIO_xbar_3_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//	
+[!IF "$portstr2 = 0 and $GPIO_xbar_3_0 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 1 and $GPIO_xbar_3_1 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 2 and $GPIO_xbar_3_2 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
 [!IF "$portstr2 = 3 and $GPIO_xbar_3_3 = 0"!]#define  PORT_GPIO_CH_[!"text:toupper(substring-after($McuGpioIntrXbarVerify,'MCU_GPIO_'))"!]_ACTIVE				 /** [!"@name"!], [!"text:toupper(substring-after($McuGpioXbarOutMapVerify,'MCU_GPIO_INT_XBAR_'))"!] R5F-Core-[!"text:toupper((substring-before($portstr1,'_')))"!] **/[!ENDIF!][!//
@@ -976,7 +976,7 @@ typedef struct Port_ConfigType_s
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 [!LOOP "as:modconf('Port')[1]/PortConfigSet/*"!]
-extern const struct Port_ConfigType_s [!"@name"!];
+extern const struct Port_ConfigType_s Port_Config;
 [!ENDLOOP!]
 
 /**********************************************************************************************************************

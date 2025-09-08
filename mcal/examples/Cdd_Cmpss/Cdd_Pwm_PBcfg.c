@@ -605,50 +605,49 @@ static CONST(struct Cdd_Pwm_HrPwmType_s, CDD_PWM_CONFIG_DATA) Cdd_Pwm_HrPwmRef[C
 
 /* Cdd_Pwm Channel Configuration parameters */
 CONST(Cdd_Pwm_ConfigType, CDD_PWM_CONFIG_DATA)
-CddPwmConfigSet_0 = {
-    .chCfg = {[0U] =
-                  {
-                      .notificationHandler    = (Cdd_Pwm_NotifyFuncType)Cdd_Pwm_Notification_Channel,
-                      .notificationTzHandler  = (Cdd_Pwm_TzNotifyFuncType)Cdd_Pwm_Tz_Notification_Channel,
-                      .baseaddr               = 0x50000000U,
-                      .channelID              = 0U,
-                      .channelHwID            = CDD_PWM_G0_CHANNEL_0,
-                      .outputCh               = CDD_PWM_OUTPUT_CH_A,
-                      .polarity               = CDD_PWM_HIGH,
-                      .channelTimerBase       = &Cdd_Pwm_TimerBaseRef[0U],
-                      .channelCounterCompare  = &Cdd_Pwm_CounterCompareRef[0U],
-                      .channelTimerBaseSync   = &Cdd_Pwm_TimerBaseSyncRef[0U],
-                      .channelActionQualifier = &Cdd_Pwm_ActionQualifierRef[0U],
-                      .channelEventTrigger    = &Cdd_Pwm_EventTriggerRef[0U],
-                      .channelAdcEventTrigger = &Cdd_Pwm_AdcEventTriggerRefSoc[0U],
-                      .channelTripZone        = &Cdd_Pwm_TripZoneRef[0U],
-                      .channelDigitalCompare  = &Cdd_Pwm_DigitalCompareRef[0U],
-                      .channelDeadBand        = &Cdd_Pwm_DeadBandRef[0U],
-                      .channelChopper         = &Cdd_Pwm_ChopperRef[0U],
-                      .channelHrPwm           = &Cdd_Pwm_HrPwmRef[0U],
-                  },
-              /* Not used in CMPSS application - initialized just to make the size same as what is used in
-                 pwm demo config */
-              [1U] = {
-                  .notificationHandler    = (Cdd_Pwm_NotifyFuncType)NULL_PTR,
-                  .notificationTzHandler  = (Cdd_Pwm_TzNotifyFuncType)NULL_PTR,
-                  .baseaddr               = 0x50001000U,
-                  .channelID              = 1U,
-                  .channelHwID            = CDD_PWM_G0_CHANNEL_1,
-                  .outputCh               = CDD_PWM_OUTPUT_CH_A,
-                  .polarity               = CDD_PWM_HIGH,
-                  .channelTimerBase       = &Cdd_Pwm_TimerBaseRef[0U],
-                  .channelCounterCompare  = &Cdd_Pwm_CounterCompareRef[0U],
-                  .channelTimerBaseSync   = &Cdd_Pwm_TimerBaseSyncRef[0U],
-                  .channelActionQualifier = &Cdd_Pwm_ActionQualifierRef[0U],
-                  .channelEventTrigger    = &Cdd_Pwm_EventTriggerRef[0U],
-                  .channelAdcEventTrigger = &Cdd_Pwm_AdcEventTriggerRefSoc[0U],
-                  .channelTripZone        = &Cdd_Pwm_TripZoneRef[0U],
-                  .channelDigitalCompare  = &Cdd_Pwm_DigitalCompareRef[0U],
-                  .channelDeadBand        = &Cdd_Pwm_DeadBandRef[0U],
-                  .channelChopper         = &Cdd_Pwm_ChopperRef[0U],
-                  .channelHrPwm           = &Cdd_Pwm_HrPwmRef[0U],
-              }}};
+Cdd_Pwm_Config = {.chCfg = {[0U] =
+                                {
+                                    .notificationHandler    = (Cdd_Pwm_NotifyFuncType)Cdd_Pwm_Notification_Channel,
+                                    .notificationTzHandler  = (Cdd_Pwm_TzNotifyFuncType)Cdd_Pwm_Tz_Notification_Channel,
+                                    .baseaddr               = 0x50000000U,
+                                    .channelID              = 0U,
+                                    .channelHwID            = CDD_PWM_G0_CHANNEL_0,
+                                    .outputCh               = CDD_PWM_OUTPUT_CH_A,
+                                    .polarity               = CDD_PWM_HIGH,
+                                    .channelTimerBase       = &Cdd_Pwm_TimerBaseRef[0U],
+                                    .channelCounterCompare  = &Cdd_Pwm_CounterCompareRef[0U],
+                                    .channelTimerBaseSync   = &Cdd_Pwm_TimerBaseSyncRef[0U],
+                                    .channelActionQualifier = &Cdd_Pwm_ActionQualifierRef[0U],
+                                    .channelEventTrigger    = &Cdd_Pwm_EventTriggerRef[0U],
+                                    .channelAdcEventTrigger = &Cdd_Pwm_AdcEventTriggerRefSoc[0U],
+                                    .channelTripZone        = &Cdd_Pwm_TripZoneRef[0U],
+                                    .channelDigitalCompare  = &Cdd_Pwm_DigitalCompareRef[0U],
+                                    .channelDeadBand        = &Cdd_Pwm_DeadBandRef[0U],
+                                    .channelChopper         = &Cdd_Pwm_ChopperRef[0U],
+                                    .channelHrPwm           = &Cdd_Pwm_HrPwmRef[0U],
+                                },
+                            /* Not used in CMPSS application - initialized just to make the size same as what is used in
+                               pwm demo config */
+                            [1U] = {
+                                .notificationHandler    = (Cdd_Pwm_NotifyFuncType)NULL_PTR,
+                                .notificationTzHandler  = (Cdd_Pwm_TzNotifyFuncType)NULL_PTR,
+                                .baseaddr               = 0x50001000U,
+                                .channelID              = 1U,
+                                .channelHwID            = CDD_PWM_G0_CHANNEL_1,
+                                .outputCh               = CDD_PWM_OUTPUT_CH_A,
+                                .polarity               = CDD_PWM_HIGH,
+                                .channelTimerBase       = &Cdd_Pwm_TimerBaseRef[0U],
+                                .channelCounterCompare  = &Cdd_Pwm_CounterCompareRef[0U],
+                                .channelTimerBaseSync   = &Cdd_Pwm_TimerBaseSyncRef[0U],
+                                .channelActionQualifier = &Cdd_Pwm_ActionQualifierRef[0U],
+                                .channelEventTrigger    = &Cdd_Pwm_EventTriggerRef[0U],
+                                .channelAdcEventTrigger = &Cdd_Pwm_AdcEventTriggerRefSoc[0U],
+                                .channelTripZone        = &Cdd_Pwm_TripZoneRef[0U],
+                                .channelDigitalCompare  = &Cdd_Pwm_DigitalCompareRef[0U],
+                                .channelDeadBand        = &Cdd_Pwm_DeadBandRef[0U],
+                                .channelChopper         = &Cdd_Pwm_ChopperRef[0U],
+                                .channelHrPwm           = &Cdd_Pwm_HrPwmRef[0U],
+                            }}};
 
 #ifdef __cplusplus
 }

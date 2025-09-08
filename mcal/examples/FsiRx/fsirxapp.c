@@ -115,7 +115,7 @@ volatile uint8 Cdd_Fsi_array_index = 0;
 /*                            Global Variables                                */
 /* ========================================================================== */
 #if (STD_OFF == MCU_NO_PLL)
-extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration;
+extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config;
 #endif
 
 CddFsiAppFxn_t CddFsiAppFxnTbl[] = {&Cdd_FsiRxApp_mainTest};
@@ -209,11 +209,11 @@ static void Cdd_FsiRxApp_mainTest(void)
     CddFsiRx_StatusType  rxstatus;
 
 #if (CDD_FSI_TX_VARIANT_POST_BUILD == STD_ON)
-    const Cdd_FsiTx_ConfigType *Cdd_FsiTx_ConfigPtr = &CddFsiTxConfigSet;
+    const Cdd_FsiTx_ConfigType *Cdd_FsiTx_ConfigPtr = &Cdd_FsiTx_Config;
     /*Cdd_FsiTx_ConfigPtr->hwUnitCfg->srcbuffer = &SrcPtr;*/
 #endif
 #if (CDD_FSI_RX_VARIANT_POST_BUILD == STD_ON)
-    const Cdd_FsiRx_ConfigType *Cdd_FsiRx_ConfigPtr = &CddFsiRxConfigSet;
+    const Cdd_FsiRx_ConfigType *Cdd_FsiRx_ConfigPtr = &Cdd_FsiRx_Config;
     Cdd_Fsi_rxbase = Cdd_FsiRx_ConfigPtr->hwUnitCfg[CDD_FSI_RX_HWUNIT_INSTANCE_IDX].baseAddr;
 #endif
 #if (STD_ON == CDD_FSI_TX_DMA_MODE)
@@ -270,8 +270,8 @@ static void Cdd_FsiRxApp_mainTest(void)
     }
     else
     {
-        if ((CddFsiTxConfigSet.hwUnitCfg->transmitMode == CDD_FSI_TX_INTERRUPT_MODE) &&
-            (CddFsiRxConfigSet.hwUnitCfg->receptionMode == CDD_FSI_RX_INTERRUPT_MODE))
+        if ((Cdd_FsiTx_Config.hwUnitCfg->transmitMode == CDD_FSI_TX_INTERRUPT_MODE) &&
+            (Cdd_FsiRx_Config.hwUnitCfg->receptionMode == CDD_FSI_RX_INTERRUPT_MODE))
         {
             Cdd_Fsi_isDataReceived = E_NOT_OK;
             Cdd_Fsi_isDataSent     = E_NOT_OK;

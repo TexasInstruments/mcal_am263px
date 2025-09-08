@@ -22,9 +22,9 @@
  *       Module:  Cdd_Pwm
  *    Generator:  EB Tresos
  *
- 
+
 *******************************************************************************************************************/
- 
+
 /**********************************************************************************************************************
     Project: pwm_am263
 	Date   : 2025-03-26 16:15:42
@@ -265,9 +265,9 @@ extern "C" {
 #define CDD_PWM_CHANNEL_ID(GroupNumber,Channel)         ((GroupNumber*CDD_PWM_MAX_CHANNELS_IN_EACH_GROUP)+Channel)
 
 /** \brief CDD_PWM Channel CddPwmConf_CddPwmChannel_CddPwmChannel_0 */
-#define CDD_PWM_G0_CHANNEL_0 (0U)   
+#define CDD_PWM_G0_CHANNEL_0 (0U)
 /** \brief CDD_PWM Channel CddPwmConf_CddPwmChannel_CddPwmChannel_1 */
-#define CDD_PWM_G0_CHANNEL_1 (1U)   
+#define CDD_PWM_G0_CHANNEL_1 (1U)
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
@@ -275,7 +275,7 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 /** \brief CDD_PWM Configuration structure declaration */
-extern const struct Cdd_Pwm_ConfigType_s CddPwmConfigSet_0;
+extern const struct Cdd_Pwm_ConfigType_s Cdd_Pwm_Config;
 
 
 

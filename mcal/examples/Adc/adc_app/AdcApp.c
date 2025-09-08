@@ -252,7 +252,7 @@ static void AdcApp_mainTest(AdcApp_Obj *appObj, const AdcApp_TestParams *testPrm
 #endif /* #if (ADC_ENABLE_START_STOP_GROUP_API == STD_ON) */
 
 #if (ADC_POLLING_MAINFUNCTION_API == STD_ON)
-            if (AdcConfigSet.groupCfg[grpIdx].groupDataAccessMode == ADC_GROUP_POLLING_ACCESS)
+            if (Adc_Config.groupCfg[grpIdx].groupDataAccessMode == ADC_GROUP_POLLING_ACCESS)
             {
                 status = Adc_GetGroupStatus(grpIdx);
 
@@ -293,7 +293,7 @@ static void AdcApp_mainTest(AdcApp_Obj *appObj, const AdcApp_TestParams *testPrm
             for (grpIdx = 0U; grpIdx < testPrms->adcConfig->maxGroup; grpIdx++)
             {
 #if (ADC_POLLING_MAINFUNCTION_API == STD_ON)
-                if (AdcConfigSet.groupCfg[grpIdx].groupDataAccessMode != ADC_GROUP_POLLING_ACCESS)
+                if (Adc_Config.groupCfg[grpIdx].groupDataAccessMode != ADC_GROUP_POLLING_ACCESS)
 #endif
                 {
                     if (gAdcAppGroupDone[grpIdx] == FALSE)

@@ -74,7 +74,7 @@ uint32        CddPwmTestCalperiod(uint32 inputfreq, uint32 dutyCycle);
 uint32        gTestPassed           = E_OK;
 uint32        Cdd_Pwm_App_NotifyCnt = 0U;
 
-extern const struct Adc_ConfigType_s AdcConfigSet;
+extern const struct Adc_ConfigType_s Adc_Config;
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
@@ -214,7 +214,7 @@ static uint32 Cdd_Pwm_App_mainTest(void)
     Cdd_Pwm_Init(NULL_PTR);
 #else
     AppUtils_printf(APP_NAME ": Variant - CDD_PWM PostBuild variant being used !!!\n\r");
-    Cdd_Pwm_Init(&CddPwmConfigSet_0);
+    Cdd_Pwm_Init(&Cdd_Pwm_Config);
 #endif
 
     AppUtils_delay(1000);
@@ -341,20 +341,20 @@ void Cdd_Pwm_Tz_Notification_Channel(uint16 Status1, uint16 Status2, uint16 Stat
 void AdcApp_Test(void)
 {
     Adc_StatusType status;
-    Adc_ConfigType CddPwmAdcConfigSet;
+    Adc_ConfigType CddPwmAdcConfig;
     uint16         Adc_AppBuffer[6U] = {0, 0, 0, 0, 0, 0};
     uint16         Adc_Group         = 0;
 
     /* Copy the Config Set of ADC */
-    memcpy(&CddPwmAdcConfigSet, &(AdcConfigSet), sizeof(Adc_ConfigType));
+    memcpy(&CddPwmAdcConfig, &(Adc_Config), sizeof(Adc_ConfigType));
 
     /* Change the ADC Trigger source to HW for Group 0 and POLLING. */
-    CddPwmAdcConfigSet.groupCfg[Adc_Group].triggSrc            = ADC_TRIGG_SRC_HW;
-    CddPwmAdcConfigSet.groupCfg[Adc_Group].hwTrigTimer         = ADC_TRIGGER_EPWM0_SOCA;
-    CddPwmAdcConfigSet.groupCfg[Adc_Group].groupDataAccessMode = ADC_GROUP_POLLING_ACCESS;
+    CddPwmAdcConfig.groupCfg[Adc_Group].triggSrc            = ADC_TRIGG_SRC_HW;
+    CddPwmAdcConfig.groupCfg[Adc_Group].hwTrigTimer         = ADC_TRIGGER_EPWM0_SOCA;
+    CddPwmAdcConfig.groupCfg[Adc_Group].groupDataAccessMode = ADC_GROUP_POLLING_ACCESS;
 
     /* Initialize ADC. */
-    Adc_Init(&CddPwmAdcConfigSet);
+    Adc_Init(&CddPwmAdcConfig);
     Adc_SetupResultBuffer(Adc_Group, Adc_AppBuffer);
     Adc_EnableGroupNotification(Adc_Group);
 

@@ -286,7 +286,7 @@ static void CddCmpss_appConfigCmpss(void)
 
 static void CddCmpss_appConfigPwm(void)
 {
-    Cdd_Pwm_Init(&CddPwmConfigSet_0);
+    Cdd_Pwm_Init(&Cdd_Pwm_Config);
 
     /* Clear all status */
     Cdd_Pwm_TzEventStatusClear(CMPSS_APP_PWM_CH_ID, CDD_PWM_TZ_STS_FLG_CBC, 0xFFFFU);

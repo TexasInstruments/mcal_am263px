@@ -214,12 +214,12 @@ typedef enum
     CAN_CONTROLLER_INSTANCE_MCAN0 = 0x0U,
     /** \brief MCAN1 Controller Instance */
     CAN_CONTROLLER_INSTANCE_MCAN1 = 0x1U
-    
+
 } Can_ControllerInstance;
 
 
 /** \brief CAN Configuration struct declaration */
-extern const struct Can_ConfigType_s CanConfigSet;
+extern const struct Can_ConfigType_s Can_Config;
 
 extern const struct Can_ControllerStruct_PC CanConfigSet_PC_CanController_0;
 

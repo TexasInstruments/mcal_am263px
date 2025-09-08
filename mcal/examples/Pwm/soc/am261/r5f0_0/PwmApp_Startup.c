@@ -39,7 +39,7 @@ volatile uint32 Pwm_App_NotifyCnt = 0;
 #endif
 
 #if (STD_OFF == MCU_NO_PLL)
-extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration;
+extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config;
 #endif
 
 volatile uint32 Pwm_NotifyRecvFlag              = 0xFFFF;
@@ -123,13 +123,13 @@ void Pwm_App_PlatformInit(void)
 #if (STD_ON == MCU_VARIANT_PRE_COMPILE)
     Mcu_Init((const Mcu_ConfigType *)NULL_PTR);
 #else
-    Mcu_Init(&McuModuleConfiguration);
+    Mcu_Init(&Mcu_Config);
 #endif /*(STD_ON == MCU_VARIANT_PRE_COMPILE)*/
 
 #if (STD_ON == PORT_PRE_COMPILE_VARIANT)
     Port_Init((const Port_ConfigType *)NULL_PTR);
 #else
-    Port_Init(&PortConfigSet_0);
+    Port_Init(&Port_Config);
 #endif /*#if (STD_ON == PORT_PRE_COMPILE_VARIANT)*/
 
     Enable_Uart();
@@ -141,7 +141,7 @@ void Example_Pwminit(void)
 {
     AppUtils_TimerInit();
     AppUtils_printf(APP_NAME ": Variant - Post Build being used !!!\n\r");
-    const Pwm_ConfigType *pCfgPtr = &PwmChannelConfigSet;
+    const Pwm_ConfigType *pCfgPtr = &Pwm_Config;
     Pwm_Init(pCfgPtr);
     AppUtils_delay(1000U);
 }
@@ -150,7 +150,7 @@ uint32 Example_PwmCalperiod(uint32 inputfreq)
 {
     uint32                period;
     uint32                clkSrc;
-    const Pwm_ConfigType *pConfgPtr = &PwmChannelConfigSet;
+    const Pwm_ConfigType *pConfgPtr = &Pwm_Config;
     /* 50% duty cycle */
     /* Counter Direction set is - UPDOWN Mode to generate a symmetric PWM
      * PRD = (TBCLK/PWM_FREQ) / 2

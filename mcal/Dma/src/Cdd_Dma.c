@@ -117,7 +117,7 @@ void Cdd_Dma_Init(Cdd_Dma_ConfigType *ConfigPtr)
 #if (STD_ON == CDD_DMA_PRE_COMPILE_VARIANT)
     if (NULL_PTR == CfgPtr)
     {
-        CfgPtr = (Cdd_Dma_ConfigType *)&CddDmaDriverHandler;
+        CfgPtr = (Cdd_Dma_ConfigType *)&Cdd_Dma_Config;
     }
 #endif
 

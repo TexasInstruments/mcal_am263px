@@ -620,7 +620,7 @@ typedef struct Mcu_ConfigType_s
     /** \brief ADC Configuration */
 	Mcu_AdcConfigPtrType     Mcu_AdcConfig;
 	#endif
-	
+
 } Mcu_ConfigType;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -730,7 +730,7 @@ void Mcu_GpioXbarConfig(void);
  *********************************************************************************************************************/
 
 /** \brief MCU Configuration struct declaration */
-extern const struct Mcu_ConfigType_s McuModuleConfiguration;
+extern const struct Mcu_ConfigType_s Mcu_Config;
 
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

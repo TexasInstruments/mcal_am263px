@@ -85,7 +85,7 @@
  * \addtogroup CDD_FSIRX FsiRx API GUIDE Header file
  * @{
  */
- 
+
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
@@ -141,7 +141,7 @@ extern "C" {
  *  \brief Pre Compile config macro name.
  */
 [!LOOP "as:modconf('Cdd_FsiRx')[1]/CddFsiRxConfigSet"!]
-#define CDD_FSI_RX_INIT_CONFIG_PC       [!"@name"!]
+#define CDD_FSI_RX_INIT_CONFIG_PC       Cdd_FsiRx_Config
 [!ENDLOOP!]
 [!ENDIF!]
 
@@ -294,7 +294,7 @@ extern "C" {
  */
 [!NOCODE!][!//
 [!IF "node:exists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs)"!][!//
-[!IF "not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN)) and not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR)) and not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR)) and not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR))"!] 
+[!IF "not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN)) and not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR)) and not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR)) and not(node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR))"!]
 [!WARNING "DEM enabled but no DEM error configured"!]
 [!ENDIF!]
 [!ENDIF!][!//
@@ -348,7 +348,7 @@ extern "C" {
 /* ========================================================================== */
 [!LOOP "as:modconf('Cdd_FsiRx')[1]/CddFsiRxConfigSet"!]
 /** \brief CDD FSI RX Configuration struct declaration */
-extern const struct Cdd_FsiRx_ConfigType_s [!"@name"!];
+extern const struct Cdd_FsiRx_ConfigType_s Cdd_FsiRx_Config;
 [!ENDLOOP!]
 
 #ifdef __cplusplus
@@ -445,7 +445,7 @@ extern const struct Cdd_FsiRx_ConfigType_s [!"@name"!];
 [!ENDNOCODE!][!//
 
 /**
-* @} 
+* @}
 */
 
 #endif  /* #ifndef CDD_FSI_RX_CFG_H_ */

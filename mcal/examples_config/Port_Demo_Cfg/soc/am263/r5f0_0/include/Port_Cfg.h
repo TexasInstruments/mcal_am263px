@@ -364,7 +364,7 @@ extern "C" {
  *  @{
  */
 #define PORT_MAX_MUXMODE (2U)
-/* @} */	
+/* @} */
 
 /** \brief Interrupt Error ID */
 #define PORT_INTR_ERROR_ID 			255U
@@ -394,23 +394,23 @@ extern "C" {
  *  @{
  */
 /** \brief Enable/Disable Port_SetPinDirection() */
-#define PORT_SET_PIN_DIRECTION_API       (STD_ON) 
+#define PORT_SET_PIN_DIRECTION_API       (STD_ON)
 /** \brief Enable/Disable Port_RefreshPinDirection() */
-#define PORT_REFRESH_PORT_DIRECTION_API  (STD_ON) 
+#define PORT_REFRESH_PORT_DIRECTION_API  (STD_ON)
 /** \brief Enable/Disable Port_GetVersionInfo() */
-#define PORT_VERSION_INFO_API            (STD_ON) 
+#define PORT_VERSION_INFO_API            (STD_ON)
 /** \brief Enable/Disable Port_SetPinMode() */
-#define PORT_SET_PIN_MODE_API            (STD_ON) 
+#define PORT_SET_PIN_MODE_API            (STD_ON)
 /** \brief Enable/Disable development error detection */
-#define PORT_DEV_ERROR_DETECT            (STD_ON) 
+#define PORT_DEV_ERROR_DETECT            (STD_ON)
 /** \brief Enable/Disable SAFETI Configuration register readback */
-#define PORT_SAFETI_API                      (STD_OFF) 
+#define PORT_SAFETI_API                      (STD_OFF)
 /** \brief enable/disable the use of Interrupt Functionality */
-#define PORT_ENABLE_INTR_API             (STD_ON) 
+#define PORT_ENABLE_INTR_API             (STD_ON)
 /** \brief enable/disable the use of Port_GetInterruptStatus API */
-#define PORT_GET_INTR_ST_API             (STD_ON) 
+#define PORT_GET_INTR_ST_API             (STD_ON)
 /** \brief enable/disable the use of Port_ClearInterruptStatus API */
-#define PORT_CLR_INTR_ST_API             (STD_ON) 
+#define PORT_CLR_INTR_ST_API             (STD_ON)
 /** \brief GPIO Ownership for R5F Cores */
 
 #define PORT_GPIO_BASE     0x52000000U
@@ -577,19 +577,19 @@ typedef enum
 {
 	/** \brief Set Pin for  GPIO Port AB mode */
     PORT_PIN_MODE_GPIOAB,
-    
+
     /** \brief Set Pin for GPIO Port CD mode */
     PORT_PIN_MODE_GPIOCD,
-    
+
     /** \brief Set Pin for  GPIO Port EF mode */
     PORT_PIN_MODE_GPIOEF,
-    
+
     /** \brief Set Pin for GPIO Port GH mode */
     PORT_PIN_MODE_GPIOGH,
-    
+
     /** \brief Set Pin for GPIO mode */
     PORT_PIN_MODE_GPIOI,
-    
+
     /** \brief Set Pin for MCAN0 (CAN FD) mode */
     PORT_PIN_MODE_MCAN0,
     /** \brief Set Pin for MCAN1 (CAN FD) mode */
@@ -598,7 +598,7 @@ typedef enum
     PORT_PIN_MODE_MCAN2,
     /** \brief Set Pin for MCAN3(CAN FD) mode */
     PORT_PIN_MODE_MCAN3,
-    
+
     /** \brief Set Pin for MIBSPI0 mode */
     PORT_PIN_MODE_SPI0,
     /** \brief Set Pin for MIBSPI1 mode */
@@ -609,14 +609,14 @@ typedef enum
     PORT_PIN_MODE_SPI3,
     /** \brief Set Pin for MIBSPI4 mode */
     PORT_PIN_MODE_SPI4,
-    
+
     /** \brief Set Pin for QSPI mode */
     PORT_PIN_MODE_QSPI0,
     /** \brief Set Pin for JTAG mode */
     PORT_PIN_MODE_JTAG,
     /** \brief Set Pin for TRACE mode */
     PORT_PIN_MODE_TRACE,
-    
+
     /** \brief Set Pin for I2C0 mode */
     PORT_PIN_MODE_I2C0,
     /** \brief Set Pin for I2C1 mode */
@@ -625,19 +625,19 @@ typedef enum
     PORT_PIN_MODE_I2C2,
     /** \brief Set Pin for I2C3 mode */
     PORT_PIN_MODE_I2C3,
-    
+
     /** \brief Set Pin for MII mode */
     PORT_PIN_MODE_MII,
     /** \brief Set Pin for RMII1 mode */
     PORT_PIN_MODE_RMII1,
     /** \brief Set Pin for RMII2 mode */
     PORT_PIN_MODE_RMII2,
-    
+
     /** \brief Set Pin for RGMII1 mode */
     PORT_PIN_MODE_RGMII1,
     /** \brief Set Pin for RGMII2 mode */
     PORT_PIN_MODE_RGMII2,
-    
+
     /** \brief Set Pin for MDIO mode */
     PORT_PIN_MODE_MDIO0,
     /** \brief Set Pin for CPTS0 mode */
@@ -678,61 +678,61 @@ typedef enum
     PORT_PIN_MODE_EPWM3,
     /** \brief Set Pin for EPWM1A mode */
     PORT_PIN_MODE_EPWM4,
-    /** \brief Set Pin for EPWM5A mode */ 
+    /** \brief Set Pin for EPWM5A mode */
     PORT_PIN_MODE_EPWM5,
-    /** \brief Set Pin for EPWM6A mode */ 
+    /** \brief Set Pin for EPWM6A mode */
     PORT_PIN_MODE_EPWM6,
-    /** \brief Set Pin for EPWM7A mode */ 
+    /** \brief Set Pin for EPWM7A mode */
     PORT_PIN_MODE_EPWM7,
-    /** \brief Set Pin for EPWM8A mode */ 
+    /** \brief Set Pin for EPWM8A mode */
     PORT_PIN_MODE_EPWM8,
-    /** \brief Set Pin for EPWM9A mode */ 
+    /** \brief Set Pin for EPWM9A mode */
     PORT_PIN_MODE_EPWM9,
-    /** \brief Set Pin for EPWM510. mode */ 
+    /** \brief Set Pin for EPWM510. mode */
     PORT_PIN_MODE_EPWM10,
-    /** \brief Set Pin for EPWM11A mode */ 
+    /** \brief Set Pin for EPWM11A mode */
     PORT_PIN_MODE_EPWM11,
-    /** \brief Set Pin for EPWM12A mode */ 
+    /** \brief Set Pin for EPWM12A mode */
     PORT_PIN_MODE_EPWM12,
-    /** \brief Set Pin for EPWM13A mode */ 
+    /** \brief Set Pin for EPWM13A mode */
     PORT_PIN_MODE_EPWM13,
-    /** \brief Set Pin for EPWM14A mode */ 
+    /** \brief Set Pin for EPWM14A mode */
     PORT_PIN_MODE_EPWM14,
-    /** \brief Set Pin for EPWM15A mode */ 
+    /** \brief Set Pin for EPWM15A mode */
     PORT_PIN_MODE_EPWM15,
-    /** \brief Set Pin for EPWM16A mode */ 
+    /** \brief Set Pin for EPWM16A mode */
     PORT_PIN_MODE_EPWM16,
-    /** \brief Set Pin for EPWM17A mode */ 
+    /** \brief Set Pin for EPWM17A mode */
     PORT_PIN_MODE_EPWM17,
-    /** \brief Set Pin for EPWM18A mode */ 
+    /** \brief Set Pin for EPWM18A mode */
     PORT_PIN_MODE_EPWM18,
-    /** \brief Set Pin for EPWM19A mode */ 
+    /** \brief Set Pin for EPWM19A mode */
     PORT_PIN_MODE_EPWM19,
-    /** \brief Set Pin for EPWM20A mode */ 
+    /** \brief Set Pin for EPWM20A mode */
     PORT_PIN_MODE_EPWM20,
-    /** \brief Set Pin for EPWM21A mode */ 
+    /** \brief Set Pin for EPWM21A mode */
     PORT_PIN_MODE_EPWM21,
-    /** \brief Set Pin for EPW22A mode */ 
+    /** \brief Set Pin for EPW22A mode */
     PORT_PIN_MODE_EPWM22,
-    /** \brief Set Pin for EPWM23A mode */ 
+    /** \brief Set Pin for EPWM23A mode */
     PORT_PIN_MODE_EPWM23,
-    /** \brief Set Pin for EPWM24A mode */ 
+    /** \brief Set Pin for EPWM24A mode */
     PORT_PIN_MODE_EPWM24,
-    /** \brief Set Pin for EPWM25A mode */ 
+    /** \brief Set Pin for EPWM25A mode */
     PORT_PIN_MODE_EPWM25,
-    /** \brief Set Pin for EPWM26A mode */ 
+    /** \brief Set Pin for EPWM26A mode */
     PORT_PIN_MODE_EPWM26,
-    /** \brief Set Pin for EPWM27A mode */ 
+    /** \brief Set Pin for EPWM27A mode */
     PORT_PIN_MODE_EPWM27,
-    /** \brief Set Pin for EPWM28A mode */ 
+    /** \brief Set Pin for EPWM28A mode */
     PORT_PIN_MODE_EPWM28,
-    /** \brief Set Pin for EPWM29A mode */ 
+    /** \brief Set Pin for EPWM29A mode */
     PORT_PIN_MODE_EPWM29,
-    /** \brief Set Pin for EPWM30A mode */ 
+    /** \brief Set Pin for EPWM30A mode */
     PORT_PIN_MODE_EPWM30,
-    /** \brief Set Pin for EPWM31A mode */ 
+    /** \brief Set Pin for EPWM31A mode */
     PORT_PIN_MODE_EPWM31,
-    /** \brief Set Pin for XBAR mode */ 
+    /** \brief Set Pin for XBAR mode */
     PORT_PIN_MODE_XBAROUT,
     /** \brief Set Pin for PRU0 mode */
     PORT_PIN_MODE_PRU0_GIO,
@@ -792,20 +792,20 @@ typedef enum
 	PORT_GPIO_BANK_0 = 0,
   	/** \brief Bank B */
 	PORT_GPIO_BANK_1 = 1,
-    /** \brief Bank C */	
+    /** \brief Bank C */
 	PORT_GPIO_BANK_2 = 2,
-    /** \brief Bank D */	
-	PORT_GPIO_BANK_3 = 3,	
+    /** \brief Bank D */
+	PORT_GPIO_BANK_3 = 3,
 	/** \brief Bank E */
-	PORT_GPIO_BANK_4 = 4,	
+	PORT_GPIO_BANK_4 = 4,
 	/** \brief Bank F */
 	PORT_GPIO_BANK_5 = 5,
-    /** \brief Bank G */	
-	PORT_GPIO_BANK_6 = 6,	
+    /** \brief Bank G */
+	PORT_GPIO_BANK_6 = 6,
 	/** \brief Bank H */
-	PORT_GPIO_BANK_7 = 7,	
-	/** \brief Bank I */	
-	PORT_GPIO_BANK_8 = 8,	
+	PORT_GPIO_BANK_7 = 7,
+	/** \brief Bank I */
+	PORT_GPIO_BANK_8 = 8,
 }Port_GpioBank;
 
 /**
@@ -877,7 +877,7 @@ typedef enum
     PORT_GPIO_CH_60 = 60,
     PORT_GPIO_CH_61 = 61,
     PORT_GPIO_CH_62 = 62,
-    PORT_GPIO_CH_63 = 63,		
+    PORT_GPIO_CH_63 = 63,
     PORT_GPIO_CH_64 = 64,	/* Bank E */
     PORT_GPIO_CH_65 = 65,
     PORT_GPIO_CH_66 = 66,
@@ -914,7 +914,7 @@ typedef enum
     PORT_GPIO_CH_97 = 97,
     PORT_GPIO_CH_98 = 98,
     PORT_GPIO_CH_99 = 99,
-    PORT_GPIO_CH_100 = 100,		
+    PORT_GPIO_CH_100 = 100,
     PORT_GPIO_CH_101 = 101,
     PORT_GPIO_CH_102 = 102,
     PORT_GPIO_CH_103 = 103,
@@ -952,11 +952,11 @@ typedef enum
     PORT_GPIO_CH_135 = 135,
     PORT_GPIO_CH_136 = 136,
     PORT_GPIO_CH_137 = 137,
-    PORT_GPIO_CH_138 = 138,	
+    PORT_GPIO_CH_138 = 138,
 }Port_GpioChannel;
 
 /**
- *  \brief GPIO Pin Edge trigger intruppt selection 
+ *  \brief GPIO Pin Edge trigger intruppt selection
  */
 typedef enum
 {
@@ -975,7 +975,7 @@ typedef enum
 } Port_IntrType;
 
 /**
- *  \brief  Notification callback function pointer 
+ *  \brief  Notification callback function pointer
  *
  *  PortBankNum --> GPIO bank numbers[A(0) to I(8)] , If configured as bank interrupt else value PORT_INTR_ERROR_ID
  *
@@ -989,7 +989,7 @@ typedef void (*Port_IsrNotificationType)(uint8 PortBankNum, uint8 PortBankChNum,
 typedef struct
 {
     volatile uint8 IntrIdxNum[ PORT_INTR_BUF_SIZE ];
-	
+
 } Port_IntrStatus;
 
 /**
@@ -1047,21 +1047,21 @@ typedef struct
     /** \brief  Pin signal name.Just for information. Not used internally.Can be NULL
     **/
     const sint8             *Port_PinSignalName;
-    
+
 	/** \brief Pin name.Just for information. Not used internally.Can be NULL */
     const sint8             *Port_PinName;
-    
+
     /** \brief  HSMASTER bit value **/
     boolean                 Port_PinHSmasterEnable;
-    
+
     /** \brief  HSMODE bit value **/
     boolean                 Port_PinHSmodeEnable;
-    
+
     /** \brief  select value for choosing inverted version of PAD input for chip**/
     Port_InputInversion     Port_InversionSelect;
-    
+
     /** \brief  select value for choosing input qualifer type for PAD. **/
-    Port_InputQualType      Port_QualifierTypeSelect;  
+    Port_InputQualType      Port_QualifierTypeSelect;
 } Port_PinConfigType;
 
 
@@ -1078,7 +1078,7 @@ typedef struct
     Port_IntrType			   Port_PinSelectInterruptType;
 	/** \brief  ISR callback function pointer*/
     Port_IsrNotificationType   Port_DioInterruptNotification;
-	
+
 } Port_DioRegConfigType;
 
 
@@ -1099,23 +1099,23 @@ typedef struct Port_ConfigType_s
     uint32 NumberOfGPIORegs;
     /** \brief  DIO config structure */
     P2CONST(Port_DioRegConfigType, AUTOMATIC, PORT_PBCFG) DioConfig_pt;
-	
+
 } Port_ConfigType;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 /**
- *  \GPIO XBAR out pins mapping 
+ *  \GPIO XBAR out pins mapping
  *   Below macros stores inforamtion about xbarout Intr. pin configuration which is done in MCU Driver.
  *  @{
- */            
-#define  PORT_GPIO_BANK_1_ACTIVE             /** PortDioConfig_0, VIM_MODULE0_0 R5F-Core-0 **/ 
+ */
+#define  PORT_GPIO_BANK_1_ACTIVE             /** PortDioConfig_0, VIM_MODULE0_0 R5F-Core-0 **/
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
 /**********************************************************************************************************************
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 
-extern const struct Port_ConfigType_s PortConfigSet_0;
+extern const struct Port_ConfigType_s Port_Config;
 
 
 /**********************************************************************************************************************

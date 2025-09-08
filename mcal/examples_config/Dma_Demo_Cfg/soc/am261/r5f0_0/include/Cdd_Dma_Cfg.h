@@ -219,7 +219,7 @@ typedef enum
 #define CddDmaConf_CddDmaDriverHandler_0_Fls  27
 
 /** \brief Cdd Configuration struct declaration */
-extern CONST(Cdd_Dma_ConfigType, CDD_DMA_CFG) CddDmaDriverHandler;
+extern CONST(Cdd_Dma_ConfigType, CDD_DMA_CFG) Cdd_Dma_Config;
   
 extern volatile uint8 Cdd_Dma_handleAlreadyInUse[CDD_DMA_MAX_HANDLER];
 

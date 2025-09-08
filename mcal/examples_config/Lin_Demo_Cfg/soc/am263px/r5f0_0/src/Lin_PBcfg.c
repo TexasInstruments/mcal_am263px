@@ -20,7 +20,7 @@
  *  Generator:  Elektrobit Tresos
  *
  *  Description:  This file contains generated post build configuration data
- *                                                                     
+ *
  *********************************************************************************************************************/
 
 /*********************************************************************************************************************
@@ -32,7 +32,7 @@
 /*********************************************************************************************************************
  * Other Header Files
  *********************************************************************************************************************/
- 
+
 /*********************************************************************************************************************
  * Version Check (if required)
  *********************************************************************************************************************/
@@ -66,7 +66,7 @@
  *********************************************************************************************************************/
 #define  LIN_START_SEC_CONFIG_DATA
 #include "Lin_MemMap.h"
-CONST(Lin_ConfigType, LIN_CFG) LinGlobalConfig =
+CONST(Lin_ConfigType, LIN_CFG) Lin_Config =
 {
    .linChannelCfg[0] =
    {
@@ -76,14 +76,14 @@ CONST(Lin_ConfigType, LIN_CFG) LinGlobalConfig =
          .IntrLineNum = LIN_INTERRUPT_LINE_NUM_0,
          .LoopbackMode = LIN_LOOPBACK_DISABLED
       },
-      .linBaudConfig = 
+      .linBaudConfig =
       {
          .Prescalar = 155U,
          .FractionalDivider = 4U
       },
       .linWakeupSource = (LIN_WAKEUP_SOURCE_0),
-      .linChannelWakeupSupport =TRUE   
-   }   
+      .linChannelWakeupSupport =TRUE
+   }
 };
 #define  LIN_STOP_SEC_CONFIG_DATA
 #include "Lin_MemMap.h"

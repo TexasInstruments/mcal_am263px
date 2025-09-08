@@ -71,7 +71,7 @@
  * Requirements : AUTORADAR_MCAL-66, AUTORADAR_MCAL-65
 */
 
-CONST(Cdd_IpcConfigType, CDD_PBCFG) CddIpcDriver_0 =
+CONST(Cdd_IpcConfigType, CDD_PBCFG) Cdd_Ipc_Config =
 {
     .Cdd_Ipc_SelfCoreId = CDD_IPC_R5FSS1_0_ID,
     .Cdd_Ipc_numCores = 2,
@@ -94,7 +94,7 @@ CONST(Cdd_IpcConfigType, CDD_PBCFG) CddIpcDriver_0 =
     .Cdd_Ipc_CrcHookFunc = NULL
 };
 
-P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr = &CddIpcDriver_0;
+P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr = &Cdd_Ipc_Config;
 
 #define  CDD_IPC_STOP_SEC_CONFIG_DATA
 #include "Cdd_Ipc_MemMap.h"

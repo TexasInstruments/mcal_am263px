@@ -1033,7 +1033,7 @@ FUNC(void, PWM_CODE) Pwm_SystemInit(P2CONST(Pwm_ConfigType, AUTOMATIC, PWM_PBCFG
     {
         for (chIdx = 0U; chIdx < PWM_MAX_NUM_CHANNELS; chIdx++)
         {
-            if (chnum == PwmChannelConfigSet_PC.chCfg[chIdx].channelHwId)
+            if (chnum == Pwm_Config_PC.chCfg[chIdx].channelHwId)
             {
                 Pwm_IsrIndex[chnum] = (uint16)chIdx;
                 break;
@@ -1049,7 +1049,7 @@ FUNC(void, PWM_CODE) Pwm_SystemInit(P2CONST(Pwm_ConfigType, AUTOMATIC, PWM_PBCFG
     for (chnum = 0U; chnum < PWM_MAX_NUM_CHANNELS; chnum++)
     {
 #if (STD_ON == PWM_DEV_ERROR_DETECT)
-        if (((&PwmChannelConfigSet_PC)->chCfg[chnum].channelId) >= (uint32)PWM_HW_MAX_NUM_CHANNELS)
+        if (((&Pwm_Config_PC)->chCfg[chnum].channelId) >= (uint32)PWM_HW_MAX_NUM_CHANNELS)
         {
             /*Invalid channel */
             (void)Pwm_reportDetError(PWM_SID_INIT, PWM_E_PARAM_CHANNEL);
@@ -1057,12 +1057,12 @@ FUNC(void, PWM_CODE) Pwm_SystemInit(P2CONST(Pwm_ConfigType, AUTOMATIC, PWM_PBCFG
 #endif
         for (chIdx = 0U; chIdx < PWM_MAX_NUM_CHANNELS; chIdx++)
         {
-            if (chIdx == ((&PwmChannelConfigSet_PC)->chCfg[chnum].channelId))
+            if (chIdx == ((&Pwm_Config_PC)->chCfg[chnum].channelId))
             {
                 /* Reset Channel object */
                 Pwm_ResetChObj(&Pwm_ChObj[chIdx]);
                 /* Copy the configuration */
-                Pwm_CopyConfig(&Pwm_ChObj[chIdx], &ConfigPtr->chCfg[chnum], &PwmChannelConfigSet_PC.chCfg[chnum]);
+                Pwm_CopyConfig(&Pwm_ChObj[chIdx], &ConfigPtr->chCfg[chnum], &Pwm_Config_PC.chCfg[chnum]);
                 /*Set interrupt flag as per polarity : this is toggled in the
                 ISR for supporting notifications*/
                 Pwm_Intrflag[chIdx] = Pwm_ChObj[chIdx].chCfg.polarity;

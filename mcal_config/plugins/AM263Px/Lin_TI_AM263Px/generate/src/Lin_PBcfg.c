@@ -20,7 +20,7 @@
  *  Generator:  Elektrobit Tresos
  *
  *  Description:  This file contains generated post build configuration data
- *                                                                     
+ *
  *********************************************************************************************************************/
 
 /*********************************************************************************************************************
@@ -32,7 +32,7 @@
 /*********************************************************************************************************************
  * Other Header Files
  *********************************************************************************************************************/
- 
+
 /*********************************************************************************************************************
  * Version Check (if required)
  *********************************************************************************************************************/
@@ -68,7 +68,7 @@
 [!IF "(as:modconf('Lin')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPostBuild')"!][!VAR "LinChannelIdIndx" = "0"!]
 #define  LIN_START_SEC_CONFIG_DATA
 #include "Lin_MemMap.h"
-CONST(Lin_ConfigType, LIN_CFG) LinGlobalConfig =
+CONST(Lin_ConfigType, LIN_CFG) Lin_Config =
 {
    [!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!][!IF "(num:i($LinChannelIdIndx)) != LinChannelId"!][!ERROR "Lin Channel Id should start with 0, increment by 1 and continue without any gaps"!][!ENDIF!]
    .linChannelCfg[[!"@index"!]] =
@@ -79,16 +79,16 @@ CONST(Lin_ConfigType, LIN_CFG) LinGlobalConfig =
          .IntrLineNum = [!"LinInterruptLineSelect"!],
          .LoopbackMode = [!"LinLoopbackMode"!]
       },
-      .linBaudConfig = 
+      .linBaudConfig =
       {
          .Prescalar = [!"LinBaudrateConfig/LinChannelPrescalar"!]U,
          .FractionalDivider = [!"LinBaudrateConfig/LinChannelFractionalDivider"!]U
       },
       .linWakeupSource = ([!IF "not(node:empty(LinChannelEcuMWakeupSource))"!]LIN_WAKEUP_SOURCE_[!"LinChannelId"!][!ELSE!]0[!ENDIF!]),
       .linChannelWakeupSupport = [!IF "LinChannelWakeupSupport='true'"!]TRUE[!ELSE!]FALSE[!ENDIF!]
-   
+
    }[!IF "not(node:islast())"!],[!CR!][!ELSE!][!ENDIF!][!VAR "LinChannelIdIndx" = "$LinChannelIdIndx+1"!][!ENDLOOP!]
-   
+
 };
 #define  LIN_STOP_SEC_CONFIG_DATA
 #include "Lin_MemMap.h"

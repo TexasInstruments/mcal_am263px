@@ -94,8 +94,8 @@ static sint32 Spi_dmaChInit_status(Spi_HwUnitObjType *hwUnitObj, Spi_TxRxMode tx
     boolean isEdmaInterruptEnabled;
 
     /* Can be checked if interrupt is enabled */
-    if ((CddDmaDriverHandler.CddDmaDriverHandler[hwUnitObj->dmaTxHandlerID]->edmaConfig.intrEnable == TRUE) &&
-        (CddDmaDriverHandler.CddDmaDriverHandler[hwUnitObj->dmaRxHandlerID]->edmaConfig.intrEnable == TRUE))
+    if ((Cdd_Dma_Config.CddDmaDriverHandler[hwUnitObj->dmaTxHandlerID]->edmaConfig.intrEnable == TRUE) &&
+        (Cdd_Dma_Config.CddDmaDriverHandler[hwUnitObj->dmaRxHandlerID]->edmaConfig.intrEnable == TRUE))
     {
         isEdmaInterruptEnabled = TRUE;
     }

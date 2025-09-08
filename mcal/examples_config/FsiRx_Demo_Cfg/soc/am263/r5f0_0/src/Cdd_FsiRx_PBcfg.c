@@ -105,7 +105,7 @@ extern void Cdd_FsiRxApp_PingReceivedNotification(Cdd_FsiRx_HWUnitType hwUnitId)
 extern void Cdd_FsiRxApp_dataReceivedNotification(Cdd_FsiRx_HWUnitType hwUnitId);
 
 /* Create runtime configurations. */
-CONST(struct Cdd_FsiRx_ConfigType_s, CDD_FSI_RX_CONFIG_DATA) CddFsiRxConfigSet =
+CONST(struct Cdd_FsiRx_ConfigType_s, CDD_FSI_RX_CONFIG_DATA) Cdd_FsiRx_Config =
 {
     .maxHwUnit = 1U,
     .cddFsiRxResetNotification = Cdd_FsiRxApp_ResetNotification,
@@ -124,7 +124,7 @@ CONST(struct Cdd_FsiRx_ConfigType_s, CDD_FSI_RX_CONFIG_DATA) CddFsiRxConfigSet =
             .pingWdgTriggerTimeout = 65500,
             .frameWdgTriggerTimeout = 60010,
         },
-    },      
+    },
 };
 
 

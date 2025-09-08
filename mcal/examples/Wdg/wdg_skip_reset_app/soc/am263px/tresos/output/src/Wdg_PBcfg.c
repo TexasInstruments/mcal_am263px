@@ -98,7 +98,7 @@ const uint32 Wdg_ResetChannelAddr[WDG_MAX_INSTANCES] =
 /*<WDG_CFG_CONFIG>*/
 
 
-CONST(Wdg_ConfigType, WDG_PBCFG) WdgSettingsConfig =
+CONST(Wdg_ConfigType, WDG_PBCFG) Wdg_Config =
 {
    .defaultMode = WDGIF_SLOW_MODE,
    .instanceId = 0,

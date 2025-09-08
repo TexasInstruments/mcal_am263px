@@ -140,13 +140,13 @@ extern "C" {
 #define ICU_DEV_ERROR_DETECT              ([!IF "as:modconf('Icu')[1]/IcuGeneral/IcuDevErrorDetect"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
 
 /** \brief Enable/disable ICU wakeup functionality API */
-#define ICU_WAKEUP_FUNCTIONALITY_API      ([!IF "as:modconf('Icu')[1]/IcuOptionalApis/IcuWakeupFunctionalityApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])     
+#define ICU_WAKEUP_FUNCTIONALITY_API      ([!IF "as:modconf('Icu')[1]/IcuOptionalApis/IcuWakeupFunctionalityApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
 
 /** \brief Enable/disable ICU wakeup functionality API */
-#define ICU_ENABLEWAKEUP_API      ([!IF "as:modconf('Icu')[1]/IcuOptionalApis/IcuEnableWakeupApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!]) 
+#define ICU_ENABLEWAKEUP_API      ([!IF "as:modconf('Icu')[1]/IcuOptionalApis/IcuEnableWakeupApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
 
 /** \brief Enable/disable ICU wakeup functionality API */
-#define ICU_DISABLEWAKEUP_API      ([!IF "as:modconf('Icu')[1]/IcuOptionalApis/IcuDisableWakeupApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!]) 
+#define ICU_DISABLEWAKEUP_API      ([!IF "as:modconf('Icu')[1]/IcuOptionalApis/IcuDisableWakeupApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
 
 /** \brief Enable/Disable Icu set mode API */
 #define ICU_SETMODE_API                   ([!IF "as:modconf('Icu')[1]/IcuOptionalApis/IcuSetModeApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
@@ -165,7 +165,7 @@ extern "C" {
  *  \brief Pre Compile config macro name.
  */
 [!LOOP "as:modconf('Icu')[1]/IcuConfigSet"!]
-#define ICU_INIT_CONFIG_PC       [!"@name"!]
+#define ICU_INIT_CONFIG_PC       Icu_Config
 [!ENDLOOP!]
 [!ENDIF!]
 
@@ -197,8 +197,8 @@ extern CONST(uint32, ICU_CONST)
 /* ========================================================================== */
 [!LOOP "as:modconf('Icu')[1]/IcuConfigSet"!]
 /** \brief ICU Configuration structure declaration */
-extern const struct Icu_ConfigType_PC_s [!"@name"!]_PC;
-extern const struct Icu_ConfigType_s [!"@name"!];
+extern const struct Icu_ConfigType_PC_s Icu_Config_PC;
+extern const struct Icu_ConfigType_s Icu_Config;
 [!ENDLOOP!]
 
 [!/*

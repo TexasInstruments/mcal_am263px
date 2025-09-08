@@ -141,7 +141,7 @@ extern "C" {
 [!ENDLOOP!][!//
 
 [!LOOP "as:modconf('Fls')[1]/FlsConfigSet"!][!//
-CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) [!"@name"!] =
+CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) Fls_Config =
 {
 [!WS "4"!].Fls_JobEndNotification = [!IF "not(node:empty(FlsJobEndNotification/*))"!][!"FlsJobEndNotification/*"!][!ELSE!]NULL_PTR[!ENDIF!],
 [!WS "4"!].Fls_JobErrorNotification = [!IF "not(node:empty(FlsJobErrorNotification/*))"!][!"FlsJobErrorNotification/*"!][!ELSE!]NULL_PTR[!ENDIF!],
@@ -173,10 +173,10 @@ CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) [!"@name"!] =
 
 /*******************************************************************************
  *  END OF FILE: Fls_Cfg.c
- ******************************************************************************/ 
+ ******************************************************************************/
 [!ELSE!][!//
 /*******************************************************************************
- *  The last generated configuration variant is not POST-BUILD variant. 
+ *  The last generated configuration variant is not POST-BUILD variant.
  *  Please refer Fls_PBcfg.c.
  ******************************************************************************/
 [!ENDIF!][!//

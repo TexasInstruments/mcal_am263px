@@ -69,10 +69,10 @@ bool                Timer_Done   = false;
 Wdg_App_TestParams *testPrms     = NULL_PTR;
 
 #if (STD_OFF == MCU_NO_PLL)
-extern CONST(Mcu_ConfigType, MCU_PBCFG) McuModuleConfiguration;
+extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config;
 #endif
 
-extern CONST(Gpt_ConfigType, GPT_PBCFG) Gpt_ChannelConfigSet_0;
+extern CONST(Gpt_ConfigType, GPT_PBCFG) Gpt_Config;
 
 #define WDGAPP_RTI_SYSCLK1_CLKSRCID (0)
 /* ========================================================================== */
@@ -256,11 +256,11 @@ void Wdg_App_wdgTest(const Wdg_App_TestParams *testPrms)
             break;
     }
     AppUtils_printf("Initializing channels\n\r");
-    RTI_Clock     = Gpt_ChannelConfigSet_0.ChannelConfig_pt[0].GptChannelClksrcRef;
-    preload       = Gpt_ChannelConfigSet_0.ChannelConfig_pt[0].GptChannelTickFrequency;
+    RTI_Clock     = Gpt_Config.ChannelConfig_pt[0].GptChannelClksrcRef;
+    preload       = Gpt_Config.ChannelConfig_pt[0].GptChannelTickFrequency;
     Gpt_Count     = (RTI_Clock * 1000 * testPrms->serviceInterval) / (preload + 1);
     Gpt_CountMode = (RTI_Clock * 1000 * testPrms->serviceIntervalMode) / (preload + 1);
-    Gpt_Init(&Gpt_ChannelConfigSet_0);
+    Gpt_Init(&Gpt_Config);
 #if (STD_ON == GPT_ENABLE_DISABLE_NOTIFICATION_API)
     Gpt_EnableNotification(ChannelId);
     Gpt_EnableNotification(ChannelIdMode);

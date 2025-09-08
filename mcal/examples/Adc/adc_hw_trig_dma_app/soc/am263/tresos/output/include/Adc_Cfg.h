@@ -182,8 +182,8 @@ extern "C" {
 
 /** \brief Alignment of ADC raw results in ADC result buffer
  *  (left/right alignment) */
-#define ADC_ALIGN_LEFT                  (0) 
-#define ADC_ALIGN_RIGHT                 (1) 
+#define ADC_ALIGN_LEFT                  (0)
+#define ADC_ALIGN_RIGHT                 (1)
 #define ADC_RESULT_ALIGNMENT            (ADC_ALIGN_RIGHT)
 
 
@@ -343,7 +343,7 @@ extern "C" {
 /* ========================================================================== */
 
 /** \brief ADC Configuration struct declaration */
-extern const struct Adc_ConfigType_s AdcConfigSet;
+extern const struct Adc_ConfigType_s Adc_Config;
 
 
 #ifdef __cplusplus

@@ -85,7 +85,7 @@ static void Wdg_appTest(void)
 {
     uint32                loopcnt;
     Std_ReturnType        retVal;
-    const Wdg_ConfigType *pWdgCfg = &WdgSettingsConfig;
+    const Wdg_ConfigType *pWdgCfg = &Wdg_Config;
 
     /* Trigger once in slow mode - we are safe to do from task context as window is 100% */
     Wdg_SetTriggerCondition(Wdg_appPreloadToMsec(pWdgCfg->slowModeCfg.preloadValue));
@@ -132,7 +132,7 @@ static void Wdg_appIsr(void)
 static void Wdg_appInit(void)
 {
     Std_VersionInfoType   versioninfo;
-    const Wdg_ConfigType *pWdgCfg = &WdgSettingsConfig;
+    const Wdg_ConfigType *pWdgCfg = &Wdg_Config;
 
     Wdg_appPlatformInit();
     Wdg_appInterruptConfig();

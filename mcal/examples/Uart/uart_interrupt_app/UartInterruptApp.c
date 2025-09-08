@@ -61,13 +61,13 @@ sint32 main(void)
 #if (STD_ON == MCU_VARIANT_PRE_COMPILE)
     Mcu_Init((const Mcu_ConfigType *)NULL_PTR);
 #else
-    Mcu_Init(&McuModuleConfiguration);
+    Mcu_Init(&Mcu_Config);
 #endif /*(STD_ON == MCU_VARIANT_PRE_COMPILE)*/
 
 #if (STD_ON == PORT_PRE_COMPILE_VARIANT)
     Port_Init((const Port_ConfigType *)NULL_PTR);
 #else
-    Port_Init(&PortConfigSet_0);
+    Port_Init(&Port_Config);
 #endif /*#if (STD_ON == PORT_PRE_COMPILE_VARIANT)*/
 
     /* Interrupt Configuration (Registering Interrupt to R5 core, ISR) */
@@ -77,7 +77,7 @@ sint32 main(void)
     Cdd_Dma_Init(NULL_PTR); /* DMA Initialization */
 #endif
 
-    Cdd_Uart_Init(&CddUartDriver_0); /* UART CDD Initialization */
+    Cdd_Uart_Init(&Cdd_Uart_Config); /* UART CDD Initialization */
 
     /* Channel select and buffer pointers for read-write */
     void *writeBuffer = &CddUart_Buffer;

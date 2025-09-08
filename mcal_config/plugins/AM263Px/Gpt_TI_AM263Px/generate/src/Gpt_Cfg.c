@@ -105,7 +105,7 @@ static CONST(Gpt_ChannelConfigType, GPT_CFG) [!"@name"!]_ChannelConfig[[!"$NumCh
 [!VAR "Index" = "0"!][!//
 [!LOOP "GptChannelConfiguration/*"!][!//
 [!WS "4"!][[!"num:i($Index)"!]] =
-[!WS "4"!]{	
+[!WS "4"!]{
 [!WS "8"!].ChannelId = (GPT_RTI_CHANNEL[!"string(num:i(GptChannelId) + 1)"!]),
 [!WS "8"!].ChannelMode = ([!CALL "ChModeTranslate","ref" = "GptChannelMode"!]),  /* Gpt Channel Mode */
 [!WS "8"!].CounterBlk = [!"GptCounterBlkId"!],
@@ -156,7 +156,7 @@ static CONST(Gpt_ChannelConfigType, GPT_CFG) [!"@name"!]_ChannelConfig[[!"$NumCh
 };
 
 /*<GPT_CONFIGURATION>*/
-CONST(Gpt_ConfigType, GPT_CFG) [!"@name"!] =
+CONST(Gpt_ConfigType, GPT_CFG) Gpt_Config =
 {
 [!WS "4"!][!"@name"!]_ChannelConfig,/*Pointer to Channel Configuration*/
 [!WS "4"!][!"num:i($NumChannels)"!]/*Number of Channels*/

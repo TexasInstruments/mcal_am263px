@@ -60,12 +60,12 @@ extern "C" {
 #include "Pwm_MemMap.h"
 
 [!MACRO "GetAddress", "ChannelNumber", "ChannelNumber2", "HWNumber"!][!//
-[!NOCODE!]    
+[!NOCODE!]
     [!VAR "BaseAddr" = "BaseAddr + 1342177280"!]
     [!VAR "Channeloffset" = "Channeloffset + 4096"!]
     [!VAR "HWunitOffset" = "HWunitOffset + 262144"!]
-    [!VAR "ChannelBase"  = "$Channeloffset*$ChannelNumber"!]  
-       
+    [!VAR "ChannelBase"  = "$Channeloffset*$ChannelNumber"!]
+
 
     [!IF "($HWNumber = 'PWM_CONTROLSS_G0')"!]
     [!VAR "HWunitBase"   = "$HWunitOffset*0"!]
@@ -74,18 +74,18 @@ extern "C" {
     [!IF "($HWNumber = 'PWM_CONTROLSS_G1')"!]
     [!VAR "HWunitBase"   = "$HWunitOffset*1"!]
     [!ENDIF!]
-    
-    
+
+
     [!IF "($HWNumber = 'PWM_CONTROLSS_G2')"!]
     [!VAR "HWunitBase"   = "$HWunitOffset*2"!]
     [!ENDIF!]
-    
-    
+
+
     [!IF "($HWNumber = 'PWM_CONTROLSS_G3')"!]
     [!VAR "HWunitBase"   = "$HWunitOffset*3"!]
     [!ENDIF!]
-    
-    [!CODE!][!"num:inttohex($BaseAddr+$ChannelBase+$HWunitBase)"!][!ENDCODE!] 
+
+    [!CODE!][!"num:inttohex($BaseAddr+$ChannelBase+$HWunitBase)"!][!ENDCODE!]
 [!ENDNOCODE!][!//
 [!ENDMACRO!][!//
 
@@ -109,7 +109,7 @@ extern "C" {
 /* Pwm Channel Configuration parameters */
 [!LOOP "as:modconf('Pwm')[1]/PwmChannelConfigSet"!]
 CONST(struct Pwm_ConfigType_PC_s, PWM_CONFIG_DATA)
-    [!"@name"!]_PC =
+    Pwm_Config_PC =
 {
     .chCfg =
     {
@@ -131,7 +131,7 @@ CONST(struct Pwm_ConfigType_PC_s, PWM_CONFIG_DATA)
 /* Pwm Channel Configuration parameters */
 [!LOOP "as:modconf('Pwm')[1]/PwmChannelConfigSet"!]
 CONST(struct Pwm_ConfigType_s, PWM_CONFIG_DATA)
-     [!"@name"!] =
+     Pwm_Config =
 {
     .chCfg =
     {
@@ -153,7 +153,7 @@ CONST(struct Pwm_ConfigType_s, PWM_CONFIG_DATA)
                   [!VAR "Ticks" = " (((num:i($Sys_ClkFreq) div num:i($Prescalers)) div (num:i(round(1 div num:f(PwmPeriodDefault))))) div 2)"!]
                   [!IF "(num:i($Ticks) > num:hextoint('0xffff'))"!][!ERROR "Configured Period is not possible or Invalid, please refer 'Configurable Interfaces' section in Pwm User guide for details!!"!][!ENDIF!]
                   [!IF "(num:f($Ticks) - floor(num:f($Ticks)))  > 0"!][!WARNING "Configured Period is not integer, please refer 'Configurable Interfaces' section in Pwm User guide for details"!][!ENDIF!]
-               
+
             [!ENDIF!]
             .hwPeriod = [!IF "PwmPeriodDefault = num:f('0')"!][!"num:i('0')"!][!ELSE!][!"num:i($Ticks)"!][!ENDIF!]U, /* Number of HW Unit ticks value which sets initial period */
             .polarity = [!"PwmPolarity"!],/* Polarity */
@@ -186,6 +186,6 @@ CONST(struct Pwm_ConfigType_s, PWM_CONFIG_DATA)
  *  END OF FILE: Pwm_Cfg.c                                                                                          *
  *********************************************************************************************************************/
 [!ELSE!]
-/* The last generated configuration variant is not 
+/* The last generated configuration variant is not
        POST-BUILD variant. Refer Pwm_Cfg.c */
 [!ENDIF!]

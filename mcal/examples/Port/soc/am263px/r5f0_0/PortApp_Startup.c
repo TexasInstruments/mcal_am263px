@@ -94,13 +94,13 @@ void Port_Example_PlatformInit()
 #if (STD_ON == MCU_VARIANT_PRE_COMPILE)
     Mcu_Init((const Mcu_ConfigType *)NULL_PTR);
 #else
-    Mcu_Init(&McuModuleConfiguration);
+    Mcu_Init(&Mcu_Config);
 #endif /*(STD_ON == MCU_VARIANT_PRE_COMPILE)*/
 
 #if (STD_ON == PORT_PRE_COMPILE_VARIANT)
     Port_Init((const Port_ConfigType *)NULL_PTR);
 #else
-    Port_Init(&PortConfigSet_0);
+    Port_Init(&Port_Config);
 #endif /*#if (STD_ON == PORT_PRE_COMPILE_VARIANT)*/
 
     Enable_Uart();

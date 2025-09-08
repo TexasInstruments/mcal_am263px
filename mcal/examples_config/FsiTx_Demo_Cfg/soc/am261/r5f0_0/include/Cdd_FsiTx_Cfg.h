@@ -190,7 +190,7 @@ extern "C" {
 
 
 /** \brief Maximum CDD FSI TX channels Configured. */
-#define CDD_FSI_TX_DMA_CHANNELS_CONFIGURED   ((uint8)63U) 
+#define CDD_FSI_TX_DMA_CHANNELS_CONFIGURED   ((uint8)63U)
 
 
 /**
@@ -262,7 +262,7 @@ extern "C" {
 /* ========================================================================== */
 
 /** \brief CDD FSI TX Configuration struct declaration */
-extern const struct Cdd_FsiTx_ConfigType_s CddFsiTxConfigSet;
+extern const struct Cdd_FsiTx_ConfigType_s Cdd_FsiTx_Config;
 
 
 #ifdef __cplusplus
@@ -271,7 +271,7 @@ extern const struct Cdd_FsiTx_ConfigType_s CddFsiTxConfigSet;
 
 
 /**
-* @} 
+* @}
 */
 
 #endif  /* #ifndef CDD_FSI_TX_CFG_H_ */

@@ -372,7 +372,7 @@ extern "C" {
 /* ========================================================================== */
 
 /** \brief ADC Configuration struct declaration */
-extern const struct Adc_ConfigType_s AdcConfigSet;
+extern const struct Adc_ConfigType_s Adc_Config;
 
 
 #ifdef __cplusplus

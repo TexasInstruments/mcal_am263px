@@ -187,13 +187,13 @@ static void Adc_appTest(void)
         /* For Group 0, 2 channels used in this example. So, srcBIdx and destBIdx shall be set to 2 to read after every
          * 2 bytes of result to move to the next consecutive result register. Also DMA update the destination buffer at
          * gAdcAppDmaBuffer[0][0] */
-        Adc_appDmaConfigure(&gAdcAppDmaBuffer[0U][0U], AdcConfigSet.groupCfg[0].numChannels * 2U, gAdcAppDmaChannel[0],
+        Adc_appDmaConfigure(&gAdcAppDmaBuffer[0U][0U], Adc_Config.groupCfg[0].numChannels * 2U, gAdcAppDmaChannel[0],
                             &dmaDataAddr[0], 2, 2);
 
         /* DMA configuration for ADC group 1 */
         /* For Group 1, Only 1 channel used. So, srcBIdx and destBIdx shall be set to 1
          * Also DMA update the destination buffer at gAdcAppDmaBuffer[1][0]*/
-        Adc_appDmaConfigure(&gAdcAppDmaBuffer[1U][0U], AdcConfigSet.groupCfg[1].numChannels * 2U, gAdcAppDmaChannel[1],
+        Adc_appDmaConfigure(&gAdcAppDmaBuffer[1U][0U], Adc_Config.groupCfg[1].numChannels * 2U, gAdcAppDmaChannel[1],
                             &dmaDataAddr[1], 1, 1);
 
         /* EPWM Configuration to start the time base counter and trigger ADC SOC*/
@@ -221,13 +221,13 @@ static void Adc_appInit(void)
     Std_VersionInfoType versioninfo;
 
     Adc_appPlatformInit();
-    Cdd_Pwm_Init(&CddPwmConfigSet_0);
+    Cdd_Pwm_Init(&Cdd_Pwm_Config);
     Cdd_Dma_Init(NULL_PTR);
-    Adc_Init(&AdcConfigSet);
+    Adc_Init(&Adc_Config);
     Adc_appInterruptConfig();
     for (uint8_t grpIdx = 0; grpIdx < ADC_MAX_GROUP; grpIdx++)
     {
-        Cdd_Dma_CbkRegister(gAdcAppDmaChannel[grpIdx], (void *)&AdcConfigSet.groupCfg[grpIdx].groupId,
+        Cdd_Dma_CbkRegister(gAdcAppDmaChannel[grpIdx], (void *)&Adc_Config.groupCfg[grpIdx].groupId,
                             &Adc_appDmaTransferCallback);
     }
 
@@ -271,15 +271,15 @@ static void Adc_appInit(void)
 
     /* Print ADC Config */
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " \r\n");
-    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " AdcConfigSet\r\n");
+    GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " Adc_Config\r\n");
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " ------------\r\n");
-    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  maxGroup     : %d\r\n", AdcConfigSet.maxGroup);
-    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  maxHwUnit    : %d\r\n", AdcConfigSet.maxHwUnit);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  maxGroup     : %d\r\n", Adc_Config.maxGroup);
+    GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  maxHwUnit    : %d\r\n", Adc_Config.maxHwUnit);
     for (uint8_t grpIdx = 0; grpIdx < ADC_MAX_GROUP; grpIdx++)
     {
         const Adc_GroupConfigType *grpCfg;
 
-        grpCfg = &AdcConfigSet.groupCfg[grpIdx];
+        grpCfg = &Adc_Config.groupCfg[grpIdx];
         GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  Group %d                       \r\n", grpIdx);
         GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "   groupId                   : %d\r\n", grpCfg->groupId);
         GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "   groupPriority             : %d\r\n", grpCfg->groupPriority);
@@ -312,7 +312,7 @@ static void Adc_appInit(void)
     {
         const Adc_HwUnitConfigType *hwUnitCfg;
 
-        hwUnitCfg = &AdcConfigSet.hwUnitCfg[hwUnitIdx];
+        hwUnitCfg = &Adc_Config.hwUnitCfg[hwUnitIdx];
         GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  HW Unit %d           \r\n", hwUnitIdx);
         GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "   hwUnitId    : %d\r\n", hwUnitCfg->hwUnitId);
         GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "   baseAddr    : 0x%08x\r\n", hwUnitCfg->baseAddr);
@@ -384,7 +384,7 @@ static void Adc_appPrintResult(uint32 loopcnt)
     {
         for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
         {
-            grpCfg = &AdcConfigSet.groupCfg[grpIdx];
+            grpCfg = &Adc_Config.groupCfg[grpIdx];
 
             /* Store the buffer data*/
             dmaDataAddr = Adc_GetReadResultBaseAddress(grpIdx);
@@ -402,7 +402,7 @@ static void Adc_appPrintResult(uint32 loopcnt)
         AppUtils_delay(100); /* Capture log every 100ms */
     }
 
-    hwUnitCfg = &AdcConfigSet.hwUnitCfg[grpCfg->hwUnitId];
+    hwUnitCfg = &Adc_Config.hwUnitCfg[grpCfg->hwUnitId];
 
     GT_2trace(ADC_APP_TRACE_MASK, GT_INFO, " HW Unit %d, Base 0x%08X:\r\n", hwUnitCfg->hwUnitId, hwUnitCfg->baseAddr);
     GT_0trace(ADC_APP_TRACE_MASK, GT_INFO, " -------------------------\r\n");
@@ -415,7 +415,7 @@ static void Adc_appPrintResult(uint32 loopcnt)
 
         for (uint32 grpIdx = 0U; grpIdx < ADC_MAX_GROUP; grpIdx++)
         {
-            grpCfg = &AdcConfigSet.groupCfg[grpIdx];
+            grpCfg = &Adc_Config.groupCfg[grpIdx];
             GT_1trace(ADC_APP_TRACE_MASK, GT_INFO, "  ADC Group %d\r\n", grpIdx);
 
             for (uint8 chIdx = 0; chIdx < grpCfg->numChannels; chIdx++)

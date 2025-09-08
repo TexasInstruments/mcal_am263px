@@ -275,7 +275,7 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 /** \brief CDD_PWM Configuration structure declaration */
-extern const struct Cdd_Pwm_ConfigType_s CddPwmConfigSet_0;
+extern const struct Cdd_Pwm_ConfigType_s Cdd_Pwm_Config;
 
 
 

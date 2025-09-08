@@ -131,7 +131,7 @@ extern "C" {
 /**
  *  \brief Pre Compile config macro name.
  */
-#define SPI_INIT_CONFIG_PC       [!"@name"!]
+#define SPI_INIT_CONFIG_PC       Spi_Config
 [!ENDLOOP!][!//
 [!ENDIF!][!//
 
@@ -397,7 +397,7 @@ extern const uint32 Spi_HwUnitBaseAddr[SPI_HW_UNIT_CNT];
 /* @} */
 
 /** \brief SPI Configuration struct declaration */
-extern const struct Spi_ConfigType_s SpiDriver;
+extern const struct Spi_ConfigType_s Spi_Config;
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 

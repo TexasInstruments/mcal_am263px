@@ -101,7 +101,7 @@ extern void AdcApp_Group2EndNotification(void);
 extern void AdcApp_Group3EndNotification(void);
 
 /* Create runtime configurations. */
-CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) AdcConfigSet =
+CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) Adc_Config =
 {
     .maxGroup = 4U,
     .maxHwUnit = 1U,

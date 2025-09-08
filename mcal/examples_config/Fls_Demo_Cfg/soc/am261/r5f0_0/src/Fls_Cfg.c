@@ -123,7 +123,7 @@ extern void Fee_JobEndNotification(void);
 
 extern void Fee_JobErrorNotification(void);
 
-CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) FlsConfigSet =
+CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) Fls_Config =
 {
     .Fls_JobEndNotification = Fee_JobEndNotification,
     .Fls_JobErrorNotification = Fee_JobErrorNotification,

@@ -328,7 +328,7 @@ extern "C" {
  *  @{
  */
 #define PORT_MAX_MUXMODE (1U)
-/* @} */	
+/* @} */
 
 /** \brief Interrupt Error ID */
 #define PORT_INTR_ERROR_ID 			255U
@@ -750,7 +750,7 @@ typedef enum
 	PORT_GPIO_BANK_5 = 5,	/* Bank F */
 	PORT_GPIO_BANK_6 = 6,	/* Bank G */
 	PORT_GPIO_BANK_7 = 7,	/* Bank H */
-	PORT_GPIO_BANK_8 = 8,	/* Bank I */	
+	PORT_GPIO_BANK_8 = 8,	/* Bank I */
 }Port_GpioBank;
 
 /**
@@ -822,7 +822,7 @@ typedef enum
     PORT_GPIO_CH_60 = 60,
     PORT_GPIO_CH_61 = 61,
     PORT_GPIO_CH_62 = 62,
-    PORT_GPIO_CH_63 = 63,		
+    PORT_GPIO_CH_63 = 63,
     PORT_GPIO_CH_64 = 64,	/* Bank E */
     PORT_GPIO_CH_65 = 65,
     PORT_GPIO_CH_66 = 66,
@@ -859,7 +859,7 @@ typedef enum
     PORT_GPIO_CH_97 = 97,
     PORT_GPIO_CH_98 = 98,
     PORT_GPIO_CH_99 = 99,
-    PORT_GPIO_CH_100 = 100,		
+    PORT_GPIO_CH_100 = 100,
     PORT_GPIO_CH_101 = 101,
     PORT_GPIO_CH_102 = 102,
     PORT_GPIO_CH_103 = 103,
@@ -897,11 +897,11 @@ typedef enum
     PORT_GPIO_CH_135 = 135,
     PORT_GPIO_CH_136 = 136,
     PORT_GPIO_CH_137 = 137,
-    PORT_GPIO_CH_138 = 138,	
+    PORT_GPIO_CH_138 = 138,
 }Port_GpioChannel;
 
 /**
- *  \brief GPIO Pin Edge trigger intruppt selection 
+ *  \brief GPIO Pin Edge trigger intruppt selection
  */
 typedef enum
 {
@@ -920,7 +920,7 @@ typedef enum
 } Port_IntrType;
 
 /**
- *  \brief  Notification callback function pointer 
+ *  \brief  Notification callback function pointer
  *
  *  PortBankNum --> GPIO bank numbers[A(0) to I(8)] , If configured as bank interrupt else value PORT_INTR_ERROR_ID
  *
@@ -934,7 +934,7 @@ typedef void (*Port_IsrNotificationType)(uint8 PortBankNum, uint8 PortBankChNum,
 typedef struct
 {
     volatile uint8 IntrIdxNum[ PORT_INTR_BUF_SIZE ];
-	
+
 } Port_IntrStatus;
 
 /**
@@ -1023,7 +1023,7 @@ typedef struct
 	/**< Select GPIO Interrupt Type*/
     Port_IsrNotificationType   Port_DioInterruptNotification;
 	/**< ISR callback function pointer*/
-	
+
 } Port_DioRegConfigType;
 
 /**
@@ -1044,7 +1044,7 @@ typedef struct Port_ConfigType_s
 } Port_ConfigType;
 
 /**
- *  \GPIO XBAR out pins mapping 
+ *  \GPIO XBAR out pins mapping
  *   Below macros stores inforamtion about xbarout Intr. pin configuration which is done in MCU Driver.
  *  @{
  */            
@@ -1053,7 +1053,7 @@ typedef struct Port_ConfigType_s
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 
-extern const struct Port_ConfigType_s PortConfigSet_0;
+extern const struct Port_ConfigType_s Port_Config;
 
 
 /**********************************************************************************************************************
