@@ -40,11 +40,11 @@ The following figure shows where the I2C is located in the AUTOSAR architecture.
 
 The expected flow for utilization of the driver as per the example application is interrupt registration (only required in case of interrupt mode), I2c driver initialization using Cdd_I2c_Init. Post initialization buffer set up linking is done to point channels to their respective buffers using Cdd_I2c_SetupEB and for writing data to slaves Cdd_I2c_AsyncTransmit() is used in both polling as well as interrupt mode.
 
-For reception of data from I2c slaves Cdd_I2c_AsyncTransmit() can be used in interrupt mode. If polling mode is being used, use Cdd_I2c_PollingModeProcessing() and after these functional calls call Cdd_I2c_MainFunction to process any sequence in the queue and update the status of the queue to real time value.
+For reception of data from I2c slaves Cdd_I2c_AsyncTransmit() can be used in interrupt mode. If polling mode is being used, use Cdd_I2c_MainFunction() to process any sequence in the queue and update the status of the queue to real time value.
 
 #### Initialization
 
-The driver I2C is initialized by calling Cdd_I2c_Init () with a null pointer passed as argument. To re-initialize the driver call I2c_DeInit () and then I2c_Init () again. Only pre-compile variant is supported for the driver, hence all configuration related parameters are provided through the GUI. The service for de-initialization is provided with the function Cdd_I2c_DeInit ().
+The driver I2C is initialized by calling Cdd_I2c_Init (). To re-initialize the driver call Cdd_I2c_DeInit () and then Cdd_I2c_Init () again. Only pre-compile variant is supported for the driver, hence all configuration related parameters are provided through the GUI. The service for de-initialization is provided with the function Cdd_I2c_DeInit ().
 
 #### States
 
@@ -145,24 +145,18 @@ I2C maintains states for:
 
 On AM263Px platform, there are 4 I2C instances I2C0, I2C1, I2C2 and I2C3 each consisting of 25 registers for control, data transmission and reception.
 
+
 #### Supported Features
 
 * Configurable Development error (Software supported)
-* Configurable No acknowledgement error check (Software supported)
-* Configurable Arbitration loss error check (Software supported)
 * Polling mode (Software supported)
 * Interrupt mode (Software supported)
-* Configurable multiple sequence in queue check (Software supported)
-* Configurable arbitration loss parameter (Software supported)
-* Configurable timeouts for reception, arbitration loss and queue (Software supported)
-* Configurable queue size (Software supported)
 * Configurable sequence size (Software supported)
 * Configurable channel size (Software supported)
 * Configurable data length (Software supported)
 * Configurable Hardware units (Hardware supported)
 * Configurable Channels (Software supported)
 * Configurable Sequences (Software supported)
-* Shareable channels (Software supported)
 * Channel in use checks (Software supported)
 * Sequence in use checks (Software supported)
 * Hardware unit in use checks (Software supported)
@@ -174,52 +168,9 @@ On AM263Px platform, there are 4 I2C instances I2C0, I2C1, I2C2 and I2C3 each co
 1. User configurable error check to report development errors.
 2. Blocking error
 
-##### Configurable No Acknowledgement Error Check
+##### Configurable Sequence and Channel Size
 
-1. User configurable check to treat a no acknowledgement condition as a development error
-2. Applicable only when AM263Px is in master receiving mode
-
-##### Configurable Arbitration Loss Error Check
-
-1. User configurable check to treat an arbitration loss condition as a development error.
-2. Applicable in both master receive and master transmit mode for AM263Px
-
-##### Configurable Multiple Sequences in Queue Check
-
-1. User configurable check to process the same sequence multiple times or only once inside the queue
-
-##### Configurable Arbitration Loss Parameter
-
-1. User configurable parameter to deal with arbitration loss condition
-2. Possible parameters
-
-   * CDD_I2C_BURST_MODE
-
-      I2c driver detaches from the bus without any recovery attempts.
-   * CDD_I2C_RECURRENT_MODE
-
-      I2c driver sends multiple stop signals on the bus in an attempt to free the bus and recover control.
-
-```{figure} Assets/images/i2c/i2c_config.png
-:align: center
-
-```
-
-##### Configurable Timeouts
-
-1. User configurable timeout for queue, reception in polling mode and arbitration loss
-2. All the timeout periods are in ticks
-3. It is user responsibility to initialize and start the timer in the application for timeouts to take effect
-
-```{Note}
-CddI2cQueueTimeout parameter Value should be passed as number of ticks according to
-clock frequency. The clock source have changed from RTI timers which used 200MHz clock frequency to R5f timers which uses 400MHz clock frequency, so the timeout values need to be configured accordingly.
-
-```
-
-##### Configurable Queue, Sequence and Channel Size
-
-1. User configurable maximum size for Sequence, Queue and Channel
+1. User configurable maximum size for Sequence and Channel
 
 ##### Configurable Hardware Units
 
@@ -241,6 +192,7 @@ clock frequency. The clock source have changed from RTI timers which used 200MHz
 3. The number of channels configured can not exceed the maximum number of channels defined in the general container.
 4. Data buffer is linked to channels in the application by provided API’s
 5. Same channels can be used by multiple sequences
+6. Restart mode parameter to decide whether to perform a stop between channels of a sequence
 
 ```{figure} Assets/images/i2c/i2c_configchannel.png
 :align: center
@@ -304,11 +256,15 @@ Description of static files is provided below:
  ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Irq.h** : *Contains the declarations of the ISR handlers*\
  ┃ ┃ ┣ 📂**src**\
  ┃ ┃ ┃ ┣ 📜**Cdd_I2c.c** : *Source file that contains the API relevant implementation*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Priv.c** : *Contains internal function definitions used to realize the driver*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Priv.h** : *Contains internal function declarations used to realize the driver*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Utils.c** : *Contains internal function definitions for queue implementation*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Utils.h** : *Contains internal function declarations for queue implementation*\
  ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Irq.c** : *Contains the ISR implementation*\
  ┃ ┃ ┣ 📂**V0**\
  ┃ ┃ ┃ ┣ 📜**Cdd_I2c_hw_reg.h** : *Contains register offsets, mask values, shift values and specific bit set reset macros*\
- ┃ ┃ ┃ ┣ 📜**Cdd_I2c_priv.c** : *Contains internal function definitions used to realize the driver*\
- ┃ ┃ ┃ ┗ 📜**Cdd_I2c_priv.h** : *Contains internal function declarations used to realize the driver*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Hw.c** : *Contains internal function definitions used to realize the driver*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Hw.h** : *Contains internal function declarations used to realize the driver*\
  ┃ ┃ ┗ 📜Makefile\
  ┣ 📂mcal_config\
  ┣ 📂mcal_docs\
@@ -429,7 +385,6 @@ The module MCU powers up the microcontroller’s peripherals at startup time and
 
 The module PORT enables the I2C lines at startup time. To operate the I2C properly, the PORT driver has to be configured. The PORT driver sets the Pins to the required values for the I2C to operate. The Pins used are SDA (serial data line) and SCL (serial clock). An open drain configuration is recommended. Some I2C drivers require the PORT for switching from I2C functionality to DIO functionality – to use the "clock free" procedure - and back.
 
-
 ##### SchM
 
 If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that CDD I2C module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
@@ -476,8 +431,7 @@ For the Following API’s it is possible to be called from the sequence notifica
    8. Cdd_I2c_GetSequenceResult
    9. Cdd_I2c_MainFunction
    10. Cdd_I2c_PollingModeProcessing
-   11. Cdd_I2c_SetHandling
-   12. Cdd_I2c_GetStatus
+   11. Cdd_I2c_GetStatus
 
 #### Multi-core support
 
@@ -759,55 +713,60 @@ None
 
 I2C example application demonstrating the MCAL I2C driver features is in folder <MCAL_ROOT>/examples /I2C.
 
-This application can be built from the root folder by giving "gmake -s I2c_app PLATFORM=am263px".
+This application can be built from the root folder by giving "gmake -s i2c_app PLATFORM=am263px".
+
 
 #### Sample Log
 
 ```{code-block}
 
-I2cApp: Sample Application - STARTS !!!
-I2cApp: gI2cAppMcuClockConfig[0].Mcu_ClockSourceId = 2 gI2cAppMcuClockConfig[0].Mcu_ClockDiv = 0  :
-I2cApp: Vendor ID: 44
-I2cApp: Module ID: 255
-I2cApp: SW Major version ID: 10
-I2cApp: SW Minor version ID: 0
-I2cApp: SW Patch version ID: 0
-I2cApp: Temperature write SuccessFull
-I2cApp: Message written to EEPROM: I2C read/write test passed
-I2cApp: EEPROM address pointer reset to start read from location : 0
-I2cApp: Temperature sensor reading : 38.500000 (celcius)
-I2cApp: Message read from EEPROM: I2C read/write test passed
-All tests have passed
+I2C_APP: STARTS !!!
+
+ I2C MCAL Version Info
+ ---------------------
+ Vendor ID           : 44
+ Module ID           : 255
+ SW Major Version    : 11
+ SW Minor Version    : 0
+ SW Patch Version    : 0
+
+I2C_APP: EEPROM Data 0x0000: 0x02
+I2C_APP: EEPROM Data 0x0001: 0x03
+I2C_APP: EEPROM Data 0x0002: 0x04
+I2C_APP: EEPROM Data 0x0003: 0x05
+I2C_APP: EEPROM Data 0x0004: 0x06
+I2C_APP: EEPROM Data 0x0005: 0x07
+I2C_APP: EEPROM Data 0x0006: 0x08
+I2C_APP: EEPROM Data 0x0007: 0x09
+I2C_APP: EEPROM Data 0x0008: 0x0A
+I2C_APP: EEPROM Data 0x0009: 0x0B
+I2C_APP: EEPROM Data 0x000A: 0x0C
+I2C_APP: EEPROM Data 0x000B: 0x0D
+I2C_APP: EEPROM Data 0x000C: 0x0E
+I2C_APP: EEPROM Data 0x000D: 0x0F
+I2C_APP: EEPROM Data 0x000E: 0x10
+I2C_APP: EEPROM Data 0x000F: 0x11
+I2C_APP: EEPROM Data 0x0010: 0x12
+I2C_APP: EEPROM Data 0x0011: 0x13
+I2C_APP: EEPROM Data 0x0012: 0x14
+I2C_APP: EEPROM Data 0x0013: 0x15
+I2C_APP: EEPROM Data 0x0014: 0x16
+I2C_APP: EEPROM Data 0x0015: 0x17
+I2C_APP: EEPROM Data 0x0016: 0x18
+I2C_APP: EEPROM Data 0x0017: 0x19
+I2C_APP: EEPROM Data 0x0018: 0x1A
+I2C_APP: EEPROM Data 0x0019: 0x1B
+I2C_APP: EEPROM Data 0x001A: 0x45
+I2C_APP: EEPROM Data 0x001B: 0x31
+I2C_APP: EEPROM Data 0x001C: 0x1E
+I2C_APP: EEPROM Data 0x001D: 0x1F
+I2C_APP: EEPROM Data 0x001E: 0x20
+I2C_APP: EEPROM Data 0x001F: 0x21
+I2C_APP: EEPROM Program and verify page: 1 ...
+I2C_APP: Temperature sensor separate write and read test ...
+I2C_APP: Temperature sensor write+read with restart test ...
+I2C_APP: Stack Usage: 816 bytes
+I2C_APP: DONE (Passed) !!
+I2C_APP: All tests have passed
 
 ```
-
-#### File Structure
-
-
-📦AM263Px\
- ┣ 📂build\
- ┣ 📂mcal\
- ┃ ┣ 📂**examples**\
- ┃ ┃ ┣ 📂**I2c**\
- ┃ ┃ ┃ ┣ 📂**soc**\
- ┃ ┃ ┃ ┣ 📜**I2capp.c** : *Contains I2c test example*\
- ┃ ┃ ┃ ┗ 📜Makefile\
- ┃ ┣ 📂**examples_config**\
- ┃ ┃ ┣ 📂**Cdd_I2c_Demo_Cfg**\
- ┃ ┃ ┃ ┗ 📂**soc**\
- ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
- ┃ ┃ ┃ ┃ ┃ ┗ 📂**r5f0_0**\
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Cdd_I2c_Cfg.h** : *Contains the configuration parameters*\
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src\
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Cfg.c** : *Contains all Pre-Compile Configured parameters*\
- ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂swcd\
- ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Bswmd.arxml** : *contains the arxml description file*\
- ┃ 📂mcal_config\
- ┃ 📂mcal_docs\
- ┗ 📜README.txt
-
-### References
-
-
-[Technical Reference Manual](<https://www.ti.com/product/AM263P4#tech-docs>)

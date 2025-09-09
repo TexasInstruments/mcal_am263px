@@ -164,7 +164,7 @@ CONST(Cdd_IpcConfigType, CDD_PBCFG) Cdd_Ipc_Config =
 [!ENDIF!]
 };
 
-P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr = &[!"name(as:modconf('Cdd_Ipc')[1]/CddIpcDriver/*[1])"!];
+P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr = &Cdd_Ipc_Config;
 #define  CDD_IPC_STOP_SEC_CONFIG_DATA
 #include "Cdd_Ipc_MemMap.h"
 

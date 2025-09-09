@@ -83,11 +83,11 @@
 /*******************************************************************************
  *  VERSION CHECK
  ******************************************************************************/
-#if ((FLS_SW_MAJOR_VERSION != (10U)) || (FLS_SW_MINOR_VERSION != (1U)))
+#if ((FLS_SW_MAJOR_VERSION != (10U)) || (FLS_SW_MINOR_VERSION != (2U)))
   #error "Version numbers of Fls_PBcfg.c and Fls.h are inconsistent!"
 #endif
 
-#if ((FLS_CFG_MAJOR_VERSION != (10U)) || (FLS_CFG_MINOR_VERSION != (1U)))
+#if ((FLS_CFG_MAJOR_VERSION != (10U)) || (FLS_CFG_MINOR_VERSION != (2U)))
   #error "Version numbers of Fls_PBcfg.c and Fls_Cfg.h are inconsistent!"
 #endif
 /*******************************************************************************

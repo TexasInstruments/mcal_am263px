@@ -120,10 +120,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.8.10.2. Setup required to run example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.8.10.3. How to run examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sample-log">4.8.10.4. Sample Log</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.8.10.5. File Structure</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#references">4.8.11. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Ipc.html">4.9. CDD_IPC Module</a></li>
@@ -248,11 +246,11 @@
 <img alt="../_images/i2c_architecture.png" src="../_images/i2c_architecture.png" />
 </figure>
 <p>The expected flow for utilization of the driver as per the example application is interrupt registration (only required in case of interrupt mode), I2c driver initialization using Cdd_I2c_Init. Post initialization buffer set up linking is done to point channels to their respective buffers using Cdd_I2c_SetupEB and for writing data to slaves Cdd_I2c_AsyncTransmit() is used in both polling as well as interrupt mode.</p>
-<p>For reception of data from I2c slaves Cdd_I2c_AsyncTransmit() can be used in interrupt mode. If polling mode is being used, use Cdd_I2c_PollingModeProcessing() and after these functional calls call Cdd_I2c_MainFunction to process any sequence in the queue and update the status of the queue to real time value.</p>
+<p>For reception of data from I2c slaves Cdd_I2c_AsyncTransmit() can be used in interrupt mode. If polling mode is being used, use Cdd_I2c_MainFunction() to process any sequence in the queue and update the status of the queue to real time value.</p>
 </section>
 <section id="initialization">
 <h3><span class="section-number">4.8.3.2. </span>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h3>
-<p>The driver I2C is initialized by calling Cdd_I2c_Init () with a null pointer passed as argument. To re-initialize the driver call I2c_DeInit () and then I2c_Init () again. Only pre-compile variant is supported for the driver, hence all configuration related parameters are provided through the GUI. The service for de-initialization is provided with the function Cdd_I2c_DeInit ().</p>
+<p>The driver I2C is initialized by calling Cdd_I2c_Init (). To re-initialize the driver call Cdd_I2c_DeInit () and then Cdd_I2c_Init () again. Only pre-compile variant is supported for the driver, hence all configuration related parameters are provided through the GUI. The service for de-initialization is provided with the function Cdd_I2c_DeInit ().</p>
 </section>
 <section id="states">
 <h3><span class="section-number">4.8.3.3. </span>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
@@ -381,21 +379,14 @@ In case incorrect channel ID is passed a DET error occur</p>
 <h3><span class="section-number">4.8.4.1. </span>Supported Features<a class="headerlink" href="#supported-features" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Configurable Development error (Software supported)</p></li>
-<li><p>Configurable No acknowledgement error check (Software supported)</p></li>
-<li><p>Configurable Arbitration loss error check (Software supported)</p></li>
 <li><p>Polling mode (Software supported)</p></li>
 <li><p>Interrupt mode (Software supported)</p></li>
-<li><p>Configurable multiple sequence in queue check (Software supported)</p></li>
-<li><p>Configurable arbitration loss parameter (Software supported)</p></li>
-<li><p>Configurable timeouts for reception, arbitration loss and queue (Software supported)</p></li>
-<li><p>Configurable queue size (Software supported)</p></li>
 <li><p>Configurable sequence size (Software supported)</p></li>
 <li><p>Configurable channel size (Software supported)</p></li>
 <li><p>Configurable data length (Software supported)</p></li>
 <li><p>Configurable Hardware units (Hardware supported)</p></li>
 <li><p>Configurable Channels (Software supported)</p></li>
 <li><p>Configurable Sequences (Software supported)</p></li>
-<li><p>Shareable channels (Software supported)</p></li>
 <li><p>Channel in use checks (Software supported)</p></li>
 <li><p>Sequence in use checks (Software supported)</p></li>
 <li><p>Hardware unit in use checks (Software supported)</p></li>
@@ -409,66 +400,14 @@ In case incorrect channel ID is passed a DET error occur</p>
 <li><p>Blocking error</p></li>
 </ol>
 </section>
-<section id="configurable-no-acknowledgement-error-check">
-<h4><span class="section-number">4.8.4.1.2. </span>Configurable No Acknowledgement Error Check<a class="headerlink" href="#configurable-no-acknowledgement-error-check" title="Link to this heading"></a></h4>
+<section id="configurable-sequence-and-channel-size">
+<h4><span class="section-number">4.8.4.1.2. </span>Configurable Sequence and Channel Size<a class="headerlink" href="#configurable-sequence-and-channel-size" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
-<li><p>User configurable check to treat a no acknowledgement condition as a development error</p></li>
-<li><p>Applicable only when AM263Px is in master receiving mode</p></li>
-</ol>
-</section>
-<section id="configurable-arbitration-loss-error-check">
-<h4><span class="section-number">4.8.4.1.3. </span>Configurable Arbitration Loss Error Check<a class="headerlink" href="#configurable-arbitration-loss-error-check" title="Link to this heading"></a></h4>
-<ol class="arabic simple">
-<li><p>User configurable check to treat an arbitration loss condition as a development error.</p></li>
-<li><p>Applicable in both master receive and master transmit mode for AM263Px</p></li>
-</ol>
-</section>
-<section id="configurable-multiple-sequences-in-queue-check">
-<h4><span class="section-number">4.8.4.1.4. </span>Configurable Multiple Sequences in Queue Check<a class="headerlink" href="#configurable-multiple-sequences-in-queue-check" title="Link to this heading"></a></h4>
-<ol class="arabic simple">
-<li><p>User configurable check to process the same sequence multiple times or only once inside the queue</p></li>
-</ol>
-</section>
-<section id="configurable-arbitration-loss-parameter">
-<h4><span class="section-number">4.8.4.1.5. </span>Configurable Arbitration Loss Parameter<a class="headerlink" href="#configurable-arbitration-loss-parameter" title="Link to this heading"></a></h4>
-<ol class="arabic">
-<li><p>User configurable parameter to deal with arbitration loss condition</p></li>
-<li><p>Possible parameters</p>
-<ul>
-<li><p>CDD_I2C_BURST_MODE</p>
-<p>I2c driver detaches from the bus without any recovery attempts.</p>
-</li>
-<li><p>CDD_I2C_RECURRENT_MODE</p>
-<p>I2c driver sends multiple stop signals on the bus in an attempt to free the bus and recover control.</p>
-</li>
-</ul>
-</li>
-</ol>
-<figure class="align-center">
-<img alt="../_images/i2c_config.png" src="../_images/i2c_config.png" />
-</figure>
-</section>
-<section id="configurable-timeouts">
-<h4><span class="section-number">4.8.4.1.6. </span>Configurable Timeouts<a class="headerlink" href="#configurable-timeouts" title="Link to this heading"></a></h4>
-<ol class="arabic simple">
-<li><p>User configurable timeout for queue, reception in polling mode and arbitration loss</p></li>
-<li><p>All the timeout periods are in ticks</p></li>
-<li><p>It is user responsibility to initialize and start the timer in the application for timeouts to take effect</p></li>
-</ol>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>CddI2cQueueTimeout parameter Value should be passed as number of ticks according to
-clock frequency. The clock source have changed from RTI timers which used 200MHz clock frequency to R5f timers which uses 400MHz clock frequency, so the timeout values need to be configured accordingly.</p>
-</div>
-</section>
-<section id="configurable-queue-sequence-and-channel-size">
-<h4><span class="section-number">4.8.4.1.7. </span>Configurable Queue, Sequence and Channel Size<a class="headerlink" href="#configurable-queue-sequence-and-channel-size" title="Link to this heading"></a></h4>
-<ol class="arabic simple">
-<li><p>User configurable maximum size for Sequence, Queue and Channel</p></li>
+<li><p>User configurable maximum size for Sequence and Channel</p></li>
 </ol>
 </section>
 <section id="configurable-hardware-units">
-<h4><span class="section-number">4.8.4.1.8. </span>Configurable Hardware Units<a class="headerlink" href="#configurable-hardware-units" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.8.4.1.3. </span>Configurable Hardware Units<a class="headerlink" href="#configurable-hardware-units" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>User configurable parameter to define how many Hardware Units (Instances) to use out of a maximum of 4</p></li>
 <li><p>User configurable parameter to specify which Hardware Unit to use</p></li>
@@ -481,20 +420,21 @@ clock frequency. The clock source have changed from RTI timers which used 200MHz
 </figure>
 </section>
 <section id="configurable-channels">
-<h4><span class="section-number">4.8.4.1.9. </span>Configurable Channels<a class="headerlink" href="#configurable-channels" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.8.4.1.4. </span>Configurable Channels<a class="headerlink" href="#configurable-channels" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>User configurable parameter to define channel direction (read or write), I2c Slave address, address scheme (7 bit slave address or 10 bit slave address) and chained channel implementation.</p></li>
 <li><p>A channel is the actual unit which contains the data to be transmitted along with direction(read/write) and slave address.</p></li>
 <li><p>The number of channels configured can not exceed the maximum number of channels defined in the general container.</p></li>
 <li><p>Data buffer is linked to channels in the application by provided API’s</p></li>
 <li><p>Same channels can be used by multiple sequences</p></li>
+<li><p>Restart mode parameter to decide whether to perform a stop between channels of a sequence</p></li>
 </ol>
 <figure class="align-center">
 <img alt="../_images/i2c_configchannel.png" src="../_images/i2c_configchannel.png" />
 </figure>
 </section>
 <section id="configurable-sequences">
-<h4><span class="section-number">4.8.4.1.10. </span>Configurable Sequences<a class="headerlink" href="#configurable-sequences" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.8.4.1.5. </span>Configurable Sequences<a class="headerlink" href="#configurable-sequences" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>User configurable parameter to define which Hardware unit to use, number of channels present in the sequence, sequence complete callback function and sequence error notify callback function</p></li>
 <li><p>Sequences are accessible to the user and are passed as function parameters for transmission and reception</p></li>
@@ -508,19 +448,19 @@ clock frequency. The clock source have changed from RTI timers which used 200MHz
 </div>
 </section>
 <section id="channel-in-use-checks">
-<h4><span class="section-number">4.8.4.1.11. </span>Channel in Use Checks<a class="headerlink" href="#channel-in-use-checks" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.8.4.1.6. </span>Channel in Use Checks<a class="headerlink" href="#channel-in-use-checks" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>Channels in free state, i.e. not currently being transmitted by another sequence or the same sequence are available for transmission/reception</p></li>
 </ol>
 </section>
 <section id="sequence-in-use-checks">
-<h4><span class="section-number">4.8.4.1.12. </span>Sequence in Use Checks<a class="headerlink" href="#sequence-in-use-checks" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.8.4.1.7. </span>Sequence in Use Checks<a class="headerlink" href="#sequence-in-use-checks" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>Sequence not in transmission currently are available for use.</p></li>
 </ol>
 </section>
 <section id="hardware-unit-in-use-checks">
-<h4><span class="section-number">4.8.4.1.13. </span>Hardware Unit in Use Checks<a class="headerlink" href="#hardware-unit-in-use-checks" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.8.4.1.8. </span>Hardware Unit in Use Checks<a class="headerlink" href="#hardware-unit-in-use-checks" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>Hardware not in use, i.e. currently not transmitting/receiving any sequence is available for use.</p></li>
 </ol>
@@ -563,11 +503,15 @@ clock frequency. The clock source have changed from RTI timers which used 200MHz
 ┃ ┃ ┃ ┗ 📜<strong>Cdd_I2c_Irq.h</strong> : <em>Contains the declarations of the ISR handlers</em><br />
 ┃ ┃ ┣ 📂<strong>src</strong><br />
 ┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c.c</strong> : <em>Source file that contains the API relevant implementation</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c_Priv.c</strong> : <em>Contains internal function definitions used to realize the driver</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c_Priv.h</strong> : <em>Contains internal function declarations used to realize the driver</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c_Utils.c</strong> : <em>Contains internal function definitions for queue implementation</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c_Utils.h</strong> : <em>Contains internal function declarations for queue implementation</em><br />
 ┃ ┃ ┃ ┗ 📜<strong>Cdd_I2c_Irq.c</strong> : <em>Contains the ISR implementation</em><br />
 ┃ ┃ ┣ 📂<strong>V0</strong><br />
 ┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c_hw_reg.h</strong> : <em>Contains register offsets, mask values, shift values and specific bit set reset macros</em><br />
-┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c_priv.c</strong> : <em>Contains internal function definitions used to realize the driver</em><br />
-┃ ┃ ┃ ┗ 📜<strong>Cdd_I2c_priv.h</strong> : <em>Contains internal function declarations used to realize the driver</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_I2c_Hw.c</strong> : <em>Contains internal function definitions used to realize the driver</em><br />
+┃ ┃ ┃ ┗ 📜<strong>Cdd_I2c_Hw.h</strong> : <em>Contains internal function declarations used to realize the driver</em><br />
 ┃ ┃ ┗ 📜Makefile<br />
 ┣ 📂mcal_config<br />
 ┣ 📂mcal_docs<br />
@@ -1057,7 +1001,6 @@ clock frequency. The clock source have changed from RTI timers which used 200MHz
 <li><p>Cdd_I2c_GetSequenceResult</p></li>
 <li><p>Cdd_I2c_MainFunction</p></li>
 <li><p>Cdd_I2c_PollingModeProcessing</p></li>
-<li><p>Cdd_I2c_SetHandling</p></li>
 <li><p>Cdd_I2c_GetStatus</p></li>
 </ol>
 </section>
@@ -1769,55 +1712,61 @@ clock frequency. The clock source have changed from RTI timers which used 200MHz
 <section id="how-to-run-examples">
 <h3><span class="section-number">4.8.10.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
 <p>I2C example application demonstrating the MCAL I2C driver features is in folder &lt;MCAL_ROOT&gt;/examples /I2C.</p>
-<p>This application can be built from the root folder by giving “gmake -s I2c_app PLATFORM=am263px”.</p>
+<p>This application can be built from the root folder by giving “gmake -s i2c_app PLATFORM=am263px”.</p>
 </section>
 <section id="sample-log">
 <h3><span class="section-number">4.8.10.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">gI2cAppMcuClockConfig</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">Mcu_ClockSourceId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">gI2cAppMcuClockConfig</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">Mcu_ClockDiv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="o">:</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="o">:</span><span class="w"> </span><span class="mi">255</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">ID</span><span class="o">:</span><span class="w"> </span><span class="mi">10</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">ID</span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">ID</span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">SuccessFull</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">written</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">EEPROM</span><span class="o">:</span><span class="w"> </span><span class="n">I2C</span><span class="w"> </span><span class="n">read</span><span class="o">/</span><span class="n">write</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">passed</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="n">pointer</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">location</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">sensor</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">38.500000</span><span class="w"> </span><span class="p">(</span><span class="n">celcius</span><span class="p">)</span>
-<span class="nl">I2cApp</span><span class="p">:</span><span class="w"> </span><span class="n">Message</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">EEPROM</span><span class="o">:</span><span class="w"> </span><span class="n">I2C</span><span class="w"> </span><span class="n">read</span><span class="o">/</span><span class="n">write</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">passed</span>
-<span class="n">All</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">passed</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
+
+<span class="w"> </span><span class="n">I2C</span><span class="w"> </span><span class="n">MCAL</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
+<span class="w"> </span><span class="o">---------------------</span>
+<span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
+<span class="w"> </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">255</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">11</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0000</span><span class="o">:</span><span class="w"> </span><span class="mh">0x02</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0001</span><span class="o">:</span><span class="w"> </span><span class="mh">0x03</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0002</span><span class="o">:</span><span class="w"> </span><span class="mh">0x04</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0003</span><span class="o">:</span><span class="w"> </span><span class="mh">0x05</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0004</span><span class="o">:</span><span class="w"> </span><span class="mh">0x06</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0005</span><span class="o">:</span><span class="w"> </span><span class="mh">0x07</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0006</span><span class="o">:</span><span class="w"> </span><span class="mh">0x08</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0007</span><span class="o">:</span><span class="w"> </span><span class="mh">0x09</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0008</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0A</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0009</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0B</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x000A</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0C</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x000B</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0D</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x000C</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0E</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x000D</span><span class="o">:</span><span class="w"> </span><span class="mh">0x0F</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x000E</span><span class="o">:</span><span class="w"> </span><span class="mh">0x10</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x000F</span><span class="o">:</span><span class="w"> </span><span class="mh">0x11</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0010</span><span class="o">:</span><span class="w"> </span><span class="mh">0x12</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0011</span><span class="o">:</span><span class="w"> </span><span class="mh">0x13</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0012</span><span class="o">:</span><span class="w"> </span><span class="mh">0x14</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0013</span><span class="o">:</span><span class="w"> </span><span class="mh">0x15</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0014</span><span class="o">:</span><span class="w"> </span><span class="mh">0x16</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0015</span><span class="o">:</span><span class="w"> </span><span class="mh">0x17</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0016</span><span class="o">:</span><span class="w"> </span><span class="mh">0x18</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0017</span><span class="o">:</span><span class="w"> </span><span class="mh">0x19</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0018</span><span class="o">:</span><span class="w"> </span><span class="mh">0x1A</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x0019</span><span class="o">:</span><span class="w"> </span><span class="mh">0x1B</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x001A</span><span class="o">:</span><span class="w"> </span><span class="mh">0x45</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x001B</span><span class="o">:</span><span class="w"> </span><span class="mh">0x31</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x001C</span><span class="o">:</span><span class="w"> </span><span class="mh">0x1E</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x001D</span><span class="o">:</span><span class="w"> </span><span class="mh">0x1F</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x001E</span><span class="o">:</span><span class="w"> </span><span class="mh">0x20</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="mh">0x001F</span><span class="o">:</span><span class="w"> </span><span class="mh">0x21</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">EEPROM</span><span class="w"> </span><span class="n">Program</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">verify</span><span class="w"> </span><span class="n">page</span><span class="o">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">...</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">sensor</span><span class="w"> </span><span class="n">separate</span><span class="w"> </span><span class="n">write</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">read</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="p">...</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Temperature</span><span class="w"> </span><span class="n">sensor</span><span class="w"> </span><span class="n">write</span><span class="o">+</span><span class="n">read</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">restart</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="p">...</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">Usage</span><span class="o">:</span><span class="w"> </span><span class="mi">816</span><span class="w"> </span><span class="n">bytes</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">DONE</span><span class="w"> </span><span class="p">(</span><span class="n">Passed</span><span class="p">)</span><span class="w"> </span><span class="o">!!</span>
+<span class="nl">I2C_APP</span><span class="p">:</span><span class="w"> </span><span class="n">All</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">passed</span>
 </pre></div>
 </div>
 </section>
-<section id="file-structure">
-<h3><span class="section-number">4.8.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
-<p>📦AM263Px<br />
-┣ 📂build<br />
-┣ 📂mcal<br />
-┃ ┣ 📂<strong>examples</strong><br />
-┃ ┃ ┣ 📂<strong>I2c</strong><br />
-┃ ┃ ┃ ┣ 📂<strong>soc</strong><br />
-┃ ┃ ┃ ┣ 📜<strong>I2capp.c</strong> : <em>Contains I2c test example</em><br />
-┃ ┃ ┃ ┗ 📜Makefile<br />
-┃ ┣ 📂<strong>examples_config</strong><br />
-┃ ┃ ┣ 📂<strong>Cdd_I2c_Demo_Cfg</strong><br />
-┃ ┃ ┃ ┗ 📂<strong>soc</strong><br />
-┃ ┃ ┃ ┃ ┣ 📂<strong>am263px</strong><br />
-┃ ┃ ┃ ┃ ┃ ┗ 📂<strong>r5f0_0</strong><br />
-┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include<br />
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜<strong>Cdd_I2c_Cfg.h</strong> : <em>Contains the configuration parameters</em><br />
-┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src<br />
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜<strong>Cdd_I2c_Cfg.c</strong> : <em>Contains all Pre-Compile Configured parameters</em><br />
-┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂swcd<br />
-┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜<strong>Cdd_I2c_Bswmd.arxml</strong> : <em>contains the arxml description file</em><br />
-┃ 📂mcal_config<br />
-┃ 📂mcal_docs<br />
-┗ 📜README.txt</p>
-</section>
-</section>
-<section id="references">
-<h2><span class="section-number">4.8.11. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
-<p><a class="reference external" href="https://www.ti.com/product/AM263P4#tech-docs">Technical Reference Manual</a></p>
 </section>
 </section>
 
@@ -1833,7 +1782,7 @@ clock frequency. The clock source have changed from RTI timers which used 200MHz
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Sep 08, 2025.
+          <span class="lastupdated" >Last updated on Sep 09, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

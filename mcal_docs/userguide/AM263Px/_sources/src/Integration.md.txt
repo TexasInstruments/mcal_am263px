@@ -202,13 +202,13 @@ The TI MCAL modules are configured using EB Tresos tool. When Vector DaVinci Con
 
 #### Files required for import
 
-1. Export of MCAL from EB Tresos (ARXML): The MCAL modules can be exported from EB Tresos into an ARXML file as instructed in [Run Export](./MCAL_Configuration_and_EB_Tresos.md#run-export). This ARXML contains ECU configuration of MCAL modules.
-2. Vendor Specific Module Definition (ARXML): TI defines Vendor Specific Module Definition for each MCAL module based on AUTOSAR Standard Module definition. This file is needed by Vector DaVinci Configurator to understand the parameters in MCAL modules. This ARXML file can be found as given in [Module Plugin Directory Structure](./MCAL_Configuration_and_EB_Tresos.md#module-plugin-directory-structure).
-3. BSW Module Description File (ARXML): The BSWMD is a formal notation of all information belonging to a certain BSW module in addition to the implementation of the artifact. Each MCAL module generates it's BSWMD file. Please refer [Generate BSWMD](./MCAL_Configuration_and_EB_Tresos.md#generate-bswmd) for details.
+1.Export of MCAL from EB Tresos (ARXML): The MCAL modules can be exported from EB Tresos into an ARXML file as instructed in [Run Export](./MCAL_Configuration_and_EB_Tresos.md#run-export). This ARXML contains ECU configuration of MCAL modules.
+2.Vendor Specific Module Definition (ARXML): TI defines Vendor Specific Module Definition for each MCAL module based on AUTOSAR Standard Module definition. This file is needed by Vector DaVinci Configurator to understand the parameters in MCAL modules. This ARXML file can be found as given in [Module Plugin Directory Structure](./MCAL_Configuration_and_EB_Tresos.md#module-plugin-directory-structure).
+3.BSW Module Description File (ARXML): The BSWMD is a formal notation of all information belonging to a certain BSW module in addition to the implementation of the artifact. Each MCAL module generates it's BSWMD file. Please refer [Generate BSWMD](./MCAL_Configuration_and_EB_Tresos.md#generate-bswmd) for details.
 
 #### Steps to import
 
-1. Provide the path of Vendor Specific Module Definition (ARXML) and BSW Module Description File (ARXML) in Additional Definitions settings in DaVinci project settings as shown below -
+1.Provide the path of Vendor Specific Module Definition (ARXML) and BSW Module Description File (ARXML) in Additional Definitions settings in DaVinci project settings as shown below -
 
 ```{figure} Assets/images/Davinci_Project_Setting.png
 :alt: Additional Definition Settings
@@ -216,7 +216,7 @@ The TI MCAL modules are configured using EB Tresos tool. When Vector DaVinci Con
 Additional Definition Settings
 ```
 
-2. Import the MCAL Module Export from EB Tresos, e.g. -
+2.Import the MCAL Module Export from EB Tresos, e.g. -
 
 ```{figure} Assets/images/Importing_the_MCAL_Module.png
 :alt: Importing MCAL module from EB Tresos
@@ -224,7 +224,7 @@ Additional Definition Settings
 Importing MCAL module from EB Tresos
 ```
 
-3. Provide the path of ARXML export of MCAL modules from EB Tresos, e.g. -
+3.Provide the path of ARXML export of MCAL modules from EB Tresos, e.g. -
 
 ```{figure} Assets/images/Path_ARXML_MCAL_module.png
 :alt: Import File Selection
@@ -232,7 +232,7 @@ Importing MCAL module from EB Tresos
 Import File Selection
 ```
 
-4. Select the MCAL modules to be imported. If there are any stubs/unwanted modules in export, they can be deselected -
+4.Select the MCAL modules to be imported. If there are any stubs/unwanted modules in export, they can be deselected -
 
 ```{figure} Assets/images/Module_Selection.png
 :alt: Import MCAL module Selection
@@ -240,7 +240,7 @@ Import File Selection
 Import MCAL module Selection
 ```
 
-5. The imported modules can be seen in DaVinci Configurator as shown below -
+5.The imported modules can be seen in DaVinci Configurator as shown below -
 
 ```{figure} Assets/images/Imported_Modules.png
 :alt: DaVinci Basic Editor View
@@ -248,7 +248,7 @@ Import MCAL module Selection
 DaVinci Basic Editor View
 ```
 
-6. As shown in below image, the TI MCAL driver and it's vendor specific module definition file are mapped to the respective driver -
+6.As shown in below image, the TI MCAL driver and it's vendor specific module definition file are mapped to the respective driver -
 
 ```{figure} Assets/images/Import_final.png
 :alt: DaVinci Basic Editor View
@@ -272,7 +272,7 @@ The intention of CAN Integration is to have successful CAN communication by conf
 
 | Sl. No. | MCAL Modules | Description | Significance in use case |
 |----|--------|----------|----|
-|1| Can Driver | The CAN module initializes and controls the internal CAN Controllers of the microcontroller. It provides services to write, read, and configure mailboxes of the CAN controllers. |In this use case , this module is responsible for configuring the CAN hardware unit, hardware mailboxes, scheduled functions etc.|
+|1| CAN Driver | The CAN module initializes and controls the internal CAN Controllers of the microcontroller. It provides services to write, read, and configure mailboxes of the CAN controllers. |In this use case , this module is responsible for configuring the CAN hardware unit, hardware mailboxes, scheduled functions etc.|
 |2| Mcu| The MCU module manages microcontroller features such as power modes, clock settings, and interrupts. |In this use case, this module is responsible for providing the clock for CAN communication. |
 |3| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for CAN communication. |
 
@@ -291,7 +291,8 @@ For detailed information, please refer to the section [CAN Module](./Module_User
 |5| CanSM | The CAN State Manager (CanSM) realizes a software layer between the Communication Manager (ComM) and the CAN Interface (CanIf). The CanSM handles the startup and shutdown of the communication of a CAN network. The CAN State Manager maps the CAN State Manager states to the states of the ComM and causes the necessary actions to change the CAN State Manager state to those requested by the ComM. | In this use case, CanSM module manages the state transitions of the CAN controller, mainly from NO COMMUNICATION to FULL COMMUNICATION.|
 |6| ComM | The Communication Manager is a resource manager, which encapsulates the control of the underlying communication services. It controls more than one communication bus channel of an ECU by implementing a channel state machine for every channel.|In this use case, ComM provides a mechanism for users to request communication modes, coordinating requests from multiple independent users.|
 |7| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling tasks and interrupts.|In this use case, OS module is used to define periodic tasks needed for CAN communication such as processing transmit and receive message. |
-|8| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+|8| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving CAN messages from application. |
+|9| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
 
 ```{Note}
  For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
@@ -305,58 +306,58 @@ For detailed information, please refer to the section [CAN Module](./Module_User
 
 This chapter explains the basic configurations that are needed to realize CAN communication.
 
-##### Can Configuration
+##### CAN Configuration
 
 TI CAN driver is configured using EB Tresos tool. It is then imported to Vector DaVinci configurator for integration with CAN stack. Following containers and parameters shall be configured.
 
 **CanController:**
 
-The CanController container defines the configuration parameters for individual CAN controllers within hardware. It manages essential settings like baud rate, timing segments, and hardware addressing, ensuring proper communication between the CAN bus and the application layer. The following figure shows the configuration of MCAN4 with Can Bus off and Can Reception/Transmission in polling mode -
+The CanController container defines the configuration parameters for individual CAN controllers within hardware. It manages essential settings like baud rate, timing segments, and hardware addressing, ensuring proper communication between the CAN bus and the application layer. The following figure shows the configuration of MCAN4 with CAN Bus off and CAN Reception/Transmission in polling mode -
 
 ```{figure} Assets/images/Can_controller.png
-:alt: Can Controller configuration.
+:alt: CAN Controller configuration.
 :align: center
 
-Can Controller configuration.
+CAN Controller configuration.
 ```
 
 Configuration of CAN controller with 1000kbps of baudrate is shown below -
 
 ```{figure} Assets/images/Can_controllerBaudrate.png
-:alt: Configuration of CancontrollerBaudrate
+:alt: Configuration of CANcontrollerBaudrate
 :align: center
 
-Configuration of CancontrollerBaudrate
+Configuration of CANcontrollerBaudrate
 ```
 
-**CanHwObject:**
+**CANHwObject:**
 
-The CanHwObject container configures hardware objects (HOHs) used for transmitting and receiving CAN messages. It defines the type, direction, and identifier settings for each hardware object, ensuring proper handling of CAN message.
+The CANHwObject container configures hardware objects (HOHs) used for transmitting and receiving CAN messages. It defines the type, direction, and identifier settings for each hardware object, ensuring proper handling of CAN message.
 
 The configuration of a transmitting CAN signal with basic standard Id is shown below -
 
 ```{figure} Assets/images/Can_HwObjectType.png
-:alt: Can message configuration
+:alt: CAN message configuration
 :align: center
 
-Can message configuration
+CAN message configuration
 ```
 
-**CanHwFilter:**
+**CANHwFilter:**
 
-The CanHwFilter container defines the hardware based message filtering mechanism for received CAN message. It ensures that only relevant messages matching a specified identifier pattern are accepted, reducing the load on the CPU.
+The CANHwFilter container defines the hardware based message filtering mechanism for received CAN message. It ensures that only relevant messages matching a specified identifier pattern are accepted, reducing the load on the CPU.
 
 The configuration of CAN signal Id filter which will be able to accept a CAN message of ID 0x9A(154) and mask code is shown below -
 
 ```{figure} Assets/images/Can_HwFilter.png
-:alt: Configuration for Can_HwFilter
+:alt: Configuration for CAN_HwFilter
 :align: center
 
-Configuration for Can_HwFilter
+Configuration for CAN_HwFilter
 ```
 
 ```{Note}
-Can driver doesn't support Sleep / Wakeup modes and ICOM functionality, hence the related parameters like partial networking shall not be configured in BSW modules.
+CAN driver doesn't support Sleep / Wakeup modes and ICOM functionality, hence the related parameters like partial networking shall not be configured in BSW modules.
 ```
 
 ##### MCU Configuration
@@ -384,10 +385,10 @@ Configuration for Mcu_ClockReferencePoint
 CAN module has dependency on Port module to configure transmit, receive, standby and enable pins of hardware. Configuration of receive pin is as shown below -
 
 ```{figure} Assets/images/Port_Can.png
-:alt: Port Pin Configuration for Can module
+:alt: Port Pin Configuration for CAN module
 :align: center
 
-Port Pin Configuration for Can module
+Port Pin Configuration for CAN module
 ```
 
 ##### EcuC Configuration in CAN Module
@@ -403,7 +404,7 @@ EcuC Pdu Collection
 
 ##### CanIf Configuration in CAN Module
 
-CanIf module abstracts the CAN driver from the rest of the Can stack. CAN driver and dependent MCAL modules must be imported to Vector DaVinci configurator before configuring Vector modules.
+CanIf module abstracts the CAN driver from the rest of the CAN stack. CAN driver and dependent MCAL modules must be imported to Vector DaVinci configurator before configuring Vector modules.
 
 CanIf configures transmit and receive Pdus.
 
@@ -542,7 +543,7 @@ The scheduling of the CAN_MainFunction Read is shown below -
 Scheduling of Periodic Function - Read
 ```
 
-The scheduling of Can_MainFunction Write is shown below -
+The scheduling of CAN_MainFunction Write is shown below -
 
 ```{figure} Assets/images/Can_writeFunction.png
 :alt: Scheduling of Periodic Function - Write
@@ -570,6 +571,17 @@ The port connection to software component is shown below -
 Port connection to software component
 ```
 
+**Development Error Detection:**
+
+This configuration enables development error detection in all BSW and MCAL modules. Please refer to this setup as a reference for configuring other modules -
+
+```{figure} Assets/images/Det_Error.png
+:alt: Configuration for Development Error Detection
+:align: center
+
+Configuration for Development Error Detection
+```
+
 ### ADC Integration
 
 #### Objective for ADC Integration
@@ -595,7 +607,8 @@ The purpose of ADC integration is to get digital voltage value from analog input
 |----|--------|----------|----|
 |1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components.|In this use case, IoHwAb layer provides wrapper function for each of the underlying ADC API's, so that the application is independent on the hardware.|
 |2| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling tasks and interrupts.| In this use case, OS module is used to define periodic tasks needed for ADC communication such as processing transmit and receive message. |
-|3| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+|3| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+|4| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
 
 ```{Note}
 For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
@@ -640,10 +653,10 @@ Configuration for AdcHWUnit
 The AdcChannel container defines the channel configuration depending on the hardware capabilities. The following figure shows the configuration of AdcChannel high/low limit and channel ID and channel range -
 
 ```{figure} Assets/images/Adc_Channel.png
-:alt: Configuration for Adc channel
+:alt: Configuration for ADC channel
 :align: center
 
-Configuration for Adc channel
+Configuration for ADC channel
 ```
 
 **AdcChannelGroup:**
@@ -670,7 +683,7 @@ Configuration for AdcGroupDefinition
 
 ##### Mcu Configuration in ADC Module
 
-The McuInterruptChannelXbar configuration is set to 'MCU_INTRXBAR0_OUT_1' and mapped to 'MCU_INT_XBAR_ADC1_INT1.
+The McuInterruptChannelXbar configuration is set to 'MCU_INTRXBAR0_OUT_1' and mapped to 'MCU_INT_XBAR_ADC1_INT1. ADC interrupt is needed to be mapped through XBAR configuration. As shown in the figure, MCU_INTRXBAR0_OUT_1 an XBAR interrpt is being mapped to MCU_INT_XBAR_ADC1_INT1, which is the interrupt for ADC hardware unit 1.
 
 The ADC interruption channel configuration is shown below -
 
@@ -715,10 +728,10 @@ Configuration for IoHwAb_AdcReadResultBuffer
 The interface between IoHwAb module and Mcal module API is shown below -
 
 ```{figure} Assets/images/Adc_readbuffer.png
-:alt: Function call between IoHwAb and Adc
+:alt: Function call between IoHwAb and ADC
 :align: center
 
-Function call between IoHwAb and Adc
+Function call between IoHwAb and ADC
 ```
 
 In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used to communication between software components.
@@ -748,10 +761,10 @@ Os configuration
 The ADC main function is mapped to a 10ms task as shown in the below -
 
 ```{figure} Assets/images/ADC_Mainfunction.png
-:alt: Mapping Adc main function to 10ms task
+:alt: Mapping ADC main function to 10ms task
 :align: center
 
-Mapping Adc main function to 10ms task
+Mapping ADC main function to 10ms task
 ```
 
 ### SPI Integration
@@ -766,10 +779,9 @@ The intention of SPI integration is to establish successful SPI communication by
 
 | Sl. No. | MCAL Modules | Description | Significance in use case |
 |----|--------|----------|----|
-|1| Can Driver | The CAN module initializes and controls the internal CAN Controllers of the microcontroller. It provides services to write, read, and configure mailboxes of the CAN controllers. |In this use case , this module is responsible for configuring the CAN hardware unit, hardware mailboxes, scheduled functions etc.|
-|2| Mcu| The MCU module manages microcontroller features such as power modes, clock settings, and interrupts. | In this use case, this module is responsible for providing the clock for SPI communication. |
-|3| SPI (Serial Peripheral Interface) | The main tasks of the SPI are Handle data transmission to the components connected via SPI, take care of the settings required by external components (baud rate etc.)| In this use case, this module is responsible for configuring spi channel, job and sequence.|
-|4| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for Spi communication. |
+|1| Mcu| The MCU module manages microcontroller features such as power modes, clock settings, and interrupts. | In this use case, this module is responsible for providing the clock for SPI communication. |
+|2| SPI (Serial Peripheral Interface) | The main tasks of the SPI are Handle data transmission to the components connected via SPI, take care of the settings required by external components (baud rate etc.)| In this use case, this module is responsible for configuring spi channel, job and sequence.|
+|3| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for Spi communication. |
 
 ```{Note}
  For detailed information, please refer to the section [SPI Module](./Module_User_Guide_Spi.md#spi-module).
@@ -781,7 +793,8 @@ The intention of SPI integration is to establish successful SPI communication by
 |----|--------|----------|----|
 |1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components. |In this use case, IoHwAb layer provides wrapper function for each of the underlying SPI API's, so that the application is independent on the hardware.|
 |2| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling tasks and interrupts.| In this use case, OS module is used to define periodic tasks needed for SPI communication such as processing transmit and receive message. |
-|3| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving spi messages from application. |
+|3| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving spi messages from application. |
+|4| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
 
 ```{Note}
 For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
@@ -1061,7 +1074,8 @@ For detailed information, please refer to the section [PWM Module](./Module_User
 |----|--------|----------|----|
 |1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components. |It provides an abstraction for the PWM driver and enables communication with the application layer.|
 |2| OS | The Operating System is mainly responsible for handling tasks. | In this use case, it is used to initialize PWM. |
-|3| Rte | The Runtime Environment module manages the information flow | In this use case, it is used to schedule the periodic task defined in OS. |
+|3| RTE | The Runtime Environment module manages the information flow | In this use case, it is used to schedule the periodic task defined in OS. |
+|4| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
 
 ```{Note}
  For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
@@ -1072,6 +1086,8 @@ For detailed information, please refer to the section [PWM Module](./Module_User
 ```
 
 #### Configuration of modules in PWM Integration
+
+This chapter explains the basic configurations that are needed to realize PWM functionality.
 
 ##### PWM Configuration
 
@@ -1211,13 +1227,14 @@ The intention of LIN integration is to establish successful LIN communication by
 |----|--------|----------|----|
 |1| EcuC | Virtual module to collect ECU Configuration specific / global configuration information.|In this use case, EcuC collects all Pdu objects flowing through the Com-Stack.|
 |2| LinIf | Provides an interface for handling communication over the LIN (Local Interconnect Network) protocol.|In this use case, LinIf ensures communication between application software and the LIN hardware.|
-|3| LinSm| Manages the state machine for the LIN communication stack.|In this use case, LinSM manages the state transitions of the Lin controller to error recovery and maintain reliable communication.|
+|3| LinSM| Manages the state machine for the LIN communication stack.|In this use case, LinSM manages the state transitions of the Lin controller to error recovery and maintain reliable communication.|
 |4| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling of tasks and interrupts.| In this use case, it used to define a periodic task. |
-|5| Rte (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between <br> Software Components (SWCs), BSW and CDDs.|In this use case, it is used to schedule the periodic task defined in OS. |
+|5| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between <br> Software Components (SWCs), BSW and CDDs.|In this use case, it is used to schedule the periodic task defined in OS. |
 |6| Com | Com is responsible to provide a signal-based <br> interface to the upper layer. It handles signal <br> conversion, transmission and reception. |In this use case, Com module handles packing of AUTOSAR signals to I-Pdus to be transmitted <br> and unpacking of received I-Pdus. |
 |7| ComM | The Communication Manager is a resource manager, which encapsulates the control of the underlying <br> communication services. It controls more than one communication bus channel of an ECU by implementing a channel state machine for every <br> channel.|In this use case, ComM provides a mechanism for users to request communication modes, coordinating requests from multiple <br> independent users. |
 |8| EcuM | EcuM is responsible for initialization of BSW (Basic Software) modules that are needed to start <br> the operating system and preparation of the microcontroller for a sleep phase and the following wake up|In this use case, EcuM is used <br> to wake up the LIN channel by configuring the EcuM wakeup sources |
 |9| PduR | PduR routes protocol data units between communication modules and ensures that the correct Pdus <br> are transmitted to the appropriate destination.|In this use case, PduR module handles the routing of Pdus to and from Com layer and <br> LIN driver. |
+|10| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
 
 ```{Note}
  For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
@@ -1284,6 +1301,8 @@ LIN1 Rx is configured on pin A9 and LIN1 Tx is configured on pin B9 as shown bel
 
 Port pin configuration for Lin
 ```
+
+Similarly, port pin for LIN  RX can be configured.
 
 ##### EcuC Configuration in LIN Module
 
@@ -1601,4 +1620,1205 @@ The port connection to software component is shown below -
 :align: center
 
 Port connection to software component
+```
+
+### CDD_IPC Integration
+
+#### Objective for CDD_IPC Integration
+
+The intention of CDD_IPC Integration is to enable reliable and efficient inter-core communication by configuring the TI MCAL IPC driver in conjunction with the Vector Basic Software (BSW) modules.Further details are explained in the subsequent chapter.
+
+#### List of Modules for CDD_IPC Integration
+
+##### MCAL Modules for CDD_IPC Integration
+
+| Sl.No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IPC | The IPC module initializes and manages the inter-core communication hardware of the microcontroller. It provides services to configure communication channels, send and receive messages, and handle inter-core synchronization.| In this use case,the module is used to enable and manage communication between master core and slave cores, ensuring reliable data exchange and synchronization.|
+
+```{Note}
+ For detailed information, please refer to the section [CDD_IPC Module](./Module_User_Guide_Cdd_Ipc.md#cdd_ipc-module).
+```
+
+##### Vector Modules for CDD_IPC Integration
+
+| Sl.No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | This module provides an abstraction layer for handling hardware-related input/output operations. It facilitates interaction with  IPC hardware resources for data exchange between processor cores. |In this use case,it abstracts the IPC driver and facilitates interaction between the application layer and the underlying inter-core communication mechanism.|
+|2| OS | The Operating System is mainly responsible for handling tasks. | In this use case, it is used to initialize,manage tasks and interrupts related to inter-core communication, |
+|3| RTE | The Runtime Environment module manages the information flow  | In this use case, it is used to schedule the periodic task defined in OS. |
+|4| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in CDD_IPC Integration
+
+This chapter explains the basic configurations that are needed to realize CDD IPC functionalities.
+
+##### CDD_IPC Configuration
+
+The TI IPC driver is configured using the EB Tresos tool. It is then imported into the Vector DaVinci Configurator for integration with the application software. Following containers and parameters shall be configured.
+
+**CDD_IPC General:**
+
+The IpcGeneral container provides general configuration settings for the IPC module.
+
+In IPC general settings,IpcWriteApi and IpcReadApi is enabled as shown below -
+
+```{figure} Assets/images/Configuration_of_IPC_general_settings.png
+:alt: Configuration of IPC general settings
+:align: center
+
+Configuration of IPC general settings
+```
+
+**CddIpcDriver:**
+
+This CddIpcDriver container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver(CDD) module
+
+In the Cdd_Ipc Driver configuration,Specifies the local core ID on which the IPC instance is running, as shown below -
+
+```{figure} Assets/images/Configuration_of_IPC_driver_settings.png
+:alt: Configuration of IPC driver settings
+:align: center
+
+Configuration of IPC driver settings
+```
+
+**CddIpcRemoteCoreList:**
+
+This CddIpcRemoteCoreList container refers to the list of core IDs that are valid for the particular platform and can participate in inter-process communication,as shown below -
+
+```{figure} Assets/images/Configuration_of_Cdd_Ipc_Remote_Core_List.png
+:alt: Configuration of Cdd IPC Remote Core List
+:align: center
+
+Configuration of Cdd IPC Remote Core List
+```
+
+##### IoHwAb Configuration
+
+IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers.
+
+To configure a Client/Server Port Interface,the container Cdd_Ipc_Notify_RegisterClient holds the configuration elements for a Client/Server template interface. This interface is instantiated by a Client/Server Port Prototype.
+
+The container IoHwAbOperationArguments contains the configuration of Operation Elements, such as Cdd_Ipc_localClientId,Cdd_Ipc_notify_msgHandler and IoHwAbOperationArgument,for a Client/Server Operation. These Operation Elements will be generated as function parameters in the I/O Hardware Abstraction(IoHwAb) implementation.
+
+Similarly, it is possible to enable communication between the I/O Client/Server interface and the MCAL APIs.
+
+Configuration of Cdd_Ipc IoHwAbCS port interface as shown below -
+
+```{figure} Assets/images/Configuration_of_Cdd_Ipc_IoHwAb_CS_Port_Interface.png
+:alt: Configuration for Cdd_Ipc IoHwAbCSPortInterface
+:align: center
+Configuration for Cdd_Ipc IoHwAbCSPortInterface
+```
+
+The container RegisterClient is used for configuring a Client/Server Port Prototype. This container represents an instantiation of a Client/Server Port Interface.
+
+Configuration of Cdd_Ipc IoHwAbCS port prototype as shown below -
+
+```{figure} Assets/images/Configuration_of_Cdd_Ipc_IoHwAb_CS_Port_Prototype.png
+:alt: Configuration for Cdd_Ipc IoHwAbCSPortPrototypes
+:align: center
+Configuration for Cdd_Ipc IoHwAbCSPortPrototypes
+```
+
+The function IoHwAb_RegisterClient_Wrapper is generated, and then the MCAL API function Cdd_Ipc_Notify_RegisterClient is called.
+
+In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used as a Sender-Receiver Port for communication between software components -
+
+```{figure} Assets/images/IOHWAB_Cdd_Ipc_RegisterClient.png
+:alt: Invoking MCAL API Cdd_Ipc RegisterClient
+:align: center
+Invoking MCAL API Cdd_Ipc RegisterClient
+```
+
+The port connection to software component for Ipc notify is shown below -
+
+```{figure} Assets/images/IpcNotify_PortConnection.png
+:alt: Port connection to software component for Ipc notify
+:align: center
+
+Port connection to software component for Ipc notify
+```
+
+The port connection to software component for Ipc rp is shown below -
+
+```{figure} Assets/images/IpcRp_PortConnection.png
+:alt: Port connection to software component for Ipc rp
+:align: center
+
+Port connection to software component for Ipc rp
+```
+
+### WDG Integration
+
+#### Objective for WDG Integration
+
+The WDG driver provides services for handling the watch dog timer on the microcontroller.
+
+#### List of Modules for WDG Integration
+
+##### MCAL Modules for WDG Integration
+
+| Sl.No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Mcu| Manages microcontroller features such as power modes, clock settings, and interrupts. | In this use case this module is used to provide clock for WDG operation. |
+|2| WDG | The WDG provides services for handling the watch dog timer on the microcontroller |In this use case, WDG is configured to handle the watch dog timer|
+
+```{Note}
+ For detailed information, please refer to the section [WDG Module](./Module_User_Guide_Wdg.md#wdg-module).
+```
+
+##### Vector Modules for WDG Integration
+
+| Sl.No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| WDGIf | The main WdgIf functionality consists of linking the overlying Watchdog Manager module (WdgM) <br> to one or more underlying WDG drivers|In this use case, WdgIf ensures operation between application <br> software and the WDG driver.|
+|2| WDGM| The Watchdog Manager (WdgM) is responsible for supervising the software components and ensuring <br> system health by monitoring the execution flow of supervised entities.|In this use case, WDGM supervises the software components and ensures system health.|
+|3| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling of tasks and interrupts.| In this use case, it used to define a periodic task. |
+|4| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between <br> Software Components (SWCs), BSW and CDDs.|In this use case, it is used to schedule the periodic task defined in OS. |
+|5| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration modules in WDG Integration
+
+This chapter explains the basic configurations that are needed to realize WDG functionalities.
+
+##### Wdg Configuration
+
+As part of WDG module integration, WDG module from TI MCAL stack shall be interconnected with vector modules. For that WDG along with its dependent WDG modules shall be configured and provide the reference to WdgIf module. As a first step following Containers and parameters shall be configured in WDG module.
+
+**WdgGeneral:**
+The WDGGeneral container is responsible for configuring the global settings of the WDG in the system. It ensures that the WDG operation module is properly set up for tasks such as WDG window size, WDG default mode.
+
+WDG is configured with 100 percent window size as shown below -
+
+```{figure} Assets/images/WdgGeneral.png
+:alt: WDG General setting
+:align: center
+
+WDG General setting
+```
+
+The default mode of WDG is selected as WDGIF_SLOW_MODE and WDG reaction is set to WDG_GENERATE_RESET as shown below -
+
+```{figure} Assets/images/WdgGeneralconfiguration.png
+:alt: Wdg General configuration
+:align: center
+
+Wdg General configuration
+```
+
+##### MCU Configuration for WDG Integration
+
+The Wdg module has dependence on MCU module. Hence, we need to provide clock setting reference in MCU module. Please refer to TechnicalReference_Mcu was used to configure this module.
+
+The MCU clock configuration for WDG driver is shown below -
+
+```{figure} Assets/images/MCUClockWdg.png
+:alt: Wdg Mcu Clock reference configuration
+:align: center
+
+Wdg Mcu Clock reference configuration
+```
+
+##### WdgIf Configuration for WDG Integration
+
+WdgIF is responsible for managing the interaction between the application layer and the underlying WDG driver. To configure WdgIF, the following containers and parameters need to be set up.
+
+**WdgIfDevices:**
+
+WDGIF is configured for WDG usecase realisation. We need to provide WDG driver reference as shown below -
+
+```{figure} Assets/images/WdgIfDevicesconfiguration.png
+:alt: WdgIf Devices configuration
+:align: center
+
+WdgIf Devices configuration
+```
+
+##### WdgM Configuration for WDG Integration
+
+The WdgM monitors safety-relevant applications on the ECU. When the WdgM detects a violation of the preconfigured temporal or logical constraints in the program flow, it takes several configurable actions to log the fault and to go to a safe state after a configurable time delay.
+
+Two WDG check points are created for entry and exit as shown below -
+
+```{figure} Assets/images/Watchdogcheckpointcreation.png
+:alt: WDG checkpoint creation
+:align: center
+
+WDG checkpoint creation
+```
+
+WDG deadline supervision is configured with maximum deadline of 5000 ms and minimum deadline of 10 ms, and the entry and exit references are given as shown below -
+
+```{figure} Assets/images/WatchdogDeadlinesupervisionconfiguration.png
+:alt: WDG Deadline supervision configuration
+:align: center
+
+WDG Deadline supervision configuration
+```
+
+Two different triggers are configured with different WDG modes. One trigger is configured with slow mode, while another with fast mode as shown below -
+
+```{figure} Assets/images/WatchDogTriggers.png
+:alt: WDG triggers
+:align: center
+
+WDG triggers
+```
+
+##### OS Configuration for WDG Integration
+
+The OS module is responsible for task scheduling. Tasks such as 10ms and 1s are created to schedule different schedulable functions for WDG  and respective BSW modules.
+
+The OS configuration is shown below -
+
+```{figure} Assets/images/WatchDogOSConfiguration.png
+:alt: OS Configuration
+:align: center
+
+OS Configuration
+```
+
+##### Rte Configuration for WDG Integration
+
+Runtime Environment (RTE) manages communication between the software components (SWC), assures consistency of the overall information flow between basic software (BSW). It also maps a BswSchedulableEntity onto one OsTask.
+
+The scheduling of the WdgM_MainFunction is shown below -
+
+```{figure} Assets/images/SchedulingWdgM_MainFunction.png
+:alt: Scheduling of periodic function - WdgM_MainFunction
+:align: center
+
+Scheduling of periodic function - WdgM_MainFunction
+```
+
+### DIO Integration
+
+#### Objective for DIO Integration
+
+The intention of DIO integration is to verify DIO functionality by configuring the DIO MCAL and dependent Vector modules. It will facilitate switching of digital signals, representing ON/OFF or HIGH/LOW states, which will be explained in the subsequent chapter.
+
+#### List of Modules for DIO Integration
+
+##### MCAL Modules for DIO
+
+| Sl.No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Mcu| The MCU module manages microcontroller features such as power modes, clock settings, and interrupts. |In this use case, this module is responsible for providing the clock for ADC communication. |
+|2| DIO | The DIO driver provides port and channel based read and write access to the internal general purpose I/O ports. The read and write behaviour is unbuffered. The basic behaviour of this driver is synchronous. | In this use case, this module is responsible for providing read input from software and send output to controller.|
+|3| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM).|In this use case, this module is responsible for configuring the hardware pins necessary for DIO output.|
+
+```{Note}
+ For detailed information, please refer to the section [DIO Module](./Module_User_Guide_Dio.md#dio-module).
+```
+
+##### Vector Modules for DIO
+
+| Sl.No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | The IoHwAb module provides a layer between the ECU software and the hardware. It allows higher-level software to access I/O hardware (like ADCs or DIOs) in a standardized way. |In this use case, IoHwab layer provides wrapper function for each of the underlying ADC API's, so that the application is independent on the hardware.|
+|2| OS (MICROSAR Operating System)| The Operating System is mainly responsible for handling tasks and interruptions.| In this use case, OS module is used to define periodic tasks needed for ADC communication such as processing transmit and receive message. |
+|3| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+|5| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in DIO integration
+
+This chapter explains the basic configurations that are needed to realize DIO functionality.
+
+##### DIO Configuration
+
+TI DIO driver is configured using EB Tresos tool. It is then imported to Vector DaVinci configurator for integration with upper layers like IoHwAb. Following containers and parameters shall be configured.
+
+**DioGeneral:**
+
+The DioGeneral contains the enabling and disabling of apis. The following figure shows the enabling DioFlipChannel api -
+
+```{figure} Assets/images/Dio_General.png
+:alt: configuration for DioGeneral
+:align: center
+
+configuration for DioGeneral
+```
+
+**DioPort:**
+
+The DioPort container is used to configure groups of DIO channels (GPIO pins) under a logical port. Each port (e.g., GPIOAB, GPIOCD) is assigned a unique DioPortId for identification. This setup enables efficient handling of multiple pins together using AUTOSAR DIO APIs. The example shows five ports with IDs from 0 to 4 -
+
+```{figure} Assets/images/Dio_port.png
+:alt: configuration for DioPort
+:align: center
+
+configuration for DioPort
+```
+
+**DioChannel:**
+
+The DioChannel container in the EB Tresos tool is used to configure individual DIO (Digital Input/Output) channels within a specified DIO port. In this example, the port being configured is named GPIOAB.
+Under the DioChannel tab, each row represents a single DIO channel configuration. Each DIO channel is assigned a unique DioChannelId which acts as an identifier used in the application code for referencing the channel -
+
+```{figure} Assets/images/Dio_channel.png
+:alt: Configuration for DioChannel
+:align: center
+
+Configuration for DioChannel
+```
+
+The port pin 128 in DIO channel is configured as shown below -
+
+```{figure} Assets/images/Dio_channel_port_pin.png
+:alt: Configuration for Port pin 128
+:align: center
+
+Configuration for Port pin 128
+```
+
+**DioChannelGroup:**
+
+The DioChannelGroup contains the configuration of DIO port mask and port offset value. The DioChannelGroup configuration is shown below -
+
+```{figure} Assets/images/Dio_ChannelGroup.png
+:alt: configuration for DioChannelGroup
+:align: center
+
+configuration for DioChannelGroup
+```
+
+##### Port Configuration for DIO Integration
+
+The port pin configuration of DIO channel is shown below -
+
+```{figure} Assets/images/Port_DIo.png
+:alt: Configuration for Portpin
+:align: center
+
+Configuration for Portpin
+```
+
+The PortPinMode configuration of DIO channel is shown below -
+
+```{figure} Assets/images/Dio_PortPinMode.png
+:alt: Configuration for PortpinMode
+:align: center
+
+Configuration for PortpinMode
+```
+
+##### IoHwAb Configuration for DIO Integration
+
+The configuration process for determining the IoHwAb_DioFlipChannel API in the IoHwAbCSPortInterfaces container is shown below -
+
+```{figure} Assets/images/Dio_FlipChannelIoHwAb.png
+:alt: Configuration for DIO IoHwAbCSPortInterface
+:align: center
+
+Configuration for DIO IoHwAbCSPortInterface
+```
+
+The configuration process for determining IoHwAbDioFlipChannel API in the IoHwAbCSPortPrototypes container is shown below -
+
+```{figure} Assets/images/Dio_FlipChannelIoHwAb1.png
+:alt: Configuration for DIO IoHwAbCSPortPrototypes
+:align: center
+
+Configuration for DIO IoHwAbCSPortPrototypes
+```
+
+The function call interaction between the IoHwAb module and the Mcal module API is shown below -
+
+```{figure} Assets/images/Dio_FlipChannelIoHwAb2.png
+:alt: Function call between IoHwAb and DIO
+:align: center
+
+Function call between IoHwAb and DIO
+```
+
+##### Os Configuration for DIO Integration
+
+The OS module is responsible for task scheduling. Tasks such as 10ms are created to schedule TestApp_DioRunnable. The following figure is shown below -
+
+```{figure} Assets/images/Dio_os.png
+:alt: OsAlarms configuration for DIO
+:align: center
+
+OsAlarms configuration for DIO
+```
+
+##### Rte Configuration for DIO Integration
+
+TestApp_DioRunnable is mapped to a 10ms task and will be called periodically every 10ms by the OS task to execute the runnable.The following figure is shown below -
+
+```{figure} Assets/images/Dio_Rte.png
+:alt: creating 10ms task for DIO runnable
+:align: center
+
+creating 10ms task for DIO runnable
+```
+
+### CDD_I2C Integration
+
+#### Objective for CDD_I2C Integration
+
+The intention of I2C Integration is to enable successful I2C communication by configuring TI MCAL modules along with Vector BSW Modules. Further details are explained in the subsequent chapter.
+
+#### List of Modules for CDD_I2C Integration
+
+##### MCAL Modules for CDD_I2C Integration
+
+| Sl.No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| I2C | I2C (Inter-Integrated Circuit) is a two-wire serial communication protocol using SDA (data) and SCL (clock) lines. It allows a master to communicate with one or more slave devices using unique addresses. I2C is commonly used for connecting low-speed peripherals like sensors, EEPROMs, and displays in embedded systems.| In this use case, this module is responsible for configure I2C channel list and Sequence.|
+|2| Mcu | Manages microcontroller features such as power modes, clock settings, and interrupts. | In this use case this module is used to provide clock for I2C operation. |
+|3| Port | Provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for I2C communication. |
+
+```{Note}
+ For detailed information, please refer to the section [CDD_I2C Module](./Module_User_Guide_Cdd_I2c.md#cdd_i2c-module).
+```
+
+##### Vector Modules for CDD_I2C Integration
+
+| Sl.No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | This module provides an abstraction layer for handling hardware-related input/output operations.<br> It facilitates interaction with  IPC hardware resources for data exchange between processor cores. |In this use case,it abstracts the IPC driver and facilitates interaction ,<br> between the application layer and the underlying inter-core communication mechanism.|
+|2| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
+|3| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+
+```{Note}
+For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration modules in CDD_I2C Integration
+
+This chapter explains the basic configurations that are needed to realize CDD I2C communication.
+
+##### CDD_I2C Configuration
+
+As part of I2C module integration, I2C module from TI MCAL stack shall be interconnected with vector modules. For that I2C along with its dependent I2C modules shall be configured and provide the reference to other module. As a first step following Containers and parameters shall be configured in I2C module.
+
+**I2cGeneral:**
+
+General configuration settings for Complex Device Drivers are defined in the container, which includes options to enable or disable API and IRQ types, as shown below -
+
+```{figure} Assets/images/I2c_General.png
+:alt: Configuration for CddI2cGeneral
+:align: center
+
+Configuration for CddI2cGeneral
+```
+
+**CddI2cHwConfig:**
+
+This container contains the HW unit initialization parameters. The HwUnitType and ChannelBitRate, HwUnitFrequency and ClkInputSrc are shown below -
+
+```{figure} Assets/images/I2cHwConfig.png
+:alt: Configuration for CddI2cHwConfig
+:align: center
+
+Configuration for CddI2cHwConfig
+```
+
+**CddI2cChannelConfig:**
+
+This container includes the channel configurations. The I2C channel direction, ChannelSlaveAddress, and SlaveAddressScheme are shown below -
+
+```{figure} Assets/images/I2cChannelConfig.png
+:alt: Configuration for CddI2cChannelConfig
+:align: center
+
+Configuration for CddI2cChannelConfig
+```
+
+**CddI2cSequenceConfig:**
+
+This container contains the Sequence configurations. The I2C Channel SequenceHwUnitType, NumberOfChannelsInSequence and SequenceCompleteNotify and SequenceErrorNotify are shown below -
+
+```{figure} Assets/images/I2cSequenceConfig.png
+:alt: Configuration for CddI2cSequenceConfig
+:align: center
+
+Configuration for CddI2cSequenceConfig
+```
+
+**I2cChannelList:**
+
+References to I2C channels and their order within the Sequence shown below -
+
+```{figure} Assets/images/I2cChannelList.png
+:alt: Configuration for I2cChannelList
+:align: center
+
+Configuration for I2cChannelList
+```
+
+##### MCU Configuration for CDD_I2C Integration
+
+The I2C module has dependence on MCU module. Hence, we need to provide clock setting reference in MCU module. Please refer to TechnicalReference_Mcu was used to configure this module.
+The following figure illustrates the configuration process for determining I2C clock reference point configuration -
+
+```{figure} Assets/images/I2cMcuClockReference.png
+:alt: Configuration for McuClockSettingConfig_I2C
+:align: center
+
+Configuration for McuClockSettingConfig_I2C
+```
+
+##### Port Configuration for CDD_I2C Integration
+
+In the configuration of the port for the I2C module, the port pins are used to facilitate the I2C data line as shown below -
+
+```{figure} Assets/images/I2c_PortPin.png
+:alt: Configuration for I2C Port pin
+:align: center
+
+Configuration for I2C Port pin
+```
+
+Similarly, port pin for I2C clock line can be configured.
+
+##### IoHwAb Configuration for CDD_I2C Integration
+
+IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers.
+To configure a Client/Server Port Interface, the container Cdd_I2c_AsyncTransmit holds the configuration elements for a Client/Server template interface. This interface is instantiated by a Client/Server Port Prototype.
+The container IoHwAbOperationArguments contains the configuration of Operation Elements, such as Cdd_I2c_SetupEB, and IoHwAbOperationArgument, for a Client/Server Operation. These Operation Elements will be generated as function parameters in the I/O Hardware Abstraction (IoHwAb) implementation.
+Similarly, it is possible to enable communication between the I/O Client/Server interface and the MCAL APIs.
+Configuration of Cdd_I2c IoHwAbCS port interface as shown below -
+
+```{figure} Assets/images/IoHwAb_I2c.png
+:alt: Configuration for Cdd_I2C IoHwAbCSPortInterface
+:align: center
+
+Configuration for Cdd_I2C IoHwAbCSPortInterface
+```
+
+The container AsyncTransmit is used for configuring a Client/Server Port Prototype. This container represents an instantiation of a Client/Server Port Interface.
+Configuration of Cdd_I2c IoHwAbCS port prototype as shown below -
+
+```{figure} Assets/images/IoHwAb_I2c1.png
+:alt: Configuration for Cdd_I2C IoHwAbCSPortPrototypes
+:align: center
+
+Configuration for Cdd_I2C IoHwAbCSPortPrototypes
+```
+
+The function IoHwAb_Construct_Wrapper is generated, and then the MCAL API function Cdd_I2c_AsyncTransmit is called. In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used as a Sender-Receiver Port for communication between software components -
+
+```{figure} Assets/images/IoHwab_to_I2c_Connection.png
+:alt: Invoking MCAL API Cdd_I2c_AsyncTransmit
+:align: center
+
+Invoking MCAL API Cdd_I2c_AsyncTransmit
+```
+
+The port connection to software component for I2C is shown below -
+
+```{figure} Assets/images/I2c_portconnection.png
+:alt: Port connection to software component for CDD_I2C
+:align: center
+
+Port connection to software component for CDD_I2C
+```
+
+### ICU Integration
+
+#### Objective for ICU Integration
+
+The objective of ICU integration is to achieve accurate duty cycle measurement of the PWM signal by configuring TI MCAL modules in coordination with Vector BSW modules. Further implementation details are provided in the subsequent chapter.
+
+#### List Of Modules for ICU
+
+##### MCAL Modules for ICU Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Mcu| The MCU module manages microcontroller features for PWM, such as power modes and clock settings.|In this use case, this module is responsible for providing the clock for PWM signal generation. |
+|2| Port | The PORT module provides an interface to configure and control microcontroller pins (e.g., GPIO, ADC, PWM). | In this use case, this module is responsible for configuring the hardware pins necessary for ICU signal capturing. |
+|3| ICU | The Input Capture Unit (ICU) is a peripheral used to detect and timestamp signal edges (rising/falling) on an input pin. It enables measurement of signal characteristics such as frequency, period, and duty cycle, commonly used for PWM analysis.| In this use case, the ICU is used to measure the duty cycle and period of a signal.|
+
+```{Note}
+For detailed information, please refer to the section [ICU Module](./Module_User_Guide_Icu.md#icu-module).
+```
+
+##### Vector Modules for ICU Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components. |It provides an abstraction for the ICU driver and enables communication with the application layer.|
+|2| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
+|3| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in ICU Integration
+
+This chapter explains the basic configurations that are needed to realize ICU functionalities.
+
+##### ICU Configuration
+
+The TI ICU driver is configured using the EB Tresos tool. It is then imported into the Vector DaVinci Configurator for integration with the application software. The following containers and parameters shall be configured.
+
+**IcuGeneral:**
+
+Configuration of general ICU parameters involves enabling or disabling the required macros, as shown below -
+
+```{figure} Assets/images/Icu_General.png
+:alt: Configuration for IcuGeneral
+:align: center
+
+Configuration for IcuGeneral
+```
+
+**IcuChannel:**
+
+The configuration of an individual ICU channel involves assigning the IcuChannelId, selecting the appropriate mode (e.g., timestamp or edge detection), setting the XBAR (crossbar) references, and configuring the ICU functional clock. These settings define how the channel will operate and interface with hardware resources, as illustrated in the configuration below -
+
+```{figure} Assets/images/Icu_Channel.png
+:alt: Configuration for IcuChannel
+:align: center
+
+Configuration for IcuChannel
+```
+
+**IcuSignalMeasurement:**
+
+This container holds the configuration parameters for the measurement mode set to IcuSignalMeasurement. In this configuration, the signal measurement property is set to ICU_PERIOD_TIME to enable period time measurement of the input signal -
+
+```{figure} Assets/images/Icu_SignalMeasurementProperty.png
+:alt: Configuration for IcuSignalMeasurementPropety
+:align: center
+
+Configuration for IcuSignalMeasurementPropety
+```
+
+##### MCU Configuration in ICU Module
+
+The following figure demonstrates the configuration of the ECAP0 interrupt within the MCU module for AM263Px. In this setup, the ECAP0 interrupt is routed through the XBAR (Crossbar) configuration. Specifically, MCU_INTRXBAR0_OUT_2 is selected as the output line, which is then mapped to MCU_INT_XBAR_EPWM3_INT. This routing enables the ECAP0 event to be captured correctly by the desired interrupt source -
+
+```{figure} Assets/images/Mcu_XbarChannelTriggerIcu.png
+:alt: Configuration for McuXbarChannelTrigger Configuration
+:align: center
+
+Configuration for McuXbarChannelTrigger Configuration
+```
+
+The following configuration illustrates the setup of an input XBAR trigger channel within the MCU module. In this example, MCU_INPUT_XBAR0_OUT_2 is selected as the output XBAR line, and it is mapped to the input source MCU_INPUT_XBAR_GPIO49. This mapping allows an external signal on GPIO49 to be routed through XBAR0 output channel 2, enabling it to trigger peripherals such as ECAP, EPWM, or other interrupt-driven modules -
+
+```{figure} Assets/images/Mcu_InputXbarChannelTriggerIcu.png
+:alt: Configuration for McuInputXbarChannelTrigger Configuration
+:align: center
+
+Configuration for McuInputXbarChannelTrigger Configuration
+```
+
+##### Port Configuration in ICU Module
+
+The PWM module has a dependency on the Port module to configure the output pins used for generating PWM signals. Each PWM channel is mapped to a specific physical pin on the microcontroller, which must be configured as an output using the Port module.
+
+In the port pin configuration, EPWM3 is configured as a PWM output, as shown below -
+
+```{figure} Assets/images/Icu_Port.png
+:alt: Port pin configuration for Pwm
+:align: center
+Port Pin configuration for Pwm
+```
+
+##### IoHwAb Configuration in ICU Module
+
+IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers.
+To configure a Client/Server Port Interface, the container IoHwAb_IcuStartSignalMeasurement holds the configuration elements for a Client/Server template interface. This interface is instantiated by a Client/Server Port Prototype.
+The container IoHwAbOperationArguments contains the configuration of Operation Elements, such as Channel for a Client/Server Operation. These Operation Elements will be generated as function parameters in the I/O Hardware Abstraction (IoHwAb) implementation.
+Similarly, it is possible to enable communication between the I/O Client/Server interface and the MCAL APIs.
+Configuration of ICU IoHwAbCS port interface as shown below -
+
+```{figure} Assets/images/IoHwAb_Icu.png
+:alt: Configuration of ICU CSPortinterface
+:align: center
+Configuration of ICU CSPortinterface
+```
+
+The container IoHwAbIcuStartSignalMeasurement is used for configuring a Client/Server Port Prototype. This container represents an instantiation of a Client/Server Port Interface.
+Configuration of cddIcu IoHwAbCS port prototype as shown below -
+
+```{figure} Assets/images/IoHwAb_Icu1.png
+:alt: Configuration of ICU PortPrototype
+:align: center
+Configuration of ICU PortPrototype
+```
+
+The function IoHwAb_IcuStartSignalMeasurement Operation is generated, and then the MCAL API function Icu_StartSignalMeasurement is called. In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used as a Sender-Receiver Port for communication between software components -
+
+```{figure} Assets/images/IoHwAb_IcuFun.png
+:alt: Invoking MCAL API for Icu_StartSignalMeasurement
+:align: center
+Invoking MCAL API for Icu_StartSignalMeasurement
+```
+
+### GPT Integration
+
+#### Objective for GPT Integration
+
+The intention of GPT Integration is to verify successful GPT functionalities by configuring TI MCAL modules along with Vector BSW Modules. Further details are explained in the subsequent chapter.
+
+#### List of Modules for GPT Integration
+
+##### MCAL Modules for GPT Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| Mcu| The MCU module manages microcontroller features for PWM, such as power modes and clock settings.|In this use case, this module is responsible for providing the clock for GPT module. |
+|2| GPT |The GPT module initializes and manages hardware timers, enabling start/stop control, time value reading, and interrupt notifications. It operates in timer ticks, and conversion to real-time units must be handled by the application using clock and prescaler settings. | In this use case, this module responsible for providing 1ms toggling of DIO port pin in continuous mode. |
+
+```{Note}
+For detailed information, please refer to the section [GPT Module](./Module_User_Guide_Gpt.md#gpt-module).
+```
+
+##### Vector Modules for GPT Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components. |It provides an abstraction for the ICU driver and enables communication with the application layer.|
+|2| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
+|3| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in GPT Integration
+
+This chapter explains the basic configurations that are needed to realize GPT functionalities.
+
+##### GPT Configuration
+
+**GptConfigurationOfOptApiServices:**
+
+This container contains all configuration switches for configuring the optional API services of the GPT driver. The following figure shows the enabling of Api’s -
+
+```{figure} Assets/images/Gpt_OptApiServices.png
+:alt: Configuration for GptConfigurationOfOptApiServices
+:align: center
+Configuration for GptConfigurationOfOptApiServices
+```
+
+**GptDriverConfiguration:**
+
+This container contains the module-wide configuration (parameters) of the GPT Driver. The following figure shows the configuration of interrupt function and prescaler value and Gpt timeout duration -
+
+```{figure} Assets/images/Gpt_DriverConfiguration.png
+:alt: Configuration for GptDriverConfiguration
+:align: center
+Configuration for GptDriverConfiguration
+```
+
+**GptChannelConfiguration:**
+
+This container serves as the base of a Configuration Set, holding the configured GPT channels. It allows definition of multiple configuration sets for post-build usage, where each GPT channel is assigned a channel ID, mode, and optional notification function -
+
+```{figure} Assets/images/Gpt_ChannelConfiguration.png
+:alt: Configuration for GptChannelConfiguration
+:align: center
+Configuration for GptChannelConfiguration
+```
+
+##### Mcu Configuration in GPT Integration
+
+The GPT module relies on the MCU module to supply the necessary clock configurations.
+The MCU clock configuration for GPT driver is shown below -
+
+```{figure} Assets/images/McuClockSetting_Gpt.png
+:alt: Configuration for McuClockSettingConfig
+:align: center
+Configuration for McuClockSettingConfig
+```
+
+GPT clock should be derived from MCU clock reference point.
+The MCU clock reference point is shown below -
+
+```{figure} Assets/images/McuClockRef_Gpt.png
+:alt: Configuration for McuClockReferencePoint
+:align: center
+Configuration for McuClockReferencePoint
+```
+
+##### IoHwAb Configuration in GPT Integration
+
+IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers.
+To configure a Client/Server Port Interface, the container IoHwAb_GptStartTimer holds the configuration elements for a Client/Server template interface. This interface is instantiated by a Client/Server Port Prototype.
+The container IoHwAbOperationArguments contains the configuration of Operation Elements, such as Channel for a Client/Server Operation. These Operation Elements will be generated as function parameters in the I/O Hardware Abstraction (IoHwAb) implementation.
+Similarly, it is possible to enable communication between the I/O Client/Server interface and the MCAL APIs.
+Configuration of ICU IoHwAbCS port interface as shown below -
+
+```{figure} Assets/images/Gpt_IoHwAb_GptStartTimer.png
+:alt: Configuration of GPT CSPortinterface
+:align: center
+
+Configuration of GPT CSPortinterface
+```
+
+The container IoHwAbGptStartTimer is used for configuring a Client/Server Port Prototype. This container represents an instantiation of a Client/Server Port Interface.
+Configuration of Gpt IoHwAbCS port prototype as shown below -
+
+```{figure} Assets/images/Gpt_IoHwAbGptStartTimer.png
+:alt: Configuration of GPT PortPrototype
+:align: center
+
+Configuration of GPT PortPrototype
+```
+
+The function IoHwAb_GptStartTimer Operation is generated, and then the MCAL API function Icu_StartSignalMeasurement is called. In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used as a Sender-Receiver Port for communication between software components -
+
+```{figure} Assets/images/IoHwAb_Gpt.png
+:alt: Invoking MCAL API for Gpt_StartTimer
+:align: center
+
+Invoking MCAL API for Gpt_StartTimer
+```
+
+### CDD FSI Integration
+
+#### Objective for CDD FSI Integration
+
+The intention of CDD FSI Integration is to enable successful CDD FSI communication by configuring TI MCAL modules along with Vector BSW Modules. Further details are explained in the subsequent chapter.
+
+#### List of Modules for CDD FSI Integration
+
+##### MCAL Modules for CDD FSI Integration
+
+| Sl. No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| FsiRx | The Fast Serial Interface (FSI) is a high-speed serial communication module designed for reliable data transfer, especially across isolation barriers without needing extra components. It includes two separate parts: the CDD FSI Transmitter (CDD FSI TX) and the CDD FSI Receiver (CDD FSI RX). These are implemented as Complex Device Drivers (CDD) in AUTOSAR and work independently from each other.|In this use case, this module is responsible for reception of transmitted data. |
+|2| FsiTx | The Fast Serial Interface (FSI) is a high-speed serial communication module designed for reliable data transfer, especially across isolation barriers without needing extra components. It includes two separate parts: the CDD FSI Transmitter (CDD FSI TX) and the CDD FSI Receiver (CDD FSI RX). These are implemented as Complex Device Drivers (CDD) in AUTOSAR and work independently from each other.|In this use case, this module is responsible for transmitting data frames. |
+|3| Mcu| The MCU module manages microcontroller features for PWM, such as power modes and clock settings.|In this use case, this module is responsible for providing the clock for FSI clock generation. |
+
+```{Note}
+For detailed information, please refer to the section [FSIRX Module](./Module_User_Guide_Cdd_FsiRx.md#cdd_fsirx-module).
+For detailed information, please refer to the section [FSITX Module](./Module_User_Guide_Cdd_FsiTx.md#cdd_fsitx-module).
+```
+
+##### Vector Modules for CDD FSI Integration
+
+| Sl. No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb | The aim of the IoHwAb is to provide ECU hardware-independent data transition from driver modules up to the Software Components. |It provides an abstraction for the CDD FSI driver and enables communication with the application layer.|
+|2| DET | The DET is used in order to report development errors. The DET can be replaced optionally by an equivalent component which is responsible for recognizing development errors, if no DET component is available.|In this use Case, Development error is enabled to detect all development errors.|
+|3| RTE (MICROSAR Runtime Environment) | The Runtime Environment module manages the information flow between Software Components (SWCs), BSW and CDDs.|In this use case, Rte module is used to schedule the periodic tasks defined in the operating system (OS) and sender receiver ports created for sending receiving can messages from application. |
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in CDD FSI Integration
+
+This chapter explains the basic configurations that are needed to realize CDD FSI communication.
+
+##### FsiRx Configuration
+
+**CddFsiRxConfigSet:**
+
+This container contains the configuration parameters and sub containers of the AUTOSAR CDD FSI Rx module. The configuration below shows the configuration of callback functions configuration -
+
+```{figure} Assets/images/CddFsiRxConfigSet.png
+:alt: Configuration for CddFsiRxConfigSet
+:align: center
+
+Configuration for CddFsiRxConfigSet
+```
+
+**CddFsiRxGeneral:**
+
+The CDDFsiRxGeneral contains the enabling and disabling required apis and gives interrupt function type, interrupt vector, number of DMA channelIds and MaxHwUnitCount as shown below -
+
+```{figure} Assets/images/CddFsiRxGeneral.png
+:alt: Configuration for CddFsiRxGeneral
+:align: center
+
+Configuration for CddFsiRxGeneral
+```
+
+**CddFsiRxHwUnit:**
+
+This container holds the driver configuration parameters used to set up the CDD FSI Rx hardware unit. The configuration includes the HwUnitId, RxPingWdgTimerTimeout, RxFrameWdgTimerTimeout, and the CDD FSI Rx reception method, which can be set to Interrupt mode, Polling mode, or DMA mode. The figure below illustrates a configuration where the reception method is set to Interrupt mode -
+
+```{figure} Assets/images/CddFsiRxHwUnit.png
+:alt: Configuration for CddFsiRxHwUnit
+:align: center
+
+Configuration for CddFsiRxHwUnit
+```
+
+##### FsiTx Configuration
+
+**CddFsiTxConfigSet:**
+
+This container contains the configuration parameters and sub containers of the AUTOSAR CDD FSI Tx module. The configuration below shows the configuration of callback functions configuration -
+
+```{figure} Assets/images/CddFsiTxConfigSet.png
+:alt: Configuration for CddFsiTxConfigSet
+:align: center
+
+Configuration for CddFsiTxConfigSet
+```
+
+**CddFsiTxGeneral:**
+
+The CDDFsiTxGeneral contains the enabling and disabling required apis and gives interrupt function type, interrupt vector, number of DMA channelIds and MaxHwUnitCount as shown below -
+
+```{figure} Assets/images/CddFsiTxGeneral.png
+:alt: Configuration for CddFsiTxGeneral
+:align: center
+
+Configuration for CddFsiTxGeneral
+```
+
+**CddFsiTxHwUnit:**
+
+This container holds the driver configuration parameters used to set up the CDD FSI Tx hardware unit. The configuration includes the HwUnitId, TxPingTimerTimeout, TxPrescale, and the CDD FSI Tx transmission method, which can be set to Interrupt mode, Polling mode, or DMA mode. The figure below illustrates a configuration where the reception method is set to Interrupt mode.
+
+```{figure} Assets/images/CddFsiTxHwUnit.png
+:alt: Configuration for CddFsiTxHwUnit
+:align: center
+
+Configuration for CddFsiTxHwUnit
+```
+
+##### port configuration for CDD FSI Integration
+
+The CDD FSI Rx module has a dependency on the Port module to configure the output pins used. Each CDD FSI Rx channel is mapped to a specific physical pin on the microcontroller, which must be configured as an output using the Port module. Configuration of a CDD FSI Rx CLK pin is as shown below.
+The following figure shows port pin configuration of CDD FSI Rx where PIN_E1 is configured as FSIRX1_CLK -
+
+```{figure} Assets/images/CddFsiRx_PortCfg.png
+:alt: configuration for FsiRx1_CLK
+:align: center
+
+configuration for FsiRx1_CLK
+```
+
+The CDD FSI Tx module has a dependency on the Port module to configure the output pins used. Each CDD FSI Tx channel is mapped to a specific physical pin on the microcontroller, which must be configured as an output using the Port module. Configuration of a CDD FSI Tx CLK pin is as shown below.
+The following figure shows port pin configuration of CDD FSI Tx where PIN_E4 is configured as FSITX1_CLK -
+
+```{figure} Assets/images/CddFsiTx_PortCfg.png
+:alt: configuration for FsiTx1_CLK
+:align: center
+
+configuration for FsiTx1_CLK
+```
+
+##### IoHwAb configuration for CDD FSI Integration
+
+IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers.
+To configure a Client/Server Port Interface, the container IoHwAb_Cdd_FsiRx_GetStatus holds the configuration elements for a Client/Server template interface. This interface is instantiated by a Client/Server Port Prototype.
+The container IoHwAbOperationArguments contains the configuration of Operation Elements, such as Channel for a Client/Server Operation. These Operation Elements will be generated as function parameters in the I/O Hardware Abstraction (IoHwAb) implementation.
+Similarly, it is possible to enable communication between the I/O Client/Server interface and the MCAL APIs.
+Configuration of ICU IoHwAbCS port interface as shown below -
+
+```{figure} Assets/images/IoHwAb_FsiRx_getstatus.png
+:alt: Configuration of CDD FSI CSPortinterface
+:align: center
+
+Configuration of CDD FSI CSPortinterface
+```
+
+The container IoHwAbCddFsiRxGetStatus is used for configuring a Client/Server Port Prototype. This container represents an instantiation of a Client/Server Port Interface.
+Configuration of cddFsi IoHwAbCS port prototype as shown below -
+
+```{figure} Assets/images/IoHwAb_FsiRx_getstatus1.png
+:alt: Configuration of CDD FSI PortPrototype
+:align: center
+
+Configuration of CDD FSI PortPrototype
+```
+
+The function IoHwAb_CddFsiRxGetStatus Operation is generated, and then the MCAL API function CddFsiRx_GetStatus is called. In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used as a Sender-Receiver Port for communication between software components -
+
+```{figure} Assets/images/CddFsiRx_GetStatus.png
+:alt: Invoking MCAL API for CddFsiRx_GetStatus
+:align: center
+
+Invoking MCAL API for CddFsiRx_GetStatus
+```
+
+### CDD_UART Integration
+
+#### Objective for CDD_UART Integration
+
+The intention of UART Integration is to enable successful UART communication by configuring TI MCAL modules along with Vector BSW Modules. Further details are explained in the subsequent chapter.
+
+#### List of Modules for CDD_UART Integration
+
+##### MCAL Modules for CDD_UART Integration
+
+| Sl.No. | MCAL Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| UART | The UART module initializes and controls the internal UART peripherals of the microcontroller. It provides services to configure baud rate, frame format, and to transmit and receive data over serial communication channels.| In this use case UART module is responsible for enabling serial communication between the microcontroller and external devices. Moreover it facilitates reliable data transmission and reception through asynchronous communication.|
+|2| Mcu| The MCU module manages microcontroller features for UART, such as clock configuration, power modes, and interrupt settings required for UART communication.|In this use case, this module is responsible for providing the clock and initialization required for UART-based serial communication between the microcontroller and external devices. |
+|3| Port | The PORT module provides an interface to configure and control the microcontroller pins used for UART communication, such as setting the TX and RX pins to the appropriate functions. | In this use case, this module is responsible for configuring the hardware pins necessary for UART communication, such as setting the TX and RX pins to their correct functions. |
+
+```{Note}
+For detailed information, please refer to the section [CDD_UART Module](./Module_User_Guide_Cdd_uart.md#cdd-uart-module).
+```
+
+##### Vector Modules for CDD_UART Integration
+
+| Sl.No. | Vector Modules | Description | Significance in use case |
+|----|--------|----------|----|
+|1| IoHwAb |  This module provides an abstraction layer for handling UART operations, enabling seamless interaction with UART hardware channels. |It provides an abstraction for the UART driver and enables communication with the application layer.|
+|2| OS |  The Operating System is mainly responsible for handling tasks. | In this use case, it is used to initialize UART and manage UART-related task scheduling.|
+|3| Rte | The Runtime Environment module manages the information flow between software components and the ECU abstraction layers.  | In this use case, it is used to schedule and route UART communication tasks between the application and lower layers. |
+
+```{Note}
+ For detailed information on each module and its features, please refer to the Technical Reference Manual provided by Vector.
+```
+
+```{Note}
+ For importing MCAL configuration files to DaVinci refer [Importing TI MCAL modules from EB Tresos to Vector DaVinci Configurator](./Integration.md#importing-ti-mcal-modules-from-eb-tresos-to-vector-davinci-configurator).
+```
+
+#### Configuration of modules in CDD_UART Integration
+
+This chapter explains the basic configurations that are needed to realize CDD UART functionalities.
+
+##### CDD_UART Configuration
+
+The UART driver is configured using the EB Tresos tool and then imported into the Vector DaVinci Configurator for integration with the application software. The following containers and parameters should be configured.
+
+**CDD_UART General:**
+
+The UART General container provides general configuration settings for the UART module.
+
+In UART general settings, CddUartReadApi, CddUartWriteApi and CddUartirq Type is enabled as shown below -
+
+```{figure} Assets/images/Configuration_for_CDD_UART_General_settings.png
+:alt: Configuration for CDD_UART General settings
+:align: center
+
+Configuration for CDD_UART General settings
+```
+
+**CDD_UART Channel:**
+
+The CddUartChannel configuration container defines the configuration parameters for an individual UART channel.
+
+In CddUartChannel configuration, The user needs to specify the CddUartHwID and CddUartIOMode as shown below -
+
+```{figure} Assets/images/Configuration_of_cdduart_channel.png
+:alt: Configuration of CddUarChannel settings
+:align: center
+
+Configuration of CddUarChannel settings
+```
+
+##### Mcu Configuration for CDD_UART Integration
+
+The UART module relies on the MCU module to supply the necessary clock configurations.
+
+The MCU clock configuration for UART driver is shown below -
+
+```{figure} Assets/images/General_Configuration_of_MCU_Clock.png
+:alt: General Configuration of MCU Clock
+:align: center
+
+General Configuration of MCU Clock
+```
+
+UART clock should be derived from MCU clock reference point.
+
+The MCU clock reference point is shown below -
+
+```{figure} Assets/images/Configuration_of_Uartmcu_clock_reference_pt.png
+:alt: Configuration of McuClockReferencePoint
+:align: center
+Configuration of McuClockReferencePoint
+```
+
+##### Port Configuration for CDD_UART Integration
+
+The UART module has a dependency on the Port module to configure the pins used for UART communication. Each UART channel is mapped to specific physical pins on the microcontroller, which must be configured as the appropriate alternate functions (TX/RX) using the Port module.
+
+In the port pin configuration, select PortPinPeripheral, PortPinPeripheralSignal, and PortPinDirection as shown below -
+
+```{figure} Assets/images/Port_Pin_Configuration.png
+:alt: Configuration of Port Pin 
+:align: center
+Configuration of Port Pin 
+```
+
+Similarly, port pin for UART RX can be configured.
+
+##### IoHwAb Configuration for CDD_UART Integration
+
+ IoHwAb is a layer in the AUTOSAR architecture that abstracts hardware-level interfaces and provides a standardized API to the upper layers.
+
+To configure a Client/Server Port Interface, the container IoHwAbCS_Uart_read holds the configuration elements for a Client/Server template interface. This interface is instantiated by a Client/Server Port Prototype.
+
+The container IoHwAbOperationArguments contains the configuration of Operation Elements, such as ChannelID, Length, Timeout, UartDestBufferptr for a Client/Server Operation. These Operation Elements will be generated as function parameters in the I/O Hardware Abstraction (IoHwAb) implementation.
+
+Similarly, it is possible to enable communication between the I/O Client/Server interface and the MCAL APIs.
+
+Configuration of UART IoHwAbCS port interface as shown below -
+
+```{figure} Assets/images/Configuration_of_CDDUART_CS_Portinterface.png
+:alt: Configuration of cdduart CSPortinterface
+:align: center
+Configuration of cdduart CSPortinterface
+```
+
+The container IoHwAbCSUar_read is used for configuring a Client/Server Port Prototype. This container represents an instantiation of a Client/Server Port Interface.
+
+Configuration of cdduart IoHwAbCS port prototype as shown below -
+
+```{figure} Assets/images/Configuration_of_CDDUART_PortPrototype.png
+:alt: Configuration of cdduart PortPrototype
+:align: center
+Configuration of cdduart PortPrototypes
+```
+
+The function IoHwAb_IoHwAbCSUart_read_IoHwAbOperation is generated, and then the MCAL API function Cdd_Uart_Read is called.
+
+In the RTE (Runtime Environment), the corresponding port is created based on the configuration, and it can be used as a Sender-Receiver Port for communication between software components -
+
+```{figure} Assets/images/Invocking_MCAL_API_for_Cdd_Uart_Read.png
+:alt: Invocking MCAL API for Cdd Uart Read
+:align: center
+ Invocking MCAL API for Cdd Uart Read
 ```
