@@ -79,7 +79,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define CDD_FSI_RX_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation patch Version */
-#define CDD_FSI_RX_SW_PATCH_VERSION (0U)
+#define CDD_FSI_RX_SW_PATCH_VERSION (1U)
 /**   @} */
 /**
  *  \name CDD FsiRx Driver Module AUTOSAR Version Info

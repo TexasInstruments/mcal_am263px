@@ -84,7 +84,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define LIN_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
-#define LIN_SW_PATCH_VERSION (0U)
+#define LIN_SW_PATCH_VERSION (1U)
 /** @} */
 //*****************************************************************************
 //

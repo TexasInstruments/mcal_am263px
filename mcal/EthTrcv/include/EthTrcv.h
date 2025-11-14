@@ -79,7 +79,7 @@ extern VAR(volatile EthTrcv_StateType, ETH_VAR_ZERO_INIT) EthTrcv_DrvStatus;
 /** \brief Driver Implementation Major Version. */
 #define ETHTRCV_SW_MAJOR_VERSION (10U)
 /** \brief Driver Implementation Minor Version. */
-#define ETHTRCV_SW_MINOR_VERSION (2U)
+#define ETHTRCV_SW_MINOR_VERSION (3U)
 /** \brief Driver Implementation Patch Version. */
 #define ETHTRCV_SW_PATCH_VERSION (0U)
 /* @} */

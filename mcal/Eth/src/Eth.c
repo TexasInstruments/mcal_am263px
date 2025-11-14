@@ -134,7 +134,7 @@
 /*
  * Design: SITARA_MCU_MCAL-2420
  */
-#if ((ETH_SW_MAJOR_VERSION != (10U)) || (ETH_SW_MINOR_VERSION != (2U)) || (ETH_SW_PATCH_VERSION != (0U)))
+#if ((ETH_SW_MAJOR_VERSION != (10U)) || (ETH_SW_MINOR_VERSION != (3U)) || (ETH_SW_PATCH_VERSION != (0U)))
 #error "Eth: Software Version Numbers are inconsistent!!"
 #endif
 

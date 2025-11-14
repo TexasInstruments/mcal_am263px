@@ -53,7 +53,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define CDD_I2C_SW_MINOR_VERSION (0U)
 /** \brief Driver Implementation Patch Version */
-#define CDD_I2C_SW_PATCH_VERSION (0U)
+#define CDD_I2C_SW_PATCH_VERSION (1U)
 /** @} */
 
 /**

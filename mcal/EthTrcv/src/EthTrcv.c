@@ -48,13 +48,13 @@
 #endif /* #if ((ETHTRCV_AR_RELEASE_MAJOR_VERSION != (0x04U)) || (ETHTRCV_AR_RELEASE_MINOR_VERSION \
           != (0x03U)) || (ETHTRCV_AR_RELEASE_REVISION_VERSION != (0x01U))) */
 
-#if ((ETHTRCV_SW_MAJOR_VERSION != (10U)) || (ETHTRCV_SW_MINOR_VERSION != (2U)))
+#if ((ETHTRCV_SW_MAJOR_VERSION != (10U)) || (ETHTRCV_SW_MINOR_VERSION != (3U)))
 #error "Vendor specific version numbers of EthTrcv.c and EthTrcv.h are inconsistent"
-#endif /* #if ((ETHTRCV_SW_MAJOR_VERSION != (10U)) || (ETHTRCV_SW_MINOR_VERSION != (2U))) */
+#endif /* #if ((ETHTRCV_SW_MAJOR_VERSION != (10U)) || (ETHTRCV_SW_MINOR_VERSION != (3U))) */
 
-#if ((ETHTRCV_CFG_MAJOR_VERSION != (10U)) || (ETHTRCV_CFG_MINOR_VERSION != (2U)))
+#if ((ETHTRCV_CFG_MAJOR_VERSION != (10U)) || (ETHTRCV_CFG_MINOR_VERSION != (3U)))
 #error "Version numbers of EthTrcv.c and EthTrcv_Cfg.h are inconsistent!"
-#endif /* #if ((ETHTRCV_CFG_MAJOR_VERSION != (10U)) || (ETHTRCV_CFG_MINOR_VERSION != (2U))) */
+#endif /* #if ((ETHTRCV_CFG_MAJOR_VERSION != (10U)) || (ETHTRCV_CFG_MINOR_VERSION != (3U))) */
 
 /*******************************************************************************
  *  STATIC CHECKS

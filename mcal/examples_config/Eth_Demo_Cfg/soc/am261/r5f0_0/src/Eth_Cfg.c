@@ -38,11 +38,11 @@
  ******************************************************************************/
 
 /*  Version checking  */
-#if ((ETH_SW_MAJOR_VERSION != (10U))||(ETH_SW_MINOR_VERSION != (2U)))
+#if ((ETH_SW_MAJOR_VERSION != (10U))||(ETH_SW_MINOR_VERSION != (3U)))
   #error "Version numbers of Eth_Cfg.c and Eth.h are inconsistent!"
 #endif
 
-#if ((ETH_CFG_MAJOR_VERSION != (10U)) || (ETH_CFG_MINOR_VERSION != (2U)))
+#if ((ETH_CFG_MAJOR_VERSION != (10U)) || (ETH_CFG_MINOR_VERSION != (3U)))
   #error "Version numbers of Eth_Cfg.c and Eth_Cfg.h are inconsistent!"
 #endif
 

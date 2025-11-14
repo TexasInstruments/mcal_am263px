@@ -63,7 +63,7 @@ extern "C" {
 /** \brief CDD DMA configuration Minor Version */
 #define CDD_DMA_MINOR_VERSION                 (2U)
 /** \brief CDD DMA configuration Patch Version */
-#define CDD_DMA_PATCH_VERSION                 (0U)
+#define CDD_DMA_PATCH_VERSION                 (1U)
 /* @} */
 
 /* ========================================================================== */

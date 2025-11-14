@@ -65,7 +65,7 @@ extern "C" {
 /** \brief Can configuration Minor Version */
 #define CAN_CFG_MINOR_VERSION           (2U)
 /** \brief Can configuration Patch Version */
-#define CAN_CFG_PATCH_VERSION           (0U)
+#define CAN_CFG_PATCH_VERSION           (1U)
 /* @} */
 
 

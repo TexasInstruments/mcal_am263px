@@ -110,7 +110,7 @@ extern "C" {
 /** \brief CDD FSI TX configuration Minor Version */
 #define CDD_FSI_TX_CFG_MINOR_VERSION                 (2U)
 /** \brief CDD FSI TX configuration Patch Version */
-#define CDD_FSI_TX_CFG_PATCH_VERSION                 (0U)
+#define CDD_FSI_TX_CFG_PATCH_VERSION                 (1U)
 /* @} */
 
 /* ========================================================================== */

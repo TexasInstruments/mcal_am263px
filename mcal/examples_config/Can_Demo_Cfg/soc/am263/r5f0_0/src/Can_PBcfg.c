@@ -38,7 +38,7 @@
 /** \brief Can configuration Minor Version */
 #define CAN_PBCFG_C_MINOR_VERSION           (2U)
 /** \brief Can configuration Patch Version */
-#define CAN_PBCFG_C_PATCH_VERSION           (0U)
+#define CAN_PBCFG_C_PATCH_VERSION           (1U)
 
 /*  Version checking  */
  #if (   (CAN_SW_MAJOR_VERSION != (10U))||(CAN_SW_MINOR_VERSION != (2U)))

@@ -103,7 +103,7 @@
 #endif
 
 /* AUTOSAR version information check has to match definition in header file */
-#if ((FLS_SW_MAJOR_VERSION != (10U)) || (FLS_SW_MINOR_VERSION != (2U)) || (FLS_SW_PATCH_VERSION != (0U)))
+#if ((FLS_SW_MAJOR_VERSION != (10U)) || (FLS_SW_MINOR_VERSION != (3U)) || (FLS_SW_PATCH_VERSION != (0U)))
 #error "Fls: Software Version Numbers are inconsistent!!"
 #endif
 

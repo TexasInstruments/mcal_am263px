@@ -71,7 +71,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define PORT_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
-#define PORT_SW_PATCH_VERSION (1U)
+#define PORT_SW_PATCH_VERSION (2U)
 /**   @} */
 
 /**
