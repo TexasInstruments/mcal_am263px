@@ -1,5 +1,4 @@
-CDD_CMPSS_PATH=$(mcal_PATH)/Cdd_Cmpss
+include $(mcal_PATH)/Cdd_Cmpss/inc.mk
 
-SRCDIR += $(CDD_CMPSS_PATH)/src
-INCDIR += $(CDD_CMPSS_PATH)/include $(CDD_CMPSS_PATH)/src/$(PLATFORM)
+SRCDIR += $(mcal_PATH)/Cdd_Cmpss/src
 SRCS_COMMON += Cdd_Cmpss.c

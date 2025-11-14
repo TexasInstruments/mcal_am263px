@@ -1457,6 +1457,315 @@ Refer crossbar section in MCU module to map crossbar.
 
 ```
 
+#### ADC with DMA example
+
+* adc hardware trigger dma example:
+
+1. This example application is to use a hardware trigger like EPWM to trigger ADC start of conversion and copy the result using dma to the specified buffer
+2. Initialize Cdd Pwm, Dma and Adc along with interrupt configuration
+3. Setup the result buffer for ADC results for the configured adc groups
+4. As we are using epwm as the trigger, enable the ADC hardware trigger using API Adc_EnableHardwareTrigger
+5. Enable Continue to Interrupt mode using Adc_SetInterruptContinuousMode
+6. Configure the DMA in the application with source and destination buffers
+7. Configure epwm channel and start the time base counter
+8. Print the result with the dma copied buffer and disable the hardware trigger for the adc groups
+9. Disable the epwm trigger and verify the test status
+
+##### Configuration used
+
+* The configuration is available in the examples folder in the following file path
+ **<MCAL_ROOT>/examples/Adc/adc_hw_trig_dma_app/soc**
+
+* One key point to note here is adc group access mode is configured as "POLLING" so that in application, the Continue to Interrupt mode is enabled and dma copies the data from result registers to destination buffer continuously until stopped in the application.
+
+##### Steps to build and run adc_hw_trig_dma_app example
+
+adc_hw_trig_dma_app example is located in folder *<MCAL_ROOT>/examples/Adc*.
+
+
+This application can be built from the root folder by giving *gmake –s adc_hw_trig_dma_app PLATFORM=am263px*.
+
+Once the build is completed we get a binary file, which is loaded in our controller and executed.
+
+##### Sample log
+
+```{code-block}
+
+ADC_HW_TRIG_DMA_APP: STARTS !!!
+ 
+ ADC MCAL Version Info
+ ---------------------
+ Vendor ID           : 44
+ Module ID           : 123
+ SW Major Version    : 10
+ SW Minor Version    : 2
+ SW Patch Version    : 0
+ 
+ 
+ DMA MCAL Version Info
+ ---------------------
+ Vendor ID           : 44
+ Module ID           : 255
+ SW Major Version    : 10
+ SW Minor Version    : 2
+ SW Patch Version    : 0
+ 
+ 
+ CDD PWM MCAL Version Info
+ ---------------------
+ Vendor ID           : 44
+ Module ID           : 255
+ SW Major Version    : 10
+ SW Minor Version    : 2
+ SW Patch Version    : 0
+ 
+ 
+ Adc_Config
+ ------------
+  maxGroup     : 2
+  maxHwUnit    : 1
+  Group 0                       
+   groupId                   : 0
+   groupPriority             : 0
+   hwUnitId                  : 0
+   Adc_GroupEndNotification  : 0x00000000
+   streamNumSamples          : 1
+   resolution                : 12
+   convMode                  : 0
+   triggSrc                  : 1
+   accessMode                : 0
+   streamBufMode             : 0
+   hwTrigSignal              : 2
+   hwTrigTimer               : 8
+   groupReplacement          : 1
+   groupChannelMask          : 0x00000003
+   groupDataAccessMode       : 1
+   numChannels               : 2
+   groupDmaChannelId         : 0
+    channelConfig 0   
+     hwChannelId   : 0
+     samplewindow  : 16
+    channelConfig 1   
+     hwChannelId   : 1
+     samplewindow  : 16
+  Group 1                       
+   groupId                   : 1
+   groupPriority             : 2
+   hwUnitId                  : 0
+   Adc_GroupEndNotification  : 0x00000000
+   streamNumSamples          : 1
+   resolution                : 12
+   convMode                  : 0
+   triggSrc                  : 1
+   accessMode                : 0
+   streamBufMode             : 0
+   hwTrigSignal              : 2
+   hwTrigTimer               : 8
+   groupReplacement          : 1
+   groupChannelMask          : 0x00000004
+   groupDataAccessMode       : 1
+   numChannels               : 1
+   groupDmaChannelId         : 0
+    channelConfig 0   
+     hwChannelId   : 2
+     samplewindow  : 16
+  HW Unit 0           
+   hwUnitId    : 0
+   baseAddr    : 0x502c0000
+   prescale    : 0
+   resolution  : 0
+ ------------
+ ADC Group 0 Status: ADC_IDLE  ! 
+ ADC Group 1 Status: ADC_IDLE  ! 
+ 
+ Read Buffer Content (Loop 0)
+ ----------------------------
+ HW Unit 0, Base 0x502C0000:
+ -------------------------
+ [Log 0]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 2785     HWResult[0][0]: 2785
+ dmaBuff[0][1]: 1982     HWResult[0][1]: 1982
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 4033     HWResult[1][0]: 4033
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 1]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1409     HWResult[0][0]: 1409
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 2113     HWResult[1][0]: 2113
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 2]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1857     HWResult[1][0]: 1857
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 3]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 4]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ 
+ 
+ Read Buffer Content (Loop 1)
+ ----------------------------
+ HW Unit 0, Base 0x502C0000:
+ -------------------------
+ [Log 0]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 1]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 2]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 3]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 4]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1217     HWResult[0][0]: 1217
+ dmaBuff[0][1]: 1728     HWResult[0][1]: 1728
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ 
+ 
+ Read Buffer Content (Loop 2)
+ ----------------------------
+ HW Unit 0, Base 0x502C0000:
+ -------------------------
+ [Log 0]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1215     HWResult[0][0]: 1215
+ dmaBuff[0][1]: 1760     HWResult[0][1]: 1760
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 1]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1215     HWResult[0][0]: 1215
+ dmaBuff[0][1]: 1790     HWResult[0][1]: 1790
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 2]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1215     HWResult[0][0]: 1215
+ dmaBuff[0][1]: 1760     HWResult[0][1]: 1760
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 3]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1215     HWResult[0][0]: 1215
+ dmaBuff[0][1]: 1888     HWResult[0][1]: 1888
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ [Log 4]
+ 
+  ADC Group 0
+ dmaBuff[0][0]: 1215     HWResult[0][0]: 1215
+ dmaBuff[0][1]: 1760     HWResult[0][1]: 1760
+ ADC Group 0 Status: ADC_BUSY ! 
+
+  ADC Group 1
+ dmaBuff[1][0]: 1727     HWResult[1][0]: 1727
+ ADC Group 1 Status: ADC_BUSY ! 
+
+ 
+ADC_HW_TRIG_DMA_APP: Stack Usage: 1076 bytes
+ADC_HW_TRIG_DMA_APP: DONE (Passed) !!!
+ADC_HW_TRIG_DMA_APP: All tests have passed
+
+```
+
 #### File Structure
 
 

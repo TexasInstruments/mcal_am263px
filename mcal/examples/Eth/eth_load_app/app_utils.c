@@ -142,7 +142,7 @@ void AppUtils_ethPrintVersionInfo()
 #endif /* #if (ETH_VERSION_INFO_API == STD_ON) */
 }
 
-Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
+Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr, uint8 trcvIdx)
 {
     Std_ReturnType retVal = E_NOT_OK;
 #if (STD_ON == ETHTRCV_GETTRANSCEIVERMODE_API)
@@ -158,9 +158,9 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
      * changes (like speed, duplex etc.) then call below function). Adding here
      * for testing purpose.
      */
-    if (ethTrcvConfigPtr->enableAutoNeg == TRUE)
+    if (ethTrcvConfigPtr->pController[trcvIdx]->enableAutoNeg == TRUE)
     {
-        retVal = EthTrcv_StartAutoNegotiation(ethTrcvConfigPtr->trcvIdx);
+        retVal = EthTrcv_StartAutoNegotiation(trcvIdx);
         if (E_OK != retVal)
         {
             DebugP_log("\rETH_APP:ETHTRCV Initialization failed\n ");
@@ -168,11 +168,11 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
     }
 #endif
 #if (STD_ON == ETHTRCV_SETTRANSCEIVERMODE_API)
-    retVal = EthTrcv_SetTransceiverMode(ethTrcvConfigPtr->trcvIdx, ETHTRCV_MODE_ACTIVE);
+    retVal = EthTrcv_SetTransceiverMode(trcvIdx, ETHTRCV_MODE_ACTIVE);
 #endif
 
 #if (STD_ON == ETHTRCV_GETTRANSCEIVERMODE_API)
-    retVal = EthTrcv_GetTransceiverMode(ethTrcvConfigPtr->trcvIdx, &trcvMode);
+    retVal = EthTrcv_GetTransceiverMode(trcvIdx, &trcvMode);
     if (E_OK == retVal)
     {
         DebugP_log("\rETH_APP: EthTrcv Controller mode change - %s\n",
@@ -183,7 +183,7 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
 #if (STD_ON == ETHTRCV_GETLINKSTATE_API)
     EthTrcv_LinkStateType linkState;
 
-    retVal = EthTrcv_GetLinkState(ethTrcvConfigPtr->trcvIdx, &linkState);
+    retVal = EthTrcv_GetLinkState(trcvIdx, &linkState);
     if (E_OK == retVal)
     {
         if (ETHTRCV_LINK_STATE_ACTIVE == linkState)
@@ -200,7 +200,7 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
 #if (STD_ON == ETHTRCV_GETBAUDRATE_API)
     EthTrcv_BaudRateType baudRate;
 
-    retVal = EthTrcv_GetBaudRate(ethTrcvConfigPtr->trcvIdx, &baudRate);
+    retVal = EthTrcv_GetBaudRate(trcvIdx, &baudRate);
     if (E_OK == retVal)
     {
         if (ETHTRCV_BAUD_RATE_10MBIT == baudRate)
@@ -225,7 +225,7 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
 #if (STD_ON == ETHTRCV_GETDUPLEXMODE_API)
     EthTrcv_DuplexModeType duplexMode;
 
-    retVal = EthTrcv_GetDuplexMode(ethTrcvConfigPtr->trcvIdx, &duplexMode);
+    retVal = EthTrcv_GetDuplexMode(trcvIdx, &duplexMode);
     if (E_OK == retVal)
     {
         if (ETHTRCV_DUPLEX_MODE_FULL == duplexMode)
@@ -243,9 +243,9 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
     }
 #endif
 
-    if (FALSE == ethTrcvConfigPtr->loopbackEnable)
+    if (FALSE == ethTrcvConfigPtr->pController[trcvIdx]->loopbackEnable)
     {
-        retVal = EthTrcv_SetPhyLoopbackMode(ethTrcvConfigPtr->trcvIdx, ETHTRCV_PHYLOOPBACK_NONE);
+        retVal = EthTrcv_SetPhyLoopbackMode(trcvIdx, ETHTRCV_PHYLOOPBACK_NONE);
     }
 
     if (E_OK == retVal)
@@ -259,7 +259,7 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
 
 #if (STD_ON == ETHTRCV_SETPHYTXMODE_API)
 
-    retVal = EthTrcv_SetPhyTxMode(ethTrcvConfigPtr->trcvIdx, ETHTRCV_PHYTXMODE_NORMAL);
+    retVal = EthTrcv_SetPhyTxMode(trcvIdx, ETHTRCV_PHYTXMODE_NORMAL);
 
     if (E_OK == retVal)
     {
@@ -276,7 +276,7 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
     uint8  ModelNrPtr;
     uint8  RevisionNrPtr;
 
-    retVal = EthTrcv_GetPhyIdentifier(ethTrcvConfigPtr->trcvIdx, &OrgUniqueIdPtr, &ModelNrPtr, &RevisionNrPtr);
+    retVal = EthTrcv_GetPhyIdentifier(trcvIdx, &OrgUniqueIdPtr, &ModelNrPtr, &RevisionNrPtr);
 
     if (E_OK == retVal)
     {
@@ -307,7 +307,7 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
 #if (STD_ON == ETHTRCV_GETCABLEDIAGNOSTICSRESULT_API)
     EthTrcv_CableDiagResultType ResultPtr;
 
-    retVal = EthTrcv_GetCableDiagnosticsResult(ethTrcvConfigPtr->trcvIdx, &ResultPtr);
+    retVal = EthTrcv_GetCableDiagnosticsResult(trcvIdx, &ResultPtr);
 
     if (E_OK == retVal)
     {
@@ -328,7 +328,7 @@ Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr)
 
 #if (STD_ON == ETHTRCV_SETPHYTESTMODE_API)
 
-    retVal = EthTrcv_SetPhyTestMode(ethTrcvConfigPtr->trcvIdx, ETHTRCV_PHYTESTMODE_NONE);
+    retVal = EthTrcv_SetPhyTestMode(trcvIdx, ETHTRCV_PHYTESTMODE_NONE);
 
     if (E_OK == retVal)
     {

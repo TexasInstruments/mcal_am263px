@@ -70,6 +70,9 @@ SRCS_COMMON += app_utils.c EthLoadUtils.c
 SRCDIR += $(mcal_PATH)/examples/Utils
 SRCS_COMMON += Dem.c Det.c
 
+# MCAL utils
+SRCS_COMMON += McalUtils.c
+
 ifeq ($(SOC), am273)
   SRCS_COMMON += EthApp_Startup.c EthTrcv_cfg.c EthTrcv_PBcfg.c Mcu_PBcfg_am273x.c Mcu_Cfg.c Port_Cfg.c
   ifeq ($(PLATFORM), am2732s)
@@ -89,14 +92,14 @@ ifeq ($(SOC), am261)
 endif
 
 ifeq ($(SOC), am263px)
-  SRCS_COMMON += EthTrcv_Cfg.c Mcu_PBcfg.c Mcu_Cfg.c Port_Cfg.c
+  SRCS_COMMON += EthApp_Startup.c EthTrcv_Cfg.c Mcu_PBcfg.c Mcu_Cfg.c Port_Cfg.c
   ifeq ($(PACKAGE), SIP)
-    SRCS_COMMON += EthApp_Startup.c EthTrcv_PBcfg.c Port_PBcfg_SIP.c
+    SRCS_COMMON += EthTrcv_PBcfg.c Port_PBcfg_SIP.c
   else
     ifeq ($(PACKAGE), C)
-      SRCS_COMMON += EthApp_Startup_C.c EthTrcv_PBcfg_C.c Port_PBcfg_C.c
+      SRCS_COMMON += EthTrcv_PBcfg_C.c Port_PBcfg_C.c
     else
-      SRCS_COMMON += EthApp_Startup.c EthTrcv_PBcfg.c Port_PBcfg.c
+      SRCS_COMMON += EthTrcv_PBcfg.c Port_PBcfg.c
     endif
   endif
 endif
@@ -116,26 +119,49 @@ EXT_INCS = -I$(MCUPLUSSDK_ROOTDIR)/source -I$(MCUPLUSSDK_ROOTDIR)/source -I$(MCU
 ifeq ($(SOC), am263)
 EXT_CFLAGS = -DSOC_AM263X
 EXT_INCS += -I$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/config/am263x/r5f
-EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.$(PROFILE).lib -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am263x.r5f.ti-arm-clang.$(PROFILE).lib
+ifneq ($(wildcard $(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.$(PROFILE).lib),)
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.$(PROFILE).lib
+else
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.freertos.$(PROFILE).lib 
+endif
+EXT_LIBS += -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am263x.r5f.ti-arm-clang.$(PROFILE).lib
 endif
 
 ifeq ($(SOC), am261)
 EXT_CFLAGS = -DSOC_AM261X
 EXT_INCS += -I$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/config/am261x/r5f
-EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am261x.r5f.ti-arm-clang.$(PROFILE).lib -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am261x.r5f.ti-arm-clang.$(PROFILE).lib
+ifneq ($(wildcard $(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am261x.r5f.ti-arm-clang.$(PROFILE).lib),)
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am261x.r5f.ti-arm-clang.$(PROFILE).lib
+else
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am261x.r5f.ti-arm-clang.freertos.$(PROFILE).lib
+endif
+EXT_LIBS += -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am261x.r5f.ti-arm-clang.$(PROFILE).lib
 endif
 
 ifeq ($(SOC), am263px)
 EXT_CFLAGS = -DSOC_AM263PX
 EXT_INCS += -I$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/config/am263px/r5f
-EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263px.r5f.ti-arm-clang.$(PROFILE).lib -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am263px.r5f.ti-arm-clang.$(PROFILE).lib
+ifneq ($(wildcard $(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263px.r5f.ti-arm-clang.$(PROFILE).lib),)
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263px.r5f.ti-arm-clang.$(PROFILE).lib
+else
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263px.r5f.ti-arm-clang.freertos.$(PROFILE).lib
+endif
+EXT_LIBS +=  -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am263px.r5f.ti-arm-clang.$(PROFILE).lib
 endif
 
 ifeq ($(SOC), am273)
 EXT_CFLAGS = -DSOC_AM273X
 EXT_INCS += -I$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/config/am273x/r5f
-EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am273x.r5f.ti-arm-clang.$(PROFILE).lib -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am273x.r5f.ti-arm-clang.$(PROFILE).lib
+ifneq ($(wildcard $(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am273x.r5f.ti-arm-clang.$(PROFILE).lib),)
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am273x.r5f.ti-arm-clang.$(PROFILE).lib
+else
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am273x.r5f.ti-arm-clang.freertos.$(PROFILE).lib
 endif
+EXT_LIBS += -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am273x.r5f.ti-arm-clang.$(PROFILE).lib
+endif
+
+# Use FreeRTOS
+EXT_CFLAGS += -DOS_FREERTOS
 
 SRCDIR += soc/$(SOC)/syscfg
 INCDIR += soc/$(SOC)/syscfg

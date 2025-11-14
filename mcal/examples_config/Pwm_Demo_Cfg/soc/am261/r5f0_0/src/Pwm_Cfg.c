@@ -11,5 +11,5 @@
  *   supplied.
  * ==================================================================== */
 
-/* The last generated configuration variant is not 
+/* The last generated configuration variant is not
        PRE-COMPILE variant. Refer Pwm_PBcfg.c */

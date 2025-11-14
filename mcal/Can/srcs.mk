@@ -1,8 +1,6 @@
-CAN_PATH=$(mcal_PATH)/Can
+include $(mcal_PATH)/Can/inc.mk
 
-SRCDIR += $(CAN_PATH)/src
-INCDIR += $(CAN_PATH)/include $(SRCDIR)
+SRCDIR += $(mcal_PATH)/Can/src
 SRCS_COMMON += Can.c Can_Priv.c Can_Irq.c mcan.c Can_Mcan.c
-
 # SOC specific files
-SRCDIR += $(CAN_PATH)/V0
+SRCDIR += $(mcal_PATH)/Can/V0

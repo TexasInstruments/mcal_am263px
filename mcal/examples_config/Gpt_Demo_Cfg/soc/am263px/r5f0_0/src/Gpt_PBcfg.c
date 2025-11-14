@@ -21,9 +21,8 @@
  */
 
  /*********************************************************************************************************************
-    Project: gpt_am263px
-    Date   : 2023-09-20 13:18:29
-    9.0.1
+    Project: Mcal_Demo_Cfg
+    10.2.0
     4.6.0
     AUTOSAR 4.3.1 0
 
@@ -35,7 +34,7 @@
 #include "Gpt.h"
 
 #define GPT_PBCFG_C_MAJOR_VERSION    (10U)
-#define GPT_PBCFG_C_MINOR_VERSION    (1U)
+#define GPT_PBCFG_C_MINOR_VERSION    (2U)
 #define GPT_PBCFG_C_PATCH_VERSION    (0U)
 
 /* ---- Perform version checking  ----------------------------------------- */
@@ -107,10 +106,10 @@ extern void Gpt_Channel_Notify31(void);
 extern void Gpt_Channel_Notify32(void);
 
 /* Gpt Channel Configuration parameters */
-static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
+static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_ChannelConfigSet_0_ChannelConfig[28] =
 {
     [0] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL5),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -119,7 +118,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [1] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL6),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -128,7 +127,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [2] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL7),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -137,7 +136,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [3] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL8),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -146,7 +145,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [4] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL9),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -155,7 +154,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [5] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL10),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -164,7 +163,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [6] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL11),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -173,7 +172,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [7] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL12),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -182,7 +181,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [8] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL13),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -191,7 +190,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [9] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL14),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -200,7 +199,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [10] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL15),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -209,7 +208,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [11] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL16),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -218,7 +217,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [12] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL17),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -227,7 +226,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [13] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL18),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -236,7 +235,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [14] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL19),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -245,7 +244,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [15] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL20),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -254,7 +253,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [16] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL21),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -263,7 +262,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [17] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL22),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -272,7 +271,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [18] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL23),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -281,7 +280,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [19] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL24),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -290,7 +289,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [20] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL25),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -299,7 +298,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [21] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL26),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -308,7 +307,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [22] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL27),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -317,7 +316,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [23] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL28),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -326,7 +325,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [24] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL29),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -335,7 +334,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [25] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL30),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER0,
@@ -344,7 +343,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [26] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL31),
         .ChannelMode = (GPT_CH_MODE_ONESHOT),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -353,7 +352,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
         .GptChannelClksrcRef = 200U  /* Gpt Clock derived from Mcu in MHz*/
     },
     [27] =
-    {	
+    {
         .ChannelId = (GPT_RTI_CHANNEL32),
         .ChannelMode = (GPT_CH_MODE_CONTINUOUS),  /* Gpt Channel Mode */
         .CounterBlk = GPT_RTI_COUNTER1,
@@ -366,7 +365,7 @@ static CONST(Gpt_ChannelConfigType, GPT_PBCFG) Gpt_Config_ChannelConfig[28] =
 /*<GPT_CONFIGURATION>*/
 CONST(Gpt_ConfigType, GPT_PBCFG) Gpt_Config =
 {
-    Gpt_Config_ChannelConfig,/*Pointer to Channel Configuration*/
+    Gpt_ChannelConfigSet_0_ChannelConfig,/*Pointer to Channel Configuration*/
     28/*Number of Channels*/
 };
 

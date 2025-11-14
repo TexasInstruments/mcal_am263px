@@ -1,0 +1,29 @@
+---
+orphan: true
+---
+
+---
+title: Fls_ReadIdConfig
+summary: FLS external flash device informations. 
+
+---
+
+# Fls_ReadIdConfig
+
+
+
+FLS external flash device informations. 
+
+
+`#include <Fls.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint8 | cmd |  Command to read device information.  |
+|  uint8 | numBytes |  Number of bytes required to read device information.  |
+|  uint8 | dummy4 |  Number of dummy bytes for 4 line.  |
+|  uint8 | dummy8 |  Number of dummy bytes for 8 line.  |
+
+

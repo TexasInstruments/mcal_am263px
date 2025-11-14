@@ -39,8 +39,6 @@
 #include "Hw_Cpsw_Stats.h"
 #include "../../../../mcal_test/eth_test/testLib/ethTestCovFlag.h"
 #endif
-/*LDRA_ANALYSIS*/
-#include "hw_types.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */

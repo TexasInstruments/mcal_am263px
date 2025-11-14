@@ -1,0 +1,160 @@
+<?xml version='1.0'?>
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="Cdd_Uart" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+          <d:chc name="Cdd_Uart" type="AR-ELEMENT" value="MODULE-CONFIGURATION">
+            <d:ctr type="MODULE-CONFIGURATION">
+              <a:a name="DEF" value="ASPath:/TI_AM263x/Cdd_Uart"/>
+              <a:a name="IMPORTER_INFO" value="@REC"/>
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION"
+                     value="VariantPreCompile">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+              </d:var>
+              <d:lst name="CddUartDriver" type="MAP">
+                <d:ctr name="CddUartDriver_0" type="IDENTIFIABLE">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                  <d:lst name="CddUartChannel" type="MAP">
+                    <d:ctr name="CddUartChannel_0" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CddUartHwID" type="ENUMERATION"
+                             value="CDD_UART_CHANNEL_ID_0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartClockFrequency" type="INTEGER"
+                             value="48000000">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartBaudRate" type="INTEGER"
+                             value="115200">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartIOMode" type="ENUMERATION"
+                             value="CDD_UART_MODE_DMA">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartTXTriggerLevel" type="ENUMERATION"
+                             value="CDD_UART_TRIGGER_LEVEL_1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartRXTriggerLevel" type="ENUMERATION"
+                             value="CDD_UART_TRIGGER_LEVEL_1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartWordLength" type="ENUMERATION"
+                             value="CDD_UART_WORD_LENGTH_8">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartParity" type="ENUMERATION"
+                             value="CDD_UART_PARITY_NONE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartReadReturnModes" type="ENUMERATION"
+                             value="CDD_UART_FULL_READ_RETURN">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartOperatingModes" type="ENUMERATION"
+                             value="CDD_UART_16x_OPER">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartStopBits" type="ENUMERATION"
+                             value="CDD_UART_STOP_BIT_1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="CddUartHwUnitCddDmaTxHandler"
+                             type="REFERENCE"
+                             value="ASPath:/Cdd_Dma/Cdd_Dma/CddDmaDriverHandler_0_Uart_Tx">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ref name="CddUartHwUnitCddDmaRxHandler"
+                             type="REFERENCE"
+                             value="ASPath:/Cdd_Dma/Cdd_Dma/CddDmaDriverHandler_0_Uart_Rx">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:var name="CddUartReadNotificationHandler"
+                             type="FUNCTION-NAME"
+                             value="CddUart_CallbackReadNotify">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartWriteNotificationHandler"
+                             type="FUNCTION-NAME"
+                             value="CddUart_CallbackWriteNotify">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CddUartErrorNotificationHandler"
+                             type="FUNCTION-NAME"
+                             value="CddUart_CallbackErrorNotify">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:lst>
+                </d:ctr>
+              </d:lst>
+              <d:ctr name="CddUartGeneral" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddVersionInfoApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartRegisterReadbackApi" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartDeinitApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartWriteApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartReadApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartCancelApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartGetRemainingWordsApi" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartDevErrorDetect" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddUartIrqType" type="ENUMERATION"
+                       value="CDD_UART_ISR_VOID">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CddDefaultOSCounterId" type="INTEGER" value="0">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:ref name="CddOsCounterRef" type="REFERENCE"
+                       value="ASPath:/Os/Os/OsCounter_0">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+              </d:ctr>
+              <d:ctr name="CddUartPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CddUartDeviceVariant" type="ENUMERATION"
+                       value="AM263X">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

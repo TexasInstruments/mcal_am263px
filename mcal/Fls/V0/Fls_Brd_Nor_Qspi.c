@@ -233,7 +233,7 @@ Std_ReturnType Nor_QspiWriteEnableLatched(QSPI_Handle handle, uint32 timeOut)
     uint8           readStatus[4U] = {0U};
     uint8           cmd            = 0U;
     volatile uint32 tempCount      = timeOut * 16U;
-    cmd                            = fls_config_sfdp->cmdRdsr;
+    cmd                            = Fls_Config_SFDP_Ptr->cmdRdsr;
     do
     {
         if (tempCount <= 0U)
@@ -242,7 +242,7 @@ Std_ReturnType Nor_QspiWriteEnableLatched(QSPI_Handle handle, uint32 timeOut)
         }
         if (stepcmd == 0U)
         {
-            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus[0U], 1);
+            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, readStatus, 1);
             if (retVal != (Std_ReturnType)E_OK)
             {
                 stepcmd = 1U;
@@ -292,7 +292,7 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
     uint8 readStatus[4U] = {0U};
     uint8 cmd            = 0U;
 
-    cmd = fls_config_sfdp->cmdRdsr;
+    cmd = Fls_Config_SFDP_Ptr->cmdRdsr;
 
     do
     {
@@ -302,7 +302,7 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
         }
         if (stepcmd == 0U)
         {
-            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus[0U], 1);
+            retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, readStatus, 1);
             if (retVal == (Std_ReturnType)E_NOT_OK)
             {
                 stepcmd = 1U;
@@ -341,9 +341,9 @@ Fls_InternalStateType Nor_QspiAsyncWaitReady(QSPI_Handle handle, uint32 timeOut)
     uint8                 readStatus[4U] = {0U};
     uint8                 cmd            = 0U;
 
-    cmd = fls_config_sfdp->cmdRdsr;
+    cmd = Fls_Config_SFDP_Ptr->cmdRdsr;
 
-    retVal1 = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, &readStatus[0U], 1);
+    retVal1 = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, readStatus, 1);
 
     if (retVal1 == E_NOT_OK)
     {
@@ -373,19 +373,19 @@ Std_ReturnType Nor_QspiReadId(QSPI_Handle handle)
     uint8          idCode[3] = {0};
     uint32         manufacturerId;
     uint32         deviceId;
-    uint8          cmd = fls_config_sfdp->idCfg.cmd;
+    uint8          cmd = Fls_Config_SFDP_Ptr->idCfg.cmd;
 
-    retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, idCode, fls_config_sfdp->idCfg.numBytes);
+    retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, idCode, Fls_Config_SFDP_Ptr->idCfg.numBytes);
 
     if (retVal == (Std_ReturnType)E_OK)
     {
         manufacturerId = (uint32)idCode[0];
         deviceId       = ((uint32)idCode[1] << 8U) | ((uint32)idCode[2]);
-        if (manufacturerId != fls_config_sfdp->manfId)
+        if (manufacturerId != Fls_Config_SFDP_Ptr->manfId)
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
-        else if (deviceId != fls_config_sfdp->deviceId)
+        else if (deviceId != Fls_Config_SFDP_Ptr->deviceId)
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
@@ -436,30 +436,30 @@ static Std_ReturnType Fls_norOpen_sub(QSPI_Handle handle, QSPI_Object *object)
     switch (Fls_DrvObj.Fls_Mode)
     {
         case FLS_QSPI_RX_LINES_SINGLE:
-            object->writeCmd     = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_SINGLE].cmdWr;
-            object->readCmd      = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_SINGLE].cmdRd;
-            object->numDummyBits = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_SINGLE].dummyClksRd;
-            object->numAddrBytes = fls_config_sfdp->addrnumBytes;
+            object->writeCmd     = Fls_Config_SFDP_Ptr->protos.cmdWr;
+            object->readCmd      = Fls_Config_SFDP_Ptr->protos.cmdRd;
+            object->numDummyBits = Fls_Config_SFDP_Ptr->protos.dummyClksRd;
+            object->numAddrBytes = Fls_Config_SFDP_Ptr->addrnumBytes;
             break;
         case FLS_QSPI_RX_LINES_DUAL:
-            object->writeCmd     = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_DUAL].cmdWr;
-            object->readCmd      = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_DUAL].cmdRd;
-            object->numDummyBits = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_DUAL].dummyClksRd;
-            object->numAddrBytes = fls_config_sfdp->addrnumBytes;
+            object->writeCmd     = Fls_Config_SFDP_Ptr->protos.cmdWr;
+            object->readCmd      = Fls_Config_SFDP_Ptr->protos.cmdRd;
+            object->numDummyBits = Fls_Config_SFDP_Ptr->protos.dummyClksRd;
+            object->numAddrBytes = Fls_Config_SFDP_Ptr->addrnumBytes;
             break;
         case FLS_QSPI_RX_LINES_QUAD:
-            object->writeCmd     = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].cmdWr;
-            object->readCmd      = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].cmdRd;
-            object->numDummyBits = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].dummyClksRd;
-            object->numAddrBytes = fls_config_sfdp->addrnumBytes;
-            retVal               = Nor_QspiSetQeBit(handle, fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].enableType);
+            object->writeCmd     = Fls_Config_SFDP_Ptr->protos.cmdWr;
+            object->readCmd      = Fls_Config_SFDP_Ptr->protos.cmdRd;
+            object->numDummyBits = Fls_Config_SFDP_Ptr->protos.dummyClksRd;
+            object->numAddrBytes = Fls_Config_SFDP_Ptr->addrnumBytes;
+            retVal               = Nor_QspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
         default:
-            object->writeCmd     = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].cmdWr;
-            object->readCmd      = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].cmdRd;
-            object->numDummyBits = fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].dummyClksRd;
-            object->numAddrBytes = fls_config_sfdp->addrnumBytes;
-            retVal               = Nor_QspiSetQeBit(handle, fls_config_sfdp->protos[FLS_QSPI_RX_LINES_QUAD].enableType);
+            object->writeCmd     = Fls_Config_SFDP_Ptr->protos.cmdWr;
+            object->readCmd      = Fls_Config_SFDP_Ptr->protos.cmdRd;
+            object->numDummyBits = Fls_Config_SFDP_Ptr->protos.dummyClksRd;
+            object->numAddrBytes = Fls_Config_SFDP_Ptr->addrnumBytes;
+            retVal               = Nor_QspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
     }
     if (retVal == E_OK)
@@ -492,7 +492,7 @@ static Std_ReturnType Fls_norOpen_sub1(void)
         cmd = NOR_CMD_RST;
         if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U) == E_OK)
         {
-            if (Nor_QspiWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->wrrwriteTimeout) == E_OK)
+            if (Nor_QspiWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout) == E_OK)
             {
                 retVal = E_OK;
             }
@@ -1118,7 +1118,7 @@ Std_ReturnType Fls_norAsyncWrite(uint32 actualChunkSize)
     Fls_InternalStateType readStatus = FLS_INTERNAL_JOB_WAIT;
     uint32                pageSize, chunkLen;
 
-    pageSize = fls_config_sfdp->pageSize;
+    pageSize = Fls_Config_SFDP_Ptr->pageSize;
     chunkLen = pageSize;
     if (FlsWriteStage == FLS_S_INIT_STAGE)
     {
@@ -1142,7 +1142,7 @@ Std_ReturnType Fls_norAsyncWrite(uint32 actualChunkSize)
     }
     else
     {
-        readStatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->flashWriteTimeout);
+        readStatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->flashWriteTimeout);
 
         if (readStatus == FLS_INTERNAL_JOB_DONE)
         {
@@ -1184,7 +1184,7 @@ Std_ReturnType Fls_norAsyncWrite(uint32 actualChunkSize)
 
 static void Flash_offsetToBlkPage(uint32 offset, uint32 *Length)
 {
-    uint32 pageSize = fls_config_sfdp->pageSize;
+    uint32 pageSize = Fls_Config_SFDP_Ptr->pageSize;
     uint32 leftover;
 
     leftover = pageSize - (offset % pageSize);
@@ -1207,7 +1207,7 @@ void Fls_norAsyncWrite_sub(uint32 actualChunkSize)
 {
     uint32         pageSize, chunkLen;
     Std_ReturnType retVal = E_OK;
-    pageSize              = fls_config_sfdp->pageSize;
+    pageSize              = Fls_Config_SFDP_Ptr->pageSize;
     chunkLen              = pageSize;
     uint8           *buf  = Fls_DrvObj.ramAddr;
     QSPI_Transaction transaction;
@@ -1237,12 +1237,12 @@ void Fls_norAsyncWrite_sub(uint32 actualChunkSize)
 static Std_ReturnType Fls_norAsyncWrite_sub1(void)
 {
     Std_ReturnType retVal  = E_OK;
-    uint8          cmdWren = fls_config_sfdp->cmdWren;
+    uint8          cmdWren = Fls_Config_SFDP_Ptr->cmdWren;
     retVal                 = Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U);
 
     if (retVal == E_OK)
     {
-        retVal = Nor_QspiWriteEnableLatched(Fls_DrvObj.spiHandle, fls_config_sfdp->wrrwriteTimeout);
+        retVal = Nor_QspiWriteEnableLatched(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     }
     return retVal;
 }
@@ -1271,9 +1271,9 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
 {
     Std_ReturnType        retVal    = E_OK;
     Fls_InternalStateType retstatus = FLS_INTERNAL_JOB_WAIT;
-    uint8                 cmd       = fls_config_sfdp->eraseCfg.cmdBlockErase3B;
+    uint8                 cmd       = Fls_Config_SFDP_Ptr->eraseCfg.cmdBlockErase3B;
     uint32                cmdAddr   = Fls_DrvObj.flashAddr;
-    uint8                 cmdWren   = fls_config_sfdp->cmdWren;
+    uint8                 cmdWren   = Fls_Config_SFDP_Ptr->cmdWren;
     switch (FlsEraseStage)
     {
         case FLS_S_INVALID_ADDRESS:
@@ -1293,7 +1293,7 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
 
         case FLS_S_DELAY_1_STAGE:
         {
-            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->wrrwriteTimeout);
+            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             retVal    = Fls_norQspiAsyncWaitReadyBlock(retstatus);
             break;
         }
@@ -1315,7 +1315,7 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
 
         case FLS_S_DELAY_2_STAGE:
         {
-            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->chipEraseTimeout);
+            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->chipEraseTimeout);
             if (retstatus == FLS_INTERNAL_JOB_DONE)
             {
                 retVal        = E_OK;
@@ -1446,9 +1446,9 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
 {
     Std_ReturnType        retVal    = E_OK;
     Fls_InternalStateType retstatus = FLS_INTERNAL_JOB_WAIT;
-    uint8                 cmd       = fls_config_sfdp->eraseCfg.cmdSectorErase3B;
+    uint8                 cmd       = Fls_Config_SFDP_Ptr->eraseCfg.cmdSectorErase3B;
     uint32                cmdAddr   = Fls_DrvObj.flashAddr;
-    uint8                 cmdWren   = fls_config_sfdp->cmdWren;
+    uint8                 cmdWren   = Fls_Config_SFDP_Ptr->cmdWren;
     switch (FlsEraseStage)
     {
         case FLS_S_INVALID_ADDRESS:
@@ -1468,7 +1468,7 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
 
         case FLS_S_DELAY_1_STAGE:
         {
-            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->wrrwriteTimeout);
+            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             retVal    = Fls_norQspiAsyncWaitReadysector(retstatus);
             break;
         }
@@ -1490,7 +1490,7 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
 
         case FLS_S_DELAY_2_STAGE:
         {
-            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->wrrwriteTimeout);
+            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             if (retstatus == FLS_INTERNAL_JOB_DONE)
             {
                 retVal        = E_OK;
@@ -1544,8 +1544,8 @@ Std_ReturnType Fls_norAsyncChipErase(void)
 {
     Fls_InternalStateType retstatus = FLS_INTERNAL_JOB_WAIT;
     Std_ReturnType        retVal    = E_OK;
-    uint8                 cmd       = fls_config_sfdp->cmdChipErase;
-    uint8                 cmdWren   = fls_config_sfdp->cmdWren;
+    uint8                 cmd       = Fls_Config_SFDP_Ptr->cmdChipErase;
+    uint8                 cmdWren   = Fls_Config_SFDP_Ptr->cmdWren;
 
     switch (FlsEraseStage)
     {
@@ -1566,7 +1566,7 @@ Std_ReturnType Fls_norAsyncChipErase(void)
 
         case FLS_S_DELAY_1_STAGE:
         {
-            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->wrrwriteTimeout);
+            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             retVal    = Fls_norQspiAsyncWaitReadyChip(retstatus);
             break;
         }
@@ -1588,7 +1588,7 @@ Std_ReturnType Fls_norAsyncChipErase(void)
 
         case FLS_S_DELAY_2_STAGE:
         {
-            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, fls_config_sfdp->chipEraseTimeout);
+            retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->chipEraseTimeout);
             if (retstatus == FLS_INTERNAL_JOB_DONE)
             {
                 retVal        = E_OK;
@@ -1650,7 +1650,7 @@ Std_ReturnType Nor_QspiSetQeBit(QSPI_Handle handle, uint8 qeType)
         }
         if (status == E_OK)
         {
-            status = Nor_QspiWaitReady(handle, fls_config_sfdp->flashWriteTimeout);
+            status = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashWriteTimeout);
         }
     }
     return status;
@@ -1659,14 +1659,14 @@ Std_ReturnType Nor_QspiSetQeBit(QSPI_Handle handle, uint8 qeType)
 static Std_ReturnType Nor_cmdwr_Enable(QSPI_Handle handle)
 {
     Std_ReturnType status = E_OK;
-    status                = Nor_QspiCmdWrite(handle, fls_config_sfdp->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U);
+    status                = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U);
     if (status == E_OK)
     {
-        status = Nor_QspiWriteEnableLatched(Fls_DrvObj.spiHandle, fls_config_sfdp->wrrwriteTimeout);
+        status = Nor_QspiWriteEnableLatched(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     }
     if (status == E_OK)
     {
-        status = Nor_QspiWaitReady(handle, fls_config_sfdp->wrrwriteTimeout);
+        status = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     }
     return status;
 }
@@ -1685,7 +1685,7 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
             /* QE is bit 6 of SR1 */
             sr1    = 0;
             bitPos = (uint8)1U << (uint8)6U;
-            status = Nor_QspiCmdRead(handle, fls_config_sfdp->cmdRdsr, FLS_QSPI_CMD_INVALID_ADDR, &sr1, 1U);
+            status = Nor_QspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, FLS_QSPI_CMD_INVALID_ADDR, &sr1, 1U);
 
             if ((sr1 & bitPos) != (uint8)0U)
             {
@@ -1722,8 +1722,8 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
         case 5:
             /* QE is bit 1 of SR2 */
             bitPos  = (uint8)1 << (uint8)1;
-            status  = Nor_QspiCmdRead(handle, fls_config_sfdp->cmdRdsr, FLS_QSPI_CMD_INVALID_ADDR, &sr1, 1U);
-            status += Nor_QspiCmdRead(handle, fls_config_sfdp->cmdRdsr2, FLS_QSPI_CMD_INVALID_ADDR, &sr2, 1U);
+            status  = Nor_QspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, FLS_QSPI_CMD_INVALID_ADDR, &sr1, 1U);
+            status += Nor_QspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr2, FLS_QSPI_CMD_INVALID_ADDR, &sr2, 1U);
 
             if ((sr2 & bitPos) != (uint8)0U)
             {
@@ -1741,7 +1741,7 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
         case 6:
             /* QE is bit 1 of SR2, using different command */
             bitPos = (uint8)1 << (uint8)1;
-            status = Nor_QspiCmdRead(handle, fls_config_sfdp->cmdRdsr2, FLS_QSPI_CMD_INVALID_ADDR, &sr2, 1U);
+            status = Nor_QspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr2, FLS_QSPI_CMD_INVALID_ADDR, &sr2, 1U);
 
             if ((sr2 & bitPos) != (uint8)0U)
             {

@@ -17,12 +17,13 @@
         "
         connection="TIXDS110_Connection.xml"
         toolChain="TICLANG"
-        cgtVersion="2.1.3"
+        cgtVersion="4.0.3.LTS"
         device="Cortex R.AM263x"
         deviceCore="Cortex_R5_0"
         ignoreDefaultDeviceSettings="true"
         ignoreDefaultCCSSettings="true"
         endianness="little"
+        outputType="executable"
         outputFormat="ELF"
         launchWizard="False"
         linkerCommandFile=""
@@ -59,6 +60,7 @@
         -I${MCAL_MCAL_autosar_include}
         -I${MCAL_MCAL_Uart}
         -I${MCAL_MCAL_Include_hw}
+        -I${MCAL_MCAL_Mcal_Lib}
         -I${MCAL_MCAL_Include_memmap}
         -I${MCAL_MCAL_Include_hw_types}
         -I${MCAL_MCAL_Include_hal_stdtypes}
@@ -121,6 +123,7 @@
         <pathVariable name="MCAL_MCAL_Utils_am263" path="${PROJECT_LOC}/Utils/am263" scope="project"/>
         <pathVariable name="MCAL_MCAL_Utils" path="${PROJECT_LOC}/Utils" scope="project"/>
         <pathVariable name="MCAL_sys_asm" path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Mcal_Lib" path="${MCAL_MCAL}/Mcal_Lib" scope="project"/>
 
         <pathVariable name="MCAL_MCAL_Uart_V0" path="${MCAL_MCAL}/Uart/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu_V0" path="${MCAL_MCAL}/Mcu/V0" scope="project"/>

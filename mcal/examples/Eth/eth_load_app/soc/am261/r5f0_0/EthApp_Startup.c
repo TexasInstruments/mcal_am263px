@@ -75,6 +75,7 @@
 
 #include "EthTrcv.h"
 #include "app_utils.h"
+#include "McalUtils.h"
 #include "EthApp_Startup.h"
 
 /* ========================================================================== */
@@ -92,26 +93,33 @@
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
-
+static CONST(Mcu_EthConfigType, MCU_PBCFG) Mcu_EthConfiguration[MCU_ETH_PORTS] = {
+    [0] = {
+        .macNum            = 1U,
+        .rmiiClkOutDisable = 1U,
+        .idModeEnable      = 1U,
+        .macConnectionType = MCU_ETH_MAC_CONN_TYPE_RGMII_DETECT_INBAND,
+    }};
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
 
 void EthApp_Startup()
 {
+    Mcu_updateGmiiField(Mcu_EthConfiguration);
 }
 
 void EthApp_TrcvInit()
 {
     Eth_ConfigType *pEthConfigPtr;
-    pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+    pEthConfigPtr = &Eth_Config;
 
     AppUtils_ethAm263xPHYDelayConfig(pEthConfigPtr, 0);
 
 #if (STD_ON == ETHTRCV_PRE_COMPILE_VARIANT)
-    AppUtils_ethTrcvInit((EthTrcv_ConfigType *)NULL_PTR);
+    AppUtils_ethTrcvInit((EthTrcv_ConfigType *)NULL_PTR, EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0);
 #else
-    AppUtils_ethTrcvInit(&EthTrcvConfigSet_EthTrcvConfig_0);
+    AppUtils_ethTrcvInit(&EthTrcv_Config, EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0);
 #endif /* (STD_ON == ETHTRCV_PRE_COMPILE_VARIANT)*/
 }
 

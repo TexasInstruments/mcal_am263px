@@ -65,11 +65,11 @@ mcal_EXAMPLE_LIST =
 
 ############################
 # device kw targets
-# List of kw targets 
+# List of kw targets
 # All the kw targets mentioned in list are built when allkw target is called
 # List below all kw targets for allowed values
 ############################
-mcal_KW_LIST = 
+mcal_KW_LIST =
 
 ############################
 # device mcal examples
@@ -103,10 +103,10 @@ ifeq ($(BUILD_OS_TYPE),baremetal)
     mcal_EXAMPLE_LIST += $(mcal_mcal_EXAMPLE_LIST)
   endif
   else
-  ifneq ($(CDD_IPC_SAFE_EXCEPTION_ENABLE), yes) 
+  ifneq ($(CDD_IPC_SAFE_EXCEPTION_ENABLE), yes)
     mcal_EXAMPLE_LIST += ipc_safeipc_app
   else
-    mcal_EXAMPLE_LIST += ipc_safeipc_test  
+    mcal_EXAMPLE_LIST += ipc_safeipc_test
   endif
   endif
   ifneq ($(mcal_mcal_KW_LIST),)
@@ -134,7 +134,7 @@ ifeq ($(BUILD_OS_TYPE),freertos)
   endif
 endif
 
-mcal_PKG_LIST_ALL = $(mcal_EXAMPLE_LIST) $(mcal_LIB_LIST) $(mcal_APP_LIB_LIST) $(mcal_test_EXAMPLE_LIST) 
+mcal_PKG_LIST_ALL = $(mcal_EXAMPLE_LIST) $(mcal_LIB_LIST) $(mcal_APP_LIB_LIST) $(mcal_test_EXAMPLE_LIST)
 
 # Component specific CFLAGS
 #CFLAGS_COMP_COMMON

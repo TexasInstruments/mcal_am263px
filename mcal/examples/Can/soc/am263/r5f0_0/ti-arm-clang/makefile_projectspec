@@ -26,17 +26,17 @@ all:
 export:
 	@echo "Exporting project: $(PROJECT_NAME)"
 	$(MKDIR) $(MCAL_PATH)/ccs_projects
-	$(CCS_ECLIPSE) -noSplash -data $(MCAL_PATH)/ccs_projects -application com.ti.ccstudio.apps.projectCreate -ccs.projectSpec $(PROJECT_SPEC) -ccs.overwrite full
+	$(CCS_ECLIPSE) -workspace $(MCAL_PATH)/ccs_projects -application com.ti.ccs.apps.projectCreate -ccs.projectSpec $(PROJECT_SPEC) -ccs.overwrite full
 
 # CCS project target: Export the project first, then build it
 ccs_project: export
 	@echo "Building project: $(PROJECT_NAME)"
-	$(CCS_ECLIPSE) -noSplash -data $(MCAL_PATH)/ccs_projects -application com.ti.ccstudio.apps.projectBuild -ccs.projects $(PROJECT_NAME) -ccs.configuration $(PROFILE)
+	$(CCS_ECLIPSE) -workspace $(MCAL_PATH)/ccs_projects -application com.ti.ccs.apps.projectBuild -ccs.projects $(PROJECT_NAME) -ccs.configuration $(PROFILE)
 
 # Clean target: Clean the specified project build artifacts
 clean:
 	@echo "Cleaning project: $(PROJECT_NAME)"
-	$(CCS_ECLIPSE) -noSplash -data $(MCAL_PATH)/ccs_projects -application com.ti.ccstudio.apps.projectBuild -ccs.projects $(PROJECT_NAME) -ccs.configuration $(PROFILE) -ccs.clean
+	$(CCS_ECLIPSE) -workspace $(MCAL_PATH)/ccs_projects -application com.ti.ccs.apps.projectBuild -ccs.projects $(PROJECT_NAME) -ccs.configuration $(PROFILE) -ccs.clean
 
 # Phony targets
 .PHONY: all ccs_project clean export

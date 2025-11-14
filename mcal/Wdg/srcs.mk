@@ -1,9 +1,6 @@
-WDG_PATH=$(mcal_PATH)/Wdg
+include $(mcal_PATH)/Wdg/inc.mk
 
-SRCDIR += $(WDG_PATH)/src
-INCDIR += $(WDG_PATH)/include
+SRCDIR += $(mcal_PATH)/Wdg/src
 SRCS_COMMON += Wdg.c Wdg_Priv.c
-
 # SOC specific files
-SRCDIR += $(WDG_PATH)/V0
-INCDIR += $(WDG_PATH)/V0
+SRCDIR += $(mcal_PATH)/Wdg/V0

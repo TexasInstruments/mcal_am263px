@@ -191,6 +191,8 @@ typedef struct Can_DriverObjType_s
     /**< Can Mailbox TX type array of Number of TX Mailboxes. */
 } Can_DriverObjType;
 
+extern uint8 Can_DrvState;
+
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */

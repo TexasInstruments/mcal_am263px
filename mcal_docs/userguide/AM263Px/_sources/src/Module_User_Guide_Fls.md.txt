@@ -625,6 +625,1072 @@ Container for runtime configuration parameters of the flash driver.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
+##### FlsFlashConfigList
+List of flash memory configurations.
+
+##### FlsFlashConfiguration
+Configuration description of external flash devices.
+
+###### FlsManfId
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsManfId |
+| **Description** | Manufacture ID of the flash device |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 157 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsSize
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsSize |
+| **Description** | Specifies the size of flash. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 33554432 |
+
+###### FlsPageSize
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsPageSize |
+| **Description** | Size of a page in flash in bytes |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 256 |
+| **Max-value** | 1048576 |
+| **Min-value** | 0 |
+
+###### FlsDeviceID
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDeviceID |
+| **Description** | Flash device ID |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 23065 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### Fls4ByteAddressEnableCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | Fls4ByteAddressEnableCmd |
+| **Description** | Sequence/Command to enable 4 byte addressing. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 161 |
+
+###### Fls4ByteAddressDisableCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | Fls4ByteAddressDisableCmd |
+| **Description** | Sequence/Command to disable 4 byte addressing. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+
+###### FlsDtrSupport
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDtrSupport |
+| **Description** | Flash DTR support yes/no |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+
+###### FlsDeviceBusyType
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDeviceBusyType |
+| **Description** | Flash device busy type |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+
+###### FlsDeviceResetType
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsDeviceResetType |
+| **Description** | Flash device reset type |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 48 |
+
+###### FlsAddressByteSupport
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsAddressByteSupport |
+| **Description** | Addressing mode according to flash, 0 - Only 3 byte addressing supported, 1 - Both 3 and 4 byte addressing supported, 2 - Only 4 byte addressing supported. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 2 |
+| **Max-value** | 2 |
+| **Min-value** | 0 |
+
+###### FlsAddrNumBytes
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsAddrNumBytes |
+| **Description** | Number of bytes used to represent address to be sent to flash. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 4 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdWren
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdWren |
+| **Description** | Command to execute Write Enable (WREN) instruction for setting Write Enable Latch (WEL) bit. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 6 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdWrsr
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdWrsr |
+| **Description** | Command to execute Write Status Register (WRSR) command which allows new values to be written to the Status Register. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdRdsr1
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdRdsr1 |
+| **Description** | Command to execute Read Status Register (RDSR) command for reading the Status Register. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 5 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdRdsr2
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdRdsr2 |
+| **Description** | Command to execute Read Status Register (RDSR2) command for reading the Status Register. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 53 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsStatusRegWipMask
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsStatusRegWipMask |
+| **Description** | Wip bit mask in Status Register. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsStatusRegWelMask
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsStatusRegWelMask |
+| **Description** | Wel bit mask in Status Register. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 2 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdChipErase
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdChipErase |
+| **Description** | Command to execute Chip Erase. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 199 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdXspiWipRdCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdXspiWipRdCmd |
+| **Description** | Command to check WIP in XSPI. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 5 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsXspiWipBitMask
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsXspiWipBitMask |
+| **Description** | WIP bit mask. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsXspiWipReg
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsXspiWipReg |
+| **Description** | Register offset for WIP in XSPI. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsNumberOfSuppEraseTypes
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsNumberOfSuppEraseTypes |
+| **Description** | Number of supported erase types |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+
+###### FlsCmdExecType
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdExecType |
+| **Description** | Command execution type. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+
+###### FlsByteOrder
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsByteOrder |
+| **Description** | Flash byte order. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 255 |
+
+###### FlsChipEraseTimeout
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsChipEraseTimeout |
+| **Description** | Timeout period for chip erase operation. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 110000000 |
+
+###### FlsWrrWriteTimeout
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsWrrWriteTimeout |
+| **Description** | Write Timeout period. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 500000 |
+
+###### FlsBusyTimeout
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsBusyTimeout |
+| **Description** | Busy timeout period. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 72000000 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+###### FlsWriteTimeout
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsWriteTimeout |
+| **Description** | Flash write timeout period. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 120 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsMaxSectorErasetime
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsMaxSectorErasetime |
+| **Description** | Maximum time to erase one complete flash sector in micro sec. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1000 |
+
+###### FlsMaxBlockErasetime
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsMaxBlockErasetime |
+| **Description** | Maximum time to erase one complete flash block in micro sec. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 10000 |
+
+###### FlsMaxChipErasetime
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsMaxChipErasetime |
+| **Description** | Maximum time to erase complete flash chip in micro sec. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 4000000 |
+
+###### FlsBlockReadWriteTime
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsBlockReadWriteTime |
+| **Description** | Maximum time to program one complete flash block in micro sec. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 10000 |
+
+###### FlsSectorReadWriteTime
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsSectorReadWriteTime |
+| **Description** | Maximum time to program one complete flash sector in micro sec. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1000 |
+
+###### FlsChipReadWriteTime
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsChipReadWriteTime |
+| **Description** | Maximum time to program complete flash chip in micro sec. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 4000000 |
+
+###### FlsEraseBlockSize
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsEraseBlockSize |
+| **Description** | Erase block size. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 131072 |
+
+###### FlsEraseSectorSize
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsEraseSectorSize |
+| **Description** | Erase sector size. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 4096 |
+
+###### FlsCmdBlkErase3Bytes
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdBlkErase3Bytes |
+| **Description** | Command to execute block erase with 3bytes address mode. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 216 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdBlkErase4Bytes
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdBlkErase4Bytes |
+| **Description** | Command to execute block erase with 4bytes address mode. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 220 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdSectorErase3Bytes
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdSectorErase3Bytes |
+| **Description** | Command to execute sector erase with 3bytes address mode. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 32 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsCmdSectorErase4Bytes
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsCmdSectorErase4Bytes |
+| **Description** | Command to execute sector erase with 4bytes address mode. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 33 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsReadIdCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsReadIdCmd |
+| **Description** | Command to check the device id and manufacture id for external flash. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 159 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsReadIdLen
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsReadIdLen |
+| **Description** | Number of bytes of data to check and read back the device id and manufacture id for external flash. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 3 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsReadIdDummy4
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsReadIdDummy4 |
+| **Description** | Number of dummy bytes required in quad mode to check and read back the device id and manufacture id for external flash. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsReadIdDummy8
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsReadIdDummy8 |
+| **Description** | Number of dummy bytes required in octal mode to check and read back the device id and manufacture id for external flash. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 8 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+##### FlsProtocolConfigs
+List of protocol related configuration parameters
+
+###### FlsProtocolReadCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolReadCmd |
+| **Description** | Protocol specific read command |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 124 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolWriteCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolWriteCmd |
+| **Description** | Protocol specific write/program command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 132 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolmodeClksCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolmodeClksCmd |
+| **Description** | Protocol specific Mode clock command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolmodeClksRead
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolmodeClksRead |
+| **Description** | Protocol specific Mode clock read. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyClkCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyClkCmd |
+| **Description** | Protocol specific dummy clock command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 16 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyClkRead
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyClkRead |
+| **Description** | Protocol specific dummy clock read. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 16 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolEnableType
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolEnableType |
+| **Description** | Protocol specific enable type. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolEnableSeq
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolEnableSeq |
+| **Description** | Protocol specific enable sequence. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolAddrReg
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolAddrReg |
+| **Description** | Protocol specific address register. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolConfigReg
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolConfigReg |
+| **Description** | Protocol specifc config register address. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolConfigRegData
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolConfigRegData |
+| **Description** | Protocol specific config register data to be written. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 231 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolConfigRegReadCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolConfigRegReadCmd |
+| **Description** | Protocol specific config register read command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 133 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolConfigRegWriteCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolConfigRegWriteCmd |
+| **Description** | Protocol specific config register write command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 129 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolConfigMask
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolConfigMask |
+| **Description** | Protocol specific config register mask. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 255 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolConfigShift
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolConfigShift |
+| **Description** | Protocol specific config register shift. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyAddrReg
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyAddrReg |
+| **Description** | Protocol specifc dummy register address. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyConfigReg
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyConfigReg |
+| **Description** | Protocol dummy config register address. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyConfigRegData
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyConfigRegData |
+| **Description** | Protocol dummy config register data to be written. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 16 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyConfigRegReadCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyConfigRegReadCmd |
+| **Description** | Protocol specifc dummy config read command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 133 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyConfigRegWriteCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyConfigRegWriteCmd |
+| **Description** | Protocol specifc dummy config write command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 129 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyConfigMask
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyConfigMask |
+| **Description** | Protocol specifc dummy config register mask. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 255 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolDummyConfigShift
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolDummyConfigShift |
+| **Description** | Protocol specifc dummy config register shift. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolStrDtrAddrReg
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolStrDtrAddrReg |
+| **Description** | Protocol Str/Dtr config via register yes/no. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolStrDtrConfigReg
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolStrDtrConfigReg |
+| **Description** | Protocol Str/Dtr config register address. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolStrDtrConfigRegData
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolStrDtrConfigRegData |
+| **Description** | Protocol Str/Dtr config register data to be written. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolStrDtrConfigRegReadCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolStrDtrConfigRegReadCmd |
+| **Description** | Protocol Str/Dtr config register data read command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 133 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolStrDtrConfigRegWriteCmd
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolStrDtrConfigRegWriteCmd |
+| **Description** | Protocol Str/Dtr config register data write command. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 129 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolStrDtrConfigMask
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolStrDtrConfigMask |
+| **Description** | Protocol Str/Dtr config register mask. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 255 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
+###### FlsProtocolStrDtrConfigShift
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsProtocolStrDtrConfigShift |
+| **Description** | Protocol Str/Dtr config register shift. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 255 |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+
 ##### FlsExternalDriver
 This container is present for external Flash drivers only. Internal Flash drivers do not use the parameter listed in this container, hence its multiplicity is 0 for internal drivers. Currently, not supported as only one external driver present.
 
@@ -964,6 +2030,18 @@ Container for general parameters of the flash driver. These parameters are alway
 | **Default-value** | 0 |
 | **Max-value** | 16 |
 | **Min-value** | 0 |
+
+##### FlsExternalFlashSelect
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsExternalFlashSelect |
+| **Description** | Reference to the external device used by this job which is mentioned in the page FlsFlashConfig. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
 ##### FlsOsCounterRef
 

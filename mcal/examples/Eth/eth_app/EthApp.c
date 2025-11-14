@@ -222,7 +222,7 @@ static void EthApp_RxTxTest()
 
     AppUtils_ethPrintVersionInfo();
 
-    pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+    pEthConfigPtr = &Eth_Config;
 
 #if (STD_OFF == ETH_VARIANT_PRE_COMPILE)
 #if (ETH_ENABLE_MII_API == STD_ON)
@@ -427,7 +427,7 @@ void EthExample_TransmitStress()
 
     lenByte = ETH_DATA_LEN;
 
-    pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+    pEthConfigPtr = &Eth_Config;
 
     packetCnt = 0;
     while (packetCnt < ETHAPP_NUM_TRANSMIT_PACKET)
@@ -608,7 +608,7 @@ void EthExample_SendTimeStampPacket(uint8 *pPacketPtr, uint16 lenByte)
     Eth_FrameType     frameType = ETHAPP_ETHERTYPE_PTP1588;
     Eth_ConfigType   *pEthConfigPtr;
 
-    pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+    pEthConfigPtr = &Eth_Config;
 
 requestbuffer:
     gTestPassed = E_OK;

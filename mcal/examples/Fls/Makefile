@@ -3,6 +3,7 @@ APP_NAME = fls_app
 # Get the list of src dir, include dir and source files to compile using module mk files
 include $(mcal_PATH)/include/hw/inc.mk
 include $(mcal_PATH)/include/memmap/inc.mk
+include $(mcal_PATH)/Mcal_Lib/inc.mk
 include $(mcal_PATH)/Dma/srcs.mk
 include $(mcal_PATH)/Fls/srcs.mk
 include $(mcal_PATH)/Mcu/srcs.mk

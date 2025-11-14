@@ -71,7 +71,7 @@
 [!ENDMACRO!][!//
 /*<ETHTRCV_CONFIG>*/
 [!LOOP "as:modconf('EthTrcv')[1]/EthTrcvConfigSet/EthTrcvConfig/*"!][!//
-VAR(struct EthTrcv_ConfigType_s, ETHTRCV_LCFG)
+VAR(struct EthTrcv_ControllerConfigType_s, ETHTRCV_CONFIG_DATA)
     [!"../../@name"!]_[!"@name"!] =
 {
 [!WS "4"!].ctrlIdx = [!"EthTrcvCtrlIdx"!]U,
@@ -123,6 +123,17 @@ VAR(struct EthTrcv_ConfigType_s, ETHTRCV_LCFG)
 };
 
 [!ENDLOOP!][!//
+
+[!SELECT "as:modconf('EthTrcv')[1]/EthTrcvConfigSet"!][!///
+VAR(struct EthTrcv_ConfigType_s, ETHTRCV_CONFIG_DATA)
+    EthTrcv_Config =
+{
+   {
+[!LOOP "as:modconf('EthTrcv')[1]/EthTrcvConfigSet/EthTrcvConfig/*"!]     (EthTrcv_ControllerConfigType*)&[!"../../@name"!]_[!"@name"!],
+[!ENDLOOP!][!//
+   }
+};
+[!ENDSELECT!][!//
 
 /*</ETHTRCV_CONFIG>*/
 #define ETHTRCV_STOP_SEC_CONFIG_DATA

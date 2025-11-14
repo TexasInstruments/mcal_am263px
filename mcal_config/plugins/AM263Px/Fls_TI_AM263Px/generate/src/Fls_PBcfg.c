@@ -83,11 +83,11 @@
 /*******************************************************************************
  *  VERSION CHECK
  ******************************************************************************/
-#if ((FLS_SW_MAJOR_VERSION != (10U)) || (FLS_SW_MINOR_VERSION != (2U)))
+#if ((FLS_SW_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U)) || (FLS_SW_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
   #error "Version numbers of Fls_PBcfg.c and Fls.h are inconsistent!"
 #endif
 
-#if ((FLS_CFG_MAJOR_VERSION != (10U)) || (FLS_CFG_MINOR_VERSION != (2U)))
+#if ((FLS_CFG_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U)) || (FLS_CFG_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
   #error "Version numbers of Fls_PBcfg.c and Fls_Cfg.h are inconsistent!"
 #endif
 /*******************************************************************************
@@ -157,10 +157,104 @@ CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) Fls_Config =
 [!WS "4"!][!ENDLOOP!]
 [!WS "4"!]},
 [!WS "4"!].flsBaudRateDiv = [!"FlsBaudRateDiv"!]U,
-[!WS "4"!].Fls_Mode = [!IF "FlsProtocol = 'FLS_1S_1S_1S'"!]FLS_OSPI_RX_1S_1S_1S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_2S'"!]FLS_OSPI_RX_1S_1S_2S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_4S'"!]FLS_OSPI_RX_1S_1S_4S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_8S'"!]FLS_OSPI_RX_1S_1S_8S[!ELSEIF "FlsProtocol = 'FLS_4S_4S_4S'"!]FLS_OSPI_RX_4S_4S_4S[!ELSEIF "FlsProtocol = 'FLS_4S_4D_4D'"!]FLS_OSPI_RX_4S_4D_4D[!ELSEIF "FlsProtocol = 'FLS_8S_8S_8S'"!]FLS_OSPI_RX_8S_8S_8S[!ELSEIF "FlsProtocol = 'FLS_8D_8D_8D'"!]FLS_OSPI_RX_8D_8D_8D[!ENDIF!]};
+[!WS "4"!].Fls_Mode = [!IF "FlsProtocol = 'FLS_1S_1S_1S'"!]FLS_OSPI_RX_1S_1S_1S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_2S'"!]FLS_OSPI_RX_1S_1S_2S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_4S'"!]FLS_OSPI_RX_1S_1S_4S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_8S'"!]FLS_OSPI_RX_1S_1S_8S[!ELSEIF "FlsProtocol = 'FLS_4S_4S_4S'"!]FLS_OSPI_RX_4S_4S_4S[!ELSEIF "FlsProtocol = 'FLS_4S_4D_4D'"!]FLS_OSPI_RX_4S_4D_4D[!ELSEIF "FlsProtocol = 'FLS_8S_8S_8S'"!]FLS_OSPI_RX_8S_8S_8S[!ELSEIF "FlsProtocol = 'FLS_8D_8D_8D'"!]FLS_OSPI_RX_8D_8D_8D[!ENDIF!][!CR!][!//
+[!VAR "FLS_MODE"!][!IF "FlsProtocol = 'FLS_1S_1S_1S'"!]FLS_OSPI_RX_1S_1S_1S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_2S'"!]FLS_OSPI_RX_1S_1S_2S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_4S'"!]FLS_OSPI_RX_1S_1S_4S[!ELSEIF "FlsProtocol = 'FLS_1S_1S_8S'"!]FLS_OSPI_RX_1S_1S_8S[!ELSEIF "FlsProtocol = 'FLS_4S_4S_4S'"!]FLS_OSPI_RX_4S_4S_4S[!ELSEIF "FlsProtocol = 'FLS_4S_4D_4D'"!]FLS_OSPI_RX_4S_4D_4D[!ELSEIF "FlsProtocol = 'FLS_8S_8S_8S'"!]FLS_OSPI_RX_8S_8S_8S[!ELSEIF "FlsProtocol = 'FLS_8D_8D_8D'"!]FLS_OSPI_RX_8D_8D_8D[!ENDIF!][!ENDVAR!]
+};
 [!ENDLOOP!][!//
 [!ENDIF!][!//
 
+    /** FLASH device specific items (note: sizes are in bytes) */
+[!VAR "FLS_SELECTED"!][!"node:name(node:ref(as:modconf('Fls')[1]/FlsGeneral/FlsExternalFlashSelect))"!][!ENDVAR!]
+/* Selected Flash [!"$FLS_SELECTED"!] */
+
+[!VAR "FlsLpCnt" = "0"!]
+struct Fls_ConfigSfdp_s Fls_Config_SFDP_1 =
+{
+  [!LOOP "as:modconf('Fls')[1]/FlsConfigSet/FlsFlashConfigList/FlsFlashConfiguration/*"!][!//
+    .flashSize                           = [!"num:inttohex(node:value(FlsSize))"!]U,
+    .pageSize                            = [!"num:inttohex(node:value(FlsPageSize))"!]U,
+    .manfId                              = [!"num:inttohex(node:value(FlsManfId))"!]U,
+    .deviceId                            = [!"num:inttohex(node:value(FlsDeviceID))"!]U,
+    .numSupportedEraseTypes              = [!"num:inttohex(node:value(FlsNumberOfSuppEraseTypes))"!]U,
+    .cmdExtType                          = [!"num:inttohex(node:value(FlsCmdExecType))"!]U,
+    .byteOrder                           = [!"num:inttohex(node:value(FlsByteOrder))"!]U,
+    .addrByteSupport                     = [!"num:inttohex(node:value(FlsAddressByteSupport))"!]U,
+    .fourByteAddrEnSeq                   = [!"num:inttohex(node:value(Fls4ByteAddressEnableCmd))"!]U,
+    .fourByteAddrDisSeq                  = [!"num:inttohex(node:value(Fls4ByteAddressDisableCmd))"!]U,
+    .dtrSupport                          = [!"num:inttohex(node:value(FlsDtrSupport))"!]U,
+    .deviceBusyType                      = [!"num:inttohex(node:value(FlsDeviceBusyType))"!]U,
+    .rstType                             = [!"num:inttohex(node:value(FlsDeviceResetType))"!]U,
+    .addrnumBytes                        = [!"num:inttohex(node:value(FlsAddrNumBytes))"!]U,
+    .cmdWren                             = [!"num:inttohex(node:value(FlsCmdWren))"!]U,
+    .cmdRdsr                             = [!"num:inttohex(node:value(FlsCmdRdsr1))"!]U,
+    .cmdRdsr2                            = [!"num:inttohex(node:value(FlsCmdRdsr2))"!]U,
+    .cmdWrsr                             = [!"num:inttohex(node:value(FlsCmdWrsr))"!]U,
+    .srWip                               = [!"num:inttohex(node:value(FlsStatusRegWipMask))"!]U,
+    .srWel                               = [!"num:inttohex(node:value(FlsStatusRegWelMask))"!]U,
+    .cmdChipErase                        = [!"num:inttohex(node:value(FlsCmdChipErase))"!]U,
+    .xspiWipRdCmd                        = [!"num:inttohex(node:value(FlsCmdXspiWipRdCmd))"!]U,
+    .xspiWipReg                          = [!"node:value(FlsXspiWipReg)"!]U,
+    .xspiWipBit                          = [!"node:value(FlsXspiWipBitMask)"!]U,
+    .flashWriteTimeout                   = [!"node:value(FlsWriteTimeout)"!]U,
+    .wrrwriteTimeout                     = [!"node:value(FlsWrrWriteTimeout)"!]U,
+    .flashBusyTimeout                    = [!"node:value(FlsBusyTimeout)"!]U,
+    .chipEraseTimeout                    = [!"node:value(FlsChipEraseTimeout)"!]U,
+    .flsMaxSectorErasetimeConvInUsec     = [!"node:value(FlsMaxSectorErasetime)"!]U,
+    .flsMaxBlockErasetimeConvInUsec      = [!"node:value(FlsMaxBlockErasetime)"!]U,
+    .flsMaxChipErasetimeConvInUsec       = [!"node:value(FlsMaxChipErasetime)"!]U,
+    .flsMaxSectorReadWritetimeConvInUsec = [!"node:value(FlsSectorReadWriteTime)"!]U,
+    .flsMaxBlockReadWritetimeConvInUsec  = [!"node:value(FlsBlockReadWriteTime)"!]U,
+    .flsMaxChipReadWritetimeConvInUsec   = [!"node:value(FlsChipReadWriteTime)"!]U,
+
+    .eraseCfg.blockSize        = [!"node:value(FlsEraseBlockSize)"!]U,
+    .eraseCfg.sectorSize       = [!"node:value(FlsEraseSectorSize)"!]U,
+    .eraseCfg.cmdBlockErase3B  = [!"num:inttohex(node:value(FlsCmdBlkErase3Bytes))"!]U,
+    .eraseCfg.cmdBlockErase4B  = [!"num:inttohex(node:value(FlsCmdBlkErase4Bytes))"!]U,
+    .eraseCfg.cmdSectorErase3B = [!"num:inttohex(node:value(FlsCmdSectorErase3Bytes))"!]U,
+    .eraseCfg.cmdSectorErase4B = [!"num:inttohex(node:value(FlsCmdSectorErase4Bytes))"!]U,
+
+    .idCfg.numBytes = [!"node:value(FlsReadIdLen)"!]U,
+    .idCfg.cmd      = [!"num:inttohex(node:value(FlsReadIdCmd))"!]U,
+    .idCfg.dummy4   = [!"node:value(FlsReadIdDummy4)"!]U,
+    .idCfg.dummy8   = [!"node:value(FlsReadIdDummy8)"!]U,
+
+     /*Selected Mode [!"$FLS_MODE"!]*/
+    .protos.cmdRd        = [!"node:value(FlsProtocolConfigs/FlsProtocolReadCmd)"!]U,
+    .protos.cmdWr        = [!"node:value(FlsProtocolConfigs/FlsProtocolWriteCmd)"!]U,
+    .protos.modeClksCmd  = [!"node:value(FlsProtocolConfigs/FlsProtocolmodeClksCmd)"!]U,
+    .protos.modeClksRd   = [!"node:value(FlsProtocolConfigs/FlsProtocolmodeClksRead)"!]U,
+    .protos.dummyClksCmd = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyClkCmd)"!]U,
+    .protos.dummyClksRd  = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyClkRead)"!]U,
+    .protos.enableType   = [!"node:value(FlsProtocolConfigs/FlsProtocolEnableType)"!]U,
+    .protos.enableSeq    = [!"node:value(FlsProtocolConfigs/FlsProtocolEnableSeq)"!]U,
+
+    .protos.protoCfg.isAddrReg  = [!"node:value(FlsProtocolConfigs/FlsProtocolAddrReg)"!]U,
+    .protos.protoCfg.cfgReg     = [!"node:value(FlsProtocolConfigs/FlsProtocolConfigReg)"!]U,
+    .protos.protoCfg.cfgRegBitP = [!"node:value(FlsProtocolConfigs/FlsProtocolConfigRegData)"!]U,
+    .protos.protoCfg.cmdRegRd   = [!"node:value(FlsProtocolConfigs/FlsProtocolConfigRegReadCmd)"!]U,
+    .protos.protoCfg.cmdRegWr   = [!"node:value(FlsProtocolConfigs/FlsProtocolConfigRegWriteCmd)"!]U,
+    .protos.protoCfg.mask       = [!"node:value(FlsProtocolConfigs/FlsProtocolConfigMask)"!]U,
+    .protos.protoCfg.shift      = [!"node:value(FlsProtocolConfigs/FlsProtocolConfigShift)"!]U,
+
+    .protos.dummyCfg.isAddrReg  = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyAddrReg)"!]U,
+    .protos.dummyCfg.cfgReg     = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyConfigReg)"!]U,
+    .protos.dummyCfg.cfgRegBitP = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyConfigRegData)"!]U,
+    .protos.dummyCfg.cmdRegRd   = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyConfigRegReadCmd)"!]U,
+    .protos.dummyCfg.cmdRegWr   = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyConfigRegWriteCmd)"!]U,
+    .protos.dummyCfg.mask       = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyConfigMask)"!]U,
+    .protos.dummyCfg.shift      = [!"node:value(FlsProtocolConfigs/FlsProtocolDummyConfigShift)"!]U,
+
+    .protos.strDtrCfg.isAddrReg  = [!"node:value(FlsProtocolConfigs/FlsProtocolStrDtrAddrReg)"!]U,
+    .protos.strDtrCfg.cfgReg     = [!"node:value(FlsProtocolConfigs/FlsProtocolStrDtrConfigReg)"!]U,
+    .protos.strDtrCfg.cfgRegBitP = [!"node:value(FlsProtocolConfigs/FlsProtocolStrDtrConfigRegData)"!]U,
+    .protos.strDtrCfg.cmdRegRd   = [!"node:value(FlsProtocolConfigs/FlsProtocolStrDtrConfigRegReadCmd)"!]U,
+    .protos.strDtrCfg.cmdRegWr   = [!"node:value(FlsProtocolConfigs/FlsProtocolStrDtrConfigRegWriteCmd)"!]U,
+    .protos.strDtrCfg.mask       = [!"node:value(FlsProtocolConfigs/FlsProtocolStrDtrConfigMask)"!]U,
+    .protos.strDtrCfg.shift      = [!"node:value(FlsProtocolConfigs/FlsProtocolStrDtrConfigShift)"!]U,
+  [!ENDLOOP!][!//
+};
+
+struct Fls_ConfigSfdp_s *Fls_Config_SFDP_Ptr = &Fls_Config_SFDP_1;
 #ifdef __cplusplus
 }
 #endif

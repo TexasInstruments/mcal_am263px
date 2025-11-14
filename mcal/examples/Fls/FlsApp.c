@@ -96,7 +96,6 @@ extern uint32   sector_or_blocksize;
 #define FLSEXAMPLE_ARRAYSIZE(x) (sizeof((x)) / sizeof(x[0]))
 #define DATA_SIZE_TEST          64 * 1024
 
-extern FlashConfigSfdp *fls_config_sfdp;
 #if (STD_ON == FLS_VERSION_INFO_API)
 Std_VersionInfoType VersionInfo;
 #endif
@@ -118,15 +117,14 @@ int main(void)
     I2c_utilsInterruptConfig();
     Cdd_I2c_Init(NULL_PTR);
     board_flash_reset();
-#endif                        // #if defined AM263PX_R_PACKAGE || defined AM263PX_C_PACKAGE
-#endif                        // if defined(AM263PX_PLATFORM)
-    Flash_sfdpParams_init();  // initialise sfdp parameters
+#endif  // #if defined AM263PX_R_PACKAGE || defined AM263PX_C_PACKAGE
+#endif  // if defined(AM263PX_PLATFORM)
 
     if (SECTOR_ERASE == 1)
     {
         offset              = 0x000000U;
         Data_Value          = 0xAA;
-        Data_Size_Test      = fls_config_sfdp->eraseCfg.sectorSize;
+        Data_Size_Test      = Fls_Config_SFDP_Ptr->eraseCfg.sectorSize;
         type_of_erase       = FLS_SECTOR_ERASE;
         sector_or_blocksize = Fls_SetEraseType(FLS_SECTOR_ERASE);
         fls_sampleapp_configinput();
@@ -135,7 +133,7 @@ int main(void)
     {
         offset              = 0x000000U;
         Data_Value          = 0xBB;
-        Data_Size_Test      = fls_config_sfdp->eraseCfg.blockSize;
+        Data_Size_Test      = Fls_Config_SFDP_Ptr->eraseCfg.blockSize;
         type_of_erase       = FLS_BLOCK_ERASE;
         sector_or_blocksize = Fls_SetEraseType(FLS_BLOCK_ERASE);
         fls_sampleapp_configinput();
@@ -144,7 +142,7 @@ int main(void)
     {
         offset              = 0x000000U;
         Data_Value          = 0xCC;
-        Data_Size_Test      = fls_config_sfdp->flashSize;
+        Data_Size_Test      = Fls_Config_SFDP_Ptr->flashSize;
         type_of_erase       = FLS_CHIP_ERASE;
         sector_or_blocksize = Fls_SetEraseType(FLS_CHIP_ERASE);
         fls_sampleapp_configinput();

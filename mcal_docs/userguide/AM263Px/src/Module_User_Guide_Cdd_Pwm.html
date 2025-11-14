@@ -47,7 +47,7 @@
             <a href="../index.html" class="icon icon-home"> AM263Px MCAL User Guide
           </a>
               <div class="version">
-                11.00.00
+                11.01.00
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -114,7 +114,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#integration-description">4.10.8. Integration description</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#dependent-modules">4.10.8.1. Dependent modules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.10.8.2. Multi-core support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#runtime-apis">4.10.8.2. Runtime APIs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.10.8.3. Multi-core support</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">4.10.9. Configuration</a><ul>
@@ -909,8 +910,17 @@ The CDD_PWM module may use OSEK/AUTOSAR OS to suspend and restore global interru
 <p>The Cdd_Pwm driver provide configured notification call back for each interrupt occurred and Trip Zone notification.</p>
 </section>
 </section>
+<section id="runtime-apis">
+<h3><span class="section-number">4.10.8.2. </span>Runtime APIs<a class="headerlink" href="#runtime-apis" title="Link to this heading"></a></h3>
+<p>There are certain runtime APIs which have been provided in the driver to provide flexibility to modify parameters like duty cycle, phase shift, period, etc during runtime.</p>
+<p>Phase Shift: Cdd_Pwm_SetPhaseShift()</p>
+<p>Duty Cycle: Cdd_Pwm_SetCounterCompareValue()</p>
+<p>Period: Cdd_Pwm_SetTimeBasePeriod()</p>
+<p>These APIs should be used in the application when the parameters are required to be updated during runtime.</p>
+<p>Note: During initialization only, API Cdd_Pwm_SetPeriodDutyPhase() shall be used to set the initial parameters</p>
+</section>
 <section id="multi-core-support">
-<h3><span class="section-number">4.10.8.2. </span>Multi-core support<a class="headerlink" href="#multi-core-support" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.10.8.3. </span>Multi-core support<a class="headerlink" href="#multi-core-support" title="Link to this heading"></a></h3>
 <p>Not Supported</p>
 </section>
 </section>
@@ -2175,7 +2185,7 @@ The CDD_PWM module may use OSEK/AUTOSAR OS to suspend and restore global interru
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Sep 10, 2025.
+          <span class="lastupdated" >Last updated on Nov 14, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 
@@ -2192,7 +2202,7 @@ The CDD_PWM module may use OSEK/AUTOSAR OS to suspend and restore global interru
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <span class="fa fa-book"></span>
-       Current Version: 11.00.00
+       Current Version: 11.01.00
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">

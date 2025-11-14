@@ -277,6 +277,17 @@ typedef struct
     /**< MAC address  */
 } Eth_MacConfigType;
 
+#if (ETH_TRAFFIC_SHAPING_API == STD_ON)
+/** \brief Structure holding the Egress FIFO shaper configuration .*/
+typedef struct
+{
+    uint8  queueNum;
+    /**< Priority queue number */
+    uint32 idleSlope;
+    /**< idleSlope for CBS for the port queue priority */
+} Eth_EgressFifoShaperCfg;
+#endif
+
 /**
  *  \brief Structure for port configuration.
  */
@@ -284,22 +295,11 @@ typedef struct
 {
     Eth_MacConfigType macCfg;
     /**< MAC Init Configurations */
+#if (ETH_TRAFFIC_SHAPING_API == STD_ON)
+    Eth_EgressFifoShaperCfg shaperCfg[ETH_PRIORITY_QUEUE_NUM];
+    /**< Traffic shapping config for egress FIFO's */
+#endif
 } Eth_PortConfigType;
-
-/**
- *  \brief Rx rate limit configuration for CPPI Port Ingress
- */
-typedef struct
-{
-    uint32 enableQoS;
-    /**<  Flag to set QoS (1U/0U) */
-    uint32 prioArray[ETH_PRIORITY_QUEUE_NUM];
-
-    /**<  Bandwidth for each of rate limited priority
-     *   Note: Array index corresponds to the priority being rate limited.
-     *   For example, prioArray[0] for priority 0, prioArray[1] for priority 1, and so on
-     */
-} Eth_cpswQoSCfg;
 
 /**
  *  \brief Implementation specific structure of the Eth configuration.
@@ -313,8 +313,6 @@ typedef struct Eth_ConfigType_s
     /**< Port Idx >*/
     Eth_PortConfigType portCfg;
     /**< Port configuration */
-    Eth_cpswQoSCfg     traffiShapingCfg;
-    /**< Traffic shaping Configuration */
 #if (ETH_ENABLE_MII_API == STD_ON)
     Eth_MdioConfigType mdioCfg;
     /**< MDIO configuration */

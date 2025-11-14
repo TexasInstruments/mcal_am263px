@@ -334,7 +334,7 @@ extern "C" {
  *  @{
  */
 /** \brief ETH Configuration struct declaration */
-extern struct Eth_ConfigType_s EthConfigSet_EthCtrlConfig_0;
+extern struct Eth_ConfigType_s Eth_Config;
 
 /** \brief ETH Configuration pointer for postbuild and linktime */
 extern const struct Eth_ConfigType_s *Eth_CfgPtr;

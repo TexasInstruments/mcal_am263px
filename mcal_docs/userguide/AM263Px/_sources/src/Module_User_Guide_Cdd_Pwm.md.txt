@@ -644,6 +644,20 @@ The DET can be replaced optionally by an equivalent component which is responsib
 
 The Cdd_Pwm driver provide configured notification call back for each interrupt occurred and Trip Zone notification.
 
+#### Runtime APIs
+
+There are certain runtime APIs which have been provided in the driver to provide flexibility to modify parameters like duty cycle, phase shift, period, etc during runtime.
+
+Phase Shift: Cdd_Pwm_SetPhaseShift()
+
+Duty Cycle: Cdd_Pwm_SetCounterCompareValue()
+
+Period: Cdd_Pwm_SetTimeBasePeriod()
+
+These APIs should be used in the application when the parameters are required to be updated during runtime.
+
+Note: During initialization only, API Cdd_Pwm_SetPeriodDutyPhase() shall be used to set the initial parameters
+
 #### Multi-core support
 
 Not Supported

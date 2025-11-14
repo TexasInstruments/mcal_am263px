@@ -83,7 +83,7 @@ extern "C" {
 [!VAR "VarRateLimit" = "0"!]
 [!ENDIF!]
 VAR(struct Eth_ConfigType_s, ETH_CFG)
-    [!"../../@name"!]_[!"@name"!] =
+    Eth_Config =
 {
        .ctrlIdx = [!"EthCtrlIdx"!]U,
 	   .portIdx = [!"EthPort"!],
@@ -109,31 +109,25 @@ VAR(struct Eth_ConfigType_s, ETH_CFG)
                     [!ENDIF!]
                 },
             },
-       },
-       .traffiShapingCfg =
-       {
-           
-           [!LOOP "EthCpswQoSCfg/*"!]
-           .enableQoS = [!IF "as:modconf('Eth')[1]/EthGeneral/EthTrafficShapingSupport = 'true'"!] 0x1U,
-           [!ELSE!] 0x0U,
-           [!ENDIF!]
-           .prioArray = 
-           {
-                [!LOOP "EthCpswRateLimitCfg/*"!]
-                [!IF "as:modconf('Eth')[1]/EthGeneral/EthTrafficShapingSupport = 'true'"!]
-                    [!IF "not(node:empty(EthCpswRateLimitPrio))"!]
-                    [!"EthCpswRateLimitPrio"!],
-                        [!ASSERT "num:i(EthCpswRateLimitPrio) < '201'","STOP: Bandwidth cannot be greater than 200 Mbps num:i(EthCpswRateLimitPrio)"!]
-                    [!ELSE!]
-                    0U,
-                    [!ENDIF!]
-                [!ELSE!]
-                0U,
-                [!ENDIF!]
-                [!ENDLOOP!]
+            [!IF "as:modconf('Eth')[1]/EthGeneral/EthTrafficShapingSupport = 'true'"!][!//
+            .shaperCfg =
+            {
+                [!VAR "ConfigCount" = "0"!][!//
+                [!LOOP "EthCtrlConfigEgress/EthCtrlConfigShaper/*"!][!//
+                {
+                    .queueNum = (uint8)[!"node:ref(./EthCtrlConfigShaperPredecessorFifoRef)/EthCtrlConfigEgressFifoIdx"!]U,
+                    .idleSlope = [!IF "not(node:empty(EthCtrlConfigShaperIdleSlope/__1))"!] (uint32)[!"EthCtrlConfigShaperIdleSlope/__1"!]U,[!ELSE!]0U,[!ENDIF!][!CR!]
+                },
+                [!VAR "ConfigCount" = "$ConfigCount+1"!][!//
+                [!ENDLOOP!][!//
+                [!FOR "x" = "$ConfigCount" TO "7"!][!//
+                {
+                    .queueNum = (uint8)ETH_PRIORITY_QUEUE_NUM, /* Invalid queue */
+                    .idleSlope = 0U,
+                },
+                [!ENDFOR!][!//
             },
-            [!ENDLOOP!]
-            
+            [!ENDIF!][!//
        },
 
 [!IF "EthCtrlEnableMii = 'true'"!]

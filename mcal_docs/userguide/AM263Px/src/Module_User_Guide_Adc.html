@@ -47,7 +47,7 @@
             <a href="../index.html" class="icon icon-home"> AM263Px MCAL User Guide
           </a>
               <div class="version">
-                11.00.00
+                11.01.00
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -108,7 +108,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.1.10.2. Setup required to run example</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.1.10.3. How to run examples</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sample-log">4.1.10.4. Sample Log</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.1.10.5. File Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adc-with-dma-example">4.1.10.5. ADC with DMA example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.1.10.6. File Structure</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#references">4.1.11. References</a></li>
@@ -261,23 +262,23 @@
 <h3><span class="section-number">4.1.3.1. </span>ADC Driver Architecture<a class="headerlink" href="#adc-driver-architecture" title="Link to this heading"></a></h3>
 <p>The following figure shows where the ADC is located in the AUTOSAR
 architecture</p>
-<figure class="align-center" id="id1">
+<figure class="align-center" id="id2">
 <img alt="ADC in AUTOSAR architecture" src="../_images/adc_image2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">ADC in AUTOSAR architecture</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">ADC in AUTOSAR architecture</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The ADC hardware module is a successive approximation (SAR) style ADC. This ADC is composed of a core and a wrapper. The core is composed of the analog circuits which include the channel select MUX, the sample-and hold (S/H) circuit, the successive approximation circuits, voltage reference circuits, and other analog support circuits. The wrapper is composed of the digital circuits that configure and control the ADC. These circuits include the logic for programmable conversions, result registers, interfaces to analog circuits, interfaces to the peripheral buses, post-processing circuits, and interfaces to other on-chip modules. Each ADC module consists of a single sample-and-hold (S/H) circuit. The ADC module is designed to be duplicated multiple times on the same chip, allowing simultaneous sampling or independent operation of multiple ADCs.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id3">
 <img alt="ADC Hardware Overview" src="../_images/adc_image3.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">ADC Hardware Overview</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">ADC Hardware Overview</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id4">
 <img alt="System Overview" src="../_images/adc_image13.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">System Overview</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">System Overview</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -296,16 +297,16 @@ mode can be:</p>
 <li><p><em>ADC_COMPLETED</em>: This is the state after a group has finished first or more samples of ADC analog input.</p></li>
 <li><p><em>ADC_STREAM_COMPLETED</em>: This is the state after a group has finished i.e., conversion result for the group is available.</p></li>
 </ol>
-<figure class="align-center" id="id4">
+<figure class="align-center" id="id5">
 <img alt="ADC State Diagram - 1" src="../_images/adc_image4.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">ADC State Diagram - 1</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">ADC State Diagram - 1</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id6">
 <img alt="ADC State Diagram - 2" src="../_images/adc_image19.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.5 </span><span class="caption-text">ADC State Diagram - 2</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.5 </span><span class="caption-text">ADC State Diagram - 2</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -340,18 +341,18 @@ mode can be:</p>
 <li><p>Each Hardware unit has Analog input channels ADCIN[0:5] ( have dedicated pins ).</p></li>
 <li><p>Each Hardware unit has 15 SOC’s (start of conversion units) for conversion of ADC channels.</p></li>
 </ol>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id7">
 <img alt="SOC architecture" src="../_images/adc_image15.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.6 </span><span class="caption-text">SOC architecture</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.6 </span><span class="caption-text">SOC architecture</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The analog channel which needs to be converted, needs to be placed in one of the SOC’s for conversion and result will be available is respective result register as shown in below figure.
 Based on trigger (either HW trigger or SW trigger), conversion shall be started for ADC HW Channel.</p>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id8">
 <img alt="ADC Channel Conversion Process" src="../_images/adc_image14.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.7 </span><span class="caption-text">ADC Channel Conversion Process</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.7 </span><span class="caption-text">ADC Channel Conversion Process</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -360,20 +361,20 @@ Based on trigger (either HW trigger or SW trigger), conversion shall be started 
 <p>The ADC Analog input channels are configured in container <em>AdcChannel</em>. The actual physical channel ID needs to be specified here.</p>
 <p>The ADC Group consists of the combination of ADC channels. These Groups configured in container <em>AdcHwUnit</em>.</p>
 <p>The below figure shows, how physical channels are mapped in Group.</p>
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id9">
 <img alt="ADC Channel Group Configuration" src="../_images/adc_image16.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.8 </span><span class="caption-text">ADC Channel Group Configuration</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.8 </span><span class="caption-text">ADC Channel Group Configuration</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Since the conversion of ADC Channels is based on ADC Group in AUTOSAR, the ADC Groups are placed in SOC’s based on Group’s being called for conversion using autosar API’s:</p>
 <p><em>Adc_StartGroupConversion</em> for SW triggered groups</p>
 <p><em>Adc_EnableHardwareTrigger</em> for HW triggered groups</p>
 <p>The below figure shows the group conversion process for AUTOSAR ADC module in ADC hardware:</p>
-<figure class="align-center" id="id9">
+<figure class="align-center" id="id10">
 <img alt="ADC Channel Group Conversion Process" src="../_images/adc_image17.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.9 </span><span class="caption-text">ADC Channel Group Conversion Process</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.9 </span><span class="caption-text">ADC Channel Group Conversion Process</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Here based on group priority the ADC Groups are allocated with SOC’s of Hardware unit. Lowest priority group will be at bottom of SOC and highest will be at TOP of SOC structure.
@@ -386,10 +387,10 @@ If the priority mechanism is active, the ADC module shall handle channel group c
 <p>There are 32 cross bar interrupts for AM263Px, ADC modules can be mapped to any of these cross interrupts as per requirement.</p>
 <p>The Mapping of ADC interrupts and cross bar interrupts are handled by MCU module configuration. (Refer section : <a class="reference internal" href="#mcu">MCU</a>)</p>
 <p>Same interrupt source number should be configured by application.</p>
-<figure class="align-center" id="id10">
+<figure class="align-center" id="id11">
 <img alt="Interrupt Cross Bar List" src="../_images/adc_image18.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.10 </span><span class="caption-text">Interrupt Cross Bar List</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.10 </span><span class="caption-text">Interrupt Cross Bar List</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -508,10 +509,10 @@ The Function “Adc_PollingMainFunction”, shall be called periodically or else
 </tbody>
 </table>
 <p>The below diagram shows the files structure for the ADC driver.</p>
-<figure class="align-center" id="id11">
+<figure class="align-center" id="id12">
 <img alt="ADC header file include structure" src="../_images/adc_image5.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.11 </span><span class="caption-text">ADC header file include structure</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.11 </span><span class="caption-text">ADC header file include structure</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -1052,39 +1053,39 @@ respective cross bar interrupt. The supported ISR’s are part of the Adc_Irq.h 
 The ADC module depends on MCU module for data buffer control and crossbar interrupt mapping
 of ADC interrupts depending on the Hardware unit being configured.</p>
 <p>Suppose the Hardware Unit 1 and Hardware Unit 3 are configured for ADC module:</p>
-<figure class="align-center" id="id12">
+<figure class="align-center" id="id13">
 <img alt="ADC Hardware container" src="../_images/adc_image6.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.12 </span><span class="caption-text">ADC Hardware container</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.12 </span><span class="caption-text">ADC Hardware container</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Then, the MCU module container <strong>McuAdcConfiguration</strong> should be configured as shown in below figure:</p>
-<figure class="align-center" id="id13">
+<figure class="align-center" id="id14">
 <img alt="McuAdcConfiguration container" src="../_images/adc_image7.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.13 </span><span class="caption-text">McuAdcConfiguration container</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.13 </span><span class="caption-text">McuAdcConfiguration container</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id14">
+<figure class="align-center" id="id15">
 <img alt="ADC Hardware unit selection" src="../_images/adc_image8.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.14 </span><span class="caption-text">ADC Hardware unit selection</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.14 </span><span class="caption-text">ADC Hardware unit selection</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Similarly, the crossbar interrupts also needs to be mapped in MCU module according to HW unit and
 interrupts being required.</p>
 <p>The ADC interrupts needs to be mapped to the corresponding cross bar interrupt required.</p>
 <p>Please refer limitation section of Interrupts to be configured for ADC as per <strong>AdcPriorityImplementation</strong>.</p>
-<figure class="align-center" id="id15">
+<figure class="align-center" id="id16">
 <img alt="ADC Interrupt configuration" src="../_images/adc_image9.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.15 </span><span class="caption-text">ADC Interrupt configuration</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.15 </span><span class="caption-text">ADC Interrupt configuration</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id16">
+<figure class="align-center" id="id17">
 <img alt="ADC Interrupt selection" src="../_images/adc_image10.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.16 </span><span class="caption-text">ADC Interrupt selection</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.16 </span><span class="caption-text">ADC Interrupt selection</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -1117,16 +1118,16 @@ mode and ADC channel Group is configured for DMA access.</p>
 </ul>
 </li>
 </ol>
-<figure class="align-center" id="id17">
+<figure class="align-center" id="id18">
 <img alt="CDD DMA configuration" src="../_images/adc_image11.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.17 </span><span class="caption-text">CDD DMA configuration</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.17 </span><span class="caption-text">CDD DMA configuration</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id18">
+<figure class="align-center" id="id19">
 <img alt="ADC module DMA channel ID selection" src="../_images/adc_image12.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.18 </span><span class="caption-text">ADC module DMA channel ID selection</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.18 </span><span class="caption-text">ADC module DMA channel ID selection</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -3392,8 +3393,316 @@ input channels through DC power supply (0-12V).</p>
 </pre></div>
 </div>
 </section>
+<section id="adc-with-dma-example">
+<h3><span class="section-number">4.1.10.5. </span>ADC with DMA example<a class="headerlink" href="#adc-with-dma-example" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>adc hardware trigger dma example:</p></li>
+</ul>
+<ol class="arabic simple">
+<li><p>This example application is to use a hardware trigger like EPWM to trigger ADC start of conversion and copy the result using dma to the specified buffer</p></li>
+<li><p>Initialize Cdd Pwm, Dma and Adc along with interrupt configuration</p></li>
+<li><p>Setup the result buffer for ADC results for the configured adc groups</p></li>
+<li><p>As we are using epwm as the trigger, enable the ADC hardware trigger using API Adc_EnableHardwareTrigger</p></li>
+<li><p>Enable Continue to Interrupt mode using Adc_SetInterruptContinuousMode</p></li>
+<li><p>Configure the DMA in the application with source and destination buffers</p></li>
+<li><p>Configure epwm channel and start the time base counter</p></li>
+<li><p>Print the result with the dma copied buffer and disable the hardware trigger for the adc groups</p></li>
+<li><p>Disable the epwm trigger and verify the test status</p></li>
+</ol>
+<section id="configuration-used">
+<h4><span class="section-number">4.1.10.5.1. </span>Configuration used<a class="headerlink" href="#configuration-used" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>The configuration is available in the examples folder in the following file path
+<strong>&lt;MCAL_ROOT&gt;/examples/Adc/adc_hw_trig_dma_app/soc</strong></p></li>
+<li><p>One key point to note here is adc group access mode is configured as “POLLING” so that in application, the Continue to Interrupt mode is enabled and dma copies the data from result registers to destination buffer continuously until stopped in the application.</p></li>
+</ul>
+</section>
+<section id="steps-to-build-and-run-adc-hw-trig-dma-app-example">
+<h4><span class="section-number">4.1.10.5.2. </span>Steps to build and run adc_hw_trig_dma_app example<a class="headerlink" href="#steps-to-build-and-run-adc-hw-trig-dma-app-example" title="Link to this heading"></a></h4>
+<p>adc_hw_trig_dma_app example is located in folder <em>&lt;MCAL_ROOT&gt;/examples/Adc</em>.</p>
+<p>This application can be built from the root folder by giving <em>gmake –s adc_hw_trig_dma_app PLATFORM=am263px</em>.</p>
+<p>Once the build is completed we get a binary file, which is loaded in our controller and executed.</p>
+</section>
+<section id="id1">
+<h4><span class="section-number">4.1.10.5.3. </span>Sample log<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">ADC_HW_TRIG_DMA_APP</span><span class="p">:</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">MCAL</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
+<span class="w"> </span><span class="o">---------------------</span>
+<span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
+<span class="w"> </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">123</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">DMA</span><span class="w"> </span><span class="n">MCAL</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
+<span class="w"> </span><span class="o">---------------------</span>
+<span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
+<span class="w"> </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">255</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">CDD</span><span class="w"> </span><span class="n">PWM</span><span class="w"> </span><span class="n">MCAL</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
+<span class="w"> </span><span class="o">---------------------</span>
+<span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
+<span class="w"> </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">255</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">Adc_Config</span>
+<span class="w"> </span><span class="o">------------</span>
+<span class="w">  </span><span class="nl">maxGroup</span><span class="w">     </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">  </span><span class="nl">maxHwUnit</span><span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">  </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w">                       </span>
+<span class="w">   </span><span class="nl">groupId</span><span class="w">                   </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">groupPriority</span><span class="w">             </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">hwUnitId</span><span class="w">                  </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">Adc_GroupEndNotification</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="mh">0x00000000</span>
+<span class="w">   </span><span class="nl">streamNumSamples</span><span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">resolution</span><span class="w">                </span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
+<span class="w">   </span><span class="nl">convMode</span><span class="w">                  </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">triggSrc</span><span class="w">                  </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">accessMode</span><span class="w">                </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">streamBufMode</span><span class="w">             </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">hwTrigSignal</span><span class="w">              </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="nl">hwTrigTimer</span><span class="w">               </span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">   </span><span class="nl">groupReplacement</span><span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">groupChannelMask</span><span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="mh">0x00000003</span>
+<span class="w">   </span><span class="nl">groupDataAccessMode</span><span class="w">       </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">numChannels</span><span class="w">               </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="nl">groupDmaChannelId</span><span class="w">         </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">channelConfig</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span>
+<span class="w">     </span><span class="nl">hwChannelId</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">     </span><span class="nl">samplewindow</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="mi">16</span>
+<span class="w">    </span><span class="n">channelConfig</span><span class="w"> </span><span class="mi">1</span><span class="w">   </span>
+<span class="w">     </span><span class="nl">hwChannelId</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">     </span><span class="nl">samplewindow</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="mi">16</span>
+<span class="w">  </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w">                       </span>
+<span class="w">   </span><span class="nl">groupId</span><span class="w">                   </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">groupPriority</span><span class="w">             </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="nl">hwUnitId</span><span class="w">                  </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">Adc_GroupEndNotification</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="mh">0x00000000</span>
+<span class="w">   </span><span class="nl">streamNumSamples</span><span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">resolution</span><span class="w">                </span><span class="p">:</span><span class="w"> </span><span class="mi">12</span>
+<span class="w">   </span><span class="nl">convMode</span><span class="w">                  </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">triggSrc</span><span class="w">                  </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">accessMode</span><span class="w">                </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">streamBufMode</span><span class="w">             </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">hwTrigSignal</span><span class="w">              </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">   </span><span class="nl">hwTrigTimer</span><span class="w">               </span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">   </span><span class="nl">groupReplacement</span><span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">groupChannelMask</span><span class="w">          </span><span class="p">:</span><span class="w"> </span><span class="mh">0x00000004</span>
+<span class="w">   </span><span class="nl">groupDataAccessMode</span><span class="w">       </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">numChannels</span><span class="w">               </span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">   </span><span class="nl">groupDmaChannelId</span><span class="w">         </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">channelConfig</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span>
+<span class="w">     </span><span class="nl">hwChannelId</span><span class="w">   </span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">     </span><span class="nl">samplewindow</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="mi">16</span>
+<span class="w">  </span><span class="n">HW</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="mi">0</span><span class="w">           </span>
+<span class="w">   </span><span class="nl">hwUnitId</span><span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">baseAddr</span><span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="mh">0x502c0000</span>
+<span class="w">   </span><span class="nl">prescale</span><span class="w">    </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="nl">resolution</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="o">------------</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_IDLE</span><span class="w">  </span><span class="o">!</span><span class="w"> </span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_IDLE</span><span class="w">  </span><span class="o">!</span><span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">Read</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="p">(</span><span class="n">Loop</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w"> </span><span class="o">----------------------------</span>
+<span class="w"> </span><span class="n">HW</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="mh">0x502C0000</span><span class="o">:</span>
+<span class="w"> </span><span class="o">-------------------------</span>
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">2785</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">2785</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1982</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1982</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">4033</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">4033</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1409</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1409</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">2113</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">2113</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1857</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1857</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">Read</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="p">(</span><span class="n">Loop</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w"> </span><span class="o">----------------------------</span>
+<span class="w"> </span><span class="n">HW</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="mh">0x502C0000</span><span class="o">:</span>
+<span class="w"> </span><span class="o">-------------------------</span>
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1217</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1728</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">Read</span><span class="w"> </span><span class="n">Buffer</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="p">(</span><span class="n">Loop</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w"> </span><span class="o">----------------------------</span>
+<span class="w"> </span><span class="n">HW</span><span class="w"> </span><span class="n">Unit</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Base</span><span class="w"> </span><span class="mh">0x502C0000</span><span class="o">:</span>
+<span class="w"> </span><span class="o">-------------------------</span>
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1760</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1760</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1790</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1790</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1760</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1760</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1888</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1888</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span><span class="p">[</span><span class="n">Log</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<span class="w"> </span>
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1215</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1760</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1760</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span>
+<span class="w"> </span><span class="n">dmaBuff</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span><span class="w">     </span><span class="n">HWResult</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="mi">1727</span>
+<span class="w"> </span><span class="n">ADC</span><span class="w"> </span><span class="n">Group</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">Status</span><span class="o">:</span><span class="w"> </span><span class="n">ADC_BUSY</span><span class="w"> </span><span class="o">!</span><span class="w"> </span>
+
+<span class="w"> </span>
+<span class="nl">ADC_HW_TRIG_DMA_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">Usage</span><span class="o">:</span><span class="w"> </span><span class="mi">1076</span><span class="w"> </span><span class="n">bytes</span>
+<span class="nl">ADC_HW_TRIG_DMA_APP</span><span class="p">:</span><span class="w"> </span><span class="n">DONE</span><span class="w"> </span><span class="p">(</span><span class="n">Passed</span><span class="p">)</span><span class="w"> </span><span class="o">!!!</span>
+<span class="nl">ADC_HW_TRIG_DMA_APP</span><span class="p">:</span><span class="w"> </span><span class="n">All</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">passed</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="file-structure">
-<h3><span class="section-number">4.1.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.1.10.6. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
 <p>📦AM263Px<br />
 ┣ 📂build<br />
 ┣ 📂mcal<br />
@@ -3437,7 +3746,7 @@ input channels through DC power supply (0-12V).</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Sep 10, 2025.
+          <span class="lastupdated" >Last updated on Nov 14, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 
@@ -3454,7 +3763,7 @@ input channels through DC power supply (0-12V).</p>
   <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
       <span class="fa fa-book"></span>
-       Current Version: 11.00.00
+       Current Version: 11.01.00
       <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">

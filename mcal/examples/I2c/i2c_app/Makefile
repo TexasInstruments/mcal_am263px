@@ -3,6 +3,7 @@ APP_NAME = i2c_app
 # Get the list of src dir, include dir and source files to compile using module mk files
 include $(mcal_PATH)/include/hw/inc.mk
 include $(mcal_PATH)/include/memmap/inc.mk
+include $(mcal_PATH)/Mcal_Lib/inc.mk
 include $(mcal_PATH)/I2c/srcs.mk
 include $(mcal_PATH)/Mcu/srcs.mk
 include $(mcal_PATH)/Port/srcs.mk

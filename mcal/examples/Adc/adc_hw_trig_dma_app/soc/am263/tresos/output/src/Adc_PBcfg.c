@@ -195,7 +195,7 @@ CONST(struct Adc_ConfigType_s, ADC_CONFIG_DATA) Adc_Config =
         {
             .hwUnitId = (Adc_HWUnitType)ADC_HWUNIT_0,
             .baseAddr =0x502c0000UL,
-            .prescale = (Adc_mcalClkPrescale_t)ADC_CLK_DIV_1_0,
+            .prescale = (Adc_mcalClkPrescale_t)ADC_CLK_DIV_3_0,
             .resolution = (Adc_mcalResolution_t)ADC_RESOLUTION_12BIT,
         },
     },

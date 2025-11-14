@@ -1,0 +1,1067 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="88344fe3-eb2c-4f18-83e5-2f34f6788a7c">
+      <SHORT-NAME>Eth_TI_AM261x</SHORT-NAME>
+      <ELEMENTS>
+        <BSW-MODULE-DESCRIPTION UUID="367a78e9-e124-4ea3-867e-ab621cc580f9">
+                  <SHORT-NAME>Eth</SHORT-NAME>
+                  <MODULE-ID>88</MODULE-ID>
+                  <PROVIDED-ENTRYS>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_Init">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_Init</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_SetControllerMode">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_SetControllerMode</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetControllerMode">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetControllerMode</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetPhysAddr">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetPhysAddr</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_SetPhysAddr">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_SetPhysAddr</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_UpdatePhysAddrFilter">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_UpdatePhysAddrFilter</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_WriteMii">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_WriteMii</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_ReadMii">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_ReadMii</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetCounterValues">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetCounterValues</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetRxStats">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetRxStats</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetTxStats">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetTxStats</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetTxErrorCounterValues">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetTxErrorCounterValues</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetCurrentTime">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetCurrentTime</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_EnableEgressTimeStamp">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_EnableEgressTimeStamp</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetEgressTimeStamp">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetEgressTimeStamp</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetIngressTimeStamp">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetIngressTimeStamp</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_ProvideTxBuffer">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_ProvideTxBuffer</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_Transmit">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_Transmit</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_Receive">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_Receive</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_TxConfirmation">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_TxConfirmation</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_GetVersionInfo">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetVersionInfo</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_MainFunction">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_MainFunction</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_RxIrqHdlr_0">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_RxIrqHdlr_0</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_RxThreshIrqHdlr_0">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_RxThreshIrqHdlr_0</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_TxIrqHdlr_0">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_TxIrqHdlr_0</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                    <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_MiscIrqHdlr_0">
+                      <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_MiscIrqHdlr_0</BSW-MODULE-ENTRY-REF>
+                    </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+                  </PROVIDED-ENTRYS>
+                  <BSW-MODULE-DEPENDENCYS>
+                    <BSW-MODULE-DEPENDENCY UUID="8149b9a9-ed37-4b3f-ba5a-2ae85bd9fd59">
+                      <SHORT-NAME>Dem</SHORT-NAME>
+                      <TARGET-MODULE-ID>54</TARGET-MODULE-ID>
+                      <TARGET-MODULE-REFS>
+                        <BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+                          <BSW-MODULE-DESCRIPTION-REF DEST="BSW-MODULE-DESCRIPTION">/AUTOSAR_Dem/Dem</BSW-MODULE-DESCRIPTION-REF>
+                        </BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+                      </TARGET-MODULE-REFS>
+                    </BSW-MODULE-DEPENDENCY>
+                    <BSW-MODULE-DEPENDENCY UUID="67c9b723-afaa-4422-a70f-8be5a058ca45">
+                      <SHORT-NAME>Det</SHORT-NAME>
+                      <TARGET-MODULE-ID>15</TARGET-MODULE-ID>
+                      <TARGET-MODULE-REFS>
+                        <BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+                          <BSW-MODULE-DESCRIPTION-REF DEST="BSW-MODULE-DESCRIPTION">/AUTOSAR_Det/Det</BSW-MODULE-DESCRIPTION-REF>
+                        </BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+                      </TARGET-MODULE-REFS>
+                    </BSW-MODULE-DEPENDENCY>
+                    <BSW-MODULE-DEPENDENCY UUID="9b2b01d5-a335-44cd-8ec4-eecf80cd5705">
+                      <SHORT-NAME>EthIf</SHORT-NAME>
+                      <TARGET-MODULE-ID>65</TARGET-MODULE-ID>
+                      <TARGET-MODULE-REFS>
+                        <BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+                          <BSW-MODULE-DESCRIPTION-REF DEST="BSW-MODULE-DESCRIPTION">/AUTOSAR/EthIf</BSW-MODULE-DESCRIPTION-REF>
+                        </BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+                      </TARGET-MODULE-REFS>
+                    </BSW-MODULE-DEPENDENCY>
+                  </BSW-MODULE-DEPENDENCYS>
+                  <INTERNAL-BEHAVIORS>
+                    <BSW-INTERNAL-BEHAVIOR UUID="84e6c7ca-9059-49d1-8f4a-0fbdad80688d">
+                      <SHORT-NAME>Eth_Behaviour</SHORT-NAME>
+                      <EXCLUSIVE-AREAS>
+                        <EXCLUSIVE-AREA UUID="c338022d-9264-40ab-ac57-11e7b90c4b06">
+                          <SHORT-NAME>ETH_EXCLUSIVE_AREA_0</SHORT-NAME>
+                        </EXCLUSIVE-AREA>
+                      </EXCLUSIVE-AREAS>
+                      <ENTITYS>
+                        <BSW-CALLED-ENTITY UUID="b8948d00-1b2e-4801-91e9-e6653fa82e8a">
+                          <SHORT-NAME>Eth_Init</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_Init</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="93346ba3-bd76-42aa-b7b0-136ad5a63d9c">
+                          <SHORT-NAME>Eth_SetControllerMode</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_SetControllerMode</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="7a44681d-e030-41c6-886e-98f675cfc2ae">
+                          <SHORT-NAME>Eth_GetControllerMode</SHORT-NAME>
+                          <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetControllerMode</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="dd030926-9890-4541-937e-dd558c282748">
+                          <SHORT-NAME>Eth_GetPhysAddr</SHORT-NAME>
+                          <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetPhysAddr</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="9318211b-6451-4bbb-a71f-cf584d17048d">
+                          <SHORT-NAME>Eth_SetPhysAddr</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                           <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                           </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_SetPhysAddr</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="1325f26d-1738-4183-b28b-b29a5fb0b7fa">
+                          <SHORT-NAME>Eth_UpdatePhysAddrFilter</SHORT-NAME>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                           <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                           </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_UpdatePhysAddrFilter</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="e0cd12e0-1074-490e-9cfd-e772239ea6a3">
+                          <SHORT-NAME>Eth_WriteMii</SHORT-NAME>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                           <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                           </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_WriteMii</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="496a6212-979f-48c0-94fd-0d6170672621">
+                          <SHORT-NAME>Eth_ReadMii</SHORT-NAME>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                           <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                           </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_ReadMii</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="dd030926-9890-4652-937e-dd558c282748">
+                          <SHORT-NAME>Eth_GetCounterValues</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetCounterValues</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="ff9c5270-5501-46b9-9a18-342f63a0bb52">
+                          <SHORT-NAME>Eth_GetRxStats</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetRxStats</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="dd030926-1910-4652-937e-dd558c282748">
+                          <SHORT-NAME>Eth_GetTxStats</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetTxStats</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="dd030926-2020-4652-937e-dd558c282748">
+                          <SHORT-NAME>Eth_GetTxErrorCounterValues</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetTxErrorCounterValues</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="9180428f-d8c6-4765-bf21-4419a44562a8">
+                          <SHORT-NAME>Eth_GetCurrentTime</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetCurrentTime</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="03066f0b-23d0-4f8b-a250-5f492322b264">
+                          <SHORT-NAME>Eth_EnableEgressTimeStamp</SHORT-NAME>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_EnableEgressTimeStamp</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="627aed58-3e7f-4069-a6f0-396503b7f9d8">
+                          <SHORT-NAME>Eth_GetEgressTimeStamp</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetEgressTimeStamp</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="97890d7d-760e-4c47-be0b-d1889f339455">
+                          <SHORT-NAME>Eth_GetIngressTimeStamp</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetIngressTimeStamp</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="dd030926-9750-4541-937e-dd558c282748">
+                          <SHORT-NAME>Eth_ProvideTxBuffer</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_ProvideTxBuffer</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="15721949-fafb-4d6d-bbc9-bc5da7e01c54">
+                          <SHORT-NAME>Eth_Transmit</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_Transmit</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="e0e1050e-b2d8-4970-98bd-41153071bf36">
+                          <SHORT-NAME>Eth_Receive</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>EthIf_RxIndication</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR/EthIf/BswModuleEntries/EthIf_RxIndication</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_Receive</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="7ab6f71b-2c7c-4d87-82b0-7ad99b5d1a71">
+                          <SHORT-NAME>Eth_TxConfirmation</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>EthIf_TxConfirmation</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR/EthIf/BswModuleEntries/EthIf_TxConfirmation</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_TxConfirmation</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-CALLED-ENTITY UUID="b6314a01-0224-4b18-b9a1-cc64ff5af074">
+                          <SHORT-NAME>Eth_GetVersionInfo</SHORT-NAME>
+                          <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
+                        </BSW-CALLED-ENTITY>
+                        <BSW-SCHEDULABLE-ENTITY UUID="f9ab814d-e3f8-4525-ade3-e72d4dee3ea0">
+                          <SHORT-NAME>Eth_MainFunction</SHORT-NAME>
+                          <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                            <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Eth_TI_AM261x/Eth/Eth_Behaviour/ETH_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                          </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                          <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>EthIf_CtrlModeIndication</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR/EthIf/BswModuleEntries/EthIf_CtrlModeIndication</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_MainFunction</IMPLEMENTED-ENTRY-REF>
+                        </BSW-SCHEDULABLE-ENTITY>
+                        <BSW-INTERRUPT-ENTITY UUID="660094e2-e5d3-46b5-bc0b-3df9d8f36c93">
+                          <SHORT-NAME>Eth_RxIrqHdlr_0</SHORT-NAME>
+                          
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>EthIf_RxIndication</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR/EthIf/BswModuleEntries/EthIf_RxIndication</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_RxIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
+                          <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        </BSW-INTERRUPT-ENTITY>
+                        <BSW-INTERRUPT-ENTITY UUID="a4baed12-b8a8-4155-a8e9-db489138d37c">
+                          <SHORT-NAME>Eth_RxThreshIrqHdlr_0</SHORT-NAME>
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>EthIf_RxIndication</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR/EthIf/BswModuleEntries/EthIf_RxIndication</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_RxThreshIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
+                          <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        </BSW-INTERRUPT-ENTITY>
+                        <BSW-INTERRUPT-ENTITY UUID="d99d62cb-ffc4-4ffa-a969-fbd5323f6e7d">
+                          <SHORT-NAME>Eth_TxIrqHdlr_0</SHORT-NAME>
+                          
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                            <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>EthIf_TxConfirmation</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR/EthIf/BswModuleEntries/EthIf_TxConfirmation</CALLED-ENTRY-REF>
+                            </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_TxIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
+                          <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        </BSW-INTERRUPT-ENTITY>
+                        <BSW-INTERRUPT-ENTITY UUID="b448ddf3-e117-4f35-be91-7a955e790c1f">
+                          <SHORT-NAME>Eth_MiscIrqHdlr_0</SHORT-NAME>
+                          
+                          <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                          <CALL-POINTS>
+                           <BSW-DIRECT-CALL-POINT>
+                              <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
+                              <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Dem/BSWModuleEntry/Dem_SetEventStatus</CALLED-ENTRY-REF>
+                           </BSW-DIRECT-CALL-POINT>
+                          </CALL-POINTS>
+                          <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM261x/Eth_ModuleEntry/Eth_MiscIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
+                          <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                        </BSW-INTERRUPT-ENTITY>
+                      </ENTITYS>
+                      <EVENTS>
+                        <BSW-TIMING-EVENT S="" UUID="2bd5a28d-6688-409f-991a-6485d0b02d3d">
+                          <SHORT-NAME>EthTimingEvent_MainFunction</SHORT-NAME>                          
+                          <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Eth_TI_AM261x/Eth/Eth_Behaviour/Eth_MainFunction</STARTS-ON-EVENT-REF>
+                          <PERIOD>0.005</PERIOD>
+                        </BSW-TIMING-EVENT>
+                      </EVENTS>
+                    </BSW-INTERNAL-BEHAVIOR>
+                  </INTERNAL-BEHAVIORS>
+                </BSW-MODULE-DESCRIPTION>
+        <BSW-IMPLEMENTATION UUID="a1e2a6d2-2b77-4cfa-b73b-2117bb2e5545">
+          <SHORT-NAME>Eth_Impl</SHORT-NAME>
+          <CODE-DESCRIPTORS>
+            <CODE UUID="88e427fc-bfc8-4c26-b750-ae6ac810a4e3">
+              <SHORT-NAME>Files</SHORT-NAME>
+              <ARTIFACT-DESCRIPTORS>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>V0::Eth_Helpers.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>V0::Eth_Helpers.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>generate::include::Eth_Cfg.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>generate::src::Eth_Cfg.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>generate::src::Eth_Lcfg.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>generate::src::Eth_PBcfg.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Eth.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Eth_Irq.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Eth_Types.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::Eth.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::Eth_Irq.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Cpsw.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Cpsw_Ale.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Cpsw_Cpdma.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Cpsw_Cpts.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Cpsw_Mdio.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Cpsw_Port.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Cpsw_Stats.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::Eth_Priv.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Ale.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Cpdma.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Cpts.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Mdio.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Port.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Priv.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Stats.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Cpsw_Types.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::cpsw::include::Eth_Priv.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw_Ale.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw_Cpdma.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw_Cpts.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw_Mdio.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw_Port.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw_Ss.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::hw::Hw_Cpsw_Stats.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+              </ARTIFACT-DESCRIPTORS>
+            </CODE>
+          </CODE-DESCRIPTORS>
+          <COMPILERS>
+            <COMPILER UUID="29b3bc5b-3ef9-4463-b391-36786af2ac29">
+              <SHORT-NAME>tiarmclang</SHORT-NAME>
+              <NAME>TI ARM Clang Compiler</NAME>
+              <OPTIONS/>
+              <VENDOR>Texas Instruments</VENDOR>
+              <VERSION>4.0.0</VERSION>
+            </COMPILER>
+          </COMPILERS>
+          <LINKERS>
+            <LINKER UUID="c18ce981-b648-4d62-8ff6-0d7d2cb5cdc2">
+              <SHORT-NAME>tiarmlnk</SHORT-NAME>
+              <NAME>TI ARM Clang Linker</NAME>
+              <VENDOR>Texas Instruments</VENDOR>
+              <VERSION>4.0.0</VERSION>
+            </LINKER>
+          </LINKERS>
+          <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+          <RESOURCE-CONSUMPTION UUID="879205ab-e717-4d99-99b4-39c047315674">
+            <SHORT-NAME>ResourceConsumption</SHORT-NAME>
+            <MEMORY-SECTIONS>
+              <MEMORY-SECTION UUID="238d7ac5-b864-44b7-a35b-8a8c7c844ac8">
+                <SHORT-NAME>ETH_CODE</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
+                <SYMBOL>CODE</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="2331411d-e179-43e3-af51-5b272e3a7820">
+                <SHORT-NAME>ETH_CONST_UNSPECIFIED</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONST</SW-ADDRMETHOD-REF>
+                <SYMBOL>CONST_UNSPECIFIED</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION S="" UUID="49a8ffe0-cbae-4dfe-8124-dd39f6adf850">
+                <SHORT-NAME>ETH_ISR_CODE</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
+                <SYMBOL>ISR_CODE</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="d2c5fb0d-02a4-464d-99b0-fbd25117beb0">
+                <SHORT-NAME>ETH_VAR_INIT_UNSPECIFIED</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_UNSPECIFIED</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="a766e1b5-4b33-42d2-a547-f6336b3bdf4b">
+                <SHORT-NAME>ETH_VAR_NO_INIT_UNSPECIFIED</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_NO_INIT_UNSPECIFIED</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="8f7a9ef6-34ff-4f9e-88f3-67d6fd546b10">
+                <SHORT-NAME>ETH_VAR_INIT_32</SHORT-NAME>
+                <ALIGNMENT>32</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_32</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="0458ec34-901e-4043-b697-f9e8645f2fae">
+                <SHORT-NAME>ETH_VAR_INIT_8</SHORT-NAME>
+                <ALIGNMENT>8</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_8</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="30533cb5-61b1-46e0-aee6-bf63ce27f4c2">
+                <SHORT-NAME>ETH_VAR_NO_INIT_8</SHORT-NAME>
+                <ALIGNMENT>8</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_NO_INIT_8</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="596325c1-cc4f-4245-8c80-c45da5b84a8e">
+                <SHORT-NAME>ETH_CONST_8</SHORT-NAME>
+                <ALIGNMENT>8</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONST</SW-ADDRMETHOD-REF>
+                <SYMBOL>CONST_8</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="b5523458-a4dd-4516-a3a9-e50971cbb891">
+                <SHORT-NAME>ETH_CONFIG_DATA</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONST_PBCFG</SW-ADDRMETHOD-REF>
+                <SYMBOL>CONFIG_DATA</SYMBOL>
+              </MEMORY-SECTION>              
+            </MEMORY-SECTIONS>
+          </RESOURCE-CONSUMPTION>
+          <SW-VERSION>10.1.0</SW-VERSION>
+          <USED-CODE-GENERATOR/>
+          <VENDOR-ID>44</VENDOR-ID>
+          <AR-RELEASE-VERSION>4.3.1</AR-RELEASE-VERSION>
+          <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Eth_TI_AM261x/Eth/Eth_Behaviour</BEHAVIOR-REF>
+          <VENDOR-SPECIFIC-MODULE-DEF-REFS>
+            <VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/TI_AM261x/Eth</VENDOR-SPECIFIC-MODULE-DEF-REF>
+          </VENDOR-SPECIFIC-MODULE-DEF-REFS>
+        </BSW-IMPLEMENTATION>
+      </ELEMENTS>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="87ef53b7-352e-43da-8ebc-affb6dbcfede">
+              <SHORT-NAME>Eth_ModuleEntry</SHORT-NAME>
+              <ELEMENTS>
+                <BSW-MODULE-ENTRY UUID="a58e11b9-b31a-4350-a5d0-a475a6cc9fcf">
+                  <SHORT-NAME>Eth_Init</SHORT-NAME>
+                  <SERVICE-ID>0x01</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="a87368d7-cd5f-4e76-ba68-4358eb8dcceb">
+                  <SHORT-NAME>Eth_SetControllerMode</SHORT-NAME>
+                  <SERVICE-ID>0x03</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="6cfb003b-a58e-4e6d-88c2-be5c13eae505">
+                  <SHORT-NAME>Eth_GetControllerMode</SHORT-NAME>
+                  <SERVICE-ID>0x04</SERVICE-ID>
+                  <IS-REENTRANT>true</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="024b9448-6bb2-4307-9883-da8e3037dc90">
+                  <SHORT-NAME>Eth_GetPhysAddr</SHORT-NAME>
+                  <SERVICE-ID>0x08</SERVICE-ID>
+                  <IS-REENTRANT>true</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="0b29aabf-821d-492c-960c-7687782504ef">
+                  <SHORT-NAME>Eth_SetPhysAddr</SHORT-NAME>
+                  <SERVICE-ID>0x13</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="4556219f-aaf9-47b2-895a-7941582dec5e">
+                  <SHORT-NAME>Eth_UpdatePhysAddrFilter</SHORT-NAME>
+                  <SERVICE-ID>0x12</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="38a4cde2-5605-499e-8232-1a766a37c454">
+                  <SHORT-NAME>Eth_WriteMii</SHORT-NAME>
+                  <SERVICE-ID>0x05</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="d218a920-e9a9-46b0-9291-a94771def3ac">
+                  <SHORT-NAME>Eth_ReadMii</SHORT-NAME>
+                  <SERVICE-ID>0x06</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="4bbc41ba-2f54-4649-8ef2-ad37649ba07c">
+                  <SHORT-NAME>Eth_GetCounterValues</SHORT-NAME>
+                  <SERVICE-ID>0x14</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="3f4d4c36-21f3-4ecd-a064-70f9ade36af2">
+                  <SHORT-NAME>Eth_GetRxStats</SHORT-NAME>
+                  <SERVICE-ID>0x15</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="3f4d4c36-2213-4ecd-a064-70f9ade36af2">
+                  <SHORT-NAME>Eth_GetTxStats</SHORT-NAME>
+                  <SERVICE-ID>0x1C</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="3f4d4c36-21d4-4ecd-a064-70f9ade36af2">
+                  <SHORT-NAME>Eth_GetTxErrorCounterValues</SHORT-NAME>
+                  <SERVICE-ID>0x1D</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>TASK</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="ab7d5911-2407-4b1a-bb35-039c0afbec5b">
+                  <SHORT-NAME>Eth_GetCurrentTime</SHORT-NAME>
+                  <SERVICE-ID>0x16</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="3cfa0701-9996-469c-94ce-643c81169308">
+                  <SHORT-NAME>Eth_EnableEgressTimeStamp</SHORT-NAME>
+                  <SERVICE-ID>0x17</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="40ee28c6-4c56-4ce7-a455-9f474240be42">
+                  <SHORT-NAME>Eth_GetEgressTimeStamp</SHORT-NAME>
+                  <SERVICE-ID>0x18</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="4921da94-1abf-4a20-bd22-4d09412a8694">
+                  <SHORT-NAME>Eth_GetIngressTimeStamp</SHORT-NAME>
+                  <SERVICE-ID>0x19</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="e95cdc36-e3cd-43b0-9e49-7e6587fcdf3a">
+                  <SHORT-NAME>Eth_ProvideTxBuffer</SHORT-NAME>
+                  <SERVICE-ID>0x09</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="0c6390cb-cd00-4c65-b8b3-d76ccbea6c5c">
+                  <SHORT-NAME>Eth_Transmit</SHORT-NAME>
+                  <SERVICE-ID>0x0a</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="5ee3e507-3e6b-420a-9fa3-76669ca7a23e">
+                  <SHORT-NAME>Eth_Receive</SHORT-NAME>
+                  <SERVICE-ID>0x0b</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="2844f458-dde1-4746-8e52-be5eeb48fc00">
+                  <SHORT-NAME>Eth_TxConfirmation</SHORT-NAME>
+                  <SERVICE-ID>0x0c</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="08e46973-c13b-46d0-b406-396a4c7cc126">
+                  <SHORT-NAME>Eth_GetVersionInfo</SHORT-NAME>
+                  <SERVICE-ID>0x0d</SERVICE-ID>
+                  <IS-REENTRANT>true</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="d67d2669-c169-447f-870b-3d311fcfb532">
+                  <SHORT-NAME>Eth_SetBandwidthLimit</SHORT-NAME>
+                  <SERVICE-ID>0x50</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY UUID="bcaccf46-243f-4b53-9f61-aabb253045e3">
+                  <SHORT-NAME>Eth_GetBandwidthLimit</SHORT-NAME>
+                  <SERVICE-ID>0x51</SERVICE-ID>
+                  <IS-REENTRANT>true</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>REGULAR</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY S="" UUID="517fe97c-ba94-4b61-9b9a-0ddcbdfa5d87">
+                  <SHORT-NAME>Eth_MainFunction</SHORT-NAME>
+                  <SERVICE-ID>0x20</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>SCHEDULED</CALL-TYPE>
+                  <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY S="" UUID="85a44668-e025-4d6a-b868-4d5d5d65f776">
+                  <SHORT-NAME>Eth_RxIrqHdlr_0</SHORT-NAME>
+                  <SERVICE-ID>0x10</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                  <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY S="" UUID="16889136-45e1-4a8d-902b-f5efbcca9714">
+                  <SHORT-NAME>Eth_RxThreshIrqHdlr_0</SHORT-NAME>
+                  <SERVICE-ID>0x21</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                  <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY S="" UUID="d91334ec-a9fb-4896-ac81-42a8d5a67769">
+                  <SHORT-NAME>Eth_TxIrqHdlr_0</SHORT-NAME>
+                  <SERVICE-ID>0x11</SERVICE-ID>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                  <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+                <BSW-MODULE-ENTRY S="" UUID="92523781-5999-4578-875f-58a20893751c">
+                  <SHORT-NAME>Eth_MiscIrqHdlr_0</SHORT-NAME>
+                  <IS-REENTRANT>false</IS-REENTRANT>
+                  <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+                  <CALL-TYPE>INTERRUPT</CALL-TYPE>
+                  <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+                  <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+                  <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+                </BSW-MODULE-ENTRY>
+              </ELEMENTS>
+            </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

@@ -135,7 +135,7 @@ void CpswPort_setDMATXPtype(uint32 baseAddr, uint32 TXPtype);
  *
  *  \return None
  */
-void CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq, uint32 bandwithLimitBitPerSec);
+uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq, uint32 bandwithLimitBitPerSec);
 
 /**
  *  \brief Get current rate limit bandwidth.

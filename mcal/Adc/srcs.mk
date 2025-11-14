@@ -1,10 +1,6 @@
-ADC_PATH=$(mcal_PATH)/Adc
+include $(mcal_PATH)/Adc/inc.mk
 
-SRCDIR += $(ADC_PATH)/src
-INCDIR += $(ADC_PATH)/include $(SRCDIR)
+SRCDIR += $(mcal_PATH)/Adc/src
 SRCS_COMMON += Adc.c Adc_Priv.c Adc_Utils.c Adc_Platform.c Adc_Irq.c
-
 # SOC specific files
-ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
-  SRCDIR += $(ADC_PATH)/V0
-endif
+SRCDIR += $(mcal_PATH)/Adc/V0

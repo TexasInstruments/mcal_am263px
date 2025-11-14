@@ -1909,52 +1909,6 @@
                         </ECUC-PARAM-CONF-CONTAINER-DEF>
                       </SUB-CONTAINERS>
                     </ECUC-PARAM-CONF-CONTAINER-DEF>
-                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:01bef43d-05da-4454-848c-9f0d502c05bb">
-                      <SHORT-NAME>EthCpswQoSCfg</SHORT-NAME>
-                      <DESC>
-                        <L-2 L="EN">CPSW module : Configure Quality of Service (rate limiting and traffic shaping)</L-2>
-                      </DESC>
-                      <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
-                      <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
-                      <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
-                      <SUB-CONTAINERS>
-                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="4a5627c8-548e-481a-946d-2d4234cea606">
-                          <SHORT-NAME>EthCpswRateLimitCfg</SHORT-NAME>
-                          <DESC>
-                            <L-2 L="EN">Structure for CPSW Rate Limit Configuration</L-2>
-                          </DESC>
-                          <LOWER-MULTIPLICITY>8</LOWER-MULTIPLICITY>
-                          <UPPER-MULTIPLICITY>8</UPPER-MULTIPLICITY>
-                          <PARAMETERS>
-                            <ECUC-INTEGER-PARAM-DEF UUID="fa39cbdb-eb2f-4408-a227-03ada37dde77">
-                              <SHORT-NAME>EthCpswRateLimitPrio</SHORT-NAME>
-                              <DESC>
-                                <L-2 L="EN">Bandwidth for each of rate limited priority</L-2>
-                              </DESC>
-                              <ORIGIN>Texas Instruments</ORIGIN>
-                              <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                              <VALUE-CONFIG-CLASSES>
-                                <ECUC-VALUE-CONFIGURATION-CLASS>
-                                  <CONFIG-CLASS>LINK</CONFIG-CLASS>
-                                  <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
-                                </ECUC-VALUE-CONFIGURATION-CLASS>
-                                <ECUC-VALUE-CONFIGURATION-CLASS>
-                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
-                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
-                                </ECUC-VALUE-CONFIGURATION-CLASS>
-                                <ECUC-VALUE-CONFIGURATION-CLASS>
-                                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                                  <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                                </ECUC-VALUE-CONFIGURATION-CLASS>
-                              </VALUE-CONFIG-CLASSES>
-                              <DEFAULT-VALUE>0</DEFAULT-VALUE>
-                              <MAX>200</MAX>
-                              <MIN>0</MIN>
-                            </ECUC-INTEGER-PARAM-DEF>
-                          </PARAMETERS>
-                        </ECUC-PARAM-CONF-CONTAINER-DEF>
-                      </SUB-CONTAINERS>
-                    </ECUC-PARAM-CONF-CONTAINER-DEF>
                   </SUB-CONTAINERS>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
               </SUB-CONTAINERS>

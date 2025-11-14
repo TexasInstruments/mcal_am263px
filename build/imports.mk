@@ -1,5 +1,5 @@
 export MCAL_PATH?=$(abspath ../)
-export CCS_VERSION?=ccs1281
+export CCS_VERSION?=ccs2030
 export AUTOSAR_VERSION_DOT?=4.3.1
 export AUTOSAR_VERSION?=$(subst .,,$(AUTOSAR_VERSION_DOT))
 
@@ -22,7 +22,7 @@ ifeq ($(OS),Windows_NT)
     export EB_PATH_SCRIPT=$(EB_PATH)/tresos/bin/tresos_cmd.bat
     export TOOLS_PATH?=C:/ti
     export CCS_PATH?=$(TOOLS_PATH)/$(CCS_VERSION)/ccs
-    export CCS_ECLIPSE=$(CCS_PATH)/eclipse/eclipse
+    export CCS_ECLIPSE=$(CCS_PATH)/eclipse/ccs-server-cli.sh
     export CYGWIN_PATH?=$(CCS_PATH)/utils/cygwin
     export MKDIR=$(CYGWIN_PATH)/mkdir -p
     export RMDIR=$(CYGWIN_PATH)/rm -rf
@@ -46,7 +46,7 @@ else
         export EB_PATH_SCRIPT=$(EB_PATH)/tresos/bin/tresos_cmd.sh
         export TOOLS_PATH?=$(HOME)/ti
         export CCS_PATH?=$(TOOLS_PATH)/$(CCS_VERSION)/ccs
-        export CCS_ECLIPSE=$(CCS_PATH)/eclipse/eclipse
+        export CCS_ECLIPSE=$(CCS_PATH)/eclipse/ccs-server-cli.sh
         export MKDIR=mkdir -p
         export RMDIR=rm -rf
         export RM=rm -f

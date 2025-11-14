@@ -321,6 +321,7 @@ FUNC(void, MCU_CODE) Mcu_SystemInit(void)
 #endif
 
     Mcu_SetupClock(); /* Invoking API to do clock initialization for different modules */
+    Mcal_pmuInit();
 
 #if (STD_ON == MCU_PWM_ENABLE)
     uint8 pwm_instance;
@@ -2019,13 +2020,9 @@ static inline void Mcu_enableAdcReference(uint32 adcInstance)
     uint32 groupnum    = (adcInstance / 3U);
     uint32 compctlmask = 0x7;
 
-    if ((adcInstance == 1U) || (adcInstance == 2U))
+    if (adcInstance == 2U)
     {
         compctlmask = (compctlmask << 4);
-    }
-    else if ((adcInstance == 3U) || (adcInstance == 4U))
-    {
-        compctlmask = (compctlmask << 8);
     }
     else
     {
@@ -2042,6 +2039,8 @@ static inline void Mcu_enableAdcReference(uint32 adcInstance)
 
     /* Lock Top Control Space */
     Mcu_controlModuleLockMMR(0, MCU_TOP_CTRL_PARTITION0);
+
+    Mcal_pmuDelayUsec(1U, MCU_SYSTEM_CLK);
 }
 
 #endif

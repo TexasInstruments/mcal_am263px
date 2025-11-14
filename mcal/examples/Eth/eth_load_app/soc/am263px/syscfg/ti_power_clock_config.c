@@ -32,6 +32,7 @@
 /*
  * Auto generated file
  */
+
 #include <kernel/dpl/DebugP.h>
 #include <drivers/soc.h>
 
@@ -47,7 +48,6 @@ typedef struct
 
 uint32_t gSocModules[] = {
     SOC_RcmPeripheralId_I2C,
-    SOC_RcmPeripheralId_I2C,
 
     SOC_RcmPeripheralId_CPTS,
 
@@ -57,7 +57,6 @@ uint32_t gSocModules[] = {
 };
 
 SOC_ModuleClockFrequency gSocModulesClockFrequency[] = {
-    {SOC_RcmPeripheralId_I2C, SOC_RcmPeripheralClockSource_DPLL_PER_HSDIV0_CLKOUT1, 96000000},
     {SOC_RcmPeripheralId_I2C, SOC_RcmPeripheralClockSource_DPLL_PER_HSDIV0_CLKOUT1, 96000000},
 
     {SOC_RcmPeripheralId_CPTS, SOC_RcmPeripheralClockSource_SYS_CLK, 200000000},

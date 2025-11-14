@@ -226,13 +226,13 @@ void EthApp_Startup()
 void EthApp_TrcvInit()
 {
     Eth_ConfigType *pEthConfigPtr;
-    pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+    pEthConfigPtr = &Eth_Config;
 
 #if (STD_ON == ETHTRCV_PRE_COMPILE_VARIANT)
-    AppUtils_ethTrcvInit((EthTrcv_ConfigType *)NULL_PTR);
+    AppUtils_ethTrcvInit((EthTrcv_ConfigType *)NULL_PTR, EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0);
 #else
-    AppUtils_ethAm263xPHYDelayConfig(pEthConfigPtr, EthTrcvConfigSet_EthTrcvConfig_0.phyAddr);
-    AppUtils_ethTrcvInit(&EthTrcvConfigSet_EthTrcvConfig_0);
+    AppUtils_ethAm263xPHYDelayConfig(pEthConfigPtr, EthTrcv_Config.pController[0]->phyAddr);
+    AppUtils_ethTrcvInit(&EthTrcv_Config, EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0);
 #endif /* (STD_ON == ETHTRCV_PRE_COMPILE_VARIANT)*/
 }
 

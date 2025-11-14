@@ -368,7 +368,7 @@ Eth_Init(P2CONST(Eth_ConfigType, AUTOMATIC, ETH_PBCFG) CfgPtr)
 #if (STD_ON == ETH_VARIANT_LINK_TIME)
         if (NULL_PTR == ConfigPtr)
         {
-            ConfigPtr = (const Eth_ConfigType *)&EthConfigSet_EthCtrlConfig_0;
+            ConfigPtr = (const Eth_ConfigType *)&Eth_Config;
         }
 #endif /* (STD_ON == ETH_VARIANT_LINK_TIME) */
 
@@ -1237,8 +1237,14 @@ Eth_SetBandwidthLimit(VAR(uint8, AUTOMATIC) CtrlIdx, VAR(uint8, AUTOMATIC) Queue
 
     if ((Std_ReturnType)E_OK == retVal)
     {
-        CpswPort_setBandwidthLimit(Eth_DrvObj.baseAddr, QueuePrio, Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq,
-                                   BandwidthLimit);
+        retVal = CpswPort_setBandwidthLimit(Eth_DrvObj.baseAddr, QueuePrio, Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq,
+                                            BandwidthLimit);
+#if (STD_ON == ETH_DEV_ERROR_DETECT)
+        if (E_NOT_OK == retVal)
+        {
+            (void)Det_ReportError(ETH_MODULE_ID, ETH_INSTANCE_ID, ETH_SID_SET_BANDWIDTH_LIMIT, ETH_E_INV_PARAM);
+        }
+#endif /*STD_ON == ETH_DEV_ERROR_DETECT*/
     }
 }
 

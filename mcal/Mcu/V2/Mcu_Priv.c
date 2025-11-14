@@ -315,6 +315,7 @@ FUNC(void, MCU_CODE) Mcu_SystemInit(void)
 #endif
 
     Mcu_SetupClock(); /* Invoking API to do clock initialization for different modules */
+    Mcal_pmuInit();
 
 #if (STD_ON == MCU_PWM_ENABLE)
     uint8 pwm_instance;
@@ -2615,6 +2616,8 @@ static inline void Mcu_enableAdcReference(uint32 adcInstance)
 
     /* Lock Top Control Space */
     Mcu_controlModuleLockMMR(0, MCU_TOP_CTRL_PARTITION0);
+
+    Mcal_pmuDelayUsec(1U, MCU_SYSTEM_CLK);
 }
 
 #endif

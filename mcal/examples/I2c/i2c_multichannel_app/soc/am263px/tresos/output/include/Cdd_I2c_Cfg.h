@@ -69,6 +69,9 @@ extern "C" {
  *   Build variants.(i.e Pre Compile and Post Build)
  */
 #define CDD_I2C_PRE_COMPILE_VARIANT     (STD_ON)
+/** \brief Precompile variant macro */
+#define CDD_I2C_CONFIG_PC               Cdd_I2c_Config
+
 
 /** \brief Enable/disable Interrupts */
 #define CDD_I2C_POLLING_MODE            (STD_OFF)
@@ -150,6 +153,7 @@ extern "C" {
 /*                      Exported Object Declarations                          */
 /* ========================================================================== */
 
+extern CONST(struct Cdd_I2c_ConfigTag, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config;
 extern CONST(uint32, CDD_I2C_CONST) Cdd_I2c_HwUnitBaseAddr[CDD_I2C_HW_UNIT_MAX];
 
 /* ========================================================================== */

@@ -1,9 +1,6 @@
-GPT_PATH=$(mcal_PATH)/Gpt
+include $(mcal_PATH)/Gpt/inc.mk
 
-SRCDIR += $(GPT_PATH)/src
-INCDIR += $(GPT_PATH)/include
+SRCDIR += $(mcal_PATH)/Gpt/src
 SRCS_COMMON += Gpt.c Gpt_Irq.c Gpt_Priv.c
-
 # SOC specific files
-SRCDIR += $(GPT_PATH)/V0
-INCDIR += $(GPT_PATH)/V0
+SRCDIR += $(mcal_PATH)/Gpt/V0

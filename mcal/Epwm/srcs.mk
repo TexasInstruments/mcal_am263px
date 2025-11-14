@@ -1,11 +1,6 @@
-EPWM_PATH=$(mcal_PATH)/Epwm
+include $(mcal_PATH)/Epwm/inc.mk
 
-SRCDIR += $(EPWM_PATH)/src
-INCDIR += $(EPWM_PATH)/include
+SRCDIR += $(mcal_PATH)/Epwm/src
 SRCS_COMMON += Cdd_Pwm.c Cdd_Pwm_Irq.c Cdd_Pwm_Priv.c Cdd_Pwm_Sfo.c
-
 # SOC specific files
-ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
-  SRCDIR += $(EPWM_PATH)/V0
-  INCDIR += $(EPWM_PATH)/V0
-endif
+SRCDIR += $(mcal_PATH)/Epwm/V0

@@ -11,7 +11,7 @@
 /* This is the heap size for malloc() API in NORTOS and FreeRTOS
  * This is also the heap used by pvPortMalloc in FreeRTOS
  */
---heap_size=1024
+--heap_size=8192
 -e_vectors  /* This is the entry of the application, _vector MUST be plabed starting address 0x0 */
 
 /* This is the size of stack when R5 is in IRQ mode
@@ -948,7 +948,7 @@ SECTIONS
     }
     
 	/* For NDK packet memory*/
-    .bss.ENET_CPPI_DESC        (NOLOAD) {} ALIGN (128) > CPPI_DESC
+    .bss.ENET_CPPI_DESC  {*(.bss.ENET_CPPI_DESC)}  ALIGN (128) > CPPI_DESC
     .bss:ENET_DMA_PKT_MEMPOOL  (NOLOAD) {} ALIGN (128) > OCRAM
 }
 
@@ -973,12 +973,12 @@ MEMORY
     R5F_TCMB  : ORIGIN = 0x00080000 , LENGTH = 0x00008000
 
     /* CPPI descriptor memory */
-    CPPI_DESC : ORIGIN = 0x70280000 , LENGTH = 0x00004000
+    CPPI_DESC : ORIGIN = 0x70180000 , LENGTH = 0x00004000
 	
     /* when using multi-core application's i.e more than one R5F/M4F active, make sure
      * this memory does not overlap with other R5F's
      */
-    OCRAM     : ORIGIN = 0x70084000 , LENGTH = 0x15C000
+    OCRAM     : ORIGIN = 0x70184000 , LENGTH = 0x05C000
 
     /* This section can be used to put XIP section of the application in flash, make sure this does not overlap with
      * other CPUs. Also make sure to add a MPU entry for this section and mark it as cached and code executable

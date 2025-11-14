@@ -209,7 +209,11 @@ void CpswMdio_init(uint32 baseAddr, uint32 inFreq, uint32 outFreq)
 
     if ((uint32)0U != outFreq)
     {
-        clkDiv = (inFreq / outFreq) - 1U;
+        clkDiv = (inFreq / outFreq);
+        if (clkDiv >= 1U)
+        {
+            clkDiv = clkDiv - 1U;
+        }
     }
 
     MDIO_WR_REG(POLL_EN, pollEnableMask | ((uint32)1U << 31U));

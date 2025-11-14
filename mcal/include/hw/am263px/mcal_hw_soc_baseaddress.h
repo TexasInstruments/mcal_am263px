@@ -42,10 +42,17 @@ extern "C"
 {
 #endif
 
-/* Global addresses in unified address space */
 
+#define CSL_MSS_TCMA_RAM_BASE               (0x00000000UL)
+#define CSL_MSS_TCMA_RAM_SIZE               (0x00008000UL)   /* 32KB */
+#define CSL_MSS_TMU_BASE                    (0x00060000UL)
+#define CSL_MSS_TMU_SIZE                    (0x00080000UL)   /* 128KB */
+#define CSL_MSS_TCMB_RAM_BASE               (0x00080000UL)
+#define CSL_MSS_TCMB_RAM_SIZE               (0x00018000UL)   /* 96KB */
+
+/* Global addresses in unified address space */
 #define MCAL_CSL_R5SS0_CORE0_TCMA_ROM_U_BASE			(0x00000000UL)
-#define MCAL_CSL_R5SS0_CORE0_TCMA_RAM_U_BASE			(0x00020000UL)
+#define MCAL_CSL_R5SS0_CORE0_TCMA_RAM_U_BASE			(0x00000000UL)
 #define MCAL_CSL_R5SS0_CORE0_TMU_U_BASE			        (0x00060000UL)
 #define MCAL_CSL_R5SS0_CORE0_TCMB_RAM_U_BASE			(0x00080000UL)
 #define MCAL_CSL_HSM_ROM_U_BASE                  (0x20000000UL)

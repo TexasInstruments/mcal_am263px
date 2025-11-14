@@ -29,13 +29,39 @@
 #include "Std_Types.h"
 /*LDRA_ANALYSIS*/
 #include "hw_types.h"
-#include "sys_common.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 
-/* None */
+typedef volatile uint32 REG32;
+#define M_REG_WRITE32(w_addr, w_data) (*((REG32 *)((w_addr)))) = ((uint32)((w_data)))
+#define M_REG_READ32(w_addr)          (*((REG32 *)((w_addr))))
+
+/*! \brief
+ * Generates a pattern of ones between end bit and start bit
+ * M_ONES(7,4) will give 0x000000F0
+ */
+#define M_ONES(c_ebit, c_sbit) (((1U << (((c_ebit) - (c_sbit)) + 1U)) - 1U) << (c_sbit))
+
+/*! \brief
+ * Generates a pattern of zeros between end bit and start bit
+ * M_MASK(7,4) will give 0xFFFFFF0F
+ */
+#define M_MASK(c_ebit, c_sbit) (~(M_ONES((c_ebit), (c_sbit))))
+
+/*! \brief
+ * Bounds the value before writing to register
+ * M_VAL_BOUND(0x1F, 7, 4) will remove the extra bit resulting in 0xF
+ * TODO: Generate a warning if extra bit found
+ */
+#define M_VAL_BOUND(val, c_ebit, c_sbit) ((M_ONES((c_ebit), (c_sbit)) >> (c_sbit)) & (uint32)(val))
+
+/*! \brief
+ * 32 bit register field read - bit fields input
+ */
+#define M_REG_BITS_READ32(w_addr, c_ebit, c_sbit) \
+    (((M_REG_READ32((w_addr))) & (M_ONES((c_ebit), (c_sbit)))) >> (c_sbit))
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */

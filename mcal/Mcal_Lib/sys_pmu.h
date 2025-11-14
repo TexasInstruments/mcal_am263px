@@ -229,6 +229,20 @@ void Mcal_GetCycleCounterValue(uint32 *Value);
  */
 void Mcal_GetElapsedCycleCountValue(uint32 *Value, uint32 *ElapsedValue);
 
+/** @fn void Mcal_pmuDelayUsec(volatile uint32 delayUsec, uint32 sysclkHz)
+ *   @brief Run pmu counter for the calculated cycles
+ *   @param[in] delayUsec - required delay in usec
+ *   @param[in] sysclkHz - system clock frequency in Hz
+ */
+void Mcal_pmuDelayUsec(volatile uint32 delayUsec, uint32 sysclkHz);
+
+/** @fn void Mcal_pmuDelayUsec(volatile uint32 delayMsec, uint32 sysclkHz)
+ *   @brief Run pmu counter for the calculated cycles
+ *   @param[in] delayMsec - required delay in msec
+ *   @param[in] sysclkHz - system clock frequency in Hz
+ */
+void Mcal_pmuDelayMsec(volatile uint32 delayMsec, uint32 sysclkHz);
+
 #ifdef __cplusplus
 }
 #endif /*extern "C" */

@@ -1,19 +1,14 @@
-MCU_PATH=$(mcal_PATH)/Mcu
+include $(mcal_PATH)/Mcu/inc.mk
 
-SRCDIR += $(MCU_PATH)/src $(mcal_PATH)/include/hw/$(PLATFORM)
-INCDIR += $(MCU_PATH)/include
+SRCDIR += $(mcal_PATH)/Mcu/src $(mcal_PATH)/include/hw/$(PLATFORM)
 SRCS_COMMON += Mcu.c Mcu_Priv.c Mcal_Libs_Utils.c
-
 # SOC specific files
 ifeq ($(SOC), $(filter $(SOC), am263))
-  SRCDIR += $(MCU_PATH)/V0
-  INCDIR += $(MCU_PATH)/V0
+  SRCDIR += $(mcal_PATH)/Mcu/V0
 endif
 ifeq ($(SOC), $(filter $(SOC), am263px))
-  SRCDIR += $(MCU_PATH)/V2
-  INCDIR += $(MCU_PATH)/V2
+  SRCDIR += $(mcal_PATH)/Mcu/V2
 endif
 ifeq ($(SOC), $(filter $(SOC), am261))
-  SRCDIR += $(MCU_PATH)/V3
-  INCDIR += $(MCU_PATH)/V3
+  SRCDIR += $(mcal_PATH)/Mcu/V3
 endif

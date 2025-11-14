@@ -467,25 +467,20 @@ FUNC(void, ETH_CODE) Eth_initHw(const Eth_ConfigType *CfgPtr)
     /* Initialize CPSW */
     EthCpswInstInit(currPort);
 
-    /* Check to see if cpswQoS for traffic shaping is needed */
-    if (FALSE != CfgPtr->traffiShapingCfg.enableQoS)
+#if (ETH_TRAFFIC_SHAPING_API == STD_ON)
+    uint8  k         = 0U;
+    uint8  queueNum  = 0U;
+    uint32 idleSlope = 0U;
+    for (k = ETH_PRIORITY_QUEUE_NUM; k > 0U; k--)
     {
-        for (i = 0U; i < (uint16)ETH_PRIORITY_QUEUE_NUM; i++)
+        queueNum  = Eth_DrvObj.ethConfig.portCfg.shaperCfg[k - 1U].queueNum;
+        idleSlope = Eth_DrvObj.ethConfig.portCfg.shaperCfg[k - 1U].idleSlope;
+        if (queueNum < ETH_PRIORITY_QUEUE_NUM)
         {
-            if (CfgPtr->traffiShapingCfg.prioArray[i] > 0U)
-            {
-                /**
-                 * Set rate limit values for each priority,
-                 * convert Mbps to bps, if 0 then rate limiting is disabled
-                 */
-                CpswPort_setBandwidthLimit(Eth_DrvObj.baseAddr, (uint8)i, Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq,
-                                           (CfgPtr->traffiShapingCfg.prioArray[i]) * 1000000U);
-            }
+            Eth_SetBandwidthLimit(Eth_DrvObj.baseAddr, queueNum, idleSlope);
         }
-
-        /* Set CPDMA Transmit Priority Type*/
-        CpswPort_setDMATXPtype(Eth_DrvObj.baseAddr, CPSW_CPDMA_DMACTRL_TX_PTYPE_PRIORITY_FIXED);
     }
+#endif
 
     /* configure switch for speed, duplex mode etc.*/
     Eth_MacConfigType *pMACConfig = &Eth_DrvObj.portObj.portCfg.macCfg;
@@ -1491,7 +1486,7 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
     Std_ReturnType      retVal   = E_OK;
     Eth_PortObject     *pPortObj = (Eth_PortObject *)NULL_PTR;
     Eth_PortConfigType *pPortCfg = (Eth_PortConfigType *)NULL_PTR;
-    uint16              totalLen = 0U;
+    uint32              totalLen = 0U;
 
     /* Each port is considered as one controller */
     pPortObj = &(Eth_DrvObj.portObj);
@@ -1514,20 +1509,20 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
 
         /* Take packet from Tx Buffer ring using BufIdx */
         pDataBuffer = pTempBufObj->payload;
-        totalLen    = LenByte + ETH_HLEN;
+        totalLen    = (uint32)LenByte + ETH_HLEN;
 
         /*
          * Make sure the driver does not transmit packet less than min. as per the
          * Ethernet standards.
          */
-        if (totalLen < (uint16)ETH_ZLEN)
+        if (totalLen < ETH_ZLEN)
         {
-            uint16 remLenInBytes = ((uint16)ETH_ZLEN - totalLen);
+            uint32 remLenInBytes = (ETH_ZLEN - totalLen);
             /* Zero pad the packet data to at least 60 known bytes */
 
             (void)memset(((void *)(&(pDataBuffer->payload[LenByte]))), 0, (size_t)remLenInBytes);
             /* With Ethernet FCS, total transmitted size will be the minimum 64 bytes */
-            totalLen = (uint16)ETH_ZLEN;
+            totalLen = ETH_ZLEN;
         }
 
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
@@ -1581,7 +1576,7 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
         if ((Eth_DrvObj.enableCacheOps == (uint32)TRUE) && (Eth_DrvObj.cacheFlushFnPtr != (Eth_CacheFlushType)NULL))
         {
             /* Double cast to avoid MISRA-C:2004 11.4 */
-            Eth_DrvObj.cacheFlushFnPtr((uint8 *)((void *)pDataBuffer), (uint32)totalLen);
+            Eth_DrvObj.cacheFlushFnPtr((uint8 *)((void *)pDataBuffer), totalLen);
         }
 
         SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();

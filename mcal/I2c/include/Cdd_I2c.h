@@ -444,7 +444,7 @@ typedef struct
 /**
  * \brief CDD_I2C config structure
  */
-typedef struct
+typedef struct Cdd_I2c_ConfigTag
 {
     /** \brief HW Unit configurations */
     Cdd_I2c_HwUnitConfigType   hwUnitCfg[CDD_I2C_MAX_HW_UNIT];
@@ -477,8 +477,7 @@ typedef struct
 /*                      Exported Object Declarations                          */
 /* ========================================================================== */
 
-/** \brief Pre-compile configuration */
-extern CONST(Cdd_I2c_ConfigType, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config;
+/* None */
 
 /* ========================================================================== */
 /*                          Function Declarations                             */

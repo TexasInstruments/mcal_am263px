@@ -82,6 +82,11 @@
 /*Port ratelimit divide */
 #define CPSW_PORT_RATELIM_DIV (32768ULL)
 
+/**
+ *  \brief Port ratelimit max counter value
+ */
+#define CPSW_PORT_BANDWIDTH_CNT_MAX (0x0FFFFFFFULL)
+
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -156,14 +161,23 @@ void CpswPort_setDMATXPtype(uint32 baseAddr, uint32 TXPtype)
     CPDMA_WR_FIELD(CONTROL, DMACTRL_TX_PTYPE, TXPtype);
 }
 
-void CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq, uint32 bandwithLimitBitPerSec)
+uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq, uint32 bandwithLimitBitPerSec)
 {
-    uint64 cir = 0LLU;
+    uint8  status = E_OK;
+    uint64 cir    = 0LLU;
 
     cir = CpswPort_mapBwToCnt(bandwithLimitBitPerSec, cppiClockFreq);
 
-    CPPI_WR_PRIORITY_FIELD(P0_PRI_CIR, (uint32)priority, PRI_CIR, cir);
-    CPPI_WR_PRIORITY_FIELD(P0_PRI_EIR, (uint32)priority, PRI_EIR, 0U);
+    if (cir < CPSW_PORT_BANDWIDTH_CNT_MAX)
+    {
+        ETH_PN_WR_PRIORITY_FIELD(PRI_CIR, (uint32)priority, PRI_CIR, cir);
+        ETH_PN_WR_PRIORITY_FIELD(PRI_EIR, (uint32)priority, PRI_EIR, 0U);
+    }
+    else
+    {
+        status = E_NOT_OK;
+    }
+    return status;
 }
 
 void CpswPort_getBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq,
@@ -171,7 +185,7 @@ void CpswPort_getBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiCloc
 {
     uint32 cir = 0U;
 
-    cir = CPPI_RD_PRIORITY_REG(P0_PRI_CIR, (uint32)priority);
+    cir = ETH_PN_RD_PRIORITY_REG(PRI_CIR, (uint32)priority);
 
     *bandwithLimitBitPerSecPtr = CpswPort_mapCntToBw(cir, cppiClockFreq);
 }

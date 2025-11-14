@@ -1,5 +1,4 @@
-CDD_FLC_PATH=$(mcal_PATH)/Cdd_Flc
+include $(mcal_PATH)/Cdd_Flc/inc.mk
 
-SRCDIR += $(CDD_FLC_PATH)/src
-INCDIR += $(CDD_FLC_PATH)/include $(CDD_FLC_PATH)/src/$(PLATFORM)
+SRCDIR += $(mcal_PATH)/Cdd_Flc/src
 SRCS_COMMON += Cdd_Flc.c

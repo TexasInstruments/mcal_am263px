@@ -93,7 +93,7 @@ extern "C" {
 /**
 *  \brief Pre Compile config macro name.
 */
-#define ETH_INIT_CONFIG_PC       [!"../../@name"!]_[!"@name"!]
+#define ETH_INIT_CONFIG_PC       Eth_Config
 
 [!ENDLOOP!]
 [!ENDIF!]
@@ -349,7 +349,7 @@ extern "C" {
  *  @{
  */
 /** \brief ETH Configuration struct declaration */
-extern struct Eth_ConfigType_s [!"../../@name"!]_[!"@name"!];
+extern struct Eth_ConfigType_s Eth_Config;
 [!ENDLOOP!]
 [!IF "as:modconf('Eth')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!][!//
 [!ELSE!][!//

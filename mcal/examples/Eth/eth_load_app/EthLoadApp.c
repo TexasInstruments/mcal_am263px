@@ -466,7 +466,7 @@ boolean EthApp_test_0100(uint32 frames, uint32 size)
         {
             /* Check if irq reach threshold then keep polling Eth_ProvideTxBuffer
                to send faster, this will increase CPU load */
-            if (irqPerMs < EthConfigSet_EthCtrlConfig_0.cpdmaCfg.txInterruptsPerMsec)
+            if (irqPerMs < Eth_Config.cpdmaCfg.txInterruptsPerMsec)
             {
                 /* accumulate irq process time before polling IRQ */
                 totalTxClock += EthApp_getElapsedTaskClock(start);
@@ -734,7 +734,7 @@ void EthLoadApp_initEth(void)
 
     /* Do Eth driver initialization */
     Eth_ConfigType *pEthConfigPtr;
-    pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+    pEthConfigPtr = &Eth_Config;
 
 #if (STD_ON == ETH_VARIANT_PRE_COMPILE)
     Eth_Init((const Eth_ConfigType *)NULL_PTR);
@@ -803,7 +803,7 @@ void EthLoadApp_initEth(void)
     /* Print Eth driver version and buffer config */
     AppUtils_ethPrintVersionInfo();
 
-    Eth_CpdmaConfigType *pCpdmaCfg = &EthConfigSet_EthCtrlConfig_0.cpdmaCfg;
+    Eth_CpdmaConfigType *pCpdmaCfg = &Eth_Config.cpdmaCfg;
 
     DebugP_log("RX_BUF=%d TX_BUF=%d\r\n", ETH_NUM_RX_BUFFERS, ETH_NUM_TX_BUFFERS);
     DebugP_log("RxPacing Enable=%d pacePerMs=%d Threshold=%d\r\n", pCpdmaCfg->rxInterruptPacingEnabled,

@@ -11,8 +11,8 @@ Steps to build
   TOOLCHAIN_PATH_R5 := $(abspath ../../../..)/Compilers/ti-cgt-armllvm_4.0.1.LTS
   mcal_PATH := $(abspath ..)/$(mcal_RELPATH)
   mcal_demo_PATH := $(abspath ..)/$(mcal_demo_RELPATH)
-  UTILS_INSTALL_DIR := $(abspath ../../../..)/ccs1281/ccs/utils/cygwin
-  GMAKE_DIR := $(abspath ../../../..)/ccs1281/ccs/utils/cygwin
+  UTILS_INSTALL_DIR := $(abspath ../../../..)/ccs2030/ccs/utils/cygwin
+  GMAKE_DIR := $(abspath ../../../..)/ccs2030/ccs/utils/cygwin
 
   By default the above are for CLANG compiler, modify respective paths accordingly for using other compilers.
 

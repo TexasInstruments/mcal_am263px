@@ -337,6 +337,12 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
         Lin_SetRxMask(lin_cnt_base_addr, 0x00U);
 
         /*
+         * Set the message ID to initiate a header transmission.
+         * This causes the ID to be written to the bus followed by the
+         * data in the transmit buffers.
+         */
+        Lin_SetIDByte(lin_cnt_base_addr, pduInfoPtr->Pid);
+        /*
          * Set the frame length (number of bytes to be transmitted)
          */
         Lin_SetFrameLength(lin_cnt_base_addr, length);
@@ -374,10 +380,17 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
         /* Set Mask ID for RX */
         Lin_SetRxMask(lin_cnt_base_addr, pduInfoPtr->Pid);
 
+        /*
+         * Set the message ID to initiate a header transmission.
+         * This causes the ID to be written to the bus followed by the
+         * data in the transmit buffers.
+         */
+        Lin_SetIDByte(lin_cnt_base_addr, pduInfoPtr->Pid);
+
         *linChannelActivityStatus = LIN_CHANNEL_RX_STARTED;
         return_value              = E_OK;
     }
-    else
+    else if (LIN_SLAVE_TO_SLAVE == pduInfoPtr->Drc)
     {
         /* Enable transmit bit. */
         HW_WR_REG32_RAW((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
@@ -390,15 +403,19 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
         /* Set Mask ID for RX to not accept any message as we don't need to read the message */
         Lin_SetRxMask(lin_cnt_base_addr, 0x00U);
 
-        /* Do Nothing */
-    }
+        /*
+         * Set the message ID to initiate a header transmission.
+         * This causes the ID to be written to the bus followed by the
+         * data in the transmit buffers.
+         */
+        Lin_SetIDByte(lin_cnt_base_addr, pduInfoPtr->Pid);
 
-    /*
-     * Set the message ID to initiate a header transmission.
-     * This causes the ID to be written to the bus followed by the
-     * data in the transmit buffers.
-     */
-    Lin_SetIDByte(lin_cnt_base_addr, pduInfoPtr->Pid);
+        return_value = E_OK;
+    }
+    else
+    {
+        /* Do Nothing*/
+    }
 
     return return_value;
 }

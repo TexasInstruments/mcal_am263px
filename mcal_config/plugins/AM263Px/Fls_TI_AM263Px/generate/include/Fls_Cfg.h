@@ -97,14 +97,14 @@ extern "C" {
 #endif
 
 typedef enum modes{
-FLS_OSPI_RX_1S_1S_1S = 1,
-FLS_OSPI_RX_1S_1S_2S = 2,
-FLS_OSPI_RX_1S_1S_4S = 3,
-FLS_OSPI_RX_1S_1S_8S = 4,
-FLS_OSPI_RX_4S_4S_4S = 5,
-FLS_OSPI_RX_4S_4D_4D = 6,
-FLS_OSPI_RX_8S_8S_8S = 7,
-FLS_OSPI_RX_8D_8D_8D = 8
+    FLS_OSPI_RX_1S_1S_1S = 1,
+    FLS_OSPI_RX_1S_1S_2S = 2,
+    FLS_OSPI_RX_1S_1S_4S = 3,
+    FLS_OSPI_RX_1S_1S_8S = 4,
+    FLS_OSPI_RX_4S_4S_4S = 5,
+    FLS_OSPI_RX_4S_4D_4D = 6,
+    FLS_OSPI_RX_8S_8S_8S = 7,
+    FLS_OSPI_RX_8D_8D_8D = 8
 } Fls_OSPI_Modes;
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -141,7 +141,7 @@ FLS_OSPI_RX_8D_8D_8D = 8
 
 
 /** \brief instance Id of ospi*/
-#define OSPI_INSTANCE_ID                ([!"as:modconf('Fls')[1]/FlsConfigSet/OspiInstanceId"!])
+#define OSPI_INSTANCE_ID                ([!"as:modconf('Fls')[1]/FlsConfigSet/OspiInstanceId"!]U)
 
 /** \brief Enable/disable FLS Blank Check API */
 #define FLS_BLANK_CHECK_API          ([!IF "as:modconf('Fls')[1]/FlsGeneral/FlsBlankCheckApi = 'true'"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
@@ -250,6 +250,7 @@ FLS_OSPI_RX_8D_8D_8D = 8
 /** \brief FLS Configuration struct declaration */
 extern const struct Fls_ConfigType_s Fls_Config;
 [!ENDLOOP!]
+extern struct Fls_ConfigSfdp_s *Fls_Config_SFDP_Ptr;
 
 
 /* ========================================================================== */

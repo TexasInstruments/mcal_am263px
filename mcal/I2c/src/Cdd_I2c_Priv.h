@@ -26,12 +26,12 @@
 /*                             Include Files                        */
 /* ================================================================ */
 
-#if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
-#include "Det.h"
-#endif
 #include "SchM_Cdd_I2c.h"
 #include "Cdd_I2c.h"
 #include "Cdd_I2c_Utils.h"
+#if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
+#include "Det.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -181,7 +181,8 @@ Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjTy
 #if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
 Std_ReturnType Cdd_I2c_CheckConfig(const Cdd_I2c_ConfigType *configPtr);
 #endif
-void Cdd_I2c_ResetDrvObj(Cdd_I2c_DriverObjType *drvObj);
+void Cdd_I2c_InitDrvObj(Cdd_I2c_DriverObjType *drvObj);
+void Cdd_I2c_DeInitDrvObj(Cdd_I2c_DriverObjType *drvObj);
 void Cdd_I2c_CopyConfig(Cdd_I2c_DriverObjType *drvObj, const Cdd_I2c_ConfigType *configPtr);
 
 void Cdd_I2c_ProcessIsr(Cdd_I2c_HwUnitType hwUnitId);

@@ -344,6 +344,7 @@ typedef enum
 
 /** \brief Initializes the Port Driver module
  *
+ * Mode              : Supervisor Mode (Privileged Mode)
  *
  * Service ID[hex] - 0x00
  *

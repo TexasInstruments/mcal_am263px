@@ -28,6 +28,7 @@
 #include "hw_types.h"
 #include "Mcal_Libs_Utils.h"
 #include "hw_ctrl_core.h"
+#include "sys_pmu.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -51,6 +52,7 @@ extern "C" {
 #define RL_TP_ST_M_VIM   (uint64)((uint64)1U << 29U)
 #define XTAL_CLKINP      ((uint64)25000000)
 
+#define MCU_SYSTEM_CLK ((uint32)500000000)
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */

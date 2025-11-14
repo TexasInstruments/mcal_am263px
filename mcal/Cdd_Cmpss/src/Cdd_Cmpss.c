@@ -450,7 +450,7 @@ uint16 Cdd_Cmpss_GetDACValueHigh(Cdd_Cmpss_HwUnitType HwUnitId)
 
         baseAddr = CddCmpssBaseAddr[HwUnitId];
 
-        /* Write the DAC value to the DAC value shadow register */
+        /* Read the DAC value from the DAC value shadow register */
         regVal = HW_RD_REG16(baseAddr + CSL_CMPSSA_DACHVALA);
     }
 
@@ -475,7 +475,7 @@ uint16 Cdd_Cmpss_GetDACValueLow(Cdd_Cmpss_HwUnitType HwUnitId)
 
         baseAddr = CddCmpssBaseAddr[HwUnitId];
 
-        /* Write the DAC value to the DAC value shadow register */
+        /* Read the DAC value from the DAC value shadow register */
         regVal = HW_RD_REG16(baseAddr + CSL_CMPSSA_DACLVALA);
     }
 

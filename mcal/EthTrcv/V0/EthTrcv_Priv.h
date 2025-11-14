@@ -474,11 +474,11 @@ extern "C" {
 
 typedef struct
 {
-    EthTrcv_ConfigType ethTrcvCfg;
+    EthTrcv_ControllerConfigType ethTrcvCfg;
     /**< Transceiver Config */
-    EthTrcv_ModeType   ctrlMode;
+    EthTrcv_ModeType             ctrlMode;
     /**< Transceiver Mode */
-    uint8              trcvIdx;
+    uint8                        trcvIdx;
     /**< PHY Address. */
 } EthTrcv_CtrlObjType;
 
@@ -686,7 +686,7 @@ Std_ReturnType EthTrcv_HwSetPhyTestMode(uint8 trcvIdx, EthTrcv_PhyTestModeType M
 
 Std_ReturnType EthTrcv_Initilization(uint8 TrcvIdx);
 
-Std_ReturnType EthTrcv_ConfigInit(EthTrcv_ConfigType *pEthTrcvCfg, EthTrcv_CtrlObjType *pEthTrcvObj);
+Std_ReturnType EthTrcv_ConfigInit(EthTrcv_ControllerConfigType *pEthTrcvCfg, EthTrcv_CtrlObjType *pEthTrcvObj);
 
 Std_ReturnType EthTrcv_SetTransceiverCtrlMode(uint8 TrcvIdx, EthTrcv_ModeType CtrlMode);
 

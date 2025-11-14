@@ -1,11 +1,6 @@
-ETHTRCV_PATH=$(mcal_PATH)/EthTrcv
+include $(mcal_PATH)/EthTrcv/inc.mk
 
-SRCDIR += $(ETHTRCV_PATH)/src
-INCDIR += $(ETHTRCV_PATH)/include
+SRCDIR += $(mcal_PATH)/EthTrcv/src
 SRCS_COMMON += EthTrcv.c EthTrcv_Priv.c
-
 # SOC specific files
-ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
-  SRCDIR += $(ETHTRCV_PATH)/V0
-  INCDIR += $(ETHTRCV_PATH)/V0
-endif
+SRCDIR += $(mcal_PATH)/EthTrcv/V0

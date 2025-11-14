@@ -109,22 +109,24 @@ static void           EthTrcv_delayExecution(TickType count);
  * \retval E_NOT_OK    PHY register write failed.
  */
 
-static Std_ReturnType EthTrcv_checkPhyConfig(const EthTrcv_ConfigType *pEthTrcvCfg, uint32 forceRetries);
+static Std_ReturnType EthTrcv_checkPhyConfig(const EthTrcv_ControllerConfigType *pEthTrcvCfg, uint32 forceRetries);
 
-static void EthTrcv_setDuplexMode(const EthTrcv_ConfigType *pEthTrcvCfg, uint16 *regVal);
+static void EthTrcv_setDuplexMode(const EthTrcv_ControllerConfigType *pEthTrcvCfg, uint16 *regVal);
 
 static void EthTrcv_updatePartnerAbility(uint32 *pPartnerAblty, uint16 regVal);
 
-static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ConfigType *pEthTrcvCfg, uint16 *ptrData);
+static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ControllerConfigType *pEthTrcvCfg,
+                                                           uint16                             *ptrData);
 
-static Std_ReturnType EthTrcv_setAutoNeg(const EthTrcv_CtrlObjType *pEthTrcvObj, const EthTrcv_ConfigType *pEthTrcvCfg,
-                                         uint16 *ptrData);
+static Std_ReturnType EthTrcv_setAutoNeg(const EthTrcv_CtrlObjType          *pEthTrcvObj,
+                                         const EthTrcv_ControllerConfigType *pEthTrcvCfg, uint16 *ptrData);
 
 static uint32 EthTrcv_countautoNegRetries(const EthTrcv_CtrlObjType *pEthTrcvObj, uint32 autoNegRetries);
 
-static Std_ReturnType EthTrcv_configsetBaudRateAndDuplexMode(EthTrcv_ConfigType *pEthTrcvCfg);
-static Std_ReturnType EthTrcv_setBaudRateAndDuplexMode(const EthTrcv_CtrlObjType *pEthTrcvObj,
-                                                       EthTrcv_ConfigType *pEthTrcvCfg, uint32 *ptrAutoNegRetries);
+static Std_ReturnType EthTrcv_configsetBaudRateAndDuplexMode(EthTrcv_ControllerConfigType *pEthTrcvCfg);
+static Std_ReturnType EthTrcv_setBaudRateAndDuplexMode(const EthTrcv_CtrlObjType    *pEthTrcvObj,
+                                                       EthTrcv_ControllerConfigType *pEthTrcvCfg,
+                                                       uint32                       *ptrAutoNegRetries);
 
 static Std_ReturnType EthTrcv_SetMiiMode(const EthTrcv_CtrlObjType *pEthTrcvObj);
 
@@ -134,7 +136,7 @@ static Std_ReturnType EthTrcv_WriteMMDIndirect(uint8 ctrlIdx, uint8 trcvIdx, uin
 /*                            Global Variables                                */
 /* ========================================================================== */
 
-uint32 EthTrcv_ControllerModeChangeFlag[ETHTRCV_MAX_CONTROLLER] = {(uint32)FALSE, (uint32)FALSE};
+uint32 EthTrcv_ControllerModeChangeFlag[ETHTRCV_MAX_CONTROLLER] = {0};
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
@@ -197,7 +199,7 @@ static Std_ReturnType EthTrcv_SetMiiMode(const EthTrcv_CtrlObjType *pEthTrcvObj)
     return retVal;
 }
 
-Std_ReturnType EthTrcv_ConfigInit(EthTrcv_ConfigType *pEthTrcvCfg, EthTrcv_CtrlObjType *pEthTrcvObj)
+Std_ReturnType EthTrcv_ConfigInit(EthTrcv_ControllerConfigType *pEthTrcvCfg, EthTrcv_CtrlObjType *pEthTrcvObj)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
 
@@ -252,9 +254,9 @@ Std_ReturnType EthTrcv_ConfigInit(EthTrcv_ConfigType *pEthTrcvCfg, EthTrcv_CtrlO
 
 Std_ReturnType EthTrcv_Initilization(uint8 TrcvIdx)
 {
-    EthTrcv_ConfigType  *pEthTrcvCfg = (EthTrcv_ConfigType *)NULL_PTR;
-    EthTrcv_CtrlObjType *pEthTrcvObj = (EthTrcv_CtrlObjType *)NULL_PTR;
-    Std_ReturnType       retVal      = (Std_ReturnType)E_NOT_OK;
+    EthTrcv_ControllerConfigType *pEthTrcvCfg = (EthTrcv_ControllerConfigType *)NULL_PTR;
+    EthTrcv_CtrlObjType          *pEthTrcvObj = (EthTrcv_CtrlObjType *)NULL_PTR;
+    Std_ReturnType                retVal      = (Std_ReturnType)E_NOT_OK;
 
     pEthTrcvObj = &(EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx]);
     pEthTrcvCfg = &(EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].ethTrcvCfg);
@@ -289,11 +291,11 @@ Std_ReturnType EthTrcv_Initilization(uint8 TrcvIdx)
 
 Std_ReturnType EthTrcv_configAndStartAutoNegotiation(EthTrcv_CtrlObjType *pEthTrcvObj)
 {
-    Std_ReturnType      retVal         = (Std_ReturnType)E_NOT_OK;
-    uint32              autoNegRetries = ETHTRCV_AUTONEGOTIATION_WAITSTATUS_RETRIES;
-    uint16              regVal         = 0U;
-    uint16              dataBcr        = 0U;
-    EthTrcv_ConfigType *pEthTrcvCfg    = &(pEthTrcvObj->ethTrcvCfg);
+    Std_ReturnType                retVal         = (Std_ReturnType)E_NOT_OK;
+    uint32                        autoNegRetries = ETHTRCV_AUTONEGOTIATION_WAITSTATUS_RETRIES;
+    uint16                        regVal         = 0U;
+    uint16                        dataBcr        = 0U;
+    EthTrcv_ControllerConfigType *pEthTrcvCfg    = &(pEthTrcvObj->ethTrcvCfg);
 
     if (NULL != pEthTrcvObj)
     {
@@ -366,10 +368,10 @@ Std_ReturnType EthTrcv_configAndStartAutoNegotiation(EthTrcv_CtrlObjType *pEthTr
 
 Std_ReturnType EthTrcv_forceConfig(const EthTrcv_CtrlObjType *pEthTrcvObj)
 {
-    uint32                    forceRetries = ETHTRCV_FORCE_WAIT_RETRIES;
-    uint16                    regVal       = 0U;
-    const EthTrcv_ConfigType *pEthTrcvCfg  = &(pEthTrcvObj->ethTrcvCfg);
-    Std_ReturnType            retVal       = (Std_ReturnType)E_NOT_OK;
+    uint32                              forceRetries = ETHTRCV_FORCE_WAIT_RETRIES;
+    uint16                              regVal       = 0U;
+    const EthTrcv_ControllerConfigType *pEthTrcvCfg  = &(pEthTrcvObj->ethTrcvCfg);
+    Std_ReturnType                      retVal       = (Std_ReturnType)E_NOT_OK;
 
     if (NULL != pEthTrcvObj)
     {
@@ -610,8 +612,8 @@ Std_ReturnType EthTrcv_regRead(uint8 CtrlIdx, uint8 trcvIdx, uint8 regIdx, uint1
     Std_ReturnType fnRetVal = E_NOT_OK;
     Std_ReturnType retVal   = E_NOT_OK;
 #if (STD_ON == ETH_ENABLE_MII_API)
-    EthTrcv_ConfigType *pTrcvCfg = (EthTrcv_ConfigType *)NULL_PTR;
-    pTrcvCfg                     = &(EthTrcv_DrvObj.ethTrcvCtrlObj[trcvIdx].ethTrcvCfg);
+    EthTrcv_ControllerConfigType *pTrcvCfg = (EthTrcv_ControllerConfigType *)NULL_PTR;
+    pTrcvCfg                               = &(EthTrcv_DrvObj.ethTrcvCtrlObj[trcvIdx].ethTrcvCfg);
 #endif
     SchM_Enter_EthTrcv_ETHTRCV_EXCLUSIVE_AREA_0();
     EthTrcv_MdioRdCmdComplete = (uint32)FALSE;
@@ -678,7 +680,7 @@ Std_ReturnType EthTrcv_regWrite(uint8 CtrlIdx, uint8 trcvIdx, uint8 regIdx, uint
     Std_ReturnType fnRetVal = E_NOT_OK;
     Std_ReturnType retVal   = E_NOT_OK;
 #if (STD_ON == ETH_ENABLE_MII_API)
-    EthTrcv_ConfigType *pTrcvCfg;
+    EthTrcv_ControllerConfigType *pTrcvCfg;
     pTrcvCfg = &(EthTrcv_DrvObj.ethTrcvCtrlObj[trcvIdx].ethTrcvCfg);
 #endif
     SchM_Enter_EthTrcv_ETHTRCV_EXCLUSIVE_AREA_0();
@@ -800,7 +802,7 @@ static void EthTrcv_delayExecution(TickType count)
     } while (tempCount <= 0U);
 }
 
-static void EthTrcv_setDuplexMode(const EthTrcv_ConfigType *pEthTrcvCfg, uint16 *regVal)
+static void EthTrcv_setDuplexMode(const EthTrcv_ControllerConfigType *pEthTrcvCfg, uint16 *regVal)
 {
     if (ETHTRCV_DUPLEX_MODE_FULL == pEthTrcvCfg->duplexMode)
     {
@@ -828,7 +830,7 @@ static void EthTrcv_setDuplexMode(const EthTrcv_ConfigType *pEthTrcvCfg, uint16 
     }
 }
 
-static Std_ReturnType EthTrcv_checkPhyConfig(const EthTrcv_ConfigType *pEthTrcvCfg, uint32 forceRetries)
+static Std_ReturnType EthTrcv_checkPhyConfig(const EthTrcv_ControllerConfigType *pEthTrcvCfg, uint32 forceRetries)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
     if (0U != forceRetries)
@@ -846,7 +848,8 @@ static Std_ReturnType EthTrcv_checkPhyConfig(const EthTrcv_ConfigType *pEthTrcvC
     return retVal;
 }
 
-static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ConfigType *pEthTrcvCfg, uint16 *ptrData)
+static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ControllerConfigType *pEthTrcvCfg,
+                                                           uint16                             *ptrData)
 {
     if (0U != (pEthTrcvCfg->advertiseCapab & (uint32)ETHERNET_ADV_CAPAB_10_HALF))
     {
@@ -886,8 +889,8 @@ static void EthTrcv_setAutomaticNegotiationSpeedCapability(const EthTrcv_ConfigT
     return;
 }
 
-static Std_ReturnType EthTrcv_setAutoNeg(const EthTrcv_CtrlObjType *pEthTrcvObj, const EthTrcv_ConfigType *pEthTrcvCfg,
-                                         uint16 *ptrData)
+static Std_ReturnType EthTrcv_setAutoNeg(const EthTrcv_CtrlObjType          *pEthTrcvObj,
+                                         const EthTrcv_ControllerConfigType *pEthTrcvCfg, uint16 *ptrData)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
     if (((uint32)TRUE) == pEthTrcvCfg->isGigCapab)
@@ -935,7 +938,7 @@ static uint32 EthTrcv_countautoNegRetries(const EthTrcv_CtrlObjType *pEthTrcvObj
     return tmpAutoNegRetries;
 }
 
-static Std_ReturnType EthTrcv_configsetBaudRateAndDuplexMode(EthTrcv_ConfigType *pEthTrcvCfg)
+static Std_ReturnType EthTrcv_configsetBaudRateAndDuplexMode(EthTrcv_ControllerConfigType *pEthTrcvCfg)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
     if (0U !=
@@ -979,8 +982,9 @@ static Std_ReturnType EthTrcv_configsetBaudRateAndDuplexMode(EthTrcv_ConfigType 
     return retVal;
 }
 
-static Std_ReturnType EthTrcv_setBaudRateAndDuplexMode(const EthTrcv_CtrlObjType *pEthTrcvObj,
-                                                       EthTrcv_ConfigType *pEthTrcvCfg, uint32 *ptrAutoNegRetries)
+static Std_ReturnType EthTrcv_setBaudRateAndDuplexMode(const EthTrcv_CtrlObjType    *pEthTrcvObj,
+                                                       EthTrcv_ControllerConfigType *pEthTrcvCfg,
+                                                       uint32                       *ptrAutoNegRetries)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_NOT_OK;
     *ptrAutoNegRetries    = EthTrcv_countautoNegRetries(pEthTrcvObj, *ptrAutoNegRetries);

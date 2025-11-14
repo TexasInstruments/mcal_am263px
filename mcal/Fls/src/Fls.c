@@ -117,7 +117,7 @@
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
 #if (STD_ON == FLS_DEV_ERROR_DETECT)
-static Std_ReturnType Fls_checkValidAddress(Fls_AddressType SourceAddress);
+static Std_ReturnType Fls_CheckValidAddress(Fls_AddressType SourceAddress);
 static Std_ReturnType Fls_DetChekWrite(Fls_AddressType TargetAddress,
                                        P2VAR(const uint8, AUTOMATIC, FLS_APPL_DATA) SourceAddressPtr,
                                        Fls_LengthType Length);
@@ -129,9 +129,9 @@ static Std_ReturnType Fls_DetCheckCompare(Fls_AddressType SourceAddress,
                                           Fls_LengthType Length);
 static uint8          Fls_DetCheckInit(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA) CfgPtr);
 #endif
-static Std_ReturnType Fls_checkSectorAlignment(Fls_AddressType SourceAddress);
-static Std_ReturnType Fls_checkPageAlignment(Fls_AddressType SourceAddress);
-static Std_ReturnType checkBlockAlignment(Fls_AddressType SourceAddress);
+static Std_ReturnType Fls_CheckSectorAlignment(Fls_AddressType SourceAddress);
+static Std_ReturnType Fls_CheckPageAlignement(Fls_AddressType SourceAddress);
+static Std_ReturnType Fls_CheckBlockAlignement(Fls_AddressType SourceAddress);
 static void           Fls_TimeoutVerification_sub(void);
 static void           Fls_TimeoutVerification(TickType startCount);
 static void           Fls_MainFunction_sub(void);
@@ -180,33 +180,33 @@ static void Fls_TimeoutVerification(TickType startCount)
         case FLS_SECTOR_ERASE:
             if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
             {
-                time1 = fls_config_sfdp->flsMaxSectorErasetimeConvInUsec;
+                time1 = Fls_Config_SFDP_Ptr->flsMaxSectorErasetimeConvInUsec;
             }
             else
             {
-                time1 = fls_config_sfdp->flsMaxSectorReadWritetimeConvInUsec;
+                time1 = Fls_Config_SFDP_Ptr->flsMaxSectorReadWritetimeConvInUsec;
             }
             Fls_TimeoutCheck(status, time1, elapsedCount);
             break;
         case FLS_BLOCK_ERASE:
             if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
             {
-                time1 = fls_config_sfdp->flsMaxBlockErasetimeConvInUsec;
+                time1 = Fls_Config_SFDP_Ptr->flsMaxBlockErasetimeConvInUsec;
             }
             else
             {
-                time1 = fls_config_sfdp->flsMaxBlockReadWritetimeConvInUsec;
+                time1 = Fls_Config_SFDP_Ptr->flsMaxBlockReadWritetimeConvInUsec;
             }
             Fls_TimeoutCheck(status, time1, elapsedCount);
             break;
         case FLS_CHIP_ERASE:
             if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
             {
-                time1 = fls_config_sfdp->flsMaxChipErasetimeConvInUsec;
+                time1 = Fls_Config_SFDP_Ptr->flsMaxChipErasetimeConvInUsec;
             }
             else
             {
-                time1 = fls_config_sfdp->flsMaxChipReadWritetimeConvInUsec;
+                time1 = Fls_Config_SFDP_Ptr->flsMaxChipReadWritetimeConvInUsec;
             }
             Fls_TimeoutCheck(status, time1, elapsedCount);
             break;
@@ -253,13 +253,13 @@ static void Fls_TimeoutVerification_sub(void)
  * Check Flash bank ranges for a valid address
  *
  */
-static Std_ReturnType Fls_checkValidAddress(Fls_AddressType SourceAddress)
+static Std_ReturnType Fls_CheckValidAddress(Fls_AddressType SourceAddress)
 {
     Std_ReturnType retVal    = (Std_ReturnType)E_NOT_OK;
     uint32         startAddr = 0U;
     if (SourceAddress >= startAddr)
     {
-        if (SourceAddress <= (startAddr + fls_config_sfdp->flashSize))
+        if (SourceAddress <= (startAddr + Fls_Config_SFDP_Ptr->flashSize))
         {
             retVal = E_OK;
         }
@@ -278,10 +278,10 @@ static Std_ReturnType Fls_checkValidAddress(Fls_AddressType SourceAddress)
  * Checks sector alignment for a valid address
  *
  */
-static Std_ReturnType Fls_checkSectorAlignment(Fls_AddressType SourceAddress)
+static Std_ReturnType Fls_CheckSectorAlignment(Fls_AddressType SourceAddress)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_NOT_OK;
-    if ((SourceAddress % fls_config_sfdp->eraseCfg.sectorSize) == 0U)
+    if ((SourceAddress % Fls_Config_SFDP_Ptr->eraseCfg.sectorSize) == 0U)
     {
         retVal = E_OK;
     }
@@ -292,10 +292,24 @@ static Std_ReturnType Fls_checkSectorAlignment(Fls_AddressType SourceAddress)
  * Checks block alignment for a valid address
  *
  */
-static Std_ReturnType checkBlockAlignment(Fls_AddressType SourceAddress)
+static Std_ReturnType Fls_CheckBlockAlignement(Fls_AddressType SourceAddress)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_NOT_OK;
-    if ((SourceAddress % fls_config_sfdp->eraseCfg.blockSize) == 0U)
+    if ((SourceAddress % Fls_Config_SFDP_Ptr->eraseCfg.blockSize) == 0U)
+    {
+        retVal = E_OK;
+    }
+    return retVal;
+}
+
+/**
+ * Checks page alignment for a valid address
+ *
+ */
+static Std_ReturnType Fls_CheckPageAlignement(Fls_AddressType SourceAddress)
+{
+    Std_ReturnType retVal = (Std_ReturnType)E_NOT_OK;
+    if ((SourceAddress % Fls_Config_SFDP_Ptr->pageSize) == 0)
     {
         retVal = E_OK;
     }
@@ -383,15 +397,15 @@ static uint8 Fls_DetCheckInit(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_PARAM_CONFIG);
         detFlag++;
     }
-    if ((detFlag == 0U) &&
-        ((CfgPtr->maxReadNormalMode == (uint32)0U) || ((CfgPtr->maxReadNormalMode % fls_config_sfdp->pageSize) != 0U)))
+    if ((detFlag == 0U) && ((CfgPtr->maxReadNormalMode == (uint32)0U) ||
+                            ((CfgPtr->maxReadNormalMode % Fls_Config_SFDP_Ptr->pageSize) != 0U)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_PARAM_CONFIG);
         detFlag++;
     }
 
     if ((detFlag == 0U) && ((CfgPtr->maxWriteNormalMode == (uint32)0U) ||
-                            ((CfgPtr->maxWriteNormalMode % fls_config_sfdp->pageSize) != 0U)))
+                            ((CfgPtr->maxWriteNormalMode % Fls_Config_SFDP_Ptr->pageSize) != 0U)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_PARAM_CONFIG);
         detFlag++;
@@ -434,10 +448,11 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Erase(Fls_AddressType TargetAddress, Fls_Leng
         retVal = (Std_ReturnType)E_NOT_OK;
     }
     if ((retVal == (Std_ReturnType)E_OK) &&
-        (((Length >= fls_config_sfdp->eraseCfg.sectorSize) && (Length < fls_config_sfdp->eraseCfg.blockSize) &&
-          (E_NOT_OK == Fls_checkSectorAlignment(eraseStartAddress))) ||
-         ((Length >= fls_config_sfdp->eraseCfg.blockSize) && (E_NOT_OK == checkBlockAlignment(eraseStartAddress))) ||
-         (E_NOT_OK == Fls_checkValidAddress(eraseStartAddress))))
+        (((Length >= Fls_Config_SFDP_Ptr->eraseCfg.sectorSize) && (Length < Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
+          (E_NOT_OK == Fls_CheckSectorAlignment(eraseStartAddress))) ||
+         ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
+          (E_NOT_OK == Fls_CheckBlockAlignement(eraseStartAddress))) ||
+         (E_NOT_OK == Fls_CheckValidAddress(eraseStartAddress))))
 
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_ERASE, FLS_E_PARAM_ADDRESS);
@@ -445,16 +460,15 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Erase(Fls_AddressType TargetAddress, Fls_Leng
     }
     if ((retVal == (Std_ReturnType)E_OK) &&
         ((Length == (Fls_LengthType)0U) ||
-         ((Length >= fls_config_sfdp->eraseCfg.sectorSize) && (Length < fls_config_sfdp->eraseCfg.blockSize) &&
-          (E_NOT_OK == Fls_checkSectorAlignment(eraseStartAddress + Length))) ||
-         ((Length >= fls_config_sfdp->eraseCfg.blockSize) &&
-          ((Std_ReturnType)E_NOT_OK == checkBlockAlignment(eraseStartAddress + (Fls_AddressType)Length))) ||
-         ((Std_ReturnType)E_NOT_OK == Fls_checkValidAddress(eraseStartAddress + (Fls_AddressType)Length - 1U))))
+         ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.sectorSize) && (Length < Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
+          (E_NOT_OK == Fls_CheckSectorAlignment(eraseStartAddress + Length))) ||
+         ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
+          ((Std_ReturnType)E_NOT_OK == Fls_CheckBlockAlignement(eraseStartAddress + (Fls_AddressType)Length))) ||
+         ((Std_ReturnType)E_NOT_OK == Fls_CheckValidAddress(eraseStartAddress + (Fls_AddressType)Length - 1U))))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_ERASE, FLS_E_PARAM_LENGTH);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-
 #endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
     if ((retVal == (Std_ReturnType)E_OK) && (Fls_DrvObj.status == MEMIF_IDLE))
     {
@@ -470,15 +484,15 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Erase(Fls_AddressType TargetAddress, Fls_Leng
 
         if (Fls_DrvObj.typeoferase == FLS_SECTOR_ERASE)
         {
-            Fls_DrvObj.jobChunkSize = fls_config_sfdp->eraseCfg.sectorSize;
+            Fls_DrvObj.jobChunkSize = Fls_Config_SFDP_Ptr->eraseCfg.sectorSize;
         }
         else if (Fls_DrvObj.typeoferase == FLS_BLOCK_ERASE)
         {
-            Fls_DrvObj.jobChunkSize = fls_config_sfdp->eraseCfg.blockSize;
+            Fls_DrvObj.jobChunkSize = Fls_Config_SFDP_Ptr->eraseCfg.blockSize;
         }
         else
         {
-            Fls_DrvObj.jobChunkSize = fls_config_sfdp->flashSize;
+            Fls_DrvObj.jobChunkSize = Fls_Config_SFDP_Ptr->flashSize;
         }
 
 #if (STD_ON == FLS_USE_INTERRUPTS)
@@ -575,7 +589,7 @@ static Std_ReturnType Fls_DetCheckRead(Fls_AddressType SourceAddress,
         retVal = (Std_ReturnType)E_NOT_OK;
     }
 
-    if ((retVal == (Std_ReturnType)E_OK) && ((Std_ReturnType)E_NOT_OK == Fls_checkValidAddress(ReadStartAddress)))
+    if ((retVal == (Std_ReturnType)E_OK) && ((Std_ReturnType)E_NOT_OK == Fls_CheckValidAddress(ReadStartAddress)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_READ, FLS_E_PARAM_ADDRESS);
         retVal = (Std_ReturnType)E_NOT_OK;
@@ -583,7 +597,7 @@ static Std_ReturnType Fls_DetCheckRead(Fls_AddressType SourceAddress,
 
     if ((retVal == (Std_ReturnType)E_OK) &&
         ((Length == (Fls_LengthType)0U) ||
-         ((Std_ReturnType)E_NOT_OK == Fls_checkValidAddress(ReadStartAddress + (Fls_AddressType)Length - 1U))))
+         ((Std_ReturnType)E_NOT_OK == Fls_CheckValidAddress(ReadStartAddress + (Fls_AddressType)Length - 1U))))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_READ, FLS_E_PARAM_LENGTH);
         retVal = (Std_ReturnType)E_NOT_OK;
@@ -674,7 +688,7 @@ static Std_ReturnType Fls_DetChekWrite(Fls_AddressType TargetAddress,
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_PARAM_DATA);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) && ((Std_ReturnType)E_NOT_OK == Fls_checkValidAddress(writeStartAddress)))
+    if ((retVal == (Std_ReturnType)E_OK) && ((Std_ReturnType)E_NOT_OK == Fls_CheckValidAddress(writeStartAddress)))
     {
         /* [SWS_Fls_00026] */
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_PARAM_ADDRESS);
@@ -683,7 +697,13 @@ static Std_ReturnType Fls_DetChekWrite(Fls_AddressType TargetAddress,
     if ((retVal == (Std_ReturnType)E_OK) &&
         ((Length == (Fls_LengthType)0U) ||
          ((Std_ReturnType)E_NOT_OK ==
-          Fls_checkValidAddress(writeStartAddress + (Fls_AddressType)Length - (Fls_AddressType)1U))))
+          Fls_CheckValidAddress(writeStartAddress + (Fls_AddressType)Length - (Fls_AddressType)1U))))
+    {
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_PARAM_LENGTH);
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+
+    if ((retVal == (Std_ReturnType)E_OK) && ((Std_ReturnType)E_NOT_OK == Fls_CheckPageAlignement(writeStartAddress)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_PARAM_LENGTH);
         retVal = (Std_ReturnType)E_NOT_OK;
@@ -777,14 +797,14 @@ static Std_ReturnType Fls_DetCheckCompare(Fls_AddressType SourceAddress,
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_COMPARE, FLS_E_PARAM_DATA);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_checkValidAddress(compareStartAddress)))
+    if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_CheckValidAddress(compareStartAddress)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_COMPARE, FLS_E_PARAM_ADDRESS);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
     if ((retVal == (Std_ReturnType)E_OK) &&
         ((Length == (Fls_LengthType)0U) ||
-         ((Std_ReturnType)E_NOT_OK == Fls_checkValidAddress(compareStartAddress + (Fls_AddressType)Length - 1U))))
+         ((Std_ReturnType)E_NOT_OK == Fls_CheckValidAddress(compareStartAddress + (Fls_AddressType)Length - 1U))))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_COMPARE, FLS_E_PARAM_LENGTH);
         retVal = (Std_ReturnType)E_NOT_OK;
@@ -858,13 +878,13 @@ static Std_ReturnType Fls_DetCheckBlankCheck(Fls_AddressType TargetAddress, Fls_
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_BUSY);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_checkValidAddress(BlankCheckStartAddress)))
+    if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_CheckValidAddress(BlankCheckStartAddress)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_PARAM_ADDRESS);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
     if ((retVal == (Std_ReturnType)E_OK) &&
-        ((Length == 0U) || (E_NOT_OK == Fls_checkValidAddress(BlankCheckStartAddress + Length - 1U))))
+        ((Length == 0U) || (E_NOT_OK == Fls_CheckValidAddress(BlankCheckStartAddress + Length - 1U))))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK, FLS_E_PARAM_LENGTH);
         retVal = (Std_ReturnType)E_NOT_OK;
@@ -1122,19 +1142,19 @@ FUNC(uint32, FLS_CODE) Fls_SetEraseType(Fls_EraseType erasetype)
     {
         case FLS_SECTOR_ERASE:
             Fls_DrvObj.typeoferase = FLS_SECTOR_ERASE;
-            sector_or_blocksize    = fls_config_sfdp->eraseCfg.sectorSize;
+            sector_or_blocksize    = Fls_Config_SFDP_Ptr->eraseCfg.sectorSize;
             break;
         case FLS_BLOCK_ERASE:
             Fls_DrvObj.typeoferase = FLS_BLOCK_ERASE;
-            sector_or_blocksize    = fls_config_sfdp->eraseCfg.blockSize;
+            sector_or_blocksize    = Fls_Config_SFDP_Ptr->eraseCfg.blockSize;
             break;
         case FLS_CHIP_ERASE:
             Fls_DrvObj.typeoferase = FLS_CHIP_ERASE;
-            sector_or_blocksize    = fls_config_sfdp->flashSize;
+            sector_or_blocksize    = Fls_Config_SFDP_Ptr->flashSize;
             break;
         default:
             Fls_DrvObj.typeoferase = FLS_SECTOR_ERASE;
-            sector_or_blocksize    = fls_config_sfdp->eraseCfg.sectorSize;
+            sector_or_blocksize    = Fls_Config_SFDP_Ptr->eraseCfg.sectorSize;
             break;
     }
     return sector_or_blocksize;

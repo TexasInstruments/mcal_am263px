@@ -1077,7 +1077,12 @@ SECTIONS
         __linker_fls_no_init_end = .;
     }
 
-	.bss.ENET_CPPI_DESC  {*(.bss.ENET_CPPI_DESC)}  ALIGN (128) > CPPI_DESC
+    GROUP : > L2_RAM_BANK0
+    {
+        __llvm_prf_cnts
+        __llvm_prf_bits
+    }
 
+	.bss.ENET_CPPI_DESC  {*(.bss.ENET_CPPI_DESC)}  ALIGN (128) > CPPI_DESC
 }
 

@@ -40,7 +40,6 @@
  * If the equality test is successful, the test was successful.
  */
 #include "Fls_NOR_SFDP.h"
-#include "Fls_Nor_config.h"
 #include <string.h>
 #include <stdlib.h>
 #include "Fls_Qspi.h"
@@ -52,8 +51,7 @@
 
 #define APP_QSPI_DATA_SIZE (256)
 
-extern FlashConfigSfdp *fls_config_sfdp;
-QSPI_Handle             Fls_QspiHandle[1];
+QSPI_Handle Fls_QspiHandle[1];
 
 /* The source buffer used for transfer */
 uint8 QspiTxBuf[APP_QSPI_DATA_SIZE];
@@ -89,7 +87,6 @@ int main(void)
 {
     AppUtils_defaultInit();
     FlsApp_PlatformInit();
-    Flash_readsfdp_init();
     qspi_flash_diag(NULL_PTR);
     return 0;
 }
@@ -138,8 +135,8 @@ void qspi_flash_diag(void *args)
 
     if (E_OK == status)
     {
-        NorSpiDevDefines.manfId   = fls_config_sfdp->manfId;
-        NorSpiDevDefines.deviceId = fls_config_sfdp->deviceId;
+        NorSpiDevDefines.manfId   = Fls_Config_SFDP_Ptr->manfId;
+        NorSpiDevDefines.deviceId = Fls_Config_SFDP_Ptr->deviceId;
 
         AppUtils_printf("[QSPI Flash Diagnostic Test] Flash Manufacturer ID : 0x%X\r\n", NorSpiDevDefines.manfId);
         AppUtils_printf("[QSPI Flash Diagnostic Test] Flash Device ID       : 0x%X\r\n", NorSpiDevDefines.deviceId);
@@ -356,157 +353,10 @@ uint32 qspi_flash_diag_print_sfdp(QSPI_Handle handle)
         if (status == E_OK)
         {
             qspi_flash_diag_print_defines_json(&NorSpiDevDefines);
-            copytoconfig(&NorSpiDevDefines);
         }
     }
 
     return status;
-}
-
-void copytoconfig(NorSpi_SfdpGenericDefines *norSpiDefines)
-{
-    fls_config_sfdp->flashSize              = norSpiDefines->flashSize;
-    fls_config_sfdp->pageSize               = norSpiDefines->pageSize;
-    fls_config_sfdp->manfId                 = norSpiDefines->manfId;
-    fls_config_sfdp->deviceId               = norSpiDefines->deviceId;
-    fls_config_sfdp->numSupportedEraseTypes = norSpiDefines->numSupportedEraseTypes;
-    fls_config_sfdp->cmdExtType             = norSpiDefines->cmdExtType;
-    fls_config_sfdp->byteOrder              = norSpiDefines->byteOrder;
-    fls_config_sfdp->addrByteSupport        = norSpiDefines->addrByteSupport;
-    fls_config_sfdp->fourByteAddrEnSeq      = norSpiDefines->fourByteAddrEnSeq;
-    fls_config_sfdp->fourByteAddrDisSeq     = norSpiDefines->fourByteAddrDisSeq;
-    fls_config_sfdp->dtrSupport             = norSpiDefines->dtrSupport;
-    fls_config_sfdp->deviceBusyType         = norSpiDefines->deviceBusyType;
-    fls_config_sfdp->rstType                = norSpiDefines->rstType;
-    fls_config_sfdp->cmdWren                = norSpiDefines->cmdWren;
-    fls_config_sfdp->cmdRdsr                = norSpiDefines->cmdRdsr;
-    fls_config_sfdp->srWip                  = norSpiDefines->srWip;
-    fls_config_sfdp->srWel                  = norSpiDefines->srWel;
-    fls_config_sfdp->cmdChipErase           = norSpiDefines->cmdChipErase;
-    fls_config_sfdp->xspiWipRdCmd           = norSpiDefines->xspiWipRdCmd;
-    fls_config_sfdp->xspiWipReg             = norSpiDefines->xspiWipReg;
-    fls_config_sfdp->xspiWipBit             = norSpiDefines->xspiWipBit;
-    fls_config_sfdp->flashWriteTimeout      = norSpiDefines->flashWriteTimeout;
-    fls_config_sfdp->flashBusyTimeout       = norSpiDefines->flashBusyTimeout;
-    fls_config_sfdp->chipEraseTimeout       = norSpiDefines->chipEraseTimeout;
-
-    fls_config_sfdp->eraseCfg.blockSize        = norSpiDefines->eraseCfg.blockSize;
-    fls_config_sfdp->eraseCfg.sectorSize       = norSpiDefines->eraseCfg.sectorSize;
-    fls_config_sfdp->eraseCfg.cmdBlockErase3B  = norSpiDefines->eraseCfg.cmdBlockErase3B;
-    fls_config_sfdp->eraseCfg.cmdBlockErase4B  = norSpiDefines->eraseCfg.cmdBlockErase4B;
-    fls_config_sfdp->eraseCfg.cmdSectorErase3B = norSpiDefines->eraseCfg.cmdSectorErase3B;
-    fls_config_sfdp->eraseCfg.cmdSectorErase4B = norSpiDefines->eraseCfg.cmdSectorErase4B;
-    fls_config_sfdp->eraseCfg.cmdChipErase     = norSpiDefines->eraseCfg.cmdChipErase;
-
-    fls_config_sfdp->idCfg.cmd      = norSpiDefines->idCfg.cmd;
-    fls_config_sfdp->idCfg.dummy4   = norSpiDefines->idCfg.dummy4;
-    fls_config_sfdp->idCfg.dummy8   = norSpiDefines->idCfg.dummy8;
-    fls_config_sfdp->idCfg.numBytes = norSpiDefines->idCfg.numBytes;
-
-    FlashCfg_ProtoEnConfig *pCfg                                   = &norSpiDefines->protos[FLASH_CFG_PROTO_1S_1S_1S];
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].isDtr        = pCfg->isDtr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].cmdRd        = pCfg->cmdRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].cmdWr        = pCfg->cmdWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].modeClksCmd  = pCfg->modeClksCmd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].modeClksRd   = pCfg->modeClksRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyClksCmd = pCfg->dummyClksCmd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyClksRd  = pCfg->dummyClksRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].enableType   = pCfg->enableType;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].enableSeq    = pCfg->enableSeq;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].protoCfg.isAddrReg  = pCfg->protoCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].protoCfg.cfgReg     = pCfg->protoCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].protoCfg.cfgRegBitP = pCfg->protoCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].protoCfg.cmdRegRd   = pCfg->protoCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].protoCfg.cmdRegWr   = pCfg->protoCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].protoCfg.mask       = pCfg->protoCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].protoCfg.shift      = pCfg->protoCfg.shift;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyCfg.isAddrReg  = pCfg->dummyCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyCfg.cfgReg     = pCfg->dummyCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyCfg.cfgRegBitP = pCfg->dummyCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyCfg.cmdRegRd   = pCfg->dummyCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyCfg.cmdRegWr   = pCfg->dummyCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyCfg.mask       = pCfg->dummyCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].dummyCfg.shift      = pCfg->dummyCfg.shift;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].strDtrCfg.isAddrReg  = pCfg->strDtrCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].strDtrCfg.cfgReg     = pCfg->strDtrCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].strDtrCfg.cfgRegBitP = pCfg->strDtrCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].strDtrCfg.cmdRegRd   = pCfg->strDtrCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].strDtrCfg.cmdRegWr   = pCfg->strDtrCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].strDtrCfg.mask       = pCfg->strDtrCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_1S].strDtrCfg.shift      = pCfg->strDtrCfg.shift;
-
-    pCfg                                                           = &norSpiDefines->protos[FLASH_CFG_PROTO_1S_1S_2S];
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].isDtr        = pCfg->isDtr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].cmdRd        = pCfg->cmdRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].cmdWr        = pCfg->cmdWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].modeClksCmd  = pCfg->modeClksCmd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].modeClksRd   = pCfg->modeClksRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyClksCmd = pCfg->dummyClksCmd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyClksRd  = pCfg->dummyClksRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].enableType   = pCfg->enableType;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].enableSeq    = pCfg->enableSeq;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].protoCfg.isAddrReg  = pCfg->protoCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].protoCfg.cfgReg     = pCfg->protoCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].protoCfg.cfgRegBitP = pCfg->protoCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].protoCfg.cmdRegRd   = pCfg->protoCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].protoCfg.cmdRegWr   = pCfg->protoCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].protoCfg.mask       = pCfg->protoCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].protoCfg.shift      = pCfg->protoCfg.shift;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyCfg.isAddrReg  = pCfg->dummyCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyCfg.cfgReg     = pCfg->dummyCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyCfg.cfgRegBitP = pCfg->dummyCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyCfg.cmdRegRd   = pCfg->dummyCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyCfg.cmdRegWr   = pCfg->dummyCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyCfg.mask       = pCfg->dummyCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].dummyCfg.shift      = pCfg->dummyCfg.shift;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].strDtrCfg.isAddrReg  = pCfg->strDtrCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].strDtrCfg.cfgReg     = pCfg->strDtrCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].strDtrCfg.cfgRegBitP = pCfg->strDtrCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].strDtrCfg.cmdRegRd   = pCfg->strDtrCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].strDtrCfg.cmdRegWr   = pCfg->strDtrCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].strDtrCfg.mask       = pCfg->strDtrCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_2S].strDtrCfg.shift      = pCfg->strDtrCfg.shift;
-
-    pCfg                                                           = &norSpiDefines->protos[FLASH_CFG_PROTO_1S_1S_4S];
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].isDtr        = pCfg->isDtr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].cmdRd        = pCfg->cmdRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].cmdWr        = pCfg->cmdWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].modeClksCmd  = pCfg->modeClksCmd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].modeClksRd   = pCfg->modeClksRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyClksCmd = pCfg->dummyClksCmd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyClksRd  = pCfg->dummyClksRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].enableType   = pCfg->enableType;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].enableSeq    = pCfg->enableSeq;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].protoCfg.isAddrReg  = pCfg->protoCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].protoCfg.cfgReg     = pCfg->protoCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].protoCfg.cfgRegBitP = pCfg->protoCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].protoCfg.cmdRegRd   = pCfg->protoCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].protoCfg.cmdRegWr   = pCfg->protoCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].protoCfg.mask       = pCfg->protoCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].protoCfg.shift      = pCfg->protoCfg.shift;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyCfg.isAddrReg  = pCfg->dummyCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyCfg.cfgReg     = pCfg->dummyCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyCfg.cfgRegBitP = pCfg->dummyCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyCfg.cmdRegRd   = pCfg->dummyCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyCfg.cmdRegWr   = pCfg->dummyCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyCfg.mask       = pCfg->dummyCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].dummyCfg.shift      = pCfg->dummyCfg.shift;
-
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].strDtrCfg.isAddrReg  = pCfg->strDtrCfg.isAddrReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].strDtrCfg.cfgReg     = pCfg->strDtrCfg.cfgReg;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].strDtrCfg.cfgRegBitP = pCfg->strDtrCfg.cfgRegBitP;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].strDtrCfg.cmdRegRd   = pCfg->strDtrCfg.cmdRegRd;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].strDtrCfg.cmdRegWr   = pCfg->strDtrCfg.cmdRegWr;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].strDtrCfg.mask       = pCfg->strDtrCfg.mask;
-    fls_config_sfdp->protos[FLASH_CFG_PROTO_1S_1S_4S].strDtrCfg.shift      = pCfg->strDtrCfg.shift;
 }
 
 void qspi_flash_diag_print_defines_json(NorSpi_SfdpGenericDefines *norSpiDefines)
@@ -611,7 +461,7 @@ uint32 QSPI_norFlashInit(QSPI_Handle handle)
     cmd = NOR_CMD_RST;
     Nor_QspiCmdWrite(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, NULL_PTR, 0);
 
-    Nor_QspiWaitReady(handle, fls_config_sfdp->wrrwriteTimeout);
+    Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     if (handle != NULL_PTR)
     {
         QSPI_Object *object  = ((QSPI_Config *)handle)->object;
@@ -629,10 +479,10 @@ static Std_ReturnType Fls_norWritesfdp(QSPI_Handle handle, uint32 offset, uint8 
     if (actualChunkSize > 0U)
     {
         uint32           pageSize, chunkLen, actual;
-        uint8            cmdWren = fls_config_sfdp->cmdWren;
+        uint8            cmdWren = Fls_Config_SFDP_Ptr->cmdWren;
         QSPI_Transaction transaction;
 
-        pageSize = fls_config_sfdp->pageSize;
+        pageSize = Fls_Config_SFDP_Ptr->pageSize;
         chunkLen = pageSize;
 
         for (actual = 0; actual < actualChunkSize; actual += chunkLen)
@@ -641,7 +491,7 @@ static Std_ReturnType Fls_norWritesfdp(QSPI_Handle handle, uint32 offset, uint8 
 
             if (retVal == E_OK)
             {
-                retVal = Nor_QspiWriteEnableLatched(handle, 2 * fls_config_sfdp->wrrwriteTimeout);
+                retVal = Nor_QspiWriteEnableLatched(handle, 2 * Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             }
 
             if (retVal == E_OK)
@@ -665,7 +515,7 @@ static Std_ReturnType Fls_norWritesfdp(QSPI_Handle handle, uint32 offset, uint8 
 
             if (retVal == E_OK)
             {
-                retVal = Nor_QspiWaitReady(handle, fls_config_sfdp->flashWriteTimeout);
+                retVal = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashWriteTimeout);
             }
 
             if (retVal == E_OK)
@@ -716,22 +566,22 @@ static Std_ReturnType Fls_norErasesfdp(QSPI_Handle handle, uint32 offset)
 {
     Std_ReturnType retVal = E_OK;
 
-    retVal = Nor_QspiWaitReady(handle, fls_config_sfdp->wrrwriteTimeout);
+    retVal = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     if (retVal == E_OK)
     {
-        retVal = Nor_QspiCmdWrite(handle, fls_config_sfdp->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0);
+        retVal = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0);
     }
     if (retVal == E_OK)
     {
-        retVal = Nor_QspiWriteEnableLatched(handle, fls_config_sfdp->wrrwriteTimeout);
+        retVal = Nor_QspiWriteEnableLatched(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     }
     if (retVal == E_OK)
     {
-        retVal = Nor_QspiCmdWrite(handle, fls_config_sfdp->eraseCfg.cmdBlockErase3B, offset, NULL, 0);
+        retVal = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->eraseCfg.cmdBlockErase3B, offset, NULL, 0);
     }
     if (retVal == E_OK)
     {
-        retVal = Nor_QspiWaitReady(handle, fls_config_sfdp->wrrwriteTimeout);
+        retVal = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     }
 
     return retVal;

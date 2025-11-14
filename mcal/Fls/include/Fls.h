@@ -85,7 +85,6 @@
 #include "Fls_Irq.h"
 #include "Fls_Cbk.h"
 #include "MemIf_Types.h"
-#include "Fls_Nor_config.h"
 #include <SchM_Fls.h>
 
 #ifdef __cplusplus
@@ -295,7 +294,6 @@ typedef struct
     Fls_LengthType  sectorSize;
     /** \brief Start address of first sector of the Flash Device */
     Fls_AddressType sectorStartaddress;
-
 } Fls_SectorType;
 
 /**
@@ -322,8 +320,173 @@ typedef struct Fls_ConfigType_s
     uint32                 flsBaudRateDiv;
     /** \brief Set Flash Protocol*/
     uint32                 Fls_Mode;
-
 } Fls_ConfigType;
+
+/**
+ *  \brief FLS external flash erase configuration items
+ */
+
+typedef struct
+{
+    /** \brief Erase block size*/
+    Fls_LengthType blockSize;
+    /** \brief Erase sector size*/
+    Fls_LengthType sectorSize;
+    /** \brief Block erase command for 3 byte addressing mode*/
+    uint8          cmdBlockErase3B;
+    /** \brief Block erase command for 4 byte addressing mode*/
+    uint8          cmdBlockErase4B;
+    /** \brief Sector erase command for 3 byte addressing mode*/
+    uint8          cmdSectorErase3B;
+    /** \brief Sector erase command for 4 byte addressing mode*/
+    uint8          cmdSectorErase4B;
+} Fls_EraseConfig;
+
+/**
+ *  \brief FLS external flash device informations
+ */
+typedef struct
+{
+    /** \brief Command to read device information*/
+    uint8 cmd;
+    /** \brief Number of bytes required to read device information*/
+    uint8 numBytes;
+    /** \brief Number of dummy bytes for 4 line*/
+    uint8 dummy4;
+    /** \brief Number of dummy bytes for 8 line*/
+    uint8 dummy8;
+} Fls_ReadIdConfig;
+
+/**
+ *  \brief FLS external flash protocol specific configuration parameters
+ */
+typedef struct
+{
+    /** \brief Config using addressed register enable/diable*/
+    uint8  isAddrReg;
+    /** \brief Command to read config register*/
+    uint8  cmdRegRd;
+    /** \brief Command to write config register*/
+    uint8  cmdRegWr;
+    /** \brief Address to config register*/
+    uint32 cfgReg;
+    /** \brief Number of register bit shifts*/
+    uint16 shift;
+    /** \brief Mask to config register*/
+    uint16 mask;
+    /** \brief Data to be written*/
+    uint8  cfgRegBitP;
+} Fls_RegEnConfig;
+
+/**
+ *  \brief FLS external flash protocol specific commands
+ */
+typedef struct
+{
+    /** \brief Protocol specific read command*/
+    uint8           cmdRd;
+    /** \brief Protocol specific write command*/
+    uint8           cmdWr;
+    /** \brief Protocol specific clock mode command*/
+    uint8           modeClksCmd;
+    /** \brief Protocol specific clock mode read command*/
+    uint8           modeClksRd;
+    /** \brief Protocol specific dummy clock command*/
+    uint16          dummyClksCmd;
+    /** \brief Protocol specific dummy clock read command*/
+    uint16          dummyClksRd;
+    /** \brief Protocol enable type*/
+    uint8           enableType;
+    /** \brief Protocol specific enable sequence*/
+    uint8           enableSeq;
+    /** \brief Protocol specific configuration list*/
+    Fls_RegEnConfig protoCfg;
+    /** \brief Protocol specific dummy cycles related configuration list*/
+    Fls_RegEnConfig dummyCfg;
+    /** \brief Protocol specific STR/DTR configuration list*/
+    Fls_RegEnConfig strDtrCfg;
+} Fls_ProtoEnableConfig;
+
+/**
+ *  \brief FLS external flash generic parameters
+ */
+typedef struct Fls_ConfigSfdp_s
+{
+    /** \brief External flash size*/
+    uint32                flashSize;
+    /** \brief External flash page size*/
+    uint32                pageSize;
+    /** \brief External flash manufacture ID*/
+    uint8                 manfId;
+    /** \brief External flash device ID*/
+    uint16                deviceId;
+    /** \brief Number of supported flash erase types*/
+    uint8                 numSupportedEraseTypes;
+    /** \brief Flash execution type*/
+    uint8                 cmdExtType;
+    /** \brief Flash byte order*/
+    uint8                 byteOrder;
+    /** \brief Flash address byte support*/
+    uint8                 addrByteSupport;
+    /** \brief Flash 4 byte address enable sequence*/
+    uint8                 fourByteAddrEnSeq;
+    /** \brief Flash 4 byte address disable sequence*/
+    uint8                 fourByteAddrDisSeq;
+    /** \brief External Flash dtr support*/
+    uint8                 dtrSupport;
+    /** \brief Flash device busy type*/
+    uint8                 deviceBusyType;
+    /** \brief Flash device reset type*/
+    uint8                 rstType;
+    /** \brief Flash device reset type*/
+    uint8                 addrnumBytes;
+    /** \brief Flash write enable command*/
+    uint8                 cmdWren;
+    /** \brief Flash read status register command*/
+    uint8                 cmdRdsr;
+    /** \brief Flash read status register2 command*/
+    uint8                 cmdRdsr2;
+    /** \brief Flash write status register command*/
+    uint8                 cmdWrsr;
+    /** \brief Flash WIP bit position*/
+    uint8                 srWip;
+    /** \brief Flash WIP bit position*/
+    uint8                 srWel;
+    /** \brief Flash chip erase command*/
+    uint8                 cmdChipErase;
+    /** \brief Flash WIP bit read command*/
+    uint8                 xspiWipRdCmd;
+    /** \brief Flash WIP bit status register address*/
+    uint32                xspiWipReg;
+    /** \brief Flash WIP bit(xSPI) bit position*/
+    uint32                xspiWipBit;
+    /** \brief Flash write timeout in us*/
+    uint32                flashWriteTimeout;
+    /** \brief Flash wrr write timeout in us*/
+    uint32                wrrwriteTimeout;
+    /** \brief Flash busy timeout in us*/
+    uint32                flashBusyTimeout;
+    /** \brief Flash chip erase timeout in us*/
+    uint32                chipEraseTimeout;
+    /** \brief Flash maximum sector erase time in us*/
+    uint32                flsMaxSectorErasetimeConvInUsec;
+    /** \brief Flash maximum block erase time in us*/
+    uint32                flsMaxBlockErasetimeConvInUsec;
+    /** \brief Flash maximum chip erase time in us*/
+    uint32                flsMaxChipErasetimeConvInUsec;
+    /** \brief Flash maximum sector read-write time in us*/
+    uint32                flsMaxSectorReadWritetimeConvInUsec;
+    /** \brief Flash maximum block read-write time in us*/
+    uint32                flsMaxBlockReadWritetimeConvInUsec;
+    /** \brief Flash maximum chip read-write time in us*/
+    uint32                flsMaxChipReadWritetimeConvInUsec;
+    /** \brief Flash erase configurations list*/
+    Fls_EraseConfig       eraseCfg;
+    /** \brief Flash device information configurations list*/
+    Fls_ReadIdConfig      idCfg;
+    /** \brief Flash protocol specific configurations list*/
+    Fls_ProtoEnableConfig protos;
+} Fls_ConfigSfdp;
 
 /** \brief ENUM for erase type names */
 typedef enum

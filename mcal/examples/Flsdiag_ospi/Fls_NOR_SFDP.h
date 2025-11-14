@@ -93,6 +93,7 @@ extern "C" {
 #define FLASH_CFG_PROTO_8S_8S_8S (0x0007)
 #define FLASH_CFG_PROTO_8D_8D_8D (0x0008)
 #define FLASH_CFG_PROTO_CUSTOM   (0x0009)
+#define FLASH_CFG_MAX_PROTO      9
 
 /* SFDP offsets */
 #define NOR_SPI_SFDP_HEADER_START_OFFSET        (0x00U)

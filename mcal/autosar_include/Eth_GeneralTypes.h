@@ -414,45 +414,6 @@ typedef enum
 	
 }EthTrcvPhysLayerType;
 
-/**
- *  \brief Implementation specific structure of the post build configuration.
- */
-/* Requirements : SWS_EthTrcv_00098 */
-typedef struct EthTrcv_ConfigType_s
-{
-	uint8			 ctrlIdx;
-	/**< Index of the Controller */
-	uint8 				trcvIdx;
-	/**< Index of the transceiver */
-	uint8 				phyAddr; 
-	/**< PHY Address. */
-	EthTrcvMiiSelection	MiiSel; 
-	/**<MII Selection */
-	uint32 				enableAutoNeg;   
-	/**< Phy gigabit capability. */
-	EthTrcvConnNeg		 connNeg;
-	/**<Connection Negotiation of EthTrcv Link */
-	uint32 				advertiseCapab;
-	/**< Phy advertisement capability. */
-	uint32 				linkPartCapab;
-	/**< Link partner capability. */
-	uint32				isGigCapab;
-	/**< Phy gigabit capability. */
-	EthTrcv_BaudRateType	 baudRate;
-	/**< Phy operating speed. */
-	EthTrcv_DuplexModeType	 duplexMode;
-	/**< Phy operating duplexMode. */
-	boolean 				loopbackEnable;
-	/**< Phy loopback enable- for Test purpose. */
-	EthTrcvPortMacLayerSpeed 	PortMacLaySpeed;
-	/**<Baud Rate of MAC layer*/
-	EthTrcvPortMacLayerSubType PortMacLaySubType;
-	/**<MAC layer subtype of a switch port */
-	EthTrcvPortMacLayerType 	PortMacLayType;
-	/**<MAC layer type of the ethernet transceiver */
-	EthTrcvPhysLayerType    PhysLayerType;
-	/**<MAC layer type of the ethernet transceiver */
-} EthTrcv_ConfigType;
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */

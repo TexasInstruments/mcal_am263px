@@ -1777,38 +1777,41 @@ void Can_mcanProcessISR(Can_ControllerObjType *canController, const Can_MailboxO
     uint32 intrStatus, baseAddr;
     uint8  ControllerId;
 
-    ControllerId = canController->canControllerConfig_PC.ControllerId;
-    baseAddr     = canController->canControllerConfig_PC.CntrAddr;
-    intrStatus   = MCAN_getIntrStatus(baseAddr);
+    if (Can_DrvState == CAN_READY)
+    {
+        ControllerId = canController->canControllerConfig_PC.ControllerId;
+        baseAddr     = canController->canControllerConfig_PC.CntrAddr;
+        intrStatus   = MCAN_getIntrStatus(baseAddr);
 
-    if ((uint32)MCAN_INTR_SRC_BUS_OFF_STATUS == (intrStatus & (uint32)MCAN_INTR_SRC_BUS_OFF_STATUS))
-    {
-        Can_mcanProcessBusOff(canController, canMailbox, canTxMessageObj, maxMbCnt);
+        if ((uint32)MCAN_INTR_SRC_BUS_OFF_STATUS == (intrStatus & (uint32)MCAN_INTR_SRC_BUS_OFF_STATUS))
+        {
+            Can_mcanProcessBusOff(canController, canMailbox, canTxMessageObj, maxMbCnt);
+        }
+        if ((uint32)MCAN_INTR_SRC_RX_FIFO0_MSG_LOST == (intrStatus & (uint32)MCAN_INTR_SRC_RX_FIFO0_MSG_LOST))
+        {
+            (void)Det_ReportRuntimeError((uint16)CAN_MODULE_ID, (uint8)ControllerId, (uint8)CAN_RXPROCESS_ID_INTERRUPT,
+                                         (uint8)CAN_E_DATALOST);
+        }
+        if ((uint32)MCAN_INTR_SRC_RX_FIFO1_MSG_LOST == (intrStatus & (uint32)MCAN_INTR_SRC_RX_FIFO1_MSG_LOST))
+        {
+            (void)Det_ReportRuntimeError((uint16)CAN_MODULE_ID, (uint8)ControllerId, (uint8)CAN_RXPROCESS_ID_POLLING,
+                                         (uint8)CAN_E_DATALOST);
+        }
+        if ((uint32)MCAN_INTR_SRC_TRANS_COMPLETE == (intrStatus & (uint32)MCAN_INTR_SRC_TRANS_COMPLETE))
+        {
+            Can_mcanProcessTx(canController, canMailbox, canTxMessageObj, INTERRUPT_MASK);
+        }
+        if (((uint32)MCAN_INTR_SRC_DEDICATED_RX_BUFF_MSG == (intrStatus & (uint32)MCAN_INTR_SRC_DEDICATED_RX_BUFF_MSG)))
+        {
+            /* Read Messages stored in  buffers */
+            Can_mcanReadRxBuff(canController, INTERRUPT_MASK);
+        }
+        if ((uint32)MCAN_INTR_SRC_RX_FIFO0_NEW_MSG == (intrStatus & (uint32)MCAN_INTR_SRC_RX_FIFO0_NEW_MSG))
+        {
+            Can_mcanReadRxFIFO(canController, MCAN_RX_FIFO_NUM_0);
+        }
+        MCAN_clearIntrStatus(baseAddr, intrStatus);
     }
-    if ((uint32)MCAN_INTR_SRC_RX_FIFO0_MSG_LOST == (intrStatus & (uint32)MCAN_INTR_SRC_RX_FIFO0_MSG_LOST))
-    {
-        (void)Det_ReportRuntimeError((uint16)CAN_MODULE_ID, (uint8)ControllerId, (uint8)CAN_RXPROCESS_ID_INTERRUPT,
-                                     (uint8)CAN_E_DATALOST);
-    }
-    if ((uint32)MCAN_INTR_SRC_RX_FIFO1_MSG_LOST == (intrStatus & (uint32)MCAN_INTR_SRC_RX_FIFO1_MSG_LOST))
-    {
-        (void)Det_ReportRuntimeError((uint16)CAN_MODULE_ID, (uint8)ControllerId, (uint8)CAN_RXPROCESS_ID_POLLING,
-                                     (uint8)CAN_E_DATALOST);
-    }
-    if ((uint32)MCAN_INTR_SRC_TRANS_COMPLETE == (intrStatus & (uint32)MCAN_INTR_SRC_TRANS_COMPLETE))
-    {
-        Can_mcanProcessTx(canController, canMailbox, canTxMessageObj, INTERRUPT_MASK);
-    }
-    if (((uint32)MCAN_INTR_SRC_DEDICATED_RX_BUFF_MSG == (intrStatus & (uint32)MCAN_INTR_SRC_DEDICATED_RX_BUFF_MSG)))
-    {
-        /* Read Messages stored in  buffers */
-        Can_mcanReadRxBuff(canController, INTERRUPT_MASK);
-    }
-    if ((uint32)MCAN_INTR_SRC_RX_FIFO0_NEW_MSG == (intrStatus & (uint32)MCAN_INTR_SRC_RX_FIFO0_NEW_MSG))
-    {
-        Can_mcanReadRxFIFO(canController, MCAN_RX_FIFO_NUM_0);
-    }
-    MCAN_clearIntrStatus(baseAddr, intrStatus);
 }
 
 void Can_mcanProcessTx(Can_ControllerObjType *canController, const Can_MailboxObjType *canMailbox,
@@ -1852,26 +1855,29 @@ void Can_mcanProcessECCISR(const Can_ControllerObjType *controllerObj)
     uint32            baseAddr;
     uint32            errType = (uint32)CAN_ECC_ERROR_TYPE_SEC;
 
-    baseAddr = controllerObj->canControllerConfig_PC.CntrAddr;
-    MCAN_eccGetErrorStatus(baseAddr, &mcanECCErr);
-    if (1U == mcanECCErr.secErr)
+    if (Can_DrvState == CAN_READY)
     {
-        MCAN_eccClearErrorStatus(baseAddr, MCAN_ECC_ERR_TYPE_SEC);
-        errType = (uint32)CAN_ECC_ERROR_TYPE_SEC;
-    }
-    if (1U == mcanECCErr.dedErr)
-    {
-        MCAN_eccClearErrorStatus(baseAddr, MCAN_ECC_ERR_TYPE_DED);
-        errType = (uint32)CAN_ECC_ERROR_TYPE_DED;
-    }
-    errorNotification = controllerObj->canControllerConfig_PC.Can_ErrorNotification;
+        baseAddr = controllerObj->canControllerConfig_PC.CntrAddr;
+        MCAN_eccGetErrorStatus(baseAddr, &mcanECCErr);
+        if (1U == mcanECCErr.secErr)
+        {
+            MCAN_eccClearErrorStatus(baseAddr, MCAN_ECC_ERR_TYPE_SEC);
+            errType = (uint32)CAN_ECC_ERROR_TYPE_SEC;
+        }
+        if (1U == mcanECCErr.dedErr)
+        {
+            MCAN_eccClearErrorStatus(baseAddr, MCAN_ECC_ERR_TYPE_DED);
+            errType = (uint32)CAN_ECC_ERROR_TYPE_DED;
+        }
+        errorNotification = controllerObj->canControllerConfig_PC.Can_ErrorNotification;
 
-    if (errorNotification != NULL_PTR)
-    {
-        errorNotification(errType);
+        if (errorNotification != NULL_PTR)
+        {
+            errorNotification(errType);
+        }
+        MCAN_eccWriteEOI(baseAddr, MCAN_ECC_ERR_TYPE_SEC);
+        MCAN_eccWriteEOI(baseAddr, MCAN_ECC_ERR_TYPE_DED);
     }
-    MCAN_eccWriteEOI(baseAddr, MCAN_ECC_ERR_TYPE_SEC);
-    MCAN_eccWriteEOI(baseAddr, MCAN_ECC_ERR_TYPE_DED);
 }
 #endif
 

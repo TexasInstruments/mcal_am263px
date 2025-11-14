@@ -1,0 +1,1324 @@
+<?xml version='1.0'?>
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="Gpt" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+          <d:chc name="Gpt" type="AR-ELEMENT" value="MODULE-CONFIGURATION">
+            <d:ctr type="MODULE-CONFIGURATION">
+              <a:a name="DEF" value="ASPath:/TI_AM263Px/Gpt"/>
+              <a:a name="IMPORTER_INFO" value="@REC"/>
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION"
+                     value="VariantPostBuild">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+              </d:var>
+              <d:lst name="GptChannelConfigSet" type="MAP">
+                <d:ctr name="Gpt_ChannelConfigSet_0" type="IDENTIFIABLE">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                  <d:lst name="GptChannelConfiguration" type="MAP">
+                    <d:ctr name="GptChannelConfiguration_5" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="4">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify5">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_6" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="5">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify6">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_7" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="6">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify7">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_8" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="7">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify8">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_9" type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="8">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify9">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_10"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="9">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify10">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_11"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="10">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify11">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_12"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="11">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify12">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_13"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="12">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify13">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_14"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="13">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify14">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_15"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="14">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify15">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_16"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="15">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify16">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_17"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="16">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify17">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_18"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="17">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify18">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_19"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="18">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify19">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_20"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="19">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify20">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_21"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="20">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify21">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_22"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="21">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify22">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_23"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="22">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify23">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_24"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="23">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify24">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_25"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="24">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify25">
+                        <a:a name="ENABLE" value="true"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_26"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="25">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify26">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_27"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="26">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify27">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_28"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="27">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify28">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_29"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="28">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify29">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_30"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="29">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify30">
+                        <a:a name="ENABLE" value="true"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_31"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="30">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_ONESHOT">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify31">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                    <d:ctr name="GptChannelConfiguration_32"
+                           type="IDENTIFIABLE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="GptChannelId" type="INTEGER" value="31">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelMode" type="ENUMERATION"
+                             value="GPT_CH_MODE_CONTINUOUS">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptCounterBlkId" type="ENUMERATION"
+                             value="GPT_RTI_COUNTER1">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickFrequency" type="FLOAT"
+                             value="1.0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptChannelTickValueMax" type="INTEGER"
+                             value="0">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptEnableWakeup" type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="GptNotification" type="FUNCTION-NAME"
+                             value="Gpt_Channel_Notify32">
+                        <a:a name="ENABLE" value="true"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:ref name="GptChannelClkSrcRef" type="REFERENCE" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:ref>
+                      <d:ctr name="GptWakeupConfiguration" type="IDENTIFIABLE">
+                        <a:a name="ENABLE" value="false"/>
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="GptWakeupSourceRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:ctr>
+                  </d:lst>
+                </d:ctr>
+              </d:lst>
+              <d:ctr name="GptConfigurationOfOptApiServices"
+                     type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="GptDeinitApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptEnableDisableNotificationApi" type="BOOLEAN"
+                       value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptTimeElapsedApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptTimeRemainingApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptVersionInfoApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptRegisterReadback" type="BOOLEAN" value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptWakeupFunctionalityApi" type="BOOLEAN"
+                       value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:ctr name="GptDriverConfiguration" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="GptDevErrorDetect" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptPredefTimer100us32bitEnable" type="BOOLEAN"
+                       value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptPredefTimer1usEnablingGrade" type="ENUMERATION"
+                       value="GPT_PREDEF_UNDEFINED">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptReportWakeupSource" type="BOOLEAN" value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptTypeofInterruptFunction" type="ENUMERATION"
+                       value="GPT_ISR_CAT1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptPrescaler" type="INTEGER" value="0">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule0CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule0CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule1CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule1CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule2CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule2CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule3CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule3CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule4CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule4CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule5CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule5CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule6CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule6CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule7CounterBlk0Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="GptModule7CounterBlk1Frequency" type="INTEGER"
+                       value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:lst name="GptClockReferencePoint" type="MAP">
+                  <d:ctr name="GptClockReferencePoint_0" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:ref name="GptClockReference" type="REFERENCE"
+                           value="ASPath:/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_RTI0/McuClockReferencePoint_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                  </d:ctr>
+                </d:lst>
+                <d:var name="GptDefaultOSCounterId" type="INTEGER" value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:ref name="GptOsCounterRef" type="REFERENCE"
+                       value="ASPath:/Os/Os/OsCounter_0">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+                <d:var name="GptTimeoutDuration" type="INTEGER" value="32000">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:ctr name="GptPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="GptDeviceVariant" type="ENUMERATION"
+                       value="AM263Px">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

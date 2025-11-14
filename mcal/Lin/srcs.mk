@@ -1,9 +1,6 @@
-LIN_PATH=$(mcal_PATH)/Lin
+include $(mcal_PATH)/Lin/inc.mk
 
-SRCDIR += $(LIN_PATH)/src
-INCDIR += $(LIN_PATH)/include
+SRCDIR += $(mcal_PATH)/Lin/src
 SRCS_COMMON += Lin.c Lin_Priv.c Lin_Irq.c
-
 # SOC specific files
-SRCDIR += $(LIN_PATH)/V0
-INCDIR += $(LIN_PATH)/V0
+SRCDIR += $(mcal_PATH)/Lin/V0

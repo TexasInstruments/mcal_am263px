@@ -1073,28 +1073,6 @@ Structure for CPTS Ethernet Message Configuration
 | **Default-value** | ETH_CPTS_MESSAGE_SYNC |
 | **Range** | ETH_CPTS_MESSAGE_SYNC<br>ETH_CPTS_MESSAGE_DELAY_REQ<br>ETH_CPTS_MESSAGE_PDELAY_REQ<br>ETH_CPTS_MESSAGE_PDELAY_RESP<br>ETH_CPTS_MESSAGE_FOLLOW_UP<br>ETH_CPTS_MESSAGE_DELAY_RESP<br>ETH_CPTS_MESSAGE_PDELAY_RESP_FOLLOW_UP<br>ETH_CPTS_MESSAGE_ANNOUNCE<br>ETH_CPTS_MESSAGE_SIGNALING<br>ETH_CPTS_MESSAGE_MANAGEMENT<br>ETH_CPTS_MESSAGE_ALL |
 
-##### EthCpswQoSCfg
-CPSW module : Configure Quality of Service (rate limiting and traffic shaping)
-
-###### EthCpswRateLimitCfg
-Structure for CPSW Rate Limit Configuration
-
-###### EthCpswRateLimitPrio
-
-| Item ||
-|--------|---------------|
-| **Name** | EthCpswRateLimitPrio |
-| **Description** | Bandwidth for each of rate limited priority |
-| **Origin** | Texas Instruments |
-| **Post-Build-Variant-Value** | false |
-| **Value-Configuration-Class** | -- |
-| Link-Time | VARIANT-LINK-TIME |
-| Post-Build-Time | VARIANT-POST-BUILD |
-| Pre-Compile-Time | VARIANT-PRE-COMPILE |
-| **Default-value** | 0 |
-| **Max-value** | 200 |
-| **Min-value** | 0 |
-
 #### EthGeneral
 General configuration of Ethernet Driver module
 

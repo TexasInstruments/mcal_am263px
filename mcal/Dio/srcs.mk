@@ -1,11 +1,6 @@
-DIO_PATH=$(mcal_PATH)/Dio
+include $(mcal_PATH)/Dio/inc.mk
 
-SRCDIR += $(DIO_PATH)/src
-INCDIR += $(DIO_PATH)/include
+SRCDIR += $(mcal_PATH)/Dio/src
 SRCS_COMMON += Dio.c Dio_Priv.c
-
 # SOC specific files
-ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
-  SRCDIR += $(DIO_PATH)/V0
-  INCDIR += $(DIO_PATH)/V0
-endif
+SRCDIR += $(mcal_PATH)/Dio/V0

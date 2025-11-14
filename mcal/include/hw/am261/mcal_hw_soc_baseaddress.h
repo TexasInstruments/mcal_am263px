@@ -43,10 +43,10 @@ extern "C"
 #endif
 
 /* Global addresses in unified address space */
- 
+
 #define MCAL_CSL_R5SS0_CORE0_TCMA_ROM_U_BASE								(0x00000000UL)
 #define MCAL_CSL_HSM_M4_SEC_ROM_U_BASE	    							(0x00010000UL)
-#define MCAL_CSL_R5SS0_CORE0_TCMA_RAM_U_BASE								(0x00020000UL)
+#define MCAL_CSL_R5SS0_CORE0_TCMA_RAM_U_BASE								(0x00000000UL)
 #define MCAL_CSL_R5SS0_CORE0_TMU_U_BASE	    							(0x00060000UL)
 #define MCAL_CSL_R5SS0_CORE0_TCMB_RAM_U_BASE								(0x00080000UL)
 #define MCAL_CSL_HSM_ROM_U_BASE	            							(0x20000000UL)

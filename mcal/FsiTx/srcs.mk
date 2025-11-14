@@ -1,8 +1,6 @@
-FSITX_PATH=$(mcal_PATH)/FsiTx
+include $(mcal_PATH)/FsiTx/inc.mk
 
-SRCDIR += $(FSITX_PATH)/src
-INCDIR += $(FSITX_PATH)/include $(SRCDIR)
+SRCDIR += $(mcal_PATH)/FsiTx/src
 SRCS_COMMON += Cdd_FsiTx.c Cdd_FsiTx_Irq.c Cdd_FsiTx_Priv.c Cdd_FsiTx_Platform.c
-
 # SOC specific files
-SRCDIR += $(FSITX_PATH)/V0
+SRCDIR += $(mcal_PATH)/FsiTx/V0

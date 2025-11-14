@@ -76,7 +76,7 @@ extern "C" {
 [!AUTOSPACING!]
 
 /* ---- Perform version checking  ----------------------------------------- */
- #if ((ICU_SW_MAJOR_VERSION != (10U))||(ICU_SW_MINOR_VERSION != (2U)))
+ #if ((ICU_SW_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U))||(ICU_SW_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
   #error "Version numbers of Icu_PBcfg.c and Icu_Cfg.h are inconsistent!"
 #endif
 

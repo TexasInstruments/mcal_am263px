@@ -62,6 +62,33 @@ void   PmuP_setup(uint32 setupFlags);
 uint32 CycleCounterP_getCount32();
 uint32 PmuP_getOverflowStatus();
 
+void Mcal_pmuDelayUsec(volatile uint32 delayUsec, uint32 sysclkHz)
+{
+    uint32 startVal, currVal, elapsed;
+    uint32 sysclkMHz   = (sysclkHz / 1000000UL);
+    uint32 totalCycles = (delayUsec * sysclkMHz);
+    uint32 maxCount    = 0xFFFFFFFF;
+
+    Mcal_GetCycleCounterValue(&startVal);
+    do
+    {
+        Mcal_GetCycleCounterValue(&currVal);
+        if (currVal >= startVal)
+        {
+            elapsed = currVal - startVal;
+        }
+        else
+        {
+            elapsed = (maxCount - startVal) + currVal;
+        }
+    } while (elapsed < totalCycles);
+}
+
+void Mcal_pmuDelayMsec(volatile uint32 delayMsec, uint32 sysclkHz)
+{
+    Mcal_pmuDelayUsec(delayMsec * 1000U, sysclkHz);
+}
+
 void Mcal_pmuInit(void)
 {
     Mcal_pmuResetCounters();

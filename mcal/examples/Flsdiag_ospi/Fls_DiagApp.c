@@ -40,17 +40,12 @@
  * If the equality test is successful, the test was successful.
  */
 #include "Fls_NOR_SFDP.h"
-#include "Fls_Nor_config.h"
 #include <string.h>
 #include <stdlib.h>
 #include "Fls_Ospi.h"
 #include "Fls_Brd_Nor.h"
 #include "Fls_Startup.h"
 #include "Det.h"
-// OSPI_Object Fls_OspiObjects[1];
-// OSPI_Config Fls_OspiConfig[1];
-
-extern FlashConfigSfdp *fls_config_sfdp;
 
 /* The source buffer used for transfer */
 uint8 OspiTxBuf[APP_OSPI_DATA_SIZE];
@@ -69,20 +64,16 @@ NorSpi_Sfdp4ByteAddressingParamTable Fbapt;
 
 NorSpi_SfdpGenericDefines NorSpiDevDefines;
 
-void                  ospi_flash_diag_test_fill_buffers(void);
-uint32                ospi_flash_diag_test_compare_buffers(void);
-uint32                ospi_flash_diag_print_sfdp(OSPI_Handle handle);
-void                  ospi_flash_diag_print_defines_json(NorSpi_SfdpGenericDefines *norSpiDefines);
-static Std_ReturnType Fls_norReadsfdp(OSPI_Handle handle, uint32 offset, uint8 *buf, uint32 len);
-static Std_ReturnType Fls_norWritesfdp(OSPI_Handle handle, uint32 offset, uint8 *buf, uint32 len);
-uint32                OSPI_norFlashInit(OSPI_Handle handle);
-void                  ospi_flash_diag(void *args);
+void   ospi_flash_diag_test_fill_buffers(void);
+uint32 ospi_flash_diag_test_compare_buffers(void);
+uint32 ospi_flash_diag_print_sfdp(OSPI_Handle handle);
+void   ospi_flash_diag_print_defines_json(NorSpi_SfdpGenericDefines *norSpiDefines);
+void   ospi_flash_diag(void *args);
 
 int main(void)
 {
     AppUtils_defaultInit();
     FlsApp_PlatformInit();
-    Flash_readsfdp_init();
     ospi_flash_diag(NULL_PTR);
     return 0;
 }
@@ -115,8 +106,8 @@ void ospi_flash_diag(void *args)
 
     if (E_OK == status)
     {
-        NorSpiDevDefines.manfId   = fls_config_sfdp->manfId;
-        NorSpiDevDefines.deviceId = fls_config_sfdp->deviceId;
+        NorSpiDevDefines.manfId   = Fls_Config_SFDP_Ptr->manfId;
+        NorSpiDevDefines.deviceId = Fls_Config_SFDP_Ptr->deviceId;
 
         AppUtils_printf("[OSPI Flash Diagnostic Test] Flash Manufacturer ID : 0x%X\r\n", NorSpiDevDefines.manfId);
         AppUtils_printf("[OSPI Flash Diagnostic Test] Flash Device ID       : 0x%X\r\n", NorSpiDevDefines.deviceId);

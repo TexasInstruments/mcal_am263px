@@ -65,7 +65,7 @@ extern void EcuM_cacheInvalidate(uint8 *BufPtr, uint32 LenByte);
 /* generation of runtime configuration       */
 /*<ETH_CONFIG>*/
 VAR(struct Eth_ConfigType_s, ETH_LCFG)
-    EthConfigSet_EthCtrlConfig_0 =
+    Eth_Config =
 {
        .ctrlIdx = 0U,
 	   .portIdx = ETH_PORT1,
@@ -85,23 +85,6 @@ VAR(struct Eth_ConfigType_s, ETH_LCFG)
                     0xFFU,
                 },
             },
-       },
-       .traffiShapingCfg =
-       {
-           
-           .enableQoS =0x0U,
-           .prioArray = 
-           {
-                0U,
-                0U,
-                0U,
-                0U,
-                0U,
-                0U,
-                0U,
-                0U,
-            },
-            
        },
 
 #if (STD_ON == ETH_ENABLE_MII_API)

@@ -2,6 +2,7 @@ MODULE_NAME = mcu
 
 include srcs.mk
 include $(mcal_PATH)/include/hw/inc.mk
+include $(mcal_PATH)/Mcal_Lib/inc.mk
 
 # List all the external components/interfaces, whose interface header files
 # need to be included for this component

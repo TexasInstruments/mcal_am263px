@@ -381,9 +381,13 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, ui
             }
         } while ((status != MCAL_SystemP_SUCCESS) && (waitForFifoNotFull != 0U) && (elapsedTicks < timeout));
 
-        if (elapsedTicks >= timeout)
+        if ((timeout != 0U) && (elapsedTicks >= timeout))
         {
             status = MCAL_SystemP_TIMEOUT;
+        }
+        else
+        {
+            /*Do nothing*/
         }
 
         SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();

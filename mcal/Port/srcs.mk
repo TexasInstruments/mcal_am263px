@@ -1,11 +1,6 @@
-PORT_PATH=$(mcal_PATH)/Port
+include $(mcal_PATH)/Port/inc.mk
 
-SRCDIR += $(PORT_PATH)/src
-INCDIR += $(PORT_PATH)/include
+SRCDIR += $(mcal_PATH)/Port/src
 SRCS_COMMON += Port.c Port_Priv.c Port_Irq.c
-
 # SOC specific files
-ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
-  SRCDIR += $(PORT_PATH)/V0
-  INCDIR += $(PORT_PATH)/V0
-endif
+SRCDIR += $(mcal_PATH)/Port/V0

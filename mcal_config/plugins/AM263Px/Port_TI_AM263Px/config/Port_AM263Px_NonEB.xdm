@@ -1323,13 +1323,13 @@
                                                                 type="IMPLEMENTATIONCONFIGCLASS">
 															<icc:v class="PostBuild">VariantPostBuild</icc:v>
 															<icc:v class="PreCompile">VariantPreCompile</icc:v>
-															
+
 														</a:a>
-														<a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+														<a:a name="ORIGIN" value="Texas Instruments"/>
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
 														<a:a name="UUID"
-                                                            value="e47f6d25-3cf5-452f-aba7-65777f52bb3d"/>														
+                                                            value="e47f6d25-3cf5-452f-aba7-65777f52bb3d"/>
 														<a:da name="RANGE">
 															<a:v>OSPI0_CSn0_MUXMODE_0</a:v>
 															<a:v>OSPI0_D0_MUXMODE_6</a:v>
@@ -2948,9 +2948,9 @@ v														</a:da>
 														</a:da>
 													</v:var>
 													<v:var name="PortGpioOwnerCore" type="INTEGER">
-                                                        <a:a name="DESC" 
+                                                        <a:a name="DESC"
                                                             value="EN: PIN ownership of GPIO. 0 - R5FSS0 Core0, 1 - R5FSS0 Core1, 2 - R5FSS1 Core0, 3 - R5FSS1 Core1"/>
-                                                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                                        <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                             type="IMPLEMENTATIONCONFIGCLASS">
                                                             <icc:v class="PreCompile">VariantPostBuild</icc:v>
                                                             <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2992,7 +2992,7 @@ v														</a:da>
 											</v:var>
 											<v:var name="PortPinSelectEdgeTrigger" type="ENUMERATION">
 												<a:a name="DESC" value="EN: Type of EdgeTrigger selection "/>
-												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">		
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 													<icc:v class="PostBuild">VariantPostBuild</icc:v>
 													<icc:v class="PreCompile">VariantPreCompile</icc:v>
 												</a:a>
@@ -3007,7 +3007,7 @@ v														</a:da>
 											</v:var>
 											<v:var name="PortPinSelectInterruptType" type="ENUMERATION">
 												<a:a name="DESC" value="EN: Select Interrupt type "/>
-												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">		
+												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 													<icc:v class="PostBuild">VariantPostBuild</icc:v>
 													<icc:v class="PreCompile">VariantPreCompile</icc:v>
 												</a:a>
@@ -3031,18 +3031,18 @@ v														</a:da>
                                                <a:da name="DEFAULT" value="NULL_PTR"/>
                                                <a:da name="ENABLE" value="true"/>
                                             </v:var>
-											
+
 											<v:ref name="PortMcuGpioXbarReference" type="REFERENCE">
 												<a:a name="DESC" value="EN: Reference to the McuGpioXbarIntrConfiguration container"/>
 												<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 													<icc:v class="PostBuild">VariantPostBuild</icc:v>
 													<icc:v class="PreCompile">VariantPreCompile</icc:v>
 												</a:a>
-												<a:a name="ORIGIN" value="Texas Instruments"/> 
+												<a:a name="ORIGIN" value="Texas Instruments"/>
 												<a:a name="UUID" value="0bc2d871-8a83-44a2-8934-8fb46a095dqc"/>
 												<a:da name="REF" value="ASPathDataOfSchema:/TI_AM263Px/Mcu/McuModuleConfiguration/McuGpioXbarIntrConfiguration"/>
 											</v:ref>
-																						
+
 										</v:ctr>
 									</v:lst>
 								</v:ctr>
@@ -3209,7 +3209,7 @@ v														</a:da>
 									<a:a name="UUID" value="0bc2dd41-8a83-44a2-8113-8fb46a095ddc"/>
 									<a:da name="DEFAULT" value="true"/>
 								</v:var>
-								
+
 								<v:ref name="PortOsCounterRef" type="REFERENCE">
 									<a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the OsCounter, which is used by the PORT driver."/>
@@ -3260,9 +3260,9 @@ v														</a:da>
 								  </a:da>
 								</v:var>
 								<v:var name="PortGpioHostCoreId" type="INTEGER">
-								<a:a name="DESC" 
+								<a:a name="DESC"
 									value="EN: R5F CPU ownership of GPIO. 0 - R5FSS0 Core0, 1 - R5FSS0 Core1, 2 - R5FSS1 Core0, 3 - R5FSS1 Core1"/>
-								<a:a name="IMPLEMENTATIONCONFIGCLASS" 
+								<a:a name="IMPLEMENTATIONCONFIGCLASS"
 									type="IMPLEMENTATIONCONFIGCLASS">
 								    <icc:v class="PreCompile">VariantPostBuild</icc:v>
                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>

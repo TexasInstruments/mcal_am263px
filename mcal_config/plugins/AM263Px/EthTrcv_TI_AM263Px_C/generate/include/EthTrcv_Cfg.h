@@ -86,9 +86,7 @@ extern "C" {
 
 [!IF "as:modconf('EthTrcv')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 /*macro derived for precompile variant*/
-[!LOOP "as:modconf('EthTrcv')[1]/EthTrcvConfigSet/EthTrcvConfig/*"!]
-#define ETHTRCV_INIT_CONFIG_PC 			[!"../../@name"!]_[!"@name"!];
-[!ENDLOOP!]
+#define ETHTRCV_INIT_CONFIG_PC 			EthTrcv_Config
 [!ENDIF!]
 
 
@@ -141,10 +139,8 @@ extern "C" {
 /* @} */
 
 /** \brief EthTrcv max number of controllers. */
-#define ETHTRCV_MAX_CONTROLLER          	([!"as:modconf('EthTrcv')[1]/EthTrcvGeneral/EthTrcvMaxControllersSupported"!]U)
-
-/** \brief EthTrcv max number of configurations. */
-#define ETHTRCV_MAX_CONTROLLER_CFGS     	(2U)
+[!VAR "EthTrcvCount" = "count(as:modconf('EthTrcv')[1]/EthTrcvConfigSet/EthTrcvConfig/*)"!][!//
+#define ETHTRCV_MAX_CONTROLLER          	([!"num:i($EthTrcvCount)"!]U)
 
 /**
  *  \name EthTrcv Controller names
@@ -233,11 +229,6 @@ extern "C" {
  */
 #define ETHTRCV_MAINFUNCTION_PERIOD          	[!"as:modconf('EthTrcv')[1]/EthTrcvGeneral/EthTrcvMainFunctionPeriod/*"!]U
 [!ENDIF!]
-/**
- *  \brief EthTrcvMaxTrcvsSupported.
- */
-#define ETHTRCV_MAXTRCVSUPPORTED             	([!"as:modconf('EthTrcv')[1]/EthTrcvGeneral/EthTrcvMaxTrcvsSupported"!]U)
-
 
 /* Requirements : SWS_EthTrcv_00110 */
 /**
@@ -255,10 +246,8 @@ extern "C" {
 /* ========================================================================== */
 /* 							Structures and Enums */
 /* ========================================================================== */
-[!LOOP "as:modconf('EthTrcv')[1]/EthTrcvConfigSet/EthTrcvConfig/*"!]
-/** \brief EthTrcv Configuration struct declaration */
-extern struct EthTrcv_ConfigType_s [!"../../@name"!]_[!"@name"!];
-[!ENDLOOP!]
+ /** \brief EthTrcv Configuration struct declaration */
+ extern struct EthTrcv_ConfigType_s EthTrcv_Config;
 
 /* ========================================================================== */
 /*                          Function Declarations                             */

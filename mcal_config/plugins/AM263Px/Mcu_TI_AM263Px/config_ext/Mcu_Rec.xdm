@@ -1,16 +1,16 @@
 <?xml version='1.0'?>
-<datamodel version="6.0" 
-           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd" 
-           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd" 
-           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
            xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
 
-  <d:ctr type="AUTOSAR" factory="autosar" 
-         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
-         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
-         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
-         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
-         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
          xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
     <d:lst type="TOP-LEVEL-PACKAGES">
       <d:ctr name="TI_AM263Px" type="AR-PACKAGE">
@@ -22,7 +22,6 @@
               <d:ctr name="McuPublishedInformation" type="IDENTIFIABLE">
                 <a:a name="IMPORTER_INFO" value="@REC"/>
                 <a:a name="READONLY" value="true"/>
-                <a:a name="REQUIRES-INDEX" value="true"/>
                 <d:lst name="McuResetReasonConf" type="MAP">
                   <d:ctr name="MCU_POWER_ON_RESET" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -217,13 +216,13 @@
                     </d:var>
                   </d:ctr>
                 </d:lst>
-                <d:var name="McuDeviceVariant" type="ENUMERATION" 
+                <d:var name="McuDeviceVariant" type="ENUMERATION"
                        value="AM263Px">
                   <a:a name="ENABLE" value="true"/>
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
               </d:ctr>
-              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION" 
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION"
                      value="VariantPostBuild">
                 <a:a name="IMPORTER_INFO" value="@REC"/>
               </d:var>
@@ -276,7 +275,7 @@
               <d:ctr name="McuModuleConfiguration" type="IDENTIFIABLE">
                 <a:a name="IMPORTER_INFO" value="@REC"/>
                 <a:a name="SHORT-NAME" value="McuModuleConfiguration"/>
-                <d:var name="McuClockSrcFailureNotification" type="ENUMERATION" 
+                <d:var name="McuClockSrcFailureNotification" type="ENUMERATION"
                        value="DISABLED">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
@@ -284,7 +283,7 @@
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
                 <d:lst name="McuResetSetting"/>
-                <d:var name="McuResetMode" type="ENUMERATION" 
+                <d:var name="McuResetMode" type="ENUMERATION"
                        value="MCU_PERFORM_RESET_MODE_WARM">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
@@ -294,26 +293,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_OSPI">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -325,26 +324,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -356,26 +355,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -387,26 +386,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -418,26 +417,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -449,26 +448,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -480,26 +479,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN5">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -511,26 +510,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN6">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -542,26 +541,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCAN7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="8.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -573,26 +572,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -604,26 +603,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -635,26 +634,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -666,26 +665,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -697,26 +696,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -728,26 +727,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI5">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -759,26 +758,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI6">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -790,282 +789,282 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RTI7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI0" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI0"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI1" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI1"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI2" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI2"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI3" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI3"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI4" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI4"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI5" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI5"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI5">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI6" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI6"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI6">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MCSPI7" 
+                  <d:ctr name="McuClockSettingConfig_MCSPI7"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MCSPI7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="7">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="5.0E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1077,26 +1076,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_I2C">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.4E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1108,26 +1107,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_SCI0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="4.8E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1139,26 +1138,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_SCI1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="4.8E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1170,26 +1169,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_SCI2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="4.8E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1201,26 +1200,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_SCI3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="4.8E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1232,26 +1231,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_SCI4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="4.8E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1263,26 +1262,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_SCI5">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="4.8E7">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1294,122 +1293,122 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_CPTS">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="1.0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_RGMI_CLK" 
+                  <d:ctr name="McuClockSettingConfig_RGMI_CLK"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_RGMI_CLK">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="1.0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MII100_CLK" 
+                  <d:ctr name="McuClockSettingConfig_MII100_CLK"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MII100_CLK">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="9">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="1.0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
                       </d:ctr>
                     </d:lst>
                   </d:ctr>
-                  <d:ctr name="McuClockSettingConfig_MII10_CLK" 
+                  <d:ctr name="McuClockSettingConfig_MII10_CLK"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_MII10_CLK">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="99">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="1.0">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1421,26 +1420,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_WDT0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1452,26 +1451,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_WDT1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1483,26 +1482,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_WDT2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1514,26 +1513,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_WDT3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="2.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1545,26 +1544,26 @@
                     <d:var name="McuClockSettingId" type="INTEGER" value="200">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockModuleId" type="ENUMERATION" 
+                    <d:var name="McuClockModuleId" type="ENUMERATION"
                            value="MCU_CLKSRC_MODULE_ID_CONTROLSS_CLK">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockSourceId" type="ENUMERATION" 
+                    <d:var name="McuClockSourceId" type="ENUMERATION"
                            value="MCU_CLKSRC_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuClockDivId" type="INTEGER" value="3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuClockInitializationConfigFlag" 
+                    <d:var name="McuClockInitializationConfigFlag"
                            type="BOOLEAN" value="true">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:lst name="McuClockReferencePoint" type="MAP">
-                      <d:ctr name="McuClockReferencePoint_0" 
+                      <d:ctr name="McuClockReferencePoint_0"
                              type="IDENTIFIABLE">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
-                        <d:var name="McuClockReferencePointFrequency" 
+                        <d:var name="McuClockReferencePointFrequency"
                                type="FLOAT" value="1.0E8">
                           <a:a name="IMPORTER_INFO" value="@REC"/>
                         </d:var>
@@ -1573,229 +1572,229 @@
                   </d:ctr>
                 </d:lst>
                 <d:lst name="McuXbarChannelTriggerConfiguration" type="MAP">
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_0" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_0"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_EPWM9_INT">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_1" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_1"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_ADC1_INT1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_2" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_2"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_3">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX1_INT1N">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_3" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_3"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_4">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX1_INT1N">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_4" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_4"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_22">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_ECAP0_INT">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_7" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_7"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_10"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX1_INT2N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_8" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_8"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_11"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX1_INT2N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_9" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_9"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_12"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX0_INT1N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_10" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_10"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_13"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX0_INT2N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_11" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_11"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_14"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX0_INT1N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_12" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_12"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_15"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX0_INT2N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_6" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_6"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_9"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX2_INT1N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_13" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_13"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_16"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX2_INT2N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_14" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_14"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_7"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX2_INT1N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_15" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_15"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_8"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX2_INT2N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_16" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_16"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_19"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX3_INT1N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_17" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_17"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_20"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSIRX3_INT2N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_18" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_18"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_17"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX3_INT1N"/>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_19" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_19"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_18"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_FSITX3_INT2N">
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_5" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_5"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_5"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_EPWM0_INT">
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuXbarChannelTriggerConfiguration_20" 
+                  <d:ctr name="McuXbarChannelTriggerConfiguration_20"
                          type="IDENTIFIABLE">
-                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbar" type="ENUMERATION"
                            value="MCU_INTRXBAR0_OUT_6"/>
-                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInterruptChannelXbarMap" type="ENUMERATION"
                            value="MCU_INT_XBAR_EPWM0_TZINT"/>
                   </d:ctr>
                 </d:lst>
-                <d:lst name="McuInputXbarChannelTriggerConfiguration" 
+                <d:lst name="McuInputXbarChannelTriggerConfiguration"
                        type="MAP">
-                  <d:ctr name="McuInputXbarChannelTriggerConfiguration_0" 
+                  <d:ctr name="McuInputXbarChannelTriggerConfiguration_0"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInputChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInputChannelXbar" type="ENUMERATION"
                            value="MCU_INPUT_XBAR0_OUT_1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInputChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInputChannelXbarMap" type="ENUMERATION"
                            value="MCU_INPUT_XBAR_GPIO0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuInputXbarChannelTriggerConfiguration_1" 
+                  <d:ctr name="McuInputXbarChannelTriggerConfiguration_1"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInputChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInputChannelXbar" type="ENUMERATION"
                            value="MCU_INPUT_XBAR0_OUT_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInputChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInputChannelXbarMap" type="ENUMERATION"
                            value="MCU_INPUT_XBAR_GPIO61">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
-                  <d:ctr name="McuInputXbarChannelTriggerConfiguration_2" 
+                  <d:ctr name="McuInputXbarChannelTriggerConfiguration_2"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuInputChannelXbar" type="ENUMERATION" 
+                    <d:var name="McuInputChannelXbar" type="ENUMERATION"
                            value="MCU_INPUT_XBAR0_OUT_2">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuInputChannelXbarMap" type="ENUMERATION" 
+                    <d:var name="McuInputChannelXbarMap" type="ENUMERATION"
                            value="MCU_INPUT_XBAR_GPIO122">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                   </d:ctr>
                 </d:lst>
                 <d:lst name="McuGpioXbarIntrConfiguration" type="MAP">
-                  <d:ctr name="McuGpioXbarIntrConfiguration_0" 
+                  <d:ctr name="McuGpioXbarIntrConfiguration_0"
                          type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:var name="McuGpioIntrXbar" type="ENUMERATION" 
+                    <d:var name="McuGpioIntrXbar" type="ENUMERATION"
                            value="MCU_GPIO_0_BANK_INTR_1">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuGpioXbarOutMap" type="ENUMERATION" 
+                    <d:var name="McuGpioXbarOutMap" type="ENUMERATION"
                            value="MCU_GPIO_INT_XBAR_VIM_MODULE0_0">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
@@ -1804,12 +1803,12 @@
                 <d:lst name="McuPwmConfiguration" type="MAP">
                   <d:ctr name="McuPwmConfiguration_0" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:ref name="McuPwmChannelId" type="REFERENCE" 
+                    <d:ref name="McuPwmChannelId" type="REFERENCE"
                            value="ASPath:/Pwm/Pwm/PwmChannelConfigSet/PwmChannel_0">
                       <a:a name="ENABLE" value="true"/>
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:ref>
-                    <d:ref name="McuPwmGroupId" type="REFERENCE" 
+                    <d:ref name="McuPwmGroupId" type="REFERENCE"
                            value="ASPath:/Pwm/Pwm/PwmChannelConfigSet/PwmChannel_0">
                       <a:a name="ENABLE" value="true"/>
                       <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -1818,13 +1817,13 @@
                 </d:lst>
                 <d:lst name="McuCddPwmConfiguration" type="MAP">
                   <d:ctr name="McuCddPwmConfiguration_0" type="IDENTIFIABLE">
-                    <d:ref name="McuCddPwmChannelId" type="REFERENCE" 
+                    <d:ref name="McuCddPwmChannelId" type="REFERENCE"
                            value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmChannel_0">
                       <a:a name="ENABLE" value="true"/>
                     </d:ref>
                   </d:ctr>
                   <d:ctr name="McuCddPwmConfiguration_1" type="IDENTIFIABLE">
-                    <d:ref name="McuCddPwmChannelId" type="REFERENCE" 
+                    <d:ref name="McuCddPwmChannelId" type="REFERENCE"
                            value="ASPath:/Cdd_Pwm/Cdd_Pwm/CddPwmConfigSet_0/CddPwmChannel_1">
                       <a:a name="ENABLE" value="true"/>
                     </d:ref>
@@ -1833,7 +1832,7 @@
                 <d:lst name="McuAdcConfiguration" type="MAP">
                   <d:ctr name="McuAdcConfiguration_0" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:ref name="McuAdcHWUnitId" type="REFERENCE" 
+                    <d:ref name="McuAdcHWUnitId" type="REFERENCE"
                            value="ASPath:/Adc/Adc/AdcConfigSet/AdcHwUnit_0">
                       <a:a name="ENABLE" value="true"/>
                       <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -1843,7 +1842,7 @@
                 <d:lst name="McuEthConfiguration" type="MAP">
                   <d:ctr name="McuEthConfiguration_0" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
-                    <d:ref name="McuEthCtrConfig" type="REFERENCE" 
+                    <d:ref name="McuEthCtrConfig" type="REFERENCE"
                            value="ASPath:/Eth/Eth/EthConfigSet/EthCtrlConfig_0">
                       <a:a name="ENABLE" value="true"/>
                       <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -1853,7 +1852,7 @@
                 <d:ctr name="McuDemEventParameterRefs" type="IDENTIFIABLE">
                   <a:a name="ENABLE" value="true"/>
                   <a:a name="IMPORTER_INFO" value="@REC"/>
-                  <d:ref name="MCU_E_CLOCK_FAILURE" type="REFERENCE" 
+                  <d:ref name="MCU_E_CLOCK_FAILURE" type="REFERENCE"
                          value="ASPath:/Dem/Dem/DemConfigSet/MCU_E_CLOCK_FAILURE">
                     <a:a name="ENABLE" value="true"/>
                     <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -1862,7 +1861,7 @@
                     <a:a name="ENABLE" value="false"/>
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:ref>
-                  <d:ref name="MCU_E_HARDWARE_ERROR" type="REFERENCE" 
+                  <d:ref name="MCU_E_HARDWARE_ERROR" type="REFERENCE"
                          value="ASPath:/Dem/Dem/DemConfigSet/MCU_E_HARDWARE_ERROR">
                     <a:a name="ENABLE" value="true"/>
                     <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -1882,14 +1881,14 @@
                     <d:var name="McuRamDefaultValue" type="INTEGER" value="190">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuRamSectionBaseAddress" type="INTEGER" 
+                    <d:var name="McuRamSectionBaseAddress" type="INTEGER"
                            value="1879048192">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
                     <d:var name="McuRamSectionSize" type="INTEGER" value="256">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>
-                    <d:var name="McuRamSectionWriteSize" type="INTEGER" 
+                    <d:var name="McuRamSectionWriteSize" type="INTEGER"
                            value="8">
                       <a:a name="IMPORTER_INFO" value="@REC"/>
                     </d:var>

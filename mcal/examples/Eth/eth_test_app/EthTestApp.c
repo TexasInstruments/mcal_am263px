@@ -441,7 +441,7 @@ int main(void)
 
     /* Do Eth driver initialization */
     Eth_ConfigType *pEthConfigPtr;
-    pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+    pEthConfigPtr = &Eth_Config;
 
 #if (STD_ON == ETH_VARIANT_PRE_COMPILE)
     Eth_Init((const Eth_ConfigType *)NULL_PTR);
@@ -1323,8 +1323,7 @@ boolean EthApp_test_0200(void)
     EthFrame frame;
 
     EthUtils_printf("test_0200: START\r\n");
-    EthPsEnterLoopback(EthConfigSet_EthCtrlConfig_0.portIdx,
-                       EthConfigSet_EthCtrlConfig_0.portCfg.macCfg.macConnectionType);
+    EthPsEnterLoopback(Eth_Config.portIdx, Eth_Config.portCfg.macCfg.macConnectionType);
 
     /* Initialize frame header */
     memcpy(frame.hdr.dstMac, BcastAddr, ETH_MAC_ADDR_LEN);
@@ -1760,26 +1759,32 @@ boolean EthApp_test_0400(void)
 
     for (i = TEST_PRIO_NUM - 1; i >= 0; i--)
     {
-        Eth_SetBandwidthLimit(gEthUtilsApp.ctrlIdx, TEST_PRIO_NUM - 1, Test_RateLimit[i]);
+        Eth_SetBandwidthLimit(gEthUtilsApp.ctrlIdx, i, Test_RateLimit[i]);
+    }
 
+    for (i = TEST_PRIO_NUM - 1; i >= 0; i--)
+    {
         EthUtils_printf("test_0400: START %d\r\n", i);
 
         /* Send START cmd */
         EthApp_sendCmd(gEthUtilsApp.ctrlIdx, CTRL_FRAME_CMD_START);
 
-        EthApp_test_0400_Helper(ETH_TEST_TYPE_PATTERN_1, TEST_PRIO_NUM - 1, ETH_TEST_VLAN_VID, ETHERTYPE_EXPERIMENTAL1);
+        EthApp_test_0400_Helper(ETH_TEST_TYPE_PATTERN_1, i, ETH_TEST_VLAN_VID, ETHERTYPE_VLAN_TAG);
 
         /* Send STOP cmd */
         EthApp_sendCmd(gEthUtilsApp.ctrlIdx, CTRL_FRAME_CMD_STOP);
 
-        Eth_GetBandwidthLimit(gEthUtilsApp.ctrlIdx, TEST_PRIO_NUM - 1, &bandwidth);
+        Eth_GetBandwidthLimit(gEthUtilsApp.ctrlIdx, i, &bandwidth);
         EthUtils_printf("test_0400 bandwidth %u: END\r\n", bandwidth);
 
         /* Flush pending rx packet */
         EthApp_flushRecvQueue(gEthUtilsApp.ctrlIdx);
     }
 
-    Eth_SetBandwidthLimit(gEthUtilsApp.ctrlIdx, TEST_PRIO_NUM - 1, 0U);
+    for (i = TEST_PRIO_NUM - 1; i >= 0; i--)
+    {
+        Eth_SetBandwidthLimit(gEthUtilsApp.ctrlIdx, i, 0);
+    }
 
     return PASS;
 }
@@ -1895,7 +1900,7 @@ boolean EthApp_test_0101(void)
 boolean EthApp_test_0500(void)
 {
     Std_ReturnType retVal     = E_OK;
-    uint8          trcvIdx    = EthTrcvConfigSet_EthTrcvConfig_0.trcvIdx;
+    uint8          trcvIdx    = EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0;
     uint32         iterations = 100;
     uint32         i;
 
@@ -1955,7 +1960,7 @@ boolean EthApp_test_0201(void)
         gEthUtilsApp.totalIrq           = 0;
 
         /* Re-Init Eth driver with new TX pacing value */
-        pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+        pEthConfigPtr = &Eth_Config;
         Eth_SetControllerMode(pEthConfigPtr->ctrlIdx, ETH_MODE_DOWN);
 
         pEthConfigPtr->cpdmaCfg.txInterruptsPerMsec = testTxPaceValue[testIdx];
@@ -2069,7 +2074,7 @@ boolean EthApp_test_0202(void)
         gEthUtilsApp.totalIrq          = 0;
 
         /* Re-Init Eth driver with new RX pacing value */
-        pEthConfigPtr = &EthConfigSet_EthCtrlConfig_0;
+        pEthConfigPtr = &Eth_Config;
         Eth_SetControllerMode(pEthConfigPtr->ctrlIdx, ETH_MODE_DOWN);
 
         pEthConfigPtr->cpdmaCfg.rxInterruptsPerMsec = testRxPaceValue[testIdx];

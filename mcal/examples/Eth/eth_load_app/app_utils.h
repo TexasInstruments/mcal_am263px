@@ -79,6 +79,7 @@
 #include "sys_common.h"
 
 #include "Eth.h"
+#include "EthTrcv.h"
 #include "Std_Types.h"
 
 #ifdef __cplusplus
@@ -147,7 +148,11 @@ extern "C" {
 #define CPSW_TH_INT MSS_CPSW_TH_INT
 #endif
 #ifndef CPSW_TH_TRSH_INT
+#ifdef CPSW_TH_THRESH_INT /* hw/am261/sys_common.h */
+#define CPSW_TH_TRSH_INT CPSW_TH_THRESH_INT
+#else
 #define CPSW_TH_TRSH_INT MSS_CPSW_TH_TRSH_INT
+#endif
 #endif
 #ifndef CPSW_MISC_INT
 #define CPSW_MISC_INT MSS_CPSW_MISC_INT
@@ -214,7 +219,7 @@ typedef struct
 void           EcuM_cacheWbInv(uint8 *startAddress, uint32 byteCount);
 void           EcuM_cacheInvalidate(uint8 *startAddress, uint32 byteCount);
 void           AppUtils_ethPrintVersionInfo();
-Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr);
+Std_ReturnType AppUtils_ethTrcvInit(EthTrcv_ConfigType *ethTrcvConfigPtr, uint8 trcvIdx);
 void           AppUtils_ethAm263xPHYDelayConfig(Eth_ConfigType *pEthConfigPtr, uint32 phyAddr);
 
 /* ========================================================================== */

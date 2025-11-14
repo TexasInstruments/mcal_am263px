@@ -226,7 +226,8 @@ sint32 RPMessage_lld_send(RPMessageLLD_Handle hRpMsg, void *data, uint16 dataLen
 sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObject, void *data, uint16 *dataLen,
                           uint16 *remoteCoreId, uint16 *remoteEndPt, uint32 timeout)
 {
-    sint32            status = MCAL_SystemP_FAILURE;
+    sint32            status     = MCAL_SystemP_FAILURE;
+    sint32            freeStatus = MCAL_SystemP_FAILURE;
     RPMessage_Struct *epObj;
 
     if ((hRpMsg != NULL_PTR) && (epObject != NULL_PTR))
@@ -251,25 +252,21 @@ sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObje
                 RPMessage_lld_recvdataLenCheck(header, dataLen);
                 memcpy((void *)data, (void *)&vringBufAddr[sizeof(RPMessage_Header)], (uint32)*dataLen);
 #if (CDD_IPC_CRC_ENABLE == STD_ON)
-                {
-                    uint16 crc;
-                    status = hRpMsg->hRpMsgInit->hIpcNotify->hIpcNotifyInit->Cdd_Ipc_CrcHookFunc(
-                        (uint8 *)data, *dataLen, CDD_IPC_RPMESSAGE_CRC_SIZE, &crc);
+                uint16 crc = 0U;
+                status     = hRpMsg->hRpMsgInit->hIpcNotify->hIpcNotifyInit->Cdd_Ipc_CrcHookFunc(
+                    (uint8 *)data, *dataLen, CDD_IPC_RPMESSAGE_CRC_SIZE, &crc);
 
-                    if (header->flags != crc)
-                    {
-                        status = MCAL_SystemP_FAILURE;
-                    }
+                if (header->flags != crc)
+                {
+                    status = MCAL_SystemP_FAILURE;
                 }
 #endif
-                if (status == MCAL_SystemP_SUCCESS)
+                freeStatus     = RPMessage_vringPutEmptyRxBuf(hRpMsg, *remoteCoreId, vringBufId, timeout);
+                isAllocPending = RPMessage_freeEndPtMsg(&hRpMsg->coreObj[*remoteCoreId], *remoteCoreId, pMsg);
+                RPMessage_lld_recv_Notify_Callback(hRpMsg, remoteCoreId, timeout, isAllocPending);
+                if (freeStatus != MCAL_SystemP_SUCCESS)
                 {
-                    status = RPMessage_vringPutEmptyRxBuf(hRpMsg, *remoteCoreId, vringBufId, timeout);
-                    if (status == MCAL_SystemP_SUCCESS)
-                    {
-                        isAllocPending = RPMessage_freeEndPtMsg(&hRpMsg->coreObj[*remoteCoreId], *remoteCoreId, pMsg);
-                        RPMessage_lld_recv_Notify_Callback(hRpMsg, remoteCoreId, timeout, isAllocPending);
-                    }
+                    status = MCAL_SystemP_FAILURE;
                 }
             }
             else

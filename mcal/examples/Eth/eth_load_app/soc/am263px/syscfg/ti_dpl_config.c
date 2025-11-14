@@ -72,7 +72,7 @@ const CacheP_Config gCacheConfig RODATA_CFG_SECTION = {
 };
 
 /* ----------- MpuP_armv7 ----------- */
-#define CONFIG_MPU_NUM_REGIONS (9u)
+#define CONFIG_MPU_NUM_REGIONS (5u)
 
 const MpuP_Config gMpuConfig RODATA_CFG_SECTION = {
     .numRegions             = CONFIG_MPU_NUM_REGIONS,
@@ -117,31 +117,6 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
                      .accessPerm           = MpuP_AP_S_RW_U_R,
                      .subregionDisableMask = 0x0u},
     },
-    /* MCSPI Register Space to be Strongly Ordered */
-    {
-        .baseAddr = 0x52200000u,
-        .size     = MpuP_RegionSize_32K,
-        .attrs    = {.isEnable             = 1,
-                     .isCacheable          = 0,
-                     .isBufferable         = 1,
-                     .isSharable           = 1,
-                     .isExecuteNever       = 0,
-                     .tex                  = 0,
-                     .accessPerm           = MpuP_AP_ALL_RW,
-                     .subregionDisableMask = 0x0u},
-    },
-    {
-        .baseAddr = 0x52201000u,
-        .size     = MpuP_RegionSize_32K,
-        .attrs    = {.isEnable             = 1,
-                     .isCacheable          = 0,
-                     .isBufferable         = 1,
-                     .isSharable           = 1,
-                     .isExecuteNever       = 0,
-                     .tex                  = 0,
-                     .accessPerm           = MpuP_AP_ALL_RW,
-                     .subregionDisableMask = 0x0u},
-    },
     {
         .baseAddr = 0x70000000u,
         .size     = MpuP_RegionSize_2M,
@@ -155,44 +130,20 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
                      .subregionDisableMask = 0x0u},
     },
     {
-        .baseAddr = 0x70200000u,
-        .size     = MpuP_RegionSize_512K,
-        .attrs    = {.isEnable             = 1,
-                     .isCacheable          = 1,
-                     .isBufferable         = 1,
-                     .isSharable           = 0,
-                     .isExecuteNever       = 0,
-                     .tex                  = 1,
-                     .accessPerm           = MpuP_AP_S_RW_U_R,
-                     .subregionDisableMask = 0x0u},
-    },
-    {
-        .baseAddr = 0x70280000u,
-        .size     = MpuP_RegionSize_512K,
+        .baseAddr = 0x70180000u,
+        .size     = MpuP_RegionSize_16K,
         .attrs    = {.isEnable             = 1,
                      .isCacheable          = 0,
                      .isBufferable         = 0,
                      .isSharable           = 0,
                      .isExecuteNever       = 0,
                      .tex                  = 1,
-                     .accessPerm           = MpuP_AP_ALL_RW,
-                     .subregionDisableMask = 0x0u},
-    },
-    {
-        .baseAddr = 0x50240000u,
-        .size     = MpuP_RegionSize_1M,
-        .attrs    = {.isEnable             = 1,
-                     .isCacheable          = 0,
-                     .isBufferable         = 0,
-                     .isSharable           = 0,
-                     .isExecuteNever       = 1,
-                     .tex                  = 2,
                      .accessPerm           = MpuP_AP_ALL_RW,
                      .subregionDisableMask = 0x0u},
     },
 };
 
-#define BOOT_SECTION __attribute__((section(".text.boot")))
+#define BOOT_SECTION __attribute__((section(".text.boot"), do_not_share))
 
 /* This function is called by _c_int00 */
 void BOOT_SECTION __mpu_init()

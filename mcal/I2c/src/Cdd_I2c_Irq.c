@@ -59,7 +59,7 @@
 #include "Cdd_I2c_MemMap.h"
 
 #if defined(CDD_I2C_HW_UNIT_0_ACTIVE)
-void Cdd_I2c_HwUnit0_ISR(void) __attribute__((target("arm")));
+__attribute__((target("arm")))
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
 FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit0_ISR(void)
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)
@@ -72,7 +72,7 @@ ISR(Cdd_I2c_HwUnit0_ISR)
 #endif
 
 #if defined(CDD_I2C_HW_UNIT_1_ACTIVE)
-void Cdd_I2c_HwUnit1_ISR(void) __attribute__((target("arm")));
+__attribute__((target("arm")))
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
 FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit1_ISR(void)
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)
@@ -85,7 +85,7 @@ ISR(Cdd_I2c_HwUnit1_ISR)
 #endif
 
 #if defined(CDD_I2C_HW_UNIT_2_ACTIVE)
-void Cdd_I2c_HwUnit2_ISR(void) __attribute__((target("arm")));
+__attribute__((target("arm")))
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
 FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit2_ISR(void)
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)
@@ -98,7 +98,7 @@ ISR(Cdd_I2c_HwUnit2_ISR)
 #endif
 
 #if defined(CDD_I2C_HW_UNIT_3_ACTIVE)
-void Cdd_I2c_HwUnit3_ISR(void) __attribute__((target("arm")));
+__attribute__((target("arm")))
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
 FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit3_ISR(void)
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)

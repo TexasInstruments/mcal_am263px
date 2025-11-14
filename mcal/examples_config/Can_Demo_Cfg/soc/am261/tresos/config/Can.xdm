@@ -1,0 +1,994 @@
+<?xml version='1.0'?>
+<datamodel version="6.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/14/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/14/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+           xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
+
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
+         xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
+    <d:lst type="TOP-LEVEL-PACKAGES">
+      <d:ctr name="Can" type="AR-PACKAGE">
+        <d:lst type="ELEMENTS">
+          <d:chc name="Can" type="AR-ELEMENT" value="MODULE-CONFIGURATION">
+            <d:ctr type="MODULE-CONFIGURATION">
+              <a:a name="DEF" value="ASPath:/TI_AM261x/Can"/>
+              <a:a name="IMPORTER_INFO" value="@REC"/>
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION"
+                     value="VariantPostBuild">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+              </d:var>
+              <d:ctr name="CanConfigSet" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:lst name="CanController" type="MAP">
+                  <d:ctr name="CanController_0" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:var name="CanControllerId" type="INTEGER" value="0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerInstance" type="ENUMERATION"
+                           value="MCAN0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerActivation" type="BOOLEAN"
+                           value="true">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerBaseAddress" type="INTEGER"
+                           value="1382023168">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanErrorNotification" type="FUNCTION-NAME"
+                           value="NULL_PTR">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerType" type="INTEGER" value="0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanBusoffProcessing" type="ENUMERATION"
+                           value="POLLING">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanRxProcessing" type="ENUMERATION"
+                           value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanTxProcessing" type="ENUMERATION"
+                           value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanWakeupFunctionalityAPI" type="BOOLEAN"
+                           value="false">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanDisableAutoRetranmission" type="BOOLEAN"
+                           value="true">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanWakeupProcessing" type="ENUMERATION"
+                           value="INTERRUPT">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanWakeupSupport" type="BOOLEAN" value="false">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:ref name="CanControllerDefaultBaudrate" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_0/CanControllerBaudrateConfig_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanCpuClockRef" type="REFERENCE"
+                           value="ASPath:/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_MCAN0/McuClockReferencePoint_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanWakeupSourceRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanControllerBaudrateConfig" type="MAP">
+                      <d:ctr name="CanControllerBaudrateConfig_0"
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanControllerBaudRate" type="INTEGER"
+                               value="1000">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerBaudRateConfigID"
+                               type="INTEGER" value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerPropSeg" type="INTEGER"
+                               value="20">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerSeg1" type="INTEGER"
+                               value="14">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerSeg2" type="INTEGER" value="5">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerSyncJumpWidth" type="INTEGER"
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:lst name="CanControllerFdBaudrateConfig" type="MAP">
+                          <d:ctr name="CanControllerFdBaudrateConfig"
+                                 type="IDENTIFIABLE">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                            <d:var name="CanControllerFdBaudRate"
+                                   type="INTEGER" value="5000">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerPropSeg" type="INTEGER"
+                                   value="3">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerSeg1" type="INTEGER"
+                                   value="3">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerSeg2" type="INTEGER"
+                                   value="1">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerSyncJumpWidth"
+                                   type="INTEGER" value="1">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:lst
+                                   name="CanControllerTrcvDelayCompensationOffset">
+                              <d:var type="INTEGER" value="180">
+                                <a:a name="IMPORTER_INFO" value="@REC"/>
+                              </d:var>
+                            </d:lst>
+                            <d:var name="CanControllerTxBitRateSwitch"
+                                   type="BOOLEAN" value="true">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                          </d:ctr>
+                        </d:lst>
+                      </d:ctr>
+                    </d:lst>
+                    <d:ctr name="CanTTController" type="IDENTIFIABLE">
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CanTTControllerApplWatchdogLimit"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerCycleCountMax" type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerExpectedTxTrigger"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerExternalClockSynchronisation"
+                             type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerGlobalTimeFiltering"
+                             type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerInitialRefOffset"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerInterruptEnable"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerLevel2" type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerNTUConfig" type="FLOAT" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerOperationMode"
+                             type="ENUMERATION" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerSyncDeviation" type="FLOAT" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTURRestore" type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTimeMaster" type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTimeMasterPriority"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTxEnableWindowLength"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerWatchTriggerGapTimeMark"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerWatchTriggerTimeMark"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTIRQProcessing" type="ENUMERATION" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:ctr>
+                  <d:ctr name="CanController_1" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:var name="CanControllerId" type="INTEGER" value="1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerInstance" type="ENUMERATION"
+                           value="MCAN1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerActivation" type="BOOLEAN"
+                           value="true">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerBaseAddress" type="INTEGER"
+                           value="1382088704">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanErrorNotification" type="FUNCTION-NAME"
+                           value="NULL_PTR">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanControllerType" type="INTEGER" value="0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanBusoffProcessing" type="ENUMERATION"
+                           value="POLLING">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanRxProcessing" type="ENUMERATION"
+                           value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanTxProcessing" type="ENUMERATION"
+                           value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanWakeupFunctionalityAPI" type="BOOLEAN"
+                           value="false">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanDisableAutoRetranmission" type="BOOLEAN"
+                           value="true">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanWakeupProcessing" type="ENUMERATION"
+                           value="INTERRUPT">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanWakeupSupport" type="BOOLEAN" value="false">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:ref name="CanControllerDefaultBaudrate" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_1/CanControllerBaudrateConfig_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanCpuClockRef" type="REFERENCE"
+                           value="ASPath:/Mcu/Mcu/McuModuleConfiguration/McuClockSettingConfig_MCAN1/McuClockReferencePoint_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanWakeupSourceRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanControllerBaudrateConfig" type="MAP">
+                      <d:ctr name="CanControllerBaudrateConfig_0"
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanControllerBaudRate" type="INTEGER"
+                               value="1000">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerBaudRateConfigID"
+                               type="INTEGER" value="0">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerPropSeg" type="INTEGER"
+                               value="20">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerSeg1" type="INTEGER"
+                               value="14">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerSeg2" type="INTEGER" value="5">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanControllerSyncJumpWidth" type="INTEGER"
+                               value="1">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:lst name="CanControllerFdBaudrateConfig" type="MAP">
+                          <d:ctr name="CanControllerFdBaudrateConfig"
+                                 type="IDENTIFIABLE">
+                            <a:a name="IMPORTER_INFO" value="@REC"/>
+                            <d:var name="CanControllerFdBaudRate"
+                                   type="INTEGER" value="5000">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerPropSeg" type="INTEGER"
+                                   value="3">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerSeg1" type="INTEGER"
+                                   value="3">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerSeg2" type="INTEGER"
+                                   value="1">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:var name="CanControllerSyncJumpWidth"
+                                   type="INTEGER" value="1">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                            <d:lst
+                                   name="CanControllerTrcvDelayCompensationOffset">
+                              <d:var type="INTEGER" value="180">
+                                <a:a name="IMPORTER_INFO" value="@REC"/>
+                              </d:var>
+                            </d:lst>
+                            <d:var name="CanControllerTxBitRateSwitch"
+                                   type="BOOLEAN" value="true">
+                              <a:a name="IMPORTER_INFO" value="@REC"/>
+                            </d:var>
+                          </d:ctr>
+                        </d:lst>
+                      </d:ctr>
+                    </d:lst>
+                    <d:ctr name="CanTTController" type="IDENTIFIABLE">
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:var name="CanTTControllerApplWatchdogLimit"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerCycleCountMax" type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerExpectedTxTrigger"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerExternalClockSynchronisation"
+                             type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerGlobalTimeFiltering"
+                             type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerInitialRefOffset"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerInterruptEnable"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerLevel2" type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerNTUConfig" type="FLOAT" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerOperationMode"
+                             type="ENUMERATION" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerSyncDeviation" type="FLOAT" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTURRestore" type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTimeMaster" type="BOOLEAN" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTimeMasterPriority"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerTxEnableWindowLength"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerWatchTriggerGapTimeMark"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTControllerWatchTriggerTimeMark"
+                             type="INTEGER" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                      <d:var name="CanTTIRQProcessing" type="ENUMERATION" >
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:ctr>
+                  </d:ctr>
+                </d:lst>
+                <d:lst name="CanHardwareObject" type="MAP">
+                  <d:ctr name="CanHardwareObject_0" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="FULL">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="true">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="1">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="TRANSMIT">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP"/>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                  <d:ctr name="CanHardwareObject_1" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="FULL">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="1">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="TRANSMIT">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP"/>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                  <d:ctr name="CanHardwareObject_2" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="FULL">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="true">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="3">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="2">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="2">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="TRANSMIT">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP"/>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                  <d:ctr name="CanHardwareObject_3" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="FULL">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="5">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="3">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="5">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="TRANSMIT">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP"/>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                  <d:ctr name="CanHardwareObject_4" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="BASIC">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="true">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="1">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="4">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="RECEIVE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable"/>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP">
+                      <d:ctr name="CanHwFilter_0" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanHwFilterCode" type="INTEGER" value="193">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanHwFilterMask" type="INTEGER"
+                               value="4294967295">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:lst>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                  <d:ctr name="CanHardwareObject_5" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="BASIC">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="1">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="5">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="RECEIVE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable"/>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP">
+                      <d:ctr name="CanHwFilter_0" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanHwFilterCode" type="INTEGER" value="194">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanHwFilterMask" type="INTEGER"
+                               value="4294967295">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CanHwFilter_1" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanHwFilterCode" type="INTEGER" value="195">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanHwFilterMask" type="INTEGER"
+                               value="4294967295">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:lst>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                  <d:ctr name="CanHardwareObject_6" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="BASIC">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="true">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="1">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="6">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="2">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="RECEIVE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable"/>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP">
+                      <d:ctr name="CanHwFilter_0" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanHwFilterCode" type="INTEGER" value="190">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanHwFilterMask" type="INTEGER"
+                               value="4294967295">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CanHwFilter_1" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanHwFilterCode" type="INTEGER" value="193">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanHwFilterMask" type="INTEGER"
+                               value="4294967295">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:lst>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                  <d:ctr name="CanHardwareObject_7" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="CanFdPaddingValue">
+                      <d:var type="INTEGER" value="204">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHandleType" type="ENUMERATION" value="FULL">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanHardwareObjectUsesPolling">
+                      <d:var type="BOOLEAN" value="false">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                      </d:var>
+                    </d:lst>
+                    <d:var name="CanHwObjectCount" type="INTEGER" value="5">
+                      <a:a name="ENABLE" value="true"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanIdType" type="ENUMERATION" value="MIXED">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectId" type="INTEGER" value="7">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanHwHandle" type="INTEGER" value="5">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="CanObjectType" type="ENUMERATION"
+                           value="RECEIVE">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="CanTriggerTransmitEnable"/>
+                    <d:ref name="CanControllerRef" type="REFERENCE"
+                           value="ASPath:/Can/Can/CanConfigSet/CanController_1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:ref name="CanMainFunctionRWPeriodRef" type="REFERENCE" >
+                      <a:a name="ENABLE" value="false"/>
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="CanHwFilter" type="MAP">
+                      <d:ctr name="CanHwFilter_0" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanHwFilterCode" type="INTEGER" value="192">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanHwFilterMask" type="INTEGER"
+                               value="4294967295">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                      <d:ctr name="CanHwFilter_1" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:var name="CanHwFilterCode" type="INTEGER" value="64">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                        <d:var name="CanHwFilterMask" type="INTEGER"
+                               value="4294967295">
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:var>
+                      </d:ctr>
+                    </d:lst>
+                    <d:lst name="CanTTHardwareObjectTrigger" type="MAP"/>
+                  </d:ctr>
+                </d:lst>
+                <d:ctr name="CanIcom" type="IDENTIFIABLE">
+                  <a:a name="ENABLE" value="false"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                  <d:lst name="CanIcomConfig" type="MAP"/>
+                </d:ctr>
+              </d:ctr>
+              <d:ctr name="CanGeneral" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CanDevErrorDetect" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanHardwareCancellation" type="BOOLEAN"
+                       value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanIdenticalIdCancellation" type="BOOLEAN"
+                       value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanIndex" type="INTEGER" value="0">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:lst name="CanLPduReceiveCalloutFunction"/>
+                <d:var name="CanMainFunctionBusoffPeriod" type="FLOAT"
+                       value="10.0">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                  <a:a name="ENABLE" value="true"/>
+                </d:var>
+                <d:var name="CanMainFunctionModePeriod" type="FLOAT"
+                       value="10.0">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanMainFunctionReadPeriod" type="FLOAT"
+                       value="0.001">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanMainFunctionWritePeriod" type="FLOAT"
+                       value="0.001">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanMainFunctionWakeupPeriod" type="FLOAT"
+                       value="10.0">
+                  <a:a name="ENABLE" value="false"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanMultiplexedTransmission" type="BOOLEAN"
+                       value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanPublicIcomSupport" type="BOOLEAN" value="false">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanSetBaudrateApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanTimeoutDuration" type="FLOAT" value="10.0">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanVersionInfoApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanDeInitApi" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:ref name="CanOsCounterRef" type="REFERENCE"
+                       value="ASPath:/Os/Os/OsCounter_0">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+                <d:ref name="CanSupportTTCANRef" type="REFERENCE" >
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+                <d:ctr name="CanIcomGeneral" type="IDENTIFIABLE">
+                  <a:a name="ENABLE" value="false"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                  <d:var name="CanIcomLevel" type="ENUMERATION"
+                         value="CAN_ICOM_LEVEL_ONE">
+                    <a:a name="ENABLE" value="false"/>
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                  </d:var>
+                  <d:var name="CanIcomVariant" type="ENUMERATION"
+                         value="CAN_ICOM_VARIANT_NONE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                  </d:var>
+                </d:ctr>
+                <d:var name="CanMaxNrOfTxObjects" type="INTEGER" value="3">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanTypeofInterruptFunction" type="ENUMERATION"
+                       value="CAN_ISR_CAT1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="CanLoopBackTest_Enable" type="BOOLEAN" value="true">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:lst name="CanMainFunctionRWPeriods" type="MAP"/>
+                <d:var name="CanDefaultOSCounterId" type="INTEGER" value="1">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:ctr name="CanPublishedInformation" type="IDENTIFIABLE">
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:var name="CanDeviceVariant" type="ENUMERATION"
+                       value="AM261x">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+              </d:ctr>
+              <d:ctr name="CanDemEventParameterRefs" type="IDENTIFIABLE">
+                <a:a name="ENABLE" value="true"/>
+                <a:a name="IMPORTER_INFO" value="@REC"/>
+                <d:ref name="CAN_E_HARDWARE_ERROR" type="REFERENCE"
+                       value="ASPath:/Dem/Dem/DemConfigSet/CAN_E_HARDWARE_ERROR">
+                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:ref>
+              </d:ctr>
+            </d:ctr>
+          </d:chc>
+        </d:lst>
+      </d:ctr>
+    </d:lst>
+  </d:ctr>
+
+</datamodel>

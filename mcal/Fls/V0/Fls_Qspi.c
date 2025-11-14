@@ -929,7 +929,7 @@ Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, QSPI_CmdParams *rdParams)
         }
 
         /* Send the command */
-        cfgAccess.buf   = (uint8 *)&rdParams->cmd;
+        cfgAccess.buf   = (void *)&rdParams->cmd;
         cfgAccess.count = QSPI_CMD_LEN;
         cfgAccess.wlen  = wrdlen;
         /* formulate the command */
@@ -946,7 +946,7 @@ Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, QSPI_CmdParams *rdParams)
         /* Send address associated with command, if any */
         if (rdParams->cmdAddr != FLS_QSPI_CMD_INVALID_ADDR)
         {
-            cfgAccess.buf   = (uint8 *)&rdParams->cmdAddr;
+            cfgAccess.buf   = (void *)&rdParams->cmdAddr;
             cfgAccess.count = QSPI_ADDR_LEN;
             /* Number of address Bytes to bits. */
             cfgAccess.wlen = (uint32)rdParams->numAddrBytes << (uint32)3U;
@@ -958,7 +958,7 @@ Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, QSPI_CmdParams *rdParams)
         /* Send data associated with command, if any */
         if (rdParams->DataLen > rdData_Len)
         {
-            cfgAccess.buf   = (uint8 *)rdParams->rxDataBuf;
+            cfgAccess.buf   = (void *)rdParams->rxDataBuf;
             cfgAccess.count = rdParams->DataLen / ((uint32)8 >> (uint32)3U);
             cfgAccess.wlen  = wrdlen;
             /* Update the command register value. */
@@ -1011,7 +1011,7 @@ Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, QSPI_CmdParams *rdParam
         }
 
         /* Send the command */
-        cfgAccess.buf   = (uint8 *)&rdParams->cmd;
+        cfgAccess.buf   = (void *)&rdParams->cmd;
         cfgAccess.count = QSPI_CMD_LEN;
         cfgAccess.wlen  = wrdlen;
         /* formulate the command */
@@ -1028,7 +1028,7 @@ Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, QSPI_CmdParams *rdParam
         /* Send address associated with command, if any */
         if (rdParams->cmdAddr != FLS_QSPI_CMD_INVALID_ADDR)
         {
-            cfgAccess.buf   = (uint8 *)&rdParams->cmdAddr;
+            cfgAccess.buf   = (void *)&rdParams->cmdAddr;
             cfgAccess.count = QSPI_ADDR_LEN;
             /* Number of address Bytes to bits. */
             cfgAccess.wlen = (uint32)rdParams->numAddrBytes << (uint32)3U;
@@ -1040,7 +1040,7 @@ Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, QSPI_CmdParams *rdParam
         /* Send dummy bytes associated with the read command */
         if (dummyBytes > (uint8)0U)
         {
-            cfgAccess.buf   = (uint8 *)&rdParams->cmd;
+            cfgAccess.buf   = (void *)&rdParams->cmd;
             cfgAccess.count = dummyBytes;
             cfgAccess.wlen  = dummyBytes * wrdlen;
             HW_SET_FIELD32(cfgAccess.cmdRegVal, QSPI_SPI_CMD_REG_WLEN, (cfgAccess.wlen - (uint32)1));
@@ -1099,7 +1099,7 @@ Std_ReturnType Fls_Qspi_WriteCmd(QSPI_Handle handle, QSPI_CmdParams *wrParams)
         }
 
         /* Send the command */
-        cfgAccess.buf   = (uint8 *)&wrParams->cmd;
+        cfgAccess.buf   = (void *)&wrParams->cmd;
         cfgAccess.count = QSPI_CMD_LEN;
         cfgAccess.wlen  = wrdlen;
         /* formulate the command */
@@ -1116,7 +1116,7 @@ Std_ReturnType Fls_Qspi_WriteCmd(QSPI_Handle handle, QSPI_CmdParams *wrParams)
         /* Send address associated with command, if any */
         if (wrParams->cmdAddr != FLS_QSPI_CMD_INVALID_ADDR)
         {
-            cfgAccess.buf   = (uint8 *)&wrParams->cmdAddr;
+            cfgAccess.buf   = (void *)&wrParams->cmdAddr;
             cfgAccess.count = QSPI_ADDR_LEN;
             /* Number of address Bytes to bits. */
             cfgAccess.wlen = (uint32)wrParams->numAddrBytes << (uint32)3U;

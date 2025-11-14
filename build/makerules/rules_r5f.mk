@@ -103,6 +103,11 @@ CFLAGS_INTERNAL += -DJENKINS_TEST_AUTOMATION
 endif
 
 CFLAGS_INTERNAL += -DCLANG
+
+ifeq ($(MCAL_DYNAMIC_BUILD), TRUE)
+CFLAGS_INTERNAL += -fprofile-instr-generate -fcoverage-mapping -fmcdc
+endif
+
 # -v
 
 # Following 'if...' block is for an application; to add a #define for each
@@ -188,7 +193,7 @@ endif
 #BootImage related paths and dependencies
 
 ifeq ($(OS),Windows_NT)
-    CCS_ECLIPSE=$(CCS_PATH)/eclipse/eclipsec
+    CCS_ECLIPSE=$(CCS_PATH)/eclipse/ccs-server-cli
     CYGWIN_PATH?=$(CCS_PATH)/utils/cygwin
     MKDIR=$(CYGWIN_PATH)/mkdir -p
     RMDIR=$(CYGWIN_PATH)/rm -rf
@@ -201,7 +206,7 @@ ifeq ($(OS),Windows_NT)
 else
     UNAME_S := $(shell uname -s)
     ifeq ($(UNAME_S),Linux)
-        export CCS_ECLIPSE=$(CCS_PATH)/eclipse/eclipse
+        export CCS_ECLIPSE=$(CCS_PATH)/eclipse/ccs-server-cli.sh
         export MKDIR=mkdir -p
         export RMDIR=rm -rf
         export RM=rm -f

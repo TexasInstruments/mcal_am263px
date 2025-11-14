@@ -12,7 +12,7 @@
  * ==================================================================== */
 
 /******************************************************************************
-    Project         : Cdd_I2c_Demo_Cfg
+    Project         : Mcal_Demo_Cfg
     SW Ver          : 11.0.0
     Module Rele Ver : AUTOSAR 4.3.1 0
 
@@ -27,7 +27,7 @@
  */
 
 /**
- *  \defgroup \addtogroup CDD_I2C I2C Configuration Header file
+ *  \addtogroup CDD_I2C I2C Configuration Header file
  *
  *  This files defines I2C configuration structures
  *  @{
@@ -69,6 +69,9 @@ extern "C" {
  *   Build variants.(i.e Pre Compile and Post Build)
  */
 #define CDD_I2C_PRE_COMPILE_VARIANT     (STD_ON)
+/** \brief Precompile variant macro */
+#define CDD_I2C_CONFIG_PC               Cdd_I2c_Config
+
 
 /** \brief Enable/disable Interrupts */
 #define CDD_I2C_POLLING_MODE            (STD_OFF)
@@ -227,6 +230,7 @@ extern "C" {
 /*                      Exported Object Declarations                          */
 /* ========================================================================== */
 
+extern CONST(struct Cdd_I2c_ConfigTag, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config;
 extern CONST(uint32, CDD_I2C_CONST) Cdd_I2c_HwUnitBaseAddr[CDD_I2C_HW_UNIT_MAX];
 
 /* ========================================================================== */

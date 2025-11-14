@@ -1,8 +1,3 @@
-ETH_PATH=$(mcal_PATH)/Eth
-
-INCDIR += $(ETH_PATH)/include $(ETH_PATH)/src/cpsw/include $(ETH_PATH)/src/hw
-
+INCDIR += $(mcal_PATH)/Eth/include $(mcal_PATH)/Eth/src/cpsw/include $(mcal_PATH)/Eth/src/hw
 # SOC specific files
-ifeq ($(SOC), $(filter $(SOC), am263 am263px am261))
-  INCDIR += $(ETH_PATH)/V0
-endif
+INCDIR += $(mcal_PATH)/Eth/V0

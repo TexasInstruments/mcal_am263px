@@ -53,8 +53,10 @@ static void           Cdd_I2c_ProcessChCompletion(Cdd_I2c_DriverObjType *drvObj,
 
 static void Cdd_I2c_CheckAndSetDrvState(Cdd_I2c_DriverObjType *drvObj);
 
+#if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
 static Std_ReturnType Cdd_I2c_CheckHwConfig(const Cdd_I2c_ConfigType *configPtr);
 static Std_ReturnType Cdd_I2c_CheckSeqConfig(const Cdd_I2c_SequenceConfigType *seqCfg);
+#endif
 
 /* ========================================================================== */
 /*                        Local Object Definitions                            */
@@ -176,7 +178,7 @@ Std_ReturnType Cdd_I2c_CheckConfig(const Cdd_I2c_ConfigType *configPtr)
 }
 #endif
 
-void Cdd_I2c_ResetDrvObj(Cdd_I2c_DriverObjType *drvObj)
+void Cdd_I2c_InitDrvObj(Cdd_I2c_DriverObjType *drvObj)
 {
     for (uint32 hwIdx = 0U; hwIdx < CDD_I2C_MAX_HW_UNIT; hwIdx++)
     {
@@ -223,6 +225,17 @@ void Cdd_I2c_ResetDrvObj(Cdd_I2c_DriverObjType *drvObj)
         chObj->doBusyCheck    = TRUE;
         chObj->state          = CDD_I2C_STATE_INIT;
         Cdd_I2c_UtilsInitNodeObject(&chObj->nodeObj);
+    }
+
+    return;
+}
+
+void Cdd_I2c_DeInitDrvObj(Cdd_I2c_DriverObjType *drvObj)
+{
+    for (uint32 hwIdx = 0U; hwIdx < CDD_I2C_MAX_HW_UNIT; hwIdx++)
+    {
+        Cdd_I2c_HwUnitObjType *hwUnitObj = &drvObj->hwUnitObj[hwIdx];
+        Cdd_I2c_UtilsDeInitLinkList(&hwUnitObj->llobj);
     }
 
     return;
@@ -330,17 +343,13 @@ void Cdd_I2c_ProcessEvents(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitObjType 
     if (NULL_PTR != chObj)
     {
 #if (STD_ON == CDD_I2C_POLLING_MODE)
-        chResult = chObj->chResult;
-        if (CDD_I2C_CH_RESULT_PENDING == chResult)
+        if (CDD_I2C_WRITE == chObj->chCfg->direction)
         {
-            if (CDD_I2C_WRITE == chObj->chCfg->direction)
-            {
-                chResult = Cdd_I2c_HwTxPollingContinue(chObj);
-            }
-            else
-            {
-                chResult = Cdd_I2c_HwRxPollingContinue(chObj);
-            }
+            chResult = Cdd_I2c_HwTxPollingContinue(chObj);
+        }
+        else
+        {
+            chResult = Cdd_I2c_HwRxPollingContinue(chObj);
         }
 #else
         /* Continue the transfer in interrupt mode */
@@ -490,11 +499,6 @@ static Std_ReturnType Cdd_I2c_StartChCheck(const Cdd_I2c_ChObjType *chObj)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
 
-    if (CDD_I2C_CH_RESULT_PENDING == chObj->chResult)
-    {
-        /* the sequence is rejected due to common used channels already in pending state */
-        retVal = (Std_ReturnType)E_NOT_OK;
-    }
     if ((CDD_I2C_WRITE == chObj->chCfg->direction) && (NULL_PTR == chObj->txBufPtr))
     {
         /* Invalid write buffer pointer */

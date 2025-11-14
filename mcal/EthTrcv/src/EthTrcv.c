@@ -162,6 +162,7 @@ FUNC(void, ETHTRCV_CODE) EthTrcv_Init(P2CONST(EthTrcv_ConfigType, AUTOMATIC, ETH
     const EthTrcv_ConfigType *ConfigPtr = (EthTrcv_ConfigType *)NULL_PTR;
     uint8                     TrcvIdx   = 0;
     Std_ReturnType            retVal    = (Std_ReturnType)E_OK;
+    uint32                    ctrlIdx   = 0U;
 
 #if (STD_ON == ETHTRCV_PRE_COMPILE_VARIANT)
     if (NULL_PTR == CfgPtr)
@@ -189,16 +190,19 @@ FUNC(void, ETHTRCV_CODE) EthTrcv_Init(P2CONST(EthTrcv_ConfigType, AUTOMATIC, ETH
     else
 #endif /* #if (STD_ON == ETHTRCV_DEV_ERROR_DETECT) */
     {
-        TrcvIdx = ConfigPtr->trcvIdx;
+        for (ctrlIdx = 0U; ctrlIdx < ETHTRCV_MAX_CONTROLLER; ctrlIdx++)
+        {
+            TrcvIdx = ConfigPtr->pController[ctrlIdx]->trcvIdx;
 
 #if (STD_ON == ETHTRCV_DEV_ERROR_DETECT)
-        if (TrcvIdx >= ETHTRCV_MAX_CONTROLLER)
-        {
-            /* EthTrcv TrcvIdx is not valid */
-            (void)Det_ReportError(ETHTRCV_MODULE_ID, ETHTRCV_INSTANCE_ID, ETHTRCV_INIT_ID, ETHTRCV_E_INV_TRCV_IDX);
-            retVal = (Std_ReturnType)E_NOT_OK;
-        }
+            if (TrcvIdx >= ETHTRCV_MAX_CONTROLLER)
+            {
+                /* EthTrcv TrcvIdx is not valid */
+                (void)Det_ReportError(ETHTRCV_MODULE_ID, ETHTRCV_INSTANCE_ID, ETHTRCV_INIT_ID, ETHTRCV_E_INV_TRCV_IDX);
+                retVal = (Std_ReturnType)E_NOT_OK;
+            }
 #endif /* #if (STD_ON == ETHTRCV_DEV_ERROR_DETECT) */
+        }
     }
     if (((Std_ReturnType)E_NOT_OK) != retVal)
     {
@@ -206,14 +210,19 @@ FUNC(void, ETHTRCV_CODE) EthTrcv_Init(P2CONST(EthTrcv_ConfigType, AUTOMATIC, ETH
         {
             /* Reset driver object */
             EthTrcv_resetDrvObj(&EthTrcv_DrvObj);
-            /* Initialize driver & copy configuration into driver object */
-            EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].ctrlMode = ETHTRCV_MODE_DOWN;
-            /* Copy controller config */
-            EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].trcvIdx = TrcvIdx;
-            /* Copy port configuration into driver object */
-            (void)(void)memcpy(&EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].ethTrcvCfg, ConfigPtr,
-                               sizeof(EthTrcv_ConfigType));
-            retVal = EthTrcv_Initilization(ConfigPtr->trcvIdx);
+            for (ctrlIdx = 0U; ctrlIdx < ETHTRCV_MAX_CONTROLLER; ctrlIdx++)
+            {
+                TrcvIdx = ConfigPtr->pController[ctrlIdx]->trcvIdx;
+
+                /* Initialize driver & copy configuration into driver object */
+                EthTrcv_DrvObj.ethTrcvCtrlObj[ctrlIdx].ctrlMode = ETHTRCV_MODE_DOWN;
+                /* Copy controller config */
+                EthTrcv_DrvObj.ethTrcvCtrlObj[ctrlIdx].trcvIdx = TrcvIdx;
+                /* Copy port configuration into driver object */
+                (void)(void)memcpy(&EthTrcv_DrvObj.ethTrcvCtrlObj[ctrlIdx].ethTrcvCfg, ConfigPtr->pController[ctrlIdx],
+                                   sizeof(EthTrcv_ControllerConfigType));
+                retVal = EthTrcv_Initilization(ctrlIdx);
+            }
             if (((Std_ReturnType)E_NOT_OK) != retVal)
             {
                 /* Change driver state to initialized */
@@ -222,11 +231,16 @@ FUNC(void, ETHTRCV_CODE) EthTrcv_Init(P2CONST(EthTrcv_ConfigType, AUTOMATIC, ETH
         }
         else
         {
-            /* Driver already initialized, just copy configuration Controller index */
-            EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].trcvIdx  = TrcvIdx;
-            EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].ctrlMode = ETHTRCV_MODE_DOWN;
-            /* Copy port configuration into driver object */
-            (void)memcpy(&EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].ethTrcvCfg, ConfigPtr, sizeof(EthTrcv_ConfigType));
+            for (ctrlIdx = 0U; ctrlIdx < ETHTRCV_MAX_CONTROLLER; ctrlIdx++)
+            {
+                /* Driver already initialized, just copy configuration Controller index */
+                EthTrcv_DrvObj.ethTrcvCtrlObj[ctrlIdx].trcvIdx  = ConfigPtr->pController[ctrlIdx]->trcvIdx;
+                EthTrcv_DrvObj.ethTrcvCtrlObj[ctrlIdx].ctrlMode = ETHTRCV_MODE_DOWN;
+
+                /* Copy port configuration into driver object */
+                (void)memcpy(&EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].ethTrcvCfg, ConfigPtr->pController[ctrlIdx],
+                             sizeof(EthTrcv_ControllerConfigType));
+            }
         }
     }
 }
@@ -398,9 +412,9 @@ EthTrcv_GetTransceiverMode(uint8 TrcvIdx, EthTrcv_ModeType *TrcvModePtr)
 #if (STD_ON == ETHTRCV_STARTAUTONEGOTIATION_API)
 FUNC(Std_ReturnType, ETHTRCV_CODE) EthTrcv_StartAutoNegotiation(uint8 TrcvIdx)
 {
-    Std_ReturnType       retVal      = (Std_ReturnType)E_NOT_OK;
-    EthTrcv_ConfigType  *pEthTrcvCfg = (EthTrcv_ConfigType *)NULL_PTR;
-    EthTrcv_CtrlObjType *pEthTrcvObj = (EthTrcv_CtrlObjType *)NULL_PTR;
+    Std_ReturnType                retVal      = (Std_ReturnType)E_NOT_OK;
+    EthTrcv_ControllerConfigType *pEthTrcvCfg = (EthTrcv_ControllerConfigType *)NULL_PTR;
+    EthTrcv_CtrlObjType          *pEthTrcvObj = (EthTrcv_CtrlObjType *)NULL_PTR;
 #if (STD_ON == ETHTRCV_DEV_ERROR_DETECT)
     if (ETHTRCV_STATE_INIT != EthTrcv_DrvStatus)
     {

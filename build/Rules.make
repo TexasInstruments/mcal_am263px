@@ -49,32 +49,42 @@ export BUILD_OS_TYPE ?= baremetal
 
 ifeq ($(OS),Windows_NT)
   # Paths for windows machine
-    CCS_PATH := C:/ti/ccs1281/ccs
+    CCS_PATH := C:/ti/ccs2030/ccs
     export EB_PATH?=C:/EB
 else
-    CCS_PATH := /opt/ti/ccs1281/ccs
+    CCS_PATH := /opt/ti/ccs2030/ccs
     export EB_PATH?=/opt/EB
 endif
 
+export TOOLCHAIN_R5_VERSION=ti-cgt-armllvm_4.0.3.LTS
 ifeq ($(OS),Windows_NT)
   # Paths for windows machine
   ifeq ($(COMPILER),TI_COMPILER)
     TOOLCHAIN_PATH_R5 := $(CCS_PATH)/tools/compiler/ti-cgt-arm_20.2.7.LTS
   else
-    TOOLCHAIN_PATH_R5 := C:/ti/ti-cgt-armllvm_4.0.1.LTS
+    TOOLCHAIN_PATH_R5 := $(CCS_PATH)/tools/compiler/$(TOOLCHAIN_R5_VERSION)
   endif
 else
   #Paths for linux machine
   ifeq ($(COMPILER),TI_COMPILER)
     TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-arm_18.12.2.LTS
   else
-    TOOLCHAIN_PATH_R5 := /opt/ti/ti-cgt-armllvm_4.0.1.LTS
+    TOOLCHAIN_PATH_R5 := $(CCS_PATH)/tools/compiler/$(TOOLCHAIN_R5_VERSION)
   endif
 endif
 
-mcal_PATH := $(abspath ..)/$(mcal_RELPATH)
-mcal_test_PATH := $(abspath ..)/$(mcal_test_RELPATH)
-mcal_demo_PATH := $(abspath ..)/$(mcal_demo_RELPATH)
+ifeq ($(ROOTDIR), )
+  ROOTDIR := $(abspath ..)
+  export ROOTDIR
+endif
+
+mcal_PATH := $(ROOTDIR)/$(mcal_RELPATH)
+export mcal_PATH
+mcal_test_PATH := $(ROOTDIR)/$(mcal_test_RELPATH)
+export mcal_test_PATH
+mcal_demo_PATH := $(ROOTDIR)/$(mcal_demo_RELPATH)
+export mcal_demo_PATH
+
 
 ifeq ($(BUILD_OS_TYPE),baremetal)
   export autosarConfigSrc_PATH ?= $(mcal_PATH)/examples_config
@@ -135,8 +145,6 @@ else
   GMAKE_DIR := $(CCS_PATH)/utils/bin
 endif
 
-ROOTDIR := $(abspath ..)
-
 # Default Profile
 # Supported Values: debug | release | prod_release
 ifeq ($(PROFILE), )
@@ -192,10 +200,6 @@ export PROFILE
 export PROFILE_$(CORE)
 export TOOLCHAIN_PATH_R5
 export mcal_RELPATH
-export mcal_PATH
-export mcal_test_PATH
-export mcal_demo_PATH
-export ROOTDIR
 export UTILS_INSTALL_DIR
 export GMAKE_DIR
 export KW_BUILD
