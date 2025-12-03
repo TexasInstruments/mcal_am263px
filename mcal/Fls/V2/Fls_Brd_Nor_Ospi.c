@@ -71,9 +71,15 @@
 #include "stdint.h"
 #include "string.h"
 #include "Fls_Cbk.h"
-#include "hw_types.h"
+#define FLS_START_SEC_CODE
+#include "Fls_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define FLS_STOP_SEC_CODE
+#include "Fls_MemMap.h"
 #include "Fls_Ospi.h"
 #include "Fls_Brd_Nor.h"
+
+#include "Fls_Ospi_Phy.h"
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -87,11 +93,9 @@
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Fls_MemMap.h"
-
 /* Compare and BlankCheck Arrays to store data to compare */
 VAR(uint8, FLS_VAR_NO_INIT) Fls_BlankCheckRxDataBuf[FLS_BLANKCHECK_SIZE_MAX];
 VAR(uint8, FLS_VAR_NO_INIT) Fls_CompareRxDataBuf[FLS_BLANKCHECK_SIZE_MAX];
-
 #define FLS_STOP_SEC_VAR_NO_INIT_8
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
@@ -313,6 +317,12 @@ Std_ReturnType Nor_OspiRead(OSPI_Handle handle, uint32 offset, uint8 *buf, uint3
     {
         retVal = E_NOT_OK;
     }
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+    if (retVal == E_OK)
+    {
+        retVal = Fls_PhyEnable();
+    }
+#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
     if (retVal == E_OK)
     {
         OSPI_Transaction transaction;
@@ -329,6 +339,9 @@ Std_ReturnType Nor_OspiRead(OSPI_Handle handle, uint32 offset, uint8 *buf, uint3
         {
             retVal = Fls_Ospi_readIndirect(handle, &transaction);
         }
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+        Fls_PhyDisable();
+#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
     }
 
     return retVal;

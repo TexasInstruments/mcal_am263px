@@ -95,6 +95,11 @@ extern "C" {
 /* @} */
 
 
+/** \brief LIN ID used to transmit a header instead of a wakeup signal. 
+ *   The hardware enters an undefined state when a standard wakeup signal is transmitted. 
+ *   To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which 
+ *   conforms to the LIN 2.1 specification **/
+#define LIN_WAKEUP_ID                    (0x3FU)
 
 /**
  *  \name Pre-Compile Switches for API Services
@@ -159,7 +164,7 @@ extern "C" {
 //*****************************************************************************
 
 
-#define LIN_WAKEUP_SOURCE_0           EcuMConf_EcuMWakeupSource_LIN1
+#define LIN_WAKEUP_SOURCE_0               (EcuM_WakeupSourceType)(0x00000020U)
 
 
 
@@ -221,6 +226,8 @@ typedef struct Lin_ControllerTag
 //*****************************************************************************
 typedef struct Lin_BaudrateConfigTag
 {
+   /** \brief Baud rate value */
+   uint32 BaudRate;
    /** \brief Prescaler */
    uint32 Prescalar;
    /** \brief Fractional divider */

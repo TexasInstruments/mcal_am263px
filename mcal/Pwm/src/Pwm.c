@@ -78,7 +78,6 @@
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
-
 /*
  *Design: MCAL-13122
  */
@@ -87,12 +86,9 @@
 #if (STD_ON == PWM_DEV_ERROR_DETECT)
 #include "Det.h"
 #endif
-
 #include "Pwm_Irq.h"
 #include "Pwm_Priv.h"
 
-/* There are static inline functions in hw_types.h file. Map them as well */
-#include "hw_types.h"
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */

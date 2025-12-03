@@ -39,14 +39,12 @@
 /*LDRA_INSPECTED 338 S : MISRAC_2012_R.20.1
  * "Reason - Required to comply with AUTOSAR memmap spec " */
 #include "Gpt_MemMap.h"
-
 /*The Array of pointers to the call notification Functions */
 CONST(Gpt_IsrRefType, GPT_CONST)
 Gpt_IsrNotifyFunctions[CHANNEL_MODES] = {
     Gpt_NotifContIsr,
     Gpt_NotifSingleIsr,
 };
-
 #define GPT_STOP_SEC_CONST_32
 /*LDRA_INSPECTED 338 S : MISRAC_2012_R.20.1
  * "Reason - Required to comply with AUTOSAR memmap spec " */
@@ -56,21 +54,22 @@ Gpt_IsrNotifyFunctions[CHANNEL_MODES] = {
 /*                            Global Variables                                */
 /* ========================================================================== */
 
-static VAR(uint16, GPT_DATA) Gpt_CounterCfg[GPT_RTI_MODULES][GPT_RTI_COUNTERS];
-
 extern VAR(Gpt_ChannelStateType, GPT_DATA) Gpt_ChannelState[GPT_RTI_MAX];
 extern P2CONST(Gpt_ConfigType, GPT_DATA, GPT_PBCFG) Gpt_Config_pt;
 
 extern VAR(uint16, GPT_DATA) Gpt_ChConfig_map[GPT_RTI_MAX];
 extern VAR(uint32, GPT_DATA) Gpt_ChStartTime_map[GPT_RTI_MAX];
+
 #define GPT_START_SEC_VAR_INIT_UNSPECIFIED
-/*LDRA_INSPECTED 338 S : MISRAC_2012_R.20.1
- * "Reason - Required to comply with AUTOSAR memmap spec " */
-/*LDRA_INSPECTED 243 S : MISRAC_2012_D.4.10
- * "Reason - Memmap file cannot have include guard w.r.o autosar spec " */
 #include "Gpt_MemMap.h"
 static VAR(Gpt_NotifyType, GPT_DATA) Gpt_ChannelNotifyFunctions[GPT_RTI_MAX] = {(Gpt_NotifyType)NULL_PTR};
 #define GPT_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Gpt_MemMap.h"
+
+#define GPT_START_SEC_VAR_NO_INIT_16
+#include "Gpt_MemMap.h"
+static VAR(uint16, GPT_DATA) Gpt_CounterCfg[GPT_RTI_MODULES][GPT_RTI_COUNTERS];
+#define GPT_STOP_SEC_VAR_NO_INIT_16
 #include "Gpt_MemMap.h"
 
 /* ========================================================================== */

@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
+  <AR-PACKAGES>
+    <AR-PACKAGE UUID="970e63b4-7332-4f9e-8178-55a1f57c25ed">
+      <SHORT-NAME>Cdd_Dma_TI_AM261x</SHORT-NAME>
+      <ELEMENTS>
+        <BSW-MODULE-DESCRIPTION UUID="3f3d3d3b-114b-4a30-8672-d98b92f82e05">
+          <SHORT-NAME>Cdd_Dma</SHORT-NAME>
+          <CATEGORY>BSW_MODULE</CATEGORY>
+          <EXPECTED-ENTRYS>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/CDD_EDMA_lld_transferCompletionMasterIsrFxn</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_ChainChannel</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>            
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_CbkRegister</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_DeInit</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_DisableTransferRegion</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_EnableTransferRegion</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetInitStatus</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetParam</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetStatus</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetVersionInfo</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_Init</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_LinkChannel</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_ParamSet</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            <BSW-MODULE-ENTRY-REF-CONDITIONAL>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_RegisterReadback</BSW-MODULE-ENTRY-REF>
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+          </EXPECTED-ENTRYS>
+          <MODULE-ID>255</MODULE-ID>
+          <BSW-MODULE-DEPENDENCYS>
+            <BSW-MODULE-DEPENDENCY UUID="217925af-5571-431f-be29-a639094793da">
+              <SHORT-NAME>Det</SHORT-NAME>
+              <TARGET-MODULE-ID>15</TARGET-MODULE-ID>
+              <TARGET-MODULE-REFS>
+              <BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+                <BSW-MODULE-DESCRIPTION-REF DEST="BSW-MODULE-DESCRIPTION">/AUTOSAR_Det/Det</BSW-MODULE-DESCRIPTION-REF>
+              </BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
+              </TARGET-MODULE-REFS>
+            </BSW-MODULE-DEPENDENCY>
+          </BSW-MODULE-DEPENDENCYS>
+          <INTERNAL-BEHAVIORS>
+            <BSW-INTERNAL-BEHAVIOR UUID="9c3743e4-4468-4ae3-9189-4cfee5ca47a7">
+              <SHORT-NAME>Cdd_Dma_Behavior</SHORT-NAME>
+              <EXCLUSIVE-AREAS>
+                <EXCLUSIVE-AREA UUID="c82fb8cc-1044-4a0a-98de-40eb4a950b2b">
+                  <SHORT-NAME>DMA_EXCLUSIVE_AREA_0</SHORT-NAME>
+                </EXCLUSIVE-AREA>
+              </EXCLUSIVE-AREAS>
+              <ENTITYS>
+                <BSW-INTERRUPT-ENTITY UUID="2a448b99-7f1b-427d-a633-85183e7072a2">
+                  <SHORT-NAME>CDD_EDMA_lld_transferCompletionMasterIsrFxn</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/CDD_EDMA_lld_transferCompletionMasterIsrFxn</IMPLEMENTED-ENTRY-REF>
+                  <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                </BSW-INTERRUPT-ENTITY>
+                <BSW-CALLED-ENTITY UUID="23d5675c-e588-452e-9eac-024353372abb">
+                  <SHORT-NAME>Cdd_Dma_CbkRegister</SHORT-NAME>
+                  <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Dma_TI_AM261x/Cdd_Dma/Cdd_Dma_Behavior/DMA_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                  </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_CbkRegister</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="93d51d71-b36d-4443-b261-0385c14b11d4">
+                  <SHORT-NAME>Cdd_Dma_ChainChannel</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_ChainChannel</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="3a8fd69e-e393-4e9a-b38c-ca578e10d8fb">
+                  <SHORT-NAME>Cdd_Dma_DeInit</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_DeInit</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="ec31415c-83e0-43fb-b907-5f9ebcfe89d9">
+                  <SHORT-NAME>Cdd_Dma_DisableTransferRegion</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_DisableTransferRegion</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="967c5e30-40d4-4642-ac25-ea462b158364">
+                  <SHORT-NAME>Cdd_Dma_EnableTransferRegion</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportRuntimeError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportRuntimeError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_EnableTransferRegion</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="3c4df88a-3d0d-44e6-87c5-f975c3930474">
+                  <SHORT-NAME>Cdd_Dma_GetInitStatus</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetInitStatus</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="02c2edd4-a0ec-440d-902f-5488b9e4243d">
+                  <SHORT-NAME>Cdd_Dma_GetParam</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetParam</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="80358f8f-7986-412c-8445-a96063f35e01">
+                  <SHORT-NAME>Cdd_Dma_GetStatus</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetStatus</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="73d56f43-40ab-4149-a923-657733c81685">
+                  <SHORT-NAME>Cdd_Dma_GetVersionInfo</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="a0c300dc-133a-4468-8b4e-5f814f401785">
+                  <SHORT-NAME>Cdd_Dma_Init</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_Init</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="f218a9dc-f9e9-44ff-bbe9-59c74738172a">
+                  <SHORT-NAME>Cdd_Dma_LinkChannel</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_LinkChannel</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="61a478ec-5c70-47b6-bf0e-846a9ef0c7d1">
+                  <SHORT-NAME>Cdd_Dma_ParamSet</SHORT-NAME>
+                  <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportRuntimeError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportRuntimeError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_ParamSet</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+                <BSW-CALLED-ENTITY UUID="6506d37a-1679-4bc0-9b06-240086d0d8f9">
+                  <SHORT-NAME>Cdd_Dma_RegisterReadback</SHORT-NAME>
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
+                  <CALL-POINTS>
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM261x/Cdd_Dma_ModuleEntry/Cdd_Dma_RegisterReadback</IMPLEMENTED-ENTRY-REF>
+                </BSW-CALLED-ENTITY>
+              </ENTITYS>
+            </BSW-INTERNAL-BEHAVIOR>
+          </INTERNAL-BEHAVIORS>
+        </BSW-MODULE-DESCRIPTION>
+        <BSW-IMPLEMENTATION UUID="7ce46663-f117-4508-89a9-fcae79e9802a">
+          <SHORT-NAME>Cdd_Dma_Impl</SHORT-NAME>
+          <CODE-DESCRIPTORS>
+            <CODE UUID="2f69ac4c-2dc7-4fda-bba4-ee07613875a7">
+              <SHORT-NAME>Files</SHORT-NAME>
+              <ARTIFACT-DESCRIPTORS>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>V0::Cdd_Dma_dmaxbar.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>V0::Cdd_Dma_soc.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>V0::Cdd_Dma_trig_xbar.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>V0::Cdd_Dma_xbar.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>generate::include::Cdd_Dma_Cfg.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>generate::src::Cdd_Dma_Cfg.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Cdd_Dma.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Cdd_Dma_Priv.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Cdd_Dma_cslr_tpcc.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Cdd_Dma_cslr_tptc.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Cdd_Dma_edma.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>include::Cdd_Dma_Irq.h</SHORT-LABEL>
+                  <CATEGORY>SWHDR</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::Cdd_Dma.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::Cdd_Dma_Irq.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+                <AUTOSAR-ENGINEERING-OBJECT>
+                  <SHORT-LABEL>src::Cdd_Dma_Priv.c</SHORT-LABEL>
+                  <CATEGORY>SWSRC</CATEGORY>
+                </AUTOSAR-ENGINEERING-OBJECT>
+              </ARTIFACT-DESCRIPTORS>
+            </CODE>
+          </CODE-DESCRIPTORS>
+          <COMPILERS>
+            <COMPILER UUID="0614ca53-cde8-446d-be9a-f52df917719f">
+              <SHORT-NAME>tiarmclang</SHORT-NAME>
+              <NAME>TI ARM Clang</NAME>
+              <VENDOR>Texas Instruments</VENDOR>
+              <VERSION>4.0.0</VERSION>
+            </COMPILER>
+          </COMPILERS>
+          <LINKERS>
+            <LINKER UUID="19c15e04-2618-4805-9673-0fc78eaf0d3f">
+              <SHORT-NAME>tiarmlnk</SHORT-NAME>
+              <NAME>TI ARM Clang Linker</NAME>
+              <VENDOR>Texas Instruments</VENDOR>
+              <VERSION>4.0.0</VERSION>
+            </LINKER>
+          </LINKERS>
+          <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
+          <RESOURCE-CONSUMPTION UUID="c8d4b2ca-60c7-4e3a-b069-8eeacb134ce0">
+            <SHORT-NAME>ResourceConsumption</SHORT-NAME>
+            <MEMORY-SECTIONS>
+              <MEMORY-SECTION UUID="80dc8f4e-c351-4a54-b435-c9288f90e8bf">
+                <SHORT-NAME>CDD_DMA_CODE</SHORT-NAME>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
+                <SYMBOL>CODE</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="e18f3fb0-9959-467f-b47a-9ee40a859543">
+                <SHORT-NAME>CDD_DMA_CONFIG_DATA</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONST_PBCFG</SW-ADDRMETHOD-REF>
+                <SYMBOL>CONFIG_DATA</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="796f794c-8c6b-4c03-90b1-db34335aea25">
+                <SHORT-NAME>CDD_DMA_ISR_CODE</SHORT-NAME>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
+                <SYMBOL>ISR_CODE</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="03295141-cae3-4ba9-90e7-91b35b0ab0d1">
+                <SHORT-NAME>CDD_DMA_VAR_INIT_32</SHORT-NAME>
+                <ALIGNMENT>32</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_32</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="80fe0d89-2a8f-4ee8-a3f2-ef1944fd2ef0">
+                <SHORT-NAME>CDD_DMA_VAR_INIT_8</SHORT-NAME>
+                <ALIGNMENT>8</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_8</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="ca513551-d641-479b-a6e3-69d21ff0783c">
+                <SHORT-NAME>CDD_DMA_VAR_INIT_UNSPECIFIED</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_UNSPECIFIED</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="2b2e5b7a-d27d-4c38-add5-6baae970f432">
+                <SHORT-NAME>CDD_DMA_VAR_NO_INIT_UNSPECIFIED</SHORT-NAME>
+                <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_NO_INIT_UNSPECIFIED</SYMBOL>
+              </MEMORY-SECTION>
+            </MEMORY-SECTIONS>
+          </RESOURCE-CONSUMPTION>
+          <SW-VERSION>10.01.00</SW-VERSION>
+          <VENDOR-ID>44</VENDOR-ID>
+          <AR-RELEASE-VERSION>4.3.1</AR-RELEASE-VERSION>
+          <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Cdd_Dma_TI_AM261x/Cdd_Dma/Cdd_Dma_Behavior</BEHAVIOR-REF>
+          <VENDOR-SPECIFIC-MODULE-DEF-REFS>
+            <VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/TI_AM261x/Cdd_Dma</VENDOR-SPECIFIC-MODULE-DEF-REF>
+          </VENDOR-SPECIFIC-MODULE-DEF-REFS>
+        </BSW-IMPLEMENTATION>
+      </ELEMENTS>
+      <AR-PACKAGES>
+        <AR-PACKAGE UUID="7991fd17-5e80-4d87-870c-f2335a7390a6">
+          <SHORT-NAME>Cdd_Dma_ModuleEntry</SHORT-NAME>
+          <ELEMENTS>
+            <BSW-MODULE-ENTRY UUID="1a079027-ecf6-4122-aca0-1314724e9c62">
+              <SHORT-NAME>CDD_EDMA_lld_transferCompletionMasterIsrFxn</SHORT-NAME>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>INTERRUPT</CALL-TYPE>
+              <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="4c58e2bf-a139-41f7-aa7d-9ae326590983">
+              <SHORT-NAME>Cdd_Dma_CbkRegister</SHORT-NAME>
+              <SERVICE-ID>3</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="871f0b68-ee55-4fdd-aa0b-4ff6450e6edc">
+              <SHORT-NAME>Cdd_Dma_ChainChannel</SHORT-NAME>
+              <SERVICE-ID>6</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="dcd20b90-4c46-402a-94ec-5bc5ac839c08">
+              <SHORT-NAME>Cdd_Dma_DeInit</SHORT-NAME>
+              <SERVICE-ID>2</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="5d85662f-2c4e-4fd9-a943-006346562845">
+              <SHORT-NAME>Cdd_Dma_DisableTransferRegion</SHORT-NAME>
+              <SERVICE-ID>12</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="a15ee7ea-c3f1-46df-8216-e8718d6ab3e4">
+              <SHORT-NAME>Cdd_Dma_EnableTransferRegion</SHORT-NAME>
+              <SERVICE-ID>7</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="1cc2b64f-3573-4c88-b4b3-402524feeeaa">
+              <SHORT-NAME>Cdd_Dma_GetInitStatus</SHORT-NAME>
+              <SERVICE-ID>10</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="b2bbcdbb-109f-4b8a-b298-769d2553a5f6">
+              <SHORT-NAME>Cdd_Dma_GetParam</SHORT-NAME>
+              <SERVICE-ID>11</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="583fd4f6-7993-4276-8af5-ee147cd8f68a">
+              <SHORT-NAME>Cdd_Dma_GetStatus</SHORT-NAME>
+              <SERVICE-ID>8</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="2548a33a-5518-4580-9a18-bca8ab345f32">
+              <SHORT-NAME>Cdd_Dma_GetVersionInfo</SHORT-NAME>
+              <SERVICE-ID>9</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="c277bae2-10ec-4014-89f5-8f22d3d43d5b">
+              <SHORT-NAME>Cdd_Dma_Init</SHORT-NAME>
+              <SERVICE-ID>1</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>              
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="6475b779-7b82-45fe-add9-9583627bb066">
+              <SHORT-NAME>Cdd_Dma_LinkChannel</SHORT-NAME>
+              <SERVICE-ID>5</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="e6bb307b-b2a7-444d-82e0-2ea18559d09a">
+              <SHORT-NAME>Cdd_Dma_ParamSet</SHORT-NAME>
+              <SERVICE-ID>4</SERVICE-ID>
+              <IS-REENTRANT>true</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+            <BSW-MODULE-ENTRY UUID="61498547-fba0-482b-9284-3f3150fe0b1f">
+              <SHORT-NAME>Cdd_Dma_RegisterReadback</SHORT-NAME>
+              <SERVICE-ID>13</SERVICE-ID>
+              <IS-REENTRANT>false</IS-REENTRANT>
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
+              <CALL-TYPE>REGULAR</CALL-TYPE>
+              <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
+              <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
+              <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
+            </BSW-MODULE-ENTRY>
+          </ELEMENTS>
+        </AR-PACKAGE>
+      </AR-PACKAGES>
+    </AR-PACKAGE>
+  </AR-PACKAGES>
+</AUTOSAR>

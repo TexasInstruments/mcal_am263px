@@ -110,7 +110,7 @@ extern "C" {
 /* @} */
 
 /** \brief Enable/disable Eth traffic shaping  */
-#define ETH_TRAFFIC_SHAPING_API   (STD_OFF)
+#define ETH_TRAFFIC_SHAPING_API   (STD_ON)
 
 /**
  *  \name Eth Buffer defines

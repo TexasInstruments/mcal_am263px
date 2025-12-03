@@ -24,11 +24,19 @@
 /* ========================================================================== */
 
 #include "Std_Types.h"
-#include "hw_types.h"
+#define PORT_START_SEC_CODE
+#include "Port_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define PORT_STOP_SEC_CODE
+#include "Port_MemMap.h"
 #include "hal_stdtypes.h"
 #include "hw_ctrl_core.h"
 #include "soc.h"
+#define PORT_START_SEC_CODE
+#include "Port_MemMap.h"
 #include "sys_common.h"
+#define PORT_STOP_SEC_CODE
+#include "Port_MemMap.h"
 
 #include "Port.h"
 #if (PORT_DEV_ERROR_DETECT == STD_ON)

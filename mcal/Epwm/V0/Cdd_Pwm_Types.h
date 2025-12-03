@@ -74,7 +74,12 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Cdd_Pwm_Cfg.h"
-#include "hw_epwm.h"
+#define CDD_PWM_START_SEC_CODE
+#include "Cdd_Pwm_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#include "hw_epwm.h"  /* Map the static inline functions in this file as well */
+#define CDD_PWM_STOP_SEC_CODE
+#include "Cdd_Pwm_MemMap.h"
 
 #ifdef __cplusplus
 extern "C" {

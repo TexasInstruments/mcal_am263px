@@ -55,12 +55,12 @@
             [!ENDLOOP!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/CddFsiTx_GetStatus</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL>           
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxBuffLoadApi = 'true'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_BufferLoad</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL>  
-            [!ENDIF!][!//   
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+            [!ENDIF!][!//
             [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxDeInitApi = 'true'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_DeInit</BSW-MODULE-ENTRY-REF>
@@ -87,7 +87,7 @@
             [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxResetDriver = 'true'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_Reset</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL> 
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!][!//
             [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxTransmitApi = 'true'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -134,7 +134,7 @@
                   <SHORT-NAME>FSI_TX_EXCLUSIVE_AREA_0</SHORT-NAME>
                 </EXCLUSIVE-AREA>
               </EXCLUSIVE-AREAS>
-              <ENTITYS>              
+              <ENTITYS>
                 [!LOOP "as:modconf('Cdd_FsiTx')[1]/CddFsiTxConfigSet"!][!//
                 [!LOOP "CddFsiTxHwUnit/*"!][!//
                 [!IF "CddFsiTxHwUnitId = 'CDD_FSI_TX_HWUNIT_0'"!][!//
@@ -160,7 +160,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
                 </BSW-INTERRUPT-ENTITY>
-                [!ENDIF!][!//                
+                [!ENDIF!][!//
                 [!IF "CddFsiTxHwUnitId = 'CDD_FSI_TX_HWUNIT_2'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="d0570b50-c142-451d-b9f8-5086a6d0489d">
                   <SHORT-NAME>CddFsiTx_FSIINT1_IrqUnit2</SHORT-NAME>
@@ -171,7 +171,7 @@
                   [!ELSE!]
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
-                </BSW-INTERRUPT-ENTITY>                
+                </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "CddFsiTxHwUnitId = 'CDD_FSI_TX_HWUNIT_3'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="88b69a2c-d2f6-40b9-bc7e-91775a9998a0">
@@ -243,7 +243,7 @@
                 [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxBuffLoadApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="24aa0e54-8fcc-4eb4-b6c5-fc03fadc1d39">
                   <SHORT-NAME>Cdd_FsiTx_BufferLoad</SHORT-NAME>
-                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>                  
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxDMAEnable = 'true'"!][!//
                     <BSW-DIRECT-CALL-POINT>
@@ -318,7 +318,7 @@
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!][!//
-                  </CALL-POINTS>                  
+                  </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxMainApi = 'true'"!][!//
@@ -372,7 +372,7 @@
                   [!ENDIF!][!//
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_Reset</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                [!ENDIF!][!//            
+                [!ENDIF!][!//
                 [!IF "as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxTransmitApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="4be642b4-d864-46c9-9d5c-56eb74e194a6">
                   <SHORT-NAME>Cdd_FsiTx_Transmit</SHORT-NAME>
@@ -504,11 +504,17 @@
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
                 <SYMBOL>VAR_INIT_UNSPECIFIED</SYMBOL>
               </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="e94d0d07-1b3c-4b53-88c4-7128cd0c3b64">
+                <SHORT-NAME>CDD_FSI_TX_VAR_INIT_32</SHORT-NAME>
+                <ALIGNMENT>32</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_32</SYMBOL>
+              </MEMORY-SECTION>
               <MEMORY-SECTION UUID="31aefe97-b47b-4aee-881b-7072a3c5b1d9">
                 <SHORT-NAME>CDD_FSI_TX_VAR_NO_INIT_8</SHORT-NAME>
                 <ALIGNMENT>8</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
-                <SYMBOL>VAR_INIT_8</SYMBOL>
+                <SYMBOL>VAR_NO_INIT_8</SYMBOL>
               </MEMORY-SECTION>
               <MEMORY-SECTION UUID="3495d097-4d21-4cbe-a17b-1ca885475406">
                 <SHORT-NAME>CDD_FSI_TX_VAR_NO_INIT_UNSPECIFIED</SHORT-NAME>
@@ -684,7 +690,7 @@
               <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
-            </BSW-MODULE-ENTRY>            
+            </BSW-MODULE-ENTRY>
             <BSW-MODULE-ENTRY UUID="6b88a9f3-b30e-4494-b367-152262188d2e">
               <SHORT-NAME>Cdd_FsiTx_MainFunction</SHORT-NAME>
               <SERVICE-ID>7</SERVICE-ID>

@@ -29,7 +29,7 @@
 #include "soc.h"
 #define CAN_START_SEC_CODE
 #include "Can_MemMap.h"
-#include "hw_types.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
 #define CAN_STOP_SEC_CODE
 #include "Can_MemMap.h"
 

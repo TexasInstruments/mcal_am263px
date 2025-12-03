@@ -27,7 +27,6 @@
 /* ========================================================================== */
 
 #include "Std_Types.h"
-/* #include "hw_types.h" */
 #include "hw_mcanss.h"
 #include "hal_stdtypes.h"
 

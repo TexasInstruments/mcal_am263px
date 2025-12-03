@@ -72,7 +72,11 @@ extern "C" {
 #include "Std_Types.h"
 #include "Cdd_Dma_edma.h"
 #include "sys_common.h"
-#include "hw_types.h"
+#define CDD_DMA_START_SEC_CODE
+#include "Cdd_Dma_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_DMA_STOP_SEC_CODE
+#include "Cdd_Dma_MemMap.h"
 #include "SchM_Cdd_Dma.h"
 
 /* ========================================================================== */

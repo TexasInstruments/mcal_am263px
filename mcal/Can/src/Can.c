@@ -43,7 +43,7 @@
 #include "soc.h"
 #define CAN_START_SEC_CODE
 #include "Can_MemMap.h"
-#include "hw_types.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
 #define CAN_STOP_SEC_CODE
 #include "Can_MemMap.h"
 #include "Can_Priv.h"
@@ -1279,6 +1279,84 @@ FUNC(void, CAN_CODE) Can_DeInit(void)
 }
 #endif /* (CAN_DEINIT_API == STD_ON) */
 
+/* [SWS_Can_91004], [SWS_Can_91005], [SWS_Can_91006], [SWS_Can_91007],
+   [SWS_Can_91008] */
+/*
+ *Design: MCAL-16917, MCAL-16889, MCAL-16927, MCAL-16997, MCAL-17098, MCAL-17141
+ */
+/*******************************************************************************
+ * Can_GetControllerErrorState
+ ******************************************************************************/
+FUNC(Std_ReturnType, CAN_CODE)
+Can_GetControllerErrorState(uint8 ControllerId, Can_ErrorStateType *ErrorStatePtr)
+{
+    Std_ReturnType     retVal = (Std_ReturnType)E_NOT_OK;
+    Can_ErrorStateType errorState;
+#if (CAN_DEV_ERROR_DETECT == STD_ON)
+    if (Can_DrvState == CAN_UNINIT)
+    {
+        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRERRST_ID,
+                              (uint8)CAN_E_UNINIT);
+    }
+    else if (ControllerId >= (Can_DriverObj.canMaxControllerCount))
+    {
+        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRERRST_ID,
+                              (uint8)CAN_E_PARAM_CONTROLLER);
+    }
+    else if (ErrorStatePtr == NULL_PTR)
+    {
+        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRERRST_ID,
+                              (uint8)CAN_E_PARAM_POINTER);
+    }
+    else
+#endif
+    {
+        retVal         = (Std_ReturnType)E_OK;
+        errorState     = Can_mcanGetProtocolStatus(&Can_DriverObj.canController[ControllerId]);
+        *ErrorStatePtr = errorState;
+    }
+
+    return retVal;
+}
+
+/*******************************************************************************
+ * Can_GetControllerMode
+ ******************************************************************************/
+/* [SWS_Can_91014][SWS_Can_91015],[SWS_Can_91016],[SWS_Can_91017],
+   [SWS_Can_91018] */
+/*
+ *Design: MCAL-16966, MCAL-17143, MCAL-16903, MCAL-17142, MCAL-16986
+ */
+FUNC(Std_ReturnType, CAN_CODE)
+Can_GetControllerMode(uint8 Controller, Can_ControllerStateType *ControllerModePtr)
+{
+    Std_ReturnType retVal = (Std_ReturnType)E_NOT_OK;
+#if (CAN_DEV_ERROR_DETECT == STD_ON)
+    if (Can_DrvState == CAN_UNINIT)
+    {
+        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRMODE_ID,
+                              (uint8)CAN_E_UNINIT);
+    }
+    else if (Controller >= (Can_DriverObj.canMaxControllerCount))
+    {
+        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRMODE_ID,
+                              (uint8)CAN_E_PARAM_CONTROLLER);
+    }
+    else if (ControllerModePtr == NULL_PTR)
+    {
+        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRMODE_ID,
+                              (uint8)CAN_E_PARAM_POINTER);
+    }
+    else
+#endif
+    {
+        retVal             = (Std_ReturnType)E_OK;
+        *ControllerModePtr = Can_DriverObj.canController[Controller].canState;
+    }
+
+    return retVal;
+}
+
 #define CAN_STOP_SEC_CODE
 #include "Can_MemMap.h"
 /*******************************************************************************
@@ -1518,83 +1596,6 @@ FUNC(void, CAN_CODE) Can_7_Int1ISR_Fun(void)
 #endif
 }
 #endif
-/* [SWS_Can_91004], [SWS_Can_91005], [SWS_Can_91006], [SWS_Can_91007],
-   [SWS_Can_91008] */
-/*
- *Design: MCAL-16917, MCAL-16889, MCAL-16927, MCAL-16997, MCAL-17098, MCAL-17141
- */
-/*******************************************************************************
- * Can_GetControllerErrorState
- ******************************************************************************/
-FUNC(Std_ReturnType, CAN_CODE)
-Can_GetControllerErrorState(uint8 ControllerId, Can_ErrorStateType *ErrorStatePtr)
-{
-    Std_ReturnType     retVal = (Std_ReturnType)E_NOT_OK;
-    Can_ErrorStateType errorState;
-#if (CAN_DEV_ERROR_DETECT == STD_ON)
-    if (Can_DrvState == CAN_UNINIT)
-    {
-        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRERRST_ID,
-                              (uint8)CAN_E_UNINIT);
-    }
-    else if (ControllerId >= (Can_DriverObj.canMaxControllerCount))
-    {
-        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRERRST_ID,
-                              (uint8)CAN_E_PARAM_CONTROLLER);
-    }
-    else if (ErrorStatePtr == NULL_PTR)
-    {
-        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRERRST_ID,
-                              (uint8)CAN_E_PARAM_POINTER);
-    }
-    else
-#endif
-    {
-        retVal         = (Std_ReturnType)E_OK;
-        errorState     = Can_mcanGetProtocolStatus(&Can_DriverObj.canController[ControllerId]);
-        *ErrorStatePtr = errorState;
-    }
-
-    return retVal;
-}
-
-/*******************************************************************************
- * Can_GetControllerMode
- ******************************************************************************/
-/* [SWS_Can_91014][SWS_Can_91015],[SWS_Can_91016],[SWS_Can_91017],
-   [SWS_Can_91018] */
-/*
- *Design: MCAL-16966, MCAL-17143, MCAL-16903, MCAL-17142, MCAL-16986
- */
-FUNC(Std_ReturnType, CAN_CODE)
-Can_GetControllerMode(uint8 Controller, Can_ControllerStateType *ControllerModePtr)
-{
-    Std_ReturnType retVal = (Std_ReturnType)E_NOT_OK;
-#if (CAN_DEV_ERROR_DETECT == STD_ON)
-    if (Can_DrvState == CAN_UNINIT)
-    {
-        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRMODE_ID,
-                              (uint8)CAN_E_UNINIT);
-    }
-    else if (Controller >= (Can_DriverObj.canMaxControllerCount))
-    {
-        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRMODE_ID,
-                              (uint8)CAN_E_PARAM_CONTROLLER);
-    }
-    else if (ControllerModePtr == NULL_PTR)
-    {
-        (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_GETCTRMODE_ID,
-                              (uint8)CAN_E_PARAM_POINTER);
-    }
-    else
-#endif
-    {
-        retVal             = (Std_ReturnType)E_OK;
-        *ControllerModePtr = Can_DriverObj.canController[Controller].canState;
-    }
-
-    return retVal;
-}
 
 #define CAN_STOP_SEC_ISR_CODE
 #include "Can_MemMap.h"

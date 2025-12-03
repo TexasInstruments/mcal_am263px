@@ -560,7 +560,6 @@ CddFsiRx_enableRxFrameWatchdogTimer(uint32 base, uint32 wdRef)
 }
 /******************************************************************************/
 #define CDD_FSIRX_STOP_SEC_CODE
-
 #include "Cdd_FsiRx_MemMap.h"
 
 /*******************************************************************************

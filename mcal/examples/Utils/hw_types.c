@@ -385,6 +385,16 @@ uint32 HW_RD_FIELD32_RAW(uint32 addr, uint32 mask, uint32 shift)
         regVal = MDIO_USER_GROUP_USER_ACCESS_REG_GO_MASK;
     }
 
+    if ((ETH_TT_COVERAGE_FLAG_MDIO_PHY_GO_DELAY == gEthCoverageTestFlag) &&
+        ((addr & 0x000FFFFFU) == MDIO_USER_GROUP_USER_ACCESS_REG) && (mask == MDIO_USER_GROUP_USER_ACCESS_REG_GO_MASK))
+    {
+        if (loop > 1) /* delay in first loop to return valid value */
+        {
+            regVal = MDIO_USER_GROUP_USER_ACCESS_REG_GO_MASK;
+        }
+        loop++;
+    }
+
     if ((ETH_TT_COVERAGE_FLAG_MDIO_PHY_ACK == gEthCoverageTestFlag) &&
         ((addr & 0x000FFFFFU) == MDIO_USER_GROUP_USER_ACCESS_REG) && (mask == MDIO_USER_GROUP_USER_ACCESS_REG_ACK_MASK))
     {

@@ -45,7 +45,11 @@
 /* ========================================================================== */
 
 #include "sys_common.h"
-#include "hw_types.h"
+#define CDD_FSITX_START_SEC_CODE
+#include "Cdd_FsiTx_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_FSITX_STOP_SEC_CODE
+#include "Cdd_FsiTx_MemMap.h"
 #include "Std_Types.h"
 #include "Cdd_FsiTx_Priv.h"
 

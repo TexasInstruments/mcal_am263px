@@ -33,7 +33,11 @@
 #include "stdbool.h"
 #include "stdint.h"
 #include "Cdd_Pwm_Sfo.h"
-#include "hw_types.h"
+#define CDD_PWM_START_SEC_CODE
+#include "Cdd_Pwm_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_PWM_STOP_SEC_CODE
+#include "Cdd_Pwm_MemMap.h"
 
 #define CDD_PWM_EPWM_O_HRCNFG   0x40
 #define CDD_PWM_EPWM_O_HRCNFG2  0x4E
@@ -118,19 +122,19 @@
 #define CDD_PWM_START_SEC_VAR_NO_INIT_32
 #include "Cdd_Pwm_MemMap.h"
 VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_MEP_SF[(CDD_PWM_CH_MAX + 1)];
-VAR(uint32, CDD_PWM_VAR_NO_INIT)
-Cdd_Pwm_SFO_Cal; /*channel to calibrate
-to use, declare "extern sint SFO_CAL;" in source file
-and call Cdd_Pwm_SFO() once before changing to select a channel.*/
-VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_gOttoCal_base = 0x502E0000UL;
-#define CDD_PWM_STOP_SEC_VAR_NO_INIT_32
-#include "Cdd_Pwm_MemMap.h"
-
-#define CDD_PWM_START_SEC_VAR_NO_INIT_32
-#include "Cdd_Pwm_MemMap.h"
+/* channel to calibrate to use, declare "extern sint SFO_CAL;" in source file
+ * and call Cdd_Pwm_SFO() once before changing to select a channel.*/
+VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_SFO_Cal;
 VAR(sint32, PWM_VAR_NO_INIT) Cdd_Pwm_MEP_ScaleFactor;
 #define CDD_PWM_STOP_SEC_VAR_NO_INIT_32
 #include "Cdd_Pwm_MemMap.h"
+
+#define CDD_PWM_START_SEC_VAR_INIT_32
+#include "Cdd_Pwm_MemMap.h"
+VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_gOttoCal_base = 0x502E0000UL;
+#define CDD_PWM_STOP_SEC_VAR_INIT_32
+#include "Cdd_Pwm_MemMap.h"
+
 /******************************************************************************
 
  FUNCTION:    Cdd_Pwm_SFO(void)

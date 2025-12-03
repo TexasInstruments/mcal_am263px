@@ -112,13 +112,13 @@ IpcNotify_Handle CddIpc_NotifyHandle = &CddIpc_NotifyObject;
 RPMessageLLD_Handle CddIpc_RPMsgHandle = &Cdd_RPMessageObj;
 #endif
 
-extern RPMessageLLD_InitObject CddIpc_RPMessageInitObj;
-
 /** \brief CDD IPC driver status */
 static VAR(Cdd_IpcStatusType, CDD_VAR_ZERO_INIT) CddIpc_DrvStatus = CDD_IPC_UNINIT;
 
 #define CDD_IPC_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Cdd_Ipc_MemMap.h"
+
+extern RPMessageLLD_InitObject CddIpc_RPMessageInitObj;
 
 /* ========================================================================== */
 /*                          Function Definitions                              */

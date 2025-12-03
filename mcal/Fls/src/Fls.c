@@ -88,6 +88,9 @@
 #include "Fls.h"
 #include "Fls_Brd_Nor.h"
 #include "Det.h"
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+#include "Fls_Ospi_Phy.h"
+#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
@@ -146,15 +149,16 @@ static void           Fls_MainFunctioncall(void);
 #include "Fls_MemMap.h"
 /** \brief FLS driver object */
 Fls_DriverObjType Fls_DrvObj = {.status = MEMIF_UNINIT};
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+Std_ReturnType Fls_PhyStatus = (Std_ReturnType)E_NOT_OK;
+#endif
 #define FLS_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Fls_MemMap.h"
 
 #define FLS_START_SEC_VAR_NO_INIT_32
 #include "Fls_MemMap.h"
-
 /*Set Erase Type Parameters */
 VAR(uint32, FLS_VAR_NO_INIT) sector_or_blocksize;
-
 #define FLS_STOP_SEC_VAR_NO_INIT_32
 #include "Fls_MemMap.h"
 
@@ -367,6 +371,16 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
         Fls_DrvObj.jobResultType = MEMIF_JOB_PENDING;
 
         ret = Fls_hwUnitInit();
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+        if (ret == E_OK)
+        {
+            Fls_PhyStatus = Fls_Ospi_phyInit();
+            if (Fls_PhyStatus != E_OK)
+            {
+                ret = (Std_ReturnType)E_NOT_OK;
+            }
+        }
+#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
 
         /*Init the HW */
         if (ret == (Std_ReturnType)E_OK)
@@ -1212,6 +1226,49 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_setResetPinMode(Fls_ResetPinMode pinMode)
     return retVal;
 }
 #endif
+
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+FUNC(Std_ReturnType, FLS_CODE) Fls_PhyEnable(void)
+{
+    Std_ReturnType retVal = E_OK;
+#if (STD_ON == FLS_DEV_ERROR_DETECT)
+    if (Fls_DrvObj.status == MEMIF_UNINIT)
+    {
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_REGISTERREADBACK, FLS_E_UNINIT);
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+    if (retVal == E_OK)
+#endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
+    {
+        if (Fls_PhyStatus == E_OK)
+        {
+            Fls_Ospi_phy_enable();
+        }
+        else
+        {
+            retVal = E_NOT_OK;
+        }
+    }
+
+    return retVal;
+}
+
+FUNC(void, FLS_CODE) Fls_PhyDisable(void)
+{
+    Std_ReturnType retVal = E_OK;
+#if (STD_ON == FLS_DEV_ERROR_DETECT)
+    if (Fls_DrvObj.status == MEMIF_UNINIT)
+    {
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_REGISTERREADBACK, FLS_E_UNINIT);
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+    if (retVal == E_OK)
+#endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
+    {
+        Fls_Ospi_phy_disable();
+    }
+}
+#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
 
 #define FLS_STOP_SEC_CODE
 #include "Fls_MemMap.h"

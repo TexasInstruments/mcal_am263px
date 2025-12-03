@@ -817,6 +817,34 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Set3ByteAddressMode(void);
 FUNC(Std_ReturnType, FLS_CODE) Fls_setResetPinMode(Fls_ResetPinMode pinMode);
 #endif
 
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+/** \brief Enables phy tuning.
+ * Use this API to read with phy
+ * Applicable on am263px and am261 platforms
+ *
+ * Service ID[hex]   : NA
+ *
+ * \return Std_ReturnType
+ * \retval E_OK: success
+ * \retval E_NOT_OK: failure
+ *
+ *****************************************************************************/
+FUNC(Std_ReturnType, FLS_CODE) Fls_PhyEnable(void);
+
+/** \brief Disable phy tuning.
+ * Use this API to diable phy
+ * Applicable on am263px and am261 platforms
+ *
+ * Service ID[hex]   : NA
+ *
+ * \return Std_ReturnType
+ * \retval E_OK: success
+ * \retval E_NOT_OK: failure
+ *
+ *****************************************************************************/
+FUNC(void, FLS_CODE) Fls_PhyDisable(void);
+#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
+
 #ifdef __cplusplus
 }
 #endif

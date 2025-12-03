@@ -81,6 +81,7 @@ Loopback mode type.
 | LIN_SID_CHECK_WAKEUP   | Lin_CheckWakeup()  |
 | LIN_SID_WAKEUP_INTERNAL   | Lin_WakeupInternal()  |
 | LIN_SID_REGISTER_READBACK   | Lin_RegisterReadback()  |
+| LIN_SID_DEINIT   | Lin_Deinit()  |
 | LIN_E_UNINIT   | API service used without module initialization.  |
 | LIN_E_INVALID_CHANNEL   | API service used with an invalid or inactive channel parameter.  |
 | LIN_E_INVALID_POINTER   | API service called with invalid configuration pointer.  |
@@ -104,6 +105,7 @@ Loopback mode type.
 | Std_ReturnType | **[Lin_WakeupInternal](../Modules/group___l_i_n.md#function-lin_wakeupinternal)**(uint8 Channel)| Generates a wake up pulse and sets the channel state to LIN_CH_OPERATIONAL without generating a wake up pulse.  |
 | Lin_StatusType | **[Lin_GetStatus](../Modules/group___l_i_n.md#function-lin_getstatus)**(uint8 Channel, uint8 ** Lin_SduPtr)| Gets the status of the LIN driver.  |
 | Std_ReturnType | **[Lin_RegisterReadback](../Modules/group___l_i_n.md#function-lin_registerreadback)**(uint8 Channel, [Lin_RegisterReadbackType](../Classes/struct_lin___register_readback_type.md) * RegRbPtr)| This function reads the important registers of the hardware unit and returns the value in the structure. This API is used to check the status of critical registers which do not change during program execution.  |
+| void | **[Lin_Deinit](../Modules/group___l_i_n.md#function-lin_deinit)**(void )| This function de-intializes the LIN hardware unit .  |
 
 
 
@@ -509,6 +511,27 @@ This function reads the important registers of the hardware unit and returns the
 
 
 **Return**: Std_ReturnType 
+
+### function Lin_Deinit
+
+```
+void Lin_Deinit(
+    void 
+)
+```
+
+
+**Brief**: 
+This function de-intializes the LIN hardware unit . 
+
+Service ID[hex] : 0x0D
+
+Sync/Async : Synchronous
+
+Reentrancy : Non - Reentrant
+
+
+**Return**: void 
 
 
 

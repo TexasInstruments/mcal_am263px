@@ -90,9 +90,9 @@ typedef enum Lin_ModuleStateTag
  * Internal Function Declarations
  *********************************************************************************************************************/
 static FUNC(Std_ReturnType, LIN_CODE) Lin_CheckWakeupInternal(uint8 Channel);
-static FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupProcess(uint8 Channel);
 static FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupInternalProcess(uint8 Channel);
-static FUNC(void, LIN_CODE) Lin_InitInternal(P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Lin_ConfigPtr);
+static FUNC(Std_ReturnType, LIN_CODE)
+    Lin_InitInternal(P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Lin_ConfigPtr);
 static FUNC(Std_ReturnType, LIN_CODE)
     Lin_SendFrameDetCheck(uint8 Channel, P2CONST(Lin_PduType, AUTOMATIC, LIN_APPL_CONST) PduInfoPtr);
 static FUNC(Lin_StatusType, LIN_CODE)
@@ -167,6 +167,7 @@ Lin_GetVersionInfo(Std_VersionInfoType *versioninfo)
 FUNC(void, LIN_CODE)
 Lin_Init(P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Config)
 {
+    VAR(Std_ReturnType, AUTOMATIC) return_value = (Std_ReturnType)E_NOT_OK;
 #if (STD_ON == LIN_PRE_COMPILE_VARIANT)
     Lin_Config_Ptr = &LIN_INIT_CONFIG_PC;
 #endif /* (STD_ON == LIN_PRE_COMPILE_VARIANT) */
@@ -191,42 +192,90 @@ Lin_Init(P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Config)
     else
 #endif
     {
-        Lin_InitInternal(Lin_Config_Ptr);
+        return_value = Lin_InitInternal(Lin_Config_Ptr);
+
+        if (return_value == E_OK)
+        {
+            /*
+             * Set Init Done flag
+             */
+            Lin_Module_State = LIN_INIT;
+        }
+        /* TI_COVERAGE_GAP_START [Line Gap] in LIN_E_INVALID_POINTER, False Positive */
+        else
+        {
+#if (STD_ON == LIN_DEV_ERROR_DETECT)
+            (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_INIT, LIN_E_INVALID_POINTER);
+#endif
+        }
     }
 }
 
-static FUNC(void, LIN_CODE) Lin_InitInternal(P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Lin_ConfigPtr)
+static FUNC(Std_ReturnType, LIN_CODE) Lin_InitInternal(P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Lin_ConfigPtr)
 {
-    uint8 channel_idx = (uint8)0;
+    VAR(uint8, AUTOMATIC) channel_idx           = (uint8)0;
+    VAR(Std_ReturnType, AUTOMATIC) return_value = (Std_ReturnType)E_NOT_OK;
+    VAR(uint8, AUTOMATIC) failcountflag         = 0U;
+
     for (channel_idx = 0; channel_idx < LIN_MAX_CHANNEL; channel_idx++)
     {
-        /* Init individual controller */
-        Lin_HwUnitConfig(&Lin_ConfigPtr->linChannelCfg[channel_idx]);
-
         /* Pass pointer of Driver Configuration to be used for ISR processing*/
         Lin_SetDriverCfgPtr(Lin_ConfigPtr);
 
-        Lin_Channel_Status[channel_idx].linChannelNetworkStatus = LIN_CHANNEL_SLEEP;
-        Lin_EnterLowPowerMode(Lin_ConfigPtr->linChannelCfg[channel_idx].linControllerConfig.CntrAddr, TRUE);
-
-        if (TRUE == Lin_ConfigPtr->linChannelCfg[channel_idx].linChannelWakeupSupport)
+        /* Init individual controller */
+        return_value = Lin_HwUnitConfig(&Lin_ConfigPtr->linChannelCfg[channel_idx]);
+        if (return_value == E_NOT_OK)
         {
-            Lin_EnableWakeupDetection(&Lin_ConfigPtr->linChannelCfg[channel_idx], TRUE);
+            failcountflag = 1U;
         }
         else
         {
-            Lin_EnableWakeupDetection(&Lin_ConfigPtr->linChannelCfg[channel_idx], FALSE);
-        }
+            Lin_Channel_Status[channel_idx].linChannelNetworkStatus = LIN_CHANNEL_SLEEP;
+            Lin_EnterLowPowerMode(Lin_ConfigPtr->linChannelCfg[channel_idx].linControllerConfig.CntrAddr, TRUE);
 
-        Lin_Channel_Status[channel_idx].linChannelActivityStatus = LIN_CHANNEL_IDLE;
+            if (TRUE == Lin_ConfigPtr->linChannelCfg[channel_idx].linChannelWakeupSupport)
+            {
+                Lin_EnableWakeupDetection(&Lin_ConfigPtr->linChannelCfg[channel_idx], TRUE);
+            }
+            else
+            {
+                Lin_EnableWakeupDetection(&Lin_ConfigPtr->linChannelCfg[channel_idx], FALSE);
+            }
+
+            Lin_Channel_Status[channel_idx].linChannelActivityStatus = LIN_CHANNEL_IDLE;
+        }
     }
 
-    /*
-     * Set Init Done flag
-     */
-    Lin_Module_State = LIN_INIT;
+    if (failcountflag != (uint32)1U)
+    {
+        return_value = E_OK;
+    }
+    else
+    {
+    }
+    return return_value;
 }
 
+FUNC(void, LIN_CODE) Lin_Deinit(void)
+{
+#if (STD_ON == LIN_DEV_ERROR_DETECT)
+    if (Lin_Module_State != LIN_INIT)
+    {
+        (void)Det_ReportError((uint16)LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_DEINIT, LIN_E_UNINIT);
+    }
+    else
+#endif /* #if (STD_ON == CAN_DEV_ERROR_DETECT) */
+
+    {
+        /* Deinitialize LIN Module */
+        Lin_DeinitInternal();
+
+        /*
+         * Set De-Init Done flag
+         */
+        Lin_Module_State = LIN_UNINIT;
+    }
+}
 /*
  * Design: MCAL-15825, MCAL-15826, MCAL-15824, MCAL-15823
  */
@@ -256,10 +305,12 @@ Lin_CheckWakeup(uint8 Channel)
 static FUNC(Std_ReturnType, LIN_CODE) Lin_CheckWakeupInternal(uint8 Channel)
 {
     Std_ReturnType return_value = E_NOT_OK;
+
     if ((uint8)LIN_CHANNEL_SLEEP == (uint8)Lin_Channel_Status[Channel].linChannelNetworkStatus)
     {
         if (TRUE == Lin_CheckWakeupStatus(Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr))
         {
+            Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_OPERATIONAL;
             /* Wakeup event sent to ECU Manager */
             EcuM_SetWakeupEvent(Lin_Config_Ptr->linChannelCfg[Channel].linWakeupSource);
         }
@@ -281,6 +332,7 @@ Lin_SendFrame(uint8 Channel, P2CONST(Lin_PduType, AUTOMATIC, LIN_APPL_CONST) Pdu
 {
     Std_ReturnType return_value = E_NOT_OK;
     return_value                = Lin_SendFrameDetCheck(Channel, PduInfoPtr);
+
     if (((Std_ReturnType)E_OK) == return_value)
     {
         SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
@@ -297,6 +349,7 @@ static FUNC(Std_ReturnType, LIN_CODE)
     Lin_SendFrameDetCheck(uint8 Channel, P2CONST(Lin_PduType, AUTOMATIC, LIN_APPL_CONST) PduInfoPtr)
 {
     Std_ReturnType return_value = E_OK;
+
     if (LIN_INIT != Lin_Module_State)
     {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
@@ -335,25 +388,22 @@ static FUNC(Std_ReturnType, LIN_CODE)
 FUNC(Std_ReturnType, LIN_CODE)
 Lin_GoToSleep(uint8 Channel)
 {
-    Std_ReturnType return_value = E_NOT_OK;
+    Std_ReturnType return_value       = E_NOT_OK;
+    uint32         lin_base_cntr_addr = Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr;
 
+#if (STD_ON == LIN_DEV_ERROR_DETECT)
     if (LIN_INIT != Lin_Module_State)
     {
-#if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_GOTO_SLEEP, LIN_E_UNINIT);
-#endif
     }
     else if (LIN_MAX_CHANNEL <= Channel)
     {
-#if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_GOTO_SLEEP, LIN_E_INVALID_CHANNEL);
-#endif
     }
     else
+#endif
     {
         SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
-
-        Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_SLEEP_PENDING;
 
         if (TRUE == Lin_Config_Ptr->linChannelCfg[Channel].linChannelWakeupSupport)
         {
@@ -364,11 +414,23 @@ Lin_GoToSleep(uint8 Channel)
             Lin_EnableWakeupDetection(&Lin_Config_Ptr->linChannelCfg[Channel], FALSE);
         }
 
-        /* TODO: Send goto-sleep command on bus? */
-        Lin_EnterLowPowerMode(Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr, TRUE);
-        Lin_AbortTransmission(Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr);
-
-        return_value = E_OK;
+        /* Send goto-sleep command on bus */
+        return_value = Lin_SendGoToSleepSignal(lin_base_cntr_addr);
+        if (return_value == E_NOT_OK)
+        {
+#if (STD_ON == LIN_DEM_ENABLE)
+#ifdef LIN_E_TIMEOUT
+            Dem_SetEventStatus(LIN_E_TIMEOUT, DEM_EVENT_STATUS_PREFAILED);
+#endif
+#endif
+        }
+        else
+        {
+            Lin_EnterLowPowerMode(lin_base_cntr_addr, TRUE);
+            Lin_AbortTransmission(lin_base_cntr_addr);
+            Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_SLEEP_PENDING;
+            return_value                                        = E_OK;
+        }
 
         SchM_Exit_Lin_LIN_EXCLUSIVE_AREA_0();
     }
@@ -384,19 +446,17 @@ Lin_GoToSleepInternal(uint8 Channel)
 {
     Std_ReturnType return_value = E_NOT_OK;
 
+#if (STD_ON == LIN_DEV_ERROR_DETECT)
     if (LIN_INIT != Lin_Module_State)
     {
-#if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_GOTO_SLEEP_INTERNAL, LIN_E_UNINIT);
-#endif
     }
     else if (LIN_MAX_CHANNEL <= Channel)
     {
-#if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_GOTO_SLEEP_INTERNAL, LIN_E_INVALID_CHANNEL);
-#endif
     }
     else
+#endif
     {
         SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
 
@@ -445,32 +505,12 @@ Lin_Wakeup(uint8 Channel)
     else
 #endif
     {
-        return_value = Lin_WakeupProcess(Channel);
+        SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
+        return_value = Lin_WakeupProcess(Channel, &Lin_Channel_Status[Channel]);
+        SchM_Exit_Lin_LIN_EXCLUSIVE_AREA_0();
     }
 
     return return_value;
-}
-
-static FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupProcess(uint8 Channel)
-{
-    Std_ReturnType ret_value = E_NOT_OK;
-    if ((uint8)LIN_CHANNEL_SLEEP == (uint8)Lin_Channel_Status[Channel].linChannelNetworkStatus)
-    {
-        SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
-
-        Lin_SendWakeupSignal(Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr);
-        Lin_EnterLowPowerMode(Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr, FALSE);
-        Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_OPERATIONAL;
-
-        SchM_Exit_Lin_LIN_EXCLUSIVE_AREA_0();
-
-        ret_value = E_OK;
-    }
-    else
-    {
-        /* Do Nothing */
-    }
-    return (ret_value);
 }
 
 /*
@@ -506,6 +546,7 @@ Lin_WakeupInternal(uint8 Channel)
 static FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupInternalProcess(uint8 Channel)
 {
     Std_ReturnType ret_value = E_NOT_OK;
+
     if ((uint8)LIN_CHANNEL_SLEEP == (uint8)Lin_Channel_Status[Channel].linChannelNetworkStatus)
     {
         SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
@@ -594,6 +635,7 @@ static FUNC(Lin_StatusType, LIN_CODE)
     Lin_GetStatusInternal(uint8 Channel, P2VAR(uint8 *, AUTOMATIC, LIN_APPL_DATA) Lin_SduPtr, uint32 *lin_cnt_base_addr)
 {
     Lin_StatusType return_value = LIN_NOT_OK;
+
     switch (Lin_Channel_Status[Channel].linChannelActivityStatus)
     {
         case LIN_CHANNEL_IDLE:

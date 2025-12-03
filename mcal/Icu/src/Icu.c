@@ -160,7 +160,6 @@ static FUNC(Std_ReturnType, ICU_CODE)
 #include "Icu_MemMap.h"
 /** \brief Icu driver init status */
 volatile VAR(uint8, ICU_VAR_INIT) Icu_DrvStatus = ICU_STATUS_UNINIT;
-
 #define ICU_STOP_SEC_VAR_INIT_8
 #include "Icu_MemMap.h"
 

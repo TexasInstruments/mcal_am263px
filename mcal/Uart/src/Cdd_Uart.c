@@ -66,30 +66,23 @@
 
 #define CDD_UART_START_SEC_VAR_INIT_UNSPECIFIED
 #include "Cdd_Uart_MemMap.h"
-
 /** \brief CDD UART driver status */
 #if (STD_ON == CDD_UART_DEV_ERROR_DETECT)
 static VAR(Cdd_Uart_StatusType, CDD_VAR_ZERO_INIT) CddUart_DriverStatus = CDD_UART_UNINIT;
 #endif
-
 #define CDD_UART_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Cdd_Uart_MemMap.h"
 
 #define CDD_UART_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Cdd_Uart_MemMap.h"
-
 /** \brief Transaction objects for read and write */
-CddUart_Transaction CddUart_readTransaction[CDD_UART_NUM_CHANNELS], CddUart_writeTransaction[CDD_UART_NUM_CHANNELS];
-
+CddUart_Transaction     CddUart_readTransaction[CDD_UART_NUM_CHANNELS], CddUart_writeTransaction[CDD_UART_NUM_CHANNELS];
 /** \brief CDD UART Notification callback functions */
 Cdd_Uart_NotifCallbacks CddUart_NotificationCallbacks[CDD_UART_NUM_CHANNELS];
-
 /** \brief CDD UART Init objects */
-CddUart_InitObject CddUart_InitObjects[CDD_UART_NUM_CHANNELS];
-
+CddUart_InitObject      CddUart_InitObjects[CDD_UART_NUM_CHANNELS];
 /** \brief CDD UART channel handles */
-CddUart_Object CddUart_ChannelObjects[CDD_UART_NUM_CHANNELS];
-
+CddUart_Object          CddUart_ChannelObjects[CDD_UART_NUM_CHANNELS];
 #define CDD_UART_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Cdd_Uart_MemMap.h"
 

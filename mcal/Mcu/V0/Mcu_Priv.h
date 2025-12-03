@@ -23,9 +23,17 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Std_Types.h"
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
 #include "sys_common.h"
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 #include "Mcu.h"
-#include "hw_types.h"
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 #include "Mcal_Libs_Utils.h"
 #include "hw_ctrl_core.h"
 #include "sys_pmu.h"

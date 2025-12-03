@@ -28,12 +28,7 @@ extern "C"
 
 /* CDD */
 #if defined(CDD_I2C_START_SEC_VAR_INIT_UNSPECIFIED)
-/*LDRA_INSPECTED 68 S : MISRAC_2012_R20.5
- * "Reason - Undef usage is required here
- * to define this memory section again" */
 #undef CDD_I2C_START_SEC_VAR_INIT_UNSPECIFIED
-/*LDRA_INSPECTED 61 X : MISRAC_2012_R.5.4 */
-/* "Reason - standard memmap" */
 #define START_SEC_COMMON_VAR_INIT_UNSPECIFIED
 
 #elif defined(CDD_I2C_START_SEC_VAR_INIT_32)
@@ -80,13 +75,9 @@ extern "C"
 #undef CDD_I2C_START_SEC_CONFIG_DATA
 #define START_SEC_COMMON_CONFIG_DATA
 #elif defined(CDD_I2C_START_SEC_CODE)
-/*LDRA_INSPECTED 68 S : MISRAC_2012_D.1.1
- * "Reason - undef usage is required here " */
 #undef CDD_I2C_START_SEC_CODE
 #define START_SEC_COMMON_CODE
 #elif defined(CDD_I2C_START_SEC_ISR_CODE)
-/*LDRA_INSPECTED 68 S : MISRAC_2012_D.1.1
- * "Reason - undef usage is required here " */
 #undef CDD_I2C_START_SEC_ISR_CODE
 #define START_SEC_COMMON_ISR_CODE
 
@@ -157,20 +148,12 @@ extern "C"
 #endif
 
 #if defined(START_SEC_COMMON_VAR_INIT_UNSPECIFIED)
-/*LDRA_INSPECTED 69 S : MISRAC_2012_D.1.1
- * "Reason - Pragma usage is required here " */
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_I2C_DATA_INIT_UNSPECIFIED_SECTION"
+#pragma clang section data=".data.CDD_I2C_DATA_INIT_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_INIT_UNSPECIFIED_SECTION")
 #endif
-/*LDRA_INSPECTED 68 S : MISRAC_2012_R20.5
- * "Reason - Undef usage is required here
- * to define this memory section again" */
 #undef START_SEC_COMMON_VAR_INIT_UNSPECIFIED
-/*LDRA_INSPECTED 68 S : MISRAC_2012_R20.5
- * "Reason - Undef usage is required here
- * to define this memory section again" */
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
 #error "SECTION start keyword not matching"
@@ -178,7 +161,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_UNSPECIFIED)
 #elif defined(START_SEC_COMMON_VAR_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_I2C_DATA_INIT_32_SECTION"
+#pragma clang section data=".data.CDD_I2C_DATA_INIT_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_INIT_32_SECTION")
 #endif
@@ -191,7 +174,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_I2C_DATA_INIT_16_SECTION"
+#pragma clang section data=".data.CDD_I2C_DATA_INIT_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_INIT_16_SECTION")
 #endif
@@ -204,7 +187,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_I2C_DATA_INIT_8_SECTION"
+#pragma clang section data=".data.CDD_I2C_DATA_INIT_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_INIT_8_SECTION")
 #endif
@@ -217,7 +200,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section bss=".bss:CDD_I2C_DATA_NO_INIT_UNSPECIFIED_SECTION"
+#pragma clang section bss=".bss.CDD_I2C_DATA_NO_INIT_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_NO_INIT_UNSPECIFIED_SECTION")
 #endif
@@ -230,7 +213,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section bss=".bss:CDD_I2C_DATA_NO_INIT_32_SECTION"
+#pragma clang section bss=".bss.CDD_I2C_DATA_NO_INIT_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_NO_INIT_32_SECTION")
 #endif
@@ -243,7 +226,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section bss=".bss:CDD_I2C_DATA_NO_INIT_16_SECTION"
+#pragma clang section bss=".bss.CDD_I2C_DATA_NO_INIT_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_NO_INIT_16_SECTION")
 #endif
@@ -256,7 +239,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section bss=".bss:CDD_I2C_DATA_NO_INIT_8_SECTION"
+#pragma clang section bss=".bss.CDD_I2C_DATA_NO_INIT_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_DATA_NO_INIT_8_SECTION")
 #endif
@@ -269,7 +252,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section rodata=".rodata:CDD_I2C_CONST_UNSPECIFIED_SECTION"
+#pragma clang section rodata=".rodata.CDD_I2C_CONST_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_CONST_UNSPECIFIED_SECTION")
 #endif
@@ -282,7 +265,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section rodata=".rodata:CDD_I2C_CONST_32_SECTION"
+#pragma clang section rodata=".rodata.CDD_I2C_CONST_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_CONST_32_SECTION")
 #endif
@@ -295,7 +278,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section rodata=".rodata:CDD_I2C_CONST_16_SECTION"
+#pragma clang section rodata=".rodata.CDD_I2C_CONST_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_CONST_16_SECTION")
 #endif
@@ -308,7 +291,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section rodata=".rodata:CDD_I2C_CONST_8_SECTION"
+#pragma clang section rodata=".rodata.CDD_I2C_CONST_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_CONST_8_SECTION")
 #endif
@@ -321,7 +304,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONFIG_DATA)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_I2C_CONFIG_SECTION"
+#pragma clang section rodata=".rodata.CDD_I2C_CONFIG_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_I2C_CONFIG_SECTION")
 #endif
@@ -333,18 +316,12 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONFIG_DATA)
 
 #elif defined(START_SEC_COMMON_CODE)
-/*LDRA_INSPECTED 69 S : MISRAC_2012_D.1.1
- * "Reason - Pragma usage is required here " */
 #if (defined CLANG) || (defined DIAB)
 #pragma clang section text=".text.CDD_I2C_TEXT_SECTION"
 #else
 #pragma SET_CODE_SECTION("CDD_I2C_TEXT_SECTION")
 #endif
-/*LDRA_INSPECTED 68 S : MISRAC_2012_D.1.1
- * "Reason - undef usage is required here " */
 #undef START_SEC_COMMON_CODE
-/*LDRA_INSPECTED 68 S : MISRAC_2012_D.1.1
- * "Reason - undef usage is required here " */
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_CODE_SECTION
 #error "SECTION start keyword not matching"
@@ -352,18 +329,12 @@ extern "C"
 #define MEMMAP_ACTIVE_CODE_SECTION (CODE)
 
 #elif defined(START_SEC_COMMON_ISR_CODE)
-/*LDRA_INSPECTED 69 S : MISRAC_2012_D.1.1
- * "Reason - Pragma usage is required here " */
 #if (defined CLANG) || (defined DIAB)
 #pragma clang section text=".text.CDD_I2C_ISR_TEXT_SECTION"
 #else
 #pragma SET_CODE_SECTION("CDD_I2C_ISR_TEXT_SECTION")
 #endif
-/*LDRA_INSPECTED 68 S : MISRAC_2012_D.1.1
- * "Reason - undef usage is required here " */
 #undef START_SEC_COMMON_ISR_CODE
-/*LDRA_INSPECTED 68 S : MISRAC_2012_D.1.1
- * "Reason - undef usage is required here " */
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_CODE_SECTION
 #error "SECTION start keyword not matching"
@@ -372,7 +343,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CALLOUT_CODE)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section text=".text:CDD_I2C_CALLOUT_TEXT_SECTION"
+#pragma clang section text=".text.CDD_I2C_CALLOUT_TEXT_SECTION"
 #else
 #pragma SET_CODE_SECTION("CDD_I2C_CALLOUT_TEXT_SECTION")
 #endif
@@ -443,7 +414,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -457,7 +428,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -471,7 +442,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -485,7 +456,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -499,7 +470,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -513,7 +484,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -527,7 +498,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -541,7 +512,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -555,7 +526,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONFIG_DATA)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif

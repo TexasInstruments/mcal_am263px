@@ -230,6 +230,11 @@ typedef enum modes{
 /** \brief Enable PHY */
 #define FLS_OSPI_PHY_ENABLE                   ([!IF "as:modconf('Fls')[1]/FlsConfigSet/FlsPhyEnable = 'true'"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
 
+/** \brief PHY control mode */
+#define FLS_OSPI_PHY_CONTROL_MODE              ([!"as:modconf('Fls')[1]/FlsConfigSet/FlsPhyControlMode"!])
+
+/** \brief PHY DLL Lock mode */
+#define FLS_OSPI_PHY_DLL_LOCK_MODE              ([!"as:modconf('Fls')[1]/FlsConfigSet/FlsPhyDllLockMode"!])
 
 /**
  * \name FLS interrupt configuration

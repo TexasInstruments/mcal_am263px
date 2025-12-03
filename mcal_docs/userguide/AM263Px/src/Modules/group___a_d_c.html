@@ -1876,6 +1876,18 @@ Typedef for group end notification function pointer.</p>
 <tr class="row-even"><td><p>ADC_SID_SET_INTERRUPT_CONTINUOUS_MODE</p></td>
 <td><p>Adc_SetInterruptContinuousMode() API Service ID.</p></td>
 </tr>
+<tr class="row-odd"><td><p>ADC_START_SEC_CODE</p></td>
+<td><p>Start Memory section tag.</p></td>
+</tr>
+<tr class="row-even"><td><p>ADC_START_SEC_CODE</p></td>
+<td><p>Start Memory section tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ADC_STOP_SEC_CODE</p></td>
+<td><p>End Memory section tag.</p></td>
+</tr>
+<tr class="row-even"><td><p>ADC_STOP_SEC_CODE</p></td>
+<td><p>End Memory section tag.</p></td>
+</tr>
 <tr class="row-odd"><td><p>ADC_EVT_TRIPHI</p></td>
 <td><p>Trip High Event.</p></td>
 </tr>
@@ -1950,12 +1962,6 @@ Typedef for group end notification function pointer.</p>
 </tr>
 <tr class="row-odd"><td><p>MCAL_ADC_RESULT_ADCRESULTx_STEP</p></td>
 <td><p>Register offset difference between 2 ADCRESULTx registers.</p></td>
-</tr>
-<tr class="row-even"><td><p>ADC_START_SEC_CODE</p></td>
-<td><p>Start Memory section tag.</p></td>
-</tr>
-<tr class="row-odd"><td><p>ADC_STOP_SEC_CODE</p></td>
-<td><p>End Memory section tag.</p></td>
 </tr>
 <tr class="row-even"><td><p>ADC_NUM_CHANNEL</p></td>
 <td><p>Number of MCAL channels - in terms of ADC HW, this represents the number of hardware steps. Note: In terms of ADC IP number of steps is 16. Due to AUTOSAR specification, the channel ID’s should be unique i.e each channel Id and actual HW channel should have one to one mapping. So ADC_NUM_CHANNEL is fixed to 9 as number of actual HW channels available is also 9.</p></td>
@@ -3903,7 +3909,7 @@ Returns the reference to the head node. This does not remove the node from the h
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Nov 14, 2025.
+          <span class="lastupdated" >Last updated on Dec 03, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

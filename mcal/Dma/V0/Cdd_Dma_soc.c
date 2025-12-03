@@ -42,7 +42,11 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Cdd_Dma_Cfg.h"
-#include "hw_types.h"
+#define CDD_DMA_START_SEC_CODE
+#include "Cdd_Dma_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_DMA_STOP_SEC_CODE
+#include "Cdd_Dma_MemMap.h"
 #include "Cdd_Dma.h"
 #include "stddef.h"
 

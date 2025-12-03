@@ -29,6 +29,7 @@ AR = $(TOOLCHAIN_PATH_$(CGT_ISA))/bin/tiarmar
 LNK = $(TOOLCHAIN_PATH_$(CGT_ISA))/bin/tiarmclang
 STRP = $(TOOLCHAIN_PATH_$(CGT_ISA))/bin/tiarmstrip
 SIZE = $(TOOLCHAIN_PATH_$(CGT_ISA))/bin/tiarmofd
+READELF = $(TOOLCHAIN_PATH_$(CGT_ISA))/bin/tiarmreadelf
 
 # Derive a part of RTS Library name based on ENDIAN: little/big
 ifeq ($(ENDIAN),little)
@@ -86,7 +87,7 @@ LNKFLAGS_INTERNAL_PROFILE =
 CFLAGS_INTERNAL += -D_DEBUG_=1
 endif
 
-LNKFLAGS_INTERNAL_PROFILE = -Wl,-qq, $(LNKFLAGS_GLOBAL_$(CORE))
+LNKFLAGS_INTERNAL_PROFILE = -Wl,-qq $(LNKFLAGS_GLOBAL_$(CORE))
 
 ifeq ($(CGT_ISA),$(filter $(CGT_ISA), R5))
 CFLAGS_INTERNAL += -ffunction-sections
@@ -166,13 +167,17 @@ ARFLAGS = rc
 # Archive/library file creation
 $(LIBDIR)/$(MODULE_NAME).$(LIBEXT) : $(OBJ_PATHS_ASM) $(OBJ_PATHS)
 	$(ECHO) \# Archiving $(PLATFORM):$(CORE):$(PROFILE_$(CORE)):$(MODULE_NAME): to $@ ...
-	$(ECHO) \#
 	$(AR) $(ARFLAGS) $@ $(OBJ_PATHS_ASM) $(OBJ_PATHS)
+	$(ECHO) \# Creating section dump file $(subst .aer5f,,$@)_sections.json ...
+	$(ECHO) \#
+	$(READELF) --sections --pretty-print --elf-output-style=JSON $@ > $(subst .aer5f,,$@)_sections.json
 
 # Linker options and rules
 # --diag_suppress=10068: suppress error "no matching section"
 # --diag_suppress=10063: suppress  supresses 'warning: entry point other than _c_int00 specified
-LNKFLAGS_INTERNAL_COMMON += -Wl,--warn_sections,-qq,--diag_suppress=10068, -mcpu=$(CGT_CPU),–-diag_suppress=10063,–-ram_model,–-reread_libs
+LNKFLAGS_INTERNAL_COMMON += -Wl,--warn_sections,-qq,--diag_suppress=10068,-mcpu=$(CGT_CPU),--diag_suppress=10063,--ram_model,--reread_libs
+# --diag_suppress=10261: suppress error "section specifier matches no sections"
+LNKFLAGS_INTERNAL_COMMON += -Wl,--display_error_number,--diag_suppress=10261
 
 # Assemble Linker flags from all other LNKFLAGS definitions
 _LNKFLAGS = $(LNKFLAGS_INTERNAL_COMMON) $(LNKFLAGS_INTERNAL_PROFILE)

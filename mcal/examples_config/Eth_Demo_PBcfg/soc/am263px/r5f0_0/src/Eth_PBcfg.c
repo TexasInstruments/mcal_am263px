@@ -84,6 +84,43 @@ VAR(struct Eth_ConfigType_s, ETH_PBCFG)
                     0xFFU,
                 },
             },
+#if (ETH_TRAFFIC_SHAPING_API == STD_ON)
+            .shaperCfg =
+            {
+                {
+                    .queueNum = (uint8)0U,
+                    .idleSlope = (uint32)0U,
+                },
+                {
+                    .queueNum = (uint8)1U,
+                    .idleSlope = (uint32)0U,
+                },
+                {
+                    .queueNum = (uint8)2U,
+                    .idleSlope = (uint32)0U,
+                },
+                {
+                    .queueNum = (uint8)3U,
+                    .idleSlope = (uint32)0U,
+                },
+                {
+                    .queueNum = (uint8)4U,
+                    .idleSlope = (uint32)0U,
+                },
+                {
+                    .queueNum = (uint8)5U,
+                    .idleSlope = (uint32)0U,
+                },
+                {
+                    .queueNum = (uint8)6U,
+                    .idleSlope = (uint32)0U,
+                },
+                {
+                    .queueNum = (uint8)7U,
+                    .idleSlope = (uint32)0U,
+                },
+            }
+#endif
        },
 
 #if (STD_ON == ETH_ENABLE_MII_API)

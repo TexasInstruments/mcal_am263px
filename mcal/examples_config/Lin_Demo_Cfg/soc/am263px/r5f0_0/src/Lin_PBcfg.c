@@ -78,6 +78,7 @@ CONST(Lin_ConfigType, LIN_CFG) Lin_Config =
       },
       .linBaudConfig =
       {
+         .BaudRate = 19200U,
          .Prescalar = 155U,
          .FractionalDivider = 4U
       },

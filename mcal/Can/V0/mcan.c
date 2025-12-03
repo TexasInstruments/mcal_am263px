@@ -18,7 +18,7 @@
 #include "mcan.h"
 #define CAN_START_SEC_CODE
 #include "Can_MemMap.h"
-#include "hw_types.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
 #define CAN_STOP_SEC_CODE
 #include "Can_MemMap.h"
 /* Includes for MCAL */
@@ -200,16 +200,17 @@ static uint32 MCAN_getDataSize(uint32 data_length);
 /*                            Global Variables                                */
 /* ========================================================================== */
 
-#define CAN_START_SEC_VAR_INIT_32
+#define CAN_START_SEC_CONST_32
 #include "Can_MemMap.h"
 
 /* payload depending on 'dlc'  field. */
 static const uint32 Can_DataSize[16] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24, 32, 48, 64};
 /* message object stored in Message RAM. */
 static const uint32 Can_MsgObjSize[8] = {4, 5, 6, 7, 8, 10, 14, 18};
-
-#define CAN_STOP_SEC_VAR_INIT_32
+static const uint32 dataSize[16]      = {0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U, 12U, 16U, 20U, 24U, 32U, 48U, 64U};
+#define CAN_STOP_SEC_CONST_32
 #include "Can_MemMap.h"
+
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
@@ -1007,8 +1008,6 @@ static void MCAN_writeMsg(uint32 baseAddr, uint32 elemAddr, const MCAN_TxBufElem
 
 static uint32 MCAN_getDataSize(uint32 data_length)
 {
-    uint32 dataSize[16] = {0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U, 12U, 16U, 20U, 24U, 32U, 48U, 64U};
-
     return (dataSize[data_length]);
 }
 

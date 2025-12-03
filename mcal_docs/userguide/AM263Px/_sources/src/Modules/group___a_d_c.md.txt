@@ -769,6 +769,10 @@ Typedef for group end notification function pointer.
 | ADC_SID_REGISTER_READBACK   | Adc_RegisterReadback() API Service ID.  |
 | ADC_SID_GET_READ_RESULT_BASE_ADDRESS   | Adc_GetReadResultBaseAddress() API Service ID.  |
 | ADC_SID_SET_INTERRUPT_CONTINUOUS_MODE   | Adc_SetInterruptContinuousMode() API Service ID.  |
+| ADC_START_SEC_CODE   | Start Memory section tag.  |
+| ADC_START_SEC_CODE   | Start Memory section tag.  |
+| ADC_STOP_SEC_CODE   | End Memory section tag.  |
+| ADC_STOP_SEC_CODE   | End Memory section tag.  |
 | ADC_EVT_TRIPHI   | Trip High Event.  |
 | ADC_EVT_TRIPLO   | Trip Low Event.  |
 | ADC_EVT_ZERO   | Zero Crossing Event.  |
@@ -794,8 +798,6 @@ Typedef for group end notification function pointer.
 | MCAL_ADC_ADCPPBTRIP_MASK   | ADC PPB Trip Mask.  |
 | MCAL_ADC_RESULT_ADCPPBxRESULT_STEP   | Register offset difference between 2 ADCPPBxRESULT registers.  |
 | MCAL_ADC_RESULT_ADCRESULTx_STEP   | Register offset difference between 2 ADCRESULTx registers.  |
-| ADC_START_SEC_CODE   | Start Memory section tag.  |
-| ADC_STOP_SEC_CODE   | End Memory section tag.  |
 | ADC_NUM_CHANNEL   | Number of MCAL channels - in terms of ADC HW, this represents the number of hardware steps. Note: In terms of ADC IP number of steps is 16. Due to AUTOSAR specification, the channel ID's should be unique i.e each channel Id and actual HW channel should have one to one mapping. So ADC_NUM_CHANNEL is fixed to 9 as number of actual HW channels available is also 9.  |
 | ADC_MIN_CHANNEL_ID   | Minimum value of channel ID.  |
 | ADC_MAX_CHANNEL_ID   | Maximum value of channel ID.  |

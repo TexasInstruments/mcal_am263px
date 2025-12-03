@@ -160,7 +160,7 @@ extern "C"
 /*LDRA_INSPECTED 69 S : MISRAC_2012_D.1.1
  * "Reason - Pragma usage is required here " */
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_INIT_UNSPECIFIED_SECTION"
+#pragma clang section data=".data.CDD_IPC_DATA_INIT_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_INIT_UNSPECIFIED_SECTION")
 #endif
@@ -178,7 +178,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_UNSPECIFIED)
 #elif defined(START_SEC_COMMON_VAR_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_INIT_32_SECTION"
+#pragma clang section data=".data.CDD_IPC_DATA_INIT_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_INIT_32_SECTION")
 #endif
@@ -191,7 +191,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_INIT_16_SECTION"
+#pragma clang section data=".data.CDD_IPC_DATA_INIT_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_INIT_16_SECTION")
 #endif
@@ -204,7 +204,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_INIT_8_SECTION"
+#pragma clang section data=".data.CDD_IPC_DATA_INIT_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_INIT_8_SECTION")
 #endif
@@ -217,7 +217,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_NO_INIT_UNSPECIFIED_SECTION"
+#pragma clang section bss=".bss.CDD_IPC_DATA_NO_INIT_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_NO_INIT_UNSPECIFIED_SECTION")
 #endif
@@ -230,7 +230,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_NO_INIT_32_SECTION"
+#pragma clang section bss=".bss.CDD_IPC_DATA_NO_INIT_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_NO_INIT_32_SECTION")
 #endif
@@ -243,7 +243,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_NO_INIT_16_SECTION"
+#pragma clang section bss=".bss.CDD_IPC_DATA_NO_INIT_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_NO_INIT_16_SECTION")
 #endif
@@ -256,7 +256,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_DATA_NO_INIT_8_SECTION"
+#pragma clang section bss=".bss.CDD_IPC_DATA_NO_INIT_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_DATA_NO_INIT_8_SECTION")
 #endif
@@ -269,7 +269,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_CONST_UNSPECIFIED_SECTION"
+#pragma clang section rodata=".rodata.CDD_IPC_CONST_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_CONST_UNSPECIFIED_SECTION")
 #endif
@@ -282,7 +282,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_CONST_32_SECTION"
+#pragma clang section rodata=".rodata.CDD_IPC_CONST_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_CONST_32_SECTION")
 #endif
@@ -295,7 +295,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_CONST_16_SECTION"
+#pragma clang section rodata=".rodata.CDD_IPC_CONST_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_CONST_16_SECTION")
 #endif
@@ -308,7 +308,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_CONST_8_SECTION"
+#pragma clang section rodata=".rodata.CDD_IPC_CONST_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_CONST_8_SECTION")
 #endif
@@ -321,7 +321,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONFIG_DATA)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CDD_IPC_CONFIG_SECTION"
+#pragma clang section rodata=".rodata.CDD_IPC_CONFIG_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_IPC_CONFIG_SECTION")
 #endif
@@ -443,7 +443,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -457,7 +457,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -471,7 +471,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -485,7 +485,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -499,7 +499,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -513,7 +513,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -527,7 +527,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -541,7 +541,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -555,7 +555,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONFIG_DATA)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif

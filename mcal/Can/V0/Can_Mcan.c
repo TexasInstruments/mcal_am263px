@@ -23,7 +23,7 @@
 #include "mcan.h"
 #define CAN_START_SEC_CODE
 #include "Can_MemMap.h"
-#include "hw_types.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
 #define CAN_STOP_SEC_CODE
 #include "Can_MemMap.h"
 #include "hw_mcanss.h"
@@ -164,12 +164,12 @@ static void Can_CheckCsStarted(Can_ControllerObjType *canController, uint32 base
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
-#define CAN_START_SEC_VAR_INIT_8
+#define CAN_START_SEC_CONST_8
 #include "Can_MemMap.h"
 
 static const uint8 Can_McanDataSize[16] = {0U, 1U, 2U, 3U, 4U, 5U, 6U, 7U, 8U, 12U, 16U, 20U, 24U, 32U, 48U, 64U};
 
-#define CAN_STOP_SEC_VAR_INIT_8
+#define CAN_STOP_SEC_CONST_8
 #include "Can_MemMap.h"
 
 /* ========================================================================== */

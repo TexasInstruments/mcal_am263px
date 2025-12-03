@@ -11,7 +11,7 @@ EXAMPLES += Cdd_Cmpss
 EXAMPLES += Dio
 EXAMPLES += Dma/Dma_ChainingMode Dma/Dma_InterruptMode Dma/Dma_LinkingMode Dma/Dma_PollingMode
 EXAMPLES += Epwm
-EXAMPLES += Fls
+EXAMPLES += Fls/fls_app
 EXAMPLES += FsiRx
 EXAMPLES += Gpt
 EXAMPLES += I2c/i2c_app I2c/i2c_intr_app I2c/i2c_multichannel_app
@@ -26,19 +26,19 @@ EXAMPLES += Wdg/wdg_app Wdg/wdg_skip_reset_app
 #Platform specific examples
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263))
   EXAMPLES += Eth/eth_app Eth/eth_test_app
-  EXAMPLES += Flsdiag
+  EXAMPLES += Fls/Flsdiag
   EXAMPLES += Uart/uart_echo_dma_app
 endif
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
   EXAMPLES += Adc/adc_resolver_app Adc/adc_resolver_dma_app
   EXAMPLES += Cdd_Flc
   EXAMPLES += Eth/eth_app Eth/eth_test_app
-  EXAMPLES += Flsdiag_ospi
+  EXAMPLES += Fls/Flsdiag_ospi Fls/fls_phy_app Fls/fls_xip_app
   EXAMPLES += Uart/uart_echo_dma_app
 endif
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
   EXAMPLES += Cdd_Flc
-  EXAMPLES += Flsdiag_ospi
+  EXAMPLES += Fls/Flsdiag_ospi Fls/fls_phy_app Fls/fls_xip_app
   EXAMPLES += Uart/uart_interrupt_app
 endif
 

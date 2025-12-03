@@ -85,7 +85,7 @@
 /**
  *  \brief Port ratelimit max counter value
  */
-#define CPSW_PORT_BANDWIDTH_CNT_MAX (0x0FFFFFFFULL)
+#define CPSW_PORT_BANDWIDTH_CNT_MAX (0xFFFFFFFFU)
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */
@@ -118,6 +118,8 @@ static uint32 CpswPort_mapCntToBw(uint32 cntVal, uint32 cppiClkFreqHz);
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
+#define ETH_START_SEC_CODE
+#include "Eth_MemMap.h"
 
 void CpswPort_hostPortopen(uint32 baseAddr)
 {
@@ -156,15 +158,10 @@ void CpswPort_hostPortopen(uint32 baseAddr)
     CPPI_WR_FIELD(P0_RX_MAXLEN, RX_MAXLEN, ETH_MAX_FRAME_LEN);
 }
 
-void CpswPort_setDMATXPtype(uint32 baseAddr, uint32 TXPtype)
-{
-    CPDMA_WR_FIELD(CONTROL, DMACTRL_TX_PTYPE, TXPtype);
-}
-
 uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq, uint32 bandwithLimitBitPerSec)
 {
     uint8  status = E_OK;
-    uint64 cir    = 0LLU;
+    uint32 cir    = 0U;
 
     cir = CpswPort_mapBwToCnt(bandwithLimitBitPerSec, cppiClockFreq);
 
@@ -193,12 +190,21 @@ void CpswPort_getBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiCloc
 static uint32 CpswPort_mapBwToCnt(uint32 rateInBps, uint32 cppiClkFreqHz)
 {
     uint64 tmp64 = 0ULL;
+    uint32 cnt   = 0U;
 
-    tmp64  = (uint64)rateInBps * CPSW_PORT_RATELIM_DIV;
-    tmp64 += (uint64)cppiClkFreqHz - 1ULL;
-    tmp64 /= cppiClkFreqHz;
+    if (0U != cppiClkFreqHz)
+    {
+        tmp64  = (uint64)rateInBps * CPSW_PORT_RATELIM_DIV;
+        tmp64 += (uint64)cppiClkFreqHz - 1ULL;
+        tmp64 /= (uint64)cppiClkFreqHz;
+        cnt    = (uint32)tmp64;
+    }
+    else
+    {
+        cnt = CPSW_PORT_BANDWIDTH_CNT_MAX; /* Assign max as invalid */
+    }
 
-    return (uint32)tmp64;
+    return cnt;
 }
 
 static uint32 CpswPort_mapCntToBw(uint32 cntVal, uint32 cppiClkFreqHz)
@@ -210,3 +216,6 @@ static uint32 CpswPort_mapCntToBw(uint32 cntVal, uint32 cppiClkFreqHz)
 
     return (uint32)tmp64;
 }
+
+#define ETH_STOP_SEC_CODE
+#include "Eth_MemMap.h"

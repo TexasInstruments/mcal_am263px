@@ -81,9 +81,7 @@
 /*LDRA_INSPECTED 243 S : MISRAC_2012_D.4.10
  * "Reason - Memmap file cannot have include guard w.r.o autosar spec " */
 #include "Gpt_MemMap.h"
-
 volatile VAR(uint32, GPT_DATA) Gpt_DriverStatus = GPT_DRIVER_UNINITIALIZED;
-
 #define GPT_STOP_SEC_VAR_INIT_UNSPECIFIED
 /*LDRA_INSPECTED 338 S : MISRAC_2012_R.20.1
  * "Reason - Required to comply with AUTOSAR memmap spec " */
@@ -95,7 +93,6 @@ volatile VAR(uint32, GPT_DATA) Gpt_DriverStatus = GPT_DRIVER_UNINITIALIZED;
 /*LDRA_INSPECTED 243 S : MISRAC_2012_D.4.10
  * "Reason - Memmap file cannot have include guard w.r.o autosar spec " */
 #include "Gpt_MemMap.h"
-
 VAR(uint32, GPT_DATA) Gpt_IsrIndex[GPT_RTI_MAX];
 
 /* Variable to indicate the state of the channel */
@@ -129,10 +126,8 @@ VAR(uint16, GPT_DATA) Gpt_ChConfig_map[GPT_RTI_MAX];
 /*LDRA_INSPECTED 243 S : MISRAC_2012_D.4.10
  * "Reason - Memmap file cannot have include guard w.r.o autosar spec " */
 #include "Gpt_MemMap.h"
-
 /** \brief GPT driver object */
 P2CONST(Gpt_ConfigType, GPT_DATA, GPT_PBCFG) Gpt_Config_pt = (Gpt_ConfigType *)NULL_PTR;
-
 #define GPT_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Gpt_MemMap.h"
 

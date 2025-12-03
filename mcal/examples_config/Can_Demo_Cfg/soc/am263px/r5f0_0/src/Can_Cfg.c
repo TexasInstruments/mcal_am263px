@@ -49,11 +49,16 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-#define CAN_START_SEC_CONFIG_DATA
+
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
+
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Can_MemMap.h"
 
 
-
+#define CAN_START_SEC_CONST_UNSPECIFIED
+#include "Can_MemMap.h"
 /* Controller structure defined here for all config sets */
 
 
@@ -133,8 +138,16 @@ const struct Can_ControllerStruct_PC
 	    CAN_CONTROLLER_INSTANCE_MCAN4,  /* Controller Instance */
 };
 
+#define CAN_STOP_SEC_CONST_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 const struct Can_ControllerStruct_PC
     *CanConfigSet_CanController_List_PC[CAN_NUM_CONTROLLER]=
 {
@@ -144,9 +157,17 @@ const struct Can_ControllerStruct_PC
     &CanConfigSet_PC_CanController_3,
     &CanConfigSet_PC_CanController_4,
 };
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define CAN_START_SEC_CONST_UNSPECIFIED
+#include "Can_MemMap.h"
 /* All the Mailbox objects(MB's) will be defined here for all config sets */
 static const struct Can_MailboxStruct_PC
     CanConfigSet_PC_CanHardwareObject_0 =
@@ -248,8 +269,16 @@ static const struct Can_MailboxStruct_PC
 {
     CanConf_CanHardwareObject_CanHardwareObject_19,  /* CanObjectId - Holds handle Id */
 };
+#define CAN_STOP_SEC_CONST_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 /* List of the Mailboxes */
 const struct Can_MailboxStruct_PC
     *CanConfigSet_CanHardwareObject_List_PC[CAN_NUM_MAILBOXES] =
@@ -275,7 +304,11 @@ const struct Can_MailboxStruct_PC
     &CanConfigSet_PC_CanHardwareObject_18,
     &CanConfigSet_PC_CanHardwareObject_19,
 };
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 
+#define  CAN_START_SEC_CONFIG_DATA
+#include "Can_MemMap.h"
 
 #define  CAN_STOP_SEC_CONFIG_DATA
 #include "Can_MemMap.h"

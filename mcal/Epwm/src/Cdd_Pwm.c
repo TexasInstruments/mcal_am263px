@@ -82,10 +82,8 @@
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
 #include "Det.h"
 #endif
-
 #include "Cdd_Pwm_Irq.h"
 #include "Cdd_Pwm_Priv.h"
-#include "hw_epwm.h"
 #include "Cdd_Pwm_Cfg.h"
 
 /* ========================================================================== */
@@ -122,28 +120,22 @@ static void Cdd_Pwm_StartNotification(Cdd_Pwm_ChannelType ChannelParameter, Cdd_
 /* ========================================================================== */
 #define CDD_PWM_START_SEC_VAR_INIT_8
 #include "Cdd_Pwm_MemMap.h"
-
 /** \brief Cdd_Pwm driver init status */
 volatile VAR(uint8, CDD_PWM_VAR_INIT) Cdd_Pwm_DrvStatus = CDD_PWM_STATUS_UNINIT;
-
 #define CDD_PWM_STOP_SEC_VAR_INIT_8
 #include "Cdd_Pwm_MemMap.h"
 
 #define CDD_PWM_START_SEC_VAR_NO_INIT_16
 #include "Cdd_Pwm_MemMap.h"
-
 /** \brief Cdd_Pwm driver interrupt index. */
 VAR(Cdd_Pwm_ChannelType, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_IsrIndex[CDD_PWM_HW_MAX_NUM_CHANNELS];
-
 #define CDD_PWM_STOP_SEC_VAR_NO_INIT_16
 #include "Cdd_Pwm_MemMap.h"
 
 #define CDD_PWM_START_SEC_VAR_NO_INIT_32
 #include "Cdd_Pwm_MemMap.h"
-
 /** \brief CDD_PWM SFO Calibration status for each configured channel*/
 VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_ChannelSfoStatus[CDD_PWM_MAX_NUM_CHANNELS];
-
 #define CDD_PWM_STOP_SEC_VAR_NO_INIT_32
 #include "Cdd_Pwm_MemMap.h"
 

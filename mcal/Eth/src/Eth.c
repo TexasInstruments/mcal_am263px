@@ -96,15 +96,12 @@
 #include "SchM_Eth.h"
 #include "string.h"
 #include "Std_Types.h"
-/* There are static inline functions in hw_types.h file. Map them as well */
 #define ETH_START_SEC_CODE
-
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Eth_MemMap.h"
-#include "hw_types.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
 #define ETH_STOP_SEC_CODE
-
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Eth_MemMap.h"

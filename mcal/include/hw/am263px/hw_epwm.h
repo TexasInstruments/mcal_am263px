@@ -58,7 +58,6 @@ extern "C"
  Header Files
 
 *******************************************************************************/
-#include "hw_types.h"
 #include "hw_epwm_reg.h"
 
 /******************************************************************************
@@ -547,7 +546,7 @@ typedef enum
     EPWM_AQ_TRIGGER_EVENT_TRIG_EPWM_SYNCIN = 7, /*!< ePWM sync*/
     EPWM_AQ_TRIGGER_EVENT_TRIG_DC_EVTFILT = 8 /*!< Digital compare filter event*/
 } EPWM_ActionQualifierTriggerSource;
- 
+
 /******************************************************************************
 
  Values that can be passed to EPWM_setActionQualifierAction() as the \e
@@ -2743,8 +2742,8 @@ EPWM_enableSyncOutPulseSource(uint32 base, uint16 source)
     /*
      Check the arguments
     */
-    
-    
+
+
 
     /*
      Enable selected EPWM Sync-Out Sources.
@@ -3401,7 +3400,7 @@ EPWM_setCounterCompareShadowLoadMode(uint32 base,
         registerOffset = base + PWM_EPWM_CMPCTL2;
     }
 
-    
+
     /* Set the appropriate sync and load mode bits and also enable shadow
      load mode. Shadow to active load can also be frozen.
     */
@@ -3595,7 +3594,7 @@ EPWM_getCounterCompareShadowStatus(uint32 base,
     /*
     Check the arguments
     */
-    
+
     /*
      Read the value of SHDWAFULL or SHDWBFULL bit
     */
@@ -3736,7 +3735,7 @@ EPWM_setActionQualifierT1TriggerSource(uint32 base,
  \param trigger sources for Action Qualifier triggers.
 
  This function sets up the sources for Action Qualifier event T2.
- Valid values for trigger are:  
+ Valid values for trigger are:
    - EPWM_AQ_TRIGGER_EVENT_TRIG_DCA_1       - Digital compare event A 1
    - EPWM_AQ_TRIGGER_EVENT_TRIG_DCA_2       - Digital compare event A 2
    - EPWM_AQ_TRIGGER_EVENT_TRIG_DCB_1       - Digital compare event B 1
@@ -3744,7 +3743,7 @@ EPWM_setActionQualifierT1TriggerSource(uint32 base,
    - EPWM_AQ_TRIGGER_EVENT_TRIG_TZ_1        - Trip zone 1
    - EPWM_AQ_TRIGGER_EVENT_TRIG_TZ_2        - Trip zone 2
    - EPWM_AQ_TRIGGER_EVENT_TRIG_TZ_3        - Trip zone 3
-   - EPWM_AQ_TRIGGER_EVENT_TRIG_EPWM_SYNCIN - ePWM sync   
+   - EPWM_AQ_TRIGGER_EVENT_TRIG_EPWM_SYNCIN - ePWM sync
    - EPWM_AQ_TRIGGER_EVENT_TRIG_DC_EVTFILT  - Digital compare filter event
 
  \return None.
@@ -4394,7 +4393,7 @@ EPWM_setFallingEdgeDeadBandDelayInput(uint32 base, uint16 input)
     /*
      Check the arguments
     */
-    
+
 
     if(input == EPWM_DB_INPUT_DB_RED)
     {
@@ -4639,7 +4638,7 @@ EPWM_setRisingEdgeDelayCount(uint32 base, uint16 redCount)
     /*
      Check the arguments
     */
-    
+
 
     /*
      Set the RED (Rising Edge Delay) count
@@ -4666,7 +4665,7 @@ EPWM_setFallingEdgeDelayCount(uint32 base, uint16 fedCount)
     /*
      Check the arguments
     */
-   
+
 
     /*
      Set the FED (Falling Edge Delay) count
@@ -4740,7 +4739,7 @@ EPWM_setChopperDutyCycle(uint32 base, uint16 dutyCycleCount)
     /*
     Check the arguments
    */
-    
+
     /*
      Set the chopper duty cycle
     */
@@ -4770,7 +4769,7 @@ EPWM_setChopperFreq(uint32 base, uint16 freqDiv)
     /*
      Check the arguments
     */
-   
+
 
     /*
      Set the chopper clock
@@ -4802,7 +4801,7 @@ EPWM_setChopperFirstPulseWidth(uint32 base, uint16 firstPulseWidth)
     /*
      Check the arguments
     */
-   
+
 
     /*
      Set the chopper clock
@@ -5222,7 +5221,7 @@ EPWM_enableTripZoneInterrupt(uint32 base, uint16 tzInterrupt)
     /*
      Check the arguments
     */
-    
+
 
     /*
     Enable Trip zone interrupts
@@ -5259,7 +5258,7 @@ EPWM_disableTripZoneInterrupt(uint32 base, uint16 tzInterrupt)
     /*
     Check the arguments
    */
-   
+
 
     /*
     Disable Trip zone interrupts
@@ -5421,7 +5420,7 @@ EPWM_clearTripZoneFlag(uint32 base, uint16 tzFlags)
     /*
      Check the arguments
     */
-   
+
 
     /*
      Clear Trip zone event flag
@@ -5459,7 +5458,7 @@ EPWM_clearCycleByCycleTripZoneFlag(uint32 base, uint16 tzCBCFlags)
     /*
      Check the arguments
     */
-   
+
 
     /*
      Clear the Cycle By Cycle Trip zone flag
@@ -5496,7 +5495,7 @@ EPWM_clearOneShotTripZoneFlag(uint32 base, uint16 tzOSTFlags)
     /*
      Check the arguments
    */
-   
+
 
     /*
      Clear the Cycle By Cycle Trip zone flag
@@ -5530,7 +5529,7 @@ EPWM_forceTripZoneEvent(uint32 base, uint16 tzForceEvent)
     /*
      Check the arguments
     */
-  
+
 
     /*
      Force a Trip Zone event
@@ -5673,7 +5672,7 @@ EPWM_setInterruptSource(uint32 base, uint16 interruptSource,
     /*
      Check the arguments
     */
-    
+
     if((interruptSource == EPWM_INT_TBCTR_U_CMPC) ||
        (interruptSource == EPWM_INT_TBCTR_U_CMPD) ||
        (interruptSource == EPWM_INT_TBCTR_D_CMPC) ||
@@ -5747,7 +5746,7 @@ EPWM_setInterruptEventCount(uint32 base, uint16 eventCount)
     /*
      Check the arguments
     */
-    
+
     /*
      Enable advanced feature of interrupt every up to 15 events
     */
@@ -5897,7 +5896,7 @@ EPWM_setInterruptEventCountInitValue(uint32 base, uint16 eventCount)
     /*
      Check the arguments
     */
-    
+
     /*
      Set the Pre-interrupt event count
     */
@@ -6073,7 +6072,7 @@ EPWM_setADCTriggerSource(uint32 base,
 
     if(adcSOCType == EPWM_SOC_A)
     {
-       EPWM_pwmadcSOCType_A(base,source,socSource,mixedSource);  
+       EPWM_pwmadcSOCType_A(base,source,socSource,mixedSource);
     }
     else
     {
@@ -6081,7 +6080,7 @@ EPWM_setADCTriggerSource(uint32 base,
     }
 }
 
-static inline FUNC(void, PWM_CODE) 
+static inline FUNC(void, PWM_CODE)
 EPWM_pwmadcSOCType_A(uint32 base,uint16 source,EPWM_ADCStartOfConversionSource socSource,uint16 mixedSource)
 {
          /*Set the SOC source*/
@@ -6132,7 +6131,7 @@ EPWM_pwmadcSOCType_A(uint32 base,uint16 source,EPWM_ADCStartOfConversionSource s
         }
 }
 
-static inline FUNC(void, PWM_CODE)  
+static inline FUNC(void, PWM_CODE)
 EPWM_pwmadcSOCType_B(uint32 base,uint16 source,EPWM_ADCStartOfConversionSource socSource,uint16 mixedSource)
 {
     /*
@@ -6216,7 +6215,7 @@ EPWM_setADCTriggerEventPrescale(uint32 base,
     /*
      Check the arguments
     */
-   
+
 
     /*
      Enable advanced feature of SOC every up to 15 events
@@ -6418,7 +6417,7 @@ EPWM_setADCTriggerEventCountInitValue(uint32 base,
     /*
      Check the arguments
     */
-    
+
 
     /*
      Set the ADC Trigger event count
@@ -6837,7 +6836,7 @@ EPWM_getDigitalCompareEdgeFilterEdgeCount(uint32 base)
 {
     /*
      Return configured DC edge filter edge count */
-    
+
     return((HW_RD_REG16(base + PWM_EPWM_DCFCTL) &
             PWM_EPWM_DCFCTL_EDGECOUNT_MASK) >>
             PWM_EPWM_DCFCTL_EDGECOUNT_SHIFT);
@@ -7085,9 +7084,9 @@ EPWM_setValleyTriggerEdgeCounts(uint32 base, uint16 startCount,
 {
 
 
-    
+
      /* Write to STARTEDGE and STOPEDGE bits */
-    
+
     HW_WR_REG16(base + PWM_EPWM_VCNTCFG,
         ((HW_RD_REG16(base + PWM_EPWM_VCNTCFG) &
         ~(PWM_EPWM_VCNTCFG_STARTEDGE_MASK | PWM_EPWM_VCNTCFG_STOPEDGE_MASK)) |
@@ -7108,9 +7107,9 @@ EPWM_setValleyTriggerEdgeCounts(uint32 base, uint16 startCount,
 static inline FUNC(void, PWM_CODE)
 EPWM_enableValleyHWDelay(uint32 base)
 {
-    
+
      /* Set EDGEFILTDLYSEL bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_VCAPCTL,
         (HW_RD_REG16(base + PWM_EPWM_VCAPCTL) |
         PWM_EPWM_VCAPCTL_EDGEFILTDLYSEL_MASK));
@@ -7130,9 +7129,9 @@ EPWM_enableValleyHWDelay(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_disableValleyHWDelay(uint32 base)
 {
-    
+
      /* Clear EDGEFILTDLYSEL bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_VCAPCTL,
         (HW_RD_REG16(base + PWM_EPWM_VCAPCTL) &
         ~PWM_EPWM_VCAPCTL_EDGEFILTDLYSEL_MASK));
@@ -7153,9 +7152,9 @@ EPWM_disableValleyHWDelay(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_setValleySWDelayValue(uint32 base, uint16 delayOffsetValue)
 {
-    
+
      /* Write to SWVDELVAL bits */
-    
+
     HW_WR_REG16(base + PWM_EPWM_SWVDELVAL, delayOffsetValue);
 }
 
@@ -7174,9 +7173,9 @@ EPWM_setValleySWDelayValue(uint32 base, uint16 delayOffsetValue)
 static inline FUNC(void, PWM_CODE)
 EPWM_setValleyDelayDivider(uint32 base, EPWM_ValleyDelayMode delayMode)
 {
-    
+
      /* Write to VDELAYDIV bits */
-    
+
     HW_WR_REG16(base + PWM_EPWM_VCAPCTL,
         ((HW_RD_REG16(base + PWM_EPWM_VCAPCTL) &
         ~PWM_EPWM_VCAPCTL_VDELAYDIV_MASK) |
@@ -7205,18 +7204,18 @@ EPWM_getValleyEdgeStatus(uint32 base, EPWM_ValleyCounterEdge edge)
 	boolean returnValue = TRUE;
     if(edge == EPWM_VALLEY_COUNT_START_EDGE)
     {
-        
+
          /* Returns STARTEDGESTS status */
-        
+
         returnValue = (((HW_RD_REG16(base + PWM_EPWM_VCNTCFG) &
                       PWM_EPWM_VCNTCFG_STARTEDGESTS_MASK) ==
                      PWM_EPWM_VCNTCFG_STARTEDGESTS_MASK) ? TRUE : FALSE);
     }
     else
     {
-        
+
          /* Returns STOPEDGESTS status */
-        
+
         returnValue =(((HW_RD_REG16(base + PWM_EPWM_VCNTCFG) &
                        PWM_EPWM_VCNTCFG_STOPEDGESTS_MASK) ==
                        PWM_EPWM_VCNTCFG_STOPEDGESTS_MASK) ? TRUE : FALSE);
@@ -7241,9 +7240,9 @@ EPWM_getValleyEdgeStatus(uint32 base, EPWM_ValleyCounterEdge edge)
 static inline FUNC(uint16, PWM_CODE)
 EPWM_getValleyCount(uint32 base)
 {
-    
+
      /* Read VCNTVAL register */
-    
+
     return(HW_RD_REG16(base + PWM_EPWM_VCNTVAL));
 }
 
@@ -7261,9 +7260,9 @@ EPWM_getValleyCount(uint32 base)
 static inline FUNC(uint16, PWM_CODE)
 EPWM_getValleyHWDelay(uint32 base)
 {
-    
+
      /* Read HWVDELVAL  register */
-    
+
     return(HW_RD_REG16(base + PWM_EPWM_HWVDELVAL));
 }
 
@@ -7283,9 +7282,9 @@ EPWM_getValleyHWDelay(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_enableGlobalLoad(uint32 base)
 {
-    
+
      /* Shadow to active load is controlled globally */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL,
         (HW_RD_REG16(base + PWM_EPWM_GLDCTL) | PWM_EPWM_GLDCTL_GLD_MASK));
 }
@@ -7305,9 +7304,9 @@ EPWM_enableGlobalLoad(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_disableGlobalLoad(uint32 base)
 {
-    
+
      /* Shadow to active load is controlled individually */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL,
         (HW_RD_REG16(base + PWM_EPWM_GLDCTL) & ~PWM_EPWM_GLDCTL_GLD_MASK));
 }
@@ -7344,9 +7343,9 @@ EPWM_disableGlobalLoad(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_setGlobalLoadTrigger(uint32 base, EPWM_GlobalLoadTrigger loadTrigger)
 {
-    
+
      /* Set the Global shadow to active load pulse */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL,
         ((HW_RD_REG16(base + PWM_EPWM_GLDCTL) &
         ~PWM_EPWM_GLDCTL_GLDMODE_MASK) |
@@ -7371,15 +7370,15 @@ EPWM_setGlobalLoadTrigger(uint32 base, EPWM_GlobalLoadTrigger loadTrigger)
 static inline FUNC(void, PWM_CODE)
 EPWM_setGlobalLoadEventPrescale(uint32 base, uint16 prescalePulseCount)
 {
-    
-    
-    
-    
 
-    /* 
+
+
+
+
+    /*
      Set the number of counts that have to occur before
      a load strobe is issued */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL,
         ((HW_RD_REG16(base + PWM_EPWM_GLDCTL) & ~PWM_EPWM_GLDCTL_GLDPRD_MASK) |
         (prescalePulseCount << PWM_EPWM_GLDCTL_GLDPRD_SHIFT)));
@@ -7401,9 +7400,9 @@ EPWM_setGlobalLoadEventPrescale(uint32 base, uint16 prescalePulseCount)
 static inline FUNC(uint16, PWM_CODE)
 EPWM_getGlobalLoadEventCount(uint32 base)
 {
-    
+
     /* Return the number of events that have occurred */
-    
+
     return((HW_RD_REG16(base + PWM_EPWM_GLDCTL) >>
             PWM_EPWM_GLDCTL_GLDCNT_SHIFT) & PWM_EPWM_GLDCTL_GLDCNT_MAX);
 }
@@ -7424,9 +7423,9 @@ EPWM_getGlobalLoadEventCount(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_disableGlobalLoadOneShotMode(uint32 base)
 {
-    
+
      /* Enable global continuous shadow to active load */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL,
         (HW_RD_REG16(base + PWM_EPWM_GLDCTL) &
         ~PWM_EPWM_GLDCTL_OSHTMODE_MASK));
@@ -7448,9 +7447,9 @@ EPWM_disableGlobalLoadOneShotMode(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_enableGlobalLoadOneShotMode(uint32 base)
 {
-    
+
     /* Enable global continuous shadow to active load */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL,
         (HW_RD_REG16(base + PWM_EPWM_GLDCTL) | PWM_EPWM_GLDCTL_OSHTMODE_MASK));
 }
@@ -7471,9 +7470,9 @@ EPWM_enableGlobalLoadOneShotMode(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_setGlobalLoadOneShotLatch(uint32 base)
 {
-    
+
      /* Set a one shot Global shadow load pulse. */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL2,
         (HW_RD_REG16(base + PWM_EPWM_GLDCTL2) | PWM_EPWM_GLDCTL2_OSHTLD_MASK));
 }
@@ -7493,9 +7492,9 @@ EPWM_setGlobalLoadOneShotLatch(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_forceGlobalLoadOneShotEvent(uint32 base)
 {
-    
+
      /* Force a Software Global shadow load pulse */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCTL2,
         (HW_RD_REG16(base + PWM_EPWM_GLDCTL2) | PWM_EPWM_GLDCTL2_GFRCLD_MASK));
 }
@@ -7529,9 +7528,9 @@ static inline FUNC(void, PWM_CODE)
 EPWM_enableGlobalLoadRegisters(uint32 base, uint16 loadRegister)
 {
 
-    
+
      /* The register specified by loadRegister is loaded globally */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCFG,
         (HW_RD_REG16(base + PWM_EPWM_GLDCFG) | loadRegister));
 }
@@ -7565,12 +7564,12 @@ EPWM_enableGlobalLoadRegisters(uint32 base, uint16 loadRegister)
 static inline FUNC(void, PWM_CODE)
 EPWM_disableGlobalLoadRegisters(uint32 base, uint16 loadRegister)
 {
-    
 
-    /* 
+
+    /*
      The register specified by loadRegister is loaded by individual
      register configuration setting */
-    
+
     HW_WR_REG16(base + PWM_EPWM_GLDCFG,
         (HW_RD_REG16(base + PWM_EPWM_GLDCFG) & ~loadRegister));
 }
@@ -7591,9 +7590,9 @@ EPWM_disableGlobalLoadRegisters(uint32 base, uint16 loadRegister)
 static inline FUNC(void, PWM_CODE)
 EPWM_lockRegisters(uint32 base, EPWM_LockRegisterGroup registerGroup)
 {
-    
+
      /* Write the Key to EPWMLOCK register */
-    
+
     HW_WR_REG32(base + PWM_EPWM_EPWMLOCK,
         ((uint32)EPWM_LOCK_KEY | ((uint32)registerGroup)));
 }
@@ -8000,10 +7999,10 @@ EPWM_setLutDecX(uint32 base, uint32 block, uint32 decx, uint32 force)
 static inline FUNC(void, PWM_CODE)
 HRPWM_setPhaseShift(uint32 base, uint32 phaseCount)
 {
-    
-    
+
+
      /* Write to TBPHS:TBPHSHR bits */
-    
+
     HW_WR_REG32(base + PWM_EPWM_TBPHS, phaseCount<<8U);
 }
 
@@ -8027,9 +8026,9 @@ static inline FUNC(void, PWM_CODE)
 HRPWM_setHiResPhaseShift(uint32 base, uint16 hrPhaseCount)
 {
 
-   
+
     /* Write to TBPHSHR bits */
-   
+
     HW_WR_REG32(base + PWM_EPWM_TBPHS,
         ((HW_RD_REG32(base + PWM_EPWM_TBPHS) &
         ~((uint32)PWM_EPWM_TBPHS_TBPHSHR_MASK)) |
@@ -8057,11 +8056,11 @@ HRPWM_setHiResPhaseShift(uint32 base, uint16 hrPhaseCount)
 static inline FUNC(void, PWM_CODE)
 HRPWM_setHiResTimeBasePeriod(uint32 base, uint16 hrPeriodCount)
 {
-    
 
-    
+
+
      /* Write to TBPRDHR bits */
-    
+
     HW_WR_REG16(base + PWM_EPWM_TBPRDHR, hrPeriodCount << 8);
 }
 
@@ -8079,9 +8078,9 @@ HRPWM_setHiResTimeBasePeriod(uint32 base, uint16 hrPeriodCount)
 static inline FUNC(uint16, PWM_CODE)
 HRPWM_getHiResTimeBasePeriod(uint32 base)
 {
-    
+
      /* Read from TBPRDHR bit */
-    
+
     return(HW_RD_REG16(base + PWM_EPWM_TBPRDHR) >> 8U);
 }
 
@@ -8115,9 +8114,9 @@ static inline FUNC(void, PWM_CODE)
 HRPWM_setMEPEdgeSelect(uint32 base, HRPWM_Channel channel,
                        HRPWM_MEPEdgeMode mepEdgeMode)
 {
-    
+
      /* Set the edge mode */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRCNFG,
         ((HW_RD_REG16(base + PWM_EPWM_HRCNFG) &
         ~(PWM_EPWM_HRCNFG_EDGMODE_MAX << (uint16)channel)) |
@@ -8152,9 +8151,9 @@ static inline FUNC(void, PWM_CODE)
 HRPWM_setMEPControlMode(uint32 base, HRPWM_Channel channel,
                         HRPWM_MEPCtrlMode mepCtrlMode)
 {
-    
+
      /* Set the MEP control */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRCNFG,
         ((HW_RD_REG16(base + PWM_EPWM_HRCNFG) &
         ~(PWM_EPWM_HRCNFG_CTLMODE_MAX << ((uint16)channel + 2U))) |
@@ -8190,9 +8189,9 @@ static inline FUNC(void, PWM_CODE)
 HRPWM_setCounterCompareShadowLoadEvent(uint32 base, HRPWM_Channel channel,
                                        HRPWM_LoadMode loadEvent)
 {
-   
+
     /* Set the CMPAHR or CMPBHR load mode */
-   
+
     HW_WR_REG16(base + PWM_EPWM_HRCNFG,
         ((HW_RD_REG16(base + PWM_EPWM_HRCNFG) &
         ~(PWM_EPWM_HRCNFG_HRLOAD_MAX << ((uint16)channel + 3U))) |
@@ -8216,9 +8215,9 @@ HRPWM_setCounterCompareShadowLoadEvent(uint32 base, HRPWM_Channel channel,
 static inline FUNC(void, PWM_CODE)
 HRPWM_setOutputSwapMode(uint32 base, boolean enableOutputSwap)
 {
-    
+
      /* Set output swap mode */
-    
+
     if((enableOutputSwap)!= FALSE)
     {
         HW_WR_REG16(base + PWM_EPWM_HRCNFG,
@@ -8249,9 +8248,9 @@ HRPWM_setOutputSwapMode(uint32 base, boolean enableOutputSwap)
 static inline FUNC(void, PWM_CODE)
 HRPWM_setChannelBOutputPath(uint32 base, HRPWM_ChannelBOutput outputOnB)
 {
-    
+
      /* Set the output on ePWM B */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRCNFG,
         ((HW_RD_REG16(base + PWM_EPWM_HRCNFG) & ~(PWM_EPWM_HRCNFG_SELOUTB_MASK)) |
         ((uint16)outputOnB << PWM_EPWM_HRCNFG_SELOUTB_SHIFT)));
@@ -8272,9 +8271,9 @@ HRPWM_setChannelBOutputPath(uint32 base, HRPWM_ChannelBOutput outputOnB)
 static inline FUNC(void, PWM_CODE)
 HRPWM_enableAutoConversion(uint32 base)
 {
-    
+
      /* Enable MEP automatic scale */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRCNFG,
         HW_RD_REG16(base + PWM_EPWM_HRCNFG) | PWM_EPWM_HRCNFG_AUTOCONV_MASK);
 }
@@ -8294,9 +8293,9 @@ HRPWM_enableAutoConversion(uint32 base)
 static inline FUNC(void, PWM_CODE)
 HRPWM_disableAutoConversion(uint32 base)
 {
-    
+
      /* Disable MEP automatic scale */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRCNFG,
         HW_RD_REG16(base + PWM_EPWM_HRCNFG) & ~PWM_EPWM_HRCNFG_AUTOCONV_MASK);
 }
@@ -8315,9 +8314,9 @@ HRPWM_disableAutoConversion(uint32 base)
 static inline FUNC(void, PWM_CODE)
 HRPWM_enablePeriodControl(uint32 base)
 {
-    
+
      /* Set HRPE bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRPCTL,
         HW_RD_REG16(base + PWM_EPWM_HRPCTL) | PWM_EPWM_HRPCTL_HRPE_MASK);
 }
@@ -8336,9 +8335,9 @@ HRPWM_enablePeriodControl(uint32 base)
 static inline FUNC(void, PWM_CODE)
 HRPWM_disablePeriodControl(uint32 base)
 {
-    
+
      /* Clear HRPE bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRPCTL,
         HW_RD_REG16(base + PWM_EPWM_HRPCTL) & ~PWM_EPWM_HRPCTL_HRPE_MASK);
 }
@@ -8358,9 +8357,9 @@ HRPWM_disablePeriodControl(uint32 base)
 static inline FUNC(void, PWM_CODE)
 HRPWM_enablePhaseShiftLoad(uint32 base)
 {
-    
+
      /* Set TBPHSHRLOADE bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRPCTL,
         HW_RD_REG16(base + PWM_EPWM_HRPCTL) | PWM_EPWM_HRPCTL_TBPHSHRLOADE_MASK);
 }
@@ -8379,9 +8378,9 @@ HRPWM_enablePhaseShiftLoad(uint32 base)
 static inline FUNC(void, PWM_CODE)
 HRPWM_disablePhaseShiftLoad(uint32 base)
 {
-    
+
      /* Clear TBPHSHRLOADE bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_HRPCTL,
         HW_RD_REG16(base + PWM_EPWM_HRPCTL) & ~PWM_EPWM_HRPCTL_TBPHSHRLOADE_MASK);
 }
@@ -8412,14 +8411,14 @@ HRPWM_disablePhaseShiftLoad(uint32 base)
 static inline FUNC(void, PWM_CODE)
 HRPWM_setSyncPulseSource(uint32 base, HRPWM_SyncPulseSource syncPulseSource)
 {
- /*    
+ /*
      Set the PWMSYNC source
-    
 
-    
+
+
      Configuration for sync pulse source equal to HRPWM_PWMSYNC_SOURCE_PERIOD
      or HRPWM_PWMSYNC_SOURCE_ZERO */
-    
+
     if(syncPulseSource < HRPWM_PWMSYNC_SOURCE_COMPC_UP)
     {
         HW_WR_REG16(base + PWM_EPWM_HRPCTL,
@@ -8450,27 +8449,27 @@ HRPWM_setSyncPulseSource(uint32 base, HRPWM_SyncPulseSource syncPulseSource)
 static inline FUNC(void, PWM_CODE)
 HRPWM_setTranslatorRemainder(uint32 base, uint16 trremVal)
 {
-    
 
-    
+
+
      /* Set Translator Remainder value */
-    
+
     HW_WR_REG16(base + PWM_EPWM_TRREM, trremVal & PWM_EPWM_TRREM_TRREM_MASK);
 }
 
 
 /****************************************************************************
   Sets the consolidated counter compare values in HR mode.
-  
+
   \param base is the base address of the EPWM module.
   \param compModule is the Counter Compare module.
   \param compCount is the consolidated counter compare count value.
-  
+
   This function sets the consolidated counter compare(CMPx:CMPxHR) value
   required in high resolution mode for counter compare registers.
   Valid values for compModule are:
-   - HRPWM_COUNTER_COMPARE_A - counter compare A. 
- 
+   - HRPWM_COUNTER_COMPARE_A - counter compare A.
+
  Enable Digital Compare to generate Start of Conversion.
 
  \param base is the base address of the EPWM module.
@@ -8493,9 +8492,9 @@ EPWM_enableDigitalCompareADCTrigger(uint32 base,
 
     registerOffset = PWM_EPWM_DCACTL + ((uint32)dcModule * EPWM_DCxCTL_STEP);
 
-    
+
      /* Enable Digital Compare start of conversion generation */
-    
+
     HW_WR_REG16(base + registerOffset,
         (HW_RD_REG16(base + registerOffset) | PWM_EPWM_DCACTL_EVT1SOCE_MASK));
 }
@@ -8524,9 +8523,9 @@ EPWM_disableDigitalCompareADCTrigger(uint32 base,
 
     registerOffset = PWM_EPWM_DCACTL + ((uint32)dcModule * EPWM_DCxCTL_STEP);
 
-    
+
      /* Disable Digital Compare start of conversion generation */
-    
+
     HW_WR_REG16(base + registerOffset,
         (HW_RD_REG16(base + registerOffset) & ~PWM_EPWM_DCACTL_EVT1SOCE_MASK));
 }
@@ -8555,9 +8554,9 @@ EPWM_enableDigitalCompareSyncEvent(uint32 base,
 
     registerOffset = PWM_EPWM_DCACTL + ((uint32)dcModule * EPWM_DCxCTL_STEP);
 
-    
+
      /* Enable Digital Compare sync out pulse generation */
-    
+
     HW_WR_REG16(base + registerOffset,
         (HW_RD_REG16(base + registerOffset) | PWM_EPWM_DCACTL_EVT1SYNCE_MASK));
 }
@@ -8586,9 +8585,9 @@ EPWM_disableDigitalCompareSyncEvent(uint32 base,
 
     registerOffset = PWM_EPWM_DCACTL + ((uint32)dcModule * EPWM_DCxCTL_STEP);
 
-    
+
      /* Disable Digital Compare sync out pulse generation */
-    
+
     HW_WR_REG16(base + registerOffset,
         (HW_RD_REG16(base + registerOffset) &
         ~PWM_EPWM_DCACTL_EVT1SYNCE_MASK));
@@ -8628,9 +8627,9 @@ EPWM_setDigitalCompareCBCLatchMode(uint32 base,
 
     registerOffset = PWM_EPWM_DCACTL + ((uint32)dcModule * EPWM_DCxCTL_STEP);
 
-    
+
      /* Set the DC CBC Latch Mode */
-    
+
     if(dcEvent == EPWM_DC_EVENT_1)
     {
         HW_WR_REG16(base + registerOffset,
@@ -8686,9 +8685,9 @@ EPWM_selectDigitalCompareCBCLatchClearEvent(uint32 base,
 
     registerOffset = PWM_EPWM_DCACTL + ((uint32)dcModule * EPWM_DCxCTL_STEP);
 
-    
+
      /* Set the DC CBC Latch Clear Event */
-    
+
     if(dcEvent == EPWM_DC_EVENT_1)
     {
         HW_WR_REG16(base + registerOffset,
@@ -8738,9 +8737,9 @@ EPWM_getDigitalCompareCBCLatchStatus(uint32 base,
 
     registerOffset = PWM_EPWM_DCACTL + ((uint32)dcModule * EPWM_DCxCTL_STEP);
 
-    
+
      /* Get DC CBC Latch Clear Event */
-    
+
     if(dcEvent == EPWM_DC_EVENT_1)
     {
         status = HW_RD_REG16(base + registerOffset) &
@@ -8772,9 +8771,9 @@ EPWM_getDigitalCompareCBCLatchStatus(uint32 base,
 static inline FUNC(void, PWM_CODE)
 EPWM_enableDigitalCompareCounterCapture(uint32 base)
 {
-    
+
      /* Enable Time base counter capture */
-    
+
     HW_WR_REG16(base + PWM_EPWM_DCCAPCTL,
         (HW_RD_REG16(base + PWM_EPWM_DCCAPCTL) | PWM_EPWM_DCCAPCTL_CAPE_MASK));
 }
@@ -8793,9 +8792,9 @@ EPWM_enableDigitalCompareCounterCapture(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_disableDigitalCompareCounterCapture(uint32 base)
 {
-    
+
      /* Disable Time base counter capture */
-    
+
     HW_WR_REG16(base + PWM_EPWM_DCCAPCTL,
         (HW_RD_REG16(base + PWM_EPWM_DCCAPCTL) &
         ~PWM_EPWM_DCCAPCTL_CAPE_MASK));
@@ -8821,18 +8820,18 @@ EPWM_setDigitalCompareCounterShadowMode(uint32 base, boolean enableShadowMode)
 {
     if(enableShadowMode == TRUE )
     {
-        
+
          /* Enable DC counter shadow mode */
-        
+
         HW_WR_REG16(base + PWM_EPWM_DCCAPCTL,
             (HW_RD_REG16(base + PWM_EPWM_DCCAPCTL) &
             ~PWM_EPWM_DCCAPCTL_SHDWMODE_MASK));
     }
     else
     {
-       
+
         /* Disable DC counter shadow mode */
-       
+
        HW_WR_REG16(base + PWM_EPWM_DCCAPCTL,
            (HW_RD_REG16(base + PWM_EPWM_DCCAPCTL) |
            PWM_EPWM_DCCAPCTL_SHDWMODE_MASK));
@@ -8856,9 +8855,9 @@ EPWM_setDigitalCompareCounterShadowMode(uint32 base, boolean enableShadowMode)
 static inline FUNC(boolean, PWM_CODE)
 EPWM_getDigitalCompareCaptureStatus(uint32 base)
 {
-    
+
      /* Return the DC compare status */
-    
+
     return((HW_RD_REG16(base + PWM_EPWM_DCCAPCTL) &
             PWM_EPWM_DCCAPCTL_CAPSTS_MASK) == PWM_EPWM_DCCAPCTL_CAPSTS_MASK);
 }
@@ -8879,9 +8878,9 @@ EPWM_getDigitalCompareCaptureStatus(uint32 base)
 static inline FUNC(uint16, PWM_CODE)
 EPWM_getDigitalCompareCaptureCount(uint32 base)
 {
-   
+
     /* Return the DC Time Base Counter Capture count value */
-   
+
     return(HW_RD_REG16(base + PWM_EPWM_DCCAP));
 }
 
@@ -8913,22 +8912,22 @@ EPWM_enableDigitalCompareTripCombinationInput(uint32 base,
 {
     uint32 registerOffset;
 
-    
+
      /* Get the DCAHTRIPSEL, DCALTRIPSEL, DCBHTRIPSEL, DCBLTRIPSEL register
      offset with respect to DCAHTRIPSEL
      */
     registerOffset = PWM_EPWM_DCAHTRIPSEL +
                      ((uint32)dcType * EPWM_DCxxTRIPSEL);
 
-    
+
      /* Set the DC trip input */
-    
+
     HW_WR_REG16(base + registerOffset,
         (HW_RD_REG16(base + registerOffset) | tripInput));
 
-    
+
      /* Enable the combination input */
-    
+
     HW_WR_REG16(base + PWM_EPWM_DCTRIPSEL,
         (HW_RD_REG16(base + PWM_EPWM_DCTRIPSEL) |
         (PWM_EPWM_DCTRIPSEL_DCAHCOMPSEL_MASK << ((uint16)dcType << 2U))));
@@ -8962,16 +8961,16 @@ EPWM_disableDigitalCompareTripCombinationInput(uint32 base,
 {
     uint32 registerOffset;
 
-    /* 
+    /*
      Get the DCAHTRIPSEL, DCALTRIPSEL, DCBHTRIPSEL, DCBLTRIPSEL register
      offset with respect to DCAHTRIPSEL */
-    
+
     registerOffset = PWM_EPWM_DCAHTRIPSEL +
                      ((uint32)dcType * EPWM_DCxxTRIPSEL);
 
-    
+
      /* Set the DC trip input */
-    
+
     HW_WR_REG16(base + registerOffset,
         (HW_RD_REG16(base + registerOffset) & ~tripInput));
 }
@@ -9011,9 +9010,9 @@ EPWM_enableValleyCapture(uint32 base)
 static inline FUNC(void, PWM_CODE)
 EPWM_disableValleyCapture(uint32 base)
 {
-    
+
      /* Clear VCAPE bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_VCAPCTL,
         (HW_RD_REG16(base + PWM_EPWM_VCAPCTL) & ~PWM_EPWM_VCAPCTL_VCAPE_MASK));
 }
@@ -9045,9 +9044,9 @@ EPWM_setValleyTriggerSource(uint32 base, EPWM_ValleyTriggerSource trigger)
 static inline FUNC(void, PWM_CODE)
 EPWM_startValleyCapture(uint32 base)
 {
-    
+
      /* Set VCAPSTART bit */
-    
+
     HW_WR_REG16(base + PWM_EPWM_VCAPCTL,
         (HW_RD_REG16(base + PWM_EPWM_VCAPCTL) |
         PWM_EPWM_VCAPCTL_VCAPSTART_MASK));
@@ -9097,7 +9096,7 @@ HRPWM_setCounterCompareValue(uint32 base,
     /*
      Check the arguments
     */
-   
+
     /*
      Write to counter compare registers
     */
@@ -9188,7 +9187,7 @@ HRPWM_setHiResCounterCompareValue(uint32 base,
     /*
      Check the arguments
     */
-    
+
 
     /*
      Write to the high resolution counter compare registers
@@ -9270,7 +9269,7 @@ HRPWM_setHiResRisingEdgeDelay(uint32 base, uint16 hrRedCount)
     /*
      Check the arguments
     */
-   
+
     /*
      Set the High Resolution RED (Rising Edge Delay) count only
     */
@@ -9300,7 +9299,7 @@ HRPWM_setHiResFallingEdgeDelayOnly(uint32 base, uint16 hrFedCount)
     /*
      Check the arguments
     */
-   
+
 
     /*
      Set the high resolution FED (Falling Edge Delay) count
@@ -9331,7 +9330,7 @@ HRPWM_setMEPStep(uint32 base, uint16 mepCount)
     /*
      Check the arguments
     */
-    
+
 
     /*
      Set HRPWM MEP count
@@ -9919,7 +9918,7 @@ EPWM_setXCMPShadowLevel(uint32 base, EPWM_XCMP_XLOADCTL_SHDWLEVEL level)
 {
     uint32 registerOffset;
 
-    
+
     registerOffset =  base + PWM_EPWM_XLOADCTL;
 
     HW_WR_REG32(registerOffset,
@@ -10474,7 +10473,7 @@ EPWM_setDiodeEmulationMonitorCounterThreshold(uint32 base,uint16 threshold)
  \return None.
 
 ******************************************************************************/
-static inline FUNC(void, PWM_CODE) 
+static inline FUNC(void, PWM_CODE)
 EPWM_setEmulationMode(uint32 base, EPWM_EmulationMode emulationMode)
 {
     /*

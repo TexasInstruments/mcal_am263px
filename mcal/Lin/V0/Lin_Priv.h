@@ -45,8 +45,13 @@ extern "C" {
 /*********************************************************************************************************************
  * Other Header Files
  *********************************************************************************************************************/
-#include "hw_types.h"
+#define LIN_START_SEC_CODE
+#include "Lin_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define LIN_STOP_SEC_CODE
+#include "Lin_MemMap.h"
 #include "cslr_lin.h"
+
 /*********************************************************************************************************************
  * Version Check (if required)
  *********************************************************************************************************************/
@@ -113,7 +118,7 @@ typedef struct Lin_ChannelStatusTag
  * \return  None.
  *
  **/
-FUNC(void, LIN_CODE)
+FUNC(Std_ReturnType, LIN_CODE)
 Lin_HwUnitConfig(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel);
 
 /**
@@ -250,10 +255,39 @@ FUNC(void, LIN_CODE) Lin_ProcessISR(uint32 channelID);
  **/
 FUNC(void, LIN_CODE) Lin_HwRegisterReadback(uint8 Channel, Lin_RegisterReadbackType *RegRbPtr);
 #endif /*#if (STD_ON == LIN_REGISTER_READBACK_API)*/
+
+/**
+ * \brief   This API will process Wakeup for given channel.
+ *
+ * \param   linChannel             LIN channel to be addressed.
+ * \param   lindrvr_Channel_Status LIN channel driver status.
+ * \return  E_OK     : LIN wakeup passed.
+ *          E_NOT_OK : LIN wakeup failed.
+ *
+ **/
+FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupProcess(uint8 linChannel, Lin_ChannelStatusType *lindrvr_Channel_Status);
+
+/**
+ * \brief   This API deinitialize the LIN module.
+ *
+ * \param   void
+ * \return  void
+ *
+ **/
+FUNC(void, LIN_CODE) Lin_DeinitInternal(void);
+
+/** Design : MCAL-25680
+ * \brief   This API will send sleep signal on bus.
+ *
+ * \param   base      Base address of Lin Instance.
+ *
+ * \return  None.
+ *
+ **/
+FUNC(Std_ReturnType, LIN_CODE) Lin_SendGoToSleepSignal(uint32 base);
 /*********************************************************************************************************************
  *  Exported Inline Function Definitions and Function-Like Macros
  *********************************************************************************************************************/
-
 #ifdef __cplusplus
 }
 #endif

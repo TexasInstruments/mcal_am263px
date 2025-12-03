@@ -73,9 +73,13 @@
 #include "string.h"
 #include "Fls_Cbk.h"
 #include "Fls_Brd_Nor.h"
-
-#include "hw_types.h"
+#define FLS_START_SEC_CODE
+#include "Fls_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define FLS_STOP_SEC_CODE
+#include "Fls_MemMap.h"
 #include "Fls_Qspi_Edma.h"
+
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -115,11 +119,9 @@ static Std_ReturnType Nor_cmdwr_Enable(QSPI_Handle handle);
 /* ========================================================================== */
 #define FLS_START_SEC_VAR_NO_INIT_8
 #include "Fls_MemMap.h"
-
 /* Compare and BlankCheck Arrays to store data to compare */
 VAR(uint8, FLS_VAR_NO_INIT) Fls_BlankCheckRxDataBuf[FLS_BLANKCHECK_SIZE_MAX];
 VAR(uint8, FLS_VAR_NO_INIT) Fls_CompareRxDataBuf[FLS_BLANKCHECK_SIZE_MAX];
-
 #define FLS_STOP_SEC_VAR_NO_INIT_8
 #include "Fls_MemMap.h"
 

@@ -269,6 +269,12 @@ CONST(Mcu_ConfigType, MCU_CONFIG_DATA) Mcu_Config =
 };
 [!ENDLOOP!][!//
 
+/*</MCU_CFG_CONFIG>*/
+#define  MCU_STOP_SEC_CONFIG_DATA
+#include "Mcu_MemMap.h"
+
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
 void Mcu_IntXbar(void)
 {
     /* Interrupt XBAR */
@@ -384,9 +390,9 @@ MCU_xbarSelectGpioIntrXbarInputSource(MCU_CSL_GPIO_INTR_XBAR_U_BASE, [!"McuGpioX
 [!ENDIF!][!//
 }
 
-/*</MCU_CFG_CONFIG>*/
-#define  MCU_STOP_SEC_CONFIG_DATA
+#define  MCU_STOP_SEC_CODE
 #include "Mcu_MemMap.h"
+
 /**********************************************************************************************************************
  *  End of File: Mcu_Cfg.c
  *********************************************************************************************************************/

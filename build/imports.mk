@@ -1,5 +1,5 @@
 export MCAL_PATH?=$(abspath ../)
-export CCS_VERSION?=ccs2030
+export CCS_VERSION?=ccs2040
 export AUTOSAR_VERSION_DOT?=4.3.1
 export AUTOSAR_VERSION?=$(subst .,,$(AUTOSAR_VERSION_DOT))
 

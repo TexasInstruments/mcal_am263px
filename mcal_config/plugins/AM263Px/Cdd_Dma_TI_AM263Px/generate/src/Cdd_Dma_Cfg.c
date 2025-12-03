@@ -76,7 +76,7 @@
  *  GLOBAL DATA
  **********************************************************************************************************************/
 
-#define  CDD_DMA_START_SEC_CONFIG_DATA
+#define  CDD_DMA_START_SEC_VAR_INIT_UNSPECIFIED
 #include "Cdd_Dma_MemMap.h"
 
 /* Runtime Configuration Generation */
@@ -175,12 +175,15 @@ static Cdd_Dma_Handler
   [!ENDLOOP!][!//
 };
 
+#define  CDD_DMA_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Cdd_Dma_MemMap.h"
 
+#define  CDD_DMA_START_SEC_CONFIG_DATA
+#include "Cdd_Dma_MemMap.h"
 CONST(Cdd_Dma_ConfigType, CDD_DMA_CFG) Cdd_Dma_Config =
 {
     [!WS "4"!]CddDmaDriverHandlerList [!WS "4"!]
 };
-
 #define  CDD_DMA_STOP_SEC_CONFIG_DATA
 #include "Cdd_Dma_MemMap.h"
 

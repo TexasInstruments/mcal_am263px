@@ -45,17 +45,14 @@
 /*                          Include Files                                     */
 /* ========================================================================== */
 #include "Std_Types.h"
-
 #include "Port.h"
 #include "Port_Priv.h"
-
 #if (PORT_DEV_ERROR_DETECT == STD_ON)
 #include "Det.h"
 #endif /* #if (PORT_DEV_ERROR_DETECT == STD_ON) */
 #include "Os.h"
-
 #include "SchM_Port.h"
-#include "hw_types.h"
+
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -109,30 +106,32 @@ static boolean Port_ValidateSetPinMode_internal(const Port_PinConfigType *pinCon
 /*                            Global Variables                                */
 /* ========================================================================== */
 
-#define PORT_START_SEC_VAR_INIT_UNSPECIFIED
+#define PORT_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Port_MemMap.h"
-
 /** \brief PORT driver object */
 VAR(Port_ConfigType, PORT_VAR_ZERO_INIT) Port_DrvObj;
-
-#define PORT_STOP_SEC_VAR_INIT_UNSPECIFIED
+#define PORT_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Port_MemMap.h"
 
+#define PORT_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Port_MemMap.h"
 #if (STD_ON == PORT_DEV_ERROR_DETECT)
 /* Global Init Done flag */
 static boolean Port_InitDone = FALSE;
 #endif /* #if (STD_ON == PORT_DEV_ERROR_DETECT) */
+#define PORT_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "Port_MemMap.h"
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
+
 #define PORT_START_SEC_CODE
 #include "Port_MemMap.h"
 
 /*
  *Design:MCAL-13961,MCAL-14016,MCAL-14015,MCAL-13981,MCAL-13985,MCAL-13979,MCAL-13966,MCAL-13960,MCAL-13962,MCAL-13993,MCAL-13965,MCAL-14012,MCAL-14013,MCAL-14018,MCAL-14031,MCAL-14028,MCAL-14032
  */
-
 FUNC(void, PORT_CODE) Port_Init(P2CONST(Port_ConfigType, AUTOMATIC, PORT_PBCFG) ConfigPtr)
 {
     const Port_ConfigType *CfgPtr = (Port_ConfigType *)NULL_PTR;

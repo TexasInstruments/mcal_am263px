@@ -9,5 +9,5 @@ ifeq ($(SOC), $(filter $(SOC), am263))
 endif
 ifeq ($(SOC), $(filter $(SOC), am263px am261))
   SRCDIR += $(mcal_PATH)/Fls/V2
-  SRCS_COMMON += Fls_Brd_Nor_Ospi.c Fls_Ospi.c Fls_Ospi_Edma.c
+  SRCS_COMMON += Fls_Brd_Nor_Ospi.c Fls_Ospi.c Fls_Ospi_Edma.c Fls_Ospi_Phy.c
 endif

@@ -53,7 +53,7 @@
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-  
+
 /**********************************************************************************************************************
  *  LOCAL MACROS
  **********************************************************************************************************************/
@@ -95,8 +95,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINN2_OSPI0_CLK,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_CLK",
-         .Port_PinName        = (const sint8 *)"PIN_N2",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_CLK",
+         //.Port_PinName        = (const sint8 *)"PIN_N2",
     },
     {
          .Port_PinId = 4,
@@ -127,8 +127,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINN1_OSPI0_D0,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D0",
-         .Port_PinName        = (const sint8 *)"PIN_N1",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D0",
+         //.Port_PinName        = (const sint8 *)"PIN_N1",
     },
     {
          .Port_PinId = 5,
@@ -159,8 +159,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINN4_OSPI0_D1,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D1",
-         .Port_PinName        = (const sint8 *)"PIN_N4",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D1",
+         //.Port_PinName        = (const sint8 *)"PIN_N4",
     },
     {
          .Port_PinId = 6,
@@ -191,8 +191,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINM4_OSPI0_D2,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D2",
-         .Port_PinName        = (const sint8 *)"PIN_M4",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D2",
+         //.Port_PinName        = (const sint8 *)"PIN_M4",
     },
     {
          .Port_PinId = 7,
@@ -223,8 +223,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINP3_OSPI0_D3,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D3",
-         .Port_PinName        = (const sint8 *)"PIN_P3",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D3",
+         //.Port_PinName        = (const sint8 *)"PIN_P3",
     },
     {
          .Port_PinId = 1,
@@ -255,8 +255,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINP1_OSPI0_CSN0,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_CSn0",
-         .Port_PinName        = (const sint8 *)"PIN_P1",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_CSn0",
+         //.Port_PinName        = (const sint8 *)"PIN_P1",
     },
     {
          .Port_PinId = 8,
@@ -287,8 +287,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINM1_MCAN0_RX,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D4",
-         .Port_PinName        = (const sint8 *)"PIN_M1",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D4",
+         //.Port_PinName        = (const sint8 *)"PIN_M1",
     },
     {
          .Port_PinId = 9,
@@ -319,8 +319,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINL1_MCAN0_TX,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D5",
-         .Port_PinName        = (const sint8 *)"PIN_L1",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D5",
+         //.Port_PinName        = (const sint8 *)"PIN_L1",
     },
     {
          .Port_PinId = 10,
@@ -351,8 +351,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINL2_MCAN1_RX,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D6",
-         .Port_PinName        = (const sint8 *)"PIN_L2",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D6",
+         //.Port_PinName        = (const sint8 *)"PIN_L2",
     },
     {
          .Port_PinId = 11,
@@ -383,8 +383,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINK1_MCAN1_TX,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_D7",
-         .Port_PinName        = (const sint8 *)"PIN_K1",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_D7",
+         //.Port_PinName        = (const sint8 *)"PIN_K1",
     },
     {
          .Port_PinId = 2,
@@ -415,8 +415,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINR3_OSPI0_CSN1,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_CSn1",
-         .Port_PinName        = (const sint8 *)"PIN_R3",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_CSn1",
+         //.Port_PinName        = (const sint8 *)"PIN_R3",
     },
     {
          .Port_PinId = 65,
@@ -447,8 +447,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINM3_UART1_TXD,
-         .Port_PinSignalName = (const sint8 *)"OSPI0_DQS",
-         .Port_PinName        = (const sint8 *)"PIN_M3",
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_DQS",
+         //.Port_PinName        = (const sint8 *)"PIN_M3",
     },
     {
          .Port_PinId = 136,
@@ -479,8 +479,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINA13_I2C0_SCL,
-         .Port_PinSignalName = (const sint8 *)"I2C0_SCL",
-         .Port_PinName        = (const sint8 *)"PIN_A13",
+         //.Port_PinSignalName = (const sint8 *)"I2C0_SCL",
+         //.Port_PinName        = (const sint8 *)"PIN_A13",
     },
     {
          .Port_PinId = 135,
@@ -511,8 +511,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINB13_I2C0_SDA,
-         .Port_PinSignalName = (const sint8 *)"I2C0_SDA",
-         .Port_PinName        = (const sint8 *)"PIN_B13",
+         //.Port_PinSignalName = (const sint8 *)"I2C0_SDA",
+         //.Port_PinName        = (const sint8 *)"PIN_B13",
     },
     {
          .Port_PinId = 26,
@@ -543,8 +543,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINC7_UART0_RTSN,
-         .Port_PinSignalName = (const sint8 *)"I2C2_SCL",
-         .Port_PinName        = (const sint8 *)"PIN_C7",
+         //.Port_PinSignalName = (const sint8 *)"I2C2_SCL",
+         //.Port_PinName        = (const sint8 *)"PIN_C7",
     },
     {
          .Port_PinId = 27,
@@ -575,8 +575,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINB7_UART0_CTSN,
-         .Port_PinSignalName = (const sint8 *)"I2C2_SDA",
-         .Port_PinName        = (const sint8 *)"PIN_B7",
+         //.Port_PinSignalName = (const sint8 *)"I2C2_SDA",
+         //.Port_PinName        = (const sint8 *)"PIN_B7",
     },
     {
          .Port_PinId = 28,
@@ -607,8 +607,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINA7_UART0_RXD,
-         .Port_PinSignalName = (const sint8 *)"UART0_RXD",
-         .Port_PinName        = (const sint8 *)"PIN_A7",
+         //.Port_PinSignalName = (const sint8 *)"UART0_RXD",
+         //.Port_PinName        = (const sint8 *)"PIN_A7",
     },
     {
          .Port_PinId = 29,
@@ -639,8 +639,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINA6_UART0_TXD,
-         .Port_PinSignalName = (const sint8 *)"LIN0_TXD",
-         .Port_PinName        = (const sint8 *)"PIN_A6",
+         //.Port_PinSignalName = (const sint8 *)"LIN0_TXD",
+         //.Port_PinName        = (const sint8 *)"PIN_A6",
     },
 };
 

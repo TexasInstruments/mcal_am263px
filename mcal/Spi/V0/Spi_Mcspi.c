@@ -28,7 +28,6 @@
 #include "Dem.h"
 #include "Os.h"
 
-/* There are static inline functions in hw_types.h file. Map them as well */
 #define SPI_START_SEC_CODE
 #include "Spi_MemMap.h"
 #include "lldr_mcspi.h"

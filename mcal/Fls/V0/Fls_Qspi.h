@@ -78,7 +78,12 @@
 #include <stdbool.h>
 #include "Platform_Types.h"
 #include "hw_ctrl_core.h"
-#include "hw_types.h"
+#define FLS_START_SEC_CODE
+#include "Fls_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define FLS_STOP_SEC_CODE
+#include "Fls_MemMap.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

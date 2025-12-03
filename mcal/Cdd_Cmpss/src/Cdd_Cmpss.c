@@ -25,7 +25,11 @@
 #include "Det.h"
 #include "Cdd_Cmpss.h"
 #include "Cdd_Cmpss_Soc.h"
-#include "hw_types.h"
+#define CDD_CMPSS_START_SEC_CODE
+#include "Cdd_Cmpss_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_CMPSS_STOP_SEC_CODE
+#include "Cdd_Cmpss_MemMap.h"
 #include "cslr_cmpssa.h"
 
 /* ========================================================================== */
@@ -1245,3 +1249,6 @@ static Std_ReturnType Cdd_Cmpss_ConfigRampParamCheck(Cdd_Cmpss_HwUnitType HwUnit
     return retVal;
 }
 #endif
+
+#define CDD_CMPSS_STOP_SEC_CODE
+#include "Cdd_Cmpss_MemMap.h"

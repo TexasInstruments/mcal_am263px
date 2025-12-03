@@ -24,7 +24,11 @@
 /* ========================================================================== */
 
 #include "Dio_Priv.h"
-#include "hw_types.h"
+#define DIO_START_SEC_CODE
+#include "Dio_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define DIO_STOP_SEC_CODE
+#include "Dio_MemMap.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */

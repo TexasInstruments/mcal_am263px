@@ -26,7 +26,11 @@
 /* ========================================================================== */
 
 #include "Std_Types.h"
-#include "hw_types.h"
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -502,6 +506,8 @@ extern "C" {
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
 
 /**
  * \brief Output XBAR: API to read raw output signal status of all Output XBars
@@ -656,6 +662,8 @@ static inline void MCU_xbarSelectOutputXBarInputSource(uint32 out, const uint32 
     HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G10,
                 group_mask[10U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G10_SEL_MASK);
 }
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 
 #ifdef __cplusplus
 }

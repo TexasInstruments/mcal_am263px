@@ -39,19 +39,16 @@
 #define CDD_FSITX_START_SEC_VAR_NO_INIT_8
 #include "Cdd_FsiTx_MemMap.h"
 /** \brief CDD_FSI_TX ISR Index */
-VAR(uint8, CDD_FSITX_VAR_CLEARED)
-Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HW_UNIT_CNT];
+VAR(uint8, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HW_UNIT_CNT];
 #define CDD_FSITX_STOP_SEC_VAR_NO_INIT_8
 #include "Cdd_FsiTx_MemMap.h"
 
 #define CDD_FSITX_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Cdd_FsiTx_MemMap.h"
 /** \brief CDD FSI TX driver object */
-VAR(Cdd_FsiTx_DriverObjType, CDD_FSITX_VAR_CLEARED)
-Cdd_FsiTx_DrvObj;
+VAR(Cdd_FsiTx_DriverObjType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DrvObj;
 /** \brief Variable to store driver status */
-VAR(Cdd_FsiTx_StatusType, CDD_FSITX_VAR_CLEARED)
-Cdd_FsiTx_DriverStatus;
+VAR(Cdd_FsiTx_StatusType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DriverStatus;
 #define CDD_FSITX_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Cdd_FsiTx_MemMap.h"
 

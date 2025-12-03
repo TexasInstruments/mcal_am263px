@@ -973,22 +973,12 @@ typedef struct
     /**< GPIO register id corresponding to this pin */
     uint32                   Port_PinDioChannelId;
     /**< GPIO channel corresponding to this pin in GPIO register */
-    const sint8             *Port_PinSignalName;
-    /**< Pin signal name.Just for information. Not used internally.Can be NULL
-    **/
-    const sint8             *Port_PinName;
-
-    /**< Pin name.Just for information. Not used internally.Can be NULL */
-
     boolean                 Port_PinHSmasterEnable;
     /** HSMASTER bit value **/
-
     boolean                 Port_PinHSmodeEnable;
     /** HSMODE bit value **/
-
     Port_InputInversion     Port_InversionSelect;
     /** select value for choosing inverted version of PAD input for chip**/
-
     Port_InputQualType      Port_QualifierTypeSelect;
     /** select value for choosing input qualifer type for PAD. **/
 } Port_PinConfigType;

@@ -80,7 +80,11 @@
 #include "Adc_Platform.h"
 #include "Adc_Types.h"
 #include "Det.h"
-#include "hw_types.h"
+#define ADC_START_SEC_CODE
+#include "Adc_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define ADC_STOP_SEC_CODE
+#include "Adc_MemMap.h"
 
 #ifdef __cplusplus
 extern "C" {

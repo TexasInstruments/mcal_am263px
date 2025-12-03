@@ -443,6 +443,16 @@ epwm_SOCLIST = $(DEFAULT_SOCLIST)
 export epwm_SOCLIST
 
 ############################
+# mcal_all_libs lib
+############################
+export mcal_all_libs_COMP_LIST = mcal_all_libs
+mcal_all_libs_RELPATH = Mcal_Demo_Cfg
+mcal_all_libs_PATH = $(mcal_PATH)/examples_config/$(mcal_all_libs_RELPATH)
+export mcal_all_libs_PLATFORM_DEPENDENCY = yes
+mcal_all_libs_PKG_LIST = mcal_all_libs
+export mcal_all_libs_SOCLIST = $(DEFAULT_SOCLIST)
+
+############################
 #device mcal examples
 # List of examples under mcal
 # All the tests mentioned in list are built when test target is called
@@ -451,19 +461,19 @@ export epwm_SOCLIST
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263))
 mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app flsdiag_app epwm_app epwm_tz_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app cdd_cmpss_app
-mcal_mcal_APP_LIB_LIST += app_utils
+mcal_mcal_APP_LIB_LIST += app_utils mcal_all_libs
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwepwm kwuart kwwdg kwport kwfsirx kwfsitx kwlin
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
-mcal_mcal_EXAMPLE_LIST = mcu_app fls_boot_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app adc_app adc_resolver_app adc_resolver_dma_app adc_hw_trig_dma_app eth_app eth_test_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app fls_app flsdiag_ospi_app epwm_app epwm_tz_app cdd_flc_app cdd_cmpss_app
-mcal_mcal_APP_LIB_LIST += app_utils
+mcal_mcal_EXAMPLE_LIST = mcu_app fls_boot_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app adc_app adc_resolver_app adc_resolver_dma_app adc_hw_trig_dma_app eth_app eth_test_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_echo_dma_app fsirx_app lin_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app fls_app fls_phy_app flsdiag_ospi_app fls_xip_app epwm_app epwm_tz_app cdd_flc_app cdd_cmpss_app
+mcal_mcal_APP_LIB_LIST += app_utils mcal_all_libs
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwepwm kwuart kwwdg kwport kwfsirx kwfsitx kwlin
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
-mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_interrupt_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app flsdiag_ospi_app lin_app epwm_app fsirx_app cdd_flc_app cdd_cmpss_app
-mcal_mcal_APP_LIB_LIST += app_utils
+mcal_mcal_EXAMPLE_LIST = mcu_app gpt_app mcspi_app can_app port_app dio_app wdg_app wdg_skip_reset_app fls_app fls_phy_app fls_xip_app eth_app eth_test_app adc_app adc_hw_trig_dma_app pwm_app icu_app ipc_notify_app ipc_rpmsg_app ipc_rpmsg_callback_app i2c_app i2c_intr_app i2c_multichannel_app uart_interrupt_app dma_interruptmode_app dma_linkingmode_app dma_pollingmode_app dma_chainingmode_app flsdiag_ospi_app lin_app epwm_app fsirx_app cdd_flc_app cdd_cmpss_app
+mcal_mcal_APP_LIB_LIST += app_utils mcal_all_libs
 mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls kwgpt kwi2c kwicu kwipc kwmcu kwspi kwpwm kwuart kwwdg kwport kwlin kwepwm kwfsirx kwfsitx
 endif
 
@@ -527,12 +537,26 @@ wdg_skip_reset_app_PATH = $(mcal_PATH)/$(wdg_skip_reset_app_RELPATH)
 export wdg_skip_reset_app_PLATFORM_DEPENDENCY = yes
 export wdg_skip_reset_app_SOCLIST = $(DEFAULT_SOCLIST)
 
-fls_app_RELPATH = examples/Fls
+fls_app_RELPATH = examples/Fls/fls_app
 fls_app_PATH = $(mcal_PATH)/$(fls_app_RELPATH)
 fls_app_PLATFORM_DEPENDENCY = yes
 fls_app_SOCLIST = $(DEFAULT_SOCLIST)
 export fls_app_SOCLIST
 export fls_app_PLATFORM_DEPENDENCY
+
+fls_phy_app_RELPATH = examples/Fls/fls_phy_app
+fls_phy_app_PATH = $(mcal_PATH)/$(fls_phy_app_RELPATH)
+fls_phy_app_PLATFORM_DEPENDENCY = yes
+fls_phy_app_SOCLIST = $(DEFAULT_SOCLIST)
+export fls_phy_app_SOCLIST
+export fls_phy_app_PLATFORM_DEPENDENCY
+
+fls_xip_app_RELPATH = examples/Fls/fls_xip_app
+fls_xip_app_PATH = $(mcal_PATH)/$(fls_xip_app_RELPATH)
+fls_xip_app_PLATFORM_DEPENDENCY = yes
+fls_xip_app_SOCLIST = $(DEFAULT_SOCLIST)
+export fls_xip_app_SOCLIST
+export fls_xip_app_PLATFORM_DEPENDENCY
 
 fls_boot_app_RELPATH = examples/Bootloader/fls_boot_app
 fls_boot_app_PATH = $(mcal_PATH)/$(fls_boot_app_RELPATH)
@@ -541,14 +565,14 @@ fls_boot_app_SOCLIST = $(DEFAULT_SOCLIST)
 export fls_boot_app_SOCLIST
 export fls_boot_app_PLATFORM_DEPENDENCY
 
-flsdiag_app_RELPATH = examples/Flsdiag
+flsdiag_app_RELPATH = examples/Fls/Flsdiag
 flsdiag_app_PATH = $(mcal_PATH)/$(flsdiag_app_RELPATH)
 flsdiag_app_PLATFORM_DEPENDENCY = yes
 flsdiag_app_SOCLIST = $(DEFAULT_SOCLIST)
 export flsdiag_app_SOCLIST
 export flsdiag_app_PLATFORM_DEPENDENCY
 
-flsdiag_ospi_app_RELPATH = examples/Flsdiag_ospi
+flsdiag_ospi_app_RELPATH = examples/Fls/Flsdiag_ospi
 flsdiag_ospi_app_PATH = $(mcal_PATH)/$(flsdiag_ospi_app_RELPATH)
 flsdiag_ospi_app_PLATFORM_DEPENDENCY = yes
 flsdiag_ospi_app_SOCLIST = $(DEFAULT_SOCLIST)

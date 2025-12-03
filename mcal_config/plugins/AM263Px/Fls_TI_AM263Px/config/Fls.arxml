@@ -500,6 +500,68 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
+                <ECUC-ENUMERATION-PARAM-DEF UUID="4bb0f920-a1e6-4b95-b4f0-00560ba23e1a">
+                  <SHORT-NAME>FlsPhyControlMode</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">The driver shall enable Phy Speed mode for DAC.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>FLS_PHY_MASTER_MODE</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>FLS_PHY_MASTER_MODE</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>FLS_PHY_BYPASS_MODE</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
+                <ECUC-ENUMERATION-PARAM-DEF UUID="76d07abb-c18a-437e-b097-6039fdfbe245">
+                  <SHORT-NAME>FlsPhyDllLockMode</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">The driver shall enable Phy Speed mode for DAC.</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>FLS_PHY_DLL_HALF_CYCLE</DEFAULT-VALUE>
+                  <LITERALS>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>FLS_PHY_DLL_HALF_CYCLE</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                    <ECUC-ENUMERATION-LITERAL-DEF>
+                      <SHORT-NAME>FLS_PHY_DLL_FULL_CYCLE</SHORT-NAME>
+                      <ORIGIN>Texas Instruments</ORIGIN>
+                    </ECUC-ENUMERATION-LITERAL-DEF>
+                  </LITERALS>
+                </ECUC-ENUMERATION-PARAM-DEF>
               </PARAMETERS>
               <REFERENCES>
                 <ECUC-REFERENCE-DEF UUID="2d4772b1-18c7-4643-b0eb-9f40bed23de7">

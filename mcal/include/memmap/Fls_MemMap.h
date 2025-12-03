@@ -73,12 +73,6 @@ extern "C"
 {
 #endif
 
-
-/* START/STOP Macros are defined twice for each variables/function sections to
- * support MPU core. With this approach no change required in current M4 memmap
- * implementation. #pragma is replaced by __attribute__ for MPU. */
-#if defined (BUILD_MCU)
-
 #define MEMMAP_ERROR
 
 /* FLS */
@@ -363,7 +357,7 @@ extern "C"
 /*TI_INSPECTED 69 S : MISRAC_2012_D1.1
  * "Reason - Pragma usage is required here to allocate
  *  Code and Data memory sections to certain RAM area" */
-#pragma clang section data="FLS_DATA_INIT_UNSPECIFIED_SECTION"
+#pragma clang section data=".data.FLS_DATA_INIT_UNSPECIFIED_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -377,7 +371,7 @@ extern "C"
 #endif
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_UNSPECIFIED)
 #elif defined(START_SEC_COMMON_VAR_INIT_32)
-#pragma clang section data="FLS_DATA_INIT_32_SECTION"
+#pragma clang section data=".data.FLS_DATA_INIT_32_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -392,7 +386,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_32)
 
 #elif defined(START_SEC_COMMON_VAR_INIT_16)
-#pragma clang section data="FLS_DATA_INIT_16_SECTION"
+#pragma clang section data=".data.FLS_DATA_INIT_16_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -407,7 +401,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_16)
 
 #elif defined(START_SEC_COMMON_VAR_INIT_8)
-#pragma clang section data="FLS_DATA_INIT_8_SECTION"
+#pragma clang section data=".data.FLS_DATA_INIT_8_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -423,7 +417,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(START_SEC_COMMON_VAR_INIT_PTR)
-#pragma clang section data="FLS_DATA_INIT_PTR_SECTION"
+#pragma clang section data=".data.FLS_DATA_INIT_PTR_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -439,7 +433,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
-#pragma clang section data="FLS_DATA_NO_INIT_UNSPECIFIED_SECTION"
+#pragma clang section bss=".bss.FLS_DATA_NO_INIT_UNSPECIFIED_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -454,7 +448,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_NO_INIT_UNSPECIFIED)
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_32)
-#pragma clang section data="FLS_DATA_NO_INIT_32_SECTION"
+#pragma clang section bss=".bss.FLS_DATA_NO_INIT_32_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -469,7 +463,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_NO_INIT_32)
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_16)
-#pragma clang section data="FLS_DATA_NO_INIT_16_SECTION"
+#pragma clang section bss=".bss.FLS_DATA_NO_INIT_16_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -484,7 +478,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_NO_INIT_16)
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_8)
-#pragma clang section data="FLS_DATA_NO_INIT_8_SECTION"
+#pragma clang section bss=".bss.FLS_DATA_NO_INIT_8_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -500,7 +494,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_PTR)
-#pragma clang section data="FLS_DATA_NO_INIT_PTR_SECTION"
+#pragma clang section bss=".bss.FLS_DATA_NO_INIT_PTR_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -516,7 +510,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(START_SEC_COMMON_CONST_UNSPECIFIED)
-#pragma clang section data="FLS_CONST_UNSPECIFIED_SECTION"
+#pragma clang section rodata=".rodata.FLS_CONST_UNSPECIFIED_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -531,7 +525,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONST_UNSPECIFIED)
 
 #elif defined(START_SEC_COMMON_CONST_32)
-#pragma clang section data="FLS_CONST_32_SECTION"
+#pragma clang section rodata=".rodata.FLS_CONST_32_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -546,7 +540,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONST_32)
 
 #elif defined(START_SEC_COMMON_CONST_16)
-#pragma clang section data="FLS_CONST_16_SECTION"
+#pragma clang section rodata=".rodata.FLS_CONST_16_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -561,7 +555,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONST_16)
 
 #elif defined(START_SEC_COMMON_CONST_8)
-#pragma clang section data="FLS_CONST_8_SECTION"
+#pragma clang section rodata=".rodata.FLS_CONST_8_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -577,7 +571,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(START_SEC_COMMON_CONST_PTR)
-#pragma clang section data="FLS_CONST_PTR_SECTION"
+#pragma clang section rodata=".rodata.FLS_CONST_PTR_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -596,7 +590,7 @@ extern "C"
 /*TI_INSPECTED 69 S : MISRAC_2012_D1.1
  * "Reason - Pragma usage is required here to allocate
  *  Code and Data memory sections to certain RAM area" */
-#pragma clang section data="FLS_CONFIG_SECTION"
+#pragma clang section rodata=".rodata.FLS_CONFIG_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -614,7 +608,7 @@ extern "C"
 /*TI_INSPECTED 69 S : MISRAC_2012_D1.1
  * "Reason - Pragma usage is required here to allocate
  *  Code and Data memory sections to certain RAM area" */
-#pragma clang section text="FLS_TEXT_SECTION"
+#pragma clang section text=".text.FLS_TEXT_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -632,7 +626,7 @@ extern "C"
 /*TI_INSPECTED 69 S : MISRAC_2012_D1.1
  * "Reason - Pragma usage is required here to allocate
  *  Code and Data memory sections to certain RAM area" */
-#pragma clang section text="FLS_ISR_TEXT_SECTION"
+#pragma clang section text=".text.FLS_ISR_TEXT_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -647,7 +641,7 @@ extern "C"
 #define MEMMAP_ACTIVE_CODE_SECTION (CODE_ISR)
 
 #elif defined(START_SEC_COMMON_CALLOUT_CODE)
-#pragma clang section text="FLS_CALLOUT_TEXT_SECTION"
+#pragma clang section text=".text.FLS_CALLOUT_TEXT_SECTION"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -664,7 +658,7 @@ extern "C"
 #endif
 
 #if defined(STOP_SEC_COMMON_VAR_INIT_UNSPECIFIED)
-#pragma clang section data=""
+#pragma clang section data=".data"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -683,7 +677,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_INIT_32)
-#pragma clang section data=""
+#pragma clang section data=".data"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -702,7 +696,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_INIT_16)
-#pragma clang section data=""
+#pragma clang section data=".data"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -721,7 +715,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_INIT_8)
-#pragma clang section data=""
+#pragma clang section data=".data"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -741,7 +735,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(STOP_SEC_COMMON_VAR_INIT_PTR)
-#pragma clang section data=""
+#pragma clang section data=".data"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -761,7 +755,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -780,7 +774,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_32)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -799,7 +793,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_16)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -818,7 +812,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_8)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -838,7 +832,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_PTR)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -858,7 +852,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(STOP_SEC_COMMON_CONST_UNSPECIFIED)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -877,7 +871,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CONST_32)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -896,7 +890,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CONST_16)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -915,7 +909,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CONST_8)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -935,7 +929,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(STOP_SEC_COMMON_CONST_PTR)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -955,7 +949,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(STOP_SEC_COMMON_CONFIG_DATA)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -974,7 +968,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CODE)
-#pragma clang section text=""
+#pragma clang section text=".text"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -993,7 +987,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_CODE_SECTION
 
 #elif defined(STOP_SEC_COMMON_ISR_CODE)
-#pragma clang section text=""
+#pragma clang section text=".text"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -1012,7 +1006,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_CODE_SECTION
 
 #elif defined(STOP_SEC_COMMON_CALLOUT_CODE)
-#pragma clang section text=""
+#pragma clang section text=".text"
 /*TI_INSPECTED 68 S : MISRAC_2012_R20.5
  * "Reason - Undef usage is required here
  * to define this memory section again" */
@@ -1035,8 +1029,6 @@ extern "C"
 #ifdef MEMMAP_ERROR
 #error "Fls_Memmap.h pragma error"
 #endif
-#endif 
-
 
 #ifdef __cplusplus
 }

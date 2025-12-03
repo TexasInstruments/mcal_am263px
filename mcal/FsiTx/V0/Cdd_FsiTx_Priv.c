@@ -116,16 +116,9 @@ volatile VAR(Cdd_FsiTx_PingTagType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_PingStatus 
 #define CDD_FSITX_START_SEC_VAR_INIT_32
 #include "Cdd_FsiTx_MemMap.h"
 /** \brief Number of words to be transmitted(frame size) */
-VAR(uint32, CDD_FSITX_VAR_CLEARED)
-Cdd_FsiTx_wordLength = 0U;
-#define CDD_FSITX_STOP_SEC_VAR_INIT_32
-#include "Cdd_FsiTx_MemMap.h"
-
-#define CDD_FSITX_START_SEC_VAR_INIT_32
-#include "Cdd_FsiTx_MemMap.h"
+VAR(uint32, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_wordLength = 0U;
 /** \brief Frame Tag to be transmitted */
-VAR(uint32, CDD_FSITX_VAR_CLEARED)
-Cdd_FsiTx_frametag = 0x01U;
+VAR(uint32, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_frametag = 0x01U;
 #define CDD_FSITX_STOP_SEC_VAR_INIT_32
 #include "Cdd_FsiTx_MemMap.h"
 

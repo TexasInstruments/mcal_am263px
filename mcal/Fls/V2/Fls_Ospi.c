@@ -80,17 +80,16 @@
 #include "Fls_Ospi_Edma.h"
 #endif
 
+/* ========================================================================== */
+/*                            Global Variables                                */
+/* ========================================================================== */
+
 #define FLS_START_SEC_VAR_NO_INIT_UNSPECIFIED
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Fls_MemMap.h"
-
 /** \brief Driver object */
 OSPI_Object Fls_OspiObjects[OSPI_NUM_INSTANCES];
-
-/* ========================================================================== */
-/*                            Global Variables                                */
-/* ========================================================================== */
 #define FLS_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
@@ -100,11 +99,8 @@ OSPI_Object Fls_OspiObjects[OSPI_NUM_INSTANCES];
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Fls_MemMap.h"
-
 /* OSPI driver configuration */
-
 OSPI_Config Fls_OspiConfig[1] = {{&Fls_OspiObjects[0]}};
-
 #define FLS_STOP_SEC_VAR_INIT_UNSPECIFIED
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */

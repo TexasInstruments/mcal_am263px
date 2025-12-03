@@ -235,36 +235,6 @@ extern "C" {
 #endif
 /** @} */
 
-/**
- *  \name CAN Config Ids
- *
- *  The Config Ids used for different
- *  CAN Configuration builds
- *  @{
- */
-/** \brief Config 0 (All configurations ON) */
-#define CAN_CFG_ID_0 (0x01U)
-/** \brief Config 1 (All configurations OFF).
- *         CAN_CFG_ID_1 is used only for compile check */
-#define CAN_CFG_ID_1 (0x02U)
-/** \brief Config 2 (All configurations ON except DET OFF) */
-#define CAN_CFG_ID_2 (0x04U)
-/** \brief Config 3 (Configurator auto generated file) */
-#define CAN_CFG_ID_3 (0x08U)
-/** \brief Config 4 (Configurator auto generated file MCAN
- *                  with pre-compile variant ON) */
-#define CAN_CFG_ID_4 (0x10U)
-/** \brief Config 5 (All configurations ON but used only for testing
- *                   WakeUp by external HW event and Performance tests) */
-#define CAN_CFG_ID_5 (0x20U)
-
-/** \brief Config 6 (Used for MCAN Testing) */
-#define CAN_CFG_ID_6 (0x40U)
-
-/** \brief Config 7 (Used for MCAN Testing) */
-#define CAN_CFG_ID_7 (0x50U)
-/** @} */
-
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */

@@ -30,17 +30,13 @@
 #include "Mcu_XbarPwm.h"
 #include "Mcu_XbarOutput.h"
 #include "Mcu_Priv.h"
-#define MCU_START_SEC_CODE
-#include "Mcu_MemMap.h"
-#define MCU_STOP_SEC_CODE
-#include "Mcu_MemMap.h"
 #include "soc.h"
 #include "hw_ctrl_core.h"
 #if (STD_ON == MCU_DEV_ERROR_DETECT)
 #include "Det.h"
 #endif
 #include "hal_stdtypes.h"
-#include "hw_types.h"
+#include "cslr_top_ctrl.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
@@ -2176,10 +2172,15 @@ static inline void Mcu_enableAdcReference(uint32 adcInstance)
     /* Unlock Top Control Space */
     Mcu_controlModuleUnlockMMR(0, MCU_TOP_CTRL_PARTITION0);
 
+    /*Mask HHV before enabling reference buffer to ensure the ADC doesn't cause an MCU reset*/
+    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_MASK_ANA_ISO, (0x7 & CSL_TOP_CTRL_MASK_ANA_ISO_MASK_MASK));
     /* Enable ADC references by writing to MMR */
-    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + MCU_CSL_TOP_CTRL_ADC_REFBUF0_CTRL + (groupnum * 4U), 0x7);
-    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + MCU_CSL_TOP_CTRL_ADC_REF_COMP_CTRL,
-                HW_RD_REG32(MCU_CSL_TOP_CTRL_U_BASE + MCU_CSL_TOP_CTRL_ADC_REF_COMP_CTRL) | compctlmask);
+    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REFBUF0_CTRL + (groupnum * 4U), 0x7);
+    /*Unmask HHV*/
+    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_MASK_ANA_ISO, ((~0x7) & CSL_TOP_CTRL_MASK_ANA_ISO_MASK_MASK));
+
+    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL,
+                HW_RD_REG32(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL) | compctlmask);
 
     /* Lock Top Control Space */
     Mcu_controlModuleLockMMR(0, MCU_TOP_CTRL_PARTITION0);

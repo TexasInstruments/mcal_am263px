@@ -112,18 +112,6 @@ extern "C" {
 void CpswPort_hostPortopen(uint32 baseAddr);
 
 /**
- *  \brief Set CPDMA TX Ptype
- *
- *   Set CPDMA TX Ptype as either Round Robin or Priority.
- *
- *  \param baseAddr                 CPSW base address
- *  \param TXPtype                  Transmit priority type: round robin or priority
- *
- *  \return None
- */
-void CpswPort_setDMATXPtype(uint32 baseAddr, uint32 TXPtype);
-
-/**
  *  \brief Set current rate limit bandwidth.
  *
  *   Set limit bandwidth for a given port and given traffic priority.

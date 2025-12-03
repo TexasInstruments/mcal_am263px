@@ -174,7 +174,7 @@ typedef volatile uint8         REG8;
 #if defined(CLANG)
 #define MCAL_INTERRUPT_ATTRIBUTE __attribute__((target("arm")))
 #else
-#define MCAL_INTERRUPT_ATTRIBUTE 
+#define MCAL_INTERRUPT_ATTRIBUTE
 #endif
 
 /** @enum config_value_type

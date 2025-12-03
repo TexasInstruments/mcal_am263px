@@ -47,12 +47,6 @@
 
 #define ICU_START_SEC_CODE
 #include "Icu_MemMap.h"
-#include "hw_types.h"
-#define ICU_STOP_SEC_CODE
-#include "Icu_MemMap.h"
-
-#define ICU_START_SEC_CODE
-#include "Icu_MemMap.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */

@@ -93,6 +93,11 @@ extern "C" {
 #define LIN_INIT_CONFIG_PC                   Lin_Config
 [!ENDIF!]
 
+/** \brief LIN ID used to transmit a header instead of a wakeup signal. 
+ *   The hardware enters an undefined state when a standard wakeup signal is transmitted. 
+ *   To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which 
+ *   conforms to the LIN 2.1 specification **/
+#define LIN_WAKEUP_ID                    (0x[!"text:toupper(substring-after(num:inttohex(LinGeneral/LinWakeupId),'0x'))"!]U)
 
 /**
  *  \name Pre-Compile Switches for API Services
@@ -165,7 +170,7 @@ extern "C" {
 //*****************************************************************************
 [!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!]
 [!IF "node:refvalid(LinChannelEcuMWakeupSource)"!]
-#define LIN_WAKEUP_SOURCE_[!"LinChannelId"!]           EcuMConf_EcuMWakeupSource_[!"node:name(node:ref(LinChannelEcuMWakeupSource))"!]
+#define LIN_WAKEUP_SOURCE_[!"LinChannelId"!]               (EcuM_WakeupSourceType)([!IF "not(node:empty(LinChannelEcuMWakeupSource))"!][!"num:inttohex(bit:bitset(0, node:value(node:ref(LinChannelEcuMWakeupSource)/EcuMWakeupSourceId)), 8)"!][!ELSE!]0[!ENDIF!]U)
 [!ENDIF!]
 [!ENDLOOP!]
 
@@ -228,6 +233,8 @@ typedef struct Lin_ControllerTag
 //*****************************************************************************
 typedef struct Lin_BaudrateConfigTag
 {
+   /** \brief Baud rate value */
+   uint32 BaudRate;
    /** \brief Prescaler*/
    uint32 Prescalar;
    /** \brief Fractional divider*/

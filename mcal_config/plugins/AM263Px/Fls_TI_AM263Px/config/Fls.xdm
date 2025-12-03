@@ -2052,6 +2052,44 @@
                            value="ECUC:622bd1f2-a9e0-4043-9b1a-8baa38771911"/>
                       <a:da name="DEFAULT" value="false"/>
                     </v:var>
+                    <v:var name="FlsPhyControlMode" type="ENUMERATION">
+                      <a:a name="DESC"
+                           value="EN: The driver shall enable Phy Speed mode for DAC."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Texas Instruments"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="4bb0f920-a1e6-4b95-b4f0-00560ba23e1a"/>
+                      <a:da name="DEFAULT" value="FLS_PHY_MASTER_MODE"/>
+                         <a:da name="RANGE">
+                              <a:v>FLS_PHY_MASTER_MODE</a:v>
+                              <a:v>FLS_PHY_BYPASS_MODE</a:v>
+                         </a:da>
+                    </v:var>
+                    <v:var name="FlsPhyDllLockMode" type="ENUMERATION">
+                      <a:a name="DESC"
+                           value="EN: The driver shall enable Phy Speed mode for DAC."/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:a name="ORIGIN" value="Texas Instruments"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                      <a:a name="UUID"
+                           value="76d07abb-c18a-437e-b097-6039fdfbe245"/>
+                      <a:da name="DEFAULT" value="FLS_PHY_DLL_HALF_CYCLE"/>
+                      <a:da name="RANGE">
+                              <a:v>FLS_PHY_DLL_HALF_CYCLE</a:v>
+                              <a:v>FLS_PHY_DLL_FULL_CYCLE</a:v>
+                         </a:da>
+                    </v:var>
               </v:ctr>
               <v:ctr name="FlsGeneral" type="IDENTIFIABLE">
                 <a:a name="DESC"
@@ -2525,7 +2563,7 @@
                   <a:a name="UUID"
                        value="ECUC:b75b0b3e-e68a-4a74-984c-875387d3aa04"/>
                   <a:da name="DEFAULT" value="23322"/>
-                      <a:da name="EDITABLE" value="‭false‬"/>
+                      <a:da name="EDITABLE" value="false"/>
                       <a:da name="READONLY" value="true"/>
                 </v:var>
                 <v:var name="FlsSpecifiedEraseCycles" type="INTEGER_LABEL">

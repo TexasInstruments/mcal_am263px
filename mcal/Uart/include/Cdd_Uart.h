@@ -46,7 +46,11 @@
 /* ========================================================================== */
 
 #include <sys_common.h>
-#include <hw_types.h>
+#define CDD_UART_START_SEC_CODE
+#include "Cdd_Uart_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_UART_STOP_SEC_CODE
+#include "Cdd_Uart_MemMap.h"
 #include "Std_Types.h"
 #include "Cdd_Uart_Cfg.h"
 #include <Uart.h>

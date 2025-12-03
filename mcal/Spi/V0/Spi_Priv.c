@@ -27,18 +27,6 @@
 #include "Spi_Priv.h"
 #include "soc.h"
 
-#if (STD_ON == SPI_JOB_LOG)
-
-/* There are static inline functions in hw_types.h file. Map them as
-    well */
-#define SPI_START_SEC_CODE
-#include "Spi_MemMap.h"
-#include "hw_types.h"
-#define SPI_STOP_SEC_CODE
-#include "Spi_MemMap.h"
-
-#endif /* #if (STD_ON == SPI_JOB_LOG) */
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -92,11 +80,8 @@ static void Spi_copyConfig_MaxSeq(Spi_DriverObjType *drvObj, const Spi_ConfigTyp
 #if (STD_ON == SPI_JOB_LOG)
 #define SPI_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Spi_MemMap.h"
-
 /** \brief SPI job log object */
-
 VAR(Spi_JobLogType, SPI_VAR_CLEARED) Spi_JobLogObj;
-
 #define SPI_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Spi_MemMap.h"
 #endif /* #if (STD_ON == SPI_JOB_LOG) */

@@ -79,15 +79,12 @@ static void Wdg_resetDrvObj(void);
 
 #define WDG_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Wdg_MemMap.h"
-
 VAR(Wdg_DriverObjType, WDG_VAR_ZERO_INIT) Wdg_DrvObj;
-
 #define WDG_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Wdg_MemMap.h"
 
 #define WDG_START_SEC_VAR_INIT_UNSPECIFIED
 #include "Wdg_MemMap.h"
-
 #if (STD_ON == WDG_DEV_ERROR_DETECT)
 /** \brief WDG driver status */
 volatile VAR(Wdg_StatusType, WDG_VAR_ZERO_INIT) Wdg_DrvStatus = WDG_UNINIT;

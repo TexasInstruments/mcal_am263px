@@ -69,10 +69,8 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Pwm_Priv.h"
-#include "hw_epwm.h"
 #include "sys_common.h"
 #include "mcal_hw_soc_baseaddress.h"
-
 #if (STD_ON == PWM_SFO_SUPPORT_ENABLE)
 #include "Pwm_Sfo.h"
 #endif
@@ -91,20 +89,22 @@
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
 
+static void Pwm_ConfigHR_epwm_Internal(uint32 outputCh, uint32 baseAddr, float32 Duty, float32 highRes_regVal);
+static void Pwm_ConfigHR_epwm_Internal1(uint32 outputCh, uint32 baseAddr, float32 Duty, float32 highRes_regVal);
+static void Pwm_EnableNotification_epwm_FallingEdge(uint32 outputCh, uint32 baseAddr, Pwm_OutputStateType polarity);
+static void Pwm_EnableNotification_epwm_RisingEdge(uint32 outputCh, uint32 baseAddr, Pwm_OutputStateType polarity);
+static void Pwm_EnableNotification_epwm_BothEdges(uint32 outputCh, uint32 baseAddr);
+
+/* ========================================================================== */
+/*                            Global Variables                                */
+/* ========================================================================== */
+
 #define PWM_START_SEC_VAR_NO_INIT_32
 #include "Pwm_MemMap.h"
 VAR(sint32, PWM_VAR_NO_INIT) Pwm_MEP_ScaleFactor;
 #define PWM_STOP_SEC_VAR_NO_INIT_32
 #include "Pwm_MemMap.h"
 
-static void Pwm_ConfigHR_epwm_Internal(uint32 outputCh, uint32 baseAddr, float32 Duty, float32 highRes_regVal);
-static void Pwm_ConfigHR_epwm_Internal1(uint32 outputCh, uint32 baseAddr, float32 Duty, float32 highRes_regVal);
-static void Pwm_EnableNotification_epwm_FallingEdge(uint32 outputCh, uint32 baseAddr, Pwm_OutputStateType polarity);
-static void Pwm_EnableNotification_epwm_RisingEdge(uint32 outputCh, uint32 baseAddr, Pwm_OutputStateType polarity);
-static void Pwm_EnableNotification_epwm_BothEdges(uint32 outputCh, uint32 baseAddr);
-/* ========================================================================== */
-/*                            Global Variables                                */
-/* ========================================================================== */
 #define PWM_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Pwm_MemMap.h"
 /** \brief Pwm driver interrupt status flag*/
@@ -117,11 +117,10 @@ VAR(uint16, PWM_VAR_NO_INIT) Pwm_IsrIndex[PWM_HW_MAX_NUM_CHANNELS];
 
 #define PWM_START_SEC_VAR_INIT_32
 #include "Pwm_MemMap.h"
-
 VAR(uint32, PWM_VAR_INIT) Pwm_gOttoCal_base = (uint32)MCAL_CSL_CONTROLSS_OTTOCAL0_U_BASE;
-
 #define PWM_STOP_SEC_VAR_INIT_32
 #include "Pwm_MemMap.h"
+
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */

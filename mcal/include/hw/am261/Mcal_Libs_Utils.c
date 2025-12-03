@@ -35,6 +35,9 @@
 static void Mcu_MMR_lock(volatile uint32 *kick0, volatile uint32 *kick1);
 static void Mcal_Libs_Utils_MMR_unlock(volatile uint32 *kick0, volatile uint32 *kick1);
 
+#define MCAL_LIB_START_SEC_CODE
+#include "Mcal_Lib_MemMap.h"
+
 /* MMR Unlock Functions */
 static void Mcal_Libs_Utils_MMR_unlock(volatile uint32 *kick0, volatile uint32 *kick1)
 {
@@ -112,3 +115,6 @@ void Mcal_Libs_Utils_lockTopRcmMMR(void)
     lock1 = (volatile uint32 *)(&toprcmREG->LOCK0_KICK1);
     Mcal_Libs_Utils_MMR_lock(lock0, lock1);
 }
+
+#define MCAL_LIB_STOP_SEC_CODE
+#include "Mcal_Lib_MemMap.h"

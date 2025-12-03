@@ -174,7 +174,7 @@ typedef volatile uint8         REG8;
 #if defined(CLANG)
 #define MCAL_INTERRUPT_ATTRIBUTE __attribute__((target("arm")))
 #else
-#define MCAL_INTERRUPT_ATTRIBUTE 
+#define MCAL_INTERRUPT_ATTRIBUTE
 #endif
 
 /** @enum config_value_type
@@ -233,11 +233,11 @@ typedef enum config_value_type
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_PRU_ICSSM0_PR1_RX_SOF_INTR_REQ_0     (8U)
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_PRU_ICSSM0_PR1_RX_SOF_INTR_REQ_1     (9U)
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_PRU_ICSSM0_PR1_TX_SOF_INTR_REQ_0     (10U)
-#define MCAL_CSLR_R5FSS0_CORE0_INTR_PRU_ICSSM0_PR1_TX_SOF_INTR_REQ_1     (11U) 
+#define MCAL_CSLR_R5FSS0_CORE0_INTR_PRU_ICSSM0_PR1_TX_SOF_INTR_REQ_1     (11U)
 #define CPSW_FH_INT                                                 (12U)      /* CPSW T-host threshold interrupt                                                        */
 #define CPSW_TH_INT                                                 (13U)      /* CPSW T-host interrupt                                                     */
 #define CPSW_TH_TRSH_INT                                            (14U)      /* CPSW F-host interrupt  */
-#define CPSW_MISC_INT                                               (15U)      /* MCAL_CSLR_R5FSS0_CORE0_INTR_CPSW0_MISC_INTR interrupt  */                
+#define CPSW_MISC_INT                                               (15U)      /* MCAL_CSLR_R5FSS0_CORE0_INTR_CPSW0_MISC_INTR interrupt  */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_LIN0_INTR_0                          (16U)      /* LIN0 Interrupt 0 */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_LIN0_INTR_1                          (17U)      /* LIN0 Interrupt 1 */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_LIN1_INTR_0                          (18U)      /* LIN1 Interrupt 0 */
@@ -259,7 +259,7 @@ typedef enum config_value_type
 #define MCAN2_MCAN_LVL_INT_1                                        (34U)      /* MCAN2 Level Interrupt 1                                                       */
 #define MCAN3_ROLLOVER_LVL_INT_0                                    (35U)      /* MCAN3 External TS RollOver Interrupt                                          */
 #define MCAN3_MCAN_LVL_INT_0                                        (36U)      /* MCAN3 Level Interrupt 0                                                       */
-#define MCAN3_MCAN_LVL_INT_1                                        (37U)      /* MCAN3 Level Interrupt 1                                                       */                                      
+#define MCAN3_MCAN_LVL_INT_1                                        (37U)      /* MCAN3 Level Interrupt 1                                                       */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_UART0_IRQ                            (38U)
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_UART1_IRQ                            (39U)
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_UART2_IRQ                            (40U)
@@ -335,7 +335,7 @@ typedef enum config_value_type
 #define RTI3_OVERFLOW_INT0                                          (110U)       /* RTI3 overflow interrupt                                                       */
 #define RTI3_OVERFLOW_INT1                                          (111U)       /* RTI3 overflow interrupt                                                       */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_RESERVED112                          112
-#define ESM_INT_CFG                                                 (113U)  /* MCAL_CSLR_R5FSS0_CORE0_INTR_ESM0_ESM_INT_CFG*/ 
+#define ESM_INT_CFG                                                 (113U)  /* MCAL_CSLR_R5FSS0_CORE0_INTR_ESM0_ESM_INT_CFG*/
 #define MSS_ESM_HI                                                  (114U)     /* MCAL_CSLR_R5FSS0_CORE0_INTR_ESM0_ESM_INT_HI ESM High Priority Interrupt                                                   */
 #define MSS_ESM_LO                                                  (115U)     /* MCAL_CSLR_R5FSS0_CORE0_INTR_ESM0_ESM_INT_LOW ESM Low Priority Interrupt                                                    */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_R5SS0_COMMRX_0                       (116U)
@@ -354,7 +354,7 @@ typedef enum config_value_type
 #define MSS_SW_INT0                                                 (129U)      /* Software Interrupt from MSS_CTRL                                              */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_R5SS0_CORE0_FPU_EXP                  (130U)
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_DEBUGSS_TXDATA_AVAIL                 (131U)
-#define CR5SS_STC_DONE                                              (132U)     /* Cortexr5ss subsystem STC complete interrupt                                   */                                    
+#define CR5SS_STC_DONE                                              (132U)     /* Cortexr5ss subsystem STC complete interrupt                                   */
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_TSENSE_H                             (133U)
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_TSENSE_L                             (134U)
 #define MCAL_CSLR_R5FSS0_CORE0_INTR_AHB_WRITE_ERR                        (135U)

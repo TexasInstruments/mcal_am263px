@@ -60,9 +60,7 @@
 
 #define CDD_UART_START_SEC_VAR_NO_INIT_32
 #include "Cdd_Uart_MemMap.h"
-
 extern uint32 baseAddresses[CDD_UART_MAXIMUM_CHANNELS];
-
 #define CDD_UART_STOP_SEC_VAR_NO_INIT_32
 #include "Cdd_Uart_MemMap.h"
 

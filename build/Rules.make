@@ -49,14 +49,14 @@ export BUILD_OS_TYPE ?= baremetal
 
 ifeq ($(OS),Windows_NT)
   # Paths for windows machine
-    CCS_PATH := C:/ti/ccs2030/ccs
+    CCS_PATH := C:/ti/ccs2040/ccs
     export EB_PATH?=C:/EB
 else
-    CCS_PATH := /opt/ti/ccs2030/ccs
+    CCS_PATH := /opt/ti/ccs2040/ccs
     export EB_PATH?=/opt/EB
 endif
 
-export TOOLCHAIN_R5_VERSION=ti-cgt-armllvm_4.0.3.LTS
+export TOOLCHAIN_R5_VERSION=ti-cgt-armllvm_4.0.4.LTS
 ifeq ($(OS),Windows_NT)
   # Paths for windows machine
   ifeq ($(COMPILER),TI_COMPILER)

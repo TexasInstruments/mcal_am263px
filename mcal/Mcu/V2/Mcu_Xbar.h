@@ -39,7 +39,11 @@ extern "C" {
 
 #include <stdint.h>
 #include "Std_Types.h"
-#include "hw_types.h"
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 
 /* Register Macros */
 #define MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G0       (0x00000100U)
@@ -789,6 +793,8 @@ static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
 
 /**
  * \brief Trip & Sync xbar: API to select input sources of Interrupt XBar
@@ -888,6 +894,8 @@ static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out
         base + MCU_CSL_GPIO_INTR_XBAR_MUXCNTL(out),
         (MCU_CSL_GPIO_INTR_XBAR_MUXCNTL_INT_ENABLE_MASK) | (mux_control & MCU_CSL_GPIO_INTR_XBAR_MUXCNTL_ENABLE_MASK));
 }
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 
 #ifdef __cplusplus
 }

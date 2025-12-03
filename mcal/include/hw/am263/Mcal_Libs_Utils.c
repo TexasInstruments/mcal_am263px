@@ -35,6 +35,9 @@
 static void Mcu_MMR_lock(volatile uint32 *kick0, volatile uint32 *kick1);
 static void Mcal_Libs_Utils_MMR_unlock(volatile uint32 *kick0, volatile uint32 *kick1);
 
+#define MCAL_LIB_START_SEC_CODE
+#include "Mcal_Lib_MemMap.h"
+
 void Mcal_CacheP_inv(void *blockPtr, uint32 byteCnt, uint32 type)
 {
     if ((type & ((uint32)Mcal_CacheP_TYPE_L1P))!=0U) {
@@ -123,6 +126,9 @@ void Mcal_Libs_Utils_lockTopRcmMMR(void)
     Mcu_MMR_lock(lock0, lock1);
 }
 
+#define MCAL_LIB_STOP_SEC_CODE
+#include "Mcal_Lib_MemMap.h"
+
 /* =========================Function separator========================= */
 /* FUNCTION DEF: void Mcal_CacheP_invL1p(uint32 blockPtr, uint32 byteCnt)
  *
@@ -130,6 +136,7 @@ void Mcal_Libs_Utils_lockTopRcmMMR(void)
  *       r1 - contains byteCnt
  */
         asm(".global Mcal_CacheP_invL1p         ");
+        asm(".section .text.MCAL_LIB_TEXT_SECTION");
         asm(".type Mcal_CacheP_invL1p,%function ");
         asm(".arm                          ");
         asm(".align 2                      ");
@@ -157,6 +164,7 @@ asm("invL1pCache_loop:");
  *       r1 - contains byteCnt
  */
         asm(".global Mcal_CacheP_invL1d");
+        asm(".section .text.MCAL_LIB_TEXT_SECTION");
         asm(".type Mcal_CacheP_invL1d,%function");
         asm(".arm");
 asm("Mcal_CacheP_invL1d:");

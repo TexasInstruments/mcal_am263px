@@ -50,9 +50,9 @@
 /**********************************************************************************************************************
  *  GLOBAL DATA
  *********************************************************************************************************************/
-#define CAN_START_SEC_CONFIG_DATA
-#include "Can_MemMap.h"
 
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Can_MemMap.h"
 
 
 
@@ -352,13 +352,11 @@ static Can_MailboxType
     &CanConfigSet_CanHardwareObject_6,
     &CanConfigSet_CanHardwareObject_7,
 };
-
-#define CAN_STOP_SEC_CONFIG_DATA
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Can_MemMap.h"
 
 #define CAN_START_SEC_CONFIG_DATA
 #include "Can_MemMap.h"
-
 /*Can Config struct */
 const struct Can_ConfigType_s Can_Config =
 {
@@ -372,9 +370,9 @@ const struct Can_ConfigType_s Can_Config =
         [1] = 0U
     }
 };
-
 #define  CAN_STOP_SEC_CONFIG_DATA
 #include "Can_MemMap.h"
+
 /*********************************************************************************************************************
  *  End of File: Can_PBcfg.c
  *********************************************************************************************************************/

@@ -54,7 +54,7 @@
 /**********************************************************************************************************************
  *  GLOBAL FUNCTION PROTOTYPES
  *********************************************************************************************************************/
-  
+
 /**********************************************************************************************************************
  *  LOCAL MACROS
  **********************************************************************************************************************/
@@ -96,8 +96,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINA7_UART0_RXD,
-         .Port_PinSignalName = (const sint8 *)"GPIO27",
-         .Port_PinName        = (const sint8 *)"PIN_A7",
+         //.Port_PinSignalName = (const sint8 *)"GPIO27",
+         //.Port_PinName        = (const sint8 *)"PIN_A7",
     },
     {
          .Port_PinId = 13,
@@ -128,8 +128,8 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
          .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
          .Port_RegOffsetAddr = PINA6_UART0_TXD,
-         .Port_PinSignalName = (const sint8 *)"GPIO28",
-         .Port_PinName        = (const sint8 *)"PIN_A6",
+         //.Port_PinSignalName = (const sint8 *)"GPIO28",
+         //.Port_PinName        = (const sint8 *)"PIN_A6",
     },
 
 };

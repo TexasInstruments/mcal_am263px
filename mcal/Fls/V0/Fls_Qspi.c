@@ -135,7 +135,6 @@ static void           QSPI_delay(uint32 delay);
 
 #define FLS_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Fls_MemMap.h"
-
 /** \brief Driver object */
 VAR(QSPI_Object, FLS_VAR_NO_INIT) Fls_QspiObjects[1];
 #define FLS_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
@@ -143,19 +142,14 @@ VAR(QSPI_Object, FLS_VAR_NO_INIT) Fls_QspiObjects[1];
 
 #define FLS_START_SEC_VAR_INIT_UNSPECIFIED
 #include "Fls_MemMap.h"
-
 /* QSPI driver configuration */
-
 VAR(QSPI_Config, FLS_VAR_INIT) Fls_QspiConfig[1] = {{&Fls_QspiObjects[0]}};
-
 #define FLS_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Fls_MemMap.h"
 
 #define FLS_START_SEC_VAR_INIT_32
 #include "Fls_MemMap.h"
-
 VAR(uint32, FLS_VAR_INIT) Fls_QspiConfigNum = 1;
-
 #define FLS_STOP_SEC_VAR_INIT_32
 #include "Fls_MemMap.h"
 

@@ -1,0 +1,150 @@
+#
+# Auto generated makefile
+#
+
+#include $(MCAL_SITARA_MCU_PATH)/build/Rules.make
+# Below variables need to be defined outside this file or via command line
+# - MCAL_SITARA_MCU_PATH
+# - PROFILE
+# - CG_TOOL_ROOT
+# - OUTNAME
+# - CCS_INSTALL_DIR
+# - CCS_IDE_MODE
+
+
+STRIP=$(CG_TOOL_ROOT)/bin/tiarmstrip
+OBJCOPY=$(CG_TOOL_ROOT)/bin/tiarmobjcopy
+ifeq ($(OS), Windows_NT)
+	PYTHON=python
+else
+	PYTHON=python3
+endif
+
+ifeq ($(OS),Windows_NT)
+    CCS_ECLIPSE=$(CCS_INSTALL_DIR)/eclipse/ccs-server-cli
+    CYGWIN_PATH?=$(CCS_INSTALL_DIR)/utils/cygwin
+    MKDIR=$(CYGWIN_PATH)/mkdir -p
+    RMDIR=$(CYGWIN_PATH)/rm -rf
+    RM=$(CYGWIN_PATH)/rm -f
+    COPY=$(CYGWIN_PATH)/cp
+    TOUCH=$(CYGWIN_PATH)/touch
+    PATHSEP=\\
+    CHMOD=$(CYGWIN_PATH)/echo
+    SHELL=cmd.exe
+else
+    UNAME_S := $(shell uname -s)
+    ifeq ($(UNAME_S),Linux)
+        export CCS_ECLIPSE=$(CCS_INSTALL_DIR)/eclipse/ccs-server-cli.sh
+        export MKDIR=mkdir -p
+        export RMDIR=rm -rf
+        export RM=rm -f
+        export COPY=cp
+        export TOUCH=touch
+        export PATHSEP=/
+        export CHMOD=chmod
+    endif
+endif
+
+OUTFILE=$(PROFILE)/$(OUTNAME).xer5f
+BOOTIMAGE_PATH=$(abspath ${PROFILE})
+BOOTIMAGE_NAME:=$(BOOTIMAGE_PATH)/$(OUTNAME).appimage
+BOOTIMAGE_NAME_XIP:=$(BOOTIMAGE_PATH)/$(OUTNAME).appimage_xip
+BOOTIMAGE_NAME_SIGNED:=$(BOOTIMAGE_PATH)/$(OUTNAME).appimage.signed
+BOOTIMAGE_RPRC_NAME:=$(BOOTIMAGE_PATH)/$(OUTNAME).rprc
+BOOTIMAGE_RPRC_NAME_XIP:=$(BOOTIMAGE_PATH)/$(OUTNAME).rprc_xip
+BOOTIMAGE_RPRC_NAME_TMP:=$(BOOTIMAGE_PATH)/$(OUTNAME).rprc_tmp
+BOOTIMAGE_NAME_MCELF:=$(BOOTIMAGE_PATH)/$(OUTNAME).mcelf
+BOOTIMAGE_NAME_MCELF_HS:=$(BOOTIMAGE_PATH)/$(OUTNAME).mcelf.hs
+
+#
+# Generation of boot image which can be loaded by Secondary Boot Loader (SBL)
+#
+ifeq ($(OS),Windows_NT)
+EXE_EXT=.exe
+endif
+ifeq ($(OS),Windows_NT)
+  BOOTIMAGE_CERT_GEN_CMD=powershell -executionpolicy unrestricted -command $(MCAL_SITARA_MCU_PATH)/build/bootimage_scripts/x509CertificateGen.ps1
+else
+  BOOTIMAGE_CERT_GEN_CMD=$(MCAL_SITARA_MCU_PATH)/build/bootimage_scripts/x509CertificateGen.sh
+endif
+BOOTIMAGE_TEMP_OUT_FILE=$(PROFILE)/temp_stdout_$(PROFILE).txt
+
+BOOTIMAGE_CORE_ID_r5fss0-0 = 0
+BOOTIMAGE_CORE_ID_r5fss0-1 = 1
+BOOTIMAGE_CORE_ID_r5fss1-0 = 2
+BOOTIMAGE_CORE_ID_r5fss1-1 = 3
+SBL_RUN_ADDRESS=0x70002000
+SBL_DEV_ID=55
+
+# Macros for multicore-elf genimage.py script
+MCELF_MERGE_SEGMENTS_FLAG?=true
+MCELF_MERGE_SEGMENTS_TOLERANCE_LIMIT?=0
+MCELF_IGNORE_CONTEXT_FLAG?=false
+MCELF_XIP_RANGE?=0x60000000:0x68000000
+# Default am263x address translation JSON is in tools/boot/multicore-elf/deviceData/AddrTranslate/am263x.json
+MCELF_ADDR_TRANSLATION_PATH?=none
+
+#Maximum size of a loadable elf segment. 
+#MCELF_MERGE_SEGMENTS_FLAG should be set to false to achieve this effect.
+MCELF_MAX_SEGMENT_SIZE?=8192
+
+MULTI_CORE_IMAGE_GEN = $(CCS_NODE) $(MCAL_SITARA_MCU_PATH)/build/bootimage_scripts/multicoreImageGen.js
+OUTRPRC_CMD = $(CCS_NODE) $(MCAL_SITARA_MCU_PATH)/build/bootimage_scripts/elf2rprc.js
+MCELF_IMAGE_GEN = $(MCAL_SITARA_MCU_PATH)/build/bootimage_scripts/multicore-elf/genimage.py
+
+ifeq ($(OS),Windows_NT)
+  XIPGEN_CMD=$(MCAL_SITARA_MCU_PATH)/build/bootimage_scripts/xipGen.exe
+else
+  XIPGEN_CMD=$(MCAL_SITARA_MCU_PATH)/build/bootimage_scripts/xipGen.out
+endif
+
+MULTI_CORE_IMAGE_PARAMS = \
+	$(BOOTIMAGE_RPRC_NAME)@$(BOOTIMAGE_CORE_ID_r5fss0-0) \
+
+MULTI_CORE_IMAGE_PARAMS_XIP = \
+	$(BOOTIMAGE_RPRC_NAME_XIP)@$(BOOTIMAGE_CORE_ID_r5fss0-0)  \
+
+all:
+ifeq ($(CCS_IDE_MODE),cloud)
+#	No post build steps
+else
+	@echo  Boot image: $(DEVICE):r5fss0-0:nortos:ti-arm-clang $(BOOTIMAGE_NAME)  ...
+	$(OUTRPRC_CMD) $(OUTFILE) >> $(BOOTIMAGE_TEMP_OUT_FILE)
+	$(COPY) $(OUTNAME).rprc $(BOOTIMAGE_RPRC_NAME)
+	$(COPY) $(BOOTIMAGE_RPRC_NAME) $(BOOTIMAGE_RPRC_NAME_TMP)
+	$(RM) $(BOOTIMAGE_RPRC_NAME)
+	$(XIPGEN_CMD) -i $(BOOTIMAGE_RPRC_NAME_TMP) -o $(BOOTIMAGE_RPRC_NAME) -x $(BOOTIMAGE_RPRC_NAME_XIP) --flash-start-addr 0x60000000 -v > $(BOOTIMAGE_TEMP_OUT_FILE)
+	$(MULTI_CORE_IMAGE_GEN) --devID $(SBL_DEV_ID) --out $(BOOTIMAGE_NAME) $(MULTI_CORE_IMAGE_PARAMS) >> $(BOOTIMAGE_TEMP_OUT_FILE)
+	$(MULTI_CORE_IMAGE_GEN) --devID $(SBL_DEV_ID) --out $(BOOTIMAGE_NAME_XIP) $(MULTI_CORE_IMAGE_PARAMS_XIP) >> $(BOOTIMAGE_TEMP_OUT_FILE)
+	$(RM) $(BOOTIMAGE_RPRC_NAME_TMP)
+	@echo  Boot multi-core ELF image: am263px:r5fss0-0:freertos:ti-arm-clang $(BOOTIMAGE_NAME_MCELF) ...
+
+	$(PYTHON) $(MCELF_IMAGE_GEN) --core-img=$(BOOTIMAGE_CORE_ID_r5fss0-0):$(OUTFILE) --output=$(BOOTIMAGE_NAME_MCELF) --merge-segments=$(MCELF_MERGE_SEGMENTS_FLAG) --tolerance-limit=$(MCELF_MERGE_SEGMENTS_TOLERANCE_LIMIT) --ignore-context=$(MCELF_IGNORE_CONTEXT_FLAG) --xip=$(MCELF_XIP_RANGE) --xlat=$(MCELF_ADDR_TRANSLATION_PATH) --max_segment_size=$(MCELF_MAX_SEGMENT_SIZE)
+
+	@echo  Boot multi-core ELF image: $(BOOTIMAGE_NAME_MCELF) Done !!!
+	@echo  Boot image: $(DEVICE):r5fss0-0:nortos:ti-arm-clang $(BOOTIMAGE_NAME) Done !!!
+	@echo  .
+ifeq ($(DEVICE_TYPE), HS)
+# Sign the appimage using appimage signing script
+ifeq ($(ENC_ENABLED),no)
+ifeq ($(RSASSAPSS_ENABLED),no)
+	@echo Boot image signing: Encryption is disabled.
+	$(PYTHON) $(APP_IMAGE_SIGN_CMD) --bin $(BOOTIMAGE_NAME) --key $(APP_SIGNING_KEY) --sign_key_id $(APP_SIGNING_KEY_KEYRING_ID) --hash_algo $(APP_SIGNING_HASH_ALGO) --output $(BOOTIMAGE_NAME_HS)
+else
+	@echo Boot image signing: Encryption is disabled. RSASSA-PSS is enabled.
+	$(PYTHON) $(APP_IMAGE_SIGN_CMD) --bin $(BOOTIMAGE_NAME) --key $(APP_SIGNING_KEY) --sign_key_id $(APP_SIGNING_KEY_KEYRING_ID) --hash_algo $(APP_SIGNING_HASH_ALGO) --pss_saltlen $(APP_SIGNING_SALT_LENGTH) --output $(BOOTIMAGE_NAME_HS) --rsassa_pss
+endif
+else
+ifeq ($(RSASSAPSS_ENABLED),no)
+	@echo Boot image signing: Encryption is enabled.
+	$(PYTHON) $(APP_IMAGE_SIGN_CMD) --bin $(BOOTIMAGE_NAME) --key $(APP_SIGNING_KEY) --enc y --enckey $(APP_ENCRYPTION_KEY) --kd-salt $(KD_SALT) --sign_key_id $(APP_SIGNING_KEY_KEYRING_ID) --enc_key_id $(APP_ENCRYPTION_KEY_KEYRING_ID) --hash_algo $(APP_SIGNING_HASH_ALGO) --output $(BOOTIMAGE_NAME_HS)
+	$(RM) $(BOOTIMAGE_NAME)-enc
+else
+	@echo Boot image signing: Encryption is enabled. RSASSA-PSS is enabled.
+	$(PYTHON) $(APP_IMAGE_SIGN_CMD) --bin $(BOOTIMAGE_NAME) --key $(APP_SIGNING_KEY) --enc y --enckey $(APP_ENCRYPTION_KEY) --kd-salt $(KD_SALT) --sign_key_id $(APP_SIGNING_KEY_KEYRING_ID) --enc_key_id $(APP_ENCRYPTION_KEY_KEYRING_ID) --hash_algo $(APP_SIGNING_HASH_ALGO) --pss_saltlen $(APP_SIGNING_SALT_LENGTH) --output $(BOOTIMAGE_NAME_HS) --rsassa_pss
+	$(RM) $(BOOTIMAGE_NAME)-enc
+endif
+endif
+	@echo  .
+endif
+endif

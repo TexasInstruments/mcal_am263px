@@ -250,7 +250,7 @@ extern "C"
 #endif
 
 #if defined(START_SEC_COMMON_VAR_INIT_UNSPECIFIED)
-#pragma clang section data="ICU_DATA_INIT_UNSPECIFIED_SECTION"
+#pragma clang section data=".data.ICU_DATA_INIT_UNSPECIFIED_SECTION"
 #undef START_SEC_COMMON_VAR_INIT_UNSPECIFIED
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -258,7 +258,7 @@ extern "C"
 #endif
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_UNSPECIFIED)
 #elif defined(START_SEC_COMMON_VAR_INIT_32)
-#pragma clang section data="ICU_DATA_INIT_32_SECTION"
+#pragma clang section data=".data.ICU_DATA_INIT_32_SECTION"
 #undef START_SEC_COMMON_VAR_INIT_32
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -267,7 +267,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_32)
 
 #elif defined(START_SEC_COMMON_VAR_INIT_16)
-#pragma clang section data="ICU_DATA_INIT_16_SECTION"
+#pragma clang section data=".data.ICU_DATA_INIT_16_SECTION"
 #undef START_SEC_COMMON_VAR_INIT_16
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -276,7 +276,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_16)
 
 #elif defined(START_SEC_COMMON_VAR_INIT_8)
-#pragma clang section data="ICU_DATA_INIT_8_SECTION"
+#pragma clang section data=".data.ICU_DATA_INIT_8_SECTION"
 #undef START_SEC_COMMON_VAR_INIT_8
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -286,7 +286,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(START_SEC_COMMON_VAR_INIT_PTR)
-#pragma clang section data="ICU_DATA_INIT_PTR_SECTION"
+#pragma clang section data=".data.ICU_DATA_INIT_PTR_SECTION"
 #undef START_SEC_COMMON_VAR_INIT_PTR
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -296,7 +296,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
-#pragma clang section data="ICU_DATA_NO_INIT_UNSPECIFIED_SECTION"
+#pragma clang section bss=".bss.ICU_DATA_NO_INIT_UNSPECIFIED_SECTION"
 #undef START_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -305,7 +305,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_NO_INIT_UNSPECIFIED)
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_32)
-#pragma clang section data="ICU_DATA_NO_INIT_32_SECTION"
+#pragma clang section bss=".bss.ICU_DATA_NO_INIT_32_SECTION"
 #undef START_SEC_COMMON_VAR_NO_INIT_32
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -314,7 +314,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_NO_INIT_32)
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_16)
-#pragma clang section data="ICU_DATA_NO_INIT_16_SECTION"
+#pragma clang section bss=".bss.ICU_DATA_NO_INIT_16_SECTION"
 #undef START_SEC_COMMON_VAR_NO_INIT_16
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -323,7 +323,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_NO_INIT_16)
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_8)
-#pragma clang section data="ICU_DATA_NO_INIT_8_SECTION"
+#pragma clang section bss=".bss.ICU_DATA_NO_INIT_8_SECTION"
 #undef START_SEC_COMMON_VAR_NO_INIT_8
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -333,7 +333,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_PTR)
-#pragma clang section data="ICU_DATA_NO_INIT_PTR_SECTION"
+#pragma clang section bss=".bss.ICU_DATA_NO_INIT_PTR_SECTION"
 #undef START_SEC_COMMON_VAR_NO_INIT_PTR
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -343,7 +343,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(START_SEC_COMMON_CONST_UNSPECIFIED)
-#pragma clang section data="ICU_CONST_UNSPECIFIED_SECTION"
+#pragma clang section rodata=".rodata.ICU_CONST_UNSPECIFIED_SECTION"
 #undef START_SEC_COMMON_CONST_UNSPECIFIED
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -352,7 +352,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONST_UNSPECIFIED)
 
 #elif defined(START_SEC_COMMON_CONST_32)
-#pragma clang section data="ICU_CONST_32_SECTION"
+#pragma clang section rodata=".rodata.ICU_CONST_32_SECTION"
 #undef START_SEC_COMMON_CONST_32
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -361,7 +361,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONST_32)
 
 #elif defined(START_SEC_COMMON_CONST_16)
-#pragma clang section data="ICU_CONST_16_SECTION"
+#pragma clang section rodata=".rodata.ICU_CONST_16_SECTION"
 #undef START_SEC_COMMON_CONST_16
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -370,7 +370,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONST_16)
 
 #elif defined(START_SEC_COMMON_CONST_8)
-#pragma clang section data="ICU_CONST_8_SECTION"
+#pragma clang section rodata=".rodata.ICU_CONST_8_SECTION"
 #undef START_SEC_COMMON_CONST_8
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -380,7 +380,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(START_SEC_COMMON_CONST_PTR)
-#pragma clang section data="ICU_CONST_PTR_SECTION"
+#pragma clang section rodata=".rodata.ICU_CONST_PTR_SECTION"
 #undef START_SEC_COMMON_CONST_PTR
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -390,7 +390,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(START_SEC_COMMON_CONFIG_DATA)
-#pragma clang section data="ICU_CONFIG_SECTION"
+#pragma clang section rodata=".rodata.ICU_CONFIG_SECTION"
 #undef START_SEC_COMMON_CONFIG_DATA
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_DATA_SECTION
@@ -399,7 +399,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_CONFIG_DATA)
 
 #elif defined(START_SEC_COMMON_CODE)
-#pragma clang section text="ICU_TEXT_SECTION"
+#pragma clang section text=".text.ICU_TEXT_SECTION"
 #undef START_SEC_COMMON_CODE
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_CODE_SECTION
@@ -408,7 +408,7 @@ extern "C"
 #define MEMMAP_ACTIVE_CODE_SECTION (CODE)
 
 #elif defined(START_SEC_COMMON_ISR_CODE)
-#pragma clang section text="ICU_ISR_TEXT_SECTION"
+#pragma clang section text=".text.ICU_ISR_TEXT_SECTION"
 #undef START_SEC_COMMON_ISR_CODE
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_CODE_SECTION
@@ -417,7 +417,7 @@ extern "C"
 #define MEMMAP_ACTIVE_CODE_SECTION (CODE_ISR)
 
 #elif defined(START_SEC_COMMON_CALLOUT_CODE)
-#pragma clang section text="ICU_CALLOUT_TEXT_SECTION"
+#pragma clang section text=".text.ICU_CALLOUT_TEXT_SECTION"
 #undef START_SEC_COMMON_CALLOUT_CODE
 #undef MEMMAP_ERROR
 #ifdef MEMMAP_ACTIVE_CODE_SECTION
@@ -428,7 +428,7 @@ extern "C"
 #endif
 
 #if defined(STOP_SEC_COMMON_VAR_INIT_UNSPECIFIED)
-#pragma clang section data=""
+#pragma clang section data=".data"
 #undef STOP_SEC_COMMON_VAR_INIT_UNSPECIFIED
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -438,7 +438,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_INIT_32)
-#pragma clang section data=""
+#pragma clang section data=".data"
 #undef STOP_SEC_COMMON_VAR_INIT_32
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -448,7 +448,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_INIT_16)
-#pragma clang section data=""
+#pragma clang section data=".data"
 #undef STOP_SEC_COMMON_VAR_INIT_16
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -458,7 +458,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_INIT_8)
-#pragma clang section data=""
+#pragma clang section data=".data"
 #undef STOP_SEC_COMMON_VAR_INIT_8
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -469,7 +469,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(STOP_SEC_COMMON_VAR_INIT_PTR)
-#pragma clang section data=""
+#pragma clang section data=".data"
 #undef STOP_SEC_COMMON_VAR_INIT_PTR
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -480,7 +480,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 #undef STOP_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -490,7 +490,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_32)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 #undef STOP_SEC_COMMON_VAR_NO_INIT_32
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -500,7 +500,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_16)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 #undef STOP_SEC_COMMON_VAR_NO_INIT_16
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -510,7 +510,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_8)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 #undef STOP_SEC_COMMON_VAR_NO_INIT_8
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -521,7 +521,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_PTR)
-#pragma clang section data=""
+#pragma clang section bss=".bss"
 #undef STOP_SEC_COMMON_VAR_NO_INIT_PTR
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -532,7 +532,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(STOP_SEC_COMMON_CONST_UNSPECIFIED)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 #undef STOP_SEC_COMMON_CONST_UNSPECIFIED
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -542,7 +542,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CONST_32)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 #undef STOP_SEC_COMMON_CONST_32
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -552,7 +552,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CONST_16)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 #undef STOP_SEC_COMMON_CONST_16
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -562,7 +562,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CONST_8)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 #undef STOP_SEC_COMMON_CONST_8
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -573,7 +573,7 @@ extern "C"
 
 #if !defined (AUTOSAR_421)
 #elif defined(STOP_SEC_COMMON_CONST_PTR)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 #undef STOP_SEC_COMMON_CONST_PTR
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -584,7 +584,7 @@ extern "C"
 #endif /* (AUTOSAR_421) */
 
 #elif defined(STOP_SEC_COMMON_CONFIG_DATA)
-#pragma clang section data=""
+#pragma clang section rodata=".rodata"
 #undef STOP_SEC_COMMON_CONFIG_DATA
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_DATA_SECTION) || \
@@ -594,7 +594,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_DATA_SECTION
 
 #elif defined(STOP_SEC_COMMON_CODE)
-#pragma clang section text=""
+#pragma clang section text=".text"
 #undef STOP_SEC_COMMON_CODE
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_CODE_SECTION) || \
@@ -604,7 +604,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_CODE_SECTION
 
 #elif defined(STOP_SEC_COMMON_ISR_CODE)
-#pragma clang section text=""
+#pragma clang section text=".text"
 #undef STOP_SEC_COMMON_ISR_CODE
 #undef MEMMAP_ERROR
 #if (!defined(MEMMAP_ACTIVE_CODE_SECTION) || \
@@ -614,7 +614,7 @@ extern "C"
 #undef MEMMAP_ACTIVE_CODE_SECTION
 
 #elif defined(STOP_SEC_COMMON_CALLOUT_CODE)
-#pragma clang section text=""
+#pragma clang section text=".text"
 #undef MEMMAP_ACTIVE_CODE_SECTION
 
 #endif

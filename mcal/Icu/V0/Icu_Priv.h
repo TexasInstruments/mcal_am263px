@@ -80,7 +80,11 @@
 #include "hw_icu.h"
 #include "soc.h"
 #include "ecap.h"
-#include "hw_types.h"
+#define ICU_START_SEC_CODE
+#include "Icu_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define ICU_STOP_SEC_CODE
+#include "Icu_MemMap.h"
 
 #include "Det.h"
 #ifdef __cplusplus

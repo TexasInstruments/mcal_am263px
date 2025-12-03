@@ -46,16 +46,29 @@ static const uint32 Port_GPIOPortAddr[5] = {
     PORT_GPIO_BASE + 0x10U, PORT_GPIO_BASE + 0x38U, PORT_GPIO_BASE + 0x60U,
     PORT_GPIO_BASE + 0x88U, PORT_GPIO_BASE + 0xB0U,
 };
+static const uint32 pull_typeselect_map[3] = {PORT_PAD_REGSETTING_PULLTYPESELECT_PULL_DOWN,
+                                              PORT_PAD_REGSETTING_PULLTYPESELECT_PULL_UP, PORT_PAD_REGSETTING_DEFAULT};
 
+static const uint32 pull_inhibit_map[3] = {PORT_PAD_REGSETTING_PULLINHIBIT_ENABLE,
+                                           PORT_PAD_REGSETTING_PULLINHIBIT_DISABLE, PORT_PAD_REGSETTING_DEFAULT};
+
+static const uint32 slewcontrol_map[3]      = {PORT_PAD_REGSETTING_SLEWCONTROL_FAST_SLEW,
+                                               PORT_PAD_REGSETTING_SLEWCONTROL_SLOW_SLEW, PORT_PAD_REGSETTING_DEFAULT};
+static const uint32 inversion_select_map[3] = {
+    PORT_PAD_REGSETTING_NON_INVERSION_EN,
+    PORT_PAD_REGSETTING_INVERSION_EN,
+    PORT_PAD_REGSETTING_DEFAULT,
+};
+static const uint32 qualifier_typeselect_map[5] = {
+    PORT_PAD_REGSETTING_SYNC_QUAL_EN, PORT_PAD_REGSETTING_THREE_SAMPLE_QUAL_EN, PORT_PAD_REGSETTING_SIX_SAMPLE_QUAL_EN,
+    PORT_PAD_REGSETTING_ASYNC_QUAL_EN, PORT_PAD_REGSETTING_DEFAULT};
 #define PORT_STOP_SEC_CONST_UNSPECIFIED
 #include "Port_MemMap.h"
 
 #define PORT_START_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Port_MemMap.h"
-
-/** \brief PORT Intrrupt object */
+/** \brief PORT Interrupt object */
 Port_IntrStatus Port_IntrObj;
-
 #define PORT_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Port_MemMap.h"
 
@@ -788,24 +801,6 @@ static uint32 Port_GetMuxMode(Port_PinModeType Port_PinMode, const Port_PinModeC
 void Port_MapConfigToReg(P2CONST(Port_PinConfigType, AUTO, PORT_APPL_DATA) padConfig,
                          P2VAR(Port_PadRegSettingType, AUTO, PORT_APPL_DATA) padRegSetting, Port_PinModeType pinMode)
 {
-    const uint32 pull_typeselect_map[3] = {PORT_PAD_REGSETTING_PULLTYPESELECT_PULL_DOWN,
-                                           PORT_PAD_REGSETTING_PULLTYPESELECT_PULL_UP, PORT_PAD_REGSETTING_DEFAULT};
-
-    const uint32 pull_inhibit_map[3] = {PORT_PAD_REGSETTING_PULLINHIBIT_ENABLE, PORT_PAD_REGSETTING_PULLINHIBIT_DISABLE,
-                                        PORT_PAD_REGSETTING_DEFAULT};
-
-    const uint32 slewcontrol_map[3]      = {PORT_PAD_REGSETTING_SLEWCONTROL_FAST_SLEW,
-                                            PORT_PAD_REGSETTING_SLEWCONTROL_SLOW_SLEW, PORT_PAD_REGSETTING_DEFAULT};
-    const uint32 inversion_select_map[3] = {
-        PORT_PAD_REGSETTING_NON_INVERSION_EN,
-        PORT_PAD_REGSETTING_INVERSION_EN,
-        PORT_PAD_REGSETTING_DEFAULT,
-    };
-
-    const uint32 qualifier_typeselect_map[5] = {
-        PORT_PAD_REGSETTING_SYNC_QUAL_EN, PORT_PAD_REGSETTING_THREE_SAMPLE_QUAL_EN,
-        PORT_PAD_REGSETTING_SIX_SAMPLE_QUAL_EN, PORT_PAD_REGSETTING_ASYNC_QUAL_EN, PORT_PAD_REGSETTING_DEFAULT};
-
     padRegSetting->muxmode = Port_GetMuxMode(pinMode, padConfig->Port_PinMode, padConfig->Port_NumPortModes);
 
     padRegSetting->pin_reg_offset = padConfig->Port_RegOffsetAddr;

@@ -47,7 +47,11 @@ extern "C" {
 #include "Cdd_Dma_trig_xbar.h"
 #include "Cdd_Dma_dmaxbar.h"
 #include "Std_Types.h"
-#include "hw_types.h"
+#define CDD_DMA_START_SEC_CODE
+#include "Cdd_Dma_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_DMA_STOP_SEC_CODE
+#include "Cdd_Dma_MemMap.h"
 
 /**
  *  \defgroup DRV_SOC_XBAR_MODULE APIs for SOC Xbars

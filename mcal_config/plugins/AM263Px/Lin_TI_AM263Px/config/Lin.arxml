@@ -131,6 +131,29 @@
                   <MAX>65535</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="bd40b2db-2e4f-41ca-9784-ac048f6667d2">
+                  <SHORT-NAME>LinWakeupId</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">Specifies the LIN ID used to transmit a header instead of a wakeup signal due to hardware constraints. The hardware enters an undefined state when a standard wakeup signal is transmitted. To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which conforms to the LIN 2.1 specification</L-2>
+                  </DESC>
+                  <SCOPE>LOCAL</SCOPE>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                  <DEFAULT-VALUE>63</DEFAULT-VALUE>
+                  <MAX>63</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
                 <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:03f6c9e0-e3b7-4907-84c0-a96e099b4431">
                   <SHORT-NAME>LinVersionInfoApi</SHORT-NAME>
                   <DESC>
@@ -187,32 +210,9 @@
                     <L-2 L="EN">This container contains the configuration (parameters) of the LIN Controller(s).</L-2>
                   </DESC>
                   <LOWER-MULTIPLICITY>1</LOWER-MULTIPLICITY>
-                  <UPPER-MULTIPLICITY-INFINITE>1</UPPER-MULTIPLICITY-INFINITE>
+                  <UPPER-MULTIPLICITY>4</UPPER-MULTIPLICITY>
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <PARAMETERS>
-                    <ECUC-INTEGER-PARAM-DEF UUID="ECUC:c3ebc9ff-d623-4c49-ac91-241dec476a8d">
-                      <SHORT-NAME>LinChannelId</SHORT-NAME>
-                      <DESC>
-                        <L-2 L="EN">Identifies the LIN channel. Replaces LIN_CHANNEL_INDEX_NAME from the LIN SWS.</L-2>
-                      </DESC>
-                      <SCOPE>LOCAL</SCOPE>
-                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
-                      <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                      <VALUE-CONFIG-CLASSES>
-                        <ECUC-VALUE-CONFIGURATION-CLASS>
-                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
-                        </ECUC-VALUE-CONFIGURATION-CLASS>
-                        <ECUC-VALUE-CONFIGURATION-CLASS>
-                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                        </ECUC-VALUE-CONFIGURATION-CLASS>
-                      </VALUE-CONFIG-CLASSES>
-                      <SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
-                      <DEFAULT-VALUE>0</DEFAULT-VALUE>
-                      <MAX>4</MAX>
-                      <MIN>0</MIN>
-                    </ECUC-INTEGER-PARAM-DEF>
                     <ECUC-INTEGER-PARAM-DEF UUID="ECUC:16748716-3f59-4064-a8ef-ca1ab0b00deb">
                       <SHORT-NAME>LinChannelBaudRate</SHORT-NAME>
                       <DESC>
@@ -235,6 +235,29 @@
                       <DEFAULT-VALUE>19200</DEFAULT-VALUE>
                       <MAX>20000</MAX>
                       <MIN>1000</MIN>
+                    </ECUC-INTEGER-PARAM-DEF>
+                    <ECUC-INTEGER-PARAM-DEF UUID="ECUC:c3ebc9ff-d623-4c49-ac91-241dec476a8d">
+                      <SHORT-NAME>LinChannelId</SHORT-NAME>
+                      <DESC>
+                        <L-2 L="EN">Identifies the LIN channel. Replaces LIN_CHANNEL_INDEX_NAME from the LIN SWS.</L-2>
+                      </DESC>
+                      <SCOPE>LOCAL</SCOPE>
+                      <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                      <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                      <VALUE-CONFIG-CLASSES>
+                        <ECUC-VALUE-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                        </ECUC-VALUE-CONFIGURATION-CLASS>
+                        <ECUC-VALUE-CONFIGURATION-CLASS>
+                          <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                          <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                        </ECUC-VALUE-CONFIGURATION-CLASS>
+                      </VALUE-CONFIG-CLASSES>
+                      <SYMBOLIC-NAME-VALUE>true</SYMBOLIC-NAME-VALUE>
+                      <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                      <MAX>4</MAX>
+                      <MIN>0</MIN>
                     </ECUC-INTEGER-PARAM-DEF>
                     <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:48e0b1e7-b421-4388-ac6c-04b471380667">
                       <SHORT-NAME>LinInstance</SHORT-NAME>
@@ -444,7 +467,7 @@
                     </ECUC-REFERENCE-DEF>
                   </REFERENCES>
                   <SUB-CONTAINERS>
-                    <ECUC-PARAM-CONF-CONTAINER-DEF>
+                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="a8c4e102-aa99-4a19-9d7b-813d9b463bfb">
                       <SHORT-NAME>LinBaudrateConfig</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">This container contains the baudrate configuration parameter of the Lin driver.</L-2>
@@ -469,7 +492,7 @@
                             </ECUC-VALUE-CONFIGURATION-CLASS>
                           </VALUE-CONFIG-CLASSES>
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                          <DEFAULT-VALUE>155</DEFAULT-VALUE>
+                          <DEFAULT-VALUE>0</DEFAULT-VALUE>
                           <MAX>16777215</MAX>
                           <MIN>0</MIN>
                         </ECUC-INTEGER-PARAM-DEF>
@@ -492,7 +515,7 @@
                             </ECUC-VALUE-CONFIGURATION-CLASS>
                           </VALUE-CONFIG-CLASSES>
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                          <DEFAULT-VALUE>4</DEFAULT-VALUE>
+                          <DEFAULT-VALUE>0</DEFAULT-VALUE>
                           <MAX>15</MAX>
                           <MIN>0</MIN>
                         </ECUC-INTEGER-PARAM-DEF>

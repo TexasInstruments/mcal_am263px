@@ -81,11 +81,8 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
-
-#if defined(BUILD_MCU)
 #include <Std_Types.h>
 #include "app_utils.h"
-#endif
 
 /* ========================================================================== */
 /*                                 Macros                                     */

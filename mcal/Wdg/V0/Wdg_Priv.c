@@ -23,7 +23,11 @@
 #include "hw_ctrl_core.h"
 #include "hal_stdtypes.h"
 #include "Wdg_Priv.h"
-#include "hw_types.h"
+#define WDG_START_SEC_CODE
+#include "Wdg_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define WDG_STOP_SEC_CODE
+#include "Wdg_MemMap.h"
 
 /* ========================================================================== */
 /*                         Macros & Typedefs                                  */

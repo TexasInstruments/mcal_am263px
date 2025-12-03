@@ -322,6 +322,21 @@ This container contains the parameters related to each LIN Driver Unit.
 | **Max-value** | 255 |
 | **Min-value** | 0 |
 
+##### LinWakeupId
+
+| Item ||
+|--------|---------------|
+| **Name** | LinWakeupId |
+| **Description** | Specifies the LIN ID used to transmit a header instead of a wakeup signal due to hardware constraints. The hardware enters an undefined state when a standard wakeup signal is transmitted. To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which conforms to the LIN 2.1 specification |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 63 |
+| **Max-value** | 63 |
+| **Min-value** | 0 |
+
 ##### LinVersionInfoApi
 
 | Item ||
@@ -353,6 +368,21 @@ This container contains the global configuration parameter of the Lin driver.
 
 ##### LinChannel
 This container contains the configuration (parameters) of the LIN Controller(s).
+
+###### LinChannelBaudRate
+
+| Item ||
+|--------|---------------|
+| **Name** | LinChannelBaudRate |
+| **Description** | Specifies the baud rate of the LIN channel |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 19200 |
+| **Max-value** | 20000 |
+| **Min-value** | 1000 |
 
 ###### LinChannelId
 
@@ -477,7 +507,7 @@ This container contains the baudrate configuration parameter of the Lin driver.
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
-| **Default-value** | 155 |
+| **Default-value** | 0 |
 | **Max-value** | 16777215 |
 | **Min-value** | 0 |
 ### Examples

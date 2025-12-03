@@ -68,8 +68,26 @@ boolean             test_run = TRUE;
 /*Notification function definitions*/
 void EcuM_CheckWakeup(EcuM_WakeupSourceType wakeupSource)
 {
-    while (1)
-        ;
+    uint8 channel_id;
+
+    if (wakeupSource == LIN_WAKEUP_SOURCE_0)
+    {
+        /* Wakeup Source 5 configured for Channel 0 */
+        channel_id = 0U;
+    }
+    else
+    {
+        channel_id = 1U;
+    }
+
+    (void)Lin_CheckWakeup(channel_id);
+
+    return;
+}
+
+void EcuM_SetWakeupEvent(EcuM_WakeupSourceType WakeupRef)
+{
+    AppUtils_printf(APP_NAME ": Wakeup event set for wakeupSource =%d :)!!!\n\r", WakeupRef);
 }
 
 static inline Lin_FramePidType Lin_GenerateParityID(Lin_FramePidType identifier)
@@ -194,8 +212,153 @@ Std_ReturnType LinApp_Slave_To_Slave_Test()
     {
         return_val = E_NOT_OK;
     }
+    AppUtils_printf(" \n\r");
 
     return return_val;
+}
+
+Std_ReturnType LinApp_Wakeup_Internal(void)
+{
+    uint32 return_val = E_NOT_OK;
+    uint32 failcount  = 0;
+
+    AppUtils_printf(APP_NAME ": LinChannel_1 performing Master Sleep and Wakeup internally \n\r");
+
+    /* Prepare Transmit PDU */
+    txPdu.Pid    = Lin_GenerateParityID(0x7);
+    txPdu.Cs     = LIN_ENHANCED_CS;
+    txPdu.Drc    = LIN_MASTER_RESPONSE;
+    txPdu.Dl     = 8;
+    txPdu.SduPtr = txData;
+
+    /* Perform Wakeup test */
+    if (LIN_CH_SLEEP == Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+    {
+        Lin_WakeupInternal(LinConf_LinChannel_LinChannel_1);
+    }
+
+    /* Go to Sleep  */
+    return_val = Lin_GoToSleep(LinConf_LinChannel_LinChannel_1);
+    if (return_val == E_OK)
+    {
+        if (LIN_CH_SLEEP == Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+        {
+            AppUtils_printf("Sleep Success \n\r");
+            AppUtils_printf("Monitor whether PLIN went to sleep\n\r");
+            /* 5000 msec delay */
+            AppUtils_delay(5000U);
+        }
+        else
+        {
+            AppUtils_printf("Sleep Failed\n\r");
+            ++failcount;
+        }
+    }
+    else
+    {
+        AppUtils_printf("Sleep Failed\n\r");
+        ++failcount;
+    }
+    /* Wakeup */
+    return_val = Lin_Wakeup(LinConf_LinChannel_LinChannel_1);
+    if (return_val == E_OK)
+    {
+        if (LIN_OPERATIONAL == Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+        {
+            AppUtils_printf("Wakeup Success\n\r");
+            AppUtils_printf("Monitor whether PLIN woke up from sleep\n\r");
+            /* 4000 msec delay */
+            AppUtils_delay(4000U);
+        }
+        else
+        {
+            AppUtils_printf("Wakeup Failed\n\r");
+            ++failcount;
+        }
+    }
+    else
+    {
+        AppUtils_printf("Wakeup Failed\n\r");
+        ++failcount;
+    }
+
+    AppUtils_printf("Started Sending Data Frame\n\r");
+    return_val = Lin_SendFrame(LinConf_LinChannel_LinChannel_1, &txPdu);
+    if (return_val == E_OK)
+    {
+        while (LIN_TX_OK != Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+            ;
+        AppUtils_printf("Data Sent Done\n\r");
+    }
+    else
+    {
+        ++failcount;
+        AppUtils_printf("Lin_SendFrame failed\n\r");
+    }
+
+    /* Check if any failed attempts observed and if any config parameters are incorrect */
+    if (failcount == 0U)
+    {
+        return_val = E_OK;
+    }
+    else
+    {
+        return_val = E_NOT_OK;
+    }
+
+    AppUtils_printf(" \n\r");
+    return (return_val);
+}
+
+Std_ReturnType LinApp_Wakeup_By_Interrupt(void)
+{
+    uint32      return_val = E_NOT_OK;
+    Lin_PduType PduInfoPtrTest;
+
+    AppUtils_printf(APP_NAME ": LinChannel_1 performing Master Sleep and Slave Wakeup in interrupt mode \n\r");
+
+    if (LIN_CH_SLEEP == Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+    {
+        Lin_WakeupInternal(LinConf_LinChannel_LinChannel_1);
+    }
+
+    AppUtils_printf("LIN Module Initialized. Sending Go to Sleep Command On Bus..\n\r");
+    return_val = Lin_GoToSleep(LinConf_LinChannel_LinChannel_1);
+
+    while (LIN_CH_SLEEP != Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+        ;
+
+    if (return_val == E_OK)
+    {
+        /* If Go to sleep is Success, Need to trigger wakeup pulse from PLIN */
+        /* When WakeUp Pulse is triggered, Wakeup Interrupt will be triggered */
+        AppUtils_printf("LIN Module Successfully Went to Sleep Mode. \n\n\r");
+        AppUtils_printf("---------------------------------------------------------------\n\n\r");
+        AppUtils_printf("Trigger WakeUp Pulse on Lin Bus to Wakeup Lin Module\n\r");
+        AppUtils_printf("Waiting for WAKE UP INTERRUPT on Bus...\n\r");
+
+        while (LIN_OPERATIONAL != Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+        {
+            /* Do nothing */
+        }
+        AppUtils_printf("Lin Module Wake Up from Sleep by WakeUp Interrupt is Success !!!\n\n\r");
+        {
+            PduInfoPtrTest.Pid    = Lin_GenerateParityID(0x3A);
+            PduInfoPtrTest.Cs     = LIN_ENHANCED_CS;
+            PduInfoPtrTest.Drc    = LIN_MASTER_RESPONSE;
+            PduInfoPtrTest.Dl     = 8;
+            PduInfoPtrTest.SduPtr = txData;
+
+            AppUtils_printf("Started Sending Data Frame\n\r");
+            return_val = Lin_SendFrame(LinConf_LinChannel_LinChannel_1, &PduInfoPtrTest);
+
+            while (LIN_TX_OK != Lin_GetStatus(LinConf_LinChannel_LinChannel_1, rxData))
+                ;
+            AppUtils_printf("Data Sent Done\n\r");
+        }
+    }
+    AppUtils_printf(" \n\r");
+    return (return_val);
 }
 
 static void LinApp_mainTest(void)
@@ -235,6 +398,17 @@ static void LinApp_mainTest(void)
     Lin_Init(pCfgPtr);
 #endif
 
+#ifdef AM263X_PLATFORM
+    AppUtils_printf("Connect PLIN to J32 on AM263x-CC board, execute this test case\n\r");
+    AppUtils_printf("In the order PIN1 to VBATLin, PIN2 to LIN, PIN3 to LIN-GND \n\r");
+#elif AM263PX_PLATFORM
+    AppUtils_printf("Connect PLIN to J10 on AM263Px-CC board, execute this test case\n\r");
+    AppUtils_printf("In the order PIN1 to VBATLin, PIN2 to LIN, PIN3 to LIN-GND \n\r");
+#else
+    AppUtils_printf("Connect LIN 1 Tx/Rx pins to the TLIN to execute this test case\n\r");
+    AppUtils_printf("82: LIN1_TX, 80: LIN1_RX \n\r");
+#endif
+
     AppUtils_printf(APP_NAME ": Using LinChannel_1 -> LIN_INSTANCE_1 \n\r");
 
     AppUtils_printf(APP_NAME ": Waking LinChannel_1 from sleep \n\r");
@@ -257,7 +431,9 @@ static void LinApp_mainTest(void)
             AppUtils_printf(APP_NAME ": m - Send Master Response Lin Request\n\r");
             AppUtils_printf(APP_NAME ": s - Send Slave Response Lin Request\n\r");
             AppUtils_printf(APP_NAME ": x - Send Slave to Slave Lin Request\n\r");
-            AppUtils_printf(APP_NAME ": a - Send all types Lin Request\n\r");
+            AppUtils_printf(APP_NAME ": p - Lin Wakeup by internal method\n\r");
+            AppUtils_printf(APP_NAME ": i - Lin Wakeup by interrupt method\n\r");
+            AppUtils_printf(APP_NAME ": a - Run all Lin_app example\n\r");
             AppUtils_printf(APP_NAME ": q - to quit the application\n\r\n\r");
 
             user_input = AppUtils_getChar();
@@ -276,10 +452,20 @@ static void LinApp_mainTest(void)
                     returnValue |= LinApp_Slave_To_Slave_Test();
                     break;
 
+                case 'p':
+                    returnValue |= LinApp_Wakeup_Internal();
+                    break;
+
+                case 'i':
+                    returnValue |= LinApp_Wakeup_By_Interrupt();
+                    break;
+
                 case 'a':
                     returnValue |= LinApp_Master_Response_Test();
                     returnValue |= LinApp_Slave_Response_Test();
                     returnValue |= LinApp_Slave_To_Slave_Test();
+                    returnValue |= LinApp_Wakeup_Internal();
+                    returnValue |= LinApp_Wakeup_By_Interrupt();
                     break;
 
                 case 'q':

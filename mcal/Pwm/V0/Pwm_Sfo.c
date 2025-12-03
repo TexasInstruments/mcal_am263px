@@ -33,7 +33,11 @@
 #include "stdbool.h"
 #include "stdint.h"
 #include "Pwm_Sfo.h"
-#include "hw_types.h"
+#define PWM_START_SEC_CODE
+#include "Pwm_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define PWM_STOP_SEC_CODE
+#include "Pwm_MemMap.h"
 
 #define PWM_EPWM_O_HRCNFG   0x40
 #define PWM_EPWM_O_HRCNFG2  0x4E
@@ -118,19 +122,14 @@
 #define PWM_START_SEC_VAR_NO_INIT_32
 #include "Pwm_MemMap.h"
 VAR(uint32, PWM_VAR_NO_INIT) Pwm_MEP_SF[(PWM_CH_MAX + 1)];
-VAR(uint32, PWM_VAR_NO_INIT)
-Pwm_SFO_Cal; /*channel to calibrate
-to use, declare "extern sint SFO_CAL;" in source file
+/* channel to calibrate to use, declare "extern sint SFO_CAL;" in source file
 and call SFO() once before changing to select a channel.*/
+VAR(uint32, PWM_VAR_NO_INIT) Pwm_SFO_Cal;
 extern VAR(uint32, PWM_VAR_NO_INIT) Pwm_gOttoCal_base;
-#define PWM_STOP_SEC_VAR_NO_INIT_32
-#include "Pwm_MemMap.h"
-
-#define PWM_START_SEC_VAR_NO_INIT_32
-#include "Pwm_MemMap.h"
 extern VAR(sint32, PWM_VAR_NO_INIT) Pwm_MEP_ScaleFactor;
 #define PWM_STOP_SEC_VAR_NO_INIT_32
 #include "Pwm_MemMap.h"
+
 /******************************************************************************
 
  FUNCTION:    Pwm_SFO(void)

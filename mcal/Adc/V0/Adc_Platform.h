@@ -54,7 +54,11 @@ extern "C" {
  *
  ******************************************************************************/
 #include "Std_Types.h"
-#include "hw_types.h"
+#define ADC_START_SEC_CODE
+#include "Adc_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define ADC_STOP_SEC_CODE
+#include "Adc_MemMap.h"
 #include "Adc_Reg.h"
 #include "Adc_RegResult.h"
 /*****************************************************************************

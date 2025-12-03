@@ -81,6 +81,7 @@ CONST(Lin_ConfigType, LIN_CFG) Lin_Config =
       },
       .linBaudConfig =
       {
+         .BaudRate = [!"LinChannelBaudRate"!]U,
          .Prescalar = [!"LinBaudrateConfig/LinChannelPrescalar"!]U,
          .FractionalDivider = [!"LinBaudrateConfig/LinChannelFractionalDivider"!]U
       },

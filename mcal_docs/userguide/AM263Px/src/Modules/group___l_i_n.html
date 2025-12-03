@@ -97,6 +97,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#function-lin-wakeupinternal">5.15.4.8. function Lin_WakeupInternal</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-lin-getstatus">5.15.4.9. function Lin_GetStatus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-lin-registerreadback">5.15.4.10. function Lin_RegisterReadback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-lin-deinit">5.15.4.11. function Lin_Deinit</a></li>
 </ul>
 </li>
 </ul>
@@ -303,28 +304,31 @@ Loopback mode type.</p>
 <tr class="row-even"><td><p>LIN_SID_REGISTER_READBACK</p></td>
 <td><p>Lin_RegisterReadback()</p></td>
 </tr>
-<tr class="row-odd"><td><p>LIN_E_UNINIT</p></td>
+<tr class="row-odd"><td><p>LIN_SID_DEINIT</p></td>
+<td><p>Lin_Deinit()</p></td>
+</tr>
+<tr class="row-even"><td><p>LIN_E_UNINIT</p></td>
 <td><p>API service used without module initialization.</p></td>
 </tr>
-<tr class="row-even"><td><p>LIN_E_INVALID_CHANNEL</p></td>
+<tr class="row-odd"><td><p>LIN_E_INVALID_CHANNEL</p></td>
 <td><p>API service used with an invalid or inactive channel parameter.</p></td>
 </tr>
-<tr class="row-odd"><td><p>LIN_E_INVALID_POINTER</p></td>
+<tr class="row-even"><td><p>LIN_E_INVALID_POINTER</p></td>
 <td><p>API service called with invalid configuration pointer.</p></td>
 </tr>
-<tr class="row-even"><td><p>LIN_E_STATE_TRANSITION</p></td>
+<tr class="row-odd"><td><p>LIN_E_STATE_TRANSITION</p></td>
 <td><p>Invalid state transition for the current state.</p></td>
 </tr>
-<tr class="row-odd"><td><p>LIN_E_PARAM_POINTER</p></td>
+<tr class="row-even"><td><p>LIN_E_PARAM_POINTER</p></td>
 <td><p>API service called with a NULL pointer.</p></td>
 </tr>
-<tr class="row-even"><td><p>LIN_ISR_VOID</p></td>
+<tr class="row-odd"><td><p>LIN_ISR_VOID</p></td>
 <td><p>void ISR type</p></td>
 </tr>
-<tr class="row-odd"><td><p>LIN_ISR_CAT1</p></td>
+<tr class="row-even"><td><p>LIN_ISR_CAT1</p></td>
 <td><p>Category 1 ISR type.</p></td>
 </tr>
-<tr class="row-even"><td><p>LIN_ISR_CAT2</p></td>
+<tr class="row-odd"><td><p>LIN_ISR_CAT2</p></td>
 <td><p>Category 2 ISR type.</p></td>
 </tr>
 </tbody>
@@ -379,6 +383,10 @@ Loopback mode type.</p>
 <tr class="row-odd"><td><p>Std_ReturnType</p></td>
 <td><p><strong><a class="reference internal" href="#function-lin-registerreadback"><span class="std std-ref">Lin_RegisterReadback</span></a></strong>(uint8 Channel, <a class="reference internal" href="../Classes/struct_lin___register_readback_type.html"><span class="std std-doc">Lin_RegisterReadbackType</span></a> * RegRbPtr)</p></td>
 <td><p>This function reads the important registers of the hardware unit and returns the value in the structure. This API is used to check the status of critical registers which do not change during program execution.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-lin-deinit"><span class="std std-ref">Lin_Deinit</span></a></strong>(void )</p></td>
+<td><p>This function de-intializes the LIN hardware unit .</p></td>
 </tr>
 </tbody>
 </table>
@@ -653,6 +661,20 @@ This function reads the important registers of the hardware unit and returns the
 </ul>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
+<section id="function-lin-deinit">
+<h3><span class="section-number">5.15.4.11. </span>function Lin_Deinit<a class="headerlink" href="#function-lin-deinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Lin_Deinit</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function de-intializes the LIN hardware unit .</p>
+<p>Service ID[hex] : 0x0D</p>
+<p>Sync/Async : Synchronous</p>
+<p>Reentrancy : Non - Reentrant</p>
+<p><strong>Return</strong>: void</p>
+</section>
 </section>
 </section>
 
@@ -668,7 +690,7 @@ This function reads the important registers of the hardware unit and returns the
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Nov 14, 2025.
+          <span class="lastupdated" >Last updated on Dec 03, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

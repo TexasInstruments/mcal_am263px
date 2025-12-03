@@ -62,6 +62,9 @@ void   PmuP_setup(uint32 setupFlags);
 uint32 CycleCounterP_getCount32();
 uint32 PmuP_getOverflowStatus();
 
+#define MCAL_LIB_START_SEC_CODE
+#include "Mcal_Lib_MemMap.h"
+
 void Mcal_pmuDelayUsec(volatile uint32 delayUsec, uint32 sysclkHz)
 {
     uint32 startVal, currVal, elapsed;
@@ -155,3 +158,6 @@ void Mcal_GetElapsedCycleCountValue(uint32 *Value, uint32 *ElapsedValue)
     }
     *Value = currVal;
 }
+
+#define MCAL_LIB_STOP_SEC_CODE
+#include "Mcal_Lib_MemMap.h"

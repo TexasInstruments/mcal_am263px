@@ -33,6 +33,7 @@ AM263x_targets:
 
 AM263Px_targets:
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=Mcal_Demo_Cfg          EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples_config/Mcal_Demo_Cfg/soc/am263px/tresos     EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples_config/Mcal_Demo_Cfg/soc/am263px/r5f0_0
+	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=Fls_OSPI_SBL_Support_Cfg  	EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples_config/Fls_OSPI_SBL_Support_Cfg/soc/am263px/tresos   EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples_config/Fls_OSPI_SBL_Support_Cfg/soc/am263px/r5f0_0
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=adc_hw_trig_dma_app 	EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples/Adc/adc_hw_trig_dma_app/soc/am263px/tresos  EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples/Adc/adc_hw_trig_dma_app/soc/am263px/tresos/output
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=adc_resolver_app    	EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples/Adc/adc_resolver_app/soc/am263px/tresos     EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples/Adc/adc_resolver_app/soc/am263px/tresos/output
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=adc_resolver_dma_app   EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples/Adc/adc_resolver_dma_app/soc/am263px/tresos EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples/Adc/adc_resolver_dma_app/soc/am263px/tresos/output
@@ -54,6 +55,7 @@ AM263Px_SIP_targets:
 
 AM261x_targets:
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=Mcal_Demo_Cfg          EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples_config/Mcal_Demo_Cfg/soc/am261/tresos       EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples_config/Mcal_Demo_Cfg/soc/am261/r5f0_0
+	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=Fls_OSPI_SBL_Support_Cfg  	EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples_config/Fls_OSPI_SBL_Support_Cfg/soc/am261/tresos   EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples_config/Fls_OSPI_SBL_Support_Cfg/soc/am261/r5f0_0
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=i2c_app                EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples/I2c/i2c_app/soc/am261/tresos                EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples/I2c/i2c_app/soc/am261/tresos/output
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=i2c_intr_app           EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples/I2c/i2c_intr_app/soc/am261/tresos           EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples/I2c/i2c_intr_app/soc/am261/tresos/output
 	$(MAKE) -C $(EB_MAKE_PATH) -f $(EB_MAKE_FILE) all EB_PLATFORM=$(EB_PLATFORM) EB_PROJECT_NAME=i2c_multichannel_app	EB_PROJECT_PATH=$(MCAL_PATH)/mcal/examples/I2c/i2c_multichannel_app/soc/am261/tresos   EB_OUTPUT_PATH=$(MCAL_PATH)/mcal/examples/I2c/i2c_multichannel_app/soc/am261/tresos/output

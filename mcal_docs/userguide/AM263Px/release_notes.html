@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 11.01.00.03 done on 14-Nov-2025.
+<p>This is the release notes for MCAL AM26xx 11.01.00.04 done on 03-Dec-2025.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.txt">license.txt</a> present in installation base path</p>
@@ -107,6 +107,35 @@ This document details about supported driver, installation, dependencies, build 
 | WDG        | V0     | V0      | V0     |
 +------------+--------+---------+--------+
 </code></pre>
+<h2 id="moduleversion">Module Version</h2>
+<pre><code class="{eval-rst} language-{eval-rst}">+------------+----------+
+| Module     | Version  |
++------------+----------+
+| ADC        | 10.02.00 |
+| CAN        | 10.02.01 |
+| CDD_CMPSS  | 01.00.02 |
+| CDD_FLC    | 01.00.02 |
+| DIO        | 10.02.00 |
+| CDD_DMA    | 10.02.01 |
+| CDD_PWM    | 10.02.00 |
+| ETH        | 10.03.00 |
+| ETHTRCV    | 10.03.00 |
+| FLS        | 10.03.00 |
+| CDD_FSIRX  | 10.02.01 |
+| CDD_FSITX  | 10.02.01 |
+| GPT        | 10.02.00 |
+| CDD_I2C    | 11.00.01 |
+| ICU        | 10.02.00 |
+| CDD_IPC    | 10.02.01 |
+| LIN        | 10.02.01 |
+| MCU        | 10.02.01 |
+| PORT       | 10.02.02 |
+| PWM        | 10.02.00 |
+| SPI        | 10.02.00 |
+| CDD_UART   | 10.02.00 |
+| WDG        | 10.02.00 |
++------------+----------+
+</code></pre>
 <h2 id="driverssupported">Drivers Supported</h2>
 <table>
   <thead>
@@ -166,6 +195,18 @@ This document details about supported driver, installation, dependencies, build 
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>MCAL-32431</td>
+      <td>Memmap section configuration issue in multiple mcal modules</td>
+      <td>All</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Fixed wrong and missed section mapping in multiple modules like CAN, PORT, MCU, PWM, EPWM. <br>
+          In PORT configuration, pin names are const strings which was not getting routed to const section. Since this is just a info, removed the structure members and converted them as comment.<br>
+          Example linker command file clean-up - removed unused section, consolidated all module sections into common section.<br>
+          Memmap Header file: for const section .rodata should be used instead of .data as per clang convention.
+      </td>
+    </tr>
     <tr>
       <td>MCAL-32468</td>
       <td>ADC_REF_COMP_CTRL configured incorrectly</td>
@@ -288,6 +329,22 @@ This document details about supported driver, installation, dependencies, build 
       <td>Invalid LIN wakeup key used earlier</td>
     </tr>
     <tr>
+      <td>MCAL-35008</td>
+      <td>LIN: Wakeup interrupt is calling EcuM_CheckWakeup with wrong argument</td>
+      <td>LIN</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>The value passed was not 1 left shifted EcuMWakeupSourceId times</td>
+    </tr>
+    <tr>
+      <td>MCAL-35010</td>
+      <td>LIN: Baudrate parameters values for Prescaler and Fractionaldivider are not automatically calculated</td>
+      <td>LIN</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>The values were manually updated. Baudrate configuration value were missing</td>
+    </tr>
+    <tr>
       <td>MCAL-32717</td>
       <td>Port_init fails in usermode</td>
       <td>PORT</td>
@@ -399,7 +456,7 @@ This document details about supported driver, installation, dependencies, build 
   <tbody>
     <tr>
       <td>ADC-R specific checks in configurator</td>
-      <td>ADC-R instance in AM263Px supports only 4 channels (other instances supports 6 channels). Also this ADC instance doesn't support HW triggers.<br>
+      <td>ADC-R instance in AM263Px supports only 4 channels (other instances supports 6 channels).<br>
           These checks are not performed in the EB configurator. User need to ensure they select the right configuration based on the AM263Px TRM
       </td>
       <td>ADC</td>

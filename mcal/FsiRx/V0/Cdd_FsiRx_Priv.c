@@ -103,8 +103,7 @@ VAR(CddFsiRx_DriverObjType, CDD_FSIRX_VAR_CLEARED) Cdd_FsiRx_DrvObj;
 #define CDD_FSIRX_START_SEC_VAR_INIT_16
 #include "Cdd_FsiRx_MemMap.h"
 /** \brief variable to store Tag and user data */
-VAR(uint16, CDD_FSIRX_VAR_CLEARED)
-Cdd_FsiRx_TagAndUserData = 0U;
+VAR(uint16, CDD_FSIRX_VAR_CLEARED) Cdd_FsiRx_TagAndUserData = 0U;
 #define CDD_FSIRX_STOP_SEC_VAR_INIT_16
 #include "Cdd_FsiRx_MemMap.h"
 

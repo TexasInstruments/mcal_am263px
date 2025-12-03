@@ -26,7 +26,11 @@
 /* ========================================================================== */
 
 #include "Std_Types.h"
-#include "hw_types.h"
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -445,6 +449,8 @@ extern "C" {
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
+#define MCU_START_SEC_CODE
+#include "Mcu_MemMap.h"
 
 /**
  * \brief PWM XBAR: API to read raw output signal status of all PWM XBars
@@ -533,6 +539,8 @@ static inline void MCU_xbarSelectPWMXBarInputSource(uint32 out, const uint32 gro
     HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G9,
                 group_mask[9U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G9_SEL_MASK);
 }
+#define MCU_STOP_SEC_CODE
+#include "Mcu_MemMap.h"
 
 #ifdef __cplusplus
 }

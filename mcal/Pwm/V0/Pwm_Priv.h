@@ -75,12 +75,17 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Pwm.h"
-
 /* IP Specific include */
-#include "hw_epwm.h"
+#define PWM_START_SEC_CODE
+#include "Pwm_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#include "hw_epwm.h"  /* Map the static inline functions in this file as well */
+#define PWM_STOP_SEC_CODE
+#include "Pwm_MemMap.h"
 #if (STD_ON == PWM_DEV_ERROR_DETECT)
 #include "Det.h"
 #endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif

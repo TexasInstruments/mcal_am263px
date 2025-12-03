@@ -609,6 +609,34 @@ Container for runtime configuration parameters of the flash driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
+##### FlsPhyControlMode
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsPhyControlMode |
+| **Description** | The driver shall enable Phy Speed mode for DAC. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | FLS_PHY_MASTER_MODE |
+| **Range** | FLS_PHY_MASTER_MODE<br>FLS_PHY_BYPASS_MODE |
+
+##### FlsPhyDllLockMode
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsPhyDllLockMode |
+| **Description** | The driver shall enable Phy Speed mode for DAC. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | FLS_PHY_DLL_HALF_CYCLE |
+| **Range** | FLS_PHY_DLL_HALF_CYCLE<br>FLS_PHY_DLL_FULL_CYCLE |
+
 ##### FlsHwUnitCddDmaHandler
 
 | Item ||

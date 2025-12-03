@@ -70,7 +70,6 @@
 /* ========================================================================== */
 #include "Cdd_Pwm.h"
 #include "Cdd_Pwm_Priv.h"
-#include "hw_epwm.h"
 
 /* ========================================================================== */
 /*                                Macros                                      */
@@ -117,16 +116,13 @@ static void Cdd_Pwm_GenerateSignal(Cdd_Pwm_channelParametertype ChannelParameter
 #include "Cdd_Pwm_MemMap.h"
 /** \brief CDD_PWM driver object. */
 extern VAR(Cdd_Pwm_ChObjType, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_ChObj[CDD_PWM_MAX_NUM_CHANNELS];
-
 #define CDD_PWM_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
 #include "Cdd_Pwm_MemMap.h"
 
 #define CDD_PWM_START_SEC_VAR_NO_INIT_32
 #include "Cdd_Pwm_MemMap.h"
-
 /** \brief CDD_PWM SFO Calibration status for each configured channel*/
 extern VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_ChannelSfoStatus[CDD_PWM_MAX_NUM_CHANNELS];
-
 #define CDD_PWM_STOP_SEC_VAR_NO_INIT_32
 #include "Cdd_Pwm_MemMap.h"
 /* ========================================================================== */

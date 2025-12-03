@@ -46,7 +46,7 @@ extern "C"
 /* Start sections - mapping */
 #if defined(START_SEC_COMMON_CONST_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section rodata=".rodata:CDD_CMPSS_CONST_UNSPECIFIED_SECTION"
+#pragma clang section rodata=".rodata.CDD_CMPSS_CONST_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CDD_CMPSS_CONST_UNSPECIFIED_SECTION")
 #endif
@@ -58,7 +58,7 @@ extern "C"
 #define MEMMAP_ACTIVE_CONST_SECTION (CONST_UNSPECIFIED)
 #elif defined(START_SEC_COMMON_CODE)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section text=".text:CDD_CMPSS_TEXT_SECTION"
+#pragma clang section text=".text.CDD_CMPSS_TEXT_SECTION"
 #else
 #pragma SET_CODE_SECTION("CDD_CMPSS_TEXT_SECTION")
 #endif

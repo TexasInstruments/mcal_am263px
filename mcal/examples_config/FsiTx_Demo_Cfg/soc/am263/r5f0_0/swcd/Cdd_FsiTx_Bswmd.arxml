@@ -16,10 +16,10 @@
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263x/Cdd_FsiTx_ModuleEntry/CddFsiTx_GetStatus</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL>           
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263x/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_BufferLoad</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL>  
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263x/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_DeInit</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -34,7 +34,7 @@
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263x/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_Reset</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL> 
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263x/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_Transmit</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -68,7 +68,7 @@
                   <SHORT-NAME>FSI_TX_EXCLUSIVE_AREA_0</SHORT-NAME>
                 </EXCLUSIVE-AREA>
               </EXCLUSIVE-AREAS>
-              <ENTITYS>              
+              <ENTITYS>
                 <BSW-INTERRUPT-ENTITY UUID="41873a95-d00b-48f6-bc1a-7fac5cea8de6">
                   <SHORT-NAME>CddFsiTx_FSIINT1_IrqUnit1</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -88,7 +88,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="4b43ca2b-b0cd-4bed-8a49-25ee1015fe6a">
                   <SHORT-NAME>Cdd_FsiTx_BufferLoad</SHORT-NAME>
-                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>                  
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
@@ -131,7 +131,7 @@
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
-                  </CALL-POINTS>                  
+                  </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263x/Cdd_FsiTx_ModuleEntry/Cdd_FsiTx_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="acadefd7-0577-46dd-be2c-5329cf94c367">
@@ -287,11 +287,17 @@
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
                 <SYMBOL>VAR_INIT_UNSPECIFIED</SYMBOL>
               </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="7f3d9dc5-18c9-4e2d-aa6e-29ced52cfa13">
+                <SHORT-NAME>CDD_FSI_TX_VAR_INIT_32</SHORT-NAME>
+                <ALIGNMENT>32</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_32</SYMBOL>
+              </MEMORY-SECTION>
               <MEMORY-SECTION UUID="9835d344-9a1b-44c9-b1d4-5407dac03159">
                 <SHORT-NAME>CDD_FSI_TX_VAR_NO_INIT_8</SHORT-NAME>
                 <ALIGNMENT>8</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
-                <SYMBOL>VAR_INIT_8</SYMBOL>
+                <SYMBOL>VAR_NO_INIT_8</SYMBOL>
               </MEMORY-SECTION>
               <MEMORY-SECTION UUID="d5a275e7-066f-4ded-8502-67fdc7191725">
                 <SHORT-NAME>CDD_FSI_TX_VAR_NO_INIT_UNSPECIFIED</SHORT-NAME>
@@ -435,7 +441,7 @@
               <EXECUTION-CONTEXT>UNSPECIFIED</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
-            </BSW-MODULE-ENTRY>            
+            </BSW-MODULE-ENTRY>
             <BSW-MODULE-ENTRY UUID="d62326a2-76d7-4b5f-a48a-868d01e75cd8">
               <SHORT-NAME>Cdd_FsiTx_MainFunction</SHORT-NAME>
               <SERVICE-ID>7</SERVICE-ID>

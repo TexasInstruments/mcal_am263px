@@ -151,6 +151,8 @@ extern "C" {
 #define LIN_SID_WAKEUP_INTERNAL ((uint8)0x0BU)
 /** \brief Lin_RegisterReadback() */
 #define LIN_SID_REGISTER_READBACK ((uint8)0x0CU)
+/** \brief Lin_Deinit() */
+#define LIN_SID_DEINIT ((uint8)0x0DU)
 /** @} */
 //*****************************************************************************
 //
@@ -432,6 +434,18 @@ FUNC(Std_ReturnType, LIN_CODE)
 Lin_RegisterReadback(uint8 Channel, P2VAR(Lin_RegisterReadbackType, AUTOMATIC, LIN_APPL_DATA) RegRbPtr);
 #endif
 
+/** \brief This function de-intializes the LIN hardware unit .
+ *
+ * Service ID[hex]   : 0x0D
+ *
+ * Sync/Async        : Synchronous
+ *
+ * Reentrancy        : Non - Reentrant
+ *
+ * \return void
+ *
+ *****************************************************************************/
+FUNC(void, LIN_CODE) Lin_Deinit(void);
 /*********************************************************************************************************************
  *  Exported Inline Function Definitions and Function-Like Macros
  *********************************************************************************************************************/

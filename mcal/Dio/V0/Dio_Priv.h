@@ -27,7 +27,11 @@
 #include "hal_stdtypes.h"
 #include "Dio.h"
 #include "hw_ctrl_core.h"
+#define DIO_START_SEC_CODE
+#include "Dio_MemMap.h"
 #include "sys_common.h"
+#define DIO_STOP_SEC_CODE
+#include "Dio_MemMap.h"
 #include "SchM_Dio.h"
 #include "soc.h"
 

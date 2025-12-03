@@ -245,7 +245,7 @@ extern "C"
 
 #if defined(START_SEC_COMMON_VAR_INIT_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_INIT_UNSPECIFIED_SECTION"
+#pragma clang section data=".data.CAN_DATA_INIT_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_INIT_UNSPECIFIED_SECTION")
 #endif
@@ -263,7 +263,7 @@ extern "C"
 #define MEMMAP_ACTIVE_DATA_SECTION (VAR_INIT_UNSPECIFIED)
 #elif defined(START_SEC_COMMON_VAR_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_INIT_32_SECTION"
+#pragma clang section data=".data.CAN_DATA_INIT_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_INIT_32_SECTION")
 #endif
@@ -282,7 +282,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_INIT_16_SECTION"
+#pragma clang section data=".data.CAN_DATA_INIT_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_INIT_16_SECTION")
 #endif
@@ -301,7 +301,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_INIT_8_SECTION"
+#pragma clang section data=".data.CAN_DATA_INIT_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_INIT_8_SECTION")
 #endif
@@ -320,7 +320,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_NO_INIT_UNSPECIFIED_SECTION"
+#pragma clang section bss=".bss.CAN_DATA_NO_INIT_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_NO_INIT_UNSPECIFIED_SECTION")
 #endif
@@ -339,7 +339,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_NO_INIT_32_SECTION"
+#pragma clang section bss=".bss.CAN_DATA_NO_INIT_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_NO_INIT_32_SECTION")
 #endif
@@ -358,7 +358,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_NO_INIT_16_SECTION"
+#pragma clang section bss=".bss.CAN_DATA_NO_INIT_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_NO_INIT_16_SECTION")
 #endif
@@ -377,7 +377,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_VAR_NO_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_DATA_NO_INIT_8_SECTION"
+#pragma clang section bss=".bss.CAN_DATA_NO_INIT_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_DATA_NO_INIT_8_SECTION")
 #endif
@@ -396,7 +396,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_CONST_UNSPECIFIED_SECTION"
+#pragma clang section rodata=".rodata.CAN_CONST_UNSPECIFIED_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_CONST_UNSPECIFIED_SECTION")
 #endif
@@ -415,7 +415,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_CONST_32_SECTION"
+#pragma clang section rodata=".rodata.CAN_CONST_32_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_CONST_32_SECTION")
 #endif
@@ -434,7 +434,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_CONST_16_SECTION"
+#pragma clang section rodata=".rodata.CAN_CONST_16_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_CONST_16_SECTION")
 #endif
@@ -453,7 +453,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CONST_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_CONST_8_SECTION"
+#pragma clang section rodata=".rodata.CAN_CONST_8_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_CONST_8_SECTION")
 #endif
@@ -475,7 +475,7 @@ extern "C"
  * "Reason - Pragma usage is required here to allocate
  *  Code and Data memory sections to certain RAM area" */
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data:CAN_CONFIG_SECTION"
+#pragma clang section rodata=".rodata.CAN_CONFIG_SECTION"
 #else
 #pragma SET_DATA_SECTION("CAN_CONFIG_SECTION")
 #endif
@@ -497,7 +497,7 @@ extern "C"
  * "Reason - Pragma usage is required here to allocate
  *  Code and Data memory sections to certain RAM area" */
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section text=".text:CAN_TEXT_SECTION"
+#pragma clang section text=".text.CAN_TEXT_SECTION"
 #else
 #pragma SET_CODE_SECTION("CAN_TEXT_SECTION")
 #endif
@@ -519,7 +519,7 @@ extern "C"
  * "Reason - Pragma usage is required here to allocate
  *  Code and Data memory sections to certain RAM area" */
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section text=".text:CAN_ISR_TEXT_SECTION"
+#pragma clang section text=".text.CAN_ISR_TEXT_SECTION"
 #else
 #pragma SET_CODE_SECTION("CAN_ISR_TEXT_SECTION")
 #endif
@@ -538,7 +538,7 @@ extern "C"
 
 #elif defined(START_SEC_COMMON_CALLOUT_CODE)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section text=".text:CAN_CALLOUT_TEXT_SECTION"
+#pragma clang section text=".text.CAN_CALLOUT_TEXT_SECTION"
 #else
 #pragma SET_CODE_SECTION("CAN_CALLOUT_TEXT_SECTION")
 #endif
@@ -651,7 +651,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -674,7 +674,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -697,7 +697,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -720,7 +720,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_VAR_NO_INIT_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section bss=".bss"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -743,7 +743,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_UNSPECIFIED)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -766,7 +766,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_32)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -789,7 +789,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_16)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -812,7 +812,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONST_8)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif
@@ -835,7 +835,7 @@ extern "C"
 
 #elif defined(STOP_SEC_COMMON_CONFIG_DATA)
 #if (defined CLANG) || (defined DIAB)
-#pragma clang section data=".data"
+#pragma clang section rodata=".rodata"
 #else
 #pragma SET_DATA_SECTION()
 #endif

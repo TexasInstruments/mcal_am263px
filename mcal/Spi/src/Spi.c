@@ -81,7 +81,6 @@ static uint8 SPI_init_CheckDetError(const Spi_ConfigType *ConfigPtr);
 
 #define SPI_START_SEC_VAR_INIT_UNSPECIFIED
 #include "Spi_MemMap.h"
-
 /** \brief SPI driver status */
 /* Requirements : SWS_Spi_00373,SWS_Spi_00061,SWS_Spi_00011,SWS_Spi_00345 */
 volatile VAR(Spi_StatusType, SPI_VAR_CLEARED) Spi_DrvStatus = SPI_UNINIT;

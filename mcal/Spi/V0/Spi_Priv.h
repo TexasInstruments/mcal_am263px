@@ -29,8 +29,13 @@
 #include "Spi.h"
 #include "Spi_Utils.h"
 #include "Det.h"
-#include "hw_types.h"
+#define SPI_START_SEC_CODE
+#include "Spi_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define SPI_STOP_SEC_CODE
+#include "Spi_MemMap.h"
 #include "hw_mcspi.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

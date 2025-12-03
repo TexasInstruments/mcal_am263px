@@ -47,10 +47,15 @@
 /* ========================================================================== */
 
 #include "Std_Types.h"
-#include "hw_types.h"
+#define CDD_FSIRX_START_SEC_CODE
+#include "Cdd_FsiRx_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_FSIRX_STOP_SEC_CODE
+#include "Cdd_FsiRx_MemMap.h"
 #include "Cdd_FsiRx_Priv.h"
 #include "Cdd_FsiRx_Reg.h"
 #include "Cdd_FsiRx_Types.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif

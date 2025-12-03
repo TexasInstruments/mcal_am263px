@@ -84,13 +84,13 @@ Bootloader_CoreAddrTranslateInfo gAddrTranslateInfo[] = {
         .addrRegionInfo =
             {
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMA_RAM_BASE,
-                    .socAddr      = CSL_MSS_TCMA_RAM_BASE,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMA_RAM_BASE,
+                    .socAddr      = (uint32_t)CSL_MSS_TCMA_RAM_BASE,
                     .regionSize   = CSL_MSS_TCMA_RAM_SIZE * 2U,
                 },
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMB_RAM_BASE,
-                    .socAddr      = CSL_MSS_TCMB_RAM_BASE,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMB_RAM_BASE,
+                    .socAddr      = (uint32_t)CSL_MSS_TCMB_RAM_BASE,
                     .regionSize   = CSL_MSS_TCMB_RAM_SIZE * 2U,
                 },
             },
@@ -107,7 +107,7 @@ Bootloader_CoreAddrTranslateInfo gAddrTranslateInfo[] = {
                     .regionSize   = CSL_MSS_TCMA_RAM_SIZE,
                 },
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMB_RAM_BASE,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMB_RAM_BASE,
                     .socAddr      = CSL_MSS_TCMB_RAM_BASE + CSL_MSS_TCMB_RAM_SIZE,
                     .regionSize   = CSL_MSS_TCMB_RAM_SIZE,
                 },
@@ -143,7 +143,7 @@ Bootloader_CoreAddrTranslateInfo gAddrTranslateInfo[] = {
                     .regionSize   = CSL_MSS_TCMA_RAM_SIZE,
                 },
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMB_RAM_BASE,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMB_RAM_BASE,
                     .socAddr      = MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE,
                     .regionSize   = CSL_MSS_TCMB_RAM_SIZE,
                 },

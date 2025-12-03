@@ -23,7 +23,11 @@
 /* ========================================================================== */
 
 #include "Cdd_I2c_Hw.h"
-#include "hw_types.h"
+#define CDD_I2C_START_SEC_CODE
+#include "Cdd_I2c_MemMap.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
+#define CDD_I2C_STOP_SEC_CODE
+#include "Cdd_I2c_MemMap.h"
 #include "Cdd_I2c_hw_reg.h"
 
 /* ========================================================================== */

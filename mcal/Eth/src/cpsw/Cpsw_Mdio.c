@@ -308,6 +308,8 @@ void CpswMdio_readPhyReg(uint32 baseAddr, uint8 phyAddr, uint8 regNum, uint16 *p
         EthTrcv_ReadMiiIndication(Eth_DrvObj.ctrlIdx, phyAddr, regNum, *pData);
 #endif /* (ETH_ENABLE_MII_API == STD_ON)*/
     }
+#else
+    *pData = *pData; /* Fix MISRA unused const */
 #endif /* STD_OFF == ETH_USR_MDIO_INTERRUPT*/
 
 #endif /* STD_ON == ETH_MDIO_OPMODE_MANUAL */

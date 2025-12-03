@@ -33,8 +33,7 @@
 
 #define ETHTRCV_START_SEC_CODE
 #include "EthTrcv_MemMap.h"
-
-#include "hw_types.h"
+#include "hw_types.h" /* Map the static inline functions in this file as well */
 #define ETHTRCV_STOP_SEC_CODE
 #include "EthTrcv_MemMap.h"
 #include "SchM_EthTrcv.h"
@@ -136,7 +135,11 @@ static Std_ReturnType EthTrcv_WriteMMDIndirect(uint8 ctrlIdx, uint8 trcvIdx, uin
 /*                            Global Variables                                */
 /* ========================================================================== */
 
+#define ETHTRCV_START_SEC_VAR_INIT_32
+#include "EthTrcv_MemMap.h"
 uint32 EthTrcv_ControllerModeChangeFlag[ETHTRCV_MAX_CONTROLLER] = {0};
+#define ETHTRCV_STOP_SEC_VAR_INIT_32
+#include "EthTrcv_MemMap.h"
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
