@@ -239,9 +239,9 @@ static inline void SIPC_insertClientIds(uint8_t remoteClientId, uint8_t selfClie
 }
 
 /* Secure IPC Isr */
-__attribute__((target("arm"))) void SIPC_isr(void *args)
+__attribute__((target("arm"))) void SIPC_isr(void)
 {
-    SIPC_InterruptConfig *pInterruptConfig = (SIPC_InterruptConfig *)args;
+    SIPC_InterruptConfig *pInterruptConfig = &gSIPC_ctrl.interruptConfig[gSIPC_ctrl.interruptConfigNum];
     uint32_t              mailboxBaseAddr;
     SIPC_SwQueue         *swQ;
     uint32_t              core;

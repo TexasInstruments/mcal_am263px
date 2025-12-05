@@ -106,7 +106,7 @@ extern "C" {
  *
  * \param args  [in] user argument passed during \ref HwiP_construct
  */
-typedef void (*HwiP_FxnCallback)(void *args);
+typedef void (*HwiP_FxnCallback)(void);
 
 /**
  * \brief HwiP config parameters, setup as part of SysConfig, not to be set by end-users directly

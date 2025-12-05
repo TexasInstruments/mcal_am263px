@@ -121,7 +121,7 @@ int32_t SIPC_Register_Isr(HwiP_Params *pHwiParams, SIPC_InterruptConfig *pInterr
                           HwiP_FxnCallback callback);
 
 /* Secure IPC Isr */
-void SIPC_isr(void *args);
+void SIPC_isr(void);
 
 #ifdef __cplusplus
 }
