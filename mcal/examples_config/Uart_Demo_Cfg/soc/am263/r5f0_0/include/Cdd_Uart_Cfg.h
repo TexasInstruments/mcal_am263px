@@ -58,7 +58,7 @@ extern "C" {
 /** \brief CDD UART configuration Minor Version */
 #define CDD_UART_CFG_MINOR_VERSION                 (2U)
 /** \brief CDD UART configuration Patch Version */
-#define CDD_UART_CFG_PATCH_VERSION                 (0U)
+#define CDD_UART_CFG_PATCH_VERSION                 (1U)
 /* @} */
 
 /* ========================================================================== */

@@ -111,7 +111,7 @@ extern "C" {
 /** \brief Icu configuration Minor Version */
 #define ICU_CFG_MINOR_VERSION           (2U)
 /** \brief Icu configuration Patch Version */
-#define ICU_CFG_PATCH_VERSION           (0U)
+#define ICU_CFG_PATCH_VERSION           (1U)
 /* @} */
 
 /**

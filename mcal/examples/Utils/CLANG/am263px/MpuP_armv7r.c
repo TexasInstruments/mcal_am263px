@@ -73,7 +73,7 @@ void MPU_SECTION MpuP_RegionAttrs_init(MpuP_RegionAttrs *region)
 }
 
 /* ----------- MpuP_armv7 ----------- */
-#define CONFIG_MPU_NUM_REGIONS (12u)
+#define CONFIG_MPU_NUM_REGIONS (13u)
 
 const MpuP_Config gMpuConfig = {
     .numRegions             = CONFIG_MPU_NUM_REGIONS,
@@ -227,7 +227,18 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] = {
                      .accessPerm           = MpuP_AP_ALL_R,
                      .subregionDisableMask = 0x0u},
     },
-
+    {
+        .baseAddr = 0xCE000000u,
+        .size     = MpuP_RegionSize_32M,
+        .attrs    = {.isEnable             = 1,
+                     .isCacheable          = 0,
+                     .isBufferable         = 0,
+                     .isSharable           = 1,
+                     .isExecuteNever       = 0,
+                     .tex                  = 0,
+                     .accessPerm           = MpuP_AP_ALL_RW,
+                     .subregionDisableMask = 0x0u},
+    },
 };
 
 uint32 MPU_SECTION MpuP_isEnable(void)

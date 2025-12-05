@@ -50,6 +50,11 @@
 #endif
 
 #include "bootloader.h"
+#include "hsmclient.h"
+#include <dthe.h>
+#include <dthe_aes.h>
+#include <dthe_sha.h>
+#include <dma.h>
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
@@ -63,6 +68,24 @@
 #define BLOCK_ERASE (0)
 /* This macro should be (1) if bulk/chip erase application is needed to run */
 #define CHIP_ERASE (0)
+
+/* sysconfig generated parameter QUEUE LENGTH */
+#define SIPC_QUEUE_LENGTH (32u)
+/* Total number of secure cores */
+#define SIPC_NUM_R5_CORES (2u)
+
+/**
+ * @brief
+ *        Maximum size of the HSM client message queue
+ *        For Streaming Secure Boot, the break up is as follows,
+ *        1 start message (includes the certificate) +
+ *        1 finish message +
+ *        1 ELF Header Buffer update message + 1 PHT Buffer update message
+ *        1024 ELF segment update messages (including the two note segments)
+ *          - PT note for boot sequence info
+ *          - PT note containing Random string for decryption verification
+ */
+#define HSM_CLIENT_MSG_QUEUE_SIZE (64U)
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */
@@ -93,6 +116,9 @@ extern uint32 sector_or_blocksize;
 #define CONFIG_BOOTLOADER0              (0U)
 #define CONFIG_BOOTLOADER_NUM_INSTANCES (1U)
 #define CONFIG_FLASH0                   (0U)
+
+#define APP_CLIENT_ID       (0x02)
+#define SEED_SIZE_IN_DWORDS (12U)
 
 /* Bootloader boot media specific arguments */
 Bootloader_FlashArgs gBootloader0Args = {
@@ -127,6 +153,11 @@ Bootloader_Config gBootloaderConfig[CONFIG_BOOTLOADER_NUM_INSTANCES] = {
 
 uint32_t gBootloaderConfigNum = CONFIG_BOOTLOADER_NUM_INSTANCES;
 
+/* ----------- HwiP ----------- */
+HwiP_Config gHwiConfig = {
+    .intcBaseAddr = 0x50F00000u,
+};
+
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -142,9 +173,299 @@ uint8 txBuf_test[DATA_SIZE_TEST] = {0};
 /* Buffer containing the received data */
 uint8 rxBuf_test[DATA_SIZE_TEST] = {0};
 
+/* memory assigned for each R5x <-> HSM channel */
+uint8_t gQueue_HsmToSecureHost[SIPC_NUM_R5_CORES][SIPC_QUEUE_LENGTH * SIPC_MSG_SIZE]
+    __attribute__((aligned(8), section(".bss.sipc_hsm_queue_mem")));
+uint8_t gQueue_SecureHostToHsm[SIPC_NUM_R5_CORES][SIPC_QUEUE_LENGTH * SIPC_MSG_SIZE]
+    __attribute__((aligned(8), section(".bss.sipc_secure_host_queue_mem")));
+HsmClient_t gHSMClient;
+
+/* Queue used to store HSM client messages that need to be dispatched via SIPC */
+HsmMsg_t gHsmClientMsgQueue[HSM_CLIENT_MSG_QUEUE_SIZE];
+
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
+/* Input buf length*/
+#define APP_CRYPTO_HMAC_SHA512_INPUT_BUF_LENGTH (9U)
+/* HMAC SHA-512 length */
+#define APP_CRYPTO_HMAC_SHA512_OUTPUT_LENGTH (64U)
+/* HMAC-SHA512 input key length */
+#define APP_CRYPTO_HMAC_SHA512_INPUT_KEY_LENGTH (64U)
+/* Alignment */
+#define APP_CRYPTO_HMAC_SHA512_BUF_ALIGNMENT (128U)
+/* Input or output length*/
+#define APP_CRYPTO_AES_CBC_128_INOUT_LENGTH (16U)
+/* AES CBC IV length in bytes */
+#define APP_CRYPTO_AES_CBC_128_IV_LENGTH_IN_BYTES (16U)
+/* AES CBC KEY length in bytes */
+#define APP_CRYPTO_AES_CBC_128_KEY_LENGTH_IN_BYTES (16U)
+/* AES CBC KEY Catche alignment size */
+#define APP_CRYPTO_AES_CBC_128_CATCHE_ALIGNMENT (32U)
+/* DTHE Public address */
+#define CSL_DTHE_PUBLIC_U_BASE (0xCE000810U)
+/* DTHE Aes Public address */
+#define CSL_DTHE_PUBLIC_AES_U_BASE (0xCE007000U)
+/* DTHE Aes Public address */
+#define CSL_DTHE_PUBLIC_SHA_U_BASE (0xCE005000U)
+
+/* EDMA config instance */
+#define CONFIG_EDMA_NUM_INSTANCES (1U)
+
+/* ========================================================================== */
+/*                            Global Variables                                */
+/* ========================================================================== */
+
+/* Input test buffer for hmac sha-512 computation */
+static uint8_t gCryptoHmacSha512TestInputBuf[APP_CRYPTO_HMAC_SHA512_INPUT_BUF_LENGTH] = {"abcdefpra"};
+
+/* Expected output buffer for hmac sha-512 computation */
+uint8_t gCryptoHmacSha512ExpectedOutput[APP_CRYPTO_HMAC_SHA512_OUTPUT_LENGTH] = {
+    0xedU, 0x5aU, 0x6fU, 0xe2U, 0x41U, 0x32U, 0xb9U, 0xfaU, 0xa7U, 0x1fU, 0x3dU, 0x3eU, 0xf0U, 0xcaU, 0x0aU, 0x42U,
+    0xefU, 0x82U, 0xf8U, 0xfeU, 0x0dU, 0xf5U, 0x9fU, 0x35U, 0x1fU, 0x26U, 0xdbU, 0x10U, 0x22U, 0xc8U, 0x94U, 0x7aU,
+    0x1dU, 0xeeU, 0x7aU, 0x3aU, 0xa4U, 0x91U, 0x71U, 0x8bU, 0x85U, 0xbcU, 0x4dU, 0x8aU, 0x7aU, 0xd1U, 0xadU, 0xe5U,
+    0x0fU, 0xc1U, 0x87U, 0x94U, 0x6fU, 0x56U, 0x38U, 0x41U, 0x11U, 0x99U, 0xcfU, 0xe8U, 0x67U, 0x44U, 0x27U, 0xc7U};
+
+/* Key buffer for hmac sha-512 computation */
+static uint8_t gCryptoHmacSha512Key[APP_CRYPTO_HMAC_SHA512_INPUT_KEY_LENGTH] = {
+    0x00U, 0x01U, 0x02U, 0x03U, 0x04U, 0x05U, 0x06U, 0x07U, 0x08U, 0x09U, 0x0AU, 0x0BU, 0x0CU, 0x0DU, 0x0EU, 0x0FU,
+    0x10U, 0x11U, 0x12U, 0x13U, 0x14U, 0x15U, 0x16U, 0x17U, 0x18U, 0x19U, 0x1AU, 0x1BU, 0x1CU, 0x1DU, 0x1EU, 0x1FU,
+    0x20U, 0x21U, 0x22U, 0x23U, 0x24U, 0x25U, 0x26U, 0x27U, 0x28U, 0x29U, 0x2AU, 0x2BU, 0x2CU, 0x2DU, 0x2EU, 0x2FU,
+    0x30U, 0x31U, 0x32U, 0x33U, 0x34U, 0x35U, 0x36U, 0x37U, 0x38U, 0x39U, 0x3AU, 0x3BU, 0x3CU, 0x3DU, 0x3EU, 0x3FU};
+
+/* Input buffer for encryption or decryption */
+static uint8_t gCryptoAesCbc128PlainText[APP_CRYPTO_AES_CBC_128_INOUT_LENGTH]
+    __attribute__((aligned(APP_CRYPTO_AES_CBC_128_CATCHE_ALIGNMENT))) = {
+        0x98, 0x3B, 0xF6, 0xF5, 0xA6, 0xDF, 0xBC, 0xDA, 0xA1, 0x93, 0x70, 0x66, 0x6E, 0x83, 0xA9, 0x9A};
+
+/* The AES algorithm encrypts and decrypts data in blocks of 128 bits. It can do this using 128-bit or 256-bit keys */
+static uint8_t gCryptoAesCbc128Key[APP_CRYPTO_AES_CBC_128_KEY_LENGTH_IN_BYTES]
+    __attribute__((aligned(APP_CRYPTO_AES_CBC_128_CATCHE_ALIGNMENT))) = {
+        0x93, 0x28, 0x67, 0x64, 0xA8, 0x51, 0x46, 0x73, 0x0E, 0x64, 0x18, 0x88, 0xDB, 0x34, 0xEB, 0x47};
+
+/* Encrypted buffer of gCryptoAesCbc128PlainText */
+static uint8_t gCryptoAesCbc128CipherText[APP_CRYPTO_AES_CBC_128_INOUT_LENGTH]
+    __attribute__((aligned(APP_CRYPTO_AES_CBC_128_CATCHE_ALIGNMENT))) = {
+        0x28, 0x33, 0xdc, 0xc7, 0x24, 0xdc, 0x6a, 0xff, 0x5a, 0x72, 0xe4, 0x3d, 0xdf, 0xb6, 0x63, 0x35};
+
+/* Initialization vector (IV) is an arbitrary number that can be used along with a secret key for data
+ * encryption/decryption. */
+static uint8_t gCryptoAesCbc128Iv[APP_CRYPTO_AES_CBC_128_IV_LENGTH_IN_BYTES]
+    __attribute__((aligned(APP_CRYPTO_AES_CBC_128_CATCHE_ALIGNMENT))) = {
+        0x19, 0x2D, 0x9B, 0x3A, 0xA1, 0x0B, 0xB2, 0xF7, 0x84, 0x6C, 0xCB, 0xA0, 0x08, 0x5C, 0x65, 0x7A};
+
+/* Public context crypto dthe, aes and sha accelerators base address */
+DTHE_Attrs gDTHE_Attrs[1] = {
+    {
+        /* crypto accelerator base address */
+        .caBaseAddr = CSL_DTHE_PUBLIC_U_BASE,
+        /* AES base address */
+        .aesBaseAddr = CSL_DTHE_PUBLIC_AES_U_BASE,
+        /* SHA base address */
+        .shaBaseAddr = CSL_DTHE_PUBLIC_SHA_U_BASE,
+        /* For checking dthe driver open or close */
+        .isOpen = FALSE,
+    },
+};
+
+DTHE_Config gDtheConfig[1] = {
+    {
+        &gDTHE_Attrs[0],
+        0,
+    },
+};
+
+DMA_Config gDmaConfig[1] = {
+    {
+        NULL,
+        NULL,
+    },
+};
+uint32_t gDmaConfigNum = 1;
+
+uint32_t gDtheConfigNum = 1;
+
+void HsmClient_config(void)
+{
+    SIPC_Params sipcParams;
+
+    /* initialize parameters to default */
+    SIPC_Params_init(&sipcParams);
+
+    sipcParams.ipcQueue_eleSize_inBytes = SIPC_MSG_SIZE;
+    sipcParams.ipcQueue_length          = SIPC_QUEUE_LENGTH;
+    /* list the cores that will do SIPC communication with this core
+     * Make sure to NOT list 'self' core in the list below
+     */
+    sipcParams.numCores      = 1;
+    sipcParams.coreIdList[0] = CORE_INDEX_HSM;
+
+    /* specify the priority of SIPC Notify interrupt */
+    sipcParams.intrPriority = 7U;
+
+    /* This is HSM -> R5F queue */
+    sipcParams.tx_SipcQueues[CORE_INDEX_HSM]          = (uintptr_t)gQueue_SecureHostToHsm[0];
+    sipcParams.rx_SipcQueues[CORE_INDEX_HSM]          = (uintptr_t)gQueue_HsmToSecureHost[0];
+    sipcParams.secHostCoreId[CORE_INDEX_SEC_MASTER_0] = CORE_ID_R5FSS0_0;
+
+    /* initialize the HsmClient module */
+    HsmClient_init(&sipcParams);
+    HsmClient_SecureBootQueueInit(HSM_CLIENT_MSG_QUEUE_SIZE);
+
+    /* register a hsm client to detect bootnotify message and keyring import from HSM */
+    HsmClient_register(&gHSMClient, HSM_BOOT_NOTIFY_CLIENT_ID);
+}
+
+void HsmClient_unRegister(void)
+{
+    /* Unregister bootnotify client */
+    HsmClient_unregister(&gHSMClient, HSM_BOOT_NOTIFY_CLIENT_ID);
+}
+
+void crypto_aes_cbc_128_main(void)
+{
+    DTHE_AES_Return_t status;
+    DTHE_Handle       aesHandle;
+    DTHE_AES_Params   aesParams;
+    uint32_t          aesResult[APP_CRYPTO_AES_CBC_128_INOUT_LENGTH / 4U];
+
+    /* opens DTHe driver */
+    aesHandle = DTHE_open(0);
+
+    AppUtils_printf("[CRYPTO] DTHE AES CBC-128 example started ...\r\n");
+
+    /* Initialize the AES Parameters */
+    (void)memset((void *)&aesParams, 0, sizeof(DTHE_AES_Params));
+
+    /* Initialize the results: We set the result to a non-zero value. */
+    (void)memset((void *)&aesResult[0], 0xFF, sizeof(aesResult));
+
+    /* Initialize the decryption parameters */
+    aesParams.algoType         = DTHE_AES_CBC_MODE;
+    aesParams.opType           = DTHE_AES_DECRYPT;
+    aesParams.useKEKMode       = FALSE;
+    aesParams.ptrKey           = (uint32_t *)&gCryptoAesCbc128Key[0];
+    aesParams.keyLen           = DTHE_AES_KEY_128_SIZE;
+    aesParams.ptrIV            = (uint32_t *)&gCryptoAesCbc128Iv[0];
+    aesParams.ptrEncryptedData = (uint32_t *)&gCryptoAesCbc128CipherText[0];
+    aesParams.dataLenBytes     = APP_CRYPTO_AES_CBC_128_INOUT_LENGTH;
+    aesParams.ptrPlainTextData = (uint32_t *)&aesResult[0];
+
+    /* opens aes driver */
+    status = DTHE_AES_open(aesHandle);
+
+    /* Decryption */
+    status = DTHE_AES_execute(aesHandle, &aesParams);
+
+    /* Comaring Aes operation result with expected result */
+    if (memcmp((void *)&gCryptoAesCbc128PlainText[0], (void *)&aesResult[0], APP_CRYPTO_AES_CBC_128_INOUT_LENGTH) == 0)
+    {
+        status = DTHE_AES_RETURN_SUCCESS;
+    }
+    else
+    {
+        status = DTHE_AES_RETURN_FAILURE;
+    }
+
+    if (status == DTHE_AES_RETURN_SUCCESS)
+    {
+        /* Initialize the AES Parameters */
+        (void)memset((void *)&aesParams, 0, sizeof(DTHE_AES_Params));
+
+        /* Initialize the results: We set the result to a non-zero value. */
+        (void)memset((void *)&aesResult[0], 0xFF, sizeof(aesResult));
+
+        /* Initialize the encryption parameters */
+        aesParams.algoType         = DTHE_AES_CBC_MODE;
+        aesParams.opType           = DTHE_AES_ENCRYPT;
+        aesParams.useKEKMode       = FALSE;
+        aesParams.ptrKey           = (uint32_t *)&gCryptoAesCbc128Key[0];
+        aesParams.keyLen           = DTHE_AES_KEY_128_SIZE;
+        aesParams.ptrIV            = (uint32_t *)&gCryptoAesCbc128Iv[0];
+        aesParams.ptrPlainTextData = (uint32_t *)&gCryptoAesCbc128PlainText[0];
+        aesParams.dataLenBytes     = APP_CRYPTO_AES_CBC_128_INOUT_LENGTH;
+        aesParams.ptrEncryptedData = (uint32_t *)&aesResult[0];
+
+        /* Encryption */
+        status = DTHE_AES_execute(aesHandle, &aesParams);
+    }
+
+    /* Closing aes driver */
+    status = DTHE_AES_close(aesHandle);
+
+    /* Closing DTHE driver */
+    if (DTHE_RETURN_SUCCESS == DTHE_close(aesHandle))
+    {
+        status = DTHE_AES_RETURN_SUCCESS;
+    }
+    else
+    {
+        status = DTHE_AES_RETURN_FAILURE;
+    }
+
+    /* Comaring Aes operation result with expected result */
+    if (memcmp((void *)&gCryptoAesCbc128CipherText[0], (void *)&aesResult[0], APP_CRYPTO_AES_CBC_128_INOUT_LENGTH) == 0)
+    {
+        AppUtils_printf("[CRYPTO] DTHE AES CBC-128 example completed!!\r\n");
+        AppUtils_printf("All tests have passed!!\r\n");
+    }
+    else
+    {
+        AppUtils_printf("[CRYPTO] DTHE AES CBC-128 example failed!!\r\n");
+    }
+}
+
+void crypto_hmac_sha512_main(void)
+{
+    DTHE_SHA_Return_t status;
+    DTHE_Handle       shaHandle;
+    DTHE_SHA_Params   shaParams;
+
+    AppUtils_printf("[CRYPTO] DTHE HMAC SHA-512 example started ...\r\n");
+
+    /* opens DTHe driver */
+    shaHandle = DTHE_open(0);
+
+    /* Opening sha driver */
+    status = DTHE_SHA_open(shaHandle);
+
+    /* Initialize the SHA Parameters */
+    shaParams.algoType      = DTHE_SHA_ALGO_SHA512;
+    shaParams.ptrDataBuffer = (uint32_t *)&gCryptoHmacSha512TestInputBuf[0];
+    shaParams.dataLenBytes  = APP_CRYPTO_HMAC_SHA512_INPUT_BUF_LENGTH;
+    shaParams.ptrKey        = (uint32_t *)&gCryptoHmacSha512Key[0];
+    shaParams.keySize       = APP_CRYPTO_HMAC_SHA512_INPUT_KEY_LENGTH;
+
+    /* Performing DTHE HMAC SHA operation */
+    status = DTHE_HMACSHA_compute(shaHandle, &shaParams);
+
+    /* Closing sha driver */
+    status = DTHE_SHA_close(shaHandle);
+
+    /* Closing DTHE driver */
+    if (DTHE_RETURN_SUCCESS == DTHE_close(shaHandle))
+    {
+        status = DTHE_SHA_RETURN_SUCCESS;
+    }
+    else
+    {
+        status = DTHE_SHA_RETURN_FAILURE;
+    }
+
+    if (status == DTHE_SHA_RETURN_SUCCESS)
+    {
+        /* Comparing final HMAC SHA-512 result with expected test results*/
+        if (memcmp(shaParams.digest, gCryptoHmacSha512ExpectedOutput, APP_CRYPTO_HMAC_SHA512_OUTPUT_LENGTH) != 0)
+        {
+            AppUtils_printf("[CRYPTO] DTHE HMAC SHA-512 example failed!!\r\n");
+        }
+        else
+        {
+            AppUtils_printf("[CRYPTO] DTHE HMAC SHA-512 example completed!!\r\n");
+            AppUtils_printf("All tests have passed!!\r\n");
+        }
+    }
+}
 
 int main(void)
 {
@@ -198,6 +519,40 @@ int main(void)
     Bootloader_BootImageInfo_init(&bootImageInfo);
 
     bootHandle = Bootloader_open(CONFIG_BOOTLOADER0, &bootParams);
+
+    {
+        HsmClient_config();
+        /* loop through and request random number from HSM */
+        /* also calculate the time spent doing the generation */
+        int32_t     ret;
+        uint32_t    length = 32;
+        uint32_t    val[length / 4];
+        HsmClient_t client;
+        RNGReq_t    getRNG;
+
+        uint32_t RngDrbgSeed[12] = {0x949db311, 0x1b53c4bf, 0x1d6cb9de, 0x75c85f23, 0xfe6bfe37, 0xae1c6462,
+                                    0x9e45f958, 0x62493581, 0x8b5df32b, 0x7bc94d49, 0xa8e69e31, 0x9237ca9f};
+        getRNG.DRBGMode          = 0x5A;
+        getRNG.seedSizeInDWords  = SEED_SIZE_IN_DWORDS;
+        getRNG.seedValue         = (uint32_t *)&RngDrbgSeed;
+        getRNG.resultLength      = length;
+        getRNG.resultPtr         = (uint8_t *)val;
+
+        ret = HsmClient_register(&client, APP_CLIENT_ID);
+
+        ret = HsmClient_getRandomNum(&client, &getRNG);
+
+        /* print the random numbers generated */
+        for (int i = 0; i < length / 4; i++)
+        {
+            AppUtils_printf("RNG output word -- 0x%X, %d\r\n", val[i], ret);
+        }
+    }
+
+    {
+        crypto_aes_cbc_128_main();
+        crypto_hmac_sha512_main();
+    }
 
     if (bootHandle != NULL)
     {

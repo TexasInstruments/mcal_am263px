@@ -8,33 +8,25 @@ Steps to build
 
   In case of windows machine edit below paths,
 
-  TOOLCHAIN_PATH_R5 := $(abspath ../../../..)/Compilers/ti-cgt-armllvm_4.0.1.LTS
-  mcal_PATH := $(abspath ..)/$(mcal_RELPATH)
-  mcal_demo_PATH := $(abspath ..)/$(mcal_demo_RELPATH)
-  UTILS_INSTALL_DIR := $(abspath ../../../..)/ccs2040/ccs/utils/cygwin
-  GMAKE_DIR := $(abspath ../../../..)/ccs2040/ccs/utils/cygwin
+  TOOLCHAIN_R5_VERSION=ti-cgt-armllvm_x.x.x.LTS
+  CCS_PATH := C:/ti/ccsxxxx/ccs
 
-  By default the above are for CLANG compiler, modify respective paths accordingly for using other compilers.
-
-  In case of linux machine edit the similar linux path
-
-  NOTE:
-  For AM263x, AM263Px and AM261 use ti-cgt-armllvm_4.0.1.LTS
+  In case of linux machine edit the similar linux paths and pass OS=linux while invoking any make command.
 
   IMPORTANT:
   Make sure the paths specified above DO NOT have any spaces in them.
 
 - Make sure "gmake" is in your system path.
-  Typically when XDC is installed "gmake" is installed along with it and
+  Typically when CCS is installed "gmake" is installed along with it and
   it becomes part of the system path by default.
 
-- Install dependecies required for MCELF image format
+- Install dependencies required for MCELF image format
   Install OpenSSL v3 from here: "https://slproweb.com/products/Win32OpenSSL.html"
   Install Python3
   Install Pip
   Make sure pyelftools and construct is installed from pip. This package is required for encrypting MCELF application images.
     pip install pyelftools construct
-  By default, MCELF generation is OFF. User can enable it with the macro MCELF_ENABLE=yes.
+  By default, MCELF generation is OFF. User can enable/disable it with the macro MCELF_ENABLE=yes/no.
   i.e.: gmake -s dio_app MCELF_ENABLE=yes
 
 ========================= How to Build =========================================

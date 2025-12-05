@@ -33,23 +33,25 @@
 #include <cslr.h>
 #include "soc.h"
 #include <mcal_hw_soc_defines.h>
+#include <hsmclient_utils/dpl/CpuIdP.h>
 
 #define EPWM_HALTEN_STEP (CSL_CONTROLSS_CTRL_EPWM1_HALTEN - CSL_CONTROLSS_CTRL_EPWM0_HALTEN)
 #define ECAP_HALTEN_STEP (CSL_CONTROLSS_CTRL_ECAP1_HALTEN - CSL_CONTROLSS_CTRL_ECAP0_HALTEN)
 
 #define EDMA_M4F_VIRT_TO_PHY_OFFSET (0x20020000U)
 
-// typedef struct
-// {
-//     uint32_t tcmaSize;
-//     uint32_t tcmbSize;
+typedef struct
+{
+    uint32_t tcmaSize;
+    uint32_t tcmbSize;
 
-//     CSL_ArmR5CPUInfo cpuInfo;
+    CSL_ArmR5CPUInfo cpuInfo;
 
-// }SOC_VirtToPhyMap;
+} SOC_VirtToPhyMap;
 
-// SOC_VirtToPhyMap virtToPhymap;
-// uint8_t isMapAvailable = 0u;
+SOC_VirtToPhyMap virtToPhymap;
+uint8_t          isMapAvailable = 0u;
+
 /**
  * \brief Return status when the API execution was successful
  */
@@ -1090,18 +1092,18 @@ uint64_t SOC_getSelfCpuClk(void)
 
 //     if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0)
 //     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0) /* R5SS0-0 */
+//         if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0) /* R5SS0-0 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5A0_SHIFT;
 
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)   /* R5SS0-1 */
+//         else if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)   /* R5SS0-1 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5B0_SHIFT;
 //     }
 //     else if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1)
 //     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0) /* R5SS1-0 */
+//         if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0) /* R5SS1-0 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5A1_SHIFT;
 
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)   /* R5SS1-1 */
+//         else if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)   /* R5SS1-1 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5B1_SHIFT;
 //     }
 
@@ -1126,18 +1128,18 @@ uint64_t SOC_getSelfCpuClk(void)
 
 //     if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0)
 //     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0) /* R5SS0-0 */
+//         if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0) /* R5SS0-0 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5A0_SHIFT;
 
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)   /* R5SS0-1 */
+//         else if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)   /* R5SS0-1 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5B0_SHIFT;
 //     }
 //     else if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1)
 //     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0) /* R5SS1-0 */
+//         if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0) /* R5SS1-0 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5A1_SHIFT;
 
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)   /* R5SS1-1 */
+//         else if(virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)   /* R5SS1-1 */
 //             shift = CSL_CONTROLSS_CTRL_EPWM0_HALTEN_CR5B1_SHIFT;
 //     }
 
@@ -1163,24 +1165,24 @@ uint64_t SOC_getSelfCpuClk(void)
 
 //     if (cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0)
 //     {
-//         if(cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0) /* R5SS0-0 */
+//         if(cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0) /* R5SS0-0 */
 //         {
 //             shift = CSL_CONTROLSS_CTRL_ECAP0_HALTEN_CR5A0_SHIFT;
 //         }else                                   /* R5SS0-1 */
 //         {
-//             /* cpuInfo.cpuID is CSL_ARM_R5_CPU_ID_1 */
+//             /* cpuInfo.cpuID is MCAL_CSL_ARM_R5_CPU_ID_1 */
 //             shift = CSL_CONTROLSS_CTRL_ECAP0_HALTEN_CR5B0_SHIFT;
 //         }
 
 //     }
 //     else /* cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1 */
 //     {
-//         if(cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0) /* R5SS1-0 */
+//         if(cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0) /* R5SS1-0 */
 //         {
 //             shift = CSL_CONTROLSS_CTRL_ECAP0_HALTEN_CR5A1_SHIFT;
 //         }else                                    /* R5SS1-1 */
 //         {
-//             /* cpuInfo.cpuID = CSL_ARM_R5_CPU_ID_1 */
+//             /* cpuInfo.cpuID = MCAL_CSL_ARM_R5_CPU_ID_1 */
 //             shift = CSL_CONTROLSS_CTRL_ECAP0_HALTEN_CR5B1_SHIFT;
 //         }
 
@@ -1244,278 +1246,269 @@ uint64_t SOC_getSelfCpuClk(void)
 //     SOC_controlModuleLockMMR(SOC_DOMAIN_ID_MAIN, MSS_CTRL_PARTITION0);
 // }
 
-// uint64_t SOC_virtToPhy(void *virtAddr)
-// {
-//     uintptr_t   temp = (uintptr_t) virtAddr;
-//     uint64_t    phyAddr = (uint64_t) temp;                  /* Default case */
+uint64_t SOC_virtToPhy(void *virtAddr)
+{
+    uintptr_t temp    = (uintptr_t)virtAddr;
+    uint64_t  phyAddr = (uint64_t)temp; /* Default case */
 
-//     /* R5F overrides */
-// #if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'R')
-//     uint32_t    retVal;
+    /* R5F overrides */
+#if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'R')
+    uint32_t retVal;
 
-//     if (0u == isMapAvailable)
-//     {
-//         /* Get Core ID Info */
-//         CSL_armR5GetCpuID(&virtToPhymap.cpuInfo);
+    if (0u == isMapAvailable)
+    {
+        /* Get Core ID Info */
+        CSL_armR5GetCpuID(&virtToPhymap.cpuInfo);
 
-//         retVal = SOC_rcmIsR5FInLockStepMode(virtToPhymap.cpuInfo.grpId);
-//         /* LockStep Mode TCM Size is 64KB */
+        retVal = SOC_rcmIsR5FInLockStepMode(virtToPhymap.cpuInfo.grpId);
+        /* LockStep Mode TCM Size is 64KB */
 
-//         if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0)
-// 	    {
-//             if (retVal == TRUE)
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
-//             }
-//             else
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
-//             }
-//         }
-//         else if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
-//         {
-//             if (retVal == TRUE)
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
-//             }
-//             else
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
-//             }
-//         }
+        if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0)
+        {
+            if (retVal == TRUE)
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
+            }
+            else
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
+            }
+        }
+        else if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
+        {
+            if (retVal == TRUE)
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
+            }
+            else
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
+            }
+        }
 
-//         isMapAvailable = 1u;
-//     }
+        isMapAvailable = 1u;
+    }
 
-//     if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0) /* R5SS0-0 */
-//     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0)
-//         {
-//             /* TCMA R5FSS0-0 */
-//             if((temp >= CSL_MSS_TCMA_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMA_RAM_BASE + virtToPhymap.tcmaSize)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMA_RAM_BASE;
-//                 phyAddr += CSL_R5SS0_CORE0_TCMA_U_BASE;
-//             }
+    if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0) /* R5SS0-0 */
+    {
+        if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0)
+        {
+            /* TCMA R5FSS0-0 */
+            if ((temp >= CSL_MSS_TCMA_RAM_BASE) && (temp < (CSL_MSS_TCMA_RAM_BASE + virtToPhymap.tcmaSize)))
+            {
+                phyAddr -= CSL_MSS_TCMA_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE;
+            }
 
-//             /* TCMB R5FSS0-0 */
-//             else if((temp >= CSL_MSS_TCMB_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMB_RAM_BASE + virtToPhymap.tcmbSize)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
-//                 phyAddr += CSL_R5SS0_CORE0_TCMB_U_BASE;
-//             }
-//         }
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)
-//         {
-//             /* TCMA R5FSS0-1 */
-//             if((temp >= CSL_MSS_TCMA_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMA_RAM_BASE + CSL_MSS_TCMA_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMA_RAM_BASE;
-//                 phyAddr += CSL_R5SS0_CORE1_TCMA_U_BASE;
-//             }
+            /* TCMB R5FSS0-0 */
+            else if ((temp >= CSL_MSS_TCMB_RAM_BASE) && (temp < (CSL_MSS_TCMB_RAM_BASE + virtToPhymap.tcmbSize)))
+            {
+                phyAddr -= CSL_MSS_TCMB_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE;
+            }
+        }
+        else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
+        {
+            /* TCMA R5FSS0-1 */
+            if ((temp >= CSL_MSS_TCMA_RAM_BASE) && (temp < (CSL_MSS_TCMA_RAM_BASE + CSL_MSS_TCMA_RAM_SIZE)))
+            {
+                phyAddr -= CSL_MSS_TCMA_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE;
+            }
 
-//             /* TCMB R5FSS0-1 */
-//             else if((temp >= CSL_MSS_TCMB_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMB_RAM_BASE + CSL_MSS_TCMB_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
-//                 phyAddr += CSL_R5SS0_CORE1_TCMB_U_BASE;
-//             }
-//         }
-//     }
+            /* TCMB R5FSS0-1 */
+            else if ((temp >= CSL_MSS_TCMB_RAM_BASE) && (temp < (CSL_MSS_TCMB_RAM_BASE + CSL_MSS_TCMB_RAM_SIZE)))
+            {
+                phyAddr -= CSL_MSS_TCMB_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE;
+            }
+        }
+    }
 
-//     if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
-//     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0)
-//         {
-//             /* TCMA R5FSS1-0 */
-//             if((temp >= CSL_MSS_TCMA_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMA_RAM_BASE + virtToPhymap.tcmaSize)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMA_RAM_BASE;
-//                 phyAddr += CSL_R5SS1_CORE0_TCMA_U_BASE;
-//             }
+    if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
+    {
+        if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0)
+        {
+            /* TCMA R5FSS1-0 */
+            if ((temp >= CSL_MSS_TCMA_RAM_BASE) && (temp < (CSL_MSS_TCMA_RAM_BASE + virtToPhymap.tcmaSize)))
+            {
+                phyAddr -= CSL_MSS_TCMA_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE;
+            }
 
-//             /* TCMB R5FSS1-0 */
-//             else if((temp >= CSL_MSS_TCMB_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMB_RAM_BASE + virtToPhymap.tcmbSize)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
-//                 phyAddr += CSL_R5SS1_CORE0_TCMB_U_BASE;
-//             }
-//         }
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)
-//         {
-//             /* TCMA R5FSS1-1 */
-//             if((temp >= CSL_MSS_TCMA_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMA_RAM_BASE + CSL_MSS_TCMA_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMA_RAM_BASE;
-//                 phyAddr += CSL_R5SS1_CORE1_TCMA_U_BASE;
-//             }
+            /* TCMB R5FSS1-0 */
+            else if ((temp >= CSL_MSS_TCMB_RAM_BASE) && (temp < (CSL_MSS_TCMB_RAM_BASE + virtToPhymap.tcmbSize)))
+            {
+                phyAddr -= CSL_MSS_TCMB_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE;
+            }
+        }
+        else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
+        {
+            /* TCMA R5FSS1-1 */
+            if ((temp >= CSL_MSS_TCMA_RAM_BASE) && (temp < (CSL_MSS_TCMA_RAM_BASE + CSL_MSS_TCMA_RAM_SIZE)))
+            {
+                phyAddr -= CSL_MSS_TCMA_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE;
+            }
 
-//             /* TCMB R5FSS1-1 */
-//             else if((temp >= CSL_MSS_TCMB_RAM_BASE) &&
-//                (temp < (CSL_MSS_TCMB_RAM_BASE + CSL_MSS_TCMB_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
-//                 phyAddr += CSL_R5SS1_CORE1_TCMB_U_BASE;
-//             }
-//         }
-//     }
-// #endif
+            /* TCMB R5FSS1-1 */
+            else if ((temp >= CSL_MSS_TCMB_RAM_BASE) && (temp < (CSL_MSS_TCMB_RAM_BASE + CSL_MSS_TCMB_RAM_SIZE)))
+            {
+                phyAddr -= CSL_MSS_TCMB_RAM_BASE;
+                phyAddr += MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE;
+            }
+        }
+    }
+#endif
 
-// #if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'M')
-//     if ( temp >= (CSL_HSM_M4_RAM_BASE - CSL_HSM_M4_RAM_BASE) &&
-//         (temp < CSL_HSM_M4_RAM_SIZE))
-//     {
-//         phyAddr += EDMA_M4F_VIRT_TO_PHY_OFFSET;
-//     }
-// #endif
+#if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'M')
+    if (temp >= (CSL_HSM_M4_RAM_BASE - CSL_HSM_M4_RAM_BASE) && (temp < CSL_HSM_M4_RAM_SIZE))
+    {
+        phyAddr += EDMA_M4F_VIRT_TO_PHY_OFFSET;
+    }
+#endif
 
-//     return (phyAddr);
-// }
+    return (phyAddr);
+}
 
-// void *SOC_phyToVirt(uint64_t phyAddr)
-// {
-//     void       *virtAddr = (void *) ((uintptr_t) phyAddr);  /* Default case */
+void *SOC_phyToVirt(uint64_t phyAddr)
+{
+    void *virtAddr = (void *)((uintptr_t)phyAddr); /* Default case */
 
-//     /* R5F overrides */
-// #if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'R')
-//     uint32_t    retVal;
+    /* R5F overrides */
+#if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'R')
+    uint32_t retVal;
 
-//     if (0u == isMapAvailable)
-//     {
-//         /* Get Core ID Info */
-//         CSL_armR5GetCpuID(&virtToPhymap.cpuInfo);
+    if (0u == isMapAvailable)
+    {
+        /* Get Core ID Info */
+        CSL_armR5GetCpuID(&virtToPhymap.cpuInfo);
 
-//         retVal = SOC_rcmIsR5FInLockStepMode(virtToPhymap.cpuInfo.grpId);
-//         /* LockStep Mode TCM Size is 64KB */
+        retVal = SOC_rcmIsR5FInLockStepMode(virtToPhymap.cpuInfo.grpId);
+        /* LockStep Mode TCM Size is 64KB */
 
-//         if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0)
-// 	    {
-//             if (retVal == TRUE)
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
-//             }
-//             else
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
-//             }
-//         }
-//         else if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
-//         {
-//             if (retVal == TRUE)
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
-//             }
-//             else
-//             {
-//                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
-//                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
-//             }
-//         }
+        if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0)
+        {
+            if (retVal == TRUE)
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
+            }
+            else
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
+            }
+        }
+        else if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
+        {
+            if (retVal == TRUE)
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE * 2U);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE * 2U);
+            }
+            else
+            {
+                virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
+                virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
+            }
+        }
 
-//         isMapAvailable = 1u;
-//     }
+        isMapAvailable = 1u;
+    }
 
-//     if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0) /* R5SS0-0 */
-//     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0)
-//         {
-//             /* TCMA - R5FSS0-0 */
-//             if((phyAddr >= CSL_R5SS0_CORE0_TCMA_U_BASE) &&
-//                (phyAddr < (CSL_R5SS0_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
-//             {
-//                 phyAddr -= CSL_R5SS0_CORE0_TCMA_U_BASE;
-//                 phyAddr += CSL_MSS_TCMA_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//             /* TCMB - R5FSS0-0 */
-//             else if((phyAddr >= CSL_R5SS0_CORE0_TCMB_U_BASE) &&
-//                (phyAddr < (CSL_R5SS0_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
-//             {
-//                 phyAddr -= CSL_R5SS0_CORE0_TCMB_U_BASE;
-//                 phyAddr += CSL_MSS_TCMB_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//         }
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)
-//         {
-//             /* TCMA - R5FSS0-1 */
-//             if((phyAddr >= CSL_R5SS0_CORE1_TCMA_U_BASE) &&
-//                (phyAddr < (CSL_R5SS0_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_R5SS0_CORE1_TCMA_U_BASE;
-//                 phyAddr += CSL_MSS_TCMA_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//             /* TCMB - R5FSS0-1 */
-//             else if((phyAddr >= CSL_R5SS0_CORE1_TCMB_U_BASE) &&
-//                (phyAddr < (CSL_R5SS0_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_R5SS0_CORE1_TCMB_U_BASE;
-//                 phyAddr += CSL_MSS_TCMB_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//         }
-//     }
+    if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_0) /* R5SS0-0 */
+    {
+        if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0)
+        {
+            /* TCMA - R5FSS0-0 */
+            if ((phyAddr >= MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE) &&
+                (phyAddr < (MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE;
+                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+            /* TCMB - R5FSS0-0 */
+            else if ((phyAddr >= MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE) &&
+                     (phyAddr < (MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE;
+                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+        }
+        else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
+        {
+            /* TCMA - R5FSS0-1 */
+            if ((phyAddr >= MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE) &&
+                (phyAddr < (MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE;
+                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+            /* TCMB - R5FSS0-1 */
+            else if ((phyAddr >= MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE) &&
+                     (phyAddr < (MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE;
+                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+        }
+    }
 
-//     if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
-//     {
-//         if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_0)
-//         {
-//             /* TCMA - R5FSS1-0 */
-//             if((phyAddr >= CSL_R5SS1_CORE0_TCMA_U_BASE) &&
-//                (phyAddr < (CSL_R5SS1_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
-//             {
-//                 phyAddr -= CSL_R5SS1_CORE0_TCMA_U_BASE;
-//                 phyAddr += CSL_MSS_TCMA_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//             /* TCMB - R5FSS1-0 */
-//             else if((phyAddr >= CSL_R5SS1_CORE0_TCMB_U_BASE) &&
-//                (phyAddr < (CSL_R5SS1_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
-//             {
-//                 phyAddr -= CSL_R5SS1_CORE0_TCMB_U_BASE;
-//                 phyAddr += CSL_MSS_TCMB_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//         }
-//         else if(virtToPhymap.cpuInfo.cpuID == CSL_ARM_R5_CPU_ID_1)
-//         {
-//             /* TCMA - R5FSS1-1 */
-//             if((phyAddr >= CSL_R5SS1_CORE1_TCMA_U_BASE) &&
-//                (phyAddr < (CSL_R5SS1_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_R5SS1_CORE1_TCMA_U_BASE;
-//                 phyAddr += CSL_MSS_TCMA_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//             /* TCMB - R5FSS1-1 */
-//             else if((phyAddr >= CSL_R5SS1_CORE1_TCMB_U_BASE) &&
-//                (phyAddr < (CSL_R5SS1_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
-//             {
-//                 phyAddr -= CSL_R5SS1_CORE1_TCMB_U_BASE;
-//                 phyAddr += CSL_MSS_TCMB_RAM_BASE;
-//                 virtAddr = (void *) ((uintptr_t) phyAddr);
-//             }
-//         }
-//     }
-// #endif
+    if (virtToPhymap.cpuInfo.grpId == (uint32_t)MCAL_CSL_ARM_R5_CLUSTER_GROUP_ID_1) /* R5SS1-0 */
+    {
+        if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0)
+        {
+            /* TCMA - R5FSS1-0 */
+            if ((phyAddr >= MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE) &&
+                (phyAddr < (MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE;
+                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+            /* TCMB - R5FSS1-0 */
+            else if ((phyAddr >= MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE) &&
+                     (phyAddr < (MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE;
+                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+        }
+        else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
+        {
+            /* TCMA - R5FSS1-1 */
+            if ((phyAddr >= MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE) &&
+                (phyAddr < (MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE;
+                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+            /* TCMB - R5FSS1-1 */
+            else if ((phyAddr >= MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE) &&
+                     (phyAddr < (MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
+            {
+                phyAddr  -= MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE;
+                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr  = (void *)((uintptr_t)phyAddr);
+            }
+        }
+    }
+#endif
 
-//     return (virtAddr);
-// }
+    return (virtAddr);
+}
 
 uint32_t SOC_getFlashDataBaseAddr(void)
 {

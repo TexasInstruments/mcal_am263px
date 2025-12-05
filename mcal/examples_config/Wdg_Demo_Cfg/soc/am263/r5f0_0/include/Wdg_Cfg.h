@@ -65,7 +65,7 @@ extern "C" {
 /** \brief Wdg configuration Minor Version */
 #define WDG_CFG_MINOR_VERSION           (2U)
 /** \brief Wdg configuration Patch Version */
-#define WDG_CFG_PATCH_VERSION           (0U)
+#define WDG_CFG_PATCH_VERSION           (1U)
 /* @} */
 /**
 *  \name WDG Build Variant.

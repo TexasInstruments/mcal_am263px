@@ -53,11 +53,11 @@
 /*
  * Vendor specific version information is BCD coded
  */
-#if ((LIN_SW_MAJOR_VERSION != (10U)) || (LIN_SW_MINOR_VERSION != (2U)))
+#if ((LIN_SW_MAJOR_VERSION != (10U)) || (LIN_SW_MINOR_VERSION != (3U)))
 #error "Version numbers of Lin.c and Lin.h are inconsistent!"
 #endif
 
-#if ((LIN_CFG_MAJOR_VERSION != (10U)) || (LIN_CFG_MINOR_VERSION != (2U)))
+#if ((LIN_CFG_MAJOR_VERSION != (10U)) || (LIN_CFG_MINOR_VERSION != (3U)))
 #error "Version numbers of Lin.c and Lin_Cfg.h are inconsistent!"
 #endif
 
@@ -388,8 +388,7 @@ static FUNC(Std_ReturnType, LIN_CODE)
 FUNC(Std_ReturnType, LIN_CODE)
 Lin_GoToSleep(uint8 Channel)
 {
-    Std_ReturnType return_value       = E_NOT_OK;
-    uint32         lin_base_cntr_addr = Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr;
+    Std_ReturnType return_value = E_NOT_OK;
 
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
     if (LIN_INIT != Lin_Module_State)
@@ -403,6 +402,8 @@ Lin_GoToSleep(uint8 Channel)
     else
 #endif
     {
+        uint32 lin_base_cntr_addr = Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr;
+
         SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
 
         if (TRUE == Lin_Config_Ptr->linChannelCfg[Channel].linChannelWakeupSupport)

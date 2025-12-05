@@ -66,7 +66,7 @@ extern "C" {
 /** \brief Dio configuration Minor Version */
 #define DIO_CFG_MINOR_VERSION           (2U)
 /** \brief Dio configuration Patch Version */
-#define DIO_CFG_PATCH_VERSION           (0U)
+#define DIO_CFG_PATCH_VERSION           (1U)
 /* @} */
 
 

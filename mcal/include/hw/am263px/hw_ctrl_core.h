@@ -4348,7 +4348,7 @@ typedef struct
 #define QSPI_SPI_DATA_REG_3_RESETVAL                        (0x00000000U)
 
 #define INTR_STATUS_RAW_SET  								(0x20U)
-#define SYSCONFIG 											(0x10U)
+// #define SYSCONFIG 											(0x10U)
 #define SPI_DC_REG 											(0x44U)
 #define SPI_CLOCK_CNTRL_REG 								(0x40U)
 #define SPI_STATUS_REG										(0x4CU)

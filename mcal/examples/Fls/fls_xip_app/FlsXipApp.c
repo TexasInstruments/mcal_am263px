@@ -157,7 +157,6 @@ void ospi_flash_xip_crc_test(void)
     }
 
     AppUtils_printf("CRC Value: %d\r\n", crc16_ccitt(gAppCrcBuf, APP_BUF_SIZE));
-
 }
 
 int main(void)

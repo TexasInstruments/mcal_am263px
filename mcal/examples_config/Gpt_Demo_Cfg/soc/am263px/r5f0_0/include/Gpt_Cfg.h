@@ -22,7 +22,7 @@
  /*********************************************************************************************************************
     Project: Mcal_Demo_Cfg
 
-	10.2.0
+	10.2.1
 	4.6.0
 	AUTOSAR 4.3.1 0
 
@@ -67,7 +67,7 @@ extern "C" {
 /** \brief Gpt configuration Minor Version */
 #define GPT_CFG_MINOR_VERSION           (2U)
 /** \brief Gpt configuration Patch Version */
-#define GPT_CFG_PATCH_VERSION           (0U)
+#define GPT_CFG_PATCH_VERSION           (1U)
 /* @} */
 
 /** \brief GPT Config ID */

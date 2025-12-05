@@ -17,6 +17,8 @@ MEMORY
     CPPI_DESC               (RW)    : origin=0x70180000 length=0x00004000
     /* MSS mailbox memory is used as shared memory, we don't use bottom 32*12 bytes, since its used as SW queue by ipc_notify */
     RTOS_NORTOS_IPC_SHM_MEM (RW)    : origin=0x72000000 length=0x00003E80
+    MAILBOX_HSM   : ORIGIN = 0x44000000 , LENGTH = 0x3CE
+    MAILBOX_R5F   : ORIGIN = 0x44000400 , LENGTH = 0x3CE
 }
 
 /* Alias for MCAL library sections */
@@ -198,4 +200,10 @@ SECTIONS
         . += FILL_LENGTH;
         __linker_bss_end = .;
     }
+
+    .bss.sipc_hsm_queue_mem (NOLOAD) : {
+    } > MAILBOX_HSM
+
+    .bss.sipc_secure_host_queue_mem (NOLOAD) : {
+    } > MAILBOX_R5F
 }

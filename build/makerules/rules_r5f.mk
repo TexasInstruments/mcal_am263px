@@ -54,10 +54,11 @@ CFLAGS_INTERNAL += -mfloat-abi=hard -mfpu=vfpv3-d16
 CFLAGS_INTERNAL += -mthumb
 endif
 ifeq ($(TREAT_WARNINGS_AS_ERROR), false)
-CFLAGS_INTERNAL += -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function
+CFLAGS_INTERNAL += -Wall
 else
-CFLAGS_INTERNAL += -Werror -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function
+CFLAGS_INTERNAL += -Werror -Wall
 endif
+CFLAGS_INTERNAL += -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function
 LNKFLAGS_INTERNAL_COMMON = -Wl,--emit_warnings_as_errors
 
 ifeq ($(SOCFAMILY),$(filter $(SOCFAMILY), am263))
@@ -156,6 +157,11 @@ $(OBJ_PATHS_ASM): $(OBJDIR)/%.$(OBJEXT): %.asm
 	$(ECHO) \# Compiling $(PLATFORM):$(CORE):$(PROFILE_$(CORE)):$(APP_NAME)$(MODULE_NAME): $<
 	$(CC) $(ASMFLAGS1) -x ti-asm $< $(ASMFLAGS2) -o $(OBJDIR)/$*.$(OBJEXT)
 
+# Object file creation
+$(OBJ_PATHS_S): $(OBJDIR)/%.$(OBJEXT): %.S
+	$(ECHO) \# Compiling $(PLATFORM):$(CORE):$(PROFILE_$(CORE)):$(APP_NAME)$(MODULE_NAME): $<
+	$(CC) $(ASMFLAGS1) $< -o $(OBJDIR)/$*.$(OBJEXT)
+
 $(PACKAGE_PATHS): $(PACKAGEDIR)/%: %
 	$(ECHO) \# Copying $(PACKAGE_NAME)/$($(MODULE_NAME)_RELPATH)/$<
 	$(MKDIR) -p $(DEST_ROOT)/package/$(PACKAGE_SELECT)/$(PACKAGE_NAME)/$($(MODULE_NAME)_RELPATH)
@@ -165,9 +171,9 @@ $(PACKAGE_PATHS): $(PACKAGEDIR)/%: %
 ARFLAGS = rc
 
 # Archive/library file creation
-$(LIBDIR)/$(MODULE_NAME).$(LIBEXT) : $(OBJ_PATHS_ASM) $(OBJ_PATHS)
+$(LIBDIR)/$(MODULE_NAME).$(LIBEXT) : $(OBJ_PATHS_ASM) $(OBJ_PATHS_S) $(OBJ_PATHS)
 	$(ECHO) \# Archiving $(PLATFORM):$(CORE):$(PROFILE_$(CORE)):$(MODULE_NAME): to $@ ...
-	$(AR) $(ARFLAGS) $@ $(OBJ_PATHS_ASM) $(OBJ_PATHS)
+	$(AR) $(ARFLAGS) $@ $(OBJ_PATHS_ASM) $(OBJ_PATHS_S) $(OBJ_PATHS)
 	$(ECHO) \# Creating section dump file $(subst .aer5f,,$@)_sections.json ...
 	$(ECHO) \#
 	$(READELF) --sections --pretty-print --elf-output-style=JSON $@ > $(subst .aer5f,,$@)_sections.json
@@ -298,13 +304,14 @@ MULTI_CORE_IMAGE_PARAMS = \
 MULTI_CORE_IMAGE_PARAMS_XIP = \
 	$(BOOTIMAGE_RPRC_NAME_XIP)@$(BOOTIMAGE_CORE_ID_r5fss0-0)  \
 
-$(EXE_NAME) : $(OBJ_PATHS_ASM) $(OBJ_PATHS) $(LIB_PATHS) $(LNKCMD_FILE)
+$(EXE_NAME) : $(OBJ_PATHS_ASM) $(OBJ_PATHS_S) $(OBJ_PATHS) $(LIB_PATHS) $(LNKCMD_FILE)
 	$(ECHO) \# Linking into $(EXE_NAME)...
 	$(ECHO) \#
-	$(LNK) $(_LNKFLAGS) $(OBJ_PATHS_ASM) $(OBJ_PATHS) -Wl,--output_file=$@,--map_file=$@.map,$(LNKCMD_FILE) $(LNK_LIBS)
+	$(LNK) $(_LNKFLAGS) $(OBJ_PATHS_ASM) $(OBJ_PATHS_S) $(OBJ_PATHS) -Wl,--output_file=$@,--map_file=$@.map,$(LNKCMD_FILE) $(LNK_LIBS)
 	$(ECHO) \#
 	$(ECHO) \# $@ created.
 	$(ECHO) \#
+
 ifeq ($(MCELF_ENABLE),yes)
 	@echo  Starting MulticoreELF image generation: $(BOOTIMAGE_PATH)/$(BOOTIMAGE_NAME_MCELF) ...
 	$(PYTHON) $(MCELF_IMAGE_GEN) --core-img=$(BOOTIMAGE_CORE_ID_r5fss0-0):$(BOOTIMAGE_INPUT_NAME_MCELF) --output=$(BOOTIMAGE_NAME_MCELF) --merge-segments=$(MCELF_MERGE_SEGMENTS_FLAG) --tolerance-limit=$(MCELF_MERGE_SEGMENTS_TOLERANCE_LIMIT) --ignore-context=$(MCELF_IGNORE_CONTEXT_FLAG) --xip=$(MCELF_XIP_RANGE) --xlat=$(MCELF_ADDR_TRANSLATION_PATH) --max_segment_size=$(MCELF_MAX_SEGMENT_SIZE)

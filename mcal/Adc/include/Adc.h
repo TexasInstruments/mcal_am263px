@@ -122,7 +122,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define ADC_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
-#define ADC_SW_PATCH_VERSION (0U)
+#define ADC_SW_PATCH_VERSION (1U)
 /**   @} */
 
 /**

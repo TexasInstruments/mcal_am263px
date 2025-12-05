@@ -134,7 +134,7 @@ sint32 main(void)
     Uart_writeDone = 0U;
     strncpy(writeBuffer, "\r\nEcho has been completed.\r\n\r\nAll tests have passed!\r\n", CDD_UART_APP_BUFFERSIZE);
     count = strlen(writeBuffer);
-#if (STD_ON == CDD_UART_DMA_ENABLE)
+#if (STD_ON == CDD_UART_DMA_ENABLE) || (STD_ON == CDD_UART_WRITE_API)
     Mcal_CacheP_wb(writeBuffer, count, Mcal_CacheP_TYPE_ALL);
 #endif
 #if (STD_ON == CDD_UART_WRITE_API)

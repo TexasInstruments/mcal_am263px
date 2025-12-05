@@ -141,7 +141,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define ICU_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
-#define ICU_SW_PATCH_VERSION (0U)
+#define ICU_SW_PATCH_VERSION (1U)
 /**   @} */
 
 /**

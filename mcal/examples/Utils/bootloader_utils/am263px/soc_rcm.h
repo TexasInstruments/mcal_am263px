@@ -40,6 +40,7 @@
 #include <cslr_top_rcm.h>
 #include <cslr_mss_rcm.h>
 #include <hal_stdtypes.h>
+#include <hsmclient_utils/dpl/SystemP.h>
 #include <mcal_hw_soc_baseaddress.h>
 #include "app_utils.h"
 
@@ -60,18 +61,6 @@ extern "C" {
 #define SOC_RCM_FREQ_HZ2MHZ(x) ((x) / (1000 * 1000))
 
 #define APP_NAME "BOOT_APP"
-
-#define SystemP_SUCCESS ((int32_t)0)
-
-/**
- * \brief Return status when the API execution was not successful due to a failure
- */
-#define SystemP_FAILURE ((int32_t)-1)
-
-/**
- * \brief Return status when the API execution was not successful due to a time out
- */
-#define SystemP_TIMEOUT ((int32_t)-2)
 
 /**
  *  \anchor SOC_DomainId_t

@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 11.01.00.04 done on 03-Dec-2025.
+<p>This is the release notes for MCAL AM26xx 11.01.00.06 done on 05-Dec-2025.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.txt">license.txt</a> present in installation base path</p>
@@ -18,8 +18,8 @@ This document details about supported driver, installation, dependencies, build 
 <h2 id="dependencies">Dependencies</h2>
 <h3 id="toolsandcompilers">Tools and Compilers</h3>
 <ul>
-<li>Code Composer Studio: 20.3.0 or later</li>
-<li>TI ARM CLANG Compiler Version: 4.0.3</li>
+<li>Code Composer Studio: 20.4.0 or later</li>
+<li>TI ARM CLANG Compiler Version: 4.0.4</li>
 <li>Elektrobit Tresos Studio: 29.3 (EB_Tresos_ACG8.8.12_Installer.zip). Please use link to request access to EB Tresos Studio and License: <a href="https://www.ti.com/secureresources/PROCESSOR-SDK-MCAL-EB-TRESOS" title="EB Tresos Download">Click Here</a></li>
 </ul>
 <h1 id="whatsnew">What’s New</h1>
@@ -45,13 +45,28 @@ This document details about supported driver, installation, dependencies, build 
       <td>Please refer Fixed Defects section for more details.</td>
     </tr>
     <tr>
-      <td>Added utility and example to showcase multi-core boot from flash</td>
+      <td>Added utility and example to showcase multi-core boot from flash, usage of hsmclient service and usage of Crypto accelerators</td>
       <td>Bootloader</td>
+      <td>AM263Px</td>
+    </tr>
+    <tr>
+      <td>Added utility for hsmclient services and crypto drivers on R5 core</td>
+      <td>Hsmclient</td>
       <td>AM263Px</td>
     </tr>
     <tr>
       <td>Added FLS flash configuration via EB Tresos</td>
       <td>Fls</td>
+      <td>All</td>
+    </tr>
+    <tr>
+      <td>Added demo example to showcase FLS with XIP</td>
+      <td>FLS</td>
+      <td>AM263Px, AM261x</td>
+    </tr>
+    <tr>
+      <td>Upgraded CCS version to 20.4.0 and compiler version to TI ARM CLANG 4.0.4LTS</td>
+      <td>All</td>
       <td>All</td>
     </tr>
   </tbody>
@@ -111,11 +126,11 @@ This document details about supported driver, installation, dependencies, build 
 <pre><code class="{eval-rst} language-{eval-rst}">+------------+----------+
 | Module     | Version  |
 +------------+----------+
-| ADC        | 10.02.00 |
+| ADC        | 10.02.01 |
 | CAN        | 10.02.01 |
 | CDD_CMPSS  | 01.00.02 |
 | CDD_FLC    | 01.00.02 |
-| DIO        | 10.02.00 |
+| DIO        | 10.02.01 |
 | CDD_DMA    | 10.02.01 |
 | CDD_PWM    | 10.02.00 |
 | ETH        | 10.03.00 |
@@ -123,17 +138,17 @@ This document details about supported driver, installation, dependencies, build 
 | FLS        | 10.03.00 |
 | CDD_FSIRX  | 10.02.01 |
 | CDD_FSITX  | 10.02.01 |
-| GPT        | 10.02.00 |
+| GPT        | 10.02.01 |
 | CDD_I2C    | 11.00.01 |
-| ICU        | 10.02.00 |
+| ICU        | 10.02.01 |
 | CDD_IPC    | 10.02.01 |
-| LIN        | 10.02.01 |
+| LIN        | 10.03.00 |
 | MCU        | 10.02.01 |
 | PORT       | 10.02.02 |
 | PWM        | 10.02.00 |
-| SPI        | 10.02.00 |
-| CDD_UART   | 10.02.00 |
-| WDG        | 10.02.00 |
+| SPI        | 10.02.01 |
+| CDD_UART   | 10.02.01 |
+| WDG        | 10.02.01 |
 +------------+----------+
 </code></pre>
 <h2 id="driverssupported">Drivers Supported</h2>
@@ -351,6 +366,48 @@ This document details about supported driver, installation, dependencies, build 
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td></td>
+    </tr>
+    <tr>
+      <td>MCAL-32662</td>
+      <td>ETH Traffic Shapper is not implemented Correctly</td>
+      <td>ETH</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Eth Traffic Shapper should happen for MAC PORT EGRESS (towards wire), however currently shapper is implemented on the host port.</td>
+    </tr>
+    <tr>
+      <td>MCAL-32438</td>
+      <td>Eth: TPS_ECUC_08011: Defining symbols used by EcuM/BswM to initialize BSW modules</td>
+      <td>ETH</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>AUTOSAR specifies a pattern for the C symbol used in BswM and EcuM for initialization.<br>
+          The MCAL does not follow this pattern (e.g. EthConfigSet instead of Eth_Config).<br></td>
+    </tr>
+    <tr>
+      <td>MCAL-32067</td>
+      <td>RMII not working in MCAL AM263X</td>
+      <td>ETH</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>RMII is not working when external clock configuration is done.<br>
+          It is not possible to configure clock as external clock in the software because of MMR regs being locked in system Init.<br></td>
+    </tr>
+    <tr>
+      <td>MCAL-32739</td>
+      <td>MCAL examples not generating MCELF binary when imported CCS</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>MCAL demo example projects makefile is now updated to generate mcelf binaries.</td>
+    </tr>
+    <tr>
+      <td>MCAL-33804</td>
+      <td>HHV mask is required before setting ADC reference buffers</td>
+      <td>All</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>HHV bit masked before enabling ADC reference buffers.</td>
     </tr>
   </tbody>
 </table>
