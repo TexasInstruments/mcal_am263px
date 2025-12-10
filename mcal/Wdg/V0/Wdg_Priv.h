@@ -109,6 +109,26 @@ Wdg_HWRegisterReadback(P2VAR(Wdg_RegisterReadbackType, AUTOMATIC, WDG_APPL_DATA)
  *
  *********************************************************************************************************************/
 FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) Mode);
+
+/** @fn FUNC(void, WDG_CODE) Wdg_ProcessTimeout(VAR(uint16, AUTOMATIC) wdgtimeoutMsec)
+ * @brief Set the DWDPRLD register for new timeout value
+ * \param[in]  uint32               wdgtimeoutMsec
+ * This function can be called to set timeout value DWDPRLD register
+ * \return void
+ *
+ */
+FUNC(void, WDG_CODE) Wdg_ProcessTimeout(VAR(uint16, AUTOMATIC) wdgTimeoutMsec);
+
+/** @fn FUNC(uint32, WDG_CODE) Wdg_getPrldValfromTimeout(VAR(uint16, AUTOMATIC) wdgtimeoutMsec)
+ * @brief Set the DWDPRLD register for new timeout value
+ * \param[in]  uint32               wdgtimeoutMsec
+ * This function can be called to set timeout value DWDPRLD register
+ * \return uint32
+ * \retval Preload Counter value to be set for DWDPRLD register
+ *
+ */
+FUNC(uint32, WDG_CODE)
+Wdg_getPrldValfromTimeout(VAR(uint16, AUTOMATIC) wdgTimeoutMsec);
 #ifdef __cplusplus
 }
 #endif

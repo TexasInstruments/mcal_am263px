@@ -91,10 +91,10 @@ static Wdg_App_TestParams Wdg_AppTestPrms[] = {
             .testId              = 0U,
             .loopCount           = WDG_APP_LOOP_COUNT,
             .testDescStr         = "AM261x WDG Example",
-            .numServiceCount     = 100,
-            .serviceInterval     = 25, /* In millisecond */
+            .numServiceCount     = 25,
+            .serviceInterval     = 6, /* In millisecond */
             .wdgConfig           = &Wdg_Config,
-            .serviceIntervalMode = 100, /* In millisecond */
+            .serviceIntervalMode = 6, /* In millisecond */
             .setMode             = WDGIF_SLOW_MODE,
         },
 };

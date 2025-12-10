@@ -11,6 +11,11 @@ include $(mcal_PATH)/examples/Utils/srcs.mk
 include $(mcal_PATH)/examples/Utils/srcs_autosar_stub.mk
 include $(mcal_PATH)/examples/Utils/srcs_startup.mk
 include $(mcal_PATH)/examples_config/Gpt_Demo_Cfg/srcs.mk
+ifeq ($(PLATFORM), $(filter $(PLATFORM), am263px am261))
+   include $(mcal_PATH)/Fls/srcs.mk
+   include $(mcal_PATH)/examples_config/Fls_OSPI_SBL_Support_Cfg/srcs.mk
+   include $(mcal_PATH)/Dma/srcs.mk
+endif
 include $(mcal_PATH)/examples_config/Mcu_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Wdg_Demo_Cfg/srcs.mk

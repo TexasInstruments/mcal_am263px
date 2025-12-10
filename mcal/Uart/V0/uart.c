@@ -117,6 +117,7 @@ static void          UART_readDataPolling(CddUart_Handle handle);
 static sint32        UART_readPolling(CddUart_Handle handle, CddUart_Transaction *trans);
 static uint32        Cdd_Uart_getRxFifoTrigBitVal(uint32 rxTrig);
 static uint32        Cdd_Uart_getTxFifoTrigBitVal(uint32 txTrig);
+static uint32        UART_checkCharsAvailInRXFifo(uint32_t baseAddr);
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -428,7 +429,29 @@ static inline uint32 UART_getIntrIdentityStatus(uint32 baseAddr)
 
     return retVal;
 }
+/* Work around for errata i2310
+ *
+ * Fixes Erroneous clear/trigger of timeout interrupt
+ *  - If timeout interrupt is erroneously set, and the FIFO is empty
+ *      - Set a high value of timeout counter in TIMEOUTH and TIMEOUTL registers
+ *      - Set EFR2 bit 6 to 1 to change timeout mode to periodic
+ *      - Read the IIR register to clear the interrupt
+ *      - Set EFR2 bit 6 back to 0 to change timeout mode back to the original mode
+ *
+ * Errata document : https://www.ti.com/lit/pdf/sprz457
+ */
+static void UART_i2310WA(uint32_t baseAddr)
+{
+    HW_WR_REG32(baseAddr + UART_TIMEOUTL, 0xFF);
 
+    HW_WR_REG32(baseAddr + UART_TIMEOUTH, 0xFF);
+
+    HW_WR_FIELD32(baseAddr + UART_EFR2, UART_EFR2_TIMEOUT_BEHAVE, 1);
+
+    HW_RD_REG32(baseAddr + UART_IIR);
+
+    HW_WR_FIELD32(baseAddr + UART_EFR2, UART_EFR2_TIMEOUT_BEHAVE, 0);
+}
 uint32 UART_checkCharsAvailInFifo(uint32 baseAddr)
 {
     uint32 lcrRegValue = 0;
@@ -451,6 +474,29 @@ uint32 UART_checkCharsAvailInFifo(uint32 baseAddr)
     if (maskVal == TRUE)
     {
         retVal = (uint32)TRUE;
+    }
+
+    /* Restoring the value of LCR. */
+    HW_WR_REG32(baseAddr + UART_LCR, lcrRegValue);
+
+    return retVal;
+}
+
+static uint32_t UART_checkCharsAvailInRXFifo(uint32_t baseAddr)
+{
+    uint32_t lcrRegValue = 0;
+    uint32_t retVal      = FALSE;
+
+    /* Preserving the current value of LCR. */
+    lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
+
+    /* Switching to Register Operational Mode of operation. */
+    HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+
+    /* Checking if the RHR(or RX FIFO) has atleast one byte to be read. */
+    if ((uint32_t)UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_0 != (HW_RD_REG32(baseAddr + UART_LSR) & UART_LSR_RX_FIFO_E_MASK))
+    {
+        retVal = (uint32_t)TRUE;
     }
 
     /* Restoring the value of LCR. */
@@ -2350,8 +2396,8 @@ static void Uart_Cdd_RxHandler(CddUart_Handle hUart)
                 hUart->readTrans->count  = hUart->readCount;
                 hUart->readTrans->status = UART_TRANSFER_STATUS_SUCCESS;
             }
-            hUart->readTrans = (CddUart_Transaction *)NULL_PTR;
             Uart_Cdd_readCompleteCallback(hUart);
+            hUart->readTrans = (CddUart_Transaction *)NULL_PTR;
         }
         else
         {
@@ -2369,21 +2415,13 @@ static void Uart_Cdd_RxHandler(CddUart_Handle hUart)
 
 static void Uart_Cdd_TxHandler(CddUart_Handle hUart)
 {
-    uint32 lineStatus;
     /* TX FIFO threshold reached */
     if (hUart->writeSizeRemaining > (uint32)0U)
     {
         hUart->writeSizeRemaining = UART_writeData(hUart, (hUart->writeSizeRemaining));
         if ((hUart->writeSizeRemaining) == (uint32)0U)
         {
-            do
-            {
-                lineStatus = UART_readLineStatus(hUart->baseAddr);
-            } while ((uint32)(UART_LSR_TX_FIFO_E_MASK | UART_LSR_TX_SR_E_MASK) !=
-                     (lineStatus & (uint32)(UART_LSR_TX_FIFO_E_MASK | UART_LSR_TX_SR_E_MASK)));
-
             UART_intrDisable(hUart->baseAddr, UART_INTR_THR);
-
             /* Reset the write buffer so we can pass it back */
             hUart->writeBuf = (const uint8 *)hUart->writeBuf - hUart->writeCount;
             if (hUart->writeTrans != NULL_PTR)
@@ -2391,8 +2429,8 @@ static void Uart_Cdd_TxHandler(CddUart_Handle hUart)
                 hUart->writeTrans->count  = hUart->writeCount;
                 hUart->writeTrans->status = UART_TRANSFER_STATUS_SUCCESS;
             }
-            hUart->writeTrans = (CddUart_Transaction *)NULL_PTR;
             Uart_Cdd_writeCompleteCallback(hUart);
+            hUart->writeTrans = (CddUart_Transaction *)NULL_PTR;
         }
     }
     else
@@ -2417,6 +2455,12 @@ static boolean Uart_Cdd_masterIsr_processInterrupt(CddUart_Handle hUart, uint32 
             {
                 /* Disable Interrupt first, to avoid further RX timeout */
                 UART_intrDisable(hUart->baseAddr, UART_INTR_RHR_CTI | UART_INTR_LINE_STAT);
+                /* Work around for errata i2310 */
+                if (FALSE == UART_checkCharsAvailInRXFifo(hUart->baseAddr))
+                {
+                    UART_i2310WA(hUart->baseAddr);
+                }
+
                 /* RX timeout, log the RX timeout errors */
                 hUart->rxTimeoutCnt++;
             }

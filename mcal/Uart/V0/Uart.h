@@ -114,10 +114,16 @@ extern "C" {
 #define UART_XOFF2            ((uint32)0x1cU)
 #define UART_TLR              ((uint32)0x1cU)
 #define UART_UASR             ((uint32)0x38U)
+#define UART_TIMEOUTL         ((uint32)0x98U)
+#define UART_TIMEOUTH         ((uint32)0x9CU)
 
+#define UART_EFR2 ((uint32)0x8CU)
 /* ========================================================================== */
 /*                             Field Definition Macros                        */
 /* ========================================================================== */
+
+#define UART_EFR2_TIMEOUT_BEHAVE_SHIFT ((uint32)0x6U)
+#define UART_EFR2_TIMEOUT_BEHAVE_MASK  ((uint32)0x6U)
 
 #define UART_RHR_RHR_SHIFT ((uint32)0U)
 #define UART_RHR_RHR_MASK  ((uint32)0x000000ffU)

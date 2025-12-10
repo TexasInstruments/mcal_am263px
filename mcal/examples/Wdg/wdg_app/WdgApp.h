@@ -58,6 +58,11 @@ extern "C" {
 #include "Gpt.h"
 #include "Gpt_Irq.h"
 #include "SchM_Gpt.h"
+#if defined AM263PX_PLATFORM || defined AM261X_PLATFORM
+#include "Fls_Ospi.h"
+#include "Fls_Brd_Nor.h"
+#include "Fls.h"
+#endif
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */

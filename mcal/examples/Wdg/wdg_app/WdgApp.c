@@ -21,9 +21,12 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 
+#include "Wdg_Priv.h"
 #include "WdgApp.h"
 #include "WdgApp_Startup.h"
 #include "WdgIf_Types.h"
+#include "sys_pmu.h"
+#include "app_utils.h"
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -54,6 +57,7 @@ Mcu_ResetType GetResetReason();
 void          SOC_controlModuleUnlockMMR(uint32 domainId, uint32 partition);
 void          SOC_controlModuleLockMMR(uint32 domainId, uint32 partition);
 void          Gpt_Channel_Notify5(void);
+void          Wdg_App_configFlsForReset(void);
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -61,12 +65,17 @@ void          Gpt_Channel_Notify5(void);
 uint32              triggerValue;
 uint32              triggerValueMode;
 uint32              gTestPassed;
-uint32              count        = 0;
-bool                WDT_Reset    = false;
-volatile uint32     gptcount     = 0;
-volatile uint32     gptcountMode = 0;
-bool                Timer_Done   = false;
-Wdg_App_TestParams *testPrms     = NULL_PTR;
+uint32              count                 = 0;
+bool                WDT_Reset             = false;
+volatile uint32     gptcount              = 0;
+volatile uint32     gptcountMode          = 0;
+bool                Timer_Done            = false;
+Wdg_App_TestParams *testPrms              = NULL_PTR;
+uint32              timer_start           = 0;
+uint32              timer_end             = 0;
+uint32              timer_cycles          = 0;
+uint32              restartCount          = 0;
+uint32              WdgApp_WdgBaseAddress = 0U;
 
 #if (STD_OFF == MCU_NO_PLL)
 extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config;
@@ -100,7 +109,7 @@ void Check_McuReset()
     Wdg_App_TestParams *testPrms;
     Mcu_ResetType       mcu_reset_reason = MCU_RESET_UNDEFINED;
     mcu_reset_reason                     = GetResetReason();
-    AppUtils_delay(4U);
+
     AppUtils_printf("Reset Reason %d \n\r", mcu_reset_reason);
     if (mcu_reset_reason != WDGAPP_MCU_WARM_RESET)
     {
@@ -108,8 +117,23 @@ void Check_McuReset()
         /* Application has not executed */
         *(uint32 *)WDGAPP_RAM_SECTION = 0x00000000;
         AppUtils_printf(APP_NAME ": Sample Application - STARTS !!!\r\n");
-        testPrms = &Wdg_AppTestPrms[0];
+        testPrms              = &Wdg_AppTestPrms[0];
+        WdgApp_WdgBaseAddress = Wdg_getWdgBaseAddr(testPrms->wdgConfig->instanceId);
         WDTApp_interruptConfig();
+#if defined AM263PX_PLATFORM || defined AM261X_PLATFORM
+        /*
+         *   IS25LX256 Flash chipset uses OSPI mode of communication.
+         *   The IS25LX256 Flash chipset expects
+         *   1. AM261/ AM263P microcontroller unit to be in sync with 1S-1S-8S mode for
+         *      supporting the microcontroller WARM_RESET.
+         *   2. The Addressing mode be set to 3 bytes.
+         *
+         *   If the sync is not achieved them microcontroller shall not perform software_reset /
+         *   or other modes of WARM_RESET
+         *
+         */
+        Wdg_App_configFlsForReset();
+#endif
         Wdg_App_wdgTest(testPrms);
     }
     else
@@ -165,7 +189,7 @@ void Wdg_App_wdgTest(const Wdg_App_TestParams *testPrms)
     triggerValue = ((testPrms->numServiceCount) * (testPrms->serviceInterval));
     AppUtils_printf("Trigger Value = %d milliseconds\r\n", triggerValue);
     triggerValueMode = ((testPrms->numServiceCount) * (testPrms->serviceIntervalMode));
-
+    AppUtils_printf("Trigger Value Mode = %d milliseconds\r\n", triggerValueMode);
     /* check if the service interval is valid or not */
 
     if (testPrms->wdgConfig->defaultMode == WDGIF_FAST_MODE)
@@ -256,16 +280,19 @@ void Wdg_App_wdgTest(const Wdg_App_TestParams *testPrms)
             break;
     }
     AppUtils_printf("Initializing channels\n\r");
-    RTI_Clock     = Gpt_Config.ChannelConfig_pt[0].GptChannelClksrcRef;
-    preload       = Gpt_Config.ChannelConfig_pt[0].GptChannelTickFrequency;
-    Gpt_Count     = (RTI_Clock * 1000 * testPrms->serviceInterval) / (preload + 1);
+    RTI_Clock = Gpt_Config.ChannelConfig_pt[0].GptChannelClksrcRef;
+    preload   = Gpt_Config.ChannelConfig_pt[0].GptChannelTickFrequency;
+    Gpt_Count = (RTI_Clock * 1000 * testPrms->serviceInterval) / (preload + 1);
+    AppUtils_printf("Gpt_Count %d  \n\r", Gpt_Count);
     Gpt_CountMode = (RTI_Clock * 1000 * testPrms->serviceIntervalMode) / (preload + 1);
+    AppUtils_printf("Gpt_CountMode %d  \n\r", Gpt_CountMode);
     Gpt_Init(&Gpt_Config);
 #if (STD_ON == GPT_ENABLE_DISABLE_NOTIFICATION_API)
     Gpt_EnableNotification(ChannelId);
     Gpt_EnableNotification(ChannelIdMode);
 #endif
-
+    AppUtils_printf("Default Preload Count %d and Downcounter Value %d \n\r", Wdg_getReloadValue(WdgApp_WdgBaseAddress),
+                    Wdg_getCurrentDownCounter(WdgApp_WdgBaseAddress));
 #if (STD_ON == WDG_VARIANT_PRE_COMPILE)
     AppUtils_printf("Precompile variant is being used .. \n\r");
     Wdg_Init((const Wdg_ConfigType *)NULL_PTR);
@@ -276,6 +303,8 @@ void Wdg_App_wdgTest(const Wdg_App_TestParams *testPrms)
     AppUtils_printf("Link-Time variant is being used .. \n\r");
     Wdg_Init(testPrms->wdgConfig);
 #endif
+    AppUtils_printf("WDG_INIT Preload Count %d and Downcounter Value %d \n\r",
+                    Wdg_getReloadValue(WdgApp_WdgBaseAddress), Wdg_getCurrentDownCounter(WdgApp_WdgBaseAddress));
 
     if (gTestPassed == E_NOT_OK)
     {
@@ -285,7 +314,12 @@ void Wdg_App_wdgTest(const Wdg_App_TestParams *testPrms)
     }
 
     Gpt_StartTimer(ChannelId, Gpt_Count + 100);
+    Mcal_pmuResetCounters();
+    timer_start = Mcal_CycleCounterP_getCount32();
     Wdg_SetTriggerCondition(triggerValue - maxServiceInterval);
+    AppUtils_printf("Trigger condition value is %d\n\r", (triggerValue - maxServiceInterval));
+    AppUtils_printf("Wdg_SetTriggerCondition_1 Preload Count %d and Downcounter Value %d \n\r",
+                    Wdg_getReloadValue(WdgApp_WdgBaseAddress), Wdg_getCurrentDownCounter(WdgApp_WdgBaseAddress));
     while (1)
     {
         if (gptcount >= SWITCH_DELAY)
@@ -296,23 +330,42 @@ void Wdg_App_wdgTest(const Wdg_App_TestParams *testPrms)
             Gpt_StopTimer(ChannelId);
             gptcount = 0;
             Wdg_SetMode(testPrms->setMode);
+            AppUtils_printf("Wdg_SetMode Preload Count %d and Downcounter Value %d \n\r",
+                            Wdg_getReloadValue(WdgApp_WdgBaseAddress),
+                            Wdg_getCurrentDownCounter(WdgApp_WdgBaseAddress));
+            timer_end    = Mcal_CycleCounterP_getCount32();
+            timer_cycles = timer_end - timer_start;
+            AppUtils_printf("Time elapsed %.6f seconds\r\n", timer_cycles / 400000000.0);
             AppUtils_printf("Wdg SetMode to  %x !! \n\r", testPrms->setMode);
             AppUtils_printf("Service Interval changed to %d milliseconds\r\n", testPrms->serviceIntervalMode);
             Gpt_StartTimer(ChannelIdMode, Gpt_CountMode + 100);
+            Mcal_pmuResetCounters();
+            timer_start = Mcal_CycleCounterP_getCount32();
             Wdg_SetTriggerCondition(triggerValueMode - maxServiceIntervalMode);
+            AppUtils_printf("trigger condition value is %d\n\r", (triggerValue - maxServiceInterval));
+            AppUtils_printf("Wdg_SetTriggerCondition2 Preload Count %d and Downcounter Value %d \n\r",
+                            Wdg_getReloadValue(WdgApp_WdgBaseAddress),
+                            Wdg_getCurrentDownCounter(WdgApp_WdgBaseAddress));
         }
         if (gptcountMode >= DELAY_COUNT)
         {
+            timer_end    = Mcal_CycleCounterP_getCount32();
+            timer_cycles = timer_end - timer_start;
+            AppUtils_printf("Time elapsed %.6f seconds\r\n", timer_cycles / 400000000.0);
             AppUtils_printf("Wdg SetMode Test Passed!! \n\r");
-#if (STD_ON == GPT_ENABLE_DISABLE_NOTIFICATION_API)
-            Gpt_DisableNotification(ChannelIdMode);
-#endif
+
             Gpt_StopTimer(ChannelIdMode);
+            /*Now start timer again, without Wdg_SetTriggerCondition, reset has to occur after 150ms*/
+            AppUtils_printf("Expecting WDG reset after around trigger value %d...\r\n", triggerValueMode);
+            restartCount = 1;
+            Gpt_StartTimer(ChannelIdMode, Gpt_CountMode + 100);
+            Mcal_pmuResetCounters();
+            timer_start  = Mcal_CycleCounterP_getCount32();
             gptcountMode = 0;
-/* Deinit current configuration */
-#if (STD_ON == GPT_DEINIT_API)
-            Gpt_DeInit();
-#endif
+
+            AppUtils_printf("Gpt_DeInit begin Preload Count %d and Downcounter Value %d \n\r",
+                            Wdg_getReloadValue(WdgApp_WdgBaseAddress),
+                            Wdg_getCurrentDownCounter(WdgApp_WdgBaseAddress));
         }
     }
 }
@@ -409,17 +462,25 @@ void Gpt_Channel_Notify5(void)
     gptcount++;
 
     Wdg_SetTriggerCondition(triggerValue);
-
+    AppUtils_printf("%d WDG trigger set \n\r", gptcount);
     AppUtils_printf(".\r");
 }
 
 void Gpt_Channel_Notify6(void)
 {
-    gptcountMode++;
-
-    Wdg_SetTriggerCondition(triggerValueMode);
-
-    AppUtils_printf(".\r");
+    if (restartCount == 0)
+    {
+        gptcountMode++;
+        Wdg_SetTriggerCondition(triggerValueMode);
+        AppUtils_printf("%d  WDG trigger set \n\r", gptcountMode);
+        AppUtils_printf(".\r");
+    }
+    if (restartCount == 1)
+    {
+        timer_end    = Mcal_CycleCounterP_getCount32();
+        timer_cycles = timer_end - timer_start;
+        AppUtils_printf("WDG time elapsed %.6f milliseconds\r\n", timer_cycles / 400000.0);
+    }
 }
 
 void Gpt_Channel_Notify7(void)
@@ -500,3 +561,42 @@ void Gpt_Channel_Notify31(void)
 void Gpt_Channel_Notify32(void)
 {
 }
+void Fee_JobEndNotification(void)
+{
+}
+/* Dummy function to avoid comiplation error */
+void Fee_JobErrorNotification(void)
+{
+}
+#if defined AM263PX_PLATFORM || defined AM261X_PLATFORM
+void        Wdg_App_configFlsForReset(void)
+{
+    Std_ReturnType status = E_OK;
+
+    AppUtils_delay(4U);
+#if (STD_ON == FLS_PRE_COMPILE_VARIANT)
+    Fls_Init((const Fls_ConfigType *)NULL_PTR);
+#else
+    Fls_Init(&Fls_Config);
+#endif
+
+#if (STD_ON == FLS_GET_STATUS_API)
+    MemIf_StatusType memstatus;
+    memstatus = Fls_GetStatus();
+    if (memstatus != MEMIF_IDLE)
+    {
+        AppUtils_printf(APP_NAME ": FLS driver is not IDLE!!\n\r");
+    }
+#endif
+    status = Fls_Set3ByteAddressMode();
+
+    if (status == E_OK)
+    {
+        AppUtils_printf(" FLS OSPI Address Byte Mode set to 3bytes \n\r");
+    }
+    else
+    {
+        AppUtils_printf(" FLS initialization Failed \n\r");
+    }
+}
+#endif

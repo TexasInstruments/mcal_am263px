@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 11.01.00.07 done on 05-Dec-2025.
+<p>This is the release notes for MCAL AM26xx 11.01.00.08 done on 11-Dec-2025.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.txt">license.txt</a> present in installation base path</p>
@@ -197,6 +197,128 @@ This document details about supported driver, installation, dependencies, build 
 | AM261x  | AM261x (am261x-som)               |                         |             |               |
 +---------+-----------------------------------+-------------------------+-------------+---------------+
 </code></pre>
+<h1 id="functionalsafetyartifacts">Functional Safety artifacts</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Sr. No.</th>
+      <th style="text-align: left;">Work Product</th>
+      <th style="text-align: left;">Availability</th>
+      <th style="text-align: left;">Where to find Artifacts</th>
+      <th style="text-align: left;">Current Quality Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>
+        Dynamic Analysis Report
+        <ol>
+          <li>MCDC</li>
+          <li>Branch</li>
+          <li>Region</li>
+          <li>Line</li>
+          <li>Function</li>
+        </ol>
+      </td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>
+        Static Analysis Report
+        <ol>
+          <li>Static</li>
+          <li>HIS</li>
+          <li>MISRA-C</li>
+        </ol>
+      </td>
+      <td>Yes</td>
+      <td>Installer:"\mcal_docs\csp\*platform*\</td>
+      <td>All Mandatory & Critical warnings and errors are resolved. Required and Advisory warnings will be fixed in future releases.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Test Reports: Test Cases and Test Results</td>
+      <td>Yes</td>
+      <td>Installer:"\mcal_docs\csp\*platform*\</td>
+      <td>All test reports are present in installer.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>
+        Bi-directional Traceability Report
+        <ol>
+          <li>MRD→SPS</li>
+          <li>SPS→SW Arch →SW Design Doc→SW Units (Code)</li>
+          <li>MRD→SPS→Test Case</li>
+          <li>Test Case→Arch Test Case→Design</li>
+        </ol>
+      </td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Customer Docs: User Guide</td>
+      <td>Yes</td>
+      <td>Installer:"\mcal_docs\userguide\*platform*\</td>
+      <td>User Guide is present in installer as well as softwaredl</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>SW FMEA</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>Detailed Design Document</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>SW Manifest</td>
+      <td>Yes</td>
+      <td>Installer:"\mcal_manifest</td>
+      <td>SW manifest is present in installer</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Software Product Specification: List of functional, safety requirements for SW components</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Architecture Document</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>SW Safety Manual</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Safety Assessment</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+  </tbody>
+</table>
 <h1 id="fixeddefects">Fixed Defects</h1>
 <table>
   <thead>

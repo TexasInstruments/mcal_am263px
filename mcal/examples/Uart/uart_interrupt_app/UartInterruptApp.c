@@ -88,7 +88,7 @@ sint32 main(void)
     void *readBuffer = &CddUart_ReceiveBuffer[0];
 #endif
     /* Write completion message to the terminal */
-    strncpy(writeBuffer, "\rThis is Uart Echo Test in DMA Mode\r\n", CDD_UART_APP_BUFFERSIZE);
+    strncpy(writeBuffer, "\rThis is Uart Echo Test in interrupt Mode\r\n", CDD_UART_APP_BUFFERSIZE);
     uint32 count = strlen(writeBuffer);
     Mcal_CacheP_wb(writeBuffer, count, Mcal_CacheP_TYPE_ALL);
 #if (STD_ON == CDD_UART_WRITE_API)
@@ -132,7 +132,7 @@ sint32 main(void)
 
     /* Write completion message to the terminal */
     Uart_writeDone = 0U;
-    strncpy(writeBuffer, "\r\nEcho has been completed.\r\n\r\nAll tests have passed!\r\n", CDD_UART_APP_BUFFERSIZE);
+    strncpy(writeBuffer, "\r\nAll tests passed!\r\n", CDD_UART_APP_BUFFERSIZE);
     count = strlen(writeBuffer);
 #if (STD_ON == CDD_UART_DMA_ENABLE) || (STD_ON == CDD_UART_WRITE_API)
     Mcal_CacheP_wb(writeBuffer, count, Mcal_CacheP_TYPE_ALL);

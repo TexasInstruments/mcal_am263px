@@ -250,23 +250,23 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetMode(WdgIf_ModeType Mode)
 #endif
         {
             retVal = Wdg_SetModeConfig(Mode);
-        }
-        if (((Std_ReturnType)E_OK) != retVal)
-        {
+
+            if (((Std_ReturnType)E_OK) != retVal)
+            {
 #if (STD_ON == WDG_DEV_ERROR_DETECT)
-            (void)Wdg_reportDetError(WDG_API_SET_MODE, WDG_E_PARAM_MODE);
+                (void)Wdg_reportDetError(WDG_API_SET_MODE, WDG_E_PARAM_MODE);
 #endif
 
 #ifdef WDG_E_MODE_FAILED
-            /* Mode not supported */
-            (void)Dem_SetEventStatus(WDG_E_MODE_FAILED, DEM_EVENT_STATUS_FAILED);
+                /* Mode not supported */
+                (void)Dem_SetEventStatus(WDG_E_MODE_FAILED, DEM_EVENT_STATUS_FAILED);
 #endif
+            }
+            else
+            {
+                Wdg_DrvObj.previousMode = Mode;
+            }
         }
-        else
-        {
-            Wdg_DrvObj.previousMode = Mode;
-        }
-
 #if (STD_ON == WDG_DEV_ERROR_DETECT)
         /* Set driver status as idle */
         Wdg_DrvStatus = WDG_IDLE;
@@ -313,6 +313,7 @@ FUNC(void, WDG_CODE) Wdg_SetTriggerCondition(uint16 timeout)
             Wdg_DrvObj.timeOutCounter = timeout;
             /* Save current watchdog counter value */
             Wdg_DrvObj.counterRef = Wdg_getCurrentDownCounter(Wdg_DrvObj.baseAddr);
+            Wdg_ProcessTimeout(timeout);
             Wdg_Trigger();
         }
     }

@@ -68,6 +68,8 @@
         -I${MCAL_MCAL_Mcu}
         -I${MCAL_MCAL_Port}
         -I${MCAL_MCAL_Gpt}
+        -I${MCAL_MCAL_Fls}
+        -I${MCAL_MCAL_Dma}
 
         -I${MCAL_MCAL_Wdg_eg}
         -I${MCAL_MCAL_Utils_am263px}
@@ -76,11 +78,14 @@
         -I${MCAL_MCAL_Mcu_Cfg}
         -I${MCAL_MCAL_Port_Cfg}
         -I${MCAL_MCAL_Gpt_Cfg}
+        -I${MCAL_MCAL_Fls_Ospi_Sup_Cfg}
 
 
         -I${MCAL_MCAL_Gpt_V0}
         -I${MCAL_MCAL_Wdg_V0}
         -I${MCAL_MCAL_Mcu_V2}
+        -I${MCAL_MCAL_Fls_V2}
+        -I${MCAL_MCAL_Dma_V0}
         -I${MCAL_MCAL_Port_V0}
         "
         postBuildStep="$(MAKE) -C ${CCS_PROJECT_DIR} -f makefile_ccs_bootimage_gen OUTNAME=wdg_app PROFILE=${ConfigName} MCAL_SITARA_MCU_PATH=${MCAL_MCAL}/.. CG_TOOL_ROOT=${CG_TOOL_ROOT} CCS_INSTALL_DIR=${CCS_INSTALL_DIR} CCS_NODE=${CCS_INSTALL_DIR}/tools/node/node CYGWIN_PATH=${CCS_UTILS_DIR}/cygwin DEVICE=am263px"
@@ -109,14 +114,15 @@
             "
         ></configuration>
 
-        <pathVariable name="MCAL_MCAL" path="../../../../../../../../../mcal" scope="project"/>
+        <pathVariable name="MCAL_MCAL" path="../../../../../../../../" scope="project"/>
         <pathVariable name="MCAL_MCAL_autosar_include" path="${MCAL_MCAL}/autosar_include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Wdg" path="${MCAL_MCAL}/Wdg/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu" path="${MCAL_MCAL}/Mcu/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port" path="${MCAL_MCAL}/Port/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Gpt" path="${MCAL_MCAL}/Gpt/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Fls" path="${MCAL_MCAL}/Fls/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Dma" path="${MCAL_MCAL}/Dma/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_makefile" path="${MCAL_MCAL}/examples/Wdg/wdg_app/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc" scope="project"/>
-
 
         <pathVariable name="MCAL_MCAL_Include_hw" path="${MCAL_MCAL}/include/hw/am263px" scope="project"/>
         <pathVariable name="MCAL_MCAL_Include_memmap" path="${MCAL_MCAL}/include/memmap" scope="project"/>
@@ -129,6 +135,8 @@
 
         <pathVariable name="MCAL_MCAL_Wdg_V0" path="${MCAL_MCAL}/Wdg/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_Mcu_V2" path="${MCAL_MCAL}/Mcu/V2" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Fls_V2" path="${MCAL_MCAL}/Fls/V2" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Dma_V0" path="${MCAL_MCAL}/Dma/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port_V0" path="${MCAL_MCAL}/Port/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_Gpt_V0" path="${MCAL_MCAL}/Gpt/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_Wdg_eg" path="${MCAL_MCAL}/examples/Wdg/wdg_app/soc/am263px/r5f0_0/" scope="project"/>
@@ -136,6 +144,7 @@
         <pathVariable name="MCAL_MCAL_Mcu_Cfg" path="${PROJECT_LOC}/examples_config/Mcu_Demo_Cfg/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port_Cfg" path="${PROJECT_LOC}/examples_config/Port_Demo_Cfg/include" scope="project"/>
         <pathVariable name="MCAL_MCAL_Gpt_Cfg" path="${PROJECT_LOC}/examples_config/Gpt_Demo_Cfg/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Fls_Ospi_Sup_Cfg" path="${PROJECT_LOC}/examples_config/Fls_OSPI_SBL_Support_Cfg/include" scope="project"/>
 
 
         <file path="${MCAL_MCAL}/Wdg/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Wdg"></file>
@@ -144,6 +153,12 @@
         <file path="${MCAL_MCAL}/Mcu/V2" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
         <file path="${MCAL_MCAL}/Mcu/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
         <file path="${MCAL_MCAL}/Mcu/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
+        <file path="${MCAL_MCAL}/Fls/V2" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Fls"></file>
+        <file path="${MCAL_MCAL}/Fls/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Fls"></file>
+        <file path="${MCAL_MCAL}/Fls/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Fls"></file>
+        <file path="${MCAL_MCAL}/Dma/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Dma"></file>
+        <file path="${MCAL_MCAL}/Dma/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Dma"></file>
+        <file path="${MCAL_MCAL}/Dma/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Dma"></file>
         <file path="${MCAL_MCAL}/Gpt/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Gpt"></file>
         <file path="${MCAL_MCAL}/Gpt/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Gpt"></file>
         <file path="${MCAL_MCAL}/Gpt/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Gpt"></file>
@@ -159,6 +174,8 @@
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/src/Port_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Gpt_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Gpt_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Gpt_Demo_Cfg/soc/am263px/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Gpt_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Fls_OSPI_SBL_Support_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Fls_OSPI_SBL_Support_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Fls_OSPI_SBL_Support_Cfg/soc/am263px/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Fls_OSPI_SBL_Support_Cfg"></file>
         <file path="${MCAL_MCAL_makefile}/makefile_ccs_bootimage_gen" openOnCreation="false" excludeFromBuild="false" action="copy" ></file>
 
         <file path="${MCAL_MCAL}/include/hw/am263px" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
@@ -205,5 +222,4 @@
         <file path="${MCAL_MCAL}/examples/Wdg/wdg_app/soc/am263px/r5f0_0/WdgApp_Startup.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
     </project>
 </projectSpec>
-
 

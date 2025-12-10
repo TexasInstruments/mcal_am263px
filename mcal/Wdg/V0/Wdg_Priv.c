@@ -385,7 +385,7 @@ static FUNC(void, WDG_CODE) Wdg_reset(void)
 
 /** @fn FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) Mode)
  *   @brief Set the WDG MODE
- *   \param[in]  Wdg_RegisterReadbackType       RegisterReadbackPtr
+ *   \param[in]  WdgIf_ModeType       Mode
  *
  *   This function can be called to change the Wdg Mode
  *
@@ -434,5 +434,48 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) 
     return retVal;
 }
 
+/** @fn FUNC(uint16, WDG_CODE) Wdg_ProcessTimeout(VAR(uint16, AUTOMATIC) wdgtimeoutMsec)
+ *   @brief Set the DWDPRLD register for new timeout value
+ *   \param[in]  uint32               wdgtimeoutMsec
+ * This function can be called to set timeout value DWDPRLD register
+ * \return void
+ *
+ */
+FUNC(void, WDG_CODE)
+Wdg_ProcessTimeout(VAR(uint16, AUTOMATIC) wdgTimeoutMsec)
+{
+    uint32 preloadVal = 0U;
+    uint32 baseAddr   = Wdg_DrvObj.baseAddr;
+
+    preloadVal = Wdg_getPrldValfromTimeout(wdgTimeoutMsec);
+
+#if (STD_ON == WDG_DEV_ERROR_DETECT)
+    if (preloadVal > WDG_MAX_PRELOAD_VALUE)
+    {
+        (void)Det_ReportError(WDG_MODULE_ID, WDG_INSTANCE_ID, WDG_SET_TRIGGER_CONDITION, WDG_E_PARAM_TIMEOUT);
+    }
+    else
+#endif
+    {
+        /* Update new Pre-load value */
+        Wdg_setPreload(baseAddr, preloadVal);
+    }
+
+    return;
+}
+
+FUNC(uint32, WDG_CODE)
+Wdg_getPrldValfromTimeout(VAR(uint16, AUTOMATIC) wdgTimeoutMsec)
+{
+    /*
+     * The expiration time of the DWD Down Counter can be determined with following equation:
+     *  RTI_DWDPRLD= (((wdgTimeoutMsec * (RTI_FCLK *1000)) / 2^13) - 1)
+     */
+    uint32 preloadcalc  = 0U;
+    preloadcalc         = (uint32)wdgTimeoutMsec * (WDG_RTI_FREQUENCY * 1000U);
+    preloadcalc         = preloadcalc >> 13U;
+    preloadcalc        -= 1U;
+    return preloadcalc;
+}
 #define WDG_STOP_SEC_CODE
 #include "Wdg_MemMap.h"
