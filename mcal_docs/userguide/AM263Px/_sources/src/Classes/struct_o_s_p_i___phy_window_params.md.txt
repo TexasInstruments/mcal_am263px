@@ -1,0 +1,53 @@
+---
+orphan: true
+---
+
+---
+title: OSPI_PhyWindowParams
+summary: OSPI PHY Tuning Window Parameters. 
+
+---
+
+# OSPI_PhyWindowParams
+
+
+
+OSPI PHY Tuning Window Parameters.  [More...](#detailed-description)
+
+
+`#include <Fls_Ospi_Phy.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  int | txDllLowWindowStart |  |
+|  int | txDllLowWindowEnd |  |
+|  int | txDllHighWindowStart |  |
+|  int | txDllHighWindowEnd |  |
+|  int | rxLowSearchStart |  |
+|  int | rxLowSearchEnd |  |
+|  int | rxHighSearchStart |  |
+|  int | rxHighSearchEnd |  |
+|  int | txLowSearchStart |  |
+|  int | txLowSearchEnd |  |
+|  int | txHighSearchStart |  |
+|  int | txHighSearchEnd |  |
+|  int | txDLLSearchOffset |  |
+|  uint32 | rxTxDLLSearchStep |  |
+|  uint32 | rdDelayMin |  |
+|  uint32 | rdDelayMax |  |
+
+## Detailed Description
+
+```cpp
+struct OSPI_PhyWindowParams;
+```
+
+
+**Brief**: 
+OSPI PHY Tuning Window Parameters. 
+
+These are input window parameters for OSPI PHY tuning algorithm. This data is usually SOC specific and is filled by SysConfig. 
+
+

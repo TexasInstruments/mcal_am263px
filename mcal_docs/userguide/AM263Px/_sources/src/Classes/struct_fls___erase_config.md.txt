@@ -1,0 +1,31 @@
+---
+orphan: true
+---
+
+---
+title: Fls_EraseConfig
+summary: FLS external flash erase configuration items. 
+
+---
+
+# Fls_EraseConfig
+
+
+
+FLS external flash erase configuration items. 
+
+
+`#include <Fls.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  [Fls_LengthType](../Modules/group___f_l_s.md#typedef-fls_lengthtype) | blockSize |  Erase block size.  |
+|  [Fls_LengthType](../Modules/group___f_l_s.md#typedef-fls_lengthtype) | sectorSize |  Erase sector size.  |
+|  uint8 | cmdBlockErase3B |  Block erase command for 3 byte addressing mode.  |
+|  uint8 | cmdBlockErase4B |  Block erase command for 4 byte addressing mode.  |
+|  uint8 | cmdSectorErase3B |  Sector erase command for 3 byte addressing mode.  |
+|  uint8 | cmdSectorErase4B |  Sector erase command for 4 byte addressing mode.  |
+
+

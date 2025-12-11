@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Getting Started With AM263Px MCAL &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Module User Guide" href="ModuleUserGuide_list.html" />
+    <link rel="prev" title="2. MCAL Configurator And EB Tresos User Guide" href="MCAL_Configuration_and_EB_Tresos.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.01.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Getting Started With AM263Px MCAL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-access-to-mcal">3.1. Getting access to MCAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#package-installer">3.2. Package installer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#am263px-mcal-overview">3.3. AM263Px MCAL Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#folder-structure">3.4. Folder structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-access-to-csp">3.5. Getting access to CSP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiler-and-linker-settings">3.6. Compiler and Linker Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#compiler-variants">3.6.1. Compiler Variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiler-options">3.6.2. Compiler Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linker-options">3.6.3. Linker Options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#modules-supported">3.7. Modules Supported</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-core-support">3.8. Multi-core support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#supported-devices-platforms">3.8.1. Supported Devices/Platforms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#core-naming-conventions">3.8.2. Core Naming Conventions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">3.9. Dependencies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-dependencies">3.9.1. Hardware Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-setup">3.9.1.1. Hardware Setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cable-connections">3.9.1.2. Cable Connections</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-uart-terminal">3.9.1.3. Setup UART Terminal</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#software-dependencies">3.9.2. Software Dependencies</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ide-ccs">3.9.2.1. IDE (CCS)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#start-up-apputils">3.10. Start-up &amp; AppUtils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#start-up-code">3.10.1. Start-up code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#apputils">3.10.2. Apputils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#build-system">3.11. Build system</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#am26x-mcal-make-architecture">3.11.1. AM26x MCAL Make Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-steps">3.11.2. Build Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-platform">3.11.3. Build Platform</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-package">3.11.4. Build Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-profiles">3.11.5. Build Profiles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multicore-elf-image-format">3.11.6. Multicore ELF Image Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#code-composer-studio-ccs">3.11.7. Code Composer Studio (CCS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#importing-projects-into-ccs">3.11.7.1. Importing projects into CCS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#loading-generated-executable-file-using-ccs">3.11.7.2. Loading generated executable file using CCS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#building-and-debugging-projects-in-ccs">3.11.7.3. Building and Debugging projects in CCS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#information-on-the-am263px-device-family">3.12. Information on the AM263Px device family</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#am26x-cpu-architecture">3.12.1. AM26x CPU Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#boot-modes">3.13. Boot Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ospi-boot-mode">3.13.1. OSPI BOOT MODE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">3.13.1.1. AM263PX-CC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">3.13.1.2. AM263PX-LP</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#uartboot-mode">3.13.2. UARTBOOT MODE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">3.13.2.1. AM263PX-CC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">3.13.2.2. AM263PX-LP</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#noboot-mode">3.13.3. NOBOOT MODE</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">3.13.3.1. AM263PX-CC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">3.13.3.2. AM263PX-LP</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-examples">3.14. Running the examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">5. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">3. </span>Getting Started With AM263Px MCAL</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started-with-am263px-mcal">
+<h1><span class="section-number">3. </span>Getting Started With AM263Px MCAL<a class="headerlink" href="#getting-started-with-am263px-mcal" title="Link to this heading"></a></h1>
+<section id="getting-access-to-mcal">
+<h2><span class="section-number">3.1. </span>Getting access to MCAL<a class="headerlink" href="#getting-access-to-mcal" title="Link to this heading"></a></h2>
+<p>AM263Px MCAL can be requested from <a class="reference external" href="https://www.ti.com/tool/MCU-PLUS-SDK-AM263PX">ti.com</a></p>
+</section>
+<section id="package-installer">
+<h2><span class="section-number">3.2. </span>Package installer<a class="headerlink" href="#package-installer" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="am263px-mcal-overview">
+<h2><span class="section-number">3.3. </span>AM263Px MCAL Overview<a class="headerlink" href="#am263px-mcal-overview" title="Link to this heading"></a></h2>
+<p>AM263Px is an SOC from TI targeted to address various AUTOMOTIVE markets.
+AUTOSAR is a key software which needs to run on ARM Cortex-R5 so that it can enable communication  with other ECUs in the system.
+TI needs to provide the MCAL drivers for the AUTOSAR to run on the SOCs.
+Customers will need to procure the other AUTOSAR SW stack either internally or from third parties.</p>
+<p>AM263Px MCAL consists of three main components, Micro-controller abstraction layer (MCAL Driver code), Bare metal Example applications &amp; EB Tresos studio Plugins.</p>
+<ul class="simple">
+<li><p><strong>drivers</strong>: The drivers folder includes driver code of MCAL modules. The MCAL drivers implement the Software specification as mentioned in the AUTOSAR 4.3.1 release. It also contains basic software stubs and hardware register information.</p></li>
+<li><p><strong>examples</strong>: The examples folder includes bare metal example applications for the MCAL driver modules that can be compiled and run on hardware.</p></li>
+<li><p><strong>plugins</strong>: The plugins folder includes plugins for the MCAL modules that can be loaded, compiled and generate configuration files with EB Tresos Studio software.</p></li>
+</ul>
+</section>
+<section id="folder-structure">
+<h2><span class="section-number">3.4. </span>Folder structure<a class="headerlink" href="#folder-structure" title="Link to this heading"></a></h2>
+<p>📦AM263Px<br />
+┣ 📂build        : <em>Make files for building the MCAL library. MCAL supports make based build</em><br />
+┣ 📂<strong>mcal</strong><br />
+┃ ┣ 📂ModuleName<br />
+┃ ┃ ┣ 📂include<br />
+┃ ┃ ┃ ┗ 📜ModuleName.h : <em>Contains the API declarations of the driver to be used by upper layers</em><br />
+┃ ┃ ┣ 📂src<br />
+┃ ┃ ┃ ┗ 📜ModuleName.c : <em>Contains the implementation of the API’s for driver</em><br />
+┃ ┃ ┣ 📂Vx         : <em>Contains other supporting SOC files for driver</em><br />
+┃ ┃ ┗ 📜Makefile<br />
+┃ ┣ 📂autosar_include : <em>These included files part of the AUTOSAR BSW core. These should replace with the header files part of the AUTOSAR stack into which the MCAL is integrated</em><br />
+┃ ┣ 📂<strong>examples</strong>    : <em>The contents of this directory SHOULD NOT be used in an AUTOSAR stack integration. It contains the utility API’s for ISR’s and enabling/disabling interrupts used, commonly across the examples when used in a non-AUTOSAR context</em><br />
+┃ ┃ ┣ 📂ModuleName<br />
+┃ ┃ ┃ ┣ 📂soc<br />
+┃ ┃ ┃ ┣ 📜ModuleNameApp.c : <em>Contains test example</em><br />
+┃ ┃ ┃ ┣ 📜ModuleNameApp.h : <em>Contains example header file</em><br />
+┃ ┃ ┃ ┗ 📜Makefile<br />
+┃ ┣ 📂examples_config<br />
+┃ ┃ ┣ 📂ModuleName_Demo_Cfg<br />
+┃ ┃ ┃ ┣ 📂soc<br />
+┃ ┃ ┃ ┃ ┣ 📂am263px<br />
+┃ ┃ ┃ ┃ ┃ ┗ 📂r5f0_0<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜ModuleName_Cfg.h : <em>Contains the configuration parameters</em><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ModuleName_Cfg/PBCfg/Lcfg.c : <em>Contains all Pre-Compile/Post build/Link Time  Configured parameters</em><br />
+┣ 📂mcal_config<br />
+┃ ┣ 📂<strong>plugins</strong><br />
+┃ ┃ ┣ 📂AM263Px<br />
+┃ ┃ ┃ ┣ 📂ModuleName_TI_AM263Px<br />
+┃ ┃ ┃ ┃ ┣ 📂config<br />
+┃ ┃ ┃ ┃ ┃ ┣ 📜ModuleName.arxml : <em>Vendor Specific Module Description : ECU Configuration and ECU Parameter definitions for the MCAL module</em><br />
+┃ ┃ ┃ ┃ ┃ ┣ 📜ModuleName.xdm : <em>ECU Parameter definition for the MCAL module.</em><br />
+┃ ┃ ┃ ┃ ┃ ┗ 📜ModuleName_NonEB.xdm : <em>ECU Parameter definition for the NON EB</em><br />
+┃ ┃ ┃ ┃ ┣ 📂config_ext<br />
+┃ ┃ ┃ ┃ ┃ ┗ 📜ModuleName_Rec.xdm : <em>Sample ECU Parameter definition for the MCAL module.</em><br />
+┃ ┃ ┃ ┃ ┣ 📂generate<br />
+┃ ┃ ┃ ┃ ┃ ┣ 📂include<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ModuleName_Cfg.h : <em>Provides template to generate header file</em><br />
+┃ ┃ ┃ ┃ ┃ ┗ 📂src<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜ModuleName_Cfg.c : <em>Provides template to generate Compile Time module configurations</em><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜ModuleName_PBCfg.c : <em>Provides template to generate Post Build module configurations</em><br />
+┃ ┃ ┃ ┃ ┣ 📂generate_swcd<br />
+┃ ┃ ┃ ┃ ┃ ┗ 📂swcd<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┗📜ModuleName_BSWMD.arxml :<em>Base Software Module Description : Contains details such exclusive area, Module Entries, Interrupts, MemMap etc…</em><br />
+┃ ┃ ┃ ┃ ┣ 📂META-INF<br />
+┃ ┃ ┃ ┃ ┃ ┣ 📜CRYPTOMANIFEST.MF<br />
+┃ ┃ ┃ ┃ ┃ ┣ 📜CRYPTOMANIFESTSIG.MF<br />
+┃ ┃ ┃ ┃ ┃ ┗📜MANIFEST.MF : <em>Licensing and module include information</em><br />
+┃ ┃ ┃ ┃ ┗ 📜plugin.xml : <em>XML file used to register resources with EB Tresos Studio</em><br />
+┣ 📂mcal_docs<br />
+┃ ┣ 📂csp  : <em>Contains test reports of all supported modules</em><br />
+┃ ┗ 📂userguide  : <em>Contains userguide of all supported modules</em><br />
+┗ 📜README.txt</p>
+</section>
+<section id="getting-access-to-csp">
+<h2><span class="section-number">3.5. </span>Getting access to CSP<a class="headerlink" href="#getting-access-to-csp" title="Link to this heading"></a></h2>
+<p>Will be added in later release.</p>
+</section>
+<section id="compiler-and-linker-settings">
+<h2><span class="section-number">3.6. </span>Compiler and Linker Settings<a class="headerlink" href="#compiler-and-linker-settings" title="Link to this heading"></a></h2>
+<section id="compiler-variants">
+<h3><span class="section-number">3.6.1. </span>Compiler Variants<a class="headerlink" href="#compiler-variants" title="Link to this heading"></a></h3>
+<p>MCAL package can be built with the following compiler variant: <strong>TI ARM CLANG 4.0.0.LTS</strong>.</p>
+<p>Users can build with either compiler variants.</p>
+<p><strong>gmake all PLATFORM=am263px PROFILE=&lt;release/debug&gt; COMPILER_VARIANT=&lt;CLANG&gt;</strong></p>
+<p>COMPILER_VARIANT can take the following value(s): <strong>CLANG</strong></p>
+<p>If COMPILER_VARIANT is not specified during the build, MCAL will be built for CLANG by default.</p>
+</section>
+<section id="compiler-options">
+<h3><span class="section-number">3.6.2. </span>Compiler Options<a class="headerlink" href="#compiler-options" title="Link to this heading"></a></h3>
+<p>Below are the compiler flags used:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Compiler Option</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>-c</p></td>
+<td><p>Stop compilation after emitting compiler generated
+object files; do not call linker.</p></td>
+</tr>
+<tr class="row-odd"><td><p>-mlittle-endian</p></td>
+<td><p>Select little-endian; default</p></td>
+</tr>
+<tr class="row-even"><td><p>-mcpu=cortex-r5</p></td>
+<td><p>ARM R5 architecture</p></td>
+</tr>
+<tr class="row-odd"><td><p>-mfpu=vfpv3-d16</p></td>
+<td><p>Select appropriate floating-point hardware</p></td>
+</tr>
+<tr class="row-even"><td><p>-mfloat-abi=hard</p></td>
+<td><p>Floating-point hardware is available; select appropriate
+hardware with -mfpu option</p></td>
+</tr>
+<tr class="row-odd"><td><p>-ffunction-sections</p></td>
+<td><p>Instructs the tiarmclang compiler to generate code for
+a function definition into its own section</p></td>
+</tr>
+<tr class="row-even"><td><p>-gdwarf-3</p></td>
+<td><p>Emit DWARF version 3 debug information</p></td>
+</tr>
+<tr class="row-odd"><td><p>-Werror</p></td>
+<td><p>Treat detected warnings in the specified category as
+errors</p></td>
+</tr>
+<tr class="row-even"><td><p>-Os</p></td>
+<td><p>Most optimizations enabled, especially optimizations
+that are designed to reduce code size while mitigating
+negative impacts on performance</p></td>
+</tr>
+<tr class="row-odd"><td><p>-x</p></td>
+<td><p>Decides the compile mode (c / c++ / ti-asm …)</p></td>
+</tr>
+<tr class="row-even"><td><p>-save-temps</p></td>
+<td><p>Keeps all temporary files generated during compilation
+and linking without halting either the compiler or the
+linker</p></td>
+</tr>
+<tr class="row-odd"><td><p>-mthumb</p></td>
+<td><p>Recognized when using armclang as a compiler,but not when using it as a assembler</p></td>
+</tr>
+<tr class="row-even"><td><p>-DAM263PX_PLATFORM</p></td>
+<td><p>Identifies the target hardware platform as a TI AM263Px.</p></td>
+</tr>
+<tr class="row-odd"><td><p>-DAM263PX_R_PACKAGE</p></td>
+<td><p>Selects Resolver (CC) package for the build.</p></td>
+</tr>
+<tr class="row-even"><td><p>-DAM263PX_SIP_PACKAGE</p></td>
+<td><p>Selects SIP package type for the build.</p></td>
+</tr>
+<tr class="row-odd"><td><p>-DAM263PX_C_PACKAGE</p></td>
+<td><p>Selects Compatible (LP) package for the build.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linker-options">
+<h3><span class="section-number">3.6.3. </span>Linker Options<a class="headerlink" href="#linker-options" title="Link to this heading"></a></h3>
+<p>Below are the linker flags used</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Linker Options</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>–emit_warnings_as_errors -WL</p></td>
+<td><p>Treats warnings as errors</p></td>
+</tr>
+<tr class="row-odd"><td><p>–warn_sections</p></td>
+<td><p>Displays a message when an undefined output section is created</p></td>
+</tr>
+<tr class="row-even"><td><p>-qq</p></td>
+<td><p>Super quiet mode(quiet: Suppresses progress messages)</p></td>
+</tr>
+<tr class="row-odd"><td><p>–diag_suppress=10068</p></td>
+<td><p>suppress error “no matching section”</p></td>
+</tr>
+<tr class="row-even"><td><p>-mcpu=cortex-r5</p></td>
+<td><p>ARM R5 architecture</p></td>
+</tr>
+<tr class="row-odd"><td><p>–diag_suppress=10063</p></td>
+<td><p>supresses ‘warning: entry point other than _c_int00 specified</p></td>
+</tr>
+<tr class="row-even"><td><p>–ram_model</p></td>
+<td><p>Initializes variables at load time</p></td>
+</tr>
+<tr class="row-odd"><td><p>–reread_libs -wl</p></td>
+<td><p>Forces rereading of libraries, which resolves back references</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="modules-supported">
+<h2><span class="section-number">3.7. </span>Modules Supported<a class="headerlink" href="#modules-supported" title="Link to this heading"></a></h2>
+<p>A set of MCAL included in the package each controlling a specific peripheral. MCAL drivers included are</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Driver</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCU</p></td>
+<td><p>Driver to control enabling of modules, PLL setting and basic microcontroller initialization</p></td>
+</tr>
+<tr class="row-odd"><td><p>PORT</p></td>
+<td><p>Driver for control of PinMux</p></td>
+</tr>
+<tr class="row-even"><td><p>SPI</p></td>
+<td><p>SPI handler and driver for Serial Peripheral Interfaces: McSPI</p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN</p></td>
+<td><p>Driver for the on-chip MCAN controller peripheral</p></td>
+</tr>
+<tr class="row-even"><td><p>GPT</p></td>
+<td><p>Driver that controls the internal timer of the controller</p></td>
+</tr>
+<tr class="row-odd"><td><p>WDG</p></td>
+<td><p>Driver for controlling the watchdog when controller goes into continuous loop</p></td>
+</tr>
+<tr class="row-even"><td><p>DIO</p></td>
+<td><p>Driver to read and write the data from the Channels / Port</p></td>
+</tr>
+<tr class="row-odd"><td><p>FLS</p></td>
+<td><p>Driver provides services for reading, writing, erasing flash memory for external flash device</p></td>
+</tr>
+<tr class="row-even"><td><p>ETH</p></td>
+<td><p>Driver provides services to transmit and receive data with the external devices</p></td>
+</tr>
+<tr class="row-odd"><td><p>ETHTRCV</p></td>
+<td><p>Driver for Physical Layer Transceiver</p></td>
+</tr>
+<tr class="row-even"><td><p>ADC</p></td>
+<td><p>Driver converts the analog value applied to ADC pin to its equivalent digital value</p></td>
+</tr>
+<tr class="row-odd"><td><p>PWM</p></td>
+<td><p>Driver provides the pulse width modulated signal</p></td>
+</tr>
+<tr class="row-even"><td><p>EPWM</p></td>
+<td><p>Driver provides the enhanced pulse width modulated signal</p></td>
+</tr>
+<tr class="row-odd"><td><p>ICU</p></td>
+<td><p>The ICU driver is a module using the input capture unit (ICU) counting pulses, measuring of frequency and duty cycle</p></td>
+</tr>
+<tr class="row-even"><td><p>IPC</p></td>
+<td><p>Make the initialization of mailbox driver and provides read and write APIs to perform inter processor communication</p></td>
+</tr>
+<tr class="row-odd"><td><p>UART</p></td>
+<td><p>Driver provides serial communication using UART</p></td>
+</tr>
+<tr class="row-even"><td><p>I2C</p></td>
+<td><p>Driver provides support for transferring data between an external I2C device and the chip running this driver</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA</p></td>
+<td><p>Provides direct memory access</p></td>
+</tr>
+<tr class="row-even"><td><p>FsiRx</p></td>
+<td><p>Provides fast serial data reception service  with the external devices</p></td>
+</tr>
+<tr class="row-odd"><td><p>FsiTx</p></td>
+<td><p>Provides fast serial data transmission service  with the external devices</p></td>
+</tr>
+<tr class="row-even"><td><p>LIN</p></td>
+<td><p>Driver for the on-chip Lin controller peripheral</p></td>
+</tr>
+<tr class="row-odd"><td><p>CMPSS</p></td>
+<td><p>Driver consists of analog comparators and supporting circuits that are useful for power applications</p></td>
+</tr>
+<tr class="row-even"><td><p>FLC</p></td>
+<td><p>Driver provides support to accelerate boot up</p></td>
+</tr>
+</tbody>
+</table>
+<p>The MCAL drivers implement the Software specification as mentioned in the AUTOSAR 4.3.1 release.
+Additionally, examples to demonstrate MCAL driver usages have also been included.</p>
+</section>
+<section id="multi-core-support">
+<h2><span class="section-number">3.8. </span>Multi-core support<a class="headerlink" href="#multi-core-support" title="Link to this heading"></a></h2>
+<section id="supported-devices-platforms">
+<h3><span class="section-number">3.8.1. </span>Supported Devices/Platforms<a class="headerlink" href="#supported-devices-platforms" title="Link to this heading"></a></h3>
+<p>AM263Px: This release supports AM263Px SoC</p>
+</section>
+<section id="core-naming-conventions">
+<h3><span class="section-number">3.8.2. </span>Core Naming Conventions<a class="headerlink" href="#core-naming-conventions" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>SoC Family</p></th>
+<th class="head"><p>Cores Names</p></th>
+<th class="head"><p>Referred as</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AM263Px</p></td>
+<td><p>CORTEX_R5_0</p></td>
+<td><p>R5_0</p></td>
+<td><p>Supported in AM263Px MCAL</p></td>
+</tr>
+<tr class="row-odd"><td><p>AM263Px</p></td>
+<td><p>CORTEX_R5_1</p></td>
+<td><p>R5_1</p></td>
+<td><p>Not supported in AM263Px MCAL</p></td>
+</tr>
+<tr class="row-even"><td><p>AM263Px</p></td>
+<td><p>CORTEX_R5_2</p></td>
+<td><p>R5_2</p></td>
+<td><p>Not supported in AM263Px MCAL</p></td>
+</tr>
+<tr class="row-odd"><td><p>AM263Px</p></td>
+<td><p>CORTEX_R5_3</p></td>
+<td><p>R5_3</p></td>
+<td><p>Not supported in AM263Px MCAL</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="dependencies">
+<h2><span class="section-number">3.9. </span>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading"></a></h2>
+<section id="hardware-dependencies">
+<h3><span class="section-number">3.9.1. </span>Hardware Dependencies<a class="headerlink" href="#hardware-dependencies" title="Link to this heading"></a></h3>
+<section id="hardware-setup">
+<h4><span class="section-number">3.9.1.1. </span>Hardware Setup<a class="headerlink" href="#hardware-setup" title="Link to this heading"></a></h4>
+<p>List of hardware required for AM263Px EVM:</p>
+<p>1.AM263Px CC / EVM</p>
+<p>2.5V 3Amp USB Type-C Power Adaptor.</p>
+<p>3.Micro USB Cable.</p>
+</section>
+<section id="cable-connections">
+<h4><span class="section-number">3.9.1.2. </span>Cable Connections<a class="headerlink" href="#cable-connections" title="Link to this heading"></a></h4>
+<p>Important cable connections, ports and switches.</p>
+<section id="am263px-cc">
+<h5><span class="section-number">3.9.1.2.1. </span>AM263PX-CC<a class="headerlink" href="#am263px-cc" title="Link to this heading"></a></h5>
+<p>1.System Power On/Off</p>
+<ul class="simple">
+<li><p>5V power through Type-C 5V/3A</p></li>
+<li><p>HSEC 5V power is available only if Type-C is unavailable</p></li>
+<li><p>No mechanical on/off switch on this EVM</p></li>
+</ul>
+<figure class="align-center" id="id9">
+<img alt="AM263_CC" src="../_images/evm_overview_4_263px.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">AM263Px_CC</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="am263px-lp">
+<h5><span class="section-number">3.9.1.2.2. </span>AM263PX-LP<a class="headerlink" href="#am263px-lp" title="Link to this heading"></a></h5>
+<figure class="align-center" id="id10">
+<img alt="AM263PX_LP" src="../_images/Am263_Lp.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">AM263PX_LP</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="setup-uart-terminal">
+<h4><span class="section-number">3.9.1.3. </span>Setup UART Terminal<a class="headerlink" href="#setup-uart-terminal" title="Link to this heading"></a></h4>
+<section id="id1">
+<h5><span class="section-number">3.9.1.3.1. </span>AM263PX-CC<a class="headerlink" href="#id1" title="Link to this heading"></a></h5>
+<p>1.Many examples use a standard UART terminal to log the output from the examples. You can use any UART terminal program for the same. Below steps show how to setup the UART terminal from CCS.</p>
+<p>2.First identify the UART port as enumerated on the host machine.</p>
+<ul class="simple">
+<li><p>Make sure that the EVM and UART cable connected as shown in <a class="reference internal" href="#cable-connections">Cable Connections</a></p></li>
+<li><p>In windows, you can use the “Device Manager” to see the detected UART ports</p></li>
+<li><p>Search “Device Manager” in Windows Search Box in the Windows taskbar.</p></li>
+<li><p>If you don’t see any USB serial ports listed in “Device Manager” under “Ports (COM &amp; LPT)”, then make sure you have installed the UART to USB driver from FTDI, <a class="reference external" href="https://www.ftdichip.com/FTDrivers.htm">https://www.ftdichip.com/FTDrivers.htm</a>.</p></li>
+</ul>
+<figure class="align-center" id="id11">
+<img alt="Identify UART Port in Windows Device Manager" src="../_images/Uart-pin.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Identify UART Port in Windows Device Manager</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>3.In CCS, goto “View &gt; Terminal”</p>
+<figure class="align-center" id="id12">
+<img alt="UART Terminal Menu" src="../_images/Terminal.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">UART Terminal Menu</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>4.Open a new UART terminal</p>
+<figure class="align-center" id="id13">
+<img alt="Open New UART Terminal" src="../_images/Uart_terminal.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">Open New UART Terminal</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>5.Select the UART port, keep other options to default, i.e 115200 baud rate - 8 data bits - No parity - 1 stop bit,</p>
+<ul class="simple">
+<li><p>We use this serial port, as seen in the device manager, for below in the SDK</p>
+<ul>
+<li><p>Flashing application via UART</p></li>
+<li><p>Booting application via UART</p></li>
+<li><p>Console output for examples</p></li>
+</ul>
+</li>
+</ul>
+<figure class="align-center" id="id14">
+<img alt="Connect to UART port" src="../_images/Launch_Terminal.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">Connect to UART port</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>6.In this screenshot this happens to be COM5/COM11 however on your machine this could be different. One tip to make sure there is no mistake in identifying the UART port is to disconnect all other UART to USB devices other than this EVM before checking in device manager.</p>
+</section>
+<section id="id2">
+<h5><span class="section-number">3.9.1.3.2. </span>AM263PX-LP<a class="headerlink" href="#id2" title="Link to this heading"></a></h5>
+<p>1.Many examples use a standard UART terminal to log the output from the examples. You can use any UART terminal program for the same. Below steps show how to setup the UART terminal from CCS.
+2.First identify the UART port as enumerated on the host machine.</p>
+<ul class="simple">
+<li><p>Make sure that the EVM and UART cable connected as shown in :ref:<code class="docutils literal notranslate"><span class="pre">Cable</span> <span class="pre">Connections_p</span></code>.</p></li>
+<li><p>In windows, you can use the “Device Manager” to see the detected UART ports.</p></li>
+<li><p>Search “Device Manager” in Windows Search Box in the Windows taskbar.</p></li>
+<li><p>If dont see any USB serial ports listed in “Device Manager” under “Ports (COM &amp; LPT)”, then make sure you have installed the UART to USB driver from FTDI, <a class="reference external" href="https://www.ftdichip.com/FTDrivers.htm">https://www.ftdichip.com/FTDrivers.htm</a>.</p></li>
+</ul>
+<figure class="align-center" id="id15">
+<img alt="Identify UART Port in Windows Device Manager" src="../_images/Uart-pin.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.7 </span><span class="caption-text">Identify UART Port in Windows Device Manager</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>3.In CCS, goto “View &gt; Terminal”</p>
+<figure class="align-center" id="id16">
+<img alt="UART Terminal Menu" src="../_images/Terminal.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.8 </span><span class="caption-text">UART Terminal Menu</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>4.Open a new UART terminal</p>
+<figure class="align-center" id="id17">
+<img alt="Open New UART Terminal" src="../_images/Uart_terminal.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.9 </span><span class="caption-text">Open New UART Terminal</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>5.Select the UART port, keep other options to default, i.e 115200 baud rate - 8 data bits - No parity - 1 stop bit,</p>
+<ul class="simple">
+<li><p>We use this serial port, as seen in the device manager, for below in the SDK</p>
+<ul>
+<li><p>Flashing application via UART</p></li>
+<li><p>Booting application via UART</p></li>
+<li><p>Console output for examples</p></li>
+</ul>
+</li>
+</ul>
+<figure class="align-center" id="id18">
+<img alt="Connect to UART port" src="../_images/Launch_Terminal.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.10 </span><span class="caption-text">Connect to UART port</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>6.In this screenshot this happens to be COM5/COM11 however on your machine this could be different. One tip to make sure there is no mistake in identifying the UART port is to disconnect all other UART to USB devices other than this EVM before checking in device manager.</p>
+</section>
+</section>
+</section>
+<section id="software-dependencies">
+<h3><span class="section-number">3.9.2. </span>Software Dependencies<a class="headerlink" href="#software-dependencies" title="Link to this heading"></a></h3>
+<section id="ide-ccs">
+<h4><span class="section-number">3.9.2.1. </span>IDE (CCS)<a class="headerlink" href="#ide-ccs" title="Link to this heading"></a></h4>
+<p>Code Composer Studio is an integrated development environment (IDE) that supports TI’s Micro-controller and Embedded Processors portfolio.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please refer release notes for CCS version details.</p>
+</div>
+<p>You can downloaded CCS from <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO#downloads">ti.com</a></p>
+<section id="installation-steps">
+<h5><span class="section-number">3.9.2.1.1. </span>Installation Steps<a class="headerlink" href="#installation-steps" title="Link to this heading"></a></h5>
+<p>1.Use TI CCS v12.5.0 or later</p>
+<p>2.After the package is downloaded, you will be prompted to restart CCS to complete the installation.</p>
+<p>3.The installer will install the Emulation package and complete installation.</p>
+</section>
+</section>
+</section>
+</section>
+<section id="start-up-apputils">
+<h2><span class="section-number">3.10. </span>Start-up &amp; AppUtils<a class="headerlink" href="#start-up-apputils" title="Link to this heading"></a></h2>
+<section id="start-up-code">
+<h3><span class="section-number">3.10.1. </span>Start-up code<a class="headerlink" href="#start-up-code" title="Link to this heading"></a></h3>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┣ 📂mcal<br />
+┃ ┣ 📂ModuleName<br />
+┃ ┣ 📂autosar_include<br />
+┃ ┣ 📂examples<br />
+┃ ┣ 📂examples_config<br />
+┃ ┣ 📂<strong>include</strong>  :  <em>Contains the Startup Code</em><br />
+┣ 📂mcal_config<br />
+┣ 📂mcal_docs<br />
+┗ 📜README.txt</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Start-up code is for reference only, it should not be used as-is in a typical AUTOSAR applications.</p>
+</div>
+</section>
+<section id="apputils">
+<h3><span class="section-number">3.10.2. </span>Apputils<a class="headerlink" href="#apputils" title="Link to this heading"></a></h3>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┣ 📂mcal<br />
+┃ ┣ 📂ModuleName<br />
+┃ ┣ 📂autosar_include<br />
+┃ ┣ 📂examples<br />
+┃ ┃ ┣ 📂ModuleName<br />
+┃ ┃ ┣ 📂<strong>Utils</strong>     :  <em>Contains AppUtils functions</em><br />
+┃ ┣ 📂examples_config<br />
+┃ ┣ 📂include<br />
+┣ 📂mcal_config<br />
+┣ 📂mcal_docs<br />
+┗ 📜README.txt</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>AppUtils source code is for reference only, it should not be used as-is in a typical AUTOSAR applications.</p>
+</div>
+</section>
+</section>
+<section id="build-system">
+<h2><span class="section-number">3.11. </span>Build system<a class="headerlink" href="#build-system" title="Link to this heading"></a></h2>
+<section id="am26x-mcal-make-architecture">
+<h3><span class="section-number">3.11.1. </span>AM26x MCAL Make Architecture<a class="headerlink" href="#am26x-mcal-make-architecture" title="Link to this heading"></a></h3>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┃ ┣ 📂bootimage_scripts<br />
+┃ ┣ 📂makerules<br />
+┃ ┃ ┣ 📜build_config.mk<br />
+┃ ┃ ┣ 📜build_config_CLANG.mk<br />
+┃ ┃ ┣ 📜common.mk<br />
+┃ ┃ ┣ 📜component.mk<br />
+┃ ┃ ┣ 📜env.mk<br />
+┃ ┃ ┣ 📜platform.mk<br />
+┃ ┃ ┣ 📜rules_r4_TI_COMPILER.mk<br />
+┃ ┃ ┣ 📜rules_r5f.mk<br />
+┃ ┃ ┣ 📜rules_r5f_CLANG.mk<br />
+┃ ┃ ┣ 📜rules_r5f_DIAB.mk<br />
+┃ ┃ ┗ 📜rules_r5f_TI_COMPILER.mk<br />
+┃ ┣ 📜ccs_makefile<br />
+┃ ┣ 📜makefile<br />
+┃ ┗ 📜Rules.make<br />
+┣ 📂mcal<br />
+┃ ┣ 📂ModuleName<br />
+┃ ┃ ┣ 📂include<br />
+┃ ┃ ┣ 📂src<br />
+┃ ┃ ┣ 📂Vx<br />
+┃ ┃ ┗ 📜Makefile<br />
+┃ ┣ 📂autosar_include<br />
+┃ ┣ 📂examples<br />
+┃ ┃ ┣ 📂ModuleName<br />
+┃ ┃ ┃ ┣ 📂soc<br />
+┃ ┃ ┃ ┣ 📜ModuleNameApp.c<br />
+┃ ┃ ┃ ┣ 📜ModuleNameApp.h<br />
+┃ ┃ ┃ ┗ 📜Makefile<br />
+┃ ┃ ┣ 📂Utils<br />
+┃ ┃ ┃ ┗ 📜Makefile<br />
+┃ ┣ 📂examples_config<br />
+┃ ┣ 📂include<br />
+┃ ┣ 📜mcal_component.mk<br />
+┣ 📂mcal_config<br />
+┣ 📂mcal_docs<br />
+┗ 📜README.txt</p>
+<ul class="simple">
+<li><p><strong>makefile at Root level</strong></p></li>
+</ul>
+<p>Invoke configuration parameters, internal make files of libraries and examples of different modules for building the source code.</p>
+<ul class="simple">
+<li><p><strong>Rules.make</strong></p></li>
+</ul>
+<p>Dependent details for the Makefile to execute like Path for compiler, library, configurations are provided in Rules.mak. Default values for build environment, compiler and SOC are defined here. The build environment/Compiler/SOC will be chosen as Windows/CLANG/am263 if the user has not specified any. Rules.mak shall be included in the Makefile at Root level.</p>
+<ul class="simple">
+<li><p><strong>mcal_component.mk</strong></p></li>
+</ul>
+<p>Contains the mcal_libs and mcal_examples list which is build as part of building libs and examples respectively. The user can add or delete MCAL components that need to be built.</p>
+<ul class="simple">
+<li><p><strong>Makefile at MCAL driver level</strong></p></li>
+</ul>
+<p>All the source and header files of respective modules are included in the Module makefile to support build.</p>
+</section>
+<section id="build-steps">
+<h3><span class="section-number">3.11.2. </span>Build Steps<a class="headerlink" href="#build-steps" title="Link to this heading"></a></h3>
+<p>This section describes how to build the MCAL package. The package is built using “gmake” from Cygwin.
+Make sure that the Cygwin tools location is added to the PATH variable.
+Also, make file internally uses some binaries like rm, mkdir, echo etc. from Cygwin.
+Standard CCS installation comes with Cygwin, gmake and other utils as required to build MCAL modules.</p>
+<p>Edit the <strong>Rules. Make</strong> file present in <strong>&lt;MCAL_INSTALL_PATH&gt;/build/Rules.make</strong> to give the appropriate paths for the tool chains and the current working directory. Make sure that CCS_PATH, and the TOOLCHAIN_PATH_R5 are updated with the proper path.</p>
+<p>Edit paths for the below variables according to your system environment</p>
+<p>1.In case of windows machine edit CCS path according to CCS version,</p>
+<ul class="simple">
+<li><p>CCS_PATH := C:/ti/ccs1250/ccs</p></li>
+<li><p>TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.0.LTS</p></li>
+</ul>
+<p>2.In case of Linux machine edit CCS path according to CCS version,</p>
+<ul class="simple">
+<li><p>CCS_PATH := /opt/ti/ccs1250/ccs</p></li>
+<li><p>TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.0.LTS</p></li>
+</ul>
+<p>3.By default the above are for CLANG compiler, modify respective paths accordingly for using other compilers.</p>
+<p>4.Install dependencies required for MCELF image format<br />
+Install Python3<br />
+Install Pip<br />
+Make sure pyelftools and construct is installed from pip. This package is required for encrypting MCELF application images.<br />
+pip install pyelftools construct<br />
+Install openssl v3 from here <a class="reference external" href="https://slproweb.com/products/Win32OpenSSL.html">https://slproweb.com/products/Win32OpenSSL.html</a></p>
+<p>By default, MCAL package provides pre-generated config headers under
+<strong>&lt;MCAL_INSTALL_PATH&gt;/examples_config/&lt;Module&gt;_Demo_Cfg/soc/&lt;SOC&gt;/&lt;Core&gt;/include.</strong></p>
+<p><strong>&lt;SOC&gt;</strong> should be with the following value(s): <strong>am263px</strong> in folder structure.</p>
+<p>Go to <strong>&lt;MCAL_INSTALL_PATH&gt;/build</strong> directory and type below commands:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Description</p></th>
+<th class="head"><p>Commands</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Command to build all the libraries</p></td>
+<td><p>gmake -s all PLATFORM=am263px</p></td>
+</tr>
+<tr class="row-odd"><td><p>Command to build an application given in examples folder</p></td>
+<td><p>gmake -s &lt;app_name&gt; PLATFORM=am263px  <br><br> <strong>app_name</strong> can be found in the make file of the respective examples folder.</p></td>
+</tr>
+<tr class="row-even"><td><p>Command to clean all targets</p></td>
+<td><p>gmake -s clean PLATFORM=am263px</p></td>
+</tr>
+<tr class="row-odd"><td><p>Command to clean individual targets</p></td>
+<td><p>gmake -s $(target)_clean PLATFORM=am263px</p></td>
+</tr>
+<tr class="row-even"><td><p>Command to build an application for Resolver Package</p></td>
+<td><p>gmake -s &lt;app_name&gt; PLATFORM=am263px PACKAGE=R</p></td>
+</tr>
+<tr class="row-odd"><td><p>Command to build an application for Compatible Package</p></td>
+<td><p>gmake -s &lt;app_name&gt; PLATFORM=am263px PACKAGE=C</p></td>
+</tr>
+<tr class="row-even"><td><p>Command to build an application for SIP Package</p></td>
+<td><p>gmake -s &lt;app_name&gt; PLATFORM=am263px PACKAGE=SIP</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="build-platform">
+<h3><span class="section-number">3.11.3. </span>Build Platform<a class="headerlink" href="#build-platform" title="Link to this heading"></a></h3>
+<p>PLATFORM makefile macro can take the name of the SOC which needs to be build.
+The possible values are as below</p>
+<ul class="simple">
+<li><p>am263</p></li>
+<li><p>am263px</p></li>
+<li><p>am261</p></li>
+</ul>
+<p>If no value is mentioned explicitly, it will take the default value as am263.</p>
+</section>
+<section id="build-package">
+<h3><span class="section-number">3.11.4. </span>Build Package<a class="headerlink" href="#build-package" title="Link to this heading"></a></h3>
+<p>Below packages are available for AM263Px.</p>
+<ul class="simple">
+<li><p>SIP</p></li>
+<li><p>C</p></li>
+<li><p>R</p></li>
+</ul>
+<p>User can build using below commands for the respective package:</p>
+<p><strong>gmake -s &lt;app_name&gt; PLATFORM=am263px PACKAGE=SIP</strong> for SIP package</p>
+<p><strong>gmake -s &lt;app_name&gt; PLATFORM=am263px PACKAGE=C</strong> for C package</p>
+<p><strong>gmake -s &lt;app_name&gt; PLATFORM=am263px PACKAGE=R</strong> for R package</p>
+</section>
+<section id="build-profiles">
+<h3><span class="section-number">3.11.5. </span>Build Profiles<a class="headerlink" href="#build-profiles" title="Link to this heading"></a></h3>
+<p>MCAL package can be built in two profiles:</p>
+<ul class="simple">
+<li><p>Release Profile</p></li>
+<li><p>Debug Profile</p></li>
+</ul>
+<p>Users can build in mode by setting parameter PROFILE while building.</p>
+<p><strong>gmake all PLATFORM=am263px PROFILE=&lt;release/debug&gt;</strong></p>
+<p>PROFILE makefile macro can take either of the following values:</p>
+<ul class="simple">
+<li><p>release for Release Profile</p></li>
+<li><p>debug for Debug Profile</p></li>
+</ul>
+<p>If PROFILE is not set during build, MCAL will be built for release profile by default.</p>
+<p>To build all the examples and libraries in debug mode, you can give the following command.</p>
+<p><strong>gmake -s all PLATFORM=am263px PROFILE=debug</strong></p>
+<p>Similarly, PROFILE can be set in all the above build commands.</p>
+</section>
+<section id="multicore-elf-image-format">
+<h3><span class="section-number">3.11.6. </span>Multicore ELF Image Format<a class="headerlink" href="#multicore-elf-image-format" title="Link to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default, MCELF is OFF.  User can enable it with the macro MCELF_ENABLE (yes/no) as yes.</p>
+<p>Give the following command to enable MCELF:</p>
+<p>gmake -s dio_app MCELF_ENABLE=yes</p>
+</div>
+<p>Multicore ELF, or MCELF is a new application image format different from the existing RPRC format. Unlike a proprietary format like RPRC, multicore elf is based on the widely recognized ELF (Executable and Linkable format) standard. This ensures seamless compatibility with industry-standard tools and platforms.<br />
+For more information on ELF format please refer: <a class="reference external" href="https://man7.org/linux/man-pages/man5/elf.5.html">https://man7.org/linux/man-pages/man5/elf.5.html</a><br />
+For more information on MCELF image format please refer: <a class="reference external" href="https://software-dl.ti.com/mcu-plus-sdk/esd/AM263PX/latest/exports/docs/api_guide_am263px/MCELF_LANDING.html">AM263Px MCU SDK: Understanding Multicore ELF image format</a></p>
+</section>
+<section id="code-composer-studio-ccs">
+<h3><span class="section-number">3.11.7. </span>Code Composer Studio (CCS)<a class="headerlink" href="#code-composer-studio-ccs" title="Link to this heading"></a></h3>
+<section id="importing-projects-into-ccs">
+<h4><span class="section-number">3.11.7.1. </span>Importing projects into CCS<a class="headerlink" href="#importing-projects-into-ccs" title="Link to this heading"></a></h4>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┣ 📂mcal<br />
+┃ ┣ 📂autosar_include<br />
+┃ ┣ 📂examples<br />
+┃ ┃ ┣ 📂Can<br />
+┃ ┃ ┃ ┣ 📂soc<br />
+┃ ┃ ┃ ┃ ┣ 📂am263px<br />
+┃ ┃ ┃ ┃ ┃ ┣ 📂r5f0_0<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂ti-arm-clang\ 
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜can_app.projectspec :  <em>Project template which can be imported into CCS</em> <br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CanApp_Startup.c<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CanApp_Startup.h<br />
+┃ ┃ ┃ ┣ 📜CanApp.c<br />
+┃ ┃ ┃ ┗ 📜Makefile<br />
+┃ ┃ ┣ 📂Utils<br />
+┃ ┣ 📂examples_config<br />
+┃ ┣ 📂include<br />
+┣ 📂mcal_config<br />
+┣ 📂mcal_docs<br />
+┗ 📜README.txt</p>
+<p>Every AM263Px MCAL example comes with a projectspec file which can be imported in CCS.</p>
+<ol class="arabic">
+<li><p>Open CCS and select Import Project -</p>
+<figure class="align-center" id="id19">
+<img alt="CCS Import Step 1" src="../_images/CCS_Import_Step1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.11 </span><span class="caption-text">CCS Import Step 1</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Browse to the folder containing Projectspec file and select the desired CCS Project to be imported.</p>
+<figure class="align-center" id="id20">
+<img alt="CCS Import Step 2" src="../_images/CCS_Import_Step2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.12 </span><span class="caption-text">CCS Import Step 2</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Once project is imported you can continue to build and debug the project.</p>
+<figure class="align-center" id="id21">
+<img alt="CCS Project Imported" src="../_images/CCS_Import_Step3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.13 </span><span class="caption-text">CCS Project Imported</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+</ol>
+</section>
+<section id="loading-generated-executable-file-using-ccs">
+<h4><span class="section-number">3.11.7.2. </span>Loading generated executable file using CCS<a class="headerlink" href="#loading-generated-executable-file-using-ccs" title="Link to this heading"></a></h4>
+<ol class="arabic">
+<li><p>Import any example project to CCS, right click on the xer5f file and select ‘Debug as Code Composer Debug Session’.</p>
+<figure class="align-center" id="id22">
+<img alt="CCS Loading Executable Step1" src="../_images/CCS_Loading_Executable_Step1.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.14 </span><span class="caption-text">CCS Loading Executable Step1</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Right click on the Texas Instruments XDS110 USB Debug Probe/Cortex_R5_0  and ‘Connect Target’.</p>
+<figure class="align-center" id="id23">
+<img alt="CCS Loading Executable Step2" src="../_images/CCS_Loading_Executable_Step2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.15 </span><span class="caption-text">CCS Loading Executable Step2</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Go to Run - Load - Load Program.</p>
+<figure class="align-center" id="id24">
+<img alt="CCS Loading Executable Step3" src="../_images/CCS_Loading_Executable_Step3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.16 </span><span class="caption-text">CCS Loading Executable Step3</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Browse to the folder containing the generated executable, select the desired executable to be loaded and click on OK.</p>
+<figure class="align-center" id="id25">
+<img alt="CCS Loading Executable Step4" src="../_images/CCS_Loading_Executable_Step4.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.17 </span><span class="caption-text">CCS Loading Executable Step4</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</li>
+<li><p>Once the executable is loaded you can continue to run and debug the project.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For more information on projectspec and it’s use in CCS <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/ccs_projectspecs.html">refer documentation</a>.</p>
+</div>
+</section>
+<section id="building-and-debugging-projects-in-ccs">
+<h4><span class="section-number">3.11.7.3. </span>Building and Debugging projects in CCS<a class="headerlink" href="#building-and-debugging-projects-in-ccs" title="Link to this heading"></a></h4>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For information on how to build and debug any project in CCS <a class="reference external" href="https://software-dl.ti.com/ccs/esd/documents/users_guide_ccs/index_project-management.html">refer documentation</a>.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="information-on-the-am263px-device-family">
+<h2><span class="section-number">3.12. </span>Information on the AM263Px device family<a class="headerlink" href="#information-on-the-am263px-device-family" title="Link to this heading"></a></h2>
+<section id="am26x-cpu-architecture">
+<h3><span class="section-number">3.12.1. </span>AM26x CPU Architecture<a class="headerlink" href="#am26x-cpu-architecture" title="Link to this heading"></a></h3>
+<p>Am263Px is a Single-core Arm® Cortex®-R5F MCU up to 400 MHz with real-time control and security. AM263Px combines up to four Cortex-R5F MCUs, a real-time control subsystem (CONTROLSS), a Hardware Security Module (HSM), and one instance of Sitara’s PRU-ICSS, making AM263Px designed for advanced motor control and digital power control applications.</p>
+<p>The ARM Dual-Core Cortex-R5F processor subsystem (R5FSS) supports the following main features:</p>
+<ul class="simple">
+<li><p>Armv7-R architecture</p></li>
+<li><p>Support Dual Core mode,  Single Core mode and  Lockstep mode</p></li>
+<li><p>Full-precision Floating Point (VFPv3)</p></li>
+<li><p>4/8/16-region Memory Protection Unit (MPU)</p></li>
+<li><p>8 breakpoints, 8 watch points</p></li>
+<li><p>CoreSight Debug Access Port (DAP)</p></li>
+<li><p>CoreSight ETM-R5 interface (CTI, ETM, ATB)</p></li>
+<li><p>Performance Monitoring Unit (PMU)</p></li>
+<li><p>Integrated Vectored Interrupt Manager (VIM) per core with 256 Interrupt Inputs each</p></li>
+</ul>
+</section>
+</section>
+<section id="boot-modes">
+<h2><span class="section-number">3.13. </span>Boot Modes<a class="headerlink" href="#boot-modes" title="Link to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>–This section has more details on AM263PX-CC. This is mainly for reference.
+Make sure boot mode switch is setup to NOBOOT mode to use with CCS.</p>
+</div>
+<section id="ospi-boot-mode">
+<h3><span class="section-number">3.13.1. </span>OSPI BOOT MODE<a class="headerlink" href="#ospi-boot-mode" title="Link to this heading"></a></h3>
+<section id="id3">
+<h4><span class="section-number">3.13.1.1. </span>AM263PX-CC<a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<p>This mode is used to boot flashed applications via EVM flash like OSPI flash.</p>
+<p>BOOTMODE [ 1 : 4 ] (SW3) = 1100</p>
+<figure class="align-center" id="id26">
+<img alt="OSPI BOOT MODE" src="../_images/OSPI_Boot.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">OSPI BOOT MODE</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id4">
+<h4><span class="section-number">3.13.1.2. </span>AM263PX-LP<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>This mode is used to boot flashed applications via EVM flash like OSPI flash.</p>
+<figure class="align-center" id="id27">
+<img alt="OSPI BOOT MODE" src="../_images/am263x_lp_boot_pins_qspi_mode.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.19 </span><span class="caption-text">OSPI BOOT MODE</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="uartboot-mode">
+<h3><span class="section-number">3.13.2. </span>UARTBOOT MODE<a class="headerlink" href="#uartboot-mode" title="Link to this heading"></a></h3>
+<section id="id5">
+<h4><span class="section-number">3.13.2.1. </span>AM263PX-CC<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<p>This mode is used to flash files to the EVM flash via UART. It can also be used to boot applications via UART.</p>
+<p>BOOTMODE [ 1 : 4 ] (SW3) = 1000</p>
+<figure class="align-center" id="id28">
+<img alt="UART BOOT MODE" src="../_images/UART_Boot.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.20 </span><span class="caption-text">UART BOOT MODE</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id6">
+<h4><span class="section-number">3.13.2.2. </span>AM263PX-LP<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
+<p>This mode is used to flash files to the EVM flash via UART. It can also be used to boot applications via UART.</p>
+<figure class="align-center" id="id29">
+<img alt="UART BOOT MODE" src="../_images/am263px_lp_boot_pins_uart_mode.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.21 </span><span class="caption-text">UART BOOT MODE</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="noboot-mode">
+<h3><span class="section-number">3.13.3. </span>NOBOOT MODE<a class="headerlink" href="#noboot-mode" title="Link to this heading"></a></h3>
+<section id="id7">
+<h4><span class="section-number">3.13.3.1. </span>AM263PX-CC<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
+<p>This mode is used in CCS.</p>
+<p>BOOTMODE [ 1 : 4 ] (SW3) = 1101</p>
+<figure class="align-center" id="id30">
+<img alt="NO BOOT MODE" src="../_images/NO_Boot.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.22 </span><span class="caption-text">NO BOOT MODE</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="id8">
+<h4><span class="section-number">3.13.3.2. </span>AM263PX-LP<a class="headerlink" href="#id8" title="Link to this heading"></a></h4>
+<p>This mode is used in CCS.</p>
+<figure class="align-center" id="id31">
+<img alt="NO BOOT MODE" src="../_images/am263px_lp_boot_pins_noboot_mode.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.23 </span><span class="caption-text">NO BOOT MODE</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+</section>
+<section id="running-the-examples">
+<h2><span class="section-number">3.14. </span>Running the examples<a class="headerlink" href="#running-the-examples" title="Link to this heading"></a></h2>
+<p>Connect the CC or EVM board to your computer through JTag (USB Port)</p>
+<ul class="simple">
+<li><p>Before running the binary file on target H/W follow the steps mentioned below:</p></li>
+<li><p>Launch CCS, Go to View &gt; Target Configuration</p></li>
+<li><p>Create a new target configuration</p></li>
+<li><p>Give a nice name to the new target configuration, typically {SOC name} _ {JTAG type}</p></li>
+<li><p>Select connection as XDS110 USB Debug Probe</p></li>
+<li><p>In “Board or Device” type “&#64;VAR_SOC_NAME” and select “AM263Px”</p></li>
+<li><p>Click “Save” to save the newly created target configuration.</p></li>
+<li><p>Under Advanced tab – Select Cortex_R5_0</p></li>
+<li><p>Make sure the device gel file path is in the Initialization script field (C:/ti/ccs1250/ccs/ccs_base/emulation/gel/AM263Px/AM263Px.gel)</p></li>
+<li><p>Click “Save” to save the newly created target configuration</p></li>
+<li><p>Launch the target configuration for AM263Px</p></li>
+<li><p>Connect to Cortex_R5_0 core</p></li>
+<li><p>Connect UART USB cable to the serial UART terminal (with appropriate port) and select UART1 serial port for viewing the UART logs and providing user input. By default, configuration may be matched by selecting baud rate as 115200, 8-bit Data Size, Parity None and 1 Stop Bit as the serial port settings.</p></li>
+<li><p>Load binary files using Load Program option</p></li>
+<li><p>Run the application and follow the prompts and output on CCS console/UART serial console.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MCAL_Configuration_and_EB_Tresos.html" class="btn btn-neutral float-left" title="2. MCAL Configurator And EB Tresos User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ModuleUserGuide_list.html" class="btn btn-neutral float-right" title="4. Module User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Dec 11, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.01.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

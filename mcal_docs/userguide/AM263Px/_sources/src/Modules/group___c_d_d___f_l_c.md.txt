@@ -1,0 +1,218 @@
+---
+title: OptiFlash FLC (Fast Local Copy) API
+
+---
+
+# CDD_FLC
+
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[Cdd_Flc_RegionConfigType](../Classes/struct_cdd___flc___region_config_type.md)** | FLC Region Config type.  |
+| **[Cdd_Flc_StatusType](../Classes/struct_cdd___flc___status_type.md)** | FLC Status.  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_FLC_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| CDD_FLC_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| CDD_FLC_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| CDD_FLC_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by CDD_FLC Driver.  |
+| CDD_FLC_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by CDD_FLC Driver.  |
+| CDD_FLC_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by CDD_FLC Driver.  |
+| CDD_FLC_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| CDD_FLC_MODULE_ID   | CDD FLC Driver Module ID.  |
+| CDD_FLC_INSTANCE_ID   | CDD FLC Instance ID.  |
+| CDD_FLC_E_PARAM_POINTER   | API service called will null param pointer.  |
+| CDD_FLC_E_ILLEGAL_HW_ID   | API service called with illegal HW ID.  |
+| CDD_FLC_E_ILLEGAL_REGION_ID   | API service called with illegal region ID.  |
+| CDD_FLC_E_UNALIGNED_ADDRESS   | API service called with unaligned address.  |
+| CDD_FLC_SID_GET_VERSION_INFO   | Cdd_Flc_GetVersionInfo() API Service ID.  |
+| CDD_FLC_SID_CONFIGURE_REGION   | Cdd_Flc_ConfigureRegion() API Service ID.  |
+| CDD_FLC_SID_ENABLE_REGION   | Cdd_Flc_EnableRegion() API Service ID.  |
+| CDD_FLC_SID_IS_REGION_COPY_DONE   | Cdd_Flc_IsRegionCopyDone() API Service ID.  |
+| CDD_FLC_SID_DISABLE_REGION   | Cdd_Flc_DisableRegion() API Service ID.  |
+| CDD_FLC_SID_GET_STATUS   | Cdd_Flc_GetStatus() API Service ID.  |
+| CDD_FLC_SID_CLEAR_ALL_STATUS   | Cdd_Flc_ClearAllStatus() API Service ID.  |
+| CDD_FLC_ADDR_ALIGNMENT   | Source and destination addresses should be aligned to this.  |
+| CDD_FLC_ADDR_ALIGNMENT_MSK   | Source and destination address alignment mask.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Cdd_Flc_GetVersionInfo](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_getversioninfo)**(Std_VersionInfoType * VersionInfo)| Service that returns the version information of the module.  |
+| Std_ReturnType | **[Cdd_Flc_ConfigureRegion](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_configureregion)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegionId](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_regionid) RegionId, const [Cdd_Flc_RegionConfigType](../Classes/struct_cdd___flc___region_config_type.md) * RegionCfgPtr)| Service to configure a FLC region.  |
+| void | **[Cdd_Flc_EnableRegion](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_enableregion)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegionId](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_regionid) RegionId, boolean EnableWithoutCopy)| Service to enable and start the FLC copy from source to destination.  |
+| boolean | **[Cdd_Flc_IsRegionCopyDone](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_isregioncopydone)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegionId](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_regionid) RegionId)| Service to check if the initiated FLC copy is completed.  |
+| void | **[Cdd_Flc_DisableRegion](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_disableregion)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegionId](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_regionid) RegionId)| Service to disable the FLC region.  |
+| void | **[Cdd_Flc_GetStatus](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_getstatus)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_StatusType](../Classes/struct_cdd___flc___status_type.md) * StatusPtr)| Service to get the status of the FLC.  |
+| void | **[Cdd_Flc_ClearAllStatus](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_clearallstatus)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId)| Service to clear all status of the FLC.  |
+
+
+
+### function Cdd_Flc_GetVersionInfo
+
+```
+void Cdd_Flc_GetVersionInfo(
+    Std_VersionInfoType * VersionInfo
+)
+```
+
+
+**Brief**: 
+Service that returns the version information of the module. 
+
+**Parameters**: 
+
+  
+* **VersionInfo** Pointer to where to store the version information of this module 
+
+
+### function Cdd_Flc_ConfigureRegion
+
+```
+Std_ReturnType Cdd_Flc_ConfigureRegion(
+    Cdd_Flc_HwUnitType HwUnitId,
+    Cdd_Flc_RegionId RegionId,
+    const Cdd_Flc_RegionConfigType * RegionCfgPtr
+)
+```
+
+
+**Brief**: 
+Service to configure a FLC region. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+  
+* **RegionId** Region ID to configure. This param should be less than CDD_FLC_REGION_ID_MAX 
+  
+* **RegionCfgPtr** Pointer to the region configuration parameter. This should not be NULL.
+
+
+**Return**: If the configuration is successful, returns E_OK else returns E_NOT_OK 
+
+**Note**: If the requested region is already in enabled state, the API returns E_NOT_OK. It is expected that the caller first calls Cdd_Flc_DisableRegion() API before calling this API in this scenario.
+
+### function Cdd_Flc_EnableRegion
+
+```
+void Cdd_Flc_EnableRegion(
+    Cdd_Flc_HwUnitType HwUnitId,
+    Cdd_Flc_RegionId RegionId,
+    boolean EnableWithoutCopy
+)
+```
+
+
+**Brief**: 
+Service to enable and start the FLC copy from source to destination. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+  
+* **RegionId** Region ID to start. This param should be less than CDD_FLC_REGION_ID_MAX 
+  
+* **EnableWithoutCopy** Set this to TRUE when the region has to be enabled without a copy 
+
+
+### function Cdd_Flc_IsRegionCopyDone
+
+```
+boolean Cdd_Flc_IsRegionCopyDone(
+    Cdd_Flc_HwUnitType HwUnitId,
+    Cdd_Flc_RegionId RegionId
+)
+```
+
+
+**Brief**: 
+Service to check if the initiated FLC copy is completed. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+  
+* **RegionId** Region ID to check. This param should be less than CDD_FLC_REGION_ID_MAX
+
+
+**Return**: TRUE if copy is completed. FALSE otherwise. 
+
+### function Cdd_Flc_DisableRegion
+
+```
+void Cdd_Flc_DisableRegion(
+    Cdd_Flc_HwUnitType HwUnitId,
+    Cdd_Flc_RegionId RegionId
+)
+```
+
+
+**Brief**: 
+Service to disable the FLC region. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+  
+* **RegionId** Region ID to start. This param should be less than CDD_FLC_REGION_ID_MAX 
+
+
+### function Cdd_Flc_GetStatus
+
+```
+void Cdd_Flc_GetStatus(
+    Cdd_Flc_HwUnitType HwUnitId,
+    Cdd_Flc_StatusType * StatusPtr
+)
+```
+
+
+**Brief**: 
+Service to get the status of the FLC. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+  
+* **StatusPtr** Pointer to where to store the FLC status 
+
+
+### function Cdd_Flc_ClearAllStatus
+
+```
+void Cdd_Flc_ClearAllStatus(
+    Cdd_Flc_HwUnitType HwUnitId
+)
+```
+
+
+**Brief**: 
+Service to clear all status of the FLC. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+
+
+
+
+
+

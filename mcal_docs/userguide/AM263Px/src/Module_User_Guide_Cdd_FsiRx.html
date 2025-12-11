@@ -1,0 +1,2364 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.6. CDD_FSIRX Module &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.7. CDD_FSITX Module" href="Module_User_Guide_Cdd_FsiTx.html" />
+    <link rel="prev" title="4.5. CDD DMA Module" href="Module_User_Guide_Cdd_dma.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.01.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ModuleUserGuide_list.html">4. Module User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Adc.html">4.1. ADC Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Can.html">4.2. CAN Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Cmpss.html">4.3. CDD CMPSS Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Flc.html">4.4. CDD FLC Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_dma.html">4.5. CDD DMA Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.6. CDD_FSIRX Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#acronyms-and-definitions">4.6.1. Acronyms and Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">4.6.2. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functional-overview">4.6.3. Functional Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#functional-overview-of-cdd-fsi-receiver">4.6.3.1. Functional Overview of CDD FSI Receiver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdd-fsi-rx-driver-architecture">4.6.3.2. CDD FSI RX Driver Architecture</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#initialization">4.6.3.3. Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#states">4.6.3.4. States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assumptions">4.6.3.5. Assumptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">4.6.3.6. Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-features">4.6.4. Hardware Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ip-supported-features">4.6.4.1. IP Supported Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdd-fsi-rx-supported-features">4.6.4.2. CDD FSI RX Supported Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdd-fsi-rx-not-supported-features">4.6.4.3. CDD FSI RX Not Supported Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configurable-hardware-units">4.6.4.4. Configurable Hardware Units</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configurable-development-error">4.6.4.5. Configurable Development Error</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configurable-frame-length">4.6.4.6. Configurable Frame Length</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configurable-timeouts">4.6.4.7. Configurable Timeouts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configurable-reception-modes">4.6.4.8. Configurable Reception Modes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#source-files">4.6.5. Source files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-requirements">4.6.6. Module requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#memory-mapping">4.6.6.1. Memory Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scheduling">4.6.6.2. Scheduling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-handling">4.6.6.3. Error handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-codes">4.6.6.4. Error codes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#used-resources">4.6.7. Used resources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#interrupt-handling">4.6.7.1. Interrupt Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-description">4.6.8. Integration description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#the-cdd-fsi-rx-driver-dependent-modules">4.6.8.1. The CDD FSI RX Driver dependent modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.6.8.2. Multi-core support</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">4.6.9. Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxconfigset">4.6.9.1. CddFsiRxConfigSet</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxgeneral">4.6.9.2. CddFsiRxGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxdemeventparameterrefs">4.6.9.3. CddFsiRxDemEventParameterRefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#symbolic-names-deviations">4.6.9.4. Symbolic Names deviations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">4.6.10. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">4.6.10.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.6.10.2. Setup required to run example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.6.10.3. How to run examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-log">4.6.10.4. Sample Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.6.10.5. File Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">4.6.11. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_FsiTx.html">4.7. CDD_FSITX Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_I2c.html">4.8. CDD_I2C Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Ipc.html">4.9. CDD_IPC Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Pwm.html">4.10. CDD_PWM Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_uart.html">4.11. CDD UART Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Dio.html">4.12. DIO Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Eth.html">4.13. ETH Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_EthTrcv.html">4.14. ETHTRCV Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Fls.html">4.15. FLS Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Gpt.html">4.16. GPT Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Icu.html">4.17. ICU Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Lin.html">4.18. LIN Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Mcu.html">4.19. MCU Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Port.html">4.20. PORT Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Pwm.html">4.21. PWM Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Spi.html">4.22. SPI Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Wdg.html">4.23. WDG Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">5. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="ModuleUserGuide_list.html"><span class="section-number">4. </span>Module User Guide</a> &raquo;</li>
+      <li><span class="section-number">4.6. </span>CDD_FSIRX Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cdd-fsirx-module">
+<h1><span class="section-number">4.6. </span>CDD_FSIRX Module<a class="headerlink" href="#cdd-fsirx-module" title="Link to this heading"></a></h1>
+<section id="acronyms-and-definitions">
+<h2><span class="section-number">4.6.1. </span>Acronyms and Definitions<a class="headerlink" href="#acronyms-and-definitions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Abbreviation/Term</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AUTOSAR</p></td>
+<td><p>Automotive Open System Architecture</p></td>
+</tr>
+<tr class="row-odd"><td><p>BSW</p></td>
+<td><p>Basic Software</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD</p></td>
+<td><p>Complex Device Driver</p></td>
+</tr>
+<tr class="row-odd"><td><p>FSI</p></td>
+<td><p>Fast Serial Interface</p></td>
+</tr>
+<tr class="row-even"><td><p>DDR</p></td>
+<td><p>Double Data Rate</p></td>
+</tr>
+<tr class="row-odd"><td><p>SDR</p></td>
+<td><p>Single Data Rate</p></td>
+</tr>
+<tr class="row-even"><td><p>SDR</p></td>
+<td><p>Single Data Rate</p></td>
+</tr>
+<tr class="row-odd"><td><p>CRC</p></td>
+<td><p>Cyclic Redundancy Check</p></td>
+</tr>
+<tr class="row-even"><td><p>SW</p></td>
+<td><p>Software</p></td>
+</tr>
+<tr class="row-odd"><td><p>HW</p></td>
+<td><p>Hardware</p></td>
+</tr>
+<tr class="row-even"><td><p>DEM</p></td>
+<td><p>Diagnostic Event Manager</p></td>
+</tr>
+<tr class="row-odd"><td><p>DMA</p></td>
+<td><p>Direct Memory Access</p></td>
+</tr>
+<tr class="row-even"><td><p>MCAL</p></td>
+<td><p>Microcontroller Abstraction Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p>DET</p></td>
+<td><p>Default Error Tracer</p></td>
+</tr>
+<tr class="row-even"><td><p>PWM</p></td>
+<td><p>Pulse Width Modulation</p></td>
+</tr>
+<tr class="row-odd"><td><p>PLL</p></td>
+<td><p>Phase Locked Loop</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU</p></td>
+<td><p>Micro Controller Unit</p></td>
+</tr>
+<tr class="row-odd"><td><p>OS</p></td>
+<td><p>Operating System</p></td>
+</tr>
+<tr class="row-even"><td><p>API</p></td>
+<td><p>Application Programming Interface</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="introduction">
+<h2><span class="section-number">4.6.2. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This document describes CDD <strong>FSI RX Driver</strong> functionality, its application interfaces and configuration details as per AUTOSAR version <strong>4.3.1</strong>.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Supported AUTOSAR Release</strong></p></td>
+<td><p>4.3.1</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Supported Configuration Variants</strong></p></td>
+<td><p>Pre-Compile &amp; Post Build</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Vendor ID</strong></p></td>
+<td><p>CDD_FSI_RX_VENDOR_ID (44)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Module ID</strong></p></td>
+<td><p>CDD_FSI_RX_MODULE_ID (255)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Supported Platform</strong></p></td>
+<td><p>AM263Px</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functional-overview">
+<h2><span class="section-number">4.6.3. </span>Functional Overview<a class="headerlink" href="#functional-overview" title="Link to this heading"></a></h2>
+<p>The Fast Serial Interface (FSI) module is a serial communication peripheral capable of reliable high-speed communication across isolation devices. The FSI is designed specifically to ensure reliable high-speed communication for system scenarios that involve communication across isolation barriers without adding components. The FSI consists of independent transmitter
+(CDD FSI TX) and receiver (CDD FSI RX) cores. The CDD FSITX and CDD FSIRX cores are configured and operated independently. Both CDD FSI TX and FsiRx are capable of configurable frame length and can be operated via DMA. The following figure shows where the CDD Module is located in the AUTOSAR architecture. Since CDD FSI Transmitter and Receiver are CDD Module it occupies the highlighted region in the AUTOSAR architecture.</p>
+<figure class="align-center" id="id1">
+<img alt="CDD FSI (CDD Module) in AUTOSAR architecture" src="../_images/fsi_image2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.26 </span><span class="caption-text">CDD FSI (CDD Module) in AUTOSAR architecture</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="functional-overview-of-cdd-fsi-receiver">
+<h3><span class="section-number">4.6.3.1. </span>Functional Overview of CDD FSI Receiver<a class="headerlink" href="#functional-overview-of-cdd-fsi-receiver" title="Link to this heading"></a></h3>
+<p>The receiver module interfaces to the CDD FSI Receiver clock (RXCLK), and data lines (RXD0 and RXD1). The receiver core handles the data framing, CRC computation,and frame-related error checking. The receiver bit clock and state machine are run by the RXCLK input,
+which is asynchronous to the device system clock. The receiver control registers allow the CPU to program, control, and monitor the operation of the FSI receiver.The receive data buffer is accessible by the CPU and the DMA.</p>
+</section>
+<section id="cdd-fsi-rx-driver-architecture">
+<h3><span class="section-number">4.6.3.2. </span>CDD FSI RX Driver Architecture<a class="headerlink" href="#cdd-fsi-rx-driver-architecture" title="Link to this heading"></a></h3>
+<figure class="align-center" id="id2">
+<img alt="CDD FSI RX Hardware Overview" src="../_images/fsirx_image2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.27 </span><span class="caption-text">CDD FSI RX Hardware Overview</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="initialization">
+<h3><span class="section-number">4.6.3.3. </span>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h3>
+<p>Cdd_FsiRx_Init() has to be called to initialize the Fsi Receiver driver before initiating a reception.This will also set  the CDD FSI Receiver Hardware Unit to CDD_FSI_RX_IDLE STATE.</p>
+</section>
+<section id="states">
+<h3><span class="section-number">4.6.3.4. </span>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
+<p>There are 2 states in which each CDD FSI Receiver HW Unit can be:</p>
+<ol class="arabic simple">
+<li><p><em>CDD_FSI_RX_UNINIT</em>: This is the state before the CDD FSI Receiver is initialized.</p></li>
+<li><p><em>CDD_FSI_RX_IDLE</em>: This is the state before starting a reception. The receiver becomes idle only after it gets initialized.</p></li>
+</ol>
+</section>
+<section id="assumptions">
+<h3><span class="section-number">4.6.3.5. </span>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+<section id="limitations">
+<h3><span class="section-number">4.6.3.6. </span>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>RXCLK  should be connected to TXCLK and it should never be configured to be faster than SYSCLK/2.</strong></p></li>
+<li><p><strong>Data Frame Configuration of Receiver Module should be in sync with the transmitter. (frame type, data width ).</strong></p></li>
+<li><p><strong>In FSI, as soon as the DMA  trigger is started, whatever data is available in the internal FSI buffer is transferred immediately before the DMA actually transfers from external buffer to FSI internal buffer. As a workaround, we are manually copying onto internal buffer before FSI DMA event is enabled</strong></p></li>
+</ol>
+<section id="design-overview-of-cdd-fsi-receiver-link-to-the-architecture-document-and-design-document">
+<h4><span class="section-number">4.6.3.6.1. </span>Design overview of CDD FSI Receiver (Link to the Architecture document and Design Document)<a class="headerlink" href="#design-overview-of-cdd-fsi-receiver-link-to-the-architecture-document-and-design-document" title="Link to this heading"></a></h4>
+<p><strong>Will be available in future release.</strong></p>
+</section>
+</section>
+</section>
+<section id="hardware-features">
+<h2><span class="section-number">4.6.4. </span>Hardware Features<a class="headerlink" href="#hardware-features" title="Link to this heading"></a></h2>
+<p><strong>CDD FSI Rx features:</strong></p>
+<section id="ip-supported-features">
+<h3><span class="section-number">4.6.4.1. </span>IP Supported Features<a class="headerlink" href="#ip-supported-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Software-configurable frame lengths</p></li>
+<li><p>Ping frame watchdog</p></li>
+<li><p>Data Frame watchdog</p></li>
+<li><p>Data buffer underrun and overrun detection</p></li>
+<li><p>DMA support</p></li>
+<li><p>Double Data Rate(DDR)</p></li>
+</ul>
+</section>
+<section id="cdd-fsi-rx-supported-features">
+<h3><span class="section-number">4.6.4.2. </span>CDD FSI RX Supported Features<a class="headerlink" href="#cdd-fsi-rx-supported-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Software-configurable frame lengths</p></li>
+<li><p>Ping frame watchdog</p></li>
+<li><p>Data Frame watchdog</p></li>
+<li><p>Data buffer underrun and overrun detection</p></li>
+<li><p>DMA support</p></li>
+</ul>
+</section>
+<section id="cdd-fsi-rx-not-supported-features">
+<h3><span class="section-number">4.6.4.3. </span>CDD FSI RX Not Supported Features<a class="headerlink" href="#cdd-fsi-rx-not-supported-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Double Data Rate(DDR)</p></li>
+</ul>
+</section>
+<section id="configurable-hardware-units">
+<h3><span class="section-number">4.6.4.4. </span>Configurable Hardware Units<a class="headerlink" href="#configurable-hardware-units" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>User configurable parameter to define how many Rx Hardware Units (Instances) to use out of a maximum of 4</p></li>
+<li><p>User configurable parameter to specify which Hardware Unit to use</p></li>
+<li><p>User configurable frame size which defines number of words to be received into Rx internal Buffer.</p></li>
+</ol>
+</section>
+<section id="configurable-development-error">
+<h3><span class="section-number">4.6.4.5. </span>Configurable Development Error<a class="headerlink" href="#configurable-development-error" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>User configurable error check to report development errors.</p></li>
+</ol>
+</section>
+<section id="configurable-frame-length">
+<h3><span class="section-number">4.6.4.6. </span>Configurable Frame Length<a class="headerlink" href="#configurable-frame-length" title="Link to this heading"></a></h3>
+<p>The number of words to be sent in each frame is user configurable. The argument <strong>RxDataLength</strong> passed into the API <strong>Cdd_FsiRx_setUpBuffer</strong>
+will setup the internal Rx Buffer for data reception.
+The <strong>RxDataLength</strong> can be any value from the enum <strong>Cdd_FsiRx_DataLengthType</strong> which has a range of 1-16.</p>
+<ol class="arabic simple">
+<li><p>CDD_FSI_RX_DATA_1_WORD_LENGTH  - Rx Reception buffer will be configured to receive 1 WORD.</p></li>
+<li><p>CDD_FSI_RX_DATA_2_WORD_LENGTH  - Rx Reception buffer will be configured to receive 2 WORDS .</p></li>
+<li><p>CDD_FSI_RX_DATA_3_WORD_LENGTH  - Rx Reception buffer will be configured to receive 3 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_4_WORD_LENGTH  - Rx Reception buffer will be configured to receive 4 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_5_WORD_LENGTH  - Rx Reception buffer will be configured to receive 5 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_6_WORD_LENGTH  - Rx Reception buffer will be configured to receive 6 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_7_WORD_LENGTH  - Rx Reception buffer will be configured to receive 7 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_8_WORD_LENGTH  - Rx Reception buffer will be configured to receive 8 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_9_WORD_LENGTH  - Rx Reception buffer will be configured to receive 9 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_10_WORD_LENGTH - Rx Reception buffer will be configured to receive 10 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_11_WORD_LENGTH  -Rx Reception buffer will be configured to receive 11 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_12_WORD_LENGTH - Rx Reception buffer will be configured to receive 12 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_13_WORD_LENGTH - Rx Reception buffer will be configured to receive 13 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_14_WORD_LENGTH - Rx Reception buffer will be configured to receive 14 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_15_WORD_LENGTH - Rx Reception buffer will be configured to receive 15 WORDS.</p></li>
+<li><p>CDD_FSI_RX_DATA_16_WORD_LENGTH - Rx Reception buffer will be configured to receive 16 WORDS.</p></li>
+</ol>
+</section>
+<section id="configurable-timeouts">
+<h3><span class="section-number">4.6.4.7. </span>Configurable Timeouts<a class="headerlink" href="#configurable-timeouts" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>User Configurable Ping Watch Dog Timeout value(If the Rx instance does not receive a ping frame within the configured timeout period of Ping WatchDog, then the Watchdog will Timeout and sent notification to application. This feature can be used to check the physical connection between Tx and Rx).</p></li>
+<li><p>User Configurable Frame Watch Dog Timeout value(If the Rx instance does not receive a data frame within the configured timeout period of Frame WatchDog, then the Watchdog will Timeout and sent notification to application. This feature can be used to check the physical connection between Tx and Rx).</p></li>
+</ol>
+</section>
+<section id="configurable-reception-modes">
+<h3><span class="section-number">4.6.4.8. </span>Configurable Reception Modes<a class="headerlink" href="#configurable-reception-modes" title="Link to this heading"></a></h3>
+<p>The FSI Receiver can Receive data in three different Modes.</p>
+<ol class="arabic simple">
+<li><p>Interrupt Mode.</p></li>
+<li><p>Polling Mode.</p></li>
+<li><p>DMA Mode.</p></li>
+</ol>
+<section id="interrupt-mode">
+<h4><span class="section-number">4.6.4.8.1. </span>Interrupt Mode<a class="headerlink" href="#interrupt-mode" title="Link to this heading"></a></h4>
+<p>Each FSI module contains multiple interrupt sources which can be assigned to two different interrupt vectors: INT1 and INT2. Each interrupt source has an associated status flag. In Interrupt Mode, the parameter <strong>CddFsiRxMainApi</strong> and  should be OFF and <strong>CddFsiRxDMAEnable</strong>
+in Cdd_FsiRx_Cfg.h will be OFF. The receiver can generate the following interrupts:</p>
+<ol class="arabic simple">
+<li><p>Ping Watchdog Timeout (PING_WD_TO) : This event indicates that the ping watchdog timer has timed out. The receiver has not received a valid frame within the time period specified in the RX_PING_WD_REF register. To enable this Interrupt Event,  the parameter <strong>CddFsiRxPingWdgTimeoutInterruptEvent</strong> in Cdd_FsiRx_Cfg.h should be ON.</p></li>
+<li><p>Frame Watchdog Timeout (FRAME_WD_TO) : This event indicates that the frame watchdog timer has timed out. The conditions of this timeout are set using the RX_FRAME_WD_CTRL register.    As soon as the start of frame phase is detected, the frame watchdog counter will start counting from 0. The end of frame phase must complete by the time the watchdog counter    reaches the reference value. If this does not happen, the watchdog will time out and this event will be generated. If this event occurs, the receiver must undergo a soft reset and subsequent resynchronization in order to guarantee proper operation. The Parameter <strong>CddFsiRxFrameWdgTimeoutInterruptEvent</strong> in Cdd_FsiRx_Cfg.h</p></li>
+<li><p>Ping Frame Received (PING_FRAME)  : This event indicates that a ping frame has been received. The Parameter <strong>CddFsiRxPingFrameReceivedInterruptEvent</strong> in Cdd_FsiRx_Cfg.h should be ON.</p></li>
+<li><p>Data Frame Received (DATA_FRAME)  : This event indicates that a data frame has been received. The macro <strong>CddFsiRxDataFrameReceivedInterruptEvent</strong> in Cdd_FsiRx_Cfg.h should be ON.</p></li>
+</ol>
+</section>
+<section id="polling-mode">
+<h4><span class="section-number">4.6.4.8.2. </span>Polling Mode<a class="headerlink" href="#polling-mode" title="Link to this heading"></a></h4>
+<p>In Polling Mode the FSI Receiver  is continuously polled using <strong>Cdd_FsiRx_MainFunction</strong> API to check whether data has received or not. In Polling Mode the states of different macros inside Cdd_FsiTx_Cfg.h are listed below:</p>
+<ol class="arabic simple">
+<li><p>CDD_FSI_RX_MAIN_FUNCTION_API           -STD ON.</p></li>
+<li><p>CDD_FSI_RX_DMA_ENABLE                  -STD OFF</p></li>
+<li><p>CDD_FSI_RX_PING_WDG_TIMEOUT_INTERRUPT  -STD OFF</p></li>
+<li><p>CDD_FSI_RX_FRAME_WDG_TIMEOUT_INTERRUPT -STD OFF</p></li>
+<li><p>CDD_FSI_RX_CRC_ERROR_INTERRUPT         -STD OFF</p></li>
+<li><p>CDD_FSI_RX_BUFFER_OVERRUN_INTERRUPT    -STD OFF</p></li>
+<li><p>CDD_FSI_RX_BUFFER_UNDERRUN_INTERRUPT   -STD OFF</p></li>
+<li><p>CDD_FSI_RX_PING_RECEIVED_INTERRUPT     -STD OFF</p></li>
+<li><p>CDD_FSI_RX_DATA_RECEIVED_INTERRUPT    -STD OFF</p></li>
+<li><p><strong>The Parameter related with each Interrupt event should be OFF if Main Function API Parameter is ON.</strong></p></li>
+</ol>
+</section>
+<section id="dma-mode">
+<h4><span class="section-number">4.6.4.8.3. </span>DMA Mode<a class="headerlink" href="#dma-mode" title="Link to this heading"></a></h4>
+<p>The FSI Receiver can receive data which is continuously copied to the destination buffer with the DMA. In order to transmit continuous data with the DMA, some configurations need to be made on the transmitter:</p>
+<ol class="arabic simple">
+<li><p>Configure the DMA channel and handle for the Rx Instance in CDD_DMA_TRANSFER_MODE_CHAINING</p></li>
+<li><p>Whenever data receives at the Rx internal buffer , the Rx interrupt will get hit and it will trigger internal function to copy data from Internal buffer to destination buffer.</p></li>
+</ol>
+<p>In DMA Mode the states of different macros inside Cdd_FsiRx_Cfg.h are listed below:</p>
+<ol class="arabic simple">
+<li><p>CDD_FSI_RX_MAIN_FUNCTION_API           -STD OFF</p></li>
+<li><p>CDD_FSI_RX_DMA_ENABLE                  -STD ON</p></li>
+<li><p>CDD_FSI_RX_PING_WDG_TIMEOUT_INTERRUPT  -STD OFF</p></li>
+<li><p>CDD_FSI_RX_FRAME_WDG_TIMEOUT_INTERRUPT -STD OFF</p></li>
+<li><p>CDD_FSI_RX_CRC_ERROR_INTERRUPT         -STD OFF</p></li>
+<li><p>CDD_FSI_RX_BUFFER_OVERRUN_INTERRUPT    -STD OFF</p></li>
+<li><p>CDD_FSI_RX_BUFFER_UNDERRUN_INTERRUPT   -STD OFF</p></li>
+<li><p>CDD_FSI_RX_PING_RECEIVED_INTERRUPT     -STD OFF</p></li>
+<li><p>CDD_FSI_RX_DATA_RECEIVED_INTERRUPT    -STD OFF</p></li>
+</ol>
+</section>
+</section>
+</section>
+<section id="source-files">
+<h2><span class="section-number">4.6.5. </span>Source files<a class="headerlink" href="#source-files" title="Link to this heading"></a></h2>
+<p>Description of static files is provided below:</p>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┣ 📂mcal<br />
+┃ ┣ 📂<strong>FsiRx</strong><br />
+┃ ┃ ┣ 📂<strong>include</strong><br />
+┃ ┃ ┃ ┗ 📜<strong>Cdd_FsiRx.h</strong> : <em>Contains the API’s of the CDD FSI RX driver to be used by upper layers</em><br />
+┃ ┃ ┣ 📂<strong>src</strong><br />
+┃ ┃ ┃ ┗ 📜<strong>Cdd_FsiRx.c</strong> : <em>Contains the implementation of the API’s for CDD FSI RX driver</em><br />
+┃ ┃ ┣ 📂<strong>V0</strong><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Irq.h</strong> : <em>Contains ISR function declaration</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Irq.c</strong> : <em>Contains ISR function definitions</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Platform.h</strong> : <em>Contains device specific function definition, data types and definitions</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Platform.c</strong> : <em>Contains device specific function definition, data types and definitions</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Priv.h</strong> : <em>Contains Internal functions declaration of CDD FSI RX driver</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Priv.c</strong> : <em>Contains Internal functions definition of CDD FSI RX driver</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Reg.h</strong> : <em>Contains CDD FSI RX Register definition</em><br />
+┃ ┃ ┃ ┗ 📜<strong>Cdd_FsiRx_Types.h</strong> : <em>Contains the cdd  data types and internal macro definitions .</em><br />
+┃ ┃ ┗ 📜Makefile<br />
+┣ 📂mcal_config<br />
+┣ 📂mcal_docs<br />
+┗ 📜README.txt</p>
+<p>Description of generated files is provided below:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Plugin Files</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CddFsiRx_Cfg.h</p></td>
+<td><p>Contains the Precompile switches, Symbolic names of hardware units and channels, Configured maximum number of hardware units</p></td>
+</tr>
+<tr class="row-odd"><td><p>CddFsiRx_PBcfg.c</p></td>
+<td><p>Contains all channels Post-Build Configuration parameters</p></td>
+</tr>
+<tr class="row-even"><td><p>CddFsiRx_Cfg.c</p></td>
+<td><p>Contains all channels Pre-Compile Configuration parameters</p></td>
+</tr>
+</tbody>
+</table>
+<p>The below diagram shows the files structure for the FSI Rx driver.</p>
+<figure class="align-center" id="id3">
+<img alt="CDD FSI RX header file include structure_Cdd_Fsi_Am263P" src="../_images/fsirx_image4.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.28 </span><span class="caption-text">CDD FSI RX header file include structure_Cdd_Fsi_Am263P</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="module-requirements">
+<h2><span class="section-number">4.6.6. </span>Module requirements<a class="headerlink" href="#module-requirements" title="Link to this heading"></a></h2>
+<p><strong>Will be updated in future release:</strong></p>
+<section id="memory-mapping">
+<h3><span class="section-number">4.6.6.1. </span>Memory Mapping<a class="headerlink" href="#memory-mapping" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Memory Mapping Sections</p></th>
+<th class="head"><p>CDD_FSIRX_CODE</p></th>
+<th class="head"><p>CDD_FSIRX_CODE_ISR</p></th>
+<th class="head"><p>CDD_FSIRX_VAR_NO_INIT</p></th>
+<th class="head"><p>CDD_FSIRX_VAR</p></th>
+<th class="head"><p>CDD_FSIRX_CONST</p></th>
+<th class="head"><p>CDD_FSIRX_PBCFG</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSIRX_START_SEC_VAR_INIT_UNSPECIFIED(.bss)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSIRX_STOP_SEC_VAR_INIT_UNSPECIFIED</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSIRX_START_SEC_CONFIG_DATA (.const)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSIRX_STOP_SEC_CONFIG_DATA</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSIRX_START_SEC_CODE(.text)</p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSIRX_STOP_SEC_CODE</p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSIRX_START_SEC_VAR_INIT_32(.bss)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSIRX_STOP_SEC_VAR_INIT_32</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSIRX_START_SEC_VAR_NO_INIT_UNSPECIFIED(.data)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSIRX_STOP_SEC_VAR_NO_INIT_UNSPECIFIED</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSIRX_START_SEC_ISR_CODE</p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSIRX_STOP_SEC_ISR_CODE</p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scheduling">
+<h3><span class="section-number">4.6.6.2. </span>Scheduling<a class="headerlink" href="#scheduling" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Schedule Function API</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Cdd_FsiRx_MainFunction</p></td>
+<td><p>The MainFunction notify the application in Polling Mode</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-handling">
+<h3><span class="section-number">4.6.6.3. </span>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h3>
+<section id="development-error-reporting">
+<h4><span class="section-number">4.6.6.3.1. </span>Development Error Reporting<a class="headerlink" href="#development-error-reporting" title="Link to this heading"></a></h4>
+<p>The module CDD FSI RX depends on the DET (by default) in order to report development errors.
+Detection and reporting of development errors can be enabled or disabled by the parameter <strong>CddFsiRxDevErrorDetect</strong>.The macro <strong>CDD_FSI_RX_DEV_ERROR_DETECT = STD_ON</strong> generated in file <strong>CddFsiRx_Cfg.h</strong>). The DET error is reported with <strong>Module ID</strong>.
+The reported service IDs identify the services which are described earlier.
+The errors reported to DET module are described in the following table:</p>
+</section>
+</section>
+<section id="error-codes">
+<h3><span class="section-number">4.6.6.4. </span>Error codes<a class="headerlink" href="#error-codes" title="Link to this heading"></a></h3>
+<section id="development-errors">
+<h4><span class="section-number">4.6.6.4.1. </span>Development Errors<a class="headerlink" href="#development-errors" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type of Error</p></th>
+<th class="head"><p>Related Error code</p></th>
+<th class="head"><p>Value (Hex)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Error code indicating the CDD FSI RX is uninitialized</p></td>
+<td><p>CDD_FSI_RX_E_UNINIT</p></td>
+<td><p>0x01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Error code indicating an invalid event</p></td>
+<td><p>CDD_FSI_RX_E_INVALID_EVENT</p></td>
+<td><p>0x02</p></td>
+</tr>
+<tr class="row-even"><td><p>Error code indicating invalid parameter pointer</p></td>
+<td><p>CDD_FSI_RX_E_PARAM_POINTER</p></td>
+<td><p>0x03</p></td>
+</tr>
+<tr class="row-odd"><td><p>API service called with invalid ramsection parameter</p></td>
+<td><p>CDD_FSI_RX_E_ALREADY_INITIALIZED</p></td>
+<td><p>0x04</p></td>
+</tr>
+<tr class="row-even"><td><p>Error code indicating Service called with invalid length</p></td>
+<td><p>CDD_FSI_RX_E_PARAM_LENGTH</p></td>
+<td><p>0x05</p></td>
+</tr>
+<tr class="row-odd"><td><p>Error code indicating invalid Number of FsiRx HwUnit</p></td>
+<td><p>CDD_FSI_RX_E_INVALID_HW_UNIT</p></td>
+<td><p>0x06</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="dem-errors">
+<h4><span class="section-number">4.6.6.4.2. </span>DEM Errors<a class="headerlink" href="#dem-errors" title="Link to this heading"></a></h4>
+<p>The errors reported to DEM are described in the following table:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Error Code</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Assigned by DEM</p></td>
+<td><p>CDD_FSI_RX_E_BUFFER_UNDERRUN</p></td>
+<td><p>This error is raised when the Receive  Buffer undergoes to an underrun</p></td>
+</tr>
+<tr class="row-odd"><td><p>Assigned by DEM</p></td>
+<td><p>CDD_FSI_RX_E_BUFFER_OVERRUN</p></td>
+<td><p>This error is raised when the Receive  Buffer undergoes to an overrun</p></td>
+</tr>
+<tr class="row-even"><td><p>Assigned by DEM</p></td>
+<td><p>CDD_FSI_RX_E_CRC_ERROR</p></td>
+<td><p>This error is raised when the Receive Buffer receives a wrong CRC</p></td>
+</tr>
+<tr class="row-odd"><td><p>Assigned by DEM</p></td>
+<td><p>CDD_FSI_RX_E_TYPE_ERR</p></td>
+<td><p>This error is raised when the Receive Buffer receives an invalid frame type</p></td>
+</tr>
+<tr class="row-even"><td><p>Assigned by DEM</p></td>
+<td><p>CDD_FSI_RX_E_FRAME_OVERRUN</p></td>
+<td><p>This error is raised when the Receive Buffer receives a new frame has been received while the FRAME_DONE flag was still set</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="used-resources">
+<h2><span class="section-number">4.6.7. </span>Used resources<a class="headerlink" href="#used-resources" title="Link to this heading"></a></h2>
+<section id="interrupt-handling">
+<h3><span class="section-number">4.6.7.1. </span>Interrupt Handling<a class="headerlink" href="#interrupt-handling" title="Link to this heading"></a></h3>
+<p>For interrupt notification, ISR’s are provided in CDD FSI RX driver. There are two ISRs for each CDD FSI RX hardware units. Depending on hardware unit configured, it will call the notify function. The interrupt service routines shall be mapped to the interrupt sources of the respective cross bar interrupt. The supported ISRs are part of the CddFsiRx_Irq.h file. Following are the ISRs for each CDD FSI RX hardware units:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hardware Unit</p></th>
+<th class="head"><p>ISR</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_RX_HW_UNIT_0</p></td>
+<td><p>CddFsiRx_FSIINT1_IrqUnit0()<br>CddFsiRx_FSIINT2_IrqUnit0()</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_RX_HW_UNIT_1</p></td>
+<td><p>CddFsiRx_FSIINT1_IrqUnit1()<br>CddFsiRx_FSIINT2_IrqUnit1()</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_RX_HW_UNIT_2</p></td>
+<td><p>CddFsiRx_FSIINT1_IrqUnit2()<br>CddFsiRx_FSIINT2_IrqUnit2()</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_RX_HW_UNIT_3</p></td>
+<td><p>CddFsiRx_FSIINT1_IrqUnit3()<br>CddFsiRx_FSIINT2_IrqUnit3()</p></td>
+</tr>
+<tr class="row-even"><td><p>DMA Mode ISR</p></td>
+<td><p>CddFsiRx_DMA_IrqChannel()</p></td>
+</tr>
+</tbody>
+</table>
+<p>1.<strong>CddFsiRxPingWdgTimeoutInterruptEvent Parameter enables/disables the Ping Watch Dog Timeout interrupt event.</strong></p>
+<ul class="simple">
+<li><p>This event indicates that the ping watchdog timer has timed out.</p></li>
+<li><p>The receiver has not received a valid frame within the time period specified in the RX_PING_WD_REF register.</p></li>
+</ul>
+<p>2.<strong>CddFsiRxFrameWdgTimeoutInterruptEvent Parameter enables/disables the Frame Watch Dog Timeout interrupt event .</strong></p>
+<ul class="simple">
+<li><p>This event indicates that the frame watchdog timer has timed out.</p></li>
+<li><p>If this event occurs, the receiver must undergo a soft reset and subsequent resynchronization in order to guarantee proper operation.</p></li>
+</ul>
+<p>3.<strong>CddFsiRxCRCErrorInterruptEvent Parameter enables/disables the CRC Error event .</strong></p>
+<ul class="simple">
+<li><p>This error indicates that a CRC error has occurred.</p></li>
+</ul>
+<p>4.<strong>CddFsiRxUnderRunInterruptEvent Parameter enables/disables the BufferUnderRun interrupt event .</strong></p>
+<ul class="simple">
+<li><p>This event indicates that an underrun condition has occurred in the receive buffer.</p></li>
+<li><p>This condition occurs when software reads the buffer while it is empty.</p></li>
+</ul>
+<p>5.<strong>CddFsiRxBufferOverRunInterruptEvent Parameter enables/disables the BufferOverRun interrupt event .</strong></p>
+<ul class="simple">
+<li><p>This event indicates that an overrun condition has occurred in the receive buffer.</p></li>
+</ul>
+<p>6.<strong>CddFsiRxPingFrameReceivedInterruptEvent Parameter enables/disables the Ping frame received interrupt event .</strong></p>
+<ul class="simple">
+<li><p>This event indicates that a ping frame has been received.</p></li>
+</ul>
+<p>7.<strong>CddFsiRxDataFrameReceivedInterruptEvent Parameter enables/disables the data frame received interrupt event .</strong></p>
+<ul class="simple">
+<li><p>This event indicates that a data frame has been received.</p></li>
+</ul>
+</section>
+</section>
+<section id="integration-description">
+<h2><span class="section-number">4.6.8. </span>Integration description<a class="headerlink" href="#integration-description" title="Link to this heading"></a></h2>
+<section id="the-cdd-fsi-rx-driver-dependent-modules">
+<h3><span class="section-number">4.6.8.1. </span>The CDD FSI RX Driver dependent modules<a class="headerlink" href="#the-cdd-fsi-rx-driver-dependent-modules" title="Link to this heading"></a></h3>
+<section id="mcu">
+<h4><span class="section-number">4.6.8.1.1. </span>MCU<a class="headerlink" href="#mcu" title="Link to this heading"></a></h4>
+<p>The CDD FSI RX  modules expects the MCU module to be powered on. The CDD FSI RX module depends on MCU module for  crossbar interrupt mapping of CDD FSI RX interrupts depending on the Hardware unit being configured.
+Suppose the Hardware Unit 1 is configured for CDD FSI RX module:</p>
+<figure class="align-center" id="id4">
+<img alt="CDD FSI RX Hardware container" src="../_images/fsirx_image6.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.29 </span><span class="caption-text">CDD FSI RX Hardware container</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Similarly, the crossbar interrupts also needs to be mapped in MCU module according to HW unit and interrupts being required. The FSI Rx interrupts needs to be mapped to the corresponding cross bar interrupt required. For each CDD FSI RX instance there will be two interrupt vectors. INT1 and INT2. For each interrupt vector separate Crossbar pins should be selected in mcu configuration.</p>
+<figure class="align-center" id="id5">
+<img alt="FSI Rx Interrupt configuration" src="../_images/fsirx_image3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.30 </span><span class="caption-text">FSI Rx Interrupt configuration</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id6">
+<img alt="CDD FSI RX Interrupt selection" src="../_images/fsirx_image5.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.31 </span><span class="caption-text">CDD FSI RX Interrupt selection</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="dma">
+<h4><span class="section-number">4.6.8.1.2. </span>DMA<a class="headerlink" href="#dma" title="Link to this heading"></a></h4>
+<p>The CDD FSI RX Modules requires DMA module to be configured, when CDD FSI RX reception is configured in DMA
+mode.</p>
+<p>1.CDD FSI RX Module Configuration:</p>
+<ul class="simple">
+<li><p>The CDD FSI RX module parameter <strong>CddFsiRxDMAEnable</strong> should be configured for <strong>TRUE</strong>.</p></li>
+<li><p>The CDD FSI RX HW Unit parameter <strong>CddFsiRxReceptionMethod</strong> should be configured with <strong>CDD_FSI_RX_DMA_MODE</strong>.</p></li>
+<li><p>The DMA supports CDD FSI TX in interrupt mode only.</p></li>
+<li><p>The reception mode in configurator should be <strong>CDD_FSI_RX_DMA_MODE</strong> and interrupt should be enabled inside the code.</p></li>
+</ul>
+<p>2.DMA module Configuration:</p>
+<ul class="simple">
+<li><p>Set up two DMA channels to be triggered by the same CDD FSI receiver and DMA trigger.</p></li>
+<li><p>Configure one channel to take data from the Rx buffer.</p></li>
+<li><p>Configure the other channel to copy the frame tag and user data fields.</p></li>
+<li><p>Configure the DMA handleId and other parameters for each CDD FSI RX instance inside DMA configurator.</p></li>
+<li><p>The DMA Configuration reference has given inside CDD FSI RX configurator to select the handleId for each RX Instance.</p></li>
+</ul>
+<figure class="align-center" id="id7">
+<img alt="CDD FSI RX module DMA channel ID selection" src="../_images/fsirx_image7.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.32 </span><span class="caption-text">CDD FSI RX module DMA channel ID selection</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="det">
+<h4><span class="section-number">4.6.8.1.3. </span>DET<a class="headerlink" href="#det" title="Link to this heading"></a></h4>
+<p>This implementation depends on the DET in order to report development errors. The detection of development errors is configurable (ON / OFF).</p>
+</section>
+<section id="dem">
+<h4><span class="section-number">4.6.8.1.4. </span>DEM<a class="headerlink" href="#dem" title="Link to this heading"></a></h4>
+<p>By  default,  production  code  related  errors  are  reported  to  the  DEM  using  the  service DEM_ReportErrorStatus().</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dem Event is enable only if <code class="docutils literal notranslate"><span class="pre">$(Module_Name)DemEventParameterRefs</span></code> is enabled.</p>
+</div>
+</section>
+<section id="schm">
+<h4><span class="section-number">4.6.8.1.5. </span>SchM<a class="headerlink" href="#schm" title="Link to this heading"></a></h4>
+<p>If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that CDD FSI RX module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.</p>
+<p>The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator.</p>
+<p>For CDD_FSI_RX Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Exclusive Area Functions used</p></th>
+<th class="head"><p>CDD_FSI_RX Function calling Exclusive Area</p></th>
+<th class="head"><p>Need for Exclusive Area</p></th>
+<th class="head"><p>Recommended Exclusive Area Mapping</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FSI_RX_EXCLUSIVE_AREA_0</p></td>
+<td><p>Cdd_FsiRx_MainFunction<br>Cdd_FsiRx_DmaDataReceive<br>Cdd_FsiRx_setUpBuffer</p></td>
+<td><p>To protect against multiple access for shared resources</p></td>
+<td><p><strong>ALL_INTERRUPT_BLOCKING</strong> : All interrupts should be blocked as this API’s can be called in the interrupts</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="callback-functions">
+<h4><span class="section-number">4.6.8.1.6. </span>Callback Functions<a class="headerlink" href="#callback-functions" title="Link to this heading"></a></h4>
+<p>The CDD FSI RX driver does not provide any call back functions.</p>
+<section id="callback-notification">
+<h5><span class="section-number">4.6.8.1.6.1. </span>Callback Notification<a class="headerlink" href="#callback-notification" title="Link to this heading"></a></h5>
+<p><strong>Notifications:</strong>
+<strong>Cdd_FsiRx_BufferNotifyType:</strong>
+This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This is called to notify the HwUnit about the completion of the data reception and availability of Rx Buffer to receive another frame.</p>
+</section>
+</section>
+</section>
+<section id="multi-core-support">
+<h3><span class="section-number">4.6.8.2. </span>Multi-core support<a class="headerlink" href="#multi-core-support" title="Link to this heading"></a></h3>
+<p>Not Supported</p>
+</section>
+</section>
+<section id="configuration">
+<h2><span class="section-number">4.6.9. </span>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<section id="cddfsirxconfigset">
+<h3><span class="section-number">4.6.9.1. </span>CddFsiRxConfigSet<a class="headerlink" href="#cddfsirxconfigset" title="Link to this heading"></a></h3>
+<p>This container contains the configuration parameters and sub containers of the AUTOSAR Cdd Fsi Rx module.</p>
+<section id="cddfsirxresetnotification">
+<h4><span class="section-number">4.6.9.1.1. </span>CddFsiRxResetNotification<a class="headerlink" href="#cddfsirxresetnotification" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxResetNotification</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Callback notification to Application to reset the driver</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
+<td><p>NULL_PTR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxoverrunnotification">
+<h4><span class="section-number">4.6.9.1.2. </span>CddFsiRxOverRunNotification<a class="headerlink" href="#cddfsirxoverrunnotification" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxOverRunNotification</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Callback notification to Application that an over-run occured in Rx buffer</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
+<td><p>NULL_PTR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxunderrunnotification">
+<h4><span class="section-number">4.6.9.1.3. </span>CddFsiRxUnderRunNotification<a class="headerlink" href="#cddfsirxunderrunnotification" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxUnderRunNotification</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Callback notification to Application that an under-run occured in Rx buffer</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
+<td><p>NULL_PTR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxpingframereceivednotification">
+<h4><span class="section-number">4.6.9.1.4. </span>CddFsiRxPingFrameReceivedNotification<a class="headerlink" href="#cddfsirxpingframereceivednotification" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxPingFrameReceivedNotification</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Callback notification to Application that a ping frame has been received</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
+<td><p>NULL_PTR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxdataframereceivednotification">
+<h4><span class="section-number">4.6.9.1.5. </span>CddFsiRxDataFrameReceivedNotification<a class="headerlink" href="#cddfsirxdataframereceivednotification" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDataFrameReceivedNotification</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Callback notification to Application that a data frame has been received</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
+<td><p>NULL_PTR</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxhwunit">
+<h4><span class="section-number">4.6.9.1.6. </span>CddFsiRxHwUnit<a class="headerlink" href="#cddfsirxhwunit" title="Link to this heading"></a></h4>
+<p>This container contains the Driver configuration (parameters) depending on which FSI Rx Hw unit is get configured</p>
+<section id="cddfsirxhwunitid">
+<h5><span class="section-number">4.6.9.1.6.1. </span>CddFsiRxHwUnitId<a class="headerlink" href="#cddfsirxhwunitid" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxHwUnitId</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Description: Numeric ID of the Rx HW Unit. For the ping treceived frame interrupt the rx hw baseadress is needed.                                         for that listing out the id as well.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>CDD_FSI_RX_HWUNIT_0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>CDD_FSI_RX_HWUNIT_0<br>CDD_FSI_RX_HWUNIT_1<br>CDD_FSI_RX_HWUNIT_2<br>CDD_FSI_RX_HWUNIT_3</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxpingwdgtimertimeout">
+<h5><span class="section-number">4.6.9.1.6.2. </span>CddFsiRxPingWdgTimerTimeout<a class="headerlink" href="#cddfsirxpingwdgtimertimeout" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxPingWdgTimerTimeout</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Timeout value for CddFsiRx Ping Wdg Timer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>20010</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>4294967295</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxframewdgtimertimeout">
+<h5><span class="section-number">4.6.9.1.6.3. </span>CddFsiRxFrameWdgTimerTimeout<a class="headerlink" href="#cddfsirxframewdgtimertimeout" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxFrameWdgTimerTimeout</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Timeout value for CddFsiRx Frame Wdg Timer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>10010</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>4294967295</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxreceptionmethod">
+<h5><span class="section-number">4.6.9.1.6.4. </span>CddFsiRxReceptionMethod<a class="headerlink" href="#cddfsirxreceptionmethod" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxReceptionMethod</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Selects the method of frame reception.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>CDD_FSI_RX_INTERRUPT_MODE</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>CDD_FSI_RX_INTERRUPT_MODE<br>CDD_FSI_RX_POLLING_MODE<br>CDD_FSI_RX_DMA_MODE</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxdmareference">
+<h5><span class="section-number">4.6.9.1.6.5. </span>CddFsiRxDmaReference<a class="headerlink" href="#cddfsirxdmareference" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDmaReference</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Reference to the DMA Group Channel</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Multiplicity-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="cddfsirxgeneral">
+<h3><span class="section-number">4.6.9.2. </span>CddFsiRxGeneral<a class="headerlink" href="#cddfsirxgeneral" title="Link to this heading"></a></h3>
+<p>General configuration (parameters) of the Cdd Fsi Rx Driver software module.</p>
+<section id="cddfsirxdeinitapi">
+<h4><span class="section-number">4.6.9.2.1. </span>CddFsiRxDeInitApi<a class="headerlink" href="#cddfsirxdeinitapi" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDeInitApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Adds / removes the service CddFsiRx_DeInit() from the code.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxdeverrordetectapi">
+<h4><span class="section-number">4.6.9.2.2. </span>CddFsiRxDevErrorDetectApi<a class="headerlink" href="#cddfsirxdeverrordetectapi" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDevErrorDetectApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Switches the development error detection and notification on or off.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxtypeofinterruptfunction">
+<h4><span class="section-number">4.6.9.2.3. </span>CddFsiRxTypeofInterruptFunction<a class="headerlink" href="#cddfsirxtypeofinterruptfunction" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxTypeofInterruptFunction</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Type of ISR function</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>CDD_FSI_RX_ISR_CAT1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>CDD_FSI_RX_ISR_VOID<br>CDD_FSI_RX_ISR_CAT1<br>CDD_FSI_RX_ISR_CAT2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxinterruptvector">
+<h4><span class="section-number">4.6.9.2.4. </span>CddFsiRxInterruptVector<a class="headerlink" href="#cddfsirxinterruptvector" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxInterruptVector</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Type of ISR function</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>CDD_FSI_RX_INT1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>CDD_FSI_RX_INT1<br>CDD_FSI_RX_INT2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxdevicevariant">
+<h4><span class="section-number">4.6.9.2.5. </span>CddFsiRxDeviceVariant<a class="headerlink" href="#cddfsirxdevicevariant" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDeviceVariant</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Select SOC variant .This parameter shall be used by driver to impose device specific constraints. The user guide shall detail the device specific constraints</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>AM263Px</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>AM263Px</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxmaxhwunitcount">
+<h4><span class="section-number">4.6.9.2.6. </span>CddFsiRxMaxHwUnitCount<a class="headerlink" href="#cddfsirxmaxhwunitcount" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxMaxHwUnitCount</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Maximum hw count across all hwunits configured</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxmaxdmachannelid">
+<h4><span class="section-number">4.6.9.2.7. </span>CddFsiRxMaxDmaChannelId<a class="headerlink" href="#cddfsirxmaxdmachannelid" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxMaxDmaChannelId</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Number of actual DMA channels. This is of type published information and not editable</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>63</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxnotifycapability">
+<h4><span class="section-number">4.6.9.2.8. </span>CddFsiRxNotifyCapability<a class="headerlink" href="#cddfsirxnotifycapability" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxNotifyCapability</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Determines, if the notification mechanism (the functions to enable and disable the notifications) is available at runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxpingwdgtimeoutinterruptevent">
+<h4><span class="section-number">4.6.9.2.9. </span>CddFsiRxPingWdgTimeoutInterruptEvent<a class="headerlink" href="#cddfsirxpingwdgtimeoutinterruptevent" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxPingWdgTimeoutInterruptEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables the interrupt Event for Ping Watch Dog Timer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxframewdgtimeoutinterruptevent">
+<h4><span class="section-number">4.6.9.2.10. </span>CddFsiRxFrameWdgTimeoutInterruptEvent<a class="headerlink" href="#cddfsirxframewdgtimeoutinterruptevent" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxFrameWdgTimeoutInterruptEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables the interrupt Event for Frame Watch Dog Timer.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxcrcerrorinterruptevent">
+<h4><span class="section-number">4.6.9.2.11. </span>CddFsiRxCRCErrorInterruptEvent<a class="headerlink" href="#cddfsirxcrcerrorinterruptevent" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxCRCErrorInterruptEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables the interrupt Event for CRC Error.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxbufferoverruninterruptevent">
+<h4><span class="section-number">4.6.9.2.12. </span>CddFsiRxBufferOverRunInterruptEvent<a class="headerlink" href="#cddfsirxbufferoverruninterruptevent" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxBufferOverRunInterruptEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables the interrupt Event for Rx Buffer Over Run.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxunderruninterruptevent">
+<h4><span class="section-number">4.6.9.2.13. </span>CddFsiRxUnderRunInterruptEvent<a class="headerlink" href="#cddfsirxunderruninterruptevent" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxUnderRunInterruptEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables the interrupt Event for Rx Buffer UnderRun.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxpingframereceivedinterruptevent">
+<h4><span class="section-number">4.6.9.2.14. </span>CddFsiRxPingFrameReceivedInterruptEvent<a class="headerlink" href="#cddfsirxpingframereceivedinterruptevent" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxPingFrameReceivedInterruptEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables the interrupt Event for Ping Frame Reception.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxdataframereceivedinterruptevent">
+<h4><span class="section-number">4.6.9.2.15. </span>CddFsiRxDataFrameReceivedInterruptEvent<a class="headerlink" href="#cddfsirxdataframereceivedinterruptevent" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDataFrameReceivedInterruptEvent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables the interrupt Event for Data Frame Reception.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxmainapi">
+<h4><span class="section-number">4.6.9.2.16. </span>CddFsiRxMainApi<a class="headerlink" href="#cddfsirxmainapi" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxMainApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Adds / removes the service CddFsiRx_Main() and from the code.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxresetdriver">
+<h4><span class="section-number">4.6.9.2.17. </span>CddFsiRxResetDriver<a class="headerlink" href="#cddfsirxresetdriver" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxResetDriver</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Adds / removes the service Cdd_FsiRx_ResetDriver() and from the code.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxgetversioninfoapi">
+<h4><span class="section-number">4.6.9.2.18. </span>CddFsiRxGetVersionInfoApi<a class="headerlink" href="#cddfsirxgetversioninfoapi" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxGetVersionInfoApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Adds / removes the service CddFsiRx_GetVersionInfo() from the code.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxdmaenable">
+<h4><span class="section-number">4.6.9.2.19. </span>CddFsiRxDMAEnable<a class="headerlink" href="#cddfsirxdmaenable" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDMAEnable</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables DMA Access method for CddFsiRx Reception.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxmultilaneenable">
+<h4><span class="section-number">4.6.9.2.20. </span>CddFsiRxMultiLaneEnable<a class="headerlink" href="#cddfsirxmultilaneenable" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxMultiLaneEnable</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Enables MultiLane Transmission for CddFsiRx.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxdefaultoscounterid">
+<h4><span class="section-number">4.6.9.2.21. </span>CddFsiRxDefaultOSCounterId<a class="headerlink" href="#cddfsirxdefaultoscounterid" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDefaultOSCounterId</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Default Os Counter Id if node reference to OsCounter ref CddFsiRxOsCounterRef is not set</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="cddfsirxoscounterref">
+<h4><span class="section-number">4.6.9.2.22. </span>CddFsiRxOsCounterRef<a class="headerlink" href="#cddfsirxoscounterref" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxOsCounterRef</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>This parameter contains a reference to the OsCounter, which is used by the CddFsiRx driver.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="cddfsirxdemeventparameterrefs">
+<h3><span class="section-number">4.6.9.3. </span>CddFsiRxDemEventParameterRefs<a class="headerlink" href="#cddfsirxdemeventparameterrefs" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxDemEventParameterRefs</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Reference to the DemEventParameter which shall be issued when the error “END OF FRAME error occurs “ has occurred.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multiplicity-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>The DDR (Double Data Rate) is not supported.So CddFsiRxMultiLaneEnable Parameter will be OFF.</p></li>
+</ol>
+</div>
+</section>
+<section id="symbolic-names-deviations">
+<h3><span class="section-number">4.6.9.4. </span>Symbolic Names deviations<a class="headerlink" href="#symbolic-names-deviations" title="Link to this heading"></a></h3>
+<p>The Symbolic names are generated for following parameters:</p>
+<p>1.<strong>CddFsiRxHwUnitId</strong>   : Symbolic name is generated as <strong>CddFsiRxConf_CddFsiRxHwUnit_&lt;CddFsiRxHwUnitId&gt;</strong></p>
+</section>
+</section>
+<section id="examples">
+<h2><span class="section-number">4.6.10. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<section id="overview">
+<h3><span class="section-number">4.6.10.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<p>The CDD FSI module example application  UT testing  is done together with CDD FSI TX and CDD FSI RX modules (loop back test) and the configurations are as follows:</p>
+<p>FSI TX HW UNIT 1 and  FSI RX HW UNIT 1 are configured</p>
+<p>SDR-INTERRUPT MODE-16 WORDS-SW TRIGGER: (HW UNIT 1)</p>
+<ol class="arabic simple">
+<li><p>Initialize the Transmitter and Receiver.</p></li>
+<li><p>Transmit the Ping Frame with Tag 0 using API Cdd_FsiTx_Ping().</p></li>
+<li><p>Load the Transmission Buffer with Data using API Cdd_FsiTx_BufferLoad().</p></li>
+<li><p>Transmission and Reception are initiated using API  Cdd_FsiTx_Transmit() and Cdd_FsiTx_Receive() respectively with SW Trigger, 16 words data length, Single Data Rate(Onlt TXD0 and RXD0) and in Interrupt Mode.</p></li>
+<li><p>Wait till reception completes and notification prints.</p></li>
+<li><p>Once test is completed successfully, verify the data in destination Buffer.</p></li>
+</ol>
+<p>SDR-DMA MODE-16 WORDS-SW TRIGGER: (HW UNIT 1)</p>
+<ol class="arabic simple">
+<li><p>Initialize the Transmitter and Receiver.</p></li>
+<li><p>Transmit the Ping Frame with Tag 0 using API Cdd_FsiTx_Ping().</p></li>
+<li><p>Load the Transmission Buffer with Data using API Cdd_FsiTx_BufferLoad().</p></li>
+<li><p>Transmission and Reception are initiated using API Cdd_FsiTx_Transmit() and Cdd_FsiTx_Receive() respectively with SW Trigger, 16 words data length, Single Data Rate(Onlt TXD0 and RXD0) and in Interrupt Mode.</p></li>
+<li><p>Wait till reception completes and notification prints.</p></li>
+<li><p>Once test is completed successfully, verify the data in destination Buffer.</p></li>
+</ol>
+<p>SDR-POLLING MODE-16 WORDS-SW TRIGGER: (HW UNIT 0)</p>
+<ol class="arabic simple">
+<li><p>Initialize the Transmitter and Receiver.</p></li>
+<li><p>Transmit the Ping Frame with Tag 0 using API Cdd_FsiTx_Ping().</p></li>
+<li><p>Load the Transmission Buffer with Data using API Cdd_FsiTx_BufferLoad().</p></li>
+<li><p>Transmission and Reception are initiated using API Cdd_FsiTx_Transmit() and Cdd_FsiTx_Receive() respectively with SW Trigger, 16 words data length, Single Data Rate(Onlt TXD0 and RXD0) and in Polling Mode.</p></li>
+<li><p>Wait till reception completes and notification prints.</p></li>
+<li><p>Once test is completed successfully, verify the data in destination Buffer.</p></li>
+</ol>
+</section>
+<section id="setup-required-to-run-example">
+<h3><span class="section-number">4.6.10.2. </span>Setup required to run example<a class="headerlink" href="#setup-required-to-run-example" title="Link to this heading"></a></h3>
+<p>None</p>
+</section>
+<section id="how-to-run-examples">
+<h3><span class="section-number">4.6.10.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
+<p>CDD FSI RX example application demonstrating the CDD FSI RX driver features is in folder <em>&lt;MCAL_ROOT&gt;/examples/FsiRx</em>.</p>
+<p>This application can be built from the root folder by giving <em>gmake -S fsirx_app PLATFORM=am263px</em>.</p>
+<p>Once the build is completed we get a binary file,which is loaded in our controller and executed.</p>
+</section>
+<section id="sample-log">
+<h3><span class="section-number">4.6.10.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="nl">FSIRX_APP</span>
+<span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="n">Cdd</span><span class="w"> </span><span class="n">Fsi</span><span class="w"> </span><span class="n">Tx</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
+
+<span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
+<span class="w"> </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">255</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">9</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w"> </span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Ping</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">BufferLoad</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">reception</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">BufferLoad</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">reception</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">BufferLoad</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">reception</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">BufferLoad</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">reception</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">BufferLoad</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Frame</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">reception</span><span class="w"> </span><span class="n">completed</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">All</span><span class="w"> </span><span class="n">frames</span><span class="w"> </span><span class="n">received</span><span class="o">!!</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Cdd</span><span class="w"> </span><span class="n">Fsi</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">initialized</span><span class="o">!!</span>
+<span class="w"> </span><span class="n">FSI</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">Usage</span><span class="o">:</span><span class="w"> </span><span class="mi">840</span><span class="w"> </span><span class="n">bytes</span>
+<span class="w"> </span><span class="n">All</span><span class="w"> </span><span class="n">tests</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="n">passed</span>
+<span class="w"> </span><span class="nl">FSIRX_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Completed</span><span class="p">.</span><span class="w"> </span><span class="o">!!!</span>
+</pre></div>
+</div>
+</section>
+<section id="file-structure">
+<h3><span class="section-number">4.6.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┣ 📂mcal<br />
+┃ ┣ 📂<strong>examples</strong><br />
+┃ ┃ ┣ 📂<strong>FsiRx</strong><br />
+┃ ┃ ┃ ┣ 📂<strong>soc</strong><br />
+┃ ┃ ┃ ┣ 📜<strong>fsirxapp.c</strong> : <em>Contains Fsi Rx test example</em><br />
+┃ ┃ ┃ ┣ 📜<strong>fsirxapp.h</strong> : <em>FsiRx App example header file</em><br />
+┃ ┃ ┃ ┗ 📜Makefile<br />
+┃ ┣ 📂<strong>examples_config</strong><br />
+┃ ┃ ┣ 📂<strong>FsiRx_Demo_Cfg</strong><br />
+┃ ┃ ┃ ┗ 📂<strong>soc</strong><br />
+┃ ┃ ┃ ┃ ┣ 📂<strong>am263px</strong><br />
+┃ ┃ ┃ ┃ ┃ ┗ 📂<strong>r5f0_0</strong><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜<strong>Cdd_FsiRx_Cfg.h</strong> : <em>Contains the configuration parameters</em><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜<strong>Cdd_FsiRx_Cfg.c</strong> : <em>Contains all Pre-Compile Configured parameters</em><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜<strong>Cdd_FsiRx_PBcfg.c</strong> : <em>Contains all Post-Build Configured parameters</em><br />
+┃ 📂mcal_config<br />
+┃ 📂mcal_docs<br />
+┗ 📜README.txt</p>
+</section>
+</section>
+<section id="references">
+<h2><span class="section-number">4.6.11. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://www.ti.com/product/AM263P4#tech-docs">Technical Reference Manual</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Module_User_Guide_Cdd_dma.html" class="btn btn-neutral float-left" title="4.5. CDD DMA Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Module_User_Guide_Cdd_FsiTx.html" class="btn btn-neutral float-right" title="4.7. CDD_FSITX Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Dec 11, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.01.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

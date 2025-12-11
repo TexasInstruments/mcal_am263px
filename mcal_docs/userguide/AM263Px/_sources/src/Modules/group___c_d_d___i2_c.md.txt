@@ -1,0 +1,420 @@
+---
+title: I2C Configuration Header file
+
+---
+
+# CDD_I2C
+
+ [More...](#detailed-description)
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_I2C_CFG_MAJOR_VERSION   | I2C configuration Major Version.  |
+| CDD_I2C_CFG_MINOR_VERSION   | I2C configuration Minor Version.  |
+| CDD_I2C_CFG_PATCH_VERSION   | I2C configuration Patch Version.  |
+| CDD_I2C_HW_UNIT_0   | HW unit 0.  |
+| CDD_I2C_HW_UNIT_1   | HW unit 1.  |
+| CDD_I2C_HW_UNIT_2   | HW unit 2.  |
+| CDD_I2C_HW_UNIT_3   | HW unit 3.  |
+| CDD_I2C_PRE_COMPILE_VARIANT   | I2C Build Variant. Build variants.(i.e Pre Compile and Post Build)  |
+| CDD_I2C_CONFIG_PC   | Precompile variant macro.  |
+| CDD_I2C_POLLING_MODE   | Enable/disable Interrupts.  |
+| CDD_I2C_DEV_ERROR_DETECT   | Enable/Disable I2C dev detect error.  |
+| CDD_I2C_VERSION_INFO_API   | Version info API macro.  |
+| CDD_I2C_CANCEL_API   | Check to enable cancel API.  |
+| CDD_I2C_GET_STATUS_API   | Check to enable get driver status API.  |
+| CDD_I2C_REGISTER_READBACK_API   | Check to readback register API.  |
+| CDD_I2C_HW_UNIT_MAX   | Maximum supported HW units for the SOC.  |
+| CDD_I2C_ISR_TYPE   | ISR type.  |
+| CDD_I2C_MAX_CH_PER_SEQ   | Maximum channels allowed per sequence.  |
+| CDD_I2C_MAX_CH   | Maximum channels across all sequence/hwunit.  |
+| CDD_I2C_MAX_SEQ   | Maximum sequence across all hwunit.  |
+| CDD_I2C_MAX_HW_UNIT   | Maximum HW unit.  |
+| CDD_I2C_HW_UNIT_0_ACTIVE   |  |
+| CDD_I2C_HW_UNIT_1_ACTIVE   |  |
+| CDD_I2C_HW_UNIT_2_ACTIVE   |  |
+| CDD_I2C_HW_UNIT_3_ACTIVE   |  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_0   | Symbolic Name for I2c Sequence 0.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_1   | Symbolic Name for I2c Sequence 1.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_2   | Symbolic Name for I2c Sequence 2.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_3   | Symbolic Name for I2c Sequence 3.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_4   | Symbolic Name for I2c Sequence 4.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_5   | Symbolic Name for I2c Sequence 5.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_6   | Symbolic Name for I2c Sequence 6.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_7   | Symbolic Name for I2c Sequence 7.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_8   | Symbolic Name for I2c Sequence 8.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_9   | Symbolic Name for I2c Sequence 9.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_10   | Symbolic Name for I2c Sequence 10.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_11   | Symbolic Name for I2c Sequence 11.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_12   | Symbolic Name for I2c Sequence 12.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_13   | Symbolic Name for I2c Sequence 13.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_14   | Symbolic Name for I2c Sequence 14.  |
+| CddI2cConf_CddI2cSequence_CddI2cSequence_15   | Symbolic Name for I2c Sequence 15.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_0   | Symbolic Name for I2c Channel 0.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_1   | Symbolic Name for I2c Channel 1.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_2   | Symbolic Name for I2c Channel 2.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_3   | Symbolic Name for I2c Channel 3.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_4   | Symbolic Name for I2c Channel 4.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_5   | Symbolic Name for I2c Channel 5.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_6   | Symbolic Name for I2c Channel 6.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_7   | Symbolic Name for I2c Channel 7.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_8   | Symbolic Name for I2c Channel 8.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_9   | Symbolic Name for I2c Channel 9.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_10   | Symbolic Name for I2c Channel 10.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_11   | Symbolic Name for I2c Channel 11.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_12   | Symbolic Name for I2c Channel 12.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_13   | Symbolic Name for I2c Channel 13.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_14   | Symbolic Name for I2c Channel 14.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_15   | Symbolic Name for I2c Channel 15.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_16   | Symbolic Name for I2c Channel 16.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_17   | Symbolic Name for I2c Channel 17.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_18   | Symbolic Name for I2c Channel 18.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_19   | Symbolic Name for I2c Channel 19.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_20   | Symbolic Name for I2c Channel 20.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_21   | Symbolic Name for I2c Channel 21.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_22   | Symbolic Name for I2c Channel 22.  |
+| CddI2cConf_CddI2cChannel_CddI2cChannel_23   | Symbolic Name for I2c Channel 23.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[I2c_utilsSeq0Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq0complete)**(void )|  |
+| void | **[I2c_utilsSeq1Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq1complete)**(void )|  |
+| void | **[I2c_utilsSeq2Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq2complete)**(void )|  |
+| void | **[I2c_utilsSeq3Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq3complete)**(void )|  |
+| void | **[I2c_utilsSeq4Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq4complete)**(void )|  |
+| void | **[I2c_utilsSeq5Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq5complete)**(void )|  |
+| void | **[I2c_utilsSeq6Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq6complete)**(void )|  |
+| void | **[I2c_utilsSeq7Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq7complete)**(void )|  |
+| void | **[I2c_utilsSeq8Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq8complete)**(void )|  |
+| void | **[I2c_utilsSeq9Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq9complete)**(void )|  |
+| void | **[I2c_utilsSeq10Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq10complete)**(void )|  |
+| void | **[I2c_utilsSeq11Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq11complete)**(void )|  |
+| void | **[I2c_utilsSeq12Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq12complete)**(void )|  |
+| void | **[I2c_utilsSeq13Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq13complete)**(void )|  |
+| void | **[I2c_utilsSeq14Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq14complete)**(void )|  |
+| void | **[I2c_utilsSeq15Complete](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq15complete)**(void )|  |
+| void | **[I2c_utilsSeq0Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq0fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq1Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq1fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq2Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq2fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq3Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq3fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq4Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq4fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq5Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq5fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq6Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq6fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq7Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq7fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq8Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq8fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq9Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq9fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq10Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq10fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq11Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq11fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq12Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq12fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq13Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq13fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq14Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq14fail)**(uint8 errorCode)|  |
+| void | **[I2c_utilsSeq15Fail](../Modules/group___c_d_d___i2_c.md#function-i2c_utilsseq15fail)**(uint8 errorCode)|  |
+
+
+
+### function I2c_utilsSeq0Complete
+
+```
+void I2c_utilsSeq0Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq1Complete
+
+```
+void I2c_utilsSeq1Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq2Complete
+
+```
+void I2c_utilsSeq2Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq3Complete
+
+```
+void I2c_utilsSeq3Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq4Complete
+
+```
+void I2c_utilsSeq4Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq5Complete
+
+```
+void I2c_utilsSeq5Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq6Complete
+
+```
+void I2c_utilsSeq6Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq7Complete
+
+```
+void I2c_utilsSeq7Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq8Complete
+
+```
+void I2c_utilsSeq8Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq9Complete
+
+```
+void I2c_utilsSeq9Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq10Complete
+
+```
+void I2c_utilsSeq10Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq11Complete
+
+```
+void I2c_utilsSeq11Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq12Complete
+
+```
+void I2c_utilsSeq12Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq13Complete
+
+```
+void I2c_utilsSeq13Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq14Complete
+
+```
+void I2c_utilsSeq14Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq15Complete
+
+```
+void I2c_utilsSeq15Complete(
+    void 
+)
+```
+
+
+### function I2c_utilsSeq0Fail
+
+```
+void I2c_utilsSeq0Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq1Fail
+
+```
+void I2c_utilsSeq1Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq2Fail
+
+```
+void I2c_utilsSeq2Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq3Fail
+
+```
+void I2c_utilsSeq3Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq4Fail
+
+```
+void I2c_utilsSeq4Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq5Fail
+
+```
+void I2c_utilsSeq5Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq6Fail
+
+```
+void I2c_utilsSeq6Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq7Fail
+
+```
+void I2c_utilsSeq7Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq8Fail
+
+```
+void I2c_utilsSeq8Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq9Fail
+
+```
+void I2c_utilsSeq9Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq10Fail
+
+```
+void I2c_utilsSeq10Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq11Fail
+
+```
+void I2c_utilsSeq11Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq12Fail
+
+```
+void I2c_utilsSeq12Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq13Fail
+
+```
+void I2c_utilsSeq13Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq14Fail
+
+```
+void I2c_utilsSeq14Fail(
+    uint8 errorCode
+)
+```
+
+
+### function I2c_utilsSeq15Fail
+
+```
+void I2c_utilsSeq15Fail(
+    uint8 errorCode
+)
+```
+
+
+
+## Detailed Description
+
+
+This files defines I2C configuration structures 
+
+
+
+

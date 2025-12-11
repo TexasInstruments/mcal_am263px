@@ -1,0 +1,36 @@
+---
+orphan: true
+---
+
+---
+title: Pwm_ChannelConfigType
+summary: Pwm channel configuration. 
+
+---
+
+# Pwm_ChannelConfigType
+
+
+
+Pwm channel configuration. 
+
+
+`#include <Pwm_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | baseaddr |  System clock frequency.  |
+|  uint32 | instanceClkHz |  System clock frequency.  |
+|  uint16 | dutyCycle |  Initial dutycycle.  |
+|  uint32 | hwPeriod |  Number of HW Unit ticks value which sets initial period.  |
+|  [Pwm_OutputStateType](../Modules/group___p_w_m.md#enum-pwm_outputstatetype) | polarity |  Initial polarity.  |
+|  [Pwm_OutputStateType](../Modules/group___p_w_m.md#enum-pwm_outputstatetype) | idleState |  Initial idle state.  |
+|  [Pwm_ChannelClassType](../Modules/group___p_w_m.md#enum-pwm_channelclasstype) | channelClass |  Fixed or Variable period.  |
+|  uint32 | prescale |  Prescaler, part of PWM HW time-base clock Range - 0 <= prescale <= 7, TBCLK = SYSCLK / (prescale) 0x0 = /1 (No prescale) 0x1 = /2 0x2 = /4 0x3 = /8 0x4 = /16 0x5 = /32 0x6 = /64 0x7 = /128.  |
+|  uint32 | hsPrescale |  High-Speed Prescaler, part for PWM HW time-base clock Range - 0 <= prescale <= 7, TBCLK = SYSCLK / (hsPrescale x prescale) 0x0 = /1 (No prescale) 0x1 = /2 0x2 = /4 0x3 = /6 0x4 = /8 0x5 = /10 0x6 = /12 0x7 = /14.  |
+|  boolean | enableHR |  Enable High Resolution Capacbility.  |
+|  [Pwm_NotifyFuncType](../Modules/group___p_w_m.md#typedef-pwm_notifyfunctype) | notificationHandler |  Notification handler.  |
+
+

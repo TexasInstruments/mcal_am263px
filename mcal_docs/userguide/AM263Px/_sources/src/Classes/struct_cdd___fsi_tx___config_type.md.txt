@@ -1,0 +1,30 @@
+---
+orphan: true
+---
+
+---
+title: Cdd_FsiTx_ConfigType
+summary: CDD FSI TX config structure. 
+
+---
+
+# Cdd_FsiTx_ConfigType
+
+
+
+CDD FSI TX config structure. 
+
+
+`#include <Cdd_FsiTx_Types.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint8 | maxHwUnit |  Maximum number of HW unit Should not be more than CDD_FSI_TX_MAX_HW_UNIT.  |
+|  [Cdd_FsiTx_BufferNotifyType](../Modules/group___f_s_i_t_x.md#typedef-cdd_fsitx_buffernotifytype) | cddFsiTxNotification |  callback notification fxn pointer  |
+|  [Cdd_FsiTx_BufferNotifyType](../Modules/group___f_s_i_t_x.md#typedef-cdd_fsitx_buffernotifytype) | cddFsiTxOverRunNotification |  callback notification fxn pointer for buffer overrun  |
+|  [Cdd_FsiTx_BufferNotifyType](../Modules/group___f_s_i_t_x.md#typedef-cdd_fsitx_buffernotifytype) | cddFsiTxUnderRunNotification |  callback notification fxn pointer for buffer underrun  |
+|  [Cdd_FsiTx_HwUnitConfigType](../Classes/struct_cdd___fsi_tx___hw_unit_config_type.md)[CDD_FSI_TX_HW_UNIT_CNT] | hwUnitCfg |  FSI TX config.  |
+
+

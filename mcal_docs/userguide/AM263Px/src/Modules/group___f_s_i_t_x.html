@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FSITX &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.01.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_guide.html">5. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>FSITX</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fsitx">
+<h1>FSITX<a class="headerlink" href="#fsitx" title="Link to this heading"></a></h1>
+<section id="types">
+<h2>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base type</p></th>
+<th class="head"><p>Type Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-statustype"><span class="std std-ref">Cdd_FsiTx_StatusType</span></a></strong></p></td>
+<td><p>Current status of the CDD FSI TX HW Unit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-triggersourcetype"><span class="std std-ref">Cdd_FsiTx_TriggerSourceType</span></a></strong></p></td>
+<td><p>Type for configuring the trigger source for CDD FSI TX HW.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-datatransmittype"><span class="std std-ref">Cdd_FsiTx_DataTransmitType</span></a></strong></p></td>
+<td><p>Type for configuring on which edge of the hardware trigger signal the Ping frame should be transmitted.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-clkprescaletype"><span class="std std-ref">Cdd_FsiTx_ClkPrescaleType</span></a></strong></p></td>
+<td><p>Type of Clock Prescale.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsi-tx-transmitlinetype"><span class="std std-ref">Cdd_Fsi_Tx_TransmitLineType</span></a></strong></p></td>
+<td><p>Type for configuring the number of data lines for transmission. This decides whether the transmission should happen in single data rate or double data rate.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-pingtagtype"><span class="std std-ref">Cdd_FsiTx_PingTagType</span></a></strong></p></td>
+<td><p>Type for configuring the status of Ping frame transmission. This decides whether the Tx has sent Ping frame with tag0 , tag1 or none of them.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-frametype"><span class="std std-ref">Cdd_FsiTx_FrameType</span></a></strong></p></td>
+<td><p>Type for configuring data frame. This decides data packet width.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-datalanetype"><span class="std std-ref">Cdd_FsiTx_DataLaneType</span></a></strong></p></td>
+<td><p>Type for configuring data frame. This decides data packet width.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-datalengthtype"><span class="std std-ref">Cdd_FsiTx_DataLengthType</span></a></strong></p></td>
+<td><p>Type for configuring data the interrupt vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-fsitx-bufferlengthtype"><span class="std std-ref">Cdd_FsiTx_BufferLengthType</span></a></strong></p></td>
+<td><p>Type for configuring Tx buffer. This decides data packet width.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef void(*)(void)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-cdd-fsitx-notifytype"><span class="std std-ref">Cdd_FsiTx_NotifyType</span></a></strong></p></td>
+<td><p>Typedef for application notification function pointer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>typedef void(*)(Cdd_FsiTx_HWUnitType hwUnitId)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-cdd-fsitx-buffernotifytype"><span class="std std-ref">Cdd_FsiTx_BufferNotifyType</span></a></strong></p></td>
+<td><p>Typedef for application notification function pointer.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="enum-cdd-fsitx-statustype">
+<h3>enum Cdd_FsiTx_StatusType<a class="headerlink" href="#enum-cdd-fsitx-statustype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_UNINIT</p></td>
+<td><p></p></td>
+<td><p>The Tx module has not initialized yet.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_INIT</p></td>
+<td><p></p></td>
+<td><p>The Tx module has initialized.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_IDLE</p></td>
+<td><p></p></td>
+<td><p>The transmission through the Tx channel hasn’t started.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUSY</p></td>
+<td><p></p></td>
+<td><p>The Frame transmission has been started and is still going on.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Current status of the CDD FSI TX HW Unit.</p>
+</section>
+<section id="enum-cdd-fsitx-triggersourcetype">
+<h3>enum Cdd_FsiTx_TriggerSourceType<a class="headerlink" href="#enum-cdd-fsitx-triggersourcetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_TRIGG_SRC_SW</p></td>
+<td><p></p></td>
+<td><p>Transmission is triggered by a software API call.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_TRIGG_SRC_HW</p></td>
+<td><p></p></td>
+<td><p>Transmission is triggered by external hardware trigger.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring the trigger source for CDD FSI TX HW.</p>
+</section>
+<section id="enum-cdd-fsitx-datatransmittype">
+<h3>enum Cdd_FsiTx_DataTransmitType<a class="headerlink" href="#enum-cdd-fsitx-datatransmittype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_INTERRUPT_MODE</p></td>
+<td><p></p></td>
+<td><p>Transmission using Interrupt Method.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_POLLING_MODE</p></td>
+<td><p></p></td>
+<td><p>Transmission using Polling Method.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DMA_MODE</p></td>
+<td><p></p></td>
+<td><p>Transmission using DMA Method.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring on which edge of the hardware trigger signal the Ping frame should be transmitted.</p>
+<p>Type of CDD FSI_TX Data Transmit method.</p>
+</section>
+<section id="enum-cdd-fsitx-clkprescaletype">
+<h3>enum Cdd_FsiTx_ClkPrescaleType<a class="headerlink" href="#enum-cdd-fsitx-clkprescaletype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_CLK_DIV_1</p></td>
+<td><p>1</p></td>
+<td><p>&lt;CDD FSI TXCLK = (controlls clock) / 1.0 = 100/1=100 MHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_CLK_DIV_2</p></td>
+<td><p>2</p></td>
+<td><p>&lt;CDD FSI TXCLK = (controlls clock) / 1.0 = 100/2=50 MHz</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_CLK_DIV_4</p></td>
+<td><p>4</p></td>
+<td><p>&lt;CDD FSI TXCLK = (controlls clock) / 1.0 = 100/4=25 MHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_CLK_DIV_5</p></td>
+<td><p>5</p></td>
+<td><p>&lt;CDD FSI TXCLK = (controlls clock) / 1.0 = 100/5=20 MHz</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_CLK_DIV_10</p></td>
+<td><p>10</p></td>
+<td><p>&lt;CDD FSI TXCLK = (controlls clock) / 1.0 = 100/10=10 MHz</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_CLK_DIV_20</p></td>
+<td><p>20</p></td>
+<td><p>&lt;CDD FSI TXCLK = (controlls clock) / 1.0 = 100/20=5 MHz</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type of Clock Prescale.</p>
+</section>
+<section id="enum-cdd-fsi-tx-transmitlinetype">
+<h3>enum Cdd_Fsi_Tx_TransmitLineType<a class="headerlink" href="#enum-cdd-fsi-tx-transmitlinetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_SINGLE_DATA_LINE</p></td>
+<td><p></p></td>
+<td><p>Single data line for Transmission( only TXD0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DOUBLE_DATA_LINE</p></td>
+<td><p></p></td>
+<td><p>Data Transmitted through both TXD0 &amp; TXD1. (DDR)</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring the number of data lines for transmission. This decides whether the transmission should happen in single data rate or double data rate.</p>
+</section>
+<section id="enum-cdd-fsitx-pingtagtype">
+<h3>enum Cdd_FsiTx_PingTagType<a class="headerlink" href="#enum-cdd-fsitx-pingtagtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_PING_ZERO_SENT</p></td>
+<td><p></p></td>
+<td><p>Ping frame with Tag 0 sent.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_PING_ONE_SENT</p></td>
+<td><p></p></td>
+<td><p>Ping frame with Tag 1 sent.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_PING_COMPLETED</p></td>
+<td><p></p></td>
+<td><p>No ping frame is sent.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring the status of Ping frame transmission. This decides whether the Tx has sent Ping frame with tag0 , tag1 or none of them.</p>
+</section>
+<section id="enum-cdd-fsitx-frametype">
+<h3>enum Cdd_FsiTx_FrameType<a class="headerlink" href="#enum-cdd-fsitx-frametype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_PING_FRAME</p></td>
+<td><p>0x00</p></td>
+<td><p>data ping frame</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_1_WORD</p></td>
+<td><p>0x04</p></td>
+<td><p>data frame with 1 words data packet</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_2_WORD</p></td>
+<td><p>0x05</p></td>
+<td><p>data frame with 2 words data packet</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_4_WORD</p></td>
+<td><p>0x06</p></td>
+<td><p>data frame with 4 words data packet</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_6_WORD</p></td>
+<td><p>0x07</p></td>
+<td><p>data frame with 6 words data packet</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_N_WORD</p></td>
+<td><p>0x03</p></td>
+<td><p>data frame with N (1-16)words data packet</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring data frame. This decides data packet width.</p>
+</section>
+<section id="enum-cdd-fsitx-datalanetype">
+<h3>enum Cdd_FsiTx_DataLaneType<a class="headerlink" href="#enum-cdd-fsitx-datalanetype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_SINGLE_DATA_LANE</p></td>
+<td><p></p></td>
+<td><p>data frame with 1 words data packet</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DOUBLE_DATA_LANE</p></td>
+<td><p></p></td>
+<td><p>data frame with 2 words data packet</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring data frame. This decides data packet width.</p>
+</section>
+<section id="enum-cdd-fsitx-datalengthtype">
+<h3>enum Cdd_FsiTx_DataLengthType<a class="headerlink" href="#enum-cdd-fsitx-datalengthtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_1_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 1 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_2_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 2 words data length</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_3_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 3 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_4_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 4 words data length</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_5_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 5 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_6_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 6 words data length</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_7_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 7 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_8_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 8 words data length</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_9_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 9 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_10_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 10 words data length</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_11_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 11 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_12_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 12 words data length</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_13_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 13 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_14_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 14 words data length</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_DATA_15_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 15 words data length</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_DATA_16_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>data packet with 16 words data length</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring data the interrupt vector.</p>
+<p>Type for configuring data frame. This decides data packet width.</p>
+</section>
+<section id="enum-cdd-fsitx-bufferlengthtype">
+<h3>enum Cdd_FsiTx_BufferLengthType<a class="headerlink" href="#enum-cdd-fsitx-bufferlengthtype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_1_WORD_LENGTH</p></td>
+<td><p>0x01</p></td>
+<td><p>TX buffer size with 1 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_2_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 2 words data length.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_3_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 3 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_4_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 4 words data length.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_5_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 5 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_6_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 6 words data length.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_7_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 7 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_8_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 8 words data length.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_9_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 9 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_10_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 10 words data length.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_11_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 11 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_12_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 12 words data length.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_13_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 13 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_14_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 14 words data length.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_FSI_TX_BUFF_SIZE_15_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 15 words data length.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FSI_TX_BUFF_SIZE_16_WORD_LENGTH</p></td>
+<td><p></p></td>
+<td><p>TX buffer size with 16 words data length.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+Type for configuring Tx buffer. This decides data packet width.</p>
+</section>
+<section id="typedef-cdd-fsitx-notifytype">
+<h3>typedef Cdd_FsiTx_NotifyType<a class="headerlink" href="#typedef-cdd-fsitx-notifytype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_FsiTx_NotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Typedef for application notification function pointer.</p>
+</section>
+<section id="typedef-cdd-fsitx-buffernotifytype">
+<h3>typedef Cdd_FsiTx_BufferNotifyType<a class="headerlink" href="#typedef-cdd-fsitx-buffernotifytype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_FsiTx_BufferNotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">Cdd_FsiTx_HWUnitType</span><span class="w"> </span><span class="n">hwUnitId</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Typedef for application notification function pointer.</p>
+</section>
+</section>
+<section id="structures">
+<h2>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___fsi_tx___hw_unit_config_type.html"><span class="std std-doc">Cdd_FsiTx_HwUnitConfigType</span></a></strong></p></td>
+<td><p>CDD FSI TX Hw unit configuration structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___fsi_tx___config_type.html"><span class="std std-doc">Cdd_FsiTx_ConfigType</span></a></strong></p></td>
+<td><p>CDD FSI TX config structure.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Dec 11, 2025.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.01.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = '';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

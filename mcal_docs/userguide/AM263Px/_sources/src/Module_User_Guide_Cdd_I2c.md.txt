@@ -1,0 +1,766 @@
+## CDD_I2C Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|API|Application Programming Interface|
+|BSW|Basic Software|
+|DET|Default Error Tracer|
+|I2C|Inter Integrated Circuit|
+|MCAL|Micro Controller Abstraction Layer|
+|MCU|Micro Controller Unit|
+|OS|Operating System|
+
+### Introduction
+
+This document describes the functionality, API and configuration of the AUTOSAR BSW module I2C.
+
+| | |
+|------|-------------|
+|**Supported AUTOSAR Release**|4.3.1|
+| **Supported Configuration Variants** | **Pre-Compile** |
+| **Vendor ID**                      |   **CDD_I2C_VENDOR_ID (44)(TEXAS INSTRUMENTS)** |
+| **Module ID**                      |   **CDD_I2C_MODULE_ID (255)** |
+| **Supported Platform**             |   AM263Px|
+
+### Functional Overview
+
+The I2C component is a proprietary extension of AUTOSAR BSW. The I2C driver was designed similar to the SPI driver specifications and is compatible to AUTOSAR 4.3.1.
+
+### Features
+
+
+On AM263Px platform, there are 4 I2C instances I2C0, I2C1, I2C2 and I2C3.
+
+
+
+#### Supported HW Features
+
+* Controller Mode
+* Polling and Interrupt Mode (at instance level)
+* Configurable Baudrate (at instance level)
+* Configurable Own Address (at instance level)
+* 7 and 10 bit Address Schemes (at channel level)
+* Restart Mode: Stop or no stop between channels (at channel level)
+* Read or Write Operation (at channel level)
+* Configurable Target Address (at channel level)
+
+#### Supported SW Features
+
+* Configurable Development Error
+* Configurable Sequence Size
+* Configurable Channel Size
+* Configurable Data Length to Transfer
+* Configurable Hardware Units
+* Configurable Channels
+* Configurable Sequences
+* Multiple Channels in a Sequence
+* Transfer Complete and Error Notification Callback
+
+#### Features Not Supported by the Driver
+
+* Target Mode
+* Multi Master Mode and Arbitration Loss scenarios are not tested
+* DMA Mode
+
+#### I2C Driver Architecture
+
+The following figure shows where the I2C is located in the AUTOSAR architecture.
+
+```{figure} Assets/images/i2c/i2c_architecture.png
+:align: center
+
+```
+
+The expected flow for utilization of the driver as per the example application is interrupt registration (only required in case of interrupt mode), I2c driver initialization using Cdd_I2c_Init(). Post initialization buffer set up linking is done to point channels to their respective buffers using Cdd_I2c_SetupEB() and for writing data to slaves Cdd_I2c_AsyncTransmit() is used in both polling as well as interrupt mode.
+
+For reception of data from I2c slaves Cdd_I2c_AsyncTransmit() can be used in interrupt mode. If polling mode is being used, use Cdd_I2c_MainFunction() to process any sequence in the queue and update the status of the queue to real time value.
+
+#### Initialization
+
+The driver I2C is initialized by calling Cdd_I2c_Init(). To re-initialize the driver call Cdd_I2c_DeInit() and then Cdd_I2c_Init() again. Only pre-compile variant is supported for the driver, hence all configuration related parameters are provided through the GUI. The service for de-initialization is provided with the function Cdd_I2c_DeInit().
+
+#### States
+
+I2C maintains states for:
+
+1. Driver
+
+   * CDD_I2C_UNINIT
+
+      * Driver is uninitialized
+      * Cdd_I2c_Init() has not been called or Cdd_I2c_DeInit() has been called after initialization
+
+   * CDD_I2C_IDLE
+
+      * Driver is currently free, not in the middle of any transmission/reception process
+
+   * CDD_I2C_BUSY
+
+      * Driver is currently in use, transmission/reception in process
+
+   The state for I2c driver is returned with Cdd_I2c_GetStatus() function call.
+
+2. Channels
+
+   * CDD_I2C_CH_RESULT_OK
+
+      * Channel transmission/reception not yet started
+      * Channel transmission/reception successful
+
+   * CDD_I2C_CH_RESULT_NOT_OK
+
+      * Channel transmission/reception is not OK
+
+   * CDD_I2C_CH_RESULT_IN_PROGRESS
+
+      * Channel transmission/reception currently in progress
+
+   * CDD_I2C_CH_RESULT_BUSFAIL
+
+      * Channel transmission/reception failed due to bus fault
+
+   * CDD_I2C_CH_RESULT_ARBFAIL
+
+      * Channel transmission/reception failed due to arbitration loss
+
+   * CDD_I2C_CH_RESULT_NACKFAIL
+
+      * Channel transmission/reception failed due to no acknowledge from target
+
+   The channel status is returned with Cdd_I2c_GetResult() function call.
+   In case incorrect channel ID is passed a DET error occur
+
+3. Sequences
+
+   * CDD_I2C_SEQ_OK
+
+      * Sequence transmission/reception not yet started
+      * Sequence transmission/reception successful
+
+   * CDD_I2C_SEQ_NOT_OK
+
+      * Sequence transmission/reception in not OK
+
+   * CDD_I2C_SEQ_PENDING
+
+      * Sequence transmission/reception in progress
+
+   * CDD_I2C_SEQ_QUEUED
+
+      * Sequence queued
+
+   * CDD_I2C_SEQ_NACK
+
+      * Sequence failed due to no acknowledge
+
+   * CDD_I2C_SEQ_FAILED
+
+      * Sequence transmission/reception failed
+
+   * CDD_I2C_SEQ_CANCELLED
+
+      * Sequence cancelled
+
+   The sequence status is returned with Cdd_I2c_GetSequenceResult()
+
+4. Hardware Units
+
+   * CDD_I2C_HW_UNIT_FREE
+
+      * Hardware Unit not in use
+
+   * CDD_I2C_HW_UNIT_BUSY
+
+      * Hardware Unit busy
+
+##### Configurable Development Error
+
+1. User configurable error check to report development errors.
+2. Blocking error
+
+##### Configurable Sequence and Channel Size
+
+1. User configurable maximum size for Sequence and Channel
+
+##### Configurable Hardware Units
+
+1. User configurable parameter to define how many Hardware Units (Instances) to use out of a maximum supported by the device
+2. User configurable parameter to specify which Hardware Unit to use
+3. User configurable parameter to specify Serial clock frequency (Channel bit rate)
+4. User configurable parameter to specify the frequency at which the Hardware Unit will operate internally
+5. User configurable input frequency to I2c module which will be used to set channel bit rate and I2c internal operational frequency. Please note that this frequency should be the same as the clock source selected in MCU module, this has to be maintained by the user.
+
+```{figure} Assets/images/i2c/i2c_confighw.png
+:align: center
+
+```
+
+##### Configurable Channels
+
+1. User configurable parameter to define channel direction (read or write), I2c Target Address, Address Scheme (7 bit or 10 bit address) and chained channel implementation.
+2. A channel is the actual unit which contains the data to be transmitted along with direction (read/write) and target address.
+3. The number of channels configured can not exceed the maximum number of channels defined in the general container.
+4. Data buffer is linked to channels in the application by provided API’s
+5. Restart mode parameter to decide whether to perform a stop between channels of a sequence
+
+```{figure} Assets/images/i2c/i2c_configchannel.png
+:align: center
+
+```
+
+##### Configurable Sequences
+
+1. User configurable parameter to define which Hardware unit to use, number of channels present in the sequence, sequence complete callback function and sequence error notify callback function
+2. Sequences are accessible to the user and are passed as function parameters for transmission and reception
+
+```{figure} Assets/images/i2c/i2c_configseq.png
+:align: center
+
+```
+
+```{Note}
+In a sequence, there can be multiple channels but all the channels should have the same target address if restart mode is no-stop between channels.
+```
+
+##### Channel in Use Checks
+
+1. Channels in free state, i.e. not currently being transmitted by another sequence or the same sequence are available for transmission/reception
+
+##### Sequence in Use Checks
+
+1. Sequence not in transmission currently are available for use.
+
+##### Hardware Unit in Use Checks
+
+1. Hardware not in use, i.e. currently not transmitting/receiving any sequence is available for use.
+
+#### Features Provided Beyond the AUTOSAR Standard
+
+1. Hardware configuration unit container to handle different hardware units
+2. Hardware configuration unit container to handle transfer speeds and hardware unit mapping. Parallel sequence and channel processing on different hardware units. Configure acknowledge and no acknowledge handling (ACK, NACK). Configurable addressing for standard (7bit) and extended (10bit) addresses.
+3. I2C chain channel feature.
+4. I2C sequence queuing feature.
+5. I2C support for parallel handling of hardware units if more than one is available.
+6. I2C improved error handling like:
+
+   * Handling for SDA stuck scenario
+   * Handling for SCL low held scenario
+   * Handling for general communication timeout
+
+### Source Files
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**I2c**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c.h** : *Contains the API declarations of the Cdd_I2c driver to be used by upper layers*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Irq.h** : *Contains the declarations of the ISR handlers*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c.c** : *Source file that contains the API relevant implementation*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Priv.c** : *Contains internal function definitions used to realize the driver*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Priv.h** : *Contains data structures and Internal function declarations*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Utils.c** : *Contains internal function definitions for queue implementation*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Utils.h** : *Contains internal function declarations for queue implementation*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Irq.c** : *Contains the ISR implementation*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_hw_reg.h** : *Contains register offsets, mask values, shift values and specific bit set reset macros*\
+ ┃ ┃ ┃ ┣ 📜**Cdd_I2c_Hw.c** : *Contains internal function definitions used to realize the driver*\
+ ┃ ┃ ┃ ┗ 📜**Cdd_I2c_Hw.h** : *Contains data structures and Internal function declarations for HW layer*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┣ 📂mcal_config\
+ ┣ 📂mcal_docs\
+ ┗ 📜README.txt
+
+Description of generated files is provided below:
+
+|Plugin Files |Description|
+|-------|------|
+|Cdd_I2c_Cfg.h |This file contains general container configuration parameters like DET error ON, Polling mode OFF, Sequence size, Queue size, Channel size etc.|
+|Cdd_I2c_Cfg.c |Contains all channels Pre-Build Configuration parameters|
+
+The below diagram shows the files structure for the I2C driver.
+
+```{figure} Assets/images/i2c/i2c_filestructure.png
+:align: center
+
+```
+
+### Module Requirements
+
+#### Memory Mapping
+
+The objects (e.g. variables, functions, constants) are declared by compiler independent definitions – the compiler abstraction definitions. Each compiler abstraction definition is assigned to a memory section. The following table contains the memory section names and the compiler abstraction definitions of the I2C and illustrates their assignment among each other.
+
+|Memory Mapping Sections|I2C_CODE|I2C_VAR_NO_INIT|I2C_VAR_INIT|I2C_CONST|I2C_CFG|I2C_APPL_CODE|I2C_APPL_DATA|
+|-----|-----|-----|-----|-----|------|-----|-----|
+| CDD_I2C_START_SEC_CODE|x| | | | | | |
+| CDD_I2C_STOP_SEC_CODE|x| | | | | | |
+| CDD_I2C_START_SEC_ISR_CODE|x| | | | | | |
+| CDD_I2C_STOP_SEC_ISR_CODE|x| | | | | | |
+| CDD_I2C_START_SEC_CONFIG_DATA| | | | |x| | |
+| CDD_I2C_STOP_SEC_CONFIG_DATA| | | | |x| | |
+| CDD_I2C_START_SEC_CONST_32| | | |x| | | |
+| CDD_I2C_STOP_SEC_CONST_32| | | |x| | | |
+| CDD_I2C_START_SEC_VAR_NOINIT_UNSPECIFIED| |x| | | | | |
+| CDD_I2C_STOP_SEC_VAR_NOINIT_UNSPECIFIED| |x| | | | | |
+| CDD_I2C_START_SEC_VAR_INIT_UNSPECIFIED| | |x| | | | |
+| CDD_I2C_STOP_SEC_VAR_INIT_UNSPECIFIED| | |x| | | | |
+| Application buffers passed to I2C| | | | | | |x|
+| Notification called from I2C| | | | | |x| |
+
+#### Scheduling
+
+|Schedule Function API|Description|
+|------------|---------------|
+|Cdd_I2c_MainFunction|This function process the I2c transmission|
+
+#### Error Handling
+
+##### Development Error Reporting
+
+By default, development errors are reported to the DET using the service Det_ReportError(), if development error reporting is enabled (i.e. precompile parameter   CDD_I2C_DEV_ERROR_DETECT==STD_ON). If another module is used for development error reporting, the function prototype for reporting the error can be configured by the integrator, but must have the same signature as the service Det_ReportError(). The reported I2C ID is 255
+
+#### Error Codes
+
+##### Development Errors
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-----|-------|
+|No errors |CDD_I2C_E_NO_ERROR|0x00|
+|API service used without module initialization |CDD_I2C_E_UNINIT|0x01|
+|Init service called twice without DeInit|CDD_I2C_E_ALREADY_INITIALIZED|0x02|
+|API service called during ongoing process |CDD_I2C_E_BUSY|0x03|
+|Channel out of bounds, exceeds the maximum number of configured channels|CDD_I2C_E_PARAM_CHANNEL|0x04|
+|Sequence out of bounds, exceeds the maximum number of configured sequences|CDD_I2C_E_PARAM_SEQUENCE|0x05|
+|Length out of bounds – a zero length is not accepted. The total length is limited to 65535|CDD_I2C_E_PARAM_LENGTH|0x06|
+|An invalid version info pointer has been passed (a NULL_PTR)|CDD_I2C_E_PARAM_VINFO_PTR|0x07|
+|An invalid configuration has been passed (a non NULL_PTR)|CDD_I2C_E_PARAM_CONFIG|0x08|
+|Two invalid transmission buffers have been passed (no NULL_PTR/ or both NULL_PTR)|CDD_I2C_E_PARAM_TRANS_BUFFER|0x09|
+|Address out of bounds, exceeds the limit of the configured address range|CDD_I2C_E_PARAM_ADDRESS|0x0A|
+|Buffer direction conflicts with channel direction set via EB|CDD_I2C_E_PARAM_DIRECTION|0x0B|
+|Notify callback functions passed as NULL_PTR|CDD_I2C_E_PARAM_NOTIFY_CALLBACK|0x0C|
+|Bus error encountered during transmission or reception|CDD_I2C_E_PARAM_TRANSMISSION_ERROR|0x0D|
+|Queue full|CDD_I2C_E_PARAM_QUEUE_FULL|0x0E|
+|Timeout error|CDD_I2C_E_PARAM_TIMEOUT|0x0F|
+|Hardware unit busy|CDD_I2C_E_HW_UNIT_BUSY|0x10|
+|Channel unit busy|CDD_I2C_E_CHANNEL_BUSY|0x11|
+|Arbitration Loss|CDD_I2C_E_ARBITRATION_LOSS|0x12|
+|Nack|CDD_I2C_E_NACK|0x13|
+|Receive shift register full|CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL|0x14|
+|API service called with invalid data buffer pointer|CDD_I2C_E_PARAM_POINTER|0x15|
+|API service called with invalid HW unit ID|CDD_I2C_E_PARAM_HWUNIT|0x16|
+|API service called with sequence is busy|CDD_I2C_E_SEQ_BUSY|0x17|
+
+### Used Resources
+
+#### Interrupt Handling
+
+Interrupt routines are provided by the CDD I2C driver is Cdd_I2c_Isr_Handler(). Basically, the ISR’s are in the file Cdd_I2c_Irq.c. User might edit it for adapting for the suitable OS.
+Interrupt handler shall be provided for each instance of the CDD I2C driver.
+The corresponding CDD I2C Interrupt numbers are:
+
+| Hardware Unit| ISR Handler Mapped| Interrupt Number|
+|-----|-----|-----|
+|0|Cdd_I2c_HwUnit0_ISR|44|
+|1|Cdd_I2c_HwUnit1_ISR|45|
+|2|Cdd_I2c_HwUnit2_ISR|46|
+|3|Cdd_I2c_HwUnit3_ISR|47|
+
+### Integration Description
+
+#### Dependent Modules
+
+##### DET
+
+The module I2C depends on the DET (by default) in order to report development errors. Detection and reporting of development errors can be enabled or disabled by the switch "Enable Development Error Detection" on the "General" container within the module I2C. The DET can be replaced optionally by an equivalent component which is responsible to recognize development errors, if no DET component is available.
+
+##### MCU
+
+The module MCU powers up the microcontroller’s peripherals at startup time and initializes clock source. Since the peripherals are also containing the registers for I/O functionality they have to be activated if it is intended to use them.
+
+##### PORT
+
+The module PORT enables the I2C lines at startup time. To operate the I2C properly, the PORT driver has to be configured. The PORT driver sets the Pins to the required values for the I2C to operate. The Pins used are SDA (serial data line) and SCL (serial clock). An open drain configuration is recommended. Some I2C drivers require the PORT for switching from I2C functionality to DIO functionality – to use the "clock free" procedure - and back.
+
+##### SchM
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that CDD I2C module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator.
+
+For CDD_I2C Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | CDD_I2C Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|CDD_I2C_EXCLUSIVE_AREA_0 | Cdd_I2c_SetupEB() <br>Cdd_I2c_SetupEBDynamic() <br>Cdd_I2c_AsyncTransmit() <br>Cdd_I2c_Cancel() <br>Cdd_I2c_MainFunction() | To protect against multiple access for shared resources|**ALL_INTERRUPT_BLOCKING** : All interrupts should be blocked as this API's can be called in the interrupts |
+
+##### Configurable Callback Functions
+
+###### Notifications
+
+At its configurable interfaces the I2C defines notifications that can be mapped to callback functions in case completion of a sequence or failure of a sequence. The mapping is not statically defined by the I2C but can be performed at configuration time.
+
+###### Cdd_I2c_SequenceEndNotification
+
+Sequence transfer successful notification function. Can be configured in the configuration tool.
+Particularities and Limitations: It is advised to keep the code execution in the notification function as short as possible.
+Call context: Interrupt as well as polling
+
+###### Cdd_I2c_SequenceErrorNotification
+
+Sequence transfer error notification function. If the I2c detects an error, this function notifies the application about a communication failure. Can be configured in the configuration tool.
+Particularities and Limitations: It is advised to keep the code execution in the notification function as short as possible.
+Call context: Interrupt as well as polling
+
+For the Following API’s it is possible to be called from the sequence notifications:
+
+   1. Cdd_I2c_GetVersionInfo
+   2. Cdd_I2c_SetupEB
+   3. Cdd_I2c_SetupEBDynamic
+   4. Cdd_I2c_GetResult
+   5. Cdd_I2c_GetSequenceResult
+   6. Cdd_I2c_GetStatus
+
+#### Multi-core Support
+
+Not Supported
+
+### Configuration
+
+
+
+##### CddI2cDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Description** | I2c Dev Error ON/OFF. |
+| **Name** | CddI2cDevErrorDetect |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CddI2cUseInterrupts
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cUseInterrupts |
+| **Description** | Switches to activate or deactivate interrupt controlled job processing(ON/OFF). |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### CddI2cVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cVersionInfoApi |
+| **Description** | Pre-processor switch to enable/disable the API to read out the modules version information. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+##### CddI2cCancelCheck
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cCancelCheck |
+| **Description** | Switches to activate or deactivate the Cancel channel transmission API(ON/OFF). |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### CddI2cStatusCheck
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cStatusCheck |
+| **Description** | Type of Isr function: void functionname(void) CAT1 : interrupt void func(void) CAT2 : ISR(func) |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_I2C_ISR_VOID |
+| **Multiplicity-Configuration-Class** | -- |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Post-build-variant-multiplicity** | false |
+| **Range** | CDD_I2C_ISR_VOID<br>CDD_I2C_ISR_CAT1<br>CDD_I2C_ISR_CAT2 |
+
+##### CddI2cHwUnitsUsed
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cHwUnitsUsed |
+| **Description** | Maximum number of I2c hardware units used |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 4 |
+| **Min-value** | 1 |
+
+##### CddI2cEnableRegisterReadbackApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cEnableRegisterReadbackApi |
+| **Description** | Switch to indicate that the Cdd_I2c_RegisterReadBack is supported |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
+#### CddI2cHwConfig
+This container contains the HW unit initialization parameters
+
+##### CddI2cHwUnitType
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cHwUnitType |
+| **Description** | I2c HW unit to use. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_I2C_HW_UNIT_0 |
+| **Range** | CDD_I2C_HW_UNIT_0<br>CDD_I2C_HW_UNIT_1<br>CDD_I2C_HW_UNIT_2<br>CDD_I2C_HW_UNIT_3 |
+
+##### CddI2cChannelBitRate
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cChannelBitRate |
+| **Description** | Selection of Channel Bit Rate. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_I2C_100KHZ |
+| **Range** | CDD_I2C_100KHZ<br>CDD_I2C_400KHZ |
+
+##### CddI2cHwUnitFrequency
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cHwUnitFrequency |
+| **Description** | Frequency which the HW unit will utilize(Range = 6.7 MHz - 13.3 MHz), please note that this differs from the bus frequency used for communication |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 8000000 |
+| **Max-value** | 13300000 |
+| **Min-value** | 6700000 |
+
+##### CddI2cClkInputSrc
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cClkInputSrc |
+| **Description** | Please ensure that the frequency used here should be the same as mcu clk settings for I2c, as this is required internally to calculate pre-scalar which is needed to set the bus frequency |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 200000000 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
+
+##### CddI2cOwnAddress
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cOwnAddress |
+| **Description** | Own address - used in both 7 and 10-bit address mode. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 127 |
+| **Max-value** | 1023 |
+| **Min-value** | 0 |
+
+#### CddI2cChannelConfig
+This container contains the Channel configurations
+
+##### CddI2cChannelDirection
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cChannelDirection |
+| **Description** | Selection of Channel direction. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_I2C_WRITE |
+| **Range** | CDD_I2C_WRITE<br>CDD_I2C_READ |
+
+##### CddI2cChannelSlaveAddress
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cChannelSlaveAddress |
+| **Description** | Specifies whether channel is 7 bit or 10 bit. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_I2C_7_BIT_ADDRESS |
+| **Max-value** | 65535 |
+| **Min-value** | 0 |
+| **Range** | CDD_I2C_7_BIT_ADDRESS<br>CDD_I2C_10_BIT_ADDRESS |
+
+#### CddI2cSequenceConfig
+This container contains the Sequence configurations
+
+##### CddI2cSequenceHwUnitType
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cSequenceHwUnitType |
+| **Description** | I2c HW unit to use. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_I2C_HW_UNIT_0 |
+| **Range** | CDD_I2C_HW_UNIT_0<br>CDD_I2C_HW_UNIT_1<br>CDD_I2C_HW_UNIT_2<br>CDD_I2C_HW_UNIT_3 |
+
+##### CddI2cNumberOfChannelsInSequence
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cNumberOfChannelsInSequence |
+| **Description** | Set the number of channels in the sequence |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 1 |
+| **Max-value** | 255 |
+| **Min-value** | 1 |
+
+##### CddI2cSequenceCompleteNotify
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cSequenceCompleteNotify |
+| **Description** | Function pointer to callback function sequence complete notify |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | NULL_PTR |
+
+##### CddI2cSequenceErrorNotify
+
+| Item ||
+|--------|---------------|
+| **Name** | CddI2cSequenceErrorNotify |
+| **Description** | Function pointer to callback function sequence complete notify |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | NULL_PTR |
+### Examples
+
+The example applications demonstrates use of I2C module, the list below identifies key steps performed in the example.
+
+#### Overview
+
+* I2c Example:
+  * Initialize clock using Mcu_Init()
+  * Initializes pins as I2C SDA and SCL using Port_Init()
+  * Get I2C version using Cdd_I2c_GetVersionInfo()
+  * Initialize I2c module using Cdd_I2c_Init()
+  * Set up channels using Cdd_I2c_SetupEBDynamic()
+  * Write data to target device
+  * Receive and process data
+  * De-initialize I2c module using Cdd_I2c_DeInit()
+
+#### Setup Required to Run Example
+
+* Install Code Composer Studio(CCS) latest version
+* Install latest C29 compiler
+* Connect the hardware and power up
+* Connect the uart and set up the baudrate to check the log on serial console
+
+#### How to Run Examples
+
+
+I2C example application demonstrating the MCAL I2C driver features is in folder <MCAL_ROOT>/examples/I2c.
+This application can be built from the root folder by giving "gmake -s i2c_app PLATFORM=am263px".
+
+
+
+#### Sample Log
+
+
+```{code-block}
+I2C_APP: STARTS !!!
+
+ I2C MCAL Version Info
+ ---------------------
+ Vendor ID           : 44
+ Module ID           : 255
+ SW Major Version    : 11
+ SW Minor Version    : 0
+ SW Patch Version    : 0
+
+I2C_APP: EEPROM Data 0x0000: 0x02
+I2C_APP: EEPROM Data 0x0001: 0x03
+I2C_APP: EEPROM Data 0x0002: 0x04
+I2C_APP: EEPROM Data 0x0003: 0x05
+I2C_APP: EEPROM Data 0x0004: 0x06
+I2C_APP: EEPROM Data 0x0005: 0x07
+I2C_APP: EEPROM Data 0x0006: 0x08
+I2C_APP: EEPROM Data 0x0007: 0x09
+I2C_APP: EEPROM Data 0x0008: 0x0A
+I2C_APP: EEPROM Data 0x0009: 0x0B
+I2C_APP: EEPROM Data 0x000A: 0x0C
+I2C_APP: EEPROM Data 0x000B: 0x0D
+I2C_APP: EEPROM Data 0x000C: 0x0E
+I2C_APP: EEPROM Data 0x000D: 0x0F
+I2C_APP: EEPROM Data 0x000E: 0x10
+I2C_APP: EEPROM Data 0x000F: 0x11
+I2C_APP: EEPROM Data 0x0010: 0x12
+I2C_APP: EEPROM Data 0x0011: 0x13
+I2C_APP: EEPROM Data 0x0012: 0x14
+I2C_APP: EEPROM Data 0x0013: 0x15
+I2C_APP: EEPROM Data 0x0014: 0x16
+I2C_APP: EEPROM Data 0x0015: 0x17
+I2C_APP: EEPROM Data 0x0016: 0x18
+I2C_APP: EEPROM Data 0x0017: 0x19
+I2C_APP: EEPROM Data 0x0018: 0x1A
+I2C_APP: EEPROM Data 0x0019: 0x1B
+I2C_APP: EEPROM Data 0x001A: 0x45
+I2C_APP: EEPROM Data 0x001B: 0x31
+I2C_APP: EEPROM Data 0x001C: 0x1E
+I2C_APP: EEPROM Data 0x001D: 0x1F
+I2C_APP: EEPROM Data 0x001E: 0x20
+I2C_APP: EEPROM Data 0x001F: 0x21
+I2C_APP: EEPROM Program and verify page: 1 ...
+I2C_APP: Temperature sensor separate write and read test ...
+I2C_APP: Temperature sensor write+read with restart test ...
+I2C_APP: Stack Usage: 816 bytes
+I2C_APP: DONE (Passed) !!
+I2C_APP: All tests have passed
+```
+
+

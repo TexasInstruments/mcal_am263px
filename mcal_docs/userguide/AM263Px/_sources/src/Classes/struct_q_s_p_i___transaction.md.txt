@@ -1,0 +1,41 @@
+---
+orphan: true
+---
+
+---
+title: QSPI_Transaction
+summary: Data structure used with QSPI_Transfers - QSPI_writeConfigMode, QSPI_readMemMapMode. 
+
+---
+
+# QSPI_Transaction
+
+
+
+Data structure used with QSPI_Transfers - QSPI_writeConfigMode, QSPI_readMemMapMode.  [More...](#detailed-description)
+
+
+`#include <Fls_Qspi.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | count |  |
+|  void * | buf |  |
+|  uint32 | addrOffset |  |
+|  uint32 | status |  |
+
+## Detailed Description
+
+```cpp
+struct QSPI_Transaction;
+```
+
+
+**Brief**: 
+Data structure used with QSPI_Transfers - QSPI_writeConfigMode, QSPI_readMemMapMode. 
+
+It indicates how many [QSPI_FrameFormat] frames are sent and received from and to the buffer buf. 
+
+

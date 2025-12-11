@@ -1,0 +1,28 @@
+---
+orphan: true
+---
+
+---
+title: Spi_JobConfigType_PC
+summary: SPI job config structure parameters Pre-Compile only. 
+
+---
+
+# Spi_JobConfigType_PC
+
+
+
+SPI job config structure parameters Pre-Compile only. 
+
+
+`#include <Spi_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  Spi_JobType | jobId |  Job ID.  |
+|  [Spi_CsPinType](../Modules/group___s_p_i.md#enum-spi_cspintype) | csPin |  Chip select pin to use.  |
+|  uint8 | externalDeviceCfgId |  index into SpiConfig.extDevCfg[] indicating the devCfg associated with the job  |
+
+
