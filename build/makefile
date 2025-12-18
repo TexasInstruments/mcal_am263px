@@ -180,6 +180,12 @@ kwwdg:
 kwport:
 	$(if $(filter $(SOCFAMILY), $(subst emptyreplacement,,$(port_SOCLIST))),$(MAKE) -C $(port_PATH),$(ECHO) Nothing to be done for $(SOCFAMILY) port)
 
+kwbootloader_utils:
+	$(if $(filter $(SOCFAMILY), $(subst emptyreplacement,,$(bootloader_utils_SOCLIST))),$(MAKE) -C $(bootloader_utils_PATH),$(ECHO) Nothing to be done for $(SOCFAMILY) bootloader_utils)
+
+kwhsmclient_utils:
+	$(if $(filter $(SOCFAMILY), $(subst emptyreplacement,,$(hsmclient_utils_SOCLIST))),$(MAKE) -C $(hsmclient_utils_PATH),$(ECHO) Nothing to be done for $(SOCFAMILY) hsmclient_utils)
+
 #=================================================================
 # MCALs libs and tests
 $(mcal_PKG_LIST_ALL):

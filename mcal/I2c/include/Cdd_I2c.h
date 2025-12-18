@@ -125,8 +125,8 @@ extern "C" {
 #define CDD_I2C_SID_MAIN_FUNCTION (0x09U)
 /** \brief Service ID Cdd_I2c_PollingModeProcessing() */
 #define CDD_I2C_SID_POLLING_MODE_PROCESSING (0x0AU)
-/** \brief Service ID Cdd_I2c_SetHandling() */
-#define CDD_I2C_SID_SET_HANDLING (0x0BU)
+/** \brief Service ID Cdd_I2c_GetStatus() */
+#define CDD_I2C_SID_GET_STATUS (0x0BU)
 /** \brief Service ID Cdd_I2c_RegisterReadBack() */
 #define CDD_I2C_SID_REGISTERREADBACK (0x0CU)
 /** @} */
@@ -143,8 +143,6 @@ extern "C" {
 #define CDD_I2C_E_UNINIT (0x01U)
 /** \brief Init service called twice without deinit */
 #define CDD_I2C_E_ALREADY_INITIALIZED (0x02U)
-/** \brief Driver is busy */
-#define CDD_I2C_E_BUSY (0x03U)
 /** \brief Channel out of bounds, exceeds the maximum number of configured channels */
 #define CDD_I2C_E_PARAM_CHANNEL (0x04U)
 /** \brief Sequence out of bounds, exceeds the maximum number of configured sequences */
@@ -161,24 +159,6 @@ extern "C" {
 #define CDD_I2C_E_PARAM_ADDRESS (0x0AU)
 /** \brief Buffer direction conflicts with channel direction set via EB */
 #define CDD_I2C_E_PARAM_DIRECTION (0x0BU)
-/** \brief Notify callback functions passed as NULL_PTR */
-#define CDD_I2C_E_PARAM_NOTIFY_CALLBACK (0x0CU)
-/** \brief Bus error encountered during transmission or reception */
-#define CDD_I2C_E_PARAM_TRANSMISSION_ERROR (0x0DU)
-/** \brief Queue full */
-#define CDD_I2C_E_PARAM_QUEUE_FULL (0x0EU)
-/** \brief Timeout error */
-#define CDD_I2C_E_PARAM_TIMEOUT (0x0FU)
-/** \brief Hardware unit busy */
-#define CDD_I2C_E_HW_UNIT_BUSY (0x10U)
-/** \brief Channel unit busy */
-#define CDD_I2C_E_CHANNEL_BUSY (0x11U)
-/** \brief ARBITRATION_LOSS */
-#define CDD_I2C_E_ARBITRATION_LOSS (0x12U)
-/** \brief NACK */
-#define CDD_I2C_E_NACK (0x13U)
-/** \brief Receive shift register full */
-#define CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL (0x14U)
 /** \brief API service called with invalid data buffer pointer */
 #define CDD_I2C_E_PARAM_POINTER (0x15U)
 /** \brief API service called with invalid HW unit ID */
@@ -190,22 +170,18 @@ extern "C" {
 /**
  * \name CDD_I2C Runtime Error Codes
  *
- *  Error codes returned by CDD_I2C functions at runtime to DEM module
+ *  Error codes returned by CDD_I2C functions at runtime via error callback
+ *  Cdd_I2c_SequenceErrorNotification
  *  @{
  */
 /** \brief Error is reported if NACK was received */
-#define CDD_I2C_E_NACK_RECEIVED ((uint8)0x00U)
+#define CDD_I2C_E_NACK_RECEIVED ((uint8)0x01U)
 /** \brief Error is reported if the master loses arbitration.
  *  This usually happens if the SDA is stuck low or another master has won
  *  the arbitration procedure */
-#define CDD_I2C_E_ARBITRATION_FAILURE ((uint8)0x01U)
-/** \brief Error is reported in case of FIFO overflow */
-#define CDD_I2C_E_FIFO_HANDLING ((uint8)0x02U)
+#define CDD_I2C_E_ARBITRATION_FAILURE ((uint8)0x02U)
 /** \brief Error is reported if the SCL line is stuck low */
 #define CDD_I2C_E_BUS_FAILURE ((uint8)0x03U)
-/** \brief The function CDD_I2C_StartListening is called while the target
- *  listening mode is set to always listening */
-#define CDD_I2C_E_WRONG_MODE ((uint8)0x04U)
 /** @} */
 
 /**

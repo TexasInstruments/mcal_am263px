@@ -430,7 +430,6 @@ void flcCopyTest(uint32 *sourceAddress, uint32 *destinationAddress, uint32 trans
     }
     Fls_PhyDisable();
 
-    Cdd_Flc_DisableRegion(hwUnitId, regionId);
     flc_end    = Mcal_CycleCounterP_getCount32();
     flc_cycles = flc_end - flc_start;
 
@@ -451,7 +450,7 @@ void flcCopyTest(uint32 *sourceAddress, uint32 *destinationAddress, uint32 trans
         }
     }
 
-    // Cdd_Flc_DisableRegion(hwUnitId, regionId);
+    Cdd_Flc_DisableRegion(hwUnitId, regionId);
     if (!error)
     {
         AppUtils_printf("No Data Mismatch\r\n");

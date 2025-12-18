@@ -149,12 +149,12 @@ void start_timer(void)
     HW_WR_REG32(0x52180000, 0x00000001);  // GCTRL Start Timer
 }
 
-void AppUtils_TimerInit()
+void AppUtils_TimerInit(void)
 {
     start_timer();
 }
 
-void AppUtils_TimerDeinit()
+void AppUtils_TimerDeinit(void)
 {
     stop_timer();
 }

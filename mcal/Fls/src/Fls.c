@@ -313,7 +313,7 @@ static Std_ReturnType Fls_CheckBlockAlignement(Fls_AddressType SourceAddress)
 static Std_ReturnType Fls_CheckPageAlignement(Fls_AddressType SourceAddress)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_NOT_OK;
-    if ((SourceAddress % Fls_Config_SFDP_Ptr->pageSize) == 0)
+    if ((SourceAddress % Fls_Config_SFDP_Ptr->pageSize) == 0U)
     {
         retVal = E_OK;
     }

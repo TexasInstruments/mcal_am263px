@@ -149,7 +149,7 @@ $(OBJ_PATHS): $(OBJDIR)/%.$(OBJEXT): %.c
 	$(CC) $(_CFLAGS) $(INCLUDES) $(EXT_CFLAGS) $(EXT_INCS) $(CFLAGS_DIROPTS) $(COMPILEMODE) -o $(OBJDIR)/$*.$(OBJEXT) $<
 
 # Implicitly called with --abi=eabi --object_format=elf --silicon_version=7M4 --float_support=FPv4SPD16 --endian=little --code_state=16 --unaligned_access=on --arm_vmrs_si_workaround=off --embedded_constants=on --hll_source=asm --symdebug:none
-ASMFLAGS1 = -mcpu=$(CGT_CPU) -mfloat-abi=hard -mfpu=vfpv3-d16 $(ENDIAN_NESS) -mthumb -save-temps -c
+ASMFLAGS1 = -mcpu=$(CGT_CPU) -mfloat-abi=hard -mfpu=vfpv3-d16 $(ENDIAN_NESS) -mthumb -c
 ASMFLAGS2 = -Wti-a,-d=CLANG
 
 # Object file creation

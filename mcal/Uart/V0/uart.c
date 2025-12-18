@@ -442,13 +442,16 @@ static inline uint32 UART_getIntrIdentityStatus(uint32 baseAddr)
  */
 static void UART_i2310WA(uint32_t baseAddr)
 {
+    uint32 regVal = 0U;
     HW_WR_REG32(baseAddr + UART_TIMEOUTL, 0xFF);
 
     HW_WR_REG32(baseAddr + UART_TIMEOUTH, 0xFF);
 
     HW_WR_FIELD32(baseAddr + UART_EFR2, UART_EFR2_TIMEOUT_BEHAVE, 1);
 
-    HW_RD_REG32(baseAddr + UART_IIR);
+    regVal = HW_RD_REG32(baseAddr + UART_IIR);
+    /*Adding this to resolve MISRA violation*/
+    (void)regVal;
 
     HW_WR_FIELD32(baseAddr + UART_EFR2, UART_EFR2_TIMEOUT_BEHAVE, 0);
 }

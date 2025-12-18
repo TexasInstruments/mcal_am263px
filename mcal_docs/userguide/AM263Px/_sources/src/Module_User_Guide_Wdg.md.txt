@@ -445,7 +445,7 @@ All general parameters of the watchdog driver are collected here.
 4. WDT window reaction can be changed to "reset" through configuration (EB Tresos).
 5. Get Watchdog version using Wdg_GetVersionInfo()
 6. Calculate and define the triggerValue and maxServiceInterval
-7. In example, service interval is 25ms and service count is 100. So, every 25ms core will service the WDT for 100 times (25*100 = 2500 ms).
+7. In example, service interval is 6ms and service count is 25. So, every 6ms core will service the WDT for 25 times (25*6 = 150 ms).
 8. Initialize the timer using Gpt_Init()
 9. Initialize the Watchdog using Wdg_Init()
 10. Start the timer using API Gpt_StartTimer()
@@ -472,31 +472,106 @@ None
 
 ```
 
-   WDG_APP: Sample Application - STARTS !!!
+   Starting OSPI Bootloader ...
+KPI_DATA: [BOOTLOADER_PROFILE] CPU Clock        : 400.000 MHz
+KPI_DATA: [BOOTLOADER_PROFILE] Boot Media       : NOR SPI FLASH
+KPI_DATA: [BOOTLOADER_PROFILE] Boot Media Clock : 133.333 MHz
+KPI_DATA: [BOOTLOADER_PROFILE] Boot Image Size  : 95 KB
+KPI_DATA: [BOOTLOADER_PROFILE] Cores present    :
+r5f0-0
+KPI_DATA: [BOOTLOADER PROFILE] System_init                      :        489us
+KPI_DATA: [BOOTLOADER PROFILE] Drivers_open                     :        103us
+KPI_DATA: [BOOTLOADER PROFILE] LoadHsmRtFw                      :       7868us
+KPI_DATA: [BOOTLOADER PROFILE] Board_driversOpen                :       2232us
+KPI_DATA: [BOOTLOADER PROFILE] CPU load                         :       5724us
+KPI_DATA: [BOOTLOADER PROFILE] SBL End                          :          6us
+KPI_DATA: [BOOTLOADER_PROFILE] SBL Total Time Taken             :      16425us
 
-   WDG MCAL Version Info
-   ---------------------
-   Vendor ID           : 44
-   Module ID           : 102
-   SW Major Version    : 9
-   SW Minor Version    : 1
-   SW Patch Version    : 0
+Image loading done, switching to application ...
+Reset Reason 1
+LoopCount 2
+WDG_APP: Sample Application - STARTS !!!
+ FLS OSPI Address Byte Mode set to 3bytes
 
-   ----------------------------------------------------------------------------------
-   Starting WDG test  !!!
-   ----------------------------------------------------------------------------------
-   Service Count 100
-   Service Interval 25 milliseconds
-   ------------------------------------------
-   Trigger Value = 2500 milliseconds
-   ------------------------------------------
-   Maximum Service Interval 74 milliseconds 
-   Initializing channels
-   Post-Build variant is being used .
-   Reset Reason 2 
-   Test Passed!! 
-   WDG Stack Usage: 800 bytes
-   ------------------------------------------
+WDG MCAL Version Info
+---------------------
+Vendor ID           : 44
+Module ID           : 102
+SW Major Version    : 10
+SW Minor Version    : 2
+SW Patch Version    : 0
+
+Starting WDG test  !!!
+Service Count 25
+Service Interval 6 milliseconds
+Trigger Value = 150 milliseconds
+Trigger Value Mode = 150 milliseconds
+Maximum Service Interval 74 milliseconds
+Initializing channels
+Gpt_Count 600000
+Gpt_CountMode 600000
+Default Preload Count 33554432 and Downcounter Value 33554431
+Post-Build variant is being used ..
+WDG_INIT Preload Count 14999552 and Downcounter Value 14999471
+Trigger condition value is 76
+Wdg_SetTriggerCondition_1 Preload Coun1 WDG trigger set
+t 14999552 and Downcounter Value 14462892
+2 WDG trigger set
+3 WDG trigger set
+4 WDG trigger set
+5 WDG trigger set
+...
+248 WDG trigger set
+249 WDG trigger set
+250 WDG trigger set
+Wdg_SetMode Preload Count 29990912 and Downcounter Value 29990778
+Time elapsed 1.508069 seconds
+Wdg SetMode to  1 !!
+Service Interval changed to 6 milliseconds
+trigger condition value is 76
+Wdg_SetTriggerCondition2 Preload Count1  WDG trigger set
+ 29990912 and Downcounter Value 29454035
+2  WDG trigger set
+3  WDG trigger set
+4  WDG trigger set
+5  WDG trigger set
+...
+98  WDG trigger set
+99  WDG trigger set
+100  WDG trigger set
+Time elapsed 0.602112 seconds
+Wdg SetMode Tes101  WDG trigger set
+r set
+!
+Expecting WDG reset after around trigger value 150...
+Gpt_DeInit begin Preload Count 29990912 and Downcounter Value 2837896WDG time elapsed 6.002078 milliseconds
+6
+WDG time elapsed 12.003002 milliseconds
+WDG time elapsed 18.003972 milliseconds
+....
+WDG time elapsed 132.022973 milliseconds
+WDG time elapsed 138.023973 milliseconds
+
+Starting OSPI Bootloader ...
+KPI_DATA: [BOOTLOADER_PROFILE] CPU Clock        : 400.000 MHz
+KPI_DATA: [BOOTLOADER_PROFILE] Boot Media       : NOR SPI FLASH
+KPI_DATA: [BOOTLOADER_PROFILE] Boot Media Clock : 133.333 MHz
+KPI_DATA: [BOOTLOADER_PROFILE] Boot Image Size  : 95 KB
+KPI_DATA: [BOOTLOADER_PROFILE] Cores present    :
+r5f0-0
+KPI_DATA: [BOOTLOADER PROFILE] System_init                      :        489us
+KPI_DATA: [BOOTLOADER PROFILE] Drivers_open                     :        103us
+KPI_DATA: [BOOTLOADER PROFILE] LoadHsmRtFw                      :       7869us
+KPI_DATA: [BOOTLOADER PROFILE] Board_driversOpen                :       2223us
+KPI_DATA: [BOOTLOADER PROFILE] CPU load                         :       5723us
+KPI_DATA: [BOOTLOADER PROFILE] SBL End                          :          6us
+KPI_DATA: [BOOTLOADER_PROFILE] SBL Total Time Taken             :      16415us
+
+Image loading done, switching to application ...
+Reset Reason 2
+Test Passed!!
+WDG Test Completed !!!
+WDG Stack Usage: 808 bytes
 
 ```
 

@@ -542,29 +542,17 @@ static Std_ReturnType I2c_utilsCheckSeqFlag(Cdd_I2c_SequenceType seqId, uint8 ex
 
 static void I2c_utilsSequenceErrorReport(uint8 errorCode)
 {
-    if (CDD_I2C_E_HW_UNIT_BUSY == errorCode)
-    {
-        GT_0trace(I2C_UTILS_TRACE_MASK, GT_ERR, " Hardware unit busy!!\n\r");
-    }
-    else if (CDD_I2C_E_CHANNEL_BUSY == errorCode)
-    {
-        GT_0trace(I2C_UTILS_TRACE_MASK, GT_ERR, " Channels busy!!\n\r");
-    }
-    else if (CDD_I2C_E_ARBITRATION_LOSS == errorCode)
+    if (CDD_I2C_E_ARBITRATION_FAILURE == errorCode)
     {
         GT_0trace(I2C_UTILS_TRACE_MASK, GT_ERR, " Arbitration lost!!\n\r");
     }
-    else if (CDD_I2C_E_NACK == errorCode)
+    else if (CDD_I2C_E_NACK_RECEIVED == errorCode)
     {
         GT_0trace(I2C_UTILS_TRACE_MASK, GT_ERR, " No Acknowledgement!!\n\r");
     }
-    else if (CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL == errorCode)
+    else if (CDD_I2C_E_BUS_FAILURE == errorCode)
     {
-        GT_0trace(I2C_UTILS_TRACE_MASK, GT_ERR, " Receive shift register full!!\n\r");
-    }
-    else if (CDD_I2C_E_PARAM_QUEUE_FULL == errorCode)
-    {
-        GT_0trace(I2C_UTILS_TRACE_MASK, GT_ERR, " Queue full!!\n\r");
+        GT_0trace(I2C_UTILS_TRACE_MASK, GT_ERR, " Bus failure!!\n\r");
     }
     else
     {

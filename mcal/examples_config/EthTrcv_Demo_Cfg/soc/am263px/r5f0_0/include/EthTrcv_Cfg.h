@@ -128,7 +128,7 @@ extern "C" {
 /* @} */
 
 /** \brief EthTrcv max number of controllers. */
-#define ETHTRCV_MAX_CONTROLLER          	(2U)
+#define ETHTRCV_MAX_CONTROLLER          	(1U)
 
 /**
  *  \name EthTrcv Controller names
@@ -148,8 +148,6 @@ extern "C" {
  */
 
 #define EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0    (0U)
-
-#define EthTrcvConf_EthTrcvConfig_EthTrcvIdx_1    (1U)
 
 /* @} */
 

@@ -419,10 +419,8 @@ Lin_GoToSleep(uint8 Channel)
         return_value = Lin_SendGoToSleepSignal(lin_base_cntr_addr);
         if (return_value == E_NOT_OK)
         {
-#if (STD_ON == LIN_DEM_ENABLE)
 #ifdef LIN_E_TIMEOUT
             Dem_SetEventStatus(LIN_E_TIMEOUT, DEM_EVENT_STATUS_PREFAILED);
-#endif
 #endif
         }
         else

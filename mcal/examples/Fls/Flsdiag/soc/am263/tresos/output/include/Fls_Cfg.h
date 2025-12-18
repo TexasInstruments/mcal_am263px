@@ -197,6 +197,8 @@ extern "C" {
 /** \brief Enable/disable FLS DMA Support */
 #define FLS_DMA_ENABLE  (STD_OFF)
 
+#define FLS_OSPI_PHY_ENABLE                   (STD_OFF)
+
 /* @} */
 
 /**

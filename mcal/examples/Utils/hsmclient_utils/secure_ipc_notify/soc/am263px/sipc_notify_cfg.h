@@ -36,9 +36,7 @@
 extern "C" {
 #endif
 
-// #include <drivers/hw_include/am263px/cslr_soc.h>
-// #include <drivers/soc/am263px/soc.h>
-#include <bootloader_utils\am263px\soc.h>
+#include <bootloader_utils/am263px/soc.h>
 #include "sys_vim.h"
 #include <HwiP.h>
 #include <CpuIdP.h>

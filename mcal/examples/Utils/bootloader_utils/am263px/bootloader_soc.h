@@ -305,7 +305,7 @@ void Bootloader_socGetBootSeqOid(uint8_t* boot_seq_oid);
 /**
  * \brief API to set CPU clock to 200 MHz or 400 MHz on the basis of eFUSE bits configuration
  */
-void Bootloader_socSetAutoClock();
+void Bootloader_socSetAutoClock(void);
 
 /**
  * dummy api call

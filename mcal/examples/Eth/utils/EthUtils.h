@@ -81,8 +81,11 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#if defined(AM263X_PLATFORM) || defined(AM263PX_PLATFORM) || defined(AM273X_PLATFORM) || defined(AM2732S_PLATFORM) || \
+    defined(AM261X_PLATFORM)
 #include <Std_Types.h>
 #include "app_utils.h"
+#endif
 
 /* ========================================================================== */
 /*                                 Macros                                     */

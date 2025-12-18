@@ -102,14 +102,14 @@ Bootloader_CoreAddrTranslateInfo gAddrTranslateInfo[] = {
         .addrRegionInfo =
             {
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMA_RAM_BASE,
-                    .socAddr      = CSL_MSS_TCMA_RAM_BASE + CSL_MSS_TCMA_RAM_SIZE,
-                    .regionSize   = CSL_MSS_TCMA_RAM_SIZE,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMA_RAM_BASE,
+                    .socAddr      = (uint32_t)CSL_MSS_TCMA_RAM_BASE + CSL_MSS_TCMA_RAM_SIZE,
+                    .regionSize   = (uint32_t)CSL_MSS_TCMA_RAM_SIZE,
                 },
                 {
                     .cpuLocalAddr = (uint32_t)CSL_MSS_TCMB_RAM_BASE,
-                    .socAddr      = CSL_MSS_TCMB_RAM_BASE + CSL_MSS_TCMB_RAM_SIZE,
-                    .regionSize   = CSL_MSS_TCMB_RAM_SIZE,
+                    .socAddr      = (uint32_t)CSL_MSS_TCMB_RAM_BASE + CSL_MSS_TCMB_RAM_SIZE,
+                    .regionSize   = (uint32_t)CSL_MSS_TCMB_RAM_SIZE,
                 },
             },
     },
@@ -120,14 +120,14 @@ Bootloader_CoreAddrTranslateInfo gAddrTranslateInfo[] = {
         .addrRegionInfo =
             {
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMA_RAM_BASE,
-                    .socAddr      = MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE,
-                    .regionSize   = CSL_MSS_TCMA_RAM_SIZE * 2U,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMA_RAM_BASE,
+                    .socAddr      = (uint32_t)MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE,
+                    .regionSize   = (uint32_t)CSL_MSS_TCMA_RAM_SIZE * 2U,
                 },
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMB_RAM_BASE,
-                    .socAddr      = MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE,
-                    .regionSize   = CSL_MSS_TCMB_RAM_SIZE * 2U,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMB_RAM_BASE,
+                    .socAddr      = (uint32_t)MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE,
+                    .regionSize   = (uint32_t)CSL_MSS_TCMB_RAM_SIZE * 2U,
                 },
             },
     },
@@ -138,14 +138,14 @@ Bootloader_CoreAddrTranslateInfo gAddrTranslateInfo[] = {
         .addrRegionInfo =
             {
                 {
-                    .cpuLocalAddr = CSL_MSS_TCMA_RAM_BASE,
-                    .socAddr      = MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE,
-                    .regionSize   = CSL_MSS_TCMA_RAM_SIZE,
+                    .cpuLocalAddr = (uint32_t)CSL_MSS_TCMA_RAM_BASE,
+                    .socAddr      = (uint32_t)MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE,
+                    .regionSize   = (uint32_t)CSL_MSS_TCMA_RAM_SIZE,
                 },
                 {
                     .cpuLocalAddr = (uint32_t)CSL_MSS_TCMB_RAM_BASE,
-                    .socAddr      = MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE,
-                    .regionSize   = CSL_MSS_TCMB_RAM_SIZE,
+                    .socAddr      = (uint32_t)MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE,
+                    .regionSize   = (uint32_t)CSL_MSS_TCMB_RAM_SIZE,
                 },
             },
     },
@@ -183,13 +183,13 @@ char *Bootloader_socGetCoreName(uint32_t cpuId)
 uint64_t Bootloader_socCpuGetClock(uint32_t cpuId)
 {
     int32_t  status  = SystemP_FAILURE;
-    uint64_t clkRate = 0;
+    uint64_t clkRate = 0U;
     if ((cpuId == MCAL_CSL_CORE_ID_R5FSS0_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS0_1) ||
         (cpuId == MCAL_CSL_CORE_ID_R5FSS1_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS1_1))
     {
         clkRate = SOC_rcmGetR5Clock(cpuId);
     }
-    if (clkRate != 0)
+    if (clkRate != 0U)
     {
         status = SystemP_SUCCESS;
     }
@@ -219,15 +219,16 @@ void Bootloader_socConfigurePll(void)
     /* Pre Requisite Sequence to relock core pll needs to be done */
     r5ClkSrc_restore = SOC_rcmCoreApllRelockPreRequisite();
 
-    hsDivCfg.hsDivOutFreqHz[0] = SOC_RCM_FREQ_MHZ2HZ(400U);
-    hsDivCfg.hsDivOutFreqHz[1] = SOC_RCM_FREQ_MHZ2HZ(500U);
-    hsDivCfg.hsDivOutFreqHz[2] = SOC_RCM_FREQ_MHZ2HZ(400U);
+    hsDivCfg.hsDivOutFreqHz[0] = (uint32_t)SOC_RCM_FREQ_MHZ2HZ(400U);
+    hsDivCfg.hsDivOutFreqHz[1] = (uint32_t)SOC_RCM_FREQ_MHZ2HZ(500U);
+    hsDivCfg.hsDivOutFreqHz[2] = (uint32_t)SOC_RCM_FREQ_MHZ2HZ(400U);
     hsDivCfg.hsdivOutEnMask =
         RCM_PLL_HSDIV_OUTPUT_ENABLE_0 | RCM_PLL_HSDIV_OUTPUT_ENABLE_1 | RCM_PLL_HSDIV_OUTPUT_ENABLE_2;
     SOC_rcmCoreApllConfig(RCM_PLL_FOUT_FREQID_CLK_2000MHZ, &hsDivCfg);
 
-    hsDivCfg.hsDivOutFreqHz[0] = SOC_RCM_FREQ_MHZ2HZ(160U);
-    hsDivCfg.hsDivOutFreqHz[1] = SOC_RCM_FREQ_MHZ2HZ(192U);
+    hsDivCfg.hsDivOutFreqHz[0] = (uint32_t)SOC_RCM_FREQ_MHZ2HZ(160U);
+    hsDivCfg.hsDivOutFreqHz[0] = (uint32_t)SOC_RCM_FREQ_MHZ2HZ(160U);
+    hsDivCfg.hsDivOutFreqHz[1] = (uint32_t)SOC_RCM_FREQ_MHZ2HZ(192U);
     hsDivCfg.hsdivOutEnMask    = RCM_PLL_HSDIV_OUTPUT_ENABLE_0 | RCM_PLL_HSDIV_OUTPUT_ENABLE_1;
     SOC_rcmPerApllConfig(RCM_PLL_FOUT_FREQID_CLK_1920MHZ, &hsDivCfg);
 
@@ -245,6 +246,8 @@ int32_t Bootloader_socCpuSetClock(uint32_t cpuId, uint32_t cpuHz)
         case MCAL_CSL_CORE_ID_R5FSS1_0:
         case MCAL_CSL_CORE_ID_R5FSS1_1:
             status = SOC_rcmSetR5Clock(cpuHz, cpuHz / 2, cpuId);
+            break;
+        default:
             break;
     }
     return status;
@@ -297,7 +300,7 @@ int32_t Bootloader_socCpuPowerOnReset(uint32_t cpuId, void *socCoreOpMode)
                     if (config->r5fss1_opMode == BOOTLOADER_OPMODE_LOCKSTEP)
                     {
                         SOC_rcmR5ConfigLockStep(cpuId);
-                        Bootloader_socMemInitCpu(cpuId);
+                        (void)Bootloader_socMemInitCpu(cpuId);
                     }
                     else
                     {
@@ -309,13 +312,13 @@ int32_t Bootloader_socCpuPowerOnReset(uint32_t cpuId, void *socCoreOpMode)
                             SOC_rcmR5SS1TriggerReset();
                             gR5ss1PORDone = TRUE;
                         }
-                        Bootloader_socMemInitCpu(MCAL_CSL_CORE_ID_R5FSS1_1);
+                        (void)Bootloader_socMemInitCpu(MCAL_CSL_CORE_ID_R5FSS1_1);
                     }
                 }
                 else
                 {
                     SOC_rcmR5ConfigLockStep(cpuId);
-                    Bootloader_socMemInitCpu(cpuId);
+                    (void)Bootloader_socMemInitCpu(cpuId);
                 }
             }
             break;
@@ -328,7 +331,10 @@ int32_t Bootloader_socCpuPowerOnReset(uint32_t cpuId, void *socCoreOpMode)
                 SOC_rcmR5SS1TriggerReset();
                 gR5ss1PORDone = TRUE;
             }
-            Bootloader_socMemInitCpu(cpuId);
+            (void)Bootloader_socMemInitCpu(cpuId);
+            break;
+        default:
+            status = SystemP_FAILURE;
             break;
     }
     return status;
@@ -455,23 +461,23 @@ uint32_t Bootloader_socIsAuthRequired(void)
 
 void Bootloader_socGetBootSeqOid(uint8_t *boot_seq_oid)
 {
-    uint8_t boot_seq[] = {0x06, 0x09, 0x2B, 0x06, 0x01, 0x04, 0x01, 0x82, 0x26, 0x01, 0x01};
-    memcpy(boot_seq_oid, boot_seq, sizeof(boot_seq));
+    uint8_t boot_seq[] = {0x06U, 0x09U, 0x2BU, 0x06U, 0x01U, 0x04U, 0x01U, 0x82U, 0x26U, 0x01U, 0x01U};
+    (void)memcpy(boot_seq_oid, boot_seq, sizeof(boot_seq));
 }
 
-void Bootloader_socSetAutoClock()
+void Bootloader_socSetAutoClock(void)
 {
     uint32_t eFuseFreq = (((ptrTopCtrlRegs->EFUSE1_ROW_12) & CSL_TOP_CTRL_EFUSE1_ROW_12_EFUSE1_ROW_12_R5SS_FREQ_MASK) >>
                           CSL_TOP_CTRL_EFUSE1_ROW_12_EFUSE1_ROW_12_R5SS_FREQ_SHIFT);
     if (eFuseFreq == BOOTLOADER_R5SS_FREQ_200MHz)
     {
-        uint32_t cpuFreq = 200 * 1000000, sysClkFreq = 200 * 1000000;
+        uint32_t cpuFreq = 200U * 1000000U, sysClkFreq = 200U * 1000000U;
 
         SOC_rcmsetR5SysClock(cpuFreq, sysClkFreq, MCAL_CSL_CORE_ID_R5FSS0_0);
     }
     else
     {
-        Bootloader_socCpuSetClock(MCAL_CSL_CORE_ID_R5FSS0_0, (uint32_t)(400 * 1000000));
+        (void)Bootloader_socCpuSetClock(MCAL_CSL_CORE_ID_R5FSS0_0, (uint32_t)(400U * 1000000U));
     }
 }
 

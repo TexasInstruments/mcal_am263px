@@ -21,6 +21,8 @@
 
 #ifndef ETHIF_CBK_H
 #define ETHIF_CBK_H
+#include "Eth_GeneralTypes.h"
+#include "EthTrcv_Types.h"
 
 #ifdef __cplusplus
 extern "C"

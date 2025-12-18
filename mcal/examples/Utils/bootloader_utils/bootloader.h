@@ -63,7 +63,7 @@ extern "C" {
 /**
  * \brief Invalid ID magic number to be used for initializations
  */
-#define BOOTLOADER_INVALID_ID (0xDEADBABE)
+#define BOOTLOADER_INVALID_ID (0xDEADBABEU)
 
 /**
  * \brief Operating mode type

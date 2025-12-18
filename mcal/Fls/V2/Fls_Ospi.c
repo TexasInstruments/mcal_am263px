@@ -404,7 +404,7 @@ Std_ReturnType Fls_Ospi_readDirect(OSPI_Handle handle, const OSPI_Transaction *t
     pSrc = (uint8 *)(FLS_BASE_ADDRESS + addrOffset);
 
     /* Transfer the data */
-    memcpy(pDst, pSrc, trans->count);
+    (void)memcpy(pDst, pSrc, trans->count);
     return retVal;
 
 #endif

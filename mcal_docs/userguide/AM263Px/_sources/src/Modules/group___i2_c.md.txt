@@ -301,12 +301,11 @@ Type to define the number of data elements to be sent and/or received during a t
 | CDD_I2C_SID_GET_SEQUENCE_RESULT   | Service ID Cdd_I2c_GetSequenceResult()  |
 | CDD_I2C_SID_MAIN_FUNCTION   | Service ID Cdd_I2c_MainFunction()  |
 | CDD_I2C_SID_POLLING_MODE_PROCESSING   | Service ID Cdd_I2c_PollingModeProcessing()  |
-| CDD_I2C_SID_SET_HANDLING   | Service ID Cdd_I2c_SetHandling()  |
+| CDD_I2C_SID_GET_STATUS   | Service ID Cdd_I2c_GetStatus()  |
 | CDD_I2C_SID_REGISTERREADBACK   | Service ID Cdd_I2c_RegisterReadBack()  |
 | CDD_I2C_E_NO_ERROR   | No errors.  |
 | CDD_I2C_E_UNINIT   | Error code for not initialized module.  |
 | CDD_I2C_E_ALREADY_INITIALIZED   | Init service called twice without deinit.  |
-| CDD_I2C_E_BUSY   | Driver is busy.  |
 | CDD_I2C_E_PARAM_CHANNEL   | Channel out of bounds, exceeds the maximum number of configured channels.  |
 | CDD_I2C_E_PARAM_SEQUENCE   | Sequence out of bounds, exceeds the maximum number of configured sequences.  |
 | CDD_I2C_E_PARAM_LENGTH   | Length out of bounds – a zero length is not accepted.  |
@@ -315,23 +314,12 @@ Type to define the number of data elements to be sent and/or received during a t
 | CDD_I2C_E_PARAM_TRANS_BUFFER   | Two in-valid transmission buffers have been passed (no NULL_PTR/ or both NULL_PTR)  |
 | CDD_I2C_E_PARAM_ADDRESS   | Address out of bounds, exceeds the limit of the configured address range.  |
 | CDD_I2C_E_PARAM_DIRECTION   | Buffer direction conflicts with channel direction set via EB.  |
-| CDD_I2C_E_PARAM_NOTIFY_CALLBACK   | Notify callback functions passed as NULL_PTR.  |
-| CDD_I2C_E_PARAM_TRANSMISSION_ERROR   | Bus error encountered during transmission or reception.  |
-| CDD_I2C_E_PARAM_QUEUE_FULL   | Queue full.  |
-| CDD_I2C_E_PARAM_TIMEOUT   | Timeout error.  |
-| CDD_I2C_E_HW_UNIT_BUSY   | Hardware unit busy.  |
-| CDD_I2C_E_CHANNEL_BUSY   | Channel unit busy.  |
-| CDD_I2C_E_ARBITRATION_LOSS   | ARBITRATION_LOSS.  |
-| CDD_I2C_E_NACK   | NACK.  |
-| CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL   | Receive shift register full.  |
 | CDD_I2C_E_PARAM_POINTER   | API service called with invalid data buffer pointer.  |
 | CDD_I2C_E_PARAM_HWUNIT   | API service called with invalid HW unit ID.  |
 | CDD_I2C_E_SEQ_BUSY   | API service called with sequence is busy.  |
 | CDD_I2C_E_NACK_RECEIVED   | Error is reported if NACK was received.  |
 | CDD_I2C_E_ARBITRATION_FAILURE   | Error is reported if the master loses arbitration. This usually happens if the SDA is stuck low or another master has won the arbitration procedure.  |
-| CDD_I2C_E_FIFO_HANDLING   | Error is reported in case of FIFO overflow.  |
 | CDD_I2C_E_BUS_FAILURE   | Error is reported if the SCL line is stuck low.  |
-| CDD_I2C_E_WRONG_MODE   | The function CDD_I2C_StartListening is called while the target listening mode is set to always listening.  |
 | CDD_I2C_WRITE   | CDD_I2C direction - write.  |
 | CDD_I2C_READ   | CDD_I2C direction - read.  |
 | CDD_I2C_7_BIT_ADDRESS   | 7 bit address  |

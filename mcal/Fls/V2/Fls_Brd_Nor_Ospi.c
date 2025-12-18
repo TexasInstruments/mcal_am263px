@@ -965,7 +965,6 @@ void processJobs(Fls_JobType job)
 #endif
             break;
         default:
-            retVal = E_NOT_OK;
             break;
     }
 

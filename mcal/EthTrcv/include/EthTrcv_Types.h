@@ -69,30 +69,6 @@ typedef enum
     ETHTRCV_STATE_INIT
 } EthTrcv_StateType;
 
-/**
- *  \brief Transceiver wake-up reason type enum
- */
-/* Requirements : SWS_EthTrcv_00114 */
-typedef enum
-{
-    ETHTRCV_WUR_NONE,
-    ETHTRCV_WUR_GENERAL,
-    ETHTRCV_WUR_BUS,
-    ETHTRCV_WUR_INTERNAL,
-    ETHTRCV_WUR_RESET,
-    ETHTRCV_WUR_POWER_ON,
-    ETHTRCV_WUR_PIN,
-    ETHTRCV_WUR_SYSERR
-} EthTrcv_WakeupReasonType;
-
-typedef enum
-{
-    ETHTRCV_WUR_MAGIC,
-    ETHTRCV_WUR_PATTERN,
-    ETHTRCV_WUR_BROADCAST,
-    ETHTRCV_WUR_UNICAST
-} EthTrcv_WakeupReasonType1;
-
 /** \brief Enumerates Advertisement configurations. */
 typedef enum
 {
@@ -109,6 +85,166 @@ typedef enum
     ETHERNET_ADV_CAPAB_1000_FULL = 0x20U, /* (0x1U << 0x5U) */
     /**< 1000 Mbps full operation. */
 } EthTrcv_AdvCapabType;
+
+/**
+ *  \brief Transceiver mode enum
+ */
+/* Requirements : SWS_EthTrcv_00099 */
+typedef enum
+{
+    ETHTRCV_MODE_DOWN,
+    ETHTRCV_MODE_ACTIVE,
+} EthTrcv_ModeType;
+
+/**
+ *  \brief Transceiver Interface enum
+ */
+/* Requirements : SWS_EthTrcv_00039 */
+typedef enum
+{
+    LIGHT_MII,
+    MII,
+    RGMII
+} EthTrcvMiiSelection;
+
+/**
+ *  \brief Transceiver link state enum
+ */
+/* Requirements : SWS_EthTrcv_00100 */
+typedef enum
+{
+    ETHTRCV_LINK_STATE_DOWN,
+    ETHTRCV_LINK_STATE_ACTIVE,
+} EthTrcv_LinkStateType;
+
+/**
+ *  \brief Transceiver board rate enum
+ */
+/* Requirements : SWS_EthTrcv_00102 */
+typedef enum
+{
+    ETHTRCV_BAUD_RATE_10MBIT,
+    ETHTRCV_BAUD_RATE_100MBIT,
+    ETHTRCV_BAUD_RATE_1000MBIT,
+} EthTrcv_BaudRateType;
+
+/**
+ *  \brief Transceiver duplex mode
+ */
+/* Requirements : SWS_EthTrcv_00103 */
+typedef enum
+{
+    ETHTRCV_DUPLEX_MODE_HALF,
+    ETHTRCV_DUPLEX_MODE_FULL,
+} EthTrcv_DuplexModeType;
+
+typedef enum
+{
+    ETHTRCV_PHYTESTMODE_NONE,
+    ETHTRCV_PHYTESTMODE_1,
+    ETHTRCV_PHYTESTMODE_2,
+    ETHTRCV_PHYTESTMODE_3,
+    ETHTRCV_PHYTESTMODE_4,
+    ETHTRCV_PHYTESTMODE_5,
+} EthTrcv_PhyTestModeType;
+
+/**
+ *  \brief Transceiver wake-up mode enum
+ */
+/* Requirements : SWS_EthTrcv_00113 */
+typedef enum
+{
+    ETHTRCV_WUM_DISABLE,
+    ETHTRCV_WUM_ENABLE,
+    ETHTRCV_WUM_CLEAR
+} EthTrcv_WakeupModeType;
+
+/**
+ *  \brief Transceiver Cable Diagnostic Results
+ */
+/* Requirements : SWS_EthTrcv_91008 */
+typedef enum
+{
+    ETHTRCV_CABLEDIAG_OK,
+    ETHTRCV_CABLEDIAG_ERROR,
+    ETHTRCV_CABLEDIAG_SHORT,
+    ETHTRCV_CABLEDIAG_OPEN
+} EthTrcv_CableDiagResultType;
+
+/**
+ *  \brief Transceiver Port MAC Layer Speed enum
+ */
+typedef enum
+{
+    ETH_MAC_LAYER_SPEED_100M,
+    ETH_MAC_LAYER_SPEED_10G,
+    ETH_MAC_LAYER_SPEED_10M,
+    ETH_MAC_LAYER_SPEED_1G
+} EthTrcvPortMacLayerSpeed;
+
+/**
+ *  \brief Transceiver Connection Negotiation of
+ *  EthTrcv Link enum
+ */
+typedef enum
+{
+    TRCV_CONN_NEG_AUTO,
+    TRCV_CONN_NEG_MASTER,
+    TRCV_CONN_NEG_SLAVE
+} EthTrcvConnNeg;
+
+/**
+ *  \brief Transceiver MAC layer subtype of a switch port
+ */
+typedef enum
+{
+    REDUCED,
+    REVERSED,
+    SERIAL,
+    STANDARD,
+    UNIVERSAL_SERIAL
+} EthTrcvPortMacLayerSubType;
+
+/**
+ *  \brief Transceiver MAC layer type of a switch port
+ */
+typedef enum
+{
+    TRCV_MAC_LAYER_TYPE_XGMII,
+    TRCV_MAC_LAYER_TYPE_XMII,
+    TRCV_MAC_LAYER_TYPE_XXGMII
+} EthTrcvPortMacLayerType;
+
+/**
+ *  \brief Transceiver PHY loopback modes
+ */
+/* Requirements : SWS_EthTrcv_91004 */
+typedef enum
+{
+    ETHTRCV_PHYLOOPBACK_NONE,
+    ETHTRCV_PHYLOOPBACK_INTERNAL,
+    ETHTRCV_PHYLOOPBACK_EXTERNAL,
+    ETHTRCV_PHYLOOPBACK_REMOTE
+} EthTrcv_PhyLoopbackModeType;
+
+/**
+ *  \brief Transceiver PHY transmit modes
+ */
+/* Requirements : SWS_EthTrcv_91006 */
+typedef enum
+{
+    ETHTRCV_PHYTXMODE_NORMAL,
+    ETHTRCV_PHYTXMODE_TX_OFF,
+    ETHTRCV_PHYTXMODE_SCRAMBLER_OFF
+} EthTrcv_PhyTxModeType;
+
+typedef enum
+{
+    TRCV_PHYS_LAYER_TYPE_1000BASE_T,
+    TRCV_PHYS_LAYER_TYPE_1000BASE_T1,
+    TRCV_PHYS_LAYER_TYPE_100BASE_T1,
+    TRCV_PHYS_LAYER_TYPE_100BASE_TX
+} EthTrcvPhysLayerType;
 
 /**
  *  \brief Implementation specific structure of the post build configuration.

@@ -556,8 +556,8 @@ Type to define the number of data elements to be sent and/or received during a t
 <tr class="row-even"><td><p>CDD_I2C_SID_POLLING_MODE_PROCESSING</p></td>
 <td><p>Service ID Cdd_I2c_PollingModeProcessing()</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_I2C_SID_SET_HANDLING</p></td>
-<td><p>Service ID Cdd_I2c_SetHandling()</p></td>
+<tr class="row-odd"><td><p>CDD_I2C_SID_GET_STATUS</p></td>
+<td><p>Service ID Cdd_I2c_GetStatus()</p></td>
 </tr>
 <tr class="row-even"><td><p>CDD_I2C_SID_REGISTERREADBACK</p></td>
 <td><p>Service ID Cdd_I2c_RegisterReadBack()</p></td>
@@ -571,59 +571,29 @@ Type to define the number of data elements to be sent and/or received during a t
 <tr class="row-odd"><td><p>CDD_I2C_E_ALREADY_INITIALIZED</p></td>
 <td><p>Init service called twice without deinit.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_I2C_E_BUSY</p></td>
-<td><p>Driver is busy.</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_CHANNEL</p></td>
+<tr class="row-even"><td><p>CDD_I2C_E_PARAM_CHANNEL</p></td>
 <td><p>Channel out of bounds, exceeds the maximum number of configured channels.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_I2C_E_PARAM_SEQUENCE</p></td>
+<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_SEQUENCE</p></td>
 <td><p>Sequence out of bounds, exceeds the maximum number of configured sequences.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_LENGTH</p></td>
+<tr class="row-even"><td><p>CDD_I2C_E_PARAM_LENGTH</p></td>
 <td><p>Length out of bounds – a zero length is not accepted.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_I2C_E_PARAM_VINFO_PTR</p></td>
+<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_VINFO_PTR</p></td>
 <td><p>An invalid version info pointer has been passed (a NULL_PTR)</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_CONFIG</p></td>
+<tr class="row-even"><td><p>CDD_I2C_E_PARAM_CONFIG</p></td>
 <td><p>An invalid configuration has been passed (a non NULL_PTR)</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_I2C_E_PARAM_TRANS_BUFFER</p></td>
+<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_TRANS_BUFFER</p></td>
 <td><p>Two in-valid transmission buffers have been passed (no NULL_PTR/ or both NULL_PTR)</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_ADDRESS</p></td>
+<tr class="row-even"><td><p>CDD_I2C_E_PARAM_ADDRESS</p></td>
 <td><p>Address out of bounds, exceeds the limit of the configured address range.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_I2C_E_PARAM_DIRECTION</p></td>
+<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_DIRECTION</p></td>
 <td><p>Buffer direction conflicts with channel direction set via EB.</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_NOTIFY_CALLBACK</p></td>
-<td><p>Notify callback functions passed as NULL_PTR.</p></td>
-</tr>
-<tr class="row-even"><td><p>CDD_I2C_E_PARAM_TRANSMISSION_ERROR</p></td>
-<td><p>Bus error encountered during transmission or reception.</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_PARAM_QUEUE_FULL</p></td>
-<td><p>Queue full.</p></td>
-</tr>
-<tr class="row-even"><td><p>CDD_I2C_E_PARAM_TIMEOUT</p></td>
-<td><p>Timeout error.</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_HW_UNIT_BUSY</p></td>
-<td><p>Hardware unit busy.</p></td>
-</tr>
-<tr class="row-even"><td><p>CDD_I2C_E_CHANNEL_BUSY</p></td>
-<td><p>Channel unit busy.</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_ARBITRATION_LOSS</p></td>
-<td><p>ARBITRATION_LOSS.</p></td>
-</tr>
-<tr class="row-even"><td><p>CDD_I2C_E_NACK</p></td>
-<td><p>NACK.</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL</p></td>
-<td><p>Receive shift register full.</p></td>
 </tr>
 <tr class="row-even"><td><p>CDD_I2C_E_PARAM_POINTER</p></td>
 <td><p>API service called with invalid data buffer pointer.</p></td>
@@ -640,14 +610,8 @@ Type to define the number of data elements to be sent and/or received during a t
 <tr class="row-even"><td><p>CDD_I2C_E_ARBITRATION_FAILURE</p></td>
 <td><p>Error is reported if the master loses arbitration. This usually happens if the SDA is stuck low or another master has won the arbitration procedure.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_FIFO_HANDLING</p></td>
-<td><p>Error is reported in case of FIFO overflow.</p></td>
-</tr>
-<tr class="row-even"><td><p>CDD_I2C_E_BUS_FAILURE</p></td>
+<tr class="row-odd"><td><p>CDD_I2C_E_BUS_FAILURE</p></td>
 <td><p>Error is reported if the SCL line is stuck low.</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_I2C_E_WRONG_MODE</p></td>
-<td><p>The function CDD_I2C_StartListening is called while the target listening mode is set to always listening.</p></td>
 </tr>
 <tr class="row-even"><td><p>CDD_I2C_WRITE</p></td>
 <td><p>CDD_I2C direction - write.</p></td>
@@ -953,7 +917,7 @@ This service reads the key I2C registers and returns their value.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Dec 11, 2025.
+          <span class="lastupdated" >Last updated on Dec 18, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

@@ -2603,22 +2603,22 @@ static inline void Mcu_enableAdcReference(uint32 adcInstance)
     }
 
     /* Unlock Top Control Space */
-    Mcu_controlModuleUnlockMMR(0, MCU_TOP_CTRL_PARTITION0);
+    Mcu_controlModuleUnlockMMR(0U, MCU_TOP_CTRL_PARTITION0);
 
     /*Mask HHV before enabling reference buffer to ensure the ADC doesn't cause an MCU reset*/
     HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_MASK_ANA_ISO,
-                (0x7 & CSL_TOP_CTRL_MASK_ANA_ISO_MASK_ANA_ISO_MASK_MASK));
+                (0x7U & CSL_TOP_CTRL_MASK_ANA_ISO_MASK_ANA_ISO_MASK_MASK));
     /* Enable ADC references by writing to MMR */
-    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + refbufCtrl_regOffset, 0x7);
+    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + refbufCtrl_regOffset, 0x7U);
     /*Unmask HHV*/
     HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_MASK_ANA_ISO,
-                ((~0x7) & CSL_TOP_CTRL_MASK_ANA_ISO_MASK_ANA_ISO_MASK_MASK));
+                ((~0x7U) & CSL_TOP_CTRL_MASK_ANA_ISO_MASK_ANA_ISO_MASK_MASK));
 
     HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL,
                 HW_RD_REG32(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL) | compctlmask);
 
     /* Lock Top Control Space */
-    Mcu_controlModuleLockMMR(0, MCU_TOP_CTRL_PARTITION0);
+    Mcu_controlModuleLockMMR(0U, MCU_TOP_CTRL_PARTITION0);
 
     Mcal_pmuDelayUsec(1U, MCU_SYSTEM_CLK);
 }

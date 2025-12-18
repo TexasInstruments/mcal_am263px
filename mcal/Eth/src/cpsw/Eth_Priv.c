@@ -710,15 +710,7 @@ static void Eth_updateMacControlVal(const Eth_MacConfigType *pMACConfig, uint32 
     }
 
     /* GIG_FORCE */
-    if ((macType == ETH_MAC_CONN_TYPE_RGMII_FORCE_100_HALF) || (macType == ETH_MAC_CONN_TYPE_RGMII_FORCE_100_FULL) ||
-        (macType == ETH_MAC_CONN_TYPE_RGMII_FORCE_1000))
-    {
-        ETH_PN_SET_FIELD(*pMacControlVal, MAC_CONTROL, GIG_FORCE, 1U);
-    }
-    else
-    {
-        ETH_PN_SET_FIELD(*pMacControlVal, MAC_CONTROL, GIG_FORCE, 0U);
-    }
+    ETH_PN_SET_FIELD(*pMacControlVal, MAC_CONTROL, GIG_FORCE, 0U);
 
     /* Duplex */
     if ((macType == ETH_MAC_CONN_TYPE_MII_10_HALF) || (macType == ETH_MAC_CONN_TYPE_MII_100_HALF) ||

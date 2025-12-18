@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 11.01.00.09 done on 11-Dec-2025.
+<p>This is the release notes for MCAL AM26xx 11.01.00.10 done on 18-Dec-2025.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.txt">license.txt</a> present in installation base path</p>
@@ -56,8 +56,13 @@ This document details about supported driver, installation, dependencies, build 
     </tr>
     <tr>
       <td>Added FLS flash configuration via EB Tresos</td>
-      <td>Fls</td>
+      <td>FLS</td>
       <td>All</td>
+    </tr>
+    <tr>
+      <td>Added PHY tuning support</td>
+      <td>FLS</td>
+      <td>AM263Px, AM261x</td>
     </tr>
     <tr>
       <td>Added demo example to showcase FLS with XIP</td>
@@ -82,14 +87,47 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
+      <td>FLS</td>
+      <td>Flash_sfdpParams_init() function is removed as SFDP parameters are initialized through configurator files</td>
+      <td>Application shall remove any usage of this API for successful build and to ensure compatibility with this change</td>
+    </tr>
+    <tr>
+      <td>CDD I2C</td>
+      <td>Removed below unused DET error codes
+        <ol>
+          <li>CDD_I2C_E_BUSY</li>
+          <li>CDD_I2C_E_PARAM_NOTIFY_CALLBACK</li>
+          <li>CDD_I2C_E_PARAM_TRANSMISSION_ERROR</li>
+          <li>CDD_I2C_E_PARAM_QUEUE_FULL</li>
+          <li>CDD_I2C_E_PARAM_TIMEOUT</li>
+          <li>CDD_I2C_E_HW_UNIT_BUSY</li>
+          <li>CDD_I2C_E_CHANNEL_BUSY</li>
+          <li>CDD_I2C_E_ARBITRATION_LOSS</li>
+          <li>CDD_I2C_E_NACK</li>
+          <li>CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL</li>
+        </ol>
+      </td>
+      <td>Application shall remove any usage of these macros</td>
+    </tr>
+    <tr>
+      <td>CDD I2C</td>
+      <td>Use below runtime error codes in the error callback instead of the previous DET error codes
+        <ol>
+          <li>CDD_I2C_E_ARBITRATION_FAILURE instead of CDD_I2C_E_ARBITRATION_LOSS</li>
+          <li>CDD_I2C_E_NACK_RECEIVED instead of CDD_I2C_E_NACK</li>
+          <li>CDD_I2C_E_BUS_FAILURE</li>
+        </ol>
+      </td>
+      <td>Use runtime error codes in the error callback</td>
+    </tr>
+    <tr>
       <td>MCU</td>
       <td>Mcu_Init also initializes PMU (calls Mcal_pmuInit(); after clock setup)</td>
       <td>Include sys_pmu.c and sys_pmu.h files under Mcal_Lib folder</td>
     </tr>
     <tr>
-      <td>FLS</td>
-      <td>Flash_sfdpParams_init() function is removed as SFDP parameters are initialized through configurator files</td>
-      <td>Application shall remove any usage of this API for successful build and to ensure compatibility with this change</td>
+      <td>WDG</td>
+      <td>Wdg_SetTriggerCondition shall now reload the timeout value during runtime</td>
     </tr>
   </tbody>
 </table>
@@ -130,24 +168,24 @@ This document details about supported driver, installation, dependencies, build 
 | CAN        | 10.02.01 |
 | CDD_CMPSS  | 01.00.02 |
 | CDD_FLC    | 01.00.02 |
-| DIO        | 10.02.01 |
 | CDD_DMA    | 10.02.01 |
+| CDD_FSIRX  | 10.02.01 |
+| CDD_FSITX  | 10.02.01 |
+| CDD_I2C    | 11.00.01 |
+| CDD_IPC    | 10.02.01 |
 | CDD_PWM    | 10.02.00 |
+| CDD_UART   | 10.02.01 |
+| DIO        | 10.02.01 |
 | ETH        | 10.03.00 |
 | ETHTRCV    | 10.03.00 |
 | FLS        | 10.03.00 |
-| CDD_FSIRX  | 10.02.01 |
-| CDD_FSITX  | 10.02.01 |
 | GPT        | 10.02.01 |
-| CDD_I2C    | 11.00.01 |
 | ICU        | 10.02.01 |
-| CDD_IPC    | 10.02.01 |
 | LIN        | 10.03.00 |
 | MCU        | 10.02.01 |
 | PORT       | 10.02.02 |
 | PWM        | 10.02.00 |
 | SPI        | 10.02.01 |
-| CDD_UART   | 10.02.01 |
 | WDG        | 10.02.01 |
 +------------+----------+
 </code></pre>
@@ -197,128 +235,6 @@ This document details about supported driver, installation, dependencies, build 
 | AM261x  | AM261x (am261x-som)               |                         |             |               |
 +---------+-----------------------------------+-------------------------+-------------+---------------+
 </code></pre>
-<h1 id="functionalsafetyartifacts">Functional Safety artifacts</h1>
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left;">Sr. No.</th>
-      <th style="text-align: left;">Work Product</th>
-      <th style="text-align: left;">Availability</th>
-      <th style="text-align: left;">Where to find Artifacts</th>
-      <th style="text-align: left;">Current Quality Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>
-        Dynamic Analysis Report
-        <ol>
-          <li>MCDC</li>
-          <li>Branch</li>
-          <li>Region</li>
-          <li>Line</li>
-          <li>Function</li>
-        </ol>
-      </td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>
-        Static Analysis Report
-        <ol>
-          <li>Static</li>
-          <li>HIS</li>
-          <li>MISRA-C</li>
-        </ol>
-      </td>
-      <td>Yes</td>
-      <td>Installer:"\mcal_docs\csp\*platform*\</td>
-      <td>All Mandatory & Critical warnings and errors are resolved. Required and Advisory warnings will be fixed in future releases.</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>Test Reports: Test Cases and Test Results</td>
-      <td>Yes</td>
-      <td>Installer:"\mcal_docs\csp\*platform*\</td>
-      <td>All test reports are present in installer.</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>
-        Bi-directional Traceability Report
-        <ol>
-          <li>MRD→SPS</li>
-          <li>SPS→SW Arch →SW Design Doc→SW Units (Code)</li>
-          <li>MRD→SPS→Test Case</li>
-          <li>Test Case→Arch Test Case→Design</li>
-        </ol>
-      </td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>Customer Docs: User Guide</td>
-      <td>Yes</td>
-      <td>Installer:"\mcal_docs\userguide\*platform*\</td>
-      <td>User Guide is present in installer as well as softwaredl</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td>SW FMEA</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>7</td>
-      <td>Detailed Design Document</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>8</td>
-      <td>SW Manifest</td>
-      <td>Yes</td>
-      <td>Installer:"\mcal_manifest</td>
-      <td>SW manifest is present in installer</td>
-    </tr>
-    <tr>
-      <td>9</td>
-      <td>Software Product Specification: List of functional, safety requirements for SW components</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>10</td>
-      <td>Architecture Document</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>11</td>
-      <td>SW Safety Manual</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>Safety Assessment</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-  </tbody>
-</table>
 <h1 id="fixeddefects">Fixed Defects</h1>
 <table>
   <thead>
@@ -345,6 +261,30 @@ This document details about supported driver, installation, dependencies, build 
       </td>
     </tr>
     <tr>
+      <td>MCAL-32739</td>
+      <td>MCAL examples not generating MCELF binary when imported CCS</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>MCAL demo example projects makefile is now updated to generate mcelf binaries.</td>
+    </tr>
+    <tr>
+      <td>MCAL-33804</td>
+      <td>HHV mask is required before setting ADC reference buffers</td>
+      <td>ADC</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>HHV bit masked before enabling ADC reference buffers.</td>
+    </tr>
+    <tr>
+      <td>MCAL-32478</td>
+      <td>Delay missing after Mcu_enableAdcReference</td>
+      <td>ADC, MCU</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>MCAL-32468</td>
       <td>ADC_REF_COMP_CTRL configured incorrectly</td>
       <td>ADC</td>
@@ -353,11 +293,11 @@ This document details about supported driver, installation, dependencies, build 
       <td>ADC REF code supported 5 ADC modules by default. But AM261x only has 3 ADC modules</td>
     </tr>
     <tr>
-      <td>MCAL-32478</td>
-      <td>Delay missing after Mcu_enableAdcReference</td>
-      <td>ADC, MCU</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
+      <td>MCAL-26385</td>
+      <td>Can Tx/Rx not working for BitRate=125 KBPS</td>
+      <td>CAN</td>
+      <td>Minor</td>
+      <td>AM263Px, AM261x</td>
       <td></td>
     </tr>
     <tr>
@@ -401,12 +341,28 @@ This document details about supported driver, installation, dependencies, build 
       <td>Fixed the code to not conflict with EB macros</td>
     </tr>
     <tr>
+      <td>MCAL-35349</td>
+      <td>I2C: DET error codes used for runtime errors like NACK</td>
+      <td>CDD I2C</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Fixed the code to use runtime error codes instead of DET error codes and also removed unused DET error codes</td>
+    </tr>
+    <tr>
       <td>MCAL-34822</td>
       <td>IPC: Cdd_Ipc_RpMsg_RecvMsg returns timeout error with timeout=0</td>
       <td>CDD IPC</td>
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>IPC rpmsg buffer was not freed when timeout is zero</td>
+    </tr>
+    <tr>
+      <td>MCAL-35079</td>
+      <td>Uart_Cdd_TxHandler function contains a blocking do while operation, which occupies a significant amount of time and causes the periodic execution of the program to be inaccurate</td>
+      <td>CDD UART</td>
+      <td>Minor</td>
+      <td>AM263Px</td>
+      <td></td>
     </tr>
     <tr>
       <td>MCAL-34848</td>
@@ -450,6 +406,14 @@ This document details about supported driver, installation, dependencies, build 
       <td>Updated the configuration</td>
     </tr>
     <tr>
+      <td>MCAL-35063</td>
+      <td>Flash size in Flash_sfdpParams_init() is incorrect for SIP device</td>
+      <td>FLS</td>
+      <td>Minor</td>
+      <td>AM263Px</td>
+      <td>All supported external flash configurations are made available in FLS plugin. So customer need to choose the flash accordingly in configurator.</td>
+    </tr>
+    <tr>
       <td>MCAL-31669</td>
       <td>LIN: Not able to transmit master response frame after slave response frame</td>
       <td>LIN</td>
@@ -490,6 +454,14 @@ This document details about supported driver, installation, dependencies, build 
       <td></td>
     </tr>
     <tr>
+      <td>MCAL-34984</td>
+      <td>The GPIO 30 and 31 pin mapping is missing in the Tresos tool</td>
+      <td>PORT</td>
+      <td>Major</td>
+      <td>AM263Px</td>
+      <td></td>
+    </tr>
+    <tr>
       <td>MCAL-32662</td>
       <td>ETH Traffic Shapper is not implemented Correctly</td>
       <td>ETH</td>
@@ -500,11 +472,12 @@ This document details about supported driver, installation, dependencies, build 
     <tr>
       <td>MCAL-32438</td>
       <td>Eth: TPS_ECUC_08011: Defining symbols used by EcuM/BswM to initialize BSW modules</td>
-      <td>ETH</td>
+      <td>ETH, ETHTRCV</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>AUTOSAR specifies a pattern for the C symbol used in BswM and EcuM for initialization.<br>
-          The MCAL does not follow this pattern (e.g. EthConfigSet instead of Eth_Config).<br></td>
+          The MCAL does not follow this pattern (e.g. EthConfigSet instead of Eth_Config, EthTrcvConfigSet_EthTrcvConfig_0, 1 instead of EthTrcv_Config).<br>
+          Default number of Eth Transceiver in AM263PX is reduce to 1 to support am263px-cc with only 1 transceiver.</td>
     </tr>
     <tr>
       <td>MCAL-32067</td>
@@ -516,20 +489,53 @@ This document details about supported driver, installation, dependencies, build 
           It is not possible to configure clock as external clock in the software because of MMR regs being locked in system Init.<br></td>
     </tr>
     <tr>
-      <td>MCAL-32739</td>
-      <td>MCAL examples not generating MCELF binary when imported CCS</td>
-      <td>All</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>MCAL demo example projects makefile is now updated to generate mcelf binaries.</td>
-    </tr>
-    <tr>
-      <td>MCAL-33804</td>
-      <td>HHV mask is required before setting ADC reference buffers</td>
-      <td>All</td>
+      <td>MCAL-32641</td>
+      <td>Missing some EthTrcv types in EthTrcv_Types.h</td>
+      <td>ETHTRCV</td>
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>HHV bit masked before enabling ADC reference buffers.</td>
+      <td>Some EthTrcv types are defined in Eth_GeneralTypes.h of TI, however these types are supposed to be local to Ethtrcv module.</td>
+    </tr>
+    <tr>
+      <td>MCAL-32481</td>
+      <td>GIG FORCE bit wrongly configured for RGMII Mode</td>
+      <td>ETH</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>GIG FORCE bit wrongly configured for RGMII Mode.<br>
+          Packet transmission and reception is not happening properly due to this wrong configuration.<br></td>
+    </tr>
+    <tr>
+      <td>MCAL-30398</td>
+      <td>Wdg_SetTriggerCondition API does not follow AUTOSAR specification</td>
+      <td>WDG</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Wdg_SetTriggerCondition shall now reload the timeout value during runtime.</td>
+    </tr>
+    <tr>
+      <td>MCAL-29157</td>
+      <td>AdcApp_GroupEndNotification not working for polling mode</td>
+      <td>ADC</td>
+      <td>Minor</td>
+      <td>AM263Px</td>
+      <td>Rejected. Reason: Group end notification is not applicable for Polling mode. Application shall be the active poller to get the status and take action based on that. Adc_GetGroupStatus() can be used to poll the group status for Polling mode. Refer details in Autosar SWS ADC 4.3.1, specification ID SWS_Adc_00140</td>
+    </tr>
+    <tr>
+      <td>MCAL-31560</td>
+      <td>Configuration doesn't check if the allocated buffers are more than RAM size</td>
+      <td>CAN</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Rejected. Reason: No bug found, expected results are observed under required tests.</td>
+    </tr>
+    <tr>
+      <td>MCAL-28276</td>
+      <td>Unable to transmit Extended CAN ID and Standard CAN ID simultaneously in one channel</td>
+      <td>CAN</td>
+      <td>Minor</td>
+      <td>AM263Px</td>
+      <td>Rejected. Reason: For AM26xx series, Message RAM is of size 4352 words. By considering maximum payload with header for CAN FD frame, calculation is done to cover the maximum elements, and the total size is matching the 4352 words.</td>
     </tr>
   </tbody>
 </table>
@@ -547,44 +553,12 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
-      <td>MCAL-32431</td>
-      <td>Memmap section configuration issues: Wrong section mapping, some symbols not mapped to any section</td>
-      <td>All</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>None. This will be fixed in next MCAL release</td>
-    </tr>
-    <tr>
-      <td>MCAL-29157</td>
-      <td>AdcApp_GroupEndNotification not working for polling mode</td>
-      <td>ADC</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Customer to use ADC in Interrupt Mode</td>
-    </tr>
-    <tr>
-      <td>MCAL-26385</td>
-      <td>Can Tx/Rx not working for BitRate=125 KBPS</td>
-      <td>CAN</td>
-      <td>Minor</td>
-      <td>AM263Px, AM261x</td>
-      <td>Customer to use BitRate other then 125KBPS</td>
-    </tr>
-    <tr>
-      <td>MCAL-28276</td>
-      <td>Unable to transmit Extended CAN ID and Standard CAN ID simultaneously in one channel</td>
-      <td>CAN</td>
+      <td>MCAL-35346</td>
+      <td>I2C: Cancel API is not functional</td>
+      <td>CDD I2C</td>
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>None. This will be fixed in future MCAL release</td>
-    </tr>
-    <tr>
-      <td>MCAL-31560</td>
-      <td>CAN: Configuration doesn't check if the allocated buffers are more than RAM size</td>
-      <td>CAN</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>User need to manually ensure that the allocated buffer sizes are within RAM size of 1024 words across RX and TX buffers</td>
     </tr>
     <tr>
       <td>MCAL-27007</td>
@@ -593,6 +567,22 @@ This document details about supported driver, installation, dependencies, build 
       <td>Minor</td>
       <td>AM261x</td>
       <td>Customer to use UART without DMA</td>
+    </tr>
+    <tr>
+      <td>MCAL-34950</td>
+      <td>Fls_Erase processed only in polling</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Fls_Erase can still be used. This will be further analysed</td>
+    </tr>
+    <tr>
+      <td>MCAL-35392</td>
+      <td>Boot and HSM Utils: Fix MISRAC and HIS Metric Violation</td>
+      <td>Bootloader, Hsmclient</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>This will be fixed in future MCAL release</td>
     </tr>
     <tr>
       <td>MCAL-25969</td>
@@ -610,14 +600,6 @@ This document details about supported driver, installation, dependencies, build 
       <td>AM263x, AM263Px, AM261x</td>
       <td>Customer to use Cache Write through in case if they are using SPI+DMA</td>
     </tr>
-    <tr>
-      <td>MCAL-30398</td>
-      <td>Wdg_SetTriggerCondition API does not follow AUTOSAR specification</td>
-      <td>WDG</td>
-      <td>Minor(Limitation)</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Timeout value provided as part of initial config for both fast and slow mode will only be taken as part of SetTriggerCondition - runtime change of timeout is not supported. So customer need to configure accordingly.</td>
-    </tr>
   </tbody>
 </table>
 <h1 id="knownlimitations">Known Limitations</h1>
@@ -634,8 +616,20 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
+      <td>Unmapped memory sections with link time optimization</td>
+      <td>
+          With compiler link time optimization enabled, rodata like switch block lookup table goes to section like .rodata..Lswitch.table.Mcu_SystemInit.<br>
+          This mapping cannot be controlled by section attributes.
+      </td>
+      <td>Memmap</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>NA</td>
+      <td>This is a known compiler limitation</td>
+    </tr>
+    <tr>
       <td>ADC-R specific checks in configurator</td>
-      <td>ADC-R instance in AM263Px supports only 4 channels (other instances supports 6 channels).<br>
+      <td>
+          ADC-R instance in AM263Px supports only 4 channels (other instances supports 6 channels).<br>
           These checks are not performed in the EB configurator. User need to ensure they select the right configuration based on the AM263Px TRM
       </td>
       <td>ADC</td>
@@ -648,6 +642,136 @@ This document details about supported driver, installation, dependencies, build 
 <h1 id="validation">Validation</h1>
 <p>Examples are validated with SBL Prebuilt binary of MCU+SDK available at ti.com.
 For details refer test reports available in mcal_docs/csp/<platform> folder.</p>
+<h2 id="functionalsafetyartifactscspstatus">Functional Safety Artifacts (CSP) Status</h2>
+<p>CSP - Compliance Support Package</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Sr. No.</th>
+      <th style="text-align: left;">Work Product</th>
+      <th style="text-align: left;">Availability</th>
+      <th style="text-align: left;">Where to Find Artifacts</th>
+      <th style="text-align: left;">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Customer Docs: User Guide</td>
+      <td>Yes</td>
+      <td>Installer:mcal_docs\userguide\*platform*\index.html</td>
+      <td>
+          User Guide is present in installer as well as below TI software-dl locations
+          <ol>
+            <li>[AM263x Userguide][am263x_user_guide_label]</li>
+            <li>[AM263Px Userguide][am263px_user_guide_label]</li>
+            <li>[AM261x Userguide][am261x_user_guide_label]</li>
+          </ol>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>SW Manifest</td>
+      <td>Yes</td>
+      <td>Installer:mcal_manifest.html</td>
+      <td>SW manifest is present in installer</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>
+        Static Analysis Report
+        <ol>
+          <li>Static</li>
+          <li>HIS</li>
+          <li>MISRA-C</li>
+        </ol>
+      </td>
+      <td>Yes</td>
+      <td>Installer:mcal_docs\csp\*platform*\mcal_static_analysis_report.xlsx</td>
+      <td>All MISRAC Mandatory & Critical warnings and errors are resolved. MISRAC Required and Advisory warnings and HIS metrics will be fixed in future releases</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Test Reports: Test Cases and Test Results</td>
+      <td>Yes</td>
+      <td>Installer:mcal_docs\csp\*platform*\mcal_test_report.xlsx</td>
+      <td>All test reports are present in installer.</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>
+        Dynamic Analysis Report
+        <ol>
+          <li>MCDC</li>
+          <li>Branch</li>
+          <li>Region</li>
+          <li>Line</li>
+          <li>Function</li>
+        </ol>
+      </td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>
+        Bi-directional Traceability Report
+        <ol>
+          <li>MRD→SPS</li>
+          <li>SPS→SW Arch →SW Design Doc→SW Units (Code)</li>
+          <li>MRD→SPS→Test Case</li>
+          <li>Test Case→Arch Test Case→Design</li>
+        </ol>
+      </td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>SW FMEA</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Detailed Design Document</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Software Product Specification: List of functional, safety requirements for SW components</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Architecture Document</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>SW Safety Manual</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Safety Assessment</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+  </tbody>
+</table>
 <h1 id="support">Support</h1>
 <p>For technical support and additional assistance, visit E2E or contact local TI Field Application Engineer.</p>
 <h1 id="versioning">Versioning</h1>

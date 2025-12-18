@@ -296,7 +296,7 @@ LOCAL_INLINE FUNC(void, LIN_CODE) Lin_SetTxRxEnable(uint32 base);
  *  \return Returns the value of the interrupt level register.
  *
  */
-LOCAL_INLINE FUNC(uint16, LIN_CODE) LIN_getInterruptLine0Offset(uint32 base);
+LOCAL_INLINE FUNC(uint32, LIN_CODE) LIN_getInterruptLine0Offset(uint32 base);
 
 /**
  *  \brief  Gets the Interrupt Vector Offset for Line 1
@@ -333,7 +333,7 @@ LOCAL_INLINE FUNC(uint16, LIN_CODE) LIN_getInterruptLine0Offset(uint32 base);
  *  \return Returns the interrupt vector offset for interrupt line 1.
  *
  */
-LOCAL_INLINE FUNC(uint16, LIN_CODE) LIN_getInterruptLine1Offset(uint32 base);
+LOCAL_INLINE FUNC(uint32, LIN_CODE) LIN_getInterruptLine1Offset(uint32 base);
 
 /** \brief Lin_ServiceInterrupts - This API will Service Lin interrupts for selected Interrupt line
  *and will clear the interrupt flags.
@@ -435,12 +435,12 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
     if (LIN_MASTER_RESPONSE == pduInfoPtr->Drc)
     {
         /* Enable transmit bit. */
-        HW_WR_REG32_RAW((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                        HW_RD_REG32_RAW(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
+                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
 
         /* Enable receive bit. */
-        HW_WR_REG32_RAW((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                        HW_RD_REG32_RAW(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
+                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
 
         /* Set Mask ID for TX */
         Lin_SetTxMask(lin_cnt_base_addr, pduInfoPtr->Pid);
@@ -474,12 +474,12 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
     else if (LIN_SLAVE_RESPONSE == pduInfoPtr->Drc)
     {
         /* Enable transmit bit. */
-        HW_WR_REG32_RAW((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                        HW_RD_REG32_RAW(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
+                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
 
         /* Enable receive bit. */
-        HW_WR_REG32_RAW((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                        HW_RD_REG32_RAW(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
+                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
 
         /*
          * Set the frame length (number of bytes to be received)
@@ -505,12 +505,12 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
     else
     {
         /* Enable transmit bit. */
-        HW_WR_REG32_RAW((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                        HW_RD_REG32_RAW(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
+                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
 
         /* Enable receive bit. */
-        HW_WR_REG32_RAW((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                        HW_RD_REG32_RAW(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
+                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
 
         /* Set Mask ID for RX to not accept any message as we don't need to read the message */
         Lin_SetRxMask(lin_cnt_base_addr, 0x00U);
@@ -539,7 +539,7 @@ Lin_GetData(uint32 channelID, uint32 base, P2VAR(uint8 *, AUTOMATIC, LIN_APPL_CO
 
     /* Get the length from the SCIFORMAT register. */
     length =
-        ((HW_RD_REG32_RAW(base + CSL_LIN_SCIFORMAT) & CSL_LIN_SCIFORMAT_LENGTH_MASK) >> CSL_LIN_SCIFORMAT_LENGTH_SHIFT);
+        ((HW_RD_REG32(base + CSL_LIN_SCIFORMAT) & CSL_LIN_SCIFORMAT_LENGTH_MASK) >> CSL_LIN_SCIFORMAT_LENGTH_SHIFT);
 
     /* Read each 8-bit piece of data. */
     for (i = 0U; i <= length; i++)
@@ -551,7 +551,7 @@ Lin_GetData(uint32 channelID, uint32 base, P2VAR(uint8 *, AUTOMATIC, LIN_APPL_CO
 FUNC(Lin_StatusType, LIN_CODE) Lin_FetchTxStatus(uint32 base)
 {
     Lin_StatusType return_value = LIN_TX_BUSY;
-    uint32         reg_val      = HW_RD_REG32_RAW(base + CSL_LIN_SCIFLR);
+    uint32         reg_val      = HW_RD_REG32(base + CSL_LIN_SCIFLR);
 
     if (((reg_val & CSL_LIN_SCIFLR_PBE_MASK) == CSL_LIN_SCIFLR_PBE_MASK))
     {
@@ -571,7 +571,7 @@ FUNC(Lin_StatusType, LIN_CODE) Lin_FetchTxStatus(uint32 base)
     }
 
     /* Clear status bits after read */
-    HW_WR_REG32_RAW((base + CSL_LIN_SCIFLR), reg_val);
+    HW_WR_REG32((base + CSL_LIN_SCIFLR), reg_val);
 
     return return_value;
 }
@@ -579,7 +579,7 @@ FUNC(Lin_StatusType, LIN_CODE) Lin_FetchTxStatus(uint32 base)
 FUNC(Lin_StatusType, LIN_CODE) Lin_FetchRxStatus(uint32 base)
 {
     Lin_StatusType return_value = LIN_RX_BUSY;
-    uint32         reg_val      = HW_RD_REG32_RAW(base + CSL_LIN_SCIFLR);
+    uint32         reg_val      = HW_RD_REG32(base + CSL_LIN_SCIFLR);
 
     if ((reg_val & CSL_LIN_SCIFLR_NRE_MASK) == CSL_LIN_SCIFLR_NRE_MASK)
     {
@@ -601,7 +601,7 @@ FUNC(Lin_StatusType, LIN_CODE) Lin_FetchRxStatus(uint32 base)
     }
 
     /* Clear status bits after read */
-    HW_WR_REG32_RAW((base + CSL_LIN_SCIFLR), reg_val);
+    HW_WR_REG32((base + CSL_LIN_SCIFLR), reg_val);
 
     return return_value;
 }
@@ -626,7 +626,7 @@ FUNC(void, LIN_CODE) Lin_EnterLowPowerMode(uint32 base, boolean enable)
 FUNC(boolean, LIN_CODE) Lin_CheckWakeupStatus(uint32 base)
 {
     boolean wakeup_status =
-        ((HW_RD_REG32_RAW(base + CSL_LIN_SCIGCR2) & CSL_LIN_SCIGCR2_POWERDOWN_MASK) != CSL_LIN_SCIGCR2_POWERDOWN_MASK);
+        ((HW_RD_REG32(base + CSL_LIN_SCIGCR2) & CSL_LIN_SCIGCR2_POWERDOWN_MASK) != CSL_LIN_SCIGCR2_POWERDOWN_MASK);
 
     /* Clear wakeup */
     HW_WR_FIELD32_RAW((base + CSL_LIN_SCIGCR1), CSL_LIN_SCIFLR_WAKEUP_MASK, CSL_LIN_SCIFLR_WAKEUP_SHIFT, TRUE);
@@ -666,7 +666,7 @@ FUNC(void, LIN_CODE) Lin_ProcessISR(uint32 channelID)
     Lin_InterruptLineNum int_line = Lin_Drv_Config_Ptr->linChannelCfg[channelID].linControllerConfig.IntrLineNum;
 
     if ((TRUE == Lin_Drv_Config_Ptr->linChannelCfg[channelID].linChannelWakeupSupport) &&
-        (((HW_RD_REG32_RAW(lin_cnt_base_addr + CSL_LIN_SCIFLR) & CSL_LIN_SCIFLR_WAKEUP_MASK) ==
+        (((HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIFLR) & CSL_LIN_SCIFLR_WAKEUP_MASK) ==
           CSL_LIN_SCIFLR_WAKEUP_MASK)))
     {
         /* Come out of low power mode */
@@ -690,7 +690,7 @@ FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupProcess(uint8 linChannel, Lin_ChannelSt
     uint32         lin_base_cntr_addr = Lin_Drv_Config_Ptr->linChannelCfg[linChannel].linControllerConfig.CntrAddr;
 
     /* Perform LIN channel Wakeup, only if LIN Channel is not in operational state */
-    if ((uint8)LIN_CHANNEL_OPERATIONAL != lindrvr_Channel_Status->linChannelNetworkStatus)
+    if (LIN_CHANNEL_OPERATIONAL != lindrvr_Channel_Status->linChannelNetworkStatus)
     {
         /* Disable Low Power Mode */
         Lin_EnterLowPowerMode(lin_base_cntr_addr, FALSE);
@@ -878,8 +878,8 @@ LOCAL_INLINE FUNC(void, LIN_CODE)
     Lin_SetBaudrateConfig(uint32 base, P2CONST(Lin_BaudRateConfigType, AUTOMATIC, LIN_APPL_CONST) baudrateConfig)
 {
     /* Set baud rate prescaler and divider. */
-    HW_WR_REG32_RAW((base + CSL_LIN_BRSR),
-                    (baudrateConfig->Prescalar | (baudrateConfig->FractionalDivider << CSL_LIN_BRSR_M_SHIFT)));
+    HW_WR_REG32((base + CSL_LIN_BRSR),
+                (baudrateConfig->Prescalar | (baudrateConfig->FractionalDivider << CSL_LIN_BRSR_M_SHIFT)));
 }
 
 LOCAL_INLINE FUNC(void, LIN_CODE) Lin_SetFrameLength(uint32 base, uint16 length)
@@ -910,44 +910,56 @@ LOCAL_INLINE FUNC(void, LIN_CODE) Lin_SetIDByte(uint32 base, Lin_FramePidType id
 
 LOCAL_INLINE FUNC(void, LIN_CODE) Lin_EnableInterrupt(uint32 base, Lin_InterruptLineNum intrLineNum, uint32 intFlags)
 {
+    uint32 regVal;
+
     /* Set Interrupt Flags */
-    HW_WR_REG32((base + CSL_LIN_SCISETINT), HW_RD_REG32_RAW(base + CSL_LIN_SCISETINT) | intFlags);
+    regVal  = HW_RD_REG32(base + CSL_LIN_SCISETINT);
+    regVal |= intFlags;
+    HW_WR_REG32((base + CSL_LIN_SCISETINT), regVal);
 
     if (LIN_INTERRUPT_LINE_NUM_1 == intrLineNum)
     {
         /* Set interrupt levels to 1 */
-        HW_WR_REG32((base + CSL_LIN_SCISETINTLVL), HW_RD_REG32_RAW(base + CSL_LIN_SCISETINTLVL) | intFlags);
+        regVal  = HW_RD_REG32(base + CSL_LIN_SCISETINTLVL);
+        regVal |= intFlags;
+        HW_WR_REG32((base + CSL_LIN_SCISETINTLVL), regVal);
+
         /* Enable global LIN interrupt for interrupt line number 1 */
-        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_EN),
-                    HW_RD_REG32_RAW(base + CSL_LIN_LIN_GLB_INT_EN) |
-                        (CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum));
+        regVal  = HW_RD_REG32(base + CSL_LIN_LIN_GLB_INT_EN);
+        regVal |= ((uint32)CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum);
+        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_EN), regVal);
+
         /* Clear global LIN interrupt status for interrupt line number 1 */
-        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_CLR), (CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum));
+        regVal = ((uint32)CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum);
+        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_CLR), regVal);
     }
     else
     {
         /* Set interrupt levels to 0 */
         HW_WR_REG32((base + CSL_LIN_SCICLEARINTLVL), intFlags);
+
         /* Enable global LIN interrupt for interrupt line number 0 */
-        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_EN),
-                    HW_RD_REG32_RAW(base + CSL_LIN_LIN_GLB_INT_EN) |
-                        (CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum));
+        regVal  = HW_RD_REG32(base + CSL_LIN_LIN_GLB_INT_EN);
+        regVal |= ((uint32)CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum);
+        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_EN), regVal);
+
         /* Clear global LIN interrupt status for interrupt line number 0 */
-        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_CLR), (CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum));
+        regVal = ((uint32)CSL_LIN_LIN_GLB_INT_FLG_INT0_FLG_MASK << (uint32)intrLineNum);
+        HW_WR_REG32((base + CSL_LIN_LIN_GLB_INT_CLR), regVal);
     }
 }
 
 LOCAL_INLINE FUNC(void, LIN_CODE) Lin_DisableInterrupt(uint32 base, uint32 intFlags)
 {
     /* Clear Interrupt Flags */
-    HW_WR_REG32_RAW((base + CSL_LIN_SCICLEARINT), intFlags);
+    HW_WR_REG32((base + CSL_LIN_SCICLEARINT), intFlags);
 }
 
 LOCAL_INLINE FUNC(void, LIN_CODE) Lin_SetTxRxEnable(uint32 base)
 {
-    uint32 regVal  = 0U;
-    regVal         = (uint32)HW_RD_REG32(base + CSL_LIN_SCIGCR1);
-    regVal        |= (uint32)CSL_LIN_SCIGCR1_TXENA_MASK | (uint32)CSL_LIN_SCIGCR1_RXENA_MASK;
+    uint32 regVal;
+    regVal  = HW_RD_REG32(base + CSL_LIN_SCIGCR1);
+    regVal |= (uint32)CSL_LIN_SCIGCR1_TXENA_MASK | (uint32)CSL_LIN_SCIGCR1_RXENA_MASK;
     HW_WR_REG32((base + CSL_LIN_SCIGCR1), regVal);
 }
 
@@ -957,12 +969,12 @@ LOCAL_INLINE FUNC(void, LIN_CODE) Lin_ServiceInterrupts(uint32 base, Lin_Interru
     if (int_line == LIN_INTERRUPT_LINE_NUM_0)
     {
         /* Read Interrupt Status Flag */
-        LIN_getInterruptLine0Offset(base);
+        (void)LIN_getInterruptLine0Offset(base);
     }
     else
     {
         /* Read Interrupt Status Flag */
-        LIN_getInterruptLine1Offset(base);
+        (void)LIN_getInterruptLine1Offset(base);
     }
 
     /* Clear All the Interrupt Flags in SCIFLR */
@@ -973,16 +985,16 @@ LOCAL_INLINE FUNC(void, LIN_CODE) Lin_ServiceInterrupts(uint32 base, Lin_Interru
                 (uint32)CSL_LIN_LIN_GLB_INT_CLR_INT0_FLG_CLR_MASK << (uint8)(int_line));
 }
 
-LOCAL_INLINE FUNC(uint16, LIN_CODE) LIN_getInterruptLine0Offset(uint32 base)
+LOCAL_INLINE FUNC(uint32, LIN_CODE) LIN_getInterruptLine0Offset(uint32 base)
 {
     /* Read and return the flag register */
-    return (HW_RD_REG32_RAW(base + CSL_LIN_SCIINTVECT0) & CSL_LIN_SCIINTVECT0_INTVECT0_MASK);
+    return (HW_RD_REG32(base + CSL_LIN_SCIINTVECT0) & CSL_LIN_SCIINTVECT0_INTVECT0_MASK);
 }
 
-LOCAL_INLINE FUNC(uint16, LIN_CODE) LIN_getInterruptLine1Offset(uint32 base)
+LOCAL_INLINE FUNC(uint32, LIN_CODE) LIN_getInterruptLine1Offset(uint32 base)
 {
     /* Read and return the flag register */
-    return (HW_RD_REG32_RAW(base + CSL_LIN_SCIINTVECT1) & CSL_LIN_SCIINTVECT1_INTVECT1_MASK);
+    return (HW_RD_REG32(base + CSL_LIN_SCIINTVECT1) & CSL_LIN_SCIINTVECT1_INTVECT1_MASK);
 }
 
 STATIC FUNC(void, LIN_CODE) Lin_SetLoopbackMode(uint32 base, Lin_LoopbackModeType loopbackMode)
@@ -1081,12 +1093,12 @@ FUNC(void, LIN_CODE) Lin_DeinitInternal(void)
         /* ------------------------------ */
         /* 3. Restore registers to default */
         /* ------------------------------ */
-        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1, 0x00000000);
-        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR2, 0x00000000);
-        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIPIO0, 0x00000000);
-        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIPIO1, 0x00000000);
-        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCICLEARINT, 0xFFFFFFFF);
-        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_LINCOMP, 0x00000000);
+        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1, 0x00000000U);
+        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR2, 0x00000000U);
+        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIPIO0, 0x00000000U);
+        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCIPIO1, 0x00000000U);
+        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_SCICLEARINT, 0xFFFFFFFFU);
+        HW_WR_REG32(lin_cnt_base_addr + CSL_LIN_LINCOMP, 0x00000000U);
     }
 }
 #define LIN_STOP_SEC_CODE

@@ -91,43 +91,12 @@ VAR(struct EthTrcv_ControllerConfigType_s, ETHTRCV_CONFIG_DATA)
     .PhysLayerType = TRCV_PHYS_LAYER_TYPE_100BASE_T1
 };
 
-VAR(struct EthTrcv_ControllerConfigType_s, ETHTRCV_CONFIG_DATA)
-    EthTrcvConfigSet_EthTrcvConfig_1 =
-{
-    .ctrlIdx = 0U,
-    .trcvIdx = 1U,
-    .phyAddr = 3U,
-    .MiiSel = RGMII,
-    .enableAutoNeg = (uint32 ) TRUE,
-    .connNeg = TRCV_CONN_NEG_AUTO,
-    .advertiseCapab =
-        (0U
-        |ETHERNET_ADV_CAPAB_10_HALF
-        |ETHERNET_ADV_CAPAB_10_FULL
-        |ETHERNET_ADV_CAPAB_100_HALF
-        |ETHERNET_ADV_CAPAB_100_FULL
-        |ETHERNET_ADV_CAPAB_1000_FULL
-        ),
-    .linkPartCapab =
-        (0U
-        ),
-    .isGigCapab =  (uint32 )TRUE,
-    .baudRate = (ETHTRCV_BAUD_RATE_100MBIT),
-    .duplexMode = ETHTRCV_DUPLEX_MODE_FULL,
-    .loopbackEnable = (boolean)FALSE,
-    .PortMacLaySpeed = ETH_MAC_LAYER_SPEED_100M,
-    .PortMacLaySubType = REDUCED,
-    .PortMacLayType = TRCV_MAC_LAYER_TYPE_XMII,
-    .PhysLayerType = TRCV_PHYS_LAYER_TYPE_100BASE_T1
-};
-
 
 VAR(struct EthTrcv_ConfigType_s, ETHTRCV_CONFIG_DATA)
     EthTrcv_Config =
 {
    {
      (EthTrcv_ControllerConfigType*)&EthTrcvConfigSet_EthTrcvConfig_0,
-     (EthTrcv_ControllerConfigType*)&EthTrcvConfigSet_EthTrcvConfig_1,
    }
 };
 

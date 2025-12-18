@@ -328,16 +328,7 @@ void EthApp_TrcvInit()
     AppUtils_ethAm263xPHYDelayConfig(pEthConfigPtr, EthTrcv_Config.pController[0]->phyAddr);
     AppUtils_ethTrcvInit((EthTrcv_ConfigType *)NULL_PTR, EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0);
 #else
-#ifdef AM263PX_C_PACKAGE
-    AppUtils_ethAm263xPHYDelayConfig(pEthConfigPtr, EthTrcv_Config.pController[1]->phyAddr);
-    AppUtils_ethTrcvInit(&EthTrcv_Config, EthTrcvConf_EthTrcvConfig_EthTrcvIdx_1);
-#else
     AppUtils_ethAm263xPHYDelayConfig(pEthConfigPtr, EthTrcv_Config.pController[0]->phyAddr);
     AppUtils_ethTrcvInit(&EthTrcv_Config, EthTrcvConf_EthTrcvConfig_EthTrcvIdx_0);
-#endif
 #endif /* (STD_ON == ETHTRCV_PRE_COMPILE_VARIANT)*/
 }
-
-#ifdef __cplusplus
-}
-#endif

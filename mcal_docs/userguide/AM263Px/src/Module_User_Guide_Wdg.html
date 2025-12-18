@@ -70,7 +70,7 @@
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_dma.html">4.5. CDD DMA Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_FsiRx.html">4.6. CDD_FSIRX Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_FsiTx.html">4.7. CDD_FSITX Module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_I2c.html">4.8. CDD_I2C Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_I2c.html">4.8. CDD I2C Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Ipc.html">4.9. CDD_IPC Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Pwm.html">4.10. CDD_PWM Module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_uart.html">4.11. CDD UART Module</a></li>
@@ -240,7 +240,7 @@ AUTOSAR BSW module Wdg.</p>
 <figure class="align-center" id="id1">
 <img alt="Wdg in AUTOSAR architecture" src="../_images/Wdg_image1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.97 </span><span class="caption-text">Wdg in AUTOSAR architecture</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.99 </span><span class="caption-text">Wdg in AUTOSAR architecture</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The WDG driver provides services for handling the watch dog timer on the microcontroller.</p>
@@ -351,7 +351,7 @@ AUTOSAR BSW module Wdg.</p>
 <figure class="align-center" id="id2">
 <img alt="WDG header file include structure" src="../_images/Wdg_image2.jpg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.98 </span><span class="caption-text">WDG header file include structure</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.100 </span><span class="caption-text">WDG header file include structure</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -1172,7 +1172,7 @@ The reported service IDs identify the services which are described in 3.4.</p>
 <li><p>WDT window reaction can be changed to “reset” through configuration (EB Tresos).</p></li>
 <li><p>Get Watchdog version using Wdg_GetVersionInfo()</p></li>
 <li><p>Calculate and define the triggerValue and maxServiceInterval</p></li>
-<li><p>In example, service interval is 25ms and service count is 100. So, every 25ms core will service the WDT for 100 times (25*100 = 2500 ms).</p></li>
+<li><p>In example, service interval is 6ms and service count is 25. So, every 6ms core will service the WDT for 25 times (25*6 = 150 ms).</p></li>
 <li><p>Initialize the timer using Gpt_Init()</p></li>
 <li><p>Initialize the Watchdog using Wdg_Init()</p></li>
 <li><p>Start the timer using API Gpt_StartTimer()</p></li>
@@ -1198,31 +1198,106 @@ The reported service IDs identify the services which are described in 3.4.</p>
 <section id="example-logs">
 <h3><span class="section-number">4.23.10.4. </span>Example Logs<a class="headerlink" href="#example-logs" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
-<span class="w">   </span><span class="nl">WDG_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
+<span class="w">   </span><span class="n">Starting</span><span class="w"> </span><span class="n">OSPI</span><span class="w"> </span><span class="n">Bootloader</span><span class="w"> </span><span class="p">...</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">CPU</span><span class="w"> </span><span class="n">Clock</span><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="mf">400.000</span><span class="w"> </span><span class="n">MHz</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Media</span><span class="w">       </span><span class="o">:</span><span class="w"> </span><span class="n">NOR</span><span class="w"> </span><span class="n">SPI</span><span class="w"> </span><span class="n">FLASH</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Media</span><span class="w"> </span><span class="n">Clock</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">133.333</span><span class="w"> </span><span class="n">MHz</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">Size</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="mi">95</span><span class="w"> </span><span class="n">KB</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Cores</span><span class="w"> </span><span class="n">present</span><span class="w">    </span><span class="o">:</span>
+<span class="n">r5f0</span><span class="mi">-0</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">System_init</span><span class="w">                      </span><span class="o">:</span><span class="w">        </span><span class="mi">489u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Drivers_open</span><span class="w">                     </span><span class="o">:</span><span class="w">        </span><span class="mi">103u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">LoadHsmRtFw</span><span class="w">                      </span><span class="o">:</span><span class="w">       </span><span class="mi">7868u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Board_driversOpen</span><span class="w">                </span><span class="o">:</span><span class="w">       </span><span class="mi">2232u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">CPU</span><span class="w"> </span><span class="n">load</span><span class="w">                         </span><span class="o">:</span><span class="w">       </span><span class="mi">5724u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">SBL</span><span class="w"> </span><span class="n">End</span><span class="w">                          </span><span class="o">:</span><span class="w">          </span><span class="mi">6u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">SBL</span><span class="w"> </span><span class="n">Total</span><span class="w"> </span><span class="n">Time</span><span class="w"> </span><span class="n">Taken</span><span class="w">             </span><span class="o">:</span><span class="w">      </span><span class="mi">16425u</span><span class="n">s</span>
 
-<span class="w">   </span><span class="n">WDG</span><span class="w"> </span><span class="n">MCAL</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
-<span class="w">   </span><span class="o">---------------------</span>
-<span class="w">   </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
-<span class="w">   </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">102</span>
-<span class="w">   </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">9</span>
-<span class="w">   </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">   </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">Image</span><span class="w"> </span><span class="n">loading</span><span class="w"> </span><span class="n">done</span><span class="p">,</span><span class="w"> </span><span class="n">switching</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="p">...</span>
+<span class="n">Reset</span><span class="w"> </span><span class="n">Reason</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">LoopCount</span><span class="w"> </span><span class="mi">2</span>
+<span class="nl">WDG_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
+<span class="w"> </span><span class="n">FLS</span><span class="w"> </span><span class="n">OSPI</span><span class="w"> </span><span class="n">Address</span><span class="w"> </span><span class="n">Byte</span><span class="w"> </span><span class="n">Mode</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">3</span><span class="n">bytes</span>
 
-<span class="w">   </span><span class="o">----------------------------------------------------------------------------------</span>
-<span class="w">   </span><span class="n">Starting</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">test</span><span class="w">  </span><span class="o">!!!</span>
-<span class="w">   </span><span class="o">----------------------------------------------------------------------------------</span>
-<span class="w">   </span><span class="n">Service</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="mi">100</span>
-<span class="w">   </span><span class="n">Service</span><span class="w"> </span><span class="n">Interval</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="n">milliseconds</span>
-<span class="w">   </span><span class="o">------------------------------------------</span>
-<span class="w">   </span><span class="n">Trigger</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2500</span><span class="w"> </span><span class="n">milliseconds</span>
-<span class="w">   </span><span class="o">------------------------------------------</span>
-<span class="w">   </span><span class="n">Maximum</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Interval</span><span class="w"> </span><span class="mi">74</span><span class="w"> </span><span class="n">milliseconds</span><span class="w"> </span>
-<span class="w">   </span><span class="n">Initializing</span><span class="w"> </span><span class="n">channels</span>
-<span class="w">   </span><span class="n">Post</span><span class="o">-</span><span class="n">Build</span><span class="w"> </span><span class="n">variant</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">being</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="p">.</span>
-<span class="w">   </span><span class="n">Reset</span><span class="w"> </span><span class="n">Reason</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span>
-<span class="w">   </span><span class="n">Test</span><span class="w"> </span><span class="n">Passed</span><span class="o">!!</span><span class="w"> </span>
-<span class="w">   </span><span class="n">WDG</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">Usage</span><span class="o">:</span><span class="w"> </span><span class="mi">800</span><span class="w"> </span><span class="n">bytes</span>
-<span class="w">   </span><span class="o">------------------------------------------</span>
+<span class="n">WDG</span><span class="w"> </span><span class="n">MCAL</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
+<span class="o">---------------------</span>
+<span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
+<span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">:</span><span class="w"> </span><span class="mi">102</span>
+<span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="w">    </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+
+<span class="n">Starting</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">test</span><span class="w">  </span><span class="o">!!!</span>
+<span class="n">Service</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="mi">25</span>
+<span class="n">Service</span><span class="w"> </span><span class="n">Interval</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="n">Trigger</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="n">Trigger</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="n">Mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">150</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="n">Maximum</span><span class="w"> </span><span class="n">Service</span><span class="w"> </span><span class="n">Interval</span><span class="w"> </span><span class="mi">74</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="n">Initializing</span><span class="w"> </span><span class="n">channels</span>
+<span class="n">Gpt_Count</span><span class="w"> </span><span class="mi">600000</span>
+<span class="n">Gpt_CountMode</span><span class="w"> </span><span class="mi">600000</span>
+<span class="n">Default</span><span class="w"> </span><span class="n">Preload</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="mi">33554432</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Downcounter</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="mi">33554431</span>
+<span class="n">Post</span><span class="o">-</span><span class="n">Build</span><span class="w"> </span><span class="n">variant</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">being</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="p">..</span>
+<span class="n">WDG_INIT</span><span class="w"> </span><span class="n">Preload</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="mi">14999552</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Downcounter</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="mi">14999471</span>
+<span class="n">Trigger</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mi">76</span>
+<span class="n">Wdg_SetTriggerCondition_1</span><span class="w"> </span><span class="n">Preload</span><span class="w"> </span><span class="n">Coun1</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="n">t</span><span class="w"> </span><span class="mi">14999552</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Downcounter</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="mi">14462892</span>
+<span class="mi">2</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">3</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">4</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">5</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="p">...</span>
+<span class="mi">248</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">249</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">250</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="n">Wdg_SetMode</span><span class="w"> </span><span class="n">Preload</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="mi">29990912</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Downcounter</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="mi">29990778</span>
+<span class="n">Time</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="mf">1.508069</span><span class="w"> </span><span class="n">seconds</span>
+<span class="n">Wdg</span><span class="w"> </span><span class="n">SetMode</span><span class="w"> </span><span class="n">to</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">!!</span>
+<span class="n">Service</span><span class="w"> </span><span class="n">Interval</span><span class="w"> </span><span class="n">changed</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="n">trigger</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="mi">76</span>
+<span class="n">Wdg_SetTriggerCondition2</span><span class="w"> </span><span class="n">Preload</span><span class="w"> </span><span class="n">Count1</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="w"> </span><span class="mi">29990912</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Downcounter</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="mi">29454035</span>
+<span class="mi">2</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">3</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">4</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">5</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="p">...</span>
+<span class="mi">98</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">99</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="mi">100</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="n">Time</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="mf">0.602112</span><span class="w"> </span><span class="n">seconds</span>
+<span class="n">Wdg</span><span class="w"> </span><span class="n">SetMode</span><span class="w"> </span><span class="n">Tes101</span><span class="w">  </span><span class="n">WDG</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">set</span>
+<span class="n">r</span><span class="w"> </span><span class="n">set</span>
+<span class="o">!</span>
+<span class="n">Expecting</span><span class="w"> </span><span class="n">WDG</span><span class="w"> </span><span class="n">reset</span><span class="w"> </span><span class="n">after</span><span class="w"> </span><span class="n">around</span><span class="w"> </span><span class="n">trigger</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="mf">150.</span><span class="p">..</span>
+<span class="n">Gpt_DeInit</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="n">Preload</span><span class="w"> </span><span class="n">Count</span><span class="w"> </span><span class="mi">29990912</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">Downcounter</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="mi">2837896</span><span class="n">WDG</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="mf">6.002078</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="mi">6</span>
+<span class="n">WDG</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="mf">12.003002</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="n">WDG</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="mf">18.003972</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="p">....</span>
+<span class="n">WDG</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="mf">132.022973</span><span class="w"> </span><span class="n">milliseconds</span>
+<span class="n">WDG</span><span class="w"> </span><span class="n">time</span><span class="w"> </span><span class="n">elapsed</span><span class="w"> </span><span class="mf">138.023973</span><span class="w"> </span><span class="n">milliseconds</span>
+
+<span class="n">Starting</span><span class="w"> </span><span class="n">OSPI</span><span class="w"> </span><span class="n">Bootloader</span><span class="w"> </span><span class="p">...</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">CPU</span><span class="w"> </span><span class="n">Clock</span><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="mf">400.000</span><span class="w"> </span><span class="n">MHz</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Media</span><span class="w">       </span><span class="o">:</span><span class="w"> </span><span class="n">NOR</span><span class="w"> </span><span class="n">SPI</span><span class="w"> </span><span class="n">FLASH</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Media</span><span class="w"> </span><span class="n">Clock</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">133.333</span><span class="w"> </span><span class="n">MHz</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Boot</span><span class="w"> </span><span class="n">Image</span><span class="w"> </span><span class="n">Size</span><span class="w">  </span><span class="o">:</span><span class="w"> </span><span class="mi">95</span><span class="w"> </span><span class="n">KB</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Cores</span><span class="w"> </span><span class="n">present</span><span class="w">    </span><span class="o">:</span>
+<span class="n">r5f0</span><span class="mi">-0</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">System_init</span><span class="w">                      </span><span class="o">:</span><span class="w">        </span><span class="mi">489u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Drivers_open</span><span class="w">                     </span><span class="o">:</span><span class="w">        </span><span class="mi">103u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">LoadHsmRtFw</span><span class="w">                      </span><span class="o">:</span><span class="w">       </span><span class="mi">7869u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">Board_driversOpen</span><span class="w">                </span><span class="o">:</span><span class="w">       </span><span class="mi">2223u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">CPU</span><span class="w"> </span><span class="n">load</span><span class="w">                         </span><span class="o">:</span><span class="w">       </span><span class="mi">5723u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER</span><span class="w"> </span><span class="n">PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">SBL</span><span class="w"> </span><span class="n">End</span><span class="w">                          </span><span class="o">:</span><span class="w">          </span><span class="mi">6u</span><span class="n">s</span>
+<span class="nl">KPI_DATA</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="n">BOOTLOADER_PROFILE</span><span class="p">]</span><span class="w"> </span><span class="n">SBL</span><span class="w"> </span><span class="n">Total</span><span class="w"> </span><span class="n">Time</span><span class="w"> </span><span class="n">Taken</span><span class="w">             </span><span class="o">:</span><span class="w">      </span><span class="mi">16415u</span><span class="n">s</span>
+
+<span class="n">Image</span><span class="w"> </span><span class="n">loading</span><span class="w"> </span><span class="n">done</span><span class="p">,</span><span class="w"> </span><span class="n">switching</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">application</span><span class="w"> </span><span class="p">...</span>
+<span class="n">Reset</span><span class="w"> </span><span class="n">Reason</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">Test</span><span class="w"> </span><span class="n">Passed</span><span class="o">!!</span>
+<span class="n">WDG</span><span class="w"> </span><span class="n">Test</span><span class="w"> </span><span class="n">Completed</span><span class="w"> </span><span class="o">!!!</span>
+<span class="n">WDG</span><span class="w"> </span><span class="n">Stack</span><span class="w"> </span><span class="n">Usage</span><span class="o">:</span><span class="w"> </span><span class="mi">808</span><span class="w"> </span><span class="n">bytes</span>
 
 </pre></div>
 </div>
@@ -1276,7 +1351,7 @@ The reported service IDs identify the services which are described in 3.4.</p>
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Dec 11, 2025.
+          <span class="lastupdated" >Last updated on Dec 18, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

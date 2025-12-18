@@ -117,11 +117,11 @@ typedef enum
 #define CSL_OSPI_BAUD_RATE_DIVISOR_DEFAULT         (CSL_OSPI_BAUD_RATE_DIVISOR(MAX_BAUDRATE_DIVIDER))
 #define OSPI_PHASE_DETECT_DLL_NUM_DELAY_ELEMENT(x) ((uint32)((x) - 1U))
 
-#define MIN(x, y)           \
-    ({                      \
-        typeof(x) _x = (x); \
-        typeof(y) _y = (y); \
-        _x < _y ? _x : _y;  \
+#define MIN(x, y)            \
+    ({                       \
+        typeof(x) _x = (x);  \
+        typeof(y) _y = (y);  \
+        (_x < _y) ? _x : _y; \
     })
 
 #define MAX(x, y)           \
@@ -130,9 +130,9 @@ typedef enum
         typeof(y) _y = (y); \
         _x > _y ? _x : _y;  \
     })
-#ifndef abs
-#define abs(x) ((x) > 0 ? (x) : -(x))
-#endif
+
+#define FLS_PHY_ABS(x) (((x) > 0) ? (x) : (-(x)))
+
 /* ========================================================================== */
 /*                         Structure Declarations                             */
 /* ========================================================================== */
@@ -145,29 +145,29 @@ typedef enum
  */
 typedef struct
 {
-    int    txDllLowWindowStart;
-    int    txDllLowWindowEnd;
-    int    txDllHighWindowStart;
-    int    txDllHighWindowEnd;
-    int    rxLowSearchStart;
-    int    rxLowSearchEnd;
-    int    rxHighSearchStart;
-    int    rxHighSearchEnd;
-    int    txLowSearchStart;
-    int    txLowSearchEnd;
-    int    txHighSearchStart;
-    int    txHighSearchEnd;
-    int    txDLLSearchOffset;
-    uint32 rxTxDLLSearchStep;
-    uint32 rdDelayMin;
-    uint32 rdDelayMax;
+    int32_t txDllLowWindowStart;
+    int32_t txDllLowWindowEnd;
+    int32_t txDllHighWindowStart;
+    int32_t txDllHighWindowEnd;
+    int32_t rxLowSearchStart;
+    int32_t rxLowSearchEnd;
+    int32_t rxHighSearchStart;
+    int32_t rxHighSearchEnd;
+    int32_t txLowSearchStart;
+    int32_t txLowSearchEnd;
+    int32_t txHighSearchStart;
+    int32_t txHighSearchEnd;
+    int32_t txDLLSearchOffset;
+    uint32  rxTxDLLSearchStep;
+    uint32  rdDelayMin;
+    uint32  rdDelayMax;
 } OSPI_PhyWindowParams;
 
 typedef struct
 {
-    int txDLL;
-    int rxDLL;
-    int rdDelay;
+    int32_t txDLL;
+    int32_t rxDLL;
+    int32_t rdDelay;
 } Fls_Ospi_phyConfig;
 
 typedef struct
