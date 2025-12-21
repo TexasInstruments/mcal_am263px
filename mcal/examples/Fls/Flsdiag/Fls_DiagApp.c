@@ -152,13 +152,34 @@ void qspi_flash_diag(void *args)
     {
         qspi_flash_diag_test_fill_buffers();
         AppUtils_printf("[QSPI Flash Diagnostic Test] Executing Flash Erase on first block...\r\n");
-        Fls_norErasesfdp(qspiHandle, offset);
+        status = Fls_norErasesfdp(qspiHandle, offset);
+        if (status == E_OK)
+        {
+            AppUtils_printf("[QSPI Flash Diagnostic Test] Done !!!\r\n");
+        }
+        else
+        {
+            AppUtils_printf("[QSPI Flash Diagnostic Test] Erase failed !!!\r\n");
+        }
         AppUtils_printf("[QSPI Flash Diagnostic Test] Done !!!\r\n");
         AppUtils_printf("[QSPI Flash Diagnostic Test] Performing Write-Read Test...\r\n");
-        Fls_norWritesfdp(qspiHandle, offset, QspiTxBuf, APP_QSPI_DATA_SIZE);
-        Fls_norReadsfdp(qspiHandle, offset, QspiRxBuf, APP_QSPI_DATA_SIZE);
-
-        status |= qspi_flash_diag_test_compare_buffers();
+        status = Fls_norWritesfdp(qspiHandle, offset, QspiTxBuf, APP_QSPI_DATA_SIZE);
+        if (status == E_OK)
+        {
+            status = Fls_norReadsfdp(qspiHandle, offset, QspiRxBuf, APP_QSPI_DATA_SIZE);
+            if (status == E_OK)
+            {
+                status |= qspi_flash_diag_test_compare_buffers();
+            }
+            else
+            {
+                AppUtils_printf("[QSPI Flash Diagnostic Test] Read Failed!\r\n");
+            }
+        }
+        else
+        {
+            AppUtils_printf("[QSPI Flash Diagnostic Test] Write Failed!\r\n");
+        }
 
         if (E_OK == status)
         {

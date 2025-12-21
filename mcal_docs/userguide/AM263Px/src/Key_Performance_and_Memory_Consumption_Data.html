@@ -670,8 +670,8 @@ Below is performance configuration having throughput &gt; 900Mbps, packet size 1
 <tbody>
 <tr class="row-even"><td><p>fsirx</p></td>
 <td><p>1674</p></td>
-<td><p>2</p></td>
-<td><p>203</p></td>
+<td><p>3</p></td>
+<td><p>202</p></td>
 </tr>
 </tbody>
 </table>
@@ -689,8 +689,8 @@ Below is performance configuration having throughput &gt; 900Mbps, packet size 1
 <tbody>
 <tr class="row-even"><td><p>fsitx</p></td>
 <td><p>2148</p></td>
-<td><p>9</p></td>
-<td><p>184</p></td>
+<td><p>10</p></td>
+<td><p>180</p></td>
 </tr>
 </tbody>
 </table>
@@ -919,7 +919,7 @@ Below is performance configuration having throughput &gt; 900Mbps, packet size 1
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2025, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Dec 18, 2025.
+          <span class="lastupdated" >Last updated on Dec 22, 2025.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 
@@ -957,7 +957,7 @@ Below is performance configuration having throughput &gt; 900Mbps, packet size 1
     // Function to fetch the JSON file from GitHub and populate the version links
     async function loadVersions() {
       try {
-    const versionsUrl = '';
+    const versionsUrl = 'https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263P/AM263Px_versions.json';
         const response = await fetch(versionsUrl); // Replace with your raw URL
         const versions = await response.json();
         const versionList = document.getElementById('version-list');

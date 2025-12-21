@@ -95,6 +95,7 @@
 extern "C" {
 #endif
 
+/** \brief OSPI modes */
 typedef enum modes{
   FLS_OSPI_RX_1S_1S_1S = 1,
   FLS_OSPI_RX_1S_1S_2S = 2,
@@ -185,7 +186,7 @@ typedef enum modes{
 #define FLS_OSPI_CTRL_BASE_ADDR        (1400930304UL)
 
 /** \brief Flash Base Address */
-#define FLS_BASE_ADDRESS                (1612709888UL)
+#define FLS_BASE_ADDRESS                (1610612736UL)
 
 /** \brief Max Erase time in millisec*/
 #define FLS_MAX_ERASE_TIME                (1000.0)
@@ -226,7 +227,6 @@ typedef enum modes{
 /** \brief ISR type */
 #define FLS_ISR_TYPE                (FLS_ISR_CAT1)
 
-#endif /* DOXYGEN_SHOULD_SKIP_THIS */
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */
@@ -235,7 +235,7 @@ typedef enum modes{
 extern const struct Fls_ConfigType_s Fls_Config;
 extern struct Fls_ConfigSfdp_s *Fls_Config_SFDP_Ptr;
 
-
+#endif /* DOXYGEN_SHOULD_SKIP_THIS */
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */

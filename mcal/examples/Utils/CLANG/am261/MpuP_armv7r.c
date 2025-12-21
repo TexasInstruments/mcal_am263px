@@ -200,7 +200,7 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] = {
                      .isSharable           = 0,
                      .isExecuteNever       = 0,
                      .tex                  = 1,
-                     .accessPerm           = MpuP_AP_ALL_R,
+                     .accessPerm           = MpuP_AP_ALL_RW,
                      .subregionDisableMask = 0x0u},
     },
 };

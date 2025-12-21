@@ -41,12 +41,12 @@
 #include "Cdd_Dma.h"
 #endif
 
-#define CDD_FSIRX_START_SEC_VAR_NO_INIT_UNSPECIFIED
+#define CDD_FSIRX_START_SEC_VAR_INIT_16
 #include "Cdd_FsiRx_MemMap.h"
 /** \brief CDD FSI RX driver object */
 VAR(CddFsiRx_StatusType, CDD_FSIRX_VAR_CLEARED)
-Cdd_FsiRx_DriverStatus;
-#define CDD_FSIRX_STOP_SEC_VAR_NO_INIT_UNSPECIFIED
+Cdd_FsiRx_DriverStatus = CDD_FSI_RX_UNINIT;
+#define CDD_FSIRX_STOP_SEC_VAR_INIT_16
 #include "Cdd_FsiRx_MemMap.h"
 extern VAR(CddFsiRx_DriverObjType, CDD_FSIRX_VAR_CLEARED) Cdd_FsiRx_DrvObj;
 

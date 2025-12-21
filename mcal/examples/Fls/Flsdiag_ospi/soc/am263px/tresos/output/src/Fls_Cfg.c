@@ -140,7 +140,7 @@ CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) Fls_Config =
             },
         },
     .flsBaudRateDiv = 4U,
-    .Fls_Mode = FLS_OSPI_RX_1S_1S_1S
+   .Fls_Mode = FLS_OSPI_RX_1S_1S_1S
   };
 
   /** FLASH device specific items (note: sizes are in bytes) */
@@ -207,14 +207,14 @@ struct Fls_ConfigSfdp_s Fls_Config_SFDP_1 =
 
     .protos.protoCfg.isAddrReg  = 0U,
     .protos.protoCfg.cfgReg     = 0U,
-    .protos.protoCfg.cfgRegBitP = 0U,
+    .protos.protoCfg.cfgRegBitP = 231U,
     .protos.protoCfg.cmdRegRd   = 0U,
     .protos.protoCfg.cmdRegWr   = 0U,
     .protos.protoCfg.mask       = 0U,
     .protos.protoCfg.shift      = 0U,
 
     .protos.dummyCfg.isAddrReg  = 0U,
-    .protos.dummyCfg.cfgReg     = 0U,
+    .protos.dummyCfg.cfgReg     = 1U,
     .protos.dummyCfg.cfgRegBitP = 0U,
     .protos.dummyCfg.cmdRegRd   = 0U,
     .protos.dummyCfg.cmdRegWr   = 0U,

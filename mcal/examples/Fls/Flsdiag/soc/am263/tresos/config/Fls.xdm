@@ -1,17 +1,17 @@
 <?xml version='1.0'?>
-<datamodel version="8.0" 
-           xmlns="http://www.tresos.de/_projects/DataModel2/18/root.xsd" 
-           xmlns:a="http://www.tresos.de/_projects/DataModel2/18/attribute.xsd" 
-           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
+<datamodel version="8.0"
+           xmlns="http://www.tresos.de/_projects/DataModel2/18/root.xsd"
+           xmlns:a="http://www.tresos.de/_projects/DataModel2/18/attribute.xsd"
+           xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
            xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd">
 
-  <d:ctr type="AUTOSAR" factory="autosar" 
-         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
-         xmlns:ce="http://www.tresos.de/_projects/DataModel2/18/childenable.xsd" 
-         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd" 
-         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd" 
-         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
-         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"  
+  <d:ctr type="AUTOSAR" factory="autosar"
+         xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+         xmlns:ce="http://www.tresos.de/_projects/DataModel2/18/childenable.xsd"
+         xmlns:cd="http://www.tresos.de/_projects/DataModel2/08/customdata.xsd"
+         xmlns:f="http://www.tresos.de/_projects/DataModel2/14/formulaexpr.xsd"
+         xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+         xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
          xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
     <d:lst type="TOP-LEVEL-PACKAGES">
       <d:ctr name="Fls" type="AR-PACKAGE">
@@ -20,7 +20,7 @@
             <d:ctr type="MODULE-CONFIGURATION">
               <a:a name="DEF" value="ASPath:/TI_AM263x/Fls"/>
               <a:a name="IMPORTER_INFO" value="@REC"/>
-              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION" 
+              <d:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION"
                      value="VariantPreCompile">
                 <a:a name="IMPORTER_INFO" value="@REC"/>
               </d:var>
@@ -35,7 +35,7 @@
                 <d:var name="FlsCallCycle" type="FLOAT" value="1.0">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="FlsDefaultMode" type="ENUMERATION" 
+                <d:var name="FlsDefaultMode" type="ENUMERATION"
                        value="MEMIF_MODE_SLOW">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
@@ -88,11 +88,11 @@
                       <d:var name="FlsDeviceID" type="INTEGER" value="8216">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="Fls4ByteAddressEnableCmd" type="INTEGER" 
+                      <d:var name="Fls4ByteAddressEnableCmd" type="INTEGER"
                              value="0">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="Fls4ByteAddressDisableCmd" type="INTEGER" 
+                      <d:var name="Fls4ByteAddressDisableCmd" type="INTEGER"
                              value="0">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
@@ -105,7 +105,7 @@
                       <d:var name="FlsDeviceResetType" type="INTEGER" value="16">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsAddressByteSupport" type="INTEGER" 
+                      <d:var name="FlsAddressByteSupport" type="INTEGER"
                              value="0">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
@@ -142,7 +142,7 @@
                       <d:var name="FlsXspiWipReg" type="INTEGER" value="0">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsNumberOfSuppEraseTypes" type="INTEGER" 
+                      <d:var name="FlsNumberOfSuppEraseTypes" type="INTEGER"
                              value="0">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
@@ -152,66 +152,66 @@
                       <d:var name="FlsByteOrder" type="INTEGER" value="255">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsChipEraseTimeout" type="INTEGER" 
+                      <d:var name="FlsChipEraseTimeout" type="INTEGER"
                              value="165000000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsWrrWriteTimeout" type="INTEGER" 
+                      <d:var name="FlsWrrWriteTimeout" type="INTEGER"
                              value="600000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsBusyTimeout" type="INTEGER" 
+                      <d:var name="FlsBusyTimeout" type="INTEGER"
                              value="165000000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsWriteTimeout" type="INTEGER" value="400">
+                      <d:var name="FlsWriteTimeout" type="INTEGER" value="1000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsMaxSectorErasetime" type="INTEGER" 
+                      <d:var name="FlsMaxSectorErasetime" type="INTEGER"
                              value="1000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsMaxBlockErasetime" type="INTEGER" 
+                      <d:var name="FlsMaxBlockErasetime" type="INTEGER"
                              value="10000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsMaxChipErasetime" type="INTEGER" 
+                      <d:var name="FlsMaxChipErasetime" type="INTEGER"
                              value="4000000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsBlockReadWriteTime" type="INTEGER" 
+                      <d:var name="FlsBlockReadWriteTime" type="INTEGER"
                              value="10000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsSectorReadWriteTime" type="INTEGER" 
+                      <d:var name="FlsSectorReadWriteTime" type="INTEGER"
                              value="1000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsChipReadWriteTime" type="INTEGER" 
+                      <d:var name="FlsChipReadWriteTime" type="INTEGER"
                              value="4000000">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsEraseBlockSize" type="INTEGER" 
+                      <d:var name="FlsEraseBlockSize" type="INTEGER"
                              value="65536">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsEraseSectorSize" type="INTEGER" 
+                      <d:var name="FlsEraseSectorSize" type="INTEGER"
                              value="4096">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsCmdBlkErase3Bytes" type="INTEGER" 
+                      <d:var name="FlsCmdBlkErase3Bytes" type="INTEGER"
                              value="216">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsCmdBlkErase4Bytes" type="INTEGER" 
+                      <d:var name="FlsCmdBlkErase4Bytes" type="INTEGER"
                              value="216">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsCmdSectorErase3Bytes" type="INTEGER" 
+                      <d:var name="FlsCmdSectorErase3Bytes" type="INTEGER"
                              value="32">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
-                      <d:var name="FlsCmdSectorErase4Bytes" type="INTEGER" 
+                      <d:var name="FlsCmdSectorErase4Bytes" type="INTEGER"
                              value="32">
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
@@ -222,123 +222,123 @@
                         <a:a name="IMPORTER_INFO" value="@DEF"/>
                       </d:var>
                       <d:ctr name="FlsProtocolConfigs" type="IDENTIFIABLE">
-                        <d:var name="FlsProtocolReadCmd" type="INTEGER" 
+                        <d:var name="FlsProtocolReadCmd" type="INTEGER"
                                value="3">
                           <a:a name="IMPORTER_INFO">
                             <a:v>@CALC</a:v>
                             <a:v>@DEF</a:v>
                           </a:a>
                         </d:var>
-                        <d:var name="FlsProtocolWriteCmd" type="INTEGER" 
+                        <d:var name="FlsProtocolWriteCmd" type="INTEGER"
                                value="2">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolmodeClksCmd" type="INTEGER" 
+                        <d:var name="FlsProtocolmodeClksCmd" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolmodeClksRead" type="INTEGER" 
+                        <d:var name="FlsProtocolmodeClksRead" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyClkCmd" type="INTEGER" 
+                        <d:var name="FlsProtocolDummyClkCmd" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyClkRead" type="INTEGER" 
+                        <d:var name="FlsProtocolDummyClkRead" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO">
                             <a:v>@CALC</a:v>
                             <a:v>@DEF</a:v>
                           </a:a>
                         </d:var>
-                        <d:var name="FlsProtocolEnableType" type="INTEGER" 
+                        <d:var name="FlsProtocolEnableType" type="INTEGER"
                                value="1"/>
-                        <d:var name="FlsProtocolEnableSeq" type="INTEGER" 
+                        <d:var name="FlsProtocolEnableSeq" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolAddrReg" type="INTEGER" 
+                        <d:var name="FlsProtocolAddrReg" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolConfigReg" type="INTEGER" 
+                        <d:var name="FlsProtocolConfigReg" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolConfigRegData" type="INTEGER" 
+                        <d:var name="FlsProtocolConfigRegData" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolConfigRegReadCmd" 
+                        <d:var name="FlsProtocolConfigRegReadCmd"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolConfigRegWriteCmd" 
+                        <d:var name="FlsProtocolConfigRegWriteCmd"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolConfigMask" type="INTEGER" 
+                        <d:var name="FlsProtocolConfigMask" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolConfigShift" type="INTEGER" 
+                        <d:var name="FlsProtocolConfigShift" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyAddrReg" type="INTEGER" 
+                        <d:var name="FlsProtocolDummyAddrReg" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyConfigReg" type="INTEGER" 
+                        <d:var name="FlsProtocolDummyConfigReg" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyConfigRegData" 
+                        <d:var name="FlsProtocolDummyConfigRegData"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyConfigRegReadCmd" 
+                        <d:var name="FlsProtocolDummyConfigRegReadCmd"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyConfigRegWriteCmd" 
+                        <d:var name="FlsProtocolDummyConfigRegWriteCmd"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyConfigMask" type="INTEGER" 
+                        <d:var name="FlsProtocolDummyConfigMask" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolDummyConfigShift" 
+                        <d:var name="FlsProtocolDummyConfigShift"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolStrDtrAddrReg" type="INTEGER" 
+                        <d:var name="FlsProtocolStrDtrAddrReg" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolStrDtrConfigReg" type="INTEGER" 
+                        <d:var name="FlsProtocolStrDtrConfigReg" type="INTEGER"
                                value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolStrDtrConfigRegData" 
+                        <d:var name="FlsProtocolStrDtrConfigRegData"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolStrDtrConfigRegReadCmd" 
+                        <d:var name="FlsProtocolStrDtrConfigRegReadCmd"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolStrDtrConfigRegWriteCmd" 
+                        <d:var name="FlsProtocolStrDtrConfigRegWriteCmd"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolStrDtrConfigMask" 
+                        <d:var name="FlsProtocolStrDtrConfigMask"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
-                        <d:var name="FlsProtocolStrDtrConfigShift" 
+                        <d:var name="FlsProtocolStrDtrConfigShift"
                                type="INTEGER" value="0">
                           <a:a name="IMPORTER_INFO" value="@DEF"/>
                         </d:var>
@@ -361,7 +361,7 @@
                       <d:var name="FlsSectorSize" type="INTEGER" value="4096">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
-                      <d:var name="FlsSectorStartaddress" type="INTEGER" 
+                      <d:var name="FlsSectorStartaddress" type="INTEGER"
                              value="0">
                         <a:a name="IMPORTER_INFO" value="@REC"/>
                       </d:var>
@@ -371,7 +371,7 @@
                 <d:var name="FlsBaudRateDiv" type="INTEGER" value="0">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="FlsProtocol" type="ENUMERATION" 
+                <d:var name="FlsProtocol" type="ENUMERATION"
                        value="FLS_1S_1S_1S"/>
               </d:ctr>
               <d:ctr name="FlsGeneral" type="IDENTIFIABLE">
@@ -379,7 +379,7 @@
                 <d:var name="FlsAcLoadOnJobStart" type="BOOLEAN" value="false">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:ref name="FlsExternalFlashSelect" type="REFERENCE" 
+                <d:ref name="FlsExternalFlashSelect" type="REFERENCE"
                        value="ASPath:/Fls/Fls/FlsConfigSet/FlsFlashConfigList/S25FL128S"/>
                 <d:var name="FlsBaseAddress" type="INTEGER" value="1610612736">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -399,7 +399,7 @@
                 <d:var name="FlsDriverIndex" type="INTEGER" value="0">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="FlsEraseVerificationEnabled" type="BOOLEAN" 
+                <d:var name="FlsEraseVerificationEnabled" type="BOOLEAN"
                        value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
@@ -412,7 +412,7 @@
                 <d:var name="FlsSetModeApi" type="BOOLEAN" value="false">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="FlsTimeoutSupervisionEnabled" type="BOOLEAN" 
+                <d:var name="FlsTimeoutSupervisionEnabled" type="BOOLEAN"
                        value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
@@ -425,15 +425,15 @@
                 <d:var name="FlsVersionInfoApi" type="BOOLEAN" value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="FlsWriteVerificationEnabled" type="BOOLEAN" 
+                <d:var name="FlsWriteVerificationEnabled" type="BOOLEAN"
                        value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="FlsQspiCtrlBaseAddr" type="INTEGER" 
+                <d:var name="FlsQspiCtrlBaseAddr" type="INTEGER"
                        value="1210056704">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:ref name="FlsOsCounterRef" type="REFERENCE" 
+                <d:ref name="FlsOsCounterRef" type="REFERENCE"
                        value="ASPath:/Os/Os/OsCounter_0">
                   <a:a name="ENABLE" value="true"/>
                   <a:a name="IMPORTER_INFO" value="@REC"/>
@@ -444,7 +444,7 @@
                 <d:var name="FlsDefaultOSCounterId" type="INTEGER" value="0">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
-                <d:var name="FlsEnableRegisterReadbackApi" type="BOOLEAN" 
+                <d:var name="FlsEnableRegisterReadbackApi" type="BOOLEAN"
                        value="true">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
