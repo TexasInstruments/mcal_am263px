@@ -128,6 +128,29 @@ void FlsApp_Startup()
 #endif  //(STD_ON == FLS_DMA_ENABLE)
 }
 
+void Mcu_controlModuleUnlockMMR(void)
+{
+    uint32           baseAddr;
+    volatile uint32 *kickAddr;
+    /*Unlock MSS_CTRL*/
+    baseAddr = (uint32)MCU_CSL_MSS_CTRL_BASE;
+    kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK0);
+    HW_WR_REG32(kickAddr, MCU_TEST_KICK0_UNLOCK_VAL); /* KICK 0 */
+    kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK1);
+    HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
+}
+
+void Mcu_controlModuleLockMMR(void)
+{
+    uint32           baseAddr;
+    volatile uint32 *kickAddr;
+    /*Lock MSS_CTRL*/
+    baseAddr = (uint32)MCU_CSL_MSS_CTRL_BASE;
+    kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK0);
+    HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 0 */
+    kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_MSS_CTRL_LOCK0_KICK1);
+    HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
+}
 #ifdef __cplusplus
 }
 #endif

@@ -202,8 +202,10 @@ SECTIONS
     }
 
     .bss.sipc_hsm_queue_mem (NOLOAD) : {
+        *(.bss.sipc_hsm_queue_mem)
     } > MAILBOX_HSM
 
     .bss.sipc_secure_host_queue_mem (NOLOAD) : {
+        *(.bss.sipc_secure_host_queue_mem)
     } > MAILBOX_R5F
 }

@@ -42,6 +42,8 @@ extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config_0;
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 void        FlsApp_Startup(void);
+void        Mcu_controlModuleUnlockMMR(void);
+void        Mcu_controlModuleLockMMR(void);
 static void FlsApp_InterruptConfig(void);
 static void FlsApp_PlatformInit(void);
 

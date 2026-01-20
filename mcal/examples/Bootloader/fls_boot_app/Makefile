@@ -13,6 +13,7 @@ include $(mcal_PATH)/examples/Utils/srcs_autosar_stub.mk
 include $(mcal_PATH)/examples/Utils/srcs_startup.mk
 include $(mcal_PATH)/examples/Utils/bootloader_utils/srcs.mk
 include $(mcal_PATH)/examples/Utils/hsmclient_utils/srcs.mk
+include $(mcal_PATH)/examples/Utils/fss_utils/srcs.mk
 include $(mcal_PATH)/examples_config/Mcu_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs_fls.mk
 ifeq ($(SOC), am263px)

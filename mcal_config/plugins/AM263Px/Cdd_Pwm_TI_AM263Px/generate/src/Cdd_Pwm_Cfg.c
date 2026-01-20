@@ -1,6 +1,6 @@
 [!IF "as:modconf('Cdd_Pwm')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 /* ======================================================================
- *   Copyright (C) [!"text:split($date,'-')[1]"!] Texas Instruments Incorporated
+ *   Copyright (C) 2025 Texas Instruments Incorporated
  *
  *   All rights reserved. Property of Texas Instruments Incorporated.
  *   Restricted rights to use, duplicate or disclose this code are

@@ -1,0 +1,287 @@
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="ARM"
+                deviceId="Cortex R.AM263Px"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="fls_boot_app"
+        name = "fls_boot_app"
+        configurations="
+            Release,
+            Debug,
+        "
+        connection="TIXDS110_Connection.xml"
+        toolChain="TICLANG"
+        cgtVersion="4.0.4.LTS"
+        device="Cortex R.AM263Px"
+        deviceCore="Cortex_R5_0"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        endianness="little"
+        outputType="executable"
+        outputFormat="ELF"
+        launchWizard="False"
+        linkerCommandFile=""
+        compilerBuildOptions_asm="
+        -x ti-asm
+        -mlittle-endian
+        -mcpu=cortex-r5
+        -mfloat-abi=hard
+        -mfpu=vfpv3-d16
+        -Wno-unused-command-line-argument
+        -mthumb
+        -save-temps
+        -c
+        "
+        artifactExtension="xer5f"
+        compilerBuildOptions_c="
+        -mlittle-endian
+        -mcpu=cortex-r5
+        -gdwarf-3
+        -mfloat-abi=hard
+        -mfpu=vfpv3-d16
+        -mthumb
+        -Wall
+        -Werror
+        -Wno-gnu-variable-sized-type-not-at-end
+        -Wno-unused-function
+        -DAM263PX_PLATFORM
+        -DAM263PX_R_PACKAGE
+        -ffunction-sections
+        -DCLANG
+        -DTRACE_ENABLE
+        -DRELEASE_BUILD
+        -DASSERT_ENABLE
+        -DAUTOSAR_431
+        -I${MCAL_MCAL_autosar_include}
+        -I${MCAL_MCAL_Fls}
+        -I${MCAL_MCAL_Include_hw}
+        -I${MCAL_MCAL_Mcal_Lib}
+        -I${MCAL_MCAL_Include_memmap}
+        -I${MCAL_MCAL_Include_hw_types}
+        -I${MCAL_MCAL_Include_hal_stdtypes}
+        -I${MCAL_MCAL_Mcu}
+        -I${MCAL_MCAL_Port}
+        -I${MCAL_MCAL_Dma}
+        -I${MCAL_MCAL_I2c}
+
+        -I${MCAL_MCAL_Fls_eg}
+        -I${MCAL_MCAL_Utils_am263px}
+        -I${MCAL_MCAL_Utils}
+        -I${MCAL_MCAL_Utils_Mcan}
+        -I${MCAL_MCAL_Fls_Cfg}
+        -I${MCAL_MCAL_Mcu_Cfg}
+        -I${MCAL_MCAL_Port_Cfg}
+        -I${MCAL_MCAL_Dma_Cfg}
+        -I${MCAL_MCAL_I2c_Cfg}
+        -I${MCAL_MCAL_Dma_V0}
+        -I${MCAL_MCAL_Fls_V2}
+        -I${MCAL_MCAL_Mcu_V2}
+        -I${MCAL_MCAL_Port_V0}
+        -I${MCAL_MCAL_I2c_V0}
+        -I${MCAL_MCAL_I2c_SRC}
+        -I${BOOTLOADER_UTILS_PATH}
+        -I${BOOTLOADER_UTILS_PATH}/am263px
+        -I${HSMCLIENT_UTILS_PATH}
+        -I${HSMCLIENT_UTILS_PATH}/crypto/dthe/hw_include
+        -I${HSMCLIENT_UTILS_PATH}/crypto/dthe
+        -I${HSMCLIENT_UTILS_PATH}/dpl
+        -I${HSMCLIENT_UTILS_PATH}/hsmclient
+        -I${HSMCLIENT_UTILS_PATH}/hsmclient/utils
+        -I${HSMCLIENT_UTILS_PATH}/secure_ipc_notify
+	    -I${HSMCLIENT_UTILS_PATH}/secure_ipc_notify/soc
+	    -I${HSMCLIENT_UTILS_PATH}/secure_ipc_notify/soc/am263px
+        -I${FSS_UTILS_PATH}
+        "
+        postBuildStep="$(MAKE) -C ${CCS_PROJECT_DIR} -f makefile_ccs_bootimage_gen OUTNAME=fls_boot_app PROFILE=${ConfigName} MCAL_SITARA_MCU_PATH=${MCAL_MCAL}/.. CG_TOOL_ROOT=${CG_TOOL_ROOT} CCS_INSTALL_DIR=${CCS_INSTALL_DIR} CCS_NODE=${CCS_INSTALL_DIR}/tools/node/node CYGWIN_PATH=${CCS_UTILS_DIR}/cygwin DEVICE=am263px"
+
+        >
+        <configuration name="Debug"
+            compilerBuildOptions_c="
+                -D_DEBUG_=1
+            "
+            linkerBuildOptions="
+            --diag_suppress=10068
+            --diag_suppress=10063
+            --ram_model
+            --reread_libs
+            "
+        ></configuration>
+        <configuration name="Release"
+            compilerBuildOptions_c="
+                -Os
+            "
+            linkerBuildOptions="
+            --diag_suppress=10068
+            --diag_suppress=10063
+            --ram_model
+            --reread_libs
+            "
+        ></configuration>
+
+        <pathVariable name="MCAL_MCAL" path="../../../../../../../../../mcal" scope="project"/>
+        <pathVariable name="MCAL_MCAL_autosar_include" path="${MCAL_MCAL}/autosar_include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Fls" path="${MCAL_MCAL}/Fls/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Mcu" path="${MCAL_MCAL}/Mcu/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Port" path="${MCAL_MCAL}/Port/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Dma" path="${MCAL_MCAL}/Dma/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c" path="${MCAL_MCAL}/I2c/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_makefile" path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/r5f0_0/ti-arm-clang/am263px_cc" scope="project"/>
+
+        <pathVariable name="MCAL_MCAL_Include_hw" path="${MCAL_MCAL}/include/hw/am263px" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Include_memmap" path="${MCAL_MCAL}/include/memmap" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Include_hw_types" path="${MCAL_MCAL}/include/hw/" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Include_hal_stdtypes" path="${MCAL_MCAL}/include/hw/hal_stdtypes.h" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Utils_am263px" path="${PROJECT_LOC}/Utils/am263px" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Utils" path="${PROJECT_LOC}/Utils" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Utils_Mcan" path="${PROJECT_LOC}/Utils/am263px/IoMux" scope="project"/>
+        <pathVariable name="MCAL_sys_asm" path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Mcal_Lib" path="${MCAL_MCAL}/Mcal_Lib" scope="project"/>
+
+        <pathVariable name="MCAL_MCAL_Fls_V2" path="${MCAL_MCAL}/Fls/V2" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Mcu_V2" path="${MCAL_MCAL}/Mcu/V2" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Port_V0" path="${MCAL_MCAL}/Port/V0" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Dma_V0" path="${MCAL_MCAL}/Dma/V0" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_V0" path="${MCAL_MCAL}/I2c/V0" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_SRC" path="${MCAL_MCAL}/I2c/src" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Fls_eg" path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/r5f0_0/" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Mcu_Cfg" path="${PROJECT_LOC}/examples_config/Mcu_Demo_Cfg/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Port_Cfg" path="${PROJECT_LOC}/examples_config/Port_Demo_Cfg/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_I2c_Cfg" path="${PROJECT_LOC}/examples_config/Cdd_I2c_Demo_Cfg/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Dma_Cfg" path="${PROJECT_LOC}/examples_config/Dma_Demo_Cfg/include" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Fls_Cfg" path="${PROJECT_LOC}/examples_config/Fls_Demo_Cfg/include" scope="project"/>
+
+        <pathVariable name="BOOTLOADER_UTILS_PATH" path="${MCAL_MCAL}/examples/Utils/bootloader_utils" scope="project"></pathVariable>
+        <pathVariable name="BOOTLOADER_UTILS_PATH_AM263PX" path="${MCAL_MCAL}/examples/Utils/bootloader_utils/am263px" scope="project"></pathVariable>
+        <pathVariable name="HSMCLIENT_UTILS_PATH" path="${MCAL_MCAL}/examples/Utils/hsmclient_utils" scope="project"></pathVariable>
+        <pathVariable name="FSS_UTILS_PATH" path="${MCAL_MCAL}/examples/Utils/fss_utils" scope="project"></pathVariable>
+
+        <file path="${MCAL_MCAL}/Fls/V2" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Fls"></file>
+        <file path="${MCAL_MCAL}/Fls/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Fls"></file>
+        <file path="${MCAL_MCAL}/Fls/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Fls"></file>
+        <file path="${MCAL_MCAL}/Mcu/V2" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
+        <file path="${MCAL_MCAL}/Mcu/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
+        <file path="${MCAL_MCAL}/Mcu/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
+        <file path="${MCAL_MCAL}/Dma/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Dma"></file>
+        <file path="${MCAL_MCAL}/Dma/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Dma"></file>
+        <file path="${MCAL_MCAL}/Dma/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Dma"></file>
+        <file path="${MCAL_MCAL}/Port/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
+        <file path="${MCAL_MCAL}/Port/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
+        <file path="${MCAL_MCAL}/Port/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
+        <file path="${MCAL_MCAL}/I2c/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/I2c"></file>
+        <file path="${MCAL_MCAL}/I2c/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/I2c"></file>
+        <file path="${MCAL_MCAL}/I2c/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/I2c"></file>
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/tresos/output/include/Fls_Cfg.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Fls_Demo_Cfg/include"></file>
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/tresos/output/src/Fls_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Fls_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/tresos/output/src/Fls_PBcfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Fls_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am263px/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/src/Port_PBcfg_Ospi.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am263px/r5f0_0/src/Port_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/tresos/output/include/Cdd_Dma_Cfg.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Dma_Demo_Cfg/include"></file>
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/tresos/output/src/Cdd_Dma_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Dma_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Cdd_I2c_Demo_Cfg/soc/am263px/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Cdd_I2c_Demo_Cfg/soc/am263px/r5f0_0/src/Cdd_I2c_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Cdd_I2c_Demo_Cfg"></file>
+
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/IoMux/ioexp_tca6416_6424.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px/IoMux"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/IoMux/ioexp_tca6416_6424.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px/IoMux"></file>
+        <file path="${MCAL_MCAL_makefile}/makefile_ccs_bootimage_gen" openOnCreation="false" excludeFromBuild="false" action="copy" ></file>
+
+        <file path="${MCAL_MCAL}/include/hw/am263px" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
+        <file path="${MCAL_MCAL}/include/memmap" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
+        <file path="${MCAL_MCAL}/include/hw/hw_types.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
+        <file path="${MCAL_MCAL}/include/hw/hal_stdtypes.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/sys_startup.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/lnk_r5_am263px_CLANG.cmd" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory=""></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/CacheP.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/CacheP.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/esm.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/Dem.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_core.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/boot_armv7r_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/boot_armv7r.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/MpuP_armv7r_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/MpuP_armv7r.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/MpuP_armv7r.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/app_utils_uart.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/app_utils.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/app_utils.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/Os.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/reg_sci.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/sci.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/am263px/sci.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/sys_core.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/sys_exception.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Mcal_Lib"></file>
+        <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Mcal_Lib"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/sys_startup.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/sys_vim.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/sys_vim.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/trace.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/trace.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/app_utilsI2c.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/app_utilsI2c.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
+        
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/BootApp.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/r5f0_0/FlsApp_Startup.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
+        <file path="${MCAL_MCAL}/examples/Bootloader/fls_boot_app/soc/am263px/r5f0_0/FlsApp_Startup.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="example"></file>
+
+        <file path="${MCAL_MCAL}/examples/Utils/bootloader_utils/bootloader.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils"></file>
+        <file path="${BOOTLOADER_UTILS_PATH}/bootloader.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils"></file>
+        <file path="${BOOTLOADER_UTILS_PATH}/bootloader_fls.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils"></file>
+        <file path="${BOOTLOADER_UTILS_PATH}/bootloader_fls.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils"></file>
+
+        <file path="${MCAL_MCAL}/examples/Utils/bootloader_utils/am263px/soc_rcm.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/bootloader_utils/am263px/soc_rcm.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/bootloader_utils/am263px/soc.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/bootloader_utils/am263px/soc.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/bootloader_utils/am263px/bootloader_soc.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/bootloader_utils/am263px/bootloader_soc.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/bootloader_utils/am263px"></file>
+
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/hsmclient/hsmclient.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/hsmclient/hsmclient.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/hsmclient/hsmclient_msg.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/hsmclient/utils/hsmclient_utils.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/hsmclient/utils"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/hsmclient/utils/hsmclient_utils.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/hsmclient/utils"></file>
+
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dthe.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dthe.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dthe_aes.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dthe_aes.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dthe_sha.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dthe_sha.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dma.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/dma.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/hw_include/cslr_aes.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe/hw_include"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/hw_include/cslr_dthe.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe/hw_include"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/hw_include/cslr_hsm_ctrl.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe/hw_include"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/crypto/dthe/hw_include/cslr_sha.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/crypto/dthe/hw_include"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/CpuId_armv7r.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/CpuId_armv7r.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/HwiP_armv7r_asm.S" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/HwiP.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/SemaphoreP_nortos.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/SemaphoreP.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/SystemP.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/dpl/CpuIdP.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/dpl"></file>
+
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/secure_ipc_notify/sipc_notify_mailbox.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/secure_ipc_notify"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/secure_ipc_notify/sipc_notify.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/secure_ipc_notify"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/secure_ipc_notify/sipc_notify_src.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/secure_ipc_notify"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/secure_ipc_notify/sipc_notify_src.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/secure_ipc_notify"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/secure_ipc_notify/soc/sipc_notify_soc.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/secure_ipc_notify/soc"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/secure_ipc_notify/soc/am263px/sipc_notify_cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/secure_ipc_notify/soc/am263px"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/hsmclient_utils/secure_ipc_notify/soc/am263px/sipc_notify_cfg.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/hsmclient_utils/secure_ipc_notify/soc/am263px"></file>
+
+        <file path="${MCAL_MCAL}/examples/Utils/fss_utils/fss_v0.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/fss_utils/"></file>
+        <file path="${MCAL_MCAL}/examples/Utils/fss_utils/fss.h" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils/fss_utils/"></file>
+    </project>
+</projectSpec>

@@ -55,6 +55,7 @@ VAR(Cdd_FsiTx_DriverObjType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DrvObj;
 /** \brief Variable to store driver status */
 VAR(Cdd_FsiTx_StatusType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DriverStatus = CDD_FSI_TX_UNINIT;
 #define CDD_FSITX_STOP_SEC_VAR_INIT_16
+#include "Cdd_FsiTx_MemMap.h"
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */

@@ -117,7 +117,7 @@ static void          UART_readDataPolling(CddUart_Handle handle);
 static sint32        UART_readPolling(CddUart_Handle handle, CddUart_Transaction *trans);
 static uint32        Cdd_Uart_getRxFifoTrigBitVal(uint32 rxTrig);
 static uint32        Cdd_Uart_getTxFifoTrigBitVal(uint32 txTrig);
-static uint32        UART_checkCharsAvailInRXFifo(uint32_t baseAddr);
+static uint32        UART_checkCharsAvailInRXFifo(uint32 baseAddr);
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -440,7 +440,7 @@ static inline uint32 UART_getIntrIdentityStatus(uint32 baseAddr)
  *
  * Errata document : https://www.ti.com/lit/pdf/sprz457
  */
-static void UART_i2310WA(uint32_t baseAddr)
+static void UART_i2310WA(uint32 baseAddr)
 {
     uint32 regVal = 0U;
     HW_WR_REG32(baseAddr + UART_TIMEOUTL, 0xFF);
@@ -485,10 +485,10 @@ uint32 UART_checkCharsAvailInFifo(uint32 baseAddr)
     return retVal;
 }
 
-static uint32_t UART_checkCharsAvailInRXFifo(uint32_t baseAddr)
+static uint32 UART_checkCharsAvailInRXFifo(uint32 baseAddr)
 {
-    uint32_t lcrRegValue = 0;
-    uint32_t retVal      = FALSE;
+    uint32 lcrRegValue = 0;
+    uint32 retVal      = FALSE;
 
     /* Preserving the current value of LCR. */
     lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
@@ -497,9 +497,9 @@ static uint32_t UART_checkCharsAvailInRXFifo(uint32_t baseAddr)
     HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
 
     /* Checking if the RHR(or RX FIFO) has atleast one byte to be read. */
-    if ((uint32_t)UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_0 != (HW_RD_REG32(baseAddr + UART_LSR) & UART_LSR_RX_FIFO_E_MASK))
+    if ((uint32)UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_0 != (HW_RD_REG32(baseAddr + UART_LSR) & UART_LSR_RX_FIFO_E_MASK))
     {
-        retVal = (uint32_t)TRUE;
+        retVal = (uint32)TRUE;
     }
 
     /* Restoring the value of LCR. */

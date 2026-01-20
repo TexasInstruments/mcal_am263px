@@ -1,5 +1,5 @@
 /* ======================================================================
- *   Copyright (C) [!"text:split($date,'-')[1]"!] Texas Instruments Incorporated
+ *   Copyright (C) 2025 Texas Instruments Incorporated
 
  *
  *   All rights reserved. Property of Texas Instruments Incorporated.

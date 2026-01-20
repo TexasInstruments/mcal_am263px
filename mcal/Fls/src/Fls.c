@@ -427,6 +427,66 @@ static uint8 Fls_DetCheckInit(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
     return detFlag;
 }
 #endif
+#if (STD_ON == FLS_DEV_ERROR_DETECT)
+static Std_ReturnType Fls_CheckEraseAddressAlignment(Fls_AddressType eraseStartAddress, Fls_LengthType Length)
+{
+    Std_ReturnType retVal = (Std_ReturnType)E_OK;
+
+    if ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.sectorSize) && (Length < Fls_Config_SFDP_Ptr->eraseCfg.blockSize))
+    {
+        if (E_NOT_OK == Fls_CheckSectorAlignment(eraseStartAddress))
+        {
+            retVal = (Std_ReturnType)E_NOT_OK;
+        }
+    }
+    else if (Length >= Fls_Config_SFDP_Ptr->eraseCfg.blockSize)
+    {
+        if (E_NOT_OK == Fls_CheckBlockAlignement(eraseStartAddress))
+        {
+            retVal = (Std_ReturnType)E_NOT_OK;
+        }
+    }
+
+    if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_CheckValidAddress(eraseStartAddress)))
+    {
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+
+    return retVal;
+}
+
+static Std_ReturnType Fls_CheckEraseLengthAlignment(Fls_AddressType eraseStartAddress, Fls_LengthType Length)
+{
+    Std_ReturnType retVal = (Std_ReturnType)E_OK;
+
+    if (Length == (Fls_LengthType)0U)
+    {
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+    else if ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.sectorSize) && (Length < Fls_Config_SFDP_Ptr->eraseCfg.blockSize))
+    {
+        if (E_NOT_OK == Fls_CheckSectorAlignment(eraseStartAddress + Length))
+        {
+            retVal = (Std_ReturnType)E_NOT_OK;
+        }
+    }
+    else if (Length >= Fls_Config_SFDP_Ptr->eraseCfg.blockSize)
+    {
+        if (E_NOT_OK == Fls_CheckBlockAlignement(eraseStartAddress + (Fls_AddressType)Length))
+        {
+            retVal = (Std_ReturnType)E_NOT_OK;
+        }
+    }
+
+    if ((retVal == (Std_ReturnType)E_OK) &&
+        (E_NOT_OK == Fls_CheckValidAddress(eraseStartAddress + (Fls_AddressType)Length - 1U)))
+    {
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+
+    return retVal;
+}
+#endif
 
 /**
  *  \name: Fls_Erase
@@ -461,28 +521,17 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Erase(Fls_AddressType TargetAddress, Fls_Leng
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_ERASE, FLS_E_BUSY);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) &&
-        (((Length >= Fls_Config_SFDP_Ptr->eraseCfg.sectorSize) && (Length < Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
-          (E_NOT_OK == Fls_CheckSectorAlignment(eraseStartAddress))) ||
-         ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
-          (E_NOT_OK == Fls_CheckBlockAlignement(eraseStartAddress))) ||
-         (E_NOT_OK == Fls_CheckValidAddress(eraseStartAddress))))
-
+    if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_CheckEraseAddressAlignment(eraseStartAddress, Length)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_ERASE, FLS_E_PARAM_ADDRESS);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) &&
-        ((Length == (Fls_LengthType)0U) ||
-         ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.sectorSize) && (Length < Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
-          (E_NOT_OK == Fls_CheckSectorAlignment(eraseStartAddress + Length))) ||
-         ((Length >= Fls_Config_SFDP_Ptr->eraseCfg.blockSize) &&
-          ((Std_ReturnType)E_NOT_OK == Fls_CheckBlockAlignement(eraseStartAddress + (Fls_AddressType)Length))) ||
-         ((Std_ReturnType)E_NOT_OK == Fls_CheckValidAddress(eraseStartAddress + (Fls_AddressType)Length - 1U))))
+    if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_CheckEraseLengthAlignment(eraseStartAddress, Length)))
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_ERASE, FLS_E_PARAM_LENGTH);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
+
 #endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
     if ((retVal == (Std_ReturnType)E_OK) && (Fls_DrvObj.status == MEMIF_IDLE))
     {

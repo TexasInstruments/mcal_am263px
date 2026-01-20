@@ -253,15 +253,13 @@ Std_ReturnType CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
         }
         else
         {
-            if (Cdd_FsiTx_PingStatus == CDD_FSI_TX_PING_ZERO_SENT)
+            /* Cdd_FsiTx_PingStatus is CDD_FSI_TX_PING_ZERO_SENT (guaranteed by else branch) */
+            CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG1);
+            if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
             {
-                CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG1);
-                if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
-                {
-                    CddFsiTx_startTxTransmit(baseAddr);
-                }
-                Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ONE_SENT;
+                CddFsiTx_startTxTransmit(baseAddr);
             }
+            Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ONE_SENT;
         }
     }
     else

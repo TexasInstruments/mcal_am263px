@@ -51,6 +51,7 @@
 
 #include "bootloader.h"
 #include "hsmclient.h"
+#include "fss.h"
 #include <dthe.h>
 #include <dthe_aes.h>
 #include <dthe_sha.h>
@@ -73,6 +74,9 @@
 #define SIPC_QUEUE_LENGTH (32u)
 /* Total number of secure cores */
 #define SIPC_NUM_R5_CORES (2u)
+
+/* FSS Region used for AB SWAP*/
+#define FSS_REG_1 (0x80000000UL)
 
 /**
  * @brief
@@ -519,6 +523,29 @@ int main(void)
     Bootloader_BootImageInfo_init(&bootImageInfo);
 
     bootHandle = Bootloader_open(CONFIG_BOOTLOADER0, &bootParams);
+
+/*  For AB SWAP the FLS_BASE_ADDRESS should be configured as 0x80000000.
+    Respective MPU region should also be configured in MpuP_armv7r.c for 0x80000000.
+*/
+#if (FLS_BASE_ADDRESS == FSS_REG_1)
+    {
+        status = SystemP_FAILURE;
+
+        if (NULL != Fls_Config_SFDP_Ptr)
+        {
+            uint32_t   bootret    = 0;
+            FSS_Config fssConf    = {0, 0};
+            fssConf.ipBaseAddress = MCAL_CSL_MSS_CTRL_U_BASE;
+            fssConf.extFlashSize  = Fls_Config_SFDP_Ptr->flashSize;
+            Mcu_controlModuleUnlockMMR();
+            FSS_selectRegionA((FSS_Handle)&fssConf);
+            Mcu_controlModuleLockMMR();
+            bootret = FSS_getBootRegion((FSS_Handle)&fssConf);
+            AppUtils_printf("Bootret : %d\r\n", bootret);
+            status = SystemP_SUCCESS;
+        }
+    }
+#endif
 
     {
         HsmClient_config();

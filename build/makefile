@@ -17,7 +17,7 @@ mcal_PKG_LIST_ALL_CLEAN = $(addsuffix _clean, $(mcal_PKG_LIST_ALL))
 
 version:
 	$(ECHO) ------------------------------------------------------
-	$(ECHO) \# $(PLATFORM) MCAL 11.01.00
+	$(ECHO) \# $(PLATFORM) MCAL 11.02.00
 	$(ECHO) ------------------------------------------------------
 
 mcal_libs: $(mcal_LIB_LIST)

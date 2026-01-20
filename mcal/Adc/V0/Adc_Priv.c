@@ -117,6 +117,9 @@ static void           Adc_startGroup_scheduleGP(Adc_GroupObjType *groupObj, Adc_
 static Std_ReturnType Adc_startGroup_ErChkr(Adc_GroupObjType *groupObj, Adc_HwUnitObjType *hwUnitObj);
 static Std_ReturnType Adc_startGroup_Internal(Adc_GroupObjType *groupObj, Adc_HwUnitObjType *hwUnitObj, boolean hwQue);
 static Std_ReturnType Adc_startGroup_Check_HWque(Adc_GroupObjType *groupObj, Adc_HwUnitObjType *hwUnitObj);
+#if ((ADC_PRIORITY_HW_SW == ADC_PRIORITY_IMPLEMENTATION) || (ADC_PRIORITY_HW == ADC_PRIORITY_IMPLEMENTATION))
+static Std_ReturnType Adc_startGroup_AssignSocInt(Adc_GroupObjType *groupObj, Adc_HwUnitObjType *hwUnitObj);
+#endif
 static void           Adc_procIsr_Internal(uint32 *convComplete, Adc_GroupObjType *groupObj, uint32 *streamComplete,
                                            Adc_ChannelObjType *chObj);
 static Std_ReturnType Adc_checkAndSchedule_Internal(Adc_HwUnitObjType *hwUnitObj, Adc_GroupObjType *nextGroupObj);
@@ -349,6 +352,61 @@ static void Adc_startGroup_scheduleGP(Adc_GroupObjType *groupObj, Adc_HwUnitObjT
     Adc_scheduleGroup(groupObj);
 }
 
+#if ((ADC_PRIORITY_HW_SW == ADC_PRIORITY_IMPLEMENTATION) || (ADC_PRIORITY_HW == ADC_PRIORITY_IMPLEMENTATION))
+/**
+ *  \brief  Assigns SOC slots and interrupt source for group start operation
+ *
+ *  This function is called during Adc_startGroup_ErChkr to validate SOC (Start of Conversion)
+ *  range availability, assign SOC slots based on the number of channels in the group,
+ *  and assign an interrupt source to the group for hardware priority scheduling.
+ *
+ *  \param[in,out]  groupObj    Pointer to the group object to be configured
+ *  \param[in,out]  hwUnitObj   Pointer to the hardware unit object containing SOC state
+ *
+ *  \return E_OK if SOC and interrupt assignment successful, E_NOT_OK if resources unavailable
+ */
+static Std_ReturnType Adc_startGroup_AssignSocInt(Adc_GroupObjType *groupObj, Adc_HwUnitObjType *hwUnitObj)
+{
+    Std_ReturnType retVal = (Std_ReturnType)E_OK;
+
+    /* Check SOC range - verify enough SOC slots are available */
+    if (((uint16)((uint16)(ADC_SOC_NUMBER15)-hwUnitObj->socHwPtr + groupObj->groupCfg.numChannels)) >
+        ((uint16)(ADC_SOC_NUMBER15)))
+    {
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+    else
+    {
+        /* Assign SOC based on numChannels */
+        if (groupObj->groupCfg.numChannels == 1U)
+        {
+            groupObj->socAssigned = hwUnitObj->socHwPtr;
+        }
+        else
+        {
+            groupObj->socAssigned =
+                (uint16)(((uint16)(hwUnitObj->socHwPtr)) - ((uint16)(groupObj->groupCfg.numChannels) - (uint16)1U));
+        }
+
+        hwUnitObj->socHwPtr = (uint16)(((uint16)groupObj->socAssigned) - 1U);
+
+        /* Check if Interrupt is Valid */
+        if (hwUnitObj->numHwGroupsQue >= (uint16)ADC_INVALID_HW_INT)
+        {
+            retVal = (Std_ReturnType)E_NOT_OK;
+        }
+        else
+        {
+            hwUnitObj->numHwGroupsQue++;
+            groupObj->groupInterruptSrc = hwUnitObj->numHwGroupsQue;
+        }
+    }
+
+    return retVal;
+}
+#endif /* #if ((ADC_PRIORITY_HW_SW == ADC_PRIORITY_IMPLEMENTATION) || (ADC_PRIORITY_HW == \
+          ADC_PRIORITY_IMPLEMENTATION)) */
+
 static Std_ReturnType Adc_startGroup_ErChkr(Adc_GroupObjType *groupObj, Adc_HwUnitObjType *hwUnitObj)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
@@ -378,38 +436,8 @@ static Std_ReturnType Adc_startGroup_ErChkr(Adc_GroupObjType *groupObj, Adc_HwUn
     {
         groupObj->lastSocAssigned = hwUnitObj->socHwPtr;
 
-        /* Assign the Queue number. */
-        if (((uint16)((uint16)(ADC_SOC_NUMBER15)-hwUnitObj->socHwPtr + groupObj->groupCfg.numChannels)) <=
-            ((uint16)(ADC_SOC_NUMBER15)))
-        {
-            if (groupObj->groupCfg.numChannels == 1U)
-            {
-                groupObj->socAssigned = hwUnitObj->socHwPtr;
-            }
-            else
-            {
-                groupObj->socAssigned =
-                    (uint16)(((uint16)(hwUnitObj->socHwPtr)) - ((uint16)(groupObj->groupCfg.numChannels) - (uint16)1U));
-            }
-
-            hwUnitObj->socHwPtr = (uint16)(((uint16)groupObj->socAssigned) - 1U);
-
-            /* Check if Interrupt is Valid. */
-            if (hwUnitObj->numHwGroupsQue >= (uint16)ADC_INVALID_HW_INT)
-            {
-                retVal = (Std_ReturnType)E_NOT_OK;
-            }
-            else
-            {
-                hwUnitObj->numHwGroupsQue++;
-                retVal                      = E_OK;
-                groupObj->groupInterruptSrc = hwUnitObj->numHwGroupsQue;
-            }
-        }
-        else
-        {
-            retVal = (Std_ReturnType)E_NOT_OK;
-        }
+        /* Assign SOC slots and interrupt source for this group */
+        retVal = Adc_startGroup_AssignSocInt(groupObj, hwUnitObj);
 
         if (retVal == E_OK)
         {

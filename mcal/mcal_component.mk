@@ -116,7 +116,7 @@ mcal_mcal_LIB_LIST = mcu port gpt spi can cdd_cmpss wdg fls adc pwm icu ipc dma 
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am263px))
-mcal_mcal_LIB_LIST = mcu port gpt spi can cdd_cmpss cdd_flc wdg adc pwm icu ipc dma eth ethtrcv i2c uart fsitx fsirx lin fls epwm dio bootloader_utils hsmclient_utils
+mcal_mcal_LIB_LIST = mcu port gpt spi can cdd_cmpss cdd_flc wdg adc pwm icu ipc dma eth ethtrcv i2c uart fsitx fsirx lin fls epwm dio bootloader_utils hsmclient_utils fss_utils
 endif
 
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
@@ -825,6 +825,17 @@ hsmclient_utils_PKG_LIST = hsmclient_utils
 hsmclient_utils_INCLUDE = examples/Utils/hsmclient_utils
 hsmclient_utils_SOCLIST = $(DEFAULT_SOCLIST)
 export hsmclient_utils_SOCLIST
+
+fss_utils_COMP_LIST = fss_utils
+fss_utils_RELPATH = examples/Utils/fss_utils
+fss_utils_PATH = $(mcal_PATH)/$(fss_utils_RELPATH)
+fss_utils_PLATFORM_DEPENDENCY = yes
+export fss_utils_COMP_LIST
+export fss_utils_PLATFORM_DEPENDENCY
+fss_utils_PKG_LIST = fss_utils
+fss_utils_INCLUDE = examples/Utils/fss_utils
+fss_utils_SOCLIST = $(DEFAULT_SOCLIST)
+export fss_utils_SOCLIST
 
 app_utils_COMP_LIST = app_utils
 app_utils_RELPATH = examples/Utils
