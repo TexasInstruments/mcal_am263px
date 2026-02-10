@@ -77,8 +77,6 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferRxIntr(Cdd_I2c_ChObjTy
 static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoWaitForAccessReady(Cdd_I2c_ChObjType *chObj);
 static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoWaitForStop(Cdd_I2c_ChObjType *chObj);
 
-static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForBusFree(uint32 baseAddr);
-static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForBusBusy(uint32 baseAddr);
 static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForTxReady(uint32 baseAddr);
 static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForRxReady(uint32 baseAddr);
 static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForAccessReady(uint32 baseAddr);
@@ -480,14 +478,17 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoWaitForBusFree(Cdd_I2c_ChObjTy
 {
     Cdd_I2c_HwUnitObjType    *hwUnitObj = chObj->hwUnitObj;
     uint32                    baseAddr  = hwUnitObj->baseAddr;
-    Cdd_I2c_ChannelResultType chResult;
+    Cdd_I2c_ChannelResultType chResult  = CDD_I2C_CH_RESULT_PENDING;
+    uint16                    intrStatus;
 
-    chResult = Cdd_I2c_HwCheckForBusFree(baseAddr);
-    if (CDD_I2C_CH_RESULT_OK == chResult)
+    intrStatus = Cdd_I2c_HwGetIntrStatus(baseAddr);
+    /* TI_COVERAGE_GAP_START Bus busy cannot be recreated in test environment as we don't have multi-master setup */
+    if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) != CDD_I2C_ICSTR_BB_MASK)
     {
-        chResult     = CDD_I2C_CH_RESULT_PENDING;
+        /* Bus is free - Move to next state */
         chObj->state = CDD_I2C_STATE_SETUP;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return chResult;
 }
@@ -496,12 +497,13 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoWaitForBusBusy(Cdd_I2c_ChObjTy
 {
     Cdd_I2c_HwUnitObjType    *hwUnitObj = chObj->hwUnitObj;
     uint32                    baseAddr  = hwUnitObj->baseAddr;
-    Cdd_I2c_ChannelResultType chResult;
+    Cdd_I2c_ChannelResultType chResult  = CDD_I2C_CH_RESULT_PENDING;
+    uint16                    intrStatus;
 
-    chResult = Cdd_I2c_HwCheckForBusBusy(baseAddr);
-    if (CDD_I2C_CH_RESULT_OK == chResult)
+    intrStatus = Cdd_I2c_HwGetIntrStatus(baseAddr);
+    if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) == CDD_I2C_ICSTR_BB_MASK)
     {
-        chResult     = CDD_I2C_CH_RESULT_PENDING;
+        /* Bus became busy - Move to next state */
         chObj->state = CDD_I2C_STATE_DATA_TRANSFER;
     }
 
@@ -730,34 +732,6 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoWaitForStop(Cdd_I2c_ChObjType 
     return chResult;
 }
 
-static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForBusFree(uint32 baseAddr)
-{
-    Cdd_I2c_ChannelResultType chResult = CDD_I2C_CH_RESULT_PENDING;
-    uint16                    intrStatus;
-
-    intrStatus = Cdd_I2c_HwGetIntrStatus(baseAddr);
-    if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) != CDD_I2C_ICSTR_BB_MASK)
-    {
-        chResult = CDD_I2C_CH_RESULT_OK;
-    }
-
-    return chResult;
-}
-
-static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForBusBusy(uint32 baseAddr)
-{
-    Cdd_I2c_ChannelResultType chResult = CDD_I2C_CH_RESULT_PENDING;
-    uint16                    intrStatus;
-
-    intrStatus = Cdd_I2c_HwGetIntrStatus(baseAddr);
-    if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) == CDD_I2C_ICSTR_BB_MASK)
-    {
-        chResult = CDD_I2C_CH_RESULT_OK;
-    }
-
-    return chResult;
-}
-
 static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForTxReady(uint32 baseAddr)
 {
     Cdd_I2c_ChannelResultType chResult = CDD_I2C_CH_RESULT_PENDING;
@@ -816,15 +790,31 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwCheckForStop(uint32 baseAddr)
 {
     Cdd_I2c_ChannelResultType chResult = CDD_I2C_CH_RESULT_PENDING;
     uint16                    intrStatus, pinStatus;
+    uint32                    matchCount = 0U;
 
     intrStatus = Cdd_I2c_HwGetIntrStatus(baseAddr);
     /* Also check the external SCL and SDA pins to go high (free) */
     pinStatus = HW_RD_REG16(baseAddr + CDD_I2C_ICPDIN);
-    /* Wait for both stop to complete and bus to become free */
-    if (((intrStatus & CDD_I2C_ICSTR_SCD_MASK) == CDD_I2C_ICSTR_SCD_MASK) &&
-        ((intrStatus & CDD_I2C_ICSTR_BB_MASK) != CDD_I2C_ICSTR_BB_MASK) &&
-        ((pinStatus & (CDD_I2C_ICPDIN_PDIN0_MASK | CDD_I2C_ICPDIN_PDIN1_MASK)) ==
-         (CDD_I2C_ICPDIN_PDIN0_MASK | CDD_I2C_ICPDIN_PDIN1_MASK)))
+
+    /* Check intr status - Stop set */
+    if ((intrStatus & CDD_I2C_ICSTR_SCD_MASK) == CDD_I2C_ICSTR_SCD_MASK)
+    {
+        matchCount++;
+    }
+    /* Check intr status - Bus should be free */
+    if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) != CDD_I2C_ICSTR_BB_MASK)
+    {
+        matchCount++;
+    }
+    /* Check pin status */
+    if ((pinStatus & (CDD_I2C_ICPDIN_PDIN0_MASK | CDD_I2C_ICPDIN_PDIN1_MASK)) ==
+        (CDD_I2C_ICPDIN_PDIN0_MASK | CDD_I2C_ICPDIN_PDIN1_MASK))
+    {
+        matchCount++;
+    }
+
+    /* Wait for all condition to be true */
+    if (matchCount == 3U)
     {
         chResult = CDD_I2C_CH_RESULT_OK;
     }
@@ -836,27 +826,33 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwGetErrorCode(uint16 intrStatus, boole
 {
     Cdd_I2c_ChannelResultType chErrorCode = CDD_I2C_CH_RESULT_OK;
 
+    /* TI_COVERAGE_GAP_START Arbitration loss error cannot be recreated in test environment */
     if ((intrStatus & CDD_I2C_ICSTR_AL_MASK) != 0U)
     {
         chErrorCode = CDD_I2C_CH_RESULT_ARBFAIL;
     }
+    /* TI_COVERAGE_GAP_STOP */
     if ((intrStatus & CDD_I2C_ICSTR_NACK_MASK) != 0U)
     {
         chErrorCode = CDD_I2C_CH_RESULT_NACKFAIL;
     }
+    /* TI_COVERAGE_GAP_START Address zero error cannot be recreated in test environment */
     if ((intrStatus & CDD_I2C_ICSTR_AD0_MASK) != 0U)
     {
         chErrorCode = CDD_I2C_CH_RESULT_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
     /* Check this only for polled mode as in intr mode
      * we use stop intr status for getting interrupt and handle
      * the transfer end */
     if (TRUE == checkStopStatus)
     {
+        /* TI_COVERAGE_GAP_START Bus fail error cannot be recreated in test environment */
         if ((intrStatus & CDD_I2C_ICSTR_SCD_MASK) != 0U)
         {
             chErrorCode = CDD_I2C_CH_RESULT_BUSFAIL;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return chErrorCode;

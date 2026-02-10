@@ -9,7 +9,7 @@
           <SHORT-NAME>Lin</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
           <EXPECTED-ENTRYS>
-            [!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!][!// 
+            [!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!][!//
             [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_0' and LinInstance = 'LIN_INSTANCE_0'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Lin_TI_AM263px/Lin_ModuleEntry/Lin_0_Int0ISR</BSW-MODULE-ENTRY-REF>
@@ -119,7 +119,7 @@
                 </EXCLUSIVE-AREA>
               </EXCLUSIVE-AREAS>
               <ENTITYS>
-                [!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!][!// 
+                [!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_0' and LinInstance = 'LIN_INSTANCE_0'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="244156bb-6321-42ff-b137-2192156e6695">
                   <SHORT-NAME>Lin_0_Int0ISR</SHORT-NAME>
@@ -130,6 +130,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_1' and LinInstance = 'LIN_INSTANCE_0'"!][!//
@@ -142,6 +143,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_0'  and LinInstance = 'LIN_INSTANCE_1'"!][!//
@@ -154,6 +156,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_1'  and LinInstance = 'LIN_INSTANCE_1'"!][!//
@@ -166,6 +169,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_0' and LinInstance = 'LIN_INSTANCE_2'"!][!//
@@ -178,6 +182,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_1' and LinInstance = 'LIN_INSTANCE_2'"!][!//
@@ -190,6 +195,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_0' and LinInstance = 'LIN_INSTANCE_3'"!][!//
@@ -202,6 +208,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_1' and LinInstance = 'LIN_INSTANCE_3'"!][!//
@@ -214,6 +221,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_0' and LinInstance = 'LIN_INSTANCE_4'"!][!//
@@ -226,6 +234,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_1' and LinInstance = 'LIN_INSTANCE_4'"!][!//
@@ -238,6 +247,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!ENDIF!][!//
                 [!ENDLOOP!][!//
@@ -531,7 +541,7 @@
               [!ENDLOOP!][!//
               [!IF "num:i($LinInstanceIsrType) = num:i('0')"!][!//
               <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
-              [!ENDIF!][!//              
+              [!ENDIF!][!//
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
@@ -696,7 +706,7 @@
               [!ENDIF!][!//
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
-            </BSW-MODULE-ENTRY>            
+            </BSW-MODULE-ENTRY>
             <BSW-MODULE-ENTRY UUID="ec8a85bc-3aa5-45ea-b883-2e00a6fd8e54">
               <SHORT-NAME>Lin_CheckWakeup</SHORT-NAME>
               <SERVICE-ID>10</SERVICE-ID>

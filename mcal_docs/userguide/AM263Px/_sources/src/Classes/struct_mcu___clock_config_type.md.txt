@@ -1,0 +1,29 @@
+---
+orphan: true
+---
+
+---
+title: Mcu_ClockConfigType
+summary: Structure for module clock setting. 
+
+---
+
+# Mcu_ClockConfigType
+
+
+
+Structure for module clock setting. 
+
+
+`#include <Mcu_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  [Mcu_ClkModuleIdType](../Modules/group___m_c_u.md#enum-mcu_clkmoduleidtype) | Mcu_ClockModuleId |  ModuleId for which clock setting to be applied.  |
+|  [Mcu_ClkSourceIdType](../Modules/group___m_c_u.md#enum-mcu_clksourceidtype) | Mcu_ClockSourceId |  Clock source Id for the module.  |
+|  uint32 | Mcu_ClockDiv |  Clock divider value for the module  |
+|  boolean | Mcu_InitCfg |  Apply this configuration at Mcu_init time.  |
+
+

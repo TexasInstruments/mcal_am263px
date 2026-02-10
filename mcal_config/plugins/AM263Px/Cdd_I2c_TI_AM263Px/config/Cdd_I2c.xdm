@@ -163,7 +163,24 @@
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID"
                        value="ECUC:34bfc216-9d93-4694-90c5-39741e73c648"/>
-                <a:da name="DEFAULT" value="true"/>
+                  <a:da name="DEFAULT" value="true"/>
+                </v:var>
+                <v:var name="CddI2cMainFunctionPeriod" type="FLOAT">
+                  <a:a name="DESC"
+                       value="EN: This parameter describes the period for cyclic call to Cdd_I2c_MainFunction. Unit is seconds."/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                  <a:a name="UUID" value="e36d9b26-757d-4f5c-be99-14de29754fad"/>
+                  <a:a name="OPTIONAL" value="true"/>
+                  <a:da name="DEFAULT" value="0.01"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;Infinity"/>
+                    <a:tst expr="&gt;0.0"/>
+                  </a:da>
                 </v:var>
               </v:ctr>
             <v:lst name="CddI2cHwConfig" type="MAP">

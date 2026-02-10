@@ -569,39 +569,47 @@ static void Cdd_I2c_SetSeqErrorCode(Cdd_I2c_SeqObjType *seqObj, Cdd_I2c_ChannelR
     if (CDD_I2C_CH_RESULT_OK != chResult)
     {
         seqObj->seqErrorCode = CDD_I2C_E_BUS_FAILURE;
-        if (CDD_I2C_CH_RESULT_NACKFAIL == chResult)
-        {
-            seqObj->seqErrorCode = CDD_I2C_E_NACK_RECEIVED;
-        }
-        if (CDD_I2C_CH_RESULT_ARBFAIL == chResult)
-        {
-            seqObj->seqErrorCode = CDD_I2C_E_ARBITRATION_FAILURE;
-        }
     }
+
+    /*
+     * Override with specific error code
+     */
+    if (CDD_I2C_CH_RESULT_NACKFAIL == chResult)
+    {
+        seqObj->seqErrorCode = CDD_I2C_E_NACK_RECEIVED;
+    }
+    /* TI_COVERAGE_GAP_START Arbitration loss error cannot be recreated in test environment */
+    if (CDD_I2C_CH_RESULT_ARBFAIL == chResult)
+    {
+        seqObj->seqErrorCode = CDD_I2C_E_ARBITRATION_FAILURE;
+    }
+    /* TI_COVERAGE_GAP_STOP */
 
     return;
 }
 
 static void Cdd_I2c_SetSeqResult(Cdd_I2c_SeqObjType *seqObj)
 {
+    seqObj->seqResult = CDD_I2C_SEQ_OK;
     /* check if any channel has previously failed or cancelled */
-    if (CDD_I2C_E_NO_ERROR == seqObj->seqErrorCode)
-    {
-        seqObj->seqResult = CDD_I2C_SEQ_OK;
-    }
-    else
+    if (CDD_I2C_E_NO_ERROR != seqObj->seqErrorCode)
     {
         seqObj->seqResult = CDD_I2C_SEQ_FAILED;
-        /* Override with specific error code */
-        if (CDD_I2C_E_NACK_RECEIVED == seqObj->seqErrorCode)
-        {
-            seqObj->seqResult = CDD_I2C_SEQ_NACK;
-        }
-        if (CDD_I2C_E_ARBITRATION_FAILURE == seqObj->seqErrorCode)
-        {
-            seqObj->seqResult = CDD_I2C_SEQ_ARB;
-        }
     }
+
+    /*
+     * Override with specific error code
+     */
+    if (CDD_I2C_E_NACK_RECEIVED == seqObj->seqErrorCode)
+    {
+        seqObj->seqResult = CDD_I2C_SEQ_NACK;
+    }
+    /* TI_COVERAGE_GAP_START Arbitration loss error cannot be recreated in test environment */
+    if (CDD_I2C_E_ARBITRATION_FAILURE == seqObj->seqErrorCode)
+    {
+        seqObj->seqResult = CDD_I2C_SEQ_ARB;
+    }
+    /* TI_COVERAGE_GAP_STOP */
 
     return;
 }

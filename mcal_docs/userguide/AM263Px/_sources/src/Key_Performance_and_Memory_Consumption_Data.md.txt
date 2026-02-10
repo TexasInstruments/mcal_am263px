@@ -1,0 +1,255 @@
+# Key Performance and Memory Consumption Data
+
+## Key Performance Metrics
+
+### CAN Driver
+
+Will be updated in future release
+
+### FLS Driver
+
+#### INDAC mode
+
+| Time Taken to Erase Sector of Size (4096 bytes)| 90ms |
+|-------------------------------------------|--------|
+| Time Taken to Write Sector of Size (4096 bytes)| 3050us|
+| Time Taken to Read Sector of Size (4096 bytes) | 283us|
+
+#### DAC mode
+
+| Time Taken to Erase Sector of Size (4096 bytes)| 91ms |
+|-----------------------------------------------|---------|
+| Time Taken to Write Sector of Size (4096 bytes)| 23129us|
+| Time Taken to Read Sector of Size (4096 bytes)| 1064us|
+
+### ETH Driver
+
+Peformance depends on Eth driver configuration.
+Below is performance configuration having throughput > 900Mbps, packet size 1500 without packet lost.
+
+| Parameter | Value   |
+|-----------|---------|
+| RX buffer      | 16     |
+| RX threshold    | 8      |
+| RX IRQ pacePerMs | 2    |
+| TX buffer      | 16    |
+| TX IRQ pacePerMs| 2      |
+| Link speed      | 1 Gbps   |
+
+#### Transmit throughput
+
+| Pkt Size| TX throughput (Mbps)| TX packet rate (Pps)| CPU load (%) |
+|------|---------|--------|---------|
+| 1500  | 609   | 50298  | 20  |
+| 512  | 794    | 188818  | 54  |
+| 256  | 789    | 365714  | 95 |
+| 128  | 434    | 382660  | 95  |
+| 64   | 240   | 384731   | 95  |
+
+#### Receive throughput
+
+|Pkt Size|RX throughput(Mbps) |RX packet rate(Pps) |CPU load(%)|
+|-----|----------|------------|---------|
+|1500 |984  |82009   |24 |
+|512   |451  |110126   |21 |
+|256   |221  |108053   |18 |
+|128  |112  |110005   |17 |
+|64    |55  |109208  |16  |
+
+#### Profiling results of key MCAL Ethernet driver operations
+
+| Stage     | Execution time (usecs) |
+|----------------|--------------|
+| Eth_Init    | 360      |
+| Eth_SetControllerMode | 333    |
+| Eth_ProvideTxBuffer  | 23    |
+| Eth_Transmit   | 31      |
+| Eth_TxConfirmation     | 16     |
+| Eth_Receive     | 42   |
+
+### LIN
+
+Will be updated in future release
+
+### ADC
+
+| CovMode  | TriggSrc | Num_Of_Channels | Theoretical(SPS) | Practical(SPS) |
+|------------|----------|--------------|-----------|----------------|
+| One_Shot | SRC_HW   | 1   | 493827    | 433839   |
+| One_Shot| SRC_SW   | 1     | 493827     | 429645    |
+| One_Shot | SRC_HW   | 6      | 2962962    | 1073345    |
+| One_Shot| SRC_SW   | 6      | 2962962     | 1089918     |
+| Continuous| SRC_SW   | 6    | 2962962      | 2461538    |
+
+### CDD IPC
+
+Will be updated in future release
+
+### CDD PWM
+
+| CDD PWM Module Performance |  |
+|----------------------------|-----------|
+| Input PWM Signal Period | 1ms   |
+| Duty Cycle   | 50%    |
+| Time taken by Normal ISR to process | 0.3750us |
+| Time taken by tripzone ISR to process | 0.524us  |
+
+### SPI
+
+Will be updated in future release
+
+## Memory Footprints
+
+### ADC
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| adc   | 5508    | 4    | 3052    |
+ 
+### CAN
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| can   | 9614    | 1    | 20020    |
+ 
+### CMPSS
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| cdd_cmpss   | 2054    | 0    | 0    |
+ 
+### DIO
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| dio   | 754    | 0    | 0    |
+ 
+### DMA
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| dma   | 4856    | 16786    | 528    |
+ 
+### EPWM
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| epwm   | 15029    | 7    | 51096    |
+ 
+### ETH
+
+Eth memory footprint changes significantly with number of RX, TX buffer.
+
+Below table is memory footprint with minimum buffer number (RX=2, TX=2).
+
+| Module  | Code  | RO Data | RW Data |
+|------------|-------|---------|---------|
+| Eth_Priv.oer5f  | 4464  | 188     | 7411    |
+| Cpsw_Cpts.oer5f | 1820  | 0       | 772     |
+| Cpsw_Ale.oer5f | 1616  | 0       | 0       |
+| Eth.oer5f  | 1458  | 0       | 1       |
+| Eth_Irq.oer5f | 884   | 0       | 0       |
+| Cpsw_Cpdma.oer5f | 464   | 0       | 0       |
+| Cpsw.oer5f  | 424   | 0       | 0       |
+| Cpsw_Stats.oer5f| 382   | 0       | 1       |
+| Cpsw_Mdio.oer5f | 260   | 0       | 0       |
+| Cpsw_Port.oer5f | 238   | 0       | 0       |
+| Eth_Helpers.oer5f| 32    | 0       | 0       |
+| **Total:** | 12042 | 188     | 8185    |
+
+### ETH_TRCV
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| ethtrcv   | 3544    | 13    | 42    |
+ 
+### FLC
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| cdd_flc   | 494    | 0    | 0    |
+ 
+### FLS
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| fls   | 11868    | 478    | 8240    |
+ 
+### FSIRX
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| fsirx   | 1674    | 3    | 202    |
+ 
+### FSITX
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| fsitx   | 2142    | 10    | 180    |
+ 
+### GPT
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| gpt   | 3334    | 136    | 1544    |
+ 
+### I2C
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| i2c   | 4298    | 1    | 2052    |
+ 
+### ICU
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| icu   | 3760    | 1    | 1472    |
+ 
+### IPC
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| ipc   | 5714    | 429    | 1656    |
+ 
+### LIN
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| lin   | 2240    | 9    | 10    |
+ 
+### MCU
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| mcu   | 8378    | 6    | 0    |
+ 
+### PORT
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| port   | 3140    | 1    | 176    |
+     
+### PWM
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| pwm   | 10258    | 7    | 465    |
+ 
+### SPI
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| spi   | 6724    | 1    | 2892    |
+ 
+### UART
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| uart   | 5766    | 1    | 196    |
+ 
+### WDG
+
+| Modules   | .text  |  .data  |  .bss  |
+| ------------ | ----------| -------- | ---------- |
+| wdg   | 1076    | 1    | 44    |
+ 

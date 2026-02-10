@@ -106,9 +106,8 @@ static void Cdd_Pwm_PwmOneShotTzEvent(const Cdd_Pwm_tripZoneType *tripZoneParame
 static void Cdd_Pwm_PwmCBCTzEvent(const Cdd_Pwm_tripZoneType *tripZoneParameter, uint32 epwmbaseadrr);
 static void Cdd_Pwm_PwmSyncOutPulseCntCmp(uint32 baseAddr, Cdd_Pwm_ChannelType ChannelNumber);
 static void Cdd_Pwm_PwmHRConfig(uint32 ChannelNumber, Cdd_Pwm_OutputChType outputCh, uint32 base);
-static void Cdd_Pwm_GenerateSignal(Cdd_Pwm_channelParametertype ChannelParameter, uint32 period,
-                                   Cdd_Pwm_OutputChType outputCh, uint32 baseAddr, Cdd_Pwm_ChObjType *local_ChObj,
-                                   const Cdd_Pwm_ChObjType *chObj);
+static void Cdd_Pwm_GenerateSignal(Cdd_Pwm_channelParametertype ChannelParameter, Cdd_Pwm_ChObjType *local_ChObj,
+                                   const Cdd_Pwm_ChObjType *chObj, uint32 baseAddr);
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -450,7 +449,7 @@ uint32 Cdd_Pwm_getBaseAddr(Cdd_Pwm_ChannelType ChannelNumber, uint32 Id)
     return (baseAddr);
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HwUnitInit(Cdd_Pwm_ChObjType *chObj)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HwUnitInit(const Cdd_Pwm_ChObjType *chObj)
 {
     /* Init the PWM module. */
     Cdd_Pwm_setTimerBase(chObj->channelID);
@@ -1649,7 +1648,6 @@ Cdd_Pwm_SystemSetPeriodAndDuty(Cdd_Pwm_channelParametertype ChannelParameter)
 FUNC(void, CDD_PWM_CODE)
 Cdd_Pwm_SetDutyCycle_Internal(Cdd_Pwm_channelParametertype ChannelParameter)
 {
-    uint32               period;
     uint32               baseAddr;
     Cdd_Pwm_OutputChType outputCh;
     Cdd_Pwm_ChObjType   *local_ChObj;
@@ -1704,22 +1702,27 @@ Cdd_Pwm_SetDutyCycle_Internal(Cdd_Pwm_channelParametertype ChannelParameter)
      * if the duty cycle is not 0% or 100% */
     local_ChObj = &Cdd_Pwm_ChObj[ChannelParameter.ChannelNumber];
 
-    period = (uint32)EPWM_getTimeBasePeriod(baseAddr);
-
     if (TRUE == local_ChObj->channelTimerBase.channelPwmEnablePhaseShift)
     {
         EPWM_setPhaseShift(baseAddr, local_ChObj->channelTimerBase.channelPwmEnablePhaseShiftValue);
     }
-    Cdd_Pwm_GenerateSignal(ChannelParameter, period, outputCh, baseAddr, local_ChObj, (const Cdd_Pwm_ChObjType *)chObj);
+    Cdd_Pwm_GenerateSignal(ChannelParameter, local_ChObj, (const Cdd_Pwm_ChObjType *)chObj, baseAddr);
 }
 
-static void Cdd_Pwm_GenerateSignal(Cdd_Pwm_channelParametertype ChannelParameter, uint32 period,
-                                   Cdd_Pwm_OutputChType outputCh, uint32 baseAddr, Cdd_Pwm_ChObjType *local_ChObj,
-                                   const Cdd_Pwm_ChObjType *chObj)
+static void Cdd_Pwm_GenerateSignal(Cdd_Pwm_channelParametertype ChannelParameter, Cdd_Pwm_ChObjType *local_ChObj,
+                                   const Cdd_Pwm_ChObjType *chObj, uint32 baseAddr)
 {
-    EPWM_SignalParams signalParams;
-    uint16            dutyintvalue;
-    uint32            sysClk;
+    EPWM_SignalParams    signalParams;
+    uint16               dutyintvalue;
+    uint32               sysClk;
+    uint32               period;
+    Cdd_Pwm_OutputChType outputCh;
+
+    /* Derive period from hardware register */
+    period = (uint32)EPWM_getTimeBasePeriod(baseAddr);
+
+    /* Derive outputCh from ChannelParameter */
+    outputCh = ChannelParameter.Output;
 
     sysClk                 = CDD_PWM_SYSTEM_CLK_FREQ;
     signalParams.tbCtrMode = local_ChObj->channelTimerBase.channelPwmCounterMode;
@@ -1768,6 +1771,132 @@ static void Cdd_Pwm_GenerateSignal(Cdd_Pwm_channelParametertype ChannelParameter
  CDD_PWM_configureSignal
 
 ******************************************************************************/
+
+static void Cdd_Pwm_configureSignalModeUp(uint32 base, boolean invertSignalB)
+{
+    /*
+    Set PWMxA on Zero
+    */
+    EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+
+    /*
+     Clear PWMxA on event A, up count
+    */
+    EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
+
+    if (invertSignalB == TRUE)
+    {
+        /*
+         Clear PWMxB on Zero
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+        /*
+         Set PWMxB on event B, up count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
+    }
+    else
+    {
+        /*
+        Set PWMxB on Zero
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+        /*
+         Clear PWMxB on event B, up count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
+    }
+}
+
+static void Cdd_Pwm_configureSignalModeDown(uint32 base, boolean invertSignalB)
+{
+    /*
+     Set PWMxA on Zero
+    */
+    EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+
+    /*
+     Clear PWMxA on event A, down count
+    */
+    EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
+
+    if (invertSignalB == TRUE)
+    {
+        /*
+         Clear PWMxB on Zero
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+        /*
+         Set PWMxB on event B, down count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH,
+                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
+    }
+    else
+    {
+        /*
+         Set PWMxB on Zero
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+        /*
+         Clear PWMxB on event B, down count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
+    }
+}
+
+static void Cdd_Pwm_configureSignalModeUpDown(uint32 base, boolean invertSignalB)
+{
+    /*
+     Clear PWMxA on Zero
+    */
+    EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+
+    /*
+     Set PWMxA on event A, up count
+    */
+    EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
+
+    /*
+     Clear PWMxA on event A, down count
+    */
+    EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
+
+    if (invertSignalB == TRUE)
+    {
+        /*
+         Set PWMxB on Zero
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+
+        /*
+         Clear PWMxB on event B, up count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
+        /*
+         Set PWMxB on event B, down count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH,
+                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
+    }
+    else
+    {
+        /*
+         Clear PWMxB on Zero
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
+
+        /*
+         Set PWMxB on event B, up count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
+        /*
+         Clear PWMxB on event B, down count
+        */
+        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
+    }
+}
+
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_configureSignal(uint32 base, const EPWM_SignalParams *signalParams)
 {
     uint16 tbPrdVal = 0U, cmpAVal = 0U, cmpBVal = 0U;
@@ -1814,131 +1943,15 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_configureSignal(uint32 base, const EPWM_SignalP
     */
     if (signalParams->tbCtrMode == EPWM_COUNTER_MODE_UP)
     {
-        /*
-        Set PWMxA on Zero
-        */
-        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-
-        /*
-         Clear PWMxA on event A, up count
-        */
-        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
-
-        if (signalParams->invertSignalB == TRUE)
-        {
-            /*
-             Clear PWMxB on Zero
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-            /*
-             Set PWMxB on event B, up count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
-        }
-        else
-        {
-            /*
-            Set PWMxB on Zero
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-            /*
-             Clear PWMxB on event B, up count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
-        }
+        Cdd_Pwm_configureSignalModeUp(base, signalParams->invertSignalB);
     }
     else if ((signalParams->tbCtrMode == EPWM_COUNTER_MODE_DOWN))
     {
-        /*
-         Set PWMxA on Zero
-        */
-        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-
-        /*
-         Clear PWMxA on event A, down count
-        */
-        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
-
-        if (signalParams->invertSignalB == TRUE)
-        {
-            /*
-             Clear PWMxB on Zero
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-            /*
-             Set PWMxB on event B, down count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-        }
-        else
-        {
-            /*
-             Set PWMxB on Zero
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-            /*
-             Clear PWMxB on event B, down count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-        }
+        Cdd_Pwm_configureSignalModeDown(base, signalParams->invertSignalB);
     }
     else if (signalParams->tbCtrMode == EPWM_COUNTER_MODE_UP_DOWN)
     {
-        /*
-         Clear PWMxA on Zero
-        */
-        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-
-        /*
-         Set PWMxA on event A, up count
-        */
-        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPA);
-
-        /*
-         Clear PWMxA on event A, down count
-        */
-        EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_A, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
-
-        if (signalParams->invertSignalB == TRUE)
-        {
-            /*
-             Set PWMxB on Zero
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-
-            /*
-             Clear PWMxB on event B, up count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
-            /*
-             Set PWMxB on event B, down count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-        }
-        else
-        {
-            /*
-             Clear PWMxB on Zero
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW, EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-
-            /*
-             Set PWMxB on event B, up count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_HIGH,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
-            /*
-             Clear PWMxB on event B, down count
-            */
-            EPWM_setActionQualifierAction(base, EPWM_AQ_OUTPUT_B, EPWM_AQ_OUTPUT_LOW,
-                                          EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-        }
+        Cdd_Pwm_configureSignalModeUpDown(base, signalParams->invertSignalB);
     }
     else
     {
@@ -2289,7 +2302,7 @@ void Cdd_Pwm_tbStatusClear(uint32 baseAddr, uint32 tbStatusClrMask)
 }
 
 uint32 Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
-                                    uint32 enableShadowWrite, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)
+                                    uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)
 {
     uint32 status = FALSE;
 

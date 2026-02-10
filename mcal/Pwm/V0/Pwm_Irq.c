@@ -121,7 +121,7 @@ ISR(Pwm_Ch0Isr)
 #if (STD_ON == PWM_DEV_ERROR_DETECT)
     /*TI_INSPECTED 91 D : MISRAC_2012_R.17.7
      * "Reason - Tool Issue, baseAddr is used in this function only " */
-    uint32 baseAddr = 0x50000000UL;
+    uint32 baseAddr = MCAL_CSL_CONTROLSS_G0_EPWM0_U_BASE;
     if (PWM_STATUS_INIT != Pwm_DrvStatus)
     {
         /* Disable and Clear Interrupt */

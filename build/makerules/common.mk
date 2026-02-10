@@ -213,6 +213,7 @@ clean :
 	$(RM) -rf $(OBJDIR)/* $(DEPDIR)/* $(LIBDIR)/*
 
 # Create dependencies list to ultimately create module archive library file
+.NOTPARALLEL: $(OBJDIR) $(DEPDIR) $(LIBDIR) $(LIBDIR)/$(MODULE_NAME).$(LIBEXT)
 $(CORE) : $(OBJDIR) $(DEPDIR) $(LIBDIR) $(LIBDIR)/$(MODULE_NAME).$(LIBEXT)
 
 

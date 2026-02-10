@@ -246,6 +246,109 @@ typedef struct
     /**< time difference (OriginTimeStampSync2[FUP2] - OriginTimeStampSync1[FUP1]) */
 } Eth_RateRatioType;
 
+/**
+ *  \brief Transceiver board rate enum
+ */
+/* Requirements : SWS_EthTrcv_00102 */
+typedef enum
+{
+    ETHTRCV_BAUD_RATE_10MBIT,
+    ETHTRCV_BAUD_RATE_100MBIT,
+    ETHTRCV_BAUD_RATE_1000MBIT,
+} EthTrcv_BaudRateType;
+
+/**
+ *  \brief Transceiver Cable Diagnostic Results
+ */
+/* Requirements : SWS_EthTrcv_91008 */
+typedef enum
+{
+    ETHTRCV_CABLEDIAG_OK,
+    ETHTRCV_CABLEDIAG_ERROR,
+    ETHTRCV_CABLEDIAG_SHORT,
+    ETHTRCV_CABLEDIAG_OPEN
+} EthTrcv_CableDiagResultType;
+
+/**
+ *  \brief Transceiver duplex mode
+ */
+/* Requirements : SWS_EthTrcv_00103 */
+typedef enum
+{
+    ETHTRCV_DUPLEX_MODE_HALF,
+    ETHTRCV_DUPLEX_MODE_FULL,
+} EthTrcv_DuplexModeType;
+
+/**
+ *  \brief Transceiver link state enum
+ */
+/* Requirements : SWS_EthTrcv_00100 */
+typedef enum
+{
+    ETHTRCV_LINK_STATE_DOWN,
+    ETHTRCV_LINK_STATE_ACTIVE,
+} EthTrcv_LinkStateType;
+
+/**
+ *  \brief Transceiver mode enum
+ */
+/* Requirements : SWS_EthTrcv_00099 */
+typedef enum
+{
+    ETHTRCV_MODE_DOWN,
+    ETHTRCV_MODE_ACTIVE,
+} EthTrcv_ModeType;
+
+/**
+ *  \brief Transceiver PHY loopback modes
+ */
+/* Requirements : SWS_EthTrcv_91004 */
+typedef enum
+{
+    ETHTRCV_PHYLOOPBACK_NONE,
+    ETHTRCV_PHYLOOPBACK_INTERNAL,
+    ETHTRCV_PHYLOOPBACK_EXTERNAL,
+    ETHTRCV_PHYLOOPBACK_REMOTE
+} EthTrcv_PhyLoopbackModeType;
+
+typedef enum
+{
+    ETHTRCV_PHYTESTMODE_NONE,
+    ETHTRCV_PHYTESTMODE_1,
+    ETHTRCV_PHYTESTMODE_2,
+    ETHTRCV_PHYTESTMODE_3,
+    ETHTRCV_PHYTESTMODE_4,
+    ETHTRCV_PHYTESTMODE_5,
+} EthTrcv_PhyTestModeType;
+
+/**
+ *  \brief Transceiver PHY transmit modes
+ */
+/* Requirements : SWS_EthTrcv_91006 */
+typedef enum
+{
+    ETHTRCV_PHYTXMODE_NORMAL,
+    ETHTRCV_PHYTXMODE_TX_OFF,
+    ETHTRCV_PHYTXMODE_SCRAMBLER_OFF
+} EthTrcv_PhyTxModeType;
+
+/**
+ *  \brief Transceiver wake-up mode enum
+ */
+/* Requirements : SWS_EthTrcv_00113 */
+typedef enum
+{
+    ETHTRCV_WUM_DISABLE,
+    ETHTRCV_WUM_ENABLE,
+    ETHTRCV_WUM_CLEAR
+} EthTrcv_WakeupModeType;
+
+/**
+ *  \brief Forward declaration of EthTrcv_ConfigType
+ */
+/* Requirements : SWS_EthTrcv_00096 */
+typedef struct EthTrcv_ConfigType_s EthTrcv_ConfigType;
+
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */

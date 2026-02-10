@@ -356,14 +356,14 @@ FUNC(sint32, PWM_CODE) Pwm_SFO(void)
             /* Calculate MEP scale factor */
             scale_factor            = ((((float32)Numer) / Denom) + ((float32)0.5));
             Pwm_MEP_SF[Pwm_SFO_Cal] = scale_factor;
-            Pwm_MEP_ScaleFactor     = Pwm_MEP_SF[0];
+            Pwm_MEP_ScaleFactor     = (sint32)Pwm_MEP_SF[0];
 
             /* Update the task pointer to MEP1 calibration initialization task
              for next call.*/
             TaskPtr = 1;
 
             /* Update status & assign scale factor value to HRMSTEP register */
-            if (Pwm_MEP_ScaleFactor > ((sint32)255U))
+            if (Pwm_MEP_ScaleFactor > 255)
             {
                 status = PWM_SFO_ERROR;
             }

@@ -370,7 +370,7 @@ static Std_ReturnType Adc_startGroup_AssignSocInt(Adc_GroupObjType *groupObj, Ad
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
 
     /* Check SOC range - verify enough SOC slots are available */
-    if (((uint16)((uint16)(ADC_SOC_NUMBER15)-hwUnitObj->socHwPtr + groupObj->groupCfg.numChannels)) >
+    if ((((uint16)(ADC_SOC_NUMBER15)) - hwUnitObj->socHwPtr + ((uint16)groupObj->groupCfg.numChannels)) >
         ((uint16)(ADC_SOC_NUMBER15)))
     {
         retVal = (Std_ReturnType)E_NOT_OK;

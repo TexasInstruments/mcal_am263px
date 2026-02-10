@@ -99,19 +99,19 @@
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_Init</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-          [!IF "$BusOffpolling != num:i(0)"!][!//  
+          [!IF "$BusOffpolling != num:i(0)"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_BusOff</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-          [!ENDIF!][!//  
+          [!ENDIF!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_Mode</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-          [!IF "$Rxpolling != num:i(0)"!][!//  
+          [!IF "$Rxpolling != num:i(0)"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_Read</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-          [!ENDIF!][!//  
+          [!ENDIF!][!//
           [!IF "$WakeUppolling != num:i(0)"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_Wakeup</BSW-MODULE-ENTRY-REF>
@@ -121,7 +121,7 @@
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_Write</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-          [!ENDIF!][!//  
+          [!ENDIF!][!//
           [!IF "as:modconf('Can')[1]/CanGeneral/CanRegisterReadbackAPI = 'true'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_RegisterReadback</BSW-MODULE-ENTRY-REF>
@@ -221,6 +221,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!IF "CanControllerInstance = 'MCAN1'"!][!//
@@ -257,6 +258,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!IF "CanControllerInstance = 'MCAN2'"!][!//
@@ -293,6 +295,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!IF "CanControllerInstance = 'MCAN3'"!][!//
@@ -329,6 +332,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!IF "CanControllerInstance = 'MCAN4'"!][!//
@@ -365,6 +369,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!IF "CanControllerInstance = 'MCAN5'"!][!//
@@ -401,6 +406,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!IF "CanControllerInstance = 'MCAN6'"!][!//
@@ -437,6 +443,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!IF "CanControllerInstance = 'MCAN7'"!][!//
@@ -473,6 +480,7 @@
                   [!ELSE!][!//
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!ENDIF!][!//
               [!ENDLOOP!][!//
@@ -592,7 +600,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-              [!IF "$BusOffpolling != num:i(0)"!][!//  
+              [!IF "$BusOffpolling != num:i(0)"!][!//
                 <BSW-SCHEDULABLE-ENTITY UUID="56f13e65-9681-41d1-b229-5d431b8ea428">
                   <SHORT-NAME>Can_MainFunction_BusOff</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -608,7 +616,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_BusOff</IMPLEMENTED-ENTRY-REF>
                 </BSW-SCHEDULABLE-ENTITY>
-              [!ENDIF!][!//  
+              [!ENDIF!][!//
                 <BSW-SCHEDULABLE-ENTITY UUID="d9235562-da17-48d5-8b38-e41334a85fd4">
                   <SHORT-NAME>Can_MainFunction_Mode</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -635,7 +643,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_Read</IMPLEMENTED-ENTRY-REF>
                 </BSW-SCHEDULABLE-ENTITY>
-              [!ENDIF!][!//  
+              [!ENDIF!][!//
               [!IF "$WakeUppolling != num:i(0)"!][!//
                 <BSW-SCHEDULABLE-ENTITY UUID="27c74c06-9ee0-49c7-b3cc-1c92233dcdd0">
                   <SHORT-NAME>Can_MainFunction_Wakeup</SHORT-NAME>
@@ -658,7 +666,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263px/Can_ModuleEntry/Can_MainFunction_Write</IMPLEMENTED-ENTRY-REF>
                 </BSW-SCHEDULABLE-ENTITY>
-              [!ENDIF!][!//  
+              [!ENDIF!][!//
               [!IF "as:modconf('Can')[1]/CanGeneral/CanRegisterReadbackAPI = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="b7e65624-4264-42b7-bb2d-30488e58248e">
                   <SHORT-NAME>Can_RegisterReadback</SHORT-NAME>
@@ -769,19 +777,19 @@
                   <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Can_TI_AM263px/Can/Can_Behavior/Can_MainFunction_BusOff</STARTS-ON-EVENT-REF>
                   <PERIOD>[!"num:f(as:modconf('Can')[1]/CanGeneral/CanMainFunctionBusoffPeriod)"!]</PERIOD>
                 </BSW-TIMING-EVENT>
-              [!ENDIF!][!//  
+              [!ENDIF!][!//
                 <BSW-TIMING-EVENT UUID="04cd4bb0-cb81-452f-92cf-623e46acc15c">
                   <SHORT-NAME>Can_MainFunctionTimingEvent_Mode</SHORT-NAME>
                   <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Can_TI_AM263px/Can/Can_Behavior/Can_MainFunction_Mode</STARTS-ON-EVENT-REF>
                   <PERIOD>[!"num:f(as:modconf('Can')[1]/CanGeneral/CanMainFunctionModePeriod)"!]</PERIOD>
                 </BSW-TIMING-EVENT>
-              [!IF "$Rxpolling != num:i(0)"!][!//  
+              [!IF "$Rxpolling != num:i(0)"!][!//
                 <BSW-TIMING-EVENT UUID="2e755435-7e91-43fd-9317-15a5b1265faf">
                   <SHORT-NAME>Can_MainFunctionTimingEvent_Read</SHORT-NAME>
                   <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Can_TI_AM263px/Can/Can_Behavior/Can_MainFunction_Read</STARTS-ON-EVENT-REF>
                   <PERIOD>[!"num:f(as:modconf('Can')[1]/CanGeneral/CanMainFunctionReadPeriod)"!]</PERIOD>
                 </BSW-TIMING-EVENT>
-              [!ENDIF!][!//  
+              [!ENDIF!][!//
               [!IF "$WakeUppolling != num:i(0)"!][!//
                 <BSW-TIMING-EVENT UUID="8b5dd1a5-2776-4eef-b311-aef69f165068">
                   <SHORT-NAME>Can_MainFunctionTimingEvent_Wakeup</SHORT-NAME>
@@ -795,7 +803,7 @@
                   <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Can_TI_AM263px/Can/Can_Behavior/Can_MainFunction_Write</STARTS-ON-EVENT-REF>
                   <PERIOD>[!"num:f(as:modconf('Can')[1]/CanGeneral/CanMainFunctionWritePeriod)"!]</PERIOD>
                 </BSW-TIMING-EVENT>
-              [!ENDIF!][!//  
+              [!ENDIF!][!//
               </EVENTS>
             </BSW-INTERNAL-BEHAVIOR>
           </INTERNAL-BEHAVIORS>

@@ -43,7 +43,7 @@
                   <BSW-MODULE-DESCRIPTION-REF DEST="BSW-MODULE-DESCRIPTION">/AUTOSAR_Dem/Dem</BSW-MODULE-DESCRIPTION-REF>
                 </BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
               </TARGET-MODULE-REFS>
-            </BSW-MODULE-DEPENDENCY>                  
+            </BSW-MODULE-DEPENDENCY>
             <BSW-MODULE-DEPENDENCY UUID="c0ce46de-3dd8-41fc-9f28-a448f1b2f6c3">
               <SHORT-NAME>Det</SHORT-NAME>
               <TARGET-MODULE-ID>15</TARGET-MODULE-ID>
@@ -82,6 +82,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/CddFsiRx_FSIINT1_IrqUnit0</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="6e81150d-4167-46a0-8ebe-3ae8210e9ba9">
                   <SHORT-NAME>CddFsiRx_FSIINT2_IrqUnit0</SHORT-NAME>
@@ -102,6 +103,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/CddFsiRx_FSIINT2_IrqUnit0</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="22b574ad-51da-4567-bfe3-0639a985f25e">
                   <SHORT-NAME>CddFsiRx_GetStatus</SHORT-NAME>
@@ -110,7 +112,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="651bbd50-7d63-4d59-965e-17dff3fd0f04">
                   <SHORT-NAME>Cdd_FsiRx_DeInit</SHORT-NAME>
-                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>                  
+                  <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
@@ -149,7 +151,7 @@
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
-                  </CALL-POINTS>                  
+                  </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/Cdd_FsiRx_Reset</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="4b43ca2b-b0cd-4bed-8a49-25ee1015fe6a">
@@ -163,7 +165,7 @@
                       <SHORT-NAME>Det_ReportError</SHORT-NAME>
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
-                  </CALL-POINTS>                  
+                  </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/Cdd_FsiRx_setUpBuffer</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
               </ENTITYS>
@@ -319,7 +321,7 @@
               <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
-            </BSW-MODULE-ENTRY> 
+            </BSW-MODULE-ENTRY>
             <BSW-MODULE-ENTRY UUID="08839271-b4b5-4df5-9258-1c17684c055f">
               <SHORT-NAME>CddFsiRx_GetStatus</SHORT-NAME>
               <SERVICE-ID>5</SERVICE-ID>

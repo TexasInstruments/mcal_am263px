@@ -159,6 +159,23 @@ typedef struct
 typedef IpcNotify_Object *IpcNotify_Handle;
 
 /**
+ * \brief Structure to hold message parameters for IPC Notify send operations
+ */
+typedef struct IpcNotify_MsgParams_s
+{
+    uint32 remoteCoreId;
+    /**< Remote core to send message to */
+    uint16 remoteClientId;
+    /**< Remote core client ID */
+    uint32 messageValue;
+    /**< Message value to send */
+    uint32 waitForFifoNotFull;
+    /**< 1: wait for FIFO, 0: return error if full */
+    uint32 timeout;
+    /**< Timeout in ticks */
+} IpcNotify_MsgParams;
+
+/**
  * \brief Initialize IPC Notify module
  *
  * This API will initialize the HW used for IPC.
@@ -191,18 +208,12 @@ sint32 IpcNotify_lld_deInit(IpcNotify_Handle hIpcNotify);
  *       i.e remoteCoreId, cannot be same as core ID of the CPU that called this API.
  *
  * \param hIpcNotify     IPC Notify LLD handle
- * \param remoteCoreId   [in] Remote core to sent message to, see \ref CSL_CoreID for valid values.
- * \param remoteClientId [in] Remote core client ID to send message to, MUST be < \ref IPC_NOTIFY_CLIENT_ID_MAX
- * \param msgValue       [in] Message value to send, MUST be < IPC_NOTIFY_MSG_VALUE_MAX
- * \param waitForFifoNotFull [in] 1: wait for message to be inserted into HW or SW FIFO,
- *                                0: if FIFO is full, dont send message and return with error.
- * \param timeout        [in] Amount of time in units of ticks to wait until timeout
+ * \param msgParams   [in] message specific structure parameter
  *
  * \return MCAL_SystemP_SUCCESS, message sent successfully
  * \return SystemP_FAILURE, message could not be sent since HW or SW FIFO for holding the message is full.
  */
-sint32 IpcNotify_lld_sendMsg(IpcNotify_Handle hIpcNotify, uint32 remoteCoreId, uint16 remoteClientId,
-                             uint32 messageValue, uint32 waitForFifoNotFull, uint32 timeout);
+sint32 IpcNotify_lld_sendMsg(IpcNotify_Handle hIpcNotify, const IpcNotify_MsgParams *msgParams);
 
 /**
  * \brief Register a callback to handle messages received from a specific remote core and for a specific local client ID

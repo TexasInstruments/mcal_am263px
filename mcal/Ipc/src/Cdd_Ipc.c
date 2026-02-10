@@ -356,8 +356,13 @@ Cdd_Ipc_Notify_Write(uint32 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteClientId,
     else
 #endif
     {
-        status = IpcNotify_lld_sendMsg(CddIpc_NotifyHandle, Cdd_Ipc_remoteCoreId, Cdd_Ipc_remoteClientId,
-                                       Cdd_Ipc_msgValue, Cdd_Ipc_waitForFifoNotFull, (CDD_IPC_TIMEOUT));
+        IpcNotify_MsgParams msgParams;
+        msgParams.remoteCoreId       = Cdd_Ipc_remoteCoreId;
+        msgParams.remoteClientId     = Cdd_Ipc_remoteClientId;
+        msgParams.messageValue       = Cdd_Ipc_msgValue;
+        msgParams.waitForFifoNotFull = Cdd_Ipc_waitForFifoNotFull;
+        msgParams.timeout            = CDD_IPC_TIMEOUT;
+        status                       = IpcNotify_lld_sendMsg(CddIpc_NotifyHandle, &msgParams);
 
         if (MCAL_SystemP_SUCCESS != status)
         {

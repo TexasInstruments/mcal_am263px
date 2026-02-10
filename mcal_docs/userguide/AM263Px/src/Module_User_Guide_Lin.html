@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4.18. LIN Module &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.19. MCU Module" href="Module_User_Guide_Mcu.html" />
+    <link rel="prev" title="4.17. ICU Module" href="Module_User_Guide_Icu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.02.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="ModuleUserGuide_list.html">4. Module User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Adc.html">4.1. ADC Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Can.html">4.2. CAN Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Cmpss.html">4.3. CDD CMPSS Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Flc.html">4.4. CDD FLC Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_dma.html">4.5. CDD DMA Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_FsiRx.html">4.6. CDD_FSIRX Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_FsiTx.html">4.7. CDD_FSITX Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_I2c.html">4.8. CDD I2C Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Ipc.html">4.9. CDD_IPC Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_Pwm.html">4.10. CDD_PWM Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Cdd_uart.html">4.11. CDD UART Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Dio.html">4.12. DIO Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Eth.html">4.13. ETH Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_EthTrcv.html">4.14. ETHTRCV Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Fls.html">4.15. FLS Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Gpt.html">4.16. GPT Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Icu.html">4.17. ICU Module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4.18. LIN Module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#acronyms-and-definitions">4.18.1. Acronyms and Definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">4.18.2. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functional-overview">4.18.3. Functional Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#initialization">4.18.3.1. Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#states">4.18.3.2. States</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#assumptions">4.18.3.3. Assumptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#limitations">4.18.3.4. Limitations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#design-overview">4.18.3.5. Design overview</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#hardware-features">4.18.4. Hardware Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ip-supported-features">4.18.4.1. IP Supported Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#autosar-supported-features">4.18.4.2. AUTOSAR Supported Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#not-supported-features">4.18.4.3. Not supported Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-compliance">4.18.4.4. Non compliance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#source-files">4.18.5. Source files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-requirements">4.18.6. Module requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#memory-mapping">4.18.6.1. Memory Mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scheduling">4.18.6.2. Scheduling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#error-handling">4.18.6.3. Error handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#used-resources">4.18.7. Used resources</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#interrupt-handling">4.18.7.1. Interrupt Handling</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#integration-description">4.18.8. Integration description</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dependent-modules">4.18.8.1. Dependent modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.18.8.2. Multi-core support</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">4.18.9. Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#lindemeventparameterrefs">4.18.9.1. LinDemEventParameterRefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lingeneral">4.18.9.2. LinGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linglobalconfig">4.18.9.3. LinGlobalConfig</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">4.18.10. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">4.18.10.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-software-setup-and-tools">4.18.10.2. Hardware Software Setup and Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps-to-build-and-run-example">4.18.10.3. Steps to build and run example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-used-to-test-this-example">4.18.10.4. Configuration used to test this example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-logs">4.18.10.5. Example Logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.18.10.6. File Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#faq-s">4.18.11. FAQ’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">4.18.12. References</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Mcu.html">4.19. MCU Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Port.html">4.20. PORT Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Pwm.html">4.21. PWM Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Spi.html">4.22. SPI Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Wdg.html">4.23. WDG Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">5. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="ModuleUserGuide_list.html"><span class="section-number">4. </span>Module User Guide</a> &raquo;</li>
+      <li><span class="section-number">4.18. </span>LIN Module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lin-module">
+<h1><span class="section-number">4.18. </span>LIN Module<a class="headerlink" href="#lin-module" title="Link to this heading"></a></h1>
+<section id="acronyms-and-definitions">
+<h2><span class="section-number">4.18.1. </span>Acronyms and Definitions<a class="headerlink" href="#acronyms-and-definitions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Abbreviation/Term</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>AUTOSAR</p></td>
+<td><p>Automotive Open System Architecture</p></td>
+</tr>
+<tr class="row-odd"><td><p>BSW</p></td>
+<td><p>Basic Software</p></td>
+</tr>
+<tr class="row-even"><td><p>MCAL</p></td>
+<td><p>Micro Controller Abstraction Layer</p></td>
+</tr>
+<tr class="row-odd"><td><p>DET</p></td>
+<td><p>Default Error Tracer</p></td>
+</tr>
+<tr class="row-even"><td><p>HW</p></td>
+<td><p>Hardware</p></td>
+</tr>
+<tr class="row-odd"><td><p>SW</p></td>
+<td><p>Software</p></td>
+</tr>
+<tr class="row-even"><td><p>EcuM</p></td>
+<td><p>ECU Manager</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN</p></td>
+<td><p>Local Interconnect Network</p></td>
+</tr>
+<tr class="row-even"><td><p>MCU</p></td>
+<td><p>Micro Controller Unit</p></td>
+</tr>
+<tr class="row-odd"><td><p>OS</p></td>
+<td><p>Operating System</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="introduction">
+<h2><span class="section-number">4.18.2. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This document describes the functionality and configuration of the AUTOSAR BSW module LIN.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Supported AUTOSAR Release</p></th>
+<th class="head"><p><strong>4.3.1</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Supported Configuration Variants</strong></p></td>
+<td><p><strong>Pre-Compile, Post-build</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Vendor ID</strong></p></td>
+<td><p><strong>LIN_VENDOR_ID (44)</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Module ID</strong></p></td>
+<td><p><strong>LIN_MODULE_ID (82)</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Supported Platform</strong></p></td>
+<td><p><strong>AM263Px</strong></p></td>
+</tr>
+</tbody>
+</table>
+<p>The LIN module initializes and controls the Lin peripheral. It provides services to send, receive data, sleep and wakeup of the Lin peripheral.</p>
+</section>
+<section id="functional-overview">
+<h2><span class="section-number">4.18.3. </span>Functional Overview<a class="headerlink" href="#functional-overview" title="Link to this heading"></a></h2>
+<section id="initialization">
+<h3><span class="section-number">4.18.3.1. </span>Initialization<a class="headerlink" href="#initialization" title="Link to this heading"></a></h3>
+<p>Lin_Init () must be called to initialize the LIN driver at power on and sets controller independent init values. This
+will also set the Lin controllers to IDLE state.</p>
+</section>
+<section id="states">
+<h3><span class="section-number">4.18.3.2. </span>States<a class="headerlink" href="#states" title="Link to this heading"></a></h3>
+<p>Refer Chapter 7.3.3 State Diagrams in AUTOSAR_SWS_LINDriver for more details.</p>
+</section>
+<section id="assumptions">
+<h3><span class="section-number">4.18.3.3. </span>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading"></a></h3>
+<p>Only one LIN channel of an ECU is allowed to connect to a particular LIN cluster.</p>
+</section>
+<section id="limitations">
+<h3><span class="section-number">4.18.3.4. </span>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Abort of current ongoing transmission [SWS_Lin_00021].</p></li>
+<li><p>Automatic transmission of Goto Sleep command [SWS_Lin_00089].</p></li>
+</ol>
+</section>
+<section id="design-overview">
+<h3><span class="section-number">4.18.3.5. </span>Design overview<a class="headerlink" href="#design-overview" title="Link to this heading"></a></h3>
+<p><strong>Will be updated in future release</strong></p>
+</section>
+</section>
+<section id="hardware-features">
+<h2><span class="section-number">4.18.4. </span>Hardware Features<a class="headerlink" href="#hardware-features" title="Link to this heading"></a></h2>
+<section id="ip-supported-features">
+<h3><span class="section-number">4.18.4.1. </span>IP Supported Features<a class="headerlink" href="#ip-supported-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Compatibility with LIN 1.3 protocols</p></li>
+<li><p>Configurable baud rate up to 20 kpbs</p></li>
+<li><p>Two external pins: LINRX and LINTX.</p></li>
+<li><p>Multibuffered receive and transmit units</p></li>
+<li><p>Identification masks for message filtering</p></li>
+<li><p>Automatic commander header generation</p></li>
+<li><p>Wake up on LINRX dominant level from transceiver</p></li>
+<li><p>Automatic wake up support</p></li>
+<li><p>Error detection</p></li>
+<li><p>2 interrupt lines with priority encoding</p></li>
+<li><p>Support for LIN 2.0 checksum</p></li>
+<li><p>Enhanced baud rate generator</p></li>
+</ul>
+</section>
+<section id="autosar-supported-features">
+<h3><span class="section-number">4.18.4.2. </span>AUTOSAR Supported Features<a class="headerlink" href="#autosar-supported-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Conformance to LIN 2.1 protocol; operation in Master Mode only.</p></li>
+<li><p>Support of upto 5 Lin Channels</p></li>
+<li><p>Sleep / wakeup functionality</p></li>
+<li><p>Enhanced and Classic checksum model</p></li>
+<li><p>Transmission / Reception of upto 8 bytes of Data</p></li>
+<li><p>PDU Directions supported : LIN_MASTER_RESPONSE, LIN_SLAVE_RESPONSE, LIN_SLAVE_TO_SLAVE</p></li>
+<li><p>Use of EcuM wakeup source</p></li>
+<li><p>Use of Det for reporting of development errors</p></li>
+</ul>
+</section>
+<section id="not-supported-features">
+<h3><span class="section-number">4.18.4.3. </span>Not supported Features<a class="headerlink" href="#not-supported-features" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Abort of ongoing transmission</p></li>
+<li><p>Automatic transmission of Goto Sleep command</p></li>
+</ul>
+</section>
+<section id="non-compliance">
+<h3><span class="section-number">4.18.4.4. </span>Non compliance<a class="headerlink" href="#non-compliance" title="Link to this heading"></a></h3>
+<section id="deviations-to-requirements-requirement-traceability">
+<h4><span class="section-number">4.18.4.4.1. </span>Deviations to requirements (Requirement Traceability)<a class="headerlink" href="#deviations-to-requirements-requirement-traceability" title="Link to this heading"></a></h4>
+<section id="deviation-of-requirements-against-autosar-specification-requirements">
+<h5><span class="section-number">4.18.4.4.1.1. </span>Deviation of requirements against AUTOSAR specification requirements<a class="headerlink" href="#deviation-of-requirements-against-autosar-specification-requirements" title="Link to this heading"></a></h5>
+<p>Will be updated in next release</p>
+</section>
+</section>
+</section>
+</section>
+<section id="source-files">
+<h2><span class="section-number">4.18.5. </span>Source files<a class="headerlink" href="#source-files" title="Link to this heading"></a></h2>
+<p>Static source C Files are defined below</p>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┣ 📂mcal<br />
+┃ ┣ 📂<strong>Lin</strong><br />
+┃ ┃ ┣ 📂<strong>include</strong><br />
+┃ ┃ ┃ ┣ 📜<strong>Lin.h</strong> : <em>Contains interface header for Lin Drv functions.</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Lin_Irq.h</strong> : <em>Contains ISR function declarations for LIN Drv.</em><br />
+┃ ┃ ┣ 📂<strong>src</strong><br />
+┃ ┃ ┃ ┣ 📜<strong>Lin.c</strong> : <em>Contains interface for Lin Drv functions.</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Lin_Irq.c</strong> : <em>Contains Interrupt Service Routines for Lin Drv.</em><br />
+┃ ┃ ┣ 📂<strong>V0</strong><br />
+┃ ┃ ┃ ┗ 📜<strong>cslr_lin.h</strong> : <em>Contains Register definitions required for accessing Lin peripherals.</em><br />
+┃ ┃ ┃ ┣ 📜<strong>Lin_Priv.c</strong> : <em>Contains controller dependent local functions and private functions to be used in Lin.c</em><br />
+┃ ┃ ┃ ┗ 📜<strong>Lin_Priv.h</strong> : <em>Contains interface header for Lin private functions.</em><br />
+┃ ┃ ┗ 📜Makefile<br />
+┃ 📂mcal_config<br />
+┃ 📂mcal_docs<br />
+┃ 📜README.txt</p>
+<p>Plugin files are defined below in the table.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Plugin Files</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Lin_Cfg.h</p></td>
+<td><p>Contains the Precompile switches, Macros for LIN channels etc.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lin_PBcfg.c</p></td>
+<td><p>Contains all channels Post-Build Configuration parameters</p></td>
+</tr>
+<tr class="row-even"><td><p>Lin_Cfg.c</p></td>
+<td><p>Contains all channels Pre-Compile Configuration parameters</p></td>
+</tr>
+</tbody>
+</table>
+<figure class="align-center" id="id1">
+<img alt="Lin header file include structure" src="../_images/lin_image1.jpg" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.81 </span><span class="caption-text">Lin header file include structure</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="module-requirements">
+<h2><span class="section-number">4.18.6. </span>Module requirements<a class="headerlink" href="#module-requirements" title="Link to this heading"></a></h2>
+<p>Please refer <strong>Software Product Specification</strong> document provided as part of CSP.</p>
+<section id="memory-mapping">
+<h3><span class="section-number">4.18.6.1. </span>Memory Mapping<a class="headerlink" href="#memory-mapping" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Memory Mapping Sections</p></th>
+<th class="head"><p>LIN_CODE</p></th>
+<th class="head"><p>LIN_CODE_ISR</p></th>
+<th class="head"><p>LIN_VAR_NO_INIT</p></th>
+<th class="head"><p>LIN_VAR</p></th>
+<th class="head"><p>LIN_CONST</p></th>
+<th class="head"><p>LIN_PBCFG</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LIN_START_SEC_VAR_INIT_UNSPECIFIED(.bss)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN_STOP_SEC_VAR_INIT_UNSPECIFIED</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LIN_START_SEC_CONFIG_DATA (.const)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN_STOP_SEC_CONFIG_DATA</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+</tr>
+<tr class="row-even"><td><p>LIN_START_SEC_CODE(.text)</p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN_STOP_SEC_CODE</p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LIN_START_SEC_VAR_INIT_32(.bss)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN_STOP_SEC_VAR_INIT_32</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LIN_START_SEC_VAR_NO_INIT_UNSPECIFIED(.data)</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN_STOP_SEC_VAR_NO_INIT_UNSPECIFIED</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>LIN_START_SEC_ISR_CODE</p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN_STOP_SEC_ISR_CODE</p></td>
+<td><p></p></td>
+<td><p>x</p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="scheduling">
+<h3><span class="section-number">4.18.6.2. </span>Scheduling<a class="headerlink" href="#scheduling" title="Link to this heading"></a></h3>
+<p>There are no scheduled functions within the LIN driver</p>
+</section>
+<section id="error-handling">
+<h3><span class="section-number">4.18.6.3. </span>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h3>
+<section id="det-errors">
+<h4><span class="section-number">4.18.6.3.1. </span>DET Errors<a class="headerlink" href="#det-errors" title="Link to this heading"></a></h4>
+<p>The errors reported to DET module are described in the following table:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type of Error</p></th>
+<th class="head"><p>Related Error code</p></th>
+<th class="head"><p>Value (Hex)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>API service used without module initialization</p></td>
+<td><p>LIN_E_UNINIT</p></td>
+<td><p>0x00</p></td>
+</tr>
+<tr class="row-odd"><td><p>API service used with an invalid or inactive channel parameter</p></td>
+<td><p>LIN_E_INVALID_CHANNEL</p></td>
+<td><p>0x02</p></td>
+</tr>
+<tr class="row-even"><td><p>API service called with invalid configuration pointer</p></td>
+<td><p>LIN_E_INVALID_POINTER</p></td>
+<td><p>0x03</p></td>
+</tr>
+<tr class="row-odd"><td><p>Invalid state transition for the current state</p></td>
+<td><p>LIN_E_STATE_TRANSITION</p></td>
+<td><p>0x04</p></td>
+</tr>
+<tr class="row-even"><td><p>API service called with a NULL pointer</p></td>
+<td><p>LIN_E_PARAM_POINTER</p></td>
+<td><p>0x05</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="runtime-errors">
+<h4><span class="section-number">4.18.6.3.2. </span>Runtime Errors<a class="headerlink" href="#runtime-errors" title="Link to this heading"></a></h4>
+<p>None</p>
+</section>
+</section>
+</section>
+<section id="used-resources">
+<h2><span class="section-number">4.18.7. </span>Used resources<a class="headerlink" href="#used-resources" title="Link to this heading"></a></h2>
+<section id="interrupt-handling">
+<h3><span class="section-number">4.18.7.1. </span>Interrupt Handling<a class="headerlink" href="#interrupt-handling" title="Link to this heading"></a></h3>
+<p>The Driver doesn’t register any interrupts handler (ISR), it’s expected that consumer of this driver registers the required interrupt handler.</p>
+<p><a class="reference external" href="https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_LINDriver.pdf">AUTOSAR_SWS_LINDriver section: 10 Configuration specification</a>, details the expected behavior and control flow for ISR implementation, please refer the same.</p>
+<p>Lin driver provides ISR for wakeup detection. The interrupt vector lines to be used is configurable in Lin driver.
+The interrupt category must be configured in Lin Driver and OS modules. The ISR’s are implemented in the file Lin_Irq.c.</p>
+<p>Respective ISRs for each Lin Instances in AM263Px are as follows:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Lin Instances</p></th>
+<th class="head"><p>ISR Routines</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LIN0 Wakeup Line 0 (IE0)</p></td>
+<td><p>Lin_0_Int0ISR()</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN0 Wakeup Line 1 (IE1)</p></td>
+<td><p>Lin_0_Int1ISR()</p></td>
+</tr>
+<tr class="row-even"><td><p>LIN1 Wakeup Line 0 (IE0)</p></td>
+<td><p>Lin_1_Int0ISR()</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN1 Wakeup Line 1 (IE1)</p></td>
+<td><p>Lin_1_Int1ISR()</p></td>
+</tr>
+<tr class="row-even"><td><p>LIN2 Wakeup Line 0 (IE0)</p></td>
+<td><p>Lin_2_Int0ISR()</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN2 Wakeup Line 1 (IE1)</p></td>
+<td><p>Lin_2_Int1ISR()</p></td>
+</tr>
+<tr class="row-even"><td><p>LIN3 Wakeup Line 0 (IE0)</p></td>
+<td><p>Lin_3_Int0ISR()</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN3 Wakeup Line 1 (IE1)</p></td>
+<td><p>Lin_3_Int1ISR()</p></td>
+</tr>
+<tr class="row-even"><td><p>LIN4 Wakeup Line 0 (IE0)</p></td>
+<td><p>Lin_4_Int0ISR()</p></td>
+</tr>
+<tr class="row-odd"><td><p>LIN4 Wakeup Line 1 (IE1)</p></td>
+<td><p>Lin_4_Int1ISR()</p></td>
+</tr>
+</tbody>
+</table>
+<ol class="arabic simple">
+<li><p><strong>Lin_0_Int0ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN0 controller.</p></li>
+<li><p><strong>Lin_0_Int1ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN0 controller</p></li>
+<li><p><strong>Lin_1_Int0ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN1 controller.</p></li>
+<li><p><strong>Lin_1_Int1ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN1 controller.</p></li>
+<li><p><strong>Lin_2_Int0ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN2 controller.</p></li>
+<li><p><strong>Lin_2_Int1ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN2 controller.</p></li>
+<li><p><strong>Lin_3_Int0ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN3 controller.</p></li>
+<li><p><strong>Lin_3_Int1ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN3 controller.</p></li>
+<li><p><strong>Lin_4_Int0ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 0 for the LIN4 controller.</p></li>
+<li><p><strong>Lin_4_Int1ISR</strong>
+For AM263Px device, this ISR is called on detection of wakeup event on interrupt line 1 for the LIN4 controller.</p></li>
+</ol>
+</section>
+</section>
+<section id="integration-description">
+<h2><span class="section-number">4.18.8. </span>Integration description<a class="headerlink" href="#integration-description" title="Link to this heading"></a></h2>
+<section id="dependent-modules">
+<h3><span class="section-number">4.18.8.1. </span>Dependent modules<a class="headerlink" href="#dependent-modules" title="Link to this heading"></a></h3>
+<section id="mcu">
+<h4><span class="section-number">4.18.8.1.1. </span>MCU<a class="headerlink" href="#mcu" title="Link to this heading"></a></h4>
+<p>The hardware of the internal LIN hardware unit depends on the system clock, prescaler(s) and PLL. Hence, the length of the LIN bit timing depends on the clock settings made in module MCU.
+The LIN driver module will not take care of setting the registers that configure the clock, prescaler(s) and PLL (e.g. switching on/off the PLL) in its init functions. The MCU module must do this.</p>
+</section>
+<section id="port">
+<h4><span class="section-number">4.18.8.1.2. </span>PORT<a class="headerlink" href="#port" title="Link to this heading"></a></h4>
+<p>The Port driver configures the port pins used for the LIN driver as input or output. Hence, the Port driver has to be initialized prior to the use of LIN functions. Otherwise, LIN driver functions will exhibit undefined behavior.</p>
+</section>
+<section id="os">
+<h4><span class="section-number">4.18.8.1.3. </span>OS<a class="headerlink" href="#os" title="Link to this heading"></a></h4>
+<p>The LIN driver uses interrupts and therefore there is a dependency on the OS, which configures the interrupt sources.</p>
+</section>
+<section id="lin-driver-users">
+<h4><span class="section-number">4.18.8.1.4. </span>LIN Driver Users<a class="headerlink" href="#lin-driver-users" title="Link to this heading"></a></h4>
+<p>The LIN Interface is the only user of the LIN driver services.</p>
+</section>
+<section id="det">
+<h4><span class="section-number">4.18.8.1.5. </span>DET<a class="headerlink" href="#det" title="Link to this heading"></a></h4>
+<p>In development mode, the Lin module reports development error through the Det_ReportError function of module DET.</p>
+<p>AUTOSAR requires that API functions shall check the validity of their respective parameters.
+These checks are for development error reporting and can be enabled or disabled.</p>
+</section>
+<section id="callback-notification">
+<h4><span class="section-number">4.18.8.1.6. </span>Callback Notification<a class="headerlink" href="#callback-notification" title="Link to this heading"></a></h4>
+<p>None</p>
+</section>
+<section id="schm">
+<h4><span class="section-number">4.18.8.1.7. </span>SchM<a class="headerlink" href="#schm" title="Link to this heading"></a></h4>
+<p>If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that LIN module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.</p>
+<p>The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator. For LIN Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Exclusive Area Functions used</p></th>
+<th class="head"><p>LIN Function calling Exclusive Area</p></th>
+<th class="head"><p>Need for Exclusive Area</p></th>
+<th class="head"><p>Recommended Exclusive Area Mapping</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LIN_EXCLUSIVE_AREA_0</p></td>
+<td><p>Lin_SendFrame<br>Lin_GoToSleep<br>Lin_GoToSleepInternal<br>Lin_WakeupProcess<br>Lin_WakeupInternalProcess<br>Lin_GetStatus</p></td>
+<td><p>To protect against multiple access for shared resources</p></td>
+<td><p>ALL_INTERRUPT_BLOCKING : All interrupts should be blocked as this API’s can be called in the interrupts</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="multi-core-support">
+<h3><span class="section-number">4.18.8.2. </span>Multi-core support<a class="headerlink" href="#multi-core-support" title="Link to this heading"></a></h3>
+<p>Not supported</p>
+</section>
+</section>
+<section id="configuration">
+<h2><span class="section-number">4.18.9. </span>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<section id="lindemeventparameterrefs">
+<h3><span class="section-number">4.18.9.1. </span>LinDemEventParameterRefs<a class="headerlink" href="#lindemeventparameterrefs" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinDemEventParameterRefs</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Reference to the DemEventParameter which shall be issued when the error “Timeout caused by hardware error” has occurred. If the reference is not configured the error shall be reported as DET error.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lingeneral">
+<h3><span class="section-number">4.18.9.2. </span>LinGeneral<a class="headerlink" href="#lingeneral" title="Link to this heading"></a></h3>
+<p>This container contains the parameters related to each LIN Driver Unit.</p>
+<section id="lindeverrordetect">
+<h4><span class="section-number">4.18.9.2.1. </span>LinDevErrorDetect<a class="headerlink" href="#lindeverrordetect" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinDevErrorDetect</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Switches the development error detection and notification on or off.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linindex">
+<h4><span class="section-number">4.18.9.2.2. </span>LinIndex<a class="headerlink" href="#linindex" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinIndex</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Specifies the InstanceId of this module instance. If only one instance is present it shall have the Id 0.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>255</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linwakeupid">
+<h4><span class="section-number">4.18.9.2.3. </span>LinWakeupId<a class="headerlink" href="#linwakeupid" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinWakeupId</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Specifies the LIN ID used to transmit a header instead of a wakeup signal due to hardware constraints. The hardware enters an undefined state when a standard wakeup signal is transmitted. To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which conforms to the LIN 2.1 specification</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>63</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>63</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linversioninfoapi">
+<h4><span class="section-number">4.18.9.2.4. </span>LinVersionInfoApi<a class="headerlink" href="#linversioninfoapi" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinVersionInfoApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Switches the Lin_GetVersionInfo function ON or OFF.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linenableregisterreadbackapi">
+<h4><span class="section-number">4.18.9.2.5. </span>LinEnableRegisterReadbackApi<a class="headerlink" href="#linenableregisterreadbackapi" title="Link to this heading"></a></h4>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinEnableRegisterReadbackApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Switch to indicate that the Lin_RegisterReadBack is supported</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="linglobalconfig">
+<h3><span class="section-number">4.18.9.3. </span>LinGlobalConfig<a class="headerlink" href="#linglobalconfig" title="Link to this heading"></a></h3>
+<p>This container contains the global configuration parameter of the Lin driver.</p>
+<section id="linchannel">
+<h4><span class="section-number">4.18.9.3.1. </span>LinChannel<a class="headerlink" href="#linchannel" title="Link to this heading"></a></h4>
+<p>This container contains the configuration (parameters) of the LIN Controller(s).</p>
+<section id="linchannelbaudrate">
+<h5><span class="section-number">4.18.9.3.1.1. </span>LinChannelBaudRate<a class="headerlink" href="#linchannelbaudrate" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinChannelBaudRate</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Specifies the baud rate of the LIN channel</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>19200</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>20000</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>1000</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linchannelid">
+<h5><span class="section-number">4.18.9.3.1.2. </span>LinChannelId<a class="headerlink" href="#linchannelid" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinChannelId</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Identifies the LIN channel. Replaces LIN_CHANNEL_INDEX_NAME from the LIN SWS.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>4</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lininstance">
+<h5><span class="section-number">4.18.9.3.1.3. </span>LinInstance<a class="headerlink" href="#lininstance" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinInstance</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Selects Lin Instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>LIN_INSTANCE_0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>LIN_INSTANCE_0<br>LIN_INSTANCE_1<br>LIN_INSTANCE_2<br>LIN_INSTANCE_3<br>LIN_INSTANCE_4</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linloopbackmode">
+<h5><span class="section-number">4.18.9.3.1.4. </span>LinLoopbackMode<a class="headerlink" href="#linloopbackmode" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinLoopbackMode</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Select loopback mode to be used for this Lin instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>LIN_LOOPBACK_DISABLED</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>LIN_LOOPBACK_DISABLED<br>LIN_LOOPBACK_INTERNAL<br>LIN_LOOPBACK_EXTERNAL</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linchannelwakeupsupport">
+<h5><span class="section-number">4.18.9.3.1.5. </span>LinChannelWakeupSupport<a class="headerlink" href="#linchannelwakeupsupport" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinChannelWakeupSupport</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Specifies if the LIN hardware channel supports wake up functionality</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linisrtype">
+<h5><span class="section-number">4.18.9.3.1.6. </span>LinISRType<a class="headerlink" href="#linisrtype" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinISRType</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Select ISR type to be used for this Lin instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>LIN_ISR_CAT2</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>LIN_ISR_VOID<br>LIN_ISR_CAT1<br>LIN_ISR_CAT2</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="lininterruptlineselect">
+<h5><span class="section-number">4.18.9.3.1.7. </span>LinInterruptLineSelect<a class="headerlink" href="#lininterruptlineselect" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinInterruptLineSelect</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Select interrupt line to be used for this Lin instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>LIN_INTERRUPT_LINE_NUM_0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>LIN_INTERRUPT_LINE_NUM_0<br>LIN_INTERRUPT_LINE_NUM_1</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linchannelecumwakeupsource">
+<h5><span class="section-number">4.18.9.3.1.8. </span>LinChannelEcuMWakeupSource<a class="headerlink" href="#linchannelecumwakeupsource" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinChannelEcuMWakeupSource</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>This parameter contains a reference to the Wakeup Source for this controller as defined in the ECU State Manager.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="linclockref">
+<h5><span class="section-number">4.18.9.3.1.9. </span>LinClockRef<a class="headerlink" href="#linclockref" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinClockRef</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Reference to the LIN clock source configuration, which is set in the MCU driver configuration.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="linbaudrateconfig">
+<h4><span class="section-number">4.18.9.3.2. </span>LinBaudrateConfig<a class="headerlink" href="#linbaudrateconfig" title="Link to this heading"></a></h4>
+<p>This container contains the baudrate configuration parameter of the Lin driver.</p>
+<section id="linchannelprescalar">
+<h5><span class="section-number">4.18.9.3.2.1. </span>LinChannelPrescalar<a class="headerlink" href="#linchannelprescalar" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>LinChannelPrescalar</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Prescalar to derive LINCLK from VCLK</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>16777215</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+</section>
+<section id="examples">
+<h2><span class="section-number">4.18.10. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<section id="overview">
+<h3><span class="section-number">4.18.10.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>PMIC Settings should be initialized for AM263Px CC board.</p></li>
+<li><p>For AM263Px “PROC110E2A” board:</p>
+<ul class="simple">
+<li><p>LIN1 pins are exposed and LIN1 is configured with a 19200 baud.</p></li>
+</ul>
+</li>
+<li><p>While running the example code :</p>
+<ul class="simple">
+<li><p>First, it asks to select the example to run.</p></li>
+<li><p>For Master Response example 8 Lin Frames are transmitted with varying PIDs, length and data.</p></li>
+<li><p>For Slave Response example LIN1 will transmit header with PID (0x20h) and slave will respond with data. Received data will be printed on screen and user can confirm if the data is correct.</p></li>
+<li><p>For Slave to Slave example LIN1 will transmit header with PID (0x30h); then one of the slaves will send response with data which should be received by the other slave connected on same cluster. User can confirm if the second slave receives the data.</p></li>
+<li><p>User can also select ‘a’ in console to run all examples sequentially.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="hardware-software-setup-and-tools">
+<h3><span class="section-number">4.18.10.2. </span>Hardware Software Setup and Tools<a class="headerlink" href="#hardware-software-setup-and-tools" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Locate SW9 on the board and set it to ON.</p></li>
+<li><p>Locate the LIN, LIN-GND and VBat-LIN pins on both the PLIN device and the board. Refer to the documentation or user manual for both the PLIN device and the board to find the correct pins.</p></li>
+<li><p>Select appropriate cables with the necessary connectors to connect between the PLIN device and the board. Ensure the cables have the correct connectors to fit securely into both the PCAN device and board’s connectors.</p></li>
+</ol>
+<figure class="align-center" id="id2">
+<img alt="LIN Hardware Connectivity with PLIN USB" src="../_images/lin_image3.PNG" />
+<figcaption>
+<p><span class="caption-number">Fig. 4.82 </span><span class="caption-text">LIN Hardware Connectivity with PLIN USB</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="4">
+<li><p>Open the PLIN configuration software on your PC. The software is usually provided by the manufacturer of the PLIN device.</p></li>
+<li><p>Locate the settings for baud rate configuration.</p></li>
+<li><p>Set the baud rate to 19200 and select mode as Slave.</p></li>
+<li><p>Apply the changes and save the configuration.</p></li>
+<li><p>Ensure all connections are secure and properly plugged into their respective connectors on both the PLIN device and the board.</p></li>
+<li><p>Before powering on the system, double-check all connections to ensure they are correctly made, and there are no loose or improperly connected cables.</p></li>
+<li><p>After making the connections and configuring the PLIN device, power on both the board and the PLIN device.</p></li>
+<li><p>Once the system is powered on, verify that the LIN communication is established between the board and the PLIN device.</p></li>
+<li><p>If Slave to Slave mode example needs to be run; we would need 2 PLIN channels to be connected to the same LIN bus.</p></li>
+<li><p>Reference PLIN configs are placed at path (mcal/examples/Lin/Peak_PLIN_Config); these can be loaded for ease of use.</p></li>
+</ol>
+</section>
+<section id="steps-to-build-and-run-example">
+<h3><span class="section-number">4.18.10.3. </span>Steps to build and run example<a class="headerlink" href="#steps-to-build-and-run-example" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>LIN example application demonstrating the MCAL LIN driver features is in folder &lt;MCAL_ROOT&gt;/examples/Lin.</p></li>
+<li><p>This application can be built from the build folder by giving “gmake –s lin_app PLATFORM=am263px.”</p></li>
+<li><p>Once the build is completed we get a binary file, which is loaded in our controller and executed.</p></li>
+</ol>
+</section>
+<section id="configuration-used-to-test-this-example">
+<h3><span class="section-number">4.18.10.4. </span>Configuration used to test this example<a class="headerlink" href="#configuration-used-to-test-this-example" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>LIN1 instance is configured as Channel_1.</p></li>
+<li><p>Baudrate of 19200 is configured.</p></li>
+</ol>
+</section>
+<section id="example-logs">
+<h3><span class="section-number">4.18.10.5. </span>Example Logs<a class="headerlink" href="#example-logs" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
+<span class="w">  </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LIN</span><span class="w"> </span><span class="n">MCAL</span><span class="w"> </span><span class="n">Version</span><span class="w"> </span><span class="n">Info</span>
+<span class="w">    </span><span class="o">---------------------</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Vendor</span><span class="w"> </span><span class="n">ID</span><span class="o">:</span><span class="w"> </span><span class="mi">44</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Module</span><span class="w"> </span><span class="n">ID</span><span class="o">:</span><span class="w"> </span><span class="mi">124</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Major</span><span class="w"> </span><span class="n">Version</span><span class="o">:</span><span class="w"> </span><span class="mi">9</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Minor</span><span class="w"> </span><span class="n">Version</span><span class="o">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">SW</span><span class="w"> </span><span class="n">Patch</span><span class="w"> </span><span class="n">Version</span><span class="o">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Post</span><span class="w"> </span><span class="n">Build</span><span class="w"> </span><span class="n">being</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="o">!!!</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Using</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">LIN_INSTANCE_1</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Waking</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">sleep</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Wakeup</span><span class="w"> </span><span class="n">Successful</span><span class="w"> </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Enter</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">Master</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">quit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">application</span>
+
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">operating</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">Master</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Transmission</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">frame</span><span class="w"> </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">operating</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Received</span><span class="w"> </span><span class="n">Data</span><span class="w"> </span><span class="o">:</span><span class="w">  </span><span class="mh">0xa5</span><span class="w">  </span><span class="mh">0x55</span><span class="w">  </span><span class="mh">0xaa</span><span class="w">  </span><span class="mh">0x55</span><span class="w">  </span><span class="mh">0xaa</span><span class="w">  </span><span class="mh">0x55</span><span class="w">  </span><span class="mh">0xaa</span><span class="w">  </span><span class="mh">0x55</span><span class="w">  </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Does</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="n">match</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="n">sent</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">Slave</span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Reception</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">operating</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">mode</span><span class="w"> </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Did</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">communication</span><span class="w"> </span><span class="n">happen</span><span class="o">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span>
+<span class="w">    </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">LinChannel_1</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">communication</span><span class="w"> </span><span class="n">successful</span><span class="w"> </span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Enter</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">Master</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Slave</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Send</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">types</span><span class="w"> </span><span class="n">Lin</span><span class="w"> </span><span class="n">Request</span>
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">quit</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">application</span>
+
+<span class="w">    </span><span class="nl">LIN_APP</span><span class="p">:</span><span class="n">All</span><span class="w"> </span><span class="n">sample</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="no">pass</span><span class="w"> </span>
+
+</pre></div>
+</div>
+</section>
+<section id="file-structure">
+<h3><span class="section-number">4.18.10.6. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<p>📦AM263Px<br />
+┣ 📂build<br />
+┣ 📂mcal<br />
+┃ ┣ 📂<strong>examples</strong><br />
+┃ ┃ ┣ 📂<strong>Lin</strong><br />
+┃ ┃ ┃ ┣ 📂<strong>Peak_PLIN_Config</strong><br />
+┃ ┃ ┃ ┣ 📂<strong>soc</strong><br />
+┃ ┃ ┃ ┣ 📜<strong>LinApp.c</strong> : <em>Contains LIN test example.</em><br />
+┃ ┃ ┃ ┣ 📜<strong>LinApp.h</strong> : <em>Contains LIN test example headers.</em><br />
+┃ ┃ ┃ ┣ 📜Makefile<br />
+┃ ┣ 📂<strong>examples_config</strong><br />
+┃ ┃ ┣ 📂<strong>Lin_Demo_Cfg</strong><br />
+┃ ┃ ┃ ┣ 📂<strong>soc</strong><br />
+┃ ┃ ┃ ┃ ┣ 📂<strong>am263px</strong><br />
+┃ ┃ ┃ ┃ ┃ ┣ 📂<strong>r5f0_0</strong><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜<strong>Lin_Cfg.h</strong> : <em>Contains the Precompile switches, Macros for LIN controllers, Hardware Objects etc.</em><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂src<br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜<strong>Lin_Cfg.c</strong> : <em>Contains all controllers Pre-Compile Configuration parameters</em><br />
+┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜<strong>Lin_PBcfg.c</strong> : <em>Contains all controllers Post-Build Configuration parameters</em><br />
+┃ 📂mcal_config<br />
+┃ 📂mcal_docs<br />
+┣ 📜README.txt</p>
+</section>
+</section>
+<section id="faq-s">
+<h2><span class="section-number">4.18.11. </span>FAQ’s<a class="headerlink" href="#faq-s" title="Link to this heading"></a></h2>
+<p>None</p>
+</section>
+<section id="references">
+<h2><span class="section-number">4.18.12. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p><a class="reference external" href="https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_LINDriver.pdf">AUTOSAR_SWS_LINDriver</a><br />
+<a class="reference external" href="https://www.ti.com/product/AM263P4#tech-docs">Technical Reference Manual</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Module_User_Guide_Icu.html" class="btn btn-neutral float-left" title="4.17. ICU Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Module_User_Guide_Mcu.html" class="btn btn-neutral float-right" title="4.19. MCU Module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2026, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Feb 10, 2026.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.02.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = 'https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263P/AM263Px_versions.json';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

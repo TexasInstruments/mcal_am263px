@@ -1,0 +1,46 @@
+---
+orphan: true
+---
+
+---
+title: Port_PinConfigType
+summary: Pin Configuration structure. 
+
+---
+
+# Port_PinConfigType
+
+
+
+Pin Configuration structure. 
+
+
+`#include <Port_Cfg.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  [Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) | Port_PinId |  Port Pin Id.  |
+|  boolean | Port_DirectionChangeable |  Flag indicating if pin direction is changeable.  |
+|  boolean | Port_PinModeChangeable |  Flag indicating if Pin mode is changeable.  |
+|  [Port_PinLevelValueType](../Modules/group___p_o_r_t.md#enum-port_pinlevelvaluetype) | Port_PinLevelValue |  Pin level value.  |
+|  [Port_PinDirectionType](../Modules/group___p_o_r_t.md#enum-port_pindirectiontype) | Port_PinDirection |  Pin direction.  |
+|  uint32 | Port_NumPortModes |  Number of modes supported for this pin.  |
+|  [Port_PinModeConfigType](../Classes/struct_port___pin_mode_config_type.md)[PORT_MAX_MUXMODE] | Port_PinMode |  Pin mode.  |
+|  [Port_PinModeType](../Modules/group___p_o_r_t.md#enum-port_pinmodetype) | Port_PinInitialMode |  Pin initial mode.  |
+|  [Port_PinPullSelectType](../Modules/group___p_o_r_t.md#enum-port_pinpullselecttype) | Port_PullTypeSelect |  Type of PULL U/D selection.  |
+|  [Port_PinSlewControlType](../Modules/group___p_o_r_t.md#enum-port_pinslewcontroltype) | Port_SlewControl |  Slew control configuration.  |
+|  uint8 | Port_GpioOwnerCore |  GPIO owner core.  |
+|  [Port_PinPullInhibitEnableType](../Modules/group___p_o_r_t.md#enum-port_pinpullinhibitenabletype) | Port_PullInhibitEnable |  Pull inhibit control configuration.  |
+|  [Port_PinInputOverrideCtrl](../Modules/group___p_o_r_t.md#enum-port_pininputoverridectrl) | Port_InputOverride_Ctrl |  Active Low input override control.  |
+|  [Port_PinOutputOverrideCtrl](../Modules/group___p_o_r_t.md#enum-port_pinoutputoverridectrl) | Port_OutputOverride_Ctrl |  Active Low output override control.  |
+|  uint32 | Port_RegOffsetAddr |  Register base address for configuring this pin.  |
+|  uint32 | Port_PinDioRegId |  GPIO register id corresponding to this pin.  |
+|  uint32 | Port_PinDioChannelId |  GPIO channel corresponding to this pin in GPIO register.  |
+|  boolean | Port_PinHSmasterEnable |  HSMASTER bit value.  |
+|  boolean | Port_PinHSmodeEnable |  HSMODE bit value.  |
+|  [Port_InputInversion](../Modules/group___p_o_r_t.md#enum-port_inputinversion) | Port_InversionSelect |  select value for choosing inverted version of PAD input for chip  |
+|  [Port_InputQualType](../Modules/group___p_o_r_t.md#enum-port_inputqualtype) | Port_QualifierTypeSelect |  select value for choosing input qualifer type for PAD.  |
+
+

@@ -423,6 +423,20 @@ typedef struct
 
 typedef struct
 {
+    /* Channel type (DMA/QDMA) */
+    uint32 chType;
+    /* Channel number */
+    uint32 chNum;
+    /* TCC number for completion/error interrupt */
+    uint32 tccNum;
+    /* PaRAM set ID */
+    uint32 paramId;
+    /* Event Queue number */
+    uint32 evtQNum;
+} Cdd_Dma_ChannelConfigType;
+
+typedef struct
+{
     /* data */
     uint32                 compIntrNumber;
     /**< Completion interrupt number. */
@@ -1351,8 +1365,7 @@ void CDD_EDMA_lld_setPaRAM(uint32 baseAddr, uint32 paRAMId, const CDD_EDMACCEDMA
  *
  *  \return  TRUE if parameters are valid, else FALSE
  */
-uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 tccNum,
-                                           uint32 paramId, uint32 evtQNum);
+uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, const Cdd_Dma_ChannelConfigType *chConfig);
 
 /**
  *  \brief    Free the specified channel (DMA/QDMA/Link) and its associated
@@ -1399,8 +1412,7 @@ uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, uin
  *
  *  \return  TRUE if parameters are valid else return FALSE
  */
-uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 trigMode,
-                                      uint32 tccNum, uint32 evtQNum);
+uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 trigMode);
 
 /**
  *  \brief    Start EDMA transfer on the specified channel.

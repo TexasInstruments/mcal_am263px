@@ -239,5 +239,10 @@ void ICU_ECAP_setEmulationMode(uint32 baseAddr, ECAP_EmulationMode mode)
                  ((uint16)mode << CSL_ECAP_ECCTL1_FREE_SOFT_SHIFT)));
 }
 
+void ICU_ECAP_selectQualPeriod(uint32 baseAddr, ECAP_QualPeriodSelect width)
+{
+    HW_WR_REG32(baseAddr + CSL_ECAP_ECCTL0, ((HW_RD_REG32(baseAddr + CSL_ECAP_ECCTL0) & ~CSL_ECAP_ECCTL0_QUALPRD_MASK) |
+                                             ((uint32_t)width << CSL_ECAP_ECCTL0_QUALPRD_SHIFT)));
+}
 #define ICU_STOP_SEC_CODE
 #include "Icu_MemMap.h"

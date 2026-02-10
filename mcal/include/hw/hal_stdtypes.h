@@ -55,14 +55,6 @@
     #define NULL ((void *) 0U)
 #endif
 
-/*****************************************************************************/
-/* Define:       NULL_PTR                                                    */
-/* Description:  Void pointer to 0                                           */
-/*****************************************************************************/
-#ifndef NULL_PTR
-    #define NULL_PTR ((void *)0x0)
-#endif
-
 /** @def TRUE
 *   @brief definition for TRUE
 */

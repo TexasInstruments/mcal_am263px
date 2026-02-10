@@ -70,7 +70,6 @@
 /* ========================================================================== */
 
 #include "Fls_Ospi_Phy.h"
-#include "CacheP.h"
 #include "EcuM_Cbk.h"
 
 #define FLS_START_SEC_VAR_INIT_UNSPECIFIED

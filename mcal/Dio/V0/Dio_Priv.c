@@ -171,12 +171,14 @@ uint32 Dio_GpioPortWrite(const gpioPORT_t *port, uint32 setBits)
     uint32 regWrFailStatus = 0U;
     /*Writing the port value */
     regWrFailStatus |= regWriteReadback(&port->DOUT, M_THIRTY_ONE, M_ZERO, setBits);
+    /* TI_COVERAGE_GAP_START Hardware register write failure cannot be recreated in test environment */
     if (regWrFailStatus != MCAL_REGWR_E_OK)
     {
 #ifdef DIO_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)DIO_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return (regWrFailStatus);
 }

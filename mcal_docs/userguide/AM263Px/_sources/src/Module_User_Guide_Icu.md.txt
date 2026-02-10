@@ -1,0 +1,756 @@
+## ICU Module
+
+### Acronyms and Definitions
+
+|Abbreviation/Term|Explanation|
+|------|------|
+|AUTOSAR|Automotive Open System Architecture|
+|BSW|Basic Software|
+|MCAL|Micro Controller Abstraction Layer|
+|API|Application Programming Interface|
+|DET|Default Error Tracer|
+|ICU |Input Capture Unit|
+|ECAP|Enhanced Capture|
+|MCU|Micro Controller Unit|
+
+### Introduction
+
+This document describes the functionality, API and configuration of the AUTOSAR BSW module Icu.
+
+| | |
+|---------------|--------------------|
+|**Supported AUTOSAR Release**|4.3.1|
+|**Supported Configuration Variants** |Pre-Compile & Post-Build|
+|**Vendor ID**|ICU_VENDOR_ID (44)|
+|**Module ID**|ICU_MODULE_ID (122)|
+| **Supported Platform**             |   AM263Px|
+
+### Functional Overview
+
+The ICU module initializes, configures and controls the internal hardware to realize ICU driver as detailed in AUTOSAR BSW ICU Driver Specification. The ICU functionality is realized through the ECAP IP available on the device. Following section highlights key aspects of this implementation, which would be of interest to an integrator.
+
+#### Functional Description
+
+The ICU driver uses ECAP module to capture events.
+In AM263Px we have a total of 10 instances of ICU. The ICU driver provides the following features:
+
+1. Signal Measurements - High time, Low time, Period time, Duty cycle
+
+2. Edge Detection - Provide notification for each edge detected
+
+3. Edge Counting - Measure edge counts
+
+4. Edge Timestamping - Measure the absolute time when edges occur
+
+ **Clock Source to timers**: Programming of clock source for the ICU module, is beyond the scope of this document. The driver expects that the user of this module has programmed required clock source. The example application demonstrates configuring clock sources for ECAP
+ module
+
+### Hardware Features
+
+#### AUTOSAR Supported Features
+
+* Signal edge notification
+* Periodic signal time measurement
+* Edge time stamping
+* Edge counting
+
+#### Not supported Features
+
+Wakeup functionality is not supported because of the limitation of the hardware.
+
+### Source files
+
+Description of static files is provided below:
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**Icu**\
+ ┃ ┃ ┣ 📂**include**\
+ ┃ ┃ ┃ ┣ 📜**Icu.h** : *Contains the API’s of the ICU driver to be used by upper layers*\
+ ┃ ┃ ┃ ┗ 📜**Icu_Irq.h** : *Contains ISR function declaration*\
+ ┃ ┃ ┣ 📂**src**\
+ ┃ ┃ ┃ ┣ 📜**Icu.c** : *Contains the implementation of the API’s for ICU driver*\
+ ┃ ┃ ┃ ┗ 📜**Icu_Irq.c** : *Contains ISR function definitions*\
+ ┃ ┃ ┣ 📂**V0**\
+ ┃ ┃ ┃ ┣ 📜**ecap.h** : *Contains Internal functions declaration of ICU driver*\
+ ┃ ┃ ┃ ┣ 📜**ecap.c** : *Contains Internal Functions definitions*\
+ ┃ ┃ ┃ ┣ 📜**hw_icu.h** : *Contains Internal functions declaration of ICU driver*\
+ ┃ ┃ ┃ ┣ 📜**Icu_Priv.c** : *Contains Internal Functions definitions*\
+ ┃ ┃ ┃ ┗ 📜**Icu_Priv.h** : *Contains Internal Functions declaration*\
+ ┃ ┃ ┗ 📜Makefile\
+ ┣ 📂mcal_config\
+ ┣ 📂mcal_docs\
+ ┗ 📜README.txt
+
+Description of generated files is provided below:
+
+|Plugin Files |Description|
+|-------|------|
+|Icu_Cfg.h|Contains static configuration of this module|
+|Icu_PBcfg.c|Contain the generated configuration for post-build variant|
+|Icu_Cfg.c|Contain the generated configuration for pre-compile variant|
+
+### Module requirements
+
+**Will be updated in future release:**
+
+#### Memory Mapping
+
+|Memory Mapping Sections|ICU_CODE|ICU_VAR_INIT|ICU_VAR_NOINIT|ICU_CONST|ICU_CONFIG|
+|-----|-----|-----|-----|-----|----|
+| ICU_START_SEC_VAR_INIT_UNSPECIFIED (.data)| |x| | | |
+| ICU_DATA_INIT_32_SECTION| |x| | | |
+| ICU_TEXT_SECTION|x| | | | |
+| ICU_DATA_NO_INIT_UNSPECIFIED_SECTION| | |x| | |
+| ICU_CONST_32_SECTION| | | |x| |
+| ICU_ISR_TEXT_SECTION|x| || | |
+| ICU_CONFIG_SECTION| | | | |x|
+
+#### Cache
+
+This driver implementation has been validated with cache enabled. For optimal performance it’s recommended to place memmap sections in cache enabled memory area.
+
+#### Scheduling
+
+There is no scheduling functions in Icu.
+
+#### Error handling
+
+##### Development Error Reporting
+
+Development errors are reported to the DET using the service Det_ReportError().
+
+#### Error codes
+
+##### Development Errors
+
+The errors reported to DET module are described in the following table:
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-----|-------|
+|API is called with invalid pointer|ICU_E_PARAM_POINTER|0x0A|
+|API service used with an invalid channel identifier or channel was not configured for the functionality of the called API|ICU_E_PARAM_CHANNEL|0x0B|
+|API service used with an invalid or not feasible activation|ICU_E_PARAM_ACTIVATION|0x0C|
+|Init Function Failed|ICU_E_INIT_FAILED|0x0D|
+|API service used with an invalid buffer size|ICU_E_PARAM_BUFFER_SIZE|0x0E|
+|API service Icu_SetMode used with an invalid mode|ICU_E_PARAM_MODE|0x0F|
+|API service used without module initialization|ICU_E_UNINIT|0x14|
+|API service Icu_SetMode is called while in running operation|ICU_E_BUSY_OPERATION|0x16|
+|API Icu_Init service is called and when the ICU driver and the Hardware are already initialized|ICU_E_ALREADY_INITIALIZED|0x17|
+|API Icu_StartTimeStamp is called and the parameter NotifyInterval is Invalid|ICU_E_PARAM_NOTIFY_INTERVAL |0x18|
+|API Icu_GetVersionInfo is called and the parameter versioninfo is invalid|ICU_E_PARAM_VINFO |0x19|
+
+##### Runtime Errors
+
+|Type of Error|Related Error code|Value (Hex)|
+|----|-----|-------|
+|API service Icu_StopTimestamp called on a channel which was not started or already stopped|ICU_E_NOT_STARTED|0x15|
+
+### Used resources
+
+#### Interrupt Handling
+
+##### Interrupt Configuration
+
+The Driver doesn't register any interrupts handler (ISR), it’s expected that consumer of this driver registers the required interrupt handler.
+
+For every Icu channel with notification enabled, an ISR requires to be registered. The Interrupt number associated with instance of the ECAP is detailed in TRM (also, please refer the demo application). Please refer IcuApp() in Icu demo application.
+
+Some of the ICU interrupts are not routed/mapped to this core, these interrupts would require additional programming to route these to this core. Please refer IcuApp() in Icu demo application.
+
+##### X-Bar Configuration
+
+In AM263Px, we have X-Bar support which basically act as a mux and will be used to transmit output signal like of EPWM/GPIO to ECAP(ICU) input.
+Following steps need to be followed in order to configure Input X-Bar:
+
+1.Input X-Bar for ICU is configured in MCU configuration.
+
+2.In MCU configuration, *McuInputXbarChannelTriggerConfiguration* container is used to configure different X-Bar with different GPIO.
+
+```{figure} Assets/images/icu/icu_image_1.png
+:alt: Input X-Bar is configured for GPIO61 which will be used by ICU
+:align: center
+
+Input X-Bar is configured for GPIO61 which will be used by ICU
+```
+
+3.Now in order to select a particular ECAP instance against that X-Bar which we have configured in MCU, their is a reference to the X-Bar in ICU.
+
+4.*XbarSelect* parameter in ICU is the reference of the X-Bar which is configured in MCU.
+
+```{figure} Assets/images/icu/icu_image_2.png
+:alt: In ICU Input X-Bar is referenced from MCU configuration
+:align: center
+
+In ICU Input X-Bar is referenced from MCU configuration
+```
+
+5.NOTE: When a new X-Bar is configured in MCU then exactly same mapping to be selected for the reference *XbarSelect* parameter in ICU.
+
+We have a support of Interrupt XBar which act as a mux for interrupts of the peripherals.So in order to provide flexibility to the user since their use cases will be different and our SOC has so many peripherals and a large amount of events like interrupts etc, interrupt XBar is used.
+Following steps need to be followed in order to configure Interrupt X-Bar:
+
+1. Interrupt X-Bar for ICU is configured in MCU configuration.
+
+2. In MCU configuration, `McuXbarChannelTriggerConfiguration` container is used to configure different X-Bar Interrupt with different peripheral.
+
+3. Now interrupt registration for the particular X-Bar interrupt, need to be done at the application side of the peripheral.
+
+4. For example: For ICU, X-Bar Interrupt number 22 is configured in MCU and with the same Interrupt is registered in ICU application.
+
+### Integration description
+
+#### Dependent modules
+
+##### DET
+
+This implementation depends on the DET in order to report development errors. The detection of development errors is configurable (ON / OFF).
+
+##### SchM
+
+If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that ICU module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.
+
+The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator.
+
+For ICU Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:
+
+| Exclusive Area Functions used | ICU Function calling Exclusive Area | Need for Exclusive Area | Recommended Exclusive Area Mapping |
+|-------|-------|-------|-------|
+|ICU_EXCLUSIVE_AREA_0 | Icu_DisableNotification<br>Icu_EnableNotification<br>Icu_SetActivationCondition<br>Icu_GetInputState<br>Icu_EnableEdgeDetection<br>Icu_DisableEdgeDetection<br>Icu_StartTimestamp<br>Icu_StopTimestamp<br>Icu_GetTimestampIndex<br>Icu_ResetEdgeCount<br>Icu_EnableEdgeCount<br>Icu_DisableEdgeCount<br>Icu_GetEdgeNumbers<br>Icu_StartSignalMeasurement<br>Icu_StopSignalMeasurement<br>Icu_GetTimeElapsed<br>Icu_GetDutyCycleValues | To protect against multiple access for shared resources|**ALL_INTERRUPT_BLOCKING** : All interrupts should be blocked as this API's can be called in the interrupts |
+
+#### Multi-core support
+
+Not Supported
+
+### Configuration
+
+
+
+#### IcuConfigSet
+This container contains the configuration parameters and sub containers of the AUTOSAR Icu module.
+
+##### IcuChannel
+Configuration of an individual ICU channel.
+
+###### IcuChannelId
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuChannelId |
+| **Description** | Channel Id of the ICU channel. This value will be assigned to the symbolic name derived of the IcuChannel container short name. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Max-value** | 16 |
+| **Min-value** | 0 |
+
+###### IcuDefaultStartEdge
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuDefaultStartEdge |
+| **Description** | Configures the capture event to  enable interupt on that capture event or not |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Range** | ECAP_CEVT1_INT<br>ECAP_CEVT2_INT<br>ECAP_CEVT3_INT<br>ECAP_CEVT4_INT<br>ECAP_CEVT1_CEVT2_INT<br>ECAP_CEVT1_CEVT3_INT<br>ECAP_CEVT1_CEVT4_INT<br>ECAP_CEVT2_CEVT3_INT<br>ECAP_CEVT2_CEVT4_INT<br>ECAP_CEVT3_CEVT4_INT<br>ECAP_CEVT1_CEVT2_CEVT3_INT<br>ECAP_CEVT1_CEVT2_CEVT4_INT<br>ECAP_CEVT1_CEVT3_CEVT4_INT<br>ECAP_CEVT2_CEVT3_CEVT4_INT<br>ECAP_INT_ALLCAPS |
+
+###### IcuMeasurementMode
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuMeasurementMode |
+| **Description** | Configures the measurement mode of this channel. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Range** | ICU_MODE_EDGE_COUNTER<br>ICU_MODE_SIGNAL_EDGE_DETECT<br>ICU_MODE_SIGNAL_MEASUREMENT<br>ICU_MODE_TIMESTAMP |
+
+###### IcuPrescaler
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuPrescaler |
+| **Description** | Time-Base Clock Prescale Bits. Keep value as 0 to by-pass prescaler. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 62 |
+| **Min-value** | 0 |
+
+###### IcuFunctionalClock
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuFunctionalClock |
+| **Description** | Value of the System clock frequency in MHz Default frequency is 125MHz for ICU. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 200 |
+
+###### IcuXbarSelect
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuXbarSelect |
+| **Description** | Configures the input select xbar to be used in order to give icu the required input |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### IcuSignalEdgeDetection
+This container contains the configuration (parameters) in case the measurement mode is "IcuSignalEdgeDetection"
+
+###### IcuSignalNotification
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuSignalNotification |
+| **Description** | Notification function for signal notification. |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | true |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### IcuSignalMeasurement
+This container contains the configuration (parameters) in case the measurement mode is "IcuSignalMeasurement"
+
+###### IcuSignalMeasurementProperty
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuSignalMeasurementProperty |
+| **Description** | Configures the property that could be measured in case the mode is "IcuSignalMeasurement". |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Range** | ICU_DUTY_CYCLE<br>ICU_HIGH_TIME<br>ICU_LOW_TIME<br>ICU_PERIOD_TIME |
+
+##### IcuTimestampMeasurement
+This container contains the configuration (parameters) in case the measurement mode is "IcuTimestamp"
+
+###### IcuTimestampMeasurementProperty
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuTimestampMeasurementProperty |
+| **Description** | Configures the handling of the buffer in case the mode is "Timestamp" |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Range** | ICU_CIRCULAR_BUFFER<br>ICU_LINEAR_BUFFER |
+
+###### IcuTimestampNotification
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuTimestampNotification |
+| **Description** | Notification function if the number of requested timestamps |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | true |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+##### IcuWakeup
+This container contains the configuration (parameters) needed to configure a wakeup capable channel
+
+###### IcuChannelWakeupInfo
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuChannelWakeupInfo |
+| **Description** | If the wakeup-capability is true the wakeup source referenced  is transmitted to the ECU State Manager (EcuM) . |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-build-variant-multiplicity** | true |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+#### IcuGeneral
+Configuration of general ICU parameters.
+
+##### IcuDevErrorDetect
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuDevErrorDetect |
+| **Description** | Switches the development error detection and notification on or off. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuIrqType
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuIrqType |
+| **Description** | Type of Isr function:<br>                          void functionname(void)<br>                          CAT1  see description in oil tool : interrupt void func(void)<br>                          CAT2  see description in oil tool : ISR(func) |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | ICU_ISR_CAT1 |
+| **Range** | ICU_ISR_VOID<br>ICU_ISR_CAT1<br>ICU_ISR_CAT2 |
+
+##### IcuDeviceVariant
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuDeviceVariant |
+| **Description** | Select SOC variant  |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | AM263Px |
+| **Range** | AM263Px |
+
+#### IcuOptionalApis
+This container contains all configuration switches for configuring optional API services of the ICU driver.
+
+##### IcuDeInitApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuDeInitApi |
+| **Description** | Adds / removes the service Icu_DeInit() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuDisableWakeupApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuDisableWakeupApi |
+| **Description** | Adds / removes the service Icu_DisableWakeup() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuEdgeCountApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuEdgeCountApi |
+| **Description** | Adds / removes all services related to the edge counting functionality as listed below, from the code: Icu_ResetEdgeCount(), Icu_EnableEdgeCount(), Icu_DisableEdgeCount(), Icu_GetEdgeNumbers(). |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuEdgeDetectApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuEdgeDetectApi |
+| **Description** | Adds / removes the services related to the edge detection functionality, from the code: |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuEnableWakeupApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuEnableWakeupApi |
+| **Description** | Adds / removes the service Icu_EnableWakeup() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuGetDutyCycleValuesApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuGetDutyCycleValuesApi |
+| **Description** | Adds / removes the service Icu_GetDutyCycleValues() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuGetInputStateApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuGetInputStateApi |
+| **Description** | Adds / removes the service Icu_GetInputState() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuGetTimeElapsedApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuGetTimeElapsedApi |
+| **Description** | Adds / removes the service Icu_GetTimeElapsed() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuGetVersionInfoApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuGetVersionInfoApi |
+| **Description** | Adds / removes the service Icu_GetVersionInfo() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuSetModeApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuSetModeApi |
+| **Description** | Adds / removes the service Icu_SetMode() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuSignalMeasurementApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuSignalMeasurementApi |
+| **Description** | Adds / removes the services Icu_StartSignalMeasurement() and Icu_StopSignalMeasurement() from the code. |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+##### IcuTimestampApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuTimestampApi |
+| **Description** | Adds / removes all services related to the timestamping functionality as listed below from the code: Icu_StartTimestamp(), Icu_StopTimestamp(), Icu_GetTimestampIndex(). |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+By default Signal measurement mode is selected but if user want to change it to some other mode so in that case following operation they need to perform:
+
+1. Change the configuration from the EB tresos tool.
+
+2. So in case of icu, timestamp mode and edge detection mode also involve interupt callback to be registered. So by default we have given callback name in our application, with that name you can configure callback also in EB tresos.
+
+3. For Edge detection mode callback name is: Icu_SignalNotification_Channel1.<br>
+   For Timestamp mode callback name is : Icu_TimeStampNotification_Channel1
+
+4. Except this rest of the parameters can be configured as provided in EB plugin.
+
+**IsrCallback:**
+
+|Mode |CallBack|
+|-----|--------|
+|**Signal Measurement Mode**|NA|
+|**Edge Detection Mode**|Icu_SignalNotification_Channel1|
+|**TimeStamp Mode**|Icu_TimeStampNotification_Channel1|
+|**Edge Count Mode**|NA|
+
+The following section details on the un-supported features and additional features added.
+
+#### Variance / Deviation from the specification
+
+APIs (listed below) related to **wakeup capability** are not supported
+as the hardware does not support.
+
+* Controlling Wakeup interrupts
+* Icu_SetMode()
+* Icu_DisableWakeup()
+* Icu_EnableWakeup()
+* Icu_CheckWakeup()
+
+### Examples
+
+#### Overview
+
+* Icu Example
+  * Initialize clock using Mcu_Init()
+  * Initialize port using Port_Init()
+  * Configure Icu interrupt using Icu_InterruptConfig()
+  * Initialize Pwm using Pwm_Init()
+  * Get Icu Version using Icu_GetVersionInfo()
+  * Initialize Icu using Icu_Init()
+  * For Signal measurement
+    * Start the measurement of signals using Icu_StartSignalMeasurement()
+    * Stop the measurement of signals using Icu_StopSignalMeasurement()
+    * Read the elapsed Signal Low Time for the given channel using Icu_GetTimeElapsed()
+    * Read the active time and period time for the ICU Channel and calculate duty cycle.
+
+#### Setup required to run example
+
+None
+
+#### How to run examples
+
+##### Build and Running the Example Application
+
+Please follow steps detailed in section to build library or example.
+
+ECAP based application name - icu_app
+
+This application uses the PWM (Enhanced Pulse Width Module) to provide input to ECAP instance. The ECAP module (with ICU driver) will capture the signals provided as input.
+
+There is one example application provided: icu_app. Please refer to below directory structures.
+
+* Config files for icu_app are located along with other applications configs at / mcal_sitara_mcu/mcal/examples/config/Icu_Cfg and Icu_PBcfg can also be found as this location.
+
+* IcuApp.c and IcuApp.h: Shall implement the start-up code sequence and register interrupts and also shall implement the example application that demonstrates the use of the driver.
+
+##### Flow of the example application
+
+In the IcuApp.c , following steps are there:
+
+1. Firstly the pin mux is initialize
+
+2. UART is enabled.
+
+3. After that EPWM is enabled , since the output of EPWM is used as an input to our ICU.
+
+4. After that the ICU is initialize
+
+5. So by default we have configured ICU in signal measurement mode, but if the user want to change then they need to change the configuration accordingly.
+
+6. By default we are using EPWM0 for our input to ICU.
+
+7. And we are taking ECAP0( ICU 0\ :sup:`TH` instance ) for the demonstration of our example.
+
+8. So now when we execute our example with default configuration we will be getting active time, period time and duty cycle as part of the signal measurement.
+
+#### Sample Log
+
+```{code-block}
+
+
+IcuApp: Sample Application - STARTS !!!
+  
+ICU_APP: ICU MCAL Version Info
+---------------------
+ICU_APP: Vendor ID: 44
+ICU_APP: Module ID: 122
+ICU_APP: SW Major Version: 10
+ICU_APP: SW Minor Version: 0
+ICU_APP: SW Patch Version: 0
+ 
+ICU_APP: Variant - Post Build being used !!!
+ 
+ICU_APP: Signal Measurement Mode! 
+ICU_APP: elapsed time (Period) is  998 us
+ICU_APP: Active Time is 499 
+ICU_APP: Period Time is 998 
+ICU_APP: Duty Cycle is 0.500000
+ICU_APP: elapsed time read is  0 us
+ICU_APP: elapsed time (Period) is  998 us
+ICU_APP: Active Time is 499 
+ICU_APP: Period Time is 998 
+ICU_APP: Duty Cycle is 0.500000
+All tests have passed
+
+
+```
+
+#### File Structure
+
+
+📦AM263Px\
+ ┣ 📂build\
+ ┣ 📂mcal\
+ ┃ ┣ 📂**examples**\
+ ┃ ┃ ┣ 📂**Icu**\
+ ┃ ┃ ┃ ┣ 📂**soc**\
+ ┃ ┃ ┃ ┣ 📜**IcuApp.c** : *Contains Icu test example*\
+ ┃ ┃ ┃ ┣ 📜**IcuApp.h** : *Contains Icu test example header file*\
+ ┃ ┃ ┃ ┗ 📜Makefile\
+ ┃ ┣ 📂**examples_config**\
+ ┃ ┃ ┣ 📂**Icu_Demo_Cfg**\
+ ┃ ┃ ┃ ┗ 📂**soc**\
+ ┃ ┃ ┃ ┃ ┣ 📂**am263px**\
+ ┃ ┃ ┃ ┃ ┃ ┗ 📂**r5f0_0**\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂include\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗📜**Icu_Cfg.h** : *Contains the configuration parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📂src\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┣📜**Icu_Cfg.c** : *Contains all Pre-Compile Configured parameters*\
+ ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜**Icu_PBcfg.c** : *contains all Post build configured parameters*\
+ ┃ 📂mcal_config\
+ ┃ 📂mcal_docs\
+ ┗ 📜README.txt
+
+### References
+
+[AUTOSAR_SWS_ICUDriver]( <https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_ICUDriver.pdf>)\
+[Technical Reference Manual](<https://www.ti.com/lit/ug/spruj17c/spruj17c.pdf?ts=1687237550088&ref_url=https%253A%25>)

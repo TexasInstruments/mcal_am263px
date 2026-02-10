@@ -1,0 +1,2030 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5.9. CDD_PWM &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="5.10. DIO" href="group___d_i_o.html" />
+    <link rel="prev" title="5.8. CDD_IPC" href="group___c_d_d___i_p_c.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.02.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">5.8. CDD_IPC</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.9. CDD_PWM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.9.1. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.9.2. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-init">5.9.2.1. function Cdd_Pwm_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-deinit">5.9.2.2. function Cdd_Pwm_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-startchannelcounter">5.9.2.3. function Cdd_Pwm_StartChannelCounter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-stopchannelcounter">5.9.2.4. function Cdd_Pwm_StopChannelCounter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setpinaction">5.9.2.5. function Cdd_Pwm_SetPinAction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-getcounter">5.9.2.6. function Cdd_Pwm_GetCounter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setrelativethreshold">5.9.2.7. function Cdd_Pwm_SetRelativeThreshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-disablenotification">5.9.2.8. function Cdd_Pwm_DisableNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-enablenotification">5.9.2.9. function Cdd_Pwm_EnableNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-getversioninfo">5.9.2.10. function Cdd_Pwm_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-registerreadback">5.9.2.11. function Cdd_Pwm_RegisterReadback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setperioddutyphase">5.9.2.12. function Cdd_Pwm_SetPeriodDutyPhase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setoutputtoidle">5.9.2.13. function Cdd_Pwm_SetOutputToIdle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-syncenable">5.9.2.14. function Cdd_Pwm_SyncEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-syncdisable">5.9.2.15. function Cdd_Pwm_SyncDisable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-getcounterstatus">5.9.2.16. function Cdd_Pwm_GetCounterStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-clearcounterstatus">5.9.2.17. function Cdd_Pwm_ClearCounterStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-countercomparatorcfg">5.9.2.18. function Cdd_Pwm_CounterComparatorCfg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-deadbandcfg">5.9.2.19. function Cdd_Pwm_DeadbandCfg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-deadbandbypass">5.9.2.20. function Cdd_Pwm_DeadbandBypass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-choppercfg">5.9.2.21. function Cdd_Pwm_ChopperCfg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-chopperenable">5.9.2.22. function Cdd_Pwm_ChopperEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-settimebasecountermode">5.9.2.23. function Cdd_Pwm_SetTimeBaseCounterMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setphaseshift">5.9.2.24. function Cdd_Pwm_SetPhaseShift</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-settimebaseperiod">5.9.2.25. function Cdd_Pwm_SetTimeBasePeriod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setcountercomparevalue">5.9.2.26. function Cdd_Pwm_SetCounterCompareValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setrisingedgedelay">5.9.2.27. function Cdd_Pwm_SetRisingEdgeDelay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setfallingedgedelay">5.9.2.28. function Cdd_Pwm_SetFallingEdgeDelay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setmindeadbanddelay">5.9.2.29. function Cdd_Pwm_SetMinDeadbandDelay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setxcmpregvalue">5.9.2.30. function Cdd_Pwm_SetXcmpRegValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setxminmaxregvalue">5.9.2.31. function Cdd_Pwm_SetXMinMaxRegValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setcmpshadowregvalue">5.9.2.32. function Cdd_Pwm_SetCmpShadowRegValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-tztripeventenable">5.9.2.33. function Cdd_Pwm_TzTripEventEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-tztripeventdisable">5.9.2.34. function Cdd_Pwm_TzTripEventDisable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-tzintrenable">5.9.2.35. function Cdd_Pwm_TzIntrEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-tzintrdisable">5.9.2.36. function Cdd_Pwm_TzIntrDisable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-tzgeteventstatus">5.9.2.37. function Cdd_Pwm_TzGetEventStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-tzeventstatusclear">5.9.2.38. function Cdd_Pwm_TzEventStatusClear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-tztriggerswevent">5.9.2.39. function Cdd_Pwm_TzTriggerSwEvent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-etintrstatus">5.9.2.40. function Cdd_Pwm_EtIntrStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-etintrclear">5.9.2.41. function Cdd_Pwm_EtIntrClear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-etintrtrigger">5.9.2.42. function Cdd_Pwm_EtIntrTrigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-etgeteventcount">5.9.2.43. function Cdd_Pwm_EtGetEventCount</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-setadctrigger">5.9.2.44. function Cdd_Pwm_SetAdcTrigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsetperioddutyphase">5.9.2.45. function Cdd_Pwm_HrSetPeriodDutyPhase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsfocalibration">5.9.2.46. function Cdd_Pwm_HrSfoCalibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsfostatus">5.9.2.47. function Cdd_Pwm_HrSfoStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsetphaseshift">5.9.2.48. function Cdd_Pwm_HrSetPhaseShift</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsettimebaseperiod">5.9.2.49. function Cdd_Pwm_HrSetTimeBasePeriod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsetcountercomparevalue">5.9.2.50. function Cdd_Pwm_HrSetCounterCompareValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsetrisingedgedelay">5.9.2.51. function Cdd_Pwm_HrSetRisingEdgeDelay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsetfallingedgedelay">5.9.2.52. function Cdd_Pwm_HrSetFallingEdgeDelay</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-pwm-hrsetxcmpregvalue">5.9.2.53. function Cdd_Pwm_HrSetXcmpRegValue</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">5.9. </span>CDD_PWM</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cdd-pwm">
+<h1><span class="section-number">5.9. </span>CDD_PWM<a class="headerlink" href="#cdd-pwm" title="Link to this heading"></a></h1>
+<section id="defines">
+<h2><span class="section-number">5.9.1. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_PWM_SW_MAJOR_VERSION</p></td>
+<td><p>Driver Implementation Major Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SW_MINOR_VERSION</p></td>
+<td><p>Driver Implementation Minor Version.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SW_PATCH_VERSION</p></td>
+<td><p>Driver Implementation Patch Version.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_AR_RELEASE_MAJOR_VERSION</p></td>
+<td><p>AUTOSAR Major version specification implemented by CDD_PWM Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_AR_RELEASE_MINOR_VERSION</p></td>
+<td><p>AUTOSAR Minor version specification implemented by CDD_PWM Driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_AR_RELEASE_REVISION_VERSION</p></td>
+<td><p>AUTOSAR Patch version specification implemented by CDD_PWM Driver.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_VENDOR_ID</p></td>
+<td><p>Texas Instruments Vendor ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_MODULE_ID</p></td>
+<td><p>CDD_PWM Driver Module ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_INSTANCE_ID</p></td>
+<td><p>CDD_PWM Driver Instance ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_E_UNINIT</p></td>
+<td><p>API service used without module initialization.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_E_INIT_FAILED</p></td>
+<td><p>API Cdd_Pwm_Init service called with wrong parameter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_E_PARAM_INVALID_CHANNEL</p></td>
+<td><p>API service used with an invalid channel Identifier.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_E_PARAM_INVALID_STATE</p></td>
+<td><p>API Cdd_Pwm_SetPinState() called with an invalid pin state or when the channel is in the RUNNING state..</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_E_PARAM_INVALID_ACTION</p></td>
+<td><p>API Cdd_Pwm_SetPinAction() called with an invalid pin action.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_E_NO_VALID_NOTIF</p></td>
+<td><p>Usage of Cdd_Pwm_DisableNotification() or Cdd_Pwm_EnableNotification() on a channel where a NULL pointer is configured as the notification function.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_E_ALREADY_INITIALIZED</p></td>
+<td><p>API Cdd_Pwm_Init() called while the CDD_PWM driver has already been initialized.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_E_PARAM_POINTER</p></td>
+<td><p>API Cdd_Pwm_GetVersionInfo() is called with a NULL parameter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_E_BUSY</p></td>
+<td><p>API Cdd_Pwm_StartChannel() called on a channel that is in state RUNNING.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_E_PARAM_NO_PIN</p></td>
+<td><p>Cdd_Pwm_SetPinState() or Cdd_Pwm_SetPinAction() called for a channel that doesn’t have an associated output pin.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_E_PARAM_INVALID_VALUE</p></td>
+<td><p>Cdd_Pwm_SetAbsoluteThreshold() or Cdd_Pwm_SetRelativeThreshold() called for with a compare match parameter greater than maximum supported counter value for a given channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_E_PARAM_CHANNEL</p></td>
+<td><p>Invalid Channel parameter</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_INIT</p></td>
+<td><p>CDD_PWM driver service ID for Initialization API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_DEINIT</p></td>
+<td><p>CDD_PWM driver service ID for De-Initialization API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_STARTCHANNEL</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_StartChannel API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_STOPCHANNEL</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_StopChannel API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_GETCOUNTER_STATUS</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_SetPinState API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_PIN_ACTION</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_SetPinAction API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_GETCOUNTER</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_GetCounter API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_ABSOLUTE_THRESHOLD</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_SetAbsoluteThreshold API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SET_RELATIVE_THRESHOLD</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_SetRelativeThreshold API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_DISABLE_NOTIFICATION</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_DisableNotification API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_ENABLE_NOTIFICATION</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_EnableNotification API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_GET_VERSION_INFO</p></td>
+<td><p>CDD_PWM driver service ID for Cdd_Pwm_GetVersionInfo API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_REGISTER_READBACK</p></td>
+<td><p>CDD_PWM driver service ID for Critical register read back API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_PERIOD_AND_DUTY</p></td>
+<td><p>CDD_PWM driver service ID for set duty cycle and period API.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SET_OUTPUT_TO_IDLE</p></td>
+<td><p>CDD_PWM driver service ID for get output state API.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_CONFIGURE_DEADBAND</p></td>
+<td><p>CDD_PWM driver service ID for configuration of DeadBand module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_BYPASS_DEADBAND</p></td>
+<td><p>CDD_PWM driver service ID to bypass DeadBand module.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_CONFIGURE_CHOPPER</p></td>
+<td><p>CDD_PWM driver service ID for configuration of Chopper module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_ENABLE_CHOPPER</p></td>
+<td><p>CDD_PWM driver service ID to enable Chopper module.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_CLEAR_COUNTER_STATUS</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_ClearCounterStatus.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_INTR_STATUS</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_EtIntrStatus.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_INTR_CLEAR_STATUS</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_EtIntrClear.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_GET_EVENT_COUNT</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_EtGetEventCount.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_ADC_TRIGGER</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_SetAdcTrigger.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SYNC_ENABLE</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_SyncEnable.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SYNC_DISABLE</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_SyncDisable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_COUNTER_CMP_CFG</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_CounterComparatorCfg.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_TZ_EVENT_ENABLE</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_TzTripEventEnable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_TZ_EVENT_DISABLE</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_TzTripEventDisable.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_TZ_INTR_ENABLE</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_TzIntrEnable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_TZ_INTR_DISABLE</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_TzIntrDisable.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_TZ_GET_EVENT_STATUS</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_TzGetEventStatus.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_TZ_EVENT_STATUS_CLEAR</p></td>
+<td><p>CDD_PWM driver service ID to Cdd_Pwm_TzEventStatusClear.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_HR_SET_HRPWM_API</p></td>
+<td><p>CDD_PWM driver service ID to enable HRPWM module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_HR_SFO_CAL_API</p></td>
+<td><p>CDD_PWM driver service ID to enable HRPWM SFO calibration.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_HR_SFO_STATUS_API</p></td>
+<td><p>CDD_PWM driver service ID to check HRPWM SFO Cal. Status.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE</p></td>
+<td><p>CDD_PWM driver service ID to set Time base counter mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_PHASE_SHIFT</p></td>
+<td><p>CDD_PWM driver service ID to set the phase shift in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SET_TIMEBASE_PERIOD</p></td>
+<td><p>CDD_PWM driver service ID to set the period in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_COUNTER_COMPARE_VALUE</p></td>
+<td><p>CDD_PWM driver service ID to set the Counter Compare value in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SET_RISING_EDGE_DELAY_COUNT</p></td>
+<td><p>CDD_PWM driver service ID to set the rising edge delay in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT</p></td>
+<td><p>CDD_PWM driver service ID to set the falling edge delay in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_HR_SET_PHASE_SHIFT</p></td>
+<td><p>CDD_PWM driver service ID to set the HRPWM phase shift in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD</p></td>
+<td><p>CDD_PWM driver service ID to set the HRPWM period in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE</p></td>
+<td><p>CDD_PWM driver service ID to set the HRPWM Counter Compare value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT</p></td>
+<td><p>CDD_PWM driver service ID to set the HRPWM rising edge delay in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_HR_SET_FALLING_EDGE_DELAY_COUNT</p></td>
+<td><p>CDD_PWM driver service ID to set the HRPWM falling edge delay in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_MIN_DEADBAND_DELAY</p></td>
+<td><p>CDD_PWM driver service ID to set the minimum deadband delay value in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SET_XCMP_REG_VALUE</p></td>
+<td><p>CDD_PWM driver service ID to set theXCMP reg value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_HR_SET_XCMP_REG_VALUE</p></td>
+<td><p>CDD_PWM driver service ID to set the HRPWM XCMP reg value in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_SID_SET_XMINMAP_REG_VALUE</p></td>
+<td><p>CDD_PWM driver service ID to set the Xminmax reg value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_SID_SET_CMP_SHADOW_REG_VALUE</p></td>
+<td><p>CDD_PWM driver service ID to set the CMP shadow reg value in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_STATUS_UNINIT</p></td>
+<td><p>CDD_PWM driver Status uninitialized.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_STATUS_INIT</p></td>
+<td><p>CDD_PWM driver Status Initialized.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_STATUS_STOPPED</p></td>
+<td><p>CDD_PWM driver Status stopped.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_STATUS_RUNNING</p></td>
+<td><p>CDD_PWM driver Status running.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_ISR_VOID</p></td>
+<td><p>void ISR type</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_ISR_CAT1</p></td>
+<td><p>Category 1 ISR type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_ISR_CAT2</p></td>
+<td><p>Category 2 ISR type.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_INDEX</p></td>
+<td><p>Instance ID of this CDD_PWM driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_INVALID_BASE_ADDR</p></td>
+<td><p>InValid Base Address.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_START_SEC_VAR_INIT_8</p></td>
+<td><p>Start Memory section tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_STOP_SEC_VAR_INIT_8</p></td>
+<td><p>End Memory section tag.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_PWM_START_SEC_CODE</p></td>
+<td><p>Start Memory section tag.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_PWM_STOP_SEC_CODE</p></td>
+<td><p>End Memory section tag.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2><span class="section-number">5.9.2. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-init"><span class="std std-ref">Cdd_Pwm_Init</span></a></strong>(const Cdd_Pwm_ConfigType * ConfigPtr)</p></td>
+<td><p>Function Initializes CDD_PWM unit.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-deinit"><span class="std std-ref">Cdd_Pwm_DeInit</span></a></strong>(void )</p></td>
+<td><p>Function for PWM De-Initialization.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-startchannelcounter"><span class="std std-ref">Cdd_Pwm_StartChannelCounter</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber)</p></td>
+<td><p>Function to start a PWM channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-stopchannelcounter"><span class="std std-ref">Cdd_Pwm_StopChannelCounter</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber)</p></td>
+<td><p>Function to stop a PWM channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setpinaction"><span class="std std-ref">Cdd_Pwm_SetPinAction</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_PinActionType PinAction)</p></td>
+<td><p>Function to indicate the driver what shall be done automatically by hardware (if supported) upon compare match.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Cdd_Pwm_ValueType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-getcounter"><span class="std std-ref">Cdd_Pwm_GetCounter</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber)</p></td>
+<td><p>Function to read the current value of the counter.</p></td>
+</tr>
+<tr class="row-even"><td><p>Cdd_Pwm_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setrelativethreshold"><span class="std std-ref">Cdd_Pwm_SetRelativeThreshold</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_ValueType RelativeValue)</p></td>
+<td><p>Function to set the value of the channel threshold relative to the current value of the counter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-disablenotification"><span class="std std-ref">Cdd_Pwm_DisableNotification</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber)</p></td>
+<td><p>Function to disable the PWM signal edge notification.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-enablenotification"><span class="std std-ref">Cdd_Pwm_EnableNotification</span></a></strong>(Cdd_Pwm_ChannelType ChannelParameter, Cdd_Pwm_InterruptType EdgeInterruptSource)</p></td>
+<td><p>Function to enable the PWM signal edge notification according to notification parameter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-getversioninfo"><span class="std std-ref">Cdd_Pwm_GetVersionInfo</span></a></strong>(Std_VersionInfoType * versioninfo)</p></td>
+<td><p>Function to return the version information of this module.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-registerreadback"><span class="std std-ref">Cdd_Pwm_RegisterReadback</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_RegisterReadbackType * RegRbPtr)</p></td>
+<td><p>Function to read the important registers of the hardware unit and returns the value in the structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setperioddutyphase"><span class="std std-ref">Cdd_Pwm_SetPeriodDutyPhase</span></a></strong>(Cdd_Pwm_channelParametertype ChannelParameter)</p></td>
+<td><p>Function sets the period and the duty cycle of a PWM channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setoutputtoidle"><span class="std std-ref">Cdd_Pwm_SetOutputToIdle</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber)</p></td>
+<td><p>Function sets the PWM output to the configured Idle state.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-syncenable"><span class="std std-ref">Cdd_Pwm_SyncEnable</span></a></strong>(uint32 Channel, uint32 tbPhsValue, uint32 counterDir)</p></td>
+<td><p>Function enables the synchronization of time base sub-module and also configures the phase count value to be loaded after sync event, counter direction after sync event.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-syncdisable"><span class="std std-ref">Cdd_Pwm_SyncDisable</span></a></strong>(uint32 Channel)</p></td>
+<td><p>Function disables the synchronization. Even if sync-in event occurs the count value will not be reloaded.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint16</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-getcounterstatus"><span class="std std-ref">Cdd_Pwm_GetCounterStatus</span></a></strong>(uint32 Channel, uint32 tbStatusMask)</p></td>
+<td><p>Function gets the Time Base status as indicated by the tbStatusMask parameter.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-clearcounterstatus"><span class="std std-ref">Cdd_Pwm_ClearCounterStatus</span></a></strong>(uint32 Channel, uint32 tbStatusClrMask)</p></td>
+<td><p>Function clears the Time base status bits indicated by the tbStatusClrMask parameter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-countercomparatorcfg"><span class="std std-ref">Cdd_Pwm_CounterComparatorCfg</span></a></strong>(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)</p></td>
+<td><p>Function configures the counter comparator and loads the comparator value.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-deadbandcfg"><span class="std std-ref">Cdd_Pwm_DeadbandCfg</span></a></strong>(uint32 Channel, const CDD_PWM_DeadbandCfgType * pCfg)</p></td>
+<td><p>Function performs the configuration of the dead band sub-module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-deadbandbypass"><span class="std std-ref">Cdd_Pwm_DeadbandBypass</span></a></strong>(uint32 Channel)</p></td>
+<td><p>Function bypasses the Dead-band sub-module.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-choppercfg"><span class="std std-ref">Cdd_Pwm_ChopperCfg</span></a></strong>(uint32 Channel, const CDD_PWM_ChopperCfgType * pCfg)</p></td>
+<td><p>Performs the configuration of the chopper sub-module.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-chopperenable"><span class="std std-ref">Cdd_Pwm_ChopperEnable</span></a></strong>(uint32 Channel, uint32 enableChopper)</p></td>
+<td><p>Function controls the enabling or disabling of chopper sub-module.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-settimebasecountermode"><span class="std std-ref">Cdd_Pwm_SetTimeBaseCounterMode</span></a></strong>(uint32 Channel, EPWM_TimeBaseCountMode Mode)</p></td>
+<td><p>Function sets the mode of Time base counter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setphaseshift"><span class="std std-ref">Cdd_Pwm_SetPhaseShift</span></a></strong>(uint32 Channel, uint16 PhaseShiftValue)</p></td>
+<td><p>Function to set the Phase shift value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-settimebaseperiod"><span class="std std-ref">Cdd_Pwm_SetTimeBasePeriod</span></a></strong>(uint32 Channel, uint16 Period)</p></td>
+<td><p>Function to set the time base period in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setcountercomparevalue"><span class="std std-ref">Cdd_Pwm_SetCounterCompareValue</span></a></strong>(uint32 Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue)</p></td>
+<td><p>Function to set the Compare value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setrisingedgedelay"><span class="std std-ref">Cdd_Pwm_SetRisingEdgeDelay</span></a></strong>(uint32 Channel, uint16 RedCount)</p></td>
+<td><p>Function to set the rising edge delay in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setfallingedgedelay"><span class="std std-ref">Cdd_Pwm_SetFallingEdgeDelay</span></a></strong>(uint32 Channel, uint16 FedCount)</p></td>
+<td><p>Function to set the falling edge delay in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setmindeadbanddelay"><span class="std std-ref">Cdd_Pwm_SetMinDeadbandDelay</span></a></strong>(uint32 Channel, uint32 Block, uint32 Delay)</p></td>
+<td><p>Function to set the minimum deadband delay in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setxcmpregvalue"><span class="std std-ref">Cdd_Pwm_SetXcmpRegValue</span></a></strong>(uint32 Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue)</p></td>
+<td><p>Function to set the XCMP register value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setxminmaxregvalue"><span class="std std-ref">Cdd_Pwm_SetXMinMaxRegValue</span></a></strong>(uint32 Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue)</p></td>
+<td><p>Function to set the XMINMAX register value in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setcmpshadowregvalue"><span class="std std-ref">Cdd_Pwm_SetCmpShadowRegValue</span></a></strong>(uint32 Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue)</p></td>
+<td><p>Function to set the CMP shadow register value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-tztripeventenable"><span class="std std-ref">Cdd_Pwm_TzTripEventEnable</span></a></strong>(uint32 Channel, uint32 tzEventType)</p></td>
+<td><p>Function enables the trip event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-tztripeventdisable"><span class="std std-ref">Cdd_Pwm_TzTripEventDisable</span></a></strong>(uint32 Channel, uint32 tzEventType)</p></td>
+<td><p>Function disable the trip event. The disabled trip events will be ignored.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-tzintrenable"><span class="std std-ref">Cdd_Pwm_TzIntrEnable</span></a></strong>(uint32 Channel, uint32 tzEventType)</p></td>
+<td><p>Function enables the trip interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-tzintrdisable"><span class="std std-ref">Cdd_Pwm_TzIntrDisable</span></a></strong>(uint32 Channel, uint32 tzEventType)</p></td>
+<td><p>Function disables the trip interrupt.</p></td>
+</tr>
+<tr class="row-even"><td><p>boolean</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-tzgeteventstatus"><span class="std std-ref">Cdd_Pwm_TzGetEventStatus</span></a></strong>(uint32 Channel, uint32 eventMask)</p></td>
+<td><p>Function returns the selected trip zone event status.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-tzeventstatusclear"><span class="std std-ref">Cdd_Pwm_TzEventStatusClear</span></a></strong>(uint32 Channel, uint32 eventMask, uint32 tzFlags)</p></td>
+<td><p>Function clears the selected trip zone event status.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-tztriggerswevent"><span class="std std-ref">Cdd_Pwm_TzTriggerSwEvent</span></a></strong>(uint32 Channel, uint32 tzEventType)</p></td>
+<td><p>Function enables to generate Software forced trip condition.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint16</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-etintrstatus"><span class="std std-ref">Cdd_Pwm_EtIntrStatus</span></a></strong>(uint32 Channel)</p></td>
+<td><p>Function returns the ePWM event interrupt status.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-etintrclear"><span class="std std-ref">Cdd_Pwm_EtIntrClear</span></a></strong>(uint32 Channel)</p></td>
+<td><p>Function clears the interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-etintrtrigger"><span class="std std-ref">Cdd_Pwm_EtIntrTrigger</span></a></strong>(uint32 Channel)</p></td>
+<td><p>Function forces interrupt to be generated.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint16</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-etgeteventcount"><span class="std std-ref">Cdd_Pwm_EtGetEventCount</span></a></strong>(uint32 Channel)</p></td>
+<td><p>Function returns the number of events occurred.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-setadctrigger"><span class="std std-ref">Cdd_Pwm_SetAdcTrigger</span></a></strong>(uint32 Channel, Cdd_Pwm_AdcSocType adcSoc)</p></td>
+<td><p>Function Enables/Disables the ADC Trigger.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsetperioddutyphase"><span class="std std-ref">Cdd_Pwm_HrSetPeriodDutyPhase</span></a></strong>(Cdd_Pwm_channelParametertype ChannelParameter)</p></td>
+<td><p>Function generates High Resolution PWM Signal.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsfocalibration"><span class="std std-ref">Cdd_Pwm_HrSfoCalibration</span></a></strong>(Cdd_Pwm_channelParametertype ChannelParameter)</p></td>
+<td><p>Function calibrate the HR PWM signal.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsfostatus"><span class="std std-ref">Cdd_Pwm_HrSfoStatus</span></a></strong>(uint32 ChannelNumber)</p></td>
+<td><p>Function returns the SFO calibration status.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsetphaseshift"><span class="std std-ref">Cdd_Pwm_HrSetPhaseShift</span></a></strong>(uint32 Channel, uint32 PhaseShiftValue)</p></td>
+<td><p>Function to set the HRPWM Phase shift value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsettimebaseperiod"><span class="std std-ref">Cdd_Pwm_HrSetTimeBasePeriod</span></a></strong>(uint32 Channel, uint16 Period)</p></td>
+<td><p>Function to set the HRPWM time base period in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsetcountercomparevalue"><span class="std std-ref">Cdd_Pwm_HrSetCounterCompareValue</span></a></strong>(uint32 Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue)</p></td>
+<td><p>Function to set the HRPWM Compare value in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsetrisingedgedelay"><span class="std std-ref">Cdd_Pwm_HrSetRisingEdgeDelay</span></a></strong>(uint32 Channel, uint16 RedCount)</p></td>
+<td><p>Function to set the HRPWM rising edge delay in runtime.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsetfallingedgedelay"><span class="std std-ref">Cdd_Pwm_HrSetFallingEdgeDelay</span></a></strong>(uint32 Channel, uint16 FedCount)</p></td>
+<td><p>Function to set the HRPWM falling edge delay in runtime.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-hrsetxcmpregvalue"><span class="std std-ref">Cdd_Pwm_HrSetXcmpRegValue</span></a></strong>(uint32 Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue)</p></td>
+<td><p>Function to set the HRPWM XCMP register value in runtime.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-cdd-pwm-init">
+<h3><span class="section-number">5.9.2.1. </span>function Cdd_Pwm_Init<a class="headerlink" href="#function-cdd-pwm-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_Init</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_Pwm_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function Initializes CDD_PWM unit.</p>
+<p>Cdd_Pwm_Init shall initialize all internals variables and the used PWM structure of the microcontroller according to the parameters specified in ConfigPtr.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ConfigPtr</strong> - Pointer to driver configuration.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-deinit">
+<h3><span class="section-number">5.9.2.2. </span>function Cdd_Pwm_DeInit<a class="headerlink" href="#function-cdd-pwm-deinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_DeInit</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function for PWM De-Initialization.</p>
+<p>Cdd_Pwm_DeInit shall de-initialize CDD_PWM.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-startchannelcounter">
+<h3><span class="section-number">5.9.2.3. </span>function Cdd_Pwm_StartChannelCounter<a class="headerlink" href="#function-cdd-pwm-startchannelcounter" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_StartChannelCounter</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to start a PWM channel.</p>
+<p>Cdd_Pwm_StartChannelCounter shall start a PWM channel.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-stopchannelcounter">
+<h3><span class="section-number">5.9.2.4. </span>function Cdd_Pwm_StopChannelCounter<a class="headerlink" href="#function-cdd-pwm-stopchannelcounter" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_StopChannelCounter</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to stop a PWM channel.</p>
+<p>Cdd_Pwm_StopChannelCounter shall stop a PWM channel.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-setpinaction">
+<h3><span class="section-number">5.9.2.5. </span>function Cdd_Pwm_SetPinAction<a class="headerlink" href="#function-cdd-pwm-setpinaction" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetPinAction</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_PinActionType</span><span class="w"> </span><span class="n">PinAction</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to indicate the driver what shall be done automatically by hardware (if supported) upon compare match.</p>
+<p>Cdd_Pwm_SetPinAction indicate the driver what shall be done automatically by hardware (if supported) upon compare match.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+<li><p><strong>PinAction</strong> - Actions Can be:PWM_SET_LOW, PWM_SET_HIGH, PWM_TOGGLE, PWM_DISABLE.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-getcounter">
+<h3><span class="section-number">5.9.2.6. </span>function Cdd_Pwm_GetCounter<a class="headerlink" href="#function-cdd-pwm-getcounter" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Cdd_Pwm_ValueType</span><span class="w"> </span><span class="n">Cdd_Pwm_GetCounter</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to read the current value of the counter.</p>
+<p>Cdd_Pwm_GetCounter read the current value of the counter.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>current</strong> value of the counter
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Cdd_Pwm_ValueType</p>
+</section>
+<section id="function-cdd-pwm-setrelativethreshold">
+<h3><span class="section-number">5.9.2.7. </span>function Cdd_Pwm_SetRelativeThreshold<a class="headerlink" href="#function-cdd-pwm-setrelativethreshold" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Cdd_Pwm_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_SetRelativeThreshold</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ValueType</span><span class="w"> </span><span class="n">RelativeValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the value of the channel threshold relative to the current value of the counter.</p>
+<p>Cdd_Pwm_SetRelativeThreshold set the value of the channel threshold relative to the current value of the counter.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong></p></li>
+<li><p><strong>RelativeValue</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>CDD_PWM_CM_IN_REF_INTERVAL</strong> - The compare match will occur inside the current Reference Interval
+<br></p></li>
+<li><p><strong>CDD_PWM_CM_OUT_REF_INTERVAL</strong> - The compare match will not occur inside the current Reference Interval
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Cdd_Pwm_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-disablenotification">
+<h3><span class="section-number">5.9.2.8. </span>function Cdd_Pwm_DisableNotification<a class="headerlink" href="#function-cdd-pwm-disablenotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_DisableNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to disable the PWM signal edge notification.</p>
+<p>Cdd_Pwm_DisableNotification disable the PWM signal edge notification.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-enablenotification">
+<h3><span class="section-number">5.9.2.9. </span>function Cdd_Pwm_EnableNotification<a class="headerlink" href="#function-cdd-pwm-enablenotification" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_EnableNotification</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelParameter</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_InterruptType</span><span class="w"> </span><span class="n">EdgeInterruptSource</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to enable the PWM signal edge notification according to notification parameter.</p>
+<p>Cdd_Pwm_EnableNotification to enable the PWM signal edge notification according to notification parameter.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelParameter</strong></p></li>
+<li><p><strong>EdgeInterruptSource</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-getversioninfo">
+<h3><span class="section-number">5.9.2.10. </span>function Cdd_Pwm_GetVersionInfo<a class="headerlink" href="#function-cdd-pwm-getversioninfo" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_GetVersionInfo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">versioninfo</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to return the version information of this module.</p>
+<p>Cdd_Pwm_GetVersionInfo returns the version information of this module.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>versioninfo</strong> - Pointer to where to store the version information of this module.</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-registerreadback">
+<h3><span class="section-number">5.9.2.11. </span>function Cdd_Pwm_RegisterReadback<a class="headerlink" href="#function-cdd-pwm-registerreadback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_RegisterReadback</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to read the important registers of the hardware unit and returns the value in the structure.</p>
+<p>Cdd_Pwm_RegisterReadback reads the important registers of the hardware unit and returns the value in the structure.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+<li><p><strong>RegRbPtr</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Register read back has been done successfully
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Register read back failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-setperioddutyphase">
+<h3><span class="section-number">5.9.2.12. </span>function Cdd_Pwm_SetPeriodDutyPhase<a class="headerlink" href="#function-cdd-pwm-setperioddutyphase" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetPeriodDutyPhase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_channelParametertype</span><span class="w"> </span><span class="n">ChannelParameter</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function sets the period and the duty cycle of a PWM channel.</p>
+<p>Cdd_Pwm_SetPeriodDutyPhase sets the period and the duty cycle of a PWM channel.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelParameter</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-setoutputtoidle">
+<h3><span class="section-number">5.9.2.13. </span>function Cdd_Pwm_SetOutputToIdle<a class="headerlink" href="#function-cdd-pwm-setoutputtoidle" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetOutputToIdle</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function sets the PWM output to the configured Idle state.</p>
+<p>Cdd_Pwm_SetOutputToIdle sets the PWM output to the configured Idle state.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-syncenable">
+<h3><span class="section-number">5.9.2.14. </span>function Cdd_Pwm_SyncEnable<a class="headerlink" href="#function-cdd-pwm-syncenable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_SyncEnable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tbPhsValue</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">counterDir</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function enables the synchronization of time base sub-module and also configures the phase count value to be loaded after sync event, counter direction after sync event.</p>
+<p>Cdd_Pwm_SyncEnable enables the synchronization of time base sub-module and also configures the phase count value to be loaded after sync event, counter direction after sync event.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>tbPhsValue</strong></p></li>
+<li><p><strong>counterDir</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Synchronization enabled successfully
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Synchronization enabled failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-syncdisable">
+<h3><span class="section-number">5.9.2.15. </span>function Cdd_Pwm_SyncDisable<a class="headerlink" href="#function-cdd-pwm-syncdisable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_SyncDisable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function disables the synchronization. Even if sync-in event occurs the count value will not be reloaded.</p>
+<p>Cdd_Pwm_SyncDisable disables the synchronization. Even if sync-in event occurs the count value will not be reloaded.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Synchronization disabled successfully
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Synchronization disabled failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-getcounterstatus">
+<h3><span class="section-number">5.9.2.16. </span>function Cdd_Pwm_GetCounterStatus<a class="headerlink" href="#function-cdd-pwm-getcounterstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Pwm_GetCounterStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tbStatusMask</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function gets the Time Base status as indicated by the tbStatusMask parameter.</p>
+<p>Cdd_Pwm_tbGetStatus gets the Time Base status as indicated by the tbStatusMask parameter.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>tbStatusMask</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<hr class="docutils" />
+<br> 
+<p><strong>Return</strong>: uint16</p>
+</section>
+<section id="function-cdd-pwm-clearcounterstatus">
+<h3><span class="section-number">5.9.2.17. </span>function Cdd_Pwm_ClearCounterStatus<a class="headerlink" href="#function-cdd-pwm-clearcounterstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_ClearCounterStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tbStatusClrMask</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function clears the Time base status bits indicated by the tbStatusClrMask parameter.</p>
+<p>Cdd_Pwm_tbStatusClear clears the Time base status bits indicated by the tbStatusClrMask parameter.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>tbStatusClrMask</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Time base status cleared successfully
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Time base status cleared failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-countercomparatorcfg">
+<h3><span class="section-number">5.9.2.18. </span>function Cdd_Pwm_CounterComparatorCfg<a class="headerlink" href="#function-cdd-pwm-countercomparatorcfg" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_CounterComparatorCfg</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_OutputChType</span><span class="w"> </span><span class="n">cmpType</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">cmpVal</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">shadowToActiveLoadTrigger</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">overwriteShadow</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function configures the counter comparator and loads the comparator value.</p>
+<p>Cdd_Pwm_counterComparatorCfg configures the counter comparator and loads the comparator value. When Counter comparator value equals the counter value, then an event is generated both in the up direction and down direction.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>cmpType</strong></p></li>
+<li><p><strong>cmpVal</strong></p></li>
+<li><p><strong>shadowToActiveLoadTrigger</strong></p></li>
+<li><p><strong>overwriteShadow</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Configuration of counter comparator is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Configuration of counter comparator is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-deadbandcfg">
+<h3><span class="section-number">5.9.2.19. </span>function Cdd_Pwm_DeadbandCfg<a class="headerlink" href="#function-cdd-pwm-deadbandcfg" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_DeadbandCfg</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">CDD_PWM_DeadbandCfgType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pCfg</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function performs the configuration of the dead band sub-module.</p>
+<p>Cdd_Pwm_deadbandCfgperforms the configuration of the dead band sub-module. This API configures the input source, output mode, polarity, rising and falling edge delays.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>pCfg</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Configuration of dead band sub-module is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Configuration of dead band sub-module is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-deadbandbypass">
+<h3><span class="section-number">5.9.2.20. </span>function Cdd_Pwm_DeadbandBypass<a class="headerlink" href="#function-cdd-pwm-deadbandbypass" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_DeadbandBypass</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function bypasses the Dead-band sub-module.</p>
+<p>Cdd_Pwm_deadbandBypass bypasses the Dead-band sub-module.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Dead-band sub-module bypass is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Dead-band sub-module bypass is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-choppercfg">
+<h3><span class="section-number">5.9.2.21. </span>function Cdd_Pwm_ChopperCfg<a class="headerlink" href="#function-cdd-pwm-choppercfg" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_ChopperCfg</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">CDD_PWM_ChopperCfgType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pCfg</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Performs the configuration of the chopper sub-module.</p>
+<p>Cdd_Pwm_chopperCfg performs the configuration of the chopper sub-module. This API configures chopping clock duty cycle, chopping clock frequency and pulse width of first pulse of chopping clock.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>pCfg</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - configuration of the chopper sub-module is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - configuration of the chopper sub-module is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-chopperenable">
+<h3><span class="section-number">5.9.2.22. </span>function Cdd_Pwm_ChopperEnable<a class="headerlink" href="#function-cdd-pwm-chopperenable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_ChopperEnable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">enableChopper</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function controls the enabling or disabling of chopper sub-module.</p>
+<p>Cdd_Pwm_chopperEnable controls the enabling or disabling of chopper sub-module.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>enableChopper</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - enabling or disabling of chopper sub-module is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - enabling or disabling of chopper sub-module is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-settimebasecountermode">
+<h3><span class="section-number">5.9.2.23. </span>function Cdd_Pwm_SetTimeBaseCounterMode<a class="headerlink" href="#function-cdd-pwm-settimebasecountermode" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_SetTimeBaseCounterMode</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EPWM_TimeBaseCountMode</span><span class="w"> </span><span class="n">Mode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function sets the mode of Time base counter.</p>
+<p>This function is used to set the mode for Time base counter.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>Mode.</strong> Refer counterMode parameter. Example CDD_PWM_COUNTER_MODE_UP defined in Epwm\V0\Cdd_Pwm_Types.h</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Operation successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Operation failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-setphaseshift">
+<h3><span class="section-number">5.9.2.24. </span>function Cdd_Pwm_SetPhaseShift<a class="headerlink" href="#function-cdd-pwm-setphaseshift" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetPhaseShift</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">PhaseShiftValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the Phase shift value in runtime.</p>
+<p>Cdd_Pwm_SetPhaseShift set the Phase shift value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>PhaseShiftValue</strong> - Phase shift value</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-settimebaseperiod">
+<h3><span class="section-number">5.9.2.25. </span>function Cdd_Pwm_SetTimeBasePeriod<a class="headerlink" href="#function-cdd-pwm-settimebaseperiod" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetTimeBasePeriod</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Period</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the time base period in runtime.</p>
+<p>Cdd_Pwm_SetTimeBasePeriod set the time base period in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>Period</strong> - Period</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-setcountercomparevalue">
+<h3><span class="section-number">5.9.2.26. </span>function Cdd_Pwm_SetCounterCompareValue<a class="headerlink" href="#function-cdd-pwm-setcountercomparevalue" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetCounterCompareValue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EPWM_CounterCompareModule</span><span class="w"> </span><span class="n">CompModule</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DutyValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the Compare value in runtime.</p>
+<p>Cdd_Pwm_SetCounterCompareValue set the Compare value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>CompModule</strong> - Compare Module. Refer <em>compModule</em> parameter</p></li>
+<li><p><strong>DutyValue</strong> - Duty cycle value</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-setrisingedgedelay">
+<h3><span class="section-number">5.9.2.27. </span>function Cdd_Pwm_SetRisingEdgeDelay<a class="headerlink" href="#function-cdd-pwm-setrisingedgedelay" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetRisingEdgeDelay</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">RedCount</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the rising edge delay in runtime.</p>
+<p>Cdd_Pwm_SetRisingEdgeDelay set the rising edge delay in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>RedCount</strong> - Rising Edge delay count</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-setfallingedgedelay">
+<h3><span class="section-number">5.9.2.28. </span>function Cdd_Pwm_SetFallingEdgeDelay<a class="headerlink" href="#function-cdd-pwm-setfallingedgedelay" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetFallingEdgeDelay</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">FedCount</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the falling edge delay in runtime.</p>
+<p>Cdd_Pwm_SetFallingEdgeDelay set the falling edge delay in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>FedCount</strong> - Falling Edge delay count</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-setmindeadbanddelay">
+<h3><span class="section-number">5.9.2.29. </span>function Cdd_Pwm_SetMinDeadbandDelay<a class="headerlink" href="#function-cdd-pwm-setmindeadbanddelay" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetMinDeadbandDelay</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Block</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Delay</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the minimum deadband delay in runtime.</p>
+<p>Cdd_Pwm_SetMinDeadbandDelay set the minimum deadband delay in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>Block</strong> - Block. Possible values EPWM_MINDB_BLOCK_A, EPWM_MINDB_BLOCK_B</p></li>
+<li><p><strong>Delay</strong> - Delay value</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-setxcmpregvalue">
+<h3><span class="section-number">5.9.2.30. </span>function Cdd_Pwm_SetXcmpRegValue<a class="headerlink" href="#function-cdd-pwm-setxcmpregvalue" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetXcmpRegValue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EPWM_XCMPReg</span><span class="w"> </span><span class="n">XcmpReg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">XcmpValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the XCMP register value in runtime.</p>
+<p>Cdd_Pwm_SetXcmpRegValue set the XCMP register value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>XcmpReg</strong> - XCMP register. Refer <em>xcmpReg</em> parameter</p></li>
+<li><p><strong>XcmpValue</strong> - XCMP Value to be passed</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-setxminmaxregvalue">
+<h3><span class="section-number">5.9.2.31. </span>function Cdd_Pwm_SetXMinMaxRegValue<a class="headerlink" href="#function-cdd-pwm-setxminmaxregvalue" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetXMinMaxRegValue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EPWM_XMinMaxReg</span><span class="w"> </span><span class="n">XminmaxReg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">XcmpValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the XMINMAX register value in runtime.</p>
+<p>Cdd_Pwm_SetXMinMaxRegValue set the XMINMAX register value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>XminmaxReg</strong> - XMINMAX register. Refer <em>xminmaxReg</em> parameter</p></li>
+<li><p><strong>XcmpValue</strong> - XCMP Value to be passed</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-setcmpshadowregvalue">
+<h3><span class="section-number">5.9.2.32. </span>function Cdd_Pwm_SetCmpShadowRegValue<a class="headerlink" href="#function-cdd-pwm-setcmpshadowregvalue" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_SetCmpShadowRegValue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">EPWM_XCompareReg</span><span class="w"> </span><span class="n">CmpReg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">CmpValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the CMP shadow register value in runtime.</p>
+<p>Cdd_Pwm_SetCmpShadowRegValue set the CMP shadow register value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>CmpReg</strong> - CMP register. Refer <em>cmpReg</em> parameter</p></li>
+<li><p><strong>CmpValue</strong> - CMP Value to be passed</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-tztripeventenable">
+<h3><span class="section-number">5.9.2.33. </span>function Cdd_Pwm_TzTripEventEnable<a class="headerlink" href="#function-cdd-pwm-tztripeventenable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_TzTripEventEnable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tzEventType</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function enables the trip event.</p>
+<p>Cdd_Pwm_tzTripEventEnable enables the trip event.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>tzEventType</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - enabling of trip event is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - enabling of trip event is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-tztripeventdisable">
+<h3><span class="section-number">5.9.2.34. </span>function Cdd_Pwm_TzTripEventDisable<a class="headerlink" href="#function-cdd-pwm-tztripeventdisable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_TzTripEventDisable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tzEventType</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function disable the trip event. The disabled trip events will be ignored.</p>
+<p>Cdd_Pwm_tzTripEventDisable disable the trip event. The The disabled trip events will be ignored.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>tzEventType</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - disabling of trip event is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - disabling of trip event is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-tzintrenable">
+<h3><span class="section-number">5.9.2.35. </span>function Cdd_Pwm_TzIntrEnable<a class="headerlink" href="#function-cdd-pwm-tzintrenable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_TzIntrEnable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tzEventType</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function enables the trip interrupt.</p>
+<p>Cdd_Pwm_tzIntrEnable enables the trip interrupt. When trip event occurs the sub-module can be configured to interrupt CPU.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>tzEventType</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - enabling of trip interrupt is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - enabling of trip interrupt is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-tzintrdisable">
+<h3><span class="section-number">5.9.2.36. </span>function Cdd_Pwm_TzIntrDisable<a class="headerlink" href="#function-cdd-pwm-tzintrdisable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_TzIntrDisable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tzEventType</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function disables the trip interrupt.</p>
+<p>Cdd_Pwm_tzIntrDisable disables the trip interrupt.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>tzEventType</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - disabling of trip interrupt is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - disabling of trip interrupt is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-tzgeteventstatus">
+<h3><span class="section-number">5.9.2.37. </span>function Cdd_Pwm_TzGetEventStatus<a class="headerlink" href="#function-cdd-pwm-tzgeteventstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">Cdd_Pwm_TzGetEventStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">eventMask</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function returns the selected trip zone event status.</p>
+<p>Cdd_Pwm_tzEventStatus returns the selected trip zone event status.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>eventMask</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>TRUE</strong>
+<br></p></li>
+<li><p><strong>FALSE</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: boolean</p>
+</section>
+<section id="function-cdd-pwm-tzeventstatusclear">
+<h3><span class="section-number">5.9.2.38. </span>function Cdd_Pwm_TzEventStatusClear<a class="headerlink" href="#function-cdd-pwm-tzeventstatusclear" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_TzEventStatusClear</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">eventMask</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tzFlags</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function clears the selected trip zone event status.</p>
+<p>Cdd_Pwm_tzEventStatusClear clears the selected trip zone event status.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>eventMask</strong></p></li>
+<li><p><strong>tzFlags</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - selected trip zone event status is cleared successfully
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - clearing of selected trip zone event status is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-tztriggerswevent">
+<h3><span class="section-number">5.9.2.39. </span>function Cdd_Pwm_TzTriggerSwEvent<a class="headerlink" href="#function-cdd-pwm-tztriggerswevent" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_TzTriggerSwEvent</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tzEventType</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function enables to generate Software forced trip condition.</p>
+<p>Cdd_Pwm_tzTriggerSwEvent enables to generate Software forced trip condition.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>eventMask</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> -
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> -
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-etintrstatus">
+<h3><span class="section-number">5.9.2.40. </span>function Cdd_Pwm_EtIntrStatus<a class="headerlink" href="#function-cdd-pwm-etintrstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Pwm_EtIntrStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function returns the ePWM event interrupt status.</p>
+<p>Cdd_Pwm_etIntrStatus returns the ePWM event interrupt status.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>ePWM</strong> event interrupt status.
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: uint16</p>
+</section>
+<section id="function-cdd-pwm-etintrclear">
+<h3><span class="section-number">5.9.2.41. </span>function Cdd_Pwm_EtIntrClear<a class="headerlink" href="#function-cdd-pwm-etintrclear" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_EtIntrClear</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function clears the interrupt.</p>
+<p>Cdd_Pwm_etIntrClear clears the interrupt. This will clear the interrupt flag bit and enable further interrupts pulses to be generated.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - Interrupt cleared successfully
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - Interrupt cleared failed.
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-etintrtrigger">
+<h3><span class="section-number">5.9.2.42. </span>function Cdd_Pwm_EtIntrTrigger<a class="headerlink" href="#function-cdd-pwm-etintrtrigger" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_EtIntrTrigger</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function forces interrupt to be generated.</p>
+<p>Cdd_Pwm_etIntrTrigger forces interrupt to be generated. This API is used for testing purpose.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> -
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> -
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-etgeteventcount">
+<h3><span class="section-number">5.9.2.43. </span>function Cdd_Pwm_EtGetEventCount<a class="headerlink" href="#function-cdd-pwm-etgeteventcount" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Pwm_EtGetEventCount</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function returns the number of events occurred.</p>
+<p>Cdd_Pwm_etGetEventCount returns the number of events occurred.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>number</strong> of events occurred.
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: uint16</p>
+</section>
+<section id="function-cdd-pwm-setadctrigger">
+<h3><span class="section-number">5.9.2.44. </span>function Cdd_Pwm_SetAdcTrigger<a class="headerlink" href="#function-cdd-pwm-setadctrigger" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_SetAdcTrigger</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_AdcSocType</span><span class="w"> </span><span class="n">adcSoc</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function Enables/Disables the ADC Trigger.</p>
+<p>Cdd_Pwm_SetAdcTrigger enables/disables the ADC Trigger.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong></p></li>
+<li><p><strong>adcSoc</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>E_OK</strong> - enabling/disabling of ADC Trigger is successful
+<br></p></li>
+<li><p><strong>E_NOT_OK</strong> - enabling/disabling of ADC Trigger is failed
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: Std_ReturnType</p>
+</section>
+<section id="function-cdd-pwm-hrsetperioddutyphase">
+<h3><span class="section-number">5.9.2.45. </span>function Cdd_Pwm_HrSetPeriodDutyPhase<a class="headerlink" href="#function-cdd-pwm-hrsetperioddutyphase" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSetPeriodDutyPhase</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_channelParametertype</span><span class="w"> </span><span class="n">ChannelParameter</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function generates High Resolution PWM Signal.</p>
+<p>Enable the HR PWM functionality.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelParameter</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-hrsfocalibration">
+<h3><span class="section-number">5.9.2.46. </span>function Cdd_Pwm_HrSfoCalibration<a class="headerlink" href="#function-cdd-pwm-hrsfocalibration" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSfoCalibration</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_channelParametertype</span><span class="w"> </span><span class="n">ChannelParameter</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function calibrate the HR PWM signal.</p>
+<p>Cdd_Pwm_HrSfoCalibration calibrate the HR PWM signal.</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelParameter</strong></p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>None</strong>
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: None</p>
+</section>
+<section id="function-cdd-pwm-hrsfostatus">
+<h3><span class="section-number">5.9.2.47. </span>function Cdd_Pwm_HrSfoStatus<a class="headerlink" href="#function-cdd-pwm-hrsfostatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSfoStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">ChannelNumber</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function returns the SFO calibration status.</p>
+<p>Cdd_Pwm_HrSfoStatus Get SFO Calibration Status</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+</ul>
+<p><strong>Returns</strong>:</p>
+<ul class="simple">
+<li><p><strong>0</strong> – Incomplete SFO Cal.
+<br></p></li>
+<li><p><strong>1</strong> – Complete SFO Cal.
+<br></p></li>
+<li><p><strong>2</strong> – Error in SFO Cal.
+<br></p></li>
+</ul>
+<p><strong>Return</strong>: uint32</p>
+</section>
+<section id="function-cdd-pwm-hrsetphaseshift">
+<h3><span class="section-number">5.9.2.48. </span>function Cdd_Pwm_HrSetPhaseShift<a class="headerlink" href="#function-cdd-pwm-hrsetphaseshift" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSetPhaseShift</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">PhaseShiftValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the HRPWM Phase shift value in runtime.</p>
+<p>Cdd_Pwm_HrSetPhaseShift set the HRPWM Phase shift value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>PhaseShiftValue</strong> - Phase shift value</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-hrsettimebaseperiod">
+<h3><span class="section-number">5.9.2.49. </span>function Cdd_Pwm_HrSetTimeBasePeriod<a class="headerlink" href="#function-cdd-pwm-hrsettimebaseperiod" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSetTimeBasePeriod</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Period</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the HRPWM time base period in runtime.</p>
+<p>Cdd_Pwm_HrSetTimeBasePeriod set the HRPWM time base period in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>Period</strong> - Period</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-hrsetcountercomparevalue">
+<h3><span class="section-number">5.9.2.50. </span>function Cdd_Pwm_HrSetCounterCompareValue<a class="headerlink" href="#function-cdd-pwm-hrsetcountercomparevalue" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSetCounterCompareValue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HRPWM_CounterCompareModule</span><span class="w"> </span><span class="n">CompModule</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">DutyValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the HRPWM Compare value in runtime.</p>
+<p>Cdd_Pwm_HrSetCounterCompareValue set the HRPWM Compare value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>CompModule</strong> - Compare Module. Refer <em>compModule</em> parameter</p></li>
+<li><p><strong>DutyValue</strong> - Duty cycle value</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-hrsetrisingedgedelay">
+<h3><span class="section-number">5.9.2.51. </span>function Cdd_Pwm_HrSetRisingEdgeDelay<a class="headerlink" href="#function-cdd-pwm-hrsetrisingedgedelay" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSetRisingEdgeDelay</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">RedCount</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the HRPWM rising edge delay in runtime.</p>
+<p>Cdd_Pwm_HrSetRisingEdgeDelay set the HRPWM rising edge delay in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>RedCount</strong> - Rising Edge delay count</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-hrsetfallingedgedelay">
+<h3><span class="section-number">5.9.2.52. </span>function Cdd_Pwm_HrSetFallingEdgeDelay<a class="headerlink" href="#function-cdd-pwm-hrsetfallingedgedelay" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSetFallingEdgeDelay</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">FedCount</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the HRPWM falling edge delay in runtime.</p>
+<p>Cdd_Pwm_HrSetFallingEdgeDelay set the HRPWM falling edge delay in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>FedCount</strong> - Falling Edge delay count</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-pwm-hrsetxcmpregvalue">
+<h3><span class="section-number">5.9.2.53. </span>function Cdd_Pwm_HrSetXcmpRegValue<a class="headerlink" href="#function-cdd-pwm-hrsetxcmpregvalue" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_HrSetXcmpRegValue</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">HRPWM_XCMPReg</span><span class="w"> </span><span class="n">HrXcmpReg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">HrXcmpValue</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to set the HRPWM XCMP register value in runtime.</p>
+<p>Cdd_Pwm_SetHrXcmpRegValue set the HRPWM XCMP register value in runtime</p>
+<p>Sync/Async - Synchronous</p>
+<p>Reentrancy - Non-Reentrant</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Channel</strong> - Channel information</p></li>
+<li><p><strong>HrXcmpReg</strong> - XCMP register. Refer <em>xcmpReg</em> parameter</p></li>
+<li><p><strong>HrXcmpValue</strong> - XCMP Value to be passed</p></li>
+</ul>
+<p><strong>Return</strong>: void</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="group___c_d_d___i_p_c.html" class="btn btn-neutral float-left" title="5.8. CDD_IPC" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___d_i_o.html" class="btn btn-neutral float-right" title="5.10. DIO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2026, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Feb 10, 2026.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.02.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = 'https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263P/AM263Px_versions.json';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

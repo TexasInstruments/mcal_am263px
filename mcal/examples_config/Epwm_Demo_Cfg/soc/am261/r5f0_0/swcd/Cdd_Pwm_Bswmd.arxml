@@ -10,7 +10,7 @@
           <EXPECTED-ENTRYS>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM261x/Cdd_Pwm_ModuleEntry/Cdd_Pwm_ChopperCfg</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL> 
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM261x/Cdd_Pwm_ModuleEntry/Cdd_Pwm_ChopperEnable</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -211,7 +211,7 @@
                     </BSW-DIRECT-CALL-POINT>
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM261x/Cdd_Pwm_ModuleEntry/Cdd_Pwm_ChopperCfg</IMPLEMENTED-ENTRY-REF>
-                </BSW-CALLED-ENTITY>  
+                </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="e99dc420-55c3-4af2-b28c-45b6a08bba93">
                   <SHORT-NAME>Cdd_Pwm_ChopperEnable</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
@@ -342,24 +342,28 @@
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM261x/Cdd_Pwm_ModuleEntry/Cdd_Pwm_G0_Ch0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="d03d4552-3a3a-4af8-904a-ea76c9c17700">
                   <SHORT-NAME>Cdd_Pwm_G0_TzCh0Isr</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM261x/Cdd_Pwm_ModuleEntry/Cdd_Pwm_G0_TzCh0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="2e067f35-ff64-42b5-948e-f79cfb628c73">
                   <SHORT-NAME>Cdd_Pwm_G0_Ch1Isr</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM261x/Cdd_Pwm_ModuleEntry/Cdd_Pwm_G0_Ch1Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="50637d54-7edf-4f54-800a-86f7b1e2afda">
                   <SHORT-NAME>Cdd_Pwm_G0_TzCh1Isr</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM261x/Cdd_Pwm_ModuleEntry/Cdd_Pwm_G0_TzCh1Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="7d85106d-5f44-4a41-9a0d-3cf7fd41cd52">
                   <SHORT-NAME>Cdd_Pwm_GetCounter</SHORT-NAME>

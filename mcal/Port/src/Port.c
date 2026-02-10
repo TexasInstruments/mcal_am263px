@@ -96,6 +96,7 @@ static void Port_InitPadList(P2CONST(Port_PinConfigType, AUTO, PORT_APPL_DATA) p
 
 #if (STD_ON == PORT_REFRESH_PORT_DIRECTION_API)
 static void Port_RefreshPortDirection_Internal(void);
+static void Port_RefreshDioPinDirection(const Port_PinConfigType *pinConfig);
 #endif
 #if (STD_ON == PORT_DEV_ERROR_DETECT)
 static boolean Port_ValidateSetPinMode_internal(const Port_PinConfigType *pinConfig, Port_PinModeType Mode,
@@ -274,13 +275,29 @@ FUNC(void, PORT_CODE) Port_RefreshPortDirection(void)
 #endif /*(STD_ON == PORT_REFRESH_PORT_DIRECTION_API)*/
 
 #if (STD_ON == PORT_REFRESH_PORT_DIRECTION_API)
+static void Port_RefreshDioPinDirection(const Port_PinConfigType *pinConfig)
+{
+    uint32 gpioPortAddr;
+
+    gpioPortAddr = Port_GetGPIOPortAddr(pinConfig->Port_PinDioRegId);
+#if (STD_ON == PORT_DEV_ERROR_DETECT)
+    if (PORT_DIO_INVALID_BASE_ADDR == gpioPortAddr)
+    {
+        Port_ReportDetError((uint8)PORT_SID_REFRESH_PORT_DIR, (uint8)PORT_E_INVALID_GPIO_PORT_ADDRESS);
+    }
+    else
+#endif /*(STD_ON == PORT_DEV_ERROR_DETECT)*/
+    {
+        Port_HWConfigDioPinDirection(gpioPortAddr, pinConfig);
+    }
+}
+
 static void Port_RefreshPortDirection_Internal(void)
 {
     uint16                    idx = 0U;
     const Port_PinConfigType *pinConfig;
     Port_PinModeType          curMode = PORT_PIN_MODE_INVALID;
 
-    uint32 gpioPortAddr = 0U;
     for (idx = 0U; idx < Port_DrvObj.NumberOfPortPins; idx++)
     {
         /* Set all registers to configured values */
@@ -291,17 +308,7 @@ static void Port_RefreshPortDirection_Internal(void)
             curMode = Port_GetCurrentPinMode(pinConfig);
             if ((curMode != PORT_PIN_MODE_INVALID) && (Port_IsDioMode(curMode) == (boolean)TRUE))
             {
-                gpioPortAddr = Port_GetGPIOPortAddr(pinConfig->Port_PinDioRegId);
-#if (STD_ON == PORT_DEV_ERROR_DETECT)
-                if (PORT_DIO_INVALID_BASE_ADDR == gpioPortAddr)
-                {
-                    Port_ReportDetError((uint8)PORT_SID_REFRESH_PORT_DIR, (uint8)PORT_E_INVALID_GPIO_PORT_ADDRESS);
-                }
-                else
-#endif /*(STD_ON == PORT_DEV_ERROR_DETECT)*/
-                {
-                    Port_HWConfigDioPinDirection(gpioPortAddr, pinConfig);
-                }
+                Port_RefreshDioPinDirection(pinConfig);
             }
             Port_ConfigurePad(pinConfig, curMode);
         }
@@ -318,7 +325,7 @@ static boolean Port_ValidateSetPinMode(Port_PinModeType Mode, const Port_PinConf
 
     if (pinConfig->Port_PinModeChangeable == (boolean)TRUE)
     {
-        for (idx = 0U; idx < pinConfig->Port_NumPortModes; idx++)
+        for (idx = 0U; (idx < pinConfig->Port_NumPortModes) && (idx < (uint32)PORT_MAX_MUXMODE); idx++)
         {
             if (pinConfig->Port_PinMode[idx].mode == Mode)
             {
@@ -500,7 +507,7 @@ static Port_PinModeType Port_GetCurrentPinMode(P2CONST(Port_PinConfigType, AUTO,
 
     uint32 muxmode_val = Port_ReadMuxMode(padCfg->Port_RegOffsetAddr);
 
-    for (idx = 0U; idx < padCfg->Port_NumPortModes; idx++)
+    for (idx = 0U; (idx < padCfg->Port_NumPortModes) && (idx < (uint32)PORT_MAX_MUXMODE); idx++)
     {
         if (padCfg->Port_PinMode[idx].muxmode == muxmode_val)
         {

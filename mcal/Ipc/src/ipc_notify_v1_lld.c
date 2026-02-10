@@ -57,11 +57,9 @@ extern RPMessageLLD_Handle CddIpc_RPMsgHandle;
 static inline void IpcNotify_getWriteMailbox(uint32 selfCoreId, uint32 remoteCoreId, uint32 *mailboxBaseAddr,
                                              uint32 *intrBitPos, IpcNotify_SwQueue **swQ);
 static void        IpcNotify_lld_init_clearIntOn(IpcNotify_Handle hIpcNotify, uint32 selfCoreId);
-static sint32      IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, uint32 remoteCoreId,
-                                                      uint16 remoteClientId, uint32 messageValue, uint32 waitForFifoNotFull,
-                                                      uint32 timeout);
-static void        IpcNotify_lld_isrCrcCheck(sint32 status, uint32 value, IpcNotify_Handle hIpcNotify,
-                                             IpcNotify_InterruptConfig *pInterruptConfig, uint32 core);
+static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, const IpcNotify_MsgParams *msgParams);
+static void   IpcNotify_lld_isrCrcCheck(sint32 status, uint32 value, IpcNotify_Handle hIpcNotify,
+                                        IpcNotify_InterruptConfig *pInterruptConfig, uint32 core);
 
 #define CDD_IPC_START_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
@@ -176,16 +174,14 @@ static uint32 IpcNotify_makeMsg(IpcNotify_Handle hIpcNotify, uint16 clientId, ui
     return msg;
 }
 
-sint32 IpcNotify_lld_sendMsg(IpcNotify_Handle hIpcNotify, uint32 remoteCoreId, uint16 remoteClientId,
-                             uint32 messageValue, uint32 waitForFifoNotFull, uint32 timeout)
+sint32 IpcNotify_lld_sendMsg(IpcNotify_Handle hIpcNotify, const IpcNotify_MsgParams *msgParams)
 {
     sint32 status = MCAL_SystemP_SUCCESS;
 
-    if ((hIpcNotify != NULL_PTR) && (remoteCoreId < MCAL_CSL_CORE_ID_MAX) &&
-        (remoteClientId < IPC_NOTIFY_CLIENT_ID_MAX))
+    if ((hIpcNotify != NULL_PTR) && (msgParams != NULL_PTR) && (msgParams->remoteCoreId < MCAL_CSL_CORE_ID_MAX) &&
+        (msgParams->remoteClientId < IPC_NOTIFY_CLIENT_ID_MAX))
     {
-        status = IpcNotify_lld_sendMsg_mailboxWrite(hIpcNotify, remoteCoreId, remoteClientId, messageValue,
-                                                    waitForFifoNotFull, timeout);
+        status = IpcNotify_lld_sendMsg_mailboxWrite(hIpcNotify, msgParams);
     }
     else
     {
@@ -348,21 +344,19 @@ static void IpcNotify_lld_init_clearIntOn(IpcNotify_Handle hIpcNotify, uint32 se
     }
 }
 
-static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, uint32 remoteCoreId,
-                                                 uint16 remoteClientId, uint32 messageValue, uint32 waitForFifoNotFull,
-                                                 uint32 timeout)
+static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, const IpcNotify_MsgParams *msgParams)
 {
     uint32             mailboxBaseAddr, intrBitPos;
     IpcNotify_SwQueue *swQ;
     sint32             status       = MCAL_SystemP_SUCCESS;
     uint32             elapsedTicks = 0U, startTicks = 0U, tempTicks = 0U;
 
-    if ((hIpcNotify->isCoreEnabled[remoteCoreId]) != 0U)
+    if ((hIpcNotify->isCoreEnabled[msgParams->remoteCoreId]) != 0U)
     {
-        uint32 value = IpcNotify_makeMsg(hIpcNotify, remoteClientId, messageValue);
+        uint32 value = IpcNotify_makeMsg(hIpcNotify, msgParams->remoteClientId, msgParams->messageValue);
 
-        IpcNotify_getWriteMailbox(hIpcNotify->hIpcNotifyInit->selfCoreId, remoteCoreId, &mailboxBaseAddr, &intrBitPos,
-                                  &swQ);
+        IpcNotify_getWriteMailbox(hIpcNotify->hIpcNotifyInit->selfCoreId, msgParams->remoteCoreId, &mailboxBaseAddr,
+                                  &intrBitPos, &swQ);
 
         SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
@@ -370,18 +364,19 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, ui
 
         do
         {
-            status = IpcNotify_mailboxWrite(hIpcNotify->hIpcNotifyInit->selfCoreId, remoteCoreId, mailboxBaseAddr,
-                                            intrBitPos, swQ, value);
-            if ((status != MCAL_SystemP_SUCCESS) && (waitForFifoNotFull != 0U))
+            status = IpcNotify_mailboxWrite(hIpcNotify->hIpcNotifyInit->selfCoreId, msgParams->remoteCoreId,
+                                            mailboxBaseAddr, intrBitPos, swQ, value);
+            if ((status != MCAL_SystemP_SUCCESS) && (msgParams->waitForFifoNotFull != 0U))
             {
                 SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
                 SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
                 tempTicks = startTicks;
                 Mcal_GetElapsedCycleCountValue(&tempTicks, &elapsedTicks);
             }
-        } while ((status != MCAL_SystemP_SUCCESS) && (waitForFifoNotFull != 0U) && (elapsedTicks < timeout));
+        } while ((status != MCAL_SystemP_SUCCESS) && (msgParams->waitForFifoNotFull != 0U) &&
+                 (elapsedTicks < msgParams->timeout));
 
-        if ((timeout != 0U) && (elapsedTicks >= timeout))
+        if ((msgParams->timeout != 0U) && (elapsedTicks >= msgParams->timeout))
         {
             status = MCAL_SystemP_TIMEOUT;
         }

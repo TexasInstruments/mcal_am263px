@@ -10,7 +10,7 @@
           <EXPECTED-ENTRYS>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM263px/Cdd_Pwm_ModuleEntry/Cdd_Pwm_ChopperCfg</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL> 
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM263px/Cdd_Pwm_ModuleEntry/Cdd_Pwm_ChopperEnable</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -205,7 +205,7 @@
                     </BSW-DIRECT-CALL-POINT>
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM263px/Cdd_Pwm_ModuleEntry/Cdd_Pwm_ChopperCfg</IMPLEMENTED-ENTRY-REF>
-                </BSW-CALLED-ENTITY>  
+                </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="e99dc420-55c3-4af2-b28c-45b6a08bba93">
                   <SHORT-NAME>Cdd_Pwm_ChopperEnable</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
@@ -336,12 +336,14 @@
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM263px/Cdd_Pwm_ModuleEntry/Cdd_Pwm_G0_Ch0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="d03d4552-3a3a-4af8-904a-ea76c9c17700">
                   <SHORT-NAME>Cdd_Pwm_G0_TzCh0Isr</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM263px/Cdd_Pwm_ModuleEntry/Cdd_Pwm_G0_TzCh0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="7d85106d-5f44-4a41-9a0d-3cf7fd41cd52">
                   <SHORT-NAME>Cdd_Pwm_GetCounter</SHORT-NAME>
@@ -3325,7 +3327,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-			<BSW-MODULE-ENTRY UUID="19e5d126-d261-46d2-a470-91d5ca848fda>
+			<BSW-MODULE-ENTRY UUID="19e5d126-d261-46d2-a470-91d5ca848fda">
               <SHORT-NAME>Cdd_Pwm_HrSetCounterCompareValue</SHORT-NAME>
               <SERVICE-ID>44</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>

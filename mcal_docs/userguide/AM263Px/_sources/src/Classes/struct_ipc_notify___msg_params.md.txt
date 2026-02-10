@@ -1,0 +1,30 @@
+---
+orphan: true
+---
+
+---
+title: IpcNotify_MsgParams
+summary: Structure to hold message parameters for IPC Notify send operations. 
+
+---
+
+# IpcNotify_MsgParams
+
+
+
+Structure to hold message parameters for IPC Notify send operations. 
+
+
+`#include <ipc_notify_v1_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | remoteCoreId |  |
+|  uint16 | remoteClientId |  |
+|  uint32 | messageValue |  |
+|  uint32 | waitForFifoNotFull |  |
+|  uint32 | timeout |  |
+
+

@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DRV_CDD_EDMA_MODULE &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.02.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_guide.html">5. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>DRV_CDD_EDMA_MODULE</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="drv-cdd-edma-module">
+<h1>DRV_CDD_EDMA_MODULE<a class="headerlink" href="#drv-cdd-edma-module" title="Link to this heading"></a></h1>
+<p><a class="reference internal" href="#detailed-description">More…</a></p>
+<section id="files">
+<h2>Files<a class="headerlink" href="#files" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="#../Files/_cdd___dma___priv_8h.md#file-cdd_dma_priv.h"><span class="xref myst">include/Cdd_Dma_Priv.h</span></a></strong> <br>This file contains the prototype of EDMA driver APIs.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="types">
+<h2>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base type</p></th>
+<th class="head"><p>Type Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-dma-transfertype"><span class="std std-ref">Cdd_Dma_TransferType</span></a></strong></p></td>
+<td><p>EDMA Parameter RAM Set in User Configurable format This is a mapping of the EDMA PaRAM set provided to the user for ease of modification of the individual fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-cdd-dma-transfermode"><span class="std std-ref">Cdd_Dma_TransferMode</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>typedef void(*)(void *appData)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-cdd-edma-eventcallback"><span class="std std-ref">Cdd_Edma_EventCallback</span></a></strong></p></td>
+<td><p>EDMA interrupt callback function prototype.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="enum-cdd-dma-transfertype">
+<h3>enum Cdd_Dma_TransferType<a class="headerlink" href="#enum-cdd-dma-transfertype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_DMA_TRANSFER_TYPE_UART_TX</p></td>
+<td><p>0x0U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_DMA_TRANSFER_TYPE_UART_RX</p></td>
+<td><p>0x1U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_DMA_TRANSFER_TYPE_ADC</p></td>
+<td><p>0x2U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_DMA_TRANSFER_TYPE_MCSPI</p></td>
+<td><p>0x3U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER</p></td>
+<td><p>0x4U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_DMA_TRANSFER_TYPE_QSPI</p></td>
+<td><p>0x5U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_DMA_TRANSFER_TYPE_FLS</p></td>
+<td><p>0x6U</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+EDMA Parameter RAM Set in User Configurable format This is a mapping of the EDMA PaRAM set provided to the user for ease of modification of the individual fields.</p>
+</section>
+<section id="enum-cdd-dma-transfermode">
+<h3>enum Cdd_Dma_TransferMode<a class="headerlink" href="#enum-cdd-dma-transfermode" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_DMA_TRANSFER_MODE_NORMAL</p></td>
+<td><p>0x0U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_DMA_TRANSFER_MODE_LINKING</p></td>
+<td><p>0x1U</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_DMA_TRANSFER_MODE_CHAINING</p></td>
+<td><p>0x2U</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="typedef-cdd-edma-eventcallback">
+<h3>typedef Cdd_Edma_EventCallback<a class="headerlink" href="#typedef-cdd-edma-eventcallback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Edma_EventCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">appData</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+EDMA interrupt callback function prototype.</p>
+</section>
+</section>
+<section id="structures">
+<h2>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct____attribute____.html"><span class="std std-doc"><strong>attribute</strong></span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___param_sets.html"><span class="std std-doc">Cdd_Dma_ParamSets</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___channel_group.html"><span class="std std-doc">Cdd_Dma_ChannelGroup</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___resource_object.html"><span class="std std-doc">Cdd_Dma_ResourceObject</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___channel_config_type.html"><span class="std std-doc">Cdd_Dma_ChannelConfigType</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___init_handle_type.html"><span class="std std-doc">Cdd_Dma_InitHandleType</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___register_readback_type.html"><span class="std std-doc">Cdd_Dma_RegisterReadbackType</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___handler.html"><span class="std std-doc">Cdd_Dma_Handler</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___config_type.html"><span class="std std-doc">Cdd_Dma_ConfigType</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___dma___csl___mss___ctrl_regs.html"><span class="std std-doc">Cdd_Dma_Csl_Mss_CtrlRegs</span></a></strong></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>CDD_EDMACC_DMAQNUM_CLR (chNum)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_DMAQNUM_SET (chNum, queNum)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_QCHMAP_PAENTRY_CLR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_QCHMAP_PAENTRY_SET (paRAMId)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_QCHMAP_TRWORD_CLR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_QCHMAP_TRWORD_SET (paRAMId)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_TRIG_MODE_MANUAL</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_TRIG_MODE_EVENT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_CHANNEL_TYPE_DMA</p></td>
+<td><p>Values that can be used for parameter chType in API’s.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_XFER_COMPLETE</p></td>
+<td><p>Values that can be used to specify different event status.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_CC_DMA_EVT_MISS</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_SYNC_A</p></td>
+<td><p>Values that can be used to specify different synchronization events.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_SYNC_AB</p></td>
+<td><p>Values that can be used to specify different synchronization events.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_ADDRESSING_MODE_LINEAR</p></td>
+<td><p>Values that can be used to specify different addressing modes (relevant for SAM and DAM sub-fields in OPT field).</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_ADDRESSING_MODE_FIFO_WRAP</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_FIFO_WIDTH_8BIT</p></td>
+<td><p>Values that can be used to specify different FIFO widths (FWID in OPT field).</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_FIFO_WIDTH_16BIT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_FIFO_WIDTH_32BIT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_FIFO_WIDTH_64BIT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_FIFO_WIDTH_128BIT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_FIFO_WIDTH_256BIT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_CLR_TCCERR</p></td>
+<td><p>Values that can be used to Clear any Channel controller Errors.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_CLR_QTHRQ0</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_CLR_QTHRQ1</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_OPT_TCCHEN_MASK</p></td>
+<td><p>Values that are used to Chain two specified channels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_OPT_ITCCHEN_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_OPT_TCINTEN_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_OPT_ITCINTEN_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_OPT_TCC_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_OPT_TCC_SHIFT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_OPT_SYNCDIM_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_OPT_SYNCDIM_SHIFT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_OPT_STATIC_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_OPT_STATIC_SHIFT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_OPT_TCC_CLR</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_OPT_TCC_SET (tcc)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_PARAM_ENTRY_OPT</p></td>
+<td><p>PaRAMEntry Fields.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_PARAM_ENTRY_SRC</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_PARAM_ENTRY_ACNT_BCNT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_PARAM_ENTRY_DST</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_PARAM_ENTRY_SRC_DST_BIDX</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_PARAM_ENTRY_LINK_BCNTRLD</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_PARAM_ENTRY_SRC_DST_CIDX</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_PARAM_ENTRY_CCNT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_PARAM_FIELD_OFFSET</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_PARAM_ENTRY_FIELDS</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_NUM_TCC</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_RESOURCE_TYPE_DMA</p></td>
+<td><p>Values that can be used for parameter resType in API’s.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_RESOURCE_TYPE_TCC</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_RESOURCE_TYPE_PARAM</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_RESOURCE_ALLOC_ANY</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_DMA_START_SEC_CODE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_DMA_STOP_SEC_CODE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_NUM_DMACH</p></td>
+<td><p>Number of DMA Channels.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_NUM_PARAMSETS</p></td>
+<td><p>Number of PaRAM Sets available.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_NUM_EVQUE</p></td>
+<td><p>Number of Event Queues available.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_CHMAPEXIST</p></td>
+<td><p>Support for Channel to PaRAM Set mapping.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_NUM_REGIONS</p></td>
+<td><p>Number of EDMA Regions.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_MEMPROTECT</p></td>
+<td><p>Support for Memory Protection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_MAPPING_SHIFT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_QUEUE_SHIFT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMA_SET_ALL_BITS</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMA_CLR_ALL_BITS</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_EDMACC_COMPL_HANDLER_RETRY_COUNT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_EDMACC_ERR_HANDLER_RETRY_COUNT</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-ccparamentry-init"><span class="std std-ref">CDD_EDMA_lld_ccParamEntry_Init</span></a></strong>(CDD_EDMACCEDMACCPaRAMEntry * paramEntry)</p></td>
+<td><p>EDMA interrupt configuration object. The object is passed to the CDD_EDMA_registerIntr() function. This is held by the driver till the CDD_EDMA_unregisterIntr() function is called with this obect. The application should not modify this object in between.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-enablechinshadowregregion"><span class="std std-ref">CDD_EDMA_lld_enableChInShadowRegRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum)</p></td>
+<td><p>Enable channel to Shadow region mapping.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-disablechinshadowregregion"><span class="std std-ref">CDD_EDMA_lld_disableChInShadowRegRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum)</p></td>
+<td><p>Disable channel to Shadow region mapping.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-channeltoparammap"><span class="std std-ref">CDD_EDMA_lld_channelToParamMap</span></a></strong>(uint32 baseAddr, uint32 channel, uint32 paramSet)</p></td>
+<td><p>This function maps DMA channel to any of the PaRAM sets in the PaRAM memory map.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-mapchtoevtq"><span class="std std-ref">CDD_EDMA_lld_mapChToEvtQ</span></a></strong>(uint32 baseAddr, uint32 chType, uint32 chNum, uint32 evtQNum)</p></td>
+<td><p>Map channel to Event Queue.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-unmapchtoevtq"><span class="std std-ref">CDD_EDMA_lld_unmapChToEvtQ</span></a></strong>(uint32 baseAddr, uint32 chType, uint32 chNum)</p></td>
+<td><p>Remove Mapping of channel to Event Queue.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-mapqdmachtoparam"><span class="std std-ref">CDD_EDMA_lld_mapQdmaChToPaRAM</span></a></strong>(uint32 baseAddr, uint32 chNum, const uint32 * paRAMId)</p></td>
+<td><p>Enables the user to map a QDMA channel to PaRAM set This API Needs to be called before programming the paRAM sets for the QDMA Channels.Application needs to maitain the paRAMId provided by this API.This paRAMId is used to set paRAM and get paRAM. Refer corresponding API’s for more details.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-clrmissevtregion"><span class="std std-ref">CDD_EDMA_lld_clrMissEvtRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum)</p></td>
+<td><p>Enables the user to Clear any missed event.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-clrccerr"><span class="std std-ref">CDD_EDMA_lld_clrCCErr</span></a></strong>(uint32 baseAddr, uint32 flags)</p></td>
+<td><p>Enables the user to Clear any Channel controller Errors.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-setevtregion"><span class="std std-ref">CDD_EDMA_lld_setEvtRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum)</p></td>
+<td><p>Enables the user to Set an event. This API helps user to manually set events to initiate DMA transfer requests.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-clrevtregion"><span class="std std-ref">CDD_EDMA_lld_clrEvtRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum)</p></td>
+<td><p>Enables the user to Clear an event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-enabledmaevtregion"><span class="std std-ref">CDD_EDMA_lld_enableDmaEvtRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum)</p></td>
+<td><p>Enables the user to enable an DMA event.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-disabledmaevtregion"><span class="std std-ref">CDD_EDMA_lld_disableDmaEvtRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum)</p></td>
+<td><p>Enables the user to Disable an DMA event.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-getintrstatusregion"><span class="std std-ref">CDD_EDMA_lld_getIntrStatusRegion</span></a></strong>(uint32 baseAddr, uint32 regionId)</p></td>
+<td><p>This function returns interrupts status of those events which is less than 32.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-enableevtintrregion"><span class="std std-ref">CDD_EDMA_lld_enableEvtIntrRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum)</p></td>
+<td><p>Enables the user to enable the transfer completion interrupt generation by the EDMACC for all DMA/QDMA channels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-disableevtintrregion"><span class="std std-ref">CDD_EDMA_lld_disableEvtIntrRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum)</p></td>
+<td><p>Enables the user to clear CC interrupts.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-clrintrregion"><span class="std std-ref">CDD_EDMA_lld_clrIntrRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 value)</p></td>
+<td><p>Enables the user to Clear an Interrupt.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-getparam"><span class="std std-ref">CDD_EDMA_lld_getPaRAM</span></a></strong>(uint32 baseAddr, uint32 paRAMId, CDD_EDMACCEDMACCPaRAMEntry * currPaRAM)</p></td>
+<td><p>Retrieve existing PaRAM set associated with specified logical channel (DMA/Link).</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-setparam"><span class="std std-ref">CDD_EDMA_lld_setPaRAM</span></a></strong>(uint32 baseAddr, uint32 paRAMId, const CDD_EDMACCEDMACCPaRAMEntry * newPaRAM)</p></td>
+<td><p>Copy the user specified PaRAM Set onto the PaRAM Set associated with the logical channel (DMA/Link).</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-configurechannelregion"><span class="std std-ref">CDD_EDMA_lld_configureChannelRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, const Cdd_Dma_ChannelConfigType * chConfig)</p></td>
+<td><p>Request a DMA/QDMA/Link channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-freechannelregion"><span class="std std-ref">CDD_EDMA_lld_freeChannelRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 trigMode)</p></td>
+<td><p>Free the specified channel (DMA/QDMA/Link) and its associated resources (PaRAM Set, TCC etc) and removes various mappings.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-enabletransferregion"><span class="std std-ref">CDD_EDMA_lld_enableTransferRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum, uint32 trigMode)</p></td>
+<td><p>Start EDMA transfer on the specified channel.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-disabletransferregion"><span class="std std-ref">CDD_EDMA_lld_disableTransferRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 chNum, uint32 trigMode)</p></td>
+<td><p>Disable DMA transfer on the specified channel.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-intrstatushighgetregion"><span class="std std-ref">CDD_EDMA_lld_intrStatusHighGetRegion</span></a></strong>(uint32 baseAddr, uint32 regionId)</p></td>
+<td><p>This function returns interrupt status of those events which are greater than 32.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-readintrstatusregion"><span class="std std-ref">CDD_EDMA_lld_readIntrStatusRegion</span></a></strong>(uint32 baseAddr, uint32 regionId, uint32 tccNum)</p></td>
+<td><p>This function reads interrupt status.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-geteventstatus"><span class="std std-ref">CDD_EDMA_lld_getEventStatus</span></a></strong>(uint32 baseAddr)</p></td>
+<td><p>This function returns status of those events which are less than 32.</p></td>
+</tr>
+<tr class="row-even"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-geteventstatushigh"><span class="std std-ref">CDD_EDMA_lld_getEventStatusHigh</span></a></strong>(uint32 baseAddr)</p></td>
+<td><p>This function returns status of those events which are greater than 32.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-readeventstatusregion"><span class="std std-ref">CDD_EDMA_lld_readEventStatusRegion</span></a></strong>(uint32 baseAddr, uint32 chNum)</p></td>
+<td><p>This function reads Event pending status.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-chainchannel"><span class="std std-ref">CDD_EDMA_lld_chainChannel</span></a></strong>(uint32 baseAddr, uint32 paRAMId1, uint32 chId2, uint32 chainOptions)</p></td>
+<td><p>Chain the two specified channels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-linkchannel"><span class="std std-ref">CDD_EDMA_lld_linkChannel</span></a></strong>(uint32 baseAddr, uint32 paRAMId1, uint32 paRAMId2)</p></td>
+<td><p>Link two channels.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-init"><span class="std std-ref">CDD_EDMA_lld_init</span></a></strong>(Cdd_Dma_ConfigType * hEdmaList)</p></td>
+<td><p>This function initializes the EDMA instance.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-deinit"><span class="std std-ref">CDD_EDMA_lld_deInit</span></a></strong>(Cdd_Dma_ConfigType * hEdmaList)</p></td>
+<td><p>This function Deinitializes the EDMA instance.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-registerintr"><span class="std std-ref">CDD_EDMA_lld_registerIntr</span></a></strong>(Cdd_Dma_Handler * hEdma, void * appdata, <a class="reference internal" href="#typedef-cdd-edma-eventcallback"><span class="std std-ref">Cdd_Edma_EventCallback</span></a> callback, uint32 handleId)</p></td>
+<td><p>Function to register callback function for a TCC.</p></td>
+</tr>
+<tr class="row-odd"><td><p>sint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-unregisterintr"><span class="std std-ref">CDD_EDMA_lld_unregisterIntr</span></a></strong>(Cdd_Dma_Handler * hEdma)</p></td>
+<td><p>Function to unregister callback function for a TCC.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-transfercompletion-masterisr"><span class="std std-ref">CDD_EDMA_TransferCompletion_MasterIsr</span></a></strong>(void )</p></td>
+<td><p>Function which will be called on the interrupt comes, will act as master ISR function.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-gettcc"><span class="std std-ref">CDD_EDMA_lld_GetTcc</span></a></strong>(uint32 handleId, uint32 channelIdx)</p></td>
+<td><p>Function used to get the dummy TCC in case of chaining.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-chainingconfigurechannelregion"><span class="std std-ref">CDD_EDMA_lld_chainingConfigureChannelRegion</span></a></strong>(Cdd_Dma_Handler * hEdma, uint32 handleId)</p></td>
+<td><p>Function used to have channel configure region in case of chaining for multiple channels.</p></td>
+</tr>
+<tr class="row-odd"><td><p>uint64</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-dma-soc-virttophy"><span class="std std-ref">Cdd_Dma_Soc_VirtToPhy</span></a></strong>(void * virtAddr)</p></td>
+<td><p>Function used for convertion of address from virtaul to physical address.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-dma-cbkunregister"><span class="std std-ref">Cdd_Dma_CbkUnregister</span></a></strong>(uint32 handleId)</p></td>
+<td><p>Function used for unregistering callback associated with the particular handle.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-dma-readback"><span class="std std-ref">Cdd_Dma_ReadBack</span></a></strong>(Cdd_Dma_RegisterReadbackType * RegRbPtr, uint32 baseAddr)</p></td>
+<td><p>Function used for register read back.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-cdd-edma-lld-ccparamentry-init">
+<h3>function CDD_EDMA_lld_ccParamEntry_Init<a class="headerlink" href="#function-cdd-edma-lld-ccparamentry-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_ccParamEntry_Init</span><span class="p">(</span>
+<span class="w">    </span><span class="n">CDD_EDMACCEDMACCPaRAMEntry</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">paramEntry</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+EDMA interrupt configuration object. The object is passed to the CDD_EDMA_registerIntr() function. This is held by the driver till the CDD_EDMA_unregisterIntr() function is called with this obect. The application should not modify this object in between.</p>
+<p>Clear a PaRAM Set .</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>paramEntry</strong> Parameter RAM set to be cleared.</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-enablechinshadowregregion">
+<h3>function CDD_EDMA_lld_enableChInShadowRegRegion<a class="headerlink" href="#function-cdd-edma-lld-enablechinshadowregregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_enableChInShadowRegRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chType</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enable channel to Shadow region mapping.</p>
+<p>This API allocates DMA/QDMA channels or TCCs, and the same resources are enabled in the shadow region specific register (DRAE/DRAEH/QRAE). Here only one shadow region is used since, there is only one Master.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chType</strong> (DMA/QDMA) Channel For Example: For DMA it is, CDD_EDMA_CHANNEL_TYPE_DMA.</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA</p></li>
+</ul>
+<p>chType can have values CDD_EDMA_CHANNEL_TYPE_DMA</p>
+<p>CDD_EDMA_CHANNEL_TYPE_QDMA</p>
+</section>
+<section id="function-cdd-edma-lld-disablechinshadowregregion">
+<h3>function CDD_EDMA_lld_disableChInShadowRegRegion<a class="headerlink" href="#function-cdd-edma-lld-disablechinshadowregregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_disableChInShadowRegRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chType</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Disable channel to Shadow region mapping.</p>
+<p>This API deallocates DMA/QDMA channels or TCCs, and the same resources are disabled in the shadow region specific register (DRAE/DRAEH/QRAE). Here only one shadow region is used since, there is only one Master.</p>
+<p>chType can have values CDD_EDMA_CHANNEL_TYPE_DMA</p>
+<p>CDD_EDMA_CHANNEL_TYPE_QDMA</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chType</strong> (DMA/QDMA) Channel</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-channeltoparammap">
+<h3>function CDD_EDMA_lld_channelToParamMap<a class="headerlink" href="#function-cdd-edma-lld-channeltoparammap" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_channelToParamMap</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">channel</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">paramSet</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function maps DMA channel to any of the PaRAM sets in the PaRAM memory map.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>channel</strong> The DMA channel number required to be mapped.</p></li>
+<li><p><strong>paramSet</strong> It specifies the paramSet to which DMA channel required to be mapped. Valid values are 0 to CDD_EDMA_NUM_PARAMSETS-1</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-mapchtoevtq">
+<h3>function CDD_EDMA_lld_mapChToEvtQ<a class="headerlink" href="#function-cdd-edma-lld-mapchtoevtq" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_mapChToEvtQ</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chType</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">evtQNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Map channel to Event Queue.</p>
+<p>This API maps DMA/QDMA channels to the Event Queue</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>chType</strong> (DMA/QDMA) Channel For Example: For QDMA it is CDD_EDMA_CHANNEL_TYPE_QDMA.</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA</p></li>
+<li><p><strong>evtQNum</strong> Event Queue Number to which the channel will be mapped (valid only for the Master Channel (DMA/QDMA) request).</p></li>
+</ul>
+<p>chtype can have values CDD_EDMA_CHANNEL_TYPE_DMA</p>
+<p>CDD_EDMA_CHANNEL_TYPE_QDMA</p>
+</section>
+<section id="function-cdd-edma-lld-unmapchtoevtq">
+<h3>function CDD_EDMA_lld_unmapChToEvtQ<a class="headerlink" href="#function-cdd-edma-lld-unmapchtoevtq" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_unmapChToEvtQ</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chType</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Remove Mapping of channel to Event Queue.</p>
+<p>This API Unmaps DMA/QDMA channels from the Event Queue allocated</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>chType</strong> (DMA/QDMA) Channel For Example: For DMA it is CDD_EDMA_CHANNEL_TYPE_DMA.</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA</p></li>
+</ul>
+<p>chtype can have values CDD_EDMA_CHANNEL_TYPE_DMA</p>
+<p>CDD_EDMA_CHANNEL_TYPE_QDMA</p>
+</section>
+<section id="function-cdd-edma-lld-mapqdmachtoparam">
+<h3>function CDD_EDMA_lld_mapQdmaChToPaRAM<a class="headerlink" href="#function-cdd-edma-lld-mapqdmachtoparam" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_mapQdmaChToPaRAM</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">paRAMId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to map a QDMA channel to PaRAM set This API Needs to be called before programming the paRAM sets for the QDMA Channels.Application needs to maitain the paRAMId provided by this API.This paRAMId is used to set paRAM and get paRAM. Refer corresponding API’s for more details.</p>
+<p>Note : The PaRAMId requested must be greater than 32(CDD_EDMA_NUM_DMACH). and lesser than CDD_EDMA_NUM_DMACH + chNum Because, the first 32 PaRAM’s are directly mapped to first 32 DMA channels and (32 - 38) for QDMA Channels. (32 - 38) is assigned by driver in this API.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA</p></li>
+<li><p><strong>paRAMId</strong> PaRAM Id to which the QDMA channel will be mapped to. mapped to.</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-clrmissevtregion">
+<h3>function CDD_EDMA_lld_clrMissEvtRegion<a class="headerlink" href="#function-cdd-edma-lld-clrmissevtregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_clrMissEvtRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to Clear any missed event.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Allocated channel number.</p></li>
+</ul>
+<p>Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p>
+</section>
+<section id="function-cdd-edma-lld-clrccerr">
+<h3>function CDD_EDMA_lld_clrCCErr<a class="headerlink" href="#function-cdd-edma-lld-clrccerr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_clrCCErr</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">flags</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to Clear any Channel controller Errors.</p>
+<p>CDD_EDMACC_CLR_TCCERR Clears the TCCERR bit in the EDMACC ERR Reg</p>
+<p>CDD_EDMACC_CLR_QTHRQ0 Queue threshold error clear for queue 0.</p>
+<p>CDD_EDMACC_CLR_QTHRQ1 Queue threshold error clear for queue 1.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>flags</strong> Masks to be passed.</p></li>
+</ul>
+<p>flags can have values:</p>
+</section>
+<section id="function-cdd-edma-lld-setevtregion">
+<h3>function CDD_EDMA_lld_setEvtRegion<a class="headerlink" href="#function-cdd-edma-lld-setevtregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_setEvtRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to Set an event. This API helps user to manually set events to initiate DMA transfer requests.</p>
+<p>Note : This API is generally used during Manual transfers.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used.</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-clrevtregion">
+<h3>function CDD_EDMA_lld_clrEvtRegion<a class="headerlink" href="#function-cdd-edma-lld-clrevtregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_clrEvtRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to Clear an event.</p>
+<p>Note : This API is generally used during Manual transfers.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Allocated channel number.</p></li>
+</ul>
+<p>Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p>
+</section>
+<section id="function-cdd-edma-lld-enabledmaevtregion">
+<h3>function CDD_EDMA_lld_enableDmaEvtRegion<a class="headerlink" href="#function-cdd-edma-lld-enabledmaevtregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_enableDmaEvtRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to enable an DMA event.</p>
+<p>Note : Writes of 1 to the bits in EESR sets the corresponding event bits in EER. This is generally used for Event Based transfers.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-disabledmaevtregion">
+<h3>function CDD_EDMA_lld_disableDmaEvtRegion<a class="headerlink" href="#function-cdd-edma-lld-disabledmaevtregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_disableDmaEvtRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to Disable an DMA event.</p>
+<p>Note : Writes of 1 to the bits in EECR clear the corresponding event bits in EER; writes of 0 have no effect.. This is generally used for Event Based transfers.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-getintrstatusregion">
+<h3>function CDD_EDMA_lld_getIntrStatusRegion<a class="headerlink" href="#function-cdd-edma-lld-getintrstatusregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_getIntrStatusRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function returns interrupts status of those events which is less than 32.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+</ul>
+<p><strong>Return</strong>: Interrupt status register value</p>
+</section>
+<section id="function-cdd-edma-lld-enableevtintrregion">
+<h3>function CDD_EDMA_lld_enableEvtIntrRegion<a class="headerlink" href="#function-cdd-edma-lld-enableevtintrregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_enableEvtIntrRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to enable the transfer completion interrupt generation by the EDMACC for all DMA/QDMA channels.</p>
+<p>Note : To set any interrupt bit in IER, a 1 must be written to the corresponding interrupt bit in the interrupt enable set register.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-disableevtintrregion">
+<h3>function CDD_EDMA_lld_disableEvtIntrRegion<a class="headerlink" href="#function-cdd-edma-lld-disableevtintrregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_disableEvtIntrRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to clear CC interrupts.</p>
+<p>Note : Writes of 1 to the bits in IECR clear the corresponding interrupt bits in the interrupt enable registers (IER); writes of 0 have no effect.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Allocated channel number. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-clrintrregion">
+<h3>function CDD_EDMA_lld_clrIntrRegion<a class="headerlink" href="#function-cdd-edma-lld-clrintrregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_clrIntrRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">value</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Enables the user to Clear an Interrupt.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>value</strong> Value to be set to clear the Interrupt Status.</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-getparam">
+<h3>function CDD_EDMA_lld_getPaRAM<a class="headerlink" href="#function-cdd-edma-lld-getparam" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_getPaRAM</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">paRAMId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CDD_EDMACCEDMACCPaRAMEntry</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">currPaRAM</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Retrieve existing PaRAM set associated with specified logical channel (DMA/Link).</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>paRAMId</strong> paRAMset ID whose parameter set is requested. Valid values are 0 to CDD_EDMA_NUM_PARAMSETS-1</p></li>
+<li><p><strong>currPaRAM</strong> User gets the existing PaRAM here.</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-setparam">
+<h3>function CDD_EDMA_lld_setPaRAM<a class="headerlink" href="#function-cdd-edma-lld-setparam" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_setPaRAM</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">paRAMId</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">CDD_EDMACCEDMACCPaRAMEntry</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">newPaRAM</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Copy the user specified PaRAM Set onto the PaRAM Set associated with the logical channel (DMA/Link).</p>
+<p>This API takes a PaRAM Set as input and copies it onto the actual PaRAM Set associated with the logical channel. OPT field of the PaRAM Set is written first and the CCNT field is written last.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>paRAMId</strong> paRAMset ID whose parameter set has to be updated Valid values are 0 to CDD_EDMA_NUM_PARAMSETS-1</p></li>
+<li><p><strong>newPaRAM</strong> Parameter RAM set to be copied onto existing PaRAM.</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-configurechannelregion">
+<h3>function CDD_EDMA_lld_configureChannelRegion<a class="headerlink" href="#function-cdd-edma-lld-configurechannelregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_configureChannelRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_Dma_ChannelConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">chConfig</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Request a DMA/QDMA/Link channel.</p>
+<p>Each channel (DMA/QDMA/Link) must be requested before initiating a DMA transfer on that channel.</p>
+<p>This API is used to allocate a logical channel (DMA/QDMA/Link) along with the associated resources. For DMA and QDMA channels, TCC and PaRAM Set are also allocated along with the requested channel.</p>
+<p>User can request a specific logical channel by passing the channel number in ‘chNum’.</p>
+<p>For DMA/QDMA channels, after allocating all the EDMA resources, this API sets the TCC field of the OPT PaRAM Word with the allocated TCC. It also sets the event queue for the channel allocated. The event queue needs to be specified by the user.</p>
+<p>For DMA channel, it also sets the DCHMAP register.</p>
+<p>For QDMA channel, it sets the QCHMAP register and CCNT as trigger word and enables the QDMA channel by writing to the QEESR register.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chType</strong> (DMA/QDMA) Channel For Example: For DMA it is CDD_EDMA_CHANNEL_TYPE_DMA.</p></li>
+<li><p><strong>chNum</strong> This is the channel number requested for a particular event. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA</p></li>
+<li><p><strong>tccNum</strong> The tcc number on which the completion/error interrupt is generated. Not used if user requested for a Link channel.</p></li>
+<li><p><strong>paramId</strong> The param number currosponding to the DMA/QDMA channel.</p></li>
+<li><p><strong>evtQNum</strong> Event Queue Number to which the channel will be mapped (valid only for the Master Channel (DMA/QDMA) request).</p></li>
+</ul>
+<p><strong>Return</strong>: TRUE if parameters are valid, else FALSE</p>
+</section>
+<section id="function-cdd-edma-lld-freechannelregion">
+<h3>function CDD_EDMA_lld_freeChannelRegion<a class="headerlink" href="#function-cdd-edma-lld-freechannelregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_freeChannelRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chType</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">trigMode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Free the specified channel (DMA/QDMA/Link) and its associated resources (PaRAM Set, TCC etc) and removes various mappings.</p>
+<p>For Link channels, this API only frees the associated PaRAM Set.</p>
+<p>For DMA/QDMA channels, it does the following operations: 1) Disable any ongoing transfer on the channel,</p>
+<ol class="arabic simple" start="2">
+<li><p>Remove the channel to Event Queue mapping,</p></li>
+<li><p>For DMA channels, clear the DCHMAP register, if available</p></li>
+<li><p>For QDMA channels, clear the QCHMAP register,</p></li>
+<li><p>Frees the DMA/QDMA channel in the end.</p></li>
+</ol>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chType</strong> (DMA/QDMA) Channel For Example: For QDMA it is, CDD_EDMA_CHANNEL_TYPE_QDMA.</p></li>
+<li><p><strong>chNum</strong> This is the channel number requested for a particular event. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA</p></li>
+<li><p><strong>trigMode</strong> Mode of triggering start of transfer.</p></li>
+<li><p><strong>tccNum</strong> The channel number on which the completion/error interrupt is generated. Not used if user requested for a Link channel.</p></li>
+<li><p><strong>evtQNum</strong> Event Queue Number to which the channel will be unmapped (valid only for the Master Channel (DMA/QDMA) request).</p></li>
+</ul>
+<p>trigMode can have values: CDD_EDMA_TRIG_MODE_MANUAL</p>
+<p>CDD_EDMA_TRIG_MODE_QDMA</p>
+<p>CDD_EDMA_TRIG_MODE_EVENT</p>
+<p><strong>Return</strong>: TRUE if parameters are valid else return FALSE</p>
+</section>
+<section id="function-cdd-edma-lld-enabletransferregion">
+<h3>function CDD_EDMA_lld_enableTransferRegion<a class="headerlink" href="#function-cdd-edma-lld-enabletransferregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_enableTransferRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">trigMode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Start EDMA transfer on the specified channel.</p>
+<p>There are multiple ways to trigger an EDMA transfer. The triggering mode option allows choosing from the available triggering modes: Event, Manual or QDMA.</p>
+<p>In event triggered, a peripheral or an externally generated event triggers the transfer. This API clears the Event and Event Miss Register and then enables the DMA channel by writing to the EESR.</p>
+<p>In manual triggered mode, CPU manually triggers a transfer by writing a 1 in the Event Set Register ESR. This API writes to the ESR to start the transfer.</p>
+<p>In QDMA triggered mode, a QDMA transfer is triggered when a CPU (or other EDMA programmer) writes to the trigger word of the QDMA channel PaRAM set (auto-triggered) or when the EDMACC performs a link update on a PaRAM set that has been mapped to a QDMA channel (link triggered). This API enables the QDMA channel by writing to the QEESR register.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Channel being used to enable transfer. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+<li><p><strong>trigMode</strong> Mode of triggering start of transfer (Manual, QDMA or Event).</p></li>
+</ul>
+<p>trigMode can have values: CDD_EDMA_TRIG_MODE_MANUAL</p>
+<p>CDD_EDMA_TRIG_MODE_QDMA</p>
+<p>CDD_EDMA_TRIG_MODE_EVENT</p>
+<p><strong>Return</strong>: retVal TRUE or FALSE depending on the param passed.</p>
+</section>
+<section id="function-cdd-edma-lld-disabletransferregion">
+<h3>function CDD_EDMA_lld_disableTransferRegion<a class="headerlink" href="#function-cdd-edma-lld-disabletransferregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_disableTransferRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">trigMode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Disable DMA transfer on the specified channel.</p>
+<p>There are multiple ways by which an EDMA transfer could be triggered. The triggering mode option allows choosing from the available triggering modes.</p>
+<p>To disable a channel which was previously triggered in manual mode, this API clears the Secondary Event Register and Event Miss Register, if set, for the specific DMA channel.</p>
+<p>To disable a channel which was previously triggered in QDMA mode, this API clears the QDMA Event Enable Register, for the specific QDMA channel.</p>
+<p>To disable a channel which was previously triggered in event mode, this API clears the Event Enable Register, Event Register, Secondary Event Register and Event Miss Register, if set, for the specific DMA channel.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used. Valid values are 0 to CDD_EDMA_NUM_REGIONS-1</p></li>
+<li><p><strong>chNum</strong> Channel being used to enable transfer. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+<li><p><strong>trigMode</strong> Mode of triggering start of transfer (Manual, QDMA or Event).</p></li>
+</ul>
+<p><strong>Return</strong>: retVal TRUE or FALSE depending on the param passed.</p>
+</section>
+<section id="function-cdd-edma-lld-intrstatushighgetregion">
+<h3>function CDD_EDMA_lld_intrStatusHighGetRegion<a class="headerlink" href="#function-cdd-edma-lld-intrstatushighgetregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_intrStatusHighGetRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function returns interrupt status of those events which are greater than 32.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used.</p></li>
+</ul>
+<p><strong>Return</strong>: value Status of the Interrupt Pending High Register</p>
+</section>
+<section id="function-cdd-edma-lld-readintrstatusregion">
+<h3>function CDD_EDMA_lld_readIntrStatusRegion<a class="headerlink" href="#function-cdd-edma-lld-readintrstatusregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_readIntrStatusRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">regionId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">tccNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function reads interrupt status.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>regionId</strong> Region id to be used.</p></li>
+<li><p><strong>tccNum</strong> The channel number on which the completion/error interrupt is generated.</p></li>
+</ul>
+<p><strong>Return</strong>: value Status of the Interrupt Pending register</p>
+</section>
+<section id="function-cdd-edma-lld-geteventstatus">
+<h3>function CDD_EDMA_lld_getEventStatus<a class="headerlink" href="#function-cdd-edma-lld-geteventstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_getEventStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function returns status of those events which are less than 32.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+</ul>
+<p><strong>Return</strong>: value Event pending status register value</p>
+</section>
+<section id="function-cdd-edma-lld-geteventstatushigh">
+<h3>function CDD_EDMA_lld_getEventStatusHigh<a class="headerlink" href="#function-cdd-edma-lld-geteventstatushigh" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_getEventStatusHigh</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function returns status of those events which are greater than 32.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+</ul>
+<p><strong>Return</strong>: value Status of the Event Pending High Register</p>
+</section>
+<section id="function-cdd-edma-lld-readeventstatusregion">
+<h3>function CDD_EDMA_lld_readEventStatusRegion<a class="headerlink" href="#function-cdd-edma-lld-readeventstatusregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_readEventStatusRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function reads Event pending status.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>chNum</strong> Channel being used for transfer. Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA</p></li>
+</ul>
+<p><strong>Return</strong>: value Status of the Event Pending register</p>
+</section>
+<section id="function-cdd-edma-lld-chainchannel">
+<h3>function CDD_EDMA_lld_chainChannel<a class="headerlink" href="#function-cdd-edma-lld-chainchannel" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_chainChannel</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">paRAMId1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chId2</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">chainOptions</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Chain the two specified channels.</p>
+<p>This API is used to chain a DMA channel to a previously allocated DMA/QDMA channel</p>
+<p>Chaining is different from Linking. The EDMA link feature reloads the current channel parameter set with the linked parameter set. The EDMA chaining feature does not modify or update any channel parameter set; it provides a synchronization event (or trigger) to the chained DMA channel, as soon as the transfer (final or intermediate) completes on the main DMA/QDMA channel.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>paRAMId1</strong> PaRAM set ID of physical channel1 to which particular paRAM set will be chained or PaRAM set ID in case another PaRAM set is being chained to this PaRAM set</p></li>
+<li><p><strong>chId2</strong> DMA channel which needs to be chained to the first DMA/QDMA channel.</p></li>
+<li><p><strong>chainOptions</strong> combination of the following masks which control individual PaRAM OPT fields related to intermediate/final completion chaining and intermediate/final completion interrupt :</p></li>
+<li><p>CDD_EDMA_OPT_TCCHEN_MASK</p></li>
+<li><p>CDD_EDMA_OPT_ITCCHEN_MASK</p></li>
+<li><p>CDD_EDMA_OPT_TCINTEN_MASK</p></li>
+<li><p>CDD_EDMA_OPT_ITCINTEN_MASK e.g to enable final completion chaining and enable interrupt only for intermediate completion, set chainOptions as : CDD_EDMA_OPT_TCCHEN_MASK | CDD_EDMA_OPT_ITCINTEN_MASK</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-linkchannel">
+<h3>function CDD_EDMA_lld_linkChannel<a class="headerlink" href="#function-cdd-edma-lld-linkchannel" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_linkChannel</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">paRAMId1</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">paRAMId2</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Link two channels.</p>
+<p>This API is used to link two previously allocated logical (DMA/QDMA/Link) channels.</p>
+<p>It sets the Link field of the PaRAM set associated with first channel (chId1) to point it to the PaRAM set associated with second channel (chId2).</p>
+<p>It also sets the TCC field of PaRAM set of second channel to the same as that of the first channel.</p>
+<p>After the transfer based on the PaRAM set of channel1 is over, the PaRAM set paRAMId2 will be copied to the PaRAM set of channel1 and transfer will resume. For DMA channels, another sync event is required to initiate the transfer on the Link channel.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the EDMA instance used.</p></li>
+<li><p><strong>paRAMId1</strong> PaRAM set ID of physical channel1 to which particular paRAM set will be linked or PaRAM set ID in case another PaRAM set is being linked to this PaRAM set</p></li>
+<li><p><strong>paRAMId2</strong> PaRAM set ID which is linked to channel with parameter ID paRAMId1</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-init">
+<h3>function CDD_EDMA_lld_init<a class="headerlink" href="#function-cdd-edma-lld-init" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_init</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Dma_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hEdmaList</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function initializes the EDMA instance.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>hEdma</strong> HandleList to the EDMA instance used</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-deinit">
+<h3>function CDD_EDMA_lld_deInit<a class="headerlink" href="#function-cdd-edma-lld-deinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_deInit</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Dma_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hEdmaList</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function Deinitializes the EDMA instance.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>hEdma</strong> HandleList to the EDMA instance used</p></li>
+</ul>
+</section>
+<section id="function-cdd-edma-lld-registerintr">
+<h3>function CDD_EDMA_lld_registerIntr<a class="headerlink" href="#function-cdd-edma-lld-registerintr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">CDD_EDMA_lld_registerIntr</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Dma_Handler</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hEdma</span><span class="p">,</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">appdata</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Edma_EventCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">handleId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to register callback function for a TCC.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>hEdma</strong> Cdd_EDMALLD_Handle returned from CDD_EDMA_open()</p></li>
+<li><p><strong>appdata</strong> data associated with it</p></li>
+<li><p><strong>callback</strong> registered callback which will be called on interupt</p></li>
+</ul>
+<p><strong>See</strong>: CDD_EDMA_open()</p>
+<p><strong>Return</strong>: E_OK if started successfully; else error on failure</p>
+<p><strong>Precondition</strong>: CDD_EDMA_open() has to be called first</p>
+</section>
+<section id="function-cdd-edma-lld-unregisterintr">
+<h3>function CDD_EDMA_lld_unregisterIntr<a class="headerlink" href="#function-cdd-edma-lld-unregisterintr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">CDD_EDMA_lld_unregisterIntr</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Dma_Handler</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hEdma</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function to unregister callback function for a TCC.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>hEdma</strong> Cdd_EDMALLD_Handle returned from CDD_EDMA_open()</p></li>
+</ul>
+<p><strong>See</strong>:</p>
+<ul class="simple">
+<li><p>CDD_EDMA_open()</p></li>
+<li><p>CDD_EDMA_registerIntr()</p></li>
+</ul>
+<p><strong>Return</strong>: E_OK if started successfully; else error on failure</p>
+<p><strong>Precondition</strong>: CDD_EDMA_registerIntr() has to be called first</p>
+</section>
+<section id="function-cdd-edma-transfercompletion-masterisr">
+<h3>function CDD_EDMA_TransferCompletion_MasterIsr<a class="headerlink" href="#function-cdd-edma-transfercompletion-masterisr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_TransferCompletion_MasterIsr</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function which will be called on the interrupt comes, will act as master ISR function.</p>
+<p><strong>See</strong>: CDD_EDMA_open()</p>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-edma-lld-gettcc">
+<h3>function CDD_EDMA_lld_GetTcc<a class="headerlink" href="#function-cdd-edma-lld-gettcc" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_GetTcc</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">handleId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">channelIdx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function used to get the dummy TCC in case of chaining.</p>
+<p><strong>See</strong>: CDD_EDMA_open()</p>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-edma-lld-chainingconfigurechannelregion">
+<h3>function CDD_EDMA_lld_chainingConfigureChannelRegion<a class="headerlink" href="#function-cdd-edma-lld-chainingconfigurechannelregion" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_lld_chainingConfigureChannelRegion</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Dma_Handler</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hEdma</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">handleId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function used to have channel configure region in case of chaining for multiple channels.</p>
+<p><strong>See</strong>: CDD_EDMA_open()</p>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-dma-soc-virttophy">
+<h3>function Cdd_Dma_Soc_VirtToPhy<a class="headerlink" href="#function-cdd-dma-soc-virttophy" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint64</span><span class="w"> </span><span class="n">Cdd_Dma_Soc_VirtToPhy</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">virtAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function used for convertion of address from virtaul to physical address.</p>
+<p><strong>See</strong>: CDD_EDMA_open()</p>
+<p><strong>Return</strong>: uint64 - phy address</p>
+</section>
+<section id="function-cdd-dma-cbkunregister">
+<h3>function Cdd_Dma_CbkUnregister<a class="headerlink" href="#function-cdd-dma-cbkunregister" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Dma_CbkUnregister</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">handleId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function used for unregistering callback associated with the particular handle.</p>
+<p><strong>See</strong>: CDD_EDMA_open()</p>
+<p><strong>Return</strong>: void</p>
+</section>
+<section id="function-cdd-dma-readback">
+<h3>function Cdd_Dma_ReadBack<a class="headerlink" href="#function-cdd-dma-readback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Dma_ReadBack</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Dma_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Function used for register read back.</p>
+<p><strong>Return</strong>: void</p>
+</section>
+</section>
+<section id="detailed-description">
+<h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Link to this heading"></a></h2>
+<p>This module contains APIs to program and use the EDMA.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2026, Texas Instruments Incorporated.
+          <span class="lastupdated" >Last updated on Feb 10, 2026.
+      </span><br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.02.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = 'https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263P/AM263Px_versions.json';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

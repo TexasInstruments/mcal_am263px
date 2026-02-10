@@ -70,7 +70,6 @@
 /* ========================================================================== */
 #include "Pwm_Priv.h"
 #include "sys_common.h"
-#include "mcal_hw_soc_baseaddress.h"
 #if (STD_ON == PWM_SFO_SUPPORT_ENABLE)
 #include "Pwm_Sfo.h"
 #endif
@@ -147,7 +146,7 @@ FUNC(void, PWM_CODE) Pwm_ResetChObj(Pwm_ChObjType *chObj)
 #endif /*PWM_USE_EPWM*/
 #if (STD_ON == PWM_NOTIFICATION_SUPPORTED)
     chObj->chCfg.notificationHandler = (Pwm_NotifyFuncType)NULL_PTR;
-    chObj->channelNotifyActiveFlag   = (uint32)FALSE;
+    chObj->channelNotifyActiveFlag   = FALSE;
 #endif
     chObj->baseAddr     = 0U;
     chObj->channelState = PWM_STATUS_UNINIT;
@@ -578,7 +577,7 @@ Pwm_EnableNotification_epwm(Pwm_ChObjType *chObj, const Pwm_ChannelConfigType_PC
     EPWM_setInterruptEventCountInitValue(chObj->baseAddr, 0);
 
     /* Requirements : MCAL-3597*/
-    chObj->channelNotifyActiveFlag = (uint32)TRUE;
+    chObj->channelNotifyActiveFlag = TRUE;
 }
 
 static void Pwm_EnableNotification_epwm_FallingEdge(uint32 outputCh, uint32 baseAddr, Pwm_OutputStateType polarity)
@@ -1069,7 +1068,7 @@ FUNC(void, PWM_CODE) Pwm_SystemInit(P2CONST(Pwm_ConfigType, AUTOMATIC, PWM_PBCFG
                 Pwm_HwUnitInit(&Pwm_ChObj[chIdx]);
 /* The function Pwm_Init shall disable all notifications */
 #if (STD_ON == PWM_NOTIFICATION_SUPPORTED)
-                Pwm_ChObj[chIdx].channelNotifyActiveFlag = (uint32)FALSE;
+                Pwm_ChObj[chIdx].channelNotifyActiveFlag = FALSE;
 #endif
                 Pwm_ChObj[chIdx].channelState = PWM_STATUS_INIT;
                 break;
@@ -1096,7 +1095,7 @@ FUNC(void, PWM_CODE) Pwm_SystemDeInit(void)
              * notifications controlled by the PWM driver.
              */
 #if (STD_ON == PWM_NOTIFICATION_SUPPORTED)
-            Pwm_ChObj[chIdx].channelNotifyActiveFlag = (uint32)FALSE;
+            Pwm_ChObj[chIdx].channelNotifyActiveFlag = FALSE;
 #endif
             Pwm_ChObj[chIdx].channelState = PWM_STATUS_UNINIT;
         }
@@ -1130,7 +1129,7 @@ FUNC(void, PWM_CODE) Pwm_SystemDisableNotification(Pwm_ChannelType ChannelNumber
     Pwm_ChObjType *chObj = &Pwm_ChObj[ChannelNumber];
     Pwm_disableInterrupt_epwm(chObj->baseAddr);
     /* Set the notification active flag to FALSE */
-    chObj->channelNotifyActiveFlag = (uint32)FALSE;
+    chObj->channelNotifyActiveFlag = FALSE;
 }
 
 #if (STD_ON == PWM_SET_PERIOD_AND_DUTY_API)

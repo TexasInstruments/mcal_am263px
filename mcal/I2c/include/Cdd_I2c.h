@@ -53,7 +53,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define CDD_I2C_SW_MINOR_VERSION (0U)
 /** \brief Driver Implementation Patch Version */
-#define CDD_I2C_SW_PATCH_VERSION (1U)
+#define CDD_I2C_SW_PATCH_VERSION (2U)
 /** @} */
 
 /**
@@ -345,9 +345,6 @@ typedef enum
 /**
  * \brief Callback routine provided by the user for each Sequence to notify the
  * caller that a Sequence has been finished.
- *
- * \param[out] sequenceId Sequence which is finished
- * \param[out] result Status of currently executed sequence
  */
 typedef void (*Cdd_I2c_SequenceEndNotification)(void);
 
@@ -469,7 +466,7 @@ typedef struct
  * Sync/Async - Synchronous
  * Reentrancy - Non Reentrant
  *
- * \param[in] ConfigPtr Pointer to CDD_I2C Driver configuration set
+ * \param[in] configPtr Pointer to CDD_I2C Driver configuration set
  */
 FUNC(void, CDD_I2C_CODE) Cdd_I2c_Init(const Cdd_I2c_ConfigType* configPtr);
 
@@ -494,7 +491,7 @@ FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_DeInit(void);
  * Sync/Async - Synchronous
  * Reentrancy - Reentrant
  *
- * \param[in] VersionInfo Pointer to where to store the version information of this module
+ * \param[in] versionInfo Pointer to where to store the version information of this module
  */
 FUNC(void, CDD_I2C_CODE) Cdd_I2c_GetVersionInfo(Std_VersionInfoType* versionInfo);
 #endif

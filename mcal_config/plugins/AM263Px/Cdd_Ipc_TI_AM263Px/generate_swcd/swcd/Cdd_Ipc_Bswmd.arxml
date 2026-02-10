@@ -71,6 +71,11 @@
           <INTERNAL-BEHAVIORS>
             <BSW-INTERNAL-BEHAVIOR UUID="2dc5440f-4934-4fcc-a242-2a240403f865">
               <SHORT-NAME>Cdd_Ipc_Behavior</SHORT-NAME>
+              <EXCLUSIVE-AREAS>
+                <EXCLUSIVE-AREA UUID="9c3eecc0-ed1c-4200-8d36-91ccaa9c1525">
+                  <SHORT-NAME>IPC_EXCLUSIVE_AREA_0</SHORT-NAME>
+                </EXCLUSIVE-AREA>
+              </EXCLUSIVE-AREAS>
               <ENTITYS>
                 [!IF "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRpMsgEnable = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="6c7a6b2e-e131-4041-80c7-17a042194d25">
@@ -164,7 +169,8 @@
                   [!ELSE!]
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!]
-                </BSW-INTERRUPT-ENTITY>                
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
+                </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="8d5717ef-eb5a-4938-902c-1a05b9683bf2">
                   <SHORT-NAME>Cdd_Ipc_Notify_RegisterClient</SHORT-NAME>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
@@ -520,7 +526,7 @@
             <BSW-MODULE-ENTRY UUID="2ff1cc3e-d41a-42fa-9503-9a5926c41636">
               <SHORT-NAME>Cdd_Ipc_Isr</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
-              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>              
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
               <CALL-TYPE>INTERRUPT</CALL-TYPE>
               [!IF "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIrqType ='CDD_IPC_ISR_CAT2'"!]
               <EXECUTION-CONTEXT>INTERRUPT-CAT-2</EXECUTION-CONTEXT>

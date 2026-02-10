@@ -132,8 +132,13 @@ sint32 RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCore
 
     SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
-    status = IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, remoteCoreId, IPC_NOTIFY_CLIENT_ID_RPMSG, txMsgValue,
-                                   1 /* wait for message to be posted */, timeout);
+    IpcNotify_MsgParams msgParams;
+    msgParams.remoteCoreId       = remoteCoreId;
+    msgParams.remoteClientId     = IPC_NOTIFY_CLIENT_ID_RPMSG;
+    msgParams.messageValue       = txMsgValue;
+    msgParams.waitForFifoNotFull = 1U; /* wait for message to be posted */
+    msgParams.timeout            = timeout;
+    status                       = IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, &msgParams);
 
     return status;
 }
@@ -253,8 +258,13 @@ sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCor
 
     SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
-    status = IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, remoteCoreId, IPC_NOTIFY_CLIENT_ID_RPMSG, rxMsgValue,
-                                   1U /* wait for message to be posted */, timeout);
+    IpcNotify_MsgParams msgParams;
+    msgParams.remoteCoreId       = remoteCoreId;
+    msgParams.remoteClientId     = IPC_NOTIFY_CLIENT_ID_RPMSG;
+    msgParams.messageValue       = rxMsgValue;
+    msgParams.waitForFifoNotFull = 1U; /* wait for message to be posted */
+    msgParams.timeout            = timeout;
+    status                       = IpcNotify_lld_sendMsg(hRpMsg->hRpMsgInit->hIpcNotify, &msgParams);
 
     return status;
 }

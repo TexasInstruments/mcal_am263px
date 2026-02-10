@@ -1573,9 +1573,8 @@ Cdd_Pwm_CounterComparatorCfg(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint3
                              uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)
 {
     uint32         baseAddr;
-    Std_ReturnType ret               = E_OK;
-    boolean        status            = FALSE;
-    uint32         enableShadowWrite = 0;
+    Std_ReturnType ret    = E_OK;
+    boolean        status = FALSE;
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_COUNTER_CMP_CFG))
 #endif
@@ -1588,8 +1587,8 @@ Cdd_Pwm_CounterComparatorCfg(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint3
             SchM_Enter_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
 
             /* Set Comaprator Values. */
-            status = (boolean)Cdd_Pwm_counterComparatorCfg(baseAddr, cmpType, cmpVal, enableShadowWrite,
-                                                           shadowToActiveLoadTrigger, overwriteShadow);
+            status = (boolean)Cdd_Pwm_counterComparatorCfg(baseAddr, cmpType, cmpVal, shadowToActiveLoadTrigger,
+                                                           overwriteShadow);
 
             /* Exit Critical Section. */
             SchM_Exit_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();

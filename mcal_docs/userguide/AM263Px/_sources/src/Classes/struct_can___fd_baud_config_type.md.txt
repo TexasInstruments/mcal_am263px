@@ -1,0 +1,34 @@
+---
+orphan: true
+---
+
+---
+title: Can_FdBaudConfigType
+summary: Structure defining the CAN FD data phase baud rate configuration. 
+
+---
+
+# Can_FdBaudConfigType
+
+
+
+Structure defining the CAN FD data phase baud rate configuration. 
+
+
+`#include <Can.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint16 | Baud |  In Kbps.  |
+|  uint8 | PropSeg |  Prop Segement value.  |
+|  uint8 | Pseg1 |  Phase Segment 1.  |
+|  uint8 | Pseg2 |  Phase Segment 2.  |
+|  uint8 | Sjw |  Sync jump width.  |
+|  uint16 | TimingValues |  Sum of all timing parameters *.  |
+|  uint16 | BrpValue |  Controller BRP value for Baud.  |
+|  uint16 | TrcvCompDelay |  Specifies the Transceiver Delay Compensation Offset in ns.  |
+|  boolean | BrsSwitch |  Specifies if the bit rate switching shall be used for transmissions.  |
+
+

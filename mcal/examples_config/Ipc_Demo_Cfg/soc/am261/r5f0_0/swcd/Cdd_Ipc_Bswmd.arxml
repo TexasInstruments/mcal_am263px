@@ -60,6 +60,11 @@
           <INTERNAL-BEHAVIORS>
             <BSW-INTERNAL-BEHAVIOR UUID="2dc5440f-4934-4fcc-a242-2a240403f865">
               <SHORT-NAME>Cdd_Ipc_Behavior</SHORT-NAME>
+              <EXCLUSIVE-AREAS>
+                <EXCLUSIVE-AREA UUID="9c3eecc0-ed1c-4200-8d36-91ccaa9c1525">
+                  <SHORT-NAME>IPC_EXCLUSIVE_AREA_0</SHORT-NAME>
+                </EXCLUSIVE-AREA>
+              </EXCLUSIVE-AREAS>
               <ENTITYS>
                 <BSW-CALLED-ENTITY UUID="6c7a6b2e-e131-4041-80c7-17a042194d25">
                   <SHORT-NAME>Cdd_Ipc_Construct</SHORT-NAME>
@@ -133,7 +138,8 @@
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Ipc_TI_AM261x/Cdd_Ipc_ModuleEntry/Cdd_Ipc_Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
-                </BSW-INTERRUPT-ENTITY>                
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
+                </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="8d5717ef-eb5a-4938-902c-1a05b9683bf2">
                   <SHORT-NAME>Cdd_Ipc_Notify_RegisterClient</SHORT-NAME>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
@@ -271,7 +277,7 @@
                 <AUTOSAR-ENGINEERING-OBJECT>
                   <SHORT-LABEL>src::ipc_rpmsg_lld.c</SHORT-LABEL>
                   <CATEGORY>SWSRC</CATEGORY>
-                </AUTOSAR-ENGINEERING-OBJECT>                
+                </AUTOSAR-ENGINEERING-OBJECT>
                 <AUTOSAR-ENGINEERING-OBJECT>
                   <SHORT-LABEL>V2::ipc_notify_v1_cfg_lld.c</SHORT-LABEL>
                   <CATEGORY>SWSRC</CATEGORY>
@@ -471,7 +477,7 @@
             <BSW-MODULE-ENTRY UUID="2ff1cc3e-d41a-42fa-9503-9a5926c41636">
               <SHORT-NAME>Cdd_Ipc_Isr</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
-              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>              
+              <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
               <CALL-TYPE>INTERRUPT</CALL-TYPE>
               <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>

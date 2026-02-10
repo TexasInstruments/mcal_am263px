@@ -68,6 +68,7 @@
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Lin_TI_AM261x/Lin_ModuleEntry/Lin_1_Int0ISR</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="8b222caa-3d83-4ea1-8ad5-9fc2a04ffddd">
                   <SHORT-NAME>Lin_CheckWakeup</SHORT-NAME>
@@ -374,7 +375,7 @@
               <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
-            </BSW-MODULE-ENTRY>   
+            </BSW-MODULE-ENTRY>
             <BSW-MODULE-ENTRY UUID="ec8a85bc-3aa5-45ea-b883-2e00a6fd8e54">
               <SHORT-NAME>Lin_CheckWakeup</SHORT-NAME>
               <SERVICE-ID>10</SERVICE-ID>

@@ -1,0 +1,1416 @@
+---
+title: Can
+
+---
+
+# CAN
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Can_MailBoxDirectionType](../Modules/group___c_a_n.md#enum-can_mailboxdirectiontype)** | Can Mailbox direction enum.  | 
+|enum| **[Can_HandleType](../Modules/group___c_a_n.md#enum-can_handletype)** | Can Handle Type enum.  | 
+|enum| **[Can_TxRxProcessingType](../Modules/group___c_a_n.md#enum-can_txrxprocessingtype)** | Can Tx/Rx processing enum.  | 
+|enum| **[Can_ECCErrorType](../Modules/group___c_a_n.md#enum-can_eccerrortype)** | Can Controller Error Types.  | 
+|enum| **[Can_ControllerInstance](../Modules/group___c_a_n.md#enum-can_controllerinstance)** | Can Controller instance enum.  | 
+|typedef void(*)(uint32 canErrorType)  | **[Can_ErrNotifyType](../Modules/group___c_a_n.md#typedef-can_errnotifytype)** | Typedef for error notification function pointer.  | 
+|typedef uint8  | **[CanControllerState_Type](../Modules/group___c_a_n.md#typedef-cancontrollerstate_type)** | Can Controller State enum type.  | 
+|typedef uint32  | **[Can_InterruptMask_Type](../Modules/group___c_a_n.md#typedef-can_interruptmask_type)** | Can Interrupt Mask type.  | 
+
+
+
+### enum Can_MailBoxDirectionType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CAN_MAILBOX_DIRECTION_RX | 0x0U| Mailbox is for receive.   |
+| CAN_MAILBOX_DIRECTION_TX | 0x1U| Mailbox is for transmit.   |
+
+
+
+
+**Brief**: 
+Can Mailbox direction enum. 
+
+
+
+### enum Can_HandleType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CAN_FULL | 0x0U| For only one L-PDU (identifier) is handled by the hardware object.   |
+| CAN_BASIC | 0x1U| For several L-PDUs are handled by the hardware object.   |
+
+
+
+
+**Brief**: 
+Can Handle Type enum. 
+
+
+
+### enum Can_TxRxProcessingType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CAN_TX_RX_PROCESSING_INTERRUPT | 0x0U| Interrupt Mode of operation.   |
+| CAN_TX_RX_PROCESSING_MIXED | 0x1U| Mixed Mode of operation.   |
+| CAN_TX_RX_PROCESSING_POLLING | 0x2U| Polling Mode of operation.   |
+
+
+
+
+**Brief**: 
+Can Tx/Rx processing enum. 
+
+
+
+### enum Can_ECCErrorType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CAN_ECC_ERROR_TYPE_PARITY | 0x0U| Parity Error.   |
+| CAN_ECC_ERROR_TYPE_SEC | 0x1U| Single Bit Error Detected and corrected.   |
+| CAN_ECC_ERROR_TYPE_DED | 0x2U| Double Bit Error Detected.   |
+
+
+
+
+**Brief**: 
+Can Controller Error Types. 
+
+
+
+### enum Can_ControllerInstance
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| CAN_CONTROLLER_INSTANCE_MCAN0 | 0x0U| MCAN0 Controller Instance.   |
+| CAN_CONTROLLER_INSTANCE_MCAN1 | 0x1U| MCAN1 Controller Instance.   |
+| CAN_CONTROLLER_INSTANCE_MCAN2 | 0x2U| MCAN2 Controller Instance.   |
+| CAN_CONTROLLER_INSTANCE_MCAN3 | 0x3U| MCAN3 Controller Instance.   |
+| CAN_CONTROLLER_INSTANCE_MCAN4 | 0x4U| MCAN4 Controller Instance.   |
+| CAN_CONTROLLER_INSTANCE_MCAN5 | 0x5U| MCAN5 Controller Instance.   |
+| CAN_CONTROLLER_INSTANCE_MCAN6 | 0x6U| MCAN6 Controller Instance.   |
+| CAN_CONTROLLER_INSTANCE_MCAN7 | 0x7U| MCAN7 Controller Instance.   |
+
+
+
+
+**Brief**: 
+Can Controller instance enum. 
+
+
+
+### typedef Can_ErrNotifyType
+```
+typedef void(* Can_ErrNotifyType) (uint32 canErrorType);
+```
+
+
+**Brief**: 
+Typedef for error notification function pointer. 
+
+
+
+### typedef CanControllerState_Type
+```
+typedef uint8 CanControllerState_Type;
+```
+
+
+**Brief**: 
+Can Controller State enum type. 
+
+
+
+### typedef Can_InterruptMask_Type
+```
+typedef uint32 Can_InterruptMask_Type;
+```
+
+
+**Brief**: 
+Can Interrupt Mask type. 
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[Can_MaskType](../Classes/struct_can___mask_type.md)** | Structure defining the filter mask to be used  |
+| **[Can_HwFilterType](../Classes/struct_can___hw_filter_type.md)** | Structure defining the HW filter to be used.  |
+| **[Can_FdBaudConfigType](../Classes/struct_can___fd_baud_config_type.md)** | Structure defining the CAN FD data phase baud rate configuration.  |
+| **[Can_BaudConfigType](../Classes/struct_can___baud_config_type.md)** | Structure defining the CAN baud rate configuration.  |
+| **[Can_ControllerType](../Classes/struct_can___controller_type.md)** | Can Controller Configuration definition.  |
+| **[Can_ControllerType_PC](../Classes/struct_can___controller_type___p_c.md)** | Can Controller Pre Compile Configuration definition.  |
+| **[Can_MailboxType](../Classes/struct_can___mailbox_type.md)** | Can mailbox configuration definition.  |
+| **[Can_MailboxType_PC](../Classes/struct_can___mailbox_type___p_c.md)** | Can mailox Pre compile configuration definition.  |
+| **[Can_ConfigType](../Classes/struct_can___config_type.md)** | Can MCAL root configuration structure.  |
+| **[Can_RegisterReadbackType](../Classes/struct_can___register_readback_type.md)** | Register Readback Structure The Safety API to readback CAN register vales will populate this structure.  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CAN_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
+| CAN_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
+| CAN_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
+| CAN_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by CanDriver.  |
+| CAN_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by CanDriver.  |
+| CAN_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by CanDriver.  |
+| CAN_VENDOR_ID   | Texas Instruments Vendor ID.  |
+| CAN_MODULE_ID   | Can Driver Module ID  |
+| CAN_INSTANCE_ID   | CAN Driver Instance ID.  |
+| CAN_UNINIT   | CAN Driver is NOT initialized.  |
+| CAN_READY   | CAN Driver is initialized.  |
+| CAN_INIT_ID   | Can_Init()  |
+| CAN_MAINFCT_WRITE_ID   | Can_MainFunction_Write()  |
+| CAN_SETCTR_ID   | Can_SetControllerMode()  |
+| CAN_DIINT_ID   | Can_DisableControllerInterrupts()  |
+| CAN_ENINT_ID   | Can_EnableControllerInterrupts()  |
+| CAN_WRITE_ID   | Can_Write()  |
+| CAN_VERSION_ID   | Can_GetVersionInfo()  |
+| CAN_MAINFCT_READ_ID   | Can_MainFunction_Read()  |
+| CAN_MAINFCT_BO_ID   | Can_MainFunction_BusOff()  |
+| CAN_MAINFCT_WU_ID   | Can_MainFunction_Wakeup()  |
+| CAN_CKWAKEUP_ID   | Can_CheckWakeup()  |
+| CAN_MAINFCT_MODE_ID   | Can_MainFunction_Mode()  |
+| CAN_SETBAUDRATE_ID   | Can_SetBaudrate()  |
+| CAN_DEINIT_ID   | Can_DeInit()  |
+| CAN_GETCTRERRST_ID   | Can_GetControllerErrorState()  |
+| CAN_GETCTRMODE_ID   | Can_GetControllerMode()  |
+| CAN_RXPROCESS_ID_INTERRUPT   | Can_RxProcess_Interrupt()  |
+| CAN_RXPROCESS_ID_POLLING   | Can_RxProcess_Polling()  |
+| CAN_REGISTER_READBACK_ID   | Can_RegisterReadback()  |
+| CAN_LOOPBACK_ENABLE_ID   | Can_TestLoopBackModeEnable()  |
+| CAN_LOOPBACK_DISABLE_ID   | Can_TestLoopBackModeDisable()  |
+| CAN_ZERO   | Numerical value.  |
+| CAN_RXINDI_ID   | CanIf_RxIndication callback.  |
+| CAN_TXCNF_ID   | CanIf_TxConfirmation callback.  |
+| CAN_CTRWAKEUP_ID   | Controller Wakeup indication callback.  |
+| CAN_CTRBUSOFF_ID   | Controller Off indication callback.  |
+| CAN_E_PARAM_POINTER   | ERROR:NULL_PTR passed as parameter.  |
+| CAN_E_PARAM_HANDLE   | ERROR:Invalid Controller Handle.  |
+| CAN_E_PARAM_DATA_LENGTH   | ERROR:Invalid length of msg.  |
+| CAN_E_PARAM_CONTROLLER   | ERROR:Invalid controller id.  |
+| CAN_E_UNINIT   | ERROR:Error due to API invoked without performing Can_Init()  |
+| CAN_E_TRANSITION   | ERROR:Error during Controller state transition.  |
+| CAN_E_PARAM_BAUDRATE   | ERROR:Invalid Baudrate configuration.  |
+| CAN_E_ICOM_CONFIG_INVALID   | ERROR:Invalid config ID.  |
+| CAN_E_INIT_FAILED   | ERROR:Timeout occured.  |
+| CAN_E_DATALOST   | ERROR:Data lost/dropped . Runtime Error.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Can_GetVersionInfo](../Modules/group___c_a_n.md#function-can_getversioninfo)**(Std_VersionInfoType * Can_VersionInfo)| Function returns the version information of this module.  |
+| void | **[Can_Init](../Modules/group___c_a_n.md#function-can_init)**(const [Can_ConfigType](../Classes/struct_can___config_type.md) * CfgPtr)| This function initializes the module. All the required initialization for the CAN driver and hardware is performed in this function.  |
+| Std_ReturnType | **[Can_SetControllerMode](../Modules/group___c_a_n.md#function-can_setcontrollermode)**(uint8 Controller, Can_ControllerStateType Transition)| This function performs software triggered state transitions of the CAN controller State machine.  |
+| Std_ReturnType | **[Can_Write](../Modules/group___c_a_n.md#function-can_write)**(Can_HwHandleType Hth, const Can_PduType * PduInfo)| This function is called by CanIf to pass a CAN message to CanDrv for transmission.  |
+| Std_ReturnType | **[Can_CheckWakeup](../Modules/group___c_a_n.md#function-can_checkwakeup)**(uint8 Controller)| This function checks if a wakeup has occurred for the given controller.  |
+| void | **[Can_DisableControllerInterrupts](../Modules/group___c_a_n.md#function-can_disablecontrollerinterrupts)**(uint8 Controller)| This function disables all interrupts for this CAN controller Basically it will Disable the CAN interrupts(reset bit 1 in CTL reg(IE0=0)).  |
+| void | **[Can_EnableControllerInterrupts](../Modules/group___c_a_n.md#function-can_enablecontrollerinterrupts)**(uint8 Controller)| This function will Enable the interrupts for the Controller desired. It will restore the interrupts that were defined in the configuration. Basically it will enable the CAN interrupts.  |
+| void | **[Can_MainFunction_Write](../Modules/group___c_a_n.md#function-can_mainfunction_write)**(void )| This function performs the polling of TX confirmation when CAN_TX_PROCESSING is set to POLLING.  |
+| void | **[Can_MainFunction_BusOff](../Modules/group___c_a_n.md#function-can_mainfunction_busoff)**(void )| This function performs the polling of bus-off events that are configured statically as 'to be polled'.  |
+| void | **[Can_MainFunction_Read](../Modules/group___c_a_n.md#function-can_mainfunction_read)**(void )| This function performs the polling of RX indications when CAN_RX_PROCESSING is set to POLLING.  |
+| void | **[Can_MainFunction_Wakeup](../Modules/group___c_a_n.md#function-can_mainfunction_wakeup)**(void )| This function performs the polling of wake-up events that are configured statically as 'to be polled.  |
+| void | **[Can_MainFunction_Mode](../Modules/group___c_a_n.md#function-can_mainfunction_mode)**(void )| This function performs the polling of CAN controller mode transitions This will indicate only the CanController SW state and cannot indicate any HW state as there is no HW state exposed from the Can Controller.  |
+| Std_ReturnType | **[Can_TestLoopBackModeEnable](../Modules/group___c_a_n.md#function-can_testloopbackmodeenable)**(uint8 controller, uint8 mode)| This service will enable CAN loopback mode.  |
+| Std_ReturnType | **[Can_TestLoopBackModeDisable](../Modules/group___c_a_n.md#function-can_testloopbackmodedisable)**(uint8 controller, uint8 mode)| This service will disable CAN loopback mode.  |
+| void | **[Can_0_Int0ISR_Fun](../Modules/group___c_a_n.md#function-can_0_int0isr_fun)**(void )| This function is the ISR for CAN controller 0/INT 0 This function should be invoked either by OS Interrupt frame handler CAN Interrupt frame handler for Category 1 ISR.  |
+| void | **[Can_0_Int1ISR_Fun](../Modules/group___c_a_n.md#function-can_0_int1isr_fun)**(void )| This function is the ISR for CAN controller 0/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR.  |
+| void | **[Can_1_Int0ISR_Fun](../Modules/group___c_a_n.md#function-can_1_int0isr_fun)**(void )| This function is the ISR for CAN controller 1/INT 0    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR.  |
+| void | **[Can_1_Int1ISR_Fun](../Modules/group___c_a_n.md#function-can_1_int1isr_fun)**(void )| This function is the ISR for CAN controller 1/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR.  |
+| void | **[Can_2_Int0ISR_Fun](../Modules/group___c_a_n.md#function-can_2_int0isr_fun)**(void )| This function is the ISR for CAN controller 2/INT 0    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR.  |
+| void | **[Can_2_Int1ISR_Fun](../Modules/group___c_a_n.md#function-can_2_int1isr_fun)**(void )| This function is the ISR for CAN controller 2/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR.  |
+| void | **[Can_3_Int0ISR_Fun](../Modules/group___c_a_n.md#function-can_3_int0isr_fun)**(void )| This function is the ISR for CAN controller 3/INT 0    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR.  |
+| void | **[Can_3_Int1ISR_Fun](../Modules/group___c_a_n.md#function-can_3_int1isr_fun)**(void )| This function is the ISR for CAN controller 3/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR.  |
+| Std_ReturnType | **[Can_SetBaudrate](../Modules/group___c_a_n.md#function-can_setbaudrate)**(uint8 Controller, uint16 BaudRateConfigID)| This function Sets Can controller baud rate selected by BaudRateConfigID.  |
+| Std_ReturnType | **[Can_RegisterReadback](../Modules/group___c_a_n.md#function-can_registerreadback)**(uint8 Controller, [Can_RegisterReadbackType](../Classes/struct_can___register_readback_type.md) * RegRbPtr)| This service will readback CAN registers This is the function for checking the configuration registers. This API can be called by higher layers to check if configuration is correct.  |
+| Std_ReturnType | **[Can_EccParityEnable](../Modules/group___c_a_n.md#function-can_eccparityenable)**(uint8 controller, uint8 flag, uint8 ramInitEnable)| This function Enables/Disables Parity This function used to test ECC/Parity error. ramInitEnable should be set to TRUE if ECC enabled for normal operations otherwise pass false if it is diagnostic purpose.  |
+| Std_ReturnType | **[Can_EccDiagnosticGetErrMsgBoxNum](../Modules/group___c_a_n.md#function-can_eccdiagnosticgeterrmsgboxnum)**(uint8 controller, uint8 * msgBox)| This function returns corrupted mailbox number This function returns mailbox number whose RAM is Corrupted.  |
+| Std_ReturnType | **[Can_EccDiagnosticModeEnable](../Modules/group___c_a_n.md#function-can_eccdiagnosticmodeenable)**(uint8 controller, uint8 flag)| This function Sets ECC diagnostic mode This function used to test Single bit ECC correction.  |
+| Std_ReturnType | **[Can_EccGetErrStatus](../Modules/group___c_a_n.md#function-can_eccgeterrstatus)**(uint8 controller, uint32 * ecccErrStatus)| This API will read the ECC error status information of MCAN controller This function used to test Double bit error detection.  |
+| Std_ReturnType | **[Can_EccClrErrStatus](../Modules/group___c_a_n.md#function-can_eccclrerrstatus)**(uint8 controller)| This API clears the ECC error status register.  |
+| void | **[Can_DeInit](../Modules/group___c_a_n.md#function-can_deinit)**(void )| This service is only used for UT testing and not for app use. This API is not standard AUTOSAR API. This service sets the internal Can Controller state to UNINIT state so that Can_Init can be invoked again. This is required for UT test cases with diff Config.  |
+| Std_ReturnType | **[Can_GetControllerErrorState](../Modules/group___c_a_n.md#function-can_getcontrollererrorstate)**(uint8 ControllerId, Can_ErrorStateType * ErrorStatePtr)| This function get the error state of the controller.  |
+| Std_ReturnType | **[Can_GetControllerMode](../Modules/group___c_a_n.md#function-can_getcontrollermode)**(uint8 Controller, Can_ControllerStateType * ControllerModePtr)| This service reports about the current status of the requested CAN controller.  |
+
+
+
+### function Can_GetVersionInfo
+
+```
+void Can_GetVersionInfo(
+    Std_VersionInfoType * Can_VersionInfo
+)
+```
+
+
+**Brief**: 
+Function returns the version information of this module. 
+
+Service ID[hex] : 0x07
+
+Sync/Async : Synchronous
+
+Reentrancy : Reentrant
+
+
+**Parameters**: 
+
+  
+* **versioninfo** Pointer to where to store the version information of this module. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_Init
+
+```
+void Can_Init(
+    const Can_ConfigType * CfgPtr
+)
+```
+
+
+**Brief**: 
+This function initializes the module. All the required initialization for the CAN driver and hardware is performed in this function. 
+
+Service ID[hex] : 0x00
+
+Sync/Async : Synchronous
+
+Reentrancy : Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **CfgPtr** Pointer to driver configuration. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_SetControllerMode
+
+```
+Std_ReturnType Can_SetControllerMode(
+    uint8 Controller,
+    Can_ControllerStateType Transition
+)
+```
+
+
+**Brief**: 
+This function performs software triggered state transitions of the CAN controller State machine. 
+
+Service ID[hex] : 0x03
+
+Sync/Async : Asynchronous
+
+Reentrancy : Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - CAN controller for which the status shall be changed 
+  
+* **Transition** - Transition value to request new CAN controller state 
+
+
+**Returns**: 
+
+  
+* **E_OK** request accepted 
+<br> 
+  
+* **E_NOT_OK** request not accepted, a development error occurred 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_Write
+
+```
+Std_ReturnType Can_Write(
+    Can_HwHandleType Hth,
+    const Can_PduType * PduInfo
+)
+```
+
+
+**Brief**: 
+This function is called by CanIf to pass a CAN message to CanDrv for transmission. 
+
+Service ID[hex] : 0x06
+
+Sync/Async : Synchronous
+
+Reentrancy : Reentrant (thread-safe)
+
+
+**Parameters**: 
+
+  
+* **Hth** - Information which HW-transmit handle shall be used for transmit. Implicitly this is also the information about the controller to use because the Hth numbers are unique inside one hardware unit. 
+  
+* **PduInfo** - Pointer to SDU user memory, DLC and Identifier. 
+
+
+**Returns**: 
+
+  
+* **E_OK** Write command has been accepted 
+<br> 
+  
+* **E_NOT_OK** development error occurred 
+<br> 
+  
+* **CAN_BUSY** No TX hardware buffer available or pre-emptive call of Can_Write that can't be implemented re-entrant 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_CheckWakeup
+
+```
+Std_ReturnType Can_CheckWakeup(
+    uint8 Controller
+)
+```
+
+
+**Brief**: 
+This function checks if a wakeup has occurred for the given controller. 
+
+Service ID[hex] : 0x0b
+
+Sync/Async : Synchronous
+
+Reentrancy : Non Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - Controller to be checked for a wakeup. 
+
+
+**Returns**: 
+
+  
+* **E_OK** if wakeup is detected. 
+<br> 
+  
+* **E_NOT_OK** if Wakeup is not detected 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_DisableControllerInterrupts
+
+```
+void Can_DisableControllerInterrupts(
+    uint8 Controller
+)
+```
+
+
+**Brief**: 
+This function disables all interrupts for this CAN controller Basically it will Disable the CAN interrupts(reset bit 1 in CTL reg(IE0=0)). 
+
+Service ID[hex] : 0x04
+
+Sync/Async : Synchronous
+
+Reentrancy : Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_EnableControllerInterrupts
+
+```
+void Can_EnableControllerInterrupts(
+    uint8 Controller
+)
+```
+
+
+**Brief**: 
+This function will Enable the interrupts for the Controller desired. It will restore the interrupts that were defined in the configuration. Basically it will enable the CAN interrupts. 
+
+Service ID[hex] : 0x05
+
+Sync/Async : Synchronous
+
+Reentrancy : Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - CAN controller for which interrupts shall be enabled. 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_MainFunction_Write
+
+```
+void Can_MainFunction_Write(
+    void 
+)
+```
+
+
+**Brief**: 
+This function performs the polling of TX confirmation when CAN_TX_PROCESSING is set to POLLING. 
+
+Service ID[hex] : 0x01
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_MainFunction_BusOff
+
+```
+void Can_MainFunction_BusOff(
+    void 
+)
+```
+
+
+**Brief**: 
+This function performs the polling of bus-off events that are configured statically as 'to be polled'. 
+
+Service ID[hex] : 0x09
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_MainFunction_Read
+
+```
+void Can_MainFunction_Read(
+    void 
+)
+```
+
+
+**Brief**: 
+This function performs the polling of RX indications when CAN_RX_PROCESSING is set to POLLING. 
+
+Service ID[hex] : 0x08
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_MainFunction_Wakeup
+
+```
+void Can_MainFunction_Wakeup(
+    void 
+)
+```
+
+
+**Brief**: 
+This function performs the polling of wake-up events that are configured statically as 'to be polled. 
+
+Service ID[hex] : 0x0A
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_MainFunction_Mode
+
+```
+void Can_MainFunction_Mode(
+    void 
+)
+```
+
+
+**Brief**: 
+This function performs the polling of CAN controller mode transitions This will indicate only the CanController SW state and cannot indicate any HW state as there is no HW state exposed from the Can Controller. 
+
+Service ID[hex] : 0x0C
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_TestLoopBackModeEnable
+
+```
+Std_ReturnType Can_TestLoopBackModeEnable(
+    uint8 controller,
+    uint8 mode
+)
+```
+
+
+**Brief**: 
+This service will enable CAN loopback mode. 
+
+Service ID[hex] : 0x0f
+
+Sync/Async : Synchronous
+
+Reentrancy : Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - CAN Controller to enable loopback mode 
+  
+* **Loopback** mode - # 0 - Digital Loopback, # 1 - Analog Loopback 
+
+
+**Returns**: 
+
+  
+* **E_OK** Loopback mode enabled in the CAN Controller 
+<br> 
+  
+* **E_NOT_OK** Loopback mode enable failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_TestLoopBackModeDisable
+
+```
+Std_ReturnType Can_TestLoopBackModeDisable(
+    uint8 controller,
+    uint8 mode
+)
+```
+
+
+**Brief**: 
+This service will disable CAN loopback mode. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - CAN Controller to disable loopback mode 
+  
+* **Loopback** mode - # 0 - Digital Loopback, # 1 - Analog Loopback 
+
+
+**Returns**: 
+
+  
+* **E_OK** Loopback mode disabled in the CAN Controller 
+<br> 
+  
+* **E_NOT_OK** Loopback mode disable failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_0_Int0ISR_Fun
+
+```
+void Can_0_Int0ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 0/INT 0 This function should be invoked either by OS Interrupt frame handler CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 0. All the Interrupts are hooked to MCAN0INT. This ISR sends the TX confirmation for the successful tx msg. This ISR will call the RX processing function for the received message. This ISR will call the Error processing function in case of any error interrupts.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_0_Int1ISR_Fun
+
+```
+void Can_0_Int1ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 0/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 0 ECC Error. This ISR will clear and report the ECC Error through call back function.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_1_Int0ISR_Fun
+
+```
+void Can_1_Int0ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 1/INT 0    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 1. All the Interrupts are hooked to MCAN1INT. This ISR sends the TX confirmation for the successful tx msg. This ISR will call the RX processing function for the received message. This ISR will call the Error processing function in case of any error interrupts.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_1_Int1ISR_Fun
+
+```
+void Can_1_Int1ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 1/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 1 ECC Error. This ISR will clear and report the ECC Error through call back function.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_2_Int0ISR_Fun
+
+```
+void Can_2_Int0ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 2/INT 0    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 2. All the Interrupts are hooked to MCAN2INT. This ISR sends the TX confirmation for the successful tx msg. This ISR will call the RX processing function for the received message. This ISR will call the Error processing function in case of any error interrupts.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_2_Int1ISR_Fun
+
+```
+void Can_2_Int1ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 2/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 2 ECC Error. This ISR will clear and report the ECC Error through call back function.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_3_Int0ISR_Fun
+
+```
+void Can_3_Int0ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 3/INT 0    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 3. All the Interrupts are hooked to MCAN3INT. This ISR sends the TX confirmation for the successful tx msg. This ISR will call the RX processing function for the received message. This ISR will call the Error processing function in case of any error interrupts.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_3_Int1ISR_Fun
+
+```
+void Can_3_Int1ISR_Fun(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the ISR for CAN controller 3/INT 1    This function should be invoked either by OS Interrupt frame handler    CAN Interrupt frame handler for Category 1 ISR. 
+
+This is the ISR function for the MCAN controller 4 ECC Error. This ISR will clear and report the ECC Error through call back function.
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_SetBaudrate
+
+```
+Std_ReturnType Can_SetBaudrate(
+    uint8 Controller,
+    uint16 BaudRateConfigID
+)
+```
+
+
+**Brief**: 
+This function Sets Can controller baud rate selected by BaudRateConfigID. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - Controller whose Baud Rate is being set 
+  
+* **BaudRateConfigID** - ID number corresponding to a Baud Rate Configuration 
+
+
+**Returns**: 
+
+  
+* **E_OK** Service request accepted, setting of (new) baud rate started 
+<br> 
+  
+* **E_NOT_OK** Service request not accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_RegisterReadback
+
+```
+Std_ReturnType Can_RegisterReadback(
+    uint8 Controller,
+    Can_RegisterReadbackType * RegRbPtr
+)
+```
+
+
+**Brief**: 
+This service will readback CAN registers This is the function for checking the configuration registers. This API can be called by higher layers to check if configuration is correct. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - CAN Controller to readback registers 
+  
+* **RegRbPtr** - Pointer to where to store the readback values. If this pointer is NULL_PTR, then the API will return E_NOT_OK. 
+
+
+**Returns**: 
+
+  
+* **E_OK** Register readback successful 
+<br> 
+  
+* **E_NOT_OK** Register readback failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_EccParityEnable
+
+```
+Std_ReturnType Can_EccParityEnable(
+    uint8 controller,
+    uint8 flag,
+    uint8 ramInitEnable
+)
+```
+
+
+**Brief**: 
+This function Enables/Disables Parity This function used to test ECC/Parity error. ramInitEnable should be set to TRUE if ECC enabled for normal operations otherwise pass false if it is diagnostic purpose. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - Controller Id 
+  
+* **flag** - Enable/Disable Parity 
+  
+* **ramInitEnable** - Enable/Disable Ram Init 
+
+
+**Returns**: 
+
+  
+* **E_OK** Parity enabled 
+<br> 
+  
+* **E_NOT_OK** Parity enable failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_EccDiagnosticGetErrMsgBoxNum
+
+```
+Std_ReturnType Can_EccDiagnosticGetErrMsgBoxNum(
+    uint8 controller,
+    uint8 * msgBox
+)
+```
+
+
+**Brief**: 
+This function returns corrupted mailbox number This function returns mailbox number whose RAM is Corrupted. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **controller** - Controller Id 
+  
+* **msgBox** - Message number which caused ECC error. 
+
+
+**Returns**: 
+
+  
+* **E_OK** Request successful 
+<br> 
+  
+* **E_NOT_OK** Request failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_EccDiagnosticModeEnable
+
+```
+Std_ReturnType Can_EccDiagnosticModeEnable(
+    uint8 controller,
+    uint8 flag
+)
+```
+
+
+**Brief**: 
+This function Sets ECC diagnostic mode This function used to test Single bit ECC correction. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **controller** - Controller Id 
+  
+* **flag** - Enable/Disable Parity 
+
+
+**Returns**: 
+
+  
+* **E_OK** ECC diagnostic mode enabled 
+<br> 
+  
+* **E_NOT_OK** ECC diagnostic mode failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_EccGetErrStatus
+
+```
+Std_ReturnType Can_EccGetErrStatus(
+    uint8 controller,
+    uint32 * ecccErrStatus
+)
+```
+
+
+**Brief**: 
+This API will read the ECC error status information of MCAN controller This function used to test Double bit error detection. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **controller** - Controller Id 
+  
+* **ecccErrStatus** - ECC error status 
+
+
+**Returns**: 
+
+  
+* **E_OK** Get ECC error status successful 
+<br> 
+  
+* **E_NOT_OK** Get ECC error status failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_EccClrErrStatus
+
+```
+Std_ReturnType Can_EccClrErrStatus(
+    uint8 controller
+)
+```
+
+
+**Brief**: 
+This API clears the ECC error status register. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **controller** - Controller Id 
+
+
+**Returns**: 
+
+  
+* **E_OK** Clear ECC error status successful 
+<br> 
+  
+* **E_NOT_OK** Clear ECC error status failed 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_DeInit
+
+```
+void Can_DeInit(
+    void 
+)
+```
+
+
+**Brief**: 
+This service is only used for UT testing and not for app use. This API is not standard AUTOSAR API. This service sets the internal Can Controller state to UNINIT state so that Can_Init can be invoked again. This is required for UT test cases with diff Config. 
+
+Service ID[hex] : N/A
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **None** 
+
+
+**Returns**: 
+
+  
+* **None** 
+<br> 
+
+
+**Return**: None 
+
+### function Can_GetControllerErrorState
+
+```
+Std_ReturnType Can_GetControllerErrorState(
+    uint8 ControllerId,
+    Can_ErrorStateType * ErrorStatePtr
+)
+```
+
+
+**Brief**: 
+This function get the error state of the controller. 
+
+Service ID[hex] : 0x11
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **ControllerId** - ID of the CAN controller whose error state is requested. 
+  
+* **ErrorStatePtr** - Pointer where the error state is updated. 
+
+
+**Returns**: 
+
+  
+* **E_OK** Error state request accepted 
+<br> 
+  
+* **E_NOT_OK** Error state request not accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+### function Can_GetControllerMode
+
+```
+Std_ReturnType Can_GetControllerMode(
+    uint8 Controller,
+    Can_ControllerStateType * ControllerModePtr
+)
+```
+
+
+**Brief**: 
+This service reports about the current status of the requested CAN controller. 
+
+Service ID[hex] : 0x12
+
+Sync/Async : Synchronous
+
+Reentrancy : Non-Reentrant
+
+
+**Parameters**: 
+
+  
+* **Controller** - CAN controller for which the status shall be changed 
+  
+* **ControllerModePtr** - Pointer to a memory location where the current mode of the CAN controller will be stored. 
+
+
+**Returns**: 
+
+  
+* **E_OK** request accepted 
+<br> 
+  
+* **E_NOT_OK** request not accepted 
+<br> 
+
+
+**Return**: Std_ReturnType 
+
+
+
+
+

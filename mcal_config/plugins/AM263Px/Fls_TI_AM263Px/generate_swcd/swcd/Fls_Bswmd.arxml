@@ -60,11 +60,11 @@
             [!ENDIF!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Fls_TI_AM263px/Fls_ModuleEntry/Fls_SetEraseType</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL>                        
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!IF "as:modconf('Fls')[1]/FlsGeneral/FlsSetModeApi = 'true'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Fls_TI_AM263px/Fls_ModuleEntry/Fls_SetMode</BSW-MODULE-ENTRY-REF>
-            </BSW-MODULE-ENTRY-REF-CONDITIONAL> 
+            </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Fls_TI_AM263px/Fls_ModuleEntry/Fls_Write</BSW-MODULE-ENTRY-REF>
@@ -93,7 +93,6 @@
               </TARGET-MODULE-REFS>
             </BSW-MODULE-DEPENDENCY>
             [!ENDIF!]
-          </BSW-MODULE-DEPENDENCYS>
           <INTERNAL-BEHAVIORS>
             <BSW-INTERNAL-BEHAVIOR UUID="dd6765d7-3996-40da-b7fd-f9e50b74661d">
               <SHORT-NAME>Fls_Behavior</SHORT-NAME>
@@ -256,6 +255,7 @@
                   [!ELSE!]
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   [!ENDIF!][!//
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="19a650c1-5b4f-48ec-b2ac-c5163704e755">
                   <SHORT-NAME>Fls_Init</SHORT-NAME>

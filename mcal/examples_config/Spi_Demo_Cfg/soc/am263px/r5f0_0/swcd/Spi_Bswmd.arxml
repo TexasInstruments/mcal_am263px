@@ -247,6 +247,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi0TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="0fd72659-1ee2-4cfd-ab7d-be33f40a6eb9">
                   <SHORT-NAME>Spi_IrqUnitMcspi1TxRx</SHORT-NAME>
@@ -264,6 +265,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi1TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="3574e0f1-073b-48d7-b303-803a7104efc3">
                   <SHORT-NAME>Spi_IrqUnitMcspi2TxRx</SHORT-NAME>
@@ -281,6 +283,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi2TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="ceed6900-fce9-4261-a8fb-129bc6a02ecc">
                   <SHORT-NAME>Spi_IrqUnitMcspi3TxRx</SHORT-NAME>
@@ -298,6 +301,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi3TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="aaa3cd5f-f394-4f6d-a65a-c1e655a30824">
                   <SHORT-NAME>Spi_IrqUnitMcspi4TxRx</SHORT-NAME>
@@ -315,6 +319,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi4TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="3574e0f1-073b-48d7-b303-803a7104efc3">
                   <SHORT-NAME>Spi_IrqUnitMcspi5TxRx</SHORT-NAME>
@@ -332,6 +337,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi5TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="ceed6900-fce9-4261-a8fb-129bc6a02ecc">
                   <SHORT-NAME>Spi_IrqUnitMcspi6TxRx</SHORT-NAME>
@@ -349,6 +355,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi6TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="aaa3cd5f-f394-4f6d-a65a-c1e655a30824">
                   <SHORT-NAME>Spi_IrqUnitMcspi7TxRx</SHORT-NAME>
@@ -366,6 +373,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi7TxRx</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-SCHEDULABLE-ENTITY UUID="aa63cd66-f8c7-4da4-ae6b-c26bce107d5b">
                   <SHORT-NAME>Spi_MainFunction_Handling</SHORT-NAME>
@@ -600,7 +608,7 @@
           </RESOURCE-CONSUMPTION>
           <SW-VERSION>10.01.00</SW-VERSION>
           <VENDOR-ID>44</VENDOR-ID>
-          <AR-RELEASE-VERSION>4.3.1 0</AR-RELEASE-VERSION>
+          <AR-RELEASE-VERSION>4.3.1</AR-RELEASE-VERSION>
           <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Spi_TI_AM263px/Spi/Spi_Behavior</BEHAVIOR-REF>
           <VENDOR-SPECIFIC-MODULE-DEF-REFS>
             <VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/TI_AM263Px/Spi</VENDOR-SPECIFIC-MODULE-DEF-REF>
@@ -772,7 +780,7 @@
               <EXECUTION-CONTEXT>INTERRUPT-CAT-1</EXECUTION-CONTEXT>
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
-            </BSW-MODULE-ENTRY>            
+            </BSW-MODULE-ENTRY>
             <BSW-MODULE-ENTRY UUID="ef5f2f23-b6cd-46c0-902f-39ebe1469bef">
               <SHORT-NAME>Spi_MainFunction_Handling</SHORT-NAME>
               <SERVICE-ID>16</SERVICE-ID>

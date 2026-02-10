@@ -257,6 +257,49 @@ typedef enum
     //! Sync-in source is EPWM31 sync-out signal
     ECAP_SYNC_IN_PULSE_SRC_SYNCOUT_EPWM31 = 0x20,
 } ECAP_SyncInPulseSource;
+
+//*****************************************************************************
+//
+//! Values that can be passed to ECAP_selectQualPeriod() as the \e mode
+//! parameter.
+//
+//*****************************************************************************
+typedef enum
+{
+    //! Bypass
+    ECAP_PULSE_WIDTH_FILTER_BYPASS = 0x0,
+    //! Pulse width less than 1 cycle
+    ECAP_PULSE_WIDTH_FILTER_CYCLE1 = 0x1,
+    //! Pulse width less than 2 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE2 = 0x2,
+    //! Pulse width less than 3 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE3 = 0x3,
+    //! Pulse width less than 4 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE4 = 0x4,
+    //! Pulse width less than 5 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE5 = 0x5,
+    //! Pulse width less than 6 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE6 = 0x6,
+    //! Pulse width less than 7 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE7 = 0x7,
+    //! Pulse width less than 8 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE8 = 0x8,
+    //! Pulse width less than 9 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE9 = 0x9,
+    //! Pulse width less than 10 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE10 = 0xA,
+    //! Pulse width less than 11 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE11 = 0xB,
+    //! Pulse width less than 12 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE12 = 0xC,
+    //! Pulse width less than 13 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE13 = 0xD,
+    //! Pulse width less than 14 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE14 = 0xE,
+    //! Pulse width less than 15 cycles
+    ECAP_PULSE_WIDTH_FILTER_CYCLE15 = 0xF,
+} ECAP_QualPeriodSelect;
+
 /**
  *  \anchor Ecap_GlobalIntrSrcClear_t
  *  \name ECAP Global Interrupt Source
@@ -554,6 +597,8 @@ uint32 ICU_ECAP_getIntrStatus(uint32 baseAddr, uint32 flag);
 void ICU_ECAP_intrStatusClear(uint32 baseAddr, uint32 flag);
 
 void ICU_ECAP_setEmulationMode(uint32 baseAddr, ECAP_EmulationMode srcSelect);
+
+void ICU_ECAP_selectQualPeriod(uint32 baseAddr, ECAP_QualPeriodSelect width);
 
 static inline void ICU_ECAP_setSyncInPulseSource(uint32 base, ECAP_SyncInPulseSource source)
 {

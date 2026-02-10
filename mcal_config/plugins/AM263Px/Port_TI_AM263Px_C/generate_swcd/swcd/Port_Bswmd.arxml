@@ -141,6 +141,7 @@
                   [!ENDIF!][!//
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Port_TI_AM263px/Port_ModuleEntry/Port_Bnk0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$INT_CAT"!]</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 [!VAR "bank0"="num:i(0)"!][!//
             [!ELSEIF "( (num:i($index) != num:i(1)) and (num:i(text:split($port_bnk)[num:i($index)]) != num:i(0) ))"!][!//
@@ -157,6 +158,7 @@
                   [!ENDIF!][!//
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Port_TI_AM263px/Port_ModuleEntry/Port_Bnk[!"num:i(num:i($index)-1)"!]Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$INT_CAT"!]</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!VAR "port_bnk"="text:replace($port_bnk,$index,'0')"!][!//
             [!ENDIF!][!//
@@ -176,6 +178,7 @@
                   [!ENDIF!][!//
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Port_TI_AM263px/Port_ModuleEntry/Port_Ch0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$INT_CAT"!]</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!VAR "chn0"="num:i(0)"!][!//
             [!ELSEIF "( (num:i($index) != num:i(1)) and (num:i(text:split($port_ch1)[num:i($index)]) != num:i(0)) and (text:match($port_ch,$index) = 'true'))"!][!//
@@ -192,6 +195,7 @@
                   [!ENDIF!][!//
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Port_TI_AM263px/Port_ModuleEntry/Port_Ch[!"num:i(num:i($index)-1)"!]Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$INT_CAT"!]</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
               [!VAR "port_ch1"="text:replace($port_ch1,$index,'0')"!][!//
             [!ENDIF!][!//

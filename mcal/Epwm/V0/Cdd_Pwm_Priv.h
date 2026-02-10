@@ -121,7 +121,7 @@ void   Cdd_Pwm_resetChObj(Cdd_Pwm_ChObjType *chObj);
 void   Cdd_Pwm_copyConfig(Cdd_Pwm_ChObjType *chObj, const Cdd_Pwm_ChannelConfigType *chCfg);
 void   Cdd_Epwm_DeInitialize(uint32 epwmbaseadrr);
 uint32 Cdd_Pwm_getBaseAddr(Cdd_Pwm_ChannelType ChannelNumber, uint32 Id);
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HwUnitInit(Cdd_Pwm_ChObjType *chObj);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HwUnitInit(const Cdd_Pwm_ChObjType *chObj);
 
 #if (STD_ON == CDD_PWM_DEINIT_API)
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_IpDeInit_epwm(const Cdd_Pwm_ChObjType *chObj);
@@ -181,7 +181,7 @@ void   Cdd_Pwm_tbTriggerSwSync(uint32 baseAddr);
 uint16 Cdd_Pwm_tbGetStatus(uint32 baseAddr, uint32 tbStatusMask);
 void   Cdd_Pwm_tbStatusClear(uint32 baseAddr, uint32 tbStatusClrMask);
 uint32 Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
-                                    uint32 enableShadowWrite, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow);
+                                    uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow);
 void   Cdd_Pwm_deadbandCfg(uint32 baseAddr, const CDD_PWM_DeadbandCfgType *pCfg);
 void   Cdd_Pwm_deadbandBypass(uint32 baseAddr);
 void   Cdd_Pwm_chopperCfg(uint32 baseAddr, const CDD_PWM_ChopperCfgType *pCfg);

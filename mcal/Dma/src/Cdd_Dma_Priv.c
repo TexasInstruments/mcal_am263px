@@ -163,9 +163,14 @@ static sint32 CDD_EDMA_lld_initialize(Cdd_Dma_Handler *hEdma)
             maxparam = ownResource.channelGroup[ch]->maxParam;
             for (count = 0; count < maxparam; count++)
             {
-                param = ownResource.channelGroup[ch]->paramGroup[count]->paramId;
-                CDD_EDMA_lld_configureChannelRegion(baseAddr, regionId, CDD_EDMA_CHANNEL_TYPE_DMA, channel, tcc, param,
-                                                    queNum);
+                Cdd_Dma_ChannelConfigType chConfig;
+                param            = ownResource.channelGroup[ch]->paramGroup[count]->paramId;
+                chConfig.chType  = CDD_EDMA_CHANNEL_TYPE_DMA;
+                chConfig.chNum   = channel;
+                chConfig.tccNum  = tcc;
+                chConfig.paramId = param;
+                chConfig.evtQNum = queNum;
+                CDD_EDMA_lld_configureChannelRegion(baseAddr, regionId, &chConfig);
                 break;
             }
             break;
@@ -541,41 +546,39 @@ void CDD_EDMA_lld_setPaRAM(uint32 baseAddr, uint32 paRAMId, const CDD_EDMACCEDMA
     }
 }
 
-uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 tccNum,
-                                           uint32 paramId, uint32 evtQNum)
+uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, const Cdd_Dma_ChannelConfigType *chConfig)
 {
     uint32 optValue;
     uint32 retVal = FALSE;
-    if (((CDD_EDMA_CHANNEL_TYPE_DMA == chType) && (chNum < CDD_EDMA_NUM_DMACH)))
+    if (((CDD_EDMA_CHANNEL_TYPE_DMA == chConfig->chType) && (chConfig->chNum < CDD_EDMA_NUM_DMACH)))
     {
         /* Enable the DMA channel in the enabled in the shadow region
          * specific register
          */
-        CDD_EDMA_lld_enableChInShadowRegRegion(baseAddr, regionId, chType, chNum);
+        CDD_EDMA_lld_enableChInShadowRegRegion(baseAddr, regionId, chConfig->chType, chConfig->chNum);
 
-        CDD_EDMA_lld_mapChToEvtQ(baseAddr, chType, chNum, evtQNum);
+        CDD_EDMA_lld_mapChToEvtQ(baseAddr, chConfig->chType, chConfig->chNum, chConfig->evtQNum);
 
-        if (CDD_EDMA_CHANNEL_TYPE_DMA == chType)
+        if (CDD_EDMA_CHANNEL_TYPE_DMA == chConfig->chType)
         {
-            CDD_EDMA_lld_channelToParamMap(baseAddr, chNum, paramId);
+            CDD_EDMA_lld_channelToParamMap(baseAddr, chConfig->chNum, chConfig->paramId);
         }
         else
         {
-            CDD_EDMA_lld_mapQdmaChToPaRAM(baseAddr, chNum, &paramId);
+            CDD_EDMA_lld_mapQdmaChToPaRAM(baseAddr, chConfig->chNum, &chConfig->paramId);
         }
 
-        optValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_OPT(paramId));
+        optValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_OPT(chConfig->paramId));
         optValue &= CDD_EDMACC_OPT_TCC_CLR;
-        optValue |= CDD_EDMACC_OPT_TCC_SET(tccNum);
-        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_OPT(paramId), optValue);
+        optValue |= CDD_EDMACC_OPT_TCC_SET(chConfig->tccNum);
+        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_OPT(chConfig->paramId), optValue);
 
         retVal = (uint32)TRUE;
     }
     return retVal;
 }
 
-uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 trigMode,
-                                      uint32 tccNum, uint32 evtQNum)
+uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 trigMode)
 {
     uint32 retVal = FALSE;
     if ((chNum < CDD_EDMA_NUM_DMACH) && (CDD_EDMA_CHANNEL_TYPE_DMA == chType))
@@ -662,7 +665,6 @@ static sint32 CDD_EDMA_lld_deinitialize(Cdd_Dma_Handler *hEdma)
     uint32                  ch;
     uint32                  tcc;
     uint32                  channel;
-    uint32                  evntQue;
     uint32                  qnumValue;
     uint32                  regionId;
     uint32                  baseAddr     = hEdma->baseAddr;
@@ -678,7 +680,6 @@ static sint32 CDD_EDMA_lld_deinitialize(Cdd_Dma_Handler *hEdma)
     {
         regionId = hEdmaInit.regionId;
         tcc      = hEdmaInit.tcc;
-        evntQue  = hEdmaInit.queNum;
         /* Disable the DMA (0 - 62) channels in the DRAE register */
         HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId), CDD_EDMA_CLR_ALL_BITS);
         HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId), CDD_EDMA_CLR_ALL_BITS);
@@ -716,12 +717,12 @@ static sint32 CDD_EDMA_lld_deinitialize(Cdd_Dma_Handler *hEdma)
             if (hEdmaInit.transferType == CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER)
             {
                 CDD_EDMA_lld_freeChannelRegion(baseAddr, regionId, CDD_EDMA_CHANNEL_TYPE_DMA, channel,
-                                               CDD_EDMA_TRIG_MODE_MANUAL, tcc, evntQue);
+                                               CDD_EDMA_TRIG_MODE_MANUAL);
             }
             else
             {
                 CDD_EDMA_lld_freeChannelRegion(baseAddr, regionId, CDD_EDMA_CHANNEL_TYPE_DMA, channel,
-                                               CDD_EDMA_TRIG_MODE_EVENT, tcc, evntQue);
+                                               CDD_EDMA_TRIG_MODE_EVENT);
             }
         }
     }
@@ -930,7 +931,15 @@ void CDD_EDMA_lld_chainingConfigureChannelRegion(Cdd_Dma_Handler *hEdma, uint32 
         /* cleanup Params, note h/w reset state is all 0s, must be done after
         disabling/clearning channel events */
         CDD_EDMA_lld_setPaRAM(baseAddr, param, &paramSet);
-        CDD_EDMA_lld_configureChannelRegion(baseAddr, region, CDD_EDMA_CHANNEL_TYPE_DMA, channel, tcc, param, queNum);
+        {
+            Cdd_Dma_ChannelConfigType chConfig;
+            chConfig.chType  = CDD_EDMA_CHANNEL_TYPE_DMA;
+            chConfig.chNum   = channel;
+            chConfig.tccNum  = tcc;
+            chConfig.paramId = param;
+            chConfig.evtQNum = queNum;
+            CDD_EDMA_lld_configureChannelRegion(baseAddr, region, &chConfig);
+        }
     }
 }
 

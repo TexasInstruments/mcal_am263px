@@ -75,6 +75,7 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Pwm.h"
+#include "mcal_hw_soc_baseaddress.h"
 /* IP Specific include */
 #define PWM_START_SEC_CODE
 #include "Pwm_MemMap.h"

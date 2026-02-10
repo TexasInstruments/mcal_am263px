@@ -68,9 +68,15 @@ void IpcNotifyUtils_lld_syncCallback(void *hIpcNotify, uint32 remoteCoreId, uint
 
 sint32 IpcNotifyUtils_lld_sendSync(IpcNotifyUtils_Handle hIpcNotifyUtils, uint32 remoteCoreId)
 {
-    return IpcNotify_lld_sendMsg(hIpcNotifyUtils->hIpcNotifyUtilsInit->hIpcNotify, remoteCoreId,
-                                 IPC_NOTIFY_CLIENT_ID_SYNC, 0xFF, /* message value is dont care */
-                                 1U /* wait for messahe to be put in the HwFifo */, CDD_IPC_TIMEOUT);
+    IpcNotify_MsgParams msgParams;
+
+    msgParams.remoteCoreId       = remoteCoreId;
+    msgParams.remoteClientId     = IPC_NOTIFY_CLIENT_ID_SYNC;
+    msgParams.messageValue       = 0xFFU; /* message value is don't care */
+    msgParams.waitForFifoNotFull = 1U;    /* wait for message to be put in the HwFifo */
+    msgParams.timeout            = CDD_IPC_TIMEOUT;
+
+    return IpcNotify_lld_sendMsg(hIpcNotifyUtils->hIpcNotifyUtilsInit->hIpcNotify, &msgParams);
 }
 
 sint32 IpcNotifyUtils_lld_waitSync(IpcNotifyUtils_Handle hIpcNotifyUtils, uint32 remoteCoreId, uint32 timeout)
