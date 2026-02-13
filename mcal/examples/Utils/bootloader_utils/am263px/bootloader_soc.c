@@ -170,7 +170,7 @@ uint32_t Bootloader_socCpuGetClkDefault(uint32_t cpuId)
 
 char *Bootloader_socGetCoreName(uint32_t cpuId)
 {
-    char *pName = NULL;
+    char *pName = NULL_PTR;
 
     if (cpuId < MCAL_CSL_CORE_ID_MAX)
     {
@@ -263,7 +263,7 @@ int32_t Bootloader_socCpuPowerOnReset(uint32_t cpuId, void *socCoreOpMode)
             {
                 /* Core 1 image is not present or not booted yet.
                    ConfigureR5 in lock step mode. */
-                if (socCoreOpMode != NULL)
+                if (socCoreOpMode != NULL_PTR)
                 {
                     Bootloader_socCoreOpModeConfig *config = (Bootloader_socCoreOpModeConfig *)socCoreOpMode;
                     /* Check for operating mode configuration as set in syscfg */
@@ -294,7 +294,7 @@ int32_t Bootloader_socCpuPowerOnReset(uint32_t cpuId, void *socCoreOpMode)
             {
                 /* Core 1 image is not present or not booted yet.
                    ConfigureR5 in lock step mode. */
-                if (socCoreOpMode != NULL)
+                if (socCoreOpMode != NULL_PTR)
                 {
                     Bootloader_socCoreOpModeConfig *config = (Bootloader_socCoreOpModeConfig *)socCoreOpMode;
                     if (config->r5fss1_opMode == BOOTLOADER_OPMODE_LOCKSTEP)

@@ -217,7 +217,7 @@ typedef enum modes{
 #define FLS_UNIT_EDMA_HANDLER  (CddDmaConf_[!"node:name(node:ref(FlsConfigSet/FlsHwUnitCddDmaHandler))"!])
 [!ELSE!]
 [!ERROR!][!//
-        "Reference to the DMA handler cannot be NULL"[!//
+        "Reference to the DMA handler cannot be NULL_PTR"[!//
 [!ENDERROR!][!//
 [!ENDIF!][!//
 [!ENDIF!][!//

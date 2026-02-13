@@ -106,7 +106,7 @@ volatile uint8_t *vector_table_loc = 0U;
 
 Bootloader_Handle Bootloader_open(uint32_t instanceNum, Bootloader_Params *openParams)
 {
-    Bootloader_Config *config = NULL;
+    Bootloader_Config *config = NULL_PTR;
 
     if (instanceNum < gBootloaderConfigNum)
     {
@@ -118,7 +118,7 @@ Bootloader_Handle Bootloader_open(uint32_t instanceNum, Bootloader_Params *openP
             status = config->fxns->imgOpenFxn(config->args, openParams);
             if (status != SystemP_SUCCESS)
             {
-                config = NULL;
+                config = NULL_PTR;
             }
         }
     }
@@ -321,7 +321,7 @@ uint8_t *Bootloader_findSeq(uint8_t *x509_cert_ptr, uint32_t x509_cert_size, uin
         x509_cert_ptr++;
     }
 
-    return NULL;
+    return NULL_PTR;
 }
 
 uint32_t Bootloader_getMsgLen(uint8_t *x509_cert_ptr, uint32_t x509_cert_size)
@@ -382,7 +382,7 @@ uint32_t Bootloader_getMulticoreImageSize(Bootloader_Handle handle)
 {
     uint32_t size = 0;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         Bootloader_Config *config = (Bootloader_Config *)handle;
         size                      = config->bootImageSize;
@@ -395,7 +395,7 @@ uint32_t Bootloader_isCorePresent(Bootloader_Handle handle, uint32_t cslCoreId)
 {
     uint32_t retVal = FALSE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         Bootloader_Config *config = (Bootloader_Config *)handle;
         if ((config->coresPresentMap & (1 << cslCoreId)) != 0)
@@ -460,7 +460,7 @@ int32_t Bootloader_getOTFAConfigFromNoteSegment(Bootloader_Handle handle, uint32
 {
     int32_t status = SystemP_FAILURE;
 
-    if (NULL != handle && NULL != otfaConfig)
+    if (NULL_PTR != handle && NULL_PTR != otfaConfig)
     {
         /* will walk through the entire note section */
         uint8_t  gotConfig = FALSE;
@@ -537,11 +537,11 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
     uint32_t phtSize     = 0U;
     uint32_t numSegments = 0U;
 
-    Bootloader_ELFH32 *elfPtr32 = NULL;
-    Bootloader_ELFH64 *elfPtr64 = NULL;
+    Bootloader_ELFH32 *elfPtr32 = NULL_PTR;
+    Bootloader_ELFH64 *elfPtr64 = NULL_PTR;
 
-    Bootloader_ELFPH32 *elfPhdrPtr32 = NULL;
-    Bootloader_ELFPH64 *elfPhdrPtr64 = NULL;
+    Bootloader_ELFPH32 *elfPhdrPtr32 = NULL_PTR;
+    Bootloader_ELFPH64 *elfPhdrPtr64 = NULL_PTR;
 
     uint32_t noteSegmentSz     = 0U;
     uint32_t noteSegmentOffset = 0U;
@@ -551,7 +551,7 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
     uint8_t initCpuDone[MCAL_CSL_CORE_ID_MAX] = {0};
     char    ELFSTR[]                          = {0x7F, 'E', 'L', 'F'};
 
-    if (config->fxns->imgReadFxn == NULL || config->fxns->imgSeekFxn == NULL)
+    if (config->fxns->imgReadFxn == NULL || config->fxns->imgSeekFxn == NULL_PTR)
     {
         status = SystemP_FAILURE;
     }

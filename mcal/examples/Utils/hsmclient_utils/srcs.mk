@@ -1,5 +1,6 @@
 HSMCLIENT_UTILS_PATH=$(mcal_PATH)/examples/Utils/hsmclient_utils
 include $(mcal_PATH)/examples/Utils/inc.mk
+include $(mcal_PATH)/examples/Utils/inc_autosar_stub.mk
 
 INCDIR += $(BOOTLOADER_UTILS_PATH)/$(SOC)
 

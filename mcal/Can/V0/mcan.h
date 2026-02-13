@@ -28,7 +28,6 @@
 
 #include "Std_Types.h"
 #include "hw_mcanss.h"
-#include "hal_stdtypes.h"
 
 #ifdef __cplusplus
 extern "C" {

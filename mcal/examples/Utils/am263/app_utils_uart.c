@@ -60,7 +60,7 @@ void message(sciBASE_t *sci, const uint8 *str)
 {
     uint32       dataLen = 0U;
     const uint8 *strLcl  = str;
-    if (str != NULL)
+    if (str != NULL_PTR)
     {
         while (*strLcl != '\0')
         {
@@ -115,7 +115,7 @@ void getCharacter(sciBASE_t *sci, uint8 *str, uint8 len)
  */
 void UARTPrintf(const char *pcFormat, ...)
 {
-    uint8  *pcTemp = NULL;
+    uint8  *pcTemp = NULL_PTR;
     va_list list;
 
     sint32 iRet = 0;

@@ -29,7 +29,21 @@
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 
-/* None */
+#define M_ZERO       (0U)
+#define M_FIVE       (5U)
+#define M_SIX        (6U)
+#define M_SEVEN      (7U)
+#define M_EIGHT      (8U)
+#define M_NINE       (9U)
+#define M_TEN        (10U)
+#define M_SIXTEEN    (16U)
+#define M_SEVENTEEN  (17U)
+#define M_EIGHTEEN   (18U)
+#define M_NINETEEN   (19U)
+#define M_TWENTY     (20U)
+#define M_THIRTY     (30U)
+#define M_THIRTY_ONE (31U)
+
 /* ========================================================================== */
 /*                           Static function declartions                               */
 /* ========================================================================== */
@@ -141,7 +155,7 @@ void Port_GPIOPortInit(const gpioPORT_t *portAddr)
     /** - Port output values */
     regWriteStatus |= regWriteReadback(&portAddr->DOUT, M_THIRTY_ONE, M_ZERO, reset_regVal_3);
 
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -160,7 +174,7 @@ void Port_GPIOInit(gpioBASE_t *gioBaseREG)
 
     /** bring GPIO module Bank interrupt disabled */
     regWriteStatus = regWriteReadback(&gioBaseREG->BINTEN, M_THIRTY_ONE, M_ZERO, regVal);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -280,7 +294,7 @@ sint32 Port_ConfigOverrideCtrl(uint32 *pinMuxBase, uint32 pin, uint32 outputCtrl
         pinMuxBase[(pin / 4U)] &= PIN_INPUTEN_MASK;
     }
 
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -332,7 +346,7 @@ sint32 Port_ConfigPulls(uint32 *pinMuxBase, uint32 pin, uint32 pullVal)
     pinMuxBase[(pin / 4U)] &= PIN_PULL_SELECT_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_NINE, M_NINE, pullVal);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -364,7 +378,7 @@ sint32 Port_ConfigSlew(uint32 *pinMuxBase, uint32 pin, uint32 slewVal)
     pinMuxBase[(pin / 4U)] &= PIN_SLEW_CONTROL_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_TEN, M_TEN, slewVal);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -395,7 +409,7 @@ sint32 Port_ConfigPullInhibitEnable(uint32 *pinMuxBase, uint32 pin, uint32 Inhib
     pinMuxBase[(pin / 4U)] &= PIN_PULL_INHIBIT_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_EIGHT, M_EIGHT, InhibitVal);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -450,7 +464,7 @@ sint32 Port_ConfigInversion(uint32 *pinMuxBase, uint32 pin, uint32 invVal)
     pinMuxBase[(pin / 4U)] &= INPUT_INVERSION_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_TWENTY, M_TWENTY, invVal);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -483,7 +497,7 @@ sint32 Port_ConfigQualType(uint32 *pinMuxBase, uint32 pin, uint32 qualifierValue
     pinMuxBase[(pin / 4U)] &= QUAL_TYPE_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_NINETEEN, M_EIGHTEEN, qualifierValue);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -503,7 +517,7 @@ sint32 Port_ConfigGpioSel(uint32 *pinMuxBase, uint32 pin, uint8 gpioCoreSel)
     pinMuxBase[(pin / 4U)] &= GPIO_SEL_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_SEVENTEEN, M_SIXTEEN, gpioCoreSel);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -534,7 +548,7 @@ sint32 Port_ConfigHSmaster(uint32 *pinMuxBase, uint32 pin, uint32 hsmasterValue)
     pinMuxBase[(pin / 4U)] &= HSMASTER_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_THIRTY_ONE, M_THIRTY_ONE, hsmasterValue);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -566,7 +580,7 @@ sint32 Port_ConfigHSmode(uint32 *pinMuxBase, uint32 pin, uint32 hsmodeValue)
     pinMuxBase[(pin / 4U)] &= HSMODE_MASK;
 
     regWriteStatus = regWriteReadback(&(pinMuxBase[(pin / 4U)]), M_THIRTY, M_THIRTY, hsmodeValue);
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -699,7 +713,7 @@ void Port_SetDirection(const gpioPORT_t *port, uint32 bit, uint32 dir)
         regWriteStatus  = regWriteReadback(&port->DIR, M_THIRTY_ONE, M_ZERO, oeRegVal);
     }
 
-    if (regWriteStatus != MCAL_REGWR_E_OK)
+    if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef PORT_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)PORT_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);

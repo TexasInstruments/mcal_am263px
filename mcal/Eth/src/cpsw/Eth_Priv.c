@@ -1165,9 +1165,9 @@ static void EthTxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaTxBuffDescQueue *pRing, ui
     pRing->pFreeHead = (Eth_CpdmaTxBuffDescType *)startAddr;
 
     pRing->pHead      = pRing->pFreeHead;
-    pRing->pQueueHead = NULL;
-    pRing->pTail      = NULL;
-    pRing->pQueueTail = NULL;
+    pRing->pQueueHead = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    pRing->pTail      = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    pRing->pQueueTail = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
 
     pRing->freeBuffDesc = numBuffDesc;
     pCurrBuffDesc       = pRing->pFreeHead;
@@ -1566,7 +1566,7 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
         }
 #endif
         /* Flush buffers */
-        if ((Eth_DrvObj.enableCacheOps == (uint32)TRUE) && (Eth_DrvObj.cacheFlushFnPtr != (Eth_CacheFlushType)NULL))
+        if ((Eth_DrvObj.enableCacheOps == (uint32)TRUE) && (Eth_DrvObj.cacheFlushFnPtr != (Eth_CacheFlushType)NULL_PTR))
         {
             /* Double cast to avoid MISRA-C:2004 11.4 */
             Eth_DrvObj.cacheFlushFnPtr((uint8 *)((void *)pDataBuffer), totalLen);
@@ -1606,12 +1606,12 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
         pXmitTxBuffDesc->pBufObj = pTempBufObj;
 
         /* if all previous TX done or not yet started then start DMA with single pXmitTxBuffDesc */
-        if (pTxDescRing->pQueueHead == NULL)
+        if (pTxDescRing->pQueueHead == NULL_PTR)
         {
             pTxDescRing->pQueueHead = pTxDescRing->pHead;
             pTxDescRing->pQueueTail = pTxDescRing->pTail;
             pTxDescRing->pHead      = pTxDescRing->pFreeHead;
-            pTxDescRing->pTail      = NULL;
+            pTxDescRing->pTail      = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
 
             /* start new queue DMA */
             pTxDescRing->pQueueTail->globalNextDescPointer = 0;
@@ -1808,7 +1808,7 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCu
     pFrameBuffer = pCurrRxBuffDesc->pDataBuffer;
 
     if ((Eth_DrvObj.enableCacheOps == (uint32)TRUE) &&
-        (Eth_DrvObj.cacheInvalidateFnPtr != (Eth_CacheInvalidateType)NULL))
+        (Eth_DrvObj.cacheInvalidateFnPtr != (Eth_CacheInvalidateType)NULL_PTR))
     {
         Eth_DrvObj.cacheInvalidateFnPtr((uint8 *)((void *)pFrameBuffer), (uint32)totLen);
     }
@@ -2087,7 +2087,7 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
     uint32                    endOfQueueFlag  = 0U;
     Eth_CpdmaTxBuffDescQueue *pTxDescRing     = &(Eth_DrvObj.txDescRing);
 
-    if (NULL != pTxDescRing->pQueueHead) /*only check if TX in progress */
+    if (NULL_PTR != pTxDescRing->pQueueHead) /*only check if TX in progress */
     {
         pCurrTxBuffDesc = pTxDescRing->pQueueHead;
         /* loop to process each packet in queue, queue end with pCurrTxBuffDesc->pNextBuffDesc ==
@@ -2114,8 +2114,9 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
             {
                 /* Restore global next buff desc from null */
                 pCurrTxBuffDesc->globalNextDescPointer = Eth_locToGlobAddr((uintptr_t)(pCurrTxBuffDesc->pNextBuffDesc));
-                pTxDescRing->pQueueHead                = NULL; /* Reset queue after DMA queue complete */
-                pTxDescRing->pQueueTail                = NULL;
+                pTxDescRing->pQueueHead =
+                    (Eth_CpdmaTxBuffDescType *)NULL_PTR; /* Reset queue after DMA queue complete */
+                pTxDescRing->pQueueTail = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
                 break;
             }
             else
@@ -2133,12 +2134,12 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
         }
 
         /* Check to start new DMA queue */
-        if ((NULL != pTxDescRing->pTail) && (0U != endOfQueueFlag))
+        if ((NULL_PTR != pTxDescRing->pTail) && (0U != endOfQueueFlag))
         {
             pTxDescRing->pQueueHead = pTxDescRing->pHead;
             pTxDescRing->pQueueTail = pTxDescRing->pTail;
             pTxDescRing->pHead      = pTxDescRing->pFreeHead;
-            pTxDescRing->pTail      = NULL;
+            pTxDescRing->pTail      = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
 
             /* start new queue DMA */
             pTxDescRing->pQueueTail->globalNextDescPointer = 0U;

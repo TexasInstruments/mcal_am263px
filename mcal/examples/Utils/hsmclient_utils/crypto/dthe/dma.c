@@ -36,6 +36,7 @@
 
 #include <dma.h>
 #include <stdlib.h>
+#include "Compiler.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
@@ -64,7 +65,7 @@
 /* ========================================================================== */
 DMA_Handle DMA_open(uint32_t instanceId)
 {
-    DMA_Config *dmaCfg = NULL;
+    DMA_Config *dmaCfg = NULL_PTR;
 
     if (instanceId < gDmaConfigNum)
     {
@@ -80,7 +81,7 @@ DMA_Return_t DMA_Config_TxChannel(DMA_Handle handle, uint32_t *srcAddress, uint3
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
         if (config && config->dmaFxns && config->dmaFxns->cfgDmaTxChFxn)
@@ -111,7 +112,7 @@ DMA_Return_t DMA_enableTxTransferRegion(DMA_Handle handle)
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
 
@@ -142,7 +143,7 @@ DMA_Return_t DMA_WaitForTxTransfer(DMA_Handle handle)
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
 
@@ -173,7 +174,7 @@ DMA_Return_t DMA_disableTxCh(DMA_Handle handle)
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
 
@@ -204,7 +205,7 @@ DMA_Return_t DMA_Config_RxChannel(DMA_Handle handle, uint32_t *srcAddress, uint3
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
         if (config && config->dmaFxns && config->dmaFxns->cfgDmaRxChFxn)
@@ -234,7 +235,7 @@ DMA_Return_t DMA_enableRxTransferRegion(DMA_Handle handle)
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
 
@@ -265,7 +266,7 @@ DMA_Return_t DMA_WaitForRxTransfer(DMA_Handle handle)
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
 
@@ -296,7 +297,7 @@ DMA_Return_t DMA_disableRxCh(DMA_Handle handle)
     DMA_Return_t dmaStatus       = DMA_RETURN_FAILURE;
     int32_t      dmaModuleStatus = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         DMA_Config *config = (DMA_Config *)handle;
 
@@ -326,9 +327,9 @@ DMA_Return_t DMA_close(DMA_Handle handle)
 {
     DMA_Return_t dmaStatus = DMA_RETURN_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
-        handle    = NULL;
+        handle    = NULL_PTR;
         dmaStatus = DMA_RETURN_SUCCESS;
     }
     return (dmaStatus);

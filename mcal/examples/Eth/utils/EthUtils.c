@@ -117,7 +117,7 @@
 int32_t EthUtils_checkPayload(DataFramePayload *payload)
 {
     uint16_t len    = ntohs(payload->len);
-    uint8_t *ref    = NULL;
+    uint8_t *ref    = NULL_PTR;
     int32_t  status = ETH_TEST_PKT_SOK;
 
     /* Verify the test packet type id */
@@ -188,7 +188,7 @@ int32_t EthUtils_checkVlanTagAndPayload(VlanDataFramePayload *payload, uint8_t p
 
 int32_t EthUtils_fillPayload(DataFramePayload *payload, uint16_t type, uint16_t len)
 {
-    uint8_t *ref    = NULL;
+    uint8_t *ref    = NULL_PTR;
     int32_t  status = ETH_TEST_PKT_SOK;
 
     /* Check that requested type id */

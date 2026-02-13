@@ -39,7 +39,6 @@ extern "C" {
 
 #include <stdint.h>
 #include <SystemP.h>
-#include "hal_stdtypes.h"
 
 /**
  * \defgroup KERNEL_DPL_HWI APIs for HW Interrupts

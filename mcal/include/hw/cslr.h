@@ -49,7 +49,6 @@ extern "C"
 {
 #endif
 
-#include <hal_stdtypes.h>
 
 /* the "expression" macros */
 

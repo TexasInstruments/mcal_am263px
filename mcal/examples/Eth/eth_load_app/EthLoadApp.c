@@ -644,7 +644,7 @@ void EthApp_testTask(void *args1)
     SemaphoreP_post(&gStatsSem);
 
     vTaskDelay(portMAX_DELAY);
-    vTaskDelete(NULL);
+    vTaskDelete(NULL_PTR);
     (void)args1;
 }
 
@@ -667,7 +667,7 @@ void EthApp_rxTask(void *args1)
     }
 
     vTaskDelay(portMAX_DELAY);
-    vTaskDelete(NULL);
+    vTaskDelete(NULL_PTR);
     (void)args1;
 }
 #endif
@@ -714,7 +714,7 @@ void EthApp_monTask(void *args1)
     }
 
     vTaskDelay(portMAX_DELAY);
-    vTaskDelete(NULL);
+    vTaskDelete(NULL_PTR);
     (void)args1;
 }
 
@@ -832,7 +832,7 @@ void EthLoadApp_initOs(void)
         EthApp_taskCfg[taskIdx].handle = OsUtils_createTask(
             EthApp_taskCfg[taskIdx].name, EthApp_taskCfg[taskIdx].priority, EthApp_taskCfg[taskIdx].stackSize,
             EthApp_taskCfg[taskIdx].stackMem, EthApp_taskCfg[taskIdx].entry);
-        configASSERT(EthApp_taskCfg[taskIdx].handle != NULL);
+        configASSERT(EthApp_taskCfg[taskIdx].handle != NULL_PTR);
     }
 }
 
@@ -851,7 +851,7 @@ void EthApp_initTask(void *args1)
     // Drivers_close();
 
     vTaskDelay(portMAX_DELAY);
-    vTaskDelete(NULL);
+    vTaskDelete(NULL_PTR);
     (void)args1;
 }
 

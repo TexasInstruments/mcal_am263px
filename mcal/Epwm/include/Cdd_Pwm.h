@@ -710,7 +710,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetOutputToIdle(Cdd_Pwm_ChannelType ChannelNumb
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_SyncEnable(uint32 Channel, uint32 tbPhsValue, uint32 counterDir);
+Cdd_Pwm_SyncEnable(Cdd_Pwm_ChannelType Channel, uint32 tbPhsValue, uint32 counterDir);
 
 /*===============================================================================================*/
 /** \brief Function disables the synchronization. Even if sync-in event
@@ -730,7 +730,7 @@ Cdd_Pwm_SyncEnable(uint32 Channel, uint32 tbPhsValue, uint32 counterDir);
  * \retval E_NOT_OK - Synchronization disabled failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SyncDisable(uint32 Channel);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SyncDisable(Cdd_Pwm_ChannelType Channel);
 #endif /*#if (STD_ON == CDD_PWM_BASE_CLK_SYNC)*/
 
 /*===============================================================================================*/
@@ -751,7 +751,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SyncDisable(uint32 Channel);
  * \retval
  *
  *****************************************************************************/
-FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_GetCounterStatus(uint32 Channel, uint32 tbStatusMask);
+FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_GetCounterStatus(Cdd_Pwm_ChannelType Channel, uint32 tbStatusMask);
 /*===============================================================================================*/
 /** \brief Function  clears the Time base status bits indicated by the
  * tbStatusClrMask parameter.
@@ -772,7 +772,7 @@ FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_GetCounterStatus(uint32 Channel, uint32 tbSta
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_ClearCounterStatus(uint32 Channel, uint32 tbStatusClrMask);
+Cdd_Pwm_ClearCounterStatus(Cdd_Pwm_ChannelType Channel, uint32 tbStatusClrMask);
 
 #if (STD_ON == CDD_PWM_COUNTER_COMPARE_CFG)
 /*===============================================================================================*/
@@ -800,7 +800,7 @@ Cdd_Pwm_ClearCounterStatus(uint32 Channel, uint32 tbStatusClrMask);
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_CounterComparatorCfg(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
+Cdd_Pwm_CounterComparatorCfg(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
                              uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow);
 #endif /*#if (STD_ON == CDD_PWM_COUNTER_COMPARE_CFG)*/
 
@@ -825,7 +825,7 @@ Cdd_Pwm_CounterComparatorCfg(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint3
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_DeadbandCfg(uint32 Channel, const CDD_PWM_DeadbandCfgType *pCfg);
+Cdd_Pwm_DeadbandCfg(Cdd_Pwm_ChannelType Channel, const CDD_PWM_DeadbandCfgType *pCfg);
 #endif /*#if (STD_ON == CDD_PWM_DEAD_BAND)*/
 
 /*===============================================================================================*/
@@ -844,7 +844,7 @@ Cdd_Pwm_DeadbandCfg(uint32 Channel, const CDD_PWM_DeadbandCfgType *pCfg);
  * \retval E_NOT_OK - Dead-band sub-module bypass is failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_DeadbandBypass(uint32 Channel);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_DeadbandBypass(Cdd_Pwm_ChannelType Channel);
 
 #if (STD_ON == CDD_PWM_CHOPPER)
 /*===============================================================================================*/
@@ -867,7 +867,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_DeadbandBypass(uint32 Channel);
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_ChopperCfg(uint32 Channel, const CDD_PWM_ChopperCfgType *pCfg);
+Cdd_Pwm_ChopperCfg(Cdd_Pwm_ChannelType Channel, const CDD_PWM_ChopperCfgType *pCfg);
 
 /*===============================================================================================*/
 /** \brief  Function  controls the enabling or disabling of chopper sub-module.
@@ -888,7 +888,7 @@ Cdd_Pwm_ChopperCfg(uint32 Channel, const CDD_PWM_ChopperCfgType *pCfg);
  * \retval E_NOT_OK - enabling or disabling of chopper sub-module is failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(uint32 Channel, uint32 enableChopper);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(Cdd_Pwm_ChannelType Channel, uint32 enableChopper);
 #endif /*#if (STD_ON == CDD_PWM_CHOPPER)*/
 
 /*===============================================================================================*/
@@ -908,7 +908,8 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(uint32 Channel, uint32 
  * \retval E_NOT_OK - Operation failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel, EPWM_TimeBaseCountMode Mode);
+FUNC(Std_ReturnType, CDD_PWM_CODE)
+Cdd_Pwm_SetTimeBaseCounterMode(Cdd_Pwm_ChannelType Channel, EPWM_TimeBaseCountMode Mode);
 
 /*========================================================================================================*/
 /** \brief  Function to set the Phase shift value in runtime.
@@ -926,7 +927,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(uint32 Channel, uint16 PhaseShiftValue);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(Cdd_Pwm_ChannelType Channel, uint16 PhaseShiftValue);
 
 /*========================================================================================================*/
 /** \brief  Function to set the time base period in runtime.
@@ -944,7 +945,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(uint32 Channel, uint16 PhaseShift
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(uint32 Channel, uint16 Period);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(Cdd_Pwm_ChannelType Channel, uint16 Period);
 
 /*========================================================================================================*/
 /** \brief  Function to set the Compare value in runtime.
@@ -964,7 +965,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(uint32 Channel, uint16 Period
  *
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE)
-Cdd_Pwm_SetCounterCompareValue(uint32 Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue);
+Cdd_Pwm_SetCounterCompareValue(Cdd_Pwm_ChannelType Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue);
 
 /*========================================================================================================*/
 /** \brief  Function to set the rising edge delay in runtime.
@@ -982,7 +983,7 @@ Cdd_Pwm_SetCounterCompareValue(uint32 Channel, EPWM_CounterCompareModule CompMod
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(uint32 Channel, uint16 RedCount);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 RedCount);
 
 /*========================================================================================================*/
 /** \brief  Function to set the falling edge delay in runtime.
@@ -1000,7 +1001,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(uint32 Channel, uint16 RedCo
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(uint32 Channel, uint16 FedCount);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 FedCount);
 
 /*========================================================================================================*/
 /** \brief  Function to set the minimum deadband delay in runtime.
@@ -1019,7 +1020,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(uint32 Channel, uint16 FedC
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(uint32 Channel, uint32 Block, uint32 Delay);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(Cdd_Pwm_ChannelType Channel, uint32 Block, uint32 Delay);
 
 /*========================================================================================================*/
 /** \brief  Function to set the XCMP register value in runtime.
@@ -1038,7 +1039,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(uint32 Channel, uint32 Bloc
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(uint32 Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue);
 
 /*========================================================================================================*/
 /** \brief  Function to set the XMINMAX register value in runtime.
@@ -1057,7 +1058,8 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(uint32 Channel, EPWM_XCMPReg Xc
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXMinMaxRegValue(uint32 Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue);
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_SetXMinMaxRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue);
 
 /*========================================================================================================*/
 /** \brief  Function to set the CMP shadow register value in runtime.
@@ -1076,7 +1078,8 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXMinMaxRegValue(uint32 Channel, EPWM_XMinMax
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetCmpShadowRegValue(uint32 Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue);
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_SetCmpShadowRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue);
 
 #if (STD_ON == CDD_PWM_TRIP_ZONE)
 /*===============================================================================================*/
@@ -1096,7 +1099,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetCmpShadowRegValue(uint32 Channel, EPWM_XComp
  * \retval E_NOT_OK - enabling of trip event is failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventEnable(uint32 Channel, uint32 tzEventType);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventEnable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType);
 
 /*===============================================================================================*/
 /** \brief  Function disable the trip event. The disabled trip events will be
@@ -1117,7 +1120,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventEnable(uint32 Channel, uin
  * \retval E_NOT_OK - disabling of trip event is failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventDisable(uint32 Channel, uint32 tzEventType);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventDisable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType);
 /*===============================================================================================*/
 /** \brief  Function enables the trip interrupt.
  *
@@ -1136,7 +1139,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventDisable(uint32 Channel, ui
  * \retval E_NOT_OK - enabling of trip interrupt is failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrEnable(uint32 Channel, uint32 tzEventType);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrEnable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType);
 /*===============================================================================================*/
 /** \brief  Function disables the trip interrupt.
  *
@@ -1154,7 +1157,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrEnable(uint32 Channel, uint32 t
  * \retval E_NOT_OK - disabling of trip interrupt is failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrDisable(uint32 Channel, uint32 tzEventType);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrDisable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType);
 /*===============================================================================================*/
 /** \brief  Function returns the selected trip zone event status.
  *
@@ -1172,7 +1175,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrDisable(uint32 Channel, uint32 
  * \retval FALSE
  *
  *****************************************************************************/
-FUNC(boolean, CDD_PWM_CODE) Cdd_Pwm_TzGetEventStatus(uint32 Channel, uint32 eventMask);
+FUNC(boolean, CDD_PWM_CODE) Cdd_Pwm_TzGetEventStatus(Cdd_Pwm_ChannelType Channel, uint32 eventMask);
 /*===============================================================================================*/
 /** \brief Function clears the selected trip zone event status.
  *
@@ -1192,7 +1195,7 @@ FUNC(boolean, CDD_PWM_CODE) Cdd_Pwm_TzGetEventStatus(uint32 Channel, uint32 even
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_TzEventStatusClear(uint32 Channel, uint32 eventMask, uint32 tzFlags);
+Cdd_Pwm_TzEventStatusClear(Cdd_Pwm_ChannelType Channel, uint32 eventMask, uint16 tzFlags);
 /*===============================================================================================*/
 /** \brief Function enables to generate Software forced trip condition.
  *
@@ -1210,7 +1213,7 @@ Cdd_Pwm_TzEventStatusClear(uint32 Channel, uint32 eventMask, uint32 tzFlags);
  * \retval E_NOT_OK -
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTriggerSwEvent(uint32 Channel, uint32 tzEventType);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTriggerSwEvent(Cdd_Pwm_ChannelType Channel, uint32 tzEventType);
 #endif /*#if (STD_ON == CDD_PWM_TRIP_ZONE)*/
 
 /*===============================================================================================*/
@@ -1227,7 +1230,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTriggerSwEvent(uint32 Channel, uint
  * \retval ePWM event interrupt status.
  *
  *****************************************************************************/
-FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtIntrStatus(uint32 Channel);
+FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtIntrStatus(Cdd_Pwm_ChannelType Channel);
 /*===============================================================================================*/
 /** \brief Function  clears the interrupt.
  *
@@ -1244,7 +1247,7 @@ FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtIntrStatus(uint32 Channel);
  * \retval E_NOT_OK - Interrupt cleared failed.
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrClear(uint32 Channel);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrClear(Cdd_Pwm_ChannelType Channel);
 /*===============================================================================================*/
 /** \brief Function forces interrupt to be generated.
  *
@@ -1262,7 +1265,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrClear(uint32 Channel);
  * \retval E_NOT_OK -
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrTrigger(uint32 Channel);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrTrigger(Cdd_Pwm_ChannelType Channel);
 /*===============================================================================================*/
 /** \brief Function returns the number of events occurred.
  *
@@ -1274,11 +1277,11 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrTrigger(uint32 Channel);
  * Reentrancy - Non Reentrant
  *
  * \param[in] Channel
- * \return uint16
+ * \return Cdd_Pwm_ValueType
  * \retval number of events occurred.
  *
  *****************************************************************************/
-FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtGetEventCount(uint32 Channel);
+FUNC(Cdd_Pwm_ValueType, CDD_PWM_CODE) Cdd_Pwm_EtGetEventCount(Cdd_Pwm_ChannelType Channel);
 
 #if (STD_ON == CDD_PWM_ADC_ENABLE_DISABLE_API)
 /*===============================================================================================*/
@@ -1298,7 +1301,7 @@ FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtGetEventCount(uint32 Channel);
  * \retval E_NOT_OK - enabling/disabling of ADC Trigger is failed
  *
  *****************************************************************************/
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetAdcTrigger(uint32 Channel, Cdd_Pwm_AdcSocType adcSoc);
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetAdcTrigger(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_AdcSocType adcSoc);
 #endif /*#if (STD_ON == CDD_PWM_ADC_ENABLE_DISABLE_API)*/
 
 #if (STD_ON == CDD_PWM_HR_SET_HRPWM_API)
@@ -1376,7 +1379,7 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_HrSfoStatus(uint32 ChannelNumber);
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(uint32 Channel, uint32 PhaseShiftValue);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(Cdd_Pwm_ChannelType Channel, uint32 PhaseShiftValue);
 
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM time base period in runtime.
@@ -1394,7 +1397,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(uint32 Channel, uint32 PhaseShi
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(uint32 Channel, uint16 Period);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(Cdd_Pwm_ChannelType Channel, uint16 Period);
 
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM Compare value in runtime.
@@ -1413,7 +1416,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(uint32 Channel, uint16 Peri
  *
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE)
-Cdd_Pwm_HrSetCounterCompareValue(uint32 Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue);
+Cdd_Pwm_HrSetCounterCompareValue(Cdd_Pwm_ChannelType Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue);
 
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM rising edge delay in runtime.
@@ -1431,7 +1434,7 @@ Cdd_Pwm_HrSetCounterCompareValue(uint32 Channel, HRPWM_CounterCompareModule Comp
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(uint32 Channel, uint16 RedCount);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 RedCount);
 
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM falling edge delay in runtime.
@@ -1449,7 +1452,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(uint32 Channel, uint16 Red
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(uint32 Channel, uint16 FedCount);
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 FedCount);
 
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM XCMP register value in runtime.
@@ -1468,7 +1471,8 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(uint32 Channel, uint16 Fe
  * \return void
  *
  *********************************************************************************************************/
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetXcmpRegValue(uint32 Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue);
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_HrSetXcmpRegValue(Cdd_Pwm_ChannelType Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue);
 
 /** \brief End Memory section tag */
 #define CDD_PWM_STOP_SEC_CODE

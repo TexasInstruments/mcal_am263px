@@ -113,16 +113,16 @@ static boolean Adc_utilsFindLinkDoublePri(const Adc_UtilsLinkListObj *llobj, con
 void Adc_utilsInitLinkList(Adc_UtilsLinkListObj *llobj)
 {
     /* Initialize the variables */
-    llobj->headNode = NULL;
-    llobj->tailNode = NULL;
+    llobj->headNode = (Adc_UtilsNode *)NULL_PTR;
+    llobj->tailNode = (Adc_UtilsNode *)NULL_PTR;
 
     return;
 }
 
 void Adc_utilsDeInitLinkList(Adc_UtilsLinkListObj *llobj)
 {
-    llobj->headNode = NULL;
-    llobj->tailNode = NULL;
+    llobj->headNode = (Adc_UtilsNode *)NULL_PTR;
+    llobj->tailNode = (Adc_UtilsNode *)NULL_PTR;
 
     return;
 }
@@ -144,9 +144,9 @@ void Adc_utilsUnLinkNodePri(Adc_UtilsLinkListObj *llobj, Adc_UtilsNode *node)
 
 void Adc_utilsInitNodeObject(Adc_UtilsNode *node)
 {
-    node->next     = NULL;
-    node->prev     = NULL;
-    node->data     = NULL;
+    node->next     = (Adc_UtilsNode *)NULL_PTR;
+    node->prev     = (Adc_UtilsNode *)NULL_PTR;
+    node->data     = NULL_PTR;
     node->priority = 0U;
 
     return;
@@ -270,8 +270,8 @@ static void Adc_utilsUnLinkDoublePri(Adc_UtilsLinkListObj *llobj, Adc_UtilsNode 
         }
 
         /* Reset node memory */
-        node->next = NULL;
-        node->prev = NULL;
+        node->next = (Adc_UtilsNode *)NULL_PTR;
+        node->prev = (Adc_UtilsNode *)NULL_PTR;
     }
 
     return;

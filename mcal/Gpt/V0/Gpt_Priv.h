@@ -31,7 +31,6 @@
 #include "Gpt.h"
 #include "hw_ctrl_core.h"
 #include "sys_common.h"
-#include "hal_stdtypes.h"
 #if (GPT_DEV_ERROR_DETECT == STD_ON)
 /*LDRA_NOANALYSIS*/
 #include "Det.h"

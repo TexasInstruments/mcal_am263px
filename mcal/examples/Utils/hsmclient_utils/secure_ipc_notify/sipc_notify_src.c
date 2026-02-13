@@ -226,7 +226,7 @@ static inline void SIPC_getReadSwQ(uint32_t remoteSecCoreId, SIPC_SwQueue **swQ)
     }
     else
     {
-        *swQ = NULL;
+        *swQ = NULL_PTR;
     }
 }
 
@@ -267,7 +267,7 @@ __attribute__((target("arm"))) void SIPC_isr(void)
 
             do
             {
-                if (swQ == NULL)
+                if (swQ == NULL_PTR)
                 {
                     status = SystemP_FAILURE;
                 }
@@ -284,7 +284,7 @@ __attribute__((target("arm"))) void SIPC_isr(void)
                     clientId    = readMsgData[0];
                     srcClientId = readMsgData[1];
 
-                    if (gSIPC_ctrl.callback[clientId] != NULL)
+                    if (gSIPC_ctrl.callback[clientId] != NULL_PTR)
                     {
                         /* Pass the src client Id of message */
                         gSIPC_ctrl.callback[clientId](pInterruptConfig->coreIdList[core], clientId, srcClientId,
@@ -313,7 +313,7 @@ int32_t SIPC_sendMsg(uint8_t remoteSecCoreId, uint8_t remoteClientId, uint8_t lo
         SIPC_insertClientIds(remoteClientId, localClientId, msgValue);
 
         SIPC_getWriteMailbox(remoteSecCoreId, &mailboxBaseAddr, &intrBitPos, &swQ);
-        if ((mailboxBaseAddr == (uint32_t)NULL) || (swQ == NULL))
+        if ((mailboxBaseAddr == (uint32_t)NULL_PTR) || (swQ == NULL_PTR))
         {
             return status;
         }
@@ -350,7 +350,7 @@ int32_t SIPC_registerClient(uint8_t localClientId, SIPC_FxnCallback msgCallback,
     if (localClientId < SIPC_CLIENT_ID_MAX)
     {
         oldIntState = HwiP_disable();
-        if (gSIPC_ctrl.callback[localClientId] == NULL)
+        if (gSIPC_ctrl.callback[localClientId] == NULL_PTR)
         {
             gSIPC_ctrl.callback[localClientId]     = msgCallback;
             gSIPC_ctrl.callbackArgs[localClientId] = args;
@@ -368,8 +368,8 @@ int32_t SIPC_unregisterClient(uint16_t localClientId)
     oldIntState = HwiP_disable();
     if (localClientId < SIPC_CLIENT_ID_MAX)
     {
-        gSIPC_ctrl.callback[localClientId]     = NULL;
-        gSIPC_ctrl.callbackArgs[localClientId] = NULL;
+        gSIPC_ctrl.callback[localClientId]     = NULL_PTR;
+        gSIPC_ctrl.callbackArgs[localClientId] = NULL_PTR;
     }
     HwiP_restore(oldIntState);
 

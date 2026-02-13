@@ -74,7 +74,6 @@
 #include "string.h"
 #include "Fls_Ospi.h"
 #include "Fls_Brd_Nor.h"
-#include "hal_stdtypes.h"
 #include <mcal_hw_soc_baseaddress.h>
 #if (FLS_DMA_ENABLE == STD_ON)
 #include "Fls_Ospi_Edma.h"
@@ -122,7 +121,7 @@ OSPI_Config Fls_OspiConfig[1] = {{&Fls_OspiObjects[0]}};
 void Fls_Ospi_TransactionInit(OSPI_Transaction *trans)
 {
     trans->count           = 0U;
-    trans->buf             = NULL;
+    trans->buf             = NULL_PTR;
     trans->addrOffset      = 0U;
     trans->transferTimeout = (uint32)-1;
     trans->status          = OSPI_TRANSFER_STARTED;
@@ -897,10 +896,10 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
     uint8          addrnumBytesInput = 0U;
 
     /* Reset Enable the Flash */
-    retVal = Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RSTEN, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+    retVal = Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RSTEN, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
     /*Reset the Flash*/
-    retVal += Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RST, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+    retVal += Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RST, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
     /* Optimal programming setup */
     /* Disable DAC */
@@ -1378,7 +1377,7 @@ void Fls_Ospi_SetProtocolCmds(OSPI_Handle handle, uint32 cmd, uint32 addr, uint3
  */
 void Fls_Ospi_setXferOpCodes(OSPI_Handle handle, uint8 readCmd, uint8 pageProgCmd)
 {
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         uint8 cmdExtRead  = OSPI_CMD_INVALID_OPCODE;
         uint8 cmdExtWrite = OSPI_CMD_INVALID_OPCODE;
@@ -1784,7 +1783,7 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
 
     if ((seq & (1U << 1U)) != 0U)
     {
-        retVal = Nor_OspiCmdWrite(handle, 0xE8, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, 0xE8, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
         if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
         {
             Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
@@ -1801,12 +1800,13 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
     }
     if ((seq & (1U << 2U)) != 0U)
     {
-        retVal += Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal +=
+            Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
         if (retVal == E_OK)
         {
             retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
         }
-        retVal += Nor_OspiCmdWrite(handle, 0x72, 0, 0, NULL, 0);
+        retVal += Nor_OspiCmdWrite(handle, 0x72, 0, 0, (uint8 *)NULL_PTR, 0);
         if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
         {
             Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
@@ -1893,19 +1893,19 @@ Std_ReturnType Fls_set444mode(OSPI_Handle handle, uint8 seq)
     if ((seq & (uint8)(1U << 0U)) != 0U)
     {
         /* Issue instruction 0x38 */
-        retVal   = Nor_OspiCmdWrite(handle, 0x38, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal   = Nor_OspiCmdWrite(handle, 0x38, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
         seqFound = 1U;
     }
     if ((seq & (uint8)(1U << 1U)) != 0U)
     {
         /* Issue instruction 0x38 */
-        retVal   += Nor_OspiCmdWrite(handle, 0x38, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal   += Nor_OspiCmdWrite(handle, 0x38, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
         seqFound  = 1U;
     }
     if ((seq & (uint8)(1U << 2U)) != 0U)
     {
         /* Issue instruction 0x35 */
-        retVal   += Nor_OspiCmdWrite(handle, 0x35, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal   += Nor_OspiCmdWrite(handle, 0x35, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
         seqFound  = 1U;
     }
     if ((seq & (uint8)(1U << 3U)) != 0U)
@@ -1971,10 +1971,10 @@ Std_ReturnType Fls_set111mode(OSPI_Handle handle, uint8 rdCmd, uint8 wrCmd, uint
     uint32         regVal = 0U;
 
     /* Reset Enablr the Flash */
-    retVal = Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RSTEN, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+    retVal = Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RSTEN, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
     /*Reset the Flash*/
-    retVal += Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RST, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+    retVal += Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RST, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
     uint32 waitMicro = 500U * 1000U;
     while (waitMicro != 0U)

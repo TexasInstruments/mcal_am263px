@@ -180,7 +180,7 @@ static boolean Port_ValidateSetPinDirection(const Port_PinConfigType *pinConfig,
 {
     boolean retVal = FALSE;
 
-    if ((pinConfig != NULL) && (curMode != PORT_PIN_MODE_INVALID))
+    if ((pinConfig != NULL_PTR) && (curMode != PORT_PIN_MODE_INVALID))
     {
         if (pinConfig->Port_DirectionChangeable == (boolean)TRUE)
         {
@@ -225,7 +225,7 @@ FUNC(void, PORT_CODE) Port_SetPinDirection(Port_PinType Pin, Port_PinDirectionTy
 #endif /* #if (STD_ON == PORT_DEV_ERROR_DETECT) */
     {
         pinConfig = Port_MapPinIdToPinConfig(Pin, Port_DrvObj.PinConfig_pt, Port_DrvObj.NumberOfPortPins);
-        if (pinConfig != NULL)
+        if (pinConfig != NULL_PTR)
         {
             curMode = Port_GetCurrentPinMode(pinConfig);
         }
@@ -493,7 +493,7 @@ static const Port_PinConfigType *Port_MapPinIdToPinConfig(Port_PinType PinId, co
 
     if (idx == numPins)
     {
-        pinCfg = (const Port_PinConfigType *)NULL;
+        pinCfg = (const Port_PinConfigType *)NULL_PTR;
     }
     return pinCfg;
 }

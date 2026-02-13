@@ -43,6 +43,7 @@
 #include <string.h>
 #include <dthe_sha.h>
 #include <dma.h>
+#include "Std_Types.h"
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
@@ -117,11 +118,11 @@ static void     DTHE_SHA512_setHMACInnerKey(CSL_EIP57T_SHARegs* ptrSHARegs, cons
 DTHE_SHA_Return_t DTHE_SHA_open(DTHE_Handle handle)
 {
     DTHE_SHA_Return_t   status = DTHE_SHA_RETURN_FAILURE;
-    DTHE_Config*        config = NULL;
-    DTHE_Attrs*         attrs  = NULL;
+    DTHE_Config*        config = NULL_PTR;
+    DTHE_Attrs*         attrs  = NULL_PTR;
     CSL_EIP57T_SHARegs* ptrShaRegs;
 
-    if (NULL != handle)
+    if (NULL_PTR != handle)
     {
         status = DTHE_SHA_RETURN_SUCCESS;
     }
@@ -143,11 +144,11 @@ DTHE_SHA_Return_t DTHE_SHA_open(DTHE_Handle handle)
 DTHE_SHA_Return_t DTHE_SHA_close(DTHE_Handle handle)
 {
     DTHE_SHA_Return_t   status = DTHE_SHA_RETURN_FAILURE;
-    DTHE_Config*        config = NULL;
-    DTHE_Attrs*         attrs  = NULL;
+    DTHE_Config*        config = NULL_PTR;
+    DTHE_Attrs*         attrs  = NULL_PTR;
     CSL_EIP57T_SHARegs* ptrShaRegs;
 
-    if (NULL != handle)
+    if (NULL_PTR != handle)
     {
         status = DTHE_SHA_RETURN_SUCCESS;
     }
@@ -177,7 +178,7 @@ DTHE_SHA_Return_t DTHE_SHA_close(DTHE_Handle handle)
 DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaParams, int32_t isLastBlock)
 {
     DTHE_SHA_Return_t   status    = DTHE_SHA_RETURN_SUCCESS;
-    DMA_Handle          dmaHandle = NULL;
+    DMA_Handle          dmaHandle = NULL_PTR;
     uint32_t            index     = 0U;
     uint32_t            dataLenWords;
     uint32_t            dataLenBytes;
@@ -190,11 +191,11 @@ DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaPa
     uint32_t            numPartialWords;
     uint32_t            partialWord = 0U;
     uint32_t            numBytes    = 0U;
-    DTHE_Config*        config      = NULL;
-    DTHE_Attrs*         attrs       = NULL;
+    DTHE_Config*        config      = NULL_PTR;
+    DTHE_Attrs*         attrs       = NULL_PTR;
     CSL_EIP57T_SHARegs* ptrShaRegs;
 
-    if ((NULL == handle) || (NULL == ptrShaParams))
+    if ((NULL_PTR == handle) || (NULL_PTR == ptrShaParams))
     {
         status = DTHE_SHA_RETURN_FAILURE;
     }
@@ -415,7 +416,7 @@ DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaPa
 DTHE_SHA_Return_t DTHE_HMACSHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaParams)
 {
     DTHE_SHA_Return_t   status    = DTHE_SHA_RETURN_FAILURE;
-    DMA_Handle          dmaHandle = NULL;
+    DMA_Handle          dmaHandle = NULL_PTR;
     uint32_t            index;
     uint32_t            dataLenWords;
     uint32_t            dataLenBytes;
@@ -427,11 +428,11 @@ DTHE_SHA_Return_t DTHE_HMACSHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrS
     uint32_t            partialWord = 0U;
     uint32_t            numBytes    = 0U;
     uint32_t            hmacPaddedKey[DTHE_HMAC_SHA_MAX_KEY_SIZE_BYTES / 4U];
-    DTHE_Config*        config = NULL;
-    DTHE_Attrs*         attrs  = NULL;
+    DTHE_Config*        config = NULL_PTR;
+    DTHE_Attrs*         attrs  = NULL_PTR;
     CSL_EIP57T_SHARegs* ptrShaRegs;
 
-    if ((NULL != handle) && (NULL != ptrShaParams))
+    if ((NULL_PTR != handle) && (NULL_PTR != ptrShaParams))
     {
         status = DTHE_SHA_RETURN_SUCCESS;
     }

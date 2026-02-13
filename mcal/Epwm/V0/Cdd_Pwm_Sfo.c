@@ -131,7 +131,7 @@ VAR(sint32, PWM_VAR_NO_INIT) Cdd_Pwm_MEP_ScaleFactor;
 
 #define CDD_PWM_START_SEC_VAR_INIT_32
 #include "Cdd_Pwm_MemMap.h"
-VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_gOttoCal_base = 0x502E0000UL;
+VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_gOttoCal_base = 0x502E0000U;
 #define CDD_PWM_STOP_SEC_VAR_INIT_32
 #include "Cdd_Pwm_MemMap.h"
 
@@ -159,12 +159,12 @@ VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_gOttoCal_base = 0x502E0000UL;
 #define CDD_PWM_START_SEC_CODE
 #include "Cdd_Pwm_MemMap.h"
 
-FUNC(sint32, PWM_CODE) Cdd_Pwm_SFO(void)
+FUNC(uint32, PWM_CODE) Cdd_Pwm_SFO(void)
 {
     static uint16 hrc1, hrc2; /* holds HRCNT0 count in 65535 HRCNT1 counts */
     static uint16 TaskPtr = 0U;
 
-    sint16  status;
+    uint32  status;
     float32 Denom;
     uint16  Numer;
     uint32  scale_factor;
@@ -371,14 +371,14 @@ FUNC(sint32, PWM_CODE) Cdd_Pwm_SFO(void)
             /* Calculate MEP scale factor */
             scale_factor                    = ((((float32)Numer) / Denom) + ((float32)0.5));
             Cdd_Pwm_MEP_SF[Cdd_Pwm_SFO_Cal] = scale_factor;
-            Cdd_Pwm_MEP_ScaleFactor         = Cdd_Pwm_MEP_SF[0];
+            Cdd_Pwm_MEP_ScaleFactor         = (sint32)(Cdd_Pwm_MEP_SF[0]);
 
             /* Update the task pointer to MEP1 calibration initialization task
              for next call.*/
             TaskPtr = 1;
 
             /* Update status & assign scale factor value to HRMSTEP register */
-            if (Cdd_Pwm_MEP_ScaleFactor > ((sint32)255U))
+            if (Cdd_Pwm_MEP_ScaleFactor > 255)
             {
                 status = CDD_PWM_SFO_ERROR;
             }

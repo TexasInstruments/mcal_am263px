@@ -370,7 +370,7 @@ FUNC(void, ICU_CODE) Icu_Timestamp_ISR(Icu_ChannelType Channel)
     baseAddr = Icu_ChObj[Channel].baseAddr;
 
     /*BufferPtr null check*/
-    if (Icu_ChObj[Channel].NextTimeStampIndexPtr != NULL)
+    if (Icu_ChObj[Channel].NextTimeStampIndexPtr != NULL_PTR)
     {
         ICU_Timestamp_ISRProcess(Channel);
     }

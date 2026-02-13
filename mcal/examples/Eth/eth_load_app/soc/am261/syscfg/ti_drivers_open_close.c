@@ -63,7 +63,7 @@ EDMA_Config gEdmaConfig[] = {};
 uint32_t gEdmaConfigNum = 0;
 
 UART_DmaChConfig gUartDmaChConfig[CONFIG_UART_NUM_INSTANCES] = {
-    NULL,
+    NULL_PTR,
 };
 
 /* UART Driver Parameters */
@@ -76,8 +76,8 @@ UART_Params gUartParams[CONFIG_UART_NUM_INSTANCES] = {
         .readMode         = UART_TRANSFER_MODE_BLOCKING,
         .readReturnMode   = UART_READ_RETURN_MODE_FULL,
         .writeMode        = UART_TRANSFER_MODE_BLOCKING,
-        .readCallbackFxn  = NULL,
-        .writeCallbackFxn = NULL,
+        .readCallbackFxn  = NULL_PTR,
+        .writeCallbackFxn = NULL_PTR,
         .hwFlowControl    = FALSE,
         .hwFlowControlThr = UART_RXTRIGLVL_16,
         .transferMode     = UART_CONFIG_MODE_INTERRUPT,
@@ -100,14 +100,14 @@ void Drivers_uartOpen(void)
 
     for (instCnt = 0U; instCnt < CONFIG_UART_NUM_INSTANCES; instCnt++)
     {
-        gUartHandle[instCnt] = NULL; /* Init to NULL so that we can exit gracefully */
+        gUartHandle[instCnt] = NULL_PTR; /* Init to NULL so that we can exit gracefully */
     }
 
     /* Open all instances */
     for (instCnt = 0U; instCnt < CONFIG_UART_NUM_INSTANCES; instCnt++)
     {
         gUartHandle[instCnt] = UART_open(instCnt, &gUartParams[instCnt]);
-        if (NULL == gUartHandle[instCnt])
+        if (NULL_PTR == gUartHandle[instCnt])
         {
             DebugP_logError("UART open failed for instance %d !!!\r\n", instCnt);
             status = SystemP_FAILURE;
@@ -130,10 +130,10 @@ void Drivers_uartClose(void)
     /* Close all instances that are open */
     for (instCnt = 0U; instCnt < CONFIG_UART_NUM_INSTANCES; instCnt++)
     {
-        if (gUartHandle[instCnt] != NULL)
+        if (gUartHandle[instCnt] != NULL_PTR)
         {
             UART_close(gUartHandle[instCnt]);
-            gUartHandle[instCnt] = NULL;
+            gUartHandle[instCnt] = NULL_PTR;
         }
     }
 

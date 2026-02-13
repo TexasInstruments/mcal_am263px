@@ -33,7 +33,6 @@
 #include "EcuM_Cbk.h"
 #include "sys_common.h"
 #include "trace.h"
-#include "hal_stdtypes.h"
 #include "soc.h"
 #include "DmaInterruptModeApp.h"
 #include "DmaInterruptModeApp_Startup.h"

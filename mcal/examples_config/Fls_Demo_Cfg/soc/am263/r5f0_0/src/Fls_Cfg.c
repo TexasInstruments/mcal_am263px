@@ -142,6 +142,12 @@ CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) Fls_Config =
     .Fls_Mode = FLS_QSPI_RX_LINES_QUAD
 };
 
+#define  FLS_STOP_SEC_CONFIG_DATA
+#include "Fls_MemMap.h"
+
+#define  FLS_START_SEC_VAR_INIT_UNSPECIFIED
+#include "Fls_MemMap.h"
+
   /** FLASH device specific items (note: sizes are in bytes) */
 /* Selected Flash S25FL128S */
 
@@ -235,7 +241,7 @@ struct Fls_ConfigSfdp_s *Fls_Config_SFDP_Ptr = &Fls_Config_SFDP_1;
 }
 #endif
 
-#define  FLS_STOP_SEC_CONFIG_DATA
+#define  FLS_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Fls_MemMap.h"
 
 /*******************************************************************************

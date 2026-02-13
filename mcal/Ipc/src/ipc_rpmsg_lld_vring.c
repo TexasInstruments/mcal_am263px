@@ -305,9 +305,7 @@ uint8 *RPMessage_vringGetRxBufAddr(RPMessageLLD_Handle hRpMsg, uint16 remoteCore
     return (uint8 *)vringObj->desc[vringBufId].addr;
 }
 
-void RPMessage_vringResetInternal(RPMessage_Vring *vringObj, uint16 numBuf, uint16 msgSize, uintptr_t vringBaseAddr,
-                                  uint32 offset_desc, uint32 offset_avail, uint32 offset_used, uint32 offset_buf,
-                                  uint32 isTx)
+void RPMessage_vringResetInternal(RPMessage_Vring *vringObj, const RPMessage_VringResetParams *resetParams)
 {
     uint8 *bufAddr;
     uint16 bufId;
@@ -315,32 +313,32 @@ void RPMessage_vringResetInternal(RPMessage_Vring *vringObj, uint16 numBuf, uint
     /* intialize locally visible variables */
     vringObj->lastUsedIdx  = 0U;
     vringObj->lastAvailIdx = 0U;
-    vringObj->vringNumBuf  = numBuf;
+    vringObj->vringNumBuf  = resetParams->numBuf;
 
     /* set address to vring descriptors, avail Q, used Q, message buffers */
-    vringObj->desc        = (struct vring_desc *)(vringBaseAddr + offset_desc);
-    vringObj->avail       = (struct vring_avail *)(vringBaseAddr + offset_avail);
-    vringObj->used        = (struct vring_used *)(vringBaseAddr + offset_used);
-    vringObj->bufBaseAddr = (uint8 *)(vringBaseAddr + offset_buf);
+    vringObj->desc        = (struct vring_desc *)(resetParams->vringBaseAddr + resetParams->offset_desc);
+    vringObj->avail       = (struct vring_avail *)(resetParams->vringBaseAddr + resetParams->offset_avail);
+    vringObj->used        = (struct vring_used *)(resetParams->vringBaseAddr + resetParams->offset_used);
+    vringObj->bufBaseAddr = (uint8 *)(resetParams->vringBaseAddr + resetParams->offset_buf);
 
     /* only initialize TX vring, RX vring is initialized by the remote core */
-    if (isTx != 0U)
+    if (resetParams->isTx != 0U)
     {
         /* initialize descriptors with message buffer address and max len */
         bufAddr = vringObj->bufBaseAddr;
-        for (bufId = 0U; bufId < numBuf; bufId++)
+        for (bufId = 0U; bufId < resetParams->numBuf; bufId++)
         {
             vringObj->desc[bufId].addr     = (uint32)bufAddr;
             vringObj->desc[bufId].padding  = 0U;
-            vringObj->desc[bufId].len      = (uint32)msgSize;
+            vringObj->desc[bufId].len      = (uint32)resetParams->msgSize;
             vringObj->desc[bufId].flags    = 0U;
             vringObj->desc[bufId].next     = 0U;
-            bufAddr                       += msgSize;
+            bufAddr                       += resetParams->msgSize;
         }
         /* initialize avail Q and add all buffers to avail Q */
         vringObj->avail->idx   = 0;
         vringObj->avail->flags = 0;
-        for (bufId = 0; bufId < numBuf; bufId++)
+        for (bufId = 0; bufId < resetParams->numBuf; bufId++)
         {
             vringObj->avail->ring[bufId] = bufId;
             vringObj->avail->idx++;
@@ -348,7 +346,7 @@ void RPMessage_vringResetInternal(RPMessage_Vring *vringObj, uint16 numBuf, uint
         /* initialize used Q */
         vringObj->used->idx   = 0;
         vringObj->used->flags = 0;
-        for (bufId = 0; bufId < numBuf; bufId++)
+        for (bufId = 0; bufId < resetParams->numBuf; bufId++)
         {
             vringObj->used->ring[bufId].id  = 0;
             vringObj->used->ring[bufId].len = 0;
@@ -393,8 +391,17 @@ void RPMessage_vringReset(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint1
     offset_buf =
         (offset_used) + RPMessage_align(((sizeof(uint16) * 2U) + (sizeof(struct vring_used_elem) * numBuf)), align);
 
-    RPMessage_vringResetInternal(vringObj, numBuf, msgSize, vringBaseAddr, offset_desc, offset_avail, offset_used,
-                                 offset_buf, isTx);
+    RPMessage_VringResetParams resetParams;
+    resetParams.numBuf        = numBuf;
+    resetParams.msgSize       = msgSize;
+    resetParams.vringBaseAddr = vringBaseAddr;
+    resetParams.offset_desc   = offset_desc;
+    resetParams.offset_avail  = offset_avail;
+    resetParams.offset_used   = offset_used;
+    resetParams.offset_buf    = offset_buf;
+    resetParams.isTx          = isTx;
+
+    RPMessage_vringResetInternal(vringObj, &resetParams);
 }
 
 static inline void RPMessage_vringPutFullTxBuf_asm(void)

@@ -35,6 +35,9 @@
 /* ========================================================================== */
 
 #define DIO_NUM_GPIO_REGS (5U)
+#define M_ZERO            (0U)
+#define M_THIRTY          (30U)
+#define M_THIRTY_ONE      (31U)
 
 /* ========================================================================== */
 /*                         Structure Declarations                             */
@@ -172,7 +175,7 @@ uint32 Dio_GpioPortWrite(const gpioPORT_t *port, uint32 setBits)
     /*Writing the port value */
     regWrFailStatus |= regWriteReadback(&port->DOUT, M_THIRTY_ONE, M_ZERO, setBits);
     /* TI_COVERAGE_GAP_START Hardware register write failure cannot be recreated in test environment */
-    if (regWrFailStatus != MCAL_REGWR_E_OK)
+    if (regWrFailStatus != (uint32)E_OK)
     {
 #ifdef DIO_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)DIO_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);

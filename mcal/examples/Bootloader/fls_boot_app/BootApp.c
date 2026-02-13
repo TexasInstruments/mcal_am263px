@@ -145,7 +145,7 @@ Bootloader_Config gBootloaderConfig[CONFIG_BOOTLOADER_NUM_INSTANCES] = {
         BOOTLOADER_MEDIA_FLASH,
         0,
         0,
-        NULL,
+        NULL_PTR,
 
         .socCoreOpMode       = (void *)&operatingMode,
         .isAppimageSigned    = FALSE,
@@ -281,8 +281,8 @@ DTHE_Config gDtheConfig[1] = {
 
 DMA_Config gDmaConfig[1] = {
     {
-        NULL,
-        NULL,
+        NULL_PTR,
+        NULL_PTR,
     },
 };
 uint32_t gDmaConfigNum = 1;
@@ -531,7 +531,7 @@ int main(void)
     {
         status = SystemP_FAILURE;
 
-        if (NULL != Fls_Config_SFDP_Ptr)
+        if (NULL_PTR != Fls_Config_SFDP_Ptr)
         {
             uint32_t   bootret    = 0;
             FSS_Config fssConf    = {0, 0};
@@ -581,7 +581,7 @@ int main(void)
         crypto_hmac_sha512_main();
     }
 
-    if (bootHandle != NULL)
+    if (bootHandle != NULL_PTR)
     {
         status = Bootloader_parseAndLoadMultiCoreELF(bootHandle, &bootImageInfo);
         if (status == SystemP_SUCCESS)

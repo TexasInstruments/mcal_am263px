@@ -44,6 +44,8 @@
 #include <stdbool.h>
 #include <dthe_aes.h>
 #include <dma.h>
+#include "Std_Types.h"
+
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -295,11 +297,11 @@ static void DTHE_AES_clearAllInterrupts(CSL_AesRegs *ptrAesRegs)
 DTHE_AES_Return_t DTHE_AES_open(DTHE_Handle handle)
 {
     DTHE_AES_Return_t status = DTHE_AES_RETURN_FAILURE;
-    DTHE_Config      *config = NULL;
-    DTHE_Attrs       *attrs  = NULL;
+    DTHE_Config      *config = NULL_PTR;
+    DTHE_Attrs       *attrs  = NULL_PTR;
     CSL_AesRegs      *ptrAesRegs;
 
-    if (NULL != handle)
+    if (NULL_PTR != handle)
     {
         status = DTHE_AES_RETURN_SUCCESS;
     }
@@ -330,10 +332,10 @@ DTHE_AES_Return_t DTHE_AES_open(DTHE_Handle handle)
 DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *ptrParams)
 {
     DTHE_AES_Return_t status = DTHE_AES_RETURN_FAILURE;
-    DTHE_Config      *config = NULL;
-    DTHE_Attrs       *attrs  = NULL;
+    DTHE_Config      *config = NULL_PTR;
+    DTHE_Attrs       *attrs  = NULL_PTR;
     CSL_AesRegs      *ptrAesRegs;
-    DMA_Handle        dmaHandle = NULL;
+    DMA_Handle        dmaHandle = NULL_PTR;
     uint32_t         *ptrWordInputBuffer;
     uint32_t         *ptrWordOutputBuffer;
     uint32_t          dataLenWords;
@@ -344,7 +346,7 @@ DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *pt
     uint8_t           inPartialBlock[32U];
     uint8_t           outPartialBlock[32U];
 
-    if (NULL != handle)
+    if (NULL_PTR != handle)
     {
         status = DTHE_AES_RETURN_SUCCESS;
     }
@@ -392,7 +394,7 @@ DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *pt
                 else
                 {
                     /* Normal Mode: Key should always be specified */
-                    if (ptrParams->ptrKey == NULL)
+                    if (ptrParams->ptrKey == NULL_PTR)
                     {
                         status = DTHE_AES_RETURN_FAILURE;
                     }
@@ -402,7 +404,7 @@ DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *pt
                     (ptrParams->algoType == DTHE_AES_ICM_MODE) || (ptrParams->algoType == DTHE_AES_CFB_MODE) ||
                     (ptrParams->algoType == DTHE_AES_CCM_MODE))
                 {
-                    if (ptrParams->ptrIV == NULL)
+                    if (ptrParams->ptrIV == NULL_PTR)
                     {
                         status = DTHE_AES_RETURN_FAILURE;
                     }
@@ -415,7 +417,7 @@ DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *pt
                     CSL_REG32_FINS(&ptrAesRegs->SYSCONFIG, AES_S_SYSCONFIG_DIRECTBUSEN, 0U);
 
                     /* Normal Mode: Key should always be specified */
-                    if (ptrParams->ptrKey != NULL)
+                    if (ptrParams->ptrKey != NULL_PTR)
                     {
                         /* Configure the key which is to be used: */
                         DTHE_AES_set256BitKey1(ptrAesRegs, ptrParams->ptrKey);
@@ -439,7 +441,7 @@ DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *pt
                 if ((ptrParams->algoType == DTHE_AES_CBC_MODE) || (ptrParams->algoType == DTHE_AES_CTR_MODE) ||
                     (ptrParams->algoType == DTHE_AES_ICM_MODE) || (ptrParams->algoType == DTHE_AES_CFB_MODE))
                 {
-                    if (ptrParams->ptrIV != NULL)
+                    if (ptrParams->ptrIV != NULL_PTR)
                     {
                         DTHE_AES_setIV(ptrAesRegs, ptrParams->ptrIV);
                     }
@@ -455,7 +457,7 @@ DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *pt
                 {
                     /* Clear the IV value */
                     DTHE_AES_clearIV(ptrAesRegs);
-                    if (ptrParams->ptrIV != NULL)
+                    if (ptrParams->ptrIV != NULL_PTR)
                     {
                         DTHE_AES_setIV(ptrAesRegs, ptrParams->ptrIV);
                     }
@@ -777,11 +779,11 @@ DTHE_AES_Return_t DTHE_AES_execute(DTHE_Handle handle, const DTHE_AES_Params *pt
 DTHE_AES_Return_t DTHE_AES_close(DTHE_Handle handle)
 {
     DTHE_AES_Return_t status = DTHE_AES_RETURN_FAILURE;
-    DTHE_Config      *config = NULL;
-    DTHE_Attrs       *attrs  = NULL;
+    DTHE_Config      *config = NULL_PTR;
+    DTHE_Attrs       *attrs  = NULL_PTR;
     CSL_AesRegs      *ptrAesRegs;
 
-    if (NULL != handle)
+    if (NULL_PTR != handle)
     {
         status = DTHE_AES_RETURN_SUCCESS;
     }

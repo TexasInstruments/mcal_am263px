@@ -932,7 +932,7 @@ static FUNC(Std_ReturnType, ICU_CODE) Icu_checkInitErrors(const Icu_ConfigType* 
 {
     Std_ReturnType retVal = E_OK;
 
-    if (NULL == IcuConfigPtr)
+    if (NULL_PTR == IcuConfigPtr)
     {
         (void)Icu_reportDetError(ICU_INIT_ID, ICU_E_PARAM_POINTER);
         retVal = E_NOT_OK;

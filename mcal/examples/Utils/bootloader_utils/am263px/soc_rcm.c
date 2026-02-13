@@ -1095,8 +1095,8 @@ static void SOC_rcmGetClkSrcAndDivReg(SOC_RcmPeripheralId periphId, SOC_RcmPerip
         }
         default:
         {
-            *clkSrcReg  = NULL;
-            *clkdDivReg = NULL;
+            *clkSrcReg  = NULL_PTR;
+            *clkdDivReg = NULL_PTR;
             *clkSrcVal  = 0x888U;
         }
     }
@@ -1595,7 +1595,7 @@ static SOC_RcmADPLLJConfig_t const *SOC_rcmGetADPLLJConfig(uint32_t Finp, SOC_Rc
     }
     else
     {
-        adplljCfg = (SOC_RcmADPLLJConfig_t const *)NULL;
+        adplljCfg = (SOC_RcmADPLLJConfig_t const *)NULL_PTR;
     }
     return adplljCfg;
 }
@@ -1848,7 +1848,7 @@ void SOC_rcmCoreApllConfig(SOC_RcmPllFoutFreqId outFreqId, SOC_RcmPllHsDivOutCon
 
     /* program PLL dividers and multipliers.  */
     adplljCfg = SOC_rcmGetADPLLJConfig(gXTALInfo[XTALFreq].Finp, outFreqId);
-    if (adplljCfg != NULL)
+    if (adplljCfg != NULL_PTR)
     {
         if (gXTALInfo[XTALFreq].div2flag == false)
         {
@@ -1947,7 +1947,7 @@ void SOC_rcmPerApllConfig(SOC_RcmPllFoutFreqId outFreqId, SOC_RcmPllHsDivOutConf
 
     /* program PLL dividers and multipliers.  */
     adplljCfg = SOC_rcmGetADPLLJConfig(gXTALInfo[XTALFreq].Finp, outFreqId);
-    if (adplljCfg != NULL)
+    if (adplljCfg != NULL_PTR)
     {
         if (gXTALInfo[XTALFreq].div2flag == false)
         {
@@ -2141,7 +2141,7 @@ int32_t SOC_rcmSetPeripheralClock(SOC_RcmPeripheralId periphId, SOC_RcmPeriphera
     clkDivisor = SOC_rcmGetModuleClkDivVal(Finp, freqHz);
     SOC_rcmGetClkSrcAndDivReg(periphId, clkSource, &clkSrcVal, &ptrClkSrcReg, &ptrClkDivReg);
 
-    if ((ptrClkSrcReg != NULL) && (ptrClkDivReg != NULL) && (clkSrcVal != 0x888U))
+    if ((ptrClkSrcReg != NULL_PTR) && (ptrClkDivReg != NULL_PTR) && (clkSrcVal != 0x888U))
     {
         uint16_t clkDivVal;
 

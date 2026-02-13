@@ -89,14 +89,14 @@ CONST(Cdd_IpcConfigType, CDD_PBCFG) Cdd_Ipc_Config =
                 [0] =
         {
         .Cdd_Ipc_localEndPt = 12,
-        .recvCallback = NULL,
-        .recvCallbackArgs = NULL,
-        .recvNotifyCallback = NULL,
-        .recvNotifyCallbackArgs = NULL,
+        .recvCallback = NULL_PTR,
+        .recvCallbackArgs = NULL_PTR,
+        .recvNotifyCallback = NULL_PTR,
+        .recvNotifyCallbackArgs = NULL_PTR,
         },
     },
 
-    .Cdd_Ipc_CrcHookFunc = NULL
+    .Cdd_Ipc_CrcHookFunc = NULL_PTR
 };
 
 P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_PBCFG)CfgPtr = &Cdd_Ipc_Config;

@@ -105,7 +105,7 @@ VAR(struct Eth_ConfigType_s, ETH_CFG)
                     0x[!"."!]U,
                     [!ENDLOOP!]
                     [!ELSE!]
-                    NULL,NULL,NULL,NULL,NULL,NULL
+                    NULL_PTR,NULL_PTR,NULL_PTR,NULL_PTR,NULL_PTR,NULL_PTR
                     [!ENDIF!]
                 },
             },
@@ -165,9 +165,9 @@ VAR(struct Eth_ConfigType_s, ETH_CFG)
            [!ENDLOOP!]
        },
 #endif
-       
+
        .enableCacheOps = (uint32)[!"text:toupper(string(EthEnableCacheOps))"!],
-	   
+
        .cacheFlushOps = (Eth_CacheFlushType) [!IF "EthEnableCacheOps = 'true'"!][!"EthCacheFlushOps"!][!ELSE!]NULL_PTR[!ENDIF!],
 
        .cacheInvalidateOps = (Eth_CacheInvalidateType) [!IF "EthEnableCacheOps = 'true'"!][!"EthInvalidateOps"!][!ELSE!]NULL_PTR[!ENDIF!]
@@ -184,6 +184,6 @@ VAR(struct Eth_ConfigType_s, ETH_CFG)
  *  End of File: Eth_Cfg.c
  ******************************************************************************/
 [!ELSE!]
-/* The last generated configuration variant is not 
+/* The last generated configuration variant is not
        PRE-COMPILE variant. Refer Eth_PBCfg.c/Eth_Lcfg.c. */
 [!ENDIF!]

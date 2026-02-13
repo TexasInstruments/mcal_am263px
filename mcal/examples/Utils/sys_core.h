@@ -46,8 +46,6 @@
 #ifndef SYS_CORE_H
 #define SYS_CORE_H
 
-#include "hal_stdtypes.h"
-
 #ifdef __cplusplus
 extern "C" {
 #endif

@@ -278,18 +278,16 @@ Cdd_Flc_GetStatus(VAR(Cdd_Flc_HwUnitType, AUTOMATIC) HwUnitId,
         {
             StatusPtr->copyDone = TRUE;
         }
-        /* TI_COVERAGE_GAP_START FLC write error cannot be recreated in test environment */
+
         if ((status & CSL_RL2_OF_IRQSTATUS_RAW_FLC_WRERR_MASK) != 0U)
         {
             StatusPtr->wrError = TRUE;
         }
-        /* TI_COVERAGE_GAP_STOP */
-        /* TI_COVERAGE_GAP_START FLC read error cannot be recreated in test environment */
+
         if ((status & CSL_RL2_OF_IRQSTATUS_RAW_FLC_RDERR_MASK) != 0U)
         {
             StatusPtr->rdError = TRUE;
         }
-        /* TI_COVERAGE_GAP_STOP */
     }
 
     return;

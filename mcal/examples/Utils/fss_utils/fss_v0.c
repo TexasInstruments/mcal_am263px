@@ -49,7 +49,7 @@ int32_t FSS_addressBitMask(FSS_Handle handle, uint32_t bitMask, uint8_t segment)
 {
     int32_t ret = SystemP_FAILURE;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         FSS_Config *config = (FSS_Config *)handle;
         if (bitMask != 0)
@@ -71,7 +71,7 @@ int32_t FSS_addressBitMask(FSS_Handle handle, uint32_t bitMask, uint8_t segment)
 int32_t FSS_selectRegionA(FSS_Handle handle)
 {
     int32_t ret = SystemP_FAILURE;
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         FSS_Config *config = (FSS_Config *)handle;
         if ((config->extFlashSize & (config->extFlashSize - 1)) == 0)
@@ -85,7 +85,7 @@ int32_t FSS_selectRegionA(FSS_Handle handle)
 int32_t FSS_selectRegionB(FSS_Handle handle)
 {
     int32_t ret = SystemP_FAILURE;
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         FSS_Config *config = (FSS_Config *)handle;
         if ((config->extFlashSize & (config->extFlashSize - 1)) == 0)
@@ -99,7 +99,7 @@ int32_t FSS_selectRegionB(FSS_Handle handle)
 uint32_t FSS_getBootRegion(FSS_Handle handle)
 {
     uint32_t ret = 0;
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         FSS_Config *config = (FSS_Config *)handle;
         ret = (HWREG(config->ipBaseAddress + MSS_OSPI_BOOT_CONFIG_SEG) > 0) ? BOOT_REGION_B : BOOT_REGION_A;
@@ -169,7 +169,7 @@ void FSS_setECCRegionSize(uint32_t regionIndex, uint32_t size_in_bytes)
 int32_t FSS_configECCMRegion(FSS_ECCRegionConfig *parameter)
 {
     int32_t status = SystemP_FAILURE;
-    if (NULL != parameter)
+    if (NULL_PTR != parameter)
     {
         uint32_t regOffset    = CSL_FSS_FSAS_GENREGS_ECC_REGCTRL_ECC_RGSTRT(parameter->regionIndex);
         uint32_t ecc_reg_size = FSS_ECCCalculateRegionSize(parameter->size);
@@ -186,7 +186,7 @@ int32_t FSS_configECCMRegion(FSS_ECCRegionConfig *parameter)
 int32_t FSS_ConfigEccm(uint32_t numRegion, FSS_ECCRegionConfig *parameter)
 {
     int32_t status = SystemP_FAILURE;
-    if (parameter != NULL)
+    if (parameter != NULL_PTR)
     {
         FSS_disableECC();
         for (int i = 0; i < numRegion; i++)

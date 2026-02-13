@@ -65,7 +65,6 @@
         -I${MCAL_MCAL_Mcal_Lib}
         -I${MCAL_MCAL_Include_memmap}
         -I${MCAL_MCAL_Include_hw_types}
-        -I${MCAL_MCAL_Include_hal_stdtypes}
         -I${MCAL_MCAL_Mcu}
         -I${MCAL_MCAL_Port}
         -I${MCAL_MCAL_I2c}
@@ -125,7 +124,6 @@
         <pathVariable name="MCAL_MCAL_Include_hw" path="${MCAL_MCAL}/include/hw/am263px" scope="project"/>
         <pathVariable name="MCAL_MCAL_Include_memmap" path="${MCAL_MCAL}/include/memmap" scope="project"/>
         <pathVariable name="MCAL_MCAL_Include_hw_types" path="${MCAL_MCAL}/include/hw/" scope="project"/>
-        <pathVariable name="MCAL_MCAL_Include_hal_stdtypes" path="${MCAL_MCAL}/include/hw/hal_stdtypes.h" scope="project"/>
         <pathVariable name="MCAL_MCAL_Utils_am263px" path="${PROJECT_LOC}/Utils/am263px" scope="project"/>
         <pathVariable name="MCAL_MCAL_Utils" path="${PROJECT_LOC}/Utils" scope="project"/>
         <pathVariable name="MCAL_sys_asm" path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" scope="project"/>
@@ -163,7 +161,6 @@
         <file path="${MCAL_MCAL}/include/hw/am263px" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
         <file path="${MCAL_MCAL}/include/memmap" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
         <file path="${MCAL_MCAL}/include/hw/hw_types.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
-        <file path="${MCAL_MCAL}/include/hw/hal_stdtypes.h" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="include"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/sys_intvecs.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/examples/Utils/CLANG/am263px/sys_startup.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>
         <file path="${MCAL_MCAL}/Mcal_Lib/sys_pmu_asm.asm" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="Utils"></file>

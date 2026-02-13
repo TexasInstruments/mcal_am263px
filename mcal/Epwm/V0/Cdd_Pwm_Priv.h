@@ -120,7 +120,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_reportDetError(uint8 apiId, uint8 errorId);
 void   Cdd_Pwm_resetChObj(Cdd_Pwm_ChObjType *chObj);
 void   Cdd_Pwm_copyConfig(Cdd_Pwm_ChObjType *chObj, const Cdd_Pwm_ChannelConfigType *chCfg);
 void   Cdd_Epwm_DeInitialize(uint32 epwmbaseadrr);
-uint32 Cdd_Pwm_getBaseAddr(Cdd_Pwm_ChannelType ChannelNumber, uint32 Id);
+uint32 Cdd_Pwm_getBaseAddr(Cdd_Pwm_ChannelType ChannelNumber, uint8 Id);
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HwUnitInit(const Cdd_Pwm_ChObjType *chObj);
 
 #if (STD_ON == CDD_PWM_DEINIT_API)
@@ -172,7 +172,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_ChannelNotificationISR_epwm(Cdd_Pwm_ChannelType
 
 #if (STD_ON == CDD_PWM_REGISTER_READBACK_API)
 FUNC(void, CDD_PWM_CODE)
-Cdd_Pwm_IpRegisterReadback_epwm(uint32 ChannelNumber, Cdd_Pwm_RegisterReadbackType *RegRbPtr);
+Cdd_Pwm_IpRegisterReadback_epwm(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_RegisterReadbackType *RegRbPtr);
 #endif /*#if (STD_ON == CDD_PWM_REGISTER_READBACK_API)*/
 
 void   Cdd_Pwm_tbSyncEnable(uint32 baseAddr, uint32 tbPhsValue, uint32 counterDir);
@@ -188,10 +188,10 @@ void   Cdd_Pwm_chopperCfg(uint32 baseAddr, const CDD_PWM_ChopperCfgType *pCfg);
 void   Cdd_Pwm_chopperEnable(uint32 baseAddr, uint32 enableChopper);
 void   Cdd_Pwm_tzTripEventEnable(uint32 baseAddr, uint32 tzEventType);
 void   Cdd_Pwm_tzTripEventDisable(uint32 baseAddr, uint32 tzEventType);
-void   Cdd_Pwm_tzIntrEnable(uint32 epwmbaseadrr, uint32 tzEventType, Cdd_Pwm_tripZoneType *tripZoneParameter);
-void   Cdd_Pwm_tzIntrDisable(uint32 epwmbaseadrr, uint32 tzEventType, Cdd_Pwm_tripZoneType *tripZoneParameter);
+void   Cdd_Pwm_tzIntrEnable(uint32 epwmbaseadrr, uint32 tzEventType, const Cdd_Pwm_tripZoneType *tripZoneParameter);
+void   Cdd_Pwm_tzIntrDisable(uint32 epwmbaseadrr, uint32 tzEventType, const Cdd_Pwm_tripZoneType *tripZoneParameter);
 uint16 Cdd_Pwm_tzEventStatus(uint32 baseAddr, uint32 eventMask);
-void   Cdd_Pwm_tzEventStatusClear(uint32 baseAddr, uint32 eventMask, uint32 Flags);
+void   Cdd_Pwm_tzEventStatusClear(uint32 baseAddr, uint32 eventMask, uint16 Flags);
 void   Cdd_Pwm_tzTriggerSwEvent(uint32 baseAddr, uint32 tzEventType);
 uint16 Cdd_Pwm_etIntrStatus(uint32 baseAddr);
 void   Cdd_Pwm_etIntrClear(uint32 baseAddr);

@@ -419,7 +419,7 @@ bool HostApp_receiveTput(uint32_t total_frame, uint32_t size)
         /* Get the "start" timestamp only after the first frame has been received */
         if (i == 0)
         {
-            gettimeofday(&t0, NULL);
+            gettimeofday(&t0, NULL_PTR);
         }
 
         /* Check if it's a STOP cmd */
@@ -433,7 +433,7 @@ bool HostApp_receiveTput(uint32_t total_frame, uint32_t size)
     }
 
     /* Get the "end" timestamp after DUT is done sending frames */
-    gettimeofday(&t1, NULL);
+    gettimeofday(&t1, NULL_PTR);
 
     /* flushed remaining packets if any */
     flushnum = total_frame == MAX_RX_PKT ? 15000u : total_frame;

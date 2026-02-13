@@ -24,7 +24,6 @@
 /* ========================================================================== */
 
 #include "Std_Types.h"
-#include "hal_stdtypes.h"
 #include "Dio.h"
 #include "hw_ctrl_core.h"
 #define DIO_START_SEC_CODE

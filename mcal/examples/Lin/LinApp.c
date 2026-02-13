@@ -33,7 +33,6 @@
 #include "Lin_Cfg.h"
 #include "sys_common.h"
 #include "trace.h"
-#include "hal_stdtypes.h"
 #include "soc.h"
 #include "LinApp.h"
 #include "LinApp_Startup.h"

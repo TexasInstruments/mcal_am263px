@@ -71,7 +71,7 @@ void Callback(void *handle, RPMessage_EpObject *epObj, void *args, void *data, u
 {
     /*Convert the void data-type of the "data" variable passed by driver callback to integer to find
      * the messages transmitted  */
-    msg = strtol((char *)data, NULL, 10);
+    msg = strtol((char *)data, NULL_PTR, 10);
     if (msg != (gMsgEchoCount - 1))
     {
         /* If the number of messages to be sent are less than the 1,00,000 messages increment the
@@ -110,7 +110,7 @@ void Notify_callback(void *handle, Cdd_Ipc_RPMessage_EpObject *obj, void *args)
     Cdd_Ipc_RpMsg_RecvMsg(msgBuf, &msgSize, CddIpcConf_CddIpclocalEndPt_CddIpcEndPtConfig_0, &remoteCoreId,
                           &remoteCoreEndPt, CDD_IPC_TIMEOUT);
 #endif
-    msg = strtol((char *)msgBuf, NULL, 10);
+    msg = strtol((char *)msgBuf, NULL_PTR, 10);
 
     if (msg != (gMsgEchoCount - 1))
     {

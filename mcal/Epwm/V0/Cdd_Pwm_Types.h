@@ -96,17 +96,6 @@ extern "C" {
 /* ========================================================================== */
 
 /******************************************************************************
-
- Values that can be passed to EPWM_setCounterCompareShadowLoadMode() as the
- \e loadMode parameter.
-
-*******************************************************************************/
-#define CDD_PWM_COMP_LOAD_ON_CNTR_ZERO        EPWM_COMP_LOAD_ON_CNTR_ZERO
-#define CDD_PWM_COMP_LOAD_ON_CNTR_PERIOD      EPWM_COMP_LOAD_ON_CNTR_PERIOD
-#define CDD_PWM_COMP_LOAD_ON_CNTR_ZERO_PERIOD EPWM_COMP_LOAD_ON_CNTR_ZERO_PERIOD
-#define CDD_PWM_COMP_LOAD_FREEZE              EPWM_COMP_LOAD_FREEZE
-
-/******************************************************************************
  Time Base Module
  Values that can be passed to EPWM_setEmulationMode() as the
  \e emulationMode parameter.
@@ -294,7 +283,6 @@ extern "C" {
 #define CDD_PWM_COMP_LOAD_ON_CNTR_ZERO_PERIOD      EPWM_COMP_LOAD_ON_CNTR_ZERO_PERIOD
 #define CDD_PWM_COMP_LOAD_FREEZE                   EPWM_COMP_LOAD_FREEZE
 #define CDD_PWM_COMP_LOAD_ON_SYNC_CNTR_ZERO        EPWM_COMP_LOAD_ON_SYNC_CNTR_ZERO
-#define CDD_PWM_COMP_LOAD_ON_SYNC_CNTR_PERIOD      EPWM_COMP_LOAD_ON_SYNC_CNTR_PERIOD
 #define CDD_PWM_COMP_LOAD_ON_SYNC_CNTR_PERIOD      EPWM_COMP_LOAD_ON_SYNC_CNTR_PERIOD
 #define CDD_PWM_COMP_LOAD_ON_SYNC_CNTR_ZERO_PERIOD EPWM_COMP_LOAD_ON_SYNC_CNTR_ZERO_PERIOD
 
@@ -2062,10 +2050,10 @@ typedef struct
     VAR(uint32, CDD_PWM_VAR) baseaddr;
     /**< Base Address of CDD_PWM channel. */
 
-    VAR(uint32, CDD_PWM_VAR) channelID;
+    VAR(Cdd_Pwm_ChannelType, CDD_PWM_VAR) channelID;
     /**< CDD_PWM Channel Logical Channel ID. */
 
-    VAR(uint32, CDD_PWM_VAR) channelHwID;
+    VAR(Cdd_Pwm_ChannelType, CDD_PWM_VAR) channelHwID;
     /**< CDD_PWM Channel Physical Channel ID. */
 
     VAR(Cdd_Pwm_OutputChType, CDD_PWM_VAR) outputCh;
@@ -2136,10 +2124,10 @@ typedef struct
     VAR(uint32, CDD_PWM_VAR) baseaddr;
     /**< Base Address of CDD_PWM channel. */
 
-    VAR(uint32, CDD_PWM_VAR) channelID;
+    VAR(Cdd_Pwm_ChannelType, CDD_PWM_VAR) channelID;
     /**< CDD_PWM Channel Logical Channel ID. */
 
-    VAR(uint32, CDD_PWM_VAR) channelHwID;
+    VAR(Cdd_Pwm_ChannelType, CDD_PWM_VAR) channelHwID;
     /**< CDD_PWM Channel Physical Channel ID. */
 
     VAR(Cdd_Pwm_OutputChType, CDD_PWM_VAR) outputCh;

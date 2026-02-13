@@ -32,12 +32,13 @@
 
 #include <CpuIdP.h>
 #include <CpuId_armv7r.h>
+#include "Compiler.h"
 
 void CSL_armR5GetCpuID(CSL_ArmR5CPUInfo *cpuInfo)
 {
     uint32_t regVal;
 
-    if (cpuInfo != NULL)
+    if (cpuInfo != NULL_PTR)
     {
         regVal         = CSL_armR5ReadMpidrReg();
         cpuInfo->cpuID = (uint32_t)((regVal & CSL_R5_MPIDR_AFF0_MASK) >> CSL_R5_MPIDR_AFF0_SHIFT);

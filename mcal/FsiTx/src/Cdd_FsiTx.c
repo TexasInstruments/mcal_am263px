@@ -288,7 +288,7 @@ Cdd_FsiTx_BufferLoad(Cdd_FsiTx_HWUnitType HwUnitId,
                      Cdd_FsiTx_DataType Cdd_FsiTx_userData, Cdd_FsiTx_BufferLengthType TxDataLength)
 {
     Std_ReturnType            BufferStatus = E_NOT_OK;
-    Cdd_FsiTx_DataBufferType *srcbuffer    = NULL;
+    Cdd_FsiTx_DataBufferType *srcbuffer    = (Cdd_FsiTx_DataBufferType *)NULL_PTR;
 
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
     if (CDD_FSI_TX_UNINIT == Cdd_FsiTx_DriverStatus)

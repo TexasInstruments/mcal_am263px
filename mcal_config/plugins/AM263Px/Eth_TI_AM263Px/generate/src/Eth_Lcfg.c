@@ -105,7 +105,7 @@ VAR(struct Eth_ConfigType_s, ETH_LCFG)
                     0x[!"."!]U,
                     [!ENDLOOP!]
                     [!ELSE!]
-                    NULL,NULL,NULL,NULL,NULL,NULL
+                    NULL_PTR,NULL_PTR,NULL_PTR,NULL_PTR,NULL_PTR,NULL_PTR
                     [!ENDIF!]
                 },
             },
@@ -166,7 +166,7 @@ VAR(struct Eth_ConfigType_s, ETH_LCFG)
        },
 #endif
        .enableCacheOps = (uint32)[!"text:toupper(string(EthEnableCacheOps))"!],
-	   
+
        .cacheFlushOps = (Eth_CacheFlushType) [!IF "EthEnableCacheOps = 'true'"!][!"EthCacheFlushOps"!][!ELSE!]NULL_PTR[!ENDIF!],
 
        .cacheInvalidateOps = (Eth_CacheInvalidateType) [!IF "EthEnableCacheOps = 'true'"!][!"EthInvalidateOps"!][!ELSE!]NULL_PTR[!ENDIF!]
@@ -200,6 +200,6 @@ P2CONST(Eth_ConfigType, ETH_VAR_NO_INIT, ETH_APPL_CONST) Eth_CfgPtr;
  *  End of File: Eth_Lcfg.c
  ******************************************************************************/
 [!ELSE!]
-/* The last generated configuration variant is not 
+/* The last generated configuration variant is not
        LINK-TIME variant. Refer Eth_Cfg.c/Eth_PBcfg.c. */
 [!ENDIF!]

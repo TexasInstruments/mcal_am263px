@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 11.02.00.04 done on 10-Feb-2026.
+<p>This is the release notes for MCAL AM26xx 11.02.00.05 done on 13-Feb-2026.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.txt">license.txt</a> present in installation base path</p>
@@ -62,47 +62,14 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
-      <td>FLS</td>
-      <td>Flash_sfdpParams_init() function is removed as SFDP parameters are initialized through configurator files</td>
-      <td>Application shall remove any usage of this API for successful build and to ensure compatibility with this change</td>
+      <td>Common</td>
+      <td>hal_stdtypes.h file and all its included are removed</td>
+      <td>Application shall remove any usage of this header file</td>
     </tr>
     <tr>
-      <td>CDD I2C</td>
-      <td>Removed below unused DET error codes
-        <ol>
-          <li>CDD_I2C_E_BUSY</li>
-          <li>CDD_I2C_E_PARAM_NOTIFY_CALLBACK</li>
-          <li>CDD_I2C_E_PARAM_TRANSMISSION_ERROR</li>
-          <li>CDD_I2C_E_PARAM_QUEUE_FULL</li>
-          <li>CDD_I2C_E_PARAM_TIMEOUT</li>
-          <li>CDD_I2C_E_HW_UNIT_BUSY</li>
-          <li>CDD_I2C_E_CHANNEL_BUSY</li>
-          <li>CDD_I2C_E_ARBITRATION_LOSS</li>
-          <li>CDD_I2C_E_NACK</li>
-          <li>CDD_I2C_E_RECEIVE_SHIFT_REGISTER_FULL</li>
-        </ol>
-      </td>
-      <td>Application shall remove any usage of these macros</td>
-    </tr>
-    <tr>
-      <td>CDD I2C</td>
-      <td>Use below runtime error codes in the error callback instead of the previous DET error codes
-        <ol>
-          <li>CDD_I2C_E_ARBITRATION_FAILURE instead of CDD_I2C_E_ARBITRATION_LOSS</li>
-          <li>CDD_I2C_E_NACK_RECEIVED instead of CDD_I2C_E_NACK</li>
-          <li>CDD_I2C_E_BUS_FAILURE</li>
-        </ol>
-      </td>
-      <td>Use runtime error codes in the error callback</td>
-    </tr>
-    <tr>
-      <td>MCU</td>
-      <td>Mcu_Init also initializes PMU (calls Mcal_pmuInit(); after clock setup)</td>
-      <td>Include sys_pmu.c and sys_pmu.h files under Mcal_Lib folder</td>
-    </tr>
-    <tr>
-      <td>WDG</td>
-      <td>Wdg_SetTriggerCondition shall now reload the timeout value during runtime</td>
+      <td>CDD PWM</td>
+      <td>Channel parameter type changed from uint32 to Cdd_Pwm_ChannelType in multiple APIs</td>
+      <td>Application shall use Cdd_Pwm_ChannelType for channel parameters instead of uint32</td>
     </tr>
   </tbody>
 </table>
@@ -263,6 +230,22 @@ This document details about supported driver, installation, dependencies, build 
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>AR-RELEASE-VERSION is fixed to 4.3.1 same as other modules.</td>
+    </tr>
+    <tr>
+      <td>MCAL-35846</td>
+      <td>Update all NULL usage to NULL_PTR</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>All usage of NULL is replaced with NULL_PTR which is defined in Compiler.h</td>
+    </tr>
+    <tr>
+      <td>MCAL-35865</td>
+      <td>Fls SFDP parameter structure should be in VAR section</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>The Fls_Config_SFDP_1 structure in CFG files shall now be placed in SEC_VAR_INIT_UNSPECIFIED section</td>
     </tr>
     <tr>
       <td>MCAL-35747</td>

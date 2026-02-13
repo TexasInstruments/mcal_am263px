@@ -47,8 +47,24 @@
 #include "esm.h"
 #include "sys_vim.h"
 #include "sys_common.h"
-#include "hal_stdtypes.h"
+#include "Compiler.h"
 #include "hw_ctrl_core.h"
+
+#define M_ZERO         (0U)
+#define M_FIVE         (5U)
+#define M_SIX          (6U)
+#define M_SEVEN        (7U)
+#define M_EIGHT        (8U)
+#define M_NINE         (9U)
+#define M_TEN          (10U)
+#define M_SIXTEEN      (16U)
+#define M_SEVENTEEN    (17U)
+#define M_EIGHTEEN     (18U)
+#define M_NINETEEN     (19U)
+#define M_TWENTY       (20U)
+#define M_TWENTY_THREE (23U)
+#define M_THIRTY       (30U)
+#define M_THIRTY_ONE   (31U)
 
 /** @typedef t_esmGroup1funptr
  *   @brief FIQ Helper Function Pointer Type Definition
@@ -639,7 +655,7 @@ void esmHighInterrupt(void)
     if (vec < 32U)
     {
         regWrFailStatus = regWriteReadback(&esmREG->SR1[0U], M_THIRTY_ONE, M_ZERO, (uint32)1U << vec);
-        if (syst_esmGroup1funptr != NULL)
+        if (syst_esmGroup1funptr != NULL_PTR)
         {
             (*syst_esmGroup1funptr)(vec);
         }
@@ -647,7 +663,7 @@ void esmHighInterrupt(void)
     else if (vec < 64U)
     {
         regWrFailStatus = regWriteReadback(&esmREG->SR1[1U], M_THIRTY_ONE, M_ZERO, (uint32)1U << (vec - 32U));
-        if (syst_esmGroup2funptr != NULL)
+        if (syst_esmGroup2funptr != NULL_PTR)
         {
             (*syst_esmGroup2funptr)(vec - 32U);
         }
@@ -655,7 +671,7 @@ void esmHighInterrupt(void)
     else if (vec < 96U)
     {
         regWrFailStatus = regWriteReadback(&esmREG->SR4[0U], M_THIRTY_ONE, M_ZERO, (uint32)1U << (vec - 64U));
-        if (syst_esmGroup1funptr != NULL)
+        if (syst_esmGroup1funptr != NULL_PTR)
         {
             (*syst_esmGroup1funptr)(vec - 32U);
         }
@@ -663,7 +679,7 @@ void esmHighInterrupt(void)
     else if (vec < 128U)
     {
         regWrFailStatus = regWriteReadback(&esmREG->SR4[1U], M_THIRTY_ONE, M_ZERO, (uint32)1U << (vec - 96U));
-        if (syst_esmGroup2funptr != NULL)
+        if (syst_esmGroup2funptr != NULL_PTR)
         {
             (*syst_esmGroup2funptr)(vec - 64U);
         }

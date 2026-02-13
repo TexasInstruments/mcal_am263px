@@ -33,6 +33,7 @@
 #include <HwiP.h>
 // #include <kernel/dpl/ClockP.h>
 #include <SemaphoreP.h>
+#include "Compiler.h"
 
 /**
  * \brief Semaphore type
@@ -85,7 +86,7 @@ int32_t SemaphoreP_construct(SemaphoreP_Object *pSemaphore, SemaphoreP_Params *p
 {
     int32_t status = SystemP_FAILURE;
 
-    if (pSemaphore != NULL)
+    if (pSemaphore != NULL_PTR)
     {
         status = SystemP_SUCCESS;
     }
@@ -158,7 +159,7 @@ int32_t SemaphoreP_pend(SemaphoreP_Object *pSemaphore, uint32_t timeout)
     uintptr_t key;
     int32_t   status = SystemP_FAILURE;
 
-    if (pSemaphore != NULL)
+    if (pSemaphore != NULL_PTR)
     {
         status = SystemP_SUCCESS;
         // ClockP_Params_init(&clockParams);
@@ -203,7 +204,7 @@ int32_t SemaphoreP_pend(SemaphoreP_Object *pSemaphore, uint32_t timeout)
 
 void SemaphoreP_post(SemaphoreP_Object *pSemaphore)
 {
-    if (pSemaphore != NULL)
+    if (pSemaphore != NULL_PTR)
     {
         uintptr_t key;
         key = HwiP_disable();

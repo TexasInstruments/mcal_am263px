@@ -293,7 +293,7 @@ static Std_ReturnType Fls_Ospi_phyConfigBaudrate(uint32 baud)
 static Std_ReturnType Fls_Ospi_phyGetBaudRateDivFromObj(uint32 *baudDiv)
 {
     Std_ReturnType status = E_OK;
-    if (NULL != baudDiv)
+    if (NULL_PTR != baudDiv)
     {
         uint32 progBaudDiv =
             HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_MSTR_BAUD_DIV_FLD);

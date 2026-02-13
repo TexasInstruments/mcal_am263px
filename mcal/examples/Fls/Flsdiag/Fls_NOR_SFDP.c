@@ -111,7 +111,7 @@ static uint32 NorSpi_Sfdp_BlockIdx  = 4;
 char *NorSpi_Sfdp_getParameterTableName(uint32 paramTableId)
 {
     uint32 i, idx = NOR_SPI_SFDP_NPH_MAX;
-    char  *p = NULL;
+    char  *p = NULL_PTR;
 
     for (i = 0; i < NOR_SPI_SFDP_NPH_MAX; i++)
     {
@@ -125,7 +125,7 @@ char *NorSpi_Sfdp_getParameterTableName(uint32 paramTableId)
     if (idx == NOR_SPI_SFDP_NPH_MAX)
     {
         /* Unrecognized param table */
-        p = NULL;
+        p = NULL_PTR;
     }
     else
     {
@@ -139,7 +139,7 @@ uint32 NorSpi_Sfdp_getPtp(NorSpi_SfdpParamHeader *paramHeader)
 {
     uint32 ptp = 0xFFFFFFFFU;
 
-    if (paramHeader != NULL)
+    if (paramHeader != NULL_PTR)
     {
         ptp = (uint32)(paramHeader->paramTablePtr[2] << 16) | (uint32)(paramHeader->paramTablePtr[1] << 8) |
               (uint32)(paramHeader->paramTablePtr[0]);
@@ -927,7 +927,7 @@ Std_ReturnType Nor_QspiReadSfdp(QSPI_Handle handle, uint32 offset, uint8 *buf, u
     uint8          cmd;
     uint32         dummyClks;
 
-    if (handle != NULL)
+    if (handle != NULL_PTR)
     {
         QSPI_Object *object = ((QSPI_Config *)handle)->object;
 

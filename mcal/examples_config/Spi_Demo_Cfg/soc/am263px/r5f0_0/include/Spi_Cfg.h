@@ -710,7 +710,7 @@ typedef struct
     /** \brief Width of clock frame in bits.
      *   In case of McSPI, valid values are from 1 to 32 bits. */
     uint8                 dataWidth;
-    /** \brief Default transmit value when TX buffer is NULL */
+    /** \brief Default transmit value when TX buffer is NULL_PTR */
     uint32                defaultTxData;
     /** \brief Max data length for external or internal buffer in SPI words.
      *   In case of internal buffers, this represents the number of

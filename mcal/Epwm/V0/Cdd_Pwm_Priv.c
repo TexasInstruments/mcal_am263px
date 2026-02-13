@@ -168,7 +168,7 @@ void Cdd_Pwm_resetChObj(Cdd_Pwm_ChObjType *chObj)
     chObj->baseaddr          = 0;
 #if (STD_ON == CDD_PWM_NOTIFICATION_SUPPORTED)
     chObj->notificationHandler     = (Cdd_Pwm_NotifyFuncType)NULL_PTR;
-    chObj->channelNotifyActiveFlag = (uint32)FALSE;
+    chObj->channelNotifyActiveFlag = CDD_PWM_FALSE;
 #endif
     chObj->channelState          = CDD_PWM_STATUS_UNINIT;
     chObj->notificationTzHandler = (Cdd_Pwm_TzNotifyFuncType)NULL_PTR;
@@ -177,7 +177,7 @@ void Cdd_Pwm_resetChObj(Cdd_Pwm_ChObjType *chObj)
 void Cdd_Pwm_copyConfig(Cdd_Pwm_ChObjType *chObj, const Cdd_Pwm_ChannelConfigType *chCfg)
 {
     /* Init channelForcedIdle var default to FALSE */
-    chObj->channelNotifyActiveFlag = (boolean)FALSE;
+    chObj->channelNotifyActiveFlag = CDD_PWM_FALSE;
     chObj->channelState            = CDD_PWM_STATUS_INIT;
     chObj->baseaddr                = chCfg->baseaddr;
     chObj->outputCh                = chCfg->outputCh;
@@ -430,13 +430,13 @@ void Cdd_Epwm_DeInitialize(uint32 epwmbaseadrr)
     HRPWM_setChannelBOutputPath(epwmbaseadrr, HRPWM_OUTPUT_ON_B_NORMAL);
 }
 
-uint32 Cdd_Pwm_getBaseAddr(Cdd_Pwm_ChannelType ChannelNumber, uint32 Id)
+uint32 Cdd_Pwm_getBaseAddr(Cdd_Pwm_ChannelType ChannelNumber, uint8 Id)
 {
-    uint32 baseAddr;
-    uint32 Chanl = ChannelNumber;
+    uint32              baseAddr;
+    Cdd_Pwm_ChannelType Chanl = ChannelNumber;
 
 #if (CDD_PWM_DEV_ERROR_DETECT == STD_ON)
-    if ((ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS) && (Id != CDD_PWM_VALID_ID))
+    if ((ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS) && (Id != CDD_PWM_VALID_ID))
     {
         (void)Cdd_Pwm_reportDetError(Id, CDD_PWM_E_PARAM_INVALID_CHANNEL);
         baseAddr = CDD_PWM_INVALID_BASE_ADDR;
@@ -535,9 +535,9 @@ void Cdd_Pwm_setTimerBase(Cdd_Pwm_ChannelType ChannelNumber)
     EPWM_setEmulationMode(baseAddr, timerBaseParamter->channelPwmEmulationMode);
     EPWM_setClockPrescaler(baseAddr, timerBaseParamter->channelPwmClockDivider,
                            timerBaseParamter->channelPwmHSClockDivider);
-    EPWM_setTimeBasePeriod(baseAddr, timerBaseParamter->channelPwmTbPeriod);
+    EPWM_setTimeBasePeriod(baseAddr, (uint16)(timerBaseParamter->channelPwmTbPeriod));
 
-    if (TRUE == timerBaseParamter->channelPwmEnablePhaseShift)
+    if (CDD_PWM_TRUE == timerBaseParamter->channelPwmEnablePhaseShift)
     {
         EPWM_enableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_TBPRD_TBPRDHR);
     }
@@ -550,10 +550,10 @@ void Cdd_Pwm_setTimerBase(Cdd_Pwm_ChannelType ChannelNumber)
 
     EPWM_setTimeBaseCounterMode(baseAddr, timerBaseParamter->channelPwmCounterMode);
 
-    if (TRUE == timerBaseParamter->channelPwmEnablePhaseShift)
+    if (CDD_PWM_TRUE == timerBaseParamter->channelPwmEnablePhaseShift)
     {
         EPWM_enablePhaseShiftLoad(baseAddr);
-        EPWM_setPhaseShift(baseAddr, timerBaseParamter->channelPwmEnablePhaseShiftValue);
+        EPWM_setPhaseShift(baseAddr, (uint16)(timerBaseParamter->channelPwmEnablePhaseShiftValue));
     }
 
     if (timerBaseParamter->channelPwmTbprdlink != CDD_PWM_LINK_DISABLE)
@@ -1181,8 +1181,8 @@ void Cdd_Pwm_DeadBand(Cdd_Pwm_ChannelType ChannelNumber)
 
     EPWM_setDeadBandControlShadowLoadMode(epwmbaseadrr,
                                           (EPWM_DeadBandControlLoadMode)DeadBandParameter->channelDeadBandShadowMode);
-    EPWM_setRisingEdgeDeadBandDelayInput(epwmbaseadrr, DeadBandParameter->channelPwmREDDelayInput);
-    EPWM_setFallingEdgeDeadBandDelayInput(epwmbaseadrr, DeadBandParameter->channelPwmFEDDelayInput);
+    EPWM_setRisingEdgeDeadBandDelayInput(epwmbaseadrr, (uint16)(DeadBandParameter->channelPwmREDDelayInput));
+    EPWM_setFallingEdgeDeadBandDelayInput(epwmbaseadrr, (uint16)(DeadBandParameter->channelPwmFEDDelayInput));
     EPWM_setDeadBandDelayPolarity(epwmbaseadrr, EPWM_DB_RED, DeadBandParameter->channelPwmRedBandPolarity);
     EPWM_setDeadBandDelayPolarity(epwmbaseadrr, EPWM_DB_FED, DeadBandParameter->channelPwmFedBandPolarity);
     EPWM_setDeadBandDelayMode(epwmbaseadrr, EPWM_DB_RED, (DeadBandParameter->channelREDEnable));
@@ -1197,7 +1197,7 @@ void Cdd_Pwm_DeadBand(Cdd_Pwm_ChannelType ChannelNumber)
 
     EPWM_setRisingEdgeDelayCountShadowLoadMode(epwmbaseadrr,
                                                (EPWM_RisingEdgeDelayLoadMode)DeadBandParameter->channelRedShadowMode);
-    EPWM_setRisingEdgeDelayCount(epwmbaseadrr, DeadBandParameter->channelREDDelayValue);
+    EPWM_setRisingEdgeDelayCount(epwmbaseadrr, (uint16)(DeadBandParameter->channelREDDelayValue));
     if (DeadBandParameter->channelFedShadowMode == FALSE)
     {
         EPWM_disableFallingEdgeDelayCountShadowLoadMode(epwmbaseadrr);
@@ -1205,7 +1205,7 @@ void Cdd_Pwm_DeadBand(Cdd_Pwm_ChannelType ChannelNumber)
 
     EPWM_setFallingEdgeDelayCountShadowLoadMode(epwmbaseadrr,
                                                 (EPWM_FallingEdgeDelayLoadMode)DeadBandParameter->channelFedShadowMode);
-    EPWM_setFallingEdgeDelayCount(epwmbaseadrr, DeadBandParameter->channelFEDDelayValue);
+    EPWM_setFallingEdgeDelayCount(epwmbaseadrr, (uint16)(DeadBandParameter->channelFEDDelayValue));
     EPWM_setDeadBandCounterClock(epwmbaseadrr, DeadBandParameter->channelDeadBandClockMode);
 }
 
@@ -1580,7 +1580,7 @@ Cdd_Pwm_SetPeriodAndDuty_Deterror(Cdd_Pwm_channelParametertype ChannelParameter)
     Std_ReturnType    returnval = E_OK;
     Cdd_Pwm_ChObjType local_ChObj;
 
-    if (ChannelParameter.ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+    if (ChannelParameter.ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
     {
         /*Invalid channel */
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
@@ -1628,7 +1628,7 @@ Cdd_Pwm_SystemSetPeriodAndDuty(Cdd_Pwm_channelParametertype ChannelParameter)
     }
 
     baseAddr = Cdd_Pwm_getBaseAddr(ChannelParameter.ChannelNumber, CDD_PWM_VALID_ID);
-    EPWM_setTimeBasePeriod(baseAddr, local_ChObj->channelTimerBase.channelPwmTbPeriod);
+    EPWM_setTimeBasePeriod(baseAddr, (uint16)(local_ChObj->channelTimerBase.channelPwmTbPeriod));
 
     if (ChannelParameter.Period == 0U)
     {
@@ -1659,7 +1659,7 @@ Cdd_Pwm_SetDutyCycle_Internal(Cdd_Pwm_channelParametertype ChannelParameter)
     /* Reactivate channel if output was forced to idle */
 
     /* Check for IDLE state. */
-    if ((boolean)TRUE == chObj->channelForcedIdle)
+    if (CDD_PWM_TRUE == chObj->channelForcedIdle)
     {
         /* Program AQCSFRC Active Register Reload From Shadow Options */
         EPWM_setActionQualifierContSWForceShadowMode(baseAddr, EPWM_AQ_SW_IMMEDIATE_LOAD);
@@ -1695,7 +1695,7 @@ Cdd_Pwm_SetDutyCycle_Internal(Cdd_Pwm_channelParametertype ChannelParameter)
             /* Continuous software forced output on B */
             EPWM_forceActionQualifierSWAction(baseAddr, EPWM_AQ_OUTPUT_B);
         }
-        chObj->channelForcedIdle = (boolean)FALSE;
+        chObj->channelForcedIdle = CDD_PWM_FALSE;
     }
 
     /* Updating Init time dutyCycle which is used to enable notifications,
@@ -1704,7 +1704,7 @@ Cdd_Pwm_SetDutyCycle_Internal(Cdd_Pwm_channelParametertype ChannelParameter)
 
     if (TRUE == local_ChObj->channelTimerBase.channelPwmEnablePhaseShift)
     {
-        EPWM_setPhaseShift(baseAddr, local_ChObj->channelTimerBase.channelPwmEnablePhaseShiftValue);
+        EPWM_setPhaseShift(baseAddr, (uint16)(local_ChObj->channelTimerBase.channelPwmEnablePhaseShiftValue));
     }
     Cdd_Pwm_GenerateSignal(ChannelParameter, local_ChObj, (const Cdd_Pwm_ChObjType *)chObj, baseAddr);
 }
@@ -1751,11 +1751,11 @@ static void Cdd_Pwm_GenerateSignal(Cdd_Pwm_channelParametertype ChannelParameter
     /* Set the Polarity. */
     if (chObj->polarity == CDD_PWM_HIGH)
     {
-        signalParams.invertSignalB = (boolean)0;
+        signalParams.invertSignalB = CDD_PWM_FALSE;
     }
     else
     {
-        signalParams.invertSignalB = (boolean)1;
+        signalParams.invertSignalB = CDD_PWM_TRUE;
     }
 
     signalParams.sysClkInHz = (float32)sysClk;
@@ -1968,7 +1968,7 @@ Cdd_Pwm_SetOutputToIdle_Deterror(Cdd_Pwm_ChannelType ChannelNumber)
 
     Cdd_Pwm_ChObjType *local_ChObj = &Cdd_Pwm_ChObj[ChannelNumber];
 
-    if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+    if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
     {
 /*Invalid channel */
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
@@ -2043,7 +2043,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_setEmulationMode(uint32 base, EPWM_EmulationMod
      Write to FREE_SOFT bits
     */
     HW_WR_REG16(base + PWM_EPWM_TBCTL, ((HW_RD_REG16(base + PWM_EPWM_TBCTL) & (~PWM_EPWM_TBCTL_FREE_SOFT_MASK)) |
-                                        ((uint16)emulationMode << PWM_EPWM_TBCTL_FREE_SOFT_SHIFT)));
+                                        (uint16)((uint16)emulationMode << PWM_EPWM_TBCTL_FREE_SOFT_SHIFT)));
 }
 
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_DisableInterrupt(Cdd_Pwm_ChannelType ChannelNumber)
@@ -2079,7 +2079,7 @@ Cdd_Pwm_EnableInterrupt(Cdd_Pwm_ChannelType ChannelParameter, Cdd_Pwm_InterruptT
     }
 
     EPWM_enableInterrupt(baseAddr);
-    local_ChObj->channelNotifyActiveFlag = (uint32)TRUE;
+    local_ChObj->channelNotifyActiveFlag = CDD_PWM_TRUE;
 }
 
 FUNC(void, CDD_PWM_CODE)
@@ -2217,7 +2217,7 @@ static void Cdd_Pmw_BothEdges(uint32 baseAddr, Cdd_Pwm_OutputChType outputCh)
 
 #if (STD_ON == CDD_PWM_REGISTER_READBACK_API)
 FUNC(void, CDD_PWM_CODE)
-Cdd_Pwm_IpRegisterReadback_epwm(uint32 ChannelNumber, Cdd_Pwm_RegisterReadbackType *RegRbPtr)
+Cdd_Pwm_IpRegisterReadback_epwm(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_RegisterReadbackType *RegRbPtr)
 {
     /* Get the base addr. */
     uint32 baseAddr;
@@ -2418,7 +2418,7 @@ void Cdd_Pwm_tzTripEventDisable(uint32 baseAddr, uint32 tzEventType)
     EPWM_disableTripZoneSignals(baseAddr, tzEventType);
 }
 
-void Cdd_Pwm_tzIntrEnable(uint32 epwmbaseadrr, uint32 tzEventType, Cdd_Pwm_tripZoneType *tripZoneParameter)
+void Cdd_Pwm_tzIntrEnable(uint32 epwmbaseadrr, uint32 tzEventType, const Cdd_Pwm_tripZoneType *tripZoneParameter)
 {
     if ((tripZoneParameter->channelPwmTZCBCInterrupt == TRUE) && (tzEventType == EPWM_TZ_INTERRUPT_CBC))
     {
@@ -2451,7 +2451,7 @@ void Cdd_Pwm_tzIntrEnable(uint32 epwmbaseadrr, uint32 tzEventType, Cdd_Pwm_tripZ
     }
 }
 
-void Cdd_Pwm_tzIntrDisable(uint32 epwmbaseadrr, uint32 tzEventType, Cdd_Pwm_tripZoneType *tripZoneParameter)
+void Cdd_Pwm_tzIntrDisable(uint32 epwmbaseadrr, uint32 tzEventType, const Cdd_Pwm_tripZoneType *tripZoneParameter)
 {
     if ((tripZoneParameter->channelPwmTZCBCInterrupt == TRUE) && (tzEventType == EPWM_TZ_INTERRUPT_CBC))
     {
@@ -2507,7 +2507,7 @@ uint16 Cdd_Pwm_tzEventStatus(uint32 baseAddr, uint32 eventMask)
     return (status);
 }
 
-void Cdd_Pwm_tzEventStatusClear(uint32 baseAddr, uint32 eventMask, uint32 Flags)
+void Cdd_Pwm_tzEventStatusClear(uint32 baseAddr, uint32 eventMask, uint16 Flags)
 {
     /* Clear the events. */
     if (CDD_PWM_TZ_STS_FLG_CBC == eventMask)
@@ -2569,10 +2569,10 @@ FUNC(void, CDD_PWM_CODE)
 Cdd_Pwm_HrSystemSetPeriodAndDuty(Cdd_Pwm_channelParametertype ChannelParameter)
 {
     uint32               base;
-    uint32               period;
+    uint16               period;
     uint32               duty_percent;
     float32              duty_percent_f;
-    uint32               ChannelNumber = ChannelParameter.ChannelNumber;
+    Cdd_Pwm_ChannelType  ChannelNumber = ChannelParameter.ChannelNumber;
     Cdd_Pwm_OutputChType outputCh      = ChannelParameter.Output;
 
     const Cdd_Pwm_timerBaseConfigType *channelTimeBaseParameter = &Cdd_Pwm_ChObj[ChannelNumber].channelTimerBase;

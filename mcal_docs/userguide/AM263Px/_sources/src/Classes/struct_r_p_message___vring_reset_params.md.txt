@@ -1,0 +1,45 @@
+---
+orphan: true
+---
+
+---
+title: RPMessage_VringResetParams
+summary: Parameters for VRING reset operation. 
+
+---
+
+# RPMessage_VringResetParams
+
+
+
+Parameters for VRING reset operation.  [More...](#detailed-description)
+
+
+`#include <ipc_rpmsg_lld_priv.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint16 | numBuf |  |
+|  uint16 | msgSize |  |
+|  uintptr_t | vringBaseAddr |  |
+|  uint32 | offset_desc |  |
+|  uint32 | offset_avail |  |
+|  uint32 | offset_used |  |
+|  uint32 | offset_buf |  |
+|  uint32 | isTx |  |
+
+## Detailed Description
+
+```cpp
+struct RPMessage_VringResetParams;
+```
+
+
+**Brief**: 
+Parameters for VRING reset operation. 
+
+This structure groups the offset parameters needed for VRING reset 
+
+

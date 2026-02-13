@@ -35,7 +35,6 @@
 #include "Icu_Cfg.h"
 #include "sys_common.h"
 #include "trace.h"
-#include "hal_stdtypes.h"
 #include "soc.h"
 #include "Pwm_Irq.h"
 #include "Icu_Irq.h"

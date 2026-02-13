@@ -603,7 +603,7 @@ void Adc_stopGroup(Adc_GroupObjType *groupObj, boolean SwHw)
     {
         /* Stop ADC */
         Adc_hwStop(hwUnitObj->baseAddr, groupObj);
-        hwUnitObj->curGroupObj = NULL;
+        hwUnitObj->curGroupObj = (Adc_GroupObjType *)NULL_PTR;
 
         /* Check and schedule any pending groups for this HW */
         Adc_checkAndSchedule(hwUnitObj);
@@ -905,11 +905,11 @@ void Adc_resetDrvObj(Adc_DriverObjType *drvObj)
         drvObj->groupObj[grpIdx].isQueued           = (uint32)ADC_FALSE;
         drvObj->groupObj[grpIdx].validSampleCount   = 0U;
         drvObj->groupObj[grpIdx].curCh              = 0U;
-        drvObj->groupObj[grpIdx].resultBufPtr       = NULL;
+        drvObj->groupObj[grpIdx].resultBufPtr       = (const Adc_ValueGroupType *)NULL_PTR;
         for (chIdx = 0U; chIdx < ADC_NUM_CHANNEL; chIdx++)
         {
-            drvObj->groupObj[grpIdx].chObj[chIdx].chResultBufPtr  = NULL;
-            drvObj->groupObj[grpIdx].chObj[chIdx].curResultBufPtr = NULL;
+            drvObj->groupObj[grpIdx].chObj[chIdx].chResultBufPtr  = (Adc_ValueGroupType *)NULL_PTR;
+            drvObj->groupObj[grpIdx].chObj[chIdx].curResultBufPtr = (Adc_ValueGroupType *)NULL_PTR;
             drvObj->groupObj[grpIdx].chObj[chIdx].curNumSamples   = 0U;
         }
 
@@ -918,7 +918,7 @@ void Adc_resetDrvObj(Adc_DriverObjType *drvObj)
     }
     for (hwUnitIdx = 0U; hwUnitIdx < ADC_MAX_HW_UNIT; hwUnitIdx++)
     {
-        drvObj->hwUnitObj[hwUnitIdx].curGroupObj = NULL;
+        drvObj->hwUnitObj[hwUnitIdx].curGroupObj = (Adc_GroupObjType *)NULL_PTR;
     }
     drvObj->maxGroup  = 0U;
     drvObj->maxHwUnit = 0U;
@@ -1521,7 +1521,7 @@ static void Adc_procIsr_Internal(uint32 *convComplete, Adc_GroupObjType *groupOb
 static void Adc_setGroupStatusPostIsr(Adc_HwUnitObjType *hwUnitObj, Adc_GroupObjType *groupObj, uint32 convComplete,
                                       uint32 streamComplete)
 {
-    Adc_GroupEndNotifyType groupEndNotification = NULL;
+    Adc_GroupEndNotifyType groupEndNotification = (Adc_GroupEndNotifyType)NULL_PTR;
     if (((uint32)ADC_TRUE) == convComplete)
     {
         /* Set group status */
@@ -1602,7 +1602,7 @@ static void Adc_setGroupStatusPostIsrStopADC(Adc_HwUnitObjType *hwUnitObj, Adc_G
     /* Check if Group is same as HW Unit Current Group */
     if (groupObj->groupCfg.groupId == hwUnitObj->curGroupObj->groupCfg.groupId)
     {
-        hwUnitObj->curGroupObj = NULL;
+        hwUnitObj->curGroupObj = (Adc_GroupObjType *)NULL_PTR;
     }
 }
 

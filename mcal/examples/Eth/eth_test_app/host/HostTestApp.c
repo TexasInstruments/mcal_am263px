@@ -471,13 +471,13 @@ int main(int argc, char *argv[])
         switch (c)
         {
             case 't':
-                gHostApp.timeout = strtol(optarg, NULL, 0);
+                gHostApp.timeout = strtol(optarg, NULL_PTR, 0);
                 break;
             case 'i':
                 ifName = optarg;
                 break;
             case 's':
-                gHostApp.testIdx = (uint8_t)strtol(optarg, NULL, 0);
+                gHostApp.testIdx = (uint8_t)strtol(optarg, NULL_PTR, 0);
                 if (gHostApp.testIdx >= ARRAY_SIZE(testFuncs))
                 {
                     printf("Invalid test Id, should be in range [%d,%lu]\n", 0, ARRAY_SIZE(testFuncs) - 1);
@@ -1314,7 +1314,7 @@ bool HostApp_test_0101(void)
         /* Wait for DUT to start the test when it's ready */
         HostApp_waitForCmd(CTRL_FRAME_CMD_START);
 
-        gettimeofday(&t0, NULL);
+        gettimeofday(&t0, NULL_PTR);
 
         /* Transmit one frame per iteration */
         for (i = 0; i < iterations; i++)
@@ -1333,7 +1333,7 @@ bool HostApp_test_0101(void)
         }
 
         /* Get the "end" timestamp after DUT is done sending frames */
-        gettimeofday(&t1, NULL);
+        gettimeofday(&t1, NULL_PTR);
 
         /* Send STOP command and wait for acknowledgement from DUT
          * - Send multiple times (ETH_TEST_ITER_S_COUNT) to account for
@@ -1528,7 +1528,7 @@ bool HostApp_receiveTputQos(uint32_t total_frame, uint32_t size)
     }
 
     /* Get the "start" timestamp only after the first frame has been received */
-    gettimeofday(&t0, NULL);
+    gettimeofday(&t0, NULL_PTR);
 
     while (true)
     {
@@ -1590,7 +1590,7 @@ bool HostApp_receiveTputQos(uint32_t total_frame, uint32_t size)
     }
 
     /* Get the "end" timestamp after DUT is done sending frames */
-    gettimeofday(&t1, NULL);
+    gettimeofday(&t1, NULL_PTR);
     elapsed = HostApp_timeDiff(t1, t0);
 
     for (i = 0; i < 8; ++i)
@@ -1740,7 +1740,7 @@ bool HostApp_test_0202(void)
         /* Wait for DUT to start the test when it's ready */
         HostApp_waitForCmd(CTRL_FRAME_CMD_START);
 
-        gettimeofday(&t0, NULL);
+        gettimeofday(&t0, NULL_PTR);
 
         /* Transmit one frame per iteration */
         for (i = 0; i < testFrames; i++)
@@ -1759,7 +1759,7 @@ bool HostApp_test_0202(void)
         }
 
         /* Get the "end" timestamp after DUT is done sending frames */
-        gettimeofday(&t1, NULL);
+        gettimeofday(&t1, NULL_PTR);
 
         /* Send STOP command and wait for acknowledgement from DUT
          * - Send multiple times (ETH_TEST_ITER_S_COUNT) to account for

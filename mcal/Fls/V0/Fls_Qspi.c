@@ -75,7 +75,6 @@
 #include "string.h"
 #include "Fls_Qspi.h"
 #include "Fls_Brd_Nor.h"
-#include "hal_stdtypes.h"
 #if (FLS_DMA_ENABLE == STD_ON)
 #include "Fls_Qspi_Edma.h"
 #endif
@@ -221,9 +220,9 @@ void Fls_QspiHwInit(void)
 QSPI_Handle Fls_QspiOpen(uint32 index)
 {
     Std_ReturnType retVal = E_OK;
-    QSPI_Handle    handle = NULL;
-    QSPI_Config   *config = NULL;
-    QSPI_Object   *obj    = NULL;
+    QSPI_Handle    handle = (QSPI_Handle)NULL_PTR;
+    QSPI_Config   *config = (QSPI_Config *)NULL_PTR;
+    QSPI_Object   *obj    = (QSPI_Object *)NULL_PTR;
 
     /* Check for valid index */
     if (index >= Fls_QspiConfigNum)
@@ -258,7 +257,7 @@ QSPI_Handle Fls_QspiOpen(uint32 index)
     }
     if (E_OK != retVal)
     {
-        if (NULL != config)
+        if (NULL_PTR != config)
         {
             Fls_QspiClose((QSPI_Handle)config);
         }
@@ -478,7 +477,7 @@ static Std_ReturnType Fls_Qspi_WriteData(QSPI_Handle handle, const uint32 *data,
 
     if (handle != NULL_PTR)
     {
-        if (pData != ((void *)NULL))
+        if (pData != ((void *)NULL_PTR))
         {
             HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG, (uint32)*pData);
         }
@@ -507,7 +506,7 @@ static Std_ReturnType Fls_Qspi_ReadData(QSPI_Handle handle, uint32 *data, uint32
 
     if (handle != NULL_PTR)
     {
-        if (pData != ((void *)NULL))
+        if (pData != ((void *)NULL_PTR))
         {
             *pData = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG);
         }
@@ -530,10 +529,10 @@ static Std_ReturnType Fls_Qspi_ReadData(QSPI_Handle handle, uint32 *data, uint32
  */
 void Fls_Qspi_TransactionInit(QSPI_Transaction *trans)
 {
-    if (trans != NULL)
+    if (trans != NULL_PTR)
     {
         trans->count      = 0U;
-        trans->buf        = NULL;
+        trans->buf        = NULL_PTR;
         trans->addrOffset = 0U;
         trans->status     = SPI_TRANSFER_STARTED;
     }
@@ -547,13 +546,13 @@ void Fls_Qspi_TransactionInit(QSPI_Transaction *trans)
 Std_ReturnType Fls_Qspi_ParamsInit(QSPI_CmdParams *QSPI_Params)
 {
     Std_ReturnType retVal = E_OK;
-    if (QSPI_Params != NULL)
+    if (QSPI_Params != NULL_PTR)
     {
         QSPI_Params->cmd          = FLS_QSPI_CMD_INVALID_OPCODE;
         QSPI_Params->cmdAddr      = FLS_QSPI_CMD_INVALID_ADDR;
         QSPI_Params->numAddrBytes = 3U;
-        QSPI_Params->txDataBuf    = NULL;
-        QSPI_Params->rxDataBuf    = NULL;
+        QSPI_Params->txDataBuf    = NULL_PTR;
+        QSPI_Params->rxDataBuf    = NULL_PTR;
         QSPI_Params->DataLen      = 0U;
         retVal                    = E_OK;
     }
@@ -573,8 +572,8 @@ Std_ReturnType Fls_Qspi_ParamsInit(QSPI_CmdParams *QSPI_Params)
 static Std_ReturnType Fls_Qspi_ConfigWrite(QSPI_Handle handle, QSPI_ConfigAccess *cfgAccess)
 {
     /* Source address */
-    uint8         *srcAddr8  = NULL;
-    uint32        *srcAddr32 = NULL;
+    uint8         *srcAddr8  = (uint8 *)NULL_PTR;
+    uint32        *srcAddr32 = (uint32 *)NULL_PTR;
     uint32         wordLenBytes;
     /* Data to be written */
     uint32         dataVal[4] = {0};
@@ -653,8 +652,8 @@ static void Fls_Qspi_ConfigWrite_sub(QSPI_Handle handle, QSPI_ConfigAccess *cfgA
 static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess *cfgAccess)
 {
     /* Source address */
-    uint8         *dstAddr8  = NULL;
-    uint32        *dstAddr32 = NULL;
+    uint8         *dstAddr8  = (uint8 *)NULL_PTR;
+    uint32        *dstAddr32 = (uint32 *)NULL_PTR;
     uint32         wordLenBytes;
     /* Data to be written */
     uint32         dataVal[4] = {0};

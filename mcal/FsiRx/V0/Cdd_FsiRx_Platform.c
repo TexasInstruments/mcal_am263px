@@ -160,7 +160,7 @@ CddFsiRx_dataReceive(uint8 hwUnitId, uint32 base, volatile Cdd_FsiRx_DataBufferT
 {
     uint32           baseAddr   = base;
     uint8            dataLength = length;
-    volatile uint16 *pSrc16     = NULL;
+    volatile uint16 *pSrc16     = (volatile uint16 *)NULL_PTR;
     uint8            wordLength = 0;
     uint8            offset     = bufOffset;
     uint32           regBase    = (uint32)CSL_CDD_FSI_RX_CFG_RX_BUF_BASE((uint32)offset);

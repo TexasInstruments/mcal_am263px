@@ -43,9 +43,9 @@ extern "C" {
 /*
    Defines
 */
-#define CDD_PWM_SFO_INCOMPLETE 0
-#define CDD_PWM_SFO_COMPLETE   1
-#define CDD_PWM_SFO_ERROR      2
+#define CDD_PWM_SFO_INCOMPLETE 0U
+#define CDD_PWM_SFO_COMPLETE   1U
+#define CDD_PWM_SFO_ERROR      2U
 
 #define CDD_PWM_CH_MAX 32 /* Equals # of HRPWM modules in the device */
 
@@ -53,7 +53,7 @@ extern "C" {
    Function Prototypes
    SFO Calibration Function
    */
-FUNC(sint32, PWM_CODE) Cdd_Pwm_SFO(void);
+FUNC(uint32, PWM_CODE) Cdd_Pwm_SFO(void);
 
 #ifdef __cplusplus
 }

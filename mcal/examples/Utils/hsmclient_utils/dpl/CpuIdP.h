@@ -38,7 +38,6 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include "hal_stdtypes.h"
 // #include <drivers/hw_include/cslr_soc.h>
 
 /**

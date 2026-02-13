@@ -48,7 +48,6 @@
 #define ESM_H
 
 // #include "reg_esm.h"
-#include "hal_stdtypes.h"
 #include "hw_ctrl_core.h"
 
 #ifdef __cplusplus

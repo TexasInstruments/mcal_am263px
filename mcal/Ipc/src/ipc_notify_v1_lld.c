@@ -364,8 +364,15 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, co
 
         do
         {
-            status = IpcNotify_mailboxWrite(hIpcNotify->hIpcNotifyInit->selfCoreId, msgParams->remoteCoreId,
-                                            mailboxBaseAddr, intrBitPos, swQ, value);
+            IpcNotify_MailboxWriteParams writeParams;
+            writeParams.selfCoreId      = hIpcNotify->hIpcNotifyInit->selfCoreId;
+            writeParams.remoteCoreId    = msgParams->remoteCoreId;
+            writeParams.mailboxBaseAddr = mailboxBaseAddr;
+            writeParams.intrBitPos      = intrBitPos;
+            writeParams.swQ             = swQ;
+            writeParams.value           = value;
+            status                      = IpcNotify_mailboxWrite(&writeParams);
+
             if ((status != MCAL_SystemP_SUCCESS) && (msgParams->waitForFifoNotFull != 0U))
             {
                 SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();

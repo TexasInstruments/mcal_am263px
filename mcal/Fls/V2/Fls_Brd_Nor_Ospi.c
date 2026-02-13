@@ -376,7 +376,8 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
 
         for (actual = 0; actual < len; actual += chunkLen)
         {
-            retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+            retVal =
+                Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
             if (retVal == E_OK)
             {
@@ -463,7 +464,7 @@ Std_ReturnType Fls_norBlockErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
     {
@@ -471,7 +472,7 @@ Std_ReturnType Fls_norBlockErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiCmdWrite(handle, cmd, cmdAddr, Fls_Config_SFDP_Ptr->addrnumBytes, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, cmd, cmdAddr, Fls_Config_SFDP_Ptr->addrnumBytes, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
     {
@@ -508,7 +509,7 @@ Std_ReturnType Fls_norSectorErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
     {
@@ -516,7 +517,7 @@ Std_ReturnType Fls_norSectorErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiCmdWrite(handle, cmd, cmdAddr, Fls_Config_SFDP_Ptr->addrnumBytes, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, cmd, cmdAddr, Fls_Config_SFDP_Ptr->addrnumBytes, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
     {
@@ -543,7 +544,7 @@ Std_ReturnType Fls_norChipErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
     {
@@ -551,7 +552,7 @@ Std_ReturnType Fls_norChipErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiCmdWrite(handle, cmd, cmdAddr, Fls_Config_SFDP_Ptr->addrnumBytes, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, cmd, cmdAddr, Fls_Config_SFDP_Ptr->addrnumBytes, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
     {
@@ -604,7 +605,8 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                     sr2[0U]       |= bitPos;
                     sr[0U]         = (uint16)(((uint16)sr2[0U] << 8) | (uint16)sr1[0U]);
 
-                    retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+                    retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                              (uint8 *)NULL_PTR, 0);
                     if (retVal == E_OK)
                     {
                         retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
@@ -629,7 +631,8 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 else
                 {
                     sr1[0U] |= bitPos;
-                    retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+                    retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                                (uint8 *)NULL_PTR, 0);
                     if (retVal == E_OK)
                     {
                         retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
@@ -653,7 +656,8 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 else
                 {
                     sr2[0U] |= bitPos;
-                    retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+                    retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                                (uint8 *)NULL_PTR, 0);
                     if (retVal == E_OK)
                     {
                         retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
@@ -676,7 +680,8 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
                 else
                 {
                     sr2[0U] |= bitPos;
-                    retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+                    retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                                (uint8 *)NULL_PTR, 0);
                     if (retVal == E_OK)
                     {
                         retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
@@ -727,7 +732,8 @@ Std_ReturnType Nor_OspiSetOeBit(OSPI_Handle handle, uint8 oeType)
             else
             {
                 sr2[0U] |= bitPos;
-                retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+                retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                            (uint8 *)NULL_PTR, 0);
                 if (retVal == E_OK)
                 {
                     retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
@@ -1284,17 +1290,17 @@ Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle)
     if ((Fls_Config_SFDP_Ptr->fourByteAddrEnSeq & (uint8)(1U << 0U)) != (uint8)0U)
     {
         /* Issue instruction 0xB7 without WREN */
-        retVal = Nor_OspiCmdWrite(handle, 0xB7, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, 0xB7, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
     if ((Fls_Config_SFDP_Ptr->fourByteAddrEnSeq & (uint8)(1U << 1U)) != (uint8)0U)
     {
         /* Issue instruction 0xB7 with WREN */
-        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
         if (retVal == E_OK)
         {
             retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
         }
-        retVal += Nor_OspiCmdWrite(handle, 0xB7, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+        retVal += Nor_OspiCmdWrite(handle, 0xB7, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
         if (retVal == E_OK)
         {
             retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
@@ -1378,7 +1384,7 @@ Std_ReturnType Nor_OspiRegWrite(OSPI_Handle handle, uint8 cmd, uint32 addr, uint
     uint8          regData[4U] = {0};
 
     regData[0U] = data;
-    retVal      = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, NULL, 0);
+    retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
     /* Wait a finite interval after WREN */
     if (retVal == E_OK)

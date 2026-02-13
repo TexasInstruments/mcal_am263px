@@ -31,7 +31,6 @@
 #include "Port.h"
 
 #include "hw_ctrl_core.h"
-#include "hal_stdtypes.h"
 #include "soc.h"
 
 #include "reg_sci.h"

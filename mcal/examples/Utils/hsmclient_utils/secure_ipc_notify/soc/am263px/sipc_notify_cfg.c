@@ -74,7 +74,7 @@ SIPC_MailboxConfig gSIPC_SecureHostMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = R5FSS0_0_MBOX_READ_DONE,
         .wrIntrBitPos              = HSM0_0_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = HSM0_0_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
     },
 
     {
@@ -84,7 +84,7 @@ SIPC_MailboxConfig gSIPC_SecureHostMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = R5FSS0_1_MBOX_READ_DONE,
         .wrIntrBitPos              = HSM0_0_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = HSM0_0_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
     },
     {
         /* with HSM0_0 */
@@ -93,7 +93,7 @@ SIPC_MailboxConfig gSIPC_SecureHostMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = R5FSS1_0_MBOX_READ_DONE,
         .wrIntrBitPos              = HSM0_0_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = HSM0_0_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
     },
     {
         /* with HSM0_0 */
@@ -102,7 +102,7 @@ SIPC_MailboxConfig gSIPC_SecureHostMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = R5FSS1_1_MBOX_READ_DONE,
         .wrIntrBitPos              = HSM0_0_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = HSM0_0_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
     },
 };
 
@@ -116,7 +116,7 @@ SIPC_MailboxConfig gSIPC_HsmMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = HSM0_0_MBOX_READ_DONE,
         .wrIntrBitPos              = R5FSS0_0_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = R5FSS0_0_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
     },
     {
         /* MBOX config with R5FSS0-1 */
@@ -125,7 +125,7 @@ SIPC_MailboxConfig gSIPC_HsmMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = HSM0_0_MBOX_READ_DONE,
         .wrIntrBitPos              = R5FSS0_1_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = R5FSS0_1_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
 
     },
     {
@@ -135,7 +135,7 @@ SIPC_MailboxConfig gSIPC_HsmMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = HSM0_0_MBOX_READ_DONE,
         .wrIntrBitPos              = R5FSS1_0_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = R5FSS1_0_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
     },
     {
         /* MBOX config with R5FSS1-1 */
@@ -144,7 +144,7 @@ SIPC_MailboxConfig gSIPC_HsmMboxConfig[CORE_ID_MAX - 1] = {
         .readReqMailboxClrBaseAddr = HSM0_0_MBOX_READ_DONE,
         .wrIntrBitPos              = R5FSS1_1_MBOX_WRITE_PROC_BIT_POS,
         .rdIntrBitPos              = R5FSS1_1_MBOX_READ_PROC_BIT_POS,
-        .swQ                       = NULL,
+        .swQ                       = NULL_PTR,
 
     },
 };

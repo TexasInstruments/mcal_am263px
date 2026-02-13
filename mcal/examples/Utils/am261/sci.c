@@ -42,7 +42,22 @@
 #include "sci.h"
 // #include "sys_vim.h"
 #include "sys_common.h"
-#include "hal_stdtypes.h"
+
+#define M_ZERO         (0U)
+#define M_FIVE         (5U)
+#define M_SIX          (6U)
+#define M_SEVEN        (7U)
+#define M_EIGHT        (8U)
+#define M_NINE         (9U)
+#define M_TEN          (10U)
+#define M_SIXTEEN      (16U)
+#define M_SEVENTEEN    (17U)
+#define M_EIGHTEEN     (18U)
+#define M_NINETEEN     (19U)
+#define M_TWENTY       (20U)
+#define M_TWENTY_THREE (23U)
+#define M_THIRTY       (30U)
+#define M_THIRTY_ONE   (31U)
 
 g_sciTransfer_t g_sciTransfer[2U];
 

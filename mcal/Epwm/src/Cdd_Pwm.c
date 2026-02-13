@@ -259,7 +259,7 @@ static void Cdd_Pwm_InitIsr(const Cdd_Pwm_ConfigType *CfgPtr)
 
 /* The function Cdd_Pwm_Init shall disable all notifications */
 #if (STD_ON == CDD_PWM_NOTIFICATION_SUPPORTED)
-        Cdd_Pwm_ChObj[chIdx].channelNotifyActiveFlag = (uint32)FALSE;
+        Cdd_Pwm_ChObj[chIdx].channelNotifyActiveFlag = CDD_PWM_FALSE;
 #endif
 
         /* Change state to CDD_PWM_STATUS_INIT */
@@ -292,7 +292,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_DeInit(void)
                  * notifications controlled by the CDD_PWM driver.
                  */
 #if (STD_ON == CDD_PWM_NOTIFICATION_SUPPORTED)
-                Cdd_Pwm_ChObj[chIdx].channelNotifyActiveFlag = (uint32)FALSE;
+                Cdd_Pwm_ChObj[chIdx].channelNotifyActiveFlag = CDD_PWM_FALSE;
 #endif
                 /* Change the State to CDD_PWM_STATUS_UNINIT */
                 Cdd_Pwm_ChObj[chIdx].channelState = CDD_PWM_STATUS_UNINIT;
@@ -319,7 +319,7 @@ Cdd_Pwm_StopChannelCounter(VAR(Cdd_Pwm_ChannelType, AUTOMATIC) ChannelNumber)
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_STOPCHANNEL))
     {
-        if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+        if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
         {
             /*Invalid channel */
             (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_STOPCHANNEL, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -365,7 +365,7 @@ Cdd_Pwm_StartChannelCounter(VAR(Cdd_Pwm_ChannelType, AUTOMATIC) ChannelNumber)
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_STARTCHANNEL))
     {
-        if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+        if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
         {
             /*Invalid channel */
             (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_STARTCHANNEL, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -423,7 +423,7 @@ Cdd_Pwm_GetCounter(VAR(Cdd_Pwm_ChannelType, AUTOMATIC) ChannelNumber)
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_GETCOUNTER))
     {
-        if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+        if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
         {
             /*Invalid channel */
             (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_GETCOUNTER, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -469,7 +469,7 @@ FUNC(void, CDD_PWM_CODE)
 Cdd_Pwm_SetPinAction(VAR(Cdd_Pwm_ChannelType, AUTOMATIC) ChannelNumber, VAR(Cdd_Pwm_PinActionType, AUTOMATIC) PinAction)
 {
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
-    if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+    if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
     {
         /*Invalid channel */
         (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_PIN_ACTION, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -522,7 +522,7 @@ Cdd_Pwm_SetAbsoluteThreshold(VAR(Cdd_Pwm_ChannelType, AUTOMATIC) ChannelNumber,
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_SET_ABSOLUTE_THRESHOLD))
     {
-        if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+        if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
         {
             /*Invalid channel */
             (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_ABSOLUTE_THRESHOLD, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -569,7 +569,7 @@ Cdd_Pwm_SetRelativeThreshold(VAR(Cdd_Pwm_ChannelType, AUTOMATIC) ChannelNumber,
     VAR(Cdd_Pwm_ReturnType, AUTOMATIC) ret = CDD_PWM_CM_OUT_REF_INTERVAL;
 
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
-    if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+    if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
     {
         /*Invalid channel */
         (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_SET_RELATIVE_THRESHOLD, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -608,7 +608,7 @@ Cdd_Pwm_SetRelativeThreshold(VAR(Cdd_Pwm_ChannelType, AUTOMATIC) ChannelNumber,
  *Design: MCAL-23400, MCAL-23401
  */
 #if (STD_ON == CDD_PWM_COUNTER_STATUS_MODE)
-FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_GetCounterStatus(uint32 Channel, uint32 tbStatusMask)
+FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_GetCounterStatus(Cdd_Pwm_ChannelType Channel, uint32 tbStatusMask)
 {
     uint32 baseAddr;
     uint16 status = 0x00U;
@@ -635,7 +635,7 @@ FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_GetCounterStatus(uint32 Channel, uint32 tbSta
  *Design: MCAL-23403, MCAL-23402
  */
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_ClearCounterStatus(uint32 Channel, uint32 tbStatusClrMask)
+Cdd_Pwm_ClearCounterStatus(Cdd_Pwm_ChannelType Channel, uint32 tbStatusClrMask)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -677,7 +677,7 @@ Cdd_Pwm_ClearCounterStatus(uint32 Channel, uint32 tbStatusClrMask)
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_DisableNotification(Cdd_Pwm_ChannelType ChannelNumber)
 {
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
-    if (ChannelNumber >= (uint32)CDD_PWM_MAX_NUM_CHANNELS)
+    if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
     {
         /*Invalid channel */
         (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_DISABLE_NOTIFICATION, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -701,7 +701,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_DisableNotification(Cdd_Pwm_ChannelType Channel
             Cdd_Pwm_DisableInterrupt(ChannelNumber);
 
             /* Set the notification active flag to FALSE */
-            chObj->channelNotifyActiveFlag = (uint32)FALSE;
+            chObj->channelNotifyActiveFlag = CDD_PWM_FALSE;
 
             /* Critical section, enable the interrupts */
             SchM_Exit_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
@@ -724,7 +724,7 @@ Cdd_Pwm_EnableNotification(Cdd_Pwm_ChannelType ChannelParameter, Cdd_Pwm_Interru
 {
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     Cdd_Pwm_ChannelType ChannelNumber = ChannelParameter;
-    if (ChannelNumber >= (Cdd_Pwm_ChannelType)CDD_PWM_MAX_NUM_CHANNELS)
+    if (ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS)
     {
         /*Invalid channel */
         (void)Cdd_Pwm_reportDetError(CDD_PWM_SID_ENABLE_NOTIFICATION, CDD_PWM_E_PARAM_INVALID_CHANNEL);
@@ -765,7 +765,7 @@ static void Cdd_Pwm_StartNotification(Cdd_Pwm_ChannelType ChannelParameter, Cdd_
             Cdd_Pwm_EnableInterrupt(ChannelParameter, EdgeInterruptSource);
 
             /* Enable the notification flag */
-            chObj->channelNotifyActiveFlag = (uint32)TRUE;
+            chObj->channelNotifyActiveFlag = CDD_PWM_TRUE;
 
             /* Critical section, enable the interrupts */
             SchM_Exit_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
@@ -777,7 +777,7 @@ static void Cdd_Pwm_StartNotification(Cdd_Pwm_ChannelType ChannelParameter, Cdd_
 /*
  *Design: MCAL-23416, MCAL-23417, MCAL-24107
  */
-FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtIntrStatus(uint32 Channel)
+FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtIntrStatus(Cdd_Pwm_ChannelType Channel)
 {
     uint32 baseAddr;
     uint16 status = 0U;
@@ -810,7 +810,7 @@ FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtIntrStatus(uint32 Channel)
 /*
  *Design: MCAL-23419, MCAL-23418
  */
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrClear(uint32 Channel)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrClear(Cdd_Pwm_ChannelType Channel)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -843,7 +843,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_EtIntrClear(uint32 Channel)
 /*
  *Design: MCAL-23420, MCAL-23421
  */
-FUNC(uint16, CDD_PWM_CODE) Cdd_Pwm_EtGetEventCount(uint32 Channel)
+FUNC(Cdd_Pwm_ValueType, CDD_PWM_CODE) Cdd_Pwm_EtGetEventCount(Cdd_Pwm_ChannelType Channel)
 {
     uint32            baseAddr;
     Cdd_Pwm_ValueType countValue = 0U;
@@ -901,7 +901,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPeriodDutyPhase(Cdd_Pwm_channelParametertype
 }
 #endif /*(STD_ON == CDD_PWM_SET_PERIOD_DUTY_PHASE_API)*/
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(uint32 Channel, uint16 PhaseShiftValue)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(Cdd_Pwm_ChannelType Channel, uint16 PhaseShiftValue)
 {
     uint32 baseAddr;
 
@@ -913,7 +913,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(uint32 Channel, uint16 PhaseShift
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_PHASE_SHIFT);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_PHASE_SHIFT);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Phase shift value is passed here */
@@ -924,7 +924,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(uint32 Channel, uint16 PhaseShift
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(uint32 Channel, uint16 Period)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(Cdd_Pwm_ChannelType Channel, uint16 Period)
 {
     uint32 baseAddr;
 
@@ -936,7 +936,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(uint32 Channel, uint16 Period
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_TIMEBASE_PERIOD);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_TIMEBASE_PERIOD);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Period value is passed here */
@@ -948,7 +948,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(uint32 Channel, uint16 Period
 }
 
 FUNC(void, CDD_PWM_CODE)
-Cdd_Pwm_SetCounterCompareValue(uint32 Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue)
+Cdd_Pwm_SetCounterCompareValue(Cdd_Pwm_ChannelType Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue)
 {
     uint32 baseAddr;
 
@@ -960,7 +960,7 @@ Cdd_Pwm_SetCounterCompareValue(uint32 Channel, EPWM_CounterCompareModule CompMod
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_COUNTER_COMPARE_VALUE);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_COUNTER_COMPARE_VALUE);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Compare module and value is passed here */
@@ -971,7 +971,7 @@ Cdd_Pwm_SetCounterCompareValue(uint32 Channel, EPWM_CounterCompareModule CompMod
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(uint32 Channel, uint16 RedCount)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 RedCount)
 {
     uint32 baseAddr;
 
@@ -983,7 +983,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(uint32 Channel, uint16 RedCo
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_RISING_EDGE_DELAY_COUNT);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_RISING_EDGE_DELAY_COUNT);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Rising Edge Delay value is passed here */
@@ -994,7 +994,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(uint32 Channel, uint16 RedCo
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(uint32 Channel, uint16 FedCount)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 FedCount)
 {
     uint32 baseAddr;
 
@@ -1006,7 +1006,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(uint32 Channel, uint16 FedC
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Falling Edge Delay value is passed here */
@@ -1017,7 +1017,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(uint32 Channel, uint16 FedC
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(uint32 Channel, uint32 Block, uint32 Delay)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(Cdd_Pwm_ChannelType Channel, uint32 Block, uint32 Delay)
 {
     uint32 baseAddr;
 
@@ -1029,7 +1029,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(uint32 Channel, uint32 Bloc
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_MIN_DEADBAND_DELAY);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_MIN_DEADBAND_DELAY);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Block and minimum deadband delay value is passed here */
@@ -1040,7 +1040,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(uint32 Channel, uint32 Bloc
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(uint32 Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue)
 {
     uint32 baseAddr;
 
@@ -1052,7 +1052,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(uint32 Channel, EPWM_XCMPReg Xc
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_XCMP_REG_VALUE);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_XCMP_REG_VALUE);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* XCMP reg and value is passed here */
@@ -1063,7 +1063,8 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(uint32 Channel, EPWM_XCMPReg Xc
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXMinMaxRegValue(uint32 Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue)
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_SetXMinMaxRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue)
 {
     uint32 baseAddr;
 
@@ -1075,7 +1076,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXMinMaxRegValue(uint32 Channel, EPWM_XMinMax
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_XMINMAP_REG_VALUE);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_XMINMAP_REG_VALUE);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* MinMax value is passed here */
@@ -1086,7 +1087,8 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXMinMaxRegValue(uint32 Channel, EPWM_XMinMax
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetCmpShadowRegValue(uint32 Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue)
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_SetCmpShadowRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XCompareReg CmpReg, uint16 CmpValue)
 {
     uint32 baseAddr;
 
@@ -1098,7 +1100,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetCmpShadowRegValue(uint32 Channel, EPWM_XComp
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_CMP_SHADOW_REG_VALUE);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_CMP_SHADOW_REG_VALUE);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* CMP shadow reg value is passed here */
@@ -1320,7 +1322,7 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_HrSfoStatus(uint32 ChannelNumber)
 }
 #endif /* #if (STD_ON == CDD_PWM_HR_SFO_STATUS_API) */
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(uint32 Channel, uint32 PhaseShiftValue)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(Cdd_Pwm_ChannelType Channel, uint32 PhaseShiftValue)
 {
     uint32 baseAddr;
 
@@ -1332,7 +1334,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(uint32 Channel, uint32 PhaseShi
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_HR_SET_PHASE_SHIFT);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_PHASE_SHIFT);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Phase shift value is passed here */
@@ -1343,7 +1345,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(uint32 Channel, uint32 PhaseShi
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(uint32 Channel, uint16 Period)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(Cdd_Pwm_ChannelType Channel, uint16 Period)
 {
     uint32 baseAddr;
 
@@ -1355,7 +1357,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(uint32 Channel, uint16 Peri
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Period value is passed here */
@@ -1367,7 +1369,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(uint32 Channel, uint16 Peri
 }
 
 FUNC(void, CDD_PWM_CODE)
-Cdd_Pwm_HrSetCounterCompareValue(uint32 Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue)
+Cdd_Pwm_HrSetCounterCompareValue(Cdd_Pwm_ChannelType Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue)
 {
     uint32 baseAddr;
 
@@ -1379,7 +1381,7 @@ Cdd_Pwm_HrSetCounterCompareValue(uint32 Channel, HRPWM_CounterCompareModule Comp
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Compare module and value is passed here */
@@ -1390,7 +1392,7 @@ Cdd_Pwm_HrSetCounterCompareValue(uint32 Channel, HRPWM_CounterCompareModule Comp
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(uint32 Channel, uint16 RedCount)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 RedCount)
 {
     uint32 baseAddr;
 
@@ -1402,7 +1404,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(uint32 Channel, uint16 Red
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Rising Edge Delay value is passed here */
@@ -1413,7 +1415,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(uint32 Channel, uint16 Red
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(uint32 Channel, uint16 FedCount)
+FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 FedCount)
 {
     uint32 baseAddr;
 
@@ -1425,7 +1427,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(uint32 Channel, uint16 Fe
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_HR_SET_FALLING_EDGE_DELAY_COUNT);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_FALLING_EDGE_DELAY_COUNT);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Falling Edge Delay value is passed here */
@@ -1436,7 +1438,8 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(uint32 Channel, uint16 Fe
     return;
 }
 
-FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetXcmpRegValue(uint32 Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue)
+FUNC(void, CDD_PWM_CODE)
+Cdd_Pwm_HrSetXcmpRegValue(Cdd_Pwm_ChannelType Channel, HRPWM_XCMPReg HrXcmpReg, uint16 HrXcmpValue)
 {
     uint32 baseAddr;
 
@@ -1448,7 +1451,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetXcmpRegValue(uint32 Channel, HRPWM_XCMPReg
     else
 #endif /* (STD_ON == CDD_PWM_DEV_ERROR_DETECT) */
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_HR_SET_XCMP_REG_VALUE);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_HR_SET_XCMP_REG_VALUE);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* XCMP reg and value is passed here */
@@ -1463,7 +1466,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetXcmpRegValue(uint32 Channel, HRPWM_XCMPReg
  *Design: MCAL-23447, MCAL-23448
  */
 #if (STD_ON == CDD_PWM_ADC_ENABLE_DISABLE_API)
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetAdcTrigger(uint32 Channel, Cdd_Pwm_AdcSocType adcSoc)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetAdcTrigger(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_AdcSocType adcSoc)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1499,7 +1502,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetAdcTrigger(uint32 Channel, Cdd_Pwm
  */
 #if (STD_ON == CDD_PWM_BASE_CLK_SYNC)
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_SyncEnable(uint32 Channel, uint32 tbPhsValue, uint32 counterDir)
+Cdd_Pwm_SyncEnable(Cdd_Pwm_ChannelType Channel, uint32 tbPhsValue, uint32 counterDir)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1533,7 +1536,7 @@ Cdd_Pwm_SyncEnable(uint32 Channel, uint32 tbPhsValue, uint32 counterDir)
 /*
  *Design: MCAL-23451, MCAL-23452
  */
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SyncDisable(uint32 Channel)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SyncDisable(Cdd_Pwm_ChannelType Channel)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1569,12 +1572,12 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SyncDisable(uint32 Channel)
  */
 #if (STD_ON == CDD_PWM_COUNTER_COMPARE_CFG)
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_CounterComparatorCfg(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
+Cdd_Pwm_CounterComparatorCfg(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
                              uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)
 {
     uint32         baseAddr;
     Std_ReturnType ret    = E_OK;
-    boolean        status = FALSE;
+    boolean        status = CDD_PWM_FALSE;
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_COUNTER_CMP_CFG))
 #endif
@@ -1593,7 +1596,7 @@ Cdd_Pwm_CounterComparatorCfg(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint3
             /* Exit Critical Section. */
             SchM_Exit_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
 
-            if (status == FALSE)
+            if (status == CDD_PWM_FALSE)
             {
                 ret = E_NOT_OK;
             }
@@ -1612,7 +1615,7 @@ Cdd_Pwm_CounterComparatorCfg(uint32 Channel, Cdd_Pwm_OutputChType cmpType, uint3
  */
 #if (STD_ON == CDD_PWM_DEAD_BAND)
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_DeadbandCfg(uint32 Channel, const CDD_PWM_DeadbandCfgType *pCfg)
+Cdd_Pwm_DeadbandCfg(Cdd_Pwm_ChannelType Channel, const CDD_PWM_DeadbandCfgType *pCfg)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1655,7 +1658,7 @@ Cdd_Pwm_DeadbandCfg(uint32 Channel, const CDD_PWM_DeadbandCfgType *pCfg)
 /*
  *Design: MCAL-23459, MCAL-23458
  */
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_DeadbandBypass(uint32 Channel)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_DeadbandBypass(Cdd_Pwm_ChannelType Channel)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1691,7 +1694,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_DeadbandBypass(uint32 Channel)
  */
 #if (STD_ON == CDD_PWM_CHOPPER)
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_ChopperCfg(uint32 Channel, const CDD_PWM_ChopperCfgType *pCfg)
+Cdd_Pwm_ChopperCfg(Cdd_Pwm_ChannelType Channel, const CDD_PWM_ChopperCfgType *pCfg)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1735,7 +1738,7 @@ Cdd_Pwm_ChopperCfg(uint32 Channel, const CDD_PWM_ChopperCfgType *pCfg)
 /*
  *Design: MCAL-23464, MCAL-23463
  */
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(uint32 Channel, uint32 enableChopper)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(Cdd_Pwm_ChannelType Channel, uint32 enableChopper)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1767,7 +1770,8 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(uint32 Channel, uint32 
 }
 #endif /*#if (STD_ON == CDD_PWM_CHOPPER)*/
 
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel, EPWM_TimeBaseCountMode Mode)
+FUNC(Std_ReturnType, CDD_PWM_CODE)
+Cdd_Pwm_SetTimeBaseCounterMode(Cdd_Pwm_ChannelType Channel, EPWM_TimeBaseCountMode Mode)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1776,7 +1780,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE))
 #endif
     {
-        baseAddr = Cdd_Pwm_getBaseAddr((Cdd_Pwm_ChannelType)Channel, CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE);
+        baseAddr = Cdd_Pwm_getBaseAddr(Channel, CDD_PWM_SID_SET_TIME_BASE_COUNTER_MODE);
         if (baseAddr != CDD_PWM_INVALID_BASE_ADDR)
         {
             /* Enter Critical Section. */
@@ -1801,7 +1805,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SetTimeBaseCounterMode(uint32 Channel
  *Design: MCAL-23465, MCAL-23466
  */
 #if (STD_ON == CDD_PWM_TRIP_ZONE)
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventEnable(uint32 Channel, uint32 tzEventType)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventEnable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1834,7 +1838,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventEnable(uint32 Channel, uin
 /*
  *Design: MCAL-23468, MCAL-23467
  */
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventDisable(uint32 Channel, uint32 tzEventType)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventDisable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1867,7 +1871,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzTripEventDisable(uint32 Channel, ui
 /*
  *Design: MCAL-23469, MCAL-23470, MCAL-24107, MCAL-24109
  */
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrEnable(uint32 Channel, uint32 tzEventType)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrEnable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1902,7 +1906,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrEnable(uint32 Channel, uint32 t
 /*
  *Design: MCAL-23472, MCAL-23471, MCAL-24100
  */
-FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrDisable(uint32 Channel, uint32 tzEventType)
+FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrDisable(Cdd_Pwm_ChannelType Channel, uint32 tzEventType)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;
@@ -1936,11 +1940,11 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_TzIntrDisable(uint32 Channel, uint32 
 /*
  *Design: MCAL-23473, MCAL-23474
  */
-FUNC(boolean, CDD_PWM_CODE) Cdd_Pwm_TzGetEventStatus(uint32 Channel, uint32 eventMask)
+FUNC(boolean, CDD_PWM_CODE) Cdd_Pwm_TzGetEventStatus(Cdd_Pwm_ChannelType Channel, uint32 eventMask)
 {
     uint32  baseAddr;
     uint16  status = 0U;
-    boolean ret    = FALSE;
+    boolean ret    = CDD_PWM_FALSE;
 
 #if (STD_ON == CDD_PWM_DEV_ERROR_DETECT)
     if (E_OK == Cdd_Pwm_Validate_Init(CDD_PWM_SID_TZ_GET_EVENT_STATUS))
@@ -1961,7 +1965,7 @@ FUNC(boolean, CDD_PWM_CODE) Cdd_Pwm_TzGetEventStatus(uint32 Channel, uint32 even
 
             if (status != 0x0U)
             {
-                ret = TRUE;
+                ret = CDD_PWM_TRUE;
             }
         }
     }
@@ -1972,7 +1976,7 @@ FUNC(boolean, CDD_PWM_CODE) Cdd_Pwm_TzGetEventStatus(uint32 Channel, uint32 even
  *Design: MCAL-23476, MCAL-23475
  */
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_TzEventStatusClear(uint32 Channel, uint32 eventMask, uint32 tzFlags)
+Cdd_Pwm_TzEventStatusClear(Cdd_Pwm_ChannelType Channel, uint32 eventMask, uint16 tzFlags)
 {
     uint32         baseAddr;
     Std_ReturnType returnValue = E_OK;

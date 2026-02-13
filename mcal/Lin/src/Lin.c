@@ -201,7 +201,6 @@ Lin_Init(P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Config)
              */
             Lin_Module_State = LIN_INIT;
         }
-        /* TI_COVERAGE_GAP_START [Line Gap] in LIN_E_INVALID_POINTER, False Positive */
         else
         {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)

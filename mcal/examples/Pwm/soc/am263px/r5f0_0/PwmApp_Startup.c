@@ -95,19 +95,14 @@ volatile uint32 Pwm_NotifyRecvFlag              = 0xFFFF;
 uint8           Pwm_Valid_WakeupSrcDetectedFlag = (uint8)FALSE;
 
 Mcu_ClockConfigType Pwm_Mcu_ClkConfig[] = {
-    [0] =
-        {
-            .Mcu_InitCfg       = TRUE,
-            .Mcu_ClockModuleId = MCU_CLKSRC_MODULE_ID_SYSCLK,
-            .Mcu_ClockSourceId = MCU_CLKSRC_2,
-            .Mcu_ClockDiv      = 0U  // Source = Sysclk ie 200MHz, so (200/(0+1) = 200MHz with 200MHz clk)
-        },
-    [1] = {
-        .Mcu_ClockModuleId = MCU_CLKSRC_MODULE_ID_SCI0,
-        .Mcu_ClockSourceId = MCU_CLKSRC_3,
-        .Mcu_ClockDiv      = 3,
-        .Mcu_InitCfg       = TRUE,
-    }};
+    [0] = {.Mcu_ClockModuleId = MCU_CLKSRC_MODULE_ID_SYSCLK,
+           .Mcu_ClockSourceId = MCU_CLKSRC_2,
+           .Mcu_ClockDiv      = 0U, /* Source = Sysclk ie 200MHz, so (200/(0+1) = 200MHz with 200MHz clk) */
+           .Mcu_InitCfg       = TRUE},
+    [1] = {.Mcu_ClockModuleId = MCU_CLKSRC_MODULE_ID_SCI0,
+           .Mcu_ClockSourceId = MCU_CLKSRC_3,
+           .Mcu_ClockDiv      = 3U,
+           .Mcu_InitCfg       = TRUE}};
 
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */

@@ -489,10 +489,10 @@ static Std_ReturnType Fls_norOpen_sub1(void)
     uint8          cmd;
     /* Reset the Flash */
     cmd = NOR_CMD_RSTEN;
-    if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U) == E_OK)
+    if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) == E_OK)
     {
         cmd = NOR_CMD_RST;
-        if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U) == E_OK)
+        if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) == E_OK)
         {
             if (Nor_QspiWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout) == E_OK)
             {
@@ -1240,7 +1240,7 @@ static Std_ReturnType Fls_norAsyncWrite_sub1(void)
 {
     Std_ReturnType retVal  = E_OK;
     uint8          cmdWren = Fls_Config_SFDP_Ptr->cmdWren;
-    retVal                 = Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U);
+    retVal = Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U);
 
     if (retVal == E_OK)
     {
@@ -1280,7 +1280,8 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
     {
         case FLS_S_INVALID_ADDRESS:
         {
-            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U) == E_OK)
+            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) ==
+                E_OK)
             {
                 retVal        = E_OK;
                 FlsEraseStage = FLS_S_DELAY_1_STAGE;
@@ -1302,7 +1303,7 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
 
         case FLS_S_BLOCK_CMD_STAGE:
         {
-            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, cmdAddr, NULL, 0U) == E_OK)
+            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, cmdAddr, (uint8 *)NULL_PTR, 0U) == E_OK)
             {
                 retVal        = E_OK;
                 FlsEraseStage = FLS_S_DELAY_2_STAGE;
@@ -1399,21 +1400,21 @@ void Fls_resetDrvObj(Fls_DriverObjType *drvObj)
 {
     if (drvObj != NULL_PTR)
     {
-        drvObj->Fls_JobEndNotification   = NULL;
-        drvObj->Fls_JobErrorNotification = NULL;
-        drvObj->maxReadNormalMode        = NULL;
-        drvObj->maxWriteNormalMode       = NULL;
+        drvObj->Fls_JobEndNotification   = (Fls_JobEndNotifyType)NULL_PTR;
+        drvObj->Fls_JobErrorNotification = (Fls_JobErrorNotifyType)NULL_PTR;
+        drvObj->maxReadNormalMode        = (uint32)0U;
+        drvObj->maxWriteNormalMode       = (uint32)0U;
         drvObj->status                   = MEMIF_UNINIT;
         drvObj->jobResultType            = MEMIF_JOB_OK;
         drvObj->jobType                  = FLS_JOB_NONE;
-        drvObj->flashAddr                = NULL;
-        drvObj->ramAddr                  = NULL;
-        drvObj->length                   = NULL;
+        drvObj->flashAddr                = (uint32)0U;
+        drvObj->ramAddr                  = (uint8 *)NULL_PTR;
+        drvObj->length                   = (Fls_LengthType)0U;
         drvObj->mode                     = MEMIF_MODE_SLOW;
-        drvObj->jobChunkSize             = NULL;
-        drvObj->spiHandle                = NULL;
-        drvObj->transferred              = NULL;
-        drvObj->flsBaudRateDiv           = NULL;
+        drvObj->jobChunkSize             = (uint32)0U;
+        drvObj->spiHandle                = NULL_PTR;
+        drvObj->transferred              = (Fls_LengthType)0U;
+        drvObj->flsBaudRateDiv           = (uint32)0U;
         drvObj->flsDmaStage              = FLS_S_READ_DMA_INIT_STAGE;
         drvObj->flsEdmaReadEnabled       = FALSE;
         drvObj->flsDmaConfigError        = Fls_check_Memmap_Enabled_DMA();
@@ -1455,7 +1456,8 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
     {
         case FLS_S_INVALID_ADDRESS:
         {
-            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U) == E_OK)
+            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) ==
+                E_OK)
             {
                 retVal        = E_OK;
                 FlsEraseStage = FLS_S_DELAY_1_STAGE;
@@ -1477,7 +1479,7 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
 
         case FLS_S_SECTOR_CMD_STAGE:
         {
-            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, cmdAddr, NULL, 0) == E_OK)
+            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, cmdAddr, (uint8 *)NULL_PTR, 0) == E_OK)
             {
                 retVal        = E_OK;
                 FlsEraseStage = FLS_S_DELAY_2_STAGE;
@@ -1553,7 +1555,8 @@ Std_ReturnType Fls_norAsyncChipErase(void)
     {
         case FLS_S_INVALID_ADDRESS:
         {
-            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U) == E_OK)
+            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) ==
+                E_OK)
             {
                 retVal        = E_OK;
                 FlsEraseStage = FLS_S_DELAY_1_STAGE;
@@ -1575,7 +1578,7 @@ Std_ReturnType Fls_norAsyncChipErase(void)
 
         case FLS_S_CHIP_CMD_STAGE:
         {
-            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0) == E_OK)
+            if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0) == E_OK)
             {
                 retVal        = E_OK;
                 FlsEraseStage = FLS_S_DELAY_2_STAGE;
@@ -1661,7 +1664,7 @@ Std_ReturnType Nor_QspiSetQeBit(QSPI_Handle handle, uint8 qeType)
 static Std_ReturnType Nor_cmdwr_Enable(QSPI_Handle handle)
 {
     Std_ReturnType status = E_OK;
-    status                = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0U);
+    status = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U);
     if (status == E_OK)
     {
         status = Nor_QspiWriteEnableLatched(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);

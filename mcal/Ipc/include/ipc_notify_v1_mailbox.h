@@ -65,6 +65,21 @@ typedef struct
     uint32          fifo[MAILBOX_MAX_MSGS_IN_SW_FIFO];
 
 } IpcNotify_SwQueue;
+/**
+ * \brief Parameters for mailbox write operation
+ *
+ * This structure groups the parameters needed for mailbox write.
+ */
+typedef struct IpcNotify_MailboxWriteParams_s
+{
+    uint32             selfCoreId;      /**< Self core ID */
+    uint32             remoteCoreId;    /**< Remote core ID */
+    uint32             mailboxBaseAddr; /**< Mailbox base address */
+    uint32             intrBitPos;      /**< Interrupt bit position */
+    IpcNotify_SwQueue *swQ;             /**< Pointer to SW queue */
+    uint32             value;           /**< Value to write */
+} IpcNotify_MailboxWriteParams;
+
 extern sint32        IpcNotify_trigInterrupt(uint32 selfCoreId, uint32 remoteCoreId, uint32 mailboxBaseAddr,
                                              uint32 intrBitPos);
 extern uint32        gIpcNotifyCoreIntrBitPos[4];
@@ -104,34 +119,34 @@ static inline sint32 IpcNotify_mailboxReadSwQ(IpcNotify_SwQueue *swQ, uint32 *va
 }
 
 /* write to SW fifo and trigger HW interrupt using HW mailbox */
-static inline sint32 IpcNotify_mailboxWrite(uint32 selfCoreId, uint32 remoteCoreId, uint32 mailboxBaseAddr,
-                                            uint32 intrBitPos, IpcNotify_SwQueue *swQ, uint32 value)
+static inline sint32 IpcNotify_mailboxWrite(const IpcNotify_MailboxWriteParams *writeParams)
 {
     sint32 status = MCAL_SystemP_FAILURE;
 
-    uint32 rdIdx = swQ->rdIdx;
-    uint32 wrIdx = swQ->wrIdx;
+    uint32 rdIdx = writeParams->swQ->rdIdx;
+    uint32 wrIdx = writeParams->swQ->wrIdx;
 
     if ((rdIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO) && (wrIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO))
     {
         if (((wrIdx + 1U) % MAILBOX_MAX_MSGS_IN_SW_FIFO) != rdIdx)
         {
             /* there is some space in the FIFO */
-            swQ->fifo[wrIdx] = value;
+            writeParams->swQ->fifo[wrIdx] = writeParams->value;
 
             wrIdx = (wrIdx + 1U) % MAILBOX_MAX_MSGS_IN_SW_FIFO;
 
-            swQ->wrIdx = wrIdx;
+            writeParams->swQ->wrIdx = wrIdx;
 
-            wrIdx = swQ->wrIdx;      /* read back to ensure the update has reached the memory */
-            if (wrIdx == swQ->wrIdx) /*To suppress MISRA warning*/
+            wrIdx = writeParams->swQ->wrIdx;      /* read back to ensure the update has reached the memory */
+            if (wrIdx == writeParams->swQ->wrIdx) /*To suppress MISRA warning*/
             {
                 /*Do nothing*/
             }
             IpcNotify_mailbox_asm();
 
             /* trigger interrupt to other core */
-            status = IpcNotify_trigInterrupt(selfCoreId, remoteCoreId, mailboxBaseAddr, intrBitPos);
+            status = IpcNotify_trigInterrupt(writeParams->selfCoreId, writeParams->remoteCoreId,
+                                             writeParams->mailboxBaseAddr, writeParams->intrBitPos);
         }
     }
 

@@ -590,7 +590,7 @@ static Std_ReturnType Fls_norErasesfdp(QSPI_Handle handle, uint32 offset)
     retVal = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
     if (retVal == E_OK)
     {
-        retVal = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL, 0);
+        retVal = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, FLS_QSPI_CMD_INVALID_ADDR, NULL_PTR, 0);
     }
     if (retVal == E_OK)
     {
@@ -598,7 +598,7 @@ static Std_ReturnType Fls_norErasesfdp(QSPI_Handle handle, uint32 offset)
     }
     if (retVal == E_OK)
     {
-        retVal = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->eraseCfg.cmdBlockErase3B, offset, NULL, 0);
+        retVal = Nor_QspiCmdWrite(handle, Fls_Config_SFDP_Ptr->eraseCfg.cmdBlockErase3B, offset, NULL_PTR, 0);
     }
     if (retVal == E_OK)
     {

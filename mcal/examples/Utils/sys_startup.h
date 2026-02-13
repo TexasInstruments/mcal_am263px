@@ -51,7 +51,6 @@ extern "C" {
 #endif
 
 #include "sys_common.h"
-#include "hal_stdtypes.h"
 
 /* Bit Masks */
 /*! \brief

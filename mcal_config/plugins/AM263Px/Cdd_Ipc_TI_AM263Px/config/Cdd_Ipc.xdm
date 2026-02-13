@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<datamodel xmlns="http://www.tresos.de/_projects/DataModel2/08/root.xsd" 
-             xmlns:a="http://www.tresos.de/_projects/DataModel2/08/attribute.xsd" 
-             xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd" 
-             xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd" 
+<datamodel xmlns="http://www.tresos.de/_projects/DataModel2/08/root.xsd"
+             xmlns:a="http://www.tresos.de/_projects/DataModel2/08/attribute.xsd"
+             xmlns:v="http://www.tresos.de/_projects/DataModel2/06/schema.xsd"
+             xmlns:d="http://www.tresos.de/_projects/DataModel2/06/data.xsd"
              version="3.0">
 
-     <d:ctr xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd" 
-             xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd" 
-             xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd" 
+     <d:ctr xmlns:ad="http://www.tresos.de/_projects/DataModel2/08/admindata.xsd"
+             xmlns:icc="http://www.tresos.de/_projects/DataModel2/08/implconfigclass.xsd"
+             xmlns:mt="http://www.tresos.de/_projects/DataModel2/11/multitest.xsd"
              type="AUTOSAR" factory="autosar">
           <d:lst type="TOP-LEVEL-PACKAGES">
                <d:ctr name="TI_AM263Px" type="AR-PACKAGE">
@@ -33,9 +33,9 @@
                                    <a:a name="UUID" value="3cfdede8-066e-473b-9b4b-40b57a8ca632"/>
                                    <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
                                         <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                             
+
                                              <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                             
+
                                         </a:a>
                                         <a:a name="LABEL" value="Config Variant"/>
                                         <a:da name="RANGE">
@@ -48,10 +48,10 @@
                                              <a:a name="UUID" value="df0680b9-eda7-4110-9598-ce1b432c3066"/>
                                              <v:var name="CddIpcLocalCoreId" type="ENUMERATION">                                                  <a:a name="DESC" value="EN: This param contains the local coreId on which the IPC instance is running."/>
                                                   <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                       
+
                                                        <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                       
-                                                       
+
+
                                                   </a:a>
                                                   <a:a name="OPTIONAL" value="false"/>
                                                   <a:a name="ORIGIN" value="Texas Instruments"/>
@@ -63,10 +63,10 @@
                                             <a:da name="ENABLE" value="true"/>
                                             <a:da name="RANGE">
                                             <a:v>CDD_IPC_R5FSS0_0_ID</a:v>
-                                            <a:v>CDD_IPC_R5FSS0_1_ID</a:v>                                     
+                                            <a:v>CDD_IPC_R5FSS0_1_ID</a:v>
                                             <a:v>CDD_IPC_R5FSS1_0_ID</a:v>
-                                            <a:v>CDD_IPC_R5FSS1_1_ID</a:v>                                                    
-                                        </a:da>                                                                         
+                                            <a:v>CDD_IPC_R5FSS1_1_ID</a:v>
+                                        </a:da>
                                         </v:var>
 
                                     <v:lst name="CddIpcRemoteCoreList" type="MAP">
@@ -76,9 +76,9 @@
                                             <a:a name="UUID" value="6a4113e1-75fa-4cac-a818-cce8010ab1e2"/>
                                             <v:var name="CddIpcRemoteCoreIdIndex" type="ENUMERATION">                                                <a:a name="DESC" value="EN: The cores that are participating the IPC message exchange (Exclude the local core from these)"/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                    
+
                                                     <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                                                                        
+
                                                 </a:a>
                                                 <a:a name="ORIGIN" value="Texas Instruments"/>
                                                 <a:a name="SCOPE" value="LOCAL"/>
@@ -90,7 +90,7 @@
                                                 <a:da name="INVALID" type="XPath" expr="text:uniq((../../../..//*[@name='CddIpcRemoteCoreIdIndex']),node:value(.))" false="The remote cores should be unique and should not contain the Local Core"/>
                                                 <a:da name="RANGE">
                                                     <a:v>CDD_IPC_R5FSS0_0_ID</a:v>
-                                                    <a:v>CDD_IPC_R5FSS0_1_ID</a:v>                            
+                                                    <a:v>CDD_IPC_R5FSS0_1_ID</a:v>
                                                     <a:v>CDD_IPC_R5FSS1_0_ID</a:v>
                                                     <a:v>CDD_IPC_R5FSS1_1_ID</a:v>
                                                 </a:da>
@@ -117,10 +117,10 @@
                                                        <a:a name="UUID" value="ea0b3275-57db-4665-bf46-8baa9a2e3ad5"/>
                                             <v:var name="CddIpcLocalEndPt" type="INTEGER">                                                            <a:a name="DESC" value="EN: This parameter is used to register a local call back especially for receiving or sending a RPMsg message "/>
                                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                                 
+
                                                                  <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                                 
-                                                                 
+
+
                                                             </a:a>
                                                             <a:a name="OPTIONAL" value="false"/>
                                                             <a:a name="ORIGIN" value="Texas Instruments"/>
@@ -135,14 +135,14 @@
                                                             </a:da>
                                                             <a:da name="DEFAULT" value="12"/>
                                                        </v:var>
-                                            <v:var name="CddIpcRecvCallBack" type="FUNCTION-NAME">                                                            <a:a name="DESC" 
+                                            <v:var name="CddIpcRecvCallBack" type="FUNCTION-NAME">                                                            <a:a name="DESC"
                                                 value="EN: Function pointer to RPMSG callback function"/>
-                                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                                <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                 type="IMPLEMENTATIONCONFIGCLASS">
-						    
+
                                                     <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                    
-                                                    
+
+
                                                 </a:a>
                                                 <a:a name="OPTIONAL" value="false"/>
                                                 <a:a name="ORIGIN" value="Texas Instruments"/>
@@ -150,17 +150,17 @@
                                                 <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                                 <a:a name="UUID" value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
                                                 <a:da name="ENABLE" type = "XPath" expr = "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRpMsgEnable = 'true' and as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRecvCallBackEnable = 'true'" />
-                                                <a:da name="DEFAULT" value="NULL"/>
+                                                <a:da name="DEFAULT" value="NULL_PTR"/>
                                             </v:var>
 
-                                            <v:var name="CddIpcrecvCallbackArguments" type="FUNCTION-NAME">                                                            <a:a name="DESC" 
+                                            <v:var name="CddIpcrecvCallbackArguments" type="FUNCTION-NAME">                                                            <a:a name="DESC"
                                                 value="EN: Function Pointer to recv callback function's arguments"/>
-                                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                                <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                 type="IMPLEMENTATIONCONFIGCLASS">
-                     			            
+
                                                     <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                    
-                                                    
+
+
                                                 </a:a>
                                                 <a:a name="OPTIONAL" value="false"/>
                                                 <a:a name="ORIGIN" value="Texas Instruments"/>
@@ -168,19 +168,19 @@
                                                 <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                                 <a:a name="UUID" value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
                                                 <a:da name="ENABLE" type = "XPath" expr = "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRpMsgEnable = 'true' and as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRecvCallBackEnable = 'true'"/>
-                                                <a:da name="DEFAULT" value="NULL"/>
+                                                <a:da name="DEFAULT" value="NULL_PTR"/>
                                             </v:var>
 
-                                            <v:var name="CddIpcrecvNotifyCallback" type="FUNCTION-NAME">                                                            <a:a name="DESC" 
-                                                value="EN: Function pointer to IPC notify message Callback function. 
-                                                User can pass a pointer to a custom defined arguments structure and the callback 
+                                            <v:var name="CddIpcrecvNotifyCallback" type="FUNCTION-NAME">                                                            <a:a name="DESC"
+                                                value="EN: Function pointer to IPC notify message Callback function.
+                                                User can pass a pointer to a custom defined arguments structure and the callback
                                                 passes this pointer when a notify interrupt is received"/>
-                                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                                <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                 type="IMPLEMENTATIONCONFIGCLASS">
-						    
+
                                                     <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                    
-                                                    
+
+
                                                 </a:a>
                                                 <a:a name="OPTIONAL" value="false"/>
                                                 <a:a name="ORIGIN" value="Texas Instruments"/>
@@ -188,17 +188,17 @@
                                                 <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                                 <a:a name="UUID" value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
                                                 <a:da name="ENABLE" type = "XPath" expr = "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRpMsgEnable = 'true' and as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRecvNotifyCallbackEnable='true'"/>
-                                                <a:da name="DEFAULT" value="NULL"/>
+                                                <a:da name="DEFAULT" value="NULL_PTR"/>
                                             </v:var>
 
-                                            <v:var name="CddIpcrecvNotifyCallbackArguments" type="FUNCTION-NAME">                                                            <a:a name="DESC" 
+                                            <v:var name="CddIpcrecvNotifyCallbackArguments" type="FUNCTION-NAME">                                                            <a:a name="DESC"
                                                 value="EN: Pointer to  IPC notify message callback function's arguments"/>
-                                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                                <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                 type="IMPLEMENTATIONCONFIGCLASS">
-						    
+
                                                     <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                    
-                                                    
+
+
                                                 </a:a>
                                                 <a:a name="OPTIONAL" value="false"/>
                                                 <a:a name="ORIGIN" value="Texas Instruments"/>
@@ -206,9 +206,9 @@
                                                 <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                                 <a:a name="UUID" value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
                                                 <a:da name="ENABLE" type = "XPath" expr = "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRpMsgEnable = 'true' and as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcRecvNotifyCallbackEnable='true'"/>
-                                                <a:da name="DEFAULT" value="NULL"/>
+                                                <a:da name="DEFAULT" value="NULL_PTR"/>
                                             </v:var>
-                                            
+
                                                   </v:ctr>
                                              </v:lst>
                                         </v:ctr>
@@ -217,9 +217,9 @@
                                         <a:a name="UUID" value="480086b4-53a1-4e67-ae4c-2063087d1dd3"/>
                                 <v:var name="CddVersionInfoApi" type="BOOLEAN">                                             <a:a name="DESC" value="EN: Switches the Cdd_IpcGetVersionInfo function ON or OFF."/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value=     "Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
@@ -229,9 +229,9 @@
                                         </v:var>
                                 <v:var name="CddDeinitApi" type="BOOLEAN">                                             <a:a name="DESC" value="EN: Switches the Cdd_IpcDeinit function ON or OFF."/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value=     "Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
@@ -241,9 +241,9 @@
                                         </v:var>
                                  <v:var name="CddIpcWriteApi" type="BOOLEAN">                                             <a:a name="DESC" value="EN: Switches the Cdd_IpcWrite function ON or OFF."/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value=     "Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
@@ -253,9 +253,9 @@
                                         </v:var>
                                  <v:var name="CddIpcReadApi" type="BOOLEAN">                                             <a:a name="DESC" value="EN: Switches the Cdd_IpcRead function ON or OFF."/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value=     "Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
@@ -265,7 +265,7 @@
                                         </v:var>
                                 <v:var name="CddIpcRpMsgEnable" type="BOOLEAN">                                             <a:a name="DESC" value="EN: Switch to enable RpMsg API's to be enabled or not."/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
                                              </a:a>
                                              <a:a name="ORIGIN" value="Texas Instruments"/>
@@ -301,9 +301,9 @@
                                         </v:var>
                                 <v:var name="CddRegisterReadBackApi" type="BOOLEAN">                                             <a:a name="DESC" value="EN: Switches the  Cdd_IpcRegisterReadBack function ON or OFF."/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value=     "Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
@@ -314,9 +314,9 @@
                                 <v:var name="CddDevErrorDetect" type="BOOLEAN">
                                     <a:a name="DESC" value="EN: Switches the Development Error Detection and Notification ON or OFF."/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value="Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
@@ -347,9 +347,9 @@
                                              <a:da name="DEFAULT" value="false"/>
                                         </v:var>
                                  <v:var name="CddIpcCrcHookFunc" type="FUNCTION-NAME">
-                                                            <a:a name="DESC" 
+                                                            <a:a name="DESC"
                                                 value="EN: Hook function in application for Crc Calculation"/>
-                                                <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                                <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                 type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PostBuild">VariantPostBuild</icc:v>
                                                 </a:a>
@@ -359,14 +359,14 @@
                                                 <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                                 <a:a name="UUID" value="354621cb-2f1c-4667-9bc1-a72ce7e28a06"/>
                                                 <a:da name="ENABLE" type = "XPath" expr = "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcCrcEnable = 'true'" />
-                                                <a:da name="DEFAULT" value="NULL"/>
+                                                <a:da name="DEFAULT" value="NULL_PTR"/>
                                             </v:var>
 
                                         <v:var name="CddIrqType" type="ENUMERATION">                                    <a:a name="DESC" value="EN: Type of Isr function: void functionname(void) CAT1 : interrupt void func(void) CAT2 : ISR(func) "/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value="Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
@@ -385,7 +385,7 @@
                                           <a:a name="DESC" value="Timeout value for send/receive/wait API's. Unit is in clock ticks"/>
                                           <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                              <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                             
+
                                           </a:a>
                                           <a:a name="ORIGIN" value="Texas Instruments"/>
                                           <a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
@@ -396,11 +396,11 @@
                                           <a:da name="DEFAULT" value="2000000"/>
                               </v:var>
                                 <v:var name="CddIpcNumOfBuffers" type="INTEGER">
- 
+
                                           <a:a name="DESC" value="EN: This parameter indicates the number of buffers for sending RPMsg"/>
                                           <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                              <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                             
+
                                           </a:a>
                                           <a:a name="ORIGIN" value="Texas Instruments"/>
                                           <a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
@@ -419,7 +419,7 @@
                                 <v:var name="CddIpcMaxBufferSize" type="INTEGER">                                          <a:a name="DESC" value="EN: This parameter indicates the Max size of each buffer. Note that the actual size available is 16 bytes less than the above chosen value (16 bytes are used for the header in RPMsg)"/>
                                           <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                              <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                             
+
                                           </a:a>
                                           <a:a name="ORIGIN" value="Texas Instruments"/>
                                           <a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
@@ -438,7 +438,7 @@
                                           <a:a name="DESC" value="EN: Default Os Counter Id if node reference to OsCounter ref CddOsCounterRef is not set"/>
                                           <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                              <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                             
+
                                           </a:a>
                                           <a:a name="ORIGIN" value="Texas Instruments"/>
                                           <a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
@@ -450,18 +450,18 @@
                                   <a:da name="ENABLE" type="XPath" expr="not(node:refexists(../CddOsCounterRef))"/>
                                         </v:var>
                                         <v:ref name="CddOsCounterRef" type="REFERENCE">
-                                             <a:a name="DESC" 
+                                             <a:a name="DESC"
                        value="EN: This parameter contains a reference to the OsCounter, which is used by the GPT driver."/>
-                                             <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS"
                        type="IMPLEMENTATIONCONFIGCLASS">
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="OPTIONAL" value="true"/>
                                              <a:a name="ORIGIN" value="Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>
                                              <a:a name="UUID" value="26c9bdff-38cf-4f0b-8754-7472d0d41cb9"/>
-                                             <a:da name="REF" 
+                                             <a:da name="REF"
                         value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
                                              <a:da name="ENABLE" value="true"/>
                                              <a:da name="EDITABLE" value="true"/>
@@ -479,9 +479,9 @@
                                              <!--Design: SITARAMCU_MCAL-___ -->
                                              <a:a name="DESC" value="EN: Device variant AM263PX"/>
                                              <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
-                                                  
+
                                                   <icc:v class="PostBuild">VariantPostBuild</icc:v>
-                                                  
+
                                              </a:a>
                                              <a:a name="ORIGIN" value="Texas Instruments"/>
                                              <a:a name="SCOPE" value="LOCAL"/>

@@ -62,7 +62,7 @@ sint32 App_CrcHookFxn(uint8 *data, uint16 len, uint8 crcSize, void *crc)
     uint16 crc16bit = 0;
     sint32 status   = MCAL_SystemP_SUCCESS;
 
-    if ((data != NULL) && (crc != NULL))
+    if ((data != NULL_PTR) && (crc != NULL_PTR))
     {
         for (i = 0; i < len; i++)
         {

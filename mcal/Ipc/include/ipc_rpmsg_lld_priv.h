@@ -42,6 +42,23 @@ extern "C" {
 #include "Cdd_Ipc.h"
 #include "ipc_rpmsg_lld.h"
 
+/**
+ * \brief Parameters for VRING reset operation
+ *
+ * This structure groups the offset parameters needed for VRING reset
+ */
+typedef struct
+{
+    uint16    numBuf;        /**< Number of buffers in VRING */
+    uint16    msgSize;       /**< Size of each message */
+    uintptr_t vringBaseAddr; /**< Base address of VRING */
+    uint32    offset_desc;   /**< Offset to descriptors */
+    uint32    offset_avail;  /**< Offset to avail queue */
+    uint32    offset_used;   /**< Offset to used queue */
+    uint32    offset_buf;    /**< Offset to message buffers */
+    uint32    isTx;          /**< 1 if TX ring, 0 if RX ring */
+} RPMessage_VringResetParams;
+
 static inline uint32 RPMessage_align(uint32 value, uint32 align);
 /* utility function to find if core ID runs linux */
 uint32               RPMessage_isLinuxCore(RPMessageLLD_Handle handle, uint16 coreId);
@@ -63,10 +80,7 @@ sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle handle, uint16 remoteCor
 
 /* functions for VRING initialization and other utility functions */
 void RPMessage_vringReset(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 isTx);
-void RPMessage_vringResetInternal(RPMessage_Vring(*vringObj), uint16 numBuf, uint16 msgSize, uintptr_t vringBaseAddr,
-                                  uint32 offset_desc, uint32 offset_avail, uint32 offset_used, uint32 offset_buf,
-                                  uint32 isTx);
-
+void RPMessage_vringResetInternal(RPMessage_Vring *vringObj, const RPMessage_VringResetParams *resetParams);
 /* utility function to align a value, `align` MUST be power of 2 */
 static inline uint32 RPMessage_align(uint32 value, uint32 align)
 {

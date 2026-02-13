@@ -41,7 +41,7 @@ MCSPI_OpenParams gMcspiOpenParams[CONFIG_MCSPI_NUM_INSTANCES] = {
     {
         .transferMode        = MCSPI_TRANSFER_MODE_BLOCKING,
         .transferTimeout     = Pmic_SystemP_WAIT_FOREVER,
-        .transferCallbackFxn = NULL,
+        .transferCallbackFxn = NULL_PTR,
         .msMode              = MCSPI_MS_MODE_CONTROLLER,
         .mcspiDmaIndex       = -1,
     },
@@ -156,7 +156,7 @@ void Drivers_mcspiOpen(void)
 
     for (instCnt = 0U; instCnt < CONFIG_MCSPI_NUM_INSTANCES; instCnt++)
     {
-        gMcspiHandle[instCnt] = NULL; /* Init to NULL so that we can exit gracefully */
+        gMcspiHandle[instCnt] = NULL_PTR; /* Init to NULL so that we can exit gracefully */
     }
 
     /* Open all instances */
@@ -194,7 +194,7 @@ int32_t PMIC_tps653860xxConfigure(void)
         spiTransaction.count = (uint32_t)1;
         spiTransaction.txBuf = (void *)gMcspiTxBuffer;
         spiTransaction.rxBuf = (void *)gMcspiRxBuffer;
-        spiTransaction.args  = NULL;
+        spiTransaction.args  = NULL_PTR;
 
         status = PMIC_mcspiReadRegister(gMcspiHandle[CONFIG_MCSPI0], &spiTransaction, CMD_REV_ID, &data);
 

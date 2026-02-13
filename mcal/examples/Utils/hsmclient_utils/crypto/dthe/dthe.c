@@ -42,8 +42,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <string.h>
+#include "Platform_Types.h"
 #include <dthe.h>
-#include <hal_stdtypes.h>
+#include "Compiler.h"
 // #include <drivers/hw_include/cslr.h>
 
 /* ========================================================================== */
@@ -75,9 +76,9 @@ void DTHE_deinit(void)
 DTHE_Handle DTHE_open(uint32_t index)
 {
     DTHE_Return_t status = DTHE_RETURN_SUCCESS;
-    DTHE_Handle   handle = NULL;
-    DTHE_Config  *config = NULL;
-    DTHE_Attrs   *attrs  = NULL;
+    DTHE_Handle   handle = NULL_PTR;
+    DTHE_Config  *config = NULL_PTR;
+    DTHE_Attrs   *attrs  = NULL_PTR;
     /* Check instance */
     if (index >= gDtheConfigNum)
     {
@@ -86,7 +87,7 @@ DTHE_Handle DTHE_open(uint32_t index)
     else
     {
         config = &gDtheConfig[index];
-        // DebugP_assert(NULL != config->attrs);
+        // DebugP_assert(NULL_PTR != config->attrs);
         attrs = config->attrs;
         if (TRUE == attrs->isOpen)
         {
@@ -116,18 +117,18 @@ DTHE_Handle DTHE_open(uint32_t index)
 DTHE_Return_t DTHE_close(DTHE_Handle handle)
 {
     DTHE_Return_t status = DTHE_RETURN_FAILURE;
-    DTHE_Config  *config = NULL;
-    DTHE_Attrs   *attrs  = NULL;
-    if (handle != NULL)
+    DTHE_Config  *config = NULL_PTR;
+    DTHE_Attrs   *attrs  = NULL_PTR;
+    if (handle != NULL_PTR)
     {
         config = (DTHE_Config *)handle;
         if (config->attrs->isOpen != (uint32_t)FALSE)
         {
             attrs = config->attrs;
-            // DebugP_assert(NULL != attrs);
+            // DebugP_assert(NULL_PTR != attrs);
             attrs->isOpen = FALSE;
             /* To disable module */
-            handle = NULL;
+            handle = NULL_PTR;
             status = DTHE_RETURN_SUCCESS;
         }
     }

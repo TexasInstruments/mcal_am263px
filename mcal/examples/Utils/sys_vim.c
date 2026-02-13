@@ -45,7 +45,6 @@
 #include "sys_vim.h"
 #include "sys_common.h"
 #include "hw_ctrl_core.h"
-#include "hal_stdtypes.h"
 #include "esm.h"
 
 /* compile flag to enable or disable interrupt nesting */
@@ -111,7 +110,7 @@ void vimFiqDispatcher(void)
     else
     {
         /* Get the interrupt handler: */
-        if (interruptHandler != (VIM_InterruptHandler)NULL)
+        if (interruptHandler != (VIM_InterruptHandler)NULL_PTR)
         {
             /* Call the interrupt handler:
               NOTE: clear interrupt at the source in this ISR function */
@@ -175,7 +174,7 @@ void vimIrqDispatcher(void)
         enableDisableIrqFiq(1);
 #endif
         /* Get the interrupt handler: */
-        if (interruptHandler != (VIM_InterruptHandler)NULL)
+        if (interruptHandler != (VIM_InterruptHandler)NULL_PTR)
         {
             /* Call the interrupt handler:
               NOTE: clear interrupt at the source in this ISR function */
@@ -239,10 +238,10 @@ void vimInit(void)
         ptrVIMRegs->group[grpIdx].map  = 0U;
     }
 
-    /* Initialize the vector(NULL) and priority registers , keep prioriy as lowest level(15) */
+    /* Initialize the vector(NULL_PTR) and priority registers , keep prioriy as lowest level(15) */
     for (intIdx = 0U; intIdx < numInts; intIdx++)
     {
-        ptrVIMRegs->vecAddr[intIdx]  = (uint32)NULL;
+        ptrVIMRegs->vecAddr[intIdx]  = (uint32)NULL_PTR;
         ptrVIMRegs->priority[intIdx] = 15U;
     }
 }

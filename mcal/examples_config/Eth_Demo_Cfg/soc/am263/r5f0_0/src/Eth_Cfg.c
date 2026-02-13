@@ -113,9 +113,9 @@ VAR(struct Eth_ConfigType_s, ETH_CFG)
                             )
        },
 #endif
-       
+
        .enableCacheOps = (uint32)TRUE,
-	   
+
        .cacheFlushOps = (Eth_CacheFlushType)EcuM_cacheWbInv,
 
        .cacheInvalidateOps = (Eth_CacheInvalidateType)EcuM_cacheInvalidate};

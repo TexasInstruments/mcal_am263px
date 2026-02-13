@@ -300,7 +300,7 @@ Std_ReturnType EthTrcv_configAndStartAutoNegotiation(EthTrcv_CtrlObjType *pEthTr
     uint16                        dataBcr        = 0U;
     EthTrcv_ControllerConfigType *pEthTrcvCfg    = &(pEthTrcvObj->ethTrcvCfg);
 
-    if (NULL != pEthTrcvObj)
+    if (NULL_PTR != pEthTrcvObj)
     {
         /* Performing Auto-Negotiation */
         retVal = EthTrcv_regRead(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx, (uint8)ETHTRCV_BMC, &dataBcr);
@@ -376,7 +376,7 @@ Std_ReturnType EthTrcv_forceConfig(const EthTrcv_CtrlObjType *pEthTrcvObj)
     const EthTrcv_ControllerConfigType *pEthTrcvCfg  = &(pEthTrcvObj->ethTrcvCfg);
     Std_ReturnType                      retVal       = (Std_ReturnType)E_NOT_OK;
 
-    if (NULL != pEthTrcvObj)
+    if (NULL_PTR != pEthTrcvObj)
     {
         retVal = EthTrcv_resetController(EthTrcv_DrvObj.ctrlIdx, pEthTrcvObj->trcvIdx);
     }

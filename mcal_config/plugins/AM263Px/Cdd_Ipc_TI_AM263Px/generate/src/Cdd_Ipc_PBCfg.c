@@ -54,12 +54,12 @@
 /* Recv CallBack Function Prototypes */
 [!LOOP "as:modconf('Cdd_Ipc')[1]/CddIpcDriver/*"!][!//
 [!LOOP "CddIpcEndPtConfig/*"!][!//
-[!IF "node:empty(CddIpcRecvCallBack) or text:match(node:value(CddIpcRecvCallBack),'NULL')"!]
+[!IF "node:empty(CddIpcRecvCallBack) or text:match(node:value(CddIpcRecvCallBack),'NULL_PTR')"!]
     [!ERROR!][!//
-        "RpMsg Recv callback function cannot be NULL"[!//
+        "RpMsg Recv callback function cannot be NULL_PTR"[!//
     [!ENDERROR!][!//
 [!ELSE!][!//
-extern void [!"CddIpcRecvCallBack"!](void *handle, Cdd_Ipc_RPMessage_EpObject *epObj,[!IF "not(node:empty(CddIpcrecvCallbackArguments)) and not(text:match(node:value(CddIpcrecvCallbackArguments),'NULL'))"!]void* [!"CddIpcrecvCallbackArguments"!][!ELSE!]void* args[!ENDIF!], void *data, uint16 dataLen,sint32 crcStatus ,uint16 remoteCoreId, uint16 remoteEndPt);
+extern void [!"CddIpcRecvCallBack"!](void *handle, Cdd_Ipc_RPMessage_EpObject *epObj,[!IF "not(node:empty(CddIpcrecvCallbackArguments)) and not(text:match(node:value(CddIpcrecvCallbackArguments),'NULL_PTR'))"!]void* [!"CddIpcrecvCallbackArguments"!][!ELSE!]void* args[!ENDIF!], void *data, uint16 dataLen,sint32 crcStatus ,uint16 remoteCoreId, uint16 remoteEndPt);
 [!ENDIF!]
 [!ENDLOOP!][!//
 [!ENDLOOP!][!//
@@ -69,12 +69,12 @@ extern void [!"CddIpcRecvCallBack"!](void *handle, Cdd_Ipc_RPMessage_EpObject *e
 /* Recv Notify CallBack Function prototypes */
 [!LOOP "as:modconf('Cdd_Ipc')[1]/CddIpcDriver/*"!][!//
 [!LOOP "CddIpcEndPtConfig/*"!][!//
-[!IF "node:empty(CddIpcrecvNotifyCallback) or text:match(node:value(CddIpcrecvNotifyCallback),'NULL')"!][!//
+[!IF "node:empty(CddIpcrecvNotifyCallback) or text:match(node:value(CddIpcrecvNotifyCallback),'NULL_PTR')"!][!//
     [!ERROR!][!//
-        "RpMsg Notify Recv callback function cannot be NULL"[!//
+        "RpMsg Notify Recv callback function cannot be NULL_PTR"[!//
     [!ENDERROR!][!//
 [!ELSE!][!//
-extern void [!"CddIpcrecvNotifyCallback"!](void *handle, Cdd_Ipc_RPMessage_EpObject *obj,[!IF "not(node:empty(CddIpcrecvNotifyCallbackArguments)) and not(text:match(node:value(CddIpcrecvNotifyCallbackArguments),'NULL'))"!]void* [!"CddIpcrecvNotifyCallbackArguments"!][!ELSE!]void* args[!ENDIF!]);
+extern void [!"CddIpcrecvNotifyCallback"!](void *handle, Cdd_Ipc_RPMessage_EpObject *obj,[!IF "not(node:empty(CddIpcrecvNotifyCallbackArguments)) and not(text:match(node:value(CddIpcrecvNotifyCallbackArguments),'NULL_PTR'))"!]void* [!"CddIpcrecvNotifyCallbackArguments"!][!ELSE!]void* args[!ENDIF!]);
 [!ENDIF!]
 [!ENDLOOP!][!//
 [!ENDLOOP!][!//
@@ -135,10 +135,10 @@ CONST(Cdd_IpcConfigType, CDD_PBCFG) Cdd_Ipc_Config =
 [!WS "8"!][[!"num:i(@index)"!]] =
 [!WS "8"!]{
 [!WS "8"!].Cdd_Ipc_localEndPt = [!"CddIpcLocalEndPt"!],
-[!WS "8"!].recvCallback = [!IF "not(node:empty(CddIpcRecvCallBack))"!](Cdd_Ipc_RPMessage_lld_recvCallback)[!"CddIpcRecvCallBack"!][!ELSE!]NULL[!ENDIF!],
-[!WS "8"!].recvCallbackArgs = [!IF "not(node:empty(CddIpcrecvCallbackArguments))"!][!"CddIpcrecvCallbackArguments"!][!ELSE!]NULL[!ENDIF!],
-[!WS "8"!].recvNotifyCallback = [!IF "not(node:empty(CddIpcrecvNotifyCallback))"!](Cdd_Ipc_RPMessage_lld_recvNotifyCallback)[!"CddIpcrecvNotifyCallback"!][!ELSE!]NULL[!ENDIF!],
-[!WS "8"!].recvNotifyCallbackArgs = [!IF "not(node:empty(CddIpcrecvNotifyCallbackArguments))"!][!"CddIpcrecvNotifyCallbackArguments"!][!ELSE!]NULL[!ENDIF!],
+[!WS "8"!].recvCallback = [!IF "not(node:empty(CddIpcRecvCallBack))"!](Cdd_Ipc_RPMessage_lld_recvCallback)[!"CddIpcRecvCallBack"!][!ELSE!]NULL_PTR[!ENDIF!],
+[!WS "8"!].recvCallbackArgs = [!IF "not(node:empty(CddIpcrecvCallbackArguments))"!][!"CddIpcrecvCallbackArguments"!][!ELSE!]NULL_PTR[!ENDIF!],
+[!WS "8"!].recvNotifyCallback = [!IF "not(node:empty(CddIpcrecvNotifyCallback))"!](Cdd_Ipc_RPMessage_lld_recvNotifyCallback)[!"CddIpcrecvNotifyCallback"!][!ELSE!]NULL_PTR[!ENDIF!],
+[!WS "8"!].recvNotifyCallbackArgs = [!IF "not(node:empty(CddIpcrecvNotifyCallbackArguments))"!][!"CddIpcrecvNotifyCallbackArguments"!][!ELSE!]NULL_PTR[!ENDIF!],
 [!WS "8"!]},
 [!ENDLOOP!][!//
 [!WS "4"!]},
@@ -152,11 +152,11 @@ CONST(Cdd_IpcConfigType, CDD_PBCFG) Cdd_Ipc_Config =
 [!ENDLOOP!][!CR!][!//
 [!ENDLOOP!][!//
 [!IF "as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcCrcEnable = 'false'"!]
-[!WS "4"!].Cdd_Ipc_CrcHookFunc = NULL
+[!WS "4"!].Cdd_Ipc_CrcHookFunc = NULL_PTR
 [!ELSE!]
-[!IF "node:empty(as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcCrcHookFunc) or text:match(node:value(as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcCrcHookFunc),'NULL')"!][!//
+[!IF "node:empty(as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcCrcHookFunc) or text:match(node:value(as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcCrcHookFunc),'NULL_PTR')"!][!//
     [!ERROR!][!//
-        "CRC callback function cannot be NULL when CRC is enabled"[!//
+        "CRC callback function cannot be NULL_PTR when CRC is enabled"[!//
     [!ENDERROR!][!//
 [!ELSE!][!//
 [!WS "4"!].Cdd_Ipc_CrcHookFunc = [!"as:modconf('Cdd_Ipc')[1]/CddIpcGeneral/CddIpcCrcHookFunc"!]

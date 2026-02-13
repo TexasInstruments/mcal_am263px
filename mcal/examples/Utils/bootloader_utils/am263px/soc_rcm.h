@@ -39,7 +39,6 @@
 #include <cslr_controlss_ctrl.h>
 #include <cslr_top_rcm.h>
 #include <cslr_mss_rcm.h>
-#include <hal_stdtypes.h>
 #include <hsmclient_utils/dpl/SystemP.h>
 #include <mcal_hw_soc_baseaddress.h>
 #include "app_utils.h"

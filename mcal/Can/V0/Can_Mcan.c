@@ -605,7 +605,7 @@ Std_ReturnType Can_mcanWriteTxMailbox(const Can_MailboxType *mailboxCfg, Can_Con
     PduLengthType     length = 0;
     Std_ReturnType    status = E_OK;
 #if (CAN_TRIGGER_TRANSMIT_ENABLE == STD_ON)
-    PduInfoType *PduInfoPtr = NULL;
+    PduInfoType *PduInfoPtr = NULL_PTR;
 #endif
 
     baseAddr = mailboxCfg->Controller->CntrAddr;
@@ -626,7 +626,7 @@ Std_ReturnType Can_mcanWriteTxMailbox(const Can_MailboxType *mailboxCfg, Can_Con
     elem.mm  = 0U;
     Can_mcanSetId(pduInfo, mailboxCfg, &elem);
 #if (CAN_TRIGGER_TRANSMIT_ENABLE == STD_ON)
-    if (mailboxCfg->CanTriggerTransmitEnable == TRUE && pduInfo->sdu == NULL)
+    if (mailboxCfg->CanTriggerTransmitEnable == TRUE && pduInfo->sdu == NULL_PTR)
     {
         status = CanIf_TriggerTransmit(pduInfo->id, PduInfoPtr);
         if (status == E_OK)
@@ -1850,7 +1850,7 @@ void Can_mcanProcessTx(Can_ControllerObjType *canController, const Can_MailboxOb
 #if (STD_ON == CAN_ECC_ENABLE)
 void Can_mcanProcessECCISR(const Can_ControllerObjType *controllerObj)
 {
-    Can_ErrNotifyType errorNotification = NULL;
+    Can_ErrNotifyType errorNotification = NULL_PTR;
     MCAN_ECCErrStatus mcanECCErr;
     uint32            baseAddr;
     uint32            errType = (uint32)CAN_ECC_ERROR_TYPE_SEC;

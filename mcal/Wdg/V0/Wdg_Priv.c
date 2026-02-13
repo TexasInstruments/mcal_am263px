@@ -21,7 +21,6 @@
 /* ========================================================================== */
 #include "soc.h"
 #include "hw_ctrl_core.h"
-#include "hal_stdtypes.h"
 #include "Wdg_Priv.h"
 #define WDG_START_SEC_CODE
 #include "Wdg_MemMap.h"
@@ -52,6 +51,8 @@
 #define RCM_KICK0_LOCK_VAL   (0x00000000U)
 #define RCM_KICK1_LOCK_VAL   (0x00000000U)
 
+#define M_SIXTEEN  (16U)
+#define M_EIGHTEEN (18U)
 /* ========================================================================== */
 /*                         Structure Declarations                             */
 /* ========================================================================== */
@@ -275,7 +276,7 @@ Wdg_platformInit(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST) ConfigPtr)
             Mcal_Libs_Utils_unlockTopRcmMMR();
             regWriteStatus = regWriteReadback(&toprcmREG->WARM_RESET_CONFIG, M_EIGHTEEN, M_SIXTEEN, 0x7U);
             Mcal_Libs_Utils_lockTopRcmMMR();
-            if (regWriteStatus != MCAL_REGWR_E_OK)
+            if (regWriteStatus != (uint32)E_OK)
             {
 #ifdef WDG_E_HARDWARE_ERROR
                 (void)Dem_SetEventStatus((Dem_EventIdType)WDG_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);

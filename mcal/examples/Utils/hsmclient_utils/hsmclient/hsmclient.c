@@ -461,7 +461,7 @@ int32_t HsmClient_register(HsmClient_t *HsmClient, uint8_t clientId)
 {
     uint8_t status;
 
-    if (HsmClient == NULL)
+    if (HsmClient == NULL_PTR)
     {
         AppUtils_printf(" \r\n [HSM_CLIENT] HsmClient_t type error. \r\n");
         return SystemP_FAILURE;
@@ -1966,7 +1966,7 @@ int32_t HsmClient_firmwareUpdate_CodeVerify(HsmClient_t *HsmClient, FirmwareUpda
         HsmClient->ReqMsg.serType = HSM_MSG_FW_UPDATE_CODE_VERIFY;
 
         /* Address and size check */
-        if ((pFirmwareUpdateObject->pStartAddress == NULL) && (pFirmwareUpdateObject->dataLength == 0))
+        if ((pFirmwareUpdateObject->pStartAddress == NULL_PTR) && (pFirmwareUpdateObject->dataLength == 0))
         {
             status = SystemP_SUCCESS;
         }
@@ -2115,10 +2115,10 @@ int32_t HsmClient_UpdateKeyRevsion(HsmClient_t *HsmClient, uint32_t timeout)
     HsmClient->ReqMsg.serType = HSM_MSG_UPDATE_KEY_REV;
 
     /* Add arg crc */
-    HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)NULL, 0U);
+    HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)NULL_PTR, 0U);
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = NULL;
+    HsmClient->ReqMsg.args = NULL_PTR;
 
     status = HsmClient_SendAndRecv(HsmClient, timeout);
 

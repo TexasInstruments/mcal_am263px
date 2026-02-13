@@ -250,7 +250,7 @@ int main(int argc, char *argv[])
         switch (c)
         {
             case 't':
-                gHostApp.timeout = strtol(optarg, NULL, 0);
+                gHostApp.timeout = strtol(optarg, NULL_PTR, 0);
                 break;
             case 'i':
                 ifName = optarg;
@@ -395,7 +395,7 @@ bool HostApp_test_0101(uint8_t testIdx)
         /* Wait for DUT to start the test when it's ready */
         HostApp_waitForCmd(CTRL_FRAME_CMD_START);
 
-        gettimeofday(&t0, NULL);
+        gettimeofday(&t0, NULL_PTR);
 
         /* Transmit one frame per iteration */
         for (i = 0; i < iterations; i++)
@@ -425,7 +425,7 @@ bool HostApp_test_0101(uint8_t testIdx)
         HostApp_sendCmd(CTRL_FRAME_CMD_STOP);
 
         /* Get the "end" timestamp after DUT is done sending frames */
-        gettimeofday(&t1, NULL);
+        gettimeofday(&t1, NULL_PTR);
 
         /* Indicate to the DUT that the test is complete, try couple times to prevent lost of STOP
          * packet */
