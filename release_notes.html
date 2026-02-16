@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 11.02.00.05 done on 13-Feb-2026.
+<p>This is the release notes for MCAL AM26xx 11.02.00.06 done on 16-Feb-2026.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.txt">license.txt</a> present in installation base path</p>
@@ -40,14 +40,22 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
-      <td>Bug Fixes</td>
+      <td>License changed to TI Text File License</td>
       <td>All</td>
-      <td>Please refer Fixed Defects section for more details.</td>
+      <td>MCAL license is changed from TI commercial to TI text file open source license.<br>
+          All the license in the source code is changed to reflect this.<br>
+          Note: Manifest update and publishing to Github is still pending.
+      </td>
     </tr>
     <tr>
       <td>Added FSS Utility</td>
       <td>FSS</td>
       <td>AM263Px</td>
+    </tr>
+    <tr>
+      <td>Bug Fixes</td>
+      <td>All</td>
+      <td>Please refer Fixed Defects section for more details.</td>
     </tr>
   </tbody>
 </table>
@@ -63,13 +71,13 @@ This document details about supported driver, installation, dependencies, build 
   <tbody>
     <tr>
       <td>Common</td>
-      <td>hal_stdtypes.h file and all its included are removed</td>
-      <td>Application shall remove any usage of this header file</td>
+      <td>hal_stdtypes.h file and all macros defined in it are removed</td>
+      <td>Application shall remove any usage of this header file and related macros. See description of defect MCAL-35744</td>
     </tr>
     <tr>
       <td>CDD PWM</td>
       <td>Channel parameter type changed from uint32 to Cdd_Pwm_ChannelType in multiple APIs</td>
-      <td>Application shall use Cdd_Pwm_ChannelType for channel parameters instead of uint32</td>
+      <td>Application shall use Cdd_Pwm_ChannelType for channel parameters instead of uint32. This is done as part of the MISRAC fixes</td>
     </tr>
   </tbody>
 </table>
@@ -106,29 +114,29 @@ This document details about supported driver, installation, dependencies, build 
 <pre><code class="{eval-rst} language-{eval-rst}">+------------+----------+
 | Module     | Version  |
 +------------+----------+
-| ADC        | 10.02.01 |
-| CAN        | 10.02.01 |
-| CDD_CMPSS  | 01.00.02 |
-| CDD_FLC    | 01.00.02 |
-| CDD_DMA    | 10.02.01 |
-| CDD_FSIRX  | 10.02.01 |
-| CDD_FSITX  | 10.02.01 |
+| ADC        | 10.02.02 |
+| CAN        | 10.02.02 |
+| CDD_CMPSS  | 01.00.03 |
+| CDD_FLC    | 01.00.03 |
+| CDD_DMA    | 10.02.02 |
+| CDD_FSIRX  | 10.02.02 |
+| CDD_FSITX  | 10.02.02 |
 | CDD_I2C    | 11.00.02 |
-| CDD_IPC    | 10.02.01 |
-| CDD_PWM    | 10.02.00 |
-| CDD_UART   | 10.02.01 |
-| DIO        | 10.02.01 |
-| ETH        | 10.03.00 |
-| ETHTRCV    | 10.03.00 |
-| FLS        | 10.03.00 |
-| GPT        | 10.02.01 |
-| ICU        | 10.02.01 |
-| LIN        | 10.03.00 |
-| MCU        | 10.02.01 |
-| PORT       | 10.02.02 |
-| PWM        | 10.02.00 |
-| SPI        | 10.02.01 |
-| WDG        | 10.02.01 |
+| CDD_IPC    | 10.02.02 |
+| CDD_PWM    | 10.02.01 |
+| CDD_UART   | 10.02.02 |
+| DIO        | 10.02.02 |
+| ETH        | 10.03.01 |
+| ETHTRCV    | 10.04.00 |
+| FLS        | 10.03.01 |
+| GPT        | 10.02.02 |
+| ICU        | 10.02.02 |
+| LIN        | 10.03.01 |
+| MCU        | 10.02.02 |
+| PORT       | 10.02.03 |
+| PWM        | 10.02.01 |
+| SPI        | 10.02.02 |
+| WDG        | 10.02.02 |
 +------------+----------+
 </code></pre>
 <h2 id="driverssupported">Drivers Supported</h2>
@@ -191,6 +199,22 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
+      <td>MCAL-35744</td>
+      <td>NULL_PTR implemented in hal_stdtypes.h</td>
+      <td>Common</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>NULL_PTR is removed from hal_stdtypes.h as it is available in Compiler.h file</td>
+    </tr>
+    <tr>
+      <td>MCAL-35846</td>
+      <td>Update all NULL usage to NULL_PTR</td>
+      <td>Common</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>All usage of NULL is replaced with NULL_PTR which is defined in Compiler.h</td>
+    </tr>
+    <tr>
       <td>MCAL-35727</td>
       <td>BSWMD file fixes</td>
       <td>CDD I2C</td>
@@ -205,7 +229,7 @@ This document details about supported driver, installation, dependencies, build 
       <td>CDD IPC</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Exclusive area is now added in Bswmd.arxml file.</td>
+      <td>Exclusive area is now added in Bswmd.arxml file</td>
     </tr>
     <tr>
       <td>MCAL-35748</td>
@@ -213,15 +237,7 @@ This document details about supported driver, installation, dependencies, build 
       <td>CDD PWM</td>
       <td>Minor</td>
       <td>AM263Px</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>MCAL-35744</td>
-      <td>NULL_PTR implemented in hal_stdtypes.h</td>
-      <td>Common</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>NULL_PTR is removed from hal_stdtypes.h as it is available in Compiler.h file.</td>
+      <td>See description</td>
     </tr>
     <tr>
       <td>MCAL-35749</td>
@@ -229,39 +245,7 @@ This document details about supported driver, installation, dependencies, build 
       <td>DIO, SPI</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>AR-RELEASE-VERSION is fixed to 4.3.1 same as other modules.</td>
-    </tr>
-    <tr>
-      <td>MCAL-35846</td>
-      <td>Update all NULL usage to NULL_PTR</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>All usage of NULL is replaced with NULL_PTR which is defined in Compiler.h</td>
-    </tr>
-    <tr>
-      <td>MCAL-35865</td>
-      <td>Fls SFDP parameter structure should be in VAR section</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>The Fls_Config_SFDP_1 structure in CFG files shall now be placed in SEC_VAR_INIT_UNSPECIFIED section</td>
-    </tr>
-    <tr>
-      <td>MCAL-35747</td>
-      <td>Extra closing tag FLS_bswmd.arxml</td>
-      <td>FLS</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>MCAL-35751</td>
-      <td>CacheP.h is present as part of examples but not needed</td>
-      <td>FLS</td>
-      <td>Minor</td>
-      <td>AM263Px, AM261x</td>
-      <td></td>
+      <td>AR-RELEASE-VERSION is fixed to 4.3.1</td>
     </tr>
     <tr>
       <td>MCAL-35750</td>
@@ -269,7 +253,34 @@ This document details about supported driver, installation, dependencies, build 
       <td>ETHTRCV</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td></td>
+      <td>Datatypes like EthTrcv_BaudRateType should be part of AUTOSAR stubs.<br>
+          Instead these were added in EthTrcv interface header files resulting in conflicts with standard AUTOSAR definitions.<br>
+          These datatypes are not moved to the stubs.
+      </td>
+    </tr>
+    <tr>
+      <td>MCAL-35865</td>
+      <td>Fls SFDP parameter structure should be in VAR section</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>The Fls_Config_SFDP_1 structure in CFG files is writable and is now placed in SEC_VAR_INIT_UNSPECIFIED section</td>
+    </tr>
+    <tr>
+      <td>MCAL-35747</td>
+      <td>Extra closing tag FLS_bswmd.arxml</td>
+      <td>FLS</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>See description</td>
+    </tr>
+    <tr>
+      <td>MCAL-35751</td>
+      <td>CacheP.h is present as part of examples but not needed</td>
+      <td>FLS</td>
+      <td>Minor</td>
+      <td>AM263Px, AM261x</td>
+      <td>See description</td>
     </tr>
   </tbody>
 </table>

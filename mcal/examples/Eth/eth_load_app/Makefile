@@ -1,25 +1,10 @@
-# Filename: Makefile
-#
-# This file is the makefile for building IPC example app.
-#
-#   Copyright (c) 2022 Texas Instruments Incorporated
-#
-#   All rights reserved. Property of Texas Instruments Incorporated.
-#   Restricted rights to use, duplicate or disclose this code are
-#   granted through contract.
-#
-#   The program may not be used without the written permission
-#   of Texas Instruments Incorporated or against the terms and conditions
-#   stipulated in the agreement under which this program has been
-#   supplied.
-#******************************************************************************
 APP_NAME = eth_load_app
 
 SRCDIR = soc/$(SOC)/$(CORE)
 
 ifeq ($(BUILD_VARIANT), linktime)
 SRCDIR += $(autosarConfigSrc_PATH)/Eth_Demo_Lcfg/soc/$(SOC)/$(CORE)/src
-else 
+else
 ifeq ($(BUILD_VARIANT), postbuild)
 SRCDIR += $(autosarConfigSrc_PATH)/Eth_Demo_PBcfg/soc/$(SOC)/$(CORE)/src
 else
@@ -35,15 +20,15 @@ INCDIR += soc/$(SOC)/$(CORE)
 
 ifeq ($(BUILD_VARIANT), linktime)
 INCDIR += $(autosarConfigSrc_PATH)/Eth_Demo_Lcfg/soc/$(SOC)/$(CORE)/include
-else 
+else
 ifeq ($(BUILD_VARIANT), postbuild)
 INCDIR += $(autosarConfigSrc_PATH)/Eth_Demo_PBcfg/soc/$(SOC)/$(CORE)/include
 else
 INCDIR += $(autosarConfigSrc_PATH)/Eth_Demo_Cfg/soc/$(SOC)/$(CORE)/include
 endif
 endif
- 
-INCDIR += $(mcal_PATH)/include/hw/$(PLATFORM) 
+
+INCDIR += $(mcal_PATH)/include/hw/$(PLATFORM)
 INCDIR += $(mcal_PATH)/include/hw
 
 INCDIR += $(mcal_PATH)/examples/Eth/utils
@@ -109,7 +94,7 @@ endif
 # Common source files and CFLAGS across all platforms and cores
 CFLAGS_LOCAL_COMMON = $(MCAL_CFLAGS) -D$(SOCFAMILY) -DSOC_$(SOCFAMILY)
 
-# Linker file 
+# Linker file
 LNKCMD_FILE = soc/$(SOC)/$(CORE)/eth_load_app_linker.cmd
 
 # Add MCU+SDK external dependencies
@@ -122,7 +107,7 @@ EXT_INCS += -I$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/config/am263x/r5f
 ifneq ($(wildcard $(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.$(PROFILE).lib),)
 EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.$(PROFILE).lib
 else
-EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.freertos.$(PROFILE).lib 
+EXT_LIBS = -l$(MCUPLUSSDK_ROOTDIR)/source/drivers/lib/drivers.am263x.r5f.ti-arm-clang.freertos.$(PROFILE).lib
 endif
 EXT_LIBS += -l$(MCUPLUSSDK_ROOTDIR)/source/kernel/freertos/lib/freertos.am263x.r5f.ti-arm-clang.$(PROFILE).lib
 endif
@@ -174,7 +159,7 @@ SRCS_COMMON += ti_board_config.c \
                ti_power_clock_config.c
 
 SRCS_COMMON += os_wrapper.c
-                   
+
 # Core/SoC/platform specific source files and CFLAGS
 # Example:
 # SRCS_<core/SoC/platform-name> =

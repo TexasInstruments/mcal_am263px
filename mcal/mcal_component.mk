@@ -1,10 +1,3 @@
-#*******************************************************************************
-#                                                                              *
-# Copyright (c) 2023 Texas Instruments Incorporated - http://www.ti.com/       *
-#                        ALL RIGHTS RESERVED                                   *
-#                                                                              *
-#*******************************************************************************
-
 # File: mcal_component.mk
 #       This file is component include make file of MCAL.
 # List of variables set in this file and their purpose:

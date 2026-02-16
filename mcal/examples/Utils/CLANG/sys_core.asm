@@ -1,38 +1,56 @@
-;-------------------------------------------------------------------------------
-; sys_core.asm
 ;
-; Copyright (C) 2023 Texas Instruments Incorporated - TI web adress www.ti.com
+; TEXAS INSTRUMENTS TEXT FILE LICENSE
 ;
+; Copyright (c) 2023 Texas Instruments Incorporated
 ;
-;  Redistribution and use in source and binary forms, with or without
-;  modification, are permitted provided that the following conditions
-;  are met:
+; All rights reserved not granted herein.
 ;
-;    Redistributions of source code must retain the above copyright
-;    notice, this list of conditions and the following disclaimer.
+; Limited License.
 ;
-;    Redistributions in binary form must reproduce the above copyright
-;    notice, this list of conditions and the following disclaimer in the
-;    documentation and/or other materials provided with the
-;    distribution.
+; Texas Instruments Incorporated grants a world-wide, royalty-free, non-exclusive
+; license under copyrights and patents it now or hereafter owns or controls to
+; make, have made, use, import, offer to sell and sell ("Utilize") this software
+; subject to the terms herein. With respect to the foregoing patent license,
+; such license is granted solely to the extent that any such patent is necessary
+; to Utilize the software alone. The patent license shall not apply to any
+; combinations which include this software, other than combinations with devices
+; manufactured by or for TI ("TI Devices"). No hardware patent is licensed hereunder.
 ;
-;    Neither the name of Texas Instruments Incorporated nor the names of
-;    its contributors may be used to endorse or promote products derived
-;    from this software without specific prior written permission.
+; Redistributions must preserve existing copyright notices and reproduce this license
+; (including the above copyright notice and the disclaimer and (if applicable) source
+; code license limitations below) in the documentation and/or other materials provided
+; with the distribution.
 ;
-;  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-;  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-;  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-;  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-;  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-;  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-;  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-;  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-;  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-;  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-;  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+; Redistribution and use in binary form, without modification, are permitted provided
+; that the following conditions are met:
+; No reverse engineering, decompilation, or disassembly of this software is
+; permitted with respect to any software provided in binary form.
+; Any redistribution and use are licensed by TI for use only with TI Devices.
+; Nothing shall obligate TI to provide you with source code for the software
+; licensed and provided to you in object code.
 ;
+; If software source code is provided to you, modification and redistribution of the
+; source code are permitted provided that the following conditions are met:
+; Any redistribution and use of the source code, including any resulting derivative
+; works, are licensed by TI for use only with TI Devices.
+; Any redistribution and use of any object code compiled from the source code
+; and any resulting derivative works, are licensed by TI for use only with TI Devices.
 ;
+; Neither the name of Texas Instruments Incorporated nor the names of its suppliers
+; may be used to endorse or promote products derived from this software without
+; specific prior written permission.
+;
+; DISCLAIMER.
+;
+; THIS SOFTWARE IS PROVIDED BY TI AND TI'S LICENSORS "AS IS" AND ANY EXPRESS OR IMPLIED
+; WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+; AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL TI AND TI'S
+; LICENSORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+; CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+; GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+; CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+; (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+; EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ;
 
     .text
@@ -58,14 +76,14 @@
     .thumb
     .thumbfunc _getCPSRValue_
     .def     _getCPSRValue_
-    
+
 
 _getCPSRValue_
 
         mrs   r0, CPSR
         bx    lr
 
-    
+
 
 ;-------------------------------------------------------------------------------
 ; Take CPU to IDLE state
@@ -76,7 +94,7 @@ _getCPSRValue_
     .thumb
     .thumbfunc _gotoCPUIdle_
     .def     _gotoCPUIdle_
-    
+
 
 _gotoCPUIdle_
 
@@ -87,7 +105,7 @@ _gotoCPUIdle_
         nop
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -99,7 +117,7 @@ _gotoCPUIdle_
     .thumb
     .thumbfunc _coreEnableVfp_
     .def     _coreEnableVfp_
-    
+
 
 _coreEnableVfp_
 
@@ -110,7 +128,7 @@ _coreEnableVfp_
         fmxr  fpexc,   r0
         bx    lr
 
-    
+
 
 ;-------------------------------------------------------------------------------
 ; Enable Event Bus Export
@@ -121,7 +139,7 @@ _coreEnableVfp_
     .thumb
     .thumbfunc _coreEnableEventBusExport_
     .def     _coreEnableEventBusExport_
-    
+
 
 _coreEnableEventBusExport_
 
@@ -132,7 +150,7 @@ _coreEnableEventBusExport_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -144,7 +162,7 @@ _coreEnableEventBusExport_
     .thumb
     .thumbfunc _coreDisableEventBusExport_
     .def     _coreDisableEventBusExport_
-    
+
 
 _coreDisableEventBusExport_
 
@@ -155,7 +173,7 @@ _coreDisableEventBusExport_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -167,7 +185,7 @@ _coreDisableEventBusExport_
     .thumb
     .thumbfunc _coreEnableRamEcc_
     .def     _coreEnableRamEcc_
-    
+
 
 _coreEnableRamEcc_
 
@@ -178,7 +196,7 @@ _coreEnableRamEcc_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -190,7 +208,7 @@ _coreEnableRamEcc_
     .thumb
     .thumbfunc _coreDisableRamEcc_
     .def     _coreDisableRamEcc_
-    
+
 
 _coreDisableRamEcc_
 
@@ -201,7 +219,7 @@ _coreDisableRamEcc_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -213,7 +231,7 @@ _coreDisableRamEcc_
     .thumb
     .thumbfunc _coreEnableTCMAEcc_
     .def     _coreEnableTCMAEcc_
-    
+
 
 _coreEnableTCMAEcc_
 
@@ -225,7 +243,7 @@ _coreEnableTCMAEcc_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -237,7 +255,7 @@ _coreEnableTCMAEcc_
     .thumb
     .thumbfunc _coreDisableTCMAEcc_
     .def     _coreDisableTCMAEcc_
-    
+
 
 _coreDisableTCMAEcc_
 
@@ -248,7 +266,7 @@ _coreDisableTCMAEcc_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -260,7 +278,7 @@ _coreDisableTCMAEcc_
     .thumb
     .thumbfunc _coreEnableIrqVicOffset_
     .def     _coreEnableIrqVicOffset_
-    
+
 
 _coreEnableIrqVicOffset_
 
@@ -271,7 +289,7 @@ _coreEnableIrqVicOffset_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -283,14 +301,14 @@ _coreEnableIrqVicOffset_
     .thumb
     .thumbfunc _coreGetDataFault_
     .def     _coreGetDataFault_
-    
+
 
 _coreGetDataFault_
 
         mrc   p15, #0, r0, c5, c0,  #0
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -302,7 +320,7 @@ _coreGetDataFault_
     .thumb
     .thumbfunc _coreClearDataFault_
     .def     _coreClearDataFault_
-    
+
 
 _coreClearDataFault_
 
@@ -312,7 +330,7 @@ _coreClearDataFault_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -324,14 +342,14 @@ _coreClearDataFault_
     .thumb
     .thumbfunc _coreGetInstructionFault_
     .def     _coreGetInstructionFault_
-    
+
 
 _coreGetInstructionFault_
 
         mrc   p15, #0, r0, c5, c0, #1
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -343,7 +361,7 @@ _coreGetInstructionFault_
     .thumb
     .thumbfunc _coreClearInstructionFault_
     .def     _coreClearInstructionFault_
-    
+
 
 _coreClearInstructionFault_
 
@@ -353,7 +371,7 @@ _coreClearInstructionFault_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -365,14 +383,14 @@ _coreClearInstructionFault_
     .thumb
     .thumbfunc _coreGetDataFaultAddress_
     .def     _coreGetDataFaultAddress_
-    
+
 
 _coreGetDataFaultAddress_
 
         mrc   p15, #0, r0, c6, c0,  #0
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -384,7 +402,7 @@ _coreGetDataFaultAddress_
     .thumb
     .thumbfunc _coreClearDataFaultAddress_
     .def     _coreClearDataFaultAddress_
-    
+
 
 _coreClearDataFaultAddress_
 
@@ -394,7 +412,7 @@ _coreClearDataFaultAddress_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -406,14 +424,14 @@ _coreClearDataFaultAddress_
     .thumb
     .thumbfunc _coreGetInstructionFaultAddress_
     .def     _coreGetInstructionFaultAddress_
-    
+
 
 _coreGetInstructionFaultAddress_
 
         mrc   p15, #0, r0, c6, c0, #2
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -425,7 +443,7 @@ _coreGetInstructionFaultAddress_
     .thumb
     .thumbfunc _coreClearInstructionFaultAddress_
     .def     _coreClearInstructionFaultAddress_
-    
+
 
 _coreClearInstructionFaultAddress_
 
@@ -435,7 +453,7 @@ _coreClearInstructionFaultAddress_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -447,14 +465,14 @@ _coreClearInstructionFaultAddress_
     .thumb
     .thumbfunc _coreGetAuxiliaryDataFault_
     .def     _coreGetAuxiliaryDataFault_
-    
+
 
 _coreGetAuxiliaryDataFault_
 
         mrc   p15, #0, r0, c5, c1, #0
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -466,7 +484,7 @@ _coreGetAuxiliaryDataFault_
     .thumb
     .thumbfunc _coreClearAuxiliaryDataFault_
     .def     _coreClearAuxiliaryDataFault_
-    
+
 
 _coreClearAuxiliaryDataFault_
 
@@ -476,7 +494,7 @@ _coreClearAuxiliaryDataFault_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 
 ;-------------------------------------------------------------------------------
@@ -488,14 +506,14 @@ _coreClearAuxiliaryDataFault_
     .thumb
     .thumbfunc _coreGetAuxiliaryInstructionFault_
     .def     _coreGetAuxiliaryInstructionFault_
-    
+
 
 _coreGetAuxiliaryInstructionFault_
 
         mrc   p15, #0, r0, c5, c1, #1
         bx    lr
 
-    
+
 
 ;-------------------------------------------------------------------------------
 ; Clear auxiliary instruction fault status register
@@ -506,7 +524,7 @@ _coreGetAuxiliaryInstructionFault_
     .thumb
     .thumbfunc _coreClearAuxiliaryInstructionFault_
     .def     _coreClearAuxiliaryInstructionFault_
-    
+
 
 _coreClearAuxiliaryInstructionFault_
 
@@ -516,7 +534,7 @@ _coreClearAuxiliaryInstructionFault_
         ldmfd sp!, {r0}
         bx    lr
 
-    
+
 
 ;-------------------------------------------------------------------------------
 ; Disable interrupts - R4 IRQ & FIQ
@@ -527,14 +545,14 @@ _coreClearAuxiliaryInstructionFault_
         .thumb
         .thumbfunc _disable_interrupt_
         .def _disable_interrupt_
-        
+
 
 _disable_interrupt_
 
         cpsid if
         bx    lr
 
-        
+
 
 ;-------------------------------------------------------------------------------
 ; Disable FIQ interrupt
@@ -542,14 +560,14 @@ _disable_interrupt_
         .thumb
         .thumbfunc _disable_FIQ_interrupt_
         .def _disable_FIQ_interrupt_
-        
+
 
 _disable_FIQ_interrupt_
 
         cpsid f
         bx    lr
 
-        
+
 
 ;-------------------------------------------------------------------------------
 ; Disable FIQ interrupt
@@ -557,14 +575,14 @@ _disable_FIQ_interrupt_
         .thumb
         .thumbfunc _disable_IRQ_interrupt_
         .def _disable_IRQ_interrupt_
-        
+
 
 _disable_IRQ_interrupt_
 
         cpsid i
         bx    lr
 
-        
+
 
 ;-------------------------------------------------------------------------------
 ; Enable interrupts - R4 IRQ & FIQ
@@ -572,14 +590,14 @@ _disable_IRQ_interrupt_
        .thumb
        .thumbfunc _enable_interrupt_
        .def _enable_interrupt_
-       
+
 
 _enable_interrupt_
 
         cpsie if
         bx    lr
 
-        
+
 
 
 
@@ -591,7 +609,7 @@ _enable_interrupt_
       .thumb
       .thumbfunc _sysDelay_
       .def    _sysDelay_
-      
+
 
 _sysDelay_
       ;nop
@@ -605,9 +623,9 @@ _sysDelayLbl_:
 
       bx       lr
 
-  
-  
-  
+
+
+
 
 ;-------------------------------------------------------------------------------
 
