@@ -1,0 +1,43 @@
+---
+orphan: true
+---
+
+---
+title: RPMessage_VringTxParams
+summary: Internal parameters for vring TX buffer operation. 
+
+---
+
+# RPMessage_VringTxParams
+
+
+
+Internal parameters for vring TX buffer operation.  [More...](#detailed-description)
+
+
+`#include <ipc_rpmsg_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint16 | vringBufId |  |
+|  uint16 | dataLen |  |
+|  uint16 | remoteEndPt |  |
+|  uint16 | localEndPt |  |
+|  void * | data |  |
+|  uint32 | timeout |  |
+
+## Detailed Description
+
+```cpp
+struct RPMessage_VringTxParams;
+```
+
+
+**Brief**: 
+Internal parameters for vring TX buffer operation. 
+
+This structure groups the parameters needed for putting a full TX buffer. 
+
+

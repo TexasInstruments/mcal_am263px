@@ -163,6 +163,39 @@ typedef struct
     int32_t rdDelay;
 } Fls_Ospi_phyConfig;
 
+/**
+ *  \brief Structure to hold corner points (bottomLeft and topRight) for PHY tuning
+ *
+ *  Used to reduce parameter count in functions that operate on corner points.
+ */
+typedef struct
+{
+    Fls_Ospi_phyConfig bottomLeft;
+    Fls_Ospi_phyConfig topRight;
+} Fls_Ospi_phyCornerPoints;
+
+/**
+ *  \brief Structure to hold gap points (gapLow and gapHigh) for PHY tuning
+ *
+ *  Used to reduce parameter count in functions that operate on gap points.
+ */
+typedef struct
+{
+    Fls_Ospi_phyConfig gapLow;
+    Fls_Ospi_phyConfig gapHigh;
+} Fls_Ospi_phyGapPoints;
+
+/**
+ *  \brief Structure to hold Rx/Tx low and high points for PHY tuning
+ *
+ *  Used to reduce parameter count in functions that operate on Rx/Tx search results.
+ */
+typedef struct
+{
+    Fls_Ospi_phyConfig low;
+    Fls_Ospi_phyConfig high;
+} Fls_Ospi_phyRxTxPoints;
+
 typedef struct
 {
     uint32               phaseDelayElement;

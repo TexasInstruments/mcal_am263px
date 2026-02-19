@@ -83,7 +83,7 @@ static inline void IpcNotify_getWriteMailbox(uint32 selfCoreId, uint32 remoteCor
 static void        IpcNotify_lld_init_clearIntOn(IpcNotify_Handle hIpcNotify, uint32 selfCoreId);
 static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, const IpcNotify_MsgParams *msgParams);
 static void   IpcNotify_lld_isrCrcCheck(sint32 status, uint32 value, IpcNotify_Handle hIpcNotify,
-                                        IpcNotify_InterruptConfig *pInterruptConfig, uint32 core);
+                                        const IpcNotify_InterruptConfig *pInterruptConfig, uint32 core);
 
 #define CDD_IPC_START_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
@@ -426,7 +426,7 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, co
 }
 
 static void IpcNotify_lld_isrCrcCheck(sint32 status, uint32 value, IpcNotify_Handle hIpcNotify,
-                                      IpcNotify_InterruptConfig *pInterruptConfig, uint32 core)
+                                      const IpcNotify_InterruptConfig *pInterruptConfig, uint32 core)
 {
     uint16 clientId;
     sint32 crcStatus = MCAL_SystemP_SUCCESS;

@@ -525,9 +525,15 @@ Cdd_Ipc_RpMsg_SendMsg(void *data, uint16 dataLen, uint16 Cdd_Ipc_remoteCoreId, u
     else
 #endif
     {
-        status =
-            RPMessage_lld_send(CddIpc_RPMsgHandle, data, dataLen, Cdd_Ipc_remoteCoreId, Cdd_Ipc_remoteEndPt,
-                               (uint16)CfgPtr->Cdd_Ipc_RpMsgParams[Cdd_Ipc_localEndPtId].Cdd_Ipc_localEndPt, timeout);
+        RPMessage_SendParams lldSendParams;
+        lldSendParams.data         = data;
+        lldSendParams.dataLen      = dataLen;
+        lldSendParams.remoteCoreId = Cdd_Ipc_remoteCoreId;
+        lldSendParams.remoteEndPt  = Cdd_Ipc_remoteEndPt;
+        lldSendParams.localEndPt   = (uint16)CfgPtr->Cdd_Ipc_RpMsgParams[Cdd_Ipc_localEndPtId].Cdd_Ipc_localEndPt;
+        lldSendParams.timeout      = timeout;
+
+        status = RPMessage_lld_send(CddIpc_RPMsgHandle, &lldSendParams);
 
         if (MCAL_SystemP_SUCCESS != status)
         {
@@ -563,8 +569,14 @@ Cdd_Ipc_RpMsg_RecvMsg(void *data, uint16 *dataLen, uint16 Cdd_Ipc_localEndPtId, 
     else
 #endif
     {
-        status = RPMessage_lld_recv(CddIpc_RPMsgHandle, &Cdd_AckReplyMsgObject[Cdd_Ipc_localEndPtId], data, dataLen,
-                                    Cdd_Ipc_remoteCoreId, Cdd_Ipc_remoteEndPt, timeout);
+        RPMessage_RecvParams lldRecvParams;
+        lldRecvParams.data         = data;
+        lldRecvParams.dataLen      = dataLen;
+        lldRecvParams.remoteCoreId = Cdd_Ipc_remoteCoreId;
+        lldRecvParams.remoteEndPt  = Cdd_Ipc_remoteEndPt;
+        lldRecvParams.timeout      = timeout;
+
+        status = RPMessage_lld_recv(CddIpc_RPMsgHandle, &Cdd_AckReplyMsgObject[Cdd_Ipc_localEndPtId], &lldRecvParams);
 
         if (MCAL_SystemP_SUCCESS != status)
         {

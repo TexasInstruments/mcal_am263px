@@ -1,0 +1,45 @@
+---
+orphan: true
+---
+
+---
+title: RPMessage_RecvCallbackParams
+summary: Parameters for RPMessage receive callback. 
+
+---
+
+# RPMessage_RecvCallbackParams
+
+
+
+Parameters for RPMessage receive callback.  [More...](#detailed-description)
+
+
+`#include <ipc_rpmsg_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  void * | handle |  |
+|  [RPMessage_EpObject](../Classes/struct_r_p_message___ep_object.md) * | epObj |  |
+|  void * | arg |  |
+|  void * | data |  |
+|  uint16 | dataLen |  |
+|  sint32 | crcStatus |  |
+|  uint16 | remoteCoreId |  |
+|  uint16 | remoteEndPt |  |
+
+## Detailed Description
+
+```cpp
+struct RPMessage_RecvCallbackParams;
+```
+
+
+**Brief**: 
+Parameters for RPMessage receive callback. 
+
+This structure groups the parameters passed to the receive callback function. 
+
+

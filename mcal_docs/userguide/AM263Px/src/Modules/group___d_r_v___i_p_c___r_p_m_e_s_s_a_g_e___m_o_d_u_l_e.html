@@ -102,7 +102,7 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>typedef void(*)(void *handle, RPMessage_EpObject *obj, void *arg, void *data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)</p></td>
+<tr class="row-even"><td><p>typedef void(*)(const RPMessage_RecvCallbackParams *cbParams)</p></td>
 <td><p><strong><a class="reference internal" href="#typedef-rpmessage-lld-recvcallback"><span class="std std-ref">RPMessage_lld_recvCallback</span></a></strong></p></td>
 <td><p>Callback that is invoked when a message is received from any CPU at the specified local end point.</p></td>
 </tr>
@@ -126,7 +126,7 @@
 </table>
 <section id="typedef-rpmessage-lld-recvcallback">
 <h3>typedef RPMessage_lld_recvCallback<a class="headerlink" href="#typedef-rpmessage-lld-recvcallback" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">RPMessage_lld_recvCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span><span class="w"> </span><span class="n">sint32</span><span class="w"> </span><span class="n">crcStatus</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteEndPt</span><span class="p">);</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">RPMessage_lld_recvCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">RPMessage_RecvCallbackParams</span><span class="w"> </span><span class="o">*</span><span class="n">cbParams</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><strong>Brief</strong>:
@@ -134,12 +134,7 @@ Callback that is invoked when a message is received from any CPU at the specifie
 <p>The callback can be optionally registered during <a class="reference internal" href="#function-rpmessage-lld-construct"><span class="std std-ref">RPMessage_lld_construct</span></a></p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>obj</strong> [in] RPMessage end point object created with <a class="reference internal" href="#function-rpmessage-lld-construct"><span class="std std-ref">RPMessage_lld_construct</span></a></p></li>
-<li><p><strong>arg</strong> [in] Arguments specified by user during <a class="reference internal" href="#function-rpmessage-lld-construct"><span class="std std-ref">RPMessage_lld_construct</span></a></p></li>
-<li><p><strong>data</strong> [in] Pointer to message</p></li>
-<li><p><strong>dataLen</strong> [in] Length of message</p></li>
-<li><p><strong>remoteCoreId</strong> [in] Core ID of sender</p></li>
-<li><p><strong>remoteEndPt</strong> [in] End point of sender</p></li>
+<li><p><strong>cbParams</strong> [in] Callback parameters containing message info <a class="reference internal" href="../Classes/struct_r_p_message___recv_callback_params.html"><span class="std std-doc">RPMessage_RecvCallbackParams</span></a></p></li>
 </ul>
 <p><strong>Note</strong>: All message contents MUST be consumed in the callback. When callback returns the message buffer is released back to the sender. If the message contents are needed for deferred processing then take a copy of the message contents</p>
 </section>
@@ -204,44 +199,59 @@ Callback that is invoked when a annoucement message is received on the control e
 <tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a></strong></p></td>
 <td><p>Opaque RPMessage object used with the RPMessage APIs.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/structvring__desc.html"><span class="std std-doc">vring_desc</span></a></strong></p></td>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___recv_callback_params.html"><span class="std std-doc">RPMessage_RecvCallbackParams</span></a></strong></p></td>
+<td><p>Parameters for RPMessage receive callback.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/structvring__desc.html"><span class="std std-doc">vring_desc</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/structvring__avail.html"><span class="std std-doc">vring_avail</span></a></strong></p></td>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/structvring__avail.html"><span class="std std-doc">vring_avail</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/structvring__used__elem.html"><span class="std std-doc">vring_used_elem</span></a></strong></p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/structvring__used__elem.html"><span class="std std-doc">vring_used_elem</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/structvring__used.html"><span class="std std-doc">vring_used</span></a></strong></p></td>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/structvring__used.html"><span class="std std-doc">vring_used</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___header.html"><span class="std std-doc">RPMessage_Header</span></a></strong></p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___header.html"><span class="std std-doc">RPMessage_Header</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___vring.html"><span class="std std-doc">RPMessage_Vring</span></a></strong></p></td>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___vring.html"><span class="std std-doc">RPMessage_Vring</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___local_msg.html"><span class="std std-doc">RPMessage_LocalMsg</span></a></strong></p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___local_msg.html"><span class="std std-doc">RPMessage_LocalMsg</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___core.html"><span class="std std-doc">RPMessage_Core</span></a></strong></p></td>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___core.html"><span class="std std-doc">RPMessage_Core</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___struct.html"><span class="std std-doc">RPMessage_Struct</span></a></strong></p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___struct.html"><span class="std std-doc">RPMessage_Struct</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___announce_msg.html"><span class="std std-doc">RPMessage_AnnounceMsg</span></a></strong></p></td>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___announce_msg.html"><span class="std std-doc">RPMessage_AnnounceMsg</span></a></strong></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___create_params.html"><span class="std std-doc">RPMessage_CreateParams</span></a></strong></p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___create_params.html"><span class="std std-doc">RPMessage_CreateParams</span></a></strong></p></td>
 <td><p>Parameters passed to <a class="reference internal" href="#"><span class="xref myst">RPMessage_lld_construct</span></a>.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message_l_l_d___init_object.html"><span class="std std-doc">RPMessageLLD_InitObject</span></a></strong></p></td>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message_l_l_d___init_object.html"><span class="std std-doc">RPMessageLLD_InitObject</span></a></strong></p></td>
 <td><p>IPC RPMessage driver initialization object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message_l_l_d___object.html"><span class="std std-doc">RPMessageLLD_Object</span></a></strong></p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message_l_l_d___object.html"><span class="std std-doc">RPMessageLLD_Object</span></a></strong></p></td>
 <td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___send_params.html"><span class="std std-doc">RPMessage_SendParams</span></a></strong></p></td>
+<td><p>Parameters for RPMessage send operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___recv_params.html"><span class="std std-doc">RPMessage_RecvParams</span></a></strong></p></td>
+<td><p>Parameters for RPMessage receive operation.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___vring_tx_params.html"><span class="std std-doc">RPMessage_VringTxParams</span></a></strong></p></td>
+<td><p>Internal parameters for vring TX buffer operation.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_r_p_message___recv_handler_params.html"><span class="std std-doc">RPMessage_RecvHandlerParams</span></a></strong></p></td>
+<td><p>Internal parameters for receive handler endpoint check.</p></td>
 </tr>
 </tbody>
 </table>
@@ -329,7 +339,7 @@ Callback that is invoked when a annoucement message is received on the control e
 <td><p>Delete a previously created RPMessage object.</p></td>
 </tr>
 <tr class="row-even"><td><p>sint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-send"><span class="std std-ref">RPMessage_lld_send</span></a></strong>(RPMessageLLD_Handle hRpMsg, void * data, uint16 dataLen, uint16 remoteCoreId, uint16 remoteEndPt, uint16 localEndPt, uint32 timeout)</p></td>
+<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-send"><span class="std std-ref">RPMessage_lld_send</span></a></strong>(RPMessageLLD_Handle hRpMsg, const <a class="reference internal" href="../Classes/struct_r_p_message___send_params.html"><span class="std std-doc">RPMessage_SendParams</span></a> * sendParams)</p></td>
 <td><p>Announce a local end point at which a <code class="docutils literal notranslate"><span class="pre">service</span></code> is created to a remote core.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
@@ -377,11 +387,11 @@ Callback that is invoked when a annoucement message is received on the control e
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>sint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-recv"><span class="std std-ref">RPMessage_lld_recv</span></a></strong>(RPMessageLLD_Handle hRpMsg, <a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a> * obj, void * data, uint16 * dataLen, uint16 * remoteCoreId, uint16 * remoteEndPt, uint32 timeout)</p></td>
+<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-recv"><span class="std std-ref">RPMessage_lld_recv</span></a></strong>(RPMessageLLD_Handle hRpMsg, <a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a> * epObject, <a class="reference internal" href="../Classes/struct_r_p_message___recv_params.html"><span class="std std-doc">RPMessage_RecvParams</span></a> * recvParams)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-rpmessage-controlendpthandler"><span class="std std-ref">RPMessage_controlEndPtHandler</span></a></strong>(void * rpMsgHandle, <a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a> * epObj, void * arg, void * data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)</p></td>
+<td><p><strong><a class="reference internal" href="#function-rpmessage-controlendpthandler"><span class="std std-ref">RPMessage_controlEndPtHandler</span></a></strong>(const <a class="reference internal" href="../Classes/struct_r_p_message___recv_callback_params.html"><span class="std std-doc">RPMessage_RecvCallbackParams</span></a> * cbParams)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -492,12 +502,7 @@ Delete a previously created RPMessage object.</p>
 <h3>function RPMessage_lld_send<a class="headerlink" href="#function-rpmessage-lld-send" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">RPMessage_lld_send</span><span class="p">(</span>
 <span class="w">    </span><span class="n">RPMessageLLD_Handle</span><span class="w"> </span><span class="n">hRpMsg</span><span class="p">,</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteEndPt</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">localEndPt</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">RPMessage_SendParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sendParams</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -509,12 +514,7 @@ Announce a local end point at which a <code class="docutils literal notranslate"
 <li><p><strong>remoteProcId</strong> [in] The remote core to annouce to.</p></li>
 <li><p><strong>localEndPt</strong> [in] Local end point of the service that is being announced</p></li>
 <li><p><strong>name</strong> [in] Name of the service that is being announced</p></li>
-<li><p><strong>data</strong> [in] Pointer to message data to send</p></li>
-<li><p><strong>dataLen</strong> [in] size of message data to send</p></li>
-<li><p><strong>remoteCoreId</strong> [in] Remote core ID to whom the message is being sent</p></li>
-<li><p><strong>remoteEndPt</strong> [in] Remote core end point ID to which the message is being sent</p></li>
-<li><p><strong>localEndPt</strong> [in] Local end point that is sending the message</p></li>
-<li><p><strong>timeout</strong> [in] Amount of time to wait, in units of system ticks</p></li>
+<li><p><strong>sendParams</strong> [in] RPmessage send structure <a class="reference internal" href="../Classes/struct_r_p_message___send_params.html"><span class="std std-doc">RPMessage_SendParams</span></a></p></li>
 </ul>
 <p><strong>Return</strong>:</p>
 <ul class="simple">
@@ -668,12 +668,8 @@ Blocking API to wait till a message is received from any CPU at the specified lo
 <h3>function RPMessage_lld_recv<a class="headerlink" href="#function-rpmessage-lld-recv" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">RPMessage_lld_recv</span><span class="p">(</span>
 <span class="w">    </span><span class="n">RPMessageLLD_Handle</span><span class="w"> </span><span class="n">hRpMsg</span><span class="p">,</span>
-<span class="w">    </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">remoteEndPt</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span>
+<span class="w">    </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">epObject</span><span class="p">,</span>
+<span class="w">    </span><span class="n">RPMessage_RecvParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">recvParams</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -681,14 +677,7 @@ Blocking API to wait till a message is received from any CPU at the specified lo
 <section id="function-rpmessage-controlendpthandler">
 <h3>function RPMessage_controlEndPtHandler<a class="headerlink" href="#function-rpmessage-controlendpthandler" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">RPMessage_controlEndPtHandler</span><span class="p">(</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rpMsgHandle</span><span class="p">,</span>
-<span class="w">    </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">epObj</span><span class="p">,</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">arg</span><span class="p">,</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span>
-<span class="w">    </span><span class="n">sint32</span><span class="w"> </span><span class="n">crcStatus</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteEndPt</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">RPMessage_RecvCallbackParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cbParams</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -709,7 +698,7 @@ Blocking API to wait till a message is received from any CPU at the specified lo
 
   <div role="contentinfo">
     <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2026, Texas Instruments Incorporated.
-          <span class="lastupdated" >Last updated on Feb 16, 2026.
+          <span class="lastupdated" >Last updated on Feb 19, 2026.
       </span><br>
         <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
 

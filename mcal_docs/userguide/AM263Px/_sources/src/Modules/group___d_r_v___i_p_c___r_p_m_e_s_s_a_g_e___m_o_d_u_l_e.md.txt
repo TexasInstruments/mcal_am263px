@@ -11,7 +11,7 @@ title: APIs for IPC RPMessage
 
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
-|typedef void(*)(void *handle, RPMessage_EpObject *obj, void *arg, void *data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)  | **[RPMessage_lld_recvCallback](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#typedef-rpmessage_lld_recvcallback)** | Callback that is invoked when a message is received from any CPU at the specified local end point.  | 
+|typedef void(*)(const RPMessage_RecvCallbackParams *cbParams)  | **[RPMessage_lld_recvCallback](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#typedef-rpmessage_lld_recvcallback)** | Callback that is invoked when a message is received from any CPU at the specified local end point.  | 
 |typedef void(*)(void *handle, RPMessage_EpObject *obj, void *arg)  | **[RPMessage_lld_recvNotifyCallback](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#typedef-rpmessage_lld_recvnotifycallback)** | Callback that is invoked when a message is received from any CPU at the specified local end point.  | 
 |typedef void(*)(void *arg, uint16 remoteCoreId, uint16 remoteEndPt, const uint8 *remoteServiceName)  | **[RPMessage_ControlEndPtCallback](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#typedef-rpmessage_controlendptcallback)** | Callback that is invoked when a annoucement message is received on the control end point.  | 
 |typedef struct [RPMessageLLD_InitObject](../Classes/struct_r_p_message_l_l_d___init_object.md) *  | **[RPMessageLLD_InitHandle](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#typedef-rpmessagelld_inithandle)** 
@@ -21,7 +21,7 @@ title: APIs for IPC RPMessage
 
 ### typedef RPMessage_lld_recvCallback
 ```
-typedef void(* RPMessage_lld_recvCallback) (void *handle, RPMessage_EpObject *obj, void *arg, void *data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt);
+typedef void(* RPMessage_lld_recvCallback) (const RPMessage_RecvCallbackParams *cbParams);
 ```
 
 
@@ -34,17 +34,7 @@ The callback can be optionally registered during [RPMessage_lld_construct](../Mo
 **Parameters**: 
 
   
-* **obj** [in] RPMessage end point object created with [RPMessage_lld_construct](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_construct)
-  
-* **arg** [in] Arguments specified by user during [RPMessage_lld_construct](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_construct)
-  
-* **data** [in] Pointer to message 
-  
-* **dataLen** [in] Length of message 
-  
-* **remoteCoreId** [in] Core ID of sender 
-  
-* **remoteEndPt** [in] End point of sender 
+* **cbParams** [in] Callback parameters containing message info [RPMessage_RecvCallbackParams](../Classes/struct_r_p_message___recv_callback_params.md)
 
 
 **Note**: All message contents MUST be consumed in the callback. When callback returns the message buffer is released back to the sender. If the message contents are needed for deferred processing then take a copy of the message contents
@@ -128,6 +118,7 @@ typedef  struct RPMessageLLD_Object * RPMessageLLD_Handle;
 |   Name         | Brief          |
 | -------------- | -------------- |
 | **[RPMessage_EpObject](../Classes/struct_r_p_message___ep_object.md)** | Opaque RPMessage object used with the RPMessage APIs.  |
+| **[RPMessage_RecvCallbackParams](../Classes/struct_r_p_message___recv_callback_params.md)** | Parameters for RPMessage receive callback.  |
 | **[vring_desc](../Classes/structvring__desc.md)** |  |
 | **[vring_avail](../Classes/structvring__avail.md)** |  |
 | **[vring_used_elem](../Classes/structvring__used__elem.md)** |  |
@@ -141,6 +132,10 @@ typedef  struct RPMessageLLD_Object * RPMessageLLD_Handle;
 | **[RPMessage_CreateParams](../Classes/struct_r_p_message___create_params.md)** | Parameters passed to [RPMessage_lld_construct]().  |
 | **[RPMessageLLD_InitObject](../Classes/struct_r_p_message_l_l_d___init_object.md)** | IPC RPMessage driver initialization object.  |
 | **[RPMessageLLD_Object](../Classes/struct_r_p_message_l_l_d___object.md)** |  |
+| **[RPMessage_SendParams](../Classes/struct_r_p_message___send_params.md)** | Parameters for RPMessage send operation.  |
+| **[RPMessage_RecvParams](../Classes/struct_r_p_message___recv_params.md)** | Parameters for RPMessage receive operation.  |
+| **[RPMessage_VringTxParams](../Classes/struct_r_p_message___vring_tx_params.md)** | Internal parameters for vring TX buffer operation.  |
+| **[RPMessage_RecvHandlerParams](../Classes/struct_r_p_message___recv_handler_params.md)** | Internal parameters for receive handler endpoint check.  |
 
 
 
@@ -172,7 +167,7 @@ typedef  struct RPMessageLLD_Object * RPMessageLLD_Handle;
 | sint32 | **[RPMessage_lld_waitForLinuxReady](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_waitforlinuxready)**(RPMessageLLD_Handle hRpMsg, uint32 timeout)| Wait for linux side RPMessage to be ready.  |
 | Std_ReturnType | **[RPMessage_lld_construct](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_construct)**(RPMessageLLD_Handle hRpMsg, [RPMessage_EpObject](../Classes/struct_r_p_message___ep_object.md) * obj, const [RPMessage_CreateParams](../Classes/struct_r_p_message___create_params.md) * createParam)| Create a RPMessage object to receive messages at a specified end-point.  |
 | void | **[RPMessage_lld_destruct](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_destruct)**(RPMessageLLD_Handle hRpMsg, [RPMessage_EpObject](../Classes/struct_r_p_message___ep_object.md) * obj)| Delete a previously created RPMessage object.  |
-| sint32 | **[RPMessage_lld_send](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_send)**(RPMessageLLD_Handle hRpMsg, void * data, uint16 dataLen, uint16 remoteCoreId, uint16 remoteEndPt, uint16 localEndPt, uint32 timeout)| Announce a local end point at which a `service` is created to a remote core.  |
+| sint32 | **[RPMessage_lld_send](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_send)**(RPMessageLLD_Handle hRpMsg, const [RPMessage_SendParams](../Classes/struct_r_p_message___send_params.md) * sendParams)| Announce a local end point at which a `service` is created to a remote core.  |
 | void | **[RPMessage_controlEndPtDeInit](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_controlendptdeinit)**(RPMessageLLD_Handle hRpMsg)| Blocking API to wait till a message is received from any CPU at the specified local end point.  |
 | uint32 | **[RPMessage_controlEndPtInit](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_controlendptinit)**(RPMessageLLD_Handle hRpMsg)|  |
 | uint32 | **[RPMessage_isLinuxCore](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_islinuxcore)**(RPMessageLLD_Handle hRpMsg, uint16 coreId)|  |
@@ -184,8 +179,8 @@ typedef  struct RPMessageLLD_Object * RPMessageLLD_Handle;
 | void | **[RPMessage_lld_recvHandler](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_recvhandler)**(RPMessageLLD_Handle hRpMsg, uint32 remoteCoreId, uint32 timeout)|  |
 | uint32 | **[RPMessage_freeEndPtMsg](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_freeendptmsg)**(RPMessage_Core * coreObj, uint16 remoteCoreId, RPMessage_LocalMsg * pMsg)|  |
 | void | **[RPMessage_notifyCallback](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_notifycallback)**(void * ipcNotifyHandle, uint32 remoteCoreId, uint16 localClientId, uint32 msgValue, uint32 timeout, sint32 crcStatus, void * args)|  |
-| sint32 | **[RPMessage_lld_recv](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_recv)**(RPMessageLLD_Handle hRpMsg, [RPMessage_EpObject](../Classes/struct_r_p_message___ep_object.md) * obj, void * data, uint16 * dataLen, uint16 * remoteCoreId, uint16 * remoteEndPt, uint32 timeout)|  |
-| void | **[RPMessage_controlEndPtHandler](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_controlendpthandler)**(void * rpMsgHandle, [RPMessage_EpObject](../Classes/struct_r_p_message___ep_object.md) * epObj, void * arg, void * data, uint16 dataLen, sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)|  |
+| sint32 | **[RPMessage_lld_recv](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_lld_recv)**(RPMessageLLD_Handle hRpMsg, [RPMessage_EpObject](../Classes/struct_r_p_message___ep_object.md) * epObject, [RPMessage_RecvParams](../Classes/struct_r_p_message___recv_params.md) * recvParams)|  |
+| void | **[RPMessage_controlEndPtHandler](../Modules/group___d_r_v___i_p_c___r_p_m_e_s_s_a_g_e___m_o_d_u_l_e.md#function-rpmessage_controlendpthandler)**(const [RPMessage_RecvCallbackParams](../Classes/struct_r_p_message___recv_callback_params.md) * cbParams)|  |
 
 
 
@@ -329,12 +324,7 @@ Delete a previously created RPMessage object.
 ```
 sint32 RPMessage_lld_send(
     RPMessageLLD_Handle hRpMsg,
-    void * data,
-    uint16 dataLen,
-    uint16 remoteCoreId,
-    uint16 remoteEndPt,
-    uint16 localEndPt,
-    uint32 timeout
+    const RPMessage_SendParams * sendParams
 )
 ```
 
@@ -355,17 +345,7 @@ Send a message to a remote core at a specified remote end point
   
 * **name** [in] Name of the service that is being announced
   
-* **data** [in] Pointer to message data to send 
-  
-* **dataLen** [in] size of message data to send 
-  
-* **remoteCoreId** [in] Remote core ID to whom the message is being sent 
-  
-* **remoteEndPt** [in] Remote core end point ID to which the message is being sent 
-  
-* **localEndPt** [in] Local end point that is sending the message 
-  
-* **timeout** [in] Amount of time to wait, in units of system ticks
+* **sendParams** [in] RPmessage send structure [RPMessage_SendParams](../Classes/struct_r_p_message___send_params.md)
 
 
 **Return**: 
@@ -542,12 +522,8 @@ void RPMessage_notifyCallback(
 ```
 sint32 RPMessage_lld_recv(
     RPMessageLLD_Handle hRpMsg,
-    RPMessage_EpObject * obj,
-    void * data,
-    uint16 * dataLen,
-    uint16 * remoteCoreId,
-    uint16 * remoteEndPt,
-    uint32 timeout
+    RPMessage_EpObject * epObject,
+    RPMessage_RecvParams * recvParams
 )
 ```
 
@@ -556,14 +532,7 @@ sint32 RPMessage_lld_recv(
 
 ```
 void RPMessage_controlEndPtHandler(
-    void * rpMsgHandle,
-    RPMessage_EpObject * epObj,
-    void * arg,
-    void * data,
-    uint16 dataLen,
-    sint32 crcStatus,
-    uint16 remoteCoreId,
-    uint16 remoteEndPt
+    const RPMessage_RecvCallbackParams * cbParams
 )
 ```
 

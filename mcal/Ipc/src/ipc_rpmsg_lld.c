@@ -63,26 +63,44 @@ static sint32  RPMessage_lld_init_lldInitParamsCheck(RPMessageLLD_Handle hRpMsg,
 static sint32  RPMessage_lld_ParamsCheck(RPMessageLLD_InitHandle hRpMsgInit, sint32 value);
 static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint32 *status, boolean done,
                                                   uint32 startTime, uint32 timeout);
-static sint32  RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle hRpMsg, RPMessage_LocalMsg *pMsg,
-                                                   uint16 localEndPt, uint8 *vringBufAddr, RPMessage_Header *header,
-                                                   uint32 remoteCoreId, sint32 status, uint16 vringBufId,
-                                                   uint32 timeout);
+static sint32  RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle                hRpMsg,
+                                                   const RPMessage_RecvHandlerParams *recvHandlerParams);
 static void RPMessage_notify_Callback(RPMessageLLD_Handle hRpMsg, uint32 remoteCoreId, uint32 msgValue, uint32 timeout,
                                       uint16 rxMsgValue);
-static sint32 RPMessage_lldSend_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId,
-                                                  uint16 dataLen, uint16 remoteEndPt, uint16 localEndPt, void *data,
-                                                  uint32 timeout, sint32 status);
+static sint32 RPMessage_lldSend_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId,
+                                                  const RPMessage_VringTxParams *txParams, sint32 status);
 static uint32 RPMessage_getEndPtMsg_mutexResourceTryLock(RPMessage_Struct *epObj, sint32 *status, uint32 tryLoop,
                                                          uint32 startTicks, uint32 timeout);
 static void   RPMessage_lld_recvdataLenCheck(RPMessage_Header *header, uint16 *dataLen);
 static sint32 RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(RPMessageLLD_Handle hRpMsg, sint32 retVal,
                                                              uint32 remoteCoreId, uint16 vringBufId, uint32 timeout);
 static sint32 RPMessage_lld_recv_statusCheck(sint32 status);
+static sint32 RPMessage_lld_recv_processMsg(RPMessageLLD_Handle hRpMsg, RPMessage_Struct *epObj,
+                                            RPMessage_RecvParams *recvParams, RPMessage_LocalMsg *pMsg);
 static void RPMessage_lld_recvHandlerEndPtCheck_recvNotifyCallback(RPMessageLLD_Handle hRpMsg, RPMessage_Struct *epObj);
 static void RPMessage_lld_recv_Notify_Callback(RPMessageLLD_Handle hRpMsg, uint16 *remoteCoreId, uint32 timeout,
                                                uint32 isAllocPending);
 #define CDD_IPC_START_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
+
+#if (CDD_IPC_CRC_ENABLE == STD_ON)
+static sint32 RPMessage_lld_recv_CrcCheck(RPMessageLLD_Handle hRpMsg, RPMessage_Header *header, void *data,
+                                          uint16 dataLen)
+{
+    sint32 status = MCAL_SystemP_SUCCESS;
+    uint16 crc    = 0U;
+
+    status = hRpMsg->hRpMsgInit->hIpcNotify->hIpcNotifyInit->Cdd_Ipc_CrcHookFunc((uint8 *)data, dataLen,
+                                                                                 CDD_IPC_RPMESSAGE_CRC_SIZE, &crc);
+
+    if (header->flags != crc)
+    {
+        status = MCAL_SystemP_FAILURE;
+    }
+
+    return status;
+}
+#endif
 
 RPMessage_LocalMsg *RPMessage_allocEndPtMsg(RPMessage_Core *coreObj, uint32 remoteCoreId)
 {
@@ -179,11 +197,18 @@ void RPMessage_lld_recvHandler(RPMessageLLD_Handle hRpMsg, uint32 remoteCoreId, 
              */
             uint8            *vringBufAddr = RPMessage_vringGetRxBufAddr(hRpMsg, (uint16)remoteCoreId, vringBufId);
             RPMessage_Header *header       = (RPMessage_Header *)vringBufAddr;
-            uint16            localEndPt   = (uint16)header->dstEndPt;
+            RPMessage_RecvHandlerParams recvHandlerParams;
 
-            status = MCAL_SystemP_FAILURE;
-            status = RPMessage_lld_recvHandlerEndPtCheck(hRpMsg, pMsg, localEndPt, vringBufAddr, header, remoteCoreId,
-                                                         status, vringBufId, timeout);
+            recvHandlerParams.pMsg         = pMsg;
+            recvHandlerParams.localEndPt   = (uint16)header->dstEndPt;
+            recvHandlerParams.vringBufAddr = vringBufAddr;
+            recvHandlerParams.header       = header;
+            recvHandlerParams.remoteCoreId = remoteCoreId;
+            recvHandlerParams.status       = MCAL_SystemP_FAILURE;
+            recvHandlerParams.vringBufId   = vringBufId;
+            recvHandlerParams.timeout      = timeout;
+
+            status = RPMessage_lld_recvHandlerEndPtCheck(hRpMsg, &recvHandlerParams);
         }
         if (status != MCAL_SystemP_SUCCESS)
         {
@@ -212,22 +237,28 @@ void RPMessage_notifyCallback(void *ipcNotifyHandle, uint32 remoteCoreId, uint16
     }
 }
 
-sint32 RPMessage_lld_send(RPMessageLLD_Handle hRpMsg, void *data, uint16 dataLen, uint16 remoteCoreId,
-                          uint16 remoteEndPt, uint16 localEndPt, uint32 timeout)
+sint32 RPMessage_lld_send(RPMessageLLD_Handle hRpMsg, const RPMessage_SendParams *sendParams)
 {
     sint32 status = MCAL_SystemP_FAILURE;
 
-    if (hRpMsg != NULL_PTR)
+    if ((hRpMsg != NULL_PTR) && (sendParams != NULL_PTR))
     {
-        if ((remoteCoreId < MCAL_CSL_CORE_ID_MAX) && (hRpMsg->isCoreEnable[remoteCoreId] != 0U) && (data != NULL_PTR) &&
-            (dataLen != 0U))
+        if ((sendParams->remoteCoreId < MCAL_CSL_CORE_ID_MAX) &&
+            (hRpMsg->isCoreEnable[sendParams->remoteCoreId] != 0U) && (sendParams->data != NULL_PTR) &&
+            (sendParams->dataLen != 0U))
         {
             uint16 vringBufId;
-            status = RPMessage_vringGetEmptyTxBuf(hRpMsg, remoteCoreId, &vringBufId, timeout);
+            status = RPMessage_vringGetEmptyTxBuf(hRpMsg, sendParams->remoteCoreId, &vringBufId, sendParams->timeout);
             if (status == MCAL_SystemP_SUCCESS)
             {
-                status = RPMessage_lldSend_vringPutFullTxBuf(hRpMsg, remoteCoreId, vringBufId, dataLen, remoteEndPt,
-                                                             localEndPt, data, timeout, status);
+                RPMessage_VringTxParams txParams;
+                txParams.vringBufId  = vringBufId;
+                txParams.dataLen     = sendParams->dataLen;
+                txParams.remoteEndPt = sendParams->remoteEndPt;
+                txParams.localEndPt  = sendParams->localEndPt;
+                txParams.data        = sendParams->data;
+                txParams.timeout     = sendParams->timeout;
+                status = RPMessage_lldSend_vringPutFullTxBuf(hRpMsg, sendParams->remoteCoreId, &txParams, status);
             }
             else
             {
@@ -246,51 +277,25 @@ sint32 RPMessage_lld_send(RPMessageLLD_Handle hRpMsg, void *data, uint16 dataLen
     return status;
 }
 
-sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObject, void *data, uint16 *dataLen,
-                          uint16 *remoteCoreId, uint16 *remoteEndPt, uint32 timeout)
+sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObject, RPMessage_RecvParams *recvParams)
 {
-    sint32            status     = MCAL_SystemP_FAILURE;
-    sint32            freeStatus = MCAL_SystemP_FAILURE;
+    sint32            status = MCAL_SystemP_FAILURE;
     RPMessage_Struct *epObj;
 
-    if ((hRpMsg != NULL_PTR) && (epObject != NULL_PTR))
+    if ((hRpMsg != NULL_PTR) && (epObject != NULL_PTR) && (recvParams != NULL_PTR))
     {
         epObj = (RPMessage_Struct *)epObject;
-        if ((data != NULL_PTR) && (dataLen != NULL_PTR) && (remoteCoreId != NULL_PTR) && (remoteEndPt != NULL_PTR) &&
+        if ((recvParams->data != NULL_PTR) && (recvParams->dataLen != NULL_PTR) &&
+            (recvParams->remoteCoreId != NULL_PTR) && (recvParams->remoteEndPt != NULL_PTR) &&
             (epObj->recvCallback == NULL_PTR)) /* i.e non-callback mode */
 
         {
             RPMessage_LocalMsg *pMsg;
 
-            status = RPMessage_getEndPtMsg(epObj, &pMsg, timeout);
+            status = RPMessage_getEndPtMsg(epObj, &pMsg, recvParams->timeout);
             if ((status == MCAL_SystemP_SUCCESS) && (pMsg != NULL_PTR))
             {
-                uint32            isAllocPending = 0U;
-                uint16            vringBufId     = pMsg->vringBufId;
-                uint8            *vringBufAddr   = RPMessage_vringGetRxBufAddr(hRpMsg, pMsg->remoteCoreId, vringBufId);
-                RPMessage_Header *header         = (RPMessage_Header *)vringBufAddr;
-
-                *remoteCoreId = pMsg->remoteCoreId;
-                *remoteEndPt  = (uint16)header->srcEndPt;
-                RPMessage_lld_recvdataLenCheck(header, dataLen);
-                memcpy((void *)data, (void *)&vringBufAddr[sizeof(RPMessage_Header)], (uint32)*dataLen);
-#if (CDD_IPC_CRC_ENABLE == STD_ON)
-                uint16 crc = 0U;
-                status     = hRpMsg->hRpMsgInit->hIpcNotify->hIpcNotifyInit->Cdd_Ipc_CrcHookFunc(
-                    (uint8 *)data, *dataLen, CDD_IPC_RPMESSAGE_CRC_SIZE, &crc);
-
-                if (header->flags != crc)
-                {
-                    status = MCAL_SystemP_FAILURE;
-                }
-#endif
-                freeStatus     = RPMessage_vringPutEmptyRxBuf(hRpMsg, *remoteCoreId, vringBufId, timeout);
-                isAllocPending = RPMessage_freeEndPtMsg(&hRpMsg->coreObj[*remoteCoreId], *remoteCoreId, pMsg);
-                RPMessage_lld_recv_Notify_Callback(hRpMsg, remoteCoreId, timeout, isAllocPending);
-                if (freeStatus != MCAL_SystemP_SUCCESS)
-                {
-                    status = MCAL_SystemP_FAILURE;
-                }
+                status = RPMessage_lld_recv_processMsg(hRpMsg, epObj, recvParams, pMsg);
             }
             else
             {
@@ -404,23 +409,23 @@ void RPMessage_coreDeInit(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId)
     RPMessage_queueReset(&coreObj->freeQ);
 }
 
-void RPMessage_controlEndPtHandler(void *rpMsgHandle, RPMessage_EpObject *epObj, void *arg, void *data, uint16 dataLen,
-                                   sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt)
+void RPMessage_controlEndPtHandler(const RPMessage_RecvCallbackParams *cbParams)
 {
-    (void)crcStatus;
-    (void)epObj;
-    (void)arg;
-    RPMessageLLD_Handle hRpMsg = (RPMessageLLD_Handle)rpMsgHandle;
+    (void)cbParams->crcStatus;
+    (void)cbParams->epObj;
+    (void)cbParams->arg;
+    RPMessageLLD_Handle hRpMsg = (RPMessageLLD_Handle)cbParams->handle;
 
     if ((hRpMsg->controlEndPtCallback) != NULL_PTR)
     {
         /* check if message is of correct size */
-        if (dataLen == sizeof(RPMessage_AnnounceMsg))
+        if (cbParams->dataLen == sizeof(RPMessage_AnnounceMsg))
         {
             /* invoke user callback */
-            RPMessage_AnnounceMsg *pMsg = (RPMessage_AnnounceMsg *)data;
+            RPMessage_AnnounceMsg *pMsg = (RPMessage_AnnounceMsg *)cbParams->data;
 
-            hRpMsg->controlEndPtCallback(hRpMsg->controlEndPtCallbackArgs, remoteCoreId, pMsg->remoteEndPt, pMsg->name);
+            hRpMsg->controlEndPtCallback(hRpMsg->controlEndPtCallbackArgs, cbParams->remoteCoreId,
+                                         (uint16)pMsg->remoteEndPt, pMsg->name);
         }
     }
 }
@@ -616,49 +621,59 @@ static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint3
     return isDone;
 }
 
-static sint32 RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle hRpMsg, RPMessage_LocalMsg *pMsg,
-                                                  uint16 localEndPt, uint8 *vringBufAddr, RPMessage_Header *header,
-                                                  uint32 remoteCoreId, sint32 status, uint16 vringBufId, uint32 timeout)
+static sint32 RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle                hRpMsg,
+                                                  const RPMessage_RecvHandlerParams *recvHandlerParams)
 {
-    sint32 retVal = status;
-    if (localEndPt < RPMESSAGE_MAX_LOCAL_ENDPT)
+    sint32 retVal = recvHandlerParams->status;
+    if (recvHandlerParams->localEndPt < RPMESSAGE_MAX_LOCAL_ENDPT)
     {
-        RPMessage_Struct *epObj = hRpMsg->localEndPtObj[localEndPt];
+        RPMessage_Struct *epObj = hRpMsg->localEndPtObj[recvHandlerParams->localEndPt];
         if (epObj != NULL_PTR)
         {
             if (epObj->recvCallback != NULL_PTR)
             {
-                sint32 crcStatus = MCAL_SystemP_SUCCESS;
+                sint32                       crcStatus = MCAL_SystemP_SUCCESS;
+                RPMessage_RecvCallbackParams cbParams;
 #if (CDD_IPC_CRC_ENABLE == STD_ON)
                 {
                     uint16 crc;
 
                     crcStatus = hRpMsg->hRpMsgInit->hIpcNotify->hIpcNotifyInit->Cdd_Ipc_CrcHookFunc(
-                        (uint8 *)(&vringBufAddr[sizeof(RPMessage_Header)]), header->dataLen, CDD_IPC_RPMESSAGE_CRC_SIZE,
-                        &crc);
+                        (uint8 *)(&recvHandlerParams->vringBufAddr[sizeof(RPMessage_Header)]),
+                        recvHandlerParams->header->dataLen, CDD_IPC_RPMESSAGE_CRC_SIZE, &crc);
 
-                    if (header->flags != crc)
+                    if (recvHandlerParams->header->flags != crc)
                     {
                         crcStatus = MCAL_SystemP_FAILURE;
                     }
                 }
 #endif
+                /* Populate callback parameters structure */
+                cbParams.handle       = hRpMsg;
+                cbParams.epObj        = (RPMessage_EpObject *)epObj;
+                cbParams.arg          = epObj->recvCallbackArgs;
+                cbParams.data         = &recvHandlerParams->vringBufAddr[sizeof(RPMessage_Header)];
+                cbParams.dataLen      = recvHandlerParams->header->dataLen;
+                cbParams.crcStatus    = crcStatus;
+                cbParams.remoteCoreId = (uint16)recvHandlerParams->remoteCoreId;
+                cbParams.remoteEndPt  = (uint16)recvHandlerParams->header->srcEndPt;
+
                 /* recv messages handled in callback mode */
-                epObj->recvCallback(hRpMsg, (RPMessage_EpObject *)epObj, epObj->recvCallbackArgs,
-                                    &vringBufAddr[sizeof(RPMessage_Header)], header->dataLen, crcStatus,
-                                    (uint16)remoteCoreId, (uint16)header->srcEndPt);
+                epObj->recvCallback(&cbParams);
 
                 /* pMsg is not used, free it */
-                RPMessage_freeEndPtMsg(&hRpMsg->coreObj[remoteCoreId], (uint16)remoteCoreId, pMsg);
+                RPMessage_freeEndPtMsg(&hRpMsg->coreObj[recvHandlerParams->remoteCoreId],
+                                       (uint16)recvHandlerParams->remoteCoreId, recvHandlerParams->pMsg);
                 /* done using vring buf, free it */
-                retVal = RPMessage_vringPutEmptyRxBuf(hRpMsg, (uint16)remoteCoreId, vringBufId, timeout);
+                retVal = RPMessage_vringPutEmptyRxBuf(hRpMsg, (uint16)recvHandlerParams->remoteCoreId,
+                                                      recvHandlerParams->vringBufId, recvHandlerParams->timeout);
             }
             else
             {
                 /* recv messages handled in non-callback mode */
-                pMsg->remoteCoreId = (uint16)remoteCoreId;
-                pMsg->vringBufId   = vringBufId;
-                RPMessage_putEndPtMsg(epObj, pMsg);
+                recvHandlerParams->pMsg->remoteCoreId = (uint16)recvHandlerParams->remoteCoreId;
+                recvHandlerParams->pMsg->vringBufId   = recvHandlerParams->vringBufId;
+                RPMessage_putEndPtMsg(epObj, recvHandlerParams->pMsg);
                 retVal = MCAL_SystemP_SUCCESS;
 
                 RPMessage_lld_recvHandlerEndPtCheck_recvNotifyCallback(hRpMsg, epObj);
@@ -667,7 +682,8 @@ static sint32 RPMessage_lld_recvHandlerEndPtCheck(RPMessageLLD_Handle hRpMsg, RP
     }
     if (retVal == MCAL_SystemP_SUCCESS)
     {
-        retVal = RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(hRpMsg, retVal, remoteCoreId, vringBufId, timeout);
+        retVal = RPMessage_lld_recvHandlerEndPtCheck_EmptyRxBuf(
+            hRpMsg, retVal, recvHandlerParams->remoteCoreId, recvHandlerParams->vringBufId, recvHandlerParams->timeout);
     }
 
     return retVal;
@@ -697,30 +713,29 @@ static void RPMessage_notify_Callback(RPMessageLLD_Handle hRpMsg, uint32 remoteC
     }
 }
 
-static sint32 RPMessage_lldSend_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId,
-                                                  uint16 dataLen, uint16 remoteEndPt, uint16 localEndPt, void *data,
-                                                  uint32 timeout, sint32 status)
+static sint32 RPMessage_lldSend_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId,
+                                                  const RPMessage_VringTxParams *txParams, sint32 status)
 {
-    uint16            dataLength   = dataLen;
+    uint16            dataLength   = txParams->dataLen;
     sint32            retVal       = status;
-    uint8            *vringBufAddr = RPMessage_vringGetTxBufAddr(hRpMsg, remoteCoreId, vringBufId);
-    uint16            vringBufLen  = (uint16)RPMessage_vringGetTxBufLen(hRpMsg, remoteCoreId, vringBufId);
+    uint8            *vringBufAddr = RPMessage_vringGetTxBufAddr(hRpMsg, remoteCoreId, txParams->vringBufId);
+    uint16            vringBufLen  = (uint16)RPMessage_vringGetTxBufLen(hRpMsg, remoteCoreId, txParams->vringBufId);
     RPMessage_Header *header       = (RPMessage_Header *)vringBufAddr;
 
-    if (dataLen > (vringBufLen - sizeof(RPMessage_Header)))
+    if (txParams->dataLen > (vringBufLen - sizeof(RPMessage_Header)))
     {
         dataLength = vringBufLen - (uint16)sizeof(RPMessage_Header);
     }
 
-    header->srcEndPt  = localEndPt;
-    header->dstEndPt  = remoteEndPt;
+    header->srcEndPt  = txParams->localEndPt;
+    header->dstEndPt  = txParams->remoteEndPt;
     header->srcCoreId = hRpMsg->selfCoreId;
     header->flags     = 0U;
 #if (CDD_IPC_CRC_ENABLE == STD_ON)
     {
         uint16 crc;
-        retVal        = hRpMsg->hRpMsgInit->hIpcNotify->hIpcNotifyInit->Cdd_Ipc_CrcHookFunc((uint8 *)data, dataLen,
-                                                                                            CDD_IPC_RPMESSAGE_CRC_SIZE, &crc);
+        retVal = hRpMsg->hRpMsgInit->hIpcNotify->hIpcNotifyInit->Cdd_Ipc_CrcHookFunc(
+            (uint8 *)txParams->data, txParams->dataLen, CDD_IPC_RPMESSAGE_CRC_SIZE, &crc);
         header->flags = crc;
     }
 #else
@@ -732,9 +747,9 @@ static sint32 RPMessage_lldSend_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, ui
     if (retVal == MCAL_SystemP_SUCCESS)
     {
         header->dataLen = dataLength;
-        memcpy((void *)&vringBufAddr[sizeof(RPMessage_Header)], (void *)data, (uint32)dataLength);
-        retVal = RPMessage_vringPutFullTxBuf(hRpMsg, remoteCoreId, vringBufId,
-                                             dataLength + (uint16)sizeof(RPMessage_Header), timeout);
+        (void)memcpy((void *)&vringBufAddr[sizeof(RPMessage_Header)], (void *)txParams->data, (uint32)dataLength);
+        retVal = RPMessage_vringPutFullTxBuf(hRpMsg, remoteCoreId, txParams->vringBufId,
+                                             dataLength + (uint16)sizeof(RPMessage_Header), txParams->timeout);
     }
 
     return retVal;
@@ -816,6 +831,38 @@ static sint32 RPMessage_lld_recv_statusCheck(sint32 status)
     {
         /*Do Nothing*/;
     }
+    return status;
+}
+
+static sint32 RPMessage_lld_recv_processMsg(RPMessageLLD_Handle hRpMsg, RPMessage_Struct *epObj,
+                                            RPMessage_RecvParams *recvParams, RPMessage_LocalMsg *pMsg)
+{
+    sint32            status         = MCAL_SystemP_SUCCESS;
+    sint32            freeStatus     = MCAL_SystemP_FAILURE;
+    uint32            isAllocPending = 0U;
+    uint16            vringBufId     = pMsg->vringBufId;
+    uint8            *vringBufAddr   = RPMessage_vringGetRxBufAddr(hRpMsg, pMsg->remoteCoreId, vringBufId);
+    RPMessage_Header *header         = (RPMessage_Header *)vringBufAddr;
+
+    (void)epObj;
+
+    *recvParams->remoteCoreId = pMsg->remoteCoreId;
+    *recvParams->remoteEndPt  = (uint16)header->srcEndPt;
+    RPMessage_lld_recvdataLenCheck(header, recvParams->dataLen);
+    (void)memcpy((void *)recvParams->data, (void *)&vringBufAddr[sizeof(RPMessage_Header)],
+                 (uint32)*recvParams->dataLen);
+#if (CDD_IPC_CRC_ENABLE == STD_ON)
+    status = RPMessage_lld_recv_CrcCheck(hRpMsg, header, recvParams->data, *recvParams->dataLen);
+#endif
+    freeStatus = RPMessage_vringPutEmptyRxBuf(hRpMsg, *recvParams->remoteCoreId, vringBufId, recvParams->timeout);
+    isAllocPending =
+        RPMessage_freeEndPtMsg(&hRpMsg->coreObj[*recvParams->remoteCoreId], *recvParams->remoteCoreId, pMsg);
+    RPMessage_lld_recv_Notify_Callback(hRpMsg, recvParams->remoteCoreId, recvParams->timeout, isAllocPending);
+    if (freeStatus != MCAL_SystemP_SUCCESS)
+    {
+        status = MCAL_SystemP_FAILURE;
+    }
+
     return status;
 }
 

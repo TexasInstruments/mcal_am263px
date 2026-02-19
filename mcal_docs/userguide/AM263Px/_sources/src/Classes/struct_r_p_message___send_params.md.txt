@@ -1,0 +1,43 @@
+---
+orphan: true
+---
+
+---
+title: RPMessage_SendParams
+summary: Parameters for RPMessage send operation. 
+
+---
+
+# RPMessage_SendParams
+
+
+
+Parameters for RPMessage send operation.  [More...](#detailed-description)
+
+
+`#include <ipc_rpmsg_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  void * | data |  |
+|  uint16 | dataLen |  |
+|  uint16 | remoteCoreId |  |
+|  uint16 | remoteEndPt |  |
+|  uint16 | localEndPt |  |
+|  uint32 | timeout |  |
+
+## Detailed Description
+
+```cpp
+struct RPMessage_SendParams;
+```
+
+
+**Brief**: 
+Parameters for RPMessage send operation. 
+
+This structure groups the parameters needed for sending a message. 
+
+

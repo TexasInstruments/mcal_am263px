@@ -1,0 +1,42 @@
+---
+orphan: true
+---
+
+---
+title: RPMessage_RecvParams
+summary: Parameters for RPMessage receive operation. 
+
+---
+
+# RPMessage_RecvParams
+
+
+
+Parameters for RPMessage receive operation.  [More...](#detailed-description)
+
+
+`#include <ipc_rpmsg_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  void * | data |  |
+|  uint16 * | dataLen |  |
+|  uint16 * | remoteCoreId |  |
+|  uint16 * | remoteEndPt |  |
+|  uint32 | timeout |  |
+
+## Detailed Description
+
+```cpp
+struct RPMessage_RecvParams;
+```
+
+
+**Brief**: 
+Parameters for RPMessage receive operation. 
+
+This structure groups the parameters needed for receiving a message. 
+
+

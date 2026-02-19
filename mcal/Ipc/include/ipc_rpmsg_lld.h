@@ -149,6 +149,31 @@ typedef struct RPMessage_EpObject_s
 } RPMessage_EpObject;
 
 /**
+ * \brief Parameters for RPMessage receive callback
+ *
+ * This structure groups the parameters passed to the receive callback function.
+ */
+typedef struct
+{
+    void               *handle;
+    /**< RPMessage handle */
+    RPMessage_EpObject *epObj;
+    /**< RPMessage end point object */
+    void               *arg;
+    /**< User arguments specified during construct */
+    void               *data;
+    /**< Pointer to received message data */
+    uint16              dataLen;
+    /**< Length of received message */
+    sint32              crcStatus;
+    /**< CRC status of received message */
+    uint16              remoteCoreId;
+    /**< Core ID of sender */
+    uint16              remoteEndPt;
+    /**< End point of sender */
+} RPMessage_RecvCallbackParams;
+
+/**
  * \brief Callback that is invoked when a message is received from any CPU at the specified local
  * end point
  *
@@ -159,15 +184,9 @@ typedef struct RPMessage_EpObject_s
  *       If the message contents are needed for deferred processing then take a copy of the message
  * contents
  *
- * \param obj   [in] RPMessage end point object created with \ref RPMessage_lld_construct
- * \param arg  [in] Arguments specified by user during \ref RPMessage_lld_construct
- * \param data  [in] Pointer to message
- * \param dataLen [in] Length of message
- * \param remoteCoreId [in] Core ID of sender
- * \param remoteEndPt [in] End point of sender
+ * \param cbParams [in] Callback parameters containing message info \ref RPMessage_RecvCallbackParams
  */
-typedef void (*RPMessage_lld_recvCallback)(void *handle, RPMessage_EpObject *obj, void *arg, void *data, uint16 dataLen,
-                                           sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt);
+typedef void (*RPMessage_lld_recvCallback)(const RPMessage_RecvCallbackParams *cbParams);
 
 /**
  * \brief Callback that is invoked when a message is received from any CPU at the specified local
@@ -486,6 +505,92 @@ typedef struct
 } RPMessageLLD_Object, *RPMessageLLD_Handle;
 
 /**
+ * \brief Parameters for RPMessage send operation
+ *
+ * This structure groups the parameters needed for sending a message.
+ */
+typedef struct
+{
+    void  *data;
+    /**< Pointer to message data to send */
+    uint16 dataLen;
+    /**< Size of message data to send in bytes */
+    uint16 remoteCoreId;
+    /**< Remote core ID to whom the message is being sent */
+    uint16 remoteEndPt;
+    /**< Remote core end point ID to which the message is being sent */
+    uint16 localEndPt;
+    /**< Local end point that is sending the message */
+    uint32 timeout;
+    /**< Amount of time to wait, in units of system ticks */
+} RPMessage_SendParams;
+
+/**
+ * \brief Parameters for RPMessage receive operation
+ *
+ * This structure groups the parameters needed for receiving a message.
+ */
+typedef struct
+{
+    void   *data;
+    /**< [out] Pointer to buffer for received message contents */
+    uint16 *dataLen;
+    /**< [in/out] Length of user message buffer / Size of received message */
+    uint16 *remoteCoreId;
+    /**< [out] Core ID of sender */
+    uint16 *remoteEndPt;
+    /**< [out] End point of sender */
+    uint32  timeout;
+    /**< Time in system ticks to block for a message receive */
+} RPMessage_RecvParams;
+
+/**
+ * \brief Internal parameters for vring TX buffer operation
+ *
+ * This structure groups the parameters needed for putting a full TX buffer.
+ */
+typedef struct
+{
+    uint16 vringBufId;
+    /**< VRING buffer ID */
+    uint16 dataLen;
+    /**< Size of message data in bytes */
+    uint16 remoteEndPt;
+    /**< Remote core end point ID */
+    uint16 localEndPt;
+    /**< Local end point that is sending */
+    void  *data;
+    /**< Pointer to message data */
+    uint32 timeout;
+    /**< Timeout in system ticks */
+} RPMessage_VringTxParams;
+
+/**
+ * \brief Internal parameters for receive handler endpoint check
+ *
+ * This structure groups the parameters needed for the receive handler endpoint check function.
+ */
+typedef struct
+{
+    RPMessage_LocalMsg *pMsg;
+    /**< Pointer to local message object */
+    uint16              localEndPt;
+    /**< Local endpoint ID */
+    uint8              *vringBufAddr;
+    /**< Pointer to vring buffer address */
+    RPMessage_Header   *header;
+    /**< Pointer to message header */
+    uint32              remoteCoreId;
+    /**< Remote core ID */
+    sint32              status;
+    /**< Status value */
+    uint16              vringBufId;
+    /**< VRING buffer ID */
+    uint32              timeout;
+    /**< Timeout in system ticks */
+} RPMessage_RecvHandlerParams;
+
+/**
  * \brief Set default values to \ref RPMessage_CreateParams
  *
  * \param params [out] default intialized structure
@@ -583,19 +688,13 @@ void RPMessage_lld_destruct(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *obj)
  *       return will immediately SystemP_TIMEOUT. Else it will wait for specified `timeout`
  *       ticks for a free buffer to be available.
  *
- * \param data [in] Pointer to message data to send
- * \param dataLen [in] size of message data to send
- * \param remoteCoreId  [in] Remote core ID to whom the message is being sent
- * \param remoteEndPt  [in] Remote core end point ID to which the message is being sent
- * \param localEndPt [in] Local end point that is sending the message
- * \param timeout   [in] Amount of time to wait, in units of system ticks
+ * \param sendParams [in] RPmessage send structure \ref RPMessage_SendParams
  *
  * \return MCAL_SystemP_SUCCESS, when the send message was successful
  * \return SystemP_TIMEOUT, message not sent since free transmit buffer not available and timeout
  * happened.
  */
-sint32 RPMessage_lld_send(RPMessageLLD_Handle hRpMsg, void *data, uint16 dataLen, uint16 remoteCoreId,
-                          uint16 remoteEndPt, uint16 localEndPt, uint32 timeout);
+sint32 RPMessage_lld_send(RPMessageLLD_Handle hRpMsg, const RPMessage_SendParams *sendParams);
 
 /**
  * \brief Blocking API to wait till a message is received from any CPU at the specified local end
@@ -632,10 +731,8 @@ void                RPMessage_lld_recvHandler(RPMessageLLD_Handle hRpMsg, uint32
 uint32              RPMessage_freeEndPtMsg(RPMessage_Core *coreObj, uint16 remoteCoreId, RPMessage_LocalMsg *pMsg);
 void   RPMessage_notifyCallback(void *ipcNotifyHandle, uint32 remoteCoreId, uint16 localClientId, uint32 msgValue,
                                 uint32 timeout, sint32 crcStatus, void *args);
-sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *obj, void *data, uint16 *dataLen,
-                          uint16 *remoteCoreId, uint16 *remoteEndPt, uint32 timeout);
-void RPMessage_controlEndPtHandler(void *rpMsgHandle, RPMessage_EpObject *epObj, void *arg, void *data, uint16 dataLen,
-                                   sint32 crcStatus, uint16 remoteCoreId, uint16 remoteEndPt);
+sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObject, RPMessage_RecvParams *recvParams);
+void   RPMessage_controlEndPtHandler(const RPMessage_RecvCallbackParams *cbParams);
 
 /** @} */
 

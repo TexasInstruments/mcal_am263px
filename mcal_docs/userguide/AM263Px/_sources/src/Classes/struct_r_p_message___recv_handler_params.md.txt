@@ -1,0 +1,45 @@
+---
+orphan: true
+---
+
+---
+title: RPMessage_RecvHandlerParams
+summary: Internal parameters for receive handler endpoint check. 
+
+---
+
+# RPMessage_RecvHandlerParams
+
+
+
+Internal parameters for receive handler endpoint check.  [More...](#detailed-description)
+
+
+`#include <ipc_rpmsg_lld.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  RPMessage_LocalMsg * | pMsg |  |
+|  uint16 | localEndPt |  |
+|  uint8 * | vringBufAddr |  |
+|  RPMessage_Header * | header |  |
+|  uint32 | remoteCoreId |  |
+|  sint32 | status |  |
+|  uint16 | vringBufId |  |
+|  uint32 | timeout |  |
+
+## Detailed Description
+
+```cpp
+struct RPMessage_RecvHandlerParams;
+```
+
+
+**Brief**: 
+Internal parameters for receive handler endpoint check. 
+
+This structure groups the parameters needed for the receive handler endpoint check function. 
+
+

@@ -256,7 +256,7 @@ static Std_ReturnType Fls_Ospi_phyGetBaudRateDivFromObj(uint32 *baudDiv);
 static void           Fls_Ospi_phySetRdDataCaptureDelay(uint32 rdDataCapDelay);
 static uint32         Fls_Ospi_phyGetRdDataCaptureDelay(void);
 static Std_ReturnType Fls_Ospi_phyReadAttackVector(uint32 offset);
-static void           Fls_Ospi_phyGetTuningData(uint32 *tuningData, uint32 *tuningDataSize);
+static void           Fls_Ospi_phyGetTuningData(const uint8 **tuningData, uint32 *tuningDataSize);
 static void           Fls_Ospi_phyBasicConfig(void);
 static void           Fls_Ospi_phyResyncDLL(void);
 static void           Fls_Ospi_phySetRdDelayTxRxDLL(const Fls_Ospi_phyConfig *configPoint);
@@ -266,6 +266,59 @@ static void Fls_Ospi_phyFindTxLow(const Fls_Ospi_phyConfig *start, uint32 offset
 static void Fls_Ospi_phyFindTxHigh(const Fls_Ospi_phyConfig *start, uint32 offset, Fls_Ospi_phyConfig *result);
 static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfig *otp);
 static Std_ReturnType Fls_Ospi_phyTuneDDR(uint32 flashOffset);
+static Std_ReturnType Fls_Ospi_phySweepReadCaptureDelay(uint32 phyTuningOffset, uint32 *rdCapDelay);
+static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOffset, uint32 initialRdCapDelay,
+                                                             uint32 *rdCapDelay);
+
+/* Helper functions for Fls_Ospi_phyFindOTP1 to reduce complexity */
+
+/* Inner loop helpers for RxLow/RxHigh search - reduces nesting and complexity */
+static boolean Fls_Ospi_phyRxLowInnerSearch(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                            Fls_Ospi_phyConfig *rxResult, const OSPI_PhyWindowParams *params,
+                                            int32_t windowEnd);
+static boolean Fls_Ospi_phyBackupRxLowInnerSearch(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                                  Fls_Ospi_phyConfig *rxResult, const OSPI_PhyWindowParams *params,
+                                                  int32_t windowStart);
+static boolean Fls_Ospi_phyRxHighInnerSearch(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                             Fls_Ospi_phyConfig *rxResult, const OSPI_PhyWindowParams *params);
+static void    Fls_Ospi_phyMergeRxHighResults(Fls_Ospi_phyConfig *rxHigh, const Fls_Ospi_phyConfig *sec_rxHigh,
+                                              boolean *continueSearch);
+
+/* Step execution helpers for Fls_Ospi_phyFindOTP1 - reduces cyclomatic complexity */
+static boolean        Fls_Ospi_phyExecuteBackupRxSearches(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                                          Fls_Ospi_phyRxTxPoints     *rxPoints,
+                                                          const OSPI_PhyWindowParams *params);
+static boolean        Fls_Ospi_phyExecuteTxSearches(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                                    Fls_Ospi_phyRxTxPoints *txPoints, const Fls_Ospi_phyRxTxPoints *rxPoints,
+                                                    const OSPI_PhyWindowParams *params);
+static Std_ReturnType Fls_Ospi_phyFinalizeOTP(uint32 flashOffset, const Fls_Ospi_phyCornerPoints *corners,
+                                              Fls_Ospi_phyConfig *otp);
+
+static boolean Fls_Ospi_phySearchGoldenRxLow(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                             Fls_Ospi_phyConfig *rxLow, Fls_Ospi_phyConfig *sec_rxLow,
+                                             const OSPI_PhyWindowParams *params);
+static boolean Fls_Ospi_phySearchGoldenRxHigh(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                              Fls_Ospi_phyConfig *rxHigh, Fls_Ospi_phyConfig *sec_rxHigh,
+                                              const OSPI_PhyWindowParams *params);
+static boolean Fls_Ospi_phySearchBackupRxLow(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                             Fls_Ospi_phyConfig *backupPoint, Fls_Ospi_phyConfig *sec_rxLow,
+                                             const OSPI_PhyWindowParams *params);
+static boolean Fls_Ospi_phySearchBackupRxHigh(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                              Fls_Ospi_phyConfig *backupPoint, Fls_Ospi_phyConfig *sec_rxHigh,
+                                              const OSPI_PhyWindowParams *params);
+static boolean Fls_Ospi_phySearchGoldenTx(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                          Fls_Ospi_phyRxTxPoints *txPoints, const Fls_Ospi_phyRxTxPoints *rxPoints,
+                                          const OSPI_PhyWindowParams *params);
+static boolean Fls_Ospi_phySearchBackupTx(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                          Fls_Ospi_phyRxTxPoints *txPoints, const Fls_Ospi_phyRxTxPoints *rxPoints,
+                                          const OSPI_PhyWindowParams *params);
+static void    Fls_Ospi_phySetupCornerPoints(uint32 flashOffset, Fls_Ospi_phyCornerPoints *corners,
+                                             const Fls_Ospi_phyRxTxPoints *txPoints,
+                                             const Fls_Ospi_phyRxTxPoints *rxPoints);
+static void    Fls_Ospi_phyBinarySearchGap(uint32 flashOffset, const Fls_Ospi_phyCornerPoints *corners,
+                                           Fls_Ospi_phyGapPoints *gaps, float32 slope);
+static void    Fls_Ospi_phyCalculateFinalOTP(const Fls_Ospi_phyCornerPoints *corners, const Fls_Ospi_phyGapPoints *gaps,
+                                             float32 slope, Fls_Ospi_phyConfig *searchPoint);
 
 static Std_ReturnType Fls_Ospi_phyConfigBaudrate(uint32 baud)
 {
@@ -345,9 +398,9 @@ static Std_ReturnType Fls_Ospi_phyReadAttackVector(uint32 offset)
     return status;
 }
 
-static void Fls_Ospi_phyGetTuningData(uint32 *tuningData, uint32 *tuningDataSize)
+static void Fls_Ospi_phyGetTuningData(const uint8 **tuningData, uint32 *tuningDataSize)
 {
-    *tuningData     = (uint32)&gOspiFlashAttackVector[0U];
+    *tuningData     = &gOspiFlashAttackVector[0U];
     *tuningDataSize = OSPI_FLASH_ATTACK_VECTOR_SIZE;
 }
 
@@ -584,489 +637,498 @@ static void Fls_Ospi_phyFindTxHigh(const Fls_Ospi_phyConfig *start, uint32 offse
     }
 }
 
-static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfig *otp)
+/**
+ * @brief Inner search loop for RxLow - handles rdDelay iteration
+ *
+ * This helper function extracts the inner while loop from RxLow search functions
+ * to reduce nesting level and cyclomatic complexity.
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration (rdDelay updated)
+ * @param[in,out] rxResult Rx search result (updated by Fls_Ospi_phyFindRxLow)
+ * @param[in] params PHY tuning window parameters
+ * @param[in] windowEnd Window end value for txDLL comparison
+ * @return TRUE if search should continue, FALSE if search failed or should stop
+ */
+static boolean Fls_Ospi_phyRxLowInnerSearch(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                            Fls_Ospi_phyConfig *rxResult, const OSPI_PhyWindowParams *params,
+                                            int32_t windowEnd)
 {
-    Std_ReturnType        status = E_OK;
-    OSPI_PhyWindowParams *gPhyTuneWindowParams =
-        (OSPI_PhyWindowParams *)&Fls_Ospi_tuningWindowParams.tuningWindowParams;
-    Fls_Ospi_phyConfig searchPoint;
-    Fls_Ospi_phyConfig bottomLeft = {0, 0, 0}, topRight = {0, 0, 0};
-    Fls_Ospi_phyConfig gapLow = {0, 0, 0}, gapHigh = {0, 0, 0};
-    Fls_Ospi_phyConfig rxLow = {0, 0, 0}, rxHigh = {0, 0, 0};
-    Fls_Ospi_phyConfig txLow = {0, 0, 0}, txHigh = {0, 0, 0};
-    Fls_Ospi_phyConfig backupPoint = {0, 0, 0}, backupCornerPoint = {0, 0, 0};
-    Fls_Ospi_phyConfig sec_rxLow = {0, 0, 0}, sec_rxHigh = {0, 0, 0};
-    float32            slope;
+    boolean continueSearch = TRUE;
 
-    /*
-     * Finding RxDLL fails at some of the TxDLL values based on the HW platform.
-     * A window of TxDLL values is used to find the RxDLL without errors.
-     * This can increase the number of CPU cycles taken for the PHY tuning
-     * in the cases where more TxDLL values need to be parsed to find a stable RxDLL.
-     */
-
-    /***************************** GOLDEN Primary Rx_Low Search **************/
-    /*
-     * To find the RxDLL boundaries, we fix a valid TxDLL and search through RxDLL range, rdDelay values
-     * As we are not sure of a valid TxDLL we use a window of TxDLL values to find the RxDLL boundaries.
-     */
-
-    searchPoint.txDLL = gPhyTuneWindowParams->txDllLowWindowStart;
-
-    while (searchPoint.txDLL <= gPhyTuneWindowParams->txDllLowWindowEnd)
+    while ((rxResult->rxDLL == 128) && (continueSearch == TRUE))
     {
-        searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMin;
-        searchPoint.rxDLL   = gPhyTuneWindowParams->rxLowSearchStart;
-        Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &rxLow);
-
-        while (rxLow.rxDLL == 128)
+        searchPoint->rdDelay++;
+        if (searchPoint->rdDelay > (int32_t)params->rdDelayMax)
         {
-            searchPoint.rdDelay++;
-            if (searchPoint.rdDelay > (int32_t)gPhyTuneWindowParams->rdDelayMax)
+            if (searchPoint->txDLL >= windowEnd)
             {
-                if (searchPoint.txDLL >= gPhyTuneWindowParams->txDllLowWindowEnd)
-                {
-                    status = E_NOT_OK;
-                    return status;
-                }
-                else
-                {
-                    break;
-                }
+                continueSearch = FALSE;
             }
-
-            Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &rxLow);
+            break;
         }
+        Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, rxResult);
+    }
 
-        if (rxLow.rxDLL != 128)
+    return continueSearch;
+}
+
+/**
+ * @brief Inner search loop for RxHigh - handles rdDelay iteration
+ *
+ * This helper function extracts the inner while loop from RxHigh search functions
+ * to reduce nesting level and cyclomatic complexity.
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration (rdDelay updated)
+ * @param[in,out] rxResult Rx search result (updated by Fls_Ospi_phyFindRxHigh)
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search should continue (always TRUE for RxHigh inner search)
+ */
+static boolean Fls_Ospi_phyRxHighInnerSearch(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                             Fls_Ospi_phyConfig *rxResult, const OSPI_PhyWindowParams *params)
+{
+    boolean continueSearch = TRUE;
+
+    while ((rxResult->rxDLL == 128) && (continueSearch == TRUE))
+    {
+        searchPoint->rdDelay--;
+        if (searchPoint->rdDelay < (int32_t)params->rdDelayMin)
         {
             break;
         }
-
-        searchPoint.txDLL += (int32_t)gPhyTuneWindowParams->rxTxDLLSearchStep;
+        Fls_Ospi_phyFindRxHigh(searchPoint, flashOffset, rxResult);
     }
 
-    /***************************** GOLDEN Secondary Rx_Low Search *****************************/
-    /* Search for one more rxLow at different txDll*/
-    if (searchPoint.txDLL <= (gPhyTuneWindowParams->txDllLowWindowEnd - gPhyTuneWindowParams->txDLLSearchOffset))
-    {
-        searchPoint.txDLL += gPhyTuneWindowParams->txDLLSearchOffset;
-    }
-    else
-    {
-        searchPoint.txDLL = gPhyTuneWindowParams->txDllLowWindowEnd;
-    }
+    return continueSearch;
+}
 
-    searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMin;
-    searchPoint.rxDLL   = gPhyTuneWindowParams->rxLowSearchStart;
-
-    Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &sec_rxLow);
-    while (sec_rxLow.rxDLL == 128)
+/**
+ * @brief Merge RxHigh results from primary and secondary searches
+ *
+ * @param[in,out] rxHigh Primary RxHigh result (updated if secondary is better)
+ * @param[in] sec_rxHigh Secondary RxHigh result
+ * @param[in,out] continueSearch Search continuation flag (set to FALSE if both failed)
+ */
+static void Fls_Ospi_phyMergeRxHighResults(Fls_Ospi_phyConfig *rxHigh, const Fls_Ospi_phyConfig *sec_rxHigh,
+                                           boolean *continueSearch)
+{
+    if (sec_rxHigh->rxDLL != 128)
     {
-        searchPoint
-            .rdDelay++; /* For each TxDLL in the window, go through all the valid rdDelays until we find the RxLow */
-        if (searchPoint.rdDelay > (int32_t)gPhyTuneWindowParams->rdDelayMax)
+        if (rxHigh->rxDLL == 128)
         {
-            if (searchPoint.txDLL >= gPhyTuneWindowParams->txDllLowWindowEnd)
-            {
-                status = E_NOT_OK;
-                return status; /* Not able to find RxLow as there is no valid TxDLL in the TxDLL window */
-            }
-            else
-            {
-                break;
-            }
+            *rxHigh = *sec_rxHigh;
         }
-
-        Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &sec_rxLow);
-    }
-
-    rxLow.rxDLL   = MIN(rxLow.rxDLL, sec_rxLow.rxDLL);
-    rxLow.rdDelay = MIN(rxLow.rdDelay, sec_rxLow.rdDelay);
-
-    /*
-     * Reset the search point txDLL to continue the Rx_High search
-     */
-    searchPoint.txDLL = rxLow.txDLL;
-
-    /***************************** GOLDEN Primary Rx_High Search *********************/
-    /*
-     * To find rxHigh we use the txDLL values of rxLow
-     * Start the rdDelay (Read delay) from maximum and decrement it.
-     * As these are valid values and rxHigh rdDelay is always >= rxLow rdDelay
-     */
-
-    searchPoint.rxDLL   = gPhyTuneWindowParams->rxHighSearchEnd;
-    searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMax;
-    Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &rxHigh);
-    while (rxHigh.rxDLL == 128)
-    {
-        searchPoint.rdDelay--;
-        if (searchPoint.rdDelay < (int32_t)gPhyTuneWindowParams->rdDelayMin)
+        else if (sec_rxHigh->rxDLL > rxHigh->rxDLL)
         {
-            status = E_NOT_OK;
-            break;
-        }
-        Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &rxHigh);
-    }
-
-    /***************************** GOLDEN Secondary Rx_High Search *********************/
-    /*
-     * To find Secondary rxHigh we use the txDLL + Search_offset value of rxLow
-     * Start the rdDelay (Read delay) from maximum and decrement it.
-     * As these are valid values and rxHigh rdDelay is always >= rxLow rdDelay
-     */
-    if (searchPoint.txDLL <= (gPhyTuneWindowParams->txDllLowWindowEnd - gPhyTuneWindowParams->txDLLSearchOffset))
-    {
-        searchPoint.txDLL += gPhyTuneWindowParams->txDLLSearchOffset;
-    }
-    else
-    {
-        searchPoint.txDLL = gPhyTuneWindowParams->txDllLowWindowEnd;
-    }
-
-    searchPoint.rxDLL   = gPhyTuneWindowParams->rxHighSearchEnd;
-    searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMax;
-
-    Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &sec_rxHigh);
-
-    while (sec_rxHigh.rxDLL == 128)
-    {
-        searchPoint.rdDelay--;
-        if (searchPoint.rdDelay < (int32_t)gPhyTuneWindowParams->rdDelayMin)
-        {
-            status = E_NOT_OK;
-            break;
-            /*
-             * If we don't find a valid Secondary Rx_High, Don't return from tuning function
-             * Check whether we have a valid Primary Rx_High and then take decision.
-             */
-        }
-        Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &sec_rxHigh);
-    }
-
-    if (sec_rxHigh.rxDLL != 128)
-    {
-        if (rxHigh.rxDLL == 128)
-        {
-            rxHigh = sec_rxHigh;
+            *rxHigh = *sec_rxHigh;
         }
         else
         {
-            if (sec_rxHigh.rxDLL > rxHigh.rxDLL)
-            {
-                rxHigh = sec_rxHigh;
-            }
+            /* Keep rxHigh as is */
         }
     }
     else
     {
-        if (rxHigh.rxDLL == 128)
+        if (rxHigh->rxDLL == 128)
         {
-            status = E_NOT_OK;
-            return status;
+            *continueSearch = FALSE;
         }
     }
-    /*
-     * Check a different point if the rxLow and rxHigh are on the same rdDelay.
-     * This avoids mistaking the metastability gap for an rxDLL boundary
-     */
-    if (rxLow.rdDelay == rxHigh.rdDelay)
+}
+
+/**
+ * @brief Search for GOLDEN Primary and Secondary Rx_Low points
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration (txDLL updated)
+ * @param[out] rxLow Primary Rx_Low result
+ * @param[out] sec_rxLow Secondary Rx_Low result
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+static boolean Fls_Ospi_phySearchGoldenRxLow(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                             Fls_Ospi_phyConfig *rxLow, Fls_Ospi_phyConfig *sec_rxLow,
+                                             const OSPI_PhyWindowParams *params)
+{
+    boolean continueSearch = TRUE;
+    int32_t windowEnd      = params->txDllLowWindowEnd;
+
+    /* GOLDEN Primary Rx_Low Search */
+    searchPoint->txDLL = params->txDllLowWindowStart;
+
+    while ((searchPoint->txDLL <= params->txDllLowWindowEnd) && (continueSearch == TRUE))
     {
-        /***************************** BACKUP Primary Rx_Low Search *********************/
-        /*
-         * Find the rxDLL boundaries using the TxDLL window at the higher end .
-         * we start the window_end and decrement the TxDLL value until we find the valid point.
-         */
+        searchPoint->rdDelay = (int32_t)params->rdDelayMin;
+        searchPoint->rxDLL   = params->rxLowSearchStart;
+        Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, rxLow);
 
-        searchPoint.txDLL = gPhyTuneWindowParams->txDllHighWindowEnd;
+        continueSearch = Fls_Ospi_phyRxLowInnerSearch(flashOffset, searchPoint, rxLow, params, windowEnd);
 
-        /* Find rxDLL Min */
-        while (searchPoint.txDLL >= gPhyTuneWindowParams->txDllHighWindowStart)
+        if ((rxLow->rxDLL != 128) || (continueSearch == FALSE))
         {
-            searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMin;
-            searchPoint.rxDLL   = gPhyTuneWindowParams->rxLowSearchStart;
-            Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &backupPoint);
-
-            while (backupPoint.rxDLL == 128)
-            {
-                searchPoint.rdDelay++;
-                if (searchPoint.rdDelay > (int32_t)gPhyTuneWindowParams->rdDelayMax)
-                {
-                    if (searchPoint.txDLL <= gPhyTuneWindowParams->txDllHighWindowStart)
-                    {
-                        status = E_NOT_OK;
-                        return status;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-                Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &backupPoint);
-            }
-
-            if (backupPoint.rxDLL != (int32_t)128)
-            {
-                break;
-            }
-
-            searchPoint.txDLL -= (int32_t)gPhyTuneWindowParams->rxTxDLLSearchStep;
+            break;
         }
 
-        /***************************** BACKUP Secondary Rx_Low Search *********************/
-        /* Search for one more rxLow at different txDll*/
-        if (searchPoint.txDLL >= (gPhyTuneWindowParams->txDllHighWindowStart + gPhyTuneWindowParams->txDLLSearchOffset))
+        searchPoint->txDLL += (int32_t)params->rxTxDLLSearchStep;
+    }
+
+    /* GOLDEN Secondary Rx_Low Search */
+    if (continueSearch == TRUE)
+    {
+        if (searchPoint->txDLL <= (params->txDllLowWindowEnd - params->txDLLSearchOffset))
         {
-            searchPoint.txDLL -= gPhyTuneWindowParams->txDLLSearchOffset;
+            searchPoint->txDLL += params->txDLLSearchOffset;
         }
         else
         {
-            searchPoint.txDLL = gPhyTuneWindowParams->txDllHighWindowStart;
+            searchPoint->txDLL = params->txDllLowWindowEnd;
         }
 
-        searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMin;
-        searchPoint.rxDLL   = gPhyTuneWindowParams->rxLowSearchStart;
-        Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &sec_rxLow);
-        while (sec_rxLow.rxDLL == 128)
+        searchPoint->rdDelay = (int32_t)params->rdDelayMin;
+        searchPoint->rxDLL   = params->rxLowSearchStart;
+
+        Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, sec_rxLow);
+        continueSearch = Fls_Ospi_phyRxLowInnerSearch(flashOffset, searchPoint, sec_rxLow, params, windowEnd);
+    }
+
+    return continueSearch;
+}
+
+/**
+ * @brief Search for GOLDEN Primary and Secondary Rx_High points
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration
+ * @param[out] rxHigh Primary Rx_High result
+ * @param[out] sec_rxHigh Secondary Rx_High result
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+static boolean Fls_Ospi_phySearchGoldenRxHigh(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                              Fls_Ospi_phyConfig *rxHigh, Fls_Ospi_phyConfig *sec_rxHigh,
+                                              const OSPI_PhyWindowParams *params)
+{
+    boolean continueSearch = TRUE;
+
+    /* GOLDEN Primary Rx_High Search */
+    searchPoint->rxDLL   = params->rxHighSearchEnd;
+    searchPoint->rdDelay = (int32_t)params->rdDelayMax;
+    Fls_Ospi_phyFindRxHigh(searchPoint, flashOffset, rxHigh);
+
+    (void)Fls_Ospi_phyRxHighInnerSearch(flashOffset, searchPoint, rxHigh, params);
+
+    /* GOLDEN Secondary Rx_High Search */
+    if (searchPoint->txDLL <= (params->txDllLowWindowEnd - params->txDLLSearchOffset))
+    {
+        searchPoint->txDLL += params->txDLLSearchOffset;
+    }
+    else
+    {
+        searchPoint->txDLL = params->txDllLowWindowEnd;
+    }
+
+    searchPoint->rxDLL   = params->rxHighSearchEnd;
+    searchPoint->rdDelay = (int32_t)params->rdDelayMax;
+
+    Fls_Ospi_phyFindRxHigh(searchPoint, flashOffset, sec_rxHigh);
+
+    (void)Fls_Ospi_phyRxHighInnerSearch(flashOffset, searchPoint, sec_rxHigh, params);
+
+    /* Merge results */
+    Fls_Ospi_phyMergeRxHighResults(rxHigh, sec_rxHigh, &continueSearch);
+
+    return continueSearch;
+}
+
+/**
+ * @brief Search for BACKUP Primary and Secondary Rx_Low points
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration
+ * @param[out] backupPoint Backup Rx_Low result
+ * @param[out] sec_rxLow Secondary Rx_Low result
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+/**
+ * @brief Inner search loop for Backup RxLow - handles rdDelay iteration (decrementing txDLL)
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration (rdDelay updated)
+ * @param[in,out] rxResult Rx search result (updated by Fls_Ospi_phyFindRxLow)
+ * @param[in] params PHY tuning window parameters
+ * @param[in] windowStart Window start value for txDLL comparison
+ * @return TRUE if search should continue, FALSE if search failed or should stop
+ */
+static boolean Fls_Ospi_phyBackupRxLowInnerSearch(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                                  Fls_Ospi_phyConfig *rxResult, const OSPI_PhyWindowParams *params,
+                                                  int32_t windowStart)
+{
+    boolean continueSearch = TRUE;
+
+    while ((rxResult->rxDLL == 128) && (continueSearch == TRUE))
+    {
+        searchPoint->rdDelay++;
+        if (searchPoint->rdDelay > (int32_t)params->rdDelayMax)
         {
-            searchPoint.rdDelay++; /* For each TxDLL in the window, go through all the valid rdDelays until we find the
-                                      RxLow */
-            if (searchPoint.rdDelay > (int32_t)gPhyTuneWindowParams->rdDelayMax)
+            if (searchPoint->txDLL <= windowStart)
             {
-                if (searchPoint.txDLL <= gPhyTuneWindowParams->txDllHighWindowStart)
-                {
-                    status = E_NOT_OK;
-                    return status; /* Not able to find RxLow as there is no valid TxDLL in the TxDLL window */
-                }
-                else
-                {
-                    break;
-                }
+                continueSearch = FALSE;
             }
-            Fls_Ospi_phyFindRxLow(&searchPoint, flashOffset, &sec_rxLow);
+            break;
+        }
+        Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, rxResult);
+    }
+
+    return continueSearch;
+}
+
+static boolean Fls_Ospi_phySearchBackupRxLow(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                             Fls_Ospi_phyConfig *backupPoint, Fls_Ospi_phyConfig *sec_rxLow,
+                                             const OSPI_PhyWindowParams *params)
+{
+    boolean continueSearch = TRUE;
+    int32_t windowStart    = params->txDllHighWindowStart;
+
+    /* BACKUP Primary Rx_Low Search */
+    searchPoint->txDLL = params->txDllHighWindowEnd;
+
+    while ((searchPoint->txDLL >= params->txDllHighWindowStart) && (continueSearch == TRUE))
+    {
+        searchPoint->rdDelay = (int32_t)params->rdDelayMin;
+        searchPoint->rxDLL   = params->rxLowSearchStart;
+        Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, backupPoint);
+
+        continueSearch = Fls_Ospi_phyBackupRxLowInnerSearch(flashOffset, searchPoint, backupPoint, params, windowStart);
+
+        if ((backupPoint->rxDLL != (int32_t)128) || (continueSearch == FALSE))
+        {
+            break;
         }
 
-        backupPoint.rxDLL   = MIN(backupPoint.rxDLL, sec_rxLow.rxDLL);
-        backupPoint.rdDelay = MIN(backupPoint.rdDelay, sec_rxLow.rdDelay);
+        searchPoint->txDLL -= (int32_t)params->rxTxDLLSearchStep;
+    }
 
-        if (backupPoint.rxDLL < rxLow.rxDLL)
+    /* BACKUP Secondary Rx_Low Search */
+    if (continueSearch == TRUE)
+    {
+        if (searchPoint->txDLL >= (params->txDllHighWindowStart + params->txDLLSearchOffset))
         {
-            rxLow = backupPoint;
-        }
-
-        /*
-         * Reset the search point txDLL to continue the Rx_High search
-         */
-        searchPoint.txDLL = backupPoint.txDLL;
-
-        /***************************** BACKUP Primary Rx_High Search *********************/
-        /*
-         * Find rxDLL Max
-         * Start the rdDelay (Read delay) from maximum and decrement it.
-         */
-
-        searchPoint.rxDLL   = gPhyTuneWindowParams->rxHighSearchEnd;
-        searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMax;
-        Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &backupPoint);
-
-        while (backupPoint.rxDLL == 128)
-        {
-            searchPoint.rdDelay--;
-            if (searchPoint.rdDelay < (int32_t)gPhyTuneWindowParams->rdDelayMin)
-            {
-                status = E_NOT_OK;
-                break;
-            }
-            Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &backupPoint);
-        }
-
-        /***************************** BACKUP Secondary Rx_High Search *********************/
-        /*
-         * Find rxDLL Max
-         * Start the rdDelay (Read delay) from maximum and decrement it.
-         */
-
-        if (searchPoint.txDLL >= (gPhyTuneWindowParams->txDllHighWindowStart + gPhyTuneWindowParams->txDLLSearchOffset))
-        {
-            searchPoint.txDLL -= gPhyTuneWindowParams->txDLLSearchOffset;
+            searchPoint->txDLL -= params->txDLLSearchOffset;
         }
         else
         {
-            searchPoint.txDLL = gPhyTuneWindowParams->txDllHighWindowStart;
+            searchPoint->txDLL = params->txDllHighWindowStart;
         }
 
-        searchPoint.rxDLL   = gPhyTuneWindowParams->rxHighSearchEnd;
-        searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMax;
-        Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &sec_rxHigh);
+        searchPoint->rdDelay = (int32_t)params->rdDelayMin;
+        searchPoint->rxDLL   = params->rxLowSearchStart;
+        Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, sec_rxLow);
 
-        while (sec_rxHigh.rxDLL == 128)
-        {
-            searchPoint.rdDelay--;
-            if (searchPoint.rdDelay < (int32_t)gPhyTuneWindowParams->rdDelayMin)
-            {
-                status = E_NOT_OK;
-                break;
-            }
-            Fls_Ospi_phyFindRxHigh(&searchPoint, flashOffset, &sec_rxHigh);
-        }
-
-        /*
-         * Compare the Primary and Secondary point
-         * Pick the point which has passing maximum rxDll
-         */
-
-        if (sec_rxHigh.rxDLL != 128)
-        {
-            if (backupPoint.rxDLL == 128)
-            {
-                backupPoint = sec_rxHigh;
-            }
-            else
-            {
-                if (sec_rxHigh.rxDLL > backupPoint.rxDLL)
-                {
-                    backupPoint = sec_rxHigh;
-                }
-            }
-        }
-        else
-        {
-            if (backupPoint.rxDLL == 128)
-            {
-                status = E_NOT_OK;
-                return status;
-            }
-        }
-
-        if (backupPoint.rxDLL > rxHigh.rxDLL)
-        {
-            rxHigh = backupPoint;
-        }
+        continueSearch = Fls_Ospi_phyBackupRxLowInnerSearch(flashOffset, searchPoint, sec_rxLow, params, windowStart);
     }
 
-    /***************************** GOLDEN Tx_Low Search *********************/
-    /*
-     * Look for txDLL boundaries at 1/4 of rxDLL window
-     * Find txDLL Min
-     */
+    return continueSearch;
+}
 
-    searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMin;
-    searchPoint.rxDLL   = rxLow.rxDLL + ((rxHigh.rxDLL - rxLow.rxDLL) / 4);
-    searchPoint.txDLL   = gPhyTuneWindowParams->txLowSearchStart;
-    Fls_Ospi_phyFindTxLow(&searchPoint, flashOffset, &txLow);
+/**
+ * @brief Search for BACKUP Primary and Secondary Rx_High points
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration
+ * @param[out] backupPoint Backup Rx_High result
+ * @param[out] sec_rxHigh Secondary Rx_High result
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+static boolean Fls_Ospi_phySearchBackupRxHigh(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                              Fls_Ospi_phyConfig *backupPoint, Fls_Ospi_phyConfig *sec_rxHigh,
+                                              const OSPI_PhyWindowParams *params)
+{
+    boolean continueSearch = TRUE;
 
-    while (txLow.txDLL == 128)
+    /* BACKUP Primary Rx_High Search */
+    searchPoint->rxDLL   = params->rxHighSearchEnd;
+    searchPoint->rdDelay = (int32_t)params->rdDelayMax;
+    Fls_Ospi_phyFindRxHigh(searchPoint, flashOffset, backupPoint);
+
+    (void)Fls_Ospi_phyRxHighInnerSearch(flashOffset, searchPoint, backupPoint, params);
+
+    /* BACKUP Secondary Rx_High Search */
+    if (searchPoint->txDLL >= (params->txDllHighWindowStart + params->txDLLSearchOffset))
     {
-        searchPoint.rdDelay++;
-        Fls_Ospi_phyFindTxLow(&searchPoint, flashOffset, &txLow);
-
-        if (searchPoint.rdDelay > (int32_t)gPhyTuneWindowParams->rdDelayMax)
-        {
-            status = E_NOT_OK;
-
-            return status;
-        }
+        searchPoint->txDLL -= params->txDLLSearchOffset;
     }
-    /***************************** GOLDEN Tx_High Search *********************/
-    /*
-     * Find txDLL Max
-     * Start the rdDelay (Read delay) from maximum and decrement it.
-     */
-    searchPoint.txDLL   = gPhyTuneWindowParams->txHighSearchEnd;
-    searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMax;
-    Fls_Ospi_phyFindTxHigh(&searchPoint, flashOffset, &txHigh);
-
-    while (txHigh.txDLL == 128)
+    else
     {
-        searchPoint.rdDelay--;
-        Fls_Ospi_phyFindTxHigh(&searchPoint, flashOffset, &txHigh);
-
-        if (searchPoint.rdDelay < (int32_t)gPhyTuneWindowParams->rdDelayMin)
-        {
-            status = E_NOT_OK;
-            return status;
-        }
+        searchPoint->txDLL = params->txDllHighWindowStart;
     }
 
-    /*
-     * Check a different point if the txLow and txHigh are on the same rdDelay.
-     * This avoids mistaking the metastability gap for a txDLL boundary
-     */
-    if (txLow.rdDelay == txHigh.rdDelay)
-    {
-        /***************************** BACKUP Tx_Low Search *********************/
-        /* Look for txDLL boundaries at 3/4 of rxDLL window */
-        /* Find txDLL Min */
+    searchPoint->rxDLL   = params->rxHighSearchEnd;
+    searchPoint->rdDelay = (int32_t)params->rdDelayMax;
+    Fls_Ospi_phyFindRxHigh(searchPoint, flashOffset, sec_rxHigh);
 
-        searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMin;
-        searchPoint.rxDLL   = rxLow.rxDLL + ((3 * (rxHigh.rxDLL - rxLow.rxDLL)) / 4);
-        searchPoint.txDLL   = gPhyTuneWindowParams->txLowSearchStart;
-        Fls_Ospi_phyFindTxLow(&searchPoint, flashOffset, &backupPoint);
-        while (backupPoint.txDLL == 128)
+    (void)Fls_Ospi_phyRxHighInnerSearch(flashOffset, searchPoint, sec_rxHigh, params);
+
+    /* Merge results */
+    Fls_Ospi_phyMergeRxHighResults(backupPoint, sec_rxHigh, &continueSearch);
+
+    return continueSearch;
+}
+
+/**
+ * @brief Search for GOLDEN Tx_Low and Tx_High points
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration
+ * @param[out] txPoints Tx search results (low and high)
+ * @param[in] rxPoints Rx reference points (low and high)
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+static boolean Fls_Ospi_phySearchGoldenTx(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                          Fls_Ospi_phyRxTxPoints *txPoints, const Fls_Ospi_phyRxTxPoints *rxPoints,
+                                          const OSPI_PhyWindowParams *params)
+{
+    boolean continueSearch = TRUE;
+
+    /* GOLDEN Tx_Low Search */
+    searchPoint->rdDelay = (int32_t)params->rdDelayMin;
+    searchPoint->rxDLL   = rxPoints->low.rxDLL + ((rxPoints->high.rxDLL - rxPoints->low.rxDLL) / 4);
+    searchPoint->txDLL   = params->txLowSearchStart;
+    Fls_Ospi_phyFindTxLow(searchPoint, flashOffset, &txPoints->low);
+
+    while ((txPoints->low.txDLL == 128) && (continueSearch == TRUE))
+    {
+        searchPoint->rdDelay++;
+        Fls_Ospi_phyFindTxLow(searchPoint, flashOffset, &txPoints->low);
+
+        if (searchPoint->rdDelay > (int32_t)params->rdDelayMax)
         {
-            searchPoint.rdDelay++;
-            Fls_Ospi_phyFindTxLow(&searchPoint, flashOffset, &backupPoint);
-            if (searchPoint.rdDelay > (int32_t)gPhyTuneWindowParams->rdDelayMax)
+            continueSearch = FALSE;
+        }
+    }
+
+    /* GOLDEN Tx_High Search */
+    if (continueSearch == TRUE)
+    {
+        searchPoint->txDLL   = params->txHighSearchEnd;
+        searchPoint->rdDelay = (int32_t)params->rdDelayMax;
+        Fls_Ospi_phyFindTxHigh(searchPoint, flashOffset, &txPoints->high);
+
+        while ((txPoints->high.txDLL == 128) && (continueSearch == TRUE))
+        {
+            searchPoint->rdDelay--;
+            Fls_Ospi_phyFindTxHigh(searchPoint, flashOffset, &txPoints->high);
+
+            if (searchPoint->rdDelay < (int32_t)params->rdDelayMin)
             {
-                status = E_NOT_OK;
-                return status;
+                continueSearch = FALSE;
             }
         }
-        if (backupPoint.txDLL < txLow.txDLL)
-        {
-            txLow = backupPoint;
-        }
+    }
 
-        /***************************** BACKUP Tx_High Search *********************/
-        /*
-         * Find txDLL Max
-         * Start the rdDelay (Read delay) from maximum and decrement it.
-         */
+    return continueSearch;
+}
 
-        searchPoint.txDLL   = gPhyTuneWindowParams->txHighSearchEnd;
-        searchPoint.rdDelay = (int32_t)gPhyTuneWindowParams->rdDelayMax;
-        Fls_Ospi_phyFindTxHigh(&searchPoint, flashOffset, &backupPoint);
-        while (backupPoint.txDLL == 128)
+/**
+ * @brief Search for BACKUP Tx_Low and Tx_High points
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration
+ * @param[in,out] txPoints Tx search results (updated if backup is better)
+ * @param[in] rxPoints Rx reference points (low and high)
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+static boolean Fls_Ospi_phySearchBackupTx(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                          Fls_Ospi_phyRxTxPoints *txPoints, const Fls_Ospi_phyRxTxPoints *rxPoints,
+                                          const OSPI_PhyWindowParams *params)
+{
+    boolean            continueSearch = TRUE;
+    Fls_Ospi_phyConfig backupPoint    = {0, 0, 0};
+
+    /* BACKUP Tx_Low Search */
+    searchPoint->rdDelay = (int32_t)params->rdDelayMin;
+    searchPoint->rxDLL   = rxPoints->low.rxDLL + ((3 * (rxPoints->high.rxDLL - rxPoints->low.rxDLL)) / 4);
+    searchPoint->txDLL   = params->txLowSearchStart;
+    Fls_Ospi_phyFindTxLow(searchPoint, flashOffset, &backupPoint);
+
+    while ((backupPoint.txDLL == 128) && (continueSearch == TRUE))
+    {
+        searchPoint->rdDelay++;
+        Fls_Ospi_phyFindTxLow(searchPoint, flashOffset, &backupPoint);
+        if (searchPoint->rdDelay > (int32_t)params->rdDelayMax)
         {
-            searchPoint.rdDelay--;
-            Fls_Ospi_phyFindTxHigh(&searchPoint, flashOffset, &backupPoint);
-            if (searchPoint.rdDelay < (int32_t)gPhyTuneWindowParams->rdDelayMin)
-            {
-                status = E_NOT_OK;
-                return status;
-            }
-        }
-        if (backupPoint.txDLL > txHigh.txDLL)
-        {
-            txHigh = backupPoint;
+            continueSearch = FALSE;
         }
     }
 
-    /*
-     * Set bottom left and top right right corners.  These are theoretical corners. They may not actually be "good"
-     * points. But the longest diagonal of the shmoo will be between these corners.
-     */
+    if (continueSearch == TRUE)
+    {
+        if (backupPoint.txDLL < txPoints->low.txDLL)
+        {
+            txPoints->low = backupPoint;
+        }
+
+        /* BACKUP Tx_High Search */
+        searchPoint->txDLL   = params->txHighSearchEnd;
+        searchPoint->rdDelay = (int32_t)params->rdDelayMax;
+        Fls_Ospi_phyFindTxHigh(searchPoint, flashOffset, &backupPoint);
+
+        while ((backupPoint.txDLL == 128) && (continueSearch == TRUE))
+        {
+            searchPoint->rdDelay--;
+            Fls_Ospi_phyFindTxHigh(searchPoint, flashOffset, &backupPoint);
+            if (searchPoint->rdDelay < (int32_t)params->rdDelayMin)
+            {
+                continueSearch = FALSE;
+            }
+        }
+
+        if ((continueSearch == TRUE) && (backupPoint.txDLL > txPoints->high.txDLL))
+        {
+            txPoints->high = backupPoint;
+        }
+    }
+
+    return continueSearch;
+}
+
+/**
+ * @brief Setup corner points (bottomLeft and topRight) for binary search
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[out] corners Corner points structure (bottomLeft and topRight)
+ * @param[in] txPoints Tx search results (low and high)
+ * @param[in] rxPoints Rx search results (low and high)
+ */
+static void Fls_Ospi_phySetupCornerPoints(uint32 flashOffset, Fls_Ospi_phyCornerPoints *corners,
+                                          const Fls_Ospi_phyRxTxPoints *txPoints,
+                                          const Fls_Ospi_phyRxTxPoints *rxPoints)
+{
+    Fls_Ospi_phyConfig backupCornerPoint;
+    Std_ReturnType     status;
 
     /* Bottom Left */
-    bottomLeft.txDLL = txLow.txDLL;
-    bottomLeft.rxDLL = rxLow.rxDLL;
+    corners->bottomLeft.txDLL = txPoints->low.txDLL;
+    corners->bottomLeft.rxDLL = rxPoints->low.rxDLL;
 
-    if (txLow.rdDelay <= rxLow.rdDelay)
+    if (txPoints->low.rdDelay <= rxPoints->low.rdDelay)
     {
-        bottomLeft.rdDelay = txLow.rdDelay;
+        corners->bottomLeft.rdDelay = txPoints->low.rdDelay;
     }
     else
     {
-        bottomLeft.rdDelay = rxLow.rdDelay;
+        corners->bottomLeft.rdDelay = rxPoints->low.rdDelay;
     }
 
-    backupCornerPoint        = bottomLeft;
+    backupCornerPoint        = corners->bottomLeft;
     backupCornerPoint.txDLL += 4;
     backupCornerPoint.rxDLL += 4;
 
     Fls_Ospi_phySetRdDelayTxRxDLL(&backupCornerPoint);
-
     status = Fls_Ospi_phyReadAttackVector(flashOffset);
 
     if (status == E_NOT_OK)
@@ -1078,27 +1140,27 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
 
     if (status == E_OK)
     {
-        bottomLeft.rdDelay = backupCornerPoint.rdDelay;
+        corners->bottomLeft.rdDelay = backupCornerPoint.rdDelay;
     }
 
-    topRight.txDLL = txHigh.txDLL;
-    topRight.rxDLL = rxHigh.rxDLL;
+    /* Top Right */
+    corners->topRight.txDLL = txPoints->high.txDLL;
+    corners->topRight.rxDLL = rxPoints->high.rxDLL;
 
-    if (txHigh.rdDelay > rxHigh.rdDelay)
+    if (txPoints->high.rdDelay > rxPoints->high.rdDelay)
     {
-        topRight.rdDelay = txHigh.rdDelay;
+        corners->topRight.rdDelay = txPoints->high.rdDelay;
     }
     else
     {
-        topRight.rdDelay = rxHigh.rdDelay;
+        corners->topRight.rdDelay = rxPoints->high.rdDelay;
     }
 
-    backupCornerPoint        = topRight;
+    backupCornerPoint        = corners->topRight;
     backupCornerPoint.txDLL -= 4;
     backupCornerPoint.rxDLL -= 4;
 
     Fls_Ospi_phySetRdDelayTxRxDLL(&backupCornerPoint);
-
     status = Fls_Ospi_phyReadAttackVector(flashOffset);
 
     if (status == E_NOT_OK)
@@ -1110,19 +1172,30 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
 
     if (status == E_OK)
     {
-        topRight.rdDelay = backupCornerPoint.rdDelay;
+        corners->topRight.rdDelay = backupCornerPoint.rdDelay;
     }
+}
 
-    /* Find the equation of diagonal between topRight and bottomLeft */
-
-    /* Slope and Intercept*/
-    slope =
-        ((float32)topRight.rxDLL - (float32)bottomLeft.rxDLL) / ((float32)topRight.txDLL - (float32)bottomLeft.txDLL);
-    /* Binary Search */
+/**
+ * @brief Perform binary search to find gap low and gap high points
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in] corners Corner points (bottomLeft and topRight)
+ * @param[out] gaps Gap points structure (gapLow and gapHigh)
+ * @param[in] slope Slope of diagonal line
+ */
+static void Fls_Ospi_phyBinarySearchGap(uint32 flashOffset, const Fls_Ospi_phyCornerPoints *corners,
+                                        Fls_Ospi_phyGapPoints *gaps, float32 slope)
+{
+    Fls_Ospi_phyConfig searchPoint;
     Fls_Ospi_phyConfig left, right;
-    /* Search along the diagonal between corners */
-    left                = bottomLeft;
-    right               = topRight;
+    Std_ReturnType     status;
+
+    (void)slope; /* Used in caller for final calculation */
+
+    /* Binary search for gap low */
+    left                = corners->bottomLeft;
+    right               = corners->topRight;
     searchPoint.txDLL   = left.txDLL + ((right.txDLL - left.txDLL) / 2);
     searchPoint.rxDLL   = left.rxDLL + ((right.rxDLL - left.rxDLL) / 2);
     searchPoint.rdDelay = left.rdDelay;
@@ -1130,110 +1203,216 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
     do
     {
         Fls_Ospi_phySetRdDelayTxRxDLL(&searchPoint);
-
         status = Fls_Ospi_phyReadAttackVector(flashOffset);
+
         if (status == E_NOT_OK)
         {
-            /*
-             * As the read failed, we go to the lower half for finding the gap low
-             */
-            right.txDLL = searchPoint.txDLL;
-            right.rxDLL = searchPoint.rxDLL;
-
+            right.txDLL       = searchPoint.txDLL;
+            right.rxDLL       = searchPoint.rxDLL;
             searchPoint.txDLL = left.txDLL + ((searchPoint.txDLL - left.txDLL) / 2);
             searchPoint.rxDLL = left.rxDLL + ((searchPoint.rxDLL - left.rxDLL) / 2);
         }
         else
         {
-            /*
-             * As the read is a success we go to the upper half for finding the gap low
-             */
-            left.txDLL = searchPoint.txDLL;
-            left.rxDLL = searchPoint.rxDLL;
-
+            left.txDLL        = searchPoint.txDLL;
+            left.rxDLL        = searchPoint.rxDLL;
             searchPoint.txDLL = searchPoint.txDLL + ((right.txDLL - searchPoint.txDLL) / 2);
             searchPoint.rxDLL = searchPoint.rxDLL + ((right.rxDLL - searchPoint.rxDLL) / 2);
         }
-        /* Break the loop if the window has closed. */
     } while (((right.txDLL - left.txDLL) >= 2) && ((right.rxDLL - left.rxDLL) >= 2));
 
-    gapLow = searchPoint;
+    gaps->gapLow = searchPoint;
 
-    /* If there's only one segment, put tuning point in the middle and adjust for temperature */
-    if (bottomLeft.rdDelay == topRight.rdDelay)
+    /* Binary search for gap high (only if two segments) */
+    if (corners->bottomLeft.rdDelay != corners->topRight.rdDelay)
     {
-        /* Start of the metastability gap is a good approximation for the topRight */
-        topRight            = gapLow;
-        searchPoint.rdDelay = bottomLeft.rdDelay;
-        searchPoint.txDLL   = (bottomLeft.txDLL + topRight.txDLL) / 2;
-        searchPoint.rxDLL   = (bottomLeft.rxDLL + topRight.rxDLL) / 2;
-
-        /* TODO: Temperature adjustment */
-    }
-    else
-    {
-        /* If there are two segments, find the start and end of the second one */
-        left                = bottomLeft;
-        right               = topRight;
+        left                = corners->bottomLeft;
+        right               = corners->topRight;
         searchPoint.txDLL   = left.txDLL + ((right.txDLL - left.txDLL) / 2);
         searchPoint.rxDLL   = left.rxDLL + ((right.rxDLL - left.rxDLL) / 2);
         searchPoint.rdDelay = right.rdDelay;
+
         do
         {
             Fls_Ospi_phySetRdDelayTxRxDLL(&searchPoint);
             status = Fls_Ospi_phyReadAttackVector(flashOffset);
+
             if (status == E_NOT_OK)
             {
-                /*
-                 * As the read failed, we go to the upper half for finding the gap high
-                 */
-                left.txDLL = searchPoint.txDLL;
-                left.rxDLL = searchPoint.rxDLL;
-
+                left.txDLL        = searchPoint.txDLL;
+                left.rxDLL        = searchPoint.rxDLL;
                 searchPoint.txDLL = searchPoint.txDLL + ((right.txDLL - searchPoint.txDLL) / 2);
                 searchPoint.rxDLL = searchPoint.rxDLL + ((right.rxDLL - searchPoint.rxDLL) / 2);
             }
             else
             {
-                /*
-                 * As the read is a success we go to the lower half for finding the gap high
-                 */
-                right.txDLL = searchPoint.txDLL;
-                right.rxDLL = searchPoint.rxDLL;
-
+                right.txDLL       = searchPoint.txDLL;
+                right.rxDLL       = searchPoint.rxDLL;
                 searchPoint.txDLL = left.txDLL + ((searchPoint.txDLL - left.txDLL) / 2);
                 searchPoint.rxDLL = left.rxDLL + ((searchPoint.rxDLL - left.rxDLL) / 2);
             }
-            /* Break the loop if the window has closed. */
         } while (((right.txDLL - left.txDLL) >= 2) && ((right.rxDLL - left.rxDLL) >= 2));
-        gapHigh = searchPoint;
 
-        /* Place the final tuning point of the PHY in the corner furthest from the gap */
-        int32_t len1 = (FLS_PHY_ABS(gapLow.txDLL - bottomLeft.txDLL)) + (FLS_PHY_ABS(gapLow.rxDLL - bottomLeft.rxDLL));
-        int32_t len2 = (FLS_PHY_ABS(gapHigh.txDLL - topRight.txDLL)) + (FLS_PHY_ABS(gapHigh.rxDLL - topRight.rxDLL));
+        gaps->gapHigh = searchPoint;
+    }
+    else
+    {
+        gaps->gapHigh = gaps->gapLow;
+    }
+}
+
+/**
+ * @brief Calculate final OTP point based on gap analysis
+ *
+ * @param[in] corners Corner points (bottomLeft and topRight)
+ * @param[in] gaps Gap points (gapLow and gapHigh)
+ * @param[in] slope Slope of diagonal line
+ * @param[out] searchPoint Final calculated OTP point
+ */
+static void Fls_Ospi_phyCalculateFinalOTP(const Fls_Ospi_phyCornerPoints *corners, const Fls_Ospi_phyGapPoints *gaps,
+                                          float32 slope, Fls_Ospi_phyConfig *searchPoint)
+{
+    if (corners->bottomLeft.rdDelay == corners->topRight.rdDelay)
+    {
+        /* Single segment - put tuning point in the middle using gapLow as upper bound */
+        searchPoint->rdDelay = corners->bottomLeft.rdDelay;
+        searchPoint->txDLL   = (corners->bottomLeft.txDLL + gaps->gapLow.txDLL) / 2;
+        searchPoint->rxDLL   = (corners->bottomLeft.rxDLL + gaps->gapLow.rxDLL) / 2;
+    }
+    else
+    {
+        /* Two segments - place in corner furthest from gap */
+        int32_t len1 = (FLS_PHY_ABS(gaps->gapLow.txDLL - corners->bottomLeft.txDLL)) +
+                       (FLS_PHY_ABS(gaps->gapLow.rxDLL - corners->bottomLeft.rxDLL));
+        int32_t len2 = (FLS_PHY_ABS(gaps->gapHigh.txDLL - corners->topRight.txDLL)) +
+                       (FLS_PHY_ABS(gaps->gapHigh.rxDLL - corners->topRight.rxDLL));
 
         if (len2 > len1)
         {
-            int32_t delta       = (topRight.txDLL - gapHigh.txDLL) / 2;
-            searchPoint         = topRight;
-            searchPoint.txDLL  -= delta;
+            int32_t delta       = (corners->topRight.txDLL - gaps->gapHigh.txDLL) / 2;
+            *searchPoint        = corners->topRight;
+            searchPoint->txDLL -= delta;
             float32 deltaFloat  = (float32)delta;
             float32 product     = deltaFloat * slope;
-            searchPoint.rxDLL  -= (int32_t)(product);
+            searchPoint->rxDLL -= (int32_t)(product);
         }
         else
         {
-            int32_t delta       = (gapLow.txDLL - bottomLeft.txDLL) / 2;
-            searchPoint         = bottomLeft;
-            searchPoint.txDLL  += delta;
+            int32_t delta       = (gaps->gapLow.txDLL - corners->bottomLeft.txDLL) / 2;
+            *searchPoint        = corners->bottomLeft;
+            searchPoint->txDLL += delta;
             float32 deltaFloat  = (float32)delta;
             float32 product     = deltaFloat * slope;
-            searchPoint.rxDLL  += (int32_t)(product);
+            searchPoint->rxDLL += (int32_t)(product);
+        }
+    }
+}
+
+/**
+ * @brief Execute BACKUP Rx searches when rxLow and rxHigh have same rdDelay
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration
+ * @param[in,out] rxPoints Rx search results (updated if backup is better)
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+static boolean Fls_Ospi_phyExecuteBackupRxSearches(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                                   Fls_Ospi_phyRxTxPoints *rxPoints, const OSPI_PhyWindowParams *params)
+{
+    boolean            continueSearch = TRUE;
+    Fls_Ospi_phyConfig backupPoint    = {0, 0, 0};
+    Fls_Ospi_phyConfig sec_rxLow      = {0, 0, 0};
+    Fls_Ospi_phyConfig sec_rxHigh     = {0, 0, 0};
+
+    continueSearch = Fls_Ospi_phySearchBackupRxLow(flashOffset, searchPoint, &backupPoint, &sec_rxLow, params);
+
+    if (continueSearch == TRUE)
+    {
+        backupPoint.rxDLL   = MIN(backupPoint.rxDLL, sec_rxLow.rxDLL);
+        backupPoint.rdDelay = MIN(backupPoint.rdDelay, sec_rxLow.rdDelay);
+
+        if (backupPoint.rxDLL < rxPoints->low.rxDLL)
+        {
+            rxPoints->low = backupPoint;
+        }
+
+        searchPoint->txDLL = backupPoint.txDLL;
+        continueSearch = Fls_Ospi_phySearchBackupRxHigh(flashOffset, searchPoint, &backupPoint, &sec_rxHigh, params);
+
+        if ((continueSearch == TRUE) && (backupPoint.rxDLL > rxPoints->high.rxDLL))
+        {
+            rxPoints->high = backupPoint;
         }
     }
 
-    Fls_Ospi_phySetRdDelayTxRxDLL(&searchPoint);
+    return continueSearch;
+}
 
+/**
+ * @brief Execute GOLDEN and BACKUP Tx searches
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in,out] searchPoint Search point configuration
+ * @param[out] txPoints Tx search results
+ * @param[in] rxPoints Rx reference points
+ * @param[in] params PHY tuning window parameters
+ * @return TRUE if search successful, FALSE if failed
+ */
+static boolean Fls_Ospi_phyExecuteTxSearches(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
+                                             Fls_Ospi_phyRxTxPoints *txPoints, const Fls_Ospi_phyRxTxPoints *rxPoints,
+                                             const OSPI_PhyWindowParams *params)
+{
+    boolean continueSearch;
+
+    /* GOLDEN Tx Search (Low + High) */
+    continueSearch = Fls_Ospi_phySearchGoldenTx(flashOffset, searchPoint, txPoints, rxPoints, params);
+
+    /* BACKUP Tx searches (if txLow and txHigh have same rdDelay) */
+    if ((continueSearch == TRUE) && (txPoints->low.rdDelay == txPoints->high.rdDelay))
+    {
+        continueSearch = Fls_Ospi_phySearchBackupTx(flashOffset, searchPoint, txPoints, rxPoints, params);
+    }
+
+    return continueSearch;
+}
+
+/**
+ * @brief Finalize OTP calculation with corner points, binary search, and verification
+ *
+ * @param[in] flashOffset Flash offset for attack vector
+ * @param[in] corners Corner points (bottomLeft and topRight)
+ * @param[out] otp Final OTP configuration
+ * @return E_OK if verification succeeds, E_NOT_OK otherwise
+ */
+static Std_ReturnType Fls_Ospi_phyFinalizeOTP(uint32 flashOffset, const Fls_Ospi_phyCornerPoints *corners,
+                                              Fls_Ospi_phyConfig *otp)
+{
+    Std_ReturnType        status = E_OK;
+    Fls_Ospi_phyGapPoints gaps   = {{0, 0, 0}, {0, 0, 0}};
+    Fls_Ospi_phyConfig    searchPoint;
+    float32               slope;
+
+    /* Calculate slope for diagonal line - guard against division by zero */
+    int32_t txDllDelta = corners->topRight.txDLL - corners->bottomLeft.txDLL;
+    if (txDllDelta != 0)
+    {
+        slope = ((float32)corners->topRight.rxDLL - (float32)corners->bottomLeft.rxDLL) / (float32)txDllDelta;
+    }
+    else
+    {
+        /* If txDLL values are equal, use slope of 1.0 as default */
+        slope = 1.0f;
+    }
+
+    /* Perform binary search for gap */
+    Fls_Ospi_phyBinarySearchGap(flashOffset, corners, &gaps, slope);
+
+    /* Calculate final OTP point */
+    Fls_Ospi_phyCalculateFinalOTP(corners, &gaps, slope, &searchPoint);
+
+    /* Verify final point */
+    Fls_Ospi_phySetRdDelayTxRxDLL(&searchPoint);
     status = Fls_Ospi_phyReadAttackVector(flashOffset);
 
     if (status == E_OK)
@@ -1247,6 +1426,74 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
         otp->rxDLL   = 0;
         otp->txDLL   = 0;
         otp->rdDelay = 0;
+    }
+
+    return status;
+}
+
+static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfig *otp)
+{
+    Std_ReturnType        status         = E_OK;
+    boolean               continueSearch = TRUE;
+    OSPI_PhyWindowParams *gPhyTuneWindowParams =
+        (OSPI_PhyWindowParams *)&Fls_Ospi_tuningWindowParams.tuningWindowParams;
+    Fls_Ospi_phyConfig       searchPoint = {0, 0, 0};
+    Fls_Ospi_phyCornerPoints corners     = {{0, 0, 0}, {0, 0, 0}};
+    Fls_Ospi_phyRxTxPoints   rxPoints    = {{0, 0, 0}, {0, 0, 0}};
+    Fls_Ospi_phyRxTxPoints   txPoints    = {{0, 0, 0}, {0, 0, 0}};
+    Fls_Ospi_phyConfig       sec_rxLow   = {0, 0, 0};
+    Fls_Ospi_phyConfig       sec_rxHigh  = {0, 0, 0};
+
+    /*
+     * Finding RxDLL fails at some of the TxDLL values based on the HW platform.
+     * A window of TxDLL values is used to find the RxDLL without errors.
+     * This can increase the number of CPU cycles taken for the PHY tuning
+     * in the cases where more TxDLL values need to be parsed to find a stable RxDLL.
+     */
+
+    /* Step 1: GOLDEN Rx_Low Search (Primary + Secondary) */
+    continueSearch =
+        Fls_Ospi_phySearchGoldenRxLow(flashOffset, &searchPoint, &rxPoints.low, &sec_rxLow, gPhyTuneWindowParams);
+
+    /* Merge primary and secondary Rx_Low results */
+    if (continueSearch == TRUE)
+    {
+        rxPoints.low.rxDLL   = MIN(rxPoints.low.rxDLL, sec_rxLow.rxDLL);
+        rxPoints.low.rdDelay = MIN(rxPoints.low.rdDelay, sec_rxLow.rdDelay);
+        searchPoint.txDLL    = rxPoints.low.txDLL;
+
+        /* Step 2: GOLDEN Rx_High Search (Primary + Secondary) */
+        continueSearch = Fls_Ospi_phySearchGoldenRxHigh(flashOffset, &searchPoint, &rxPoints.high, &sec_rxHigh,
+                                                        gPhyTuneWindowParams);
+    }
+
+    /* Step 3: BACKUP Rx searches (if rxLow and rxHigh have same rdDelay) */
+    if ((continueSearch == TRUE) && (rxPoints.low.rdDelay == rxPoints.high.rdDelay))
+    {
+        continueSearch =
+            Fls_Ospi_phyExecuteBackupRxSearches(flashOffset, &searchPoint, &rxPoints, gPhyTuneWindowParams);
+    }
+
+    /* Step 4 & 5: GOLDEN and BACKUP Tx searches */
+    if (continueSearch == TRUE)
+    {
+        continueSearch =
+            Fls_Ospi_phyExecuteTxSearches(flashOffset, &searchPoint, &txPoints, &rxPoints, gPhyTuneWindowParams);
+    }
+
+    /* Step 6: Setup corner points, binary search, and finalize OTP */
+    if (continueSearch == TRUE)
+    {
+        Fls_Ospi_phySetupCornerPoints(flashOffset, &corners, &txPoints, &rxPoints);
+        status = Fls_Ospi_phyFinalizeOTP(flashOffset, &corners, otp);
+    }
+    else
+    {
+        /* Search was aborted due to error - set default values */
+        otp->rxDLL   = 0;
+        otp->txDLL   = 0;
+        otp->rdDelay = 0;
+        status       = E_NOT_OK;
     }
 
     return status;
@@ -1302,6 +1549,81 @@ static Std_ReturnType Fls_Ospi_phyTuneDDR(uint32 flashOffset)
     return status;
 }
 
+/**
+ * @brief Sweeps through readCaptureDelay values to find a working configuration
+ *
+ * @param[in] phyTuningOffset Flash offset for attack vector
+ * @param[in,out] rdCapDelay Pointer to readCaptureDelay value (updated on success)
+ * @return E_OK if attack vector read succeeds, E_NOT_OK otherwise
+ */
+static Std_ReturnType Fls_Ospi_phySweepReadCaptureDelay(uint32 phyTuningOffset, uint32 *rdCapDelay)
+{
+    Std_ReturnType attackVectorStatus = E_NOT_OK;
+    uint32         sweepDelay         = 8U;
+
+    while ((attackVectorStatus != E_OK) && (sweepDelay > 0U))
+    {
+        Fls_Ospi_phySetRdDataCaptureDelay(sweepDelay);
+        attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
+        sweepDelay--;
+    }
+
+    if (attackVectorStatus == E_OK)
+    {
+        *rdCapDelay = sweepDelay + 1U; /* +1 because we decremented after successful read */
+    }
+
+    return attackVectorStatus;
+}
+
+/**
+ * @brief Writes attack vector to flash and verifies it can be read
+ *
+ * @param[in] phyTuningOffset Flash offset for attack vector
+ * @param[in] initialRdCapDelay Initial readCaptureDelay value to try first
+ * @param[in,out] rdCapDelay Pointer to readCaptureDelay value (updated if sweep needed)
+ * @return E_OK if attack vector write and verify succeeds, E_NOT_OK otherwise
+ */
+static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOffset, uint32 initialRdCapDelay,
+                                                             uint32 *rdCapDelay)
+{
+    Std_ReturnType attackVectorStatus = E_NOT_OK;
+    const uint8   *phyTuningData      = (uint8 *)NULL_PTR;
+    uint32         phyTuningDataSize  = 0U;
+    Std_ReturnType retVal             = E_NOT_OK;
+    OSPI_Handle    handle             = Fls_DrvObj.spiHandle;
+
+    Fls_Ospi_phyGetTuningData(&phyTuningData, &phyTuningDataSize);
+
+    /* Setting to a known readcapturedelay value so that first attack vector
+     * read after write will pass most probably
+     */
+    *rdCapDelay = initialRdCapDelay;
+    Fls_Ospi_phySetRdDataCaptureDelay(*rdCapDelay);
+    retVal = Fls_norSectorErase(handle, OSPI_PHY_OFFSET);
+
+    /* If erase has passed, proceed with write */
+    if (E_OK == retVal)
+    {
+        /* MISRA deviation: Cast away const for write operation - data is not modified */
+        retVal = Nor_OspiWrite(handle, OSPI_PHY_OFFSET, (uint8 *)(uintptr_t)phyTuningData, phyTuningDataSize);
+    }
+
+    /* If write has passed, verify by reading */
+    if (E_OK == retVal)
+    {
+        attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
+
+        /* If initial read failed, attempt a readCaptureDelay sweep */
+        if (attackVectorStatus != E_OK)
+        {
+            attackVectorStatus = Fls_Ospi_phySweepReadCaptureDelay(phyTuningOffset, rdCapDelay);
+        }
+    }
+
+    return attackVectorStatus;
+}
+
 Std_ReturnType Fls_Ospi_phyInit(void)
 {
     Std_ReturnType status             = E_OK;
@@ -1309,12 +1631,11 @@ Std_ReturnType Fls_Ospi_phyInit(void)
 
     uint32 phyTuningOffset             = OSPI_PHY_OFFSET;
     uint32 origBaudRateDiv             = 0U;
-    bool   readCapDelayModReq          = false;
     uint32 initialReadDataCaptureDelay = 0U;
 
     (void)Fls_Ospi_phyGetBaudRateDivFromObj(&origBaudRateDiv);
 
-    /*Configure to max baudrate to read attack vector*/
+    /* Configure to max baudrate to read attack vector */
     (void)Fls_Ospi_phyConfigBaudrate(MAX_BAUDRATE_DIVIDER);
 
     /* Reading the readcapture delay set by Fls Driver */
@@ -1328,84 +1649,34 @@ Std_ReturnType Fls_Ospi_phyInit(void)
     /* Check if attack vector status is successful over the readCaptureDelay sweep */
     if (attackVectorStatus != E_OK)
     {
-        readDataCaptureDelay = 8U;
-        while ((attackVectorStatus != E_OK) && (readDataCaptureDelay > 0U))
-        {
-            Fls_Ospi_phySetRdDataCaptureDelay(readDataCaptureDelay);
-            attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
-            readDataCaptureDelay--;
-        }
+        attackVectorStatus = Fls_Ospi_phySweepReadCaptureDelay(phyTuningOffset, &readDataCaptureDelay);
     }
 
+    /* If still not successful, write attack vector to flash and verify */
     if (attackVectorStatus != E_OK)
     {
-        /* Flash the attack vector to the last block if the attack vector is not already written in the flash.
-         * This step ensures that the PHY tuning data is available for proper operation of the OSPI interface.
-         * Without this, the system may fail to achieve optimal performance or encounter communication issues.
-         */
-        attackVectorStatus           = E_NOT_OK;
-        uint32         phyTuningData = 0U, phyTuningDataSize = 0U;
-        Std_ReturnType retVal = E_NOT_OK;
-        OSPI_Handle    handle = Fls_DrvObj.spiHandle;
-        Fls_Ospi_phyGetTuningData(&phyTuningData, &phyTuningDataSize);
-
-        /* Setting to a known readcapturedelay value so that first attack vector
-         * read after write will pass most probably
-         * */
-        readDataCaptureDelay = initialReadDataCaptureDelay;
-        Fls_Ospi_phySetRdDataCaptureDelay(readDataCaptureDelay);
-        retVal = Fls_norSectorErase(handle, OSPI_PHY_OFFSET);
-
-        /* If erase has passed */
-        if (E_OK == retVal)
-        {
-            retVal = Nor_OspiWrite(handle, OSPI_PHY_OFFSET, (uint8 *)phyTuningData, phyTuningDataSize);
-        }
-
-        /* If write has passed */
-        if (E_OK == retVal)
-        {
-            attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
-
-            /* Attempting a readCaptureDelay sweep to find the new readCapDelay */
-            readDataCaptureDelay = 8U;
-            while ((attackVectorStatus != E_OK) && (readDataCaptureDelay > 0U))
-            {
-                Fls_Ospi_phySetRdDataCaptureDelay(readDataCaptureDelay);
-                attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
-                readDataCaptureDelay--;
-                readCapDelayModReq = true;
-            }
-
-            /*
-             * If readCapdelay needs to be changed after attack vector writing and reading (above example) then the
-             * variable needs to be updated for bookkeeping. This is done above. Else we are reverting to old and known
-             * readCaptureDelay.
-             */
-            if (false == readCapDelayModReq)
-            {
-                readDataCaptureDelay = initialReadDataCaptureDelay;
-                Fls_Ospi_phySetRdDataCaptureDelay(readDataCaptureDelay);
-            }
-        }
+        attackVectorStatus =
+            Fls_Ospi_phyWriteAndVerifyAttackVector(phyTuningOffset, initialReadDataCaptureDelay, &readDataCaptureDelay);
     }
 
+    /* Perform PHY tuning if attack vector is available */
     if (attackVectorStatus == E_OK)
     {
-        status += Fls_Ospi_phyTuneDDR(phyTuningOffset);
+        status = Fls_Ospi_phyTuneDDR(phyTuningOffset);
     }
     else
     {
         status = E_NOT_OK;
     }
 
+    /* Update PHY init status and handle failure case */
     if (status == E_OK)
     {
         phyInitStatus = E_OK;
     }
     else
     {
-        /* If failed by any means, then reverting readCapturedelay to a know value */
+        /* If failed by any means, then reverting readCapturedelay to a known value */
         readDataCaptureDelay = initialReadDataCaptureDelay;
         Fls_Ospi_phySetRdDataCaptureDelay(readDataCaptureDelay);
     }

@@ -362,12 +362,14 @@ static void Port_RefreshPortDirection_Internal(void)
 #if (STD_ON == PORT_DEV_ERROR_DETECT)
 static boolean Port_ValidateSetPinMode(Port_PinModeType Mode, const Port_PinConfigType *pinConfig, uint8 *errorIdPtr)
 {
-    boolean retVal = (boolean)FALSE;
-    uint32  idx    = 0U;
+    boolean retVal    = (boolean)FALSE;
+    uint32  idx       = 0U;
+    uint32  numModes  = pinConfig->Port_NumPortModes;
+    uint32  loopLimit = (numModes < (uint32)PORT_MAX_MUXMODE) ? numModes : (uint32)PORT_MAX_MUXMODE;
 
     if (pinConfig->Port_PinModeChangeable == (boolean)TRUE)
     {
-        for (idx = 0U; (idx < pinConfig->Port_NumPortModes) && (idx < (uint32)PORT_MAX_MUXMODE); idx++)
+        for (idx = 0U; idx < loopLimit; idx++)
         {
             if (pinConfig->Port_PinMode[idx].mode == Mode)
             {
@@ -544,12 +546,14 @@ static const Port_PinConfigType *Port_MapPinIdToPinConfig(Port_PinType PinId, co
 #if ((STD_ON == PORT_SET_PIN_DIRECTION_API) || (STD_ON == PORT_REFRESH_PORT_DIRECTION_API))
 static Port_PinModeType Port_GetCurrentPinMode(P2CONST(Port_PinConfigType, AUTO, PORT_APPL_DATA) padCfg)
 {
-    uint32           idx     = 0U;
-    Port_PinModeType pinMode = PORT_PIN_MODE_INVALID;
+    uint32           idx       = 0U;
+    uint32           numModes  = padCfg->Port_NumPortModes;
+    uint32           loopLimit = (numModes < (uint32)PORT_MAX_MUXMODE) ? numModes : (uint32)PORT_MAX_MUXMODE;
+    Port_PinModeType pinMode   = PORT_PIN_MODE_INVALID;
 
     uint32 muxmode_val = Port_ReadMuxMode(padCfg->Port_RegOffsetAddr);
 
-    for (idx = 0U; (idx < padCfg->Port_NumPortModes) && (idx < (uint32)PORT_MAX_MUXMODE); idx++)
+    for (idx = 0U; idx < loopLimit; idx++)
     {
         if (padCfg->Port_PinMode[idx].muxmode == muxmode_val)
         {
@@ -557,7 +561,7 @@ static Port_PinModeType Port_GetCurrentPinMode(P2CONST(Port_PinConfigType, AUTO,
             break;
         }
     }
-    if (idx == padCfg->Port_NumPortModes)
+    if (idx == loopLimit)
     {
         pinMode = PORT_PIN_MODE_INVALID;
     }
