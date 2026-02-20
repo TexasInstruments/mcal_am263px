@@ -245,11 +245,11 @@ FUNC(void, PWM_CODE) Pwm_HwUnitInit(Pwm_ChObjType *chObj)
         /* Set the Polarity. */
         if (pChannelConfig->polarity == PWM_HIGH)
         {
-            signalParams.invertSignalB = (boolean)0;
+            signalParams.invertSignalB = FALSE;
         }
         else
         {
-            signalParams.invertSignalB = (boolean)1;
+            signalParams.invertSignalB = TRUE;
         }
 
         signalParams.sysClkInHz = pChannelConfig->instanceClkHz;
@@ -262,7 +262,7 @@ FUNC(void, PWM_CODE) Pwm_HwUnitInit(Pwm_ChObjType *chObj)
 
         /* Configure HR PWM.  */
         Pwm_ConfigHR_epwm(baseAddr, (float32)signalParams.sysClkInHz, (float32)(phwPeriod), duty_cycle_percent_dec,
-                          (uint32)channelConfig_PC->outputCh);
+                          channelConfig_PC->outputCh);
     }
     else
     {
@@ -286,11 +286,11 @@ FUNC(void, PWM_CODE) Pwm_HwUnitInit(Pwm_ChObjType *chObj)
         /* Set the Polarity. */
         if (pChannelConfig->polarity == PWM_HIGH)
         {
-            signalParams.invertSignalB = (boolean)0;
+            signalParams.invertSignalB = FALSE;
         }
         else
         {
-            signalParams.invertSignalB = (boolean)1;
+            signalParams.invertSignalB = TRUE;
         }
 
         signalParams.sysClkInHz = pChannelConfig->instanceClkHz;
