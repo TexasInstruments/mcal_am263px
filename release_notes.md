@@ -1,10 +1,10 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 11.02.00 done on 21-Feb-2026.
+This is the release notes for MCAL AM26xx 11.02.00 done on 22-Feb-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
-Refer to manifest file [mcal_manifest.html](./mcal_manifest.html) and [license.txt](./license.txt) present in installation base path
+Refer to manifest file [mcal_manifest.html](./mcal_manifest.html) and [license.md](./license.md) present in installation base path
 
 ## Getting Started
 The AM263x [HTML][am263x_user_guide_label] /AM263Px [HTML][am263px_user_guide_label] /AM261x [HTML][am261x_user_guide_label] User Guide provides the documentation and references necessary to begin development on TI's platforms using AM263x/AM263Px/AM261x.
@@ -41,7 +41,7 @@ This document details about supported driver, installation, dependencies, build 
       <td>All</td>
       <td>MCAL license is changed from TI commercial to TI text file open source license.<br>
           All the license in the source code is changed to reflect this.<br>
-          Note: Manifest update and publishing to Github is still pending.
+          Refer [mcal_manifest.html](./mcal_manifest.html) for details.
       </td>
     </tr>
     <tr>

@@ -1,3 +1,86 @@
+commit b2d128fdeb611f4c5ffeda0278e7092a1356bfff
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Sat Feb 21 14:42:54 2026 +0530
+
+    all: misc: add GitHub authentication support to mirror script
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/windows/mcal_github_mirror.sh | 41 +++++++++++++++++++++++--
+ 1 file changed, 38 insertions(+), 3 deletions(-)
+
+commit bc5af4b35d85193794f2b80e6fc0ce50c5951fe4
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Sat Feb 21 11:12:04 2026 +0530
+
+    all: misc: add HTML to JSON converter for test results
+    
+    Add test_result_html_to_json.py script to convert MCAL test automation
+    HTML reports to JSON format for easier programmatic processing.
+    
+    Features:
+    - Parses test automation HTML reports and extracts structured data
+    - Outputs JSON with metadata, summary, repo revisions, component
+      summary, and test case details
+    - Excludes test_engine_summary section from output
+    - Extracts only JIRA ID from test case links (removes URL)
+    - Removes log_http, board_name, and assignee fields from test cases
+    - Handles malformed HTML with duplicate closing tags gracefully
+    - Uses only Python standard library (no external dependencies)
+    - Supports Python 3.6+ (f-strings and typing)
+    - Add test result comparison script with test suite
+    - Test input files stored in test/inputs/ folder.
+    
+    Usage:
+      python test_result_html_to_json.py results.html results.json
+    
+    Also adds requirements.txt documenting the standard library dependencies.
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/requirements.txt                 |  12 +
+ mcal_misc/scripts/test/inputs/baseline.json        |  62 +++
+ mcal_misc/scripts/test/inputs/identical.json       |  62 +++
+ mcal_misc/scripts/test/inputs/mixed_scenario.json  |  62 +++
+ .../scripts/test/inputs/new_test_failing.json      |  67 +++
+ .../scripts/test/inputs/new_test_passing.json      |  67 +++
+ .../scripts/test/inputs/regression_multiple.json   |  62 +++
+ .../scripts/test/inputs/regression_single.json     |  62 +++
+ .../scripts/test/inputs/sample_test_results.html   |  85 ++++
+ mcal_misc/scripts/test/inputs/test_fixed.json      |  62 +++
+ mcal_misc/scripts/test/inputs/test_removed.json    |  52 ++
+ mcal_misc/scripts/test/test_compare_results.py     | 340 ++++++++++++++
+ mcal_misc/scripts/test/test_html_to_json.py        | 523 +++++++++++++++++++++
+ mcal_misc/scripts/test_result_compare.py           | 243 ++++++++++
+ mcal_misc/scripts/test_result_html_to_json.py      | 351 ++++++++++++++
+ 15 files changed, 2112 insertions(+)
+
+commit dcbcfc2bf773f4616c57236665a9da067033286a
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Sat Feb 21 08:45:20 2026 +0530
+
+    all: misc: update release build script
+    
+    - update license.txt reference to license.md
+    - add build number support in release version (mm.nn.pp.bb format)
+    - remove --depth=1 from git clone to support full history
+    - update manifest reference note in release_notes.md
+    - add f29h85x device support to github mirror script
+    - remove branch argument as this is not used - all branches and tags
+      are mirrored by default
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ AGENTS.md                                       |  2 +-
+ mcal_misc/scripts/windows/mcal_github_mirror.sh | 85 +++++++++++++++----------
+ mcal_misc/scripts/windows/mcal_release_build.sh | 11 +++-
+ release_notes.md                                |  6 +-
+ 4 files changed, 64 insertions(+), 40 deletions(-)
+
 
 
 
