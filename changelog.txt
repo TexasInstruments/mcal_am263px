@@ -1,3 +1,40 @@
+commit 263777b06aeded53868123c0c8c4a0e1e3558c05
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Mon Feb 23 07:48:41 2026 +0530
+
+    all:scripts: reorganize folders
+    
+    - to remove clutter to base folder of script
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/{windows => cicd}/.gitignore                    | 0
+ mcal_misc/scripts/{windows => cicd}/mcal_github_mirror.sh         | 5 -----
+ mcal_misc/scripts/{ => cicd}/requirements.txt                     | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/baseline.json            | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/identical.json           | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/mixed_scenario.json      | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/new_test_failing.json    | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/new_test_passing.json    | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/regression_multiple.json | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/regression_single.json   | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/sample_test_results.html | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/test_fixed.json          | 0
+ mcal_misc/scripts/{ => cicd}/test/inputs/test_removed.json        | 0
+ mcal_misc/scripts/{ => cicd}/test/test_compare_results.py         | 0
+ mcal_misc/scripts/{ => cicd}/test/test_html_to_json.py            | 0
+ mcal_misc/scripts/{ => cicd}/test_result_compare.py               | 0
+ mcal_misc/scripts/{ => cicd}/test_result_html_to_json.py          | 0
+ mcal_misc/scripts/{ => helper}/md_to_html.js                      | 0
+ mcal_misc/scripts/{ => helper}/memmap_checker.py                  | 0
+ mcal_misc/scripts/{ => helper}/release_tag.sh                     | 2 +-
+ mcal_misc/scripts/{ => helper}/version_update.sh                  | 2 +-
+ mcal_misc/scripts/windows/mcal_installer_test.sh                  | 2 +-
+ mcal_misc/scripts/windows/mcal_release_build.sh                   | 2 +-
+ 23 files changed, 4 insertions(+), 9 deletions(-)
+
 commit b2d128fdeb611f4c5ffeda0278e7092a1356bfff
 Author: Sivaraj R <sivaraj@ti.com>
 Date:   Sat Feb 21 14:42:54 2026 +0530
