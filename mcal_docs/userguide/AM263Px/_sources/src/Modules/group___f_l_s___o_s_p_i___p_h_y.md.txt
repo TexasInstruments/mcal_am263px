@@ -1,0 +1,112 @@
+---
+title: FLS OSPI PHY Driver Interface
+
+---
+
+# FLS_OSPI_PHY
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[Fls_PhyControlMode](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#enum-fls_phycontrolmode)** 
+|enum| **[Fls_PhyDllLockMode](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#enum-fls_phydlllockmode)** 
+
+
+
+### enum Fls_PhyControlMode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| FLS_PHY_MASTER_MODE | |   |
+| FLS_PHY_BYPASS_MODE | |   |
+
+
+
+
+
+
+### enum Fls_PhyDllLockMode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| FLS_PHY_DLL_FULL_CYCLE | |   |
+| FLS_PHY_DLL_HALF_CYCLE | |   |
+
+
+
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[OSPI_PhyWindowParams](../Classes/struct_o_s_p_i___phy_window_params.md)** | OSPI PHY Tuning Window Parameters.  |
+| **[Fls_Ospi_phyConfig](../Classes/struct_fls___ospi__phy_config.md)** |  |
+| **[Fls_Ospi_phyCornerPoints](../Classes/struct_fls___ospi__phy_corner_points.md)** | Structure to hold corner points (bottomLeft and topRight) for PHY tuning.  |
+| **[Fls_Ospi_phyGapPoints](../Classes/struct_fls___ospi__phy_gap_points.md)** | Structure to hold gap points (gapLow and gapHigh) for PHY tuning.  |
+| **[Fls_Ospi_phyRxTxPoints](../Classes/struct_fls___ospi__phy_rx_tx_points.md)** | Structure to hold Rx/Tx low and high points for PHY tuning.  |
+| **[Fls_Ospi_phyConfiguration](../Classes/struct_fls___ospi__phy_configuration.md)** |  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| FLS_START_SEC_CODE   |  |
+| FLS_STOP_SEC_CODE   |  |
+| OSPI_FLASH_ATTACK_VECTOR_SIZE   |  |
+| OSPI_PHY_TUNING_FREQ_RANGE   |  |
+| OSPI_PHY_OFFSET   |  |
+| CSL_OSPI_BAUD_RATE_DIVISOR (x)  |  |
+| MAX_BAUDRATE_DIVIDER   |  |
+| CSL_OSPI_BAUD_RATE_DIVISOR_DEFAULT   |  |
+| OSPI_PHASE_DETECT_DLL_NUM_DELAY_ELEMENT (x)  |  |
+| MIN (x, y)  |  |
+| MAX (x, y)  |  |
+| FLS_PHY_ABS (x)  |  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| Std_ReturnType | **[Fls_Ospi_phyInit](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phyinit)**(void )|  |
+| void | **[Fls_Ospi_phy_enable](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phy_enable)**(void )|  |
+| void | **[Fls_Ospi_phy_disable](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phy_disable)**(void )|  |
+
+
+
+### function Fls_Ospi_phyInit
+
+```
+Std_ReturnType Fls_Ospi_phyInit(
+    void 
+)
+```
+
+
+### function Fls_Ospi_phy_enable
+
+```
+void Fls_Ospi_phy_enable(
+    void 
+)
+```
+
+
+### function Fls_Ospi_phy_disable
+
+```
+void Fls_Ospi_phy_disable(
+    void 
+)
+```
+
+
+
+
+
+

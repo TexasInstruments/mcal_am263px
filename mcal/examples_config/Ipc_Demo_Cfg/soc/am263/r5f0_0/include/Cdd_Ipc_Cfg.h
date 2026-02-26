@@ -75,7 +75,7 @@
 
 
 /**
- * \addtogroup CDD_IPC Ipc API GUIDE Header file
+ * \addtogroup CDD_IPC
  * @{
  */
 

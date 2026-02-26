@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-design.min.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,6 +18,7 @@
         <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../_static/js/theme.js"></script>
 
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
@@ -82,27 +84,28 @@
 <li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
 <li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.18. PWM</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#types">5.18.1. Types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-edgenotificationtype">5.18.1.1. enum Pwm_EdgeNotificationType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-outputstatetype">5.18.1.2. enum Pwm_OutputStateType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-channelclasstype">5.18.1.3. enum Pwm_ChannelClassType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-epwmoutputch-t">5.18.1.4. enum Pwm_epwmOutputCh_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-pwm-notifyfunctype">5.18.1.5. typedef Pwm_NotifyFuncType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">5.18.1. Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types">5.18.2. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-edgenotificationtype">5.18.2.1. enum Pwm_EdgeNotificationType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-outputstatetype">5.18.2.2. enum Pwm_OutputStateType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-channelclasstype">5.18.2.3. enum Pwm_ChannelClassType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-pwm-epwmoutputch-t">5.18.2.4. enum Pwm_epwmOutputCh_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-pwm-notifyfunctype">5.18.2.5. typedef Pwm_NotifyFuncType</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#structures">5.18.2. Structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defines">5.18.3. Defines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions">5.18.4. Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-init">5.18.4.1. function Pwm_Init</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-deinit">5.18.4.2. function Pwm_DeInit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-setdutycycle">5.18.4.3. function Pwm_SetDutyCycle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-setperiodandduty">5.18.4.4. function Pwm_SetPeriodAndDuty</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-setoutputtoidle">5.18.4.5. function Pwm_SetOutputToIdle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-disablenotification">5.18.4.6. function Pwm_DisableNotification</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-enablenotification">5.18.4.7. function Pwm_EnableNotification</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-getversioninfo">5.18.4.8. function Pwm_GetVersionInfo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-registerreadback">5.18.4.9. function Pwm_RegisterReadback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-pwm-getoutputstate">5.18.4.10. function Pwm_GetOutputState</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">5.18.3. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.18.4. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.18.5. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-init">5.18.5.1. function Pwm_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-deinit">5.18.5.2. function Pwm_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-setdutycycle">5.18.5.3. function Pwm_SetDutyCycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-setperiodandduty">5.18.5.4. function Pwm_SetPeriodAndDuty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-setoutputtoidle">5.18.5.5. function Pwm_SetOutputToIdle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-disablenotification">5.18.5.6. function Pwm_DisableNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-enablenotification">5.18.5.7. function Pwm_EnableNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-getversioninfo">5.18.5.8. function Pwm_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-registerreadback">5.18.5.9. function Pwm_RegisterReadback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-pwm-getoutputstate">5.18.5.10. function Pwm_GetOutputState</a></li>
 </ul>
 </li>
 </ul>
@@ -142,8 +145,21 @@
              
   <section id="pwm">
 <h1><span class="section-number">5.18. </span>PWM<a class="headerlink" href="#pwm" title="Link to this heading"></a></h1>
+<section id="modules">
+<h2><span class="section-number">5.18.1. </span>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="group___p_w_m___i_r_q.html"><span class="std std-doc">Pwm Driver Interrupt Handlers</span></a></strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="types">
-<h2><span class="section-number">5.18.1. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.18.2. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Base type</p></th>
@@ -175,7 +191,7 @@
 </tbody>
 </table>
 <section id="enum-pwm-edgenotificationtype">
-<h3><span class="section-number">5.18.1.1. </span>enum Pwm_EdgeNotificationType<a class="headerlink" href="#enum-pwm-edgenotificationtype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.2.1. </span>enum Pwm_EdgeNotificationType<a class="headerlink" href="#enum-pwm-edgenotificationtype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -202,7 +218,7 @@
 Possible edge notification</p>
 </section>
 <section id="enum-pwm-outputstatetype">
-<h3><span class="section-number">5.18.1.2. </span>enum Pwm_OutputStateType<a class="headerlink" href="#enum-pwm-outputstatetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.2.2. </span>enum Pwm_OutputStateType<a class="headerlink" href="#enum-pwm-outputstatetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -225,7 +241,7 @@ Possible edge notification</p>
 Output state type.</p>
 </section>
 <section id="enum-pwm-channelclasstype">
-<h3><span class="section-number">5.18.1.3. </span>enum Pwm_ChannelClassType<a class="headerlink" href="#enum-pwm-channelclasstype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.2.3. </span>enum Pwm_ChannelClassType<a class="headerlink" href="#enum-pwm-channelclasstype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -252,7 +268,7 @@ Output state type.</p>
 Channel class type.</p>
 </section>
 <section id="enum-pwm-epwmoutputch-t">
-<h3><span class="section-number">5.18.1.4. </span>enum Pwm_epwmOutputCh_t<a class="headerlink" href="#enum-pwm-epwmoutputch-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.2.4. </span>enum Pwm_epwmOutputCh_t<a class="headerlink" href="#enum-pwm-epwmoutputch-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -279,7 +295,7 @@ Channel class type.</p>
 EPWM outputs in a single epwm channel.</p>
 </section>
 <section id="typedef-pwm-notifyfunctype">
-<h3><span class="section-number">5.18.1.5. </span>typedef Pwm_NotifyFuncType<a class="headerlink" href="#typedef-pwm-notifyfunctype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.2.5. </span>typedef Pwm_NotifyFuncType<a class="headerlink" href="#typedef-pwm-notifyfunctype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Pwm_NotifyFuncType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -288,7 +304,7 @@ Notification callback function pointer</p>
 </section>
 </section>
 <section id="structures">
-<h2><span class="section-number">5.18.2. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.18.3. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -315,7 +331,7 @@ Notification callback function pointer</p>
 </table>
 </section>
 <section id="defines">
-<h2><span class="section-number">5.18.3. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.18.4. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -435,7 +451,7 @@ Notification callback function pointer</p>
 </table>
 </section>
 <section id="functions">
-<h2><span class="section-number">5.18.4. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.18.5. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Return type</p></th>
@@ -487,7 +503,7 @@ Notification callback function pointer</p>
 </tbody>
 </table>
 <section id="function-pwm-init">
-<h3><span class="section-number">5.18.4.1. </span>function Pwm_Init<a class="headerlink" href="#function-pwm-init" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.1. </span>function Pwm_Init<a class="headerlink" href="#function-pwm-init" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_Init</span><span class="p">(</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Pwm_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">CfgPtr</span>
 <span class="p">)</span>
@@ -512,7 +528,7 @@ Service for PWM initialization. Initializes internal variables and the PWM unit 
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-deinit">
-<h3><span class="section-number">5.18.4.2. </span>function Pwm_DeInit<a class="headerlink" href="#function-pwm-deinit" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.2. </span>function Pwm_DeInit<a class="headerlink" href="#function-pwm-deinit" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_DeInit</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -536,7 +552,7 @@ Service for PWM de-initialization. After DeInit output states should be in idle 
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-setdutycycle">
-<h3><span class="section-number">5.18.4.3. </span>function Pwm_SetDutyCycle<a class="headerlink" href="#function-pwm-setdutycycle" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.3. </span>function Pwm_SetDutyCycle<a class="headerlink" href="#function-pwm-setdutycycle" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetDutyCycle</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DutyCycle</span>
@@ -562,7 +578,7 @@ Service for setting Duty Cycle This service sets the duty cycle for a channel if
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-setperiodandduty">
-<h3><span class="section-number">5.18.4.4. </span>function Pwm_SetPeriodAndDuty<a class="headerlink" href="#function-pwm-setperiodandduty" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.4. </span>function Pwm_SetPeriodAndDuty<a class="headerlink" href="#function-pwm-setperiodandduty" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetPeriodAndDuty</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Pwm_PeriodType</span><span class="w"> </span><span class="n">Period</span><span class="p">,</span>
@@ -590,7 +606,7 @@ Service for setting Period and Duty Cycle This service sets period and duty cycl
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-setoutputtoidle">
-<h3><span class="section-number">5.18.4.5. </span>function Pwm_SetOutputToIdle<a class="headerlink" href="#function-pwm-setoutputtoidle" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.5. </span>function Pwm_SetOutputToIdle<a class="headerlink" href="#function-pwm-setoutputtoidle" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_SetOutputToIdle</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
 <span class="p">)</span>
@@ -614,7 +630,7 @@ Service to set the output of a channel immediately to idle. This service sets th
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-disablenotification">
-<h3><span class="section-number">5.18.4.6. </span>function Pwm_DisableNotification<a class="headerlink" href="#function-pwm-disablenotification" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.6. </span>function Pwm_DisableNotification<a class="headerlink" href="#function-pwm-disablenotification" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_DisableNotification</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
 <span class="p">)</span>
@@ -638,7 +654,7 @@ Service to disable the Edge Notification Disables the Edge Notification This ser
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-enablenotification">
-<h3><span class="section-number">5.18.4.7. </span>function Pwm_EnableNotification<a class="headerlink" href="#function-pwm-enablenotification" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.7. </span>function Pwm_EnableNotification<a class="headerlink" href="#function-pwm-enablenotification" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_EnableNotification</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Pwm_EdgeNotificationType</span><span class="w"> </span><span class="n">Notification</span>
@@ -664,7 +680,7 @@ Service to enable the Edge Notification Enables the Edge Notification This servi
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-getversioninfo">
-<h3><span class="section-number">5.18.4.8. </span>function Pwm_GetVersionInfo<a class="headerlink" href="#function-pwm-getversioninfo" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.8. </span>function Pwm_GetVersionInfo<a class="headerlink" href="#function-pwm-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_GetVersionInfo</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">versioninfo</span>
 <span class="p">)</span>
@@ -688,7 +704,7 @@ This service returns the version information of this module. Returns the version
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-pwm-registerreadback">
-<h3><span class="section-number">5.18.4.9. </span>function Pwm_RegisterReadback<a class="headerlink" href="#function-pwm-registerreadback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.9. </span>function Pwm_RegisterReadback<a class="headerlink" href="#function-pwm-registerreadback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_RegisterReadback</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Pwm_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
@@ -715,7 +731,7 @@ This function reads the important registers of the hardware unit and returns the
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-pwm-getoutputstate">
-<h3><span class="section-number">5.18.4.10. </span>function Pwm_GetOutputState<a class="headerlink" href="#function-pwm-getoutputstate" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.18.5.10. </span>function Pwm_GetOutputState<a class="headerlink" href="#function-pwm-getoutputstate" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Pwm_OutputStateType</span><span class="w"> </span><span class="n">Pwm_GetOutputState</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span>
 <span class="p">)</span>

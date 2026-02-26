@@ -54,10 +54,13 @@
  */
 
 /**
- *  \file     Fls_Qspi.h
+ *  \file     Fls_Qspi_Edma.h
  *
- *  \brief    This file contains interface header for FLS MCAL driver
+ *  \brief    This file contains interface header for FLS MCAL driver EDMA support
  *
+ *  \ingroup FLS
+ *  \defgroup FLS_QSPI_EDMA FLS QSPI EDMA Driver Interface
+ *  @{
  */
 
 #ifndef FLS_QSPI_EDMA_H_
@@ -97,6 +100,7 @@ sint32 Fls_Qspi_dmaChInit(Fls_DriverObjType DrvObj);
 void   FLS_edmaTransfer(uint8* dst, uint8* src, uint32 length, QSPI_Handle qspiHandle);
 
 #endif  //(FLS_DMA_ENABLE == STD_ON)
-#endif  /* #ifndef FLS_QSPI_EDMA_H_ */
 
-/** @} */
+/** @} */ /* End of FLS_QSPI_EDMA group */
+
+#endif /* #ifndef FLS_QSPI_EDMA_H_ */

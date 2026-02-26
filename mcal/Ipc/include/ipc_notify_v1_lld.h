@@ -67,9 +67,7 @@ extern "C" {
 
 /**
  * \defgroup DRV_IPC_NOTIFY_LLD_MODULE  APIs for IPC Notify LLD
- * \ingroup DRV_MODULE
- *
- * See \ref DRIVERS_IPC_NOTIFY_LLD_PAGE for more details.
+ * \ingroup CDD_IPC
  *
  * @{
  */

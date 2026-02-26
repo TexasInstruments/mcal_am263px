@@ -61,15 +61,16 @@
  *
  */
 /**
- *  \defgroup CDD_UART Complex Device Driver
+ *  \ingroup UART
+ *  \defgroup UART_PRIV UART Driver Private Interface
+ *
  *  This module implements a CDD driver in ANSI C programming language to centralize the
- *                configuration of ports and pins which are used by more than one driver module.
- *                This driver can:
- *                - Configure the UART config registers
- *                - Read and write data over UART
+ *  configuration of ports and pins which are used by more than one driver module.
+ *  This driver can:
+ *  - Configure the UART config registers
+ *  - Read and write data over UART
  *
  *  This files defines CDD UART data structures
- *   @sa CDD_UART
  *  @{
  */
 /*  ------------------------------------------------------------------------------------------------------------------
@@ -165,6 +166,6 @@ Uart_Cdd_RegisterReadback(CddUart_Handle CddUartHandle,
 }
 #endif
 
-#endif /* #ifndef CDD_UART_PRIV_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef CDD_UART_PRIV_H_ */

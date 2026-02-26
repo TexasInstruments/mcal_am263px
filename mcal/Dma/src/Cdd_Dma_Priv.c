@@ -122,82 +122,73 @@ static sint32 CDD_EDMA_lld_initialize(Cdd_Dma_Handler *hEdma)
     uint32                     channel;
     uint32                     maxparam;
     uint32                     param;
-    uint32                     baseAddr     = hEdma->baseAddr;
-    Cdd_Dma_InitHandleType     hEdmaInit    = hEdma->edmaConfig;
-    Cdd_Dma_InitHandleType    *hEdmaInitPtr = &hEdmaInit;
-    Cdd_Dma_ResourceObject     ownResource  = hEdmaInit.ownResource;
+    uint32                     baseAddr    = hEdma->baseAddr;
+    Cdd_Dma_InitHandleType     hEdmaInit   = hEdma->edmaConfig;
+    Cdd_Dma_ResourceObject     ownResource = hEdmaInit.ownResource;
 
-    if (hEdmaInitPtr == NULL_PTR)
+    regionId = hEdmaInit.regionId;
+    queNum   = hEdmaInit.queNum;
+    tcc      = hEdmaInit.tcc;
+    for (ch = 0; ch < ownResource.maxChannel; ch++)
     {
-        retVal = MCAL_SystemP_FAILURE;
+        channel = ownResource.channelGroup[ch]->channelId;
+        /* Clear the Event miss Registers                                     */
+        CDD_EDMA_lld_initializeCheckChannel(channel, baseAddr, regionId);
+        /* Disable and clear DMA events for all own dma channels */
+        CDD_EDMA_lld_disableDmaEvtRegion(baseAddr, regionId, channel);
+        CDD_EDMA_lld_clrEvtRegion(baseAddr, regionId, channel);
+        CDD_EDMA_lld_clrMissEvtRegion(baseAddr, regionId, channel);
+        /* Disable the interrupt for the channel to transfer in polling mode */
+        if (hEdmaInit.intrEnable != TRUE)
+        {
+            CDD_EDMA_lld_disableEvtIntrRegion(baseAddr, regionId, channel);
+        }
+        if (CDD_EDMA_CHMAPEXIST != 0U)
+        {
+            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DCHMAPN(channel), channel << CDD_EDMA_MAPPING_SHIFT);
+        }
+        /* Initialize the DMA Queue Number Registers                            */
+        qnumValue  = HW_RD_REG32(baseAddr + (CDD_EDMA_TPCC_DMAQNUMN((channel >> CDD_EDMA_QUEUE_SHIFT))));
+        qnumValue &= CDD_EDMACC_DMAQNUM_CLR(channel);
+        qnumValue |= CDD_EDMACC_DMAQNUM_SET(channel, queNum);
+        HW_WR_REG32(baseAddr + (CDD_EDMA_TPCC_DMAQNUMN((channel >> CDD_EDMA_QUEUE_SHIFT))), qnumValue);
     }
-    else
-    {
-        regionId = hEdmaInit.regionId;
-        queNum   = hEdmaInit.queNum;
-        tcc      = hEdmaInit.tcc;
-        for (ch = 0; ch < ownResource.maxChannel; ch++)
-        {
-            channel = ownResource.channelGroup[ch]->channelId;
-            /* Clear the Event miss Registers                                     */
-            CDD_EDMA_lld_initializeCheckChannel(channel, baseAddr, regionId);
-            /* Disable and clear DMA events for all own dma channels */
-            CDD_EDMA_lld_disableDmaEvtRegion(baseAddr, regionId, channel);
-            CDD_EDMA_lld_clrEvtRegion(baseAddr, regionId, channel);
-            CDD_EDMA_lld_clrMissEvtRegion(baseAddr, regionId, channel);
-            /* Disable the interrupt for the channel to transfer in polling mode */
-            if (hEdmaInit.intrEnable != TRUE)
-            {
-                CDD_EDMA_lld_disableEvtIntrRegion(baseAddr, regionId, channel);
-            }
-            if (CDD_EDMA_CHMAPEXIST != 0U)
-            {
-                HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DCHMAPN(channel), channel << CDD_EDMA_MAPPING_SHIFT);
-            }
-            /* Initialize the DMA Queue Number Registers                            */
-            qnumValue  = HW_RD_REG32(baseAddr + (CDD_EDMA_TPCC_DMAQNUMN((channel >> CDD_EDMA_QUEUE_SHIFT))));
-            qnumValue &= CDD_EDMACC_DMAQNUM_CLR(channel);
-            qnumValue |= CDD_EDMACC_DMAQNUM_SET(channel, queNum);
-            HW_WR_REG32(baseAddr + (CDD_EDMA_TPCC_DMAQNUMN((channel >> CDD_EDMA_QUEUE_SHIFT))), qnumValue);
-        }
-        /* Clear CCERR register.                                               */
-        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_CCERRCLR, CDD_EDMA_SET_ALL_BITS);
-        /* Disable and clear channel interrupts for all own dma channels */
-        CDD_EDMA_lld_disableEvtIntrRegion(baseAddr, regionId, tcc);
-        CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tcc);
-        /* Enable the own TCCs also for the region in DRAE and DRAEH register */
-        CDD_EDMA_lld_initializeCheckTcc(tcc, baseAddr, regionId);
-        CDD_EDMA_lld_ccParamEntry_Init(&paramSet);
-        /* cleanup Params, note h/w reset state is all 0s, must be done after
-        disabling/clearning channel events */
+    /* Clear CCERR register.                                               */
+    HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_CCERRCLR, CDD_EDMA_SET_ALL_BITS);
+    /* Disable and clear channel interrupts for all own dma channels */
+    CDD_EDMA_lld_disableEvtIntrRegion(baseAddr, regionId, tcc);
+    CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tcc);
+    /* Enable the own TCCs also for the region in DRAE and DRAEH register */
+    CDD_EDMA_lld_initializeCheckTcc(tcc, baseAddr, regionId);
+    CDD_EDMA_lld_ccParamEntry_Init(&paramSet);
+    /* cleanup Params, note h/w reset state is all 0s, must be done after
+    disabling/clearning channel events */
 
-        for (ch = 0; ch < ownResource.maxChannel; ch++)
+    for (ch = 0; ch < ownResource.maxChannel; ch++)
+    {
+        maxparam = ownResource.channelGroup[ch]->maxParam;
+        for (count = 0; count < maxparam; count++)
         {
-            maxparam = ownResource.channelGroup[ch]->maxParam;
-            for (count = 0; count < maxparam; count++)
-            {
-                param = ownResource.channelGroup[ch]->paramGroup[count]->paramId;
-                CDD_EDMA_lld_setPaRAM(baseAddr, param, &paramSet);
-            }
+            param = ownResource.channelGroup[ch]->paramGroup[count]->paramId;
+            CDD_EDMA_lld_setPaRAM(baseAddr, param, &paramSet);
         }
-        for (ch = 0; ch < ownResource.maxChannel; ch++)
+    }
+    for (ch = 0; ch < ownResource.maxChannel; ch++)
+    {
+        channel  = ownResource.channelGroup[ch]->channelId;
+        maxparam = ownResource.channelGroup[ch]->maxParam;
+        for (count = 0; count < maxparam; count++)
         {
-            channel  = ownResource.channelGroup[ch]->channelId;
-            maxparam = ownResource.channelGroup[ch]->maxParam;
-            for (count = 0; count < maxparam; count++)
-            {
-                Cdd_Dma_ChannelConfigType chConfig;
-                param            = ownResource.channelGroup[ch]->paramGroup[count]->paramId;
-                chConfig.chType  = CDD_EDMA_CHANNEL_TYPE_DMA;
-                chConfig.chNum   = channel;
-                chConfig.tccNum  = tcc;
-                chConfig.paramId = param;
-                chConfig.evtQNum = queNum;
-                CDD_EDMA_lld_configureChannelRegion(baseAddr, regionId, &chConfig);
-                break;
-            }
+            Cdd_Dma_ChannelConfigType chConfig;
+            param            = ownResource.channelGroup[ch]->paramGroup[count]->paramId;
+            chConfig.chNum   = channel;
+            chConfig.tccNum  = tcc;
+            chConfig.paramId = param;
+            chConfig.evtQNum = queNum;
+            CDD_EDMA_lld_configureChannelRegion(baseAddr, regionId, &chConfig);
             break;
         }
+        break;
     }
 
     return retVal;
@@ -228,60 +219,46 @@ void CDD_EDMA_lld_ccParamEntry_Init(CDD_EDMACCEDMACCPaRAMEntry *paramEntry)
     }
 }
 
-void CDD_EDMA_lld_enableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum)
+void CDD_EDMA_lld_enableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chNum)
 {
     uint32 draeValue;
-    /* Allocate the DMA/QDMA channel */
-    if (CDD_EDMA_CHANNEL_TYPE_DMA == chType)
-    {
-        /* FOR TYPE EDMA*/
-        if (chNum < 32U)
-        {
-            draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId));
-            /* Enable the DMA channel in the DRAE registers */
-            draeValue |= (uint32)0x01U << chNum;
-            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId), draeValue);
-        }
-        else
-        {
-            draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId));
 
-            /* Enable the DMA channel in the DRAEH registers */
-            draeValue |= (uint32)0x01U << (chNum - 32U);
-            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId), draeValue);
-        }
+    /* FOR TYPE EDMA*/
+    if (chNum < 32U)
+    {
+        draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId));
+        /* Enable the DMA channel in the DRAE registers */
+        draeValue |= (uint32)0x01U << chNum;
+        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId), draeValue);
     }
     else
     {
-        /*An error will be generated automatically.*/
+        draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId));
+
+        /* Enable the DMA channel in the DRAEH registers */
+        draeValue |= (uint32)0x01U << (chNum - 32U);
+        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId), draeValue);
     }
 }
 
-void CDD_EDMA_lld_disableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum)
+void CDD_EDMA_lld_disableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chNum)
 {
     uint32 draeValue;
-    /* Allocate the DMA/QDMA channel */
-    if (CDD_EDMA_CHANNEL_TYPE_DMA == chType)
+
+    /* FOR TYPE EDMA*/
+    if (chNum < 32U)
     {
-        /* FOR TYPE EDMA*/
-        if (chNum < 32U)
-        {
-            draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId));
-            /* Enable the DMA channel in the DRAE registers */
-            draeValue &= ~((uint32)0x01U << chNum);
-            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId), draeValue);
-        }
-        else
-        {
-            draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId));
-            /* Enable the DMA channel in the DRAEH registers */
-            draeValue &= ~((uint32)0x01U << (chNum - 32U));
-            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId), draeValue);
-        }
+        draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId));
+        /* Disable the DMA channel in the DRAE registers */
+        draeValue &= ~((uint32)0x01U << chNum);
+        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId), draeValue);
     }
     else
     {
-        /*An error will be generated automatically.*/
+        draeValue = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId));
+        /* Disable the DMA channel in the DRAEH registers */
+        draeValue &= ~((uint32)0x01U << (chNum - 32U));
+        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId), draeValue);
     }
 }
 
@@ -294,47 +271,25 @@ void CDD_EDMA_lld_channelToParamMap(uint32 baseAddr, uint32 channel, uint32 para
     }
 }
 
-void CDD_EDMA_lld_mapChToEvtQ(uint32 baseAddr, uint32 chType, uint32 chNum, uint32 evtQNum)
+void CDD_EDMA_lld_mapChToEvtQ(uint32 baseAddr, uint32 chNum, uint32 evtQNum)
 {
     uint32 qnumValue;
-    if (CDD_EDMA_CHANNEL_TYPE_DMA == chType)
-    {
-        /* Associate DMA Channel to Event Queue                             */
-        qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> CDD_EDMA_QUEUE_SHIFT));
-        qnumValue &= CDD_EDMACC_DMAQNUM_CLR(chNum);
-        qnumValue |= CDD_EDMACC_DMAQNUM_SET(chNum, evtQNum);
-        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> 3U), qnumValue);
-    }
-    else
-    {
-        /*An error will be generated automatically.*/
-    }
+
+    /* Associate DMA Channel to Event Queue                             */
+    qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> CDD_EDMA_QUEUE_SHIFT));
+    qnumValue &= CDD_EDMACC_DMAQNUM_CLR(chNum);
+    qnumValue |= CDD_EDMACC_DMAQNUM_SET(chNum, evtQNum);
+    HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> 3U), qnumValue);
 }
 
-void CDD_EDMA_lld_unmapChToEvtQ(uint32 baseAddr, uint32 chType, uint32 chNum)
+void CDD_EDMA_lld_unmapChToEvtQ(uint32 baseAddr, uint32 chNum)
 {
     uint32 qnumValue;
-    if (CDD_EDMA_CHANNEL_TYPE_DMA == chType)
-    {
-        /* Unmap DMA Channel to Event Queue                                */
-        qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> 3U));
-        qnumValue &= CDD_EDMACC_DMAQNUM_CLR(chNum);
-        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> 3U), qnumValue);
-    }
-    else
-    {
-        /*An error will be generated automatically.*/
-    }
-}
 
-void CDD_EDMA_lld_mapQdmaChToPaRAM(uint32 baseAddr, uint32 chNum, const uint32 *paRAMId)
-{
-    uint32 qchmapValue;
-    /* Map Parameter RAM Set Number for specified channelId             */
-    qchmapValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_QCHMAPN(chNum));
-    qchmapValue &= CDD_EDMACC_QCHMAP_PAENTRY_CLR;
-    qchmapValue |= (uint32)CDD_EDMACC_QCHMAP_PAENTRY_SET(*paRAMId);
-    HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_QCHMAPN(chNum), qchmapValue);
+    /* Unmap DMA Channel to Event Queue                                */
+    qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> 3U));
+    qnumValue &= CDD_EDMACC_DMAQNUM_CLR(chNum);
+    HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> 3U), qnumValue);
 }
 
 void CDD_EDMA_lld_clrMissEvtRegion(uint32 baseAddr, uint32 regionId, uint32 chNum)
@@ -488,10 +443,14 @@ uint32 CDD_EDMA_lld_readEventStatusRegion(uint32 baseAddr, uint32 chNum)
     }
     else
     {
+        /* TI_COVERAGE_GAP_START : Branch requires an external hardware peripheral to trigger a DMA event,which is not
+         * possible in unit test environment.
+         */
         if ((CDD_EDMA_lld_getEventStatusHigh(baseAddr) & (0x1U << (chNum - 32U))) == (0x1U << (chNum - 32U)))
         {
             eventStatus = 1;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     return eventStatus;
 }
@@ -573,23 +532,16 @@ uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, con
 {
     uint32 optValue;
     uint32 retVal = FALSE;
-    if (((CDD_EDMA_CHANNEL_TYPE_DMA == chConfig->chType) && (chConfig->chNum < CDD_EDMA_NUM_DMACH)))
+    if (chConfig->chNum < CDD_EDMA_NUM_DMACH)
     {
         /* Enable the DMA channel in the enabled in the shadow region
          * specific register
          */
-        CDD_EDMA_lld_enableChInShadowRegRegion(baseAddr, regionId, chConfig->chType, chConfig->chNum);
+        CDD_EDMA_lld_enableChInShadowRegRegion(baseAddr, regionId, chConfig->chNum);
 
-        CDD_EDMA_lld_mapChToEvtQ(baseAddr, chConfig->chType, chConfig->chNum, chConfig->evtQNum);
+        CDD_EDMA_lld_mapChToEvtQ(baseAddr, chConfig->chNum, chConfig->evtQNum);
 
-        if (CDD_EDMA_CHANNEL_TYPE_DMA == chConfig->chType)
-        {
-            CDD_EDMA_lld_channelToParamMap(baseAddr, chConfig->chNum, chConfig->paramId);
-        }
-        else
-        {
-            CDD_EDMA_lld_mapQdmaChToPaRAM(baseAddr, chConfig->chNum, &chConfig->paramId);
-        }
+        CDD_EDMA_lld_channelToParamMap(baseAddr, chConfig->chNum, chConfig->paramId);
 
         optValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_OPT(chConfig->paramId));
         optValue &= CDD_EDMACC_OPT_TCC_CLR;
@@ -601,17 +553,17 @@ uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, con
     return retVal;
 }
 
-uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 trigMode)
+uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chNum, uint32 trigMode)
 {
     uint32 retVal = FALSE;
-    if ((chNum < CDD_EDMA_NUM_DMACH) && (CDD_EDMA_CHANNEL_TYPE_DMA == chType))
+    if (chNum < CDD_EDMA_NUM_DMACH)
     {
         CDD_EDMA_lld_disableTransferRegion(baseAddr, regionId, chNum, trigMode);
         /* Disable the DMA channel in the shadow region specific register
          */
-        CDD_EDMA_lld_disableChInShadowRegRegion(baseAddr, regionId, chType, chNum);
+        CDD_EDMA_lld_disableChInShadowRegRegion(baseAddr, regionId, chNum);
 
-        CDD_EDMA_lld_unmapChToEvtQ(baseAddr, chType, chNum);
+        CDD_EDMA_lld_unmapChToEvtQ(baseAddr, chNum);
 
         retVal = (uint32)TRUE;
     }
@@ -684,69 +636,59 @@ uint32 CDD_EDMA_lld_disableTransferRegion(uint32 baseAddr, uint32 regionId, uint
 
 static sint32 CDD_EDMA_lld_deinitialize(Cdd_Dma_Handler *hEdma)
 {
-    sint32                  retVal = MCAL_SystemP_SUCCESS;
-    uint32                  ch;
-    uint32                  tcc;
-    uint32                  channel;
-    uint32                  qnumValue;
-    uint32                  regionId;
-    uint32                  baseAddr     = hEdma->baseAddr;
-    Cdd_Dma_InitHandleType  hEdmaInit    = hEdma->edmaConfig;
-    Cdd_Dma_InitHandleType *hEdmaInitPtr = &hEdmaInit;
-    Cdd_Dma_ResourceObject  ownResource  = hEdmaInit.ownResource;
+    sint32                 retVal = MCAL_SystemP_SUCCESS;
+    uint32                 ch;
+    uint32                 tcc;
+    uint32                 channel;
+    uint32                 qnumValue;
+    uint32                 regionId;
+    uint32                 baseAddr    = hEdma->baseAddr;
+    Cdd_Dma_InitHandleType hEdmaInit   = hEdma->edmaConfig;
+    Cdd_Dma_ResourceObject ownResource = hEdmaInit.ownResource;
 
-    if (hEdmaInitPtr == NULL_PTR)
+    regionId = hEdmaInit.regionId;
+    tcc      = hEdmaInit.tcc;
+    /* Disable the DMA (0 - 62) channels in the DRAE register */
+    HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId), CDD_EDMA_CLR_ALL_BITS);
+    HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId), CDD_EDMA_CLR_ALL_BITS);
+
+    CDD_EDMA_lld_clrCCErr(baseAddr, CDD_EDMACC_CLR_TCCERR);
+
+    /* Clear the Event miss Registers                      */
+    for (ch = 0; ch < ownResource.maxChannel; ch++)
     {
-        retVal = MCAL_SystemP_FAILURE;
-    }
-    else
-    {
-        regionId = hEdmaInit.regionId;
-        tcc      = hEdmaInit.tcc;
-        /* Disable the DMA (0 - 62) channels in the DRAE register */
-        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEM(regionId), CDD_EDMA_CLR_ALL_BITS);
-        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DRAEHM(regionId), CDD_EDMA_CLR_ALL_BITS);
-
-        CDD_EDMA_lld_clrCCErr(baseAddr, CDD_EDMACC_CLR_TCCERR);
-
-        /* Clear the Event miss Registers                      */
-        for (ch = 0; ch < ownResource.maxChannel; ch++)
+        channel = ownResource.channelGroup[ch]->channelId;
+        /* Clear the Event miss Registers                                     */
+        if (channel < 31U)
         {
-            channel = ownResource.channelGroup[ch]->channelId;
-            /* Clear the Event miss Registers                                     */
-            if (channel < 31U)
-            {
-                HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_EMCR, ((uint32)1 << channel));
-            }
-            else
-            {
-#if CDD_EDMA_NUM_DMACH > 32
-                HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_EMCRH, ((uint32)1 << (channel - 32U)));
-#endif
-            }
-            /* Deinitialize the Queue Number Registers */
-            qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN((channel >> 3U)));
-            qnumValue &= CDD_EDMACC_DMAQNUM_CLR(channel);
-            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN((channel >> 3U)), qnumValue);
+            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_EMCR, ((uint32)1 << channel));
         }
-        /* Disable and clear channel interrupts for all dma channels */
-
-        CDD_EDMA_lld_disableEvtIntrRegion(baseAddr, regionId, tcc);
-        CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tcc);
-
-        for (ch = 0; ch < ownResource.maxChannel; ch++)
+        else
         {
-            channel = ownResource.channelGroup[ch]->channelId;
-            if (hEdmaInit.transferType == CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER)
-            {
-                CDD_EDMA_lld_freeChannelRegion(baseAddr, regionId, CDD_EDMA_CHANNEL_TYPE_DMA, channel,
-                                               CDD_EDMA_TRIG_MODE_MANUAL);
-            }
-            else
-            {
-                CDD_EDMA_lld_freeChannelRegion(baseAddr, regionId, CDD_EDMA_CHANNEL_TYPE_DMA, channel,
-                                               CDD_EDMA_TRIG_MODE_EVENT);
-            }
+#if CDD_EDMA_NUM_DMACH > 32
+            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_EMCRH, ((uint32)1 << (channel - 32U)));
+#endif
+        }
+        /* Deinitialize the Queue Number Registers */
+        qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN((channel >> 3U)));
+        qnumValue &= CDD_EDMACC_DMAQNUM_CLR(channel);
+        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN((channel >> 3U)), qnumValue);
+    }
+    /* Disable and clear channel interrupts for all dma channels */
+
+    CDD_EDMA_lld_disableEvtIntrRegion(baseAddr, regionId, tcc);
+    CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tcc);
+
+    for (ch = 0; ch < ownResource.maxChannel; ch++)
+    {
+        channel = ownResource.channelGroup[ch]->channelId;
+        if (hEdmaInit.transferType == CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER)
+        {
+            CDD_EDMA_lld_freeChannelRegion(baseAddr, regionId, channel, CDD_EDMA_TRIG_MODE_MANUAL);
+        }
+        else
+        {
+            CDD_EDMA_lld_freeChannelRegion(baseAddr, regionId, channel, CDD_EDMA_TRIG_MODE_EVENT);
         }
     }
     return retVal;
@@ -956,7 +898,6 @@ void CDD_EDMA_lld_chainingConfigureChannelRegion(Cdd_Dma_Handler *hEdma, uint32 
         CDD_EDMA_lld_setPaRAM(baseAddr, param, &paramSet);
         {
             Cdd_Dma_ChannelConfigType chConfig;
-            chConfig.chType  = CDD_EDMA_CHANNEL_TYPE_DMA;
             chConfig.chNum   = channel;
             chConfig.tccNum  = tcc;
             chConfig.paramId = param;
@@ -1075,23 +1016,31 @@ static void CDD_EDMA_TransferCompletion_MasterIsr_loop(uint8 i)
                 intrLow &= ~(1U << tccNum);
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
+            /* TI_COVERAGE_GAP_START : Branch requires TCC >= 32 with active interrupt in high register,
+             * which requires specific hardware configuration not available in unit test environment.
+             */
             if ((tccNum >= 32U) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrHigh &= ~(1U << (tccNum - 32U));
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
         if (maxChannel > 1U)
         {
             tccNum = Cdd_Dma_ChainingTcc[i][maxChannel - 1U];
 
+            /* TI_COVERAGE_GAP_START : Branch requires chaining mode (maxChannel > 1) with TCC < 32 and active
+             * interrupt, which requires specific test configuration not available in unit test environment.
+             */
             if ((tccNum < 32U) && ((intrLow & (1U << tccNum)) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrLow &= ~(1U << tccNum);
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
+            /* TI_COVERAGE_GAP_STOP */
             if ((tccNum >= 32U) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);

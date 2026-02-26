@@ -4,6 +4,7 @@ orphan: true
 
 ---
 title: Fls_DriverObjType
+summary: FLS Driver Object, global information used by module. 
 
 ---
 
@@ -11,7 +12,7 @@ title: Fls_DriverObjType
 
 
 
- [More...](#detailed-description)
+FLS Driver Object, global information used by module. 
 
 
 `#include <Fls_Brd_Nor.h>`
@@ -21,14 +22,14 @@ title: Fls_DriverObjType
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
 |  uint32 | Fls_Mode |  |
-|  [Fls_JobEndNotifyType](../Files/_fls___cbk_8h.md#typedef-fls_jobendnotifytype) | Fls_JobEndNotification |  |
-|  [Fls_JobErrorNotifyType](../Files/_fls___cbk_8h.md#typedef-fls_joberrornotifytype) | Fls_JobErrorNotification |  |
+|  [Fls_JobEndNotifyType](../Modules/group___f_l_s___c_b_k.md#typedef-fls_jobendnotifytype) | Fls_JobEndNotification |  |
+|  [Fls_JobErrorNotifyType](../Modules/group___f_l_s___c_b_k.md#typedef-fls_joberrornotifytype) | Fls_JobErrorNotification |  |
 |  uint32 | maxReadNormalMode |  |
 |  uint32 | maxWriteNormalMode |  |
 |  [Fls_SectorType](../Classes/struct_fls___sector_type.md)[FLS_NUMBER_OF_SECTOR_CFG] | sectorList |  |
 |  MemIf_StatusType | status |  |
 |  MemIf_JobResultType | jobResultType |  |
-|  Fls_JobType | jobType |  |
+|  [Fls_JobType](../Files/_v2_2_fls___brd___nor_8h.md#enum-fls_jobtype) | jobType |  |
 |  [Fls_AddressType](../Modules/group___f_l_s.md#typedef-fls_addresstype) | flashAddr |  |
 |  uint8 * | ramAddr |  |
 |  [Fls_LengthType](../Modules/group___f_l_s.md#typedef-fls_lengthtype) | length |  |
@@ -38,7 +39,7 @@ title: Fls_DriverObjType
 |  uint32 | actual |  |
 |  uint32 | postBlankCheckFlashaddr |  |
 |  uint32 | prevFlashaddr |  |
-|  [QSPI_Handle](../Files/_fls___qspi_8h.md#typedef-qspi_handle) | spiHandle |  |
+|  [QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) | spiHandle |  |
 |  [Fls_LengthType](../Modules/group___f_l_s.md#typedef-fls_lengthtype) | transferred |  |
 |  uint32 | flsBaudRateDiv |  |
 |  [Fls_EraseType](../Modules/group___f_l_s.md#enum-fls_erasetype) | typeoferase |  |
@@ -54,14 +55,5 @@ title: Fls_DriverObjType
 |  uint32 | decChipSelect |  |
 |  uint32 | dmaEnable |  |
 |  uint32 | frmFmt |  |
-
-## Detailed Description
-
-```cpp
-struct Fls_DriverObjType;
-```
-
-
-\breif FLS Driver Object, global information used by module. 
 
 

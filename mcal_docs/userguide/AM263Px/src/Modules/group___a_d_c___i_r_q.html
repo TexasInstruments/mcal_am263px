@@ -4,10 +4,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CDD_UART &mdash; Documentation for AM263Px</title>
+  <title>ADC_IRQ &mdash; Documentation for AM263Px</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-design.min.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,6 +18,7 @@
         <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../_static/js/theme.js"></script>
 
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
@@ -80,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>CDD_UART</li>
+      <li>ADC_IRQ</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,118 +91,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="cdd-uart">
-<h1>CDD_UART<a class="headerlink" href="#cdd-uart" title="Link to this heading"></a></h1>
+  <section id="adc-irq">
+<h1>ADC_IRQ<a class="headerlink" href="#adc-irq" title="Link to this heading"></a></h1>
 <p><a class="reference internal" href="#detailed-description">More…</a></p>
-<section id="structures">
-<h2>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head"><p>Brief</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd_uart___register_readback_type.html"><span class="std std-doc">CddUart_RegisterReadbackType</span></a></strong></p></td>
-<td><p>UART registers.</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="defines">
-<h2>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head"><p>Brief</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>CDD_UART_MODULE_ID</p></td>
-<td><p>name CDD UART Driver ID Info</p></td>
-</tr>
-<tr class="row-odd"><td><p>CDD_UART_VENDOR_ID</p></td>
-<td><p>Texas Instruments Vendor ID.</p></td>
-</tr>
-<tr class="row-even"><td><p>CDD_UART_INSTANCE_ID</p></td>
-<td><p>Texas Instruments Vendor ID.</p></td>
-</tr>
-<tr class="row-odd"><td><p>EDMA_NUM_DMACH_SOC</p></td>
-<td><p>Number of own resources in use for DMA Mode.</p></td>
-</tr>
-<tr class="row-even"><td><p>EDMA_NUM_PARAMSETS_SOC</p></td>
-<td><p></p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Return type</p></th>
-<th class="head"><p>Function Name</p></th>
-<th class="head"><p>Brief</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-uart-object-configuration-mapping"><span class="std std-ref">Cdd_Uart_Object_Configuration_Mapping</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> CddUartHandle, const <a class="reference internal" href="../Classes/struct_cdd___uart___config_type.html"><span class="std std-doc">Cdd_Uart_ConfigType</span></a> * ChannelCfgPtr)</p></td>
-<td><p>Function for mapping Configuration parameters to UART Handle.</p></td>
-</tr>
-<tr class="row-odd"><td><p>uint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-uart-getchannelindex"><span class="std std-ref">Cdd_Uart_GetChannelIndex</span></a></strong>(uint8 hUart_Channel_ID)</p></td>
-<td><p>Function to get the index of the Channel ID.</p></td>
-</tr>
-<tr class="row-even"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-cdd-registerreadback"><span class="std std-ref">Uart_Cdd_RegisterReadback</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> CddUartHandle, <a class="reference internal" href="../Classes/struct_cdd_uart___register_readback_type.html"><span class="std std-doc">CddUart_RegisterReadbackType</span></a> * RegisterSetPtr)</p></td>
-<td><p>UART Hardware IP instance based Register Readback Function.</p></td>
-</tr>
-</tbody>
-</table>
-<section id="function-cdd-uart-object-configuration-mapping">
-<h3>function Cdd_Uart_Object_Configuration_Mapping<a class="headerlink" href="#function-cdd-uart-object-configuration-mapping" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Uart_Object_Configuration_Mapping</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">CddUartHandle</span><span class="p">,</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_Uart_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ChannelCfgPtr</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Brief</strong>:
-Function for mapping Configuration parameters to UART Handle.</p>
-<p>Function for mapping Configuration parameters to UART Handle.</p>
-</section>
-<section id="function-cdd-uart-getchannelindex">
-<h3>function Cdd_Uart_GetChannelIndex<a class="headerlink" href="#function-cdd-uart-getchannelindex" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Uart_GetChannelIndex</span><span class="p">(</span>
-<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">hUart_Channel_ID</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Brief</strong>:
-Function to get the index of the Channel ID.</p>
-</section>
-<section id="function-uart-cdd-registerreadback">
-<h3>function Uart_Cdd_RegisterReadback<a class="headerlink" href="#function-uart-cdd-registerreadback" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Uart_Cdd_RegisterReadback</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">CddUartHandle</span><span class="p">,</span>
-<span class="w">    </span><span class="n">CddUart_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegisterSetPtr</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p><strong>Brief</strong>:
-UART Hardware IP instance based Register Readback Function.</p>
-</section>
-</section>
 <section id="detailed-description">
 <h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Link to this heading"></a></h2>
-<p>This module implements a CDD driver in ANSI C programming language to centralize the configuration of ports and pins which are used by more than one driver module. This driver can:</p>
-<ul class="simple">
-<li><p>Configure the UART config registers</p></li>
-<li><p>Read and write data over UART</p></li>
-</ul>
-<p>This files defines CDD UART data structures</p>
-<p><strong>See</strong>: CDD_UART</p>
+<p>This file defines the interrupt handlers for ADC MCAL driver</p>
 </section>
 </section>
 

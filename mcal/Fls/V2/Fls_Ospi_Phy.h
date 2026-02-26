@@ -58,6 +58,9 @@
  *
  *  \brief    This file contains Phy tuning interface for FLS MCAL driver
  *
+ *  \ingroup FLS
+ *  \defgroup FLS_OSPI_PHY FLS OSPI PHY Driver Interface
+ *  @{
  */
 
 #ifndef FLS_OSPI_PHY_H_
@@ -213,6 +216,7 @@ void           Fls_Ospi_phy_disable(void);
 #ifdef __cplusplus
 }
 #endif
-#endif /* #ifndef FLS_OSPI_PHY_H_ */
 
-/** @} */
+/** @} */ /* End of FLS_OSPI_PHY group */
+
+#endif /* #ifndef FLS_OSPI_PHY_H_ */

@@ -55,7 +55,7 @@
 
 /**
  *  \defgroup DRV_UART_LLD_MODULE APIs for UART
- *  \ingroup DRV_MODULE
+ *  \ingroup UART
  *
  *  This module contains APIs to program and use the UART.
  *

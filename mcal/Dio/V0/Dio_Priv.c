@@ -278,9 +278,11 @@ void Dio_GpioBitToggle(gpioPORT_t *port, uint32 bit)
     }
 }
 /**
- * @fn
+ * \brief Get GPIO register information for a channel
+ * @param[in] channelId - DIO channel identifier
+ * @param[out] baseAddr - Pointer to store base address of the port
+ * @param[out] pinNumber - Pointer to store pin number
  */
-
 void Dio_GetGPIORegInfo(Dio_ChannelType channelId, uint32 *baseAddr, uint32 *pinNumber)
 {
     uint8 gpioRegNum;

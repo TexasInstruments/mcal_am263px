@@ -58,6 +58,9 @@
  *
  *  \brief    This file contains interface header for FLS MCAL driver
  *
+ *  \ingroup FLS
+ *  \defgroup FLS_QSPI FLS QSPI Driver Interface
+ *  @{
  */
 
 #ifndef FLS_QSPI_H_
@@ -85,7 +88,14 @@ extern "C" {
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 
-/*QSPI_ChipSelect*/
+/**
+ *  \anchor QSPI_ChipSelect
+ *  \name QSPI Chip Select
+ *
+ *  Chip select values for QSPI
+ *
+ *  @{
+ */
 #define FLS_QSPI_CS0 (0U)
 #define FLS_QSPI_CS1 (1U)
 #define FLS_QSPI_CS2 (2U)
@@ -94,6 +104,11 @@ extern "C" {
 
 /**
  *  \anchor QSPI_CmdMacros
+ *  \name QSPI Command Macros
+ *
+ *  Command macros for QSPI operations
+ *
+ *  @{
  */
 #define FLS_QSPI_CMD_INVALID_OPCODE (0xFFU)
 #define FLS_QSPI_CMD_INVALID_ADDR   (0xFFFFFFFFU)
@@ -124,10 +139,7 @@ typedef enum SPI_Status_s
  *  \name Transfer Lines Number
  *
  *  Number of lines used for QSPI read transaction
- *
- *  @{
  */
-/** @} */
 
 /**
  *  \anchor QSPI_FrameFormat
@@ -343,7 +355,6 @@ Std_ReturnType Fls_Qspi_ReadMemMapMode(QSPI_Handle handle, QSPI_Transaction *tra
  *  \sa     #QSPI_open
  */
 Std_ReturnType Fls_Qspi_WriteConfigMode(QSPI_Handle handle, QSPI_Transaction *trans);
-/** @} */
 
 /**
  *  \brief  Function to perform reads from the flash in configuration mode.
@@ -356,7 +367,6 @@ Std_ReturnType Fls_Qspi_WriteConfigMode(QSPI_Handle handle, QSPI_Transaction *tr
  *  \sa     #QSPI_open
  */
 Std_ReturnType Fls_Qspi_ReadConfigMode(QSPI_Handle handle, QSPI_Transaction *trans);
-/** @} */
 
 /**
  *  \brief  Function to initialize the #QSPI_Transaction structure
@@ -467,6 +477,6 @@ void Fls_hwi(void);
 }
 #endif
 
-#endif /* #ifndef QSPI_H_ */
+/** @} */ /* End of FLS_QSPI group */
 
-/** @} */
+#endif /* #ifndef QSPI_H_ */

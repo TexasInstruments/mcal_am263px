@@ -60,6 +60,14 @@
  *            API documentation.
  */
 
+/**
+ *  \ingroup CAN
+ *  \defgroup CAN_IRQ CAN Driver Interrupt Handlers
+ *
+ *  This file defines the interrupt handlers for CAN MCAL driver
+ *  @{
+ */
+
 #ifndef CAN_IRQ_H_
 #define CAN_IRQ_H_
 /* ========================================================================== */
@@ -90,7 +98,7 @@ extern "C" {
 #define CAN_ISR_CAT1 (0x01U)
 /** \brief Category 2 ISR type */
 #define CAN_ISR_CAT2 (0x02U)
-/* @} */
+/** @} */
 
 /* ========================================================================== */
 /*                           Function Prototypes                              */
@@ -561,6 +569,6 @@ ISR(Can_7_Int1ISR);
 }
 #endif
 
-#endif /* #ifndef CAN_IRQ_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef CAN_IRQ_H_ */

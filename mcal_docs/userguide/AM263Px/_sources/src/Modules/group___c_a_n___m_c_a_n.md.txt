@@ -1,0 +1,562 @@
+---
+title: CAN MCAN Driver Implementation
+
+---
+
+# CAN_MCAN
+
+
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| MCAN_TRANSMIT_PAUSE_ENABLE   | Transmit pause enable.  |
+| MCAN_EFBI   | Edge Filtering during Bus Integration.  |
+| MCAN_PROT_EXP_HANDLING_ENABLE   | Protocol Exception Handling Enable.  |
+| MCAN_EMU_ENABLE   | Emulation Enable.  |
+| MCAN_EMU_FAST_ACK   | Emulation Fast Ack.  |
+| MCAN_CLK_STOP_FAST_ACK   | Clock Stop Fast Ack.  |
+| MCAN_WDC_PRELOAD   | Start value of the Message RAM Watchdog Counter.  |
+| MCAN_TRCV_DELAY_COMP_WIN   | Transmitter Delay Compensation Filter Window Length.  |
+| APP_MCAN_EXT_ID_AND_MASK   | MCAN Extension ID mask.  |
+| MCAN_MSG_RAM_STD_ELEM_SIZE   | Standard ID Filter Element Size.  |
+| MCAN_MSG_RAM_EXT_ELEM_SIZE   | Extended ID Filter Element Size.  |
+| MCAN_MSG_RAM_TX_RX_ELEM_SIZE   | Tx/Rx Mailbox Size.  |
+| MCAN_INTR_MASK   |  |
+| CAN_START_SEC_CODE   |  |
+| CAN_START_SEC_CODE   |  |
+| CAN_STOP_SEC_CODE   |  |
+| CAN_STOP_SEC_CODE   |  |
+| XTD_MSGID_MASK   |  |
+| STD_MSGID_MASK   |  |
+| STD_MSGID_SHIFT   |  |
+| MSGID_FD_SHIFT   |  |
+| CAN_ID_STD   |  |
+| CAN_ID_XTD   |  |
+| CAN_ID_MIXED   |  |
+| CAN_MSG_ID_TYPE_STD   |  |
+| CAN_MSG_ID_TYPE_EXT   |  |
+| CAN_MSG_TYPE_MASK   |  |
+| CAN_MSG_TYPE_CLASSIC_CAN   |  |
+| CAN_MSG_TYPE_CAN_FD   |  |
+| CAN_START_SEC_CONST_8   |  |
+| CAN_STOP_SEC_CONST_8   |  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Can_mcanInit](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcaninit)**([MCAN_InitParams](../Classes/struct_m_c_a_n___init_params.md) * initParams, const [Can_ControllerType](../Classes/struct_can___controller_type.md) * canControllerCfg, const [Can_ControllerType_PC](../Classes/struct_can___controller_type___p_c.md) * canControllerCfg_PC)|  |
+| void | **[Can_mcanConfig](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanconfig)**(const [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, uint32 baseAddr)|  |
+| void | **[Can_mcanSetUpController](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetupcontroller)**(uint32 baseAddr)|  |
+| void | **[Can_mcanMsgRAMConfigInit](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanmsgramconfiginit)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * canFDMsgRamConfig)|  |
+| void | **[Can_mcanSetUpMSGRAM](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetupmsgram)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 maxMbCnt)|  |
+| void | **[Can_mcanSetUpTxMailbox](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuptxmailbox)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canControllerCfg, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 htrh)|  |
+| void | **[Can_mcanSetUpRxMailbox](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuprxmailbox)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh)|  |
+| void | **[Can_mcanSetUpRxMailboxBuf](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuprxmailboxbuf)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)|  |
+| void | **[Can_mcanSetUpRxMailboxStdIdFifo](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuprxmailboxstdidfifo)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)|  |
+| void | **[Can_mcanSetUpRxMailboxExtIdFifo](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuprxmailboxextidfifo)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)|  |
+| void | **[Can_mcanMsgRAMConfig](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanmsgramconfig)**(uint32 baseAddr, [Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * canFDMsgRamConfig)|  |
+| void | **[Can_mcanInitInterrupt](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcaninitinterrupt)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj)|  |
+| void | **[Can_mcanCancelPendMsg](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcancancelpendmsg)**(uint32 baseAddr)|  |
+| void | **[Can_WaitInternal](../Modules/group___c_a_n___m_c_a_n.md#function-can_waitinternal)**(uint32 baseAddr, uint32 bitPos, uint32 bitIndex)|  |
+| void | **[Can_mcanSetId](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetid)**(const Can_PduType * PduInfo, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, [MCAN_TxBufElement](../Classes/struct_m_c_a_n___tx_buf_element.md) * elem)|  |
+| uint32 | **[Can_mcanGetID](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcangetid)**(const uint32 idType, const uint32 CanId)|  |
+| void | **[Can_mcanRamInitDone](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanraminitdone)**(uint32 baseAddr)| Checks the initialization of Message RAM done or not.  |
+| void | **[Can_MailboxInitialize](../Modules/group___c_a_n___m_c_a_n.md#function-can_mailboxinitialize)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg)|  |
+| void | **[Can_GetFilterMask](../Modules/group___c_a_n___m_c_a_n.md#function-can_getfiltermask)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)|  |
+| void | **[Can_CheckCsStarted](../Modules/group___c_a_n___m_c_a_n.md#function-can_checkcsstarted)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, uint32 baseAddr)|  |
+| void | **[Can_hwUnitConfig](../Modules/group___c_a_n___m_c_a_n.md#function-can_hwunitconfig)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 maxMbCnt)|  |
+| Std_ReturnType | **[Can_mcanStart](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanstart)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj)|  |
+| Std_ReturnType | **[Can_mcanStop](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanstop)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj, [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 maxMbCnt)|  |
+| Std_ReturnType | **[Can_mcanSleep](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansleep)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj)|  |
+| Std_ReturnType | **[Can_mcanTestLoopBackModeEnable](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcantestloopbackmodeenable)**(uint32 baseAddr, uint8 mode)|  |
+| Std_ReturnType | **[Can_mcanTestLoopBackModeDisable](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcantestloopbackmodedisable)**(uint32 baseAddr, uint8 mode)|  |
+| void | **[Can_mcanCancelledMessagesReset](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcancancelledmessagesreset)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj)|  |
+| uint32 | **[Can_writeGetFreeMsgObj](../Modules/group___c_a_n___m_c_a_n.md#function-can_writegetfreemsgobj)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj)|  |
+| Std_ReturnType | **[Can_mcanWriteTxMailbox](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanwritetxmailbox)**(const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj, uint32 messageBox, const Can_PduType * pduInfo)|  |
+| Can_ErrorStateType | **[Can_mcanGetProtocolStatus](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcangetprotocolstatus)**(const [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController)| This function will check the Protocol Status register to get the error status.  |
+| void | **[Can_mcanSetUpMbxList](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetupmbxlist)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, uint32 maxMbCnt)|  |
+| void | **[Can_mcanSetBaudrate](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetbaudrate)**(const [Can_ControllerType_PC](../Classes/struct_can___controller_type___p_c.md) * canControllerCfg_PC, const [Can_BaudConfigType](../Classes/struct_can___baud_config_type.md) * setBaud)|  |
+| void | **[Can_mcanDisableInterrupts](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcandisableinterrupts)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj)|  |
+| void | **[Can_mcanEnableInterrupts](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanenableinterrupts)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController)|  |
+| void | **[Can_mcanProcessBusOff](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanprocessbusoff)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 maxMbCnt)|  |
+| void | **[Can_mcan_ModeProcess](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcan_modeprocess)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController)|  |
+| void | **[Can_mcanReadRxBuff](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanreadrxbuff)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj, uint32 Interrupt_Mask)|  |
+| void | **[Can_mcanReadRxFIFO](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanreadrxfifo)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj, [MCAN_RxFIFONum](../Files/mcan_8h.md#enum-mcan_rxfifonum) fifoNum)|  |
+| void | **[Can_mcanProcessISR](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanprocessisr)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 maxMbCnt)|  |
+| void | **[Can_mcanProcessTx](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanprocesstx)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 Interrupt_Mask)|  |
+| void | **[Can_mcanProcessECCISR](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanprocesseccisr)**(const [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * controllerObj)|  |
+| void | **[Can_mcanHwDeInit](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanhwdeinit)**(const [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController)|  |
+
+
+
+### function Can_mcanInit
+
+```
+static void Can_mcanInit(
+    MCAN_InitParams * initParams,
+    const Can_ControllerType * canControllerCfg,
+    const Can_ControllerType_PC * canControllerCfg_PC
+)
+```
+
+
+### function Can_mcanConfig
+
+```
+void Can_mcanConfig(
+    const Can_ControllerObjType * canController,
+    uint32 baseAddr
+)
+```
+
+
+### function Can_mcanSetUpController
+
+```
+void Can_mcanSetUpController(
+    uint32 baseAddr
+)
+```
+
+
+### function Can_mcanMsgRAMConfigInit
+
+```
+void Can_mcanMsgRAMConfigInit(
+    Can_FdMsgRAMConfigObjType * canFDMsgRamConfig
+)
+```
+
+
+### function Can_mcanSetUpMSGRAM
+
+```
+void Can_mcanSetUpMSGRAM(
+    Can_ControllerObjType * canController,
+    const Can_MailboxObjType * canMailbox,
+    Can_MailboxObjTxType * canTxMessageObj,
+    uint32 maxMbCnt
+)
+```
+
+
+### function Can_mcanSetUpTxMailbox
+
+```
+void Can_mcanSetUpTxMailbox(
+    Can_FdMsgRAMConfigObjType * msgRamConfig,
+    const Can_MailboxType * mailboxCfg,
+    Can_ControllerObjType * canControllerCfg,
+    Can_MailboxObjTxType * canTxMessageObj,
+    uint32 htrh
+)
+```
+
+
+### function Can_mcanSetUpRxMailbox
+
+```
+static void Can_mcanSetUpRxMailbox(
+    Can_FdMsgRAMConfigObjType * msgRamConfig,
+    const Can_MailboxType * mailboxCfg,
+    uint32 htrh
+)
+```
+
+
+### function Can_mcanSetUpRxMailboxBuf
+
+```
+static void Can_mcanSetUpRxMailboxBuf(
+    Can_FdMsgRAMConfigObjType * msgRamConfig,
+    const Can_MailboxType * mailboxCfg,
+    uint32 htrh,
+    uint32 hwFilterIdx
+)
+```
+
+
+### function Can_mcanSetUpRxMailboxStdIdFifo
+
+```
+static void Can_mcanSetUpRxMailboxStdIdFifo(
+    Can_FdMsgRAMConfigObjType * msgRamConfig,
+    const Can_MailboxType * mailboxCfg,
+    uint32 htrh,
+    uint32 hwFilterIdx
+)
+```
+
+
+### function Can_mcanSetUpRxMailboxExtIdFifo
+
+```
+static void Can_mcanSetUpRxMailboxExtIdFifo(
+    Can_FdMsgRAMConfigObjType * msgRamConfig,
+    const Can_MailboxType * mailboxCfg,
+    uint32 htrh,
+    uint32 hwFilterIdx
+)
+```
+
+
+### function Can_mcanMsgRAMConfig
+
+```
+void Can_mcanMsgRAMConfig(
+    uint32 baseAddr,
+    Can_FdMsgRAMConfigObjType * canFDMsgRamConfig
+)
+```
+
+
+### function Can_mcanInitInterrupt
+
+```
+void Can_mcanInitInterrupt(
+    Can_ControllerObjType * controllerObj
+)
+```
+
+
+### function Can_mcanCancelPendMsg
+
+```
+static void Can_mcanCancelPendMsg(
+    uint32 baseAddr
+)
+```
+
+
+### function Can_WaitInternal
+
+```
+static void Can_WaitInternal(
+    uint32 baseAddr,
+    uint32 bitPos,
+    uint32 bitIndex
+)
+```
+
+
+### function Can_mcanSetId
+
+```
+static void Can_mcanSetId(
+    const Can_PduType * PduInfo,
+    const Can_MailboxType * mailboxCfg,
+    MCAN_TxBufElement * elem
+)
+```
+
+
+### function Can_mcanGetID
+
+```
+static inline uint32 Can_mcanGetID(
+    const uint32 idType,
+    const uint32 CanId
+)
+```
+
+
+### function Can_mcanRamInitDone
+
+```
+static void Can_mcanRamInitDone(
+    uint32 baseAddr
+)
+```
+
+
+**Brief**: 
+Checks the initialization of Message RAM done or not. 
+
+**Parameters**: 
+
+  
+* **uint32** baseAddr - Base Address of controller 
+
+
+### function Can_MailboxInitialize
+
+```
+static void Can_MailboxInitialize(
+    Can_ControllerObjType * canController,
+    Can_MailboxObjTxType * canTxMessageObj,
+    const Can_MailboxType * mailboxCfg
+)
+```
+
+
+### function Can_GetFilterMask
+
+```
+static void Can_GetFilterMask(
+    Can_FdMsgRAMConfigObjType * msgRamConfig,
+    const Can_MailboxType * mailboxCfg,
+    uint32 htrh,
+    uint32 hwFilterIdx
+)
+```
+
+
+### function Can_CheckCsStarted
+
+```
+static void Can_CheckCsStarted(
+    Can_ControllerObjType * canController,
+    uint32 baseAddr
+)
+```
+
+
+### function Can_hwUnitConfig
+
+```
+void Can_hwUnitConfig(
+    Can_ControllerObjType * canController,
+    const Can_MailboxObjType * canMailbox,
+    Can_MailboxObjTxType * canTxMessageObj,
+    uint32 maxMbCnt
+)
+```
+
+
+### function Can_mcanStart
+
+```
+Std_ReturnType Can_mcanStart(
+    Can_ControllerObjType * controllerObj
+)
+```
+
+
+### function Can_mcanStop
+
+```
+Std_ReturnType Can_mcanStop(
+    Can_ControllerObjType * controllerObj,
+    Can_MailboxObjType * canMailbox,
+    Can_MailboxObjTxType * canTxMessageObj,
+    uint32 maxMbCnt
+)
+```
+
+
+### function Can_mcanSleep
+
+```
+Std_ReturnType Can_mcanSleep(
+    Can_ControllerObjType * controllerObj
+)
+```
+
+
+### function Can_mcanTestLoopBackModeEnable
+
+```
+Std_ReturnType Can_mcanTestLoopBackModeEnable(
+    uint32 baseAddr,
+    uint8 mode
+)
+```
+
+
+### function Can_mcanTestLoopBackModeDisable
+
+```
+Std_ReturnType Can_mcanTestLoopBackModeDisable(
+    uint32 baseAddr,
+    uint8 mode
+)
+```
+
+
+### function Can_mcanCancelledMessagesReset
+
+```
+void Can_mcanCancelledMessagesReset(
+    Can_ControllerObjType * canController,
+    const Can_MailboxObjType * canMailbox,
+    Can_MailboxObjTxType * canTxMessageObj
+)
+```
+
+
+### function Can_writeGetFreeMsgObj
+
+```
+uint32 Can_writeGetFreeMsgObj(
+    Can_ControllerObjType * canController,
+    Can_MailboxObjTxType * canTxMessageObj
+)
+```
+
+
+### function Can_mcanWriteTxMailbox
+
+```
+Std_ReturnType Can_mcanWriteTxMailbox(
+    const Can_MailboxType * mailboxCfg,
+    Can_ControllerObjType * controllerObj,
+    uint32 messageBox,
+    const Can_PduType * pduInfo
+)
+```
+
+
+### function Can_mcanGetProtocolStatus
+
+```
+Can_ErrorStateType Can_mcanGetProtocolStatus(
+    const Can_ControllerObjType * canController
+)
+```
+
+
+**Brief**: 
+This function will check the Protocol Status register to get the error status. 
+
+**Parameters**: 
+
+  
+* **Can_ControllerObjType** controller - The controller for which the error status is checked.
+  
+* **Returns** the Can_ErrorStateType errorState \context 
+
+
+### function Can_mcanSetUpMbxList
+
+```
+static void Can_mcanSetUpMbxList(
+    Can_ControllerObjType * canController,
+    const Can_MailboxObjType * canMailbox,
+    uint32 maxMbCnt
+)
+```
+
+
+### function Can_mcanSetBaudrate
+
+```
+void Can_mcanSetBaudrate(
+    const Can_ControllerType_PC * canControllerCfg_PC,
+    const Can_BaudConfigType * setBaud
+)
+```
+
+
+### function Can_mcanDisableInterrupts
+
+```
+void Can_mcanDisableInterrupts(
+    Can_ControllerObjType * controllerObj
+)
+```
+
+
+### function Can_mcanEnableInterrupts
+
+```
+void Can_mcanEnableInterrupts(
+    Can_ControllerObjType * canController
+)
+```
+
+
+### function Can_mcanProcessBusOff
+
+```
+void Can_mcanProcessBusOff(
+    Can_ControllerObjType * canController,
+    const Can_MailboxObjType * canMailbox,
+    Can_MailboxObjTxType * canTxMessageObj,
+    uint32 maxMbCnt
+)
+```
+
+
+### function Can_mcan_ModeProcess
+
+```
+void Can_mcan_ModeProcess(
+    Can_ControllerObjType * canController
+)
+```
+
+
+### function Can_mcanReadRxBuff
+
+```
+void Can_mcanReadRxBuff(
+    Can_ControllerObjType * controllerObj,
+    uint32 Interrupt_Mask
+)
+```
+
+
+### function Can_mcanReadRxFIFO
+
+```
+void Can_mcanReadRxFIFO(
+    Can_ControllerObjType * controllerObj,
+    MCAN_RxFIFONum fifoNum
+)
+```
+
+
+### function Can_mcanProcessISR
+
+```
+void Can_mcanProcessISR(
+    Can_ControllerObjType * canController,
+    const Can_MailboxObjType * canMailbox,
+    Can_MailboxObjTxType * canTxMessageObj,
+    uint32 maxMbCnt
+)
+```
+
+
+### function Can_mcanProcessTx
+
+```
+void Can_mcanProcessTx(
+    Can_ControllerObjType * canController,
+    const Can_MailboxObjType * canMailbox,
+    Can_MailboxObjTxType * canTxMessageObj,
+    uint32 Interrupt_Mask
+)
+```
+
+
+### function Can_mcanProcessECCISR
+
+```
+void Can_mcanProcessECCISR(
+    const Can_ControllerObjType * controllerObj
+)
+```
+
+
+### function Can_mcanHwDeInit
+
+```
+void Can_mcanHwDeInit(
+    const Can_ControllerObjType * canController
+)
+```
+
+
+
+
+
+

@@ -60,6 +60,14 @@
  *
  */
 
+/**
+ *  \ingroup GPT
+ *  \defgroup GPT_IRQ GPT Driver Interrupt Handlers
+ *
+ *  This file defines the interrupt handlers for GPT MCAL driver
+ *  @{
+ */
+
 #ifndef GPT_IRQ_H_
 #define GPT_IRQ_H_
 
@@ -109,7 +117,7 @@ extern "C" {
 #define GPT_ISR_CAT1 (0x01U)
 /** \brief Category 2 ISR type */
 #define GPT_ISR_CAT2 (0x02U)
-/* @} */
+/** @} */
 
 /** \brief Typedef for the ISR Function Array */
 typedef void (*Gpt_IsrRefType)(Gpt_ChannelType channel);
@@ -403,6 +411,6 @@ ISR(Gpt_Ch31Isr);
 }
 #endif
 
-#endif /* #ifndef GPT_IRQ_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef GPT_IRQ_H_ */

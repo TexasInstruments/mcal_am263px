@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-design.min.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,6 +18,7 @@
         <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../_static/js/theme.js"></script>
 
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
@@ -66,52 +68,53 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.2. CAN</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#types">5.2.1. Types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#enum-can-mailboxdirectiontype">5.2.1.1. enum Can_MailBoxDirectionType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-can-handletype">5.2.1.2. enum Can_HandleType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-can-txrxprocessingtype">5.2.1.3. enum Can_TxRxProcessingType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-can-eccerrortype">5.2.1.4. enum Can_ECCErrorType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-can-controllerinstance">5.2.1.5. enum Can_ControllerInstance</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-can-errnotifytype">5.2.1.6. typedef Can_ErrNotifyType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-cancontrollerstate-type">5.2.1.7. typedef CanControllerState_Type</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-can-interruptmask-type">5.2.1.8. typedef Can_InterruptMask_Type</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">5.2.1. Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types">5.2.2. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-can-mailboxdirectiontype">5.2.2.1. enum Can_MailBoxDirectionType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-can-handletype">5.2.2.2. enum Can_HandleType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-can-txrxprocessingtype">5.2.2.3. enum Can_TxRxProcessingType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-can-eccerrortype">5.2.2.4. enum Can_ECCErrorType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-can-controllerinstance">5.2.2.5. enum Can_ControllerInstance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-can-errnotifytype">5.2.2.6. typedef Can_ErrNotifyType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-cancontrollerstate-type">5.2.2.7. typedef CanControllerState_Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-can-interruptmask-type">5.2.2.8. typedef Can_InterruptMask_Type</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#structures">5.2.2. Structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defines">5.2.3. Defines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions">5.2.4. Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-getversioninfo">5.2.4.1. function Can_GetVersionInfo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-init">5.2.4.2. function Can_Init</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-setcontrollermode">5.2.4.3. function Can_SetControllerMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-write">5.2.4.4. function Can_Write</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-checkwakeup">5.2.4.5. function Can_CheckWakeup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-disablecontrollerinterrupts">5.2.4.6. function Can_DisableControllerInterrupts</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-enablecontrollerinterrupts">5.2.4.7. function Can_EnableControllerInterrupts</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-write">5.2.4.8. function Can_MainFunction_Write</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-busoff">5.2.4.9. function Can_MainFunction_BusOff</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-read">5.2.4.10. function Can_MainFunction_Read</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-wakeup">5.2.4.11. function Can_MainFunction_Wakeup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-mode">5.2.4.12. function Can_MainFunction_Mode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-testloopbackmodeenable">5.2.4.13. function Can_TestLoopBackModeEnable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-testloopbackmodedisable">5.2.4.14. function Can_TestLoopBackModeDisable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-0-int0isr-fun">5.2.4.15. function Can_0_Int0ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-0-int1isr-fun">5.2.4.16. function Can_0_Int1ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-1-int0isr-fun">5.2.4.17. function Can_1_Int0ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-1-int1isr-fun">5.2.4.18. function Can_1_Int1ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-2-int0isr-fun">5.2.4.19. function Can_2_Int0ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-2-int1isr-fun">5.2.4.20. function Can_2_Int1ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-3-int0isr-fun">5.2.4.21. function Can_3_Int0ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-3-int1isr-fun">5.2.4.22. function Can_3_Int1ISR_Fun</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-setbaudrate">5.2.4.23. function Can_SetBaudrate</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-registerreadback">5.2.4.24. function Can_RegisterReadback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-eccparityenable">5.2.4.25. function Can_EccParityEnable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-eccdiagnosticgeterrmsgboxnum">5.2.4.26. function Can_EccDiagnosticGetErrMsgBoxNum</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-eccdiagnosticmodeenable">5.2.4.27. function Can_EccDiagnosticModeEnable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-eccgeterrstatus">5.2.4.28. function Can_EccGetErrStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-eccclrerrstatus">5.2.4.29. function Can_EccClrErrStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-deinit">5.2.4.30. function Can_DeInit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-getcontrollererrorstate">5.2.4.31. function Can_GetControllerErrorState</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-can-getcontrollermode">5.2.4.32. function Can_GetControllerMode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">5.2.3. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.2.4. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.2.5. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-getversioninfo">5.2.5.1. function Can_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-init">5.2.5.2. function Can_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-setcontrollermode">5.2.5.3. function Can_SetControllerMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-write">5.2.5.4. function Can_Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-checkwakeup">5.2.5.5. function Can_CheckWakeup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-disablecontrollerinterrupts">5.2.5.6. function Can_DisableControllerInterrupts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-enablecontrollerinterrupts">5.2.5.7. function Can_EnableControllerInterrupts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-write">5.2.5.8. function Can_MainFunction_Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-busoff">5.2.5.9. function Can_MainFunction_BusOff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-read">5.2.5.10. function Can_MainFunction_Read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-wakeup">5.2.5.11. function Can_MainFunction_Wakeup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-mainfunction-mode">5.2.5.12. function Can_MainFunction_Mode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-testloopbackmodeenable">5.2.5.13. function Can_TestLoopBackModeEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-testloopbackmodedisable">5.2.5.14. function Can_TestLoopBackModeDisable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-0-int0isr-fun">5.2.5.15. function Can_0_Int0ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-0-int1isr-fun">5.2.5.16. function Can_0_Int1ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-1-int0isr-fun">5.2.5.17. function Can_1_Int0ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-1-int1isr-fun">5.2.5.18. function Can_1_Int1ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-2-int0isr-fun">5.2.5.19. function Can_2_Int0ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-2-int1isr-fun">5.2.5.20. function Can_2_Int1ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-3-int0isr-fun">5.2.5.21. function Can_3_Int0ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-3-int1isr-fun">5.2.5.22. function Can_3_Int1ISR_Fun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-setbaudrate">5.2.5.23. function Can_SetBaudrate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-registerreadback">5.2.5.24. function Can_RegisterReadback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-eccparityenable">5.2.5.25. function Can_EccParityEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-eccdiagnosticgeterrmsgboxnum">5.2.5.26. function Can_EccDiagnosticGetErrMsgBoxNum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-eccdiagnosticmodeenable">5.2.5.27. function Can_EccDiagnosticModeEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-eccgeterrstatus">5.2.5.28. function Can_EccGetErrStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-eccclrerrstatus">5.2.5.29. function Can_EccClrErrStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-deinit">5.2.5.30. function Can_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-getcontrollererrorstate">5.2.5.31. function Can_GetControllerErrorState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-can-getcontrollermode">5.2.5.32. function Can_GetControllerMode</a></li>
 </ul>
 </li>
 </ul>
@@ -167,8 +170,23 @@
              
   <section id="can">
 <h1><span class="section-number">5.2. </span>CAN<a class="headerlink" href="#can" title="Link to this heading"></a></h1>
+<section id="modules">
+<h2><span class="section-number">5.2.1. </span>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="group___c_a_n___i_r_q.html"><span class="std std-doc">CAN Driver Interrupt Handlers</span></a></strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="group___c_a_n___m_c_a_n.html"><span class="std std-doc">CAN MCAN Driver Implementation</span></a></strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="types">
-<h2><span class="section-number">5.2.1. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.2.2. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Base type</p></th>
@@ -212,7 +230,7 @@
 </tbody>
 </table>
 <section id="enum-can-mailboxdirectiontype">
-<h3><span class="section-number">5.2.1.1. </span>enum Can_MailBoxDirectionType<a class="headerlink" href="#enum-can-mailboxdirectiontype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.1. </span>enum Can_MailBoxDirectionType<a class="headerlink" href="#enum-can-mailboxdirectiontype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -235,7 +253,7 @@
 Can Mailbox direction enum.</p>
 </section>
 <section id="enum-can-handletype">
-<h3><span class="section-number">5.2.1.2. </span>enum Can_HandleType<a class="headerlink" href="#enum-can-handletype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.2. </span>enum Can_HandleType<a class="headerlink" href="#enum-can-handletype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -258,7 +276,7 @@ Can Mailbox direction enum.</p>
 Can Handle Type enum.</p>
 </section>
 <section id="enum-can-txrxprocessingtype">
-<h3><span class="section-number">5.2.1.3. </span>enum Can_TxRxProcessingType<a class="headerlink" href="#enum-can-txrxprocessingtype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.3. </span>enum Can_TxRxProcessingType<a class="headerlink" href="#enum-can-txrxprocessingtype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -285,7 +303,7 @@ Can Handle Type enum.</p>
 Can Tx/Rx processing enum.</p>
 </section>
 <section id="enum-can-eccerrortype">
-<h3><span class="section-number">5.2.1.4. </span>enum Can_ECCErrorType<a class="headerlink" href="#enum-can-eccerrortype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.4. </span>enum Can_ECCErrorType<a class="headerlink" href="#enum-can-eccerrortype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -312,7 +330,7 @@ Can Tx/Rx processing enum.</p>
 Can Controller Error Types.</p>
 </section>
 <section id="enum-can-controllerinstance">
-<h3><span class="section-number">5.2.1.5. </span>enum Can_ControllerInstance<a class="headerlink" href="#enum-can-controllerinstance" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.5. </span>enum Can_ControllerInstance<a class="headerlink" href="#enum-can-controllerinstance" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -359,7 +377,7 @@ Can Controller Error Types.</p>
 Can Controller instance enum.</p>
 </section>
 <section id="typedef-can-errnotifytype">
-<h3><span class="section-number">5.2.1.6. </span>typedef Can_ErrNotifyType<a class="headerlink" href="#typedef-can-errnotifytype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.6. </span>typedef Can_ErrNotifyType<a class="headerlink" href="#typedef-can-errnotifytype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Can_ErrNotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">uint32</span><span class="w"> </span><span class="n">canErrorType</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -367,7 +385,7 @@ Can Controller instance enum.</p>
 Typedef for error notification function pointer.</p>
 </section>
 <section id="typedef-cancontrollerstate-type">
-<h3><span class="section-number">5.2.1.7. </span>typedef CanControllerState_Type<a class="headerlink" href="#typedef-cancontrollerstate-type" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.7. </span>typedef CanControllerState_Type<a class="headerlink" href="#typedef-cancontrollerstate-type" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">CanControllerState_Type</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -375,7 +393,7 @@ Typedef for error notification function pointer.</p>
 Can Controller State enum type.</p>
 </section>
 <section id="typedef-can-interruptmask-type">
-<h3><span class="section-number">5.2.1.8. </span>typedef Can_InterruptMask_Type<a class="headerlink" href="#typedef-can-interruptmask-type" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.2.8. </span>typedef Can_InterruptMask_Type<a class="headerlink" href="#typedef-can-interruptmask-type" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Can_InterruptMask_Type</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -384,7 +402,7 @@ Can Interrupt Mask type.</p>
 </section>
 </section>
 <section id="structures">
-<h2><span class="section-number">5.2.2. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.2.3. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -426,7 +444,7 @@ Can Interrupt Mask type.</p>
 </table>
 </section>
 <section id="defines">
-<h2><span class="section-number">5.2.3. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.2.4. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -579,7 +597,7 @@ Can Interrupt Mask type.</p>
 </table>
 </section>
 <section id="functions">
-<h2><span class="section-number">5.2.4. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.2.5. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Return type</p></th>
@@ -719,7 +737,7 @@ Can Interrupt Mask type.</p>
 </tbody>
 </table>
 <section id="function-can-getversioninfo">
-<h3><span class="section-number">5.2.4.1. </span>function Can_GetVersionInfo<a class="headerlink" href="#function-can-getversioninfo" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.1. </span>function Can_GetVersionInfo<a class="headerlink" href="#function-can-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_GetVersionInfo</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Can_VersionInfo</span>
 <span class="p">)</span>
@@ -742,7 +760,7 @@ Function returns the version information of this module.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-init">
-<h3><span class="section-number">5.2.4.2. </span>function Can_Init<a class="headerlink" href="#function-can-init" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.2. </span>function Can_Init<a class="headerlink" href="#function-can-init" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_Init</span><span class="p">(</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">CfgPtr</span>
 <span class="p">)</span>
@@ -765,7 +783,7 @@ This function initializes the module. All the required initialization for the CA
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-setcontrollermode">
-<h3><span class="section-number">5.2.4.3. </span>function Can_SetControllerMode<a class="headerlink" href="#function-can-setcontrollermode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.3. </span>function Can_SetControllerMode<a class="headerlink" href="#function-can-setcontrollermode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_SetControllerMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">Controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Can_ControllerStateType</span><span class="w"> </span><span class="n">Transition</span>
@@ -792,7 +810,7 @@ This function performs software triggered state transitions of the CAN controlle
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-write">
-<h3><span class="section-number">5.2.4.4. </span>function Can_Write<a class="headerlink" href="#function-can-write" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.4. </span>function Can_Write<a class="headerlink" href="#function-can-write" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_Write</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Can_HwHandleType</span><span class="w"> </span><span class="n">Hth</span><span class="p">,</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_PduType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PduInfo</span>
@@ -821,7 +839,7 @@ This function is called by CanIf to pass a CAN message to CanDrv for transmissio
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-checkwakeup">
-<h3><span class="section-number">5.2.4.5. </span>function Can_CheckWakeup<a class="headerlink" href="#function-can-checkwakeup" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.5. </span>function Can_CheckWakeup<a class="headerlink" href="#function-can-checkwakeup" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_CheckWakeup</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">Controller</span>
 <span class="p">)</span>
@@ -846,7 +864,7 @@ This function checks if a wakeup has occurred for the given controller.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-disablecontrollerinterrupts">
-<h3><span class="section-number">5.2.4.6. </span>function Can_DisableControllerInterrupts<a class="headerlink" href="#function-can-disablecontrollerinterrupts" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.6. </span>function Can_DisableControllerInterrupts<a class="headerlink" href="#function-can-disablecontrollerinterrupts" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_DisableControllerInterrupts</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">Controller</span>
 <span class="p">)</span>
@@ -869,7 +887,7 @@ This function disables all interrupts for this CAN controller Basically it will 
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-enablecontrollerinterrupts">
-<h3><span class="section-number">5.2.4.7. </span>function Can_EnableControllerInterrupts<a class="headerlink" href="#function-can-enablecontrollerinterrupts" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.7. </span>function Can_EnableControllerInterrupts<a class="headerlink" href="#function-can-enablecontrollerinterrupts" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_EnableControllerInterrupts</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">Controller</span>
 <span class="p">)</span>
@@ -892,7 +910,7 @@ This function will Enable the interrupts for the Controller desired. It will res
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-mainfunction-write">
-<h3><span class="section-number">5.2.4.8. </span>function Can_MainFunction_Write<a class="headerlink" href="#function-can-mainfunction-write" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.8. </span>function Can_MainFunction_Write<a class="headerlink" href="#function-can-mainfunction-write" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_MainFunction_Write</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -913,7 +931,7 @@ This function performs the polling of TX confirmation when CAN_TX_PROCESSING is 
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-mainfunction-busoff">
-<h3><span class="section-number">5.2.4.9. </span>function Can_MainFunction_BusOff<a class="headerlink" href="#function-can-mainfunction-busoff" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.9. </span>function Can_MainFunction_BusOff<a class="headerlink" href="#function-can-mainfunction-busoff" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_MainFunction_BusOff</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -934,7 +952,7 @@ This function performs the polling of bus-off events that are configured statica
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-mainfunction-read">
-<h3><span class="section-number">5.2.4.10. </span>function Can_MainFunction_Read<a class="headerlink" href="#function-can-mainfunction-read" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.10. </span>function Can_MainFunction_Read<a class="headerlink" href="#function-can-mainfunction-read" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_MainFunction_Read</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -955,7 +973,7 @@ This function performs the polling of RX indications when CAN_RX_PROCESSING is s
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-mainfunction-wakeup">
-<h3><span class="section-number">5.2.4.11. </span>function Can_MainFunction_Wakeup<a class="headerlink" href="#function-can-mainfunction-wakeup" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.11. </span>function Can_MainFunction_Wakeup<a class="headerlink" href="#function-can-mainfunction-wakeup" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_MainFunction_Wakeup</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -976,7 +994,7 @@ This function performs the polling of wake-up events that are configured statica
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-mainfunction-mode">
-<h3><span class="section-number">5.2.4.12. </span>function Can_MainFunction_Mode<a class="headerlink" href="#function-can-mainfunction-mode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.12. </span>function Can_MainFunction_Mode<a class="headerlink" href="#function-can-mainfunction-mode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_MainFunction_Mode</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -997,7 +1015,7 @@ This function performs the polling of CAN controller mode transitions This will 
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-testloopbackmodeenable">
-<h3><span class="section-number">5.2.4.13. </span>function Can_TestLoopBackModeEnable<a class="headerlink" href="#function-can-testloopbackmodeenable" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.13. </span>function Can_TestLoopBackModeEnable<a class="headerlink" href="#function-can-testloopbackmodeenable" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_TestLoopBackModeEnable</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">mode</span>
@@ -1024,7 +1042,7 @@ This service will enable CAN loopback mode.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-testloopbackmodedisable">
-<h3><span class="section-number">5.2.4.14. </span>function Can_TestLoopBackModeDisable<a class="headerlink" href="#function-can-testloopbackmodedisable" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.14. </span>function Can_TestLoopBackModeDisable<a class="headerlink" href="#function-can-testloopbackmodedisable" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_TestLoopBackModeDisable</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">mode</span>
@@ -1051,7 +1069,7 @@ This service will disable CAN loopback mode.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-0-int0isr-fun">
-<h3><span class="section-number">5.2.4.15. </span>function Can_0_Int0ISR_Fun<a class="headerlink" href="#function-can-0-int0isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.15. </span>function Can_0_Int0ISR_Fun<a class="headerlink" href="#function-can-0-int0isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_0_Int0ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1075,7 +1093,7 @@ This function is the ISR for CAN controller 0/INT 0 This function should be invo
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-0-int1isr-fun">
-<h3><span class="section-number">5.2.4.16. </span>function Can_0_Int1ISR_Fun<a class="headerlink" href="#function-can-0-int1isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.16. </span>function Can_0_Int1ISR_Fun<a class="headerlink" href="#function-can-0-int1isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_0_Int1ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1099,7 +1117,7 @@ This function is the ISR for CAN controller 0/INT 1    This function should be i
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-1-int0isr-fun">
-<h3><span class="section-number">5.2.4.17. </span>function Can_1_Int0ISR_Fun<a class="headerlink" href="#function-can-1-int0isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.17. </span>function Can_1_Int0ISR_Fun<a class="headerlink" href="#function-can-1-int0isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_1_Int0ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1123,7 +1141,7 @@ This function is the ISR for CAN controller 1/INT 0    This function should be i
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-1-int1isr-fun">
-<h3><span class="section-number">5.2.4.18. </span>function Can_1_Int1ISR_Fun<a class="headerlink" href="#function-can-1-int1isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.18. </span>function Can_1_Int1ISR_Fun<a class="headerlink" href="#function-can-1-int1isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_1_Int1ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1147,7 +1165,7 @@ This function is the ISR for CAN controller 1/INT 1    This function should be i
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-2-int0isr-fun">
-<h3><span class="section-number">5.2.4.19. </span>function Can_2_Int0ISR_Fun<a class="headerlink" href="#function-can-2-int0isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.19. </span>function Can_2_Int0ISR_Fun<a class="headerlink" href="#function-can-2-int0isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_2_Int0ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1171,7 +1189,7 @@ This function is the ISR for CAN controller 2/INT 0    This function should be i
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-2-int1isr-fun">
-<h3><span class="section-number">5.2.4.20. </span>function Can_2_Int1ISR_Fun<a class="headerlink" href="#function-can-2-int1isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.20. </span>function Can_2_Int1ISR_Fun<a class="headerlink" href="#function-can-2-int1isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_2_Int1ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1195,7 +1213,7 @@ This function is the ISR for CAN controller 2/INT 1    This function should be i
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-3-int0isr-fun">
-<h3><span class="section-number">5.2.4.21. </span>function Can_3_Int0ISR_Fun<a class="headerlink" href="#function-can-3-int0isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.21. </span>function Can_3_Int0ISR_Fun<a class="headerlink" href="#function-can-3-int0isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_3_Int0ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1219,7 +1237,7 @@ This function is the ISR for CAN controller 3/INT 0    This function should be i
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-3-int1isr-fun">
-<h3><span class="section-number">5.2.4.22. </span>function Can_3_Int1ISR_Fun<a class="headerlink" href="#function-can-3-int1isr-fun" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.22. </span>function Can_3_Int1ISR_Fun<a class="headerlink" href="#function-can-3-int1isr-fun" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_3_Int1ISR_Fun</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1243,7 +1261,7 @@ This function is the ISR for CAN controller 3/INT 1    This function should be i
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-setbaudrate">
-<h3><span class="section-number">5.2.4.23. </span>function Can_SetBaudrate<a class="headerlink" href="#function-can-setbaudrate" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.23. </span>function Can_SetBaudrate<a class="headerlink" href="#function-can-setbaudrate" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_SetBaudrate</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">Controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">BaudRateConfigID</span>
@@ -1270,7 +1288,7 @@ This function Sets Can controller baud rate selected by BaudRateConfigID.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-registerreadback">
-<h3><span class="section-number">5.2.4.24. </span>function Can_RegisterReadback<a class="headerlink" href="#function-can-registerreadback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.24. </span>function Can_RegisterReadback<a class="headerlink" href="#function-can-registerreadback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_RegisterReadback</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">Controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Can_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
@@ -1297,7 +1315,7 @@ This service will readback CAN registers This is the function for checking the c
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-eccparityenable">
-<h3><span class="section-number">5.2.4.25. </span>function Can_EccParityEnable<a class="headerlink" href="#function-can-eccparityenable" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.25. </span>function Can_EccParityEnable<a class="headerlink" href="#function-can-eccparityenable" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_EccParityEnable</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">flag</span><span class="p">,</span>
@@ -1326,7 +1344,7 @@ This function Enables/Disables Parity This function used to test ECC/Parity erro
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-eccdiagnosticgeterrmsgboxnum">
-<h3><span class="section-number">5.2.4.26. </span>function Can_EccDiagnosticGetErrMsgBoxNum<a class="headerlink" href="#function-can-eccdiagnosticgeterrmsgboxnum" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.26. </span>function Can_EccDiagnosticGetErrMsgBoxNum<a class="headerlink" href="#function-can-eccdiagnosticgeterrmsgboxnum" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_EccDiagnosticGetErrMsgBoxNum</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">msgBox</span>
@@ -1353,7 +1371,7 @@ This function returns corrupted mailbox number This function returns mailbox num
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-eccdiagnosticmodeenable">
-<h3><span class="section-number">5.2.4.27. </span>function Can_EccDiagnosticModeEnable<a class="headerlink" href="#function-can-eccdiagnosticmodeenable" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.27. </span>function Can_EccDiagnosticModeEnable<a class="headerlink" href="#function-can-eccdiagnosticmodeenable" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_EccDiagnosticModeEnable</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">flag</span>
@@ -1380,7 +1398,7 @@ This function Sets ECC diagnostic mode This function used to test Single bit ECC
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-eccgeterrstatus">
-<h3><span class="section-number">5.2.4.28. </span>function Can_EccGetErrStatus<a class="headerlink" href="#function-can-eccgeterrstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.28. </span>function Can_EccGetErrStatus<a class="headerlink" href="#function-can-eccgeterrstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_EccGetErrStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ecccErrStatus</span>
@@ -1407,7 +1425,7 @@ This API will read the ECC error status information of MCAN controller This func
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-eccclrerrstatus">
-<h3><span class="section-number">5.2.4.29. </span>function Can_EccClrErrStatus<a class="headerlink" href="#function-can-eccclrerrstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.29. </span>function Can_EccClrErrStatus<a class="headerlink" href="#function-can-eccclrerrstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_EccClrErrStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">controller</span>
 <span class="p">)</span>
@@ -1432,7 +1450,7 @@ This API clears the ECC error status register.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-deinit">
-<h3><span class="section-number">5.2.4.30. </span>function Can_DeInit<a class="headerlink" href="#function-can-deinit" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.30. </span>function Can_DeInit<a class="headerlink" href="#function-can-deinit" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_DeInit</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -1455,7 +1473,7 @@ This service is only used for UT testing and not for app use. This API is not st
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-can-getcontrollererrorstate">
-<h3><span class="section-number">5.2.4.31. </span>function Can_GetControllerErrorState<a class="headerlink" href="#function-can-getcontrollererrorstate" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.31. </span>function Can_GetControllerErrorState<a class="headerlink" href="#function-can-getcontrollererrorstate" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_GetControllerErrorState</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">ControllerId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Can_ErrorStateType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ErrorStatePtr</span>
@@ -1482,7 +1500,7 @@ This function get the error state of the controller.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-can-getcontrollermode">
-<h3><span class="section-number">5.2.4.32. </span>function Can_GetControllerMode<a class="headerlink" href="#function-can-getcontrollermode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.2.5.32. </span>function Can_GetControllerMode<a class="headerlink" href="#function-can-getcontrollermode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_GetControllerMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">Controller</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Can_ControllerStateType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ControllerModePtr</span>

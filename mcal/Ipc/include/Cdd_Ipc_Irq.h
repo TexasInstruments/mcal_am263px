@@ -61,7 +61,10 @@
  */
 
 /**
- *  \ingroup MCAL_CDD_API
+ *  \ingroup CDD_IPC
+ *  \defgroup CDD_IPC_IRQ IPC Driver Interrupt Handlers
+ *
+ *  This file defines the interrupt handlers for IPC Complex Device Driver
  *  @{
  */
 
@@ -104,4 +107,6 @@ ISR(Cdd_Ipc_Isr);
 }
 #endif
 
-#endif
+/** @} */
+
+#endif /* #ifndef CDD_IPC_IRQ_H_ */

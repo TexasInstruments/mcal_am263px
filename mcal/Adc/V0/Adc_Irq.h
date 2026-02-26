@@ -61,7 +61,10 @@
  */
 
 /**
- *  \ingroup MCAL_ADC_API
+ *  \ingroup ADC
+ *  \defgroup ADC_IRQ ADC Driver Interrupt Handlers
+ *
+ *  This file defines the interrupt handlers for ADC MCAL driver
  *  @{
  */
 
@@ -321,6 +324,6 @@ ISR(Adc_ADCINT4_IrqUnit6);
 }
 #endif
 
-#endif /* #ifndef ADC_IRQ_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef ADC_IRQ_H_ */

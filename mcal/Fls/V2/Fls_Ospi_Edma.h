@@ -54,10 +54,13 @@
  */
 
 /**
- *  \file     Fls_Ospi.h
+ *  \file     Fls_Ospi_Edma.h
  *
  *  \brief    This file contains interface header for FLS MCAL driver
  *
+ *  \ingroup FLS
+ *  \defgroup FLS_OSPI_EDMA FLS OSPI EDMA Driver Interface
+ *  @{
  */
 
 #ifndef FLS_OSPI_EDMA_H_
@@ -98,6 +101,7 @@ sint32 Fls_Ospi_dmaChInit(Fls_DriverObjType* drvObj);
 void   FLS_edmaTransfer(uint8* dst, uint8* src, uint32 length, OSPI_Handle ospiHandle);
 
 #endif  //(FLS_DMA_ENABLE == STD_ON)
-#endif  /* #ifndef FLS_OSPI_EDMA_H_ */
 
-/** @} */
+/** @} */ /* End of FLS_OSPI_EDMA group */
+
+#endif /* #ifndef FLS_OSPI_EDMA_H_ */

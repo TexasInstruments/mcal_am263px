@@ -54,7 +54,7 @@
  */
 
 /**
- *  \file     Fls_Brd_Nor_Ospi.h
+ *  \file     Fls_Brd_Nor.h
  *
  *  \brief    This file contains the common declarations and macros used across
  *            all the FLS MCAL driver files.
@@ -124,7 +124,7 @@ typedef enum
 } Fls_JobType;
 
 /**
- * \breif FLS Driver Object, global information used by module.
+ * \brief FLS Driver Object, global information used by module.
  */
 typedef struct
 {

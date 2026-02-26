@@ -61,7 +61,10 @@
  */
 
 /**
- *  \ingroup MCAL_FLS_API
+ *  \ingroup FLS
+ *  \defgroup FLS_CBK FLS Driver Callback Types
+ *
+ *  This file defines the callback types for FLS MCAL driver
  *  @{
  */
 
@@ -94,6 +97,6 @@ typedef P2FUNC(void, FLS_APPL_CODE, Fls_JobErrorNotifyType)(void);
 }
 #endif
 
-#endif /* #ifndef FLS_CBK_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef FLS_CBK_H_ */

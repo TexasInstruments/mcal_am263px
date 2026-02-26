@@ -4,10 +4,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MCAL_ICU_IRQ &mdash; Documentation for AM263Px</title>
+  <title>GPT_IRQ &mdash; Documentation for AM263Px</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-design.min.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,6 +18,7 @@
         <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../_static/js/theme.js"></script>
 
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
@@ -80,7 +82,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>MCAL_ICU_IRQ</li>
+      <li>GPT_IRQ</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -89,9 +91,67 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="mcal-icu-irq">
-<h1>MCAL_ICU_IRQ<a class="headerlink" href="#mcal-icu-irq" title="Link to this heading"></a></h1>
+  <section id="gpt-irq">
+<h1>GPT_IRQ<a class="headerlink" href="#gpt-irq" title="Link to this heading"></a></h1>
 <p><a class="reference internal" href="#detailed-description">More…</a></p>
+<section id="types">
+<h2>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Base type</p></th>
+<th class="head"><p>Type Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>typedef void(*)(Gpt_ChannelType channel)</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-gpt-isrreftype"><span class="std std-ref">Gpt_IsrRefType</span></a></strong></p></td>
+<td><p>Typedef for the ISR Function Array.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="typedef-gpt-isrreftype">
+<h3>typedef Gpt_IsrRefType<a class="headerlink" href="#typedef-gpt-isrreftype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Gpt_IsrRefType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">Gpt_ChannelType</span><span class="w"> </span><span class="n">channel</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Typedef for the ISR Function Array.</p>
+</section>
+</section>
+<section id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>GPT_ISR_VOID</p></td>
+<td><p>void ISR type</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPT_ISR_CAT1</p></td>
+<td><p>Category 1 ISR type.</p></td>
+</tr>
+<tr class="row-even"><td><p>GPT_ISR_CAT2</p></td>
+<td><p>Category 2 ISR type.</p></td>
+</tr>
+<tr class="row-odd"><td><p>GPT_IRQ_MAJOR_VERSION</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>GPT_IRQ_MINOR_VERSION</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>GPT_IRQ_PATCH_VERSION</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CHANNEL_MODES</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
@@ -103,25 +163,68 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-icu-intisr-fun"><span class="std std-ref">Icu_IntISR_Fun</span></a></strong>(<a class="reference internal" href="group___i_c_u.html#typedef-icu-channeltype"><span class="std std-ref">Icu_ChannelType</span></a> Icu_Channel)</p></td>
-<td><p>ICU ISR.</p></td>
+<td><p><strong><a class="reference internal" href="#function-gpt-ch0isr"><span class="std std-ref">Gpt_Ch0Isr</span></a></strong>(void )</p></td>
+<td><p>Interrupt Functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-gpt-ch1isr"><span class="std std-ref">Gpt_Ch1Isr</span></a></strong>(void )</p></td>
+<td><p>Channel 1 interrupt service routine.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-gpt-ch2isr"><span class="std std-ref">Gpt_Ch2Isr</span></a></strong>(void )</p></td>
+<td><p>Channel 2 interrupt service routine.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-gpt-ch3isr"><span class="std std-ref">Gpt_Ch3Isr</span></a></strong>(void )</p></td>
+<td><p>Channel 3 interrupt service routine.</p></td>
 </tr>
 </tbody>
 </table>
-<section id="function-icu-intisr-fun">
-<h3>function Icu_IntISR_Fun<a class="headerlink" href="#function-icu-intisr-fun" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Icu_IntISR_Fun</span><span class="p">(</span>
-<span class="w">    </span><span class="n">Icu_ChannelType</span><span class="w"> </span><span class="n">Icu_Channel</span>
+<section id="function-gpt-ch0isr">
+<h3>function Gpt_Ch0Isr<a class="headerlink" href="#function-gpt-ch0isr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Gpt_Ch0Isr</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Brief</strong>:
-ICU ISR.</p>
+Interrupt Functions.</p>
+<p>Channel 0 interrupt service routine</p>
+</section>
+<section id="function-gpt-ch1isr">
+<h3>function Gpt_Ch1Isr<a class="headerlink" href="#function-gpt-ch1isr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Gpt_Ch1Isr</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Channel 1 interrupt service routine.</p>
+</section>
+<section id="function-gpt-ch2isr">
+<h3>function Gpt_Ch2Isr<a class="headerlink" href="#function-gpt-ch2isr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Gpt_Ch2Isr</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Channel 2 interrupt service routine.</p>
+</section>
+<section id="function-gpt-ch3isr">
+<h3>function Gpt_Ch3Isr<a class="headerlink" href="#function-gpt-ch3isr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Gpt_Ch3Isr</span><span class="p">(</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Channel 3 interrupt service routine.</p>
 </section>
 </section>
 <section id="detailed-description">
 <h2>Detailed Description<a class="headerlink" href="#detailed-description" title="Link to this heading"></a></h2>
-<p>This file defines the interrupt handlers for all instance of timer/channels</p>
+<p>This file defines the interrupt handlers for GPT MCAL driver</p>
 </section>
 </section>
 

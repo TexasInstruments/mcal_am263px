@@ -61,8 +61,8 @@
  */
 
 /**
- *  \ingroup MCAL_PWM_API
- *  \defgroup MCAL_PWM_IRQ Pwm Driver Interrupt Handlers
+ *  \ingroup PWM
+ *  \defgroup PWM_IRQ Pwm Driver Interrupt Handlers
  *
  *  This file defines the interrupt handlers for all instance of timer/channels
  *  @{
@@ -378,6 +378,6 @@ ISR(Pwm_Ch127Isr);
 }
 #endif
 
-#endif /* #ifndef PWM_IRQ_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef PWM_IRQ_H_ */

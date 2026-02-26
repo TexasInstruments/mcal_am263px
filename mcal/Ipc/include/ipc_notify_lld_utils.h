@@ -57,7 +57,7 @@
 #define IPC_NOTIFY_LLD_UTILS_V0_H_
 
 /**
- * \addtogroup CDD_IPC Ipc API GUIDE Header file
+ * \addtogroup CDD_IPC
  * @{
  */
 

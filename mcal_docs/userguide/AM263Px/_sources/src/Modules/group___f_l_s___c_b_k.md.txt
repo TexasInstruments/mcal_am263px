@@ -1,0 +1,52 @@
+---
+title: FLS Driver Callback Types
+
+---
+
+# FLS_CBK
+
+ [More...](#detailed-description)
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|typedef void(*)(void)  | **[Fls_JobEndNotifyType](../Modules/group___f_l_s___c_b_k.md#typedef-fls_jobendnotifytype)** | Typedef for job end notification function pointer.  | 
+|typedef void(*)(void)  | **[Fls_JobErrorNotifyType](../Modules/group___f_l_s___c_b_k.md#typedef-fls_joberrornotifytype)** | Typedef for job error notification function pointer.  | 
+
+
+
+### typedef Fls_JobEndNotifyType
+```
+typedef void(* Fls_JobEndNotifyType) (void);
+```
+
+
+**Brief**: 
+Typedef for job end notification function pointer. 
+
+
+
+### typedef Fls_JobErrorNotifyType
+```
+typedef void(* Fls_JobErrorNotifyType) (void);
+```
+
+
+**Brief**: 
+Typedef for job error notification function pointer. 
+
+
+
+
+
+
+
+## Detailed Description
+
+
+This file defines the callback types for FLS MCAL driver 
+
+
+
+

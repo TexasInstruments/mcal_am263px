@@ -68,9 +68,7 @@ extern "C" {
 
 /**
  * \defgroup DRV_IPC_RPMESSAGE_MODULE  APIs for IPC RPMessage
- * \ingroup DRV_MODULE
- *
- * See \ref DRIVERS_IPC_RPMESSAGE_PAGE for more details.
+ * \ingroup CDD_IPC
  *
  * @{
  */

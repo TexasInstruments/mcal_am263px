@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 11.02.00 done on 24-Feb-2026.
+This is the release notes for MCAL AM26xx 11.02.00 done on 27-Feb-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -285,7 +285,7 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>FLS</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>See description</td>
+      <td></td>
     </tr>
     <tr>
       <td>MCAL-35751</td>
@@ -293,7 +293,23 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>FLS</td>
       <td>Minor</td>
       <td>AM263Px, AM261x</td>
-      <td>See description</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>MCAL-35979,MCAL-35981</td>
+      <td>Functions Wdg_SetMode and Wdg_SetTriggerCondition updated to have exclusive areas.</td>
+      <td>WDG</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Wdg_SetMode and Wdg_SetTriggerCondition are updated to have exclusive area while updating mode and trigger conditions</td>
+    </tr>
+    <tr>
+      <td>MCAL-35982</td>
+      <td>Removal of Wdg_ProcessTimeout() call from Wdg_SetTriggerCondition()</td>
+      <td>WDG</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Wdg_ProcessTimeout() is removed from Wdg_SetTriggerCondition()</td>
     </tr>
   </tbody>
 </table>

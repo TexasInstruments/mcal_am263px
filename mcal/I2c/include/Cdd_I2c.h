@@ -62,7 +62,7 @@
 
 /**
  *
- * \defgroup I2C API
+ * \defgroup MCAL_CDD_I2C_API I2C API
  *  @{
  */
 
@@ -698,6 +698,6 @@ Cdd_I2c_RegisterReadback(uint8 hwUnitId, Cdd_I2c_RegisterReadbackType* regRbPtr)
 }
 #endif
 
-#endif /* CDD_I2C_H_ */
-
 /** @} */
+
+#endif /* CDD_I2C_H_ */

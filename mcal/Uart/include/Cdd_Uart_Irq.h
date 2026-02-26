@@ -61,7 +61,10 @@
  */
 
 /**
- *  \ingroup MCAL_CDD_API
+ *  \ingroup UART
+ *  \defgroup UART_IRQ UART Driver Interrupt Handlers
+ *
+ *  This file defines the interrupt handlers for UART Complex Device Driver
  *  @{
  */
 
@@ -180,4 +183,6 @@ ISR(Cdd_Uart_ChannelIsr_MSS_SCIB);
 }
 #endif
 
-#endif
+/** @} */
+
+#endif /* #ifndef CDD_UART_IRQ_H_ */

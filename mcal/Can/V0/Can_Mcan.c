@@ -53,6 +53,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/**
+ *  \ingroup CAN
+ *  \defgroup CAN_MCAN CAN MCAN Driver Implementation
+ *  @{
+ */
+
 /* ========================================================================== */
 /*                             Include Files                                  */
 /* ========================================================================== */
@@ -102,6 +108,7 @@
 #define MCAN_TRCV_DELAY_COMP_WIN (0U)
 /** \brief  MCAN Extension ID mask*/
 #define APP_MCAN_EXT_ID_AND_MASK (0x1FFFFFFFU)
+/** @} */
 
 /**
  *  \name Elements Size
@@ -115,6 +122,7 @@
 #define MCAN_MSG_RAM_EXT_ELEM_SIZE (2U)
 /** \brief  Tx/Rx Mailbox Size */
 #define MCAN_MSG_RAM_TX_RX_ELEM_SIZE (18U)
+/** @} */
 
 #define XTD_MSGID_MASK  ((uint32)0x1fffffffU)
 #define STD_MSGID_MASK  ((uint32)0x7ffU)
@@ -144,6 +152,7 @@
      (uint32)MCAN_INTR_SRC_PROTOCOL_ERR_DATA | (uint32)MCAN_INTR_SRC_RX_FIFO0_NEW_MSG |                              \
      (uint32)MCAN_INTR_SRC_RX_FIFO0_MSG_LOST | (uint32)MCAN_INTR_SRC_TRANS_COMPLETE |                                \
      (uint32)MCAN_INTR_SRC_DEDICATED_RX_BUFF_MSG | (uint32)MCAN_INTR_SRC_BUS_OFF_STATUS)
+/** @} */
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */
@@ -1947,3 +1956,5 @@ void Can_mcanHwDeInit(const Can_ControllerObjType *canController)
 
 #define CAN_STOP_SEC_CODE
 #include "Can_MemMap.h"
+
+/** @} */

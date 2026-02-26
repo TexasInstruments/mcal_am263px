@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-design.min.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,6 +18,7 @@
         <script src="../_static/documentation_options.js?v=4a3566fb"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../_static/js/theme.js"></script>
 
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
@@ -263,7 +265,7 @@
 <figure class="align-center" id="id1">
 <img alt="CDD in AUTOSAR architecture" src="../_images/epwm_image1.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.44 </span><span class="caption-text">CDD in AUTOSAR architecture</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.43 </span><span class="caption-text">CDD in AUTOSAR architecture</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The AUTOSAR Architecture distinguishes on the highest abstraction level between three software layers Application, Runtime Environment and Basic Software which run on a Microcontroller.</p>
@@ -271,7 +273,7 @@
 <figure class="align-center" id="id2">
 <img alt="Standard alignment left and right, expressed by high and low priority level" src="../_images/epwm_image3.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.45 </span><span class="caption-text">Standard alignment left and right, expressed by high and low priority level</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.44 </span><span class="caption-text">Standard alignment left and right, expressed by high and low priority level</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The CDD PWM module generates pulses with variable pulse width, allows the selection of the duty cycle and the signal period time and offers services to,</p>
@@ -348,7 +350,7 @@
 <figure class="align-center" id="id3">
 <img alt="Time-Base Submodule" src="../_images/epwm_tb1.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.46 </span><span class="caption-text">Time-Base Submodule</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.45 </span><span class="caption-text">Time-Base Submodule</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -362,7 +364,7 @@
 <figure class="align-center" id="id4">
 <img alt="Compare Submodule" src="../_images/epwm_cc.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.47 </span><span class="caption-text">Compare Submodule</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.46 </span><span class="caption-text">Compare Submodule</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The counter-compare registers CMPA and CMPB each have an associated shadow register. Shadowing provides a way to keep updates to the registers synchronized with the hardware. When shadowing is used,updates to the active registers only occur at strategic points. This prevents corruption or spurious operation due to the register being asynchronously modified by software. The memory address of the active register and the shadow register is identical.</p>
@@ -390,7 +392,7 @@
 <figure class="align-center" id="id5">
 <img alt="Action Qualifier Waveforms using different output actions on the up-count and down count" src="../_images/epwm_sym_waveform_A.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.48 </span><span class="caption-text">Action Qualifier Waveforms using different output actions on the up-count and down count</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.47 </span><span class="caption-text">Action Qualifier Waveforms using different output actions on the up-count and down count</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>And finally in the above figure, again using different output actions on the up-count and down count, the EPWMA output is being set high on the compare A up-count match and being cleared low on the compare B down-count match. The EPWMB output is being cleared low on the zero match and being set high on the period match.</p>
@@ -456,7 +458,7 @@ various options for generating the appropriate signal outputs on EPWMxA and EPWM
 <figure class="align-center" id="id6">
 <img alt="Dead-Band Waveforms for Typical Cases (0% &lt; Duty &lt; 100%)" src="../_images/epwm_db.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.49 </span><span class="caption-text">Dead-Band Waveforms for Typical Cases (0% &lt; Duty &lt; 100%)</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.48 </span><span class="caption-text">Dead-Band Waveforms for Typical Cases (0% &lt; Duty &lt; 100%)</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Dead-band control provides a convenient means of combating current shoot-through problems in a power converter. Shoot-through occurs when both the upper and lower gates in the same phase of a power converter are open simultaneously. This condition shorts the power supply and results in a large current draw. Shoot-through problems occur because transistors open faster than they close, and because high-side and low-side power converter gates are typically switched in a complimentary fashion. Although the duration of the shoot-through current path is finite during PWM cycling, (i.e. the closing gate will eventually shut), even brief periods of a short circuit condition can produce excessive heating and overstress in the power converter and power supply.</p>
@@ -473,7 +475,7 @@ various options for generating the appropriate signal outputs on EPWMxA and EPWM
 <figure class="align-center" id="id7">
 <img alt="Trip-Zone Submodule" src="../_images/epwm_tz.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.50 </span><span class="caption-text">Trip-Zone Submodule</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.49 </span><span class="caption-text">Trip-Zone Submodule</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The trip-zone submodule utilizes a fast clock-independent logic mechanism to quickly handle fault conditions by forcing the EPWMxA and EPWMxB outputs to a safe state, such as high, low, or high-impedance.</p>
@@ -505,7 +507,7 @@ The key functions of the PWM chopper submodule are:</p>
 <figure class="align-center" id="id8">
 <img alt="Chopper Submodule" src="../_images/epwm_c.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.51 </span><span class="caption-text">Chopper Submodule</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.50 </span><span class="caption-text">Chopper Submodule</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -515,7 +517,7 @@ The key functions of the PWM chopper submodule are:</p>
 <figure class="align-center" id="id9">
 <img alt="Event Trigger Submodule" src="../_images/epwm_et.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.52 </span><span class="caption-text">Event Trigger Submodule</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.51 </span><span class="caption-text">Event Trigger Submodule</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>These event triggers can occur when the time-base counter equals zero, period, zero or period,
@@ -644,7 +646,7 @@ It also enable/disable ADC Trigger.</p>
 <figure class="align-center" id="id10">
 <img alt="Reference : Header file structure of the PWM driver" src="../_images/epwm_image4.JPG" />
 <figcaption>
-<p><span class="caption-number">Fig. 4.53 </span><span class="caption-text">Reference : Header file structure of the ePWM driver</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 4.52 </span><span class="caption-text">Reference : Header file structure of the ePWM driver</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>

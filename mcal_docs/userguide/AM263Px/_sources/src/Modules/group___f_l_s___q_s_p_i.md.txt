@@ -1,0 +1,595 @@
+---
+title: FLS QSPI Driver Interface
+
+---
+
+# FLS_QSPI
+
+
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|enum| **[SPI_Status](../Modules/group___f_l_s___q_s_p_i.md#enum-spi_status)** 
+|typedef void *  | **[QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle)** | QSPI Parameters.  | 
+
+
+
+### enum SPI_Status
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_TRANSFER_COMPLETED | 0|   |
+| SPI_TRANSFER_STARTED | |   |
+| SPI_TRANSFER_CANCELED | |   |
+| SPI_TRANSFER_FAILED | |   |
+| SPI_TRANSFER_CSN_DEASSERT | |   |
+| SPI_TRANSFER_TIMEOUT | |   |
+
+
+
+
+
+
+### typedef QSPI_Handle
+```
+typedef void* QSPI_Handle;
+```
+
+
+**Brief**: 
+QSPI Parameters. 
+
+QSPI Parameters are used to with the QSPI_open() call. Default values for these parameters are set using QSPI_Params_init().
+
+If NULL is passed for the parameters, QSPI_open() uses default parameters.
+
+
+QSPI driver object 
+
+
+**See**: QSPI_Params_init()
+
+
+
+
+## Structures
+|   Name         | Brief          |
+| -------------- | -------------- |
+| **[QSPI_Transaction](../Classes/struct_q_s_p_i___transaction.md)** | Data structure used with QSPI_Transfers - QSPI_writeConfigMode, QSPI_readMemMapMode.  |
+| **[QSPI_CmdParams](../Classes/struct_q_s_p_i___cmd_params.md)** |  |
+| **[QSPI_Object](../Classes/struct_q_s_p_i___object.md)** |  |
+| **[QSPI_Config](../Classes/struct_q_s_p_i___config.md)** |  |
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| FLS_SPI_MAX_CONFIG_CNT   |  |
+| FLS_QSPI_CS0   |  |
+| FLS_QSPI_CS1   |  |
+| FLS_QSPI_CS2   |  |
+| FLS_QSPI_CS3   |  |
+| FLS_QSPI_CMD_INVALID_OPCODE   |  |
+| FLS_QSPI_CMD_INVALID_ADDR   |  |
+| FLS_QSPI_CMD_DELAY   |  |
+| FLS_QSPI_FF_POL0_PHA0   |  |
+| FLS_QSPI_FF_POL0_PHA1   |  |
+| FLS_QSPI_FF_POL1_PHA0   |  |
+| FLS_QSPI_FF_POL1_PHA1   |  |
+| FLS_QSPI_CS_POL_ACTIVE_LOW   |  |
+| FLS_QSPI_CS_POL_ACTIVE_HIGH   |  |
+| FLS_QSPI_DATA_DELAY_0   |  |
+| FLS_QSPI_DATA_DELAY_1   |  |
+| FLS_QSPI_DATA_DELAY_2   |  |
+| FLS_QSPI_DATA_DELAY_3   |  |
+| FLS_START_SEC_CODE   |  |
+| FLS_STOP_SEC_CODE   |  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Fls_QspiHwInit](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspihwinit)**(void )| Externally defined driver configuration array size.  |
+| Std_ReturnType | **[Fls_Qspi_ParamsInit](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_paramsinit)**(QSPI_CmdParams * QSPI_Params)| Initialize data structure with defaults.  |
+| [QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) | **[Fls_QspiOpen](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspiopen)**(uint32 index)| This function opens a given QSPI peripheral.  |
+| void | **[Fls_QspiClose](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspiclose)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle)| Function to close a QSPI peripheral specified by the QSPI handle.  |
+| Std_ReturnType | **[Fls_Qspi_ReadMemMapMode](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_readmemmapmode)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, [QSPI_Transaction](../Classes/struct_q_s_p_i___transaction.md) * trans)| Function to perform reads from the flash in memory mapped mode.  |
+| Std_ReturnType | **[Fls_Qspi_WriteConfigMode](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_writeconfigmode)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, [QSPI_Transaction](../Classes/struct_q_s_p_i___transaction.md) * trans)| Function to perform writes to the flash in configuration mode.  |
+| Std_ReturnType | **[Fls_Qspi_ReadConfigMode](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_readconfigmode)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, [QSPI_Transaction](../Classes/struct_q_s_p_i___transaction.md) * trans)| Function to perform reads from the flash in configuration mode.  |
+| void | **[Fls_Qspi_TransactionInit](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_transactioninit)**([QSPI_Transaction](../Classes/struct_q_s_p_i___transaction.md) * trans)| Function to initialize the QSPI_Transaction structure.  |
+| Std_ReturnType | **[Fls_Qspi_ReadCmd](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_readcmd)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, QSPI_CmdParams * rdParams)| Function to send specific commands and receive related data from flash.  |
+| Std_ReturnType | **[Fls_Qspi_QuadReadData](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_quadreaddata)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, QSPI_CmdParams * rdParams)| Function to read data from flash.  |
+| Std_ReturnType | **[Fls_Qspi_WriteCmd](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_writecmd)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, QSPI_CmdParams * wrParams)| Function to send specific commands and related data to flash.  |
+| void | **[Fls_QspiIntEnable](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspiintenable)**(uint32 intFlag)| This function is used to enable word or frame complete interrupt.  |
+| void | **[Fls_QspiIntDisable](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspiintdisable)**(uint32 intFlag)| This function is used to disable word or frame complete interrupt.  |
+| void | **[Fls_QspiIntClear](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspiintclear)**(uint32 intFlag)| This function is used to clear word or frame complete interrupt.  |
+| void | **[Fls_IntClearDisable](../Modules/group___f_l_s___q_s_p_i.md#function-fls_intcleardisable)**(void )| This function Disables and Clear Interrupt Register.  |
+| void | **[Fls_Interrupt_Enable](../Modules/group___f_l_s___q_s_p_i.md#function-fls_interrupt_enable)**(void )| This function check the Hardware interrupt status register.  |
+| Std_ReturnType | **[Fls_Qspi_SetPreScaler](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_setprescaler)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, uint32 clkDividerVal)| Set the QSPI clock register divider value.  |
+| void | **[Fls_hwi](../Modules/group___f_l_s___q_s_p_i.md#function-fls_hwi)**(void )|  |
+
+
+
+### function Fls_QspiHwInit
+
+```
+void Fls_QspiHwInit(
+    void 
+)
+```
+
+
+**Brief**: 
+Externally defined driver configuration array size. 
+
+This function initializes the QSPI module
+
+\Function Name: Fls_QspiHwInit
+
+This function initializes the QSPI module 
+
+
+### function Fls_Qspi_ParamsInit
+
+```
+Std_ReturnType Fls_Qspi_ParamsInit(
+    QSPI_CmdParams * QSPI_Params
+)
+```
+
+
+**Brief**: 
+Initialize data structure with defaults. 
+
+
+\Function Name: Fls_Qspi_ParamsInit
+
+Initialize data structure with defaults 
+
+
+**Parameters**: 
+
+  
+* **qspiParams** [out] Initialized parameters
+
+
+### function Fls_QspiOpen
+
+```
+QSPI_Handle Fls_QspiOpen(
+    uint32 index
+)
+```
+
+
+**Brief**: 
+This function opens a given QSPI peripheral. 
+
+
+\Function Name: Fls_QspiOpen
+
+This function opens a given QSPI peripheral. 
+
+
+**Parameters**: 
+
+  
+* **index** Index of config to use in the _QSPI_Config_ array 
+  
+* **openParams** Pointer to parameters to open the driver with
+
+
+**See**: 
+
+  * QSPI_init() 
+  * QSPI_close()
+
+
+**Return**: A QSPI_Handle on success or a NULL on an error or if it has been opened already
+
+**Precondition**: QSPI controller has been initialized using QSPI_init()
+
+### function Fls_QspiClose
+
+```
+void Fls_QspiClose(
+    QSPI_Handle handle
+)
+```
+
+
+**Brief**: 
+Function to close a QSPI peripheral specified by the QSPI handle. 
+
+
+\Function Name: Fls_QspiClose
+
+Function to close a QSPI peripheral specified by the QSPI handle. 
+
+
+**Parameters**: 
+
+  
+* **handle** QSPI_Handle returned from QSPI_open()
+
+
+**See**: QSPI_open()
+
+**Precondition**: QSPI_open() has to be called first
+
+### function Fls_Qspi_ReadMemMapMode
+
+```
+Std_ReturnType Fls_Qspi_ReadMemMapMode(
+    QSPI_Handle handle,
+    QSPI_Transaction * trans
+)
+```
+
+
+**Brief**: 
+Function to perform reads from the flash in memory mapped mode. 
+
+
+\Function Name: Fls_Qspi_ReadMemMapMode
+
+Function to perform reads from the flash in memory mapped mode. 
+
+
+**Parameters**: 
+
+  
+* **handle** QSPI_Handle returned from QSPI_open() 
+  
+* **trans** Pointer to a QSPI_Transaction
+
+
+**See**: QSPI_open
+
+**Return**: SystemP_SUCCESS on successful read; else error on failure
+
+### function Fls_Qspi_WriteConfigMode
+
+```
+Std_ReturnType Fls_Qspi_WriteConfigMode(
+    QSPI_Handle handle,
+    QSPI_Transaction * trans
+)
+```
+
+
+**Brief**: 
+Function to perform writes to the flash in configuration mode. 
+
+
+\Function Name: Fls_Qspi_WriteConfigMode
+
+Function to perform writes to the flash in configuration mode 
+
+
+**Parameters**: 
+
+  
+* **handle** QSPI_Handle returned from QSPI_open() 
+  
+* **trans** Pointer to a QSPI_Transaction
+
+
+**See**: QSPI_open
+
+**Return**: SystemP_SUCCESS on successful write; else error on failure
+
+### function Fls_Qspi_ReadConfigMode
+
+```
+Std_ReturnType Fls_Qspi_ReadConfigMode(
+    QSPI_Handle handle,
+    QSPI_Transaction * trans
+)
+```
+
+
+**Brief**: 
+Function to perform reads from the flash in configuration mode. 
+
+
+\Function Name: Fls_Qspi_ReadConfigMode
+
+Function to perform reads from the flash in configuration mode 
+
+
+**Parameters**: 
+
+  
+* **handle** QSPI_Handle returned from QSPI_open() 
+  
+* **trans** Pointer to a QSPI_Transaction
+
+
+**See**: QSPI_open
+
+**Return**: SystemP_SUCCESS on successful read; else error on failure
+
+### function Fls_Qspi_TransactionInit
+
+```
+void Fls_Qspi_TransactionInit(
+    QSPI_Transaction * trans
+)
+```
+
+
+**Brief**: 
+Function to initialize the QSPI_Transaction structure. 
+
+
+\Function Name: Fls_Qspi_TransactionInit
+
+Function to initialize the QSPI_Transaction structure 
+
+
+**Parameters**: 
+
+  
+* **trans** Pointer to a QSPI_Transaction
+
+
+### function Fls_Qspi_ReadCmd
+
+```
+Std_ReturnType Fls_Qspi_ReadCmd(
+    QSPI_Handle handle,
+    QSPI_CmdParams * rdParams
+)
+```
+
+
+**Brief**: 
+Function to send specific commands and receive related data from flash. 
+
+
+\Function Name: Fls_Qspi_ReadCmd
+
+Function to send specific commands and receive related data from flash 
+
+
+**Parameters**: 
+
+  
+* **handle** QSPI_Handle returned from QSPI_open() 
+  
+* **rdParams** Pointer to a QSPI_ReadCmdParams
+
+
+**See**: QSPI_open
+
+**Return**: SystemP_SUCCESS if command read was successful; else error on failure
+
+### function Fls_Qspi_QuadReadData
+
+```
+Std_ReturnType Fls_Qspi_QuadReadData(
+    QSPI_Handle handle,
+    QSPI_CmdParams * rdParams
+)
+```
+
+
+**Brief**: 
+Function to read data from flash. 
+
+
+\Function Name: Fls_Qspi_QuadReadData
+
+Function to read data from external flash 
+
+
+**Parameters**: 
+
+  
+* **handle** QSPI_Handle returned from QSPI_open() 
+  
+* **rdParams** Pointer to a QSPI_ReadCmdParams
+
+
+**See**: QSPI_open
+
+**Return**: SystemP_SUCCESS if command read was successful; else error on failure
+
+### function Fls_Qspi_WriteCmd
+
+```
+Std_ReturnType Fls_Qspi_WriteCmd(
+    QSPI_Handle handle,
+    QSPI_CmdParams * wrParams
+)
+```
+
+
+**Brief**: 
+Function to send specific commands and related data to flash. 
+
+
+\Function Name: Fls_Qspi_WriteCmd
+
+Function to send specific commands and related data to flash 
+
+
+**Parameters**: 
+
+  
+* **handle** QSPI_Handle returned from QSPI_open() 
+  
+* **wrParams** Pointer to a QSPI_WriteCmdParams
+
+
+**See**: QSPI_open
+
+**Return**: SystemP_SUCCESS if command write was successful; else error on failure
+
+### function Fls_QspiIntEnable
+
+```
+void Fls_QspiIntEnable(
+    uint32 intFlag
+)
+```
+
+
+**Brief**: 
+This function is used to enable word or frame complete interrupt. 
+
+
+\Function Name: Fls_QspiIntEnable
+
+This function is used to enable word or frame complete interrupt 
+
+
+**Parameters**: 
+
+  
+* **handle** A QSPI_Handle returned from a QSPI_open() 
+  
+* **intFlag** Flag for enabling interrupt.
+
+
+**Return**: SystemP_SUCCESS on success, SystemP_FAILURE otherwise
+
+### function Fls_QspiIntDisable
+
+```
+void Fls_QspiIntDisable(
+    uint32 intFlag
+)
+```
+
+
+**Brief**: 
+This function is used to disable word or frame complete interrupt. 
+
+
+\Function Name: Fls_QspiIntDisable
+
+This function is used to disable word or frame complete interrupt 
+
+
+**Parameters**: 
+
+  
+* **handle** A QSPI_Handle returned from a QSPI_open() 
+  
+* **intFlag** Flag for disabling interrupt.
+
+
+**Return**: SystemP_SUCCESS on success, SystemP_FAILURE otherwise
+
+### function Fls_QspiIntClear
+
+```
+void Fls_QspiIntClear(
+    uint32 intFlag
+)
+```
+
+
+**Brief**: 
+This function is used to clear word or frame complete interrupt. 
+
+
+\Function Name: Fls_QspiIntClear
+
+This function is used to clear word or frame complete interrupt 
+
+
+**Parameters**: 
+
+  
+* **handle** A QSPI_Handle returned from a QSPI_open() 
+  
+* **intFlag** Flag for clearing interrupt.
+
+
+**Return**: SystemP_SUCCESS on success, SystemP_FAILURE otherwise
+
+### function Fls_IntClearDisable
+
+```
+void Fls_IntClearDisable(
+    void 
+)
+```
+
+
+**Brief**: 
+This function Disables and Clear Interrupt Register. 
+
+\Function Name: Fls_IntClearDisable
+
+This function is used to disable and clear Interrupt Register. 
+
+
+### function Fls_Interrupt_Enable
+
+```
+void Fls_Interrupt_Enable(
+    void 
+)
+```
+
+
+**Brief**: 
+This function check the Hardware interrupt status register. 
+
+### function Fls_Qspi_SetPreScaler
+
+```
+Std_ReturnType Fls_Qspi_SetPreScaler(
+    QSPI_Handle handle,
+    uint32 clkDividerVal
+)
+```
+
+
+**Brief**: 
+Set the QSPI clock register divider value. 
+
+This function sets the QSPI clock control register with serial data clock divider ratio (DCLK_DIV) according to the input clock provided and the output clock required. DCLK_DIV = ((input clock) / (output clock)) - 1. This function also enables the clock for QSPI module. This can only be done if QSPI module is not busy.
+
+
+\Function Name: Fls_Qspi_SetPreScaler
+
+Function Set the QSPI clock register divider value 
+
+
+**Parameters**: 
+
+  
+* **handle** A QSPI_Handle returned from a QSPI_open()
+  
+* **clkDividerVal** Clock divider value to be set.
+
+
+**Return**: SystemP_SUCCESS on success, SystemP_FAILURE otherwise
+
+### function Fls_hwi
+
+```
+void Fls_hwi(
+    void 
+)
+```
+
+
+\Function Name: Fls_hwi
+
+This function check the Hardware interrupt status register. if interrupt is occured then perform the corresponding operation and this function call is in Fls_Irq.c file. 
+
+
+
+
+
+

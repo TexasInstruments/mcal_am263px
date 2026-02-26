@@ -1,3 +1,283 @@
+commit 89605e532f8aa8fd1b70f131ceb1d7c0f874c4c4
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Feb 26 11:39:39 2026 +0530
+
+    all: all: Config build fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/examples_config/Can_Demo_Cfg/soc/am263/r5f0_0/include/Can_Cfg.h | 4 +---
+ .../Ipc_Demo_Cfg/soc/am263px/r5f0_0/include/Cdd_Ipc_Cfg.h            | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am261/r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am261/r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am261/r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am261/r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am261/r5f0_0/config_7/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../soc/am261/r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../soc/am261/r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../soc/am261/r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../soc/am261/r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../Mcu/soc/am263/r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am263/r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am263/r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am263/r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am263/r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am263/r5f0_0/config_6/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../Mcu/soc/am263/r5f0_0/config_7/tresos/output/swcd/Wdg_Bswmd.arxml | 5 +++++
+ .../soc/am263/r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../soc/am263/r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../soc/am263/r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../soc/am263/r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml    | 5 +++++
+ .../soc/am263px/r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml   | 5 +++++
+ .../soc/am263px/r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml   | 5 +++++
+ .../soc/am263px/r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml   | 5 +++++
+ .../soc/am263px/r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml   | 5 +++++
+ .../soc/am263px/r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml   | 5 +++++
+ .../soc/am263px/r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml  | 5 +++++
+ .../soc/am263px/r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml  | 5 +++++
+ .../soc/am263px/r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml  | 5 +++++
+ .../soc/am263px/r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml  | 5 +++++
+ 32 files changed, 152 insertions(+), 4 deletions(-)
+
+commit 9603aeeade4f78d15fa984f0e4a900d1757807e6
+Author: Akash <a-verma3@ti.com>
+Date:   Wed Feb 18 23:54:16 2026 +0530
+
+    All: DMA: Add branch coverage tests for EDMA LLD internal functions
+    
+    - Test case to cover else branch in CDD_EDMA_lld_ccParamEntry_Init()
+    
+    - Test case to cover else/false branches when chType=CDD_EDMA_CHANNEL_TYPE_QDMA
+    
+    - Test case to covers all branches in CDD_EDMA_lld_readEventStatusRegion() for different chNum
+    
+    Fixes: MCAL-35535
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dma/include/Cdd_Dma_Priv.h                    | 208 +++-------
+ mcal/Dma/src/Cdd_Dma_Priv.c                        | 373 ++++++++---------
+ mcal_test/dma_test/testInput/dmaTestCases.h        |  37 +-
+ mcal_test/dma_test/testInput/dmaTestConfig.h       |  73 ++++
+ mcal_test/dma_test/testLib/dmaTest.h               |   4 +-
+ mcal_test/dma_test/testLib/dmaTestMainTestCase.c   |  13 -
+ .../dma_test/testLib/dmaTestNegativeTestCase.c     | 107 +++++
+ .../Dma/soc/am261/r5f0_0/config_1/Cdd_Dma_Cfg.h    | 412 +++++++++----------
+ .../Dma/soc/am261/r5f0_0/config_91/Cdd_Dma_Cfg.h   | 448 ++++++++++-----------
+ .../Dma/soc/am261/r5f0_0/config_92/Cdd_Dma_Cfg.h   | 448 ++++++++++-----------
+ .../Dma/soc/am261/r5f0_0/config_93/Cdd_Dma_Cfg.h   | 448 ++++++++++-----------
+ .../Dma/soc/am261/r5f0_0/config_94/Cdd_Dma_Cfg.h   | 448 ++++++++++-----------
+ .../Dma/soc/am263/r5f0_0/config_1/Cdd_Dma_Cfg.h    | 414 +++++++++----------
+ .../Dma/soc/am263/r5f0_0/config_91/Cdd_Dma_Cfg.h   | 416 +++++++++----------
+ .../Dma/soc/am263/r5f0_0/config_92/Cdd_Dma_Cfg.h   | 416 +++++++++----------
+ .../Dma/soc/am263/r5f0_0/config_93/Cdd_Dma_Cfg.h   | 416 +++++++++----------
+ .../Dma/soc/am263/r5f0_0/config_94/Cdd_Dma_Cfg.h   | 416 +++++++++----------
+ .../Dma/soc/am263px/r5f0_0/config_1/Cdd_Dma_Cfg.h  |   2 +-
+ .../Dma/soc/am263px/r5f0_0/config_91/Cdd_Dma_Cfg.h | 416 +++++++++----------
+ .../Dma/soc/am263px/r5f0_0/config_92/Cdd_Dma_Cfg.h | 416 +++++++++----------
+ .../Dma/soc/am263px/r5f0_0/config_93/Cdd_Dma_Cfg.h | 416 +++++++++----------
+ .../Dma/soc/am263px/r5f0_0/config_94/Cdd_Dma_Cfg.h | 416 +++++++++----------
+ 22 files changed, 3407 insertions(+), 3356 deletions(-)
+
+commit 978dc2fc8c216dfc8ee26eb16bd2d1f4bbaa5061
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Wed Feb 25 09:30:54 2026 +0530
+
+    all: script: json to md convert
+    
+    - add script to convert json results to md file
+    - we can use this to push test results to github
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/cicd/test_result_json_to_md.py | 206 +++++++++++++++++++++++
+ 1 file changed, 206 insertions(+)
+
+commit 9f158d6944cec3b5c737e990277dfa441092b296
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Feb 25 00:56:08 2026 -0600
+
+    Pull request #2482: Bugfix/MCAL-35979 wdg functions setmode and settriggerinfo to be updated
+    
+    Merge in SIT_MCAL/mcal_sitara_mcu from bugfix/MCAL-35979-wdg-functions-setmode-and-settriggerinfo-to-be-updated to next
+    
+    Squashed commit of the following:
+    
+    commit f4f6ed97fc47ad1196ba17c64513c038279124b4
+    Author: Swathi G Bhat <s-bhat2@ti.com>
+    Date:   Tue Feb 24 11:41:43 2026 +0530
+    
+        all: WDG: Updating wdg bswarxml for exclusive area
+    
+        Fixes: MCAL-35979, MCAL-35981, MCAL-35982
+    
+        Signed-off-by: Swathi G Bhat
+    
+    commit cc52506e1c4e76c53b64a30c9b4d9a58e3e1e6d1
+    Author: Guruprasad G R <g-giddannanavar@ti.com>
+    Date:   Mon Feb 23 20:01:37 2026 +0530
+    
+        [All][WDG]:SetMode and SetTriggerCondition updated
+    
+        Problem:
+        "Wdg_SetMode" and "Wdg_SetTriggerCondition" can
+        be pre-empted by "Wdg_Trigger" potentially \
+        causing undefined behaviour
+    
+        Solution:
+        "Wdg_SetMode" and "Wdg_SetTriggerCondition" \
+        functions are guarded by \
+        SchM_Enter_Wdg_WDG_EXCLUSIVE_AREA_0, \
+        SchM_Exit_Wdg_WDG_EXCLUSIVE_AREA_0.
+    
+        Impact:
+        -
+    
+        Refs:
+        MCAL-35979
+    
+        Signed-off-by: Guruprasad G R <g-giddannanavar@ti.com>
+    
+    commit 2f86d455925a1a8e6379c2f1721dde20ba7319a2
+    Author: Guruprasad G R <g-giddannanavar@ti.com>
+    Date:   Mon Feb 23 19:06:39 2026 +0530
+    
+        [All][WDG]:  "Wdg_ProcessTimeout" is removed.
+    
+        Problem:
+        In "Wdg_SetTriggerInfo" function, \
+        "Wdg_ProcessTimeout" call is unnecessary. \
+        Watchdog downcounter reload is not required.\
+        The current call was redundant.
+    
+        Solution:
+        "Wdg_ProcessTimeout" is removed
+    
+        Impact:
+        -
+    
+        Refs:
+        MCAL-35979
+    
+        Signed-off-by: Guruprasad G R <g-giddannanavar@ti.com>
+
+ mcal/Wdg/V0/Wdg_Priv.c                             | 30 ----------------------
+ mcal/Wdg/V0/Wdg_Priv.h                             |  9 -------
+ mcal/Wdg/src/Wdg.c                                 |  7 +++--
+ .../soc/am261/tresos/output/swcd/Wdg_Bswmd.arxml   |  5 ++++
+ .../soc/am263/tresos/output/swcd/Wdg_Bswmd.arxml   |  5 ++++
+ .../soc/am263px/tresos/output/swcd/Wdg_Bswmd.arxml |  5 ++++
+ .../soc/am261/r5f0_0/swcd/Wdg_Bswmd.arxml          |  5 ++++
+ .../soc/am263/r5f0_0/swcd/Wdg_Bswmd.arxml          |  5 ++++
+ .../soc/am263px/r5f0_0/swcd/Wdg_Bswmd.arxml        |  5 ++++
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |  5 ++++
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |  5 ++++
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |  5 ++++
+ mcal_test/mcu_test/testApp/mcuTestApp.c            | 11 ++++++++
+ release_notes.md                                   | 20 +++++++++++++--
+ 14 files changed, 79 insertions(+), 43 deletions(-)
+
+commit 1f78195922ddcbd6126537be0d26aff27eede618
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Tue Feb 24 14:19:24 2026 +0530
+
+    all: scripts: minor fixes
+    
+    - python3 is not found in the jenkin machine
+    - fix test result compare to fail incase of test case removal
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/cicd/test/test_compare_results.py | 14 +++++++-------
+ mcal_misc/scripts/cicd/test_result_compare.py       | 11 +++++++----
+ mcal_misc/scripts/cicd/test_result_validator.sh     |  3 ++-
+ 3 files changed, 16 insertions(+), 12 deletions(-)
+
+commit af76d728e24629a252a5944a00b614d528f011db
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Tue Feb 24 00:04:57 2026 +0530
+
+    all: scripts: validate test results
+    
+    Add MCAL release orchestrator for automated test
+    validation and GitHub mirroring
+    
+    - Created mcal_release_orchestrator.sh to iterate through
+      devices (am261x, am263x, am263px), validate test results,
+      and mirror to GitHub
+    - Auto-fetches expected commit ID from commit.txt in each
+      device repo (e.g., mcal_am261x) for test result validation
+    - Added --force_push option to push to GitHub even if
+      validation fails (validator still runs to show issues)
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/cicd/.gitignore                  |   4 +
+ .../cicd/docs/mcal_cicd_architecture_workflow.html | 376 ++++++++++
+ mcal_misc/scripts/cicd/mcal_github_mirror.sh       |  20 +-
+ .../scripts/cicd/mcal_release_orchestrator.sh      | 531 ++++++++++++++
+ .../cicd/test/inputs/with_commit_correct.json      |  70 ++
+ .../cicd/test/inputs/with_commit_missing.json      |  70 ++
+ .../cicd/test/inputs/with_commit_wrong.json        |  70 ++
+ .../scripts/cicd/test/test_compare_results.py      | 139 +++-
+ mcal_misc/scripts/cicd/test_result_compare.py      | 130 +++-
+ mcal_misc/scripts/cicd/test_result_html_to_json.py |  35 +-
+ mcal_misc/scripts/cicd/test_result_validator.sh    | 809 +++++++++++++++++++++
+ 11 files changed, 2221 insertions(+), 33 deletions(-)
+
+commit 861948ab71603ac7e478da359b915c20d91e473c
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Mon Feb 23 21:19:59 2026 +0530
+
+    all: all: fix doxygen warnings
+    
+     Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal/Adc/V0/Adc_Irq.h                              |  9 +++++---
+ mcal/Can/V0/Can_Mcan.c                             | 11 +++++++++
+ mcal/Can/include/Can_Irq.h                         | 14 +++++++++---
+ mcal/Dio/V0/Dio_Priv.c                             |  6 +++--
+ mcal/Dma/V0/Cdd_Dma_xbar.h                         |  4 +---
+ mcal/Dma/include/Cdd_Dma_Priv.h                    |  2 +-
+ mcal/Epwm/include/Cdd_Pwm_Irq.h                    |  6 ++---
+ mcal/Fls/V0/Fls_Brd_Nor.h                          |  2 +-
+ mcal/Fls/V0/Fls_Qspi.h                             | 26 +++++++++++++++-------
+ mcal/Fls/V0/Fls_Qspi_Edma.h                        | 12 ++++++----
+ mcal/Fls/V2/Fls_Brd_Nor.h                          |  4 ++--
+ mcal/Fls/V2/Fls_Ospi_Edma.h                        | 10 ++++++---
+ mcal/Fls/V2/Fls_Ospi_Phy.h                         |  8 +++++--
+ mcal/Fls/include/Fls_Cbk.h                         |  9 +++++---
+ mcal/Gpt/include/Gpt_Irq.h                         | 14 +++++++++---
+ mcal/I2c/include/Cdd_I2c.h                         |  6 ++---
+ mcal/Icu/V0/ecap.h                                 |  4 ++--
+ mcal/Icu/include/Icu_Irq.h                         |  8 +++----
+ mcal/Ipc/include/Cdd_Ipc_Irq.h                     |  9 ++++++--
+ mcal/Ipc/include/ipc_notify_lld_utils.h            |  2 +-
+ mcal/Ipc/include/ipc_notify_v1_lld.h               |  4 +---
+ mcal/Ipc/include/ipc_rpmsg_lld.h                   |  4 +---
+ mcal/Pwm/V0/Pwm_Irq.h                              |  8 +++----
+ mcal/Uart/V0/Cdd_Uart_Priv.h                       | 17 +++++++-------
+ mcal/Uart/V0/Uart.h                                |  2 +-
+ mcal/Uart/include/Cdd_Uart_Irq.h                   |  9 ++++++--
+ .../soc/am261/r5f0_0/include/Cdd_Ipc_Cfg.h         |  2 +-
+ .../soc/am263/r5f0_0/include/Cdd_Ipc_Cfg.h         |  2 +-
+ .../generate/include/Cdd_Ipc_Cfg.h                 |  2 +-
+ .../generate/include/Cdd_Ipc_Cfg.h                 |  2 +-
+ .../Can_TI_AM263x/generate/include/Can_Cfg.h       |  4 +---
+ .../generate/include/Cdd_Ipc_Cfg.h                 |  2 +-
+ 32 files changed, 142 insertions(+), 82 deletions(-)
+
 commit 263777b06aeded53868123c0c8c4a0e1e3558c05
 Author: Sivaraj R <sivaraj@ti.com>
 Date:   Mon Feb 23 07:48:41 2026 +0530

@@ -61,8 +61,8 @@
  */
 
 /**
- *  \ingroup MCAL_ICU_API
- *  \defgroup MCAL_ICU_IRQ ICU Driver Interrupt Handlers
+ *  \ingroup ICU
+ *  \defgroup ICU_IRQ ICU Driver Interrupt Handlers
  *
  *  This file defines the interrupt handlers for all instance of timer/channels
  *  @{
@@ -242,6 +242,6 @@ ISR(Icu_ch15Notify);
 }
 #endif
 
-#endif /* #ifndef ICU_IRQ_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef ICU_IRQ_H_ */

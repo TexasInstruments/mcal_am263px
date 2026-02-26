@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CAN_MCAN &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-design.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                11.02.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api_guide.html">5. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>CAN_MCAN</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="can-mcan">
+<h1>CAN_MCAN<a class="headerlink" href="#can-mcan" title="Link to this heading"></a></h1>
+<section id="defines">
+<h2>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MCAN_TRANSMIT_PAUSE_ENABLE</p></td>
+<td><p>Transmit pause enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCAN_EFBI</p></td>
+<td><p>Edge Filtering during Bus Integration.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCAN_PROT_EXP_HANDLING_ENABLE</p></td>
+<td><p>Protocol Exception Handling Enable.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCAN_EMU_ENABLE</p></td>
+<td><p>Emulation Enable.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCAN_EMU_FAST_ACK</p></td>
+<td><p>Emulation Fast Ack.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCAN_CLK_STOP_FAST_ACK</p></td>
+<td><p>Clock Stop Fast Ack.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCAN_WDC_PRELOAD</p></td>
+<td><p>Start value of the Message RAM Watchdog Counter.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCAN_TRCV_DELAY_COMP_WIN</p></td>
+<td><p>Transmitter Delay Compensation Filter Window Length.</p></td>
+</tr>
+<tr class="row-even"><td><p>APP_MCAN_EXT_ID_AND_MASK</p></td>
+<td><p>MCAN Extension ID mask.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCAN_MSG_RAM_STD_ELEM_SIZE</p></td>
+<td><p>Standard ID Filter Element Size.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCAN_MSG_RAM_EXT_ELEM_SIZE</p></td>
+<td><p>Extended ID Filter Element Size.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MCAN_MSG_RAM_TX_RX_ELEM_SIZE</p></td>
+<td><p>Tx/Rx Mailbox Size.</p></td>
+</tr>
+<tr class="row-even"><td><p>MCAN_INTR_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN_START_SEC_CODE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CAN_START_SEC_CODE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN_STOP_SEC_CODE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CAN_STOP_SEC_CODE</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>XTD_MSGID_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>STD_MSGID_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>STD_MSGID_SHIFT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>MSGID_FD_SHIFT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN_ID_STD</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CAN_ID_XTD</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN_ID_MIXED</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CAN_MSG_ID_TYPE_STD</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN_MSG_ID_TYPE_EXT</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CAN_MSG_TYPE_MASK</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN_MSG_TYPE_CLASSIC_CAN</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CAN_MSG_TYPE_CAN_FD</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>CAN_START_SEC_CONST_8</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>CAN_STOP_SEC_CONST_8</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Return type</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Brief</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcaninit"><span class="std std-ref">Can_mcanInit</span></a></strong>(<a class="reference internal" href="../Classes/struct_m_c_a_n___init_params.html"><span class="std std-doc">MCAN_InitParams</span></a> * initParams, const <a class="reference internal" href="../Classes/struct_can___controller_type.html"><span class="std std-doc">Can_ControllerType</span></a> * canControllerCfg, const <a class="reference internal" href="../Classes/struct_can___controller_type___p_c.html"><span class="std std-doc">Can_ControllerType_PC</span></a> * canControllerCfg_PC)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanconfig"><span class="std std-ref">Can_mcanConfig</span></a></strong>(const <a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, uint32 baseAddr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetupcontroller"><span class="std std-ref">Can_mcanSetUpController</span></a></strong>(uint32 baseAddr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanmsgramconfiginit"><span class="std std-ref">Can_mcanMsgRAMConfigInit</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * canFDMsgRamConfig)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetupmsgram"><span class="std std-ref">Can_mcanSetUpMSGRAM</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, const <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, uint32 maxMbCnt)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetuptxmailbox"><span class="std std-ref">Can_mcanSetUpTxMailbox</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * msgRamConfig, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, <a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canControllerCfg, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, uint32 htrh)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetuprxmailbox"><span class="std std-ref">Can_mcanSetUpRxMailbox</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * msgRamConfig, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, uint32 htrh)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetuprxmailboxbuf"><span class="std std-ref">Can_mcanSetUpRxMailboxBuf</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * msgRamConfig, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetuprxmailboxstdidfifo"><span class="std std-ref">Can_mcanSetUpRxMailboxStdIdFifo</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * msgRamConfig, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetuprxmailboxextidfifo"><span class="std std-ref">Can_mcanSetUpRxMailboxExtIdFifo</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * msgRamConfig, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanmsgramconfig"><span class="std std-ref">Can_mcanMsgRAMConfig</span></a></strong>(uint32 baseAddr, <a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * canFDMsgRamConfig)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcaninitinterrupt"><span class="std std-ref">Can_mcanInitInterrupt</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcancancelpendmsg"><span class="std std-ref">Can_mcanCancelPendMsg</span></a></strong>(uint32 baseAddr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-waitinternal"><span class="std std-ref">Can_WaitInternal</span></a></strong>(uint32 baseAddr, uint32 bitPos, uint32 bitIndex)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetid"><span class="std std-ref">Can_mcanSetId</span></a></strong>(const Can_PduType * PduInfo, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, <a class="reference internal" href="../Classes/struct_m_c_a_n___tx_buf_element.html"><span class="std std-doc">MCAN_TxBufElement</span></a> * elem)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcangetid"><span class="std std-ref">Can_mcanGetID</span></a></strong>(const uint32 idType, const uint32 CanId)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanraminitdone"><span class="std std-ref">Can_mcanRamInitDone</span></a></strong>(uint32 baseAddr)</p></td>
+<td><p>Checks the initialization of Message RAM done or not.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mailboxinitialize"><span class="std std-ref">Can_MailboxInitialize</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-getfiltermask"><span class="std std-ref">Can_GetFilterMask</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___fd_msg_r_a_m_config_obj_type.html"><span class="std std-doc">Can_FdMsgRAMConfigObjType</span></a> * msgRamConfig, const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-checkcsstarted"><span class="std std-ref">Can_CheckCsStarted</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, uint32 baseAddr)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-hwunitconfig"><span class="std std-ref">Can_hwUnitConfig</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, const <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, uint32 maxMbCnt)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanstart"><span class="std std-ref">Can_mcanStart</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanstop"><span class="std std-ref">Can_mcanStop</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, uint32 maxMbCnt)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansleep"><span class="std std-ref">Can_mcanSleep</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcantestloopbackmodeenable"><span class="std std-ref">Can_mcanTestLoopBackModeEnable</span></a></strong>(uint32 baseAddr, uint8 mode)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcantestloopbackmodedisable"><span class="std std-ref">Can_mcanTestLoopBackModeDisable</span></a></strong>(uint32 baseAddr, uint8 mode)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcancancelledmessagesreset"><span class="std std-ref">Can_mcanCancelledMessagesReset</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, const <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-writegetfreemsgobj"><span class="std std-ref">Can_writeGetFreeMsgObj</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanwritetxmailbox"><span class="std std-ref">Can_mcanWriteTxMailbox</span></a></strong>(const <a class="reference internal" href="../Classes/struct_can___mailbox_type.html"><span class="std std-doc">Can_MailboxType</span></a> * mailboxCfg, <a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj, uint32 messageBox, const Can_PduType * pduInfo)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Can_ErrorStateType</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcangetprotocolstatus"><span class="std std-ref">Can_mcanGetProtocolStatus</span></a></strong>(const <a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController)</p></td>
+<td><p>This function will check the Protocol Status register to get the error status.</p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetupmbxlist"><span class="std std-ref">Can_mcanSetUpMbxList</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, const <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, uint32 maxMbCnt)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcansetbaudrate"><span class="std std-ref">Can_mcanSetBaudrate</span></a></strong>(const <a class="reference internal" href="../Classes/struct_can___controller_type___p_c.html"><span class="std std-doc">Can_ControllerType_PC</span></a> * canControllerCfg_PC, const <a class="reference internal" href="../Classes/struct_can___baud_config_type.html"><span class="std std-doc">Can_BaudConfigType</span></a> * setBaud)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcandisableinterrupts"><span class="std std-ref">Can_mcanDisableInterrupts</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanenableinterrupts"><span class="std std-ref">Can_mcanEnableInterrupts</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanprocessbusoff"><span class="std std-ref">Can_mcanProcessBusOff</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, const <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, uint32 maxMbCnt)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcan-modeprocess"><span class="std std-ref">Can_mcan_ModeProcess</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanreadrxbuff"><span class="std std-ref">Can_mcanReadRxBuff</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj, uint32 Interrupt_Mask)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanreadrxfifo"><span class="std std-ref">Can_mcanReadRxFIFO</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj, <a class="reference internal" href="#../Files/mcan_8h.md#enum-mcan_rxfifonum"><span class="xref myst">MCAN_RxFIFONum</span></a> fifoNum)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanprocessisr"><span class="std std-ref">Can_mcanProcessISR</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, const <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, uint32 maxMbCnt)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanprocesstx"><span class="std std-ref">Can_mcanProcessTx</span></a></strong>(<a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController, const <a class="reference internal" href="../Classes/struct_can___mailbox_obj_type.html"><span class="std std-doc">Can_MailboxObjType</span></a> * canMailbox, <a class="reference internal" href="../Classes/struct_can___mailbox_obj_tx_type.html"><span class="std std-doc">Can_MailboxObjTxType</span></a> * canTxMessageObj, uint32 Interrupt_Mask)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanprocesseccisr"><span class="std std-ref">Can_mcanProcessECCISR</span></a></strong>(const <a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * controllerObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-can-mcanhwdeinit"><span class="std std-ref">Can_mcanHwDeInit</span></a></strong>(const <a class="reference internal" href="../Classes/struct_can___controller_obj_type.html"><span class="std std-doc">Can_ControllerObjType</span></a> * canController)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<section id="function-can-mcaninit">
+<h3>function Can_mcanInit<a class="headerlink" href="#function-can-mcaninit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanInit</span><span class="p">(</span>
+<span class="w">    </span><span class="n">MCAN_InitParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">initParams</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ControllerType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canControllerCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ControllerType_PC</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canControllerCfg_PC</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanconfig">
+<h3>function Can_mcanConfig<a class="headerlink" href="#function-can-mcanconfig" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanConfig</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetupcontroller">
+<h3>function Can_mcanSetUpController<a class="headerlink" href="#function-can-mcansetupcontroller" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpController</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanmsgramconfiginit">
+<h3>function Can_mcanMsgRAMConfigInit<a class="headerlink" href="#function-can-mcanmsgramconfiginit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanMsgRAMConfigInit</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canFDMsgRamConfig</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetupmsgram">
+<h3>function Can_mcanSetUpMSGRAM<a class="headerlink" href="#function-can-mcansetupmsgram" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpMSGRAM</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">maxMbCnt</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetuptxmailbox">
+<h3>function Can_mcanSetUpTxMailbox<a class="headerlink" href="#function-can-mcansetuptxmailbox" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpTxMailbox</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">msgRamConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canControllerCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">htrh</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetuprxmailbox">
+<h3>function Can_mcanSetUpRxMailbox<a class="headerlink" href="#function-can-mcansetuprxmailbox" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpRxMailbox</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">msgRamConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">htrh</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetuprxmailboxbuf">
+<h3>function Can_mcanSetUpRxMailboxBuf<a class="headerlink" href="#function-can-mcansetuprxmailboxbuf" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpRxMailboxBuf</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">msgRamConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">htrh</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">hwFilterIdx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetuprxmailboxstdidfifo">
+<h3>function Can_mcanSetUpRxMailboxStdIdFifo<a class="headerlink" href="#function-can-mcansetuprxmailboxstdidfifo" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpRxMailboxStdIdFifo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">msgRamConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">htrh</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">hwFilterIdx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetuprxmailboxextidfifo">
+<h3>function Can_mcanSetUpRxMailboxExtIdFifo<a class="headerlink" href="#function-can-mcansetuprxmailboxextidfifo" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpRxMailboxExtIdFifo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">msgRamConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">htrh</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">hwFilterIdx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanmsgramconfig">
+<h3>function Can_mcanMsgRAMConfig<a class="headerlink" href="#function-can-mcanmsgramconfig" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanMsgRAMConfig</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canFDMsgRamConfig</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcaninitinterrupt">
+<h3>function Can_mcanInitInterrupt<a class="headerlink" href="#function-can-mcaninitinterrupt" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanInitInterrupt</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcancancelpendmsg">
+<h3>function Can_mcanCancelPendMsg<a class="headerlink" href="#function-can-mcancancelpendmsg" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanCancelPendMsg</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-waitinternal">
+<h3>function Can_WaitInternal<a class="headerlink" href="#function-can-waitinternal" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_WaitInternal</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">bitPos</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">bitIndex</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetid">
+<h3>function Can_mcanSetId<a class="headerlink" href="#function-can-mcansetid" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetId</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_PduType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">PduInfo</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MCAN_TxBufElement</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">elem</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcangetid">
+<h3>function Can_mcanGetID<a class="headerlink" href="#function-can-mcangetid" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Can_mcanGetID</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">idType</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">CanId</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanraminitdone">
+<h3>function Can_mcanRamInitDone<a class="headerlink" href="#function-can-mcanraminitdone" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanRamInitDone</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Checks the initialization of Message RAM done or not.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>uint32</strong> baseAddr - Base Address of controller</p></li>
+</ul>
+</section>
+<section id="function-can-mailboxinitialize">
+<h3>function Can_MailboxInitialize<a class="headerlink" href="#function-can-mailboxinitialize" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_MailboxInitialize</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-getfiltermask">
+<h3>function Can_GetFilterMask<a class="headerlink" href="#function-can-getfiltermask" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_GetFilterMask</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_FdMsgRAMConfigObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">msgRamConfig</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">htrh</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">hwFilterIdx</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-checkcsstarted">
+<h3>function Can_CheckCsStarted<a class="headerlink" href="#function-can-checkcsstarted" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_CheckCsStarted</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-hwunitconfig">
+<h3>function Can_hwUnitConfig<a class="headerlink" href="#function-can-hwunitconfig" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_hwUnitConfig</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">maxMbCnt</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanstart">
+<h3>function Can_mcanStart<a class="headerlink" href="#function-can-mcanstart" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_mcanStart</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanstop">
+<h3>function Can_mcanStop<a class="headerlink" href="#function-can-mcanstop" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_mcanStop</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">maxMbCnt</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansleep">
+<h3>function Can_mcanSleep<a class="headerlink" href="#function-can-mcansleep" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_mcanSleep</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcantestloopbackmodeenable">
+<h3>function Can_mcanTestLoopBackModeEnable<a class="headerlink" href="#function-can-mcantestloopbackmodeenable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_mcanTestLoopBackModeEnable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">mode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcantestloopbackmodedisable">
+<h3>function Can_mcanTestLoopBackModeDisable<a class="headerlink" href="#function-can-mcantestloopbackmodedisable" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_mcanTestLoopBackModeDisable</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">mode</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcancancelledmessagesreset">
+<h3>function Can_mcanCancelledMessagesReset<a class="headerlink" href="#function-can-mcancancelledmessagesreset" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanCancelledMessagesReset</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-writegetfreemsgobj">
+<h3>function Can_writeGetFreeMsgObj<a class="headerlink" href="#function-can-writegetfreemsgobj" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Can_writeGetFreeMsgObj</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanwritetxmailbox">
+<h3>function Can_mcanWriteTxMailbox<a class="headerlink" href="#function-can-mcanwritetxmailbox" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Can_mcanWriteTxMailbox</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mailboxCfg</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">messageBox</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_PduType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">pduInfo</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcangetprotocolstatus">
+<h3>function Can_mcanGetProtocolStatus<a class="headerlink" href="#function-can-mcangetprotocolstatus" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Can_ErrorStateType</span><span class="w"> </span><span class="n">Can_mcanGetProtocolStatus</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This function will check the Protocol Status register to get the error status.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>Can_ControllerObjType</strong> controller - The controller for which the error status is checked.</p></li>
+<li><p><strong>Returns</strong> the Can_ErrorStateType errorState \context</p></li>
+</ul>
+</section>
+<section id="function-can-mcansetupmbxlist">
+<h3>function Can_mcanSetUpMbxList<a class="headerlink" href="#function-can-mcansetupmbxlist" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetUpMbxList</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">maxMbCnt</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcansetbaudrate">
+<h3>function Can_mcanSetBaudrate<a class="headerlink" href="#function-can-mcansetbaudrate" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanSetBaudrate</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ControllerType_PC</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canControllerCfg_PC</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_BaudConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">setBaud</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcandisableinterrupts">
+<h3>function Can_mcanDisableInterrupts<a class="headerlink" href="#function-can-mcandisableinterrupts" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanDisableInterrupts</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanenableinterrupts">
+<h3>function Can_mcanEnableInterrupts<a class="headerlink" href="#function-can-mcanenableinterrupts" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanEnableInterrupts</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanprocessbusoff">
+<h3>function Can_mcanProcessBusOff<a class="headerlink" href="#function-can-mcanprocessbusoff" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanProcessBusOff</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">maxMbCnt</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcan-modeprocess">
+<h3>function Can_mcan_ModeProcess<a class="headerlink" href="#function-can-mcan-modeprocess" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcan_ModeProcess</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanreadrxbuff">
+<h3>function Can_mcanReadRxBuff<a class="headerlink" href="#function-can-mcanreadrxbuff" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanReadRxBuff</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Interrupt_Mask</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanreadrxfifo">
+<h3>function Can_mcanReadRxFIFO<a class="headerlink" href="#function-can-mcanreadrxfifo" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanReadRxFIFO</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">MCAN_RxFIFONum</span><span class="w"> </span><span class="n">fifoNum</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanprocessisr">
+<h3>function Can_mcanProcessISR<a class="headerlink" href="#function-can-mcanprocessisr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanProcessISR</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">maxMbCnt</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanprocesstx">
+<h3>function Can_mcanProcessTx<a class="headerlink" href="#function-can-mcanprocesstx" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanProcessTx</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_MailboxObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canMailbox</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Can_MailboxObjTxType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canTxMessageObj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Interrupt_Mask</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanprocesseccisr">
+<h3>function Can_mcanProcessECCISR<a class="headerlink" href="#function-can-mcanprocesseccisr" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanProcessECCISR</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">controllerObj</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-can-mcanhwdeinit">
+<h3>function Can_mcanHwDeInit<a class="headerlink" href="#function-can-mcanhwdeinit" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_mcanHwDeInit</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Can_ControllerObjType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">canController</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2026, Texas Instruments Incorporated.
+        <br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 11.02.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = 'https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263P/AM263Px_versions.json';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

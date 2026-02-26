@@ -76,9 +76,7 @@ extern "C" {
 
 /**
  *  \defgroup DRV_SOC_XBAR_MODULE APIs for SOC Xbars
- *  \ingroup DRV_SOC_MODULE
- *
- * For more details and example usage, see \ref DRIVERS_SOC_PAGE
+ *  \ingroup DMA
  *
  *  @{
  */

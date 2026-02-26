@@ -83,7 +83,7 @@ MCAL-15072
 #include "Wdg_Cbk.h"
 #include "Dem.h"
 #include "Wdg_Priv.h"
-
+#include "SchM_Wdg.h"
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -277,6 +277,7 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetMode(WdgIf_ModeType Mode)
     else
 #endif
     {
+        SchM_Enter_Wdg_WDG_EXCLUSIVE_AREA_0();
 #if (STD_ON == WDG_DEV_ERROR_DETECT)
         /* Set driver status as busy */
         Wdg_DrvStatus = WDG_BUSY;
@@ -313,6 +314,7 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetMode(WdgIf_ModeType Mode)
         /* Set driver status as idle */
         Wdg_DrvStatus = WDG_IDLE;
 #endif
+        SchM_Exit_Wdg_WDG_EXCLUSIVE_AREA_0();
     }
 
     return (retVal);
@@ -336,6 +338,7 @@ FUNC(void, WDG_CODE) Wdg_SetTriggerCondition(uint16 timeout)
     else
 #endif
     {
+        SchM_Enter_Wdg_WDG_EXCLUSIVE_AREA_0();
         if (0U == timeout)
         {
             /* Skip force resetting the device only when this compilation flag is set to OFF */
@@ -355,9 +358,9 @@ FUNC(void, WDG_CODE) Wdg_SetTriggerCondition(uint16 timeout)
             Wdg_DrvObj.timeOutCounter = timeout;
             /* Save current watchdog counter value */
             Wdg_DrvObj.counterRef = Wdg_getCurrentDownCounter(Wdg_DrvObj.baseAddr);
-            Wdg_ProcessTimeout(timeout);
             Wdg_Trigger();
         }
+        SchM_Exit_Wdg_WDG_EXCLUSIVE_AREA_0();
     }
 
     return;

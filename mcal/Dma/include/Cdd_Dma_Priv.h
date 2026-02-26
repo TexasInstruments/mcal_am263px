@@ -55,7 +55,7 @@
 
 /**
  *  \defgroup DRV_CDD_EDMA_MODULE APIs for EDMA
- *  \ingroup DRV_MODULE
+ *  \ingroup DMA
  *
  *  This module contains APIs to program and use the EDMA.
  *
@@ -154,16 +154,6 @@ extern "C" {
 /**< Manually trigger EDMA transfer */
 #define CDD_EDMA_TRIG_MODE_EVENT ((uint32)1U)
 /**< Trigger EDMA transfer upon Event */
-/** @} */
-
-/** \anchor CDD_EDMA_CHANNEL_TYPE_DEFS
- *   \name EDMA channel type definitions.
- *  @{
- */
-/** \brief Values that can be used for parameter chType in API's
- */
-#define CDD_EDMA_CHANNEL_TYPE_DMA ((uint32)0U)
-/**< Channel Typr DMA */
 /** @} */
 
 /** \anchor CDD_EDMA_EVENT_STATUS_DEFS
@@ -446,8 +436,6 @@ typedef struct
 
 typedef struct
 {
-    /* Channel type (DMA/QDMA) */
-    uint32 chType;
     /* Channel number */
     uint32 chNum;
     /* TCC number for completion/error interrupt */
@@ -1010,8 +998,8 @@ void CDD_EDMA_lld_ccParamEntry_Init(CDD_EDMACCEDMACCPaRAMEntry *paramEntry);
 /**
  * \brief  Enable channel to Shadow region mapping
  *
- * This API allocates DMA/QDMA channels or TCCs, and the same resources are
- * enabled in the shadow region specific register (DRAE/DRAEH/QRAE).
+ * This API allocates DMA channels or TCCs, and the same resources are
+ * enabled in the shadow region specific register (DRAE/DRAEH).
  * Here only one shadow region is used since, there is only one Master.
  *
  *  \param   baseAddr     Memory address of the EDMA instance used.\n
@@ -1019,25 +1007,17 @@ void CDD_EDMA_lld_ccParamEntry_Init(CDD_EDMACCEDMACCPaRAMEntry *paramEntry);
  *  \param   regionId     Region id to be used.
  *                        Valid values are 0 to CDD_EDMA_NUM_REGIONS-1 \n
  *
- *  \param   chType       (DMA/QDMA) Channel
- *                        For Example: For DMA it is,
- *                        CDD_EDMA_CHANNEL_TYPE_DMA.\n
- *
  *  \param   chNum       Allocated channel number.
- *                       Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA
- *                       Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA \n
- *  chType can have values
- *        CDD_EDMA_CHANNEL_TYPE_DMA\n
- *        CDD_EDMA_CHANNEL_TYPE_QDMA
+ *                       Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA \n
  *
  */
-void CDD_EDMA_lld_enableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum);
+void CDD_EDMA_lld_enableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chNum);
 
 /**
  * \brief  Disable channel to Shadow region mapping
  *
- * This API deallocates DMA/QDMA channels or TCCs, and the same resources are
- * disabled in the shadow region specific register (DRAE/DRAEH/QRAE).
+ * This API deallocates DMA channels or TCCs, and the same resources are
+ * disabled in the shadow region specific register (DRAE/DRAEH).
  * Here only one shadow region is used since, there is only one Master.
  *
  * \param   baseAddr   Memory address of the EDMA instance used.\n
@@ -1045,19 +1025,11 @@ void CDD_EDMA_lld_enableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, ui
  * \param   regionId     Region id to be used.
  *                        Valid values are 0 to CDD_EDMA_NUM_REGIONS-1 \n
  *
- * \param   chType      (DMA/QDMA) Channel
- *
  * \param   chNum       Allocated channel number.
- *                      Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA
- *                      Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA \n
- *
- *
- *  chType can have values
- *        CDD_EDMA_CHANNEL_TYPE_DMA\n
- *        CDD_EDMA_CHANNEL_TYPE_QDMA
+ *                      Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA \n
  *
  */
-void CDD_EDMA_lld_disableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum);
+void CDD_EDMA_lld_disableChInShadowRegRegion(uint32 baseAddr, uint32 regionId, uint32 chNum);
 
 /**
  *  \brief   This function maps DMA channel to any of the PaRAM sets
@@ -1077,74 +1049,32 @@ void CDD_EDMA_lld_channelToParamMap(uint32 baseAddr, uint32 channel, uint32 para
 /**
  *  \brief  Map channel to Event Queue
  *
- *  This API maps DMA/QDMA channels to the Event Queue
+ *  This API maps DMA channels to the Event Queue
  *
  *  \param  baseAddr    Memory address of the EDMA instance used.\n
  *
- *  \param  chType     (DMA/QDMA) Channel
- *                     For Example: For QDMA it is
- *                     CDD_EDMA_CHANNEL_TYPE_QDMA.\n
- *
  *  \param   chNum     Allocated channel number.
- *                     Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA
- *                     Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA \n
+ *                     Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA \n
  *
  *  \param  evtQNum    Event Queue Number to which the channel
  *                     will be mapped (valid only for the
- *                     Master Channel (DMA/QDMA) request).\n
- *
- *  chtype can have values
- *        CDD_EDMA_CHANNEL_TYPE_DMA\n
- *        CDD_EDMA_CHANNEL_TYPE_QDMA
+ *                     Master Channel (DMA) request).\n
  *
  */
-void CDD_EDMA_lld_mapChToEvtQ(uint32 baseAddr, uint32 chType, uint32 chNum, uint32 evtQNum);
+void CDD_EDMA_lld_mapChToEvtQ(uint32 baseAddr, uint32 chNum, uint32 evtQNum);
 
 /**
  *  \brief  Remove Mapping of channel to Event Queue
  *
- *  This API Unmaps DMA/QDMA channels from the Event Queue allocated
+ *  This API Unmaps DMA channels from the Event Queue allocated
  *
  *  \param  baseAddr    Memory address of the EDMA instance used.\n
  *
- *  \param  chType     (DMA/QDMA) Channel
- *                     For Example: For DMA it is
- *                     CDD_EDMA_CHANNEL_TYPE_DMA.\n
- *
  *  \param   chNum     Allocated channel number.
- *                     Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA
- *                     Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA \n
- *
- *  chtype can have values
- *        CDD_EDMA_CHANNEL_TYPE_DMA\n
- *        CDD_EDMA_CHANNEL_TYPE_QDMA
+ *                     Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA \n
  *
  */
-void CDD_EDMA_lld_unmapChToEvtQ(uint32 baseAddr, uint32 chType, uint32 chNum);
-
-/**
- *  \brief  Enables the user to map a QDMA channel to PaRAM set
- *          This API Needs to be called before programming the paRAM sets for
- *          the QDMA Channels.Application needs to maitain the paRAMId
- *          provided by this API.This paRAMId is used to set paRAM and get
- *          paRAM. Refer corresponding API's for more details.
- *
- *  \param  baseAddr                  Memory address of the EDMA instance used.\n
- *
- *  \param   chNum                    Allocated channel number.
- *                                    Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA \n
- *
- *  \param  paRAMId                  PaRAM Id to which the QDMA channel will be
- *                                   mapped to.
- *                                   mapped to.
- *
- *  Note : The PaRAMId requested must be greater than 32(CDD_EDMA_NUM_DMACH).
- *         and lesser than CDD_EDMA_NUM_DMACH + chNum  Because, the first
- *         32 PaRAM's are directly mapped to first 32 DMA channels and (32 - 38)
- *         for QDMA Channels. (32 - 38) is assigned by driver in this API.
- *
- */
-void CDD_EDMA_lld_mapQdmaChToPaRAM(uint32 baseAddr, uint32 chNum, const uint32 *paRAMId);
+void CDD_EDMA_lld_unmapChToEvtQ(uint32 baseAddr, uint32 chNum);
 
 /**
  *  \brief   Enables the user to Clear any missed event
@@ -1338,104 +1268,79 @@ void CDD_EDMA_lld_getPaRAM(uint32 baseAddr, uint32 paRAMId, CDD_EDMACCEDMACCPaRA
 void CDD_EDMA_lld_setPaRAM(uint32 baseAddr, uint32 paRAMId, const CDD_EDMACCEDMACCPaRAMEntry *newPaRAM);
 
 /**
- *  \brief Request a DMA/QDMA/Link channel.
+ *  \brief Request a DMA channel.
  *
- *  Each channel (DMA/QDMA/Link) must be requested  before initiating a DMA
+ *  Each channel (DMA) must be requested before initiating a DMA
  *  transfer on that channel.
  *
- *  This API is used to allocate a logical channel (DMA/QDMA/Link) along with
- *  the associated resources. For DMA and QDMA channels, TCC and PaRAM Set are
+ *  This API is used to allocate a logical channel (DMA) along with
+ *  the associated resources. For DMA channels, TCC and PaRAM Set are
  *  also allocated along with the requested channel.
  *
  *  User can request a specific logical channel by passing the channel number
- *  in 'chNum'.
+ *  in 'chConfig->chNum'.
  *
- *  For DMA/QDMA channels, after allocating all the EDMA resources, this API
+ *  For DMA channels, after allocating all the EDMA resources, this API
  *  sets the TCC field of the OPT PaRAM Word with the allocated TCC. It also
  *  sets the event queue for the channel allocated. The event queue needs to
  *  be specified by the user.
  *
  *  For DMA channel, it also sets the DCHMAP register.
  *
- *  For QDMA channel, it sets the QCHMAP register and CCNT as trigger word and
- *  enables the QDMA channel by writing to the QEESR register.
- *
  *  \param  baseAddr                  Memory address of the EDMA instance used.\n
  *
  *  \param   regionId                 Region id to be used.
  *                                    Valid values are 0 to CDD_EDMA_NUM_REGIONS-1 \n
  *
- *  \param  chType                   (DMA/QDMA) Channel
- *                                    For Example: For DMA it is
- *                                    CDD_EDMA_CHANNEL_TYPE_DMA.\n
- *
- *  \param  chNum                    This is the channel number requested for a
- *                                   particular event.
- *                                   Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA
- *                                   Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA \n
- *
- *  \param  tccNum                   The tcc number on which the
- *                                   completion/error interrupt is generated.
- *                                   Not used if user requested for a Link
- *                                   channel.\n
- *
- *  \param  paramId                  The param number currosponding to the
- *                                   DMA/QDMA channel.\n
- *
- *  \param  evtQNum                  Event Queue Number to which the channel
- *                                   will be mapped (valid only for the
- *                                   Master Channel (DMA/QDMA) request).\n
+ *  \param  chConfig                 Pointer to channel configuration structure
+ *                                   containing the following fields:\n
+ *                                   - chNum: This is the channel number requested for a
+ *                                     particular event.
+ *                                     Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA \n
+ *                                   - tccNum: The TCC number on which the
+ *                                     completion/error interrupt is generated.
+ *                                     Not used if user requested for a Link
+ *                                     channel.\n
+ *                                   - paramId: The param number corresponding to the
+ *                                     DMA channel.\n
+ *                                   - evtQNum: Event Queue Number to which the channel
+ *                                     will be mapped (valid only for the
+ *                                     Master Channel (DMA) request).\n
  *
  *  \return  TRUE if parameters are valid, else FALSE
  */
 uint32 CDD_EDMA_lld_configureChannelRegion(uint32 baseAddr, uint32 regionId, const Cdd_Dma_ChannelConfigType *chConfig);
 
 /**
- *  \brief    Free the specified channel (DMA/QDMA/Link) and its associated
+ *  \brief    Free the specified channel (DMA/Link) and its associated
  *            resources (PaRAM Set, TCC etc) and removes various mappings.
  *
  *  For Link channels, this API only frees the associated PaRAM Set.
  *
- *  For DMA/QDMA channels, it does the following operations:
+ *  For DMA channels, it does the following operations:
  *  1) Disable any ongoing transfer on the channel,\n
  *  2) Remove the channel to Event Queue mapping,\n
  *  3) For DMA channels, clear the DCHMAP register, if available\n
- *  4) For QDMA channels, clear the QCHMAP register,\n
- *  5) Frees the DMA/QDMA channel in the end.\n
+ *  4) Frees the DMA channel in the end.\n
  *
  *  \param  baseAddr                  Memory address of the EDMA instance used.\n
  *
  *  \param   regionId                 Region id to be used.
  *                                    Valid values are 0 to CDD_EDMA_NUM_REGIONS-1 \n
  *
- *  \param  chType                    (DMA/QDMA) Channel
- *                                      For Example: For QDMA it is,
- *                                      CDD_EDMA_CHANNEL_TYPE_QDMA.\n
- *
  *  \param  chNum                    This is the channel number requested for a
  *                                   particular event.
- *                                   Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA
- *                                   Valid values are 0 to CDD_EDMA_NUM_QDMACH-1 for QDMA \n
+ *                                   Valid values are 0 to CDD_EDMA_NUM_DMACH-1 for DMA \n
  *
  *  \param  trigMode                 Mode of triggering start of transfer.\n
  *
- *  \param  tccNum                   The channel number on which the
- *                                   completion/error interrupt is generated.
- *                                   Not used if user requested for a Link
- *                                   channel.\n
- *
- *  \param  evtQNum                  Event Queue Number to which the channel
- *                                   will be unmapped (valid only for the
- *                                   Master Channel (DMA/QDMA) request).\n
- *
  *  trigMode can have values:
  *        CDD_EDMA_TRIG_MODE_MANUAL\n
- *        CDD_EDMA_TRIG_MODE_QDMA\n
  *        CDD_EDMA_TRIG_MODE_EVENT
  *
  *  \return  TRUE if parameters are valid else return FALSE
  */
-uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chType, uint32 chNum, uint32 trigMode);
+uint32 CDD_EDMA_lld_freeChannelRegion(uint32 baseAddr, uint32 regionId, uint32 chNum, uint32 trigMode);
 
 /**
  *  \brief    Start EDMA transfer on the specified channel.
@@ -1670,8 +1575,9 @@ void CDD_EDMA_lld_deInit(Cdd_Dma_ConfigType *hEdmaList);
  *  \pre    #CDD_EDMA_open() has to be called first
  *
  *  \param  hEdma      #Cdd_EDMALLD_Handle returned from #CDD_EDMA_open()
- *  \param appdata     #data associated with it
- *  \param callback    #registered callback which will be called on interupt
+ *  \param  appdata    #data associated with it
+ *  \param  callback   #registered callback which will be called on interrupt
+ *  \param  handleId   Handle ID for the EDMA instance
  *
  *  \return #E_OK if started successfully; else error on failure
  *
@@ -1697,56 +1603,68 @@ sint32         CDD_EDMA_lld_unregisterIntr(Cdd_Dma_Handler *hEdma);
 /**
  *  \brief  Function which will be called on the interrupt comes, will act as master ISR function
  *
- *
  *  \return #void
  *
  *  \sa     #CDD_EDMA_open()
  */
 void           CDD_EDMA_TransferCompletion_MasterIsr(void);
+
 /**
  *  \brief  Function used to get the dummy TCC in case of chaining
  *
+ *  \param  handleId    Handle ID for the EDMA instance
+ *  \param  channelIdx  Channel index for which TCC is requested
  *
  *  \return #void
  *
  *  \sa     #CDD_EDMA_open()
  */
-void           CDD_EDMA_lld_GetTcc(uint32 handleId, uint32 channelIdx);
+void CDD_EDMA_lld_GetTcc(uint32 handleId, uint32 channelIdx);
+
 /**
  *  \brief  Function used to have channel configure region in case of chaining for multiple channels
  *
+ *  \param  hEdma       Handle to the EDMA instance
+ *  \param  handleId    Handle ID for the EDMA instance
  *
  *  \return #void
  *
  *  \sa     #CDD_EDMA_open()
  */
-void           CDD_EDMA_lld_chainingConfigureChannelRegion(Cdd_Dma_Handler *hEdma, uint32 handleId);
+void CDD_EDMA_lld_chainingConfigureChannelRegion(Cdd_Dma_Handler *hEdma, uint32 handleId);
+
 /**
- *  \brief  Function used for convertion of address from virtaul to physical address
+ *  \brief  Function used for conversion of address from virtual to physical address
  *
+ *  \param  virtAddr    Virtual address to be converted
  *
- *  \return #uint64 - phy address
+ *  \return #uint64 - physical address
  *
  *  \sa     #CDD_EDMA_open()
  */
-uint64         Cdd_Dma_Soc_VirtToPhy(void *virtAddr);
+uint64 Cdd_Dma_Soc_VirtToPhy(void *virtAddr);
+
 /**
  *  \brief  Function used for unregistering callback associated with the particular handle
  *
+ *  \param  handleId    Handle ID for which callback needs to be unregistered
  *
  *  \return #void
  *
  *  \sa     #CDD_EDMA_open()
  */
-void           Cdd_Dma_CbkUnregister(uint32 handleId);
+void Cdd_Dma_CbkUnregister(uint32 handleId);
+
 /**
  *  \brief  Function used for register read back
  *
+ *  \param  RegRbPtr    Pointer to structure where register values will be stored
+ *  \param  baseAddr    Memory address of the EDMA instance used
  *
  *  \return #void
  *
  */
-void           Cdd_Dma_ReadBack(Cdd_Dma_RegisterReadbackType *RegRbPtr, uint32 baseAddr);
+void Cdd_Dma_ReadBack(Cdd_Dma_RegisterReadbackType *RegRbPtr, uint32 baseAddr);
 
 #ifdef __cplusplus
 }

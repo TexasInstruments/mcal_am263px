@@ -1,0 +1,51 @@
+---
+title: UART Driver Interrupt Handlers
+
+---
+
+# UART_IRQ
+
+ [More...](#detailed-description)
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CDD_UART_ISR_VOID   | void ISR type  |
+| CDD_UART_ISR_CAT1   | Category 1 ISR type.  |
+| CDD_UART_ISR_CAT2   | Category 2 ISR type.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Cdd_Uart_ChannelIsr](../Modules/group___u_a_r_t___i_r_q.md#function-cdd_uart_channelisr)**(uint8 ChannelID)| UART Master ISR function.  |
+
+
+
+### function Cdd_Uart_ChannelIsr
+
+```
+void Cdd_Uart_ChannelIsr(
+    uint8 ChannelID
+)
+```
+
+
+**Brief**: 
+UART Master ISR function. 
+
+
+## Detailed Description
+
+
+This file defines the interrupt handlers for UART Complex Device Driver 
+
+
+
+

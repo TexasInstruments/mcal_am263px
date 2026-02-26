@@ -1,0 +1,302 @@
+---
+title: CAN Driver Interrupt Handlers
+
+---
+
+# CAN_IRQ
+
+ [More...](#detailed-description)
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| CAN_ISR_VOID   | void ISR type  |
+| CAN_ISR_CAT1   | Category 1 ISR type.  |
+| CAN_ISR_CAT2   | Category 2 ISR type.  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Can_0_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_0_int0isr)**(void )| This function is the Interrupt frame for CAN controller 0/INT 0.  |
+| void | **[Can_0_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_0_int1isr)**(void )| This function is the Interrupt frame for CAN controller 0/INT 1.  |
+| void | **[Can_1_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_1_int0isr)**(void )| This function is the Interrupt frame for CAN controller 1/INT 0.  |
+| void | **[Can_1_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_1_int1isr)**(void )| This function is the Interrupt frame for CAN controller 1/INT 1.  |
+| void | **[Can_2_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_2_int0isr)**(void )| This function is the Interrupt frame for CAN controller 3/INT 0.  |
+| void | **[Can_2_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_2_int1isr)**(void )| This function is the Interrupt frame for CAN controller 3/INT 1.  |
+| void | **[Can_3_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_3_int0isr)**(void )| This function is the Interrupt frame for CAN controller 4/INT 0.  |
+| void | **[Can_3_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_3_int1isr)**(void )| This function is the Interrupt frame for CAN controller 4/INT 1.  |
+
+
+
+### function Can_0_Int0ISR
+
+```
+void Can_0_Int0ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 0/INT 0. 
+
+
+
+```
+*
+*  Function name     :Can_0_Int0ISR
+*  Syntax            :void Can_0_Int0ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     0/INT 0 <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+### function Can_0_Int1ISR
+
+```
+void Can_0_Int1ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 0/INT 1. 
+
+
+
+```
+*
+*  Function name     :Can_0_Int1ISR
+*  Syntax            :void Can_0_Int1ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     0/INT 1 <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+### function Can_1_Int0ISR
+
+```
+void Can_1_Int0ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 1/INT 0. 
+
+
+
+```
+*
+*  Function name     :Can_1_Int0ISR
+*  Syntax            :void Can_1_Int0ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     1/INT 0 <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+### function Can_1_Int1ISR
+
+```
+void Can_1_Int1ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 1/INT 1. 
+
+
+
+```
+*
+*  Function name     :Can_1_Int1ISR
+*  Syntax            :void Can_1_Int1ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     1/INT 1 ECC Interrupt <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+### function Can_2_Int0ISR
+
+```
+void Can_2_Int0ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 3/INT 0. 
+
+
+
+```
+*
+*  Function name     :Can_2_Int0ISR
+*  Syntax            :void Can_2_Int0ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     3/INT 0 <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+### function Can_2_Int1ISR
+
+```
+void Can_2_Int1ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 3/INT 1. 
+
+
+
+```
+*
+*  Function name     :Can_2_Int1ISR
+*  Syntax            :void Can_2_Int1ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     3/INT 1 ECC Interrupt <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+### function Can_3_Int0ISR
+
+```
+void Can_3_Int0ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 4/INT 0. 
+
+
+
+```
+*
+*  Function name     :Can_3_Int0ISR
+*  Syntax            :void Can_3_Int0ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     4/INT 0 <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+### function Can_3_Int1ISR
+
+```
+void Can_3_Int1ISR(
+    void 
+)
+```
+
+
+**Brief**: 
+This function is the Interrupt frame for CAN controller 4/INT 1. 
+
+
+
+```
+*
+*  Function name     :Can_3_Int1ISR
+*  Syntax            :void Can_3_Int1ISR( void )
+*  Service ID[hex]   :N/A
+*  Sync/Async        :Synchronous
+*  Reentrancy        :Non-Reentrant
+*  Parameters (in)   :None
+*  Parameters (inout):None
+*  Parameters (out)  :None
+*  Return value      :None
+*  Description       :This function is the Interrupt frame for CAN controller
+*                     4/INT 1 ECC Interrupt <br>
+*                     This function should be plugged into the vector table for
+*                     Category 1 ISR
+* ```
+
+
+
+## Detailed Description
+
+
+This file defines the interrupt handlers for CAN MCAL driver 
+
+
+
+

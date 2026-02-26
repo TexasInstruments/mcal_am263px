@@ -1,0 +1,115 @@
+---
+title: GPT Driver Interrupt Handlers
+
+---
+
+# GPT_IRQ
+
+ [More...](#detailed-description)
+
+## Types
+
+|  Base type   | Type Name  | Brief |
+| -------------| -----------| ----- |
+|typedef void(*)(Gpt_ChannelType channel)  | **[Gpt_IsrRefType](../Modules/group___g_p_t___i_r_q.md#typedef-gpt_isrreftype)** | Typedef for the ISR Function Array.  | 
+
+
+
+### typedef Gpt_IsrRefType
+```
+typedef void(* Gpt_IsrRefType) (Gpt_ChannelType channel);
+```
+
+
+**Brief**: 
+Typedef for the ISR Function Array. 
+
+
+
+
+
+
+
+## Defines
+
+| Name           |  Brief     |
+| -------------- | ---------- |
+| GPT_ISR_VOID   | void ISR type  |
+| GPT_ISR_CAT1   | Category 1 ISR type.  |
+| GPT_ISR_CAT2   | Category 2 ISR type.  |
+| GPT_IRQ_MAJOR_VERSION   |  |
+| GPT_IRQ_MINOR_VERSION   |  |
+| GPT_IRQ_PATCH_VERSION   |  |
+| CHANNEL_MODES   |  |
+
+## Functions
+
+| Return type    | Function Name           |      Brief        |
+| -------------- | ----------------------- | ----------------- |
+| void | **[Gpt_Ch0Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch0isr)**(void )| Interrupt Functions.  |
+| void | **[Gpt_Ch1Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch1isr)**(void )| Channel 1 interrupt service routine.  |
+| void | **[Gpt_Ch2Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch2isr)**(void )| Channel 2 interrupt service routine.  |
+| void | **[Gpt_Ch3Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch3isr)**(void )| Channel 3 interrupt service routine.  |
+
+
+
+### function Gpt_Ch0Isr
+
+```
+void Gpt_Ch0Isr(
+    void 
+)
+```
+
+
+**Brief**: 
+Interrupt Functions. 
+
+Channel 0 interrupt service routine 
+
+
+### function Gpt_Ch1Isr
+
+```
+void Gpt_Ch1Isr(
+    void 
+)
+```
+
+
+**Brief**: 
+Channel 1 interrupt service routine. 
+
+### function Gpt_Ch2Isr
+
+```
+void Gpt_Ch2Isr(
+    void 
+)
+```
+
+
+**Brief**: 
+Channel 2 interrupt service routine. 
+
+### function Gpt_Ch3Isr
+
+```
+void Gpt_Ch3Isr(
+    void 
+)
+```
+
+
+**Brief**: 
+Channel 3 interrupt service routine. 
+
+
+## Detailed Description
+
+
+This file defines the interrupt handlers for GPT MCAL driver 
+
+
+
+

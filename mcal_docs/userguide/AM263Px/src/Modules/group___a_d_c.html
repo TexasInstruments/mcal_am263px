@@ -8,6 +8,7 @@
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/sphinx-design.min.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -17,6 +18,7 @@
         <script src="../../_static/documentation_options.js?v=4a3566fb"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../../_static/js/theme.js"></script>
 
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
@@ -65,117 +67,118 @@
 <li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">5.1. ADC</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#types">5.1.1. Types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalclkprescale-t">5.1.1.1. enum Adc_mcalClkPrescale_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalresolution-t">5.1.1.2. enum Adc_mcalResolution_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalsignalmode-t">5.1.1.3. enum Adc_mcalSignalMode_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcaltrigger-t">5.1.1.4. enum Adc_mcalTrigger_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalchannel-t">5.1.1.5. enum Adc_mcalChannel_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalpulsemode-t">5.1.1.6. enum Adc_mcalPulseMode_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalintnumber-t">5.1.1.7. enum Adc_mcalIntNumber_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalppbnumber-t">5.1.1.8. enum Adc_mcalPPBNumber_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalsocnumber-t">5.1.1.9. enum Adc_mcalSOCNumber_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalintsoctrigger-t">5.1.1.10. enum Adc_mcalIntSOCTrigger_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalprioritymode-t">5.1.1.11. enum Adc_mcalPriorityMode_t</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-statustype">5.1.1.12. enum Adc_StatusType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-triggersourcetype">5.1.1.13. enum Adc_TriggerSourceType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupconvmodetype">5.1.1.14. enum Adc_GroupConvModeType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-streambuffermodetype">5.1.1.15. enum Adc_StreamBufferModeType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupaccessmodetype">5.1.1.16. enum Adc_GroupAccessModeType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-hwtriggersignaltype">5.1.1.17. enum Adc_HwTriggerSignalType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupreplacementtype">5.1.1.18. enum Adc_GroupReplacementType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-channelrangeselecttype">5.1.1.19. enum Adc_ChannelRangeSelectType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupdataaccesstype">5.1.1.20. enum Adc_GroupDataAccessType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-powerstatetype">5.1.1.21. enum Adc_PowerStateType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-powerstaterequestresulttype">5.1.1.22. enum Adc_PowerStateRequestResultType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-adc-averagingmode">5.1.1.23. enum Adc_AveragingMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-channeltype">5.1.1.24. typedef Adc_ChannelType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-grouptype">5.1.1.25. typedef Adc_GroupType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-valuegrouptype">5.1.1.26. typedef Adc_ValueGroupType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-prescaletype">5.1.1.27. typedef Adc_PrescaleType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-conversiontimetype">5.1.1.28. typedef Adc_ConversionTimeType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-samplingtimetype">5.1.1.29. typedef Adc_SamplingTimeType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-resolutiontype">5.1.1.30. typedef Adc_ResolutionType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-groupprioritytype">5.1.1.31. typedef Adc_GroupPriorityType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-groupdeftype">5.1.1.32. typedef Adc_GroupDefType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-streamnumsampletype">5.1.1.33. typedef Adc_StreamNumSampleType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-hwtriggertimertype">5.1.1.34. typedef Adc_HwTriggerTimerType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-hwunittype">5.1.1.35. typedef Adc_HWUnitType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-groupendnotifytype">5.1.1.36. typedef Adc_GroupEndNotifyType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-dmacallbackfunctiontype">5.1.1.37. typedef Adc_DmaCallBackFunctionType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">5.1.1. Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types">5.1.2. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalclkprescale-t">5.1.2.1. enum Adc_mcalClkPrescale_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalresolution-t">5.1.2.2. enum Adc_mcalResolution_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalsignalmode-t">5.1.2.3. enum Adc_mcalSignalMode_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcaltrigger-t">5.1.2.4. enum Adc_mcalTrigger_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalchannel-t">5.1.2.5. enum Adc_mcalChannel_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalpulsemode-t">5.1.2.6. enum Adc_mcalPulseMode_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalintnumber-t">5.1.2.7. enum Adc_mcalIntNumber_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalppbnumber-t">5.1.2.8. enum Adc_mcalPPBNumber_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalsocnumber-t">5.1.2.9. enum Adc_mcalSOCNumber_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalintsoctrigger-t">5.1.2.10. enum Adc_mcalIntSOCTrigger_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-mcalprioritymode-t">5.1.2.11. enum Adc_mcalPriorityMode_t</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-statustype">5.1.2.12. enum Adc_StatusType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-triggersourcetype">5.1.2.13. enum Adc_TriggerSourceType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupconvmodetype">5.1.2.14. enum Adc_GroupConvModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-streambuffermodetype">5.1.2.15. enum Adc_StreamBufferModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupaccessmodetype">5.1.2.16. enum Adc_GroupAccessModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-hwtriggersignaltype">5.1.2.17. enum Adc_HwTriggerSignalType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupreplacementtype">5.1.2.18. enum Adc_GroupReplacementType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-channelrangeselecttype">5.1.2.19. enum Adc_ChannelRangeSelectType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-groupdataaccesstype">5.1.2.20. enum Adc_GroupDataAccessType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-powerstatetype">5.1.2.21. enum Adc_PowerStateType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-powerstaterequestresulttype">5.1.2.22. enum Adc_PowerStateRequestResultType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-adc-averagingmode">5.1.2.23. enum Adc_AveragingMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-channeltype">5.1.2.24. typedef Adc_ChannelType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-grouptype">5.1.2.25. typedef Adc_GroupType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-valuegrouptype">5.1.2.26. typedef Adc_ValueGroupType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-prescaletype">5.1.2.27. typedef Adc_PrescaleType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-conversiontimetype">5.1.2.28. typedef Adc_ConversionTimeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-samplingtimetype">5.1.2.29. typedef Adc_SamplingTimeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-resolutiontype">5.1.2.30. typedef Adc_ResolutionType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-groupprioritytype">5.1.2.31. typedef Adc_GroupPriorityType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-groupdeftype">5.1.2.32. typedef Adc_GroupDefType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-streamnumsampletype">5.1.2.33. typedef Adc_StreamNumSampleType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-hwtriggertimertype">5.1.2.34. typedef Adc_HwTriggerTimerType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-hwunittype">5.1.2.35. typedef Adc_HWUnitType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-groupendnotifytype">5.1.2.36. typedef Adc_GroupEndNotifyType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-adc-dmacallbackfunctiontype">5.1.2.37. typedef Adc_DmaCallBackFunctionType</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#structures">5.1.2. Structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defines">5.1.3. Defines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions">5.1.4. Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-init">5.1.4.1. function Adc_Init</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-deinit">5.1.4.2. function Adc_DeInit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setupresultbuffer">5.1.4.3. function Adc_SetupResultBuffer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getgroupstatus">5.1.4.4. function Adc_GetGroupStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getstreamlastpointer">5.1.4.5. function Adc_GetStreamLastPointer</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-startgroupconversion">5.1.4.6. function Adc_StartGroupConversion</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-stopgroupconversion">5.1.4.7. function Adc_StopGroupConversion</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-readgroup">5.1.4.8. function Adc_ReadGroup</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enablegroupnotification">5.1.4.9. function Adc_EnableGroupNotification</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disablegroupnotification">5.1.4.10. function Adc_DisableGroupNotification</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getversioninfo">5.1.4.11. function Adc_GetVersionInfo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-registerreadback">5.1.4.12. function Adc_RegisterReadback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enablehardwaretrigger">5.1.4.13. function Adc_EnableHardwareTrigger</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disablehardwaretrigger">5.1.4.14. function Adc_DisableHardwareTrigger</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-inittemperatureread">5.1.4.15. function Adc_InitTemperatureRead</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-readtemperature">5.1.4.16. function Adc_ReadTemperature</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-readtemperatureresult">5.1.4.17. function Adc_ReadTemperatureResult</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-pollingmainfunction">5.1.4.18. function Adc_PollingMainFunction</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getreadresultbaseaddress">5.1.4.19. function Adc_GetReadResultBaseAddress</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptcontinuousmode">5.1.4.20. function Adc_SetInterruptContinuousMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setprescaler">5.1.4.21. function ADC_setPrescaler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setupsoc">5.1.4.22. function ADC_setupSOC</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptsoctrigger">5.1.4.23. function ADC_setInterruptSOCTrigger</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptpulsemode">5.1.4.24. function ADC_setInterruptPulseMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptcycleoffset">5.1.4.25. function ADC_setInterruptCycleOffset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableconverter">5.1.4.26. function ADC_enableConverter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableconverter">5.1.4.27. function ADC_disableConverter</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-forcesoc">5.1.4.28. function ADC_forceSOC</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-forcemultiplesoc">5.1.4.29. function ADC_forceMultipleSOC</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getinterruptstatus">5.1.4.30. function ADC_getInterruptStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-clearinterruptstatus">5.1.4.31. function ADC_clearInterruptStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getinterruptoverflowstatus">5.1.4.32. function ADC_getInterruptOverflowStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-clearinterruptoverflowstatus">5.1.4.33. function ADC_clearInterruptOverflowStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-readresult">5.1.4.34. function ADC_readResult</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-readresultbaseaddr">5.1.4.35. function ADC_readResultbaseaddr</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-isbusy">5.1.4.36. function ADC_isBusy</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setburstmodeconfig">5.1.4.37. function ADC_setBurstModeConfig</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableburstmode">5.1.4.38. function ADC_enableBurstMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableburstmode">5.1.4.39. function ADC_disableBurstMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setsocpriority">5.1.4.40. function ADC_setSOCPriority</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setupppb">5.1.4.41. function ADC_setupPPB</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbevent">5.1.4.42. function ADC_enablePPBEvent</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbevent">5.1.4.43. function ADC_disablePPBEvent</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbeventinterrupt">5.1.4.44. function ADC_enablePPBEventInterrupt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbeventinterrupt">5.1.4.45. function ADC_disablePPBEventInterrupt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getppbeventstatus">5.1.4.46. function ADC_getPPBEventStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-clearppbeventstatus">5.1.4.47. function ADC_clearPPBEventStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-readppbresult">5.1.4.48. function ADC_readPPBResult</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-getppbdelaytimestamp">5.1.4.49. function ADC_getPPBDelayTimeStamp</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setppbcalibrationoffset">5.1.4.50. function ADC_setPPBCalibrationOffset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setppbreferenceoffset">5.1.4.51. function ADC_setPPBReferenceOffset</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbtwoscomplement">5.1.4.52. function ADC_enablePPBTwosComplement</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbtwoscomplement">5.1.4.53. function ADC_disablePPBTwosComplement</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbeventcbcclear">5.1.4.54. function ADC_enablePPBEventCBCClear</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbeventcbcclear">5.1.4.55. function ADC_disablePPBEventCBCClear</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableinterrupt">5.1.4.56. function ADC_enableInterrupt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableinterrupt">5.1.4.57. function ADC_disableInterrupt</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptsource">5.1.4.58. function ADC_setInterruptSource</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-enablecontinuousmode">5.1.4.59. function ADC_enableContinuousMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-disablecontinuousmode">5.1.4.60. function ADC_disableContinuousMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setmode">5.1.4.61. function ADC_setMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-setppbtriplimits">5.1.4.62. function ADC_setPPBTripLimits</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsinitlinklist">5.1.4.63. function Adc_utilsInitLinkList</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsdeinitlinklist">5.1.4.64. function Adc_utilsDeInitLinkList</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilslinknodepri">5.1.4.65. function Adc_utilsLinkNodePri</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsunlinknodepri">5.1.4.66. function Adc_utilsUnLinkNodePri</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsinitnodeobject">5.1.4.67. function Adc_utilsInitNodeObject</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsgetheadnode">5.1.4.68. function Adc_utilsGetHeadNode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">5.1.3. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">5.1.4. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.1.5. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-init">5.1.5.1. function Adc_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-deinit">5.1.5.2. function Adc_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setupresultbuffer">5.1.5.3. function Adc_SetupResultBuffer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getgroupstatus">5.1.5.4. function Adc_GetGroupStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getstreamlastpointer">5.1.5.5. function Adc_GetStreamLastPointer</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-startgroupconversion">5.1.5.6. function Adc_StartGroupConversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-stopgroupconversion">5.1.5.7. function Adc_StopGroupConversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-readgroup">5.1.5.8. function Adc_ReadGroup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enablegroupnotification">5.1.5.9. function Adc_EnableGroupNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disablegroupnotification">5.1.5.10. function Adc_DisableGroupNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getversioninfo">5.1.5.11. function Adc_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-registerreadback">5.1.5.12. function Adc_RegisterReadback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enablehardwaretrigger">5.1.5.13. function Adc_EnableHardwareTrigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disablehardwaretrigger">5.1.5.14. function Adc_DisableHardwareTrigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-inittemperatureread">5.1.5.15. function Adc_InitTemperatureRead</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-readtemperature">5.1.5.16. function Adc_ReadTemperature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-readtemperatureresult">5.1.5.17. function Adc_ReadTemperatureResult</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-pollingmainfunction">5.1.5.18. function Adc_PollingMainFunction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getreadresultbaseaddress">5.1.5.19. function Adc_GetReadResultBaseAddress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptcontinuousmode">5.1.5.20. function Adc_SetInterruptContinuousMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setprescaler">5.1.5.21. function ADC_setPrescaler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setupsoc">5.1.5.22. function ADC_setupSOC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptsoctrigger">5.1.5.23. function ADC_setInterruptSOCTrigger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptpulsemode">5.1.5.24. function ADC_setInterruptPulseMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptcycleoffset">5.1.5.25. function ADC_setInterruptCycleOffset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableconverter">5.1.5.26. function ADC_enableConverter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableconverter">5.1.5.27. function ADC_disableConverter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-forcesoc">5.1.5.28. function ADC_forceSOC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-forcemultiplesoc">5.1.5.29. function ADC_forceMultipleSOC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getinterruptstatus">5.1.5.30. function ADC_getInterruptStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-clearinterruptstatus">5.1.5.31. function ADC_clearInterruptStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getinterruptoverflowstatus">5.1.5.32. function ADC_getInterruptOverflowStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-clearinterruptoverflowstatus">5.1.5.33. function ADC_clearInterruptOverflowStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-readresult">5.1.5.34. function ADC_readResult</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-readresultbaseaddr">5.1.5.35. function ADC_readResultbaseaddr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-isbusy">5.1.5.36. function ADC_isBusy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setburstmodeconfig">5.1.5.37. function ADC_setBurstModeConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableburstmode">5.1.5.38. function ADC_enableBurstMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableburstmode">5.1.5.39. function ADC_disableBurstMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setsocpriority">5.1.5.40. function ADC_setSOCPriority</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setupppb">5.1.5.41. function ADC_setupPPB</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbevent">5.1.5.42. function ADC_enablePPBEvent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbevent">5.1.5.43. function ADC_disablePPBEvent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbeventinterrupt">5.1.5.44. function ADC_enablePPBEventInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbeventinterrupt">5.1.5.45. function ADC_disablePPBEventInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getppbeventstatus">5.1.5.46. function ADC_getPPBEventStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-clearppbeventstatus">5.1.5.47. function ADC_clearPPBEventStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-readppbresult">5.1.5.48. function ADC_readPPBResult</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-getppbdelaytimestamp">5.1.5.49. function ADC_getPPBDelayTimeStamp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setppbcalibrationoffset">5.1.5.50. function ADC_setPPBCalibrationOffset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setppbreferenceoffset">5.1.5.51. function ADC_setPPBReferenceOffset</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbtwoscomplement">5.1.5.52. function ADC_enablePPBTwosComplement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbtwoscomplement">5.1.5.53. function ADC_disablePPBTwosComplement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableppbeventcbcclear">5.1.5.54. function ADC_enablePPBEventCBCClear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableppbeventcbcclear">5.1.5.55. function ADC_disablePPBEventCBCClear</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enableinterrupt">5.1.5.56. function ADC_enableInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disableinterrupt">5.1.5.57. function ADC_disableInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setinterruptsource">5.1.5.58. function ADC_setInterruptSource</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-enablecontinuousmode">5.1.5.59. function ADC_enableContinuousMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-disablecontinuousmode">5.1.5.60. function ADC_disableContinuousMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setmode">5.1.5.61. function ADC_setMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-setppbtriplimits">5.1.5.62. function ADC_setPPBTripLimits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsinitlinklist">5.1.5.63. function Adc_utilsInitLinkList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsdeinitlinklist">5.1.5.64. function Adc_utilsDeInitLinkList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilslinknodepri">5.1.5.65. function Adc_utilsLinkNodePri</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsunlinknodepri">5.1.5.66. function Adc_utilsUnLinkNodePri</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsinitnodeobject">5.1.5.67. function Adc_utilsInitNodeObject</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-adc-utilsgetheadnode">5.1.5.68. function Adc_utilsGetHeadNode</a></li>
 </ul>
 </li>
 </ul>
@@ -232,8 +235,21 @@
              
   <section id="adc">
 <h1><span class="section-number">5.1. </span>ADC<a class="headerlink" href="#adc" title="Link to this heading"></a></h1>
+<section id="modules">
+<h2><span class="section-number">5.1.1. </span>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="group___a_d_c___i_r_q.html"><span class="std std-doc">ADC Driver Interrupt Handlers</span></a></strong></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="types">
-<h2><span class="section-number">5.1.1. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.1.2. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Base type</p></th>
@@ -393,7 +409,7 @@
 </tbody>
 </table>
 <section id="enum-adc-mcalclkprescale-t">
-<h3><span class="section-number">5.1.1.1. </span>enum Adc_mcalClkPrescale_t<a class="headerlink" href="#enum-adc-mcalclkprescale-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.1. </span>enum Adc_mcalClkPrescale_t<a class="headerlink" href="#enum-adc-mcalclkprescale-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -468,7 +484,7 @@
 Values that can be passed to ADC_setPrescaler() as the <em>clkPrescale</em> parameter.</p>
 </section>
 <section id="enum-adc-mcalresolution-t">
-<h3><span class="section-number">5.1.1.2. </span>enum Adc_mcalResolution_t<a class="headerlink" href="#enum-adc-mcalresolution-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.2. </span>enum Adc_mcalResolution_t<a class="headerlink" href="#enum-adc-mcalresolution-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -487,7 +503,7 @@ Values that can be passed to ADC_setPrescaler() as the <em>clkPrescale</em> para
 Values that can be passed to ADC_setMode() as the <em>resolution</em> parameter.</p>
 </section>
 <section id="enum-adc-mcalsignalmode-t">
-<h3><span class="section-number">5.1.1.3. </span>enum Adc_mcalSignalMode_t<a class="headerlink" href="#enum-adc-mcalsignalmode-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.3. </span>enum Adc_mcalSignalMode_t<a class="headerlink" href="#enum-adc-mcalsignalmode-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -510,7 +526,7 @@ Values that can be passed to ADC_setMode() as the <em>resolution</em> parameter.
 Values that can be passed to ADC_setMode() as the <em>signalMode</em> parameter.</p>
 </section>
 <section id="enum-adc-mcaltrigger-t">
-<h3><span class="section-number">5.1.1.4. </span>enum Adc_mcalTrigger_t<a class="headerlink" href="#enum-adc-mcaltrigger-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.4. </span>enum Adc_mcalTrigger_t<a class="headerlink" href="#enum-adc-mcaltrigger-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -849,7 +865,7 @@ Values that can be passed to ADC_setMode() as the <em>signalMode</em> parameter.
 Values that can be passed to ADC_setupSOC() as the <em>trigger</em> parameter to specify the event that will trigger a conversion to start. It is also used with ADC_setBurstModeConfig().</p>
 </section>
 <section id="enum-adc-mcalchannel-t">
-<h3><span class="section-number">5.1.1.5. </span>enum Adc_mcalChannel_t<a class="headerlink" href="#enum-adc-mcalchannel-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.5. </span>enum Adc_mcalChannel_t<a class="headerlink" href="#enum-adc-mcalchannel-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -924,7 +940,7 @@ Values that can be passed to ADC_setupSOC() as the <em>trigger</em> parameter to
 Values that can be passed to ADC_setupSOC() as the <em>channel</em> parameter. This is the input pin on which the signal to be converted is located.</p>
 </section>
 <section id="enum-adc-mcalpulsemode-t">
-<h3><span class="section-number">5.1.1.6. </span>enum Adc_mcalPulseMode_t<a class="headerlink" href="#enum-adc-mcalpulsemode-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.6. </span>enum Adc_mcalPulseMode_t<a class="headerlink" href="#enum-adc-mcalpulsemode-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -947,7 +963,7 @@ Values that can be passed to ADC_setupSOC() as the <em>channel</em> parameter. T
 Values that can be passed to ADC_setInterruptPulseMode() as the <em>pulseMode</em> parameter.</p>
 </section>
 <section id="enum-adc-mcalintnumber-t">
-<h3><span class="section-number">5.1.1.7. </span>enum Adc_mcalIntNumber_t<a class="headerlink" href="#enum-adc-mcalintnumber-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.7. </span>enum Adc_mcalIntNumber_t<a class="headerlink" href="#enum-adc-mcalintnumber-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -978,7 +994,7 @@ Values that can be passed to ADC_setInterruptPulseMode() as the <em>pulseMode</e
 Values that can be passed to ADC_enableInterrupt(), ADC_disableInterrupt(), ADC_clearInterruptStatus(), ADC_getInterruptOverflowStatus(), ADC_clearInterruptOverflowStatus(), ADC_setInterruptSource(), ADC_enableContinuousMode(), ADC_disableContinuousMode() and ADC_getInterruptStatus() as the <em>adcIntNum</em> parameter.</p>
 </section>
 <section id="enum-adc-mcalppbnumber-t">
-<h3><span class="section-number">5.1.1.8. </span>enum Adc_mcalPPBNumber_t<a class="headerlink" href="#enum-adc-mcalppbnumber-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.8. </span>enum Adc_mcalPPBNumber_t<a class="headerlink" href="#enum-adc-mcalppbnumber-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1009,7 +1025,7 @@ Values that can be passed to ADC_enableInterrupt(), ADC_disableInterrupt(), ADC_
 Values that can be passed in as the <em>ppbNumber</em> parameter for several functions.</p>
 </section>
 <section id="enum-adc-mcalsocnumber-t">
-<h3><span class="section-number">5.1.1.9. </span>enum Adc_mcalSOCNumber_t<a class="headerlink" href="#enum-adc-mcalsocnumber-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.9. </span>enum Adc_mcalSOCNumber_t<a class="headerlink" href="#enum-adc-mcalsocnumber-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1092,7 +1108,7 @@ Values that can be passed in as the <em>ppbNumber</em> parameter for several fun
 Values that can be passed in as the <em>socNumber</em> parameter for several functions. This value identifies the start-of-conversion (SOC) that a function is configuring or accessing. Note that in some cases (for example, ADC_setInterruptSource()) <em>socNumber</em> is used to refer to the corresponding end-of-conversion (EOC).</p>
 </section>
 <section id="enum-adc-mcalintsoctrigger-t">
-<h3><span class="section-number">5.1.1.10. </span>enum Adc_mcalIntSOCTrigger_t<a class="headerlink" href="#enum-adc-mcalintsoctrigger-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.10. </span>enum Adc_mcalIntSOCTrigger_t<a class="headerlink" href="#enum-adc-mcalintsoctrigger-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1119,7 +1135,7 @@ Values that can be passed in as the <em>socNumber</em> parameter for several fun
 Values that can be passed in as the <em>trigger</em> parameter for the ADC_setInterruptSOCTrigger() function.</p>
 </section>
 <section id="enum-adc-mcalprioritymode-t">
-<h3><span class="section-number">5.1.1.11. </span>enum Adc_mcalPriorityMode_t<a class="headerlink" href="#enum-adc-mcalprioritymode-t" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.11. </span>enum Adc_mcalPriorityMode_t<a class="headerlink" href="#enum-adc-mcalprioritymode-t" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1202,7 +1218,7 @@ Values that can be passed in as the <em>trigger</em> parameter for the ADC_setIn
 Values that can be passed to ADC_setSOCPriority() as the <em>priMode</em> parameter.</p>
 </section>
 <section id="enum-adc-statustype">
-<h3><span class="section-number">5.1.1.12. </span>enum Adc_StatusType<a class="headerlink" href="#enum-adc-statustype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.12. </span>enum Adc_StatusType<a class="headerlink" href="#enum-adc-statustype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1233,7 +1249,7 @@ Values that can be passed to ADC_setSOCPriority() as the <em>priMode</em> parame
 Current status of the conversion of the requested ADC Channel group.</p>
 </section>
 <section id="enum-adc-triggersourcetype">
-<h3><span class="section-number">5.1.1.13. </span>enum Adc_TriggerSourceType<a class="headerlink" href="#enum-adc-triggersourcetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.13. </span>enum Adc_TriggerSourceType<a class="headerlink" href="#enum-adc-triggersourcetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1256,7 +1272,7 @@ Current status of the conversion of the requested ADC Channel group.</p>
 Type for configuring the trigger source for an ADC Channel group.</p>
 </section>
 <section id="enum-adc-groupconvmodetype">
-<h3><span class="section-number">5.1.1.14. </span>enum Adc_GroupConvModeType<a class="headerlink" href="#enum-adc-groupconvmodetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.14. </span>enum Adc_GroupConvModeType<a class="headerlink" href="#enum-adc-groupconvmodetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1279,7 +1295,7 @@ Type for configuring the trigger source for an ADC Channel group.</p>
 Type for configuring the conversion mode of an ADC Channel group.</p>
 </section>
 <section id="enum-adc-streambuffermodetype">
-<h3><span class="section-number">5.1.1.15. </span>enum Adc_StreamBufferModeType<a class="headerlink" href="#enum-adc-streambuffermodetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.15. </span>enum Adc_StreamBufferModeType<a class="headerlink" href="#enum-adc-streambuffermodetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1302,7 +1318,7 @@ Type for configuring the conversion mode of an ADC Channel group.</p>
 Type for configuring the streaming access mode buffer type.</p>
 </section>
 <section id="enum-adc-groupaccessmodetype">
-<h3><span class="section-number">5.1.1.16. </span>enum Adc_GroupAccessModeType<a class="headerlink" href="#enum-adc-groupaccessmodetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.16. </span>enum Adc_GroupAccessModeType<a class="headerlink" href="#enum-adc-groupaccessmodetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1325,7 +1341,7 @@ Type for configuring the streaming access mode buffer type.</p>
 Type for configuring the access mode to group conversion results.</p>
 </section>
 <section id="enum-adc-hwtriggersignaltype">
-<h3><span class="section-number">5.1.1.17. </span>enum Adc_HwTriggerSignalType<a class="headerlink" href="#enum-adc-hwtriggersignaltype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.17. </span>enum Adc_HwTriggerSignalType<a class="headerlink" href="#enum-adc-hwtriggersignaltype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1353,7 +1369,7 @@ Type for configuring on which edge of the hardware trigger signal the driver sho
 <p>Note: This feature is not supported in this driver</p>
 </section>
 <section id="enum-adc-groupreplacementtype">
-<h3><span class="section-number">5.1.1.18. </span>enum Adc_GroupReplacementType<a class="headerlink" href="#enum-adc-groupreplacementtype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.18. </span>enum Adc_GroupReplacementType<a class="headerlink" href="#enum-adc-groupreplacementtype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1376,7 +1392,7 @@ Type for configuring on which edge of the hardware trigger signal the driver sho
 Replacement mechanism, which is used on ADC group level, if a group conversion is interrupted by a group which has a higher priority.</p>
 </section>
 <section id="enum-adc-channelrangeselecttype">
-<h3><span class="section-number">5.1.1.19. </span>enum Adc_ChannelRangeSelectType<a class="headerlink" href="#enum-adc-channelrangeselecttype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.19. </span>enum Adc_ChannelRangeSelectType<a class="headerlink" href="#enum-adc-channelrangeselecttype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1420,7 +1436,7 @@ In case of active limit checking: defines which conversion values are taken into
 <p>Note: This feature is not supported yet.</p>
 </section>
 <section id="enum-adc-groupdataaccesstype">
-<h3><span class="section-number">5.1.1.20. </span>enum Adc_GroupDataAccessType<a class="headerlink" href="#enum-adc-groupdataaccesstype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.20. </span>enum Adc_GroupDataAccessType<a class="headerlink" href="#enum-adc-groupdataaccesstype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1447,7 +1463,7 @@ In case of active limit checking: defines which conversion values are taken into
 Type of ADC Data access method.</p>
 </section>
 <section id="enum-adc-powerstatetype">
-<h3><span class="section-number">5.1.1.21. </span>enum Adc_PowerStateType<a class="headerlink" href="#enum-adc-powerstatetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.21. </span>enum Adc_PowerStateType<a class="headerlink" href="#enum-adc-powerstatetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1470,7 +1486,7 @@ Type of ADC Data access method.</p>
 Power state currently active or set as target power state.</p>
 </section>
 <section id="enum-adc-powerstaterequestresulttype">
-<h3><span class="section-number">5.1.1.22. </span>enum Adc_PowerStateRequestResultType<a class="headerlink" href="#enum-adc-powerstaterequestresulttype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.22. </span>enum Adc_PowerStateRequestResultType<a class="headerlink" href="#enum-adc-powerstaterequestresulttype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1509,7 +1525,7 @@ Power state currently active or set as target power state.</p>
 Result of the requests related to power state transitions.</p>
 </section>
 <section id="enum-adc-averagingmode">
-<h3><span class="section-number">5.1.1.23. </span>enum Adc_AveragingMode<a class="headerlink" href="#enum-adc-averagingmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.23. </span>enum Adc_AveragingMode<a class="headerlink" href="#enum-adc-averagingmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -1544,7 +1560,7 @@ Result of the requests related to power state transitions.</p>
 Enum to number of samplings to average. ADC allows user to program the number of samplings to average.</p>
 </section>
 <section id="typedef-adc-channeltype">
-<h3><span class="section-number">5.1.1.24. </span>typedef Adc_ChannelType<a class="headerlink" href="#typedef-adc-channeltype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.24. </span>typedef Adc_ChannelType<a class="headerlink" href="#typedef-adc-channeltype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Adc_ChannelType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1552,7 +1568,7 @@ Enum to number of samplings to average. ADC allows user to program the number of
 Numeric ID of an ADC channel.</p>
 </section>
 <section id="typedef-adc-grouptype">
-<h3><span class="section-number">5.1.1.25. </span>typedef Adc_GroupType<a class="headerlink" href="#typedef-adc-grouptype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.25. </span>typedef Adc_GroupType<a class="headerlink" href="#typedef-adc-grouptype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Adc_GroupType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1560,7 +1576,7 @@ Numeric ID of an ADC channel.</p>
 Numeric ID of an ADC channel group.</p>
 </section>
 <section id="typedef-adc-valuegrouptype">
-<h3><span class="section-number">5.1.1.26. </span>typedef Adc_ValueGroupType<a class="headerlink" href="#typedef-adc-valuegrouptype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.26. </span>typedef Adc_ValueGroupType<a class="headerlink" href="#typedef-adc-valuegrouptype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">Adc_ValueGroupType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1569,7 +1585,7 @@ Type for reading the converted values of a channel group (raw, without further s
 <p>Note: Even though the resolution for this ADC HW is 10-bit, we set this to 32-bit integer as the register read access is 32-bit.</p>
 </section>
 <section id="typedef-adc-prescaletype">
-<h3><span class="section-number">5.1.1.27. </span>typedef Adc_PrescaleType<a class="headerlink" href="#typedef-adc-prescaletype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.27. </span>typedef Adc_PrescaleType<a class="headerlink" href="#typedef-adc-prescaletype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Adc_PrescaleType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1577,7 +1593,7 @@ Type for reading the converted values of a channel group (raw, without further s
 Type of clock prescaler factor.</p>
 </section>
 <section id="typedef-adc-conversiontimetype">
-<h3><span class="section-number">5.1.1.28. </span>typedef Adc_ConversionTimeType<a class="headerlink" href="#typedef-adc-conversiontimetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.28. </span>typedef Adc_ConversionTimeType<a class="headerlink" href="#typedef-adc-conversiontimetype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">Adc_ConversionTimeType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1585,7 +1601,7 @@ Type of clock prescaler factor.</p>
 Type of conversion time, i.e. the time during which the sampled analogue value is converted into digital representation.</p>
 </section>
 <section id="typedef-adc-samplingtimetype">
-<h3><span class="section-number">5.1.1.29. </span>typedef Adc_SamplingTimeType<a class="headerlink" href="#typedef-adc-samplingtimetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.29. </span>typedef Adc_SamplingTimeType<a class="headerlink" href="#typedef-adc-samplingtimetype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">Adc_SamplingTimeType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1593,7 +1609,7 @@ Type of conversion time, i.e. the time during which the sampled analogue value i
 Type of sampling time, i.e. the time during which the value is sampled (in clockcycles).</p>
 </section>
 <section id="typedef-adc-resolutiontype">
-<h3><span class="section-number">5.1.1.30. </span>typedef Adc_ResolutionType<a class="headerlink" href="#typedef-adc-resolutiontype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.30. </span>typedef Adc_ResolutionType<a class="headerlink" href="#typedef-adc-resolutiontype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Adc_ResolutionType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1601,7 +1617,7 @@ Type of sampling time, i.e. the time during which the value is sampled (in clock
 Type of channel resolution in number of bits.</p>
 </section>
 <section id="typedef-adc-groupprioritytype">
-<h3><span class="section-number">5.1.1.31. </span>typedef Adc_GroupPriorityType<a class="headerlink" href="#typedef-adc-groupprioritytype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.31. </span>typedef Adc_GroupPriorityType<a class="headerlink" href="#typedef-adc-groupprioritytype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Adc_GroupPriorityType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1609,7 +1625,7 @@ Type of channel resolution in number of bits.</p>
 Priority level of the channel. Lowest priority is 0.</p>
 </section>
 <section id="typedef-adc-groupdeftype">
-<h3><span class="section-number">5.1.1.32. </span>typedef Adc_GroupDefType<a class="headerlink" href="#typedef-adc-groupdeftype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.32. </span>typedef Adc_GroupDefType<a class="headerlink" href="#typedef-adc-groupdeftype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Adc_GroupDefType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1617,7 +1633,7 @@ Priority level of the channel. Lowest priority is 0.</p>
 Type of assignment of channels to a channel group.</p>
 </section>
 <section id="typedef-adc-streamnumsampletype">
-<h3><span class="section-number">5.1.1.33. </span>typedef Adc_StreamNumSampleType<a class="headerlink" href="#typedef-adc-streamnumsampletype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.33. </span>typedef Adc_StreamNumSampleType<a class="headerlink" href="#typedef-adc-streamnumsampletype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">Adc_StreamNumSampleType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1625,7 +1641,7 @@ Type of assignment of channels to a channel group.</p>
 Type for configuring the number of group conversions in streaming access mode (in single access mode, parameter is 1).</p>
 </section>
 <section id="typedef-adc-hwtriggertimertype">
-<h3><span class="section-number">5.1.1.34. </span>typedef Adc_HwTriggerTimerType<a class="headerlink" href="#typedef-adc-hwtriggertimertype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.34. </span>typedef Adc_HwTriggerTimerType<a class="headerlink" href="#typedef-adc-hwtriggertimertype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">Adc_mcalTrigger_t</span><span class="w"> </span><span class="n">Adc_HwTriggerTimerType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1633,7 +1649,7 @@ Type for configuring the number of group conversions in streaming access mode (i
 Type for the value of the ADC module embedded timer.</p>
 </section>
 <section id="typedef-adc-hwunittype">
-<h3><span class="section-number">5.1.1.35. </span>typedef Adc_HWUnitType<a class="headerlink" href="#typedef-adc-hwunittype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.35. </span>typedef Adc_HWUnitType<a class="headerlink" href="#typedef-adc-hwunittype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">Adc_HWUnitType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1641,7 +1657,7 @@ Type for the value of the ADC module embedded timer.</p>
 Specifies the identification (ID) for a ADC Hardware microcontroller peripheral (unit)</p>
 </section>
 <section id="typedef-adc-groupendnotifytype">
-<h3><span class="section-number">5.1.1.36. </span>typedef Adc_GroupEndNotifyType<a class="headerlink" href="#typedef-adc-groupendnotifytype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.36. </span>typedef Adc_GroupEndNotifyType<a class="headerlink" href="#typedef-adc-groupendnotifytype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Adc_GroupEndNotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -1649,7 +1665,7 @@ Specifies the identification (ID) for a ADC Hardware microcontroller peripheral 
 Typedef for group end notification function pointer.</p>
 </section>
 <section id="typedef-adc-dmacallbackfunctiontype">
-<h3><span class="section-number">5.1.1.37. </span>typedef Adc_DmaCallBackFunctionType<a class="headerlink" href="#typedef-adc-dmacallbackfunctiontype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.2.37. </span>typedef Adc_DmaCallBackFunctionType<a class="headerlink" href="#typedef-adc-dmacallbackfunctiontype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">Cdd_Edma_EventCallback</span><span class="w"> </span><span class="n">Adc_DmaCallBackFunctionType</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1658,7 +1674,7 @@ Typedef for group end notification function pointer.</p>
 </section>
 </section>
 <section id="structures">
-<h2><span class="section-number">5.1.2. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.1.3. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -1703,7 +1719,7 @@ Typedef for group end notification function pointer.</p>
 </table>
 </section>
 <section id="defines">
-<h2><span class="section-number">5.1.3. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.1.4. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -1976,7 +1992,7 @@ Typedef for group end notification function pointer.</p>
 </table>
 </section>
 <section id="functions">
-<h2><span class="section-number">5.1.4. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<h2><span class="section-number">5.1.5. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Return type</p></th>
@@ -2260,7 +2276,7 @@ Typedef for group end notification function pointer.</p>
 </tbody>
 </table>
 <section id="function-adc-init">
-<h3><span class="section-number">5.1.4.1. </span>function Adc_Init<a class="headerlink" href="#function-adc-init" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.1. </span>function Adc_Init<a class="headerlink" href="#function-adc-init" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_Init</span><span class="p">(</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Adc_ConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">CfgPtr</span>
 <span class="p">)</span>
@@ -2284,7 +2300,7 @@ Service for ADC initialization.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-deinit">
-<h3><span class="section-number">5.1.4.2. </span>function Adc_DeInit<a class="headerlink" href="#function-adc-deinit" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.2. </span>function Adc_DeInit<a class="headerlink" href="#function-adc-deinit" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_DeInit</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -2304,7 +2320,7 @@ This service sets all ADC HW Units to a state comparable to their power on reset
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setupresultbuffer">
-<h3><span class="section-number">5.1.4.3. </span>function Adc_SetupResultBuffer<a class="headerlink" href="#function-adc-setupresultbuffer" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.3. </span>function Adc_SetupResultBuffer<a class="headerlink" href="#function-adc-setupresultbuffer" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Adc_SetupResultBuffer</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span><span class="p">,</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Adc_ValueGroupType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DataBufferPtr</span>
@@ -2332,7 +2348,7 @@ This service initializes ADC driver with the group specific result buffer start 
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-adc-getgroupstatus">
-<h3><span class="section-number">5.1.4.4. </span>function Adc_GetGroupStatus<a class="headerlink" href="#function-adc-getgroupstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.4. </span>function Adc_GetGroupStatus<a class="headerlink" href="#function-adc-getgroupstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Adc_StatusType</span><span class="w"> </span><span class="n">Adc_GetGroupStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2362,7 +2378,7 @@ Returns the conversion status of the requested ADC Channel group.</p>
 <p><strong>Return</strong>: Adc_StatusType - Conversion status for the requested group.</p>
 </section>
 <section id="function-adc-getstreamlastpointer">
-<h3><span class="section-number">5.1.4.5. </span>function Adc_GetStreamLastPointer<a class="headerlink" href="#function-adc-getstreamlastpointer" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.5. </span>function Adc_GetStreamLastPointer<a class="headerlink" href="#function-adc-getstreamlastpointer" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Adc_StreamNumSampleType</span><span class="w"> </span><span class="n">Adc_GetStreamLastPointer</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_ValueGroupType</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">PtrToSamplePtr</span>
@@ -2388,7 +2404,7 @@ Returns the number of valid samples per channel, stored in the result buffer.</p
 <p><strong>Return</strong>: Adc_StreamNumSampleType</p>
 </section>
 <section id="function-adc-startgroupconversion">
-<h3><span class="section-number">5.1.4.6. </span>function Adc_StartGroupConversion<a class="headerlink" href="#function-adc-startgroupconversion" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.6. </span>function Adc_StartGroupConversion<a class="headerlink" href="#function-adc-startgroupconversion" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_StartGroupConversion</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2412,7 +2428,7 @@ Starts the conversion of all channels of the requested ADC Channel group.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-stopgroupconversion">
-<h3><span class="section-number">5.1.4.7. </span>function Adc_StopGroupConversion<a class="headerlink" href="#function-adc-stopgroupconversion" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.7. </span>function Adc_StopGroupConversion<a class="headerlink" href="#function-adc-stopgroupconversion" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_StopGroupConversion</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2436,7 +2452,7 @@ Stops the conversion of the requested ADC Channel group.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-readgroup">
-<h3><span class="section-number">5.1.4.8. </span>function Adc_ReadGroup<a class="headerlink" href="#function-adc-readgroup" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.8. </span>function Adc_ReadGroup<a class="headerlink" href="#function-adc-readgroup" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Adc_ReadGroup</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_ValueGroupType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">DataBufferPtr</span>
@@ -2464,7 +2480,7 @@ Reads the group conversion result of the last completed conversion round of the 
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-adc-enablegroupnotification">
-<h3><span class="section-number">5.1.4.9. </span>function Adc_EnableGroupNotification<a class="headerlink" href="#function-adc-enablegroupnotification" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.9. </span>function Adc_EnableGroupNotification<a class="headerlink" href="#function-adc-enablegroupnotification" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_EnableGroupNotification</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2488,7 +2504,7 @@ Enables the notification mechanism for the requested ADC Channel group.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disablegroupnotification">
-<h3><span class="section-number">5.1.4.10. </span>function Adc_DisableGroupNotification<a class="headerlink" href="#function-adc-disablegroupnotification" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.10. </span>function Adc_DisableGroupNotification<a class="headerlink" href="#function-adc-disablegroupnotification" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_DisableGroupNotification</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2512,7 +2528,7 @@ Disables the notification mechanism for the requested ADC Channel group.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-getversioninfo">
-<h3><span class="section-number">5.1.4.11. </span>function Adc_GetVersionInfo<a class="headerlink" href="#function-adc-getversioninfo" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.11. </span>function Adc_GetVersionInfo<a class="headerlink" href="#function-adc-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_GetVersionInfo</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">versioninfo</span>
 <span class="p">)</span>
@@ -2536,7 +2552,7 @@ This service returns the version information of this module.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-registerreadback">
-<h3><span class="section-number">5.1.4.12. </span>function Adc_RegisterReadback<a class="headerlink" href="#function-adc-registerreadback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.12. </span>function Adc_RegisterReadback<a class="headerlink" href="#function-adc-registerreadback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Adc_RegisterReadback</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_HWUnitType</span><span class="w"> </span><span class="n">HWUnit</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
@@ -2564,7 +2580,7 @@ This function reads the important registers of the hardware unit and returns the
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-adc-enablehardwaretrigger">
-<h3><span class="section-number">5.1.4.13. </span>function Adc_EnableHardwareTrigger<a class="headerlink" href="#function-adc-enablehardwaretrigger" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.13. </span>function Adc_EnableHardwareTrigger<a class="headerlink" href="#function-adc-enablehardwaretrigger" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_EnableHardwareTrigger</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2588,7 +2604,7 @@ Enables the hardware trigger for the requested ADC Channel group.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disablehardwaretrigger">
-<h3><span class="section-number">5.1.4.14. </span>function Adc_DisableHardwareTrigger<a class="headerlink" href="#function-adc-disablehardwaretrigger" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.14. </span>function Adc_DisableHardwareTrigger<a class="headerlink" href="#function-adc-disablehardwaretrigger" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_DisableHardwareTrigger</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2612,7 +2628,7 @@ Disables the hardware trigger for the requested ADC Channel group.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-inittemperatureread">
-<h3><span class="section-number">5.1.4.15. </span>function Adc_InitTemperatureRead<a class="headerlink" href="#function-adc-inittemperatureread" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.15. </span>function Adc_InitTemperatureRead<a class="headerlink" href="#function-adc-inittemperatureread" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_InitTemperatureRead</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -2632,7 +2648,7 @@ This service initializes the efuse parameters for temperature calculation. This 
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-readtemperature">
-<h3><span class="section-number">5.1.4.16. </span>function Adc_ReadTemperature<a class="headerlink" href="#function-adc-readtemperature" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.16. </span>function Adc_ReadTemperature<a class="headerlink" href="#function-adc-readtemperature" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_ReadTemperature</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">NumAverages</span><span class="p">,</span>
@@ -2660,7 +2676,7 @@ This service starts temperature conversion, waits for completion and reads the t
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-readtemperatureresult">
-<h3><span class="section-number">5.1.4.17. </span>function Adc_ReadTemperatureResult<a class="headerlink" href="#function-adc-readtemperatureresult" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.17. </span>function Adc_ReadTemperatureResult<a class="headerlink" href="#function-adc-readtemperatureresult" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_ReadTemperatureResult</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_TempSensValueType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">TempValuesPtr</span>
@@ -2687,7 +2703,7 @@ This service reads only the results of the temperature sensors group configured 
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-pollingmainfunction">
-<h3><span class="section-number">5.1.4.18. </span>function Adc_PollingMainFunction<a class="headerlink" href="#function-adc-pollingmainfunction" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.18. </span>function Adc_PollingMainFunction<a class="headerlink" href="#function-adc-pollingmainfunction" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_PollingMainFunction</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -2711,7 +2727,7 @@ This service is used for Polling Group data.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-getreadresultbaseaddress">
-<h3><span class="section-number">5.1.4.19. </span>function Adc_GetReadResultBaseAddress<a class="headerlink" href="#function-adc-getreadresultbaseaddress" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.19. </span>function Adc_GetReadResultBaseAddress<a class="headerlink" href="#function-adc-getreadresultbaseaddress" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Adc_GetReadResultBaseAddress</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2730,7 +2746,7 @@ Returns the HW result register base address.</p>
 <p><strong>Return</strong>: uint32 Result base address</p>
 </section>
 <section id="function-adc-setinterruptcontinuousmode">
-<h3><span class="section-number">5.1.4.20. </span>function Adc_SetInterruptContinuousMode<a class="headerlink" href="#function-adc-setinterruptcontinuousmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.20. </span>function Adc_SetInterruptContinuousMode<a class="headerlink" href="#function-adc-setinterruptcontinuousmode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Adc_SetInterruptContinuousMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_GroupType</span><span class="w"> </span><span class="n">Group</span>
 <span class="p">)</span>
@@ -2749,7 +2765,7 @@ Sets the continue to interrupt mode of ADC.</p>
 <p><strong>Return</strong>: Std_ReturnType. E_OK - success, E_NOT_OK - operation failed</p>
 </section>
 <section id="function-adc-setprescaler">
-<h3><span class="section-number">5.1.4.21. </span>function ADC_setPrescaler<a class="headerlink" href="#function-adc-setprescaler" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.21. </span>function ADC_setPrescaler<a class="headerlink" href="#function-adc-setprescaler" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setPrescaler</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalClkPrescale_t</span><span class="w"> </span><span class="n">clkPrescale</span>
@@ -2772,7 +2788,7 @@ Configures the analog-to-digital converter module prescaler.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setupsoc">
-<h3><span class="section-number">5.1.4.22. </span>function ADC_setupSOC<a class="headerlink" href="#function-adc-setupsoc" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.22. </span>function ADC_setupSOC<a class="headerlink" href="#function-adc-setupsoc" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setupSOC</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">socNumber</span><span class="p">,</span>
@@ -2801,7 +2817,7 @@ Configures a start-of-conversion (SOC) in the ADC.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setinterruptsoctrigger">
-<h3><span class="section-number">5.1.4.23. </span>function ADC_setInterruptSOCTrigger<a class="headerlink" href="#function-adc-setinterruptsoctrigger" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.23. </span>function ADC_setInterruptSOCTrigger<a class="headerlink" href="#function-adc-setinterruptsoctrigger" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptSOCTrigger</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socNumber</span><span class="p">,</span>
@@ -2829,7 +2845,7 @@ Configures the interrupt SOC trigger of an SOC.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setinterruptpulsemode">
-<h3><span class="section-number">5.1.4.24. </span>function ADC_setInterruptPulseMode<a class="headerlink" href="#function-adc-setinterruptpulsemode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.24. </span>function ADC_setInterruptPulseMode<a class="headerlink" href="#function-adc-setinterruptpulsemode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptPulseMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPulseMode_t</span><span class="w"> </span><span class="n">pulseMode</span>
@@ -2852,7 +2868,7 @@ Sets the timing of the end-of-conversion pulse.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setinterruptcycleoffset">
-<h3><span class="section-number">5.1.4.25. </span>function ADC_setInterruptCycleOffset<a class="headerlink" href="#function-adc-setinterruptcycleoffset" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.25. </span>function ADC_setInterruptCycleOffset<a class="headerlink" href="#function-adc-setinterruptcycleoffset" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptCycleOffset</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">cycleOffset</span>
@@ -2876,7 +2892,7 @@ Sets the timing of early interrupt generation.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-enableconverter">
-<h3><span class="section-number">5.1.4.26. </span>function ADC_enableConverter<a class="headerlink" href="#function-adc-enableconverter" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.26. </span>function ADC_enableConverter<a class="headerlink" href="#function-adc-enableconverter" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableConverter</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span>
 <span class="p">)</span>
@@ -2898,7 +2914,7 @@ Powers up the analog-to-digital converter core.</p>
 <p><strong>Note</strong>: Allow at least a 500us delay before sampling after calling this API. If you enable multiple ADCs, you can delay after they all have begun powering up.</p>
 </section>
 <section id="function-adc-disableconverter">
-<h3><span class="section-number">5.1.4.27. </span>function ADC_disableConverter<a class="headerlink" href="#function-adc-disableconverter" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.27. </span>function ADC_disableConverter<a class="headerlink" href="#function-adc-disableconverter" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableConverter</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span>
 <span class="p">)</span>
@@ -2919,7 +2935,7 @@ Powers down the analog-to-digital converter module.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-forcesoc">
-<h3><span class="section-number">5.1.4.28. </span>function ADC_forceSOC<a class="headerlink" href="#function-adc-forcesoc" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.28. </span>function ADC_forceSOC<a class="headerlink" href="#function-adc-forcesoc" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_forceSOC</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalSOCNumber_t</span><span class="w"> </span><span class="n">socNumber</span>
@@ -2942,7 +2958,7 @@ Forces a SOC flag to a 1 in the analog-to-digital converter.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-forcemultiplesoc">
-<h3><span class="section-number">5.1.4.29. </span>function ADC_forceMultipleSOC<a class="headerlink" href="#function-adc-forcemultiplesoc" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.29. </span>function ADC_forceMultipleSOC<a class="headerlink" href="#function-adc-forcemultiplesoc" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_forceMultipleSOC</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socMask</span>
@@ -2966,7 +2982,7 @@ Forces multiple SOC flags to 1 in the analog-to-digital converter.</p>
 <p><strong>Note</strong>: To trigger SOC0, SOC1 and SOC2, value (ADC_FORCE_SOC0 | ADC_FORCE_SOC1 | ADC_FORCE_SOC2) should be passed as socMask.</p>
 </section>
 <section id="function-adc-getinterruptstatus">
-<h3><span class="section-number">5.1.4.30. </span>function ADC_getInterruptStatus<a class="headerlink" href="#function-adc-getinterruptstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.30. </span>function ADC_getInterruptStatus<a class="headerlink" href="#function-adc-getinterruptstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">boolean</span><span class="w"> </span><span class="n">ADC_getInterruptStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -2991,7 +3007,7 @@ Gets the current ADC interrupt status.</p>
 <p><strong>Return</strong>: boolean</p>
 </section>
 <section id="function-adc-clearinterruptstatus">
-<h3><span class="section-number">5.1.4.31. </span>function ADC_clearInterruptStatus<a class="headerlink" href="#function-adc-clearinterruptstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.31. </span>function ADC_clearInterruptStatus<a class="headerlink" href="#function-adc-clearinterruptstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_clearInterruptStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -3014,7 +3030,7 @@ Clears ADC interrupt sources.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-getinterruptoverflowstatus">
-<h3><span class="section-number">5.1.4.32. </span>function ADC_getInterruptOverflowStatus<a class="headerlink" href="#function-adc-getinterruptoverflowstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.32. </span>function ADC_getInterruptOverflowStatus<a class="headerlink" href="#function-adc-getinterruptoverflowstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">boolean</span><span class="w"> </span><span class="n">ADC_getInterruptOverflowStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -3039,7 +3055,7 @@ Gets the current ADC interrupt overflow status.</p>
 <p><strong>Return</strong>: boolean</p>
 </section>
 <section id="function-adc-clearinterruptoverflowstatus">
-<h3><span class="section-number">5.1.4.33. </span>function ADC_clearInterruptOverflowStatus<a class="headerlink" href="#function-adc-clearinterruptoverflowstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.33. </span>function ADC_clearInterruptOverflowStatus<a class="headerlink" href="#function-adc-clearinterruptoverflowstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_clearInterruptOverflowStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -3062,7 +3078,7 @@ Clears ADC interrupt overflow sources.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-readresult">
-<h3><span class="section-number">5.1.4.34. </span>function ADC_readResult<a class="headerlink" href="#function-adc-readresult" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.34. </span>function ADC_readResult<a class="headerlink" href="#function-adc-readresult" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">ADC_readResult</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">resultBase</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">socNumber</span>
@@ -3086,7 +3102,7 @@ Reads the conversion result.</p>
 <p><strong>Note</strong>: Take care that you are using a base address for the result registers (ADCxRESULT_BASE) and not a base address for the control registers.</p>
 </section>
 <section id="function-adc-readresultbaseaddr">
-<h3><span class="section-number">5.1.4.35. </span>function ADC_readResultbaseaddr<a class="headerlink" href="#function-adc-readresultbaseaddr" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.35. </span>function ADC_readResultbaseaddr<a class="headerlink" href="#function-adc-readresultbaseaddr" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">ADC_readResultbaseaddr</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">resultBase</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socNumber</span>
@@ -3110,7 +3126,7 @@ Reads the address of the conversion result register.</p>
 <p><strong>Note</strong>: Take care that you are using a base address for the result registers (ADCxRESULT_BASE) and not a base address for the control registers.</p>
 </section>
 <section id="function-adc-isbusy">
-<h3><span class="section-number">5.1.4.36. </span>function ADC_isBusy<a class="headerlink" href="#function-adc-isbusy" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.36. </span>function ADC_isBusy<a class="headerlink" href="#function-adc-isbusy" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">boolean</span><span class="w"> </span><span class="n">ADC_isBusy</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span>
 <span class="p">)</span>
@@ -3133,7 +3149,7 @@ Determines whether the ADC is busy or not.</p>
 <p><strong>Return</strong>: boolean</p>
 </section>
 <section id="function-adc-setburstmodeconfig">
-<h3><span class="section-number">5.1.4.37. </span>function ADC_setBurstModeConfig<a class="headerlink" href="#function-adc-setburstmodeconfig" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.37. </span>function ADC_setBurstModeConfig<a class="headerlink" href="#function-adc-setburstmodeconfig" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setBurstModeConfig</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalTrigger_t</span><span class="w"> </span><span class="n">trigger</span><span class="p">,</span>
@@ -3158,7 +3174,7 @@ Set SOC burst mode.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-enableburstmode">
-<h3><span class="section-number">5.1.4.38. </span>function ADC_enableBurstMode<a class="headerlink" href="#function-adc-enableburstmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.38. </span>function ADC_enableBurstMode<a class="headerlink" href="#function-adc-enableburstmode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableBurstMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span>
 <span class="p">)</span>
@@ -3179,7 +3195,7 @@ Enables SOC burst mode.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disableburstmode">
-<h3><span class="section-number">5.1.4.39. </span>function ADC_disableBurstMode<a class="headerlink" href="#function-adc-disableburstmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.39. </span>function ADC_disableBurstMode<a class="headerlink" href="#function-adc-disableburstmode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableBurstMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span>
 <span class="p">)</span>
@@ -3200,7 +3216,7 @@ Disables SOC burst mode.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setsocpriority">
-<h3><span class="section-number">5.1.4.40. </span>function ADC_setSOCPriority<a class="headerlink" href="#function-adc-setsocpriority" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.40. </span>function ADC_setSOCPriority<a class="headerlink" href="#function-adc-setsocpriority" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setSOCPriority</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">priMode</span>
@@ -3228,7 +3244,7 @@ Sets the priority mode of the SOCs.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setupppb">
-<h3><span class="section-number">5.1.4.41. </span>function ADC_setupPPB<a class="headerlink" href="#function-adc-setupppb" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.41. </span>function ADC_setupPPB<a class="headerlink" href="#function-adc-setupppb" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setupPPB</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3254,7 +3270,7 @@ Configures a post-processing block (PPB) in the ADC.</p>
 <p><strong>Note</strong>: You can have more that one PPB associated with the same SOC, but a PPB can only be configured to correspond to one SOC at a time. Also note that when you have multiple PPBs for the same SOC, the calibration offset that actually gets applied will be that of the PPB with the highest number. Since SOC0 is the default for all PPBs, look out for unintentional overwriting of a lower numbered PPB’s offset.</p>
 </section>
 <section id="function-adc-enableppbevent">
-<h3><span class="section-number">5.1.4.42. </span>function ADC_enablePPBEvent<a class="headerlink" href="#function-adc-enableppbevent" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.42. </span>function ADC_enablePPBEvent<a class="headerlink" href="#function-adc-enableppbevent" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enablePPBEvent</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3279,7 +3295,7 @@ Enables individual ADC PPB event sources.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disableppbevent">
-<h3><span class="section-number">5.1.4.43. </span>function ADC_disablePPBEvent<a class="headerlink" href="#function-adc-disableppbevent" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.43. </span>function ADC_disablePPBEvent<a class="headerlink" href="#function-adc-disableppbevent" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disablePPBEvent</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3304,7 +3320,7 @@ Disables individual ADC PPB event sources.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-enableppbeventinterrupt">
-<h3><span class="section-number">5.1.4.44. </span>function ADC_enablePPBEventInterrupt<a class="headerlink" href="#function-adc-enableppbeventinterrupt" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.44. </span>function ADC_enablePPBEventInterrupt<a class="headerlink" href="#function-adc-enableppbeventinterrupt" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enablePPBEventInterrupt</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3329,7 +3345,7 @@ Enables individual ADC PPB event interrupt sources.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disableppbeventinterrupt">
-<h3><span class="section-number">5.1.4.45. </span>function ADC_disablePPBEventInterrupt<a class="headerlink" href="#function-adc-disableppbeventinterrupt" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.45. </span>function ADC_disablePPBEventInterrupt<a class="headerlink" href="#function-adc-disableppbeventinterrupt" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disablePPBEventInterrupt</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3354,7 +3370,7 @@ Disables individual ADC PPB event interrupt sources.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-getppbeventstatus">
-<h3><span class="section-number">5.1.4.46. </span>function ADC_getPPBEventStatus<a class="headerlink" href="#function-adc-getppbeventstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.46. </span>function ADC_getPPBEventStatus<a class="headerlink" href="#function-adc-getppbeventstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">ADC_getPPBEventStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span>
@@ -3377,7 +3393,7 @@ Gets the current ADC event status.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-clearppbeventstatus">
-<h3><span class="section-number">5.1.4.47. </span>function ADC_clearPPBEventStatus<a class="headerlink" href="#function-adc-clearppbeventstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.47. </span>function ADC_clearPPBEventStatus<a class="headerlink" href="#function-adc-clearppbeventstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_clearPPBEventStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3402,7 +3418,7 @@ Clears ADC event flags.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-readppbresult">
-<h3><span class="section-number">5.1.4.48. </span>function ADC_readPPBResult<a class="headerlink" href="#function-adc-readppbresult" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.48. </span>function ADC_readPPBResult<a class="headerlink" href="#function-adc-readppbresult" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">sint32</span><span class="w"> </span><span class="n">ADC_readPPBResult</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">resultBase</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span>
@@ -3426,7 +3442,7 @@ Reads the processed conversion result from the PPB.</p>
 <p><strong>Note</strong>: Take care that you are using a base address for the result registers (ADCxRESULT_BASE) and not a base address for the control registers.</p>
 </section>
 <section id="function-adc-getppbdelaytimestamp">
-<h3><span class="section-number">5.1.4.49. </span>function ADC_getPPBDelayTimeStamp<a class="headerlink" href="#function-adc-getppbdelaytimestamp" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.49. </span>function ADC_getPPBDelayTimeStamp<a class="headerlink" href="#function-adc-getppbdelaytimestamp" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">ADC_getPPBDelayTimeStamp</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span>
@@ -3449,7 +3465,7 @@ Reads sample delay time stamp from a PPB.</p>
 <p><strong>Return</strong>: uint16</p>
 </section>
 <section id="function-adc-setppbcalibrationoffset">
-<h3><span class="section-number">5.1.4.50. </span>function ADC_setPPBCalibrationOffset<a class="headerlink" href="#function-adc-setppbcalibrationoffset" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.50. </span>function ADC_setPPBCalibrationOffset<a class="headerlink" href="#function-adc-setppbcalibrationoffset" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setPPBCalibrationOffset</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3476,7 +3492,7 @@ Sets the post processing block offset correction.</p>
 <p><strong>Note</strong>: If multiple PPBs are applied to the same SOC, the offset that will be applied will be that of the PPB with the highest number.</p>
 </section>
 <section id="function-adc-setppbreferenceoffset">
-<h3><span class="section-number">5.1.4.51. </span>function ADC_setPPBReferenceOffset<a class="headerlink" href="#function-adc-setppbreferenceoffset" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.51. </span>function ADC_setPPBReferenceOffset<a class="headerlink" href="#function-adc-setppbreferenceoffset" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setPPBReferenceOffset</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3503,7 +3519,7 @@ Sets the post processing block reference offset.</p>
 <p><strong>Note</strong>: If in 12-bit mode, you may only pass a 12-bit value into the <em>offset</em> parameter.</p>
 </section>
 <section id="function-adc-enableppbtwoscomplement">
-<h3><span class="section-number">5.1.4.52. </span>function ADC_enablePPBTwosComplement<a class="headerlink" href="#function-adc-enableppbtwoscomplement" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.52. </span>function ADC_enablePPBTwosComplement<a class="headerlink" href="#function-adc-enableppbtwoscomplement" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enablePPBTwosComplement</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span>
@@ -3526,7 +3542,7 @@ Enables two’s complement capability in the PPB.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disableppbtwoscomplement">
-<h3><span class="section-number">5.1.4.53. </span>function ADC_disablePPBTwosComplement<a class="headerlink" href="#function-adc-disableppbtwoscomplement" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.53. </span>function ADC_disablePPBTwosComplement<a class="headerlink" href="#function-adc-disableppbtwoscomplement" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disablePPBTwosComplement</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span>
@@ -3549,7 +3565,7 @@ Disables two’s complement capability in the PPB.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-enableppbeventcbcclear">
-<h3><span class="section-number">5.1.4.54. </span>function ADC_enablePPBEventCBCClear<a class="headerlink" href="#function-adc-enableppbeventcbcclear" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.54. </span>function ADC_enablePPBEventCBCClear<a class="headerlink" href="#function-adc-enableppbeventcbcclear" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enablePPBEventCBCClear</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">ppbNumber</span>
@@ -3572,7 +3588,7 @@ Enables cycle-by-cycle clear of ADC PPB event flags.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disableppbeventcbcclear">
-<h3><span class="section-number">5.1.4.55. </span>function ADC_disablePPBEventCBCClear<a class="headerlink" href="#function-adc-disableppbeventcbcclear" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.55. </span>function ADC_disablePPBEventCBCClear<a class="headerlink" href="#function-adc-disableppbeventcbcclear" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disablePPBEventCBCClear</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">ppbNumber</span>
@@ -3595,7 +3611,7 @@ Disables cycle-by-cycle clear of ADC PPB event flags.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-enableinterrupt">
-<h3><span class="section-number">5.1.4.56. </span>function ADC_enableInterrupt<a class="headerlink" href="#function-adc-enableinterrupt" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.56. </span>function ADC_enableInterrupt<a class="headerlink" href="#function-adc-enableinterrupt" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableInterrupt</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -3618,7 +3634,7 @@ Enables an ADC interrupt source.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disableinterrupt">
-<h3><span class="section-number">5.1.4.57. </span>function ADC_disableInterrupt<a class="headerlink" href="#function-adc-disableinterrupt" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.57. </span>function ADC_disableInterrupt<a class="headerlink" href="#function-adc-disableinterrupt" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableInterrupt</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -3641,7 +3657,7 @@ Disables an ADC interrupt source.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setinterruptsource">
-<h3><span class="section-number">5.1.4.58. </span>function ADC_setInterruptSource<a class="headerlink" href="#function-adc-setinterruptsource" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.58. </span>function ADC_setInterruptSource<a class="headerlink" href="#function-adc-setinterruptsource" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptSource</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span><span class="p">,</span>
@@ -3666,7 +3682,7 @@ Sets the source EOC for an analog-to-digital converter interrupt.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-enablecontinuousmode">
-<h3><span class="section-number">5.1.4.59. </span>function ADC_enableContinuousMode<a class="headerlink" href="#function-adc-enablecontinuousmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.59. </span>function ADC_enableContinuousMode<a class="headerlink" href="#function-adc-enablecontinuousmode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableContinuousMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -3689,7 +3705,7 @@ Enables continuous mode for an ADC interrupt.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-disablecontinuousmode">
-<h3><span class="section-number">5.1.4.60. </span>function ADC_disableContinuousMode<a class="headerlink" href="#function-adc-disablecontinuousmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.60. </span>function ADC_disableContinuousMode<a class="headerlink" href="#function-adc-disablecontinuousmode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableContinuousMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">adcIntNum</span>
@@ -3712,7 +3728,7 @@ Disables continuous mode for an ADC interrupt.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setmode">
-<h3><span class="section-number">5.1.4.61. </span>function ADC_setMode<a class="headerlink" href="#function-adc-setmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.61. </span>function ADC_setMode<a class="headerlink" href="#function-adc-setmode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalResolution_t</span><span class="w"> </span><span class="n">resolution</span><span class="p">,</span>
@@ -3737,7 +3753,7 @@ Configures the analog-to-digital converter resolution and signal mode.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-setppbtriplimits">
-<h3><span class="section-number">5.1.4.62. </span>function ADC_setPPBTripLimits<a class="headerlink" href="#function-adc-setppbtriplimits" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.62. </span>function ADC_setPPBTripLimits<a class="headerlink" href="#function-adc-setppbtriplimits" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setPPBTripLimits</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
@@ -3764,7 +3780,7 @@ Sets the windowed trip limits for a PPB.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-utilsinitlinklist">
-<h3><span class="section-number">5.1.4.63. </span>function Adc_utilsInitLinkList<a class="headerlink" href="#function-adc-utilsinitlinklist" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.63. </span>function Adc_utilsInitLinkList<a class="headerlink" href="#function-adc-utilsinitlinklist" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_utilsInitLinkList</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_UtilsLinkListObj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">llobj</span>
 <span class="p">)</span>
@@ -3784,7 +3800,7 @@ Init a link list object.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-utilsdeinitlinklist">
-<h3><span class="section-number">5.1.4.64. </span>function Adc_utilsDeInitLinkList<a class="headerlink" href="#function-adc-utilsdeinitlinklist" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.64. </span>function Adc_utilsDeInitLinkList<a class="headerlink" href="#function-adc-utilsdeinitlinklist" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_utilsDeInitLinkList</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_UtilsLinkListObj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">llobj</span>
 <span class="p">)</span>
@@ -3804,7 +3820,7 @@ De-init a link list object.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-utilslinknodepri">
-<h3><span class="section-number">5.1.4.65. </span>function Adc_utilsLinkNodePri<a class="headerlink" href="#function-adc-utilslinknodepri" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.65. </span>function Adc_utilsLinkNodePri<a class="headerlink" href="#function-adc-utilslinknodepri" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_utilsLinkNodePri</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_UtilsLinkListObj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">llobj</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_UtilsNode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">node</span><span class="p">,</span>
@@ -3833,7 +3849,7 @@ Links a node to the linked list.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-utilsunlinknodepri">
-<h3><span class="section-number">5.1.4.66. </span>function Adc_utilsUnLinkNodePri<a class="headerlink" href="#function-adc-utilsunlinknodepri" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.66. </span>function Adc_utilsUnLinkNodePri<a class="headerlink" href="#function-adc-utilsunlinknodepri" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_utilsUnLinkNodePri</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_UtilsLinkListObj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">llobj</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_UtilsNode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">node</span>
@@ -3855,7 +3871,7 @@ Unlinks the node from the list. Used for the priority link lists.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-utilsinitnodeobject">
-<h3><span class="section-number">5.1.4.67. </span>function Adc_utilsInitNodeObject<a class="headerlink" href="#function-adc-utilsinitnodeobject" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.67. </span>function Adc_utilsInitNodeObject<a class="headerlink" href="#function-adc-utilsinitnodeobject" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Adc_utilsInitNodeObject</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Adc_UtilsNode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">node</span>
 <span class="p">)</span>
@@ -3875,7 +3891,7 @@ Initialize the node object with default value.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-adc-utilsgetheadnode">
-<h3><span class="section-number">5.1.4.68. </span>function Adc_utilsGetHeadNode<a class="headerlink" href="#function-adc-utilsgetheadnode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.1.5.68. </span>function Adc_utilsGetHeadNode<a class="headerlink" href="#function-adc-utilsgetheadnode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Adc_UtilsNode</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Adc_utilsGetHeadNode</span><span class="p">(</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Adc_UtilsLinkListObj</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">llobj</span>
 <span class="p">)</span>

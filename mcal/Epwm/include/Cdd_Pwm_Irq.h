@@ -61,7 +61,7 @@
  */
 
 /**
- *  \ingroup MCAL_CDD_PWM_API
+ *  \ingroup CDD_PWM
  *  \defgroup MCAL_CDD_PWM_IRQ Cdd_Pwm Driver Interrupt Handlers
  *
  *  This file defines the interrupt handlers for all instance of timer/channels
@@ -3694,6 +3694,6 @@ ISR(Cdd_Pwm_G3_TzCh31Isr);
 }
 #endif
 
-#endif /* #ifndef CDD_PWM_IRQ_H_ */
+/** @} */
 
-/* @} */
+#endif /* #ifndef CDD_PWM_IRQ_H_ */

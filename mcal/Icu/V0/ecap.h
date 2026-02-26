@@ -55,7 +55,7 @@
 
 /**
  *  \defgroup DRV_ECAP_MODULE APIs for ECAP
- *  \ingroup DRV_MODULE
+ *  \ingroup ICU
  *
  *  This module contains APIs to program and use the ECAP module.
  *
@@ -63,7 +63,7 @@
  */
 
 /**
- *  \file v2/ecap.h
+ *  \file ecap.h
  *
  *  \brief      This file contains the function prototypes for the device
  *              abstraction layer for ECAP. It also contains some

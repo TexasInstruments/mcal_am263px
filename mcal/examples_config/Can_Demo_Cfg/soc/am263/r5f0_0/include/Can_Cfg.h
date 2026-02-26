@@ -321,9 +321,7 @@ extern const struct Can_MailboxStruct_PC
 }
 #endif
 
-/**
-* @}
-*/
+/** @} */
 
 #endif /*CAN_CFG_H__*/
 

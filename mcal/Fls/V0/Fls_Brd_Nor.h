@@ -127,7 +127,7 @@ typedef enum
 } Fls_JobType;
 
 /**
- * \breif FLS Driver Object, global information used by module.
+ * \brief FLS Driver Object, global information used by module.
  */
 typedef struct
 {
