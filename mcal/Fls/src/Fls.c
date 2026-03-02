@@ -439,6 +439,10 @@ static Std_ReturnType Fls_CheckEraseAddressAlignment(Fls_AddressType eraseStartA
             retVal = (Std_ReturnType)E_NOT_OK;
         }
     }
+    else
+    {
+        /*Do nothing*/
+    }
 
     if ((retVal == (Std_ReturnType)E_OK) && (E_NOT_OK == Fls_CheckValidAddress(eraseStartAddress)))
     {
@@ -469,6 +473,10 @@ static Std_ReturnType Fls_CheckEraseLengthAlignment(Fls_AddressType eraseStartAd
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
+    }
+    else
+    {
+        /*Do nothing*/
     }
 
     if ((retVal == (Std_ReturnType)E_OK) &&
@@ -764,7 +772,15 @@ static Std_ReturnType Fls_DetChekWrite(Fls_AddressType TargetAddress,
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_PARAM_LENGTH);
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-
+#if defined(AM263PX_PLATFORM)
+    /*Check if Fls operating mode is DDR and if length parsed is odd*/
+    if ((retVal == (Std_ReturnType)E_OK) && ((Fls_DrvObj.currentprotocolMode & 0x0F000000U) > 1U) &&
+        ((Length & 1U) != 0U))
+    {
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_PARAM_LENGTH);
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+#endif
     return retVal;
 }
 #endif

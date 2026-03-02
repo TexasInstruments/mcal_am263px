@@ -82,7 +82,11 @@
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
-
+#define MCAL_CSL_ADC_ADCEVTSTAT_PPBXTRIPXX_MASK                                          \
+    (MCAL_CSL_ADC_ADCEVTSTAT_PPB1TRIPHI_MASK | MCAL_CSL_ADC_ADCEVTSTAT_PPB1TRIPLO_MASK | \
+     MCAL_CSL_ADC_ADCEVTSTAT_PPB2TRIPHI_MASK | MCAL_CSL_ADC_ADCEVTSTAT_PPB2TRIPLO_MASK | \
+     MCAL_CSL_ADC_ADCEVTSTAT_PPB3TRIPHI_MASK | MCAL_CSL_ADC_ADCEVTSTAT_PPB3TRIPLO_MASK | \
+     MCAL_CSL_ADC_ADCEVTSTAT_PPB4TRIPHI_MASK | MCAL_CSL_ADC_ADCEVTSTAT_PPB4TRIPLO_MASK)
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -732,14 +736,7 @@ void Adc_IrqTxRx(Adc_HwUnitObjType *hwUnitObj, uint16 InterruptNum, uint8 Soc)
         LimitCheck = (HW_RD_REG16(baseAddr + MCAL_CSL_ADC_ADCEVTSTAT));
 
         /* Check if, Error limits are occured or not.  */
-        if ((MCAL_CSL_ADC_ADCEVTSTAT_PPB1TRIPHI_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB1TRIPHI_MASK)) ||
-            (MCAL_CSL_ADC_ADCEVTSTAT_PPB1TRIPLO_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB1TRIPLO_MASK)) ||
-            (MCAL_CSL_ADC_ADCEVTSTAT_PPB2TRIPHI_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB2TRIPHI_MASK)) ||
-            (MCAL_CSL_ADC_ADCEVTSTAT_PPB2TRIPLO_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB2TRIPLO_MASK)) ||
-            (MCAL_CSL_ADC_ADCEVTSTAT_PPB3TRIPHI_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB3TRIPHI_MASK)) ||
-            (MCAL_CSL_ADC_ADCEVTSTAT_PPB3TRIPLO_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB3TRIPLO_MASK)) ||
-            (MCAL_CSL_ADC_ADCEVTSTAT_PPB4TRIPHI_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB4TRIPHI_MASK)) ||
-            (MCAL_CSL_ADC_ADCEVTSTAT_PPB4TRIPLO_MASK == (LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPB4TRIPLO_MASK)))
+        if ((LimitCheck & MCAL_CSL_ADC_ADCEVTSTAT_PPBXTRIPXX_MASK) > 0U)
         {
             allowFlag = ADC_FALSE;
         }

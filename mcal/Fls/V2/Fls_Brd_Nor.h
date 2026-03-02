@@ -130,6 +130,12 @@ typedef struct
 {
     uint32                 Fls_Mode;
     /* Set Flash Protocol*/
+    uint32                 currentprotocolMode;
+    /**< Protocol for OSPI reading/writing. 32 bit integer with
+     * byte0 -> data lines
+     * byte1 -> addr lines
+     * byte2 -> cmd lines
+     * byte3 -> STR/DTR (0 = STR, 1 = DTR)*/
     Fls_JobEndNotifyType   Fls_JobEndNotification;
     /**<    Mapped to the job end notification routine provided by some upper layer
      *      module, typically the Fee module. */

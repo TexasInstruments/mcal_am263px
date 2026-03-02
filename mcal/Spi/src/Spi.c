@@ -452,52 +452,61 @@ static void Spi_writeIB_tempBuf_update(Spi_ChannelObjType *chObj, const Spi_Data
     if (1U == chObj->bufWidth)
     {
         tempIbPtr8 = ((uint8 *)&chObj->txIb[0U]);
-        for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
+        if (NULL_PTR != DataBufferPtr)
         {
-            if (NULL_PTR != DataBufferPtr)
+            tempBuf8 = (const uint8 *)DataBufferPtr;
+            for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
             {
-                tempBuf8  = (const uint8 *)DataBufferPtr;
-                tempBuf8 += index;
+                tempIbPtr8[index] = tempBuf8[index];
             }
-            else
+        }
+        else
+        {
+            tempBuf8 = ((const uint8 *)&chObj->chCfg.defaultTxData);
+            for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
             {
-                tempBuf8 = ((const uint8 *)&chObj->chCfg.defaultTxData);
+                tempIbPtr8[index] = *tempBuf8;
             }
-            tempIbPtr8[index] = *tempBuf8;
         }
     }
     else if (2U == chObj->bufWidth)
     {
         tempIbPtr16 = ((uint16 *)&chObj->txIb[0U]);
-        for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
+        if (NULL_PTR != DataBufferPtr)
         {
-            if (NULL_PTR != DataBufferPtr)
+            tempBuf16 = (const uint16 *)DataBufferPtr;
+            for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
             {
-                tempBuf16  = (const uint16 *)DataBufferPtr;
-                tempBuf16 += index;
+                tempIbPtr16[index] = tempBuf16[index];
             }
-            else
+        }
+        else
+        {
+            tempBuf16 = ((const uint16 *)&chObj->chCfg.defaultTxData);
+            for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
             {
-                tempBuf16 = ((const uint16 *)&chObj->chCfg.defaultTxData);
+                tempIbPtr16[index] = *tempBuf16;
             }
-            tempIbPtr16[index] = *tempBuf16;
         }
     }
     else
     {
         tempIbPtr32 = ((uint32 *)&chObj->txIb[0U]);
-        for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
+        if (NULL_PTR != DataBufferPtr)
         {
-            if (NULL_PTR != DataBufferPtr)
+            tempBuf32 = (const uint32 *)DataBufferPtr;
+            for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
             {
-                tempBuf32  = (const uint32 *)DataBufferPtr;
-                tempBuf32 += index;
+                tempIbPtr32[index] = tempBuf32[index];
             }
-            else
+        }
+        else
+        {
+            tempBuf32 = ((const uint32 *)&chObj->chCfg.defaultTxData);
+            for (index = 0U; index < chObj->chCfg.maxBufLength; index++)
             {
-                tempBuf32 = ((const uint32 *)&chObj->chCfg.defaultTxData);
+                tempIbPtr32[index] = *tempBuf32;
             }
-            tempIbPtr32[index] = *tempBuf32;
         }
     }
 }

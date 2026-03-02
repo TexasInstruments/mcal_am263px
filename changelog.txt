@@ -1,3 +1,190 @@
+commit dcb07bb8b6af2e3ef65c27504ea101d5b7329013
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Mon Mar 2 22:02:58 2026 +0530
+
+    all: script: reorganize cicd scripts
+    
+    - enable sbl test for am261x
+    - move cfgs to device folder
+    - improve regression prints to have module and sescription
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal/Adc/V0/Adc_Priv.c                             |  15 +-
+ mcal/Adc/V0/Adc_Utils.c                            |   4 +-
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c                     |  14 +-
+ mcal/Fls/V2/Fls_Ospi.c                             |   2 +-
+ mcal_misc/scripts/cicd/am261x/test_urls.cfg        |  11 ++
+ mcal_misc/scripts/cicd/am263px/test_urls.cfg       |  16 ++
+ mcal_misc/scripts/cicd/am263x/test_urls.cfg        |  12 ++
+ mcal_misc/scripts/cicd/test_result_compare.py      |  77 ++++++--
+ mcal_misc/scripts/cicd/test_result_validator.sh    | 111 +++++------
+ mcal_test/adc_test/testInput/adcTestCases.h        |  72 +++----
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   |  32 ++-
+ .../adc_test/testLib/adcTestNegativeTestCase.c     | 214 +++++++++------------
+ 12 files changed, 311 insertions(+), 269 deletions(-)
+
+commit b46ffad659adf333a9683dae8fac1ae85bc68c7f
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Mon Mar 2 08:28:11 2026 +0530
+
+    all: script: kw log fixes
+    
+    - redirect error logs to console
+    
+    Fixes: MCAL-36318
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/mcal_kw_build.sh | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit a800142032e5f836e48066ab4446a79c0b87d35c
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Mar 2 09:30:22 2026 +0530
+
+    all: Port: Code coverage for Port Module
+    
+    - Add fault injection for PORT_E_HARDWARE_ERROR paths via weak registerReadWrite_local override
+    
+    - Make registerReadWrite_local weak in sys_common.h/.c for am261/am263/am263px platforms
+    
+    - Add config_12 to MODULE_COVERAGE_CONFIG_LIST in build makefile
+    
+    - Add branch/MC-DC coverage tests for Port_Priv.c in config_91 negative test cases
+    
+    - Add coverage tests for Port_GpioPinNotificationISR, Port_PinDisableIntrNotification in config_12
+    
+    Fixes: MCAL-35542
+    
+    Signed-off-by: <Akash Verma>
+
+ mcal/examples/Utils/sys_common.c                   |  15 +-
+ mcal_test/port_test/Makefile                       |   5 +
+ mcal_test/port_test/build/makefile                 |   2 +-
+ mcal_test/port_test/testInput/portTestCases.h      |  14 ++
+ mcal_test/port_test/testLib/portTest.h             |  27 +++
+ mcal_test/port_test/testLib/portTestCommon.c       |  49 +++++
+ mcal_test/port_test/testLib/portTestMainTestCase.c |  35 +++
+ .../port_test/testLib/portTestNegativeTestCase.c   | 244 +++++++++++++++++++--
+ .../Port/soc/am261/r5f0_0/config_91/Port_PBcfg.c   |  63 ++++++
+ .../Port/soc/am263/r5f0_0/config_91/Port_PBcfg.c   |  68 ++++++
+ .../Port/soc/am263px/r5f0_0/config_91/Port_PBcfg.c |  70 +++++-
+ 11 files changed, 566 insertions(+), 26 deletions(-)
+
+commit c6408c2a5fa2b428eae0f066b962e9dbba0ba69c
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Thu Feb 5 17:39:49 2026 +0530
+
+    all: adc: improve dynamic coverage
+    
+     - Added test case to improve coverage with CLANG
+    
+    Fixes: MCAL-35531
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal/Adc/V0/Adc_Platform.h                         | 610 +--------------------
+ mcal/Adc/V0/Adc_Priv.c                             |  18 +-
+ mcal/Adc/V0/Adc_Utils.c                            |  26 +-
+ mcal_test/adc_test/build/makefile                  |   2 +-
+ mcal_test/adc_test/testInput/adcTestCases.h        | 241 +++++++-
+ mcal_test/adc_test/testLib/adcTest.h               |  13 +
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   | 122 ++++-
+ .../adc_test/testLib/adcTestNegativeTestCase.c     | 460 +++++++++++++++-
+ 8 files changed, 847 insertions(+), 645 deletions(-)
+
+commit 399b7783a7caec4d80d1a164fabe2fe522b24271
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Mar 2 10:27:32 2026 +0530
+
+    all: all: Updating KW version to 25.2
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/docker_epsw/kw/Dockerfile    | 58 +++++++++++++-------------
+ mcal_misc/scripts/docker_epsw/kw/docker_run.sh |  2 +-
+ mcal_misc/scripts/docker_epsw/kw/run_kw.sh     |  2 +-
+ 3 files changed, 31 insertions(+), 31 deletions(-)
+
+commit 9ffdee82d72d82cfee4a044cee997a4a16cd7199
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sun Mar 1 22:17:51 2026 +0530
+
+    all: all: Adding improvemnets to coverage infra
+    
+    -Added infra to generate lcov file
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/makefile_common.mk | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 3f5a98e502e00f49e1d9c9844d56696110a23379
+Author: Akash <a-verma3@ti.com>
+Date:   Thu Feb 26 16:29:48 2026 +0530
+
+    am263: port/spi: Removed port from am263x
+    
+    - Removed port from makefile as of now, since build is failing for am263x in jenkin, wiil debug and add later
+    
+    - Added spi Klockwork max nested fix
+    
+    Fixes: MCAL-36318
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Spi/src/Spi.c | 51 ++++++++++++++++++++++++++++++---------------------
+ mcal_test/makefile |  2 +-
+ 2 files changed, 31 insertions(+), 22 deletions(-)
+
+commit 5c54f861d43f262ab75d4efb2da43dd13c34e667
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Feb 26 14:46:27 2026 +0530
+
+    all: Fls: KW fixes
+    
+    Fixes: MCAL-32405, MCAL-35541
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c | 10 ++++------
+ mcal/Fls/V2/Fls_Ospi.c         | 24 +++++++++---------------
+ mcal/Fls/src/Fls.c             |  8 ++++++++
+ 3 files changed, 21 insertions(+), 21 deletions(-)
+
+commit f40b220b3559e3ac38c7092c7328b142fc74953c
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Feb 25 10:40:43 2026 +0530
+
+    am263px/am261x: Fls: Adding 2byte DAC write support
+    
+    -FLS DAC writes had support for write length as 4n, DDR modes support 2byte writes and this was not supported earlier
+    
+    -DAC write now check for mode and supports 2byte write
+    
+    -Fls write API DET check added for odd lengths when fls mode is DDR
+    
+    Fixes: MCAL-35984
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor.h                        |  6 ++
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c                   |  1 +
+ mcal/Fls/V2/Fls_Ospi.c                           | 92 +++++++++++++++---------
+ mcal/Fls/src/Fls.c                               | 10 ++-
+ mcal_test/fls_test/testInput/flsTestCases_ospi.h |  2 +-
+ mcal_test/fls_test/testLib/flsTestMainTestCase.c | 32 +--------
+ mcal_test/fls_test/testLib/flsTestParser.c       |  2 +
+ release_notes.md                                 |  8 +++
+ 8 files changed, 87 insertions(+), 66 deletions(-)
+
 commit 89605e532f8aa8fd1b70f131ceb1d7c0f874c4c4
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Thu Feb 26 11:39:39 2026 +0530

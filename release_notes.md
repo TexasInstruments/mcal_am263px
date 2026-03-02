@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 11.02.00 done on 27-Feb-2026.
+This is the release notes for MCAL AM26xx 11.02.00 done on 03-Mar-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -278,6 +278,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>The Fls_Config_SFDP_1 structure in CFG files is writable and is now placed in SEC_VAR_INIT_UNSPECIFIED section</td>
+    </tr>
+    <tr>
+      <td>MCAL-35984</td>
+      <td>Fls Write API causes issue for write sizes less than 4 byte</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>FLS DAC write now supports 2-byte writes, additional checks have been added to report DET when trying to write odd number of bytes in DDR modes</td>
     </tr>
     <tr>
       <td>MCAL-35747</td>

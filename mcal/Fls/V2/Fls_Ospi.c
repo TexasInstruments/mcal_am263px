@@ -650,6 +650,7 @@ Std_ReturnType Fls_Ospi_writeDirect(OSPI_Handle handle, const OSPI_Transaction *
     uint8         *pDst;
     uint32         addrOffset, remainSize, size, i;
     uint32         wrWord;
+    uint16         wrHalfWord;
     uint8          wrByte;
 
     addrOffset = trans->addrOffset;
@@ -671,12 +672,26 @@ Std_ReturnType Fls_Ospi_writeDirect(OSPI_Handle handle, const OSPI_Transaction *
     }
     if (retVal == E_OK)
     {
-        /* Transfer the remaining data in 8-bit size */
-        for (i = 0; i < remainSize; i++)
+        /* Check if DDR mode - requires minimum 16-bit writes */
+        if ((Fls_DrvObj.currentprotocolMode & 0x0F000000U) > 1U)
         {
-            wrByte = HW_RD_REG8(pSrc + size + i);
-            HW_WR_REG8(pDst + size + i, wrByte);
-            retVal = Nor_OspiWaitDAC(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
+            /* DDR mode: Use 16-bit writes for remaining 2-byte chunks */
+            if (remainSize == 2U)
+            {
+                wrHalfWord = HW_RD_REG16(pSrc + size);
+                HW_WR_REG16(pDst + size, wrHalfWord);
+                retVal = Nor_OspiWaitDAC(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
+            }
+        }
+        else
+        {
+            /* SDR mode: Transfer the remaining data in 8-bit size */
+            for (i = 0; i < remainSize; i++)
+            {
+                wrByte = HW_RD_REG8(pSrc + size + i);
+                HW_WR_REG8(pDst + size + i, wrByte);
+                retVal = Nor_OspiWaitDAC(handle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
+            }
         }
     }
     return retVal;
@@ -1207,96 +1222,98 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
 {
     Std_ReturnType retVal = E_OK;
     uint32         cmd, data, addr, dtr;
-    dtr                          = 0;
-    Fls_OSPI_Modes protocol_mode = FLS_OSPI_RX_1S_1S_1S;
+    dtr = 0;
 
-    if ((protocol >= (uint32)FLS_OSPI_RX_1S_1S_1S) && (protocol <= (uint32)FLS_OSPI_RX_8D_8D_8D))
+    switch (protocol)
     {
-        protocol_mode = (Fls_OSPI_Modes)protocol;
-    }
-
-    switch (protocol_mode)
-    {
-        case FLS_OSPI_RX_1S_1S_1S:
+        case (uint32)FLS_OSPI_RX_1S_1S_1S:
             /*Set cmd, address, data and dtr*/
-            cmd  = 0;
-            addr = 0;
-            data = 0;
+            cmd                            = 0;
+            addr                           = 0;
+            data                           = 0;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(1, 1, 1, dtr);
             Fls_Ospi_setXferOpCodes(handle, Fls_Config_SFDP_Ptr->protos.cmdRd, Fls_Config_SFDP_Ptr->protos.cmdWr);
             break;
 
-        case FLS_OSPI_RX_1S_1S_2S:
+        case (uint32)FLS_OSPI_RX_1S_1S_2S:
             /*Set cmd, address, data and dtr*/
-            cmd  = 0;
-            addr = 0;
-            data = 1;
+            cmd                            = 0;
+            addr                           = 0;
+            data                           = 1;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(1, 1, 2, dtr);
             break;
 
-        case FLS_OSPI_RX_1S_1S_4S:
+        case (uint32)FLS_OSPI_RX_1S_1S_4S:
             /* Set Quad Enable Bit. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
-            cmd  = 0;
-            addr = 0;
-            data = 2;
+            cmd                            = 0;
+            addr                           = 0;
+            data                           = 2;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(1, 1, 4, dtr);
             /* Set QE bit */
             retVal += Nor_OspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
 
-        case FLS_OSPI_RX_1S_1S_8S:
+        case (uint32)FLS_OSPI_RX_1S_1S_8S:
             /* Set Octal Enable Bit. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
-            cmd  = 0;
-            addr = 0;
-            data = 3;
+            cmd                            = 0;
+            addr                           = 0;
+            data                           = 3;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(1, 1, 8, dtr);
             /* Set OE bit */
             retVal += Nor_OspiSetOeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
 
-        case FLS_OSPI_RX_4S_4S_4S:
+        case (uint32)FLS_OSPI_RX_4S_4S_4S:
             /* Set Quad Enable Bit. Set 444 mode. Set commands, mode and dummy cycle if needed.
              * In case of DTR, enable that too*/
             /*Set cmd, address, data and dtr*/
-            cmd  = 2;
-            addr = 2;
-            data = 2;
+            cmd                            = 2;
+            addr                           = 2;
+            data                           = 2;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(4, 4, 4, dtr);
             /* Set QE bit */
             retVal += Nor_OspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             /* Set 444 mode */
             retVal += Fls_set444mode(handle, Fls_Config_SFDP_Ptr->protos.enableSeq);
             break;
-        case FLS_OSPI_RX_4S_4D_4D:
+        case (uint32)FLS_OSPI_RX_4S_4D_4D:
             /* Set Quad Enable Bit. Set 444 mode. Set commands, mode and dummy cycle if needed.
              * In case of DTR, enable that too*/
             /*Set cmd, address, data and dtr*/
-            cmd  = 2;
-            addr = 2;
-            data = 2;
-            dtr  = 1;
+            cmd                            = 2;
+            addr                           = 2;
+            data                           = 2;
+            dtr                            = 1;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(4, 4, 4, dtr);
             /* Set QE bit */
             retVal += Nor_OspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             /* Set 444 mode */
             retVal += Fls_set444mode(handle, Fls_Config_SFDP_Ptr->protos.enableSeq);
             break;
 
-        case FLS_OSPI_RX_8S_8S_8S:
+        case (uint32)FLS_OSPI_RX_8S_8S_8S:
             /* Set Octal Enable Bit. Set 888 mode. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
-            cmd  = 3;
-            addr = 3;
-            data = 3;
+            cmd                            = 3;
+            addr                           = 3;
+            data                           = 3;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(8, 8, 8, dtr);
             /* Set OE bit */
             retVal = Nor_OspiSetOeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             /* Set 888 mode */
             retVal += Fls_set888mode(handle, Fls_Config_SFDP_Ptr->protos.enableSeq);
             break;
 
-        case FLS_OSPI_RX_8D_8D_8D:
+        case (uint32)FLS_OSPI_RX_8D_8D_8D:
             /* Set Octal Enable Bit. Set 888 mode. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
-            cmd  = 3;
-            addr = 3;
-            data = 3;
-            dtr  = 1;
+            cmd                            = 3;
+            addr                           = 3;
+            data                           = 3;
+            dtr                            = 1;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(8, 8, 8, dtr);
             /* Set OE bit */
             retVal = Nor_OspiSetOeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             /* Set 888 mode */
@@ -1305,9 +1322,10 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
 
         default:
             /*Set cmd, address, data and dtr*/
-            cmd  = 0;
-            addr = 0;
-            data = 0;
+            cmd                            = 0;
+            addr                           = 0;
+            data                           = 0;
+            Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(cmd, addr, data, dtr);
             Fls_Ospi_setXferOpCodes(handle, Fls_Config_SFDP_Ptr->protos.cmdRd, Fls_Config_SFDP_Ptr->protos.cmdWr);
             break;
     }

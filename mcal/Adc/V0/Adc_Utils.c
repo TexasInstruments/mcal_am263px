@@ -160,6 +160,7 @@ static void Adc_utilsLinkDoublePri(Adc_UtilsLinkListObj *llobj, Adc_UtilsNode *n
                                    Adc_GroupPriorityType priority, uint32 isPaused)
 {
     Adc_UtilsNode *curNode, *prevNode;
+    boolean        exitLoop = FALSE;
 
     node->data     = data;
     node->priority = priority;
@@ -167,24 +168,29 @@ static void Adc_utilsLinkDoublePri(Adc_UtilsLinkListObj *llobj, Adc_UtilsNode *n
     prevNode = (Adc_UtilsNode *)NULL_PTR;
     /* Add to the list based on priority */
     curNode = llobj->headNode;
-    while (NULL_PTR != curNode)
+    while ((NULL_PTR != curNode) && (exitLoop == FALSE))
     {
         /* Condition 1: Nodes with the same priority are added to the bottom
-         * of the existing nodes with same priority. So break only if
+         * of the existing nodes with same priority. So exit only if
          * priority is high
          * Condition 2: Nodes with the same priority are added to the top
-         * of the existing nodes with same priority. So break if
+         * of the existing nodes with same priority. So exit if
          * priority is high or same
          */
-        if ((((uint32)ADC_FALSE == isPaused) && (priority > curNode->priority)) ||
-            (((uint32)ADC_TRUE == isPaused) && (priority >= curNode->priority)))
+        if (((uint32)ADC_FALSE == isPaused) && (priority > curNode->priority))
         {
-            break;
+            exitLoop = TRUE;
         }
-
-        /* Move to next node */
-        prevNode = curNode;
-        curNode  = curNode->next;
+        else if (((uint32)ADC_TRUE == isPaused) && (priority >= curNode->priority))
+        {
+            exitLoop = TRUE;
+        }
+        else
+        {
+            /* Move to next node */
+            prevNode = curNode;
+            curNode  = curNode->next;
+        }
     }
 
     /* Add the node between current and previous nodes */
