@@ -631,7 +631,7 @@ Fls_Compare(Fls_AddressType SourceAddress, const uint8 *TargetAddressPtr, Fls_Le
  *
  * Reentrancy        : Non-Reentrant
  *
- * \param[in] Address - Source address in flash memory. This address offset will be added to the
+ * \param[in] TargetAddress - Source address in flash memory. This address offset will be added to the
  *flash memory base address.
  * \param[in] Length - Number of bytes to compare
  * \return Std_ReturnType
@@ -640,7 +640,7 @@ Fls_Compare(Fls_AddressType SourceAddress, const uint8 *TargetAddressPtr, Fls_Le
  *
  *****************************************************************************/
 #if (STD_ON == FLS_BLANK_CHECK_API)
-FUNC(Std_ReturnType, FLS_CODE) Fls_BlankCheck(Fls_AddressType Address, Fls_LengthType Length);
+FUNC(Std_ReturnType, FLS_CODE) Fls_BlankCheck(Fls_AddressType TargetAddress, Fls_LengthType Length);
 #endif
 
 /** \brief Returns the driver state.

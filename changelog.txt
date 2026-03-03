@@ -1,3 +1,58 @@
+commit 3b79df7985dbe4c1e9d155e2387aacb07709f17d
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Tue Mar 3 07:44:46 2026 +0530
+
+    all: script: cicd print improvements
+    
+    - increase regression print limit
+    - add better prints for commid id
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/cicd/test_result_compare.py | 28 +++++++++++++--------------
+ 1 file changed, 14 insertions(+), 14 deletions(-)
+
+commit 8b7736d8c5ef03df7191e1b254a6141cdf63a3ed
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Mar 2 20:50:59 2026 +0530
+
+    all: all: Fixing new KW issues
+    
+    -For rules : MISRA.FUNC.PARAMS.IDENT, MISRA.MACRO_ARG.EXPRESSION.2012 across modules
+    
+    Fixes: MCAL-36360
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Can/V0/Can_Mcan.c                |  3 +-
+ mcal/Can/V0/Can_Priv.h                | 22 +++++------
+ mcal/Can/V0/mcan.h                    |  4 +-
+ mcal/Epwm/include/Cdd_Pwm.h           |  9 +++--
+ mcal/Eth/src/cpsw/Eth_Priv.c          |  2 +-
+ mcal/Fls/V2/Fls_Brd_Nor.h             |  4 +-
+ mcal/Fls/include/Fls.h                |  4 +-
+ mcal/FsiRx/V0/Cdd_FsiRx_Priv.h        |  2 +-
+ mcal/FsiTx/V0/Cdd_FsiTx_Platform.h    |  2 +-
+ mcal/Gpt/include/Gpt.h                |  4 +-
+ mcal/Icu/V0/Icu_Priv.h                |  6 +--
+ mcal/Icu/V0/ecap.h                    |  2 +-
+ mcal/Ipc/include/ipc_rpmsg_lld.h      |  6 +--
+ mcal/Ipc/include/ipc_rpmsg_lld_priv.h | 22 +++++------
+ mcal/Ipc/src/ipc_rpmsg_lld.c          |  2 +-
+ mcal/Mcu/V0/Mcu_Priv.h                | 52 ++++++++++++------------
+ mcal/Mcu/V2/Mcu_Priv.h                | 74 +++++++++++++++++------------------
+ mcal/Mcu/V3/Mcu_Priv.h                | 44 ++++++++++-----------
+ mcal/Port/V0/Port_Priv.h              |  2 +-
+ mcal/Pwm/include/Pwm.h                |  9 +++--
+ mcal/Uart/include/Cdd_Uart.h          | 32 +++++++--------
+ mcal/include/hw/am261/sys_common.h    |  2 +-
+ mcal/include/hw/am263/sys_common.h    |  2 +-
+ mcal/include/hw/am263px/sys_common.h  |  2 +-
+ mcal/include/hw/hw_types.h            |  2 +-
+ 25 files changed, 157 insertions(+), 158 deletions(-)
+
 commit dcb07bb8b6af2e3ef65c27504ea101d5b7329013
 Author: Sivaraj R <sivaraj@ti.com>
 Date:   Mon Mar 2 22:02:58 2026 +0530

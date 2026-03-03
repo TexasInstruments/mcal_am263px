@@ -1612,11 +1612,11 @@ uint32 MCAN_txBufCancellationStatus(uint32 baseAddr);
  * \brief   This API is used to enable Tx Buffer Transmission Interrupt.
  *
  * \param   baseAddr        Base Address of the MCAN Registers.
- * \param   bufNum          Buffer number for which interrupt is to enable.
+ * \param   InterruptMask          Buffer number for which interrupt is to enable.
  *
  * \return  None
  */
-void MCAN_txBufTransIntrEnable(uint32 baseAddr, uint32 bufNum);
+void MCAN_txBufTransIntrEnable(uint32 baseAddr, uint32 InterruptMask);
 /**
  * \brief   This API add clock stop request for MCAN module to put it in
  *          power down mode.

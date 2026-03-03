@@ -57,7 +57,7 @@ title: CAN MCAN Driver Implementation
 | void | **[Can_mcanSetUpController](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetupcontroller)**(uint32 baseAddr)|  |
 | void | **[Can_mcanMsgRAMConfigInit](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcanmsgramconfiginit)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * canFDMsgRamConfig)|  |
 | void | **[Can_mcanSetUpMSGRAM](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetupmsgram)**([Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, const [Can_MailboxObjType](../Classes/struct_can___mailbox_obj_type.md) * canMailbox, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 maxMbCnt)|  |
-| void | **[Can_mcanSetUpTxMailbox](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuptxmailbox)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canControllerCfg, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 htrh)|  |
+| void | **[Can_mcanSetUpTxMailbox](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuptxmailbox)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, [Can_ControllerObjType](../Classes/struct_can___controller_obj_type.md) * canController, [Can_MailboxObjTxType](../Classes/struct_can___mailbox_obj_tx_type.md) * canTxMessageObj, uint32 htrh)|  |
 | void | **[Can_mcanSetUpRxMailbox](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuprxmailbox)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh)|  |
 | void | **[Can_mcanSetUpRxMailboxBuf](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuprxmailboxbuf)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)|  |
 | void | **[Can_mcanSetUpRxMailboxStdIdFifo](../Modules/group___c_a_n___m_c_a_n.md#function-can_mcansetuprxmailboxstdidfifo)**([Can_FdMsgRAMConfigObjType](../Classes/struct_can___fd_msg_r_a_m_config_obj_type.md) * msgRamConfig, const [Can_MailboxType](../Classes/struct_can___mailbox_type.md) * mailboxCfg, uint32 htrh, uint32 hwFilterIdx)|  |
@@ -154,7 +154,7 @@ void Can_mcanSetUpMSGRAM(
 void Can_mcanSetUpTxMailbox(
     Can_FdMsgRAMConfigObjType * msgRamConfig,
     const Can_MailboxType * mailboxCfg,
-    Can_ControllerObjType * canControllerCfg,
+    Can_ControllerObjType * canController,
     Can_MailboxObjTxType * canTxMessageObj,
     uint32 htrh
 )

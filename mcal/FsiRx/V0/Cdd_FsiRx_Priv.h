@@ -157,7 +157,7 @@ Std_ReturnType CddFsiRx_hwUnitDeInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj);
 void           CddFsiRx_resetDrvObj(CddFsiRx_DriverObjType *drvObj);
 void           CddFsiRx_copyConfig(CddFsiRx_DriverObjType *drvObj, const Cdd_FsiRx_ConfigType *cfgPtr);
 void           CddFsiRx_Receive(Cdd_FsiRx_HwUnitObjType *hwUnitObj);
-void           CddFsiRx_IrqRx(Cdd_FsiRx_HwUnitObjType *hwUnitObj, uint16 evntflag);
+void           CddFsiRx_IrqRx(Cdd_FsiRx_HwUnitObjType *hwUnitObj, uint16 flag);
 Std_ReturnType CddFsiRx_ClearResetRxSubModules(const Cdd_FsiRx_HwUnitObjType *hwUnitObj,
                                                Cdd_FsiRx_ResetSubModuleType   subModule);
 Std_ReturnType CddFsiRx_ResetRxSubModules(const Cdd_FsiRx_HwUnitObjType *hwUnitObj,

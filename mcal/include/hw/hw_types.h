@@ -386,7 +386,7 @@ void HW_WR_REG8_RAW(uint32 addr, uint8 value);
 static inline
 #endif
 void HW_WR_FIELD32_RAW(uint32 addr,
-                                     uint32 Mask,
+                                     uint32 mask,
                                      uint32 shift,
                                      uint32 value);
 

@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 11.02.00 done on 03-Mar-2026.
+This is the release notes for MCAL AM26xx 11.02.00.10 done on 03-Mar-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing

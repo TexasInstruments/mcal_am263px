@@ -134,7 +134,7 @@ extern "C" {
 #define PORT_GET_REG_INDEX(PinNum) (uint32)(((PinNum) >> PORT_PINS_PER_REG_SHIFT))
 
 /** \brief Returns the Pin Bit Position based on pin number and register id */
-#define PORT_GET_REG_BIT_POS(PinNum, PinBankRegID) (uint32)(((PinNum) - (PinBankRegID * 32U)))
+#define PORT_GET_REG_BIT_POS(PinNum, PinBankRegID) (uint32)(((PinNum) - ((PinBankRegID) * 32U)))
 
 /** \Port bank mask value */
 #define PORT_BANK_MASK (0x0000FFFFU)

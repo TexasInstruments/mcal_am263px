@@ -59,7 +59,7 @@
 static inline sint32 RPMessage_lld_init_Copy_Values(RPMessageLLD_Handle hRpMsg);
 static inline sint32 RPMessage_lld_init_Enable_Core(RPMessageLLD_Handle hRpMsg);
 static sint32  RPMessage_lld_init_lldInitParamsCheck(RPMessageLLD_Handle hRpMsg, RPMessageLLD_InitHandle hRpMsgInit,
-                                                     sint32 status);
+                                                     sint32 value);
 static sint32  RPMessage_lld_ParamsCheck(RPMessageLLD_InitHandle hRpMsgInit, sint32 value);
 static boolean RPMessage_getEndPtMsg_timeoutCheck(RPMessage_Struct *epObj, sint32 *status, boolean done,
                                                   uint32 startTime, uint32 timeout);

@@ -177,7 +177,7 @@ Values that can be passed to ECAP_selectQualPeriod() as the _mode_ parameter.
 | void | **[ICU_ECAP_intrDisable](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_intrdisable)**(uint32 baseAddr, uint32 flag)| This function disables the specified interrupts.  |
 | uint32 | **[ICU_ECAP_getIntrStatus](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_getintrstatus)**(uint32 baseAddr, uint32 flag)| This function returns the status specified interrupts.  |
 | void | **[ICU_ECAP_intrStatusClear](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_intrstatusclear)**(uint32 baseAddr, uint32 flag)| This function clears of the status specified interrupts.  |
-| void | **[ICU_ECAP_setEmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setemulationmode)**(uint32 baseAddr, [ECAP_EmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_emulationmode) srcSelect)|  |
+| void | **[ICU_ECAP_setEmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setemulationmode)**(uint32 baseAddr, [ECAP_EmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_emulationmode) mode)|  |
 | void | **[ICU_ECAP_selectQualPeriod](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_selectqualperiod)**(uint32 baseAddr, [ECAP_QualPeriodSelect](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_qualperiodselect) width)|  |
 | void | **[ICU_ECAP_setSyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setsyncinpulsesource)**(uint32 base, [ECAP_SyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_syncinpulsesource) source)|  |
 
@@ -663,7 +663,7 @@ This function clears of the status specified interrupts.
 ```
 void ICU_ECAP_setEmulationMode(
     uint32 baseAddr,
-    ECAP_EmulationMode srcSelect
+    ECAP_EmulationMode mode
 )
 ```
 

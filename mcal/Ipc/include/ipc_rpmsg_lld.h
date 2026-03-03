@@ -642,15 +642,15 @@ sint32 RPMessage_lld_waitForLinuxReady(RPMessageLLD_Handle hRpMsg, uint32 timeou
  *
  * \return E_OK on success, else failure.
  */
-Std_ReturnType RPMessage_lld_construct(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *obj,
+Std_ReturnType RPMessage_lld_construct(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObject,
                                        const RPMessage_CreateParams *createParam);
 
 /**
  * \brief Delete a previously created RPMessage object
  *
- * \param obj [in] object
+ * \param epObject [in] object
  */
-void RPMessage_lld_destruct(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *obj);
+void RPMessage_lld_destruct(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObject);
 
 /**
  * \brief Announce a local end point at which a `service` is created to a remote core

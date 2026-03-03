@@ -604,14 +604,14 @@ Cdd_Pwm_EnableNotification(Cdd_Pwm_ChannelType ChannelParameter, Cdd_Pwm_Interru
  *
  * Reentrancy - Non Reentrant
  *
- * \param[out] versioninfo - Pointer to where to store the version information
+ * \param[out] VersionInfoPtr - Pointer to where to store the version information
  * of this module.
  * \return None
  * \retval None
  *
  *****************************************************************************/
 FUNC(void, CDD_PWM_CODE)
-Cdd_Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_PWM_APPL_DATA) versioninfo);
+Cdd_Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_PWM_APPL_DATA) VersionInfoPtr);
 #endif /*#if (STD_ON == CDD_PWM_VERSION_INFO_API)*/
 
 /*===============================================================================================*/
@@ -628,7 +628,7 @@ Cdd_Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_PWM_APPL_DATA) 
  *
  * Reentrancy - Non Reentrant
  *
- * \param[in] ChannelNumber - configured channel number
+ * \param[in] Cdd_PwmChannel - configured channel number
  * \param[in] RegRbPtr
  * \return Std_ReturnType
  * \retval E_OK - Register read back has been done successfully
@@ -636,7 +636,8 @@ Cdd_Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_PWM_APPL_DATA) 
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_RegisterReadback(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_RegisterReadbackType *RegRbPtr);
+Cdd_Pwm_RegisterReadback(Cdd_Pwm_ChannelType Cdd_PwmChannel,
+                         P2VAR(Cdd_Pwm_RegisterReadbackType, AUTOMATIC, CDD_PWM_APPL_DATA) RegRbPtr);
 #endif /*#if(STD_ON == CDD_PWM_REGISTER_READBACK_API)*/
 
 /*===============================================================================================*/

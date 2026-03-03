@@ -122,8 +122,8 @@ title: Epwm API GUIDE Header file
 | Cdd_Pwm_ReturnType | **[Cdd_Pwm_SetRelativeThreshold](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setrelativethreshold)**(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_ValueType RelativeValue)| Function to set the value of the channel threshold relative to the current value of the counter.  |
 | void | **[Cdd_Pwm_DisableNotification](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_disablenotification)**(Cdd_Pwm_ChannelType ChannelNumber)| Function to disable the PWM signal edge notification.  |
 | void | **[Cdd_Pwm_EnableNotification](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_enablenotification)**(Cdd_Pwm_ChannelType ChannelParameter, Cdd_Pwm_InterruptType EdgeInterruptSource)| Function to enable the PWM signal edge notification according to notification parameter.  |
-| void | **[Cdd_Pwm_GetVersionInfo](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_getversioninfo)**(Std_VersionInfoType * versioninfo)| Function to return the version information of this module.  |
-| Std_ReturnType | **[Cdd_Pwm_RegisterReadback](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_registerreadback)**(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_RegisterReadbackType * RegRbPtr)| Function to read the important registers of the hardware unit and returns the value in the structure.  |
+| void | **[Cdd_Pwm_GetVersionInfo](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_getversioninfo)**(Std_VersionInfoType * VersionInfoPtr)| Function to return the version information of this module.  |
+| Std_ReturnType | **[Cdd_Pwm_RegisterReadback](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_registerreadback)**(Cdd_Pwm_ChannelType Cdd_PwmChannel, Cdd_Pwm_RegisterReadbackType * RegRbPtr)| Function to read the important registers of the hardware unit and returns the value in the structure.  |
 | void | **[Cdd_Pwm_SetPeriodDutyPhase](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setperioddutyphase)**(Cdd_Pwm_channelParametertype ChannelParameter)| Function sets the period and the duty cycle of a PWM channel.  |
 | void | **[Cdd_Pwm_SetOutputToIdle](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_setoutputtoidle)**(Cdd_Pwm_ChannelType ChannelNumber)| Function sets the PWM output to the configured Idle state.  |
 | Std_ReturnType | **[Cdd_Pwm_SyncEnable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_syncenable)**(Cdd_Pwm_ChannelType Channel, uint32 tbPhsValue, uint32 counterDir)| Function enables the synchronization of time base sub-module and also configures the phase count value to be loaded after sync event, counter direction after sync event.  |
@@ -485,7 +485,7 @@ Reentrancy - Non Reentrant
 
 ```
 void Cdd_Pwm_GetVersionInfo(
-    Std_VersionInfoType * versioninfo
+    Std_VersionInfoType * VersionInfoPtr
 )
 ```
 
@@ -503,7 +503,7 @@ Reentrancy - Non Reentrant
 **Parameters**: 
 
   
-* **versioninfo** - Pointer to where to store the version information of this module. 
+* **VersionInfoPtr** - Pointer to where to store the version information of this module. 
 
 
 **Returns**: 
@@ -519,7 +519,7 @@ Reentrancy - Non Reentrant
 
 ```
 Std_ReturnType Cdd_Pwm_RegisterReadback(
-    Cdd_Pwm_ChannelType ChannelNumber,
+    Cdd_Pwm_ChannelType Cdd_PwmChannel,
     Cdd_Pwm_RegisterReadbackType * RegRbPtr
 )
 ```
@@ -538,7 +538,7 @@ Reentrancy - Non Reentrant
 **Parameters**: 
 
   
-* **ChannelNumber** - configured channel number 
+* **Cdd_PwmChannel** - configured channel number 
   
 * **RegRbPtr** 
 

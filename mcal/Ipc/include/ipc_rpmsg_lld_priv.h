@@ -84,25 +84,25 @@ typedef struct
 
 static inline uint32 RPMessage_align(uint32 value, uint32 align);
 /* utility function to find if core ID runs linux */
-uint32               RPMessage_isLinuxCore(RPMessageLLD_Handle handle, uint16 coreId);
+uint32               RPMessage_isLinuxCore(RPMessageLLD_Handle hRpMsg, uint16 coreId);
 
 /* functions for VRING TX handling and initialization */
-void   RPMessage_vringCheckEmptyTxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId);
-sint32 RPMessage_vringGetEmptyTxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 *vringBufId,
+void   RPMessage_vringCheckEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId);
+sint32 RPMessage_vringGetEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 *vringBufId,
                                     uint32 timeout);
-uint8 *RPMessage_vringGetTxBufAddr(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId);
-uint32 RPMessage_vringGetTxBufLen(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId);
-sint32 RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId, uint16 dataLen,
+uint8 *RPMessage_vringGetTxBufAddr(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId);
+uint32 RPMessage_vringGetTxBufLen(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId);
+sint32 RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId, uint16 dataLen,
                                    uint32 timeout);
 
 /* functions for VRING RX handling and initialization */
-uint32 RPMessage_vringIsFullRxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId);
-sint32 RPMessage_vringGetFullRxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 *vringBufId);
-uint8 *RPMessage_vringGetRxBufAddr(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId);
-sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 vringBufId, uint32 timeout);
+uint32 RPMessage_vringIsFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId);
+sint32 RPMessage_vringGetFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 *vringBufId);
+uint8 *RPMessage_vringGetRxBufAddr(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId);
+sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 vringBufId, uint32 timeout);
 
 /* functions for VRING initialization and other utility functions */
-void RPMessage_vringReset(RPMessageLLD_Handle handle, uint16 remoteCoreId, uint16 isTx);
+void RPMessage_vringReset(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 isTx);
 void RPMessage_vringResetInternal(RPMessage_Vring *vringObj, const RPMessage_VringResetParams *resetParams);
 /* utility function to align a value, `align` MUST be power of 2 */
 static inline uint32 RPMessage_align(uint32 value, uint32 align)

@@ -314,33 +314,33 @@ extern "C" {
 #define UART_STATE_RX_ENABLED  (0x1U)
 
 /** \brief Macro to check if the Data length is valid */
-#define IS_DATA_LENGTH_VALID(dataLength)                                                 \
-    ((dataLength == CDD_UART_WORD_LENGTH_5) || (dataLength == CDD_UART_WORD_LENGTH_6) || \
-     (dataLength == CDD_UART_WORD_LENGTH_7) || (dataLength == CDD_UART_WORD_LENGTH_8))
+#define IS_DATA_LENGTH_VALID(dataLength)                                                     \
+    (((dataLength) == CDD_UART_WORD_LENGTH_5) || ((dataLength) == CDD_UART_WORD_LENGTH_6) || \
+     ((dataLength) == CDD_UART_WORD_LENGTH_7) || ((dataLength) == CDD_UART_WORD_LENGTH_8))
 
 /** \brief Macro to check if the Number of stop bits is valid */
-#define IS_STOP_BITS_VALID(stopBits) ((stopBits == CDD_UART_STOP_BIT_1) || (stopBits == CDD_UART_STOP_BITS_2))
+#define IS_STOP_BITS_VALID(stopBits) (((stopBits) == CDD_UART_STOP_BIT_1) || ((stopBits) == CDD_UART_STOP_BITS_2))
 
 /** \brief Macro to check if the Parity type is valid */
-#define IS_PARITY_TYPE_VALID(parityType)                                            \
-    ((parityType == CDD_UART_PARITY_NONE) || (parityType == CDD_UART_PARITY_ODD) || \
-     (parityType == CDD_UART_PARITY_EVEN))
+#define IS_PARITY_TYPE_VALID(parityType)                                                \
+    (((parityType) == CDD_UART_PARITY_NONE) || ((parityType) == CDD_UART_PARITY_ODD) || \
+     ((parityType) == CDD_UART_PARITY_EVEN))
 
 /** \brief Macro to check if the Operation mode is valid */
 #define IS_OPER_MODE_VALID(operMode) \
-    ((operMode == CDD_UART_16x_OPER) || (operMode == CDD_UART_16x_AUTO_OPER) || (operMode == CDD_UART_13x_OPER))
+    (((operMode) == CDD_UART_16x_OPER) || ((operMode) == CDD_UART_16x_AUTO_OPER) || ((operMode) == CDD_UART_13x_OPER))
 
 /** \brief Macro to check if the RX Trigger level is valid */
-#define IS_RXTRIG_LVL_VALID(rxTrigLvl)                                                       \
-    ((rxTrigLvl == CDD_UART_TRIGGER_LEVEL_1) || (rxTrigLvl == CDD_UART_TRIGGER_LEVEL_8) ||   \
-     (rxTrigLvl == CDD_UART_TRIGGER_LEVEL_16) || (rxTrigLvl == CDD_UART_TRIGGER_LEVEL_56) || \
-     (rxTrigLvl == CDD_UART_TRIGGER_LEVEL_60))
+#define IS_RXTRIG_LVL_VALID(rxTrigLvl)                                                           \
+    (((rxTrigLvl) == CDD_UART_TRIGGER_LEVEL_1) || ((rxTrigLvl) == CDD_UART_TRIGGER_LEVEL_8) ||   \
+     ((rxTrigLvl) == CDD_UART_TRIGGER_LEVEL_16) || ((rxTrigLvl) == CDD_UART_TRIGGER_LEVEL_56) || \
+     ((rxTrigLvl) == CDD_UART_TRIGGER_LEVEL_60))
 
 /** \brief Macro to check if the TX Trigger level is valid */
-#define IS_TXTRIG_LVL_VALID(txTrigLvl)                                                       \
-    ((txTrigLvl == CDD_UART_TRIGGER_LEVEL_1) || (txTrigLvl == CDD_UART_TRIGGER_LEVEL_8) ||   \
-     (txTrigLvl == CDD_UART_TRIGGER_LEVEL_16) || (txTrigLvl == CDD_UART_TRIGGER_LEVEL_32) || \
-     (txTrigLvl == CDD_UART_TRIGGER_LEVEL_56))
+#define IS_TXTRIG_LVL_VALID(txTrigLvl)                                                           \
+    (((txTrigLvl) == CDD_UART_TRIGGER_LEVEL_1) || ((txTrigLvl) == CDD_UART_TRIGGER_LEVEL_8) ||   \
+     ((txTrigLvl) == CDD_UART_TRIGGER_LEVEL_16) || ((txTrigLvl) == CDD_UART_TRIGGER_LEVEL_32) || \
+     ((txTrigLvl) == CDD_UART_TRIGGER_LEVEL_56))
 
 /** \name MCAL Driver states
  * @{

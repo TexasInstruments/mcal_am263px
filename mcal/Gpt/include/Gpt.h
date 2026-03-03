@@ -268,9 +268,9 @@ extern "C" {
    Reason: Macro cannot be avoided here as sending type as an argument
  */
 /** \brief Set a bit  */
-#define SET(type, var, bit) (var |= (type)(((uint32)1U) << bit))
+#define SET(type, var, bit) ((var) |= (type)(((uint32)1U) << (bit)))
 /** \brief Clear a bit  */
-#define CLEAR(type, var, bit) (var &= (~((type)(((uint32)1U) << bit))))
+#define CLEAR(type, var, bit) ((var) &= (~((type)(((uint32)1U) << (bit)))))
 
 #if (STD_ON == GPT_REGISTER_READBACK_API)
 

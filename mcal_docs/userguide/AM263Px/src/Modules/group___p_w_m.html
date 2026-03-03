@@ -489,11 +489,11 @@ Notification callback function pointer</p>
 <td><p>Service to enable the Edge Notification Enables the Edge Notification This service enables the notification of the chosen edges for the Pwm channel specified by the ChannelNumber.The function can be called on task level.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-pwm-getversioninfo"><span class="std std-ref">Pwm_GetVersionInfo</span></a></strong>(Std_VersionInfoType * versioninfo)</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-getversioninfo"><span class="std std-ref">Pwm_GetVersionInfo</span></a></strong>(Std_VersionInfoType * VersionInfoPtr)</p></td>
 <td><p>This service returns the version information of this module. Returns the version information of this module. The function can be called on task level.</p></td>
 </tr>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-pwm-registerreadback"><span class="std std-ref">Pwm_RegisterReadback</span></a></strong>(Pwm_ChannelType ChannelNumber, <a class="reference internal" href="../Classes/struct_pwm___register_readback_type.html"><span class="std std-doc">Pwm_RegisterReadbackType</span></a> * RegRbPtr)</p></td>
+<td><p><strong><a class="reference internal" href="#function-pwm-registerreadback"><span class="std std-ref">Pwm_RegisterReadback</span></a></strong>(Pwm_ChannelType PwmChannel, <a class="reference internal" href="../Classes/struct_pwm___register_readback_type.html"><span class="std std-doc">Pwm_RegisterReadbackType</span></a> * RegRbPtr)</p></td>
 <td><p>This function reads the important registers of the hardware unit and returns the value in the structure. This API is used to check the status of critical registers which do not change during program execution.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#enum-pwm-outputstatetype"><span class="std std-ref">Pwm_OutputStateType</span></a></p></td>
@@ -682,7 +682,7 @@ Service to enable the Edge Notification Enables the Edge Notification This servi
 <section id="function-pwm-getversioninfo">
 <h3><span class="section-number">5.18.5.8. </span>function Pwm_GetVersionInfo<a class="headerlink" href="#function-pwm-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Pwm_GetVersionInfo</span><span class="p">(</span>
-<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">versioninfo</span>
+<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">VersionInfoPtr</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -694,7 +694,7 @@ This service returns the version information of this module. Returns the version
 <p>Reentrancy : Reentrant</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>versioninfo</strong> - version info</p></li>
+<li><p><strong>VersionInfoPtr</strong> - version info</p></li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul class="simple">
@@ -706,7 +706,7 @@ This service returns the version information of this module. Returns the version
 <section id="function-pwm-registerreadback">
 <h3><span class="section-number">5.18.5.9. </span>function Pwm_RegisterReadback<a class="headerlink" href="#function-pwm-registerreadback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Pwm_RegisterReadback</span><span class="p">(</span>
-<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Pwm_ChannelType</span><span class="w"> </span><span class="n">PwmChannel</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Pwm_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
 <span class="p">)</span>
 </pre></div>
@@ -718,7 +718,7 @@ This function reads the important registers of the hardware unit and returns the
 <p>Reentrancy : Reentrant</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>ChannelNumber</strong> - Channel number</p></li>
+<li><p><strong>PwmChannel</strong> - Channel number</p></li>
 <li><p><strong>RegRbPtr</strong> - Pointer to where to store the readback values. If this pointer is NULL, then the API will return E_NOT_OK.</p></li>
 </ul>
 <p><strong>Returns</strong>:</p>

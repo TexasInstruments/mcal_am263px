@@ -160,8 +160,8 @@ Notification callback function pointer
 | void | **[Pwm_SetOutputToIdle](../Modules/group___p_w_m.md#function-pwm_setoutputtoidle)**(Pwm_ChannelType ChannelNumber)| Service to set the output of a channel immediately to idle. This service sets the output of a channel immediately to idle. The idle output level is configured in driver configuration. The function can be called on task level.  |
 | void | **[Pwm_DisableNotification](../Modules/group___p_w_m.md#function-pwm_disablenotification)**(Pwm_ChannelType ChannelNumber)| Service to disable the Edge Notification Disables the Edge Notification This service deactivates the Edge Notification for the pwm channel specified by the ChannelNumber Parameter. The function can be called on task level.  |
 | void | **[Pwm_EnableNotification](../Modules/group___p_w_m.md#function-pwm_enablenotification)**(Pwm_ChannelType ChannelNumber, [Pwm_EdgeNotificationType](../Modules/group___p_w_m.md#enum-pwm_edgenotificationtype) Notification)| Service to enable the Edge Notification Enables the Edge Notification This service enables the notification of the chosen edges for the Pwm channel specified by the ChannelNumber.The function can be called on task level.  |
-| void | **[Pwm_GetVersionInfo](../Modules/group___p_w_m.md#function-pwm_getversioninfo)**(Std_VersionInfoType * versioninfo)| This service returns the version information of this module. Returns the version information of this module. The function can be called on task level.  |
-| Std_ReturnType | **[Pwm_RegisterReadback](../Modules/group___p_w_m.md#function-pwm_registerreadback)**(Pwm_ChannelType ChannelNumber, [Pwm_RegisterReadbackType](../Classes/struct_pwm___register_readback_type.md) * RegRbPtr)| This function reads the important registers of the hardware unit and returns the value in the structure. This API is used to check the status of critical registers which do not change during program execution.  |
+| void | **[Pwm_GetVersionInfo](../Modules/group___p_w_m.md#function-pwm_getversioninfo)**(Std_VersionInfoType * VersionInfoPtr)| This service returns the version information of this module. Returns the version information of this module. The function can be called on task level.  |
+| Std_ReturnType | **[Pwm_RegisterReadback](../Modules/group___p_w_m.md#function-pwm_registerreadback)**(Pwm_ChannelType PwmChannel, [Pwm_RegisterReadbackType](../Classes/struct_pwm___register_readback_type.md) * RegRbPtr)| This function reads the important registers of the hardware unit and returns the value in the structure. This API is used to check the status of critical registers which do not change during program execution.  |
 | [Pwm_OutputStateType](../Modules/group___p_w_m.md#enum-pwm_outputstatetype) | **[Pwm_GetOutputState](../Modules/group___p_w_m.md#function-pwm_getoutputstate)**(Pwm_ChannelType ChannelNumber)| This function read the internal state of the PWM output signal.  |
 
 
@@ -436,7 +436,7 @@ Reentrancy : Reentrant
 
 ```
 void Pwm_GetVersionInfo(
-    Std_VersionInfoType * versioninfo
+    Std_VersionInfoType * VersionInfoPtr
 )
 ```
 
@@ -456,7 +456,7 @@ Reentrancy : Reentrant
 **Parameters**: 
 
   
-* **versioninfo** - version info 
+* **VersionInfoPtr** - version info 
 
 
 **Returns**: 
@@ -472,7 +472,7 @@ Reentrancy : Reentrant
 
 ```
 Std_ReturnType Pwm_RegisterReadback(
-    Pwm_ChannelType ChannelNumber,
+    Pwm_ChannelType PwmChannel,
     Pwm_RegisterReadbackType * RegRbPtr
 )
 ```
@@ -491,7 +491,7 @@ Reentrancy : Reentrant
 **Parameters**: 
 
   
-* **ChannelNumber** - Channel number 
+* **PwmChannel** - Channel number 
   
 * **RegRbPtr** - Pointer to where to store the readback values. If this pointer is NULL, then the API will return E_NOT_OK. 
 

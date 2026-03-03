@@ -619,7 +619,7 @@ uint32 ICU_ECAP_getIntrStatus(uint32 baseAddr, uint32 flag);
  */
 void ICU_ECAP_intrStatusClear(uint32 baseAddr, uint32 flag);
 
-void ICU_ECAP_setEmulationMode(uint32 baseAddr, ECAP_EmulationMode srcSelect);
+void ICU_ECAP_setEmulationMode(uint32 baseAddr, ECAP_EmulationMode mode);
 
 void ICU_ECAP_selectQualPeriod(uint32 baseAddr, ECAP_QualPeriodSelect width);
 

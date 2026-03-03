@@ -332,11 +332,11 @@ Callback that is invoked when a annoucement message is received on the control e
 <td><p>Wait for linux side RPMessage to be ready.</p></td>
 </tr>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-construct"><span class="std std-ref">RPMessage_lld_construct</span></a></strong>(RPMessageLLD_Handle hRpMsg, <a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a> * obj, const <a class="reference internal" href="../Classes/struct_r_p_message___create_params.html"><span class="std std-doc">RPMessage_CreateParams</span></a> * createParam)</p></td>
+<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-construct"><span class="std std-ref">RPMessage_lld_construct</span></a></strong>(RPMessageLLD_Handle hRpMsg, <a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a> * epObject, const <a class="reference internal" href="../Classes/struct_r_p_message___create_params.html"><span class="std std-doc">RPMessage_CreateParams</span></a> * createParam)</p></td>
 <td><p>Create a RPMessage object to receive messages at a specified end-point.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-destruct"><span class="std std-ref">RPMessage_lld_destruct</span></a></strong>(RPMessageLLD_Handle hRpMsg, <a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a> * obj)</p></td>
+<td><p><strong><a class="reference internal" href="#function-rpmessage-lld-destruct"><span class="std std-ref">RPMessage_lld_destruct</span></a></strong>(RPMessageLLD_Handle hRpMsg, <a class="reference internal" href="../Classes/struct_r_p_message___ep_object.html"><span class="std std-doc">RPMessage_EpObject</span></a> * epObject)</p></td>
 <td><p>Delete a previously created RPMessage object.</p></td>
 </tr>
 <tr class="row-even"><td><p>sint32</p></td>
@@ -463,7 +463,7 @@ Wait for linux side RPMessage to be ready.</p>
 <h3>function RPMessage_lld_construct<a class="headerlink" href="#function-rpmessage-lld-construct" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">RPMessage_lld_construct</span><span class="p">(</span>
 <span class="w">    </span><span class="n">RPMessageLLD_Handle</span><span class="w"> </span><span class="n">hRpMsg</span><span class="p">,</span>
-<span class="w">    </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">obj</span><span class="p">,</span>
+<span class="w">    </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">epObject</span><span class="p">,</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">RPMessage_CreateParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">createParam</span>
 <span class="p">)</span>
 </pre></div>
@@ -488,7 +488,7 @@ Create a RPMessage object to receive messages at a specified end-point.</p>
 <h3>function RPMessage_lld_destruct<a class="headerlink" href="#function-rpmessage-lld-destruct" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">RPMessage_lld_destruct</span><span class="p">(</span>
 <span class="w">    </span><span class="n">RPMessageLLD_Handle</span><span class="w"> </span><span class="n">hRpMsg</span><span class="p">,</span>
-<span class="w">    </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">obj</span>
+<span class="w">    </span><span class="n">RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">epObject</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -496,7 +496,7 @@ Create a RPMessage object to receive messages at a specified end-point.</p>
 Delete a previously created RPMessage object.</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>obj</strong> [in] object</p></li>
+<li><p><strong>epObject</strong> [in] object</p></li>
 </ul>
 </section>
 <section id="function-rpmessage-lld-send">

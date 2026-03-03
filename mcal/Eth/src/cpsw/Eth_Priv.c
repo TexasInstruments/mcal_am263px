@@ -268,7 +268,7 @@ static void Eth_enableControllerToTransmitAndReceiveBuffers(const Eth_CpdmaConfi
 
 static inline Eth_PortObjectPtrType Eth_getCurrPortObj(void);
 
-static void Eth_HwcheckCtrlrErrors1(const Eth_StatsType *pStatistics);
+static void Eth_HwcheckCtrlrErrors1(const Eth_StatsType *ethStats);
 
 static void Eth_MacControlEnable(uint32 *macControlVal, const Eth_MacConfigType *pMACConfig, uint8 portNum);
 

@@ -483,13 +483,13 @@ Pwm_EnableNotification(Pwm_ChannelType ChannelNumber, Pwm_EdgeNotificationType N
  *
  * Reentrancy        : Reentrant
  *
- * \param[in] versioninfo - version info
+ * \param[in] VersionInfoPtr - version info
  * \return None
  * \retval None
  *
  *****************************************************************************/
 FUNC(void, PWM_CODE)
-Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, PWM_APPL_DATA) versioninfo);
+Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, PWM_APPL_DATA) VersionInfoPtr);
 #endif
 
 #if (STD_ON == PWM_REGISTER_READBACK_API) || (STD_ON == PWM_SAFETI_API)
@@ -505,7 +505,7 @@ Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, PWM_APPL_DATA) versioni
  *
  * Reentrancy        : Reentrant
  *
- * \param[in] ChannelNumber - Channel number
+ * \param[in] PwmChannel - Channel number
  * \param[out] RegRbPtr - Pointer to where to store the readback
  *                       values. If this pointer is NULL, then the API
  *                       will return E_NOT_OK.
@@ -514,7 +514,8 @@ Pwm_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, PWM_APPL_DATA) versioni
  * \retval E_NOT_OK: Register read back failed
  *
  *****************************************************************************/
-Std_ReturnType Pwm_RegisterReadback(Pwm_ChannelType ChannelNumber, Pwm_RegisterReadbackType *RegRbPtr);
+FUNC(Std_ReturnType, PWM_CODE)
+Pwm_RegisterReadback(Pwm_ChannelType PwmChannel, P2VAR(Pwm_RegisterReadbackType, AUTOMATIC, PWM_APPL_DATA) RegRbPtr);
 #endif
 
 #if (STD_ON == PWM_GET_OUTPUT_STATE_API)

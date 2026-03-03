@@ -509,11 +509,11 @@
 <td><p>Function to enable the PWM signal edge notification according to notification parameter.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-pwm-getversioninfo"><span class="std std-ref">Cdd_Pwm_GetVersionInfo</span></a></strong>(Std_VersionInfoType * versioninfo)</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-getversioninfo"><span class="std std-ref">Cdd_Pwm_GetVersionInfo</span></a></strong>(Std_VersionInfoType * VersionInfoPtr)</p></td>
 <td><p>Function to return the version information of this module.</p></td>
 </tr>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-pwm-registerreadback"><span class="std std-ref">Cdd_Pwm_RegisterReadback</span></a></strong>(Cdd_Pwm_ChannelType ChannelNumber, Cdd_Pwm_RegisterReadbackType * RegRbPtr)</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-registerreadback"><span class="std std-ref">Cdd_Pwm_RegisterReadback</span></a></strong>(Cdd_Pwm_ChannelType Cdd_PwmChannel, Cdd_Pwm_RegisterReadbackType * RegRbPtr)</p></td>
 <td><p>Function to read the important registers of the hardware unit and returns the value in the structure.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
@@ -900,7 +900,7 @@ Function to enable the PWM signal edge notification according to notification pa
 <section id="function-cdd-pwm-getversioninfo">
 <h3><span class="section-number">5.9.3.10. </span>function Cdd_Pwm_GetVersionInfo<a class="headerlink" href="#function-cdd-pwm-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Pwm_GetVersionInfo</span><span class="p">(</span>
-<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">versioninfo</span>
+<span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">VersionInfoPtr</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -911,7 +911,7 @@ Function to return the version information of this module.</p>
 <p>Reentrancy - Non Reentrant</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>versioninfo</strong> - Pointer to where to store the version information of this module.</p></li>
+<li><p><strong>VersionInfoPtr</strong> - Pointer to where to store the version information of this module.</p></li>
 </ul>
 <p><strong>Returns</strong>:</p>
 <ul class="simple">
@@ -923,7 +923,7 @@ Function to return the version information of this module.</p>
 <section id="function-cdd-pwm-registerreadback">
 <h3><span class="section-number">5.9.3.11. </span>function Cdd_Pwm_RegisterReadback<a class="headerlink" href="#function-cdd-pwm-registerreadback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_RegisterReadback</span><span class="p">(</span>
-<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">ChannelNumber</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">Cdd_PwmChannel</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Pwm_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
 <span class="p">)</span>
 </pre></div>
@@ -935,7 +935,7 @@ Function to read the important registers of the hardware unit and returns the va
 <p>Reentrancy - Non Reentrant</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>ChannelNumber</strong> - configured channel number</p></li>
+<li><p><strong>Cdd_PwmChannel</strong> - configured channel number</p></li>
 <li><p><strong>RegRbPtr</strong></p></li>
 </ul>
 <p><strong>Returns</strong>:</p>

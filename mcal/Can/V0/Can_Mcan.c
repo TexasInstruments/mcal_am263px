@@ -177,8 +177,7 @@ void Can_mcanSetUpMSGRAM(Can_ControllerObjType *canController, const Can_Mailbox
                          Can_MailboxObjTxType *canTxMessageObj, uint32 maxMbCnt);
 
 void Can_mcanSetUpTxMailbox(Can_FdMsgRAMConfigObjType *msgRamConfig, const Can_MailboxType *mailboxCfg,
-                            Can_ControllerObjType *canControllerCfg, Can_MailboxObjTxType *canTxMessageObj,
-                            uint32 htrh);
+                            Can_ControllerObjType *canController, Can_MailboxObjTxType *canTxMessageObj, uint32 htrh);
 
 static void Can_mcanSetUpRxMailbox(Can_FdMsgRAMConfigObjType *msgRamConfig, const Can_MailboxType *mailboxCfg,
                                    uint32 htrh);

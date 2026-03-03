@@ -91,16 +91,16 @@ extern "C" {
 #define POLLING_MASK   (0xFFFFFFFFU)
 #define INTERRUPT_MASK (0U)
 
-#define FIFTH(n)  ((((n | 0x0000FFFFU) + (0x01U)) >> 27) & 0x00000010U)
-#define FOURTH(n) ((((n | 0x00FF00FFU) + (0x01U)) >> 28) & 0x00000008U)
-#define THIRD(n)  ((((n | 0x0F0F0F0FU) + (0x01U)) >> 29) & 0x00000004U)
-#define SECOND(n) ((((n | 0x33333333U) + (0x01U)) >> 30) & 0x00000002U)
-#define FIRST(n)  ((((n | 0X55555555U) + (0x01U)) >> 31) & 0x00000001U)
+#define FIFTH(n)  (((((n) | 0x0000FFFFU) + (0x01U)) >> 27) & 0x00000010U)
+#define FOURTH(n) (((((n) | 0x00FF00FFU) + (0x01U)) >> 28) & 0x00000008U)
+#define THIRD(n)  (((((n) | 0x0F0F0F0FU) + (0x01U)) >> 29) & 0x00000004U)
+#define SECOND(n) (((((n) | 0x33333333U) + (0x01U)) >> 30) & 0x00000002U)
+#define FIRST(n)  (((((n) | 0X55555555U) + (0x01U)) >> 31) & 0x00000001U)
 
-#define GET_LOWER_INDEX(n) Lower_Index(((~n) | ((n) - (0x01U))))
+#define GET_LOWER_INDEX(n) Lower_Index(((~(n)) | ((n) - (0x01U))))
 #define Lower_Index(n)     (FIFTH(n) | FOURTH(n) | THIRD(n) | SECOND(n) | FIRST(n))
 
-#define ONES(m, n) ((((uint32)1 << m) - (uint32)1) ^ (((uint32)1 << n) - (uint32)1))
+#define ONES(m, n) ((((uint32)1 << (m)) - (uint32)1) ^ (((uint32)1 << (n)) - (uint32)1))
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -238,10 +238,8 @@ extern uint8 Can_DrvState;
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
-
-FUNC(void, CAN_CODE)
-Can_hwUnitConfig(Can_ControllerObjType *canController, const Can_MailboxObjType *canMailbox,
-                 Can_MailboxObjTxType *canTxMessageObj, uint32 MaxMbCnt);
+void Can_hwUnitConfig(Can_ControllerObjType *canController, const Can_MailboxObjType *canMailbox,
+                      Can_MailboxObjTxType *canTxMessageObj, uint32 maxMbCnt);
 
 Std_ReturnType Can_hwUnitStart(Can_ControllerObjType *controllerObj);
 
@@ -299,7 +297,7 @@ void Can_mcanDisableInterrupts(Can_ControllerObjType *controllerObj);
 
 void Can_mcanEnableInterrupts(Can_ControllerObjType *canController);
 
-void Can_mcanProcessBusOff(Can_ControllerObjType *controllerObj, const Can_MailboxObjType *canMailbox,
+void Can_mcanProcessBusOff(Can_ControllerObjType *canController, const Can_MailboxObjType *canMailbox,
                            Can_MailboxObjTxType *canTxMessageObj, uint32 maxMbCnt);
 
 void Can_mcan_ModeProcess(Can_ControllerObjType *canController);

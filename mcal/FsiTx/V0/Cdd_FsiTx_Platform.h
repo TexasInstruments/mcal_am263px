@@ -138,7 +138,7 @@ typedef enum
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_selectTxPLLClock(uint32 base, uint16 clkSel);
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_resetTxModule(uint32 base);
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_clearTxModuleReset(uint32 base);
-FUNC(Std_ReturnType, CDD_FSITX_CODE) CddFsiTx_clearTxEvents(uint32 base, uint16 evtFlags);
+FUNC(Std_ReturnType, CDD_FSITX_CODE) CddFsiTx_clearTxEvents(uint32 base, uint16 evtFlag);
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_enableTxDMAEvent(uint32 base);
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_disableTxDMAEvent(uint32 base);
 FUNC(uint32, CDD_FSITX_CODE) CddFsiTx_sendTxFlush(uint32 base);

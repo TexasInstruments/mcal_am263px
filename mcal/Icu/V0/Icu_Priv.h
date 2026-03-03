@@ -264,12 +264,12 @@ void Icu_TimeStamp_Clear(Icu_ChannelType Channel);
 /**
  * \brief   This API will get the base address of the ICU .
  *
- * \param   Channel       Channel number
+ * \param   ChannelNumber       Channel number
  *
  * \return  None.
  *
  **/
-uint32 Icu_GetBaseAddr(Icu_ChannelType Channel);
+FUNC(uint32, ICU_CODE) Icu_GetBaseAddr(Icu_ChannelType ChannelNumber);
 
 /**
  * \brief   This API will configure the ECAP module
@@ -315,7 +315,7 @@ void Icu_reportDetRuntimeError(uint8 apiId, uint8 errorId);
  * \return
  *
  **/
-void Icu_ChannelISR(Icu_ChannelType ChannelNumber);
+FUNC(void, ICU_CODE) Icu_ChannelISR(Icu_ChannelType Channel);
 
 /**
  * \brief   This will select ECAP Input.
