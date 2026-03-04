@@ -456,7 +456,7 @@ void    HsmClient_SecureBootQueueInit(uint32_t configured_hsm_client_msg_queue_s
  * 2. SystemP_FAILURE if NACK message is received or client id not registered.
  * 3. SystemP_TIMEOUT if timeout exception occours.
  */
-int32_t HsmClient_getVersion(HsmClient_t *HsmClient, HsmVer_t *verId, uint32_t timeToWaitInTick);
+int32_t HsmClient_getVersion(HsmClient_t *HsmClient, HsmVer_t *hsmVer, uint32_t timeout);
 
 /**
  * @brief
@@ -551,7 +551,7 @@ int32_t HsmClient_writeOTPRow(HsmClient_t *HsmClient, NvmOtpRowWrite_t *writeRow
  * 1. SystemP_SUCCESS if returns successfully
  * 2. SystemP_FAILURE if NACK message is received or client id not registered.
  */
-int32_t HsmClient_lockOTPRow(HsmClient_t *HsmClient, NvmOtpRowProt_t *rowProt);
+int32_t HsmClient_lockOTPRow(HsmClient_t *HsmClient, NvmOtpRowProt_t *protRow);
 
 /**
  * @brief

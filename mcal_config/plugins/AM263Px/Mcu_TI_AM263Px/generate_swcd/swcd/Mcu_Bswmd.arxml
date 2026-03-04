@@ -202,7 +202,7 @@
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
-                  </CALL-POINTS>                  
+                  </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Mcu_TI_AM263px/Mcu_ModuleEntry/Mcu_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!IF "as:modconf('Mcu')[1]/McuGeneralConfiguration/McuInitClock = 'true'"!]
@@ -362,7 +362,7 @@
               <MEMORY-SECTION UUID="ea70c000-7abd-4d8e-89d0-e5bc164ecfbe">
                 <SHORT-NAME>MCU_CONFIG_DATA</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
-                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONST_PBCFG</SW-ADDRMETHOD-REF>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONFIG_DATA</SW-ADDRMETHOD-REF>
                 <SYMBOL>CONFIG_DATA</SYMBOL>
               </MEMORY-SECTION>
               <MEMORY-SECTION UUID="420083a5-5f7d-4aff-a589-7e7d13776f7e">

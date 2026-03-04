@@ -114,6 +114,8 @@ MCAL-15072
 /* ========================================================================== */
 
 static void Wdg_resetDrvObj(void);
+static FUNC(void, WDG_CODE)
+    Wdg_handleSetModeResult(VAR(Std_ReturnType, AUTOMATIC) retVal, CONST(WdgIf_ModeType, AUTOMATIC) Mode);
 
 /* ========================================================================== */
 /*                            Global Variables                                */
@@ -255,6 +257,33 @@ FUNC(void, WDG_CODE) Wdg_Init(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST)
 }
 
 /******************************************************************************
+ *  Wdg_handleSetModeResult
+ ******************************************************************************/
+/**
+ *  \brief  Handles the result of Wdg_SetModeConfig and reports errors if needed
+ *  \param  retVal  Return value from Wdg_SetModeConfig
+ *  \param  Mode    The mode that was requested
+ */
+static FUNC(void, WDG_CODE)
+    Wdg_handleSetModeResult(VAR(Std_ReturnType, AUTOMATIC) retVal, CONST(WdgIf_ModeType, AUTOMATIC) Mode)
+{
+    if (((Std_ReturnType)E_OK) != retVal)
+    {
+#if (STD_ON == WDG_DEV_ERROR_DETECT)
+        (void)Wdg_reportDetError(WDG_API_SET_MODE, WDG_E_PARAM_MODE);
+#endif
+#ifdef WDG_E_MODE_FAILED
+        /* Mode not supported */
+        (void)Dem_SetEventStatus(WDG_E_MODE_FAILED, DEM_EVENT_STATUS_FAILED);
+#endif
+    }
+    else
+    {
+        Wdg_DrvObj.previousMode = Mode;
+    }
+}
+
+/******************************************************************************
  *  Wdg_SetMode
  ******************************************************************************/
 /*
@@ -293,22 +322,7 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetMode(WdgIf_ModeType Mode)
 #endif
         {
             retVal = Wdg_SetModeConfig(Mode);
-
-            if (((Std_ReturnType)E_OK) != retVal)
-            {
-#if (STD_ON == WDG_DEV_ERROR_DETECT)
-                (void)Wdg_reportDetError(WDG_API_SET_MODE, WDG_E_PARAM_MODE);
-#endif
-
-#ifdef WDG_E_MODE_FAILED
-                /* Mode not supported */
-                (void)Dem_SetEventStatus(WDG_E_MODE_FAILED, DEM_EVENT_STATUS_FAILED);
-#endif
-            }
-            else
-            {
-                Wdg_DrvObj.previousMode = Mode;
-            }
+            Wdg_handleSetModeResult(retVal, Mode);
         }
 #if (STD_ON == WDG_DEV_ERROR_DETECT)
         /* Set driver status as idle */

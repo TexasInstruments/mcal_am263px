@@ -922,12 +922,15 @@ void processJobs(Fls_JobType job)
 #endif
             break;
         case FLS_JOB_WRITE:
-            if (Fls_WriteStage == FLS_S_WRITE_DONE)
+            if (Fls_WriteStage == FLS_S_INIT_STAGE)
             {
 #if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
                 retVal = Fls_norBlankCheck(chunkSize);
                 if (retVal != E_OK)
                 {
+#if (STD_OFF == FLS_USE_INTERRUPTS)
+                    Fls_JobNotification(job, retVal, chunkSize);
+#endif
                     break;
                 }
 #endif
@@ -1073,6 +1076,17 @@ void Fls_ErrorNotification(Fls_JobType job, uint8 retVal)
 #else
             (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_BLANK_CHECK,
                                          FLS_E_VERIFY_ERASE_FAILED);
+#endif
+        }
+        else if ((FLS_JOB_WRITE == job) && (E_BLANKCHECK_MISMATCH == retVal))
+        {
+            /* Pre-write blank check fail DET */
+            Fls_DrvObj.jobResultType = MEMIF_BLOCK_INCONSISTENT;
+#if (STD_OFF == FLS_USE_INTERRUPTS)
+            (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION,
+                                         FLS_E_VERIFY_ERASE_FAILED);
+#else
+            (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_VERIFY_ERASE_FAILED);
 #endif
         }
         else /*if (FLS_JOB_COMPARE == job)*/

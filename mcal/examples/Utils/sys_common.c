@@ -134,11 +134,10 @@ typedef volatile uint32 REG32;
  *  coverage testing. The weak attribute allows a strong implementation
  *  in test code to take precedence during test builds.
  */
-/* TI_COVERAGE_GAP_START Weak attribute is required to enable test override capability for fault injection.*/
 #if defined(__GNUC__) || defined(__clang__) || defined(__ti_version__)
 __attribute__((weak))
 #endif
-/* TI_COVERAGE_GAP_STOP */
+
 uint32
 registerReadWrite_local(volatile uint32 *regAddr, uint32 endBit, uint32 startBit, uint32 wrValue)
 {

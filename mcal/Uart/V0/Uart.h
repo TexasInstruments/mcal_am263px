@@ -1465,19 +1465,19 @@ typedef struct
 /* ========================================================================== */
 
 /* Driver internal functions */
-void                 UART_configInstance(CddUart_Handle handle);
+void                 UART_configInstance(CddUart_Handle hUart);
 static sint32        UART_checkTransaction(CddUart_Transaction *trans);
-boolean              UART_writeCancelNoCB(CddUart_Handle handle);
-boolean              UART_writeCancelDmaNoCB(CddUart_Handle handle);
-sint32               UART_writePolling(CddUart_Handle handle, CddUart_Transaction *trans);
-sint32               UART_writeInterrupt(CddUart_Handle handle);
-boolean              UART_readCancelNoCB(CddUart_Handle handle);
-boolean              UART_readCancelDmaNoCB(CddUart_Handle handle);
+boolean              UART_writeCancelNoCB(CddUart_Handle hUart);
+boolean              UART_writeCancelDmaNoCB(CddUart_Handle hUart);
+sint32               UART_writePolling(CddUart_Handle hUart, CddUart_Transaction *trans);
+sint32               UART_writeInterrupt(CddUart_Handle hUart);
+boolean              UART_readCancelNoCB(CddUart_Handle hUart);
+boolean              UART_readCancelDmaNoCB(CddUart_Handle hUart);
 uint32               UART_spaceAvail(uint32 baseAddr);
 uint32               UART_operatingModeSelect(uint32 baseAddr, uint32 modeFlag);
-static inline uint32 UART_writeData(CddUart_Handle handle, uint32 size);
-static inline uint32 UART_readData(CddUart_Handle handle, uint32 size);
-uint8                UART_readByte(CddUart_Handle handle);
+static inline uint32 UART_writeData(CddUart_Handle hUart, uint32 writeSizeRemaining);
+static inline uint32 UART_readData(CddUart_Handle hUart, uint32 size);
+uint8                UART_readByte(CddUart_Handle hUart);
 uint8                UART_fifoCharGet(uint32 baseAddr);
 uint32               UART_divisorValCompute(uint32 moduleClk, uint32 baudRate, uint32 modeFlag);
 uint32               UART_regConfigModeEnable(uint32 baseAddr, uint32 modeFlag);

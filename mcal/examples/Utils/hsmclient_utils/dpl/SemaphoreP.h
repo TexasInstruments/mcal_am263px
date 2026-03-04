@@ -90,55 +90,55 @@ typedef struct SemaphoreP_Object_
  *
  * \return \ref SystemP_SUCCESS on success, \ref SystemP_FAILURE on error
  */
-int32_t SemaphoreP_constructMutex(SemaphoreP_Object *obj);
+int32_t SemaphoreP_constructMutex(SemaphoreP_Object *pSemaphore);
 
 /**
  * \brief Create a binary semaphore object
  *
- * \param obj [out] created object
- * \param initValue [in] Initial value of the binary semaphore, MUST be 0 or 1
+ * \param pSemaphore [out] created object
+ * \param initCount [in] Initial value of the binary semaphore, MUST be 0 or 1
  *
  * \return \ref SystemP_SUCCESS on success, \ref SystemP_FAILURE on error
  */
-int32_t SemaphoreP_constructBinary(SemaphoreP_Object *obj, uint32_t initValue);
+int32_t SemaphoreP_constructBinary(SemaphoreP_Object *pSemaphore, uint32_t initCount);
 
 /**
  * \brief Create a counting semaphore object
  *
- * \param obj [out] created object
- * \param initValue [in] Initial value of the counting semaphore, MUST be between 0 .. maxValue
- * \param maxValue [in] Maximum value of counting semaphore
+ * \param pSemaphore [out] created object
+ * \param initCount [in] Initial value of the counting semaphore, MUST be between 0 .. maxCount
+ * \param maxCount [in] Maximum value of counting semaphore
  *
  * \return \ref SystemP_SUCCESS on success, \ref SystemP_FAILURE on error
  */
-int32_t SemaphoreP_constructCounting(SemaphoreP_Object *obj, uint32_t initValue, uint32_t maxValue);
+int32_t SemaphoreP_constructCounting(SemaphoreP_Object *pSemaphore, uint32_t initCount, uint32_t maxCount);
 
 /**
  * \brief Cleanup, delete, destruct a semaphore object
  *
- * \param obj [in] semaphore object
+ * \param pSemaphore [in] semaphore object
  */
-void SemaphoreP_destruct(SemaphoreP_Object *obj);
+void SemaphoreP_destruct(SemaphoreP_Object *pSemaphore);
 
 /**
  * \brief Post a semaphore object or unlock a mutex
  *
- * \param obj [in] semaphore object
+ * \param pSemaphore [in] semaphore object
  */
-void SemaphoreP_post(SemaphoreP_Object *obj);
+void SemaphoreP_post(SemaphoreP_Object *pSemaphore);
 
 /**
  * \brief Pend on a semaphore object or lock a mutex
  *
- * \param obj [in] semaphore object
- * \param timeToWaitInTicks [in] amount of time to block waiting for semaphore to be available, in units of system ticks
+ * \param pSemaphore [in] semaphore object
+ * \param timeout [in] amount of time to block waiting for semaphore to be available, in units of system ticks
  * (see \ref KERNEL_DPL_CLOCK_PAGE)
  *
  * \return \ref SystemP_SUCCESS on successful acquire of the semaphore
  * \return \ref SystemP_TIMEOUT on failure to acquire the semaphore due to timeout condition
  * \return \ref SystemP_FAILURE on failure to acquire the semaphore due to other conditions
  */
-int32_t SemaphoreP_pend(SemaphoreP_Object *obj, uint32_t timeToWaitInTicks);
+int32_t SemaphoreP_pend(SemaphoreP_Object *pSemaphore, uint32_t timeout);
 
 /*!
  *  @brief  Function to return the count of a semaphore.

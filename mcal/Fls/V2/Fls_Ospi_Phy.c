@@ -390,7 +390,7 @@ static Std_ReturnType Fls_Ospi_phyReadAttackVector(uint32 offset)
         count--;
     }
 
-    if (memcmp((const void *)gReadBuf, (const void *)gOspiFlashAttackVector, OSPI_FLASH_ATTACK_VECTOR_SIZE) != 0)
+    if (memcmp((const uint8 *)gReadBuf, (const uint8 *)gOspiFlashAttackVector, OSPI_FLASH_ATTACK_VECTOR_SIZE) != 0)
     {
         status = E_NOT_OK;
     }

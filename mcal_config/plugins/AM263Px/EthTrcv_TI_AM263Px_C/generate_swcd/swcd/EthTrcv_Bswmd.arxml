@@ -372,7 +372,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/EthTrcv_TI_AM263Px_C/EthTrcv_ModuleEntry/EthTrcv_GetDuplexMode</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-						    [!ENDIF!][!//						
+						    [!ENDIF!][!//
 						    [!IF "$EthTrcvSetPhyTxModeApi_Enable = 'true'"!][!//
 						    <BSW-CALLED-ENTITY S="" UUID="bab97778-3dbc-4c37-9241-4b89621aea7a">
                   <SHORT-NAME>EthTrcv_SetPhyTxMode</SHORT-NAME>
@@ -542,10 +542,10 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/EthTrcv_TI_AM263Px_C/EthTrcv_ModuleEntry/EthTrcv_MainFunction</IMPLEMENTED-ENTRY-REF>
                 </BSW-SCHEDULABLE-ENTITY>
-              </ENTITYS>					  
+              </ENTITYS>
               <EVENTS>
                 <BSW-TIMING-EVENT S="" UUID="2bd5a28d-6688-409f-991a-6485d0b02d3d">
-                  <SHORT-NAME>EthTrcvTimingEvent_MainFunction</SHORT-NAME>                          
+                  <SHORT-NAME>EthTrcvTimingEvent_MainFunction</SHORT-NAME>
                   <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/EthTrcv_TI_AM263Px_C/EthTrcv/EthTrcv_Behavior/EthTrcv_MainFunction</STARTS-ON-EVENT-REF>
                   <PERIOD>0.005</PERIOD>
 						    </BSW-TIMING-EVENT>
@@ -626,7 +626,7 @@
               <MEMORY-SECTION UUID="d6340197-47ab-4d3e-9b41-3835b828d6b9">
                 <SHORT-NAME>ETHTRCV_CONFIG_DATA</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
-                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONST_PBCFG</SW-ADDRMETHOD-REF>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONFIG_DATA</SW-ADDRMETHOD-REF>
                 <SYMBOL>CONFIG_DATA</SYMBOL>
               </MEMORY-SECTION>
               <MEMORY-SECTION UUID="26bca45e-c74e-4b8e-882c-bf09cedb8461">

@@ -294,8 +294,8 @@ extern volatile VAR(Dem_EventStatusType, DEM_VAR_CLEARED) Dem_EventStatus;
 #define DemConf_DemEventParameter_CDD_FSI_TX_E_BUFFER_OVERRUN     (65530U)
 
 #if defined (AUTOSAR_431)
-void Dem_ReportErrorStatus(Dem_EventIdType     eventId,
-                           Dem_EventStatusType eventStatus);
+void Dem_ReportErrorStatus(Dem_EventIdType     EventId,
+                           Dem_EventStatusType EventStatus);
 #endif
 
 #ifdef __cplusplus

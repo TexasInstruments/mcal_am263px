@@ -489,10 +489,11 @@ FUNC(void, PWM_CODE) Pwm_ChannelNotificationISR_epwm(Pwm_ChannelType ChannelNumb
      * "Reason - Pointer typecast required here to match
      *           destination data type" */
     Pwm_NotifyFuncType pwmNotification = (Pwm_NotifyFuncType)NULL_PTR;
-    Pwm_ChObjType     *chObj           = &Pwm_ChObj[ChannelNumber];
-    EPWM_clearEventTriggerInterruptFlag(chObj->baseAddr);
-    if (NULL_PTR != chObj)
+
+    if (ChannelNumber < PWM_MAX_NUM_CHANNELS)
     {
+        Pwm_ChObjType *chObj = &Pwm_ChObj[ChannelNumber];
+        EPWM_clearEventTriggerInterruptFlag(chObj->baseAddr);
         if ((chObj->chCfg.dutyCycle != PWM_DUTY_0_PERCENT) && (chObj->chCfg.dutyCycle != PWM_DUTY_100_PERCENT))
         {
             /* Call Notification */

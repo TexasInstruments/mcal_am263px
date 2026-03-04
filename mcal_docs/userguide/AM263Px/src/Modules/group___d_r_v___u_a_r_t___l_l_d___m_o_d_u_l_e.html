@@ -2915,7 +2915,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>void</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-configinstance"><span class="std std-ref">UART_configInstance</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-configinstance"><span class="std std-ref">UART_configInstance</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>sint32</p></td>
@@ -2923,27 +2923,27 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>boolean</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-writecancelnocb"><span class="std std-ref">UART_writeCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-writecancelnocb"><span class="std std-ref">UART_writeCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>boolean</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-writecanceldmanocb"><span class="std std-ref">UART_writeCancelDmaNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-writecanceldmanocb"><span class="std std-ref">UART_writeCancelDmaNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>sint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-writepolling"><span class="std std-ref">UART_writePolling</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle, <a class="reference internal" href="../Classes/struct_cdd_uart___transaction.html"><span class="std std-doc">CddUart_Transaction</span></a> * trans)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-writepolling"><span class="std std-ref">UART_writePolling</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart, <a class="reference internal" href="../Classes/struct_cdd_uart___transaction.html"><span class="std std-doc">CddUart_Transaction</span></a> * trans)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>sint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-writeinterrupt"><span class="std std-ref">UART_writeInterrupt</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-writeinterrupt"><span class="std std-ref">UART_writeInterrupt</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>boolean</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-readcancelnocb"><span class="std std-ref">UART_readCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-readcancelnocb"><span class="std std-ref">UART_readCancelNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>boolean</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-readcanceldmanocb"><span class="std std-ref">UART_readCancelDmaNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-readcanceldmanocb"><span class="std std-ref">UART_readCancelDmaNoCB</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>uint32</p></td>
@@ -2955,15 +2955,15 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>uint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-writedata"><span class="std std-ref">UART_writeData</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle, uint32 size)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-writedata"><span class="std std-ref">UART_writeData</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart, uint32 writeSizeRemaining)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>uint32</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-readdata"><span class="std std-ref">UART_readData</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle, uint32 size)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-readdata"><span class="std std-ref">UART_readData</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart, uint32 size)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>uint8</p></td>
-<td><p><strong><a class="reference internal" href="#function-uart-readbyte"><span class="std std-ref">UART_readByte</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> handle)</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-readbyte"><span class="std std-ref">UART_readByte</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>uint8</p></td>
@@ -3035,7 +3035,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-configinstance">
 <h3>function UART_configInstance<a class="headerlink" href="#function-uart-configinstance" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">UART_configInstance</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -3051,7 +3051,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-writecancelnocb">
 <h3>function UART_writeCancelNoCB<a class="headerlink" href="#function-uart-writecancelnocb" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">UART_writeCancelNoCB</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -3059,7 +3059,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-writecanceldmanocb">
 <h3>function UART_writeCancelDmaNoCB<a class="headerlink" href="#function-uart-writecanceldmanocb" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">UART_writeCancelDmaNoCB</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -3067,7 +3067,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-writepolling">
 <h3>function UART_writePolling<a class="headerlink" href="#function-uart-writepolling" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">UART_writePolling</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span><span class="p">,</span>
 <span class="w">    </span><span class="n">CddUart_Transaction</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">trans</span>
 <span class="p">)</span>
 </pre></div>
@@ -3076,7 +3076,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-writeinterrupt">
 <h3>function UART_writeInterrupt<a class="headerlink" href="#function-uart-writeinterrupt" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">UART_writeInterrupt</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -3084,7 +3084,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-readcancelnocb">
 <h3>function UART_readCancelNoCB<a class="headerlink" href="#function-uart-readcancelnocb" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">UART_readCancelNoCB</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -3092,7 +3092,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-readcanceldmanocb">
 <h3>function UART_readCancelDmaNoCB<a class="headerlink" href="#function-uart-readcanceldmanocb" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">UART_readCancelDmaNoCB</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -3117,8 +3117,8 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-writedata">
 <h3>function UART_writeData<a class="headerlink" href="#function-uart-writedata" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">UART_writeData</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">size</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">writeSizeRemaining</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -3126,7 +3126,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-readdata">
 <h3>function UART_readData<a class="headerlink" href="#function-uart-readdata" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">UART_readData</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">size</span>
 <span class="p">)</span>
 </pre></div>
@@ -3135,7 +3135,7 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <section id="function-uart-readbyte">
 <h3>function UART_readByte<a class="headerlink" href="#function-uart-readbyte" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint8</span><span class="w"> </span><span class="n">UART_readByte</span><span class="p">(</span>
-<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">handle</span>
+<span class="w">    </span><span class="n">CddUart_Handle</span><span class="w"> </span><span class="n">hUart</span>
 <span class="p">)</span>
 </pre></div>
 </div>

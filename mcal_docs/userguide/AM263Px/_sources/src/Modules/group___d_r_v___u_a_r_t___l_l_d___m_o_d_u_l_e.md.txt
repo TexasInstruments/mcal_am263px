@@ -978,19 +978,19 @@ typedef  struct CddUart_Object * CddUart_Handle;
 
 | Return type    | Function Name           |      Brief        |
 | -------------- | ----------------------- | ----------------- |
-| void | **[UART_configInstance](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_configinstance)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
+| void | **[UART_configInstance](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_configinstance)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)|  |
 | sint32 | **[UART_checkTransaction](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_checktransaction)**([CddUart_Transaction](../Classes/struct_cdd_uart___transaction.md) * trans)|  |
-| boolean | **[UART_writeCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writecancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
-| boolean | **[UART_writeCancelDmaNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writecanceldmanocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
-| sint32 | **[UART_writePolling](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writepolling)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle, [CddUart_Transaction](../Classes/struct_cdd_uart___transaction.md) * trans)|  |
-| sint32 | **[UART_writeInterrupt](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writeinterrupt)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
-| boolean | **[UART_readCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readcancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
-| boolean | **[UART_readCancelDmaNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readcanceldmanocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
+| boolean | **[UART_writeCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writecancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)|  |
+| boolean | **[UART_writeCancelDmaNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writecanceldmanocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)|  |
+| sint32 | **[UART_writePolling](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writepolling)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart, [CddUart_Transaction](../Classes/struct_cdd_uart___transaction.md) * trans)|  |
+| sint32 | **[UART_writeInterrupt](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writeinterrupt)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)|  |
+| boolean | **[UART_readCancelNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readcancelnocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)|  |
+| boolean | **[UART_readCancelDmaNoCB](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readcanceldmanocb)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)|  |
 | uint32 | **[UART_spaceAvail](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_spaceavail)**(uint32 baseAddr)|  |
 | uint32 | **[UART_operatingModeSelect](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_operatingmodeselect)**(uint32 baseAddr, uint32 modeFlag)|  |
-| uint32 | **[UART_writeData](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writedata)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle, uint32 size)|  |
-| uint32 | **[UART_readData](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readdata)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle, uint32 size)|  |
-| uint8 | **[UART_readByte](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readbyte)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) handle)|  |
+| uint32 | **[UART_writeData](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_writedata)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart, uint32 writeSizeRemaining)|  |
+| uint32 | **[UART_readData](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readdata)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart, uint32 size)|  |
+| uint8 | **[UART_readByte](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_readbyte)**([CddUart_Handle](../Classes/struct_cdd_uart___object.md) hUart)|  |
 | uint8 | **[UART_fifoCharGet](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_fifocharget)**(uint32 baseAddr)|  |
 | uint32 | **[UART_divisorValCompute](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_divisorvalcompute)**(uint32 moduleClk, uint32 baudRate, uint32 modeFlag)|  |
 | uint32 | **[UART_regConfigModeEnable](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_regconfigmodeenable)**(uint32 baseAddr, uint32 modeFlag)|  |
@@ -1014,7 +1014,7 @@ typedef  struct CddUart_Object * CddUart_Handle;
 
 ```
 void UART_configInstance(
-    CddUart_Handle handle
+    CddUart_Handle hUart
 )
 ```
 
@@ -1032,7 +1032,7 @@ static sint32 UART_checkTransaction(
 
 ```
 boolean UART_writeCancelNoCB(
-    CddUart_Handle handle
+    CddUart_Handle hUart
 )
 ```
 
@@ -1041,7 +1041,7 @@ boolean UART_writeCancelNoCB(
 
 ```
 boolean UART_writeCancelDmaNoCB(
-    CddUart_Handle handle
+    CddUart_Handle hUart
 )
 ```
 
@@ -1050,7 +1050,7 @@ boolean UART_writeCancelDmaNoCB(
 
 ```
 sint32 UART_writePolling(
-    CddUart_Handle handle,
+    CddUart_Handle hUart,
     CddUart_Transaction * trans
 )
 ```
@@ -1060,7 +1060,7 @@ sint32 UART_writePolling(
 
 ```
 sint32 UART_writeInterrupt(
-    CddUart_Handle handle
+    CddUart_Handle hUart
 )
 ```
 
@@ -1069,7 +1069,7 @@ sint32 UART_writeInterrupt(
 
 ```
 boolean UART_readCancelNoCB(
-    CddUart_Handle handle
+    CddUart_Handle hUart
 )
 ```
 
@@ -1078,7 +1078,7 @@ boolean UART_readCancelNoCB(
 
 ```
 boolean UART_readCancelDmaNoCB(
-    CddUart_Handle handle
+    CddUart_Handle hUart
 )
 ```
 
@@ -1106,8 +1106,8 @@ uint32 UART_operatingModeSelect(
 
 ```
 static inline uint32 UART_writeData(
-    CddUart_Handle handle,
-    uint32 size
+    CddUart_Handle hUart,
+    uint32 writeSizeRemaining
 )
 ```
 
@@ -1116,7 +1116,7 @@ static inline uint32 UART_writeData(
 
 ```
 static inline uint32 UART_readData(
-    CddUart_Handle handle,
+    CddUart_Handle hUart,
     uint32 size
 )
 ```
@@ -1126,7 +1126,7 @@ static inline uint32 UART_readData(
 
 ```
 uint8 UART_readByte(
-    CddUart_Handle handle
+    CddUart_Handle hUart
 )
 ```
 

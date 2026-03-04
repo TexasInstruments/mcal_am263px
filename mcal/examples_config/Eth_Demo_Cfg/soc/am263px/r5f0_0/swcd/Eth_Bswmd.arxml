@@ -454,7 +454,7 @@
                         </BSW-SCHEDULABLE-ENTITY>
                         <BSW-INTERRUPT-ENTITY UUID="660094e2-e5d3-46b5-bc0b-3df9d8f36c93">
                           <SHORT-NAME>Eth_RxIrqHdlr_0</SHORT-NAME>
-                          
+
                           <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                           <CALL-POINTS>
                             <BSW-DIRECT-CALL-POINT>
@@ -487,7 +487,7 @@
                         </BSW-INTERRUPT-ENTITY>
                         <BSW-INTERRUPT-ENTITY UUID="d99d62cb-ffc4-4ffa-a969-fbd5323f6e7d">
                           <SHORT-NAME>Eth_TxIrqHdlr_0</SHORT-NAME>
-                          
+
                           <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                           <CALL-POINTS>
                             <BSW-DIRECT-CALL-POINT>
@@ -504,7 +504,7 @@
                         </BSW-INTERRUPT-ENTITY>
                         <BSW-INTERRUPT-ENTITY UUID="b448ddf3-e117-4f35-be91-7a955e790c1f">
                           <SHORT-NAME>Eth_MiscIrqHdlr_0</SHORT-NAME>
-                          
+
                           <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                           <CALL-POINTS>
                            <BSW-DIRECT-CALL-POINT>
@@ -518,7 +518,7 @@
                       </ENTITYS>
                       <EVENTS>
                         <BSW-TIMING-EVENT S="" UUID="2bd5a28d-6688-409f-991a-6485d0b02d3d">
-                          <SHORT-NAME>EthTimingEvent_MainFunction</SHORT-NAME>                          
+                          <SHORT-NAME>EthTimingEvent_MainFunction</SHORT-NAME>
                           <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Eth_TI_AM263px/Eth/Eth_Behaviour/Eth_MainFunction</STARTS-ON-EVENT-REF>
                           <PERIOD>0.005</PERIOD>
                         </BSW-TIMING-EVENT>
@@ -761,9 +761,9 @@
               <MEMORY-SECTION UUID="b5523458-a4dd-4516-a3a9-e50971cbb891">
                 <SHORT-NAME>ETH_CONFIG_DATA</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
-                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONST_PBCFG</SW-ADDRMETHOD-REF>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONFIG_DATA</SW-ADDRMETHOD-REF>
                 <SYMBOL>CONFIG_DATA</SYMBOL>
-              </MEMORY-SECTION>              
+              </MEMORY-SECTION>
             </MEMORY-SECTIONS>
           </RESOURCE-CONSUMPTION>
           <SW-VERSION>10.1.0</SW-VERSION>
