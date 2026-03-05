@@ -1,3 +1,48 @@
+commit dc17fa0af2b3bdce770c8ef49bd03f217cad631a
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Mar 5 17:33:24 2026 +0530
+
+    all: all: Added previous release notes content back
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 84 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 84 insertions(+)
+
+commit 38b1a7e0b4daa4f02144f2843c43ccc404b95b2e
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Mar 5 12:24:13 2026 +0530
+
+    all: all: Release note update for Lucid patch release
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 84 +++-----------------------------------------------------
+ 1 file changed, 4 insertions(+), 80 deletions(-)
+
+commit a61f10fcc4b3712e26735ea5c0a598e6f192e027
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Wed Mar 4 22:04:07 2026 +0530
+
+    all: script: cicd improvements
+    
+    - add result summary output (passed, failed_partial, not_run counts)
+    - add configurable execution time rounding with buffer:
+        - TIME_ROUNDING_SECONDS = 10 (round to nearest 10s)
+        - TIME_BUFFER_SECONDS = 10 (add buffer before rounding)
+        - Ensures minimum deviation of 10s, maximum of 19s
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/cicd/test_result_html_to_json.py | 73 ++++++++++++++++++++--
+ 1 file changed, 68 insertions(+), 5 deletions(-)
+
 commit eeccfb46b9f9317c0e2d867412116a89c19f10ff
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon Mar 2 11:50:35 2026 +0530

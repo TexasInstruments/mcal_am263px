@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 11.02.00 done on 05-Mar-2026.
+This is the release notes for MCAL AM26xx 11.02.00 done on 06-Mar-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -302,6 +302,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263Px, AM261x</td>
       <td></td>
+    </tr>
+    <tr>
+      <td>MCAL-36364</td>
+      <td>Fls_norBlankCheck() not being called for the first chunk of write.</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>FLS write shall perform a blankcheck before write when FLS_ERASE_VERIFICATION_ENABLED is STD_ON</td>
     </tr>
     <tr>
       <td>MCAL-35979,MCAL-35981</td>
