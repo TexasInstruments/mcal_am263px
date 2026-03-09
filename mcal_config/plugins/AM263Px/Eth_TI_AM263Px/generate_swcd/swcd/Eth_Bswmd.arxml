@@ -836,6 +836,7 @@
             <LINKER UUID="c18ce981-b648-4d62-8ff6-0d7d2cb5cdc2">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </LINKER>

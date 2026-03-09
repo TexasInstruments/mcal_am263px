@@ -66,6 +66,7 @@
 
 #include "Fls.h"
 #include "Fls_Brd_Nor.h"
+#include "sys_common.h"
 
 #if (FLS_ISR_TYPE == FLS_ISR_CAT2)
 #include "Os.h"

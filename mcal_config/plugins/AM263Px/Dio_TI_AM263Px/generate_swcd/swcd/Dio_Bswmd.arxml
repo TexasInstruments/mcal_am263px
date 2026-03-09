@@ -246,6 +246,7 @@
             <COMPILER UUID="a91f9953-05a6-4657-8097-509c6b28c1aa">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb  -DAM263PX_SIP_PACKAGE  -DAM263PX_PLATFORM -DAM263PX_R_PACKAGE -DAM263PX_C_PACKAGE </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </COMPILER>
@@ -254,6 +255,7 @@
             <LINKER UUID="4aac1373-f8e3-4440-b8ea-5785c82c847e">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </LINKER>

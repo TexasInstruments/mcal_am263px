@@ -24,21 +24,21 @@ title: CAN Driver Interrupt Handlers
 
 | Return type    | Function Name           |      Brief        |
 | -------------- | ----------------------- | ----------------- |
-| void | **[Can_0_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_0_int0isr)**(void )| This function is the Interrupt frame for CAN controller 0/INT 0.  |
-| void | **[Can_0_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_0_int1isr)**(void )| This function is the Interrupt frame for CAN controller 0/INT 1.  |
-| void | **[Can_1_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_1_int0isr)**(void )| This function is the Interrupt frame for CAN controller 1/INT 0.  |
-| void | **[Can_1_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_1_int1isr)**(void )| This function is the Interrupt frame for CAN controller 1/INT 1.  |
-| void | **[Can_2_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_2_int0isr)**(void )| This function is the Interrupt frame for CAN controller 3/INT 0.  |
-| void | **[Can_2_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_2_int1isr)**(void )| This function is the Interrupt frame for CAN controller 3/INT 1.  |
-| void | **[Can_3_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_3_int0isr)**(void )| This function is the Interrupt frame for CAN controller 4/INT 0.  |
-| void | **[Can_3_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_3_int1isr)**(void )| This function is the Interrupt frame for CAN controller 4/INT 1.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_0_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_0_int0isr)**(void )| This function is the Interrupt frame for CAN controller 0/INT 0.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_0_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_0_int1isr)**(void )| This function is the Interrupt frame for CAN controller 0/INT 1.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_1_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_1_int0isr)**(void )| This function is the Interrupt frame for CAN controller 1/INT 0.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_1_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_1_int1isr)**(void )| This function is the Interrupt frame for CAN controller 1/INT 1.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_2_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_2_int0isr)**(void )| This function is the Interrupt frame for CAN controller 3/INT 0.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_2_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_2_int1isr)**(void )| This function is the Interrupt frame for CAN controller 3/INT 1.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_3_Int0ISR](../Modules/group___c_a_n___i_r_q.md#function-can_3_int0isr)**(void )| This function is the Interrupt frame for CAN controller 4/INT 0.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Can_3_Int1ISR](../Modules/group___c_a_n___i_r_q.md#function-can_3_int1isr)**(void )| This function is the Interrupt frame for CAN controller 4/INT 1.  |
 
 
 
 ### function Can_0_Int0ISR
 
 ```
-void Can_0_Int0ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_0_Int0ISR(
     void 
 )
 ```
@@ -70,7 +70,7 @@ This function is the Interrupt frame for CAN controller 0/INT 0.
 ### function Can_0_Int1ISR
 
 ```
-void Can_0_Int1ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_0_Int1ISR(
     void 
 )
 ```
@@ -102,7 +102,7 @@ This function is the Interrupt frame for CAN controller 0/INT 1.
 ### function Can_1_Int0ISR
 
 ```
-void Can_1_Int0ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_1_Int0ISR(
     void 
 )
 ```
@@ -134,7 +134,7 @@ This function is the Interrupt frame for CAN controller 1/INT 0.
 ### function Can_1_Int1ISR
 
 ```
-void Can_1_Int1ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_1_Int1ISR(
     void 
 )
 ```
@@ -166,7 +166,7 @@ This function is the Interrupt frame for CAN controller 1/INT 1.
 ### function Can_2_Int0ISR
 
 ```
-void Can_2_Int0ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_2_Int0ISR(
     void 
 )
 ```
@@ -198,7 +198,7 @@ This function is the Interrupt frame for CAN controller 3/INT 0.
 ### function Can_2_Int1ISR
 
 ```
-void Can_2_Int1ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_2_Int1ISR(
     void 
 )
 ```
@@ -230,7 +230,7 @@ This function is the Interrupt frame for CAN controller 3/INT 1.
 ### function Can_3_Int0ISR
 
 ```
-void Can_3_Int0ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_3_Int0ISR(
     void 
 )
 ```
@@ -262,7 +262,7 @@ This function is the Interrupt frame for CAN controller 4/INT 0.
 ### function Can_3_Int1ISR
 
 ```
-void Can_3_Int1ISR(
+MCAL_INTERRUPT_ATTRIBUTE void Can_3_Int1ISR(
     void 
 )
 ```

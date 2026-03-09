@@ -78,7 +78,7 @@
                   <MAX>0</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:326f888f-0676-4eec-a10e-f8159c0655ee">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2b6e1da8-4ca3-473a-906c-7b5abe524db8">
                   <SHORT-NAME>FlsAcWrite</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Address offset in RAM to which the write flash access code shall be loaded. Currenly, Flash Access code Erase/Write functionality is not supported.</L-2>
@@ -360,7 +360,7 @@
                   <MAX>4294967295</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:006f40ff-e794-490e-9ec6-057e04aada0c">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:df1cb169-e8df-4084-9050-f54a11582c4d">
                   <SHORT-NAME>FlsBaudRateDiv</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">To Select the baud rate divider values</L-2>
@@ -382,7 +382,7 @@
                   <MAX>4294967295</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:f72e69f0-f52b-4383-9077-224b9258cf31">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:e700adbf-2f97-4a6f-9f0d-1e0b3a47067f">
                   <SHORT-NAME>FlsProtocol</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter is used to select different modes                         for command, address and data transfer. First parameter denotes                         number of lines to transfer command, second parameter denotes                         number of lines to transfer address and third parameter denotes data lines                         S(Single) and D(Dual) are used denote data rates </L-2>
@@ -458,7 +458,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:622bd1f2-a9e0-4043-9b1a-8baa38771911">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:586db5f5-64c9-45e0-9fd9-99a74b0f7bf8">
                   <SHORT-NAME>FlsOspiClkSpeed</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">The driver shall specify the OSPI Clk speed to be used.</L-2>
@@ -479,7 +479,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>133333333</DEFAULT-VALUE>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:622bd1f2-a9e0-4043-9b1a-8baa38771911">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:addeb0c0-d7c9-4097-9f6c-290f7a129a4f">
                   <SHORT-NAME>FlsPhyEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">The driver shall enable Phy Speed mode for DAC.</L-2>
@@ -727,7 +727,7 @@
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                           <DEFAULT-VALUE>161</DEFAULT-VALUE>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6004be5c-6225-4b7c-8675-3f52214104f1">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:66c258b0-d0d2-4eef-95d1-449b61d159ec">
                           <SHORT-NAME>Fls4ByteAddressDisableCmd</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Sequence/Command to disable 4 byte addressing.</L-2>
@@ -748,7 +748,7 @@
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                           <DEFAULT-VALUE>0</DEFAULT-VALUE>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6004be5c-6225-4b7c-8675-3f52214104f1">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:a33cd764-7271-44fa-8b67-df76c6f1176d">
                           <SHORT-NAME>FlsDtrSupport</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Flash DTR support yes/no</L-2>
@@ -769,7 +769,7 @@
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                           <DEFAULT-VALUE>0</DEFAULT-VALUE>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6004be5c-6225-4b7c-8675-3f52214104f1">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:5c48023a-7c52-42c2-b71c-9f963d9cc203">
                           <SHORT-NAME>FlsDeviceBusyType</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Flash device busy type</L-2>
@@ -790,7 +790,7 @@
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                           <DEFAULT-VALUE>0</DEFAULT-VALUE>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6004be5c-6225-4b7c-8675-3f52214104f1">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:9e7434c7-7ce8-416e-bd9f-b10196ae5690">
                           <SHORT-NAME>FlsDeviceResetType</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Flash device reset type</L-2>
@@ -972,7 +972,7 @@
                           <MAX>65535</MAX>
                           <MIN>0</MIN>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6f01251b-5374-4234-9ee6-2efb6f9abe57">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:0dd88883-332f-4399-91c6-ad2b3493ae55">
                           <SHORT-NAME>FlsStatusRegWelMask</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Wel bit mask in Status Register.</L-2>
@@ -1087,7 +1087,7 @@
                           <MAX>65535</MAX>
                           <MIN>0</MIN>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6004be5c-6225-4b7c-8675-3f52214104f1">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:8b7ae83e-26d2-4768-9da5-32d26391d54c">
                           <SHORT-NAME>FlsNumberOfSuppEraseTypes</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Number of supported erase types</L-2>
@@ -1108,7 +1108,7 @@
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                           <DEFAULT-VALUE>0</DEFAULT-VALUE>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6004be5c-6225-4b7c-8675-3f52214104f1">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:1da5e9a4-47bb-49bb-857d-b8efdf84172a">
                           <SHORT-NAME>FlsCmdExecType</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Command execution type.</L-2>
@@ -1129,7 +1129,7 @@
                           <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                           <DEFAULT-VALUE>0</DEFAULT-VALUE>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6004be5c-6225-4b7c-8675-3f52214104f1">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:0a013cd8-1d5b-416c-84d9-3e9f7b73dd1e">
                           <SHORT-NAME>FlsByteOrder</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Flash byte order.</L-2>
@@ -1840,7 +1840,7 @@
                               <MAX>65535</MAX>
                               <MIN>0</MIN>
                             </ECUC-INTEGER-PARAM-DEF>
-                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2892091b-2e83-4a3e-b8fb-b042fdcafe8c">
+                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:5b2bdf96-9e05-4ee2-9e4f-9baffb535105">
                               <SHORT-NAME>FlsProtocolConfigRegData</SHORT-NAME>
                               <DESC>
                                 <L-2 L="EN">Protocol specific config register data to be written.</L-2>
@@ -1978,7 +1978,7 @@
                               <MAX>65535</MAX>
                               <MIN>0</MIN>
                             </ECUC-INTEGER-PARAM-DEF>
-                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2892091b-2e83-4a3e-b8fb-b042fdcafe8c">
+                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:528d1e33-20ec-419d-bc10-c5126157387b">
                               <SHORT-NAME>FlsProtocolDummyConfigReg</SHORT-NAME>
                               <DESC>
                                 <L-2 L="EN">Protocol dummy config register address.</L-2>
@@ -2001,7 +2001,7 @@
                               <MAX>65535</MAX>
                               <MIN>0</MIN>
                             </ECUC-INTEGER-PARAM-DEF>
-                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2892091b-2e83-4a3e-b8fb-b042fdcafe8c">
+                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:dfb9d92e-8006-4db6-9bfc-e8657c223cca">
                               <SHORT-NAME>FlsProtocolDummyConfigRegData</SHORT-NAME>
                               <DESC>
                                 <L-2 L="EN">Protocol dummy config register data to be written.</L-2>
@@ -2116,7 +2116,7 @@
                               <MAX>65535</MAX>
                               <MIN>0</MIN>
                             </ECUC-INTEGER-PARAM-DEF>
-                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2892091b-2e83-4a3e-b8fb-b042fdcafe8c">
+                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:c224fb40-dbf7-49bd-ab16-6edb370d1103">
                               <SHORT-NAME>FlsProtocolStrDtrAddrReg</SHORT-NAME>
                               <DESC>
                                 <L-2 L="EN">Protocol Str/Dtr config via register yes/no.</L-2>
@@ -2139,7 +2139,7 @@
                               <MAX>65535</MAX>
                               <MIN>0</MIN>
                             </ECUC-INTEGER-PARAM-DEF>
-                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2892091b-2e83-4a3e-b8fb-b042fdcafe8c">
+                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:55a089ac-5e2f-4794-b818-7503cc00abb2">
                               <SHORT-NAME>FlsProtocolStrDtrConfigReg</SHORT-NAME>
                               <DESC>
                                 <L-2 L="EN">Protocol Str/Dtr config register address.</L-2>
@@ -2162,7 +2162,7 @@
                               <MAX>65535</MAX>
                               <MIN>0</MIN>
                             </ECUC-INTEGER-PARAM-DEF>
-                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2892091b-2e83-4a3e-b8fb-b042fdcafe8c">
+                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:a7d34624-f622-468e-9519-b7dec655a7be">
                               <SHORT-NAME>FlsProtocolStrDtrConfigRegData</SHORT-NAME>
                               <DESC>
                                 <L-2 L="EN">Protocol Str/Dtr config register data to be written.</L-2>
@@ -2327,7 +2327,7 @@
                     </ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
                   </REFERENCES>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:48a5cfc6-7ab9-44e4-a3eb-9e4eb901c845">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:5c56c44a-c33b-4780-a4d2-98c9c720b241">
                   <SHORT-NAME>FlsSectorList</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">List of flashable sectors and pages.The maximum number of sectors/sector size/pages/pagesize that can be configured, is based on external flash used, and care must be taken to configure these parameters as per the external flash used</L-2>
@@ -2446,7 +2446,7 @@
                 <L-2 L="EN">Container for general parameters of the flash driver. These parameters are always pre-compile.</L-2>
               </DESC>
               <PARAMETERS>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:622bd1f2-a9e0-4043-9b1a-8baa38771911">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:e652c8ee-8826-46cc-b72d-09d4261b6224">
                   <SHORT-NAME>FlsAcLoadOnJobStart</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">The flash driver shall load the flash access code to RAM whenever an erase or write job is started and unload (overwrite) it after that job has been finished or canceled.</L-2>
@@ -2615,7 +2615,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:760f215b-bb6c-4810-950c-be3df14fa844">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:bb37d902-7836-4dd0-8f54-34dea8373461">
                   <SHORT-NAME>FlsGetJobResultApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Compile switch to enable and disable the Fls_GetJobResult function.</L-2>
@@ -3123,7 +3123,7 @@
                   <MAX>INF</MAX>
                   <MIN>0.0</MIN>
                 </ECUC-FLOAT-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:61ce65fd-81a1-4a8e-93b4-9ab14d046848">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:a4ddf197-81fe-4c0c-985e-eaf102a5602a">
                   <SHORT-NAME>FlsDeviceVariant</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Select required Device Variant.</L-2>

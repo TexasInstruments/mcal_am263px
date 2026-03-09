@@ -469,6 +469,7 @@
             <COMPILER UUID="5b252f7d-33c9-466f-9573-9877d7f656ec">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb   -DAM261X_PLATFORM </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </COMPILER>
@@ -477,6 +478,7 @@
             <LINKER UUID="2fee982e-243e-4f73-b7df-edf8c9b26e85">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </LINKER>
@@ -554,7 +556,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="7f808ba2-63db-46f4-8000-d8d86708c8b8">
+            <BSW-MODULE-ENTRY UUID="4e461087-68ee-40c6-961c-c3ee9c75b456">
               <SHORT-NAME>Can_CheckWakeup</SHORT-NAME>
               <SERVICE-ID>11</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>

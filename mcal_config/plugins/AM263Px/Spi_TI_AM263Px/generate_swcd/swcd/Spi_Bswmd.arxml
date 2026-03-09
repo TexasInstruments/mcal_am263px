@@ -377,7 +377,7 @@
                   <INTERRUPT-CATEGORY>[!IF "SpiGeneral/SpiIrqType = 'SPI_ISR_CAT2'"!]CAT-2[!ELSE!]CAT-1[!ENDIF!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="3574e0f1-073b-48d7-b303-803a7104efc3">
+                <BSW-INTERRUPT-ENTITY UUID="9362a781-0ba5-4021-b1b6-fda91f02d899">
                   <SHORT-NAME>Spi_IrqUnitMcspi5TxRx</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
@@ -397,7 +397,7 @@
                   <INTERRUPT-CATEGORY>[!IF "SpiGeneral/SpiIrqType = 'SPI_ISR_CAT2'"!]CAT-2[!ELSE!]CAT-1[!ENDIF!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="ceed6900-fce9-4261-a8fb-129bc6a02ecc">
+                <BSW-INTERRUPT-ENTITY UUID="51bc2cdb-ddf4-4f5a-91db-cafe010d3188">
                   <SHORT-NAME>Spi_IrqUnitMcspi6TxRx</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
@@ -417,7 +417,7 @@
                   <INTERRUPT-CATEGORY>[!IF "SpiGeneral/SpiIrqType = 'SPI_ISR_CAT2'"!]CAT-2[!ELSE!]CAT-1[!ENDIF!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="aaa3cd5f-f394-4f6d-a65a-c1e655a30824">
+                <BSW-INTERRUPT-ENTITY UUID="ab1b4e84-2780-4f3f-8793-3762b770e1a5">
                   <SHORT-NAME>Spi_IrqUnitMcspi7TxRx</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
@@ -634,6 +634,7 @@
             <COMPILER UUID="21bccd6a-4712-4ab8-a748-3bd9b1423ccb">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb  -DAM263PX_SIP_PACKAGE  -DAM263PX_PLATFORM -DAM263PX_R_PACKAGE -DAM263PX_C_PACKAGE </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </COMPILER>
@@ -642,6 +643,7 @@
             <LINKER UUID="7afbdb7a-c37e-45d8-a3e7-fa3c2c3a187b">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </LINKER>
@@ -830,7 +832,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="0f5c9ce7-e000-4d90-9311-5c01b0fd99e0">
+            <BSW-MODULE-ENTRY UUID="45bc6854-c0ae-4d79-8c59-0be6c48d749f">
               <SHORT-NAME>Spi_IrqUnitMcspi5TxRx</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -839,7 +841,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="18647505-b5a6-440e-969a-7cde0b7ebe77">
+            <BSW-MODULE-ENTRY UUID="14514a02-4d88-490f-a98b-eb3c9a8f2364">
               <SHORT-NAME>Spi_IrqUnitMcspi6TxRx</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -848,7 +850,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="4a2d94c1-8363-49ba-b39e-25f52cf9568c">
+            <BSW-MODULE-ENTRY UUID="d941ebe9-3547-41ea-84fa-6c37ad1774f3">
               <SHORT-NAME>Spi_IrqUnitMcspi7TxRx</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>

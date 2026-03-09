@@ -58,6 +58,7 @@
 /* ========================================================================== */
 
 #include "Can.h"
+#include "sys_common.h"
 
 #if (CAN_ISR_TYPE == CAN_ISR_CAT2)
 #include "Os.h"

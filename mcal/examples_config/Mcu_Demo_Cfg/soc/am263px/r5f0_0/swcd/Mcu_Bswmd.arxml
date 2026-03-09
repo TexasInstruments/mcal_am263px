@@ -135,7 +135,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Mcu_TI_AM263px/Mcu_ModuleEntry/Mcu_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="a8325b9b-f8d1-493c-b7a7-9b001c3b7c48">
+                <BSW-CALLED-ENTITY UUID="3dc827ed-b354-42e3-b043-99d6ce501dd1">
                   <SHORT-NAME>Mcu_Init</SHORT-NAME>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
@@ -265,6 +265,7 @@
             <COMPILER UUID="ec9398f8-1653-4c0e-bdbb-2d50f7344b3a">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb  -DAM263PX_SIP_PACKAGE  -DAM263PX_PLATFORM -DAM263PX_R_PACKAGE -DAM263PX_C_PACKAGE </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </COMPILER>
@@ -273,6 +274,7 @@
             <LINKER UUID="627ebbe6-6b76-4bed-8cae-64b1695abcaa">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </LINKER>
@@ -389,7 +391,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="fc79633b-62cd-4995-a36c-0ff71639242a">
+            <BSW-MODULE-ENTRY UUID="bd4b248c-b7a8-4f76-ba7d-aca9fba97197">
               <SHORT-NAME>Mcu_Init</SHORT-NAME>
               <SERVICE-ID>0</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>

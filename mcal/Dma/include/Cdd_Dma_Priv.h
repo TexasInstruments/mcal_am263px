@@ -1607,7 +1607,7 @@ sint32         CDD_EDMA_lld_unregisterIntr(Cdd_Dma_Handler *hEdma);
  *
  *  \sa     #CDD_EDMA_open()
  */
-void           CDD_EDMA_TransferCompletion_MasterIsr(void);
+MCAL_INTERRUPT_ATTRIBUTE void CDD_EDMA_TransferCompletion_MasterIsr(void);
 
 /**
  *  \brief  Function used to get the dummy TCC in case of chaining

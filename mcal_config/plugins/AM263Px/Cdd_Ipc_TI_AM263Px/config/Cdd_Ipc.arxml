@@ -216,7 +216,7 @@
                         </ECUC-FUNCTION-NAME-DEF-CONDITIONAL>
                       </ECUC-FUNCTION-NAME-DEF-VARIANTS>
                     </ECUC-FUNCTION-NAME-DEF>
-                    <ECUC-FUNCTION-NAME-DEF UUID="354621cb-2f1c-4667-9bc1-a72ce7e28a06">
+                    <ECUC-FUNCTION-NAME-DEF UUID="ECUC:637edf10-e682-46ab-8f5f-a887fcd75e07">
                       <SHORT-NAME>CddIpcrecvCallbackArguments</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Function Pointer to recv callback function&apos;s arguments</L-2>
@@ -248,7 +248,7 @@
                         </ECUC-FUNCTION-NAME-DEF-CONDITIONAL>
                       </ECUC-FUNCTION-NAME-DEF-VARIANTS>
                     </ECUC-FUNCTION-NAME-DEF>
-                    <ECUC-FUNCTION-NAME-DEF UUID="354621cb-2f1c-4667-9bc1-a72ce7e28a06">
+                    <ECUC-FUNCTION-NAME-DEF UUID="ECUC:19edda02-7547-473a-ab63-c6ca5a2c7494">
                       <SHORT-NAME>CddIpcrecvNotifyCallback</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Function pointer to IPC notify message Callback function.                                                 User can pass a pointer to a custom defined arguments structure and the callback                                                 passes this pointer when a notify interrupt is received</L-2>
@@ -280,7 +280,7 @@
                         </ECUC-FUNCTION-NAME-DEF-CONDITIONAL>
                       </ECUC-FUNCTION-NAME-DEF-VARIANTS>
                     </ECUC-FUNCTION-NAME-DEF>
-                    <ECUC-FUNCTION-NAME-DEF UUID="354621cb-2f1c-4667-9bc1-a72ce7e28a06">
+                    <ECUC-FUNCTION-NAME-DEF UUID="ECUC:02217d26-6ab8-4700-bda1-b73470f384f5">
                       <SHORT-NAME>CddIpcrecvNotifyCallbackArguments</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Pointer to  IPC notify message callback function&apos;s arguments</L-2>
@@ -322,7 +322,7 @@
                 <L-2 L="EN">General configuration settings for Complex device driver</L-2>
               </DESC>
               <PARAMETERS>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:57941233-82f4-49e1-b8ec-0b9e86dc8b82">
                   <SHORT-NAME>CddVersionInfoApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Cdd_IpcGetVersionInfo function ON or OFF.</L-2>
@@ -339,7 +339,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:930f36a3-fca4-49b0-bb4a-92d7a8e68878">
                   <SHORT-NAME>CddDeinitApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Cdd_IpcDeinit function ON or OFF.</L-2>
@@ -356,7 +356,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:0304431b-1236-4e5f-af45-7f7d59e66608">
                   <SHORT-NAME>CddIpcWriteApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Cdd_IpcWrite function ON or OFF.</L-2>
@@ -373,7 +373,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:b7f343ff-116a-451e-9d1a-03e7bc857c4e">
                   <SHORT-NAME>CddIpcReadApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Cdd_IpcRead function ON or OFF.</L-2>
@@ -390,7 +390,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:e3ea4af2-6f89-483e-8ae4-801c2ee3999b">
                   <SHORT-NAME>CddIpcRpMsgEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switch to enable RpMsg API&apos;s to be enabled or not.</L-2>
@@ -407,7 +407,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:66397e6b-edb9-4552-bb96-7f203d750a51">
                   <SHORT-NAME>CddIpcRecvCallBackEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switch to Enable RPMsg Recv Callback (This is different from Notify Callback).</L-2>
@@ -435,7 +435,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:065e1e67-75f1-446c-b306-9253860d5cb6">
                   <SHORT-NAME>CddIpcRecvNotifyCallbackEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switch to enable RPMsg Notify message Recv Callback.</L-2>
@@ -463,7 +463,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:c8be6c05-dc99-4260-a594-8f49d1e99cab">
                   <SHORT-NAME>CddRegisterReadBackApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the  Cdd_IpcRegisterReadBack function ON or OFF.</L-2>
@@ -497,7 +497,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:35facf3e-95ac-4ca8-b08b-cf05a363dfa0">
                   <SHORT-NAME>CddIpcSafeIpcEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switch to enable Safe Ipc to be enabled or not.</L-2>
@@ -514,7 +514,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:850c1709-4d6b-4daa-8e12-c1545d7f8d10">
                   <SHORT-NAME>CddIpcCrcEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switch to enable Crc to be enabled or not.</L-2>
@@ -531,7 +531,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-FUNCTION-NAME-DEF UUID="354621cb-2f1c-4667-9bc1-a72ce7e28a06">
+                <ECUC-FUNCTION-NAME-DEF UUID="ECUC:bb5db37a-5369-46ec-b285-55a5fb6915f8">
                   <SHORT-NAME>CddIpcCrcHookFunc</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Hook function in application for Crc Calculation</L-2>
@@ -611,7 +611,7 @@
                   <MAX>2147483648</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2455fd9a-fcf6-4931-a773-d93f5184081f">
                   <SHORT-NAME>CddIpcNumOfBuffers</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter indicates the number of buffers for sending RPMsg</L-2>
@@ -626,7 +626,7 @@
                   </VALUE-CONFIG-CLASSES>
                   <DEFAULT-VALUE>8</DEFAULT-VALUE>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:b3459c40-5f6e-4686-a0e1-76ac5e47c44d">
                   <SHORT-NAME>CddIpcMaxBufferSize</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter indicates the Max size of each buffer. Note that the actual size available is 16 bytes less than the above chosen value (16 bytes are used for the header in RPMsg)</L-2>
@@ -641,7 +641,7 @@
                   </VALUE-CONFIG-CLASSES>
                   <DEFAULT-VALUE>128</DEFAULT-VALUE>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:1c1114a5-6103-4f2a-94ea-a02869338eb5">
                   <SHORT-NAME>CddDefaultOSCounterId</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Default Os Counter Id if node reference to OsCounter ref CddOsCounterRef is not set</L-2>

@@ -46,17 +46,17 @@ Typedef for the ISR Function Array.
 
 | Return type    | Function Name           |      Brief        |
 | -------------- | ----------------------- | ----------------- |
-| void | **[Gpt_Ch0Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch0isr)**(void )| Interrupt Functions.  |
-| void | **[Gpt_Ch1Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch1isr)**(void )| Channel 1 interrupt service routine.  |
-| void | **[Gpt_Ch2Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch2isr)**(void )| Channel 2 interrupt service routine.  |
-| void | **[Gpt_Ch3Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch3isr)**(void )| Channel 3 interrupt service routine.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Gpt_Ch0Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch0isr)**(void )| Interrupt Functions.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Gpt_Ch1Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch1isr)**(void )| Channel 1 interrupt service routine.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Gpt_Ch2Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch2isr)**(void )| Channel 2 interrupt service routine.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[Gpt_Ch3Isr](../Modules/group___g_p_t___i_r_q.md#function-gpt_ch3isr)**(void )| Channel 3 interrupt service routine.  |
 
 
 
 ### function Gpt_Ch0Isr
 
 ```
-void Gpt_Ch0Isr(
+MCAL_INTERRUPT_ATTRIBUTE void Gpt_Ch0Isr(
     void 
 )
 ```
@@ -71,7 +71,7 @@ Channel 0 interrupt service routine
 ### function Gpt_Ch1Isr
 
 ```
-void Gpt_Ch1Isr(
+MCAL_INTERRUPT_ATTRIBUTE void Gpt_Ch1Isr(
     void 
 )
 ```
@@ -83,7 +83,7 @@ Channel 1 interrupt service routine.
 ### function Gpt_Ch2Isr
 
 ```
-void Gpt_Ch2Isr(
+MCAL_INTERRUPT_ATTRIBUTE void Gpt_Ch2Isr(
     void 
 )
 ```
@@ -95,7 +95,7 @@ Channel 2 interrupt service routine.
 ### function Gpt_Ch3Isr
 
 ```
-void Gpt_Ch3Isr(
+MCAL_INTERRUPT_ATTRIBUTE void Gpt_Ch3Isr(
     void 
 )
 ```

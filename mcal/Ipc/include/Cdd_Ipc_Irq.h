@@ -98,7 +98,7 @@ extern "C" {
 /** \brief IPC Master ISR functions */
 #if ((CDD_IPC_ISR_TYPE == CDD_IPC_ISR_CAT1) || (CDD_IPC_ISR_TYPE == CDD_IPC_ISR_VOID))
 /** \brief Channel 0 interrupt service routine */
-void Cdd_Ipc_Isr(void);
+MCAL_INTERRUPT_ATTRIBUTE void Cdd_Ipc_Isr(void);
 #elif (CDD_IPC_ISR_TYPE == CDD_IPC_ISR_CAT2)
 ISR(Cdd_Ipc_Isr);
 #endif /* ((CDD_IPC_ISR_TYPE == CDD_IPC_ISR_CAT1).... */

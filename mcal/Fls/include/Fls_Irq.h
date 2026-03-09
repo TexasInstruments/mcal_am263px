@@ -92,7 +92,7 @@ extern "C" {
 /* ISR of FLS. */
 /* The attribute of ARM Interrupt is used for FLS ISR. */
 #if ((FLS_ISR_TYPE == FLS_ISR_CAT1) || (FLS_ISR_TYPE == FLS_ISR_VOID))
-FUNC(void, FLS_CODE_FAST) Fls_Hdlr(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, FLS_CODE_FAST) Fls_Hdlr(void);
 #elif ((FLS_ISR_TYPE == FLS_ISR_CAT2))
 ISR(Fls_Hdlr);
 #endif

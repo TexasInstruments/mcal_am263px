@@ -596,7 +596,7 @@ EDMA interrupt callback function prototype.</p>
 <td><p><strong><a class="reference internal" href="#function-cdd-edma-lld-unregisterintr"><span class="std std-ref">CDD_EDMA_lld_unregisterIntr</span></a></strong>(Cdd_Dma_Handler * hEdma)</p></td>
 <td><p>Function to unregister callback function for a TCC.</p></td>
 </tr>
-<tr class="row-odd"><td><p>void</p></td>
+<tr class="row-odd"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-cdd-edma-transfercompletion-masterisr"><span class="std std-ref">CDD_EDMA_TransferCompletion_MasterIsr</span></a></strong>(void )</p></td>
 <td><p>Function which will be called on the interrupt comes, will act as master ISR function.</p></td>
 </tr>
@@ -1271,7 +1271,7 @@ Function to unregister callback function for a TCC.</p>
 </section>
 <section id="function-cdd-edma-transfercompletion-masterisr">
 <h3>function CDD_EDMA_TransferCompletion_MasterIsr<a class="headerlink" href="#function-cdd-edma-transfercompletion-masterisr" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_TransferCompletion_MasterIsr</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">MCAL_INTERRUPT_ATTRIBUTE</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">CDD_EDMA_TransferCompletion_MasterIsr</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
 </pre></div>

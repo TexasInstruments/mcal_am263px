@@ -126,7 +126,7 @@ extern "C" {
  *  \endverbatim
  */
 #if ((ETH_ISR_TYPE == ETH_ISR_CAT1) || (ETH_ISR_TYPE == ETH_ISR_VOID))
-FUNC(void, ETH_CODE_ISR) Eth_RxIrqHdlr_0(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, ETH_CODE_ISR) Eth_RxIrqHdlr_0(void);
 #elif (ETH_ISR_TYPE == ETH_ISR_CAT2)
 ISR(Eth_RxIrqHdlr_0);
 #endif
@@ -150,7 +150,7 @@ ISR(Eth_RxIrqHdlr_0);
  */
 
 #if ((ETH_ISR_TYPE == ETH_ISR_CAT1) || (ETH_ISR_TYPE == ETH_ISR_VOID))
-FUNC(void, ETH_CODE_ISR) Eth_TxIrqHdlr_0(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, ETH_CODE_ISR) Eth_TxIrqHdlr_0(void);
 #elif (ETH_ISR_TYPE == ETH_ISR_CAT2)
 ISR(Eth_TxIrqHdlr_0);
 #endif
@@ -173,7 +173,7 @@ ISR(Eth_TxIrqHdlr_0);
  *  \endverbatim
  */
 #if ((ETH_ISR_TYPE == ETH_ISR_CAT1) || (ETH_ISR_TYPE == ETH_ISR_VOID))
-FUNC(void, ETH_CODE_ISR) Eth_MiscIrqHdlr_0(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, ETH_CODE_ISR) Eth_MiscIrqHdlr_0(void);
 #elif (ETH_ISR_TYPE == ETH_ISR_CAT2)
 ISR(Eth_MiscIrqHdlr_0);
 #endif
@@ -196,7 +196,7 @@ ISR(Eth_MiscIrqHdlr_0);
  *  \endverbatim
  */
 #if ((ETH_ISR_TYPE == ETH_ISR_CAT1) || (ETH_ISR_TYPE == ETH_ISR_VOID))
-void Eth_RxThreshIrqHdlr_0(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, ETH_CODE_ISR) Eth_RxThreshIrqHdlr_0(void);
 #elif (ETH_ISR_TYPE == ETH_ISR_CAT2)
 ISR(Eth_RxThreshIrqHdlr_0);
 #endif

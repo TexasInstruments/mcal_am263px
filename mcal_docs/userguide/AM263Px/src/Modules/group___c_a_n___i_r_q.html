@@ -125,35 +125,35 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>void</p></td>
+<tr class="row-even"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can-0-int0isr"><span class="std std-ref">Can_0_Int0ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 0/INT 0.</p></td>
 </tr>
-<tr class="row-odd"><td><p>void</p></td>
+<tr class="row-odd"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can_0_int1isr"><span class="std std-ref">Can_0_Int1ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 0/INT 1.</p></td>
 </tr>
-<tr class="row-even"><td><p>void</p></td>
+<tr class="row-even"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can-1-int0isr"><span class="std std-ref">Can_1_Int0ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 1/INT 0.</p></td>
 </tr>
-<tr class="row-odd"><td><p>void</p></td>
+<tr class="row-odd"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can_1_int1isr"><span class="std std-ref">Can_1_Int1ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 1/INT 1.</p></td>
 </tr>
-<tr class="row-even"><td><p>void</p></td>
+<tr class="row-even"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can-2-int0isr"><span class="std std-ref">Can_2_Int0ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 3/INT 0.</p></td>
 </tr>
-<tr class="row-odd"><td><p>void</p></td>
+<tr class="row-odd"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can_2_int1isr"><span class="std std-ref">Can_2_Int1ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 3/INT 1.</p></td>
 </tr>
-<tr class="row-even"><td><p>void</p></td>
+<tr class="row-even"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can-3-int0isr"><span class="std std-ref">Can_3_Int0ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 4/INT 0.</p></td>
 </tr>
-<tr class="row-odd"><td><p>void</p></td>
+<tr class="row-odd"><td><p>MCAL_INTERRUPT_ATTRIBUTE void</p></td>
 <td><p><strong><a class="reference internal" href="#function-can_3_int1isr"><span class="std std-ref">Can_3_Int1ISR</span></a></strong>(void )</p></td>
 <td><p>This function is the Interrupt frame for CAN controller 4/INT 1.</p></td>
 </tr>
@@ -161,7 +161,7 @@
 </table>
 <section id="function-can-0-int0isr">
 <h3>function Can_0_Int0ISR<a class="headerlink" href="#function-can-0-int0isr" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_0_Int0ISR</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">MCAL_INTERRUPT_ATTRIBUTE</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_0_Int0ISR</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
 </pre></div>
@@ -189,7 +189,7 @@ This function is the Interrupt frame for CAN controller 0/INT 0.</p>
 
 </pre></div>
 </div>
-<p>void Can_0_Int1ISR(
+<p>MCAL_INTERRUPT_ATTRIBUTE void Can_0_Int1ISR(
 void
 )</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
@@ -234,7 +234,7 @@ void
 </section>
 <section id="function-can-1-int0isr">
 <h3>function Can_1_Int0ISR<a class="headerlink" href="#function-can-1-int0isr" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_1_Int0ISR</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">MCAL_INTERRUPT_ATTRIBUTE</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_1_Int0ISR</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
 </pre></div>
@@ -262,7 +262,7 @@ This function is the Interrupt frame for CAN controller 1/INT 0.</p>
 
 </pre></div>
 </div>
-<p>void Can_1_Int1ISR(
+<p>MCAL_INTERRUPT_ATTRIBUTE void Can_1_Int1ISR(
 void
 )</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
@@ -307,7 +307,7 @@ void
 </section>
 <section id="function-can-2-int0isr">
 <h3>function Can_2_Int0ISR<a class="headerlink" href="#function-can-2-int0isr" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_2_Int0ISR</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">MCAL_INTERRUPT_ATTRIBUTE</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_2_Int0ISR</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
 </pre></div>
@@ -335,7 +335,7 @@ This function is the Interrupt frame for CAN controller 3/INT 0.</p>
 
 </pre></div>
 </div>
-<p>void Can_2_Int1ISR(
+<p>MCAL_INTERRUPT_ATTRIBUTE void Can_2_Int1ISR(
 void
 )</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
@@ -380,7 +380,7 @@ void
 </section>
 <section id="function-can-3-int0isr">
 <h3>function Can_3_Int0ISR<a class="headerlink" href="#function-can-3-int0isr" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Can_3_Int0ISR</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">MCAL_INTERRUPT_ATTRIBUTE</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">Can_3_Int0ISR</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
 </pre></div>
@@ -408,7 +408,7 @@ This function is the Interrupt frame for CAN controller 4/INT 0.</p>
 
 </pre></div>
 </div>
-<p>void Can_3_Int1ISR(
+<p>MCAL_INTERRUPT_ATTRIBUTE void Can_3_Int1ISR(
 void
 )</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>

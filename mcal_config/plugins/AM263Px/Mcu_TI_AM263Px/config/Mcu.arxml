@@ -49,7 +49,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="7ba26558-4039-419f-82b6-6603ad626464">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:856c3522-8724-4607-ab74-1e52321eb772">
                   <SHORT-NAME>McuIntrCrossbarEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Pre-processor switch for enabling the Mcu Interrupt Crossbar.</L-2>
@@ -70,7 +70,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="7ba26558-4039-419f-82b6-6603ad626464">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:15269d66-95fb-4691-a402-d8676c45cd4b">
                   <SHORT-NAME>McuInputCrossbarEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Pre-processor switch for enabling the Mcu Input Crossbar.</L-2>
@@ -257,7 +257,7 @@
                   <MAX>16</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:f4a9b840-699f-40ae-8b7b-f9604c745647">
                   <SHORT-NAME>McuTimeoutDuration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">MCU timeout </L-2>
@@ -278,7 +278,7 @@
                   <MAX>4294967295</MAX>
                   <MIN>1</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:a7185ae6-4594-4c95-9163-bf1b8f91f1a6">
                   <SHORT-NAME>McuPllTimeoutDuration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">PLL timeout - used in Pll initialization. Unit is in clock ticks. Configure the timeout according to r5f clock frequency(400MHz/200MHz)</L-2>
@@ -518,7 +518,7 @@
                       <MAX>255</MAX>
                       <MIN>0</MIN>
                     </ECUC-INTEGER-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="4f815cf1-b16c-4054-bf58-9649ed0040da">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:d58dd3ba-374c-466c-9c8e-f81ab035c945">
                       <SHORT-NAME>McuClockModuleId</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">ModuleId for which clock setting to be applied.</L-2>
@@ -717,7 +717,7 @@
                         </ECUC-ENUMERATION-LITERAL-DEF>
                       </LITERALS>
                     </ECUC-ENUMERATION-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="4f815cf1-b16c-4054-bf58-9649ed0040da">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:85bdbeaf-0c61-414c-87c7-7ad2b9407426">
                       <SHORT-NAME>McuClockSourceId</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Clock source Id for selected module</L-2>
@@ -772,7 +772,7 @@
                         </ECUC-ENUMERATION-LITERAL-DEF>
                       </LITERALS>
                     </ECUC-ENUMERATION-PARAM-DEF>
-                    <ECUC-INTEGER-PARAM-DEF UUID="4f815cf1-b16c-4054-bf58-9649ed0040da">
+                    <ECUC-INTEGER-PARAM-DEF UUID="ECUC:61f7511c-cf66-4b1a-a111-f3800d27469d">
                       <SHORT-NAME>McuClockDivId</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">McuClockDivider value should be less than or equal to 255 as per hardware limitation for MII10                      and it should be less than or equal to 15 for all other modules.</L-2>
@@ -854,7 +854,7 @@
                     </ECUC-PARAM-CONF-CONTAINER-DEF>
                   </SUB-CONTAINERS>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ae144fc2-5219-449f-bb57-bb30cfca9343">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:bb08aa78-3a6f-49fc-88ff-a228f1e23808">
                   <SHORT-NAME>McuXbarChannelTriggerConfiguration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This container contains the Xbar Channel Trigger condition.</L-2>
@@ -864,7 +864,7 @@
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <REQUIRES-INDEX>true</REQUIRES-INDEX>
                   <PARAMETERS>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="b69210b4-2bfe-4ab2-adbf-69cf2d542942">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:e211b4f2-cb10-46dc-ac16-b5d44cbd59a9">
                       <SHORT-NAME>McuInterruptChannelXbar</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Cross Bar.</L-2>
@@ -1011,7 +1011,7 @@
                         </ECUC-ENUMERATION-LITERAL-DEF>
                       </LITERALS>
                     </ECUC-ENUMERATION-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="4f815cf1-b16c-4054-bf58-9649ed0040da">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:ba7f7121-28f9-4ec8-93ff-4dd5ec2f57a9">
                       <SHORT-NAME>McuInterruptChannelXbarMap</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Cross Bar.</L-2>
@@ -1568,7 +1568,7 @@
                     </ECUC-ENUMERATION-PARAM-DEF>
                   </PARAMETERS>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ae144fc2-5219-449f-bb57-bb30cfca9343">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:3468faea-25c2-440a-93d2-969b058f1019">
                   <SHORT-NAME>McuInputXbarChannelTriggerConfiguration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This container contains the Xbar Channel Trigger condition.</L-2>
@@ -1578,7 +1578,7 @@
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <REQUIRES-INDEX>true</REQUIRES-INDEX>
                   <PARAMETERS>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="b69210b4-2bfe-4ab2-adbf-69cf2d542942">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:140fba15-994b-4f86-bd91-ded627ee88cb">
                       <SHORT-NAME>McuInputChannelXbar</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Cross Bar.</L-2>
@@ -1725,7 +1725,7 @@
                         </ECUC-ENUMERATION-LITERAL-DEF>
                       </LITERALS>
                     </ECUC-ENUMERATION-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="4f815cf1-b16c-4054-bf58-9649ed0040da">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:80188578-8f1b-4463-a096-f3dd18fa0543">
                       <SHORT-NAME>McuInputChannelXbarMap</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Cross Bar.</L-2>
@@ -2450,7 +2450,7 @@
                     </ECUC-ENUMERATION-PARAM-DEF>
                   </PARAMETERS>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ae144fc2-5219-449f-bb57-bb30cfca9343">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:16aa242d-1546-4d1e-9255-df02b29c16b0">
                   <SHORT-NAME>McuGpioXbarIntrConfiguration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This container contains channel/bank selection for each output pin of GPIO_XBAR_INTRTR0 routing module</L-2>
@@ -2460,7 +2460,7 @@
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <REQUIRES-INDEX>true</REQUIRES-INDEX>
                   <PARAMETERS>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="b69210b4-2bfe-4ab2-adbf-69cf2d542942">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4bf35766-eb02-4f86-b2db-3b583e3812d9">
                       <SHORT-NAME>McuGpioIntrXbar</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">GPIO xbar Intr.</L-2>
@@ -3179,7 +3179,7 @@
                         </ECUC-ENUMERATION-LITERAL-DEF>
                       </LITERALS>
                     </ECUC-ENUMERATION-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="4f815cf1-b16c-4054-bf58-9649ed0040da">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:2c9610f2-0dce-4272-9ef2-23a718c82b7c">
                       <SHORT-NAME>McuGpioXbarOutMap</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Gpio xbar output pin mapping</L-2>
@@ -3320,7 +3320,7 @@
                     </ECUC-ENUMERATION-PARAM-DEF>
                   </PARAMETERS>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ae144fc2-5219-449f-bb57-bb30cfca9343">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:bd0bb27a-28b5-4b58-ad4f-6322fb898670">
                   <SHORT-NAME>McuPwmConfiguration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This container contains the PWM clock configuration.</L-2>
@@ -3363,7 +3363,7 @@
                       </VALUE-CONFIG-CLASSES>
                       <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Pwm/PwmChannelConfigSet/PwmChannel</DESTINATION-REF>
                     </ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
-                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="f4f8b845-61f2-40eb-8aa9-fd78fa11ebc5">
+                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="ECUC:b4aae968-b6d6-4134-8a7d-0b99f7d07766">
                       <SHORT-NAME>McuPwmGroupId</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">PwmGroupId</L-2>
@@ -3398,7 +3398,7 @@
                     </ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
                   </REFERENCES>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ae144fc2-5219-449f-bb57-bb30cfca9343">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:02ab48dd-2324-4266-80e7-e4c03769668e">
                   <SHORT-NAME>McuCddPwmConfiguration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This container contains the PWM clock configuration.</L-2>
@@ -3408,7 +3408,7 @@
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <REQUIRES-INDEX>true</REQUIRES-INDEX>
                   <REFERENCES>
-                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="f4f8b845-61f2-40eb-8aa9-fd78fa11ebc5">
+                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="ECUC:c70b9173-e591-4189-89ce-e84cddd85b5c">
                       <SHORT-NAME>McuCddPwmChannelId</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">CddPwmChannelId</L-2>
@@ -3443,7 +3443,7 @@
                     </ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
                   </REFERENCES>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ae144fc2-5219-449f-bb57-bb30cfca9343">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:e6689dbb-a551-46ce-8528-c9760e85b2bc">
                   <SHORT-NAME>McuAdcConfiguration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This container contains the ADC buffer control configuration.</L-2>
@@ -3453,7 +3453,7 @@
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <REQUIRES-INDEX>true</REQUIRES-INDEX>
                   <REFERENCES>
-                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="f4f8b845-61f2-40eb-8aa9-fd78fa11ebc5">
+                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="ECUC:0e2c58dc-9481-4b86-bfc0-e00af5d96e64">
                       <SHORT-NAME>McuAdcHWUnitId</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">AdcHwUnit</L-2>
@@ -3542,7 +3542,7 @@
                   <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <REFERENCES>
-                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="f4f8b845-61f2-40eb-8aa9-fd78fa11ebc5">
+                    <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="ECUC:697736ab-8bfd-4602-9022-a9a199bf51d2">
                       <SHORT-NAME>MCU_E_CLOCK_FAILURE</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Reference to configured DEM event to report &quot;Clock source failure&quot;.</L-2>
@@ -3754,7 +3754,7 @@
                       <MAX>4294967295</MAX>
                       <MIN>0</MIN>
                     </ECUC-INTEGER-PARAM-DEF>
-                    <ECUC-INTEGER-PARAM-DEF UUID="9a74b34e-1420-423f-937e-6814196e6e6d">
+                    <ECUC-INTEGER-PARAM-DEF UUID="ECUC:fe0ad437-a988-45a8-b8fb-48b5d28f33b8">
                       <SHORT-NAME>McuRamSectionWriteSize</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">This parameter shall define the size in bytes of data which can be written into RAM at once.</L-2>

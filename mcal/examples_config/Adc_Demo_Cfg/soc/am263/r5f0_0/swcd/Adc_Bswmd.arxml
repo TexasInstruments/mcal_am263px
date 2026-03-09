@@ -139,7 +139,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-CALLED-ENTITY UUID="651bbd50-7d63-4d59-965e-17dff3fd0f04">
+                <BSW-CALLED-ENTITY UUID="622ce71e-3683-42a5-b0c8-64729bcb1858">
                   <SHORT-NAME>Adc_DeInit</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Adc_TI_AM263x/Adc/Adc_Behavior/ADC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -289,7 +289,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Adc_TI_AM263x/Adc_ModuleEntry/Adc_PollingMainFunction</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="08bd6605-9162-4248-b0c7-bf7ddd98d4ed">
+                <BSW-CALLED-ENTITY UUID="1dc2d8eb-caea-44be-b1f8-0ae41681abe8">
                   <SHORT-NAME>Adc_ReadGroup</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Adc_TI_AM263x/Adc/Adc_Behavior/ADC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -457,6 +457,7 @@
             <COMPILER UUID="5b252f7d-33c9-466f-9573-9877d7f656ec">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb   -DAM263X_PLATFORM </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>2.1.3</VERSION>
             </COMPILER>
@@ -465,6 +466,7 @@
             <LINKER UUID="2fee982e-243e-4f73-b7df-edf8c9b26e85">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>2.1.3</VERSION>
             </LINKER>
@@ -563,7 +565,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="1d97bed1-0ab4-4928-82fa-b02fa2d4757a">
+            <BSW-MODULE-ENTRY UUID="72fdb2ec-6bbc-4e21-8273-1cdd5771048b">
               <SHORT-NAME>Adc_ADCINT2_IrqUnit0</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -608,7 +610,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="0a6277dc-f1ab-456a-b966-dfc1e64a5f3f">
+            <BSW-MODULE-ENTRY UUID="f7a8aa56-6adb-455f-9b50-1318a9d41235">
               <SHORT-NAME>Adc_ADCINT3_IrqUnit0</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -653,7 +655,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="8cfa77b5-0147-4f7c-84cb-dbba8182a761">
+            <BSW-MODULE-ENTRY UUID="ca52a31c-80cc-4f4b-93c2-9e1b2d7d8170">
               <SHORT-NAME>Adc_ADCINT4_IrqUnit0</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -698,7 +700,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ad2befa7-4cd5-4c70-966c-2dfa1ae6bbda">
+            <BSW-MODULE-ENTRY UUID="06985fb8-2902-4aef-b7d4-96827d989673">
               <SHORT-NAME>Adc_DeInit</SHORT-NAME>
               <SERVICE-ID>1</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>

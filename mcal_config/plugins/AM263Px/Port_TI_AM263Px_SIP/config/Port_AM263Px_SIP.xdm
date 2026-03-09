@@ -123,7 +123,7 @@
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
 														<a:a name="UUID"
-                                                            value="112c0c66-60ac-4eed-a84e-0c70216627f1"/>
+                                                            value="ECUC:61e225b9-88bc-4cef-b5c0-7008eac48ca4"/>
 														<a:da name="RANGE" type="XPath" expr="ecu:list(concat('Port_TI_AM263Px_Signals_',node:value(../PortPinPeripheral)))"/>
 													</v:var>
 													<v:var name="PortPinName" type="ENUMERATION">
@@ -155,7 +155,7 @@
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="true"/>
 														<a:a name="UUID"
-                                                        value="28150d9d-10bf-491d-a6f5-478585de3da6"/>
+                                                        value="ECUC:3044a688-30ac-4695-ab39-140e5eae818f"/>
 														<!--<a:da name="DEFAULT" type="XPath" expr="num:i(string-length(substring-before(ecu:get('Port_TI_AM263Px_Pins'),node:value(../PortPinName))) - string-length(translate(substring-before(ecu:get('Port_TI_AM263Px_Pins'),node:value(../PortPinName)),',','')) + 1)" />-->
 
 														<a:da name="DEFAULT" type="XPath" expr="num:i(number(ecu:get(concat('Port_TI_AM263Px_PinId_',node:value(../PortPinName)))))"/>
@@ -173,7 +173,7 @@
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
 														<a:a name="UUID"
-                                                              value="28150d9d-10bf-491d-a6f5-478585de3da6"/>
+                                                              value="ECUC:5d5248ee-0995-4a00-9b69-bd098238b97c"/>
 														<a:da name="DEFAULT" type="XPath" expr="ecu:get(concat('Port_TI_AM263Px_',node:value(../PortPinName),'.Addr'))"/>
 														<a:da name="ENABLE" value = "true"/>
 													</v:var>
@@ -190,7 +190,7 @@
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
 														<a:a name="UUID"
-                                                                value="112c0c66-60ac-4eed-a84e-0c70216627f1"/>
+                                                                value="ECUC:b056e26d-a6ea-44e2-91c5-dba5d54617ac"/>
 														<a:da name="RANGE">
 															<a:v>PORT_PIN_IN</a:v>
 															<a:v>PORT_PIN_OUT</a:v>
@@ -318,7 +318,7 @@
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
 														<a:a name="UUID"
-                                                            value="112c0c66-60ac-4eed-a84e-0c70216627f1"/>
+                                                            value="ECUC:a1b209bf-e53d-4e71-9f2f-2cc8c16fe581"/>
 														<a:da name="RANGE">
 															<a:v>PORT_PIN_PULL_INHIBIT_ENABLE</a:v>
 															<a:v>PORT_PIN_PULL_INHIBIT_DISABLE</a:v>
@@ -359,7 +359,7 @@
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
 														<a:a name="UUID"
-                                                            value="293bdc0b-2824-45fc-8d06-e53c2ad1c47e"/>
+                                                            value="ECUC:3e133acb-2d34-475f-881c-da532400f7c0"/>
 														<a:da name="DEFAULT" value="false"/>
                     									<a:da name="ENABLE" value="false"/>
                     									<a:da name="EDITABLE" value="false"/>
@@ -376,7 +376,7 @@
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
 														<a:a name="UUID"
-                                                            value="293bdc0b-2824-45fc-8d06-e53c2ad1c47e"/>
+                                                            value="ECUC:0bcb35cf-8838-4c62-a407-90ca5fa22028"/>
 														<a:da name="DEFAULT" value="false"/>
                     									<a:da name="ENABLE" value="false"/>
                     									<a:da name="EDITABLE" value="false"/>
@@ -393,7 +393,7 @@
 														<a:a name="ORIGIN" value="Texas Instruments"/>
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-														<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+														<a:a name="UUID" value="ECUC:9cc10c84-08d2-4934-ba95-f7cfa5a52c3f"/>
 														<a:da name="ENABLE" value="true"/>
 														<a:da name="DEFAULT" value="PORT_INVTYPE_DEFAULT"/>
 														<a:da name="RANGE">
@@ -414,7 +414,7 @@
 														<a:a name="ORIGIN" value="Texas Instruments"/>
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-														<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+														<a:a name="UUID" value="ECUC:40030815-5cea-4444-a33f-9bc6c1971c83"/>
 														<a:da name="ENABLE" value="true"/>
 														<a:da name="DEFAULT" value="PORT_QUALTYPE_DEFAULT"/>
 														<a:da name="RANGE">
@@ -437,7 +437,7 @@
 														<a:a name="ORIGIN" value="Texas Instruments"/>
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-														<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+														<a:a name="UUID" value="ECUC:24fd4eee-ead5-427b-8d45-0f83424e0699"/>
 														<a:da name="ENABLE" value="true"/>
 														<a:da name="DEFAULT" value="PORT_PIN_SLEWCONTROL_FAST_SLEW"/>
 														<a:da name="RANGE">
@@ -457,7 +457,7 @@
 														<a:a name="ORIGIN" value="Texas Instruments"/>
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-														<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+														<a:a name="UUID" value="ECUC:b071309c-5f1b-4f24-b55b-73f61662e2d3"/>
 														<a:da name="ENABLE" value="true"/>
 														<a:da name="DEFAULT" value="PORT_PIN_INPUT_RETAIN_HW_CTRL"/>
 														<a:da name="RANGE">
@@ -477,7 +477,7 @@
 														<a:a name="ORIGIN" value="Texas Instruments"/>
 														<a:a name="SCOPE" value="LOCAL"/>
 														<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-														<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+														<a:a name="UUID" value="ECUC:98cd163d-8e26-4f53-80c8-d9e70d7368eb"/>
 														<a:da name="ENABLE" value="true"/>
 														<a:da name="DEFAULT" value="PORT_PIN_OUTPUT_RETAIN_HW_CTRL"/>
 														<a:da name="RANGE">
@@ -616,7 +616,7 @@
 									<a:a name="ORIGIN" value="Texas Instruments"/>
 									<a:a name="SCOPE" value="LOCAL"/>
 									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-									<a:a name="UUID" value="4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+									<a:a name="UUID" value="ECUC:b52ab3db-fe2d-4425-9c59-efef6dfa8156"/>
 									<a:da name="ENABLE" value="true"/>
                                     <a:da name="DEFAULT" value="AM263Px"/>
 									<a:da name="RANGE">
@@ -705,7 +705,7 @@
 									<a:a name="ORIGIN" value="Texas Instruments"/>
 									<a:a name="SCOPE" value="LOCAL"/>
 									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-									<a:a name="UUID" value="0bc2dd41-8a83-44a2-8013-8fb46a095ddc"/>
+									<a:a name="UUID" value="ECUC:cb2d3d00-1bee-4720-8c52-0af8c42688ee"/>
 									<a:da name="DEFAULT" value="true"/>
 								</v:var>
 								<v:var name="PortEnableIntrApi" type="BOOLEAN">
@@ -773,7 +773,7 @@
 									<icc:v class="PreCompile">VariantPreCompile</icc:v>
 								  </a:a>
 								  <a:a name="ORIGIN" value="Texas Instruments"/>
-								  <a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+								  <a:a name="UUID" value="ECUC:ad139a0c-ea68-4bf1-b78f-2ef52e7c4cc4"/>
 								  <a:da name="INVALID" type="Range">
 									<a:tst expr="&lt;=4294967295"/>
 									<a:tst expr="&gt;=1"/>

@@ -533,6 +533,7 @@
             <COMPILER UUID="5b252f7d-33c9-466f-9573-9877d7f656ec">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb   -DAM263X_PLATFORM </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>2.1.3</VERSION>
             </COMPILER>
@@ -541,6 +542,7 @@
             <LINKER UUID="2fee982e-243e-4f73-b7df-edf8c9b26e85">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>2.1.3</VERSION>
             </LINKER>
@@ -600,7 +602,7 @@
         <AR-PACKAGE UUID="1566c979-f45e-487c-bc3b-f53f40dd5feb">
           <SHORT-NAME>Can_ModuleEntry</SHORT-NAME>
           <ELEMENTS>
-            <BSW-MODULE-ENTRY UUID="0c16dfc7-8957-4508-9120-00506f632384">
+            <BSW-MODULE-ENTRY UUID="256d92ab-20ff-41f9-841f-2ff30b48a8fa">
               <SHORT-NAME>Can_0_Int0ISR</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -609,7 +611,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="0a6277dc-f1ab-456a-b966-dfc2e64a5f3f">
+            <BSW-MODULE-ENTRY UUID="ac9b1175-0f8f-4a13-b59f-3c34d4c2f6fe">
               <SHORT-NAME>Can_1_Int0ISR</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -618,7 +620,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="b22ac66f-17f3-474a-b3ef-dbefaa6fe9f1">
+            <BSW-MODULE-ENTRY UUID="4e461087-68ee-40c6-961c-c3ee9c75b456">
               <SHORT-NAME>Can_2_Int0ISR</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -627,7 +629,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="d14c8160-b8b3-4eae-81ff-f9f37e3bb07e">
+            <BSW-MODULE-ENTRY UUID="f15d8caa-e4d6-4e42-9e8a-cf4535f47ad0">
               <SHORT-NAME>Can_3_Int0ISR</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -636,7 +638,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="7f808ba2-63db-46f4-8000-d8d86708c8b8">
+            <BSW-MODULE-ENTRY UUID="ecdac919-94b0-42d6-aa10-074fd80312ad">
               <SHORT-NAME>Can_CheckWakeup</SHORT-NAME>
               <SERVICE-ID>11</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>

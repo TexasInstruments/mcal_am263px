@@ -68,6 +68,7 @@
 /* ========================================================================== */
 
 #include "Cdd_I2c.h"
+#include "sys_common.h"
 #include "Os.h"
 
 #ifdef __cplusplus
@@ -94,7 +95,7 @@ extern "C" {
 
 #if defined(CDD_I2C_HW_UNIT_0_ACTIVE)
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
-FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit0_ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit0_ISR(void);
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)
 ISR(Cdd_I2c_HwUnit0_ISR);
 #endif
@@ -102,7 +103,7 @@ ISR(Cdd_I2c_HwUnit0_ISR);
 
 #if defined(CDD_I2C_HW_UNIT_1_ACTIVE)
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
-FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit1_ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit1_ISR(void);
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)
 ISR(Cdd_I2c_HwUnit1_ISR);
 #endif
@@ -110,7 +111,7 @@ ISR(Cdd_I2c_HwUnit1_ISR);
 
 #if defined(CDD_I2C_HW_UNIT_2_ACTIVE)
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
-FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit2_ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit2_ISR(void);
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)
 ISR(Cdd_I2c_HwUnit2_ISR);
 #endif
@@ -118,7 +119,7 @@ ISR(Cdd_I2c_HwUnit2_ISR);
 
 #if defined(CDD_I2C_HW_UNIT_3_ACTIVE)
 #if ((CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT1) || (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_VOID))
-FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit3_ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CDD_I2C_CODE_FAST) Cdd_I2c_HwUnit3_ISR(void);
 #elif (CDD_I2C_ISR_TYPE == CDD_I2C_ISR_CAT2)
 ISR(Cdd_I2c_HwUnit3_ISR);
 #endif

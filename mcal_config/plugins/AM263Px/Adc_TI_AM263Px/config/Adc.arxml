@@ -134,7 +134,7 @@
                         </ECUC-ENUMERATION-LITERAL-DEF>
                       </LITERALS>
                     </ECUC-ENUMERATION-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:7aa61340-e385-4037-b899-40ce3e595755">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:35c1b529-3351-42b4-aad5-e4226fae675e">
                       <SHORT-NAME>AdcHwUnitResolution</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Description: ADC Resolution of Hardware unit.</L-2>
@@ -196,7 +196,7 @@
                       <MAX>65535</MAX>
                       <MIN>0</MIN>
                     </ECUC-INTEGER-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:7aa61340-e385-4037-b899-40ce3e595755">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:2b625e84-37fc-464a-a380-2e43bb235772">
                       <SHORT-NAME>AdcHwPrescale</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Optional ADC module specific clock prescale factor, if supported by hardware.</L-2>
@@ -681,7 +681,7 @@
                           <MAX>4294967295</MAX>
                           <MIN>0</MIN>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:d11259ac-99d0-488f-9cc6-a66170fbb368">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:66f9855d-e737-4463-b018-ee5b65065cc8">
                           <SHORT-NAME>AdcChannelSampleWindow</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">The sampleWindow parameter is the acquisition window duration in SYSCLK cycles. It should be a value between 1 and 512 cycles inclusive. The selected duration must be at least as long as one ADCCLK cycle. Also, the datasheet will specify a minimum window duration requirement in nanoseconds.</L-2>
@@ -896,7 +896,7 @@
                             </ECUC-ENUMERATION-LITERAL-DEF>
                           </LITERALS>
                         </ECUC-ENUMERATION-PARAM-DEF>
-                        <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:f348b1d0-aabc-46ee-a71a-02cc6e49dca6">
+                        <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4f5f5596-8c01-471c-b190-f0a2cb6fbf9c">
                           <SHORT-NAME>AdcGroupReplacement</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Replacement mechanism, which is used on ADC group level, if a group conversion is interrupted by a group which has a higher priority.</L-2>
@@ -1693,7 +1693,7 @@
                   </VALUE-CONFIG-CLASSES>
                   <DEFAULT-VALUE>63</DEFAULT-VALUE>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:272c9c43-c3dc-45e3-88cd-2ab19c61dfea">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:8ccb54f0-fbb5-40a9-af84-5dfae46bdc4b">
                   <SHORT-NAME>AdcDmaInstance</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Number of actual DMA channels. This is of type published information and not editable</L-2>
@@ -1975,7 +1975,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:b7b8808b-2c55-473e-a396-6bf632668e85">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:06ea52ff-7845-4d77-9937-02de9007a0aa">
                   <SHORT-NAME>AdcErrorLog</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Enables/Disables ADC Group Error logging.Useful in debugging</L-2>
@@ -2107,7 +2107,7 @@
                   <MAX>1024</MAX>
                   <MIN>1</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:ab0f7a27-9247-49c3-a48e-a8409ef7fd65">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:e44512d9-80e2-4e3e-98ae-fda8a11010aa">
                   <SHORT-NAME>AdcMaxChannelCount</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Maximum Channels count across all hwunits configured</L-2>
@@ -2497,7 +2497,7 @@
                   </VALUE-CONFIG-CLASSES>
                   <DEFAULT-VALUE>6</DEFAULT-VALUE>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:272c9c43-c3dc-45e3-88cd-2ab19c61dfea">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:2d5067ec-70dc-47ac-a15e-96aaa4c78c06">
                   <SHORT-NAME>AdcMaxHwChannelId</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Number of actual HW channels - in terms of ADC HW the actual channel input to the ADC module. This is of type published information and not editable</L-2>

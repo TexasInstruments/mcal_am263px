@@ -67,13 +67,14 @@
 /* ========================================================================== */
 
 #include "Cdd_Dma.h"
+#include "sys_common.h"
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
 
 #if ((CDD_DMA_ISR_TYPE == CDD_DMA_ISR_CAT1) || (CDD_DMA_ISR_TYPE == CDD_DMA_ISR_VOID))
-void CDD_EDMA_lld_transferCompletionMasterIsrFxn(void);
+MCAL_INTERRUPT_ATTRIBUTE void CDD_EDMA_lld_transferCompletionMasterIsrFxn(void);
 #else /* (CDD_DMA_ISR_TYPE == CDD_DMA_ISR_CAT2) */
 ISR(CDD_EDMA_lld_transferCompletionMasterIsrFxn);
 #endif

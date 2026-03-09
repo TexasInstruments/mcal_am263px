@@ -101,7 +101,7 @@ extern "C" {
  */
 #if defined(LIN_INSTANCE_0_LINE_NUM_0)
 #if ((LIN_INSTANCE_0_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_0_ISR_TYPE == LIN_ISR_VOID))
-void Lin_0_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_0_Int0ISR(void);
 #endif
 #endif
 
@@ -113,7 +113,7 @@ ISR(Lin_0_Int0ISR);
 
 #if defined(LIN_INSTANCE_0_LINE_NUM_1)
 #if ((LIN_INSTANCE_0_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_0_ISR_TYPE == LIN_ISR_VOID))
-void Lin_0_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_0_Int1ISR(void);
 #endif
 #endif
 
@@ -125,7 +125,7 @@ ISR(Lin_0_Int1ISR);
 
 #if defined(LIN_INSTANCE_1_LINE_NUM_0)
 #if ((LIN_INSTANCE_1_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_1_ISR_TYPE == LIN_ISR_VOID))
-void Lin_1_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_1_Int0ISR(void);
 #endif
 #endif
 
@@ -137,7 +137,7 @@ ISR(Lin_1_Int0ISR);
 
 #if defined(LIN_INSTANCE_1_LINE_NUM_1)
 #if ((LIN_INSTANCE_1_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_1_ISR_TYPE == LIN_ISR_VOID))
-void Lin_1_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_1_Int1ISR(void);
 #endif
 #endif
 
@@ -149,7 +149,7 @@ ISR(Lin_1_Int1ISR);
 
 #if defined(LIN_INSTANCE_2_LINE_NUM_0)
 #if ((LIN_INSTANCE_2_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_2_ISR_TYPE == LIN_ISR_VOID))
-void Lin_2_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_2_Int0ISR(void);
 #endif
 #endif
 
@@ -161,7 +161,7 @@ ISR(Lin_2_Int0ISR);
 
 #if defined(LIN_INSTANCE_2_LINE_NUM_1)
 #if ((LIN_INSTANCE_2_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_2_ISR_TYPE == LIN_ISR_VOID))
-void Lin_2_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_2_Int1ISR(void);
 #endif
 #endif
 
@@ -173,7 +173,7 @@ ISR(Lin_2_Int1ISR);
 
 #if defined(LIN_INSTANCE_3_LINE_NUM_0)
 #if ((LIN_INSTANCE_3_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_3_ISR_TYPE == LIN_ISR_VOID))
-void Lin_3_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_3_Int0ISR(void);
 #endif
 #endif
 
@@ -185,7 +185,7 @@ ISR(Lin_3_Int0ISR);
 
 #if defined(LIN_INSTANCE_3_LINE_NUM_1)
 #if ((LIN_INSTANCE_3_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_3_ISR_TYPE == LIN_ISR_VOID))
-void Lin_3_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_3_Int1ISR(void);
 #endif
 #endif
 
@@ -197,7 +197,7 @@ ISR(Lin_3_Int1ISR);
 
 #if defined(LIN_INSTANCE_4_LINE_NUM_0)
 #if ((LIN_INSTANCE_4_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_4_ISR_TYPE == LIN_ISR_VOID))
-void Lin_4_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_4_Int0ISR(void);
 #endif
 #endif
 
@@ -209,7 +209,7 @@ ISR(Lin_4_Int0ISR);
 
 #if defined(LIN_INSTANCE_4_LINE_NUM_1)
 #if ((LIN_INSTANCE_4_ISR_TYPE == LIN_ISR_CAT1) || (LIN_INSTANCE_4_ISR_TYPE == LIN_ISR_VOID))
-void Lin_4_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE void Lin_4_Int1ISR(void);
 #endif
 #endif
 

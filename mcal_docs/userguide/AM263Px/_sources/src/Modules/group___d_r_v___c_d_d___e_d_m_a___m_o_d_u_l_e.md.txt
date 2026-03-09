@@ -189,7 +189,7 @@ EDMA interrupt callback function prototype.
 | void | **[CDD_EDMA_lld_deInit](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_edma_lld_deinit)**(Cdd_Dma_ConfigType * hEdmaList)| This function Deinitializes the EDMA instance.  |
 | Std_ReturnType | **[CDD_EDMA_lld_registerIntr](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_edma_lld_registerintr)**(Cdd_Dma_Handler * hEdma, void * appdata, [Cdd_Edma_EventCallback](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#typedef-cdd_edma_eventcallback) callback, uint32 handleId)| Function to register callback function for a TCC.  |
 | sint32 | **[CDD_EDMA_lld_unregisterIntr](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_edma_lld_unregisterintr)**(Cdd_Dma_Handler * hEdma)| Function to unregister callback function for a TCC.  |
-| void | **[CDD_EDMA_TransferCompletion_MasterIsr](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_edma_transfercompletion_masterisr)**(void )| Function which will be called on the interrupt comes, will act as master ISR function.  |
+| MCAL_INTERRUPT_ATTRIBUTE void | **[CDD_EDMA_TransferCompletion_MasterIsr](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_edma_transfercompletion_masterisr)**(void )| Function which will be called on the interrupt comes, will act as master ISR function.  |
 | void | **[CDD_EDMA_lld_GetTcc](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_edma_lld_gettcc)**(uint32 handleId, uint32 channelIdx)| Function used to get the dummy TCC in case of chaining.  |
 | void | **[CDD_EDMA_lld_chainingConfigureChannelRegion](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_edma_lld_chainingconfigurechannelregion)**(Cdd_Dma_Handler * hEdma, uint32 handleId)| Function used to have channel configure region in case of chaining for multiple channels.  |
 | uint64 | **[Cdd_Dma_Soc_VirtToPhy](../Modules/group___d_r_v___c_d_d___e_d_m_a___m_o_d_u_l_e.md#function-cdd_dma_soc_virttophy)**(void * virtAddr)| Function used for conversion of address from virtual to physical address.  |
@@ -1125,7 +1125,7 @@ Function to unregister callback function for a TCC.
 ### function CDD_EDMA_TransferCompletion_MasterIsr
 
 ```
-void CDD_EDMA_TransferCompletion_MasterIsr(
+MCAL_INTERRUPT_ATTRIBUTE void CDD_EDMA_TransferCompletion_MasterIsr(
     void 
 )
 ```

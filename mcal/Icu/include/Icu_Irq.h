@@ -108,11 +108,11 @@ extern "C" {
 /**
  *  \brief ICU ISR
  */
-FUNC(void, ICU_CODE_FAST) Icu_IntISR_Fun(Icu_ChannelType Icu_Channel);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, ICU_CODE_FAST) Icu_IntISR_Fun(Icu_ChannelType Icu_Channel);
 
 #if defined(ICU_CHANNEL_0_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch0Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch0Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch0Notify);
 #endif
@@ -120,7 +120,7 @@ ISR(Icu_ch0Notify);
 
 #if defined(ICU_CHANNEL_1_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch1Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch1Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch1Notify);
 #endif
@@ -128,7 +128,7 @@ ISR(Icu_ch1Notify);
 
 #if defined(ICU_CHANNEL_2_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch2Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch2Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch2Notify);
 #endif
@@ -136,7 +136,7 @@ ISR(Icu_ch2Notify);
 
 #if defined(ICU_CHANNEL_3_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch3Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch3Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch3Notify);
 #endif
@@ -144,7 +144,7 @@ ISR(Icu_ch3Notify);
 
 #if defined(ICU_CHANNEL_4_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch4Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch4Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch4Notify);
 #endif
@@ -152,7 +152,7 @@ ISR(Icu_ch4Notify);
 
 #if defined(ICU_CHANNEL_5_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch5Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch5Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch5Notify);
 #endif
@@ -160,7 +160,7 @@ ISR(Icu_ch5Notify);
 
 #if defined(ICU_CHANNEL_6_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch6Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch6Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch6Notify);
 #endif
@@ -168,7 +168,7 @@ ISR(Icu_ch6Notify);
 
 #if defined(ICU_CHANNEL_7_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch7Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch7Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch7Notify);
 #endif
@@ -176,7 +176,7 @@ ISR(Icu_ch7Notify);
 
 #if defined(ICU_CHANNEL_8_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch8Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch8Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch8Notify);
 #endif
@@ -184,7 +184,7 @@ ISR(Icu_ch8Notify);
 
 #if defined(ICU_CHANNEL_9_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch9Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch9Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch9Notify);
 #endif
@@ -192,7 +192,7 @@ ISR(Icu_ch9Notify);
 
 #if defined(ICU_CHANNEL_10_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch10Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch10Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch10Notify);
 #endif
@@ -200,7 +200,7 @@ ISR(Icu_ch10Notify);
 
 #if defined(ICU_CHANNEL_11_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch11Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch11Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch11Notify);
 #endif
@@ -208,7 +208,7 @@ ISR(Icu_ch11Notify);
 
 #if defined(ICU_CHANNEL_12_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch12Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch12Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch12Notify);
 #endif
@@ -216,7 +216,7 @@ ISR(Icu_ch12Notify);
 
 #if defined(ICU_CHANNEL_13_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch13Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch13Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch13Notify);
 #endif
@@ -224,7 +224,7 @@ ISR(Icu_ch13Notify);
 
 #if defined(ICU_CHANNEL_14_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch14Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch14Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch14Notify);
 #endif
@@ -232,7 +232,7 @@ ISR(Icu_ch14Notify);
 
 #if defined(ICU_CHANNEL_15_ACTIVE)
 #if ((ICU_ISR_TYPE == ICU_ISR_CAT1) || (ICU_ISR_TYPE == ICU_ISR_VOID))
-void Icu_ch15Notify(void);
+MCAL_INTERRUPT_ATTRIBUTE void Icu_ch15Notify(void);
 #elif (ICU_ISR_TYPE == ICU_ISR_CAT2)
 ISR(Icu_ch15Notify);
 #endif

@@ -139,7 +139,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-CALLED-ENTITY UUID="651bbd50-7d63-4d59-965e-17dff3fd0f04">
+                <BSW-CALLED-ENTITY UUID="6e81150d-4167-46a0-8ebe-1ae8210e9ba9">
                   <SHORT-NAME>Adc_DeInit</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Adc_TI_AM261x/Adc/Adc_Behavior/ADC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -289,7 +289,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Adc_TI_AM261x/Adc_ModuleEntry/Adc_PollingMainFunction</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="08bd6605-9162-4248-b0c7-bf7ddd98d4ed">
+                <BSW-CALLED-ENTITY UUID="ac14fa3b-a94f-4fcc-97ce-afe493142c22">
                   <SHORT-NAME>Adc_ReadGroup</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Adc_TI_AM261x/Adc/Adc_Behavior/ADC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -457,6 +457,7 @@
             <COMPILER UUID="5b252f7d-33c9-466f-9573-9877d7f656ec">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb   -DAM261X_PLATFORM </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </COMPILER>
@@ -465,6 +466,7 @@
             <LINKER UUID="2fee982e-243e-4f73-b7df-edf8c9b26e85">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </LINKER>
@@ -545,7 +547,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="1d97bed1-0ab4-4928-82fa-b02fa2d4757a">
+            <BSW-MODULE-ENTRY UUID="b22ac66f-17f3-474a-b3ef-dbefaa4fe9f1">
               <SHORT-NAME>Adc_ADCINT2_IrqUnit0</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>

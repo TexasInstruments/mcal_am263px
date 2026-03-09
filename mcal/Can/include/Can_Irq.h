@@ -126,7 +126,7 @@ extern "C" {
  * \endverbatim
  */
 #if ((CAN_ISR_TYPE == CAN_ISR_CAT1) || (CAN_ISR_TYPE == CAN_ISR_VOID))
-FUNC(void, CAN_CODE) Can_0_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_0_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_0_Int0ISR);
@@ -153,7 +153,7 @@ ISR(Can_0_Int0ISR);
  * \endverbatim
  */
 #if ((CAN_ISR_TYPE == CAN_ISR_CAT1) || (CAN_ISR_TYPE == CAN_ISR_VOID))
-FUNC(void, CAN_CODE) Can_0_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_0_Int1ISR(void);
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_0_Int1ISR);
 #endif /* ((CAN_ISR_TYPE == CAN_ISR_CAT1).... */
@@ -181,7 +181,7 @@ ISR(Can_0_Int1ISR);
  * \endverbatim
  */
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_1_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_1_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_1_Int0ISR);
@@ -209,7 +209,7 @@ ISR(Can_1_Int0ISR);
  */
 #if (STD_ON == CAN_ECC_ENABLE)
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_1_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_1_Int1ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_1_Int1ISR);
@@ -239,7 +239,7 @@ ISR(Can_1_Int1ISR);
  * \endverbatim
  */
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_2_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_2_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_2_Int0ISR);
@@ -267,7 +267,7 @@ ISR(Can_2_Int0ISR);
  */
 #if (STD_ON == CAN_ECC_ENABLE)
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_2_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_2_Int1ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_2_Int1ISR);
@@ -297,7 +297,7 @@ ISR(Can_2_Int1ISR);
  * \endverbatim
  */
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_3_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_3_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_3_Int0ISR);
@@ -325,7 +325,7 @@ ISR(Can_3_Int0ISR);
  */
 #if (STD_ON == CAN_ECC_ENABLE)
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_3_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_3_Int1ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_3_Int1ISR);
@@ -355,7 +355,7 @@ ISR(Can_3_Int1ISR);
  * \endverbatim
  */
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_4_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_4_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_4_Int0ISR);
@@ -383,7 +383,7 @@ ISR(Can_4_Int0ISR);
  */
 #if (STD_ON == CAN_ECC_ENABLE)
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_4_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_4_Int1ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_4_Int1ISR);
@@ -413,7 +413,7 @@ ISR(Can_4_Int1ISR);
  * \endverbatim
  */
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_5_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_5_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_5_Int0ISR);
@@ -441,7 +441,7 @@ ISR(Can_5_Int0ISR);
  */
 #if (STD_ON == CAN_ECC_ENABLE)
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_5_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_5_Int1ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_5_Int1ISR);
@@ -471,7 +471,7 @@ ISR(Can_5_Int1ISR);
  * \endverbatim
  */
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_6_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_6_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_6_Int0ISR);
@@ -499,7 +499,7 @@ ISR(Can_6_Int0ISR);
  */
 #if (STD_ON == CAN_ECC_ENABLE)
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_6_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_6_Int1ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_6_Int1ISR);
@@ -529,7 +529,7 @@ ISR(Can_6_Int1ISR);
  * \endverbatim
  */
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_7_Int0ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_7_Int0ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_7_Int0ISR);
@@ -557,7 +557,7 @@ ISR(Can_7_Int0ISR);
  */
 #if (STD_ON == CAN_ECC_ENABLE)
 #if (CAN_ISR_TYPE == CAN_ISR_CAT1 || CAN_ISR_TYPE == CAN_ISR_VOID)
-FUNC(void, CAN_CODE) Can_7_Int1ISR(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, CAN_CODE) Can_7_Int1ISR(void);
 
 #elif (CAN_ISR_TYPE == CAN_ISR_CAT2)
 ISR(Can_7_Int1ISR);
