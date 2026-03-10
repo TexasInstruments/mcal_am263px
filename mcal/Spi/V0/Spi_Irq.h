@@ -102,56 +102,56 @@ extern "C" {
 FUNC(void, SPI_CODE_FAST) Spi_IntISR_McspiTxRx(Spi_HWUnitType Spi_HwUnit) MCAL_INTERRUPT_ATTRIBUTE;
 /** \brief SPI MCSPI0 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi0TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi0TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi0TxRx);
 #endif
 
 /** \brief SPI MCSPI1 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi1TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi1TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi1TxRx);
 #endif
 
 /** \brief SPI MCSPI2 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi2TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi2TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi2TxRx);
 #endif
 
 /** \brief SPI MCSPI3 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi3TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi3TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi3TxRx);
 #endif
 
 /** \brief SPI MCSPI4 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi4TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi4TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi4TxRx);
 #endif
 
 /** \brief SPI MCSPI5 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi5TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi5TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi5TxRx);
 #endif
 
 /** \brief SPI MCSPI6 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi6TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi6TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi6TxRx);
 #endif
 
 /** \brief SPI MCSPI7 ISR */
 #if ((SPI_ISR_TYPE == SPI_ISR_CAT1) || (SPI_ISR_TYPE == SPI_ISR_VOID))
-FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi7TxRx(void);
+MCAL_INTERRUPT_ATTRIBUTE FUNC(void, SPI_CODE_FAST) Spi_IrqUnitMcspi7TxRx(void);
 #elif (SPI_ISR_TYPE == SPI_ISR_CAT2)
 ISR(Spi_IrqUnitMcspi7TxRx);
 #endif

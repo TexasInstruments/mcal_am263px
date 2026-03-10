@@ -352,8 +352,8 @@ Spi_JobResultType Spi_mcspiContinueTxRx(const Spi_HwUnitObjType *hwUnitObj, cons
                                         Spi_ChannelObjType *chObj);
 Spi_JobResultType Spi_mcspiXferJob(const Spi_HwUnitObjType *hwUnitObj, Spi_JobObjType *jobObj);
 void              Spi_mcspiStop(const Spi_HwUnitObjType *hwUnitObj, const Spi_JobObjType *jobObj);
-void              Spi_mcspiClearAllIrqStatus(uint32 baseAddr);
-void              Spi_mcspiDisableAllIntr(uint32 baseAddr);
+__attribute__((target("arm"))) void Spi_mcspiClearAllIrqStatus(uint32 baseAddr);
+void                                Spi_mcspiDisableAllIntr(uint32 baseAddr);
 
 #if (STD_ON == SPI_REGISTER_READBACK_API)
 FUNC(Std_ReturnType, SPI_CODE)

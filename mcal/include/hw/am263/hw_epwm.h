@@ -2824,9 +2824,9 @@ EPWM_disableSyncOutPulseSource(uint32 base, uint16 source)
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
-static void EPWM_pwmadcSOCType_A(uint32 base,uint16 source,EPWM_ADCStartOfConversionSource socSource,uint16 mixedSource);
-static void EPWM_pwmadcSOCType_B(uint32 base,uint16 source,EPWM_ADCStartOfConversionSource socSource,uint16 mixedSource);
-static void EPWM_shadowSetCheck(uint32 base, uint32 shadowset,EPWM_ActionQualifierOutputModule epwmOutput,
+static inline FUNC(void, PWM_CODE) EPWM_pwmadcSOCType_A(uint32 base,uint16 source,EPWM_ADCStartOfConversionSource socSource,uint16 mixedSource);
+static inline FUNC(void, PWM_CODE) EPWM_pwmadcSOCType_B(uint32 base,uint16 source,EPWM_ADCStartOfConversionSource socSource,uint16 mixedSource);
+static inline FUNC(void, PWM_CODE) EPWM_shadowSetCheck(uint32 base, uint32 shadowset,EPWM_ActionQualifierOutputModule epwmOutput,
                               EPWM_ActionQualifierOutput output,EPWM_XCMPActionQualifierOutputEvent event);
 /****************************************************************************
 

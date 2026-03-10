@@ -241,8 +241,8 @@ static void Can_Initialization(uint8 controller_cntr)
         {
             /* Init individual controller (may be moved to
              * SetControllerMode(start state)) */
-            Can_hwUnitConfig(&Can_DriverObj.canController[controller_cntr], &Can_DriverObj.canMailbox[0U],
-                             &Can_DriverObj.canTxMessageObj[0U], Can_DriverObj.maxMbCnt);
+            Can_hwUnitConfig(&Can_DriverObj.canController[controller_cntr], Can_DriverObj.canMailbox,
+                             Can_DriverObj.canTxMessageObj, Can_DriverObj.maxMbCnt);
             /* initialize the interrupt counter to zero */
             Can_DriverObj.canController[controller_cntr].canInterruptCounter = 0U;
             /* change the state to stopped from the UNINIT state */
@@ -333,8 +333,8 @@ static void Can_initDrvObj(Can_DriverObjType *drvObj, const Can_ConfigType *Conf
     drvObj->canMaxControllerCount = ConfigPtr->CanMaxControllerCount;
     drvObj->maxMbCnt              = ConfigPtr->MaxMbCnt;
 
-    mailBoxCfgList  = &drvObj->canMailbox[0U];
-    canTxMessageObj = &drvObj->canTxMessageObj[0];
+    mailBoxCfgList  = drvObj->canMailbox;
+    canTxMessageObj = drvObj->canTxMessageObj;
     maxMbCnt        = drvObj->maxMbCnt;
     /* Initialize Can_MailboxObjTxType params according to configured mailboxes */
     for (htrh = 0U; htrh < maxMbCnt; htrh++)
@@ -905,8 +905,8 @@ Can_SetControllerMode(uint8 Controller, Can_ControllerStateType Transition)
 
             case CAN_CS_STOPPED:
             {
-                retVal = Can_hwUnitStop(&Can_DriverObj.canController[Controller], &Can_DriverObj.canMailbox[0],
-                                        &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+                retVal = Can_hwUnitStop(&Can_DriverObj.canController[Controller], Can_DriverObj.canMailbox,
+                                        Can_DriverObj.canTxMessageObj, Can_DriverObj.maxMbCnt);
                 break;
             }
 
@@ -960,8 +960,8 @@ FUNC(Std_ReturnType, CAN_CODE) Can_Write(Can_HwHandleType Hth, const Can_PduType
     {
         HwHandle  = Can_DriverObj.canMailbox[Hth].mailBoxConfig.HwHandle;
         MsgCntrlr = Can_DriverObj.canMailbox[Hth].mailBoxConfig.Controller->ControllerId;
-        Can_mcanCancelledMessagesReset(&Can_DriverObj.canController[MsgCntrlr], &Can_DriverObj.canMailbox[0],
-                                       &Can_DriverObj.canTxMessageObj[0]);
+        Can_mcanCancelledMessagesReset(&Can_DriverObj.canController[MsgCntrlr], Can_DriverObj.canMailbox,
+                                       Can_DriverObj.canTxMessageObj);
         if (Can_DriverObj.canTxMessageObj[HwHandle].freeHwObjectCount == 0U)
         {
             status = CAN_BUSY;
@@ -1069,8 +1069,8 @@ FUNC(void, CAN_CODE) Can_MainFunction_Write(void)
         {
             if (Can_DriverObj.canController[ctlrIndx].canControllerConfig_PC.CntrActive == (boolean)TRUE)
             {
-                Can_mcanProcessTx(&Can_DriverObj.canController[ctlrIndx], &Can_DriverObj.canMailbox[0U],
-                                  &Can_DriverObj.canTxMessageObj[0], POLLING_MASK);
+                Can_mcanProcessTx(&Can_DriverObj.canController[ctlrIndx], Can_DriverObj.canMailbox,
+                                  Can_DriverObj.canTxMessageObj, POLLING_MASK);
             }
         }
     }
@@ -1123,8 +1123,8 @@ FUNC(void, CAN_CODE) Can_MainFunction_BusOff(void)
         /* If the controller is not activated just skip its checking */
         if (Can_DriverObj.canController[controller_cntr].canControllerConfig_PC.CntrActive == (boolean)TRUE)
         {
-            Can_MainFunction_BusOffProcess(&Can_DriverObj.canController[controller_cntr], &Can_DriverObj.canMailbox[0U],
-                                           &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+            Can_MainFunction_BusOffProcess(&Can_DriverObj.canController[controller_cntr], Can_DriverObj.canMailbox,
+                                           Can_DriverObj.canTxMessageObj, Can_DriverObj.maxMbCnt);
         }
     }
 }
@@ -1419,8 +1419,8 @@ FUNC(void, CAN_CODE) Can_0_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN0];
 
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 #if (STD_ON == CAN_ECC_ENABLE)
@@ -1449,8 +1449,8 @@ FUNC(void, CAN_CODE) Can_0_Int1ISR_Fun(void)
 FUNC(void, CAN_CODE) Can_1_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN1];
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 #if (STD_ON == CAN_ECC_ENABLE)
@@ -1479,8 +1479,8 @@ FUNC(void, CAN_CODE) Can_2_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN2];
 
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 #if (STD_ON == CAN_ECC_ENABLE)
@@ -1508,8 +1508,8 @@ FUNC(void, CAN_CODE) Can_3_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN3];
 
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 #if (STD_ON == CAN_ECC_ENABLE)
@@ -1536,8 +1536,8 @@ FUNC(void, CAN_CODE) Can_4_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN4];
 
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 /*******************************************************************************
@@ -1564,8 +1564,8 @@ FUNC(void, CAN_CODE) Can_5_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN5];
 
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 /*******************************************************************************
@@ -1592,8 +1592,8 @@ FUNC(void, CAN_CODE) Can_6_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN6];
 
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 /*******************************************************************************
@@ -1620,8 +1620,8 @@ FUNC(void, CAN_CODE) Can_7_Int0ISR_Fun(void)
 {
     uint32 ctrlId = Can_DriverObj.controllerIDMap[CAN_CONTROLLER_INSTANCE_MCAN7];
 
-    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], &Can_DriverObj.canMailbox[0],
-                       &Can_DriverObj.canTxMessageObj[0], Can_DriverObj.maxMbCnt);
+    Can_mcanProcessISR(&Can_DriverObj.canController[ctrlId], Can_DriverObj.canMailbox, Can_DriverObj.canTxMessageObj,
+                       Can_DriverObj.maxMbCnt);
 }
 
 /*******************************************************************************

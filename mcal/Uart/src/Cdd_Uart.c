@@ -568,7 +568,7 @@ Cdd_Uart_GetRemainingWords(uint8 ChannelID, CddUartDataDirectionType TransferTyp
 #endif /* (STD_ON == CDD_UART_GETREMAININGWORDS_API) */
 
 /* Invoke Callback functions */
-void Uart_Cdd_readCompleteCallback(CddUart_Handle hUart)
+__attribute__((weak)) void Uart_Cdd_readCompleteCallback(CddUart_Handle hUart)
 {
     uint32 channelIndex = 0U;
 
@@ -581,7 +581,7 @@ void Uart_Cdd_readCompleteCallback(CddUart_Handle hUart)
     }
 }
 
-void Uart_Cdd_writeCompleteCallback(CddUart_Handle hUart)
+__attribute__((weak)) void Uart_Cdd_writeCompleteCallback(CddUart_Handle hUart)
 {
     uint32 channelIndex = 0U;
 
@@ -594,7 +594,7 @@ void Uart_Cdd_writeCompleteCallback(CddUart_Handle hUart)
     }
 }
 
-void Uart_Cdd_errorCallback(CddUart_Handle hUart)
+__attribute__((weak)) void Uart_Cdd_errorCallback(CddUart_Handle hUart)
 {
     uint32 channelIndex = 0U;
 

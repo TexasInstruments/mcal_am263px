@@ -1,3 +1,42 @@
+commit 2855d3a9a84039b0fee05406447bd53608eae21b
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Tue Mar 10 07:41:10 2026 +0530
+
+    all: script: fix cicd scripts
+    
+    - change to branch main
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ .../scripts/cicd/mcal_release_orchestrator.sh      | 24 +++++++++++-----------
+ 1 file changed, 12 insertions(+), 12 deletions(-)
+
+commit f5b1c36fb8835cd309f1b4b41b0b0a7d1386d0e3
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Mar 10 00:18:23 2026 +0530
+
+    all: all: Fixing new KW issues across modules
+    
+    -Fixing issue codes: ABV.GENERAL, ABV.NON_ARRAY, MISRA.DECL.FUNC.NAME.QUAL.2012, MISRA.FOR.ITER_EXPR.ONE_EXPR, MISRA.FUNC.PARAMS.IDENT
+    
+    Fixes: MCAL-36360
+    
+    SIgned-off-by: Swathi G Bhat
+
+ mcal/Can/src/Can.c                                 | 56 +++++++++++-----------
+ mcal/Ipc/src/ipc_notify_v1_lld.c                   |  3 +-
+ mcal/Spi/V0/Spi_Irq.h                              | 16 +++----
+ mcal/Spi/V0/Spi_Priv.h                             |  4 +-
+ mcal/Uart/V0/uart.c                                | 12 ++---
+ mcal/Uart/src/Cdd_Uart.c                           |  6 +--
+ .../secure_ipc_notify/sipc_notify_src.h            |  2 +-
+ mcal/include/hw/am261/hw_epwm.h                    |  6 +--
+ mcal/include/hw/am263/hw_epwm.h                    |  6 +--
+ mcal/include/hw/am263px/hw_epwm.h                  |  9 ++--
+ 10 files changed, 61 insertions(+), 59 deletions(-)
+
 commit 138c1fc2b3eba89f7ecab0478a6752269c10cd65
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon Mar 9 10:35:02 2026 +0530

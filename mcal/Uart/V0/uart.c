@@ -133,11 +133,11 @@ static void          UART_breakCtl(uint32 baseAddr, uint32 breakState);
 static void          UART_hardwareFlowCtrlOptSet(uint32 baseAddr, uint32 hwFlowCtrl);
 static void          UART_flowCtrlTrigLvlConfig(uint32 baseAddr, uint32 rtsHaltFlag, uint32 rtsStartFlag);
 static uint32        UART_getRxError(uint32 baseAddr);
-static sint32        UART_readInterrupt(CddUart_Handle handle, CddUart_Transaction *trans);
-static boolean       UART_statusIsDataReady(CddUart_Handle handle);
-static uint32        UART_fifoRead(CddUart_Handle handle, uint8 *buffer, uint32 readSizeRemaining);
-static void          UART_readDataPolling(CddUart_Handle handle);
-static sint32        UART_readPolling(CddUart_Handle handle, CddUart_Transaction *trans);
+static sint32        UART_readInterrupt(CddUart_Handle hUart, CddUart_Transaction *trans);
+static boolean       UART_statusIsDataReady(CddUart_Handle hUart);
+static uint32        UART_fifoRead(CddUart_Handle hUart, uint8 *buffer, uint32 readSizeRemaining);
+static void          UART_readDataPolling(CddUart_Handle hUart);
+static sint32        UART_readPolling(CddUart_Handle hUart, CddUart_Transaction *trans);
 static uint32        Cdd_Uart_getRxFifoTrigBitVal(uint32 rxTrig);
 static uint32        Cdd_Uart_getTxFifoTrigBitVal(uint32 txTrig);
 static uint32        UART_checkCharsAvailInRXFifo(uint32 baseAddr);
@@ -2539,7 +2539,7 @@ static boolean Uart_Cdd_masterIsr_processInterrupt(CddUart_Handle hUart, uint32 
  *
  *  @param(arg)         The CddUart_Handle for this Hwi.
  */
-void Uart_Cdd_masterIsr(void *args)
+__attribute__((weak)) void Uart_Cdd_masterIsr(void *args)
 {
     CddUart_Handle hUart = (CddUart_Handle)args;
 

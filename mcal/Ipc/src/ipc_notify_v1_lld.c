@@ -324,9 +324,8 @@ void Cdd_Ipc_Clock_uSleep(uint32 usec) __attribute__((optnone))
 {
     volatile uint32 i     = 0U;
     uint32          value = usec * 400U;
-    for (i = 0U; i < value;)
+    for (i = 0U; i < value; i = i + 1U)
     {
-        i = i + 1U;
     }
 
     /* Here 400 is the number of uSeconds per ticks*/
