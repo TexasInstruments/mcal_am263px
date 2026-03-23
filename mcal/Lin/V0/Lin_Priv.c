@@ -103,13 +103,13 @@
  *********************************************************************************************************************/
 #define LIN_START_SEC_VAR_INIT_UNSPECIFIED
 #include "Lin_MemMap.h"
-STATIC P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Lin_Drv_Config_Ptr = (Lin_ConfigType *)NULL_PTR;
+static P2CONST(Lin_ConfigType, AUTOMATIC, LIN_APPL_CONST) Lin_Drv_Config_Ptr = (Lin_ConfigType *)NULL_PTR;
 #define LIN_STOP_SEC_VAR_INIT_UNSPECIFIED
 #include "Lin_MemMap.h"
 
 #define LIN_START_SEC_VAR_NO_INIT_8
 #include "Lin_MemMap.h"
-STATIC VAR(uint8, LIN_VAR) Lin_RxShadowBuffer[LIN_MAX_CHANNEL][LIN_MAX_DATA_LENGTH];
+static VAR(uint8, LIN_VAR) Lin_RxShadowBuffer[LIN_MAX_CHANNEL][LIN_MAX_DATA_LENGTH];
 #define LIN_STOP_SEC_VAR_NO_INIT_8
 #include "Lin_MemMap.h"
 
@@ -376,7 +376,7 @@ LOCAL_INLINE FUNC(void, LIN_CODE) Lin_ServiceInterrupts(uint32 base, Lin_Interru
  * \return  None.
  *
  **/
-STATIC FUNC(void, LIN_CODE) Lin_SetLoopbackMode(uint32 base, Lin_LoopbackModeType loopbackMode);
+static FUNC(void, LIN_CODE) Lin_SetLoopbackMode(uint32 base, Lin_LoopbackModeType loopbackMode);
 
 /*********************************************************************************************************************
  *  External Functions Definition
@@ -1017,7 +1017,7 @@ LOCAL_INLINE FUNC(uint32, LIN_CODE) LIN_getInterruptLine1Offset(uint32 base)
     return (HW_RD_REG32(base + CSL_LIN_SCIINTVECT1) & CSL_LIN_SCIINTVECT1_INTVECT1_MASK);
 }
 
-STATIC FUNC(void, LIN_CODE) Lin_SetLoopbackMode(uint32 base, Lin_LoopbackModeType loopbackMode)
+static FUNC(void, LIN_CODE) Lin_SetLoopbackMode(uint32 base, Lin_LoopbackModeType loopbackMode)
 {
     switch (loopbackMode)
     {

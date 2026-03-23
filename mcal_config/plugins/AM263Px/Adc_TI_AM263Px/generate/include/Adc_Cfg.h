@@ -399,6 +399,9 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 [!LOOP "as:modconf('Adc')[1]/AdcConfigSet"!]
+/* Forward declaration for Adc configuration structure */
+struct Adc_ConfigType_s;
+
 /** \brief ADC Configuration struct declaration */
 extern const struct Adc_ConfigType_s Adc_Config;
 [!ENDLOOP!]

@@ -223,6 +223,9 @@ extern "C" {
 /*                      Exported Object Declarations                          */
 /* ========================================================================== */
 
+/* Forward declaration for Cdd_I2c configuration structure */
+struct Cdd_I2c_ConfigTag;
+
 extern CONST(struct Cdd_I2c_ConfigTag, CDD_I2C_CONFIG_DATA) Cdd_I2c_Config;
 extern CONST(uint32, CDD_I2C_CONST) Cdd_I2c_HwUnitBaseAddr[CDD_I2C_HW_UNIT_MAX];
 

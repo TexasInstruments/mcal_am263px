@@ -246,9 +246,15 @@ typedef enum modes{
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 [!LOOP "as:modconf('Fls')[1]/FlsConfigSet"!]
+/* Forward declaration for Fls configuration structure */
+struct Fls_ConfigType_s;
+
 /** \brief FLS Configuration struct declaration */
 extern const struct Fls_ConfigType_s Fls_Config;
 [!ENDLOOP!]
+/* Forward declaration for Fls SFDP configuration structure */
+struct Fls_ConfigSfdp_s;
+
 extern struct Fls_ConfigSfdp_s *Fls_Config_SFDP_Ptr;
 
 

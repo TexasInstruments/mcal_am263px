@@ -288,7 +288,10 @@ extern "C" {
 /* ========================================================================== */
 /* 							Structures and Enums */
 /* ========================================================================== */
- /** \brief EthTrcv Configuration struct declaration */
+ /* Forward declaration for EthTrcv configuration structure */
+struct EthTrcv_ConfigType_s;
+
+/** \brief EthTrcv Configuration struct declaration */
  extern struct EthTrcv_ConfigType_s EthTrcv_Config;
 
 /* ========================================================================== */

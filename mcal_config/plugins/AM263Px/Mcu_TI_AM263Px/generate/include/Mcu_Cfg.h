@@ -914,6 +914,9 @@ void Mcu_GpioXbarConfig(void);
  *  Exported Object Declarations
  *********************************************************************************************************************/
 [!LOOP "as:modconf('Mcu')[1]/McuModuleConfiguration/."!]
+/* Forward declaration for Mcu configuration structure */
+struct Mcu_ConfigType_s;
+
 /** \brief MCU Configuration struct declaration */
 extern const struct Mcu_ConfigType_s Mcu_Config;
 [!ENDLOOP!]

@@ -122,7 +122,7 @@ extern "C" {
 
 [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 /**
-*  \brief Pre Compile config macro name.
+* \brief Pre Compile config macro name.
 */
 [!LOOP "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgSettingsConfig"!]
 #define WDG_INIT_CONFIG_PC		Wdg_Config
@@ -200,6 +200,9 @@ extern "C" {
  * Exported Preprocessor #define Macros
  ******************************************************************************/
 [!LOOP "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgSettingsConfig"!]
+/* Forward declaration for Wdg configuration structure */
+struct Wdg_ConfigType_s;
+
 /** \brief WDG Configuration struct declaration */
 extern const struct Wdg_ConfigType_s Wdg_Config;
 [!ENDLOOP!]

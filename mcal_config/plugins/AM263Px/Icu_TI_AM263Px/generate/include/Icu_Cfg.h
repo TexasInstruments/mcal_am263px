@@ -189,8 +189,14 @@ extern CONST(uint32, ICU_CONST)
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 [!LOOP "as:modconf('Icu')[1]/IcuConfigSet"!]
+/* Forward declaration for Icu PC configuration structure */
+struct Icu_ConfigType_PC_s;
+
 /** \brief ICU Configuration structure declaration */
 extern const struct Icu_ConfigType_PC_s Icu_Config_PC;
+/* Forward declaration for Icu configuration structure */
+struct Icu_ConfigType_s;
+
 extern const struct Icu_ConfigType_s Icu_Config;
 [!ENDLOOP!]
 

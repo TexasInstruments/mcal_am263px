@@ -345,8 +345,14 @@ typedef struct
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
+/* Forward declaration for Pwm PC configuration structure */
+struct Pwm_ConfigType_PC_s;
+
 /** \brief PWM Configuration structure declaration */
 extern const struct Pwm_ConfigType_PC_s Pwm_Config_PC;
+/* Forward declaration for Pwm configuration structure */
+struct Pwm_ConfigType_s;
+
 extern const struct Pwm_ConfigType_s Pwm_Config;
 
 extern void Pwm_Notification_Channel1 (void);

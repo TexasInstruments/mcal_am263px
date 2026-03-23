@@ -371,6 +371,9 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 [!LOOP "as:modconf('Cdd_Pwm')[1]/CddPwmConfigSet/*"!]
+/* Forward declaration for Cdd_Pwm configuration structure */
+struct Cdd_Pwm_ConfigType_s;
+
 /** \brief CDD_PWM Configuration structure declaration */
 extern const struct Cdd_Pwm_ConfigType_s Cdd_Pwm_Config;
 [!ENDLOOP!]

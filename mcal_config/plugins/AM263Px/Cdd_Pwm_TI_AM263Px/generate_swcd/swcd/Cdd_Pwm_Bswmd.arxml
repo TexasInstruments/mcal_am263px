@@ -8,7 +8,7 @@
         <BSW-MODULE-DESCRIPTION UUID="d1b8bf0b-124b-47a0-944b-819926a7022e">
           <SHORT-NAME>Cdd_Pwm</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
-          <EXPECTED-ENTRYS>
+          <IMPLEMENTED-ENTRYS>
           [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmChopperEnable = 'true'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM263px/Cdd_Pwm_ModuleEntry/Cdd_Pwm_ChopperCfg</BSW-MODULE-ENTRY-REF>
@@ -1496,7 +1496,7 @@
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Pwm_TI_AM263px/Cdd_Pwm_ModuleEntry/Cdd_Pwm_TzTripEventEnable</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
           [!ENDIF!][!//
-          </EXPECTED-ENTRYS>
+          </IMPLEMENTED-ENTRYS>
           <MODULE-ID>255</MODULE-ID>
         [!IF "as:modconf('Cdd_Pwm')[1]/CddPwmGeneral/CddPwmDevErrorDetect"!][!//
           <BSW-MODULE-DEPENDENCYS>

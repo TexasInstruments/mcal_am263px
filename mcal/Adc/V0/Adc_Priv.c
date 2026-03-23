@@ -413,21 +413,11 @@ static Std_ReturnType Adc_startGroup_ErChkr(Adc_GroupObjType *groupObj, Adc_HwUn
     boolean hwQue = ADC_FALSE;
 #endif
 
-#if ((ADC_PRIORITY_HW_SW == ADC_PRIORITY_IMPLEMENTATION) || (ADC_PRIORITY_HW == ADC_PRIORITY_IMPLEMENTATION)) || \
-    ((ADC_PRIORITY_NONE == ADC_PRIORITY_IMPLEMENTATION) && (ADC_ENABLE_QUEUING == STD_ON))
-    Adc_GroupObjType *curGroupObj = (Adc_GroupObjType *)NULL_PTR;
-
-    if (curGroupObj != NULL_PTR)
-    {
-        /*Do nothing, written to fix build issues*/
-    }
-#endif
-
 #if ((ADC_PRIORITY_HW_SW == ADC_PRIORITY_IMPLEMENTATION) || (ADC_PRIORITY_HW == ADC_PRIORITY_IMPLEMENTATION))
 
     /* Check if this group's priority is more than current group's
      * priority */
-    curGroupObj = hwUnitObj->curGroupObj;
+    Adc_GroupObjType *curGroupObj = hwUnitObj->curGroupObj;
 
     if (ADC_TRUE == Adc_CheckPass(curGroupObj, groupObj))
     {
@@ -722,10 +712,12 @@ void Adc_IrqTxRx(Adc_HwUnitObjType *hwUnitObj, uint16 InterruptNum, uint8 Soc)
                 }
             }
             break;
-
+            /* TI_COVERAGE_GAP_START Enum of groupDataAccessMode has only 3 valid element and
+            cannot be covered the default condition */
             default:
                 /* Do nothing*/
                 break;
+                /* TI_COVERAGE_GAP_STOP */
         }
     }
 
@@ -858,12 +850,16 @@ Adc_HwUnitObjType *Adc_getHwUnitObj(Adc_HWUnitType HWUnit)
     /* Get the HW unit.  */
     hwObj = &drvObj->hwUnitObj[HWUnit];
 
+    /* TI_COVERAGE_GAP_START Adc_DrvObj is a global static object. drvObj = &Adc_DrvObj is always
+     a non-zero address. Since the base is a fixed non-zero global address, the result of
+     the & (address-of) operator on a struct member can never be NULL_PTR (0x0). */
     if (hwObj == NULL_PTR)
     {
 #if (STD_ON == ADC_DEV_ERROR_DETECT)
         Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG);
 #endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return (hwObj);
 }
@@ -1167,11 +1163,14 @@ static Std_ReturnType Adc_checkGroupParameters(const Adc_GroupConfigType *groupC
         retVal = (Std_ReturnType)E_NOT_OK;
         Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG);
     }
+    /* TI_COVERAGE_GAP_START Adc_getHwUnitObj function will not return NULL_PTR as
+     &drvObj->hwUnitObj[HWUnit] drvObj = &Adc_DrvObj is always a non-zero address. */
     else if (NULL_PTR == Adc_getHwUnitObj(groupCfg->hwUnitId))
     {
         /* DET already reported by Adc_getHwUnitObj() */
         retVal = (Std_ReturnType)E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
     else
     {
         retVal = Adc_checkGroupCfgRangeParameters(groupCfg);
@@ -1773,9 +1772,12 @@ static void Adc_hwConfig(const Adc_GroupObjType *groupObj, uint32 baseAddr)
 #endif
         }
         break;
+        /* TI_COVERAGE_GAP_START Enum of groupDataAccessMode has only 3 valid element and
+           cannot be covered the default condition */
         default:
             /* Do nothing*/
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
 
     return;

@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 11-Mar-2026.
+This is the release notes for MCAL AM26xx 26.00.00 done on 24-Mar-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -212,12 +212,28 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
+      <td>MCAL-35742</td>
+      <td>In the arxml files the OPTIONS tag is expected before the VENDOR tag</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>OPTIONS tag is now added with all recommended compiler and linker options</td>
+    </tr>
+    <tr>
       <td>MCAL-35744</td>
       <td>NULL_PTR implemented in hal_stdtypes.h</td>
       <td>Common</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>NULL_PTR is removed from hal_stdtypes.h as it is available in Compiler.h file</td>
+    </tr>
+    <tr>
+      <td>MCAL-36583</td>
+      <td>All BSWModleEntry has to be implementedEntry</td>
+      <td>Common</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Replaced EXPECTED-ENTRYS with IMPLEMENTED-ENTRYS</td>
     </tr>
     <tr>
       <td>MCAL-35846</td>
@@ -251,6 +267,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263Px</td>
       <td>See description</td>
+    </tr>
+    <tr>
+      <td>MCAL-36586</td>
+      <td>Usage of STATIC in MCAL drivers</td>
+      <td>DIO, LIN</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>As per AUTOSAR 4.3.1, AUTOSAR_SWS_CompilerAbstraction document STATIC declaration keyword is removed, hence STATIC macro is removed from Compiler.h and all its usage is replaced with 'static'</td>
     </tr>
     <tr>
       <td>MCAL-35749</td>
@@ -310,6 +334,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263Px, AM261x</td>
       <td>FLS write shall perform a blankcheck before write when FLS_ERASE_VERIFICATION_ENABLED is STD_ON</td>
+    </tr>
+    <tr>
+      <td>MCAL-35753</td>
+      <td>Duplicate UUID present in MCU Bswmd arxml</td>
+      <td>Mcu</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Duplicate uids across all modules are now replaced with new unique uids</td>
     </tr>
     <tr>
       <td>MCAL-35979,MCAL-35981</td>

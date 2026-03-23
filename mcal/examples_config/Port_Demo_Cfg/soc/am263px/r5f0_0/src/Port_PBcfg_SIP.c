@@ -3405,6 +3405,38 @@ static CONST( Port_PinConfigType, PORT_PBCFG) PortConfigSet_0_PinConfig[] =
          //.Port_PinName        = (const sint8 *)"PIN_P3",
     },
     {
+         .Port_PinId = 314,
+         .Port_PullInhibitEnable = PORT_PIN_PULL_INHIBIT_DISABLE,
+         .Port_OutputOverride_Ctrl = PORT_PIN_OUTPUT_RETAIN_HW_CTRL,
+         .Port_InputOverride_Ctrl = PORT_PIN_INPUT_RETAIN_HW_CTRL,
+         .Port_DirectionChangeable = FALSE,
+         .Port_PinModeChangeable = FALSE,
+         .Port_PinLevelValue = PORT_PIN_LEVEL_HIGH,
+         .Port_PinDirection = PORT_PIN_OUT,
+         .Port_PinInitialMode =  PORT_PIN_MODE_OSPI0,
+         .Port_PullTypeSelect = PORT_PIN_PULLTYPE_DEFAULT,
+         .Port_PinHSmasterEnable = FALSE,
+         .Port_PinHSmodeEnable = FALSE,
+         .Port_InversionSelect = PORT_NONINV,
+         .Port_QualifierTypeSelect = PORT_QUALTYPE_DEFAULT,
+         .Port_SlewControl = PORT_PIN_SLEWCONTROL_SLOW_SLEW,
+         .Port_GpioOwnerCore = 0,
+         .Port_NumPortModes = 1,
+         .Port_PinMode =
+         {            [0] =
+            {
+                .mode = PORT_PIN_MODE_OSPI0,
+
+                .muxmode = 5,
+            },
+         },
+         .Port_PinDioRegId = PORT_DIO_INVALID_REG_ID, /* GPIO register index is 0 based */
+         .Port_PinDioChannelId = PORT_DIO_INVALID_REG_ID,
+         .Port_RegOffsetAddr = PINJ3_GPIO64,
+         //.Port_PinSignalName = (const sint8 *)"OSPI0_RESET_OUT0",
+         //.Port_PinName        = (const sint8 *)"PIN_J3",
+    },
+    {
          .Port_PinId = 317,
          .Port_PullInhibitEnable = PORT_PIN_PULL_INHIBIT_DEFAULT,
          .Port_OutputOverride_Ctrl = PORT_PIN_OUTPUT_RETAIN_HW_CTRL,
@@ -3615,7 +3647,7 @@ static CONST( Port_DioRegConfigType, PORT_PBCFG) PortConfigSet_0_DioConfig[] =
 /*</PORT_PIN_CONFIGURATION>*/
 CONST(Port_ConfigType, PORT_PBCFG) Port_Config =
 {
-    .NumberOfPortPins = 109,
+    .NumberOfPortPins = 110,
     .PinConfig_pt = PortConfigSet_0_PinConfig,
     .NumberOfGPIORegs = 1,
     .DioConfig_pt = PortConfigSet_0_DioConfig,

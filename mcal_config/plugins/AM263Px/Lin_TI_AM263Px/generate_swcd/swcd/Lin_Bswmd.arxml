@@ -8,7 +8,7 @@
         <BSW-MODULE-DESCRIPTION UUID="3d987ce4-2934-426b-88b0-de0a0ebda34e">
           <SHORT-NAME>Lin</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
-          <EXPECTED-ENTRYS>
+          <IMPLEMENTED-ENTRYS>
             [!LOOP "as:modconf('Lin')[1]/LinGlobalConfig/LinChannel/*"!][!//
             [!IF "LinInterruptLineSelect = 'LIN_INTERRUPT_LINE_NUM_0' and LinInstance = 'LIN_INSTANCE_0'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -95,7 +95,7 @@
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Lin_TI_AM263px/Lin_ModuleEntry/Lin_WakeupInternal</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-          </EXPECTED-ENTRYS>
+          </IMPLEMENTED-ENTRYS>
           <MODULE-ID>82</MODULE-ID>
           <BSW-MODULE-DEPENDENCYS>
             [!IF "as:modconf('Lin')[1]/LinGeneral/LinDevErrorDetect = 'true'"!][!//

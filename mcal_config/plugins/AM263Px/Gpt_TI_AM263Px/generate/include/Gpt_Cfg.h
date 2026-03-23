@@ -309,6 +309,9 @@ extern "C" {
 extern const uint32 Gpt_RTIChannelAddr[GPT_RTI_MODULES];
 
 [!LOOP "as:modconf('Gpt')[1]/GptChannelConfigSet/*"!]
+/* Forward declaration for Gpt configuration structure */
+struct Gpt_ConfigType_s;
+
 extern const struct Gpt_ConfigType_s Gpt_Config;
 [!ENDLOOP!]
 

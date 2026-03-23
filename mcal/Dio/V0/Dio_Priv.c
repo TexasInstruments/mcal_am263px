@@ -99,7 +99,7 @@ static void Dio_PinWrite(uint32 baseAdd, uint32 pinNumber, Dio_LevelType level);
 #define DIO_START_SEC_CONST_UNSPECIFIED
 #include "Dio_MemMap.h"
 
-STATIC CONST(uint32, DIO_CONST) Dio_GPIOPortAddr[DIO_NUM_GPIO_REGS] = {
+static CONST(uint32, DIO_CONST) Dio_GPIOPortAddr[DIO_NUM_GPIO_REGS] = {
     DIO_GPIO_BASE + 0x10U, DIO_GPIO_BASE + 0x38U, DIO_GPIO_BASE + 0x60U, DIO_GPIO_BASE + 0x88U, DIO_GPIO_BASE + 0xB0U,
 };
 
@@ -216,14 +216,12 @@ uint32 Dio_GpioPortWrite(const gpioPORT_t *port, uint32 setBits)
     uint32 regWrFailStatus = 0U;
     /*Writing the port value */
     regWrFailStatus |= regWriteReadback(&port->DOUT, M_THIRTY_ONE, M_ZERO, setBits);
-    /* TI_COVERAGE_GAP_START Hardware register write failure cannot be recreated in test environment */
     if (regWrFailStatus != (uint32)E_OK)
     {
 #ifdef DIO_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)DIO_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
-    /* TI_COVERAGE_GAP_STOP */
 
     return (regWrFailStatus);
 }

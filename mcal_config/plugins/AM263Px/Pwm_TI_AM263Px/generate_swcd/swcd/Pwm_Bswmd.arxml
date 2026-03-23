@@ -8,7 +8,7 @@
         <BSW-MODULE-DESCRIPTION UUID="14f83e36-7628-433d-ac1a-ee586d6d4cf7">
           <SHORT-NAME>Pwm</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
-          <EXPECTED-ENTRYS>
+          <IMPLEMENTED-ENTRYS>
             [!LOOP "as:modconf('Pwm')[1]/PwmChannelConfigSet/PwmChannel/*"!][!//
             [!IF "PwmChannelId = '0'"!][!//
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -699,7 +699,7 @@
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Pwm_TI_AM263px/Pwm_ModuleEntry/Pwm_SetPeriodAndDuty</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!][!//
-          </EXPECTED-ENTRYS>
+          </IMPLEMENTED-ENTRYS>
           <MODULE-ID>121</MODULE-ID>
           <BSW-MODULE-DEPENDENCYS>
             [!IF "as:modconf('Pwm')[1]/PwmGeneral/PwmDevErrorDetect = 'true'"!][!//

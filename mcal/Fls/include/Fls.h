@@ -266,6 +266,8 @@ typedef uint32 Fls_LengthType;
 #define FLS_SID_REGISTERREADBACK ((uint8)0x0BU)
 /** \brief Fls_SetEraseType() API Service ID */
 #define FLS_SID_SET_ERASE_TYPE ((uint8)0x0CU)
+/** \brief Fls_Set3ByteAddressMode() API Service ID */
+#define FLS_SID_SET_3BYTEADDR_MODE ((uint8)0x0DU)
 
 /** @} */
 

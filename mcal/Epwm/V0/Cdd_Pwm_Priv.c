@@ -429,14 +429,17 @@ uint32 Cdd_Pwm_getBaseAddr(Cdd_Pwm_ChannelType ChannelNumber, uint8 Id)
     uint32              baseAddr;
     Cdd_Pwm_ChannelType Chanl = ChannelNumber;
 
-#if (CDD_PWM_DEV_ERROR_DETECT == STD_ON)
-    if ((ChannelNumber >= CDD_PWM_MAX_NUM_CHANNELS) && (Id != CDD_PWM_VALID_ID))
+    if (Chanl >= CDD_PWM_MAX_NUM_CHANNELS)
     {
-        (void)Cdd_Pwm_reportDetError(Id, CDD_PWM_E_PARAM_INVALID_CHANNEL);
+#if (CDD_PWM_DEV_ERROR_DETECT == STD_ON)
+        if ((Id != CDD_PWM_VALID_ID))
+        {
+            (void)Cdd_Pwm_reportDetError(Id, CDD_PWM_E_PARAM_INVALID_CHANNEL);
+        }
+#endif
         baseAddr = CDD_PWM_INVALID_BASE_ADDR;
     }
     else
-#endif
     {
         baseAddr = Cdd_Pwm_ChObj[Chanl].baseaddr;
     }

@@ -1,3 +1,1062 @@
+commit dc767637438dd5ed5546b8595be0bf142c61d53c
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sun Mar 22 14:42:58 2026 +0530
+
+    all: Fls: Adding missing DET check and updated reset pin for SIP
+    
+    Fixes: MCAL-34951, MCAL-35725
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/include/Fls.h                             |  2 ++
+ mcal/Fls/src/Fls.c                                 | 30 ++++++++++++++++---
+ .../soc/am263px/r5f0_0/src/Port_PBcfg_SIP.c        | 34 +++++++++++++++++++++-
+ .../fls_test/testLib/flsTestNegativeTestCase.c     | 18 ++++++++++++
+ 4 files changed, 79 insertions(+), 5 deletions(-)
+
+commit 75d4448acaba70b30cca44555ceb57ca2afe0c77
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Mar 23 09:54:12 2026 +0530
+
+    all: all: Config build fix
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am263px/tresos/output/include/Adc_Cfg.h    |  3 ++
+ .../am263px/tresos/output/include/Cdd_Pwm_Cfg.h    |  3 ++
+ .../soc/am263px/tresos/output/include/Mcu_Cfg.h    |  3 ++
+ .../soc/am263px/tresos/output/include/Adc_Cfg.h    |  3 ++
+ .../am263px/tresos/output/include/Cdd_I2c_Cfg.h    |  3 ++
+ .../soc/am263px/tresos/output/include/Mcu_Cfg.h    |  3 ++
+ .../soc/am263px/tresos/output/include/Adc_Cfg.h    |  3 ++
+ .../am263px/tresos/output/include/Cdd_I2c_Cfg.h    |  3 ++
+ .../soc/am263px/tresos/output/include/Mcu_Cfg.h    |  3 ++
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |  6 ++++
+ .../tresos/am263px_lp/output/include/Port_Cfg.h    |  3 ++
+ .../tresos/am263px_sip/output/include/Port_Cfg.h   |  3 ++
+ mcal/examples/Fls/fls_app/Makefile                 |  2 +-
+ .../soc/am261/tresos/output/include/Cdd_I2c_Cfg.h  |  3 ++
+ .../soc/am263/tresos/output/include/Cdd_I2c_Cfg.h  |  3 ++
+ .../am263px/tresos/output/include/Cdd_I2c_Cfg.h    |  3 ++
+ .../soc/am261/tresos/output/include/Cdd_I2c_Cfg.h  |  3 ++
+ .../soc/am263/tresos/output/include/Cdd_I2c_Cfg.h  |  3 ++
+ .../am263px/tresos/output/include/Cdd_I2c_Cfg.h    |  3 ++
+ .../soc/am261/tresos/output/include/Cdd_I2c_Cfg.h  |  3 ++
+ .../soc/am263/tresos/output/include/Cdd_I2c_Cfg.h  |  3 ++
+ .../am263px/tresos/output/include/Cdd_I2c_Cfg.h    |  3 ++
+ .../soc/am261/tresos/output/include/Wdg_Cfg.h      |  3 ++
+ .../soc/am263/tresos/output/include/Wdg_Cfg.h      |  3 ++
+ .../soc/am263px/tresos/output/include/Wdg_Cfg.h    |  3 ++
+ .../soc/am261/r5f0_0/include/Adc_Cfg.h             |  3 ++
+ .../soc/am263/r5f0_0/include/Adc_Cfg.h             |  3 ++
+ .../soc/am263px/r5f0_0/include/Adc_Cfg.h           |  2 +-
+ .../soc/am261/r5f0_0/include/Can_Cfg.h             | 12 +++++++
+ .../soc/am263/r5f0_0/include/Can_Cfg.h             | 18 ++++++++++
+ .../soc/am263px/r5f0_0/include/Can_Cfg.h           | 23 +++++++++++--
+ .../soc/am261/r5f0_0/include/Cdd_I2c_Cfg.h         |  3 ++
+ .../soc/am263/r5f0_0/include/Cdd_I2c_Cfg.h         |  3 ++
+ .../soc/am263px/r5f0_0/include/Cdd_I2c_Cfg.h       |  2 +-
+ .../soc/am261/r5f0_0/include/Cdd_Pwm_Cfg.h         |  2 +-
+ .../soc/am263/r5f0_0/include/Cdd_Pwm_Cfg.h         |  2 +-
+ .../soc/am263px/r5f0_0/include/Cdd_Pwm_Cfg.h       |  2 +-
+ .../soc/am261/r5f0_0/include/EthTrcv_Cfg.h         |  3 ++
+ .../soc/am263/r5f0_0/include/EthTrcv_Cfg.h         |  3 ++
+ .../soc/am263px/r5f0_0/include/EthTrcv_Cfg.h       |  6 ++--
+ .../soc/am261/r5f0_0/include/Eth_Cfg.h             |  3 ++
+ .../soc/am263/r5f0_0/include/Eth_Cfg.h             |  3 ++
+ .../soc/am263px/r5f0_0/include/Eth_Cfg.h           | 40 +++++++++++-----------
+ .../soc/am261/r5f0_0/include/Fls_Cfg.h             |  6 ++++
+ .../soc/am263/r5f0_0/include/Fls_Cfg.h             |  6 ++++
+ .../soc/am263px/r5f0_0/include/Fls_Cfg.h           | 10 +++---
+ .../soc/am261/r5f0_0/include/Fls_Cfg.h             |  6 ++++
+ .../soc/am263px/r5f0_0/include/Fls_Cfg.h           |  6 ++++
+ .../soc/am261/r5f0_0/include/Cdd_FsiRx_Cfg.h       |  3 ++
+ .../soc/am263/r5f0_0/include/Cdd_FsiRx_Cfg.h       |  3 ++
+ .../soc/am263px/r5f0_0/include/Cdd_FsiRx_Cfg.h     |  2 +-
+ .../soc/am261/r5f0_0/include/Cdd_FsiTx_Cfg.h       |  3 ++
+ .../soc/am263/r5f0_0/include/Cdd_FsiTx_Cfg.h       |  3 ++
+ .../soc/am263px/r5f0_0/include/Cdd_FsiTx_Cfg.h     |  2 +-
+ .../soc/am261/r5f0_0/include/Gpt_Cfg.h             |  3 ++
+ .../soc/am263/r5f0_0/include/Gpt_Cfg.h             |  3 ++
+ .../soc/am263px/r5f0_0/include/Gpt_Cfg.h           |  3 +-
+ .../soc/am261/r5f0_0/include/Icu_Cfg.h             |  6 ++++
+ .../soc/am263/r5f0_0/include/Icu_Cfg.h             |  6 ++++
+ .../soc/am263px/r5f0_0/include/Icu_Cfg.h           |  6 ++--
+ .../soc/am261/r5f0_0/include/Lin_Cfg.h             |  3 ++
+ .../soc/am263/r5f0_0/include/Lin_Cfg.h             |  3 ++
+ .../soc/am263px/r5f0_0/include/Lin_Cfg.h           |  8 ++---
+ .../soc/am261/r5f0_0/include/Mcu_Cfg.h             |  3 ++
+ .../soc/am263/r5f0_0/include/Mcu_Cfg.h             |  3 ++
+ .../soc/am263px/r5f0_0/include/Mcu_Cfg.h           |  3 ++
+ .../soc/am261/r5f0_0/include/Port_Cfg.h            |  3 ++
+ .../soc/am263/r5f0_0/include/Port_Cfg.h            |  3 ++
+ .../soc/am263px/r5f0_0/include/Port_Cfg.h          |  3 ++
+ .../soc/am261/r5f0_0/include/Pwm_Cfg.h             |  6 ++++
+ .../soc/am263/r5f0_0/include/Pwm_Cfg.h             |  6 ++++
+ .../soc/am263px/r5f0_0/include/Pwm_Cfg.h           |  6 ++++
+ .../soc/am261/r5f0_0/include/Wdg_Cfg.h             |  3 ++
+ .../soc/am263/r5f0_0/include/Wdg_Cfg.h             |  3 ++
+ .../soc/am263px/r5f0_0/include/Wdg_Cfg.h           |  2 +-
+ 75 files changed, 299 insertions(+), 46 deletions(-)
+
+commit 45daec0135570f50b85f8bd1c56f377bc75c298b
+Author: Akash <a-verma3@ti.com>
+Date:   Sun Mar 15 23:51:28 2026 +0530
+
+    all: DMA/ADC: Coverage fix for DMA module
+    
+    - Improve dynamic analysis coverage for Cdd_Dma_soc
+    
+    Fixes: MCAL-36537
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dma/V0/Cdd_Dma_soc.c                          | 23 +++++--------
+ mcal_test/Utils/mock_common/mock_common.c          | 36 +++++++++++++++++++
+ mcal_test/Utils/mock_common/mock_common.h          | 36 +++++++++++++++++++
+ mcal_test/Utils/mock_common/srcs.mk                |  5 +++
+ mcal_test/dma_test/Makefile                        |  4 +++
+ mcal_test/dma_test/build/makefile                  | 34 +++++++++---------
+ mcal_test/dma_test/testInput/dmaTestCases.h        |  4 +--
+ mcal_test/dma_test/testLib/dmaTest.h               |  4 +--
+ mcal_test/dma_test/testLib/dmaTestMainTestCase.c   | 40 ++++++++++++++++++++--
+ .../dma_test/testLib/dmaTestNegativeTestCase.c     | 18 ++--------
+ 10 files changed, 150 insertions(+), 54 deletions(-)
+
+commit 2276d7b13f55682cad63580000cb029ac44d6784
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Mar 18 10:37:51 2026 +0530
+
+    all: all: Updated release notes and lint fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Adc/V0/Adc_Priv.c                             |  12 +-
+ mcal_test/adc_test/testInput/adcTestCases.h        | 500 ++++++++++++---------
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   | 418 ++++++++---------
+ .../adc_test/testLib/adcTestNegativeTestCase.c     | 128 +++---
+ mcal_test/lin_test/testLib/linTestMainTestCase.c   |   2 +-
+ release_notes.md                                   |  32 ++
+ 6 files changed, 568 insertions(+), 524 deletions(-)
+
+commit da8ce3e7298362d1b3043354712fd837c16f2ac7
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Mar 17 15:54:55 2026 +0530
+
+    all: all: Replaced <EXPECTED-ENTRYS> with <IMPLEMENTED-ENTRYS>
+    
+    Fixes: MCAL-36583
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../adc_hw_trig_dma_app/soc/am261/tresos/output/swcd/Adc_Bswmd.arxml  | 4 ++--
+ .../soc/am261/tresos/output/swcd/Cdd_Dma_Bswmd.arxml                  | 4 ++--
+ .../soc/am261/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml                  | 4 ++--
+ .../adc_hw_trig_dma_app/soc/am261/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../adc_hw_trig_dma_app/soc/am263/tresos/output/swcd/Adc_Bswmd.arxml  | 4 ++--
+ .../soc/am263/tresos/output/swcd/Cdd_Dma_Bswmd.arxml                  | 4 ++--
+ .../soc/am263/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml                  | 4 ++--
+ .../adc_hw_trig_dma_app/soc/am263/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml                    | 4 ++--
+ .../soc/am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml                | 4 ++--
+ .../soc/am263px/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml                | 4 ++--
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml                    | 4 ++--
+ .../adc_resolver_app/soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml   | 4 ++--
+ .../adc_resolver_app/soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml                    | 4 ++--
+ .../soc/am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml                | 4 ++--
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml                    | 4 ++--
+ .../fls_boot_app/soc/am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml   | 4 ++--
+ .../fls_boot_app/soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml       | 4 ++--
+ .../Can/soc/am263px/tresos/am263px_lp/output/swcd/Port_Bswmd.arxml    | 4 ++--
+ .../Can/soc/am263px/tresos/am263px_sip/output/swcd/Port_Bswmd.arxml   | 4 ++--
+ .../examples/Fls/Flsdiag/soc/am263/tresos/output/swcd/Fls_Bswmd.arxml | 4 ++--
+ .../Fls/Flsdiag_ospi/soc/am261/tresos/output/swcd/Fls_Bswmd.arxml     | 4 ++--
+ .../Fls/Flsdiag_ospi/soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml   | 4 ++--
+ .../Fls/fls_phy_app/soc/am261/tresos/output/swcd/Fls_Bswmd.arxml      | 4 ++--
+ .../Fls/fls_phy_app/soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml    | 4 ++--
+ .../Fls/fls_xip_app/soc/am261/tresos/output/swcd/Fls_Bswmd.arxml      | 4 ++--
+ .../Fls/fls_xip_app/soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml    | 4 ++--
+ .../wdg_skip_reset_app/soc/am261/tresos/output/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ .../wdg_skip_reset_app/soc/am263/tresos/output/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ .../wdg_skip_reset_app/soc/am263px/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Adc_Demo_Cfg/soc/am261/r5f0_0/swcd/Adc_Bswmd.arxml                | 4 ++--
+ .../Adc_Demo_Cfg/soc/am263/r5f0_0/swcd/Adc_Bswmd.arxml                | 4 ++--
+ .../Adc_Demo_Cfg/soc/am263px/r5f0_0/swcd/Adc_Bswmd.arxml              | 4 ++--
+ .../Can_Demo_Cfg/soc/am261/r5f0_0/swcd/Can_Bswmd.arxml                | 4 ++--
+ .../Can_Demo_Cfg/soc/am263/r5f0_0/swcd/Can_Bswmd.arxml                | 4 ++--
+ .../Can_Demo_Cfg/soc/am263px/r5f0_0/swcd/Can_Bswmd.arxml              | 4 ++--
+ .../Dio_Demo_Cfg/soc/am261/r5f0_0/swcd/Dio_Bswmd.arxml                | 4 ++--
+ .../Dio_Demo_Cfg/soc/am263/r5f0_0/swcd/Dio_Bswmd.arxml                | 4 ++--
+ .../Dio_Demo_Cfg/soc/am263px/r5f0_0/swcd/Dio_Bswmd.arxml              | 4 ++--
+ .../Dma_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml            | 4 ++--
+ .../Dma_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml            | 4 ++--
+ .../Dma_Demo_Cfg/soc/am263px/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml          | 4 ++--
+ .../Epwm_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml           | 4 ++--
+ .../Epwm_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml           | 4 ++--
+ .../Epwm_Demo_Cfg/soc/am263px/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml         | 4 ++--
+ .../Fls_Demo_Cfg/soc/am261/r5f0_0/swcd/Fls_Bswmd.arxml                | 4 ++--
+ .../Fls_Demo_Cfg/soc/am263/r5f0_0/swcd/Fls_Bswmd.arxml                | 4 ++--
+ .../Fls_Demo_Cfg/soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml              | 4 ++--
+ .../soc/am261/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml                         | 4 ++--
+ .../Fls_OSPI_SBL_Support_Cfg/soc/am261/r5f0_0/swcd/Fls_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml                       | 4 ++--
+ .../Fls_OSPI_SBL_Support_Cfg/soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml  | 4 ++--
+ .../FsiRx_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml        | 4 ++--
+ .../FsiRx_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml        | 4 ++--
+ .../FsiRx_Demo_Cfg/soc/am263px/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml      | 4 ++--
+ .../FsiTx_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml        | 4 ++--
+ .../FsiTx_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml        | 4 ++--
+ .../FsiTx_Demo_Cfg/soc/am263px/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml      | 4 ++--
+ .../Gpt_Demo_Cfg/soc/am261/r5f0_0/swcd/Gpt_Bswmd.arxml                | 4 ++--
+ .../Gpt_Demo_Cfg/soc/am263/r5f0_0/swcd/Gpt_Bswmd.arxml                | 4 ++--
+ .../Gpt_Demo_Cfg/soc/am263px/r5f0_0/swcd/Gpt_Bswmd.arxml              | 4 ++--
+ .../Icu_Demo_Cfg/soc/am261/r5f0_0/swcd/Icu_Bswmd.arxml                | 4 ++--
+ .../Icu_Demo_Cfg/soc/am263/r5f0_0/swcd/Icu_Bswmd.arxml                | 4 ++--
+ .../Icu_Demo_Cfg/soc/am263px/r5f0_0/swcd/Icu_Bswmd.arxml              | 4 ++--
+ .../Ipc_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml            | 4 ++--
+ .../Ipc_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml            | 4 ++--
+ .../Ipc_Demo_Cfg/soc/am263px/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml          | 4 ++--
+ .../Lin_Demo_Cfg/soc/am261/r5f0_0/swcd/Lin_Bswmd.arxml                | 4 ++--
+ .../Lin_Demo_Cfg/soc/am263/r5f0_0/swcd/Lin_Bswmd.arxml                | 4 ++--
+ .../Lin_Demo_Cfg/soc/am263px/r5f0_0/swcd/Lin_Bswmd.arxml              | 4 ++--
+ .../Mcu_Demo_Cfg/soc/am261/r5f0_0/swcd/Mcu_Bswmd.arxml                | 4 ++--
+ .../Mcu_Demo_Cfg/soc/am263/r5f0_0/swcd/Mcu_Bswmd.arxml                | 4 ++--
+ .../Mcu_Demo_Cfg/soc/am263px/r5f0_0/swcd/Mcu_Bswmd.arxml              | 4 ++--
+ .../Port_Demo_Cfg/soc/am261/r5f0_0/swcd/Port_Bswmd.arxml              | 4 ++--
+ .../Port_Demo_Cfg/soc/am263/r5f0_0/swcd/Port_Bswmd.arxml              | 4 ++--
+ .../Port_Demo_Cfg/soc/am263px/r5f0_0/swcd/Port_Bswmd.arxml            | 4 ++--
+ .../Pwm_Demo_Cfg/soc/am261/r5f0_0/swcd/Pwm_Bswmd.arxml                | 4 ++--
+ .../Pwm_Demo_Cfg/soc/am263/r5f0_0/swcd/Pwm_Bswmd.arxml                | 4 ++--
+ .../Pwm_Demo_Cfg/soc/am263px/r5f0_0/swcd/Pwm_Bswmd.arxml              | 4 ++--
+ .../Spi_Demo_Cfg/soc/am261/r5f0_0/swcd/Spi_Bswmd.arxml                | 4 ++--
+ .../Spi_Demo_Cfg/soc/am263/r5f0_0/swcd/Spi_Bswmd.arxml                | 4 ++--
+ .../Spi_Demo_Cfg/soc/am263px/r5f0_0/swcd/Spi_Bswmd.arxml              | 4 ++--
+ .../Uart_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_Uart_Bswmd.arxml          | 4 ++--
+ .../Uart_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_Uart_Bswmd.arxml          | 4 ++--
+ .../Uart_Demo_Cfg/soc/am263px/r5f0_0/swcd/Cdd_Uart_Bswmd.arxml        | 4 ++--
+ .../Wdg_Demo_Cfg/soc/am261/r5f0_0/swcd/Wdg_Bswmd.arxml                | 4 ++--
+ .../Wdg_Demo_Cfg/soc/am263/r5f0_0/swcd/Wdg_Bswmd.arxml                | 4 ++--
+ .../Wdg_Demo_Cfg/soc/am263px/r5f0_0/swcd/Wdg_Bswmd.arxml              | 4 ++--
+ .../plugins/AM261x/Adc_TI_AM261x/generate_swcd/swcd/Adc_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Can_TI_AM261x/generate_swcd/swcd/Can_Bswmd.arxml   | 4 ++--
+ .../AM261x/Cdd_Dma_TI_AM261x/generate_swcd/swcd/Cdd_Dma_Bswmd.arxml   | 4 ++--
+ .../Cdd_FsiRx_TI_AM261x/generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml      | 4 ++--
+ .../Cdd_FsiTx_TI_AM261x/generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml      | 4 ++--
+ .../AM261x/Cdd_Ipc_TI_AM261x/generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml   | 4 ++--
+ .../AM261x/Cdd_Pwm_TI_AM261x/generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml   | 4 ++--
+ .../AM261x/Cdd_Uart_TI_AM261x/generate_swcd/swcd/Cdd_Uart_Bswmd.arxml | 4 ++--
+ .../plugins/AM261x/Dio_TI_AM261x/generate_swcd/swcd/Dio_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Fls_TI_AM261x/generate_swcd/swcd/Fls_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Gpt_TI_AM261x/generate_swcd/swcd/Gpt_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Icu_TI_AM261x/generate_swcd/swcd/Icu_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Lin_TI_AM261x/generate_swcd/swcd/Lin_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Mcu_TI_AM261x/generate_swcd/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../AM261x/Port_TI_AM261x_ZCZ/generate_swcd/swcd/Port_Bswmd.arxml     | 4 ++--
+ .../plugins/AM261x/Pwm_TI_AM261x/generate_swcd/swcd/Pwm_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Spi_TI_AM261x/generate_swcd/swcd/Spi_Bswmd.arxml   | 4 ++--
+ .../plugins/AM261x/Wdg_TI_AM261x/generate_swcd/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263Px/Adc_TI_AM263Px/generate_swcd/swcd/Adc_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Can_TI_AM263Px/generate_swcd/swcd/Can_Bswmd.arxml | 4 ++--
+ .../AM263Px/Cdd_Dma_TI_AM263Px/generate_swcd/swcd/Cdd_Dma_Bswmd.arxml | 4 ++--
+ .../Cdd_FsiRx_TI_AM263Px/generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml     | 4 ++--
+ .../Cdd_FsiTx_TI_AM263Px/generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml     | 4 ++--
+ .../AM263Px/Cdd_Ipc_TI_AM263Px/generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml | 4 ++--
+ .../AM263Px/Cdd_Pwm_TI_AM263Px/generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml | 4 ++--
+ .../Cdd_Uart_TI_AM263Px/generate_swcd/swcd/Cdd_Uart_Bswmd.arxml       | 4 ++--
+ .../plugins/AM263Px/Dio_TI_AM263Px/generate_swcd/swcd/Dio_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Fls_TI_AM263Px/generate_swcd/swcd/Fls_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Gpt_TI_AM263Px/generate_swcd/swcd/Gpt_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Icu_TI_AM263Px/generate_swcd/swcd/Icu_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Lin_TI_AM263Px/generate_swcd/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Mcu_TI_AM263Px/generate_swcd/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../AM263Px/Port_TI_AM263Px/generate_swcd/swcd/Port_Bswmd.arxml       | 4 ++--
+ .../AM263Px/Port_TI_AM263Px_C/generate_swcd/swcd/Port_Bswmd.arxml     | 4 ++--
+ .../AM263Px/Port_TI_AM263Px_SIP/generate_swcd/swcd/Port_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263Px/Pwm_TI_AM263Px/generate_swcd/swcd/Pwm_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Spi_TI_AM263Px/generate_swcd/swcd/Spi_Bswmd.arxml | 4 ++--
+ .../plugins/AM263Px/Wdg_TI_AM263Px/generate_swcd/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../plugins/AM263x/Adc_TI_AM263x/generate_swcd/swcd/Adc_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Can_TI_AM263x/generate_swcd/swcd/Can_Bswmd.arxml   | 4 ++--
+ .../AM263x/Cdd_Dma_TI_AM263x/generate_swcd/swcd/Cdd_Dma_Bswmd.arxml   | 4 ++--
+ .../Cdd_FsiRx_TI_AM263x/generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml      | 4 ++--
+ .../Cdd_FsiTx_TI_AM263x/generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml      | 4 ++--
+ .../AM263x/Cdd_Ipc_TI_AM263x/generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml   | 4 ++--
+ .../AM263x/Cdd_Pwm_TI_AM263x/generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml   | 4 ++--
+ .../AM263x/Cdd_Uart_TI_AM263x/generate_swcd/swcd/Cdd_Uart_Bswmd.arxml | 4 ++--
+ .../plugins/AM263x/Dio_TI_AM263x/generate_swcd/swcd/Dio_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Fls_TI_AM263x/generate_swcd/swcd/Fls_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Gpt_TI_AM263x/generate_swcd/swcd/Gpt_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Icu_TI_AM263x/generate_swcd/swcd/Icu_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Lin_TI_AM263x/generate_swcd/swcd/Lin_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Mcu_TI_AM263x/generate_swcd/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Port_TI_AM263x/generate_swcd/swcd/Port_Bswmd.arxml | 4 ++--
+ .../plugins/AM263x/Pwm_TI_AM263x/generate_swcd/swcd/Pwm_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Spi_TI_AM263x/generate_swcd/swcd/Spi_Bswmd.arxml   | 4 ++--
+ .../plugins/AM263x/Wdg_TI_AM263x/generate_swcd/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ .../soc/am261/r5f0_0/config_22/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml | 4 ++--
+ .../soc/am263/r5f0_0/config_22/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml | 4 ++--
+ .../am263px/r5f0_0/config_22/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml   | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_1/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_91/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_92/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_93/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_94/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am261/r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_1/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_2/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_2/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_3/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_3/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_4/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_4/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_5/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_5/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_6/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_6/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_7/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_7/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_8/tresos/output/swcd/Lin_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_8/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_91/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_92/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_93/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_94/tresos/output/swcd/Lin_Bswmd.arxml | 4 ++--
+ .../Lin/soc/am263/r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../soc/am263px/r5f0_0/config_1/tresos/output/swcd/Lin_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_91/tresos/output/swcd/Lin_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_92/tresos/output/swcd/Lin_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_93/tresos/output/swcd/Lin_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_94/tresos/output/swcd/Lin_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_2/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_3/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_4/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_5/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_7/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_7/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am261/r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_2/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_3/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_4/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_5/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_6/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_6/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_7/tresos/output/swcd/Mcu_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_7/tresos/output/swcd/Wdg_Bswmd.arxml  | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml | 4 ++--
+ .../Mcu/soc/am263/r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml | 4 ++--
+ .../soc/am263px/r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_2/tresos/output/swcd/Mcu_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_3/tresos/output/swcd/Mcu_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_4/tresos/output/swcd/Mcu_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_5/tresos/output/swcd/Mcu_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml    | 4 ++--
+ .../soc/am263px/r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml   | 4 ++--
+ .../soc/am263px/r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml   | 4 ++--
+ 252 files changed, 504 insertions(+), 504 deletions(-)
+
+commit ef5dd6904baad95924f1bdda6e9db77fabcd6329
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Mar 17 15:21:21 2026 +0530
+
+    all: all: Fixing KW MISRA.INCOMPLETE.STRUCT issue
+    
+    Fixes: MCAL-36360
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am263px/r5f0_0/include/Adc_Cfg.h           |    3 +
+ .../soc/am263px/r5f0_0/include/Can_Cfg.h           |    4 +
+ .../soc/am263px/r5f0_0/include/Cdd_I2c_Cfg.h       |    3 +
+ .../soc/am261/r5f0_0/include/Cdd_Pwm_Cfg.h         |    3 +
+ .../soc/am263/r5f0_0/include/Cdd_Pwm_Cfg.h         |    3 +
+ .../soc/am263px/r5f0_0/include/Cdd_Pwm_Cfg.h       |    3 +
+ .../soc/am263px/r5f0_0/include/EthTrcv_Cfg.h       |    5 +-
+ .../soc/am263px/r5f0_0/include/Eth_Cfg.h           |   41 +-
+ .../soc/am263px/r5f0_0/include/Fls_Cfg.h           |    8 +-
+ .../soc/am263px/r5f0_0/include/Cdd_FsiRx_Cfg.h     |    3 +
+ .../soc/am263px/r5f0_0/include/Cdd_FsiTx_Cfg.h     |    3 +
+ .../soc/am263px/r5f0_0/include/Gpt_Cfg.h           |    2 +
+ .../soc/am263px/r5f0_0/include/Icu_Cfg.h           |    4 +
+ .../soc/am263px/r5f0_0/include/Lin_Cfg.h           |    9 +-
+ .../soc/am261/r5f0_0/include/Spi_Cfg.h             |    3 +
+ .../soc/am263/r5f0_0/include/Spi_Cfg.h             |    2 +
+ .../soc/am263px/r5f0_0/include/Spi_Cfg.h           |    3 +
+ .../soc/am263px/r5f0_0/include/Wdg_Cfg.h           |    3 +
+ .../Adc_TI_AM261x/generate/include/Adc_Cfg.h       |  939 ++++----
+ .../Can_TI_AM261x/generate/include/Can_Cfg.h       |  715 +++---
+ .../generate/include/Cdd_FsiRx_Cfg.h               |  857 +++----
+ .../generate/include/Cdd_FsiTx_Cfg.h               |  795 +++----
+ .../generate/include/Cdd_I2c_Cfg.h                 |    3 +
+ .../generate/include/Cdd_Pwm_Cfg.h                 |  821 +++----
+ .../generate/include/EthTrcv_Cfg.h                 |  617 ++---
+ .../Eth_TI_AM261x/generate/include/Eth_Cfg.h       |  928 ++++----
+ .../Fls_TI_AM261x/generate/include/Fls_Cfg.h       |  544 ++---
+ .../Gpt_TI_AM261x/generate/include/Gpt_Cfg.h       |  613 ++---
+ .../Icu_TI_AM261x/generate/include/Icu_Cfg.h       |  534 ++---
+ .../Lin_TI_AM261x/generate/include/Lin_Cfg.h       |  643 ++---
+ .../Mcu_TI_AM261x/generate/include/Mcu_Cfg.h       | 1765 +++++++-------
+ .../Port_TI_AM261x_ZCZ/generate/include/Port_Cfg.h |    3 +
+ .../Pwm_TI_AM261x/generate/include/Pwm_Cfg.h       |  788 ++++---
+ .../Spi_TI_AM261x/generate/include/Spi_Cfg.h       |    3 +
+ .../Wdg_TI_AM261x/generate/include/Wdg_Cfg.h       |  441 ++--
+ .../Adc_TI_AM263Px/generate/include/Adc_Cfg.h      |  985 ++++----
+ .../Can_TI_AM263Px/generate/include/Can_Cfg.h      |  793 ++++---
+ .../generate/include/Cdd_FsiRx_Cfg.h               |  891 +++----
+ .../generate/include/Cdd_FsiTx_Cfg.h               |  823 +++----
+ .../generate/include/Cdd_I2c_Cfg.h                 |    3 +
+ .../generate/include/Cdd_Pwm_Cfg.h                 |  871 +++----
+ .../generate/include/EthTrcv_Cfg.h                 |  617 ++---
+ .../generate/include/EthTrcv_Cfg.h                 |    5 +-
+ .../Eth_TI_AM263Px/generate/include/Eth_Cfg.h      |  834 +++----
+ .../Fls_TI_AM263Px/generate/include/Fls_Cfg.h      |  544 ++---
+ .../Gpt_TI_AM263Px/generate/include/Gpt_Cfg.h      |  667 +++---
+ .../Icu_TI_AM263Px/generate/include/Icu_Cfg.h      |  448 ++--
+ .../Lin_TI_AM263Px/generate/include/Lin_Cfg.h      |  643 ++---
+ .../Mcu_TI_AM263Px/generate/include/Mcu_Cfg.h      | 1871 +++++++--------
+ .../Port_TI_AM263Px/generate/include/Port_Cfg.h    | 2065 ++++++++--------
+ .../Port_TI_AM263Px_C/generate/include/Port_Cfg.h  |    3 +
+ .../generate/include/Port_Cfg.h                    |    3 +
+ .../Pwm_TI_AM263Px/generate/include/Pwm_Cfg.h      |  784 +++---
+ .../Spi_TI_AM263Px/generate/include/Spi_Cfg.h      |    3 +
+ .../Wdg_TI_AM263Px/generate/include/Wdg_Cfg.h      |  441 ++--
+ .../Adc_TI_AM263x/generate/include/Adc_Cfg.h       |  963 ++++----
+ .../Can_TI_AM263x/generate/include/Can_Cfg.h       |  747 +++---
+ .../generate/include/Cdd_FsiRx_Cfg.h               |  897 +++----
+ .../generate/include/Cdd_FsiTx_Cfg.h               |  827 +++----
+ .../generate/include/Cdd_I2c_Cfg.h                 |    3 +
+ .../generate/include/Cdd_Pwm_Cfg.h                 |  867 +++----
+ .../generate/include/EthTrcv_Cfg.h                 |  617 ++---
+ .../Eth_TI_AM263x/generate/include/Eth_Cfg.h       |  930 ++++----
+ .../Fls_TI_AM263x/generate/include/Fls_Cfg.h       |    6 +
+ .../Gpt_TI_AM263x/generate/include/Gpt_Cfg.h       |    3 +
+ .../Icu_TI_AM263x/generate/include/Icu_Cfg.h       |  520 ++--
+ .../Lin_TI_AM263x/generate/include/Lin_Cfg.h       |  637 ++---
+ .../Mcu_TI_AM263x/generate/include/Mcu_Cfg.h       | 1811 +++++++-------
+ .../Port_TI_AM263x/generate/include/Port_Cfg.h     | 2083 ++++++++--------
+ .../Pwm_TI_AM263x/generate/include/Pwm_Cfg.h       |  814 +++----
+ .../Spi_TI_AM263x/generate/include/Spi_Cfg.h       |    2 +
+ .../Wdg_TI_AM263x/generate/include/Wdg_Cfg.h       |  469 ++--
+ .../Can/soc/am263px/r5f0_0/config_2/Port_Cfg.h     | 2215 ++++++++---------
+ .../Can/soc/am263px/r5f0_0/config_4/Port_Cfg.h     | 2215 ++++++++---------
+ .../Can/soc/am263px/r5f0_0/config_5/Port_Cfg.h     | 2215 ++++++++---------
+ .../Can/soc/am263px/r5f0_0/config_7/Port_Cfg.h     | 2215 ++++++++---------
+ .../config_1/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_2/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_3/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_4/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_5/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_6/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_1/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_2/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_3/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_4/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_5/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_6/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_1/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_2/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_3/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_4/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_5/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../config_6/tresos/output/include/Cdd_I2c_Cfg.h   |    3 +
+ .../Dio/soc/am261/r5f0_0/config_1/Port_Cfg.h       |    3 +
+ .../Dio/soc/am261/r5f0_0/config_2/Port_Cfg.h       |    3 +
+ .../Dio/soc/am261/r5f0_0/config_3/Port_Cfg.h       |    3 +
+ .../Dio/soc/am261/r5f0_0/config_4/Port_Cfg.h       |    3 +
+ .../Dio/soc/am261/r5f0_0/config_5/Port_Cfg.h       |    3 +
+ .../Dio/soc/am261/r5f0_0/config_91/Port_Cfg.h      |    3 +
+ .../Dio/soc/am261/r5f0_0/config_92/Port_Cfg.h      |    3 +
+ .../Dio/soc/am261/r5f0_0/config_93/Port_Cfg.h      |    3 +
+ .../Dio/soc/am261/r5f0_0/config_94/Port_Cfg.h      |    3 +
+ .../Dio/soc/am263/r5f0_0/config_1/Port_Cfg.h       |    3 +
+ .../Dio/soc/am263/r5f0_0/config_2/Port_Cfg.h       |    3 +
+ .../Dio/soc/am263/r5f0_0/config_3/Port_Cfg.h       |    3 +
+ .../Dio/soc/am263/r5f0_0/config_4/Port_Cfg.h       |    3 +
+ .../Dio/soc/am263/r5f0_0/config_5/Port_Cfg.h       |    3 +
+ .../Dio/soc/am263/r5f0_0/config_91/Port_Cfg.h      |    3 +
+ .../Dio/soc/am263/r5f0_0/config_92/Port_Cfg.h      |    3 +
+ .../Dio/soc/am263/r5f0_0/config_93/Port_Cfg.h      |    3 +
+ .../Dio/soc/am263/r5f0_0/config_94/Port_Cfg.h      |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_1/Port_Cfg.h     |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_2/Port_Cfg.h     |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_3/Port_Cfg.h     |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_4/Port_Cfg.h     |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_5/Port_Cfg.h     |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_91/Port_Cfg.h    |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_92/Port_Cfg.h    |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_93/Port_Cfg.h    |    3 +
+ .../Dio/soc/am263px/r5f0_0/config_94/Port_Cfg.h    |    3 +
+ .../Epwm/soc/am261/r5f0_0/config_1/Cdd_Pwm_Cfg.h   |  533 ++---
+ .../Epwm/soc/am261/r5f0_0/config_11/Cdd_Pwm_Cfg.h  |  525 +++--
+ .../Epwm/soc/am261/r5f0_0/config_12/Cdd_Pwm_Cfg.h  |  499 ++--
+ .../Epwm/soc/am261/r5f0_0/config_13/Cdd_Pwm_Cfg.h  |  503 ++--
+ .../Epwm/soc/am261/r5f0_0/config_14/Cdd_Pwm_Cfg.h  |  503 ++--
+ .../Epwm/soc/am261/r5f0_0/config_15/Cdd_Pwm_Cfg.h  |  505 ++--
+ .../Epwm/soc/am261/r5f0_0/config_16/Cdd_Pwm_Cfg.h  |  505 ++--
+ .../Epwm/soc/am261/r5f0_0/config_17/Cdd_Pwm_Cfg.h  |  535 ++---
+ .../Epwm/soc/am261/r5f0_0/config_18/Cdd_Pwm_Cfg.h  |  567 ++---
+ .../Epwm/soc/am261/r5f0_0/config_19/Cdd_Pwm_Cfg.h  |  565 ++---
+ .../Epwm/soc/am261/r5f0_0/config_2/Cdd_Pwm_Cfg.h   |  533 ++---
+ .../Epwm/soc/am261/r5f0_0/config_22/Cdd_Pwm_Cfg.h  |  559 ++---
+ .../config_22/tresos/output/include/Cdd_Pwm_Cfg.h  |  555 ++---
+ .../Epwm/soc/am261/r5f0_0/config_3/Cdd_Pwm_Cfg.h   |  513 ++--
+ .../Epwm/soc/am261/r5f0_0/config_4/Cdd_Pwm_Cfg.h   |  509 ++--
+ .../Epwm/soc/am261/r5f0_0/config_5/Cdd_Pwm_Cfg.h   |  507 ++--
+ .../Epwm/soc/am261/r5f0_0/config_6/Cdd_Pwm_Cfg.h   |  517 ++--
+ .../Epwm/soc/am261/r5f0_0/config_7/Cdd_Pwm_Cfg.h   |  517 ++--
+ .../Epwm/soc/am261/r5f0_0/config_8/Cdd_Pwm_Cfg.h   |  517 ++--
+ .../Epwm/soc/am261/r5f0_0/config_91/Cdd_Pwm_Cfg.h  |  517 ++--
+ .../Epwm/soc/am261/r5f0_0/config_92/Cdd_Pwm_Cfg.h  |  519 ++--
+ .../Epwm/soc/am261/r5f0_0/config_93/Cdd_Pwm_Cfg.h  |  513 ++--
+ .../Epwm/soc/am261/r5f0_0/config_94/Cdd_Pwm_Cfg.h  |  511 ++--
+ .../Epwm/soc/am263/r5f0_0/config_1/Cdd_Pwm_Cfg.h   |  571 ++---
+ .../Epwm/soc/am263/r5f0_0/config_11/Cdd_Pwm_Cfg.h  |  575 ++---
+ .../Epwm/soc/am263/r5f0_0/config_12/Cdd_Pwm_Cfg.h  |  549 ++---
+ .../Epwm/soc/am263/r5f0_0/config_13/Cdd_Pwm_Cfg.h  |  553 ++---
+ .../Epwm/soc/am263/r5f0_0/config_14/Cdd_Pwm_Cfg.h  |  553 ++---
+ .../Epwm/soc/am263/r5f0_0/config_15/Cdd_Pwm_Cfg.h  |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_16/Cdd_Pwm_Cfg.h  |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_17/Cdd_Pwm_Cfg.h  |  585 ++---
+ .../Epwm/soc/am263/r5f0_0/config_18/Cdd_Pwm_Cfg.h  |  747 +++---
+ .../Epwm/soc/am263/r5f0_0/config_19/Cdd_Pwm_Cfg.h  |  747 +++---
+ .../Epwm/soc/am263/r5f0_0/config_2/Cdd_Pwm_Cfg.h   |  573 ++---
+ .../Epwm/soc/am263/r5f0_0/config_20/Cdd_Pwm_Cfg.h  |  747 +++---
+ .../Epwm/soc/am263/r5f0_0/config_21/Cdd_Pwm_Cfg.h  |  747 +++---
+ .../Epwm/soc/am263/r5f0_0/config_22/Cdd_Pwm_Cfg.h  |  607 ++---
+ .../config_22/tresos/output/include/Cdd_Pwm_Cfg.h  |  603 ++---
+ .../Epwm/soc/am263/r5f0_0/config_3/Cdd_Pwm_Cfg.h   |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_4/Cdd_Pwm_Cfg.h   |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_5/Cdd_Pwm_Cfg.h   |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_6/Cdd_Pwm_Cfg.h   |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_7/Cdd_Pwm_Cfg.h   |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_8/Cdd_Pwm_Cfg.h   |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_91/Cdd_Pwm_Cfg.h  |  559 ++---
+ .../Epwm/soc/am263/r5f0_0/config_92/Cdd_Pwm_Cfg.h  |  561 ++---
+ .../Epwm/soc/am263/r5f0_0/config_93/Cdd_Pwm_Cfg.h  |  555 ++---
+ .../Epwm/soc/am263/r5f0_0/config_94/Cdd_Pwm_Cfg.h  |  553 ++---
+ .../Epwm/soc/am263px/r5f0_0/config_1/Cdd_Pwm_Cfg.h |  571 ++---
+ .../soc/am263px/r5f0_0/config_11/Cdd_Pwm_Cfg.h     |  575 ++---
+ .../soc/am263px/r5f0_0/config_12/Cdd_Pwm_Cfg.h     |  549 ++---
+ .../soc/am263px/r5f0_0/config_13/Cdd_Pwm_Cfg.h     |  553 ++---
+ .../soc/am263px/r5f0_0/config_14/Cdd_Pwm_Cfg.h     |  553 ++---
+ .../soc/am263px/r5f0_0/config_15/Cdd_Pwm_Cfg.h     |  555 ++---
+ .../soc/am263px/r5f0_0/config_16/Cdd_Pwm_Cfg.h     |  555 ++---
+ .../soc/am263px/r5f0_0/config_17/Cdd_Pwm_Cfg.h     |  585 ++---
+ .../soc/am263px/r5f0_0/config_18/Cdd_Pwm_Cfg.h     |  747 +++---
+ .../soc/am263px/r5f0_0/config_19/Cdd_Pwm_Cfg.h     |  747 +++---
+ .../Epwm/soc/am263px/r5f0_0/config_2/Cdd_Pwm_Cfg.h |  573 ++---
+ .../soc/am263px/r5f0_0/config_20/Cdd_Pwm_Cfg.h     |  747 +++---
+ .../soc/am263px/r5f0_0/config_21/Cdd_Pwm_Cfg.h     |  747 +++---
+ .../soc/am263px/r5f0_0/config_22/Cdd_Pwm_Cfg.h     |  609 ++---
+ .../config_22/tresos/output/include/Cdd_Pwm_Cfg.h  |  605 ++---
+ .../Epwm/soc/am263px/r5f0_0/config_3/Cdd_Pwm_Cfg.h |  555 ++---
+ .../Epwm/soc/am263px/r5f0_0/config_4/Cdd_Pwm_Cfg.h |  555 ++---
+ .../Epwm/soc/am263px/r5f0_0/config_5/Cdd_Pwm_Cfg.h |  555 ++---
+ .../Epwm/soc/am263px/r5f0_0/config_6/Cdd_Pwm_Cfg.h |  555 ++---
+ .../Epwm/soc/am263px/r5f0_0/config_7/Cdd_Pwm_Cfg.h |  555 ++---
+ .../Epwm/soc/am263px/r5f0_0/config_8/Cdd_Pwm_Cfg.h |  555 ++---
+ .../soc/am263px/r5f0_0/config_91/Cdd_Pwm_Cfg.h     |  559 ++---
+ .../soc/am263px/r5f0_0/config_92/Cdd_Pwm_Cfg.h     |  561 ++---
+ .../soc/am263px/r5f0_0/config_93/Cdd_Pwm_Cfg.h     |  555 ++---
+ .../soc/am263px/r5f0_0/config_94/Cdd_Pwm_Cfg.h     |  553 ++---
+ .../Eth/soc/am261/r5f0_0/config_15/Port_Cfg.h      | 1833 ++++++++-------
+ .../Gpt/soc/am261/r5f0_0/config_1/Gpt_Cfg.h        |  527 ++---
+ .../Gpt/soc/am261/r5f0_0/config_2/Gpt_Cfg.h        |  487 ++--
+ .../Gpt/soc/am261/r5f0_0/config_3/Gpt_Cfg.h        |  535 ++---
+ .../Gpt/soc/am261/r5f0_0/config_4/Gpt_Cfg.h        |  527 ++---
+ .../Gpt/soc/am261/r5f0_0/config_91/Gpt_Cfg.h       |  527 ++---
+ .../Gpt/soc/am261/r5f0_0/config_92/Gpt_Cfg.h       |  527 ++---
+ .../Gpt/soc/am261/r5f0_0/config_93/Gpt_Cfg.h       |  527 ++---
+ .../Gpt/soc/am261/r5f0_0/config_94/Gpt_Cfg.h       |  527 ++---
+ .../Gpt/soc/am263/r5f0_0/config_1/Gpt_Cfg.h        |  513 ++--
+ .../Gpt/soc/am263/r5f0_0/config_2/Gpt_Cfg.h        |  477 ++--
+ .../Gpt/soc/am263/r5f0_0/config_3/Gpt_Cfg.h        |  531 ++---
+ .../Gpt/soc/am263/r5f0_0/config_4/Gpt_Cfg.h        |  517 ++--
+ .../Gpt/soc/am263/r5f0_0/config_91/Gpt_Cfg.h       |  517 ++--
+ .../Gpt/soc/am263/r5f0_0/config_92/Gpt_Cfg.h       |  517 ++--
+ .../Gpt/soc/am263/r5f0_0/config_93/Gpt_Cfg.h       |  513 ++--
+ .../Gpt/soc/am263/r5f0_0/config_94/Gpt_Cfg.h       |  517 ++--
+ .../Gpt/soc/am263px/r5f0_0/config_1/Gpt_Cfg.h      |  645 ++---
+ .../Gpt/soc/am263px/r5f0_0/config_2/Gpt_Cfg.h      |  541 ++---
+ .../Gpt/soc/am263px/r5f0_0/config_3/Gpt_Cfg.h      |  663 +++---
+ .../Gpt/soc/am263px/r5f0_0/config_4/Gpt_Cfg.h      |  645 ++---
+ .../Gpt/soc/am263px/r5f0_0/config_91/Gpt_Cfg.h     |  647 ++---
+ .../Gpt/soc/am263px/r5f0_0/config_92/Gpt_Cfg.h     |  647 ++---
+ .../Gpt/soc/am263px/r5f0_0/config_93/Gpt_Cfg.h     |  647 ++---
+ .../Gpt/soc/am263px/r5f0_0/config_94/Gpt_Cfg.h     |  647 ++---
+ .../Icu/soc/am261/r5f0_0/config_1/Icu_Cfg.h        |  438 ++--
+ .../Icu/soc/am261/r5f0_0/config_2/Icu_Cfg.h        |  442 ++--
+ .../Icu/soc/am261/r5f0_0/config_3/Icu_Cfg.h        |  444 ++--
+ .../Icu/soc/am261/r5f0_0/config_91/Icu_Cfg.h       |  442 ++--
+ .../Icu/soc/am261/r5f0_0/config_92/Icu_Cfg.h       |  442 ++--
+ .../Icu/soc/am261/r5f0_0/config_93/Icu_Cfg.h       |  442 ++--
+ .../Icu/soc/am261/r5f0_0/config_94/Icu_Cfg.h       |  442 ++--
+ .../Icu/soc/am263/r5f0_0/config_1/Icu_Cfg.h        |  478 ++--
+ .../Icu/soc/am263/r5f0_0/config_2/Icu_Cfg.h        |  478 ++--
+ .../Icu/soc/am263/r5f0_0/config_3/Icu_Cfg.h        |  478 ++--
+ .../Icu/soc/am263/r5f0_0/config_4/Icu_Cfg.h        |  656 +++---
+ .../Icu/soc/am263/r5f0_0/config_91/Icu_Cfg.h       |  482 ++--
+ .../Icu/soc/am263/r5f0_0/config_92/Icu_Cfg.h       |  482 ++--
+ .../Icu/soc/am263/r5f0_0/config_93/Icu_Cfg.h       |  482 ++--
+ .../Icu/soc/am263/r5f0_0/config_94/Icu_Cfg.h       |  482 ++--
+ .../Icu/soc/am263px/r5f0_0/config_1/Icu_Cfg.h      |  438 ++--
+ .../Icu/soc/am263px/r5f0_0/config_2/Icu_Cfg.h      |  438 ++--
+ .../Icu/soc/am263px/r5f0_0/config_3/Icu_Cfg.h      |  438 ++--
+ .../Icu/soc/am263px/r5f0_0/config_91/Icu_Cfg.h     |  438 ++--
+ .../Icu/soc/am263px/r5f0_0/config_92/Icu_Cfg.h     |  438 ++--
+ .../Icu/soc/am263px/r5f0_0/config_93/Icu_Cfg.h     |  438 ++--
+ .../Icu/soc/am263px/r5f0_0/config_94/Icu_Cfg.h     |  438 ++--
+ .../config_1/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../Lin/soc/am261/r5f0_0/config_91/Lin_Cfg.h       |  435 ++--
+ .../config_91/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_1/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../Lin/soc/am263/r5f0_0/config_6/Lin_Cfg.h        |  453 ++--
+ .../config_6/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_6/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../Lin/soc/am263/r5f0_0/config_7/Lin_Cfg.h        |  453 ++--
+ .../config_7/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_7/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../Lin/soc/am263/r5f0_0/config_8/Lin_Cfg.h        |  453 ++--
+ .../config_8/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_8/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../Lin/soc/am263/r5f0_0/config_91/Lin_Cfg.h       |  453 ++--
+ .../config_91/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../Lin/soc/am263px/r5f0_0/config_1/Lin_Cfg.h      |  435 ++--
+ .../config_1/tresos/output/include/Lin_Cfg.h       |    3 +
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_91/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Lin_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_1/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_7/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_7/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_91/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_1/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_6/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_6/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_7/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_7/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_91/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_1/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_2/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_3/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_4/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |    3 +
+ .../config_5/tresos/output/include/Wdg_Cfg.h       |    3 +
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_91/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_92/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_93/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |    3 +
+ .../config_94/tresos/output/include/Wdg_Cfg.h      |    3 +
+ .../Port/soc/am261/r5f0_0/config_1/Port_Cfg.h      | 1973 ++++++++--------
+ .../Port/soc/am261/r5f0_0/config_11/Mcu_Cfg.h      | 1255 +++++-----
+ .../Port/soc/am261/r5f0_0/config_11/Port_Cfg.h     | 1687 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_12/Mcu_Cfg.h      | 1255 +++++-----
+ .../Port/soc/am261/r5f0_0/config_12/Port_Cfg.h     | 1691 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_13/Mcu_Cfg.h      | 1255 +++++-----
+ .../Port/soc/am261/r5f0_0/config_13/Port_Cfg.h     | 1691 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_14/Mcu_Cfg.h      | 1255 +++++-----
+ .../Port/soc/am261/r5f0_0/config_14/Port_Cfg.h     | 1691 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_2/Port_Cfg.h      | 1673 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_3/Port_Cfg.h      | 1655 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_4/Port_Cfg.h      | 1665 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_5/Port_Cfg.h      | 1667 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_91/Port_Cfg.h     | 1671 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_92/Port_Cfg.h     | 1671 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_93/Port_Cfg.h     | 1671 ++++++-------
+ .../Port/soc/am261/r5f0_0/config_94/Port_Cfg.h     | 1671 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_1/Port_Cfg.h      | 2485 ++++++++++----------
+ .../Port/soc/am263/r5f0_0/config_11/Mcu_Cfg.h      | 1193 +++++-----
+ .../Port/soc/am263/r5f0_0/config_11/Port_Cfg.h     | 1697 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_12/Mcu_Cfg.h      | 1193 +++++-----
+ .../Port/soc/am263/r5f0_0/config_12/Port_Cfg.h     | 1699 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_13/Mcu_Cfg.h      | 1193 +++++-----
+ .../Port/soc/am263/r5f0_0/config_13/Port_Cfg.h     | 1697 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_14/Mcu_Cfg.h      | 1189 +++++-----
+ .../Port/soc/am263/r5f0_0/config_14/Port_Cfg.h     | 1699 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_2/Port_Cfg.h      | 1703 +++++++-------
+ .../Port/soc/am263/r5f0_0/config_3/Port_Cfg.h      | 1699 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_4/Port_Cfg.h      | 1699 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_5/Port_Cfg.h      | 1699 ++++++-------
+ .../Port/soc/am263/r5f0_0/config_91/Port_Cfg.h     | 2179 ++++++++---------
+ .../Port/soc/am263/r5f0_0/config_92/Port_Cfg.h     | 2179 ++++++++---------
+ .../Port/soc/am263/r5f0_0/config_93/Port_Cfg.h     | 2161 ++++++++---------
+ .../Port/soc/am263/r5f0_0/config_94/Port_Cfg.h     | 2179 ++++++++---------
+ .../Port/soc/am263px/r5f0_0/config_1/Port_Cfg.h    | 1973 ++++++++--------
+ .../Port/soc/am263px/r5f0_0/config_11/Mcu_Cfg.h    |    3 +
+ .../Port/soc/am263px/r5f0_0/config_11/Port_Cfg.h   | 1681 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_12/Mcu_Cfg.h    |    3 +
+ .../Port/soc/am263px/r5f0_0/config_12/Port_Cfg.h   | 1685 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_13/Mcu_Cfg.h    |    3 +
+ .../Port/soc/am263px/r5f0_0/config_13/Port_Cfg.h   | 1681 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_14/Mcu_Cfg.h    |    3 +
+ .../Port/soc/am263px/r5f0_0/config_14/Port_Cfg.h   | 1685 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_2/Port_Cfg.h    | 1677 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_3/Port_Cfg.h    | 1675 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_4/Port_Cfg.h    | 1673 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_5/Port_Cfg.h    | 1675 ++++++-------
+ .../Port/soc/am263px/r5f0_0/config_91/Port_Cfg.h   | 2177 ++++++++---------
+ .../Port/soc/am263px/r5f0_0/config_92/Port_Cfg.h   | 2165 ++++++++---------
+ .../Port/soc/am263px/r5f0_0/config_93/Port_Cfg.h   | 2165 ++++++++---------
+ .../Port/soc/am263px/r5f0_0/config_94/Port_Cfg.h   | 2167 ++++++++---------
+ .../Pwm/soc/am261/r5f0_0/config_1/Pwm_Cfg.h        |  658 +++---
+ .../Pwm/soc/am261/r5f0_0/config_2/Pwm_Cfg.h        |  658 +++---
+ .../Pwm/soc/am261/r5f0_0/config_3/Pwm_Cfg.h        |  748 +++---
+ .../Pwm/soc/am261/r5f0_0/config_4/Pwm_Cfg.h        |  698 +++---
+ .../Pwm/soc/am261/r5f0_0/config_5/Pwm_Cfg.h        |  678 +++---
+ .../Pwm/soc/am261/r5f0_0/config_7/Pwm_Cfg.h        |  748 +++---
+ .../Pwm/soc/am261/r5f0_0/config_8/Pwm_Cfg.h        |  748 +++---
+ .../Pwm/soc/am261/r5f0_0/config_91/Pwm_Cfg.h       |  658 +++---
+ .../Pwm/soc/am261/r5f0_0/config_92/Pwm_Cfg.h       |  658 +++---
+ .../Pwm/soc/am261/r5f0_0/config_93/Pwm_Cfg.h       |  658 +++---
+ .../Pwm/soc/am261/r5f0_0/config_94/Pwm_Cfg.h       |  658 +++---
+ .../Pwm/soc/am263/r5f0_0/config_1/Pwm_Cfg.h        |  606 ++---
+ .../Pwm/soc/am263/r5f0_0/config_2/Pwm_Cfg.h        |  608 ++---
+ .../Pwm/soc/am263/r5f0_0/config_3/Pwm_Cfg.h        |  730 +++---
+ .../Pwm/soc/am263/r5f0_0/config_4/Pwm_Cfg.h        |  622 ++---
+ .../Pwm/soc/am263/r5f0_0/config_5/Pwm_Cfg.h        |  730 +++---
+ .../Pwm/soc/am263/r5f0_0/config_7/Pwm_Cfg.h        |  730 +++---
+ .../Pwm/soc/am263/r5f0_0/config_8/Pwm_Cfg.h        |  732 +++---
+ .../Pwm/soc/am263/r5f0_0/config_9/Pwm_Cfg.h        | 1124 ++++-----
+ .../Pwm/soc/am263/r5f0_0/config_91/Pwm_Cfg.h       |  606 ++---
+ .../Pwm/soc/am263/r5f0_0/config_92/Pwm_Cfg.h       |  606 ++---
+ .../Pwm/soc/am263/r5f0_0/config_93/Pwm_Cfg.h       |  606 ++---
+ .../Pwm/soc/am263/r5f0_0/config_94/Pwm_Cfg.h       |  606 ++---
+ .../Pwm/soc/am263px/r5f0_0/config_1/Pwm_Cfg.h      |  608 ++---
+ .../Pwm/soc/am263px/r5f0_0/config_2/Pwm_Cfg.h      |  608 ++---
+ .../Pwm/soc/am263px/r5f0_0/config_3/Pwm_Cfg.h      |  730 +++---
+ .../Pwm/soc/am263px/r5f0_0/config_4/Pwm_Cfg.h      |  622 ++---
+ .../Pwm/soc/am263px/r5f0_0/config_5/Pwm_Cfg.h      |  730 +++---
+ .../Pwm/soc/am263px/r5f0_0/config_7/Pwm_Cfg.h      |  730 +++---
+ .../Pwm/soc/am263px/r5f0_0/config_8/Pwm_Cfg.h      |  732 +++---
+ .../Pwm/soc/am263px/r5f0_0/config_9/Pwm_Cfg.h      | 1124 ++++-----
+ .../Pwm/soc/am263px/r5f0_0/config_91/Pwm_Cfg.h     |  606 ++---
+ .../Pwm/soc/am263px/r5f0_0/config_92/Pwm_Cfg.h     |  606 ++---
+ .../Pwm/soc/am263px/r5f0_0/config_93/Pwm_Cfg.h     |  606 ++---
+ .../Pwm/soc/am263px/r5f0_0/config_94/Pwm_Cfg.h     |  608 ++---
+ .../Spi/soc/am261/r5f0_0/config_1/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_11/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am261/r5f0_0/config_12/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am261/r5f0_0/config_13/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am261/r5f0_0/config_15/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am261/r5f0_0/config_2/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_3/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_4/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_5/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_6/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_7/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_8/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_9/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am261/r5f0_0/config_91/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am261/r5f0_0/config_92/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am261/r5f0_0/config_93/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am261/r5f0_0/config_94/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_1/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_10/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_15/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_2/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_3/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_4/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_5/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_51/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_52/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_6/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_7/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_8/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_9/Spi_Cfg.h        |    3 +
+ .../Spi/soc/am263/r5f0_0/config_91/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_92/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_93/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263/r5f0_0/config_94/Spi_Cfg.h       |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_1/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_11/Spi_Cfg.h     |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_12/Spi_Cfg.h     |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_13/Spi_Cfg.h     |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_15/Spi_Cfg.h     |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_2/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_3/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_4/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_5/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_6/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_7/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_8/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_9/Spi_Cfg.h      |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_91/Spi_Cfg.h     |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_92/Spi_Cfg.h     |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_93/Spi_Cfg.h     |    3 +
+ .../Spi/soc/am263px/r5f0_0/config_94/Spi_Cfg.h     |    3 +
+ .../Wdg/soc/am261/r5f0_0/config_1/Wdg_Cfg.h        |  311 +--
+ .../Wdg/soc/am261/r5f0_0/config_2/Wdg_Cfg.h        |  325 +--
+ .../Wdg/soc/am261/r5f0_0/config_3/Wdg_Cfg.h        |  311 +--
+ .../Wdg/soc/am261/r5f0_0/config_4/Wdg_Cfg.h        |  311 +--
+ .../Wdg/soc/am261/r5f0_0/config_5/Wdg_Cfg.h        |  311 +--
+ .../Wdg/soc/am261/r5f0_0/config_6/Wdg_Cfg.h        |  317 +--
+ .../Wdg/soc/am261/r5f0_0/config_7/Wdg_Cfg.h        |  321 +--
+ .../Wdg/soc/am261/r5f0_0/config_91/Wdg_Cfg.h       |  307 +--
+ .../Wdg/soc/am261/r5f0_0/config_92/Wdg_Cfg.h       |  309 +--
+ .../Wdg/soc/am261/r5f0_0/config_93/Wdg_Cfg.h       |  269 +--
+ .../Wdg/soc/am261/r5f0_0/config_94/Wdg_Cfg.h       |  307 +--
+ .../Wdg/soc/am263/r5f0_0/config_1/Wdg_Cfg.h        |  331 +--
+ .../Wdg/soc/am263/r5f0_0/config_2/Wdg_Cfg.h        |  313 +--
+ .../Wdg/soc/am263/r5f0_0/config_3/Wdg_Cfg.h        |  299 +--
+ .../Wdg/soc/am263/r5f0_0/config_4/Wdg_Cfg.h        |  303 +--
+ .../Wdg/soc/am263/r5f0_0/config_5/Wdg_Cfg.h        |  303 +--
+ .../Wdg/soc/am263/r5f0_0/config_6/Wdg_Cfg.h        |  341 +--
+ .../Wdg/soc/am263/r5f0_0/config_7/Wdg_Cfg.h        |  291 +--
+ .../Wdg/soc/am263/r5f0_0/config_91/Wdg_Cfg.h       |  301 +--
+ .../Wdg/soc/am263/r5f0_0/config_92/Wdg_Cfg.h       |  301 +--
+ .../Wdg/soc/am263/r5f0_0/config_93/Wdg_Cfg.h       |  269 +--
+ .../Wdg/soc/am263/r5f0_0/config_94/Wdg_Cfg.h       |  301 +--
+ .../Wdg/soc/am263px/r5f0_0/config_1/Wdg_Cfg.h      |  305 +--
+ .../Wdg/soc/am263px/r5f0_0/config_2/Wdg_Cfg.h      |  319 +--
+ .../Wdg/soc/am263px/r5f0_0/config_3/Wdg_Cfg.h      |  303 +--
+ .../Wdg/soc/am263px/r5f0_0/config_4/Wdg_Cfg.h      |  303 +--
+ .../Wdg/soc/am263px/r5f0_0/config_5/Wdg_Cfg.h      |  303 +--
+ .../Wdg/soc/am263px/r5f0_0/config_6/Wdg_Cfg.h      |  315 +--
+ .../Wdg/soc/am263px/r5f0_0/config_7/Wdg_Cfg.h      |  291 +--
+ .../Wdg/soc/am263px/r5f0_0/config_91/Wdg_Cfg.h     |  303 +--
+ .../Wdg/soc/am263px/r5f0_0/config_92/Wdg_Cfg.h     |  303 +--
+ .../Wdg/soc/am263px/r5f0_0/config_93/Wdg_Cfg.h     |  269 +--
+ .../Wdg/soc/am263px/r5f0_0/config_94/Wdg_Cfg.h     |  303 +--
+ 521 files changed, 116288 insertions(+), 114500 deletions(-)
+
+commit 8f5472ae23b164687baee9037233e440d4eb21ac
+Author: Asha D <asha.d@ti.com>
+Date:   Tue Mar 17 13:10:48 2026 +0530
+
+    am263px:EPWM: Fixing CXX.SUSPICIOUS_INDEX_CHECK
+                  MISRAC issue
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+commit 8a3bca083aac0d11971e9a18ebc17589851fd9c3
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Mar 17 16:40:37 2026 +0530
+
+    all: Dio,Lin: Removed STATIC macro from Compiler.h file and updated the usage to static
+    
+    -As per AUTOSAR 4.3.1, AUTOSAR_SWS_CompilerAbstraction document STATIC declaration keyword is removed
+    
+    Fixes: MCAL-36586
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Dio/V0/Dio_Priv.c          | 2 +-
+ mcal/Lin/V0/Lin_Priv.c          | 8 ++++----
+ mcal/autosar_include/Compiler.h | 1 -
+ 3 files changed, 5 insertions(+), 6 deletions(-)
+
+commit 9ef57220c84e7097adc9e889804f10fc31a75f97
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Mar 13 13:41:17 2026 +0530
+
+    all: DMA/Dio: Coverage improvement for DMA and Dio module
+    
+    - Added coverage for regWriteReadback in Dio to get 100% coverage
+    
+    - Removed TI gap tag from DMA module, since gap is covered
+    
+    Fixes: MCAL-36532
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dio/V0/Dio_Priv.c                           |  2 -
+ mcal/Dma/src/Cdd_Dma_Priv.c                      |  8 ---
+ mcal_test/dio_test/Makefile                      | 83 +++++++++++++-----------
+ mcal_test/dio_test/testLib/dioTest.h             | 14 ++++
+ mcal_test/dio_test/testLib/dioTestCommon.c       | 62 ++++++++++++++++++
+ mcal_test/dio_test/testLib/dioTestMainTestCase.c |  8 +++
+ 6 files changed, 128 insertions(+), 49 deletions(-)
+
+commit 5ba2ca1aee40151a00c2be277e5f1d92537f0bd0
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Tue Mar 3 15:57:58 2026 +0530
+
+    all: adc: improve dynamic analysis coverage
+    
+     - Added testcase to improve coverage
+    
+    Fixes: MCAL-35531
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal/Adc/V0/Adc_Priv.c                             |   26 +-
+ mcal_test/adc_test/Makefile                        |    4 +
+ mcal_test/adc_test/build/makefile                  |    2 +-
+ mcal_test/adc_test/testInput/adcTestCases.h        | 1620 ++++++++---
+ mcal_test/adc_test/testLib/adcTest.h               |   56 +
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   | 2824 ++++++++++++++++++++
+ .../adc_test/testLib/adcTestNegativeTestCase.c     |  569 ++++
+ 7 files changed, 4746 insertions(+), 355 deletions(-)
+
+commit 858e953396c4778cb1e2fc58170f0756deddcc97
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Mar 9 15:07:14 2026 +0530
+
+    all: LIN: Code Coverage for LIN module
+    
+    - Added test case to cover uncovered gap of LIN
+    
+    Fixes: MCAL-35533
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/lin_test/testInput/linTestCases.h        |  23 ++
+ mcal_test/lin_test/testLib/linTest.h               |   2 +
+ mcal_test/lin_test/testLib/linTestMainTestCase.c   | 280 ++++++++++++++++++++-
+ .../lin_test/testLib/linTestNegativeTestCase.c     |   2 +-
+ 4 files changed, 305 insertions(+), 2 deletions(-)
+
+commit 2281ee0d1cad4247d185d39243b6377a371c2426
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Mar 2 20:50:46 2026 +0530
+
+    all: DMA: Coverage for CDD_DMA module
+    
+    - Added test case for VirtToPhy and NULL pointer handling for Cdd_Dma_soc.c
+    
+    - Added test case to cover gap of CDD_EDMA_lld_readEventStatusRegion function in Cdd_Dma_Priv.c
+    
+    - Added DDMA_COVERAGE_TEST flag for coverage builds
+    
+    Fixes: MCAL-35535
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dma/V0/Cdd_Dma_soc.c                          |  12 +-
+ mcal/Dma/src/Cdd_Dma_Priv.c                        |   8 +-
+ mcal_test/dma_test/Makefile                        |   3 +
+ mcal_test/dma_test/build/makefile_lib              |  31 ++--
+ mcal_test/dma_test/testInput/dmaTestCases.h        |  41 ++++-
+ mcal_test/dma_test/testLib/dmaTest.h               |   4 +
+ mcal_test/dma_test/testLib/dmaTestMainTestCase.c   |  89 +++++++++++
+ .../dma_test/testLib/dmaTestNegativeTestCase.c     | 166 +++++++++++++++++++--
+ .../Dma/soc/am263px/r5f0_0/config_1/Cdd_Dma_Cfg.h  |   5 +
+ 9 files changed, 311 insertions(+), 48 deletions(-)
+
 commit 2855d3a9a84039b0fee05406447bd53608eae21b
 Author: Sivaraj R <sivaraj@ti.com>
 Date:   Tue Mar 10 07:41:10 2026 +0530

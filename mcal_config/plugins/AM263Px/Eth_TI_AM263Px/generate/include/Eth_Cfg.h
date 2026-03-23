@@ -390,12 +390,18 @@ extern "C" {
  *
  *  @{
  */
+/* Forward declaration for Eth configuration structure */
+struct Eth_ConfigType_s;
+
 /** \brief ETH Configuration struct declaration */
 extern struct Eth_ConfigType_s Eth_Config;
 [!ENDLOOP!]
 [!IF "as:modconf('Eth')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!][!//
 [!ELSE!][!//
 /** \brief ETH Configuration pointer for postbuild and linktime */
+/* Forward declaration for Eth configuration structure */
+struct Eth_ConfigType_s;
+
 extern const struct Eth_ConfigType_s *Eth_CfgPtr;
 [!ENDIF!][!//
 /* @} */

@@ -258,6 +258,9 @@ typedef struct Lin_BaudrateConfigTag
 /*********************************************************************************************************************
  * Exported Object Declarations
  *********************************************************************************************************************/
+/* Forward declaration for Lin configuration structure */
+struct Lin_ConfigTag;
+
 /** \brief LIN Configuration struct declaration */
 extern const struct Lin_ConfigTag Lin_Config;
 

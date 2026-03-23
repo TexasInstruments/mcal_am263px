@@ -210,8 +210,14 @@ extern "C" {
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
+/* Forward declaration for Fls configuration structure */
+struct Fls_ConfigType_s;
+
 /** \brief FLS Configuration struct declaration */
 extern const struct Fls_ConfigType_s Fls_Config;
+/* Forward declaration for Fls SFDP configuration structure */
+struct Fls_ConfigSfdp_s;
+
 extern struct Fls_ConfigSfdp_s *Fls_Config_SFDP_Ptr;
 
 

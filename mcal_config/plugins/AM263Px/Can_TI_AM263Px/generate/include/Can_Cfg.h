@@ -362,9 +362,15 @@ typedef enum
 } Can_ControllerInstance;
 
 [!LOOP "as:modconf('Can')[1]/CanConfigSet"!]
+/* Forward declaration for Can configuration structure */
+struct Can_ConfigType_s;
+
 /** \brief CAN Configuration struct declaration */
 extern const struct Can_ConfigType_s Can_Config;
 [!LOOP "CanController/*"!]
+/* Forward declaration for Can Controller Pre Compile configuration structure */
+struct Can_ControllerStruct_PC;
+
 extern const struct Can_ControllerStruct_PC [!"../../@name"!]_PC_[!"@name"!];
 [!ENDLOOP!]
 
@@ -373,6 +379,9 @@ extern const struct Can_ControllerStruct_PC
     *[!"@name"!]_CanController_List_PC[CAN_NUM_CONTROLLER];
 
 /** \brief CAN Mailbox Pre Compile Configuration List */
+/* Forward declaration for Can Mailbox Pre Compile configuration structure */
+struct Can_MailboxStruct_PC;
+
 extern const struct Can_MailboxStruct_PC
     *[!"@name"!]_CanHardwareObject_List_PC[CAN_NUM_MAILBOXES];
 

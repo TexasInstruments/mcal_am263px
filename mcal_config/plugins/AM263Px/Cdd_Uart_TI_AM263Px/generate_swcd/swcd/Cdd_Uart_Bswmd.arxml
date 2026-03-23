@@ -14,7 +14,7 @@
         <BSW-MODULE-DESCRIPTION UUID="8c29cf80-0a18-4825-93fd-db98a191f852">
           <SHORT-NAME>Cdd_Uart</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
-          <EXPECTED-ENTRYS>
+          <IMPLEMENTED-ENTRYS>
 		  	    [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartCancelApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Cancel</BSW-MODULE-ENTRY-REF>
@@ -101,7 +101,7 @@
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_RegisterReadback</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
-          </EXPECTED-ENTRYS>
+          </IMPLEMENTED-ENTRYS>
           <MODULE-ID>255</MODULE-ID>
           [!IF "((as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true') or ($DMA_ENABLE="STD_ON") )"!]
           <BSW-MODULE-DEPENDENCYS>

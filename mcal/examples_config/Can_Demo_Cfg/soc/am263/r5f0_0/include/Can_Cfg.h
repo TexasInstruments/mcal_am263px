@@ -296,13 +296,28 @@ typedef enum
  *  @{
  */
 
+/* Forward declaration for Can configuration structure */
+struct Can_ConfigType_s;
+
 extern const struct Can_ConfigType_s Can_Config;
+
+/* Forward declaration for Can Controller Pre Compile configuration structure */
+struct Can_ControllerStruct_PC;
 
 extern const struct Can_ControllerStruct_PC CanConfigSet_PC_CanController_0;
 
+/* Forward declaration for Can Controller Pre Compile configuration structure */
+struct Can_ControllerStruct_PC;
+
 extern const struct Can_ControllerStruct_PC CanConfigSet_PC_CanController_1;
 
+/* Forward declaration for Can Controller Pre Compile configuration structure */
+struct Can_ControllerStruct_PC;
+
 extern const struct Can_ControllerStruct_PC CanConfigSet_PC_CanController_2;
+
+/* Forward declaration for Can Controller Pre Compile configuration structure */
+struct Can_ControllerStruct_PC;
 
 extern const struct Can_ControllerStruct_PC CanConfigSet_PC_CanController_3;
 
@@ -312,6 +327,9 @@ extern const struct Can_ControllerStruct_PC
     *CanConfigSet_CanController_List_PC[CAN_NUM_CONTROLLER];
 
 /** \brief CAN Mailbox Pre Compile Configuration List */
+/* Forward declaration for Can Mailbox Pre Compile configuration structure */
+struct Can_MailboxStruct_PC;
+
 extern const struct Can_MailboxStruct_PC
     *CanConfigSet_CanHardwareObject_List_PC[CAN_NUM_MAILBOXES];
 

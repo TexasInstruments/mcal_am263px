@@ -386,6 +386,9 @@ extern "C" {
  *
  *  @{
  */
+/* Forward declaration for Eth configuration structure */
+struct Eth_ConfigType_s;
+
 /** \brief ETH Configuration struct declaration */
 extern struct Eth_ConfigType_s Eth_Config;
 

@@ -8,7 +8,7 @@
         <BSW-MODULE-DESCRIPTION UUID="31a37e9b-e148-4281-8458-69bdcb59d021">
           <SHORT-NAME>Wdg</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
-          <EXPECTED-ENTRYS>
+          <IMPLEMENTED-ENTRYS>
             [!IF "as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgVersionInfoApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Wdg_TI_AM263px/Wdg_ModuleEntry/Wdg_GetVersionInfo</BSW-MODULE-ENTRY-REF>
@@ -31,7 +31,7 @@
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Wdg_TI_AM263px/Wdg_ModuleEntry/Wdg_Trigger</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
-          </EXPECTED-ENTRYS>
+          </IMPLEMENTED-ENTRYS>
           <MODULE-ID>102</MODULE-ID>
           [!IF "((as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*)) = 'true'))"!]
           <BSW-MODULE-DEPENDENCYS>

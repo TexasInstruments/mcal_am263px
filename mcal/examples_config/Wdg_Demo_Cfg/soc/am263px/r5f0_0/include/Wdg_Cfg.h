@@ -176,6 +176,9 @@ extern "C" {
  * Exported Preprocessor #define Macros
  ******************************************************************************/
 
+/* Forward declaration for Wdg configuration structure */
+struct Wdg_ConfigType_s;
+
 /** \brief WDG Configuration struct declaration */
 extern const struct Wdg_ConfigType_s Wdg_Config;
 

@@ -1235,7 +1235,20 @@ FUNC(uint32, FLS_CODE) Fls_SetEraseType(Fls_EraseType erasetype)
 #if (STD_ON == FLS_SETMODE_API)
 FUNC(void, FLS_CODE) Fls_SetMode(MemIf_ModeType Mode)
 {
-    (void)Mode;
+#if (STD_ON == FLS_DEV_ERROR_DETECT) /* Requirement SWS_Fls_00156*/
+    if (MEMIF_UNINIT == Fls_DrvObj.status)
+    {
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_SET_MODE, FLS_E_UNINIT);
+    }
+    else if (MEMIF_BUSY == Fls_DrvObj.status)
+    {
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_SET_MODE, FLS_E_BUSY);
+    }
+    else
+#endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
+    {
+        (void)Mode;
+    }
     return;
 }
 #endif
@@ -1268,9 +1281,18 @@ Fls_RegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) R
 #ifdef FLS_OSPI_CTRL_BASE_ADDR
 FUNC(Std_ReturnType, FLS_CODE) Fls_Set3ByteAddressMode(void)
 {
-    Std_ReturnType retVal = E_NOT_OK;
-    retVal                = Fls_OspiSet3ByteAddress();
-
+    Std_ReturnType retVal = E_OK;
+#if (STD_ON == FLS_DEV_ERROR_DETECT)
+    if (Fls_DrvObj.status == MEMIF_UNINIT)
+    {
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_SET_3BYTEADDR_MODE, FLS_E_UNINIT);
+        retVal = (Std_ReturnType)E_NOT_OK;
+    }
+    if (retVal == E_OK)
+#endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
+    {
+        retVal = Fls_OspiSet3ByteAddress();
+    }
     return retVal;
 }
 #endif

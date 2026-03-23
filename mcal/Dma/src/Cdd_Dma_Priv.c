@@ -173,6 +173,9 @@ static sint32 CDD_EDMA_lld_initialize(Cdd_Dma_Handler *hEdma)
             CDD_EDMA_lld_setPaRAM(baseAddr, param, &paramSet);
         }
     }
+    /* TI_COVERAGE_GAP_START : Unconditional break exits loop after first iteration.
+     * LLVM creates implicit gap regions for unreachable loop-continuation paths (dead code).
+     */
     for (ch = 0; ch < ownResource.maxChannel; ch++)
     {
         channel  = ownResource.channelGroup[ch]->channelId;
@@ -190,6 +193,7 @@ static sint32 CDD_EDMA_lld_initialize(Cdd_Dma_Handler *hEdma)
         }
         break;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return retVal;
 }
@@ -443,14 +447,10 @@ uint32 CDD_EDMA_lld_readEventStatusRegion(uint32 baseAddr, uint32 chNum)
     }
     else
     {
-        /* TI_COVERAGE_GAP_START : Branch requires an external hardware peripheral to trigger a DMA event,which is not
-         * possible in unit test environment.
-         */
         if ((CDD_EDMA_lld_getEventStatusHigh(baseAddr) & (0x1U << (chNum - 32U))) == (0x1U << (chNum - 32U)))
         {
             eventStatus = 1;
         }
-        /* TI_COVERAGE_GAP_STOP */
     }
     return eventStatus;
 }
@@ -1016,31 +1016,23 @@ static void CDD_EDMA_TransferCompletion_MasterIsr_loop(uint8 i)
                 intrLow &= ~(1U << tccNum);
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
-            /* TI_COVERAGE_GAP_START : Branch requires TCC >= 32 with active interrupt in high register,
-             * which requires specific hardware configuration not available in unit test environment.
-             */
             if ((tccNum >= 32U) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrHigh &= ~(1U << (tccNum - 32U));
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
-            /* TI_COVERAGE_GAP_STOP */
         }
         if (maxChannel > 1U)
         {
             tccNum = Cdd_Dma_ChainingTcc[i][maxChannel - 1U];
 
-            /* TI_COVERAGE_GAP_START : Branch requires chaining mode (maxChannel > 1) with TCC < 32 and active
-             * interrupt, which requires specific test configuration not available in unit test environment.
-             */
             if ((tccNum < 32U) && ((intrLow & (1U << tccNum)) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrLow &= ~(1U << tccNum);
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
-            /* TI_COVERAGE_GAP_STOP */
             if ((tccNum >= 32U) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);

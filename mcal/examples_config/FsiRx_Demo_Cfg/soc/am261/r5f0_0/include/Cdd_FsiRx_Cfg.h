@@ -265,6 +265,9 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 
+/* Forward declaration for Cdd_FsiRx configuration structure */
+struct Cdd_FsiRx_ConfigType_s;
+
 /** \brief CDD FSI RX Configuration struct declaration */
 extern const struct Cdd_FsiRx_ConfigType_s Cdd_FsiRx_Config;
 

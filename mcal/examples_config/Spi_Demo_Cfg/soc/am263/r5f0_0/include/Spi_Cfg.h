@@ -436,6 +436,8 @@ typedef uint8 Spi_HWUnitType;
 
 extern const uint32 Spi_HwUnitBaseAddr[SPI_HW_UNIT_CNT];
 
+/* Forward declaration for configuration structure */
+struct Spi_ConfigType_s;
 
 /** \brief SPI Configuration struct declaration */
 extern const struct Spi_ConfigType_s Spi_Config;

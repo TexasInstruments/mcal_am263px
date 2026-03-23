@@ -880,6 +880,9 @@ typedef struct Port_ConfigType_s
  *  GLOBAL DATA TYPES AND STRUCTURES
  *********************************************************************************************************************/
 
+/* Forward declaration for Port configuration structure */
+struct Port_ConfigType_s;
+
 extern const struct Port_ConfigType_s Port_Config;
 
 

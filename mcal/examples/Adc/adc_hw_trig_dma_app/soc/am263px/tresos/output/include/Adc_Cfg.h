@@ -341,6 +341,9 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 
+/* Forward declaration for Adc configuration structure */
+struct Adc_ConfigType_s;
+
 /** \brief ADC Configuration struct declaration */
 extern const struct Adc_ConfigType_s Adc_Config;
 
