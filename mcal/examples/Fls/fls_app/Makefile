@@ -27,7 +27,7 @@ INCDIR += .
 SRCS_COMMON += FlsApp.c
 
 CFLAGS_LOCAL_COMMON = $(MCAL_CFLAGS)
-LNKCMD_FILE = $(mcal_PATH)/examples/lnk_r5_$(SOC)_$(COMPILER)_sec_config.cmd
+LNKCMD_FILE = $(mcal_PATH)/examples/lnk_r5_$(SOC)_$(COMPILER).cmd
 
 # Include common make files
 include $(MAKERULEDIR)/common.mk
