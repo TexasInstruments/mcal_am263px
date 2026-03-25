@@ -1526,6 +1526,7 @@ void Fls_hwi(void)
                                     OSPI_SRAM_FILL_REG_SRAM_FILL_INDAC_READ_FLD_MASK;
                         if (sramLevel == 0U)
                         {
+                            Fls_IntClearDisable();
                             retVal = E_NOT_OK;
                         }
                         if (retVal == E_OK)
@@ -1616,6 +1617,7 @@ void Fls_hwi(void)
                                 Fls_DrvObj.status        = MEMIF_IDLE;
                                 Fls_DrvObj.jobType       = FLS_JOB_NONE;
                                 Fls_DrvObj.transferred   = 0U;
+                                Fls_IntClearDisable();
                                 Fls_DrvObj.Fls_JobErrorNotification();
                                 break;
                             }
@@ -1637,6 +1639,7 @@ void Fls_hwi(void)
                                 Fls_DrvObj.status        = MEMIF_IDLE;
                                 Fls_DrvObj.jobType       = FLS_JOB_NONE;
                                 Fls_DrvObj.transferred   = 0U;
+                                Fls_IntClearDisable();
                                 Fls_DrvObj.Fls_JobErrorNotification();
                                 break;
                             }

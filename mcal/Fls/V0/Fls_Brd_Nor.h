@@ -248,6 +248,7 @@ void                  Fls_norAsyncWrite_sub(uint32 actualChunkSize);
 Std_ReturnType        Fls_norAsyncChipErase(void);
 Std_ReturnType        Nor_QspiSetQeBit(QSPI_Handle handle, uint8 qeType);
 Std_ReturnType        Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType);
+void                  Fls_ResetStateMachines(void);
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */

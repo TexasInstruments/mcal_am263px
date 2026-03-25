@@ -1419,6 +1419,24 @@ void Fls_resetDrvObj(Fls_DriverObjType *drvObj)
 }
 
 /**
+ *  \Function Name: Fls_ResetStateMachines
+ *
+ *   Reset state machine variables (Fls_EraseStage and Fls_WriteStage)
+ *   to their initial states. This function is called by Fls_Cancel() to ensure
+ *   the state machines start fresh for the next job.
+ *
+ */
+void Fls_ResetStateMachines(void)
+{
+#if (STD_ON == FLS_USE_INTERRUPTS)
+    Fls_IntClearDisable();
+#endif
+    FlsEraseStage = FLS_S_DEFAULT;
+    FlsWriteStage = FLS_S_INIT_STAGE;
+    return;
+}
+
+/**
  *  \Function Name: Fls_norAsyncSectorErase
  *
  *   Function to perform sector erase in the flash

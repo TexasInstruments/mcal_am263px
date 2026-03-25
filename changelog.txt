@@ -1,3 +1,60 @@
+commit 9003a0b1d911cd6acf9d7d24cbd8db1ce6c6cb3a
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Mar 23 15:00:01 2026 +0530
+
+    am263px: Dma: Klockwork and Coverage fix for Dma module
+    
+    Fixes: MCAL-35535
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dma/src/Cdd_Dma.c                             | 10 +++
+ mcal/Dma/src/Cdd_Dma_Priv.c                        | 14 ++--
+ .../dma_test/testLib/dmaTestNegativeTestCase.c     | 80 ++++++++++++++++++----
+ 3 files changed, 82 insertions(+), 22 deletions(-)
+
+commit 473999987ea5303954ca107a7eaa959f383c9342
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Mar 18 23:57:45 2026 +0530
+
+    am263px/am261x: Fls: Adding Fls_IntClearDisable() in cancel, read, compare and blankcheck failures
+    
+    -printf in main_handling_intr() removed
+    
+    Fixes: MCAL-36638
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V0/Fls_Brd_Nor.h          |  1 +
+ mcal/Fls/V0/Fls_Brd_Nor_Qspi.c     | 18 ++++++++++++++++++
+ mcal/Fls/V2/Fls_Brd_Nor.h          |  2 ++
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c     | 29 ++++++++++++++++++++++++-----
+ mcal/Fls/V2/Fls_Ospi.c             |  3 +++
+ mcal/Fls/src/Fls.c                 |  4 ++++
+ mcal/examples/Fls/fls_app/FlsApp.c |  1 -
+ release_notes.md                   | 11 +++++++++++
+ 8 files changed, 63 insertions(+), 6 deletions(-)
+
+commit 102ac2c805a666f6529ab07266e8d715daa82b6f
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Jan 7 14:59:21 2026 +0530
+
+    am263px/am261: Fls: Adding Fls erase non-blocking support
+    
+    -Erase status check handled by Fls_MainFuntion call
+    
+    Fixes: MCAL-34950
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor.h                        |  10 +-
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c                   | 147 +++++++++++++++++------
+ mcal/examples/Fls/fls_app/FlsApp.c               |   2 +-
+ mcal/examples/Fls/fls_phy_app/FlsApp.c           |   1 -
+ mcal_test/fls_test/build/makefile                |   2 +-
+ mcal_test/fls_test/testLib/flsTestMainTestCase.c |   2 +
+ 6 files changed, 116 insertions(+), 48 deletions(-)
+
 commit 87f209024662b928fac55f9fa479f108b033af1b
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Mar 24 09:37:58 2026 +0530

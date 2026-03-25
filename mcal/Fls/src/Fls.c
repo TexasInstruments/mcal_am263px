@@ -230,6 +230,7 @@ static void Fls_TimeoutCheck(StatusType status, uint32 time1, TickType elapsedCo
 static void Fls_TimeoutVerification_sub(void)
 {
     Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_TIMEOUT);
+
     if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)
     {
         Fls_DrvObj.Fls_JobErrorNotification();
@@ -1184,6 +1185,9 @@ FUNC(void, FLS_CODE) Fls_Cancel(void)
         {
             Fls_DrvObj.jobResultType = MEMIF_JOB_CANCELED;
         }
+        /* Reset state machine variables to ensure clean state for next job */
+        Fls_ResetStateMachines();
+
         if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)
         {
             Fls_DrvObj.Fls_JobErrorNotification();

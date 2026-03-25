@@ -103,9 +103,9 @@ volatile VAR(uint8, FLS_VAR_INIT) Fls_WriteStage = FLS_S_INIT_STAGE;
 #include "Fls_MemMap.h"
 #include "Fls_Ospi_Edma.h"
 
-static void Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
-static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize);
-
+static void           Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
+static void           Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize);
+static Std_ReturnType Fls_norProcessErase(void);
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
@@ -248,6 +248,52 @@ Std_ReturnType Nor_OspiWaitReady(OSPI_Handle handle, uint32 timeOut)
         retVal = (Std_ReturnType)E_NOT_OK;
     }
 
+    return retVal;
+}
+
+Std_ReturnType Fls_NorGetEraseStatus(OSPI_Handle handle)
+{
+    Std_ReturnType retVal = E_OK;
+    OSPI_Object   *obj    = ((OSPI_Config *)handle)->object;
+
+    /* Initialize readStatus with WIP bit set (0xFF) so that if read fails,
+     * the state remains IN_PROGRESS instead of transitioning to DONE prematurely */
+    uint8  readStatus[2]  = {0xFFU, 0xFFU};
+    uint8  numAddrBytes   = OSPI_CMD_INVALID_OPCODE;
+    uint32 cmdAddr        = OSPI_CMD_INVALID_ADDR;
+    uint8  cmd            = Fls_Config_SFDP_Ptr->cmdRdsr;
+    uint32 bitMask        = (uint32)Fls_Config_SFDP_Ptr->srWip;
+    uint8  numBytesToRead = 1;
+    uint8  dummyBits      = 0;
+
+    /* Do RDSR based on xspi WIP status */
+    if ((Fls_Config_SFDP_Ptr->xspiWipRdCmd != 0x00U) && (obj->currentprotocol == (uint32)FLS_OSPI_RX_8D_8D_8D))
+    {
+        /* Check XSPI WIP configuration */
+        cmd            = Fls_Config_SFDP_Ptr->xspiWipRdCmd;
+        cmdAddr        = Fls_Config_SFDP_Ptr->xspiWipReg;
+        numAddrBytes   = Fls_Config_SFDP_Ptr->addrnumBytes;
+        bitMask        = Fls_Config_SFDP_Ptr->xspiWipBit;
+        numBytesToRead = 2; /* Can't read odd bytes in Octal DDR mode */
+        dummyBits      = (uint8)Fls_Config_SFDP_Ptr->protos.dummyClksCmd;
+    }
+
+    retVal = Nor_OspiCmdRead(handle, cmd, cmdAddr, numAddrBytes, dummyBits, readStatus, numBytesToRead);
+    if (retVal == (Std_ReturnType)E_OK)
+    {
+        if ((readStatus[0] & (uint8)bitMask) == 0U)
+        {
+            Fls_EraseStage = FLS_S_DEFAULT;
+        }
+        /* else: WIP bit is still set - erase still in progress, keep state as IN_PROGRESS */
+    }
+    else
+    {
+        /* Read command failed - set state to FAIL */
+        Fls_EraseStage = FLS_S_FAIL;
+    }
+
+    /* Return E_OK for polling - the state machine handles completion/failure */
     return retVal;
 }
 /**
@@ -470,7 +516,7 @@ Std_ReturnType Fls_norBlockErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+        Fls_EraseStage = FLS_S_IN_PROGRESS;
     }
 
     return retVal;
@@ -515,7 +561,7 @@ Std_ReturnType Fls_norSectorErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+        Fls_EraseStage = FLS_S_IN_PROGRESS;
     }
 
     return retVal;
@@ -550,7 +596,7 @@ Std_ReturnType Fls_norChipErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
-        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->chipEraseTimeout);
+        Fls_EraseStage = FLS_S_IN_PROGRESS;
     }
 
     return retVal;
@@ -809,6 +855,41 @@ static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize)
     }
 }
 
+static Std_ReturnType Fls_norProcessErase(void)
+{
+    Std_ReturnType retVal = E_OK; /* Default to E_OK for polling */
+    if (Fls_EraseStage == FLS_S_DEFAULT)
+    {
+        if (Fls_DrvObj.typeoferase == FLS_SECTOR_ERASE)
+        {
+            retVal = Fls_norSectorErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
+        }
+        else if (Fls_DrvObj.typeoferase == FLS_BLOCK_ERASE)
+        {
+            retVal = Fls_norBlockErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
+        }
+        else if (Fls_DrvObj.typeoferase == FLS_CHIP_ERASE)
+        {
+            retVal = Fls_norChipErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
+        }
+        else
+        {
+            /* Invalid erase type */
+            retVal = E_NOT_OK;
+        }
+    }
+    else if (Fls_EraseStage == FLS_S_IN_PROGRESS)
+    {
+        /* Poll for erase completion - Fls_NorGetEraseStatus updates flsEraseState */
+        retVal = Fls_NorGetEraseStatus(Fls_DrvObj.spiHandle);
+        /* retVal is E_OK for polling, state machine handles completion/failure */
+    }
+    else /* FLS_ERASE_STATE_FAIL */
+    {
+        retVal = E_NOT_OK;
+    }
+    return retVal;
+}
 /**
  *  \Function Name: processJobs
  *
@@ -857,54 +938,44 @@ void processJobs(Fls_JobType job)
             Fls_DrvObj.postBlankCheckFlashaddr = prevFlashaddr + chunkSize;
             postBlankCheckFlashaddr            = Fls_DrvObj.postBlankCheckFlashaddr;
 #endif
-
-            if (Fls_EraseStage == FLS_S_DEFAULT)
-            {
-#if (STD_OFF == FLS_USE_INTERRUPTS)
-                Fls_EraseStage = FLS_S_DEFAULT;
-#endif
-            }
-
             if (chunkSize == 0U)
             {
                 retVal = E_NOT_OK;
+                Fls_JobNotification(job, retVal, chunkSize);
             }
             else
             {
-                if (Fls_DrvObj.typeoferase == FLS_SECTOR_ERASE)
+                retVal = Fls_norProcessErase();
+                /* Only proceed with verification and notification when erase is complete */
+                if (Fls_EraseStage == FLS_S_DEFAULT)
                 {
-                    retVal = Fls_norSectorErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
-                }
-                else if (Fls_DrvObj.typeoferase == FLS_BLOCK_ERASE)
-                {
-                    retVal = Fls_norBlockErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
-                }
-                else
-                {
-                    if (Fls_DrvObj.typeoferase == FLS_CHIP_ERASE)
-                    {
-                        retVal = Fls_norChipErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
-                    }
-                }
-            }
-
 #if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
-            if (Fls_EraseStage == FLS_S_DEFAULT)
-            {
-                if (retVal == E_OK)
-                {
-                    while (prevFlashaddr < postBlankCheckFlashaddr) /* to allow Fls_norBlankCheck to work for larger
-                                                                       chunksize (>4KB) */
+                    if (retVal == E_OK)
                     {
-                        Fls_DrvObj.flashAddr = prevFlashaddr;
-                        retVal               = Fls_norBlankCheck(norblankmaxchunkSize);
-                        prevFlashaddr        = prevFlashaddr + norblankmaxchunkSize;
+                        while (prevFlashaddr < postBlankCheckFlashaddr) /* to allow Fls_norBlankCheck to work for larger
+                                                                           chunksize (>4KB) */
+                        {
+                            Fls_DrvObj.flashAddr = prevFlashaddr;
+                            retVal               = Fls_norBlankCheck(norblankmaxchunkSize);
+                            if (retVal != E_OK)
+                            {
+                                /* Blank check failed, exit loop */
+                                break;
+                            }
+                            prevFlashaddr = prevFlashaddr + norblankmaxchunkSize;
+                        }
+                        Fls_DrvObj.flashAddr = postBlankCheckFlashaddr;
                     }
-                    Fls_DrvObj.flashAddr = postBlankCheckFlashaddr;
-                }
-            }
 #endif
-            Fls_JobNotification(job, retVal, chunkSize);
+                    Fls_JobNotification(job, retVal, chunkSize);
+                }
+                else if (Fls_EraseStage == FLS_S_FAIL)
+                {
+                    Fls_EraseStage = FLS_S_DEFAULT; /*  Reset for next operation */
+                    Fls_JobNotification(job, E_NOT_OK, chunkSize);
+                }
+                /* If FLS_S_IN_PROGRESS, do nothing - wait for next MainFunction call */
+            }
             break;
         case FLS_JOB_READ:
             if (FLS_USE_INTERRUPTS == STD_ON)
@@ -1225,6 +1296,25 @@ void Fls_resetDrvObj(Fls_DriverObjType *drvObj)
     }
     return;
 }
+
+/**
+ *  \Function Name: Fls_ResetStateMachines
+ *
+ *   Reset state machine variables (Fls_EraseStage and Fls_WriteStage)
+ *   to their initial states. This function is called by Fls_Cancel() to ensure
+ *   the state machines start fresh for the next job.
+ *
+ */
+void Fls_ResetStateMachines(void)
+{
+#if (STD_ON == FLS_USE_INTERRUPTS)
+    Fls_IntClearDisable();
+#endif
+    Fls_EraseStage = FLS_S_DEFAULT;
+    Fls_WriteStage = FLS_S_INIT_STAGE;
+    return;
+}
+
 /**
  *  \Function Name: Fls_copyConfig
  *

@@ -87,13 +87,9 @@ extern "C" {
 #define E_BLANKCHECK_MISMATCH (3U)
 
 /* FLS Stage of Erase. */
-#define FLS_S_DEFAULT          (0U)
-#define FLS_S_INVALID_ADDRESS  (1U)
-#define FLS_S_DELAY_1_STAGE    (2U)
-#define FLS_S_SECTOR_CMD_STAGE (3U)
-#define FLS_S_BLOCK_CMD_STAGE  (3U)
-#define FLS_S_CHIP_CMD_STAGE   (3U)
-#define FLS_S_DELAY_2_STAGE    (4U)
+#define FLS_S_DEFAULT     (0U)
+#define FLS_S_IN_PROGRESS (1U)
+#define FLS_S_FAIL        (2U)
 
 /* FLS Stage of Erase. */
 #define FLS_S_INIT_STAGE (0U)
@@ -228,12 +224,14 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
 Std_ReturnType Fls_norBlockErase(OSPI_Handle handle, uint32 offset);
 Std_ReturnType Fls_norSectorErase(OSPI_Handle handle, uint32 offset);
 Std_ReturnType Fls_norChipErase(OSPI_Handle handle, uint32 offset);
+Std_ReturnType Fls_NorGetEraseStatus(OSPI_Handle handle);
 Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType);
 Std_ReturnType Nor_OspiSetOeBit(OSPI_Handle handle, uint8 oeType);
 
 void  processJobs(Fls_JobType job);
 uint8 Fls_norBlankCheck(uint32 actualChunkSize);
 void  Fls_resetDrvObj(Fls_DriverObjType *drvObj);
+void  Fls_ResetStateMachines(void);
 void  Fls_copyConfig(Fls_DriverObjType *drvObj, const Fls_ConfigType *cfgPtr);
 
 Std_ReturnType Fls_hwUnitInit(void);

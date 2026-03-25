@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 26.00.00 done on 24-Mar-2026.
+<p>This is the release notes for MCAL AM26xx 26.00.00 done on 25-Mar-2026.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.md">license.md</a> present in installation base path</p>
@@ -53,6 +53,11 @@ This document details about supported driver, installation, dependencies, build 
       <td>AM263Px</td>
     </tr>
     <tr>
+      <td>Non-blocking Flash Erase</td>
+      <td>FLS</td>
+      <td>AM263Px, AM261</td>
+    </tr>
+    <tr>
       <td>Bug Fixes</td>
       <td>All</td>
       <td>Please refer Fixed Defects section for more details.</td>
@@ -78,6 +83,12 @@ This document details about supported driver, installation, dependencies, build 
       <td>CDD PWM</td>
       <td>Channel parameter type changed from uint32 to Cdd_Pwm_ChannelType in multiple APIs</td>
       <td>Application shall use Cdd_Pwm_ChannelType for channel parameters instead of uint32. This is done as part of the MISRAC fixes</td>
+    </tr>
+    <tr>
+      <td>FLS</td>
+      <td>Flash erase operations are now non-blocking</td>
+      <td>The application must periodically schedule <code>Fls_MainFunction</code>
+          to process erase completion and update the job result.</td><br>
     </tr>
   </tbody>
 </table>

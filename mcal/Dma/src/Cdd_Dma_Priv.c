@@ -145,7 +145,7 @@ static sint32 CDD_EDMA_lld_initialize(Cdd_Dma_Handler *hEdma)
         }
         if (CDD_EDMA_CHMAPEXIST != 0U)
         {
-            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DCHMAPN(channel), channel << CDD_EDMA_MAPPING_SHIFT);
+            HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DCHMAPN(channel), (channel << CDD_EDMA_MAPPING_SHIFT));
         }
         /* Initialize the DMA Queue Number Registers                            */
         qnumValue  = HW_RD_REG32(baseAddr + (CDD_EDMA_TPCC_DMAQNUMN((channel >> CDD_EDMA_QUEUE_SHIFT))));
@@ -271,7 +271,7 @@ void CDD_EDMA_lld_channelToParamMap(uint32 baseAddr, uint32 channel, uint32 para
 {
     if (CDD_EDMA_CHMAPEXIST != 0U)
     {
-        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DCHMAPN(channel), paramSet << CDD_EDMA_MAPPING_SHIFT);
+        HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DCHMAPN(channel), (paramSet << CDD_EDMA_MAPPING_SHIFT));
     }
 }
 
@@ -280,7 +280,7 @@ void CDD_EDMA_lld_mapChToEvtQ(uint32 baseAddr, uint32 chNum, uint32 evtQNum)
     uint32 qnumValue;
 
     /* Associate DMA Channel to Event Queue                             */
-    qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> CDD_EDMA_QUEUE_SHIFT));
+    qnumValue  = HW_RD_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN((chNum >> CDD_EDMA_QUEUE_SHIFT)));
     qnumValue &= CDD_EDMACC_DMAQNUM_CLR(chNum);
     qnumValue |= CDD_EDMACC_DMAQNUM_SET(chNum, evtQNum);
     HW_WR_REG32(baseAddr + CDD_EDMA_TPCC_DMAQNUMN(chNum >> 3U), qnumValue);
@@ -1010,13 +1010,13 @@ static void CDD_EDMA_TransferCompletion_MasterIsr_loop(uint8 i)
         tccNum                        = Cdd_Dma_TccHandlerMapping[i];
         if (maxChannel == 1U)
         {
-            if ((tccNum < 32U) && ((intrLow & (1U << tccNum)) != 0U))
+            if ((tccNum < (uint32)CDD_EDMA_NUM_TCC) && (tccNum < 32U) && ((intrLow & (1U << tccNum)) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrLow &= ~(1U << tccNum);
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
-            if ((tccNum >= 32U) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
+            if ((tccNum >= 32U) && (tccNum < (uint32)CDD_EDMA_NUM_TCC) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrHigh &= ~(1U << (tccNum - 32U));
@@ -1027,13 +1027,13 @@ static void CDD_EDMA_TransferCompletion_MasterIsr_loop(uint8 i)
         {
             tccNum = Cdd_Dma_ChainingTcc[i][maxChannel - 1U];
 
-            if ((tccNum < 32U) && ((intrLow & (1U << tccNum)) != 0U))
+            if ((tccNum < (uint32)CDD_EDMA_NUM_TCC) && (tccNum < 32U) && ((intrLow & (1U << tccNum)) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrLow &= ~(1U << tccNum);
                 Cdd_Dma_CallBackList[tccNum](Cdd_Dma_AppDataList[tccNum]);
             }
-            if ((tccNum >= 32U) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
+            if ((tccNum >= 32U) && (tccNum < (uint32)CDD_EDMA_NUM_TCC) && ((intrHigh & (1U << (tccNum - 32U))) != 0U))
             {
                 CDD_EDMA_lld_clrIntrRegion(baseAddr, regionId, tccNum);
                 intrHigh &= ~(1U << (tccNum - 32U));

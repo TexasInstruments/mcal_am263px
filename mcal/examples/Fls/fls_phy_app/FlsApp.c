@@ -562,7 +562,6 @@ void Fee_JobErrorNotification(void)
 }
 void main_handling()
 {
-    AppUtils_printf(APP_NAME ": Job Processing in Progress.\n\r");
     while (1U)
     {
         Fls_MainFunction();
