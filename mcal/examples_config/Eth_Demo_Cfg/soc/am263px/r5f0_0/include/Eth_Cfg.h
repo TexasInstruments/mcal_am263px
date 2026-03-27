@@ -166,24 +166,37 @@ extern "C" {
 /** \brief Enable/disable Eth traffic shaping  */
 #define ETH_TRAFFIC_SHAPING_API   (STD_OFF)
 
+/** \brief Number of TX buffers */
+#define ETH_NUM_TX_BUFFERS_PRI_0    (16U)
+#define ETH_NUM_TX_BUFFERS_PRI_1    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_2    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_3    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_4    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_5    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_6    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_7    (0U)
+#define ETH_NUM_TX_BUFFERS          (0U + 16U + 0U + 0U + 0U + 0U + 0U + 0U + 0U)
+
+/** \brief Number of RX buffers */
+#define ETH_NUM_RX_BUFFERS_PRI_0    (16U)
+#define ETH_NUM_RX_BUFFERS_PRI_1    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_2    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_3    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_4    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_5    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_6    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_7    (0U)
+#define ETH_NUM_RX_BUFFERS          (0U + 16U + 0U + 0U + 0U + 0U + 0U + 0U + 0U)
+
+/** \brief Enable/disable Eth multi-queue QoS support  */
+#define ETH_QOS_MULTI_QUEUE_SUPPORT (STD_OFF)
+
 /**
  *  \name Eth Buffer defines
  *
  *  Defines for Buffer configurations
  *  @{
  */
-/**
- *  \brief Eth buffer rotation enable
- *  This will enable driver to recycle buffers without driver intervention.
- */
-#define ETH_AUTO_BUFF_ROTATION      (STD_ON)
-
-/** \brief Number of TX buffers */
-#define ETH_NUM_TX_BUFFERS          (16U)
-/** \brief Number of RX buffers */
-#define ETH_NUM_RX_BUFFERS          (16U)
-
-
 /** \brief Limits the maximum rx/tx buffer length (frame length) in bytes.*/
 #define ETH_BUF_LEN_BYTE          (1522U)
 /* @} */

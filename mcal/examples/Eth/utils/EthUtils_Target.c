@@ -497,8 +497,17 @@ boolean EthApp_waitForHost(void)
 void EthApp_receiveAllFifo(uint8 ctrlIdx)
 {
     Eth_RxStatusType rxStatus;
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    uint8 priority = 0U;
+
+    for (priority = 0; priority < ETH_PRIORITY_QUEUE_NUM; priority++)
+    {
+        Eth_Receive(ctrlIdx, priority, &rxStatus);
+    }
+#else
     /* Priority is not supported and app should always pass it as 0 */
     Eth_Receive(ctrlIdx, 0, &rxStatus);
+#endif
 }
 
 void EthApp_transmitFlush(uint8 ctrlIdx)
@@ -868,13 +877,13 @@ void EthUtilsApp_RxIndication(uint8 ctrlIdx, Eth_FrameType FrameType, boolean Is
             if (gEthUtilsApp.qosTest)
             {
                 VlanDataFramePayload *vlanHdr = (VlanDataFramePayload *)DataPtr;
-                // uint8 tci = (ntohs(vlanHdr->tci) >> 13) & 0x7;
-                uint16                vlanId = ntohs(vlanHdr->tci) & 0xFFF;
+                uint8                 tci     = (ntohs(vlanHdr->tci) >> 13) & 0x7;
+                uint16                vlanId  = ntohs(vlanHdr->tci) & 0xFFF;
 
                 if (vlanId == ETH_TEST_VLAN_VID)
                 {
-                    // gEthUtilsApp.stats.qosPacketCnt[tci]++;
-                    // gEthUtilsApp.stats.qosBytesCnt[tci] += lenByte;
+                    gEthUtilsApp.stats.qosPacketCnt[tci]++;
+                    gEthUtilsApp.stats.qosBytesCnt[tci] += lenByte;
                 }
                 else
                 {

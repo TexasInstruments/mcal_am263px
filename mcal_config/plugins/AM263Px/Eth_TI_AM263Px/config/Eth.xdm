@@ -651,6 +651,7 @@
                             <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                             <a:a name="UUID" 
                                  value="ECUC:6188cf4b-b670-42db-a75f-de9da8593272"/>
+							<a:da name="DEFAULT" value="2"/>
                             <a:da name="INVALID" type="Range">
                               <a:tst expr="&lt;=65535"/>
                               <a:tst expr="&gt;=0"/>
@@ -1176,21 +1177,49 @@
                           <a:tst expr="&gt;=0"/>
                         </a:da>
                       </v:var>
-                      <v:var name="EthRxThresholdCount" type="INTEGER">
-                        <a:a name="DESC" value="EN: Port VID bit"/>
-                        <a:a name="IMPLEMENTATIONCONFIGCLASS" 
-                             type="IMPLEMENTATIONCONFIGCLASS">
-                          <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
-                        </a:a>
-                        <a:a name="ORIGIN" value="Texas Instruments"/>
-                        <a:a name="UUID" 
-                             value="ECUC:475e2924-8dc4-4fdc-95c5-600fc6ba3225"/>
-                        <a:da name="DEFAULT" value="15"/>
-                        <a:da name="INVALID" type="Range">
-                          <a:tst expr="&lt;=4294967295"/>
-                          <a:tst expr="&gt;=0"/>
-                        </a:da>
-                      </v:var>
+                        <v:lst name="EthRxThresholdConfig" type="MAP">
+                          <a:da name="MAX" value="8"/>
+                          <v:ctr name="EthRxThresholdConfig" type="IDENTIFIABLE">
+                            <a:a name="DESC" 
+                                 value="EN: Structure for RX threshold interrupt configuration"/>
+                            <a:a name="UUID" 
+                                 value="ECUC:1fbc3bbe-3b3f-458d-88ac-932018508e41"/>
+                            <v:var name="RxThresholdCount" type="INTEGER">
+                              <a:a name="DESC" 
+                                   value="EN: Number of remaining RX buffers to trigger RX threshold interrupt"/>
+                              <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                   type="IMPLEMENTATIONCONFIGCLASS">
+                                <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
+                              </a:a>
+                              <a:a name="ORIGIN" value="Texas Instruments"/>
+                              <a:a name="UUID" 
+                                   value="ECUC:ca04c0a6-1a12-41c9-9b5f-55d901a01907"/>
+                              <a:da name="DEFAULT" value="0"/>
+                              <a:da name="INVALID" type="Range">
+                                <a:tst expr="&lt;=4294967295"/>
+                                <a:tst expr="&gt;=0"/>
+                              </a:da>
+                            </v:var>
+                            <v:ref name="EthCtrlConfigIngressFifoRef" 
+                                 type="SYMBOLIC-NAME-REFERENCE">
+                            <a:a name="DESC" 
+                                 value="EN: McuEthCtrConfig"/>
+                            <a:a name="IMPLEMENTATIONCONFIGCLASS" 
+                                 type="IMPLEMENTATIONCONFIGCLASS">
+                                 <icc:v class="PreCompile">VariantPostBuild</icc:v>
+                                 <icc:v class="PreCompile">VariantPreCompile</icc:v>
+                            </a:a>
+                            <a:a name="OPTIONAL" value="true"/>
+                            <a:a name="ORIGIN" value="Texas Instruments"/>
+                            <a:a name="SCOPE" value="LOCAL"/>
+                            <a:a name="UUID" 
+                                 value="895c7267-09ad-4dfb-8259-3e6f72801bf3"/>
+                                                <a:da name="ENABLE" value="false"/>
+                            <a:da name="REF" 
+                                  value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlConfigIngress/EthCtrlConfigIngressFifo"/>
+                            </v:ref>
+                          </v:ctr>
+                        </v:lst>
                     </v:ctr>
                     <v:lst name="EthMdioConfig" type="MAP">
                       <a:da name="MAX" value="1"/>
@@ -1585,44 +1614,6 @@
                     <a:v>ETH_ISR_CAT2</a:v>
                   </a:da>
                 </v:var>
-                <v:var name="EthNumTxBuffers" type="INTEGER">
-                  <a:a name="DESC" value="EN: Number of TX buffers"/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                    <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
-                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="LOCAL"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" 
-                       value="ECUC:1b1b006e-50e6-42ee-b17c-ec080fa265d6"/>
-                  <a:da name="DEFAULT" value="256"/>
-                  <a:da name="INVALID" type="Range">
-                    <a:tst expr="&lt;=1024"/>
-                    <a:tst expr="&gt;=8"/>
-                  </a:da>
-                </v:var>
-                <v:var name="EthNumRxBuffers" type="INTEGER">
-                  <a:a name="DESC" value="EN: Number of RX buffers"/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                    <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
-                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="LOCAL"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" 
-                       value="ECUC:239fd12d-58a4-4588-96a5-b8c70f4cebe3"/>
-                  <a:da name="DEFAULT" value="256"/>
-                  <a:da name="INVALID" type="Range">
-                    <a:tst expr="&lt;=1024"/>
-                    <a:tst expr="&gt;=8"/>
-                  </a:da>
-                </v:var>
                 <v:var name="EthBufLenByte" type="INTEGER">
                   <a:a name="DESC" 
                        value="EN: Maximum rx/tx buffer length (frame length) in bytes"/>
@@ -1642,22 +1633,6 @@
                     <a:tst expr="&lt;=1522"/>
                     <a:tst expr="&gt;=0"/>
                   </a:da>
-                </v:var>
-                <v:var name="EthAutoBuffRotation" type="BOOLEAN">
-                  <a:a name="DESC" 
-                       value="EN: Enable/Disable automatic buffer rotation"/>
-                  <a:a name="IMPLEMENTATIONCONFIGCLASS" 
-                       type="IMPLEMENTATIONCONFIGCLASS">
-                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
-                    <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
-                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
-                  </a:a>
-                  <a:a name="ORIGIN" value="Texas Instruments"/>
-                  <a:a name="SCOPE" value="LOCAL"/>
-                  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
-                  <a:a name="UUID" 
-                       value="ECUC:bd45fa1c-dda6-4e8f-ad5d-7f7fc3b3ed92"/>
-                  <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:lst name="EthDefaultOSCounterId">
                   <a:da name="MAX" value="1"/>

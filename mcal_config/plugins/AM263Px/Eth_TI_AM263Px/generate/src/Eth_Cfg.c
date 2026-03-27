@@ -128,7 +128,7 @@ VAR(struct Eth_ConfigType_s, ETH_CFG)
     Eth_Config =
 {
        .ctrlIdx = [!"EthCtrlIdx"!]U,
-	   .portIdx = [!"EthPort"!],
+       .portIdx = [!"EthPort"!],
        .portCfg =
        {
             .macCfg =
@@ -191,7 +191,19 @@ VAR(struct Eth_ConfigType_s, ETH_CFG)
             .txInterruptPacingEnabled = (uint32) [!"text:toupper(EthCpdmaConfig/EthTxInterruptPacingEnabled)"!],
             .txInterruptsPerMsec = [!"EthCpdmaConfig/EthTxInterruptPerMsec"!]U,
             .dmaModeFlags = [!"EthCpdmaConfig/EthDmaModeFlags"!]U,
-            .rxThreshCount = [!"EthCpdmaConfig/EthRxThresholdCount"!]U,
+            [!VAR "totalRxThreshold" = "count(EthCpdmaConfig/EthRxThresholdConfig/*)"!][!//
+            [!IF "num:i($totalRxThreshold) = num:i(1)"!][!//
+            [!LOOP "EthCpdmaConfig/EthRxThresholdConfig/*"!][!//
+            .rxThreshCount = {[!"RxThresholdCount"!]U, [!"RxThresholdCount"!]U, [!"RxThresholdCount"!]U, [!"RxThresholdCount"!]U, [!"RxThresholdCount"!]U, [!"RxThresholdCount"!]U, [!"RxThresholdCount"!]U, [!"RxThresholdCount"!]U},
+            [!ENDLOOP!][!//
+            [!ELSE!][!//
+            .rxThreshCount =
+            {
+               [!LOOP "EthCpdmaConfig/EthRxThresholdConfig/*"!]
+               [[!"node:ref(./EthCtrlConfigIngressFifoRef)/EthCtrlConfigIngressFifoIdx"!]] = [!"RxThresholdCount"!]U,
+               [!ENDLOOP!]
+            },
+            [!ENDIF!][!//
        },
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
        .cptsCfg =

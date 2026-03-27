@@ -239,8 +239,7 @@ typedef struct
     /**< Register control fields for DMA Control register      */
     uint32 dmaModeFlags;
     /**< Configuation Mode Flags.  */
-    uint32 rxThreshCount;
-
+    uint32 rxThreshCount[ETH_PRIORITY_QUEUE_NUM];
     /**< Free buffer descriptors count threshold to trigger an RX_THRESH
      *  interrupt.Set to zero for no threshold interrupt enablement
      */

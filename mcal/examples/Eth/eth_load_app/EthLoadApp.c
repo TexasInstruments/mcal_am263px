@@ -800,7 +800,7 @@ void EthLoadApp_initEth(void)
 
     DebugP_log("RX_BUF=%d TX_BUF=%d\r\n", ETH_NUM_RX_BUFFERS, ETH_NUM_TX_BUFFERS);
     DebugP_log("RxPacing Enable=%d pacePerMs=%d Threshold=%d\r\n", pCpdmaCfg->rxInterruptPacingEnabled,
-               pCpdmaCfg->rxInterruptsPerMsec, pCpdmaCfg->rxThreshCount);
+               pCpdmaCfg->rxInterruptsPerMsec, pCpdmaCfg->rxThreshCount[0]);
     DebugP_log("TxPacing Enable=%d pacePerMs=%d\r\n", pCpdmaCfg->txInterruptPacingEnabled,
                pCpdmaCfg->txInterruptsPerMsec);
 }

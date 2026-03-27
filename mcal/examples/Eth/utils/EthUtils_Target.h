@@ -277,10 +277,10 @@ typedef struct EthUtilsApp_Stats_s
     volatile uint32 detErr;
     /**< DET errors (Det_ReportError()) */
 
-    // volatile uint32 qosPacketCnt[ETH_PRIORITY_QUEUE_NUM];
+    volatile uint32 qosPacketCnt[ETH_PRIORITY_QUEUE_NUM];
     /**< Number of data received packets for QOS value */
 
-    // volatile uint32 qosBytesCnt[ETH_PRIORITY_QUEUE_NUM];
+    volatile uint32 qosBytesCnt[ETH_PRIORITY_QUEUE_NUM];
     /**< Number of data received packets for QOS value */
 } EthUtilsApp_Stats;
 

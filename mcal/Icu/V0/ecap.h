@@ -376,19 +376,15 @@ typedef enum
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
+/** \brief Write to RE-ARM bit */
 static inline void ECAP_reArm(uint32 base)
 {
-    //
-    // Write to RE-ARM bit
-    //
     HW_WR_REG16(base + CSL_ECAP_ECCTL2, (HW_RD_REG16(base + CSL_ECAP_ECCTL2) | CSL_ECAP_ECCTL2_REARM_MASK));
 }
 
+/** \brief Write to INT bit */
 static inline void ECAP_clearGlobalInterrupt(uint32 base)
 {
-    //
-    // Write to INT bit
-    //
     HW_WR_REG16(base + CSL_ECAP_ECCLR, (HW_RD_REG16(base + CSL_ECAP_ECCLR) | CSL_ECAP_ECCLR_INT_MASK));
 }
 
@@ -623,14 +619,13 @@ void ICU_ECAP_setEmulationMode(uint32 baseAddr, ECAP_EmulationMode mode);
 
 void ICU_ECAP_selectQualPeriod(uint32 baseAddr, ECAP_QualPeriodSelect width);
 
+/** \brief Set ECAP Sync-In Source Mode */
 static inline void ICU_ECAP_setSyncInPulseSource(uint32 base, ECAP_SyncInPulseSource source)
 {
-    /*
-     *  Set ECAP Sync-In Source Mode.
-     */
-    HW_WR_REG16(base + CSL_ECAP_ECAPSYNCINSEL,
-                ((HW_RD_REG16(base + CSL_ECAP_ECAPSYNCINSEL) & (~CSL_ECAP_ECAPSYNCINSEL_SEL_MASK)) |
-                 ((uint16)source & CSL_ECAP_ECAPSYNCINSEL_SEL_MASK)));
+    uint16 regVal  = HW_RD_REG16(base + CSL_ECAP_ECAPSYNCINSEL);
+    regVal        &= (uint16)(~CSL_ECAP_ECAPSYNCINSEL_SEL_MASK);
+    regVal        |= ((uint16)source & CSL_ECAP_ECAPSYNCINSEL_SEL_MASK);
+    HW_WR_REG16(base + CSL_ECAP_ECAPSYNCINSEL, regVal);
 }
 
 /* ========================================================================== */

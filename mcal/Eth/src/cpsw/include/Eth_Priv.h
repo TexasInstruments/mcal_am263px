@@ -89,6 +89,15 @@ extern "C" {
  */
 #define ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM (7U)
 
+/* Mask of buffer index in Eth_BufIdxType */
+#define ETH_BUFFER_IDX_MASK (0x00FFFFFFU)
+
+/* Mask of buffer priority in Eth_BufIdxType */
+#define ETH_PRIORITY_IDX_MASK (0xFF000000U)
+
+/* Base value of buffer priority in Eth_BufIdxType */
+#define ETH_PRIORITY_IDX_BASE (0x01000000U)
+
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -163,9 +172,16 @@ Std_ReturnType Eth_HwUpdatePhysAddrFilter(P2CONST(uint8, AUTOMATIC, ETH_APPL_DAT
  * \retval BUFREQ_E_BUSY   All buffers in use
  * \retval BUFREQ_E_OVFL   Requested buffer too large
  */
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+BufReq_ReturnType Eth_provideHwTxBuffer(VAR(uint8, AUTOMATIC) Priority,
+                                        P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
+                                        P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
+                                        P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr);
+#else
 BufReq_ReturnType Eth_provideHwTxBuffer(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
                                         P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
                                         P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr);
+#endif
 
 /**
  * \brief  Triggers transmission of a previously filled transmit buffer.
@@ -191,7 +207,7 @@ Std_ReturnType Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_Fra
  *
  * \return None
  */
-void Eth_receiveHw(P2VAR(Eth_RxStatusType, AUTOMATIC, ETH_APPL_DATA) RxStatusPtr);
+void Eth_receiveHw(VAR(uint8, AUTOMATIC) FifoIdx, P2VAR(Eth_RxStatusType, AUTOMATIC, ETH_APPL_DATA) RxStatusPtr);
 
 /**
  * \brief  Reads a list with drop counter values of the corresponding controller.

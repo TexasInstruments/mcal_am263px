@@ -795,6 +795,7 @@ Represents a Fifo at the ingress side.
 | Link-Time | VARIANT-LINK-TIME |
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 2 |
 | **Max-value** | 65535 |
 | **Min-value** | 0 |
 
@@ -977,19 +978,36 @@ MAC Init Configurations
 | **Max-value** | 4294967295 |
 | **Min-value** | 0 |
 
-###### EthRxThresholdCount
+###### EthRxThresholdConfig
 
 | Item ||
 |--------|---------------|
-| **Name** | EthRxThresholdCount |
-| **Description** | Port VID bit |
+| **Name** | EthRxThresholdConfig |
+| **Description** | Number of remaining RX buffers to trigger RX threshold interrupt |
+| **Post-build-variant-multiplicity** | false |
 | **Origin** | Texas Instruments |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |
-| **Default-value** | 15 |
+| **Default-value** | 0 |
 | **Max-value** | 4294967295 |
 | **Min-value** | 0 |
+
+###### EthCtrlConfigIngressFifoRef
+
+| Item ||
+|--------|---------------|
+| **Name** | EthCtrlConfigIngressFifoRef |
+| **Description** | McuEthCtrConfig |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | Texas Instruments |
+| **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
 ##### EthMdioConfig
 Structure for MDIO configuration
@@ -1280,38 +1298,6 @@ General configuration of Ethernet Driver module
 | **Default-value** | ETH_ISR_CAT1 |
 | **Range** | ETH_ISR_VOID<br>ETH_ISR_CAT1<br>ETH_ISR_CAT2 |
 
-##### EthNumTxBuffers
-
-| Item ||
-|--------|---------------|
-| **Name** | EthNumTxBuffers |
-| **Description** | Number of TX buffers |
-| **Origin** | Texas Instruments |
-| **Post-Build-Variant-Value** | false |
-| **Value-Configuration-Class** | -- |
-| Pre-Compile-Time | VARIANT-PRE-COMPILE |
-| Link-Time | VARIANT-LINK-TIME |
-| Post-Build-Time | VARIANT-POST-BUILD |
-| **Default-value** | 256 |
-| **Max-value** | 1024 |
-| **Min-value** | 8 |
-
-##### EthNumRxBuffers
-
-| Item ||
-|--------|---------------|
-| **Name** | EthNumRxBuffers |
-| **Description** | Number of RX buffers |
-| **Origin** | Texas Instruments |
-| **Post-Build-Variant-Value** | false |
-| **Value-Configuration-Class** | -- |
-| Pre-Compile-Time | VARIANT-PRE-COMPILE |
-| Link-Time | VARIANT-LINK-TIME |
-| Post-Build-Time | VARIANT-POST-BUILD |
-| **Default-value** | 256 |
-| **Max-value** | 1024 |
-| **Min-value** | 8 |
-
 ##### EthBufLenByte
 
 | Item ||
@@ -1327,20 +1313,6 @@ General configuration of Ethernet Driver module
 | **Default-value** | 1522 |
 | **Max-value** | 1522 |
 | **Min-value** | 0 |
-
-##### EthAutoBuffRotation
-
-| Item ||
-|--------|---------------|
-| **Name** | EthAutoBuffRotation |
-| **Description** | Enable/Disable automatic buffer rotation |
-| **Origin** | Texas Instruments |
-| **Post-Build-Variant-Value** | false |
-| **Value-Configuration-Class** | -- |
-| Pre-Compile-Time | VARIANT-PRE-COMPILE |
-| Link-Time | VARIANT-LINK-TIME |
-| Post-Build-Time | VARIANT-POST-BUILD |
-| **Default-value** | true |
 
 ##### EthDefaultOSCounterId
 

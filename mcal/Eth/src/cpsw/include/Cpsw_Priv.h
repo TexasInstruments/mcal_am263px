@@ -401,8 +401,6 @@ typedef struct
     /**< Buffer object for Receive buffer ring */
     Eth_TxBufObjType   txBufObjArray[ETH_NUM_TX_BUFFERS];
     /**< Buffer object for Transmit buffer ring */
-    uint32             lastTxIdx;
-    /**< Last used TX buffer index */
 } Eth_PortObject;
 
 /**
@@ -500,13 +498,13 @@ typedef struct
  *         and common information shared by ports */
 typedef struct
 {
-    uint8                    ctrlIdx;
+    uint8                   ctrlIdx;
     /**< Controller index */
-    uint8                    portIdx;
+    uint8                   portIdx;
     /**< Port >*/
-    Eth_ConfigType           ethConfig;
+    Eth_ConfigType          ethConfig;
     /**< Eth driver Init Configuration */
-    uint32                   enableCacheOps;
+    uint32                  enableCacheOps;
     /**< Since the Eth driver is updating (writing/reading) the packet header,
      *   if the packets are in cached region, then cache flush should be done
      *   for transmit and cache invalidate should be done for receive.
@@ -515,21 +513,35 @@ typedef struct
      *   or not. If enabled, then the below two callback will be called to
      *   perform the cache operation
      */
-    Eth_CacheFlushType       cacheFlushFnPtr;
+    Eth_CacheFlushType      cacheFlushFnPtr;
     /**< Cache flush function pointer */
-    Eth_CacheInvalidateType  cacheInvalidateFnPtr;
+    Eth_CacheInvalidateType cacheInvalidateFnPtr;
     /**< Cache invalidate function pointer */
-    Eth_ModeType             ctrlMode;
+    Eth_ModeType            ctrlMode;
     /**< CPSW instance in the device  */
-    uint32                   baseAddr;
+    uint32                  baseAddr;
     /**< Base address */
-    uint32                   rxDescMemBaseAddr;
-    uint32                   txDescMemBaseAddr;
+    uint32                  rxDescMemBaseAddr;
+    uint32                  txDescMemBaseAddr;
     /**< CPPI RAM Base address */
-    uint8                    activeMACPortCount;
+    uint8                   activeMACPortCount;
     /**< Total number active ports */
-    Eth_PortObject           portObj;
+    Eth_PortObject          portObj;
     /**< Port interface */
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    Eth_CpdmaRxBuffDescQueue rxDescRing[ETH_PRIORITY_QUEUE_NUM];
+    /**< Receive buffer descriptor queue*/
+    uint32                   maxRxBuffDesc[ETH_PRIORITY_QUEUE_NUM];
+    /**< Maximum Rx buffer descriptors */
+    Eth_CpdmaTxBuffDescQueue txDescRing[ETH_PRIORITY_QUEUE_NUM];
+    /**< Transmit buffer descriptor queue */
+    uint32                   maxTxBuffDesc[ETH_PRIORITY_QUEUE_NUM];
+    /**< Maximum Tx buffer descriptors */
+    uint32                   lastTxIdx[ETH_PRIORITY_QUEUE_NUM];
+    /**< Last used TX buffer index */
+    uint32                   txBufStartIdx[ETH_PRIORITY_QUEUE_NUM];
+    /**< Start index of each TX priority queue */
+#else
     Eth_CpdmaRxBuffDescQueue rxDescRing;
     /**< Receive buffer descriptor queue*/
     uint32                   maxRxBuffDesc;
@@ -537,10 +549,14 @@ typedef struct
     Eth_CpdmaTxBuffDescQueue txDescRing;
     /**< Transmit buffer descriptor queue */
     uint32                   maxTxBuffDesc;
+    /**< Maximum number of TX buffer descriptor */
+    uint32                   lastTxIdx;
+    /**< Last used TX buffer index */
+#endif
     /**< Maximum Tx buffer descriptors */
-    Eth_StatsObj             statsObj;
+    Eth_StatsObj      statsObj;
     /**< Statistics object */
-    CpswCpts_StateObj        cptsObj;
+    CpswCpts_StateObj cptsObj;
     /**< CPTS object */
 } Eth_DrvObject;
 

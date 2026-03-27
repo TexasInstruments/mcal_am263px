@@ -143,7 +143,17 @@ VAR(struct Eth_ConfigType_s, ETH_PBCFG)
             .txInterruptPacingEnabled = (uint32) TRUE,
             .txInterruptsPerMsec = 2U,
             .dmaModeFlags = 0U,
-            .rxThreshCount = 8U,
+            .rxThreshCount =
+            {
+               [0] = 8U,
+               [1] = 0U,
+               [2] = 0U,
+               [3] = 0U,
+               [4] = 0U,
+               [5] = 0U,
+               [6] = 0U,
+               [7] = 0U,
+            },
        },
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
        .cptsCfg =

@@ -877,6 +877,7 @@
                                 </ECUC-VALUE-CONFIGURATION-CLASS>
                               </VALUE-CONFIG-CLASSES>
                               <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
+                              <DEFAULT-VALUE>2</DEFAULT-VALUE>
                               <MAX>65535</MAX>
                               <MIN>0</MIN>
                             </ECUC-INTEGER-PARAM-DEF>
@@ -1685,24 +1686,72 @@
                           <MAX>4294967295</MAX>
                           <MIN>0</MIN>
                         </ECUC-INTEGER-PARAM-DEF>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:475e2924-8dc4-4fdc-95c5-600fc6ba3225">
-                          <SHORT-NAME>EthRxThresholdCount</SHORT-NAME>
-                          <DESC>
-                            <L-2 L="EN">Port VID bit</L-2>
-                          </DESC>
-                          <ORIGIN>Texas Instruments</ORIGIN>
-                          <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                          <VALUE-CONFIG-CLASSES>
-                            <ECUC-VALUE-CONFIGURATION-CLASS>
-                              <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
-                              <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
-                            </ECUC-VALUE-CONFIGURATION-CLASS>
-                          </VALUE-CONFIG-CLASSES>
-                          <DEFAULT-VALUE>15</DEFAULT-VALUE>
-                          <MAX>4294967295</MAX>
-                          <MIN>0</MIN>
-                        </ECUC-INTEGER-PARAM-DEF>
                       </PARAMETERS>
+                      <SUB-CONTAINERS>
+                        <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:1fbc3bbe-3b3f-458d-88ac-932018508e41">
+                          <SHORT-NAME>EthRxThresholdConfig</SHORT-NAME>
+                          <DESC>
+                            <L-2 L="EN">Structure for RX threshold interrupt configuration</L-2>
+                          </DESC>
+                          <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                          <UPPER-MULTIPLICITY>8</UPPER-MULTIPLICITY>
+                          <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+                          <PARAMETERS>
+                            <ECUC-INTEGER-PARAM-DEF UUID="ECUC:ca04c0a6-1a12-41c9-9b5f-55d901a01907">
+                              <SHORT-NAME>RxThresholdCount</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">Number of remaining RX buffers to trigger RX threshold interrupt</L-2>
+                              </DESC>
+                              <ORIGIN>Texas Instruments</ORIGIN>
+                              <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                              <VALUE-CONFIG-CLASSES>
+                                <ECUC-VALUE-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>POST-BUILD</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-VALUE-CONFIGURATION-CLASS>
+                              </VALUE-CONFIG-CLASSES>
+                              <DEFAULT-VALUE>0</DEFAULT-VALUE>
+                              <MAX>4294967295</MAX>
+                              <MIN>0</MIN>
+                            </ECUC-INTEGER-PARAM-DEF>
+                          </PARAMETERS>
+                          <REFERENCES>
+                            <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="895c7267-09ad-4dfb-8259-3e6f72801bf3">
+                              <SHORT-NAME>EthCtrlConfigIngressFifoRef</SHORT-NAME>
+                              <DESC>
+                                <L-2 L="EN">McuEthCtrConfig</L-2>
+                              </DESC>
+                              <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+                              <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+                              <SCOPE>LOCAL</SCOPE>
+                              <MULTIPLICITY-CONFIG-CLASSES>
+                                <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                                <ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                </ECUC-MULTIPLICITY-CONFIGURATION-CLASS>
+                              </MULTIPLICITY-CONFIG-CLASSES>
+                              <ORIGIN>Texas Instruments</ORIGIN>
+                              <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
+                              <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                              <VALUE-CONFIG-CLASSES>
+                                <ECUC-VALUE-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                                </ECUC-VALUE-CONFIGURATION-CLASS>
+                                <ECUC-VALUE-CONFIGURATION-CLASS>
+                                  <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                                  <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                                </ECUC-VALUE-CONFIGURATION-CLASS>
+                              </VALUE-CONFIG-CLASSES>
+                              <DESTINATION-REF DEST="ECUC-PARAM-CONF-CONTAINER-DEF">/AUTOSAR/EcucDefs/Eth/EthConfigSet/EthCtrlConfig/EthCtrlConfigIngress/EthCtrlConfigIngressFifo</DESTINATION-REF>
+                            </ECUC-SYMBOLIC-NAME-REFERENCE-DEF>
+                          </REFERENCES>
+                        </ECUC-PARAM-CONF-CONTAINER-DEF>
+                      </SUB-CONTAINERS>
                     </ECUC-PARAM-CONF-CONTAINER-DEF>
                     <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:b1cea778-9884-402b-9535-a819da9e6b7e">
                       <SHORT-NAME>EthMdioConfig</SHORT-NAME>
@@ -2295,60 +2344,6 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:1b1b006e-50e6-42ee-b17c-ec080fa265d6">
-                  <SHORT-NAME>EthNumTxBuffers</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Number of TX buffers</L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>256</DEFAULT-VALUE>
-                  <MAX>1024</MAX>
-                  <MIN>8</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:239fd12d-58a4-4588-96a5-b8c70f4cebe3">
-                  <SHORT-NAME>EthNumRxBuffers</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Number of RX buffers</L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>256</DEFAULT-VALUE>
-                  <MAX>1024</MAX>
-                  <MIN>8</MIN>
-                </ECUC-INTEGER-PARAM-DEF>
                 <ECUC-INTEGER-PARAM-DEF UUID="ECUC:c8944de1-af01-4bd9-a2d8-0ae2009f2937">
                   <SHORT-NAME>EthBufLenByte</SHORT-NAME>
                   <DESC>
@@ -2376,31 +2371,6 @@
                   <MAX>1522</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:bd45fa1c-dda6-4e8f-ad5d-7f7fc3b3ed92">
-                  <SHORT-NAME>EthAutoBuffRotation</SHORT-NAME>
-                  <DESC>
-                    <L-2 L="EN">Enable/Disable automatic buffer rotation</L-2>
-                  </DESC>
-                  <SCOPE>LOCAL</SCOPE>
-                  <ORIGIN>Texas Instruments</ORIGIN>
-                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
-                  <VALUE-CONFIG-CLASSES>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-LINK-TIME</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                    <ECUC-VALUE-CONFIGURATION-CLASS>
-                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
-                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
-                    </ECUC-VALUE-CONFIGURATION-CLASS>
-                  </VALUE-CONFIG-CLASSES>
-                  <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
-                  <DEFAULT-VALUE>true</DEFAULT-VALUE>
-                </ECUC-BOOLEAN-PARAM-DEF>
                 <ECUC-INTEGER-PARAM-DEF UUID="ECUC:a0feb39e-ae1f-4a84-bf81-b67526d28b63">
                   <SHORT-NAME>EthDefaultOSCounterId</SHORT-NAME>
                   <DESC>

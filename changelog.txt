@@ -1,3 +1,192 @@
+commit 83f3047c8d097311b9d5336e0e1563b642096afb
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Mar 26 09:45:45 2026 +0530
+
+    all: Eth: Fixing lint, amdc, arxml and config build issues
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ build/amdc/output/AM261x/Cdd_FsiTx.csv             |  2 +-
+ build/amdc/output/AM261x/Eth.csv                   |  8 +--
+ build/amdc/output/AM263Px/Eth.csv                  |  8 +--
+ build/amdc/output/AM263x/Cdd_FsiTx.csv             |  2 +-
+ build/amdc/output/AM263x/Eth.csv                   |  8 +--
+ mcal/Eth/src/cpsw/Eth_Priv.c                       | 62 +++++++++++-----------
+ mcal/Eth/src/cpsw/include/Eth_Priv.h               |  6 +--
+ .../soc/am261/r5f0_0/include/Eth_Cfg.h             |  2 +-
+ .../soc/am263/r5f0_0/include/Eth_Cfg.h             |  3 +-
+ .../soc/am263px/r5f0_0/include/Eth_Cfg.h           |  2 +-
+ .../plugins/AM261x/Eth_TI_AM261x/config/Eth.arxml  | 32 +++++++----
+ .../plugins/AM261x/Eth_TI_AM261x/config/Eth.xdm    |  2 +-
+ .../AM263Px/Eth_TI_AM263Px/config/Eth.arxml        | 32 +++++++----
+ .../plugins/AM263Px/Eth_TI_AM263Px/config/Eth.xdm  |  2 +-
+ .../plugins/AM263x/Eth_TI_AM263x/config/Eth.arxml  | 34 ++++++++----
+ .../plugins/AM263x/Eth_TI_AM263x/config/Eth.xdm    |  2 +-
+ mcal_test/eth_test/testInput/ethTestCases.h        |  3 +-
+ mcal_test/eth_test/testLib/ethTestMainTestCase.c   |  4 +-
+ 18 files changed, 128 insertions(+), 86 deletions(-)
+
+commit 11bf6173ac6edf8db67a29f44c2c020d9df82929
+Author: Akash <a-verma3@ti.com>
+Date:   Thu Mar 26 17:23:47 2026 +0530
+
+    all: Icu: Coverage for Icu module
+    
+    - Added test case to cover ICU_ECAP_selectQualPeriod function, pending task-MCAL-35793
+    
+    Fixes: MCAL-35524
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Icu/V0/ecap.h                                 |  19 +-
+ mcal_test/Utils/mock_common/mock_common.c          |  14 +
+ mcal_test/Utils/mock_common/mock_common.h          |   9 +
+ mcal_test/icu_test/Makefile                        |   3 +
+ mcal_test/icu_test/am261/testInput/icuTestCases.h  |  40 ++
+ mcal_test/icu_test/am261/testLib/icuTest.h         |  24 +-
+ .../icu_test/am261/testLib/icuTestMainTestCase.c   |   8 +-
+ .../am261/testLib/icuTestNegativeTestCase.c        | 351 ++++++++++++++
+ mcal_test/icu_test/am263/testInput/icuTestCases.h  |  40 ++
+ mcal_test/icu_test/am263/testLib/icuTest.h         |  24 +-
+ .../icu_test/am263/testLib/icuTestMainTestCase.c   |   8 +-
+ .../am263/testLib/icuTestNegativeTestCase.c        | 351 ++++++++++++++
+ .../icu_test/am263px/testInput/icuTestCases.h      |  40 ++
+ mcal_test/icu_test/am263px/testLib/icuTest.h       |  24 +-
+ .../icu_test/am263px/testLib/icuTestMainTestCase.c |   8 +-
+ .../am263px/testLib/icuTestNegativeTestCase.c      | 521 ++++++++++++++++++++-
+ mcal_test/icu_test/build/makefile_lib              |  33 +-
+ 17 files changed, 1439 insertions(+), 78 deletions(-)
+
+commit 393e4dff740076499fa3beb85f2a11daeb9df2bf
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Mar 25 10:31:33 2026 +0530
+
+    am263px: Port: Corrected all TRACE to TRC in am263px port plugins
+    
+    -The port pin mode of trace has a mismatch and because of this the
+    register for port never sets the muxmode to 4 (needed for port) and
+    always remains as 7 (default) as AM263px generation uses TRACE instead
+    of TRC and this leads to a mismatch.
+    
+    Fixes: MCAL-36718
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../plugins/AM263Px/Port_TI_AM263Px/config/Port_AM263Px.arxml     | 4 ++--
+ .../plugins/AM263Px/Port_TI_AM263Px/config/Port_AM263Px_NonEB.xdm | 4 ++--
+ .../AM263Px/Port_TI_AM263Px/resources/AM263Px_Port.properties     | 4 ++--
+ .../plugins/AM263Px/Port_TI_AM263Px_C/config/Port_AM263Px_C.arxml | 4 ++--
+ .../AM263Px/Port_TI_AM263Px_C/config/Port_AM263Px_NonEB.xdm       | 4 ++--
+ .../AM263Px/Port_TI_AM263Px_C/resources/AM263Px_C_Port.properties | 4 ++--
+ .../AM263Px/Port_TI_AM263Px_SIP/config/Port_AM263Px_NonEB.xdm     | 4 ++--
+ .../AM263Px/Port_TI_AM263Px_SIP/config/Port_AM263Px_SIP.arxml     | 4 ++--
+ .../Port_TI_AM263Px_SIP/resources/AM263Px_SIP_Port.properties     | 4 ++--
+ release_notes.md                                                  | 8 ++++++++
+ 10 files changed, 26 insertions(+), 18 deletions(-)
+
+commit 4dfde8c3fe1d18ce8e9034f9255c416b6394d74f
+Author: Khanh Tran <x1120448@ti.com>
+Date:   Wed Feb 11 19:43:56 2026 +0700
+
+    all: Eth: Support multi-queue QoS
+    
+    - Add config to enable/disable multi-queue QoS
+    - Update Eth driver source to process multi-queue separately
+    - Update EB Eth plugin
+    - Update unit-test config1 and config6 for coverage
+    - Update lint format, release note
+    
+    Fixes: MCAL-24386, MCAL-30483
+    
+    Signed-off by: Tran Khanh <x1120448@ti.com>
+
+ mcal/Eth/include/Eth_Types.h                       |   3 +-
+ mcal/Eth/src/Eth.c                                 |  63 +-
+ mcal/Eth/src/cpsw/Cpsw_Port.c                      |   4 +
+ mcal/Eth/src/cpsw/Eth_Priv.c                       | 380 +++++++--
+ mcal/Eth/src/cpsw/include/Cpsw_Priv.h              |  48 +-
+ mcal/Eth/src/cpsw/include/Eth_Priv.h               |  18 +-
+ mcal/examples/Eth/eth_app/EthApp.c                 |  16 +-
+ mcal/examples/Eth/eth_load_app/EthLoadApp.c        |   2 +-
+ mcal/examples/Eth/eth_test_app/EthTestApp.c        | 150 +++-
+ mcal/examples/Eth/eth_test_app/host/HostTestApp.c  |  65 +-
+ mcal/examples/Eth/eth_test_app/host/makefile       |  10 +
+ mcal/examples/Eth/utils/EthUtils.c                 |   3 +
+ mcal/examples/Eth/utils/EthUtils_Host.c            |   7 +
+ mcal/examples/Eth/utils/EthUtils_Target.c          |  17 +-
+ mcal/examples/Eth/utils/EthUtils_Target.h          |   4 +-
+ mcal/examples/Utils/hw_types.c                     |   7 +
+ .../soc/am261/r5f0_0/include/Eth_Cfg.h             |  37 +-
+ .../Eth_Demo_Cfg/soc/am261/r5f0_0/src/Eth_Cfg.c    |  14 +-
+ .../Eth_Demo_Cfg/soc/am261/tresos/config/Eth.xdm   | 421 ++++++++-
+ .../soc/am263/r5f0_0/include/Eth_Cfg.h             |  37 +-
+ .../Eth_Demo_Cfg/soc/am263/r5f0_0/src/Eth_Cfg.c    |  14 +-
+ .../Eth_Demo_Cfg/soc/am263/tresos/config/Eth.xdm   | 421 ++++++++-
+ .../soc/am263px/r5f0_0/include/Eth_Cfg.h           |  37 +-
+ .../Eth_Demo_Cfg/soc/am263px/r5f0_0/src/Eth_Cfg.c  |  14 +-
+ .../Eth_Demo_Cfg/soc/am263px/tresos/config/Eth.xdm | 421 ++++++++-
+ .../soc/am261/r5f0_0/include/Eth_Cfg.h             |  40 +-
+ .../Eth_Demo_Lcfg/soc/am261/r5f0_0/src/Eth_Lcfg.c  |  12 +-
+ .../soc/am263/r5f0_0/include/Eth_Cfg.h             |  40 +-
+ .../Eth_Demo_Lcfg/soc/am263/r5f0_0/src/Eth_Lcfg.c  |  12 +-
+ .../soc/am263px/r5f0_0/include/Eth_Cfg.h           |  40 +-
+ .../soc/am263px/r5f0_0/src/Eth_Lcfg.c              |  12 +-
+ .../soc/am261/r5f0_0/include/Eth_Cfg.h             |  40 +-
+ .../soc/am261/r5f0_0/src/Eth_PBcfg.c               |  12 +-
+ .../soc/am263/r5f0_0/include/Eth_Cfg.h             |  41 +-
+ .../soc/am263/r5f0_0/src/Eth_PBcfg.c               |  12 +-
+ .../soc/am263px/r5f0_0/include/Eth_Cfg.h           |  28 +
+ .../soc/am263px/r5f0_0/src/Eth_PBcfg.c             |  12 +-
+ .../plugins/AM261x/Eth_TI_AM261x/config/Eth.arxml  | 148 ++--
+ .../plugins/AM261x/Eth_TI_AM261x/config/Eth.xdm    | 113 +--
+ .../AM261x/Eth_TI_AM261x/config_ext/Eth_Rec.xdm    | 421 ++++++++-
+ .../Eth_TI_AM261x/generate/include/Eth_Cfg.h       | 949 ++++++++++----------
+ .../AM261x/Eth_TI_AM261x/generate/src/Eth_Cfg.c    |  16 +-
+ .../AM261x/Eth_TI_AM261x/generate/src/Eth_Lcfg.c   |  16 +-
+ .../AM261x/Eth_TI_AM261x/generate/src/Eth_PBcfg.c  |  16 +-
+ .../AM263Px/Eth_TI_AM263Px/config/Eth.arxml        | 148 ++--
+ .../plugins/AM263Px/Eth_TI_AM263Px/config/Eth.xdm  | 113 +--
+ .../AM263Px/Eth_TI_AM263Px/config_ext/Eth_Rec.xdm  | 421 ++++++++-
+ .../Eth_TI_AM263Px/generate/include/Eth_Cfg.h      | 855 ++++++++++---------
+ .../AM263Px/Eth_TI_AM263Px/generate/src/Eth_Cfg.c  |  16 +-
+ .../AM263Px/Eth_TI_AM263Px/generate/src/Eth_Lcfg.c |  16 +-
+ .../Eth_TI_AM263Px/generate/src/Eth_PBcfg.c        |  16 +-
+ .../plugins/AM263x/Eth_TI_AM263x/config/Eth.arxml  | 150 ++--
+ .../plugins/AM263x/Eth_TI_AM263x/config/Eth.xdm    | 113 +--
+ .../AM263x/Eth_TI_AM263x/config_ext/Eth_Rec.xdm    | 421 ++++++++-
+ .../Eth_TI_AM263x/generate/include/Eth_Cfg.h       | 950 +++++++++++----------
+ .../AM263x/Eth_TI_AM263x/generate/src/Eth_Cfg.c    |  16 +-
+ .../AM263x/Eth_TI_AM263x/generate/src/Eth_Lcfg.c   |  16 +-
+ .../AM263x/Eth_TI_AM263x/generate/src/Eth_PBcfg.c  |  16 +-
+ mcal_test/eth_test/testInput/ethTestCases.h        | 282 +++---
+ .../eth_test/testLib/ethTestCoverageTestCase.c     |  18 +-
+ mcal_test/eth_test/testLib/ethTestMainTestCase.c   |  18 +-
+ .../eth_test/testLib/ethTestNegativeTestCase.c     |  10 +-
+ .../Eth/soc/am261/r5f0_0/config_1/Eth_Cfg.h        |  37 +-
+ .../Eth/soc/am261/r5f0_0/config_6/Eth_Cfg.h        |  37 +-
+ .../Eth/soc/am263/r5f0_0/config_1/Eth_Cfg.h        |  37 +-
+ .../Eth/soc/am263/r5f0_0/config_6/Eth_Cfg.h        |  37 +-
+ .../Eth/soc/am263px/r5f0_0/config_1/Eth_Cfg.h      |  40 +-
+ .../Eth/soc/am263px/r5f0_0/config_6/Eth_Cfg.h      |  40 +-
+ release_notes.md                                   |  11 +
+ 69 files changed, 5611 insertions(+), 2416 deletions(-)
+
+commit 8771a32d7f3c2e5a210de7bbdc889a3e7653378c
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Mar 25 13:33:09 2026 +0530
+
+    all: all: cicd improvements
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/cicd/am263px/test_urls.cfg | 10 +++++-----
+ mcal_misc/scripts/cicd/am263x/test_urls.cfg  |  2 +-
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+
 commit 9003a0b1d911cd6acf9d7d24cbd8db1ce6c6cb3a
 Author: Akash <a-verma3@ti.com>
 Date:   Mon Mar 23 15:00:01 2026 +0530

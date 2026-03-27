@@ -16,6 +16,10 @@ export ETH_ZERO_COPY_SUPPORT ?= FALSE
 
 # Enable/Disable Checksum Offload Test Cases
 export ETH_CHECKSUM_OFFLOAD_SUPPORT ?= FALSE
+
+# Enable/Disable Multi-queue QOS Test Cases
+export ETH_QOS_MULTI_QUEUE_SUPPORT ?= FALSE
+
 ################################################################################
 # Eth Host Application Configurations Ends
 ################################################################################
@@ -42,6 +46,12 @@ ifeq ($(ETH_CHECKSUM_OFFLOAD_SUPPORT),TRUE)
 else
     TST_CFLAGS += -DETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP=STD_OFF
     TST_CFLAGS += -DETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP=STD_OFF
+endif
+
+ifeq ($(ETH_QOS_MULTI_QUEUE_SUPPORT),TRUE)
+    TST_CFLAGS += -DETH_QOS_MULTI_QUEUE_SUPPORT=STD_ON
+else
+    TST_CFLAGS += -DETH_QOS_MULTI_QUEUE_SUPPORT=STD_OFF
 endif
 
 HOST_CFLAGS = $(STD_CFLAGS) $(TST_CFLAGS)

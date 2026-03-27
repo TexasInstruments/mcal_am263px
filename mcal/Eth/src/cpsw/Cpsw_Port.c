@@ -143,8 +143,12 @@ void CpswPort_hostPortopen(uint32 baseAddr)
 #endif
     CPPI_WR_REG(P0_CONTROL, reg);
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    /* Nothing */
+#else
     /* Assign all priority to switch queue priority 0 */
     CPPI_WR_REG(P0_TX_PRI_MAP, 0);
+#endif
 
     /* Port 0 max len, beside configured MTU, need to add pass_crc
      * and encap checksum so set to max frame size for simplicity */

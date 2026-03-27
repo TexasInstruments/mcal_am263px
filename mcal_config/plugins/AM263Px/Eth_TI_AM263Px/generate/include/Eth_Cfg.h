@@ -174,24 +174,42 @@ extern "C" {
 /** \brief Enable/disable Eth traffic shaping  */
 #define ETH_TRAFFIC_SHAPING_API   [!IF "as:modconf('Eth')[1]/EthGeneral/EthTrafficShapingSupport = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
+[!LOOP "as:modconf('Eth')[1]/EthConfigSet/EthCtrlConfig/*"!][!//
+[!VAR "qosMultiQueueSupport" = "'STD_OFF'"!][!//
+/** \brief Number of TX buffers */
+[!VAR "totalTxBuffers" = "'(0U'"!][!//
+[!LOOP "EthCtrlConfigEgress/EthCtrlConfigEgressFifo/*"!][!//
+#define ETH_NUM_TX_BUFFERS_PRI_[!"EthCtrlConfigEgressFifoIdx"!]    ([!"EthCtrlConfigEgressFifoBufTotal"!]U)
+[!VAR "totalTxBuffers"="concat($totalTxBuffers,' + ', EthCtrlConfigEgressFifoBufTotal, 'U')"!][!//
+[!IF "EthCtrlConfigEgressFifoIdx != 0 and EthCtrlConfigEgressFifoBufTotal != 0"!][!//
+[!VAR "qosMultiQueueSupport" = "'STD_ON'"!][!//
+[!ENDIF!][!//
+[!ENDLOOP!][!//
+[!VAR "totalTxBuffers"="concat($totalTxBuffers,")")"!][!//
+#define ETH_NUM_TX_BUFFERS          [!"$totalTxBuffers"!]
+
+/** \brief Number of RX buffers */
+[!VAR "totalRxBuffers" = "'(0U'"!][!//
+[!LOOP "EthCtrlConfigIngress/EthCtrlConfigIngressFifo/*"!][!//
+#define ETH_NUM_RX_BUFFERS_PRI_[!"EthCtrlConfigIngressFifoIdx"!]    ([!"EthCtrlConfigIngressFifoBufTotal"!]U)
+[!VAR "totalRxBuffers"="concat($totalRxBuffers,' + ', EthCtrlConfigIngressFifoBufTotal, 'U')"!][!//
+[!IF "EthCtrlConfigIngressFifoIdx != 0 and EthCtrlConfigIngressFifoBufTotal != 0"!][!//
+[!VAR "qosMultiQueueSupport" = "'STD_ON'"!][!//
+[!ENDIF!][!//
+[!ENDLOOP!][!//
+[!VAR "totalRxBuffers"="concat($totalRxBuffers,")")"!][!//
+#define ETH_NUM_RX_BUFFERS          [!"$totalRxBuffers"!]
+
+/** \brief Enable/disable Eth multi-queue QoS support  */
+#define ETH_QOS_MULTI_QUEUE_SUPPORT ([!"$qosMultiQueueSupport"!])
+[!ENDLOOP!][!//
+
 /**
  *  \name Eth Buffer defines
  *
  *  Defines for Buffer configurations
  *  @{
  */
-/**
- *  \brief Eth buffer rotation enable
- *  This will enable driver to recycle buffers without driver intervention.
- */
-#define ETH_AUTO_BUFF_ROTATION      [!IF "as:modconf('Eth')[1]/EthGeneral/EthAutoBuffRotation = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
-
-/** \brief Number of TX buffers */
-#define ETH_NUM_TX_BUFFERS          ([!"as:modconf('Eth')[1]/EthGeneral/EthNumTxBuffers"!]U)
-/** \brief Number of RX buffers */
-#define ETH_NUM_RX_BUFFERS          ([!"as:modconf('Eth')[1]/EthGeneral/EthNumRxBuffers"!]U)
-
-
 /** \brief Limits the maximum rx/tx buffer length (frame length) in bytes.*/
 #define ETH_BUF_LEN_BYTE          ([!"as:modconf('Eth')[1]/EthGeneral/EthBufLenByte"!]U)
 /* @} */
@@ -399,9 +417,6 @@ extern struct Eth_ConfigType_s Eth_Config;
 [!IF "as:modconf('Eth')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!][!//
 [!ELSE!][!//
 /** \brief ETH Configuration pointer for postbuild and linktime */
-/* Forward declaration for Eth configuration structure */
-struct Eth_ConfigType_s;
-
 extern const struct Eth_ConfigType_s *Eth_CfgPtr;
 [!ENDIF!][!//
 /* @} */

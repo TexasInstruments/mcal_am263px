@@ -156,8 +156,8 @@ Values that can be passed to ECAP_selectQualPeriod() as the _mode_ parameter.
 
 | Return type    | Function Name           |      Brief        |
 | -------------- | ----------------------- | ----------------- |
-| void | **[ECAP_reArm](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-ecap_rearm)**(uint32 base)|  |
-| void | **[ECAP_clearGlobalInterrupt](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-ecap_clearglobalinterrupt)**(uint32 base)|  |
+| void | **[ECAP_reArm](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-ecap_rearm)**(uint32 base)| Write to RE-ARM bit.  |
+| void | **[ECAP_clearGlobalInterrupt](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-ecap_clearglobalinterrupt)**(uint32 base)| Write to INT bit.  |
 | void | **[ICU_ECAP_captureLoadingEnable](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_captureloadingenable)**(uint32 baseAddr)| This function enables capture loading.  |
 | void | **[ICU_ECAP_captureLoadingDisable](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_captureloadingdisable)**(uint32 baseAddr)| This function disables capture loading.  |
 | void | **[ICU_ECAP_cap1Reset](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_cap1reset)**(uint32 baseAddr)| This function will reset the value of capture register cap1.  |
@@ -179,7 +179,7 @@ Values that can be passed to ECAP_selectQualPeriod() as the _mode_ parameter.
 | void | **[ICU_ECAP_intrStatusClear](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_intrstatusclear)**(uint32 baseAddr, uint32 flag)| This function clears of the status specified interrupts.  |
 | void | **[ICU_ECAP_setEmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setemulationmode)**(uint32 baseAddr, [ECAP_EmulationMode](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_emulationmode) mode)|  |
 | void | **[ICU_ECAP_selectQualPeriod](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_selectqualperiod)**(uint32 baseAddr, [ECAP_QualPeriodSelect](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_qualperiodselect) width)|  |
-| void | **[ICU_ECAP_setSyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setsyncinpulsesource)**(uint32 base, [ECAP_SyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_syncinpulsesource) source)|  |
+| void | **[ICU_ECAP_setSyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#function-icu_ecap_setsyncinpulsesource)**(uint32 base, [ECAP_SyncInPulseSource](../Modules/group___d_r_v___e_c_a_p___m_o_d_u_l_e.md#enum-ecap_syncinpulsesource) source)| Set ECAP Sync-In Source Mode.  |
 
 
 
@@ -192,6 +192,9 @@ static inline void ECAP_reArm(
 ```
 
 
+**Brief**: 
+Write to RE-ARM bit. 
+
 ### function ECAP_clearGlobalInterrupt
 
 ```
@@ -200,6 +203,9 @@ static inline void ECAP_clearGlobalInterrupt(
 )
 ```
 
+
+**Brief**: 
+Write to INT bit. 
 
 ### function ICU_ECAP_captureLoadingEnable
 
@@ -687,6 +693,9 @@ static inline void ICU_ECAP_setSyncInPulseSource(
 )
 ```
 
+
+**Brief**: 
+Set ECAP Sync-In Source Mode. 
 
 
 ## Detailed Description

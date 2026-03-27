@@ -179,6 +179,13 @@ uint32 HW_RD_REG32_RAW(uint32 addr)
         loop++;
     }
 
+    if ((ETH_TT_COVERAGE_FLAG_ETH_RECEIVE_WRD3_OWN_DISABLE == gEthCoverageTestFlag) &&
+        ((addr & 0x000FFFFFU) == CPSW_CPDMA_TH_CP_REG(0U))) /* 0: RX channel number */
+    {
+        regVal = 0xFFFFFFFFU;
+        loop++;
+    }
+
     if ((ETH_TT_COVERAGE_FLAG_ETH_RECEIVE_THRESH_WRD3_OWN_DISABLE == gEthCoverageTestFlag) &&
         ((addr & 0x000FFFFFU) == CPSW_SS_TH_THRESH_PULSE_STATUS_REG))
     {

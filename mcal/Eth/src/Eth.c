@@ -386,13 +386,36 @@ Eth_Init(P2CONST(Eth_ConfigType, AUTOMATIC, ETH_PBCFG) CfgPtr)
 
 #if (STD_ON == ETH_DEV_ERROR_DETECT)
         /* rxThresh must be below ETH_NUM_RX_BUFFERS else threshold interrupt happens continuously*/
-        if (((Std_ReturnType)E_OK == retVal) && (0U != ConfigPtr->cpdmaCfg.rxThreshCount) &&
-            (ETH_NUM_RX_BUFFERS < ConfigPtr->cpdmaCfg.rxThreshCount))
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+        if ((Std_ReturnType)E_OK == retVal)
+        {
+            uint32       i                                    = 0U;
+            const uint32 rxBufferSize[ETH_PRIORITY_QUEUE_NUM] = {
+                ETH_NUM_RX_BUFFERS_PRI_0, ETH_NUM_RX_BUFFERS_PRI_1, ETH_NUM_RX_BUFFERS_PRI_2, ETH_NUM_RX_BUFFERS_PRI_3,
+                ETH_NUM_RX_BUFFERS_PRI_4, ETH_NUM_RX_BUFFERS_PRI_5, ETH_NUM_RX_BUFFERS_PRI_6, ETH_NUM_RX_BUFFERS_PRI_7};
+
+            for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+            {
+                if (0U != rxBufferSize[i])
+                {
+                    if (rxBufferSize[i] <= ConfigPtr->cpdmaCfg.rxThreshCount[i])
+                    {
+                        (void)Det_ReportError(ETH_MODULE_ID, ETH_INSTANCE_ID, ETH_SID_INIT, ETH_E_INV_PARAM);
+                        retVal = E_NOT_OK;
+                    }
+                }
+            }
+        }
+#else
+        if (((Std_ReturnType)E_OK == retVal) &&
+            (0U != ConfigPtr->cpdmaCfg.rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM]) &&
+            (ETH_NUM_RX_BUFFERS <= ConfigPtr->cpdmaCfg.rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM]))
         {
             (void)Det_ReportError(ETH_MODULE_ID, ETH_INSTANCE_ID, ETH_SID_INIT, ETH_E_INV_PARAM);
             retVal = E_NOT_OK;
         }
-#endif
+#endif /* ETH_QOS_MULTI_QUEUE_SUPPORT */
+#endif /* ETH_DEV_ERROR_DETECT */
         if ((Std_ReturnType)E_OK == retVal)
         {
 #if (STD_OFF == ETH_VARIANT_PRE_COMPILE)
@@ -640,6 +663,15 @@ Eth_ProvideTxBuffer(VAR(uint8, AUTOMATIC) CtrlIdx, VAR(uint8, AUTOMATIC) Priorit
     /* Return if a development error occurred */
 #endif
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    if (((BufReq_ReturnType)BUFREQ_OK == retVal) && (Priority >= (uint8)ETH_PRIORITY_QUEUE_NUM))
+    {
+#if (ETH_DEV_ERROR_DETECT == STD_ON)
+        (void)Det_ReportError(ETH_MODULE_ID, ETH_INSTANCE_ID, ETH_SID_PROVIDE_TX_BUFFER, ETH_E_INV_PARAM);
+#endif
+        retVal = BUFREQ_E_NOT_OK;
+    }
+#else
     if (((BufReq_ReturnType)BUFREQ_OK == retVal) && (Priority != (uint8)0))
     {
 #if (ETH_DEV_ERROR_DETECT == STD_ON)
@@ -647,10 +679,15 @@ Eth_ProvideTxBuffer(VAR(uint8, AUTOMATIC) CtrlIdx, VAR(uint8, AUTOMATIC) Priorit
 #endif
         retVal = BUFREQ_E_NOT_OK;
     }
+#endif /* ETH_QOS_MULTI_QUEUE_SUPPORT */
 
     if ((BufReq_ReturnType)BUFREQ_OK == retVal)
     {
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+        retVal = Eth_provideHwTxBuffer(Priority, BufIdxPtr, BufPtr, LenBytePtr);
+#else
         retVal = Eth_provideHwTxBuffer(BufIdxPtr, BufPtr, LenBytePtr);
+#endif
     }
 
     return retVal;
@@ -731,7 +768,7 @@ Eth_Receive(VAR(uint8, AUTOMATIC) CtrlIdx, VAR(uint8, AUTOMATIC) FifoIdx,
 
     if ((Std_ReturnType)E_OK == retVal)
     {
-        Eth_receiveHw(RxStatusPtr);
+        Eth_receiveHw(FifoIdx, RxStatusPtr);
     }
 }
 
@@ -1514,11 +1551,25 @@ static FUNC(Std_ReturnType, ETH_CODE)
         retVal = E_NOT_OK;
     }
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    /* Mask Priority at upper byte */
+    if (((bufIdx & ETH_BUFFER_IDX_MASK) >= ETH_NUM_TX_BUFFERS) && (retVal == (Std_ReturnType)E_OK))
+#else
     if ((bufIdx >= ETH_NUM_TX_BUFFERS) && (retVal == (Std_ReturnType)E_OK))
+#endif
     {
         (void)Det_ReportError(ETH_MODULE_ID, ETH_INSTANCE_ID, ETH_SID_TRANSMIT, ETH_E_INV_PARAM);
         retVal = E_NOT_OK;
     }
+
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    /* Mask Priority at upper byte */
+    if (((bufIdx / ETH_PRIORITY_IDX_BASE) >= ETH_PRIORITY_QUEUE_NUM) && (retVal == (Std_ReturnType)E_OK))
+    {
+        (void)Det_ReportError(ETH_MODULE_ID, ETH_INSTANCE_ID, ETH_SID_TRANSMIT, ETH_E_INV_PARAM);
+        retVal = E_NOT_OK;
+    }
+#endif
 
     if ((Eth_DrvObj.ctrlMode != ETH_MODE_ACTIVE) && (retVal == (Std_ReturnType)E_OK))
     {
@@ -1560,8 +1611,12 @@ static FUNC(Std_ReturnType, ETH_CODE) Eth_checkReceiveErrors(uint8 ctrlIdx, uint
         retVal = E_NOT_OK;
     }
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    if ((FifoIdx >= (uint8)ETH_PRIORITY_QUEUE_NUM) && (retVal == (Std_ReturnType)E_OK))
+#else
     /* Priority is not supported and app should always pass it as 0 */
     if ((FifoIdx != (uint8)0) && (retVal == (Std_ReturnType)E_OK))
+#endif
     {
         (void)Det_ReportError(ETH_MODULE_ID, ETH_INSTANCE_ID, ETH_SID_RECEIVE, ETH_E_PARAM_POINTER);
         retVal = E_NOT_OK;

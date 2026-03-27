@@ -79,6 +79,9 @@
 /* \brief Octets of payload per console row */
 #define OCTETS_PER_ROW 16
 
+#ifndef NULL_PTR
+#define NULL_PTR ((void *)0U)
+#endif
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */

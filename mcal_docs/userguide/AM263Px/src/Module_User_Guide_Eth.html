@@ -2118,10 +2118,13 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 <tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
 <td><p>VARIANT-PRE-COMPILE</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
+<td><p>2</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Max-value</strong></p></td>
 <td><p>65535</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<tr class="row-even"><td><p><strong>Min-value</strong></p></td>
 <td><p>0</p></td>
 </tr>
 </tbody>
@@ -2612,8 +2615,8 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </tbody>
 </table>
 </section>
-<section id="ethrxthresholdcount">
-<h5><span class="section-number">4.13.9.1.6.7. </span>EthRxThresholdCount<a class="headerlink" href="#ethrxthresholdcount" title="Link to this heading"></a></h5>
+<section id="ethrxthresholdconfig">
+<h5><span class="section-number">4.13.9.1.6.7. </span>EthRxThresholdConfig<a class="headerlink" href="#ethrxthresholdconfig" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2622,13 +2625,67 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </thead>
 <tbody>
 <tr class="row-even"><td><p><strong>Name</strong></p></td>
-<td><p>EthRxThresholdCount</p></td>
+<td><p>EthRxThresholdConfig</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Port VID bit</p></td>
+<td><p>Number of remaining RX buffers to trigger RX threshold interrupt</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<tr class="row-even"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Origin</strong></p></td>
 <td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>4294967295</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="ethctrlconfigingressfiforef">
+<h5><span class="section-number">4.13.9.1.6.8. </span>EthCtrlConfigIngressFifoRef<a class="headerlink" href="#ethctrlconfigingressfiforef" title="Link to this heading"></a></h5>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>EthCtrlConfigIngressFifoRef</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>McuEthCtrConfig</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Multiplicity-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
 <td><p>false</p></td>
@@ -2639,14 +2696,8 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 <tr class="row-odd"><td><p>Post-Build-Time</p></td>
 <td><p>VARIANT-POST-BUILD</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
-<td><p>15</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Max-value</strong></p></td>
-<td><p>4294967295</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Min-value</strong></p></td>
-<td><p>0</p></td>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
 </tr>
 </tbody>
 </table>
@@ -3442,98 +3493,8 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </tbody>
 </table>
 </section>
-<section id="ethnumtxbuffers">
-<h4><span class="section-number">4.13.9.2.15. </span>EthNumTxBuffers<a class="headerlink" href="#ethnumtxbuffers" title="Link to this heading"></a></h4>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Item</p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Name</strong></p></td>
-<td><p>EthNumTxBuffers</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Number of TX buffers</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Origin</strong></p></td>
-<td><p>Texas Instruments</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
-<td><p>false</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
-<td><p>VARIANT-PRE-COMPILE</p></td>
-</tr>
-<tr class="row-even"><td><p>Link-Time</p></td>
-<td><p>VARIANT-LINK-TIME</p></td>
-</tr>
-<tr class="row-odd"><td><p>Post-Build-Time</p></td>
-<td><p>VARIANT-POST-BUILD</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
-<td><p>256</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Max-value</strong></p></td>
-<td><p>1024</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Min-value</strong></p></td>
-<td><p>8</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="ethnumrxbuffers">
-<h4><span class="section-number">4.13.9.2.16. </span>EthNumRxBuffers<a class="headerlink" href="#ethnumrxbuffers" title="Link to this heading"></a></h4>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Item</p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Name</strong></p></td>
-<td><p>EthNumRxBuffers</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Number of RX buffers</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Origin</strong></p></td>
-<td><p>Texas Instruments</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
-<td><p>false</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
-<td><p>VARIANT-PRE-COMPILE</p></td>
-</tr>
-<tr class="row-even"><td><p>Link-Time</p></td>
-<td><p>VARIANT-LINK-TIME</p></td>
-</tr>
-<tr class="row-odd"><td><p>Post-Build-Time</p></td>
-<td><p>VARIANT-POST-BUILD</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
-<td><p>256</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Max-value</strong></p></td>
-<td><p>1024</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Min-value</strong></p></td>
-<td><p>8</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="ethbuflenbyte">
-<h4><span class="section-number">4.13.9.2.17. </span>EthBufLenByte<a class="headerlink" href="#ethbuflenbyte" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.13.9.2.15. </span>EthBufLenByte<a class="headerlink" href="#ethbuflenbyte" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3577,47 +3538,8 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </tbody>
 </table>
 </section>
-<section id="ethautobuffrotation">
-<h4><span class="section-number">4.13.9.2.18. </span>EthAutoBuffRotation<a class="headerlink" href="#ethautobuffrotation" title="Link to this heading"></a></h4>
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Item</p></th>
-<th class="head"><p></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><strong>Name</strong></p></td>
-<td><p>EthAutoBuffRotation</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Enable/Disable automatic buffer rotation</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Origin</strong></p></td>
-<td><p>Texas Instruments</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
-<td><p>false</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
-<td><p>–</p></td>
-</tr>
-<tr class="row-odd"><td><p>Pre-Compile-Time</p></td>
-<td><p>VARIANT-PRE-COMPILE</p></td>
-</tr>
-<tr class="row-even"><td><p>Link-Time</p></td>
-<td><p>VARIANT-LINK-TIME</p></td>
-</tr>
-<tr class="row-odd"><td><p>Post-Build-Time</p></td>
-<td><p>VARIANT-POST-BUILD</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
-<td><p>true</p></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="ethdefaultoscounterid">
-<h4><span class="section-number">4.13.9.2.19. </span>EthDefaultOSCounterId<a class="headerlink" href="#ethdefaultoscounterid" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.13.9.2.16. </span>EthDefaultOSCounterId<a class="headerlink" href="#ethdefaultoscounterid" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3671,7 +3593,7 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethtimeoutduration">
-<h4><span class="section-number">4.13.9.2.20. </span>EthTimeoutDuration<a class="headerlink" href="#ethtimeoutduration" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.13.9.2.17. </span>EthTimeoutDuration<a class="headerlink" href="#ethtimeoutduration" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3713,7 +3635,7 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethoscounterref">
-<h4><span class="section-number">4.13.9.2.21. </span>EthOsCounterRef<a class="headerlink" href="#ethoscounterref" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.13.9.2.18. </span>EthOsCounterRef<a class="headerlink" href="#ethoscounterref" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3758,10 +3680,10 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethinterruptconfig">
-<h4><span class="section-number">4.13.9.2.22. </span>EthInterruptConfig<a class="headerlink" href="#ethinterruptconfig" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.13.9.2.19. </span>EthInterruptConfig<a class="headerlink" href="#ethinterruptconfig" title="Link to this heading"></a></h4>
 <p>interrupt configuration- misc interrupts flags.</p>
 <section id="ethstatsinterruptenable">
-<h5><span class="section-number">4.13.9.2.22.1. </span>EthStatsInterruptEnable<a class="headerlink" href="#ethstatsinterruptenable" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.13.9.2.19.1. </span>EthStatsInterruptEnable<a class="headerlink" href="#ethstatsinterruptenable" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3800,7 +3722,7 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethusrmdiointerruptenable">
-<h5><span class="section-number">4.13.9.2.22.2. </span>EthUsrMdioInterruptEnable<a class="headerlink" href="#ethusrmdiointerruptenable" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.13.9.2.19.2. </span>EthUsrMdioInterruptEnable<a class="headerlink" href="#ethusrmdiointerruptenable" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3839,7 +3761,7 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethhosterrorinterruptenable">
-<h5><span class="section-number">4.13.9.2.22.3. </span>EthHostErrorInterruptEnable<a class="headerlink" href="#ethhosterrorinterruptenable" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.13.9.2.19.3. </span>EthHostErrorInterruptEnable<a class="headerlink" href="#ethhosterrorinterruptenable" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3879,10 +3801,10 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </section>
 </section>
 <section id="ethctrloffloading">
-<h4><span class="section-number">4.13.9.2.23. </span>EthCtrlOffloading<a class="headerlink" href="#ethctrloffloading" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.13.9.2.20. </span>EthCtrlOffloading<a class="headerlink" href="#ethctrloffloading" title="Link to this heading"></a></h4>
 <p>Configuration of hardware offloading features.</p>
 <section id="ethctrlenableoffloadchecksumicmp">
-<h5><span class="section-number">4.13.9.2.23.1. </span>EthCtrlEnableOffloadChecksumICMP<a class="headerlink" href="#ethctrlenableoffloadchecksumicmp" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.13.9.2.20.1. </span>EthCtrlEnableOffloadChecksumICMP<a class="headerlink" href="#ethctrlenableoffloadchecksumicmp" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3918,7 +3840,7 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethctrlenableoffloadchecksumipv4">
-<h5><span class="section-number">4.13.9.2.23.2. </span>EthCtrlEnableOffloadChecksumIPv4<a class="headerlink" href="#ethctrlenableoffloadchecksumipv4" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.13.9.2.20.2. </span>EthCtrlEnableOffloadChecksumIPv4<a class="headerlink" href="#ethctrlenableoffloadchecksumipv4" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3954,7 +3876,7 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethctrlenableoffloadchecksumtcp">
-<h5><span class="section-number">4.13.9.2.23.3. </span>EthCtrlEnableOffloadChecksumTCP<a class="headerlink" href="#ethctrlenableoffloadchecksumtcp" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.13.9.2.20.3. </span>EthCtrlEnableOffloadChecksumTCP<a class="headerlink" href="#ethctrlenableoffloadchecksumtcp" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3990,7 +3912,7 @@ The Ethernet module may use OSEK/AUTOSAR OS to suspend and restore global interr
 </table>
 </section>
 <section id="ethctrlenableoffloadchecksumudp">
-<h5><span class="section-number">4.13.9.2.23.4. </span>EthCtrlEnableOffloadChecksumUDP<a class="headerlink" href="#ethctrlenableoffloadchecksumudp" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.13.9.2.20.4. </span>EthCtrlEnableOffloadChecksumUDP<a class="headerlink" href="#ethctrlenableoffloadchecksumudp" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>

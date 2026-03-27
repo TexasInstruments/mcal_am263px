@@ -154,6 +154,31 @@ extern "C" {
 /** \brief Enable/disable Eth traffic shaping  */
 #define ETH_TRAFFIC_SHAPING_API   (STD_ON)
 
+/** \brief Number of TX buffers */
+#define ETH_NUM_TX_BUFFERS_PRI_0    (16U)
+#define ETH_NUM_TX_BUFFERS_PRI_1    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_2    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_3    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_4    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_5    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_6    (0U)
+#define ETH_NUM_TX_BUFFERS_PRI_7    (0U)
+#define ETH_NUM_TX_BUFFERS          (0U + 16U + 0U + 0U + 0U + 0U + 0U + 0U + 0U)
+
+/** \brief Number of RX buffers */
+#define ETH_NUM_RX_BUFFERS_PRI_0    (16U)
+#define ETH_NUM_RX_BUFFERS_PRI_1    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_2    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_3    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_4    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_5    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_6    (0U)
+#define ETH_NUM_RX_BUFFERS_PRI_7    (0U)
+#define ETH_NUM_RX_BUFFERS          (0U + 16U + 0U + 0U + 0U + 0U + 0U + 0U + 0U)
+
+/** \brief Enable/disable Eth multi-queue QoS support  */
+#define ETH_QOS_MULTI_QUEUE_SUPPORT	(STD_OFF)
+
 /**
  *  \name Eth Buffer defines
  *
@@ -339,6 +364,9 @@ extern "C" {
  *
  *  @{
  */
+/* Forward declaration for Eth configuration structure */
+struct Eth_ConfigType_s;
+
 /** \brief ETH Configuration struct declaration */
 extern struct Eth_ConfigType_s Eth_Config;
 

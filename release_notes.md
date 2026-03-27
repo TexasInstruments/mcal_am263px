@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 25-Mar-2026.
+This is the release notes for MCAL AM26xx 26.00.00 done on 27-Mar-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -355,6 +355,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Duplicate uids across all modules are now replaced with new unique uids</td>
     </tr>
     <tr>
+      <td>MCAL-36718</td>
+      <td>Mismatch in PORT_PIN_MODE_TRACE vs PORT_PIN_MODE_TRC in AM263Px</td>
+      <td>Port</td>
+      <td>Major</td>
+      <td>AM263Px</td>
+      <td>All TRC Port_PinInitialMode and Port_PinMode is now updated to match TRC</td>
+    </tr>
+    <tr>
       <td>MCAL-35979,MCAL-35981</td>
       <td>Functions Wdg_SetMode and Wdg_SetTriggerCondition updated to have exclusive areas.</td>
       <td>WDG</td>
@@ -369,6 +377,17 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Wdg_ProcessTimeout() is removed from Wdg_SetTriggerCondition()</td>
+    </tr>
+    <tr>
+      <td>MCAL-30483</td>
+      <td>MCAL: Eth driver shall support QoS (multiqueue support)</td>
+      <td>ETH</td>
+      <td>Medium</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>ETH module shall support multiple queues in the following driver functions, as per AUTOSAR 4.3.1 specification<br>
+          - FifoIdx in Eth_Receive()<br>
+          - Priority in Eth_ProvideTxBuffer()<br>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -100,8 +100,9 @@ typedef Eth_PortObject *Eth_PortObjectPtrType;
  * Note - This is fixed, dont change */
 #define ETH_HOST_PORT_ID (0U)
 
-#define ntohs(a) ((((a) >> 8) & 0xffU) + (((a) << 8) & 0xff00U))
-#define htons(a) (ntohs(a))
+#define ETH_INVALID_BUFFER_IDX (0xFFFFFFFFU)
+#define ntohs(a)               ((((a) >> 8) & 0xffU) + (((a) << 8) & 0xff00U))
+#define htons(a)               (ntohs(a))
 
 #if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) || (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
 /* CPSW Checksum offload Encap Info length */
@@ -258,7 +259,11 @@ static void Eth_updateMacControlVal(const Eth_MacConfigType *pMACConfig, uint32 
 
 static void EthRxChTearDown(uint32 chNum);
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc, uint32 chNum);
+#else
 static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc);
+#endif
 
 static void Eth_configureSwitch(const uint8 macAddr[6]);
 
@@ -284,9 +289,16 @@ static uint32 EthCheckNullMACAddr(const uint8 macAddr[ETH_MAC_ADDR_LEN]);
 
 static void Eth_freeTxBuffers(Eth_TxBufObjType *bufObjArray, uint32 numBuffers);
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+static BufReq_ReturnType Eth_HwProvideTxBufferIdx(VAR(uint8, AUTOMATIC) Priority,
+                                                  P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
+                                                  P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
+                                                  P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr);
+#else
 static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
                                                   P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
                                                   P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr);
+#endif
 
 static void EthResetDrvObj(Eth_DrvObject *pEthDrvObj);
 
@@ -444,8 +456,6 @@ FUNC(void, ETH_CODE) Eth_initHw(const Eth_ConfigType *CfgPtr)
         portObj->txBufObjArray[i].txConfirmation = (boolean)FALSE;
     }
 
-    portObj->lastTxIdx = ETH_NUM_TX_BUFFERS - 1U;
-
     /* Copy RX buffer information into driver object */
     for (i = 0U; i < (uint16)ETH_NUM_RX_BUFFERS; i++)
     {
@@ -502,6 +512,9 @@ FUNC(void, ETH_CODE) Eth_initHw(const Eth_ConfigType *CfgPtr)
  */
 static void EthResetDrvObj(Eth_DrvObject *pEthDrvObj)
 {
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    uint32 i = 0U;
+#endif
     /* Always one controller */
     pEthDrvObj->ctrlIdx  = (uint8)0x0U;
     pEthDrvObj->ctrlMode = ETH_MODE_DOWN;
@@ -510,13 +523,24 @@ static void EthResetDrvObj(Eth_DrvObject *pEthDrvObj)
 
     /* clear port object structure */
     (void)memset(&(pEthDrvObj->portObj), 0, sizeof(pEthDrvObj->portObj));
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+    {
+        /* clear CPDMA config structure */
+        (void)memset(&(pEthDrvObj->rxDescRing[i]), 0, sizeof(Eth_CpdmaRxBuffDescQueue));
+        /* clear CPDMA config structure */
+        (void)memset(&(pEthDrvObj->txDescRing[i]), 0, sizeof(Eth_CpdmaTxBuffDescQueue));
+        pEthDrvObj->maxTxBuffDesc[i] = 0U;
+        pEthDrvObj->maxRxBuffDesc[i] = 0U;
+    }
+#else
     /* clear CPDMA config structure */
     (void)memset(&(pEthDrvObj->rxDescRing), 0, sizeof(pEthDrvObj->rxDescRing));
     /* clear CPDMA config structure */
     (void)memset(&(pEthDrvObj->txDescRing), 0, sizeof(pEthDrvObj->txDescRing));
     pEthDrvObj->maxTxBuffDesc = 0U;
     pEthDrvObj->maxRxBuffDesc = 0U;
-
+#endif
     /* clear CPDMA config structure */
     (void)memset(&(pEthDrvObj->statsObj), 0, sizeof(pEthDrvObj->statsObj));
 
@@ -535,6 +559,10 @@ static void EthCpswInstInit(uint32 portNum)
 {
     uint32               maskVar      = 0U;
     Eth_CpdmaConfigType *pCpdmaConfig = &(Eth_DrvObj.ethConfig.cpdmaCfg);
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    uint32 startIdx = 0U;
+    uint32 i        = 0U;
+#endif
 #if (ETH_ENABLE_MII_API == STD_ON)
     Eth_MdioConfigType *pMdioCfg = &Eth_DrvObj.ethConfig.mdioCfg;
 
@@ -585,17 +613,70 @@ static void EthCpswInstInit(uint32 portNum)
      * Currently no. of descriptors can not be more than
      * number of buffers
      */
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    Eth_DrvObj.maxTxBuffDesc[0] = ETH_NUM_TX_BUFFERS_PRI_0;
+    Eth_DrvObj.maxTxBuffDesc[1] = ETH_NUM_TX_BUFFERS_PRI_1;
+    Eth_DrvObj.maxTxBuffDesc[2] = ETH_NUM_TX_BUFFERS_PRI_2;
+    Eth_DrvObj.maxTxBuffDesc[3] = ETH_NUM_TX_BUFFERS_PRI_3;
+    Eth_DrvObj.maxTxBuffDesc[4] = ETH_NUM_TX_BUFFERS_PRI_4;
+    Eth_DrvObj.maxTxBuffDesc[5] = ETH_NUM_TX_BUFFERS_PRI_5;
+    Eth_DrvObj.maxTxBuffDesc[6] = ETH_NUM_TX_BUFFERS_PRI_6;
+    Eth_DrvObj.maxTxBuffDesc[7] = ETH_NUM_TX_BUFFERS_PRI_7;
+    for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+    {
+        Eth_DrvObj.txBufStartIdx[i] = startIdx;
+        if (0U != Eth_DrvObj.maxTxBuffDesc[i])
+        {
+            Eth_DrvObj.lastTxIdx[i] = startIdx + Eth_DrvObj.maxTxBuffDesc[i] - 1U;
+        }
+        else
+        {
+            Eth_DrvObj.lastTxIdx[i] = ETH_INVALID_BUFFER_IDX;
+        }
+        startIdx += Eth_DrvObj.maxTxBuffDesc[i];
+    }
+
+    Eth_DrvObj.maxRxBuffDesc[0] = ETH_NUM_RX_BUFFERS_PRI_0;
+    Eth_DrvObj.maxRxBuffDesc[1] = ETH_NUM_RX_BUFFERS_PRI_1;
+    Eth_DrvObj.maxRxBuffDesc[2] = ETH_NUM_RX_BUFFERS_PRI_2;
+    Eth_DrvObj.maxRxBuffDesc[3] = ETH_NUM_RX_BUFFERS_PRI_3;
+    Eth_DrvObj.maxRxBuffDesc[4] = ETH_NUM_RX_BUFFERS_PRI_4;
+    Eth_DrvObj.maxRxBuffDesc[5] = ETH_NUM_RX_BUFFERS_PRI_5;
+    Eth_DrvObj.maxRxBuffDesc[6] = ETH_NUM_RX_BUFFERS_PRI_6;
+    Eth_DrvObj.maxRxBuffDesc[7] = ETH_NUM_RX_BUFFERS_PRI_7;
+
+    for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+    {
+        if (pCpdmaConfig->rxThreshCount[i] != (uint32)0U)
+        {
+            /* Reset the free buffer count for this channel
+             * (it is write to increment, force to rollover to zero) */
+            CpswCpdma_setRxChFreeBufCnt(Eth_DrvObj.baseAddr, i, Eth_DrvObj.maxRxBuffDesc[i]);
+
+            /* Set the threshold for the RX_THRESH interrupt trigger */
+            CpswCpdma_setRxChThresh(Eth_DrvObj.baseAddr, i, pCpdmaConfig->rxThreshCount[i]);
+
+            /* Enable Rx threshold interrupt in CPDMA */
+            CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, i, CPSW_CH_INTR_RX_THR);
+
+            /* Enable Rx threshold interrupt in subsystem */
+            Cpsw_enableChIntr(Eth_DrvObj.baseAddr, i, CPSW_CH_INTR_RX_THR);
+        }
+    }
+#else
     Eth_DrvObj.maxTxBuffDesc = (uint32)ETH_NUM_TX_BUFFERS;
+    Eth_DrvObj.lastTxIdx     = ETH_NUM_TX_BUFFERS - 1U;
     Eth_DrvObj.maxRxBuffDesc = (uint32)ETH_NUM_RX_BUFFERS;
 
-    if (pCpdmaConfig->rxThreshCount != (uint32)0U)
+    if (pCpdmaConfig->rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM] != (uint32)0U)
     {
         /* Reset the free buffer count for this channel
          * (it is write to increment, force to rollover to zero) */
         CpswCpdma_setRxChFreeBufCnt(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, Eth_DrvObj.maxRxBuffDesc);
 
         /* Set the threshold for the RX_THRESH interrupt trigger */
-        CpswCpdma_setRxChThresh(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, pCpdmaConfig->rxThreshCount);
+        CpswCpdma_setRxChThresh(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM,
+                                pCpdmaConfig->rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM]);
 
         /* Enable Rx threshold interrupt in CPDMA */
         CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
@@ -603,6 +684,7 @@ static void EthCpswInstInit(uint32 portNum)
         /* Enable Rx threshold interrupt in subsystem */
         Cpsw_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
     }
+#endif
 }
 
 static void Eth_macSetConfig(uint8 portNum, const Eth_MacConfigType *pMACConfig)
@@ -806,7 +888,11 @@ Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
     uint32         rxChNum = ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM;
     uint32         txChNum = ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM;
     uint8          portIdx = Eth_DrvObj.portObj.portNum;
-
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    uint32 i           = 0U;
+    uint32 startTxAddr = Eth_DrvObj.txDescMemBaseAddr;
+    uint32 startRxAddr = Eth_DrvObj.rxDescMemBaseAddr;
+#endif
     /* Only process if input CtrlMode differs with current mode */
     if (Eth_DrvObj.ctrlMode != CtrlMode)
     {
@@ -841,8 +927,21 @@ Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
              */
             SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
             Eth_freeTxBuffers(Eth_DrvObj.portObj.txBufObjArray, ETH_NUM_TX_BUFFERS);
-            Eth_DrvObj.portObj.lastTxIdx = ETH_NUM_TX_BUFFERS - 1U;
-
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+            for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+            {
+                if (0U != Eth_DrvObj.maxTxBuffDesc[i])
+                {
+                    Eth_DrvObj.lastTxIdx[i] = Eth_DrvObj.txBufStartIdx[i] + Eth_DrvObj.maxTxBuffDesc[i] - 1U;
+                }
+                else
+                {
+                    Eth_DrvObj.lastTxIdx[i] = ETH_INVALID_BUFFER_IDX;
+                }
+            }
+#else
+            Eth_DrvObj.lastTxIdx = ETH_NUM_TX_BUFFERS - 1U;
+#endif
             /* Disable the transmission and reception */
             CpswCpdma_disableTxCh(Eth_DrvObj.baseAddr);
             CpswCpdma_disableRxCh(Eth_DrvObj.baseAddr);
@@ -866,7 +965,22 @@ Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
              * buffers
              */
             SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+            for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+            {
+                EthTxBuffDescInit(CtrlIdx, &(Eth_DrvObj.txDescRing[i]), Eth_DrvObj.maxTxBuffDesc[i], startTxAddr);
+                startTxAddr += Eth_DrvObj.maxTxBuffDesc[i] * sizeof(Eth_CpdmaTxBuffDescType);
 
+                EthRxBuffDescInit(CtrlIdx, &(Eth_DrvObj.rxDescRing[i]), Eth_DrvObj.maxRxBuffDesc[i], startRxAddr);
+                startRxAddr += Eth_DrvObj.maxRxBuffDesc[i] * sizeof(Eth_CpdmaRxBuffDescType);
+                if (0U != Eth_DrvObj.maxRxBuffDesc[i])
+                {
+                    /* Enable all transmit and receive buffers */
+                    CpswCpdma_writeRxChHdp(Eth_DrvObj.baseAddr,
+                                           Eth_locToGlobAddr((uintptr_t)Eth_DrvObj.rxDescRing[i].pHead), i);
+                }
+            }
+#else
             EthTxBuffDescInit(CtrlIdx, &(Eth_DrvObj.txDescRing), Eth_DrvObj.maxTxBuffDesc,
                               Eth_DrvObj.txDescMemBaseAddr);
 
@@ -876,7 +990,7 @@ Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
             /* Enable all transmit and receive buffers */
             CpswCpdma_writeRxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)Eth_DrvObj.rxDescRing.pHead),
                                    rxChNum);
-
+#endif
             /* Open the stats module */
             CpswStats_init(Eth_DrvObj.baseAddr, &Eth_DrvObj.statsObj, portIdx);
 
@@ -1107,6 +1221,9 @@ static void Eth_freeTxBuffers(Eth_TxBufObjType *bufObjArray, uint32 numBuffers)
 
 static void Eth_enableControllerToTransmitAndReceiveBuffers(const Eth_CpdmaConfigType *pCpdmaConfig)
 {
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    uint32 i = 0U;
+#endif
     /*
      *  Acknowledge receive and transmit interrupts for proper interrupt
      *  pulsing
@@ -1116,10 +1233,20 @@ static void Eth_enableControllerToTransmitAndReceiveBuffers(const Eth_CpdmaConfi
     CpswCpdma_writeEoiVector(Eth_DrvObj.baseAddr, CPSW_WR_INTR_LINE_RX_THR);
 
     /* Enable the interrupts for channel 0 and for control core 0 */
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+    {
+        CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, i, CPSW_CH_INTR_RX);
+        Cpsw_enableChIntr(Eth_DrvObj.baseAddr, i, CPSW_CH_INTR_RX);
+        CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, i, CPSW_CH_INTR_TX);
+        Cpsw_enableChIntr(Eth_DrvObj.baseAddr, i, CPSW_CH_INTR_TX);
+    }
+#else
     CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
     Cpsw_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
     CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM, CPSW_CH_INTR_TX);
     Cpsw_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM, CPSW_CH_INTR_TX);
+#endif
 
 #if (ETH_HOST_ERROR_INTERRUPT == STD_ON)
     /* Enable host port error interrupts */
@@ -1198,17 +1325,23 @@ static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaRxBuffDescQueue *pRing, ui
     Eth_CpdmaRxBuffDescType *pCurrBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
     Eth_CpdmaRxBuffDescType *pLastBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
     Eth_RxBufObjType        *pEthBufObj    = (Eth_RxBufObjType *)NULL_PTR;
-    uint32                   bufIdx        = 0;
+    uint32                   bufIdx        = 0U;
+    uint32                   rxStartIdx    = 0U;
+
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    rxStartIdx  = startAddr - Eth_DrvObj.rxDescMemBaseAddr;
+    rxStartIdx /= sizeof(Eth_CpdmaRxBuffDescType);
+#endif
     (void)ctrlIdx; /* MISRA C Compliance - Reserved for future use */
 
     pRing->pHead  = (Eth_CpdmaRxBuffDescType *)startAddr;
     pCurrBuffDesc = pRing->pHead;
 
     /* Init and allocate buffer desc */
-    for (bufIdx = 0; bufIdx < numBuffDesc; bufIdx++)
+    for (bufIdx = 0U; bufIdx < numBuffDesc; bufIdx++)
     {
         /* Allocate and init buffer object */
-        pEthBufObj = &Eth_DrvObj.portObj.rxBufObjArray[bufIdx];
+        pEthBufObj = &Eth_DrvObj.portObj.rxBufObjArray[bufIdx + rxStartIdx];
         /* Init desc pointer */
         pCurrBuffDesc->pNextBuffDesc         = pCurrBuffDesc + 0x1U;
         pCurrBuffDesc->globalNextDescPointer = Eth_locToGlobAddr((uintptr_t)(pCurrBuffDesc->pNextBuffDesc));
@@ -1228,7 +1361,7 @@ static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaRxBuffDescQueue *pRing, ui
     }
 
     /* Init ring buffer */
-    if (0U != bufIdx)
+    if (0U != numBuffDesc)
     {
         /* Link last desc to head to create ring */
         /* We are going to receive starting from the free head */
@@ -1243,19 +1376,26 @@ static void EthRxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaRxBuffDescQueue *pRing, ui
         pRing->pTail->globalNextDescPointer = 0U;
 
         /*Update actual buffer desc length */
-        pRing->freeBuffDesc = bufIdx;
+        pRing->freeBuffDesc = numBuffDesc;
     }
     else
     {
         pRing->pHead        = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
         pRing->pTail        = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
-        pRing->freeBuffDesc = 0;
+        pRing->freeBuffDesc = 0U;
     }
 }
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+static BufReq_ReturnType Eth_HwProvideTxBufferIdx(VAR(uint8, AUTOMATIC) Priority,
+                                                  P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
+                                                  P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
+                                                  P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr)
+#else
 static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
                                                   P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
                                                   P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr)
+#endif
 {
     Eth_BufIdxType      bufIdx       = 0;
     uint16              allocBuffLen = 0U;
@@ -1266,12 +1406,25 @@ static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATI
     /* Each port is considered as one controller */
     pPortObj = &(Eth_DrvObj.portObj);
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    bufIdx = Eth_DrvObj.lastTxIdx[Priority] + 1U;
+    if (bufIdx >= (Eth_DrvObj.txBufStartIdx[Priority] + Eth_DrvObj.maxTxBuffDesc[Priority]))
+    {
+        bufIdx = Eth_DrvObj.txBufStartIdx[Priority];
+    }
+#else
     /* This function is only called if having freeBuffDesc, next Tx idx is free buffer */
-    bufIdx       = (pPortObj->lastTxIdx + 1U) % ETH_NUM_TX_BUFFERS;
-    *BufIdxPtr   = bufIdx;
+    bufIdx = (Eth_DrvObj.lastTxIdx + 1U) % ETH_NUM_TX_BUFFERS;
+#endif
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    *BufIdxPtr                      = Priority * ETH_PRIORITY_IDX_BASE; /* store Priority at high byte */
+    *BufIdxPtr                     += bufIdx;
+    Eth_DrvObj.lastTxIdx[Priority]  = bufIdx; /* store last used index */
+#else
+    *BufIdxPtr           = bufIdx;
+    Eth_DrvObj.lastTxIdx = bufIdx; /* store last used index */
+#endif
     allocBuffLen = pPortObj->txBufObjArray[bufIdx].len;
-
-    pPortObj->lastTxIdx = bufIdx; /* store last used index */
 
     /* Add Ethernet header length to BufPtr and return to application */
     ethFrame                                 = pPortObj->txBufObjArray[bufIdx].payload;
@@ -1281,7 +1434,11 @@ static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATI
     /* Enter critical section */
     SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
     /* Decrement free bds, since one is consumed */
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    Eth_DrvObj.txDescRing[Priority].freeBuffDesc -= 1U;
+#else
     Eth_DrvObj.txDescRing.freeBuffDesc -= 1U;
+#endif
     /* Exit critical section */
     SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
 
@@ -1309,15 +1466,34 @@ static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATI
     return retVal;
 }
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+FUNC(BufReq_ReturnType, ETH_CODE)
+Eth_provideHwTxBuffer(VAR(uint8, AUTOMATIC) Priority, P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
+                      P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
+                      P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr)
+#else
 FUNC(BufReq_ReturnType, ETH_CODE)
 Eth_provideHwTxBuffer(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
                       P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) * BufPtr,
                       P2VAR(uint16, AUTOMATIC, ETH_APPL_DATA) LenBytePtr)
+#endif
 {
     BufReq_ReturnType retVal = BUFREQ_E_NOT_OK;
 
 /* Try to process TX buffer to get free desc before TX IRQ happens */
 #if (STD_ON == ETH_ENABLE_TX_INTERRUPT)
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    if ((uint32)0U == Eth_DrvObj.txDescRing[Priority].freeBuffDesc)
+    {
+        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
+        /* Below process TX will exit then re-enter exclusive with EthIf tx confirm callback,
+           disable TX interrupt here to avoid race condition with process TX in IRQ handler */
+        CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, Priority, CPSW_CH_INTR_TX);
+        Eth_processTxBuffDesc(Eth_DrvObj.ctrlIdx, Priority);
+        CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, Priority, CPSW_CH_INTR_TX);
+        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
+    }
+#else
     if ((uint32)0U == Eth_DrvObj.txDescRing.freeBuffDesc)
     {
         SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
@@ -1329,6 +1505,7 @@ Eth_provideHwTxBuffer(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
         SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
 #endif
+#endif
 
     /* Make sure to get empty buffer to fit data and header */
 
@@ -1338,7 +1515,16 @@ Eth_provideHwTxBuffer(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
      * may encounter a case where buffer is available but not buffer
      * descriptor.
      */
-
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    if ((uint32)0U == Eth_DrvObj.txDescRing[Priority].freeBuffDesc)
+    {
+        retVal = BUFREQ_E_BUSY;
+    }
+    else
+    {
+        retVal = Eth_HwProvideTxBufferIdx(Priority, BufIdxPtr, BufPtr, LenBytePtr);
+    }
+#else
     if ((uint32)0U == Eth_DrvObj.txDescRing.freeBuffDesc)
     {
         retVal = BUFREQ_E_BUSY;
@@ -1347,6 +1533,7 @@ Eth_provideHwTxBuffer(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
     {
         retVal = Eth_HwProvideTxBufferIdx(BufIdxPtr, BufPtr, LenBytePtr);
     }
+#endif
 
     return retVal;
 }
@@ -1469,16 +1656,24 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
                VAR(boolean, AUTOMATIC) TxConfirmation, VAR(uint16, AUTOMATIC) LenByte,
                P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) PhysAddrPtr)
 {
-    Std_ReturnType      retVal   = E_OK;
-    Eth_PortObject     *pPortObj = (Eth_PortObject *)NULL_PTR;
-    Eth_PortConfigType *pPortCfg = (Eth_PortConfigType *)NULL_PTR;
-    uint32              totalLen = 0U;
+    Std_ReturnType      retVal      = E_OK;
+    Eth_PortObject     *pPortObj    = (Eth_PortObject *)NULL_PTR;
+    Eth_PortConfigType *pPortCfg    = (Eth_PortConfigType *)NULL_PTR;
+    uint32              totalLen    = 0U;
+    uint32              localBufIdx = BufIdx;
+
+    /* Get priority and pure buffer index */
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    uint32 priority = 0U;
+    priority        = BufIdx / ETH_PRIORITY_IDX_BASE;
+    localBufIdx     = BufIdx & ETH_BUFFER_IDX_MASK;
+#endif
 
     /* Each port is considered as one controller */
     pPortObj = &(Eth_DrvObj.portObj);
     pPortCfg = &pPortObj->portCfg;
 
-    if (ETH_BUF_STATE_FREE == pPortObj->txBufObjArray[BufIdx].bufState)
+    if (ETH_BUF_STATE_FREE == pPortObj->txBufObjArray[localBufIdx].bufState)
     {
         /*
          * Buffer is not allocated through call to Eth_ProvideTxBuffer or
@@ -1488,11 +1683,14 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
     }
     else
     {
-        Eth_TxFrameObjType       *pDataBuffer;
-        Eth_CpdmaTxBuffDescType  *pXmitTxBuffDesc;
-        Eth_TxBufObjType         *pTempBufObj = &(pPortObj->txBufObjArray[BufIdx]);
+        Eth_TxFrameObjType      *pDataBuffer;
+        Eth_CpdmaTxBuffDescType *pXmitTxBuffDesc;
+        Eth_TxBufObjType        *pTempBufObj = &(pPortObj->txBufObjArray[localBufIdx]);
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+        Eth_CpdmaTxBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing[priority]);
+#else
         Eth_CpdmaTxBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing);
-
+#endif
         /* Take packet from Tx Buffer ring using BufIdx */
         pDataBuffer = pTempBufObj->payload;
         totalLen    = (uint32)LenByte + ETH_HLEN;
@@ -1607,9 +1805,14 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
             pTxDescRing->pTail      = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
 
             /* start new queue DMA */
-            pTxDescRing->pQueueTail->globalNextDescPointer = 0;
+            pTxDescRing->pQueueTail->globalNextDescPointer = 0U;
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+            CpswCpdma_writeTxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)pTxDescRing->pQueueHead),
+                                   priority);
+#else
             CpswCpdma_writeTxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)pTxDescRing->pQueueHead),
                                    ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM);
+#endif
         }
         else
         {
@@ -1632,7 +1835,7 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
 }
 
 FUNC(void, ETH_CODE)
-Eth_receiveHw(P2VAR(Eth_RxStatusType, AUTOMATIC, ETH_APPL_DATA) RxStatusPtr)
+Eth_receiveHw(VAR(uint8, AUTOMATIC) FifoIdx, P2VAR(Eth_RxStatusType, AUTOMATIC, ETH_APPL_DATA) RxStatusPtr)
 {
     uint32 rxIntFlags = 0U, threshIntFlags = 0U;
     uint32 channelNum = 0U, channelMask = 0U;
@@ -1644,37 +1847,46 @@ Eth_receiveHw(P2VAR(Eth_RxStatusType, AUTOMATIC, ETH_APPL_DATA) RxStatusPtr)
 
     rxIntFlags |= threshIntFlags;
 
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    channelNum      = FifoIdx;
+    channelMask     = (uint32)0x1U << channelNum;
+    threshIntFlags &= channelMask;
+#else
+    (void)FifoIdx; /* MISRA C Compliance */
     /* Look for receive interrupts from across all CPDMA Rx Channels */
     while ((uint32)0U != rxIntFlags)
     {
         channelMask = (uint32)0x1U << channelNum;
-
-        if ((uint32)0U != (uint32)(rxIntFlags & channelMask))
-        {
-            SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
-
-            *RxStatusPtr = EthRxBuffDescProcessSingle(Eth_DrvObj.ctrlIdx, channelNum);
-            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-        }
-
-        /* Clear the channel flag for the channel just handled */
-        rxIntFlags &= ~channelMask;
-        channelNum++;
-    }
-
-    if (ETH_NOT_RECEIVED != *RxStatusPtr)
+#endif
+    if ((uint32)0U != (uint32)(rxIntFlags & channelMask))
     {
-        if ((uint32)0U != threshIntFlags)
-        {
-            /* All outstanding RX_THRESH interrupts were handled */
-            CpswCpdma_writeEoiVector(Eth_DrvObj.baseAddr, CPSW_WR_INTR_LINE_RX_THR);
-        }
+        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
 
-        /* Write the EOI register */
-        CpswCpdma_writeEoiVector(Eth_DrvObj.baseAddr, CPSW_WR_INTR_LINE_RX);
+        *RxStatusPtr = EthRxBuffDescProcessSingle(Eth_DrvObj.ctrlIdx, channelNum);
+        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
 
-    return;
+#if (STD_OFF == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    /* Clear the channel flag for the channel just handled */
+    rxIntFlags &= ~channelMask;
+
+    channelNum++;
+}
+#endif
+
+if (ETH_NOT_RECEIVED != *RxStatusPtr)
+{
+    if ((uint32)0U != threshIntFlags)
+    {
+        /* All outstanding RX_THRESH interrupts were handled */
+        CpswCpdma_writeEoiVector(Eth_DrvObj.baseAddr, CPSW_WR_INTR_LINE_RX_THR);
+    }
+
+    /* Write the EOI register */
+    CpswCpdma_writeEoiVector(Eth_DrvObj.baseAddr, CPSW_WR_INTR_LINE_RX);
+}
+
+return;
 }
 
 static void EthRxBuffDescRxStatus(const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc, Eth_RxStatusType *rxStatus)
@@ -1693,11 +1905,15 @@ static void EthRxBuffDescRxStatus(const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc
 
 static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
 {
-    Eth_CpdmaRxBuffDescType  *pCurrRxBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
-    Eth_CpdmaRxBuffDescQueue *pRxDescRing     = &(Eth_DrvObj.rxDescRing);
-    uint32                    cp              = 0U;
-    Eth_RxStatusType          rxStatus        = ETH_NOT_RECEIVED;
-    uint32                    endOfQueueFlag  = 0U;
+    Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    Eth_CpdmaRxBuffDescQueue *pRxDescRing = &(Eth_DrvObj.rxDescRing[chNum]);
+#else
+        Eth_CpdmaRxBuffDescQueue *pRxDescRing = &(Eth_DrvObj.rxDescRing);
+#endif
+    uint32           cp             = 0U;
+    Eth_RxStatusType rxStatus       = ETH_NOT_RECEIVED;
+    uint32           endOfQueueFlag = 0U;
 
     cp = CpswCpdma_readRxChCp(Eth_DrvObj.baseAddr, chNum);
 
@@ -1714,8 +1930,11 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
         if (CPSW_CPDMA_WRD3_OWN_DISABLE ==
             (uint32)HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_OWN))
         {
-            EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc);
-
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+            EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc, chNum);
+#else
+                EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc);
+#endif
             /* Get endOfQueueFlag before update desc */
             endOfQueueFlag = HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_EOQ);
 
@@ -1728,7 +1947,7 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
              * increment number of buffers available(This is a write to
              * increment field).
              */
-            if ((uint32)0U != Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount)
+            if ((uint32)0U != Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[chNum])
             {
                 CpswCpdma_setRxChFreeBufCnt(Eth_DrvObj.baseAddr, chNum, 1U);
             }
@@ -1772,7 +1991,11 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
     return rxStatus;
 }
 
-static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc)
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc, uint32 chNum)
+#else
+    static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc)
+#endif
 {
     uint16              totLen = 0U, dataLen = 0U;
     uint8               srcMacAddr[ETH_MAC_ADDR_LEN] = {0U, 0U, 0U, 0U, 0U, 0U};
@@ -1869,19 +2092,35 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCu
         /* Release SchM before notify upper layer */
         /* Both RX IRQ and RX Threshold IRQ handler may call EthIf_Rxindication(),
          * disable both RX IRQs here to avoid race condition */
-        CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
-        if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount != (uint32)0U)
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+        CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, chNum, CPSW_CH_INTR_RX);
+        if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[chNum] != (uint32)0U)
         {
-            CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+            CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, chNum, CPSW_CH_INTR_RX_THR);
         }
         SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
         EthIf_RxIndication(ctrlIdx, frameType, isBroadcast, &srcMacAddr[0U], (Eth_DataType *)frameDataPtr, dataLen);
         SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
-        CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
-        if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount != (uint32)0U)
+        CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, chNum, CPSW_CH_INTR_RX);
+        if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[chNum] != (uint32)0U)
         {
-            CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+            CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, chNum, CPSW_CH_INTR_RX_THR);
         }
+#else
+            CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
+            if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM] != (uint32)0U)
+            {
+                CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+            }
+            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
+            EthIf_RxIndication(ctrlIdx, frameType, isBroadcast, &srcMacAddr[0U], (Eth_DataType *)frameDataPtr, dataLen);
+            SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
+            CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
+            if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM] != (uint32)0U)
+            {
+                CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
+            }
+#endif
     }
 }
 
@@ -1933,11 +2172,15 @@ static void EthRxBuffDescEnqueue(Eth_CpdmaRxBuffDescQueue *pRxDescRing, Eth_Cpdm
 
 void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
 {
-    Eth_CpdmaRxBuffDescType  *pCurrRxBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
-    Eth_CpdmaRxBuffDescType  *pLastBuffDesc   = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
-    Eth_CpdmaRxBuffDescQueue *pRxDescRing     = &(Eth_DrvObj.rxDescRing);
-    uint32                    cp = 0U, packetCount = 0U;
-    uint32                    endOfQueueFlag = 0U;
+    Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+    Eth_CpdmaRxBuffDescType *pLastBuffDesc   = (Eth_CpdmaRxBuffDescType *)NULL_PTR;
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    Eth_CpdmaRxBuffDescQueue *pRxDescRing = &(Eth_DrvObj.rxDescRing[chNum]);
+#else
+        Eth_CpdmaRxBuffDescQueue *pRxDescRing = &(Eth_DrvObj.rxDescRing);
+#endif
+    uint32 cp = 0U, packetCount = 0U;
+    uint32 endOfQueueFlag = 0U;
 
     cp = CpswCpdma_readRxChCp(Eth_DrvObj.baseAddr, chNum);
 
@@ -1954,7 +2197,11 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
         while (CPSW_CPDMA_WRD3_OWN_DISABLE ==
                (uint32)HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_OWN))
         {
-            EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc);
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+            EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc, chNum);
+#else
+                EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc);
+#endif
             /* Get endOfQueueFlag before update desc */
             endOfQueueFlag = HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_EOQ);
 
@@ -1976,7 +2223,7 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
              * increment number of buffers available(This is a write to
              * increment field).
              */
-            if ((uint32)0U != Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount)
+            if ((uint32)0U != Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[chNum])
             {
                 CpswCpdma_setRxChFreeBufCnt(Eth_DrvObj.baseAddr, chNum, packetCount);
             }
@@ -2075,10 +2322,14 @@ static void EthTxBuffProcess(uint8 ctrlIdx, Eth_TxBufObjType *pBufObj)
 
 void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
 {
-    Eth_CpdmaTxBuffDescType  *pCurrTxBuffDesc = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
-    Eth_CpdmaTxBuffDescType  *pLastBuffDesc   = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
-    uint32                    endOfQueueFlag  = 0U;
-    Eth_CpdmaTxBuffDescQueue *pTxDescRing     = &(Eth_DrvObj.txDescRing);
+    Eth_CpdmaTxBuffDescType *pCurrTxBuffDesc = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    Eth_CpdmaTxBuffDescType *pLastBuffDesc   = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
+    uint32                   endOfQueueFlag  = 0U;
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    Eth_CpdmaTxBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing[chNum]);
+#else
+        Eth_CpdmaTxBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing);
+#endif
 
     if (NULL_PTR != pTxDescRing->pQueueHead) /*only check if TX in progress */
     {
@@ -2147,6 +2398,9 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
 
 void Eth_processTxTearDown(uint32 chNum)
 {
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    uint32 i = 0U;
+#endif
     /* Channel teardown */
     Eth_PortObjectPtrType portObj = Eth_getCurrPortObj();
 
@@ -2158,7 +2412,21 @@ void Eth_processTxTearDown(uint32 chNum)
     CpswCpdma_disableTxCh(Eth_DrvObj.baseAddr);
 
     Eth_freeTxBuffers(portObj->txBufObjArray, ETH_NUM_TX_BUFFERS);
-    portObj->lastTxIdx = ETH_NUM_TX_BUFFERS - 1U;
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    for (i = 0U; i < ETH_PRIORITY_QUEUE_NUM; i++)
+    {
+        if (0U != Eth_DrvObj.maxTxBuffDesc[i])
+        {
+            Eth_DrvObj.lastTxIdx[i] = Eth_DrvObj.txBufStartIdx[i] + Eth_DrvObj.maxTxBuffDesc[i] - 1U;
+        }
+        else
+        {
+            Eth_DrvObj.lastTxIdx[i] = ETH_INVALID_BUFFER_IDX;
+        }
+    }
+#else
+        Eth_DrvObj.lastTxIdx = ETH_NUM_TX_BUFFERS - 1U;
+#endif
 
     /*
      * Set Eth controller mode to disabled if both RX and TX

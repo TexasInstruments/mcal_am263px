@@ -177,13 +177,15 @@ char *ethRcvStatusString[3] = {
 
 Eth_MdioConfigType gMdioCfg = {.mdioBusFreq = 22000000U, .mdioClockFreq = 200000000U};
 
-Eth_CpdmaConfigType gCpdmaCfg = {.pacingClkFreq            = 125000000U,
-                                 .rxInterruptPacingEnabled = (uint32)TRUE,
-                                 .rxInterruptsPerMsec      = 2U,
-                                 .txInterruptPacingEnabled = (uint32)TRUE,
-                                 .txInterruptsPerMsec      = 2U,
-                                 .dmaModeFlags             = 0U,
-                                 .rxThreshCount            = 0x0F};
+Eth_CpdmaConfigType gCpdmaCfg = {
+    .pacingClkFreq            = 125000000U,
+    .rxInterruptPacingEnabled = (uint32)TRUE,
+    .rxInterruptsPerMsec      = 2U,
+    .txInterruptPacingEnabled = (uint32)TRUE,
+    .txInterruptsPerMsec      = 2U,
+    .dmaModeFlags             = 0U,
+    .rxThreshCount            = {1U, 0U, 0U, 0U, 0U, 0U, 0U, 0U},
+};
 
 Eth_CptsConfigType gCptsCfg = {
     /* 200U MHz */

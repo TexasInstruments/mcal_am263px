@@ -86,7 +86,9 @@
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
-
+#ifndef NULL_PTR
+#define NULL_PTR ((void *)0U)
+#endif
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -388,6 +390,11 @@ bool HostApp_test_0302(void);
 /* Traffic shaping test */
 bool HostApp_test_0400(void);
 
+/* Rx QOS test */
+bool HostApp_test_0610(void);
+
+/* Tx QOS test */
+bool HostApp_test_0611(void);
 /* Tx IRQ pacing test */
 bool HostApp_test_0201(void);
 
@@ -398,20 +405,25 @@ bool HostApp_test_0202(void);
 /*                            Global Variables                                */
 /* ========================================================================== */
 
-TestFunc testFuncs[] = {&HostApp_test_0001, &HostApp_test_0002, &HostApp_test_0003, &HostApp_test_0004,
+TestFunc testFuncs[] = {
+    &HostApp_test_0001, &HostApp_test_0002, &HostApp_test_0003, &HostApp_test_0004,
 #if (STD_ON == ETH_TRAFFIC_SHAPING_API)
-                        &HostApp_test_0400,
+    &HostApp_test_0400,
 #endif /* (STD_ON == ETH_TRAFFIC_SHAPING_API) */
 #if (STD_ON == ETH_UPDATE_PHYS_ADDR_FILTER_API)
-                        &HostApp_test_0005,
+    &HostApp_test_0005,
 #endif /* (STD_ON == ETH_UPDATE_PHYS_ADDR_FILTER_API) */
-                        &HostApp_test_0006, &HostApp_test_0007, &HostApp_test_0008, &HostApp_test_0009,
-                        &HostApp_test_0010, &HostApp_test_0011,
+    &HostApp_test_0006, &HostApp_test_0007, &HostApp_test_0008, &HostApp_test_0009,
+    &HostApp_test_0010, &HostApp_test_0011,
 #if ((STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_TCP) && (STD_ON == ETH_CTRL_ENABLE_OFFLOAD_CHECKSUM_UDP))
-                        &HostApp_test_0012, &HostApp_test_0013,
+    &HostApp_test_0012, &HostApp_test_0013,
 #endif
-                        &HostApp_test_0300, &HostApp_test_0301, &HostApp_test_0302, &HostApp_test_0110,
-                        &HostApp_test_0101, &HostApp_test_0201, &HostApp_test_0202};
+    &HostApp_test_0300, &HostApp_test_0301, &HostApp_test_0302, &HostApp_test_0110,
+    &HostApp_test_0101, &HostApp_test_0201, &HostApp_test_0202,
+#if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
+    &HostApp_test_0610, &HostApp_test_0611,
+#endif
+};
 
 HostApp gHostApp = {
     .dutAddr = {0xf4, 0x84, 0x4c, 0xeb, 0x95, 0x09},
@@ -1625,30 +1637,23 @@ bool HostApp_test_0611(void)
 {
     uint8_t               pcp        = 0;
     uint32_t              iterations = 150000u;
-    TestFrame             frames[2];
+    TestFrame             frames[8];
     VlanDataFramePayload *payload;
     int                   vid = ETH_TEST_VLAN_VID;
     int                   i;
 
     printf("test_0611: START\r\n");
 
-    /* Unicast packet with DUT's MAC address */
-    frames[0].len = 1500u;
-    pcp           = 0u;
-    payload       = (VlanDataFramePayload *)frames[0].frame.payload;
-    memcpy(&frames[0].frame.hdr, &hdrUcastCtrl, ETH_HDR_LEN);
-    frames[0].frame.hdr.etherType = htons(ETHERTYPE_VLAN_TAG);
-    payload->tci                  = htons((pcp << 13) | vid);
-    payload->etherType            = htons(ETHERTYPE_EXPERIMENTAL3);
-
-    /* Unicast packet with DUT's MAC address */
-    pcp           = 7u;
-    frames[1].len = 1500u;
-    payload       = (VlanDataFramePayload *)frames[1].frame.payload;
-    memcpy(&frames[1].frame.hdr, &hdrUcastCtrl, ETH_HDR_LEN);
-    frames[1].frame.hdr.etherType = htons(ETHERTYPE_VLAN_TAG);
-    payload->tci                  = htons((pcp << 13) | vid);
-    payload->etherType            = htons(ETHERTYPE_EXPERIMENTAL3);
+    for (pcp = 0U; pcp < 8U; pcp++)
+    {
+        /* Unicast packet with DUT's MAC address */
+        frames[pcp].len = 1500u;
+        payload         = (VlanDataFramePayload *)frames[pcp].frame.payload;
+        memcpy(&frames[pcp].frame.hdr, &hdrUcastCtrl, ETH_HDR_LEN);
+        frames[pcp].frame.hdr.etherType = htons(ETHERTYPE_VLAN_TAG);
+        payload->tci                    = htons((pcp << 13) | vid);
+        payload->etherType              = htons(ETHERTYPE_EXPERIMENTAL3);
+    }
 
     /* Wait for DUT to start the test when it's ready */
     HostApp_waitForCmd(CTRL_FRAME_CMD_START);
@@ -1661,8 +1666,10 @@ bool HostApp_test_0611(void)
         }
 
         /* Transmit one frame */
-        HostApp_send(&frames[0].frame, frames[0].len);
-        HostApp_send(&frames[1].frame, frames[1].len);
+        for (pcp = 0U; pcp < 8U; pcp++)
+        {
+            HostApp_send(&frames[pcp].frame, frames[pcp].len);
+        }
     }
 
     /* Send STOP command and wait for acknowledgement from DUT
