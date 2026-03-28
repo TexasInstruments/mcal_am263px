@@ -679,10 +679,8 @@ void Drivers_qspiClose(void)
 
 void SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0(void)
 {
-    AppUtils_SchM_Enter_EXCLUSIVE_AREA_0();
 }
 
 void SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0(void)
 {
-    AppUtils_SchM_Exit_EXCLUSIVE_AREA_0();
 }

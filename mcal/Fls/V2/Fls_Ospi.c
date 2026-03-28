@@ -1526,7 +1526,15 @@ void Fls_hwi(void)
                                     OSPI_SRAM_FILL_REG_SRAM_FILL_INDAC_READ_FLD_MASK;
                         if (sramLevel == 0U)
                         {
+                            Fls_DrvObj.jobResultType = MEMIF_JOB_FAILED;
+                            Fls_DrvObj.status        = MEMIF_IDLE;
+                            Fls_DrvObj.jobType       = FLS_JOB_NONE;
+                            Fls_DrvObj.transferred   = 0U;
                             Fls_IntClearDisable();
+                            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                            do not use this hook function for critical section protection*/
+                            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
+                            Fls_DrvObj.Fls_JobErrorNotification();
                             retVal = E_NOT_OK;
                         }
                         if (retVal == E_OK)
@@ -1618,6 +1626,9 @@ void Fls_hwi(void)
                                 Fls_DrvObj.jobType       = FLS_JOB_NONE;
                                 Fls_DrvObj.transferred   = 0U;
                                 Fls_IntClearDisable();
+                                /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                                do not use this hook function for critical section protection*/
+                                SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
                                 Fls_DrvObj.Fls_JobErrorNotification();
                                 break;
                             }
@@ -1640,6 +1651,9 @@ void Fls_hwi(void)
                                 Fls_DrvObj.jobType       = FLS_JOB_NONE;
                                 Fls_DrvObj.transferred   = 0U;
                                 Fls_IntClearDisable();
+                                /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                                do not use this hook function for critical section protection*/
+                                SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
                                 Fls_DrvObj.Fls_JobErrorNotification();
                                 break;
                             }
@@ -1655,6 +1669,9 @@ void Fls_hwi(void)
                     Fls_DrvObj.status        = MEMIF_IDLE;
                     Fls_DrvObj.jobType       = FLS_JOB_NONE;
                     Fls_DrvObj.transferred   = 0U;
+                    /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                    do not use this hook function for critical section protection*/
+                    SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
                     Fls_DrvObj.Fls_JobEndNotification();
                 }
                 break;
@@ -1741,6 +1758,9 @@ void Fls_hwi(void)
                     Fls_DrvObj.status        = MEMIF_IDLE;
                     Fls_DrvObj.jobType       = FLS_JOB_NONE;
                     Fls_DrvObj.transferred   = 0U;
+                    /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                    do not use this hook function for critical section protection*/
+                    SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
                     Fls_DrvObj.Fls_JobEndNotification();
                 }
                 break;

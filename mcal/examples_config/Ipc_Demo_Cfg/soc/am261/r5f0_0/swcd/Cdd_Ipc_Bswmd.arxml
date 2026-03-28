@@ -142,6 +142,9 @@
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="8d5717ef-eb5a-4938-902c-1a05b9683bf2">
                   <SHORT-NAME>Cdd_Ipc_Notify_RegisterClient</SHORT-NAME>
+                  <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Ipc_TI_AM261x/Cdd_Ipc/Cdd_Ipc_Behavior/IPC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                  </CAN-ENTER-EXCLUSIVE-AREA-REFS>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -158,6 +161,9 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="3faac01d-b5b0-4c41-bf9c-c2f569efe1bc">
                   <SHORT-NAME>Cdd_Ipc_Notify_Write</SHORT-NAME>
+                  <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Ipc_TI_AM261x/Cdd_Ipc/Cdd_Ipc_Behavior/IPC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                  </CAN-ENTER-EXCLUSIVE-AREA-REFS>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -169,6 +175,9 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="33073e5c-58db-4d07-9709-4e146fb031c9">
                   <SHORT-NAME>Cdd_Ipc_Notify_UnregisterClient</SHORT-NAME>
+                  <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Ipc_TI_AM261x/Cdd_Ipc/Cdd_Ipc_Behavior/IPC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                  </CAN-ENTER-EXCLUSIVE-AREA-REFS>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -180,6 +189,9 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="642e878c-ed26-4678-8806-b2cdb8284aab">
                   <SHORT-NAME>Cdd_Ipc_RpMsg_RecvMsg</SHORT-NAME>
+                  <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Ipc_TI_AM261x/Cdd_Ipc/Cdd_Ipc_Behavior/IPC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                  </CAN-ENTER-EXCLUSIVE-AREA-REFS>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -191,6 +203,9 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="4626aa79-2f65-4d64-bc80-c191f630c30f">
                   <SHORT-NAME>Cdd_Ipc_RpMsg_SendMsg</SHORT-NAME>
+                  <CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Ipc_TI_AM261x/Cdd_Ipc/Cdd_Ipc_Behavior/IPC_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                  </CAN-ENTER-EXCLUSIVE-AREA-REFS>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>

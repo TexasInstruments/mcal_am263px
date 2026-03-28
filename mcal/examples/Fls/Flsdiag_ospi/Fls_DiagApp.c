@@ -488,3 +488,11 @@ void Fee_JobEndNotification(void)
 void Fee_JobErrorNotification(void)
 {
 }
+
+void SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0(void)
+{
+}
+
+void SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0(void)
+{
+}

@@ -642,3 +642,10 @@ void        Wdg_App_configFlsForReset(void)
     }
 }
 #endif
+void SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0(void)
+{
+}
+
+void SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0(void)
+{
+}

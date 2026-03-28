@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 27-Mar-2026.
+This is the release notes for MCAL AM26xx 26.00.00 done on 29-Mar-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -88,6 +88,11 @@ This document details about supported driver, installation, dependencies, build 
       <td>Flash erase operations are now non-blocking</td>
       <td>The application must periodically schedule <code>Fls_MainFunction</code>
           to process erase completion and update the job result.</td><br>
+    </tr>
+    <tr>
+      <td>FLS</td>
+      <td>All Fls operations have SchM_Entry_Fls/SchM_Exit_Fls provided as hooks to spinlock/unlock</td>
+      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical section protection by default. </td><br>
     </tr>
   </tbody>
 </table>
@@ -323,6 +328,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>FLS DAC write now supports 2-byte writes, additional checks have been added to report DET when trying to write odd number of bytes in DDR modes</td>
     </tr>
     <tr>
+      <td>MCAL-36585</td>
+      <td>Implementation of Schm callout for FLS Driver</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>The FLS driver now has Schm callout in process job to be used as hooks for the spinlock usage for multicore flash usage.</td>
+    </tr>
+    <tr>
       <td>MCAL-35747</td>
       <td>Extra closing tag FLS_bswmd.arxml</td>
       <td>FLS</td>
@@ -361,6 +374,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263Px</td>
       <td>All TRC Port_PinInitialMode and Port_PinMode is now updated to match TRC</td>
+    </tr>
+    <tr>
+      <td>MCAL-36790</td>
+      <td>Missing WDG exclusive area reference inside APIs in bswmd arxml </td>
+      <td>WDG</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Bswmd.arxml files are now updated to have the exclusive area references</td>
     </tr>
     <tr>
       <td>MCAL-35979,MCAL-35981</td>

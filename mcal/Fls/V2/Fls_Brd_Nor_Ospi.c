@@ -860,6 +860,9 @@ static Std_ReturnType Fls_norProcessErase(void)
     Std_ReturnType retVal = E_OK; /* Default to E_OK for polling */
     if (Fls_EraseStage == FLS_S_DEFAULT)
     {
+        /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+        do not use this hook function for critical section protection*/
+        SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0();
         if (Fls_DrvObj.typeoferase == FLS_SECTOR_ERASE)
         {
             retVal = Fls_norSectorErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
@@ -922,12 +925,18 @@ void processJobs(Fls_JobType job)
     switch (job)
     {
         case FLS_JOB_COMPARE:
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0();
             if (FLS_USE_INTERRUPTS == STD_ON)
             {
                 Fls_OspiIntEnable();
             }
             retVal = Fls_norCompare(chunkSize);
 #if (STD_OFF == FLS_USE_INTERRUPTS)
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
             Fls_JobNotification(job, retVal, chunkSize);
 #endif
             break;
@@ -967,17 +976,26 @@ void processJobs(Fls_JobType job)
                         Fls_DrvObj.flashAddr = postBlankCheckFlashaddr;
                     }
 #endif
+                    /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                    do not use this hook function for critical section protection*/
+                    SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
                     Fls_JobNotification(job, retVal, chunkSize);
                 }
                 else if (Fls_EraseStage == FLS_S_FAIL)
                 {
                     Fls_EraseStage = FLS_S_DEFAULT; /*  Reset for next operation */
+                    /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                    do not use this hook function for critical section protection*/
+                    SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
                     Fls_JobNotification(job, E_NOT_OK, chunkSize);
                 }
                 /* If FLS_S_IN_PROGRESS, do nothing - wait for next MainFunction call */
             }
             break;
         case FLS_JOB_READ:
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0();
             if (FLS_USE_INTERRUPTS == STD_ON)
             {
                 Fls_OspiIntEnable();
@@ -989,17 +1007,26 @@ void processJobs(Fls_JobType job)
             retVal = Nor_OspiRead(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr, Fls_DrvObj.ramAddr, chunkSize);
 #endif
 #if (STD_OFF == FLS_USE_INTERRUPTS)
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
             Fls_JobNotification(job, retVal, chunkSize);
 #endif
             break;
         case FLS_JOB_WRITE:
             if (Fls_WriteStage == FLS_S_INIT_STAGE)
             {
+                /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                do not use this hook function for critical section protection*/
+                SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0();
 #if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
                 retVal = Fls_norBlankCheck(chunkSize);
                 if (retVal != E_OK)
                 {
 #if (STD_OFF == FLS_USE_INTERRUPTS)
+                    /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                    do not use this hook function for critical section protection*/
+                    SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
                     Fls_JobNotification(job, retVal, chunkSize);
 #endif
                     break;
@@ -1025,16 +1052,25 @@ void processJobs(Fls_JobType job)
             }
 #endif
 #if (STD_OFF == FLS_USE_INTERRUPTS)
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
             Fls_JobNotification(job, retVal, chunkSize);
 #endif
             break;
         case FLS_JOB_BLANKCHECK:
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0();
             if (FLS_USE_INTERRUPTS == STD_ON)
             {
                 Fls_OspiIntEnable();
             }
             retVal = Fls_norBlankCheck(chunkSize);
 #if (STD_OFF == FLS_USE_INTERRUPTS)
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
             Fls_JobNotification(job, retVal, chunkSize);
 #endif
             break;

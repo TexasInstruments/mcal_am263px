@@ -102,7 +102,8 @@
                          */
 #define BLOCK_ERASE (0) /* This macro should be (1) if block erase application is needed to run */
 #define CHIP_ERASE  (0) /* This macro should be (1) if bulk/chip erase application is needed to run */
-
+#define FLS_UNLOCK  0
+#define FLS_LOCK    1
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -116,6 +117,7 @@
 void            FlsApp_Startup(void);
 void            main_handling(void);
 void            main_handling_intr(void);
+void            main_handling_erase();
 uint8           fls_sampleapp(void);
 uint8           fls_sampleapp_configinput(void);
 uint32          Fls_TestPassed;
@@ -131,6 +133,7 @@ uint32          offset;
 uint32          Total_datasize;
 uint32          type_of_erase;
 extern uint32   sector_or_blocksize;
+volatile uint32 Fls_lockUnlock = FLS_UNLOCK;
 
 /* ========================================================================== */
 /*                            Global Variables                                */
@@ -277,11 +280,7 @@ uint8 fls_sampleapp_configinput(void)
                 break;
             }
         }
-#if (STD_OFF == FLS_USE_INTERRUPTS)
-        main_handling();
-#else
-        main_handling_intr();
-#endif
+        main_handling_erase();
 
 #if (STD_ON == FLS_GET_JOB_RESULT_API)
         Result_type = Fls_GetJobResult();
@@ -293,6 +292,7 @@ uint8 fls_sampleapp_configinput(void)
 
 #if (STD_ON == FLS_BLANK_CHECK_API)
         AppUtils_printf(APP_NAME ": Blank Checking \n\r");
+
         while (1U)
         {
             job_accepted = Fls_BlankCheck(offset, Total_datasize);
@@ -309,6 +309,7 @@ uint8 fls_sampleapp_configinput(void)
 #endif /*STD_ON == FLS_BLANK_CHECK_API*/
 
         AppUtils_printf(APP_NAME ": Writing \n\r");
+
         while (1U)
         {
             job_accepted = Fls_Write(offset, &txBuf_test[0], Total_datasize);
@@ -327,6 +328,7 @@ uint8 fls_sampleapp_configinput(void)
 #if (STD_ON == FLS_DMA_ENABLE)
         Mcal_CacheP_wb(rxBuf_test, Total_datasize, Mcal_CacheP_TYPE_ALL);
 #endif
+
         while (1U)
         {
             job_accepted = Fls_Read(offset, &rxBuf_test[0], Total_datasize);
@@ -347,6 +349,7 @@ uint8 fls_sampleapp_configinput(void)
 
 #if (STD_ON == FLS_COMPARE_API)
         AppUtils_printf(APP_NAME ": Write Compare \n\r");
+
         while (1U)
         {
             /*
@@ -366,6 +369,7 @@ uint8 fls_sampleapp_configinput(void)
 #endif
 
         AppUtils_printf(APP_NAME ": Read Compare \n\r");
+
         while (1U)
         {
             /*
@@ -423,12 +427,17 @@ uint8 fls_sampleapp_configinput(void)
 }
 void SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0(void)
 {
-    AppUtils_SchM_Enter_EXCLUSIVE_AREA_0();
+    while (Fls_lockUnlock == FLS_LOCK)
+    {
+    }
+    Fls_lockUnlock = FLS_LOCK;
+    AppUtils_printf("Flash is now locked!\n\r");
 }
 
 void SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0(void)
 {
-    AppUtils_SchM_Exit_EXCLUSIVE_AREA_0();
+    Fls_lockUnlock = FLS_UNLOCK;
+    AppUtils_printf("Flash is now unlocked!\n\r");
 }
 void SchM_Enter_Mcu_MCU_EXCLUSIVE_AREA_0()
 {
@@ -501,6 +510,29 @@ void main_handling()
     return;
 }
 void main_handling_intr()
+{
+    while (1U)
+    {
+        // Fls_MainFunction();
+        if (Fls_JobDoneSuccess == 1U)
+        {
+            AppUtils_printf(APP_NAME ": Job Ends: SUCCESS\n\r");
+            retVal = E_OK;
+            break;
+        }
+        if (Fls_JobDoneError == 1U)
+        {
+            AppUtils_printf(APP_NAME ": Job Ends: Error\n\r");
+            retVal = E_NOT_OK;
+            break;
+        }
+    }
+
+    Fls_JobDoneSuccess = 0U;
+    Fls_JobDoneError   = 0U;
+    return;
+}
+void main_handling_erase()
 {
     while (1U)
     {

@@ -1,3 +1,103 @@
+commit fda7ce8b5fb6282d289f60305051d43d65718546
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sat Mar 28 22:54:05 2026 +0530
+
+    all: all: Release note update
+    
+    Fixes: MCAL-36790
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit bea1b6d91038bf639a74dfbe31f40a1df90e61f3
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sat Mar 28 22:19:51 2026 +0530
+
+    all: WDG/IPC: Updated exclusive are references in bswmd.arxml
+    
+    -bswmd files are updated to have exclusive area references to all APIs that use exclusive area
+    
+    Fixes: MCAL-36790
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am261/tresos/output/swcd/Wdg_Bswmd.arxml          |  6 ++++++
+ .../soc/am263/tresos/output/swcd/Wdg_Bswmd.arxml          |  6 ++++++
+ .../soc/am263px/tresos/output/swcd/Wdg_Bswmd.arxml        |  6 ++++++
+ .../soc/am261/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml             | 15 +++++++++++++++
+ .../soc/am263/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml             | 15 +++++++++++++++
+ .../soc/am263px/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml           | 15 +++++++++++++++
+ .../Wdg_Demo_Cfg/soc/am261/r5f0_0/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../Wdg_Demo_Cfg/soc/am263/r5f0_0/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../Wdg_Demo_Cfg/soc/am263px/r5f0_0/swcd/Wdg_Bswmd.arxml  |  6 ++++++
+ .../generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml                | 15 +++++++++++++++
+ .../Wdg_TI_AM261x/generate_swcd/swcd/Wdg_Bswmd.arxml      |  6 ++++++
+ .../generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml                | 15 +++++++++++++++
+ .../Wdg_TI_AM263Px/generate_swcd/swcd/Wdg_Bswmd.arxml     |  6 ++++++
+ .../generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml                | 15 +++++++++++++++
+ .../Wdg_TI_AM263x/generate_swcd/swcd/Wdg_Bswmd.arxml      |  6 ++++++
+ .../r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_7/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_6/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_7/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |  6 ++++++
+ .../r5f0_0/config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ .../r5f0_0/config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |  6 ++++++
+ 45 files changed, 324 insertions(+)
+
+commit 599d97712fd46f19eca8f25fe5a917eab75c61fa
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Mar 24 23:03:32 2026 +0530
+
+    am263px/am261x: Fls: Adding SchM_Fls at entry and exit of each job
+    
+    -Removed exclusive area implementation in apps
+    
+    Fls exclusive area in true sense is not required and will be used as hooks to identify entry and exit where user can choose to spinlock/unlock
+    
+    Fixes: MCAL-36531, MCAL-36585
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c                  | 36 +++++++++++++++++++
+ mcal/Fls/V2/Fls_Ospi.c                          | 20 +++++++++++
+ mcal/examples/Bootloader/fls_boot_app/BootApp.c |  2 --
+ mcal/examples/Fls/Flsdiag/Fls_DiagApp.c         |  2 --
+ mcal/examples/Fls/Flsdiag_ospi/Fls_DiagApp.c    |  8 +++++
+ mcal/examples/Fls/fls_app/FlsApp.c              | 48 ++++++++++++++++++++-----
+ mcal/examples/Fls/fls_phy_app/FlsApp.c          |  2 --
+ mcal/examples/Fls/fls_xip_app/FlsXipApp.c       |  2 --
+ mcal/examples/Wdg/wdg_app/WdgApp.c              |  7 ++++
+ mcal_test/mcu_test/testApp/mcuTestApp.c         |  8 +++++
+ mcal_test/wdg_test/testApp/wdgTestApp.c         |  7 ++++
+ release_notes.md                                | 13 +++++++
+ 12 files changed, 139 insertions(+), 16 deletions(-)
+
 commit 83f3047c8d097311b9d5336e0e1563b642096afb
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Thu Mar 26 09:45:45 2026 +0530
