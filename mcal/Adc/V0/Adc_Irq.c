@@ -111,12 +111,14 @@ ISR(Adc_ADCINT1_IrqUnit0)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER1, adcSocNumber);
@@ -135,12 +137,14 @@ ISR(Adc_ADCINT2_IrqUnit0)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER2, adcSocNumber);
@@ -159,12 +163,14 @@ ISR(Adc_ADCINT3_IrqUnit0)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER3, adcSocNumber);
@@ -183,12 +189,14 @@ ISR(Adc_ADCINT4_IrqUnit0)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_0].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER4, adcSocNumber);
@@ -208,12 +216,14 @@ ISR(Adc_ADCINT1_IrqUnit1)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER1, adcSocNumber);
@@ -232,12 +242,14 @@ ISR(Adc_ADCINT2_IrqUnit1)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER2, adcSocNumber);
@@ -256,12 +268,14 @@ ISR(Adc_ADCINT3_IrqUnit1)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER3, adcSocNumber);
@@ -280,12 +294,14 @@ ISR(Adc_ADCINT4_IrqUnit1)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_1].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER4, adcSocNumber);
@@ -305,12 +321,14 @@ ISR(Adc_ADCINT1_IrqUnit2)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER1, adcSocNumber);
@@ -329,12 +347,14 @@ ISR(Adc_ADCINT2_IrqUnit2)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER2, adcSocNumber);
@@ -353,12 +373,14 @@ ISR(Adc_ADCINT3_IrqUnit2)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER3, adcSocNumber);
@@ -377,12 +399,14 @@ ISR(Adc_ADCINT4_IrqUnit2)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_2].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER4, adcSocNumber);
@@ -402,12 +426,14 @@ ISR(Adc_ADCINT1_IrqUnit3)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER1, adcSocNumber);
@@ -426,12 +452,14 @@ ISR(Adc_ADCINT2_IrqUnit3)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER2, adcSocNumber);
@@ -450,12 +478,14 @@ ISR(Adc_ADCINT3_IrqUnit3)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER3, adcSocNumber);
@@ -474,12 +504,14 @@ ISR(Adc_ADCINT4_IrqUnit3)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_3].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER4, adcSocNumber);
@@ -499,12 +531,14 @@ ISR(Adc_ADCINT1_IrqUnit4)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER1, adcSocNumber);
@@ -523,12 +557,14 @@ ISR(Adc_ADCINT2_IrqUnit4)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER2, adcSocNumber);
@@ -547,12 +583,14 @@ ISR(Adc_ADCINT3_IrqUnit4)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER3, adcSocNumber);
@@ -571,12 +609,14 @@ ISR(Adc_ADCINT4_IrqUnit4)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_4].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER4, adcSocNumber);
@@ -596,12 +636,14 @@ ISR(Adc_ADCINT1_IrqUnit5)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER1, adcSocNumber);
@@ -620,12 +662,14 @@ ISR(Adc_ADCINT2_IrqUnit5)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER2, adcSocNumber);
@@ -644,12 +688,14 @@ ISR(Adc_ADCINT3_IrqUnit5)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER3, adcSocNumber);
@@ -668,12 +714,14 @@ ISR(Adc_ADCINT4_IrqUnit5)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_5].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER4, adcSocNumber);
@@ -693,12 +741,14 @@ ISR(Adc_ADCINT1_IrqUnit6)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER1, adcSocNumber);
@@ -717,12 +767,14 @@ ISR(Adc_ADCINT2_IrqUnit6)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_12_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER2, adcSocNumber);
@@ -741,12 +793,14 @@ ISR(Adc_ADCINT3_IrqUnit6)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_13_REGISTER_MASK));
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER3, adcSocNumber);
@@ -765,12 +819,14 @@ ISR(Adc_ADCINT4_IrqUnit6)
 {
     Adc_HwUnitObjType *hwUnitObj;
     uint8              adcSocNumber;
+    uint8              hwUnitIdx;
     uint32             intRegAddr;
 
     /* Check if, Index is invalid */
-    if (Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit != ADC_INVALID_INDEX)
+    hwUnitIdx = Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit;
+    if (hwUnitIdx < (uint8)ADC_MAX_HW_UNIT)
     {
-        hwUnitObj    = &Adc_DrvObj.hwUnitObj[Adc_HwSocGroupMapping[ADC_HWUNIT_6].adcHwUnit];
+        hwUnitObj    = &Adc_DrvObj.hwUnitObj[hwUnitIdx];
         intRegAddr   = hwUnitObj->baseAddr | ADC_INTERRUPT_34_REGISTER_OFFSET;
         adcSocNumber = (uint8)((HW_RD_REG16(intRegAddr) & ADC_INTERRUPT_24_REGISTER_MASK) >> 8U);
         Adc_IrqTxRx(hwUnitObj, ADC_INT_NUMBER4, adcSocNumber);

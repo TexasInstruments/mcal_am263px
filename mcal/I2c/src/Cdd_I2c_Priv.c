@@ -91,7 +91,8 @@ static void           Cdd_I2c_ScheduleCh(Cdd_I2c_ChObjType *chObj);
 static void           Cdd_I2c_SetSeqErrorCode(Cdd_I2c_SeqObjType *seqObj, Cdd_I2c_ChannelResultType chResult);
 static void           Cdd_I2c_SetSeqResult(Cdd_I2c_SeqObjType *seqObj);
 static void           Cdd_I2c_ProcessChCompletion(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_ChObjType *chObj,
-                                                  Cdd_I2c_HwUnitObjType *hwUnitObj, Cdd_I2c_ChannelResultType chResult);
+                                                  Cdd_I2c_HwUnitObjType *hwUnitObj, Cdd_I2c_ChannelResultType chResult,
+                                                  boolean doSchedule);
 
 static void Cdd_I2c_CheckAndSetDrvState(Cdd_I2c_DriverObjType *drvObj);
 
@@ -141,7 +142,7 @@ Std_ReturnType Cdd_I2c_StartSeqAsync(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqO
 Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj)
 {
     Std_ReturnType     retVal      = E_OK;
-    Cdd_I2c_ChObjType *chObjActive = (Cdd_I2c_ChObjType *)NULL_PTR;
+    Cdd_I2c_ChObjType *activeChObj = (Cdd_I2c_ChObjType *)NULL_PTR;
 
     /* Check all channels in the sequence and cancel them */
     for (uint32 chIdx = 0U; chIdx < seqObj->seqCfg->chPerSeq; chIdx++)
@@ -158,40 +159,89 @@ Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjTy
         if (chObj == hwUnitObj->curChObj)
         {
             /* Stop the on going transfer */
-#if (STD_ON == CDD_I2C_POLLING_MODE)
-            Cdd_I2c_HwCancelPolling(chObj);
-#else
-            Cdd_I2c_HwCancelIntr(chObj);
-#endif
-            hwUnitObj->curChObj = (Cdd_I2c_ChObjType *)NULL_PTR;
-            chObjActive         = chObj;
+            seqObj->numChsPending      = 1U; /* Only one channel to transfer now */
+            seqObj->isCancelInProgress = TRUE;
+            chObj->isCancelInProgress  = TRUE;
+            activeChObj                = chObj;
         }
         else
         {
             /* Channel is not active. Just remove from queue */
             Cdd_I2c_UtilsUnLinkNodePri(&hwUnitObj->llobj, &chObj->nodeObj);
+            /* Set channel results */
+            chObj->chResult = CDD_I2C_CH_RESULT_OK;
+            chObj->state    = CDD_I2C_STATE_COMPLETE;
         }
-
-        /* Set channel results */
-        chObj->chResult = CDD_I2C_CH_RESULT_OK;
-        chObj->state    = CDD_I2C_STATE_COMPLETE;
     }
-
-    /* Set sequence status */
-    seqObj->seqResult     = CDD_I2C_SEQ_CANCELLED;
-    seqObj->seqErrorCode  = CDD_I2C_E_NO_ERROR;
-    seqObj->numChsPending = 0U;
 
     /*
-     * Check if any active channel was cancelled and if so consume any pending channels
-     * Note: This step is done after all the channels in the sequence is cancelled. Otherwise
-     * we will end-up scheduling the subsequent channels in the same sequence.
+     * Check if any active channel was cancelled and if not the sequence was never started!!
      */
-    if (chObjActive != NULL_PTR)
+    if (activeChObj == NULL_PTR)
     {
-        Cdd_I2c_HwUnitObjType *hwUnitObj = chObjActive->hwUnitObj;
-        Cdd_I2c_CheckAndScheduleHw(drvObj, hwUnitObj);
+        Cdd_I2c_SequenceErrorNotification errorNotify = (Cdd_I2c_SequenceErrorNotification)NULL_PTR;
+
+        /* Set sequence status */
+        seqObj->seqResult     = CDD_I2C_SEQ_CANCELLED;
+        seqObj->seqErrorCode  = CDD_I2C_E_CANCELLED;
+        seqObj->numChsPending = 0U;
+
+        /* Notify Sequence end */
+        errorNotify = seqObj->seqCfg->errorNotify;
+        if (NULL_PTR != errorNotify)
+        {
+            errorNotify(seqObj->seqErrorCode);
+        }
     }
+
+    return retVal;
+}
+
+Std_ReturnType Cdd_I2c_ResetHwUnitPriv(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitObjType *hwUnitObj)
+{
+    Std_ReturnType                  retVal    = E_OK;
+    const Cdd_I2c_HwUnitConfigType *hwUnitCfg = hwUnitObj->hwUnitCfg;
+    Cdd_I2c_ChObjType              *chObj;
+    uint32                          baseAddr = hwUnitObj->baseAddr;
+
+    /* Disable all interrupts to avoid any interrupts during reset */
+    Cdd_I2c_HwDisableAllIntr(baseAddr);
+
+    /* Check and disable any active channels in process */
+    if (NULL_PTR != hwUnitObj->curChObj)
+    {
+        chObj        = hwUnitObj->curChObj;
+        chObj->state = CDD_I2C_STATE_COMPLETE;
+        Cdd_I2c_ProcessChCompletion(drvObj, chObj, hwUnitObj, CDD_I2C_CH_RESULT_HW_UNIT_RESET, FALSE);
+    }
+
+    /* Clear all queued channels and notify their sequences */
+    while (1U)
+    {
+        Cdd_I2c_UtilsNode *headNode;
+
+        headNode = Cdd_I2c_UtilsGetHeadNode(&hwUnitObj->llobj);
+        if (NULL_PTR == headNode)
+        {
+            break;
+        }
+
+        chObj = (Cdd_I2c_ChObjType *)headNode->params.data;
+        Cdd_I2c_UtilsUnLinkNodePri(&hwUnitObj->llobj, headNode);
+        chObj->state = CDD_I2C_STATE_COMPLETE;
+        Cdd_I2c_ProcessChCompletion(drvObj, chObj, hwUnitObj, CDD_I2C_CH_RESULT_HW_UNIT_RESET, FALSE);
+    }
+
+    /* Re-init HW so that we can continue with a fresh transaction */
+    Cdd_I2c_HwInit(baseAddr, hwUnitCfg->baudRate, hwUnitCfg->hwUnitFrequency, hwUnitCfg->sysClk, hwUnitCfg->ownAddress);
+
+    /* No new channel scheduled, hardware is free!! */
+    hwUnitObj->hwUnitStatus = CDD_I2C_HW_UNIT_FREE;
+    /*
+     * Check if all hardware is free so that driver can be
+     * put in idle state
+     */
+    Cdd_I2c_CheckAndSetDrvState(drvObj);
 
     return retVal;
 }
@@ -237,35 +287,37 @@ void Cdd_I2c_InitDrvObj(Cdd_I2c_DriverObjType *drvObj)
     {
         Cdd_I2c_SeqObjType *seqObj = &drvObj->seqObj[seqIdx];
 
-        seqObj->seqCfg        = (const Cdd_I2c_SequenceConfigType *)NULL_PTR;
-        seqObj->sequenceId    = (Cdd_I2c_SequenceType)seqIdx;
-        seqObj->hwUnitObj     = (Cdd_I2c_HwUnitObjType *)NULL_PTR;
-        seqObj->seqResult     = CDD_I2C_SEQ_OK;
-        seqObj->seqErrorCode  = CDD_I2C_E_NO_ERROR;
-        seqObj->numChsPending = 0U;
+        seqObj->seqCfg             = (const Cdd_I2c_SequenceConfigType *)NULL_PTR;
+        seqObj->sequenceId         = (Cdd_I2c_SequenceType)seqIdx;
+        seqObj->hwUnitObj          = (Cdd_I2c_HwUnitObjType *)NULL_PTR;
+        seqObj->seqResult          = CDD_I2C_SEQ_OK;
+        seqObj->seqErrorCode       = CDD_I2C_E_NO_ERROR;
+        seqObj->numChsPending      = 0U;
+        seqObj->isCancelInProgress = FALSE;
     }
 
     for (uint32 chIdx = 0U; chIdx < CDD_I2C_MAX_CH; chIdx++)
     {
         Cdd_I2c_ChObjType *chObj = &drvObj->chObj[chIdx];
 
-        chObj->chCfg          = (const Cdd_I2c_ChConfigType *)NULL_PTR;
-        chObj->chId           = (Cdd_I2c_ChannelType)chIdx;
-        chObj->seqObj         = (Cdd_I2c_SeqObjType *)NULL_PTR;
-        chObj->hwUnitObj      = (Cdd_I2c_HwUnitObjType *)NULL_PTR;
-        chObj->txBufPtr       = (Cdd_I2c_DataConstPtrType)NULL_PTR;
-        chObj->rxBufPtr       = (Cdd_I2c_DataPtrType)NULL_PTR;
-        chObj->length         = 0U;
-        chObj->deviceAddress  = 0x00U;
-        chObj->addressScheme  = CDD_I2C_7_BIT_ADDRESS;
-        chObj->chResult       = CDD_I2C_CH_RESULT_OK;
-        chObj->chErrorCode    = CDD_I2C_CH_RESULT_OK;
-        chObj->curTxBufPtr    = (Cdd_I2c_DataConstPtrType)NULL_PTR;
-        chObj->curRxBufPtr    = (Cdd_I2c_DataPtrType)NULL_PTR;
-        chObj->curLength      = 0U;
-        chObj->isStopRequired = TRUE;
-        chObj->doBusyCheck    = TRUE;
-        chObj->state          = CDD_I2C_STATE_INIT;
+        chObj->chCfg              = (const Cdd_I2c_ChConfigType *)NULL_PTR;
+        chObj->chId               = (Cdd_I2c_ChannelType)chIdx;
+        chObj->seqObj             = (Cdd_I2c_SeqObjType *)NULL_PTR;
+        chObj->hwUnitObj          = (Cdd_I2c_HwUnitObjType *)NULL_PTR;
+        chObj->txBufPtr           = (Cdd_I2c_DataConstPtrType)NULL_PTR;
+        chObj->rxBufPtr           = (Cdd_I2c_DataPtrType)NULL_PTR;
+        chObj->length             = 0U;
+        chObj->deviceAddress      = 0x00U;
+        chObj->addressScheme      = CDD_I2C_7_BIT_ADDRESS;
+        chObj->chResult           = CDD_I2C_CH_RESULT_OK;
+        chObj->chErrorCode        = CDD_I2C_CH_RESULT_OK;
+        chObj->curTxBufPtr        = (Cdd_I2c_DataConstPtrType)NULL_PTR;
+        chObj->curRxBufPtr        = (Cdd_I2c_DataPtrType)NULL_PTR;
+        chObj->curLength          = 0U;
+        chObj->isStopRequired     = TRUE;
+        chObj->doBusyCheck        = TRUE;
+        chObj->state              = CDD_I2C_STATE_INIT;
+        chObj->isCancelInProgress = FALSE;
         Cdd_I2c_UtilsInitNodeObject(&chObj->nodeObj);
     }
 
@@ -401,7 +453,7 @@ void Cdd_I2c_ProcessEvents(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitObjType 
         /* Channel completed or failed!! */
         if (CDD_I2C_CH_RESULT_PENDING != chResult)
         {
-            Cdd_I2c_ProcessChCompletion(drvObj, chObj, hwUnitObj, chResult);
+            Cdd_I2c_ProcessChCompletion(drvObj, chObj, hwUnitObj, chResult, TRUE);
         }
     }
 
@@ -499,6 +551,7 @@ static Std_ReturnType Cdd_I2c_QueueCh(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_Seq
             chObj->seqObj                = seqObj;
             chObj->chResult              = CDD_I2C_CH_RESULT_PENDING;
             chObj->chErrorCode           = CDD_I2C_CH_RESULT_OK;
+            chObj->isCancelInProgress    = FALSE;
             utilsParams.data             = chObj;
             utilsParams.priority         = 0U; /* Not used in current implementation */
             utilsParams.seqId            = seqObj->sequenceId;
@@ -507,10 +560,11 @@ static Std_ReturnType Cdd_I2c_QueueCh(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_Seq
         }
 
         /* Set the states */
-        seqObj->seqResult     = CDD_I2C_SEQ_PENDING;
-        seqObj->seqErrorCode  = CDD_I2C_E_NO_ERROR;
-        seqObj->numChsPending = seqObj->seqCfg->chPerSeq;
-        Cdd_I2c_DrvState      = CDD_I2C_BUSY;
+        seqObj->seqResult          = CDD_I2C_SEQ_PENDING;
+        seqObj->seqErrorCode       = CDD_I2C_E_NO_ERROR;
+        seqObj->isCancelInProgress = FALSE;
+        seqObj->numChsPending      = seqObj->seqCfg->chPerSeq;
+        Cdd_I2c_DrvState           = CDD_I2C_BUSY;
     }
 
     return retVal;
@@ -626,6 +680,10 @@ static void Cdd_I2c_SetSeqErrorCode(Cdd_I2c_SeqObjType *seqObj, Cdd_I2c_ChannelR
         seqObj->seqErrorCode = CDD_I2C_E_ARBITRATION_FAILURE;
     }
     /* TI_COVERAGE_GAP_STOP */
+    if (CDD_I2C_CH_RESULT_HW_UNIT_RESET == chResult)
+    {
+        seqObj->seqErrorCode = CDD_I2C_E_HW_UNIT_RESET;
+    }
 
     return;
 }
@@ -652,12 +710,23 @@ static void Cdd_I2c_SetSeqResult(Cdd_I2c_SeqObjType *seqObj)
         seqObj->seqResult = CDD_I2C_SEQ_ARB;
     }
     /* TI_COVERAGE_GAP_STOP */
+    if (TRUE == seqObj->isCancelInProgress)
+    {
+        seqObj->seqResult          = CDD_I2C_SEQ_CANCELLED;
+        seqObj->seqErrorCode       = CDD_I2C_E_CANCELLED;
+        seqObj->isCancelInProgress = FALSE;
+    }
+    if (CDD_I2C_E_HW_UNIT_RESET == seqObj->seqErrorCode)
+    {
+        seqObj->seqResult = CDD_I2C_SEQ_HW_UNIT_RESET;
+    }
 
     return;
 }
 
 static void Cdd_I2c_ProcessChCompletion(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_ChObjType *chObj,
-                                        Cdd_I2c_HwUnitObjType *hwUnitObj, Cdd_I2c_ChannelResultType chResult)
+                                        Cdd_I2c_HwUnitObjType *hwUnitObj, Cdd_I2c_ChannelResultType chResult,
+                                        boolean doSchedule)
 {
     Cdd_I2c_SeqObjType               *seqObj;
     Cdd_I2c_SequenceEndNotification   completeNotify = (Cdd_I2c_SequenceEndNotification)NULL_PTR;
@@ -665,8 +734,9 @@ static void Cdd_I2c_ProcessChCompletion(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_C
 
     seqObj = chObj->seqObj;
     seqObj->numChsPending--;
-    hwUnitObj->curChObj = (Cdd_I2c_ChObjType *)NULL_PTR;
-    chObj->chResult     = chResult;
+    hwUnitObj->curChObj       = (Cdd_I2c_ChObjType *)NULL_PTR;
+    chObj->chResult           = chResult;
+    chObj->isCancelInProgress = FALSE;
     Cdd_I2c_SetSeqErrorCode(seqObj, chResult);
 
     /* Check if sequence is complete */
@@ -686,8 +756,11 @@ static void Cdd_I2c_ProcessChCompletion(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_C
         }
     }
 
-    /* Check if HW is free and can be scheduled */
-    Cdd_I2c_CheckAndScheduleHw(drvObj, hwUnitObj);
+    if (TRUE == doSchedule)
+    {
+        /* Check if HW is free and can be scheduled */
+        Cdd_I2c_CheckAndScheduleHw(drvObj, hwUnitObj);
+    }
 
     /* Notify Sequence end - should be done after scheduling */
     if (NULL_PTR != completeNotify)

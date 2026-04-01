@@ -183,19 +183,19 @@ extern "C" {
 #define CPPI_SET_FIELD(regVal, reg, field, fieldVal) HW_SET_FIELD32(regVal, CPSW_CPPI_##reg##_REG_##field, fieldVal)
 
 /* ETH_PN macros */
-#define ETH_PN_WR_REG(reg, val) HW_WR_REG32(baseAddr + CPSW_ETH_PN##reg##_REG, val)
+#define ETH_PN_WR_REG(reg, val) HW_WR_REG32(baseAddr + CPSW_ETH_PN##reg##_REG, (val))
 
 #define ETH_PN_WR_PORT_REG(reg, portNum, val) \
-    HW_WR_REG32(baseAddr + CPSW_ETH_PN_##reg##_REG + CPSW_PN_OFFSET(portNum), val)
+    HW_WR_REG32(baseAddr + CPSW_ETH_PN_##reg##_REG + CPSW_PN_OFFSET(portNum), (val))
 
 #define ETH_PN_WR_FIELD(reg, field, val) \
-    HW_WR_FIELD32(baseAddr + CPSW_ETH_PN_##reg##_REG, CPSW_ETH_PN_##reg##_REG_##field, val)
+    HW_WR_FIELD32(baseAddr + CPSW_ETH_PN_##reg##_REG, CPSW_ETH_PN_##reg##_REG_##field, (val))
 
 #define ETH_PN_WR_PORT_FIELD(reg, portNum, field, val) \
-    HW_WR_FIELD32(baseAddr + CPSW_ETH_PN_##reg##_REG + CPSW_PN_OFFSET(portNum), CPSW_ETH_PN_##reg##_REG_##field, val)
+    HW_WR_FIELD32(baseAddr + CPSW_ETH_PN_##reg##_REG + CPSW_PN_OFFSET(portNum), CPSW_ETH_PN_##reg##_REG_##field, (val))
 
 #define ETH_PN_WR_PRIORITY_FIELD(reg, priority, field, val) \
-    HW_WR_FIELD32(baseAddr + CPSW_ETH_PN_##reg##_REG(priority), CPSW_ETH_PN_##reg##_REG_##field, val)
+    HW_WR_FIELD32(baseAddr + CPSW_ETH_PN_##reg##_REG(priority), CPSW_ETH_PN_##reg##_REG_##field, (val))
 
 #define ETH_PN_RD_REG(reg) HW_RD_REG32(baseAddr + CPSW_ETH_PN_##reg##_REG)
 

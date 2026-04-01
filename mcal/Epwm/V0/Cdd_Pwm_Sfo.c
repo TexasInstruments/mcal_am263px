@@ -401,10 +401,13 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_SFO(void)
             TaskPtr = 1;
 
             /* Update status & assign scale factor value to HRMSTEP register */
+            /* TI_COVERAGE_GAP_START - the ScaleFactor gets updated during runtime
+               and the value cannot be greater than 255 */
             if (Cdd_Pwm_MEP_ScaleFactor > 255)
             {
                 status = CDD_PWM_SFO_ERROR;
             }
+            /* TI_COVERAGE_GAP_STOP */
             else
             {
                 /* Update HRMSTEP register only with DCAL result*/
@@ -414,7 +417,9 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_SFO(void)
             }
 
             break;
+        /* TI_COVERAGE_GAP_START - Taskptr can't be controlled using configuration parameter */
         default:
+            /* TI_COVERAGE_GAP_STOP */
             break;
     }
     return status;

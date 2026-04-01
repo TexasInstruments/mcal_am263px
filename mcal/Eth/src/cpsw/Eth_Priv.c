@@ -265,7 +265,7 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCu
 static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCurrRxBuffDesc);
 #endif
 
-static void Eth_configureSwitch(const uint8 macAddr[6]);
+static void Eth_configureSwitch(P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr);
 
 static Std_ReturnType Eth_allowReception(uint8 currPort, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) PhysAddrPtr);
 
@@ -285,7 +285,7 @@ static void EthTxBuffProcess(uint8 ctrlIdx, Eth_TxBufObjType *pBufObj);
 
 static void EthRxBuffDescEnqueue(Eth_CpdmaRxBuffDescQueue *pRxDescRing, Eth_CpdmaRxBuffDescType *pNewTail);
 
-static uint32 EthCheckNullMACAddr(const uint8 macAddr[ETH_MAC_ADDR_LEN]);
+static uint32 EthCheckNullMACAddr(P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr);
 
 static void Eth_freeTxBuffers(Eth_TxBufObjType *bufObjArray, uint32 numBuffers);
 
@@ -1078,7 +1078,7 @@ Std_ReturnType Eth_HwUpdatePhysAddrFilter(P2CONST(uint8, AUTOMATIC, ETH_APPL_DAT
     return (retVal);
 }
 
-static void Eth_configureSwitch(const uint8 macAddr[6])
+static void Eth_configureSwitch(P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr)
 {
     uint32 currPort                     = 0U;
     uint32 flushOldAddrFlag             = (uint32)FALSE;
@@ -1192,7 +1192,7 @@ static Std_ReturnType Eth_allowReception(uint8 currPort, P2CONST(uint8, AUTOMATI
     return retVal;
 }
 
-static uint32 EthCheckNullMACAddr(const uint8 macAddr[ETH_MAC_ADDR_LEN])
+static uint32 EthCheckNullMACAddr(P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr)
 {
     uint8  i      = 0U;
     uint32 retVal = (uint32)TRUE;

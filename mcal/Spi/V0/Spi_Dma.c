@@ -292,20 +292,28 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
             HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAR, CSL_MCSPI_CH0CONF_DMAR_ENABLED);
             HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
         }
+        /* TI_COVERAGE_GAP_START MCSPI_dmaStart is static and only reachable via Spi_dmaTransfer.
+         In coverage config, Cdd_Dma_EnableTransferRegion(TX) fails for TX_ONLY injected calls
+         due to DMA channel not having an active hardware SPI TX event, keeping status E_NOT_OK
+         and preventing MCSPI_dmaStart from being called with TX_ONLY mode. */
         else if (SPI_TX_RX_MODE_TX_ONLY == jobObj->extDevCfg->mcspi.txRxMode)
         {
             HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             /* condition check */
         }
 
+        /* TI_COVERAGE_GAP_START Static function only called with MCSPI_MODULCTRL_SINGLE_SINGLE,
+         FALSE branch unreachable */
         /* Manual CS assert */
         if (MCSPI_MODULCTRL_SINGLE_SINGLE == chMode)
         {
             HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_FORCE, CSL_MCSPI_CH0CONF_FORCE_ASSERT);
         }
+        /* TI_COVERAGE_GAP_STOP */
 
         /* Enable channel */
         HW_WR_FIELD32((baseAddr + MCSPI_CHCTRL(chNum)), CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_ACT);
@@ -345,10 +353,13 @@ static void Spi_dmaTxIsrHandler_StatusCheck(const Spi_HwUnitObjType *hwUnitObj)
     volatile uint32 chStat    = 0U;
     uint32          chNum     = 0U;
     volatile uint32 tempCount = SPI_MAX_TIMEOUT_DURATION;
+    /* TI_COVERAGE_GAP_START Compile-time constant SPI_MAX_TIMEOUT_DURATION (20000) > 8 always TRUE,
+     FALSE branch unreachable */
     if (SPI_MAX_TIMEOUT_DURATION > 8U)
     {
         tempCount = SPI_MAX_TIMEOUT_DURATION / 8U;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     chNum = (uint32)hwUnitObj->curJobObj->jobCfg_PC.csPin;
     do
@@ -373,7 +384,8 @@ void Spi_DmaRxIsrHandler(void *args)
     if (args != NULL_PTR)
     {
         hwUnitObj = (Spi_HwUnitObjType *)args;
-        if ((NULL_PTR != hwUnitObj) && (NULL_PTR != hwUnitObj->curJobObj) &&
+
+        if ((NULL_PTR != hwUnitObj->curJobObj) &&
             (hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode != SPI_TX_RX_MODE_TX_ONLY))
         {
             /* This channel transfer is complete */

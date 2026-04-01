@@ -193,8 +193,9 @@ typedef void *OSPI_Handle;
  *
  *  @{
  */
-#define OSPI_NOR_PROTOCOL(cmd, addr, data, dtr) \
-    (uint32)(((uint32)(dtr) << 24) | ((uint32)(cmd) << 16) | ((uint32)(addr) << 8) | ((uint32)(data) << 0))
+#define OSPI_NOR_PROTOCOL(cmd, addr, data, dtr)                                                \
+    ((uint32)(((uint32)((dtr)) << 24U) | ((uint32)((cmd)) << 16U) | ((uint32)((addr)) << 8U) | \
+              ((uint32)((data)) << 0U)))
 #define OSPI_NOR_PROTOCOL_INVALID (uint32)(0xFFFFFFFF)
 /** @} */
 

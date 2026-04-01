@@ -166,7 +166,7 @@ extern "C"
 #define CPSW_STAT_1_ENET_PN_TX_PRI_BCNT_REG(ENET_PN_TX_PRI_BCNT_REG) (0x0003A3A0U+((ENET_PN_TX_PRI_BCNT_REG)*0x4U))
 #define CPSW_STAT_1_ENET_PN_TX_PRI_DROP_REG(ENET_PN_TX_PRI_DROP_REG) (0x0003A3C0U+((ENET_PN_TX_PRI_DROP_REG)*0x4U))
 #define CPSW_STAT_1_ENET_PN_TX_PRI_DROP_BCNT_REG(ENET_PN_TX_PRI_DROP_BCNT_REG) (0x0003A3E0U+((ENET_PN_TX_PRI_DROP_BCNT_REG)*0x4U))
-#define CPSW_STAT_OFFSET(portNum)                         (0x00000200U * ((uint32)portNum - 1U))
+#define CPSW_STAT_OFFSET(portNum)                        (0x00000200U * (((uint32)(portNum)) - 1U))
 
 
 /*******************************************************************************

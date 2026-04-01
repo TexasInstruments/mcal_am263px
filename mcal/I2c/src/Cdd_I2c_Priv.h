@@ -128,6 +128,8 @@ typedef struct
     /**< I2C sequence error code */
     uint32                            numChsPending;
     /**< Number of chs still pending. Used for notifying sequence end */
+    boolean                           isCancelInProgress;
+    /**< Set to TRUE when user cancels a sequence */
 } Cdd_I2c_SeqObjType;
 
 /**
@@ -174,6 +176,8 @@ typedef struct
     /**< Flag to indicate whether to perform bus busy check at start of channel transfer */
     Cdd_I2c_StateType           state;
     /**< Flag to indicate the current stage of data transfer */
+    boolean                     isCancelInProgress;
+    /**< Set to TRUE when user cancels a sequence - this is set for all channels in a sequence */
 } Cdd_I2c_ChObjType;
 
 /**
@@ -219,6 +223,7 @@ typedef struct
 
 Std_ReturnType Cdd_I2c_StartSeqAsync(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj);
 Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjType *seqObj);
+Std_ReturnType Cdd_I2c_ResetHwUnitPriv(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_HwUnitObjType *hwUnitObj);
 
 #if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
 Std_ReturnType Cdd_I2c_CheckConfig(const Cdd_I2c_ConfigType *configPtr);

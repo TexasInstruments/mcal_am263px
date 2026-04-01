@@ -449,11 +449,11 @@ FUNC(Gpt_ValueType, GPT_CODE) Gpt_GetTimeRemaining(Gpt_ChannelType channel)
     Gpt_ValueType          Return_Value = 0U;
     uint32                 Gpt_rtiChAddr;
     Gpt_ChannelConfigType *gptDrvChannelObj;
-    if (channel > GPT_RTI_CH_MAX)
+    uint16                 channelIdx = (uint16)GPT_RTI_MAX;
+    if (channel <= GPT_RTI_CH_MAX)
     {
-        (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_GET_TIME_REMAINING, GPT_E_PARAM_CHANNEL);
+        channelIdx = Gpt_ChConfig_map[channel];
     }
-    uint16 channelIdx = Gpt_ChConfig_map[channel];
 
     /* Check if the driver has been successfully initialized. If the driver
      * has not been initialized, report an error and return from Api.
@@ -466,7 +466,7 @@ FUNC(Gpt_ValueType, GPT_CODE) Gpt_GetTimeRemaining(Gpt_ChannelType channel)
     /* Check if parameter channel is in valid range. If its value is out
      * of range report an error and return from the function.    */
     /* If any channel is not configured then default channelIdx will be GPT_RTI_MAX */
-    else if (channelIdx >= (uint16)GPT_RTI_MAX)
+    else if ((channel > GPT_RTI_CH_MAX) || (channelIdx >= (uint16)GPT_RTI_MAX))
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_GET_TIME_REMAINING, GPT_E_PARAM_CHANNEL);
     }

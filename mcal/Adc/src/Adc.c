@@ -195,18 +195,23 @@ FUNC(void, ADC_CODE) Adc_Init(P2CONST(Adc_ConfigType, AUTOMATIC, ADC_PBCFG) CfgP
                                                                   or NULL in post build*/
         Avoid_nesting_flag = 1U;
     }
-    if ((Avoid_nesting_flag == 0U) &&
-        ((ConfigPtr->maxGroup >= (ADC_MAX_GROUP + 1U)) || (ConfigPtr->maxHwUnit >= (ADC_MAX_HW_UNIT + 1U))))
+    if (Avoid_nesting_flag == 0U)
     {
-        Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG); /*Report DET if ConfigPtr has parameter values which
-                                                                 exceeds max values*/
-        Avoid_nesting_flag = 1U;
-    }
-    if ((Avoid_nesting_flag == 0U) && (((uint32)ADC_TRUE) != Adc_checkHwUnitObj(ConfigPtr)))
-    {
-        Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG); /* Report DET if HwUnitId exceeds max
-                                                                 hw value and hwunit not found*/
-        Avoid_nesting_flag = 1U;
+        if ((ConfigPtr->maxGroup > ADC_MAX_GROUP) || (ConfigPtr->maxHwUnit > ADC_MAX_HW_UNIT))
+        {
+            Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG); /*Report DET if ConfigPtr has parameter values which
+                                                                     exceeds max values*/
+            Avoid_nesting_flag = 1U;
+        }
+        else
+        {
+            if (((uint32)ADC_TRUE) != Adc_checkHwUnitObj(ConfigPtr))
+            {
+                Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG); /* Report DET if HwUnitId exceeds max
+                                                                         hw value and hwunit not found*/
+                Avoid_nesting_flag = 1U;
+            }
+        }
     }
     if (Avoid_nesting_flag == 0U)
 #endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */

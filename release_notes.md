@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00.02 done on 29-Mar-2026.
+This is the release notes for MCAL AM26xx 26.00.00 done on 02-Apr-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -236,6 +236,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>OPTIONS tag is now added with all recommended compiler and linker options</td>
     </tr>
     <tr>
+      <td>MCAL-36815</td>
+      <td>MainFunction execution is not mapped to TASK in bswmd.arxml</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>All main function execution, the context is now updated to TASK instead of UNSPECIFIED</td>
+    </tr>
+    <tr>
       <td>MCAL-35744</td>
       <td>NULL_PTR implemented in hal_stdtypes.h</td>
       <td>Common</td>
@@ -267,6 +275,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>AM263x, AM263Px, AM261x</td>
       <td>With fixes done in CDD I2C in previous releases, the BSWMD file was not updated.<br>
           Fixes include adding CddI2cMainFunctionPeriod configuration parameter, removing unavailable entries</td>
+    </tr>
+    <tr>
+      <td>MCAL-35346</td>
+      <td>Implement non-blocking Cancel API for CDD I2C</td>
+      <td>CDD I2C</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Added <code>Cdd_I2c_Cancel</code> API to cancel in-progress I2C sequences in polling and interrupt modes</td>
     </tr>
     <tr>
       <td>MCAL-35752</td>
@@ -427,14 +443,6 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>MCAL-35346</td>
-      <td>I2C: Cancel API is not functional</td>
-      <td>CDD I2C</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>None. This will be fixed in future MCAL release</td>
-    </tr>
     <tr>
       <td>MCAL-27007</td>
       <td>UART read/write with DMA enabled is not working</td>

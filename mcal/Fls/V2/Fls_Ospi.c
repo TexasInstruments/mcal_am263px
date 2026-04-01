@@ -1804,87 +1804,114 @@ void Fls_Interrupt_Enable(void)
     processJobs(Fls_DrvObj.jobType);
 }
 /**
- *  \Function Name: Fls_set888mode
+ *  \Function Name: Fls_set888mode_seq1
  *
- *   This function is used to set register read and write commands for 888 mode.
+ *   Helper: processes sequence bit 1 of 888 mode setup.
+ *   Extracted from Fls_set888mode to reduce the PATH HIS metric.
  *
  */
-Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
+static Std_ReturnType Fls_set888mode_seq1(OSPI_Handle handle, OSPI_Object *obj)
 {
-    OSPI_Config   *pHandle = (OSPI_Config *)handle;
-    OSPI_Object   *obj     = pHandle->object;
-    Std_ReturnType retVal  = E_OK;
+    Std_ReturnType retVal = Nor_OspiCmdWrite(handle, 0xE8, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
-    if ((seq & (1U << 1U)) != 0U)
+    if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
     {
-        retVal = Nor_OspiCmdWrite(handle, 0xE8, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
-        if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
+        Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
+    }
+    else
+    {
+        Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 0);
+    }
+    obj->currentprotocol = Fls_DrvObj.Fls_Mode;
+    if (retVal == E_OK)
+    {
+        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+    }
+    return retVal;
+}
+/**
+ *  \Function Name: Fls_set888mode_seq2
+ *
+ *   Helper: processes sequence bit 2 of 888 mode setup.
+ *   Extracted from Fls_set888mode to reduce the PATH HIS metric.
+ *
+ */
+static Std_ReturnType Fls_set888mode_seq2(OSPI_Handle handle, OSPI_Object *obj)
+{
+    Std_ReturnType retVal =
+        Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
+    if (retVal == E_OK)
+    {
+        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+    }
+    retVal += Nor_OspiCmdWrite(handle, 0x72, 0, 0, (uint8 *)NULL_PTR, 0);
+    if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
+    {
+        Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
+    }
+    else
+    {
+        Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 0);
+    }
+    obj->currentprotocol = Fls_DrvObj.Fls_Mode;
+    if (retVal == E_OK)
+    {
+        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+    }
+    return retVal;
+}
+/**
+ *  \Function Name: Fls_set888mode_doAddrReg
+ *
+ *   Helper: performs the combined octal/DTR register read-modify-write.
+ *   Extracted from Fls_set888mode to reduce the PATH HIS metric.
+ *
+ */
+static Std_ReturnType Fls_set888mode_doAddrReg(OSPI_Handle handle, Fls_RegEnConfig *octCfg, Fls_RegEnConfig *dCfg)
+{
+    uint8          reg    = 0U;
+    Std_ReturnType retVal = Nor_OspiRegRead(handle, octCfg->cmdRegRd, octCfg->cfgReg, &reg);
+
+    if (E_OK == retVal)
+    {
+        /* Octal DDR is special. Check if it is already enabled */
+        if ((((reg >> octCfg->shift) & 0x01U) == (uint8)1U) && (((reg >> dCfg->shift) & 0x01U) == (uint8)1U))
         {
-            Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
+            /* Already 8D */
         }
         else
         {
-            Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 0);
-        }
-        obj->currentprotocol = Fls_DrvObj.Fls_Mode;
-        if (retVal == E_OK)
-        {
-            retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
-        }
-    }
-    if ((seq & (1U << 2U)) != 0U)
-    {
-        retVal +=
-            Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
-        if (retVal == E_OK)
-        {
-            retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
-        }
-        retVal += Nor_OspiCmdWrite(handle, 0x72, 0, 0, (uint8 *)NULL_PTR, 0);
-        if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
-        {
-            Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
-        }
-        else
-        {
-            Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 0);
-        }
-        obj->currentprotocol = Fls_DrvObj.Fls_Mode;
-        if (retVal == E_OK)
-        {
-            retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+            /* Clear the config bits in the register */
+            reg &= ~(uint8)(octCfg->mask | dCfg->mask);
+            /* Bitwise OR the bit pattern for setting the dummyCycle selected */
+            reg |= (octCfg->cfgRegBitP << octCfg->shift);
+            if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
+            {
+                reg |= (dCfg->cfgRegBitP << dCfg->shift);
+            }
+            retVal += Nor_OspiRegWrite(handle, octCfg->cmdRegWr, octCfg->cfgReg, reg);
         }
     }
-
-    /* Check for register addressed 8-8-8 mode */
+    return retVal;
+}
+/**
+ *  \Function Name: Fls_set888mode_regCfg
+ *
+ *   Helper: configures the octal/DTR register settings for 888 mode.
+ *   Extracted from Fls_set888mode to reduce the PATH HIS metric.
+ *
+ */
+static Std_ReturnType Fls_set888mode_regCfg(OSPI_Handle handle, OSPI_Object *obj)
+{
+    Std_ReturnType   retVal = E_OK;
     Fls_RegEnConfig *octCfg = &(Fls_Config_SFDP_Ptr->protos.protoCfg);
     Fls_RegEnConfig *dCfg   = &(Fls_Config_SFDP_Ptr->protos.strDtrCfg);
 
+    /* Check for register addressed 8-8-8 mode */
     if ((octCfg->isAddrReg != 0U) && (dCfg->isAddrReg != 0U) && (dCfg->cfgReg == octCfg->cfgReg))
     {
         /* Do both the configs together */
-        uint8 reg  = 0U;
-        retVal    += Nor_OspiRegRead(handle, octCfg->cmdRegRd, octCfg->cfgReg, &reg);
-        if (E_OK == retVal)
-        {
-            /* Octal DDR is special. Check if it is already enabled */
-            if ((((reg >> octCfg->shift) & 0x01U) == (uint8)1U) && (((reg >> dCfg->shift) & 0x01U) == (uint8)1U))
-            {
-                /* Already 8D */
-            }
-            else
-            {
-                /* Clear the config bits in the register  */
-                reg &= ~(uint8)(octCfg->mask | dCfg->mask);
-                /* Bitwise OR the bit pattern for setting the dummyCycle selected */
-                reg |= (octCfg->cfgRegBitP << octCfg->shift);
-                if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
-                {
-                    reg |= (dCfg->cfgRegBitP << dCfg->shift);
-                }
-                retVal += Nor_OspiRegWrite(handle, octCfg->cmdRegWr, octCfg->cfgReg, reg);
-            }
-        }
+        retVal += Fls_set888mode_doAddrReg(handle, octCfg, dCfg);
         if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
         {
             Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);
@@ -1905,6 +1932,29 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
         }
         retVal += Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
     }
+    return retVal;
+}
+/**
+ *  \Function Name: Fls_set888mode
+ *
+ *   This function is used to set register read and write commands for 888 mode.
+ *
+ */
+Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
+{
+    OSPI_Config   *pHandle = (OSPI_Config *)handle;
+    OSPI_Object   *obj     = pHandle->object;
+    Std_ReturnType retVal  = E_OK;
+
+    if ((seq & (1U << 1U)) != 0U)
+    {
+        retVal = Fls_set888mode_seq1(handle, obj);
+    }
+    if ((seq & (1U << 2U)) != 0U)
+    {
+        retVal += Fls_set888mode_seq2(handle, obj);
+    }
+    retVal += Fls_set888mode_regCfg(handle, obj);
     if (retVal == E_OK)
     {
         obj->currentprotocol = Fls_DrvObj.Fls_Mode;

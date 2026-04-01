@@ -377,6 +377,8 @@ static Std_ReturnType Fls_Ospi_phyReadAttackVector(uint32 offset)
     uint8         *src               = (uint8 *)(flashDataBaseAddr + offset);
     uint8         *dst               = (uint8 *)gReadBuf;
     uint32         count             = OSPI_FLASH_ATTACK_VECTOR_SIZE;
+    const uint8   *readBufPtr        = (const uint8 *)gReadBuf;
+    uint32         vecIdx;
 
     /* Enable Direct Access Mode */
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_ENB_DIR_ACC_CTLR_FLD, 1);
@@ -390,9 +392,13 @@ static Std_ReturnType Fls_Ospi_phyReadAttackVector(uint32 offset)
         count--;
     }
 
-    if (memcmp((const uint8 *)gReadBuf, (const uint8 *)gOspiFlashAttackVector, OSPI_FLASH_ATTACK_VECTOR_SIZE) != 0)
+    for (vecIdx = 0U; vecIdx < (uint32)OSPI_FLASH_ATTACK_VECTOR_SIZE; vecIdx++)
     {
-        status = E_NOT_OK;
+        if (readBufPtr[vecIdx] != gOspiFlashAttackVector[vecIdx])
+        {
+            status = E_NOT_OK;
+            break;
+        }
     }
 
     return status;

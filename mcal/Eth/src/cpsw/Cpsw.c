@@ -161,7 +161,7 @@ uint32 Cpsw_checkHostErr(uint32 baseAddr)
     return retVal;
 }
 
-void Cpsw_setPortSrcAddr(uint32 baseAddr, uint8 slavePortNum, const uint8 macAddr[6])
+void Cpsw_setPortSrcAddr(uint32 baseAddr, uint8 slavePortNum, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr)
 {
     uint32 regVal = 0U;
 
@@ -190,7 +190,7 @@ void Cpsw_setPrescale(uint32 baseAddr, uint32 preScalarVal)
     CPSW_SS_WR_FIELD(INT_CONTROL, PRESCALE, preScalarVal);
 }
 
-Std_ReturnType Cpsw_getPortSrcAddr(uint32 baseAddr, uint32 slavePortNum, uint8 macAddr[6])
+Std_ReturnType Cpsw_getPortSrcAddr(uint32 baseAddr, uint32 slavePortNum, P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr)
 {
     Std_ReturnType retVal    = (Std_ReturnType)E_NOT_OK;
     uint32         macAddrLo = 0U, macAddrHi = 0U;

@@ -784,7 +784,7 @@ uint32 Spi_mcspiGetCsIntrMask(uint32 csNum, Spi_TxRxMode txRxMode)
             csIntrMask |= (uint32)MCSPI_IRQENABLE_RX0_FULL_ENABLE_MASK;
         }
     }
-    if (((uint32)SPI_CS1 == csNum) && (ConditionCheck == 0U))
+    else if ((uint32)SPI_CS1 == csNum)
     {
         ConditionCheck  = 1U;
         csIntrMask     |= (uint32)MCSPI_IRQENABLE_TX1_EMPTY_ENABLE_MASK;
@@ -793,7 +793,7 @@ uint32 Spi_mcspiGetCsIntrMask(uint32 csNum, Spi_TxRxMode txRxMode)
             csIntrMask |= (uint32)MCSPI_IRQENABLE_RX1_FULL_ENABLE_MASK;
         }
     }
-    if (((uint32)SPI_CS2 == csNum) && (ConditionCheck == 0U))
+    else if ((uint32)SPI_CS2 == csNum)
     {
         ConditionCheck  = 1U;
         csIntrMask     |= (uint32)MCSPI_IRQENABLE_TX2_EMPTY_ENABLE_MASK;

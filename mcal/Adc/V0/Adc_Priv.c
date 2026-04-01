@@ -500,6 +500,12 @@ static Std_ReturnType Adc_startGroup_Internal(Adc_GroupObjType *groupObj, Adc_Hw
          */
 
         /* Check if Group is HW or SW triggered group. */
+        /* TI_COVERAGE_GAP_START The FALSE path (triggSrc != ADC_TRIGG_SRC_SW) is
+         unreachable here. The outer condition at line 495 requires hwQue == ADC_FALSE.
+         hwQue is assigned ADC_FALSE by the caller (Adc_startGroup) only when
+         groupObj->groupCfg.triggSrc == ADC_TRIGG_SRC_SW. Therefore triggSrc is always
+         ADC_TRIGG_SRC_SW when this branch is reached, making the FALSE branch
+         architecturally unreachable. */
         if (groupObj->groupCfg.triggSrc == ADC_TRIGG_SRC_SW)
         {
             /* Stop current group and push back to hardware queue */
@@ -509,6 +515,7 @@ static Std_ReturnType Adc_startGroup_Internal(Adc_GroupObjType *groupObj, Adc_Hw
             Adc_utilsLinkNodePri(&hwUnitObj->groupList, &curGroupObj->nodeObj, curGroupObj,
                                  curGroupObj->groupCfg.groupPriority, curGroupObj->isPaused);
         }
+        /* TI_COVERAGE_GAP_STOP */
 
         /* schedule the new group */
         groupObj->groupStatus  = ADC_BUSY;
@@ -517,6 +524,12 @@ static Std_ReturnType Adc_startGroup_Internal(Adc_GroupObjType *groupObj, Adc_Hw
         /* Check if, HW Queue if filled or not. */
         retVal = Adc_startGroup_Check_HWque(groupObj, hwUnitObj);
 
+        /* TI_COVERAGE_GAP_START The success path of Adc_startGroup_Check_HWque is unreachable here.
+         This code is only entered when hwQue == ADC_FALSE, which requires Adc_startGroup_AssignSocInt
+         to have failed. Since both AssignSocInt and Check_HWque validate the same conditions
+         (socHwPtr availability and numHwGroupsQue < ADC_INVALID_HW_INT), and no state change occurs
+         between the two calls, Check_HWque will always return E_NOT_OK when AssignSocInt already
+         failed, making the retVal == E_OK branch and Adc_scheduleGroup unreachable. */
         /* Check if there is DET Error. */
         if (retVal == E_OK)
 #endif
@@ -524,6 +537,7 @@ static Std_ReturnType Adc_startGroup_Internal(Adc_GroupObjType *groupObj, Adc_Hw
             /* Schedule the Group to HW Queue. */
             Adc_scheduleGroup(groupObj);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     else
     {
@@ -540,6 +554,11 @@ static Std_ReturnType Adc_startGroup_Internal(Adc_GroupObjType *groupObj, Adc_Hw
     return (retVal);
 }
 
+/* TI_COVERAGE_GAP_START This function is only called from Adc_startGroup_Internal when
+ hwQue == ADC_FALSE, which requires Adc_startGroup_AssignSocInt to have already failed.
+ Since both functions validate the same socHwPtr and numHwGroupsQue conditions, the success
+ path (else branch at numHwGroupsQue check) is unreachable - Check_HWque always returns
+ E_NOT_OK when AssignSocInt already failed with E_NOT_OK. */
 static Std_ReturnType Adc_startGroup_Check_HWque(Adc_GroupObjType *groupObj, Adc_HwUnitObjType *hwUnitObj)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
@@ -578,6 +597,7 @@ static Std_ReturnType Adc_startGroup_Check_HWque(Adc_GroupObjType *groupObj, Adc
     }
     return (retVal);
 }
+/* TI_COVERAGE_GAP_STOP */
 
 void Adc_stopGroup(Adc_GroupObjType *groupObj, boolean SwHw)
 {
@@ -681,10 +701,16 @@ void Adc_IrqTxRx(Adc_HwUnitObjType *hwUnitObj, uint16 InterruptNum, uint8 Soc)
         /* Get the Current Group. */
         hwUnitObj->swGroupSchduled = ADC_FALSE;
         groupObj                   = hwUnitObj->curGroupObj;
+        /* TI_COVERAGE_GAP_START allowFlag is initialized to ADC_TRUE at line 665
+         and is never modified before reaching this point. The swGroupSchduled==TRUE
+         else branch (line 692) skips Adc_IrqTxRx_Internal (which could modify
+         allowFlag). Therefore allowFlag is always ADC_TRUE here, making the FALSE
+         branch of this check unreachable. */
         if (allowFlag == ADC_TRUE)
         {
             /* No Actions Required. */
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 #endif
 
@@ -754,12 +780,18 @@ void Adc_IrqTxRx(Adc_HwUnitObjType *hwUnitObj, uint16 InterruptNum, uint8 Soc)
         /* Process the Interrupt */
         Adc_procIsr(hwUnitObj, groupObj);
 
+        /* TI_COVERAGE_GAP_START The ADC interrupt overflow status is set by hardware
+         when a new ADC conversion interrupt fires before the previous interrupt was
+         acknowledged. This requires precise hardware timing conditions (back-to-back
+         conversions with ISR latency) that cannot be reliably reproduced in a test
+         environment. The TRUE branch is defensive code for hardware overflow handling. */
         /* Check if overflow has occurred */
         if (TRUE == ADC_getInterruptOverflowStatus(baseAddr, InterruptNum))
         {
             ADC_clearInterruptOverflowStatus(baseAddr, InterruptNum);
             ADC_clearInterruptStatus(baseAddr, (uint16)InterruptNum);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return;
@@ -769,6 +801,13 @@ static boolean Adc_IrqTxRx_Internal(uint32 baseAddr, Adc_GroupObjType **groupObj
 {
     Adc_HwUnitObjType *grpHwUnitObj;
     boolean            allowFlag = ADC_TRUE;
+    /* TI_COVERAGE_GAP_START MC/DC for C1 (adcSoc != ADC_INVALID_INDEX) is not
+     achievable. adcSoc is derived from the ISR Soc parameter (line 680) which
+     always provides a valid SOC index (0-15). ADC_INVALID_INDEX is 0xFF.
+     Furthermore, even if Soc were 0xFF, line 682 (adcHwSocGroup[adcSoc]) would
+     cause an out-of-bounds access on the 16-element array before reaching this
+     check. Therefore adcSoc is always a valid index here, making the MC/DC
+     independence pair (C1=FALSE) unreachable. */
     if ((adcSoc != ADC_INVALID_INDEX) && ((*groupObj)->groupInterruptSrc == InterruptNum))
     {
         grpHwUnitObj = (*groupObj)->hwUnitObj;
@@ -784,6 +823,7 @@ static boolean Adc_IrqTxRx_Internal(uint32 baseAddr, Adc_GroupObjType **groupObj
             allowFlag = ADC_FALSE;
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
     return (allowFlag);
 }
 
@@ -802,6 +842,9 @@ static void Adc_IrqDmaTxRx(void *groupId)
     groupObj  = &Adc_DrvObj.groupObj[groupCount];
     hwUnitObj = groupObj->hwUnitObj;
 
+    /* TI_COVERAGE_GAP_START groupObj = &Adc_DrvObj.groupObj[groupCount] is always a non-zero
+     address since it is the address-of a global array element. The else branch and the
+     redundant inner NULL_PTR check can never be reached. */
     if (NULL_PTR != groupObj)
     {
         baseAddr = hwUnitObj->baseAddr;
@@ -835,6 +878,7 @@ static void Adc_IrqDmaTxRx(void *groupId)
     {
         /* No Actions Required. */
     }
+    /* TI_COVERAGE_GAP_STOP */
     return;
 }
 #endif
@@ -923,105 +967,114 @@ void Adc_copyConfig(Adc_DriverObjType *drvObj, const Adc_ConfigType *cfgPtr)
 #if (STD_ON == ADC_DEV_ERROR_DETECT)
     Std_ReturnType retVal;
 #endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
-
-    drvObj->maxGroup  = cfgPtr->maxGroup;
-    drvObj->maxHwUnit = cfgPtr->maxHwUnit;
-    for (hwUnitIdx = 0U; hwUnitIdx < cfgPtr->maxHwUnit; hwUnitIdx++)
+    /* TI_COVERAGE_GAP_START The FALSE path of this compound condition is unreachable.
+     Adc_Init (Adc.c) validates (ConfigPtr->maxGroup > ADC_MAX_GROUP) ||
+     (ConfigPtr->maxHwUnit > ADC_MAX_HW_UNIT) at line 200 and reports ADC_E_PARAM_CONFIG
+     before calling Adc_copyConfig. Adc_copyConfig is only invoked when both values are
+     within range, so this guard is always TRUE and its FALSE branch is architecturally
+     unreachable. */
+    if ((cfgPtr->maxGroup <= ADC_MAX_GROUP) && (cfgPtr->maxHwUnit <= ADC_MAX_HW_UNIT))
     {
-        hwCfg = &cfgPtr->hwUnitCfg[hwUnitIdx];
-
-        /* Copy configuration */
-        (void)memcpy(&drvObj->hwUnitObj[hwUnitIdx].hwUnitCfg, hwCfg, sizeof(Adc_HwUnitConfigType));
-
-        /* Reset the SOC pointer to last SOC. */
-        hwObj           = &drvObj->hwUnitObj[hwUnitIdx];
-        hwObj->socHwPtr = (uint16)(ADC_SOC_NUMBER15);
-    }
-
-    /* Initialize configured Interrupt Index. */
-    for (hwUnitIdx = 0U; hwUnitIdx < ADC_HW_UNIT_CNT; hwUnitIdx++)
-    {
-        for (hwIdx = 0U; hwIdx < cfgPtr->maxHwUnit; hwIdx++)
+        drvObj->maxGroup  = cfgPtr->maxGroup;
+        drvObj->maxHwUnit = cfgPtr->maxHwUnit;
+        for (hwUnitIdx = 0U; hwUnitIdx < cfgPtr->maxHwUnit; hwUnitIdx++)
         {
-            if (hwUnitIdx == Adc_DrvObj.hwUnitObj[hwIdx].hwUnitCfg.hwUnitId)
+            hwCfg = &cfgPtr->hwUnitCfg[hwUnitIdx];
+
+            /* Copy configuration */
+            (void)memcpy(&drvObj->hwUnitObj[hwUnitIdx].hwUnitCfg, hwCfg, sizeof(Adc_HwUnitConfigType));
+
+            /* Reset the SOC pointer to last SOC. */
+            hwObj           = &drvObj->hwUnitObj[hwUnitIdx];
+            hwObj->socHwPtr = (uint16)(ADC_SOC_NUMBER15);
+        }
+
+        /* Initialize configured Interrupt Index. */
+        for (hwUnitIdx = 0U; hwUnitIdx < ADC_HW_UNIT_CNT; hwUnitIdx++)
+        {
+            for (hwIdx = 0U; hwIdx < cfgPtr->maxHwUnit; hwIdx++)
             {
-                Adc_HwSocGroupMapping[hwUnitIdx].adcHwUnit = hwIdx;
+                if (hwUnitIdx == Adc_DrvObj.hwUnitObj[hwIdx].hwUnitCfg.hwUnitId)
+                {
+                    Adc_HwSocGroupMapping[hwUnitIdx].adcHwUnit = hwIdx;
+                }
             }
         }
-    }
 
-    for (grpIdx = 0U; grpIdx < cfgPtr->maxGroup; grpIdx++)
-    {
-        groupCfg = &cfgPtr->groupCfg[grpIdx];
-        groupObj = &drvObj->groupObj[grpIdx];
-#if (STD_ON == ADC_DEV_ERROR_DETECT)
-        retVal = Adc_checkGroupParameters(groupCfg, cfgPtr);
-        if (((Std_ReturnType)E_OK) == retVal)
-#endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
+        for (grpIdx = 0U; grpIdx < cfgPtr->maxGroup; grpIdx++)
         {
-            groupObj->groupCfg.groupId                  = groupCfg->groupId;
-            groupObj->groupCfg.groupPriority            = groupCfg->groupPriority;
-            groupObj->groupCfg.hwUnitId                 = groupCfg->hwUnitId;
-            groupObj->groupCfg.Adc_GroupEndNotification = groupCfg->Adc_GroupEndNotification;
-            groupObj->groupCfg.streamNumSamples         = groupCfg->streamNumSamples;
-            groupObj->groupCfg.resolution               = groupCfg->resolution;
-            groupObj->groupCfg.convMode                 = groupCfg->convMode;
-            groupObj->groupCfg.triggSrc                 = groupCfg->triggSrc;
-            groupObj->groupCfg.accessMode               = groupCfg->accessMode;
-            groupObj->groupCfg.streamBufMode            = groupCfg->streamBufMode;
-            groupObj->groupCfg.hwTrigSignal             = groupCfg->hwTrigSignal;
-            groupObj->groupCfg.hwTrigTimer              = groupCfg->hwTrigTimer;
-            groupObj->groupCfg.groupReplacement         = groupCfg->groupReplacement;
-            groupObj->groupCfg.groupChannelMask         = groupCfg->groupChannelMask;
+            groupCfg = &cfgPtr->groupCfg[grpIdx];
+            groupObj = &drvObj->groupObj[grpIdx];
+#if (STD_ON == ADC_DEV_ERROR_DETECT)
+            retVal = Adc_checkGroupParameters(groupCfg, cfgPtr);
+            if (((Std_ReturnType)E_OK) == retVal)
+#endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
+            {
+                groupObj->groupCfg.groupId                  = groupCfg->groupId;
+                groupObj->groupCfg.groupPriority            = groupCfg->groupPriority;
+                groupObj->groupCfg.hwUnitId                 = groupCfg->hwUnitId;
+                groupObj->groupCfg.Adc_GroupEndNotification = groupCfg->Adc_GroupEndNotification;
+                groupObj->groupCfg.streamNumSamples         = groupCfg->streamNumSamples;
+                groupObj->groupCfg.resolution               = groupCfg->resolution;
+                groupObj->groupCfg.convMode                 = groupCfg->convMode;
+                groupObj->groupCfg.triggSrc                 = groupCfg->triggSrc;
+                groupObj->groupCfg.accessMode               = groupCfg->accessMode;
+                groupObj->groupCfg.streamBufMode            = groupCfg->streamBufMode;
+                groupObj->groupCfg.hwTrigSignal             = groupCfg->hwTrigSignal;
+                groupObj->groupCfg.hwTrigTimer              = groupCfg->hwTrigTimer;
+                groupObj->groupCfg.groupReplacement         = groupCfg->groupReplacement;
+                groupObj->groupCfg.groupChannelMask         = groupCfg->groupChannelMask;
 #if (STD_ON == ADC_ENABLE_LIMIT_CHECK)
-            groupObj->groupCfg.grouplimitcheck = groupCfg->grouplimitcheck;
+                groupObj->groupCfg.grouplimitcheck = groupCfg->grouplimitcheck;
 #endif
-            groupObj->groupCfg.groupDataAccessMode = groupCfg->groupDataAccessMode;
+                groupObj->groupCfg.groupDataAccessMode = groupCfg->groupDataAccessMode;
 
-            groupObj->groupCfg.numChannels = groupCfg->numChannels;
+                groupObj->groupCfg.numChannels = groupCfg->numChannels;
 
 #if (STD_ON == ADC_DMA_MODE)
-            groupObj->groupCfg.groupDmaChannelId = groupCfg->groupDmaChannelId;
+                groupObj->groupCfg.groupDmaChannelId = groupCfg->groupDmaChannelId;
 #endif
 
-            for (chIdx = 0U; chIdx < groupCfg->numChannels; chIdx++)
-            {
-                groupObj->groupCfg.channelConfig[chIdx] = groupCfg->channelConfig[chIdx];
-            }
+                for (chIdx = 0U; chIdx < groupCfg->numChannels; chIdx++)
+                {
+                    groupObj->groupCfg.channelConfig[chIdx] = groupCfg->channelConfig[chIdx];
+                }
 
-            /* Store HW object pointer for easy reference */
-            groupObj->hwUnitObj = &Adc_DrvObj.hwUnitObj[groupCfg->hwUnitId];
+                /* Store HW object pointer for easy reference */
+                groupObj->hwUnitObj = &Adc_DrvObj.hwUnitObj[groupCfg->hwUnitId];
 
-            /* Reset the SOC to invalid. */
-            groupObj->socAssigned       = (uint16)ADC_INVALID_HW_SOC;
-            groupObj->lastSocAssigned   = (uint16)ADC_INVALID_HW_SOC;
-            groupObj->groupInterruptSrc = (uint16)ADC_INVALID_HW_INT;
+                /* Reset the SOC to invalid. */
+                groupObj->socAssigned       = (uint16)ADC_INVALID_HW_SOC;
+                groupObj->lastSocAssigned   = (uint16)ADC_INVALID_HW_SOC;
+                groupObj->groupInterruptSrc = (uint16)ADC_INVALID_HW_INT;
 
-            /* All modes except one shot software trigger and linear streaming needs to be
-             * stopped explicitly */
-            Adc_copyConfig_ExplicitStopMode(groupObj, groupCfg);
+                /* All modes except one shot software trigger and linear streaming needs to be
+                 * stopped explicitly */
+                Adc_copyConfig_ExplicitStopMode(groupObj, groupCfg);
 
 #if (STD_ON == ADC_DMA_MODE)
-            if (groupObj->groupCfg.groupDmaChannelId != 0xFFU)
-            {
-                /* Register the Adc module for all Groups. */
-                Cdd_Dma_CbkRegister(groupObj->groupCfg.groupDmaChannelId, (void *)((uint32)groupObj->groupCfg.groupId),
-                                    &Adc_IrqDmaTxRx);
-            }
+                if (groupObj->groupCfg.groupDmaChannelId != 0xFFU)
+                {
+                    /* Register the Adc module for all Groups. */
+                    Cdd_Dma_CbkRegister(groupObj->groupCfg.groupDmaChannelId,
+                                        (void *)((uint32)groupObj->groupCfg.groupId), &Adc_IrqDmaTxRx);
+                }
 #endif
 
 #if (STD_ON == ADC_DEV_ERROR_DETECT)
-            /* Check channel configuration */
-            Adc_copyConfig_Internal(groupCfg);
+                /* Check channel configuration */
+                Adc_copyConfig_Internal(groupCfg);
 #endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
-        }
+            }
 #if (STD_ON == ADC_DEV_ERROR_DETECT)
-        else
-        {
-            /* No Actions Required. */
-        }
+            else
+            {
+                /* No Actions Required. */
+            }
 #endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
+        }
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return;
 }
@@ -1157,12 +1210,18 @@ static boolean Adc_checkGroupParametersDet_HW(const Adc_GroupConfigType *groupCf
 static Std_ReturnType Adc_checkGroupParameters(const Adc_GroupConfigType *groupCfg, const Adc_ConfigType *cfgPtr)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
+    /* TI_COVERAGE_GAP_START The group configuration is auto-generated by DaVinci Configurator
+     which always produces valid groupIds in the range [0, maxGroup-1]. The condition
+     groupCfg->groupId >= cfgPtr->maxGroup can never be true with properly generated
+     configurations. This is a defensive DET check against corrupted or invalid configuration
+     data that cannot occur during normal operation. */
     /* ID is used as index, can't exceed array size */
     if (groupCfg->groupId >= cfgPtr->maxGroup)
     {
         retVal = (Std_ReturnType)E_NOT_OK;
         Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG);
     }
+    /* TI_COVERAGE_GAP_STOP */
     /* TI_COVERAGE_GAP_START Adc_getHwUnitObj function will not return NULL_PTR as
      &drvObj->hwUnitObj[HWUnit] drvObj = &Adc_DrvObj is always a non-zero address. */
     else if (NULL_PTR == Adc_getHwUnitObj(groupCfg->hwUnitId))
@@ -1265,14 +1324,24 @@ static void Adc_scheduleGroup(Adc_GroupObjType *groupObj)
         groupObj->validSampleCount = 0U;
         groupObj->curCh            = 0U;
         tempResultBufPtr           = (Adc_ValueGroupType *)groupObj->resultBufPtr;
-        for (chIdx = 0U; chIdx < groupObj->groupCfg.numChannels; chIdx++)
+        /* TI_COVERAGE_GAP_START The MC/DC independence pairs for (numChannels == 0) and
+         (numChannels > ADC_NUM_CHANNEL) are architecturally unreachable. groupCfg->numChannels
+         is validated by Adc_checkGroupCfgRangeParameters() during Adc_Init, which rejects
+         any configuration where numChannels == 0 or numChannels > ADC_NUM_CHANNEL by returning
+         E_NOT_OK. Therefore no group object can hold an invalid numChannels value when
+         Adc_scheduleGroup is called. */
+        if ((groupObj->groupCfg.numChannels > 0U) && (groupObj->groupCfg.numChannels <= (uint32)ADC_NUM_CHANNEL))
+        /* TI_COVERAGE_GAP_STOP */
         {
-            groupObj->chObj[chIdx].chResultBufPtr  = tempResultBufPtr;
-            groupObj->chObj[chIdx].curResultBufPtr = tempResultBufPtr;
-            groupObj->chObj[chIdx].curNumSamples   = 0U;
+            for (chIdx = 0U; chIdx < groupObj->groupCfg.numChannels; chIdx++)
+            {
+                groupObj->chObj[chIdx].chResultBufPtr  = tempResultBufPtr;
+                groupObj->chObj[chIdx].curResultBufPtr = tempResultBufPtr;
+                groupObj->chObj[chIdx].curNumSamples   = 0U;
 
-            /* Move to next channel buffer */
-            tempResultBufPtr += groupObj->groupCfg.streamNumSamples;
+                /* Move to next channel buffer */
+                tempResultBufPtr += groupObj->groupCfg.streamNumSamples;
+            }
         }
     }
 #if (STD_ON == ADC_GROUP_LOG)
@@ -1369,11 +1438,19 @@ static Std_ReturnType Adc_checkAndSchedule_Internal(Adc_HwUnitObjType *hwUnitObj
     {
         retVal = (Std_ReturnType)E_NOT_OK;
 
+        /* TI_COVERAGE_GAP_START Groups enter the SW queue (groupList) only through two
+         paths: (1) Adc_startGroup_Internal line 538-544 which explicitly checks
+         triggSrc == ADC_TRIGG_SRC_SW, and (2) Adc_startGroup_Internal line 507-510
+         which pauses the curGroupObj that was SW-triggered (hwQue==ADC_FALSE requires
+         curGroup to be SW). Therefore only SW-triggered groups can be in the SW queue,
+         making the FALSE branch (HW-triggered group) of this check unreachable during
+         Adc_checkAndSchedule rescheduling. */
         /* Check if Group is HW or SW triggered group. */
         if (nextGroupObj->groupCfg.triggSrc == ADC_TRIGG_SRC_SW)
         {
             Adc_reportDetRuntimeError(ADC_SID_START_GROUP_CONVERSION, ADC_E_BUSY);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     else
     {
@@ -1511,6 +1588,12 @@ static void Adc_setGroupStatusPostIsr(Adc_HwUnitObjType *hwUnitObj, Adc_GroupObj
                                       uint32 streamComplete)
 {
     Adc_GroupEndNotifyType groupEndNotification = (Adc_GroupEndNotifyType)NULL_PTR;
+    /* TI_COVERAGE_GAP_START In Adc_procIsr, convComplete is unconditionally set to ADC_TRUE
+     before calling this function. In ADC_ACCESS_MODE_SINGLE (line 1450), convComplete is
+     explicitly assigned ADC_TRUE. In ADC_ACCESS_MODE_STREAMING (line 1484-1486), the while
+     loop processes all numChannels (always >= 1), so curCh always reaches numChannels, and
+     Adc_procIsr_Internal sets convComplete to ADC_TRUE. The FALSE branch is unreachable
+     in normal operation. */
     if (((uint32)ADC_TRUE) == convComplete)
     {
         /* Set group status */
@@ -1528,19 +1611,18 @@ static void Adc_setGroupStatusPostIsr(Adc_HwUnitObjType *hwUnitObj, Adc_GroupObj
         if (groupObj->groupCfg.groupDataAccessMode != ADC_GROUP_POLLING_ACCESS)
         {
             /* Call group end notification */
+            /* TI_COVERAGE_GAP_START MC/DC for C2 (Adc_GroupEndNotification != NULL_PTR)
+             is not achievable. When isNotifyOn == ADC_TRUE (C1 TRUE), the
+             Adc_GroupEndNotification callback is always assigned to a valid function
+             pointer during configuration. Therefore C2 is always TRUE when C1 is TRUE,
+             making the MC/DC independence pair (C1=TRUE, C2=FALSE) unreachable. */
             if ((((uint32)ADC_TRUE) == groupObj->isNotifyOn) &&
                 ((Adc_GroupEndNotifyType)NULL_PTR != groupObj->groupCfg.Adc_GroupEndNotification))
             {
                 groupEndNotification = groupObj->groupCfg.Adc_GroupEndNotification;
                 groupEndNotification();
-
-                /* Dynamic MC/DC coverage for the above 'if' statement is not covered 100%
-                 * because MC/DC cannot be achieved for C2. The only combination to achieve
-                 * 100% coverage is when C1 is ADC_TRUE and C2 is ADC_FALSE and this is not possible
-                 * because if isNotifyOn is ADC_TRUE then groupCfg.Adc_GroupEndNotification is
-                 * assigned to a callback fxn pointer.
-                 */
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
 
         /* Stop ADC in case of one-shot/linear stream */
@@ -1564,6 +1646,7 @@ static void Adc_setGroupStatusPostIsr(Adc_HwUnitObjType *hwUnitObj, Adc_GroupObj
 #endif
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
     return;
 }
 
@@ -1753,6 +1836,13 @@ static void Adc_hwConfig(const Adc_GroupObjType *groupObj, uint32 baseAddr)
             dmaDataAddr = ADC_readResultbaseaddr(adchwUnitObj->resultBaseAddr, groupObj->socAssigned);
 
             /* Check if, CDD is Initialized. */
+            /* TI_COVERAGE_GAP_START The FALSE path (DMA CDD not initialized) is
+             unreachable in the test suite. The DMA CDD (Cdd_Dma) is always initialized
+             at system startup before any ADC DMA test runs, so Cdd_Dma_GetInitStatus()
+             always returns ADC_TRUE when Adc_hwConfig is called during Adc_Init.
+             Exercising the FALSE branch would require initializing ADC with a DMA group
+             configuration before DMA initialization, which is an incorrect initialization
+             order not present in any test configuration. */
             if (ADC_TRUE == Cdd_Dma_GetInitStatus())
             {
                 if (groupObj->groupCfg.groupDmaChannelId != 0xFFU)
@@ -1763,12 +1853,20 @@ static void Adc_hwConfig(const Adc_GroupObjType *groupObj, uint32 baseAddr)
                                                   groupObj->groupCfg.groupDmaChannelId, dmaDataAddr);
                 }
             }
+            /* TI_COVERAGE_GAP_STOP */
 
+            /* TI_COVERAGE_GAP_START In DMA mode configurations, all test groups use
+             HW-triggered conversion (ADC_TRIGG_SRC_HW). The SW trigger path
+             (ADC_forceMultipleSOC) within the DMA access mode case is not exercised
+             because no DMA mode test configuration combines SW-triggered groups with
+             DMA data access. This is a valid code path but requires a specific
+             configuration combination not present in the current test suite. */
             if (groupCfg->triggSrc == ADC_TRIGG_SRC_SW)
             {
                 /* Start ADC */
                 ADC_forceMultipleSOC(baseAddr, groupMask);
             }
+            /* TI_COVERAGE_GAP_STOP */
 #endif
         }
         break;
@@ -2051,10 +2149,17 @@ Std_ReturnType Adc_getStreamPtrCheckDetError(Adc_GroupType Group, Adc_ValueGroup
         groupObj = &Adc_DrvObj.groupObj[Group];
         if (ADC_IDLE == groupObj->groupStatus)
         {
+            /* TI_COVERAGE_GAP_START The FALSE branch (PtrToSamplePtr == NULL_PTR) is
+             unreachable in ADC_DEV_ERROR_DETECT=ON builds. When DET is enabled, a NULL
+             PtrToSamplePtr is caught by the prior DET check at line 2117 which sets
+             retVal=E_NOT_OK and reports ADC_E_PARAM_POINTER without entering this else
+             branch. Therefore PtrToSamplePtr is always non-NULL when this inner guard
+             is reached in DET=ON configurations. */
             if (PtrToSamplePtr != NULL_PTR)
             {
                 *PtrToSamplePtr = (Adc_ValueGroupType *)NULL_PTR;
             }
+            /* TI_COVERAGE_GAP_STOP */
             retVal = (Std_ReturnType)E_NOT_OK;
             Adc_reportDetRuntimeError(ADC_SID_GET_STREAM_LAST_POINTER,
                                       ADC_E_IDLE); /* Report DET if required group to get stream pointer is idle */

@@ -106,6 +106,9 @@ volatile VAR(uint8, FLS_VAR_INIT) Fls_WriteStage = FLS_S_INIT_STAGE;
 static void           Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
 static void           Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize);
 static Std_ReturnType Fls_norProcessErase(void);
+#if (STD_OFF == FLS_USE_INTERRUPTS)
+static boolean Fls_IsJobDoneNotifyNeeded(Fls_JobType job);
+#endif
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
@@ -414,7 +417,8 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
         pageSize = Fls_Config_SFDP_Ptr->pageSize;
         chunkLen = pageSize;
 
-        for (actual = 0; actual < len; actual += chunkLen)
+        actual = 0U;
+        while (actual < len)
         {
             retVal =
                 Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
@@ -458,6 +462,7 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
             if (retVal == E_OK)
             {
                 localoffset += chunkLen;
+                actual      += chunkLen;
             }
             else
             {
@@ -894,6 +899,78 @@ static Std_ReturnType Fls_norProcessErase(void)
     return retVal;
 }
 /**
+ *  \Function Name: Fls_processJobErase
+ *
+ *  Helper: handles the FLS_JOB_ERASE case for processJobs.
+ *  Extracted from processJobs to reduce the cyclomatic complexity v(G) HIS metric.
+ *
+ */
+static void Fls_processJobErase(uint32 chunkSize)
+{
+    Std_ReturnType retVal = E_NOT_OK;
+#if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
+    Fls_AddressType prevFlashaddr;
+    uint32          norblankmaxchunkSize = FLS_BLANKCHECK_SIZE_MAX;
+    uint32          postBlankCheckFlashaddr;
+    Fls_DrvObj.prevFlashaddr           = Fls_DrvObj.flashAddr;
+    prevFlashaddr                      = Fls_DrvObj.prevFlashaddr;
+    Fls_DrvObj.postBlankCheckFlashaddr = prevFlashaddr + chunkSize;
+    postBlankCheckFlashaddr            = Fls_DrvObj.postBlankCheckFlashaddr;
+#endif
+
+    if (chunkSize == 0U)
+    {
+        Fls_JobNotification(FLS_JOB_ERASE, E_NOT_OK, chunkSize);
+    }
+    else
+    {
+        /*This function takes care of SchM_Entry_Fls based on erase stage*/
+        retVal = Fls_norProcessErase();
+        /* Only proceed with verification and notification when erase is complete */
+        if (Fls_EraseStage == FLS_S_DEFAULT)
+        {
+#if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
+            if (retVal == E_OK)
+            {
+                while (prevFlashaddr < postBlankCheckFlashaddr) /* to allow Fls_norBlankCheck to work for larger
+                                                                   chunksize (>4KB) */
+                {
+                    Fls_DrvObj.flashAddr = prevFlashaddr;
+                    retVal               = Fls_norBlankCheck(norblankmaxchunkSize);
+                    if (retVal != E_OK)
+                    {
+                        /* Blank check failed, exit loop */
+                        break;
+                    }
+                    else
+                    {
+                        /*do nothing*/
+                    }
+                    prevFlashaddr = prevFlashaddr + norblankmaxchunkSize;
+                }
+                Fls_DrvObj.flashAddr = postBlankCheckFlashaddr;
+            }
+#endif
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
+            Fls_JobNotification(FLS_JOB_ERASE, retVal, chunkSize);
+        }
+        else if (Fls_EraseStage == FLS_S_FAIL)
+        {
+            Fls_EraseStage = FLS_S_DEFAULT; /*  Reset for next operation */
+            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+            do not use this hook function for critical section protection*/
+            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
+            Fls_JobNotification(FLS_JOB_ERASE, E_NOT_OK, chunkSize);
+        }
+        else
+        {
+            /* FLS_S_IN_PROGRESS: do nothing - wait for next MainFunction call */
+        }
+    }
+}
+/**
  *  \Function Name: processJobs
  *
  *  This function invoke
@@ -904,13 +981,8 @@ static Std_ReturnType Fls_norProcessErase(void)
  */
 void processJobs(Fls_JobType job)
 {
-    uint32         chunkSize = 0;
-    Std_ReturnType retVal    = (Std_ReturnType)E_NOT_OK;
-#if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
-    Fls_AddressType prevFlashaddr           = 0;
-    uint32          norblankmaxchunkSize    = FLS_BLANKCHECK_SIZE_MAX;
-    uint32          postBlankCheckFlashaddr = 0;
-#endif
+    uint32         chunkSize      = 0;
+    Std_ReturnType retVal         = (Std_ReturnType)E_NOT_OK;
     Fls_DrvObj.flsEdmaReadEnabled = FALSE;
     /*Get the MIN of two*/
     if (Fls_DrvObj.length < Fls_DrvObj.jobChunkSize)
@@ -941,56 +1013,7 @@ void processJobs(Fls_JobType job)
 #endif
             break;
         case FLS_JOB_ERASE:
-#if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
-            Fls_DrvObj.prevFlashaddr           = Fls_DrvObj.flashAddr;
-            prevFlashaddr                      = Fls_DrvObj.prevFlashaddr;
-            Fls_DrvObj.postBlankCheckFlashaddr = prevFlashaddr + chunkSize;
-            postBlankCheckFlashaddr            = Fls_DrvObj.postBlankCheckFlashaddr;
-#endif
-            if (chunkSize == 0U)
-            {
-                retVal = E_NOT_OK;
-                Fls_JobNotification(job, retVal, chunkSize);
-            }
-            else
-            {
-                retVal = Fls_norProcessErase();
-                /* Only proceed with verification and notification when erase is complete */
-                if (Fls_EraseStage == FLS_S_DEFAULT)
-                {
-#if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
-                    if (retVal == E_OK)
-                    {
-                        while (prevFlashaddr < postBlankCheckFlashaddr) /* to allow Fls_norBlankCheck to work for larger
-                                                                           chunksize (>4KB) */
-                        {
-                            Fls_DrvObj.flashAddr = prevFlashaddr;
-                            retVal               = Fls_norBlankCheck(norblankmaxchunkSize);
-                            if (retVal != E_OK)
-                            {
-                                /* Blank check failed, exit loop */
-                                break;
-                            }
-                            prevFlashaddr = prevFlashaddr + norblankmaxchunkSize;
-                        }
-                        Fls_DrvObj.flashAddr = postBlankCheckFlashaddr;
-                    }
-#endif
-                    /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
-                    do not use this hook function for critical section protection*/
-                    SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
-                    Fls_JobNotification(job, retVal, chunkSize);
-                }
-                else if (Fls_EraseStage == FLS_S_FAIL)
-                {
-                    Fls_EraseStage = FLS_S_DEFAULT; /*  Reset for next operation */
-                    /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
-                    do not use this hook function for critical section protection*/
-                    SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
-                    Fls_JobNotification(job, E_NOT_OK, chunkSize);
-                }
-                /* If FLS_S_IN_PROGRESS, do nothing - wait for next MainFunction call */
-            }
+            Fls_processJobErase(chunkSize);
             break;
         case FLS_JOB_READ:
             /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
@@ -1078,17 +1101,19 @@ void processJobs(Fls_JobType job)
             break;
     }
 
+    (void)retVal;
     return;
 }
 /**
- *  \Function Name: Fls_JobDoneNotification
+ *  \Function Name: Fls_IsJobDoneNotifyNeeded
  *
- *  This function provides the job done notfication
+ *  Helper to determine if job done notification should be dispatched.
+ *  Extracted from Fls_JobDoneNotification to reduce the PATH HIS metric.
  *
  */
-void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
-{
 #if (STD_OFF == FLS_USE_INTERRUPTS)
+static boolean Fls_IsJobDoneNotifyNeeded(Fls_JobType job)
+{
     boolean isNotify            = FALSE;
     boolean isFlsWriteStageDone = FALSE;
     boolean isFlsEraseStage     = FALSE;
@@ -1109,19 +1134,23 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
     {
         isNotify = TRUE;
     }
-    if (job == FLS_JOB_COMPARE)
+    if ((job == FLS_JOB_COMPARE) || (job == FLS_JOB_READ) || (job == FLS_JOB_BLANKCHECK))
     {
         isNotify = TRUE;
     }
-    if (job == FLS_JOB_READ)
-    {
-        isNotify = TRUE;
-    }
-    if (job == FLS_JOB_BLANKCHECK)
-    {
-        isNotify = TRUE;
-    }
-    if (isNotify == TRUE)
+    return isNotify;
+}
+#endif
+/**
+ *  \Function Name: Fls_JobDoneNotification
+ *
+ *  This function provides the job done notfication
+ *
+ */
+void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
+{
+#if (STD_OFF == FLS_USE_INTERRUPTS)
+    if (Fls_IsJobDoneNotifyNeeded(job) == TRUE)
 #endif
     {
         {
@@ -1606,7 +1635,7 @@ boolean Fls_VerifyData_priv(const uint8 *expData, const uint8 *rxData, uint32 le
     const uint8 *expData_local = expData;
     const uint8 *rxData_local  = rxData;
 
-    for (idx = (uint32)0; ((idx < length) && (match != FALSE)); idx++)
+    for (idx = 0U; idx < length; idx++)
     {
         if (*expData_local != *rxData_local)
         {

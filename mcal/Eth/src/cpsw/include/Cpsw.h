@@ -211,7 +211,7 @@ uint32 Cpsw_getMiscIntrStatus(uint32 baseAddr);
  *
  * \return  None
  */
-void Cpsw_setPortSrcAddr(uint32 baseAddr, uint8 slavePortNum, const uint8 macAddr[6]);
+void Cpsw_setPortSrcAddr(uint32 baseAddr, uint8 slavePortNum, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr);
 
 /**
  * \brief   Get MAC address of given slave MAC port.
@@ -223,7 +223,8 @@ void Cpsw_setPortSrcAddr(uint32 baseAddr, uint8 slavePortNum, const uint8 macAdd
  * \retval  E_OK         If address is valid
  * \retval  E_NOT_OK     Address not valid
  */
-Std_ReturnType Cpsw_getPortSrcAddr(uint32 baseAddr, uint32 slavePortNum, uint8 macAddr[6]);
+Std_ReturnType Cpsw_getPortSrcAddr(uint32 baseAddr, uint32 slavePortNum,
+                                   P2VAR(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr);
 
 /**
  * \brief   Check the access to the CPSW host.

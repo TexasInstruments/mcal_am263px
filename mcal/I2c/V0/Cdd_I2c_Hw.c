@@ -205,6 +205,18 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwTxPollingContinue(Cdd_I2c_ChObjType *chObj)
 {
     Cdd_I2c_ChannelResultType chResult = chObj->chResult;
 
+    /*
+     * If not started yet and is cancelled, just return
+     */
+    if (TRUE == chObj->isCancelInProgress)
+    {
+        if (chObj->state <= CDD_I2C_STATE_SETUP)
+        {
+            chResult     = CDD_I2C_CH_RESULT_OK;
+            chObj->state = CDD_I2C_STATE_COMPLETE;
+        }
+    }
+
     if (CDD_I2C_STATE_WAIT_FOR_BUS_FREE == chObj->state)
     {
         chResult = Cdd_I2c_HwStateDoWaitForBusFree(chObj);
@@ -223,7 +235,16 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwTxPollingContinue(Cdd_I2c_ChObjType *chObj)
 
     if (CDD_I2C_STATE_DATA_TRANSFER == chObj->state)
     {
-        chResult = Cdd_I2c_HwStateDoTransferTxPolling(chObj);
+        if (TRUE == chObj->isCancelInProgress)
+        {
+            /* Skip further transfers in data transfer state - the main difference in
+             * cancel compared to regular transfer */
+            chObj->state = CDD_I2C_STATE_WAIT_FOR_ACCESS_READY;
+        }
+        else
+        {
+            chResult = Cdd_I2c_HwStateDoTransferTxPolling(chObj);
+        }
     }
 
     if (CDD_I2C_STATE_WAIT_FOR_ACCESS_READY == chObj->state)
@@ -264,6 +285,18 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwRxPollingContinue(Cdd_I2c_ChObjType *chObj)
 {
     Cdd_I2c_ChannelResultType chResult = chObj->chResult;
 
+    /*
+     * If not started yet and is cancelled, just return
+     */
+    if (TRUE == chObj->isCancelInProgress)
+    {
+        if (chObj->state <= CDD_I2C_STATE_SETUP)
+        {
+            chResult     = CDD_I2C_CH_RESULT_OK;
+            chObj->state = CDD_I2C_STATE_COMPLETE;
+        }
+    }
+
     if (CDD_I2C_STATE_WAIT_FOR_BUS_FREE == chObj->state)
     {
         chResult = Cdd_I2c_HwStateDoWaitForBusFree(chObj);
@@ -282,8 +315,25 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwRxPollingContinue(Cdd_I2c_ChObjType *chObj)
 
     if (CDD_I2C_STATE_DATA_TRANSFER == chObj->state)
     {
-        /* Read the remaining bytes */
-        chResult = Cdd_I2c_HwStateDoTransferRxPolling(chObj);
+        /* Incase of cancel, wait for a RX event to exit the transfer gracefully */
+        if (TRUE == chObj->isCancelInProgress)
+        {
+            Cdd_I2c_HwUnitObjType    *hwUnitObj = chObj->hwUnitObj;
+            uint32                    baseAddr  = hwUnitObj->baseAddr;
+            Cdd_I2c_ChannelResultType chResultTemp;
+
+            chResultTemp = Cdd_I2c_HwCheckForRxReady(baseAddr);
+            if (CDD_I2C_CH_RESULT_OK == chResultTemp)
+            {
+                chObj->state = CDD_I2C_STATE_WAIT_FOR_STOP;
+                Cdd_I2c_HwStop(baseAddr);
+            }
+        }
+        else
+        {
+            /* Read the remaining bytes */
+            chResult = Cdd_I2c_HwStateDoTransferRxPolling(chObj);
+        }
     }
 
     if (CDD_I2C_STATE_WAIT_FOR_STOP == chObj->state)
@@ -348,61 +398,30 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwTxRxIntrContinue(Cdd_I2c_ChObjType *chObj)
     }
     else
     {
-        if (CDD_I2C_WRITE == chObj->chCfg->direction)
+        if (TRUE == chObj->isCancelInProgress)
         {
-            chResult = Cdd_I2c_HwStateDoTransferTxIntr(chObj, intrStatus);
+            Cdd_I2c_HwDisableIntr(
+                baseAddr, (uint16)(CDD_I2C_ICIMR_ARDY_MASK | CDD_I2C_ICIMR_ICXRDY_MASK | CDD_I2C_ICIMR_ICRRDY_MASK));
+            Cdd_I2c_HwClearIntr(
+                baseAddr, (uint16)(CDD_I2C_ICSTR_ARDY_MASK | CDD_I2C_ICSTR_ICXRDY_MASK | CDD_I2C_ICSTR_ICRRDY_MASK));
+
+            chObj->state = CDD_I2C_STATE_WAIT_FOR_STOP;
+            Cdd_I2c_HwStop(baseAddr);
         }
         else
         {
-            chResult = Cdd_I2c_HwStateDoTransferRxIntr(chObj, intrStatus);
+            if (CDD_I2C_WRITE == chObj->chCfg->direction)
+            {
+                chResult = Cdd_I2c_HwStateDoTransferTxIntr(chObj, intrStatus);
+            }
+            else
+            {
+                chResult = Cdd_I2c_HwStateDoTransferRxIntr(chObj, intrStatus);
+            }
         }
     }
 
     return chResult;
-}
-
-void Cdd_I2c_HwCancelPolling(Cdd_I2c_ChObjType *chObj)
-{
-    Cdd_I2c_HwUnitObjType    *hwUnitObj = chObj->hwUnitObj;
-    uint32                    baseAddr  = hwUnitObj->baseAddr;
-    Cdd_I2c_ChannelResultType chResult;
-
-    /* Force stop only if the channel is started */
-    if (chObj->state > CDD_I2C_STATE_SETUP)
-    {
-        // TODO: Implement timeout
-        Cdd_I2c_HwStop(baseAddr);
-        do
-        {
-            chResult = Cdd_I2c_HwStateDoWaitForStop(chObj);
-        } while (chResult != CDD_I2C_CH_RESULT_OK);
-    }
-
-    return;
-}
-
-void Cdd_I2c_HwCancelIntr(Cdd_I2c_ChObjType *chObj)
-{
-    Cdd_I2c_HwUnitObjType    *hwUnitObj = chObj->hwUnitObj;
-    uint32                    baseAddr  = hwUnitObj->baseAddr;
-    Cdd_I2c_ChannelResultType chResult;
-
-    /* Force stop only if the channel is started */
-    if (chObj->state > CDD_I2C_STATE_SETUP)
-    {
-        /* Disable and clear all interrupts and perform stop from same context */
-        Cdd_I2c_HwDisableAllIntr(baseAddr);
-        Cdd_I2c_HwClearAllStatus(baseAddr);
-
-        // TODO: Implement timeout
-        Cdd_I2c_HwStop(baseAddr);
-        do
-        {
-            chResult = Cdd_I2c_HwStateDoWaitForStop(chObj);
-        } while (chResult != CDD_I2C_CH_RESULT_OK);
-    }
-
-    return;
 }
 
 void Cdd_I2c_HwDisableAllIntr(uint32 baseAddr)
@@ -737,8 +756,9 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoWaitForAccessReady(Cdd_I2c_ChO
     chResult = Cdd_I2c_HwCheckForAccessReady(baseAddr);
     if (CDD_I2C_CH_RESULT_OK == chResult)
     {
-        /* Generate stop if required or in case of error */
-        if ((TRUE == chObj->isStopRequired) || (chObj->chErrorCode != CDD_I2C_CH_RESULT_OK))
+        /* Generate stop if required or in case of error or if cancelled */
+        if ((TRUE == chObj->isStopRequired) || (chObj->chErrorCode != CDD_I2C_CH_RESULT_OK) ||
+            (TRUE == chObj->isCancelInProgress))
         {
             chResult     = CDD_I2C_CH_RESULT_PENDING;
             chObj->state = CDD_I2C_STATE_WAIT_FOR_STOP;
@@ -948,7 +968,7 @@ static void Cdd_I2c_HwDisableIntr(uint32 baseAddr, uint16 mask)
 
 static void Cdd_I2c_HwClearIntr(uint32 baseAddr, uint16 mask)
 {
-    /* TODO: STR needs to read before clearing without this restart is not working */
+    /* STR needs to read before clearing without this restart is not working */
     volatile uint16 regVal;
     regVal = HW_RD_REG16(baseAddr + CDD_I2C_ICSTR);
     (void)regVal;

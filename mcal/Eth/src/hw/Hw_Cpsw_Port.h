@@ -149,7 +149,7 @@ extern "C"
 #define CPSW_ETH_PN_MAC_TXN_PAUSETIMER_REG(PN_MAC_TXN_PAUSETIMER_REG) (0x00022380U+((PN_MAC_TXN_PAUSETIMER_REG)*0x4U))
 #define CPSW_ETH_PN_MAC_EMCONTROL_REG                    (0x000223A0U)
 #define CPSW_ETH_PN_MAC_TX_GAP_REG                       (0x000223A4U)
-#define CPSW_PN_OFFSET(n)                               (((uint32)n*0x1000U) - (uint32)0x1000U)
+#define CPSW_PN_OFFSET(n)                               ((((uint32)(n))*0x1000U) - (uint32)0x1000U)
 
 /*!*****************************************************************************
 * Field Definition Macros

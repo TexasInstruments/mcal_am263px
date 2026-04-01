@@ -188,7 +188,8 @@ void CpswAle_enableBypass(uint32 baseAddr, uint32 enableBypass);
  * \retval index of the ALE entry added
  * \retval Max number of entry as invalid value if table entry is not free
  */
-uint32 CpswAle_addUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint32 portNum);
+uint32 CpswAle_addUnicastEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                               uint32 portNum);
 
 /**
  * \brief Deletes an unicast entry in the ALE table.
@@ -201,7 +202,8 @@ uint32 CpswAle_addUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 v
  * \retval index of the ALE entry deleted
  * \retval Max number of entry as invalid value if table entry is not present
  */
-uint32 CpswAle_delUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint32 portNum);
+uint32 CpswAle_delUnicastEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                               uint32 portNum);
 
 /**
  * \brief Adds a multicast entry in the ALE table
@@ -214,7 +216,8 @@ uint32 CpswAle_delUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 v
  * \retval index of the ALE entry added
  * \retval Max number of entry as invalid value if table entry is not free
  */
-uint32 CpswAle_addMulticastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint32 portMask);
+uint32 CpswAle_addMulticastEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                                 uint32 portMask);
 
 /**
  * \brief Deletes a multicast entry in the ALE table
@@ -227,7 +230,8 @@ uint32 CpswAle_addMulticastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32
  * \retval index of the ALE entry deleted
  * \retval Max number of entry as invalid value
  */
-uint32 CpswAle_delMulticastEntryPort(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint8 portNum);
+uint32 CpswAle_delMulticastEntryPort(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                                     uint8 portNum);
 
 /**
  * \brief   This API clears the entries of address lookup table.

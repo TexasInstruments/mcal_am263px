@@ -169,8 +169,10 @@ extern "C" {
 #define CDD_I2C_SID_POLLING_MODE_PROCESSING (0x0AU)
 /** \brief Service ID Cdd_I2c_GetStatus() */
 #define CDD_I2C_SID_GET_STATUS (0x0BU)
+/** \brief Service ID Cdd_I2c_ResetHwUnit() */
+#define CDD_I2C_SID_RESET_HW_UNIT (0x0CU)
 /** \brief Service ID Cdd_I2c_RegisterReadBack() */
-#define CDD_I2C_SID_REGISTERREADBACK (0x0CU)
+#define CDD_I2C_SID_REGISTERREADBACK (0x0DU)
 /** @} */
 
 /**
@@ -224,6 +226,10 @@ extern "C" {
 #define CDD_I2C_E_ARBITRATION_FAILURE ((uint8)0x02U)
 /** \brief Error is reported if the SCL line is stuck low */
 #define CDD_I2C_E_BUS_FAILURE ((uint8)0x03U)
+/** \brief Sequence cancelled */
+#define CDD_I2C_E_CANCELLED ((uint8)0x04U)
+/** \brief Error is reported if HW unit reset occurred */
+#define CDD_I2C_E_HW_UNIT_RESET ((uint8)0x05U)
 /** @} */
 
 /**
@@ -342,7 +348,9 @@ typedef enum
     /** \brief I2C channel transmission failed due to arbitration loss */
     CDD_I2C_CH_RESULT_ARBFAIL,
     /** \brief I2C channel transmission failed due to bus NACK */
-    CDD_I2C_CH_RESULT_NACKFAIL
+    CDD_I2C_CH_RESULT_NACKFAIL,
+    /** \brief I2C channel transmission failed due to HW unit reset */
+    CDD_I2C_CH_RESULT_HW_UNIT_RESET
 } Cdd_I2c_ChannelResultType;
 
 /**
@@ -368,7 +376,9 @@ typedef enum
     /** \brief I2C sequence transmission is not OK */
     CDD_I2C_SEQ_NOT_OK = 0x06U,
     /** \brief An I2C Sequence encountered a arbitration loss */
-    CDD_I2C_SEQ_ARB = 0x07U
+    CDD_I2C_SEQ_ARB = 0x07U,
+    /** \brief I2C sequence was terminated due to HW unit reset */
+    CDD_I2C_SEQ_HW_UNIT_RESET = 0x08U
 } Cdd_I2c_SequenceResultType;
 
 /**
@@ -613,6 +623,23 @@ FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_AsyncTransmit(Cdd_I2c_SequenceType se
  */
 FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_Cancel(Cdd_I2c_SequenceType sequenceId);
 #endif
+
+/**
+ * \brief Service to reset and recover a single I2C HW unit from a bus-off condition.
+ *
+ * This API performs a hard reset of the specified I2C hardware unit without
+ * attempting a STOP condition on the bus.
+ *
+ * Service ID[hex] - CDD_I2C_SID_RESET_HW_UNIT
+ * Sync/Async - Synchronous
+ * Reentrancy - Non Reentrant
+ *
+ * \param[in] hwUnitId I2C HW unit ID to reset
+ * \return Std_ReturnType
+ * \retval E_OK: Success
+ * \retval E_NOT_OK: Request rejected
+ */
+FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_ResetHwUnit(Cdd_I2c_HwUnitType hwUnitId);
 
 /**
  * \brief Makes a target channel available for processing requests (addressing).

@@ -108,7 +108,7 @@ typedef enum
 /* ========================================================================== */
 static uint32 CpswAle_getFreeEntry(uint32 baseAddr);
 
-static uint32 CpswAle_getAddrEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId);
+static uint32 CpswAle_getAddrEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId);
 
 static void CpswAle_getTableEntry(uint32 baseAddr, uint32 aleTblIdx, uint32 aleEntry[CPSW_ALE_ENTRY_NUM_WORDS]);
 
@@ -173,7 +173,8 @@ void CpswAle_enableBypass(uint32 baseAddr, uint32 enableBypass)
     }
 }
 
-uint32 CpswAle_addUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint32 portNum)
+uint32 CpswAle_addUnicastEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                               uint32 portNum)
 {
     uint32 aleEntry[CPSW_ALE_ENTRY_NUM_WORDS] = {0U, 0U, 0U};
     uint32 idx                                = 0U;
@@ -222,7 +223,8 @@ uint32 CpswAle_addUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 v
     return idx;
 }
 
-uint32 CpswAle_delUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint32 portNum)
+uint32 CpswAle_delUnicastEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                               uint32 portNum)
 {
     const uint32 freeAleEntry[CPSW_ALE_ENTRY_NUM_WORDS] = {0U, 0U, 0U};
     uint32       idx                                    = 0U;
@@ -236,7 +238,8 @@ uint32 CpswAle_delUnicastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 v
     return idx;
 }
 
-uint32 CpswAle_addMulticastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint32 portMask)
+uint32 CpswAle_addMulticastEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                                 uint32 portMask)
 {
     uint32 aleEntry[CPSW_ALE_ENTRY_NUM_WORDS] = {0U, 0U, 0U};
     uint32 idx                                = 0U;
@@ -284,7 +287,8 @@ uint32 CpswAle_addMulticastEntry(uint32 baseAddr, const uint8 macAddr[6], uint32
     return idx;
 }
 
-uint32 CpswAle_delMulticastEntryPort(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId, uint8 portNum)
+uint32 CpswAle_delMulticastEntryPort(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId,
+                                     uint8 portNum)
 {
     uint32       aleEntry[CPSW_ALE_ENTRY_NUM_WORDS]     = {0U, 0U, 0U};
     const uint32 freeAleEntry[CPSW_ALE_ENTRY_NUM_WORDS] = {0U, 0U, 0U};
@@ -418,7 +422,7 @@ static uint32 CpswAle_getFreeEntry(uint32 baseAddr)
  * \retval index of the ALE entry which match address of VLAN
  * \retval Maximum number of entry as invalid value if not found
  */
-static uint32 CpswAle_getAddrEntry(uint32 baseAddr, const uint8 macAddr[6], uint32 vlanId)
+static uint32 CpswAle_getAddrEntry(uint32 baseAddr, P2CONST(uint8, AUTOMATIC, ETH_APPL_DATA) macAddr, uint32 vlanId)
 {
     uint32  aleEntry[CPSW_ALE_ENTRY_NUM_WORDS];
     uint32  entryType;
