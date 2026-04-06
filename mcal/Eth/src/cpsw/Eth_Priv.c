@@ -480,8 +480,8 @@ FUNC(void, ETH_CODE) Eth_initHw(const Eth_ConfigType *CfgPtr)
         idleSlope = Eth_DrvObj.ethConfig.portCfg.shaperCfg[k - 1U].idleSlope;
         if (queueNum < ETH_PRIORITY_QUEUE_NUM)
         {
-            CpswPort_setBandwidthLimit(Eth_DrvObj.baseAddr, queueNum, Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq,
-                                       idleSlope);
+            (void)CpswPort_setBandwidthLimit(Eth_DrvObj.baseAddr, currPort, queueNum,
+                                             Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq, idleSlope);
         }
     }
 #endif

@@ -1,3 +1,264 @@
+commit 3cc4988dec296178193d754b11cccd80cdedff6e
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Apr 6 15:11:46 2026 +0530
+
+    spi/uart: lint fixes only
+    
+    Fixes: MCAL-36888
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Spi/V0/Spi_Dma.c   |  6 +++---
+ mcal/Spi/V0/Spi_Mcspi.c | 10 +++++-----
+ mcal/Uart/V0/uart.c     |  2 +-
+ 3 files changed, 9 insertions(+), 9 deletions(-)
+
+commit 46f465e8a355e233a3ac23fc5c77da69dd00c0f0
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Apr 2 12:36:51 2026 +0530
+
+    am263px/am261x: Fls: Fixing indirect read error path
+    
+    Fixes: MCAL-36857
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Ospi.c                        |  25 +-
+ mcal/examples/Eth/eth_ecc_app/EthEccApp.c     |  24 +-
+ mcal/examples/Eth/eth_ecc_app/dpl_interface.c |  34 +-
+ mcal/examples/Eth/eth_ecc_app/dpl_interface.h |   5 +-
+ mcal/examples/Eth/eth_ecc_app/ecc_cpsw.c      |  47 ++-
+ mcal/examples/Eth/eth_ecc_app/esm.c           | 491 ++++++++++++--------------
+ mcal/examples/Eth/eth_ecc_app/sdlexample.h    | 284 ++++++++-------
+ 7 files changed, 440 insertions(+), 470 deletions(-)
+
+commit 3ed4d84b283bdee7073209621ccd1707e97c8986
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Mar 20 20:57:52 2026 +0530
+
+    all: all: KW fix for MISRA.MACRO_ARG.EXPRESSION.2012
+    
+    Fixes: MCAL-36360
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c       |  8 +---
+ mcal/Mcu/V2/Mcu_Priv.c               |  4 +-
+ mcal/Spi/V0/Spi_Dma.c                | 41 +++++++++++---------
+ mcal/Spi/V0/Spi_Mcspi.c              | 73 ++++++++++++++++++++----------------
+ mcal/Spi/V0/Spi_Priv.h               | 10 ++---
+ mcal/Uart/V0/uart.c                  | 35 +++++++++++------
+ mcal/include/hw/am261/hw_epwm.h      |  8 ++--
+ mcal/include/hw/am263/hw_epwm.h      |  8 ++--
+ mcal/include/hw/am263px/hw_epwm.h    |  8 ++--
+ mcal/include/hw/am263px/sys_common.h |  5 ++-
+ 10 files changed, 113 insertions(+), 87 deletions(-)
+
+commit d582b08ff57720266aa03dee41e31085b3c66b82
+Author: Asha D <asha.d@ti.com>
+Date:   Wed Apr 1 15:42:18 2026 +0530
+
+    am263:EPWM: Bug Fix
+    
+    Disable CBC and OST interrupt flags to prevent infinite ISR loop in the EPWM tests
+    
+    Fixes: MCAL-35320
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal_test/epwm_test/testLib/cddPwmTestMainTestCase.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+commit 6823414522c49fc06210126115a989933ee822a5
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Apr 1 17:25:14 2026 +0530
+
+    all: WDG: Adding exception for Wdg_SetMode when called in usermode
+    
+    -timeOutCounter and counterRef in Wdg_DriverObjType struct are made volatile
+    
+    Fixes: MCAL-36588, MCAL-36832
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Wdg/V0/Wdg_Priv.c | 10 ++++++++++
+ mcal/Wdg/V0/Wdg_Priv.h |  4 ++--
+ release_notes.md       | 38 +++++++++++++++++++++++++++-----------
+ 3 files changed, 39 insertions(+), 13 deletions(-)
+
+commit e1e236283fd3b9e381dc37fc5f5e1e9cfaa4e109
+Author: Khanh Tran <x1120448@ti.com>
+Date:   Wed Apr 1 09:33:19 2026 +0700
+
+    all: Eth: Fix traffic shaper on port 2
+    
+    - Current bandwith config functions only acces port 1 registers,
+      change to add argument portNum to get/set bandwidth function.
+    
+    Fixes: MCAL-32662
+    
+    Signed-off by: Tran Khanh <x1120448@ti.com>
+
+ mcal/Eth/src/Eth.c                         | 12 ++++++------
+ mcal/Eth/src/cpsw/Cpsw_Port.c              | 11 ++++++-----
+ mcal/Eth/src/cpsw/Eth_Priv.c               |  4 ++--
+ mcal/Eth/src/cpsw/include/Cpsw_Hw.h        |  8 +++++---
+ mcal/Eth/src/cpsw/include/Cpsw_Port.h      |  5 +++--
+ mcal_test/eth_test/testLib/ethTestCommon.c |  4 ++++
+ 6 files changed, 26 insertions(+), 18 deletions(-)
+
+commit fc6cd652d686da9ca34a3e21143beff52b60a38f
+Author: Khanh Tran <x1120448@ti.com>
+Date:   Wed Mar 4 14:04:15 2026 +0700
+
+    all: eth: Eth ECC example
+    
+    - Add ECC inject test
+    - Update makefile to buil eth_ecc_app
+    
+    Fixes: MCAL-35516
+    
+    Signed-off-by: Tran Khanh <x1120448@ti.com>
+
+ .../Eth/eth_ecc_app/{EthLoadApp.c => EthEccApp.c}  |   95 +-
+ mcal/examples/Eth/eth_ecc_app/EthLoadUtils.c       |    2 +-
+ mcal/examples/Eth/eth_ecc_app/EthLoadUtils.h       |    2 +-
+ mcal/examples/Eth/eth_ecc_app/Makefile             |   23 +-
+ mcal/examples/Eth/eth_ecc_app/McalUtils.c          |    2 +-
+ mcal/examples/Eth/eth_ecc_app/McalUtils.h          |    2 +-
+ mcal/examples/Eth/eth_ecc_app/app_utils.c          |    2 +-
+ mcal/examples/Eth/eth_ecc_app/app_utils.h          |    2 +-
+ mcal/examples/Eth/eth_ecc_app/dpl_interface.c      |  181 ++++
+ mcal/examples/Eth/eth_ecc_app/dpl_interface.h      |   86 ++
+ mcal/examples/Eth/eth_ecc_app/ecc_cpsw.c           |  205 ++++
+ mcal/examples/Eth/eth_ecc_app/esm.c                |  673 ++++++++++++
+ .../host/{HostLoadApp.c => HostEccApp.c}           |    7 +-
+ mcal/examples/Eth/eth_ecc_app/host/makefile        |    6 +-
+ mcal/examples/Eth/eth_ecc_app/os_wrapper.c         |    2 +-
+ mcal/examples/Eth/eth_ecc_app/os_wrapper.h         |    2 +-
+ mcal/examples/Eth/eth_ecc_app/sdlexample.h         |  374 +++++++
+ .../eth_ecc_app/soc/am261/r5f0_0/EthApp_Startup.c  |    2 +-
+ .../eth_ecc_app/soc/am261/r5f0_0/EthApp_Startup.h  |    2 +-
+ ..._load_app_linker.cmd => eth_ecc_app_linker.cmd} |    0
+ .../eth_ecc_app/soc/am261/syscfg/ti_board_config.c |    2 +-
+ .../eth_ecc_app/soc/am261/syscfg/ti_board_config.h |    2 +-
+ .../soc/am261/syscfg/ti_board_open_close.c         |    2 +-
+ .../soc/am261/syscfg/ti_board_open_close.h         |    2 +-
+ .../eth_ecc_app/soc/am261/syscfg/ti_dpl_config.c   |    2 +-
+ .../eth_ecc_app/soc/am261/syscfg/ti_dpl_config.h   |    2 +-
+ .../soc/am261/syscfg/ti_drivers_config.c           |    2 +-
+ .../soc/am261/syscfg/ti_drivers_config.h           |    2 +-
+ .../soc/am261/syscfg/ti_drivers_open_close.c       |    2 +-
+ .../soc/am261/syscfg/ti_drivers_open_close.h       |    2 +-
+ .../soc/am261/syscfg/ti_pinmux_config.c            |    2 +-
+ .../soc/am261/syscfg/ti_power_clock_config.c       |    2 +-
+ .../eth_ecc_app/soc/am263/r5f0_0/EthApp_Startup.c  |    2 +-
+ .../eth_ecc_app/soc/am263/r5f0_0/EthApp_Startup.h  |    2 +-
+ ..._load_app_linker.cmd => eth_ecc_app_linker.cmd} |    0
+ .../eth_ecc_app/soc/am263/syscfg/ti_board_config.c |    2 +-
+ .../eth_ecc_app/soc/am263/syscfg/ti_board_config.h |    2 +-
+ .../soc/am263/syscfg/ti_board_open_close.c         |    2 +-
+ .../soc/am263/syscfg/ti_board_open_close.h         |    2 +-
+ .../eth_ecc_app/soc/am263/syscfg/ti_dpl_config.c   |    2 +-
+ .../eth_ecc_app/soc/am263/syscfg/ti_dpl_config.h   |    2 +-
+ .../soc/am263/syscfg/ti_drivers_config.c           |    2 +-
+ .../soc/am263/syscfg/ti_drivers_config.h           |    2 +-
+ .../soc/am263/syscfg/ti_drivers_open_close.c       |    2 +-
+ .../soc/am263/syscfg/ti_drivers_open_close.h       |    2 +-
+ .../soc/am263/syscfg/ti_pinmux_config.c            |    2 +-
+ .../soc/am263/syscfg/ti_power_clock_config.c       |    2 +-
+ .../soc/am263px/r5f0_0/EthApp_Startup.c            |    2 +-
+ .../soc/am263px/r5f0_0/EthApp_Startup.h            |    2 +-
+ ..._load_app_linker.cmd => eth_ecc_app_linker.cmd} |    0
+ .../soc/am263px/syscfg/ti_board_config.c           |    2 +-
+ .../soc/am263px/syscfg/ti_board_config.h           |    2 +-
+ .../soc/am263px/syscfg/ti_board_open_close.c       |    2 +-
+ .../soc/am263px/syscfg/ti_board_open_close.h       |    2 +-
+ .../eth_ecc_app/soc/am263px/syscfg/ti_dpl_config.c |    2 +-
+ .../eth_ecc_app/soc/am263px/syscfg/ti_dpl_config.h |    2 +-
+ .../soc/am263px/syscfg/ti_drivers_config.c         |    2 +-
+ .../soc/am263px/syscfg/ti_drivers_config.h         |    2 +-
+ .../soc/am263px/syscfg/ti_drivers_open_close.c     |    2 +-
+ .../soc/am263px/syscfg/ti_drivers_open_close.h     |    2 +-
+ .../soc/am263px/syscfg/ti_pinmux_config.c          |    2 +-
+ .../soc/am263px/syscfg/ti_power_clock_config.c     |    2 +-
+ mcal/examples/lnk_r5_am261_CLANG.cmd               | 1136 +++-----------------
+ 63 files changed, 1801 insertions(+), 1085 deletions(-)
+
+commit 7b8057fd0d8817037958904e21c0bcfd88954322
+Author: Khanh Tran <x1120448@ti.com>
+Date:   Wed Feb 25 12:44:52 2026 +0700
+
+    all: eth: Eth ECC example
+    
+    - Clone eth_load_app to eth_ecc_app as base source
+    
+    Fixes: MCAL-35516
+    
+    Signed-off-by: Tran Khanh <x1120448@ti.com>
+
+ mcal/examples/Eth/eth_ecc_app/EthLoadApp.c         |  896 +++++++++++++++
+ mcal/examples/Eth/eth_ecc_app/EthLoadUtils.c       |  798 ++++++++++++++
+ mcal/examples/Eth/eth_ecc_app/EthLoadUtils.h       |  640 +++++++++++
+ mcal/examples/Eth/eth_ecc_app/Makefile             |  179 +++
+ mcal/examples/Eth/eth_ecc_app/McalUtils.c          |  212 ++++
+ mcal/examples/Eth/eth_ecc_app/McalUtils.h          |   81 ++
+ mcal/examples/Eth/eth_ecc_app/app_utils.c          |  454 ++++++++
+ mcal/examples/Eth/eth_ecc_app/app_utils.h          |  226 ++++
+ mcal/examples/Eth/eth_ecc_app/host/HostLoadApp.c   |  482 +++++++++
+ mcal/examples/Eth/eth_ecc_app/host/makefile        |   10 +
+ mcal/examples/Eth/eth_ecc_app/os_wrapper.c         |  140 +++
+ mcal/examples/Eth/eth_ecc_app/os_wrapper.h         |   92 ++
+ .../eth_ecc_app/soc/am261/r5f0_0/EthApp_Startup.c  |  121 +++
+ .../eth_ecc_app/soc/am261/r5f0_0/EthApp_Startup.h  |   70 ++
+ .../soc/am261/r5f0_0/eth_load_app_linker.cmd       |  987 +++++++++++++++++
+ .../eth_ecc_app/soc/am261/syscfg/ti_board_config.c |   71 ++
+ .../eth_ecc_app/soc/am261/syscfg/ti_board_config.h |   76 ++
+ .../soc/am261/syscfg/ti_board_open_close.c         |   70 ++
+ .../soc/am261/syscfg/ti_board_open_close.h         |   79 ++
+ .../eth_ecc_app/soc/am261/syscfg/ti_dpl_config.c   |  207 ++++
+ .../eth_ecc_app/soc/am261/syscfg/ti_dpl_config.h   |   83 ++
+ .../soc/am261/syscfg/ti_drivers_config.c           |  123 +++
+ .../soc/am261/syscfg/ti_drivers_config.h           |   94 ++
+ .../soc/am261/syscfg/ti_drivers_open_close.c       |  164 +++
+ .../soc/am261/syscfg/ti_drivers_open_close.h       |  100 ++
+ .../soc/am261/syscfg/ti_pinmux_config.c            |  168 +++
+ .../soc/am261/syscfg/ti_power_clock_config.c       |  141 +++
+ .../eth_ecc_app/soc/am263/r5f0_0/EthApp_Startup.c  |  207 ++++
+ .../eth_ecc_app/soc/am263/r5f0_0/EthApp_Startup.h  |   77 ++
+ .../soc/am263/r5f0_0/eth_load_app_linker.cmd       |  987 +++++++++++++++++
+ .../eth_ecc_app/soc/am263/syscfg/ti_board_config.c |   71 ++
+ .../eth_ecc_app/soc/am263/syscfg/ti_board_config.h |   76 ++
+ .../soc/am263/syscfg/ti_board_open_close.c         |   70 ++
+ .../soc/am263/syscfg/ti_board_open_close.h         |   79 ++
+ .../eth_ecc_app/soc/am263/syscfg/ti_dpl_config.c   |  257 +++++
+ .../eth_ecc_app/soc/am263/syscfg/ti_dpl_config.h   |   82 ++
+ .../soc/am263/syscfg/ti_drivers_config.c           |  124 +++
+ .../soc/am263/syscfg/ti_drivers_config.h           |   94 ++
+ .../soc/am263/syscfg/ti_drivers_open_close.c       |  164 +++
+ .../soc/am263/syscfg/ti_drivers_open_close.h       |  100 ++
+ .../soc/am263/syscfg/ti_pinmux_config.c            |  171 +++
+ .../soc/am263/syscfg/ti_power_clock_config.c       |  143 +++
+ .../soc/am263px/r5f0_0/EthApp_Startup.c            |  331 ++++++
+ .../soc/am263px/r5f0_0/EthApp_Startup.h            |   90 ++
+ .../soc/am263px/r5f0_0/eth_load_app_linker.cmd     |  986 +++++++++++++++++
+ .../soc/am263px/syscfg/ti_board_config.c           |   71 ++
+ .../soc/am263px/syscfg/ti_board_config.h           |   76 ++
+ .../soc/am263px/syscfg/ti_board_open_close.c       |   71 ++
+ .../soc/am263px/syscfg/ti_board_open_close.h       |   79 ++
+ .../eth_ecc_app/soc/am263px/syscfg/ti_dpl_config.c |  205 ++++
+ .../eth_ecc_app/soc/am263px/syscfg/ti_dpl_config.h |   82 ++
+ .../soc/am263px/syscfg/ti_drivers_config.c         |  124 +++
+ .../soc/am263px/syscfg/ti_drivers_config.h         |   93 ++
+ .../soc/am263px/syscfg/ti_drivers_open_close.c     |  162 +++
+ .../soc/am263px/syscfg/ti_drivers_open_close.h     |  100 ++
+ .../soc/am263px/syscfg/ti_pinmux_config.c          |  168 +++
+ .../soc/am263px/syscfg/ti_power_clock_config.c     |  142 +++
+ mcal/examples/Eth/eth_ecc_app/soc/srcs.mk          |    6 +
+ mcal/examples/lnk_r5_am261_CLANG.cmd               | 1136 +++++++++++++++++---
+ mcal/mcal_component.mk                             |    9 +-
+ 60 files changed, 13269 insertions(+), 128 deletions(-)
+
 commit 9496335c8f4241e0e02a24e304be01dc69f245df
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Mar 31 12:29:16 2026 +0530

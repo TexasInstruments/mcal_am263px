@@ -1526,15 +1526,22 @@ void Fls_hwi(void)
                                     OSPI_SRAM_FILL_REG_SRAM_FILL_INDAC_READ_FLD_MASK;
                         if (sramLevel == 0U)
                         {
-                            Fls_DrvObj.jobResultType = MEMIF_JOB_FAILED;
-                            Fls_DrvObj.status        = MEMIF_IDLE;
-                            Fls_DrvObj.jobType       = FLS_JOB_NONE;
-                            Fls_DrvObj.transferred   = 0U;
-                            Fls_IntClearDisable();
-                            /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
-                            do not use this hook function for critical section protection*/
-                            SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
-                            Fls_DrvObj.Fls_JobErrorNotification();
+                            if ((intrStatus & OSPI_IRQ_STATUS_REG_INDIRECT_OP_DONE_FLD_MASK) != 0U)
+                            {
+                                /* Transfer declared done by controller but
+                                 * FIFO is empty — data was never transferred from flash */
+                                Fls_DrvObj.jobResultType = MEMIF_JOB_FAILED;
+                                Fls_DrvObj.status        = MEMIF_IDLE;
+                                Fls_DrvObj.jobType       = FLS_JOB_NONE;
+                                Fls_DrvObj.transferred   = 0U;
+                                Fls_IntClearDisable();
+                                /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+                                do not use this hook function for critical section protection*/
+                                SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
+                                Fls_DrvObj.Fls_JobErrorNotification();
+                            }
+                            /* else: spurious interrupt from watermark=0 transient during
+                             * Fls_Ospi_readIndirect setup. Transfer has not yet started */
                             retVal = E_NOT_OK;
                         }
                         if (retVal == E_OK)

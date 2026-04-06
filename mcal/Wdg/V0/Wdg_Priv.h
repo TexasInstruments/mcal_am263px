@@ -95,9 +95,9 @@ typedef struct
     /**< Base address of the hardware */
     uint32           baseAddr;
     /**< Watchdog timeOutCounter value */
-    uint32           timeOutCounter;
+    volatile uint32  timeOutCounter;
     /**< Counter refence value for trigger */
-    uint32           counterRef;
+    volatile uint32  counterRef;
     /** \brief Fast Mode settings */
     Wdg_ModeInfoType fastModeCfg;
     /** \brief Slow mode config */

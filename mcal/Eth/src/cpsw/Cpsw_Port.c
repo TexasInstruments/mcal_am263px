@@ -155,7 +155,8 @@ void CpswPort_hostPortopen(uint32 baseAddr)
     CPPI_WR_FIELD(P0_RX_MAXLEN, RX_MAXLEN, ETH_MAX_FRAME_LEN);
 }
 
-uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq, uint32 bandwithLimitBitPerSec)
+uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint32 portNum, uint8 priority, uint32 cppiClockFreq,
+                                 uint32 bandwithLimitBitPerSec)
 {
     uint8  status = E_OK;
     uint32 cir    = 0U;
@@ -164,8 +165,8 @@ uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClo
 
     if (cir < CPSW_PORT_BANDWIDTH_CNT_MAX)
     {
-        ETH_PN_WR_PRIORITY_FIELD(PRI_CIR, (uint32)priority, PRI_CIR, cir);
-        ETH_PN_WR_PRIORITY_FIELD(PRI_EIR, (uint32)priority, PRI_EIR, 0U);
+        ETH_PN_WR_PRIORITY_FIELD(PRI_CIR, portNum, (uint32)priority, PRI_CIR, cir);
+        ETH_PN_WR_PRIORITY_FIELD(PRI_EIR, portNum, (uint32)priority, PRI_EIR, 0U);
     }
     else
     {
@@ -174,12 +175,12 @@ uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClo
     return status;
 }
 
-void CpswPort_getBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq,
+void CpswPort_getBandwidthLimit(uint32 baseAddr, uint32 portNum, uint8 priority, uint32 cppiClockFreq,
                                 uint32 *bandwithLimitBitPerSecPtr)
 {
     uint32 cir = 0U;
 
-    cir = ETH_PN_RD_PRIORITY_REG(PRI_CIR, (uint32)priority);
+    cir = ETH_PN_RD_PRIORITY_REG(PRI_CIR, portNum, (uint32)priority);
 
     *bandwithLimitBitPerSecPtr = CpswPort_mapCntToBw(cir, cppiClockFreq);
 }

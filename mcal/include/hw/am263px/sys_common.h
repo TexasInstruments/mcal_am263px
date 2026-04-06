@@ -583,8 +583,9 @@ static inline uint32 registerReadWrite_local(volatile uint32 *regAddr, uint32 en
     {
         /* Read Register */
         readVal = M_REG_READ32(regAddr);
-        maskVal = M_MASK(endBit, startBit);
-        boundVal = (uint32)M_VAL_BOUND(wrValue, endBit, startBit);
+        uint32 onesMaskVal = M_ONES(endBit, startBit);
+        maskVal  = ~onesMaskVal;
+        boundVal = (uint32)((onesMaskVal >> startBit) & wrValue);
         maskedWrValue = (readVal & maskVal) | (boundVal << startBit);
         /* Write */
         M_REG_WRITE32(regAddr, maskedWrValue);

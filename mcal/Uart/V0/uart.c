@@ -292,7 +292,8 @@ static inline uint32 UART_getChar(uint32 baseAddr, uint8 *pChar)
     lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
 
     /* Switching to Register Operational Mode of operation. */
-    HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+    uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+    HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
 
     /* Checking if the RX FIFO(or RHR) has atleast one byte of data. */
     if ((uint32)UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_0 != (HW_RD_REG32(baseAddr + UART_LSR) & UART_LSR_RX_FIFO_E_MASK))
@@ -333,7 +334,8 @@ static inline void UART_intrEnable(uint32 baseAddr, uint32 intrFlag)
         lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
 
         /* Switching to Register Operational Mode of operation. */
-        HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+        uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+        HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
 
         /*
         ** It is suggested that the System Interrupts for UART in the
@@ -377,7 +379,8 @@ static inline void UART_intrEnable(uint32 baseAddr, uint32 intrFlag)
     }
 
     /* Programming the bits IER[3:0]. */
-    HW_WR_REG32(baseAddr + UART_IER, HW_RD_REG32(baseAddr + UART_IER) | (intrFlag & 0x0FU));
+    uint32 ierEnableVal = HW_RD_REG32(baseAddr + UART_IER) | (intrFlag & 0x0FU);
+    HW_WR_REG32(baseAddr + UART_IER, ierEnableVal);
 }
 
 static inline void UART_intrDisable(uint32 baseAddr, uint32 intrFlag)
@@ -406,9 +409,11 @@ static inline void UART_intrDisable(uint32 baseAddr, uint32 intrFlag)
     lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
 
     /* Switching to Register Operational Mode of operation. */
-    HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+    uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+    HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
 
-    HW_WR_REG32(baseAddr + UART_IER, HW_RD_REG32(baseAddr + UART_IER) & ~(intrFlag & 0xFFU));
+    uint32 ierDisableVal = HW_RD_REG32(baseAddr + UART_IER) & ~(intrFlag & 0xFFU);
+    HW_WR_REG32(baseAddr + UART_IER, ierDisableVal);
 
     /* Restoring the value of LCR. */
     HW_WR_REG32(baseAddr + UART_LCR, lcrRegValue);
@@ -431,7 +436,8 @@ static inline void UART_intrDisable(uint32 baseAddr, uint32 intrFlag)
 
 static inline void UART_intr2Disable(uint32 baseAddr, uint32 intrFlag)
 {
-    HW_WR_REG32(baseAddr + UART_IER2, HW_RD_REG32(baseAddr + UART_IER2) & ~(intrFlag & 0x3U));
+    uint32 ier2DisableVal = HW_RD_REG32(baseAddr + UART_IER2) & ~(intrFlag & 0x3U);
+    HW_WR_REG32(baseAddr + UART_IER2, ier2DisableVal);
 }
 
 static inline uint32 UART_getIntrIdentityStatus(uint32 baseAddr)
@@ -443,7 +449,8 @@ static inline uint32 UART_getIntrIdentityStatus(uint32 baseAddr)
     lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
 
     /* Switching to Register Operational Mode of operation. */
-    HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+    uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+    HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
 
     retVal = HW_RD_REG32(baseAddr + UART_IIR) & UART_IIR_IT_TYPE_MASK;
 
@@ -487,7 +494,8 @@ uint32 UART_checkCharsAvailInFifo(uint32 baseAddr)
     lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
 
     /* Switching to Register Operational Mode of operation. */
-    HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+    uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+    HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
 
     /* Checking if the Transmitter FIFO and Transmitter Shift Register are empty. */
     uint32  hwRdReg       = HW_RD_REG32(baseAddr + UART_LSR);
@@ -517,7 +525,8 @@ static uint32 UART_checkCharsAvailInRXFifo(uint32 baseAddr)
     lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
 
     /* Switching to Register Operational Mode of operation. */
-    HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+    uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+    HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
 
     /* Checking if the RHR(or RX FIFO) has atleast one byte to be read. */
     if ((uint32)UART_LSR_RX_FIFO_E_RX_FIFO_E_VALUE_0 != (HW_RD_REG32(baseAddr + UART_LSR) & UART_LSR_RX_FIFO_E_MASK))
@@ -540,7 +549,8 @@ uint32 UART_readLineStatus(uint32 baseAddr)
     lcrRegValue = HW_RD_REG32(baseAddr + UART_LCR);
 
     /* Switching to Register Operational Mode of operation. */
-    HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+    uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+    HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
 
     retVal = HW_RD_REG32(baseAddr + UART_LSR);
 
@@ -1422,8 +1432,11 @@ uint32 UART_regConfigModeEnable(uint32 baseAddr, uint32 modeFlag)
             break;
 
         case UART_REG_OPERATIONAL_MODE:
-            HW_WR_REG32(baseAddr + UART_LCR, HW_RD_REG32(baseAddr + UART_LCR) & 0x7FU);
+        {
+            uint32 lcrOpModeVal = lcrRegValue & 0x7FU;
+            HW_WR_REG32(baseAddr + UART_LCR, lcrOpModeVal);
             break;
+        }
         default:
             break;
     }

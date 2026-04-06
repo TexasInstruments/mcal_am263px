@@ -9223,16 +9223,16 @@ HRPWM_setHiResCounterCompareValue(uint32 base,
         /*
          Write to CMPAHR
         */
-        HW_WR_REG32(base + PWM_EPWM_CMPA,
-            HW_RD_REG32(base + PWM_EPWM_CMPA) | ((hrCompCount & PWM_EPWM_CMPA_CMPAHR_MASK) << 8U));
+        uint32 cmpAVal = HW_RD_REG32(base + PWM_EPWM_CMPA) | ((hrCompCount & PWM_EPWM_CMPA_CMPAHR_MASK) << 8U);
+        HW_WR_REG32(base + PWM_EPWM_CMPA, cmpAVal);
     }
     else
     {
         /*
          Write to CMPBHR
         */
-        HW_WR_REG32(base + PWM_EPWM_CMPB,
-            HW_RD_REG32(base + PWM_EPWM_CMPB) | ((hrCompCount & PWM_EPWM_CMPB_CMPBHR_MASK) << 8U));
+        uint32 cmpBVal = HW_RD_REG32(base + PWM_EPWM_CMPB) | ((hrCompCount & PWM_EPWM_CMPB_CMPBHR_MASK) << 8U);
+        HW_WR_REG32(base + PWM_EPWM_CMPB, cmpBVal);
     }
 }
 

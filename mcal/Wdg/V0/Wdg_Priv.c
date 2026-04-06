@@ -427,6 +427,13 @@ static FUNC(void, WDG_CODE) Wdg_reset(void)
     HW_WR_REG32(MSS_RCM_LOCK0_KICK0, RCM_KICK0_LOCK_VAL);
     HW_WR_REG32(MSS_RCM_LOCK0_KICK1, RCM_KICK1_LOCK_VAL);
 }
+static inline void Wdg_AssertPrivilegedMode(void)
+{
+    uint32_t dummy;
+    /* UNDEFINED in User mode */
+    __asm__ volatile("MRC p15, 0, %0, c0, c0, 0" : "=r"(dummy));
+    (void)dummy;
+}
 
 /** @fn FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) Mode)
  *   @brief Set the WDG MODE
@@ -452,6 +459,9 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) 
         /* Get Requested mode type settings from configuration settings */
         else
         {
+            /*Wdg_SetMode functionality can go undefined when executed in user mode.
+            Hence the below assertion to raise UNDEF exception */
+            Wdg_AssertPrivilegedMode();
             Wdg_reset();
             if (Mode == WDGIF_FAST_MODE)
             {

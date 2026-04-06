@@ -471,7 +471,7 @@ mcal_mcal_KW_LIST = kwadc kwcan kwdio kwdma kweth kwethtrcv kwcmpss kwflc kwfls 
 endif
 
 ifneq ($(MCUPLUSSDK_ROOTDIR), )
-mcal_mcal_EXAMPLE_LIST += eth_load_app
+mcal_mcal_EXAMPLE_LIST += eth_load_app eth_ecc_app
 endif
 
 ##############################
@@ -641,6 +641,13 @@ eth_load_app_PLATFORM_DEPENDENCY = yes
 eth_load_app_SOCLIST = $(DEFAULT_SOCLIST)
 export eth_load_app_SOCLIST
 export eth_load_app_PLATFORM_DEPENDENCY
+
+eth_ecc_app_RELPATH = examples/Eth/eth_ecc_app
+eth_ecc_app_PATH = $(mcal_PATH)/$(eth_ecc_app_RELPATH)
+eth_ecc_app_PLATFORM_DEPENDENCY = yes
+eth_ecc_app_SOCLIST = $(DEFAULT_SOCLIST)
+export eth_ecc_app_SOCLIST
+export eth_ecc_app_PLATFORM_DEPENDENCY
 
 adc_app_RELPATH = examples/Adc/adc_app
 adc_app_PATH = $(mcal_PATH)/$(adc_app_RELPATH)

@@ -178,11 +178,13 @@ Std_ReturnType Spi_dmaTransfer(const Spi_HwUnitObjType *HwUnitObj, Spi_JobObjTyp
     Cdd_Dma_ParamEntry edmaTxParam    = {0};
     Cdd_Dma_ParamEntry edmaRxParam    = {0};
     Cdd_Dma_ParamEntry edmaDummyParam = {0};
+    uint32             rxRegOffset    = MCSPI_CHRX(jobObj->jobCfg_PC.csPin);
+    uint32             txRegOffset    = MCSPI_CHTX(jobObj->jobCfg_PC.csPin);
 
     if ((SPI_TX_RX_MODE_BOTH == jobObj->extDevCfg->mcspi.txRxMode))
     {
         /* Receive param set configuration */
-        edmaRxParam.srcPtr     = (uint8 *)HwUnitObj->baseAddr + MCSPI_CHRX(jobObj->jobCfg_PC.csPin);
+        edmaRxParam.srcPtr     = (uint8 *)HwUnitObj->baseAddr + rxRegOffset;
         edmaRxParam.destPtr    = (void *)chObj->curRxBufPtr;
         edmaRxParam.aCnt       = (uint16)(((uint16)1U) << ((uint16)(((uint16)chObj->bufWidth) / ((uint16)2U))));
         edmaRxParam.bCnt       = Count;
@@ -209,7 +211,7 @@ Std_ReturnType Spi_dmaTransfer(const Spi_HwUnitObjType *HwUnitObj, Spi_JobObjTyp
     {
         /* Transmit param set configuration */
         edmaTxParam.srcPtr     = (void *)chObj->curTxBufPtr;
-        edmaTxParam.destPtr    = (uint8 *)HwUnitObj->baseAddr + MCSPI_CHTX(jobObj->jobCfg_PC.csPin);
+        edmaTxParam.destPtr    = (uint8 *)HwUnitObj->baseAddr + txRegOffset;
         edmaTxParam.aCnt       = (uint16)(((uint16)1U) << ((uint16)(((uint16)chObj->bufWidth) / ((uint16)2U))));
         edmaTxParam.bCnt       = Count;
         edmaTxParam.cCnt       = (uint16)1U;
@@ -250,26 +252,28 @@ Std_ReturnType Spi_dmaTransfer(const Spi_HwUnitObjType *HwUnitObj, Spi_JobObjTyp
 
 Std_ReturnType Spi_dmaStop(Spi_JobObjType *jobObj, uint32 baseAddr, uint32 chNum, uint8 chMode)
 {
-    Std_ReturnType status = E_OK;
+    Std_ReturnType status     = E_OK;
+    uint32         chConfAddr = baseAddr + MCSPI_CHCONF(chNum);
+    uint32         chCtrlAddr = baseAddr + MCSPI_CHCTRL(chNum);
 
     /* Manual CS de-assert */
     if (MCSPI_MODULCTRL_SINGLE_SINGLE == chMode)
     {
-        HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_FORCE, CSL_MCSPI_CH0CONF_FORCE_DEASSERT);
+        HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_FORCE, CSL_MCSPI_CH0CONF_FORCE_DEASSERT);
     }
 
     /* Disable channel */
-    HW_WR_FIELD32((baseAddr + MCSPI_CHCTRL(chNum)), CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_NACT);
+    HW_WR_FIELD32(chCtrlAddr, CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_NACT);
 
     if (SPI_TX_RX_MODE_BOTH == jobObj->extDevCfg->mcspi.txRxMode)
     {
         /* Disable DMA */
-        HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_DISABLED);
-        HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAR, CSL_MCSPI_CH0CONF_DMAR_DISABLED);
+        HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_DISABLED);
+        HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAR, CSL_MCSPI_CH0CONF_DMAR_DISABLED);
     }
     else if (SPI_TX_RX_MODE_TX_ONLY == jobObj->extDevCfg->mcspi.txRxMode)
     {
-        HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_DISABLED);
+        HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_DISABLED);
     }
     else
     {
@@ -281,7 +285,9 @@ Std_ReturnType Spi_dmaStop(Spi_JobObjType *jobObj, uint32 baseAddr, uint32 chNum
 
 static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode)
 {
-    uint32 chNum = jobObj->jobCfg_PC.csPin;
+    uint32 chNum      = jobObj->jobCfg_PC.csPin;
+    uint32 chConfAddr = baseAddr + MCSPI_CHCONF(chNum);
+    uint32 chCtrlAddr = baseAddr + MCSPI_CHCTRL(chNum);
 
     if (jobObj->dmaChIdx == 0U)
     {
@@ -289,8 +295,8 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
         /* Enable DMA */
         if (SPI_TX_RX_MODE_BOTH == jobObj->extDevCfg->mcspi.txRxMode)
         {
-            HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAR, CSL_MCSPI_CH0CONF_DMAR_ENABLED);
-            HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
+            HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAR, CSL_MCSPI_CH0CONF_DMAR_ENABLED);
+            HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
         }
         /* TI_COVERAGE_GAP_START MCSPI_dmaStart is static and only reachable via Spi_dmaTransfer.
          In coverage config, Cdd_Dma_EnableTransferRegion(TX) fails for TX_ONLY injected calls
@@ -298,7 +304,7 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
          and preventing MCSPI_dmaStart from being called with TX_ONLY mode. */
         else if (SPI_TX_RX_MODE_TX_ONLY == jobObj->extDevCfg->mcspi.txRxMode)
         {
-            HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
+            HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
         }
         /* TI_COVERAGE_GAP_STOP */
         else
@@ -311,20 +317,20 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
         /* Manual CS assert */
         if (MCSPI_MODULCTRL_SINGLE_SINGLE == chMode)
         {
-            HW_WR_FIELD32((baseAddr + MCSPI_CHCONF(chNum)), CSL_MCSPI_CH0CONF_FORCE, CSL_MCSPI_CH0CONF_FORCE_ASSERT);
+            HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_FORCE, CSL_MCSPI_CH0CONF_FORCE_ASSERT);
         }
         /* TI_COVERAGE_GAP_STOP */
 
         /* Enable channel */
-        HW_WR_FIELD32((baseAddr + MCSPI_CHCTRL(chNum)), CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_ACT);
+        HW_WR_FIELD32(chCtrlAddr, CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_ACT);
 
         /** Note: Once the channel is enabled, DMA will trigger its transfer. */
     }
     else
     {
         /* Disable and re-enable channel for the next DMA transfer */
-        HW_WR_FIELD32((baseAddr + MCSPI_CHCTRL(chNum)), CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_NACT);
-        HW_WR_FIELD32((baseAddr + MCSPI_CHCTRL(chNum)), CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_ACT);
+        HW_WR_FIELD32(chCtrlAddr, CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_NACT);
+        HW_WR_FIELD32(chCtrlAddr, CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_ACT);
     }
 }
 
@@ -361,7 +367,8 @@ static void Spi_dmaTxIsrHandler_StatusCheck(const Spi_HwUnitObjType *hwUnitObj)
     }
     /* TI_COVERAGE_GAP_STOP */
 
-    chNum = (uint32)hwUnitObj->curJobObj->jobCfg_PC.csPin;
+    chNum                = (uint32)hwUnitObj->curJobObj->jobCfg_PC.csPin;
+    uint32 chStatRegAddr = hwUnitObj->baseAddr + MCSPI_CHSTAT(chNum);
     do
     {
         if (tempCount <= 0U)
@@ -372,7 +379,7 @@ static void Spi_dmaTxIsrHandler_StatusCheck(const Spi_HwUnitObjType *hwUnitObj)
             break;
         }
         MCAL_SW_DELAY(tempCount);
-        chStat = HW_RD_REG32(hwUnitObj->baseAddr + MCSPI_CHSTAT(chNum));
+        chStat = HW_RD_REG32(chStatRegAddr);
     } while ((chStat & CSL_MCSPI_CH0STAT_EOT_MASK) == 0U);
     /* no timeout */
 }

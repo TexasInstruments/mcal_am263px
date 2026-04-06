@@ -119,29 +119,29 @@ typedef struct Spi_HwUnitObjType_t Spi_HwUnitObjType;
 /**
  * \brief Base address of McSPI Channel configuration : MCSPI_CHCONF(x)
  */
-#define MCSPI_CHCONF(x) ((uint32)MCSPI_CH0CONF + (uint32)((uint32)MCSPI_REG_OFFSET * ((uint32)(x))))
+#define MCSPI_CHCONF(x) (((uint32)MCSPI_CH0CONF) + ((uint32)(((uint32)MCSPI_REG_OFFSET) * ((uint32)(x)))))
 
 /**
  * \brief Base address of McSPI Channel status : McSPI_CHSTAT(x)
  */
-#define MCSPI_CHSTAT(x) ((uint32)MCSPI_CH0STAT + (uint32)((uint32)MCSPI_REG_OFFSET * ((uint32)(x))))
+#define MCSPI_CHSTAT(x) (((uint32)MCSPI_CH0STAT) + ((uint32)(((uint32)MCSPI_REG_OFFSET) * ((uint32)(x)))))
 
 /**
  * \brief Base address of McSPI_CHCTRL(x) which is used to enable channel
  */
-#define MCSPI_CHCTRL(x) ((uint32)MCSPI_CH0CTRL + (uint32)((uint32)MCSPI_REG_OFFSET * ((uint32)(x))))
+#define MCSPI_CHCTRL(x) (((uint32)MCSPI_CH0CTRL) + ((uint32)(((uint32)MCSPI_REG_OFFSET) * ((uint32)(x)))))
 
 /**
  * \brief Base address of McSPI_CHTX(x) which is used to store data to be
  *        transmitted
  */
-#define MCSPI_CHTX(x) ((uint32)MCSPI_TX0 + (uint32)((uint32)MCSPI_REG_OFFSET * ((uint32)(x))))
+#define MCSPI_CHTX(x) (((uint32)MCSPI_TX0) + ((uint32)(((uint32)MCSPI_REG_OFFSET) * ((uint32)(x)))))
 
 /**
  * \brief Base address of McSPI_CHRX(x) which is used to store data to be
  *        received
  */
-#define MCSPI_CHRX(x) ((uint32)MCSPI_RX0 + (uint32)((uint32)MCSPI_REG_OFFSET * ((uint32)(x))))
+#define MCSPI_CHRX(x) (((uint32)MCSPI_RX0) + ((uint32)(((uint32)MCSPI_REG_OFFSET) * ((uint32)(x)))))
 /* @} */
 
 /* ================================================================ */

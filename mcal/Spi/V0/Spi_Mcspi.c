@@ -540,8 +540,9 @@ Spi_JobResultType Spi_mcspiContinueTxRx(const Spi_HwUnitObjType *hwUnitObj, cons
 
 static void Spi_mcspci_continueTxRx_conditons(uint32 baseAddr, uint32 csNum)
 {
-    uint32          chStat    = 0U;
-    volatile uint32 tempCount = SPI_MAX_TIMEOUT_DURATION;
+    uint32          chStat        = 0U;
+    volatile uint32 tempCount     = SPI_MAX_TIMEOUT_DURATION;
+    uint32          chStatRegAddr = baseAddr + MCSPI_CHSTAT(csNum);
     if (SPI_MAX_TIMEOUT_DURATION > 8U)
     {
         tempCount = SPI_MAX_TIMEOUT_DURATION / 8U;
@@ -555,7 +556,7 @@ static void Spi_mcspci_continueTxRx_conditons(uint32 baseAddr, uint32 csNum)
         }
         MCAL_SW_DELAY(tempCount);
         /* Wait for end of transfer*/
-        chStat = HW_RD_REG32(baseAddr + MCSPI_CHSTAT(csNum));
+        chStat = HW_RD_REG32(chStatRegAddr);
     } while ((chStat & MCSPI_CH0STAT_EOT_MASK) == 0U);
 }
 
@@ -921,15 +922,16 @@ static void Spi_mcspiConfigDataPinDir(const Spi_HwUnitObjType *hwUnitObj, Spi_Jo
 static inline const uint8 *Spi_mcspiFifoWrite8(uint32 baseAddr, uint32 chNum, const uint8 *bufPtr,
                                                uint32 transferLength)
 {
-    uint32       index  = 0U;
-    uint32       txData = 0U;
-    const uint8 *temp   = bufPtr;
+    uint32       index    = 0U;
+    uint32       txData   = 0U;
+    const uint8 *temp     = bufPtr;
+    uint32       chtxAddr = baseAddr + MCSPI_CHTX(chNum);
 
     /* Write the data in TX FIFO for 8-bit transfer */
     for (index = 0U; index < transferLength; index++)
     {
         txData = *temp;
-        HW_WR_REG32(baseAddr + MCSPI_CHTX(chNum), txData);
+        HW_WR_REG32(chtxAddr, txData);
         temp++;
     }
 
@@ -939,14 +941,15 @@ static inline const uint8 *Spi_mcspiFifoWrite8(uint32 baseAddr, uint32 chNum, co
 static inline const uint16 *Spi_mcspiFifoWrite16(uint32 baseAddr, uint32 chNum, const uint16 *bufPtr,
                                                  uint32 transferLength)
 {
-    uint32        index  = 0U;
-    uint32        txData = 0U;
-    const uint16 *temp   = bufPtr;
+    uint32        index    = 0U;
+    uint32        txData   = 0U;
+    const uint16 *temp     = bufPtr;
+    uint32        chtxAddr = baseAddr + MCSPI_CHTX(chNum);
     /* Write the data in TX FIFO for 16-bit transfer */
     for (index = 0U; index < transferLength; index++)
     {
         txData = *temp;
-        HW_WR_REG32(baseAddr + MCSPI_CHTX(chNum), txData);
+        HW_WR_REG32(chtxAddr, txData);
         temp++;
     }
 
@@ -956,15 +959,16 @@ static inline const uint16 *Spi_mcspiFifoWrite16(uint32 baseAddr, uint32 chNum, 
 static inline const uint32 *Spi_mcspiFifoWrite32(uint32 baseAddr, uint32 chNum, const uint32 *bufPtr,
                                                  uint32 transferLength)
 {
-    uint32        index  = 0U;
-    uint32        txData = 0U;
-    const uint32 *temp   = bufPtr;
+    uint32        index    = 0U;
+    uint32        txData   = 0U;
+    const uint32 *temp     = bufPtr;
+    uint32        chtxAddr = baseAddr + MCSPI_CHTX(chNum);
 
     /* Write the data in TX FIFO for 32-bit transfer */
     for (index = 0U; index < transferLength; index++)
     {
         txData = *temp;
-        HW_WR_REG32(baseAddr + MCSPI_CHTX(chNum), txData);
+        HW_WR_REG32(chtxAddr, txData);
         temp++;
     }
 
@@ -973,26 +977,28 @@ static inline const uint32 *Spi_mcspiFifoWrite32(uint32 baseAddr, uint32 chNum, 
 
 static inline void Spi_mcspiFifoWriteDefault(uint32 baseAddr, uint32 chNum, uint32 defaultTxData, uint32 transferLength)
 {
-    uint32 index = 0U;
+    uint32 index    = 0U;
+    uint32 chtxAddr = baseAddr + MCSPI_CHTX(chNum);
 
     /* Write default data to TX FIFO */
     for (index = 0U; index < transferLength; index++)
     {
-        HW_WR_REG32(baseAddr + MCSPI_CHTX(chNum), defaultTxData);
+        HW_WR_REG32(chtxAddr, defaultTxData);
     }
 }
 
 static inline uint8 *Spi_mcspiFifoRead8(uint32 baseAddr, uint32 chNum, uint8 *bufPtr, uint32 transferLength,
                                         uint32 dataWidthBitMask)
 {
-    uint32 index  = 0U;
-    uint32 rxData = 0U;
-    uint8 *temp   = bufPtr;
+    uint32 index    = 0U;
+    uint32 rxData   = 0U;
+    uint8 *temp     = bufPtr;
+    uint32 chrxAddr = baseAddr + MCSPI_CHRX(chNum);
 
     /* Read the data from RX FIFO for 8-bit transfer */
     for (index = 0U; index < transferLength; index++)
     {
-        rxData  = HW_RD_REG32(baseAddr + MCSPI_CHRX(chNum));
+        rxData  = HW_RD_REG32(chrxAddr);
         rxData &= dataWidthBitMask; /* Clear unused bits */
         *temp   = (uint8)rxData;
         temp++;
@@ -1004,14 +1010,15 @@ static inline uint8 *Spi_mcspiFifoRead8(uint32 baseAddr, uint32 chNum, uint8 *bu
 static inline uint16 *Spi_mcspiFifoRead16(uint32 baseAddr, uint32 chNum, uint16 *bufPtr, uint32 transferLength,
                                           uint32 dataWidthBitMask)
 {
-    uint32  index  = 0U;
-    uint32  rxData = 0U;
-    uint16 *temp   = bufPtr;
+    uint32  index    = 0U;
+    uint32  rxData   = 0U;
+    uint16 *temp     = bufPtr;
+    uint32  chrxAddr = baseAddr + MCSPI_CHRX(chNum);
 
     /* Read the data from RX FIFO for 16-bit transfer */
     for (index = 0U; index < transferLength; index++)
     {
-        rxData  = HW_RD_REG32(baseAddr + MCSPI_CHRX(chNum));
+        rxData  = HW_RD_REG32(chrxAddr);
         rxData &= dataWidthBitMask; /* Clear unused bits */
         *temp   = (uint16)rxData;
         temp++;
@@ -1023,13 +1030,14 @@ static inline uint16 *Spi_mcspiFifoRead16(uint32 baseAddr, uint32 chNum, uint16 
 static inline uint32 *Spi_mcspiFifoRead32(uint32 baseAddr, uint32 chNum, uint32 *bufPtr, uint32 transferLength,
                                           uint32 dataWidthBitMask)
 {
-    uint32  index  = 0U;
-    uint32  rxData = 0U;
-    uint32 *temp   = bufPtr;
+    uint32  index    = 0U;
+    uint32  rxData   = 0U;
+    uint32 *temp     = bufPtr;
+    uint32  chrxAddr = baseAddr + MCSPI_CHRX(chNum);
     /* Read the data from RX FIFO for 32-bit transfer */
     for (index = 0U; index < transferLength; index++)
     {
-        rxData  = HW_RD_REG32(baseAddr + MCSPI_CHRX(chNum));
+        rxData  = HW_RD_REG32(chrxAddr);
         rxData &= dataWidthBitMask; /* Clear unused bits */
         *temp   = (uint32)rxData;
         temp++;
@@ -1040,13 +1048,14 @@ static inline uint32 *Spi_mcspiFifoRead32(uint32 baseAddr, uint32 chNum, uint32 
 
 static inline void Spi_mcspiFifoReadDiscard(uint32 baseAddr, uint32 chNum, uint32 transferLength)
 {
-    uint32          index  = 0U;
-    volatile uint32 rxData = 0U;
+    uint32          index    = 0U;
+    volatile uint32 rxData   = 0U;
+    uint32          chrxAddr = baseAddr + MCSPI_CHRX(chNum);
 
     /* Read the data from RX FIFO and discard it */
     for (index = 0U; index < transferLength; index++)
     {
-        rxData = HW_RD_REG32(baseAddr + MCSPI_CHRX(chNum));
+        rxData = HW_RD_REG32(chrxAddr);
         (void)rxData;
     }
 }

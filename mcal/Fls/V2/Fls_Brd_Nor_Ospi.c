@@ -876,14 +876,10 @@ static Std_ReturnType Fls_norProcessErase(void)
         {
             retVal = Fls_norBlockErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
         }
-        else if (Fls_DrvObj.typeoferase == FLS_CHIP_ERASE)
-        {
-            retVal = Fls_norChipErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
-        }
         else
         {
-            /* Invalid erase type */
-            retVal = E_NOT_OK;
+            /* FLS_CHIP_ERASE: only remaining enum value */
+            retVal = Fls_norChipErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
         }
     }
     else if (Fls_EraseStage == FLS_S_IN_PROGRESS)

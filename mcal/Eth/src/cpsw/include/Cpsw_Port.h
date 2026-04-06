@@ -116,7 +116,8 @@ void CpswPort_hostPortopen(uint32 baseAddr);
  *
  *  \return None
  */
-uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq, uint32 bandwithLimitBitPerSec);
+uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint32 portNum, uint8 priority, uint32 cppiClockFreq,
+                                 uint32 bandwithLimitBitPerSec);
 
 /**
  *  \brief Get current rate limit bandwidth.
@@ -130,7 +131,7 @@ uint8 CpswPort_setBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClo
  *
  *  \return None
  */
-void CpswPort_getBandwidthLimit(uint32 baseAddr, uint8 priority, uint32 cppiClockFreq,
+void CpswPort_getBandwidthLimit(uint32 baseAddr, uint32 portNum, uint8 priority, uint32 cppiClockFreq,
                                 uint32 *bandwithLimitBitPerSecPtr);
 
 /* ========================================================================== */

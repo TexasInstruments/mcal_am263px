@@ -2703,8 +2703,8 @@ static inline void Mcu_enableAdcReference(uint32 adcInstance)
     HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_MASK_ANA_ISO,
                 ((~0x7U) & CSL_TOP_CTRL_MASK_ANA_ISO_MASK_ANA_ISO_MASK_MASK));
 
-    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL,
-                HW_RD_REG32(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL) | compctlmask);
+    uint32 adcRefCompVal = HW_RD_REG32(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL) | compctlmask;
+    HW_WR_REG16(MCU_CSL_TOP_CTRL_U_BASE + CSL_TOP_CTRL_ADC_REF_COMP_CTRL, adcRefCompVal);
 
     /* Lock Top Control Space */
     Mcu_controlModuleLockMMR(0U, MCU_TOP_CTRL_PARTITION0);

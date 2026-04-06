@@ -252,7 +252,7 @@ static FUNC(Std_ReturnType, ETH_CODE)
 #if (STD_ON == ETH_TRAFFIC_SHAPING_API)
 #if (STD_ON == ETH_DEV_ERROR_DETECT)
 static FUNC(Std_ReturnType, ETH_CODE)
-    Eth_checkGetBandwidthLimitErrors(uint8 ctrlIdx, uint8 queuePrio, uint32 *BandwidthLimitPtr);
+    Eth_checkGetBandwidthLimitErrors(uint8 ctrlIdx, uint8 queuePrio, const uint32 *BandwidthLimitPtr);
 #endif /* (STD_ON == ETH_DEV_ERROR_DETECT) */
 #endif /* (STD_ON == ETH_TRAFFIC_SHAPING_API) */
 
@@ -1264,8 +1264,8 @@ Eth_SetBandwidthLimit(VAR(uint8, AUTOMATIC) CtrlIdx, VAR(uint8, AUTOMATIC) Queue
 
     if ((Std_ReturnType)E_OK == retVal)
     {
-        retVal = CpswPort_setBandwidthLimit(Eth_DrvObj.baseAddr, QueuePrio, Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq,
-                                            BandwidthLimit);
+        retVal = CpswPort_setBandwidthLimit(Eth_DrvObj.baseAddr, Eth_DrvObj.portObj.portNum, QueuePrio,
+                                            Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq, BandwidthLimit);
 #if (STD_ON == ETH_DEV_ERROR_DETECT)
         if (E_NOT_OK == retVal)
         {
@@ -1304,8 +1304,8 @@ Eth_GetBandwidthLimit(VAR(uint8, AUTOMATIC) CtrlIdx, VAR(uint8, AUTOMATIC) Queue
 
     if ((Std_ReturnType)E_OK == retVal)
     {
-        CpswPort_getBandwidthLimit(Eth_DrvObj.baseAddr, QueuePrio, Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq,
-                                   BandwidthLimitPtr);
+        CpswPort_getBandwidthLimit(Eth_DrvObj.baseAddr, Eth_DrvObj.portObj.portNum, QueuePrio,
+                                   Eth_DrvObj.ethConfig.cpdmaCfg.pacingClkFreq, BandwidthLimitPtr);
     }
 }
 #endif /* (STD_ON == ETH_TRAFFIC_SHAPING_API) */
@@ -2002,7 +2002,7 @@ static FUNC(Std_ReturnType, ETH_CODE)
 #if (STD_ON == ETH_TRAFFIC_SHAPING_API)
 #if (STD_ON == ETH_DEV_ERROR_DETECT)
 static FUNC(Std_ReturnType, ETH_CODE)
-    Eth_checkGetBandwidthLimitErrors(uint8 ctrlIdx, uint8 queuePrio, uint32 *BandwidthLimitPtr)
+    Eth_checkGetBandwidthLimitErrors(uint8 ctrlIdx, uint8 queuePrio, const uint32 *BandwidthLimitPtr)
 {
     Std_ReturnType retVal = E_OK;
 
