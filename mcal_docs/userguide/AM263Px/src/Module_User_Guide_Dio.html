@@ -112,20 +112,28 @@
 <li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.12.8.2. Multi-core support</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration">4.12.9. Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#dioconfig">4.12.9.1. DioConfig</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#diogeneral">4.12.9.2. DioGeneral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">4.12.9. Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dioconfig">4.12.10. DioConfig</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#dioport">4.12.10.1. DioPort</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">4.12.10. Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#overview">4.12.10.1. Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.12.10.2. Setup required to run example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.12.10.3. How to run examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sample-log">4.12.10.4. Sample Log</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.12.10.5. File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diogeneral">4.12.11. DioGeneral</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#diodeverrordetect">4.12.11.1. DioDevErrorDetect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diodemenable">4.12.11.2. DioDemEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dioflipchannelapi">4.12.11.3. DioFlipChannelApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dioversioninfoapi">4.12.11.4. DioVersionInfoApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#diohostcoreid">4.12.11.5. DioHostCoreId</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#references">4.12.11. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">4.12.12. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">4.12.12.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.12.12.2. Setup required to run example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.12.12.3. How to run examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-log">4.12.12.4. Sample Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.12.12.5. File Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">4.12.13. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Eth.html">4.13. ETH Module</a></li>
@@ -676,14 +684,15 @@ DEM_ReportErrorStatus ().</p>
 </section>
 <section id="configuration">
 <h2><span class="section-number">4.12.9. </span>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+</section>
 <section id="dioconfig">
-<h3><span class="section-number">4.12.9.1. </span>DioConfig<a class="headerlink" href="#dioconfig" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.12.10. </span>DioConfig<a class="headerlink" href="#dioconfig" title="Link to this heading"></a></h2>
 <p>This container contains the configuration parameters and sub containers of the AUTOSAR DIO module. This container is a MultipleConfigurationContainer, i.e. this container and its sub-containers exist once per configuration set.</p>
 <section id="dioport">
-<h4><span class="section-number">4.12.9.1.1. </span>DioPort<a class="headerlink" href="#dioport" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.12.10.1. </span>DioPort<a class="headerlink" href="#dioport" title="Link to this heading"></a></h3>
 <p>Configuration of individual DIO ports, consisting of channels and possible channel groups.</p>
 <section id="dioportid">
-<h5><span class="section-number">4.12.9.1.1.1. </span>DioPortId<a class="headerlink" href="#dioportid" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.12.10.1.1. </span>DioPortId<a class="headerlink" href="#dioportid" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -724,12 +733,11 @@ DEM_ReportErrorStatus ().</p>
 </tbody>
 </table>
 </section>
-</section>
 <section id="diochannel">
-<h4><span class="section-number">4.12.9.1.2. </span>DioChannel<a class="headerlink" href="#diochannel" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.12.10.1.2. </span>DioChannel<a class="headerlink" href="#diochannel" title="Link to this heading"></a></h4>
 <p>Configuration of an individual DIO channel. Besides a HW specific channel name which is typically fixed for a specific micro controller, additional symbolic names can be defined per channel.</p>
 <section id="diochannelid">
-<h5><span class="section-number">4.12.9.1.2.1. </span>DioChannelId<a class="headerlink" href="#diochannelid" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.12.10.1.2.1. </span>DioChannelId<a class="headerlink" href="#diochannelid" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -772,10 +780,10 @@ DEM_ReportErrorStatus ().</p>
 </section>
 </section>
 <section id="diochannelgroup">
-<h4><span class="section-number">4.12.9.1.3. </span>DioChannelGroup<a class="headerlink" href="#diochannelgroup" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.12.10.1.3. </span>DioChannelGroup<a class="headerlink" href="#diochannelgroup" title="Link to this heading"></a></h4>
 <p>Definition and configuration of DIO channel groups. A channel group represents several adjoining DIO channels represented by a logical group.</p>
 <section id="diochannelgroupidentification">
-<h5><span class="section-number">4.12.9.1.3.1. </span>DioChannelGroupIdentification<a class="headerlink" href="#diochannelgroupidentification" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.12.10.1.3.1. </span>DioChannelGroupIdentification<a class="headerlink" href="#diochannelgroupidentification" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -808,7 +816,7 @@ DEM_ReportErrorStatus ().</p>
 </table>
 </section>
 <section id="dioportmask">
-<h5><span class="section-number">4.12.9.1.3.2. </span>DioPortMask<a class="headerlink" href="#dioportmask" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.12.10.1.3.2. </span>DioPortMask<a class="headerlink" href="#dioportmask" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -847,7 +855,7 @@ DEM_ReportErrorStatus ().</p>
 </table>
 </section>
 <section id="dioportoffset">
-<h5><span class="section-number">4.12.9.1.3.3. </span>DioPortOffset<a class="headerlink" href="#dioportoffset" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.12.10.1.3.3. </span>DioPortOffset<a class="headerlink" href="#dioportoffset" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -887,11 +895,12 @@ DEM_ReportErrorStatus ().</p>
 </section>
 </section>
 </section>
+</section>
 <section id="diogeneral">
-<h3><span class="section-number">4.12.9.2. </span>DioGeneral<a class="headerlink" href="#diogeneral" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.12.11. </span>DioGeneral<a class="headerlink" href="#diogeneral" title="Link to this heading"></a></h2>
 <p>General DIO module configuration parameters.</p>
 <section id="diodeverrordetect">
-<h4><span class="section-number">4.12.9.2.1. </span>DioDevErrorDetect<a class="headerlink" href="#diodeverrordetect" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.12.11.1. </span>DioDevErrorDetect<a class="headerlink" href="#diodeverrordetect" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -927,7 +936,7 @@ DEM_ReportErrorStatus ().</p>
 </table>
 </section>
 <section id="diodemenable">
-<h4><span class="section-number">4.12.9.2.2. </span>DioDemEnable<a class="headerlink" href="#diodemenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.12.11.2. </span>DioDemEnable<a class="headerlink" href="#diodemenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -963,7 +972,7 @@ DEM_ReportErrorStatus ().</p>
 </table>
 </section>
 <section id="dioflipchannelapi">
-<h4><span class="section-number">4.12.9.2.3. </span>DioFlipChannelApi<a class="headerlink" href="#dioflipchannelapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.12.11.3. </span>DioFlipChannelApi<a class="headerlink" href="#dioflipchannelapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -999,7 +1008,7 @@ DEM_ReportErrorStatus ().</p>
 </table>
 </section>
 <section id="dioversioninfoapi">
-<h4><span class="section-number">4.12.9.2.4. </span>DioVersionInfoApi<a class="headerlink" href="#dioversioninfoapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.12.11.4. </span>DioVersionInfoApi<a class="headerlink" href="#dioversioninfoapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1035,7 +1044,7 @@ DEM_ReportErrorStatus ().</p>
 </table>
 </section>
 <section id="diohostcoreid">
-<h4><span class="section-number">4.12.9.2.5. </span>DioHostCoreId<a class="headerlink" href="#diohostcoreid" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.12.11.5. </span>DioHostCoreId<a class="headerlink" href="#diohostcoreid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1092,11 +1101,10 @@ If AUTOSAR MCAL is running on cores other than R5F0_0, user need to take care of
 </div>
 </section>
 </section>
-</section>
 <section id="examples">
-<h2><span class="section-number">4.12.10. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.12.12. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <section id="overview">
-<h3><span class="section-number">4.12.10.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.12.12.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Dio Example</p>
 <ul>
@@ -1117,16 +1125,16 @@ If AUTOSAR MCAL is running on cores other than R5F0_0, user need to take care of
 </ul>
 </section>
 <section id="setup-required-to-run-example">
-<h3><span class="section-number">4.12.10.2. </span>Setup required to run example<a class="headerlink" href="#setup-required-to-run-example" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.12.12.2. </span>Setup required to run example<a class="headerlink" href="#setup-required-to-run-example" title="Link to this heading"></a></h3>
 <p>None</p>
 </section>
 <section id="how-to-run-examples">
-<h3><span class="section-number">4.12.10.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.12.12.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
 <p>1.DIO example application demonstrating the MCAL DIO driver features is in folder &lt;MCAL_ROOT&gt;/examples/Dio.</p>
 <p>2.This application can be built from the build folder by giving “gmake –s dio_app PLATFORM=am263px” command in command prompt.</p>
 <p>3.Once the build is completed we get a binary file, which is loaded in our controller and executed.</p>
 <section id="configuration-used-to-test-this-example">
-<h4><span class="section-number">4.12.10.3.1. </span>Configuration used to test this example<a class="headerlink" href="#configuration-used-to-test-this-example" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.12.12.3.1. </span>Configuration used to test this example<a class="headerlink" href="#configuration-used-to-test-this-example" title="Link to this heading"></a></h4>
 <p>1.The DIO example app used to verify the port pin (High/Low) functionalities.</p>
 <p>2.GPIOI_128(Ball number A15) these pins are configured as a GPIO.</p>
 <p>3.Pin Configurations are provided in mcal/example/Config/Port_PBcfg.c File.</p>
@@ -1135,7 +1143,7 @@ If AUTOSAR MCAL is running on cores other than R5F0_0, user need to take care of
 </section>
 </section>
 <section id="sample-log">
-<h3><span class="section-number">4.12.10.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.12.12.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">CLANG</span><span class="w"> </span><span class="n">compiled</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">DioApp</span><span class="o">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
 <span class="n">DIO</span><span class="w"> </span><span class="n">Driver</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="n">info</span><span class="o">:</span><span class="mf">9.1.0</span>
 <span class="n">DIO</span><span class="w"> </span><span class="n">Driver</span><span class="w"> </span><span class="n">Module</span><span class="o">/</span><span class="n">Driver</span><span class="o">:</span><span class="mf">120.44</span><span class="w"> </span>
@@ -1162,7 +1170,7 @@ If AUTOSAR MCAL is running on cores other than R5F0_0, user need to take care of
 </div>
 </section>
 <section id="file-structure">
-<h3><span class="section-number">4.12.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.12.12.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
 <p>📦AM263Px<br />
 ┣ 📂build<br />
 ┣ 📂mcal<br />
@@ -1187,7 +1195,7 @@ If AUTOSAR MCAL is running on cores other than R5F0_0, user need to take care of
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">4.12.11. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.12.13. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_DIODriver.pdf">AUTOSAR_SWS_DIODriver</a><br />
 <a class="reference external" href="https://www.ti.com/product/AM263P4#tech-docs">Technical Reference Manual</a></p>
 </section>

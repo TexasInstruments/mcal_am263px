@@ -245,10 +245,10 @@ Not supported
 
 
 
-#### CddUartDriver
+###### CddUartDriver
 This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module.
 
-##### CddUartChannel
+###### CddUartChannel
 Configuration of an individual UART channel.
 
 ###### CddUartHwID
@@ -478,12 +478,12 @@ Configuration of an individual UART channel.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### CddUartGeneral
+###### CddUartGeneral
 
 | Item ||
 |--------|---------------|
 | **Name** | CddUartGeneral |
-| **Description** | Switches the Cdd_Uart_GetVersionInfo function ON or OFF. |
+| **Description** | General configuration settings for the Complex Device Driver |
 | **Origin** | Texas Instruments |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
@@ -491,7 +491,7 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartRegisterReadbackApi
+###### CddUartRegisterReadbackApi
 
 | Item ||
 |--------|---------------|
@@ -504,7 +504,7 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartDeinitApi
+###### CddUartDeinitApi
 
 | Item ||
 |--------|---------------|
@@ -517,7 +517,7 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartWriteApi
+###### CddUartWriteApi
 
 | Item ||
 |--------|---------------|
@@ -530,7 +530,7 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartReadApi
+###### CddUartReadApi
 
 | Item ||
 |--------|---------------|
@@ -543,7 +543,7 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartCancelApi
+###### CddUartCancelApi
 
 | Item ||
 |--------|---------------|
@@ -556,7 +556,7 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartGetRemainingWordsApi
+###### CddUartGetRemainingWordsApi
 
 | Item ||
 |--------|---------------|
@@ -569,7 +569,7 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartDevErrorDetect
+###### CddUartDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -582,12 +582,12 @@ Configuration of an individual UART channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddUartIrqType
+###### CddUartIrqType
 
 | Item ||
 |--------|---------------|
 | **Name** | CddUartIrqType |
-| **Description** | This parameter contains a reference to the OsCounter, which is used by the UART driver. |
+| **Description** | This parameter specifies the category of Interrupt ReQuest for callbacks. |
 | **Origin** | Texas Instruments |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |

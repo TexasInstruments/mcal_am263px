@@ -794,7 +794,7 @@ Cdd_Pwm_ClearCounterStatus(Cdd_Pwm_ChannelType Channel, uint32 tbStatusClrMask);
  *
  *****************************************************************************/
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_CounterComparatorCfg(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
+Cdd_Pwm_CounterComparatorCfg(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint16 cmpVal,
                              uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow);
 #endif /*#if (STD_ON == CDD_PWM_COUNTER_COMPARE_CFG)*/
 

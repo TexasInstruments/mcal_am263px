@@ -78,7 +78,7 @@
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
-static uint16 Cdd_Pwm_DutyValue(uint32 compareValue, uint32 period, EPWM_TimeBaseCountMode tbCtrMode);
+static uint16 Cdd_Pwm_DutyValue(uint32 compareValue, uint16 period, EPWM_TimeBaseCountMode tbCtrMode);
 
 #if (STD_ON == CDD_PWM_NOTIFICATION_SUPPORTED)
 static void Cdd_Pmw_FallingEdgeHighPol(uint32 baseAddr, Cdd_Pwm_OutputChType outputCh);
@@ -124,7 +124,7 @@ extern VAR(uint32, CDD_PWM_VAR_NO_INIT) Cdd_Pwm_ChannelSfoStatus[CDD_PWM_MAX_NUM
 
 #define CDD_PWM_START_SEC_CODE
 #include "Cdd_Pwm_MemMap.h"
-static uint16 Cdd_Pwm_DutyValue(uint32 compareValue, uint32 period, EPWM_TimeBaseCountMode tbCtrMode)
+static uint16 Cdd_Pwm_DutyValue(uint32 compareValue, uint16 period, EPWM_TimeBaseCountMode tbCtrMode)
 {
     float32 duty_cycle_percent;
     float64 duty_cycle_period;
@@ -146,10 +146,18 @@ static uint16 Cdd_Pwm_DutyValue(uint32 compareValue, uint32 period, EPWM_TimeBas
     }
     else
     {
-        dutyintvalue = ((((float64)period + 1.0f) - ((float64)duty_cycle_period)) - ((float64)(0.5f)));
+        /* UP_DOWN: T_PWM = 2 x TBPRD x T_TBCLK  =>  CMPA = TBPRD x (1 - duty) */
+        dutyintvalue = (((float64)period * (1.0 - (float64)duty_cycle_percent)) + ((float64)(0.5f)));
     }
 
-    duty_Value = (uint16)dutyintvalue;
+    if (dutyintvalue > (float64)0xFFFFU)
+    {
+        duty_Value = (uint16)0xFFFFU;
+    }
+    else
+    {
+        duty_Value = (uint16)dutyintvalue;
+    }
 
     return (duty_Value);
 }
@@ -645,11 +653,12 @@ static void Cdd_Pwm_CounterCmpA(Cdd_Pwm_ChannelType ChannelNumber, uint32 baseAd
     Cdd_Pwm_compareType         *counterCompareParameter = &Cdd_Pwm_ChObj[ChannelNumber].channelCounterCompare;
     Cdd_Pwm_timerBaseConfigType *timerBaseParamter       = &Cdd_Pwm_ChObj[ChannelNumber].channelTimerBase;
 
-    DutyValue = Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpA,
-                                  timerBaseParamter->channelPwmTbPeriod, timerBaseParamter->channelPwmCounterMode);
+    DutyValue =
+        Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpA,
+                          (uint16)(timerBaseParamter->channelPwmTbPeriod), timerBaseParamter->channelPwmCounterMode);
 
     /* Counter Compare A */
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_A, (((uint16)(DutyValue)) - 1U));
+    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_A, DutyValue);
 
     if (counterCompareParameter->channelCddPwmCompareValueCmpA == FALSE)
     {
@@ -683,11 +692,13 @@ static void Cdd_Pwm_CounterCmpB(Cdd_Pwm_ChannelType ChannelNumber, uint32 baseAd
     uint16                       DutyValue;
     Cdd_Pwm_compareType         *counterCompareParameter = &Cdd_Pwm_ChObj[ChannelNumber].channelCounterCompare;
     Cdd_Pwm_timerBaseConfigType *timerBaseParamter       = &Cdd_Pwm_ChObj[ChannelNumber].channelTimerBase;
-    DutyValue = Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpB,
-                                  timerBaseParamter->channelPwmTbPeriod, timerBaseParamter->channelPwmCounterMode);
+
+    DutyValue =
+        Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpB,
+                          (uint16)(timerBaseParamter->channelPwmTbPeriod), timerBaseParamter->channelPwmCounterMode);
 
     /* Counter Compare B */
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_B, (((uint16)(DutyValue)) - 1U));
+    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_B, DutyValue);
 
     if (counterCompareParameter->channelCddPwmCompareValueCmpB == FALSE)
     {
@@ -721,11 +732,13 @@ static void Cdd_Pwm_CounterCmpC(Cdd_Pwm_ChannelType ChannelNumber, uint32 baseAd
     uint16                       DutyValue;
     Cdd_Pwm_compareType         *counterCompareParameter = &Cdd_Pwm_ChObj[ChannelNumber].channelCounterCompare;
     Cdd_Pwm_timerBaseConfigType *timerBaseParamter       = &Cdd_Pwm_ChObj[ChannelNumber].channelTimerBase;
-    DutyValue = Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpC,
-                                  timerBaseParamter->channelPwmTbPeriod, timerBaseParamter->channelPwmCounterMode);
+
+    DutyValue =
+        Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpC,
+                          (uint16)(timerBaseParamter->channelPwmTbPeriod), timerBaseParamter->channelPwmCounterMode);
 
     /* Counter Compare C */
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_C, (((uint16)(DutyValue)) - 1U));
+    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_C, DutyValue);
 
     if (counterCompareParameter->channelCddPwmCompareValueCmpC == FALSE)
     {
@@ -759,11 +772,13 @@ static void Cdd_Pwm_CounterCmpD(Cdd_Pwm_ChannelType ChannelNumber, uint32 baseAd
     uint16                       DutyValue;
     Cdd_Pwm_compareType         *counterCompareParameter = &Cdd_Pwm_ChObj[ChannelNumber].channelCounterCompare;
     Cdd_Pwm_timerBaseConfigType *timerBaseParamter       = &Cdd_Pwm_ChObj[ChannelNumber].channelTimerBase;
-    DutyValue = Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpD,
-                                  timerBaseParamter->channelPwmTbPeriod, timerBaseParamter->channelPwmCounterMode);
+
+    DutyValue =
+        Cdd_Pwm_DutyValue(counterCompareParameter->channelCddPwmCompareValueCmpD,
+                          (uint16)(timerBaseParamter->channelPwmTbPeriod), timerBaseParamter->channelPwmCounterMode);
 
     /* Counter Compare D */
-    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_D, (((uint16)(DutyValue)) - 1U));
+    EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_D, DutyValue);
 
     if (counterCompareParameter->channelCddPwmCompareValueCmpD == FALSE)
     {
@@ -1178,14 +1193,14 @@ void Cdd_Pwm_DeadBand(Cdd_Pwm_ChannelType ChannelNumber)
 
     EPWM_setDeadBandControlShadowLoadMode(epwmbaseadrr,
                                           (EPWM_DeadBandControlLoadMode)DeadBandParameter->channelDeadBandShadowMode);
-    EPWM_setRisingEdgeDeadBandDelayInput(epwmbaseadrr, (uint16)(DeadBandParameter->channelPwmREDDelayInput));
-    EPWM_setFallingEdgeDeadBandDelayInput(epwmbaseadrr, (uint16)(DeadBandParameter->channelPwmFEDDelayInput));
+    EPWM_setRisingEdgeDeadBandDelayInput(epwmbaseadrr, DeadBandParameter->channelPwmREDDelayInput);
+    EPWM_setFallingEdgeDeadBandDelayInput(epwmbaseadrr, DeadBandParameter->channelPwmFEDDelayInput);
     EPWM_setDeadBandDelayPolarity(epwmbaseadrr, EPWM_DB_RED, DeadBandParameter->channelPwmRedBandPolarity);
     EPWM_setDeadBandDelayPolarity(epwmbaseadrr, EPWM_DB_FED, DeadBandParameter->channelPwmFedBandPolarity);
-    EPWM_setDeadBandDelayMode(epwmbaseadrr, EPWM_DB_RED, (DeadBandParameter->channelREDEnable));
-    EPWM_setDeadBandDelayMode(epwmbaseadrr, EPWM_DB_FED, (DeadBandParameter->channelFEDEnable));
-    EPWM_setDeadBandOutputSwapMode(epwmbaseadrr, EPWM_DB_OUTPUT_A, (DeadBandParameter->channelDeadBandSwapOutputA));
-    EPWM_setDeadBandOutputSwapMode(epwmbaseadrr, EPWM_DB_OUTPUT_B, (DeadBandParameter->channelDeadBandSwapOutputB));
+    EPWM_setDeadBandDelayMode(epwmbaseadrr, EPWM_DB_RED, DeadBandParameter->channelREDEnable);
+    EPWM_setDeadBandDelayMode(epwmbaseadrr, EPWM_DB_FED, DeadBandParameter->channelFEDEnable);
+    EPWM_setDeadBandOutputSwapMode(epwmbaseadrr, EPWM_DB_OUTPUT_A, DeadBandParameter->channelDeadBandSwapOutputA);
+    EPWM_setDeadBandOutputSwapMode(epwmbaseadrr, EPWM_DB_OUTPUT_B, DeadBandParameter->channelDeadBandSwapOutputB);
 
     if (DeadBandParameter->channelRedShadowMode == FALSE)
     {
@@ -1194,7 +1209,7 @@ void Cdd_Pwm_DeadBand(Cdd_Pwm_ChannelType ChannelNumber)
 
     EPWM_setRisingEdgeDelayCountShadowLoadMode(epwmbaseadrr,
                                                (EPWM_RisingEdgeDelayLoadMode)DeadBandParameter->channelRedShadowMode);
-    EPWM_setRisingEdgeDelayCount(epwmbaseadrr, (uint16)(DeadBandParameter->channelREDDelayValue));
+    EPWM_setRisingEdgeDelayCount(epwmbaseadrr, DeadBandParameter->channelREDDelayValue);
     if (DeadBandParameter->channelFedShadowMode == FALSE)
     {
         EPWM_disableFallingEdgeDelayCountShadowLoadMode(epwmbaseadrr);
@@ -1202,7 +1217,7 @@ void Cdd_Pwm_DeadBand(Cdd_Pwm_ChannelType ChannelNumber)
 
     EPWM_setFallingEdgeDelayCountShadowLoadMode(epwmbaseadrr,
                                                 (EPWM_FallingEdgeDelayLoadMode)DeadBandParameter->channelFedShadowMode);
-    EPWM_setFallingEdgeDelayCount(epwmbaseadrr, (uint16)(DeadBandParameter->channelFEDDelayValue));
+    EPWM_setFallingEdgeDelayCount(epwmbaseadrr, DeadBandParameter->channelFEDDelayValue);
     EPWM_setDeadBandCounterClock(epwmbaseadrr, DeadBandParameter->channelDeadBandClockMode);
 }
 
@@ -1932,8 +1947,8 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_configureSignal(uint32 base, const EPWM_SignalP
     /*
      Set Compare values
     */
-    EPWM_setCounterCompareValue(base, EPWM_COUNTER_COMPARE_A, (cmpAVal - 1U));
-    EPWM_setCounterCompareValue(base, EPWM_COUNTER_COMPARE_B, (cmpBVal - 1U));
+    EPWM_setCounterCompareValue(base, EPWM_COUNTER_COMPARE_A, cmpAVal);
+    EPWM_setCounterCompareValue(base, EPWM_COUNTER_COMPARE_B, cmpBVal);
 
     /*
      Set actions for ePWMxA & ePWMxB
@@ -2298,22 +2313,22 @@ void Cdd_Pwm_tbStatusClear(uint32 baseAddr, uint32 tbStatusClrMask)
     }
 }
 
-uint32 Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
-                                    uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)
+boolean Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpType, uint16 cmpVal,
+                                     uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)
 {
-    uint32 status = FALSE;
+    boolean status = CDD_PWM_FALSE;
 
     if ((CDD_PWM_OUTPUT_CH_A == cmpType) || (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType))
     {
         if ((TRUE == overwriteShadow) ||
             (FALSE == EPWM_getCounterCompareShadowStatus(baseAddr, EPWM_COUNTER_COMPARE_A)))
         {
-            EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_A, (((uint16)(cmpVal)) - 1U));
+            EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_A, cmpVal);
 
             EPWM_setCounterCompareShadowLoadMode(baseAddr, EPWM_COUNTER_COMPARE_A,
                                                  (EPWM_CounterCompareLoadMode)shadowToActiveLoadTrigger);
 
-            status = TRUE;
+            status = CDD_PWM_TRUE;
         }
     }
     else if ((CDD_PWM_OUTPUT_CH_B == cmpType) || (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType))
@@ -2321,12 +2336,12 @@ uint32 Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpTyp
         if ((TRUE == overwriteShadow) ||
             (FALSE == EPWM_getCounterCompareShadowStatus(baseAddr, EPWM_COUNTER_COMPARE_B)))
         {
-            EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_A, (((uint16)(cmpVal)) - 1U));
+            EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_B, cmpVal);
 
-            EPWM_setCounterCompareShadowLoadMode(baseAddr, EPWM_COUNTER_COMPARE_A,
+            EPWM_setCounterCompareShadowLoadMode(baseAddr, EPWM_COUNTER_COMPARE_B,
                                                  (EPWM_CounterCompareLoadMode)shadowToActiveLoadTrigger);
 
-            status = TRUE;
+            status = CDD_PWM_TRUE;
         }
     }
     else

@@ -279,22 +279,22 @@ Not supported
 
 
 
-#### LinDemEventParameterRefs
+### LinDemEventParameterRefs
 
 | Item ||
 |--------|---------------|
 | **Name** | LinDemEventParameterRefs |
-| **Description** | Reference to the DemEventParameter which shall be issued when the error "Timeout caused by hardware error" has occurred. If the reference is not configured the error shall be reported as DET error. |
+| **Description** | Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter's DemEventId symbolic value. The standardized errors are provided in this container and can be extended by vendor-specific error references. |
 | **Origin** | AUTOSAR_ECUC |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### LinGeneral
+### LinGeneral
 This container contains the parameters related to each LIN Driver Unit.
 
-##### LinDevErrorDetect
+###### LinDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -307,7 +307,7 @@ This container contains the parameters related to each LIN Driver Unit.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### LinIndex
+###### LinIndex
 
 | Item ||
 |--------|---------------|
@@ -322,7 +322,7 @@ This container contains the parameters related to each LIN Driver Unit.
 | **Max-value** | 255 |
 | **Min-value** | 0 |
 
-##### LinWakeupId
+###### LinWakeupId
 
 | Item ||
 |--------|---------------|
@@ -337,7 +337,7 @@ This container contains the parameters related to each LIN Driver Unit.
 | **Max-value** | 63 |
 | **Min-value** | 0 |
 
-##### LinVersionInfoApi
+###### LinVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -350,7 +350,7 @@ This container contains the parameters related to each LIN Driver Unit.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### LinEnableRegisterReadbackApi
+###### LinEnableRegisterReadbackApi
 
 | Item ||
 |--------|---------------|
@@ -363,10 +363,10 @@ This container contains the parameters related to each LIN Driver Unit.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-#### LinGlobalConfig
+### LinGlobalConfig
 This container contains the global configuration parameter of the Lin driver.
 
-##### LinChannel
+#### LinChannel
 This container contains the configuration (parameters) of the LIN Controller(s).
 
 ###### LinChannelBaudRate
@@ -509,6 +509,21 @@ This container contains the baudrate configuration parameter of the Lin driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | 0 |
 | **Max-value** | 16777215 |
+| **Min-value** | 0 |
+
+###### LinChannelFractionalDivider
+
+| Item ||
+|--------|---------------|
+| **Name** | LinChannelFractionalDivider |
+| **Description** | The M field of the BRSR register modifies the integer prescaler P for fine tuning of the baud rate. The M value adds in increments of 1/16 of the P value. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | true |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 0 |
+| **Max-value** | 15 |
 | **Min-value** | 0 |
 ### Examples
 

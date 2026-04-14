@@ -455,10 +455,10 @@ Not Supported
 
 
 
-#### CddFsiTxConfigSet
+###### CddFsiTxConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR Cdd Fsi Tx module.
 
-##### CddFsiTxNotification
+###### CddFsiTxNotification
 
 | Item ||
 |--------|---------------|
@@ -475,7 +475,7 @@ This container contains the configuration parameters and sub containers of the A
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | NULL_PTR |
 
-##### CddFsiTxOverRunNotification
+###### CddFsiTxOverRunNotification
 
 | Item ||
 |--------|---------------|
@@ -492,7 +492,7 @@ This container contains the configuration parameters and sub containers of the A
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | NULL_PTR |
 
-##### CddFsiTxUnderRunNotification
+###### CddFsiTxUnderRunNotification
 
 | Item ||
 |--------|---------------|
@@ -509,7 +509,7 @@ This container contains the configuration parameters and sub containers of the A
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | NULL_PTR |
 
-##### CddFsiTxHwUnit
+###### CddFsiTxHwUnit
 This container contains the Driver configuration (parameters) depending on which FSI Hw unit is get configured
 
 ###### CddFsiTxHwUnitId
@@ -631,10 +631,10 @@ This container contains the Driver configuration (parameters) depending on which
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### CddFsiTxGeneral
+###### CddFsiTxGeneral
 General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 
-##### CddFsiTxDeInitApi
+###### CddFsiTxDeInitApi
 
 | Item ||
 |--------|---------------|
@@ -647,7 +647,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxTransmitApi
+###### CddFsiTxTransmitApi
 
 | Item ||
 |--------|---------------|
@@ -660,7 +660,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### CddFsiTxDevErrorDetectApi
+###### CddFsiTxDevErrorDetectApi
 
 | Item ||
 |--------|---------------|
@@ -673,7 +673,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxPingApi
+###### CddFsiTxPingApi
 
 | Item ||
 |--------|---------------|
@@ -686,7 +686,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### CddFsiTxExtTriggerEnable
+###### CddFsiTxExtTriggerEnable
 
 | Item ||
 |--------|---------------|
@@ -699,7 +699,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### CddFsiTxBuffLoadApi
+###### CddFsiTxBuffLoadApi
 
 | Item ||
 |--------|---------------|
@@ -712,7 +712,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxResetDriver
+###### CddFsiTxResetDriver
 
 | Item ||
 |--------|---------------|
@@ -725,7 +725,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxTypeofInterruptFunction
+###### CddFsiTxTypeofInterruptFunction
 
 | Item ||
 |--------|---------------|
@@ -739,7 +739,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | **Default-value** | CDD_FSI_TX_ISR_CAT1 |
 | **Range** | CDD_FSI_TX_ISR_VOID<br>CDD_FSI_TX_ISR_CAT1<br>CDD_FSI_TX_ISR_CAT2 |
 
-##### CddFsiTxInterruptVector
+###### CddFsiTxInterruptVector
 
 | Item ||
 |--------|---------------|
@@ -753,7 +753,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | **Default-value** | CDD_FSI_TX_INT1 |
 | **Range** | CDD_FSI_TX_INT1<br>CDD_FSI_TX_INT2 |
 
-##### CddFsiTxDeviceVariant
+###### CddFsiTxDeviceVariant
 
 | Item ||
 |--------|---------------|
@@ -767,7 +767,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | **Default-value** | AM263Px |
 | **Range** | AM263Px |
 
-##### CddFsiTxMaxHwUnitCount
+###### CddFsiTxMaxHwUnitCount
 
 | Item ||
 |--------|---------------|
@@ -782,7 +782,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | **Max-value** | 4 |
 | **Min-value** | 1 |
 
-##### CddFsiTxNotifyCapability
+###### CddFsiTxNotifyCapability
 
 | Item ||
 |--------|---------------|
@@ -795,7 +795,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxBufferOverRunInterrupt
+###### CddFsiTxBufferOverRunInterrupt
 
 | Item ||
 |--------|---------------|
@@ -808,7 +808,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxBufferUnderRunInterrupt
+###### CddFsiTxBufferUnderRunInterrupt
 
 | Item ||
 |--------|---------------|
@@ -821,7 +821,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxPingTimeOutInterrupt
+###### CddFsiTxPingTimeOutInterrupt
 
 | Item ||
 |--------|---------------|
@@ -834,7 +834,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxFrameDoneInterrupt
+###### CddFsiTxFrameDoneInterrupt
 
 | Item ||
 |--------|---------------|
@@ -847,7 +847,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxMainApi
+###### CddFsiTxMainApi
 
 | Item ||
 |--------|---------------|
@@ -860,7 +860,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxGetVersionInfoApi
+###### CddFsiTxGetVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -873,7 +873,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddFsiTxDMAEnable
+###### CddFsiTxDMAEnable
 
 | Item ||
 |--------|---------------|
@@ -886,7 +886,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### CddFsiTxMultiLaneEnable
+###### CddFsiTxMultiLaneEnable
 
 | Item ||
 |--------|---------------|
@@ -899,7 +899,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### CddFsiTxMaxDmaChannelId
+###### CddFsiTxMaxDmaChannelId
 
 | Item ||
 |--------|---------------|
@@ -912,7 +912,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | 63 |
 
-##### CddFsiTxDefaultOSCounterId
+###### CddFsiTxDefaultOSCounterId
 
 | Item ||
 |--------|---------------|
@@ -927,7 +927,7 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | **Max-value** | 16 |
 | **Min-value** | 0 |
 
-##### CddFsiTxOsCounterRef
+###### CddFsiTxOsCounterRef
 
 | Item ||
 |--------|---------------|
@@ -940,12 +940,12 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### CddFsiTxDemEventParameterRefs
+###### CddFsiTxDemEventParameterRefs
 
 | Item ||
 |--------|---------------|
 | **Name** | CddFsiTxDemEventParameterRefs |
-| **Description** | Reference to configured DEM event to report "Tx buffer overrun". |
+| **Description** | Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter's DemEventId value. The standardized errors are provided in the container and can be extended by vendor specific error references |
 | **Post-build-variant-multiplicity** | false |
 | **Multiplicity-Configuration-Class** | -- |
 | Post-Build Time | VARIANT-POST-BUILD |

@@ -323,11 +323,14 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwRxPollingContinue(Cdd_I2c_ChObjType *chObj)
             Cdd_I2c_ChannelResultType chResultTemp;
 
             chResultTemp = Cdd_I2c_HwCheckForRxReady(baseAddr);
+            /* TI_COVERAGE_GAP_START RX ready during cancel requires receiving a byte mid-transfer
+             * with precise HW timing; not achievable by state manipulation in test environment */
             if (CDD_I2C_CH_RESULT_OK == chResultTemp)
             {
                 chObj->state = CDD_I2C_STATE_WAIT_FOR_STOP;
                 Cdd_I2c_HwStop(baseAddr);
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
         else
         {
@@ -543,11 +546,15 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoWaitForBusFree(Cdd_I2c_ChObjTy
     uint16                    intrStatus;
 
     intrStatus = Cdd_I2c_HwGetIntrStatus(baseAddr);
-    /* TI_COVERAGE_GAP_START Bus busy cannot be recreated in test environment as we don't have multi-master setup */
     if ((intrStatus & CDD_I2C_ICSTR_BB_MASK) != CDD_I2C_ICSTR_BB_MASK)
     {
         /* Bus is free - Move to next state */
         chObj->state = CDD_I2C_STATE_SETUP;
+    }
+    /* TI_COVERAGE_GAP_START Bus still busy: multi-master scenario not available in test environment */
+    else
+    {
+        /* Bus is still busy - remain in WAIT_FOR_BUS_FREE state until bus becomes free */
     }
     /* TI_COVERAGE_GAP_STOP */
 
@@ -634,6 +641,13 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferTxIntr(Cdd_I2c_ChObjTy
                 chObj->state = CDD_I2C_STATE_COMPLETE;
             }
         }
+        /* TI_COVERAGE_GAP_START ARDY fires only after slave ACKs all bytes, so curLength always
+         * equals length when ARDY is received. An ARDY with curLength < length is unreachable. */
+        else
+        {
+            /* ARDY before all bytes transferred - structurally unreachable */
+        }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     /* Check for transmit ready */
@@ -646,6 +660,13 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferTxIntr(Cdd_I2c_ChObjTy
             chObj->curTxBufPtr++;
             chObj->curLength++;
         }
+        /* TI_COVERAGE_GAP_START ICXRDY is disabled when curLength reaches length, so a spurious
+         * ICXRDY with curLength >= length cannot occur in normal operation. */
+        else
+        {
+            /* Spurious ICXRDY after last byte - structurally unreachable */
+        }
+        /* TI_COVERAGE_GAP_STOP */
 
         if (chObj->curLength == chObj->length)
         {
@@ -724,6 +745,13 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferRxIntr(Cdd_I2c_ChObjTy
             chObj->curRxBufPtr++;
             chObj->curLength++;
         }
+        /* TI_COVERAGE_GAP_START ICRRDY is disabled when curLength reaches length, so a spurious
+         * ICRRDY with curLength >= length cannot occur in normal operation. */
+        else
+        {
+            /* Spurious ICRRDY after last byte - structurally unreachable */
+        }
+        /* TI_COVERAGE_GAP_STOP */
 
         if (chObj->curLength == chObj->length)
         {
@@ -743,6 +771,14 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferRxIntr(Cdd_I2c_ChObjTy
             }
         }
     }
+    /* TI_COVERAGE_GAP_START RX interrupt mask (AL|NACK|ICRRDY|SCD) does not include ARDY. After
+     * AL/NACK and SCD are handled earlier in the ISR, ICRRDY is the only remaining enabled source.
+     * An RX ISR call with ICRRDY=0 is structurally unreachable. */
+    else
+    {
+        /* ICRRDY not set in RX ISR - structurally unreachable */
+    }
+    /* TI_COVERAGE_GAP_STOP */
 
     return chResult;
 }

@@ -130,7 +130,7 @@ title: Epwm API GUIDE Header file
 | Std_ReturnType | **[Cdd_Pwm_SyncDisable](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_syncdisable)**(Cdd_Pwm_ChannelType Channel)| Function disables the synchronization. Even if sync-in event occurs the count value will not be reloaded.  |
 | uint16 | **[Cdd_Pwm_GetCounterStatus](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_getcounterstatus)**(Cdd_Pwm_ChannelType Channel, uint32 tbStatusMask)| Function gets the Time Base status as indicated by the tbStatusMask parameter.  |
 | Std_ReturnType | **[Cdd_Pwm_ClearCounterStatus](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_clearcounterstatus)**(Cdd_Pwm_ChannelType Channel, uint32 tbStatusClrMask)| Function clears the Time base status bits indicated by the tbStatusClrMask parameter.  |
-| Std_ReturnType | **[Cdd_Pwm_CounterComparatorCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_countercomparatorcfg)**(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)| Function configures the counter comparator and loads the comparator value.  |
+| Std_ReturnType | **[Cdd_Pwm_CounterComparatorCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_countercomparatorcfg)**(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint16 cmpVal, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)| Function configures the counter comparator and loads the comparator value.  |
 | Std_ReturnType | **[Cdd_Pwm_DeadbandCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_deadbandcfg)**(Cdd_Pwm_ChannelType Channel, const CDD_PWM_DeadbandCfgType * pCfg)| Function performs the configuration of the dead band sub-module.  |
 | Std_ReturnType | **[Cdd_Pwm_DeadbandBypass](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_deadbandbypass)**(Cdd_Pwm_ChannelType Channel)| Function bypasses the Dead-band sub-module.  |
 | Std_ReturnType | **[Cdd_Pwm_ChopperCfg](../Modules/group___c_d_d___p_w_m.md#function-cdd_pwm_choppercfg)**(Cdd_Pwm_ChannelType Channel, const CDD_PWM_ChopperCfgType * pCfg)| Performs the configuration of the chopper sub-module.  |
@@ -786,7 +786,7 @@ Reentrancy - Non Reentrant
 Std_ReturnType Cdd_Pwm_CounterComparatorCfg(
     Cdd_Pwm_ChannelType Channel,
     Cdd_Pwm_OutputChType cmpType,
-    uint32 cmpVal,
+    uint16 cmpVal,
     uint32 shadowToActiveLoadTrigger,
     uint32 overwriteShadow
 )

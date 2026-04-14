@@ -219,10 +219,10 @@ Not supported
 
 
 
-#### CddIpcDriver
+###### CddIpcDriver
 This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver(CDD) module.
 
-##### CddIpcLocalCoreId
+###### CddIpcLocalCoreId
 
 | Item ||
 |--------|---------------|
@@ -235,7 +235,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Default-value** | CDD_IPC_R5FSS0_0_ID |
 | **Range** | CDD_IPC_R5FSS0_0_ID<br>CDD_IPC_R5FSS0_1_ID<br>CDD_IPC_R5FSS1_0_ID<br>CDD_IPC_R5FSS1_1_ID |
 
-##### CddIpcRemoteCoreList
+###### CddIpcRemoteCoreList
 Refers to the list of coreId that are valid for the particular platform.
 
 ###### CddIpcRemoteCoreIdIndex
@@ -266,7 +266,7 @@ Refers to the list of coreId that are valid for the particular platform.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | false |
 
-##### CddIpcEndPtConfig
+###### CddIpcEndPtConfig
 This is required only in case of RpMsg is being used. To enable this make sure the CddIpcRpMsgEnable box is enabled.
 
 ###### CddIpcLocalEndPt
@@ -346,19 +346,19 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | NULL_PTR |
 
-#### CddIpcGeneral
+###### CddIpcGeneral
 
 | Item ||
 |--------|---------------|
 | **Name** | CddIpcGeneral |
-| **Description** | Switches the Cdd_IpcDeinit function ON or OFF. |
+| **Description** | General configuration settings for Complex device driver |
 | **Origin** | Texas Instruments |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### CddIpcWriteApi
+###### CddIpcWriteApi
 
 | Item ||
 |--------|---------------|
@@ -370,7 +370,7 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### CddIpcReadApi
+###### CddIpcReadApi
 
 | Item ||
 |--------|---------------|
@@ -382,7 +382,7 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### CddIpcRpMsgEnable
+###### CddIpcRpMsgEnable
 
 | Item ||
 |--------|---------------|
@@ -394,7 +394,7 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### CddIpcRecvCallBackEnable
+###### CddIpcRecvCallBackEnable
 
 | Item ||
 |--------|---------------|
@@ -409,12 +409,12 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### CddIpcRecvNotifyCallbackEnable
+###### CddIpcRecvNotifyCallbackEnable
 
 | Item ||
 |--------|---------------|
 | **Name** | CddIpcRecvNotifyCallbackEnable |
-| **Description** | Switches the Development Error Detection and Notification ON or OFF. |
+| **Description** | Switch to enable RPMsg Notify message Recv Callback. |
 | **Multiplicity-Configuration-Class** | -- |
 | Post-Build Time | VARIANT-POST-BUILD |
 | **Origin** | Texas Instruments |
@@ -424,7 +424,7 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### CddIpcSafeIpcEnable
+###### CddIpcSafeIpcEnable
 
 | Item ||
 |--------|---------------|
@@ -436,7 +436,7 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | false |
 
-##### CddIpcCrcEnable
+###### CddIpcCrcEnable
 
 | Item ||
 |--------|---------------|
@@ -448,12 +448,12 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | false |
 
-##### CddIpcCrcHookFunc
+###### CddIpcCrcHookFunc
 
 | Item ||
 |--------|---------------|
 | **Name** | CddIpcCrcHookFunc |
-| **Description** | Type of Isr function: void functionname(void) CAT1 : interrupt void func(void) CAT2 : ISR(func)  |
+| **Description** | Hook function in application for Crc Calculation |
 | **Multiplicity-Configuration-Class** | -- |
 | Post-Build Time | VARIANT-POST-BUILD |
 | **Origin** | Texas Instruments |
@@ -464,7 +464,7 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | **Default-value** | CDD_IPC_ISR_VOID |
 | **Range** | CDD_IPC_ISR_VOID<br>CDD_IPC_ISR_CAT1<br>CDD_IPC_ISR_CAT2 |
 
-##### CddIpcTimeout
+###### CddIpcTimeout
 
 | Item ||
 |--------|---------------|
@@ -478,7 +478,7 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | **Max-value** | 2147483648 |
 | **Min-value** | 0 |
 
-##### CddIpcNumOfBuffers
+###### CddIpcNumOfBuffers
 
 | Item ||
 |--------|---------------|
@@ -489,6 +489,24 @@ This is required only in case of RpMsg is being used. To enable this make sure t
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | 8 |
+
+###### CddIpcMaxBufferSize
+
+| Item ||
+|--------|---------------|
+| **Name** | CddIpcMaxBufferSize |
+| **Description** | This parameter indicates the Max size of each buffer. Note that the actual size available is 16 bytes less than the above chosen value (16 bytes are used for the header in RPMsg) |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| **Default-value** | AM263PX |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| **Post-build-variant-multiplicity** | false |
+| **Max-value** | 16 |
+| **Min-value** | 0 |
+| **Range** | AM263PX |
 
 Note: In case of CddIpcRecvCallBack , when RPMsg arrive then that is invoked along with the data in the VRING buffer.So now if the msg size is less then what we are transferring between cores then we will send the echo msg back to the core from which we are receiving and will do UNLOCK of core only if complete msg transfer happens.So by this way we are acknowledging the remote core.
 

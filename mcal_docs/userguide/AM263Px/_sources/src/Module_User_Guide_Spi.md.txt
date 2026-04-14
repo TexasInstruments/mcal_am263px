@@ -401,12 +401,12 @@ Not Supported
 
 
 
-#### SpiDemEventParameterRefs
+### SpiDemEventParameterRefs
 
 | Item ||
 |--------|---------------|
 | **Name** | SpiDemEventParameterRefs |
-| **Description** | Reference to configured DEM event to report "Hardware failure". If the reference is not configured the error shall not be reported. |
+| **Description** | Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter's DemEventId symbolic value. The standardized errors are provided in this container and can be extended by vendor-specific error references. |
 | **Post-build-variant-multiplicity** | false |
 | **Multiplicity-Configuration-Class** | -- |
 | Link Time | VARIANT-LINK-TIME |
@@ -419,10 +419,10 @@ Not Supported
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### SpiDriver
+### SpiDriver
 This container contains the configuration parameters and sub containers of the AUTOSAR Spi module.
 
-##### SpiMaxChannel
+###### SpiMaxChannel
 
 | Item ||
 |--------|---------------|
@@ -443,7 +443,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 255 |
 | **Min-value** | 0 |
 
-##### SpiMaxJob
+###### SpiMaxJob
 
 | Item ||
 |--------|---------------|
@@ -464,7 +464,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 65535 |
 | **Min-value** | 0 |
 
-##### SpiMaxSequence
+###### SpiMaxSequence
 
 | Item ||
 |--------|---------------|
@@ -485,7 +485,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 255 |
 | **Min-value** | 0 |
 
-##### SpiMaxHwUnit
+###### SpiMaxHwUnit
 
 | Item ||
 |--------|---------------|
@@ -501,7 +501,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 8 |
 | **Min-value** | 0 |
 
-##### SpiMaxExternalDeviceConfig
+###### SpiMaxExternalDeviceConfig
 
 | Item ||
 |--------|---------------|
@@ -517,7 +517,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 8 |
 | **Min-value** | 0 |
 
-##### SpiChannel
+#### SpiChannel
 All data needed to configure one SPI-channel
 
 ###### SpiChannelId
@@ -635,7 +635,7 @@ All data needed to configure one SPI-channel
 | **Default-value** | MSB |
 | **Range** | LSB<br>MSB |
 
-##### SpiExternalDevice
+#### SpiExternalDevice
 The communication settings of an external device. Closely linked to SpiJob.
 
 ###### SpiExternalDeviceId
@@ -896,7 +896,7 @@ MCSPI HW specific external device config. Should be populated only if hwUnitId i
 | **Default-value** | DATA_LINE_1_TRANSMISSION |
 | **Range** | DATA_LINE_NO_TRANSMISSION<br>DATA_LINE_0_TRANSMISSION<br>DATA_LINE_1_TRANSMISSION<br>DATA_LINE_BOTH_TRANSMISSION |
 
-##### SpiJob
+#### SpiJob
 All data needed to configure one SPI-Job, amongst others the connection between the internal SPI unit and the special settings for an external device is done.
 
 ###### SpiHwUnitSynchronous
@@ -904,7 +904,7 @@ All data needed to configure one SPI-Job, amongst others the connection between 
 | Item ||
 |--------|---------------|
 | **Name** | SpiHwUnitSynchronous |
-| **Description** | Tags: atp.Status=obsolete |
+| **Description** | If SpiHwUnitSynchronous is set to "SYNCHRONOUS", the SpiJob uses its containing SpiDriver in a synchronous manner. If it is set to "ASYNCHRONOUS", it uses the driver in an asynchronous way. If the parameter is not set, the SpiChannel uses the driver also in an asynchronous way. |
 | **Multiplicity-Configuration-Class** | -- |
 | Link Time | VARIANT-LINK-TIME |
 | Post-Build Time | VARIANT-POST-BUILD |
@@ -1028,7 +1028,7 @@ References to SPI channels and their order within the Job.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### SpiSequence
+#### SpiSequence
 All data needed to configure one SPI-sequence
 
 ###### SpiInterruptibleSequence
@@ -1098,7 +1098,7 @@ All data needed to configure one SPI-sequence
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### SpiHwUnitConfig
+#### SpiHwUnitConfig
 HW Unit configurations
 
 ###### SpiHwUnitType
@@ -1158,10 +1158,10 @@ HW Unit configurations
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### SpiGeneral
+### SpiGeneral
 General configuration settings for SPI-Handler
 
-##### SpiCancelApi
+###### SpiCancelApi
 
 | Item ||
 |--------|---------------|
@@ -1175,7 +1175,7 @@ General configuration settings for SPI-Handler
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### SpiEnableJobLog
+###### SpiEnableJobLog
 
 | Item ||
 |--------|---------------|
@@ -1189,7 +1189,7 @@ General configuration settings for SPI-Handler
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### SpiMaxExternalDevices
+###### SpiMaxExternalDevices
 
 | Item ||
 |--------|---------------|
@@ -1205,7 +1205,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 8 |
 | **Min-value** | 1 |
 
-##### SpiMaxJobLogLength
+###### SpiMaxJobLogLength
 
 | Item ||
 |--------|---------------|
@@ -1221,7 +1221,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 65535 |
 | **Min-value** | 1 |
 
-##### SpiMaxTimeoutDuration
+###### SpiMaxTimeoutDuration
 
 | Item ||
 |--------|---------------|
@@ -1237,7 +1237,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 4294967295 |
 | **Min-value** | 1 |
 
-##### SpiMaxChannelsPerJob
+###### SpiMaxChannelsPerJob
 
 | Item ||
 |--------|---------------|
@@ -1253,7 +1253,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 255 |
 | **Min-value** | 1 |
 
-##### SpiMaxJobsPerSequence
+###### SpiMaxJobsPerSequence
 
 | Item ||
 |--------|---------------|
@@ -1269,7 +1269,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 255 |
 | **Min-value** | 1 |
 
-##### SpiMaxChannels
+###### SpiMaxChannels
 
 | Item ||
 |--------|---------------|
@@ -1285,7 +1285,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 255 |
 | **Min-value** | 1 |
 
-##### SpiMaxJobs
+###### SpiMaxJobs
 
 | Item ||
 |--------|---------------|
@@ -1301,7 +1301,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 65535 |
 | **Min-value** | 1 |
 
-##### SpiMaxSequences
+###### SpiMaxSequences
 
 | Item ||
 |--------|---------------|
@@ -1317,7 +1317,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 255 |
 | **Min-value** | 1 |
 
-##### SpiChannelBuffersAllowed
+###### SpiChannelBuffersAllowed
 
 | Item ||
 |--------|---------------|
@@ -1333,7 +1333,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 2 |
 | **Min-value** | 0 |
 
-##### SpiDevErrorDetect
+###### SpiDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -1347,7 +1347,7 @@ General configuration settings for SPI-Handler
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### SpiHwStatusApi
+###### SpiHwStatusApi
 
 | Item ||
 |--------|---------------|
@@ -1361,7 +1361,7 @@ General configuration settings for SPI-Handler
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### SpiInterruptibleSeqAllowed
+###### SpiInterruptibleSeqAllowed
 
 | Item ||
 |--------|---------------|
@@ -1375,7 +1375,7 @@ General configuration settings for SPI-Handler
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### SpiLevelDelivered
+###### SpiLevelDelivered
 
 | Item ||
 |--------|---------------|
@@ -1391,7 +1391,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 2 |
 | **Min-value** | 0 |
 
-##### SpiMainFunctionPeriod
+###### SpiMainFunctionPeriod
 
 | Item ||
 |--------|---------------|
@@ -1407,7 +1407,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | INF |
 | **Min-value** | 0.0 |
 
-##### SpiSupportConcurrentSyncTransmit
+###### SpiSupportConcurrentSyncTransmit
 
 | Item ||
 |--------|---------------|
@@ -1421,7 +1421,7 @@ General configuration settings for SPI-Handler
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### SpiUserCallbackHeaderFile
+###### SpiUserCallbackHeaderFile
 
 | Item ||
 |--------|---------------|
@@ -1439,7 +1439,7 @@ General configuration settings for SPI-Handler
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### SpiVersionInfoApi
+###### SpiVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -1453,7 +1453,7 @@ General configuration settings for SPI-Handler
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### SpiIrqType
+###### SpiIrqType
 
 | Item ||
 |--------|---------------|
@@ -1468,7 +1468,7 @@ General configuration settings for SPI-Handler
 | **Default-value** | SPI_ISR_CAT2 |
 | **Range** | SPI_ISR_VOID<br>SPI_ISR_CAT1<br>SPI_ISR_CAT2 |
 
-##### SpiDefaultOSCounterId
+###### SpiDefaultOSCounterId
 
 | Item ||
 |--------|---------------|
@@ -1485,7 +1485,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 16 |
 | **Min-value** | 0 |
 
-##### SpiTimeoutDuration
+###### SpiTimeoutDuration
 
 | Item ||
 |--------|---------------|
@@ -1501,7 +1501,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 4294967295 |
 | **Min-value** | 1 |
 
-##### SpiRegisterReadbackApi
+###### SpiRegisterReadbackApi
 
 | Item ||
 |--------|---------------|
@@ -1515,7 +1515,7 @@ General configuration settings for SPI-Handler
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### SpiSafetyApi
+###### SpiSafetyApi
 
 | Item ||
 |--------|---------------|
@@ -1529,7 +1529,7 @@ General configuration settings for SPI-Handler
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### SpiChannelInternalBufferMaxLength
+###### SpiChannelInternalBufferMaxLength
 
 | Item ||
 |--------|---------------|
@@ -1545,7 +1545,7 @@ General configuration settings for SPI-Handler
 | **Max-value** | 4294967295 |
 | **Min-value** | 1 |
 
-##### SpiDeviceVariant
+###### SpiDeviceVariant
 
 | Item ||
 |--------|---------------|
@@ -1560,7 +1560,7 @@ General configuration settings for SPI-Handler
 | **Default-value** | AM263Px |
 | **Range** | AM263Px |
 
-##### SpiOsCounterRef
+###### SpiOsCounterRef
 
 | Item ||
 |--------|---------------|
@@ -1574,7 +1574,7 @@ General configuration settings for SPI-Handler
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### SpiHwUnitEnabled
+#### SpiHwUnitEnabled
 Structure for storing enabled SPI HW units
 
 ###### SpiHwUnitEnabledFlag

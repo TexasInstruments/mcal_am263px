@@ -293,7 +293,7 @@ FUNC(void, ETHTRCV_CODE) EthTrcv_Init(P2CONST(EthTrcv_ConfigType, AUTOMATIC, ETH
                     EthTrcv_DrvObj.ethTrcvCtrlObj[ctrlIdx].ctrlMode = ETHTRCV_MODE_DOWN;
 
                     /* Copy port configuration into driver object */
-                    (void)memcpy(&EthTrcv_DrvObj.ethTrcvCtrlObj[TrcvIdx].ethTrcvCfg, ConfigPtr->pController[ctrlIdx],
+                    (void)memcpy(&EthTrcv_DrvObj.ethTrcvCtrlObj[ctrlIdx].ethTrcvCfg, ConfigPtr->pController[ctrlIdx],
                                  sizeof(EthTrcv_ControllerConfigType));
                 }
             }
@@ -764,6 +764,9 @@ EthTrcv_GetDuplexMode(uint8 TrcvIdx, EthTrcv_DuplexModeType *DuplexModePtr)
 FUNC(void, ETHTRCV_CODE)
 EthTrcv_ReadMiiIndication(uint8 CtrlIdx, uint8 TrcvIdx, uint8 RegIdx, uint16 RegVal)
 {
+    (void)CtrlIdx; /* MISRA C Compliance */
+    (void)TrcvIdx; /* MISRA C Compliance */
+    (void)RegIdx;  /* MISRA C Compliance */
     EthTrcv_MdioRdVal         = RegVal;
     EthTrcv_MdioRdCmdComplete = (uint32)TRUE;
 }
@@ -785,6 +788,8 @@ EthTrcv_ReadMiiIndication(uint8 CtrlIdx, uint8 TrcvIdx, uint8 RegIdx, uint16 Reg
 /* Requirements : SWS_EthTrcv_00109 */
 FUNC(void, ETHTRCV_CODE) EthTrcv_WriteMiiIndication(uint8 CtrlIdx, uint8 TrcvIdx, uint8 RegId)
 {
+    (void)CtrlIdx; /* MISRA C Compliance */
+    (void)TrcvIdx; /* MISRA C Compliance */
     EthTrcv_MdioWrCmdComplete = (uint32)TRUE;
 }
 

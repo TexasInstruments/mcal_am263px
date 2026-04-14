@@ -1020,16 +1020,15 @@ void Port_DioInit(void)
 #endif /*(STD_ON == PORT_DEV_ERROR_DETECT)*/
         {
             Port_GPIOPortInit((gpioPORT_t *)gpioPortAddr);
-        }
-
 #if (STD_ON == PORT_ENABLE_INTR_API)
-        Port_IntrObj.IntrIdxNum[pin] = (uint8)idx;
-        if (Port_DrvObj.DioConfig_pt[idx].Port_PinSelectInterruptType == PORT_BANK_INTR)
-        {
-            portBankIdx                          = (PORT_GPIO_BANK_SUFFIX + (PORT_GET_BANK_INDEX(pin)));
-            Port_IntrObj.IntrIdxNum[portBankIdx] = (uint8)idx;
-        }
+            Port_IntrObj.IntrIdxNum[pin] = (uint8)idx;
+            if (Port_DrvObj.DioConfig_pt[idx].Port_PinSelectInterruptType == PORT_BANK_INTR)
+            {
+                portBankIdx                          = (PORT_GPIO_BANK_SUFFIX + (PORT_GET_BANK_INDEX(pin)));
+                Port_IntrObj.IntrIdxNum[portBankIdx] = (uint8)idx;
+            }
 #endif /** #if (STD_ON == PORT_ENABLE_INTR_API) */
+        }
     }
 
 #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API))

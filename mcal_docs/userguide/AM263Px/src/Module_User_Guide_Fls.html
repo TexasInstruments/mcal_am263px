@@ -114,22 +114,68 @@
 <li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.15.8.2. Multi-core support</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration">4.15.9. Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#flsconfigset">4.15.9.1. FlsConfigSet</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#flsgeneral">4.15.9.2. FlsGeneral</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#configuration-changes-with-dma-mode">4.15.9.3. Configuration changes with DMA mode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">4.15.9. Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flsconfigset">4.15.10. FlsConfigSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#flsacerase">4.15.10.1. FlsAcErase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsacwrite">4.15.10.2. FlsAcWrite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flscallcycle">4.15.10.3. FlsCallCycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsdefaultmode">4.15.10.4. FlsDefaultMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsenabledma">4.15.10.5. FlsEnableDMA</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsjobendnotification">4.15.10.6. FlsJobEndNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsjoberrornotification">4.15.10.7. FlsJobErrorNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsmaxreadfastmode">4.15.10.8. FlsMaxReadFastMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsmaxreadnormalmode">4.15.10.9. FlsMaxReadNormalMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsmaxwritefastmode">4.15.10.10. FlsMaxWriteFastMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsmaxwritenormalmode">4.15.10.11. FlsMaxWriteNormalMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsprotection">4.15.10.12. FlsProtection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsbaudratediv">4.15.10.13. FlsBaudRateDiv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsprotocol">4.15.10.14. FlsProtocol</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsdacenable">4.15.10.15. FlsDacEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsospiclkspeed">4.15.10.16. FlsOspiClkSpeed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsphyenable">4.15.10.17. FlsPhyEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsphycontrolmode">4.15.10.18. FlsPhyControlMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsphydlllockmode">4.15.10.19. FlsPhyDllLockMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flshwunitcdddmahandler">4.15.10.20. FlsHwUnitCddDmaHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsflashconfiglist">4.15.10.21. FlsFlashConfigList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsexternaldriver">4.15.10.22. FlsExternalDriver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flssectorlist">4.15.10.23. FlsSectorList</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">4.15.10. Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#overview">4.15.10.1. Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hardware-software-setup-and-tools">4.15.10.2. Hardware Software Setup and Tools</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#steps-to-build-and-run-example">4.15.10.3. Steps to build and run example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example-logs">4.15.10.4. Example Logs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.15.10.5. File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flsgeneral">4.15.11. FlsGeneral</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#flsacloadonjobstart">4.15.11.1. FlsAcLoadOnJobStart</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsbaseaddress">4.15.11.2. FlsBaseAddress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsblankcheckapi">4.15.11.3. FlsBlankCheckApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flscancelapi">4.15.11.4. FlsCancelApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flscompareapi">4.15.11.5. FlsCompareApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsdeverrordetect">4.15.11.6. FlsDevErrorDetect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsdriverindex">4.15.11.7. FlsDriverIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flseraseverificationenabled">4.15.11.8. FlsEraseVerificationEnabled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsgetjobresultapi">4.15.11.9. FlsGetJobResultApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsgetstatusapi">4.15.11.10. FlsGetStatusApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flssetmodeapi">4.15.11.11. FlsSetModeApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flstimeoutsupervisionenabled">4.15.11.12. FlsTimeoutSupervisionEnabled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flstotalsize">4.15.11.13. FlsTotalSize</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsuseinterrupts">4.15.11.14. FlsUseInterrupts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsversioninfoapi">4.15.11.15. FlsVersionInfoApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flswriteverificationenabled">4.15.11.16. FlsWriteVerificationEnabled</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsospictrlbaseaddr">4.15.11.17. FlsOspiCtrlBaseAddr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsirqtype">4.15.11.18. FlsIrqType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsdefaultoscounterid">4.15.11.19. FlsDefaultOSCounterId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsexternalflashselect">4.15.11.20. FlsExternalFlashSelect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#flsoscounterref">4.15.11.21. FlsOsCounterRef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-changes-with-dma-mode">4.15.11.22. Configuration changes with DMA mode</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#faq-s">4.15.11. FAQ’s</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#references">4.15.12. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">4.15.12. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">4.15.12.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-software-setup-and-tools">4.15.12.2. Hardware Software Setup and Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps-to-build-and-run-example">4.15.12.3. Steps to build and run example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-logs">4.15.12.4. Example Logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.15.12.5. File Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#faq-s">4.15.13. FAQ’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">4.15.14. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Gpt.html">4.16. GPT Module</a></li>
@@ -858,11 +904,12 @@ to notify the module environment about job end and job error</p>
 </section>
 <section id="configuration">
 <h2><span class="section-number">4.15.9. </span>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+</section>
 <section id="flsconfigset">
-<h3><span class="section-number">4.15.9.1. </span>FlsConfigSet<a class="headerlink" href="#flsconfigset" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.15.10. </span>FlsConfigSet<a class="headerlink" href="#flsconfigset" title="Link to this heading"></a></h2>
 <p>Container for runtime configuration parameters of the flash driver.</p>
 <section id="flsacerase">
-<h4><span class="section-number">4.15.9.1.1. </span>FlsAcErase<a class="headerlink" href="#flsacerase" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.1. </span>FlsAcErase<a class="headerlink" href="#flsacerase" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -874,7 +921,7 @@ to notify the module environment about job end and job error</p>
 <td><p>FlsAcErase</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Instance Id of OSPI. In this variant only one is supported</p></td>
+<td><p>Address offset in RAM to which the erase flash access code shall be loaded. Currenly, Flash Access code Erase/Write functionality is not supported.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Origin</strong></p></td>
 <td><p>Texas Instruments</p></td>
@@ -901,7 +948,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsacwrite">
-<h4><span class="section-number">4.15.9.1.2. </span>FlsAcWrite<a class="headerlink" href="#flsacwrite" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.2. </span>FlsAcWrite<a class="headerlink" href="#flsacwrite" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -940,7 +987,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscallcycle">
-<h4><span class="section-number">4.15.9.1.3. </span>FlsCallCycle<a class="headerlink" href="#flscallcycle" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.3. </span>FlsCallCycle<a class="headerlink" href="#flscallcycle" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -982,7 +1029,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdefaultmode">
-<h4><span class="section-number">4.15.9.1.4. </span>FlsDefaultMode<a class="headerlink" href="#flsdefaultmode" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.4. </span>FlsDefaultMode<a class="headerlink" href="#flsdefaultmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1021,7 +1068,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsenabledma">
-<h4><span class="section-number">4.15.9.1.5. </span>FlsEnableDMA<a class="headerlink" href="#flsenabledma" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.5. </span>FlsEnableDMA<a class="headerlink" href="#flsenabledma" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1060,7 +1107,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsjobendnotification">
-<h4><span class="section-number">4.15.9.1.6. </span>FlsJobEndNotification<a class="headerlink" href="#flsjobendnotification" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.6. </span>FlsJobEndNotification<a class="headerlink" href="#flsjobendnotification" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1105,7 +1152,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsjoberrornotification">
-<h4><span class="section-number">4.15.9.1.7. </span>FlsJobErrorNotification<a class="headerlink" href="#flsjoberrornotification" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.7. </span>FlsJobErrorNotification<a class="headerlink" href="#flsjoberrornotification" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1150,7 +1197,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsmaxreadfastmode">
-<h4><span class="section-number">4.15.9.1.8. </span>FlsMaxReadFastMode<a class="headerlink" href="#flsmaxreadfastmode" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.8. </span>FlsMaxReadFastMode<a class="headerlink" href="#flsmaxreadfastmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1192,7 +1239,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsmaxreadnormalmode">
-<h4><span class="section-number">4.15.9.1.9. </span>FlsMaxReadNormalMode<a class="headerlink" href="#flsmaxreadnormalmode" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.9. </span>FlsMaxReadNormalMode<a class="headerlink" href="#flsmaxreadnormalmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1234,7 +1281,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsmaxwritefastmode">
-<h4><span class="section-number">4.15.9.1.10. </span>FlsMaxWriteFastMode<a class="headerlink" href="#flsmaxwritefastmode" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.10. </span>FlsMaxWriteFastMode<a class="headerlink" href="#flsmaxwritefastmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1276,7 +1323,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsmaxwritenormalmode">
-<h4><span class="section-number">4.15.9.1.11. </span>FlsMaxWriteNormalMode<a class="headerlink" href="#flsmaxwritenormalmode" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.11. </span>FlsMaxWriteNormalMode<a class="headerlink" href="#flsmaxwritenormalmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1318,7 +1365,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotection">
-<h4><span class="section-number">4.15.9.1.12. </span>FlsProtection<a class="headerlink" href="#flsprotection" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.12. </span>FlsProtection<a class="headerlink" href="#flsprotection" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1357,7 +1404,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsbaudratediv">
-<h4><span class="section-number">4.15.9.1.13. </span>FlsBaudRateDiv<a class="headerlink" href="#flsbaudratediv" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.13. </span>FlsBaudRateDiv<a class="headerlink" href="#flsbaudratediv" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1396,7 +1443,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocol">
-<h4><span class="section-number">4.15.9.1.14. </span>FlsProtocol<a class="headerlink" href="#flsprotocol" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.14. </span>FlsProtocol<a class="headerlink" href="#flsprotocol" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1435,7 +1482,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdacenable">
-<h4><span class="section-number">4.15.9.1.15. </span>FlsDacEnable<a class="headerlink" href="#flsdacenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.15. </span>FlsDacEnable<a class="headerlink" href="#flsdacenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1471,7 +1518,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsospiclkspeed">
-<h4><span class="section-number">4.15.9.1.16. </span>FlsOspiClkSpeed<a class="headerlink" href="#flsospiclkspeed" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.16. </span>FlsOspiClkSpeed<a class="headerlink" href="#flsospiclkspeed" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1507,7 +1554,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsphyenable">
-<h4><span class="section-number">4.15.9.1.17. </span>FlsPhyEnable<a class="headerlink" href="#flsphyenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.17. </span>FlsPhyEnable<a class="headerlink" href="#flsphyenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1543,7 +1590,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsphycontrolmode">
-<h4><span class="section-number">4.15.9.1.18. </span>FlsPhyControlMode<a class="headerlink" href="#flsphycontrolmode" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.18. </span>FlsPhyControlMode<a class="headerlink" href="#flsphycontrolmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1582,7 +1629,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsphydlllockmode">
-<h4><span class="section-number">4.15.9.1.19. </span>FlsPhyDllLockMode<a class="headerlink" href="#flsphydlllockmode" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.19. </span>FlsPhyDllLockMode<a class="headerlink" href="#flsphydlllockmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1621,7 +1668,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flshwunitcdddmahandler">
-<h4><span class="section-number">4.15.9.1.20. </span>FlsHwUnitCddDmaHandler<a class="headerlink" href="#flshwunitcdddmahandler" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.20. </span>FlsHwUnitCddDmaHandler<a class="headerlink" href="#flshwunitcdddmahandler" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1666,14 +1713,13 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsflashconfiglist">
-<h4><span class="section-number">4.15.9.1.21. </span>FlsFlashConfigList<a class="headerlink" href="#flsflashconfiglist" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.21. </span>FlsFlashConfigList<a class="headerlink" href="#flsflashconfiglist" title="Link to this heading"></a></h3>
 <p>List of flash memory configurations.</p>
-</section>
 <section id="flsflashconfiguration">
-<h4><span class="section-number">4.15.9.1.22. </span>FlsFlashConfiguration<a class="headerlink" href="#flsflashconfiguration" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.15.10.21.1. </span>FlsFlashConfiguration<a class="headerlink" href="#flsflashconfiguration" title="Link to this heading"></a></h4>
 <p>Configuration description of external flash devices.</p>
 <section id="flsmanfid">
-<h5><span class="section-number">4.15.9.1.22.1. </span>FlsManfId<a class="headerlink" href="#flsmanfid" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.1. </span>FlsManfId<a class="headerlink" href="#flsmanfid" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1715,7 +1761,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flssize">
-<h5><span class="section-number">4.15.9.1.22.2. </span>FlsSize<a class="headerlink" href="#flssize" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.2. </span>FlsSize<a class="headerlink" href="#flssize" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1751,7 +1797,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flspagesize">
-<h5><span class="section-number">4.15.9.1.22.3. </span>FlsPageSize<a class="headerlink" href="#flspagesize" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.3. </span>FlsPageSize<a class="headerlink" href="#flspagesize" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1793,7 +1839,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdeviceid">
-<h5><span class="section-number">4.15.9.1.22.4. </span>FlsDeviceID<a class="headerlink" href="#flsdeviceid" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.4. </span>FlsDeviceID<a class="headerlink" href="#flsdeviceid" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1835,7 +1881,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="fls4byteaddressenablecmd">
-<h5><span class="section-number">4.15.9.1.22.5. </span>Fls4ByteAddressEnableCmd<a class="headerlink" href="#fls4byteaddressenablecmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.5. </span>Fls4ByteAddressEnableCmd<a class="headerlink" href="#fls4byteaddressenablecmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1871,7 +1917,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="fls4byteaddressdisablecmd">
-<h5><span class="section-number">4.15.9.1.22.6. </span>Fls4ByteAddressDisableCmd<a class="headerlink" href="#fls4byteaddressdisablecmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.6. </span>Fls4ByteAddressDisableCmd<a class="headerlink" href="#fls4byteaddressdisablecmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1907,7 +1953,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdtrsupport">
-<h5><span class="section-number">4.15.9.1.22.7. </span>FlsDtrSupport<a class="headerlink" href="#flsdtrsupport" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.7. </span>FlsDtrSupport<a class="headerlink" href="#flsdtrsupport" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1943,7 +1989,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdevicebusytype">
-<h5><span class="section-number">4.15.9.1.22.8. </span>FlsDeviceBusyType<a class="headerlink" href="#flsdevicebusytype" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.8. </span>FlsDeviceBusyType<a class="headerlink" href="#flsdevicebusytype" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1979,7 +2025,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdeviceresettype">
-<h5><span class="section-number">4.15.9.1.22.9. </span>FlsDeviceResetType<a class="headerlink" href="#flsdeviceresettype" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.9. </span>FlsDeviceResetType<a class="headerlink" href="#flsdeviceresettype" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2015,7 +2061,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsaddressbytesupport">
-<h5><span class="section-number">4.15.9.1.22.10. </span>FlsAddressByteSupport<a class="headerlink" href="#flsaddressbytesupport" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.10. </span>FlsAddressByteSupport<a class="headerlink" href="#flsaddressbytesupport" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2057,7 +2103,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsaddrnumbytes">
-<h5><span class="section-number">4.15.9.1.22.11. </span>FlsAddrNumBytes<a class="headerlink" href="#flsaddrnumbytes" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.11. </span>FlsAddrNumBytes<a class="headerlink" href="#flsaddrnumbytes" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2099,7 +2145,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdwren">
-<h5><span class="section-number">4.15.9.1.22.12. </span>FlsCmdWren<a class="headerlink" href="#flscmdwren" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.12. </span>FlsCmdWren<a class="headerlink" href="#flscmdwren" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2141,7 +2187,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdwrsr">
-<h5><span class="section-number">4.15.9.1.22.13. </span>FlsCmdWrsr<a class="headerlink" href="#flscmdwrsr" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.13. </span>FlsCmdWrsr<a class="headerlink" href="#flscmdwrsr" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2183,7 +2229,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdrdsr1">
-<h5><span class="section-number">4.15.9.1.22.14. </span>FlsCmdRdsr1<a class="headerlink" href="#flscmdrdsr1" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.14. </span>FlsCmdRdsr1<a class="headerlink" href="#flscmdrdsr1" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2225,7 +2271,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdrdsr2">
-<h5><span class="section-number">4.15.9.1.22.15. </span>FlsCmdRdsr2<a class="headerlink" href="#flscmdrdsr2" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.15. </span>FlsCmdRdsr2<a class="headerlink" href="#flscmdrdsr2" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2267,7 +2313,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsstatusregwipmask">
-<h5><span class="section-number">4.15.9.1.22.16. </span>FlsStatusRegWipMask<a class="headerlink" href="#flsstatusregwipmask" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.16. </span>FlsStatusRegWipMask<a class="headerlink" href="#flsstatusregwipmask" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2309,7 +2355,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsstatusregwelmask">
-<h5><span class="section-number">4.15.9.1.22.17. </span>FlsStatusRegWelMask<a class="headerlink" href="#flsstatusregwelmask" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.17. </span>FlsStatusRegWelMask<a class="headerlink" href="#flsstatusregwelmask" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2351,7 +2397,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdchiperase">
-<h5><span class="section-number">4.15.9.1.22.18. </span>FlsCmdChipErase<a class="headerlink" href="#flscmdchiperase" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.18. </span>FlsCmdChipErase<a class="headerlink" href="#flscmdchiperase" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2393,7 +2439,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdxspiwiprdcmd">
-<h5><span class="section-number">4.15.9.1.22.19. </span>FlsCmdXspiWipRdCmd<a class="headerlink" href="#flscmdxspiwiprdcmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.19. </span>FlsCmdXspiWipRdCmd<a class="headerlink" href="#flscmdxspiwiprdcmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2435,7 +2481,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsxspiwipbitmask">
-<h5><span class="section-number">4.15.9.1.22.20. </span>FlsXspiWipBitMask<a class="headerlink" href="#flsxspiwipbitmask" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.20. </span>FlsXspiWipBitMask<a class="headerlink" href="#flsxspiwipbitmask" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2477,7 +2523,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsxspiwipreg">
-<h5><span class="section-number">4.15.9.1.22.21. </span>FlsXspiWipReg<a class="headerlink" href="#flsxspiwipreg" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.21. </span>FlsXspiWipReg<a class="headerlink" href="#flsxspiwipreg" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2519,7 +2565,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsnumberofsupperasetypes">
-<h5><span class="section-number">4.15.9.1.22.22. </span>FlsNumberOfSuppEraseTypes<a class="headerlink" href="#flsnumberofsupperasetypes" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.22. </span>FlsNumberOfSuppEraseTypes<a class="headerlink" href="#flsnumberofsupperasetypes" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2555,7 +2601,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdexectype">
-<h5><span class="section-number">4.15.9.1.22.23. </span>FlsCmdExecType<a class="headerlink" href="#flscmdexectype" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.23. </span>FlsCmdExecType<a class="headerlink" href="#flscmdexectype" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2591,7 +2637,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsbyteorder">
-<h5><span class="section-number">4.15.9.1.22.24. </span>FlsByteOrder<a class="headerlink" href="#flsbyteorder" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.24. </span>FlsByteOrder<a class="headerlink" href="#flsbyteorder" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2627,7 +2673,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flschiperasetimeout">
-<h5><span class="section-number">4.15.9.1.22.25. </span>FlsChipEraseTimeout<a class="headerlink" href="#flschiperasetimeout" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.25. </span>FlsChipEraseTimeout<a class="headerlink" href="#flschiperasetimeout" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2663,7 +2709,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flswrrwritetimeout">
-<h5><span class="section-number">4.15.9.1.22.26. </span>FlsWrrWriteTimeout<a class="headerlink" href="#flswrrwritetimeout" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.26. </span>FlsWrrWriteTimeout<a class="headerlink" href="#flswrrwritetimeout" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2699,7 +2745,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsbusytimeout">
-<h5><span class="section-number">4.15.9.1.22.27. </span>FlsBusyTimeout<a class="headerlink" href="#flsbusytimeout" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.27. </span>FlsBusyTimeout<a class="headerlink" href="#flsbusytimeout" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2741,7 +2787,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flswritetimeout">
-<h5><span class="section-number">4.15.9.1.22.28. </span>FlsWriteTimeout<a class="headerlink" href="#flswritetimeout" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.28. </span>FlsWriteTimeout<a class="headerlink" href="#flswritetimeout" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2783,7 +2829,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsmaxsectorerasetime">
-<h5><span class="section-number">4.15.9.1.22.29. </span>FlsMaxSectorErasetime<a class="headerlink" href="#flsmaxsectorerasetime" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.29. </span>FlsMaxSectorErasetime<a class="headerlink" href="#flsmaxsectorerasetime" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2819,7 +2865,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsmaxblockerasetime">
-<h5><span class="section-number">4.15.9.1.22.30. </span>FlsMaxBlockErasetime<a class="headerlink" href="#flsmaxblockerasetime" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.30. </span>FlsMaxBlockErasetime<a class="headerlink" href="#flsmaxblockerasetime" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2855,7 +2901,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsmaxchiperasetime">
-<h5><span class="section-number">4.15.9.1.22.31. </span>FlsMaxChipErasetime<a class="headerlink" href="#flsmaxchiperasetime" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.31. </span>FlsMaxChipErasetime<a class="headerlink" href="#flsmaxchiperasetime" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2891,7 +2937,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsblockreadwritetime">
-<h5><span class="section-number">4.15.9.1.22.32. </span>FlsBlockReadWriteTime<a class="headerlink" href="#flsblockreadwritetime" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.32. </span>FlsBlockReadWriteTime<a class="headerlink" href="#flsblockreadwritetime" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2927,7 +2973,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flssectorreadwritetime">
-<h5><span class="section-number">4.15.9.1.22.33. </span>FlsSectorReadWriteTime<a class="headerlink" href="#flssectorreadwritetime" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.33. </span>FlsSectorReadWriteTime<a class="headerlink" href="#flssectorreadwritetime" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2963,7 +3009,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flschipreadwritetime">
-<h5><span class="section-number">4.15.9.1.22.34. </span>FlsChipReadWriteTime<a class="headerlink" href="#flschipreadwritetime" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.34. </span>FlsChipReadWriteTime<a class="headerlink" href="#flschipreadwritetime" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2999,7 +3045,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flseraseblocksize">
-<h5><span class="section-number">4.15.9.1.22.35. </span>FlsEraseBlockSize<a class="headerlink" href="#flseraseblocksize" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.35. </span>FlsEraseBlockSize<a class="headerlink" href="#flseraseblocksize" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3035,7 +3081,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flserasesectorsize">
-<h5><span class="section-number">4.15.9.1.22.36. </span>FlsEraseSectorSize<a class="headerlink" href="#flserasesectorsize" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.36. </span>FlsEraseSectorSize<a class="headerlink" href="#flserasesectorsize" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3071,7 +3117,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdblkerase3bytes">
-<h5><span class="section-number">4.15.9.1.22.37. </span>FlsCmdBlkErase3Bytes<a class="headerlink" href="#flscmdblkerase3bytes" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.37. </span>FlsCmdBlkErase3Bytes<a class="headerlink" href="#flscmdblkerase3bytes" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3113,7 +3159,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdblkerase4bytes">
-<h5><span class="section-number">4.15.9.1.22.38. </span>FlsCmdBlkErase4Bytes<a class="headerlink" href="#flscmdblkerase4bytes" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.38. </span>FlsCmdBlkErase4Bytes<a class="headerlink" href="#flscmdblkerase4bytes" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3155,7 +3201,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdsectorerase3bytes">
-<h5><span class="section-number">4.15.9.1.22.39. </span>FlsCmdSectorErase3Bytes<a class="headerlink" href="#flscmdsectorerase3bytes" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.39. </span>FlsCmdSectorErase3Bytes<a class="headerlink" href="#flscmdsectorerase3bytes" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3197,7 +3243,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscmdsectorerase4bytes">
-<h5><span class="section-number">4.15.9.1.22.40. </span>FlsCmdSectorErase4Bytes<a class="headerlink" href="#flscmdsectorerase4bytes" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.40. </span>FlsCmdSectorErase4Bytes<a class="headerlink" href="#flscmdsectorerase4bytes" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3239,7 +3285,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsreadidcmd">
-<h5><span class="section-number">4.15.9.1.22.41. </span>FlsReadIdCmd<a class="headerlink" href="#flsreadidcmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.41. </span>FlsReadIdCmd<a class="headerlink" href="#flsreadidcmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3281,7 +3327,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsreadidlen">
-<h5><span class="section-number">4.15.9.1.22.42. </span>FlsReadIdLen<a class="headerlink" href="#flsreadidlen" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.42. </span>FlsReadIdLen<a class="headerlink" href="#flsreadidlen" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3323,7 +3369,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsreadiddummy4">
-<h5><span class="section-number">4.15.9.1.22.43. </span>FlsReadIdDummy4<a class="headerlink" href="#flsreadiddummy4" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.43. </span>FlsReadIdDummy4<a class="headerlink" href="#flsreadiddummy4" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3365,7 +3411,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsreadiddummy8">
-<h5><span class="section-number">4.15.9.1.22.44. </span>FlsReadIdDummy8<a class="headerlink" href="#flsreadiddummy8" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.44. </span>FlsReadIdDummy8<a class="headerlink" href="#flsreadiddummy8" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3406,12 +3452,12 @@ to notify the module environment about job end and job error</p>
 </tbody>
 </table>
 </section>
-</section>
 <section id="flsprotocolconfigs">
-<h4><span class="section-number">4.15.9.1.23. </span>FlsProtocolConfigs<a class="headerlink" href="#flsprotocolconfigs" title="Link to this heading"></a></h4>
+<h5><span class="section-number">4.15.10.21.1.45. </span>FlsProtocolConfigs<a class="headerlink" href="#flsprotocolconfigs" title="Link to this heading"></a></h5>
 <p>List of protocol related configuration parameters</p>
+</section>
 <section id="flsprotocolreadcmd">
-<h5><span class="section-number">4.15.9.1.23.1. </span>FlsProtocolReadCmd<a class="headerlink" href="#flsprotocolreadcmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.46. </span>FlsProtocolReadCmd<a class="headerlink" href="#flsprotocolreadcmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3453,7 +3499,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolwritecmd">
-<h5><span class="section-number">4.15.9.1.23.2. </span>FlsProtocolWriteCmd<a class="headerlink" href="#flsprotocolwritecmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.47. </span>FlsProtocolWriteCmd<a class="headerlink" href="#flsprotocolwritecmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3495,7 +3541,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolmodeclkscmd">
-<h5><span class="section-number">4.15.9.1.23.3. </span>FlsProtocolmodeClksCmd<a class="headerlink" href="#flsprotocolmodeclkscmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.48. </span>FlsProtocolmodeClksCmd<a class="headerlink" href="#flsprotocolmodeclkscmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3537,7 +3583,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolmodeclksread">
-<h5><span class="section-number">4.15.9.1.23.4. </span>FlsProtocolmodeClksRead<a class="headerlink" href="#flsprotocolmodeclksread" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.49. </span>FlsProtocolmodeClksRead<a class="headerlink" href="#flsprotocolmodeclksread" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3579,7 +3625,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyclkcmd">
-<h5><span class="section-number">4.15.9.1.23.5. </span>FlsProtocolDummyClkCmd<a class="headerlink" href="#flsprotocoldummyclkcmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.50. </span>FlsProtocolDummyClkCmd<a class="headerlink" href="#flsprotocoldummyclkcmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3621,7 +3667,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyclkread">
-<h5><span class="section-number">4.15.9.1.23.6. </span>FlsProtocolDummyClkRead<a class="headerlink" href="#flsprotocoldummyclkread" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.51. </span>FlsProtocolDummyClkRead<a class="headerlink" href="#flsprotocoldummyclkread" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3663,7 +3709,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolenabletype">
-<h5><span class="section-number">4.15.9.1.23.7. </span>FlsProtocolEnableType<a class="headerlink" href="#flsprotocolenabletype" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.52. </span>FlsProtocolEnableType<a class="headerlink" href="#flsprotocolenabletype" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3705,7 +3751,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolenableseq">
-<h5><span class="section-number">4.15.9.1.23.8. </span>FlsProtocolEnableSeq<a class="headerlink" href="#flsprotocolenableseq" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.53. </span>FlsProtocolEnableSeq<a class="headerlink" href="#flsprotocolenableseq" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3747,7 +3793,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoladdrreg">
-<h5><span class="section-number">4.15.9.1.23.9. </span>FlsProtocolAddrReg<a class="headerlink" href="#flsprotocoladdrreg" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.54. </span>FlsProtocolAddrReg<a class="headerlink" href="#flsprotocoladdrreg" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3789,7 +3835,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolconfigreg">
-<h5><span class="section-number">4.15.9.1.23.10. </span>FlsProtocolConfigReg<a class="headerlink" href="#flsprotocolconfigreg" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.55. </span>FlsProtocolConfigReg<a class="headerlink" href="#flsprotocolconfigreg" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3831,7 +3877,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolconfigregdata">
-<h5><span class="section-number">4.15.9.1.23.11. </span>FlsProtocolConfigRegData<a class="headerlink" href="#flsprotocolconfigregdata" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.56. </span>FlsProtocolConfigRegData<a class="headerlink" href="#flsprotocolconfigregdata" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3873,7 +3919,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolconfigregreadcmd">
-<h5><span class="section-number">4.15.9.1.23.12. </span>FlsProtocolConfigRegReadCmd<a class="headerlink" href="#flsprotocolconfigregreadcmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.57. </span>FlsProtocolConfigRegReadCmd<a class="headerlink" href="#flsprotocolconfigregreadcmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3915,7 +3961,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolconfigregwritecmd">
-<h5><span class="section-number">4.15.9.1.23.13. </span>FlsProtocolConfigRegWriteCmd<a class="headerlink" href="#flsprotocolconfigregwritecmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.58. </span>FlsProtocolConfigRegWriteCmd<a class="headerlink" href="#flsprotocolconfigregwritecmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3957,7 +4003,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolconfigmask">
-<h5><span class="section-number">4.15.9.1.23.14. </span>FlsProtocolConfigMask<a class="headerlink" href="#flsprotocolconfigmask" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.59. </span>FlsProtocolConfigMask<a class="headerlink" href="#flsprotocolconfigmask" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -3999,7 +4045,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolconfigshift">
-<h5><span class="section-number">4.15.9.1.23.15. </span>FlsProtocolConfigShift<a class="headerlink" href="#flsprotocolconfigshift" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.60. </span>FlsProtocolConfigShift<a class="headerlink" href="#flsprotocolconfigshift" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4041,7 +4087,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyaddrreg">
-<h5><span class="section-number">4.15.9.1.23.16. </span>FlsProtocolDummyAddrReg<a class="headerlink" href="#flsprotocoldummyaddrreg" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.61. </span>FlsProtocolDummyAddrReg<a class="headerlink" href="#flsprotocoldummyaddrreg" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4083,7 +4129,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyconfigreg">
-<h5><span class="section-number">4.15.9.1.23.17. </span>FlsProtocolDummyConfigReg<a class="headerlink" href="#flsprotocoldummyconfigreg" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.62. </span>FlsProtocolDummyConfigReg<a class="headerlink" href="#flsprotocoldummyconfigreg" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4125,7 +4171,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyconfigregdata">
-<h5><span class="section-number">4.15.9.1.23.18. </span>FlsProtocolDummyConfigRegData<a class="headerlink" href="#flsprotocoldummyconfigregdata" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.63. </span>FlsProtocolDummyConfigRegData<a class="headerlink" href="#flsprotocoldummyconfigregdata" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4167,7 +4213,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyconfigregreadcmd">
-<h5><span class="section-number">4.15.9.1.23.19. </span>FlsProtocolDummyConfigRegReadCmd<a class="headerlink" href="#flsprotocoldummyconfigregreadcmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.64. </span>FlsProtocolDummyConfigRegReadCmd<a class="headerlink" href="#flsprotocoldummyconfigregreadcmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4209,7 +4255,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyconfigregwritecmd">
-<h5><span class="section-number">4.15.9.1.23.20. </span>FlsProtocolDummyConfigRegWriteCmd<a class="headerlink" href="#flsprotocoldummyconfigregwritecmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.65. </span>FlsProtocolDummyConfigRegWriteCmd<a class="headerlink" href="#flsprotocoldummyconfigregwritecmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4251,7 +4297,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyconfigmask">
-<h5><span class="section-number">4.15.9.1.23.21. </span>FlsProtocolDummyConfigMask<a class="headerlink" href="#flsprotocoldummyconfigmask" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.66. </span>FlsProtocolDummyConfigMask<a class="headerlink" href="#flsprotocoldummyconfigmask" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4293,7 +4339,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocoldummyconfigshift">
-<h5><span class="section-number">4.15.9.1.23.22. </span>FlsProtocolDummyConfigShift<a class="headerlink" href="#flsprotocoldummyconfigshift" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.67. </span>FlsProtocolDummyConfigShift<a class="headerlink" href="#flsprotocoldummyconfigshift" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4335,7 +4381,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolstrdtraddrreg">
-<h5><span class="section-number">4.15.9.1.23.23. </span>FlsProtocolStrDtrAddrReg<a class="headerlink" href="#flsprotocolstrdtraddrreg" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.68. </span>FlsProtocolStrDtrAddrReg<a class="headerlink" href="#flsprotocolstrdtraddrreg" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4377,7 +4423,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolstrdtrconfigreg">
-<h5><span class="section-number">4.15.9.1.23.24. </span>FlsProtocolStrDtrConfigReg<a class="headerlink" href="#flsprotocolstrdtrconfigreg" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.69. </span>FlsProtocolStrDtrConfigReg<a class="headerlink" href="#flsprotocolstrdtrconfigreg" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4419,7 +4465,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolstrdtrconfigregdata">
-<h5><span class="section-number">4.15.9.1.23.25. </span>FlsProtocolStrDtrConfigRegData<a class="headerlink" href="#flsprotocolstrdtrconfigregdata" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.70. </span>FlsProtocolStrDtrConfigRegData<a class="headerlink" href="#flsprotocolstrdtrconfigregdata" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4461,7 +4507,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolstrdtrconfigregreadcmd">
-<h5><span class="section-number">4.15.9.1.23.26. </span>FlsProtocolStrDtrConfigRegReadCmd<a class="headerlink" href="#flsprotocolstrdtrconfigregreadcmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.71. </span>FlsProtocolStrDtrConfigRegReadCmd<a class="headerlink" href="#flsprotocolstrdtrconfigregreadcmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4503,7 +4549,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolstrdtrconfigregwritecmd">
-<h5><span class="section-number">4.15.9.1.23.27. </span>FlsProtocolStrDtrConfigRegWriteCmd<a class="headerlink" href="#flsprotocolstrdtrconfigregwritecmd" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.72. </span>FlsProtocolStrDtrConfigRegWriteCmd<a class="headerlink" href="#flsprotocolstrdtrconfigregwritecmd" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4545,7 +4591,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolstrdtrconfigmask">
-<h5><span class="section-number">4.15.9.1.23.28. </span>FlsProtocolStrDtrConfigMask<a class="headerlink" href="#flsprotocolstrdtrconfigmask" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.73. </span>FlsProtocolStrDtrConfigMask<a class="headerlink" href="#flsprotocolstrdtrconfigmask" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4587,7 +4633,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsprotocolstrdtrconfigshift">
-<h5><span class="section-number">4.15.9.1.23.29. </span>FlsProtocolStrDtrConfigShift<a class="headerlink" href="#flsprotocolstrdtrconfigshift" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.21.1.74. </span>FlsProtocolStrDtrConfigShift<a class="headerlink" href="#flsprotocolstrdtrconfigshift" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4629,11 +4675,12 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 </section>
+</section>
 <section id="flsexternaldriver">
-<h4><span class="section-number">4.15.9.1.24. </span>FlsExternalDriver<a class="headerlink" href="#flsexternaldriver" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.22. </span>FlsExternalDriver<a class="headerlink" href="#flsexternaldriver" title="Link to this heading"></a></h3>
 <p>This container is present for external Flash drivers only. Internal Flash drivers do not use the parameter listed in this container, hence its multiplicity is 0 for internal drivers. Currently, not supported as only one external driver present.</p>
 <section id="flsspireference">
-<h5><span class="section-number">4.15.9.1.24.1. </span>FlsSpiReference<a class="headerlink" href="#flsspireference" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.15.10.22.1. </span>FlsSpiReference<a class="headerlink" href="#flsspireference" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4679,14 +4726,13 @@ to notify the module environment about job end and job error</p>
 </section>
 </section>
 <section id="flssectorlist">
-<h4><span class="section-number">4.15.9.1.25. </span>FlsSectorList<a class="headerlink" href="#flssectorlist" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.10.23. </span>FlsSectorList<a class="headerlink" href="#flssectorlist" title="Link to this heading"></a></h3>
 <p>List of flashable sectors and pages.The maximum number of sectors/sector size/pages/pagesize that can be configured, is based on external flash used, and care must be taken to configure these parameters as per the external flash used</p>
-</section>
 <section id="flssector">
-<h4><span class="section-number">4.15.9.1.26. </span>FlsSector<a class="headerlink" href="#flssector" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.15.10.23.1. </span>FlsSector<a class="headerlink" href="#flssector" title="Link to this heading"></a></h4>
 <p>Configuration description of a flashable sector</p>
 <section id="flsnumberofsectors">
-<h5><span class="section-number">4.15.9.1.26.1. </span>FlsNumberOfSectors<a class="headerlink" href="#flsnumberofsectors" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.23.1.1. </span>FlsNumberOfSectors<a class="headerlink" href="#flsnumberofsectors" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4728,7 +4774,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="id1">
-<h5><span class="section-number">4.15.9.1.26.2. </span>FlsPageSize<a class="headerlink" href="#id1" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.23.1.2. </span>FlsPageSize<a class="headerlink" href="#id1" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4770,7 +4816,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flssectorsize">
-<h5><span class="section-number">4.15.9.1.26.3. </span>FlsSectorSize<a class="headerlink" href="#flssectorsize" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.23.1.3. </span>FlsSectorSize<a class="headerlink" href="#flssectorsize" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4812,7 +4858,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flssectorstartaddress">
-<h5><span class="section-number">4.15.9.1.26.4. </span>FlsSectorStartaddress<a class="headerlink" href="#flssectorstartaddress" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.15.10.23.1.4. </span>FlsSectorStartaddress<a class="headerlink" href="#flssectorstartaddress" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4855,11 +4901,12 @@ to notify the module environment about job end and job error</p>
 </section>
 </section>
 </section>
+</section>
 <section id="flsgeneral">
-<h3><span class="section-number">4.15.9.2. </span>FlsGeneral<a class="headerlink" href="#flsgeneral" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.15.11. </span>FlsGeneral<a class="headerlink" href="#flsgeneral" title="Link to this heading"></a></h2>
 <p>Container for general parameters of the flash driver. These parameters are always pre-compile.</p>
 <section id="flsacloadonjobstart">
-<h4><span class="section-number">4.15.9.2.1. </span>FlsAcLoadOnJobStart<a class="headerlink" href="#flsacloadonjobstart" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.1. </span>FlsAcLoadOnJobStart<a class="headerlink" href="#flsacloadonjobstart" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4895,7 +4942,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsbaseaddress">
-<h4><span class="section-number">4.15.9.2.2. </span>FlsBaseAddress<a class="headerlink" href="#flsbaseaddress" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.2. </span>FlsBaseAddress<a class="headerlink" href="#flsbaseaddress" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4937,7 +4984,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsblankcheckapi">
-<h4><span class="section-number">4.15.9.2.3. </span>FlsBlankCheckApi<a class="headerlink" href="#flsblankcheckapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.3. </span>FlsBlankCheckApi<a class="headerlink" href="#flsblankcheckapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -4973,7 +5020,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscancelapi">
-<h4><span class="section-number">4.15.9.2.4. </span>FlsCancelApi<a class="headerlink" href="#flscancelapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.4. </span>FlsCancelApi<a class="headerlink" href="#flscancelapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5006,7 +5053,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flscompareapi">
-<h4><span class="section-number">4.15.9.2.5. </span>FlsCompareApi<a class="headerlink" href="#flscompareapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.5. </span>FlsCompareApi<a class="headerlink" href="#flscompareapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5039,7 +5086,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdeverrordetect">
-<h4><span class="section-number">4.15.9.2.6. </span>FlsDevErrorDetect<a class="headerlink" href="#flsdeverrordetect" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.6. </span>FlsDevErrorDetect<a class="headerlink" href="#flsdeverrordetect" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5075,7 +5122,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdriverindex">
-<h4><span class="section-number">4.15.9.2.7. </span>FlsDriverIndex<a class="headerlink" href="#flsdriverindex" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.7. </span>FlsDriverIndex<a class="headerlink" href="#flsdriverindex" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5114,7 +5161,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flseraseverificationenabled">
-<h4><span class="section-number">4.15.9.2.8. </span>FlsEraseVerificationEnabled<a class="headerlink" href="#flseraseverificationenabled" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.8. </span>FlsEraseVerificationEnabled<a class="headerlink" href="#flseraseverificationenabled" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5150,7 +5197,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsgetjobresultapi">
-<h4><span class="section-number">4.15.9.2.9. </span>FlsGetJobResultApi<a class="headerlink" href="#flsgetjobresultapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.9. </span>FlsGetJobResultApi<a class="headerlink" href="#flsgetjobresultapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5183,7 +5230,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsgetstatusapi">
-<h4><span class="section-number">4.15.9.2.10. </span>FlsGetStatusApi<a class="headerlink" href="#flsgetstatusapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.10. </span>FlsGetStatusApi<a class="headerlink" href="#flsgetstatusapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5216,7 +5263,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flssetmodeapi">
-<h4><span class="section-number">4.15.9.2.11. </span>FlsSetModeApi<a class="headerlink" href="#flssetmodeapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.11. </span>FlsSetModeApi<a class="headerlink" href="#flssetmodeapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5249,7 +5296,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flstimeoutsupervisionenabled">
-<h4><span class="section-number">4.15.9.2.12. </span>FlsTimeoutSupervisionEnabled<a class="headerlink" href="#flstimeoutsupervisionenabled" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.12. </span>FlsTimeoutSupervisionEnabled<a class="headerlink" href="#flstimeoutsupervisionenabled" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5285,7 +5332,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flstotalsize">
-<h4><span class="section-number">4.15.9.2.13. </span>FlsTotalSize<a class="headerlink" href="#flstotalsize" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.13. </span>FlsTotalSize<a class="headerlink" href="#flstotalsize" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5327,7 +5374,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsuseinterrupts">
-<h4><span class="section-number">4.15.9.2.14. </span>FlsUseInterrupts<a class="headerlink" href="#flsuseinterrupts" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.14. </span>FlsUseInterrupts<a class="headerlink" href="#flsuseinterrupts" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5363,7 +5410,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsversioninfoapi">
-<h4><span class="section-number">4.15.9.2.15. </span>FlsVersionInfoApi<a class="headerlink" href="#flsversioninfoapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.15. </span>FlsVersionInfoApi<a class="headerlink" href="#flsversioninfoapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5399,7 +5446,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flswriteverificationenabled">
-<h4><span class="section-number">4.15.9.2.16. </span>FlsWriteVerificationEnabled<a class="headerlink" href="#flswriteverificationenabled" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.16. </span>FlsWriteVerificationEnabled<a class="headerlink" href="#flswriteverificationenabled" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5435,7 +5482,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsospictrlbaseaddr">
-<h4><span class="section-number">4.15.9.2.17. </span>FlsOspiCtrlBaseAddr<a class="headerlink" href="#flsospictrlbaseaddr" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.17. </span>FlsOspiCtrlBaseAddr<a class="headerlink" href="#flsospictrlbaseaddr" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5477,7 +5524,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsirqtype">
-<h4><span class="section-number">4.15.9.2.18. </span>FlsIrqType<a class="headerlink" href="#flsirqtype" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.18. </span>FlsIrqType<a class="headerlink" href="#flsirqtype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5516,7 +5563,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsdefaultoscounterid">
-<h4><span class="section-number">4.15.9.2.19. </span>FlsDefaultOSCounterId<a class="headerlink" href="#flsdefaultoscounterid" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.19. </span>FlsDefaultOSCounterId<a class="headerlink" href="#flsdefaultoscounterid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5558,7 +5605,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsexternalflashselect">
-<h4><span class="section-number">4.15.9.2.20. </span>FlsExternalFlashSelect<a class="headerlink" href="#flsexternalflashselect" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.20. </span>FlsExternalFlashSelect<a class="headerlink" href="#flsexternalflashselect" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5591,7 +5638,7 @@ to notify the module environment about job end and job error</p>
 </table>
 </section>
 <section id="flsoscounterref">
-<h4><span class="section-number">4.15.9.2.21. </span>FlsOsCounterRef<a class="headerlink" href="#flsoscounterref" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.15.11.21. </span>FlsOsCounterRef<a class="headerlink" href="#flsoscounterref" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -5626,9 +5673,8 @@ to notify the module environment about job end and job error</p>
 </tbody>
 </table>
 </section>
-</section>
 <section id="configuration-changes-with-dma-mode">
-<h3><span class="section-number">4.15.9.3. </span>Configuration changes with DMA mode<a class="headerlink" href="#configuration-changes-with-dma-mode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.15.11.22. </span>Configuration changes with DMA mode<a class="headerlink" href="#configuration-changes-with-dma-mode" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Flash configuration should include Cdd_Dma in module configurations to use DMA.</p></li>
 </ol>
@@ -5674,15 +5720,15 @@ As DAC mode doesn’t support FLS interrupt, polling shall be used for FLS where
 </figcaption>
 </figure>
 <section id="program-changes-with-dma-mode">
-<h4><span class="section-number">4.15.9.3.1. </span>Program changes with DMA mode<a class="headerlink" href="#program-changes-with-dma-mode" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.15.11.22.1. </span>Program changes with DMA mode<a class="headerlink" href="#program-changes-with-dma-mode" title="Link to this heading"></a></h4>
 <p>For DMA mode support, DMA TPCC0 Interrupt aggregation (INTR) line number 72 gets used to register ISR (CDD_EDMA_lld_transferCompletionMasterIsrFxn) with EDMA and Cache invalidation on destination buffers should happen using Mcal_CacheP_inv APIs before using Flash DMA support for read.</p>
 </section>
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">4.15.10. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.15.12. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <section id="overview">
-<h3><span class="section-number">4.15.10.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.15.12.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Fls Example</p>
 <ul>
@@ -5703,11 +5749,11 @@ As DAC mode doesn’t support FLS interrupt, polling shall be used for FLS where
 </ul>
 </section>
 <section id="hardware-software-setup-and-tools">
-<h3><span class="section-number">4.15.10.2. </span>Hardware Software Setup and Tools<a class="headerlink" href="#hardware-software-setup-and-tools" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.15.12.2. </span>Hardware Software Setup and Tools<a class="headerlink" href="#hardware-software-setup-and-tools" title="Link to this heading"></a></h3>
 <p>None</p>
 </section>
 <section id="steps-to-build-and-run-example">
-<h3><span class="section-number">4.15.10.3. </span>Steps to build and run example<a class="headerlink" href="#steps-to-build-and-run-example" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.15.12.3. </span>Steps to build and run example<a class="headerlink" href="#steps-to-build-and-run-example" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>FLS example application demonstrating the MCAL Fls driver features is in folder <em>&lt;MCAL_ROOT&gt;/examples/Fls</em>.</p></li>
 <li><p>This application can be built from the root folder by giving <em>gmake –s fls_app PLATFORM=am263px</em>.</p></li>
@@ -5715,7 +5761,7 @@ As DAC mode doesn’t support FLS interrupt, polling shall be used for FLS where
 </ol>
 </section>
 <section id="example-logs">
-<h3><span class="section-number">4.15.10.4. </span>Example Logs<a class="headerlink" href="#example-logs" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.15.12.4. </span>Example Logs<a class="headerlink" href="#example-logs" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
 <span class="w"> </span><span class="nl">FlsApp</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
 <span class="w"> </span><span class="nl">FLS_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Variant</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Pre</span><span class="w"> </span><span class="n">Compile</span><span class="w"> </span><span class="n">being</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="o">!!!</span>
@@ -5757,7 +5803,7 @@ As DAC mode doesn’t support FLS interrupt, polling shall be used for FLS where
 </div>
 </section>
 <section id="file-structure">
-<h3><span class="section-number">4.15.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.15.12.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
 <p>📦AM263Px<br />
 ┣ 📂build<br />
 ┣ 📂mcal<br />
@@ -5782,14 +5828,14 @@ As DAC mode doesn’t support FLS interrupt, polling shall be used for FLS where
 </section>
 </section>
 <section id="faq-s">
-<h2><span class="section-number">4.15.11. </span>FAQ’s<a class="headerlink" href="#faq-s" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.15.13. </span>FAQ’s<a class="headerlink" href="#faq-s" title="Link to this heading"></a></h2>
 <p>Q1. What if some flashes also support write enable for non-volatile registers?</p>
 <p>Before writing to any register in flash, write enable command is issued to the flash.  The Write enable can be issued to both volatile and non volatile registers depending on     what the flash supports. Currently the existing flash in the device supports write enable to volatile registers. In case any external flash (e.g. S25FL064LABMFB01X) supports write enable to both volatile and non volatile registers, the user can issue write enable command for non volatile registers using Nor_OspiCmdWrite API. User can also update the fls_config_sfdp_1.cmdWren parameter in Flash_sfdpParams_init API in V2/Fls_Nor_config.c file by following the flash datasheet.</p>
 <p>Q2. How to enable interrupt mode in Flash?</p>
 <p>To enable interrupt mode, FLS_USE_INTERRUPTS should be set to STD_ON. INDAC mode should be enabled in interrupt mode as ospi controller uses SRAM level to trigger interrupt and INDAC mode of operation uses SRAM for data transfer. Also maxReadNormalMode and maxWriteNormalMode should be set to page size of the flash. Further, FLS_ERASE_VERIFICATION_ENABLED,FLS_WRITE_VERIFICATION_ENABLED and FLS_TIMEOUT_SUPERVISION_ENABLED should be disabled in interrupt mode.</p>
 </section>
 <section id="references">
-<h2><span class="section-number">4.15.12. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.15.14. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_FlashDriver.pdf">AUTOSAR_SWS_FlashDriver</a><br />
 <a class="reference external" href="https://www.ti.com/am263px">Technical Reference Manual</a></p>
 </section>

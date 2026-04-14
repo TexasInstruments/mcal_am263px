@@ -408,7 +408,7 @@
                           <a:tst expr="&lt;=16777215"/>
                           <a:tst expr="&gt;=0"/>
                         </a:da>
-                        <a:da name="DEFAULT" type="XPath" expr="node:fallback(&quot;->num:i(((num:i(node:value(concat(node:path(node:ref(../../LinClockRef)), '/McuClockReferencePointFrequency')))) div ((../LinChannelBaudRate) * 16) - 1))&quot;,'0')"/>
+                        <a:da name="DEFAULT" type="XPath" expr="node:fallback(&quot;->num:i(((num:i(node:value(concat(node:path(node:ref(../../LinClockRef)), '/McuClockReferencePointFrequency')))) div ((../../LinChannelBaudRate) * 16) - 1))&quot;,'0')"/>
                       </v:var>
                       <v:var name="LinChannelFractionalDivider" type="INTEGER">
                         <a:a name="DESC"
@@ -428,7 +428,7 @@
                           <a:tst expr="&lt;=15"/>
                           <a:tst expr="&gt;=0"/>
                         </a:da>
-                        <a:da name="DEFAULT" type="XPath" expr="node:fallback(&quot;->num:i(( (( (num:i(node:value(concat(node:path(node:ref(../../LinClockRef)), '/McuClockReferencePointFrequency')))) div ((../LinChannelBaudRate) * 16) - 1)) - (../LinChannelPrescalar)) * 16)&quot;,'0')"/>
+                        <a:da name="DEFAULT" type="XPath" expr="node:fallback(&quot;->num:i(( (( (num:i(node:value(concat(node:path(node:ref(../../LinClockRef)), '/McuClockReferencePointFrequency')))) div ((../../LinChannelBaudRate) * 16) - 1)) - (../LinChannelPrescalar)) * 16)&quot;,'0')"/>
                       </v:var>
                     </v:ctr>
                   </v:ctr>

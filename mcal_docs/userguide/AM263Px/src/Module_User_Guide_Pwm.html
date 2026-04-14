@@ -119,23 +119,51 @@
 <li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.21.8.2. Multi-core support</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration">4.21.9. Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#pwmchannelconfigset">4.21.9.1. PwmChannelConfigSet</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pwmconfigurationofoptapiservices">4.21.9.2. PwmConfigurationOfOptApiServices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pwmgeneral">4.21.9.3. PwmGeneral</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#symbolic-names-deviations">4.21.9.4. Symbolic Names deviations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">4.21.9. Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwmchannelconfigset">4.21.10. PwmChannelConfigSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pwmchannel">4.21.10.1. PwmChannel</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">4.21.10. Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#overview">4.21.10.1. Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#hardware-software-setup-and-tools">4.21.10.2. Hardware Software Setup and Tools</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#steps-to-build-and-run-example">4.21.10.3. Steps to build and run example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#example-logs">4.21.10.4. Example Logs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.21.10.5. File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwmconfigurationofoptapiservices">4.21.11. PwmConfigurationOfOptApiServices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pwmdeinitapi">4.21.11.1. PwmDeInitApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmgetoutputstate">4.21.11.2. PwmGetOutputState</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmsetdutycycle">4.21.11.3. PwmSetDutyCycle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmsetoutputtoidle">4.21.11.4. PwmSetOutputToIdle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmsetperiodandduty">4.21.11.5. PwmSetPeriodAndDuty</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmversioninfoapi">4.21.11.6. PwmVersionInfoApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmenableregisterreadbackapi">4.21.11.7. PwmEnableRegisterReadbackApi</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#faq-s">4.21.11. FAQ’s</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#references">4.21.12. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pwmgeneral">4.21.12. PwmGeneral</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pwmdeverrordetect">4.21.12.1. PwmDevErrorDetect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmsysclockfrequency">4.21.12.2. PwmSysClockFrequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmdutycycleupdatedendperiod">4.21.12.3. PwmDutycycleUpdatedEndperiod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmsfosupportenable">4.21.12.4. PwmSfoSupportEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmdefaultoscounterid">4.21.12.5. PwmDefaultOSCounterId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmmaxtimeoutduration">4.21.12.6. PwmMaxTimeoutDuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmindex">4.21.12.7. PwmIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmnotificationsupported">4.21.12.8. PwmNotificationSupported</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmperiodupdatedendperiod">4.21.12.9. PwmPeriodUpdatedEndperiod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmerrorhook">4.21.12.10. PwmErrorHook</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmdetincludefile">4.21.12.11. PwmDetIncludeFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmnotificationsincludefile">4.21.12.12. PwmNotificationsIncludeFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmcfgdebugreporting">4.21.12.13. PwmCfgDebugReporting</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmtypeofinterruptfunction">4.21.12.14. PwmTypeofInterruptFunction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmoscounterref">4.21.12.15. PwmOsCounterRef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pwmpowerstateconfig">4.21.12.16. PwmPowerStateConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#symbolic-names-deviations">4.21.12.17. Symbolic Names deviations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">4.21.13. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">4.21.13.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-software-setup-and-tools">4.21.13.2. Hardware Software Setup and Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps-to-build-and-run-example">4.21.13.3. Steps to build and run example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-logs">4.21.13.4. Example Logs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.21.13.5. File Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#faq-s">4.21.14. FAQ’s</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">4.21.15. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Spi.html">4.22. SPI Module</a></li>
@@ -785,14 +813,15 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </section>
 <section id="configuration">
 <h2><span class="section-number">4.21.9. </span>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+</section>
 <section id="pwmchannelconfigset">
-<h3><span class="section-number">4.21.9.1. </span>PwmChannelConfigSet<a class="headerlink" href="#pwmchannelconfigset" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.21.10. </span>PwmChannelConfigSet<a class="headerlink" href="#pwmchannelconfigset" title="Link to this heading"></a></h2>
 <p>This container contains the configuration parameters and sub containers of the AUTOSAR Pwm module.</p>
 <section id="pwmchannel">
-<h4><span class="section-number">4.21.9.1.1. </span>PwmChannel<a class="headerlink" href="#pwmchannel" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.10.1. </span>PwmChannel<a class="headerlink" href="#pwmchannel" title="Link to this heading"></a></h3>
 <p>Configuration of an individual PWM channel.</p>
 <section id="pwmchannelclass">
-<h5><span class="section-number">4.21.9.1.1.1. </span>PwmChannelClass<a class="headerlink" href="#pwmchannelclass" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.1. </span>PwmChannelClass<a class="headerlink" href="#pwmchannelclass" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -843,7 +872,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmchannelid">
-<h5><span class="section-number">4.21.9.1.1.2. </span>PwmChannelId<a class="headerlink" href="#pwmchannelid" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.2. </span>PwmChannelId<a class="headerlink" href="#pwmchannelid" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -882,7 +911,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmhwchannelid">
-<h5><span class="section-number">4.21.9.1.1.3. </span>PwmHWChannelId<a class="headerlink" href="#pwmhwchannelid" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.3. </span>PwmHWChannelId<a class="headerlink" href="#pwmhwchannelid" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -924,7 +953,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmhwunit">
-<h5><span class="section-number">4.21.9.1.1.4. </span>PwmHwUnit<a class="headerlink" href="#pwmhwunit" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.4. </span>PwmHwUnit<a class="headerlink" href="#pwmhwunit" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -963,7 +992,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmdutycycledefault">
-<h5><span class="section-number">4.21.9.1.1.5. </span>PwmDutycycleDefault<a class="headerlink" href="#pwmdutycycledefault" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.5. </span>PwmDutycycleDefault<a class="headerlink" href="#pwmdutycycledefault" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1005,7 +1034,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmidlestate">
-<h5><span class="section-number">4.21.9.1.1.6. </span>PwmIdleState<a class="headerlink" href="#pwmidlestate" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.6. </span>PwmIdleState<a class="headerlink" href="#pwmidlestate" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1044,7 +1073,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmnotification">
-<h5><span class="section-number">4.21.9.1.1.7. </span>PwmNotification<a class="headerlink" href="#pwmnotification" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.7. </span>PwmNotification<a class="headerlink" href="#pwmnotification" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1092,7 +1121,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmperioddefault">
-<h5><span class="section-number">4.21.9.1.1.8. </span>PwmPeriodDefault<a class="headerlink" href="#pwmperioddefault" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.8. </span>PwmPeriodDefault<a class="headerlink" href="#pwmperioddefault" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1134,7 +1163,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmoutputchselect">
-<h5><span class="section-number">4.21.9.1.1.9. </span>PwmOutputChSelect<a class="headerlink" href="#pwmoutputchselect" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.9. </span>PwmOutputChSelect<a class="headerlink" href="#pwmoutputchselect" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1173,7 +1202,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmfunctionalclock">
-<h5><span class="section-number">4.21.9.1.1.10. </span>PwmFunctionalClock<a class="headerlink" href="#pwmfunctionalclock" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.10. </span>PwmFunctionalClock<a class="headerlink" href="#pwmfunctionalclock" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1209,7 +1238,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmpolarity">
-<h5><span class="section-number">4.21.9.1.1.11. </span>PwmPolarity<a class="headerlink" href="#pwmpolarity" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.11. </span>PwmPolarity<a class="headerlink" href="#pwmpolarity" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1248,7 +1277,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmclkprescaler">
-<h5><span class="section-number">4.21.9.1.1.12. </span>PwmClkPrescaler<a class="headerlink" href="#pwmclkprescaler" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.12. </span>PwmClkPrescaler<a class="headerlink" href="#pwmclkprescaler" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1290,7 +1319,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmhsclkprescaler">
-<h5><span class="section-number">4.21.9.1.1.13. </span>PwmHSClkPrescaler<a class="headerlink" href="#pwmhsclkprescaler" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.13. </span>PwmHSClkPrescaler<a class="headerlink" href="#pwmhsclkprescaler" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1332,7 +1361,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmenablehighres">
-<h5><span class="section-number">4.21.9.1.1.14. </span>PwmEnableHighRes<a class="headerlink" href="#pwmenablehighres" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.14. </span>PwmEnableHighRes<a class="headerlink" href="#pwmenablehighres" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1368,7 +1397,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmmcuclockreferencepoint">
-<h5><span class="section-number">4.21.9.1.1.15. </span>PwmMcuClockReferencePoint<a class="headerlink" href="#pwmmcuclockreferencepoint" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.21.10.1.15. </span>PwmMcuClockReferencePoint<a class="headerlink" href="#pwmmcuclockreferencepoint" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1403,9 +1432,9 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </section>
 </section>
 <section id="pwmconfigurationofoptapiservices">
-<h3><span class="section-number">4.21.9.2. </span>PwmConfigurationOfOptApiServices<a class="headerlink" href="#pwmconfigurationofoptapiservices" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.21.11. </span>PwmConfigurationOfOptApiServices<a class="headerlink" href="#pwmconfigurationofoptapiservices" title="Link to this heading"></a></h2>
 <section id="pwmdeinitapi">
-<h4><span class="section-number">4.21.9.2.1. </span>PwmDeInitApi<a class="headerlink" href="#pwmdeinitapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.11.1. </span>PwmDeInitApi<a class="headerlink" href="#pwmdeinitapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1441,7 +1470,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmgetoutputstate">
-<h4><span class="section-number">4.21.9.2.2. </span>PwmGetOutputState<a class="headerlink" href="#pwmgetoutputstate" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.11.2. </span>PwmGetOutputState<a class="headerlink" href="#pwmgetoutputstate" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1474,7 +1503,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmsetdutycycle">
-<h4><span class="section-number">4.21.9.2.3. </span>PwmSetDutyCycle<a class="headerlink" href="#pwmsetdutycycle" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.11.3. </span>PwmSetDutyCycle<a class="headerlink" href="#pwmsetdutycycle" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1507,7 +1536,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmsetoutputtoidle">
-<h4><span class="section-number">4.21.9.2.4. </span>PwmSetOutputToIdle<a class="headerlink" href="#pwmsetoutputtoidle" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.11.4. </span>PwmSetOutputToIdle<a class="headerlink" href="#pwmsetoutputtoidle" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1540,7 +1569,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmsetperiodandduty">
-<h4><span class="section-number">4.21.9.2.5. </span>PwmSetPeriodAndDuty<a class="headerlink" href="#pwmsetperiodandduty" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.11.5. </span>PwmSetPeriodAndDuty<a class="headerlink" href="#pwmsetperiodandduty" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1573,7 +1602,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmversioninfoapi">
-<h4><span class="section-number">4.21.9.2.6. </span>PwmVersionInfoApi<a class="headerlink" href="#pwmversioninfoapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.11.6. </span>PwmVersionInfoApi<a class="headerlink" href="#pwmversioninfoapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1609,7 +1638,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmenableregisterreadbackapi">
-<h4><span class="section-number">4.21.9.2.7. </span>PwmEnableRegisterReadbackApi<a class="headerlink" href="#pwmenableregisterreadbackapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.11.7. </span>PwmEnableRegisterReadbackApi<a class="headerlink" href="#pwmenableregisterreadbackapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1646,9 +1675,9 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </section>
 </section>
 <section id="pwmgeneral">
-<h3><span class="section-number">4.21.9.3. </span>PwmGeneral<a class="headerlink" href="#pwmgeneral" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.21.12. </span>PwmGeneral<a class="headerlink" href="#pwmgeneral" title="Link to this heading"></a></h2>
 <section id="pwmdeverrordetect">
-<h4><span class="section-number">4.21.9.3.1. </span>PwmDevErrorDetect<a class="headerlink" href="#pwmdeverrordetect" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.1. </span>PwmDevErrorDetect<a class="headerlink" href="#pwmdeverrordetect" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1684,7 +1713,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmsysclockfrequency">
-<h4><span class="section-number">4.21.9.3.2. </span>PwmSysClockFrequency<a class="headerlink" href="#pwmsysclockfrequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.2. </span>PwmSysClockFrequency<a class="headerlink" href="#pwmsysclockfrequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1723,7 +1752,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmdutycycleupdatedendperiod">
-<h4><span class="section-number">4.21.9.3.3. </span>PwmDutycycleUpdatedEndperiod<a class="headerlink" href="#pwmdutycycleupdatedendperiod" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.3. </span>PwmDutycycleUpdatedEndperiod<a class="headerlink" href="#pwmdutycycleupdatedendperiod" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1759,7 +1788,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmsfosupportenable">
-<h4><span class="section-number">4.21.9.3.4. </span>PwmSfoSupportEnable<a class="headerlink" href="#pwmsfosupportenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.4. </span>PwmSfoSupportEnable<a class="headerlink" href="#pwmsfosupportenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1795,7 +1824,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmdefaultoscounterid">
-<h4><span class="section-number">4.21.9.3.5. </span>PwmDefaultOSCounterId<a class="headerlink" href="#pwmdefaultoscounterid" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.5. </span>PwmDefaultOSCounterId<a class="headerlink" href="#pwmdefaultoscounterid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1840,7 +1869,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmmaxtimeoutduration">
-<h4><span class="section-number">4.21.9.3.6. </span>PwmMaxTimeoutDuration<a class="headerlink" href="#pwmmaxtimeoutduration" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.6. </span>PwmMaxTimeoutDuration<a class="headerlink" href="#pwmmaxtimeoutduration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1882,7 +1911,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmindex">
-<h4><span class="section-number">4.21.9.3.7. </span>PwmIndex<a class="headerlink" href="#pwmindex" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.7. </span>PwmIndex<a class="headerlink" href="#pwmindex" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1924,7 +1953,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmnotificationsupported">
-<h4><span class="section-number">4.21.9.3.8. </span>PwmNotificationSupported<a class="headerlink" href="#pwmnotificationsupported" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.8. </span>PwmNotificationSupported<a class="headerlink" href="#pwmnotificationsupported" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1960,7 +1989,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmperiodupdatedendperiod">
-<h4><span class="section-number">4.21.9.3.9. </span>PwmPeriodUpdatedEndperiod<a class="headerlink" href="#pwmperiodupdatedendperiod" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.9. </span>PwmPeriodUpdatedEndperiod<a class="headerlink" href="#pwmperiodupdatedendperiod" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1996,7 +2025,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmerrorhook">
-<h4><span class="section-number">4.21.9.3.10. </span>PwmErrorHook<a class="headerlink" href="#pwmerrorhook" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.10. </span>PwmErrorHook<a class="headerlink" href="#pwmerrorhook" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2032,7 +2061,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmdetincludefile">
-<h4><span class="section-number">4.21.9.3.11. </span>PwmDetIncludeFile<a class="headerlink" href="#pwmdetincludefile" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.11. </span>PwmDetIncludeFile<a class="headerlink" href="#pwmdetincludefile" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2068,7 +2097,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmnotificationsincludefile">
-<h4><span class="section-number">4.21.9.3.12. </span>PwmNotificationsIncludeFile<a class="headerlink" href="#pwmnotificationsincludefile" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.12. </span>PwmNotificationsIncludeFile<a class="headerlink" href="#pwmnotificationsincludefile" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2104,7 +2133,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmcfgdebugreporting">
-<h4><span class="section-number">4.21.9.3.13. </span>PwmCfgDebugReporting<a class="headerlink" href="#pwmcfgdebugreporting" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.13. </span>PwmCfgDebugReporting<a class="headerlink" href="#pwmcfgdebugreporting" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2140,7 +2169,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmtypeofinterruptfunction">
-<h4><span class="section-number">4.21.9.3.14. </span>PwmTypeofInterruptFunction<a class="headerlink" href="#pwmtypeofinterruptfunction" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.14. </span>PwmTypeofInterruptFunction<a class="headerlink" href="#pwmtypeofinterruptfunction" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2179,7 +2208,7 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmoscounterref">
-<h4><span class="section-number">4.21.9.3.15. </span>PwmOsCounterRef<a class="headerlink" href="#pwmoscounterref" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.15. </span>PwmOsCounterRef<a class="headerlink" href="#pwmoscounterref" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2215,20 +2244,19 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </table>
 </section>
 <section id="pwmpowerstateconfig">
-<h4><span class="section-number">4.21.9.3.16. </span>PwmPowerStateConfig<a class="headerlink" href="#pwmpowerstateconfig" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.21.12.16. </span>PwmPowerStateConfig<a class="headerlink" href="#pwmpowerstateconfig" title="Link to this heading"></a></h3>
 <p>Each instance of this parameter defines a power state and the callback to be called when this power state is reached.</p>
 <p><strong>Note:</strong> PwmMaxTimeoutDuration parameter Value should be passed as number of ticks according to clock frequency. The clock source have changed from RTI timers which used 200MHz clock frequency to R5f timers which uses 400MHz clock frequency, so the timeout values need to be configured accordingly.</p>
 </section>
-</section>
 <section id="symbolic-names-deviations">
-<h3><span class="section-number">4.21.9.4. </span>Symbolic Names deviations<a class="headerlink" href="#symbolic-names-deviations" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.21.12.17. </span>Symbolic Names deviations<a class="headerlink" href="#symbolic-names-deviations" title="Link to this heading"></a></h3>
 <p>None</p>
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">4.21.10. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.21.13. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <section id="overview">
-<h3><span class="section-number">4.21.10.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.21.13.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Initialize Timer and Interrupt using API PwmApp_Startup()</p></li>
 <li><p>Initialize Clock (Mcu_Init), Port (Port_Init) and Uart using API Pwm_App_PlatformInit() in example application</p></li>
@@ -2244,11 +2272,11 @@ The PWM interrupts needs to be mapped to the corresponding cross bar interrupt.<
 </ol>
 </section>
 <section id="hardware-software-setup-and-tools">
-<h3><span class="section-number">4.21.10.2. </span>Hardware Software Setup and Tools<a class="headerlink" href="#hardware-software-setup-and-tools" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.21.13.2. </span>Hardware Software Setup and Tools<a class="headerlink" href="#hardware-software-setup-and-tools" title="Link to this heading"></a></h3>
 <p>None</p>
 </section>
 <section id="steps-to-build-and-run-example">
-<h3><span class="section-number">4.21.10.3. </span>Steps to build and run example<a class="headerlink" href="#steps-to-build-and-run-example" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.21.13.3. </span>Steps to build and run example<a class="headerlink" href="#steps-to-build-and-run-example" title="Link to this heading"></a></h3>
 <p>Pwm example application demonstrating the MCAL PWM driver features is
 in folder &lt;MCAL_ROOT&gt;/examples/Pwm.</p>
 <p>This application can be built from the build folder by giving
@@ -2262,7 +2290,7 @@ in folder &lt;MCAL_ROOT&gt;/examples/Pwm.</p>
 </ol>
 </section>
 <section id="example-logs">
-<h3><span class="section-number">4.21.10.4. </span>Example Logs<a class="headerlink" href="#example-logs" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.21.13.4. </span>Example Logs<a class="headerlink" href="#example-logs" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
 <span class="w">   </span><span class="nl">PWM_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
 
@@ -2301,7 +2329,7 @@ in folder &lt;MCAL_ROOT&gt;/examples/Pwm.</p>
 </div>
 </section>
 <section id="file-structure">
-<h3><span class="section-number">4.21.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.21.13.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
 <p>📦AM263Px<br />
 ┣ 📂build<br />
 ┣ 📂mcal<br />
@@ -2327,11 +2355,11 @@ in folder &lt;MCAL_ROOT&gt;/examples/Pwm.</p>
 </section>
 </section>
 <section id="faq-s">
-<h2><span class="section-number">4.21.11. </span>FAQ’s<a class="headerlink" href="#faq-s" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.21.14. </span>FAQ’s<a class="headerlink" href="#faq-s" title="Link to this heading"></a></h2>
 <p>Will be updated in next release</p>
 </section>
 <section id="references">
-<h2><span class="section-number">4.21.12. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.21.15. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_PWMDriver.pdf">AUTOSAR_SWS_PWMDriver</a><br />
 <a class="reference external" href="https://www.ti.com/product/AM263P4#tech-docs">Technical Reference Manual</a></p>
 </section>

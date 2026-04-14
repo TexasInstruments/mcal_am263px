@@ -263,20 +263,23 @@ void Cdd_Dma_ParamSet(uint32 handleId, uint32 channelIdx, uint32 paramIndex, Cdd
             maxParamCheck = hEdmaInitCheck.ownResource.channelGroup[channelIdx]->maxParam;
             exitCondition = Cdd_Dma_ParamSet_MaxparamDetcheck(maxParamCheck, paramIndex);
         }
-    }
-    if (exitCondition == TRUE)
-#endif
-    {
-#if (STD_OFF == CDD_DMA_DEV_ERROR_DETECT)
-        /* Boundary check for handleId before using as index (DET disabled build) */
-        if (handleId >= (uint32)CDD_DMA_MAX_HANDLER)
+        if (exitCondition == TRUE)
         {
-            Det_ReportRuntimeError(CDD_DMA_MODULE_ID, CDD_DMA_INSTANCE_ID, CDD_DMA_PARAMSET_SERVICE_ID,
-                                   CDD_DMA_E_PARAM_VALUE);
-            /* Return to prevent out-of-bounds array access (MISRA-C:2012 R15.3, AUTOSAR) */
-            return;
+            if (Cdd_Dma_handleAlreadyInUse[handleId] != 0U)
+            {
+                Det_ReportRuntimeError(CDD_DMA_MODULE_ID, CDD_DMA_INSTANCE_ID, CDD_DMA_PARAMSET_SERVICE_ID,
+                                       CDD_DMA_E_ALREADY_IN_PROGRESS);
+            }
+            else
+            {
+                Cdd_Dma_ParamSet_ConfigValues(handleId, channelIdx, paramIndex, paramEntry);
+            }
         }
-#endif
+    }
+#else
+    /* DET_OFF: runtime bound check before using handleId as index */
+    if (handleId < (uint32)CDD_DMA_MAX_HANDLER)
+    {
         if (Cdd_Dma_handleAlreadyInUse[handleId] != 0U)
         {
             Det_ReportRuntimeError(CDD_DMA_MODULE_ID, CDD_DMA_INSTANCE_ID, CDD_DMA_PARAMSET_SERVICE_ID,
@@ -287,6 +290,12 @@ void Cdd_Dma_ParamSet(uint32 handleId, uint32 channelIdx, uint32 paramIndex, Cdd
             Cdd_Dma_ParamSet_ConfigValues(handleId, channelIdx, paramIndex, paramEntry);
         }
     }
+    else
+    {
+        Det_ReportRuntimeError(CDD_DMA_MODULE_ID, CDD_DMA_INSTANCE_ID, CDD_DMA_PARAMSET_SERVICE_ID,
+                               CDD_DMA_E_PARAM_VALUE);
+    }
+#endif
 }
 
 /*

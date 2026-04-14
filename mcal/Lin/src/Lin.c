@@ -383,29 +383,43 @@ static FUNC(Std_ReturnType, LIN_CODE)
     {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_UNINIT);
-        return_value = E_NOT_OK;
 #endif
+        return_value = E_NOT_OK;
     }
-    if ((LIN_MAX_CHANNEL <= Channel) && (return_value == E_OK))
+    if ((Channel >= LIN_MAX_CHANNEL) && (return_value == E_OK))
     {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_INVALID_CHANNEL);
-        return_value = E_NOT_OK;
 #endif
+        return_value = E_NOT_OK;
     }
     if ((NULL_PTR == PduInfoPtr) && (return_value == E_OK))
     {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_PARAM_POINTER);
-        return_value = E_NOT_OK;
 #endif
+        return_value = E_NOT_OK;
     }
-    if ((LIN_CHANNEL_OPERATIONAL != Lin_Channel_Status[Channel].linChannelNetworkStatus) && (return_value == E_OK))
+    if (return_value == E_OK)
     {
+        if (Channel < LIN_MAX_CHANNEL)
+        {
+            if (LIN_CHANNEL_OPERATIONAL != Lin_Channel_Status[Channel].linChannelNetworkStatus)
+            {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
-        (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_STATE_TRANSITION);
-        return_value = E_NOT_OK;
+                (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_STATE_TRANSITION);
 #endif
+                return_value = E_NOT_OK;
+            }
+        }
+        /* TI_COVERAGE_GAP_START: Channel always < LIN_MAX_CHANNEL when return_value == E_OK;
+         * boundary check sets return_value = E_NOT_OK when Channel >= LIN_MAX_CHANNEL. False branch
+         * unreachable by design. */
+        else
+        {
+            /* Do Nothing */
+        }
+        /* TI_COVERAGE_GAP_STOP */
     }
     return return_value;
 }
@@ -446,12 +460,15 @@ Lin_GoToSleep(uint8 Channel)
 
         /* Send goto-sleep command on bus */
         return_value = Lin_SendGoToSleepSignal(lin_base_cntr_addr);
+        /* TI_COVERAGE_GAP_START : Lin_SendGoToSleepSignal always returns E_OK in the test
+         * environment; hardware timeout cannot be simulated. */
         if (return_value == E_NOT_OK)
         {
 #ifdef LIN_E_TIMEOUT
             Dem_SetEventStatus(LIN_E_TIMEOUT, DEM_EVENT_STATUS_PREFAILED);
 #endif
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             Lin_EnterLowPowerMode(lin_base_cntr_addr, TRUE);
@@ -600,10 +617,9 @@ static FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupInternalProcess(uint8 Channel)
 FUNC(Lin_StatusType, LIN_CODE)
 Lin_GetStatus(uint8 Channel, P2VAR(uint8 *, AUTOMATIC, LIN_APPL_DATA) Lin_SduPtr)
 {
-    uint32         condition_check    = 0U;
-    uint32         channelstate_check = 0U;
-    Lin_StatusType return_value       = LIN_NOT_OK;
-    uint32         lin_cnt_base_addr  = (uint32)0;
+    uint32         condition_check   = 0U;
+    Lin_StatusType return_value      = LIN_NOT_OK;
+    uint32         lin_cnt_base_addr = (uint32)0;
 
     if (LIN_INIT != Lin_Module_State)
     {
@@ -612,49 +628,58 @@ Lin_GetStatus(uint8 Channel, P2VAR(uint8 *, AUTOMATIC, LIN_APPL_DATA) Lin_SduPtr
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_GET_STATUS, LIN_E_UNINIT);
 #endif
     }
-    if ((LIN_MAX_CHANNEL <= Channel) && (condition_check == 0U))
+    if ((Channel >= LIN_MAX_CHANNEL) && (condition_check == 0U))
     {
         condition_check = 1U;
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_GET_STATUS, LIN_E_INVALID_CHANNEL);
 #endif
     }
-    if ((NULL_PTR == Lin_SduPtr) && (condition_check == 0U))
+    else if ((NULL_PTR == Lin_SduPtr) && (condition_check == 0U))
     {
         condition_check = 1U;
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_GET_STATUS, LIN_E_PARAM_POINTER);
 #endif
     }
+    else
+    {
+        /* Do Nothing */
+    }
     if (condition_check == 0U)
     {
-        condition_check   = 1U;
-        lin_cnt_base_addr = Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr;
+        if (Channel < LIN_MAX_CHANNEL)
+        {
+            lin_cnt_base_addr = Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr;
 
-        SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
+            SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
 
-        if (LIN_CHANNEL_OPERATIONAL == Lin_Channel_Status[Channel].linChannelNetworkStatus)
-        {
-            channelstate_check = 1U;
-            return_value       = Lin_GetStatusInternal(Channel, Lin_SduPtr, &lin_cnt_base_addr);
+            if (LIN_CHANNEL_OPERATIONAL == Lin_Channel_Status[Channel].linChannelNetworkStatus)
+            {
+                return_value = Lin_GetStatusInternal(Channel, Lin_SduPtr, &lin_cnt_base_addr);
+            }
+            else if (LIN_CHANNEL_SLEEP == Lin_Channel_Status[Channel].linChannelNetworkStatus)
+            {
+                return_value = LIN_CH_SLEEP;
+            }
+            else
+            {
+                /* LIN_CHANNEL_SLEEP_PENDING is the only remaining valid state; Lin_Channel_Status
+                 * is static and only written by Lin module functions which enforce valid states.
+                 * Transition to SLEEP (MISRA-C:2012 R15.7). */
+                Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_SLEEP;
+                return_value                                        = LIN_CH_SLEEP;
+            }
+            SchM_Exit_Lin_LIN_EXCLUSIVE_AREA_0();
         }
-        if ((LIN_CHANNEL_SLEEP == Lin_Channel_Status[Channel].linChannelNetworkStatus) && (channelstate_check == 0U))
-        {
-            channelstate_check = 1U;
-            return_value       = LIN_CH_SLEEP;
-        }
-        if ((LIN_CHANNEL_SLEEP_PENDING == Lin_Channel_Status[Channel].linChannelNetworkStatus) &&
-            (channelstate_check == 0U))
-        {
-            channelstate_check                                  = 1U;
-            Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_SLEEP;
-            return_value                                        = LIN_CH_SLEEP;
-        }
+        /* TI_COVERAGE_GAP_START: Channel always < LIN_MAX_CHANNEL when condition_check == 0U;
+         * boundary check sets condition_check = 1U when Channel >= LIN_MAX_CHANNEL. False branch
+         * unreachable by design. */
         else
         {
             /* Do Nothing */
         }
-        SchM_Exit_Lin_LIN_EXCLUSIVE_AREA_0();
+        /* TI_COVERAGE_GAP_STOP */
     }
     return return_value;
 }
@@ -708,9 +733,12 @@ static FUNC(Lin_StatusType, LIN_CODE)
 
             break;
 
+        /* TI_COVERAGE_GAP_START : Only LIN_CHANNEL_IDLE, LIN_CHANNEL_TX_STARTED, and
+         * LIN_CHANNEL_RX_STARTED are valid activity statuses; the default case is unreachable. */
         default:
             /* Do Nothing */
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
     return return_value;
 }

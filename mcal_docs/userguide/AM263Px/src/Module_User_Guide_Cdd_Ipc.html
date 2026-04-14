@@ -105,7 +105,28 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">4.9.9. Configuration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cddipcdriver">4.9.9.1. CddIpcDriver</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddipcgeneral">4.9.9.2. CddIpcGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipclocalcoreid">4.9.9.2. CddIpcLocalCoreId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcremotecorelist">4.9.9.3. CddIpcRemoteCoreList</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcremotecoreidindex">4.9.9.4. CddIpcRemoteCoreIdIndex</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcsafeipccoresenable">4.9.9.5. CddIpcSafeIpcCoresEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcendptconfig">4.9.9.6. CddIpcEndPtConfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipclocalendpt">4.9.9.7. CddIpcLocalEndPt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcrecvcallback">4.9.9.8. CddIpcRecvCallBack</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcrecvcallbackarguments">4.9.9.9. CddIpcrecvCallbackArguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcrecvnotifycallback">4.9.9.10. CddIpcrecvNotifyCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcrecvnotifycallbackarguments">4.9.9.11. CddIpcrecvNotifyCallbackArguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcgeneral">4.9.9.12. CddIpcGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcwriteapi">4.9.9.13. CddIpcWriteApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcreadapi">4.9.9.14. CddIpcReadApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcrpmsgenable">4.9.9.15. CddIpcRpMsgEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcrecvcallbackenable">4.9.9.16. CddIpcRecvCallBackEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcrecvnotifycallbackenable">4.9.9.17. CddIpcRecvNotifyCallbackEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcsafeipcenable">4.9.9.18. CddIpcSafeIpcEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipccrcenable">4.9.9.19. CddIpcCrcEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipccrchookfunc">4.9.9.20. CddIpcCrcHookFunc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipctimeout">4.9.9.21. CddIpcTimeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcnumofbuffers">4.9.9.22. CddIpcNumOfBuffers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddipcmaxbuffersize">4.9.9.23. CddIpcMaxBufferSize</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">4.9.10. Examples</a><ul>
@@ -651,8 +672,9 @@ The mailbox operations like write, read are protected by a critical section.</p>
 <section id="cddipcdriver">
 <h3><span class="section-number">4.9.9.1. </span>CddIpcDriver<a class="headerlink" href="#cddipcdriver" title="Link to this heading"></a></h3>
 <p>This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver(CDD) module.</p>
+</section>
 <section id="cddipclocalcoreid">
-<h4><span class="section-number">4.9.9.1.1. </span>CddIpcLocalCoreId<a class="headerlink" href="#cddipclocalcoreid" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.2. </span>CddIpcLocalCoreId<a class="headerlink" href="#cddipclocalcoreid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -688,10 +710,11 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcremotecorelist">
-<h4><span class="section-number">4.9.9.1.2. </span>CddIpcRemoteCoreList<a class="headerlink" href="#cddipcremotecorelist" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.3. </span>CddIpcRemoteCoreList<a class="headerlink" href="#cddipcremotecorelist" title="Link to this heading"></a></h3>
 <p>Refers to the list of coreId that are valid for the particular platform.</p>
+</section>
 <section id="cddipcremotecoreidindex">
-<h5><span class="section-number">4.9.9.1.2.1. </span>CddIpcRemoteCoreIdIndex<a class="headerlink" href="#cddipcremotecoreidindex" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.9.9.4. </span>CddIpcRemoteCoreIdIndex<a class="headerlink" href="#cddipcremotecoreidindex" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -727,7 +750,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcsafeipccoresenable">
-<h5><span class="section-number">4.9.9.1.2.2. </span>CddIpcSafeIpcCoresEnable<a class="headerlink" href="#cddipcsafeipccoresenable" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.9.9.5. </span>CddIpcSafeIpcCoresEnable<a class="headerlink" href="#cddipcsafeipccoresenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -768,12 +791,12 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </tbody>
 </table>
 </section>
-</section>
 <section id="cddipcendptconfig">
-<h4><span class="section-number">4.9.9.1.3. </span>CddIpcEndPtConfig<a class="headerlink" href="#cddipcendptconfig" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.6. </span>CddIpcEndPtConfig<a class="headerlink" href="#cddipcendptconfig" title="Link to this heading"></a></h3>
 <p>This is required only in case of RpMsg is being used. To enable this make sure the CddIpcRpMsgEnable box is enabled.</p>
+</section>
 <section id="cddipclocalendpt">
-<h5><span class="section-number">4.9.9.1.3.1. </span>CddIpcLocalEndPt<a class="headerlink" href="#cddipclocalendpt" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.9.9.7. </span>CddIpcLocalEndPt<a class="headerlink" href="#cddipclocalendpt" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -821,7 +844,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcrecvcallback">
-<h5><span class="section-number">4.9.9.1.3.2. </span>CddIpcRecvCallBack<a class="headerlink" href="#cddipcrecvcallback" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.9.9.8. </span>CddIpcRecvCallBack<a class="headerlink" href="#cddipcrecvcallback" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -863,7 +886,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcrecvcallbackarguments">
-<h5><span class="section-number">4.9.9.1.3.3. </span>CddIpcrecvCallbackArguments<a class="headerlink" href="#cddipcrecvcallbackarguments" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.9.9.9. </span>CddIpcrecvCallbackArguments<a class="headerlink" href="#cddipcrecvcallbackarguments" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -905,7 +928,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcrecvnotifycallback">
-<h5><span class="section-number">4.9.9.1.3.4. </span>CddIpcrecvNotifyCallback<a class="headerlink" href="#cddipcrecvnotifycallback" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.9.9.10. </span>CddIpcrecvNotifyCallback<a class="headerlink" href="#cddipcrecvnotifycallback" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -947,7 +970,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcrecvnotifycallbackarguments">
-<h5><span class="section-number">4.9.9.1.3.5. </span>CddIpcrecvNotifyCallbackArguments<a class="headerlink" href="#cddipcrecvnotifycallbackarguments" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.9.9.11. </span>CddIpcrecvNotifyCallbackArguments<a class="headerlink" href="#cddipcrecvnotifycallbackarguments" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -988,10 +1011,8 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </tbody>
 </table>
 </section>
-</section>
-</section>
 <section id="cddipcgeneral">
-<h3><span class="section-number">4.9.9.2. </span>CddIpcGeneral<a class="headerlink" href="#cddipcgeneral" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.9.9.12. </span>CddIpcGeneral<a class="headerlink" href="#cddipcgeneral" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1003,7 +1024,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 <td><p>CddIpcGeneral</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Switches the Cdd_IpcDeinit function ON or OFF.</p></td>
+<td><p>General configuration settings for Complex device driver</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Origin</strong></p></td>
 <td><p>Texas Instruments</p></td>
@@ -1022,8 +1043,9 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </tr>
 </tbody>
 </table>
+</section>
 <section id="cddipcwriteapi">
-<h4><span class="section-number">4.9.9.2.1. </span>CddIpcWriteApi<a class="headerlink" href="#cddipcwriteapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.13. </span>CddIpcWriteApi<a class="headerlink" href="#cddipcwriteapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1056,7 +1078,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcreadapi">
-<h4><span class="section-number">4.9.9.2.2. </span>CddIpcReadApi<a class="headerlink" href="#cddipcreadapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.14. </span>CddIpcReadApi<a class="headerlink" href="#cddipcreadapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1089,7 +1111,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcrpmsgenable">
-<h4><span class="section-number">4.9.9.2.3. </span>CddIpcRpMsgEnable<a class="headerlink" href="#cddipcrpmsgenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.15. </span>CddIpcRpMsgEnable<a class="headerlink" href="#cddipcrpmsgenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1122,7 +1144,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcrecvcallbackenable">
-<h4><span class="section-number">4.9.9.2.4. </span>CddIpcRecvCallBackEnable<a class="headerlink" href="#cddipcrecvcallbackenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.16. </span>CddIpcRecvCallBackEnable<a class="headerlink" href="#cddipcrecvcallbackenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1164,7 +1186,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcrecvnotifycallbackenable">
-<h4><span class="section-number">4.9.9.2.5. </span>CddIpcRecvNotifyCallbackEnable<a class="headerlink" href="#cddipcrecvnotifycallbackenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.17. </span>CddIpcRecvNotifyCallbackEnable<a class="headerlink" href="#cddipcrecvnotifycallbackenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1176,7 +1198,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 <td><p>CddIpcRecvNotifyCallbackEnable</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Switches the Development Error Detection and Notification ON or OFF.</p></td>
+<td><p>Switch to enable RPMsg Notify message Recv Callback.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Multiplicity-Configuration-Class</strong></p></td>
 <td><p>–</p></td>
@@ -1206,7 +1228,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcsafeipcenable">
-<h4><span class="section-number">4.9.9.2.6. </span>CddIpcSafeIpcEnable<a class="headerlink" href="#cddipcsafeipcenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.18. </span>CddIpcSafeIpcEnable<a class="headerlink" href="#cddipcsafeipcenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1239,7 +1261,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipccrcenable">
-<h4><span class="section-number">4.9.9.2.7. </span>CddIpcCrcEnable<a class="headerlink" href="#cddipccrcenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.19. </span>CddIpcCrcEnable<a class="headerlink" href="#cddipccrcenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1272,7 +1294,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipccrchookfunc">
-<h4><span class="section-number">4.9.9.2.8. </span>CddIpcCrcHookFunc<a class="headerlink" href="#cddipccrchookfunc" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.20. </span>CddIpcCrcHookFunc<a class="headerlink" href="#cddipccrchookfunc" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1284,7 +1306,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 <td><p>CddIpcCrcHookFunc</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Type of Isr function: void functionname(void) CAT1 : interrupt void func(void) CAT2 : ISR(func)</p></td>
+<td><p>Hook function in application for Crc Calculation</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Multiplicity-Configuration-Class</strong></p></td>
 <td><p>–</p></td>
@@ -1317,7 +1339,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipctimeout">
-<h4><span class="section-number">4.9.9.2.9. </span>CddIpcTimeout<a class="headerlink" href="#cddipctimeout" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.21. </span>CddIpcTimeout<a class="headerlink" href="#cddipctimeout" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1356,7 +1378,7 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </table>
 </section>
 <section id="cddipcnumofbuffers">
-<h4><span class="section-number">4.9.9.2.10. </span>CddIpcNumOfBuffers<a class="headerlink" href="#cddipcnumofbuffers" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.9.9.22. </span>CddIpcNumOfBuffers<a class="headerlink" href="#cddipcnumofbuffers" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1387,9 +1409,59 @@ The mailbox operations like write, read are protected by a critical section.</p>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="cddipcmaxbuffersize">
+<h3><span class="section-number">4.9.9.23. </span>CddIpcMaxBufferSize<a class="headerlink" href="#cddipcmaxbuffersize" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddIpcMaxBufferSize</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>This parameter indicates the Max size of each buffer. Note that the actual size available is 16 bytes less than the above chosen value (16 bytes are used for the header in RPMsg)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Default-value</strong></p></td>
+<td><p>AM263PX</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multiplicity-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-even"><td><p>Post-Build Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Max-value</strong></p></td>
+<td><p>16</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Min-value</strong></p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Range</strong></p></td>
+<td><p>AM263PX</p></td>
+</tr>
+</tbody>
+</table>
 <p>Note: In case of CddIpcRecvCallBack , when RPMsg arrive then that is invoked along with the data in the VRING buffer.So now if the msg size is less then what we are transferring between cores then we will send the echo msg back to the core from which we are receiving and will do UNLOCK of core only if complete msg transfer happens.So by this way we are acknowledging the remote core.</p>
 <p>For details of configuration supported refer the MCAL_Configurator_UserGuide.pdf present in mcal_config/docs folder</p>
-</section>
 </section>
 </section>
 <section id="examples">

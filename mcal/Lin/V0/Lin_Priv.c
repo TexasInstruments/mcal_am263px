@@ -438,6 +438,7 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
     uint8          length            = pduInfoPtr->Dl;
     sint8          i                 = 0;
     Std_ReturnType return_value      = E_NOT_OK;
+    uint32         regVal            = 0U;
 
     if (LIN_CHANNEL_IDLE != *linChannelActivityStatus)
     {
@@ -455,12 +456,12 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
     if (LIN_MASTER_RESPONSE == pduInfoPtr->Drc)
     {
         /* Enable transmit bit. */
-        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
+        regVal = HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK;
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1), regVal);
 
         /* Enable receive bit. */
-        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
+        regVal = HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK;
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1), regVal);
 
         /* Set Mask ID for TX */
         Lin_SetTxMask(lin_cnt_base_addr, pduInfoPtr->Pid);
@@ -494,12 +495,12 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
     else if (LIN_SLAVE_RESPONSE == pduInfoPtr->Drc)
     {
         /* Enable transmit bit. */
-        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
+        regVal = HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK;
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1), regVal);
 
         /* Enable receive bit. */
-        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
+        regVal = HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK;
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1), regVal);
 
         /*
          * Set the frame length (number of bytes to be received)
@@ -525,12 +526,12 @@ Lin_SendData(P2CONST(Lin_ChannelType, AUTOMATIC, LIN_APPL_DATA) linChannel,
     else
     {
         /* Enable transmit bit. */
-        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK);
+        regVal = HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_TXENA_MASK;
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1), regVal);
 
         /* Enable receive bit. */
-        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1),
-                    HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK);
+        regVal = HW_RD_REG32(lin_cnt_base_addr + CSL_LIN_SCIGCR1) | CSL_LIN_SCIGCR1_RXENA_MASK;
+        HW_WR_REG32((lin_cnt_base_addr + CSL_LIN_SCIGCR1), regVal);
 
         /* Set Mask ID for RX to not accept any message as we don't need to read the message */
         Lin_SetRxMask(lin_cnt_base_addr, 0x00U);

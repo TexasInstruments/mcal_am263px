@@ -363,15 +363,13 @@ FUNC(Gpt_ValueType, GPT_CODE) Gpt_GetTimeElapsed(Gpt_ChannelType channel)
     Gpt_ChannelMode        ChannelMode;
     Gpt_ValueType          Return_Value = 0U;
     uint32                 Gpt_rtiChAddr;
-    uint16                 channelIdx;
-    uint32                 exitCondition = FALSE;
+    uint16                 channelIdx = (uint16)GPT_RTI_MAX;
     Gpt_ChannelConfigType *gptDrvChannelObj;
     if (channel < GPT_RTI_MAX)
     {
         channelIdx = Gpt_ChConfig_map[channel];
     }
 
-    /*Used to solve METRICS.E.HIS_Metrics___Max_nesting_level_LEVEL issue*/
     /* Check if the driver has been successfully initialized. If the driver
      * has not been initialized, report an error and return from Api.
      */
@@ -379,51 +377,52 @@ FUNC(Gpt_ValueType, GPT_CODE) Gpt_GetTimeElapsed(Gpt_ChannelType channel)
     if (Gpt_DriverStatus != GPT_DRIVER_INITIALIZED)
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_GET_TIME_ELAPSED, GPT_E_UNINIT);
-        exitCondition = TRUE;
     }
     /* Check if parameter channel is in valid range. If its value is out
      * of range report an error and return from the function.    */
     /* If any channel is not configured then default channelIdx will be GPT_RTI_MAX */
-    if ((exitCondition == FALSE) && ((channel > GPT_RTI_CH_MAX) || (channelIdx >= (uint16)GPT_RTI_MAX)))
+    else if ((channel > GPT_RTI_CH_MAX) || (channelIdx >= (uint16)GPT_RTI_MAX))
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_GET_TIME_ELAPSED, GPT_E_PARAM_CHANNEL);
-        exitCondition = TRUE;
     }
+    else
 #endif
-    /* Check if timer is in "initialized" state, if TRUE return value = 0"*/
-    /* SWS_Gpt_00295: If timer is in "initialized" state, by default return value = 0 */
-    if ((exitCondition == FALSE) && (GPT_INITIALIZED != Gpt_ChannelState[channel]))
     {
-        Gpt_rtiChAddr = Gpt_GetRTIChannelAddr(channel);
-        /*Read the Counter, update counter and free running counter values of the channel*/
-
-        /*LDRA_INSPECTED 440 S : MISRAC_2012_R11.1
-         * "Reason - Cast for register address " */
-        /*LDRA_INSPECTED 91 D : MISRAC_2012_R4.7
-         * "Reason - Return value used  " */
-        FreeRunningCounter = Gpt_GetCounter_Values((rtiBASE_t *)Gpt_rtiChAddr, channel, &UpdCompare, &Compare);
-
-        gptDrvChannelObj = &Gpt_DrvObj.gChannelConfig_pt[channelIdx];
-        ChannelMode      = (gptDrvChannelObj->ChannelMode);
-
-        /* SWS_Gpt_00299: Return the target time if the channel is
-         * expired, else return the relative difference */
-        if (GPT_CH_MODE_ONESHOT == ChannelMode)
+        /* Check if timer is in "initialized" state, if TRUE return value = 0"*/
+        /* SWS_Gpt_00295: If timer is in "initialized" state, by default return value = 0 */
+        if (GPT_INITIALIZED != Gpt_ChannelState[channel])
         {
-            if (GPT_EXPIRED == Gpt_ChannelState[channel])
+            Gpt_rtiChAddr = Gpt_GetRTIChannelAddr(channel);
+            /*Read the Counter, update counter and free running counter values of the channel*/
+
+            /*LDRA_INSPECTED 440 S : MISRAC_2012_R11.1
+             * "Reason - Cast for register address " */
+            /*LDRA_INSPECTED 91 D : MISRAC_2012_R4.7
+             * "Reason - Return value used  " */
+            FreeRunningCounter = Gpt_GetCounter_Values((rtiBASE_t *)Gpt_rtiChAddr, channel, &UpdCompare, &Compare);
+
+            gptDrvChannelObj = &Gpt_DrvObj.gChannelConfig_pt[channelIdx];
+            ChannelMode      = (gptDrvChannelObj->ChannelMode);
+
+            /* SWS_Gpt_00299: Return the target time if the channel is
+             * expired, else return the relative difference */
+            if (GPT_CH_MODE_ONESHOT == ChannelMode)
             {
-                Return_Value = Mod_Difference(Compare, Gpt_ChStartTime_map[channel]);
+                if (GPT_EXPIRED == Gpt_ChannelState[channel])
+                {
+                    Return_Value = Mod_Difference(Compare, Gpt_ChStartTime_map[channel]);
+                }
+                else
+                {
+                    Return_Value = Mod_Difference(FreeRunningCounter, Gpt_ChStartTime_map[channel]);
+                }
             }
+            /* Continuous Mode */
             else
             {
-                Return_Value = Mod_Difference(FreeRunningCounter, Gpt_ChStartTime_map[channel]);
+                /*Find the relative difference b/w Compare and Free running counter*/
+                Return_Value = UpdCompare - Mod_Difference(Compare, FreeRunningCounter);
             }
-        }
-        /* Continuous Mode */
-        else
-        {
-            /*Find the relative difference b/w Compare and Free running counter*/
-            Return_Value = UpdCompare - Mod_Difference(Compare, FreeRunningCounter);
         }
     }
     return Return_Value;
@@ -521,8 +520,7 @@ static FUNC(Gpt_ValueType, GPT_CODE) Gpt_GetTimeMaxLevel(Gpt_ChannelType channel
  */
 FUNC(void, GPT_CODE) Gpt_StartTimer(Gpt_ChannelType channel, Gpt_ValueType value)
 {
-    uint16 channelIdx;
-    uint32 exitCondition = FALSE; /*Used to solve METRICS.E.HIS_Metrics___Max_nesting_level_LEVEL issue*/
+    uint16                 channelIdx = (uint16)GPT_RTI_MAX;
     Gpt_ChannelConfigType *gptDrvChannelObj;
     if (channel < GPT_RTI_MAX)
     {
@@ -536,26 +534,19 @@ FUNC(void, GPT_CODE) Gpt_StartTimer(Gpt_ChannelType channel, Gpt_ValueType value
     if (Gpt_DriverStatus != GPT_DRIVER_INITIALIZED)
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_START_TIMER, GPT_E_UNINIT);
-        exitCondition = TRUE;
     }
-    /* Check if parameter channel is in valid range and not in Uninitialized mode. If its value is
-     * out of range report an error and set flag.
-     */
-    if ((exitCondition == FALSE) && ((channel > GPT_RTI_CH_MAX) || (GPT_UNINITIALIZED == Gpt_ChannelState[channel])))
+    /* Check if parameter channel is in valid range and not in Uninitialized mode. */
+    else if ((channel > GPT_RTI_CH_MAX) || (GPT_UNINITIALIZED == Gpt_ChannelState[channel]))
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_START_TIMER, GPT_E_PARAM_CHANNEL);
-        exitCondition = TRUE;
     }
-    /* Check if parameter value is in valid range. If "0" is specified as
-     * value, report an error and set flag.
-     */
-    if ((exitCondition == FALSE) && ((value == 0U) || (value >= MAX_RESOLUTION)))
+    /* Check if parameter value is in valid range. */
+    else if ((value == 0U) || (value >= MAX_RESOLUTION))
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_START_TIMER, GPT_E_PARAM_VALUE);
-        exitCondition = TRUE;
     }
+    else
 #endif
-    if (exitCondition == FALSE)
     {
         /*Check if channel is running, report error GPT_E_BUSY if channel already in "Running"
          * state*/
@@ -601,23 +592,18 @@ FUNC(void, GPT_CODE) Gpt_StopTimer(Gpt_ChannelType channel)
      * has not been initialized, report an error and return immediately.
      */
 #if (STD_ON == GPT_DEV_ERROR_DETECT)
-
-    /* Lower 2 bits determine the compare block - (0, 1, 2, 3) */
-    uint32 exitCondition = FALSE; /*Used to solve METRICS.E.HIS_Metrics___Max_nesting_level_LEVEL issue*/
     if (Gpt_DriverStatus != GPT_DRIVER_INITIALIZED)
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_STOP_TIMER, GPT_E_UNINIT);
-        exitCondition = TRUE;
     }
     /* Check if parameter channel is in valid range. If its value is out
      * of range report an error and return immediately.
      */
-    if ((exitCondition == FALSE) && (channel > GPT_RTI_CH_MAX))
+    else if (channel > GPT_RTI_CH_MAX)
     {
         (void)Det_ReportError(GPT_MODULE_ID, GPT_INSTANCE_ID, GPT_SID_STOP_TIMER, GPT_E_PARAM_CHANNEL);
-        exitCondition = TRUE;
     }
-    if (exitCondition == FALSE)
+    else
 #endif
     {
         /*Check for Channel State, if channel is not in "Running" state

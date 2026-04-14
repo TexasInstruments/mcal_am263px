@@ -974,16 +974,21 @@ static FUNC(Std_ReturnType, ICU_CODE)
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_SETACTIVATIONCONDITION_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_SIGNAL_MEASUREMENT == Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_SETACTIVATIONCONDITION_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_SETACTIVATIONCONDITION_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (ICU_MODE_SIGNAL_MEASUREMENT == Icu_ChObj[Channel].chCfg.measurementMode)
+            {
+                (void)Icu_reportDetError(ICU_SETACTIVATIONCONDITION_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
     if ((Activation != ICU_RISING_EDGE) && (Activation != ICU_FALLING_EDGE) && (Activation != ICU_BOTH_EDGES) &&
         (retVal == (Std_ReturnType)E_OK))
@@ -1008,17 +1013,22 @@ static FUNC(Std_ReturnType, ICU_CODE) Icu_checkGetInputStateErrors(Icu_ChannelTy
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_GETINPUTSTATE_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_SIGNAL_EDGE_DETECT != Icu_ChObj[Channel].chCfg.measurementMode) &&
-        (ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_GETINPUTSTATE_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_GETINPUTSTATE_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if ((ICU_MODE_SIGNAL_EDGE_DETECT != Icu_ChObj[Channel].chCfg.measurementMode) &&
+                (ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode))
+            {
+                (void)Icu_reportDetError(ICU_GETINPUTSTATE_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
     return retVal;
 }
@@ -1036,16 +1046,21 @@ static FUNC(Std_ReturnType, ICU_CODE)
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_STARTTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_TIMESTAMP != Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_STARTTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_STARTTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (ICU_MODE_TIMESTAMP != Icu_ChObj[Channel].chCfg.measurementMode)
+            {
+                (void)Icu_reportDetError(ICU_STARTTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
 
     if ((NULL_PTR == BufferPtr) && (retVal == (Std_ReturnType)E_OK))
@@ -1074,16 +1089,21 @@ static FUNC(Std_ReturnType, ICU_CODE) Icu_checkStopTimestampErrors(Icu_ChannelTy
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_STOPTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_TIMESTAMP != Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_STOPTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_STOPTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (ICU_MODE_TIMESTAMP != Icu_ChObj[Channel].chCfg.measurementMode)
+            {
+                (void)Icu_reportDetError(ICU_STOPTIMESTAMP_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
 
     return retVal;
@@ -1100,16 +1120,21 @@ static FUNC(Std_ReturnType, ICU_CODE) Icu_checkGetTimestampIndexErrors(Icu_Chann
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_GETTIMESTAMPINDEX_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_TIMESTAMP != Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_GETTIMESTAMPINDEX_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_GETTIMESTAMPINDEX_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (ICU_MODE_TIMESTAMP != Icu_ChObj[Channel].chCfg.measurementMode)
+            {
+                (void)Icu_reportDetError(ICU_GETTIMESTAMPINDEX_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
     return retVal;
 }
@@ -1125,16 +1150,21 @@ static FUNC(Std_ReturnType, ICU_CODE) Icu_checkStopSignalMeasurementErrors(Icu_C
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_STOPSIGNALMEASUREMENT_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_STOPSIGNALMEASUREMENT_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_STOPSIGNALMEASUREMENT_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode)
+            {
+                (void)Icu_reportDetError(ICU_STOPSIGNALMEASUREMENT_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
     return retVal;
 }
@@ -1152,16 +1182,21 @@ static FUNC(Std_ReturnType, ICU_CODE)
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_GETDUTYCYCLEVALUES_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_GETDUTYCYCLEVALUES_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_GETDUTYCYCLEVALUES_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode)
+            {
+                (void)Icu_reportDetError(ICU_GETDUTYCYCLEVALUES_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
 
     if ((NULL_PTR == DutyCycleValues) && (retVal == (Std_ReturnType)E_OK))
@@ -1183,16 +1218,21 @@ static FUNC(Std_ReturnType, ICU_CODE) Icu_checkGetTimeElapsedErrors(Icu_ChannelT
         retVal = E_NOT_OK;
     }
 
-    if ((ICU_MAX_NUM_CHANNELS <= Channel) && (retVal == (Std_ReturnType)E_OK))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Icu_reportDetError(ICU_GETTIMEELAPSED_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-
-    if ((ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode) && (retVal == (Std_ReturnType)E_OK))
-    {
-        (void)Icu_reportDetError(ICU_GETTIMEELAPSED_ID, ICU_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
+        if (ICU_MAX_NUM_CHANNELS <= Channel)
+        {
+            (void)Icu_reportDetError(ICU_GETTIMEELAPSED_ID, ICU_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (ICU_MODE_SIGNAL_MEASUREMENT != Icu_ChObj[Channel].chCfg.measurementMode)
+            {
+                (void)Icu_reportDetError(ICU_GETTIMEELAPSED_ID, ICU_E_PARAM_CHANNEL);
+                retVal = E_NOT_OK;
+            }
+        }
     }
     return retVal;
 }

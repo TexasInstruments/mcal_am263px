@@ -203,10 +203,9 @@ void Spi_mcspiConfigJob(const Spi_HwUnitObjType *hwUnitObj, Spi_JobObjType *jobO
     Spi_McspiExternalDeviceConfigType *extDevCfg       = (Spi_McspiExternalDeviceConfigType *)NULL_PTR;
     uint32                             clkModeTemp     = 0U;
     uint32                             mcspiFifoLength = 0U;
-
-    baseAddr  = hwUnitObj->baseAddr;
-    csNum     = (uint32)(jobObj->jobCfg_PC.csPin);
-    extDevCfg = &jobObj->extDevCfg->mcspi;
+    baseAddr                                           = hwUnitObj->baseAddr;
+    csNum                                              = (uint32)(jobObj->jobCfg_PC.csPin);
+    extDevCfg                                          = &jobObj->extDevCfg->mcspi;
 
     /*
      * Set Data Pin Directions
@@ -390,10 +389,9 @@ void Spi_mcspiStart(const Spi_HwUnitObjType *hwUnitObj, const Spi_JobObjType *jo
     uint32                             intrMask   = 0U;
     uint32                             csIntrMask = 0U;
     Spi_McspiExternalDeviceConfigType *extDevCfg  = (Spi_McspiExternalDeviceConfigType *)NULL_PTR;
-
-    baseAddr  = hwUnitObj->baseAddr;
-    csNum     = (uint32)(jobObj->jobCfg_PC.csPin);
-    extDevCfg = &jobObj->extDevCfg->mcspi;
+    baseAddr                                      = hwUnitObj->baseAddr;
+    csNum                                         = (uint32)(jobObj->jobCfg_PC.csPin);
+    extDevCfg                                     = &jobObj->extDevCfg->mcspi;
 
     /* Clear all previous interrupt status */
     Spi_mcspiClearAllIrqStatus(baseAddr);
@@ -608,10 +606,9 @@ void Spi_mcspiStop(const Spi_HwUnitObjType *hwUnitObj, const Spi_JobObjType *job
     uint32                             intrMask   = 0U;
     uint32                             csIntrMask = 0U;
     Spi_McspiExternalDeviceConfigType *extDevCfg  = (Spi_McspiExternalDeviceConfigType *)NULL_PTR;
-
-    baseAddr  = hwUnitObj->baseAddr;
-    extDevCfg = &jobObj->extDevCfg->mcspi;
-    csNum     = (uint32)(jobObj->jobCfg_PC.csPin);
+    baseAddr                                      = hwUnitObj->baseAddr;
+    extDevCfg                                     = &jobObj->extDevCfg->mcspi;
+    csNum                                         = (uint32)(jobObj->jobCfg_PC.csPin);
 
     /* Deassert CS */
     if (SPI_CONTINUOUS == extDevCfg->csMode)
@@ -802,6 +799,10 @@ uint32 Spi_mcspiGetCsIntrMask(uint32 csNum, Spi_TxRxMode txRxMode)
         {
             csIntrMask |= (uint32)MCSPI_IRQENABLE_RX2_FULL_ENABLE_MASK;
         }
+    }
+    else
+    {
+        /* Do Nothing */
     }
     if (ConditionCheck == 0U)
     {

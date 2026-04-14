@@ -119,22 +119,60 @@
 <li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.16.8.2. Multi-core support</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration">4.16.9. Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gptchannelconfigset">4.16.9.1. GptChannelConfigSet</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gptconfigurationofoptapiservices">4.16.9.2. GptConfigurationOfOptApiServices</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#gptdriverconfiguration">4.16.9.3. GptDriverConfiguration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#steps-to-configure-gpt-module">4.16.9.4. Steps To Configure Gpt Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">4.16.9. Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gptchannelconfigset">4.16.10. GptChannelConfigSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gptchannelconfiguration">4.16.10.1. GptChannelConfiguration</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">4.16.10. Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#overview">4.16.10.1. Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.16.10.2. Setup required to run example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.16.10.3. How to run examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sample-log">4.16.10.4. Sample Log</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.16.10.5. File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gptconfigurationofoptapiservices">4.16.11. GptConfigurationOfOptApiServices</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gptdeinitapi">4.16.11.1. GptDeinitApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptenabledisablenotificationapi">4.16.11.2. GptEnableDisableNotificationApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpttimeelapsedapi">4.16.11.3. GptTimeElapsedApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpttimeremainingapi">4.16.11.4. GptTimeRemainingApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptversioninfoapi">4.16.11.5. GptVersionInfoApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptregisterreadback">4.16.11.6. GptRegisterReadback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptwakeupfunctionalityapi">4.16.11.7. GptWakeupFunctionalityApi</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#references">4.16.11. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gptdriverconfiguration">4.16.12. GptDriverConfiguration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gptdeverrordetect">4.16.12.1. GptDevErrorDetect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptpredeftimer100us32bitenable">4.16.12.2. GptPredefTimer100us32bitEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptpredeftimer1usenablinggrade">4.16.12.3. GptPredefTimer1usEnablingGrade</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptreportwakeupsource">4.16.12.4. GptReportWakeupSource</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpttypeofinterruptfunction">4.16.12.5. GptTypeofInterruptFunction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptprescaler">4.16.12.6. GptPrescaler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule0counterblk0frequency">4.16.12.7. GptModule0CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule0counterblk1frequency">4.16.12.8. GptModule0CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule1counterblk0frequency">4.16.12.9. GptModule1CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule1counterblk1frequency">4.16.12.10. GptModule1CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule2counterblk0frequency">4.16.12.11. GptModule2CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule2counterblk1frequency">4.16.12.12. GptModule2CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule3counterblk0frequency">4.16.12.13. GptModule3CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule3counterblk1frequency">4.16.12.14. GptModule3CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule4counterblk0frequency">4.16.12.15. GptModule4CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule4counterblk1frequency">4.16.12.16. GptModule4CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule5counterblk0frequency">4.16.12.17. GptModule5CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule5counterblk1frequency">4.16.12.18. GptModule5CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule6counterblk0frequency">4.16.12.19. GptModule6CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule6counterblk1frequency">4.16.12.20. GptModule6CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule7counterblk0frequency">4.16.12.21. GptModule7CounterBlk0Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptmodule7counterblk1frequency">4.16.12.22. GptModule7CounterBlk1Frequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptdefaultoscounterid">4.16.12.23. GptDefaultOSCounterId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gpttimeoutduration">4.16.12.24. GptTimeoutDuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptoscounterref">4.16.12.25. GptOsCounterRef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gptclockreferencepoint">4.16.12.26. GptClockReferencePoint</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#steps-to-configure-gpt-module">4.16.12.27. Steps To Configure Gpt Module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">4.16.13. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">4.16.13.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.16.13.2. Setup required to run example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.16.13.3. How to run examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-log">4.16.13.4. Sample Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.16.13.5. File Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">4.16.14. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Icu.html">4.17. ICU Module</a></li>
@@ -924,14 +962,15 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </section>
 <section id="configuration">
 <h2><span class="section-number">4.16.9. </span>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+</section>
 <section id="gptchannelconfigset">
-<h3><span class="section-number">4.16.9.1. </span>GptChannelConfigSet<a class="headerlink" href="#gptchannelconfigset" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.16.10. </span>GptChannelConfigSet<a class="headerlink" href="#gptchannelconfigset" title="Link to this heading"></a></h2>
 <p>This container is the base of a Configuration Set which contains the configured GPT channels. This way, different configuration sets can be defined for post-build process.</p>
 <section id="gptchannelconfiguration">
-<h4><span class="section-number">4.16.9.1.1. </span>GptChannelConfiguration<a class="headerlink" href="#gptchannelconfiguration" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.10.1. </span>GptChannelConfiguration<a class="headerlink" href="#gptchannelconfiguration" title="Link to this heading"></a></h3>
 <p>Configuration of an individual GPT channel.</p>
 <section id="gptchannelid">
-<h5><span class="section-number">4.16.9.1.1.1. </span>GptChannelId<a class="headerlink" href="#gptchannelid" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.16.10.1.1. </span>GptChannelId<a class="headerlink" href="#gptchannelid" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -973,7 +1012,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptchannelmode">
-<h5><span class="section-number">4.16.9.1.1.2. </span>GptChannelMode<a class="headerlink" href="#gptchannelmode" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.16.10.1.2. </span>GptChannelMode<a class="headerlink" href="#gptchannelmode" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1012,7 +1051,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptcounterblkid">
-<h5><span class="section-number">4.16.9.1.1.3. </span>GptCounterBlkId<a class="headerlink" href="#gptcounterblkid" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.16.10.1.3. </span>GptCounterBlkId<a class="headerlink" href="#gptcounterblkid" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1051,7 +1090,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptenablewakeup">
-<h5><span class="section-number">4.16.9.1.1.4. </span>GptEnableWakeup<a class="headerlink" href="#gptenablewakeup" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.16.10.1.4. </span>GptEnableWakeup<a class="headerlink" href="#gptenablewakeup" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1087,7 +1126,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptnotification">
-<h5><span class="section-number">4.16.9.1.1.5. </span>GptNotification<a class="headerlink" href="#gptnotification" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.16.10.1.5. </span>GptNotification<a class="headerlink" href="#gptnotification" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1135,7 +1174,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptchannelclksrcref">
-<h5><span class="section-number">4.16.9.1.1.6. </span>GptChannelClkSrcRef<a class="headerlink" href="#gptchannelclksrcref" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.16.10.1.6. </span>GptChannelClkSrcRef<a class="headerlink" href="#gptchannelclksrcref" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1167,12 +1206,11 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </tbody>
 </table>
 </section>
-</section>
 <section id="gptwakeupconfiguration">
-<h4><span class="section-number">4.16.9.1.2. </span>GptWakeupConfiguration<a class="headerlink" href="#gptwakeupconfiguration" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.16.10.1.7. </span>GptWakeupConfiguration<a class="headerlink" href="#gptwakeupconfiguration" title="Link to this heading"></a></h4>
 <p>Function pointer to callback function (for wakeup notification).</p>
 <section id="gptwakeupsourceref">
-<h5><span class="section-number">4.16.9.1.2.1. </span>GptWakeupSourceRef<a class="headerlink" href="#gptwakeupsourceref" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.16.10.1.7.1. </span>GptWakeupSourceRef<a class="headerlink" href="#gptwakeupsourceref" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1206,11 +1244,12 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </section>
 </section>
 </section>
+</section>
 <section id="gptconfigurationofoptapiservices">
-<h3><span class="section-number">4.16.9.2. </span>GptConfigurationOfOptApiServices<a class="headerlink" href="#gptconfigurationofoptapiservices" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.16.11. </span>GptConfigurationOfOptApiServices<a class="headerlink" href="#gptconfigurationofoptapiservices" title="Link to this heading"></a></h2>
 <p>This container contains all configuration switches for configuring optional API services of the GPT driver.</p>
 <section id="gptdeinitapi">
-<h4><span class="section-number">4.16.9.2.1. </span>GptDeinitApi<a class="headerlink" href="#gptdeinitapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.11.1. </span>GptDeinitApi<a class="headerlink" href="#gptdeinitapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1246,7 +1285,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptenabledisablenotificationapi">
-<h4><span class="section-number">4.16.9.2.2. </span>GptEnableDisableNotificationApi<a class="headerlink" href="#gptenabledisablenotificationapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.11.2. </span>GptEnableDisableNotificationApi<a class="headerlink" href="#gptenabledisablenotificationapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1282,7 +1321,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gpttimeelapsedapi">
-<h4><span class="section-number">4.16.9.2.3. </span>GptTimeElapsedApi<a class="headerlink" href="#gpttimeelapsedapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.11.3. </span>GptTimeElapsedApi<a class="headerlink" href="#gpttimeelapsedapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1318,7 +1357,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gpttimeremainingapi">
-<h4><span class="section-number">4.16.9.2.4. </span>GptTimeRemainingApi<a class="headerlink" href="#gpttimeremainingapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.11.4. </span>GptTimeRemainingApi<a class="headerlink" href="#gpttimeremainingapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1354,7 +1393,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptversioninfoapi">
-<h4><span class="section-number">4.16.9.2.5. </span>GptVersionInfoApi<a class="headerlink" href="#gptversioninfoapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.11.5. </span>GptVersionInfoApi<a class="headerlink" href="#gptversioninfoapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1390,7 +1429,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptregisterreadback">
-<h4><span class="section-number">4.16.9.2.6. </span>GptRegisterReadback<a class="headerlink" href="#gptregisterreadback" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.11.6. </span>GptRegisterReadback<a class="headerlink" href="#gptregisterreadback" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1426,7 +1465,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptwakeupfunctionalityapi">
-<h4><span class="section-number">4.16.9.2.7. </span>GptWakeupFunctionalityApi<a class="headerlink" href="#gptwakeupfunctionalityapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.11.7. </span>GptWakeupFunctionalityApi<a class="headerlink" href="#gptwakeupfunctionalityapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1463,10 +1502,10 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </section>
 </section>
 <section id="gptdriverconfiguration">
-<h3><span class="section-number">4.16.9.3. </span>GptDriverConfiguration<a class="headerlink" href="#gptdriverconfiguration" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.16.12. </span>GptDriverConfiguration<a class="headerlink" href="#gptdriverconfiguration" title="Link to this heading"></a></h2>
 <p>This container contains the module-wide configuration (parameters) of the GPT Driver</p>
 <section id="gptdeverrordetect">
-<h4><span class="section-number">4.16.9.3.1. </span>GptDevErrorDetect<a class="headerlink" href="#gptdeverrordetect" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.1. </span>GptDevErrorDetect<a class="headerlink" href="#gptdeverrordetect" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1502,7 +1541,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptpredeftimer100us32bitenable">
-<h4><span class="section-number">4.16.9.3.2. </span>GptPredefTimer100us32bitEnable<a class="headerlink" href="#gptpredeftimer100us32bitenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.2. </span>GptPredefTimer100us32bitEnable<a class="headerlink" href="#gptpredeftimer100us32bitenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1538,7 +1577,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptpredeftimer1usenablinggrade">
-<h4><span class="section-number">4.16.9.3.3. </span>GptPredefTimer1usEnablingGrade<a class="headerlink" href="#gptpredeftimer1usenablinggrade" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.3. </span>GptPredefTimer1usEnablingGrade<a class="headerlink" href="#gptpredeftimer1usenablinggrade" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1577,7 +1616,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptreportwakeupsource">
-<h4><span class="section-number">4.16.9.3.4. </span>GptReportWakeupSource<a class="headerlink" href="#gptreportwakeupsource" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.4. </span>GptReportWakeupSource<a class="headerlink" href="#gptreportwakeupsource" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1613,7 +1652,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gpttypeofinterruptfunction">
-<h4><span class="section-number">4.16.9.3.5. </span>GptTypeofInterruptFunction<a class="headerlink" href="#gpttypeofinterruptfunction" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.5. </span>GptTypeofInterruptFunction<a class="headerlink" href="#gpttypeofinterruptfunction" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1652,7 +1691,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptprescaler">
-<h4><span class="section-number">4.16.9.3.6. </span>GptPrescaler<a class="headerlink" href="#gptprescaler" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.6. </span>GptPrescaler<a class="headerlink" href="#gptprescaler" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1694,7 +1733,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule0counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.7. </span>GptModule0CounterBlk0Frequency<a class="headerlink" href="#gptmodule0counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.7. </span>GptModule0CounterBlk0Frequency<a class="headerlink" href="#gptmodule0counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1736,7 +1775,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule0counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.8. </span>GptModule0CounterBlk1Frequency<a class="headerlink" href="#gptmodule0counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.8. </span>GptModule0CounterBlk1Frequency<a class="headerlink" href="#gptmodule0counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1778,7 +1817,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule1counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.9. </span>GptModule1CounterBlk0Frequency<a class="headerlink" href="#gptmodule1counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.9. </span>GptModule1CounterBlk0Frequency<a class="headerlink" href="#gptmodule1counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1820,7 +1859,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule1counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.10. </span>GptModule1CounterBlk1Frequency<a class="headerlink" href="#gptmodule1counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.10. </span>GptModule1CounterBlk1Frequency<a class="headerlink" href="#gptmodule1counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1862,7 +1901,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule2counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.11. </span>GptModule2CounterBlk0Frequency<a class="headerlink" href="#gptmodule2counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.11. </span>GptModule2CounterBlk0Frequency<a class="headerlink" href="#gptmodule2counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1904,7 +1943,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule2counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.12. </span>GptModule2CounterBlk1Frequency<a class="headerlink" href="#gptmodule2counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.12. </span>GptModule2CounterBlk1Frequency<a class="headerlink" href="#gptmodule2counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1946,7 +1985,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule3counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.13. </span>GptModule3CounterBlk0Frequency<a class="headerlink" href="#gptmodule3counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.13. </span>GptModule3CounterBlk0Frequency<a class="headerlink" href="#gptmodule3counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1988,7 +2027,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule3counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.14. </span>GptModule3CounterBlk1Frequency<a class="headerlink" href="#gptmodule3counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.14. </span>GptModule3CounterBlk1Frequency<a class="headerlink" href="#gptmodule3counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2030,7 +2069,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule4counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.15. </span>GptModule4CounterBlk0Frequency<a class="headerlink" href="#gptmodule4counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.15. </span>GptModule4CounterBlk0Frequency<a class="headerlink" href="#gptmodule4counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2072,7 +2111,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule4counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.16. </span>GptModule4CounterBlk1Frequency<a class="headerlink" href="#gptmodule4counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.16. </span>GptModule4CounterBlk1Frequency<a class="headerlink" href="#gptmodule4counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2114,7 +2153,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule5counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.17. </span>GptModule5CounterBlk0Frequency<a class="headerlink" href="#gptmodule5counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.17. </span>GptModule5CounterBlk0Frequency<a class="headerlink" href="#gptmodule5counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2156,7 +2195,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule5counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.18. </span>GptModule5CounterBlk1Frequency<a class="headerlink" href="#gptmodule5counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.18. </span>GptModule5CounterBlk1Frequency<a class="headerlink" href="#gptmodule5counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2198,7 +2237,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule6counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.19. </span>GptModule6CounterBlk0Frequency<a class="headerlink" href="#gptmodule6counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.19. </span>GptModule6CounterBlk0Frequency<a class="headerlink" href="#gptmodule6counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2240,7 +2279,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule6counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.20. </span>GptModule6CounterBlk1Frequency<a class="headerlink" href="#gptmodule6counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.20. </span>GptModule6CounterBlk1Frequency<a class="headerlink" href="#gptmodule6counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2282,7 +2321,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule7counterblk0frequency">
-<h4><span class="section-number">4.16.9.3.21. </span>GptModule7CounterBlk0Frequency<a class="headerlink" href="#gptmodule7counterblk0frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.21. </span>GptModule7CounterBlk0Frequency<a class="headerlink" href="#gptmodule7counterblk0frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2324,7 +2363,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptmodule7counterblk1frequency">
-<h4><span class="section-number">4.16.9.3.22. </span>GptModule7CounterBlk1Frequency<a class="headerlink" href="#gptmodule7counterblk1frequency" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.22. </span>GptModule7CounterBlk1Frequency<a class="headerlink" href="#gptmodule7counterblk1frequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2366,7 +2405,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptdefaultoscounterid">
-<h4><span class="section-number">4.16.9.3.23. </span>GptDefaultOSCounterId<a class="headerlink" href="#gptdefaultoscounterid" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.23. </span>GptDefaultOSCounterId<a class="headerlink" href="#gptdefaultoscounterid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2420,7 +2459,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gpttimeoutduration">
-<h4><span class="section-number">4.16.9.3.24. </span>GptTimeoutDuration<a class="headerlink" href="#gpttimeoutduration" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.24. </span>GptTimeoutDuration<a class="headerlink" href="#gpttimeoutduration" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2462,7 +2501,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptoscounterref">
-<h4><span class="section-number">4.16.9.3.25. </span>GptOsCounterRef<a class="headerlink" href="#gptoscounterref" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.25. </span>GptOsCounterRef<a class="headerlink" href="#gptoscounterref" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2507,10 +2546,10 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 <section id="gptclockreferencepoint">
-<h4><span class="section-number">4.16.9.3.26. </span>GptClockReferencePoint<a class="headerlink" href="#gptclockreferencepoint" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.16.12.26. </span>GptClockReferencePoint<a class="headerlink" href="#gptclockreferencepoint" title="Link to this heading"></a></h3>
 <p>This container contains a parameter, which represents a reference to a container of the type McuClockReferencePoint (defined in module MCU).</p>
 <section id="gptclockreference">
-<h5><span class="section-number">4.16.9.3.26.1. </span>GptClockReference<a class="headerlink" href="#gptclockreference" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.16.12.26.1. </span>GptClockReference<a class="headerlink" href="#gptclockreference" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2543,9 +2582,8 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </table>
 </section>
 </section>
-</section>
 <section id="steps-to-configure-gpt-module">
-<h3><span class="section-number">4.16.9.4. </span>Steps To Configure Gpt Module<a class="headerlink" href="#steps-to-configure-gpt-module" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.16.12.27. </span>Steps To Configure Gpt Module<a class="headerlink" href="#steps-to-configure-gpt-module" title="Link to this heading"></a></h3>
 <ol class="arabic simple">
 <li><p>Open EB Tresos configurator tool, load Gpt. Select the Config Variant ( Precompile/Post-Build)</p></li>
 <li><p>Go to GptChannelConfiguration Container tab and create a new container.</p></li>
@@ -2555,10 +2593,10 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">4.16.10. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.16.13. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>The example applications demonstrates use of Gpt module, the list below identifies key steps performed in the example.</p>
 <section id="overview">
-<h3><span class="section-number">4.16.10.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.16.13.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Gpt Example:</p>
 <ul>
@@ -2575,7 +2613,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </li>
 </ul>
 <section id="flow-of-the-example-application">
-<h4><span class="section-number">4.16.10.1.1. </span>Flow of the example application<a class="headerlink" href="#flow-of-the-example-application" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.16.13.1.1. </span>Flow of the example application<a class="headerlink" href="#flow-of-the-example-application" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>After initialization of timer followed by starting of timer, a channel waits until the interrupt is received.    Interrupt indicates that 2sec is completed for respective channel.</p></li>
 <li><p>After receiving interrupt notification, it stops the current channel and starts next channel to execute the same process.</p></li>
@@ -2584,13 +2622,13 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </section>
 </section>
 <section id="setup-required-to-run-example">
-<h3><span class="section-number">4.16.10.2. </span>Setup required to run example<a class="headerlink" href="#setup-required-to-run-example" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.16.13.2. </span>Setup required to run example<a class="headerlink" href="#setup-required-to-run-example" title="Link to this heading"></a></h3>
 <p>None</p>
 </section>
 <section id="how-to-run-examples">
-<h3><span class="section-number">4.16.10.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.16.13.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
 <section id="steps-to-build-and-run-example">
-<h4><span class="section-number">4.16.10.3.1. </span>Steps to build and run example<a class="headerlink" href="#steps-to-build-and-run-example" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.16.13.3.1. </span>Steps to build and run example<a class="headerlink" href="#steps-to-build-and-run-example" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>GPT example application demonstrates the MCAL GPT driver features, which is referred from folder &lt;MCAL_ROOT&gt;/examples/Gpt.</p></li>
 <li><p>This application can be built from the build folder by giving “gmake –s gpt_app PLATFORM=am263px”.</p></li>
@@ -2598,7 +2636,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </ol>
 </section>
 <section id="configuration-used-to-test-this-example">
-<h4><span class="section-number">4.16.10.3.2. </span>Configuration used to test this example<a class="headerlink" href="#configuration-used-to-test-this-example" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.16.13.3.2. </span>Configuration used to test this example<a class="headerlink" href="#configuration-used-to-test-this-example" title="Link to this heading"></a></h4>
 <ol class="arabic simple">
 <li><p>In Example program,total 32 channels are configured in AM263px.</p></li>
 <li><p>Channels 5, 6, 9, 12, 13, 16, 17, 20, 21, 24, 25, 28, 29, 32 are configured in Continuous mode in AM263px</p></li>
@@ -2632,7 +2670,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </section>
 </section>
 <section id="sample-log">
-<h3><span class="section-number">4.16.10.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.16.13.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
 <p><strong>AM263Px</strong></p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="nl">GPT_APP</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
 <span class="w">     </span>
@@ -3134,7 +3172,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </div>
 </section>
 <section id="file-structure">
-<h3><span class="section-number">4.16.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.16.13.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
 <p>📦AM263Px<br />
 ┣ 📂build<br />
 ┣ 📂mcal<br />
@@ -3160,7 +3198,7 @@ Example: Gpt_Channel_Notify5 for channel 5</p>
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">4.16.11. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.16.14. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_GPTDriver.pdf">Autosar SWS 4.3.1</a><br />
 <a class="reference external" href="https://www.ti.com/product/AM263P4#tech-docs">Technical Reference Manual</a></p>
 </section>

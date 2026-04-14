@@ -256,10 +256,10 @@ Not supported
 
 
 
-#### CddDmaDriverHandler
+###### CddDmaDriverHandler
 This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module.
 
-##### CddDmaTransferType
+###### CddDmaTransferType
 
 | Item ||
 |--------|---------------|
@@ -272,7 +272,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Default-value** | CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER |
 | **Range** | CDD_DMA_TRANSFER_TYPE_UART_TX<br>CDD_DMA_TRANSFER_TYPE_UART_RX<br>CDD_DMA_TRANSFER_TYPE_ADC<br>CDD_DMA_TRANSFER_TYPE_MCSPI<br>CDD_DMA_TRANSFER_TYPE_MEMORY_TRANSFER<br>CDD_DMA_TRANSFER_TYPE_FLS |
 
-##### CddDmaInstance
+###### CddDmaInstance
 
 | Item ||
 |--------|---------------|
@@ -285,7 +285,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Default-value** | CDD_DMA_MSS_A |
 | **Range** | CDD_DMA_MSS_A |
 
-##### CddDmaRegionID
+###### CddDmaRegionID
 
 | Item ||
 |--------|---------------|
@@ -299,7 +299,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 7 |
 | **Min-value** | 0 |
 
-##### CddDmaTccNumber
+###### CddDmaTccNumber
 
 | Item ||
 |--------|---------------|
@@ -313,7 +313,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 63 |
 | **Min-value** | 0 |
 
-##### CddDmaQueueNumber
+###### CddDmaQueueNumber
 
 | Item ||
 |--------|---------------|
@@ -327,7 +327,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 1 |
 | **Min-value** | 0 |
 
-##### CddDmaEnableInterrupt
+###### CddDmaEnableInterrupt
 
 | Item ||
 |--------|---------------|
@@ -339,7 +339,7 @@ This container contains the configuration parameters and sub containers of the A
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddDmaTransferModeSelect
+###### CddDmaTransferModeSelect
 
 | Item ||
 |--------|---------------|
@@ -352,7 +352,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Default-value** | CDD_DMA_TRANSFER_MODE_NORMAL |
 | **Range** | CDD_DMA_TRANSFER_MODE_NORMAL<br>CDD_DMA_TRANSFER_MODE_LINKING<br>CDD_DMA_TRANSFER_MODE_CHAINING |
 
-##### CddDmaChannelGroup
+###### CddDmaChannelGroup
 This container contains the DMA Channel Group.
 
 ###### CddDmaChannel
@@ -369,7 +369,7 @@ This container contains the DMA Channel Group.
 | **Max-value** | 63 |
 | **Min-value** | 0 |
 
-##### CddDmaParamSets
+###### CddDmaParamSets
 This container contains the DMA params.
 
 ###### CddDmaPramNumber
@@ -386,7 +386,7 @@ This container contains the DMA params.
 | **Max-value** | 255 |
 | **Min-value** | 0 |
 
-##### CddDmaChannelTriggerConfiguration
+###### CddDmaChannelTriggerConfiguration
 This container contains the DMA Channel Trigger reasource.
 
 ###### CddDmaDmaChannelModule
@@ -441,10 +441,10 @@ This container contains the DMA Channel Trigger reasource.
 | **Default-value** | CDD_DMA_XBAR_ADC0_INT1 |
 | **Range** | CDD_DMA_XBAR_EPWM0_SOCA<br>CDD_DMA_XBAR_EPWM1_SOCA<br>CDD_DMA_XBAR_EPWM2_SOCA<br>CDD_DMA_XBAR_EPWM3_SOCA<br>CDD_DMA_XBAR_EPWM4_SOCA<br>CDD_DMA_XBAR_EPWM5_SOCA<br>CDD_DMA_XBAR_EPWM6_SOCA<br>CDD_DMA_XBAR_EPWM7_SOCA<br>CDD_DMA_XBAR_EPWM8_SOCA<br>CDD_DMA_XBAR_EPWM9_SOCA<br>CDD_DMA_XBAR_EPWM10_SOCA<br>CDD_DMA_XBAR_EPWM11_SOCA<br>CDD_DMA_XBAR_EPWM12_SOCA<br>CDD_DMA_XBAR_EPWM13_SOCA<br>CDD_DMA_XBAR_EPWM14_SOCA<br>CDD_DMA_XBAR_EPWM15_SOCA<br>CDD_DMA_XBAR_EPWM16_SOCA<br>CDD_DMA_XBAR_EPWM17_SOCA<br>CDD_DMA_XBAR_EPWM18_SOCA<br>CDD_DMA_XBAR_EPWM19_SOCA<br>CDD_DMA_XBAR_EPWM20_SOCA<br>CDD_DMA_XBAR_EPWM21_SOCA<br>CDD_DMA_XBAR_EPWM22_SOCA<br>CDD_DMA_XBAR_EPWM23_SOCA<br>CDD_DMA_XBAR_EPWM24_SOCA<br>CDD_DMA_XBAR_EPWM25_SOCA<br>CDD_DMA_XBAR_EPWM26_SOCA<br>CDD_DMA_XBAR_EPWM27_SOCA<br>CDD_DMA_XBAR_EPWM28_SOCA<br>CDD_DMA_XBAR_EPWM29_SOCA<br>CDD_DMA_XBAR_EPWM30_SOCA<br>CDD_DMA_XBAR_EPWM31_SOCA<br>CDD_DMA_XBAR_EPWM0_SOCB<br>CDD_DMA_XBAR_EPWM1_SOCB<br>CDD_DMA_XBAR_EPWM2_SOCB<br>CDD_DMA_XBAR_EPWM3_SOCB<br>CDD_DMA_XBAR_EPWM4_SOCB<br>CDD_DMA_XBAR_EPWM5_SOCB<br>CDD_DMA_XBAR_EPWM6_SOCB<br>CDD_DMA_XBAR_EPWM7_SOCB<br>CDD_DMA_XBAR_EPWM8_SOCB<br>CDD_DMA_XBAR_EPWM9_SOCB<br>CDD_DMA_XBAR_EPWM10_SOCB<br>CDD_DMA_XBAR_EPWM11_SOCB<br>CDD_DMA_XBAR_EPWM12_SOCB<br>CDD_DMA_XBAR_EPWM13_SOCB<br>CDD_DMA_XBAR_EPWM14_SOCB<br>CDD_DMA_XBAR_EPWM15_SOCB<br>CDD_DMA_XBAR_EPWM16_SOCB<br>CDD_DMA_XBAR_EPWM17_SOCB<br>CDD_DMA_XBAR_EPWM18_SOCB<br>CDD_DMA_XBAR_EPWM19_SOCB<br>CDD_DMA_XBAR_EPWM20_SOCB<br>CDD_DMA_XBAR_EPWM21_SOCB<br>CDD_DMA_XBAR_EPWM22_SOCB<br>CDD_DMA_XBAR_EPWM23_SOCB<br>CDD_DMA_XBAR_EPWM24_SOCB<br>CDD_DMA_XBAR_EPWM25_SOCB<br>CDD_DMA_XBAR_EPWM26_SOCB<br>CDD_DMA_XBAR_EPWM27_SOCB<br>CDD_DMA_XBAR_EPWM28_SOCB<br>CDD_DMA_XBAR_EPWM29_SOCB<br>CDD_DMA_XBAR_EPWM30_SOCB<br>CDD_DMA_XBAR_EPWM31_SOCB<br>CDD_DMA_XBAR_ADC0_INT1<br>CDD_DMA_XBAR_ADC0_INT2<br>CDD_DMA_XBAR_ADC0_INT3<br>CDD_DMA_XBAR_ADC0_INT4<br>CDD_DMA_XBAR_ADC0_EVTINT<br>CDD_DMA_XBAR_ADC1_INT1<br>CDD_DMA_XBAR_ADC1_INT2<br>CDD_DMA_XBAR_ADC1_INT3<br>CDD_DMA_XBAR_ADC1_INT4<br>CDD_DMA_XBAR_ADC1_EVTINT<br>CDD_DMA_XBAR_ADC2_INT1<br>CDD_DMA_XBAR_ADC2_INT2<br>CDD_DMA_XBAR_ADC2_INT3<br>CDD_DMA_XBAR_ADC2_INT4<br>CDD_DMA_XBAR_ADC2_EVTINT<br>CDD_DMA_XBAR_ADC3_INT1<br>CDD_DMA_XBAR_ADC3_INT2<br>CDD_DMA_XBAR_ADC3_INT3<br>CDD_DMA_XBAR_ADC3_INT4<br>CDD_DMA_XBAR_ADC3_EVTINT<br>CDD_DMA_XBAR_ADC4_INT1<br>CDD_DMA_XBAR_ADC4_INT2<br>CDD_DMA_XBAR_ADC4_INT3<br>CDD_DMA_XBAR_ADC4_INT4<br>CDD_DMA_XBAR_ADC4_EVTINT<br>CDD_DMA_XBAR_FSI0_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI0_DMA_TRIG1<br>CDD_DMA_XBAR_FSI0_DMA_TRIG2<br>CDD_DMA_XBAR_FSI1_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI1_DMA_TRIG1<br>CDD_DMA_XBAR_FSI1_DMA_TRIG2<br>CDD_DMA_XBAR_FSI2_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI2_DMA_TRIG1<br>CDD_DMA_XBAR_FSI2_DMA_TRIG2<br>CDD_DMA_XBAR_FSI3_RX_DMA_EVT<br>CDD_DMA_XBAR_FSI3_DMA_TRIG1<br>CDD_DMA_XBAR_FSI3_DMA_TRIG2<br>CDD_DMA_XBAR_FSI0_TX_DMA_EVT<br>CDD_DMA_XBAR_FSI1_TX_DMA_EVT<br>CDD_DMA_XBAR_FSI2_TX_DMA_EVT<br>CDD_DMA_XBAR_FSI3_TX_DMA_EVT<br>CDD_DMA_XBAR_SD0_FILT0_DRINT<br>CDD_DMA_XBAR_SD0_FILT1_DRINT<br>CDD_DMA_XBAR_SD0_FILT2_DRINT<br>CDD_DMA_XBAR_SD0_FILT3_DRINT<br>CDD_DMA_XBAR_SD1_FILT0_DRINT<br>CDD_DMA_XBAR_SD1_FILT1_DRINT<br>CDD_DMA_XBAR_SD1_FILT2_DRINT<br>CDD_DMA_XBAR_SD1_FILT3_DRINT<br>CDD_DMA_XBAR_ECAP0_DMA_INT<br>CDD_DMA_XBAR_ECAP1_DMA_INT<br>CDD_DMA_XBAR_ECAP2_DMA_INT<br>CDD_DMA_XBAR_ECAP3_DMA_INT<br>CDD_DMA_XBAR_ECAP4_DMA_INT<br>CDD_DMA_XBAR_ECAP5_DMA_INT<br>CDD_DMA_XBAR_ECAP6_DMA_INT<br>CDD_DMA_XBAR_ECAP7_DMA_INT<br>CDD_DMA_XBAR_ECAP8_DMA_INT<br>CDD_DMA_XBAR_ECAP9_DMA_INT<br>CDD_DMA_XBAR_ADCR0_INT1<br>CDD_DMA_XBAR_ADCR0_INT2<br>CDD_DMA_XBAR_ADCR0_INT3<br>CDD_DMA_XBAR_ADCR0_INT4<br>CDD_DMA_XBAR_ADCR0_EVTINT<br>CDD_DMA_XBAR_ADCR1_INT1<br>CDD_DMA_XBAR_ADCR1_INT2<br>CDD_DMA_XBAR_ADCR1_INT3<br>CDD_DMA_XBAR_ADCR1_INT4<br>CDD_DMA_XBAR_ADCR1_EVTINT |
 
-#### CddDmaGeneral
+###### CddDmaGeneral
 General configuration settings for the Complex Device Driver
 
-##### CddDmaVersionInfoApi
+###### CddDmaVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -456,7 +456,7 @@ General configuration settings for the Complex Device Driver
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddDmaDeinitApi
+###### CddDmaDeinitApi
 
 | Item ||
 |--------|---------------|
@@ -468,7 +468,7 @@ General configuration settings for the Complex Device Driver
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddDmaDevErrorDetect
+###### CddDmaDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -480,7 +480,7 @@ General configuration settings for the Complex Device Driver
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CddDmaRegisterReadBackApi
+###### CddDmaRegisterReadBackApi
 
 | Item ||
 |--------|---------------|
@@ -491,6 +491,19 @@ General configuration settings for the Complex Device Driver
 | **Value-Configuration-Class** | -- |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
+
+###### CddDmaIrqType
+
+| Item ||
+|--------|---------------|
+| **Name** | CddDmaIrqType |
+| **Description** | This parameter specifies the category of Interrupt ReQuest for callbacks. |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | CDD_DMA_ISR_VOID |
+| **Range** | CDD_DMA_ISR_VOID<br>CDD_DMA_ISR_CAT1<br>CDD_DMA_ISR_CAT2 |
 ### Examples
 
 #### Overview

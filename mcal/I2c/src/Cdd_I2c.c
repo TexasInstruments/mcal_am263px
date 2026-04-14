@@ -235,14 +235,18 @@ Cdd_I2c_SetupEB(Cdd_I2c_ChannelType chId, Cdd_I2c_DataConstPtrType txDataBufferP
         (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_SETUP_EB, CDD_I2C_E_UNINIT);
         retVal = E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) && (chId >= CDD_I2C_MAX_CH))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_SETUP_EB, CDD_I2C_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
-    if (E_OK == retVal)
-    {
-        retVal = Cdd_I2c_SetupEBParamCheck(CDD_I2C_SID_SETUP_EB, chId, txDataBufferPtr, rxDataBufferPtr, length);
+        if (chId >= CDD_I2C_MAX_CH)
+        {
+            (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_SETUP_EB,
+                                  CDD_I2C_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            retVal = Cdd_I2c_SetupEBParamCheck(CDD_I2C_SID_SETUP_EB, chId, txDataBufferPtr, rxDataBufferPtr, length);
+        }
     }
     if (E_OK == retVal)
 #endif
@@ -278,22 +282,25 @@ Cdd_I2c_SetupEBDynamic(Cdd_I2c_ChannelType chId, Cdd_I2c_AddressType deviceAddre
         (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_SETUP_EB_DYNAMIC, CDD_I2C_E_UNINIT);
         retVal = E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) && (chId >= CDD_I2C_MAX_CH))
-    {
-        (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_SETUP_EB_DYNAMIC,
-                              CDD_I2C_E_PARAM_CHANNEL);
-        retVal = E_NOT_OK;
-    }
     if ((retVal == (Std_ReturnType)E_OK) && (deviceAddress > CDD_I2C_ADDRESS_10_BIT_MAX))
     {
         (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_SETUP_EB_DYNAMIC,
                               CDD_I2C_E_PARAM_ADDRESS);
         retVal = E_NOT_OK;
     }
-    if (E_OK == retVal)
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        retVal =
-            Cdd_I2c_SetupEBParamCheck(CDD_I2C_SID_SETUP_EB_DYNAMIC, chId, txDataBufferPtr, rxDataBufferPtr, length);
+        if (chId >= CDD_I2C_MAX_CH)
+        {
+            (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_SETUP_EB_DYNAMIC,
+                                  CDD_I2C_E_PARAM_CHANNEL);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            retVal =
+                Cdd_I2c_SetupEBParamCheck(CDD_I2C_SID_SETUP_EB_DYNAMIC, chId, txDataBufferPtr, rxDataBufferPtr, length);
+        }
     }
     if (E_OK == retVal)
 #endif
@@ -575,26 +582,45 @@ Cdd_I2c_RegisterReadback(uint8 hwUnitId, Cdd_I2c_RegisterReadbackType *regRbPtr)
         (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_REGISTERREADBACK, CDD_I2C_E_UNINIT);
         retVal = E_NOT_OK;
     }
-    if ((retVal == (Std_ReturnType)E_OK) && (hwUnitId >= CDD_I2C_HW_UNIT_MAX))
+    if (retVal == (Std_ReturnType)E_OK)
     {
-        (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_REGISTERREADBACK,
-                              CDD_I2C_E_PARAM_HWUNIT);
-        retVal = E_NOT_OK;
+        if (hwUnitId >= CDD_I2C_HW_UNIT_MAX)
+        {
+            (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_REGISTERREADBACK,
+                                  CDD_I2C_E_PARAM_HWUNIT);
+            retVal = E_NOT_OK;
+        }
+        else
+        {
+            if (NULL_PTR == regRbPtr)
+            {
+                (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_REGISTERREADBACK,
+                                      CDD_I2C_E_PARAM_POINTER);
+                retVal = E_NOT_OK;
+            }
+            else
+            {
+                uint32 baseAddr;
+
+                baseAddr = Cdd_I2c_GetHwUnitBaseAddr(hwUnitId);
+                Cdd_I2c_HwRegReadback(baseAddr, regRbPtr);
+            }
+        }
     }
-    if ((retVal == (Std_ReturnType)E_OK) && (NULL_PTR == regRbPtr))
-    {
-        (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_REGISTERREADBACK,
-                              CDD_I2C_E_PARAM_POINTER);
-        retVal = E_NOT_OK;
-    }
-    if (E_OK == retVal)
-#endif
+#else
+    /* DET_OFF: runtime bound check before using hwUnitId as index */
+    if (hwUnitId < CDD_I2C_HW_UNIT_MAX)
     {
         uint32 baseAddr;
 
         baseAddr = Cdd_I2c_GetHwUnitBaseAddr(hwUnitId);
         Cdd_I2c_HwRegReadback(baseAddr, regRbPtr);
     }
+    else
+    {
+        retVal = E_NOT_OK;
+    }
+#endif
 
     return retVal;
 }

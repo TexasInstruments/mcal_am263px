@@ -174,7 +174,7 @@ void Spi_hwUnitInit(Spi_HwUnitObjType *hwUnitObj)
         if (Spi_dmaChInit(&Spi_DrvObj, hwUnitObj, txrxMode) == MCAL_SystemP_SUCCESS)
         {
             /* Check if DMA Enabled HwUnit reaches bounds and increment */
-            if ((Spi_DrvObj.dmaEnableHwIndx + 1) == SPI_MAX_HW_DMA_UNIT)
+            if ((Spi_DrvObj.dmaEnableHwIndx + 1U) == SPI_MAX_HW_DMA_UNIT)
             {
 #if (STD_ON == SPI_DEV_ERROR_DETECT)
                 Spi_reportDetError(SPI_SID_INIT, SPI_E_PARAM_CHANNEL);
@@ -571,7 +571,7 @@ void Spi_copyConfig(Spi_DriverObjType *drvObj, const Spi_ConfigType *cfgPtr)
     drvObj->maxSeq             = cfgPtr->maxSeq;
     drvObj->maxHwUnit          = cfgPtr->maxHwUnit;
     drvObj->maxExtDevCfg       = cfgPtr->maxExtDevCfg;
-    for (index = 0U; index < cfgPtr->maxExtDevCfg; index++)
+    for (index = 0U; (index < (uint32)SPI_MAX_EXT_DEV) && (index < cfgPtr->maxExtDevCfg); index++)
     {
         (void)memcpy(&drvObj->extDevCfg[index], &cfgPtr->extDevCfg[index], sizeof(Spi_ExternalDeviceConfigType));
     }

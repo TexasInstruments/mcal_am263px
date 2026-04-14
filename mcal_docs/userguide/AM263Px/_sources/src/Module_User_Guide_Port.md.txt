@@ -366,10 +366,10 @@ Not Supported
 
 
 
-#### PortConfigSet
+### PortConfigSet
 This container contains the multiple configuration set and sub containers of the AUTOSAR Port module
 
-##### PortContainer
+#### PortContainer
 Container collecting the PortPins.
 
 ###### PortNumberOfPortPins
@@ -694,7 +694,7 @@ Configuration of the individual port pins.
 | **Max-value** | 3 |
 | **Min-value** | 0 |
 
-##### PortDioConfig
+#### PortDioConfig
 Structure for GPIO Interrupt configuration
 
 ###### PortDioPinNumber
@@ -765,10 +765,10 @@ Structure for GPIO Interrupt configuration
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### PortGeneral
+### PortGeneral
 Module wide configuration parameters of the PORT driver.
 
-##### PortDevErrorDetect
+###### PortDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -781,7 +781,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortDeviceVariant
+###### PortDeviceVariant
 
 | Item ||
 |--------|---------------|
@@ -795,7 +795,7 @@ Module wide configuration parameters of the PORT driver.
 | **Default-value** | AM263Px |
 | **Range** | AM263Px |
 
-##### PortSetPinDirectionApi
+###### PortSetPinDirectionApi
 
 | Item ||
 |--------|---------------|
@@ -808,7 +808,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortSetPinModeApi
+###### PortSetPinModeApi
 
 | Item ||
 |--------|---------------|
@@ -821,7 +821,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortVersionInfoApi
+###### PortVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -834,7 +834,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortRefreshPortDirectionApi
+###### PortRefreshPortDirectionApi
 
 | Item ||
 |--------|---------------|
@@ -846,7 +846,7 @@ Module wide configuration parameters of the PORT driver.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### PortDefaultOSCounterId
+###### PortDefaultOSCounterId
 
 | Item ||
 |--------|---------------|
@@ -865,7 +865,7 @@ Module wide configuration parameters of the PORT driver.
 | **Max-value** | 16 |
 | **Min-value** | 0 |
 
-##### PortSafeTIApi
+###### PortSafeTIApi
 
 | Item ||
 |--------|---------------|
@@ -878,7 +878,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortEnableIntrApi
+###### PortEnableIntrApi
 
 | Item ||
 |--------|---------------|
@@ -891,7 +891,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortGetIntrStatusApi
+###### PortGetIntrStatusApi
 
 | Item ||
 |--------|---------------|
@@ -904,7 +904,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortClearIntrStatusApi
+###### PortClearIntrStatusApi
 
 | Item ||
 |--------|---------------|
@@ -917,7 +917,7 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PortTimeoutDuration
+###### PortTimeoutDuration
 
 | Item ||
 |--------|---------------|
@@ -932,7 +932,7 @@ Module wide configuration parameters of the PORT driver.
 | **Max-value** | 4294967295 |
 | **Min-value** | 1 |
 
-##### PortTypeofInterruptFunction
+###### PortTypeofInterruptFunction
 
 | Item ||
 |--------|---------------|
@@ -946,7 +946,7 @@ Module wide configuration parameters of the PORT driver.
 | **Default-value** | PORT_ISR_CAT1 |
 | **Range** | PORT_ISR_VOID<br>PORT_ISR_CAT1<br>PORT_ISR_CAT2 |
 
-##### PortGpioHostCoreId
+###### PortGpioHostCoreId
 
 | Item ||
 |--------|---------------|
@@ -961,7 +961,7 @@ Module wide configuration parameters of the PORT driver.
 | **Max-value** | 3 |
 | **Min-value** | 0 |
 
-##### PortOsCounterRef
+###### PortOsCounterRef
 
 | Item ||
 |--------|---------------|
@@ -972,6 +972,22 @@ Module wide configuration parameters of the PORT driver.
 | Pre-Compile Time | VARIANT-PRE-COMPILE |
 | **Origin** | Texas Instruments |
 | **Post-build-variant-multiplicity** | false |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+
+### PortDemEventParameterRefs
+
+| Item ||
+|--------|---------------|
+| **Name** | PortDemEventParameterRefs |
+| **Description** | Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter's DemEventId value. The standardized errors are provided in the container and can be extended by vendor specific error references. |
+| **Post-build-variant-multiplicity** | false |
+| **Multiplicity-Configuration-Class** | -- |
+| Post-Build Time | VARIANT-POST-BUILD |
+| Pre-Compile Time | VARIANT-PRE-COMPILE |
+| **Origin** | Texas Instruments |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
 | Post-Build-Time | VARIANT-POST-BUILD |

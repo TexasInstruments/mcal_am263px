@@ -227,10 +227,10 @@ Not Supported
 
 
 
-#### IcuConfigSet
+### IcuConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR Icu module.
 
-##### IcuChannel
+#### IcuChannel
 Configuration of an individual ICU channel.
 
 ###### IcuChannelId
@@ -252,7 +252,7 @@ Configuration of an individual ICU channel.
 | Item ||
 |--------|---------------|
 | **Name** | IcuDefaultStartEdge |
-| **Description** | Configures the capture event to  enable interupt on that capture event or not |
+| **Description** | Configures the default-activation-edge which shall be used for this channel if there was no activation-edge configured by the call of service Icu_SetActivationCondition(). |
 | **Origin** | Texas Instruments |
 | **Post-Build-Variant-Value** | true |
 | **Value-Configuration-Class** | -- |
@@ -399,10 +399,10 @@ This container contains the configuration (parameters) needed to configure a wak
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### IcuGeneral
+### IcuGeneral
 Configuration of general ICU parameters.
 
-##### IcuDevErrorDetect
+###### IcuDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -415,7 +415,7 @@ Configuration of general ICU parameters.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuIrqType
+###### IcuIrqType
 
 | Item ||
 |--------|---------------|
@@ -429,7 +429,7 @@ Configuration of general ICU parameters.
 | **Default-value** | ICU_ISR_CAT1 |
 | **Range** | ICU_ISR_VOID<br>ICU_ISR_CAT1<br>ICU_ISR_CAT2 |
 
-##### IcuDeviceVariant
+###### IcuDeviceVariant
 
 | Item ||
 |--------|---------------|
@@ -443,10 +443,10 @@ Configuration of general ICU parameters.
 | **Default-value** | AM263Px |
 | **Range** | AM263Px |
 
-#### IcuOptionalApis
+### IcuOptionalApis
 This container contains all configuration switches for configuring optional API services of the ICU driver.
 
-##### IcuDeInitApi
+###### IcuDeInitApi
 
 | Item ||
 |--------|---------------|
@@ -459,7 +459,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuDisableWakeupApi
+###### IcuDisableWakeupApi
 
 | Item ||
 |--------|---------------|
@@ -472,7 +472,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuEdgeCountApi
+###### IcuEdgeCountApi
 
 | Item ||
 |--------|---------------|
@@ -485,7 +485,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuEdgeDetectApi
+###### IcuEdgeDetectApi
 
 | Item ||
 |--------|---------------|
@@ -498,7 +498,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuEnableWakeupApi
+###### IcuEnableWakeupApi
 
 | Item ||
 |--------|---------------|
@@ -511,7 +511,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuGetDutyCycleValuesApi
+###### IcuGetDutyCycleValuesApi
 
 | Item ||
 |--------|---------------|
@@ -524,7 +524,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuGetInputStateApi
+###### IcuGetInputStateApi
 
 | Item ||
 |--------|---------------|
@@ -537,7 +537,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuGetTimeElapsedApi
+###### IcuGetTimeElapsedApi
 
 | Item ||
 |--------|---------------|
@@ -550,7 +550,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuGetVersionInfoApi
+###### IcuGetVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -563,7 +563,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuSetModeApi
+###### IcuSetModeApi
 
 | Item ||
 |--------|---------------|
@@ -576,7 +576,7 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuSignalMeasurementApi
+###### IcuSignalMeasurementApi
 
 | Item ||
 |--------|---------------|
@@ -589,12 +589,25 @@ This container contains all configuration switches for configuring optional API 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### IcuTimestampApi
+###### IcuTimestampApi
 
 | Item ||
 |--------|---------------|
 | **Name** | IcuTimestampApi |
 | **Description** | Adds / removes all services related to the timestamping functionality as listed below from the code: Icu_StartTimestamp(), Icu_StopTimestamp(), Icu_GetTimestampIndex(). |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | false |
+
+###### IcuWakeupFunctionalityApi
+
+| Item ||
+|--------|---------------|
+| **Name** | IcuWakeupFunctionalityApi |
+| **Description** | Adds / removes the service Icu_CheckWakeup() from the code. |
 | **Origin** | AUTOSAR_ECUC |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |

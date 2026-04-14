@@ -275,10 +275,10 @@ Not Supported
 
 
 
-#### DioConfig
+### DioConfig
 This container contains the configuration parameters and sub containers of the AUTOSAR DIO module. This container is a MultipleConfigurationContainer, i.e. this container and its sub-containers exist once per configuration set.
 
-##### DioPort
+#### DioPort
 Configuration of individual DIO ports, consisting of channels and possible channel groups.
 
 ###### DioPortId
@@ -357,10 +357,10 @@ Definition and configuration of DIO channel groups. A channel group represents s
 | **Max-value** | 31 |
 | **Min-value** | 0 |
 
-#### DioGeneral
+### DioGeneral
 General DIO module configuration parameters.
 
-##### DioDevErrorDetect
+###### DioDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -373,7 +373,7 @@ General DIO module configuration parameters.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### DioDemEnable
+###### DioDemEnable
 
 | Item ||
 |--------|---------------|
@@ -386,7 +386,7 @@ General DIO module configuration parameters.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### DioFlipChannelApi
+###### DioFlipChannelApi
 
 | Item ||
 |--------|---------------|
@@ -399,7 +399,7 @@ General DIO module configuration parameters.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### DioVersionInfoApi
+###### DioVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -412,7 +412,7 @@ General DIO module configuration parameters.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### DioHostCoreId
+###### DioHostCoreId
 
 | Item ||
 |--------|---------------|

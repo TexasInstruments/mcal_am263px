@@ -574,10 +574,10 @@ Not Supported
 
 
 
-#### AdcConfigSet
+### AdcConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR Adc module.
 
-##### AdcHwUnit
+#### AdcHwUnit
 This container contains the Driver configuration (parameters) depending on grouping of channels
 
 ###### AdcHwUnitId
@@ -975,10 +975,10 @@ This container contains the Group configuration (parameters).
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### AdcGeneral
+### AdcGeneral
 General configuration (parameters) of the ADC Driver software module.
 
-##### AdcDeInitApi
+###### AdcDeInitApi
 
 | Item ||
 |--------|---------------|
@@ -991,7 +991,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcDevErrorDetect
+###### AdcDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -1004,7 +1004,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcEnableLimitCheck
+###### AdcEnableLimitCheck
 
 | Item ||
 |--------|---------------|
@@ -1017,7 +1017,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### AdcEnableQueuing
+###### AdcEnableQueuing
 
 | Item ||
 |--------|---------------|
@@ -1030,7 +1030,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcEnableStartStopGroupApi
+###### AdcEnableStartStopGroupApi
 
 | Item ||
 |--------|---------------|
@@ -1043,7 +1043,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcMaxDmaChannelId
+###### AdcMaxDmaChannelId
 
 | Item ||
 |--------|---------------|
@@ -1056,7 +1056,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | 63 |
 
-##### AdcDmaInstance
+###### AdcDmaInstance
 
 | Item ||
 |--------|---------------|
@@ -1069,7 +1069,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | 0 |
 
-##### AdcGrpNotifCapability
+###### AdcGrpNotifCapability
 
 | Item ||
 |--------|---------------|
@@ -1082,7 +1082,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcHwTriggerApi
+###### AdcHwTriggerApi
 
 | Item ||
 |--------|---------------|
@@ -1095,7 +1095,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### AdcPriorityImplementation
+###### AdcPriorityImplementation
 
 | Item ||
 |--------|---------------|
@@ -1109,7 +1109,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Default-value** | ADC_PRIORITY_HW_SW |
 | **Range** | ADC_PRIORITY_HW<br>ADC_PRIORITY_HW_SW<br>ADC_PRIORITY_NONE |
 
-##### AdcReadGroupApi
+###### AdcReadGroupApi
 
 | Item ||
 |--------|---------------|
@@ -1122,7 +1122,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcResultAlignment
+###### AdcResultAlignment
 
 | Item ||
 |--------|---------------|
@@ -1136,7 +1136,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Default-value** | ADC_ALIGN_RIGHT |
 | **Range** | ADC_ALIGN_LEFT<br>ADC_ALIGN_RIGHT |
 
-##### AdcVersionInfoApi
+###### AdcVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -1149,7 +1149,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcReadTemperatureApi
+###### AdcReadTemperatureApi
 
 | Item ||
 |--------|---------------|
@@ -1162,7 +1162,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### AdcFifoErrLog
+###### AdcFifoErrLog
 
 | Item ||
 |--------|---------------|
@@ -1175,7 +1175,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcErrLogMaxLen
+###### AdcErrLogMaxLen
 
 | Item ||
 |--------|---------------|
@@ -1190,7 +1190,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Max-value** | 1024 |
 | **Min-value** | 0 |
 
-##### AdcDefaultOSCounterId
+###### AdcDefaultOSCounterId
 
 | Item ||
 |--------|---------------|
@@ -1205,7 +1205,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Max-value** | 16 |
 | **Min-value** | 0 |
 
-##### AdcMaxGroupCount
+###### AdcMaxGroupCount
 
 | Item ||
 |--------|---------------|
@@ -1220,7 +1220,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Max-value** | 1024 |
 | **Min-value** | 1 |
 
-##### AdcMaxChannelCount
+###### AdcMaxChannelCount
 
 | Item ||
 |--------|---------------|
@@ -1235,7 +1235,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Max-value** | 15 |
 | **Min-value** | 1 |
 
-##### AdcMaxHwUnitCount
+###### AdcMaxHwUnitCount
 
 | Item ||
 |--------|---------------|
@@ -1250,7 +1250,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Max-value** | 7 |
 | **Min-value** | 1 |
 
-##### AdcEnableRegisterReadbackApi
+###### AdcEnableRegisterReadbackApi
 
 | Item ||
 |--------|---------------|
@@ -1263,7 +1263,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### AdcPollingMainFunctionApi
+###### AdcPollingMainFunctionApi
 
 | Item ||
 |--------|---------------|
@@ -1276,7 +1276,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### AdcTypeofInterruptFunction
+###### AdcTypeofInterruptFunction
 
 | Item ||
 |--------|---------------|
@@ -1290,7 +1290,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Default-value** | ADC_ISR_CAT1 |
 | **Range** | ADC_ISR_VOID<br>ADC_ISR_CAT1<br>ADC_ISR_CAT2 |
 
-##### AdcDMAEnable
+###### AdcDMAEnable
 
 | Item ||
 |--------|---------------|
@@ -1303,7 +1303,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### AdcDeviceVariant
+###### AdcDeviceVariant
 
 | Item ||
 |--------|---------------|
@@ -1317,7 +1317,7 @@ General configuration (parameters) of the ADC Driver software module.
 | **Default-value** | AM263Px |
 | **Range** | AM263Px |
 
-##### AdcOsCounterRef
+###### AdcOsCounterRef
 
 | Item ||
 |--------|---------------|
@@ -1330,7 +1330,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### AdcPowerStateConfig
+#### AdcPowerStateConfig
 Each instance of this parameter defines a power state and the callback to be called when this power state is reached.
 ### Examples
 

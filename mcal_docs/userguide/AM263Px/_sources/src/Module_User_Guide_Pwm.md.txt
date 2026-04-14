@@ -354,10 +354,10 @@ Not supported
 
 
 
-#### PwmChannelConfigSet
+### PwmChannelConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR Pwm module.
 
-##### PwmChannel
+#### PwmChannel
 Configuration of an individual PWM channel.
 
 ###### PwmChannelClass
@@ -578,9 +578,9 @@ Configuration of an individual PWM channel.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### PwmConfigurationOfOptApiServices
+### PwmConfigurationOfOptApiServices
 
-##### PwmDeInitApi
+###### PwmDeInitApi
 
 | Item ||
 |--------|---------------|
@@ -593,7 +593,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmGetOutputState
+###### PwmGetOutputState
 
 | Item ||
 |--------|---------------|
@@ -605,7 +605,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### PwmSetDutyCycle
+###### PwmSetDutyCycle
 
 | Item ||
 |--------|---------------|
@@ -617,7 +617,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmSetOutputToIdle
+###### PwmSetOutputToIdle
 
 | Item ||
 |--------|---------------|
@@ -629,7 +629,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmSetPeriodAndDuty
+###### PwmSetPeriodAndDuty
 
 | Item ||
 |--------|---------------|
@@ -641,7 +641,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmVersionInfoApi
+###### PwmVersionInfoApi
 
 | Item ||
 |--------|---------------|
@@ -654,7 +654,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### PwmEnableRegisterReadbackApi
+###### PwmEnableRegisterReadbackApi
 
 | Item ||
 |--------|---------------|
@@ -667,9 +667,9 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-#### PwmGeneral
+### PwmGeneral
 
-##### PwmDevErrorDetect
+###### PwmDevErrorDetect
 
 | Item ||
 |--------|---------------|
@@ -682,7 +682,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmSysClockFrequency
+###### PwmSysClockFrequency
 
 | Item ||
 |--------|---------------|
@@ -696,7 +696,7 @@ Configuration of an individual PWM channel.
 | **Max-value** | 200000000 |
 | **Min-value** | 1 |
 
-##### PwmDutycycleUpdatedEndperiod
+###### PwmDutycycleUpdatedEndperiod
 
 | Item ||
 |--------|---------------|
@@ -709,7 +709,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmSfoSupportEnable
+###### PwmSfoSupportEnable
 
 | Item ||
 |--------|---------------|
@@ -722,7 +722,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
 
-##### PwmDefaultOSCounterId
+###### PwmDefaultOSCounterId
 
 | Item ||
 |--------|---------------|
@@ -738,7 +738,7 @@ Configuration of an individual PWM channel.
 | **Max-value** | 16 |
 | **Min-value** | 0 |
 
-##### PwmMaxTimeoutDuration
+###### PwmMaxTimeoutDuration
 
 | Item ||
 |--------|---------------|
@@ -753,7 +753,7 @@ Configuration of an individual PWM channel.
 | **Max-value** | 4294967295 |
 | **Min-value** | 1 |
 
-##### PwmIndex
+###### PwmIndex
 
 | Item ||
 |--------|---------------|
@@ -768,7 +768,7 @@ Configuration of an individual PWM channel.
 | **Max-value** | 1 |
 | **Min-value** | 0 |
 
-##### PwmNotificationSupported
+###### PwmNotificationSupported
 
 | Item ||
 |--------|---------------|
@@ -781,7 +781,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmPeriodUpdatedEndperiod
+###### PwmPeriodUpdatedEndperiod
 
 | Item ||
 |--------|---------------|
@@ -794,7 +794,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmErrorHook
+###### PwmErrorHook
 
 | Item ||
 |--------|---------------|
@@ -807,7 +807,7 @@ Configuration of an individual PWM channel.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | Det_ReportError |
 
-##### PwmDetIncludeFile
+###### PwmDetIncludeFile
 
 | Item ||
 |--------|---------------|
@@ -820,7 +820,7 @@ Configuration of an individual PWM channel.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | Det.h |
 
-##### PwmNotificationsIncludeFile
+###### PwmNotificationsIncludeFile
 
 | Item ||
 |--------|---------------|
@@ -833,7 +833,7 @@ Configuration of an individual PWM channel.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | None |
 
-##### PwmCfgDebugReporting
+###### PwmCfgDebugReporting
 
 | Item ||
 |--------|---------------|
@@ -846,7 +846,7 @@ Configuration of an individual PWM channel.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### PwmTypeofInterruptFunction
+###### PwmTypeofInterruptFunction
 
 | Item ||
 |--------|---------------|
@@ -860,7 +860,7 @@ Configuration of an individual PWM channel.
 | **Default-value** | PWM_ISR_CAT1 |
 | **Range** | PWM_ISR_VOID<br>PWM_ISR_CAT1<br>PWM_ISR_CAT2 |
 
-##### PwmOsCounterRef
+###### PwmOsCounterRef
 
 | Item ||
 |--------|---------------|
@@ -873,7 +873,7 @@ Configuration of an individual PWM channel.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### PwmPowerStateConfig
+#### PwmPowerStateConfig
 Each instance of this parameter defines a power state and the callback to be called when this power state is reached.
 
 **Note:** PwmMaxTimeoutDuration parameter Value should be passed as number of ticks according to clock frequency. The clock source have changed from RTI timers which used 200MHz clock frequency to R5f timers which uses 400MHz clock frequency, so the timeout values need to be configured accordingly.

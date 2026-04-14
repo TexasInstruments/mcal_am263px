@@ -1,3 +1,163 @@
+commit 8263bda26baea7020ba3d4dc7d8c46827b514961
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Apr 14 09:59:21 2026 +0530
+
+    all: all: Lint fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c                        | 56 ++++++++++++----------
+ mcal/Epwm/V0/Cdd_Pwm_Priv.h                        |  4 +-
+ mcal/Epwm/src/Cdd_Pwm.c                            |  4 +-
+ mcal/EthTrcv/src/EthTrcv.c                         | 10 ++--
+ mcal_test/epwm_test/testInput/cddPwmTestCases.h    |  4 +-
+ .../epwm_test/testLib/cddPwmTestMainTestCase.c     |  5 +-
+ 6 files changed, 45 insertions(+), 38 deletions(-)
+
+commit 7a63ac5e35b10d4b59c05c62c55be9d37a7d48bf
+Author: Akash <a-verma3@ti.com>
+Date:   Sun Apr 12 23:46:06 2026 +0530
+
+    am263px: i2c: Coverage improvement for i2c
+    
+    - Added test  case to cover gap caused by two API added : Cdd_I2c_CancelSeq and Cdd_I2c_ResetHwUnit
+    
+    Fixes: MCAL-35539
+    
+    Signed-off-by: Akash Verma
+
+ mcal/I2c/V0/Cdd_I2c_Hw.c                         |  38 ++-
+ mcal/I2c/src/Cdd_I2c_Priv.c                      |   4 -
+ mcal_test/i2c_test/testLib/i2cTestMiscTestCase.c | 335 +++++++++++++++++++++++
+ 3 files changed, 372 insertions(+), 5 deletions(-)
+
+commit a6b9962cc48a046701978e92b1275000f4f17bea
+Author: Asha D <asha.d@ti.com>
+Date:   Tue Apr 7 11:17:58 2026 +0530
+
+    all:EPWM: Bug fix
+    
+            fixing round-to-nearest for UP_DOWN mode so near-100% duty no longer truncates to 0.
+    
+            Removing all the subtractions( -1U). Cdd_Pwm_DutyValue() already returns the correct CMPA value,
+            the subtraction is redundant and wraps to 65535 when the value is 0.
+    
+            Added testcases for the near-100% and near-0% dutycycles.
+    
+    Fixes: MCAL-36833
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c                        | 107 ++++++++++---------
+ mcal/Epwm/V0/Cdd_Pwm_Priv.h                        |  66 ++++++------
+ mcal/Epwm/V0/Cdd_Pwm_Types.h                       |   8 +-
+ mcal/Epwm/include/Cdd_Pwm.h                        |   2 +-
+ mcal/Epwm/src/Cdd_Pwm.c                            |   6 +-
+ mcal_test/epwm_test/testInput/cddPwmTestCases.h    |  14 +++
+ mcal_test/epwm_test/testLib/cddPwmTest.h           |   5 +
+ .../epwm_test/testLib/cddPwmTestMainTestCase.c     | 117 +++++++++++++++++++++
+ 8 files changed, 234 insertions(+), 91 deletions(-)
+
+commit 29e82cad7bfc2b5da6829ede089625c33ce63834
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Apr 10 13:20:23 2026 +0530
+
+    am263px: Spi: Fix config fail issue
+    
+    - Fix Config 11 and 8 fail issue, MCAL-35730
+    
+    Fixes: MCAL-35730
+    
+    Signed-off-by: Akash Verma
+
+ mcal/examples/Utils/srcs.mk                        |  1 -
+ mcal_test/spi_test/testInput/spiTestCases.h        |  6 ++--
+ .../spi_test/testLib/spiTestMcspiMiscTestCase.c    |  9 +++++-
+ mcal_test/spi_test/testLib/spiTestMcspiTestCase.c  | 32 +++++++++++++---------
+ 4 files changed, 30 insertions(+), 18 deletions(-)
+
+commit 8cad95d46e570534b957be195cac9f1bcd3eca4b
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Apr 10 12:17:39 2026 +0530
+
+    all: Lin: Corrected path for lin baud config items
+    
+    -LinChannelFractionalDivider and LinChannelPrescalar expressions updated to use the right path to LinChannelBaudrate node
+    
+    Fixes: MCAL-36986
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_config/plugins/AM261x/Lin_TI_AM261x/config/Lin.xdm   | 4 ++--
+ mcal_config/plugins/AM263Px/Lin_TI_AM263Px/config/Lin.xdm | 4 ++--
+ mcal_config/plugins/AM263x/Lin_TI_AM263x/config/Lin.xdm   | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+commit fb29d8541971ff09f4d092673b9b11ddef703361
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Tue Apr 7 13:46:30 2026 +0530
+
+    all: adc: move the testcase to right config
+    
+     - ADC_DMA_Polling feature is not supported in config_38. So, moved to
+       config_40
+    
+    Fixes: MCAL-35728
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal_test/adc_test/testInput/adcTestCases.h | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+commit fdc91186eebc1c5a9ff22f4380adf47b60ec5e71
+Author: Khanh Tran <x1120448@ti.com>
+Date:   Wed Apr 8 14:17:29 2026 +0700
+
+    all: EthTrcv: Fix new MISRA Klocwork
+    
+    - Fix wrong usage of TrcvIdx
+    - Fix MISRA.UNUSEDPAR
+    
+    Fixes: MCAL-36360
+    
+    Signed-off by: Tran Khanh <x1120448@ti.com>
+
+ mcal/EthTrcv/src/EthTrcv.c | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+commit ef6747ddd66047e5242ae7f1bec0b2db51d307b1
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Mar 30 11:47:06 2026 +0530
+
+    all: Klockwork Issue fix
+    
+    - Module fix : Dma , Icu, Lin, Spi, I2c and Port
+    
+    - No regression in Coverage
+    
+    Fixes: MCAL-36793
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dma/src/Cdd_Dma.c                      |  33 +++--
+ mcal/Gpt/src/Gpt.c                          |  90 ++++++--------
+ mcal/I2c/src/Cdd_I2c.c                      |  82 +++++++-----
+ mcal/I2c/src/Cdd_I2c_Priv.c                 |   2 +-
+ mcal/Icu/src/Icu.c                          | 186 +++++++++++++++++-----------
+ mcal/Lin/V0/Lin_Priv.c                      |  25 ++--
+ mcal/Lin/src/Lin.c                          |  94 +++++++++-----
+ mcal/Port/V0/Port_Priv.c                    |  15 ++-
+ mcal/Spi/V0/Spi_Mcspi.c                     |  25 ++--
+ mcal/Spi/V0/Spi_Priv.c                      |   4 +-
+ mcal/Spi/src/Spi.c                          |  58 +++++----
+ mcal_test/dma_test/build/makefile           |   2 +-
+ mcal_test/i2c_test/build/makefile           |  28 ++---
+ mcal_test/lin_test/build/makefile           |   2 +-
+ mcal_test/lin_test/testInput/linTestCases.h |  22 ++++
+ 15 files changed, 395 insertions(+), 273 deletions(-)
+
 commit 3cc4988dec296178193d754b11cccd80cdedff6e
 Author: Akash <a-verma3@ti.com>
 Date:   Mon Apr 6 15:11:46 2026 +0530

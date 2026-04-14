@@ -216,7 +216,7 @@ Std_ReturnType Cdd_I2c_ResetHwUnitPriv(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_Hw
     }
 
     /* Clear all queued channels and notify their sequences */
-    while (1U)
+    for (;;)
     {
         Cdd_I2c_UtilsNode *headNode;
 
@@ -674,12 +674,10 @@ static void Cdd_I2c_SetSeqErrorCode(Cdd_I2c_SeqObjType *seqObj, Cdd_I2c_ChannelR
     {
         seqObj->seqErrorCode = CDD_I2C_E_NACK_RECEIVED;
     }
-    /* TI_COVERAGE_GAP_START Arbitration loss error cannot be recreated in test environment */
     if (CDD_I2C_CH_RESULT_ARBFAIL == chResult)
     {
         seqObj->seqErrorCode = CDD_I2C_E_ARBITRATION_FAILURE;
     }
-    /* TI_COVERAGE_GAP_STOP */
     if (CDD_I2C_CH_RESULT_HW_UNIT_RESET == chResult)
     {
         seqObj->seqErrorCode = CDD_I2C_E_HW_UNIT_RESET;
@@ -704,12 +702,10 @@ static void Cdd_I2c_SetSeqResult(Cdd_I2c_SeqObjType *seqObj)
     {
         seqObj->seqResult = CDD_I2C_SEQ_NACK;
     }
-    /* TI_COVERAGE_GAP_START Arbitration loss error cannot be recreated in test environment */
     if (CDD_I2C_E_ARBITRATION_FAILURE == seqObj->seqErrorCode)
     {
         seqObj->seqResult = CDD_I2C_SEQ_ARB;
     }
-    /* TI_COVERAGE_GAP_STOP */
     if (TRUE == seqObj->isCancelInProgress)
     {
         seqObj->seqResult          = CDD_I2C_SEQ_CANCELLED;

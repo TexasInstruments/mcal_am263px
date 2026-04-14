@@ -541,7 +541,7 @@
 <td><p>Function clears the Time base status bits indicated by the tbStatusClrMask parameter.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-cdd-pwm-countercomparatorcfg"><span class="std std-ref">Cdd_Pwm_CounterComparatorCfg</span></a></strong>(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-pwm-countercomparatorcfg"><span class="std std-ref">Cdd_Pwm_CounterComparatorCfg</span></a></strong>(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint16 cmpVal, uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)</p></td>
 <td><p>Function configures the counter comparator and loads the comparator value.</p></td>
 </tr>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
@@ -1102,7 +1102,7 @@ Function clears the Time base status bits indicated by the tbStatusClrMask param
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Pwm_CounterComparatorCfg</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Pwm_ChannelType</span><span class="w"> </span><span class="n">Channel</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Pwm_OutputChType</span><span class="w"> </span><span class="n">cmpType</span><span class="p">,</span>
-<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">cmpVal</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">cmpVal</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">shadowToActiveLoadTrigger</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">overwriteShadow</span>
 <span class="p">)</span>

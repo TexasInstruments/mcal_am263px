@@ -115,9 +115,44 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">4.7.9. Configuration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cddfsitxconfigset">4.7.9.1. CddFsiTxConfigSet</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsitxgeneral">4.7.9.2. CddFsiTxGeneral</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdemeventparameterrefs">4.7.9.3. CddFsiTxDemEventParameterRefs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#symbolic-names-deviations">4.7.9.4. Symbolic Names deviations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxnotification">4.7.9.2. CddFsiTxNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxoverrunnotification">4.7.9.3. CddFsiTxOverRunNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxunderrunnotification">4.7.9.4. CddFsiTxUnderRunNotification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxhwunit">4.7.9.5. CddFsiTxHwUnit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxhwunitid">4.7.9.6. CddFsiTxHwUnitId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxprescale">4.7.9.7. CddFsiTxPrescale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxpingtimertimeout">4.7.9.8. CddFsiTxPingTimerTimeout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxtriggersrc">4.7.9.9. CddFsiTxTriggerSrc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxtransmissionmethod">4.7.9.10. CddFsiTxTransmissionMethod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxexthwtrigsrc">4.7.9.11. CddFsiTxExtHwTrigSrc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxextpingtrigsrc">4.7.9.12. CddFsiTxExtPingTrigSrc</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdmareference">4.7.9.13. CddFsiTxDmaReference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxgeneral">4.7.9.14. CddFsiTxGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdeinitapi">4.7.9.15. CddFsiTxDeInitApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxtransmitapi">4.7.9.16. CddFsiTxTransmitApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdeverrordetectapi">4.7.9.17. CddFsiTxDevErrorDetectApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxpingapi">4.7.9.18. CddFsiTxPingApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxexttriggerenable">4.7.9.19. CddFsiTxExtTriggerEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxbuffloadapi">4.7.9.20. CddFsiTxBuffLoadApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxresetdriver">4.7.9.21. CddFsiTxResetDriver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxtypeofinterruptfunction">4.7.9.22. CddFsiTxTypeofInterruptFunction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxinterruptvector">4.7.9.23. CddFsiTxInterruptVector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdevicevariant">4.7.9.24. CddFsiTxDeviceVariant</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxmaxhwunitcount">4.7.9.25. CddFsiTxMaxHwUnitCount</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxnotifycapability">4.7.9.26. CddFsiTxNotifyCapability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxbufferoverruninterrupt">4.7.9.27. CddFsiTxBufferOverRunInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxbufferunderruninterrupt">4.7.9.28. CddFsiTxBufferUnderRunInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxpingtimeoutinterrupt">4.7.9.29. CddFsiTxPingTimeOutInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxframedoneinterrupt">4.7.9.30. CddFsiTxFrameDoneInterrupt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxmainapi">4.7.9.31. CddFsiTxMainApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxgetversioninfoapi">4.7.9.32. CddFsiTxGetVersionInfoApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdmaenable">4.7.9.33. CddFsiTxDMAEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxmultilaneenable">4.7.9.34. CddFsiTxMultiLaneEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxmaxdmachannelid">4.7.9.35. CddFsiTxMaxDmaChannelId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdefaultoscounterid">4.7.9.36. CddFsiTxDefaultOSCounterId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxoscounterref">4.7.9.37. CddFsiTxOsCounterRef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsitxdemeventparameterrefs">4.7.9.38. CddFsiTxDemEventParameterRefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#symbolic-names-deviations">4.7.9.39. Symbolic Names deviations</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">4.7.10. Examples</a></li>
@@ -876,8 +911,9 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 <section id="cddfsitxconfigset">
 <h3><span class="section-number">4.7.9.1. </span>CddFsiTxConfigSet<a class="headerlink" href="#cddfsitxconfigset" title="Link to this heading"></a></h3>
 <p>This container contains the configuration parameters and sub containers of the AUTOSAR Cdd Fsi Tx module.</p>
+</section>
 <section id="cddfsitxnotification">
-<h4><span class="section-number">4.7.9.1.1. </span>CddFsiTxNotification<a class="headerlink" href="#cddfsitxnotification" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.2. </span>CddFsiTxNotification<a class="headerlink" href="#cddfsitxnotification" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -925,7 +961,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxoverrunnotification">
-<h4><span class="section-number">4.7.9.1.2. </span>CddFsiTxOverRunNotification<a class="headerlink" href="#cddfsitxoverrunnotification" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.3. </span>CddFsiTxOverRunNotification<a class="headerlink" href="#cddfsitxoverrunnotification" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -973,7 +1009,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxunderrunnotification">
-<h4><span class="section-number">4.7.9.1.3. </span>CddFsiTxUnderRunNotification<a class="headerlink" href="#cddfsitxunderrunnotification" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.4. </span>CddFsiTxUnderRunNotification<a class="headerlink" href="#cddfsitxunderrunnotification" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1021,10 +1057,11 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxhwunit">
-<h4><span class="section-number">4.7.9.1.4. </span>CddFsiTxHwUnit<a class="headerlink" href="#cddfsitxhwunit" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.5. </span>CddFsiTxHwUnit<a class="headerlink" href="#cddfsitxhwunit" title="Link to this heading"></a></h3>
 <p>This container contains the Driver configuration (parameters) depending on which FSI Hw unit is get configured</p>
+</section>
 <section id="cddfsitxhwunitid">
-<h5><span class="section-number">4.7.9.1.4.1. </span>CddFsiTxHwUnitId<a class="headerlink" href="#cddfsitxhwunitid" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.6. </span>CddFsiTxHwUnitId<a class="headerlink" href="#cddfsitxhwunitid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1063,7 +1100,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxprescale">
-<h5><span class="section-number">4.7.9.1.4.2. </span>CddFsiTxPrescale<a class="headerlink" href="#cddfsitxprescale" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.7. </span>CddFsiTxPrescale<a class="headerlink" href="#cddfsitxprescale" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1102,7 +1139,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxpingtimertimeout">
-<h5><span class="section-number">4.7.9.1.4.3. </span>CddFsiTxPingTimerTimeout<a class="headerlink" href="#cddfsitxpingtimertimeout" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.8. </span>CddFsiTxPingTimerTimeout<a class="headerlink" href="#cddfsitxpingtimertimeout" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1147,7 +1184,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxtriggersrc">
-<h5><span class="section-number">4.7.9.1.4.4. </span>CddFsiTxTriggerSrc<a class="headerlink" href="#cddfsitxtriggersrc" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.9. </span>CddFsiTxTriggerSrc<a class="headerlink" href="#cddfsitxtriggersrc" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1186,7 +1223,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxtransmissionmethod">
-<h5><span class="section-number">4.7.9.1.4.5. </span>CddFsiTxTransmissionMethod<a class="headerlink" href="#cddfsitxtransmissionmethod" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.10. </span>CddFsiTxTransmissionMethod<a class="headerlink" href="#cddfsitxtransmissionmethod" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1228,7 +1265,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxexthwtrigsrc">
-<h5><span class="section-number">4.7.9.1.4.6. </span>CddFsiTxExtHwTrigSrc<a class="headerlink" href="#cddfsitxexthwtrigsrc" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.11. </span>CddFsiTxExtHwTrigSrc<a class="headerlink" href="#cddfsitxexthwtrigsrc" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1270,7 +1307,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxextpingtrigsrc">
-<h5><span class="section-number">4.7.9.1.4.7. </span>CddFsiTxExtPingTrigSrc<a class="headerlink" href="#cddfsitxextpingtrigsrc" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.12. </span>CddFsiTxExtPingTrigSrc<a class="headerlink" href="#cddfsitxextpingtrigsrc" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1312,7 +1349,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxdmareference">
-<h5><span class="section-number">4.7.9.1.4.8. </span>CddFsiTxDmaReference<a class="headerlink" href="#cddfsitxdmareference" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.7.9.13. </span>CddFsiTxDmaReference<a class="headerlink" href="#cddfsitxdmareference" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1356,13 +1393,12 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </tbody>
 </table>
 </section>
-</section>
-</section>
 <section id="cddfsitxgeneral">
-<h3><span class="section-number">4.7.9.2. </span>CddFsiTxGeneral<a class="headerlink" href="#cddfsitxgeneral" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.7.9.14. </span>CddFsiTxGeneral<a class="headerlink" href="#cddfsitxgeneral" title="Link to this heading"></a></h3>
 <p>General configuration (parameters) of the Cdd Fsi Tx Driver software module.</p>
+</section>
 <section id="cddfsitxdeinitapi">
-<h4><span class="section-number">4.7.9.2.1. </span>CddFsiTxDeInitApi<a class="headerlink" href="#cddfsitxdeinitapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.15. </span>CddFsiTxDeInitApi<a class="headerlink" href="#cddfsitxdeinitapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1398,7 +1434,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxtransmitapi">
-<h4><span class="section-number">4.7.9.2.2. </span>CddFsiTxTransmitApi<a class="headerlink" href="#cddfsitxtransmitapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.16. </span>CddFsiTxTransmitApi<a class="headerlink" href="#cddfsitxtransmitapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1434,7 +1470,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxdeverrordetectapi">
-<h4><span class="section-number">4.7.9.2.3. </span>CddFsiTxDevErrorDetectApi<a class="headerlink" href="#cddfsitxdeverrordetectapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.17. </span>CddFsiTxDevErrorDetectApi<a class="headerlink" href="#cddfsitxdeverrordetectapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1470,7 +1506,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxpingapi">
-<h4><span class="section-number">4.7.9.2.4. </span>CddFsiTxPingApi<a class="headerlink" href="#cddfsitxpingapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.18. </span>CddFsiTxPingApi<a class="headerlink" href="#cddfsitxpingapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1506,7 +1542,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxexttriggerenable">
-<h4><span class="section-number">4.7.9.2.5. </span>CddFsiTxExtTriggerEnable<a class="headerlink" href="#cddfsitxexttriggerenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.19. </span>CddFsiTxExtTriggerEnable<a class="headerlink" href="#cddfsitxexttriggerenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1542,7 +1578,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxbuffloadapi">
-<h4><span class="section-number">4.7.9.2.6. </span>CddFsiTxBuffLoadApi<a class="headerlink" href="#cddfsitxbuffloadapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.20. </span>CddFsiTxBuffLoadApi<a class="headerlink" href="#cddfsitxbuffloadapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1578,7 +1614,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxresetdriver">
-<h4><span class="section-number">4.7.9.2.7. </span>CddFsiTxResetDriver<a class="headerlink" href="#cddfsitxresetdriver" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.21. </span>CddFsiTxResetDriver<a class="headerlink" href="#cddfsitxresetdriver" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1614,7 +1650,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxtypeofinterruptfunction">
-<h4><span class="section-number">4.7.9.2.8. </span>CddFsiTxTypeofInterruptFunction<a class="headerlink" href="#cddfsitxtypeofinterruptfunction" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.22. </span>CddFsiTxTypeofInterruptFunction<a class="headerlink" href="#cddfsitxtypeofinterruptfunction" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1653,7 +1689,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxinterruptvector">
-<h4><span class="section-number">4.7.9.2.9. </span>CddFsiTxInterruptVector<a class="headerlink" href="#cddfsitxinterruptvector" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.23. </span>CddFsiTxInterruptVector<a class="headerlink" href="#cddfsitxinterruptvector" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1692,7 +1728,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxdevicevariant">
-<h4><span class="section-number">4.7.9.2.10. </span>CddFsiTxDeviceVariant<a class="headerlink" href="#cddfsitxdevicevariant" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.24. </span>CddFsiTxDeviceVariant<a class="headerlink" href="#cddfsitxdevicevariant" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1731,7 +1767,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxmaxhwunitcount">
-<h4><span class="section-number">4.7.9.2.11. </span>CddFsiTxMaxHwUnitCount<a class="headerlink" href="#cddfsitxmaxhwunitcount" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.25. </span>CddFsiTxMaxHwUnitCount<a class="headerlink" href="#cddfsitxmaxhwunitcount" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1773,7 +1809,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxnotifycapability">
-<h4><span class="section-number">4.7.9.2.12. </span>CddFsiTxNotifyCapability<a class="headerlink" href="#cddfsitxnotifycapability" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.26. </span>CddFsiTxNotifyCapability<a class="headerlink" href="#cddfsitxnotifycapability" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1809,7 +1845,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxbufferoverruninterrupt">
-<h4><span class="section-number">4.7.9.2.13. </span>CddFsiTxBufferOverRunInterrupt<a class="headerlink" href="#cddfsitxbufferoverruninterrupt" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.27. </span>CddFsiTxBufferOverRunInterrupt<a class="headerlink" href="#cddfsitxbufferoverruninterrupt" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1845,7 +1881,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxbufferunderruninterrupt">
-<h4><span class="section-number">4.7.9.2.14. </span>CddFsiTxBufferUnderRunInterrupt<a class="headerlink" href="#cddfsitxbufferunderruninterrupt" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.28. </span>CddFsiTxBufferUnderRunInterrupt<a class="headerlink" href="#cddfsitxbufferunderruninterrupt" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1881,7 +1917,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxpingtimeoutinterrupt">
-<h4><span class="section-number">4.7.9.2.15. </span>CddFsiTxPingTimeOutInterrupt<a class="headerlink" href="#cddfsitxpingtimeoutinterrupt" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.29. </span>CddFsiTxPingTimeOutInterrupt<a class="headerlink" href="#cddfsitxpingtimeoutinterrupt" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1917,7 +1953,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxframedoneinterrupt">
-<h4><span class="section-number">4.7.9.2.16. </span>CddFsiTxFrameDoneInterrupt<a class="headerlink" href="#cddfsitxframedoneinterrupt" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.30. </span>CddFsiTxFrameDoneInterrupt<a class="headerlink" href="#cddfsitxframedoneinterrupt" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1953,7 +1989,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxmainapi">
-<h4><span class="section-number">4.7.9.2.17. </span>CddFsiTxMainApi<a class="headerlink" href="#cddfsitxmainapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.31. </span>CddFsiTxMainApi<a class="headerlink" href="#cddfsitxmainapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1989,7 +2025,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxgetversioninfoapi">
-<h4><span class="section-number">4.7.9.2.18. </span>CddFsiTxGetVersionInfoApi<a class="headerlink" href="#cddfsitxgetversioninfoapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.32. </span>CddFsiTxGetVersionInfoApi<a class="headerlink" href="#cddfsitxgetversioninfoapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2025,7 +2061,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxdmaenable">
-<h4><span class="section-number">4.7.9.2.19. </span>CddFsiTxDMAEnable<a class="headerlink" href="#cddfsitxdmaenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.33. </span>CddFsiTxDMAEnable<a class="headerlink" href="#cddfsitxdmaenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2061,7 +2097,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxmultilaneenable">
-<h4><span class="section-number">4.7.9.2.20. </span>CddFsiTxMultiLaneEnable<a class="headerlink" href="#cddfsitxmultilaneenable" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.34. </span>CddFsiTxMultiLaneEnable<a class="headerlink" href="#cddfsitxmultilaneenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2097,7 +2133,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxmaxdmachannelid">
-<h4><span class="section-number">4.7.9.2.21. </span>CddFsiTxMaxDmaChannelId<a class="headerlink" href="#cddfsitxmaxdmachannelid" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.35. </span>CddFsiTxMaxDmaChannelId<a class="headerlink" href="#cddfsitxmaxdmachannelid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2133,7 +2169,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxdefaultoscounterid">
-<h4><span class="section-number">4.7.9.2.22. </span>CddFsiTxDefaultOSCounterId<a class="headerlink" href="#cddfsitxdefaultoscounterid" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.36. </span>CddFsiTxDefaultOSCounterId<a class="headerlink" href="#cddfsitxdefaultoscounterid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2175,7 +2211,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsitxoscounterref">
-<h4><span class="section-number">4.7.9.2.23. </span>CddFsiTxOsCounterRef<a class="headerlink" href="#cddfsitxoscounterref" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.7.9.37. </span>CddFsiTxOsCounterRef<a class="headerlink" href="#cddfsitxoscounterref" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2210,9 +2246,8 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </tbody>
 </table>
 </section>
-</section>
 <section id="cddfsitxdemeventparameterrefs">
-<h3><span class="section-number">4.7.9.3. </span>CddFsiTxDemEventParameterRefs<a class="headerlink" href="#cddfsitxdemeventparameterrefs" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.7.9.38. </span>CddFsiTxDemEventParameterRefs<a class="headerlink" href="#cddfsitxdemeventparameterrefs" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2224,7 +2259,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 <td><p>CddFsiTxDemEventParameterRefs</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Reference to configured DEM event to report “Tx buffer overrun”.</p></td>
+<td><p>Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter’s DemEventId value. The standardized errors are provided in the container and can be extended by vendor specific error references</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Post-build-variant-multiplicity</strong></p></td>
 <td><p>false</p></td>
@@ -2263,7 +2298,7 @@ This Cdd_FsiTx_BufferNotifyType which is defined in CddFsiTx_Types.h file. This 
 </div>
 </section>
 <section id="symbolic-names-deviations">
-<h3><span class="section-number">4.7.9.4. </span>Symbolic Names deviations<a class="headerlink" href="#symbolic-names-deviations" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.7.9.39. </span>Symbolic Names deviations<a class="headerlink" href="#symbolic-names-deviations" title="Link to this heading"></a></h3>
 <p>The Symbolic names are generated for following parameters:</p>
 <ol class="arabic simple">
 <li><p><strong>CddFsiTxHwUnitId</strong>   : Symbolic name is generated as <strong>CddFsiTxConf_CddFsiTxHwUnit_&lt;CddFsiTxHwUnitId&gt;</strong></p></li>

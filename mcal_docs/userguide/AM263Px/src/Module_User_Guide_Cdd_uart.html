@@ -112,7 +112,32 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">4.11.9. Configuration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cdduartdriver">4.11.9.1. CddUartDriver</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cdduartgeneral">4.11.9.2. CddUartGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartchannel">4.11.9.2. CddUartChannel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduarthwid">4.11.9.3. CddUartHwID</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartclockfrequency">4.11.9.4. CddUartClockFrequency</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartbaudrate">4.11.9.5. CddUartBaudRate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartiomode">4.11.9.6. CddUartIOMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduarttxtriggerlevel">4.11.9.7. CddUartTXTriggerLevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartrxtriggerlevel">4.11.9.8. CddUartRXTriggerLevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartwordlength">4.11.9.9. CddUartWordLength</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartparity">4.11.9.10. CddUartParity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartreadreturnmodes">4.11.9.11. CddUartReadReturnModes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartoperatingmodes">4.11.9.12. CddUartOperatingModes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartstopbits">4.11.9.13. CddUartStopBits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartreadnotificationhandler">4.11.9.14. CddUartReadNotificationHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartwritenotificationhandler">4.11.9.15. CddUartWriteNotificationHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduarterrornotificationhandler">4.11.9.16. CddUartErrorNotificationHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduarthwunitcdddmatxhandler">4.11.9.17. CddUartHwUnitCddDmaTxHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduarthwunitcdddmarxhandler">4.11.9.18. CddUartHwUnitCddDmaRxHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartgeneral">4.11.9.19. CddUartGeneral</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartregisterreadbackapi">4.11.9.20. CddUartRegisterReadbackApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartdeinitapi">4.11.9.21. CddUartDeinitApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartwriteapi">4.11.9.22. CddUartWriteApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartreadapi">4.11.9.23. CddUartReadApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartcancelapi">4.11.9.24. CddUartCancelApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartgetremainingwordsapi">4.11.9.25. CddUartGetRemainingWordsApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartdeverrordetect">4.11.9.26. CddUartDevErrorDetect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cdduartirqtype">4.11.9.27. CddUartIrqType</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">4.11.10. Examples</a><ul>
@@ -589,11 +614,13 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 <section id="cdduartdriver">
 <h3><span class="section-number">4.11.9.1. </span>CddUartDriver<a class="headerlink" href="#cdduartdriver" title="Link to this heading"></a></h3>
 <p>This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module.</p>
+</section>
 <section id="cdduartchannel">
-<h4><span class="section-number">4.11.9.1.1. </span>CddUartChannel<a class="headerlink" href="#cdduartchannel" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.2. </span>CddUartChannel<a class="headerlink" href="#cdduartchannel" title="Link to this heading"></a></h3>
 <p>Configuration of an individual UART channel.</p>
+</section>
 <section id="cdduarthwid">
-<h5><span class="section-number">4.11.9.1.1.1. </span>CddUartHwID<a class="headerlink" href="#cdduarthwid" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.3. </span>CddUartHwID<a class="headerlink" href="#cdduarthwid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -632,7 +659,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartclockfrequency">
-<h5><span class="section-number">4.11.9.1.1.2. </span>CddUartClockFrequency<a class="headerlink" href="#cdduartclockfrequency" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.4. </span>CddUartClockFrequency<a class="headerlink" href="#cdduartclockfrequency" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -674,7 +701,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartbaudrate">
-<h5><span class="section-number">4.11.9.1.1.3. </span>CddUartBaudRate<a class="headerlink" href="#cdduartbaudrate" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.5. </span>CddUartBaudRate<a class="headerlink" href="#cdduartbaudrate" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -716,7 +743,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartiomode">
-<h5><span class="section-number">4.11.9.1.1.4. </span>CddUartIOMode<a class="headerlink" href="#cdduartiomode" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.6. </span>CddUartIOMode<a class="headerlink" href="#cdduartiomode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -755,7 +782,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduarttxtriggerlevel">
-<h5><span class="section-number">4.11.9.1.1.5. </span>CddUartTXTriggerLevel<a class="headerlink" href="#cdduarttxtriggerlevel" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.7. </span>CddUartTXTriggerLevel<a class="headerlink" href="#cdduarttxtriggerlevel" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -794,7 +821,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartrxtriggerlevel">
-<h5><span class="section-number">4.11.9.1.1.6. </span>CddUartRXTriggerLevel<a class="headerlink" href="#cdduartrxtriggerlevel" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.8. </span>CddUartRXTriggerLevel<a class="headerlink" href="#cdduartrxtriggerlevel" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -833,7 +860,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartwordlength">
-<h5><span class="section-number">4.11.9.1.1.7. </span>CddUartWordLength<a class="headerlink" href="#cdduartwordlength" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.9. </span>CddUartWordLength<a class="headerlink" href="#cdduartwordlength" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -872,7 +899,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartparity">
-<h5><span class="section-number">4.11.9.1.1.8. </span>CddUartParity<a class="headerlink" href="#cdduartparity" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.10. </span>CddUartParity<a class="headerlink" href="#cdduartparity" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -911,7 +938,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartreadreturnmodes">
-<h5><span class="section-number">4.11.9.1.1.9. </span>CddUartReadReturnModes<a class="headerlink" href="#cdduartreadreturnmodes" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.11. </span>CddUartReadReturnModes<a class="headerlink" href="#cdduartreadreturnmodes" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -950,7 +977,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartoperatingmodes">
-<h5><span class="section-number">4.11.9.1.1.10. </span>CddUartOperatingModes<a class="headerlink" href="#cdduartoperatingmodes" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.12. </span>CddUartOperatingModes<a class="headerlink" href="#cdduartoperatingmodes" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -989,7 +1016,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartstopbits">
-<h5><span class="section-number">4.11.9.1.1.11. </span>CddUartStopBits<a class="headerlink" href="#cdduartstopbits" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.13. </span>CddUartStopBits<a class="headerlink" href="#cdduartstopbits" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1028,7 +1055,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartreadnotificationhandler">
-<h5><span class="section-number">4.11.9.1.1.12. </span>CddUartReadNotificationHandler<a class="headerlink" href="#cdduartreadnotificationhandler" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.14. </span>CddUartReadNotificationHandler<a class="headerlink" href="#cdduartreadnotificationhandler" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1064,7 +1091,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartwritenotificationhandler">
-<h5><span class="section-number">4.11.9.1.1.13. </span>CddUartWriteNotificationHandler<a class="headerlink" href="#cdduartwritenotificationhandler" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.15. </span>CddUartWriteNotificationHandler<a class="headerlink" href="#cdduartwritenotificationhandler" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1100,7 +1127,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduarterrornotificationhandler">
-<h5><span class="section-number">4.11.9.1.1.14. </span>CddUartErrorNotificationHandler<a class="headerlink" href="#cdduarterrornotificationhandler" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.16. </span>CddUartErrorNotificationHandler<a class="headerlink" href="#cdduarterrornotificationhandler" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1136,7 +1163,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduarthwunitcdddmatxhandler">
-<h5><span class="section-number">4.11.9.1.1.15. </span>CddUartHwUnitCddDmaTxHandler<a class="headerlink" href="#cdduarthwunitcdddmatxhandler" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.17. </span>CddUartHwUnitCddDmaTxHandler<a class="headerlink" href="#cdduarthwunitcdddmatxhandler" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1181,7 +1208,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduarthwunitcdddmarxhandler">
-<h5><span class="section-number">4.11.9.1.1.16. </span>CddUartHwUnitCddDmaRxHandler<a class="headerlink" href="#cdduarthwunitcdddmarxhandler" title="Link to this heading"></a></h5>
+<h3><span class="section-number">4.11.9.18. </span>CddUartHwUnitCddDmaRxHandler<a class="headerlink" href="#cdduarthwunitcdddmarxhandler" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1225,10 +1252,8 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </tbody>
 </table>
 </section>
-</section>
-</section>
 <section id="cdduartgeneral">
-<h3><span class="section-number">4.11.9.2. </span>CddUartGeneral<a class="headerlink" href="#cdduartgeneral" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.11.9.19. </span>CddUartGeneral<a class="headerlink" href="#cdduartgeneral" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1240,7 +1265,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 <td><p>CddUartGeneral</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Switches the Cdd_Uart_GetVersionInfo function ON or OFF.</p></td>
+<td><p>General configuration settings for the Complex Device Driver</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Origin</strong></p></td>
 <td><p>Texas Instruments</p></td>
@@ -1262,8 +1287,9 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </tr>
 </tbody>
 </table>
+</section>
 <section id="cdduartregisterreadbackapi">
-<h4><span class="section-number">4.11.9.2.1. </span>CddUartRegisterReadbackApi<a class="headerlink" href="#cdduartregisterreadbackapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.20. </span>CddUartRegisterReadbackApi<a class="headerlink" href="#cdduartregisterreadbackapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1299,7 +1325,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartdeinitapi">
-<h4><span class="section-number">4.11.9.2.2. </span>CddUartDeinitApi<a class="headerlink" href="#cdduartdeinitapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.21. </span>CddUartDeinitApi<a class="headerlink" href="#cdduartdeinitapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1335,7 +1361,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartwriteapi">
-<h4><span class="section-number">4.11.9.2.3. </span>CddUartWriteApi<a class="headerlink" href="#cdduartwriteapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.22. </span>CddUartWriteApi<a class="headerlink" href="#cdduartwriteapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1371,7 +1397,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartreadapi">
-<h4><span class="section-number">4.11.9.2.4. </span>CddUartReadApi<a class="headerlink" href="#cdduartreadapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.23. </span>CddUartReadApi<a class="headerlink" href="#cdduartreadapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1407,7 +1433,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartcancelapi">
-<h4><span class="section-number">4.11.9.2.5. </span>CddUartCancelApi<a class="headerlink" href="#cdduartcancelapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.24. </span>CddUartCancelApi<a class="headerlink" href="#cdduartcancelapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1443,7 +1469,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartgetremainingwordsapi">
-<h4><span class="section-number">4.11.9.2.6. </span>CddUartGetRemainingWordsApi<a class="headerlink" href="#cdduartgetremainingwordsapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.25. </span>CddUartGetRemainingWordsApi<a class="headerlink" href="#cdduartgetremainingwordsapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1479,7 +1505,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartdeverrordetect">
-<h4><span class="section-number">4.11.9.2.7. </span>CddUartDevErrorDetect<a class="headerlink" href="#cdduartdeverrordetect" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.26. </span>CddUartDevErrorDetect<a class="headerlink" href="#cdduartdeverrordetect" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1515,7 +1541,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 </table>
 </section>
 <section id="cdduartirqtype">
-<h4><span class="section-number">4.11.9.2.8. </span>CddUartIrqType<a class="headerlink" href="#cdduartirqtype" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.11.9.27. </span>CddUartIrqType<a class="headerlink" href="#cdduartirqtype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1527,7 +1553,7 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 <td><p>CddUartIrqType</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>This parameter contains a reference to the OsCounter, which is used by the UART driver.</p></td>
+<td><p>This parameter specifies the category of Interrupt ReQuest for callbacks.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Origin</strong></p></td>
 <td><p>Texas Instruments</p></td>
@@ -1575,7 +1601,6 @@ for use with UART channels in DMA mode as IO mode.</em><br />
 <li><p>separate DMA configuration shall be done for Tx and/or Rx of each UART instance configured for DMA IO mode using the CDD DMA configurator plugin. Make sure to set CddDmaInterruptEnable option provided there as UART peripheral shall make use of enhanced DMA with interrupt enabled.</p></li>
 <li><p>UART Tx makes use of two parameters for Tx and Dummy param sets to service a dummy transfer request at the end as expected from HW IP. So make sure to have corresponding two parameter sets registered in a channel group on configurator plugin.</p></li>
 </ul>
-</section>
 </section>
 </section>
 <section id="examples">

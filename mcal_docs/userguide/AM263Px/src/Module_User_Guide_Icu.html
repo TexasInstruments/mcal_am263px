@@ -111,22 +111,43 @@
 <li class="toctree-l4"><a class="reference internal" href="#multi-core-support">4.17.8.2. Multi-core support</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#configuration">4.17.9. Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#icuconfigset">4.17.9.1. IcuConfigSet</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#icugeneral">4.17.9.2. IcuGeneral</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#icuoptionalapis">4.17.9.3. IcuOptionalApis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#variance-deviation-from-the-specification">4.17.9.4. Variance / Deviation from the specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">4.17.9. Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#icuconfigset">4.17.10. IcuConfigSet</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#icuchannel">4.17.10.1. IcuChannel</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">4.17.10. Examples</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#overview">4.17.10.1. Overview</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.17.10.2. Setup required to run example</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.17.10.3. How to run examples</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sample-log">4.17.10.4. Sample Log</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.17.10.5. File Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#icugeneral">4.17.11. IcuGeneral</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#icudeverrordetect">4.17.11.1. IcuDevErrorDetect</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icuirqtype">4.17.11.2. IcuIrqType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icudevicevariant">4.17.11.3. IcuDeviceVariant</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#references">4.17.11. References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#icuoptionalapis">4.17.12. IcuOptionalApis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#icudeinitapi">4.17.12.1. IcuDeInitApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icudisablewakeupapi">4.17.12.2. IcuDisableWakeupApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icuedgecountapi">4.17.12.3. IcuEdgeCountApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icuedgedetectapi">4.17.12.4. IcuEdgeDetectApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icuenablewakeupapi">4.17.12.5. IcuEnableWakeupApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icugetdutycyclevaluesapi">4.17.12.6. IcuGetDutyCycleValuesApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icugetinputstateapi">4.17.12.7. IcuGetInputStateApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icugettimeelapsedapi">4.17.12.8. IcuGetTimeElapsedApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icugetversioninfoapi">4.17.12.9. IcuGetVersionInfoApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icusetmodeapi">4.17.12.10. IcuSetModeApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icusignalmeasurementapi">4.17.12.11. IcuSignalMeasurementApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icutimestampapi">4.17.12.12. IcuTimestampApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icuwakeupfunctionalityapi">4.17.12.13. IcuWakeupFunctionalityApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variance-deviation-from-the-specification">4.17.12.14. Variance / Deviation from the specification</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#examples">4.17.13. Examples</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">4.17.13.1. Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#setup-required-to-run-example">4.17.13.2. Setup required to run example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-run-examples">4.17.13.3. How to run examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-log">4.17.13.4. Sample Log</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#file-structure">4.17.13.5. File Structure</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#references">4.17.14. References</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Module_User_Guide_Lin.html">4.18. LIN Module</a></li>
@@ -550,14 +571,15 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </section>
 <section id="configuration">
 <h2><span class="section-number">4.17.9. </span>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+</section>
 <section id="icuconfigset">
-<h3><span class="section-number">4.17.9.1. </span>IcuConfigSet<a class="headerlink" href="#icuconfigset" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.17.10. </span>IcuConfigSet<a class="headerlink" href="#icuconfigset" title="Link to this heading"></a></h2>
 <p>This container contains the configuration parameters and sub containers of the AUTOSAR Icu module.</p>
 <section id="icuchannel">
-<h4><span class="section-number">4.17.9.1.1. </span>IcuChannel<a class="headerlink" href="#icuchannel" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.10.1. </span>IcuChannel<a class="headerlink" href="#icuchannel" title="Link to this heading"></a></h3>
 <p>Configuration of an individual ICU channel.</p>
 <section id="icuchannelid">
-<h5><span class="section-number">4.17.9.1.1.1. </span>IcuChannelId<a class="headerlink" href="#icuchannelid" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.17.10.1.1. </span>IcuChannelId<a class="headerlink" href="#icuchannelid" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -596,7 +618,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icudefaultstartedge">
-<h5><span class="section-number">4.17.9.1.1.2. </span>IcuDefaultStartEdge<a class="headerlink" href="#icudefaultstartedge" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.17.10.1.2. </span>IcuDefaultStartEdge<a class="headerlink" href="#icudefaultstartedge" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -608,7 +630,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 <td><p>IcuDefaultStartEdge</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
-<td><p>Configures the capture event to  enable interupt on that capture event or not</p></td>
+<td><p>Configures the default-activation-edge which shall be used for this channel if there was no activation-edge configured by the call of service Icu_SetActivationCondition().</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Origin</strong></p></td>
 <td><p>Texas Instruments</p></td>
@@ -632,7 +654,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icumeasurementmode">
-<h5><span class="section-number">4.17.9.1.1.3. </span>IcuMeasurementMode<a class="headerlink" href="#icumeasurementmode" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.17.10.1.3. </span>IcuMeasurementMode<a class="headerlink" href="#icumeasurementmode" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -668,7 +690,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icuprescaler">
-<h5><span class="section-number">4.17.9.1.1.4. </span>IcuPrescaler<a class="headerlink" href="#icuprescaler" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.17.10.1.4. </span>IcuPrescaler<a class="headerlink" href="#icuprescaler" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -710,7 +732,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icufunctionalclock">
-<h5><span class="section-number">4.17.9.1.1.5. </span>IcuFunctionalClock<a class="headerlink" href="#icufunctionalclock" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.17.10.1.5. </span>IcuFunctionalClock<a class="headerlink" href="#icufunctionalclock" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -746,7 +768,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icuxbarselect">
-<h5><span class="section-number">4.17.9.1.1.6. </span>IcuXbarSelect<a class="headerlink" href="#icuxbarselect" title="Link to this heading"></a></h5>
+<h4><span class="section-number">4.17.10.1.6. </span>IcuXbarSelect<a class="headerlink" href="#icuxbarselect" title="Link to this heading"></a></h4>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -778,12 +800,11 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </tbody>
 </table>
 </section>
-</section>
 <section id="icusignaledgedetection">
-<h4><span class="section-number">4.17.9.1.2. </span>IcuSignalEdgeDetection<a class="headerlink" href="#icusignaledgedetection" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.17.10.1.7. </span>IcuSignalEdgeDetection<a class="headerlink" href="#icusignaledgedetection" title="Link to this heading"></a></h4>
 <p>This container contains the configuration (parameters) in case the measurement mode is “IcuSignalEdgeDetection”</p>
 <section id="icusignalnotification">
-<h5><span class="section-number">4.17.9.1.2.1. </span>IcuSignalNotification<a class="headerlink" href="#icusignalnotification" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.17.10.1.7.1. </span>IcuSignalNotification<a class="headerlink" href="#icusignalnotification" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -829,10 +850,10 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </section>
 </section>
 <section id="icusignalmeasurement">
-<h4><span class="section-number">4.17.9.1.3. </span>IcuSignalMeasurement<a class="headerlink" href="#icusignalmeasurement" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.17.10.1.8. </span>IcuSignalMeasurement<a class="headerlink" href="#icusignalmeasurement" title="Link to this heading"></a></h4>
 <p>This container contains the configuration (parameters) in case the measurement mode is “IcuSignalMeasurement”</p>
 <section id="icusignalmeasurementproperty">
-<h5><span class="section-number">4.17.9.1.3.1. </span>IcuSignalMeasurementProperty<a class="headerlink" href="#icusignalmeasurementproperty" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.17.10.1.8.1. </span>IcuSignalMeasurementProperty<a class="headerlink" href="#icusignalmeasurementproperty" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -869,10 +890,10 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </section>
 </section>
 <section id="icutimestampmeasurement">
-<h4><span class="section-number">4.17.9.1.4. </span>IcuTimestampMeasurement<a class="headerlink" href="#icutimestampmeasurement" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.17.10.1.9. </span>IcuTimestampMeasurement<a class="headerlink" href="#icutimestampmeasurement" title="Link to this heading"></a></h4>
 <p>This container contains the configuration (parameters) in case the measurement mode is “IcuTimestamp”</p>
 <section id="icutimestampmeasurementproperty">
-<h5><span class="section-number">4.17.9.1.4.1. </span>IcuTimestampMeasurementProperty<a class="headerlink" href="#icutimestampmeasurementproperty" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.17.10.1.9.1. </span>IcuTimestampMeasurementProperty<a class="headerlink" href="#icutimestampmeasurementproperty" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -908,7 +929,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icutimestampnotification">
-<h5><span class="section-number">4.17.9.1.4.2. </span>IcuTimestampNotification<a class="headerlink" href="#icutimestampnotification" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.17.10.1.9.2. </span>IcuTimestampNotification<a class="headerlink" href="#icutimestampnotification" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -954,10 +975,10 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </section>
 </section>
 <section id="icuwakeup">
-<h4><span class="section-number">4.17.9.1.5. </span>IcuWakeup<a class="headerlink" href="#icuwakeup" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.17.10.1.10. </span>IcuWakeup<a class="headerlink" href="#icuwakeup" title="Link to this heading"></a></h4>
 <p>This container contains the configuration (parameters) needed to configure a wakeup capable channel</p>
 <section id="icuchannelwakeupinfo">
-<h5><span class="section-number">4.17.9.1.5.1. </span>IcuChannelWakeupInfo<a class="headerlink" href="#icuchannelwakeupinfo" title="Link to this heading"></a></h5>
+<h5><span class="section-number">4.17.10.1.10.1. </span>IcuChannelWakeupInfo<a class="headerlink" href="#icuchannelwakeupinfo" title="Link to this heading"></a></h5>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1003,11 +1024,12 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </section>
 </section>
 </section>
+</section>
 <section id="icugeneral">
-<h3><span class="section-number">4.17.9.2. </span>IcuGeneral<a class="headerlink" href="#icugeneral" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.17.11. </span>IcuGeneral<a class="headerlink" href="#icugeneral" title="Link to this heading"></a></h2>
 <p>Configuration of general ICU parameters.</p>
 <section id="icudeverrordetect">
-<h4><span class="section-number">4.17.9.2.1. </span>IcuDevErrorDetect<a class="headerlink" href="#icudeverrordetect" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.11.1. </span>IcuDevErrorDetect<a class="headerlink" href="#icudeverrordetect" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1043,7 +1065,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icuirqtype">
-<h4><span class="section-number">4.17.9.2.2. </span>IcuIrqType<a class="headerlink" href="#icuirqtype" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.11.2. </span>IcuIrqType<a class="headerlink" href="#icuirqtype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1082,7 +1104,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icudevicevariant">
-<h4><span class="section-number">4.17.9.2.3. </span>IcuDeviceVariant<a class="headerlink" href="#icudevicevariant" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.11.3. </span>IcuDeviceVariant<a class="headerlink" href="#icudevicevariant" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1122,10 +1144,10 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </section>
 </section>
 <section id="icuoptionalapis">
-<h3><span class="section-number">4.17.9.3. </span>IcuOptionalApis<a class="headerlink" href="#icuoptionalapis" title="Link to this heading"></a></h3>
+<h2><span class="section-number">4.17.12. </span>IcuOptionalApis<a class="headerlink" href="#icuoptionalapis" title="Link to this heading"></a></h2>
 <p>This container contains all configuration switches for configuring optional API services of the ICU driver.</p>
 <section id="icudeinitapi">
-<h4><span class="section-number">4.17.9.3.1. </span>IcuDeInitApi<a class="headerlink" href="#icudeinitapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.1. </span>IcuDeInitApi<a class="headerlink" href="#icudeinitapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1161,7 +1183,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icudisablewakeupapi">
-<h4><span class="section-number">4.17.9.3.2. </span>IcuDisableWakeupApi<a class="headerlink" href="#icudisablewakeupapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.2. </span>IcuDisableWakeupApi<a class="headerlink" href="#icudisablewakeupapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1197,7 +1219,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icuedgecountapi">
-<h4><span class="section-number">4.17.9.3.3. </span>IcuEdgeCountApi<a class="headerlink" href="#icuedgecountapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.3. </span>IcuEdgeCountApi<a class="headerlink" href="#icuedgecountapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1233,7 +1255,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icuedgedetectapi">
-<h4><span class="section-number">4.17.9.3.4. </span>IcuEdgeDetectApi<a class="headerlink" href="#icuedgedetectapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.4. </span>IcuEdgeDetectApi<a class="headerlink" href="#icuedgedetectapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1269,7 +1291,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icuenablewakeupapi">
-<h4><span class="section-number">4.17.9.3.5. </span>IcuEnableWakeupApi<a class="headerlink" href="#icuenablewakeupapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.5. </span>IcuEnableWakeupApi<a class="headerlink" href="#icuenablewakeupapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1305,7 +1327,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icugetdutycyclevaluesapi">
-<h4><span class="section-number">4.17.9.3.6. </span>IcuGetDutyCycleValuesApi<a class="headerlink" href="#icugetdutycyclevaluesapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.6. </span>IcuGetDutyCycleValuesApi<a class="headerlink" href="#icugetdutycyclevaluesapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1341,7 +1363,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icugetinputstateapi">
-<h4><span class="section-number">4.17.9.3.7. </span>IcuGetInputStateApi<a class="headerlink" href="#icugetinputstateapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.7. </span>IcuGetInputStateApi<a class="headerlink" href="#icugetinputstateapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1377,7 +1399,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icugettimeelapsedapi">
-<h4><span class="section-number">4.17.9.3.8. </span>IcuGetTimeElapsedApi<a class="headerlink" href="#icugettimeelapsedapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.8. </span>IcuGetTimeElapsedApi<a class="headerlink" href="#icugettimeelapsedapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1413,7 +1435,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icugetversioninfoapi">
-<h4><span class="section-number">4.17.9.3.9. </span>IcuGetVersionInfoApi<a class="headerlink" href="#icugetversioninfoapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.9. </span>IcuGetVersionInfoApi<a class="headerlink" href="#icugetversioninfoapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1449,7 +1471,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icusetmodeapi">
-<h4><span class="section-number">4.17.9.3.10. </span>IcuSetModeApi<a class="headerlink" href="#icusetmodeapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.10. </span>IcuSetModeApi<a class="headerlink" href="#icusetmodeapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1485,7 +1507,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icusignalmeasurementapi">
-<h4><span class="section-number">4.17.9.3.11. </span>IcuSignalMeasurementApi<a class="headerlink" href="#icusignalmeasurementapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.11. </span>IcuSignalMeasurementApi<a class="headerlink" href="#icusignalmeasurementapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1521,7 +1543,7 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </table>
 </section>
 <section id="icutimestampapi">
-<h4><span class="section-number">4.17.9.3.12. </span>IcuTimestampApi<a class="headerlink" href="#icutimestampapi" title="Link to this heading"></a></h4>
+<h3><span class="section-number">4.17.12.12. </span>IcuTimestampApi<a class="headerlink" href="#icutimestampapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1534,6 +1556,42 @@ Following steps need to be followed in order to configure Interrupt X-Bar:</p>
 </tr>
 <tr class="row-odd"><td><p><strong>Description</strong></p></td>
 <td><p>Adds / removes all services related to the timestamping functionality as listed below from the code: Icu_StartTimestamp(), Icu_StopTimestamp(), Icu_GetTimestampIndex().</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>AUTOSAR_ECUC</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="icuwakeupfunctionalityapi">
+<h3><span class="section-number">4.17.12.13. </span>IcuWakeupFunctionalityApi<a class="headerlink" href="#icuwakeupfunctionalityapi" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>IcuWakeupFunctionalityApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Adds / removes the service Icu_CheckWakeup() from the code.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>Origin</strong></p></td>
 <td><p>AUTOSAR_ECUC</p></td>
@@ -1587,9 +1645,8 @@ For Timestamp mode callback name is : Icu_TimeStampNotification_Channel1</p></li
 </table>
 <p>The following section details on the un-supported features and additional features added.</p>
 </section>
-</section>
 <section id="variance-deviation-from-the-specification">
-<h3><span class="section-number">4.17.9.4. </span>Variance / Deviation from the specification<a class="headerlink" href="#variance-deviation-from-the-specification" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.17.12.14. </span>Variance / Deviation from the specification<a class="headerlink" href="#variance-deviation-from-the-specification" title="Link to this heading"></a></h3>
 <p>APIs (listed below) related to <strong>wakeup capability</strong> are not supported
 as the hardware does not support.</p>
 <ul class="simple">
@@ -1602,9 +1659,9 @@ as the hardware does not support.</p>
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">4.17.10. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.17.13. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <section id="overview">
-<h3><span class="section-number">4.17.10.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.17.13.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Icu Example</p>
 <ul>
@@ -1627,13 +1684,13 @@ as the hardware does not support.</p>
 </ul>
 </section>
 <section id="setup-required-to-run-example">
-<h3><span class="section-number">4.17.10.2. </span>Setup required to run example<a class="headerlink" href="#setup-required-to-run-example" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.17.13.2. </span>Setup required to run example<a class="headerlink" href="#setup-required-to-run-example" title="Link to this heading"></a></h3>
 <p>None</p>
 </section>
 <section id="how-to-run-examples">
-<h3><span class="section-number">4.17.10.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.17.13.3. </span>How to run examples<a class="headerlink" href="#how-to-run-examples" title="Link to this heading"></a></h3>
 <section id="build-and-running-the-example-application">
-<h4><span class="section-number">4.17.10.3.1. </span>Build and Running the Example Application<a class="headerlink" href="#build-and-running-the-example-application" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.17.13.3.1. </span>Build and Running the Example Application<a class="headerlink" href="#build-and-running-the-example-application" title="Link to this heading"></a></h4>
 <p>Please follow steps detailed in section to build library or example.</p>
 <p>ECAP based application name - icu_app</p>
 <p>This application uses the PWM (Enhanced Pulse Width Module) to provide input to ECAP instance. The ECAP module (with ICU driver) will capture the signals provided as input.</p>
@@ -1644,7 +1701,7 @@ as the hardware does not support.</p>
 </ul>
 </section>
 <section id="flow-of-the-example-application">
-<h4><span class="section-number">4.17.10.3.2. </span>Flow of the example application<a class="headerlink" href="#flow-of-the-example-application" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.17.13.3.2. </span>Flow of the example application<a class="headerlink" href="#flow-of-the-example-application" title="Link to this heading"></a></h4>
 <p>In the IcuApp.c , following steps are there:</p>
 <ol class="arabic simple">
 <li><p>Firstly the pin mux is initialize</p></li>
@@ -1659,7 +1716,7 @@ as the hardware does not support.</p>
 </section>
 </section>
 <section id="sample-log">
-<h3><span class="section-number">4.17.10.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.17.13.4. </span>Sample Log<a class="headerlink" href="#sample-log" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span>
 <span class="nl">IcuApp</span><span class="p">:</span><span class="w"> </span><span class="n">Sample</span><span class="w"> </span><span class="n">Application</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">STARTS</span><span class="w"> </span><span class="o">!!!</span>
 <span class="w">  </span>
@@ -1689,7 +1746,7 @@ as the hardware does not support.</p>
 </div>
 </section>
 <section id="file-structure">
-<h3><span class="section-number">4.17.10.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.17.13.5. </span>File Structure<a class="headerlink" href="#file-structure" title="Link to this heading"></a></h3>
 <p>📦AM263Px<br />
 ┣ 📂build<br />
 ┣ 📂mcal<br />
@@ -1715,7 +1772,7 @@ as the hardware does not support.</p>
 </section>
 </section>
 <section id="references">
-<h2><span class="section-number">4.17.11. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<h2><span class="section-number">4.17.14. </span>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
 <p><a class="reference external" href="https://www.autosar.org/fileadmin/standards/R4.3.1/CP/AUTOSAR_SWS_ICUDriver.pdf">AUTOSAR_SWS_ICUDriver</a><br />
 <a class="reference external" href="https://www.ti.com/lit/ug/spruj17c/spruj17c.pdf?ts=1687237550088&amp;amp;ref_url=https%253A%25">Technical Reference Manual</a></p>
 </section>

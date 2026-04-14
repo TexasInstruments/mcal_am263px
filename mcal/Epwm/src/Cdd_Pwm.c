@@ -1565,7 +1565,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_SyncDisable(Cdd_Pwm_ChannelType Chann
  */
 #if (STD_ON == CDD_PWM_COUNTER_COMPARE_CFG)
 FUNC(Std_ReturnType, CDD_PWM_CODE)
-Cdd_Pwm_CounterComparatorCfg(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint32 cmpVal,
+Cdd_Pwm_CounterComparatorCfg(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType cmpType, uint16 cmpVal,
                              uint32 shadowToActiveLoadTrigger, uint32 overwriteShadow)
 {
     uint32         baseAddr;
@@ -1583,8 +1583,8 @@ Cdd_Pwm_CounterComparatorCfg(Cdd_Pwm_ChannelType Channel, Cdd_Pwm_OutputChType c
             SchM_Enter_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
 
             /* Set Comaprator Values. */
-            status = (boolean)Cdd_Pwm_counterComparatorCfg(baseAddr, cmpType, cmpVal, shadowToActiveLoadTrigger,
-                                                           overwriteShadow);
+            status =
+                Cdd_Pwm_counterComparatorCfg(baseAddr, cmpType, cmpVal, shadowToActiveLoadTrigger, overwriteShadow);
 
             /* Exit Critical Section. */
             SchM_Exit_Cdd_Pwm_PWM_EXCLUSIVE_AREA_0();
