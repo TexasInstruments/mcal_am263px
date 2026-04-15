@@ -132,14 +132,17 @@ sint32 IpcNotify_lld_init(IpcNotify_Handle hIpcNotify)
 
         MCAL_LLD_PARAMS_CHECK(selfCoreId < MCAL_CSL_CORE_ID_MAX);
 
-        hIpcNotify->interruptConfig    = IpcNotifyCfg_getInterruptConfig(selfCoreId);
-        hIpcNotify->interruptConfigNum = IpcNotifyCfg_getInterruptConfigNum(selfCoreId);
-
-        for (clientId = 0U; clientId < IPC_NOTIFY_CLIENT_ID_MAX; clientId++)
+        if (selfCoreId < MCAL_CSL_CORE_ID_MAX)
         {
-            IpcNotify_lld_unregisterClient(hIpcNotify, (uint16)clientId);
+            hIpcNotify->interruptConfig    = IpcNotifyCfg_getInterruptConfig(selfCoreId);
+            hIpcNotify->interruptConfigNum = IpcNotifyCfg_getInterruptConfigNum(selfCoreId);
+
+            for (clientId = 0U; clientId < IPC_NOTIFY_CLIENT_ID_MAX; clientId++)
+            {
+                IpcNotify_lld_unregisterClient(hIpcNotify, (uint16)clientId);
+            }
+            IpcNotify_lld_init_clearIntOn(hIpcNotify, selfCoreId);
         }
-        IpcNotify_lld_init_clearIntOn(hIpcNotify, selfCoreId);
     }
     else
     {
@@ -374,7 +377,8 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, co
     sint32             status       = MCAL_SystemP_SUCCESS;
     uint32             elapsedTicks = 0U, startTicks = 0U, tempTicks = 0U;
 
-    if ((hIpcNotify->isCoreEnabled[msgParams->remoteCoreId]) != 0U)
+    if ((msgParams->remoteCoreId < MCAL_CSL_CORE_ID_MAX) &&
+        ((hIpcNotify->isCoreEnabled[msgParams->remoteCoreId]) != 0U))
     {
         uint32 value = IpcNotify_makeMsg(hIpcNotify, msgParams->remoteClientId, msgParams->messageValue);
 

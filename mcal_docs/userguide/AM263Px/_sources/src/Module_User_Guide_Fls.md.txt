@@ -362,7 +362,7 @@ Not supported
 ### Configuration
 
 
-### FlsConfigSet
+##### FlsConfigSet
 Container for runtime configuration parameters of the flash driver.
 
 ###### FlsAcErase
@@ -653,10 +653,10 @@ Container for runtime configuration parameters of the flash driver.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### FlsFlashConfigList
+###### FlsFlashConfigList
 List of flash memory configurations.
 
-##### FlsFlashConfiguration
+###### FlsFlashConfiguration
 Configuration description of external flash devices.
 
 ###### FlsManfId
@@ -1719,7 +1719,7 @@ List of protocol related configuration parameters
 | **Max-value** | 65535 |
 | **Min-value** | 0 |
 
-#### FlsExternalDriver
+###### FlsExternalDriver
 This container is present for external Flash drivers only. Internal Flash drivers do not use the parameter listed in this container, hence its multiplicity is 0 for internal drivers. Currently, not supported as only one external driver present.
 
 ###### FlsSpiReference
@@ -1738,10 +1738,10 @@ This container is present for external Flash drivers only. Internal Flash driver
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### FlsSectorList
+###### FlsSectorList
 List of flashable sectors and pages.The maximum number of sectors/sector size/pages/pagesize that can be configured, is based on external flash used, and care must be taken to configure these parameters as per the external flash used
 
-##### FlsSector
+###### FlsSector
 Configuration description of a flashable sector
 
 ###### FlsNumberOfSectors
@@ -1804,7 +1804,7 @@ Configuration description of a flashable sector
 | **Max-value** | 4294967295 |
 | **Min-value** | 0 |
 
-### FlsGeneral
+##### FlsGeneral
 Container for general parameters of the flash driver. These parameters are always pre-compile.
 
 ###### FlsAcLoadOnJobStart

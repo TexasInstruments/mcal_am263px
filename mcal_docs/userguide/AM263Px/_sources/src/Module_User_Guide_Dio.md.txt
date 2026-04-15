@@ -275,10 +275,10 @@ Not Supported
 
 
 
-### DioConfig
+##### DioConfig
 This container contains the configuration parameters and sub containers of the AUTOSAR DIO module. This container is a MultipleConfigurationContainer, i.e. this container and its sub-containers exist once per configuration set.
 
-#### DioPort
+###### DioPort
 Configuration of individual DIO ports, consisting of channels and possible channel groups.
 
 ###### DioPortId
@@ -296,7 +296,7 @@ Configuration of individual DIO ports, consisting of channels and possible chann
 | **Max-value** | 4 |
 | **Min-value** | 0 |
 
-##### DioChannel
+###### DioChannel
 Configuration of an individual DIO channel. Besides a HW specific channel name which is typically fixed for a specific micro controller, additional symbolic names can be defined per channel.
 
 ###### DioChannelId
@@ -314,7 +314,7 @@ Configuration of an individual DIO channel. Besides a HW specific channel name w
 | **Max-value** | 138 |
 | **Min-value** | 0 |
 
-##### DioChannelGroup
+###### DioChannelGroup
 Definition and configuration of DIO channel groups. A channel group represents several adjoining DIO channels represented by a logical group.
 
 ###### DioChannelGroupIdentification
@@ -357,7 +357,7 @@ Definition and configuration of DIO channel groups. A channel group represents s
 | **Max-value** | 31 |
 | **Min-value** | 0 |
 
-### DioGeneral
+##### DioGeneral
 General DIO module configuration parameters.
 
 ###### DioDevErrorDetect

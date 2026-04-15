@@ -412,10 +412,10 @@ Not supported
 ### Configuration
 
 
-### EthConfigSet
+##### EthConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR Eth module.
 
-#### EthCtrlConfig
+###### EthCtrlConfig
 Configuration of the individual controller
 
 ###### EthCtrlEnableMii
@@ -605,7 +605,7 @@ Configuration of the individual controller
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | false |
 
-##### EthCtrlConfigEgress
+###### EthCtrlConfigEgress
 Configuration of one Ethernet controler egress behavior.
 
 ###### EthCtrlConfigEgressLastSchedulerRef
@@ -761,7 +761,7 @@ Represents a Shaper an the egress side.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### EthCtrlConfigIngress
+###### EthCtrlConfigIngress
 Configuration of one Ethernet controler ingress behavior.
 
 ###### EthCtrlConfigIngressFifo
@@ -836,7 +836,7 @@ Represents a Fifo at the ingress side.
 | **Max-value** | 7 |
 | **Min-value** | 0 |
 
-##### EthDemEventParameterRefs
+###### EthDemEventParameterRefs
 
 | Item ||
 |--------|---------------|
@@ -854,7 +854,7 @@ Represents a Fifo at the ingress side.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### EthPortConfig
+###### EthPortConfig
 Structure for port configuration
 
 ###### EthMacConfig
@@ -892,7 +892,7 @@ MAC Init Configurations
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-##### EthCpdmaConfig
+###### EthCpdmaConfig
 
 ###### EthPacingClkFreq
 
@@ -1009,7 +1009,7 @@ MAC Init Configurations
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### EthMdioConfig
+###### EthMdioConfig
 Structure for MDIO configuration
 
 ###### EthMdioBusFreq
@@ -1040,7 +1040,7 @@ Structure for MDIO configuration
 | **Max-value** | 4294967295 |
 | **Min-value** | 0 |
 
-##### EthCptsConfig
+###### EthCptsConfig
 CPTS Module Init Configuration Structure for the CPTS modules provided during initialization
 
 ###### EthCptsInputFreq
@@ -1091,7 +1091,7 @@ Structure for CPTS Ethernet Message Configuration
 | **Default-value** | ETH_CPTS_MESSAGE_SYNC |
 | **Range** | ETH_CPTS_MESSAGE_SYNC<br>ETH_CPTS_MESSAGE_DELAY_REQ<br>ETH_CPTS_MESSAGE_PDELAY_REQ<br>ETH_CPTS_MESSAGE_PDELAY_RESP<br>ETH_CPTS_MESSAGE_FOLLOW_UP<br>ETH_CPTS_MESSAGE_DELAY_RESP<br>ETH_CPTS_MESSAGE_PDELAY_RESP_FOLLOW_UP<br>ETH_CPTS_MESSAGE_ANNOUNCE<br>ETH_CPTS_MESSAGE_SIGNALING<br>ETH_CPTS_MESSAGE_MANAGEMENT<br>ETH_CPTS_MESSAGE_ALL |
 
-### EthGeneral
+##### EthGeneral
 General configuration of Ethernet Driver module
 
 ###### EthDevErrorDetect
@@ -1364,7 +1364,7 @@ General configuration of Ethernet Driver module
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### EthInterruptConfig
+###### EthInterruptConfig
 interrupt configuration- misc interrupts flags.
 
 ###### EthStatsInterruptEnable
@@ -1409,7 +1409,7 @@ interrupt configuration- misc interrupts flags.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | **Default-value** | true |
 
-#### EthCtrlOffloading
+###### EthCtrlOffloading
 Configuration of hardware offloading features.
 
 ###### EthCtrlEnableOffloadChecksumICMP

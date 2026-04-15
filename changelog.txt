@@ -1,3 +1,62 @@
+commit dd8b155ecb52611d0f2ab61cfcd5111d5600b90b
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Apr 15 11:42:21 2026 +0530
+
+    all: Can: Adding Requires-tag for CanHardwareObject
+    
+    Fixes: MCAL-35600
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../plugins/AM261x/Can_TI_AM261x/config/Can.arxml  |  1 +
+ .../plugins/AM261x/Can_TI_AM261x/config/Can.xdm    | 11 +++---
+ .../AM263Px/Can_TI_AM263Px/config/Can.arxml        |  1 +
+ .../plugins/AM263Px/Can_TI_AM263Px/config/Can.xdm  | 11 +++---
+ .../plugins/AM263x/Can_TI_AM263x/config/Can.arxml  |  1 +
+ .../plugins/AM263x/Can_TI_AM263x/config/Can.xdm    |  1 +
+ mcal_test/epwm_test/testInput/cddPwmTestCases.h    |  4 +--
+ .../epwm_test/testLib/cddPwmTestMainTestCase.c     | 41 ++++++++++------------
+ .../epwm_test/testLib/cddPwmTestNegativeTestCase.c | 12 +++----
+ 9 files changed, 42 insertions(+), 41 deletions(-)
+
+commit e3f816eeb7c8d47988f2153205fdaf76f092688f
+Author: Akash <a-verma3@ti.com>
+Date:   Tue Apr 7 15:13:29 2026 +0530
+
+    Can/Ipc: Klockwork fix for Can and Ipc
+    
+    Fixes: MCAL-36793
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dma/src/Cdd_Dma.c           |  3 +--
+ mcal/I2c/src/Cdd_I2c.c           | 21 +++++++++------------
+ mcal/Ipc/src/Cdd_Ipc.c           |  2 +-
+ mcal/Ipc/src/ipc_notify_v1_lld.c | 18 +++++++++++-------
+ mcal/Lin/src/Lin.c               | 23 ++++++-----------------
+ mcal/Wdg/V0/Wdg_Priv.c           | 28 ++++++++++++++++++++++------
+ 6 files changed, 50 insertions(+), 45 deletions(-)
+
+commit 47703f27a4c44f32520f14c2642c533b7abd3b85
+Author: Asha D <asha.d@ti.com>
+Date:   Mon Feb 23 18:03:28 2026 +0530
+
+    am263px:EPWM:Added testcases for coverage
+    
+            Removed redundant null checks
+            Fixing lint warnings
+    
+    Fixes: MCAL-37016, MCAL-35527
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c                        |  42 ++-
+ mcal_test/epwm_test/testInput/cddPwmTestCases.h    |  28 +-
+ mcal_test/epwm_test/testLib/cddPwmTest.h           |   1 +
+ .../epwm_test/testLib/cddPwmTestMainTestCase.c     | 420 ++++++++++++++++-----
+ .../epwm_test/testLib/cddPwmTestNegativeTestCase.c |  84 ++++-
+ 5 files changed, 442 insertions(+), 133 deletions(-)
+
 commit 8263bda26baea7020ba3d4dc7d8c46827b514961
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Apr 14 09:59:21 2026 +0530

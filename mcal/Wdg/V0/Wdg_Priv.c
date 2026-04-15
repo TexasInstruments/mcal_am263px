@@ -210,9 +210,12 @@ FUNC(void, WDG_CODE) Wdg_counterEnable(uint32 baseAddr)
  */
 FUNC(uint32, MCU_CODE) Wdg_getWdgBaseAddr(uint16 regNum)
 {
-    uint32 baseAddr;
+    uint32 baseAddr = 0U;
 
-    baseAddr = Wdg_RTIChannelAddr[regNum];
+    if (regNum < (uint16)WDG_MAX_INSTANCES)
+    {
+        baseAddr = Wdg_RTIChannelAddr[regNum];
+    }
 
     return (baseAddr);
 }
@@ -312,7 +315,20 @@ Wdg_platformInit(P2CONST(Wdg_ConfigType, AUTOMATIC, WDG_APPL_CONST) ConfigPtr)
         status = (Std_ReturnType)E_NOT_OK;
     }
     else
+    {
+        status = (Std_ReturnType)E_OK;
+    }
+#else
+    if ((uint32)ConfigPtr->instanceId < (uint32)WDG_MAX_INSTANCES)
+    {
+        status = (Std_ReturnType)E_OK;
+    }
+    else
+    {
+        status = (Std_ReturnType)E_NOT_OK;
+    }
 #endif
+    if ((Std_ReturnType)E_OK == status)
     {
         status = wdg_platforminit_internal(ConfigPtr);
         if ((Std_ReturnType)E_OK == status)
@@ -429,10 +445,10 @@ static FUNC(void, WDG_CODE) Wdg_reset(void)
 }
 static inline void Wdg_AssertPrivilegedMode(void)
 {
-    uint32_t dummy;
-    /* UNDEFINED in User mode */
-    __asm__ volatile("MRC p15, 0, %0, c0, c0, 0" : "=r"(dummy));
-    (void)dummy;
+    /* MISRA Dir 4.3: only assembly in this function (MISRA.ASM.ENCAPS fix).
+       MRC reads MIDR register (CP15 c0) which is privileged-only.
+       Triggers UNDEFINED exception if called in user mode. */
+    __asm__ volatile("MRC p15, 0, r0, c0, c0, 0" : : : "r0", "memory");
 }
 
 /** @fn FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) Mode)

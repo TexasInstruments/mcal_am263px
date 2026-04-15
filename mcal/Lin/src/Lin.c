@@ -386,40 +386,29 @@ static FUNC(Std_ReturnType, LIN_CODE)
 #endif
         return_value = E_NOT_OK;
     }
-    if ((Channel >= LIN_MAX_CHANNEL) && (return_value == E_OK))
+    else if (Channel >= LIN_MAX_CHANNEL)
     {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_INVALID_CHANNEL);
 #endif
         return_value = E_NOT_OK;
     }
-    if ((NULL_PTR == PduInfoPtr) && (return_value == E_OK))
+    else if (NULL_PTR == PduInfoPtr)
     {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
         (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_PARAM_POINTER);
 #endif
         return_value = E_NOT_OK;
     }
-    if (return_value == E_OK)
+    else
     {
-        if (Channel < LIN_MAX_CHANNEL)
+        if (LIN_CHANNEL_OPERATIONAL != Lin_Channel_Status[Channel].linChannelNetworkStatus)
         {
-            if (LIN_CHANNEL_OPERATIONAL != Lin_Channel_Status[Channel].linChannelNetworkStatus)
-            {
 #if (STD_ON == LIN_DEV_ERROR_DETECT)
-                (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_STATE_TRANSITION);
+            (void)Det_ReportError(LIN_MODULE_ID, LIN_INSTANCE_ID, LIN_SID_SEND_FRAME, LIN_E_STATE_TRANSITION);
 #endif
-                return_value = E_NOT_OK;
-            }
+            return_value = E_NOT_OK;
         }
-        /* TI_COVERAGE_GAP_START: Channel always < LIN_MAX_CHANNEL when return_value == E_OK;
-         * boundary check sets return_value = E_NOT_OK when Channel >= LIN_MAX_CHANNEL. False branch
-         * unreachable by design. */
-        else
-        {
-            /* Do Nothing */
-        }
-        /* TI_COVERAGE_GAP_STOP */
     }
     return return_value;
 }

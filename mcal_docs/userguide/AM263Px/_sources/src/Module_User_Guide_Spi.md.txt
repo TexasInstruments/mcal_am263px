@@ -401,7 +401,7 @@ Not Supported
 
 
 
-### SpiDemEventParameterRefs
+##### SpiDemEventParameterRefs
 
 | Item ||
 |--------|---------------|
@@ -419,7 +419,7 @@ Not Supported
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-### SpiDriver
+##### SpiDriver
 This container contains the configuration parameters and sub containers of the AUTOSAR Spi module.
 
 ###### SpiMaxChannel
@@ -517,7 +517,7 @@ This container contains the configuration parameters and sub containers of the A
 | **Max-value** | 8 |
 | **Min-value** | 0 |
 
-#### SpiChannel
+###### SpiChannel
 All data needed to configure one SPI-channel
 
 ###### SpiChannelId
@@ -635,7 +635,7 @@ All data needed to configure one SPI-channel
 | **Default-value** | MSB |
 | **Range** | LSB<br>MSB |
 
-#### SpiExternalDevice
+###### SpiExternalDevice
 The communication settings of an external device. Closely linked to SpiJob.
 
 ###### SpiExternalDeviceId
@@ -819,7 +819,7 @@ The communication settings of an external device. Closely linked to SpiJob.
 | **Max-value** | 65535 |
 | **Min-value** | 0 |
 
-##### SpiExternalDeviceConfigMCSPI
+###### SpiExternalDeviceConfigMCSPI
 MCSPI HW specific external device config. Should be populated only if hwUnitId is of type MCSPI
 
 ###### SpiExtDeviceMCSPITxRxMode
@@ -896,7 +896,7 @@ MCSPI HW specific external device config. Should be populated only if hwUnitId i
 | **Default-value** | DATA_LINE_1_TRANSMISSION |
 | **Range** | DATA_LINE_NO_TRANSMISSION<br>DATA_LINE_0_TRANSMISSION<br>DATA_LINE_1_TRANSMISSION<br>DATA_LINE_BOTH_TRANSMISSION |
 
-#### SpiJob
+###### SpiJob
 All data needed to configure one SPI-Job, amongst others the connection between the internal SPI unit and the special settings for an external device is done.
 
 ###### SpiHwUnitSynchronous
@@ -996,7 +996,7 @@ All data needed to configure one SPI-Job, amongst others the connection between 
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### SpiChannelList
+###### SpiChannelList
 References to SPI channels and their order within the Job.
 
 ###### SpiChannelIndex
@@ -1028,7 +1028,7 @@ References to SPI channels and their order within the Job.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### SpiSequence
+###### SpiSequence
 All data needed to configure one SPI-sequence
 
 ###### SpiInterruptibleSequence
@@ -1098,7 +1098,7 @@ All data needed to configure one SPI-sequence
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### SpiHwUnitConfig
+###### SpiHwUnitConfig
 HW Unit configurations
 
 ###### SpiHwUnitType
@@ -1158,7 +1158,7 @@ HW Unit configurations
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-### SpiGeneral
+##### SpiGeneral
 General configuration settings for SPI-Handler
 
 ###### SpiCancelApi
@@ -1574,7 +1574,7 @@ General configuration settings for SPI-Handler
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### SpiHwUnitEnabled
+###### SpiHwUnitEnabled
 Structure for storing enabled SPI HW units
 
 ###### SpiHwUnitEnabledFlag

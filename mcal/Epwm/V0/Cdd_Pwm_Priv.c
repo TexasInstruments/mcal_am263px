@@ -792,7 +792,7 @@ static void Cdd_Pwm_CounterCmpD(Cdd_Pwm_ChannelType ChannelNumber, uint32 baseAd
             (EPWM_CounterCompareLoadMode)counterCompareParameter->channelCddPwmCounterCompareShadowModeCmpD);
     }
 
-    if (counterCompareParameter->channelCddPwmCounterCompareGlobalLoadCmpC == TRUE)
+    if (counterCompareParameter->channelCddPwmCounterCompareGlobalLoadCmpD == TRUE)
     {
         EPWM_enableGlobalLoadRegisters(baseAddr, EPWM_GL_REGISTER_CMPD);
     }
@@ -803,7 +803,7 @@ static void Cdd_Pwm_CounterCmpD(Cdd_Pwm_ChannelType ChannelNumber, uint32 baseAd
 
     if (counterCompareParameter->channelCddPwmTbprdlinkCmpD != CDD_PWM_LINK_DISABLE)
     {
-        EPWM_setupEPWMLinks(baseAddr, counterCompareParameter->channelCddPwmTbprdlinkCmpD, EPWM_LINK_COMP_C);
+        EPWM_setupEPWMLinks(baseAddr, counterCompareParameter->channelCddPwmTbprdlinkCmpD, EPWM_LINK_COMP_D);
     }
 }
 
@@ -1380,19 +1380,25 @@ Cdd_Pwm_SetPinAction_Private(const Cdd_Pwm_ChObjType *chObj, Cdd_Pwm_PinActionTy
         {
             swTrigAction = EPWM_AQ_SW_DISABLED;
             break;
+            /* TI_COVERAGE_GAP_START  - unreachable after break - LLVM artifact */
         }
+            /* TI_COVERAGE_GAP_STOP */
 
         case CDD_PWM_SET_LOW:
         {
             swTrigAction = EPWM_AQ_SW_OUTPUT_LOW;
             break;
+            /* TI_COVERAGE_GAP_START  - unreachable after break - LLVM artifact */
         }
+            /* TI_COVERAGE_GAP_STOP */
 
         case CDD_PWM_SET_HIGH:
         {
             swTrigAction = EPWM_AQ_SW_OUTPUT_HIGH;
             break;
+            /* TI_COVERAGE_GAP_START  - unreachable after break - LLVM artifact */
         }
+            /* TI_COVERAGE_GAP_STOP */
 
         default:
             break;
@@ -2331,8 +2337,13 @@ boolean Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpTy
             status = CDD_PWM_TRUE;
         }
     }
+    /* TI_COVERAGE_GAP_START - (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType) is structurally
+     * unreachable here: BOTH_A_AND_B is always caught by the outer if above.
+     * The sub-condition can never be independently decisive (MC/DC)
+     * or evaluate to TRUE at this else-if. */
     else if ((CDD_PWM_OUTPUT_CH_B == cmpType) || (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType))
     {
+        /* TI_COVERAGE_GAP_STOP */
         if ((TRUE == overwriteShadow) ||
             (FALSE == EPWM_getCounterCompareShadowStatus(baseAddr, EPWM_COUNTER_COMPARE_B)))
         {
@@ -2796,14 +2807,11 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_ChannelNotificationISR_epwm(Cdd_Pwm_ChannelType
 
     Cdd_Pwm_ChObjType *chObj = &Cdd_Pwm_ChObj[ChannelNumber];
 
-    if (NULL_PTR != (void *)chObj)
+    /* Call Notification */
+    if (NULL_PTR != (void *)chObj->notificationHandler)
     {
-        /* Call Notification */
-        if (NULL_PTR != (void *)chObj->notificationHandler)
-        {
-            pwmNotification = chObj->notificationHandler;
-            pwmNotification();
-        }
+        pwmNotification = chObj->notificationHandler;
+        pwmNotification();
     }
 
     /* Clear the events. */
@@ -2835,14 +2843,11 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_ChannelNotificationTzISR(Cdd_Pwm_ChannelType Ch
     statusCBC = EPWM_getCycleByCycleTripZoneFlagStatus(baseAddr);
     statusINT = EPWM_getTripZoneFlagStatus(baseAddr);
 
-    if (NULL_PTR != (void *)chObj)
+    /* Call Notification */
+    if (NULL_PTR != (void *)chObj->notificationTzHandler)
     {
-        /* Call Notification */
-        if (NULL_PTR != (void *)chObj->notificationTzHandler)
-        {
-            pwmTzNotification = chObj->notificationTzHandler;
-            pwmTzNotification();
-        }
+        pwmTzNotification = chObj->notificationTzHandler;
+        pwmTzNotification();
     }
 
     /* Clear the events for CBC trip zone signal */
@@ -2850,12 +2855,17 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_ChannelNotificationTzISR(Cdd_Pwm_ChannelType Ch
     {
         EPWM_clearCycleByCycleTripZoneFlag(baseAddr, statusCBC);
 
+        /* TI_COVERAGE_GAP_START statusCBC is read from TZCBCFLG and statusINT from TZFLG.
+         When TZCBCFLG != 0 (statusCBC != 0), the hardware automatically sets TZFLG.CBC
+         (bit 1), so TZFLG & 0xFF is always non-zero. The FALSE branch of this check is
+         architecturally unreachable when inside if (statusCBC != 0U). */
         if (statusINT != 0U)
         {
             /* Clear the interrupt bit for on-shot/CBC interrupt to detect the furthur interrupts on
              * trip signal */
             EPWM_clearTripZoneFlag(baseAddr, EPWM_TZ_INTERRUPT);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 }
 

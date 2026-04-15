@@ -267,8 +267,7 @@ void Cdd_Dma_ParamSet(uint32 handleId, uint32 channelIdx, uint32 paramIndex, Cdd
         {
             if (Cdd_Dma_handleAlreadyInUse[handleId] != 0U)
             {
-                Det_ReportRuntimeError(CDD_DMA_MODULE_ID, CDD_DMA_INSTANCE_ID, CDD_DMA_PARAMSET_SERVICE_ID,
-                                       CDD_DMA_E_ALREADY_IN_PROGRESS);
+                Cdd_Dma_ReportDetError(CDD_DMA_PARAMSET_SERVICE_ID, CDD_DMA_E_ALREADY_IN_PROGRESS);
             }
             else
             {

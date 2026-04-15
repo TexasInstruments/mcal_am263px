@@ -425,10 +425,10 @@ Refer [AUTOSAR_SWS_CANDriver section: 10 Configuration specification](https://ww
 
 
 
-### CanConfigSet
+##### CanConfigSet
 This container contains the multiple configuration container and sub containers of the AUTOSAR Can module.
 
-#### CanController
+###### CanController
 This container contains the configuration parameters of the CAN controller(s).
 
 ###### CanControllerId
@@ -636,7 +636,7 @@ This container contains the configuration parameters of the CAN controller(s).
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### CanControllerBaudrateConfig
+###### CanControllerBaudrateConfig
 This container contains bit timing related configuration parameters of the CAN controller(s).
 
 ###### CanControllerBaudRate
@@ -839,7 +839,7 @@ This optional container contains bit timing related configuration parameters of 
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
-##### CanTTController
+###### CanTTController
 This container is only included and valid if TTCAN SWS is used and TTCAN is enabled.
 
 ###### CanTTControllerGlobalTimeFiltering
@@ -866,7 +866,7 @@ This container is only included and valid if TTCAN SWS is used and TTCAN is enab
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### CanHardwareObject
+###### CanHardwareObject
 This container contains the configuration (parameters) of CAN Hardware Objects.
 
 ###### CanFdPaddingValue
@@ -1020,7 +1020,7 @@ This container contains the configuration (parameters) of CAN Hardware Objects.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### CanHwFilter
+###### CanHwFilter
 This container is only valid for HRHs and contains the configuration (parameters) of one hardware filter.
 
 ###### CanHwFilterCode
@@ -1053,13 +1053,13 @@ This container is only valid for HRHs and contains the configuration (parameters
 | **Max-value** | 4294967295 |
 | **Min-value** | 0 |
 
-##### CanTTHardwareObjectTrigger
+###### CanTTHardwareObjectTrigger
 This container is only included and valid if TTCAN SWS is used and TTCAN is enabled.
 
-#### CanIcom
+###### CanIcom
 This container contains the parameters for configuring pretended networking
 
-##### CanIcomConfig
+###### CanIcomConfig
 This container contains the configuration parameters of the ICOM Configuration.
 
 ###### CanIcomConfigId
@@ -1182,7 +1182,7 @@ This container contains the configuration parameters for the wakeup causes for m
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-### CanGeneral
+##### CanGeneral
 This container contains the parameters related each CAN Driver Unit.
 
 ###### CanDevErrorDetect
@@ -1434,7 +1434,7 @@ This container contains the parameters related each CAN Driver Unit.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### CanIcomGeneral
+###### CanIcomGeneral
 This container contains the general configuration parameters of the ICOM Configuration.
 
 ###### CanIcomVariant
@@ -1451,7 +1451,7 @@ This container contains the general configuration parameters of the ICOM Configu
 | **Default-value** | CAN_ICOM_VARIANT_NONE |
 | **Range** | CAN_ICOM_VARIANT_HW<br>CAN_ICOM_VARIANT_NONE<br>CAN_ICOM_VARIANT_SW |
 
-#### CanMainFunctionRWPeriods
+###### CanMainFunctionRWPeriods
 This container contains the parameter for configuring the period for cyclic call to Can_MainFunction_Read or Can_MainFunction_Write depending on the referring item.
 
 ###### CanMainFunctionPeriod

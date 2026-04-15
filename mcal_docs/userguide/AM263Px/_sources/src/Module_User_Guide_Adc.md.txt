@@ -574,10 +574,10 @@ Not Supported
 
 
 
-### AdcConfigSet
+##### AdcConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR Adc module.
 
-#### AdcHwUnit
+###### AdcHwUnit
 This container contains the Driver configuration (parameters) depending on grouping of channels
 
 ###### AdcHwUnitId
@@ -626,7 +626,7 @@ This container contains the Driver configuration (parameters) depending on group
 | **Default-value** | ADC_CLK_DIV_1_0 |
 | **Range** | ADC_CLK_DIV_1_0<br>ADC_CLK_DIV_2_0<br>ADC_CLK_DIV_2_5<br>ADC_CLK_DIV_3_0<br>ADC_CLK_DIV_3_5<br>ADC_CLK_DIV_4_0<br>ADC_CLK_DIV_4_5<br>ADC_CLK_DIV_5_0<br>ADC_CLK_DIV_5_5<br>ADC_CLK_DIV_6_0<br>ADC_CLK_DIV_6_5<br>ADC_CLK_DIV_7_0<br>ADC_CLK_DIV_7_5<br>ADC_CLK_DIV_8_0<br>ADC_CLK_DIV_8_5 |
 
-##### AdcChannel
+###### AdcChannel
 This container contains the channel configuration (parameters) depending on the hardware capability.
 
 ###### AdcChannelId
@@ -734,7 +734,7 @@ This container contains the channel configuration (parameters) depending on the 
 | **Max-value** | 512 |
 | **Min-value** | 1 |
 
-##### AdcGroup
+###### AdcGroup
 This container contains the Group configuration (parameters).
 
 ###### AdcGroupAccessMode
@@ -975,7 +975,7 @@ This container contains the Group configuration (parameters).
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-### AdcGeneral
+##### AdcGeneral
 General configuration (parameters) of the ADC Driver software module.
 
 ###### AdcDeInitApi
@@ -1330,7 +1330,7 @@ General configuration (parameters) of the ADC Driver software module.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-#### AdcPowerStateConfig
+###### AdcPowerStateConfig
 Each instance of this parameter defines a power state and the callback to be called when this power state is reached.
 ### Examples
 

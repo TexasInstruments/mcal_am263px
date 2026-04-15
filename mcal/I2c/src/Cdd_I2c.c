@@ -590,21 +590,18 @@ Cdd_I2c_RegisterReadback(uint8 hwUnitId, Cdd_I2c_RegisterReadbackType *regRbPtr)
                                   CDD_I2C_E_PARAM_HWUNIT);
             retVal = E_NOT_OK;
         }
+        else if (NULL_PTR == regRbPtr)
+        {
+            (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_REGISTERREADBACK,
+                                  CDD_I2C_E_PARAM_POINTER);
+            retVal = E_NOT_OK;
+        }
         else
         {
-            if (NULL_PTR == regRbPtr)
-            {
-                (void)Det_ReportError(CDD_I2C_MODULE_ID, CDD_I2C_INSTANCE_ID, CDD_I2C_SID_REGISTERREADBACK,
-                                      CDD_I2C_E_PARAM_POINTER);
-                retVal = E_NOT_OK;
-            }
-            else
-            {
-                uint32 baseAddr;
+            uint32 baseAddr;
 
-                baseAddr = Cdd_I2c_GetHwUnitBaseAddr(hwUnitId);
-                Cdd_I2c_HwRegReadback(baseAddr, regRbPtr);
-            }
+            baseAddr = Cdd_I2c_GetHwUnitBaseAddr(hwUnitId);
+            Cdd_I2c_HwRegReadback(baseAddr, regRbPtr);
         }
     }
 #else

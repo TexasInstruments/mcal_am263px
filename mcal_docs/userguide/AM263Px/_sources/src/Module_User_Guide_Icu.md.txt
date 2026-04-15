@@ -227,10 +227,10 @@ Not Supported
 
 
 
-### IcuConfigSet
+##### IcuConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR Icu module.
 
-#### IcuChannel
+###### IcuChannel
 Configuration of an individual ICU channel.
 
 ###### IcuChannelId
@@ -313,7 +313,7 @@ Configuration of an individual ICU channel.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### IcuSignalEdgeDetection
+###### IcuSignalEdgeDetection
 This container contains the configuration (parameters) in case the measurement mode is "IcuSignalEdgeDetection"
 
 ###### IcuSignalNotification
@@ -332,7 +332,7 @@ This container contains the configuration (parameters) in case the measurement m
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### IcuSignalMeasurement
+###### IcuSignalMeasurement
 This container contains the configuration (parameters) in case the measurement mode is "IcuSignalMeasurement"
 
 ###### IcuSignalMeasurementProperty
@@ -348,7 +348,7 @@ This container contains the configuration (parameters) in case the measurement m
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Range** | ICU_DUTY_CYCLE<br>ICU_HIGH_TIME<br>ICU_LOW_TIME<br>ICU_PERIOD_TIME |
 
-##### IcuTimestampMeasurement
+###### IcuTimestampMeasurement
 This container contains the configuration (parameters) in case the measurement mode is "IcuTimestamp"
 
 ###### IcuTimestampMeasurementProperty
@@ -380,7 +380,7 @@ This container contains the configuration (parameters) in case the measurement m
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### IcuWakeup
+###### IcuWakeup
 This container contains the configuration (parameters) needed to configure a wakeup capable channel
 
 ###### IcuChannelWakeupInfo
@@ -399,7 +399,7 @@ This container contains the configuration (parameters) needed to configure a wak
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-### IcuGeneral
+##### IcuGeneral
 Configuration of general ICU parameters.
 
 ###### IcuDevErrorDetect
@@ -443,7 +443,7 @@ Configuration of general ICU parameters.
 | **Default-value** | AM263Px |
 | **Range** | AM263Px |
 
-### IcuOptionalApis
+##### IcuOptionalApis
 This container contains all configuration switches for configuring optional API services of the ICU driver.
 
 ###### IcuDeInitApi

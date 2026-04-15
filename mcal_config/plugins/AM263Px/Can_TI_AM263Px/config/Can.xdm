@@ -338,7 +338,7 @@
                            value="ECUC:2730d1c3-ea87-4005-954c-fdcdd0b4ddb4"/>
                                                 <a:da name="REF"
                               value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Can/CanConfigSet/CanController/CanControllerBaudrateConfig"/>
-													
+
                                             </v:ref>
                                             <!--Requirements: ECUC_Can_00313 -->
                                             <v:ref name="CanCpuClockRef" type="REFERENCE">
@@ -647,7 +647,7 @@
 																		type="IMPLEMENTATIONCONFIGCLASS">
 																		<icc:v class="PostBuild">VariantPostBuild</icc:v>
 																		<icc:v class="PreCompile">VariantPreCompile</icc:v>
-                                                                     </a:a> 
+                                                                     </a:a>
 																<!--	<a:a name="OPTIONAL" value="true"/> -->
 																	<a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
 																	<a:a name="SCOPE" value="LOCAL"/>
@@ -1066,6 +1066,7 @@
                                         <v:ctr name="CanHardwareObject" type="IDENTIFIABLE">
                                             <a:a name="DESC"
                            value="EN: This container contains the configuration (parameters) of CAN Hardware Objects."/>
+                                            <a:a name="REQUIRES-INDEX" value="true"/>
                                             <a:a name="UUID"
                            value="ECUC:fb9b8bfa-3adb-4d25-8b74-99eb91278298"/>
                                             <!--Requirements: ECUC_Can_00485 -->
@@ -1875,7 +1876,7 @@
                                     </a:da>
                                     <a:da name="DEFAULT" value="10.0"/>
                                 </v:var>
-								
+
                                  <v:var name="CanMainFunctionReadPeriod" type="FLOAT">
                                      <a:a name="DESC"
 						value="EN: This parameter describes the period for cyclic call to Can_MainFunction_Read. Unit is seconds."/>
@@ -1911,7 +1912,7 @@
                                          <a:da name="DEFAULT" value="0.0010"/>
                                      </a:da>
                                  </v:var>
-											
+
                                 <!--Requirements: ECUC_Can_00357 -->
                                 <v:var name="CanMainFunctionWakeupPeriod" type="FLOAT">
                                     <a:a name="DESC"
@@ -2207,7 +2208,7 @@
 									 value="EN: Additional published parameters not covered by &quot;Common&quot; Published Information. Note that these parameters have &quot;PUBLISHED-INFORMATION&quot; configuration class setting, since they are published information."/>
 								<a:a name="UUID"
 									 value="ECUC:03f52c10-8440-4280-94f9-f2c30bc12ef9"/>
-								
+
 								<v:var name="CanDeviceVariant" type="ENUMERATION">
 									<a:a name="DESC" value="EN: Select SOC variant .This parameter shall be used by driver to impose device specific constraints. The user guide shall detail the device specific constraints "/>
 									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">

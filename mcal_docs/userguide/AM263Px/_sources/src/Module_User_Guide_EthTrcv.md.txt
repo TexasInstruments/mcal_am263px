@@ -312,10 +312,10 @@ Not supported
 
 
 
-### EthTrcvConfigSet
+##### EthTrcvConfigSet
 This container contains the configuration parameters and sub containers of the AUTOSAR EthTrcv module.
 
-#### EthTrcvConfig
+###### EthTrcvConfig
 Configuration of the individual transceiver
 
 ###### EthTrcvAutoNegotiationEnabled
@@ -589,7 +589,7 @@ Configuration of the individual transceiver
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### EthTrcvDemEventParameterRefs
+###### EthTrcvDemEventParameterRefs
 
 | Item ||
 |--------|---------------|
@@ -673,7 +673,7 @@ This container includes the Switch interface configuration between an Ethernet S
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### EthTrcvWakeupMap
+###### EthTrcvWakeupMap
 Container for the mapping of wake up reasons to wake up sources. At least one container is needed if EthTrcvWakeUpSupport is not ETHTRCV_WAKEUP_NOT_SUPPORTED.
 
 ###### EthTrcvWakeupReason
@@ -719,7 +719,7 @@ Container for the mapping of wake up reasons to wake up sources. At least one co
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 
-##### EthTrcvCapabType
+###### EthTrcvCapabType
 Structure for MDIO configuration
 
 ###### EthTrcvCapabTypeEnum
@@ -737,7 +737,7 @@ Structure for MDIO configuration
 | **Default-value** | ETHERNET_ADV_CAPAB_100_FULL |
 | **Range** | ETHERNET_ADV_CAPAB_10_HALF<br>ETHERNET_ADV_CAPAB_10_FULL<br>ETHERNET_ADV_CAPAB_100_HALF<br>ETHERNET_ADV_CAPAB_100_FULL<br>ETHERNET_ADV_CAPAB_1000_HALF<br>ETHERNET_ADV_CAPAB_1000_FULL |
 
-### EthTrcvGeneral
+##### EthTrcvGeneral
 General configuration of Ethernet Transceiver Driver module
 
 ###### EthTrcvAutoNegotiationWaitCountTicks
