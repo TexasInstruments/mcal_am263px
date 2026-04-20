@@ -889,7 +889,7 @@ Std_ReturnType Fls_Qspi_ReadMemMapMode(QSPI_Handle handle, QSPI_Transaction *tra
  *
  */
 
-Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, QSPI_CmdParams *rdParams)
+Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, const QSPI_CmdParams *rdParams)
 {
     Std_ReturnType status     = E_OK;
     uint32         rdData_Len = 0U;
@@ -968,7 +968,7 @@ Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, QSPI_CmdParams *rdParams)
  *   Function to read data from external flash
  *
  */
-Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, QSPI_CmdParams *rdParams)
+Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, const QSPI_CmdParams *rdParams)
 {
     Std_ReturnType status     = E_OK;
     uint32         rdData_Len = 0U;
@@ -1060,7 +1060,7 @@ Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, QSPI_CmdParams *rdParam
  *   Function to send specific commands and related data to flash
  *
  */
-Std_ReturnType Fls_Qspi_WriteCmd(QSPI_Handle handle, QSPI_CmdParams *wrParams)
+Std_ReturnType Fls_Qspi_WriteCmd(QSPI_Handle handle, const QSPI_CmdParams *wrParams)
 {
     Std_ReturnType status     = E_OK;
     uint32         wrData_Len = 0U;

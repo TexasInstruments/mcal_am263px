@@ -139,6 +139,8 @@ static uint32 Fls_Ospi_ExecCmd(void)
     /* Start to execute flash read/write command */
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_CTRL_REG, OSPI_FLASH_CMD_CTRL_REG_CMD_EXEC_FLD, 1);
 
+    /* TI_COVERAGE_GAP_START retry == 0 is hit only when there is a flash read failure in hardware, hence below while
+     * loop and follow if is partially covered */
     while (retry != 0U)
     {
         /* Check the command execution status
@@ -163,7 +165,7 @@ static uint32 Fls_Ospi_ExecCmd(void)
     {
         retVal = (uint32)-1;
     }
-
+    /* TI_COVERAGE_GAP_STOP */
     idleFlag = 0U;
     while (idleFlag == 0U)
     {
@@ -446,7 +448,8 @@ Std_ReturnType Fls_Ospi_readIndirect(OSPI_Handle handle, OSPI_Transaction *trans
     if (OSPI_TRANSFER_MODE_POLLING == obj->transferMode)
     {
         remainingSize = trans->count;
-
+        /* TI_COVERAGE_GAP_START retry == 0 is hit only when there is a flash read failure in hardware, hence below
+         * while loop and follow if is partially covered */
         while (remainingSize > 0U)
         {
             /* Read SRAM level*/
@@ -1235,6 +1238,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             Fls_Ospi_setXferOpCodes(handle, Fls_Config_SFDP_Ptr->protos.cmdRd, Fls_Config_SFDP_Ptr->protos.cmdWr);
             break;
 
+        /* TI_COVERAGE_GAP_START The 1-1-2 flash mode not supported by the flash currently used */
         case (uint32)FLS_OSPI_RX_1S_1S_2S:
             /*Set cmd, address, data and dtr*/
             cmd                            = 0;
@@ -1242,7 +1246,8 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             data                           = 1;
             Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(1, 1, 2, dtr);
             break;
-
+            /* TI_COVERAGE_GAP_STOP */
+        /* TI_COVERAGE_GAP_START The 1-1-4 flash mode not supported by the flash currently used */
         case (uint32)FLS_OSPI_RX_1S_1S_4S:
             /* Set Quad Enable Bit. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
@@ -1253,7 +1258,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             /* Set QE bit */
             retVal += Nor_OspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
-
+        /* TI_COVERAGE_GAP_STOP */
         case (uint32)FLS_OSPI_RX_1S_1S_8S:
             /* Set Octal Enable Bit. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
@@ -1265,6 +1270,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             retVal += Nor_OspiSetOeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
 
+        /* TI_COVERAGE_GAP_START The 4-4-4 flash mode not supported by the flash currently used */
         case (uint32)FLS_OSPI_RX_4S_4S_4S:
             /* Set Quad Enable Bit. Set 444 mode. Set commands, mode and dummy cycle if needed.
              * In case of DTR, enable that too*/
@@ -1292,7 +1298,9 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             /* Set 444 mode */
             retVal += Fls_set444mode(handle, Fls_Config_SFDP_Ptr->protos.enableSeq);
             break;
+        /* TI_COVERAGE_GAP_STOP */
 
+        /* TI_COVERAGE_GAP_START The 8s-8s-8s flash mode not supported by the flash currently used */
         case (uint32)FLS_OSPI_RX_8S_8S_8S:
             /* Set Octal Enable Bit. Set 888 mode. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
@@ -1305,6 +1313,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             /* Set 888 mode */
             retVal += Fls_set888mode(handle, Fls_Config_SFDP_Ptr->protos.enableSeq);
             break;
+            /* TI_COVERAGE_GAP_STOP */
 
         case (uint32)FLS_OSPI_RX_8D_8D_8D:
             /* Set Octal Enable Bit. Set 888 mode. Set commands, mode and dummy cycle if needed */
@@ -1320,6 +1329,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             retVal += Fls_set888mode(handle, Fls_Config_SFDP_Ptr->protos.enableSeq);
             break;
 
+        /* TI_COVERAGE_GAP_START The default case is a defensive branch */
         default:
             /*Set cmd, address, data and dtr*/
             cmd                            = 0;
@@ -1328,6 +1338,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(cmd, addr, data, dtr);
             Fls_Ospi_setXferOpCodes(handle, Fls_Config_SFDP_Ptr->protos.cmdRd, Fls_Config_SFDP_Ptr->protos.cmdWr);
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
 
     Fls_Ospi_SetProtocolCmds(handle, cmd, addr, data, dtr);
@@ -1817,6 +1828,12 @@ void Fls_Interrupt_Enable(void)
  *   Extracted from Fls_set888mode to reduce the PATH HIS metric.
  *
  */
+/* TI_COVERAGE_GAP_START The 8-8-8 (Octal SPI) protocol mode requires a flash device that supports
+   the Octal Enable (OE) bit and an 888 mode entry sequence. No AM263Px FLS test configuration
+   exercises FLS_OSPI_RX_8S_8S_8S or FLS_OSPI_RX_8D_8D_8D protocol modes because the test
+   environment flash does not require this entry sequence. This function is only reachable via
+   Fls_set888mode(), which is itself only called from Fls_Ospi_setProtocol() for those
+   untested protocol cases. */
 static Std_ReturnType Fls_set888mode_seq1(OSPI_Handle handle, OSPI_Object *obj)
 {
     Std_ReturnType retVal = Nor_OspiCmdWrite(handle, 0xE8, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
@@ -1836,6 +1853,7 @@ static Std_ReturnType Fls_set888mode_seq1(OSPI_Handle handle, OSPI_Object *obj)
     }
     return retVal;
 }
+/* TI_COVERAGE_GAP_STOP */
 /**
  *  \Function Name: Fls_set888mode_seq2
  *
@@ -1843,6 +1861,8 @@ static Std_ReturnType Fls_set888mode_seq1(OSPI_Handle handle, OSPI_Object *obj)
  *   Extracted from Fls_set888mode to reduce the PATH HIS metric.
  *
  */
+/* TI_COVERAGE_GAP_START Same rationale as Fls_set888mode_seq1: only reachable in 888 mode which
+   is not exercised in any test configuration. */
 static Std_ReturnType Fls_set888mode_seq2(OSPI_Handle handle, OSPI_Object *obj)
 {
     Std_ReturnType retVal =
@@ -1867,6 +1887,7 @@ static Std_ReturnType Fls_set888mode_seq2(OSPI_Handle handle, OSPI_Object *obj)
     }
     return retVal;
 }
+/* TI_COVERAGE_GAP_STOP */
 /**
  *  \Function Name: Fls_set888mode_doAddrReg
  *
@@ -1879,6 +1900,7 @@ static Std_ReturnType Fls_set888mode_doAddrReg(OSPI_Handle handle, Fls_RegEnConf
     uint8          reg    = 0U;
     Std_ReturnType retVal = Nor_OspiRegRead(handle, octCfg->cmdRegRd, octCfg->cfgReg, &reg);
 
+    /* TI_COVERAGE_GAP_START The below if-else is partially covered as only 8D-8D-8D is supported by the flash used */
     if (E_OK == retVal)
     {
         /* Octal DDR is special. Check if it is already enabled */
@@ -1886,6 +1908,7 @@ static Std_ReturnType Fls_set888mode_doAddrReg(OSPI_Handle handle, Fls_RegEnConf
         {
             /* Already 8D */
         }
+
         else
         {
             /* Clear the config bits in the register */
@@ -1899,6 +1922,7 @@ static Std_ReturnType Fls_set888mode_doAddrReg(OSPI_Handle handle, Fls_RegEnConf
             retVal += Nor_OspiRegWrite(handle, octCfg->cmdRegWr, octCfg->cfgReg, reg);
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 /**
@@ -1908,6 +1932,7 @@ static Std_ReturnType Fls_set888mode_doAddrReg(OSPI_Handle handle, Fls_RegEnConf
  *   Extracted from Fls_set888mode to reduce the PATH HIS metric.
  *
  */
+
 static Std_ReturnType Fls_set888mode_regCfg(OSPI_Handle handle, OSPI_Object *obj)
 {
     Std_ReturnType   retVal = E_OK;
@@ -1915,6 +1940,7 @@ static Std_ReturnType Fls_set888mode_regCfg(OSPI_Handle handle, OSPI_Object *obj
     Fls_RegEnConfig *dCfg   = &(Fls_Config_SFDP_Ptr->protos.strDtrCfg);
 
     /* Check for register addressed 8-8-8 mode */
+    /* TI_COVERAGE_GAP_START The below if-else is partially covered as only 8D-8D-8D is supported by the flash used */
     if ((octCfg->isAddrReg != 0U) && (dCfg->isAddrReg != 0U) && (dCfg->cfgReg == octCfg->cfgReg))
     {
         /* Do both the configs together */
@@ -1939,8 +1965,10 @@ static Std_ReturnType Fls_set888mode_regCfg(OSPI_Handle handle, OSPI_Object *obj
         }
         retVal += Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
+
 /**
  *  \Function Name: Fls_set888mode
  *
@@ -1952,7 +1980,8 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
     OSPI_Config   *pHandle = (OSPI_Config *)handle;
     OSPI_Object   *obj     = pHandle->object;
     Std_ReturnType retVal  = E_OK;
-
+    /* TI_COVERAGE_GAP_START The seq passed to this function is 0 in the flash currently used, hence the if conditions
+     * remain uncovered */
     if ((seq & (1U << 1U)) != 0U)
     {
         retVal = Fls_set888mode_seq1(handle, obj);
@@ -1961,6 +1990,7 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
     {
         retVal += Fls_set888mode_seq2(handle, obj);
     }
+    /* TI_COVERAGE_GAP_STOP */
     retVal += Fls_set888mode_regCfg(handle, obj);
     if (retVal == E_OK)
     {
@@ -1969,12 +1999,14 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
 
     return retVal;
 }
+
 /**
  *  \Function Name: Fls_set444mode
  *
  *   This function is used to set register read and write commands for 444 mode.
  *
  */
+/* TI_COVERAGE_GAP_START The 4-4-4 (Quad-All) protocol mode not supported by the flash currently used */
 Std_ReturnType Fls_set444mode(OSPI_Handle handle, uint8 seq)
 {
     OSPI_Object   *obj      = ((OSPI_Config *)handle)->object;
@@ -2049,6 +2081,7 @@ Std_ReturnType Fls_set444mode(OSPI_Handle handle, uint8 seq)
 
     return retVal;
 }
+/* TI_COVERAGE_GAP_STOP */
 /**
  *  \Function Name: Fls_set111mode
  *

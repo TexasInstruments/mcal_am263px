@@ -387,7 +387,7 @@ void Fls_Qspi_TransactionInit(QSPI_Transaction *trans);
  *
  *  \sa     #QSPI_open
  */
-Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, QSPI_CmdParams *rdParams);
+Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, const QSPI_CmdParams *rdParams);
 
 /**
  *  \brief  Function to read data from flash
@@ -399,7 +399,7 @@ Std_ReturnType Fls_Qspi_ReadCmd(QSPI_Handle handle, QSPI_CmdParams *rdParams);
  *
  *  \sa     #QSPI_open
  */
-Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, QSPI_CmdParams *rdParams);
+Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, const QSPI_CmdParams *rdParams);
 
 /**
  *  \brief  Function to send specific commands and related data to flash
@@ -411,7 +411,7 @@ Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, QSPI_CmdParams *rdParam
  *
  *  \sa     #QSPI_open
  */
-Std_ReturnType Fls_Qspi_WriteCmd(QSPI_Handle handle, QSPI_CmdParams *wrParams);
+Std_ReturnType Fls_Qspi_WriteCmd(QSPI_Handle handle, const QSPI_CmdParams *wrParams);
 
 /**
  *  \brief  This function is used to enable word or frame complete interrupt.

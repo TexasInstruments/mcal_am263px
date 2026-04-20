@@ -302,15 +302,15 @@ QSPI Parameters.</p>
 <td><p>Function to initialize the QSPI_Transaction structure.</p></td>
 </tr>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-fls-qspi-readcmd"><span class="std std-ref">Fls_Qspi_ReadCmd</span></a></strong>(<a class="reference internal" href="#typedef-qspi-handle"><span class="std std-ref">QSPI_Handle</span></a> handle, QSPI_CmdParams * rdParams)</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-qspi-readcmd"><span class="std std-ref">Fls_Qspi_ReadCmd</span></a></strong>(<a class="reference internal" href="#typedef-qspi-handle"><span class="std std-ref">QSPI_Handle</span></a> handle, const QSPI_CmdParams * rdParams)</p></td>
 <td><p>Function to send specific commands and receive related data from flash.</p></td>
 </tr>
 <tr class="row-odd"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-fls-qspi-quadreaddata"><span class="std std-ref">Fls_Qspi_QuadReadData</span></a></strong>(<a class="reference internal" href="#typedef-qspi-handle"><span class="std std-ref">QSPI_Handle</span></a> handle, QSPI_CmdParams * rdParams)</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-qspi-quadreaddata"><span class="std std-ref">Fls_Qspi_QuadReadData</span></a></strong>(<a class="reference internal" href="#typedef-qspi-handle"><span class="std std-ref">QSPI_Handle</span></a> handle, const QSPI_CmdParams * rdParams)</p></td>
 <td><p>Function to read data from flash.</p></td>
 </tr>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-fls-qspi-writecmd"><span class="std std-ref">Fls_Qspi_WriteCmd</span></a></strong>(<a class="reference internal" href="#typedef-qspi-handle"><span class="std std-ref">QSPI_Handle</span></a> handle, QSPI_CmdParams * wrParams)</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-qspi-writecmd"><span class="std std-ref">Fls_Qspi_WriteCmd</span></a></strong>(<a class="reference internal" href="#typedef-qspi-handle"><span class="std std-ref">QSPI_Handle</span></a> handle, const QSPI_CmdParams * wrParams)</p></td>
 <td><p>Function to send specific commands and related data to flash.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
@@ -494,7 +494,7 @@ Function to initialize the QSPI_Transaction structure.</p>
 <h3>function Fls_Qspi_ReadCmd<a class="headerlink" href="#function-fls-qspi-readcmd" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Fls_Qspi_ReadCmd</span><span class="p">(</span>
 <span class="w">    </span><span class="n">QSPI_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
-<span class="w">    </span><span class="n">QSPI_CmdParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rdParams</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">QSPI_CmdParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rdParams</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -514,7 +514,7 @@ Function to send specific commands and receive related data from flash.</p>
 <h3>function Fls_Qspi_QuadReadData<a class="headerlink" href="#function-fls-qspi-quadreaddata" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Fls_Qspi_QuadReadData</span><span class="p">(</span>
 <span class="w">    </span><span class="n">QSPI_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
-<span class="w">    </span><span class="n">QSPI_CmdParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rdParams</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">QSPI_CmdParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rdParams</span>
 <span class="p">)</span>
 </pre></div>
 </div>
@@ -534,7 +534,7 @@ Function to read data from flash.</p>
 <h3>function Fls_Qspi_WriteCmd<a class="headerlink" href="#function-fls-qspi-writecmd" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Fls_Qspi_WriteCmd</span><span class="p">(</span>
 <span class="w">    </span><span class="n">QSPI_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
-<span class="w">    </span><span class="n">QSPI_CmdParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">wrParams</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">QSPI_CmdParams</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">wrParams</span>
 <span class="p">)</span>
 </pre></div>
 </div>

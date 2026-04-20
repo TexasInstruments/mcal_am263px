@@ -1,3 +1,136 @@
+commit 2852efde54d1bb2b14ccd0a9da748ee19703e1c8
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Apr 20 11:29:06 2026 +0530
+
+    all: Fls/Fsi: KW fixes
+    
+    -Fls Qspi KW fix for am263
+    
+    Fixes: MCAL-36360
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V0/Fls_Brd_Nor_Qspi.c      |   2 +-
+ mcal/Fls/V0/Fls_Qspi.c              |   6 +-
+ mcal/Fls/V0/Fls_Qspi.h              |   6 +-
+ mcal/FsiRx/V0/Cdd_FsiRx_Platform.c  | 172 +++++-------------------------------
+ mcal/FsiTx/V0/Cdd_FsiTx_Irq.c       |  16 ++--
+ mcal_misc/scripts/helper/kw_sync.sh |  20 +++++
+ 6 files changed, 56 insertions(+), 166 deletions(-)
+
+commit e413d085214d231bf461ada611dc0d1d33aacd22
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Apr 20 12:57:34 2026 +0530
+
+    am263px: I2c: Reverted I2c coverage fix merged PR
+    
+    - Reverted commit ID : 7a63ac5e35b10d4b59c05c62c55be9d37a7d48bf.
+    
+    - Reverted the changes to get the coverage for Cancel sequence, need to implement it - MCAL-36816 .
+    
+    Fixes: MCAL-37180
+    
+    Signed-off-by: Akash Verma
+
+ mcal/I2c/V0/Cdd_I2c_Hw.c                         |  45 +--
+ mcal/I2c/src/Cdd_I2c_Priv.c                      |   4 +
+ mcal_test/i2c_test/build/makefile                |   2 +-
+ mcal_test/i2c_test/testLib/i2cTestMiscTestCase.c | 335 -----------------------
+ 4 files changed, 10 insertions(+), 376 deletions(-)
+
+commit 7ca5333a46c66589acf1e2a67a8975cad333ee6a
+Author: Asha D <asha.d@ti.com>
+Date:   Fri Apr 17 16:52:21 2026 +0530
+
+    all:MCU: HIS METRICS Klocwork Fix
+    
+            METRICS.E.Cyclomatic_v_G_ :
+                    Refactoring the Mcu_ClockSetSource function with
+                    appropriate helper functions based on module ID
+    
+                    Refactoring the function Mcu_GetPlatformResetReason
+                    using structure
+    
+    Fixes : MCAL-35523
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Mcu/V0/Mcu_Priv.c | 324 +++++++++++++++++++++++++------------
+ mcal/Mcu/V2/Mcu_Priv.c | 404 +++++++++++++++++++++++++++-------------------
+ mcal/Mcu/V3/Mcu_Priv.c | 430 ++++++++++++++++++++++++++++---------------------
+ 3 files changed, 712 insertions(+), 446 deletions(-)
+
+commit d549538d8ee3c21ca7f626d8ea15729fdf6c02a3
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Apr 20 10:53:37 2026 +0530
+
+    all: Wdg: Fixing UT for automation
+    
+    Fixes: 35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/fls_test/testLib/flsTestNegativeTestCase.c | 4 ++--
+ mcal_test/wdg_test/Makefile                          | 4 +---
+ mcal_test/wdg_test/testInput/wdgTestCases.h          | 2 +-
+ 3 files changed, 4 insertions(+), 6 deletions(-)
+
+commit 84af60d4ca554aff3543127efc60b4eb1212d7f2
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Sat Apr 18 10:40:42 2026 +0530
+
+    all: scripts: github release publish
+    
+    - publish script with all relevant options
+    
+    Fixes: MCAL-35884
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/cicd/.gitignore             |    3 +-
+ mcal_misc/scripts/cicd/mcal_github_publish.sh | 1231 +++++++++++++++++++++++++
+ 2 files changed, 1233 insertions(+), 1 deletion(-)
+
+commit 1aff7e0b37ac565bab64af61412a2fdb2234d986
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Apr 13 00:51:00 2026 +0530
+
+    am263px: Can: Klockwork fix for CAN
+
+ mcal/Can/V0/Can_Mcan.c   | 92 ++++++++++++++++++++++++++++--------------------
+ mcal/Uart/src/Cdd_Uart.c |  6 ----
+ 2 files changed, 54 insertions(+), 44 deletions(-)
+
+commit f0016522731cc3ab44cd3bc6e0766923edfd92a1
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Apr 7 23:27:56 2026 +0530
+
+    am263px: FLS: Adding coverage for fls
+    
+    Fixes: MCAL-35541
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Ospi.c                             |  43 +-
+ mcal/Fls/src/Fls.c                                 |   6 +
+ mcal_misc/ccs_test_automation/load_run_test.js     |  11 +
+ mcal_test/fls_test/Makefile                        |   8 +
+ mcal_test/fls_test/build/makefile                  |  10 +-
+ mcal_test/fls_test/testApp/flsTestApp.c            |   2 +-
+ mcal_test/fls_test/testInput/FlsTest_Config.h      |   4 +
+ mcal_test/fls_test/testInput/flsTestCases_ospi.h   | 293 ++++++-
+ mcal_test/fls_test/testLib/flsTest.h               |  30 +-
+ mcal_test/fls_test/testLib/flsTestMainTestCase.c   | 458 ++++++++--
+ .../fls_test/testLib/flsTestNegativeTestCase.c     | 924 ++++++++++++++++++++-
+ mcal_test/makefile                                 |   6 +-
+ .../Fls/soc/am261/r5f0_0/config_12/Fls_Cfg.c       | 236 ++++++
+ .../Fls/soc/am261/r5f0_0/config_12/Fls_Cfg.h       | 248 ++++++
+ .../Fls/soc/am261/r5f0_0/config_12/Fls_PBcfg.c     |   4 +
+ .../Fls/soc/am263px/r5f0_0/config_12/Fls_Cfg.c     | 237 ++++++
+ .../Fls/soc/am263px/r5f0_0/config_12/Fls_Cfg.h     | 247 ++++++
+ .../Fls/soc/am263px/r5f0_0/config_12/Fls_PBcfg.c   |   4 +
+ 18 files changed, 2629 insertions(+), 142 deletions(-)
+
 commit dd8b155ecb52611d0f2ab61cfcd5111d5600b90b
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Wed Apr 15 11:42:21 2026 +0530

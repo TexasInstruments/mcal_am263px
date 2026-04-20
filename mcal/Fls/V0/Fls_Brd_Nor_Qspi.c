@@ -1031,7 +1031,7 @@ Std_ReturnType Fls_norCompare(uint32 actualChunkSize)
  *  erased
  *
  */
-uint8 Fls_norBlankCheck(uint32 actualChunkSize)
+Std_ReturnType Fls_norBlankCheck(uint32 actualChunkSize)
 {
     QSPI_Handle handle;
     uint32      addr         = Fls_DrvObj.flashAddr;

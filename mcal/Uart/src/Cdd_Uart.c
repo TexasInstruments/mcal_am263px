@@ -511,9 +511,7 @@ Cdd_Uart_GetRemainingWords(uint8 ChannelID, CddUartDataDirectionType TransferTyp
     uint32 channelIndex = 0U, paramIndex = 0U;
 #endif
 
-    Std_ReturnType status = (Std_ReturnType)E_OK;
 #if (STD_ON == CDD_UART_DEV_ERROR_DETECT)
-    status = (Std_ReturnType)E_NOT_OK;
     if (CDD_UART_UNINIT == CddUart_DriverStatus)
     {
         CddUart_ReportDetError(CDD_UART_GETREMAININGWORDS_SERVICE_ID, CDD_UART_E_UNINIT);
@@ -527,11 +525,7 @@ Cdd_Uart_GetRemainingWords(uint8 ChannelID, CddUartDataDirectionType TransferTyp
         CddUart_ReportDetError(CDD_UART_GETREMAININGWORDS_SERVICE_ID, CDD_UART_E_PARAM_VALUE);
     }
     else
-    {
-        status = (Std_ReturnType)E_OK;
-    }
 #endif
-    if ((Std_ReturnType)E_OK == status)
     {
 #if (CDD_UART_DMA_ENABLE == STD_ON)
         if (CddUart_ChannelObjects[ChannelID].hUartInit->transferMode == CDD_UART_MODE_DMA)

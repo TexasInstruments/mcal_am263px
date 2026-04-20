@@ -411,7 +411,10 @@ Std_ReturnType Can_mcanStop(Can_ControllerObjType *controllerObj, Can_MailboxObj
         if ((CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir) &&
             (mailboxCfg->Controller->ControllerId == controllerObj->canControllerConfig_PC.ControllerId))
         {
-            canTxMessageObj[mailboxCfg->HwHandle].freeHwObjectCount = mailboxCfg->CanHwObjectCount;
+            if (mailboxCfg->HwHandle < (Can_HwHandleType)CAN_NUM_TX_MAILBOXES)
+            {
+                canTxMessageObj[mailboxCfg->HwHandle].freeHwObjectCount = mailboxCfg->CanHwObjectCount;
+            }
         }
     }
     /* Put MCAN in SW initialization mode */
@@ -623,12 +626,15 @@ void Can_mcanCancelledMessagesReset(Can_ControllerObjType *canController, const 
         txStatus                        ^= (uint32)1 << idx;
         canFDMsgRamConfig->txAddRequest ^= (uint32)1 << idx;
 
-        hth        = canController->canFDMsgRamConfig.txMbMapping[idx];
-        mailboxCfg = &canMailbox[hth].mailBoxConfig;
-        HwHandle   = mailboxCfg->HwHandle;
-        if (CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir)
+        hth = canController->canFDMsgRamConfig.txMbMapping[idx];
+        if (hth < (uint32)CAN_NUM_MAILBOXES)
         {
-            canTxMessageObj[HwHandle].freeHwObjectCount++;
+            mailboxCfg = &canMailbox[hth].mailBoxConfig;
+            HwHandle   = mailboxCfg->HwHandle;
+            if (CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir)
+            {
+                canTxMessageObj[HwHandle].freeHwObjectCount++;
+            }
         }
     }
 }
@@ -1103,40 +1109,43 @@ void Can_mcanSetUpTxMailbox(Can_FdMsgRAMConfigObjType *msgRamConfig, const Can_M
     uint16                 hth = mailboxCfg->HwHandle;
     Can_ControllerType_PC *canControllerCfg_PC;
     canControllerCfg_PC = &canController->canControllerConfig_PC;
-    if (mailboxCfg->CanHwObjectCount == 1U)
+    if (hth < (uint16)CAN_NUM_TX_MAILBOXES)
     {
-        uint8 txBuff                      = (uint8)(msgRamConfig->configParams.txBufNum);
-        msgRamConfig->txMbMapping[txBuff] = (Can_HwHandleType)htrh;
-        /* Prepare Transmission Interrupt Enable Mask */
-        if ((canControllerCfg_PC->TxProcessingType == CAN_TX_RX_PROCESSING_INTERRUPT) ||
-            ((canControllerCfg_PC->TxProcessingType == CAN_TX_RX_PROCESSING_MIXED) &&
-             (mailboxCfg->CanHardwareObjectUsesPolling == (boolean)FALSE)))
+        if (mailboxCfg->CanHwObjectCount == 1U)
         {
-            msgRamConfig->txInterruptMask |= ((uint32)1 << (uint32)txBuff);
-        }
-        canTxMessageObj[hth].lowerBuffIdx    = (uint8)(msgRamConfig->configParams.txBufNum);
-        msgRamConfig->configParams.txBufNum += 0x01U;
-        canTxMessageObj[hth].higherBuffIdx   = (uint8)(msgRamConfig->configParams.txBufNum);
-    }
-    else
-    {
-        uint8 loopCnt;
-        uint8 temp                          = (uint8)(msgRamConfig->txBuffNum + msgRamConfig->txFIFONum);
-        canTxMessageObj[hth].lowerBuffIdx   = temp;
-        msgRamConfig->txFIFONum            += mailboxCfg->CanHwObjectCount;
-        canTxMessageObj[hth].higherBuffIdx  = (uint8)(msgRamConfig->txBuffNum + msgRamConfig->txFIFONum);
-        for (loopCnt = temp; loopCnt < canTxMessageObj[hth].higherBuffIdx; loopCnt++)
-        {
-            msgRamConfig->txMbMapping[loopCnt] = (Can_HwHandleType)htrh;
+            uint8 txBuff                      = (uint8)(msgRamConfig->configParams.txBufNum);
+            msgRamConfig->txMbMapping[txBuff] = (Can_HwHandleType)htrh;
             /* Prepare Transmission Interrupt Enable Mask */
             if ((canControllerCfg_PC->TxProcessingType == CAN_TX_RX_PROCESSING_INTERRUPT) ||
                 ((canControllerCfg_PC->TxProcessingType == CAN_TX_RX_PROCESSING_MIXED) &&
                  (mailboxCfg->CanHardwareObjectUsesPolling == (boolean)FALSE)))
             {
-                msgRamConfig->txInterruptMask |= ((uint32)1 << (uint32)loopCnt);
+                msgRamConfig->txInterruptMask |= ((uint32)1 << (uint32)txBuff);
             }
+            canTxMessageObj[hth].lowerBuffIdx    = (uint8)(msgRamConfig->configParams.txBufNum);
+            msgRamConfig->configParams.txBufNum += 0x01U;
+            canTxMessageObj[hth].higherBuffIdx   = (uint8)(msgRamConfig->configParams.txBufNum);
         }
-        msgRamConfig->configParams.txFIFOSize += (uint32)mailboxCfg->CanHwObjectCount;
+        else
+        {
+            uint8 loopCnt;
+            uint8 temp                          = (uint8)(msgRamConfig->txBuffNum + msgRamConfig->txFIFONum);
+            canTxMessageObj[hth].lowerBuffIdx   = temp;
+            msgRamConfig->txFIFONum            += mailboxCfg->CanHwObjectCount;
+            canTxMessageObj[hth].higherBuffIdx  = (uint8)(msgRamConfig->txBuffNum + msgRamConfig->txFIFONum);
+            for (loopCnt = temp; loopCnt < canTxMessageObj[hth].higherBuffIdx; loopCnt++)
+            {
+                msgRamConfig->txMbMapping[loopCnt] = (Can_HwHandleType)htrh;
+                /* Prepare Transmission Interrupt Enable Mask */
+                if ((canControllerCfg_PC->TxProcessingType == CAN_TX_RX_PROCESSING_INTERRUPT) ||
+                    ((canControllerCfg_PC->TxProcessingType == CAN_TX_RX_PROCESSING_MIXED) &&
+                     (mailboxCfg->CanHardwareObjectUsesPolling == (boolean)FALSE)))
+                {
+                    msgRamConfig->txInterruptMask |= ((uint32)1 << (uint32)loopCnt);
+                }
+            }
+            msgRamConfig->configParams.txFIFOSize += (uint32)mailboxCfg->CanHwObjectCount;
+        }
     }
 }
 
@@ -1596,6 +1605,7 @@ void Can_mcanProcessBusOff(Can_ControllerObjType *canController, const Can_Mailb
         {
             canController->canFDMsgRamConfig.txAddRequest = 0U;
             Can_mcanCancelPendMsg(baseAddr);
+
             /* Initialize Can_MailboxObjTxType params according to configured mailboxes */
             for (htrh = 0U; htrh < maxMbCnt; htrh++)
             {
@@ -1615,7 +1625,10 @@ static void Can_MailboxInitialize(Can_ControllerObjType *canController, Can_Mail
     if ((CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir) &&
         (mailboxCfg->Controller->ControllerId == canController->canControllerConfig_PC.ControllerId))
     {
-        canTxMessageObj[mailboxCfg->HwHandle].freeHwObjectCount = mailboxCfg->CanHwObjectCount;
+        if (mailboxCfg->HwHandle < (Can_HwHandleType)CAN_NUM_TX_MAILBOXES)
+        {
+            canTxMessageObj[mailboxCfg->HwHandle].freeHwObjectCount = mailboxCfg->CanHwObjectCount;
+        }
     }
 }
 void Can_mcan_ModeProcess(Can_ControllerObjType *canController)
@@ -1886,13 +1899,16 @@ void Can_mcanProcessTx(Can_ControllerObjType *canController, const Can_MailboxOb
         canFDMsgRamConfig->txAddRequest ^= (uint32)1 << idx;
         hth                              = canController->canFDMsgRamConfig.txMbMapping[idx];
         CanTxPduId                       = canController->canFDMsgRamConfig.txPduIdMapping[idx];
-        mailboxCfg                       = &canMailbox[hth].mailBoxConfig;
-        HwHandle                         = mailboxCfg->HwHandle;
-        if (CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir)
+        if (hth < (uint32)CAN_NUM_MAILBOXES)
         {
-            canTxMessageObj[HwHandle].freeHwObjectCount++;
-            /* clear for next transmission. */
-            CanIf_TxConfirmation(CanTxPduId);
+            mailboxCfg = &canMailbox[hth].mailBoxConfig;
+            HwHandle   = mailboxCfg->HwHandle;
+            if (CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir)
+            {
+                canTxMessageObj[HwHandle].freeHwObjectCount++;
+                /* clear for next transmission. */
+                CanIf_TxConfirmation(CanTxPduId);
+            }
         }
     }
 }

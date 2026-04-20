@@ -262,167 +262,40 @@ CddFsiRx_setRxDataWidth(uint32 base, CddFsiRxDataLaneType dataWidth)
 FUNC(Std_ReturnType, CDD_FSIRX_CODE)
 CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 {
-    Std_ReturnType retVal = E_OK;
+    Std_ReturnType retVal     = E_OK;
+    uint16         regVal     = 0U;
+    uint16         flagMask   = 0U;
+    uint32         baseAdress = 0U;
 
-    /* Check the arguments */
+    /* Build the interrupt flag mask from compile-time enabled interrupt types */
 #if (STD_ON == CDD_FSI_RX_PING_WDG_TIMEOUT_INTERRUPT)
-    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
-    {
-        uint16 regVal      = 0;
-        uint32 baseAdress  = 0;
-        baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
-        regVal             = HW_RD_REG16(baseAdress);
-        regVal            |= CDD_FSI_RX_PING_WDG_TIMEOUT;
-        HW_WR_REG16(baseAdress, regVal);
-    }
-    /*Enable only INT2 vector*/
-    else
-    {
-        if (intRxNum == (uint8)CDD_FSI_RX_INT2)
-        {
-            uint16 regVal      = 0;
-            uint32 baseAdress  = 0;
-            baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
-            regVal             = HW_RD_REG16(baseAdress);
-            regVal            |= CDD_FSI_RX_PING_WDG_TIMEOUT;
-            HW_WR_REG16(baseAdress, regVal);
-        }
-    }
+    flagMask |= CDD_FSI_RX_PING_WDG_TIMEOUT;
 #endif /*STD_ON == CDD_FSI_RX_PING_WDG_TIMEOUT_INTERRUPT*/
-
 #if (STD_ON == CDD_FSI_RX_FRAME_WDG_TIMEOUT_INTERRUPT)
-    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
-    {
-        uint16 regVal      = 0;
-        uint32 baseAdress  = 0;
-        baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
-        regVal             = HW_RD_REG16(baseAdress);
-        regVal            |= CDD_FSI_RX_FRAME_WDG_TIMEOUT;
-        HW_WR_REG16(baseAdress, regVal);
-    }
-    /*Enable only INT2 vector*/
-    else
-    {
-        if (intRxNum == (uint8)CDD_FSI_RX_INT2)
-        {
-            uint16 regVal      = 0;
-            uint32 baseAdress  = 0;
-            baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
-            regVal             = HW_RD_REG16(baseAdress);
-            regVal            |= CDD_FSI_RX_FRAME_WDG_TIMEOUT;
-            HW_WR_REG16(baseAdress, regVal);
-        }
-    }
+    flagMask |= CDD_FSI_RX_FRAME_WDG_TIMEOUT;
 #endif /*STD_ON == CDD_FSI_RX_FRAME_WDG_TIMEOUT_INTERRUPT*/
-
 #if (STD_ON == CDD_FSI_RX_CRC_ERROR_INTERRUPT)
-    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
-    {
-        uint16 regVal      = 0;
-        uint32 baseAdress  = 0;
-        baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
-        regVal             = HW_RD_REG16(baseAdress);
-        regVal            |= CDD_FSI_RX_CRC_ERROR;
-        HW_WR_REG16(baseAdress, regVal);
-    }
-    /*Enable only INT2 vector*/
-    else
-    {
-        if (intRxNum == (uint8)CDD_FSI_RX_INT2)
-        {
-            uint16 regVal      = 0;
-            uint32 baseAdress  = 0;
-            baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
-            regVal             = HW_RD_REG16(baseAdress);
-            regVal            |= CDD_FSI_RX_CRC_ERROR;
-            HW_WR_REG16(baseAdress, regVal);
-        }
-    }
+    flagMask |= CDD_FSI_RX_CRC_ERROR;
 #endif /*STD_ON == CDD_FSI_RX_CRC_ERROR_INTERRUPT*/
-
 #if (STD_ON == CDD_FSI_RX_BUFFER_OVERRUN_INTERRUPT)
-    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
-    {
-        uint16 regVal      = 0;
-        uint32 baseAdress  = 0;
-        baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
-        regVal             = HW_RD_REG16(baseAdress);
-        regVal            |= CDD_FSI_RX_BUFFER_OVERRUN;
-        HW_WR_REG16(baseAdress, regVal);
-    }
-    /*Enable only INT2 vector*/
-    else
-    {
-        if (intRxNum == (uint8)CDD_FSI_RX_INT2)
-        {
-            uint16 regVal      = 0;
-            uint32 baseAdress  = 0;
-            baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
-            regVal             = HW_RD_REG16(baseAdress);
-            regVal            |= CDD_FSI_RX_BUFFER_OVERRUN;
-            HW_WR_REG16(baseAdress, regVal);
-        }
-    }
+    flagMask |= CDD_FSI_RX_BUFFER_OVERRUN;
 #endif /*STD_ON == CDD_FSI_RX_BUFFER_OVERRUN_INTERRUPT*/
-
 #if (STD_ON == CDD_FSI_RX_BUFFER_UNDERRUN_INTERRUPT)
-    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
-    {
-        uint16 regVal      = 0;
-        uint32 baseAdress  = 0;
-        baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
-        regVal             = HW_RD_REG16(baseAdress);
-        regVal            |= CDD_FSI_RX_BUFFER_UNDERRUN;
-        HW_WR_REG16(baseAdress, regVal);
-    }
-    /*Enable only INT2 vector*/
-    else
-    {
-        if (intRxNum == (uint8)CDD_FSI_RX_INT2)
-        {
-            uint16 regVal      = 0;
-            uint32 baseAdress  = 0;
-            baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
-            regVal             = HW_RD_REG16(baseAdress);
-            regVal            |= CDD_FSI_RX_BUFFER_UNDERRUN;
-            HW_WR_REG16(baseAdress, regVal);
-        }
-    }
+    flagMask |= CDD_FSI_RX_BUFFER_UNDERRUN;
 #endif /*STD_ON == CDD_FSI_RX_BUFFER_UNDERRUN_INTERRUPT*/
-
 #if (STD_ON == CDD_FSI_RX_PING_RECEIVED_INTERRUPT)
-    if (intRxNum == (uint8)CDD_FSI_RX_INT1)
-    {
-        uint16 regVal      = 0;
-        uint32 baseAdress  = 0;
-        baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
-        regVal             = HW_RD_REG16(baseAdress);
-        regVal            |= CDD_FSI_RX_PING_FRAME_RECEIVED;
-        HW_WR_REG16(baseAdress, regVal);
-    }
-    /*Enable only INT2 vector*/
-    else
-    {
-        if (intRxNum == (uint8)CDD_FSI_RX_INT2)
-        {
-            uint16 regVal      = 0;
-            uint32 baseAdress  = 0;
-            baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
-            regVal             = HW_RD_REG16(baseAdress);
-            regVal            |= CDD_FSI_RX_PING_FRAME_RECEIVED;
-            HW_WR_REG16(baseAdress, regVal);
-        }
-    }
+    flagMask |= CDD_FSI_RX_PING_FRAME_RECEIVED;
 #endif /*STD_ON == CDD_FSI_RX_PING_RECEIVED_INTERRUPT*/
-
 #if (STD_ON == CDD_FSI_RX_DATA_RECEIVED_INTERRUPT)
+    flagMask |= CDD_FSI_RX_DATA_FRAME_RECEIVED;
+#endif /*STD_ON == CDD_FSI_RX_DATA_RECEIVED_INTERRUPT*/
+
+    /* Apply the flag mask to the selected interrupt control register */
     if (intRxNum == (uint8)CDD_FSI_RX_INT1)
     {
-        uint16 regVal      = 0;
-        uint32 baseAdress  = 0;
-        baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
-        regVal             = HW_RD_REG16(baseAdress);
-        regVal            |= CDD_FSI_RX_DATA_FRAME_RECEIVED;
+        baseAdress  = base + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1;
+        regVal      = HW_RD_REG16(baseAdress);
+        regVal     |= flagMask;
         HW_WR_REG16(baseAdress, regVal);
     }
     /*Enable only INT2 vector*/
@@ -430,15 +303,12 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
     {
         if (intRxNum == (uint8)CDD_FSI_RX_INT2)
         {
-            uint16 regVal      = 0;
-            uint32 baseAdress  = 0;
-            baseAdress         = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
-            regVal             = HW_RD_REG16(baseAdress);
-            regVal            |= CDD_FSI_RX_DATA_FRAME_RECEIVED;
+            baseAdress  = base + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1;
+            regVal      = HW_RD_REG16(baseAdress);
+            regVal     |= flagMask;
             HW_WR_REG16(baseAdress, regVal);
         }
     }
-#endif /*STD_ON == CDD_FSI_RX_DATA_RECEIVED_INTERRUPT*/
 
     return (retVal);
 }

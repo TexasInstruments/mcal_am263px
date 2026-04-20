@@ -144,10 +144,35 @@
 #define M_VALUE_4194368    (4194368U)
 #define M_VALUE_8388672    (8388672U)
 
+/** \brief Number of entries in reset reason lookup table */
+#define MCU_RESET_MAP_SIZE (12U)
+
 /* ========================================================================== */
 /*                         Structure Declarations                             */
 /* ========================================================================== */
-/* None */
+
+/**
+ * \brief  Structure to map raw reset values to reset types
+ */
+typedef struct
+{
+    uint32        rawValue;  /**< Raw reset register value */
+    Mcu_ResetType resetType; /**< Corresponding reset type */
+} Mcu_ResetMapType;
+
+const Mcu_ResetMapType Mcu_ResetReasonMap[MCU_RESET_MAP_SIZE] = {{M_ZERO, MCU_RESET_CLEAR},
+                                                                 {M_SIXTY_FIVE, MCU_POWER_ON_RESET},
+                                                                 {M_SIXTY_SIX, MCU_WARM_RESET_WDT0},
+                                                                 {M_SIXTY_EIGHT, MCU_WARM_RESET_WDT1},
+                                                                 {M_SEVENTY_TWO, MCU_WARM_RESET_WDT2},
+                                                                 {M_EIGHTY, MCU_WARM_RESET_WDT3},
+                                                                 {M_NINTY_SIX, MCU_WARM_RESET},
+                                                                 {M_SIXTY_FOUR, MCU_EXT_PAD_RESET},
+                                                                 {M_ONE_NINTY_TWO, MCU_HSM_WDT_RESET},
+                                                                 {M_THREE_TWENTY, MCU_DEBUGGER_RESET},
+                                                                 {M_FIVE_SEVENTY_SIX, MCU_WARM_RESET_TEMP0},
+                                                                 {M_VALUE_1088, MCU_WARM_RESET_TEMP1}};
+
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -179,6 +204,24 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition);
 static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition);
 static void Mcu_SetupClock_Config(uint8 idx);
 static void Mcu_Timeoutevent(volatile uint32 *addr, uint32 Value, uint32 timeout);
+
+static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId,
+                                             uint32 clkDivId, boolean enable);
+
+static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                            boolean enable);
+
+static Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                            boolean enable);
+
+static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId,
+                                              uint32 clkDivId, boolean enable);
+
+static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                            boolean enable);
+
+static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId,
+                                              uint32 clkDivId, boolean enable);
 
 /* ========================================================================== */
 /*                          Function Definitions                              */
@@ -232,75 +275,20 @@ void Mcu_PerformSoftSysReset(uint32 resetVal)
 
 Mcu_ResetType Mcu_GetPlatformResetReason(void)
 {
+    VAR(uint8, MCU_VAR) idx                = 0U;
     VAR(uint32, MCU_VAR) Reset_Read        = 0U;
     VAR(Mcu_ResetType, MCU_VAR) Reset_Type = MCU_RESET_UNDEFINED;
-    Reset_Read                             = Mcu_GetPlatformRawResetReason();
 
-    switch (Reset_Read)
+    Reset_Read = Mcu_GetPlatformRawResetReason();
+
+    /* Search lookup table for matching reset reason */
+    for (idx = 0U; idx < MCU_RESET_MAP_SIZE; idx++)
     {
-        case M_ZERO:
+        if (Mcu_ResetReasonMap[idx].rawValue == Reset_Read)
         {
-            Reset_Type = MCU_RESET_CLEAR;
+            Reset_Type = Mcu_ResetReasonMap[idx].resetType;
             break;
         }
-        case M_SIXTY_FIVE:
-        {
-            Reset_Type = MCU_POWER_ON_RESET;
-            break;
-        }
-        case M_SIXTY_SIX:
-        {
-            Reset_Type = MCU_WARM_RESET_WDT0;
-            break;
-        }
-        case M_SIXTY_EIGHT:
-        {
-            Reset_Type = MCU_WARM_RESET_WDT1;
-            break;
-        }
-        case M_SEVENTY_TWO:
-        {
-            Reset_Type = MCU_WARM_RESET_WDT2;
-            break;
-        }
-        case M_EIGHTY:
-        {
-            Reset_Type = MCU_WARM_RESET_WDT3;
-            break;
-        }
-        case M_NINTY_SIX:
-        {
-            Reset_Type = MCU_WARM_RESET;
-            break;
-        }
-        case M_SIXTY_FOUR:
-        {
-            Reset_Type = MCU_EXT_PAD_RESET;
-            break;
-        }
-        case M_ONE_NINTY_TWO:
-        {
-            Reset_Type = MCU_HSM_WDT_RESET;
-            break;
-        }
-        case M_THREE_TWENTY:
-        {
-            Reset_Type = MCU_DEBUGGER_RESET;
-            break;
-        }
-        case M_FIVE_SEVENTY_SIX:
-        {
-            Reset_Type = MCU_WARM_RESET_TEMP0;
-            break;
-        }
-        case M_VALUE_1088:
-        {
-            Reset_Type = MCU_WARM_RESET_TEMP1;
-            break;
-        }
-        default:
-            Reset_Type = MCU_RESET_UNDEFINED;
-            break;
     }
 
     return Reset_Type;
@@ -1347,11 +1335,13 @@ Std_ReturnType Mcu_ClockSetSourceCONTROLSS(Mcu_ClkSourceIdType clk_srcId, uint32
     return retVal;
 }
 
-FUNC(Std_ReturnType, MCU_CODE)
-Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId, boolean enable)
+/**
+ * \brief  Helper function to enable clock source for MCAN modules
+ */
+static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId,
+                                             uint32 clkDivId, boolean enable)
 {
-    VAR(Std_ReturnType, MCU_VAR) RetVal    = E_OK;
-    VAR(Std_ReturnType, MCU_VAR) defRetVal = E_OK;
+    VAR(Std_ReturnType, MCU_VAR) RetVal = E_OK;
 
     switch (moduleId)
     {
@@ -1407,6 +1397,24 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
             }
             break;
         }
+        default:
+            RetVal = (Std_ReturnType)E_NOT_OK;
+            break;
+    }
+
+    return RetVal;
+}
+
+/**
+ * \brief  Helper function to enable clock source for RTI modules
+ */
+static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                            boolean enable)
+{
+    VAR(Std_ReturnType, MCU_VAR) RetVal = E_OK;
+
+    switch (moduleId)
+    {
         case MCU_CLKSRC_MODULE_ID_RTI0:
         {
             if (enable == (boolean)TRUE)
@@ -1459,6 +1467,24 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
             }
             break;
         }
+        default:
+            RetVal = (Std_ReturnType)E_NOT_OK;
+            break;
+    }
+
+    return RetVal;
+}
+
+/**
+ * \brief  Helper function to enable clock source for WDT modules
+ */
+static Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                            boolean enable)
+{
+    VAR(Std_ReturnType, MCU_VAR) RetVal = E_OK;
+
+    switch (moduleId)
+    {
         case MCU_CLKSRC_MODULE_ID_WDT0:
         {
             if (enable == (boolean)TRUE)
@@ -1512,19 +1538,24 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
             }
             break;
         }
-        case MCU_CLKSRC_MODULE_ID_QSPI:
-        {
-            if (enable == (boolean)TRUE)
-            {
-                mssrcmREG->RCM_QSPI0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
-                RetVal                        = Mcu_ClockSetSourceQSPI(clkSrcId, clkDivId);
-            }
-            else
-            {
-                mssrcmREG->RCM_QSPI0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
-            }
+        default:
+            RetVal = (Std_ReturnType)E_NOT_OK;
             break;
-        }
+    }
+
+    return RetVal;
+}
+
+/**
+ * \brief  Helper function to enable clock source for MCSPI modules
+ */
+static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId,
+                                              uint32 clkDivId, boolean enable)
+{
+    VAR(Std_ReturnType, MCU_VAR) RetVal = E_OK;
+
+    switch (moduleId)
+    {
         case MCU_CLKSRC_MODULE_ID_MCSPI0:
         {
             if (enable == (boolean)TRUE)
@@ -1590,25 +1621,24 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
             }
             break;
         }
-        case MCU_CLKSRC_MODULE_ID_I2C:
-        {
-            if (enable == (boolean)TRUE)
-            {
-                mssrcmREG->RCM_I2C0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
-                mssrcmREG->RCM_I2C1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
-                mssrcmREG->RCM_I2C2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
-                mssrcmREG->RCM_I2C3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
-                RetVal                       = Mcu_ClockSetSourceI2C(clkSrcId, clkDivId);
-            }
-            else
-            {
-                mssrcmREG->RCM_I2C0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
-                mssrcmREG->RCM_I2C1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
-                mssrcmREG->RCM_I2C2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
-                mssrcmREG->RCM_I2C3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
-            }
+        default:
+            RetVal = (Std_ReturnType)E_NOT_OK;
             break;
-        }
+    }
+
+    return RetVal;
+}
+
+/**
+ * \brief  Helper function to enable clock source for SCI modules
+ */
+static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                            boolean enable)
+{
+    VAR(Std_ReturnType, MCU_VAR) RetVal = E_OK;
+
+    switch (moduleId)
+    {
         case MCU_CLKSRC_MODULE_ID_SCI0:
         {
             if (enable == (boolean)TRUE)
@@ -1694,6 +1724,56 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
             else
             {
                 mssrcmREG->RCM_UART5_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
+            }
+            break;
+        }
+        default:
+            RetVal = (Std_ReturnType)E_NOT_OK;
+            break;
+    }
+
+    return RetVal;
+}
+
+/**
+ * \brief  Helper function to enable clock source for Other modules
+ */
+static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId,
+                                              uint32 clkDivId, boolean enable)
+{
+    VAR(Std_ReturnType, MCU_VAR) RetVal = E_OK;
+
+    switch (moduleId)
+    {
+        case MCU_CLKSRC_MODULE_ID_QSPI:
+        {
+            if (enable == (boolean)TRUE)
+            {
+                mssrcmREG->RCM_QSPI0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
+                RetVal                        = Mcu_ClockSetSourceQSPI(clkSrcId, clkDivId);
+            }
+            else
+            {
+                mssrcmREG->RCM_QSPI0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
+            }
+            break;
+        }
+        case MCU_CLKSRC_MODULE_ID_I2C:
+        {
+            if (enable == (boolean)TRUE)
+            {
+                mssrcmREG->RCM_I2C0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
+                mssrcmREG->RCM_I2C1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
+                mssrcmREG->RCM_I2C2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
+                mssrcmREG->RCM_I2C3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_RESETVAL;
+                RetVal                       = Mcu_ClockSetSourceI2C(clkSrcId, clkDivId);
+            }
+            else
+            {
+                mssrcmREG->RCM_I2C0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
+                mssrcmREG->RCM_I2C1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
+                mssrcmREG->RCM_I2C2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
+                mssrcmREG->RCM_I2C3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
             break;
         }
@@ -1794,14 +1874,58 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
         }
 
         default:
-            RetVal    = (Std_ReturnType)E_NOT_OK;
-            defRetVal = (Std_ReturnType)E_NOT_OK;
+            RetVal = (Std_ReturnType)E_NOT_OK;
             break;
+    }
+
+    return RetVal;
+}
+
+FUNC(Std_ReturnType, MCU_CODE)
+Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId, boolean enable)
+{
+    VAR(Std_ReturnType, MCU_VAR) RetVal    = E_OK;
+    VAR(Std_ReturnType, MCU_VAR) defRetVal = E_OK;
+
+    /* Handle MCAN modules (MCAN0-MCAN3) */
+    if ((moduleId >= MCU_CLKSRC_MODULE_ID_MCAN0) && (moduleId <= MCU_CLKSRC_MODULE_ID_MCAN3))
+    {
+        RetVal    = Mcu_ClockSetSourceMCAN(moduleId, clkSrcId, clkDivId, enable);
+        defRetVal = E_OK;
+    }
+    /* Handle RTI modules (RTI0-RTI3) */
+    else if ((moduleId >= MCU_CLKSRC_MODULE_ID_RTI0) && (moduleId <= MCU_CLKSRC_MODULE_ID_RTI3))
+    {
+        RetVal    = Mcu_ClockSetSourceRTI(moduleId, clkSrcId, clkDivId, enable);
+        defRetVal = E_OK;
+    }
+    /* Handle WDT modules (WDT0-WDT3) */
+    else if ((moduleId >= MCU_CLKSRC_MODULE_ID_WDT0) && (moduleId <= MCU_CLKSRC_MODULE_ID_WDT3))
+    {
+        RetVal    = Mcu_ClockSetSourceWDT(moduleId, clkSrcId, clkDivId, enable);
+        defRetVal = E_OK;
+    }
+    /* Handle MCSPI modules (MCSPI0-MCSPI4) */
+    else if ((moduleId >= MCU_CLKSRC_MODULE_ID_MCSPI0) && (moduleId <= MCU_CLKSRC_MODULE_ID_MCSPI4))
+    {
+        RetVal    = Mcu_ClockSetSourceMCSPI(moduleId, clkSrcId, clkDivId, enable);
+        defRetVal = E_OK;
+    }
+    /* Handle SCI modules (SCI0-SCI5) */
+    else if ((moduleId >= MCU_CLKSRC_MODULE_ID_SCI0) && (moduleId <= MCU_CLKSRC_MODULE_ID_SCI5))
+    {
+        RetVal    = Mcu_ClockSetSourceSCI(moduleId, clkSrcId, clkDivId, enable);
+        defRetVal = E_OK;
+    }
+    else
+    {
+        RetVal    = Mcu_ClockSetSourceOther(moduleId, clkSrcId, clkDivId, enable);
+        defRetVal = E_OK;
     }
 
     if (defRetVal == E_OK)
     {
-        if ((RetVal != E_OK))
+        if (RetVal != E_OK)
         {
 #ifdef MCU_E_HARDWARE_ERROR
             (void)Dem_SetEventStatus((Dem_EventIdType)MCU_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);

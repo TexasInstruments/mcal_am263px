@@ -369,14 +369,19 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
         if (ret == E_OK)
         {
             Fls_PhyStatus = Fls_Ospi_phyInit();
+            /* TI_COVERAGE_GAP_START The below if is never entered as this condition is only met on a hardware failure
+             */
             if (Fls_PhyStatus != E_OK)
             {
                 ret = (Std_ReturnType)E_NOT_OK;
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
 #endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
 
         /*Init the HW */
+        /* TI_COVERAGE_GAP_START The below if-else is partially covered as false condition is only met on a hardware
+         * failure */
         if (ret == (Std_ReturnType)E_OK)
         {
             Fls_DrvObj.jobResultType = MEMIF_JOB_OK;
@@ -387,6 +392,7 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
             Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_UNEXPECTED_FLASH_ID);
             Fls_DrvObj.status = MEMIF_UNINIT;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     return;
 }

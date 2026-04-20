@@ -116,7 +116,7 @@ ISR(CddFsiTx_FSIINT1_IrqUnit0)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
@@ -142,7 +142,7 @@ ISR(CddFsiTx_FSIINT2_IrqUnit0)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
@@ -168,7 +168,7 @@ ISR(CddFsiTx_FSIINT1_IrqUnit1)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_1] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_1] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_1]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
@@ -194,7 +194,7 @@ ISR(CddFsiTx_FSIINT2_IrqUnit1)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_1] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_1] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_1]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
@@ -220,7 +220,7 @@ ISR(CddFsiTx_FSIINT1_IrqUnit2)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_2] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_2] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_2]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
@@ -246,7 +246,7 @@ ISR(CddFsiTx_FSIINT2_IrqUnit2)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_2] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_2] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_2]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
@@ -273,7 +273,7 @@ ISR(CddFsiTx_FSIINT1_IrqUnit3)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_3] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_3] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_3]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
@@ -299,7 +299,7 @@ ISR(CddFsiTx_FSIINT2_IrqUnit3)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_3] != CDD_FSI_TX_INVALID_INDEX)
+    if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_3] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_3]];
         intStatusRegAddr   = hwUnitObj->hwUnitCfg.baseAddr | CDD_FSI_TX_INT_STATUS_REGISTER_OFFSET;
