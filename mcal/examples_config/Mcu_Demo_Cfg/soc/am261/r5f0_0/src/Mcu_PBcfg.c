@@ -412,15 +412,24 @@ void Mcu_IntXbar(void)
 {
     /* Interrupt XBAR */
 
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_0,MCU_INT_XBAR_EPWM9_INT, 0, 0, 0, 0, 0, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_1,0, 0, MCU_INT_XBAR_ADC1_INT1, 0, 0, 0, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_22,0, 0, 0, 0, 0, MCU_INT_XBAR_ECAP0_INT, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_5,MCU_INT_XBAR_EPWM0_INT, 0, 0, 0, 0, 0, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_6,0, MCU_INT_XBAR_EPWM0_TZINT, 0, 0, 0, 0, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_12,0, 0, 0, MCU_INT_XBAR_FSITX0_INT1N, 0, 0, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_13,0, 0, 0, MCU_INT_XBAR_FSITX0_INT2N, 0, 0, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_14,0, 0, 0, MCU_INT_XBAR_FSIRX0_INT1N, 0, 0, 0);
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_15,0, 0, 0, MCU_INT_XBAR_FSIRX0_INT2N, 0, 0, 0);
+    uint32 maskType0[] = {MCU_INT_XBAR_EPWM9_INT, 0, 0, 0, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_0, maskType0);
+    uint32 maskType1[] = {0, 0, MCU_INT_XBAR_ADC1_INT1, 0, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_1, maskType1);
+    uint32 maskType2[] = {0, 0, 0, 0, 0, MCU_INT_XBAR_ECAP0_INT, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_22, maskType2);
+    uint32 maskType3[] = {MCU_INT_XBAR_EPWM0_INT, 0, 0, 0, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_5, maskType3);
+    uint32 maskType4[] = {0, MCU_INT_XBAR_EPWM0_TZINT, 0, 0, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_6, maskType4);
+    uint32 maskType5[] = {0, 0, 0, MCU_INT_XBAR_FSITX0_INT1N, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_12, maskType5);
+    uint32 maskType6[] = {0, 0, 0, MCU_INT_XBAR_FSITX0_INT2N, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_13, maskType6);
+    uint32 maskType7[] = {0, 0, 0, MCU_INT_XBAR_FSIRX0_INT1N, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_14, maskType7);
+    uint32 maskType8[] = {0, 0, 0, MCU_INT_XBAR_FSIRX0_INT2N, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_15, maskType8);
 
 }
 

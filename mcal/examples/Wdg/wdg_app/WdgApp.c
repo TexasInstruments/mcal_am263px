@@ -118,7 +118,7 @@ uint32              timer_end             = 0;
 uint32              timer_cycles          = 0;
 uint32              restartCount          = 0;
 uint32              WdgApp_WdgBaseAddress = 0U;
-
+uint32              Wdg_TestPassed;
 #if (STD_OFF == MCU_NO_PLL)
 extern CONST(Mcu_ConfigType, MCU_PBCFG) Mcu_Config;
 #endif
@@ -129,6 +129,14 @@ extern CONST(Gpt_ConfigType, GPT_PBCFG) Gpt_Config;
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
+Std_ReturnType Det_ReportRuntimeError(VAR(uint16, AUTOMATIC) ModuleId, VAR(uint8, AUTOMATIC) InstanceId,
+                                      VAR(uint8, AUTOMATIC) ApiId, VAR(uint8, AUTOMATIC) ErrorId)
+{
+    Wdg_TestPassed = E_NOT_OK;
+    AppUtils_printf("WDG runtime DET Error: API ID %u ERROR ID %u \r\n", ApiId, ErrorId);
+    GT_assert(McalAppTrace, FALSE);
+    return (E_OK);
+}
 
 int main(void)
 {

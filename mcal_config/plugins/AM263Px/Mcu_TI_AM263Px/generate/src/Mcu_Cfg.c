@@ -362,7 +362,8 @@ void Mcu_IntXbar(void)
     [!VAR "Group" = "6"!]
 [!ENDIF!]
 [!CODE!]
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, [!"McuInterruptChannelXbar"!],[!CALL "IntGetXbar", "Xbar" = "$Groupindex0"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex1"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex2"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex3"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex4"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex5"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex6"!]);[!ENDCODE!]
+    uint32 maskType[!"@index"!][] = {[!CALL "IntGetXbar", "Xbar" = "$Groupindex0"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex1"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex2"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex3"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex4"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex5"!], [!CALL "IntGetXbar", "Xbar" = "$Groupindex6"!]};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, [!"McuInterruptChannelXbar"!], maskType[!"@index"!]);[!ENDCODE!]
 [!ENDLOOP!]
 [!ENDNOCODE!]
 

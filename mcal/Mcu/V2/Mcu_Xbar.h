@@ -794,17 +794,17 @@ extern "C" {
 #define MCU_GPIO_INT_XBAR_VIM_MODULE3_2 28
 #define MCU_GPIO_INT_XBAR_VIM_MODULE3_3 29
 
+/** \brief IntXBAR Number of groups */
+#define MCU_INT_XBAR_NUM_GROUPS (7U)
+
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
 
-static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out, uint32 group0_mask,
-                                                          uint32 group1_mask, uint32 group2_mask, uint32 group3_mask,
-                                                          uint32 group4_mask, uint32 group5_mask, uint32 group6_mask);
-static inline void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, uint32 out, uint32 group0_mask,
-                                                                  uint32 group1_mask, uint32 group2_mask,
-                                                                  uint32 group3_mask, uint32 group4_mask,
-                                                                  uint32 group5_mask, uint32 group6_mask,
+static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out,
+                                                          const uint32 group_mask[MCU_INT_XBAR_NUM_GROUPS]);
+static inline void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, uint32 out,
+                                                                  const uint32 group_mask[MCU_INT_XBAR_NUM_GROUPS],
                                                                   uint32 group7_mask, uint32 group8_mask,
                                                                   uint32 group9_mask);
 
@@ -824,33 +824,26 @@ static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out
  *
  * \param base [in] Interrupt XBar base address
  * \param out [in] Instance of Interrupt XBar
- * \param group0_mask [in] Mask to OR inputs from group 0
- * \param group1_mask [in] Mask to OR inputs from group 1
- * \param group2_mask [in] Mask to OR inputs from group 2
- * \param group3_mask [in] Mask to OR inputs from group 3
- * \param group4_mask [in] Mask to OR inputs from group 4
- * \param group5_mask [in] Mask to OR inputs from group 5
- * \param group6_mask [in] Mask to OR inputs from group 6
+ * \param group_mask [in] Pointer to arrray of Mask to OR inputs from group 0 to 6
  *
  */
-static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out, uint32 group0_mask,
-                                                          uint32 group1_mask, uint32 group2_mask, uint32 group3_mask,
-                                                          uint32 group4_mask, uint32 group5_mask, uint32 group6_mask)
+static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out,
+                                                          const uint32 group_mask[MCU_INT_XBAR_NUM_GROUPS])
 {
     HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G0,
-                group0_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G0_SEL_MASK);
+                group_mask[0U] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G0_SEL_MASK);
     HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G1,
-                group1_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G1_SEL_MASK);
+                group_mask[1U] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G1_SEL_MASK);
     HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G2,
-                group2_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G2_SEL_MASK);
+                group_mask[2U] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G2_SEL_MASK);
     HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G3,
-                group3_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G3_SEL_MASK);
+                group_mask[3U] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G3_SEL_MASK);
     HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G4,
-                group4_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G4_SEL_MASK);
+                group_mask[4U] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G4_SEL_MASK);
     HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G5,
-                group5_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G5_SEL_MASK);
+                group_mask[5U] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G5_SEL_MASK);
     HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G6,
-                group6_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G6_SEL_MASK);
+                group_mask[6U] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G6_SEL_MASK);
 }
 
 /**
@@ -858,27 +851,18 @@ static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 ou
  *
  * \param base [in] Interrupt XBar base address
  * \param out [in] Instance of Interrupt XBar
- * \param group0_mask [in] Mask to OR inputs from group 0
- * \param group1_mask [in] Mask to OR inputs from group 1
- * \param group2_mask [in] Mask to OR inputs from group 2
- * \param group3_mask [in] Mask to OR inputs from group 3
- * \param group4_mask [in] Mask to OR inputs from group 4
- * \param group5_mask [in] Mask to OR inputs from group 5
- * \param group6_mask [in] Mask to OR inputs from group 6
+ * \param group_mask  [in] Pointer to Array of Mask to OR inputs from group 0-6
  * \param group7_mask [in] Mask to OR inputs from group 7
  * \param group8_mask [in] Mask to OR inputs from group 8
  * \param group9_mask [in] Mask to OR inputs from group 9
  *
  */
-static inline void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, uint32 out, uint32 group0_mask,
-                                                                  uint32 group1_mask, uint32 group2_mask,
-                                                                  uint32 group3_mask, uint32 group4_mask,
-                                                                  uint32 group5_mask, uint32 group6_mask,
+static inline void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, uint32 out,
+                                                                  const uint32 group_mask[MCU_INT_XBAR_NUM_GROUPS],
                                                                   uint32 group7_mask, uint32 group8_mask,
                                                                   uint32 group9_mask)
 {
-    MCU_xbarSelectInterruptXBarInputSource(base, out, group0_mask, group1_mask, group2_mask, group3_mask, group4_mask,
-                                           group5_mask, group6_mask);
+    MCU_xbarSelectInterruptXBarInputSource(base, out, group_mask);
     HW_WR_REG32(base + (uint32)(out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + (uint32)MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7,
                 (uint32)(group7_mask & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G7_SEL_MASK));
     HW_WR_REG32(base + (uint32)(out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + (uint32)MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G8,

@@ -159,6 +159,8 @@ void AppUtils_defaultInit(void);
 void AppUtils_sectionInit(void);
 void AppUtils_defaultInitDiab(void);
 void AppUtils_printf(const char *pStr, ...);
+void Apps_switch_to_user_mode(void);
+void Apps_switch_to_system_mode(void);
 
 void UARTPrintf(const char *pcString, ...);
 

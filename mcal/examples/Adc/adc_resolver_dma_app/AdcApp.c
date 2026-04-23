@@ -359,18 +359,20 @@ static void Adc_appInterruptConfig(void)
     intCfg.handler  = Adc_ADCINT1_IrqUnit5;
     intCfg.priority = VIM_PRIORITY_15;
     vimRegisterInterrupt(&intCfg);
+    const uint32 group_mask1[MCU_INT_XBAR_NUM_GROUPS] = {0U, 0U, 0U, 0U, 0U, 0U, 0U};
     /* Configure Interrupt XBAR */
-    MCU_xbarSelectInterruptXBarInputSourceExtended(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_1, 0U, 0U, 0U,
-                                                   0U, 0U, 0U, 0U, MCU_INT_XBAR_ADC_R0_INT1, 0U, 0U);
+    MCU_xbarSelectInterruptXBarInputSourceExtended(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_1, group_mask1,
+                                                   MCU_INT_XBAR_ADC_R0_INT1, 0U, 0U);
 
     /* Use XBAR Interrupt 2 for ADC R1 */
     intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_CONTROLSS_INTRXBAR0_OUT_2;
     intCfg.handler  = Adc_ADCINT1_IrqUnit6;
     intCfg.priority = VIM_PRIORITY_15;
     vimRegisterInterrupt(&intCfg);
+    const uint32 group_mask2[MCU_INT_XBAR_NUM_GROUPS] = {0U, 0U, 0U, 0U, 0U, 0U, 0U};
     /* Configure Interrupt XBAR */
-    MCU_xbarSelectInterruptXBarInputSourceExtended(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_2, 0U, 0U, 0U,
-                                                   0U, 0U, 0U, 0U, MCU_INT_XBAR_ADC_R1_INT1, 0U, 0U);
+    MCU_xbarSelectInterruptXBarInputSourceExtended(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_2, group_mask2,
+                                                   MCU_INT_XBAR_ADC_R1_INT1, 0U, 0U);
 
     /* Enable DMA interrupt */
     intCfg.type     = VIM_INTTRIGTYPE_PULSE;

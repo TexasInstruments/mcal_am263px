@@ -495,7 +495,8 @@ void Mcu_IntXbar(void)
 {
     /* Interrupt XBAR */
 
-    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_1,0, 0, MCU_INT_XBAR_ADC0_INT1, 0, 0, 0, 0);
+    uint32 maskType0[] = {0, 0, MCU_INT_XBAR_ADC0_INT1, 0, 0, 0, 0};
+    MCU_xbarSelectInterruptXBarInputSource(MCU_CSL_CONTROLSS_INTXBAR_U_BASE, MCU_INTRXBAR0_OUT_1, maskType0);
 
 }
 

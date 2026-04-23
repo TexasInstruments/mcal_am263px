@@ -74,6 +74,7 @@
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263x/Cdd_Dma_ModuleEntry/CDD_EDMA_lld_transferCompletionMasterIsrFxn</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                  <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="ed8271be-7603-4d9a-9b81-efc4562dc696">
                   <SHORT-NAME>Cdd_Dma_CbkRegister</SHORT-NAME>
@@ -289,6 +290,7 @@
             <COMPILER UUID="4b87c3f4-ee94-4950-9454-07b07a52a39d">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb   -DAM263X_PLATFORM </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>2.1.3</VERSION>
             </COMPILER>
@@ -297,6 +299,7 @@
             <LINKER UUID="2553c476-ad6e-46cc-b353-a61db6dde42c">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>2.1.3</VERSION>
             </LINKER>

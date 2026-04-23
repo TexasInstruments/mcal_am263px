@@ -431,6 +431,23 @@ void Apps_switch_to_system_mode(void)
 #endif
 }
 
+void Apps_switch_to_user_mode(void)
+{
+#ifdef DIAB
+    __asm("  MRS r0, CPSR ");
+    __asm("  BIC r0, r0, #0x1F "); /* clear mode bits */
+    __asm("  ORR r0, r0, #0x10 "); /* set user mode (0x10) */
+    __asm("  MSR CPSR_c, r0 ");
+    __asm("  BX lr ");
+#else
+    asm("  MRS r0, CPSR ");
+    asm("  BIC r0, r0, #0x1F "); /* clear mode bits */
+    asm("  ORR r0, r0, #0x10 "); /* set user mode (0x10) */
+    asm("  MSR CPSR_c, r0 ");
+    asm("  BX lr ");
+#endif
+}
+
 void AppUtils_defaultInit(void)
 {
     Apps_switch_to_system_mode();

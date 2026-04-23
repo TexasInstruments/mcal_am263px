@@ -141,6 +141,8 @@ extern "C" {
 #define WDG_E_PARAM_POINTER ((uint8)0x14U)
 /** \brief ERROR:Invalid Configuration set selection */
 #define WDG_E_INIT_FAILED ((uint8)0x15U)
+/** \brief ERROR:Invalid ARM execution mode */
+#define WDG_E_INVALID_EXEC_MODE ((uint8)0x16U)
 /** @} */
 
 /**

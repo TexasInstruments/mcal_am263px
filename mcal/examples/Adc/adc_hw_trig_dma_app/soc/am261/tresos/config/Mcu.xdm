@@ -1201,20 +1201,18 @@
                   </d:ctr>
                 </d:lst>
                 <d:ctr name="McuDemEventParameterRefs" type="IDENTIFIABLE">
-                  <a:a name="ENABLE" value="true"/>
+                  <a:a name="ENABLE" value="false"/>
                   <a:a name="IMPORTER_INFO" value="@REC"/>
-                  <d:ref name="MCU_E_CLOCK_FAILURE" type="REFERENCE" 
-                         value="ASPath:/Dem/Dem/DemConfigSet/MCU_E_CLOCK_FAILURE">
-                    <a:a name="ENABLE" value="true"/>
+                  <d:ref name="MCU_E_CLOCK_FAILURE" type="REFERENCE">
+                    <a:a name="ENABLE" value="false"/>
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:ref>
                   <d:ref name="MCU_E_MODE_FAILURE" type="REFERENCE" >
                     <a:a name="ENABLE" value="false"/>
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:ref>
-                  <d:ref name="MCU_E_HARDWARE_ERROR" type="REFERENCE" 
-                         value="ASPath:/Dem/Dem/DemConfigSet/MCU_E_HARDWARE_ERROR">
-                    <a:a name="ENABLE" value="true"/>
+                  <d:ref name="MCU_E_HARDWARE_ERROR" type="REFERENCE">
+                    <a:a name="ENABLE" value="false"/>
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                   </d:ref>
                 </d:ctr>

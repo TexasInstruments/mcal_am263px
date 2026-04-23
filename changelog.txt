@@ -1,3 +1,274 @@
+commit b4a0384358267b9740bdbd9a69819ae87fb3238e
+Author: Asha D <asha.d@ti.com>
+Date:   Thu Apr 23 01:43:48 2026 +0530
+
+    all:MCU: HIS METRICS Klocwork Fixes
+    
+            METRICS.E.Number_of_parameters_PARAM
+                    Updated function implementations to access group masks
+                    through structure pointers instead of individual parameters
+    
+            Updated the config files according to the source changes
+    
+    Fixes : MCAL-35523
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Mcu/V0/Mcu_Xbar.h                             |  35 ++-
+ mcal/Mcu/V2/Mcu_Xbar.h                             |  58 ++--
+ mcal/Mcu/V3/Mcu_Xbar.h                             |  35 ++-
+ .../soc/am261/tresos/.prefs/pref_general.xdm       |  58 +---
+ .../adc_hw_trig_dma_app/soc/am261/tresos/.project  |   2 +-
+ .../soc/am261/tresos/config/Mcu.xdm                |  12 +-
+ .../soc/am261/tresos/output/include/Adc_Cfg.h      |   5 +-
+ .../soc/am261/tresos/output/include/Cdd_Dma_Cfg.h  |   8 +-
+ .../soc/am261/tresos/output/include/Cdd_Pwm_Cfg.h  |   5 +-
+ .../soc/am261/tresos/output/include/Mcu_Cfg.h      |  30 ++-
+ .../soc/am261/tresos/output/src/Adc_PBcfg.c        |   2 +-
+ .../soc/am261/tresos/output/src/Cdd_Dma_Cfg.c      |  24 +-
+ .../soc/am261/tresos/output/src/Cdd_Pwm_Cfg.c      |   2 +-
+ .../soc/am261/tresos/output/src/Cdd_Pwm_PBcfg.c    |   2 +-
+ .../soc/am261/tresos/output/src/Mcu_Cfg.c          |   2 +-
+ .../soc/am261/tresos/output/src/Mcu_PBcfg.c        |  24 +-
+ .../soc/am261/tresos/output/swcd/Adc_Bswmd.arxml   |  12 +-
+ .../am261/tresos/output/swcd/Cdd_Dma_Bswmd.arxml   |   3 +
+ .../am261/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml   | 293 ++++++++++++++++++++
+ .../soc/am261/tresos/output/swcd/Mcu_Bswmd.arxml   |   2 +
+ .../soc/am263/tresos/.prefs/pref_general.xdm       |  58 +---
+ .../adc_hw_trig_dma_app/soc/am263/tresos/.project  |   2 +-
+ .../soc/am263/tresos/config/Mcu.xdm                |  12 +-
+ .../soc/am263/tresos/output/include/Adc_Cfg.h      |   5 +-
+ .../soc/am263/tresos/output/include/Cdd_Dma_Cfg.h  |   6 +-
+ .../soc/am263/tresos/output/include/Cdd_Pwm_Cfg.h  |   5 +-
+ .../soc/am263/tresos/output/include/Mcu_Cfg.h      | 250 ++++++++---------
+ .../soc/am263/tresos/output/src/Adc_PBcfg.c        |   2 +-
+ .../soc/am263/tresos/output/src/Cdd_Dma_Cfg.c      |  31 ++-
+ .../soc/am263/tresos/output/src/Cdd_Pwm_Cfg.c      |   2 +-
+ .../soc/am263/tresos/output/src/Cdd_Pwm_PBcfg.c    |   2 +-
+ .../soc/am263/tresos/output/src/Mcu_Cfg.c          |   2 +-
+ .../soc/am263/tresos/output/src/Mcu_PBcfg.c        |  24 +-
+ .../soc/am263/tresos/output/swcd/Adc_Bswmd.arxml   |  18 +-
+ .../am263/tresos/output/swcd/Cdd_Dma_Bswmd.arxml   |   3 +
+ .../am263/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml   | 297 ++++++++++++++++++++-
+ .../soc/am263/tresos/output/swcd/Mcu_Bswmd.arxml   |   2 +
+ .../soc/am263px/tresos/output/src/Mcu_PBcfg.c      |   3 +-
+ mcal/examples/Adc/adc_resolver_app/AdcApp.c        |  13 +-
+ mcal/examples/Adc/adc_resolver_dma_app/AdcApp.c    |  10 +-
+ .../soc/am263/tresos/.prefs/pref_general.xdm       |   2 +-
+ .../soc/am261/tresos/.prefs/pref_general.xdm       |   2 +-
+ .../soc/am263px/tresos/.prefs/pref_general.xdm     |   2 +-
+ .../soc/am261/tresos/.prefs/pref_general.xdm       |   2 +-
+ .../soc/am263px/tresos/.prefs/pref_general.xdm     |   2 +-
+ .../soc/am261/tresos/.prefs/pref_general.xdm       |   2 +-
+ .../soc/am263px/tresos/.prefs/pref_general.xdm     |   2 +-
+ .../Mcu_Demo_Cfg/soc/am261/r5f0_0/src/Mcu_PBcfg.c  |  27 +-
+ .../Mcu_Demo_Cfg/soc/am263/r5f0_0/src/Mcu_PBcfg.c  |  63 +++--
+ .../soc/am263px/r5f0_0/src/Mcu_PBcfg.c             |  63 +++--
+ .../AM261x/Mcu_TI_AM261x/generate/src/Mcu_Cfg.c    |   3 +-
+ .../AM261x/Mcu_TI_AM261x/generate/src/Mcu_PBcfg.c  |   3 +-
+ .../AM263Px/Mcu_TI_AM263Px/generate/src/Mcu_Cfg.c  |   3 +-
+ .../Mcu_TI_AM263Px/generate/src/Mcu_PBcfg.c        |   3 +-
+ .../AM263x/Mcu_TI_AM263x/generate/src/Mcu_Cfg.c    |   3 +-
+ .../AM263x/Mcu_TI_AM263x/generate/src/Mcu_PBcfg.c  |   3 +-
+ .../Mcu_Demo_Cfg/soc/am261/r5f0_0/src/Mcu_PBcfg.c  |  44 +--
+ .../Mcu_Demo_Cfg/soc/am263/r5f0_0/src/Mcu_PBcfg.c  |  24 +-
+ .../soc/am263px/r5f0_0/src/Mcu_PBcfg.c             |  24 +-
+ .../epwm_test/testApp/soc/am261/r5f0_0/Mcu_PBcfg.c |  44 +--
+ .../epwm_test/testApp/soc/am263/r5f0_0/Mcu_PBcfg.c |   9 +-
+ .../testApp/soc/am263px/r5f0_0/Mcu_PBcfg.c         |  44 +--
+ .../Eth/soc/am261/r5f0_0/config_10/Mcu_PBcfg.c     |  98 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_13/Mcu_PBcfg.c     |  98 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_14/Mcu_PBcfg.c     |  98 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_15/Mcu_PBcfg.c     |  97 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_16/Mcu_PBcfg.c     |  97 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_6/Mcu_PBcfg.c      |  97 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_7/Mcu_PBcfg.c      |  97 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_8/Mcu_PBcfg.c      |  97 ++++++-
+ .../Eth/soc/am261/r5f0_0/config_9/Mcu_PBcfg.c      |  97 ++++++-
+ .../Eth/soc/am263/r5f0_0/config_10/Mcu_PBcfg.c     | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_13/Mcu_PBcfg.c     | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_14/Mcu_PBcfg.c     | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_15/Mcu_PBcfg.c     | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_16/Mcu_PBcfg.c     | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_6/Mcu_PBcfg.c      | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_7/Mcu_PBcfg.c      | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_8/Mcu_PBcfg.c      | 230 ++++++++++++++--
+ .../Eth/soc/am263/r5f0_0/config_9/Mcu_PBcfg.c      | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_10/Mcu_PBcfg.c   | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_13/Mcu_PBcfg.c   | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_14/Mcu_PBcfg.c   | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_15/Mcu_PBcfg.c   | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_16/Mcu_PBcfg.c   | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_6/Mcu_PBcfg.c    | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_7/Mcu_PBcfg.c    | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_8/Mcu_PBcfg.c    | 230 ++++++++++++++--
+ .../Eth/soc/am263px/r5f0_0/config_9/Mcu_PBcfg.c    | 230 ++++++++++++++--
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  27 +-
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_3/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_4/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_5/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_6/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_7/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_8/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  27 +-
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  27 +-
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |  27 +-
+ .../r5f0_0/config_4/tresos/output/src/Mcu_PBcfg.c  |  27 +-
+ .../r5f0_0/config_5/tresos/output/src/Mcu_PBcfg.c  |  27 +-
+ .../r5f0_0/config_7/tresos/output/src/Mcu_PBcfg.c  |  27 +-
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  27 +-
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |  63 +++--
+ .../r5f0_0/config_4/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_5/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_6/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_7/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |  63 +++--
+ .../r5f0_0/config_4/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   2 +-
+ .../r5f0_0/config_5/tresos/output/src/Mcu_PBcfg.c  |  63 +++--
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  63 +++--
+ .../Port/soc/am261/r5f0_0/config_11/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am261/r5f0_0/config_12/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am261/r5f0_0/config_13/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am261/r5f0_0/config_14/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am263/r5f0_0/config_11/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am263/r5f0_0/config_12/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am263/r5f0_0/config_13/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am263/r5f0_0/config_14/Mcu_PBcfg.c    |   3 +-
+ .../Port/soc/am263px/r5f0_0/config_11/Mcu_PBcfg.c  |   7 +-
+ .../Port/soc/am263px/r5f0_0/config_12/Mcu_PBcfg.c  |   7 +-
+ .../Port/soc/am263px/r5f0_0/config_13/Mcu_PBcfg.c  |   7 +-
+ .../Port/soc/am263px/r5f0_0/config_14/Mcu_PBcfg.c  |   7 +-
+ 154 files changed, 7604 insertions(+), 1937 deletions(-)
+
+commit 025e808727eb7c4b993924235eb6a667a94e3df5
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Apr 21 23:52:19 2026 +0530
+
+    all: Wdg: Updated Wdg_SetMode with DetRuntime in usermode
+    
+    Fixes: MCAL-36588, MCAL-36832
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Wdg/V0/Wdg_Priv.c                             |  60 +++++++----
+ mcal/Wdg/V0/Wdg_Priv.h                             |   3 +-
+ mcal/Wdg/include/Wdg.h                             |   2 +
+ mcal/examples/Utils/am261/app_utils.c              |  17 +++
+ mcal/examples/Utils/am261/app_utils.h              |   2 +
+ mcal/examples/Utils/am263/app_utils.c              |  17 +++
+ mcal/examples/Utils/am263/app_utils.h              |   2 +
+ mcal/examples/Utils/am263px/app_utils.c            |  17 +++
+ mcal/examples/Utils/am263px/app_utils.h            |   2 +
+ mcal/examples/Wdg/wdg_app/WdgApp.c                 |  10 +-
+ .../soc/am261/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../soc/am263/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../soc/am263px/tresos/output/swcd/Wdg_Bswmd.arxml |   4 +
+ .../soc/am261/r5f0_0/swcd/Wdg_Bswmd.arxml          |   4 +
+ .../soc/am263/r5f0_0/swcd/Wdg_Bswmd.arxml          |   4 +
+ .../soc/am263px/r5f0_0/swcd/Wdg_Bswmd.arxml        |   4 +
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |   8 +-
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |   8 +-
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |   8 +-
+ .../epwm_test/testLib/cddPwmTestMainTestCase.c     |   2 +-
+ .../config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_7/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_6/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_7/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |   4 +
+ .../config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |   4 +
+ .../wdg_test/testLib/wdgTestNegativeTestCase.c     | 120 +++++++++++++++++++++
+ 51 files changed, 391 insertions(+), 31 deletions(-)
+
+commit 849486848931c36b4e1c89fcaaa74866f83dd84f
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Apr 20 10:36:34 2026 +0530
+
+    am263px/1x: Fls: Improved coverage and added gap comments
+    
+    Fixes: MCAL-35541
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c                     | 317 +++++++++++++--------
+ mcal/Fls/V2/Fls_Ospi.c                             | 192 ++++++++++---
+ mcal/Fls/V2/Fls_Ospi_Phy.c                         | 162 ++++++++++-
+ mcal/Fls/src/Fls.c                                 |  18 +-
+ .../coverage/DynamicAnalysisReportTemplate.xlsx    | Bin 42797 -> 31530 bytes
+ mcal_test/coverage/covReportGen.py                 |  38 ++-
+ mcal_test/fls_test/build/makefile                  |   4 +-
+ mcal_test/fls_test/testLib/flsTest.h               |   6 +
+ .../fls_test/testLib/flsTestNegativeTestCase.c     | 127 +++++++++
+ mcal_test/makefile                                 |   4 +-
+ 10 files changed, 685 insertions(+), 183 deletions(-)
+
+commit deb6e6291ab3944dd9c271eab566809dbce11313
+Author: Asha D <asha.d@ti.com>
+Date:   Tue Apr 21 11:43:23 2026 +0530
+
+    am263px:EPWM: Added Coverage Gap for EPWM module
+    
+    Fixes: MCAL-36770, MCAL-35527
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c                        |  4 +++
+ .../epwm_test/testLib/cddPwmTestMainTestCase.c     | 36 +++++-----------------
+ 2 files changed, 12 insertions(+), 28 deletions(-)
+
 commit 2852efde54d1bb2b14ccd0a9da748ee19703e1c8
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon Apr 20 11:29:06 2026 +0530

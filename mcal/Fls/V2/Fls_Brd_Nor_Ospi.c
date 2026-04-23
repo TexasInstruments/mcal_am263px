@@ -290,11 +290,13 @@ Std_ReturnType Fls_NorGetEraseStatus(OSPI_Handle handle)
         }
         /* else: WIP bit is still set - erase still in progress, keep state as IN_PROGRESS */
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] RDSR command only fails on hardware/bus fault; not inducible in test */
     else
     {
         /* Read command failed - set state to FAIL */
         Fls_EraseStage = FLS_S_FAIL;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     /* Return E_OK for polling - the state machine handles completion/failure */
     return retVal;
@@ -328,13 +330,18 @@ Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
         Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->idCfg.cmd, cmdAddr, numAddrBytes, dummyBits, idCode, idNumBytes);
 
     /* Verify ID with filled data */
+    /* TI_COVERAGE_GAP_START [Branch] result == E_NOT_OK cannot be validated unless a hardware read failure */
     if (retVal == (Std_ReturnType)E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         uint32 manfID, devID;
 
         manfID = (uint32)idCode[0];
         devID  = ((uint32)idCode[1] << 8) | ((uint32)idCode[2]);
+        /* TI_COVERAGE_GAP_START [Branch/MC-DC] failure here can be achieved only in case of wrong manID and devID,
+         * cannot be validated */
         if ((manfID != Fls_Config_SFDP_Ptr->manfId) || (devID != Fls_Config_SFDP_Ptr->deviceId))
+        /* TI_COVERAGE_GAP_STOP */
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
@@ -351,15 +358,21 @@ Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
 Std_ReturnType Nor_OspiRead(OSPI_Handle handle, uint32 offset, uint8 *buf, uint32 len)
 {
     Std_ReturnType retVal = E_OK;
+    /* TI_COVERAGE_GAP_START [Branch/Line] Defensive NULL handle check; handle is always valid after successful
+    Fls_Init; NULL handle scenario not inducible without hardware/driver initialization failure */
     if (handle == NULL_PTR)
     {
         retVal = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
     /* Validate address input */
+    /* TI_COVERAGE_GAP_START [Branch/Line] Defensive bounds check; address range is validated by DET checks in
+    Fls.c before Nor_OspiRead is called; out-of-range scenario not inducible in normal test operation */
     if ((offset + len) > (Fls_Config_SFDP_Ptr->flashSize))
     {
         retVal = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 #if (STD_ON == FLS_OSPI_PHY_ENABLE)
     if (retVal == E_OK)
     {
@@ -399,10 +412,13 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
 {
     Std_ReturnType retVal      = E_OK;
     uint32         localoffset = offset;
+    /* TI_COVERAGE_GAP_START [Branch/Line] Defensive NULL handle check; handle is always valid after successful
+    Fls_Init; NULL handle scenario not inducible without hardware/driver initialization failure */
     if (handle == NULL_PTR)
     {
         retVal = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     boolean isFlsWriteInitStage = FALSE;
     if (Fls_WriteStage == FLS_S_INIT_STAGE)
@@ -422,13 +438,15 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
         {
             retVal =
                 Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
-
+            /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
             if (retVal == E_OK)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
             }
-
+            /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
             if (retVal == E_OK)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 /* Send Page Program command */
                 if ((len - actual) < (pageSize))
@@ -453,8 +471,9 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
                     retVal = Fls_Ospi_writeIndirect(handle, &transaction);
                 }
             }
-
+            /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
             if (retVal == E_OK)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashWriteTimeout);
             }
@@ -464,13 +483,18 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
                 localoffset += chunkLen;
                 actual      += chunkLen;
             }
+            /* TI_COVERAGE_GAP_START [Branch/Line] Flash page write always succeeds in test; hardware write failure not
+            inducible */
             else
             {
                 break;
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
 #if (FLS_USE_INTERRUPTS == STD_OFF)
+        /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
         if (retVal == E_OK)
+        /* TI_COVERAGE_GAP_STOP */
         {
             Fls_WriteStage = FLS_S_WRITE_DONE;
         }
@@ -620,130 +644,134 @@ Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType)
     uint8          sr1[4U] = {0}, sr2[4U] = {0}, bitPos = 0;
     uint32         bFlashRegWr = 0U;
 
-    if (E_OK == retVal)
+    switch (qeType)
     {
-        switch (qeType)
-        {
-            case 0:
-                /* No QE bit, detects 1-1-4 based on instruction */
-                break;
+        case 0:
+            /* No QE bit, detects 1-1-4 based on instruction */
+            break;
 
-            case 1:
-            case 4:
-            case 5:
-                /* QE is bit 1 of SR2 */
-                bitPos  = (uint8)(1U << 1U);
-                retVal  = Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, OSPI_CMD_INVALID_ADDR,
-                                          Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr1[0U], 1);
-                retVal += Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr2, OSPI_CMD_INVALID_ADDR,
-                                          Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr2[0U], 1);
+        /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] QE bit setting only required for 1-1-4/4-4-4 protocols; not
+         supported by the flash currently used */
+        case 1:
+        case 4:
+        case 5:
+            /* QE is bit 1 of SR2 */
+            bitPos  = (uint8)(1U << 1U);
+            retVal  = Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, OSPI_CMD_INVALID_ADDR,
+                                      Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr1[0U], 1);
+            retVal += Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr2, OSPI_CMD_INVALID_ADDR,
+                                      Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr2[0U], 1);
 
-                if ((sr2[0U] & bitPos) != (uint8)0U)
-                {
-                    /* QE bit already set */
-                }
-                else
-                {
-                    /* OSPI read command can potentially read a word of 4 bytes. So allocate that
-                     * big buffer even for a 1 byte read */
-                    uint16 sr[4U]  = {0};
-                    sr2[0U]       |= bitPos;
-                    sr[0U]         = (uint16)(((uint16)sr2[0U] << 8) | (uint16)sr1[0U]);
+            if ((sr2[0U] & bitPos) != (uint8)0U)
+            {
+                /* QE bit already set */
+            }
+            else
+            {
+                /* OSPI read command can potentially read a word of 4 bytes. So allocate that
+                 * big buffer even for a 1 byte read */
+                uint16 sr[4U]  = {0};
+                sr2[0U]       |= bitPos;
+                sr[0U]         = (uint16)(((uint16)sr2[0U] << 8) | (uint16)sr1[0U]);
 
-                    retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
-                                              (uint8 *)NULL_PTR, 0);
-                    if (retVal == E_OK)
-                    {
-                        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
-                    }
+                retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                          (uint8 *)NULL_PTR, 0);
+                if (retVal == E_OK)
+                {
+                    retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+                }
 
-                    retVal += Nor_OspiCmdWrite(handle, 0x01, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
-                                               (uint8 *)&sr[0U], 2);
-                    bFlashRegWr = 1U;
-                }
-                break;
-            case 2:
-                /* QE is bit 6 of SR1 */
-                sr1[0U] = 0;
-                bitPos  = (uint8)(1U << 6U);
-                retVal  = Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, OSPI_CMD_INVALID_ADDR,
-                                          Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr1[0U], 1);
+                retVal      += Nor_OspiCmdWrite(handle, 0x01, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
+                                                (uint8 *)&sr[0U], 2);
+                bFlashRegWr  = 1U;
+            }
+            break;
+        case 2:
+            /* QE is bit 6 of SR1 */
+            sr1[0U] = 0;
+            bitPos  = (uint8)(1U << 6U);
+            retVal  = Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, OSPI_CMD_INVALID_ADDR,
+                                      Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr1[0U], 1);
 
-                if ((sr1[0U] & bitPos) != (uint8)0U)
+            if ((sr1[0U] & bitPos) != (uint8)0U)
+            {
+                /* QE is already set */
+            }
+            else
+            {
+                sr1[0U] |= bitPos;
+                retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                            (uint8 *)NULL_PTR, 0);
+                if (retVal == E_OK)
                 {
-                    /* QE is already set */
+                    retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
                 }
-                else
-                {
-                    sr1[0U] |= bitPos;
-                    retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
-                                                (uint8 *)NULL_PTR, 0);
-                    if (retVal == E_OK)
-                    {
-                        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
-                    }
-                    retVal += Nor_OspiCmdWrite(handle, 0x01, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
-                                               &sr1[0U], 1);
-                    bFlashRegWr = 1U;
-                }
-                break;
-            case 3:
-                /* QE is bit 7 of SR2 */
-                sr2[0U] = 0;
-                bitPos  = (uint8)(1U << 7U);
-                retVal  = Nor_OspiCmdRead(handle, 0x3F, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
-                                          OSPI_CMD_INVALID_DUMMY, &sr2[0U], 1);
+                retVal      += Nor_OspiCmdWrite(handle, 0x01, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
+                                                &sr1[0U], 1);
+                bFlashRegWr  = 1U;
+            }
+            break;
+        case 3:
+            /* QE is bit 7 of SR2 */
+            sr2[0U] = 0;
+            bitPos  = (uint8)(1U << 7U);
+            retVal  = Nor_OspiCmdRead(handle, 0x3F, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
+                                      OSPI_CMD_INVALID_DUMMY, &sr2[0U], 1);
 
-                if ((sr2[0U] & bitPos) != (uint8)0U)
+            if ((sr2[0U] & bitPos) != (uint8)0U)
+            {
+                /* QE is already set */
+            }
+            else
+            {
+                sr2[0U] |= bitPos;
+                retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                            (uint8 *)NULL_PTR, 0);
+                if (retVal == E_OK)
                 {
-                    /* QE is already set */
+                    retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
                 }
-                else
-                {
-                    sr2[0U] |= bitPos;
-                    retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
-                                                (uint8 *)NULL_PTR, 0);
-                    if (retVal == E_OK)
-                    {
-                        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
-                    }
-                    retVal += Nor_OspiCmdWrite(handle, 0x3E, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
-                                               &sr2[0U], 1);
-                    bFlashRegWr = 1U;
-                }
-                break;
-            case 6:
-                /* QE is bit 1 of SR2, using different command */
-                bitPos = (uint8)(1U << 1U);
-                retVal = Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr2, OSPI_CMD_INVALID_ADDR,
-                                         Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr2[0U], 1);
+                retVal      += Nor_OspiCmdWrite(handle, 0x3E, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
+                                                &sr2[0U], 1);
+                bFlashRegWr  = 1U;
+            }
+            break;
+        case 6:
+            /* QE is bit 1 of SR2, using different command */
+            bitPos = (uint8)(1U << 1U);
+            retVal = Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr2, OSPI_CMD_INVALID_ADDR,
+                                     Fls_Config_SFDP_Ptr->addrnumBytes, OSPI_CMD_INVALID_DUMMY, &sr2[0U], 1);
 
-                if ((sr2[0U] & bitPos) != (uint8)0U)
+            if ((sr2[0U] & bitPos) != (uint8)0U)
+            {
+                /* QE bit already set */
+            }
+            else
+            {
+                sr2[0U] |= bitPos;
+                retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
+                                            (uint8 *)NULL_PTR, 0);
+                if (retVal == E_OK)
                 {
-                    /* QE bit already set */
+                    retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
                 }
-                else
-                {
-                    sr2[0U] |= bitPos;
-                    retVal   = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0,
-                                                (uint8 *)NULL_PTR, 0);
-                    if (retVal == E_OK)
-                    {
-                        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
-                    }
-                    retVal += Nor_OspiCmdWrite(handle, 0x31, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
-                                               &sr2[0U], 1);
-                    bFlashRegWr = 1U;
-                }
-                break;
-            default:
-                break;
-        }
-        if ((retVal == E_OK) && (1U == bFlashRegWr))
-        {
-            retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
-        }
+                retVal      += Nor_OspiCmdWrite(handle, 0x31, OSPI_CMD_INVALID_ADDR, Fls_Config_SFDP_Ptr->addrnumBytes,
+                                                &sr2[0U], 1);
+                bFlashRegWr  = 1U;
+            }
+            break;
+            /* TI_COVERAGE_GAP_STOP */
+        default:
+            break;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] if condition can be satisfied only in 1-1-4/4-4-4 protocols; not
+    supported by the flash currently used*/
+    if ((retVal == E_OK) && (1U == bFlashRegWr))
+    /* TI_COVERAGE_GAP_STOP */
+    {
+        retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+    }
+
     return retVal;
 }
 /**
@@ -765,6 +793,8 @@ Std_ReturnType Nor_OspiSetOeBit(OSPI_Handle handle, uint8 oeType)
         case 0:
             /* No octal enable bit */
             break;
+        /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] OE bit setting only required for 1-1-8S/8S-8S-8S protocols; not
+         supported by the flash currently used */
         case 1:
             /* Octal enable is the bit 3 of SR2 */
             bitPos = (uint8)(1U << 3U);
@@ -787,6 +817,7 @@ Std_ReturnType Nor_OspiSetOeBit(OSPI_Handle handle, uint8 oeType)
                                            &sr2[0U], 1);
             }
             break;
+            /* TI_COVERAGE_GAP_STOP */
         default:
             break;
     }
@@ -799,7 +830,9 @@ static uint8 Fls_norDmaRead(void)
     uint32         chunkSize = 0;
     chunkSize                = Fls_DrvObj.length;
     retVal                   = Fls_DrvObj.flsDmaConfigError;
+    /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         Fls_DrvObj.flsEdmaReadEnabled = TRUE;
         if (Fls_DrvObj.flsDmaStage == FLS_S_READ_DMA_INIT_STAGE)
@@ -833,7 +866,10 @@ static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize)
             }
             break;
         case FLS_JOB_ERASE:
+            /* TI_COVERAGE_GAP_START [Branch] Defensive check, Fls_processJobErase only calls Fls_JobNotification when
+            Fls_EraseStage==FLS_S_DEFAULT; false branch architecturally unreachable */
             if (FLS_S_DEFAULT == Fls_EraseStage)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 Fls_JobDoneNotification(chunkSize, job);
             }
@@ -855,8 +891,11 @@ static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize)
         case FLS_JOB_BLANKCHECK:
             Fls_JobDoneNotification(chunkSize, job);
             break;
+        /* TI_COVERAGE_GAP_START [Branch] Defensive default, jobType is always one of the defined enum values;
+         unreachable in correct operation */
         default:
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
 }
 
@@ -888,10 +927,13 @@ static Std_ReturnType Fls_norProcessErase(void)
         retVal = Fls_NorGetEraseStatus(Fls_DrvObj.spiHandle);
         /* retVal is E_OK for polling, state machine handles completion/failure */
     }
+    /* TI_COVERAGE_GAP_START [Branch] FLS_S_FAIL only entered when RDSR bus read fails; hardware-level fault not
+     inducible in test */
     else /* FLS_ERASE_STATE_FAIL */
     {
         retVal = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 /**
@@ -952,6 +994,8 @@ static void Fls_processJobErase(uint32 chunkSize)
             SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
             Fls_JobNotification(FLS_JOB_ERASE, retVal, chunkSize);
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] FLS_S_FAIL path requires a hardware RDSR read failure during erase
+         polling; not inducible in test */
         else if (Fls_EraseStage == FLS_S_FAIL)
         {
             Fls_EraseStage = FLS_S_DEFAULT; /*  Reset for next operation */
@@ -960,6 +1004,7 @@ static void Fls_processJobErase(uint32 chunkSize)
             SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
             Fls_JobNotification(FLS_JOB_ERASE, E_NOT_OK, chunkSize);
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             /* FLS_S_IN_PROGRESS: do nothing - wait for next MainFunction call */
@@ -1060,14 +1105,20 @@ void processJobs(Fls_JobType job)
 #if (STD_ON == FLS_WRITE_VERIFICATION_ENABLED)
             if (Fls_WriteStage == FLS_S_WRITE_DONE)
             {
+                /* TI_COVERAGE_GAP_START [Branch] result == E_NOT_OK cannot be validated unless a hardware read failure
+                 */
                 if (retVal == E_OK)
+                /* TI_COVERAGE_GAP_STOP */
                 {
                     retVal = Fls_norCompare(chunkSize);
                 }
+                /* TI_COVERAGE_GAP_START [Branch/Line] Write failure with verification enabled, write operations always
+                 succeed in test hardware */
                 else
                 {
                     /* Do Nothing */
                 }
+                /* TI_COVERAGE_GAP_STOP */
             }
 #endif
 #if (STD_OFF == FLS_USE_INTERRUPTS)
@@ -1151,7 +1202,10 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
     {
         {
             Fls_DrvObj.ramAddr = &Fls_DrvObj.ramAddr[chunkSize];
+            /* TI_COVERAGE_GAP_START [Branch] Second sub-condition is compile-time false when erase verification is
+            enabled, coverable only with FLS_ERASE_VERIFICATION_ENABLED=STD_OFF */
             if ((job != FLS_JOB_ERASE) || ((job == FLS_JOB_ERASE) && (STD_OFF == FLS_ERASE_VERIFICATION_ENABLED)))
+            /* TI_COVERAGE_GAP_STOP */
             {
                 Fls_DrvObj.flashAddr += chunkSize;
             }
@@ -1210,6 +1264,8 @@ void Fls_ErrorNotification(Fls_JobType job, uint8 retVal)
                                          FLS_E_VERIFY_ERASE_FAILED);
 #endif
         }
+        /* TI_COVERAGE_GAP_START [Branch] Pre-write blank check mismatch only occurs when writing to non-erased flash;
+         test always erases before writing */
         else if ((FLS_JOB_WRITE == job) && (E_BLANKCHECK_MISMATCH == retVal))
         {
             /* Pre-write blank check fail DET */
@@ -1221,6 +1277,7 @@ void Fls_ErrorNotification(Fls_JobType job, uint8 retVal)
             (void)Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_VERIFY_ERASE_FAILED);
 #endif
         }
+        /* TI_COVERAGE_GAP_STOP */
         else /*if (FLS_JOB_COMPARE == job)*/
         {
             Fls_DrvObj.jobResultType = MEMIF_BLOCK_INCONSISTENT;
@@ -1279,6 +1336,7 @@ void ReportFlsError(Fls_JobType job)
         case FLS_JOB_WRITE:
             (void)Det_ReportTransientFault(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_WRITE, FLS_E_WRITE_FAILED);
             break;
+
         default:
             break;
     }
@@ -1321,10 +1379,12 @@ uint8 Fls_norBlankCheck(uint32 actualChunkSize)
             }
         }
     }
+
     else
     {
         retVal = (uint8)E_NOT_OK; /*Handle is NULL_PTR*/
     }
+
 #endif
     return retVal;
 }
@@ -1420,16 +1480,21 @@ Std_ReturnType Fls_hwUnitInit(void)
 
     Fls_DrvObj.spiHandle = handle;
 
-    if ((handle != NULL_PTR) && (retVal == (Std_ReturnType)E_OK))
+    if (handle != NULL_PTR)
     {
         retVal = (Std_ReturnType)E_OK;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] OSPI peripheral always opens successfully in test; NULL handle only returned
+     on hardware fault */
     else
     {
         retVal = (Std_ReturnType)E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 #if (FLS_DMA_ENABLE == STD_ON)
+    /* TI_COVERAGE_GAP_START [Branch] result == E_NOT_OK cannot be validated unless a hardware read failure */
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         retVal = Fls_Ospi_dmaChInit(&Fls_DrvObj);
     }
@@ -1446,11 +1511,15 @@ Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle)
 {
     Std_ReturnType retVal = E_OK;
 
+    /* TI_COVERAGE_GAP_START [Branch] False condition cannot be validated as flash supports 2-byte address enable */
     if ((Fls_Config_SFDP_Ptr->fourByteAddrEnSeq & (uint8)(1U << 0U)) != (uint8)0U)
+    /* TI_COVERAGE_GAP_STOP */
     {
         /* Issue instruction 0xB7 without WREN */
         retVal = Nor_OspiCmdWrite(handle, 0xB7, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] 4-byte address enable bits 1-4 are not set in test flash SFDP configuration;
+     only bit 0 path is exercised */
     if ((Fls_Config_SFDP_Ptr->fourByteAddrEnSeq & (uint8)(1U << 1U)) != (uint8)0U)
     {
         /* Issue instruction 0xB7 with WREN */
@@ -1481,6 +1550,7 @@ Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle)
     {
         /* Dedicated 4 byte address instruction set, consider 4 bytes always ON */
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 /**
@@ -1497,29 +1567,44 @@ Std_ReturnType Ospi_SetRegCfg(OSPI_Handle handle, const Fls_RegEnConfig *rCfg)
     if ((rCfg->cmdRegRd != 0U) || (rCfg->cmdRegWr != 0U))
     {
         uint8 cfgReg = 0;
+        /* TI_COVERAGE_GAP_START [Branch] This value is always true for the flash used, hence false condition cannot be
+        validated */
         if (rCfg->isAddrReg == TRUE)
+        /* TI_COVERAGE_GAP_STOP */
         {
             retVal += Nor_OspiRegRead(handle, rCfg->cmdRegRd, rCfg->cfgReg, &cfgReg);
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] Test flash configuration always uses addressed register access
+         (isAddrReg==TRUE); non-addressed path never taken */
         else
         {
             retVal += Nor_OspiRegRead(handle, rCfg->cmdRegRd, OSPI_CMD_INVALID_ADDR, &cfgReg);
         }
+        /* TI_COVERAGE_GAP_STOP */
+
+        /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
         if (E_OK == retVal)
+        /* TI_COVERAGE_GAP_STOP */
         {
             /* Clear the config bits in the register  */
             cfgReg &= ~(uint8)(rCfg->mask);
             /* Bitwise OR the bit pattern for setting the dummyCycle selected */
             cfgReg |= (rCfg->cfgRegBitP << rCfg->shift);
             /* There is register config, address might not be needed */
+            /* TI_COVERAGE_GAP_START [Branch] This value is always true for the flash used, hence false condition cannot
+            be validated */
             if (rCfg->isAddrReg == TRUE)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 retVal += Nor_OspiRegWrite(handle, rCfg->cmdRegWr, rCfg->cfgReg, cfgReg);
             }
+            /* TI_COVERAGE_GAP_START [Branch/Line] Test flash configuration always uses addressed register access
+             (isAddrReg==TRUE) non-addressed path never taken */
             else
             {
                 retVal += Nor_OspiRegWrite(handle, rCfg->cmdRegWr, OSPI_CMD_INVALID_ADDR, cfgReg);
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
     }
     else
@@ -1546,7 +1631,9 @@ Std_ReturnType Nor_OspiRegWrite(OSPI_Handle handle, uint8 cmd, uint32 addr, uint
     retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
     /* Wait a finite interval after WREN */
+    /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
     }

@@ -207,8 +207,11 @@ static void Fls_TimeoutVerification(TickType startCount)
             }
             Fls_TimeoutCheck(status, time1, elapsedCount);
             break;
+        /* TI_COVERAGE_GAP_START [Branch] Defensive default, typeoferase is always SECTOR/BLOCK/CHIP; unreachable in
+         correct operation */
         default:
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
 }
 
@@ -221,10 +224,13 @@ static void Fls_TimeoutCheck(StatusType status, uint32 time1, TickType elapsedCo
             Fls_TimeoutVerification_sub();
         }
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] GetElapsedValue always returns E_OK on this platform; hardware timer failure
+    is not inducible in test */
     else
     {
         /* Do Nothing */
     }
+    /* TI_COVERAGE_GAP_STOP */
 }
 
 static void Fls_TimeoutVerification_sub(void)
@@ -255,7 +261,10 @@ static Std_ReturnType Fls_CheckValidAddress(Fls_AddressType SourceAddress)
 {
     Std_ReturnType retVal    = (Std_ReturnType)E_NOT_OK;
     uint32         startAddr = 0U;
+    /* TI_COVERAGE_GAP_START [Branch] False branch is unreachable; SourceAddress is Fls_AddressType (unsigned) and
+    startAddr is always 0U; an unsigned value is always >= 0U */
     if (SourceAddress >= startAddr)
+    /* TI_COVERAGE_GAP_STOP */
     {
         if (SourceAddress <= (startAddr + Fls_Config_SFDP_Ptr->flashSize))
         {
@@ -369,8 +378,8 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
         if (ret == E_OK)
         {
             Fls_PhyStatus = Fls_Ospi_phyInit();
-            /* TI_COVERAGE_GAP_START The below if is never entered as this condition is only met on a hardware failure
-             */
+            /* TI_COVERAGE_GAP_START [Branch/Line] The below if is never entered as this condition is only met on a
+            hardware failure; PHY init failure cannot be induced in normal test environment */
             if (Fls_PhyStatus != E_OK)
             {
                 ret = (Std_ReturnType)E_NOT_OK;
@@ -380,13 +389,13 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
 #endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
 
         /*Init the HW */
-        /* TI_COVERAGE_GAP_START The below if-else is partially covered as false condition is only met on a hardware
-         * failure */
         if (ret == (Std_ReturnType)E_OK)
         {
             Fls_DrvObj.jobResultType = MEMIF_JOB_OK;
             Fls_DrvObj.status        = MEMIF_IDLE;
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] The below else branch is only reached on hardware failure (hwUnitInit or
+        phyInit failure); not inducible in normal test environment */
         else
         {
             Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_UNEXPECTED_FLASH_ID);
@@ -1193,7 +1202,6 @@ FUNC(void, FLS_CODE) Fls_Cancel(void)
         }
         /* Reset state machine variables to ensure clean state for next job */
         Fls_ResetStateMachines();
-
         if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)
         {
             Fls_DrvObj.Fls_JobErrorNotification();

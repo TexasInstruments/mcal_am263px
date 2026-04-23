@@ -95,6 +95,10 @@
 
 #define M_SIXTEEN  (16U)
 #define M_EIGHTEEN (18U)
+
+/* Define R5F Processor Modes */
+#define R5F_MODE_USER (0x10U)
+#define R5F_MODE_MASK (0x1FU)
 /* ========================================================================== */
 /*                         Structure Declarations                             */
 /* ========================================================================== */
@@ -443,14 +447,20 @@ static FUNC(void, WDG_CODE) Wdg_reset(void)
     HW_WR_REG32(MSS_RCM_LOCK0_KICK0, RCM_KICK0_LOCK_VAL);
     HW_WR_REG32(MSS_RCM_LOCK0_KICK1, RCM_KICK1_LOCK_VAL);
 }
-static inline void Wdg_AssertPrivilegedMode(void)
-{
-    /* MISRA Dir 4.3: only assembly in this function (MISRA.ASM.ENCAPS fix).
-       MRC reads MIDR register (CP15 c0) which is privileged-only.
-       Triggers UNDEFINED exception if called in user mode. */
-    __asm__ volatile("MRC p15, 0, r0, c0, c0, 0" : : : "r0", "memory");
-}
 
+void Wdg_reportDetRuntimeError(uint8 apiId, uint8 errorId)
+{
+    (void)Det_ReportRuntimeError(WDG_MODULE_ID, WDG_INSTANCE_ID, apiId, errorId);
+    return;
+}
+/* Helper to read CPSR via compiler intrinsic or inline assembly */
+static inline uint32 Wdg_GetProcessorMode(void)
+{
+    uint32 cpsr;
+    /* Example for TI Arm Clang / GCC */
+    __asm__ volatile("mrs %0, cpsr" : "=r"(cpsr));
+    return (cpsr & R5F_MODE_MASK);
+}
 /** @fn FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) Mode)
  *   @brief Set the WDG MODE
  *   \param[in]  WdgIf_ModeType       Mode
@@ -475,26 +485,34 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetModeConfig(VAR(WdgIf_ModeType, AUTOMATIC) 
         /* Get Requested mode type settings from configuration settings */
         else
         {
-            /*Wdg_SetMode functionality can go undefined when executed in user mode.
-            Hence the below assertion to raise UNDEF exception */
-            Wdg_AssertPrivilegedMode();
-            Wdg_reset();
-            if (Mode == WDGIF_FAST_MODE)
+            /*Wdg_SetMode shall check for ARM mode and if user-mode reports runtime DET*/
+            if (Wdg_GetProcessorMode() == R5F_MODE_USER)
             {
-                /* DWD Expiration Period */
-                retVal =
-                    Wdg_windowConfig(baseAddr, (uint32)Wdg_DrvObj.fastModeCfg.reaction,
-                                     Wdg_DrvObj.fastModeCfg.preloadValue, (uint32)Wdg_DrvObj.fastModeCfg.windowSize);
+                Wdg_reportDetRuntimeError(
+                    WDG_API_SET_MODE,
+                    WDG_E_INVALID_EXEC_MODE); /* Report Runtime DET if this function is called in user-mode*/
+                retVal = E_NOT_OK;
             }
             else
             {
-                /* DWD Expiration Period */
-                retVal =
-                    Wdg_windowConfig(baseAddr, (uint32)Wdg_DrvObj.slowModeCfg.reaction,
-                                     Wdg_DrvObj.slowModeCfg.preloadValue, (uint32)Wdg_DrvObj.slowModeCfg.windowSize);
+                Wdg_reset();
+                if (Mode == WDGIF_FAST_MODE)
+                {
+                    /* DWD Expiration Period */
+                    retVal = Wdg_windowConfig(baseAddr, (uint32)Wdg_DrvObj.fastModeCfg.reaction,
+                                              Wdg_DrvObj.fastModeCfg.preloadValue,
+                                              (uint32)Wdg_DrvObj.fastModeCfg.windowSize);
+                }
+                else
+                {
+                    /* DWD Expiration Period */
+                    retVal = Wdg_windowConfig(baseAddr, (uint32)Wdg_DrvObj.slowModeCfg.reaction,
+                                              Wdg_DrvObj.slowModeCfg.preloadValue,
+                                              (uint32)Wdg_DrvObj.slowModeCfg.windowSize);
+                }
+                /*  Enable the WDG after changing the DWDPRLD register */
+                Wdg_counterEnable(Wdg_DrvObj.baseAddr);
             }
-            /*  Enable the WDG after changing the DWDPRLD register */
-            Wdg_counterEnable(Wdg_DrvObj.baseAddr);
         }
     }
     else

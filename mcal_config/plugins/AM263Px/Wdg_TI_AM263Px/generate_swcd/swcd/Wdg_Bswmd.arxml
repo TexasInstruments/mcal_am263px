@@ -117,8 +117,8 @@
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Wdg_TI_AM263px/Wdg/Wdg_Behavior/WDG_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  [!IF "((as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))='true'))"!]
                   <CALL-POINTS>
+                  [!IF "((as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgGeneral/WdgDevErrorDetect = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))='true'))"!]
                     [!IF "((not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) = 'true') or (not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))='true'))"!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Dem_SetEventStatus</SHORT-NAME>
@@ -131,8 +131,12 @@
                       <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/BSWModuleEntry/Det_ReportError</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
-                  </CALL-POINTS>
                   [!ENDIF!]
+                    <BSW-DIRECT-CALL-POINT>
+                      <SHORT-NAME>Det_ReportRuntimeError</SHORT-NAME>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/AUTOSAR_Det/Det/Det_ReportRuntimeError</CALLED-ENTRY-REF>
+                    </BSW-DIRECT-CALL-POINT>
+                  </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Wdg_TI_AM263px/Wdg_ModuleEntry/Wdg_SetMode</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="efc248e3-ed91-4864-bf9a-eb57c5b85cd7">

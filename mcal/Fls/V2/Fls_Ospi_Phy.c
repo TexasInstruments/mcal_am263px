@@ -329,10 +329,13 @@ static Std_ReturnType Fls_Ospi_phyConfigBaudrate(uint32 baud)
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_MSTR_BAUD_DIV_FLD,
                       CSL_OSPI_BAUD_RATE_DIVISOR(baud));
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] Baud rate is always valid (computed from HW divider); invalid baud is never
+       passed not triggered in test */
     else
     {
         status = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return status;
 }
@@ -348,10 +351,13 @@ static Std_ReturnType Fls_Ospi_phyGetBaudRateDivFromObj(uint32 *baudDiv)
         progBaudDiv = (progBaudDiv << 1U) + 2U;
         *baudDiv    = progBaudDiv;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] Function always called with valid non-NULL pointer in PHY init flow; NULL
+    defensive check never triggered */
     else
     {
         status = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
     return status;
 }
 
@@ -607,10 +613,13 @@ static void Fls_Ospi_phyFindTxLow(const Fls_Ospi_phyConfig *start, uint32 offset
     {
         result->txDLL += (int32_t)gPhyTuneWindowParams->rxTxDLLSearchStep;
         if (result->txDLL > gPhyTuneWindowParams->txLowSearchEnd)
+        /* TI_COVERAGE_GAP_START [Branch/Line] TxLow search always succeeds on first txDLL attempt in test; retry
+        iterations never reached */
         {
             result->txDLL = 128;
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
         Fls_Ospi_phySetRdDelayTxRxDLL(result);
         rdAttackStatus = Fls_Ospi_phyReadAttackVector(offset);
     }
@@ -662,19 +671,23 @@ static boolean Fls_Ospi_phyRxLowInnerSearch(uint32 flashOffset, Fls_Ospi_phyConf
 {
     boolean continueSearch = TRUE;
 
+    /* TI_COVERAGE_GAP_START [Branch] Total rxLow search failure cannot be validated*/
     while ((rxResult->rxDLL == 128) && (continueSearch == TRUE))
     {
         searchPoint->rdDelay++;
         if (searchPoint->rdDelay > (int32_t)params->rdDelayMax)
         {
             if (searchPoint->txDLL >= windowEnd)
+            /* TI_COVERAGE_GAP_START [Branch/Line] Total rxLow search failure not encountered on test hardware */
             {
                 continueSearch = FALSE;
             }
+            /* TI_COVERAGE_GAP_STOP */
             break;
         }
         Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, rxResult);
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return continueSearch;
 }
@@ -696,15 +709,21 @@ static boolean Fls_Ospi_phyRxHighInnerSearch(uint32 flashOffset, Fls_Ospi_phyCon
 {
     boolean continueSearch = TRUE;
 
+    /* TI_COVERAGE_GAP_START [Branch] Total rxHigh search failure cannot be validated*/
     while ((rxResult->rxDLL == 128) && (continueSearch == TRUE))
     {
         searchPoint->rdDelay--;
+
         if (searchPoint->rdDelay < (int32_t)params->rdDelayMin)
+        /* TI_COVERAGE_GAP_START [Branch/Line] RxHigh search always finds result before rdDelay minimum; rdDelay
+     decrement loop body never iterated in test */
         {
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
         Fls_Ospi_phyFindRxHigh(searchPoint, flashOffset, rxResult);
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return continueSearch;
 }
@@ -721,6 +740,8 @@ static void Fls_Ospi_phyMergeRxHighResults(Fls_Ospi_phyConfig *rxHigh, const Fls
 {
     if (sec_rxHigh->rxDLL != 128)
     {
+        /* TI_COVERAGE_GAP_START [Branch/Line] Both primary and secondary rxHigh searches always succeed in test; total
+     rxHigh failure path not encountered */
         if (rxHigh->rxDLL == 128)
         {
             *rxHigh = *sec_rxHigh;
@@ -729,11 +750,14 @@ static void Fls_Ospi_phyMergeRxHighResults(Fls_Ospi_phyConfig *rxHigh, const Fls
         {
             *rxHigh = *sec_rxHigh;
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             /* Keep rxHigh as is */
         }
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] Both primary and secondary rxHigh searches always succeed in test; total
+     rxHigh failure path not encountered */
     else
     {
         if (rxHigh->rxDLL == 128)
@@ -741,6 +765,7 @@ static void Fls_Ospi_phyMergeRxHighResults(Fls_Ospi_phyConfig *rxHigh, const Fls
             *continueSearch = FALSE;
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
 }
 
 /**
@@ -762,8 +787,10 @@ static boolean Fls_Ospi_phySearchGoldenRxLow(uint32 flashOffset, Fls_Ospi_phyCon
 
     /* GOLDEN Primary Rx_Low Search */
     searchPoint->txDLL = params->txDllLowWindowStart;
-
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] searches always succeed here, unless
+    hardware failure;fail cannot be validated*/
     while ((searchPoint->txDLL <= params->txDllLowWindowEnd) && (continueSearch == TRUE))
+    /* TI_COVERAGE_GAP_STOP */
     {
         searchPoint->rdDelay = (int32_t)params->rdDelayMin;
         searchPoint->rxDLL   = params->rxLowSearchStart;
@@ -786,10 +813,13 @@ static boolean Fls_Ospi_phySearchGoldenRxLow(uint32 flashOffset, Fls_Ospi_phyCon
         {
             searchPoint->txDLL += params->txDLLSearchOffset;
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] Secondary search txDLL offset never exceeds window end in test; boundary
+        clamp not triggered */
         else
         {
             searchPoint->txDLL = params->txDllLowWindowEnd;
         }
+        /* TI_COVERAGE_GAP_STOP */
 
         searchPoint->rdDelay = (int32_t)params->rdDelayMin;
         searchPoint->rxDLL   = params->rxLowSearchStart;
@@ -829,10 +859,13 @@ static boolean Fls_Ospi_phySearchGoldenRxHigh(uint32 flashOffset, Fls_Ospi_phyCo
     {
         searchPoint->txDLL += params->txDLLSearchOffset;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] Secondary rxHigh search txDLL offset never exceeds window end in test;
+    boundary clamp not triggered */
     else
     {
         searchPoint->txDLL = params->txDllLowWindowEnd;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     searchPoint->rxDLL   = params->rxHighSearchEnd;
     searchPoint->rdDelay = (int32_t)params->rdDelayMax;
@@ -872,11 +905,13 @@ static boolean Fls_Ospi_phyBackupRxLowInnerSearch(uint32 flashOffset, Fls_Ospi_p
                                                   int32_t windowStart)
 {
     boolean continueSearch = TRUE;
-
+    /* TI_COVERAGE_GAP_START [Branch/Line] searches always succeed here, unless hardware failure;fail cannot be
+            validated*/
     while ((rxResult->rxDLL == 128) && (continueSearch == TRUE))
     {
         searchPoint->rdDelay++;
         if (searchPoint->rdDelay > (int32_t)params->rdDelayMax)
+
         {
             if (searchPoint->txDLL <= windowStart)
             {
@@ -886,7 +921,7 @@ static boolean Fls_Ospi_phyBackupRxLowInnerSearch(uint32 flashOffset, Fls_Ospi_p
         }
         Fls_Ospi_phyFindRxLow(searchPoint, flashOffset, rxResult);
     }
-
+    /* TI_COVERAGE_GAP_STOP */
     return continueSearch;
 }
 
@@ -899,8 +934,10 @@ static boolean Fls_Ospi_phySearchBackupRxLow(uint32 flashOffset, Fls_Ospi_phyCon
 
     /* BACKUP Primary Rx_Low Search */
     searchPoint->txDLL = params->txDllHighWindowEnd;
-
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] Backup primary rxLow always found on first txDLL attempt; outer loop
+    decrement iteration never executed in test */
     while ((searchPoint->txDLL >= params->txDllHighWindowStart) && (continueSearch == TRUE))
+    /* TI_COVERAGE_GAP_STOP*/
     {
         searchPoint->rdDelay = (int32_t)params->rdDelayMin;
         searchPoint->rxDLL   = params->rxLowSearchStart;
@@ -913,8 +950,11 @@ static boolean Fls_Ospi_phySearchBackupRxLow(uint32 flashOffset, Fls_Ospi_phyCon
             break;
         }
 
+        /* TI_COVERAGE_GAP_START [Line] Backup primary rxLow always found on first txDLL attempt; outer loop decrement
+        iteration never executed in test */
         searchPoint->txDLL -= (int32_t)params->rxTxDLLSearchStep;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     /* BACKUP Secondary Rx_Low Search */
     if (continueSearch == TRUE)
@@ -923,10 +963,13 @@ static boolean Fls_Ospi_phySearchBackupRxLow(uint32 flashOffset, Fls_Ospi_phyCon
         {
             searchPoint->txDLL -= params->txDLLSearchOffset;
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] Backup secondary rxLow txDLL offset never pushes below window start in
+        test; boundary clamp not triggered */
         else
         {
             searchPoint->txDLL = params->txDllHighWindowStart;
         }
+        /* TI_COVERAGE_GAP_STOP */
 
         searchPoint->rdDelay = (int32_t)params->rdDelayMin;
         searchPoint->rxDLL   = params->rxLowSearchStart;
@@ -966,10 +1009,13 @@ static boolean Fls_Ospi_phySearchBackupRxHigh(uint32 flashOffset, Fls_Ospi_phyCo
     {
         searchPoint->txDLL -= params->txDLLSearchOffset;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] Backup secondary rxHigh txDLL offset never pushes below window start in test;
+    boundary clamp not triggered */
     else
     {
         searchPoint->txDLL = params->txDllHighWindowStart;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     searchPoint->rxDLL   = params->rxHighSearchEnd;
     searchPoint->rdDelay = (int32_t)params->rdDelayMax;
@@ -1005,6 +1051,8 @@ static boolean Fls_Ospi_phySearchGoldenTx(uint32 flashOffset, Fls_Ospi_phyConfig
     searchPoint->txDLL   = params->txLowSearchStart;
     Fls_Ospi_phyFindTxLow(searchPoint, flashOffset, &txPoints->low);
 
+    /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] Golden txLow always found at rdDelayMin; retry loop and total-failure
+    path never taken in test */
     while ((txPoints->low.txDLL == 128) && (continueSearch == TRUE))
     {
         searchPoint->rdDelay++;
@@ -1015,23 +1063,31 @@ static boolean Fls_Ospi_phySearchGoldenTx(uint32 flashOffset, Fls_Ospi_phyConfig
             continueSearch = FALSE;
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     /* GOLDEN Tx_High Search */
+    /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be validated*/
     if (continueSearch == TRUE)
+    /* TI_COVERAGE_GAP_STOP */
     {
         searchPoint->txDLL   = params->txHighSearchEnd;
         searchPoint->rdDelay = (int32_t)params->rdDelayMax;
         Fls_Ospi_phyFindTxHigh(searchPoint, flashOffset, &txPoints->high);
 
+        /* TI_COVERAGE_GAP_START [Branch] Golden txHigh always found at rdDelayMax; retry loop and total-failure path
+        never taken in test */
         while ((txPoints->high.txDLL == 128) && (continueSearch == TRUE))
+        /* TI_COVERAGE_GAP_STOP */
         {
             searchPoint->rdDelay--;
             Fls_Ospi_phyFindTxHigh(searchPoint, flashOffset, &txPoints->high);
-
+            /* TI_COVERAGE_GAP_START [Branch/Line] searches always succeed here, unless hardware failure;fail cannot be
+            validated*/
             if (searchPoint->rdDelay < (int32_t)params->rdDelayMin)
             {
                 continueSearch = FALSE;
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
     }
 
@@ -1048,6 +1104,8 @@ static boolean Fls_Ospi_phySearchGoldenTx(uint32 flashOffset, Fls_Ospi_phyConfig
  * @param[in] params PHY tuning window parameters
  * @return TRUE if search successful, FALSE if failed
  */
+/* TI_COVERAGE_GAP_START [Function] Backup Tx search only invoked when golden txLow and txHigh share the same rdDelay;
+this does not occur on test hardware */
 static boolean Fls_Ospi_phySearchBackupTx(uint32 flashOffset, Fls_Ospi_phyConfig *searchPoint,
                                           Fls_Ospi_phyRxTxPoints *txPoints, const Fls_Ospi_phyRxTxPoints *rxPoints,
                                           const OSPI_PhyWindowParams *params)
@@ -1101,6 +1159,7 @@ static boolean Fls_Ospi_phySearchBackupTx(uint32 flashOffset, Fls_Ospi_phyConfig
 
     return continueSearch;
 }
+/* TI_COVERAGE_GAP_STOP */
 
 /**
  * @brief Setup corner points (bottomLeft and topRight) for binary search
@@ -1125,10 +1184,13 @@ static void Fls_Ospi_phySetupCornerPoints(uint32 flashOffset, Fls_Ospi_phyCorner
     {
         corners->bottomLeft.rdDelay = txPoints->low.rdDelay;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] txLow.rdDelay is always <= rxLow.rdDelay in test; else path (use rxLow
+    rdDelay) never taken */
     else
     {
         corners->bottomLeft.rdDelay = rxPoints->low.rdDelay;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     backupCornerPoint        = corners->bottomLeft;
     backupCornerPoint.txDLL += 4;
@@ -1137,14 +1199,19 @@ static void Fls_Ospi_phySetupCornerPoints(uint32 flashOffset, Fls_Ospi_phyCorner
     Fls_Ospi_phySetRdDelayTxRxDLL(&backupCornerPoint);
     status = Fls_Ospi_phyReadAttackVector(flashOffset);
 
+    /* TI_COVERAGE_GAP_START [Branch/Line] BottomLeft corner+4 offset reads successfully without rdDelay adjustment in
+    test; decrement retry not needed */
     if (status == E_NOT_OK)
     {
         backupCornerPoint.rdDelay--;
         Fls_Ospi_phySetRdDelayTxRxDLL(&backupCornerPoint);
         status = Fls_Ospi_phyReadAttackVector(flashOffset);
     }
+    /* TI_COVERAGE_GAP_STOP */
 
+    /* TI_COVERAGE_GAP_START [Branch] status = E_NOT_OK cannot be validated unless a hardware read failure */
     if (status == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         corners->bottomLeft.rdDelay = backupCornerPoint.rdDelay;
     }
@@ -1157,10 +1224,13 @@ static void Fls_Ospi_phySetupCornerPoints(uint32 flashOffset, Fls_Ospi_phyCorner
     {
         corners->topRight.rdDelay = txPoints->high.rdDelay;
     }
+    /* TI_COVERAGE_GAP_START [Branch] rxHigh.rdDelay is always >= txHigh.rdDelay in test; topRight rdDelay always taken
+    from rxHigh */
     else
     {
         corners->topRight.rdDelay = rxPoints->high.rdDelay;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     backupCornerPoint        = corners->topRight;
     backupCornerPoint.txDLL -= 4;
@@ -1225,12 +1295,16 @@ static void Fls_Ospi_phyBinarySearchGap(uint32 flashOffset, const Fls_Ospi_phyCo
             searchPoint.txDLL = searchPoint.txDLL + ((right.txDLL - searchPoint.txDLL) / 2);
             searchPoint.rxDLL = searchPoint.rxDLL + ((right.rxDLL - searchPoint.rxDLL) / 2);
         }
+        /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be
+        validated*/
     } while (((right.txDLL - left.txDLL) >= 2) && ((right.rxDLL - left.rxDLL) >= 2));
-
+    /* TI_COVERAGE_GAP_STOP */
     gaps->gapLow = searchPoint;
 
     /* Binary search for gap high (only if two segments) */
+    /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be validated*/
     if (corners->bottomLeft.rdDelay != corners->topRight.rdDelay)
+    /* TI_COVERAGE_GAP_STOP */
     {
         left                = corners->bottomLeft;
         right               = corners->topRight;
@@ -1257,14 +1331,19 @@ static void Fls_Ospi_phyBinarySearchGap(uint32 flashOffset, const Fls_Ospi_phyCo
                 searchPoint.txDLL = left.txDLL + ((searchPoint.txDLL - left.txDLL) / 2);
                 searchPoint.rxDLL = left.rxDLL + ((searchPoint.rxDLL - left.rxDLL) / 2);
             }
+            /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be
+            validated*/
         } while (((right.txDLL - left.txDLL) >= 2) && ((right.rxDLL - left.rxDLL) >= 2));
-
+        /* TI_COVERAGE_GAP_STOP */
         gaps->gapHigh = searchPoint;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] searches always succeed here, unless hardware failure;fail cannot be
+    validated*/
     else
     {
         gaps->gapHigh = gaps->gapLow;
     }
+    /* TI_COVERAGE_GAP_STOP */
 }
 
 /**
@@ -1278,6 +1357,8 @@ static void Fls_Ospi_phyBinarySearchGap(uint32 flashOffset, const Fls_Ospi_phyCo
 static void Fls_Ospi_phyCalculateFinalOTP(const Fls_Ospi_phyCornerPoints *corners, const Fls_Ospi_phyGapPoints *gaps,
                                           float32 slope, Fls_Ospi_phyConfig *searchPoint)
 {
+    /* TI_COVERAGE_GAP_START [Branch/Line] searches always succeed here, unless hardware failure;fail cannot be
+    validated*/
     if (corners->bottomLeft.rdDelay == corners->topRight.rdDelay)
     {
         /* Single segment - put tuning point in the middle using gapLow as upper bound */
@@ -1285,13 +1366,17 @@ static void Fls_Ospi_phyCalculateFinalOTP(const Fls_Ospi_phyCornerPoints *corner
         searchPoint->txDLL   = (corners->bottomLeft.txDLL + gaps->gapLow.txDLL) / 2;
         searchPoint->rxDLL   = (corners->bottomLeft.rxDLL + gaps->gapLow.rxDLL) / 2;
     }
+    /* TI_COVERAGE_GAP_STOP */
     else
     {
         /* Two segments - place in corner furthest from gap */
+        /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be
+        validated*/
         int32_t len1 = (FLS_PHY_ABS(gaps->gapLow.txDLL - corners->bottomLeft.txDLL)) +
                        (FLS_PHY_ABS(gaps->gapLow.rxDLL - corners->bottomLeft.rxDLL));
         int32_t len2 = (FLS_PHY_ABS(gaps->gapHigh.txDLL - corners->topRight.txDLL)) +
                        (FLS_PHY_ABS(gaps->gapHigh.rxDLL - corners->topRight.rxDLL));
+        /* TI_COVERAGE_GAP_STOP */
 
         if (len2 > len1)
         {
@@ -1302,6 +1387,8 @@ static void Fls_Ospi_phyCalculateFinalOTP(const Fls_Ospi_phyCornerPoints *corner
             float32 product     = deltaFloat * slope;
             searchPoint->rxDLL -= (int32_t)(product);
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] searches always succeed here, unless hardware failure;fail cannot be
+        validated*/
         else
         {
             int32_t delta       = (gaps->gapLow.txDLL - corners->bottomLeft.txDLL) / 2;
@@ -1311,6 +1398,7 @@ static void Fls_Ospi_phyCalculateFinalOTP(const Fls_Ospi_phyCornerPoints *corner
             float32 product     = deltaFloat * slope;
             searchPoint->rxDLL += (int32_t)(product);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 }
 
@@ -1335,21 +1423,28 @@ static boolean Fls_Ospi_phyExecuteBackupRxSearches(uint32 flashOffset, Fls_Ospi_
 
     if (continueSearch == TRUE)
     {
+        /* TI_COVERAGE_GAP_START [Branch/Line] Backup rxLow result never better (lower rxDLL) than golden in test;
+        update path not taken */
         backupPoint.rxDLL   = MIN(backupPoint.rxDLL, sec_rxLow.rxDLL);
         backupPoint.rdDelay = MIN(backupPoint.rdDelay, sec_rxLow.rdDelay);
-
+        /* TI_COVERAGE_GAP_STOP */
+        /* TI_COVERAGE_GAP_START [Branch/Line] Backup rxLow result never better (lower rxDLL) than golden in test;
+        update path not taken */
         if (backupPoint.rxDLL < rxPoints->low.rxDLL)
         {
             rxPoints->low = backupPoint;
         }
-
+        /* TI_COVERAGE_GAP_STOP */
         searchPoint->txDLL = backupPoint.txDLL;
         continueSearch = Fls_Ospi_phySearchBackupRxHigh(flashOffset, searchPoint, &backupPoint, &sec_rxHigh, params);
 
+        /* TI_COVERAGE_GAP_START [Branch/Line] Backup rxHigh result never better (higher rxDLL) than golden in test;
+        update path not taken */
         if ((continueSearch == TRUE) && (backupPoint.rxDLL > rxPoints->high.rxDLL))
         {
             rxPoints->high = backupPoint;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return continueSearch;
@@ -1375,10 +1470,13 @@ static boolean Fls_Ospi_phyExecuteTxSearches(uint32 flashOffset, Fls_Ospi_phyCon
     continueSearch = Fls_Ospi_phySearchGoldenTx(flashOffset, searchPoint, txPoints, rxPoints, params);
 
     /* BACKUP Tx searches (if txLow and txHigh have same rdDelay) */
+    /* TI_COVERAGE_GAP_START [Branch/Line] Golden txLow and txHigh always have different rdDelay in test; backup Tx
+    search never invoked */
     if ((continueSearch == TRUE) && (txPoints->low.rdDelay == txPoints->high.rdDelay))
     {
         continueSearch = Fls_Ospi_phySearchBackupTx(flashOffset, searchPoint, txPoints, rxPoints, params);
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return continueSearch;
 }
@@ -1401,15 +1499,19 @@ static Std_ReturnType Fls_Ospi_phyFinalizeOTP(uint32 flashOffset, const Fls_Ospi
 
     /* Calculate slope for diagonal line - guard against division by zero */
     int32_t txDllDelta = corners->topRight.txDLL - corners->bottomLeft.txDLL;
+
     if (txDllDelta != 0)
     {
         slope = ((float32)corners->topRight.rxDLL - (float32)corners->bottomLeft.rxDLL) / (float32)txDllDelta;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] txDLL delta between corners is never zero in test; default slope=1.0 path not
+    taken */
     else
     {
         /* If txDLL values are equal, use slope of 1.0 as default */
         slope = 1.0f;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     /* Perform binary search for gap */
     Fls_Ospi_phyBinarySearchGap(flashOffset, corners, &gaps, slope);
@@ -1427,12 +1529,15 @@ static Std_ReturnType Fls_Ospi_phyFinalizeOTP(uint32 flashOffset, const Fls_Ospi
         otp->txDLL   = searchPoint.txDLL;
         otp->rdDelay = searchPoint.rdDelay;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] Computed OTP point always verifies successfully in test hardware;
+    verification failure path not encountered */
     else
     {
         otp->rxDLL   = 0;
         otp->txDLL   = 0;
         otp->rdDelay = 0;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return status;
 }
@@ -1462,11 +1567,16 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
         Fls_Ospi_phySearchGoldenRxLow(flashOffset, &searchPoint, &rxPoints.low, &sec_rxLow, gPhyTuneWindowParams);
 
     /* Merge primary and secondary Rx_Low results */
+    /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be validated*/
     if (continueSearch == TRUE)
+    /* TI_COVERAGE_GAP_STOP */
     {
-        rxPoints.low.rxDLL   = MIN(rxPoints.low.rxDLL, sec_rxLow.rxDLL);
+        rxPoints.low.rxDLL = MIN(rxPoints.low.rxDLL, sec_rxLow.rxDLL);
+        /* TI_COVERAGE_GAP_START [Branch/Line] Backup rxLow result never better (lower rxDLL) than golden in test;
+        update path not taken */
         rxPoints.low.rdDelay = MIN(rxPoints.low.rdDelay, sec_rxLow.rdDelay);
-        searchPoint.txDLL    = rxPoints.low.txDLL;
+        /* TI_COVERAGE_GAP_STOP */
+        searchPoint.txDLL = rxPoints.low.txDLL;
 
         /* Step 2: GOLDEN Rx_High Search (Primary + Secondary) */
         continueSearch = Fls_Ospi_phySearchGoldenRxHigh(flashOffset, &searchPoint, &rxPoints.high, &sec_rxHigh,
@@ -1474,14 +1584,19 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
     }
 
     /* Step 3: BACKUP Rx searches (if rxLow and rxHigh have same rdDelay) */
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] searches always succeed here, unless hardware failure;fail cannot be
+    validated*/
     if ((continueSearch == TRUE) && (rxPoints.low.rdDelay == rxPoints.high.rdDelay))
+    /* TI_COVERAGE_GAP_STOP */
     {
         continueSearch =
             Fls_Ospi_phyExecuteBackupRxSearches(flashOffset, &searchPoint, &rxPoints, gPhyTuneWindowParams);
     }
 
     /* Step 4 & 5: GOLDEN and BACKUP Tx searches */
+    /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be validated*/
     if (continueSearch == TRUE)
+    /* TI_COVERAGE_GAP_STOP */
     {
         continueSearch =
             Fls_Ospi_phyExecuteTxSearches(flashOffset, &searchPoint, &txPoints, &rxPoints, gPhyTuneWindowParams);
@@ -1493,6 +1608,8 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
         Fls_Ospi_phySetupCornerPoints(flashOffset, &corners, &txPoints, &rxPoints);
         status = Fls_Ospi_phyFinalizeOTP(flashOffset, &corners, otp);
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] PHY tuning always finds valid Rx/Tx operating points in test; total search
+    failure (continueSearch=FALSE) not encountered */
     else
     {
         /* Search was aborted due to error - set default values */
@@ -1501,6 +1618,7 @@ static Std_ReturnType Fls_Ospi_phyFindOTP1(uint32 flashOffset, Fls_Ospi_phyConfi
         otp->rdDelay = 0;
         status       = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return status;
 }
@@ -1512,7 +1630,10 @@ void Fls_Ospi_phy_disable(void)
     /* Disable PHY pipeline */
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_PIPELINE_PHY_FLD, FALSE);
 #endif
+    /* TI_COVERAGE_GAP_START [Branch] This function is entered only when phy is already enabled from config, this if is
+    defensive check */
     if (phyEnable == TRUE)
+    /* TI_COVERAGE_GAP_STOP */
     {
         uint32 dummyClks = (uint32)Fls_Config_SFDP_Ptr->protos.dummyClksCmd - 1U;
         /* Set new dummyClk */
@@ -1567,18 +1688,22 @@ static Std_ReturnType Fls_Ospi_phySweepReadCaptureDelay(uint32 phyTuningOffset, 
     Std_ReturnType attackVectorStatus = E_NOT_OK;
     uint32         sweepDelay         = 8U;
 
+    /* TI_COVERAGE_GAP_START [Branch] searches always succeed here, unless hardware failure;fail cannot be validated*/
     while ((attackVectorStatus != E_OK) && (sweepDelay > 0U))
+    /* TI_COVERAGE_GAP_STOP */
     {
         Fls_Ospi_phySetRdDataCaptureDelay(sweepDelay);
         attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
         sweepDelay--;
     }
 
+    /* TI_COVERAGE_GAP_START [Branch/Line] attackVectorStatus == E_NOT_OK cannot be validated unless a hardware read
+    failure */
     if (attackVectorStatus == E_OK)
     {
         *rdCapDelay = sweepDelay + 1U; /* +1 because we decremented after successful read */
     }
-
+    /* TI_COVERAGE_GAP_STOP */
     return attackVectorStatus;
 }
 
@@ -1609,22 +1734,29 @@ static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOff
     retVal = Fls_norSectorErase(handle, OSPI_PHY_OFFSET);
 
     /* If erase has passed, proceed with write */
+    /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
     if (E_OK == retVal)
+    /* TI_COVERAGE_GAP_STOP */
     {
         /* MISRA deviation: Cast away const for write operation - data is not modified */
         retVal = Nor_OspiWrite(handle, OSPI_PHY_OFFSET, (uint8 *)(uintptr_t)phyTuningData, phyTuningDataSize);
     }
 
     /* If write has passed, verify by reading */
+    /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
     if (E_OK == retVal)
+    /* TI_COVERAGE_GAP_STOP */
     {
         attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
 
         /* If initial read failed, attempt a readCaptureDelay sweep */
+        /* TI_COVERAGE_GAP_START [Branch] Attack vector read after write always succeeds at initial rdCapDelay in test;
+        sweep fallback not needed */
         if (attackVectorStatus != E_OK)
         {
             attackVectorStatus = Fls_Ospi_phySweepReadCaptureDelay(phyTuningOffset, rdCapDelay);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return attackVectorStatus;
@@ -1670,22 +1802,28 @@ Std_ReturnType Fls_Ospi_phyInit(void)
     {
         status = Fls_Ospi_phyTuneDDR(phyTuningOffset);
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] Attack vector always found (read or written) in test; total unavailability
+     path not encountered */
     else
     {
         status = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     /* Update PHY init status and handle failure case */
     if (status == E_OK)
     {
         phyInitStatus = E_OK;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] PHY tuning always succeeds in test; failure revert path (restore initial
+     rdCapDelay) not executed */
     else
     {
         /* If failed by any means, then reverting readCapturedelay to a known value */
         readDataCaptureDelay = initialReadDataCaptureDelay;
         Fls_Ospi_phySetRdDataCaptureDelay(readDataCaptureDelay);
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return phyInitStatus;
 }
