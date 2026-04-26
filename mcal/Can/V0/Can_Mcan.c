@@ -411,10 +411,13 @@ Std_ReturnType Can_mcanStop(Can_ControllerObjType *controllerObj, Can_MailboxObj
         if ((CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir) &&
             (mailboxCfg->Controller->ControllerId == controllerObj->canControllerConfig_PC.ControllerId))
         {
+            /* TI_COVERAGE_GAP_START [Branch] HwHandle >= CAN_NUM_TX_MAILBOXES; all configured TX mailboxes have valid
+             * HwHandle in test */
             if (mailboxCfg->HwHandle < (Can_HwHandleType)CAN_NUM_TX_MAILBOXES)
             {
                 canTxMessageObj[mailboxCfg->HwHandle].freeHwObjectCount = mailboxCfg->CanHwObjectCount;
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
     }
     /* Put MCAN in SW initialization mode */
@@ -872,10 +875,12 @@ void Can_mcanInitInterrupt(Can_ControllerObjType *controllerObj)
     }
 
     /* Enable RX Interrupt for Buffers when it is configured */
+    /* TI_COVERAGE_GAP_START [Branch/MCDC] RX buffer interrupt configuration; no RX buffers in test configs */
     if ((canFDMsgRamConfig->rxLowInterruptMask != CAN_ZERO) || (canFDMsgRamConfig->rxHighInterruptMask != CAN_ZERO))
     {
         *canInterruptMask |= MCAN_IR_DRX_MASK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     /* Enable RX Interrupt for FIFO new message and message lost
             when it is configured */
@@ -982,6 +987,8 @@ void Can_mcanSetUpController(uint32 baseAddr)
 
     /* reset MCAN Module */
     MCAN_reset(baseAddr);
+    /* TI_COVERAGE_GAP_START [Branch]
+     * status initialized to E_OK; first condition always True on entry */
     if (((StatusType)E_OK) == status)
     {
         /* Wait for FSM to to come out of reset */
@@ -990,10 +997,6 @@ void Can_mcanSetUpController(uint32 baseAddr)
             /* Below API can change start time, so use temp variable */
             if (tempCount <= 0U)
             {
-                /* Dynamic coverage for the below DEM event is not covered.
-                 * Since it is hardware dependent.
-                 */
-
                 /* timeout */
 #ifdef CAN_E_HARDWARE_ERROR
                 (void)Dem_SetEventStatus(CAN_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -1004,6 +1007,7 @@ void Can_mcanSetUpController(uint32 baseAddr)
             MCAL_SW_DELAY(tempCount);
         }
     }
+    /* TI_COVERAGE_GAP_STOP [Branch] */
 
     /* Put MCAN in SW initialization mode */
     MCAN_setOpMode(baseAddr, (uint32)MCAN_OPERATION_MODE_SW_INIT);
@@ -1022,10 +1026,6 @@ void Can_mcanSetUpController(uint32 baseAddr)
             /* Below API can change start time, so use temp variable */
             if (tempCount <= 0U)
             {
-                /* Dynamic coverage for the below DEM event is not covered.
-                 * Since it is hardware dependent.
-                 */
-
                 /* timeout */
 #ifdef CAN_E_HARDWARE_ERROR
                 (void)Dem_SetEventStatus(CAN_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
@@ -1168,6 +1168,8 @@ static void Can_mcanSetUpRxMailbox(Can_FdMsgRAMConfigObjType *msgRamConfig, cons
             ((rxProcessingType == CAN_TX_RX_PROCESSING_MIXED) &&
              (mailboxCfg->CanHardwareObjectUsesPolling == (boolean)FALSE)))
         {
+            /* TI_COVERAGE_GAP_START [Branch]
+             * rxBuffNum >= 32 not covered; would require 32+ RX buffer mailboxes */
             if (msgRamConfig->rxBuffNum < (uint16)32)
             {
                 msgRamConfig->rxLowInterruptMask |= (uint32)1 << (uint32)(msgRamConfig->rxBuffNum);
@@ -1176,6 +1178,7 @@ static void Can_mcanSetUpRxMailbox(Can_FdMsgRAMConfigObjType *msgRamConfig, cons
             {
                 msgRamConfig->rxHighInterruptMask |= (uint32)1 << (msgRamConfig->rxBuffNum - (uint16)32);
             }
+            /* TI_COVERAGE_GAP_STOP [Branch] */
         }
         msgRamConfig->rxBuffNum += 1U;
     }
@@ -1245,9 +1248,6 @@ static void Can_mcanSetUpRxMailboxStdIdFifo(Can_FdMsgRAMConfigObjType *msgRamCon
         msgRamConfig->stdMsgIDFilterList[idx].sfid2 = (tmpIdValue & STD_MSGID_MASK);
         msgRamConfig->stdMsgIDFilterList[idx].sft   = 0x0U;
     }
-    /* Dynamic coverage for the below "else" statement
-     * is not covered. Since can handle type FULL is tested.
-     */
     else
     {
         msgRamConfig->stdMsgIDFilterList[idx].sfid2 = (tmpFilterMask & STD_MSGID_MASK);
@@ -1430,19 +1430,14 @@ static void Can_mcanSetId(const Can_PduType *PduInfo, const Can_MailboxType *mai
     switch (mailboxCfg->MBIdType)
     {
         case CAN_ID_STD:
-        {
             idType = CAN_ID_STD;
             break;
-        }
 
         case CAN_ID_XTD:
-        {
             idType = CAN_ID_XTD;
             break;
-        }
 
         case CAN_ID_MIXED:
-        {
             /*Mixed ID */
             if ((PduInfo->id & CAN_MSG_ID_TYPE_EXT) == (CAN_MSG_ID_TYPE_EXT))
             {
@@ -1453,17 +1448,14 @@ static void Can_mcanSetId(const Can_PduType *PduInfo, const Can_MailboxType *mai
                 idType = CAN_ID_STD;
             }
             break;
-        }
 
         default:
-        {
 #if (CAN_DEV_ERROR_DETECT == STD_ON)
             (void)Det_ReportError((uint16)CAN_MODULE_ID, (uint8)CAN_INSTANCE_ID, (uint8)CAN_WRITE_ID,
                                   (uint8)CAN_E_PARAM_CONTROLLER);
 #endif
             status = (uint32)E_NOT_OK;
             break;
-        }
     }
 
     if (((uint32)E_OK) == status)
@@ -1641,35 +1633,27 @@ void Can_mcan_ModeProcess(Can_ControllerObjType *canController)
     switch (controller_state)
     {
         case CAN_CS_STARTED:
-        {
             Can_CheckCsStarted(canController, baseAddr);
             CanIf_ControllerModeIndication((uint8)canController->canControllerConfig_PC.ControllerId,
                                            (Can_ControllerStateType)CAN_CS_STARTED);
             break;
-        }
 
         case CAN_CS_STOPPED:
-        {
             if ((uint32)MCAN_OPERATION_MODE_SW_INIT == MCAN_getOpMode(baseAddr))
             {
                 CanIf_ControllerModeIndication(canController->canControllerConfig_PC.ControllerId, CAN_CS_STOPPED);
             }
             break;
-        }
 
         case CAN_CS_SLEEP:
-        {
             if (MCAN_CCCR_CSA_ACK == (MCAN_getClkStopAck(baseAddr) & (uint32)MCAN_CCCR_CSA_ACK))
             {
                 CanIf_ControllerModeIndication(canController->canControllerConfig_PC.ControllerId, CAN_CS_SLEEP);
             }
             break;
-        }
 
         default:
-        {
             break;
-        }
     } /*End of Switch*/
 }
 

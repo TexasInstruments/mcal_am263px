@@ -115,6 +115,34 @@ void Mcal_pmuDelayMsec(volatile uint32 delayMsec, uint32 sysclkHz)
     Mcal_pmuDelayUsec(delayMsec * 1000U, sysclkHz);
 }
 
+void Mcal_pmuDelay(uint32 count)
+{
+    /*
+     * PMU cycle-counter busy-wait — identical pattern to Mcal_pmuDelayUsec.
+     * 'count' is the number of CPU clock cycles to spin, so no empirical
+     * loop-overhead constant is required in the caller's formula.
+     * Requires PMU to be initialised via Mcal_pmuInit() before use.
+     */
+    uint32 startVal;
+    uint32 currVal;
+    uint32 elapsed;
+    uint32 maxCount = MCAL_CYCLE_COUNTER_MAX_COUNT;
+
+    Mcal_GetCycleCounterValue(&startVal);
+    do
+    {
+        Mcal_GetCycleCounterValue(&currVal);
+        if (currVal >= startVal)
+        {
+            elapsed = currVal - startVal;
+        }
+        else
+        {
+            elapsed = (maxCount - startVal) + currVal;
+        }
+    } while (elapsed < count);
+}
+
 void Mcal_pmuInit(void)
 {
     Mcal_pmuResetCounters();

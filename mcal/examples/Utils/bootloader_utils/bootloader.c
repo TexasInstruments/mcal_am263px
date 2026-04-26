@@ -72,18 +72,30 @@
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 
-#define GET_CACHE_ALIGNED_SIZE(x) ((x + CacheP_CACHELINE_ALIGNMENT) & ~(CacheP_CACHELINE_ALIGNMENT - 1))
+#define GET_CACHE_ALIGNED_SIZE(x) \
+    (((x) + (uint32_t)CacheP_CACHELINE_ALIGNMENT) & ~((uint32_t)CacheP_CACHELINE_ALIGNMENT - 1U))
 
-/** Increase variable A by number B while keping the alignemnt of C bytes */
-#define ALIGNED_INCREMENT(A, B, C)                          \
-    do                                                      \
-    {                                                       \
-        A = (A = A + B, (A % C) > 0 ? A + C - (A % C) : A); \
-    } while (0)
+/**
+ * @brief Increase variable by a value while keeping alignment
+ *
+ * @param pValue Pointer to the value to increment
+ * @param increment Amount to add to the value
+ * @param alignment Alignment boundary in bytes
+ */
+static inline void Bootloader_alignedIncrement(uint32_t *pValue, uint32_t increment, uint32_t alignment)
+{
+    uint32_t newValue = *pValue + increment;
+    *pValue           = newValue;
+    if (0U != (newValue % alignment))
+    {
+        uint32_t remainder = newValue % alignment;
+        *pValue            = newValue + (alignment - remainder);
+    }
+}
 
 /*RPRC image ID for linux load only images */
 #define RPRC_LINUX_LOAD_ONLY_IMAGE_ID (21U)
-#define SEGMENT_MAP_NOTE_TYPE         (0xBBBB7777)
+#define SEGMENT_MAP_NOTE_TYPE         (0xBBBB7777U)
 
 /** Maximum allowed length of application certificate. */
 #define MAX_APP_CERT_LENGTH (0x1000U)
@@ -96,26 +108,28 @@
 /** The maximum possible size of RS note segment placed at the end of MCELF appimage. */
 #define BOOTLOADER_MAX_RS_NOTE_SEGMENT_SIZE (48)
 
-#define NOTE_SEGMENT_NOTE_TYPE_OTFA_CONFIG (0xDDDDBBBB)
+#define NOTE_SEGMENT_NOTE_TYPE_OTFA_CONFIG (0xDDDDBBBBU)
 
+#define CONFIG_BOOTLOADER_NUM_INSTANCES (1U)
 /* ========================================================================== */
 /*                             Global Variables                               */
 /* ========================================================================== */
 
-extern Bootloader_Config gBootloaderConfig[];
+extern Bootloader_Config gBootloaderConfig[CONFIG_BOOTLOADER_NUM_INSTANCES];
 extern uint32_t          gBootloaderConfigNum;
 
 #ifdef BOOTLOADER_SCRATCH_MEM_SUPPORT
 extern Bootloader_MemArgs gMemBootloaderArgs;
 #endif
 
-uint8_t gElfHBuffer[GET_CACHE_ALIGNED_SIZE(ELF_HEADER_MAX_SIZE)] __attribute__((aligned(CacheP_CACHELINE_ALIGNMENT)));
+uint8_t gElfHBuffer[GET_CACHE_ALIGNED_SIZE(ELF_HEADER_MAX_SIZE)]
+    __attribute__((aligned((uint32_t)CacheP_CACHELINE_ALIGNMENT)));
 uint8_t gNoteSegBuffer[GET_CACHE_ALIGNED_SIZE(ELF_NOTE_SEGMENT_MAX_SIZE)]
-    __attribute__((aligned(CacheP_CACHELINE_ALIGNMENT)));
-uint8_t gPHTBuffer[GET_CACHE_ALIGNED_SIZE(ELF_MAX_SEGMENTS * ELF_P_HEADER_MAX_SIZE)]
-    __attribute__((aligned(CacheP_CACHELINE_ALIGNMENT)));
+    __attribute__((aligned((uint32_t)CacheP_CACHELINE_ALIGNMENT)));
+uint8_t gPHTBuffer[GET_CACHE_ALIGNED_SIZE((ELF_MAX_SEGMENTS * ELF_P_HEADER_MAX_SIZE))]
+    __attribute__((aligned((uint32_t)CacheP_CACHELINE_ALIGNMENT)));
 uint8_t vec_addrs[GET_CACHE_ALIGNED_SIZE(BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB)]
-    __attribute__((aligned(CacheP_CACHELINE_ALIGNMENT)));
+    __attribute__((aligned((uint32_t)CacheP_CACHELINE_ALIGNMENT)));
 volatile uint32_t vec_size = 0U;
 
 /** Buffer to store the Application X509 cert if present. */
@@ -223,7 +237,7 @@ int32_t Bootloader_runCpu(Bootloader_Handle handle, Bootloader_CpuInfo *cpuInfo)
         uint64_t cpuHz;
 
         cpuHz = Bootloader_socCpuGetClock(cpuInfo->cpuId);
-        if (cpuHz > 0)
+        if (cpuHz > 0ULL)
         {
             AppUtils_printf(APP_NAME ":CPU %s is initialized to %d Hz !!!\r\n",
                             Bootloader_socGetCoreName(cpuInfo->cpuId), (uint32_t)cpuHz);
@@ -287,64 +301,77 @@ uint32_t Bootloader_getX509CertLen(uint8_t *x509_cert_ptr)
     uint32_t certLen  = 0;
     uint8_t *pCertLen = (uint8_t *)&certLen;
 
-    if (*x509_cert_ptr != 0x30)
+    if (*x509_cert_ptr == 0x30U)
     {
-        return 0;
+        certLen = *(x509_cert_ptr + 1U);
+
+        /* If you need more than 2 bytes to store the cert length  */
+        /* it means that the cert length is greater than 64 Kbytes */
+        /* and we do not support it                                */
+        if ((certLen <= 0x80U) || (certLen == 0x82U))
+        {
+            if (certLen == 0x82U)
+            {
+                *pCertLen        = *(x509_cert_ptr + 3U);
+                *(pCertLen + 1U) = *(x509_cert_ptr + 2U);
+
+                /* add current offset from start of x509 cert */
+                certLen += 3U;
+            }
+            else
+            {
+                /* add current offset from start of x509 cert  */
+                /* if cert len was obtained from 2nd byte i.e. */
+                /* cert size is 127 bytes or less              */
+                certLen += 1U;
+            }
+
+            /* certLen now contains the offset of the last byte */
+            /* of the cert from the ccert_start. To get the size */
+            /* of certificate, add 1                             */
+            certLen += 1U;
+        }
+        else
+        {
+            certLen = 0U;
+        }
     }
 
-    certLen = *(x509_cert_ptr + 1);
-
-    /* If you need more than 2 bytes to store the cert length  */
-    /* it means that the cert length is greater than 64 Kbytes */
-    /* and we do not support it                                */
-    if ((certLen > 0x80) && (certLen != 0x82))
-    {
-        return 0;
-    }
-
-    if (certLen == 0x82)
-    {
-        *pCertLen       = *(x509_cert_ptr + 3);
-        *(pCertLen + 1) = *(x509_cert_ptr + 2);
-
-        /* add current offset from start of x509 cert */
-        certLen += 3;
-    }
-    else
-    {
-        /* add current offset from start of x509 cert  */
-        /* if cert len was obtained from 2nd byte i.e. */
-        /* cert size is 127 bytes or less              */
-        certLen += 1;
-    }
-
-    /* certLen now contains the offset of the last byte */
-    /* of the cert from the ccert_start. To get the size */
-    /* of certificate, add 1                             */
-
-    return certLen + 1;
+    return certLen;
 }
 
 uint8_t *Bootloader_findSeq(uint8_t *x509_cert_ptr, uint32_t x509_cert_size, uint8_t *seq_oid, uint8_t seq_len)
 {
-    uint8_t *x509_cert_end = x509_cert_ptr + x509_cert_size - seq_len;
+    uint8_t *x509_cert_end = x509_cert_ptr + x509_cert_size - (uint32_t)seq_len;
+    uint8_t *certPtr       = x509_cert_ptr;
+    uint8_t *result        = NULL_PTR;
 
     /* searching for the following byte seq in the cert */
     /* seq_id(0x30) seq_len(< 0x80) 0x06 0x09 0x2B...   */
-    while (x509_cert_ptr < x509_cert_end)
+    while ((certPtr < x509_cert_end) && (NULL_PTR == result))
     {
-        if ((*x509_cert_ptr == seq_oid[0]) && (*(x509_cert_ptr + 2) == seq_oid[2]) && (*(x509_cert_ptr - 2) == 0x30))
+        if ((*certPtr == seq_oid[0]) && (*(certPtr + 2U) == seq_oid[2U]) && (*(certPtr - 2U) == 0x30U))
         {
-            if ((memcmp((const void *)x509_cert_ptr, (const void *)seq_oid, seq_len)) == 0)
+            /* MISRA-C:2012 Rule 21.16 - Use byte-by-byte comparison for non-string data */
+            uint8_t match = 1U;
+            for (uint8_t idx = 0U; idx < seq_len; idx++)
             {
-                /* return start boot_seq */
-                return (x509_cert_ptr - 2);
+                if (certPtr[idx] != seq_oid[idx])
+                {
+                    match = 0U;
+                    break;
+                }
+            }
+            if (match == 1U)
+            {
+                /* found start boot_seq */
+                result = (certPtr - 2U);
             }
         }
-        x509_cert_ptr++;
+        certPtr++;
     }
 
-    return NULL_PTR;
+    return result;
 }
 
 uint32_t Bootloader_getMsgLen(uint8_t *x509_cert_ptr, uint32_t x509_cert_size)
@@ -360,7 +387,8 @@ uint32_t Bootloader_getMsgLen(uint8_t *x509_cert_ptr, uint32_t x509_cert_size)
     /* length of seq is stored as offset of the last byte of seq */
     /* from current offset. Jump to the end of the boot seq as   */
     /* the length of the message  is the last field of this seq  */
-    boot_seq_len = *(++boot_seq_ptr);
+    boot_seq_ptr++;
+    boot_seq_len = *boot_seq_ptr;
     boot_seq_ptr = boot_seq_ptr + boot_seq_len;
 
     /* The last integer in this sequence is the msg length    */
@@ -370,31 +398,35 @@ uint32_t Bootloader_getMsgLen(uint8_t *x509_cert_ptr, uint32_t x509_cert_size)
     /* 0x02 0x02 0x## 0x##                                    */
     /* 0x02 0x03 0x## 0x## 0x##                               */
     /* 0x02 0x04 0x## 0x## 0x## 0x##                          */
-    if ((*(boot_seq_ptr - 5) == 0x02) && (*(boot_seq_ptr - 4) == 0x04))
+    if ((*(boot_seq_ptr - 5U) == 0x02U) && (*(boot_seq_ptr - 4U) == 0x04U))
     {
         /* msg length encoded in 4 bytes */
-        *msg_len_ptr       = *boot_seq_ptr;
-        *(msg_len_ptr + 1) = *(boot_seq_ptr - 1);
-        *(msg_len_ptr + 2) = *(boot_seq_ptr - 2);
-        *(msg_len_ptr + 3) = *(boot_seq_ptr - 3);
+        *msg_len_ptr        = *boot_seq_ptr;
+        *(msg_len_ptr + 1U) = *(boot_seq_ptr - 1U);
+        *(msg_len_ptr + 2U) = *(boot_seq_ptr - 2U);
+        *(msg_len_ptr + 3U) = *(boot_seq_ptr - 3U);
     }
-    else if ((*(boot_seq_ptr - 4) == 0x02) && (*(boot_seq_ptr - 3) == 0x03))
+    else if ((*(boot_seq_ptr - 4U) == 0x02U) && (*(boot_seq_ptr - 3U) == 0x03U))
     {
         /* msg length encoded in 3 bytes */
-        *msg_len_ptr       = *boot_seq_ptr;
-        *(msg_len_ptr + 1) = *(boot_seq_ptr - 1);
-        *(msg_len_ptr + 2) = *(boot_seq_ptr - 2);
+        *msg_len_ptr        = *boot_seq_ptr;
+        *(msg_len_ptr + 1U) = *(boot_seq_ptr - 1U);
+        *(msg_len_ptr + 2U) = *(boot_seq_ptr - 2U);
     }
-    else if ((*(boot_seq_ptr - 3) == 0x02) && (*(boot_seq_ptr - 2) == 0x02))
+    else if ((*(boot_seq_ptr - 3U) == 0x02U) && (*(boot_seq_ptr - 2U) == 0x02U))
     {
         /* msg length encoded in 2 bytes */
-        *msg_len_ptr       = *boot_seq_ptr;
-        *(msg_len_ptr + 1) = *(boot_seq_ptr - 1);
+        *msg_len_ptr        = *boot_seq_ptr;
+        *(msg_len_ptr + 1U) = *(boot_seq_ptr - 1U);
     }
-    else if ((*(boot_seq_ptr - 2) == 0x02) && (*(boot_seq_ptr - 1) == 0x01))
+    else if ((*(boot_seq_ptr - 2U) == 0x02U) && (*(boot_seq_ptr - 1U) == 0x01U))
     {
         /* msg length encoded in 1 byte */
         *msg_len_ptr = *boot_seq_ptr;
+    }
+    else
+    {
+        /* MISRA compliance - default case */
     }
 
     return msg_len;
@@ -421,7 +453,7 @@ uint32_t Bootloader_isCorePresent(Bootloader_Handle handle, uint32_t cslCoreId)
     if (handle != NULL_PTR)
     {
         Bootloader_Config *config = (Bootloader_Config *)handle;
-        if ((config->coresPresentMap & (1 << cslCoreId)) != 0)
+        if ((config->coresPresentMap & (1U << (uint32_t)cslCoreId)) != 0U)
         {
             retVal = TRUE;
         }
@@ -445,7 +477,7 @@ int32_t Bootloader_parseNoteSegment(Bootloader_Handle handle, uint32_t noteSegme
         if (notePtr->type == SEGMENT_MAP_NOTE_TYPE)
         {
             sgMpIdx = idx + notePtr->namesz;
-            if (notePtr->namesz % alignSize != 0)
+            if ((notePtr->namesz % alignSize) != 0U)
             {
                 sgMpIdx += (alignSize - (notePtr->namesz % alignSize));
             }
@@ -453,12 +485,12 @@ int32_t Bootloader_parseNoteSegment(Bootloader_Handle handle, uint32_t noteSegme
         }
         else
         {
-            idx += notePtr->namesz + notePtr->descsz;
-            if (notePtr->namesz % alignSize != 0)
+            idx += (notePtr->namesz + notePtr->descsz);
+            if ((notePtr->namesz % alignSize) != 0U)
             {
                 idx += (alignSize - (notePtr->namesz % alignSize));
             }
-            if (notePtr->descsz % alignSize != 0)
+            if ((notePtr->descsz % alignSize) != 0U)
             {
                 idx += (alignSize - (notePtr->descsz % alignSize));
             }
@@ -466,7 +498,7 @@ int32_t Bootloader_parseNoteSegment(Bootloader_Handle handle, uint32_t noteSegme
         }
     }
 
-    if (sgMpIdx == 0)
+    if (sgMpIdx == 0U)
     {
         status = SystemP_FAILURE;
     }
@@ -483,32 +515,42 @@ int32_t Bootloader_getOTFAConfigFromNoteSegment(Bootloader_Handle handle, uint32
 {
     int32_t status = SystemP_FAILURE;
 
-    if (NULL_PTR != handle && NULL_PTR != otfaConfig)
+    if ((NULL_PTR != handle) && (NULL_PTR != otfaConfig))
     {
         /* will walk through the entire note section */
         uint8_t  gotConfig = FALSE;
         uint32_t index     = 0;
         do
         {
-            uint32_t namesz = *(uint32_t *)(gNoteSegBuffer + index);
-            ALIGNED_INCREMENT(index, 4, 4);
-            uint32_t descsz = *(uint32_t *)(gNoteSegBuffer + index);
-            ALIGNED_INCREMENT(index, 4, 4);
-            uint32_t type = *(uint32_t *)(gNoteSegBuffer + index);
-            ALIGNED_INCREMENT(index, 4, 4);
+            uint32_t       namesz = 0U;
+            uint32_t       descsz = 0U;
+            uint32_t       type   = 0U;
+            /* MISRA-C:2012 AMD1 Rule 21.16 - Extract uint32_t from byte buffer */
+            uint8_t const *pBuf = &gNoteSegBuffer[index];
+            namesz              = ((uint32_t)pBuf[0]) | ((uint32_t)pBuf[1] << 8U) | ((uint32_t)pBuf[2] << 16U) |
+                     ((uint32_t)pBuf[3] << 24U);
+            Bootloader_alignedIncrement(&index, 4U, 4U);
+            pBuf   = &gNoteSegBuffer[index];
+            descsz = ((uint32_t)pBuf[0]) | ((uint32_t)pBuf[1] << 8U) | ((uint32_t)pBuf[2] << 16U) |
+                     ((uint32_t)pBuf[3] << 24U);
+            Bootloader_alignedIncrement(&index, 4U, 4U);
+            pBuf = &gNoteSegBuffer[index];
+            type = ((uint32_t)pBuf[0]) | ((uint32_t)pBuf[1] << 8U) | ((uint32_t)pBuf[2] << 16U) |
+                   ((uint32_t)pBuf[3] << 24U);
+            Bootloader_alignedIncrement(&index, 4U, 4U);
             uint8_t *name = &(gNoteSegBuffer[index]);
-            ALIGNED_INCREMENT(index, namesz, 4);
+            Bootloader_alignedIncrement(&index, namesz, 4U);
             uint8_t *desc = &(gNoteSegBuffer[index]);
-            ALIGNED_INCREMENT(index, descsz, 4);
+            Bootloader_alignedIncrement(&index, descsz, 4U);
 
-            if (NOTE_SEGMENT_NOTE_TYPE_OTFA_CONFIG == type && strcmp((const char *)name, "otfaConfig") == 0)
+            if ((NOTE_SEGMENT_NOTE_TYPE_OTFA_CONFIG == type) && (strcmp((const char *)name, "otfaConfig") == 0))
             {
                 /*this note type is for otfa configuration*/
                 memcpy((void *)otfaConfig, (void *)desc, sizeof(Bootloader_OtfaConfig));
                 status    = SystemP_SUCCESS;
                 gotConfig = TRUE;
             }
-        } while (index < noteSegmentSz && gotConfig == FALSE);
+        } while ((index < noteSegmentSz) && (gotConfig == FALSE));
     }
 
     return status;
@@ -572,9 +614,9 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
     Bootloader_Config *config = (Bootloader_Config *)handle;
 
     uint8_t initCpuDone[MCAL_CSL_CORE_ID_MAX] = {0};
-    char    ELFSTR[]                          = {0x7F, 'E', 'L', 'F'};
+    uint8_t ELFSTR[]                          = {0x7FU, (uint8_t)'E', (uint8_t)'L', (uint8_t)'F'};
 
-    if (config->fxns->imgReadFxn == NULL || config->fxns->imgSeekFxn == NULL_PTR)
+    if ((config->fxns->imgReadFxn == NULL) || (config->fxns->imgSeekFxn == NULL_PTR))
     {
         status = SystemP_FAILURE;
     }
@@ -617,7 +659,9 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
         config->fxns->imgSeekFxn(imgOffset, config->args);
         status = config->fxns->imgReadFxn(gElfHBuffer, rdSz, config->args);
 
-        if (memcmp(ELFSTR, gElfHBuffer, 4) != 0)
+        /* MISRA-C:2012 AMD1 Rule 21.16 - Compare byte arrays without memcmp */
+        if ((gElfHBuffer[0] != ELFSTR[0]) || (gElfHBuffer[1] != ELFSTR[1]) || (gElfHBuffer[2] != ELFSTR[2]) ||
+            (gElfHBuffer[3] != ELFSTR[3]))
         {
             status = SystemP_FAILURE;
         }
@@ -650,11 +694,11 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
         elfPtr64 = (Bootloader_ELFH64 *)gElfHBuffer;
 
         /* Calculate the Program Header Table size. */
-        phtSize = ((elfPtr32->e_phnum) * (elfPtr32->e_phentsize));
+        phtSize = ((uint32_t)elfPtr32->e_phnum * (uint32_t)elfPtr32->e_phentsize);
 
         if (elfClass == ELFCLASS_64)
         {
-            phtSize = ((elfPtr64->e_phnum) * (elfPtr64->e_phentsize));
+            phtSize = ((uint32_t)elfPtr64->e_phnum * (uint32_t)elfPtr64->e_phentsize);
         }
 
         numSegments = elfPtr32->e_phnum;
@@ -735,42 +779,42 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
             Note segment is the first segment in MCELF. The loadable are expected to be present after that.
             So we set the index i to be 1 in the following loop.
         */
-        for (int32_t i = 1; ((i < elfPtr32->e_phnum) && (status == SystemP_SUCCESS)); i++)
+        for (int32_t i = 1; (i < (int32_t)elfPtr32->e_phnum); i++)
         {
-            if ((elfPhdrPtr32[i].filesz != 0) &&
-                (((doAuth == TRUE) && (elfPhdrPtr32[i].filesz <= (bootImageLen - parsedImageSize))) ||
+            if ((elfPhdrPtr32[i].filesz != 0U) &&
+                ((((doAuth == TRUE) && (elfPhdrPtr32[i].filesz <= (bootImageLen - parsedImageSize)))) ||
                  (doAuth == FALSE)))
             {
                 if (elfPhdrPtr32[i].type == PT_LOAD)
                 {
-                    uint8_t cpuId = gNoteSegBuffer[segmentMapIdx + i - 1];
+                    uint8_t cpuId = gNoteSegBuffer[segmentMapIdx + (uint32_t)((uint32_t)i - 1U)];
 
-                    if (!initCpuDone[cpuId])
+                    if (initCpuDone[cpuId] == 0U)
                     {
                         status                   = Bootloader_initCpu(handle, &bootImageInfo->cpuInfo[cpuId]);
-                        config->coresPresentMap |= 1 << cpuId;
-                        initCpuDone[cpuId]       = 1;
+                        config->coresPresentMap |= (1U << (uint32_t)cpuId);
+                        initCpuDone[cpuId]       = 1U;
                     }
                     if (status == SystemP_SUCCESS)
                     {
                         config->fxns->imgSeekFxn(imgOffset + elfPhdrPtr32[i].offset, config->args);
-                        uint32_t addr = Bootloader_socTranslateSectionAddr(gNoteSegBuffer[segmentMapIdx + i - 1],
-                                                                           elfPhdrPtr32[i].vaddr);
+                        uint32_t addr = Bootloader_socTranslateSectionAddr(
+                            gNoteSegBuffer[segmentMapIdx + ((uint32_t)i - 1U)], elfPhdrPtr32[i].vaddr);
                         /*
                             Do not overwrite the vector table present at address 0 till the authentication is complete.
                             Just copy this into a buffer and send the buffer address for authentication.
                         */
                         if (addr == 0U)
                         {
-                            uint32_t tcm_mirror_addr = (uint32_t)&vec_addrs[0U];
-                            vec_present              = 1U;
-                            vec_size                 = elfPhdrPtr32[i].filesz;
+                            void *tcm_mirror_addr = (void *)&vec_addrs[0U];
+                            vec_present           = 1U;
+                            vec_size              = elfPhdrPtr32[i].filesz;
 
                             if (vec_size > BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB)
                             {
                                 /* If the address of the segment is valid, load the segment from the flash. */
-                                status                 = config->fxns->imgReadFxn((void *)tcm_mirror_addr,
-                                                                                  BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB, config->args);
+                                status = config->fxns->imgReadFxn(tcm_mirror_addr, BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB,
+                                                                  config->args);
                                 config->bootImageSize += BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB;
                                 parsedImageSize       += BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB;
 
@@ -782,7 +826,8 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
                                 // }
 
                                 /* If the address of the segment is valid, load the segment from the flash. */
-                                status = config->fxns->imgReadFxn((void *)(addr + BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB),
+                                uint32_t segmentAddr = addr + BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB;
+                                status = config->fxns->imgReadFxn((void *)(uint32_t *)(uintptr_t)segmentAddr,
                                                                   (vec_size - BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB),
                                                                   config->args);
                                 config->bootImageSize += (vec_size - BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB);
@@ -804,8 +849,8 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
                                 if (status == SystemP_SUCCESS)
                                 {
                                     /* If the address of the segment is valid, load the segment from the flash. */
-                                    status = config->fxns->imgReadFxn((void *)tcm_mirror_addr, elfPhdrPtr32[i].filesz,
-                                                                      config->args);
+                                    status =
+                                        config->fxns->imgReadFxn(tcm_mirror_addr, elfPhdrPtr32[i].filesz, config->args);
                                     config->bootImageSize += elfPhdrPtr32[i].filesz;
                                     parsedImageSize       += elfPhdrPtr32[i].filesz;
                                 }
@@ -827,7 +872,8 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
                             if (status == SystemP_SUCCESS)
                             {
                                 /* If the address of the segment is valid, load the segment from the flash. */
-                                status = config->fxns->imgReadFxn((void *)addr, elfPhdrPtr32[i].filesz, config->args);
+                                status                 = config->fxns->imgReadFxn((void *)(uint32_t *)(uintptr_t)addr,
+                                                                                  elfPhdrPtr32[i].filesz, config->args);
                                 config->bootImageSize += elfPhdrPtr32[i].filesz;
                                 parsedImageSize       += elfPhdrPtr32[i].filesz;
                             }
@@ -855,6 +901,12 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
             {
                 /* NO LOAD segment, do nothing */
             }
+
+            /* Exit loop if status indicates failure */
+            if (status != SystemP_SUCCESS)
+            {
+                break;
+            }
         }
     }
     else if ((status == SystemP_SUCCESS) && (elfClass == ELFCLASS_64))
@@ -863,17 +915,17 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
             Note segment is the first segment in MCELF. The loadable are expected to be present after that.
             So we set the index i to be 1 in the following loop.
         */
-        for (int32_t i = 1; ((i < elfPtr64->e_phnum) && (status == SystemP_SUCCESS)); i++)
+        for (int32_t i = 1; (i < (int32_t)elfPtr64->e_phnum); i++)
         {
-            if ((elfPhdrPtr64[i].filesz != 0) &&
+            if ((elfPhdrPtr64[i].filesz != 0U) &&
                 (((doAuth == TRUE) && (elfPhdrPtr64[i].filesz <= (bootImageLen - parsedImageSize))) ||
                  (doAuth == FALSE)))
             {
                 if (elfPhdrPtr64[i].type == PT_LOAD)
                 {
                     config->fxns->imgSeekFxn(imgOffset + elfPhdrPtr64[i].offset, config->args);
-                    uint32_t addr = Bootloader_socTranslateSectionAddr(gNoteSegBuffer[segmentMapIdx + i - 1],
-                                                                       elfPhdrPtr64[i].vaddr);
+                    uint32_t addr = Bootloader_socTranslateSectionAddr(
+                        gNoteSegBuffer[segmentMapIdx + ((uint32_t)i - 1U)], elfPhdrPtr64[i].vaddr);
                     /*
                             Do not overwrite the vector table present at address 0 till the authentication is complete.
                             Just copy this into a buffer and send the buffer address for authentication.
@@ -898,7 +950,8 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
 
                     if (status == SystemP_SUCCESS)
                     {
-                        status = config->fxns->imgReadFxn((void *)addr, elfPhdrPtr64[i].filesz, config->args);
+                        status = config->fxns->imgReadFxn((void *)(uint32_t *)(uintptr_t)addr, elfPhdrPtr64[i].filesz,
+                                                          config->args);
                         config->bootImageSize += elfPhdrPtr64[i].filesz;
                         parsedImageSize       += elfPhdrPtr64[i].filesz;
                     }
@@ -923,6 +976,12 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
             else
             {
                 /* NO LOAD segment, do nothing */
+            }
+
+            /* Exit loop if status indicates failure */
+            if (status != SystemP_SUCCESS)
+            {
+                break;
             }
         }
     }
@@ -973,19 +1032,30 @@ int32_t Bootloader_parseAndLoadMultiCoreELF(Bootloader_Handle handle, Bootloader
         /* Since authentication is complete now replace the vector table with the one from the application image if
          * required. */
 
-        /*
-            Invalidate the local cache so as to read the value of the vectors from the Shared memory.
-            This is required in the case of decryption where the HSM core has decrypted the contents
-            but the modified contents do not show up in the cache.
-        */
-        Mcal_CacheP_inv(vec_addrs, vec_size, Mcal_CacheP_TYPE_ALLD);
+        /* Bounds check to ensure vec_size does not exceed buffer capacity */
+        if (vec_size <= BOOTLOADER_MAX_SBL_SIZE_IN_TCM_KB)
+        {
+            /*
+                Invalidate the local cache so as to read the value of the vectors from the Shared memory.
+                This is required in the case of decryption where the HSM core has decrypted the contents
+                but the modified contents do not show up in the cache.
+            */
+            Mcal_CacheP_inv(vec_addrs, vec_size, Mcal_CacheP_TYPE_ALLD);
 
-        (void)memcpy((void *)vector_table_loc, vec_addrs, vec_size);
+            /* MISRA-C:2012 AMD1 Rule 21.16 - Cast away volatile for memcpy */
+            uint8_t *pDest = (uint8_t *)(uintptr_t)vector_table_loc;
+            (void)memcpy((void *)pDest, (const void *)vec_addrs, vec_size);
 
-        /*
-            Write the contents of the vector address in shared memory so that these are used by the CPU after reset.
-        */
-        Mcal_CacheP_wbInv((void *)vector_table_loc, vec_size, Mcal_CacheP_TYPE_ALLD);
+            /*
+                Write the contents of the vector address in shared memory so that these are used by the CPU after reset.
+            */
+            Mcal_CacheP_wbInv((void *)vector_table_loc, vec_size, Mcal_CacheP_TYPE_ALLD);
+        }
+        else
+        {
+            /* vec_size exceeds buffer capacity - this should not happen if code flow is correct */
+            status = SystemP_FAILURE;
+        }
     }
 
     return status;

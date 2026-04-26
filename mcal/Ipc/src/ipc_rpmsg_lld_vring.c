@@ -139,12 +139,6 @@ sint32 RPMessage_vringPutFullTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCore
     uint32                  txMsgValue = RPMESSAGE_MSG_VRING_NEW_FULL;
     sint32                  status     = MCAL_SystemP_FAILURE;
 
-    if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
-    {
-        /* for linux we need to send the TX VRING ID in the mailbox message */
-        txMsgValue = RPMESSAGE_LINUX_TX_VRING_ID;
-    }
-
     SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
     used      = &vringObj->used->ring[vringObj->used->idx % vringObj->vringNumBuf];
@@ -212,33 +206,14 @@ sint32 RPMessage_vringGetFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCore
 
     SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
-    if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
+    if (vringObj->lastUsedIdx != vringObj->used->idx)
     {
-        /* There's nothing available */
-        if (vringObj->lastAvailIdx != vringObj->avail->idx)
-        {
-            head = vringObj->avail->ring[vringObj->lastAvailIdx % vringObj->vringNumBuf];
-            vringObj->lastAvailIdx++;
+        head = (uint16)(vringObj->used->ring[vringObj->lastUsedIdx % vringObj->vringNumBuf].id);
+        vringObj->lastUsedIdx++;
 
-            *vringBufId = head;
-            status      = MCAL_SystemP_SUCCESS;
-        }
-        else
-        {
-            vringObj->used->flags &= (uint16)~VRING_USED_F_NO_NOTIFY;
-        }
-    }
-    else
-    {
-        if (vringObj->lastUsedIdx != vringObj->used->idx)
-        {
-            head = (uint16)(vringObj->used->ring[vringObj->lastUsedIdx % vringObj->vringNumBuf].id);
-            vringObj->lastUsedIdx++;
+        *vringBufId = head;
 
-            *vringBufId = head;
-
-            status = MCAL_SystemP_SUCCESS;
-        }
+        status = MCAL_SystemP_SUCCESS;
     }
 
     SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
@@ -255,27 +230,11 @@ sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCor
 
     SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
-    if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
-    {
-        struct vring_used_elem *used;
-
-        used      = &vringObj->used->ring[vringObj->used->idx % vringObj->vringNumBuf];
-        used->id  = vringBufId;
-        used->len = vringObj->desc[vringBufId].len;
-        vringObj->used->idx++;
-
-        rxMsgValue = RPMESSAGE_LINUX_RX_VRING_ID; /* in case of linux this should be RX VRING ID */
-    }
-    else
-    {
-        uint16 avail;
-
-        avail                        = (uint16)(vringObj->avail->idx % vringObj->vringNumBuf);
-        vringObj->avail->ring[avail] = vringBufId;
-        vringObj->avail->idx++;
-
-        rxMsgValue = RPMESSAGE_MSG_VRING_NEW_EMPTY;
-    }
+    uint16 avail;
+    avail                        = (uint16)(vringObj->avail->idx % vringObj->vringNumBuf);
+    vringObj->avail->ring[avail] = vringBufId;
+    vringObj->avail->idx++;
+    rxMsgValue = RPMESSAGE_MSG_VRING_NEW_EMPTY;
 
     IpcNotify_mailbox_asm();
 
@@ -300,19 +259,9 @@ uint32 RPMessage_vringIsFullRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreI
 
     SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
 
-    if ((RPMessage_isLinuxCore(hRpMsg, remoteCoreId)) != 0U)
+    if (vringObj->lastUsedIdx == vringObj->used->idx)
     {
-        if (vringObj->lastAvailIdx == vringObj->avail->idx)
-        {
-            isNewFullBuf = 0;
-        }
-    }
-    else
-    {
-        if (vringObj->lastUsedIdx == vringObj->used->idx)
-        {
-            isNewFullBuf = 0;
-        }
+        isNewFullBuf = 0;
     }
 
     SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
@@ -449,6 +398,15 @@ static inline void RPMessage_vringPutFullTxBuf_asm(void)
 #endif
 }
 
+/* TI_COVERAGE_GAP_START
+ * Reason: Mutex timeout and failure conditions cannot be reliably recreated in test environment.
+ * The timeout/failure path in RPMessage_vringGetEmptyTxBufTimeOut requires the mutex lock
+ * operation to fail or timeout, which depends on multi-core timing conditions that cannot
+ * be controlled in a single-core unit test environment. The mutex timeout in
+ * RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock requires another core to hold the mutex
+ * for the entire timeout duration, which is a race condition that cannot be deterministically
+ * reproduced without actual multi-core hardware interaction.
+ */
 static boolean RPMessage_vringGetEmptyTxBufTimeOut(sint32 *status, boolean done)
 {
     boolean isDone = done;
@@ -481,5 +439,6 @@ static uint32 RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(sint32 *status, 
 
     return tryLoopLocal;
 }
+/* TI_COVERAGE_GAP_STOP */
 #define CDD_IPC_STOP_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"

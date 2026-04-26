@@ -123,11 +123,15 @@ extern "C" {
 #define LIN_INIT_CONFIG_PC                   Lin_Config
 [!ENDIF!]
 
-/** \brief LIN ID used to transmit a header instead of a wakeup signal. 
- *   The hardware enters an undefined state when a standard wakeup signal is transmitted. 
- *   To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which 
+/** \brief LIN DEM Event Configuration: LIN Timeout Duration*/
+#define LIN_TIMEOUT_DURATION            ([!"as:modconf('Lin')[1]/LinGeneral/LinTimeoutDuration"!]U)
+
+/** \brief LIN ID used to transmit a header instead of a wakeup signal.
+ *   The hardware enters an undefined state when a standard wakeup signal is transmitted.
+ *   To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which
  *   conforms to the LIN 2.1 specification **/
 #define LIN_WAKEUP_ID                    (0x[!"text:toupper(substring-after(num:inttohex(LinGeneral/LinWakeupId),'0x'))"!]U)
+
 
 /**
  *  \name Pre-Compile Switches for API Services

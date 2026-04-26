@@ -161,7 +161,7 @@ static uint32_t SIPC_readSelfCoreID(void)
     CSL_armR5GetCpuID(&cpuId);
     /* both cpuId and greId fields can be either 0 or 1
      * ex for R5FSS1-0 core grpId = 1 and cpu id = 0 */
-    coreId = cpuId.cpuID | (cpuId.grpId) << 1;
+    coreId = (cpuId.cpuID | ((cpuId.grpId) << 1));
     return coreId;
 }
 #define SELF_CORE_ID (SIPC_readSelfCoreID())

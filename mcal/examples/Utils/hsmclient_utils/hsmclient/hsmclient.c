@@ -81,7 +81,7 @@
  * @brief
  *        Macro calculates the cache-aligned size for a given buffer or data structure
  */
-#define GET_CACHE_ALIGNED_SIZE(x) ((x + Mcal_CacheP_CACHELINE_ALIGNMENT) & ~(Mcal_CacheP_CACHELINE_ALIGNMENT - 1))
+#define GET_CACHE_ALIGNED_SIZE(x) ((x + Mcal_CacheP_CACHELINE_ALIGNMENT) & ~(Mcal_CacheP_CACHELINE_ALIGNMENT - 1U))
 
 /**
  * @brief
@@ -108,14 +108,19 @@ static volatile int32_t gSecureBootStatus = SystemP_SUCCESS;
 /* This variable indicates whether Boot notification is received or not */
 static volatile int32_t gBootNotificationReceived = SystemP_FAILURE;
 
-static int32_t          gLastSentIndex            = -1;
-static int32_t          gLastEnqueuedIndex        = -1;
-static int32_t          gNum_HsmRequestSent       = 0;
-static volatile int32_t gNum_HsmResponseReceived  = 0;
-static uint32_t         hsm_client_msg_queue_size = 64U;
+static int32_t          gLastSentIndex           = -1;
+static int32_t          gLastEnqueuedIndex       = -1;
+static int32_t          gNum_HsmRequestSent      = 0;
+static volatile int32_t gNum_HsmResponseReceived = 0;
+/** Default HSM client message queue size */
+#ifndef HSM_CLIENT_MSG_QUEUE_SIZE
+#define HSM_CLIENT_MSG_QUEUE_SIZE (64U)
+#endif
+
+static uint32_t hsm_client_msg_queue_size = HSM_CLIENT_MSG_QUEUE_SIZE;
 
 /* Queue used to store HSM client messages that need to be dispatched via SIPC */
-extern HsmMsg_t gHsmClientMsgQueue[];
+extern HsmMsg_t gHsmClientMsgQueue[HSM_CLIENT_MSG_QUEUE_SIZE];
 
 /*==========================================================================
  *                        Static Function Declarations
@@ -148,7 +153,7 @@ static int32_t HsmClient_SendAndRecv(HsmClient_t *HsmClient, uint32_t timeout);
  * @param message message that needs to be sent to the HSM core.
  * @return SystemP_SUCCESS if transaction is successful else SystemP_FAILURE.
  */
-static int32_t HsmClient_EnqueueAndSendMsg(HsmMsg_t message);
+static int32_t HsmClient_EnqueueAndSendMsg(HsmMsg_t hsmMessage);
 
 /**
  * @brief
@@ -158,14 +163,14 @@ static int32_t HsmClient_EnqueueAndSendMsg(HsmMsg_t message);
  * @param message message that needs to be sent to the HSM core
  * @return SystemP_SUCCESS if transaction is successful else SystemP_FAILURE.
  */
-static int32_t HsmClient_EnqueueAndSendMsgBlocking(HsmMsg_t message);
+static int32_t HsmClient_EnqueueAndSendMsgBlocking(HsmMsg_t hsmMessage);
 
 /**
  * @brief
  *      Generic api which waits for all responses to be received
  * @return SystemP_SUCCESS if all responses are successful else SystemP_FAILURE.
  */
-static int32_t HsmClient_waitForAllResponses();
+static int32_t HsmClient_waitForAllResponses(void);
 
 /*==============================================================================*
  *                          Static Functions definition.
@@ -175,28 +180,35 @@ static int32_t HsmClient_waitForAllResponses();
 static uint16_t crc16_ccit(uint8_t *data, uint16_t length)
 {
     uint8_t  x;
-    uint16_t crc = 0xFFFF;
+    uint16_t crc         = 0xFFFF;
+    uint8_t *localData   = data;
+    uint16_t localLength = length;
 
-    while (length--)
+    while (localLength > 0U)
     {
-        x    = crc >> 8 ^ *data++;
-        x   ^= x >> 4;
-        crc  = (crc << 8) ^ ((uint16_t)(x << 12)) ^ ((uint16_t)(x << 5)) ^ ((uint16_t)x);
+        x    = ((crc >> 8) ^ (*localData));
+        x   ^= (x >> 4);
+        crc  = ((crc << 8) ^ ((uint16_t)((uint16_t)x << 12))) ^ ((uint16_t)((uint16_t)x << 5)) ^ ((uint16_t)x);
+        localData++;
+        localLength--;
     }
     return crc;
 }
 
-static int32_t HsmClient_EnqueueAndSendMsg(HsmMsg_t message)
+static int32_t HsmClient_EnqueueAndSendMsg(HsmMsg_t hsmMessage)
 {
-    int32_t status         = SystemP_FAILURE;
-    uint8_t localClientId  = message.srcClientId;
-    uint8_t remoteClientId = message.destClientId;
+    int32_t  status         = SystemP_FAILURE;
+    uint8_t  localClientId  = hsmMessage.srcClientId;
+    uint8_t  remoteClientId = hsmMessage.destClientId;
+    HsmMsg_t localMessage   = hsmMessage;
+    uint8_t  loopBreak      = 0U;
 
-    message.crcMsg = crc16_ccit((uint8_t *)&message, (sizeof(HsmMsg_t) - 2));
+    localMessage.crcMsg = crc16_ccit((uint8_t *)&localMessage, (sizeof(HsmMsg_t) - 2U));
 
-    if (gLastEnqueuedIndex < (int32_t)(hsm_client_msg_queue_size - 1))
+    if (gLastEnqueuedIndex < (((int32_t)hsm_client_msg_queue_size) - 1))
     {
-        gHsmClientMsgQueue[++gLastEnqueuedIndex] = message;
+        gLastEnqueuedIndex++;
+        gHsmClientMsgQueue[gLastEnqueuedIndex] = localMessage;
 
         /* Till the boot notify is not received, simply enqueue the message */
         if (gBootNotificationReceived == SystemP_SUCCESS)
@@ -222,12 +234,17 @@ static int32_t HsmClient_EnqueueAndSendMsg(HsmMsg_t message)
                 */
                 else if (status == SystemP_FAILURE)
                 {
-                    status = SystemP_SUCCESS;
-                    break;
+                    status    = SystemP_SUCCESS;
+                    loopBreak = 1U;
                 }
                 else
                 {
-                    status = SystemP_FAILURE;
+                    status    = SystemP_FAILURE;
+                    loopBreak = 1U;
+                }
+
+                if (loopBreak == 1U)
+                {
                     break;
                 }
             }
@@ -245,17 +262,19 @@ static int32_t HsmClient_EnqueueAndSendMsg(HsmMsg_t message)
     return status;
 }
 
-static int32_t HsmClient_EnqueueAndSendMsgBlocking(HsmMsg_t message)
+static int32_t HsmClient_EnqueueAndSendMsgBlocking(HsmMsg_t hsmMessage)
 {
-    int32_t status         = SystemP_FAILURE;
-    uint8_t localClientId  = message.srcClientId;
-    uint8_t remoteClientId = message.destClientId;
+    int32_t  status         = SystemP_FAILURE;
+    uint8_t  localClientId  = hsmMessage.srcClientId;
+    uint8_t  remoteClientId = hsmMessage.destClientId;
+    HsmMsg_t localMessage   = hsmMessage;
 
-    message.crcMsg = crc16_ccit((uint8_t *)&message, (sizeof(HsmMsg_t) - 2));
+    localMessage.crcMsg = crc16_ccit((uint8_t *)&localMessage, (sizeof(HsmMsg_t) - 2U));
 
-    if (gLastEnqueuedIndex < (int32_t)(hsm_client_msg_queue_size - 1))
+    if (gLastEnqueuedIndex < (((int32_t)hsm_client_msg_queue_size) - 1))
     {
-        gHsmClientMsgQueue[++gLastEnqueuedIndex] = message;
+        gLastEnqueuedIndex++;
+        gHsmClientMsgQueue[gLastEnqueuedIndex] = localMessage;
 
         /*
             If the boot notification is not received, we wait for it indefinitely
@@ -296,10 +315,17 @@ static int32_t HsmClient_EnqueueAndSendMsgBlocking(HsmMsg_t message)
     return status;
 }
 
-static int32_t HsmClient_waitForAllResponses()
+static int32_t HsmClient_waitForAllResponses(void)
 {
-    while ((gSecureBootStatus == SystemP_SUCCESS) && (gNum_HsmResponseReceived < gNum_HsmRequestSent))
+    int32_t bootStatus  = gSecureBootStatus;
+    int32_t numReceived = gNum_HsmResponseReceived;
+    int32_t numSent     = gNum_HsmRequestSent;
+
+    while ((bootStatus == SystemP_SUCCESS) && (numReceived < numSent))
     {
+        bootStatus  = gSecureBootStatus;
+        numReceived = gNum_HsmResponseReceived;
+        numSent     = gNum_HsmRequestSent;
     }
 
     return gSecureBootStatus;
@@ -316,7 +342,7 @@ static int32_t HsmClient_SendAndRecv(HsmClient_t *HsmClient, uint32_t timeout)
     remoteClientId = HsmClient->ReqMsg.destClientId;
 
     /* Add message crc. Exclude crcMsg argument of HsmMsg_t from crc calculations*/
-    HsmClient->ReqMsg.crcMsg = crc16_ccit((uint8_t *)&HsmClient->ReqMsg, (sizeof(HsmMsg_t) - 2));
+    HsmClient->ReqMsg.crcMsg = crc16_ccit((uint8_t *)&HsmClient->ReqMsg, (sizeof(HsmMsg_t) - 2U));
 
     status =
         SIPC_sendMsg(CORE_INDEX_HSM, remoteClientId, localClientId, (uint8_t *)&HsmClient->ReqMsg, WAIT_IF_FIFO_FULL);
@@ -325,16 +351,16 @@ static int32_t HsmClient_SendAndRecv(HsmClient_t *HsmClient, uint32_t timeout)
         status = SemaphoreP_pend(&HsmClient->Semaphore, timeout);
         if (status == SystemP_FAILURE)
         {
-            return SystemP_FAILURE;
+            /* Status is already set to SystemP_FAILURE */
         }
         else if (status == SystemP_TIMEOUT)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Timeout exception \r\n");
-            return SystemP_TIMEOUT;
+            /* Status is already set to SystemP_TIMEOUT */
         }
         else
         {
-            crcMsg = crc16_ccit((uint8_t *)&HsmClient->RespMsg, SIPC_MSG_SIZE - 2);
+            crcMsg = crc16_ccit((uint8_t *)&HsmClient->RespMsg, SIPC_MSG_SIZE - 2U);
             /* if the message is okay then send whatever the flag receive */
             if (crcMsg == HsmClient->RespMsg.crcMsg)
             {
@@ -348,13 +374,10 @@ static int32_t HsmClient_SendAndRecv(HsmClient_t *HsmClient, uint32_t timeout)
                 HsmClient->RespFlag = HSM_FLAG_NACK;
                 status              = SystemP_FAILURE;
             }
-            return status;
         }
     }
-    else
-    {
-        return status;
-    }
+
+    return status;
 }
 
 /*==============================================================================*
@@ -368,16 +391,17 @@ void HsmClient_isr(uint8_t remoteCoreId, uint8_t localClientId, uint8_t remoteCl
     /* here we will just post the semaphore */
     /* copy message to client response variable */
     /* As this ISR is blocking, quickly copy the message and exit ISR */
-    memcpy(&HsmClient->RespMsg, msgValue, SIPC_MSG_SIZE);
+    /* MISRA-C:2012 AMD1 Rule 21.16 - Ensure type compatibility for memcpy */
+    (void)memcpy((void *)&HsmClient->RespMsg, (void const *)msgValue, SIPC_MSG_SIZE);
 
     /* Check if HSM response message is not related to proc_auth_boot
      * proc_auth_boot APIs use HsmClient_EnqueueAndSendMsg() or HsmClient_EnqueueAndSendMsgBlocking()
      * Others use HsmClient_SendAndRecv()
      * If true, post the semaphore to signal completion
      */
-    if ((HsmClient->RespMsg.serType != HSM_MSG_PROC_AUTH_BOOT_START) &&  /* Not proc_auth_boot auth start */
-        (HsmClient->RespMsg.serType != HSM_MSG_PROC_AUTH_BOOT_UPDATE) && /* Not proc_auth_boot auth update */
-        (HsmClient->RespMsg.serType != HSM_MSG_PROC_AUTH_BOOT_FINISH))   /* Not proc_auth_boot auth finish */
+    if ((HsmClient->RespMsg.serType != (uint16_t)HSM_MSG_PROC_AUTH_BOOT_START) &&  /* Not proc_auth_boot auth start */
+        (HsmClient->RespMsg.serType != (uint16_t)HSM_MSG_PROC_AUTH_BOOT_UPDATE) && /* Not proc_auth_boot auth update */
+        (HsmClient->RespMsg.serType != (uint16_t)HSM_MSG_PROC_AUTH_BOOT_FINISH))   /* Not proc_auth_boot auth finish */
     {
         SemaphoreP_post(&HsmClient->Semaphore);
     }
@@ -385,7 +409,7 @@ void HsmClient_isr(uint8_t remoteCoreId, uint8_t localClientId, uint8_t remoteCl
     /*
         Analyze the received response packet.
     */
-    if (HsmClient->RespMsg.serType == HSM_MSG_BOOT_NOTIFY)
+    if (HsmClient->RespMsg.serType == (uint16_t)HSM_MSG_BOOT_NOTIFY)
     {
         gBootNotificationReceived = SystemP_SUCCESS;
         gSecureBootStatus         = SystemP_SUCCESS;
@@ -400,17 +424,18 @@ void HsmClient_isr(uint8_t remoteCoreId, uint8_t localClientId, uint8_t remoteCl
              * the call is non-blocking which is valid only for PROC_AUTH
              * (START, UPDATE, FINISH).
              */
-            if ((HsmClient->RespMsg.serType == HSM_MSG_PROC_AUTH_BOOT_START) ||
-                (HsmClient->RespMsg.serType == HSM_MSG_PROC_AUTH_BOOT_UPDATE) ||
-                (HsmClient->RespMsg.serType == HSM_MSG_PROC_AUTH_BOOT_FINISH))
+            if ((HsmClient->RespMsg.serType == (uint16_t)HSM_MSG_PROC_AUTH_BOOT_START) ||
+                (HsmClient->RespMsg.serType == (uint16_t)HSM_MSG_PROC_AUTH_BOOT_UPDATE) ||
+                (HsmClient->RespMsg.serType == (uint16_t)HSM_MSG_PROC_AUTH_BOOT_FINISH))
             {
-                gNum_HsmResponseReceived++;
+                /* MISRA-C:2012 Rule 13.3 - Increment in separate statement */
+                gNum_HsmResponseReceived = gNum_HsmResponseReceived + (int32_t)1;
             }
-            if (HsmClient->RespMsg.flags == HSM_FLAG_NACK)
+            if (HsmClient->RespMsg.flags == (uint8_t)HSM_FLAG_NACK)
             {
                 gSecureBootStatus = SystemP_FAILURE;
             }
-            else if (HsmClient->RespMsg.flags == HSM_FLAG_ACK)
+            else if (HsmClient->RespMsg.flags == (uint8_t)HSM_FLAG_ACK)
             {
                 gSecureBootStatus = SystemP_SUCCESS;
             }
@@ -482,31 +507,30 @@ int32_t HsmClient_checkAndWaitForBootNotification(void)
  * A callback has been registered. already */
 int32_t HsmClient_register(HsmClient_t *HsmClient, uint8_t clientId)
 {
-    uint8_t status;
+    int32_t status;
 
     if (HsmClient == NULL_PTR)
     {
         AppUtils_printf(" \r\n [HSM_CLIENT] HsmClient_t type error. \r\n");
-        return SystemP_FAILURE;
+        status = SystemP_FAILURE;
     }
     else
     {
-        status = SystemP_SUCCESS;
+        HsmClient->ClientId = clientId;
+
+        /* register HSM_Isr and pass the pointer as args */
+        status = SIPC_registerClient(clientId, HsmClient_isr, (void *)HsmClient);
+        if (status == SystemP_SUCCESS)
+        {
+            SemaphoreP_constructBinary(&HsmClient->Semaphore, 0);
+            AppUtils_printf("\r\n [HSM_CLIENT] New Client Registered with Client Id = %d\r\n ", clientId);
+        }
+        else
+        {
+            AppUtils_printf(" \r\n [HSM_CLIENT] Client already registered or Invalid ClientId\r\n");
+        }
     }
 
-    HsmClient->ClientId = clientId;
-
-    /* register HSM_Isr and pass the pointer as args */
-    status = SIPC_registerClient(clientId, HsmClient_isr, (void *)HsmClient);
-    if (status == SystemP_SUCCESS)
-    {
-        SemaphoreP_constructBinary(&HsmClient->Semaphore, 0);
-        AppUtils_printf("\r\n [HSM_CLIENT] New Client Registered with Client Id = %d\r\n ", clientId);
-    }
-    else
-    {
-        AppUtils_printf(" \r\n [HSM_CLIENT] Client already registered or Invalid ClientId\r\n");
-    }
     return status;
 }
 
@@ -561,7 +585,8 @@ int32_t HsmClient_getVersion(HsmClient_t *HsmClient, HsmVer_t *hsmVer, uint32_t 
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)hsmVer, sizeof(HsmVer_t));
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(hsmVer);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(hsmVer);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
        Write back the HsmVer struct and
@@ -575,7 +600,7 @@ int32_t HsmClient_getVersion(HsmClient_t *HsmClient, HsmVer_t *hsmVer, uint32_t 
     {
         /* the hsmVer has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Get version request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -583,7 +608,9 @@ int32_t HsmClient_getVersion(HsmClient_t *HsmClient, HsmVer_t *hsmVer, uint32_t 
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)(HsmClient->RespMsg.args), sizeof(HsmVer_t));
@@ -629,7 +656,8 @@ int32_t HsmClient_getUID(HsmClient_t *HsmClient, uint8_t *uid, uint32_t timeout)
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)uid, HSM_UID_SIZE);
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(uid);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(uid);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
        Write back the uid and
@@ -642,7 +670,7 @@ int32_t HsmClient_getUID(HsmClient_t *HsmClient, uint8_t *uid, uint32_t timeout)
     {
         /* the getUID has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Get UID request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -650,7 +678,9 @@ int32_t HsmClient_getUID(HsmClient_t *HsmClient, uint8_t *uid, uint32_t timeout)
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, HSM_UID_SIZE);
@@ -697,7 +727,8 @@ int32_t HsmClient_openDbgFirewall(HsmClient_t *HsmClient, uint8_t *cert, uint32_
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)cert, cert_size);
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(cert);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(cert);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
        Write back the debug cert and
@@ -710,7 +741,7 @@ int32_t HsmClient_openDbgFirewall(HsmClient_t *HsmClient, uint8_t *cert, uint32_
     {
         /* the OpenDbgFirewalls has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] OpenDbgFirewall request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -718,7 +749,9 @@ int32_t HsmClient_openDbgFirewall(HsmClient_t *HsmClient, uint8_t *cert, uint32_
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, 0U);
@@ -760,13 +793,13 @@ int32_t HsmClient_importKeyring(HsmClient_t *HsmClient, uint8_t *cert, uint32_t 
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_KEYRING_IMPORT;
-    HsmClient->ReqMsg.args    = (void *)cert;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)cert, cert_size);
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(cert);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(cert);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
        Write back the keyring cert and
@@ -779,7 +812,7 @@ int32_t HsmClient_importKeyring(HsmClient_t *HsmClient, uint8_t *cert, uint32_t 
     {
         /* the OpenDbgFirewalls has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Import Keyring request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -787,7 +820,9 @@ int32_t HsmClient_importKeyring(HsmClient_t *HsmClient, uint8_t *cert, uint32_t 
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, 0U);
@@ -830,7 +865,8 @@ int32_t HsmClient_readOTPRow(HsmClient_t *HsmClient, NvmOtpRead_t *readRow)
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_READ_OTP_ROW;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(readRow);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(readRow);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)readRow, sizeof(NvmOtpRead_t));
@@ -846,7 +882,7 @@ int32_t HsmClient_readOTPRow(HsmClient_t *HsmClient, NvmOtpRead_t *readRow)
     {
         /* the readRow has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Read OTP row request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -854,7 +890,9 @@ int32_t HsmClient_readOTPRow(HsmClient_t *HsmClient, NvmOtpRead_t *readRow)
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(NvmOtpRead_t));
@@ -896,7 +934,8 @@ int32_t HsmClient_writeOTPRow(HsmClient_t *HsmClient, NvmOtpRowWrite_t *writeRow
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_WRITE_OTP_ROW;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(writeRow);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(writeRow);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)writeRow, sizeof(NvmOtpRowWrite_t));
@@ -912,7 +951,7 @@ int32_t HsmClient_writeOTPRow(HsmClient_t *HsmClient, NvmOtpRowWrite_t *writeRow
     {
         /* the extended otp row has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Write OTP row request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -920,7 +959,9 @@ int32_t HsmClient_writeOTPRow(HsmClient_t *HsmClient, NvmOtpRowWrite_t *writeRow
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(NvmOtpRowWrite_t));
@@ -962,7 +1003,8 @@ int32_t HsmClient_lockOTPRow(HsmClient_t *HsmClient, NvmOtpRowProt_t *protRow)
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_PROT_OTP_ROW;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(protRow);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(protRow);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)protRow, sizeof(NvmOtpRowProt_t));
@@ -978,7 +1020,7 @@ int32_t HsmClient_lockOTPRow(HsmClient_t *HsmClient, NvmOtpRowProt_t *protRow)
     {
         /* the row is locked by HSM server if this
          * request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Extended OTP row protection request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -986,7 +1028,9 @@ int32_t HsmClient_lockOTPRow(HsmClient_t *HsmClient, NvmOtpRowProt_t *protRow)
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(NvmOtpRowProt_t));
@@ -1028,7 +1072,8 @@ int32_t HsmClient_getOTPRowCount(HsmClient_t *HsmClient, NvmOtpRowCount_t *rowCo
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_GET_OTP_ROW_COUNT;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(rowCount);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(rowCount);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)rowCount, sizeof(NvmOtpRowCount_t));
@@ -1044,7 +1089,7 @@ int32_t HsmClient_getOTPRowCount(HsmClient_t *HsmClient, NvmOtpRowCount_t *rowCo
     {
         /* the rowCount has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Get OTP row count request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1052,7 +1097,9 @@ int32_t HsmClient_getOTPRowCount(HsmClient_t *HsmClient, NvmOtpRowCount_t *rowCo
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(NvmOtpRowCount_t));
@@ -1094,7 +1141,8 @@ int32_t HsmClient_getOTPRowProtection(HsmClient_t *HsmClient, NvmOtpRowProt_t *r
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_GET_OTP_ROW_PROT;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(rowProt);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(rowProt);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)rowProt, sizeof(NvmOtpRowProt_t));
@@ -1110,7 +1158,7 @@ int32_t HsmClient_getOTPRowProtection(HsmClient_t *HsmClient, NvmOtpRowProt_t *r
     {
         /* the rowProt has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Get OTP row protection request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1118,7 +1166,9 @@ int32_t HsmClient_getOTPRowProtection(HsmClient_t *HsmClient, NvmOtpRowProt_t *r
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(NvmOtpRowProt_t));
@@ -1159,13 +1209,13 @@ int32_t HsmClient_procAuthBoot(HsmClient_t *HsmClient, uint8_t *cert, uint32_t c
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_PROC_AUTH_BOOT;
-    HsmClient->ReqMsg.args    = (void *)cert;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)cert, cert_size);
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(cert);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(cert);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
         Write back the cert and
@@ -1178,7 +1228,7 @@ int32_t HsmClient_procAuthBoot(HsmClient_t *HsmClient, uint8_t *cert, uint32_t c
     {
         /* the OpenDbgFirewalls has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Proc_Auth_Boot request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1186,7 +1236,9 @@ int32_t HsmClient_procAuthBoot(HsmClient_t *HsmClient, uint8_t *cert, uint32_t c
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, 0U);
@@ -1234,7 +1286,8 @@ int32_t HsmClient_procAuthBootStart(HsmClient_t *HsmClient, SecureBoot_Stream_t 
     startMsg.crcArgs = crc16_ccit((uint8_t *)secureBootInfo, sizeof(SecureBoot_Stream_t));
 
     /* Change the Arguments Address in Physical Address */
-    startMsg.args = (void *)(uintptr_t)SOC_virtToPhy(secureBootInfo);
+    uint64_t startPhyAddr = SOC_virtToPhy(secureBootInfo);
+    startMsg.args         = (void *)(uint32_t *)(uintptr_t)startPhyAddr;
 
     /*
        Write back secure boot info object  and the data it contains
@@ -1267,7 +1320,8 @@ int32_t HsmClient_procAuthBootUpdate(HsmClient_t *HsmClient, SecureBoot_Stream_t
     updateMsg.crcArgs = crc16_ccit((uint8_t *)secureBootInfo, sizeof(SecureBoot_Stream_t));
 
     /* Change the Arguments Address in Physical Address */
-    updateMsg.args = (void *)(uintptr_t)SOC_virtToPhy(secureBootInfo);
+    uint64_t updatePhyAddr = SOC_virtToPhy(secureBootInfo);
+    updateMsg.args         = (void *)(uint32_t *)(uintptr_t)updatePhyAddr;
 
     /*
        Write back secure boot info object to Shared memory
@@ -1299,7 +1353,8 @@ int32_t HsmClient_procAuthBootFinish(HsmClient_t *HsmClient, SecureBoot_Stream_t
     finishMsg.crcArgs = crc16_ccit((uint8_t *)secureBootInfo, sizeof(SecureBoot_Stream_t));
 
     /* Change the Arguments Address in Physical Address */
-    finishMsg.args = (void *)(uintptr_t)SOC_virtToPhy(secureBootInfo);
+    uint64_t finishPhyAddr = SOC_virtToPhy(secureBootInfo);
+    finishMsg.args         = (void *)(uint32_t *)(uintptr_t)finishPhyAddr;
 
     /*
        Write back secure boot info object to Shared memory
@@ -1331,14 +1386,15 @@ int32_t HsmClient_setFirewall(HsmClient_t *HsmClient, FirewallReq_t *FirewallReq
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_SET_FIREWALL;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(FirewallReqObj);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(FirewallReqObj);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Calculates CRC of the array containing firewall regions to be configured */
-    crcFirewallRegionArr   = crc16_ccit((uint8_t *)FirewallReqObj->FirewallRegionArr,
-                                        ((FirewallReqObj->regionCount) * sizeof(FirewallRegionReq_t)));
-    FirewallReqObj->crcArr = crcFirewallRegionArr;
-    FirewallReqObj->FirewallRegionArr =
-        (FirewallRegionReq_t *)(uintptr_t)SOC_virtToPhy(FirewallReqObj->FirewallRegionArr);
+    crcFirewallRegionArr              = crc16_ccit((uint8_t *)FirewallReqObj->FirewallRegionArr,
+                                                   ((FirewallReqObj->regionCount) * sizeof(FirewallRegionReq_t)));
+    FirewallReqObj->crcArr            = crcFirewallRegionArr;
+    uint64_t firewallRegionArrPhy     = SOC_virtToPhy(FirewallReqObj->FirewallRegionArr);
+    FirewallReqObj->FirewallRegionArr = (FirewallRegionReq_t *)(uint32_t *)(uintptr_t)firewallRegionArrPhy;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)FirewallReqObj, sizeof(FirewallReq_t));
@@ -1356,7 +1412,7 @@ int32_t HsmClient_setFirewall(HsmClient_t *HsmClient, FirewallReq_t *FirewallReq
     {
         /* the firewall regions has been configured by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Set firewall request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1364,7 +1420,9 @@ int32_t HsmClient_setFirewall(HsmClient_t *HsmClient, FirewallReq_t *FirewallReq
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             Mcal_CacheP_inv((void *)HsmClient->RespMsg.args, GET_CACHE_ALIGNED_SIZE(sizeof(FirewallReq_t)),
                             Mcal_CacheP_TYPE_ALL);
@@ -1408,7 +1466,8 @@ int32_t HsmClient_FirewallIntr(HsmClient_t *HsmClient, FirewallIntrReq_t *Firewa
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_SET_FIREWALL_INTR;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(FirewallIntrReqObj);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(FirewallIntrReqObj);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)FirewallIntrReqObj, sizeof(FirewallIntrReq_t));
@@ -1424,7 +1483,7 @@ int32_t HsmClient_FirewallIntr(HsmClient_t *HsmClient, FirewallIntrReq_t *Firewa
     {
         /* the firewall interrupt request has been honored by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] firewall interrupt request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1432,7 +1491,9 @@ int32_t HsmClient_FirewallIntr(HsmClient_t *HsmClient, FirewallIntrReq_t *Firewa
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             Mcal_CacheP_inv((void *)HsmClient->RespMsg.args, GET_CACHE_ALIGNED_SIZE(sizeof(FirewallIntrReq_t)),
                             Mcal_CacheP_TYPE_ALL);
@@ -1476,7 +1537,8 @@ int32_t HsmClient_getDKEK(HsmClient_t *HsmClient, DKEK_t *getDKEK, uint32_t time
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_GET_DKEK;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(getDKEK);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(getDKEK);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)getDKEK, sizeof(DKEK_t));
@@ -1491,7 +1553,7 @@ int32_t HsmClient_getDKEK(HsmClient_t *HsmClient, DKEK_t *getDKEK, uint32_t time
     {
         /* the readRow has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Get DKEK request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1499,7 +1561,9 @@ int32_t HsmClient_getDKEK(HsmClient_t *HsmClient, DKEK_t *getDKEK, uint32_t time
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(DKEK_t));
@@ -1540,13 +1604,13 @@ int32_t HsmClient_keyWriter(HsmClient_t *HsmClient, KeyWriterCertHeader_t *certH
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_KEYWRITER_SEND_CUST_KEY_CERT;
-    HsmClient->ReqMsg.args    = (void *)certHeader;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)certHeader, sizeof(KeyWriterCertHeader_t));
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(certHeader);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(certHeader);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
        Write back the KwrCertHeader struct and
@@ -1560,7 +1624,7 @@ int32_t HsmClient_keyWriter(HsmClient_t *HsmClient, KeyWriterCertHeader_t *certH
     {
         /* the OpenDbgFirewalls has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf(
                 "\r\n [HSM_CLIENT] KeyWriter customer key certificate send request NACKed by HSM server\r\n");
@@ -1569,7 +1633,9 @@ int32_t HsmClient_keyWriter(HsmClient_t *HsmClient, KeyWriterCertHeader_t *certH
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(KeyWriterCertHeader_t));
@@ -1613,7 +1679,8 @@ int32_t HsmClient_readSWRev(HsmClient_t *HsmClient, SWRev_t *readSWRev)
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_READ_SWREV;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(readSWRev);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(readSWRev);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)readSWRev, sizeof(SWRev_t));
@@ -1629,7 +1696,7 @@ int32_t HsmClient_readSWRev(HsmClient_t *HsmClient, SWRev_t *readSWRev)
     {
         /* the readRow has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Read SWRev request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1637,7 +1704,9 @@ int32_t HsmClient_readSWRev(HsmClient_t *HsmClient, SWRev_t *readSWRev)
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(SWRev_t));
@@ -1679,7 +1748,8 @@ int32_t HsmClient_writeSWRev(HsmClient_t *HsmClient, SWRev_t *writeSWRev)
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_WRITE_SWREV;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(writeSWRev);
+    uint64_t tempPhyAddr      = SOC_virtToPhy(writeSWRev);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)tempPhyAddr;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)writeSWRev, sizeof(SWRev_t));
@@ -1695,7 +1765,7 @@ int32_t HsmClient_writeSWRev(HsmClient_t *HsmClient, SWRev_t *writeSWRev)
     {
         /* the readRow has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Write SWRev request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1703,7 +1773,9 @@ int32_t HsmClient_writeSWRev(HsmClient_t *HsmClient, SWRev_t *writeSWRev)
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(SWRev_t));
@@ -1745,10 +1817,13 @@ int32_t HsmClient_getRandomNum(HsmClient_t *HsmClient, RNGReq_t *getRandomNum)
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_GET_RAND;
-    HsmClient->ReqMsg.args    = (void *)(uintptr_t)SOC_virtToPhy(getRandomNum);
+    uint64_t phyAddrRNG       = SOC_virtToPhy(getRandomNum);
+    HsmClient->ReqMsg.args    = (void *)(uint32_t *)(uintptr_t)phyAddrRNG;
 
-    getRandomNum->resultPtr = (uint8_t *)(uintptr_t)SOC_virtToPhy(getRandomNum->resultPtr);
-    getRandomNum->seedValue = (uint32_t *)(uintptr_t)SOC_virtToPhy(getRandomNum->seedValue);
+    uint64_t resultPtrPhy   = SOC_virtToPhy(getRandomNum->resultPtr);
+    getRandomNum->resultPtr = (uint8_t *)(uint32_t *)(uintptr_t)resultPtrPhy;
+    uint64_t seedValuePhy   = SOC_virtToPhy(getRandomNum->seedValue);
+    getRandomNum->seedValue = (uint32_t *)(uintptr_t)seedValuePhy;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)getRandomNum, sizeof(RNGReq_t));
@@ -1758,7 +1833,7 @@ int32_t HsmClient_getRandomNum(HsmClient_t *HsmClient, RNGReq_t *getRandomNum)
        invalidate the cache before passing it to HSM
     */
     Mcal_CacheP_wbInv(getRandomNum, GET_CACHE_ALIGNED_SIZE(sizeof(RNGReq_t)), Mcal_CacheP_TYPE_ALL);
-    Mcal_CacheP_wbInv(getRandomNum->seedValue, GET_CACHE_ALIGNED_SIZE((getRandomNum->seedSizeInDWords) * 4),
+    Mcal_CacheP_wbInv(getRandomNum->seedValue, GET_CACHE_ALIGNED_SIZE(((getRandomNum->seedSizeInDWords) * 4U)),
                       Mcal_CacheP_TYPE_ALL);
 
     status = HsmClient_SendAndRecv(HsmClient, timeout);
@@ -1766,7 +1841,7 @@ int32_t HsmClient_getRandomNum(HsmClient_t *HsmClient, RNGReq_t *getRandomNum)
     {
         /* the readRow has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Get Random Number request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -1774,16 +1849,18 @@ int32_t HsmClient_getRandomNum(HsmClient_t *HsmClient, RNGReq_t *getRandomNum)
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
             Mcal_CacheP_inv((void *)HsmClient->RespMsg.args, GET_CACHE_ALIGNED_SIZE(sizeof(RNGReq_t)),
                             Mcal_CacheP_TYPE_ALL);
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, sizeof(RNGReq_t));
 
             ((RNGReq_t *)HsmClient->RespMsg.args)->resultPtr =
-                (uint8_t *)SOC_phyToVirt((uint64_t)(((RNGReq_t *)HsmClient->RespMsg.args)->resultPtr));
+                (uint8_t *)SOC_phyToVirt((uint64_t)(uintptr_t)(((RNGReq_t *)HsmClient->RespMsg.args)->resultPtr));
             ((RNGReq_t *)HsmClient->RespMsg.args)->seedValue =
-                (uint32_t *)SOC_phyToVirt((uint64_t)(((RNGReq_t *)HsmClient->RespMsg.args)->seedValue));
+                (uint32_t *)SOC_phyToVirt((uint64_t)(uintptr_t)(((RNGReq_t *)HsmClient->RespMsg.args)->seedValue));
             Mcal_CacheP_inv((void *)((RNGReq_t *)HsmClient->RespMsg.args)->resultPtr,
                             GET_CACHE_ALIGNED_SIZE(((uint32_t)*(((RNGReq_t *)HsmClient->RespMsg.args)->resultPtr))),
                             Mcal_CacheP_TYPE_ALL);
@@ -1842,12 +1919,13 @@ int32_t HsmClient_firmwareUpdate_CertProcess(HsmClient_t *HsmClient, FirmwareUpd
     if (SystemP_SUCCESS == status)
     {
         /* Change the certificate start address to HSM address space */
-        pFirmwareUpdateObject->pStartAddress =
-            (uint8_t *)(uintptr_t)SOC_virtToPhy(pFirmwareUpdateObject->pStartAddress);
+        uint64_t startAddrPhy                = SOC_virtToPhy(pFirmwareUpdateObject->pStartAddress);
+        pFirmwareUpdateObject->pStartAddress = (uint8_t *)(uint32_t *)(uintptr_t)startAddrPhy;
         /* Add arg crc */
         HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)pFirmwareUpdateObject, sizeof(FirmwareUpdateReq_t));
         /* Change the Arguments Address in Physical Address */
-        HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(pFirmwareUpdateObject);
+        uint64_t phyAddrTemp   = SOC_virtToPhy(pFirmwareUpdateObject);
+        HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
         /*
         Write back the HsmVer struct and
@@ -1861,7 +1939,7 @@ int32_t HsmClient_firmwareUpdate_CertProcess(HsmClient_t *HsmClient, FirmwareUpd
         {
             /* the FW update cert process request has been completed by HSM server
              * if this request has been processed correctly */
-            if (HsmClient->RespFlag == HSM_FLAG_NACK)
+            if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
             {
                 AppUtils_printf(
                     "\r\n [HSM_CLIENT] Firmware update certificate processing request NACKed by HSM server\r\n");
@@ -1870,7 +1948,9 @@ int32_t HsmClient_firmwareUpdate_CertProcess(HsmClient_t *HsmClient, FirmwareUpd
             else
             {
                 /* Change the Arguments Address in Physical Address */
-                HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+                uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+                uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+                HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
                 /* check the integrity of args */
                 crcArgs = crc16_ccit((uint8_t *)(HsmClient->RespMsg.args), 0);
                 if (crcArgs == HsmClient->RespMsg.crcArgs)
@@ -1920,12 +2000,13 @@ int32_t HsmClient_firmwareUpdate_CodeProgram(HsmClient_t *HsmClient, FirmwareUpd
     if (SystemP_SUCCESS == status)
     {
         /* Change the certificate start address to HSM address space */
-        pFirmwareUpdateObject->pStartAddress =
-            (uint8_t *)(uintptr_t)SOC_virtToPhy(pFirmwareUpdateObject->pStartAddress);
+        uint64_t startAddrPhy                = SOC_virtToPhy(pFirmwareUpdateObject->pStartAddress);
+        pFirmwareUpdateObject->pStartAddress = (uint8_t *)(uint32_t *)(uintptr_t)startAddrPhy;
         /* Add arg crc */
         HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)pFirmwareUpdateObject, sizeof(FirmwareUpdateReq_t));
         /* Change the Arguments Address in Physical Address */
-        HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(pFirmwareUpdateObject);
+        uint64_t phyAddrTemp   = SOC_virtToPhy(pFirmwareUpdateObject);
+        HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
         /*
         Write back the HsmVer struct and
@@ -1939,7 +2020,7 @@ int32_t HsmClient_firmwareUpdate_CodeProgram(HsmClient_t *HsmClient, FirmwareUpd
         {
             /* the FW update cert process request has been completed by HSM server
              * if this request has been processed correctly */
-            if (HsmClient->RespFlag == HSM_FLAG_NACK)
+            if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
             {
                 AppUtils_printf("\r\n [HSM_CLIENT] Firmware update code programming request NACKed by HSM server\r\n");
                 status = SystemP_FAILURE;
@@ -1947,7 +2028,9 @@ int32_t HsmClient_firmwareUpdate_CodeProgram(HsmClient_t *HsmClient, FirmwareUpd
             else
             {
                 /* Change the Arguments Address in Physical Address */
-                HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+                uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+                uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+                HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
                 /* check the integrity of args */
                 crcArgs = crc16_ccit((uint8_t *)(HsmClient->RespMsg.args), 0);
                 if (crcArgs == HsmClient->RespMsg.crcArgs)
@@ -1989,7 +2072,8 @@ int32_t HsmClient_firmwareUpdate_CodeVerify(HsmClient_t *HsmClient, FirmwareUpda
         HsmClient->ReqMsg.serType = HSM_MSG_FW_UPDATE_CODE_VERIFY;
 
         /* Address and size check */
-        if ((pFirmwareUpdateObject->pStartAddress == NULL_PTR) && (pFirmwareUpdateObject->dataLength == 0))
+        /* MISRA-C:2012 Rule 10.4 - Ensure type consistency in comparisons */
+        if ((pFirmwareUpdateObject->pStartAddress == NULL_PTR) && (pFirmwareUpdateObject->dataLength == 0U))
         {
             status = SystemP_SUCCESS;
         }
@@ -2005,7 +2089,8 @@ int32_t HsmClient_firmwareUpdate_CodeVerify(HsmClient_t *HsmClient, FirmwareUpda
         /* Add arg crc */
         HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)pFirmwareUpdateObject, 0);
         /* Change the Arguments Address in Physical Address */
-        HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(pFirmwareUpdateObject);
+        uint64_t phyAddrTemp   = SOC_virtToPhy(pFirmwareUpdateObject);
+        HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
         /*
         Write back the HsmVer struct and
@@ -2019,7 +2104,8 @@ int32_t HsmClient_firmwareUpdate_CodeVerify(HsmClient_t *HsmClient, FirmwareUpda
         {
             /* the FW update cert process request has been completed by HSM server
              * if this request has been processed correctly */
-            if (HSM_FLAG_NACK == HsmClient->RespFlag)
+            /* MISRA-C:2012 Rule 10.4 - Ensure type consistency in comparisons */
+            if ((uint8_t)HSM_FLAG_NACK == HsmClient->RespFlag)
             {
                 AppUtils_printf(
                     "\r\n [HSM_CLIENT] Firmware update certificate programming request NACKed by HSM server\r\n");
@@ -2028,7 +2114,9 @@ int32_t HsmClient_firmwareUpdate_CodeVerify(HsmClient_t *HsmClient, FirmwareUpda
             else
             {
                 /* Change the Arguments Address in Physical Address */
-                HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+                uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+                uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+                HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
                 /* check the integrity of args */
                 crcArgs = crc16_ccit((uint8_t *)(HsmClient->RespMsg.args), 0);
                 if (crcArgs == HsmClient->RespMsg.crcArgs)
@@ -2065,13 +2153,13 @@ int32_t HsmClient_VerifyROTSwitchingCertificate(HsmClient_t *HsmClient, uint8_t 
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_VERIFY_ROT_CERT;
-    HsmClient->ReqMsg.args    = (void *)cert;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)cert, cert_size);
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(cert);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(cert);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
     Write back the RoT cert and
@@ -2084,7 +2172,8 @@ int32_t HsmClient_VerifyROTSwitchingCertificate(HsmClient_t *HsmClient, uint8_t 
     {
         /* the RoT Switch has been populated by HSM server
          * if this request has been processed correctly */
-        if (HSM_FLAG_NACK == HsmClient->RespFlag)
+        /* MISRA-C:2012 Rule 10.4 - Ensure type consistency in comparisons */
+        if ((uint8_t)HSM_FLAG_NACK == HsmClient->RespFlag)
         {
             AppUtils_printf(
                 "\r\n [HSM_CLIENT] RoT Switching Certificate Verification request NACKed by HSM server\r\n");
@@ -2093,7 +2182,9 @@ int32_t HsmClient_VerifyROTSwitchingCertificate(HsmClient_t *HsmClient, uint8_t 
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, 0U);
@@ -2149,7 +2240,8 @@ int32_t HsmClient_UpdateKeyRevsion(HsmClient_t *HsmClient, uint32_t timeout)
     {
         /* the verifyApp has been populated by HSM server
          * if this request has been processed correctly */
-        if (HSM_FLAG_NACK == HsmClient->RespFlag)
+        /* MISRA-C:2012 Rule 10.4 - Ensure type consistency in comparisons */
+        if ((uint8_t)HSM_FLAG_NACK == HsmClient->RespFlag)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Update Key Revision request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -2157,7 +2249,9 @@ int32_t HsmClient_UpdateKeyRevsion(HsmClient_t *HsmClient, uint32_t timeout)
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)(HsmClient->RespMsg.args), 0);
@@ -2203,7 +2297,8 @@ int32_t HsmClient_configOTFARegions(HsmClient_t *HsmClient, OTFA_Config_t *OTFA_
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)OTFA_ConfigInfo, sizeof(OTFA_Config_t));
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(OTFA_ConfigInfo);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(OTFA_ConfigInfo);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
        Write back the OTFA_ConfigInfo struct and
@@ -2217,7 +2312,7 @@ int32_t HsmClient_configOTFARegions(HsmClient_t *HsmClient, OTFA_Config_t *OTFA_
     {
         /* the hsmVer has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Configure OTFA request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -2225,7 +2320,9 @@ int32_t HsmClient_configOTFARegions(HsmClient_t *HsmClient, OTFA_Config_t *OTFA_
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)(HsmClient->RespMsg.args), sizeof(OTFA_Config_t));
@@ -2271,7 +2368,8 @@ int32_t HsmClient_readOTFARegions(HsmClient_t *HsmClient, OTFA_readRegion_t *OTF
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)OTFA_readRegion, sizeof(OTFA_readRegion_t));
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(OTFA_readRegion);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(OTFA_readRegion);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
        Write back the OTFA_readRegion struct and
@@ -2285,7 +2383,7 @@ int32_t HsmClient_readOTFARegions(HsmClient_t *HsmClient, OTFA_readRegion_t *OTF
     {
         /* the hsmVer has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Read OTFA request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -2293,7 +2391,9 @@ int32_t HsmClient_readOTFARegions(HsmClient_t *HsmClient, OTFA_readRegion_t *OTF
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)(HsmClient->RespMsg.args), sizeof(OTFA_readRegion_t));
@@ -2334,13 +2434,13 @@ int32_t HsmClient_secCfgValidate(HsmClient_t *HsmClient, SecCfgValidate_t *pSecC
     /* Always expect acknowledgement from HSM server */
     HsmClient->ReqMsg.flags   = HSM_FLAG_AOP;
     HsmClient->ReqMsg.serType = HSM_MSG_PROC_AUTH_BOOT_SEC_CFG;
-    HsmClient->ReqMsg.args    = (void *)pSecCfgParams;
 
     /* Add arg crc */
     HsmClient->ReqMsg.crcArgs = crc16_ccit((uint8_t *)pSecCfgParams, sizeof(SecCfgValidate_t));
 
     /* Change the Arguments Address in Physical Address */
-    HsmClient->ReqMsg.args = (void *)(uintptr_t)SOC_virtToPhy(pSecCfgParams);
+    uint64_t phyAddrTemp   = SOC_virtToPhy(pSecCfgParams);
+    HsmClient->ReqMsg.args = (void *)(uint32_t *)(uintptr_t)phyAddrTemp;
 
     /*
         Write back the cert and
@@ -2353,7 +2453,7 @@ int32_t HsmClient_secCfgValidate(HsmClient_t *HsmClient, SecCfgValidate_t *pSecC
     {
         /* the OpenDbgFirewalls has been populated by HSM server
          * if this request has been processed correctly */
-        if (HsmClient->RespFlag == HSM_FLAG_NACK)
+        if (HsmClient->RespFlag == (uint8_t)HSM_FLAG_NACK)
         {
             AppUtils_printf("\r\n [HSM_CLIENT] Sec-Cfg validation request NACKed by HSM server\r\n");
             status = SystemP_FAILURE;
@@ -2361,7 +2461,9 @@ int32_t HsmClient_secCfgValidate(HsmClient_t *HsmClient, SecCfgValidate_t *pSecC
         else
         {
             /* Change the Arguments Address in Physical Address */
-            HsmClient->RespMsg.args = (void *)SOC_phyToVirt((uint64_t)HsmClient->RespMsg.args);
+            uint32_t *tempTypedPtr  = (uint32_t *)HsmClient->RespMsg.args;
+            uint64_t  tempPhyAddr   = (uint64_t)(uintptr_t)tempTypedPtr;
+            HsmClient->RespMsg.args = SOC_phyToVirt(tempPhyAddr);
 
             /* check the integrity of args */
             crcArgs = crc16_ccit((uint8_t *)HsmClient->RespMsg.args, 0);

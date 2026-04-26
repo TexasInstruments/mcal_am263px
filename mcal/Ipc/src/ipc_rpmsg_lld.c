@@ -387,8 +387,8 @@ sint32 RPMessage_coreInit(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId)
     {
         RPMessage_queuePut(&coreObj->freeQ, &coreObj->localMsgObj[elemId].elem);
     }
-    /* Linux VRINGs we will init later inside RPMessage_waitForLinuxReady() */
-    if ((hRpMsg->isCoreEnable[remoteCoreId] != 0U) && (!(RPMessage_isLinuxCore(hRpMsg, remoteCoreId) != 0U)))
+
+    if (hRpMsg->isCoreEnable[remoteCoreId] != 0U)
     {
         /* reset RX ring */
         RPMessage_vringReset(hRpMsg, remoteCoreId, 0U);
@@ -411,9 +411,6 @@ void RPMessage_coreDeInit(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId)
 
 void RPMessage_controlEndPtHandler(const RPMessage_RecvCallbackParams *cbParams)
 {
-    (void)cbParams->crcStatus;
-    (void)cbParams->epObj;
-    (void)cbParams->arg;
     RPMessageLLD_Handle hRpMsg = (RPMessageLLD_Handle)cbParams->handle;
 
     if ((hRpMsg->controlEndPtCallback) != NULL_PTR)
@@ -446,17 +443,6 @@ uint32 RPMessage_controlEndPtInit(RPMessageLLD_Handle hRpMsg)
 void RPMessage_controlEndPtDeInit(RPMessageLLD_Handle hRpMsg)
 {
     RPMessage_lld_destruct(hRpMsg, &hRpMsg->controlEndPtObj);
-}
-
-uint32 RPMessage_isLinuxCore(RPMessageLLD_Handle hRpMsg, uint16 coreId)
-{
-    uint32 isLinuxCore = 0U;
-
-    if ((coreId == hRpMsg->linuxCoreId) && (hRpMsg->linuxResourceTable))
-    {
-        isLinuxCore = 1U;
-    }
-    return isLinuxCore;
 }
 
 sint32 RPMessage_lld_init(RPMessageLLD_Handle hRpMsg)
@@ -547,8 +533,8 @@ static inline sint32 RPMessage_lld_init_Enable_Core(RPMessageLLD_Handle hRpMsg)
         {
             hRpMsg->isCoreEnable[coreId] = 1U;
         }
-        if ((RPMessage_isLinuxCore(hRpMsg, coreId) != 0U) &&
-            (IpcNotify_lld_isCoreEnabled(hRpMsgInit->hIpcNotify, coreId) != 0U))
+
+        if (IpcNotify_lld_isCoreEnabled(hRpMsgInit->hIpcNotify, coreId) != 0U)
         {
             hRpMsg->isCoreEnable[coreId] = 1U;
         }
@@ -693,10 +679,7 @@ static void RPMessage_notify_Callback(RPMessageLLD_Handle hRpMsg, uint32 remoteC
                                       uint16 rxMsgValue)
 {
     uint16 rxValue = rxMsgValue;
-    if ((RPMessage_isLinuxCore(hRpMsg, (uint16)remoteCoreId)) != 0U)
-    {
-        rxValue = RPMESSAGE_LINUX_RX_VRING_ID; /* In linux, we get RX VRING ID, which is 1 in linux */
-    }
+
     if (msgValue == rxValue)
     { /* check full ring */
         while ((RPMessage_vringIsFullRxBuf(hRpMsg, (uint16)remoteCoreId)) == 1U)
@@ -769,7 +752,8 @@ static uint32 RPMessage_getEndPtMsg_mutexResourceTryLock(RPMessage_Struct *epObj
         }
         else
         {
-            tempTicks = startTicks;
+            tryLoopLocal = 0U;
+            tempTicks    = startTicks;
             Mcal_GetElapsedCycleCountValue(&tempTicks, &elapsedTicks);
         }
     } while ((elapsedTicks < timeout) && (tryLoopLocal == 0U));

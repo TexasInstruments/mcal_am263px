@@ -79,8 +79,8 @@ extern "C" {
  *  @{
  */
 
-#define SOC_RCM_FREQ_MHZ2HZ(x) ((x) * 1000 * 1000)
-#define SOC_RCM_FREQ_HZ2MHZ(x) ((x) / (1000 * 1000))
+#define SOC_RCM_FREQ_MHZ2HZ(x) ((x) * 1000U * 1000U)
+#define SOC_RCM_FREQ_HZ2MHZ(x) ((x) / (1000U * 1000U))
 
 #define APP_NAME "BOOT_APP"
 
@@ -92,13 +92,13 @@ extern "C" {
 #define SOC_DOMAIN_ID_MAIN (0U)
 
 /*Control MMRs partition*/
-#define MSS_CTRL_PARTITION0       (1)
-#define TOP_CTRL_PARTITION0       (2)
-#define CONTROLSS_CTRL_PARTITION0 (3)
+#define MSS_CTRL_PARTITION0       (1U)
+#define TOP_CTRL_PARTITION0       (2U)
+#define CONTROLSS_CTRL_PARTITION0 (3U)
 
 /*Clock and reset MMRs partition*/
-#define MSS_RCM_PARTITION0 (4)
-#define TOP_RCM_PARTITION0 (5)
+#define MSS_RCM_PARTITION0 (4U)
+#define TOP_RCM_PARTITION0 (5U)
 
 /*Pinmux MMR*/
 // #define IOMUX_PARTITION0                                   (6)
@@ -955,6 +955,22 @@ void SOC_configureWarmResetInputRiseDelay(uint16_t inpRiseDelayValue);
  * \param inpFallDelayValue [in] Programmable delay value. Refer \ref SOC_RcmWarm_ResetTime123_t
  */
 void SOC_configureWarmResetInputFallDelay(uint16_t inpFallDelayValue);
+
+/**
+ * \brief Get base address of CONTROLSS CTRL registers
+ *
+ * \return Pointer to CONTROLSS CTRL registers
+ */
+CSL_controlss_ctrlRegs *SOC_rcmGetBaseAddressCONTROLSSCTRL(void);
+
+/**
+ * \brief Get peripheral clock frequency
+ *
+ * \param clkSource [in] Clock source
+ *
+ * \return Clock frequency in Hz
+ */
+uint32_t SOC_rcmGetPeripheralClockFrequency(SOC_RcmPeripheralClockSource clkSource);
 
 /** @} */
 

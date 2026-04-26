@@ -71,7 +71,7 @@ typedef struct
                                   */
     uint32_t interruptConfigNum; /* number of interrupts to setup, i.e number of element in interruptConfig array */
     /* place holder to store the secure master core information */
-    uint32_t secHostCoreId[MAX_SEC_CORES_WITH_HSM - 1];
+    uint32_t secHostCoreId[((uint32_t)MAX_SEC_CORES_WITH_HSM - 1U)];
 } SIPC_Ctrl;
 
 SIPC_Ctrl gSIPC_ctrl;
@@ -86,10 +86,10 @@ static inline void SIPC_setMboxConfig(SIPC_Params *params, uint32_t selfCoreId)
     uint8_t             secMaster;
     /* Based on secureMaster_corID populate the queues and mbox config
      * if selfcore id is hsm then write all the sec master write queues to the hsmmbox config and vice versa */
-    if (selfCoreId == CORE_ID_HSM0_0)
+    if (selfCoreId == (uint32_t)CORE_ID_HSM0_0)
     {
         /* Define HSM->R5 tx and R5 -> HSM rx queues */
-        for (secMaster = 0; secMaster < (MAX_SEC_CORES_WITH_HSM - 1); secMaster++)
+        for (secMaster = 0U; secMaster < ((uint8_t)MAX_SEC_CORES_WITH_HSM - 1U); secMaster++)
         {
             /*****************************************************************************/
             /* HSM TX queue setup                                                        */
@@ -125,8 +125,8 @@ static inline void SIPC_setMboxConfig(SIPC_Params *params, uint32_t selfCoreId)
         pMailboxConfig->swQ->rdIdx   = 0;
         pMailboxConfig->swQ->EleSize = params->ipcQueue_eleSize_inBytes;
         pMailboxConfig->swQ->Qlength = params->ipcQueue_length;
-        pMailboxConfig->swQ->Qfifo =
-            (uint8_t *)((uint32_t)SOC_virtToPhy((void *)params->tx_SipcQueues[CORE_INDEX_HSM]));
+        uint64_t txPhyAddr           = SOC_virtToPhy((void *)params->tx_SipcQueues[CORE_INDEX_HSM]);
+        pMailboxConfig->swQ->Qfifo   = (uint8_t *)(uintptr_t)txPhyAddr;
 
         /*****************************************************************************/
         /* R5 RX queue setup                                                        */
@@ -137,8 +137,8 @@ static inline void SIPC_setMboxConfig(SIPC_Params *params, uint32_t selfCoreId)
         pMailboxConfig->swQ->rdIdx   = 0;
         pMailboxConfig->swQ->EleSize = params->ipcQueue_eleSize_inBytes;
         pMailboxConfig->swQ->Qlength = params->ipcQueue_length;
-        pMailboxConfig->swQ->Qfifo =
-            (uint8_t *)((uint32_t)SOC_virtToPhy((void *)params->rx_SipcQueues[CORE_INDEX_HSM]));
+        uint64_t rxPhyAddr           = SOC_virtToPhy((void *)params->rx_SipcQueues[CORE_INDEX_HSM]);
+        pMailboxConfig->swQ->Qfifo   = (uint8_t *)(uintptr_t)rxPhyAddr;
     }
 }
 
@@ -148,7 +148,7 @@ static inline void SIPC_getWriteMailbox(uint32_t remoteSecCoreId, uint32_t *mail
 {
     SIPC_MailboxConfig *pMailboxConfig;
     /* If it is HSM */
-    if ((gSIPC_ctrl.selfCoreId == CORE_ID_HSM0_0) && (remoteSecCoreId < 2))
+    if ((gSIPC_ctrl.selfCoreId == (uint32_t)CORE_ID_HSM0_0) && (remoteSecCoreId < 2U))
     {
         /* Read the necessary fields */
         pMailboxConfig   = &gSIPC_HsmMboxConfig[gSIPC_ctrl.secHostCoreId[remoteSecCoreId]];
@@ -170,10 +170,10 @@ static inline void SIPC_getReadMailbox(uint32_t *mailboxBaseAddr)
 {
     SIPC_MailboxConfig *pMailboxConfig;
 
-    if (gSIPC_ctrl.selfCoreId < CORE_ID_MAX)
+    if (gSIPC_ctrl.selfCoreId < (uint32_t)CORE_ID_MAX)
     {
         /* If current core is HSM */
-        if (gSIPC_ctrl.selfCoreId == CORE_ID_HSM0_0)
+        if (gSIPC_ctrl.selfCoreId == (uint32_t)CORE_ID_HSM0_0)
         {
             pMailboxConfig   = &gSIPC_HsmMboxConfig[0];
             *mailboxBaseAddr = pMailboxConfig->readReqMailboxBaseAddr;
@@ -195,10 +195,10 @@ static inline void SIPC_getReadMailboxClear(uint32_t *mailboxBaseAddr)
 {
     SIPC_MailboxConfig *pMailboxConfig;
 
-    if (gSIPC_ctrl.selfCoreId < CORE_ID_MAX)
+    if (gSIPC_ctrl.selfCoreId < (uint32_t)CORE_ID_MAX)
     {
         /* If current core is HSM */
-        if (gSIPC_ctrl.selfCoreId == CORE_ID_HSM0_0)
+        if (gSIPC_ctrl.selfCoreId == (uint32_t)CORE_ID_HSM0_0)
         {
             pMailboxConfig   = &gSIPC_HsmMboxConfig[0];
             *mailboxBaseAddr = pMailboxConfig->readReqMailboxClrBaseAddr;
@@ -220,7 +220,7 @@ static inline void SIPC_getIntrConfig(uint32_t selfCoreId, SIPC_InterruptConfig 
                                       uint32_t *interruptConfigNum, uint8_t intrCfgNum)
 {
     /* Extern globals that are specific to this core */
-    extern SIPC_InterruptConfig gSIPC_InterruptConfig[INTR_CFG_NUM_MAX][CORE_ID_MAX];
+    extern SIPC_InterruptConfig gSIPC_InterruptConfig[INTR_CFG_NUM_MAX][(uint32_t)CORE_ID_MAX];
 
     *interruptConfig    = &gSIPC_InterruptConfig[intrCfgNum][selfCoreId];
     *interruptConfigNum = intrCfgNum;
@@ -231,10 +231,10 @@ static inline void SIPC_getReadSwQ(uint32_t remoteSecCoreId, SIPC_SwQueue **swQ)
 {
     SIPC_MailboxConfig *pMailboxConfig;
 
-    if (gSIPC_ctrl.selfCoreId < CORE_ID_MAX)
+    if (gSIPC_ctrl.selfCoreId < (uint32_t)CORE_ID_MAX)
     {
         /* If current core is HSM core */
-        if (gSIPC_ctrl.selfCoreId == CORE_ID_HSM0_0)
+        if (gSIPC_ctrl.selfCoreId == (uint32_t)CORE_ID_HSM0_0)
         {
             /* Get remote secure master mailbox configuration */
             pMailboxConfig = &gSIPC_SecureHostMboxConfig[gSIPC_ctrl.secHostCoreId[remoteSecCoreId]];
@@ -257,8 +257,9 @@ static inline void SIPC_getReadSwQ(uint32_t remoteSecCoreId, SIPC_SwQueue **swQ)
 static inline void SIPC_insertClientIds(uint8_t remoteClientId, uint8_t selfClientId, uint8_t *msgValue)
 {
     /* Add error checking for wrong client Id in the message */
-    *msgValue       = remoteClientId;
-    *(msgValue + 1) = selfClientId;
+    /* MISRA-C:2012 Rule 18.4 - Use array indexing instead of pointer arithmetic */
+    msgValue[0] = remoteClientId;
+    msgValue[1] = selfClientId;
 }
 
 /* Secure IPC Isr */
@@ -319,7 +320,7 @@ __attribute__((target("arm"))) void SIPC_isr(void)
         SIPC_getReadMailbox(&mailboxBaseAddr);
         /* We need to keeping doing this until all status bits are 0, else we dont get new interrupt */
         pendingIntr = SIPC_mailboxGetPendingIntr(mailboxBaseAddr);
-    } while (pendingIntr != 0);
+    } while (pendingIntr != 0U);
 }
 /* This api will be used to send message to a particular remoteSecCodeId and remoteClientId. */
 int32_t SIPC_sendMsg(uint8_t remoteSecCoreId, uint8_t remoteClientId, uint8_t localClientId, uint8_t *msgValue,
@@ -330,29 +331,26 @@ int32_t SIPC_sendMsg(uint8_t remoteSecCoreId, uint8_t remoteClientId, uint8_t lo
     SIPC_SwQueue *swQ;
     int32_t       status = SystemP_FAILURE;
 
-    if ((remoteSecCoreId < MAX_SEC_CORES_WITH_HSM) && (gSIPC_ctrl.isCoreEnabled[remoteSecCoreId]))
+    if (((uint32_t)remoteSecCoreId < (uint32_t)MAX_SEC_CORES_WITH_HSM) &&
+        (gSIPC_ctrl.isCoreEnabled[remoteSecCoreId] != 0U))
     {
         /* Prepend src and dest client Id to msgValue */
         SIPC_insertClientIds(remoteClientId, localClientId, msgValue);
 
         SIPC_getWriteMailbox(remoteSecCoreId, &mailboxBaseAddr, &intrBitPos, &swQ);
-        if ((mailboxBaseAddr == (uint32_t)NULL_PTR) || (swQ == NULL_PTR))
-        {
-            return status;
-        }
-        else
+        if ((mailboxBaseAddr != 0U) && (swQ != NULL_PTR))
         {
             oldIntState = HwiP_disable();
             do
             {
                 status = SIPC_mailboxWrite(mailboxBaseAddr, intrBitPos, swQ, msgValue);
-                if (status != SystemP_SUCCESS && waitForFifoNotFull)
+                if ((status != SystemP_SUCCESS) && ((uint8_t)waitForFifoNotFull != 0U))
                 {
                     /* Allow interrupt enable and check again */
                     HwiP_restore(oldIntState);
                     oldIntState = HwiP_disable();
                 }
-            } while (status != (SystemP_SUCCESS && waitForFifoNotFull));
+            } while ((status != SystemP_SUCCESS) && ((uint8_t)waitForFifoNotFull != 0U));
 
             HwiP_restore(oldIntState);
             /* If not wait option is selected then return failure if FIFO is full */
@@ -362,6 +360,7 @@ int32_t SIPC_sendMsg(uint8_t remoteSecCoreId, uint8_t remoteClientId, uint8_t lo
             }
         }
     }
+
     return status;
 }
 
@@ -406,9 +405,9 @@ void SIPC_Params_init(SIPC_Params *params)
 
     params->numCores = 0;
     /* for non registered cores.*/
-    for (i = 0; i < MAX_SEC_CORES_WITH_HSM; i++)
+    for (i = 0U; i < (uint32_t)MAX_SEC_CORES_WITH_HSM; i++)
     {
-        params->coreIdList[i] = CORE_ID_MAX;
+        params->coreIdList[i] = (uint32_t)CORE_ID_MAX;
     }
 
     params->interruptConfig_Num = 0;
@@ -417,111 +416,115 @@ void SIPC_Params_init(SIPC_Params *params)
 int32_t SIPC_init(SIPC_Params *params)
 {
     uint32_t i, core, oldIntState;
-    int32_t  status = SystemP_SUCCESS;
+    int32_t  status = SystemP_FAILURE;
     uint32_t mailboxBaseAddr;
     uint32_t selfCoreId;
     uint8_t  assertFlag = 0;
     /* for R5 selfCoreId comes from core cluster registers
      * This is configured at compile time */
     selfCoreId        = SELF_CORE_ID;
-    uint8_t secMaster = 0;
+    uint8_t secMaster = 0U;
 
     /* check if current core who is doing sipc init is a secure host or not if not.
      * if not then return init failure */
+    /* MISRA-C:2012 Rule 10.4, 10.1 - Ensure type consistency in comparisons */
+    uint8_t maxSecMasters = (uint8_t)((uint32_t)MAX_SEC_CORES_WITH_HSM - 1U);
 
-    for (secMaster = 0; secMaster < (MAX_SEC_CORES_WITH_HSM - 1); secMaster++)
+    for (secMaster = 0U; secMaster < maxSecMasters; secMaster++)
     {
-        if ((selfCoreId == params->secHostCoreId[secMaster]) || (selfCoreId == CORE_ID_HSM0_0))
+        if ((selfCoreId == params->secHostCoreId[secMaster]) || (selfCoreId == (uint32_t)CORE_ID_HSM0_0))
         {
-            if (selfCoreId == CORE_ID_HSM0_0)
+            if (selfCoreId == (uint32_t)CORE_ID_HSM0_0)
             {
-                gSIPC_ctrl.selfSecHostId = CORE_INDEX_HSM;
+                gSIPC_ctrl.selfSecHostId = (SIPC_SecCoreId)CORE_INDEX_HSM;
             }
             else
             {
                 gSIPC_ctrl.selfSecHostId = secMaster;
             }
-            assertFlag = 0;
+            assertFlag = 0U;
 
             break;
         }
         else
         {
-            assertFlag = 1;
+            assertFlag = 1U;
         }
     }
     /* Indicates that this core is not a secHost*/
-    if (assertFlag == 1)
+    if (assertFlag != 1U)
     {
-        return SystemP_FAILURE;
-    }
-    else
-    {
-        SIPC_getIntrConfig(selfCoreId, &gSIPC_ctrl.interruptConfig, &gSIPC_ctrl.interruptConfigNum,
-                           params->interruptConfig_Num);
-        /* Add the selfcore iD to notifyctrl structure*/
-        gSIPC_ctrl.selfCoreId                             = selfCoreId;
-        gSIPC_ctrl.secHostCoreId[CORE_INDEX_SEC_MASTER_0] = params->secHostCoreId[CORE_INDEX_SEC_MASTER_0];
-        gSIPC_ctrl.secHostCoreId[CORE_INDEX_SEC_MASTER_1] = params->secHostCoreId[CORE_INDEX_SEC_MASTER_1];
+        /* Validate selfCoreId is within valid bounds before using as array index */
+        if (selfCoreId < (uint32_t)CORE_ID_MAX)
+        {
+            SIPC_getIntrConfig(selfCoreId, &gSIPC_ctrl.interruptConfig, &gSIPC_ctrl.interruptConfigNum,
+                               params->interruptConfig_Num);
+            /* Add the selfcore iD to notifyctrl structure*/
+            gSIPC_ctrl.selfCoreId                             = selfCoreId;
+            gSIPC_ctrl.secHostCoreId[CORE_INDEX_SEC_MASTER_0] = params->secHostCoreId[CORE_INDEX_SEC_MASTER_0];
+            gSIPC_ctrl.secHostCoreId[CORE_INDEX_SEC_MASTER_1] = params->secHostCoreId[CORE_INDEX_SEC_MASTER_1];
 
-        /* Unregister previously registered clients. */
-        for (i = 0; i < SIPC_CLIENT_ID_MAX; i++)
-        {
-            SIPC_unregisterClient(i);
-        }
-        /* Register queues pointer point to an allocated queue. & initialize mailboxconfig swQ parameters.
-         * set the mailbox config based on wether a core is secure master or not */
-        SIPC_setMboxConfig(params, selfCoreId);
-
-        /* Reset some state variables */
-        for (core = 0; core < MAX_SEC_CORES_WITH_HSM; core++)
-        {
-            gSIPC_ctrl.isCoreEnabled[core] = 0;
-        }
-        /* Typechecking user config params */
-        if (params->numCores < MAX_SEC_CORES_WITH_HSM)
-        {
-            for (core = 0; core < params->numCores; core++)
+            /* Unregister previously registered clients. */
+            for (i = 0; i < SIPC_CLIENT_ID_MAX; i++)
             {
-                if (params->coreIdList[core] < MAX_SEC_CORES_WITH_HSM)
+                SIPC_unregisterClient(i);
+            }
+            /* Register queues pointer point to an allocated queue. & initialize mailboxconfig swQ parameters.
+             * set the mailbox config based on wether a core is secure master or not */
+            SIPC_setMboxConfig(params, selfCoreId);
+
+            /* Reset some state variables */
+            for (core = 0U; core < (uint32_t)MAX_SEC_CORES_WITH_HSM; core++)
+            {
+                gSIPC_ctrl.isCoreEnabled[core] = 0U;
+            }
+            /* Typechecking user config params */
+            if (params->numCores < (uint32_t)MAX_SEC_CORES_WITH_HSM)
+            {
+                status = SystemP_SUCCESS;
+                for (core = 0U; core < params->numCores; core++)
                 {
-                    /* Mark core as enabled for IPC */
-                    gSIPC_ctrl.isCoreEnabled[params->coreIdList[core]] = 1;
+                    if (params->coreIdList[core] < (uint32_t)MAX_SEC_CORES_WITH_HSM)
+                    {
+                        /* Mark core as enabled for IPC */
+                        gSIPC_ctrl.isCoreEnabled[params->coreIdList[core]] = 1U;
+                    }
+                    else
+                    {
+                        status = SystemP_FAILURE;
+                        break;
+                    }
                 }
-                else
+
+                if (status == SystemP_SUCCESS)
                 {
-                    return SystemP_FAILURE;
+                    oldIntState = HwiP_disable();
+
+                    for (i = 0; i <= gSIPC_ctrl.interruptConfigNum; i++)
+                    {
+                        HwiP_Params           hwiParams;
+                        SIPC_InterruptConfig *pInterruptConfig;
+
+                        pInterruptConfig = &gSIPC_ctrl.interruptConfig[i];
+
+                        /* Isr need to write this register to clear the interrupt */
+                        SIPC_getReadMailbox(&mailboxBaseAddr);
+
+                        if (pInterruptConfig->clearIntOnInit != 0U)
+                        {
+                            SIPC_mailboxClearAllInt(mailboxBaseAddr);
+                        }
+
+                        status = SIPC_Register_Isr(&hwiParams, pInterruptConfig, params, &SIPC_isr);
+                    }
+
+                    HwiP_restore(oldIntState);
                 }
             }
         }
-        else
-        {
-            return SystemP_FAILURE;
-        }
-        oldIntState = HwiP_disable();
-
-        for (i = 0; i <= gSIPC_ctrl.interruptConfigNum; i++)
-        {
-            HwiP_Params           hwiParams;
-            SIPC_InterruptConfig *pInterruptConfig;
-
-            pInterruptConfig = &gSIPC_ctrl.interruptConfig[i];
-
-            /* Isr need to write this register to clear the interrupt */
-            SIPC_getReadMailbox(&mailboxBaseAddr);
-
-            if (pInterruptConfig->clearIntOnInit != 0U)
-            {
-                SIPC_mailboxClearAllInt(mailboxBaseAddr);
-            }
-
-            status = SIPC_Register_Isr(&hwiParams, pInterruptConfig, params, &SIPC_isr);
-        }
-
-        HwiP_restore(oldIntState);
-
-        return status;
     }
+
+    return status;
 }
 
 void SIPC_deInit(void)
@@ -560,13 +563,13 @@ uint32_t SIPC_isCoreEnabled(uint32_t coreId)
 {
     uint32_t isEnabled = 0;
 
-    if (coreId < MAX_SEC_CORES_WITH_HSM)
+    if (coreId < (uint32_t)MAX_SEC_CORES_WITH_HSM)
     {
         isEnabled = gSIPC_ctrl.isCoreEnabled[coreId];
     }
     else
     {
-        isEnabled = 0;
+        isEnabled = 0U;
     }
     return isEnabled;
 }

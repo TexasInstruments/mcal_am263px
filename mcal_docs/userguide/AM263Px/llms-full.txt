@@ -14611,13 +14611,13 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| ipc   | 5808    | 429    | 1656    |
+| ipc   | 5530    | 429    | 1656    |
  
 ### LIN
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| lin   | 2212    | 9    | 10    |
+| lin   | 2240    | 9    | 10    |
  
 ### MCU
 
@@ -30179,6 +30179,21 @@ This container contains the parameters related to each LIN Driver Unit.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | 0 |
 | **Max-value** | 255 |
+| **Min-value** | 0 |
+
+###### LinTimeoutDuration
+
+| Item ||
+|--------|---------------|
+| **Name** | LinTimeoutDuration |
+| **Description** | Specifies the maximum number of loops for blocking function until a timeout is raised in short term wait loops |
+| **Origin** | AUTOSAR_ECUC |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 65535 |
+| **Max-value** | 65535 |
 | **Min-value** | 0 |
 
 ###### LinWakeupId

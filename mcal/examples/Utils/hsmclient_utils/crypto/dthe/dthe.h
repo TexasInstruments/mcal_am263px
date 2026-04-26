@@ -138,8 +138,13 @@ typedef struct
 /*                            Global Variables                                */
 /* ========================================================================== */
 
+/** Maximum number of DTHE instances Referenced from BootApp.c*/
+#ifndef DTHE_NUM_INSTANCES
+#define DTHE_NUM_INSTANCES (1U)
+#endif
+
 /** \brief Externally defined driver configuration array */
-extern DTHE_Config gDtheConfig[];
+extern DTHE_Config gDtheConfig[DTHE_NUM_INSTANCES];
 /** \brief Externally defined driver configuration Num */
 extern uint32_t    gDtheConfigNum;
 

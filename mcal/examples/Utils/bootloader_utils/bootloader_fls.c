@@ -79,22 +79,30 @@ volatile uint32 Fls_JobDoneSuccess;
 volatile uint32 Fls_JobDoneError;
 Std_ReturnType  retVal = E_OK;
 
-static void main_handling()
+static void main_handling(void)
 {
+    uint8_t loopControl = 1U;
+    uint8_t loopBreak   = 0U;
+
     AppUtils_printf(APP_NAME ": Job Processing in Progress.\n\r");
-    while (1U)
+
+    while (loopControl == 1U)
     {
         Fls_MainFunction();
         if (Fls_JobDoneSuccess == 1U)
         {
             AppUtils_printf(APP_NAME ": Job Ends: SUCCESS\n\r");
-            retVal = E_OK;
-            break;
+            retVal    = E_OK;
+            loopBreak = 1U;
         }
         if (Fls_JobDoneError == 1U)
         {
             AppUtils_printf(APP_NAME ": Job Ends: Error\n\r");
-            retVal = E_NOT_OK;
+            retVal    = E_NOT_OK;
+            loopBreak = 1U;
+        }
+        if (loopBreak == 1U)
+        {
             break;
         }
     }
@@ -104,21 +112,28 @@ static void main_handling()
     return;
 }
 
-static void main_handling_intr()
+static void main_handling_intr(void)
 {
+    uint8_t loopControl = 1U;
+    uint8_t loopBreak   = 0U;
+
     AppUtils_printf(APP_NAME ": Job Processing in Progress.\n\r");
-    while (1U)
+    while (loopControl == 1U)
     {
         if (Fls_JobDoneSuccess == 1U)
         {
             AppUtils_printf(APP_NAME ": Job Ends: SUCCESS\n\r");
-            retVal = E_OK;
-            break;
+            retVal    = E_OK;
+            loopBreak = 1U;
         }
         if (Fls_JobDoneError == 1U)
         {
             AppUtils_printf(APP_NAME ": Job Ends: Error\n\r");
-            retVal = E_NOT_OK;
+            retVal    = E_NOT_OK;
+            loopBreak = 1U;
+        }
+        if (loopBreak == 1U)
+        {
             break;
         }
     }
@@ -151,10 +166,11 @@ static int32_t Flash_imgRead(void *dst, uint32_t len, void *args)
     Bootloader_FlashArgs *flashArgs    = (Bootloader_FlashArgs *)args;
     // Flash_Handle handle = Flash_getHandle(flashArgs->flashIndex);
     // Flash_Attrs *attrs = Flash_getAttrs(flashArgs->flashIndex);
+    uint8_t               loopControl = 1U;
 
-    if (flashArgs->curOffset + len < Fls_Config_SFDP_Ptr->flashSize)
+    if ((flashArgs->curOffset + len) < Fls_Config_SFDP_Ptr->flashSize)
     {
-        while (1U)
+        while (loopControl == 1U)
         {
             job_accepted = Fls_Read(flashArgs->curOffset, (uint8_t *)dst, len);
             if (E_OK == job_accepted)

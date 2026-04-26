@@ -568,6 +568,21 @@ extern "C" {
 /* ========================================================================== */
 /*                          Function Declarations                             */
 /* ========================================================================== */
+/* TI_COVERAGE_GAP_START [Statement] All functions in this section are static inline functions defined in header file.
+   Code coverage tools may not track these functions the same way as regular functions. The following
+   inline functions have been tested via mcuXbarCoverageTest() test case and are exercised during
+   testing, but may not appear as covered in traditional line coverage reports:
+   - MCU_xbarGetOutputXBarOutputSignalStatus() (line 580)
+   - MCU_xbarInvertOutputXBarOutputSignalBeforeLatch() (line 593)
+   - MCU_xbarGetOutputXBarOutputSignalLatchedFlag() (line 605)
+   - MCU_xbarClearOutputXBarOutputSignalLatchedFlag() (line 616)
+   - MCU_xbarForceOutputXBarOutputSignalLatchedFlag() (line 627)
+   - MCU_xbarSelectLatchOutputXBarOutputSignal() (line 639)
+   - MCU_xbarSelectStretchedPulseOutputXBarOutputSignal() (line 652)
+   - MCU_xbarSelectStretchedPulseLengthOutputXBarOutputSignal() (line 665)
+   - MCU_xbarInvertOutputXBarOutputSignal() (line 677)
+   - MCU_xbarSelectOutputXBarInputSource() (line 700)
+   See test ID 19982 for coverage verification. */
 #define MCU_START_SEC_CODE
 #include "Mcu_MemMap.h"
 
@@ -724,6 +739,7 @@ static inline void MCU_xbarSelectOutputXBarInputSource(uint32 out, const uint32 
     HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G10,
                 group_mask[10U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G10_SEL_MASK);
 }
+/* TI_COVERAGE_GAP_STOP */
 #define MCU_STOP_SEC_CODE
 #include "Mcu_MemMap.h"
 

@@ -106,25 +106,25 @@ typedef void (*SIPC_FxnCallback)(uint8_t remoteSecCoreId, uint8_t localClientId,
  */
 typedef struct SIPC_Params_
 {
-    uint32_t numCores;                           /**< Number of remote cores participating in IPC, excluding the core on
-                                                  *  which this API is called.
-                                                  */
-    uint32_t coreIdList[MAX_SEC_CORES_WITH_HSM]; /**< List of secure cores participating in IPC, excluding the core on
-                                                  *   which this API is called.
-                                                  *
-                                                  *   See \ref CSL_CoreID for valid values for this field. */
+    uint32_t numCores; /**< Number of remote cores participating in IPC, excluding the core on
+                        *  which this API is called.
+                        */
+    uint32_t coreIdList[(uint32_t)MAX_SEC_CORES_WITH_HSM]; /**< List of secure cores participating in IPC, excluding the
+                                                            * core on which this API is called.
+                                                            *
+                                                            *   See \ref CSL_CoreID for valid values for this field. */
 
     uint16_t ipcQueue_length;            /** < Number of elements in IpcQueue */
     uint16_t ipcQueue_eleSize_inBytes;   /** < size of each element in words */
     uint32_t ipcQueue_totalSize_inBytes; /** < Total size of IpcQueue */
 
-    uintptr_t tx_SipcQueues[MAX_SEC_CORES_WITH_HSM]; /**< List of pointer to the queue locaton which is indexed
-                                                      * with secure core index.*/
-    uintptr_t rx_SipcQueues[MAX_SEC_CORES_WITH_HSM]; /** < to specify the queues thorugh which current core is going to
-                                                      * read the message */
+    uintptr_t tx_SipcQueues[(uint32_t)MAX_SEC_CORES_WITH_HSM]; /**< List of pointer to the queue locaton which is
+                                                                * indexed with secure core index.*/
+    uintptr_t rx_SipcQueues[(uint32_t)MAX_SEC_CORES_WITH_HSM]; /** < to specify the queues thorugh which current core is
+                                                                * going to read the message */
     /* The size of SecureMaster_CoreId array is 2 so the coreId value written on INDEX = 0 will represent the
      * Secure Master 1's CORE ID and so on */
-    uint32_t  secHostCoreId[MAX_SEC_CORES_WITH_HSM - 1];
+    uint32_t  secHostCoreId[((uint32_t)MAX_SEC_CORES_WITH_HSM - 1U)];
     /* This field is for soc extension if user wants to configure different interrupt for SIPC communication*/
     /* for am263x it is fixed to zero */
     uint8_t   intrPriority; /**< Interrupt priority */

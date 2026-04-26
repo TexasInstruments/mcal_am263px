@@ -118,18 +118,28 @@ static inline int32_t SIPC_mailboxRead(SIPC_SwQueue *swQ, uint8_t *Buff)
 {
     int32_t status = SystemP_FAILURE;
 
-    volatile uint32_t rdIdx = swQ->rdIdx;
-    volatile uint32_t wrIdx = swQ->wrIdx;
+    /* MISRA-C:2012 Rule 13.5 - Read volatile variables once to avoid side effects in logical expressions */
+    uint32_t rdIdx   = swQ->rdIdx;
+    uint32_t wrIdx   = swQ->wrIdx;
+    uint16_t qLength = swQ->Qlength;
+    uint32_t rdIdxValid;
+    uint32_t wrIdxValid;
 
-    if ((rdIdx < swQ->Qlength) && (wrIdx < swQ->Qlength))
+    rdIdxValid = (rdIdx < qLength) ? 1U : 0U;
+    wrIdxValid = (wrIdx < qLength) ? 1U : 0U;
+
+    if ((rdIdxValid != 0U) && (wrIdxValid != 0U))
     {
         /* If this condition meets then it means there is something in the fifo*/
         if (rdIdx != wrIdx)
         {
-            /* Copy EleSize bytes from Queue memory to the buffer */
-            memcpy(Buff, SOC_phyToVirt((uint64_t)(swQ->Qfifo + (swQ->EleSize * rdIdx))), swQ->EleSize);
+            /* MISRA-C:2012 Rule 18.4, Rule 21.16 - Calculate offset without pointer arithmetic, use byte copy */
+            uint32_t       offset  = (uint32_t)swQ->EleSize * rdIdx;
+            uint8_t const *srcPtr  = &swQ->Qfifo[offset];
+            void const    *phyAddr = SOC_phyToVirt((uint64_t)srcPtr);
+            (void)memcpy((void *)Buff, phyAddr, (size_t)swQ->EleSize);
 
-            rdIdx = (rdIdx + 1) % swQ->Qlength;
+            rdIdx = (rdIdx + 1U) % swQ->Qlength;
 
             swQ->rdIdx = rdIdx;
 
@@ -153,20 +163,30 @@ static inline int32_t SIPC_mailboxWrite(uint32_t mailboxBaseAddr, uint32_t wrInt
 {
     int32_t status = SystemP_FAILURE;
 
-    volatile uint32_t rdIdx = swQ->rdIdx;
-    volatile uint32_t wrIdx = swQ->wrIdx;
+    /* MISRA-C:2012 Rule 13.5 - Read volatile variables once to avoid side effects in logical expressions */
+    uint32_t rdIdx   = swQ->rdIdx;
+    uint32_t wrIdx   = swQ->wrIdx;
+    uint16_t qLength = swQ->Qlength;
+    uint32_t rdIdxValid;
+    uint32_t wrIdxValid;
 
-    if ((rdIdx < swQ->Qlength) && (wrIdx < swQ->Qlength))
+    rdIdxValid = (rdIdx < qLength) ? 1U : 0U;
+    wrIdxValid = (wrIdx < qLength) ? 1U : 0U;
+
+    if ((rdIdxValid != 0U) && (wrIdxValid != 0U))
     {
-        if (((wrIdx + 1) % swQ->Qlength) != rdIdx)
+        if (((wrIdx + 1U) % swQ->Qlength) != rdIdx)
         {
             volatile uint32_t *addr = (uint32_t *)mailboxBaseAddr;
 
             /* There is some space in the FIFO */
+            /* MISRA-C:2012 Rule 18.4, Rule 21.16 - Calculate offset without pointer arithmetic, use byte copy */
+            uint32_t offset  = (uint32_t)swQ->EleSize * wrIdx;
+            uint8_t *dstPtr  = &swQ->Qfifo[offset];
+            void    *phyAddr = SOC_phyToVirt((uint64_t)dstPtr);
+            (void)memcpy(phyAddr, (void const *)Buff, (size_t)swQ->EleSize);
 
-            memcpy(SOC_phyToVirt((uint64_t)(swQ->Qfifo + (swQ->EleSize * wrIdx))), Buff, swQ->EleSize);
-
-            wrIdx = (wrIdx + 1) % swQ->Qlength;
+            wrIdx = (wrIdx + 1U) % swQ->Qlength;
 
             swQ->wrIdx = wrIdx;
 
@@ -178,7 +198,8 @@ static inline int32_t SIPC_mailboxWrite(uint32_t mailboxBaseAddr, uint32_t wrInt
 #endif
 
             /* Trigger interrupt to other core */
-            *addr = (1U << (wrIntrBitPos));
+            /* MISRA-C:2012 Rule 10.8 - Ensure shift result matches target type width */
+            *addr = ((uint32_t)1 << wrIntrBitPos);
 
             status = SystemP_SUCCESS;
         }
@@ -189,7 +210,7 @@ static inline int32_t SIPC_mailboxWrite(uint32_t mailboxBaseAddr, uint32_t wrInt
 static inline void SIPC_mailboxClearAllInt(uint32_t mailboxBaseAddr)
 {
     volatile uint32_t *addr = (uint32_t *)mailboxBaseAddr;
-    *addr                   = 0x1111111;
+    *addr                   = 0x1111111U;
 }
 
 static inline uint32_t SIPC_mailboxGetPendingIntr(uint32_t mailboxBaseAddr)
@@ -205,12 +226,17 @@ static inline void SIPC_mailboxClearPendingIntr(uint32_t mailboxBaseAddr, uint32
     *addr                   = pendingIntr;
 }
 
+/** Maximum number of cores (matches CORE_ID_MAX from sipc_notify_cfg.h) */
+#ifndef SIPC_MAX_CORES
+#define SIPC_MAX_CORES (5U)
+#endif
+
 static inline uint32_t SIPC_mailboxIsPendingIntr(uint32_t pendingIntr, uint32_t coreId)
 {
-    extern uint32_t gSIPCCoreIntrBitPos[];
+    extern uint32_t gSIPCCoreIntrBitPos[SIPC_MAX_CORES];
 
-    uint32_t isPending = 0;
-    isPending          = pendingIntr & (1 << gSIPCCoreIntrBitPos[coreId]);
+    uint32_t isPending = 0U;
+    isPending          = pendingIntr & (1U << (uint32_t)gSIPCCoreIntrBitPos[coreId]);
     return isPending;
 }
 

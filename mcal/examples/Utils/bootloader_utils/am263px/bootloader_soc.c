@@ -268,7 +268,7 @@ int32_t Bootloader_socCpuSetClock(uint32_t cpuId, uint32_t cpuHz)
         case MCAL_CSL_CORE_ID_R5FSS0_1:
         case MCAL_CSL_CORE_ID_R5FSS1_0:
         case MCAL_CSL_CORE_ID_R5FSS1_1:
-            status = SOC_rcmSetR5Clock(cpuHz, cpuHz / 2, cpuId);
+            status = SOC_rcmSetR5Clock(cpuHz, cpuHz / 2U, cpuId);
             break;
         default:
             break;
@@ -444,10 +444,10 @@ uint32_t Bootloader_socTranslateSectionAddr(uint32_t cslCoreId, uint32_t addr)
         uint32_t socAddr      = addrTranslateInfo->addrRegionInfo[i].socAddr;
         uint32_t regionSize   = addrTranslateInfo->addrRegionInfo[i].regionSize;
 
-        if ((addr >= cpuLocalAddr) && (addr < cpuLocalAddr + regionSize))
+        if ((addr >= cpuLocalAddr) && (addr < (cpuLocalAddr + regionSize)))
         {
             uint32_t offset = addr - cpuLocalAddr;
-            outputAddr      = socAddr + offset;
+            outputAddr      = (socAddr + offset);
             break;
         }
     }

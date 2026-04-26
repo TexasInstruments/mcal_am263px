@@ -104,16 +104,17 @@ int32_t SOC_moduleSetClockFrequency(uint32_t moduleId, uint32_t clkId, uint64_t 
 
 const char *SOC_getCoreName(uint16_t coreId)
 {
-    static char *coreIdNames[MCAL_CSL_CORE_ID_MAX + 2] = {"r5f0-0", "r5f0-1", "r5f1-0", "r5f1-1", "hsm0-0", "unknown"};
-    const char  *name;
+    static const char *const coreIdNames[(MCAL_CSL_CORE_ID_MAX + 2U)] = {"r5f0-0", "r5f0-1", "r5f1-0",
+                                                                         "r5f1-1", "hsm0-0", "unknown"};
+    const char              *name;
 
-    if (coreId < MCAL_CSL_CORE_ID_MAX + 1)
+    if (coreId < (MCAL_CSL_CORE_ID_MAX + 1U))
     {
         name = coreIdNames[coreId];
     }
     else
     {
-        name = coreIdNames[MCAL_CSL_CORE_ID_MAX + 1];
+        name = coreIdNames[(MCAL_CSL_CORE_ID_MAX + 1U)];
     }
     return name;
 }
@@ -1271,8 +1272,11 @@ uint64_t SOC_getSelfCpuClk(void)
 
 uint64_t SOC_virtToPhy(void *virtAddr)
 {
-    uintptr_t temp    = (uintptr_t)virtAddr;
-    uint64_t  phyAddr = (uint64_t)temp; /* Default case */
+    uintptr_t temp;
+    uint64_t  phyAddr;
+
+    temp    = (uintptr_t)virtAddr;
+    phyAddr = (uint64_t)temp; /* Default case */
 
     /* R5F overrides */
 #if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'R')
@@ -1311,6 +1315,10 @@ uint64_t SOC_virtToPhy(void *virtAddr)
                 virtToPhymap.tcmaSize = (CSL_MSS_TCMA_RAM_SIZE);
                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
             }
+        }
+        else
+        {
+            /* MISRA compliance - default case */
         }
 
         isMapAvailable = 1u;
@@ -1333,6 +1341,10 @@ uint64_t SOC_virtToPhy(void *virtAddr)
                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
                 phyAddr += MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
         }
         else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
         {
@@ -1349,6 +1361,14 @@ uint64_t SOC_virtToPhy(void *virtAddr)
                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
                 phyAddr += MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
+        }
+        else
+        {
+            /* MISRA compliance - default case */
         }
     }
 
@@ -1369,6 +1389,10 @@ uint64_t SOC_virtToPhy(void *virtAddr)
                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
                 phyAddr += MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
         }
         else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
         {
@@ -1385,6 +1409,14 @@ uint64_t SOC_virtToPhy(void *virtAddr)
                 phyAddr -= CSL_MSS_TCMB_RAM_BASE;
                 phyAddr += MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
+        }
+        else
+        {
+            /* MISRA compliance - default case */
         }
     }
 #endif
@@ -1401,7 +1433,11 @@ uint64_t SOC_virtToPhy(void *virtAddr)
 
 void *SOC_phyToVirt(uint64_t phyAddr)
 {
-    void *virtAddr = (void *)((uintptr_t)phyAddr); /* Default case */
+    void    *virtAddr;
+    uint64_t localPhyAddr;
+
+    virtAddr     = (void *)(uintptr_t)phyAddr; /* Default case */
+    localPhyAddr = phyAddr;
 
     /* R5F overrides */
 #if (__ARM_ARCH == 7) && (__ARM_ARCH_PROFILE == 'R')
@@ -1441,6 +1477,10 @@ void *SOC_phyToVirt(uint64_t phyAddr)
                 virtToPhymap.tcmbSize = (CSL_MSS_TCMB_RAM_SIZE);
             }
         }
+        else
+        {
+            /* MISRA compliance - default case */
+        }
 
         isMapAvailable = 1u;
     }
@@ -1450,40 +1490,52 @@ void *SOC_phyToVirt(uint64_t phyAddr)
         if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0)
         {
             /* TCMA - R5FSS0-0 */
-            if ((phyAddr >= MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE) &&
-                (phyAddr < (MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
+            if ((localPhyAddr >= MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE) &&
+                (localPhyAddr < (MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
             {
-                phyAddr  -= MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE;
-                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS0_CORE0_TCMA_U_BASE;
+                localPhyAddr += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
             }
             /* TCMB - R5FSS0-0 */
-            else if ((phyAddr >= MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE) &&
-                     (phyAddr < (MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
+            else if ((localPhyAddr >= MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE) &&
+                     (localPhyAddr < (MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
             {
-                phyAddr  -= MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE;
-                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS0_CORE0_TCMB_U_BASE;
+                localPhyAddr += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
         }
         else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
         {
             /* TCMA - R5FSS0-1 */
-            if ((phyAddr >= MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE) &&
-                (phyAddr < (MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
+            if ((localPhyAddr >= MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE) &&
+                (localPhyAddr < (MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
             {
-                phyAddr  -= MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE;
-                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS0_CORE1_TCMA_U_BASE;
+                localPhyAddr += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
             }
             /* TCMB - R5FSS0-1 */
-            else if ((phyAddr >= MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE) &&
-                     (phyAddr < (MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
+            else if ((localPhyAddr >= MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE) &&
+                     (localPhyAddr < (MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
             {
-                phyAddr  -= MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE;
-                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS0_CORE1_TCMB_U_BASE;
+                localPhyAddr += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
+        }
+        else
+        {
+            /* MISRA compliance - default case */
         }
     }
 
@@ -1492,40 +1544,52 @@ void *SOC_phyToVirt(uint64_t phyAddr)
         if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_0)
         {
             /* TCMA - R5FSS1-0 */
-            if ((phyAddr >= MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE) &&
-                (phyAddr < (MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
+            if ((localPhyAddr >= MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE) &&
+                (localPhyAddr < (MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE + virtToPhymap.tcmaSize)))
             {
-                phyAddr  -= MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE;
-                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS1_CORE0_TCMA_U_BASE;
+                localPhyAddr += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
             }
             /* TCMB - R5FSS1-0 */
-            else if ((phyAddr >= MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE) &&
-                     (phyAddr < (MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
+            else if ((localPhyAddr >= MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE) &&
+                     (localPhyAddr < (MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE + virtToPhymap.tcmbSize)))
             {
-                phyAddr  -= MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE;
-                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS1_CORE0_TCMB_U_BASE;
+                localPhyAddr += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
         }
         else if (virtToPhymap.cpuInfo.cpuID == MCAL_CSL_ARM_R5_CPU_ID_1)
         {
             /* TCMA - R5FSS1-1 */
-            if ((phyAddr >= MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE) &&
-                (phyAddr < (MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
+            if ((localPhyAddr >= MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE) &&
+                (localPhyAddr < (MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE + CSL_MSS_TCMA_RAM_SIZE)))
             {
-                phyAddr  -= MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE;
-                phyAddr  += CSL_MSS_TCMA_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS1_CORE1_TCMA_U_BASE;
+                localPhyAddr += CSL_MSS_TCMA_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
             }
             /* TCMB - R5FSS1-1 */
-            else if ((phyAddr >= MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE) &&
-                     (phyAddr < (MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
+            else if ((localPhyAddr >= MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE) &&
+                     (localPhyAddr < (MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE + CSL_MSS_TCMB_RAM_SIZE)))
             {
-                phyAddr  -= MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE;
-                phyAddr  += CSL_MSS_TCMB_RAM_BASE;
-                virtAddr  = (void *)((uintptr_t)phyAddr);
+                localPhyAddr -= MCAL_CSL_R5SS1_CORE1_TCMB_U_BASE;
+                localPhyAddr += CSL_MSS_TCMB_RAM_BASE;
+                virtAddr      = (void *)(uintptr_t)localPhyAddr;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
+        }
+        else
+        {
+            /* MISRA compliance - default case */
         }
     }
 #endif
@@ -1557,6 +1621,10 @@ void SOC_sendSoftwareInterrupt(uint16_t coreId)
 
         case MCAL_CSL_CORE_ID_R5FSS1_1:
             regs->R5SS1_CORE1_SW_INT = 1;
+            break;
+
+        default:
+            /* No action for invalid core ID */
             break;
     };
 }

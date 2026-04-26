@@ -295,11 +295,17 @@ sint32 IpcNotify_trigInterrupt(uint32 selfCoreId, uint32 remoteCoreId, uint32 ma
         pendingIntr = IpcNotify_mailboxGetPendingIntr(pReceiverMailboxConfig->readReqMailboxBaseAddr);
         pendingIntr = (pendingIntr >> (pReceiverMailboxConfig->intrBitPos)) &
                       (0x1U); /* Get the READ_REQ reg. value w.r.t Core bit pos. */
+        /* TI_COVERAGE_GAP_START Hardware mailbox timeout cannot be recreated in test environment.
+         * The timeout condition (counter >= IPC_NOTIFY_LOOP_COUNTER_MAX) requires the hardware
+         * mailbox to NOT clear the pending interrupt bit after triggering, which only occurs
+         * during hardware failure. In normal operation, the mailbox always acknowledges the
+         * interrupt within a few cycles. */
     } while ((pendingIntr != 1U) && (counter < IPC_NOTIFY_LOOP_COUNTER_MAX));
     if (counter >= IPC_NOTIFY_LOOP_COUNTER_MAX)
     {
         status = MCAL_SystemP_TIMEOUT;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return status;
 }

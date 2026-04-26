@@ -156,6 +156,8 @@ Bootloader_resMemSections *Bootloader_socGetSBLMem(void);
 
 uint32_t Bootloader_getX509CertLen(uint8_t *x509_cert_ptr);
 uint32_t Bootloader_getMsgLen(uint8_t *x509_cert_ptr, uint32_t x509_cert_size);
+uint8_t *Bootloader_findSeq(uint8_t *x509_cert_ptr, uint32_t x509_cert_size, uint8_t *seq_oid, uint8_t seq_len);
+int32_t  Bootloader_parseNoteSegment(Bootloader_Handle handle, uint32_t noteSegmentSz, uint32_t *segmentMapIdx);
 
 #ifdef __cplusplus
 }

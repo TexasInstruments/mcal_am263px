@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 24-Apr-2026.
+This is the release notes for MCAL AM26xx 26.00.00 done on 27-Apr-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -387,6 +387,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>FLS write shall perform a blankcheck before write when FLS_ERASE_VERIFICATION_ENABLED is STD_ON</td>
     </tr>
     <tr>
+      <td>MCAL-37036</td>
+      <td>Lin plugin doesn't have LIN_TIMEOUT_DURATION macro generation</td>
+      <td>LIN</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Required delay is now added in Lin_SendGoToSleepSignal and LIN_TIMEOUT_DURATION macro is enabled in plugin</td>
+    </tr>
+    <tr>
       <td>MCAL-35753</td>
       <td>Duplicate UUID present in MCU Bswmd arxml</td>
       <td>Mcu</td>
@@ -412,11 +420,11 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
     </tr>
     <tr>
       <td>MCAL-36588</td>
-      <td>Wdg_SetModeConfig does not give exception when CPU is in usermode</td>
+      <td>Wdg_SetModeConfig does not give DET error when CPU is in usermode</td>
       <td>WDG</td>
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Wdg_AssertPrivilegedMode function is added to trigger undef exception in user-mode</td>
+      <td>DetRuntime error shall be reported in user-mode</td>
     </tr>
     <tr>
       <td>MCAL-36832</td>

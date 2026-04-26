@@ -101,25 +101,21 @@ extern "C" {
 /**
  * @brief
  * type for reading HSMRt version.
- *
+ * MISRA-C:2012 Directive 4.6 Advisory Deviation: Union required for efficient version parsing
  */
-typedef union HsmVer_t_
+typedef struct HsmVer_t_
 {
-    uint64_t HsmrtVer /**< A 64 bit unique Version number */;
-    struct
-    {
-        uint8_t PatchVer; /** patch Version number refer HSMRT_PATCH_VER in TIFS Docs  */
-        uint8_t MinorVer; /** HSMRt minor version number refer HSMRT_MINOR_VER in TIFS Docs*/
-        uint8_t MajorVer; /** HSMRt major version number refer HSMRT_MAJOR_VER in TIFS Docs*/
-        uint8_t ApiVer;   /** HSMRt API version number refer HSMRT_APIS_VER in TIFS Docs*/
-        uint8_t SocType;  /** HSMRt Soc type ID refer HSMRT_SOC_TYPE in TIFS Docs*/
-        uint8_t BinType;  /** HSMRt Binary type ID refer HSMRT_BIN_TYPE in TIFS Docs*/
-        uint8_t HsmType;  /** HSM Architecture version */
-        uint8_t DevType;  /** HSMRt Device type ID  refer HSMRT_DEVICE_TYPE in TIFS Docs*/
-
-    } VerStruct;
+    uint8_t PatchVer; /** patch Version number refer HSMRT_PATCH_VER in TIFS Docs  */
+    uint8_t MinorVer; /** HSMRt minor version number refer HSMRT_MINOR_VER in TIFS Docs*/
+    uint8_t MajorVer; /** HSMRt major version number refer HSMRT_MAJOR_VER in TIFS Docs*/
+    uint8_t ApiVer;   /** HSMRt API version number refer HSMRT_APIS_VER in TIFS Docs*/
+    uint8_t SocType;  /** HSMRt Soc type ID refer HSMRT_SOC_TYPE in TIFS Docs*/
+    uint8_t BinType;  /** HSMRt Binary type ID refer HSMRT_BIN_TYPE in TIFS Docs*/
+    uint8_t HsmType;  /** HSM Architecture version */
+    uint8_t DevType;  /** HSMRt Device type ID  refer HSMRT_DEVICE_TYPE in TIFS Docs*/
 #if defined(_TMS320C6X)
 } __attribute__((packed)) HsmVer_t_;
+typedef HsmVer_t_         HsmVer_t;
 #else
 } __attribute__((packed)) HsmVer_t;
 #endif
@@ -912,6 +908,24 @@ int32_t HsmClient_readOTFARegions(HsmClient_t *HsmClient, OTFA_readRegion_t *OTF
  * 2. SystemP_FAILURE if NACK message is received or client id not registered.
  */
 int32_t HsmClient_secCfgValidate(HsmClient_t *HsmClient, SecCfgValidate_t *pSecCfgParams, uint32_t timeout);
+
+/**
+ * @brief
+ *  ISR handler for HSM client
+ *
+ * @param remoteCoreId   [IN] Remote core ID
+ * @param localClientId  [IN] Local client ID
+ * @param remoteClientId [IN] Remote client ID
+ * @param msgValue       [IN] Message value
+ * @param args           [IN] Arguments
+ */
+void HsmClient_isr(uint8_t remoteCoreId, uint8_t localClientId, uint8_t remoteClientId, uint8_t *msgValue, void *args);
+
+/**
+ * @brief
+ *  Deinitialize HSM client
+ */
+void HsmClient_deinit(void);
 
 /** @} */
 

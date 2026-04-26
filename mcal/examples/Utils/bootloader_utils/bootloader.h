@@ -258,6 +258,8 @@ typedef struct Bootloader_Config_s
 
 } Bootloader_Config;
 
+/* MISRA-C:2012 Directive 4.10 Deviation: bootloader_fls.h depends on Bootloader_Fxns type defined above */
+/* MISRA-C:2012 Rule 20.1 Advisory Deviation: Include must appear after type definitions it depends on */
 #include <bootloader_fls.h>
 
 /**

@@ -110,7 +110,7 @@ extern "C" {
 /** @brief Binary type flag for OTPKW */
 #define BIN_TYPE_OTPKW 0x33
 
-typedef union HsmVer_t_ HsmVer_t;
+typedef struct HsmVer_t_ HsmVer_t;
 
 /* ========================================================================== */
 /*                             Function Declaration                           */

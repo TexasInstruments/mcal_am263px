@@ -115,17 +115,17 @@ const SOC_RcmADPLLJConfig_t gADPLLJConfigTbl[] = {
     },
 };
 
-const SOC_RcmXTALInfo gXTALInfo[] = {
+const SOC_RcmXTALInfo gXTALInfo[1] = {
     [RCM_XTAL_FREQID_CLK_25MHZ] = {.Finp = SOC_RCM_FREQ_HZ2MHZ(25000000U), .div2flag = false},
 };
 
-const uint32_t gPLLFreqId2FOutMap[] = {
+const uint32_t gPLLFreqId2FOutMap[3] = {
     [RCM_PLL_FOUT_FREQID_CLK_2000MHZ] = 2000U,
     [RCM_PLL_FOUT_FREQID_CLK_1920MHZ] = 1920U,
     [RCM_PLL_FOUT_FREQID_CLK_800MHZ]  = 800U,
 };
 
-const SOC_RcmClkSrcInfo gPeripheralClkSrcInfoMap[] = {
+const SOC_RcmClkSrcInfo gPeripheralClkSrcInfoMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK] =
         {
             .pllId    = RCM_PLLID_XTALCLK,
@@ -212,7 +212,7 @@ const SOC_RcmClkSrcInfo gCLKOUTClkSrcInfoMap = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for MCAN
  */
-static uint16_t gMcanClkSrcValMap[] = {
+static uint16_t gMcanClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -234,7 +234,7 @@ static uint16_t gMcanClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for OSPI
  */
-static uint16_t gOspiClkSrcValMap[] = {
+static uint16_t gOspiClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -256,7 +256,7 @@ static uint16_t gOspiClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for RTI
  */
-static uint16_t gRtiClkSrcValMap[] = {
+static uint16_t gRtiClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -278,7 +278,7 @@ static uint16_t gRtiClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for WDT
  */
-static uint16_t gWdtClkSrcValMap[] = {
+static uint16_t gWdtClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -300,7 +300,7 @@ static uint16_t gWdtClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for McSPI
  */
-static uint16_t gMcSpiClkSrcValMap[] = {
+static uint16_t gMcSpiClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -322,7 +322,7 @@ static uint16_t gMcSpiClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for MMC
  */
-static uint16_t gMmcClkSrcValMap[] = {
+static uint16_t gMmcClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -344,7 +344,7 @@ static uint16_t gMmcClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for ICSSM UART
  */
-static uint16_t gIcssmUartClkSrcValMap[] = {
+static uint16_t gIcssmUartClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -366,7 +366,7 @@ static uint16_t gIcssmUartClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for CPTS
  */
-static uint16_t gCptsClkSrcValMap[] = {
+static uint16_t gCptsClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -411,7 +411,7 @@ static uint16_t gCptsClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for ControlSS PLL
  */
-static uint16_t gControlssPllClkSrcValMap[] = {
+static uint16_t gControlssPllClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = UNSUPPORTED_CLOCK_SOURCE,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -433,7 +433,7 @@ static uint16_t gControlssPllClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for I2C
  */
-static uint16_t gI2cClkSrcValMap[] = {
+static uint16_t gI2cClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -455,7 +455,7 @@ static uint16_t gI2cClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for LIN
  */
-static uint16_t gLinUartClkSrcValMap[] = {
+static uint16_t gLinUartClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = 0x222U,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -477,7 +477,7 @@ static uint16_t gLinUartClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for R5F and SYSCLK
  */
-static uint16_t gR5SysClkSrcValMap[] = {
+static uint16_t gR5SysClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = UNSUPPORTED_CLOCK_SOURCE,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = UNSUPPORTED_CLOCK_SOURCE,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -499,7 +499,7 @@ static uint16_t gR5SysClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for Trace
  */
-static uint16_t gTraceClkSrcValMap[] = {
+static uint16_t gTraceClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = UNSUPPORTED_CLOCK_SOURCE,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -521,7 +521,7 @@ static uint16_t gTraceClkSrcValMap[] = {
  * @details
  *  Mapping Array between Clock mode and Clock Mode Value for CLKOUT
  */
-static uint16_t gClkoutClkSrcValMap[] = {
+static uint16_t gClkoutClkSrcValMap[12] = {
     [SOC_RcmPeripheralClockSource_XTALCLK]                  = 0x666U,
     [SOC_RcmPeripheralClockSource_SYS_CLK]                  = UNSUPPORTED_CLOCK_SOURCE,
     [SOC_RcmPeripheralClockSource_WUCPUCLK]                 = 0x000U,
@@ -543,7 +543,7 @@ static uint16_t gClkoutClkSrcValMap[] = {
  * @details
  *  Mapping Array between Reset Cause Bit and Reset Cause
  */
-static SOC_RcmResetCause gResetBitToResetCause[12U] = {
+static const SOC_RcmResetCause gResetBitToResetCause[12U] = {
     SOC_RcmResetCause_POWER_ON_RESET,      SOC_RcmResetCause_WARM_RESET,          SOC_RcmResetCause_STC_RESET,
     SOC_RcmResetCause_MMR_CPU0_VIM0_RESET, SOC_RcmResetCause_MMR_CPU1_VIM1_RESET, SOC_RcmResetCause_MMR_CPU0_RESET,
     SOC_RcmResetCause_MMR_CPU1_RESET,      SOC_RcmResetCause_DBG_CPU0_RESET,      SOC_RcmResetCause_DBG_CPU1_RESET,
@@ -1121,6 +1121,7 @@ static void SOC_rcmGetClkSrcAndDivReg(SOC_RcmPeripheralId periphId, SOC_RcmPerip
             *clkSrcReg  = NULL_PTR;
             *clkdDivReg = NULL_PTR;
             *clkSrcVal  = 0x888U;
+            break;
         }
     }
     return;
@@ -1522,6 +1523,11 @@ static uint32_t SOC_rcmGetCoreHSDivOut(uint32_t Finp, bool div2flag, SOC_RcmPllH
             clkDiv = 0U;
             break;
         }
+        default:
+        {
+            clkDiv = 0U;
+            break;
+        }
     }
     return (FOut / (clkDiv + 1U));
 }
@@ -1665,7 +1671,7 @@ static uint32_t SOC_rcmGetCoreFout(uint32_t Finp, bool div2flag)
     ptrTopRCMRegs = SOC_rcmGetBaseAddressTOPRCM();
     /* read the Core PLL Lock status */
     pllSwitchFlag = SOC_rcmExtract8(ptrTopRCMRegs->PLL_CORE_STATUS, 10U, 10U);
-    if (pllSwitchFlag)
+    if (pllSwitchFlag != 0U)
     {
         uint32_t M, N, M2, FracM;
 
@@ -1702,7 +1708,7 @@ static uint32_t SOC_rcmGetPerFout(uint32_t Finp, bool div2flag)
     ptrTopRCMRegs = SOC_rcmGetBaseAddressTOPRCM();
     /* read the Core PLL Lock status */
     pllSwitchFlag = SOC_rcmExtract8(ptrTopRCMRegs->PLL_PER_STATUS, 10U, 10U);
-    if (pllSwitchFlag)
+    if (pllSwitchFlag != 0U)
     {
         uint32_t M, N, M2, FracM;
 
@@ -1757,6 +1763,11 @@ static uint32_t SOC_rcmGetPerHSDivOut(uint32_t Finp, bool div2flag, SOC_RcmPllHS
             break;
         }
         case RCM_PLLHSDIV_OUT_NONE:
+        {
+            clkDiv = 0U;
+            break;
+        }
+        default:
         {
             clkDiv = 0U;
             break;
@@ -1907,21 +1918,21 @@ void SOC_rcmCoreApllHSDivConfig(SOC_RcmPllFoutFreqId outFreqId, SOC_RcmPllHsDivO
 
     /* Derive Clocks */
     /* Set clock divider values from Core PLL*/
-    if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0)
+    if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0) != 0U)
     {
         hsDivOutRegVal = Fout / hsDivCfg->hsDivOutFreqHz[RCM_PLL_HSDIV_OUTPUT_IDX0];
         hsDivOutRegVal--;
         ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT0 =
             SOC_rcmInsert8(ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT0, 4U, 0U, hsDivOutRegVal);
     }
-    if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1)
+    if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1) != 0U)
     {
         hsDivOutRegVal = Fout / hsDivCfg->hsDivOutFreqHz[RCM_PLL_HSDIV_OUTPUT_IDX1];
         hsDivOutRegVal--;
         ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT1 =
             SOC_rcmInsert8(ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT1, 4U, 0U, hsDivOutRegVal);
     }
-    if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_2)
+    if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_2) != 0U)
     {
         hsDivOutRegVal = Fout / hsDivCfg->hsDivOutFreqHz[RCM_PLL_HSDIV_OUTPUT_IDX2];
         hsDivOutRegVal--;
@@ -1934,17 +1945,17 @@ void SOC_rcmCoreApllHSDivConfig(SOC_RcmPllFoutFreqId outFreqId, SOC_RcmPllHsDivO
     ptrTopRCMRegs->PLL_CORE_HSDIVIDER = SOC_rcmInsert8(ptrTopRCMRegs->PLL_CORE_HSDIVIDER, 2U, 2U, 0x0U);
 
     /* Ungate the clocks */
-    if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0)
+    if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0) != 0U)
     {
         ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT0 =
             SOC_rcmInsert8(ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT0, 8U, 8U, 0x1U);
     }
-    if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1)
+    if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1) != 0U)
     {
         ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT1 =
             SOC_rcmInsert8(ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT1, 8U, 8U, 0x1U);
     }
-    if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_2)
+    if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_2) != 0U)
     {
         ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT2 =
             SOC_rcmInsert8(ptrTopRCMRegs->PLL_CORE_HSDIVIDER_CLKOUT2, 8U, 8U, 0x1U);
@@ -1990,14 +2001,14 @@ void SOC_rcmPerApllConfig(SOC_RcmPllFoutFreqId outFreqId, SOC_RcmPllHsDivOutConf
 
         /* Derive Clocks */
         /* Set clock divider values from PER PLL*/
-        if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0)
+        if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0) != 0U)
         {
             hsDivOutRegVal = Fout / hsDivCfg->hsDivOutFreqHz[RCM_PLL_HSDIV_OUTPUT_IDX0];
             hsDivOutRegVal--;
             ptrTopRCMRegs->PLL_PER_HSDIVIDER_CLKOUT0 =
                 SOC_rcmInsert8(ptrTopRCMRegs->PLL_PER_HSDIVIDER_CLKOUT0, 4U, 0U, hsDivOutRegVal);
         }
-        if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1)
+        if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1) != 0U)
         {
             hsDivOutRegVal = Fout / hsDivCfg->hsDivOutFreqHz[RCM_PLL_HSDIV_OUTPUT_IDX1];
             hsDivOutRegVal--;
@@ -2012,12 +2023,12 @@ void SOC_rcmPerApllConfig(SOC_RcmPllFoutFreqId outFreqId, SOC_RcmPllHsDivOutConf
         ptrTopRCMRegs->PLL_PER_HSDIVIDER = SOC_rcmInsert8(ptrTopRCMRegs->PLL_PER_HSDIVIDER, 2U, 2U, 0x0U);
 
         /* Ungate the clocks */
-        if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0)
+        if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_0) != 0U)
         {
             ptrTopRCMRegs->PLL_PER_HSDIVIDER_CLKOUT0 =
                 SOC_rcmInsert8(ptrTopRCMRegs->PLL_PER_HSDIVIDER_CLKOUT0, 8U, 8U, 0x1U);
         }
-        if (hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1)
+        if ((hsDivCfg->hsdivOutEnMask & RCM_PLL_HSDIV_OUTPUT_ENABLE_1) != 0U)
         {
             ptrTopRCMRegs->PLL_PER_HSDIVIDER_CLKOUT1 =
                 SOC_rcmInsert8(ptrTopRCMRegs->PLL_PER_HSDIVIDER_CLKOUT1, 8U, 8U, 0x1U);
@@ -2269,6 +2280,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCAN0_CLK_GATE = CSL_MSS_RCM_MCAN0_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCAN1:
@@ -2280,6 +2295,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MCAN1_CLK_GATE = CSL_MSS_RCM_MCAN1_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2293,6 +2312,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCAN2_CLK_GATE = CSL_MSS_RCM_MCAN2_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCAN3:
@@ -2304,6 +2327,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MCAN3_CLK_GATE = CSL_MSS_RCM_MCAN3_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2318,6 +2345,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->OSPI_CLK_GATE = CSL_MSS_RCM_OSPI_CLK_GATE_OSPI_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_RTI0:
@@ -2329,6 +2360,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->RTI0_CLK_GATE = CSL_MSS_RCM_RTI0_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2342,6 +2377,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->RTI1_CLK_GATE = CSL_MSS_RCM_RTI1_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_RTI2:
@@ -2353,6 +2392,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->RTI2_CLK_GATE = CSL_MSS_RCM_RTI2_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2366,6 +2409,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->RTI3_CLK_GATE = CSL_MSS_RCM_RTI3_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_WDT0:
@@ -2377,6 +2424,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->WDT0_CLK_GATE = CSL_MSS_RCM_WDT0_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2390,6 +2441,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->WDT1_CLK_GATE = CSL_MSS_RCM_WDT1_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_WDT2:
@@ -2401,6 +2456,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->WDT2_CLK_GATE = CSL_MSS_RCM_WDT2_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2414,6 +2473,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->WDT3_CLK_GATE = CSL_MSS_RCM_WDT3_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCSPI0:
@@ -2425,6 +2488,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MCSPI0_CLK_GATE = CSL_MSS_RCM_MCSPI0_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2438,6 +2505,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCSPI1_CLK_GATE = CSL_MSS_RCM_MCSPI1_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCSPI2:
@@ -2449,6 +2520,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MCSPI2_CLK_GATE = CSL_MSS_RCM_MCSPI2_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2462,6 +2537,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCSPI3_CLK_GATE = CSL_MSS_RCM_MCSPI3_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCSPI4:
@@ -2473,6 +2552,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MCSPI4_CLK_GATE = CSL_MSS_RCM_MCSPI4_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2486,6 +2569,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCSPI5_CLK_GATE = CSL_MSS_RCM_MCSPI5_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCSPI6:
@@ -2497,6 +2584,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MCSPI6_CLK_GATE = CSL_MSS_RCM_MCSPI6_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2510,6 +2601,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCSPI7_CLK_GATE = CSL_MSS_RCM_MCSPI7_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MMC0:
@@ -2521,6 +2616,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MMC0_CLK_GATE = CSL_MSS_RCM_MMC0_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2534,6 +2633,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->ICSSM0_UART_CLK_GATE = CSL_MSS_RCM_ICSSM0_UART_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_CPTS:
@@ -2545,6 +2648,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->CPTS_CLK_GATE = CSL_MSS_RCM_CPTS_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2572,6 +2679,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->CONTROLSS_PLL_CLK_GATE = CSL_MSS_RCM_CONTROLSS_PLL_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_I2C:
@@ -2590,6 +2701,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
                 ptrMSSRCMRegs->I2C2_CLK_GATE = CSL_MSS_RCM_I2C2_CLK_GATE_GATED_MASK;
                 ptrMSSRCMRegs->I2C3_CLK_GATE = CSL_MSS_RCM_I2C3_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_LIN0_UART0:
@@ -2603,6 +2718,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->LIN0_CLK_GATE  = CSL_MSS_RCM_LIN0_CLK_GATE_GATED_MASK;
                 ptrMSSRCMRegs->UART0_CLK_GATE = CSL_MSS_RCM_UART0_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2618,6 +2737,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
                 ptrMSSRCMRegs->LIN1_CLK_GATE  = CSL_MSS_RCM_LIN1_CLK_GATE_GATED_MASK;
                 ptrMSSRCMRegs->UART1_CLK_GATE = CSL_MSS_RCM_UART1_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_LIN2_UART2:
@@ -2631,6 +2754,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->LIN2_CLK_GATE  = CSL_MSS_RCM_LIN2_CLK_GATE_GATED_MASK;
                 ptrMSSRCMRegs->UART2_CLK_GATE = CSL_MSS_RCM_UART2_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2646,6 +2773,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
                 ptrMSSRCMRegs->LIN3_CLK_GATE  = CSL_MSS_RCM_LIN3_CLK_GATE_GATED_MASK;
                 ptrMSSRCMRegs->UART3_CLK_GATE = CSL_MSS_RCM_UART3_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_LIN4_UART4:
@@ -2660,6 +2791,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
                 ptrMSSRCMRegs->LIN4_CLK_GATE  = CSL_MSS_RCM_LIN4_CLK_GATE_GATED_MASK;
                 ptrMSSRCMRegs->UART4_CLK_GATE = CSL_MSS_RCM_UART4_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_LIN5_UART5:
@@ -2671,6 +2806,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->UART5_CLK_GATE = CSL_MSS_RCM_UART5_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2684,6 +2823,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCAN4_CLK_GATE = CSL_MSS_RCM_MCAN4_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCAN5:
@@ -2695,6 +2838,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             else if (enable == 0U)
             {
                 ptrMSSRCMRegs->MCAN5_CLK_GATE = CSL_MSS_RCM_MCAN5_CLK_GATE_GATED_MASK;
+            }
+            else
+            {
+                /* MISRA compliance - default case */
             }
             break;
         }
@@ -2708,6 +2855,10 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCAN6_CLK_GATE = CSL_MSS_RCM_MCAN6_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         case SOC_RcmPeripheralId_MCAN7:
@@ -2720,11 +2871,16 @@ int32_t SOC_rcmEnablePeripheralClock(SOC_RcmPeripheralId periphId, uint32_t enab
             {
                 ptrMSSRCMRegs->MCAN7_CLK_GATE = CSL_MSS_RCM_MCAN7_CLK_GATE_GATED_MASK;
             }
+            else
+            {
+                /* MISRA compliance - default case */
+            }
             break;
         }
         default:
         {
             status = SystemP_FAILURE;
+            break;
         }
     }
 
@@ -2867,12 +3023,16 @@ void SOC_rcmStartMemInitTCMA(uint32_t cpuId)
     {
         /* Check MEMINIT STATUS is zero to confirm no inprogress MEM INIT */
         while (CSL_FEXT(mssCtrl->R5SS0_ATCM_MEM_INIT_STATUS, MSS_CTRL_R5SS0_ATCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         /* Clear MEMINIT DONE before initiating MEMINIT */
         CSL_FINS(mssCtrl->R5SS0_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_ATCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
         while (CSL_FEXT(mssCtrl->R5SS0_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_ATCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         CSL_FINS(mssCtrl->R5SS0_ATCM_MEM_INIT, MSS_CTRL_R5SS0_ATCM_MEM_INIT_MEM_INIT, 1U);
     }
@@ -2880,12 +3040,16 @@ void SOC_rcmStartMemInitTCMA(uint32_t cpuId)
     {
         /* Check MEMINIT STATUS is zero to confirm no inprogress MEM INIT */
         while (CSL_FEXT(mssCtrl->R5SS1_ATCM_MEM_INIT_STATUS, MSS_CTRL_R5SS1_ATCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         /* Clear MEMINIT DONE before initiating MEMINIT */
         CSL_FINS(mssCtrl->R5SS1_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_ATCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
         while (CSL_FEXT(mssCtrl->R5SS1_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_ATCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         CSL_FINS(mssCtrl->R5SS1_ATCM_MEM_INIT, MSS_CTRL_R5SS1_ATCM_MEM_INIT_MEM_INIT, 1U);
     }
@@ -2909,24 +3073,36 @@ void SOC_rcmWaitMemInitTCMA(uint32_t cpuId)
     if ((cpuId == MCAL_CSL_CORE_ID_R5FSS0_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS0_1))
     {
         while (CSL_FEXT(mssCtrl->R5SS0_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_ATCM_MEM_INIT_DONE_MEM_INIT_DONE) != 1U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         CSL_FINS(mssCtrl->R5SS0_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_ATCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
         /* Check MEMINIT STATUS is zero to confirm no inprogress MEM INIT */
         while (CSL_FEXT(mssCtrl->R5SS0_ATCM_MEM_INIT_STATUS, MSS_CTRL_R5SS0_ATCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         while (CSL_FEXT(mssCtrl->R5SS0_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_ATCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
     }
     else if ((cpuId == MCAL_CSL_CORE_ID_R5FSS1_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS1_1))
     {
         while (CSL_FEXT(mssCtrl->R5SS1_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_ATCM_MEM_INIT_DONE_MEM_INIT_DONE) != 1U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         CSL_FINS(mssCtrl->R5SS1_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_ATCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
         /* Check MEMINIT STATUS is zero to confirm no inprogress MEM INIT */
         while (CSL_FEXT(mssCtrl->R5SS1_ATCM_MEM_INIT_STATUS, MSS_CTRL_R5SS1_ATCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         while (CSL_FEXT(mssCtrl->R5SS1_ATCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_ATCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
     }
     else
     {
@@ -2947,24 +3123,32 @@ void SOC_rcmStartMemInitTCMB(uint32_t cpuId)
     if ((cpuId == MCAL_CSL_CORE_ID_R5FSS0_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS0_1))
     {
         while (CSL_FEXT(mssCtrl->R5SS0_BTCM_MEM_INIT_STATUS, MSS_CTRL_R5SS0_BTCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         /* Check MEMINIT STATUS is zero to confirm no in progress MEM INIT */
         CSL_FINS(mssCtrl->R5SS0_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_BTCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
         while (CSL_FEXT(mssCtrl->R5SS0_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_BTCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         CSL_FINS(mssCtrl->R5SS0_BTCM_MEM_INIT, MSS_CTRL_R5SS0_BTCM_MEM_INIT_MEM_INIT, 1U);
     }
     else if ((cpuId == MCAL_CSL_CORE_ID_R5FSS1_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS1_1))
     {
         while (CSL_FEXT(mssCtrl->R5SS1_BTCM_MEM_INIT_STATUS, MSS_CTRL_R5SS1_BTCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         /* Check MEMINIT STATUS is zero to confirm no in progress MEM INIT */
         CSL_FINS(mssCtrl->R5SS1_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_BTCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
         while (CSL_FEXT(mssCtrl->R5SS1_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_BTCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
 
         CSL_FINS(mssCtrl->R5SS1_BTCM_MEM_INIT, MSS_CTRL_R5SS1_BTCM_MEM_INIT_MEM_INIT, 1U);
     }
@@ -2988,28 +3172,40 @@ void SOC_rcmWaitMemInitTCMB(uint32_t cpuId)
     if ((cpuId == MCAL_CSL_CORE_ID_R5FSS0_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS0_1))
     {
         while (CSL_FEXT(mssCtrl->R5SS0_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_BTCM_MEM_INIT_DONE_MEM_INIT_DONE) != 1U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         /* Clear MEMINIT DONE before initiating MEMINIT */
         CSL_FINS(mssCtrl->R5SS0_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_BTCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
 
         /* Check MEMINIT STATUS is zero to confirm no inprogress MEM INIT */
         while (CSL_FEXT(mssCtrl->R5SS0_BTCM_MEM_INIT_STATUS, MSS_CTRL_R5SS0_BTCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         while (CSL_FEXT(mssCtrl->R5SS0_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS0_BTCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
     }
     else if ((cpuId == MCAL_CSL_CORE_ID_R5FSS1_0) || (cpuId == MCAL_CSL_CORE_ID_R5FSS1_1))
     {
         while (CSL_FEXT(mssCtrl->R5SS1_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_BTCM_MEM_INIT_DONE_MEM_INIT_DONE) != 1U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         /* Clear MEMINIT DONE before initiating MEMINIT */
         CSL_FINS(mssCtrl->R5SS1_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_BTCM_MEM_INIT_DONE_MEM_INIT_DONE, 1U);
 
         /* Check MEMINIT STATUS is zero to confirm no inprogress MEM INIT */
         while (CSL_FEXT(mssCtrl->R5SS1_BTCM_MEM_INIT_STATUS, MSS_CTRL_R5SS1_BTCM_MEM_INIT_STATUS_MEM_STATUS) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
         while (CSL_FEXT(mssCtrl->R5SS1_BTCM_MEM_INIT_DONE, MSS_CTRL_R5SS1_BTCM_MEM_INIT_DONE_MEM_INIT_DONE) != 0U)
-            ;
+        {
+            ; /* Wait for hardware status */
+        }
     }
     else
     {
@@ -3029,7 +3225,9 @@ void SOC_rcmMemInitMailboxMemory(void)
 
     CSL_FINS(mssCtrl->MAILBOXRAM_MEM_INIT, MSS_CTRL_MAILBOXRAM_MEM_INIT_MEM0_INIT, 1U);
     while (CSL_FEXT(mssCtrl->MAILBOXRAM_MEM_INIT_DONE, MSS_CTRL_MAILBOXRAM_MEM_INIT_DONE_MEM0_DONE) != 1U)
-        ;
+    {
+        ; /* Wait for hardware status */
+    }
 
     /* Lock MSS_CTRL registers */
     SOC_controlModuleLockMMR(SOC_DOMAIN_ID_MAIN, MSS_CTRL_PARTITION0);
@@ -3045,25 +3243,33 @@ void SOC_rcmMemInitL2Memory(void)
     /* MemInit for L2-Bank2 */
     CSL_FINS(mssCtrl->L2IOCRAM_MEM_INIT, MSS_CTRL_L2IOCRAM_MEM_INIT_PARTITION2, 1U);
     while (CSL_FEXT(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION2) != 1U)
-        ;
+    {
+        ; /* Wait for hardware status */
+    }
     CSL_FINS(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION2, 1U);
 
     /* MemInit for L2-Bank3 */
     CSL_FINS(mssCtrl->L2IOCRAM_MEM_INIT, MSS_CTRL_L2IOCRAM_MEM_INIT_PARTITION3, 1U);
     while (CSL_FEXT(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION3) != 1U)
-        ;
+    {
+        ; /* Wait for hardware status */
+    }
     CSL_FINS(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION3, 1U);
 
     /* MemInit for L2-Bank4 */
     CSL_FINS(mssCtrl->L2IOCRAM_MEM_INIT, MSS_CTRL_L2IOCRAM_MEM_INIT_PARTITION4, 1U);
     while (CSL_FEXT(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION4) != 1U)
-        ;
+    {
+        ; /* Wait for hardware status */
+    }
     CSL_FINS(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION4, 1U);
 
     /* MemInit for L2-Bank5 */
     CSL_FINS(mssCtrl->L2IOCRAM_MEM_INIT, MSS_CTRL_L2IOCRAM_MEM_INIT_PARTITION5, 1U);
     while (CSL_FEXT(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION5) != 1U)
-        ;
+    {
+        ; /* Wait for hardware status */
+    }
     CSL_FINS(mssCtrl->L2OCRAM_MEM_INIT_DONE, MSS_CTRL_L2OCRAM_MEM_INIT_DONE_PARTITION5, 1U);
 
     /* Lock MSS_CTRL registers */
@@ -3213,18 +3419,21 @@ void SOC_generateSwWarmReset(void)
 void SOC_configureWarmResetSource(uint32_t source)
 {
     CSL_top_rcmRegs *ptrTOPRCMRegs;
-    uint32_t         regVal;
 
     ptrTOPRCMRegs = SOC_rcmGetBaseAddressTOPRCM();
 
+    /* MISRA-C:2012 Required Rule - Validate pointer before dereferencing */
+    // if (ptrTOPRCMRegs != NULL_PTR)
+    // {
     /* Unlock CONTROLSS_CTRL registers */
     SOC_controlModuleUnlockMMR(SOC_DOMAIN_ID_MAIN, TOP_RCM_PARTITION0);
 
-    regVal = ptrTOPRCMRegs->WARM_RESET_CONFIG;
-    CSL_REG32_WR(regVal, source);
+    /* Write the warm reset source configuration */
+    CSL_REG32_WR(&(ptrTOPRCMRegs->WARM_RESET_CONFIG), source);
 
     /* Lock CONTROLSS_CTRL registers */
     SOC_controlModuleLockMMR(SOC_DOMAIN_ID_MAIN, TOP_RCM_PARTITION0);
+    // }
 }
 
 SOC_WarmResetCause SOC_getWarmResetCause(void)

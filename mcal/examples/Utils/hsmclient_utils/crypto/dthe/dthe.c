@@ -151,7 +151,6 @@ DTHE_Return_t DTHE_close(DTHE_Handle handle)
             // DebugP_assert(NULL_PTR != attrs);
             attrs->isOpen = FALSE;
             /* To disable module */
-            handle = NULL_PTR;
             status = DTHE_RETURN_SUCCESS;
         }
     }

@@ -62,6 +62,7 @@
  * Other Header Files
  *********************************************************************************************************************/
 #include "Lin_Priv.h"
+#include "sys_pmu.h"
 
 /*********************************************************************************************************************
  * Version Check (if required)
@@ -86,6 +87,21 @@
 
 /** \brief  Max data length of the LIN SDU */
 #define LIN_MAX_DATA_LENGTH (8U)
+
+/**
+ * \brief LIN MCAL library delay in counts
+ *
+ * Derivation of 500 cycles:
+ * - CPU clock: 400 MHz
+ * - Per-cycle time: 1 / 400MHz = 2.5 ns
+ * - 500 cycles × 2.5 ns = 1.25 µs per loop iteration
+ *
+ * This delay accounts for LIN sleep frame transmission (0xC0 command = 8 bits
+ * with total frame length of 132 bits including header, data, and checksum).
+ * The 1.25 µs inter-frame delay provides timing margin for LIN protocol state
+ * machine execution across all LIN baudrates for frame-to-frame transitions.
+ */
+#define LIN_MCAL_LIB_DELAY (500U)
 /*********************************************************************************************************************
  * Local Preprocessor #define Macros
  *********************************************************************************************************************/
@@ -747,6 +763,7 @@ FUNC(Std_ReturnType, LIN_CODE) Lin_WakeupProcess(uint8 linChannel, Lin_ChannelSt
  */
 FUNC(Std_ReturnType, LIN_CODE) Lin_SendGoToSleepSignal(uint32 base)
 {
+    uint32         regVal;
     Std_ReturnType return_value = E_NOT_OK;
 #ifdef LIN_TIMEOUT_DURATION
     VAR(uint32, AUTOMATIC) timeout_duration = LIN_TIMEOUT_DURATION;
@@ -782,20 +799,20 @@ FUNC(Std_ReturnType, LIN_CODE) Lin_SendGoToSleepSignal(uint32 base)
     while (timeout_duration > 0U)
     {
         regVal = HW_RD_REG32(base + CSL_LIN_SCIFLR);
-        if ((regVal & LIN_CSL_LIN_SCIFLR_TXEMPTY_MASK) == LIN_SCIFLR_TXEMPTY)
+        if ((regVal & CSL_LIN_SCIFLR_TXEMPTY_MASK) == CSL_LIN_SCIFLR_TXEMPTY_MASK)
         {
             return_value = E_OK;
             break;
         }
         else
         {
-            // McalLib_Delay(LIN_MCAL_LIB_DELAY);
+            Mcal_pmuDelay(LIN_MCAL_LIB_DELAY);
             timeout_duration--;
             /* Wait for TX Ready flag */
         }
     }
 #else
-    return_value = E_OK;
+    return_value = E_NOT_OK;
 #endif
 
     return return_value;

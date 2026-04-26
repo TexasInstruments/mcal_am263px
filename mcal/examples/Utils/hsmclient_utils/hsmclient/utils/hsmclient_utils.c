@@ -64,9 +64,9 @@
 /*                             Constant Declaration                           */
 /* ========================================================================== */
 
-static const char soc_type_arr[NUM_SOC_TYPE][8] = {
-    "AM263x", "AM263p", "AM273x", "AWR294x", "F29H85x", "AM261X",
-};
+/* MISRA-C:2012 Rule 9.3 - Array fully initialized with all elements explicitly defined */
+static const char soc_type_arr[NUM_SOC_TYPE][8] = {"AM263x",  "AM263p", "AM273x", "AWR294x",
+                                                   "F29H85x", "AM261X", "Unknown"};
 
 /* ========================================================================== */
 /*                             Static Function Declaration                    */
@@ -135,20 +135,22 @@ static uint8_t* lib_itoa(uint32_t value, uint8_t* str, uint32_t base)
         idx++;
     }
 
-    while (value > 0U)
+    uint32_t localValue = value;
+
+    while (localValue > 0U)
     {
-        val = value % base;
+        val = localValue % base;
         if (val < 10U)
         {
-            str[idx] = (uint8_t)(val + '0');
+            str[idx] = (uint8_t)(val + (uint32_t)'0');
         }
         else
         {
-            str[idx] = (uint8_t)((val - 10U) + 'A');
+            str[idx] = (uint8_t)((val - 10U) + (uint32_t)'A');
         }
 
         idx++;
-        value /= base;
+        localValue /= base;
     }
 
     str[idx] = (uint8_t)'\0';
@@ -159,11 +161,11 @@ static uint8_t* lib_itoa(uint32_t value, uint8_t* str, uint32_t base)
         idx--;
 
         /* Reverse the string as we converted from low digit to high */
-        for (i = 0U; i <= idx / 2U; i++)
+        for (i = 0U; i <= (idx / 2U); i++)
         {
-            val          = str[idx - i];
-            str[idx - i] = str[i];
-            str[i]       = (uint8_t)val;
+            val            = str[(idx - i)];
+            str[(idx - i)] = str[i];
+            str[i]         = (uint8_t)val;
         }
     }
 
@@ -173,7 +175,7 @@ static uint8_t* lib_itoa(uint32_t value, uint8_t* str, uint32_t base)
 static void HsmClient_getSocType(uint8_t soc_type, char* parsedVer)
 {
     strcpy(parsedVer, "\r\n[Soc Type]          = ");
-    strcat(parsedVer, soc_type_arr[soc_type - 1]);
+    strcat(parsedVer, soc_type_arr[soc_type - 1U]);
 }
 
 static void HsmClient_getDeviceType(uint8_t device_type, char* parsedVer)
@@ -232,11 +234,11 @@ int32_t HsmClient_parseVersion(HsmVer_t* tifsMcuVer, char* parsedVer)
 {
     int32_t status = SystemP_FAILURE;
 
-    HsmClient_getSocType(tifsMcuVer->VerStruct.SocType, parsedVer);
-    HsmClient_getDeviceType(tifsMcuVer->VerStruct.DevType, parsedVer);
-    HsmClient_getHSMType(tifsMcuVer->VerStruct.HsmType, parsedVer);
-    HsmClient_getBinType(tifsMcuVer->VerStruct.BinType, parsedVer);
-    if (tifsMcuVer->VerStruct.BinType == BIN_TYPE_OTPKW)
+    HsmClient_getSocType(tifsMcuVer->SocType, parsedVer);
+    HsmClient_getDeviceType(tifsMcuVer->DevType, parsedVer);
+    HsmClient_getHSMType(tifsMcuVer->HsmType, parsedVer);
+    HsmClient_getBinType(tifsMcuVer->BinType, parsedVer);
+    if (tifsMcuVer->BinType == (uint8_t)BIN_TYPE_OTPKW)
     {
         strcat(parsedVer, "\r\n[OTP-KW Version]    = ");
     }
@@ -244,11 +246,11 @@ int32_t HsmClient_parseVersion(HsmVer_t* tifsMcuVer, char* parsedVer)
     {
         strcat(parsedVer, "\r\n[TIFS-MCU Version]  = ");
     }
-    lib_itoa(tifsMcuVer->VerStruct.MajorVer, (uint8_t*)&parsedVer[strlen(parsedVer)], 10);
+    lib_itoa(tifsMcuVer->MajorVer, (uint8_t*)&parsedVer[strlen(parsedVer)], 10U);
     parsedVer[strlen(parsedVer)] = '.';
-    lib_itoa(tifsMcuVer->VerStruct.MinorVer, (uint8_t*)&parsedVer[strlen(parsedVer)], 10);
+    lib_itoa(tifsMcuVer->MinorVer, (uint8_t*)&parsedVer[strlen(parsedVer)], 10U);
     parsedVer[strlen(parsedVer)] = '.';
-    lib_itoa(tifsMcuVer->VerStruct.PatchVer, (uint8_t*)&parsedVer[strlen(parsedVer)], 10);
+    lib_itoa(tifsMcuVer->PatchVer, (uint8_t*)&parsedVer[strlen(parsedVer)], 10U);
     parsedVer[strlen(parsedVer)] = '\0';
     status                       = SystemP_SUCCESS;
 

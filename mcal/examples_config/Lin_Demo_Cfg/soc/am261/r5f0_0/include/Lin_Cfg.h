@@ -115,9 +115,11 @@ extern "C" {
 /* @} */
 
 
-/** \brief LIN ID used to transmit a header instead of a wakeup signal. 
- *   The hardware enters an undefined state when a standard wakeup signal is transmitted. 
- *   To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which 
+/** \brief LIN DEM Event Configuration: LIN Timeout Duration*/
+#define LIN_TIMEOUT_DURATION            (65535U)
+/** \brief LIN ID used to transmit a header instead of a wakeup signal.
+ *   The hardware enters an undefined state when a standard wakeup signal is transmitted.
+ *   To mitigate this limitation, an unused header frame is utilized as the wakeup signal, which
  *   conforms to the LIN 2.1 specification **/
 #define LIN_WAKEUP_ID                    (0x3FU)
 

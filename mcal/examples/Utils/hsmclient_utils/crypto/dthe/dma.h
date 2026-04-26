@@ -269,8 +269,13 @@ struct DMA_Config_s
     /**< Pointer to DMA driver functions */
 };
 
+/** Maximum number of DMA instances Referenced from BootApp.c*/
+#ifndef DMA_NUM_INSTANCES
+#define DMA_NUM_INSTANCES (1U)
+#endif
+
 /** Global dma configuration */
-extern DMA_Config gDmaConfig[];
+extern DMA_Config gDmaConfig[DMA_NUM_INSTANCES];
 /** Number of global dma configurations */
 extern uint32_t   gDmaConfigNum;
 

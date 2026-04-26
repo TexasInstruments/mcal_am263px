@@ -58,38 +58,41 @@
 // #include <drivers/hw_include/am263px/cslr_soc.h>
 
 /* Dedicated hsm mailbox memories address and size */
-#define HSM_MBOX_MEM      (0x44000000)
-#define HSM_MBOX_MEM_SIZE ((2U * 1024U) - 4)
+#define HSM_MBOX_MEM      (0x44000000U)
+#define HSM_MBOX_MEM_SIZE (((2U * 1024U) - 4U))
 
 /* SIPC_SwQueue structure should be stored in a particular shared memory section
  * In this section we define such Queues and store it at the bottom of our shared Mbox memory so that
  * Both R5 and M4 cores can access this data structure .
  * Each of the SwQueue instance will point to a corresponding Queue memory location in HSM_MBOX_MEM area
  */
+/* MISRA-C:2012 Rule 10.4, 12.1 - Ensure type consistency and explicit precedence */
 #define CORE0_TO_HSM0_0_SW_QUEUE \
-    (SIPC_SwQueue *)(HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE - MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 4)
+    (SIPC_SwQueue *)((HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 4U))
 #define HSM0_0_TO_CORE0_SW_QUEUE \
-    (SIPC_SwQueue *)(HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE - MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 3)
+    (SIPC_SwQueue *)((HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 3U))
 #define CORE1_TO_HSM0_0_SW_QUEUE \
-    (SIPC_SwQueue *)(HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE - MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 2)
+    (SIPC_SwQueue *)((HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 2U))
 #define HSM0_0_TO_CORE1_SW_QUEUE \
-    (SIPC_SwQueue *)(HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE - MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 1)
+    (SIPC_SwQueue *)((HSM_MBOX_MEM + HSM_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_STRUCT_SIZE * 1U))
 
 /* For AM263Px SBL runs on R50 core so one of the secure master has to be R50 by default
  * Default second secure master is R51 */
-uint8_t       gCore_Ids[MAX_SEC_CORES_WITH_HSM] = {CORE_ID_R5FSS0_0, CORE_ID_R5FSS0_1, CORE_ID_HSM0_0};
+uint8_t       gCore_Ids[(uint32_t)MAX_SEC_CORES_WITH_HSM] = {CORE_ID_R5FSS0_0, CORE_ID_R5FSS0_1, CORE_ID_HSM0_0};
 /* Pointer to the Queues R5 -> HSM indexed by Sec master core Id */
-SIPC_SwQueue *gSIPC_QueSecureHostToHsm[MAX_SEC_CORES_WITH_HSM - 1] = {CORE0_TO_HSM0_0_SW_QUEUE,
-                                                                      CORE1_TO_HSM0_0_SW_QUEUE};
+/* MISRA-C:2012 Rule 10.4, 12.1 - Explicit type casting and parentheses for precedence */
+SIPC_SwQueue *gSIPC_QueSecureHostToHsm[((uint32_t)MAX_SEC_CORES_WITH_HSM - (uint32_t)1U)] = {CORE0_TO_HSM0_0_SW_QUEUE,
+                                                                                             CORE1_TO_HSM0_0_SW_QUEUE};
 
 /* Pointer to the Queues HSM -> R5 indexed by Sec master core Id */
-SIPC_SwQueue *gSIPC_QueHsmToSecureHost[MAX_SEC_CORES_WITH_HSM - 1] = {HSM0_0_TO_CORE0_SW_QUEUE,
-                                                                      HSM0_0_TO_CORE1_SW_QUEUE};
+/* MISRA-C:2012 Rule 10.4, 12.1 - Explicit type casting and parentheses for precedence */
+SIPC_SwQueue *gSIPC_QueHsmToSecureHost[((uint32_t)MAX_SEC_CORES_WITH_HSM - (uint32_t)1U)] = {HSM0_0_TO_CORE0_SW_QUEUE,
+                                                                                             HSM0_0_TO_CORE1_SW_QUEUE};
 
 /* Mailbox queues will be dynamically created at runtime via sysconfig similarly as Rpmessage queues are made
  * Pre-defined mailbox config to send message from R5 to HSM
  * based on which core is configured as secure master the swQ data structure will be populated */
-SIPC_MailboxConfig gSIPC_SecureHostMboxConfig[CORE_ID_MAX - 1] = {
+SIPC_MailboxConfig gSIPC_SecureHostMboxConfig[(((uint32_t)CORE_ID_MAX) - 1U)] = {
     {
         /* with HSM0_0 */
         .writeDoneMailboxBaseAddr  = R5FSS0_0_MBOX_READ_DONE_ACK,
@@ -131,7 +134,7 @@ SIPC_MailboxConfig gSIPC_SecureHostMboxConfig[CORE_ID_MAX - 1] = {
 
 /* Pre-defined mailbox config to send message from R5 to HSM
  * based on which core is configured as secure master the swQ data structure will be populated */
-SIPC_MailboxConfig gSIPC_HsmMboxConfig[CORE_ID_MAX - 1] = {
+SIPC_MailboxConfig gSIPC_HsmMboxConfig[((uint32_t)CORE_ID_MAX - 1U)] = {
     {
         /* MBOX config with R5FSS0-0 */
         .writeDoneMailboxBaseAddr  = HSM0_0_MBOX_READ_DONE_ACK,
@@ -173,69 +176,70 @@ SIPC_MailboxConfig gSIPC_HsmMboxConfig[CORE_ID_MAX - 1] = {
 };
 
 /* Global data structure defining interrupt config for all the cores. */
-SIPC_InterruptConfig gSIPC_InterruptConfig[INTR_CFG_NUM_MAX][CORE_ID_MAX] =
+/* MISRA-C:2012 Rule 9.3 - Array is fully initialized with all elements explicitly defined */
+SIPC_InterruptConfig gSIPC_InterruptConfig[INTR_CFG_NUM_MAX][(uint32_t)CORE_ID_MAX] = {
     /* interrupt config number 0 */
-    {{/*interrupt config for R5FSS0_0 core */
-      {
-          .intNum   = R5FSS0_0_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-0 */
-          .eventId  = 0U,                          /* not used */
-          .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
-          .coreIdList =
-              {
-                  /* sec core ID's tied to this interrupt line */
-                  CORE_INDEX_HSM,
-              },
-          .clearIntOnInit = 1,
-      },
-      /* Interrupt config for R5FSS0_1 Core */
-      {
-          .intNum   = R5FSS0_1_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-1 */
-          .eventId  = 0U,                          /* not used */
-          .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
-          .coreIdList =
-              {
-                  /* sec core ID's tied to this interrupt line */
-                  CORE_INDEX_HSM,
-              },
-          .clearIntOnInit = 1,
-      },
-      /* Interrupt config for R5FSS1_0 Core */
-      {
-          .intNum   = R5FSS1_0_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-1 */
-          .eventId  = 0U,                          /* not used */
-          .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
-          .coreIdList =
-              {
-                  /* sec core ID's tied to this interrupt line */
-                  CORE_INDEX_HSM,
-              },
-          .clearIntOnInit = 1,
-      },
-      /* Interrupt config for R5FSS1_1 Core */
-      {
-          .intNum   = R5FSS1_1_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-1 */
-          .eventId  = 0U,                          /* not used */
-          .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
-          .coreIdList =
-              {
-                  /* sec core ID's tied to this interrupt line */
-                  CORE_INDEX_HSM,
-              },
-          .clearIntOnInit = 1,
-      },
-      /* Interrupt Config for HSM core */
-      {
-          .intNum   = HSM0_0_MBOX_READ_ACK_INTR, /* interrupt line on M4 */
-          .eventId  = 0U,                        /* not used */
-          .numCores = 2U, /* number of cores that send messages which tied to this interrupt line */
-          .coreIdList =
-              {
-                  /* sec core ID's tied to this interrupt line */
-                  CORE_INDEX_SEC_MASTER_0,
-                  CORE_INDEX_SEC_MASTER_1,
-              },
-          .clearIntOnInit = 1,
-      }}};
+    {/*interrupt config for R5FSS0_0 core */
+     {
+         .intNum   = R5FSS0_0_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-0 */
+         .eventId  = 0U,                          /* not used */
+         .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
+         .coreIdList =
+             {
+                 /* sec core ID's tied to this interrupt line */
+                 CORE_INDEX_HSM,
+             },
+         .clearIntOnInit = 1U,
+     },
+     /* Interrupt config for R5FSS0_1 Core */
+     {
+         .intNum   = R5FSS0_1_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-1 */
+         .eventId  = 0U,                          /* not used */
+         .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
+         .coreIdList =
+             {
+                 /* sec core ID's tied to this interrupt line */
+                 CORE_INDEX_HSM,
+             },
+         .clearIntOnInit = 1U,
+     },
+     /* Interrupt config for R5FSS1_0 Core */
+     {
+         .intNum   = R5FSS1_0_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-1 */
+         .eventId  = 0U,                          /* not used */
+         .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
+         .coreIdList =
+             {
+                 /* sec core ID's tied to this interrupt line */
+                 CORE_INDEX_HSM,
+             },
+         .clearIntOnInit = 1U,
+     },
+     /* Interrupt config for R5FSS1_1 Core */
+     {
+         .intNum   = R5FSS1_1_MBOX_READ_ACK_INTR, /* interrupt line on R5FSS0-1 */
+         .eventId  = 0U,                          /* not used */
+         .numCores = 1U, /* number of cores that send messages which tied to this interrupt line */
+         .coreIdList =
+             {
+                 /* sec core ID's tied to this interrupt line */
+                 CORE_INDEX_HSM,
+             },
+         .clearIntOnInit = 1U,
+     },
+     /* Interrupt Config for HSM core */
+     {
+         .intNum   = HSM0_0_MBOX_READ_ACK_INTR, /* interrupt line on M4 */
+         .eventId  = 0U,                        /* not used */
+         .numCores = 2U, /* number of cores that send messages which tied to this interrupt line */
+         .coreIdList =
+             {
+                 /* sec core ID's tied to this interrupt line */
+                 CORE_INDEX_SEC_MASTER_0,
+                 CORE_INDEX_SEC_MASTER_1,
+             },
+         .clearIntOnInit = 1U,
+     }}};
 
 int32_t SIPC_Register_Isr(HwiP_Params *pHwiParams, SIPC_InterruptConfig *pInterruptConfig, SIPC_Params *params,
                           HwiP_FxnCallback callback)

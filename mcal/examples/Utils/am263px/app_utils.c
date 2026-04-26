@@ -148,12 +148,12 @@ void AppUtils_SchM_Exit_EXCLUSIVE_AREA_0()
     asm(" CPSIE I");
 #endif
 }
-void *my_memset(void *s, int c, uint32 len)
+void *my_memset(void *s, uint8 c, uint32 len)
 {
     uint8 *p = (uint8 *)s;
     while (len--)
     {
-        *p++ = (unsigned char)c;
+        *p++ = c;
     }
     return s;
 }

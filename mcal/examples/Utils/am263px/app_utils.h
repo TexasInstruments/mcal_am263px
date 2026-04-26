@@ -166,7 +166,7 @@ void UARTPrintf(const char *pcString, ...);
 
 void Enable_Uart(void);
 
-void   sys_cSwiInt(unsigned char svcNum);
+void   sys_cSwiInt(uint8 svcNum);
 uint32 AppUtils_getCurTimeInMsec(void);
 uint32 AppUtils_getElapsedTimeInMsec(uint32 startTime);
 void   AppUtils_delay(uint32 msec);
@@ -185,7 +185,7 @@ Std_ReturnType AppUtilsPort_RefreshPortDrirection(void);
 void           AppUtils_logTestResult(uint32 testResult);
 Std_ReturnType AppUtilsPort_RefreshPortDrirection(void);
 void           my_memcpy(void *dest, void *src, uint32 n);
-void          *my_memset(void *s, int c, uint32 len);
+void          *my_memset(void *s, uint8 c, uint32 len);
 void           AppUtils_SchM_Enter_EXCLUSIVE_AREA_0(void);
 void           AppUtils_SchM_Exit_EXCLUSIVE_AREA_0(void);
 void           AppUtils_sectionInit(void);

@@ -1,3 +1,382 @@
+commit f65b78ce7c11e63e99935ec80bbcbecc240aceae
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sun Apr 26 22:13:50 2026 +0530
+
+    all: Mcu: Lint fix
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Mcu/V2/Mcu_Priv.c                             |  4 ++--
+ mcal_test/mcu_test/testInput/mcuTestCases.h        | 26 +++++++++++-----------
+ mcal_test/mcu_test/testLib/mcuTestMainTestCase.c   | 25 ++++++++++-----------
+ .../mcu_test/testLib/mcuTestNegativeTestCase.c     |  2 +-
+ 4 files changed, 28 insertions(+), 29 deletions(-)
+
+commit 0d42ddeac3eedf0e9d77800b8fa04d1c7bdee9c5
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sun Apr 26 22:10:52 2026 +0530
+
+    all: Ipc: trylooplocal fix
+    
+    Fixes: MCAL-37166
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Ipc/src/ipc_rpmsg_lld.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 25c4021792f5d0f523c2f4839f5f03e97368e81d
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Apr 24 23:26:17 2026 +0530
+
+    all: Ipc: RPMessage_getEndPtMsg() tryloop bugfix
+    
+    -If the RPMessage_getEndPtMsg() is called when No message has been sent by the sender core, then the execution gets stuck inside this function until new messages comes and tryloop is 1
+    
+    -tryloop is made 0 to avoid the wait
+    
+    Fixes: MCAL-37166
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Ipc/src/ipc_rpmsg_lld.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 766c3e1103bd306e416e5fb65b8e2d03f245d10a
+Author: Asha D <asha.d@ti.com>
+Date:   Fri Apr 24 00:32:04 2026 +0530
+
+    am263px:MCU: Added testcases for coverage
+    
+    Fixes: MCAL-35523
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Mcu/V2/Mcu_Priv.c                             | 252 +++++++++++++++++----
+ mcal/Mcu/V2/Mcu_Xbar.h                             |  21 ++
+ mcal/Mcu/V2/Mcu_XbarOutput.h                       |  16 ++
+ mcal/Mcu/V2/Mcu_XbarPwm.h                          |  11 +
+ mcal/Mcu/src/Mcu.c                                 |  10 +
+ mcal_test/mcu_test/build/makefile                  |   2 +-
+ mcal_test/mcu_test/testInput/mcuTestCases.h        |  84 ++++++-
+ mcal_test/mcu_test/testLib/mcuTest.h               |   2 +
+ mcal_test/mcu_test/testLib/mcuTestMainTestCase.c   |  94 +++++++-
+ .../mcu_test/testLib/mcuTestNegativeTestCase.c     |   2 +-
+ 10 files changed, 433 insertions(+), 61 deletions(-)
+
+commit 50fc0b040d1604ba5281346558b37160335caa25
+Author: Asha D <asha.d@ti.com>
+Date:   Sun Apr 26 13:27:52 2026 +0530
+
+    all:ICU: Fixing config 1 failure
+    
+            gIcuTestResult will be E_NOT_OK as we are checking for the DET
+            errors and should be compared for the same
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal_test/icu_test/am261/testLib/icuTestNegativeTestCase.c   | 2 +-
+ mcal_test/icu_test/am263/testLib/icuTestNegativeTestCase.c   | 2 +-
+ mcal_test/icu_test/am263px/testLib/icuTestNegativeTestCase.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit e5830ce2c220655a0e0ac71c330df8e0e5437c1b
+Author: Akash <a-verma3@ti.com>
+Date:   Sun Apr 26 11:11:33 2026 +0530
+
+    all: CAN: Coverage Improvement for CAN.
+    
+    - More coverage improvement by adding test case.
+    
+    Fixes: MCAL-35536
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Can/V0/Can_Mcan.c                             | 11 +++++
+ mcal_test/can_test/testInput/canTestCases.h        | 54 ++++++++++++++++++++++
+ mcal_test/can_test/testLib/canTestMainTestCase.c   |  4 ++
+ .../can_test/testLib/canTestNegativeTestCase.c     | 30 +++++++++++-
+ 4 files changed, 98 insertions(+), 1 deletion(-)
+
+commit a071f19e215f72c30628fb0111b6ee7b3155411a
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Sun Apr 26 09:13:05 2026 +0530
+
+    all: utils: misrac fixes
+    
+    Fixes: MCAL-36360
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal/examples/Utils/am261/app_utils.c   | 4 ++--
+ mcal/examples/Utils/am261/app_utils.h   | 4 ++--
+ mcal/examples/Utils/am263/app_utils.c   | 4 ++--
+ mcal/examples/Utils/am263/app_utils.h   | 4 ++--
+ mcal/examples/Utils/am263px/app_utils.c | 4 ++--
+ mcal/examples/Utils/am263px/app_utils.h | 4 ++--
+ 6 files changed, 12 insertions(+), 12 deletions(-)
+
+commit 6a3da3782505457584c320db19cb06c99da584fc
+Author: Akash <a-verma3@ti.com>
+Date:   Sun Apr 26 11:16:32 2026 +0530
+
+    all: Lint fixes only.
+    
+    Fixes: MCAL-37336
+    
+    Signed-off-by: Akash Verma
+
+ mcal/examples/Utils/bootloader_utils/am263px/soc.c |  59 ++---
+ .../Utils/bootloader_utils/am263px/soc_rcm.c       |  12 +-
+ mcal/examples/Utils/bootloader_utils/bootloader.c  |  65 +++---
+ .../Utils/bootloader_utils/bootloader_fls.c        |  20 +-
+ .../Utils/hsmclient_utils/crypto/dthe/dthe_aes.c   |  38 ++--
+ .../Utils/hsmclient_utils/hsmclient/hsmclient.c    | 238 ++++++++++-----------
+ .../Utils/hsmclient_utils/hsmclient/hsmclient.h    |   2 +-
+ .../hsmclient/utils/hsmclient_utils.c              |   9 +-
+ .../secure_ipc_notify/sipc_notify.h                |  22 +-
+ .../secure_ipc_notify/sipc_notify_mailbox.h        |  20 +-
+ .../secure_ipc_notify/sipc_notify_src.c            |   3 +-
+ .../soc/am263px/sipc_notify_cfg.c                  | 134 ++++++------
+ .../eth_test/testLib/ethTestCoverageTestCase.c     |   2 +-
+ .../eth_test/testLib/ethTestNegativeTestCase.c     |   3 +-
+ 14 files changed, 317 insertions(+), 310 deletions(-)
+
+commit 79f31e8596e198c5c2388348a8dd1837866cae3c
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Apr 13 17:30:20 2026 +0530
+
+    am263px: Can: Coverage for CAN module
+    
+    - Added test case to cover CAN coverage
+    
+    Fixes: MCAL-35536
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Can/V0/Can_Mcan.c                             |  27 -
+ mcal/Can/V0/Can_Priv.h                             |   3 +
+ mcal/Can/src/Can.c                                 |  18 +-
+ mcal_test/Utils/mock_common/mock_common.c          |  36 +
+ mcal_test/Utils/mock_common/mock_common.h          |  46 +-
+ mcal_test/can_test/Makefile                        | 198 ++---
+ mcal_test/can_test/build/makefile                  |  46 +-
+ mcal_test/can_test/build/makefile_lib              |  38 +-
+ mcal_test/can_test/testInput/canTestCases.h        | 116 +++
+ mcal_test/can_test/testInput/canTestConfig.h       |  28 +-
+ mcal_test/can_test/testLib/canTest.h               |  11 +-
+ mcal_test/can_test/testLib/canTestHwTypes.c        | 191 ++++
+ .../can_test/testLib/canTestNegativeTestCase.c     | 977 ++++++++++++++++++++-
+ mcal_test/can_test/testLib/canTestParser.c         |  35 +-
+ mcal_test/coverage/covReportGen.py                 | 906 +++++++++----------
+ mcal_test/makefile                                 |   2 +-
+ mcal_test/ut_config/Can/srcs.mk                    |   3 -
+ 17 files changed, 1993 insertions(+), 688 deletions(-)
+
+commit 99bb44e781dbe330ae2f953f5134d0b6381e5968
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sun Apr 26 01:29:57 2026 +0530
+
+    am261: Fls: UT fixes
+    
+    -Fixing RC1 testing found issues
+    
+    Fixes: MCAL-37335
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/fls_test/testLib/flsTestNegativeTestCase.c          | 11 +++++++++++
+ mcal_test/fsi_test/testLib/fsiTestMainTestCase.c              |  7 ++++++-
+ .../ut_config/Fls/soc/am261/r5f0_0/config_15/Fls_PBcfg.c      |  3 +--
+ .../FsiRx/soc/am261/r5f0_0/config_12/Cdd_FsiRx_PBcfg.c        |  2 +-
+ 4 files changed, 19 insertions(+), 4 deletions(-)
+
+commit d5052a5b0aae469ffce56051df559b3996ac1419
+Author: aswinsankar <a-puthenpurackaldileep@ti.com>
+Date:   Thu Apr 23 19:17:29 2026 +0530
+
+    am263px: Bootloader: Fix Bootloader and HSM Client MISRA C Issues
+
+ .../bootloader_utils/am263px/bootloader_soc.c      |   6 +-
+ mcal/examples/Utils/bootloader_utils/am263px/soc.c | 161 +++++---
+ .../Utils/bootloader_utils/am263px/soc_rcm.c       | 333 +++++++++++++---
+ .../Utils/bootloader_utils/am263px/soc_rcm.h       |  30 +-
+ mcal/examples/Utils/bootloader_utils/bootloader.c  | 297 +++++++++------
+ mcal/examples/Utils/bootloader_utils/bootloader.h  |   2 +
+ .../Utils/bootloader_utils/bootloader_elf.h        |  14 +-
+ .../Utils/bootloader_utils/bootloader_fls.c        |  32 +-
+ .../Utils/bootloader_utils/bootloader_priv.h       |   2 +
+ .../Utils/hsmclient_utils/crypto/dthe/dma.c        |   1 -
+ .../Utils/hsmclient_utils/crypto/dthe/dma.h        |   7 +-
+ .../Utils/hsmclient_utils/crypto/dthe/dthe.c       |   1 -
+ .../Utils/hsmclient_utils/crypto/dthe/dthe.h       |   7 +-
+ .../Utils/hsmclient_utils/crypto/dthe/dthe_aes.c   |  62 +--
+ .../Utils/hsmclient_utils/crypto/dthe/dthe_sha.c   |  32 +-
+ .../Utils/hsmclient_utils/hsmclient/hsmclient.c    | 420 +++++++++++++--------
+ .../Utils/hsmclient_utils/hsmclient/hsmclient.h    |  44 ++-
+ .../hsmclient/utils/hsmclient_utils.c              |  39 +-
+ .../hsmclient/utils/hsmclient_utils.h              |   2 +-
+ .../secure_ipc_notify/sipc_notify.h                |   8 +-
+ .../secure_ipc_notify/sipc_notify_mailbox.h        |  62 ++-
+ .../secure_ipc_notify/sipc_notify_src.c            | 192 +++++-----
+ .../secure_ipc_notify/sipc_notify_src.h            |   8 +-
+ .../soc/am263px/sipc_notify_cfg.c                  | 156 ++++----
+ .../soc/am263px/sipc_notify_cfg.h                  |   2 +-
+ 25 files changed, 1237 insertions(+), 683 deletions(-)
+
+commit 64149d7cba18e985df36a48bc6c651c04c3dd44f
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Apr 24 14:47:42 2026 +0530
+
+    all: CAN/Spi: Config and test case fail fix.
+    
+    - For can MCAL- 11677 and 11691 is failing, it was map to wrong controller ID
+    
+    - For Spi config 8 is failing, fixed.
+    
+    Fixes: MCAL-37264
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/can_test/testLib/canTestMainTestCase.c      | 4 ++--
+ mcal_test/spi_test/testLib/spiTestMcspiMiscTestCase.c | 3 +++
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+commit 51d974eed31dd5471e8855234f62402c1909c246
+Author: Khanh Tran <x1120448@ti.com>
+Date:   Fri Apr 24 17:27:59 2026 +0700
+
+    all: Eth: update coverage test
+    
+    - Add more test step for multi-queue feature
+    
+    Fixes: MCAL-30363
+    
+    Signed-off by: Tran Khanh <x1120448@ti.com>
+
+ mcal_test/eth_test/testLib/ethTestCoverageTestCase.c |  2 ++
+ mcal_test/eth_test/testLib/ethTestNegativeTestCase.c | 15 +++++++++++++++
+ 2 files changed, 17 insertions(+)
+
+commit e194157d3e1937eee71db53addc8cff1074d70a8
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Apr 20 11:22:30 2026 +0530
+
+    am263px: Lin: Fix Lin go to Sleep signal logic
+    
+    - Lin Go to sleep is not working, since it is in a macro which is not defined.
+    
+    Fixes: MCAL-37036
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Lin/Makefile                                  |   1 +
+ mcal/Lin/V0/Lin_Priv.c                             |  23 +-
+ mcal/Mcal_Lib/sys_pmu.c                            |  28 +++
+ mcal/Mcal_Lib/sys_pmu.h                            |  13 ++
+ .../soc/am261/r5f0_0/include/Lin_Cfg.h             |   8 +-
+ .../Lin_Demo_Cfg/soc/am261/tresos/config/Lin.xdm   |   2 +-
+ .../soc/am263/r5f0_0/include/Lin_Cfg.h             |   9 +-
+ .../Lin_Demo_Cfg/soc/am263/tresos/config/Lin.xdm   |   2 +-
+ .../soc/am263px/r5f0_0/include/Lin_Cfg.h           |  10 +-
+ .../Lin_Demo_Cfg/soc/am263px/tresos/config/Lin.xdm | 232 ++++++++++----------
+ .../plugins/AM261x/Lin_TI_AM261x/config/Lin.arxml  |   2 +-
+ .../plugins/AM261x/Lin_TI_AM261x/config/Lin.xdm    |   5 +-
+ .../Lin_TI_AM261x/generate/include/Lin_Cfg.h       |   8 +-
+ .../AM263Px/Lin_TI_AM263Px/config/Lin.arxml        |   2 +-
+ .../plugins/AM263Px/Lin_TI_AM263Px/config/Lin.xdm  |   5 +-
+ .../Lin_TI_AM263Px/generate/include/Lin_Cfg.h      |  10 +-
+ .../plugins/AM263x/Lin_TI_AM263x/config/Lin.arxml  |   2 +-
+ .../plugins/AM263x/Lin_TI_AM263x/config/Lin.xdm    |   5 +-
+ .../Lin_TI_AM263x/generate/include/Lin_Cfg.h       |   9 +-
+ .../am261/r5f0_0/config_1/tresos/config/Lin.xdm    |  48 ++---
+ .../config_1/tresos/output/include/Lin_Cfg.h       |   8 +-
+ .../am261/r5f0_0/config_91/tresos/config/Lin.xdm   |  48 ++---
+ .../config_91/tresos/output/include/Lin_Cfg.h      |   8 +-
+ .../am261/r5f0_0/config_92/tresos/config/Lin.xdm   |  48 ++---
+ .../config_92/tresos/output/include/Lin_Cfg.h      |   8 +-
+ .../am261/r5f0_0/config_93/tresos/config/Lin.xdm   |  48 ++---
+ .../config_93/tresos/output/include/Lin_Cfg.h      |   8 +-
+ .../am261/r5f0_0/config_94/tresos/config/Lin.xdm   |  48 ++---
+ .../config_94/tresos/output/include/Lin_Cfg.h      |   8 +-
+ .../am263/r5f0_0/config_1/tresos/config/Lin.xdm    |  48 ++---
+ .../config_1/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_2/tresos/config/Lin.xdm    |  48 ++---
+ .../config_2/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_3/tresos/config/Lin.xdm    |  48 ++---
+ .../config_3/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_4/tresos/config/Lin.xdm    |  48 ++---
+ .../config_4/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_5/tresos/config/Lin.xdm    |  48 ++---
+ .../config_5/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_6/tresos/config/Lin.xdm    |  48 ++---
+ .../config_6/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_7/tresos/config/Lin.xdm    |  48 ++---
+ .../config_7/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_8/tresos/config/Lin.xdm    |  48 ++---
+ .../config_8/tresos/output/include/Lin_Cfg.h       |   9 +-
+ .../am263/r5f0_0/config_91/tresos/config/Lin.xdm   |  48 ++---
+ .../config_91/tresos/output/include/Lin_Cfg.h      |   9 +-
+ .../am263/r5f0_0/config_92/tresos/config/Lin.xdm   |  48 ++---
+ .../config_92/tresos/output/include/Lin_Cfg.h      |   9 +-
+ .../am263/r5f0_0/config_93/tresos/config/Lin.xdm   |  48 ++---
+ .../config_93/tresos/output/include/Lin_Cfg.h      |   9 +-
+ .../am263/r5f0_0/config_94/tresos/config/Lin.xdm   |  48 ++---
+ .../config_94/tresos/output/include/Lin_Cfg.h      |   9 +-
+ .../am263px/r5f0_0/config_1/tresos/config/Lin.xdm  | 234 ++++++++++-----------
+ .../config_1/tresos/output/include/Lin_Cfg.h       |  10 +-
+ .../am263px/r5f0_0/config_91/tresos/config/Lin.xdm | 234 ++++++++++-----------
+ .../config_91/tresos/output/include/Lin_Cfg.h      |  10 +-
+ .../am263px/r5f0_0/config_92/tresos/config/Lin.xdm | 226 ++++++++++----------
+ .../config_92/tresos/output/include/Lin_Cfg.h      |  10 +-
+ .../am263px/r5f0_0/config_93/tresos/config/Lin.xdm | 230 ++++++++++----------
+ .../config_93/tresos/output/include/Lin_Cfg.h      |  10 +-
+ .../am263px/r5f0_0/config_94/tresos/config/Lin.xdm | 222 +++++++++----------
+ .../config_94/tresos/output/include/Lin_Cfg.h      |  10 +-
+ release_notes.md                                   |  12 +-
+ 64 files changed, 1350 insertions(+), 1198 deletions(-)
+
+commit e00d58c1e5dc206b8d374d69bc9a7973dace7772
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Feb 25 17:02:50 2026 +0530
+
+    am263px: Cdd_Ipc: Adding additional test cases and infra for IPC code coverage
+    
+    -Removed unused static function in mcal/Ipc/include/ipc_notify_v1_mailbox.h
+    
+    -Removed LinuxCore checks across the driver
+    
+    -Added additional test cases and script file changes to support mutiple
+    configs and multiple sdk binaries support
+    
+    Fixes: MCAL-35528
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Ipc/V0/ipc_notify_v1_cfg_lld.c                |    6 +
+ mcal/Ipc/src/ipc_rpmsg_lld.c                       |   27 +-
+ mcal/Ipc/src/ipc_rpmsg_lld_vring.c                 |   85 +-
+ mcal_misc/ccs_test_automation/load_run_ipc_test.js |  228 ++-
+ mcal_test/ipc_test/Makefile                        |   14 +
+ .../ipc_test/am261/testLib/ipcFaultInjection.c     | 1025 ++++++++++
+ .../ipc_test/am261/testLib/ipcFaultInjection.h     |  410 ++++
+ .../ipc_test/am263/testLib/ipcFaultInjection.c     | 1025 ++++++++++
+ .../ipc_test/am263/testLib/ipcFaultInjection.h     |  410 ++++
+ .../ipc_test/am263px/testInput/ipcTestCases.h      |  448 +++++
+ .../ipc_test/am263px/testInput/ipcTestConfig.h     |  116 ++
+ .../ipc_test/am263px/testLib/ipcFaultInjection.c   | 1025 ++++++++++
+ .../ipc_test/am263px/testLib/ipcFaultInjection.h   |  410 ++++
+ mcal_test/ipc_test/am263px/testLib/ipcTest.h       |   83 +-
+ mcal_test/ipc_test/am263px/testLib/ipcTestCommon.c |   15 +
+ .../ipc_test/am263px/testLib/ipcTestMainTestCase.c | 1948 +++++++++++++++++++-
+ .../am263px/testLib/ipcTestNegativeTestCase.c      |  672 ++++++-
+ mcal_test/ipc_test/build/makefile                  |   82 +-
+ mcal_test/makefile                                 |    2 +-
+ .../Ipc/soc/am263px/r5f0_0/config_7/Cdd_Ipc_Cfg.h  |  219 +++
+ 20 files changed, 8068 insertions(+), 182 deletions(-)
+
 commit b4a0384358267b9740bdbd9a69819ae87fb3238e
 Author: Asha D <asha.d@ti.com>
 Date:   Thu Apr 23 01:43:48 2026 +0530

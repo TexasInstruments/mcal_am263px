@@ -263,6 +263,19 @@ void Mcal_pmuDelayUsec(volatile uint32 delayUsec, uint32 sysclkHz);
  */
 void Mcal_pmuDelayMsec(volatile uint32 delayMsec, uint32 sysclkHz);
 
+/** @fn void Mcal_Delay(uint32 count)
+ *   @brief PMU cycle-counter busy-wait delay.
+ *
+ *   Spins until exactly \p count CPU clock cycles have elapsed, measured
+ *   via the PMU cycle counter (same mechanism as Mcal_pmuDelayUsec).
+ *   Because count is in raw CPU cycles no loop-overhead constant is needed
+ *   in the caller's timing formula.
+ *   Requires PMU to be initialised via Mcal_pmuInit() before first use.
+ *
+ *   @param[in] count  Number of CPU clock cycles to busy-wait.
+ */
+void Mcal_pmuDelay(uint32 count);
+
 #ifdef __cplusplus
 }
 #endif /*extern "C" */

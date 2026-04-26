@@ -155,7 +155,7 @@ DTHE_SHA_Return_t DTHE_SHA_open(DTHE_Handle handle)
         config             = (DTHE_Config*)handle;
         attrs              = config->attrs;
         ptrShaRegs         = (CSL_EIP57T_SHARegs*)attrs->shaBaseAddr;
-        gDTHESHAInProgress = FALSE;
+        gDTHESHAInProgress = (bool)FALSE;
 
         /* Disable all interrupts */
         DTHE_SHA_setInterruptStatus(ptrShaRegs, 0U);
@@ -181,7 +181,7 @@ DTHE_SHA_Return_t DTHE_SHA_close(DTHE_Handle handle)
         config     = (DTHE_Config*)handle;
         attrs      = config->attrs;
         ptrShaRegs = (CSL_EIP57T_SHARegs*)attrs->shaBaseAddr;
-        if (gDTHESHAInProgress == FALSE)
+        if (gDTHESHAInProgress == (bool)FALSE)
         {
             /* Disable all interrupts */
             DTHE_SHA_setInterruptStatus(ptrShaRegs, 0U);
@@ -234,7 +234,7 @@ DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaPa
     }
     /* Sanity Checking: Any data buffer except the last block should be aligned as per
      * the SHA Size. For SHA256 this is 64byte while for SHA512 this should be 128byte */
-    if ((status == DTHE_SHA_RETURN_SUCCESS) && (isLastBlock == FALSE))
+    if ((status == DTHE_SHA_RETURN_SUCCESS) && (isLastBlock == (int32_t)FALSE))
     {
         if (ptrShaParams->algoType == DTHE_SHA_ALGO_SHA256)
         {
@@ -267,7 +267,7 @@ DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaPa
         /********************************************************************
          * Is this the first block which is being passed to the SHA Engine?
          ********************************************************************/
-        if (gDTHESHAInProgress == FALSE)
+        if (gDTHESHAInProgress == (bool)FALSE)
         {
             /* Yes: For the first block we will use the algorithm constants */
             useAlgoConstants = 1U;
@@ -279,7 +279,7 @@ DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaPa
         }
 
         /* Is this the last block? */
-        if (isLastBlock == TRUE)
+        if (isLastBlock == (int32_t)TRUE)
         {
             /* Yes: Close the Hash */
             closeHash = 1U;
@@ -334,12 +334,12 @@ DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaPa
         dataLenWords = dataLenBytes / 4U;
 
         /* Compute the number of blocks: */
-        numBlocks = dataLenWords / blockSize;
+        numBlocks = (dataLenWords / blockSize);
 
         /* Compute the number of partial words which need to be handled seperately */
-        numPartialWords = dataLenWords % blockSize;
+        numPartialWords = (dataLenWords % blockSize);
 
-        if ((config->dmaEnable == DMA_ENABLE) && numBlocks > 0U)
+        if ((config->dmaEnable == DMA_ENABLE) && (numBlocks > 0U))
         {
             dmaHandle = DMA_open(0);
 
@@ -422,15 +422,15 @@ DTHE_SHA_Return_t DTHE_SHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrShaPa
             gDTHESHAdigestCount = DTHE_SHA512_getDigestCount(ptrShaRegs);
         }
 
-        if (isLastBlock == TRUE)
+        if (isLastBlock == (int32_t)TRUE)
         {
             /* SHA Computation is in progress: */
-            gDTHESHAInProgress = FALSE;
+            gDTHESHAInProgress = (bool)FALSE;
         }
         else
         {
             /* SHA Computation is in progress: */
-            gDTHESHAInProgress = TRUE;
+            gDTHESHAInProgress = (bool)TRUE;
         }
     }
     return (status);
@@ -531,15 +531,15 @@ DTHE_SHA_Return_t DTHE_HMACSHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrS
             }
 
             /* Determine the data length in words: */
-            dataLenWords = dataLenBytes / 4U;
+            dataLenWords = (dataLenBytes / 4U);
 
             /* Compute the number of blocks: */
-            numBlocks = dataLenWords / blockSize;
+            numBlocks = (dataLenWords / blockSize);
 
             /* Compute the number of partial words which need to be handled seperately */
-            numPartialWords = dataLenWords % blockSize;
+            numPartialWords = (dataLenWords % blockSize);
 
-            if ((config->dmaEnable == DMA_ENABLE) && numBlocks > 0U)
+            if ((config->dmaEnable == DMA_ENABLE) && (numBlocks > 0U))
             {
                 dmaHandle = DMA_open(0);
 
@@ -623,7 +623,7 @@ DTHE_SHA_Return_t DTHE_HMACSHA_compute(DTHE_Handle handle, DTHE_SHA_Params* ptrS
             }
 
             /* SHA Computation is in progress: */
-            gDTHESHAInProgress = FALSE;
+            gDTHESHAInProgress = (bool)FALSE;
         }
     }
     return (status);

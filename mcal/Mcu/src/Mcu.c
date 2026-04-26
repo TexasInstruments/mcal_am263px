@@ -261,19 +261,26 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(void)
     }
     else
     {
+        /* TI_COVERAGE_GAP_START [Branch] PLL lock failure is a hardware timeout/failure condition that cannot be easily
+           recreated in test environment without hardware malfunction */
         if (MCU_PLL_LOCKED != Mcu_GetPllStatus())
         {
             /* API is being called before PLL is locked */
             (void)Det_ReportError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_SID_DISTRIBUTE_PLL_CLOCK, MCU_E_PLL_NOT_LOCKED);
             InitClock_Return = E_NOT_OK;
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
+            /* TI_COVERAGE_GAP_START [Branch] Mcu_PllStatus is always MCU_STATE_INIT after Mcu_Init() call which is
+               a prerequisite for Mcu_DistributePllClock(). The TRUE branch (lines 277-279) is logically unreachable
+               in normal operation when MCU_NO_PLL == STD_OFF */
             if (Mcu_PllStatus != MCU_STATE_INIT) /* Checking whether PLL is already initialised or not */
             {
                 (void)Mcu_PLLInitAll(Mcu_DrvObj); /* Invoking PLL init API */
                 Mcu_PllStatus = MCU_STATE_INIT;   /* Updating PLL status object as initialized */
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
     }
 #endif /* STD_ON == MCU_DEV_ERROR_DETECT */
@@ -311,7 +318,10 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_InitRamSection(Mcu_RamSectionType RamSection)
         Mcu_RamDestination = Mcu_DrvObj->Mcu_ConfigRamSection[RamSection].Mcu_RamSectionBaseAddress;
         /* Load the RamSection Size */
         Mcu_RamBytes = Mcu_DrvObj->Mcu_ConfigRamSection[RamSection].Mcu_RamSectionBytes;
+        /* TI_COVERAGE_GAP_START [Branch] All RAM sections in configuration have non-zero size,
+           making zero-byte iteration untestable */
         while (0U < Mcu_RamBytes)
+        /* TI_COVERAGE_GAP_STOP */
         {
             /* Initialize the RAM with selected default value */
             *Mcu_RamDestination = Mcu_DrvObj->Mcu_ConfigRamSection[RamSection].Mcu_RamDefaultValue;

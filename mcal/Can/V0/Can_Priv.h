@@ -286,6 +286,9 @@ Std_ReturnType Can_mcanTestLoopBackModeDisable(uint32 baseAddr, uint8 mode);
 void Can_mcanCancelledMessagesReset(Can_ControllerObjType *canController, const Can_MailboxObjType *canMailbox,
                                     Can_MailboxObjTxType *canTxMessageObj);
 
+void Can_mcanSetUpTxMailbox(Can_FdMsgRAMConfigObjType *msgRamConfig, const Can_MailboxType *mailboxCfg,
+                            Can_ControllerObjType *canController, Can_MailboxObjTxType *canTxMessageObj, uint32 htrh);
+
 uint32 Can_writeGetFreeMsgObj(Can_ControllerObjType *canController, Can_MailboxObjTxType *canTxMessageObj);
 
 Std_ReturnType Can_mcanWriteTxMailbox(const Can_MailboxType *mailboxCfg, Can_ControllerObjType *controllerObj,

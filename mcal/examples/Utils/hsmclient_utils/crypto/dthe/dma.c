@@ -352,7 +352,6 @@ DMA_Return_t DMA_close(DMA_Handle handle)
 
     if (handle != NULL_PTR)
     {
-        handle    = NULL_PTR;
         dmaStatus = DMA_RETURN_SUCCESS;
     }
     return (dmaStatus);
