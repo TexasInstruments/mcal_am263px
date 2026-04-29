@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 27-Apr-2026.
+This is the release notes for MCAL AM26xx 26.00.00.05 done on 29-Apr-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -228,6 +228,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
+      <td>MCAL-36593</td>
+      <td>Change the EXPECTED ENTRY to IMPLEMENTED ENTRY in BSWMD.arxml files</td>
+      <td>All</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>All EXPECTED ENTRY chaged to IMPLEMENTED ENTRY</td>
+    </tr>
+    <tr>
       <td>MCAL-35742</td>
       <td>In the arxml files the OPTIONS tag is expected before the VENDOR tag</td>
       <td>All</td>
@@ -242,6 +250,22 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>All main function execution, the context is now updated to TASK instead of UNSPECIFIED</td>
+    </tr>
+    <tr>
+      <td>MCAL-35577</td>
+      <td>FSS support in MCAL</td>
+      <td>Bootloader</td>
+      <td>Major</td>
+      <td>AM263Px</td>
+      <td>FSS support is now added</td>
+    </tr>
+    <tr>
+      <td>MCAL-35496</td>
+      <td>HSM_Service error in Boot APP</td>
+      <td>Bootloader</td>
+      <td>Major</td>
+      <td>AM263Px</td>
+      <td></td>
     </tr>
     <tr>
       <td>MCAL-35744</td>
@@ -293,6 +317,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Exclusive area is now added in Bswmd.arxml file</td>
     </tr>
     <tr>
+      <td>MCAL-36833</td>
+      <td>Incorrect CMP and duty calculations in ~100% duty cases</td>
+      <td>CDD PWM</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Fixed round-to-nearest for UP_DOWN mode so near-100% duty no longer truncates to 0.</td>
+    </tr>
+    <tr>
       <td>MCAL-35748</td>
       <td>Missing quotation mark in BSW-MODULE-ENTRY UUID attribute</td>
       <td>CDD PWM</td>
@@ -337,6 +369,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
           Instead these were added in EthTrcv interface header files resulting in conflicts with standard AUTOSAR definitions.<br>
           These datatypes are not moved to the stubs.
       </td>
+    </tr>
+    <tr>
+      <td>MCAL-34950</td>
+      <td>FLS: Fls_Erase processed only in polling</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Non-blocking mode for fls erase implemented</td>
     </tr>
     <tr>
       <td>MCAL-35865</td>
@@ -387,6 +427,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>FLS write shall perform a blankcheck before write when FLS_ERASE_VERIFICATION_ENABLED is STD_ON</td>
     </tr>
     <tr>
+      <td>MCAL-35415</td>
+      <td>ICU QUAL implementation missing in MCAL</td>
+      <td>ICU</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>QUAL support is now added</td>
+    </tr>
+    <tr>
       <td>MCAL-37036</td>
       <td>Lin plugin doesn't have LIN_TIMEOUT_DURATION macro generation</td>
       <td>LIN</td>
@@ -409,6 +457,22 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263Px</td>
       <td>All TRC Port_PinInitialMode and Port_PinMode is now updated to match TRC</td>
+    </tr>
+    <tr>
+      <td>MCAL-35628</td>
+      <td>Add literal to Port_AM263x.arxml</td>
+      <td>Port</td>
+      <td>Minor</td>
+      <td>AM263x</td>
+      <td>Updated NULL in Non EB xdm and corresponding arxml</td>
+    </tr>
+    <tr>
+      <td>MCAL-37350</td>
+      <td>AM261x Xbar uses AM263x macros for Xbar interrupt ID</td>
+      <td>Port</td>
+      <td>Minor</td>
+      <td>AM261x</td>
+      <td>All INTRXBAR_OUT macros for am261 are now corrected</td>
     </tr>
     <tr>
       <td>MCAL-36790</td>
@@ -468,38 +532,6 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
-      <td>MCAL-27007</td>
-      <td>UART read/write with DMA enabled is not working</td>
-      <td>CDD UART</td>
-      <td>Minor</td>
-      <td>AM261x</td>
-      <td>Customer to use UART without DMA</td>
-    </tr>
-    <tr>
-      <td>MCAL-34950</td>
-      <td>Fls_Erase processed only in polling</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Fls_Erase can still be used. This will be further analysed</td>
-    </tr>
-    <tr>
-      <td>MCAL-35392</td>
-      <td>Boot and HSM Utils: Fix MISRAC and HIS Metric Violation</td>
-      <td>Bootloader, Hsmclient</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>This will be fixed in future MCAL release</td>
-    </tr>
-    <tr>
-      <td>MCAL-25969</td>
-      <td>Connecting Multiple Interrupt sources to single Interrupt Xbar line is not supported</td>
-      <td>MCU</td>
-      <td>Minor(Limitation)</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Use single interrupt source to a XBar</td>
-    </tr>
-    <tr>
       <td>MCAL-13434</td>
       <td>DMA mode is not working with Cache Writeback enabled</td>
       <td>SPI</td>
@@ -544,6 +576,15 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>ADC</td>
       <td>AM263Px</td>
       <td>NA</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <td>Multiple Interrupt sources to single Interrupt Xbar line not supported</td>
+      <td>Connecting Multiple Interrupt sources to single Interrupt Xbar line is not supported</td>
+      <td>MCU</td>
+      <td>Minor(Limitation)</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Use single interrupt source to a XBar</td>
       <td>NA</td>
     </tr>
   </tbody>

@@ -144,7 +144,7 @@ void Port_InterruptConfig(void)
 
     /** GPIO Bank1 Interrupt Configuration **/
     intCfg.priority = VIM_PRIORITY_12;
-    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_14;
+    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_22;
 #if defined(PORT_GPIO_BANK_1_ACTIVE)
     intCfg.handler = Port_Bnk1Isr;
 #endif /** #if defined(PORT_GPIO_BANK_1_ACTIVE) **/
@@ -152,7 +152,7 @@ void Port_InterruptConfig(void)
 
     /** GPIO Bank2 Interrupt Configuration **/
     intCfg.priority = VIM_PRIORITY_12;
-    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_15;
+    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_23;
 #if defined(PORT_GPIO_BANK_2_ACTIVE)
     intCfg.handler = Port_Bnk2Isr;
 #endif /** #if defined(PORT_GPIO_BANK_2_ACTIVE) **/
@@ -160,7 +160,7 @@ void Port_InterruptConfig(void)
 
     /** GPIO Ch1 Interrupt Configuration **/
     intCfg.priority = VIM_PRIORITY_12;
-    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_16;
+    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_24;
 #if defined(PORT_GPIO_CH_1_ACTIVE)
     intCfg.handler = Port_Ch1Isr;
 #endif /** #if defined(PORT_GPIO_CH_1_ACTIVE) **/
@@ -168,7 +168,7 @@ void Port_InterruptConfig(void)
 
     /** GPIO Ch2 Interrupt Configuration **/
     intCfg.priority = VIM_PRIORITY_12;
-    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_17;
+    intCfg.intNum   = MCAL_CSLR_R5FSS0_CORE0_INTR_GPIO_INTRXBAR_OUT_25;
 #if defined(PORT_GPIO_CH_2_ACTIVE)
     intCfg.handler = Port_Ch2Isr;
 #endif /** #if defined(PORT_GPIO_CH_2_ACTIVE) **/

@@ -103,7 +103,7 @@ typedef volatile struct
     uint32 SET_FAL_TRIG;
     uint32 CLR_FAL_TRIG;
     uint32 INTSTAT;
-    
+
 } gpioPORT_t;
 
 /*---------------------------------------------------------------------------------------
@@ -119,154 +119,154 @@ typedef volatile struct
 typedef volatile struct
 {
      uint32    OSPI0_CSN0;
-     uint32    OSPI0_CSN1; 	  
-     uint32    OSPI0_CLK;          	  
-     uint32    OSPI0_D0;          	      
-     uint32    OSPI0_D1;         	      
-     uint32    OSPI0_D2;         	      
-     uint32    OSPI0_D3;         	      
-     uint32    MCAN0_RX;  	              
-     uint32    MCAN0_TX;  	              
-     uint32    MCAN1_RX;  	              
-     uint32	   MCAN1_TX;  	              
-     uint32	   SPI0_CS0;     	          
-     uint32	   SPI0_CLK;   	          
-     uint32	   SPI0_D0;  	              
-     uint32	   SPI0_D1; 	              
-     uint32	   SPI1_CS0;      	          
-     uint32	   SPI1_CLK; 	              
-     uint32	   SPI1_D0; 	              
-     uint32	   SPI1_D1; 	              
-     uint32	   LIN1_RXD; 	              
-     uint32	   LIN1_TXD; 	              
-     uint32	   LIN2_RXD; 	              
-     uint32	   LIN2_TXD; 	              
-     uint32	   I2C1_SCL; 	              
-     uint32	   I2C1_SDA ; 	              
-     uint32	   UART0_RTSN;               
-     uint32	   UART0_CTSN;              
-     uint32	   UART0_RXD;             
-     uint32	   UART0_TXD;                
-     uint32	   RGMII1_RXC;               
-     uint32	   RGMII1_RX_CTL;            
-     uint32	   RGMII1_RD0;              
-     uint32	   RGMII1_RD1;              
-     uint32	   RGMII1_RD2;              
-     uint32	   RGMII1_RD3;              
-     uint32	   RGMII1_TXC;              
-     uint32	   RGMII1_TX;             
-     uint32	   RGMII1_TD0;              
-     uint32	   RGMII1_TD1;              
-     uint32	   RGMII1_TD2;             
-     uint32	   RGMII1_TD3;             
-     uint32	   MDIO_MDCMDIO;             
-     uint32	   MDIO_MDC;             
-     uint32	   EPWM0_A;             
-     uint32	   EPWM0_B;              
-     uint32	   EPWM1_A;                 
-     uint32	   EPWM1_B;                 
-     uint32	   EPWM2_A;                 
-     uint32	   EPWM2_B;                 
-     uint32	   EPWM3_A;                 
-     uint32	   EPWM3_B;                 
-     uint32	   EPWM4_A;                 
-     uint32	   EPWM4_B;       	      
-     uint32	   EPWM5_A;      	          
-     uint32	   EPWM5_B;           	  
-     uint32	   EPWM6_A;       	      
-     uint32	   EPWM6_B;       	      
-     uint32	   EPWM7_A;        	      
-     uint32	   EPWM7_B;                 
-     uint32	   EPWM8_A;                 
-     uint32	   EPWM8_B;                 
-     uint32	   EPWM9_A;                 
-     uint32	   EPWM9_B; 
+     uint32    OSPI0_CSN1;
+     uint32    OSPI0_CLK;
+     uint32    OSPI0_D0;
+     uint32    OSPI0_D1;
+     uint32    OSPI0_D2;
+     uint32    OSPI0_D3;
+     uint32    MCAN0_RX;
+     uint32    MCAN0_TX;
+     uint32    MCAN1_RX;
+     uint32	   MCAN1_TX;
+     uint32	   SPI0_CS0;
+     uint32	   SPI0_CLK;
+     uint32	   SPI0_D0;
+     uint32	   SPI0_D1;
+     uint32	   SPI1_CS0;
+     uint32	   SPI1_CLK;
+     uint32	   SPI1_D0;
+     uint32	   SPI1_D1;
+     uint32	   LIN1_RXD;
+     uint32	   LIN1_TXD;
+     uint32	   LIN2_RXD;
+     uint32	   LIN2_TXD;
+     uint32	   I2C1_SCL;
+     uint32	   I2C1_SDA ;
+     uint32	   UART0_RTSN;
+     uint32	   UART0_CTSN;
+     uint32	   UART0_RXD;
+     uint32	   UART0_TXD;
+     uint32	   RGMII1_RXC;
+     uint32	   RGMII1_RX_CTL;
+     uint32	   RGMII1_RD0;
+     uint32	   RGMII1_RD1;
+     uint32	   RGMII1_RD2;
+     uint32	   RGMII1_RD3;
+     uint32	   RGMII1_TXC;
+     uint32	   RGMII1_TX;
+     uint32	   RGMII1_TD0;
+     uint32	   RGMII1_TD1;
+     uint32	   RGMII1_TD2;
+     uint32	   RGMII1_TD3;
+     uint32	   MDIO_MDCMDIO;
+     uint32	   MDIO_MDC;
+     uint32	   EPWM0_A;
+     uint32	   EPWM0_B;
+     uint32	   EPWM1_A;
+     uint32	   EPWM1_B;
+     uint32	   EPWM2_A;
+     uint32	   EPWM2_B;
+     uint32	   EPWM3_A;
+     uint32	   EPWM3_B;
+     uint32	   EPWM4_A;
+     uint32	   EPWM4_B;
+     uint32	   EPWM5_A;
+     uint32	   EPWM5_B;
+     uint32	   EPWM6_A;
+     uint32	   EPWM6_B;
+     uint32	   EPWM7_A;
+     uint32	   EPWM7_B;
+     uint32	   EPWM8_A;
+     uint32	   EPWM8_B;
+     uint32	   EPWM9_A;
+     uint32	   EPWM9_B;
      uint32    GPIO63;
-     uint32    GPIO64; 
-     uint32    GPIO65; 
-     uint32    GPIO66;  
-     uint32    PR1_PRU0_GPIO0; 
+     uint32    GPIO64;
+     uint32    GPIO65;
+     uint32    GPIO66;
+     uint32    PR1_PRU0_GPIO0;
      uint32    PR1_PRU0_GPIO1;
      uint32    PR1_PRU0_GPIO2;
      uint32    PR1_PRU0_GPIO9;
      uint32    PR1_PRU1_GPIO0;
      uint32    PR1_PRU1_GPIO1;
      uint32    PR1_PRU1_GPIO2;
-     uint32    PR1_PRU1_GPIO9;              	              
-     uint32	   UART1_RXD;               
-     uint32	   UART1_TXD;               
-     uint32	   MMC_CLK;                
-     uint32	   MMC_CMD;                
-     uint32	   MMC_DAT0;                
-     uint32	   MMC_DAT1;                
-     uint32	   MMC_DAT2;                
-     uint32	   MMC_DAT3;                
-     uint32	   MMC_SDWP;                
-     uint32	   MMC_SDCD;               
-     uint32	   PR0_MDIO_MDIO;          
-     uint32	   PR0_MDIO_MDC;          
-     uint32	   PR0_PRU0_GPIO5;          
-     uint32	   PR0_PRU0_GPIO9;          
-     uint32	   PR0_PRU0_GPIO10;          
-     uint32	   PR0_PRU0_GPIO8;          
-     uint32	   PR0_PRU0_GPIO6;          
-     uint32	   PR0_PRU0_GPIO4;          
-     uint32	   PR0_PRU0_GPIO0;          
-     uint32	   PR0_PRU0_GPIO1;          
-     uint32	   PR0_PRU0_GPIO2;          
-     uint32	   PR0_PRU0_GPIO3;          
-     uint32	   PR0_PRU0_GPIO16;          
-     uint32	   PR0_PRU0_GPIO15;          
-     uint32	   PR0_PRU0_GPIO11;          
-     uint32	   PR0_PRU0_GPIO12;          
-     uint32	   PR0_PRU0_GPIO13;          
-     uint32	   PR0_PRU0_GPIO14;        
-     uint32	   PR0_PRU1_GPIO5;	          
-     uint32	   PR0_PRU1_GPIO9;	          
-     uint32	   PR0_PRU1_GPIO10;    	      
-     uint32	   PR0_PRU1_GPIO8;           
-     uint32	   PR0_PRU1_GPIO6;       	  
-     uint32	   PR0_PRU1_GPIO4;         	  
-     uint32	   PR0_PRU1_GPIO0;             
-     uint32	   PR0_PRU1_GPIO1;        	  
-     uint32	   PR0_PRU1_GPIO2;     	      
-     uint32	   PR0_PRU1_GPIO3; 	          
-     uint32	   PR0_PRU1_GPIO16;      	      
-     uint32	   PR0_PRU1_GPIO15;             
-     uint32	   PR0_PRU1_GPIO11;       	  
-     uint32	   PR0_PRU1_GPIO12;      	      
-     uint32	   PR0_PRU1_GPIO13;  	          
-     uint32	   PR0_PRU1_GPIO14;    	      
-     uint32	   PR0_PRU1_GPIO19;         	  
-     uint32	   PR0_PRU1_GPIO18;             
-     uint32	   EXT_REFCLK0;             
-     uint32	   SDFM0_CLK0;  	          
-     uint32	   SDFM0_D0;  	          
-     uint32	   SDFM0_CLK1;     	      
-     uint32	   SDFM0_D1;             
-     uint32	   SDFM0_CLK2;             
-     uint32	   SDFM0_D2;             
-     uint32	   SDFM0_CLK3;             
-     uint32	   SDFM0_D3;             
-     uint32	   EQEP0_A;            
-     uint32	   EQEP0_B;        	  
-     uint32	   EQEP0_STROBE;        	  
-     uint32	   EQEP0_INDEX;             
-     uint32	   I2C0_SDA;             
-     uint32	   I2C0_SCL;             
+     uint32    PR1_PRU1_GPIO9;
+     uint32	   UART1_RXD;
+     uint32	   UART1_TXD;
+     uint32	   MMC_CLK;
+     uint32	   MMC_CMD;
+     uint32	   MMC_DAT0;
+     uint32	   MMC_DAT1;
+     uint32	   MMC_DAT2;
+     uint32	   MMC_DAT3;
+     uint32	   MMC_SDWP;
+     uint32	   MMC_SDCD;
+     uint32	   PR0_MDIO_MDIO;
+     uint32	   PR0_MDIO_MDC;
+     uint32	   PR0_PRU0_GPIO5;
+     uint32	   PR0_PRU0_GPIO9;
+     uint32	   PR0_PRU0_GPIO10;
+     uint32	   PR0_PRU0_GPIO8;
+     uint32	   PR0_PRU0_GPIO6;
+     uint32	   PR0_PRU0_GPIO4;
+     uint32	   PR0_PRU0_GPIO0;
+     uint32	   PR0_PRU0_GPIO1;
+     uint32	   PR0_PRU0_GPIO2;
+     uint32	   PR0_PRU0_GPIO3;
+     uint32	   PR0_PRU0_GPIO16;
+     uint32	   PR0_PRU0_GPIO15;
+     uint32	   PR0_PRU0_GPIO11;
+     uint32	   PR0_PRU0_GPIO12;
+     uint32	   PR0_PRU0_GPIO13;
+     uint32	   PR0_PRU0_GPIO14;
+     uint32	   PR0_PRU1_GPIO5;
+     uint32	   PR0_PRU1_GPIO9;
+     uint32	   PR0_PRU1_GPIO10;
+     uint32	   PR0_PRU1_GPIO8;
+     uint32	   PR0_PRU1_GPIO6;
+     uint32	   PR0_PRU1_GPIO4;
+     uint32	   PR0_PRU1_GPIO0;
+     uint32	   PR0_PRU1_GPIO1;
+     uint32	   PR0_PRU1_GPIO2;
+     uint32	   PR0_PRU1_GPIO3;
+     uint32	   PR0_PRU1_GPIO16;
+     uint32	   PR0_PRU1_GPIO15;
+     uint32	   PR0_PRU1_GPIO11;
+     uint32	   PR0_PRU1_GPIO12;
+     uint32	   PR0_PRU1_GPIO13;
+     uint32	   PR0_PRU1_GPIO14;
+     uint32	   PR0_PRU1_GPIO19;
+     uint32	   PR0_PRU1_GPIO18;
+     uint32	   EXT_REFCLK0;
+     uint32	   SDFM0_CLK0;
+     uint32	   SDFM0_D0;
+     uint32	   SDFM0_CLK1;
+     uint32	   SDFM0_D1;
+     uint32	   SDFM0_CLK2;
+     uint32	   SDFM0_D2;
+     uint32	   SDFM0_CLK3;
+     uint32	   SDFM0_D3;
+     uint32	   EQEP0_A;
+     uint32	   EQEP0_B;
+     uint32	   EQEP0_STROBE;
+     uint32	   EQEP0_INDEX;
+     uint32	   I2C0_SDA;
+     uint32	   I2C0_SCL;
      uint32    GPIO136;
-     uint32    GPIO137;            
+     uint32    GPIO137;
      uint32	   CLKOUT0;
      uint32    USB0_DP;
-     uint32    USB0_DM;             
-     uint32	   WARMRSTN;             
-     uint32	   SAFETY_ERRORN;           
-     uint32	   TDI;           
-     uint32	   TDO;      	  
-     uint32	   TMS; 	      
-     uint32	   TCK;        	  
-     uint32	   OSPI0_CLKLB;  
-     uint32	   OSPI1_CLKLB;	      
+     uint32    USB0_DM;
+     uint32	   WARMRSTN;
+     uint32	   SAFETY_ERRORN;
+     uint32	   TDI;
+     uint32	   TDO;
+     uint32	   TMS;
+     uint32	   TCK;
+     uint32	   OSPI0_CLKLB;
+     uint32	   OSPI1_CLKLB;
      uint32    QUAL_GRP_0_CFG_REG;
      uint32    QUAL_GRP_1_CFG_REG;
      uint32    QUAL_GRP_2_CFG_REG;
@@ -486,11 +486,11 @@ typedef volatile struct {
     volatile uint32 RCM_LIN1_UART1_CLK_SRC_SEL;
     volatile uint32 RCM_LIN2_UART2_CLK_SRC_SEL;
     volatile uint32 RCM_LIN3_UART3_CLK_SRC_SEL;
-	volatile uint32 RCM_LIN4_UART4_CLK_SRC_SEL;		
-	volatile uint32 RCM_LIN5_UART5_CLK_SRC_SEL;		
+	volatile uint32 RCM_LIN4_UART4_CLK_SRC_SEL;
+	volatile uint32 RCM_LIN5_UART5_CLK_SRC_SEL;
 	volatile uint8  RCM_Resv_740[104];
-	volatile uint32 RCM_ICSSM0_CORE_CLK_SRC_SEL;		
-	volatile uint32 RCM_ICSSM1_CORE_CLK_SRC_SEL;		
+	volatile uint32 RCM_ICSSM0_CORE_CLK_SRC_SEL;
+	volatile uint32 RCM_ICSSM1_CORE_CLK_SRC_SEL;
 	volatile uint8  RCM_Resv_768[20];
     volatile uint32 RCM_MCAN0_CLK_DIV_VAL;
     volatile uint32 RCM_MCAN1_CLK_DIV_VAL;
@@ -530,11 +530,11 @@ typedef volatile struct {
     volatile uint32 RCM_LIN1_UART1_CLK_DIV_VAL;
     volatile uint32 RCM_LIN2_UART2_CLK_DIV_VAL;
     volatile uint32 RCM_LIN3_UART3_CLK_DIV_VAL;
-	volatile uint32 RCM_LIN4_UART4_CLK_DIV_VAL;		
-	volatile uint32 RCM_LIN5_UART5_CLK_DIV_VAL;		
+	volatile uint32 RCM_LIN4_UART4_CLK_DIV_VAL;
+	volatile uint32 RCM_LIN5_UART5_CLK_DIV_VAL;
 	volatile uint8  RCM_Resv_1252[104];
-	volatile uint32 RCM_ICSSM0_CORE_CLK_DIV_VAL;		
-	volatile uint32 RCM_ICSSM1_CORE_CLK_DIV_VAL;		
+	volatile uint32 RCM_ICSSM0_CORE_CLK_DIV_VAL;
+	volatile uint32 RCM_ICSSM1_CORE_CLK_DIV_VAL;
 	volatile uint8  RCM_Resv_1280[20];
     volatile uint32 RCM_MCAN0_CLK_GATE;
     volatile uint32 RCM_MCAN1_CLK_GATE;
@@ -580,11 +580,11 @@ typedef volatile struct {
     volatile uint32 RCM_UART1_CLK_GATE;
     volatile uint32 RCM_UART2_CLK_GATE;
     volatile uint32 RCM_UART3_CLK_GATE;
-	volatile uint32 RCM_UART4_CLK_GATE;		
-	volatile uint32 RCM_UART5_CLK_GATE;		
+	volatile uint32 RCM_UART4_CLK_GATE;
+	volatile uint32 RCM_UART5_CLK_GATE;
 	volatile uint8  RCM_Resv_1764[40];
-	volatile uint32 RCM_MSS_ICSSM0_CORE_CLK_GATE;		
-	volatile uint32 RCM_MSS_ICSSM1_CORE_CLK_GATE;		
+	volatile uint32 RCM_MSS_ICSSM0_CORE_CLK_GATE;
+	volatile uint32 RCM_MSS_ICSSM1_CORE_CLK_GATE;
 	volatile uint8  RCM_Resv_1792[20];
     volatile uint32 RCM_R5SS0_CORE0_GATE;
     volatile uint8  RCM_Resv_1808[12];
@@ -598,7 +598,7 @@ typedef volatile struct {
 	volatile uint8  RCM_Resv_1856[8];
     volatile uint32 RCM_USB_CLK_GATE;
     volatile uint32 RCM_USB_WKUP_CLK_GATE;
-	volatile uint32 RCM_USB_XTAL_CLK_GATE;		
+	volatile uint32 RCM_USB_XTAL_CLK_GATE;
 	volatile uint8  RCM_Resv_2048[180];
     volatile uint32 RCM_HSM_RTIA_CLK_SRC_SEL;
     volatile uint32 RCM_HSM_WDT_CLK_SRC_SEL;
@@ -659,11 +659,11 @@ typedef volatile struct {
     volatile uint32 RCM_LIN1_UART1_CLK_STATUS;
     volatile uint32 RCM_LIN2_UART2_CLK_STATUS;
     volatile uint32 RCM_LIN3_UART3_CLK_STATUS;
-	volatile uint32 RCM_LIN4_UART4_CLK_STATUS;		
-	volatile uint32 RCM_LIN5_UART5_CLK_STATUS;		
+	volatile uint32 RCM_LIN4_UART4_CLK_STATUS;
+	volatile uint32 RCM_LIN5_UART5_CLK_STATUS;
 	volatile uint8  RCM_Resv_2788[104];
-	volatile uint32 RCM_ICSSM0_CORE_CLK_STATUS;		
-	volatile uint32 RCM_ICSSM1_CORE_CLK_STATUS;		
+	volatile uint32 RCM_ICSSM0_CORE_CLK_STATUS;
+	volatile uint32 RCM_ICSSM1_CORE_CLK_STATUS;
 	volatile uint8  RCM_Resv_2816[20];
     volatile uint32 RCM_MCAN0_RST_CTRL;
     volatile uint32 RCM_MCAN1_RST_CTRL;
@@ -685,7 +685,7 @@ typedef volatile struct {
     volatile uint32 RCM_ICSSM1_RST_CTRL;
     volatile uint8  RCM_Resv_3056[8];
     volatile uint32 RCM_OSPI0_RST_CTRL;
-	volatile uint32 RCM_OSPI1_RST_CTRL;		
+	volatile uint32 RCM_OSPI1_RST_CTRL;
 	volatile uint8  RCM_Resv_3072[8];
     volatile uint32 RCM_GPMC_RST_CTRL;
     volatile uint32 RCM_MMC0_RST_CTRL;
@@ -705,8 +705,8 @@ typedef volatile struct {
     volatile uint32 RCM_UART1_RST_CTRL;
     volatile uint32 RCM_UART2_RST_CTRL;
     volatile uint32 RCM_UART3_RST_CTRL;
-	volatile uint32 RCM_UART4_RST_CTRL;		
-	volatile uint32 RCM_UART5_RST_CTRL;		
+	volatile uint32 RCM_UART4_RST_CTRL;
+	volatile uint32 RCM_UART5_RST_CTRL;
 	volatile uint8  RCM_Resv_3328[68];
     volatile uint32 RCM_R5SS0_POR_RST_CTRL;
     volatile uint8  RCM_Resv_3344[12];
@@ -1422,8 +1422,8 @@ typedef volatile struct
     volatile uint32 FIQVEC;
     volatile uint32 ACTIRQ;
     volatile uint32 ACTFIQ;
-	volatile uint32 IRQPRIMSK;		
-	volatile uint32 FIQPRIMSK;		
+	volatile uint32 IRQPRIMSK;
+	volatile uint32 FIQPRIMSK;
     volatile uint32 DEDVEC;
     volatile uint8  Resv_1024[972];
     volatile uint32 RAW;
@@ -2775,7 +2775,7 @@ typedef struct {
 
 /* PIN N2, OSPI0_CLK functionality */
 #define PINN2_GPIO2                            0X008U
-      
+
 
 /* PIN N1, OSPI0_D0 functionality */
 #define PINN1_GPIO3                            0X0CU
@@ -2945,10 +2945,10 @@ typedef struct {
 #define PINE1_GPIO55                           0XDCU
 
 /* PIN F3, PADAO functionality */
-#define PINF3_GPIO56                           0XE0U             
+#define PINF3_GPIO56                           0XE0U
 
 /* PIN F4, PADAP functionality */
-#define PINF4_GPIO57                           0XE4U      
+#define PINF4_GPIO57                           0XE4U
 
 /* PIN F1, PADAQ functionality */
 #define PINF1_GPIO58                           0XE8U
@@ -2978,7 +2978,7 @@ typedef struct {
 #define PINJ1_GPIO66                                  0X108U
 
 /* PIN K2,PR1_PRU0_GPIO0 functionality */
-#define   PINK2_GPIO67                        0X10CU         
+#define   PINK2_GPIO67                        0X10CU
 
 /* PIN J4,PR1_PRU0_GPIO1 functionality */
 #define   PINJ4_GPIO68                        0X110U
@@ -3189,7 +3189,7 @@ typedef struct {
 /* PIN A12 GPIO137 functionality */
 #define   PINA12_GPIO137                                0X224U
 /* PIN M2 CLKOUT0 functionality */
-#define   PINM2_GPIO138                                0X228U                  
+#define   PINM2_GPIO138                                0X228U
 /* PIN V2 USB0_DP functionality */
 #define   PINV2_GPIO139                                0X22CU
 /* PIN U3 USB0_DM functionality */
@@ -3197,7 +3197,7 @@ typedef struct {
 
 /* PIN C3, PADFP functionality */
 #define PINC3_WARMRSTn                          0X0234U
-            
+
 /* PIN D4, PADEO functionality */
 #define PIND4_SAFETY_ERRORn                        0X238U
 
@@ -4304,7 +4304,6 @@ typedef struct
 #define QSPI_SPI_DATA_REG_3_RESETVAL                        (0x00000000U)
 
 #define INTR_STATUS_RAW_SET  								(0x20U)
-#define SYSCONFIG 											(0x10U)
 #define SPI_DC_REG 											(0x44U)
 #define SPI_CLOCK_CNTRL_REG 								(0x40U)
 #define SPI_STATUS_REG										(0x4CU)

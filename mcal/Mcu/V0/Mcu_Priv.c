@@ -1884,8 +1884,8 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
 FUNC(Std_ReturnType, MCU_CODE)
 Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId, boolean enable)
 {
-    VAR(Std_ReturnType, MCU_VAR) RetVal    = E_OK;
-    VAR(Std_ReturnType, MCU_VAR) defRetVal = E_OK;
+    VAR(Std_ReturnType, MCU_VAR) RetVal    = E_NOT_OK;
+    VAR(Std_ReturnType, MCU_VAR) defRetVal = E_NOT_OK;
 
     /* Handle MCAN modules (MCAN0-MCAN3) */
     if ((moduleId >= MCU_CLKSRC_MODULE_ID_MCAN0) && (moduleId <= MCU_CLKSRC_MODULE_ID_MCAN3))

@@ -102,10 +102,13 @@ volatile VAR(uint8, FLS_VAR_INIT) Fls_WriteStage = FLS_S_INIT_STAGE;
 #define FLS_STOP_SEC_VAR_INIT_8
 #include "Fls_MemMap.h"
 #include "Fls_Ospi_Edma.h"
+#include "cslr_fss.h"
 
 static void           Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
 static void           Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize);
 static Std_ReturnType Fls_norProcessErase(void);
+static void           Flash_norOspiDisxipEnable(void);
+static void           Flash_norOspiDisxipDisable(void);
 #if (STD_OFF == FLS_USE_INTERRUPTS)
 static boolean Fls_IsJobDoneNotifyNeeded(Fls_JobType job);
 #endif
@@ -117,6 +120,18 @@ static boolean Fls_IsJobDoneNotifyNeeded(Fls_JobType job);
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Fls_MemMap.h"
+
+static void Flash_norOspiDisxipEnable(void)
+{
+    HW_WR_FIELD32(CSL_FSS_FSAS_GENREGS_REGS_BASE + CSL_FSS_FSAS_GENREGS_SYSCONFIG,
+                  CSL_FSS_FSAS_GENREGS_SYSCONFIG_DISXIP, 1U);
+}
+
+static void Flash_norOspiDisxipDisable(void)
+{
+    HW_WR_FIELD32(CSL_FSS_FSAS_GENREGS_REGS_BASE + CSL_FSS_FSAS_GENREGS_SYSCONFIG,
+                  CSL_FSS_FSAS_GENREGS_SYSCONFIG_DISXIP, 0U);
+}
 
 /**
  *  \Function Name: Nor_OspiCmdWrite
@@ -433,6 +448,8 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
         pageSize = Fls_Config_SFDP_Ptr->pageSize;
         chunkLen = pageSize;
 
+        Flash_norOspiDisxipEnable();
+
         actual = 0U;
         while (actual < len)
         {
@@ -499,6 +516,7 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
             Fls_WriteStage = FLS_S_WRITE_DONE;
         }
 #endif
+        Flash_norOspiDisxipDisable();
     }
 
     return retVal;
@@ -533,6 +551,7 @@ Std_ReturnType Fls_norBlockErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
+        Flash_norOspiDisxipEnable();
         retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
@@ -578,6 +597,7 @@ Std_ReturnType Fls_norSectorErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
+        Flash_norOspiDisxipEnable();
         retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
@@ -613,6 +633,7 @@ Std_ReturnType Fls_norChipErase(OSPI_Handle handle, uint32 offset)
     }
     if (E_OK == retVal)
     {
+        Flash_norOspiDisxipEnable();
         retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
     if (E_OK == retVal)
@@ -967,6 +988,7 @@ static void Fls_processJobErase(uint32 chunkSize)
         /* Only proceed with verification and notification when erase is complete */
         if (Fls_EraseStage == FLS_S_DEFAULT)
         {
+            Flash_norOspiDisxipDisable();
 #if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
             if (retVal == E_OK)
             {
@@ -998,6 +1020,7 @@ static void Fls_processJobErase(uint32 chunkSize)
          polling; not inducible in test */
         else if (Fls_EraseStage == FLS_S_FAIL)
         {
+            Flash_norOspiDisxipDisable();
             Fls_EraseStage = FLS_S_DEFAULT; /*  Reset for next operation */
             /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
             do not use this hook function for critical section protection*/

@@ -743,6 +743,7 @@ static uint32 RPMessage_getEndPtMsg_mutexResourceTryLock(RPMessage_Struct *epObj
 {
     uint32 tempTicks, elapsedTicks;
     uint32 tryLoopLocal = tryLoop;
+    (void)tryLoopLocal;
     do
     {
         if (Cdd_Ipc_Mutex_resourceTryLock(&epObj->newEndPtMsgSem) == CDD_IPC_MUTEX_ARM_UNLOCKED)

@@ -2423,7 +2423,7 @@ FUNC(Std_ReturnType, MCU_CODE)
 Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId, boolean enable)
 {
     VAR(Std_ReturnType, MCU_VAR) RetVal    = E_NOT_OK;
-    VAR(Std_ReturnType, MCU_VAR) defRetVal = (Std_ReturnType)E_NOT_OK;
+    VAR(Std_ReturnType, MCU_VAR) defRetVal = E_NOT_OK;
 
     /* Handle MCAN modules (MCAN0-MCAN7) */
     if ((moduleId >= MCU_CLKSRC_MODULE_ID_MCAN0) && (moduleId <= MCU_CLKSRC_MODULE_ID_MCAN7))

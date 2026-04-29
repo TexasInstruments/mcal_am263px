@@ -671,6 +671,7 @@ static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess 
         QSPI_delay(FLS_QSPI_CMD_DELAY);
         /* Wait for the QSPI busy status */
         status = Fls_Qspi_WaitIdle(handle);
+        (void)status;
 
         /* Store the number of data registers needed to read data */
         status = Fls_Qspi_ReadData(handle, &dataVal[0], 1U);

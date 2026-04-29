@@ -343,14 +343,17 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
 void Spi_DmaTxIsrHandler(void *args)
 {
     Spi_HwUnitObjType *hwUnitObj = (Spi_HwUnitObjType *)args;
-    if ((NULL_PTR != hwUnitObj) && (NULL_PTR != hwUnitObj->curJobObj) &&
-        (hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode == SPI_TX_RX_MODE_TX_ONLY))
+    if ((NULL_PTR != hwUnitObj) && (NULL_PTR != hwUnitObj->curJobObj))
     {
+        /* Always check TX status (ISR only registered for TX_ONLY and BOTH) */
         Spi_dmaTxIsrHandler_StatusCheck(hwUnitObj);
 
-        /* This channel transfer is complete */
-        hwUnitObj->curJobObj->jobResult = SPI_JOB_OK;
-        Spi_processChCompletion(hwUnitObj, SPI_JOB_OK);
+        /* Only call completion for TX_ONLY mode */
+        if (hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode == SPI_TX_RX_MODE_TX_ONLY)
+        {
+            hwUnitObj->curJobObj->jobResult = SPI_JOB_OK;
+            Spi_processChCompletion(hwUnitObj, SPI_JOB_OK);
+        }
     }
 }
 
