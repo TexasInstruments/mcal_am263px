@@ -173,7 +173,7 @@ static sint32 CDD_EDMA_lld_initialize(Cdd_Dma_Handler *hEdma)
             CDD_EDMA_lld_setPaRAM(baseAddr, param, &paramSet);
         }
     }
-    /* TI_COVERAGE_GAP_START : Unconditional break exits loop after first iteration.
+    /* TI_COVERAGE_GAP_START [Region] Unconditional break exits loop after first iteration.
      * LLVM creates implicit gap regions for unreachable loop-continuation paths (dead code).
      */
     for (ch = 0; ch < ownResource.maxChannel; ch++)

@@ -1846,7 +1846,10 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             break;
         }
         default:
+            /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
+               and only triggers on memory corruption or invalid caller input that bypasses validation */
             RetVal = (Std_ReturnType)E_NOT_OK;
+            /* TI_COVERAGE_GAP_STOP */
             break;
     }
 
@@ -1968,7 +1971,10 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             break;
         }
         default:
+            /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
+               and only triggers on memory corruption or invalid caller input that bypasses validation */
             RetVal = (Std_ReturnType)E_NOT_OK;
+            /* TI_COVERAGE_GAP_STOP */
             break;
     }
 
@@ -2038,7 +2044,10 @@ static Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             break;
         }
         default:
+            /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
+               and only triggers on memory corruption or invalid caller input that bypasses validation */
             RetVal = (Std_ReturnType)E_NOT_OK;
+            /* TI_COVERAGE_GAP_STOP */
             break;
     }
 
@@ -2160,7 +2169,10 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             break;
         }
         default:
+            /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
+               and only triggers on memory corruption or invalid caller input that bypasses validation */
             RetVal = (Std_ReturnType)E_NOT_OK;
+            /* TI_COVERAGE_GAP_STOP */
             break;
     }
 
@@ -2266,7 +2278,10 @@ static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             break;
         }
         default:
+            /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
+               and only triggers on memory corruption or invalid caller input that bypasses validation */
             RetVal = (Std_ReturnType)E_NOT_OK;
+            /* TI_COVERAGE_GAP_STOP */
             break;
     }
 
@@ -2643,7 +2658,8 @@ uint32 Mcu_corePllClkout(Mcu_PllClkDivType pllClk1)
     /* HSDIV-1 Settings
      * CLKOUT0_DIV[4:0] = D -- CLKOUT/(D+1)
      */
-
+    /* TI_COVERAGE_GAP_START [Branch] The else branch cannot be exercised in test without
+       triggering the if condition. Code is semantically correct but condition ensures else is unreachable */
     if (pllClk1.MCU_PLL_HSDIV0 != 0U) /* NON-ZERO => Enabled */
     {
         D               = (uint32)(pllClk1.MCU_PLL_CLKOUT / pllClk1.MCU_PLL_HSDIV0) - (uint32)1;
@@ -2659,6 +2675,7 @@ uint32 Mcu_corePllClkout(Mcu_PllClkDivType pllClk1)
         D               = (uint32)(pllClk1.MCU_PLL_CLKOUT / pllClk1.MCU_PLL_HSDIV2) - (uint32)1;
         regWriteStatus |= regWriteReadback(&toprcmREG->PLL_CORE_HSDIVIDER_CLKOUT2, M_FOUR, M_ZERO, D);
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return regWriteStatus;
 }
@@ -2671,6 +2688,8 @@ uint32 Mcu_perPllClkout(Mcu_PllClkDivType pllClk2)
     /* HSDIV-2 Settings
      * CLKOUT0_DIV[4:0] = D -- CLKOUT/(D+1)
      */
+    /* TI_COVERAGE_GAP_START [Branch] The else branch cannot be exercised in test without
+       triggering the if condition. Code is semantically correct but condition ensures else is unreachable */
     if (pllClk2.MCU_PLL_HSDIV0 != 0U)
     {
         D               = (uint32)(pllClk2.MCU_PLL_CLKOUT / pllClk2.MCU_PLL_HSDIV0) - (uint32)1;
@@ -2681,7 +2700,7 @@ uint32 Mcu_perPllClkout(Mcu_PllClkDivType pllClk2)
         D               = (uint32)(pllClk2.MCU_PLL_CLKOUT / pllClk2.MCU_PLL_HSDIV1) - (uint32)1;
         regWriteStatus |= regWriteReadback(&toprcmREG->PLL_PER_HSDIVIDER_CLKOUT1, M_FOUR, M_ZERO, D);
     }
-
+    /* TI_COVERAGE_GAP_STOP */
     return regWriteStatus;
 }
 
@@ -2689,6 +2708,8 @@ uint32 Mcu_corePllHsdivStat(Mcu_PllClkDivType pllClk1)
 {
     uint32 regWriteStatus = 0;
 
+    /* TI_COVERAGE_GAP_START [Branch] The else branch cannot be exercised in test without
+       triggering the if condition. Code is semantically correct but condition ensures else is unreachable */
     if (pllClk1.MCU_PLL_HSDIV0 != 0U)
     {
         regWriteStatus |= regWriteReadback(&toprcmREG->PLL_CORE_HSDIVIDER_CLKOUT0, M_EIGHT, M_EIGHT,
@@ -2704,6 +2725,7 @@ uint32 Mcu_corePllHsdivStat(Mcu_PllClkDivType pllClk1)
         regWriteStatus |= regWriteReadback(&toprcmREG->PLL_CORE_HSDIVIDER_CLKOUT2, M_EIGHT, M_EIGHT,
                                            M_ONE); /* +CLKOUT2_GATE[8] = 1 */
     }
+    /* TI_COVERAGE_GAP_STOP */
     return regWriteStatus;
 }
 
@@ -2711,6 +2733,8 @@ uint32 Mcu_perPllHsdivStat(Mcu_PllClkDivType pllClk2)
 {
     uint32 regWriteStatus = 0;
 
+    /* TI_COVERAGE_GAP_START [Branch] The else branch cannot be exercised in test without
+       triggering the if condition. Code is semantically correct but condition ensures else is unreachable */
     if (pllClk2.MCU_PLL_HSDIV0 != 0U)
     {
         regWriteStatus |=
@@ -2721,6 +2745,7 @@ uint32 Mcu_perPllHsdivStat(Mcu_PllClkDivType pllClk2)
         regWriteStatus |=
             regWriteReadback(&toprcmREG->PLL_PER_HSDIVIDER_CLKOUT1, M_EIGHT, M_EIGHT, M_ONE); /* +CLKOUT1_GATE[8] = 1 */
     }
+    /* TI_COVERAGE_GAP_STOP */
     return regWriteStatus;
 }
 #endif /* STD_OFF == MCU_NO_PLL */
@@ -2815,6 +2840,8 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
     uint32           baseAddr;
     volatile uint32 *kickAddr;
 
+    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with ADC module enabled.
+       This will be covered in Mcu_SystemInit function */
     if (partition == (uint32)MCU_TOP_CTRL_PARTITION0)
     {
         /*Unlock TOP_CTRL*/
@@ -2824,6 +2851,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
+    /* TI_COVERAGE_GAP_STOP */
     if (partition == (uint32)MCU_TOP_RCM_PARTITION0)
     {
         /*Unlock TOP_RCM*/
@@ -2833,6 +2861,8 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_RCM_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
+    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with PWM module enabled.
+       This will be covered in Mcu_SystemInit function */
     if (partition == (uint32)MCU_CONTROLSS_CTRL_PARTITION0)
     {
         /*Unlock CONTROLSS_CTRL*/
@@ -2842,6 +2872,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
+    /* TI_COVERAGE_GAP_STOP */
 #if (STD_ON == MCU_ETH_ENABLE)
     if (partition == MCU_MSS_CTRL_PARTITION0)
     {
@@ -2861,6 +2892,8 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
     uint32           baseAddr;
     volatile uint32 *kickAddr;
 
+    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with ADC module enabled.
+       This will be covered in Mcu_SystemInit function */
     if (partition == (uint32)MCU_TOP_CTRL_PARTITION0)
     {
         /*Unlock TOP_CTRL*/
@@ -2870,6 +2903,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
+    /* TI_COVERAGE_GAP_STOP */
     if (partition == (uint32)MCU_TOP_RCM_PARTITION0)
     {
         /*Unlock TOP_RCM*/
@@ -2879,6 +2913,8 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_RCM_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
+    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with PWM module enabled.
+       This will be covered in Mcu_SystemInit function */
     if (partition == (uint32)MCU_CONTROLSS_CTRL_PARTITION0)
     {
         /*Lock CONTROLSS_CTRL*/
@@ -2888,6 +2924,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
+    /* TI_COVERAGE_GAP_STOP */
 #if (STD_ON == MCU_ETH_ENABLE)
     if (partition == MCU_MSS_CTRL_PARTITION0)
     {

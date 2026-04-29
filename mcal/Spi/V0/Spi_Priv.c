@@ -158,7 +158,7 @@ void Spi_hwUnitInit(Spi_HwUnitObjType *hwUnitObj)
         Spi_TxRxMode txrxMode = SPI_TX_RX_MODE_TX_ONLY;
         for (uint8 idx = 0; idx < Spi_DrvObj.maxJobs; idx++)
         {
-            /* TI_COVERAGE_GAP_START MC/DC: baseAddr match TRUE with txRxMode FALSE pair —
+            /* TI_COVERAGE_GAP_START [Branch/MCDC]: baseAddr match TRUE with txRxMode FALSE pair —
              production extDevCfg is in const flash; test writes silently fail so
              TX_ONLY override via test code cannot be observed by the library */
             if ((Spi_DrvObj.jobObj[idx].hwUnitObj->baseAddr == hwUnitObj->baseAddr) &&
@@ -296,7 +296,7 @@ Std_ReturnType Spi_startSeqSync(Spi_SeqObjType *seqObj)
          * and hence the sequence result is already set. So
          * don't overwrite the sequence status with OK for the
          * subsequent job */
-        /* TI_COVERAGE_GAP_START Spi_mcspiXferJob always returns SPI_JOB_OK so seqResult
+        /* TI_COVERAGE_GAP_START [Branch] Spi_mcspiXferJob always returns SPI_JOB_OK so seqResult
          stays SPI_SEQ_PENDING, FALSE path unreachable */
         if (seqObj->seqResult == SPI_SEQ_PENDING)
         {
@@ -835,7 +835,7 @@ static void Spi_scheduleJob(Spi_JobObjType *jobObj)
 
     hwUnitObj = jobObj->hwUnitObj;
 
-    /* TI_COVERAGE_GAP_START Async jobs run on non-DMA HW units in coverage configs,
+    /* TI_COVERAGE_GAP_START [Branch] Async jobs run on non-DMA HW units in coverage configs,
      enableDmaMode TRUE branch never reached in scheduleJob */
     if (hwUnitObj->enableDmaMode == (boolean)TRUE)
     {
@@ -875,7 +875,7 @@ static void Spi_scheduleJob(Spi_JobObjType *jobObj)
     chObj = Spi_getCurrChannelObj(chId);
     Spi_mcspiConfigCh(hwUnitObj, jobObj, chObj);
 
-    /* TI_COVERAGE_GAP_START Async jobs run on non-DMA HW units in coverage configs,
+    /* TI_COVERAGE_GAP_START [Branch] Async jobs run on non-DMA HW units in coverage configs,
      enableDmaMode FALSE branch (DMA start path) never reached without causing
      regression in Spi_Mcspi.c via unexpected DMA events during real loopback tests */
     if (hwUnitObj->enableDmaMode != (boolean)TRUE)
@@ -953,7 +953,7 @@ static void Spi_scheduleAllJobsSyncTransmit(Spi_SeqObjType *seqObj)
         }
 
         /* Fail the sequence if job fails */
-        /* TI_COVERAGE_GAP_START Spi_mcspiXferJob always returns SPI_JOB_OK,
+        /* TI_COVERAGE_GAP_START [Branch] Spi_mcspiXferJob always returns SPI_JOB_OK,
          SPI_JOB_FAILED path unreachable */
         if (SPI_JOB_FAILED == jobResult)
         {

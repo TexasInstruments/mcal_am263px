@@ -1,3 +1,47 @@
+commit 931fde4c6100d335f24b7c0cb74a6759f520268e
+Author: Asha D <asha.d@ti.com>
+Date:   Wed Apr 29 16:26:30 2026 +0530
+
+    am263px:MCU: Updated coverage Gap for the module
+    
+    Fixes: MCAL-35523
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Mcu/V2/Mcu_Priv.c | 41 +++++++++++++++++++++++++++++++++++++++--
+ mcal/Mcu/src/Mcu.c     |  8 ++++++--
+ 2 files changed, 45 insertions(+), 4 deletions(-)
+
+commit b183b6d4405ffa089de85782dc712b5594e4c8e8
+Author: Akash <a-verma3@ti.com>
+Date:   Wed Apr 29 01:10:41 2026 +0530
+
+    am263px: all: Coverage alignment report gap to actual gap added in code .
+    
+    Fixes: MCAL-37879
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Dma/V0/Cdd_Dma_soc.c   |  2 +-
+ mcal/Dma/src/Cdd_Dma_Priv.c |  2 +-
+ mcal/Spi/V0/Spi_Dma.c       | 13 +++++--------
+ mcal/Spi/V0/Spi_Priv.c      | 10 +++++-----
+ mcal/Spi/src/Spi.c          |  3 +++
+ 5 files changed, 15 insertions(+), 15 deletions(-)
+
+commit ba38f851ba511a4ec6e9d3dee737dd4ad763b61c
+Author: Akash <a-verma3@ti.com>
+Date:   Wed Apr 29 01:43:45 2026 +0530
+
+    am263px: Lin: Lin Coverage build issue fix .
+    
+    Fixes: MCAL-37879
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/lin_test/build/makefile_lib | 1 +
+ 1 file changed, 1 insertion(+)
+
 commit 9a2fa7a4644921a38c9bdf46cccd7bf520f5e6a5
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Wed Apr 29 08:45:20 2026 +0530

@@ -179,6 +179,8 @@ FUNC(void, SPI_CODE) Spi_Init(P2CONST(Spi_ConfigType, AUTOMATIC, SPI_CONFIG_DATA
           (STD_ON == SPI_LINK_TIME_VARIANT) */
 #if (STD_ON == SPI_DEV_ERROR_DETECT)
     ConditionCheck = SPI_init_CheckDetError(ConfigPtr);
+    /* TI_COVERAGE_GAP_START [Branch] DET validation error (ConditionCheck != 0U).
+       All test configurations pass SPI_init_CheckDetError validation. */
     if (ConditionCheck == 0U)
     {
         if (ConfigPtr->maxExtDevCfg > SPI_MAX_EXT_DEV)
@@ -207,6 +209,7 @@ FUNC(void, SPI_CODE) Spi_Init(P2CONST(Spi_ConfigType, AUTOMATIC, SPI_CONFIG_DATA
             }
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
 #else
     Spi_resetDrvObj(&Spi_DrvObj);
     Spi_copyConfig(&Spi_DrvObj, ConfigPtr);

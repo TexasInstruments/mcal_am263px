@@ -298,10 +298,10 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
             HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAR, CSL_MCSPI_CH0CONF_DMAR_ENABLED);
             HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
         }
-        /* TI_COVERAGE_GAP_START MCSPI_dmaStart is static and only reachable via Spi_dmaTransfer.
-         In coverage config, Cdd_Dma_EnableTransferRegion(TX) fails for TX_ONLY injected calls
-         due to DMA channel not having an active hardware SPI TX event, keeping status E_NOT_OK
-         and preventing MCSPI_dmaStart from being called with TX_ONLY mode. */
+        /* TI_COVERAGE_GAP_START [Branch] Spi_dmaStop TX_ONLY branch (DMAW disable) is unreachable
+        because Spi_dmaTransfer does not complete successfully in TX_ONLY mode: hardware
+        SPI TX event is not triggered in test environment, causing
+        Cdd_Dma_EnableTransferRegion to fail and MCSPI_dmaStart never to be called. */
         else if (SPI_TX_RX_MODE_TX_ONLY == jobObj->extDevCfg->mcspi.txRxMode)
         {
             HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
@@ -312,7 +312,7 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
             /* condition check */
         }
 
-        /* TI_COVERAGE_GAP_START Static function only called with MCSPI_MODULCTRL_SINGLE_SINGLE,
+        /* TI_COVERAGE_GAP_START [Branch] Static function only called with MCSPI_MODULCTRL_SINGLE_SINGLE,
          FALSE branch unreachable */
         /* Manual CS assert */
         if (MCSPI_MODULCTRL_SINGLE_SINGLE == chMode)
@@ -362,13 +362,10 @@ static void Spi_dmaTxIsrHandler_StatusCheck(const Spi_HwUnitObjType *hwUnitObj)
     volatile uint32 chStat    = 0U;
     uint32          chNum     = 0U;
     volatile uint32 tempCount = SPI_MAX_TIMEOUT_DURATION;
-    /* TI_COVERAGE_GAP_START Compile-time constant SPI_MAX_TIMEOUT_DURATION (20000) > 8 always TRUE,
-     FALSE branch unreachable */
     if (SPI_MAX_TIMEOUT_DURATION > 8U)
     {
         tempCount = SPI_MAX_TIMEOUT_DURATION / 8U;
     }
-    /* TI_COVERAGE_GAP_STOP */
 
     chNum                = (uint32)hwUnitObj->curJobObj->jobCfg_PC.csPin;
     uint32 chStatRegAddr = hwUnitObj->baseAddr + MCSPI_CHSTAT(chNum);

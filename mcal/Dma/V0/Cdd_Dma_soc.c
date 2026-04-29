@@ -359,7 +359,7 @@ static void Cdd_Dma_Csl_ArmR5GetCpuID(Cdd_Dma_Csl_ArmR5CpuInfo *cpuInfo)
 {
     uint32 regVal;
 
-    /* TI_COVERAGE_GAP_START : Static function always called with valid pointer &Cdd_Dma_virtToPhymap.cpuInfo.
+    /* TI_COVERAGE_GAP_START [Branch] Static function always called with valid pointer &Cdd_Dma_virtToPhymap.cpuInfo.
      * The NULL_PTR false branch is unreachable defensive code.
      */
     if (cpuInfo != NULL_PTR)

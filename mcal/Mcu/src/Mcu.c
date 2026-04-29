@@ -233,7 +233,7 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_InitClock(Mcu_ClockType ClockSetting)
     else
 #endif /* STD_ON == MCU_DEV_ERROR_DETECT */
     {
-        /* Mcu_ClockSetSource will return E_OK if clock configurationis initialised successfully */
+        /* Mcu_ClockSetSource will return E_OK if clock configuration is initialised successfully */
         InitClock_Return = Mcu_ClockSetSource(Mcu_DrvObj->Mcu_ClockConfig[ClockSetting].Mcu_ClockModuleId,
                                               Mcu_DrvObj->Mcu_ClockConfig[ClockSetting].Mcu_ClockSourceId,
                                               Mcu_DrvObj->Mcu_ClockConfig[ClockSetting].Mcu_ClockDiv,
@@ -273,7 +273,7 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(void)
         else
         {
             /* TI_COVERAGE_GAP_START [Branch] Mcu_PllStatus is always MCU_STATE_INIT after Mcu_Init() call which is
-               a prerequisite for Mcu_DistributePllClock(). The TRUE branch (lines 277-279) is logically unreachable
+               a prerequisite for Mcu_DistributePllClock(). The TRUE branch is logically unreachable
                in normal operation when MCU_NO_PLL == STD_OFF */
             if (Mcu_PllStatus != MCU_STATE_INIT) /* Checking whether PLL is already initialised or not */
             {
@@ -468,6 +468,9 @@ FUNC(void, MCU_CODE) Mcu_PerformReset(void)
     }
     else
 #endif /* STD_ON == MCU_DEV_ERROR_DETECT */
+    /* TI_COVERAGE_GAP_START [Branch] Else branch executes Mcu_PerformSoftSysReset() which performs
+       actual system reset and halts execution. Cannot be covered in normal test environment as
+       executing this branch terminates test execution */
     {
         VAR(uint8, MCU_VAR) Reset_Mode;
 
@@ -479,6 +482,7 @@ FUNC(void, MCU_CODE) Mcu_PerformReset(void)
         Mcu_PerformSoftSysReset(Reset_Mode);
         SchM_Exit_Mcu_MCU_EXCLUSIVE_AREA_0();
     }
+    /* TI_COVERAGE_GAP_STOP */
 } /*end of the Mcu_PerformReset()*/
 #endif /* STD_ON == MCU_PERFORM_RESET_API */
 
