@@ -65,6 +65,7 @@
               <ENTITYS>
                 <BSW-INTERRUPT-ENTITY UUID="43585e3c-0d7f-4f61-a05a-50d16e4a1c41">
                   <SHORT-NAME>CddFsiRx_FSIINT1_IrqUnit1</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -86,6 +87,7 @@
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="634c5c7d-7198-4bd4-8ccc-1792718d169e">
                   <SHORT-NAME>CddFsiRx_FSIINT2_IrqUnit1</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -107,11 +109,13 @@
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="b3c2a43b-a994-4b33-a515-dcc6c46ce3fb">
                   <SHORT-NAME>CddFsiRx_GetStatus</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM263px/Cdd_FsiRx_ModuleEntry/CddFsiRx_GetStatus</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="5539ae74-899d-4486-b72c-efcbe1d7168b">
                   <SHORT-NAME>Cdd_FsiRx_DeInit</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -123,6 +127,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="912751a4-91a7-4a4f-9abd-b9aeef85696a">
                   <SHORT-NAME>Cdd_FsiRx_GetVersionInfo</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -134,6 +139,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="76e8839f-57cb-49c2-b691-31a13a66655f">
                   <SHORT-NAME>Cdd_FsiRx_Init</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -145,6 +151,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="96c84af5-c583-4fbc-a194-703f4f9d4665">
                   <SHORT-NAME>Cdd_FsiRx_Reset</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -159,6 +166,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_FsiRx_TI_AM263px/Cdd_FsiRx/Cdd_Fsi_Rx_Behavior/FSI_RX_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>

@@ -68,6 +68,7 @@
               <ENTITYS>
                 <BSW-CALLED-ENTITY UUID="77db2b60-e52e-4f3c-a2d0-691f9a0557f7">
                   <SHORT-NAME>Port_ClearInterruptStatus</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -79,6 +80,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="abd50d8a-2657-466b-bc7c-88e3fe792c7e">
                   <SHORT-NAME>Port_GetInterruptStatus</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -90,6 +92,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="51a3a10e-9720-4f8b-90dc-bdad3a7c925e">
                   <SHORT-NAME>Port_GetVersionInfo</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -101,6 +104,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="b06917a5-5fe0-4f4c-a66b-200ed05e52ff">
                   <SHORT-NAME>Port_Init</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -116,6 +120,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="fb08f3d7-0fd7-4d4c-9468-559d2db8bc8d">
                   <SHORT-NAME>Port_PinDisableIntrNotification</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -127,6 +132,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="fb496810-2608-460d-b4aa-af0aeb0f8587">
                   <SHORT-NAME>Port_PinEnableIntrNotification</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -138,6 +144,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="62bd7f28-f53d-4145-99a2-6b31430a59f9">
                   <SHORT-NAME>Port_RefreshPortDirection</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -156,6 +163,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Port_TI_AM261x/Port/Port_Behavior/PORT_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -174,6 +182,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Port_TI_AM261x/Port/Port_Behavior/PORT_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>

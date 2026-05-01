@@ -267,6 +267,7 @@
                 [!IF "GptChannelId = '0'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="36f34213-1fad-4610-a13d-4e73fd10bded">
                   <SHORT-NAME>Gpt_Ch0Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch0Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -280,6 +281,7 @@
                 [!IF "GptChannelId = '10'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="bc7e7fa3-f05e-41cf-bb0a-4d01954fa92c">
                   <SHORT-NAME>Gpt_Ch10Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch10Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -293,6 +295,7 @@
                 [!IF "GptChannelId = '11'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="41873a95-d00b-48f6-bc1a-7fac5cea8de6">
                   <SHORT-NAME>Gpt_Ch11Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch11Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -306,6 +309,7 @@
                 [!IF "GptChannelId = '12'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="69f47805-d5cc-4caf-958b-a57512e07ae8">
                   <SHORT-NAME>Gpt_Ch12Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch12Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -319,6 +323,7 @@
                 [!IF "GptChannelId = '13'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="27ea42f7-c5ea-4423-b1ba-797aab85b360">
                   <SHORT-NAME>Gpt_Ch13Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch13Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -332,6 +337,7 @@
                 [!IF "GptChannelId = '14'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="5985b291-eef6-4e20-9f49-e18189a91285">
                   <SHORT-NAME>Gpt_Ch14Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch14Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -345,6 +351,7 @@
                 [!IF "GptChannelId = '15'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="6d730ce7-e98b-441f-bd9d-eb394a589739">
                   <SHORT-NAME>Gpt_Ch15Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch15Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -358,6 +365,7 @@
                 [!IF "GptChannelId = '16'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="fef5aa70-2278-4bc7-944d-a1264032c13d">
                   <SHORT-NAME>Gpt_Ch16Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch16Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -371,6 +379,7 @@
                 [!IF "GptChannelId = '17'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="842ead83-ecdc-4c3e-85de-09f0fb3897e0">
                   <SHORT-NAME>Gpt_Ch17Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch17Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -384,6 +393,7 @@
                 [!IF "GptChannelId = '18'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="84f3a87f-189d-4c0d-9901-6405870cb3cb">
                   <SHORT-NAME>Gpt_Ch18Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch18Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -397,6 +407,7 @@
                 [!IF "GptChannelId = '19'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="0b10c608-a787-477b-9868-1821dd70774a">
                   <SHORT-NAME>Gpt_Ch19Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch19Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -410,6 +421,7 @@
                 [!IF "GptChannelId = '1'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="0443adf1-dce4-41d6-b45c-e8963c1cca53">
                   <SHORT-NAME>Gpt_Ch1Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch1Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -423,6 +435,7 @@
                 [!IF "GptChannelId = '20'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="a2c45016-7717-4ca3-bdd1-35037de66daf">
                   <SHORT-NAME>Gpt_Ch20Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch20Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -436,6 +449,7 @@
                 [!IF "GptChannelId = '21'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="bb2814b9-4ba5-486d-a50c-b137095fc266">
                   <SHORT-NAME>Gpt_Ch21Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch21Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -449,6 +463,7 @@
                 [!IF "GptChannelId = '22'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="100810cb-b931-47aa-a5e0-f0e4391c5421">
                   <SHORT-NAME>Gpt_Ch22Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch22Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -462,6 +477,7 @@
                 [!IF "GptChannelId = '23'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="d894ed17-674d-40bd-8ae9-9dcde0b3aea5">
                   <SHORT-NAME>Gpt_Ch23Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch23Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -475,6 +491,7 @@
                 [!IF "GptChannelId = '24'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="6e81150d-4167-46a0-8ebe-3ae8210e9ba9">
                   <SHORT-NAME>Gpt_Ch24Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch24Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -488,6 +505,7 @@
                 [!IF "GptChannelId = '25'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="ca83e896-6cb3-43d9-90e6-ed48fa4b1dea">
                   <SHORT-NAME>Gpt_Ch25Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch25Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -501,6 +519,7 @@
                 [!IF "GptChannelId = '26'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="7c014ad8-f6c9-46d2-baff-ea6dccd50813">
                   <SHORT-NAME>Gpt_Ch26Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch26Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -514,6 +533,7 @@
                 [!IF "GptChannelId = '27'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="d7c3f94a-fbe5-4610-86b2-ad5407821078">
                   <SHORT-NAME>Gpt_Ch27Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch27Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -527,6 +547,7 @@
                 [!IF "GptChannelId = '28'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="d36773d5-dc22-494a-832f-49a69424bb33">
                   <SHORT-NAME>Gpt_Ch28Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch28Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -540,6 +561,7 @@
                 [!IF "GptChannelId = '29'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="fcb60478-4c9a-47da-93ca-fac545a48406">
                   <SHORT-NAME>Gpt_Ch29Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch29Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -553,6 +575,7 @@
                 [!IF "GptChannelId = '2'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="c51bb078-a377-485f-b759-9663d5795581">
                   <SHORT-NAME>Gpt_Ch2Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch2Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -566,6 +589,7 @@
                 [!IF "GptChannelId = '30'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="8cb64c7a-c982-40bf-ba1b-405f72156934">
                   <SHORT-NAME>Gpt_Ch30Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch30Isr</IMPLEMENTED-ENTRY-REF>
                    [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -579,6 +603,7 @@
                 [!IF "GptChannelId = '31'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="7e6cf28d-469c-467a-b42b-5123827050bd">
                   <SHORT-NAME>Gpt_Ch31Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch31Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -592,6 +617,7 @@
                 [!IF "GptChannelId = '3'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="caf16b63-3ba5-4a61-bc43-dca7bda3b1d7">
                   <SHORT-NAME>Gpt_Ch3Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch3Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -605,6 +631,7 @@
                 [!IF "GptChannelId = '4'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="c3971e00-9238-4e26-aca7-487c7aa9c105">
                   <SHORT-NAME>Gpt_Ch4Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch4Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -618,6 +645,7 @@
                 [!IF "GptChannelId = '5'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="c52e45b5-d4fe-4b3d-ad43-9645ef2ff8c1">
                   <SHORT-NAME>Gpt_Ch5Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch5Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -631,6 +659,7 @@
                 [!IF "GptChannelId = '6'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="c3d8cab8-45a8-46cb-a48c-e0532ce239c9">
                   <SHORT-NAME>Gpt_Ch6Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch6Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -644,6 +673,7 @@
                 [!IF "GptChannelId = '7'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="a7e46b02-7697-414b-8f34-03482f880033">
                   <SHORT-NAME>Gpt_Ch7Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch7Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -657,6 +687,7 @@
                 [!IF "GptChannelId = '8'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="cc782ac9-495b-47c9-b62d-6f29235ec226">
                   <SHORT-NAME>Gpt_Ch8Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch8Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -670,6 +701,7 @@
                 [!IF "GptChannelId = '9'"!][!//
                 <BSW-INTERRUPT-ENTITY UUID="3fd215ae-fcb6-490d-9fee-548273d83e9e">
                   <SHORT-NAME>Gpt_Ch9Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_Ch9Isr</IMPLEMENTED-ENTRY-REF>
                   [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptTypeofInterruptFunction = 'GPT_ISR_CAT2'"!][!//
@@ -685,6 +717,7 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptWakeupFunctionalityApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="077420f2-90f2-4729-b2d5-22a33ff2cde3">
                   <SHORT-NAME>Gpt_CheckWakeup</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_CheckWakeup</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
@@ -692,6 +725,7 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptRegisterReadback = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="4b43ca2b-b0cd-4bed-8a49-25ee1015fe6a">
                   <SHORT-NAME>Gpt_ConfigRegReadBack</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_ConfigRegReadBack</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
@@ -699,6 +733,7 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptDeinitApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="651bbd50-7d63-4d59-965e-17dff3fd0f04">
                   <SHORT-NAME>Gpt_DeInit</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -721,6 +756,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Gpt_TI_AM263px/Gpt/Gpt_Behavior/GPT_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -736,6 +772,7 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptWakeupFunctionalityApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="61e29ce4-8ce3-455d-b1fd-b2758704fb0b">
                   <SHORT-NAME>Gpt_DisableWakeup</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_DisableWakeup</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
@@ -746,6 +783,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Gpt_TI_AM263px/Gpt/Gpt_Behavior/GPT_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -761,18 +799,21 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptWakeupFunctionalityApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="947b836f-9764-4e05-ac2c-fd1454a05bdd">
                   <SHORT-NAME>Gpt_EnableWakeup</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_CheckWakeup</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!ENDIF!][!//
                 <BSW-CALLED-ENTITY UUID="03b3d9e0-7246-4c8f-99ad-ace68a31755d">
                   <SHORT-NAME>Gpt_GetPredefTimerValue</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_GetPredefTimerValue</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptTimeElapsedApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="2d3b64ca-a563-4a23-b7c3-16743ee5c7ff">
                   <SHORT-NAME>Gpt_GetTimeElapsed</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -788,6 +829,7 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptTimeRemainingApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="5f68c0b9-a9f7-49e9-812c-02712a496b8e">
                   <SHORT-NAME>Gpt_GetTimeRemaining</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -803,6 +845,7 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptVersionInfoApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="12cf18e0-9183-4e55-839b-57fe386a0627">
                   <SHORT-NAME>Gpt_GetVersionInfo</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -817,6 +860,7 @@
                 [!ENDIF!][!//
                 <BSW-CALLED-ENTITY UUID="08bd6605-9162-4248-b0c7-bf7ddd98d4ed">
                   <SHORT-NAME>Gpt_Init</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -831,6 +875,7 @@
                 [!IF "as:modconf('Gpt')[1]/GptConfigurationOfOptApiServices/GptWakeupFunctionalityApi = 'true'"!][!//
                 <BSW-CALLED-ENTITY UUID="df053cff-01bc-4cce-b79a-a971c0bb8a54">
                   <SHORT-NAME>Gpt_SetMode</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Gpt_TI_AM263px/Gpt_ModuleEntry/Gpt_SetMode</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
@@ -840,6 +885,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Gpt_TI_AM263px/Gpt/Gpt_Behavior/GPT_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -860,6 +906,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Gpt_TI_AM263px/Gpt/Gpt_Behavior/GPT_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     [!IF "as:modconf('Gpt')[1]/GptDriverConfiguration/GptDevErrorDetect = 'true'"!][!//
@@ -983,6 +1030,12 @@
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
                 <SYMBOL>VAR_NO_INIT_UNSPECIFIED</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="502930ee-1584-49e4-8877-c3781fb35310">
+                <SHORT-NAME>GPT_VAR_NO_INIT_16</SHORT-NAME>
+                <ALIGNMENT>16</ALIGNMENT>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_NO_INIT_16</SYMBOL>
               </MEMORY-SECTION>
             </MEMORY-SECTIONS>
           </RESOURCE-CONSUMPTION>

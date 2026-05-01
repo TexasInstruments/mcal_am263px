@@ -67,6 +67,7 @@
 #include <soc_rcm.h>
 #include <bootloader_soc.h>
 #include "CacheP.h"
+#include <bootloader_fls.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -225,16 +226,7 @@ typedef int32_t (*Bootloader_imgCustomFxn)(void *args);
 /**
  * \brief Driver implementation callbacks
  */
-typedef struct Bootloader_Fxns_s
-{
-    Bootloader_imgOpenFxn   imgOpenFxn;
-    Bootloader_imgReadFxn   imgReadFxn;
-    Bootloader_imgOffsetFxn imgOffsetFxn;
-    Bootloader_imgSeekFxn   imgSeekFxn;
-    Bootloader_imgCloseFxn  imgCloseFxn;
-    Bootloader_imgCustomFxn imgCustomFxn;
-
-} Bootloader_Fxns;
+typedef struct Bootloader_Fxns_s Bootloader_Fxns;
 
 /**
  * \brief Bootloader driver configuration, these are filled by SysCfg based on the boot media selected.
@@ -257,10 +249,6 @@ typedef struct Bootloader_Config_s
     uint32_t         enableScratchMem;
 
 } Bootloader_Config;
-
-/* MISRA-C:2012 Directive 4.10 Deviation: bootloader_fls.h depends on Bootloader_Fxns type defined above */
-/* MISRA-C:2012 Rule 20.1 Advisory Deviation: Include must appear after type definitions it depends on */
-#include <bootloader_fls.h>
 
 /**
  * \brief Data structure containing information related to a particular CPU, required for RPRC loading

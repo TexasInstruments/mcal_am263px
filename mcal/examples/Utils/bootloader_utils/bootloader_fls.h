@@ -72,7 +72,9 @@ typedef struct Bootloader_FlashArgs_s
 
 } Bootloader_FlashArgs;
 
-extern Bootloader_Fxns gBootloaderFlashFxns;
+struct Bootloader_Fxns_s;
+
+extern struct Bootloader_Fxns_s gBootloaderFlashFxns;
 
 #ifdef __cplusplus
 }

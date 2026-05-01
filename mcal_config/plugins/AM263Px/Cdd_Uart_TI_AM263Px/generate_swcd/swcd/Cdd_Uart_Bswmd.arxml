@@ -144,6 +144,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Uart_TI_AM263px/Cdd_Uart/Cdd_Uart_Behavior/UART_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "((as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true') or ($DMA_ENABLE="STD_ON"))"!]
                   <CALL-POINTS>
@@ -167,6 +168,7 @@
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDeinitApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="cc9769ce-86b1-41f4-9a23-f5033dde45be">
                   <SHORT-NAME>Cdd_Uart_DeInit</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true'"!]
                   <CALL-POINTS>
@@ -182,6 +184,7 @@
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartGetRemainingWordsApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="c75aff00-f8dd-4fdd-bd5f-0371a02bce60">
                   <SHORT-NAME>Cdd_Uart_GetRemainingWords</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "((as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true') or ($DMA_ENABLE="STD_ON"))"!]
                   <CALL-POINTS>
@@ -205,6 +208,7 @@
 				        [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartReadApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="5d2ceb33-1e64-474c-b185-f698cee56bbc">
                   <SHORT-NAME>Cdd_Uart_Read</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "((as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true') or ($DMA_ENABLE="STD_ON"))"!]
                   <CALL-POINTS>
@@ -232,6 +236,7 @@
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddVersionInfoApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="de09df2c-9ac5-4e50-ba55-495a2e604ce7">
                   <SHORT-NAME>Cdd_Uart_GetVersionInfo</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true'"!]
                   <CALL-POINTS>
@@ -246,6 +251,7 @@
                 [!ENDIF!]
                 <BSW-CALLED-ENTITY UUID="001c8f84-8117-48b7-bb95-e1b03ea034d4">
                   <SHORT-NAME>Cdd_Uart_Init</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "((as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true') or ($DMA_ENABLE="STD_ON"))"!]
                   <CALL-POINTS>
@@ -268,6 +274,7 @@
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartWriteApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="7bd42bba-f55b-4e37-910e-b7a8b69a804e">
                   <SHORT-NAME>Cdd_Uart_Write</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "((as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true') or ($DMA_ENABLE="STD_ON"))"!]
                   <CALL-POINTS>
@@ -299,6 +306,7 @@
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartRegisterReadbackApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="b80fd2d1-8feb-4635-b24c-f374b0d25d96">
                   <SHORT-NAME>Cdd_Uart_RegisterReadback</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDevErrorDetect = 'true'"!]
                   <CALL-POINTS>
@@ -315,6 +323,7 @@
                 [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='0') )"!]
                 <BSW-INTERRUPT-ENTITY UUID="4037f53c-df6e-446e-8d75-1b2a81dd16d8">
                   <SHORT-NAME>Cdd_Uart_Channel0Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
@@ -327,6 +336,7 @@
                 [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='1') )"!]
                 <BSW-INTERRUPT-ENTITY UUID="6d10e9b8-f355-4633-8871-d632498c34ad">
                   <SHORT-NAME>Cdd_Uart_Channel1Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel1Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
@@ -339,6 +349,7 @@
                 [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='2') )"!]
                 <BSW-INTERRUPT-ENTITY UUID="f3c22383-a145-4a35-b596-fb346599f137">
                   <SHORT-NAME>Cdd_Uart_Channel2Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel2Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
@@ -351,6 +362,7 @@
                 [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='3') )"!]
                 <BSW-INTERRUPT-ENTITY UUID="10e3c9f5-3abd-4e16-b1fa-4fecdc1c7cf9">
                   <SHORT-NAME>Cdd_Uart_Channel3Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel3Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
@@ -363,6 +375,7 @@
                 [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='4') )"!]
                 <BSW-INTERRUPT-ENTITY UUID="3061c54a-43ed-4928-9b96-d51968e2b644">
                   <SHORT-NAME>Cdd_Uart_Channel4Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel4Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
@@ -375,6 +388,7 @@
                 [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='5') )"!]
                 <BSW-INTERRUPT-ENTITY UUID="1b3212fe-9559-4dca-999b-414bdd8534da">
                   <SHORT-NAME>Cdd_Uart_Channel5Isr</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel5Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>

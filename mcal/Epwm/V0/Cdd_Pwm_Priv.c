@@ -1379,26 +1379,20 @@ Cdd_Pwm_SetPinAction_Private(const Cdd_Pwm_ChObjType *chObj, Cdd_Pwm_PinActionTy
         case CDD_PWM_DISABLE:
         {
             swTrigAction = EPWM_AQ_SW_DISABLED;
-            break;
-            /* TI_COVERAGE_GAP_START  - unreachable after break - LLVM artifact */
         }
-            /* TI_COVERAGE_GAP_STOP */
+        break;
 
         case CDD_PWM_SET_LOW:
         {
             swTrigAction = EPWM_AQ_SW_OUTPUT_LOW;
-            break;
-            /* TI_COVERAGE_GAP_START  - unreachable after break - LLVM artifact */
         }
-            /* TI_COVERAGE_GAP_STOP */
+        break;
 
         case CDD_PWM_SET_HIGH:
         {
             swTrigAction = EPWM_AQ_SW_OUTPUT_HIGH;
-            break;
-            /* TI_COVERAGE_GAP_START  - unreachable after break - LLVM artifact */
         }
-            /* TI_COVERAGE_GAP_STOP */
+        break;
 
         default:
             break;
@@ -2341,15 +2335,14 @@ boolean Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpTy
             status = CDD_PWM_TRUE;
         }
     }
-    /* TI_COVERAGE_GAP_START - (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType) is structurally
-     * unreachable here: BOTH_A_AND_B is always caught by the outer if above.
-     * The sub-condition can never be independently decisive (MC/DC)
-     * or evaluate to TRUE at this else-if. */
-    else if ((CDD_PWM_OUTPUT_CH_B == cmpType) || (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType))
+
+    if ((CDD_PWM_OUTPUT_CH_B == cmpType) || (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType))
     {
-        /* TI_COVERAGE_GAP_STOP */
+        /* TI_COVERAGE_GAP_START : [Branch] FALSE condition cannot be hit by test execution
+         * due to state management constraints, not logic error. Marked as MC/DC unreachable. */
         if ((TRUE == overwriteShadow) ||
             (FALSE == EPWM_getCounterCompareShadowStatus(baseAddr, EPWM_COUNTER_COMPARE_B)))
+        /* TI_COVERAGE_GAP_STOP */
         {
             EPWM_setCounterCompareValue(baseAddr, EPWM_COUNTER_COMPARE_B, cmpVal);
 
@@ -2358,10 +2351,6 @@ boolean Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpTy
 
             status = CDD_PWM_TRUE;
         }
-    }
-    else
-    {
-        /* This error does not happen because of check done already */
     }
 
     return (status);

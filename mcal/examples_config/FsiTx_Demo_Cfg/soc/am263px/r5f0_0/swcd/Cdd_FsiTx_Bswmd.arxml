@@ -71,6 +71,7 @@
               <ENTITYS>
                 <BSW-INTERRUPT-ENTITY UUID="230c8bb0-3e6d-4f40-9b30-84b0ff3b8e5f">
                   <SHORT-NAME>CddFsiTx_FSIINT1_IrqUnit1</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/CddFsiTx_FSIINT1_IrqUnit1</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
@@ -78,6 +79,7 @@
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-INTERRUPT-ENTITY UUID="bdde4cef-2ab4-4888-9931-336c0ab57f2f">
                   <SHORT-NAME>CddFsiTx_FSIINT2_IrqUnit1</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/CddFsiTx_FSIINT2_IrqUnit1</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
@@ -85,11 +87,13 @@
                 </BSW-INTERRUPT-ENTITY>
                 <BSW-CALLED-ENTITY UUID="458b778b-2527-4dc0-87f7-dcf08ade504f">
                   <SHORT-NAME>CddFsiTx_GetStatus</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx_ModuleEntry/CddFsiTx_GetStatus</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="24aa0e54-8fcc-4eb4-b6c5-fc03fadc1d39">
                   <SHORT-NAME>Cdd_FsiTx_BufferLoad</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -105,6 +109,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="ab29ef3d-6c67-451e-aa01-d5eda9e00199">
                   <SHORT-NAME>Cdd_FsiTx_DeInit</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -116,6 +121,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="1d955680-2bba-4b23-9a12-345ae72e5da1">
                   <SHORT-NAME>Cdd_FsiTx_GetVersionInfo</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -127,6 +133,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="a8b433cf-e26c-408d-916b-d34ac857b172">
                   <SHORT-NAME>Cdd_FsiTx_Init</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -138,6 +145,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="3ace9b75-b52e-4a50-9a63-bce3ec0129a9">
                   <SHORT-NAME>Cdd_FsiTx_Ping</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -153,6 +161,7 @@
                 </BSW-CALLED-ENTITY>
                 <BSW-CALLED-ENTITY UUID="3ed059b1-6bcd-43ca-9a17-a1ad6ea50620">
                   <SHORT-NAME>Cdd_FsiTx_Reset</SHORT-NAME>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -167,6 +176,7 @@
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_FsiTx_TI_AM263px/Cdd_FsiTx/Cdd_Fsi_Tx_Behavior/FSI_TX_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
+                  <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
                   <CALL-POINTS>
                     <BSW-DIRECT-CALL-POINT>
@@ -296,6 +306,12 @@
                 <ALIGNMENT>32</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
                 <SYMBOL>VAR_INIT_32</SYMBOL>
+              </MEMORY-SECTION>
+              <MEMORY-SECTION UUID="9eaf491f-f9fe-457a-9062-407f81f39052">
+                <SHORT-NAME>CDD_FSITX_VAR_INIT_16</SHORT-NAME>
+                <PREFIX-REF DEST="SECTION-NAME-PREFIX">/Cdd_FsiTx_TI_AM263Px/Implementations/BswImplementation_0/ResourceConsumption/CDD_FSITX</PREFIX-REF>
+                <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
+                <SYMBOL>VAR_INIT_16</SYMBOL>
               </MEMORY-SECTION>
               <MEMORY-SECTION UUID="31aefe97-b47b-4aee-881b-7072a3c5b1d9">
                 <SHORT-NAME>CDD_FSI_TX_VAR_NO_INIT_8</SHORT-NAME>

@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 30-Apr-2026.
+This is the release notes for MCAL AM26xx 26.00.00 done on 02-May-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -252,6 +252,22 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>All main function execution, the context is now updated to TASK instead of UNSPECIFIED</td>
     </tr>
     <tr>
+      <td>MCAL-37913</td>
+      <td>Few memmap Memory Sections missing in bswmd.arxml</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>All missing memoey sections are now added to corresponding bswmd.arxml</td>
+    </tr>
+    <tr>
+      <td>MCAL-37917</td>
+      <td>MINIMUM-INTERVAL tag missing for all BSW-INTERRUPT-ENTITY and BSW-CALLED-ENTITY</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>MINIMUM-INTERVAL tag is now added to all BSW-INTERRUPT-ENTITY and BSW-CALLED-ENTITY</td>
+    </tr>
+    <tr>
       <td>MCAL-35577</td>
       <td>FSS support in MCAL</td>
       <td>Bootloader</td>
@@ -323,6 +339,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Fixed round-to-nearest for UP_DOWN mode so near-100% duty no longer truncates to 0.</td>
+    </tr>
+    <tr>
+      <td>MCAL-37916</td>
+      <td>PWM Counter Comparator Configuration Incomplete for Dual-Channel Mode</td>
+      <td>CDD PWM</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Cdd_Pwm_counterComparatorCfg now fixed to configure both channels properly</td>
     </tr>
     <tr>
       <td>MCAL-35748</td>
@@ -401,6 +425,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>The FLS driver now has Schm callout in process job to be used as hooks for the spinlock usage for multicore flash usage.</td>
+    </tr>
+    <tr>
+      <td>MCAL-37290</td>
+      <td>FLS Init redundant function calls</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>These function calls were redundant as Flash reset is done before hand, hence these calls are removed</td>
     </tr>
     <tr>
       <td>MCAL-35747</td>
@@ -724,6 +756,180 @@ CSP - Compliance Support Package
       <td>No</td>
       <td>CSP</td>
       <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+  </tbody>
+</table>
+
+# Release Types
+
+AM26xx MCAL releases follow a tiered support model with three release types: Early Adopter (EA), Short Term Support (STS), and Long Term Support (LTS). Each release type serves different customer needs and provides varying levels of support, quality assurance, and maintenance.
+
+## How to Identify Release Type
+
+The release type for each AM26xx MCAL release can be identified through the following methods:
+
+Release Notes Introduction Section: Every release note’s Introduction section will specify the release type (EA, STS, or LTS) for that particular release.
+
+## EA (Early Adopter)
+
+Early Adopter releases are intended for customers who want early access to new features and capabilities before they are fully validated. These releases allow customers to evaluate new functionality and provide feedback during the development cycle.
+
+Example Use Cases:
+- Early evaluation of new features
+- Proof-of-concept development
+- Providing feedback to the development team
+- Planning for future integration
+
+## STS (Short Term Support)
+
+Short Term Support releases provide a stable platform with validated features suitable for development and integration activities. These releases offer improved quality assurance compared to EA releases but are not intended for production deployment.
+
+Example Use Cases:
+- Development and integration activities
+- System validation and testing
+- Pre-production evaluation
+- Feature completeness verification
+
+## LTS (Long Term Support)
+
+Long Term Support releases are production-ready releases that provide the highest level of quality assurance, safety certification support, and long-term maintenance. These releases are recommended for production deployment in automotive and safety-critical applications.
+
+Example Use Cases:
+- Production deployment
+- Safety-critical applications
+- Automotive production systems
+- Applications requiring long-term stability and support
+
+## Release Type Comparison
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Topic</th>
+      <th style="text-align: left;">EA (Early Adopter)</th>
+      <th style="text-align: left;">STS (Short Term Support)</th>
+      <th style="text-align: left;">LTS (Long Term Support)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Quality</td>
+      <td>Baseline Quality</td>
+      <td>Baseline Quality (new features)</td>
+      <td>Functional Safety (if applicable)</td>
+    </tr>
+    <tr>
+      <td>Testing</td>
+      <td>Best Effort</td>
+      <td>>95% pass</td>
+      <td>>95% pass</td>
+    </tr>
+    <tr>
+      <td>Safety CSP</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>Yes (if FSQ)</td>
+    </tr>
+    <tr>
+      <td>Safety Certification</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>Yes (Internal / External)</td>
+    </tr>
+    <tr>
+      <td>Maintenance</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Will maintain until next LTS release</td>
+    </tr>
+    <tr>
+      <td>Bug Fix / Patch Release</td>
+      <td>No</td>
+      <td>Bugs that are prioritized will be fixed in the next release; no backporting to STS releases</td>
+      <td>Bug fixes on the LTS maintenance branch will be prioritized based on the severity of the bug</td>
+    </tr>
+    <tr>
+      <td>Feature Addition</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>New features will be added in an LTS release, but post LTS release, new features will not be backported to the LTS maintenance branch</td>
+    </tr>
+    <tr>
+      <td>Production Ready</td>
+      <td>No</td>
+      <td>Not recommended for Production</td>
+      <td>Recommended for Production</td>
+    </tr>
+  </tbody>
+</table>
+
+# CI/CD Strategy
+
+AM26xx MCAL is also available on GitHub.
+- AM263X - https://github.com/TexasInstruments/mcal_am263x
+- AM263PX - https://github.com/TexasInstruments/mcal_am263px
+- AM261X - https://github.com/TexasInstruments/mcal_am261x
+These GitHub repositories always reflects the leading and bleeding edge of MCAL development, providing early access to the latest features, fixes, and improvements as they are developed.
+
+Disclaimer: The GitHub repositories contains software that is not fully tested and may include bugs, errors, or defects that could cause system instability or unexpected behavior. Always review and validate code before use in any application.
+
+Official releases are published under the Releases section of the GitHub repository. These correspond to the versioned releases documented in these release notes and have undergone the quality and testing criteria.
+
+# Software Bill of Materials
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Component Type</th>
+      <th style="text-align: left;">Component Name</th>
+      <th style="text-align: left;">Production or Reference</th>
+      <th style="text-align: left;">Process Compliance</th>
+      <th style="text-align: left;">Certification</th>
+      <th style="text-align: left;">Distribution</th>
+      <th style="text-align: left;">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tools</td>
+      <td>${MCAL_INSTALL_PATH}/build/*</td>
+      <td>Reference</td>
+      <td>Demo Quality</td>
+      <td>No</td>
+      <td>github</td>
+      <td></td>
+    <tr>
+      <td>Documentation</td>
+      <td>${MCAL_INSTALL_PATH}/mcal_docs/*</td>
+      <td>Reference</td>
+      <td>Baseline Quality</td>
+      <td>Yes</td>
+      <td>github</td>
+      <td></td>
+    <tr>
+      <td>Drivers</td>
+      <td>${MCAL_INSTALL_PATH}/mcal/*</td>
+      <td>Production</td>
+      <td>Baseline Quality</td>
+      <td>Yes</td>
+      <td>github</td>
+      <td>Functional Safety Quality and Certification will be available in future releases. Please refer to device roadmap for details.</td>
+    <tr>
+      <td>Examples</td>
+      <td>${MCAL_INSTALL_PATH}/mcal/examples/*</td>
+      <td>Reference</td>
+      <td>Demo Quality</td>
+      <td>No</td>
+      <td>github</td>
+      <td></td>
+    <tr>
+      <td>Tools</td>
+      <td>${MCAL_INSTALL_PATH}/mcal_config/plugins/*</td>
+      <td>Production</td>
+      <td>Baseline Quality</td>
+      <td>Yes</td>
+      <td>github</td>
+      <td>Functional Safety Quality and Certification will be available in future releases. Please refer to device roadmap for details.</td>
     </tr>
   </tbody>
 </table>

@@ -947,12 +947,6 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
     uint32         regVal            = 0U;
     uint8          addrnumBytesInput = 0U;
 
-    /* Reset Enable the Flash */
-    retVal = Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RSTEN, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
-
-    /*Reset the Flash*/
-    retVal += Nor_OspiCmdWrite(handle, OSPI_NOR_CMD_RST, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
-
     /* Optimal programming setup */
     /* Disable DAC */
     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_ENB_DIR_ACC_CTLR_FLD, 0);

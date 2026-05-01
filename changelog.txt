@@ -1,3 +1,487 @@
+commit c8cf4d97f9f0fa4195d407b00d068ef0b1dd6694
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 1 15:20:17 2026 +0530
+
+    all: all: Lint fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c                        |   2 +-
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   | 164 ++++++++++++++-------
+ .../adc_test/testLib/adcTestNegativeTestCase.c     |   2 +-
+ mcal_test/mcu_test/testLib/mcuTestMainTestCase.c   |   4 +-
+ 4 files changed, 111 insertions(+), 61 deletions(-)
+
+commit b136e1e06acc366bb3cff7c82478144f7a579616
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 1 15:06:55 2026 +0530
+
+    all: all: Adding MINIMUM-START-INTERVAL to all BSW-INTERRUPT-ENTITY and BSW-CALLED-ENTITY
+    
+    Fixes: MCAL-37917
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml |  19 ++
+ .../am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml |  13 +
+ .../am263px/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml |  54 ++++
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |  12 +
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml |  23 ++
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  12 +
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |  12 +
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml |  23 ++
+ .../am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml |  13 +
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  12 +
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |  12 +
+ .../am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml |  14 +
+ .../soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml |  14 +
+ .../tresos/am263px_lp/output/swcd/Port_Bswmd.arxml |   9 +
+ .../am263px_sip/output/swcd/Port_Bswmd.arxml       |   9 +
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  13 +
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  13 +
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  13 +
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  13 +
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  13 +
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  13 +
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  12 +
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  12 +
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  12 +
+ .../soc/am261/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../soc/am263/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../soc/am263px/tresos/output/swcd/Wdg_Bswmd.arxml |   6 +
+ .../soc/am261/r5f0_0/swcd/Adc_Bswmd.arxml          |  19 ++
+ .../soc/am263/r5f0_0/swcd/Adc_Bswmd.arxml          |  19 ++
+ .../soc/am263px/r5f0_0/swcd/Adc_Bswmd.arxml        |  19 ++
+ .../soc/am261/r5f0_0/swcd/Can_Bswmd.arxml          |  18 ++
+ .../soc/am263/r5f0_0/swcd/Can_Bswmd.arxml          |  20 ++
+ .../soc/am263px/r5f0_0/swcd/Can_Bswmd.arxml        |  21 ++
+ .../soc/am261/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml      |  14 +
+ .../soc/am263/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml      |  15 +
+ .../soc/am263px/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml    |  15 +
+ .../soc/am261/r5f0_0/swcd/Dio_Bswmd.arxml          |   8 +
+ .../soc/am263/r5f0_0/swcd/Dio_Bswmd.arxml          |   8 +
+ .../soc/am263px/r5f0_0/swcd/Dio_Bswmd.arxml        |   8 +
+ .../soc/am261/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml      |  14 +
+ .../soc/am263/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml      |  14 +
+ .../soc/am263px/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml    |  14 +
+ .../soc/am261/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml      |  56 ++++
+ .../soc/am263/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml      |  55 ++++
+ .../soc/am263px/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml    |  56 ++++
+ .../soc/am261/r5f0_0/swcd/EthTrcv_Bswmd.arxml      |  14 +
+ .../soc/am263/r5f0_0/swcd/EthTrcv_Bswmd.arxml      |  14 +
+ .../soc/am263px/r5f0_0/swcd/EthTrcv_Bswmd.arxml    |  14 +
+ .../soc/am261/r5f0_0/swcd/Fls_Bswmd.arxml          |  14 +
+ .../soc/am263/r5f0_0/swcd/Fls_Bswmd.arxml          |  14 +
+ .../soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml        |  14 +
+ .../soc/am261/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml      |  14 +
+ .../soc/am261/r5f0_0/swcd/Fls_Bswmd.arxml          |  14 +
+ .../soc/am263px/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml    |  14 +
+ .../soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml        |  14 +
+ .../soc/am261/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml    |   8 +
+ .../soc/am263/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml    |   8 +
+ .../soc/am263px/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml  |   8 +
+ .../soc/am261/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml    |  10 +
+ .../soc/am263/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml    |  10 +
+ .../soc/am263px/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml  |  10 +
+ .../soc/am261/r5f0_0/swcd/Gpt_Bswmd.arxml          |  22 ++
+ .../soc/am263/r5f0_0/swcd/Gpt_Bswmd.arxml          |  22 ++
+ .../soc/am263px/r5f0_0/swcd/Gpt_Bswmd.arxml        |  38 +++
+ .../soc/am261/r5f0_0/swcd/Icu_Bswmd.arxml          |  22 ++
+ .../soc/am263/r5f0_0/swcd/Icu_Bswmd.arxml          |  23 ++
+ .../soc/am263px/r5f0_0/swcd/Icu_Bswmd.arxml        |  22 ++
+ .../soc/am261/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml      |  12 +
+ .../soc/am263/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml      |  12 +
+ .../soc/am263px/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml    |  12 +
+ .../soc/am261/r5f0_0/swcd/Lin_Bswmd.arxml          |  11 +
+ .../soc/am263/r5f0_0/swcd/Lin_Bswmd.arxml          |  11 +
+ .../soc/am263px/r5f0_0/swcd/Lin_Bswmd.arxml        |  11 +
+ .../soc/am261/r5f0_0/swcd/Mcu_Bswmd.arxml          |  12 +
+ .../soc/am263/r5f0_0/swcd/Mcu_Bswmd.arxml          |  12 +
+ .../soc/am263px/r5f0_0/swcd/Mcu_Bswmd.arxml        |  12 +
+ .../soc/am261/r5f0_0/swcd/Port_Bswmd.arxml         |   9 +
+ .../soc/am263/r5f0_0/swcd/Port_Bswmd.arxml         |  10 +
+ .../soc/am263px/r5f0_0/swcd/Port_Bswmd.arxml       |  10 +
+ .../soc/am261/r5f0_0/swcd/Pwm_Bswmd.arxml          |  10 +
+ .../soc/am263/r5f0_0/swcd/Pwm_Bswmd.arxml          |  10 +
+ .../soc/am263px/r5f0_0/swcd/Pwm_Bswmd.arxml        |  10 +
+ .../soc/am261/r5f0_0/swcd/Spi_Bswmd.arxml          |  19 ++
+ .../soc/am263/r5f0_0/swcd/Spi_Bswmd.arxml          |  20 ++
+ .../soc/am263px/r5f0_0/swcd/Spi_Bswmd.arxml        |  23 ++
+ .../soc/am261/r5f0_0/swcd/Cdd_Uart_Bswmd.arxml     |   8 +
+ .../soc/am263/r5f0_0/swcd/Cdd_Uart_Bswmd.arxml     |   8 +
+ .../soc/am263px/r5f0_0/swcd/Cdd_Uart_Bswmd.arxml   |   7 +
+ .../soc/am261/r5f0_0/swcd/Wdg_Bswmd.arxml          |   6 +
+ .../soc/am263/r5f0_0/swcd/Wdg_Bswmd.arxml          |   6 +
+ .../soc/am263px/r5f0_0/swcd/Wdg_Bswmd.arxml        |   6 +
+ .../generate_swcd/swcd/Adc_Bswmd.arxml             |  27 ++
+ .../generate_swcd/swcd/Can_Bswmd.arxml             |  21 ++
+ .../generate_swcd/swcd/Cdd_Dma_Bswmd.arxml         |  14 +
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       |   9 +
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |  11 +
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         |  16 ++
+ .../generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml         |  12 +
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         |  92 ++++++
+ .../generate_swcd/swcd/Cdd_Uart_Bswmd.arxml        |  14 +
+ .../generate_swcd/swcd/Dio_Bswmd.arxml             |   8 +
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |  19 ++
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |  15 +
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  31 +++
+ .../generate_swcd/swcd/Icu_Bswmd.arxml             |  34 +++
+ .../generate_swcd/swcd/Lin_Bswmd.arxml             |  16 ++
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             |  13 +
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |  13 +
+ .../generate_swcd/swcd/Pwm_Bswmd.arxml             |  30 ++
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |  19 ++
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |   6 +
+ .../generate_swcd/swcd/Adc_Bswmd.arxml             |  43 +++
+ .../generate_swcd/swcd/Can_Bswmd.arxml             |  27 ++
+ .../generate_swcd/swcd/Cdd_Dma_Bswmd.arxml         |  14 +
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       |  15 +
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |  17 ++
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         |  17 ++
+ .../generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml         |  12 +
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         | 308 +++++++++++++++++++++
+ .../generate_swcd/swcd/Cdd_Uart_Bswmd.arxml        |  14 +
+ .../generate_swcd/swcd/Dio_Bswmd.arxml             |   8 +
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |  19 ++
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |  19 ++
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |  15 +
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  47 ++++
+ .../generate_swcd/swcd/Icu_Bswmd.arxml             |  42 +++
+ .../generate_swcd/swcd/Lin_Bswmd.arxml             |  20 ++
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             |  13 +
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |  13 +
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |  13 +
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |  13 +
+ .../generate_swcd/swcd/Pwm_Bswmd.arxml             | 138 +++++++++
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |  23 ++
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |   6 +
+ .../generate_swcd/swcd/Adc_Bswmd.arxml             |  35 +++
+ .../generate_swcd/swcd/Can_Bswmd.arxml             |  23 ++
+ .../generate_swcd/swcd/Cdd_Dma_Bswmd.arxml         |  14 +
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       |  15 +
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |  17 ++
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         |  17 ++
+ .../generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml         |  12 +
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         | 307 ++++++++++++++++++++
+ .../generate_swcd/swcd/Cdd_Uart_Bswmd.arxml        |  14 +
+ .../generate_swcd/swcd/Det_Bswmd.arxml             |   2 +
+ .../generate_swcd/swcd/Dio_Bswmd.arxml             |   8 +
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |  19 ++
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |  15 +
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  47 ++++
+ .../generate_swcd/swcd/Icu_Bswmd.arxml             |  36 +++
+ .../generate_swcd/swcd/Lin_Bswmd.arxml             |  20 ++
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             |  13 +
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |  13 +
+ .../generate_swcd/swcd/Pwm_Bswmd.arxml             | 138 +++++++++
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |  20 ++
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |   6 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  13 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  14 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |   9 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  10 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  13 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  14 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  13 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  15 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |   9 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  11 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  13 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  15 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  13 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  15 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |   9 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  11 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  13 +
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  15 +
+ .../config_1/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_91/tresos/output/swcd/Lin_Bswmd.arxml   |  11 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_92/tresos/output/swcd/Lin_Bswmd.arxml   |   9 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_93/tresos/output/swcd/Lin_Bswmd.arxml   |  11 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_94/tresos/output/swcd/Lin_Bswmd.arxml   |   9 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_1/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_2/tresos/output/swcd/Lin_Bswmd.arxml    |  10 +
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_3/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_4/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_5/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_6/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_6/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_7/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_7/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_8/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_8/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_91/tresos/output/swcd/Lin_Bswmd.arxml   |  11 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_92/tresos/output/swcd/Lin_Bswmd.arxml   |   9 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_93/tresos/output/swcd/Lin_Bswmd.arxml   |  11 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_94/tresos/output/swcd/Lin_Bswmd.arxml   |   9 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_1/tresos/output/swcd/Lin_Bswmd.arxml    |  11 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_91/tresos/output/swcd/Lin_Bswmd.arxml   |  11 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_92/tresos/output/swcd/Lin_Bswmd.arxml   |   9 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_93/tresos/output/swcd/Lin_Bswmd.arxml   |  11 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_94/tresos/output/swcd/Lin_Bswmd.arxml   |   9 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |   5 +
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  13 +
+ .../config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |   5 +
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  13 +
+ .../config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |   5 +
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   5 +
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |   5 +
+ .../config_7/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_7/tresos/output/swcd/Wdg_Bswmd.arxml    |   5 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |   5 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  13 +
+ .../config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |   5 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |   5 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   7 +
+ .../config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |   5 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  13 +
+ .../config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  13 +
+ .../config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_6/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_6/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_7/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_7/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |   7 +
+ .../config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   7 +
+ .../config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  13 +
+ .../config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  13 +
+ .../config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |  12 +
+ .../config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |   6 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |   7 +
+ .../config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  12 +
+ .../config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   7 +
+ .../config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |   6 +
+ release_notes.md                                   |  16 ++
+ 278 files changed, 4699 insertions(+)
+
+commit 36d11323df73fca938aa0e23ab043d33e213efdd
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 1 02:18:00 2026 +0530
+
+    all: all: Added release types, CI/CD stratergy and SBOM
+    
+    Fixes: MCAL-35550
+    
+    Signed-of-by: Swathi G Bhat
+
+ release_notes.md | 190 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 190 insertions(+)
+
+commit b59ce7c33eba6ec72896bd4cc109b84a4ac275c4
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 1 02:15:55 2026 +0530
+
+    all: all: Updated bswmd memory sections
+    
+    Fixes: MCAL-37913
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../am263px/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml |  6 ++++++
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  6 ++++++
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  6 ++++++
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  6 ++++++
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  6 ++++++
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  6 ++++++
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  6 ++++++
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  6 ++++++
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  6 ++++++
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  6 ++++++
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  6 ++++++
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  6 ++++++
+ .../soc/am261/r5f0_0/swcd/Can_Bswmd.arxml          | 24 ++++++++++++++++++++++
+ .../soc/am263/r5f0_0/swcd/Can_Bswmd.arxml          | 24 ++++++++++++++++++++++
+ .../soc/am263px/r5f0_0/swcd/Can_Bswmd.arxml        | 24 ++++++++++++++++++++++
+ .../soc/am261/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml      |  6 ++++++
+ .../soc/am263/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml      |  6 ++++++
+ .../soc/am263px/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml    |  6 ++++++
+ .../soc/am261/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml      |  6 ++++++
+ .../soc/am263/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml      |  6 ++++++
+ .../soc/am263px/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml    |  6 ++++++
+ .../soc/am261/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml    |  6 ++++++
+ .../soc/am263/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml    |  6 ++++++
+ .../soc/am263px/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml  |  6 ++++++
+ .../soc/am261/r5f0_0/swcd/Gpt_Bswmd.arxml          |  6 ++++++
+ .../soc/am263/r5f0_0/swcd/Gpt_Bswmd.arxml          |  6 ++++++
+ .../soc/am263px/r5f0_0/swcd/Gpt_Bswmd.arxml        |  6 ++++++
+ .../generate_swcd/swcd/Can_Bswmd.arxml             | 24 ++++++++++++++++++++++
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |  6 ++++++
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         |  6 ++++++
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  6 ++++++
+ .../generate_swcd/swcd/Can_Bswmd.arxml             | 24 ++++++++++++++++++++++
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |  6 ++++++
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         |  6 ++++++
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  6 ++++++
+ .../generate_swcd/swcd/Can_Bswmd.arxml             | 24 ++++++++++++++++++++++
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |  6 ++++++
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         |  6 ++++++
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  6 ++++++
+ 60 files changed, 468 insertions(+)
+
+commit 7b269861296205766f27542b4aedf660fe32e569
+Author: aswinsankar <a-puthenpurackaldileep@ti.com>
+Date:   Sun Apr 26 21:13:53 2026 +0530
+
+    am263px: Bootloader: Fixed bootloader_fls.h file inclusion
+    Fixes: MCAL-35392
+    
+    Signed-off-by: Aswin P D
+
+ mcal/examples/Utils/bootloader_utils/bootloader.h      | 16 ++--------------
+ mcal/examples/Utils/bootloader_utils/bootloader_fls.c  |  1 +
+ mcal/examples/Utils/bootloader_utils/bootloader_fls.h  |  4 +++-
+ mcal/examples/Utils/bootloader_utils/bootloader_priv.h | 13 +++++++++++++
+ 4 files changed, 19 insertions(+), 15 deletions(-)
+
+commit ec9d83765bd4a8e831c711d76e736a2b81abe848
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Apr 29 14:29:03 2026 +0530
+
+    am263px/am261x: Fls: Redundant reset enable and reset of flash in Fls_init removed
+    
+    Fixes: MCAL-37920
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Ospi.c                             |  6 ---
+ mcal_test/fls_test/testLib/flsTest.h               |  7 ++-
+ mcal_test/fls_test/testLib/flsTestMainTestCase.c   | 60 ++++++++++++++++++++--
+ .../fls_test/testLib/flsTestNegativeTestCase.c     | 26 +++++++++-
+ 4 files changed, 88 insertions(+), 11 deletions(-)
+
+commit 9e80dbad5847215cbc45c21da6bfc1f6a8d51a26
+Author: Asha D <asha.d@ti.com>
+Date:   Thu Apr 30 18:54:49 2026 +0530
+
+    am263px:EPWM: Updated the Coverage Gap
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c | 27 ++++++++-------------------
+ 1 file changed, 8 insertions(+), 19 deletions(-)
+
+commit f494949523db50b583b3c275e809350a599561fa
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Tue Apr 28 01:08:30 2026 +0530
+
+    am26xx: adc: fix the bug
+    
+     - Fixed the testcase failures
+     - Added define for combined macros
+    
+    Fixes: MCAL-35728
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal_test/adc_test/testApp/adcTestApp.c            |   2 +-
+ .../testApp/soc/am261/r5f0_0/adcTestApp_Startup.c  |   2 +-
+ .../testApp/soc/am263/r5f0_0/adcTestApp_Startup.c  |   2 +-
+ .../soc/am263px/r5f0_0/adcTestApp_Startup.c        |   2 +-
+ mcal_test/adc_test/testInput/adcTestCases.h        |   4 -
+ mcal_test/adc_test/testLib/adcTest.h               |   2 +-
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   | 484 +++++++++++++--------
+ .../adc_test/testLib/adcTestNegativeTestCase.c     |   3 +-
+ 8 files changed, 305 insertions(+), 196 deletions(-)
+
+commit 0934817ad2e85a5f904671ed3c634d747c64a8d1
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Thu Apr 30 16:00:45 2026 +0530
+
+    all: script: add f29h85x mirror-only support
+    
+    Fixes: MCAL-35884
+
+ .../scripts/cicd/mcal_release_orchestrator.sh      | 48 ++++++++++++++++++----
+ 1 file changed, 41 insertions(+), 7 deletions(-)
+
+commit e31e93558ca16bcfa44a25dd7b754af8f523af3f
+Author: Asha D <asha.d@ti.com>
+Date:   Fri Apr 24 00:32:04 2026 +0530
+
+    am263px:MCU: Updated testcases for coverage
+    
+    Fixes: MCAL-35523
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal_test/mcu_test/build/makefile                  |   4 +-
+ mcal_test/mcu_test/testInput/mcuTestCases.h        |  84 ++++++++++-------
+ mcal_test/mcu_test/testLib/mcuTest.h               |   2 +-
+ mcal_test/mcu_test/testLib/mcuTestMainTestCase.c   | 100 +++++++++------------
+ .../mcu_test/testLib/mcuTestNegativeTestCase.c     |   6 +-
+ 5 files changed, 102 insertions(+), 94 deletions(-)
+
 commit 931fde4c6100d335f24b7c0cb74a6759f520268e
 Author: Asha D <asha.d@ti.com>
 Date:   Wed Apr 29 16:26:30 2026 +0530

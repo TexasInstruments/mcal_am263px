@@ -142,6 +142,19 @@ typedef struct
     uint32_t memEnd;
 } Bootloader_memSection;
 
+/**
+ * \brief Driver implementation callbacks - Full definition (internal use only)
+ */
+struct Bootloader_Fxns_s
+{
+    Bootloader_imgOpenFxn   imgOpenFxn;
+    Bootloader_imgReadFxn   imgReadFxn;
+    Bootloader_imgOffsetFxn imgOffsetFxn;
+    Bootloader_imgSeekFxn   imgSeekFxn;
+    Bootloader_imgCloseFxn  imgCloseFxn;
+    Bootloader_imgCustomFxn imgCustomFxn;
+};
+
 typedef struct
 {
     uint32_t              numSections;

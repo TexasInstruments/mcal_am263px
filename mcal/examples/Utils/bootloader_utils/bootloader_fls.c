@@ -54,6 +54,7 @@
  */
 
 #include <bootloader.h>
+#include "bootloader_priv.h"
 #include <bootloader_fls.h>
 #include "Fls.h"
 
