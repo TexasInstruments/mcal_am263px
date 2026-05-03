@@ -1,3 +1,65 @@
+commit 62299f3f638b9232e2bba55f4e362ecccf42edbb
+Author: Akash <a-verma3@ti.com>
+Date:   Sat May 2 19:17:53 2026 +0530
+
+    am26xx: all: lint and release note update(amend).
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Akash Verma
+
+commit e57eadc2c021e8298cae6c7b721aae9f501b9c52
+Author: Akash <a-verma3@ti.com>
+Date:   Sat May 2 18:21:15 2026 +0530
+
+    am26xx: all: Lint and release note update
+
+ mcal/Spi/V0/Spi_Dma.c                             | 13 +++++-----
+ mcal_test/spi_test/testLib/spiTestMcspiTestCase.c | 10 ++++----
+ release_notes.md                                  | 30 +++++++++++++++++------
+ 3 files changed, 34 insertions(+), 19 deletions(-)
+
+commit 435d4db70b5afd7927094c54321265034bde180e
+Author: Akash <a-verma3@ti.com>
+Date:   Wed Apr 29 01:21:07 2026 +0530
+
+    am263x: Spi: UT Config 10 running is stuck .
+    
+    - XBAR_EDMA is configured wrong for the Rx for SPI4_DMA
+    
+    - In the config 10 (am263x) callback configuration is also wrong. configured for SpiApp_McspiJobX,changed to spiTest_McspiJobX
+    
+    Fixes: MCAL-35323
+    
+    Signed-off-by: Akash Verma
+
+ .../soc/am263/r5f0_0/include/Cdd_Dma_Cfg.h         |    2 +-
+ .../soc/am263/tresos/config/Cdd_Dma.xdm            | 5076 ++++++++++----------
+ .../spi_test/testLib/spiTestMcspiMiscTestCase.c    |   69 +
+ mcal_test/spi_test/testLib/spiTestMcspiTestCase.c  |   33 +-
+ .../Spi/soc/am261/r5f0_0/config_1/Port_Cfg.c       |    4 +
+ .../Spi/soc/am261/r5f0_0/config_1/Port_Cfg.h       |  889 ++++
+ .../Spi/soc/am261/r5f0_0/config_1/Port_PBcfg.c     |  769 +++
+ .../Spi/soc/am263/r5f0_0/config_10/Spi_PBcfg.c     |   16 +-
+ .../Spi/soc/am263px/r5f0_0/config_7/Spi_Cfg.h      |    3 +
+ 9 files changed, 4311 insertions(+), 2550 deletions(-)
+
+commit a2c2da2b5d69bc8b6d8e48173350a2c59eb38a82
+Author: Akash <a-verma3@ti.com>
+Date:   Sat May 2 00:41:45 2026 +0530
+
+    am26xx: Spi: Add cache invalidation in SPI DMA RX handler.
+    
+    - Added to ensure CPU reads fresh DMA-written data when cache writeback mode is enabled
+    
+    Fixes: MCAL-13434
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Spi/V0/Spi_Dma.c | 19 +++++++++++++++++++
+ mcal/Spi/srcs.mk      |  1 +
+ 2 files changed, 20 insertions(+)
+
 commit c8cf4d97f9f0fa4195d407b00d068ef0b1dd6694
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Fri May 1 15:20:17 2026 +0530

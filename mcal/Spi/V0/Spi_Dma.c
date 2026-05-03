@@ -71,6 +71,8 @@
 
 #if (SPI_DMA_ENABLE == STD_ON)
 
+#include "CacheP.h"
+
 #define SPI_START_SEC_CODE
 #include "Spi_MemMap.h"
 #include "lldr_mcspi.h"
@@ -386,7 +388,10 @@ static void Spi_dmaTxIsrHandler_StatusCheck(const Spi_HwUnitObjType *hwUnitObj)
 
 void Spi_DmaRxIsrHandler(void *args)
 {
-    Spi_HwUnitObjType *hwUnitObj = (Spi_HwUnitObjType *)NULL_PTR;
+    Spi_HwUnitObjType  *hwUnitObj    = (Spi_HwUnitObjType *)NULL_PTR;
+    Spi_ChannelObjType *chObj        = (Spi_ChannelObjType *)NULL_PTR;
+    Spi_ChannelType     chId         = 0U;
+    uint32              rxBufferSize = 0U;
 
     if (args != NULL_PTR)
     {
@@ -395,6 +400,19 @@ void Spi_DmaRxIsrHandler(void *args)
         if ((NULL_PTR != hwUnitObj->curJobObj) &&
             (hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode != SPI_TX_RX_MODE_TX_ONLY))
         {
+            /*  Invalidate RX buffer cache to ensure CPU reads fresh DMA data */
+            chId  = hwUnitObj->curJobObj->jobCfg.channelList[hwUnitObj->curJobObj->curChIdx];
+            chObj = Spi_getCurrChannelObj(chId);
+
+            if (NULL_PTR != chObj)
+            {
+                rxBufferSize = (uint32)chObj->numWordsTxRx * (uint32)chObj->bufWidth;
+
+                if ((rxBufferSize > 0U) && (NULL_PTR != chObj->curRxBufPtr))
+                {
+                    Mcal_CacheP_inv((void *)chObj->curRxBufPtr, rxBufferSize, Mcal_CacheP_TYPE_L1D);
+                }
+            }
             /* This channel transfer is complete */
             hwUnitObj->curJobObj->jobResult = SPI_JOB_OK;
             Spi_processChCompletion(hwUnitObj, SPI_JOB_OK);

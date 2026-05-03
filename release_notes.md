@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 02-May-2026.
+This is the release notes for MCAL AM26xx 26.00.00 done on 03-May-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -87,12 +87,12 @@ This document details about supported driver, installation, dependencies, build 
       <td>FLS</td>
       <td>Flash erase operations are now non-blocking</td>
       <td>The application must periodically schedule <code>Fls_MainFunction</code>
-          to process erase completion and update the job result.</td><br>
+          to process erase completion and update the job result.</td>
     </tr>
     <tr>
       <td>FLS</td>
       <td>All Fls operations have SchM_Entry_Fls/SchM_Exit_Fls provided as hooks to spinlock/unlock</td>
-      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical section protection by default. </td><br>
+      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical     section protection by default. </td><br>
     </tr>
   </tbody>
 </table>
@@ -507,6 +507,22 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>All INTRXBAR_OUT macros for am261 are now corrected</td>
     </tr>
     <tr>
+      <td>MCAL-13434</td>
+      <td>DMA mode is not working with Cache Writeback enabled</td>
+      <td>SPI</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SPI -DMA mode is now fixed to work with Cache Writeback enabled</td>
+    </tr>
+      <tr>
+      <td>MCAL-29488</td>
+      <td>SPI -DMA interrupt Handling is wrong when both TX and RX are selected</td>
+      <td>SPI</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SPI-DMA Tx ISR is now fixed to handle txRxmode set to SPI_TX_RX_MODE_BOTH</td>
+    </tr>
+    <tr>
       <td>MCAL-36790</td>
       <td>Missing WDG exclusive area reference inside APIs in bswmd arxml </td>
       <td>WDG</td>
@@ -563,13 +579,13 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>MCAL-13434</td>
-      <td>DMA mode is not working with Cache Writeback enabled</td>
-      <td>SPI</td>
+     <tr>
+      <td>MCAL-32474</td>
+      <td>LIN Performance values are not updated in MCAL user manual</td>
+      <td>LIN</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Customer to use Cache Write through in case if they are using SPI+DMA</td>
+      <td>To be fixed in future release</td>
     </tr>
   </tbody>
 </table>

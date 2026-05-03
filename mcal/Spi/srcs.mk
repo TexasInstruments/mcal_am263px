@@ -1,4 +1,5 @@
 include $(mcal_PATH)/Spi/inc.mk
+INCDIR += $(mcal_PATH)/examples/Utils/$(COMPILER)/$(SOC)
 
 SRCDIR += $(mcal_PATH)/Spi/src
 SRCS_COMMON += Spi.c Spi_Priv.c Spi_Utils.c Spi_Irq.c
