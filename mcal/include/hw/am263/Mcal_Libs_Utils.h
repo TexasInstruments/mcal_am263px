@@ -80,7 +80,7 @@ typedef enum Mcal_CacheP_Type_ {
 
 void Mcal_CacheP_invL1p(uint32 blockPtr, uint32 byteCnt);
 void Mcal_CacheP_invL1d(uint32 blockPtr, uint32 byteCnt);
-void Mcal_CacheP_inv(void *blockPtr, uint32 byteCnt, uint32 type);
+void Mcal_CacheP_inv(void *addr, uint32 size, uint32 type);
 
 void Mcal_Libs_Utils_unlockMMR(void);
 void Mcal_Libs_Utils_lockMMR(void);

@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.00.00 done on 03-May-2026.
+This is the release notes for MCAL AM26xx 26.00.00.07 done on 05-May-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -45,6 +45,11 @@ This document details about supported driver, installation, dependencies, build 
       </td>
     </tr>
     <tr>
+      <td>Eth driver supports QoS (multiqueue support)<td>
+      <td>ETH</td>
+      <td>AM263x, AM263Px, AM261x</td>
+    </tr>
+    <tr>
       <td>Added FSS Utility</td>
       <td>FSS</td>
       <td>AM263Px</td>
@@ -54,6 +59,16 @@ This document details about supported driver, installation, dependencies, build 
       <td>FLS</td>
       <td>AM263Px, AM261</td>
     </tr>
+    <tr>
+      <td>Non-blocking I2C Cancel</td>
+      <td>I2C</td>
+      <td>AM263x, AM263Px, AM261x</td>
+    </tr>
+    <tr>
+      <td>Enabled LIN_TIMEOUT_DURATION</td>
+      <td>LIN</td>
+      <td>AM263x, AM263Px, AM261x</td>
+    </tr>   
     <tr>
       <td>Bug Fixes</td>
       <td>All</td>
@@ -92,7 +107,12 @@ This document details about supported driver, installation, dependencies, build 
     <tr>
       <td>FLS</td>
       <td>All Fls operations have SchM_Entry_Fls/SchM_Exit_Fls provided as hooks to spinlock/unlock</td>
-      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical     section protection by default. </td><br>
+      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical     section protection by default. </td>
+    </tr>
+    <tr>
+      <td>WDG</td>
+      <td>Wdg_SetMode API returns DET run time error "WDG_E_INVALID_EXEC_MODE" when executed in usermode</td>
+      <td>Application shall handle WDG_E_INVALID_EXEC_MODE error code.</td><br>
     </tr>
   </tbody>
 </table>
@@ -150,15 +170,15 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
 | DIO        | 10.02.02 |
 | ETH        | 10.03.01 |
 | ETHTRCV    | 10.04.00 |
-| FLS        | 10.03.01 |
+| FLS        | 11.00.00 |
 | GPT        | 10.02.02 |
 | ICU        | 10.02.02 |
-| LIN        | 10.03.01 |
+| LIN        | 10.04.00 |
 | MCU        | 10.02.02 |
 | PORT       | 10.02.03 |
 | PWM        | 10.02.01 |
 | SPI        | 10.02.02 |
-| WDG        | 10.02.02 |
+| WDG        | 11.00.00 |
 +------------+----------+
 ```
 

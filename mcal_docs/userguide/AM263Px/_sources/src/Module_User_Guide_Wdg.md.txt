@@ -171,6 +171,8 @@ The errors reported to DET and DEM are described in the following table
 |API service called with wrong / inconsistent parameter(s)|WDG_E_PARAM_CONFIG|0x12|
 |The passed timeout value is higher than the max timeout value.|WDG_E_PARAM_TIMEOUT|0x13|
 |API is called with wrong pointer value (e.g. NULL pointer)|WDG_E_PARAM_POINTER|0x14|
+|API called with invalid configuration set selection|WDG_E_INIT_FAILED|0x15|
+|API called with invalid(user-mode) ARM execution mode|WDG_E_INVALID_EXEC_MODE|0x16|
 
 ##### Parameter Checking
 

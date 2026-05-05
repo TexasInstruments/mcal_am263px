@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 26.00.00 done on 03-May-2026.
+<p>This is the release notes for MCAL AM26xx 26.00.00.07 done on 05-May-2026.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.md">license.md</a> present in installation base path</p>
@@ -48,6 +48,11 @@ This document details about supported driver, installation, dependencies, build 
       </td>
     </tr>
     <tr>
+      <td>Eth driver supports QoS (multiqueue support)<td>
+      <td>ETH</td>
+      <td>AM263x, AM263Px, AM261x</td>
+    </tr>
+    <tr>
       <td>Added FSS Utility</td>
       <td>FSS</td>
       <td>AM263Px</td>
@@ -57,6 +62,16 @@ This document details about supported driver, installation, dependencies, build 
       <td>FLS</td>
       <td>AM263Px, AM261</td>
     </tr>
+    <tr>
+      <td>Non-blocking I2C Cancel</td>
+      <td>I2C</td>
+      <td>AM263x, AM263Px, AM261x</td>
+    </tr>
+    <tr>
+      <td>Enabled LIN_TIMEOUT_DURATION</td>
+      <td>LIN</td>
+      <td>AM263x, AM263Px, AM261x</td>
+    </tr>   
     <tr>
       <td>Bug Fixes</td>
       <td>All</td>
@@ -93,7 +108,12 @@ This document details about supported driver, installation, dependencies, build 
     <tr>
       <td>FLS</td>
       <td>All Fls operations have SchM_Entry_Fls/SchM_Exit_Fls provided as hooks to spinlock/unlock</td>
-      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical     section protection by default. </td><br>
+      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical     section protection by default. </td>
+    </tr>
+    <tr>
+      <td>WDG</td>
+      <td>Wdg_SetMode API returns DET run time error "WDG_E_INVALID_EXEC_MODE" when executed in usermode</td>
+      <td>Application shall handle WDG_E_INVALID_EXEC_MODE error code.</td><br>
     </tr>
   </tbody>
 </table>
@@ -144,15 +164,15 @@ This document details about supported driver, installation, dependencies, build 
 | DIO        | 10.02.02 |
 | ETH        | 10.03.01 |
 | ETHTRCV    | 10.04.00 |
-| FLS        | 10.03.01 |
+| FLS        | 11.00.00 |
 | GPT        | 10.02.02 |
 | ICU        | 10.02.02 |
-| LIN        | 10.03.01 |
+| LIN        | 10.04.00 |
 | MCU        | 10.02.02 |
 | PORT       | 10.02.03 |
 | PWM        | 10.02.01 |
 | SPI        | 10.02.02 |
-| WDG        | 10.02.02 |
+| WDG        | 11.00.00 |
 +------------+----------+
 </code></pre>
 <h2 id="driverssupported">Drivers Supported</h2>

@@ -1,3 +1,489 @@
+commit ec607a383a79f94b45270f168b66d5dac46a2936
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon May 4 21:19:12 2026 +0530
+
+    all: all: Updated pref_general.xdm with module versions
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../fls_boot_app/soc/am263px/tresos/.prefs/pref_general.xdm         | 2 +-
+ .../Wdg/wdg_skip_reset_app/soc/am261/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Wdg/wdg_skip_reset_app/soc/am263/tresos/.prefs/pref_general.xdm | 2 +-
+ .../wdg_skip_reset_app/soc/am263px/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../soc/am261/tresos/.prefs/pref_general.xdm                        | 2 +-
+ .../soc/am263px/tresos/.prefs/pref_general.xdm                      | 2 +-
+ .../Mcal_Demo_Cfg/soc/am261/tresos/.prefs/pref_general.xdm          | 6 +++---
+ .../Mcal_Demo_Cfg/soc/am263/tresos/.prefs/pref_general.xdm          | 6 +++---
+ .../Mcal_Demo_Cfg/soc/am263px/tresos/.prefs/pref_general.xdm        | 6 +++---
+ .../Lin/soc/am261/r5f0_0/config_1/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am261/r5f0_0/config_91/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am261/r5f0_0/config_92/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am261/r5f0_0/config_93/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am261/r5f0_0/config_94/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_1/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_2/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_3/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_4/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_5/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_6/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_7/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_8/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_91/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_92/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_93/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am263/r5f0_0/config_94/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Lin/soc/am263px/r5f0_0/config_1/tresos/.prefs/pref_general.xdm  | 2 +-
+ .../Lin/soc/am263px/r5f0_0/config_91/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Lin/soc/am263px/r5f0_0/config_92/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Lin/soc/am263px/r5f0_0/config_93/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Lin/soc/am263px/r5f0_0/config_94/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_1/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_2/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_3/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_4/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_5/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_7/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_91/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_92/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_93/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am261/r5f0_0/config_94/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_1/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_2/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_3/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_4/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_5/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_6/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_7/tresos/.prefs/pref_general.xdm    | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_91/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_92/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_93/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am263/r5f0_0/config_94/tresos/.prefs/pref_general.xdm   | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_1/tresos/.prefs/pref_general.xdm  | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_2/tresos/.prefs/pref_general.xdm  | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_3/tresos/.prefs/pref_general.xdm  | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_4/tresos/.prefs/pref_general.xdm  | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_5/tresos/.prefs/pref_general.xdm  | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_91/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_92/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_93/tresos/.prefs/pref_general.xdm | 2 +-
+ .../Mcu/soc/am263px/r5f0_0/config_94/tresos/.prefs/pref_general.xdm | 2 +-
+ 61 files changed, 67 insertions(+), 67 deletions(-)
+
+commit e8c8e7cefa1b124a7ab6336d1d63e18c80e6a950
+Author: Akash <a-verma3@ti.com>
+Date:   Sat May 2 20:03:32 2026 +0530
+
+    am26xx: all: Release note and Module versions update.
+    
+    Fixes: MCAL-37918
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Fls/include/Fls.h                             |  6 ++---
+ mcal/Fls/src/Fls.c                                 |  2 +-
+ mcal/Lin/include/Lin.h                             |  4 ++--
+ mcal/Lin/src/Lin.c                                 |  4 ++--
+ mcal/Wdg/include/Wdg.h                             |  6 ++---
+ mcal/Wdg/src/Wdg.c                                 |  4 ++--
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |  6 ++---
+ .../soc/am263px/tresos/output/src/Fls_Cfg.c        |  4 ++--
+ .../soc/am263/tresos/output/include/Fls_Cfg.h      |  6 ++---
+ .../Flsdiag/soc/am263/tresos/output/src/Fls_Cfg.c  |  4 ++--
+ .../soc/am261/tresos/output/include/Fls_Cfg.h      |  6 ++---
+ .../soc/am261/tresos/output/src/Fls_Cfg.c          |  4 ++--
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |  6 ++---
+ .../soc/am263px/tresos/output/src/Fls_Cfg.c        |  4 ++--
+ .../soc/am261/tresos/output/include/Fls_Cfg.h      |  6 ++---
+ .../soc/am261/tresos/output/src/Fls_Cfg.c          |  4 ++--
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |  6 ++---
+ .../soc/am263px/tresos/output/src/Fls_Cfg.c        |  4 ++--
+ .../soc/am261/tresos/output/include/Fls_Cfg.h      |  6 ++---
+ .../soc/am261/tresos/output/src/Fls_Cfg.c          |  4 ++--
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |  6 ++---
+ .../soc/am263px/tresos/output/src/Fls_Cfg.c        |  4 ++--
+ .../soc/am261/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../soc/am261/tresos/output/src/Wdg_PBcfg.c        |  8 +++----
+ .../soc/am263/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../soc/am263/tresos/output/src/Wdg_PBcfg.c        |  4 ++--
+ .../soc/am263px/tresos/output/include/Wdg_Cfg.h    |  6 ++---
+ .../soc/am263px/tresos/output/src/Wdg_PBcfg.c      |  4 ++--
+ .../soc/am261/r5f0_0/include/Fls_Cfg.h             |  6 ++---
+ .../Fls_Demo_Cfg/soc/am261/r5f0_0/src/Fls_Cfg.c    |  4 ++--
+ .../soc/am263/r5f0_0/include/Fls_Cfg.h             |  6 ++---
+ .../Fls_Demo_Cfg/soc/am263/r5f0_0/src/Fls_Cfg.c    |  4 ++--
+ .../soc/am263px/r5f0_0/include/Fls_Cfg.h           |  6 ++---
+ .../Fls_Demo_Cfg/soc/am263px/r5f0_0/src/Fls_Cfg.c  |  4 ++--
+ .../soc/am261/r5f0_0/include/Fls_Cfg.h             |  6 ++---
+ .../soc/am261/r5f0_0/src/Fls_PBcfg.c               |  4 ++--
+ .../soc/am263px/r5f0_0/include/Fls_Cfg.h           |  6 ++---
+ .../soc/am263px/r5f0_0/src/Fls_PBcfg.c             |  4 ++--
+ .../soc/am261/r5f0_0/include/Lin_Cfg.h             |  4 ++--
+ .../Lin_Demo_Cfg/soc/am261/r5f0_0/src/Lin_Cfg.c    |  4 ++--
+ .../Lin_Demo_Cfg/soc/am261/r5f0_0/src/Lin_PBcfg.c  |  4 ++--
+ .../soc/am263/r5f0_0/include/Lin_Cfg.h             |  4 ++--
+ .../Lin_Demo_Cfg/soc/am263/r5f0_0/src/Lin_Cfg.c    |  4 ++--
+ .../Lin_Demo_Cfg/soc/am263/r5f0_0/src/Lin_PBcfg.c  |  4 ++--
+ .../soc/am263px/r5f0_0/include/Lin_Cfg.h           |  4 ++--
+ .../Lin_Demo_Cfg/soc/am263px/r5f0_0/src/Lin_Cfg.c  |  4 ++--
+ .../soc/am263px/r5f0_0/src/Lin_PBcfg.c             |  4 ++--
+ .../soc/am261/r5f0_0/include/Wdg_Cfg.h             |  6 ++---
+ .../Wdg_Demo_Cfg/soc/am261/r5f0_0/src/Wdg_PBcfg.c  |  8 +++----
+ .../soc/am263/r5f0_0/include/Wdg_Cfg.h             |  6 ++---
+ .../Wdg_Demo_Cfg/soc/am263/r5f0_0/src/Wdg_PBcfg.c  |  4 ++--
+ .../soc/am263px/r5f0_0/include/Wdg_Cfg.h           |  6 ++---
+ .../soc/am263px/r5f0_0/src/Wdg_PBcfg.c             |  4 ++--
+ .../plugins/AM261x/Fls_TI_AM261x/plugin.xml        |  6 ++---
+ .../plugins/AM261x/Lin_TI_AM261x/plugin.xml        |  4 ++--
+ .../plugins/AM261x/Wdg_TI_AM261x/plugin.xml        |  6 ++---
+ .../plugins/AM263Px/Fls_TI_AM263Px/plugin.xml      |  6 ++---
+ .../plugins/AM263Px/Lin_TI_AM263Px/plugin.xml      |  4 ++--
+ .../plugins/AM263Px/Wdg_TI_AM263Px/plugin.xml      |  6 ++---
+ .../plugins/AM263x/Fls_TI_AM263x/plugin.xml        |  6 ++---
+ .../plugins/AM263x/Lin_TI_AM263x/plugin.xml        |  4 ++--
+ .../plugins/AM263x/Wdg_TI_AM263x/plugin.xml        |  6 ++---
+ mcal_misc/scripts/helper/version_update.sh         | 16 ++++++-------
+ .../Fls/soc/am261/r5f0_0/config_1/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_1/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_10/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_10/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_12/Fls_Cfg.c       |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_12/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_14/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_14/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_15/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_15/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_16/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_16/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_2/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_2/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_20/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_20/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_3/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_3/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_4/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_4/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_5/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_5/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_6/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_6/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_7/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_7/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_8/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_8/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_9/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_9/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_91/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_91/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_92/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_92/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_93/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_93/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am261/r5f0_0/config_94/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am261/r5f0_0/config_94/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_1/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_1/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_10/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_10/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_11/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_11/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_14/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_14/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_15/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_15/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_16/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_16/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_2/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_2/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_20/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_20/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_21/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_21/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_3/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_3/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_4/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_4/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_5/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_5/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_6/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_6/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_7/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_7/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_8/Fls_Cfg.c        |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_8/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_9/Fls_Cfg.h        |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_9/Fls_PBcfg.c      |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_91/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_91/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_92/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_92/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_93/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_93/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263/r5f0_0/config_94/Fls_Cfg.h       |  6 ++---
+ .../Fls/soc/am263/r5f0_0/config_94/Fls_PBcfg.c     |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_1/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_1/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_10/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_10/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_12/Fls_Cfg.c     |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_12/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_14/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_14/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_15/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_15/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_16/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_16/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_17/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_17/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_2/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_2/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_20/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_20/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_3/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_3/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_4/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_4/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_5/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_5/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_6/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_6/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_7/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_7/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_8/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_8/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_9/Fls_Cfg.h      |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_9/Fls_PBcfg.c    |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_91/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_91/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_92/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_92/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_93/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_93/Fls_PBcfg.c   |  4 ++--
+ .../Fls/soc/am263px/r5f0_0/config_94/Fls_Cfg.h     |  6 ++---
+ .../Fls/soc/am263px/r5f0_0/config_94/Fls_PBcfg.c   |  4 ++--
+ .../config_1/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_1/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_1/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../Lin/soc/am261/r5f0_0/config_91/Lin_Cfg.h       |  4 ++--
+ .../config_91/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_91/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_91/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_92/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_92/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_92/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_93/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_93/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_93/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_94/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_94/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_94/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_1/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_1/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_1/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../config_2/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_2/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_2/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../config_3/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_3/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_3/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../config_4/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_4/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_4/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../config_5/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_5/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_5/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../Lin/soc/am263/r5f0_0/config_6/Lin_Cfg.h        |  4 ++--
+ .../config_6/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_6/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_6/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../Lin/soc/am263/r5f0_0/config_7/Lin_Cfg.h        |  4 ++--
+ .../config_7/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_7/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_7/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../Lin/soc/am263/r5f0_0/config_8/Lin_Cfg.h        |  4 ++--
+ .../config_8/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_8/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_8/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../Lin/soc/am263/r5f0_0/config_91/Lin_Cfg.h       |  4 ++--
+ .../config_91/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_91/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_91/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_92/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_92/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_92/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_93/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_93/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_93/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_94/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_94/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_94/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../Lin/soc/am263px/r5f0_0/config_1/Lin_Cfg.h      |  4 ++--
+ .../config_1/tresos/output/include/Lin_Cfg.h       |  4 ++--
+ .../r5f0_0/config_1/tresos/output/src/Lin_Cfg.c    |  4 ++--
+ .../r5f0_0/config_1/tresos/output/src/Lin_PBcfg.c  |  4 ++--
+ .../config_91/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_91/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_91/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_92/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_92/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_92/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_93/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_93/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_93/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_94/tresos/output/include/Lin_Cfg.h      |  4 ++--
+ .../r5f0_0/config_94/tresos/output/src/Lin_Cfg.c   |  4 ++--
+ .../r5f0_0/config_94/tresos/output/src/Lin_PBcfg.c |  4 ++--
+ .../config_1/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_1/tresos/output/src/Wdg_PBcfg.c  |  8 +++----
+ .../config_2/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_2/tresos/output/src/Wdg_PBcfg.c  |  8 +++----
+ .../config_3/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_3/tresos/output/src/Wdg_PBcfg.c  |  8 +++----
+ .../config_4/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_4/tresos/output/src/Wdg_PBcfg.c  |  8 +++----
+ .../config_5/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_5/tresos/output/src/Wdg_PBcfg.c  |  8 +++----
+ .../config_7/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_7/tresos/output/src/Wdg_PBcfg.c  |  8 +++----
+ .../config_91/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_91/tresos/output/src/Wdg_PBcfg.c |  8 +++----
+ .../config_92/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_92/tresos/output/src/Wdg_PBcfg.c |  8 +++----
+ .../config_93/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_93/tresos/output/src/Wdg_PBcfg.c |  8 +++----
+ .../config_94/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_94/tresos/output/src/Wdg_PBcfg.c |  8 +++----
+ .../config_1/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_1/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_2/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_2/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_3/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_3/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_4/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_4/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_5/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_5/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_6/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_6/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_7/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_7/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_91/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_91/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../config_92/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_92/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../config_93/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_93/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../config_94/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_94/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../config_1/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_1/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_2/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_2/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_3/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_3/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_4/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_4/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_5/tresos/output/include/Wdg_Cfg.h       |  6 ++---
+ .../r5f0_0/config_5/tresos/output/src/Wdg_PBcfg.c  |  4 ++--
+ .../config_91/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_91/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../config_92/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_92/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../config_93/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_93/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../config_94/tresos/output/include/Wdg_Cfg.h      |  6 ++---
+ .../r5f0_0/config_94/tresos/output/src/Wdg_PBcfg.c |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_1/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_1/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_2/Wdg_Cfg.c        |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_2/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_3/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_3/Wdg_Lcfg.c       |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_4/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_4/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_5/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_5/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_6/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_6/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_7/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_7/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am261/r5f0_0/config_91/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_92/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_93/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am261/r5f0_0/config_94/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_1/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_1/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am263/r5f0_0/config_2/Wdg_Cfg.c        |  4 ++--
+ .../Wdg/soc/am263/r5f0_0/config_2/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_3/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_3/Wdg_Lcfg.c       |  4 ++--
+ .../Wdg/soc/am263/r5f0_0/config_4/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_4/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am263/r5f0_0/config_5/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_5/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am263/r5f0_0/config_6/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_6/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am263/r5f0_0/config_7/Wdg_Cfg.h        |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_7/Wdg_PBcfg.c      |  4 ++--
+ .../Wdg/soc/am263/r5f0_0/config_91/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_92/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_93/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am263/r5f0_0/config_94/Wdg_Cfg.h       |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_1/Wdg_Cfg.h      |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_1/Wdg_PBcfg.c    |  4 ++--
+ .../Wdg/soc/am263px/r5f0_0/config_2/Wdg_Cfg.c      |  4 ++--
+ .../Wdg/soc/am263px/r5f0_0/config_2/Wdg_Cfg.h      |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_3/Wdg_Cfg.h      |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_3/Wdg_Lcfg.c     |  4 ++--
+ .../Wdg/soc/am263px/r5f0_0/config_4/Wdg_Cfg.h      |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_4/Wdg_PBcfg.c    |  4 ++--
+ .../Wdg/soc/am263px/r5f0_0/config_5/Wdg_Cfg.h      |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_5/Wdg_PBcfg.c    |  4 ++--
+ .../Wdg/soc/am263px/r5f0_0/config_6/Wdg_Cfg.h      |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_6/Wdg_PBcfg.c    |  4 ++--
+ .../Wdg/soc/am263px/r5f0_0/config_7/Wdg_Cfg.h      |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_7/Wdg_PBcfg.c    |  4 ++--
+ .../Wdg/soc/am263px/r5f0_0/config_91/Wdg_Cfg.h     |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_92/Wdg_Cfg.h     |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_93/Wdg_Cfg.h     |  6 ++---
+ .../Wdg/soc/am263px/r5f0_0/config_94/Wdg_Cfg.h     |  6 ++---
+ release_notes.md                                   | 28 ++++++++++++++++++----
+ 368 files changed, 936 insertions(+), 916 deletions(-)
+
+commit 41eb18cfff902cfff38f88f6a43c98261269fb4a
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon May 4 17:15:33 2026 +0530
+
+    all: all: Updated static and test reports for github release
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../csp/am261x/mcal_static_analysis_report.xlsx    | Bin 896680 -> 898096 bytes
+ mcal_docs/csp/am261x/mcal_test_report.xlsx         | Bin 191159 -> 191140 bytes
+ .../csp/am263px/mcal_static_analysis_report.xlsx   | Bin 1015811 -> 1017539 bytes
+ mcal_docs/csp/am263px/mcal_test_report.xlsx        | Bin 229563 -> 230099 bytes
+ .../csp/am263x/mcal_static_analysis_report.xlsx    | Bin 913363 -> 914357 bytes
+ mcal_docs/csp/am263x/mcal_test_report.xlsx         | Bin 254786 -> 256936 bytes
+ 6 files changed, 0 insertions(+), 0 deletions(-)
+
+commit ee5b2d952ee8180caa2b005edca96fc13204f1da
+Author: Akash <a-verma3@ti.com>
+Date:   Sun May 3 20:48:44 2026 +0530
+
+    am263px: Spi: Klockwork Spi fix.
+    
+    Fixes: MCAL-36360
+    
+    Signed-off-by: Akash Verma
+
+ mcal/examples/Utils/CLANG/am263/CacheP.h | 2 +-
+ mcal/include/hw/am263/Mcal_Libs_Utils.c  | 6 +++---
+ mcal/include/hw/am263/Mcal_Libs_Utils.h  | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
 commit 62299f3f638b9232e2bba55f4e362ecccf42edbb
 Author: Akash <a-verma3@ti.com>
 Date:   Sat May 2 19:17:53 2026 +0530

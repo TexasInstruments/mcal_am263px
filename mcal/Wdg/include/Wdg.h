@@ -90,11 +90,11 @@ extern "C" {
  *  @{
  */
 /** \brief Driver Implementation Major Version */
-#define WDG_SW_MAJOR_VERSION (10U)
+#define WDG_SW_MAJOR_VERSION (11U)
 /** \brief Driver Implementation Minor Version */
-#define WDG_SW_MINOR_VERSION (2U)
+#define WDG_SW_MINOR_VERSION (0U)
 /** \brief Driver Implementation Patch Version */
-#define WDG_SW_PATCH_VERSION (2U)
+#define WDG_SW_PATCH_VERSION (0U)
 /** @} */
 
 /**

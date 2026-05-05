@@ -182,7 +182,7 @@ void Mcal_CacheP_wbInv(void *addr, uint32 size, uint32 type);
  * \brief Initialize Cache sub-system, called by SysConfig, not to be called by end users
  *
  */
-void Mcal_CacheP_init();
+void Mcal_CacheP_init(void);
 
 /** @} */
 

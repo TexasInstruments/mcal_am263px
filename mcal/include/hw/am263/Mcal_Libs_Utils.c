@@ -61,13 +61,13 @@ static void Mcal_Libs_Utils_MMR_unlock(volatile uint32 *kick0, volatile uint32 *
 #define MCAL_LIB_START_SEC_CODE
 #include "Mcal_Lib_MemMap.h"
 
-void Mcal_CacheP_inv(void *blockPtr, uint32 byteCnt, uint32 type)
+void Mcal_CacheP_inv(void *addr, uint32 size, uint32 type)
 {
     if ((type & ((uint32)Mcal_CacheP_TYPE_L1P))!=0U) {
-        Mcal_CacheP_invL1p((uint32)blockPtr, byteCnt);
+        Mcal_CacheP_invL1p((uint32)addr, size);
     }
     if ((type & ((uint32)Mcal_CacheP_TYPE_L1D))!=0U) {
-        Mcal_CacheP_invL1d((uint32)blockPtr, byteCnt);
+        Mcal_CacheP_invL1d((uint32)addr, size);
     }
 }
 

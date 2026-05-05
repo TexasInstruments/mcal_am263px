@@ -88,13 +88,13 @@
  ******************************************************************************/
 
 /*  Version checking  */
- #if ((WDG_SW_MAJOR_VERSION != (10U)) || \
-    (WDG_SW_MINOR_VERSION != (2U)))
+ #if ((WDG_SW_MAJOR_VERSION != (11U)) || \
+    (WDG_SW_MINOR_VERSION != (0U)))
   #error "Version numbers of Wdg_PBcfg.c and Wdg.h are inconsistent!"
 #endif
 
-#if ((WDG_CFG_MAJOR_VERSION != (10U)) || \
-    (WDG_CFG_MINOR_VERSION != (2U)))
+#if ((WDG_CFG_MAJOR_VERSION != (11U)) || \
+    (WDG_CFG_MINOR_VERSION != (0U)))
   #error "Version numbers of Wdg_PBcfg.c and Wdg_Cfg.h are inconsistent!"
 #endif
 
