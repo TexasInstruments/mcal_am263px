@@ -1,3 +1,18 @@
+commit 51c050c42ad355c2970bbd2c7b34a8413b9653d7
+Author: Akash <a-verma3@ti.com>
+Date:   Tue May 5 18:02:04 2026 +0530
+
+    am261: Can: Config fail fix.
+    
+    - Test case MCAL-19019 is falling, due to wrong number of mailbox configured.
+    
+    Fixes: MCAL-37995
+    
+    Signed-off-by: Akash Verma
+
+ .../Can/soc/am261/r5f0_0/config_3/Can_Cfg.c        | 860 ++++++++++-----------
+ 1 file changed, 430 insertions(+), 430 deletions(-)
+
 commit ec607a383a79f94b45270f168b66d5dac46a2936
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon May 4 21:19:12 2026 +0530
