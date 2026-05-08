@@ -1,3 +1,42 @@
+commit fd942b170a63ac3ea804ffc552830b4ba29021e4
+Author: Akash <a-verma3@ti.com>
+Date:   Thu May 7 18:06:09 2026 +0530
+
+    am261: Adc: Config fail fix.
+    
+    Fixes: MCAL-37999
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/adc_test/Makefile                        |    2 +
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   |    4 +-
+ .../Adc/soc/am261/r5f0_0/config_34/Adc_PBcfg.c     |  706 ++++----
+ .../Adc/soc/am261/r5f0_0/config_39/Adc_Cfg.h       |    2 +-
+ .../Adc/soc/am261/r5f0_0/config_39/Cdd_Dma_Cfg.c   | 1793 +++++++++++++++++++
+ .../Adc/soc/am261/r5f0_0/config_39/Cdd_Dma_Cfg.h   |  281 +++
+ .../Adc/soc/am261/r5f0_0/config_40/Adc_Cfg.h       |    2 +-
+ .../Adc/soc/am261/r5f0_0/config_40/Cdd_Dma_Cfg.c   | 1795 ++++++++++++++++++++
+ .../Adc/soc/am261/r5f0_0/config_40/Cdd_Dma_Cfg.h   |  282 +++
+ .../Adc/soc/am261/r5f0_0/config_43/Adc_Cfg.h       |    4 +-
+ .../Adc/soc/am261/r5f0_0/config_43/Adc_PBcfg.c     |  102 +-
+ mcal_test/ut_config/Adc/srcs.mk                    |   13 +-
+ 12 files changed, 4526 insertions(+), 460 deletions(-)
+
+commit 32be81fddd6c32de63fa933ff11eec094fc4afc4
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 8 00:12:17 2026 +0530
+
+    all: all: Updated test report and statis reports
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_docs/csp/am261x/mcal_test_report.xlsx         | Bin 191140 -> 191346 bytes
+ .../csp/am263px/mcal_static_analysis_report.xlsx   | Bin 1017539 -> 1017537 bytes
+ mcal_docs/csp/am263x/mcal_test_report.xlsx         | Bin 256936 -> 257071 bytes
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
 commit 51c050c42ad355c2970bbd2c7b34a8413b9653d7
 Author: Akash <a-verma3@ti.com>
 Date:   Tue May 5 18:02:04 2026 +0530
