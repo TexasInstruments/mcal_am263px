@@ -1,3 +1,34 @@
+commit 02324a41f856ae51d7413b6e374e683c0b821d49
+Author: Akash <a-verma3@ti.com>
+Date:   Mon May 11 17:20:23 2026 +0530
+
+    am261: UART: Added Example App for uart_echo_dma mode for am261.
+    
+    - Added uart_echo_dma_app example for AM261x SoC that demonstrates UART echo functionality using DMA mode.
+    
+    - The example configures UART to receive data via DMA and echo it back on the same channel.
+    
+    Fixes: MCAL-38095
+    
+    Signed-off-by: Akash Verma
+
+ mcal/examples/Uart/uart_echo_dma_app/Makefile      |   2 +
+ .../soc/am261/r5f0_0/UartEchoDma_Startup.c         |  89 +++++
+ .../soc/am261/r5f0_0/UartEchoDma_Startup.h         |  84 ++++
+ .../r5f0_0/ti-arm-clang/makefile_ccs_bootimage_gen | 149 +++++++
+ .../am261/r5f0_0/ti-arm-clang/makefile_projectspec |  42 ++
+ .../ti-arm-clang/uart_echo_dma_app.projectspec     | 196 ++++++++++
+ .../soc/am261/tresos/.prefs/pref_general.xdm       |  89 +++++
+ .../uart_echo_dma_app/soc/am261/tresos/.project    |  13 +
+ .../soc/am261/tresos/config/Cdd_Uart.xdm           | 160 ++++++++
+ .../soc/am261/tresos/output/include/Cdd_Uart_Cfg.h | 358 +++++++++++++++++
+ .../soc/am261/tresos/output/src/Cdd_Uart_Cfg.c     | 160 ++++++++
+ .../soc/am261/tresos/output/src/Cdd_Uart_PBcfg.c   |  76 ++++
+ .../am261/tresos/output/swcd/Cdd_Uart_Bswmd.arxml  | 433 +++++++++++++++++++++
+ mcal/examples/Uart/uart_echo_dma_app/soc/srcs.mk   |  15 +-
+ mcal/mcal_component.mk                             |   2 +-
+ 15 files changed, 1863 insertions(+), 5 deletions(-)
+
 commit 4d8711506b6b2ac4a9e80378c639d4fa98ceb72a
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon May 11 11:29:12 2026 +0530

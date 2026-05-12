@@ -13,7 +13,9 @@ include $(mcal_PATH)/examples/Utils/srcs_startup.mk
 include $(mcal_PATH)/examples_config/Dma_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Mcu_Demo_Cfg/srcs.mk
 include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs_uart.mk
+ifneq ($(SOC), am261)
 include $(mcal_PATH)/examples_config/Uart_Demo_Cfg/srcs.mk
+endif
 include soc/srcs.mk
 
 SRCDIR += .
