@@ -8,6 +8,7 @@ ifeq ($(SOC), $(filter $(SOC), am263))
 endif
 ifeq ($(SOC), $(filter $(SOC), am263px))
   SRCDIR += $(mcal_PATH)/Mcu/V2
+  SRCS_COMMON += Mcu_Xbar.c
 endif
 ifeq ($(SOC), $(filter $(SOC), am261))
   SRCDIR += $(mcal_PATH)/Mcu/V3

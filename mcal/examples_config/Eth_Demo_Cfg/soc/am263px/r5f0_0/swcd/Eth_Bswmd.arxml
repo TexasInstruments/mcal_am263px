@@ -6,7 +6,6 @@
       <ELEMENTS>
         <BSW-MODULE-DESCRIPTION UUID="367a78e9-e124-4ea3-867e-ab621cc580f9">
                   <SHORT-NAME>Eth</SHORT-NAME>
-                  <MODULE-ID>88</MODULE-ID>
                   <IMPLEMENTED-ENTRYS>
                     <BSW-MODULE-ENTRY-REF-CONDITIONAL S="Eth_Init">
                       <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM263px/Eth_ModuleEntry/Eth_Init</BSW-MODULE-ENTRY-REF>
@@ -87,6 +86,7 @@
                       <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM263px/Eth_ModuleEntry/Eth_MiscIrqHdlr_0</BSW-MODULE-ENTRY-REF>
                     </BSW-MODULE-ENTRY-REF-CONDITIONAL>
                   </IMPLEMENTED-ENTRYS>
+                  <MODULE-ID>88</MODULE-ID>
                   <BSW-MODULE-DEPENDENCYS>
                     <BSW-MODULE-DEPENDENCY UUID="8149b9a9-ed37-4b3f-ba5a-2ae85bd9fd59">
                       <SHORT-NAME>Dem</SHORT-NAME>
@@ -468,6 +468,7 @@
                           </CALL-POINTS>
                           <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM263px/Eth_ModuleEntry/Eth_RxIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
                           <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                          <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                         </BSW-INTERRUPT-ENTITY>
                         <BSW-INTERRUPT-ENTITY UUID="a4baed12-b8a8-4155-a8e9-db489138d37c">
                           <SHORT-NAME>Eth_RxThreshIrqHdlr_0</SHORT-NAME>
@@ -484,6 +485,7 @@
                           </CALL-POINTS>
                           <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM263px/Eth_ModuleEntry/Eth_RxThreshIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
                           <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                          <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                         </BSW-INTERRUPT-ENTITY>
                         <BSW-INTERRUPT-ENTITY UUID="d99d62cb-ffc4-4ffa-a969-fbd5323f6e7d">
                           <SHORT-NAME>Eth_TxIrqHdlr_0</SHORT-NAME>
@@ -501,6 +503,7 @@
                           </CALL-POINTS>
                           <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM263px/Eth_ModuleEntry/Eth_TxIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
                           <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                          <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                         </BSW-INTERRUPT-ENTITY>
                         <BSW-INTERRUPT-ENTITY UUID="b448ddf3-e117-4f35-be91-7a955e790c1f">
                           <SHORT-NAME>Eth_MiscIrqHdlr_0</SHORT-NAME>
@@ -514,6 +517,7 @@
                           </CALL-POINTS>
                           <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Eth_TI_AM263px/Eth_ModuleEntry/Eth_MiscIrqHdlr_0</IMPLEMENTED-ENTRY-REF>
                           <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
+                          <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                         </BSW-INTERRUPT-ENTITY>
                       </ENTITYS>
                       <EVENTS>
@@ -686,8 +690,8 @@
           <COMPILERS>
             <COMPILER UUID="29b3bc5b-3ef9-4463-b391-36786af2ac29">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
-              <NAME>TI ARM Clang Compiler</NAME>
-              <OPTIONS/>
+              <NAME>TI ARM Clang</NAME>
+              <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb  -DAM263PX_SIP_PACKAGE  -DAM263PX_PLATFORM -DAM263PX_R_PACKAGE -DAM263PX_C_PACKAGE </OPTIONS>
               <VENDOR>Texas Instruments</VENDOR>
               <VERSION>4.0.0</VERSION>
             </COMPILER>

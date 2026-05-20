@@ -88,9 +88,7 @@ Will be added in later release.
 
 ### Compiler Variants
 
-MCAL package can be built with the following compiler variant: **TI ARM CLANG 4.0.0.LTS**.
-
-Users can build with either compiler variants.
+Please refer release notes for compiler version details.
 
 **gmake all PLATFORM=am263px PROFILE=<release/debug> COMPILER_VARIANT=\<CLANG>**
 
@@ -129,8 +127,8 @@ A set of MCAL included in the package each controlling a specific peripheral. MC
 
 Driver   | Comments  |
 ---------|-----------|
-MCU |  Driver to control enabling of modules, PLL setting and basic microcontroller initialization |  
-PORT|  Driver for control of PinMux |  
+MCU |  Driver to control enabling of modules, PLL setting and basic microcontroller initialization |
+PORT|  Driver for control of PinMux |
 SPI |  SPI handler and driver for Serial Peripheral Interfaces: McSPI |
 CAN |  Driver for the on-chip MCAN controller peripheral |
 GPT |  Driver that controls the internal timer of the controller  |
@@ -347,7 +345,7 @@ You can downloaded CCS from [ti.com](https://www.ti.com/tool/CCSTUDIO#downloads)
 
 ##### Installation Steps
 
-1.Use TI CCS v12.5.0 or later
+1.Use TI CCS v12.5.0 or later(please refer release notes for CCS version details).
 
 2.After the package is downloaded, you will be prompted to restart CCS to complete the installation.
 
@@ -464,15 +462,18 @@ Edit the **Rules. Make** file present in **<MCAL_INSTALL_PATH>/build/Rules.make*
 
 Edit paths for the below variables according to your system environment
 
-1.In case of windows machine edit CCS path according to CCS version,
+1.In case of windows machine edit CCS path according to CCS version, for eg:
 
 - CCS_PATH := C:/ti/ccs1250/ccs
-- TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.0.LTS
+- TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.4.LTS
 
-2.In case of Linux machine edit CCS path according to CCS version,
+2.In case of Linux machine edit CCS path according to CCS version, for eg:
 
 - CCS_PATH := /opt/ti/ccs1250/ccs
-- TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.0.LTS
+- TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.4.LTS
+
+Note: Use the tool versions as mentioned in release notes.
+For eg, if CCS version in release notes is 20.4.0, then the CCS_PATH := C:/ti/ccs2040/ccs
 
 3.By default the above are for CLANG compiler, modify respective paths accordingly for using other compilers.
 
@@ -556,7 +557,7 @@ Similarly, PROFILE can be set in all the above build commands.
 ```{Note}
   By default, MCELF is OFF.  User can enable it with the macro MCELF_ENABLE (yes/no) as yes.
 
-  Give the following command to enable MCELF: 
+  Give the following command to enable MCELF:
 
   gmake -s dio_app MCELF_ENABLE=yes
 
@@ -579,7 +580,7 @@ For more information on MCELF image format please refer: [AM263Px MCU SDK: Under
  ┃ ┃ ┃ ┣ 📂soc\
  ┃ ┃ ┃ ┃ ┣ 📂am263px\
  ┃ ┃ ┃ ┃ ┃ ┣ 📂r5f0_0\
- ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂ti-arm-clang\  
+ ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂ti-arm-clang\
  ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜can_app.projectspec :  *Project template which can be imported into CCS* \
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CanApp_Startup.c\
  ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CanApp_Startup.h\

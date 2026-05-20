@@ -256,8 +256,7 @@ Customers will need to procure the other AUTOSAR SW stack either internally or f
 <h2><span class="section-number">3.6. </span>Compiler and Linker Settings<a class="headerlink" href="#compiler-and-linker-settings" title="Link to this heading"></a></h2>
 <section id="compiler-variants">
 <h3><span class="section-number">3.6.1. </span>Compiler Variants<a class="headerlink" href="#compiler-variants" title="Link to this heading"></a></h3>
-<p>MCAL package can be built with the following compiler variant: <strong>TI ARM CLANG 4.0.0.LTS</strong>.</p>
-<p>Users can build with either compiler variants.</p>
+<p>Please refer release notes for compiler version details.</p>
 <p><strong>gmake all PLATFORM=am263px PROFILE=&lt;release/debug&gt; COMPILER_VARIANT=&lt;CLANG&gt;</strong></p>
 <p>COMPILER_VARIANT can take the following value(s): <strong>CLANG</strong></p>
 <p>If COMPILER_VARIANT is not specified during the build, MCAL will be built for CLANG by default.</p>
@@ -645,7 +644,7 @@ Additionally, examples to demonstrate MCAL driver usages have also been included
 <p>You can downloaded CCS from <a class="reference external" href="https://www.ti.com/tool/CCSTUDIO#downloads">ti.com</a></p>
 <section id="installation-steps">
 <h5><span class="section-number">3.9.2.1.1. </span>Installation Steps<a class="headerlink" href="#installation-steps" title="Link to this heading"></a></h5>
-<p>1.Use TI CCS v12.5.0 or later</p>
+<p>1.Use TI CCS v12.5.0 or later(please refer release notes for CCS version details).</p>
 <p>2.After the package is downloaded, you will be prompted to restart CCS to complete the installation.</p>
 <p>3.The installer will install the Emulation package and complete installation.</p>
 </section>
@@ -761,16 +760,18 @@ Also, make file internally uses some binaries like rm, mkdir, echo etc. from Cyg
 Standard CCS installation comes with Cygwin, gmake and other utils as required to build MCAL modules.</p>
 <p>Edit the <strong>Rules. Make</strong> file present in <strong>&lt;MCAL_INSTALL_PATH&gt;/build/Rules.make</strong> to give the appropriate paths for the tool chains and the current working directory. Make sure that CCS_PATH, and the TOOLCHAIN_PATH_R5 are updated with the proper path.</p>
 <p>Edit paths for the below variables according to your system environment</p>
-<p>1.In case of windows machine edit CCS path according to CCS version,</p>
+<p>1.In case of windows machine edit CCS path according to CCS version, for eg:</p>
 <ul class="simple">
 <li><p>CCS_PATH := C:/ti/ccs1250/ccs</p></li>
-<li><p>TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.0.LTS</p></li>
+<li><p>TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.4.LTS</p></li>
 </ul>
-<p>2.In case of Linux machine edit CCS path according to CCS version,</p>
+<p>2.In case of Linux machine edit CCS path according to CCS version, for eg:</p>
 <ul class="simple">
 <li><p>CCS_PATH := /opt/ti/ccs1250/ccs</p></li>
-<li><p>TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.0.LTS</p></li>
+<li><p>TOOLCHAIN_PATH_R5 := $(CCS_PATH)/Compilers/ti-cgt-armllvm_4.0.4.LTS</p></li>
 </ul>
+<p>Note: Use the tool versions as mentioned in release notes.
+For eg, if CCS version in release notes is 20.4.0, then the CCS_PATH := C:/ti/ccs2040/ccs</p>
 <p>3.By default the above are for CLANG compiler, modify respective paths accordingly for using other compilers.</p>
 <p>4.Install dependencies required for MCELF image format<br />
 Install Python3<br />
@@ -881,7 +882,7 @@ For more information on MCELF image format please refer: <a class="reference ext
 ┃ ┃ ┃ ┣ 📂soc<br />
 ┃ ┃ ┃ ┃ ┣ 📂am263px<br />
 ┃ ┃ ┃ ┃ ┃ ┣ 📂r5f0_0<br />
-┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂ti-arm-clang\ 
+┃ ┃ ┃ ┃ ┃ ┃ ┣ 📂ti-arm-clang<br />
 ┃ ┃ ┃ ┃ ┃ ┃ ┃ ┗ 📜can_app.projectspec :  <em>Project template which can be imported into CCS</em> <br />
 ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CanApp_Startup.c<br />
 ┃ ┃ ┃ ┃ ┃ ┃ ┣ 📜CanApp_Startup.h<br />

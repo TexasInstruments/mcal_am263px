@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 13-May-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 21-May-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -68,7 +68,7 @@ This document details about supported driver, installation, dependencies, build 
       <td>Enabled LIN_TIMEOUT_DURATION</td>
       <td>LIN</td>
       <td>AM263x, AM263Px, AM261x</td>
-    </tr>   
+    </tr>
     <tr>
       <td>Bug Fixes</td>
       <td>All</td>
@@ -710,15 +710,15 @@ CSP - Compliance Support Package
         </ol>
       </td>
       <td>Yes</td>
-      <td>Installer:mcal_docs\csp\*platform*\mcal_static_analysis_report.xlsx</td>
-      <td>All MISRAC Mandatory & Critical warnings and errors are resolved. MISRAC Required and Advisory warnings and HIS metrics will be fixed in future releases</td>
+      <td>Installer:mcal_docs\csp\*platform*\mcal_static_analysis_report.html</td>
+      <td></td>
     </tr>
     <tr>
       <td>4</td>
       <td>Test Reports: Test Cases and Test Results</td>
       <td>Yes</td>
       <td>Installer:mcal_docs\csp\*platform*\mcal_test_report.xlsx</td>
-      <td>All test reports are present in installer.</td>
+      <td></td>
     </tr>
     <tr>
       <td>5</td>

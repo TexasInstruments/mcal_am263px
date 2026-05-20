@@ -1,3 +1,135 @@
+commit 0a93672c3b50973a8135c4805a0c0787d2d8c9c5
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue May 19 22:43:38 2026 +0530
+
+    all: Eth/EthTrcv: Fixing bsmwd issues
+    
+    Fixes: MCAL-38218, MCAL-38219, MCAL-38220
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am261/r5f0_0/swcd/EthTrcv_Bswmd.arxml        | 15 +--------------
+ .../soc/am263/r5f0_0/swcd/EthTrcv_Bswmd.arxml        | 15 +--------------
+ .../soc/am263px/r5f0_0/swcd/EthTrcv_Bswmd.arxml      | 15 +--------------
+ .../soc/am261/r5f0_0/swcd/Eth_Bswmd.arxml            |  6 +++++-
+ .../soc/am263/r5f0_0/swcd/Eth_Bswmd.arxml            |  6 +++++-
+ .../soc/am263px/r5f0_0/swcd/Eth_Bswmd.arxml          |  6 +++++-
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml           | 20 +-------------------
+ .../Eth_TI_AM261x/generate_swcd/swcd/Eth_Bswmd.arxml |  6 +++++-
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml           | 20 +-------------------
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml           | 20 +-------------------
+ .../generate_swcd/swcd/Eth_Bswmd.arxml               |  6 +++++-
+ .../Det_TI_AM263x/generate_swcd/swcd/Det_Bswmd.arxml |  2 --
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml           | 20 +-------------------
+ .../Eth_TI_AM263x/generate_swcd/swcd/Eth_Bswmd.arxml |  6 +++++-
+ 14 files changed, 37 insertions(+), 126 deletions(-)
+
+commit 29bf762af5e1111c5c77d92d0921e783113563b0
+Author: Asha D <asha.d@ti.com>
+Date:   Wed May 13 12:59:20 2026 +0530
+
+    am263px:MCU: Converting Static inline function
+    related to Xbar into non-inline implementation
+    
+    Added testcases to cover those functions
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Mcu/V2/Mcu_Priv.c                           |  15 +-
+ mcal/Mcu/V2/Mcu_Xbar.c                           | 273 +++++++++++++++++++++++
+ mcal/Mcu/V2/Mcu_Xbar.h                           | 100 +--------
+ mcal/Mcu/V2/Mcu_XbarOutput.h                     | 100 +--------
+ mcal/Mcu/V2/Mcu_XbarPwm.h                        |  63 +-----
+ mcal/Mcu/srcs.mk                                 |   1 +
+ mcal_test/mcu_test/build/makefile_lib            |   4 +
+ mcal_test/mcu_test/testInput/mcuTestCases.h      |   6 +-
+ mcal_test/mcu_test/testLib/mcuTest.h             |   2 +
+ mcal_test/mcu_test/testLib/mcuTestMainTestCase.c |  65 ++++--
+ 10 files changed, 365 insertions(+), 264 deletions(-)
+
+commit 1a55ad0c7c4f13a21b3c3e5a5bd7c16f298ed757
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 15 12:16:34 2026 +0530
+
+    all: all: Fixing bswmd issues
+    
+    Fixes: MCAL-38205, MCAL-38206, MCAL-38207
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am263px/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml         |  6 ++++--
+ .../i2c_app/soc/am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  2 +-
+ .../i2c_app/soc/am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  2 +-
+ .../i2c_app/soc/am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  2 +-
+ .../soc/am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml           |  2 +-
+ .../soc/am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml           |  2 +-
+ .../soc/am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  2 +-
+ .../soc/am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml           |  2 +-
+ .../soc/am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml           |  2 +-
+ .../soc/am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  2 +-
+ .../Cdd_I2c_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml |  2 +-
+ .../Cdd_I2c_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml |  2 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml                |  2 +-
+ .../Epwm_Demo_Cfg/soc/am261/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml    |  6 ++++--
+ .../Epwm_Demo_Cfg/soc/am263/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml    | 10 ++++++----
+ .../Epwm_Demo_Cfg/soc/am263px/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml  |  6 ++++--
+ .../EthTrcv_Demo_Cfg/soc/am261/r5f0_0/swcd/EthTrcv_Bswmd.arxml | 10 ++++++----
+ .../EthTrcv_Demo_Cfg/soc/am263/r5f0_0/swcd/EthTrcv_Bswmd.arxml | 10 ++++++----
+ .../soc/am263px/r5f0_0/swcd/EthTrcv_Bswmd.arxml                |  6 ++++--
+ .../Eth_Demo_Cfg/soc/am261/r5f0_0/swcd/Eth_Bswmd.arxml         |  4 ++--
+ .../Eth_Demo_Cfg/soc/am263/r5f0_0/swcd/Eth_Bswmd.arxml         |  8 ++++----
+ .../Eth_Demo_Cfg/soc/am263px/r5f0_0/swcd/Eth_Bswmd.arxml       |  4 ++--
+ .../Cdd_I2c_TI_AM261x/generate_swcd/swcd/Cdd_I2c_Bswmd.arxml   |  8 ++++----
+ .../Cdd_Pwm_TI_AM261x/generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml   |  6 ++++--
+ .../EthTrcv_TI_AM261x/generate_swcd/swcd/EthTrcv_Bswmd.arxml   | 10 ++++++----
+ .../AM261x/Eth_TI_AM261x/generate_swcd/swcd/Eth_Bswmd.arxml    |  4 ++--
+ .../Cdd_I2c_TI_AM263Px/generate_swcd/swcd/Cdd_I2c_Bswmd.arxml  | 10 +++++-----
+ .../Cdd_Pwm_TI_AM263Px/generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml  |  6 ++++--
+ .../EthTrcv_TI_AM263Px/generate_swcd/swcd/EthTrcv_Bswmd.arxml  |  6 ++++--
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml                     |  6 ++++--
+ .../AM263Px/Eth_TI_AM263Px/generate_swcd/swcd/Eth_Bswmd.arxml  |  4 ++--
+ .../Cdd_I2c_TI_AM263x/generate_swcd/swcd/Cdd_I2c_Bswmd.arxml   | 10 +++++-----
+ .../Cdd_Pwm_TI_AM263x/generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml   | 10 ++++++----
+ .../EthTrcv_TI_AM263x/generate_swcd/swcd/EthTrcv_Bswmd.arxml   | 10 ++++++----
+ .../AM263x/Eth_TI_AM263x/generate_swcd/swcd/Eth_Bswmd.arxml    |  8 ++++----
+ .../r5f0_0/config_1/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_2/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_5/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_6/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_1/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_2/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_5/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_6/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_1/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_2/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_5/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ .../r5f0_0/config_6/tresos/output/swcd/Cdd_I2c_Bswmd.arxml     |  2 +-
+ 47 files changed, 122 insertions(+), 94 deletions(-)
+
+commit 193e848b4501b0b9b025e0bc4567c04ac07b9810
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Fri May 15 12:46:40 2026 +0530
+
+    all: docs: kw html report
+    
+    - migrate to new kw reporting
+    - few open items are there, which needs to be fixed
+    - add override for am263x comment issue
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ .../csp/am261x/mcal_static_analysis_report.html    | 7190 +++++++++++++++++
+ .../csp/am261x/mcal_static_analysis_report.xlsx    |  Bin 898096 -> 0 bytes
+ .../csp/am263px/mcal_static_analysis_report.html   | 8257 ++++++++++++++++++++
+ .../csp/am263px/mcal_static_analysis_report.xlsx   |  Bin 1017537 -> 0 bytes
+ .../csp/am263x/mcal_static_analysis_report.html    | 7317 +++++++++++++++++
+ .../csp/am263x/mcal_static_analysis_report.xlsx    |  Bin 914357 -> 0 bytes
+ .../scripts/kw_override/kw_override_am263x.json    |   21 +
+ release_notes.md                                   |    8 +-
+ 8 files changed, 22789 insertions(+), 4 deletions(-)
+
 commit 02324a41f856ae51d7413b6e374e683c0b821d49
 Author: Akash <a-verma3@ti.com>
 Date:   Mon May 11 17:20:23 2026 +0530
