@@ -289,6 +289,16 @@ typedef struct
 } Eth_RateRatioType;
 
 /**
+ *  \brief Transceiver state enum
+ */
+/* Requirements : SWS_EthTrcv_00101 */
+typedef enum
+{
+    ETHTRCV_STATE_UNINIT,
+    ETHTRCV_STATE_INIT
+} EthTrcv_StateType;
+
+/**
  *  \brief Transceiver board rate enum
  */
 /* Requirements : SWS_EthTrcv_00102 */

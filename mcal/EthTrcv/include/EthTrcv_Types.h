@@ -100,16 +100,6 @@ extern "C" {
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 
-/**
- *  \brief Transceiver state enum
- */
-/* Requirements : SWS_EthTrcv_00101 */
-typedef enum
-{
-    ETHTRCV_STATE_UNINIT,
-    ETHTRCV_STATE_INIT
-} EthTrcv_StateType;
-
 /** \brief Enumerates Advertisement configurations. */
 typedef enum
 {
