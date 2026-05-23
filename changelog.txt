@@ -1,3 +1,34 @@
+commit aeaa2317d9efbddbf26f5cfd1328a7ec666f21e7
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 22 10:58:48 2026 +0530
+
+    all: Eth: Adding MINIMUM-INTERVAL tag to Eth bswmd
+    
+    Fixes: MCAL-38219
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am261/r5f0_0/swcd/Eth_Bswmd.arxml          | 26 ++++++++++++++++++++
+ .../soc/am263/r5f0_0/swcd/Eth_Bswmd.arxml          | 26 ++++++++++++++++++++
+ .../soc/am263px/r5f0_0/swcd/Eth_Bswmd.arxml        | 26 ++++++++++++++++++++
+ .../generate_swcd/swcd/Eth_Bswmd.arxml             | 28 ++++++++++++++++++++++
+ .../generate_swcd/swcd/Eth_Bswmd.arxml             | 28 ++++++++++++++++++++++
+ .../generate_swcd/swcd/Eth_Bswmd.arxml             | 28 ++++++++++++++++++++++
+ 6 files changed, 162 insertions(+)
+
+commit 73fd9237c3e867cba112672bc19329eda49e4de3
+Author: Akash <a-verma3@ti.com>
+Date:   Fri May 22 11:34:15 2026 +0530
+
+    am261: Uart: Added Uart_echo_dma_app to the daily-build-docker script.
+    
+    Fixes: MCAL-38095
+    
+    Signed-off-by: Akash Verma
+
+ .../docker_epsw/am261-daily-build-docker.sh        | 1862 ++++++++++----------
+ 1 file changed, 931 insertions(+), 931 deletions(-)
+
 commit 97f531bdec4910b62b1a3e2c5caffa8d313b0972
 Author: Khanh Tran <x1120448@ti.com>
 Date:   Wed May 20 16:14:15 2026 +0700
