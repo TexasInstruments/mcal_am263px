@@ -172,6 +172,252 @@ VAR(Adc_HwSocObjType, ADC_VAR_CLEARED) Adc_HwSocGroupMapping[ADC_HW_UNIT_CNT];
 #define ADC_START_SEC_CODE
 #include "Adc_MemMap.h"
 
+void ADC_enableContinuousMode(uint32 base, uint16 adcIntNum)
+{
+    uint32 intRegAddr;
+    uint16 shiftVal;
+
+    /*
+     * Each INTSEL register manages two interrupts. If the interrupt number is
+     * even, we'll be accessing the upper byte and will need to shift.
+     */
+    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
+    shiftVal   = (uint16)(((uint16)adcIntNum & (uint16)0x1U) << (uint16)3U);
+
+    /*
+     * Enable continuous mode for the specified ADC interrupt.
+     */
+    HW_WR_REG16(intRegAddr,
+                (uint16)(HW_RD_REG16(intRegAddr) | ((uint16)MCAL_CSL_ADC_ADCINTSEL1N2_INT1CONT_MASK << shiftVal)));
+}
+
+void ADC_setPrescaler(uint32 base, Adc_mcalClkPrescale_t clkPrescale)
+{
+    /*
+     * Set the configuration of the ADC module prescaler.
+     */
+    HW_WR_REG16(
+        base + MCAL_CSL_ADC_ADCCTL2,
+        ((HW_RD_REG16(base + MCAL_CSL_ADC_ADCCTL2) & ~MCAL_CSL_ADC_ADCCTL2_PRESCALE_MASK) | (uint16)clkPrescale));
+}
+
+void ADC_setupSOC(uint32 base, uint32 socNumber, Adc_mcalTrigger_t trigger, uint32 channel, uint32 sampleWindow)
+{
+    uint32 ctlRegAddr;
+
+    /*
+     * Check the arguments.
+     */
+
+    /*
+     * Calculate address for the SOC control register.
+     */
+    ctlRegAddr = base + MCAL_CSL_ADC_ADCSOC0CTL + ((uint32)socNumber * MCAL_ADC_ADCSOCxCTL_STEP);
+
+    /*
+     * Set the configuration of the specified SOC.
+     */
+    HW_WR_REG32(ctlRegAddr, (((uint32)channel << MCAL_CSL_ADC_ADCSOC0CTL_CHSEL_SHIFT) |
+                             ((uint32)trigger << MCAL_CSL_ADC_ADCSOC0CTL_TRIGSEL_SHIFT) | (sampleWindow - 1U)));
+}
+
+void ADC_setInterruptSOCTrigger(uint32 base, uint16 socNumber, Adc_mcalIntSOCTrigger_t trigger)
+{
+    uint32 shiftVal;
+
+    /*
+     * Each SOC has a 2-bit field in this register.
+     */
+    shiftVal = (uint32)socNumber << 1U;
+
+    /*
+     * Set the configuration of the specified SOC. Note that we're treating
+     * ADCINTSOCSEL1 and ADCINTSOCSEL2 as one 32-bit register here.
+     */
+    HW_WR_REG32(base + MCAL_CSL_ADC_ADCINTSOCSEL1, ((HW_RD_REG32(base + MCAL_CSL_ADC_ADCINTSOCSEL1) &
+                                                     ~((uint32)MCAL_CSL_ADC_ADCINTSOCSEL1_SOC0_MASK << shiftVal)) |
+                                                    ((uint32)trigger << shiftVal)));
+}
+
+void ADC_enableConverter(uint32 base)
+{
+    /*
+     * Set the bit that powers up the analog circuitry.
+     */
+    HW_WR_REG16(base + MCAL_CSL_ADC_ADCCTL1,
+                (HW_RD_REG16(base + MCAL_CSL_ADC_ADCCTL1) | MCAL_CSL_ADC_ADCCTL1_ADCPWDNZ_MASK));
+}
+
+void ADC_disableConverter(uint32 base)
+{
+    /*
+     * Clear the bit that powers down the analog circuitry.
+     */
+    HW_WR_REG16(base + MCAL_CSL_ADC_ADCCTL1,
+                (HW_RD_REG16(base + MCAL_CSL_ADC_ADCCTL1) & ~MCAL_CSL_ADC_ADCCTL1_ADCPWDNZ_MASK));
+}
+
+void ADC_forceMultipleSOC(uint32 base, uint16 socMask)
+{
+    /*
+     * Write to the register that will force a 1 to desired SOCs
+     */
+    HW_WR_REG16(base + MCAL_CSL_ADC_ADCSOCFRC1, socMask);
+}
+
+boolean ADC_getInterruptStatus(uint32 base, uint16 adcIntNum)
+{
+    /*
+     * Get the specified ADC interrupt status.
+     */
+    return (((HW_RD_REG16(base + MCAL_CSL_ADC_ADCINTFLG) & ((uint16)1U << adcIntNum)) != (uint16)0U) ? TRUE : FALSE);
+}
+
+void ADC_clearInterruptStatus(uint32 base, uint16 adcIntNum)
+{
+    /*
+     * Clear the specified interrupt.
+     */
+    HW_WR_REG16(base + MCAL_CSL_ADC_ADCINTFLGCLR, ((uint16)((uint16)1U << (uint16)adcIntNum)));
+}
+
+boolean ADC_getInterruptOverflowStatus(uint32 base, uint16 adcIntNum)
+{
+    /*
+     * Get the specified ADC interrupt status.
+     */
+    return (((HW_RD_REG16(base + MCAL_CSL_ADC_ADCINTOVF) & ((uint16)1U << adcIntNum)) != (uint16)0U) ? TRUE : FALSE);
+}
+
+void ADC_clearInterruptOverflowStatus(uint32 base, uint16 adcIntNum)
+{
+    /*
+     * Clear the specified interrupt overflow bit.
+     */
+    HW_WR_REG16(base + MCAL_CSL_ADC_ADCINTOVFCLR, ((uint16)((uint16)1U << (uint16)adcIntNum)));
+}
+
+uint16 ADC_readResult(uint32 resultBase, uint32 socNumber)
+{
+    /*
+     * Return the ADC result for the selected SOC.
+     */
+    return (HW_RD_REG16(resultBase + MCAL_CSL_ADC_RESULT_ADCRESULT0 +
+                        ((uint32)socNumber * MCAL_ADC_RESULT_ADCRESULTx_STEP)));
+}
+
+void ADC_setSOCPriority(uint32 base, uint16 priMode)
+{
+    /*
+     * Set SOC priority
+     */
+    HW_WR_REG16(base + MCAL_CSL_ADC_ADCSOCPRICTL,
+                ((HW_RD_REG16(base + MCAL_CSL_ADC_ADCSOCPRICTL) & ~MCAL_CSL_ADC_ADCSOCPRICTL_SOCPRIORITY_MASK) |
+                 (uint16)priMode));
+}
+
+void ADC_setupPPB(uint32 base, Adc_mcalPPBNumber_t ppbNumber, uint16 socNumber)
+{
+    uint32 ppbOffset;
+
+    /*
+     * Get the offset to the appropriate PPB configuration register.
+     */
+    ppbOffset = (MCAL_ADC_ADCPPBx_STEP * (uint32)ppbNumber) + MCAL_CSL_ADC_ADCPPB1CONFIG;
+
+    /*
+     * Write the configuration to the register.
+     */
+    HW_WR_REG16(base + ppbOffset,
+                (uint16)(((uint16)(HW_RD_REG16(base + ppbOffset) & ~MCAL_CSL_ADC_ADCPPB1CONFIG_CONFIG_MASK)) |
+                         ((uint16)socNumber & (uint16)MCAL_CSL_ADC_ADCPPB1CONFIG_CONFIG_MASK)));
+}
+
+void ADC_enableInterrupt(uint32 base, uint16 adcIntNum)
+{
+    uint32 intRegAddr;
+    uint16 shiftVal;
+
+    /*
+     * Each INTSEL register manages two interrupts. If the interrupt number is
+     * even, we'll be accessing the upper byte and will need to shift.
+     */
+    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
+    shiftVal   = (uint16)(((uint16)adcIntNum & (uint16)0x1U) << (uint16)3U);
+
+    /*
+     * Enable the specified ADC interrupt.
+     */
+    HW_WR_REG16(intRegAddr,
+                (uint16)(HW_RD_REG16(intRegAddr) | ((uint16)MCAL_CSL_ADC_ADCINTSEL1N2_INT1E_MASK << shiftVal)));
+}
+
+void ADC_disableInterrupt(uint32 base, uint16 adcIntNum)
+{
+    uint32 intRegAddr;
+    uint16 shiftVal;
+
+    /*
+     * Each INTSEL register manages two interrupts. If the interrupt number is
+     * even, we'll be accessing the upper byte and will need to shift.
+     */
+    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
+    shiftVal   = (uint16)(((uint16)adcIntNum & (uint16)0x1U) << (uint16)3U);
+
+    /*
+     * Disable the specified ADC interrupt.
+     */
+    HW_WR_REG16(intRegAddr,
+                (uint16)(HW_RD_REG16(intRegAddr) & ~((uint16)MCAL_CSL_ADC_ADCINTSEL1N2_INT1E_MASK << shiftVal)));
+}
+
+void ADC_setInterruptSource(uint32 base, uint16 adcIntNum, uint16 socNumber)
+{
+    uint32 intRegAddr;
+    uint16 shiftVal;
+
+    /*
+     * Each INTSEL register manages two interrupts. If the interrupt number is
+     * even, we'll be accessing the upper byte and will need to shift.
+     */
+    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
+    shiftVal   = (uint16)(((uint16)adcIntNum & (uint16)0x1U) << (uint16)3U);
+
+    /*
+     * Set the specified ADC interrupt source.
+     */
+    HW_WR_REG16(intRegAddr,
+                (uint16)((HW_RD_REG16(intRegAddr) & ~((uint16)MCAL_CSL_ADC_ADCINTSEL1N2_INT1SEL_MASK << shiftVal)) |
+                         ((uint16)socNumber << shiftVal)));
+}
+
+void ADC_disableContinuousMode(uint32 base, uint32 adcIntNum)
+{
+    uint32 intRegAddr;
+    uint16 shiftVal;
+
+    /*
+     * Each INTSEL register manages two interrupts. If the interrupt number is
+     * even, we'll be accessing the upper byte and will need to shift.
+     */
+    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
+    shiftVal   = (uint16)(((uint16)adcIntNum & (uint16)0x1U) << (uint16)3U);
+
+    /*
+     * Disable continuous mode for the specified ADC interrupt.
+     */
+    HW_WR_REG16(intRegAddr,
+                (uint16)(HW_RD_REG16(intRegAddr) & ~((uint16)MCAL_CSL_ADC_ADCINTSEL1N2_INT1CONT_MASK << shiftVal)));
+}
+
+uint32 ADC_readResultbaseaddr(uint32 resultBase, uint16 socNumber)
+{
+    /*
+     * Return the ADC result for the selected SOC.
+     */
+    return (resultBase + MCAL_CSL_ADC_RESULT_ADCRESULT0 + ((uint32)socNumber * MCAL_ADC_RESULT_ADCRESULTx_STEP));
+}
+
 void Adc_hwUnitInit(Adc_HwUnitObjType *hwUnitObj)
 {
     uint32 baseAddr;

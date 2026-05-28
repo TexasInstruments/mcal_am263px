@@ -449,15 +449,12 @@ Lin_GoToSleep(uint8 Channel)
 
         /* Send goto-sleep command on bus */
         return_value = Lin_SendGoToSleepSignal(lin_base_cntr_addr);
-        /* TI_COVERAGE_GAP_START : Lin_SendGoToSleepSignal always returns E_OK in the test
-         * environment; hardware timeout cannot be simulated. */
         if (return_value == E_NOT_OK)
         {
 #ifdef LIN_E_TIMEOUT
             Dem_SetEventStatus(LIN_E_TIMEOUT, DEM_EVENT_STATUS_PREFAILED);
 #endif
         }
-        /* TI_COVERAGE_GAP_STOP */
         else
         {
             Lin_EnterLowPowerMode(lin_base_cntr_addr, TRUE);
@@ -637,38 +634,27 @@ Lin_GetStatus(uint8 Channel, P2VAR(uint8 *, AUTOMATIC, LIN_APPL_DATA) Lin_SduPtr
     }
     if (condition_check == 0U)
     {
-        if (Channel < LIN_MAX_CHANNEL)
+        lin_cnt_base_addr = Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr;
+
+        SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
+
+        if (LIN_CHANNEL_OPERATIONAL == Lin_Channel_Status[Channel].linChannelNetworkStatus)
         {
-            lin_cnt_base_addr = Lin_Config_Ptr->linChannelCfg[Channel].linControllerConfig.CntrAddr;
-
-            SchM_Enter_Lin_LIN_EXCLUSIVE_AREA_0();
-
-            if (LIN_CHANNEL_OPERATIONAL == Lin_Channel_Status[Channel].linChannelNetworkStatus)
-            {
-                return_value = Lin_GetStatusInternal(Channel, Lin_SduPtr, &lin_cnt_base_addr);
-            }
-            else if (LIN_CHANNEL_SLEEP == Lin_Channel_Status[Channel].linChannelNetworkStatus)
-            {
-                return_value = LIN_CH_SLEEP;
-            }
-            else
-            {
-                /* LIN_CHANNEL_SLEEP_PENDING is the only remaining valid state; Lin_Channel_Status
-                 * is static and only written by Lin module functions which enforce valid states.
-                 * Transition to SLEEP (MISRA-C:2012 R15.7). */
-                Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_SLEEP;
-                return_value                                        = LIN_CH_SLEEP;
-            }
-            SchM_Exit_Lin_LIN_EXCLUSIVE_AREA_0();
+            return_value = Lin_GetStatusInternal(Channel, Lin_SduPtr, &lin_cnt_base_addr);
         }
-        /* TI_COVERAGE_GAP_START: Channel always < LIN_MAX_CHANNEL when condition_check == 0U;
-         * boundary check sets condition_check = 1U when Channel >= LIN_MAX_CHANNEL. False branch
-         * unreachable by design. */
+        else if (LIN_CHANNEL_SLEEP == Lin_Channel_Status[Channel].linChannelNetworkStatus)
+        {
+            return_value = LIN_CH_SLEEP;
+        }
         else
         {
-            /* Do Nothing */
+            /* LIN_CHANNEL_SLEEP_PENDING is the only remaining valid state; Lin_Channel_Status
+             * is static and only written by Lin module functions which enforce valid states.
+             * Transition to SLEEP (MISRA-C:2012 R15.7). */
+            Lin_Channel_Status[Channel].linChannelNetworkStatus = LIN_CHANNEL_SLEEP;
+            return_value                                        = LIN_CH_SLEEP;
         }
-        /* TI_COVERAGE_GAP_STOP */
+        SchM_Exit_Lin_LIN_EXCLUSIVE_AREA_0();
     }
     return return_value;
 }

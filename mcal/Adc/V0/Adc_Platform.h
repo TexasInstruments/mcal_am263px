@@ -562,15 +562,7 @@ typedef enum
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_setPrescaler(uint32 base, Adc_mcalClkPrescale_t clkPrescale)
-{
-    /*
-     * Set the configuration of the ADC module prescaler.
-     */
-    HW_WR_REG16(
-        base + MCAL_CSL_ADC_ADCCTL2,
-        ((HW_RD_REG16(base + MCAL_CSL_ADC_ADCCTL2) & ~MCAL_CSL_ADC_ADCCTL2_PRESCALE_MASK) | (uint16)clkPrescale));
-}
+void ADC_setPrescaler(uint32 base, Adc_mcalClkPrescale_t clkPrescale);
 
 /** \brief Configures a start-of-conversion (SOC) in the ADC.
  *
@@ -604,26 +596,7 @@ static inline FUNC(void, ADC_CODE) ADC_setPrescaler(uint32 base, Adc_mcalClkPres
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE)
-    ADC_setupSOC(uint32 base, uint32 socNumber, Adc_mcalTrigger_t trigger, uint32 channel, uint32 sampleWindow)
-{
-    uint32 ctlRegAddr;
-
-    /*
-     * Check the arguments.
-     */
-
-    /*
-     * Calculate address for the SOC control register.
-     */
-    ctlRegAddr = base + MCAL_CSL_ADC_ADCSOC0CTL + ((uint32)socNumber * MCAL_ADC_ADCSOCxCTL_STEP);
-
-    /*
-     * Set the configuration of the specified SOC.
-     */
-    HW_WR_REG32(ctlRegAddr, (((uint32)channel << MCAL_CSL_ADC_ADCSOC0CTL_CHSEL_SHIFT) |
-                             ((uint32)trigger << MCAL_CSL_ADC_ADCSOC0CTL_TRIGSEL_SHIFT) | (sampleWindow - 1U)));
-}
+void ADC_setupSOC(uint32 base, uint32 socNumber, Adc_mcalTrigger_t trigger, uint32 channel, uint32 sampleWindow);
 
 /** \brief Configures the interrupt SOC trigger of an SOC.
  *
@@ -646,24 +619,7 @@ static inline FUNC(void, ADC_CODE)
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE)
-    ADC_setInterruptSOCTrigger(uint32 base, uint16 socNumber, Adc_mcalIntSOCTrigger_t trigger)
-{
-    uint16 shiftVal;
-
-    /*
-     * Each SOC has a 2-bit field in this register.
-     */
-    shiftVal = (uint16)socNumber << 1U;
-
-    /*
-     * Set the configuration of the specified SOC. Note that we're treating
-     * ADCINTSOCSEL1 and ADCINTSOCSEL2 as one 32-bit register here.
-     */
-    HW_WR_REG32(base + MCAL_CSL_ADC_ADCINTSOCSEL1, ((HW_RD_REG32(base + MCAL_CSL_ADC_ADCINTSOCSEL1) &
-                                                     ~((uint32)MCAL_CSL_ADC_ADCINTSOCSEL1_SOC0_MASK << shiftVal)) |
-                                                    ((uint32)trigger << shiftVal)));
-}
+void ADC_setInterruptSOCTrigger(uint32 base, uint16 socNumber, Adc_mcalIntSOCTrigger_t trigger);
 
 /** \brief Powers up the analog-to-digital converter core.
  *
@@ -679,14 +635,7 @@ static inline FUNC(void, ADC_CODE)
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_enableConverter(uint32 base)
-{
-    /*
-     * Set the bit that powers up the analog circuitry.
-     */
-    HW_WR_REG16(base + MCAL_CSL_ADC_ADCCTL1,
-                (HW_RD_REG16(base + MCAL_CSL_ADC_ADCCTL1) | MCAL_CSL_ADC_ADCCTL1_ADCPWDNZ_MASK));
-}
+void ADC_enableConverter(uint32 base);
 
 /** \brief Powers down the analog-to-digital converter module.
  *
@@ -698,14 +647,7 @@ static inline FUNC(void, ADC_CODE) ADC_enableConverter(uint32 base)
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_disableConverter(uint32 base)
-{
-    /*
-     * Clear the bit that powers down the analog circuitry.
-     */
-    HW_WR_REG16(base + MCAL_CSL_ADC_ADCCTL1,
-                (HW_RD_REG16(base + MCAL_CSL_ADC_ADCCTL1) & ~MCAL_CSL_ADC_ADCCTL1_ADCPWDNZ_MASK));
-}
+void ADC_disableConverter(uint32 base);
 
 /** \brief Forces multiple SOC flags to 1 in the analog-to-digital converter.
  *
@@ -727,13 +669,7 @@ static inline FUNC(void, ADC_CODE) ADC_disableConverter(uint32 base)
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_forceMultipleSOC(uint32 base, uint16 socMask)
-{
-    /*
-     * Write to the register that will force a 1 to desired SOCs
-     */
-    HW_WR_REG16(base + MCAL_CSL_ADC_ADCSOCFRC1, socMask);
-}
+void ADC_forceMultipleSOC(uint32 base, uint16 socMask);
 
 /** \brief Gets the current ADC interrupt status.
  *
@@ -753,13 +689,7 @@ static inline FUNC(void, ADC_CODE) ADC_forceMultipleSOC(uint32 base, uint16 socM
  * is not set
  *
  *****************************************************************************/
-static inline boolean ADC_getInterruptStatus(uint32 base, uint16 adcIntNum)
-{
-    /*
-     * Get the specified ADC interrupt status.
-     */
-    return ((HW_RD_REG16(base + MCAL_CSL_ADC_ADCINTFLG) & (1U << (uint16)adcIntNum)) != 0U);
-}
+boolean ADC_getInterruptStatus(uint32 base, uint16 adcIntNum);
 
 /** \brief Clears ADC interrupt sources.
  *
@@ -777,13 +707,7 @@ static inline boolean ADC_getInterruptStatus(uint32 base, uint16 adcIntNum)
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_clearInterruptStatus(uint32 base, uint16 adcIntNum)
-{
-    /*
-     * Clear the specified interrupt.
-     */
-    HW_WR_REG16(base + MCAL_CSL_ADC_ADCINTFLGCLR, ((uint16)((uint16)1U << (uint16)adcIntNum)));
-}
+void ADC_clearInterruptStatus(uint32 base, uint16 adcIntNum);
 
 /** \brief Gets the current ADC interrupt overflow status.
  *
@@ -805,13 +729,7 @@ static inline FUNC(void, ADC_CODE) ADC_clearInterruptStatus(uint32 base, uint16 
  * number is not set
  *
  *****************************************************************************/
-static inline boolean ADC_getInterruptOverflowStatus(uint32 base, uint16 adcIntNum)
-{
-    /*
-     * Get the specified ADC interrupt status.
-     */
-    return ((HW_RD_REG16(base + MCAL_CSL_ADC_ADCINTOVF) & (1U << (uint16)adcIntNum)) != 0U);
-}
+boolean ADC_getInterruptOverflowStatus(uint32 base, uint16 adcIntNum);
 
 /** \brief Clears ADC interrupt overflow sources.
  *
@@ -829,13 +747,7 @@ static inline boolean ADC_getInterruptOverflowStatus(uint32 base, uint16 adcIntN
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_clearInterruptOverflowStatus(uint32 base, uint16 adcIntNum)
-{
-    /*
-     * Clear the specified interrupt overflow bit.
-     */
-    HW_WR_REG16(base + MCAL_CSL_ADC_ADCINTOVFCLR, ((uint16)((uint16)1U << (uint16)adcIntNum)));
-}
+void ADC_clearInterruptOverflowStatus(uint32 base, uint16 adcIntNum);
 
 /** \brief Reads the conversion result.
  *
@@ -854,14 +766,7 @@ static inline FUNC(void, ADC_CODE) ADC_clearInterruptOverflowStatus(uint32 base,
  * \retval Returns the conversion result.
  *
  *****************************************************************************/
-static inline FUNC(uint16, ADC_CODE) ADC_readResult(uint32 resultBase, uint32 socNumber)
-{
-    /*
-     * Return the ADC result for the selected SOC.
-     */
-    return (HW_RD_REG16(resultBase + MCAL_CSL_ADC_RESULT_ADCRESULT0 +
-                        ((uint32)socNumber * MCAL_ADC_RESULT_ADCRESULTx_STEP)));
-}
+uint16 ADC_readResult(uint32 resultBase, uint32 socNumber);
 
 /** \brief Reads the address of the conversion result register.
  *
@@ -880,13 +785,7 @@ static inline FUNC(uint16, ADC_CODE) ADC_readResult(uint32 resultBase, uint32 so
  * \retval Returns the conversion result.
  *
  *****************************************************************************/
-static inline FUNC(uint32, ADC_CODE) ADC_readResultbaseaddr(uint32 resultBase, uint16 socNumber)
-{
-    /*
-     * Return the ADC result for the selected SOC.
-     */
-    return (resultBase + MCAL_CSL_ADC_RESULT_ADCRESULT0 + ((uint32)socNumber * MCAL_ADC_RESULT_ADCRESULTx_STEP));
-}
+uint32 ADC_readResultbaseaddr(uint32 resultBase, uint16 socNumber);
 
 /** \brief Sets the priority mode of the SOCs.
  *
@@ -914,15 +813,7 @@ static inline FUNC(uint32, ADC_CODE) ADC_readResultbaseaddr(uint32 resultBase, u
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_setSOCPriority(uint32 base, uint16 priMode)
-{
-    /*
-     * Set SOC priority
-     */
-    HW_WR_REG16(base + MCAL_CSL_ADC_ADCSOCPRICTL,
-                ((HW_RD_REG16(base + MCAL_CSL_ADC_ADCSOCPRICTL) & ~MCAL_CSL_ADC_ADCSOCPRICTL_SOCPRIORITY_MASK) |
-                 (uint16)priMode));
-}
+void ADC_setSOCPriority(uint32 base, uint16 priMode);
 
 /** \brief Configures a post-processing block (PPB) in the ADC.
  *
@@ -948,21 +839,7 @@ static inline FUNC(void, ADC_CODE) ADC_setSOCPriority(uint32 base, uint16 priMod
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_setupPPB(uint32 base, Adc_mcalPPBNumber_t ppbNumber, uint16 socNumber)
-{
-    uint32 ppbOffset;
-
-    /*
-     * Get the offset to the appropriate PPB configuration register.
-     */
-    ppbOffset = (MCAL_ADC_ADCPPBx_STEP * (uint32)ppbNumber) + MCAL_CSL_ADC_ADCPPB1CONFIG;
-
-    /*
-     * Write the configuration to the register.
-     */
-    HW_WR_REG16(base + ppbOffset, ((HW_RD_REG16(base + ppbOffset) & ~MCAL_CSL_ADC_ADCPPB1CONFIG_CONFIG_MASK) |
-                                   ((uint16)socNumber & MCAL_CSL_ADC_ADCPPB1CONFIG_CONFIG_MASK)));
-}
+void ADC_setupPPB(uint32 base, Adc_mcalPPBNumber_t ppbNumber, uint16 socNumber);
 
 /** \brief Enables an ADC interrupt source.
  *
@@ -980,23 +857,7 @@ static inline FUNC(void, ADC_CODE) ADC_setupPPB(uint32 base, Adc_mcalPPBNumber_t
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_enableInterrupt(uint32 base, uint16 adcIntNum)
-{
-    uint32 intRegAddr;
-    uint16 shiftVal;
-
-    /*
-     * Each INTSEL register manages two interrupts. If the interrupt number is
-     * even, we'll be accessing the upper byte and will need to shift.
-     */
-    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
-    shiftVal   = ((uint16)adcIntNum & 0x1U) << 3U;
-
-    /*
-     * Enable the specified ADC interrupt.
-     */
-    HW_WR_REG16(intRegAddr, HW_RD_REG16(intRegAddr) | (MCAL_CSL_ADC_ADCINTSEL1N2_INT1E_MASK << shiftVal));
-}
+void ADC_enableInterrupt(uint32 base, uint16 adcIntNum);
 
 /** \brief Disables an ADC interrupt source.
  *
@@ -1014,23 +875,7 @@ static inline FUNC(void, ADC_CODE) ADC_enableInterrupt(uint32 base, uint16 adcIn
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_disableInterrupt(uint32 base, uint16 adcIntNum)
-{
-    uint32 intRegAddr;
-    uint16 shiftVal;
-
-    /*
-     * Each INTSEL register manages two interrupts. If the interrupt number is
-     * even, we'll be accessing the upper byte and will need to shift.
-     */
-    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
-    shiftVal   = ((uint16)adcIntNum & 0x1U) << 3U;
-
-    /*
-     * Disable the specified ADC interrupt.
-     */
-    HW_WR_REG16(intRegAddr, HW_RD_REG16(intRegAddr) & ~(MCAL_CSL_ADC_ADCINTSEL1N2_INT1E_MASK << shiftVal));
-}
+void ADC_disableInterrupt(uint32 base, uint16 adcIntNum);
 
 /** \brief Sets the source EOC for an analog-to-digital converter interrupt.
  *
@@ -1050,24 +895,7 @@ static inline FUNC(void, ADC_CODE) ADC_disableInterrupt(uint32 base, uint16 adcI
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_setInterruptSource(uint32 base, uint16 adcIntNum, uint16 socNumber)
-{
-    uint32 intRegAddr;
-    uint16 shiftVal;
-
-    /*
-     * Each INTSEL register manages two interrupts. If the interrupt number is
-     * even, we'll be accessing the upper byte and will need to shift.
-     */
-    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
-    shiftVal   = ((uint16)adcIntNum & 0x1U) << 3U;
-
-    /*
-     * Set the specified ADC interrupt source.
-     */
-    HW_WR_REG16(intRegAddr, ((HW_RD_REG16(intRegAddr) & ~(MCAL_CSL_ADC_ADCINTSEL1N2_INT1SEL_MASK << shiftVal)) |
-                             ((uint16)socNumber << shiftVal)));
-}
+void ADC_setInterruptSource(uint32 base, uint16 adcIntNum, uint16 socNumber);
 
 /** \brief Enables continuous mode for an ADC interrupt.
  *
@@ -1086,23 +914,7 @@ static inline FUNC(void, ADC_CODE) ADC_setInterruptSource(uint32 base, uint16 ad
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_enableContinuousMode(uint32 base, uint16 adcIntNum)
-{
-    uint32 intRegAddr;
-    uint16 shiftVal;
-
-    /*
-     * Each INTSEL register manages two interrupts. If the interrupt number is
-     * even, we'll be accessing the upper byte and will need to shift.
-     */
-    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
-    shiftVal   = ((uint16)adcIntNum & 0x1U) << 3U;
-
-    /*
-     * Enable continuous mode for the specified ADC interrupt.
-     */
-    HW_WR_REG16(intRegAddr, HW_RD_REG16(intRegAddr) | (MCAL_CSL_ADC_ADCINTSEL1N2_INT1CONT_MASK << shiftVal));
-}
+void ADC_enableContinuousMode(uint32 base, uint16 adcIntNum);
 
 /** \brief Disables continuous mode for an ADC interrupt.
  *
@@ -1122,23 +934,7 @@ static inline FUNC(void, ADC_CODE) ADC_enableContinuousMode(uint32 base, uint16 
  * \retval None
  *
  *****************************************************************************/
-static inline FUNC(void, ADC_CODE) ADC_disableContinuousMode(uint32 base, uint32 adcIntNum)
-{
-    uint32 intRegAddr;
-    uint16 shiftVal;
-
-    /*
-     * Each INTSEL register manages two interrupts. If the interrupt number is
-     * even, we'll be accessing the upper byte and will need to shift.
-     */
-    intRegAddr = base + MCAL_CSL_ADC_ADCINTSEL1N2 + (((uint32)adcIntNum >> 1) * MCAL_ADC_ADCINTSELxNy_STEP);
-    shiftVal   = ((uint16)adcIntNum & 0x1U) << 3U;
-
-    /*
-     * Disable continuous mode for the specified ADC interrupt.
-     */
-    HW_WR_REG16(intRegAddr, HW_RD_REG16(intRegAddr) & ~(MCAL_CSL_ADC_ADCINTSEL1N2_INT1CONT_MASK << shiftVal));
-}
+void ADC_disableContinuousMode(uint32 base, uint32 adcIntNum);
 
 /** \brief Configures the analog-to-digital converter resolution and signal mode.
  *
@@ -1160,7 +956,7 @@ static inline FUNC(void, ADC_CODE) ADC_disableContinuousMode(uint32 base, uint32
  * \retval None
  *
  *****************************************************************************/
-extern void ADC_setMode(uint32 base, Adc_mcalResolution_t resolution, Adc_mcalSignalMode_t signalMode);
+void ADC_setMode(uint32 base, Adc_mcalResolution_t resolution, Adc_mcalSignalMode_t signalMode);
 
 /** \brief Sets the windowed trip limits for a PPB.
  *
@@ -1180,7 +976,7 @@ extern void ADC_setMode(uint32 base, Adc_mcalResolution_t resolution, Adc_mcalSi
  * \retval None
  *
  *****************************************************************************/
-extern void ADC_setPPBTripLimits(uint32 base, Adc_mcalPPBNumber_t ppbNumber, sint32 tripHiLimit, sint32 tripLoLimit);
+void ADC_setPPBTripLimits(uint32 base, Adc_mcalPPBNumber_t ppbNumber, sint32 tripHiLimit, sint32 tripLoLimit);
 
 /*****************************************************************************
  *

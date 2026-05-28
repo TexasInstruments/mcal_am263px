@@ -1,3 +1,112 @@
+commit c7b12edba395bc814e7e0f311bff428d7b062eaf
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu May 28 16:14:04 2026 +0530
+
+    all: Adc: Lint fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Adc/V0/Adc_Priv.c | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
+
+commit cf76577a80d2c6f7bee2dd205e9ed837f44e0bb1
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Wed May 27 13:24:34 2026 +0530
+
+    am26xx: adc: fix klocwork issues
+    
+     - Fix klocwork issues
+    
+    Fixes: MCAL-38558
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal/Adc/V0/Adc_Priv.c | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
+
+commit e5022d1564655ff6703972cc57379f5bb75bbabe
+Author: Akash <a-verma3@ti.com>
+Date:   Tue May 26 16:49:01 2026 +0530
+
+    am26xx: Lin: Coverage improvement for LIN module for all module
+    
+    - Addressed last release comment.
+    
+    Fixes: MCAL-37955
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Lin/src/Lin.c | 44 +++++++++++++++-----------------------------
+ 1 file changed, 15 insertions(+), 29 deletions(-)
+
+commit bedf6c9f329dc3fd2254172e5d2a1543ec594277
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed May 27 11:40:44 2026 +0530
+
+    all: Lint fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Lin/V0/Lin_Priv.c                               | 2 +-
+ mcal_test/adc_test/testInput/adcTestCases.h          | 2 +-
+ mcal_test/adc_test/testLib/adcTestNegativeTestCase.c | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 4df56e95f69cc597f5f0861c9a8a930dd6d7c74d
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Tue May 12 17:08:00 2026 +0530
+
+    all: adc: improve dynamic analysis coverage
+    
+     - Enabled AM263x/AM261x for CLANG Coverage automation
+     - Added testcase to improve coverage
+     - Moved static inline functions in relevant source files
+    
+    Fixes: MCAL-35531
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal/Adc/V0/Adc_Platform.h                         | 246 ++-------------------
+ mcal/Adc/V0/Adc_Priv.c                             | 240 ++++++++++++++++++++
+ mcal_test/adc_test/testInput/adcTestCases.h        |  15 ++
+ mcal_test/adc_test/testLib/adcTest.h               |   1 +
+ .../adc_test/testLib/adcTestNegativeTestCase.c     |  10 +-
+ mcal_test/makefile                                 |   4 +-
+ 6 files changed, 288 insertions(+), 228 deletions(-)
+
+commit 868469d42989573324a22aeb7530b6d02ed69a91
+Author: Akash <a-verma3@ti.com>
+Date:   Mon May 25 15:36:46 2026 +0530
+
+    am26x: Lin: LIN issues with Sleep command
+    
+    - Change the order of sending command to first set ID Byte then sending payload
+    
+    Fixes: MCAL-38305
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Lin/V0/Lin_Priv.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+commit a9681eb4bcc1d732f91a6e1afcf6de3d05c35c78
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon May 25 12:47:13 2026 +0530
+
+    am261: all: PR build script fix
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ build/ccs_makefile                                 |    2 +-
+ .../docker_epsw/am261-daily-build-docker.sh        | 1862 ++++++++++----------
+ 2 files changed, 932 insertions(+), 932 deletions(-)
+
 commit c41982ee688e22140c69a716924db0dba584984a
 Author: Asha D <asha.d@ti.com>
 Date:   Wed May 20 15:24:40 2026 +0530

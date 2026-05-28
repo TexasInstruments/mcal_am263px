@@ -1583,7 +1583,7 @@ Reentrancy - Reentrant
 ### function ADC_setPrescaler
 
 ```
-static inline void ADC_setPrescaler(
+void ADC_setPrescaler(
     uint32 base,
     Adc_mcalClkPrescale_t clkPrescale
 )
@@ -1616,7 +1616,7 @@ This function configures the ADC module's ADCCLK.
 ### function ADC_setupSOC
 
 ```
-static inline void ADC_setupSOC(
+void ADC_setupSOC(
     uint32 base,
     uint32 socNumber,
     Adc_mcalTrigger_t trigger,
@@ -1658,7 +1658,7 @@ This function configures the a start-of-conversion (SOC) in the ADC module.
 ### function ADC_setInterruptSOCTrigger
 
 ```
-static inline void ADC_setInterruptSOCTrigger(
+void ADC_setInterruptSOCTrigger(
     uint32 base,
     uint16 socNumber,
     Adc_mcalIntSOCTrigger_t trigger
@@ -1698,7 +1698,7 @@ This function configures the interrupt start-of-conversion trigger in the ADC mo
 ### function ADC_enableConverter
 
 ```
-static inline void ADC_enableConverter(
+void ADC_enableConverter(
     uint32 base
 )
 ```
@@ -1730,7 +1730,7 @@ This function powers up the analog circuitry inside the analog core.
 ### function ADC_disableConverter
 
 ```
-static inline void ADC_disableConverter(
+void ADC_disableConverter(
     uint32 base
 )
 ```
@@ -1760,7 +1760,7 @@ This function powers down the analog circuitry inside the analog core..
 ### function ADC_forceMultipleSOC
 
 ```
-static inline void ADC_forceMultipleSOC(
+void ADC_forceMultipleSOC(
     uint32 base,
     uint16 socMask
 )
@@ -1795,7 +1795,7 @@ This function forces the SOCFRC1 flags associated with the SOCs specified by _so
 ### function ADC_getInterruptStatus
 
 ```
-static inline boolean ADC_getInterruptStatus(
+boolean ADC_getInterruptStatus(
     uint32 base,
     uint16 adcIntNum
 )
@@ -1831,7 +1831,7 @@ This function returns the interrupt status for the analog-to-digital converter.
 ### function ADC_clearInterruptStatus
 
 ```
-static inline void ADC_clearInterruptStatus(
+void ADC_clearInterruptStatus(
     uint32 base,
     uint16 adcIntNum
 )
@@ -1864,7 +1864,7 @@ This function clears the specified ADC interrupt sources so that they no longer 
 ### function ADC_getInterruptOverflowStatus
 
 ```
-static inline boolean ADC_getInterruptOverflowStatus(
+boolean ADC_getInterruptOverflowStatus(
     uint32 base,
     uint16 adcIntNum
 )
@@ -1900,7 +1900,7 @@ This function returns the interrupt overflow status for the analog-to-digital co
 ### function ADC_clearInterruptOverflowStatus
 
 ```
-static inline void ADC_clearInterruptOverflowStatus(
+void ADC_clearInterruptOverflowStatus(
     uint32 base,
     uint16 adcIntNum
 )
@@ -1933,7 +1933,7 @@ This function clears the specified ADC interrupt overflow sources so that they n
 ### function ADC_readResult
 
 ```
-static inline uint16 ADC_readResult(
+uint16 ADC_readResult(
     uint32 resultBase,
     uint32 socNumber
 )
@@ -1968,7 +1968,7 @@ This function returns the conversion result that corresponds to the base address
 ### function ADC_readResultbaseaddr
 
 ```
-static inline uint32 ADC_readResultbaseaddr(
+uint32 ADC_readResultbaseaddr(
     uint32 resultBase,
     uint16 socNumber
 )
@@ -2003,7 +2003,7 @@ This function returns the conversion result that corresponds to the base address
 ### function ADC_setSOCPriority
 
 ```
-static inline void ADC_setSOCPriority(
+void ADC_setSOCPriority(
     uint32 base,
     uint16 priMode
 )
@@ -2042,7 +2042,7 @@ This function sets the priority mode of the SOCs. There are three main modes tha
 ### function ADC_setupPPB
 
 ```
-static inline void ADC_setupPPB(
+void ADC_setupPPB(
     uint32 base,
     Adc_mcalPPBNumber_t ppbNumber,
     uint16 socNumber
@@ -2080,7 +2080,7 @@ This function associates a post-processing block with a SOC.
 ### function ADC_enableInterrupt
 
 ```
-static inline void ADC_enableInterrupt(
+void ADC_enableInterrupt(
     uint32 base,
     uint16 adcIntNum
 )
@@ -2113,7 +2113,7 @@ This function enables the indicated ADC interrupt source. Only the sources that 
 ### function ADC_disableInterrupt
 
 ```
-static inline void ADC_disableInterrupt(
+void ADC_disableInterrupt(
     uint32 base,
     uint16 adcIntNum
 )
@@ -2146,7 +2146,7 @@ This function disables the indicated ADC interrupt source. Only the sources that
 ### function ADC_setInterruptSource
 
 ```
-static inline void ADC_setInterruptSource(
+void ADC_setInterruptSource(
     uint32 base,
     uint16 adcIntNum,
     uint16 socNumber
@@ -2182,7 +2182,7 @@ This function sets which conversion is the source of an ADC interrupt.
 ### function ADC_enableContinuousMode
 
 ```
-static inline void ADC_enableContinuousMode(
+void ADC_enableContinuousMode(
     uint32 base,
     uint16 adcIntNum
 )
@@ -2215,7 +2215,7 @@ This function enables continuous mode for the ADC interrupt passed into _adcIntN
 ### function ADC_disableContinuousMode
 
 ```
-static inline void ADC_disableContinuousMode(
+void ADC_disableContinuousMode(
     uint32 base,
     uint32 adcIntNum
 )

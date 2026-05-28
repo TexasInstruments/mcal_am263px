@@ -779,6 +779,13 @@ FUNC(Std_ReturnType, LIN_CODE) Lin_SendGoToSleepSignal(uint32 base)
     Lin_SetRxMask(base, 0x00U);
 
     /*
+     * Set the message ID as 60 OR 0x3C to initiate a header transmission.
+     * This causes the ID to be written to the bus followed by the
+     * data in the transmit buffers.
+     */
+    Lin_SetIDByte(base, 0x3CU);
+
+    /*
      * Set the frame length (number of bytes to be transmitted)
      */
     Lin_SetFrameLength(base, 0x8U);
@@ -788,12 +795,6 @@ FUNC(Std_ReturnType, LIN_CODE) Lin_SendGoToSleepSignal(uint32 base)
      */
     HW_WR_REG32((base + CSL_LIN_LINTD1), (uint32)LIN_GOTOSLEEP_TD1KEY);
     HW_WR_REG32((base + CSL_LIN_LINTD0), (uint32)LIN_GOTOSLEEP_TD0KEY);
-    /*
-     * Set the message ID as 60 OR 0x3C to initiate a header transmission.
-     * This causes the ID to be written to the bus followed by the
-     * data in the transmit buffers.
-     */
-    Lin_SetIDByte(base, 0x3CU);
 
 #ifdef LIN_TIMEOUT_DURATION
     while (timeout_duration > 0U)

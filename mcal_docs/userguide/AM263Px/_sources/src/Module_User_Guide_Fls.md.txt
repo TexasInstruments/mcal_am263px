@@ -99,15 +99,15 @@ Will be available in future release.
       4. Cancel job is supported.\
       5. Compare and Blank Check flash memory location.
 * Configure error detection (DET)
-* Only polling mode is supported.
+* Polling mode is supported.
 * DAC and INDAC mode of operation are supported.
 * Interrupt mode is supported (only in INDAC Mode)
 * DMA mode is supported for Flash Read. (Only in DAC mode)
+* PHY Tuning is supported.
 
 #### Not supported Features
 
 * XIP Mode is not supported.
-* PHY Tune Module is not supported.
 
 #### IP specific Features supported
 
@@ -157,15 +157,14 @@ Static source C Files are defined below
  ┃ ┃ ┃ ┣ 📜**Fls.c** : *Contains the pre-complier switches.*\
  ┃ ┃ ┃ ┗ 📜**Fls_Irq.c** : *Contains ISR function definitions..*\
  ┃ ┃ ┣ 📂**V2**\
- ┃ ┃ ┃ ┣ 📜**Fls_Brd_Nor.h** : *Contains internal functions and data structures.*\
- ┃ ┃ ┃ ┗ 📜**Fls_Brd_Nor_Ospi.c** : *Contains internal functions and data structures.*\
- ┃ ┃ ┃ ┣ 📜**Fls_Nor_config.c** : *Contains flash specific commands*\
- ┃ ┃ ┃ ┣ 📜**Fls_Nor_config.h** : *Contains device specific configuration parameters.*\
- ┃ ┃ ┃ ┣ 📜**Fls_Ospi.c** : *Contains internal functions definitions.*\
- ┃ ┃ ┃ ┗ 📜**Fls_Ospi.h** : *Contains internal functions definitions and data structures.*\
- ┃ ┃ ┃ ┣ 📜**Fls_Ospi_Edma.c** : *Contains internal functions definitions for dma support.*\
- ┃ ┃ ┃ ┗ 📜**Fls_Ospi_Edma.h** : *Contains internal functions definitions and data structures for dma support.*\
-structures.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Brd_Nor.h** : *Contains common declarations, macros, and data structures used across OSPI FLS driver files.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Brd_Nor_Ospi.c** : *Contains board-level NOR flash erase, read, write, and blank check functions for OSPI.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Ospi.c** : *Contains OSPI controller driver functions and job processing.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Ospi.h** : *Contains OSPI controller driver interface and data structures.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Ospi_Edma.c** : *Contains internal functions definitions for OSPI DMA support.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Ospi_Edma.h** : *Contains internal functions definitions and data structures for OSPI DMA support.*\
+ ┃ ┃ ┃ ┣ 📜**Fls_Ospi_Phy.c** : *Contains OSPI PHY tuning algorithm implementation.*\
+ ┃ ┃ ┃ ┗ 📜**Fls_Ospi_Phy.h** : *Contains OSPI PHY tuning interface and configuration structures.*\
  ┃ ┃ ┗ 📜Makefile\
  ┣ 📂mcal_config\
  ┣ 📂mcal_docs\
@@ -231,6 +230,8 @@ The run time errors reported to DET module are described in the following table:
 |----|-------|-----|
 |Erase verification (blank check) failed|FLS_E_VERIFY_ERASE_FAILED|0x07|
 |Write verification (compare) failed|FLS_E_VERIFY_WRITE_FAILED|0x08|
+|Timeout exceeded|FLS_E_TIMEOUT|0x09|
+|Memory map / interrupt mode off but DMA on|FLS_E_MEMAP_INTERRUPT_OFF_DMA_ON|0x0B|
 
 AUTOSAR requires that API functions check the validity of their
 parameters. The check in below table shows the various Development
@@ -240,28 +241,32 @@ development error reporting and can be enabled or disabled. The
 following table shows which parameter checks are performed on which
 services:
 
-| Check Services     | FLS_E_PARAM_CONFIG | FLS_E_PARAM_ADDRESS | FLS_E_PARAM_LENGTH | FLS_E_PARAM_DATA | FLS_E_UNINIT | FLS_E_BUSY | FLS_E_PARAM_POINTER  |
-|--------------------|--------------------|---------------------|--------------------|------------------|--------------|------------|----------------------|
-| Fls_Init           | x        |                     |                    |                  |              | x          |                      |
-| Fls_Erase          |        | x                   | x                  |                  | x            | x          |                      |
-| Fls_Read           |          | x                   | x                  | x                | x            | x          |                      |
-| Fls_Write          |          | x                   | x                  | x                | x            | x          |                      |
-| Fls_Compare        |            | x                   | x                  | x                | x            | x          |                      |
-| Fls_BlankCheck     |          | x                   | x                  |                  | x            | x          |                      |
-| Fls_GetJobResult   |          |                     |                    |                  | x            |            |                      |
-| Fls_GetVersionInfo |          |                     |                    |                  |              |            | x                    |
-| Fls_MainFunction   |           |                     |                    |                  | x            |            |                      |
-| Fls_Cancel         |       |               |                    |                  | x            |            |                      |
+| Check Services              | FLS_E_PARAM_CONFIG | FLS_E_PARAM_ADDRESS | FLS_E_PARAM_LENGTH | FLS_E_PARAM_DATA | FLS_E_UNINIT | FLS_E_BUSY | FLS_E_PARAM_POINTER  |
+|-----------------------------|--------------------|--------------------|--------------------|--------------------|--------------|------------|----------------------|
+| Fls_Init                    | x                  |                     |                    |                  |              | x          |                      |
+| Fls_Erase                   |                    | x                   | x                  |                  | x            | x          |                      |
+| Fls_Read                    |                    | x                   | x                  | x                | x            | x          |                      |
+| Fls_Write                   |                    | x                   | x                  | x                | x            | x          |                      |
+| Fls_Compare                 |                    | x                   | x                  | x                | x            | x          |                      |
+| Fls_BlankCheck              |                    | x                   | x                  |                  | x            | x          |                      |
+| Fls_GetJobResult            |                    |                     |                    |                  | x            |            |                      |
+| Fls_GetVersionInfo          |                    |                     |                    |                  |              |            | x                    |
+| Fls_MainFunction            |                    |                     |                    |                  | x            |            |                      |
+| Fls_Cancel                  |                    |                     |                    |                  | x            |            |                      |
+| Fls_SetMode                 |                    |                     |                    |                  | x            |            |                      |
+| Fls_RegisterReadback        |                    |                     |                    |                  | x            |            | x                    |
+| Fls_SetEraseType            |                    |                     |                    |                  | x            |            |                      |
+| Fls_Set3ByteAddressMode     |                    |                     |                    |                  | x            |            |                      |
 
 ### Used resources
 
 #### Interrupt Handling
 
-FLS uses Interrupt line R5FSS0_CORE0_INTR_QSPI0_INT (interrupt number 54) and Fls_Hdlr shall be called when the interrupt occurs
+FLS uses Interrupt line R5FSS0_CORE1_INTR_OSPI0_INT (interrupt number 54) and Fls_Hdlr shall be called when the interrupt occurs
 
 | Interrupt Number| ISR API Mapped  |
 |----------------|----------------|
-| R5FSS0_CORE0_INTR_QSPI0_INT | Fls_Hdlr |
+| R5FSS0_CORE1_INTR_OSPI0_INT | Fls_Hdlr |
 
 ### Integration description
 
@@ -311,8 +316,12 @@ The following table represents the service IDs:
 | FLS_SID_READ           | 0x07 | FLS_Read()             |
 | FLS_SID_COMPARE       | 0x08 | FLS_Compare()          |
 | FLS_SID_GET_VERSION_INFO     | 0x10 | Fls_GetVersionInfo()   |
-| FLS_SID_BLANK_CHECK   | 0x0A | FLS_BlankCheck()       |
-| FLS_SID_MAIN_FUNCTION       | 0x06 | FLS_MainFunction()     |
+| FLS_SID_BLANK_CHECK         | 0x0A | Fls_BlankCheck()             |
+| FLS_SID_MAIN_FUNCTION       | 0x06 | Fls_MainFunction()           |
+| FLS_SID_SET_MODE            | 0x09 | Fls_SetMode()                |
+| FLS_SID_REGISTERREADBACK    | 0x0B | Fls_RegisterReadback()       |
+| FLS_SID_SET_ERASE_TYPE      | 0x0C | Fls_SetEraseType()           |
+| FLS_SID_SET_3BYTEADDR_MODE  | 0x0D | Fls_Set3ByteAddressMode()    |
 
 ##### DEM
 
@@ -339,6 +348,23 @@ Implementation of this function is done to allow user to select one or more eras
 The function Fls_SetEraseType sets the parameters like data size, data_value, erase type(sector/block/chip),
 "typeoferase" for Fls_DrvObj, based on the erase type parameter passed to this function while calling from example app.
 These parameters are required in example app.
+
+##### Fls_Set3ByteAddressMode
+
+This function switches the OSPI controller and the connected NOR flash device to 3-byte addressing mode. It is applicable only on platforms with an OSPI controller (`FLS_OSPI_CTRL_BASE_ADDR` defined). This API can be used when interoperability with devices expecting 3-byte addressing is required.
+
+##### Fls_setResetPinMode
+
+This function sets the flash RESET# pin to the specified state (high or low) via the OSPI controller register. It is applicable on AM263Px-SIP and AM263Px Rev A boards. To perform a hardware flash reset, the caller must toggle the pin: first set it HIGH then LOW (or LOW then HIGH depending on flash polarity). Note: On a standard AM263Px EVM without SIP packaging, the RESET# pin is not wired to the flash and this function has no effect on the flash device itself.
+
+##### Fls PHY Tuning (Fls_PhyEnable / Fls_PhyDisable)
+
+OSPI PHY tuning is supported on AM263Px (enabled via the `FLS_OSPI_PHY_ENABLE` pre-compile switch). The PHY tuning algorithm searches for optimal TX/RX DLL delay window settings to achieve reliable high-speed 8D-8D-8D flash operation.
+
+- **Fls_PhyEnable()**: Runs the PHY tuning algorithm and enables the OSPI PHY. This must be called after `Fls_Init()` and after the flash protocol has been configured. Once enabled, all subsequent read operations use PHY-assisted data capture for improved timing margins at high frequencies.
+- **Fls_PhyDisable()**: Disables the OSPI PHY, reverting to non-PHY read operation.
+
+The PHY configuration parameters (tuning window, DLL mode, phase delay) are provided through SysConfig-generated configuration.
 
 ##### Callback Notification
 
@@ -2109,7 +2135,7 @@ FLS Handler in Cdd_Dma configuration
 FLS Handler Channels in Cdd_Dma configuration
 ```
 
-4. Flash configuration should enable DAC mode and DMA. 
+4. Flash configuration should enable DAC mode and DMA.
 DMA works only in DAC mode.
 As DAC mode doesn't support FLS interrupt, polling shall be used for FLS whereas DMA interrupt can be used
 
@@ -2164,40 +2190,40 @@ None
 
  FlsApp: Sample Application - STARTS !!!
  FLS_APP: Variant - Pre Compile being used !!!
- FLS MCAL version info:9.1.0
- FLS MCAL Module/Driver:92.44 
- FLS_APP:Executing Sector configuration number :  1 
- FLS_APP:Number of sector/blocks to erase/read/write: 1 
- FLS_APP:Total data size: 0x1000 
- FLS_APP:Offset is 0x0 
- FLS_APP: Erasing 
+ FLS MCAL version info:11.0.0
+ FLS MCAL Module/Driver:92.44
+ FLS_APP:Executing Sector configuration number :  1
+ FLS_APP:Number of sector/blocks to erase/read/write: 1
+ FLS_APP:Total data size: 0x1000
+ FLS_APP:Offset is 0x0
+ FLS_APP: Erasing
  FLS_APP: Job Processing in Progress.
  FLS_APP: Job Ends: SUCCESS
- FLS_APP: Blank Checking 
+ FLS_APP: Blank Checking
  FLS_APP: Job Processing in Progress.
  FLS_APP: Job Ends: SUCCESS
- FLS_APP: Writing 
+ FLS_APP: Writing
  FLS_APP: Job Processing in Progress.
  FLS_APP: Job Ends: SUCCESS
- FLS_APP: Reading 
+ FLS_APP: Reading
  FLS_APP: Job Processing in Progress.
  FLS_APP: Job Ends: SUCCESS
- FLS_APP: Write Compare 
+ FLS_APP: Write Compare
  FLS_APP: Job Processing in Progress.
  FLS_APP: Job Ends: SUCCESS
- FLS_APP: Read Compare 
+ FLS_APP: Read Compare
  FLS_APP: Job Processing in Progress.
  FLS_APP: Job Ends: SUCCESS
- FLS_APP: 
- FLS_APP: Job Cancel 
- FLS_APP:         1. Writing 
- FLS_APP:         2. Canceling 
- FLS_APP: Job Canceled (SUCCESS) ! 
- FLS_APP: 
- FLS_APP: 
- FLS_APP: ---------- FLS Sample application Done !! ----------  
  FLS_APP:
-      
+ FLS_APP: Job Cancel
+ FLS_APP:         1. Writing
+ FLS_APP:         2. Canceling
+ FLS_APP: Job Canceled (SUCCESS) !
+ FLS_APP:
+ FLS_APP:
+ FLS_APP: ---------- FLS Sample application Done !! ----------
+ FLS_APP:
+
 ```
 
 #### File Structure

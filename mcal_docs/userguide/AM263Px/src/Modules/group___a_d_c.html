@@ -2624,7 +2624,7 @@ Sets the continue to interrupt mode of ADC.</p>
 </section>
 <section id="function-adc-setprescaler">
 <h3><span class="section-number">5.1.5.21. </span>function ADC_setPrescaler<a class="headerlink" href="#function-adc-setprescaler" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setPrescaler</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setPrescaler</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalClkPrescale_t</span><span class="w"> </span><span class="n">clkPrescale</span>
 <span class="p">)</span>
@@ -2647,7 +2647,7 @@ Configures the analog-to-digital converter module prescaler.</p>
 </section>
 <section id="function-adc-setupsoc">
 <h3><span class="section-number">5.1.5.22. </span>function ADC_setupSOC<a class="headerlink" href="#function-adc-setupsoc" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setupSOC</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setupSOC</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">socNumber</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalTrigger_t</span><span class="w"> </span><span class="n">trigger</span><span class="p">,</span>
@@ -2676,7 +2676,7 @@ Configures a start-of-conversion (SOC) in the ADC.</p>
 </section>
 <section id="function-adc-setinterruptsoctrigger">
 <h3><span class="section-number">5.1.5.23. </span>function ADC_setInterruptSOCTrigger<a class="headerlink" href="#function-adc-setinterruptsoctrigger" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptSOCTrigger</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptSOCTrigger</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socNumber</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalIntSOCTrigger_t</span><span class="w"> </span><span class="n">trigger</span>
@@ -2704,7 +2704,7 @@ Configures the interrupt SOC trigger of an SOC.</p>
 </section>
 <section id="function-adc-enableconverter">
 <h3><span class="section-number">5.1.5.24. </span>function ADC_enableConverter<a class="headerlink" href="#function-adc-enableconverter" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableConverter</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableConverter</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span>
 <span class="p">)</span>
 </pre></div>
@@ -2726,7 +2726,7 @@ Powers up the analog-to-digital converter core.</p>
 </section>
 <section id="function-adc-disableconverter">
 <h3><span class="section-number">5.1.5.25. </span>function ADC_disableConverter<a class="headerlink" href="#function-adc-disableconverter" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableConverter</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableConverter</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span>
 <span class="p">)</span>
 </pre></div>
@@ -2747,7 +2747,7 @@ Powers down the analog-to-digital converter module.</p>
 </section>
 <section id="function-adc-forcemultiplesoc">
 <h3><span class="section-number">5.1.5.26. </span>function ADC_forceMultipleSOC<a class="headerlink" href="#function-adc-forcemultiplesoc" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_forceMultipleSOC</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_forceMultipleSOC</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socMask</span>
 <span class="p">)</span>
@@ -2771,7 +2771,7 @@ Forces multiple SOC flags to 1 in the analog-to-digital converter.</p>
 </section>
 <section id="function-adc-getinterruptstatus">
 <h3><span class="section-number">5.1.5.27. </span>function ADC_getInterruptStatus<a class="headerlink" href="#function-adc-getinterruptstatus" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">boolean</span><span class="w"> </span><span class="n">ADC_getInterruptStatus</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">ADC_getInterruptStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>
@@ -2796,7 +2796,7 @@ Gets the current ADC interrupt status.</p>
 </section>
 <section id="function-adc-clearinterruptstatus">
 <h3><span class="section-number">5.1.5.28. </span>function ADC_clearInterruptStatus<a class="headerlink" href="#function-adc-clearinterruptstatus" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_clearInterruptStatus</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_clearInterruptStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>
@@ -2819,7 +2819,7 @@ Clears ADC interrupt sources.</p>
 </section>
 <section id="function-adc-getinterruptoverflowstatus">
 <h3><span class="section-number">5.1.5.29. </span>function ADC_getInterruptOverflowStatus<a class="headerlink" href="#function-adc-getinterruptoverflowstatus" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">boolean</span><span class="w"> </span><span class="n">ADC_getInterruptOverflowStatus</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">ADC_getInterruptOverflowStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>
@@ -2844,7 +2844,7 @@ Gets the current ADC interrupt overflow status.</p>
 </section>
 <section id="function-adc-clearinterruptoverflowstatus">
 <h3><span class="section-number">5.1.5.30. </span>function ADC_clearInterruptOverflowStatus<a class="headerlink" href="#function-adc-clearinterruptoverflowstatus" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_clearInterruptOverflowStatus</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_clearInterruptOverflowStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>
@@ -2867,7 +2867,7 @@ Clears ADC interrupt overflow sources.</p>
 </section>
 <section id="function-adc-readresult">
 <h3><span class="section-number">5.1.5.31. </span>function ADC_readResult<a class="headerlink" href="#function-adc-readresult" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">ADC_readResult</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">ADC_readResult</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">resultBase</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">socNumber</span>
 <span class="p">)</span>
@@ -2891,7 +2891,7 @@ Reads the conversion result.</p>
 </section>
 <section id="function-adc-readresultbaseaddr">
 <h3><span class="section-number">5.1.5.32. </span>function ADC_readResultbaseaddr<a class="headerlink" href="#function-adc-readresultbaseaddr" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">ADC_readResultbaseaddr</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">ADC_readResultbaseaddr</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">resultBase</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socNumber</span>
 <span class="p">)</span>
@@ -2915,7 +2915,7 @@ Reads the address of the conversion result register.</p>
 </section>
 <section id="function-adc-setsocpriority">
 <h3><span class="section-number">5.1.5.33. </span>function ADC_setSOCPriority<a class="headerlink" href="#function-adc-setsocpriority" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setSOCPriority</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setSOCPriority</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">priMode</span>
 <span class="p">)</span>
@@ -2943,7 +2943,7 @@ Sets the priority mode of the SOCs.</p>
 </section>
 <section id="function-adc-setupppb">
 <h3><span class="section-number">5.1.5.34. </span>function ADC_setupPPB<a class="headerlink" href="#function-adc-setupppb" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setupPPB</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setupPPB</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Adc_mcalPPBNumber_t</span><span class="w"> </span><span class="n">ppbNumber</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socNumber</span>
@@ -2969,7 +2969,7 @@ Configures a post-processing block (PPB) in the ADC.</p>
 </section>
 <section id="function-adc-enableinterrupt">
 <h3><span class="section-number">5.1.5.35. </span>function ADC_enableInterrupt<a class="headerlink" href="#function-adc-enableinterrupt" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableInterrupt</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableInterrupt</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>
@@ -2992,7 +2992,7 @@ Enables an ADC interrupt source.</p>
 </section>
 <section id="function-adc-disableinterrupt">
 <h3><span class="section-number">5.1.5.36. </span>function ADC_disableInterrupt<a class="headerlink" href="#function-adc-disableinterrupt" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableInterrupt</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableInterrupt</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>
@@ -3015,7 +3015,7 @@ Disables an ADC interrupt source.</p>
 </section>
 <section id="function-adc-setinterruptsource">
 <h3><span class="section-number">5.1.5.37. </span>function ADC_setInterruptSource<a class="headerlink" href="#function-adc-setinterruptsource" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptSource</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_setInterruptSource</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">socNumber</span>
@@ -3040,7 +3040,7 @@ Sets the source EOC for an analog-to-digital converter interrupt.</p>
 </section>
 <section id="function-adc-enablecontinuousmode">
 <h3><span class="section-number">5.1.5.38. </span>function ADC_enableContinuousMode<a class="headerlink" href="#function-adc-enablecontinuousmode" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableContinuousMode</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_enableContinuousMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>
@@ -3063,7 +3063,7 @@ Enables continuous mode for an ADC interrupt.</p>
 </section>
 <section id="function-adc-disablecontinuousmode">
 <h3><span class="section-number">5.1.5.39. </span>function ADC_disableContinuousMode<a class="headerlink" href="#function-adc-disablecontinuousmode" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableContinuousMode</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">ADC_disableContinuousMode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">base</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">adcIntNum</span>
 <span class="p">)</span>

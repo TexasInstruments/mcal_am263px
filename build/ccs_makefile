@@ -39,7 +39,7 @@ endif
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
   EXAMPLES += Cdd_Flc
   EXAMPLES += Fls/Flsdiag_ospi Fls/fls_phy_app Fls/fls_xip_app
-  EXAMPLES += Uart/uart_interrupt_app
+  EXAMPLES += Uart/uart_interrupt_app Uart/uart_echo_dma_app
 endif
 
 EXAMPLES_CLEAN=$(addsuffix _clean, $(EXAMPLES))
