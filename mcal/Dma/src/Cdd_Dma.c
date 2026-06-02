@@ -118,6 +118,13 @@ static boolean Cdd_Dma_ChainChannel_paramDetCheck(uint32 channelIdx0, uint32 cha
                                                   Cdd_Dma_InitHandleType hEdmaInitCheck, uint32 paramIndex0);
 #endif
 
+/* Common Design ID's */
+/*
+ *Design: MCAL-19701, MCAL-19691, MCAL-19645, MCAL-19643, MCAL-19642, MCAL-19641, MCAL-19640,
+ *MCAL-19639, MCAL-19637, MCAL-19636, MCAL-19635, MCAL-19632, MCAL-19631, MCAL-19630, MCAL-19629,
+ *MCAL-19626, MCAL-19625, MCAL-19624
+ */
+
 #define CDD_DMA_START_SEC_CODE
 #include "Cdd_Dma_MemMap.h"
 /*********************************************************************************************************************
@@ -132,7 +139,7 @@ static inline void Cdd_Dma_ReportDetError(uint8 apiId, uint8 errorId)
 #endif /* #if (STD_ON == CDD_DMA_DEV_ERROR_DETECT) */
 
 /*
- *Design:MCAL-19816,MCAL-19817,MCAL-19818,MCAL-19819,MCAL-19638,MCAL-19627,MCAL-18914,MCAL-18915,MCAL-18916,MCAL-18917,MCAL-18918,MCAL-18919,MCAL-18921,MCAL-18922,MCAL-18923,MCAL-18924,MCAL-18925,MCAL-18926,MCAL-18928
+ *Design:MCAL-19816,MCAL-19817,MCAL-19818,MCAL-19819,MCAL-19638,MCAL-19627,MCAL-18914,MCAL-18915,MCAL-18916,MCAL-18917,MCAL-18918,MCAL-18919,MCAL-18921,MCAL-18922,MCAL-18923,MCAL-18924,MCAL-18925,MCAL-18926,MCAL-18927,MCAL-18928
  *
  */
 /* Initializes the DMA module. */
@@ -482,7 +489,7 @@ void Cdd_Dma_GetVersionInfo(Std_VersionInfoType *VersionInfoPtr)
 #endif /* CDD_DMA_GET_VERSION_INFO_API*/
 
 /*
- *Design:MCAL-21480,MCAL-21482,MCAL-21485,MCAL-22641
+ *Design:MCAL-21480,MCAL-21482,MCAL-21485,MCAL-22638,MCAL-22639,MCAL-22640,MCAL-22641,MCAL-22642
  */
 void Cdd_Dma_GetParam(uint32 handleId, uint32 channelIdx, uint32 paramIndex, CDD_EDMACCEDMACCPaRAMEntry *edmaParam)
 {
@@ -505,7 +512,7 @@ void Cdd_Dma_GetParam(uint32 handleId, uint32 channelIdx, uint32 paramIndex, CDD
 }
 
 /*
- *Design:MCAL-21487,MCAL-21488,MCAL-19633,MCAL-22644,MCAL-22646
+ *Design:MCAL-21487,MCAL-21488,MCAL-19633,MCAL-22643,MCAL-22644,MCAL-22645,MCAL-22646
  */
 boolean Cdd_Dma_DisableTransferRegion(uint32 handleId, uint32 trigMode)
 {
@@ -717,7 +724,7 @@ static boolean Cdd_Dma_GetParam_detErrorCheck(uint32 handleId, uint32 channelIdx
 
 #if (STD_ON == CDD_DMA_REGISTER_READBACK_API)
 /*
- *Design:MCAL-23362,MCAL-23368
+ *Design:MCAL-22692,MCAL-23362,MCAL-23368
  */
 Std_ReturnType Cdd_Dma_RegisterReadback(uint32 handleId, Cdd_Dma_RegisterReadbackType *RegPtr)
 {

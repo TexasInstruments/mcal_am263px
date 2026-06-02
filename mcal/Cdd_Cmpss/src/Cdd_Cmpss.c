@@ -133,6 +133,7 @@ static uint32 const CddCmpssBaseAddr[CDD_CMPSS_MAX] = {CDD_CMPSS_BASEADDR_ARRAY}
 #define CDD_CMPSS_START_SEC_CODE
 #include "Cdd_Cmpss_MemMap.h"
 
+/* Design: MCAL-38716 */
 #if (STD_ON == CDD_CMPSS_VERSION_INFO_API)
 FUNC(void, CDD_CMPSS_CODE)
 Cdd_Cmpss_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_CMPSS_DATA) VersionInfo)
@@ -157,6 +158,7 @@ Cdd_Cmpss_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_CMPSS_DATA) V
 }
 #endif
 
+/* Design: MCAL-38718 */
 void Cdd_Cmpss_EnableModule(Cdd_Cmpss_HwUnitType HwUnitId)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -183,6 +185,7 @@ void Cdd_Cmpss_EnableModule(Cdd_Cmpss_HwUnitType HwUnitId)
     return;
 }
 
+/* Design: MCAL-38719 */
 void Cdd_Cmpss_DisableModule(Cdd_Cmpss_HwUnitType HwUnitId)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -209,6 +212,7 @@ void Cdd_Cmpss_DisableModule(Cdd_Cmpss_HwUnitType HwUnitId)
     return;
 }
 
+/* Design: MCAL-38720 */
 void Cdd_Cmpss_ConfigHighComparator(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -236,6 +240,7 @@ void Cdd_Cmpss_ConfigHighComparator(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config
     return;
 }
 
+/* Design: MCAL-38721 */
 void Cdd_Cmpss_ConfigLowComparator(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -263,6 +268,7 @@ void Cdd_Cmpss_ConfigLowComparator(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
     return;
 }
 
+/* Design: MCAL-38722 */
 void Cdd_Cmpss_ConfigOutputsHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -290,6 +296,7 @@ void Cdd_Cmpss_ConfigOutputsHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
     return;
 }
 
+/* Design: MCAL-38723 */
 void Cdd_Cmpss_ConfigOutputsLow(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -317,6 +324,7 @@ void Cdd_Cmpss_ConfigOutputsLow(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
     return;
 }
 
+/* Design: MCAL-38724 */
 uint16 Cdd_Cmpss_GetStatus(Cdd_Cmpss_HwUnitType HwUnitId)
 {
     uint16 status = 0U;
@@ -342,6 +350,7 @@ uint16 Cdd_Cmpss_GetStatus(Cdd_Cmpss_HwUnitType HwUnitId)
     return status;
 }
 
+/* Design: MCAL-38725 */
 void Cdd_Cmpss_ConfigDAC(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -370,6 +379,7 @@ void Cdd_Cmpss_ConfigDAC(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Config)
     return;
 }
 
+/* Design: MCAL-38726 */
 void Cdd_Cmpss_SetDACValueHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -398,6 +408,7 @@ void Cdd_Cmpss_SetDACValueHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value)
     return;
 }
 
+/* Design: MCAL-38727 */
 void Cdd_Cmpss_SetDACValueLow(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -729,6 +740,7 @@ uint16 Cdd_Cmpss_GetRampDelayValue(Cdd_Cmpss_HwUnitType HwUnitId)
     return regVal;
 }
 
+/* Design: MCAL-38731 */
 void Cdd_Cmpss_ConfigBlanking(Cdd_Cmpss_HwUnitType HwUnitId, uint16 PwmBlankSrc)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
@@ -999,6 +1011,7 @@ void Cdd_Cmpss_SetComparatorLowHysteresis(Cdd_Cmpss_HwUnitType HwUnitId, uint16 
     return;
 }
 
+/* Design: MCAL-38728 */
 void Cdd_Cmpss_ConfigFilterHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 SamplePrescale, uint16 SampleWindow,
                                 uint16 Threshold)
 {
@@ -1029,6 +1042,7 @@ void Cdd_Cmpss_ConfigFilterHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 SamplePres
     return;
 }
 
+/* Design: MCAL-38729 */
 void Cdd_Cmpss_ConfigFilterLow(Cdd_Cmpss_HwUnitType HwUnitId, uint16 SamplePrescale, uint16 SampleWindow,
                                uint16 Threshold)
 {
@@ -1110,6 +1124,7 @@ void Cdd_Cmpss_ConfigLatchOnPWMSYNC(Cdd_Cmpss_HwUnitType HwUnitId, boolean HighE
     return;
 }
 
+/* Design: MCAL-38730 */
 void Cdd_Cmpss_ConfigRamp(Cdd_Cmpss_HwUnitType HwUnitId, const Cdd_Cmpss_RampConfigType *RampConfigPtr)
 {
 #if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)

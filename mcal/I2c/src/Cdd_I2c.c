@@ -123,9 +123,15 @@ Cdd_I2c_DriverObjType Cdd_I2c_DrvObj;
 /*                          Function Definitions                              */
 /* ========================================================================== */
 
+/* Common Design ID's */
+/* Design: MCAL-13633, MCAL-13682, MCAL-13683, MCAL-13684, MCAL-13685, MCAL-13686,
+ * MCAL-13690, MCAL-13698, MCAL-13699, MCAL-13700, MCAL-14877, MCAL-14878,
+ * MCAL-14879, MCAL-14880, MCAL-14985, MCAL-14986, MCAL-14989 */
+
 #define CDD_I2C_START_SEC_CODE
 #include "Cdd_I2c_MemMap.h"
 
+/* Design: MCAL-13622, MCAL-13636, MCAL-13637, MCAL-13638 */
 FUNC(void, CDD_I2C_CODE) Cdd_I2c_Init(const Cdd_I2c_ConfigType *configPtr)
 {
 #if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
@@ -173,6 +179,7 @@ FUNC(void, CDD_I2C_CODE) Cdd_I2c_Init(const Cdd_I2c_ConfigType *configPtr)
     return;
 }
 
+/* Design: MCAL-13623, MCAL-13644, MCAL-13645 */
 FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_DeInit(void)
 {
     Std_ReturnType retVal = E_OK;
@@ -200,6 +207,7 @@ FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_DeInit(void)
     return retVal;
 }
 
+/* Design: MCAL-13632, MCAL-13647, MCAL-13648 */
 #if (STD_ON == CDD_I2C_VERSION_INFO_API)
 FUNC(void, CDD_I2C_CODE) Cdd_I2c_GetVersionInfo(Std_VersionInfoType *versionInfo)
 {
@@ -223,6 +231,7 @@ FUNC(void, CDD_I2C_CODE) Cdd_I2c_GetVersionInfo(Std_VersionInfoType *versionInfo
 }
 #endif
 
+/* Design: MCAL-13624, MCAL-13649, MCAL-13650, MCAL-13651, MCAL-13652, MCAL-13653, MCAL-13654, MCAL-13688 */
 FUNC(Std_ReturnType, CDD_I2C_CODE)
 Cdd_I2c_SetupEB(Cdd_I2c_ChannelType chId, Cdd_I2c_DataConstPtrType txDataBufferPtr, Cdd_I2c_DataPtrType rxDataBufferPtr,
                 Cdd_I2c_DataLengthType length)
@@ -269,6 +278,7 @@ Cdd_I2c_SetupEB(Cdd_I2c_ChannelType chId, Cdd_I2c_DataConstPtrType txDataBufferP
     return retVal;
 }
 
+/* Design: MCAL-13625, MCAL-13655, MCAL-13656, MCAL-13657, MCAL-13658, MCAL-13659, MCAL-13660, MCAL-13689 */
 FUNC(Std_ReturnType, CDD_I2C_CODE)
 Cdd_I2c_SetupEBDynamic(Cdd_I2c_ChannelType chId, Cdd_I2c_AddressType deviceAddress,
                        Cdd_I2c_DataConstPtrType txDataBufferPtr, Cdd_I2c_DataPtrType rxDataBufferPtr,
@@ -330,6 +340,8 @@ Cdd_I2c_SetupEBDynamic(Cdd_I2c_ChannelType chId, Cdd_I2c_AddressType deviceAddre
     return retVal;
 }
 
+/* Design: MCAL-13626, MCAL-13663, MCAL-13664, MCAL-13665, MCAL-13666, MCAL-13667, MCAL-13668, MCAL-13669, MCAL-13670,
+ * MCAL-13671, MCAL-13691 */
 FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_AsyncTransmit(Cdd_I2c_SequenceType sequenceId)
 {
     Std_ReturnType retVal = E_OK;
@@ -382,6 +394,7 @@ FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_AsyncTransmit(Cdd_I2c_SequenceType se
     return retVal;
 }
 
+/* Design: MCAL-13631, MCAL-13672, MCAL-13673, MCAL-13692 */
 #if (STD_ON == CDD_I2C_CANCEL_API)
 FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_Cancel(Cdd_I2c_SequenceType sequenceId)
 {
@@ -418,6 +431,7 @@ FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_Cancel(Cdd_I2c_SequenceType sequenceI
 }
 #endif
 
+/* Design: MCAL-13701, MCAL-13709 */
 FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_ResetHwUnit(Cdd_I2c_HwUnitType hwUnitId)
 {
     Std_ReturnType         retVal = E_OK;
@@ -455,6 +469,7 @@ FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_ResetHwUnit(Cdd_I2c_HwUnitType hwUnit
     return retVal;
 }
 
+/* Design: MCAL-13634, MCAL-13695 */
 FUNC(void, CDD_I2C_CODE) Cdd_I2c_MainFunction(void)
 {
 #if (STD_ON == CDD_I2C_DEV_ERROR_DETECT)
@@ -488,6 +503,7 @@ FUNC(void, CDD_I2C_CODE) Cdd_I2c_MainFunction(void)
     return;
 }
 
+/* Design: MCAL-13635, MCAL-13678, MCAL-13679, MCAL-13680, MCAL-13681, MCAL-13696 */
 #if (STD_ON == CDD_I2C_POLLING_MODE)
 FUNC(void, CDD_I2C_CODE) Cdd_I2c_PollingModeProcessing(void)
 {
@@ -498,6 +514,7 @@ FUNC(void, CDD_I2C_CODE) Cdd_I2c_PollingModeProcessing(void)
 }
 #endif
 
+/* Design: MCAL-13630, MCAL-13676, MCAL-13677, MCAL-13694 */
 FUNC(Cdd_I2c_SequenceResultType, CDD_I2C_CODE) Cdd_I2c_GetSequenceResult(Cdd_I2c_SequenceType sequenceId)
 {
     Cdd_I2c_SequenceResultType seqResult = CDD_I2C_SEQ_OK;
@@ -527,6 +544,7 @@ FUNC(Cdd_I2c_SequenceResultType, CDD_I2C_CODE) Cdd_I2c_GetSequenceResult(Cdd_I2c
     return seqResult;
 }
 
+/* Design: MCAL-13629, MCAL-13674, MCAL-13675, MCAL-13693 */
 FUNC(Cdd_I2c_ChannelResultType, CDD_I2C_CODE) Cdd_I2c_GetResult(Cdd_I2c_ChannelType chId)
 {
     Cdd_I2c_ChannelResultType chResult = CDD_I2C_CH_RESULT_OK;
@@ -554,6 +572,7 @@ FUNC(Cdd_I2c_ChannelResultType, CDD_I2C_CODE) Cdd_I2c_GetResult(Cdd_I2c_ChannelT
     return chResult;
 }
 
+/* Design: MCAL-13628, MCAL-13697 */
 #if (STD_ON == CDD_I2C_GET_STATUS_API)
 FUNC(Cdd_I2c_ComponentStatusType, CDD_I2C_CODE) Cdd_I2c_GetStatus(void)
 {
@@ -561,6 +580,7 @@ FUNC(Cdd_I2c_ComponentStatusType, CDD_I2C_CODE) Cdd_I2c_GetStatus(void)
 }
 #endif
 
+/* Design: MCAL-21350, MCAL-21351, MCAL-21510, MCAL-22429 */
 #if (STD_ON == CDD_I2C_REGISTER_READBACK_API)
 /**
  * \brief This service reads the key I2C registers and returns their value

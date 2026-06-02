@@ -108,7 +108,7 @@ extern VAR(CddFsiRx_DriverObjType, CDD_FSIRX_VAR_CLEARED) Cdd_FsiRx_DrvObj;
  *  \param[out]  void
  *  \context
  ******************************************************************************/
-
+/* Design: MCAL-38742, MCAL-38748, MCAL-38749 */
 FUNC(void, CDD_FSIRX_CODE)
 Cdd_FsiRx_Init(P2CONST(Cdd_FsiRx_ConfigType, AUTOMATIC, CDD_FsiRx_CFG) ConfigurationPtr)
 {
@@ -159,6 +159,7 @@ Cdd_FsiRx_Init(P2CONST(Cdd_FsiRx_ConfigType, AUTOMATIC, CDD_FsiRx_CFG) Configura
  *  \param[out]  void
  *  \context
  ******************************************************************************/
+/* Design: MCAL-38746 */
 FUNC(CddFsiRx_StatusType, CDD_FSIRX_CODE)
 CddFsiRx_GetStatus(void)
 {
@@ -177,6 +178,7 @@ CddFsiRx_GetStatus(void)
  *  \context
  ******************************************************************************/
 
+/* Design: MCAL-38743 */
 #if (STD_ON == CDD_FSI_RX_DEINIT_API)
 
 FUNC(void, CDD_FSIRX_CODE)
@@ -241,6 +243,7 @@ Cdd_FsiRx_MainFunction(void)
  *  \param[in]  VersionInfoPtr : Pointer to the buffer containing version information.
  *  \param[out] void
  ******************************************************************************/
+/* Design: MCAL-38741 */
 #if (STD_ON == CDD_FSI_RX_GET_VERSION_INFO)
 FUNC(void, CDD_FSIRX_CODE)
 Cdd_FsiRx_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_FsiRx_APPL_DATA) VersionInfoPtr)
@@ -271,6 +274,7 @@ Cdd_FsiRx_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_FsiRx_APPL_DA
  *  \param[out] void
  ******************************************************************************/
 
+/* Design: MCAL-38747 */
 #if (STD_ON == CDD_FSI_RX_RESET_API)
 FUNC(void, CDD_FSIRX_CODE)
 Cdd_FsiRx_Reset(Cdd_FsiRx_HWUnitType HwUnitId, VAR(Cdd_FsiRx_ResetSubModuleType, AUTOMATIC) ResetModule)
@@ -295,6 +299,7 @@ Cdd_FsiRx_Reset(Cdd_FsiRx_HWUnitType HwUnitId, VAR(Cdd_FsiRx_ResetSubModuleType,
  *Application Buffer to which data to be copied
  ******************************************************************************/
 
+/* Design: MCAL-38744 */
 FUNC(void, CDD_FSIRX_CODE)
 Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
                       P2VAR(Cdd_FsiRx_DataBufferType, AUTOMATIC, CDD_FSI_RX_APPL_DATA) DataBufferPtr,
@@ -340,6 +345,7 @@ Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
  *  Parameters (inOut)  : None.
  ******************************************************************************/
 
+/* Design: MCAL-38745 */
 FUNC(void, CDD_FSIRX_CODE)
 Cdd_FsiRx_DmaDataReceive(Cdd_FsiRx_HWUnitType HwUnitId)
 {

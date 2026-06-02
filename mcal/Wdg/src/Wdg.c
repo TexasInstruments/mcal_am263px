@@ -288,7 +288,7 @@ static FUNC(void, WDG_CODE)
  ******************************************************************************/
 /*
  *Design: MCAL-14948, MCAL-14949, MCAL-14950, MCAL-14951, MCAL-14952, MCAL-14953, MCAL-14954,
- *MCAL-14955, MCAL-14956, MCAL-14957 , MCAL-15014 , MCAL-15070 , MCAL-15079
+ *MCAL-14955, MCAL-14956, MCAL-14957 , MCAL-15014 , MCAL-15070 , MCAL-15079, MCAL-38223
  */
 FUNC(Std_ReturnType, WDG_CODE) Wdg_SetMode(WdgIf_ModeType Mode)
 {

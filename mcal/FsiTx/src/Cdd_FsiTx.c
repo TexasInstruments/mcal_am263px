@@ -124,8 +124,7 @@ VAR(Cdd_FsiTx_StatusType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DriverStatus = CDD_FS
 #define CDD_FSITX_START_SEC_CODE
 #include "Cdd_FsiTx_MemMap.h"
 
-/*  Design:
- *  Requirement(s): SITARAMCU_MCAL-___    */
+/* Design: MCAL-38733 */
 /*******************************************************************************
  * Cdd_FsiTx_Init
  ******************************************************************************/
@@ -196,6 +195,7 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
  *  \param[in]  void
  *  \param[out]  void
  *******************************************************************************/
+/* Design: MCAL-38738 */
 FUNC(Cdd_FsiTx_StatusType, CDD_FSITX_CODE)
 CddFsiTx_GetStatus(void)
 {
@@ -212,6 +212,7 @@ CddFsiTx_GetStatus(void)
  *  \context
  ******************************************************************************/
 
+/* Design: MCAL-38734 */
 #if (STD_ON == CDD_FSI_TX_DEINIT_API)
 FUNC(void, CDD_FSITX_CODE)
 Cdd_FsiTx_DeInit(void)
@@ -249,6 +250,7 @@ Cdd_FsiTx_DeInit(void)
  *  \context
  ******************************************************************************/
 
+/* Design: MCAL-38739 */
 #if (STD_ON == CDD_FSI_TX_RESET_API)
 FUNC(void, CDD_FSITX_CODE)
 Cdd_FsiTx_Reset(Cdd_FsiTx_HWUnitType HwUnitId, VAR(Cdd_FsiTx_ResetSubModuleType, AUTOMATIC) ResetModule)
@@ -272,6 +274,7 @@ Cdd_FsiTx_Reset(Cdd_FsiTx_HWUnitType HwUnitId, VAR(Cdd_FsiTx_ResetSubModuleType,
  *  \param[out]  void
  ******************************************************************************/
 
+/* Design: MCAL-38735 */
 #if (STD_ON == CDD_FSI_TX_PING_API)
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
 Cdd_FsiTx_Ping(Cdd_FsiTx_HWUnitType HwUnitId)
@@ -323,6 +326,7 @@ Cdd_FsiTx_Ping(Cdd_FsiTx_HWUnitType HwUnitId)
  *
  *  \param[out] void
  ******************************************************************************/
+/* Design: MCAL-38736 */
 #if (STD_ON == CDD_FSI_TX_BUFFER_LOAD_API)
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
 Cdd_FsiTx_BufferLoad(Cdd_FsiTx_HWUnitType HwUnitId,
@@ -372,6 +376,7 @@ Cdd_FsiTx_BufferLoad(Cdd_FsiTx_HWUnitType HwUnitId,
  *  \param[out] void
  ******************************************************************************/
 
+/* Design: MCAL-38737, MCAL-38740 */
 #if (STD_ON == CDD_FSI_TX_TRANSMIT_API)
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
 Cdd_FsiTx_Transmit(Cdd_FsiTx_HWUnitType HwUnitId, Cdd_FsiTx_UserDataType userData,
@@ -408,6 +413,7 @@ Cdd_FsiTx_Transmit(Cdd_FsiTx_HWUnitType HwUnitId, Cdd_FsiTx_UserDataType userDat
  *  \param[in]  VersionInfoPtr:Pointer to the buffer which contains version info details
  *  \param[out] void
  ******************************************************************************/
+/* Design: MCAL-38732 */
 #if (STD_ON == CDD_FSI_TX_GET_VERSION_INFO)
 FUNC(void, CDD_FSITX_CODE)
 Cdd_FsiTx_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_FSI_TX_APPL_DATA) VersionInfoPtr)
@@ -430,9 +436,6 @@ Cdd_FsiTx_GetVersionInfo(P2VAR(Std_VersionInfoType, AUTOMATIC, CDD_FSI_TX_APPL_D
 }
 #endif /* (STD_ON == CDD_FSI_TX_VERSION_INFO_API) */
 
-/*
- * Design:
- */
 /*******************************************************************************
  * Cdd_FsiTx_MainFunction
  ******************************************************************************/
