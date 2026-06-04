@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 03-Jun-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 04-Jun-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -248,339 +248,68 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
-      <td>MCAL-36593</td>
-      <td>Change the EXPECTED ENTRY to IMPLEMENTED ENTRY in BSWMD.arxml files</td>
-      <td>All</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>All EXPECTED ENTRY chaged to IMPLEMENTED ENTRY</td>
-    </tr>
-    <tr>
-      <td>MCAL-35742</td>
-      <td>In the arxml files the OPTIONS tag is expected before the VENDOR tag</td>
-      <td>All</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>OPTIONS tag is now added with all recommended compiler and linker options</td>
-    </tr>
-    <tr>
-      <td>MCAL-36815</td>
-      <td>MainFunction execution is not mapped to TASK in bswmd.arxml</td>
-      <td>All</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>All main function execution, the context is now updated to TASK instead of UNSPECIFIED</td>
-    </tr>
-    <tr>
-      <td>MCAL-37913</td>
-      <td>Few memmap Memory Sections missing in bswmd.arxml</td>
-      <td>All</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>All missing memoey sections are now added to corresponding bswmd.arxml</td>
-    </tr>
-    <tr>
-      <td>MCAL-37917</td>
-      <td>MINIMUM-INTERVAL tag missing for all BSW-INTERRUPT-ENTITY and BSW-CALLED-ENTITY</td>
-      <td>All</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>MINIMUM-INTERVAL tag is now added to all BSW-INTERRUPT-ENTITY and BSW-CALLED-ENTITY</td>
-    </tr>
-    <tr>
-      <td>MCAL-35577</td>
-      <td>FSS support in MCAL</td>
-      <td>Bootloader</td>
-      <td>Major</td>
-      <td>AM263Px</td>
-      <td>FSS support is now added</td>
-    </tr>
-    <tr>
-      <td>MCAL-35496</td>
-      <td>HSM_Service error in Boot APP</td>
-      <td>Bootloader</td>
-      <td>Major</td>
-      <td>AM263Px</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>MCAL-35744</td>
-      <td>NULL_PTR implemented in hal_stdtypes.h</td>
-      <td>Common</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>NULL_PTR is removed from hal_stdtypes.h as it is available in Compiler.h file</td>
-    </tr>
-    <tr>
-      <td>MCAL-36583</td>
-      <td>All BSWModleEntry has to be implementedEntry</td>
-      <td>Common</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Replaced EXPECTED-ENTRYS with IMPLEMENTED-ENTRYS</td>
-    </tr>
-    <tr>
-      <td>MCAL-35846</td>
-      <td>Update all NULL usage to NULL_PTR</td>
-      <td>Common</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>All usage of NULL is replaced with NULL_PTR which is defined in Compiler.h</td>
-    </tr>
-    <tr>
-      <td>MCAL-35727</td>
-      <td>BSWMD file fixes</td>
+      <td>MCAL-38204</td>
+      <td>Mismatch between BSW-CALLED-ENTITY SHORT-NAME and IMPLEMENTED-ENTRY-REF in Bswmd file</td>
       <td>CDD I2C</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>With fixes done in CDD I2C in previous releases, the BSWMD file was not updated.<br>
-          Fixes include adding CddI2cMainFunctionPeriod configuration parameter, removing unavailable entries</td>
+      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
     </tr>
     <tr>
-      <td>MCAL-35346</td>
-      <td>Implement non-blocking Cancel API for CDD I2C</td>
-      <td>CDD I2C</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Added <code>Cdd_I2c_Cancel</code> API to cancel in-progress I2C sequences in polling and interrupt modes</td>
-    </tr>
-    <tr>
-      <td>MCAL-35752</td>
-      <td>Missing EXCLUSIVE_AREA in Cdd_Ipc_Bswmd.arxml</td>
-      <td>CDD IPC</td>
+      <td>MCAL-38207</td>
+      <td>Options tag is missing in Bswmd arxml files</td>
+      <td>CDD PWM, Eth, EthTrcv</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Exclusive area is now added in Bswmd.arxml file</td>
+      <td>Corresponding bswmd files are now updated with Options tag</td>
     </tr>
     <tr>
-      <td>MCAL-36833</td>
-      <td>Incorrect CMP and duty calculations in ~100% duty cases</td>
-      <td>CDD PWM</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Fixed round-to-nearest for UP_DOWN mode so near-100% duty no longer truncates to 0.</td>
-    </tr>
-    <tr>
-      <td>MCAL-37916</td>
-      <td>PWM Counter Comparator Configuration Incomplete for Dual-Channel Mode</td>
-      <td>CDD PWM</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Cdd_Pwm_counterComparatorCfg now fixed to configure both channels properly</td>
-    </tr>
-    <tr>
-      <td>MCAL-35748</td>
-      <td>Missing quotation mark in BSW-MODULE-ENTRY UUID attribute</td>
-      <td>CDD PWM</td>
-      <td>Minor</td>
-      <td>AM263Px</td>
-      <td>See description</td>
-    </tr>
-    <tr>
-      <td>MCAL-36586</td>
-      <td>Usage of STATIC in MCAL drivers</td>
-      <td>DIO, LIN</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>As per AUTOSAR 4.3.1, AUTOSAR_SWS_CompilerAbstraction document STATIC declaration keyword is removed, hence STATIC macro is removed from Compiler.h and all its usage is replaced with 'static'</td>
-    </tr>
-    <tr>
-      <td>MCAL-35749</td>
-      <td>Mismatch AR-RELEASE-VERSION in Spi and Dio</td>
-      <td>DIO, SPI</td>
+      <td>MCAL-38103</td>
+      <td>[DOC] Userguide has wrong compiler version mentioned.</td>
+      <td>Documentation</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>AR-RELEASE-VERSION is fixed to 4.3.1</td>
+      <td>Userguide is now updated</td>
     </tr>
     <tr>
-      <td>MCAL-30483</td>
-      <td>MCAL: Eth driver shall support QoS (multiqueue support)</td>
-      <td>ETH</td>
-      <td>Medium</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>ETH module shall support multiple queues in the following driver functions, as per AUTOSAR 4.3.1 specification<br>
-          - FifoIdx in Eth_Receive()<br>
-          - Priority in Eth_ProvideTxBuffer()<br>
-      </td>
-    </tr>
-    <tr>
-      <td>MCAL-35750</td>
-      <td>EthTrcv API implemented in the wrong header file</td>
-      <td>ETHTRCV</td>
+      <td>MCAL-38218</td>
+      <td>MCAL Eth Driver INTERRUPT-SOURCE tag missing</td>
+      <td>Eth</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Datatypes like EthTrcv_BaudRateType should be part of AUTOSAR stubs.<br>
-          Instead these were added in EthTrcv interface header files resulting in conflicts with standard AUTOSAR definitions.<br>
-          These datatypes are not moved to the stubs.
-      </td>
+      <td>Eth_bswmd.arxml is now updated with INTERRUPT-SOURCE tag</td>
     </tr>
     <tr>
-      <td>MCAL-34950</td>
-      <td>FLS: Fls_Erase processed only in polling</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>Non-blocking mode for fls erase implemented</td>
-    </tr>
-    <tr>
-      <td>MCAL-35865</td>
-      <td>Fls SFDP parameter structure should be in VAR section</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>The Fls_Config_SFDP_1 structure in CFG files is writable and is now placed in SEC_VAR_INIT_UNSPECIFIED section</td>
-    </tr>
-    <tr>
-      <td>MCAL-35984</td>
-      <td>Fls Write API causes issue for write sizes less than 4 byte</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>FLS DAC write now supports 2-byte writes, additional checks have been added to report DET when trying to write odd number of bytes in DDR modes</td>
-    </tr>
-    <tr>
-      <td>MCAL-36585</td>
-      <td>Implementation of Schm callout for FLS Driver</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>The FLS driver now has Schm callout in process job to be used as hooks for the spinlock usage for multicore flash usage.</td>
-    </tr>
-    <tr>
-      <td>MCAL-37290</td>
-      <td>FLS Init redundant function calls</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>These function calls were redundant as Flash reset is done before hand, hence these calls are removed</td>
-    </tr>
-    <tr>
-      <td>MCAL-35747</td>
-      <td>Extra closing tag FLS_bswmd.arxml</td>
-      <td>FLS</td>
+      <td>MCAL-38219</td>
+      <td>MINIMUM-START-INTERVAL Tag Mismatch in Eth& EthT</td>
+      <td>Eth, EthTrcv</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td></td>
+      <td>Corresponding bswmd files are now updated</td>
     </tr>
     <tr>
-      <td>MCAL-35751</td>
-      <td>CacheP.h is present as part of examples but not needed</td>
-      <td>FLS</td>
-      <td>Minor</td>
-      <td>AM263Px, AM261x</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>MCAL-36364</td>
-      <td>Fls_norBlankCheck() not being called for the first chunk of write.</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>FLS write shall perform a blankcheck before write when FLS_ERASE_VERIFICATION_ENABLED is STD_ON</td>
-    </tr>
-    <tr>
-      <td>MCAL-35415</td>
-      <td>ICU QUAL implementation missing in MCAL</td>
-      <td>ICU</td>
+      <td>MCAL-38220</td>
+      <td>Mismatch of MODULE-ID Tag in Eth& EthTrcv</td>
+      <td>Eth, EthTrcv</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>QUAL support is now added</td>
+      <td>Corresponding bswmd files are now updated</td>
     </tr>
     <tr>
-      <td>MCAL-37036</td>
-      <td>Lin plugin doesn't have LIN_TIMEOUT_DURATION macro generation</td>
-      <td>LIN</td>
+      <td>MCAL-38221</td>
+      <td>Code Compilation error for EthTrcv driver</td>
+      <td>EthTrcv</td>
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Required delay is now added in Lin_SendGoToSleepSignal and LIN_TIMEOUT_DURATION macro is enabled in plugin</td>
+      <td>Moved "EthTrcv_StateType" structure declaration from "mcal/EthTrcv/include/EthTrcv_Types.h" to "mcal/autosar_include/Eth_GeneralTypes.h"</td>
     </tr>
     <tr>
-      <td>MCAL-35753</td>
-      <td>Duplicate UUID present in MCU Bswmd arxml</td>
-      <td>Mcu</td>
+      <td>MCAL-38578</td>
+      <td>Spi_MainFunction_Handling shouldn't be available for SpiLevelDelivered 0</td>
+      <td>Spi</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Duplicate uids across all modules are now replaced with new unique uids</td>
-    </tr>
-    <tr>
-      <td>MCAL-36718</td>
-      <td>Mismatch in PORT_PIN_MODE_TRACE vs PORT_PIN_MODE_TRC in AM263Px</td>
-      <td>Port</td>
-      <td>Major</td>
-      <td>AM263Px</td>
-      <td>All TRC Port_PinInitialMode and Port_PinMode is now updated to match TRC</td>
-    </tr>
-    <tr>
-      <td>MCAL-35628</td>
-      <td>Add literal to Port_AM263x.arxml</td>
-      <td>Port</td>
-      <td>Minor</td>
-      <td>AM263x</td>
-      <td>Updated NULL in Non EB xdm and corresponding arxml</td>
-    </tr>
-    <tr>
-      <td>MCAL-37350</td>
-      <td>AM261x Xbar uses AM263x macros for Xbar interrupt ID</td>
-      <td>Port</td>
-      <td>Minor</td>
-      <td>AM261x</td>
-      <td>All INTRXBAR_OUT macros for am261 are now corrected</td>
-    </tr>
-    <tr>
-      <td>MCAL-13434</td>
-      <td>DMA mode is not working with Cache Writeback enabled</td>
-      <td>SPI</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>SPI -DMA mode is now fixed to work with Cache Writeback enabled</td>
-    </tr>
-      <tr>
-      <td>MCAL-29488</td>
-      <td>SPI -DMA interrupt Handling is wrong when both TX and RX are selected</td>
-      <td>SPI</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>SPI-DMA Tx ISR is now fixed to handle txRxmode set to SPI_TX_RX_MODE_BOTH</td>
-    </tr>
-    <tr>
-      <td>MCAL-36790</td>
-      <td>Missing WDG exclusive area reference inside APIs in bswmd arxml </td>
-      <td>WDG</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Bswmd.arxml files are now updated to have the exclusive area references</td>
-    </tr>
-    <tr>
-      <td>MCAL-36588</td>
-      <td>Wdg_SetModeConfig does not give DET error when CPU is in usermode</td>
-      <td>WDG</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>DetRuntime error shall be reported in user-mode</td>
-    </tr>
-    <tr>
-      <td>MCAL-36832</td>
-      <td>Volatile keyword missing in few items of Wdg_DrvObj</td>
-      <td>WDG</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>timeOutCounter and counterRef in Wdg_DriverObjType structure are made volatile</td>
-    </tr>
-    <tr>
-      <td>MCAL-35979,MCAL-35981</td>
-      <td>Functions Wdg_SetMode and Wdg_SetTriggerCondition updated to have exclusive areas.</td>
-      <td>WDG</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Wdg_SetMode and Wdg_SetTriggerCondition are updated to have exclusive area while updating mode and trigger conditions</td>
-    </tr>
-    <tr>
-      <td>MCAL-35982</td>
-      <td>Removal of Wdg_ProcessTimeout() call from Wdg_SetTriggerCondition()</td>
-      <td>WDG</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Wdg_ProcessTimeout() is removed from Wdg_SetTriggerCondition()</td>
+      <td>Conditional check for SpiLevelDelivered is added in Spi_bswmd.arxml</td>
     </tr>
   </tbody>
 </table>

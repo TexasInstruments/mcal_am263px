@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 [!SELECT "as:modconf('Spi')[1]"!][!//
 [!AUTOSPACING!][!//
+[!VAR "Spi_MainFunction_Handling_Enable"="num:i(node:value(SpiGeneral/SpiLevelDelivered)) > 0 "!][!//
 <AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
   <AR-PACKAGES>
     <AR-PACKAGE UUID="7039293d-346e-48a7-b9b1-02c368e6bf43">
@@ -74,9 +75,11 @@
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_IrqUnitMcspi7TxRx</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+[!IF "$Spi_MainFunction_Handling_Enable = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_MainFunction_Handling</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
+[!ENDIF!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
               <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_ReadIB</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
@@ -477,7 +480,9 @@
                     </BSW-DIRECT-CALL-POINT>
 [!ENDIF!][!//
                   </CALL-POINTS>
+[!IF "$Spi_MainFunction_Handling_Enable = 'true'"!]
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Spi_TI_AM263px/BswModuleEntries/Spi_MainFunction_Handling</IMPLEMENTED-ENTRY-REF>
+[!ENDIF!]                 
                 </BSW-SCHEDULABLE-ENTITY>
                 <BSW-CALLED-ENTITY UUID="4dbb477d-5162-47c3-9afd-fb37e8304bfe">
                   <SHORT-NAME>Spi_ReadIB</SHORT-NAME>
@@ -567,11 +572,13 @@
                 </BSW-CALLED-ENTITY>
               </ENTITYS>
               <EVENTS>
+[!IF "$Spi_MainFunction_Handling_Enable = 'true'"!]
                 <BSW-TIMING-EVENT>
                   <SHORT-NAME>Spi_MainFunctionTimingEvent_Handling</SHORT-NAME>
                   <STARTS-ON-EVENT-REF DEST="BSW-SCHEDULABLE-ENTITY">/Spi_TI_AM263px/Spi/Spi_Behavior/Spi_MainFunction_Handling</STARTS-ON-EVENT-REF>
                   <PERIOD>[!"num:f(SpiGeneral/SpiMainFunctionPeriod)"!]</PERIOD>
                 </BSW-TIMING-EVENT>
+[!ENDIF!]
               </EVENTS>
             </BSW-INTERNAL-BEHAVIOR>
           </INTERNAL-BEHAVIORS>

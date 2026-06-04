@@ -1,3 +1,19 @@
+commit 41564d5cd172186b71b9400565cf1ca4b47eecc7
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Jun 3 20:11:07 2026 +0530
+
+    all: Spi: Added conditional check for Spi_LevelDelivered in bswmd template
+    
+    Fixes: MCAL-38578
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |   7 +
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |   7 +
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |   7 +
+ release_notes.md                                   | 333 ++-------------------
+ 4 files changed, 52 insertions(+), 302 deletions(-)
+
 commit f6672267e9cfa312499c356aad53dc0de5f86c51
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Jun 2 17:47:04 2026 +0530
