@@ -37,40 +37,17 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
-      <td>License changed to TI Text File License</td>
-      <td>All</td>
-      <td>MCAL license is changed from TI commercial to TI text file open source license.<br>
-          All the license in the source code is changed to reflect this.<br>
-          Refer [mcal_manifest.html](./mcal_manifest.html) for details.
-      </td>
-    </tr>
-    <tr>
-      <td>Eth driver supports QoS (multiqueue support)<td>
-      <td>ETH</td>
-      <td>AM263x, AM263Px, AM261x</td>
-    </tr>
-    <tr>
-      <td>Added FSS Utility</td>
-      <td>FSS</td>
-      <td>AM263Px</td>
-    </tr>
-    <tr>
-      <td>Non-blocking Flash Erase</td>
-      <td>FLS</td>
-      <td>AM263Px, AM261</td>
-    </tr>
-    <tr>
-      <td>Non-blocking I2C Cancel</td>
-      <td>I2C</td>
-      <td>AM263x, AM263Px, AM261x</td>
-    </tr>
-    <tr>
-      <td>Enabled LIN_TIMEOUT_DURATION</td>
+      <td>Lin_SendGoToSleepSignal header issue fixed</td>
       <td>LIN</td>
-      <td>AM263x, AM263Px, AM261x</td>
+      <td>The unexpected behaviour observed in Lin_SendGoToSleepSignal was reproduced and tested with the fix</td>
     </tr>
     <tr>
-      <td>Bug Fixes</td>
+      <td>Code Compilation error for EthTrcv driver is fixed.</td>
+      <td>EthTrcv</td>
+      <td>Please refer Fixed Defects section for more details.</td>
+    </tr>
+    <tr>
+      <td>All reported bswmd fixes done.</td>
       <td>All</td>
       <td>Please refer Fixed Defects section for more details.</td>
     </tr>
@@ -248,8 +225,16 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
-      <td>MCAL-38204</td>
+      <td>MCAL-38205</td>
       <td>Mismatch between BSW-CALLED-ENTITY SHORT-NAME and IMPLEMENTED-ENTRY-REF in Bswmd file</td>
+      <td>CDD I2C</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
+    </tr>
+    <tr>
+      <td>MCAL-38206</td>
+      <td>Incorrect relative path used in CddIrqType condition for ISR entries</td>
       <td>CDD I2C</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
@@ -302,6 +287,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Moved "EthTrcv_StateType" structure declaration from "mcal/EthTrcv/include/EthTrcv_Types.h" to "mcal/autosar_include/Eth_GeneralTypes.h"</td>
+    </tr>
+    <tr>
+      <td>MCAL-38305</td>
+      <td>LIN issues with Sleep command</td>
+      <td>LIN</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SetId is now done before setting data</td>
     </tr>
     <tr>
       <td>MCAL-38578</td>
