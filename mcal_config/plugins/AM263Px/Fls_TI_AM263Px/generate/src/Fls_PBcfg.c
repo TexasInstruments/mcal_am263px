@@ -166,10 +166,9 @@ CONST(struct Fls_ConfigType_s, FLS_CONFIG_DATA) Fls_Config =
 [!VAR "FLS_SELECTED"!][!"node:name(node:ref(as:modconf('Fls')[1]/FlsGeneral/FlsExternalFlashSelect))"!][!ENDVAR!]
 /* Selected Flash [!"$FLS_SELECTED"!] */
 
-[!VAR "FlsLpCnt" = "0"!]
 struct Fls_ConfigSfdp_s Fls_Config_SFDP_1 =
 {
-  [!LOOP "as:modconf('Fls')[1]/FlsConfigSet/FlsFlashConfigList/FlsFlashConfiguration/*"!][!//
+  [!LOOP "node:ref(as:modconf('Fls')[1]/FlsGeneral/FlsExternalFlashSelect)"!][!//
     .flashSize                           = [!"num:inttohex(node:value(FlsSize))"!]U,
     .pageSize                            = [!"num:inttohex(node:value(FlsPageSize))"!]U,
     .manfId                              = [!"num:inttohex(node:value(FlsManfId))"!]U,

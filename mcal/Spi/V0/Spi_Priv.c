@@ -158,16 +158,12 @@ void Spi_hwUnitInit(Spi_HwUnitObjType *hwUnitObj)
         Spi_TxRxMode txrxMode = SPI_TX_RX_MODE_TX_ONLY;
         for (uint8 idx = 0; idx < Spi_DrvObj.maxJobs; idx++)
         {
-            /* TI_COVERAGE_GAP_START [Branch/MCDC]: baseAddr match TRUE with txRxMode FALSE pair —
-             production extDevCfg is in const flash; test writes silently fail so
-             TX_ONLY override via test code cannot be observed by the library */
             if ((Spi_DrvObj.jobObj[idx].hwUnitObj->baseAddr == hwUnitObj->baseAddr) &&
                 (Spi_DrvObj.jobObj[idx].extDevCfg->mcspi.txRxMode == SPI_TX_RX_MODE_BOTH))
             {
                 txrxMode = SPI_TX_RX_MODE_BOTH;
                 break;
             }
-            /* TI_COVERAGE_GAP_STOP */
         }
 
         /* Configure SPI DMA with initialization of all channels */

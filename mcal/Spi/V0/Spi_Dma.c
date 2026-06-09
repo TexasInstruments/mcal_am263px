@@ -290,6 +290,7 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
     uint32 chNum      = jobObj->jobCfg_PC.csPin;
     uint32 chConfAddr = baseAddr + MCSPI_CHCONF(chNum);
     uint32 chCtrlAddr = baseAddr + MCSPI_CHCTRL(chNum);
+    (void)chMode;
 
     if (jobObj->dmaChIdx == 0U)
     {
@@ -300,28 +301,17 @@ static void MCSPI_dmaStart(Spi_JobObjType *jobObj, uint32 baseAddr, uint8 chMode
             HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAR, CSL_MCSPI_CH0CONF_DMAR_ENABLED);
             HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
         }
-        /* TI_COVERAGE_GAP_START [Branch] Spi_dmaStop TX_ONLY branch (DMAW disable) is unreachable
-        because Spi_dmaTransfer does not complete successfully in TX_ONLY mode: hardware
-        SPI TX event is not triggered in test environment, causing
-        Cdd_Dma_EnableTransferRegion to fail and MCSPI_dmaStart never to be called. */
         else if (SPI_TX_RX_MODE_TX_ONLY == jobObj->extDevCfg->mcspi.txRxMode)
         {
             HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_DMAW, CSL_MCSPI_CH0CONF_DMAW_ENABLED);
         }
-        /* TI_COVERAGE_GAP_STOP */
         else
         {
             /* condition check */
         }
 
-        /* TI_COVERAGE_GAP_START [Branch] Static function only called with MCSPI_MODULCTRL_SINGLE_SINGLE,
-         FALSE branch unreachable */
         /* Manual CS assert */
-        if (MCSPI_MODULCTRL_SINGLE_SINGLE == chMode)
-        {
-            HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_FORCE, CSL_MCSPI_CH0CONF_FORCE_ASSERT);
-        }
-        /* TI_COVERAGE_GAP_STOP */
+        HW_WR_FIELD32(chConfAddr, CSL_MCSPI_CH0CONF_FORCE, CSL_MCSPI_CH0CONF_FORCE_ASSERT);
 
         /* Enable channel */
         HW_WR_FIELD32(chCtrlAddr, CSL_MCSPI_CH0CTRL_EN, CSL_MCSPI_CH0CTRL_EN_ACT);
@@ -404,6 +394,8 @@ void Spi_DmaRxIsrHandler(void *args)
             chId  = hwUnitObj->curJobObj->jobCfg.channelList[hwUnitObj->curJobObj->curChIdx];
             chObj = Spi_getCurrChannelObj(chId);
 
+            /* TI_COVERAGE_GAP_START [Branch] Spi_getCurrChannelObj returns &channelObj[chId] — never NULL
+               False branch structurally unreachable */
             if (NULL_PTR != chObj)
             {
                 rxBufferSize = (uint32)chObj->numWordsTxRx * (uint32)chObj->bufWidth;
@@ -413,6 +405,7 @@ void Spi_DmaRxIsrHandler(void *args)
                     Mcal_CacheP_inv((void *)chObj->curRxBufPtr, rxBufferSize, Mcal_CacheP_TYPE_L1D);
                 }
             }
+            /* TI_COVERAGE_GAP_STOP */
             /* This channel transfer is complete */
             hwUnitObj->curJobObj->jobResult = SPI_JOB_OK;
             Spi_processChCompletion(hwUnitObj, SPI_JOB_OK);

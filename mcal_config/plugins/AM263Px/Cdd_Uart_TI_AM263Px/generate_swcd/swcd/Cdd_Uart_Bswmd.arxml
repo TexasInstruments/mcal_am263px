@@ -9,7 +9,7 @@
 <AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
   <AR-PACKAGES>
     <AR-PACKAGE UUID="d4f1e50c-915c-4680-82a1-fadae5903555">
-      <SHORT-NAME>Cdd_Uart_TI_AM263px</SHORT-NAME>
+      <SHORT-NAME>Cdd_Uart_TI_AM263Px</SHORT-NAME>
       <ELEMENTS>
         <BSW-MODULE-DESCRIPTION UUID="8c29cf80-0a18-4825-93fd-db98a191f852">
           <SHORT-NAME>Cdd_Uart</SHORT-NAME>
@@ -17,13 +17,13 @@
           <IMPLEMENTED-ENTRYS>
 		  	    [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartCancelApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Cancel</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Cancel</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
             [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*/CddUartChannel/*"!]
             [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='0') )"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel0Isr</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel0Isr</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!BREAK!]
             [!ENDIF!]
@@ -31,7 +31,7 @@
             [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*/CddUartChannel/*"!]
             [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='1') )"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel1Isr</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel1Isr</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!BREAK!]
             [!ENDIF!]
@@ -39,7 +39,7 @@
             [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*/CddUartChannel/*"!]
             [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='2') )"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel2Isr</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel2Isr</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!BREAK!]
             [!ENDIF!]
@@ -47,7 +47,7 @@
             [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*/CddUartChannel/*"!]
             [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='3') )"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel3Isr</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel3Isr</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!BREAK!]
             [!ENDIF!]
@@ -55,7 +55,7 @@
             [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*/CddUartChannel/*"!]
             [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='4') )"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel4Isr</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel4Isr</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!BREAK!]
             [!ENDIF!]
@@ -63,42 +63,42 @@
             [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*/CddUartChannel/*"!]
             [!IF "((CddUartIOMode = 'CDD_UART_MODE_INTERRUPT') and (num:i(substring-after(node:value(CddUartHwID),'CDD_UART_CHANNEL_ID_'))='5') )"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel5Isr</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel5Isr</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!BREAK!]
             [!ENDIF!]
             [!ENDLOOP!]
             [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDeinitApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_DeInit</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_DeInit</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
             [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddVersionInfoApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetVersionInfo</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetVersionInfo</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
             [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartReadApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Read</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Read</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Init</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Init</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartGetRemainingWordsApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetRemainingWords</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetRemainingWords</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
             [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartWriteApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Write</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Write</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
             [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartRegisterReadbackApi = 'true'"!]
             <BSW-MODULE-ENTRY-REF-CONDITIONAL>
-              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_RegisterReadback</BSW-MODULE-ENTRY-REF>
+              <BSW-MODULE-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_RegisterReadback</BSW-MODULE-ENTRY-REF>
             </BSW-MODULE-ENTRY-REF-CONDITIONAL>
             [!ENDIF!]
           </IMPLEMENTED-ENTRYS>
@@ -122,7 +122,7 @@
               <TARGET-MODULE-ID>255</TARGET-MODULE-ID>
               <TARGET-MODULE-REFS>
               <BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
-                <BSW-MODULE-DESCRIPTION-REF DEST="BSW-MODULE-DESCRIPTION">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry</BSW-MODULE-DESCRIPTION-REF>
+                <BSW-MODULE-DESCRIPTION-REF DEST="BSW-MODULE-DESCRIPTION">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry</BSW-MODULE-DESCRIPTION-REF>
               </BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
               </TARGET-MODULE-REFS>
             </BSW-MODULE-DEPENDENCY>
@@ -142,7 +142,7 @@
                 <BSW-CALLED-ENTITY UUID="73f723b7-6f54-4b2e-9122-dddc173d2375">
                   <SHORT-NAME>Cdd_Uart_Cancel</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
-                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Uart_TI_AM263px/Cdd_Uart/Cdd_Uart_Behavior/UART_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
+                    <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Cdd_Uart_TI_AM263Px/Cdd_Uart/Cdd_Uart_Behavior/UART_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
                   </CAN-ENTER-EXCLUSIVE-AREA-REFS>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -157,12 +157,12 @@
                     [!IF "$DMA_ENABLE="STD_ON""!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_DisableTransferRegion</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_DisableTransferRegion</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_DisableTransferRegion</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Cancel</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Cancel</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!ENDIF!]
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartDeinitApi = 'true'"!]
@@ -178,7 +178,7 @@
                     </BSW-DIRECT-CALL-POINT>
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_DeInit</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_DeInit</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!ENDIF!]
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartGetRemainingWordsApi = 'true'"!]
@@ -197,12 +197,12 @@
                     [!IF "$DMA_ENABLE="STD_ON""!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_GetParam</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_GetParam</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_GetParam</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetRemainingWords</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetRemainingWords</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
 				        [!ENDIF!]
 				        [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartReadApi = 'true'"!]
@@ -221,16 +221,16 @@
                     [!IF "$DMA_ENABLE="STD_ON""!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_EnableTransferRegion</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_EnableTransferRegion</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_EnableTransferRegion</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_ParamSet</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_ParamSet</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_ParamSet</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Read</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Read</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
 				        [!ENDIF!]
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddVersionInfoApi = 'true'"!]
@@ -246,7 +246,7 @@
                     </BSW-DIRECT-CALL-POINT>
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!ENDIF!]
                 <BSW-CALLED-ENTITY UUID="001c8f84-8117-48b7-bb95-e1b03ea034d4">
@@ -264,12 +264,12 @@
                     [!IF "$DMA_ENABLE="STD_ON""!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_CbkRegister</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_CbkRegister</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_CbkRegister</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Init</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartWriteApi = 'true'"!]
                 <BSW-CALLED-ENTITY UUID="7bd42bba-f55b-4e37-910e-b7a8b69a804e">
@@ -287,20 +287,20 @@
                     [!IF "$DMA_ENABLE="STD_ON""!]
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_EnableTransferRegion</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_EnableTransferRegion</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_EnableTransferRegion</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_LinkChannel</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_LinkChannel</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_LinkChannel</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     <BSW-DIRECT-CALL-POINT>
                       <SHORT-NAME>Cdd_Dma_ParamSet</SHORT-NAME>
-                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263px/Cdd_Dma_ModuleEntry/Cdd_Dma_ParamSet</CALLED-ENTRY-REF>
+                      <CALLED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Dma_TI_AM263Px/Cdd_Dma_ModuleEntry/Cdd_Dma_ParamSet</CALLED-ENTRY-REF>
                     </BSW-DIRECT-CALL-POINT>
                     [!ENDIF!]
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Write</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Write</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!ENDIF!]
                 [!IF "as:modconf('Cdd_Uart')[1]/CddUartGeneral/CddUartRegisterReadbackApi = 'true'"!]
@@ -316,7 +316,7 @@
                     </BSW-DIRECT-CALL-POINT>
                   </CALL-POINTS>
                   [!ENDIF!]
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_RegisterReadback</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_RegisterReadback</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
                 [!ENDIF!]
                 [!LOOP "as:modconf('Cdd_Uart')[1]/CddUartDriver/*/CddUartChannel/*"!]
@@ -325,7 +325,7 @@
                   <SHORT-NAME>Cdd_Uart_Channel0Isr</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel0Isr</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel0Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
@@ -338,7 +338,7 @@
                   <SHORT-NAME>Cdd_Uart_Channel1Isr</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel1Isr</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel1Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
@@ -351,7 +351,7 @@
                   <SHORT-NAME>Cdd_Uart_Channel2Isr</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel2Isr</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel2Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
@@ -364,7 +364,7 @@
                   <SHORT-NAME>Cdd_Uart_Channel3Isr</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel3Isr</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel3Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
@@ -377,7 +377,7 @@
                   <SHORT-NAME>Cdd_Uart_Channel4Isr</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel4Isr</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel4Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
@@ -390,7 +390,7 @@
                   <SHORT-NAME>Cdd_Uart_Channel5Isr</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
-                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel5Isr</IMPLEMENTED-ENTRY-REF>
+                  <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_Uart_TI_AM263Px/Cdd_Uart_ModuleEntry/Cdd_Uart_Channel5Isr</IMPLEMENTED-ENTRY-REF>
                   <INTERRUPT-CATEGORY>[!"$ISR_CAT"!]</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
@@ -529,7 +529,7 @@
           <SW-VERSION>10.01.00</SW-VERSION>
           <VENDOR-ID>44</VENDOR-ID>
           <AR-RELEASE-VERSION>4.3.1</AR-RELEASE-VERSION>
-          <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Cdd_Uart_TI_AM263px/Cdd_Uart/Cdd_Uart_Behavior</BEHAVIOR-REF>
+          <BEHAVIOR-REF DEST="BSW-INTERNAL-BEHAVIOR">/Cdd_Uart_TI_AM263Px/Cdd_Uart/Cdd_Uart_Behavior</BEHAVIOR-REF>
           <VENDOR-SPECIFIC-MODULE-DEF-REFS>
             <VENDOR-SPECIFIC-MODULE-DEF-REF DEST="ECUC-MODULE-DEF">/TI_AM263Px/Cdd_Uart</VENDOR-SPECIFIC-MODULE-DEF-REF>
           </VENDOR-SPECIFIC-MODULE-DEF-REFS>

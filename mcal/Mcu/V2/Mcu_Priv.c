@@ -241,7 +241,7 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
 /* ========================================================================== */
 
 /* TI_COVERAGE_GAP: Multiple clock and register configuration functions throughout this file (e.g.,
-   Mcu_ClockSetSourceR5, Mcu_ClockSetSourceSYSCLK, Mcu_ClockSetSourceMCAN*, Mcu_ClockSetSourceMCSPI,
+   Mcu_ClockSetSourceR5, Mcu_ClockSetSourceMCAN*, Mcu_ClockSetSourceMCSPI,
    Mcu_ClockSetSourceSCI, etc.) contain regWriteStatus checks that report hardware errors when register
    write verification fails. These error paths cannot be triggered in normal test environment without
    actual hardware malfunction (stuck bits, read-only registers, or bus errors). See lines 533, 559,
@@ -305,15 +305,15 @@ Mcu_ResetType Mcu_GetPlatformResetReason(void)
     Reset_Read = Mcu_GetPlatformRawResetReason();
 
     /* Search lookup table for matching reset reason */
-    /* TI_COVERAGE_GAP_START [Branch] max size should be MCU_RESET_MAP_SIZE */
     for (idx = 0U; idx < MCU_RESET_MAP_SIZE; idx++)
     {
-        /* TI_COVERAGE_GAP_STOP */
+        /* TI_COVERAGE_GAP_START [Branch] Reset cannot be achieved in dynamic analysis */
         if (Mcu_ResetReasonMap[idx].rawValue == Reset_Read)
         {
             Reset_Type = Mcu_ResetReasonMap[idx].resetType;
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return Reset_Type;
@@ -411,8 +411,6 @@ static void Mcu_Timeoutevent(volatile uint32 *addr, uint32 Value, uint32 timeout
     /* each unit of SW_delay equals to 10 clockcycle, so divided by 10U*/
     while (M_REG_READ32(addr) != Value)
     {
-        /* TI_COVERAGE_GAP_START [Branch] Clock timeout is a hardware failure condition that cannot be triggered in
-           normal test environment without hardware malfunction or timing issues */
         if (tempCount <= 0U)
         {
 #ifdef MCU_E_CLOCK_FAILURE
@@ -421,7 +419,6 @@ static void Mcu_Timeoutevent(volatile uint32 *addr, uint32 Value, uint32 timeout
 #endif
             break;
         }
-        /* TI_COVERAGE_GAP_STOP */
         MCAL_SW_DELAY(tempCount);
     }
 }
@@ -505,19 +502,19 @@ Mcu_ClkSourceIdType Mcu_ClockSetSourceCR5(Mcu_ClkSourceIdType clk_srcId)
     clkSrcVal = Mcu_getMultibitValue((uint32)clk_srcId);
 
     regWriteStatus = regWriteReadback(&toprcmREG->R5SS_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
-    /* TI_COVERAGE_GAP_START [Branch] Hardware register write verification failure cannot be triggered in normal
-       test environment without actual hardware malfunction */
+
     if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef MCU_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)MCU_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     Mcu_Timeoutevent(&toprcmREG->R5SS_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
     return multibitValue;
 }
+
 Std_ReturnType Mcu_ClockSetSourceSYSCLK(uint32 clk_divId)
 {
     /*Clk source is pre-configured*/
@@ -549,14 +546,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN0(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN0_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceMCAN1(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -578,14 +572,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN1(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN1_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -607,14 +598,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN2(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN2_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -636,14 +624,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN3(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN3_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -665,14 +650,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN4(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN4_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceMCAN5(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -693,14 +675,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN5(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN5_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceMCAN6(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -721,14 +700,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN6(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN6_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -750,14 +726,11 @@ Std_ReturnType Mcu_ClockSetSourceMCAN7(Mcu_ClkSourceIdType clk_srcId, uint32 clk
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCAN7_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceRTI0(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -778,14 +751,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI0(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI0_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -807,14 +777,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI1(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
 
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI1_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -834,14 +801,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI2(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_RTI2_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI2_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -861,14 +825,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI3(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_RTI3_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI3_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -888,14 +849,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI4(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_RTI4_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI4_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceRTI5(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -914,14 +872,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI5(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_RTI5_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI5_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceRTI6(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -940,14 +895,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI6(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_RTI6_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI6_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceRTI7(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -966,14 +918,11 @@ Std_ReturnType Mcu_ClockSetSourceRTI7(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_RTI7_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RTI7_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceWDT0(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -992,14 +941,11 @@ Std_ReturnType Mcu_ClockSetSourceWDT0(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_WDT0_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_WDT0_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceWDT1(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -1018,14 +964,11 @@ Std_ReturnType Mcu_ClockSetSourceWDT1(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_WDT1_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_WDT1_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 Std_ReturnType Mcu_ClockSetSourceWDT2(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -1044,14 +987,11 @@ Std_ReturnType Mcu_ClockSetSourceWDT2(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_WDT2_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_WDT2_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1071,14 +1011,11 @@ Std_ReturnType Mcu_ClockSetSourceWDT3(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_WDT3_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_WDT3_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1098,14 +1035,11 @@ Std_ReturnType Mcu_ClockSetSourceOSPI(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_OSPI0_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_OSPI0_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1125,14 +1059,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI0(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI0_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI0_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1152,14 +1083,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI1(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI1_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI1_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1179,14 +1107,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI2(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI2_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI2_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1206,14 +1131,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI3(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI3_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI3_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1233,14 +1155,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI4(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI4_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI4_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1260,14 +1179,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI5(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI5_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI5_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1287,14 +1203,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI6(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI6_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI6_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1314,14 +1227,11 @@ Std_ReturnType Mcu_ClockSetSourceMCSPI7(Mcu_ClkSourceIdType clk_srcId, uint32 cl
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_MCSPI7_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_MCSPI7_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1341,14 +1251,11 @@ Std_ReturnType Mcu_ClockSetSourceI2C(Mcu_ClkSourceIdType clk_srcId, uint32 clk_d
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_I2C_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_I2C_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1368,14 +1275,11 @@ Std_ReturnType Mcu_ClockSetSourceSCI0(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_LIN0_UART0_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_LIN0_UART0_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1395,14 +1299,11 @@ Std_ReturnType Mcu_ClockSetSourceSCI1(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_LIN1_UART1_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_LIN1_UART1_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1422,14 +1323,11 @@ Std_ReturnType Mcu_ClockSetSourceSCI2(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_LIN2_UART2_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_LIN2_UART2_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1449,14 +1347,11 @@ Std_ReturnType Mcu_ClockSetSourceSCI3(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_LIN3_UART3_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_LIN3_UART3_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1476,14 +1371,11 @@ Std_ReturnType Mcu_ClockSetSourceSCI4(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_LIN4_UART4_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_LIN4_UART4_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1503,14 +1395,11 @@ Std_ReturnType Mcu_ClockSetSourceSCI5(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_LIN5_UART5_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_LIN5_UART5_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1530,14 +1419,11 @@ Std_ReturnType Mcu_ClockSetSourceCPTS(Mcu_ClkSourceIdType clk_srcId, uint32 clk_
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_CPTS_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_CPTS_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1560,14 +1446,11 @@ Std_ReturnType Mcu_ClockSetSourceMcuClkout0(Mcu_ClkSourceIdType clk_srcId, uint3
 
     Mcu_Timeoutevent(&toprcmREG->CLKOUT0_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1590,23 +1473,21 @@ Std_ReturnType Mcu_ClockSetSourceMcuClkout1(Mcu_ClkSourceIdType clk_srcId, uint3
 
     Mcu_Timeoutevent(&toprcmREG->CLKOUT1_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
 Std_ReturnType Mcu_ClockSetSourcePmicClkout(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
 {
-    uint32 regWriteStatus          = 0U;
-    VAR(uint32, MCU_VAR) clkSrcVal = 0;
-    VAR(uint32, MCU_VAR) clkDivVal = 0;
-    TickType timeout_duration      = 100U;
+    uint32 regWriteStatus           = 0U;
+    VAR(uint32, MCU_VAR) clkSrcVal  = 0;
+    VAR(uint32, MCU_VAR) clkDivVal  = 0;
+    TickType       timeout_duration = 100U;
+    Std_ReturnType retVal           = E_OK;
 
     clkSrcVal      = Mcu_getMultibitValue((uint32)clk_srcId);
     clkDivVal      = Mcu_getMultibitValue(clk_divId);
@@ -1623,10 +1504,11 @@ Std_ReturnType Mcu_ClockSetSourcePmicClkout(Mcu_ClkSourceIdType clk_srcId, uint3
     {
 #ifdef MCU_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)MCU_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
+        retVal = E_NOT_OK;
 #endif
     }
     /* TI_COVERAGE_GAP_STOP */
-    return E_OK;
+    return retVal;
 }
 
 Std_ReturnType Mcu_ClockSetSourceMII100Clk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId)
@@ -1641,14 +1523,11 @@ Std_ReturnType Mcu_ClockSetSourceMII100Clk(Mcu_ClkSourceIdType clk_srcId, uint32
     regWriteStatus = regWriteReadback(&mssrcmREG->RCM_RGMII_50_CLK_DIV_VAL, M_ELEVEN, M_ZERO, clkDivVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RGMII_50_CLK_DIV_VAL, clkDivVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1664,14 +1543,11 @@ Std_ReturnType Mcu_ClockSetSourceMII10Clk(Mcu_ClkSourceIdType clk_srcId, uint32 
     regWriteStatus = regWriteReadback(&mssrcmREG->RCM_RGMII_5_CLK_DIV_VAL, M_TWENTY_THREE, M_ZERO, clkDivVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RGMII_5_CLK_DIV_VAL, clkDivVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1687,14 +1563,11 @@ Std_ReturnType Mcu_ClockSetSourceRGMIClk(Mcu_ClkSourceIdType clk_srcId, uint32 c
     regWriteStatus = regWriteReadback(&mssrcmREG->RCM_RGMII_250_CLK_DIV_VAL, M_ELEVEN, M_ZERO, clkDivVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_RGMII_250_CLK_DIV_VAL, clkDivVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1714,14 +1587,11 @@ Std_ReturnType Mcu_ClockSetSourceCONTROLSS(Mcu_ClkSourceIdType clk_srcId, uint32
     regWriteStatus |= regWriteReadback(&mssrcmREG->RCM_CONTROLSS_PLL_CLK_SRC_SEL, M_ELEVEN, M_ZERO, clkSrcVal);
     Mcu_Timeoutevent(&mssrcmREG->RCM_CONTROLSS_PLL_CLK_SRC_SEL, clkSrcVal, timeout_duration);
 
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus checks that report hardware errors when register
-       write verification fails. These error paths cannot be triggered in normal test environment without
-       actual hardware malfunction */
     if (regWriteStatus != (uint32)E_OK)
     {
         retVal = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     return retVal;
 }
 
@@ -1746,8 +1616,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCAN1:
         {
             if (enable == (boolean)TRUE)
@@ -1759,8 +1630,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCAN2:
         {
             if (enable == (boolean)TRUE)
@@ -1772,8 +1644,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCAN3:
         {
             if (enable == (boolean)TRUE)
@@ -1785,8 +1658,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCAN4:
         {
             if (enable == (boolean)TRUE)
@@ -1798,8 +1672,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN4_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCAN5:
         {
             if (enable == (boolean)TRUE)
@@ -1811,9 +1686,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN5_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            RetVal += Mcu_ClockSetSourceMCAN5(clkSrcId, clkDivId);
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCAN6:
         {
             if (enable == (boolean)TRUE)
@@ -1825,8 +1700,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN6_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCAN7:
         {
             if (enable == (boolean)TRUE)
@@ -1838,8 +1714,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_C
             {
                 mssrcmREG->RCM_MCAN7_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         default:
             /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
                and only triggers on memory corruption or invalid caller input that bypasses validation */
@@ -1872,8 +1749,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RTI1:
         {
             if (enable == (boolean)TRUE)
@@ -1885,8 +1763,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RTI2:
         {
             if (enable == (boolean)TRUE)
@@ -1898,8 +1777,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RTI3:
         {
             if (enable == (boolean)TRUE)
@@ -1911,8 +1791,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RTI4:
         {
             if (enable == (boolean)TRUE)
@@ -1924,8 +1805,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI4_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RTI5:
         {
             if (enable == (boolean)TRUE)
@@ -1937,8 +1819,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI5_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RTI6:
         {
             if (enable == (boolean)TRUE)
@@ -1950,8 +1833,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI6_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RTI7:
         {
             if (enable == (boolean)TRUE)
@@ -1963,8 +1847,9 @@ static Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_RTI7_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         default:
             /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
                and only triggers on memory corruption or invalid caller input that bypasses validation */
@@ -1997,8 +1882,9 @@ static Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_WDT0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_WDT1:
         {
             if (enable == (boolean)TRUE)
@@ -2010,8 +1896,9 @@ static Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_WDT1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_WDT2:
         {
             if (enable == (boolean)TRUE)
@@ -2023,8 +1910,9 @@ static Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_WDT2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_WDT3:
         {
             if (enable == (boolean)TRUE)
@@ -2036,8 +1924,9 @@ static Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_WDT3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         default:
             /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
                and only triggers on memory corruption or invalid caller input that bypasses validation */
@@ -2070,8 +1959,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCSPI1:
         {
             if (enable == (boolean)TRUE)
@@ -2083,8 +1973,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCSPI2:
         {
             if (enable == (boolean)TRUE)
@@ -2096,8 +1987,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCSPI3:
         {
             if (enable == (boolean)TRUE)
@@ -2109,8 +2001,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCSPI4:
         {
             if (enable == (boolean)TRUE)
@@ -2122,8 +2015,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI4_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCSPI5:
         {
             if (enable == (boolean)TRUE)
@@ -2135,8 +2029,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI5_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCSPI6:
         {
             if (enable == (boolean)TRUE)
@@ -2148,8 +2043,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI6_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCSPI7:
         {
             if (enable == (boolean)TRUE)
@@ -2161,8 +2057,9 @@ static Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_MCSPI7_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         default:
             /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
                and only triggers on memory corruption or invalid caller input that bypasses validation */
@@ -2197,8 +2094,9 @@ static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
                 mssrcmREG->RCM_UART0_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
                 mssrcmREG->RCM_LIN0_CLK_GATE  = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_SCI1:
         {
             if (enable == (boolean)TRUE)
@@ -2212,8 +2110,9 @@ static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
                 mssrcmREG->RCM_UART1_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
                 mssrcmREG->RCM_LIN1_CLK_GATE  = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_SCI2:
         {
             if (enable == (boolean)TRUE)
@@ -2227,8 +2126,9 @@ static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
                 mssrcmREG->RCM_UART2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
                 mssrcmREG->RCM_LIN2_CLK_GATE  = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_SCI3:
         {
             if (enable == (boolean)TRUE)
@@ -2242,8 +2142,9 @@ static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
                 mssrcmREG->RCM_UART3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
                 mssrcmREG->RCM_LIN3_CLK_GATE  = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_SCI4:
         {
             if (enable == (boolean)TRUE)
@@ -2257,8 +2158,9 @@ static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
                 mssrcmREG->RCM_UART4_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
                 mssrcmREG->RCM_LIN4_CLK_GATE  = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_SCI5:
         {
             if (enable == (boolean)TRUE)
@@ -2270,8 +2172,9 @@ static Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_Cl
             {
                 mssrcmREG->RCM_UART5_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         default:
             /* TI_COVERAGE_GAP_START [Branch] Default case is unreachable for valid enum values
                and only triggers on memory corruption or invalid caller input that bypasses validation */
@@ -2304,8 +2207,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_OSPI_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_I2C:
         {
             if (enable == (boolean)TRUE)
@@ -2323,8 +2227,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
                 mssrcmREG->RCM_I2C2_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
                 mssrcmREG->RCM_I2C3_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_CPTS:
         {
             if (enable == (boolean)TRUE)
@@ -2336,8 +2241,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_CPTS_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCU_CLKOUT0:
         {
             if (enable == (boolean)TRUE)
@@ -2349,8 +2255,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 toprcmREG->CLKOUT0_CLK_GATE = TOP_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MCU_CLKOUT1:
         {
             if (enable == (boolean)TRUE)
@@ -2362,8 +2269,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 toprcmREG->CLKOUT1_CLK_GATE = TOP_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MII100_CLK:
         {
             if (enable == (boolean)TRUE)
@@ -2376,8 +2284,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_RGMII_50_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_MII10_CLK:
         {
             if (enable == (boolean)TRUE)
@@ -2390,8 +2299,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_RGMII_5_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_RGMI_CLK:
         {
             if (enable == (boolean)TRUE)
@@ -2404,8 +2314,9 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_RGMII_250_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
+
         case MCU_CLKSRC_MODULE_ID_CONTROLSS_CLK:
         {
             if (enable == (boolean)TRUE)
@@ -2418,8 +2329,8 @@ static Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_
             {
                 mssrcmREG->RCM_CONTROLSS_PLL_CLK_GATE = MSS_RCM_CLK_GATE_GATED_MASK;
             }
-            break;
         }
+        break;
 
         default:
             RetVal = (Std_ReturnType)E_NOT_OK;
@@ -2495,7 +2406,7 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
     uint32              regWriteStatus  = 0U;
     Std_ReturnType      init_pll_return = E_OK;
     Mcu_ClkSourceIdType r5ClkSrc_restore;
-    uint32              M;
+    uint32              multiplier;
 
     Mcu_PllClkDivType pllClk1 = Mcu_PllDrvObj->Mcu_PllConfig[Mcu_PllDrvObj->Mcu_PllSourceId].Mcu_PllClk1;
     Mcu_PllClkDivType pllClk2 = Mcu_PllDrvObj->Mcu_PllConfig[Mcu_PllDrvObj->Mcu_PllSourceId].Mcu_PllClk2;
@@ -2504,15 +2415,16 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
     r5ClkSrc_restore = Mcu_ClockSetSourceCR5(MCU_CLKSRC_0);
     if (Mcu_PllDrvObj->Mcu_PllSourceId == MCU_CLKSRC_DPLL)
     {
+        /* TI_COVERAGE_GAP_START [Branch] the Variable MCU_PLL_CLKOUT is read only variable and not assignable */
         /* NON-ZERO => Enabled */
         if (pllClk1.MCU_PLL_CLKOUT != 0U) /* DPLL_CORE */
         {
             /* APPLJ-1 Setting
              * CLOCKOUT = M/(N+1) * CLKINP * (1/M2)
              */
-            M = (uint32)((pllClk1.MCU_PLL_CLKOUT * ((pllClk1.N + (uint32)1) * pllClk1.M2)) / XTAL_CLKINP);
+            multiplier = (uint32)((pllClk1.MCU_PLL_CLKOUT * ((pllClk1.N + (uint32)1) * pllClk1.M2)) / XTAL_CLKINP);
             /*Collect status of Core PLL registers */
-            regWriteStatus |= Mcu_corePllInit(pllClk1, M);
+            regWriteStatus |= Mcu_corePllInit(pllClk1, multiplier);
 
             /*Timeout function call for MCU_E_CLOCK_FAILURE */
             init_pll_return = Mcu_pllTimeoutevent(&toprcmREG->PLL_CORE_STATUS);
@@ -2527,15 +2439,17 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
                 regWriteStatus |= Mcu_corePllHsdivStat(pllClk1);
             }
         }
+        /* TI_COVERAGE_GAP_STOP */
 
+        /* TI_COVERAGE_GAP_START [Branch] the Variable MCU_PLL_CLKOUT is read only variable and not assignable */
         if (pllClk2.MCU_PLL_CLKOUT != 0U) /* DPLL_PER */
         {
             /* APPLJ-3 Setting
              * CLOCKOUT = M/(N+1) * CLKINP * (1/M2)
              */
-            M = (uint32)((pllClk2.MCU_PLL_CLKOUT * ((pllClk2.N + (uint32)1) * pllClk2.M2)) / XTAL_CLKINP);
+            multiplier = (uint32)((pllClk2.MCU_PLL_CLKOUT * ((pllClk2.N + (uint32)1) * pllClk2.M2)) / XTAL_CLKINP);
             /*Collect status of Per PLL registers */
-            regWriteStatus |= Mcu_perPllInit(pllClk2, M);
+            regWriteStatus |= Mcu_perPllInit(pllClk2, multiplier);
 
             /*Timeout function call for MCU_E_CLOCK_FAILURE */
             init_pll_return = Mcu_pllTimeoutevent(&toprcmREG->PLL_PER_STATUS);
@@ -2548,6 +2462,7 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
                 regWriteStatus |= Mcu_perPllHsdivStat(pllClk2);
             }
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     /* Restore clock source to DPLL (MCU_CLKSRC_2 is DPLL_CORE_HSDIV0_CLKOUT0)*/
@@ -2579,7 +2494,7 @@ uint32 Mcu_Pll_PerHSDIV(void)
     return regWriteStatus;
 }
 
-uint32 Mcu_corePllInit(Mcu_PllClkDivType pllClk1, uint32 M)
+uint32 Mcu_corePllInit(Mcu_PllClkDivType pllClk1, uint32 multiplier)
 {
     uint32 regWriteStatus = 0;
 
@@ -2588,8 +2503,8 @@ uint32 Mcu_corePllInit(Mcu_PllClkDivType pllClk1, uint32 M)
     regWriteStatus |=
         regWriteReadback(&toprcmREG->PLL_CORE_M2NDIV, M_TWENTY_TWO, M_SIXTEEN, pllClk1.M2); /* M2 - post divider */
     regWriteStatus |=
-        regWriteReadback(&toprcmREG->PLL_CORE_M2NDIV, M_SEVEN, M_ZERO, pllClk1.N);        /* N - input clock divider */
-    regWriteStatus |= regWriteReadback(&toprcmREG->PLL_CORE_MN2DIV, M_ELEVEN, M_ZERO, M); /* M - multiplier */
+        regWriteReadback(&toprcmREG->PLL_CORE_M2NDIV, M_SEVEN, M_ZERO, pllClk1.N); /* N - input clock divider */
+    regWriteStatus |= regWriteReadback(&toprcmREG->PLL_CORE_MN2DIV, M_ELEVEN, M_ZERO, multiplier); /* M - multiplier */
     regWriteStatus |=
         regWriteReadback(&toprcmREG->PLL_CORE_MN2DIV, M_NINETEEN, M_SIXTEEN, M_ZERO); /* N2 - divider for by-pass */
     regWriteStatus |=
@@ -2613,15 +2528,15 @@ uint32 Mcu_corePllInit(Mcu_PllClkDivType pllClk1, uint32 M)
     return regWriteStatus;
 }
 
-uint32 Mcu_perPllInit(Mcu_PllClkDivType pllClk2, uint32 M)
+uint32 Mcu_perPllInit(Mcu_PllClkDivType pllClk2, uint32 multiplier)
 {
     uint32 regWriteStatus = 0;
 
     regWriteStatus |=
         regWriteReadback(&toprcmREG->PLL_PER_M2NDIV, M_TWENTY_TWO, M_SIXTEEN, pllClk2.M2); /* M2 - post divider */
     regWriteStatus |=
-        regWriteReadback(&toprcmREG->PLL_PER_M2NDIV, M_SEVEN, M_ZERO, pllClk2.N);        /* N - input clock divider */
-    regWriteStatus |= regWriteReadback(&toprcmREG->PLL_PER_MN2DIV, M_ELEVEN, M_ZERO, M); /* M - multiplier */
+        regWriteReadback(&toprcmREG->PLL_PER_M2NDIV, M_SEVEN, M_ZERO, pllClk2.N); /* N - input clock divider */
+    regWriteStatus |= regWriteReadback(&toprcmREG->PLL_PER_MN2DIV, M_ELEVEN, M_ZERO, multiplier); /* M - multiplier */
     regWriteStatus |=
         regWriteReadback(&toprcmREG->PLL_PER_MN2DIV, M_NINETEEN, M_SIXTEEN, M_ZERO); /* N2 - divider for by-pass */
     regWriteStatus |=
@@ -2671,7 +2586,6 @@ uint32 Mcu_corePllClkout(Mcu_PllClkDivType pllClk1)
         regWriteStatus |= regWriteReadback(&toprcmREG->PLL_CORE_HSDIVIDER_CLKOUT2, M_FOUR, M_ZERO, D);
     }
     /* TI_COVERAGE_GAP_STOP */
-
     return regWriteStatus;
 }
 
@@ -2696,6 +2610,7 @@ uint32 Mcu_perPllClkout(Mcu_PllClkDivType pllClk2)
         regWriteStatus |= regWriteReadback(&toprcmREG->PLL_PER_HSDIVIDER_CLKOUT1, M_FOUR, M_ZERO, D);
     }
     /* TI_COVERAGE_GAP_STOP */
+
     return regWriteStatus;
 }
 
@@ -2835,8 +2750,6 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
     uint32           baseAddr;
     volatile uint32 *kickAddr;
 
-    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with ADC module enabled.
-       This will be covered in Mcu_SystemInit function */
     if (partition == (uint32)MCU_TOP_CTRL_PARTITION0)
     {
         /*Unlock TOP_CTRL*/
@@ -2846,7 +2759,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     if (partition == (uint32)MCU_TOP_RCM_PARTITION0)
     {
         /*Unlock TOP_RCM*/
@@ -2856,8 +2769,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_RCM_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
-    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with PWM module enabled.
-       This will be covered in Mcu_SystemInit function */
+
     if (partition == (uint32)MCU_CONTROLSS_CTRL_PARTITION0)
     {
         /*Unlock CONTROLSS_CTRL*/
@@ -2867,7 +2779,7 @@ static void Mcu_controlModuleUnlockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK1_UNLOCK_VAL); /* KICK 1 */
     }
-    /* TI_COVERAGE_GAP_STOP */
+
 #if (STD_ON == MCU_ETH_ENABLE)
     if (partition == MCU_MSS_CTRL_PARTITION0)
     {
@@ -2887,8 +2799,6 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
     uint32           baseAddr;
     volatile uint32 *kickAddr;
 
-    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with ADC module enabled.
-       This will be covered in Mcu_SystemInit function */
     if (partition == (uint32)MCU_TOP_CTRL_PARTITION0)
     {
         /*Unlock TOP_CTRL*/
@@ -2898,7 +2808,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     if (partition == (uint32)MCU_TOP_RCM_PARTITION0)
     {
         /*Unlock TOP_RCM*/
@@ -2908,8 +2818,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_TOP_RCM_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
-    /* TI_COVERAGE_GAP_START [Branch] As this is static code, need a new config with PWM module enabled.
-       This will be covered in Mcu_SystemInit function */
+
     if (partition == (uint32)MCU_CONTROLSS_CTRL_PARTITION0)
     {
         /*Lock CONTROLSS_CTRL*/
@@ -2919,7 +2828,7 @@ static void Mcu_controlModuleLockMMR(uint32 domainId, uint32 partition)
         kickAddr = (volatile uint32 *)(baseAddr + MCU_CSL_CONTROLSS_CTRL_LOCK0_KICK1);
         HW_WR_REG32(kickAddr, MCU_TEST_KICK_LOCK_VAL); /* KICK 1 */
     }
-    /* TI_COVERAGE_GAP_STOP */
+
 #if (STD_ON == MCU_ETH_ENABLE)
     if (partition == MCU_MSS_CTRL_PARTITION0)
     {

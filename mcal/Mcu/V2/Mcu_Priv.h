@@ -126,8 +126,8 @@ typedef struct
 #if (STD_OFF == MCU_NO_PLL)
 Mcu_PllStatusType Mcu_GetPllLockStatus(void);
 Std_ReturnType    Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj);
-uint32            Mcu_corePllInit(Mcu_PllClkDivType pllClk1, uint32 M);
-uint32            Mcu_perPllInit(Mcu_PllClkDivType pllClk2, uint32 M);
+uint32            Mcu_corePllInit(Mcu_PllClkDivType pllClk1, uint32 multiplier);
+uint32            Mcu_perPllInit(Mcu_PllClkDivType pllClk2, uint32 multiplier);
 uint32            Mcu_corePllClkout(Mcu_PllClkDivType pllClk1);
 uint32            Mcu_perPllClkout(Mcu_PllClkDivType pllClk2);
 uint32            Mcu_corePllHsdivStat(Mcu_PllClkDivType pllClk1);

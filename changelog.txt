@@ -1,3 +1,366 @@
+commit 32dba61f86d19c4aff75d3443929f1d8e58abbc7
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Jun 9 11:18:02 2026 +0530
+
+    all: Lin: Lint fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/lin_test/testInput/linTestCases.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit 6f4085b803321a1a73025cca045743e16ad698a8
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Jun 8 17:05:33 2026 +0530
+
+    am263px: I2c: Correcting i2c plugin changes and reverting previous commit bswmd changes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../I2c/i2c_app/soc/am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 7 +++++++
+ .../Cdd_I2c_TI_AM263Px/generate_swcd/swcd/Cdd_I2c_Bswmd.arxml      | 4 ++--
+ .../am263px/r5f0_0/config_1/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 7 +++++++
+ .../am263px/r5f0_0/config_3/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 7 +++++++
+ .../am263px/r5f0_0/config_5/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 7 +++++++
+ 5 files changed, 30 insertions(+), 2 deletions(-)
+
+commit 285eddeaf3db76cb21276359e777658fb69f2b19
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Jun 8 11:04:11 2026 +0530
+
+    all: all: Fixing i2c config build and adding script improvements
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  7 ----
+ mcal_misc/scripts/windows/mcal_installer_test.sh   |  4 +-
+ mcal_misc/scripts/windows/mcal_release_build.sh    | 44 ++++++++++++++++++++--
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  7 ----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  7 ----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  7 ----
+ 6 files changed, 43 insertions(+), 33 deletions(-)
+
+commit b5473a46b997941e773b54fb19d6c3f18b5e769a
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Jun 5 15:45:20 2026 +0530
+
+    am26xx: Lin: Added test case for missing header detection.
+    
+    -Sending Slave response followed by Master response to detect missing header repeatedly.
+    
+    Fixes: MCAL-38812
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/lin_test/testInput/linTestCases.h      |  24 ++++
+ mcal_test/lin_test/testLib/linTest.h             |   1 +
+ mcal_test/lin_test/testLib/linTestMainTestCase.c | 153 +++++++++++++++++++++++
+ 3 files changed, 178 insertions(+)
+
+commit 031ad4a7402764f520ade287404a142db9c2d371
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed May 27 12:04:22 2026 +0530
+
+    am263px: Fls: Adding files to support SIP build
+    
+    Fixes: MCAL-38316, MCAL-38314
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../am263px_sip/fls_app_sip.projectspec            |   4 +-
+ .../am263px_sip/fls_phy_app_sip.projectspec        |   6 +-
+ .../soc/am263px/tresos_sip/.prefs/pref_general.xdm | 103 +++
+ .../fls_phy_app/soc/am263px/tresos_sip/.project    |  13 +
+ .../soc/am263px/tresos_sip/config/Fls.xdm          | 788 +++++++++++++++++++++
+ .../am263px/tresos_sip/output/include/Fls_Cfg.h    | 249 +++++++
+ .../soc/am263px/tresos_sip/output/src/Fls_Cfg.c    | 237 +++++++
+ .../soc/am263px/tresos_sip/output/src/Fls_PBcfg.c  |   4 +
+ .../am263px/tresos_sip/output/swcd/Fls_Bswmd.arxml | 610 ++++++++++++++++
+ mcal/examples/Fls/fls_phy_app/soc/srcs.mk          |  14 +-
+ .../soc/am263px_sip/r5f0_0/include/Fls_Cfg.h       | 253 +++++++
+ .../soc/am263px_sip/r5f0_0/src/Fls_Cfg.c           | 243 +++++++
+ .../soc/am263px_sip/r5f0_0/src/Fls_PBcfg.c         |   4 +
+ .../soc/am263px_sip/r5f0_0/swcd/Fls_Bswmd.arxml    | 610 ++++++++++++++++
+ .../Fls_Demo_Cfg/soc/am263px_sip/tresos/Fls.xdm    | 786 ++++++++++++++++++++
+ mcal/examples_config/Fls_Demo_Cfg/srcs.mk          |  14 +-
+ .../AM261x/Fls_TI_AM261x/generate/src/Fls_Cfg.c    |   3 +-
+ .../AM261x/Fls_TI_AM261x/generate/src/Fls_PBcfg.c  |   3 +-
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         |   4 +-
+ .../AM263Px/Fls_TI_AM263Px/generate/src/Fls_Cfg.c  |   3 +-
+ .../Fls_TI_AM263Px/generate/src/Fls_PBcfg.c        |   3 +-
+ .../AM263x/Fls_TI_AM263x/generate/src/Fls_Cfg.c    |   3 +-
+ .../AM263x/Fls_TI_AM263x/generate/src/Fls_PBcfg.c  |   3 +-
+ 23 files changed, 3937 insertions(+), 23 deletions(-)
+
+commit 9dcf5e8d420e0119c381cf4c44dd02d084c99211
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Jun 5 11:26:08 2026 +0530
+
+    all: Mcu: Lint fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Mcu/V2/Mcu_Priv.c                             | 10 ++++-----
+ .../docker_epsw/am261-daily-build-docker.sh        |  4 +++-
+ .../docker_epsw/am263-daily-build-docker.sh        |  4 +++-
+ .../docker_epsw/am263p-daily-build-docker.sh       |  4 +++-
+ mcal_test/mcu_test/testInput/mcuTestCases.h        | 18 +++++++--------
+ mcal_test/mcu_test/testLib/mcuTestCommon.c         |  4 ++--
+ .../mcu_test/testLib/mcuTestNegativeTestCase.c     | 26 ++++++++++------------
+ 7 files changed, 37 insertions(+), 33 deletions(-)
+
+commit f898f575ba6b2cbd927d7ce25a28330631c36faf
+Author: Asha D <asha.d@ti.com>
+Date:   Wed May 20 15:36:20 2026 +0530
+
+    am263px:MCU:added new config for MCU module
+    
+            Config enabling PWM and ADC for MCU coverage
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Mcu/V2/Mcu_Priv.c                             |  409 ++--
+ mcal/Mcu/V2/Mcu_Priv.h                             |    4 +-
+ mcal_test/mcu_test/build/makefile                  |   10 +-
+ mcal_test/mcu_test/testInput/mcuTestCases.h        |   76 +-
+ mcal_test/mcu_test/testLib/mcuTest.h               |   12 +-
+ mcal_test/mcu_test/testLib/mcuTestCommon.c         |   45 +
+ mcal_test/mcu_test/testLib/mcuTestMainTestCase.c   |   19 +-
+ .../mcu_test/testLib/mcuTestNegativeTestCase.c     |  140 +-
+ .../config_10/tresos/.prefs/pref_general.xdm       |  167 ++
+ .../soc/am263px/r5f0_0/config_10/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_10/tresos/config/Adc.xdm |  814 +++++++
+ .../r5f0_0/config_10/tresos/config/Compiler.xdm    |   77 +
+ .../am263px/r5f0_0/config_10/tresos/config/Dem.xdm | 2329 ++++++++++++++++++++
+ .../am263px/r5f0_0/config_10/tresos/config/Mcu.xdm | 1988 +++++++++++++++++
+ .../am263px/r5f0_0/config_10/tresos/config/Pwm.xdm |  199 ++
+ .../config_10/tresos/config/SystemModel2.tdb       |  Bin 0 -> 3723264 bytes
+ .../am263px/r5f0_0/config_10/tresos/config/Wdg.xdm |  145 ++
+ .../config_10/tresos/output/include/Adc_Cfg.h      |  387 ++++
+ .../tresos/output/include/Compiler_CfgExtMcal.h    |   21 +
+ .../tresos/output/include/Compiler_CfgInt.h        |   21 +
+ .../config_10/tresos/output/include/Mcu_Cfg.h      |  789 +++++++
+ .../config_10/tresos/output/include/Pwm_Cfg.h      |  366 +++
+ .../config_10/tresos/output/include/Wdg_Cfg.h      |  193 ++
+ .../r5f0_0/config_10/tresos/output/src/Adc_Cfg.c   |   58 +
+ .../r5f0_0/config_10/tresos/output/src/Adc_PBcfg.c |  317 +++
+ .../r5f0_0/config_10/tresos/output/src/Mcu_Cfg.c   |    3 +
+ .../r5f0_0/config_10/tresos/output/src/Mcu_PBcfg.c |  547 +++++
+ .../r5f0_0/config_10/tresos/output/src/Pwm_Cfg.c   |  123 ++
+ .../r5f0_0/config_10/tresos/output/src/Pwm_PBcfg.c |  132 ++
+ .../r5f0_0/config_10/tresos/output/src/Wdg_Cfg.c   |    3 +
+ .../r5f0_0/config_10/tresos/output/src/Wdg_Lcfg.c  |    3 +
+ .../r5f0_0/config_10/tresos/output/src/Wdg_PBcfg.c |  157 ++
+ .../config_10/tresos/output/swcd/Adc_Bswmd.arxml   |  949 ++++++++
+ .../config_10/tresos/output/swcd/Mcu_Bswmd.arxml   |  471 ++++
+ .../config_10/tresos/output/swcd/Pwm_Bswmd.arxml   | 1582 +++++++++++++
+ .../config_10/tresos/output/swcd/Wdg_Bswmd.arxml   |  320 +++
+ 36 files changed, 12591 insertions(+), 298 deletions(-)
+
+commit e04b9b4034b74cce68f5978441181ddebf3e25eb
+Author: Akash <a-verma3@ti.com>
+Date:   Fri May 29 16:53:01 2026 +0530
+
+    am26xx: Spi: Coverage improvement for SPI for all platform.
+    
+    -Enable SPI coverage for am263
+    
+    -Addressed last release comment on SPI
+    
+    Fixes: MCAL-37951
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Spi/V0/Spi_Dma.c                              | 17 ++----
+ mcal/Spi/V0/Spi_Priv.c                             |  4 --
+ mcal_test/makefile                                 |  2 +-
+ .../spi_test/testLib/spiTestMcspiMiscTestCase.c    | 63 +++++++++++++++++++++-
+ 4 files changed, 68 insertions(+), 18 deletions(-)
+
+commit adc60a5d25ec6176fef3255f4b519e2d46b04e2c
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon May 11 16:44:02 2026 +0530
+
+    all: all: Build improvements
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../docker_epsw/am261-daily-build-docker.sh        | 28 +++++++++++++-----
+ .../docker_epsw/am263-daily-build-docker.sh        | 33 ++++++++++++++++------
+ .../docker_epsw/am263p-daily-build-docker.sh       | 30 ++++++++++++++++----
+ mcal_misc/scripts/docker_epsw/docker_run.sh        | 17 +++++++----
+ mcal_misc/scripts/docker_epsw/nas_cleanup.sh       |  5 ++--
+ mcal_misc/scripts/windows/mcal_installer_test.sh   |  4 +--
+ mcal_misc/scripts/windows/mcal_release_build.sh    |  4 +--
+ 7 files changed, 89 insertions(+), 32 deletions(-)
+
+commit 8bd348b94839f9ea130f138b181ed1954ddc0dc3
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Jun 4 10:54:18 2026 +0530
+
+    am263px: all: Updated bswmd file to have AM263Px instead of AM263px
+    
+    Fixes: MCAL-38756
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml |  104 +-
+ .../am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml |   58 +-
+ .../am263px/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml |  282 ++---
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |   54 +-
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml |  120 +-
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |   54 +-
+ .../soc/am263px/tresos/output/swcd/Adc_Bswmd.arxml |  122 +-
+ .../am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml |   58 +-
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |   54 +-
+ .../am263px/tresos/output/swcd/Cdd_Dma_Bswmd.arxml |   62 +-
+ .../soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml |   74 +-
+ .../tresos/am263px_lp/output/swcd/Port_Bswmd.arxml |   44 +-
+ .../am263px_sip/output/swcd/Port_Bswmd.arxml       |   44 +-
+ .../soc/am263px/tresos/output/swcd/Wdg_Bswmd.arxml |   32 +-
+ .../soc/am263px/r5f0_0/swcd/Adc_Bswmd.arxml        |  104 +-
+ .../soc/am263px/r5f0_0/swcd/Can_Bswmd.arxml        |  108 +-
+ .../soc/am263px/r5f0_0/swcd/Dio_Bswmd.arxml        |   42 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml    |   62 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml    |  290 ++---
+ .../soc/am263px/r5f0_0/swcd/Eth_Bswmd.arxml        |  140 +--
+ .../soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml        |   74 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_Dma_Bswmd.arxml    |   62 +-
+ .../soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml        |   74 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml  |   38 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml  |   46 +-
+ .../soc/am263px/r5f0_0/swcd/Gpt_Bswmd.arxml        |  164 +--
+ .../soc/am263px/r5f0_0/swcd/Icu_Bswmd.arxml        |  128 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_Ipc_Bswmd.arxml    |   64 +-
+ .../soc/am263px/r5f0_0/swcd/Lin_Bswmd.arxml        |   60 +-
+ .../soc/am263px/r5f0_0/swcd/Mcu_Bswmd.arxml        |   54 +-
+ .../soc/am263px/r5f0_0/swcd/Port_Bswmd.arxml       |   48 +-
+ .../soc/am263px/r5f0_0/swcd/Pwm_Bswmd.arxml        |   54 +-
+ .../soc/am263px/r5f0_0/swcd/Spi_Bswmd.arxml        |  112 +-
+ .../soc/am263px/r5f0_0/swcd/Cdd_Uart_Bswmd.arxml   |   52 +-
+ .../soc/am263px/r5f0_0/swcd/Wdg_Bswmd.arxml        |   32 +-
+ .../generate_swcd/swcd/Adc_Bswmd.arxml             |  202 +--
+ .../generate_swcd/swcd/Can_Bswmd.arxml             |  134 +-
+ .../generate_swcd/swcd/Cdd_Dma_Bswmd.arxml         |   62 +-
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       |   70 +-
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |   78 +-
+ .../generate_swcd/swcd/Cdd_Ipc_Bswmd.arxml         |   64 +-
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         | 1298 ++++++++++----------
+ .../generate_swcd/swcd/Cdd_Uart_Bswmd.arxml        |   80 +-
+ .../generate_swcd/swcd/Dio_Bswmd.arxml             |   42 +-
+ .../generate_swcd/swcd/Eth_Bswmd.arxml             |  148 +--
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |   80 +-
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  200 +--
+ .../generate_swcd/swcd/Icu_Bswmd.arxml             |  208 ++--
+ .../generate_swcd/swcd/Lin_Bswmd.arxml             |   96 +-
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             |   58 +-
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |   60 +-
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |   60 +-
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |   60 +-
+ .../generate_swcd/swcd/Pwm_Bswmd.arxml             |  566 ++++-----
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |  114 +-
+ .../generate_swcd/swcd/Wdg_Bswmd.arxml             |   32 +-
+ .../config_1/tresos/output/swcd/Lin_Bswmd.arxml    |   60 +-
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |   54 +-
+ .../config_91/tresos/output/swcd/Lin_Bswmd.arxml   |   60 +-
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |   54 +-
+ .../config_92/tresos/output/swcd/Lin_Bswmd.arxml   |   52 +-
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |   54 +-
+ .../config_93/tresos/output/swcd/Lin_Bswmd.arxml   |   60 +-
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |   54 +-
+ .../config_94/tresos/output/swcd/Lin_Bswmd.arxml   |   52 +-
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   54 +-
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |   54 +-
+ .../config_1/tresos/output/swcd/Wdg_Bswmd.arxml    |   32 +-
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |   58 +-
+ .../config_2/tresos/output/swcd/Wdg_Bswmd.arxml    |   32 +-
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |   58 +-
+ .../config_3/tresos/output/swcd/Wdg_Bswmd.arxml    |   32 +-
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |   54 +-
+ .../config_4/tresos/output/swcd/Wdg_Bswmd.arxml    |   32 +-
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |   54 +-
+ .../config_5/tresos/output/swcd/Wdg_Bswmd.arxml    |   32 +-
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |   54 +-
+ .../config_91/tresos/output/swcd/Wdg_Bswmd.arxml   |   32 +-
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |   32 +-
+ .../config_92/tresos/output/swcd/Wdg_Bswmd.arxml   |   32 +-
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |   54 +-
+ .../config_93/tresos/output/swcd/Wdg_Bswmd.arxml   |   32 +-
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   32 +-
+ .../config_94/tresos/output/swcd/Wdg_Bswmd.arxml   |   32 +-
+ 84 files changed, 3987 insertions(+), 3987 deletions(-)
+
+commit 73546d8518b91adb6584baaacbf9b41d0566260b
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri May 22 11:01:39 2026 +0530
+
+    all: Cdd_I2c: Bswmd fixes
+    
+    Fixes: MCAL-38206, MCAL-38579
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 16 +++++++--------
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 16 +++++++--------
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  8 ++++----
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   |  8 ++++----
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml |  8 ++++----
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   | 14 ++++++-------
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   | 16 +++++++--------
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 20 +++++++++---------
+ .../am261/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   | 14 ++++++-------
+ .../am263/tresos/output/swcd/Cdd_I2c_Bswmd.arxml   | 16 +++++++--------
+ .../am263px/tresos/output/swcd/Cdd_I2c_Bswmd.arxml | 16 +++++++--------
+ .../soc/am261/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml      | 14 ++++++-------
+ .../soc/am263/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml      | 16 +++++++--------
+ .../soc/am263px/r5f0_0/swcd/Cdd_I2c_Bswmd.arxml    | 16 +++++++--------
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         | 20 +++++++++---------
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         | 24 +++++++++++-----------
+ .../generate_swcd/swcd/Cdd_I2c_Bswmd.arxml         | 24 +++++++++++-----------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 14 ++++++-------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 14 ++++++-------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 14 ++++++-------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 16 +++++++--------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 16 +++++++--------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 16 +++++++--------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 16 +++++++--------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 16 +++++++--------
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         |  8 ++++----
+ .../tresos/output/swcd/Cdd_I2c_Bswmd.arxml         | 16 +++++++--------
+ 35 files changed, 238 insertions(+), 238 deletions(-)
+
+commit c4da0b19096632310f9ac11290095eefb3615e3e
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Jun 4 12:33:08 2026 +0530
+
+    all: all: Updated cicd script to accept override json files
+    
+    Fixes: MCAL-38582
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/cicd/test_result_compare.py   | 57 +++++++++++++++++++++++--
+ mcal_misc/scripts/cicd/test_result_validator.sh | 20 ++++++++-
+ 2 files changed, 71 insertions(+), 6 deletions(-)
+
 commit 41564d5cd172186b71b9400565cf1ca4b47eecc7
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Wed Jun 3 20:11:07 2026 +0530
