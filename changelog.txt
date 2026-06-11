@@ -1,3 +1,20 @@
+commit 0a29cea9b4ac2c8c73d11762e9f5eba921a58b87
+Author: Akash <a-verma3@ti.com>
+Date:   Tue Jun 9 11:48:42 2026 +0530
+
+    am263/am261: Can: Enabled Coverage run for the platform.
+    
+    Fixes: MCAL-37950
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/can_test/build/makefile                  |   2 +-
+ .../can_test/testLib/canTestNegativeTestCase.c     |   8 +
+ mcal_test/makefile                                 |   4 +-
+ .../Can/soc/am263/r5f0_0/config_3/Can_Cfg.c        | 365 +--------------------
+ .../Can/soc/am263/r5f0_0/config_3/Can_Cfg.h        |  13 +-
+ 5 files changed, 25 insertions(+), 367 deletions(-)
+
 commit 899a084b17ccebbd0199b1c3406391078045a94a
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon Jun 8 21:21:34 2026 +0530
