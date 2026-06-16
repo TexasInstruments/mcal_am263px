@@ -1,3 +1,22 @@
+commit ad5dad9f21cb8b1002a8bc5fde613fa7d57450e2
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Jun 11 12:45:12 2026 +0530
+
+    all: Eth: Adding coverage infra
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/eth_test/Makefile                        | 180 ++++++---------------
+ mcal_test/eth_test/build/makefile                  |  13 +-
+ mcal_test/eth_test/build/makefile_lib              |  16 ++
+ .../eth_test/testLib/ethTestCoverageTestCase.c     |   9 +-
+ mcal_test/ut_config/Eth/inc.mk                     |   3 +
+ .../Eth/soc/am261/r5f0_0/config_15/Port_Cfg.h      |   2 +
+ mcal_test/ut_config/Eth/srcs.mk                    |   4 +
+ 7 files changed, 86 insertions(+), 141 deletions(-)
+
 commit 81db5a6054d63b3c110253943ebee591ead3369b
 Author: Akash <a-verma3@ti.com>
 Date:   Thu Jun 11 19:27:20 2026 +0530
