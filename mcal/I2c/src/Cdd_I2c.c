@@ -341,7 +341,7 @@ Cdd_I2c_SetupEBDynamic(Cdd_I2c_ChannelType chId, Cdd_I2c_AddressType deviceAddre
 }
 
 /* Design: MCAL-13626, MCAL-13663, MCAL-13664, MCAL-13665, MCAL-13666, MCAL-13667, MCAL-13668, MCAL-13669, MCAL-13670,
- * MCAL-13671, MCAL-13691 */
+ * MCAL-13671, MCAL-13691, MCAL-14885 */
 FUNC(Std_ReturnType, CDD_I2C_CODE) Cdd_I2c_AsyncTransmit(Cdd_I2c_SequenceType sequenceId)
 {
     Std_ReturnType retVal = E_OK;

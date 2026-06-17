@@ -283,6 +283,7 @@ typedef const uint8* Cdd_I2c_DataConstPtrType;
 /** \brief Specifies the identification (ID) for a CDD_I2C Hardware unit */
 typedef uint8 Cdd_I2c_HwUnitType;
 
+/* Design: MCAL-14967 */
 /** \brief This is the type for a sequence identifier */
 typedef uint8 Cdd_I2c_SequenceType;
 
@@ -319,6 +320,7 @@ typedef enum
     CDD_I2C_BUSY
 } Cdd_I2c_ComponentStatusType;
 
+/* Design: MCAL-14886 */
 /**
  * \brief This is an enum containing the possible variants
  * of arbitration loss timeout handling
