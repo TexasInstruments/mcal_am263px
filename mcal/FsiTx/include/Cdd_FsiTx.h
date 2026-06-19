@@ -164,6 +164,8 @@ extern "C" {
 #define CDD_FSI_TX_DEINIT_SID 0x07U
 /** \brief API Service ID for reset driver API */
 #define CDD_FSI_TX_RESET_SID 0x08U
+/** \brief API Service ID for register readback API */
+#define CDD_FSI_TX_REGISTER_READBACK_SID 0x09U
 /**   @} */
 /**
  *  \name CDD FsiTx Error Codes
@@ -210,6 +212,23 @@ extern "C" {
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
+
+#if (STD_ON == CDD_FSI_TX_REGISTER_READBACK_API)
+/** \brief FsiTx Register Readback type */
+typedef struct Cdd_FsiTx_RegisterReadbackTypeTag
+{
+    /** \brief TX_MASTER_CTRL register value */
+    uint16 txMasterCtrl;
+    /** \brief TX_CLK_CTRL register value */
+    uint16 txClkCtrl;
+    /** \brief TX_OPER_CTRL_LO_ALT1 register value */
+    uint16 txOperCtrlLo;
+    /** \brief TX_DMA_CTRL register value */
+    uint16 txDmaCtrl;
+    /** \brief TX_PING_CTRL_ALT1 register value */
+    uint16 txPingCtrl;
+} Cdd_FsiTx_RegisterReadbackType;
+#endif /* STD_ON == CDD_FSI_TX_REGISTER_READBACK_API */
 
 /* ========================================================================== */
 /*                          Function Declarations                             */
@@ -382,6 +401,26 @@ FUNC(void, CDD_FSITX_CODE) Cdd_FsiTx_MainFunction(void);
 FUNC(void, CDD_FSITX_CODE)
 Cdd_FsiTx_Reset(Cdd_FsiTx_HWUnitType HwUnitId, VAR(Cdd_FsiTx_ResetSubModuleType, AUTOMATIC) ResetModule);
 #endif /* #if (STD_ON == CDD_FSI_TX_RESET_API) */
+
+#if (STD_ON == CDD_FSI_TX_REGISTER_READBACK_API)
+/** \brief Reads back key hardware registers for functional safety verification.
+ *
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Reentrant
+ *
+ * \param[in]  HwUnitId   Hardware unit ID. Must be less than CDD_FSI_TX_HW_UNIT_CNT.
+ * \param[out] RegRbPtr   Pointer to register readback structure to populate.
+ * \return Std_ReturnType
+ * \retval E_OK     Register readback successful.
+ * \retval E_NOT_OK Parameter error detected.
+ *
+ *****************************************************************************/
+FUNC(Std_ReturnType, CDD_FSITX_CODE)
+Cdd_FsiTx_RegisterReadback(Cdd_FsiTx_HWUnitType HwUnitId,
+                           P2VAR(Cdd_FsiTx_RegisterReadbackType, AUTOMATIC, CDD_FSI_TX_APPL_DATA) RegRbPtr);
+#endif /* STD_ON == CDD_FSI_TX_REGISTER_READBACK_API */
 
 #ifdef __cplusplus
 }

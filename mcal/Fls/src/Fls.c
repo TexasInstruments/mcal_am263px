@@ -1291,7 +1291,7 @@ Fls_RegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) R
     if (retVal == E_OK)
 #endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
     {
-        Fls_Qspi_RegisterReadback(RegRbPtr);
+        Fls_hwRegisterReadback(RegRbPtr);
     }
     return (retVal);
 }

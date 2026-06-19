@@ -173,7 +173,8 @@ extern "C" {
 /** \brief Data Frame Reception Interrupt Event */
 #define CDD_FSI_RX_DATA_RECEIVED_INTERRUPT            (STD_ON)
 
-
+/** \brief Enable/Disable Cdd_FsiRx RegisterReadback API */
+#define CDD_FSI_RX_REGISTER_READBACK_API       (STD_ON)
 
 /* @} */
 /** \brief Maximum CDD FSI RX channels Configured. */

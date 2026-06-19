@@ -1802,6 +1802,14 @@ Std_ReturnType Fls_norCompare(uint32 actualChunkSize)
     return retVal;
 }
 
+#if (STD_ON == FLS_REGISTER_READBACK_API)
+void Fls_hwRegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) RegRbPtr)
+{
+    (void)memset(RegRbPtr, 0, sizeof(Fls_RegisterReadbackType));
+    RegRbPtr->reg = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_MODULE_ID_REG);
+}
+#endif
+
 #define FLS_STOP_SEC_CODE
 #include "Fls_MemMap.h"
 

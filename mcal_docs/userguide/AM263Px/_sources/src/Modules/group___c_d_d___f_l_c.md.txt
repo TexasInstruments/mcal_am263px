@@ -14,6 +14,7 @@ title: OptiFlash FLC (Fast Local Copy) API
 | -------------- | -------------- |
 | **[Cdd_Flc_RegionConfigType](../Classes/struct_cdd___flc___region_config_type.md)** | FLC Region Config type.  |
 | **[Cdd_Flc_StatusType](../Classes/struct_cdd___flc___status_type.md)** | FLC Status.  |
+| **[Cdd_Flc_RegisterReadbackType](../Classes/struct_cdd___flc___register_readback_type.md)** | FLC Register Readback type.  |
 
 
 
@@ -42,6 +43,7 @@ title: OptiFlash FLC (Fast Local Copy) API
 | CDD_FLC_SID_DISABLE_REGION   | Cdd_Flc_DisableRegion() API Service ID.  |
 | CDD_FLC_SID_GET_STATUS   | Cdd_Flc_GetStatus() API Service ID.  |
 | CDD_FLC_SID_CLEAR_ALL_STATUS   | Cdd_Flc_ClearAllStatus() API Service ID.  |
+| CDD_FLC_SID_REGISTER_READBACK   | Cdd_Flc_RegisterReadback() API Service ID.  |
 | CDD_FLC_ADDR_ALIGNMENT   | Source and destination addresses should be aligned to this.  |
 | CDD_FLC_ADDR_ALIGNMENT_MSK   | Source and destination address alignment mask.  |
 
@@ -56,6 +58,7 @@ title: OptiFlash FLC (Fast Local Copy) API
 | void | **[Cdd_Flc_DisableRegion](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_disableregion)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegionId](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_regionid) RegionId)| Service to disable the FLC region.  |
 | void | **[Cdd_Flc_GetStatus](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_getstatus)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_StatusType](../Classes/struct_cdd___flc___status_type.md) * StatusPtr)| Service to get the status of the FLC.  |
 | void | **[Cdd_Flc_ClearAllStatus](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_clearallstatus)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId)| Service to clear all status of the FLC.  |
+| Std_ReturnType | **[Cdd_Flc_RegisterReadback](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_registerreadback)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegisterReadbackType](../Classes/struct_cdd___flc___register_readback_type.md) * RegRbPtr)| Reads back key hardware registers for functional safety verification.  |
 
 
 
@@ -211,6 +214,29 @@ Service to clear all status of the FLC.
   
 * **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
 
+
+### function Cdd_Flc_RegisterReadback
+
+```
+Std_ReturnType Cdd_Flc_RegisterReadback(
+    Cdd_Flc_HwUnitType HwUnitId,
+    Cdd_Flc_RegisterReadbackType * RegRbPtr
+)
+```
+
+
+**Brief**: 
+Reads back key hardware registers for functional safety verification. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+  
+* **RegRbPtr** Pointer to the register readback structure to populate
+
+
+**Return**: E_OK if successful, E_NOT_OK if a parameter error was detected 
 
 
 

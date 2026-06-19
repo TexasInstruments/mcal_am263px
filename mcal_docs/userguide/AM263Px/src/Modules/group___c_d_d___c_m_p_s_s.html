@@ -109,6 +109,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configfilterlow">5.3.3.35. function Cdd_Cmpss_ConfigFilterLow</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configlatchonpwmsync">5.3.3.36. function Cdd_Cmpss_ConfigLatchOnPWMSYNC</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configramp">5.3.3.37. function Cdd_Cmpss_ConfigRamp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-registerreadback">5.3.3.38. function Cdd_Cmpss_RegisterReadback</a></li>
 </ul>
 </li>
 </ul>
@@ -172,7 +173,10 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___cmpss___ramp_config_type.html"><span class="std std-doc">Cdd_Cmpss_RampConfigType</span></a></strong></p></td>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___cmpss___register_readback_type.html"><span class="std std-doc">Cdd_Cmpss_RegisterReadbackType</span></a></strong></p></td>
+<td><p>CMPSS Register Readback type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___cmpss___ramp_config_type.html"><span class="std std-doc">Cdd_Cmpss_RampConfigType</span></a></strong></p></td>
 <td><p>CMPSS Ramp Config type.</p></td>
 </tr>
 </tbody>
@@ -334,76 +338,79 @@
 <tr class="row-even"><td><p>CDD_CMPSS_SID_CONFIG_RAMP</p></td>
 <td><p>Cdd_Cmpss_ConfigRamp() API Service ID.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_INSRC_DAC</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_SID_REGISTERREADBACK</p></td>
+<td><p>Cdd_Cmpss_RegisterReadback() API Service ID.</p></td>
+</tr>
+<tr class="row-even"><td><p>CDD_CMPSS_INSRC_DAC</p></td>
 <td><p>Input driven by internal DAC.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_INSRC_PIN</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_INSRC_PIN</p></td>
 <td><p>Input driven by external ‘INL’ pin</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_INSRC_PIN_INL</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_INSRC_PIN_INL</p></td>
 <td><p>Input driven by external ‘INL’ pin.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_INSRC_PIN_INH</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_INSRC_PIN_INH</p></td>
 <td><p>Input driven by external ‘INH’ pin.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_INV_INVERTED</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_INV_INVERTED</p></td>
 <td><p>Comparator output is inverted.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_OR_ASYNC_OUT_W_FILT</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_OR_ASYNC_OUT_W_FILT</p></td>
 <td><p>Asynch comparator output feeds into OR with latched digital filter output.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_TRIPOUT_ASYNC_COMP</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_TRIPOUT_ASYNC_COMP</p></td>
 <td><p>Asynchronous comparator output drives CTRIPOUT.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_TRIPOUT_SYNC_COMP</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_TRIPOUT_SYNC_COMP</p></td>
 <td><p>Synchronous comparator output drives CTRIPOUT.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_TRIPOUT_FILTER</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_TRIPOUT_FILTER</p></td>
 <td><p>Filter output drives CTRIPOUT.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_TRIPOUT_LATCH</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_TRIPOUT_LATCH</p></td>
 <td><p>Latched filter output drives CTRIPOUT.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_TRIP_ASYNC_COMP</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_TRIP_ASYNC_COMP</p></td>
 <td><p>Asynchronous comparator output drives CTRIP.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_TRIP_SYNC_COMP</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_TRIP_SYNC_COMP</p></td>
 <td><p>Synchronous comparator output drives CTRIP.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_TRIP_FILTER</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_TRIP_FILTER</p></td>
 <td><p>Filter output drives CTRIP.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_TRIP_LATCH</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_TRIP_LATCH</p></td>
 <td><p>Latched filter output drives CTRIP.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_STS_HI_FILTOUT</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_STS_HI_FILTOUT</p></td>
 <td><p>High digital filter output.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_STS_HI_LATCHFILTOUT</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_STS_HI_LATCHFILTOUT</p></td>
 <td><p>Latched value of high digital filter output.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_STS_LO_FILTOUT</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_STS_LO_FILTOUT</p></td>
 <td><p>Low digital filter output.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_STS_LO_LATCHFILTOUT</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_STS_LO_LATCHFILTOUT</p></td>
 <td><p>Latched value of low digital filter output.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_DACVAL_SYSCLK</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_DACVAL_SYSCLK</p></td>
 <td><p>DAC value updated from SYSCLK.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_DACVAL_PWMSYNC</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_DACVAL_PWMSYNC</p></td>
 <td><p>DAC value updated from PWMSYNC.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_DACREF_VDDA</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_DACREF_VDDA</p></td>
 <td><p>VDDA is the voltage reference.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_DACREF_VDAC</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_DACREF_VDAC</p></td>
 <td><p>VDAC is the voltage reference.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_CMPSS_DACSRC_SHDW</p></td>
+<tr class="row-even"><td><p>CDD_CMPSS_DACSRC_SHDW</p></td>
 <td><p>DAC value updated from shadow register.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_CMPSS_DACSRC_RAMP</p></td>
+<tr class="row-odd"><td><p>CDD_CMPSS_DACSRC_RAMP</p></td>
 <td><p>DAC value is updated from the ramp register.</p></td>
 </tr>
 </tbody>
@@ -566,6 +573,10 @@
 <tr class="row-even"><td><p>void</p></td>
 <td><p><strong><a class="reference internal" href="#function-cdd-cmpss-configramp"><span class="std std-ref">Cdd_Cmpss_ConfigRamp</span></a></strong>(<a class="reference internal" href="group___c_d_d___c_m_p_s_s___c_f_g.html#enum-cdd-cmpss-hwunittype"><span class="std std-ref">Cdd_Cmpss_HwUnitType</span></a> HwUnitId, const <a class="reference internal" href="../Classes/struct_cdd___cmpss___ramp_config_type.html"><span class="std std-doc">Cdd_Cmpss_RampConfigType</span></a> * RampConfigPtr)</p></td>
 <td><p>Configures the comparator subsystem’s ramp generator.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-cmpss-registerreadback"><span class="std std-ref">Cdd_Cmpss_RegisterReadback</span></a></strong>(<a class="reference internal" href="group___c_d_d___c_m_p_s_s___c_f_g.html#enum-cdd-cmpss-hwunittype"><span class="std std-ref">Cdd_Cmpss_HwUnitType</span></a> HwUnitId, <a class="reference internal" href="../Classes/struct_cdd___cmpss___register_readback_type.html"><span class="std std-doc">Cdd_Cmpss_RegisterReadbackType</span></a> * RegRbPtr)</p></td>
+<td><p>Reads back key hardware registers for functional safety verification.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1265,6 +1276,23 @@ Configures the comparator subsystem’s ramp generator.</p>
 <li><p><strong>HwUnitId</strong> HW ID. This param should be less than CDD_CMPSS_HW_UNIT_MAX</p></li>
 <li><p><strong>RampConfigPtr</strong> Pointer to the ramp configuration parameter. This should not be NULL.</p></li>
 </ul>
+</section>
+<section id="function-cdd-cmpss-registerreadback">
+<h3><span class="section-number">5.3.3.38. </span>function Cdd_Cmpss_RegisterReadback<a class="headerlink" href="#function-cdd-cmpss-registerreadback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Cmpss_RegisterReadback</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Cmpss_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Reads back key hardware registers for functional safety verification.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>HwUnitId</strong> HW ID. This param should be less than CDD_CMPSS_HW_UNIT_MAX</p></li>
+<li><p><strong>RegRbPtr</strong> Pointer to the register readback structure to populate</p></li>
+</ul>
+<p><strong>Return</strong>: E_OK if successful, E_NOT_OK if a parameter error was detected</p>
 </section>
 </section>
 </section>

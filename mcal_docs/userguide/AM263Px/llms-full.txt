@@ -6017,6 +6017,31 @@ orphan: true
 ---
 
 ---
+title: Cdd_Cmpss_RegisterReadbackType
+summary: CMPSS Register Readback type. 
+
+---
+
+# Cdd_Cmpss_RegisterReadbackType
+
+CMPSS Register Readback type. 
+
+`#include <Cdd_Cmpss.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint16 | compctl |  COMPCTL register value.  |
+|  uint16 | compdacctl |  COMPDACCTL register value.  |
+
+
+
+---
+orphan: true
+---
+
+---
 title: Cdd_Dma_ChannelConfigType
 
 ---
@@ -6767,6 +6792,30 @@ FLC Region Config type.
 |  uint32 | srcStartAddr |  Source start address. Data at this address is copied. This address should be aligned to 4KB boundary.  |
 |  uint32 | srcEndAddr |  Source end address, upto this address data is copied. This address should be aligned to 4KB boundary.  |
 |  uint32 | destStartAddr |  Destination start address, this address is also written. This address should be aligned to 4KB boundary.  |
+
+
+
+---
+orphan: true
+---
+
+---
+title: Cdd_Flc_RegisterReadbackType
+summary: FLC Register Readback type. 
+
+---
+
+# Cdd_Flc_RegisterReadbackType
+
+FLC Register Readback type. 
+
+`#include <Cdd_Flc.h>`
+
+## Structure Members
+
+|  Member Type   | Member name    | Brief |
+| -------------- | -------------- | ----- |
+|  uint32 | modVer |  MOD_VER register value.  |
 
 
 
@@ -7794,7 +7843,7 @@ Register readback type.
 
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
-|  uint32 | qspireg1 |  QSPI register.  |
+|  uint32 | reg |  Controller (QSPI/OSPI) PID/Module-ID register.  |
 
 
 
@@ -14519,7 +14568,7 @@ Will be updated in future release
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| cdd_cmpss   | 2054    | 0    | 0    |
+| cdd_cmpss   | 2120    | 0    | 0    |
  
 ### DIO
 
@@ -14570,25 +14619,25 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| cdd_flc   | 494    | 0    | 0    |
+| cdd_flc   | 556    | 0    | 0    |
  
 ### FLS
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| fls   | 12574    | 482    | 8240    |
+| fls   | 12652    | 482    | 8240    |
  
 ### FSIRX
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| fsirx   | 1628    | 3    | 202    |
+| fsirx   | 1704    | 3    | 202    |
  
 ### FSITX
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| fsitx   | 2142    | 10    | 180    |
+| fsitx   | 2212    | 10    | 180    |
  
 ### GPT
 
@@ -15718,6 +15767,19 @@ General configuration (parameters) of the Cdd Fsi Rx Driver software module.
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | true |
 
+###### CddFsiRxEnableRegisterReadbackApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddFsiRxEnableRegisterReadbackApi |
+| **Description** | Switch to indicate that the CddFsiRx_RegisterReadBack is supported |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
+
 ###### CddFsiRxMainApi
 
 | Item ||
@@ -16622,6 +16684,19 @@ General configuration (parameters) of the Cdd Fsi Tx Driver software module.
 | Post-Build-Time | VARIANT-POST-BUILD |
 | Pre-Compile-Time | VARIANT-PRE-COMPILE |
 | **Default-value** | false |
+
+###### CddFsiTxEnableRegisterReadbackApi
+
+| Item ||
+|--------|---------------|
+| **Name** | CddFsiTxEnableRegisterReadbackApi |
+| **Description** | Switch to indicate that the CddFsiTx_RegisterReadBack is supported |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
 
 ###### CddFsiTxDevErrorDetectApi
 
@@ -27365,6 +27440,19 @@ Container for general parameters of the flash driver. These parameters are alway
 | **Default-value** | 0 |
 | **Max-value** | 16 |
 | **Min-value** | 0 |
+
+###### FlsEnableRegisterReadbackApi
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsEnableRegisterReadbackApi |
+| **Description** | Switch to indicate that the Fls_RegisterReadBack is supported |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | true |
 
 ###### FlsExternalFlashSelect
 
@@ -40312,6 +40400,7 @@ title: CMPSS API
 ## Structures
 |   Name         | Brief          |
 | -------------- | -------------- |
+| **[Cdd_Cmpss_RegisterReadbackType](../Classes/struct_cdd___cmpss___register_readback_type.md)** | CMPSS Register Readback type.  |
 | **[Cdd_Cmpss_RampConfigType](../Classes/struct_cdd___cmpss___ramp_config_type.md)** | CMPSS Ramp Config type.  |
 
 ## Defines
@@ -40367,6 +40456,7 @@ title: CMPSS API
 | CDD_CMPSS_SID_CONFIG_FILTER_LOW   | Cdd_Cmpss_ConfigFilterLow() API Service ID.  |
 | CDD_CMPSS_SID_CONFIG_LATCH_ON_PWM_SYNC   | Cdd_Cmpss_ConfigLatchOnPWMSYNC() API Service ID.  |
 | CDD_CMPSS_SID_CONFIG_RAMP   | Cdd_Cmpss_ConfigRamp() API Service ID.  |
+| CDD_CMPSS_SID_REGISTERREADBACK   | Cdd_Cmpss_RegisterReadback() API Service ID.  |
 | CDD_CMPSS_INSRC_DAC   | Input driven by internal DAC.  |
 | CDD_CMPSS_INSRC_PIN   | Input driven by external 'INL' pin  |
 | CDD_CMPSS_INSRC_PIN_INL   | Input driven by external 'INL' pin.  |
@@ -40433,6 +40523,7 @@ title: CMPSS API
 | void | **[Cdd_Cmpss_ConfigFilterLow](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_configfilterlow)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, uint16 SamplePrescale, uint16 SampleWindow, uint16 Threshold)| Configures the digital filter of the low comparator.  |
 | void | **[Cdd_Cmpss_ConfigLatchOnPWMSYNC](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_configlatchonpwmsync)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, boolean HighEnable, boolean LowEnable)| Configures whether or not the digital filter latches are reset by PWMSYNC.  |
 | void | **[Cdd_Cmpss_ConfigRamp](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_configramp)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, const [Cdd_Cmpss_RampConfigType](../Classes/struct_cdd___cmpss___ramp_config_type.md) * RampConfigPtr)| Configures the comparator subsystem's ramp generator.  |
+| Std_ReturnType | **[Cdd_Cmpss_RegisterReadback](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_registerreadback)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, [Cdd_Cmpss_RegisterReadbackType](../Classes/struct_cdd___cmpss___register_readback_type.md) * RegRbPtr)| Reads back key hardware registers for functional safety verification.  |
 
 ### function Cdd_Cmpss_GetVersionInfo
 
@@ -41285,6 +41376,27 @@ To indicate whether the ramp generator should reset with the value from the ramp
   
 * **RampConfigPtr** Pointer to the ramp configuration parameter. This should not be NULL.
 
+### function Cdd_Cmpss_RegisterReadback
+
+```
+Std_ReturnType Cdd_Cmpss_RegisterReadback(
+    Cdd_Cmpss_HwUnitType HwUnitId,
+    Cdd_Cmpss_RegisterReadbackType * RegRbPtr
+)
+```
+
+**Brief**: 
+Reads back key hardware registers for functional safety verification. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_CMPSS_HW_UNIT_MAX 
+  
+* **RegRbPtr** Pointer to the register readback structure to populate
+
+**Return**: E_OK if successful, E_NOT_OK if a parameter error was detected 
+
 
 
 ---
@@ -41339,6 +41451,7 @@ Specifies the HW identification (ID) for a CMPSS unit.
 | CDD_CMPSS_CFG_PATCH_VERSION   | CDD CMPSS configuration Patch Version.  |
 | CDD_CMPSS_DEV_ERROR_DETECT   | Enable/Disable CDD CMPSS dev detect error.  |
 | CDD_CMPSS_VERSION_INFO_API   | Version info Api macro.  |
+| CDD_CMPSS_REGISTER_READBACK_API   | Enable/disable CMPSS register read back API.  |
 
 ## Detailed Description
 
@@ -41358,6 +41471,7 @@ title: OptiFlash FLC (Fast Local Copy) API
 | -------------- | -------------- |
 | **[Cdd_Flc_RegionConfigType](../Classes/struct_cdd___flc___region_config_type.md)** | FLC Region Config type.  |
 | **[Cdd_Flc_StatusType](../Classes/struct_cdd___flc___status_type.md)** | FLC Status.  |
+| **[Cdd_Flc_RegisterReadbackType](../Classes/struct_cdd___flc___register_readback_type.md)** | FLC Register Readback type.  |
 
 ## Defines
 
@@ -41383,6 +41497,7 @@ title: OptiFlash FLC (Fast Local Copy) API
 | CDD_FLC_SID_DISABLE_REGION   | Cdd_Flc_DisableRegion() API Service ID.  |
 | CDD_FLC_SID_GET_STATUS   | Cdd_Flc_GetStatus() API Service ID.  |
 | CDD_FLC_SID_CLEAR_ALL_STATUS   | Cdd_Flc_ClearAllStatus() API Service ID.  |
+| CDD_FLC_SID_REGISTER_READBACK   | Cdd_Flc_RegisterReadback() API Service ID.  |
 | CDD_FLC_ADDR_ALIGNMENT   | Source and destination addresses should be aligned to this.  |
 | CDD_FLC_ADDR_ALIGNMENT_MSK   | Source and destination address alignment mask.  |
 
@@ -41397,6 +41512,7 @@ title: OptiFlash FLC (Fast Local Copy) API
 | void | **[Cdd_Flc_DisableRegion](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_disableregion)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegionId](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_regionid) RegionId)| Service to disable the FLC region.  |
 | void | **[Cdd_Flc_GetStatus](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_getstatus)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_StatusType](../Classes/struct_cdd___flc___status_type.md) * StatusPtr)| Service to get the status of the FLC.  |
 | void | **[Cdd_Flc_ClearAllStatus](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_clearallstatus)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId)| Service to clear all status of the FLC.  |
+| Std_ReturnType | **[Cdd_Flc_RegisterReadback](../Modules/group___c_d_d___f_l_c.md#function-cdd_flc_registerreadback)**([Cdd_Flc_HwUnitType](../Modules/group___c_d_d___f_l_c___c_f_g.md#enum-cdd_flc_hwunittype) HwUnitId, [Cdd_Flc_RegisterReadbackType](../Classes/struct_cdd___flc___register_readback_type.md) * RegRbPtr)| Reads back key hardware registers for functional safety verification.  |
 
 ### function Cdd_Flc_GetVersionInfo
 
@@ -41537,6 +41653,27 @@ Service to clear all status of the FLC.
   
 * **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
 
+### function Cdd_Flc_RegisterReadback
+
+```
+Std_ReturnType Cdd_Flc_RegisterReadback(
+    Cdd_Flc_HwUnitType HwUnitId,
+    Cdd_Flc_RegisterReadbackType * RegRbPtr
+)
+```
+
+**Brief**: 
+Reads back key hardware registers for functional safety verification. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX 
+  
+* **RegRbPtr** Pointer to the register readback structure to populate
+
+**Return**: E_OK if successful, E_NOT_OK if a parameter error was detected 
+
 
 
 ---
@@ -41588,6 +41725,7 @@ FLC Region ID.
 | CDD_FLC_CFG_PATCH_VERSION   | CDD FLC configuration Patch Version.  |
 | CDD_FLC_DEV_ERROR_DETECT   | Enable/Disable CDD FLC dev detect error.  |
 | CDD_FLC_VERSION_INFO_API   | Version info Api macro.  |
+| CDD_FLC_REGISTER_READBACK_API   | Enable/disable FLC register read back API.  |
 
 ## Detailed Description
 
@@ -41623,6 +41761,7 @@ title: FsiRx API GUIDE Header file
 | CDD_FSI_RX_RESET_SID   | API Service ID for reset driver API.  |
 | CDD_FSI_RX_SETUP_BUFFER_SID   | API Service ID for Buffer Setup API.  |
 | CDD_FSI_RX_DMA_DATA_RECEIVE_SID   | API Service ID for Cdd_FsiRx_DmaDataReceive API.  |
+| CDD_FSI_RX_REGISTER_READBACK_SID   | API Service ID for register readback API.  |
 | CDD_FSI_RX_E_UNINIT   | Error code indicating the FsiRx is uninitialized.  |
 | CDD_FSI_RX_E_INVALID_EVENT   | Error code indicating an invalid event.  |
 | CDD_FSI_RX_E_PARAM_POINTER   | Error code indicating invalid parameter pointer.  |
@@ -41919,6 +42058,7 @@ title: FsiTx API GUIDE Header file
 | CDD_FSI_TX_MAIN_FUNCTION_SID   | API Service ID for Tx mainfunction API.  |
 | CDD_FSI_TX_DEINIT_SID   | API Service ID deinit API.  |
 | CDD_FSI_TX_RESET_SID   | API Service ID for reset driver API.  |
+| CDD_FSI_TX_REGISTER_READBACK_SID   | API Service ID for register readback API.  |
 | CDD_FSI_TX_E_UNINIT   | Error code indicating the FsiTx is uninitialized.  |
 | CDD_FSI_TX_E_INVALID_EVENT   | Error code indicating an invalid event.  |
 | CDD_FSI_TX_E_PARAM_POINTER   | Error code indicating invalid parameter pointer.  |

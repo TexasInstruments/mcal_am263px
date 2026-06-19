@@ -139,15 +139,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#cddfsirxunderruninterruptevent">4.6.9.26. CddFsiRxUnderRunInterruptEvent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cddfsirxpingframereceivedinterruptevent">4.6.9.27. CddFsiRxPingFrameReceivedInterruptEvent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cddfsirxdataframereceivedinterruptevent">4.6.9.28. CddFsiRxDataFrameReceivedInterruptEvent</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxmainapi">4.6.9.29. CddFsiRxMainApi</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxresetdriver">4.6.9.30. CddFsiRxResetDriver</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxgetversioninfoapi">4.6.9.31. CddFsiRxGetVersionInfoApi</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxdmaenable">4.6.9.32. CddFsiRxDMAEnable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxmultilaneenable">4.6.9.33. CddFsiRxMultiLaneEnable</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxdefaultoscounterid">4.6.9.34. CddFsiRxDefaultOSCounterId</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxoscounterref">4.6.9.35. CddFsiRxOsCounterRef</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cddfsirxdemeventparameterrefs">4.6.9.36. CddFsiRxDemEventParameterRefs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#symbolic-names-deviations">4.6.9.37. Symbolic Names deviations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxenableregisterreadbackapi">4.6.9.29. CddFsiRxEnableRegisterReadbackApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxmainapi">4.6.9.30. CddFsiRxMainApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxresetdriver">4.6.9.31. CddFsiRxResetDriver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxgetversioninfoapi">4.6.9.32. CddFsiRxGetVersionInfoApi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxdmaenable">4.6.9.33. CddFsiRxDMAEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxmultilaneenable">4.6.9.34. CddFsiRxMultiLaneEnable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxdefaultoscounterid">4.6.9.35. CddFsiRxDefaultOSCounterId</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxoscounterref">4.6.9.36. CddFsiRxOsCounterRef</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cddfsirxdemeventparameterrefs">4.6.9.37. CddFsiRxDemEventParameterRefs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#symbolic-names-deviations">4.6.9.38. Symbolic Names deviations</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">4.6.10. Examples</a><ul>
@@ -1897,8 +1898,44 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </tbody>
 </table>
 </section>
+<section id="cddfsirxenableregisterreadbackapi">
+<h3><span class="section-number">4.6.9.29. </span>CddFsiRxEnableRegisterReadbackApi<a class="headerlink" href="#cddfsirxenableregisterreadbackapi" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Item</p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Name</strong></p></td>
+<td><p>CddFsiRxEnableRegisterReadbackApi</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Description</strong></p></td>
+<td><p>Switch to indicate that the CddFsiRx_RegisterReadBack is supported</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Origin</strong></p></td>
+<td><p>Texas Instruments</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Post-Build-Variant-Value</strong></p></td>
+<td><p>false</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Value-Configuration-Class</strong></p></td>
+<td><p>–</p></td>
+</tr>
+<tr class="row-odd"><td><p>Post-Build-Time</p></td>
+<td><p>VARIANT-POST-BUILD</p></td>
+</tr>
+<tr class="row-even"><td><p>Pre-Compile-Time</p></td>
+<td><p>VARIANT-PRE-COMPILE</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Default-value</strong></p></td>
+<td><p>true</p></td>
+</tr>
+</tbody>
+</table>
+</section>
 <section id="cddfsirxmainapi">
-<h3><span class="section-number">4.6.9.29. </span>CddFsiRxMainApi<a class="headerlink" href="#cddfsirxmainapi" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.30. </span>CddFsiRxMainApi<a class="headerlink" href="#cddfsirxmainapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1934,7 +1971,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsirxresetdriver">
-<h3><span class="section-number">4.6.9.30. </span>CddFsiRxResetDriver<a class="headerlink" href="#cddfsirxresetdriver" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.31. </span>CddFsiRxResetDriver<a class="headerlink" href="#cddfsirxresetdriver" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -1970,7 +2007,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsirxgetversioninfoapi">
-<h3><span class="section-number">4.6.9.31. </span>CddFsiRxGetVersionInfoApi<a class="headerlink" href="#cddfsirxgetversioninfoapi" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.32. </span>CddFsiRxGetVersionInfoApi<a class="headerlink" href="#cddfsirxgetversioninfoapi" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2006,7 +2043,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsirxdmaenable">
-<h3><span class="section-number">4.6.9.32. </span>CddFsiRxDMAEnable<a class="headerlink" href="#cddfsirxdmaenable" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.33. </span>CddFsiRxDMAEnable<a class="headerlink" href="#cddfsirxdmaenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2042,7 +2079,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsirxmultilaneenable">
-<h3><span class="section-number">4.6.9.33. </span>CddFsiRxMultiLaneEnable<a class="headerlink" href="#cddfsirxmultilaneenable" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.34. </span>CddFsiRxMultiLaneEnable<a class="headerlink" href="#cddfsirxmultilaneenable" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2078,7 +2115,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsirxdefaultoscounterid">
-<h3><span class="section-number">4.6.9.34. </span>CddFsiRxDefaultOSCounterId<a class="headerlink" href="#cddfsirxdefaultoscounterid" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.35. </span>CddFsiRxDefaultOSCounterId<a class="headerlink" href="#cddfsirxdefaultoscounterid" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2120,7 +2157,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsirxoscounterref">
-<h3><span class="section-number">4.6.9.35. </span>CddFsiRxOsCounterRef<a class="headerlink" href="#cddfsirxoscounterref" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.36. </span>CddFsiRxOsCounterRef<a class="headerlink" href="#cddfsirxoscounterref" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2156,7 +2193,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </table>
 </section>
 <section id="cddfsirxdemeventparameterrefs">
-<h3><span class="section-number">4.6.9.36. </span>CddFsiRxDemEventParameterRefs<a class="headerlink" href="#cddfsirxdemeventparameterrefs" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.37. </span>CddFsiRxDemEventParameterRefs<a class="headerlink" href="#cddfsirxdemeventparameterrefs" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Item</p></th>
@@ -2207,7 +2244,7 @@ This Cdd_FsiRx_BufferNotifyType which is defined in CddFsiRx_Types.h file. This 
 </div>
 </section>
 <section id="symbolic-names-deviations">
-<h3><span class="section-number">4.6.9.37. </span>Symbolic Names deviations<a class="headerlink" href="#symbolic-names-deviations" title="Link to this heading"></a></h3>
+<h3><span class="section-number">4.6.9.38. </span>Symbolic Names deviations<a class="headerlink" href="#symbolic-names-deviations" title="Link to this heading"></a></h3>
 <p>The Symbolic names are generated for following parameters:</p>
 <p>1.<strong>CddFsiRxHwUnitId</strong>   : Symbolic name is generated as <strong>CddFsiRxConf_CddFsiRxHwUnit_&lt;CddFsiRxHwUnitId&gt;</strong></p>
 </section>

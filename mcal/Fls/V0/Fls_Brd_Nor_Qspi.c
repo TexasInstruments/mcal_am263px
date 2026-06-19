@@ -1778,10 +1778,10 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
 }
 
 #if (STD_ON == FLS_REGISTER_READBACK_API)
-void Fls_Qspi_RegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) RegRbPtr)
+void Fls_hwRegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) RegRbPtr)
 {
     (void)memset(RegRbPtr, 0, sizeof(Fls_RegisterReadbackType));
-    RegRbPtr->qspireg1 = HW_RD_REG32((FLS_BASE_ADDRESS & FLS_BASE_ADDRESS_REQ) + FLS_QSPI0_PID_REG);
+    RegRbPtr->reg = HW_RD_REG32((FLS_BASE_ADDRESS & FLS_BASE_ADDRESS_REQ) + FLS_QSPI0_PID_REG);
 }
 #endif
 

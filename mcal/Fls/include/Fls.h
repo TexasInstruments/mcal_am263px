@@ -498,8 +498,8 @@ typedef enum
 /** \brief Register readback type */
 typedef struct
 {
-    /** \brief QSPI register */
-    uint32 qspireg1;
+    /** \brief Controller (QSPI/OSPI) PID/Module-ID register */
+    uint32 reg;
 
 } Fls_RegisterReadbackType;
 #endif /* #if (STD_ON == FLS_REGISTER_READBACK_API) */

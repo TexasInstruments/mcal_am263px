@@ -162,6 +162,8 @@ extern "C" {
 #define CDD_FLC_SID_GET_STATUS ((uint8)0x05U)
 /** \brief Cdd_Flc_ClearAllStatus() API Service ID */
 #define CDD_FLC_SID_CLEAR_ALL_STATUS ((uint8)0x06U)
+/** \brief Cdd_Flc_RegisterReadback() API Service ID */
+#define CDD_FLC_SID_REGISTER_READBACK ((uint8)0x07U)
 /** @} */
 
 /** \brief Source and destination addresses should be aligned to this */
@@ -216,6 +218,21 @@ typedef struct Cdd_Flc_StatusTypeTag
      */
     uint32  rdError;
 } Cdd_Flc_StatusType;
+
+/* ========================================================================== */
+/*                         Structures and Enums                               */
+/* ========================================================================== */
+
+/**
+ * \brief FLC Register Readback type
+ */
+#if (STD_ON == CDD_FLC_REGISTER_READBACK_API)
+typedef struct Cdd_Flc_RegisterReadbackTypeTag
+{
+    /** \brief MOD_VER register value */
+    uint32 modVer;
+} Cdd_Flc_RegisterReadbackType;
+#endif /* STD_ON == CDD_FLC_REGISTER_READBACK_API */
 
 /* ========================================================================== */
 /*                          Function Declarations                             */
@@ -296,6 +313,20 @@ Cdd_Flc_GetStatus(VAR(Cdd_Flc_HwUnitType, AUTOMATIC) HwUnitId,
  */
 FUNC(void, CDD_FLC_CODE)
 Cdd_Flc_ClearAllStatus(VAR(Cdd_Flc_HwUnitType, AUTOMATIC) HwUnitId);
+
+#if (STD_ON == CDD_FLC_REGISTER_READBACK_API)
+/**
+ * \brief Reads back key hardware registers for functional safety verification.
+ *
+ * \param[in]  HwUnitId  HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX
+ * \param[out] RegRbPtr  Pointer to the register readback structure to populate
+ *
+ * \return E_OK if successful, E_NOT_OK if a parameter error was detected
+ */
+FUNC(Std_ReturnType, CDD_FLC_CODE)
+Cdd_Flc_RegisterReadback(VAR(Cdd_Flc_HwUnitType, AUTOMATIC) HwUnitId,
+                         P2VAR(Cdd_Flc_RegisterReadbackType, AUTOMATIC, CDD_FLC_DATA) RegRbPtr);
+#endif /* STD_ON == CDD_FLC_REGISTER_READBACK_API */
 
 #ifdef __cplusplus
 }

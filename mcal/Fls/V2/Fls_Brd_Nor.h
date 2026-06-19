@@ -235,6 +235,9 @@ void  Fls_ResetStateMachines(void);
 void  Fls_copyConfig(Fls_DriverObjType *drvObj, const Fls_ConfigType *cfgPtr);
 
 Std_ReturnType Fls_hwUnitInit(void);
+#if (STD_ON == FLS_REGISTER_READBACK_API)
+void Fls_hwRegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) RegRbPtr);
+#endif /*STD_ON == FLS_REGISTER_READBACK_API*/
 Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle);
 Std_ReturnType Nor_OspiSetAddressBytes(OSPI_Handle handle);
 Std_ReturnType Fls_OspiSet3ByteAddress(void);

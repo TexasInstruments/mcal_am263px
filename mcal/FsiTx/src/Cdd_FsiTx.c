@@ -470,5 +470,38 @@ Cdd_FsiTx_MainFunction(void)
 }
 #endif /*(STD_ON == CDD_FSI_TX_MAIN_FUNCTION_API)*/
 
+/* Design: MCAL-39725 */
+#if (STD_ON == CDD_FSI_TX_REGISTER_READBACK_API)
+FUNC(Std_ReturnType, CDD_FSITX_CODE)
+Cdd_FsiTx_RegisterReadback(Cdd_FsiTx_HWUnitType HwUnitId,
+                           P2VAR(Cdd_FsiTx_RegisterReadbackType, AUTOMATIC, CDD_FSI_TX_APPL_DATA) RegRbPtr)
+{
+    Std_ReturnType retVal = E_OK;
+
+#if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
+    if (HwUnitId >= Cdd_FsiTx_DrvObj.maxHwUnit)
+    {
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_REGISTER_READBACK_SID, CDD_FSI_TX_E_PARAM_VALUE);
+        retVal = E_NOT_OK;
+    }
+    else if (NULL_PTR == RegRbPtr)
+    {
+        (void)CddFsiTx_ReportDetError(CDD_FSI_TX_REGISTER_READBACK_SID, CDD_FSI_TX_E_PARAM_POINTER);
+        retVal = E_NOT_OK;
+    }
+    else
+#endif
+    {
+        uint32 baseAddr        = Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId].hwUnitCfg.baseAddr;
+        RegRbPtr->txMasterCtrl = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_MASTER_CTRL);
+        RegRbPtr->txClkCtrl    = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_CLK_CTRL);
+        RegRbPtr->txOperCtrlLo = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_OPER_CTRL_LO_ALT1);
+        RegRbPtr->txDmaCtrl    = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_DMA_CTRL);
+        RegRbPtr->txPingCtrl   = HW_RD_REG16(baseAddr + CSL_CDD_FSI_TX_CFG_TX_PING_CTRL_ALT1);
+    }
+    return retVal;
+}
+#endif /* STD_ON == CDD_FSI_TX_REGISTER_READBACK_API */
+
 #define CDD_FSITX_STOP_SEC_CODE
 #include "Cdd_FsiTx_MemMap.h"

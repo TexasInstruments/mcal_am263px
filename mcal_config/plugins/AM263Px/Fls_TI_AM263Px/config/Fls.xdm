@@ -2433,6 +2433,21 @@
                     </a:da>
 				  <a:da name="DEFAULT" value="0"/>
                   </v:var>
+                  <v:var name="FlsEnableRegisterReadbackApi" type="BOOLEAN">
+                    <a:a name="DESC"
+                         value="EN: Switch to indicate that the Fls_RegisterReadBack is supported"/>
+                    <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                         type="IMPLEMENTATIONCONFIGCLASS">
+                         <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                         <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                    </a:a>
+                    <a:a name="ORIGIN" value="Texas Instruments"/>
+                    <a:a name="SCOPE" value="LOCAL"/>
+                    <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                    <a:a name="UUID"
+                         value="ECUC:34bfc216-9d93-4694-90c5-39340e82c118"/>
+                    <a:da name="DEFAULT" value="true"/>
+                  </v:var>
               </v:ctr>
               <v:ctr name="FlsPublishedInformation" type="IDENTIFIABLE">
                 <a:a name="DESC"

@@ -175,6 +175,8 @@ extern "C" {
 /** \brief Enable/disable Tx Frame Done Interrupt Event  */
 #define CDD_FSI_TX_FRAME_DONE_INTERRUPT            (STD_ON)
 
+/** \brief Enable/Disable Cdd_FsiTx RegisterReadback API */
+#define CDD_FSI_TX_REGISTER_READBACK_API       (STD_ON)
 
 /** \brief Enable/disable Multilane Transmission */
 #define CDD_FSI_TX_MULTI_LANE_ENABLE           (STD_OFF)

@@ -80,6 +80,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-disableregion">5.4.3.5. function Cdd_Flc_DisableRegion</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-getstatus">5.4.3.6. function Cdd_Flc_GetStatus</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-clearallstatus">5.4.3.7. function Cdd_Flc_ClearAllStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-registerreadback">5.4.3.8. function Cdd_Flc_RegisterReadback</a></li>
 </ul>
 </li>
 </ul>
@@ -147,6 +148,9 @@
 </tr>
 <tr class="row-odd"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___flc___status_type.html"><span class="std std-doc">Cdd_Flc_StatusType</span></a></strong></p></td>
 <td><p>FLC Status.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong><a class="reference internal" href="../Classes/struct_cdd___flc___register_readback_type.html"><span class="std std-doc">Cdd_Flc_RegisterReadbackType</span></a></strong></p></td>
+<td><p>FLC Register Readback type.</p></td>
 </tr>
 </tbody>
 </table>
@@ -220,10 +224,13 @@
 <tr class="row-odd"><td><p>CDD_FLC_SID_CLEAR_ALL_STATUS</p></td>
 <td><p>Cdd_Flc_ClearAllStatus() API Service ID.</p></td>
 </tr>
-<tr class="row-even"><td><p>CDD_FLC_ADDR_ALIGNMENT</p></td>
+<tr class="row-even"><td><p>CDD_FLC_SID_REGISTER_READBACK</p></td>
+<td><p>Cdd_Flc_RegisterReadback() API Service ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p>CDD_FLC_ADDR_ALIGNMENT</p></td>
 <td><p>Source and destination addresses should be aligned to this.</p></td>
 </tr>
-<tr class="row-odd"><td><p>CDD_FLC_ADDR_ALIGNMENT_MSK</p></td>
+<tr class="row-even"><td><p>CDD_FLC_ADDR_ALIGNMENT_MSK</p></td>
 <td><p>Source and destination address alignment mask.</p></td>
 </tr>
 </tbody>
@@ -266,6 +273,10 @@
 <tr class="row-even"><td><p>void</p></td>
 <td><p><strong><a class="reference internal" href="#function-cdd-flc-clearallstatus"><span class="std std-ref">Cdd_Flc_ClearAllStatus</span></a></strong>(<a class="reference internal" href="group___c_d_d___f_l_c___c_f_g.html#enum-cdd-flc-hwunittype"><span class="std std-ref">Cdd_Flc_HwUnitType</span></a> HwUnitId)</p></td>
 <td><p>Service to clear all status of the FLC.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-cdd-flc-registerreadback"><span class="std std-ref">Cdd_Flc_RegisterReadback</span></a></strong>(<a class="reference internal" href="group___c_d_d___f_l_c___c_f_g.html#enum-cdd-flc-hwunittype"><span class="std std-ref">Cdd_Flc_HwUnitType</span></a> HwUnitId, <a class="reference internal" href="../Classes/struct_cdd___flc___register_readback_type.html"><span class="std std-doc">Cdd_Flc_RegisterReadbackType</span></a> * RegRbPtr)</p></td>
+<td><p>Reads back key hardware registers for functional safety verification.</p></td>
 </tr>
 </tbody>
 </table>
@@ -383,6 +394,23 @@ Service to clear all status of the FLC.</p>
 <ul class="simple">
 <li><p><strong>HwUnitId</strong> HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX</p></li>
 </ul>
+</section>
+<section id="function-cdd-flc-registerreadback">
+<h3><span class="section-number">5.4.3.8. </span>function Cdd_Flc_RegisterReadback<a class="headerlink" href="#function-cdd-flc-registerreadback" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Flc_RegisterReadback</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
+<span class="w">    </span><span class="n">Cdd_Flc_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Reads back key hardware registers for functional safety verification.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>HwUnitId</strong> HW ID. This param should be less than CDD_FLC_HW_UNIT_MAX</p></li>
+<li><p><strong>RegRbPtr</strong> Pointer to the register readback structure to populate</p></li>
+</ul>
+<p><strong>Return</strong>: E_OK if successful, E_NOT_OK if a parameter error was detected</p>
 </section>
 </section>
 </section>

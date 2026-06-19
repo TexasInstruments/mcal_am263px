@@ -206,7 +206,8 @@ extern "C" {
 /** \brief Data Frame Reception Interrupt Event */
 #define CDD_FSI_RX_DATA_RECEIVED_INTERRUPT           [!IF "as:modconf('Cdd_FsiRx')[1]/CddFsiRxGeneral/CddFsiRxDataFrameReceivedInterruptEvent  = 'true'"!] (STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
-
+/** \brief Enable/Disable Cdd_FsiRx RegisterReadback API */
+#define CDD_FSI_RX_REGISTER_READBACK_API       ([!IF "as:modconf('Cdd_FsiRx')[1]/CddFsiRxGeneral/CddFsiRxEnableRegisterReadbackApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
 
 /* @} */
 /** \brief Maximum CDD FSI RX channels Configured. */

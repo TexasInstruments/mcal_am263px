@@ -369,5 +369,42 @@ Cdd_FsiRx_DmaDataReceive(Cdd_FsiRx_HWUnitType HwUnitId)
     }
 }
 
+/* Design: MCAL-39724 */
+#if (STD_ON == CDD_FSI_RX_REGISTER_READBACK_API)
+FUNC(Std_ReturnType, CDD_FSIRX_CODE)
+Cdd_FsiRx_RegisterReadback(Cdd_FsiRx_HWUnitType HwUnitId,
+                           P2VAR(Cdd_FsiRx_RegisterReadbackType, AUTOMATIC, CDD_FSI_RX_APPL_DATA) RegRbPtr)
+{
+    Std_ReturnType retVal = E_OK;
+
+#if (STD_ON == CDD_FSI_RX_DEV_ERROR_DETECT)
+    if (HwUnitId >= Cdd_FsiRx_DrvObj.maxHwUnit)
+    {
+        CddFsiRx_ReportDetError(CDD_FSI_RX_REGISTER_READBACK_SID, CDD_FSI_RX_E_PARAM_VALUE);
+        retVal = E_NOT_OK;
+    }
+    else if (NULL_PTR == RegRbPtr)
+    {
+        CddFsiRx_ReportDetError(CDD_FSI_RX_REGISTER_READBACK_SID, CDD_FSI_RX_E_PARAM_POINTER);
+        retVal = E_NOT_OK;
+    }
+    else
+#endif
+    {
+        uint32 baseAddr = Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitId].hwUnitCfg.baseAddr;
+
+        RegRbPtr->rxMasterCtrl  = HW_RD_REG16(baseAddr + CSL_CDD_FSI_RX_CFG_RX_MASTER_CTRL_ALTB);
+        RegRbPtr->rxOperCtrl    = HW_RD_REG16(baseAddr + CSL_CDD_FSI_RX_CFG_RX_OPER_CTRL);
+        RegRbPtr->rxDmaCtrl     = HW_RD_REG16(baseAddr + CSL_CDD_FSI_RX_CFG_RX_DMA_CTRL);
+        RegRbPtr->rxFrameWdCtrl = HW_RD_REG16(baseAddr + CSL_CDD_FSI_RX_CFG_RX_FRAME_WD_CTRL);
+        RegRbPtr->rxPingWdCtrl  = HW_RD_REG16(baseAddr + CSL_CDD_FSI_RX_CFG_RX_PING_WD_CTRL);
+        RegRbPtr->rxInt1Ctrl    = HW_RD_REG16(baseAddr + CSL_CDD_FSI_RX_CFG_RX_INT1_CTRL_ALT1);
+        RegRbPtr->rxInt2Ctrl    = HW_RD_REG16(baseAddr + CSL_CDD_FSI_RX_CFG_RX_INT2_CTRL_ALT1);
+    }
+
+    return retVal;
+}
+#endif /* STD_ON == CDD_FSI_RX_REGISTER_READBACK_API */
+
 #define CDD_FSIRX_STOP_SEC_CODE
 #include "Cdd_FsiRx_MemMap.h"

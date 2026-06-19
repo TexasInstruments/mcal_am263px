@@ -1307,5 +1307,39 @@ static Std_ReturnType Cdd_Cmpss_ConfigRampParamCheck(Cdd_Cmpss_HwUnitType HwUnit
 }
 #endif
 
+/* Design: MCAL-39722 */
+#if (STD_ON == CDD_CMPSS_REGISTER_READBACK_API)
+FUNC(Std_ReturnType, CDD_CMPSS_CODE)
+Cdd_Cmpss_RegisterReadback(Cdd_Cmpss_HwUnitType HwUnitId,
+                           P2VAR(Cdd_Cmpss_RegisterReadbackType, AUTOMATIC, CDD_CMPSS_DATA) RegRbPtr)
+{
+    Std_ReturnType retVal = E_OK;
+
+#if (STD_ON == CDD_CMPSS_DEV_ERROR_DETECT)
+    if (HwUnitId >= CDD_CMPSS_MAX)
+    {
+        (void)Det_ReportError(CDD_CMPSS_MODULE_ID, CDD_CMPSS_INSTANCE_ID, CDD_CMPSS_SID_REGISTERREADBACK,
+                              CDD_CMPSS_E_ILLEGAL_HW_ID);
+        retVal = E_NOT_OK;
+    }
+    else if (NULL_PTR == RegRbPtr)
+    {
+        (void)Det_ReportError(CDD_CMPSS_MODULE_ID, CDD_CMPSS_INSTANCE_ID, CDD_CMPSS_SID_REGISTERREADBACK,
+                              CDD_CMPSS_E_PARAM_POINTER);
+        retVal = E_NOT_OK;
+    }
+    else
+#endif
+    {
+        uint32 baseAddr = CddCmpssBaseAddr[HwUnitId];
+
+        RegRbPtr->compctl    = HW_RD_REG16(baseAddr + CSL_CMPSSA_COMPCTL);
+        RegRbPtr->compdacctl = HW_RD_REG16(baseAddr + CSL_CMPSSA_COMPDACCTL);
+    }
+
+    return retVal;
+}
+#endif /* STD_ON == CDD_CMPSS_REGISTER_READBACK_API */
+
 #define CDD_CMPSS_STOP_SEC_CODE
 #include "Cdd_Cmpss_MemMap.h"

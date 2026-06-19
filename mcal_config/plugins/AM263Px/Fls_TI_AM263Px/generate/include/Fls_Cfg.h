@@ -192,6 +192,9 @@ typedef enum modes{
 /** \brief Max Write time in millisec*/
 #define FLS_MAX_WRITE_TIME                ([!"as:modconf('Fls')[1]/FlsPublishedInformation/FlsWriteTime"!])
 
+/** \brief Enable/Disable FLS RegisterReadback API */
+#define FLS_REGISTER_READBACK_API       ([!IF "as:modconf('Fls')[1]/FlsGeneral/FlsEnableRegisterReadbackApi"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!])
+
 /** \brief Number of Sectorlist configured */
 [!LOOP "as:modconf('Fls')[1]/FlsConfigSet"!][!//
 [!VAR "NumOfSectorCfg" = "0"!]

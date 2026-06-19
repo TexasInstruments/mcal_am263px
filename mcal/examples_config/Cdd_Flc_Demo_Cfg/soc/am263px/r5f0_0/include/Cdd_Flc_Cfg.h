@@ -109,6 +109,9 @@ extern "C" {
 /** \brief Version info Api macro */
 #define CDD_FLC_VERSION_INFO_API        (STD_ON)
 
+/** \brief Enable/disable FLC register read back API */
+#define CDD_FLC_REGISTER_READBACK_API        (STD_ON)
+
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */

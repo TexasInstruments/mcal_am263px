@@ -220,6 +220,8 @@ extern "C" {
 #define CDD_CMPSS_SID_CONFIG_LATCH_ON_PWM_SYNC ((uint8)35U)
 /** \brief Cdd_Cmpss_ConfigRamp() API Service ID */
 #define CDD_CMPSS_SID_CONFIG_RAMP ((uint8)36U)
+/** \brief Cdd_Cmpss_RegisterReadback() API Service ID */
+#define CDD_CMPSS_SID_REGISTERREADBACK ((uint8)37U)
 /** @} */
 
 /*
@@ -359,6 +361,17 @@ extern "C" {
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
+
+#if (STD_ON == CDD_CMPSS_REGISTER_READBACK_API)
+/** \brief CMPSS Register Readback type */
+typedef struct Cdd_Cmpss_RegisterReadbackTypeTag
+{
+    /** \brief COMPCTL register value */
+    uint16 compctl;
+    /** \brief COMPDACCTL register value */
+    uint16 compdacctl;
+} Cdd_Cmpss_RegisterReadbackType;
+#endif /* STD_ON == CDD_CMPSS_REGISTER_READBACK_API */
 
 /** \brief CMPSS Ramp Config type */
 typedef struct Cdd_Cmpss_RampConfigTypeTag
@@ -978,6 +991,20 @@ void Cdd_Cmpss_ConfigLatchOnPWMSYNC(Cdd_Cmpss_HwUnitType HwUnitId, boolean HighE
  * ramp generator from the latched value.
  */
 void Cdd_Cmpss_ConfigRamp(Cdd_Cmpss_HwUnitType HwUnitId, const Cdd_Cmpss_RampConfigType *RampConfigPtr);
+
+#if (STD_ON == CDD_CMPSS_REGISTER_READBACK_API)
+/**
+ * \brief Reads back key hardware registers for functional safety verification.
+ *
+ * \param[in]  HwUnitId  HW ID. This param should be less than CDD_CMPSS_HW_UNIT_MAX
+ * \param[out] RegRbPtr  Pointer to the register readback structure to populate
+ *
+ * \return E_OK if successful, E_NOT_OK if a parameter error was detected
+ */
+FUNC(Std_ReturnType, CDD_CMPSS_CODE)
+Cdd_Cmpss_RegisterReadback(Cdd_Cmpss_HwUnitType HwUnitId,
+                           P2VAR(Cdd_Cmpss_RegisterReadbackType, AUTOMATIC, CDD_CMPSS_DATA) RegRbPtr);
+#endif /* STD_ON == CDD_CMPSS_REGISTER_READBACK_API */
 
 #ifdef __cplusplus
 }

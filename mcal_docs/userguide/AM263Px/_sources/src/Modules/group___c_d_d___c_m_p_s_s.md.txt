@@ -12,6 +12,7 @@ title: CMPSS API
 ## Structures
 |   Name         | Brief          |
 | -------------- | -------------- |
+| **[Cdd_Cmpss_RegisterReadbackType](../Classes/struct_cdd___cmpss___register_readback_type.md)** | CMPSS Register Readback type.  |
 | **[Cdd_Cmpss_RampConfigType](../Classes/struct_cdd___cmpss___ramp_config_type.md)** | CMPSS Ramp Config type.  |
 
 
@@ -70,6 +71,7 @@ title: CMPSS API
 | CDD_CMPSS_SID_CONFIG_FILTER_LOW   | Cdd_Cmpss_ConfigFilterLow() API Service ID.  |
 | CDD_CMPSS_SID_CONFIG_LATCH_ON_PWM_SYNC   | Cdd_Cmpss_ConfigLatchOnPWMSYNC() API Service ID.  |
 | CDD_CMPSS_SID_CONFIG_RAMP   | Cdd_Cmpss_ConfigRamp() API Service ID.  |
+| CDD_CMPSS_SID_REGISTERREADBACK   | Cdd_Cmpss_RegisterReadback() API Service ID.  |
 | CDD_CMPSS_INSRC_DAC   | Input driven by internal DAC.  |
 | CDD_CMPSS_INSRC_PIN   | Input driven by external 'INL' pin  |
 | CDD_CMPSS_INSRC_PIN_INL   | Input driven by external 'INL' pin.  |
@@ -136,6 +138,7 @@ title: CMPSS API
 | void | **[Cdd_Cmpss_ConfigFilterLow](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_configfilterlow)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, uint16 SamplePrescale, uint16 SampleWindow, uint16 Threshold)| Configures the digital filter of the low comparator.  |
 | void | **[Cdd_Cmpss_ConfigLatchOnPWMSYNC](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_configlatchonpwmsync)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, boolean HighEnable, boolean LowEnable)| Configures whether or not the digital filter latches are reset by PWMSYNC.  |
 | void | **[Cdd_Cmpss_ConfigRamp](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_configramp)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, const [Cdd_Cmpss_RampConfigType](../Classes/struct_cdd___cmpss___ramp_config_type.md) * RampConfigPtr)| Configures the comparator subsystem's ramp generator.  |
+| Std_ReturnType | **[Cdd_Cmpss_RegisterReadback](../Modules/group___c_d_d___c_m_p_s_s.md#function-cdd_cmpss_registerreadback)**([Cdd_Cmpss_HwUnitType](../Modules/group___c_d_d___c_m_p_s_s___c_f_g.md#enum-cdd_cmpss_hwunittype) HwUnitId, [Cdd_Cmpss_RegisterReadbackType](../Classes/struct_cdd___cmpss___register_readback_type.md) * RegRbPtr)| Reads back key hardware registers for functional safety verification.  |
 
 
 
@@ -1129,6 +1132,29 @@ To indicate whether the ramp generator should reset with the value from the ramp
   
 * **RampConfigPtr** Pointer to the ramp configuration parameter. This should not be NULL.
 
+
+### function Cdd_Cmpss_RegisterReadback
+
+```
+Std_ReturnType Cdd_Cmpss_RegisterReadback(
+    Cdd_Cmpss_HwUnitType HwUnitId,
+    Cdd_Cmpss_RegisterReadbackType * RegRbPtr
+)
+```
+
+
+**Brief**: 
+Reads back key hardware registers for functional safety verification. 
+
+**Parameters**: 
+
+  
+* **HwUnitId** HW ID. This param should be less than CDD_CMPSS_HW_UNIT_MAX 
+  
+* **RegRbPtr** Pointer to the register readback structure to populate
+
+
+**Return**: E_OK if successful, E_NOT_OK if a parameter error was detected 
 
 
 

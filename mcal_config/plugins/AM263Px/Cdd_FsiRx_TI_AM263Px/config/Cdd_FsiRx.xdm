@@ -586,6 +586,21 @@
                                                   value="ECUC:b843f353-6de1-4b78-a39e-2d1987a794bf" />
                                              <a:da name="DEFAULT" value="true" />
                                         </v:var>
+                                        <v:var name="CddFsiRxEnableRegisterReadbackApi" type="BOOLEAN">
+                                             <a:a name="DESC"
+                                                  value="EN: Switch to indicate that the CddFsiRx_RegisterReadBack is supported"/>
+                                             <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                                                  type="IMPLEMENTATIONCONFIGCLASS">
+                                                  <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                                                  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                                             </a:a>
+                                             <a:a name="ORIGIN" value="Texas Instruments"/>
+                                             <a:a name="SCOPE" value="LOCAL"/>
+                                             <a:a name="SYMBOLICNAMEVALUE" value="false"/>
+                                             <a:a name="UUID"
+                                                  value="ECUC:6cdfea8b-55be-4337-ba0f-b6f78be6f461"/>
+                                             <a:da name="DEFAULT" value="true"/>
+                                        </v:var>
 
                                         <!--Design:
                                              MCAL-5649 -->

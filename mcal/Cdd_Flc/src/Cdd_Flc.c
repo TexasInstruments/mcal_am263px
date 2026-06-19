@@ -361,6 +361,41 @@ Cdd_Flc_ClearAllStatus(VAR(Cdd_Flc_HwUnitType, AUTOMATIC) HwUnitId)
     return;
 }
 
+/* Design: MCAL-39723 */
+#if (STD_ON == CDD_FLC_REGISTER_READBACK_API)
+FUNC(Std_ReturnType, CDD_FLC_CODE)
+Cdd_Flc_RegisterReadback(VAR(Cdd_Flc_HwUnitType, AUTOMATIC) HwUnitId,
+                         P2VAR(Cdd_Flc_RegisterReadbackType, AUTOMATIC, CDD_FLC_DATA) RegRbPtr)
+{
+    Std_ReturnType retVal = E_OK;
+
+#if (STD_ON == CDD_FLC_DEV_ERROR_DETECT)
+    if (HwUnitId >= CDD_FLC_RL2_MAX)
+    {
+        (void)Det_ReportError(CDD_FLC_MODULE_ID, CDD_FLC_INSTANCE_ID, CDD_FLC_SID_REGISTER_READBACK,
+                              CDD_FLC_E_ILLEGAL_HW_ID);
+        retVal = E_NOT_OK;
+    }
+    else if (NULL_PTR == RegRbPtr)
+    {
+        (void)Det_ReportError(CDD_FLC_MODULE_ID, CDD_FLC_INSTANCE_ID, CDD_FLC_SID_REGISTER_READBACK,
+                              CDD_FLC_E_PARAM_POINTER);
+        retVal = E_NOT_OK;
+    }
+    else
+#endif
+    {
+        CSL_rl2_of_Regs *regs;
+
+        regs = CddFlcBaseAddr[HwUnitId];
+
+        RegRbPtr->modVer = regs->MOD_VER;
+    }
+
+    return retVal;
+}
+#endif /* STD_ON == CDD_FLC_REGISTER_READBACK_API */
+
 /* Design: MCAL-29417 */
 #if (STD_ON == CDD_FLC_DEV_ERROR_DETECT)
 static Std_ReturnType Cdd_Flc_ConfigureRegionParamCheck(Cdd_Flc_HwUnitType hwUnitId, Cdd_Flc_RegionId regionId,

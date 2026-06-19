@@ -162,6 +162,8 @@ extern "C" {
 #define CDD_FSI_RX_SETUP_BUFFER_SID 0x07U
 /** \brief API Service ID for Cdd_FsiRx_DmaDataReceive API */
 #define CDD_FSI_RX_DMA_DATA_RECEIVE_SID 0x08U
+/** \brief API Service ID for register readback API */
+#define CDD_FSI_RX_REGISTER_READBACK_SID 0x09U
 /**   @} */
 /**
  *  \name CDD FsiRx Error Codes
@@ -224,6 +226,31 @@ extern "C" {
 /** \brief Category 2 ISR type */
 #define CDD_FSI_RX_ISR_CAT2 (0x02U)
 /**   @} */
+
+/* ========================================================================== */
+/*                         Structures and Enums                               */
+/* ========================================================================== */
+
+#if (STD_ON == CDD_FSI_RX_REGISTER_READBACK_API)
+/** \brief FsiRx Register Readback type */
+typedef struct Cdd_FsiRx_RegisterReadbackTypeTag
+{
+    /** \brief RX_MASTER_CTRL_ALTB register value */
+    uint16 rxMasterCtrl;
+    /** \brief RX_OPER_CTRL register value */
+    uint16 rxOperCtrl;
+    /** \brief RX_DMA_CTRL register value */
+    uint16 rxDmaCtrl;
+    /** \brief RX_FRAME_WD_CTRL register value */
+    uint16 rxFrameWdCtrl;
+    /** \brief RX_PING_WD_CTRL register value */
+    uint16 rxPingWdCtrl;
+    /** \brief RX_INT1_CTRL_ALT1 register value */
+    uint16 rxInt1Ctrl;
+    /** \brief RX_INT2_CTRL_ALT1 register value */
+    uint16 rxInt2Ctrl;
+} Cdd_FsiRx_RegisterReadbackType;
+#endif /* STD_ON == CDD_FSI_RX_REGISTER_READBACK_API */
 
 /* ========================================================================== */
 /*                          Function Declarations                             */
@@ -371,6 +398,26 @@ Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
  *****************************************************************************/
 FUNC(void, CDD_FSIRX_CODE)
 Cdd_FsiRx_DmaDataReceive(Cdd_FsiRx_HWUnitType HwUnitId);
+
+#if (STD_ON == CDD_FSI_RX_REGISTER_READBACK_API)
+/** \brief Reads back key hardware registers for functional safety verification.
+ *
+ *
+ * Sync/Async - Synchronous
+ *
+ * Reentrancy - Reentrant
+ *
+ * \param[in]  HwUnitId   Hardware unit ID. Must be less than maxHwUnit.
+ * \param[out] RegRbPtr   Pointer to register readback structure to populate.
+ * \return Std_ReturnType
+ * \retval E_OK     Register readback successful.
+ * \retval E_NOT_OK Parameter error detected.
+ *
+ *****************************************************************************/
+FUNC(Std_ReturnType, CDD_FSIRX_CODE)
+Cdd_FsiRx_RegisterReadback(Cdd_FsiRx_HWUnitType HwUnitId,
+                           P2VAR(Cdd_FsiRx_RegisterReadbackType, AUTOMATIC, CDD_FSI_RX_APPL_DATA) RegRbPtr);
+#endif /* STD_ON == CDD_FSI_RX_REGISTER_READBACK_API */
 
 #ifdef __cplusplus
 }

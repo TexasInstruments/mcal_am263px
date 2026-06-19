@@ -220,7 +220,7 @@ extern void Fls_resetDrvObj(Fls_DriverObjType *drvObj);
 extern void Fls_copyConfig(Fls_DriverObjType *drvObj, const Fls_ConfigType *cfgPtr);
 
 #if (STD_ON == FLS_REGISTER_READBACK_API)
-void Fls_Qspi_RegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) RegRbPtr);
+void Fls_hwRegisterReadback(P2VAR(Fls_RegisterReadbackType, AUTOMATIC, FLS_APPL_DATA) RegRbPtr);
 #endif /*STD_ON == FLS_REGISTER_READBACK_API*/
 
 /*========================================================================= */
