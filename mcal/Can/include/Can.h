@@ -213,23 +213,6 @@ extern "C" {
 /** @} */
 
 /**
- *  \name Can Driver CallOut function id
- *
- *  The Service Id is one of the argument to Det_ReportError functiona and is
- *                     used to
- *  identify the source of the error
- *  @{
- */
-/** \brief  CanIf_RxIndication callback */
-#define CAN_RXINDI_ID (0x10U)
-/** \brief  CanIf_TxConfirmation callback */
-#define CAN_TXCNF_ID (0x11U)
-/** \brief  Controller Wakeup indication callback */
-#define CAN_CTRWAKEUP_ID (0x12U)
-/** \brief  Controller Off indication callback */
-#define CAN_CTRBUSOFF_ID (0x13U)
-/** @} */
-/**
  *  \name Can Error Codes
  *
  *  Error codes returned by Can functions
@@ -261,19 +244,15 @@ extern "C" {
 #endif
 #ifndef CAN_E_PARAM_BAUDRATE
 /** \brief  ERROR:Invalid Baudrate configuration */
-#define CAN_E_PARAM_BAUDRATE (0x07U)
+#define CAN_E_PARAM_BAUDRATE (0x08U)
 #endif
 #ifndef CAN_E_ICOM_CONFIG_INVALID
 /** \brief  ERROR:Invalid config ID*/
-#define CAN_E_ICOM_CONFIG_INVALID (0x08U)
-#endif
-#ifndef CAN_E_INIT_FAILED
-/** \brief  ERROR:Timeout occured */
-#define CAN_E_INIT_FAILED (0x09U)
+#define CAN_E_ICOM_CONFIG_INVALID (0x09U)
 #endif
 #ifndef CAN_E_DATALOST
 /** \brief  ERROR:Data lost/dropped . Runtime Error*/
-#define CAN_E_DATALOST (0x01U)
+#define CAN_E_DATALOST (0x07U)
 #endif
 /** @} */
 

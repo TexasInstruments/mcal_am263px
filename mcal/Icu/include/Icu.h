@@ -214,7 +214,7 @@ extern "C" {
 /** \brief Icu_GetVersionInfo() API Service ID */
 #define ICU_GETVERSIONINFO_ID ((uint8)0x12U)
 /** \brief Icu_RegisterReadback() API Service ID */
-#define ICU_REGISTERREADBACK_ID ((uint8)0x15U)
+#define ICU_REGISTERREADBACK_ID ((uint8)0x18U)
 /**   @} */
 
 /**
@@ -243,7 +243,7 @@ extern "C" {
 /** \brief API service calleed without module initialisation */
 #define ICU_E_UNINIT ((uint8)0x14U)
 /** \brief Icu_StopTimestamp called on channel not started or already stopped */
-#define ICU_E_NOT_STARTED ((uint8)0x16U)
+#define ICU_E_NOT_STARTED ((uint8)0x15U)
 /** \brief API service called while a running operation */
 #define ICU_E_BUSY_OPERATION ((uint8)0x16U)
 /** \brief API service Icu_Init called when module already initialized */

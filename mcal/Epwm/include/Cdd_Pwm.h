@@ -293,11 +293,11 @@ extern "C" {
 #define CDD_PWM_SID_SET_FALLING_EDGE_DELAY_COUNT ((uint8)(0x29U))
 
 /** \brief CDD_PWM driver service ID to set the HRPWM phase shift in runtime */
-#define CDD_PWM_SID_HR_SET_PHASE_SHIFT ((uint8)(0x2AU))
+#define CDD_PWM_SID_HR_SET_PHASE_SHIFT ((uint8)(0x34U))
 /** \brief CDD_PWM driver service ID to set the HRPWM period in runtime */
-#define CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD ((uint8)(0x2BU))
+#define CDD_PWM_SID_HR_SET_TIMEBASE_PERIOD ((uint8)(0x35U))
 /** \brief CDD_PWM driver service ID to set the HRPWM Counter Compare value in runtime */
-#define CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE ((uint8)(0x2CU))
+#define CDD_PWM_SID_HR_SET_COUNTER_COMPARE_VALUE ((uint8)(0x36U))
 /** \brief CDD_PWM driver service ID to set the HRPWM rising edge delay in runtime */
 #define CDD_PWM_SID_HR_SET_RISING_EDGE_DELAY_COUNT ((uint8)(0x2DU))
 /** \brief CDD_PWM driver service ID to set the HRPWM falling edge delay in runtime */
