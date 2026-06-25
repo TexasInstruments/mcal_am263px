@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
   <AR-PACKAGES>
-    <AR-PACKAGE UUID="2da4a9c6-dcb8-4a7d-91a0-3970a368b2ae">
+    <AR-PACKAGE UUID="ab195415-e0e2-4fad-a8ce-86e34df51ba0">
       <SHORT-NAME>Icu_TI_AM263x</SHORT-NAME>
       <ELEMENTS>
-        <BSW-MODULE-DESCRIPTION UUID="f10365d7-7bbc-479a-8d68-b489f92a46d9">
+        <BSW-MODULE-DESCRIPTION UUID="c68f2b63-67b9-4133-96fc-63f81a3b4403">
           <SHORT-NAME>Icu</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
           <IMPLEMENTED-ENTRYS>
@@ -80,7 +80,7 @@
           </IMPLEMENTED-ENTRYS>
           <MODULE-ID>122</MODULE-ID>
           <BSW-MODULE-DEPENDENCYS>
-            <BSW-MODULE-DEPENDENCY UUID="c0ce46de-3dd8-41fc-9f28-a448f1b2f6c3">
+            <BSW-MODULE-DEPENDENCY UUID="f82571b7-a520-48dc-908a-ba12fb3c9183">
               <SHORT-NAME>Det</SHORT-NAME>
               <TARGET-MODULE-ID>15</TARGET-MODULE-ID>
               <TARGET-MODULE-REFS>
@@ -91,15 +91,15 @@
             </BSW-MODULE-DEPENDENCY>
           </BSW-MODULE-DEPENDENCYS>
           <INTERNAL-BEHAVIORS>
-            <BSW-INTERNAL-BEHAVIOR UUID="08c7871b-5e99-4611-9a00-06a369df7e86">
+            <BSW-INTERNAL-BEHAVIOR UUID="5e988ea4-2b07-45e4-b8d4-a68f60c043c7">
               <SHORT-NAME>Icu_Behavior</SHORT-NAME>
               <EXCLUSIVE-AREAS>
-                <EXCLUSIVE-AREA UUID="4fc38db4-f789-41ad-baac-f5c8fc007188">
+                <EXCLUSIVE-AREA UUID="1da5d8b9-befd-429e-ad41-d939a7d0991d">
                   <SHORT-NAME>ICU_EXCLUSIVE_AREA_0</SHORT-NAME>
                 </EXCLUSIVE-AREA>
               </EXCLUSIVE-AREAS>
               <ENTITYS>
-                <BSW-CALLED-ENTITY UUID="92a9fa61-ed40-4d3c-92f2-34c25d56865c">
+                <BSW-CALLED-ENTITY UUID="51408e1f-1d28-449c-9f9e-6c099cdd3b1a">
                   <SHORT-NAME>Icu_Deinit</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -111,7 +111,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_Deinit</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="61e29ce4-8ce3-455d-b1fd-b2758704fb0b">
+                <BSW-CALLED-ENTITY UUID="56baee4c-8be1-41ea-a776-b8fb238c57b4">
                   <SHORT-NAME>Icu_DisableEdgeCount</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -126,7 +126,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_DisableEdgeCount</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="03b3d9e0-7246-4c8f-99ad-ace68a31755d">
+                <BSW-CALLED-ENTITY UUID="82ccdfae-0565-423f-a948-3afba11bbf20">
                   <SHORT-NAME>Icu_DisableEdgeDetection</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -141,7 +141,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_DisableEdgeDetection</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="651bbd50-7d63-4d59-965e-17dff3fd0f04">
+                <BSW-CALLED-ENTITY UUID="6db08e67-be2d-4789-ab1c-15f293febd47">
                   <SHORT-NAME>Icu_DisableNotification</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -156,7 +156,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_DisableNotification</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="077420f2-90f2-4729-b2d5-22a33ff2cde3">
+                <BSW-CALLED-ENTITY UUID="2ddcc5e3-0515-463d-b120-58e56067e2a7">
                   <SHORT-NAME>Icu_EnableEdgeCount</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -186,7 +186,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_EnableEdgeDetection</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="5f68c0b9-a9f7-49e9-812c-02712a496b8e">
+                <BSW-CALLED-ENTITY UUID="19a59e01-ba66-4292-ab55-bf7fbfd192b9">
                   <SHORT-NAME>Icu_EnableNotification</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -216,7 +216,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_GetDutyCycleValues</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="df053cff-01bc-4cce-b79a-a971c0bb8a54">
+                <BSW-CALLED-ENTITY UUID="b8f8c774-f994-42f9-ab20-14e8ce5fe7ee">
                   <SHORT-NAME>Icu_GetEdgeNumbers</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -246,7 +246,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_GetInputState</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="5eadd01a-497c-407a-8e51-6cae225563b9">
+                <BSW-CALLED-ENTITY UUID="cbc6d72b-c803-4d63-9fe5-c7f77f297d0d">
                   <SHORT-NAME>Icu_GetTimeElapsed</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -276,7 +276,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_GetTimestampIndex</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="e3d5179a-4e95-4ba8-9aa3-fca2e37535ac">
+                <BSW-CALLED-ENTITY UUID="1eb24ed2-7158-4357-9b72-d84cecbe5797">
                   <SHORT-NAME>Icu_GetVersionInfo</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Icu_TI_AM263x/Icu/Icu_Behavior/ICU_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -317,7 +317,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-CALLED-ENTITY UUID="7093e647-5bee-43ae-942f-7700c7d34aaf">
+                <BSW-CALLED-ENTITY UUID="86f0610f-8562-40b8-a2e5-35182ae32676">
                   <SHORT-NAME>Icu_RegisterReadback</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
@@ -423,7 +423,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Icu_TI_AM263x/Icu_ModuleEntry/Icu_StopTimestamp</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="36f34213-1fad-4610-a13d-4e73fd10bded">
+                <BSW-INTERRUPT-ENTITY UUID="15903e4f-03b3-4746-802d-e062271ba1ad">
                   <SHORT-NAME>Icu_ch0Notify</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -441,10 +441,10 @@
             </BSW-INTERNAL-BEHAVIOR>
           </INTERNAL-BEHAVIORS>
         </BSW-MODULE-DESCRIPTION>
-        <BSW-IMPLEMENTATION UUID="68fab167-6a0d-4a08-9015-4767e4cc68a5">
+        <BSW-IMPLEMENTATION UUID="6b3196fb-b4bd-4b1d-8432-ae376f182807">
           <SHORT-NAME>Icu_Impl</SHORT-NAME>
           <CODE-DESCRIPTORS>
-            <CODE UUID="e4253ecc-4d3a-4d4c-a08b-835c4c19fb3a">
+            <CODE UUID="7180b52c-0457-4323-a2bb-c7b60d1897ed">
               <SHORT-NAME>Files</SHORT-NAME>
               <ARTIFACT-DESCRIPTORS>
                 <AUTOSAR-ENGINEERING-OBJECT>
@@ -499,7 +499,7 @@
             </CODE>
           </CODE-DESCRIPTORS>
           <COMPILERS>
-            <COMPILER UUID="5b252f7d-33c9-466f-9573-9877d7f656ec">
+            <COMPILER UUID="df5400ed-bde3-4473-b876-e188e68998e3">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
               <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb   -DAM263X_PLATFORM </OPTIONS>
@@ -508,7 +508,7 @@
             </COMPILER>
           </COMPILERS>
           <LINKERS>
-            <LINKER UUID="2fee982e-243e-4f73-b7df-edf8c9b26e85">
+            <LINKER UUID="0006b7e2-0bef-43ac-bfd4-0ac7a4530cbc">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
               <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
@@ -517,34 +517,34 @@
             </LINKER>
           </LINKERS>
           <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
-          <RESOURCE-CONSUMPTION UUID="014cc1bb-df57-4463-ac65-9a6716333457">
+          <RESOURCE-CONSUMPTION UUID="aa0fad55-b181-40bc-9729-3dcfc76db673">
             <SHORT-NAME>ResourceConsumption</SHORT-NAME>
             <MEMORY-SECTIONS>
-              <MEMORY-SECTION UUID="46032e93-30dc-4f81-ba38-7f5f4ffabdb5">
+              <MEMORY-SECTION UUID="3b7d1f71-0a67-43b1-a7d2-1b182dce45b7">
                 <SHORT-NAME>ICU_CODE</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
                 <SYMBOL>CODE</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="098b7980-8967-4297-97df-2e4034d02f06">
+              <MEMORY-SECTION UUID="e029e6dd-a887-44dc-9d20-ef64fa48cefc">
                 <SHORT-NAME>ICU_CONFIG_DATA</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONFIG_DATA</SW-ADDRMETHOD-REF>
                 <SYMBOL>CONFIG_DATA</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="ba479406-8b46-4cb5-b878-bea6b0db925b">
+              <MEMORY-SECTION UUID="33ee8e88-dcab-49bd-a3e2-eb0b82ea586a">
                 <SHORT-NAME>ICU_ISR_CODE</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
                 <SYMBOL>ISR_CODE</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="38294663-f034-493c-aecd-714bc6ac74c2">
+              <MEMORY-SECTION UUID="3a759eb0-61b2-4ada-98ae-9184ad818e15">
                 <SHORT-NAME>ICU_VAR_INIT_8</SHORT-NAME>
                 <ALIGNMENT>8</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
                 <SYMBOL>VAR_INIT_8</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="41f75d23-20cc-4542-a316-67a458c0f9ec">
+              <MEMORY-SECTION UUID="63ff68f5-c9fb-4096-85d8-b08f27855ce0">
                 <SHORT-NAME>ICU_VAR_NO_INIT_UNSPECIFIED</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
@@ -562,10 +562,10 @@
         </BSW-IMPLEMENTATION>
       </ELEMENTS>
       <AR-PACKAGES>
-        <AR-PACKAGE UUID="1566c979-f45e-487c-bc3b-f53f40dd5feb">
+        <AR-PACKAGE UUID="c8242f52-86ab-45a2-927c-9d6234313dd1">
           <SHORT-NAME>Icu_ModuleEntry</SHORT-NAME>
           <ELEMENTS>
-            <BSW-MODULE-ENTRY UUID="1d494aba-e343-4ac6-a05d-3cd20edddd99">
+            <BSW-MODULE-ENTRY UUID="f7db655e-ea09-4c67-ab84-de2f7b354f05">
               <SHORT-NAME>Icu_CheckWakeup</SHORT-NAME>
               <SERVICE-ID>21</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -575,7 +575,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="18c2b1ec-f0ac-4a7a-9947-82bcbf40535b">
+            <BSW-MODULE-ENTRY UUID="f7e8dc0b-31f8-4953-8745-44e70a714e7e">
               <SHORT-NAME>Icu_Deinit</SHORT-NAME>
               <SERVICE-ID>1</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -585,7 +585,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="45e08524-5f68-4acc-9fa4-8b83568dd294">
+            <BSW-MODULE-ENTRY UUID="48eb896b-c0b6-4599-8b6e-44497b136c2a">
               <SHORT-NAME>Icu_DisableEdgeCount</SHORT-NAME>
               <SERVICE-ID>14</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -595,7 +595,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="3a517739-3b20-41ac-8c35-fbaaadda568e">
+            <BSW-MODULE-ENTRY UUID="c9e5c2e3-4d19-4787-89b6-db8d9c630b95">
               <SHORT-NAME>Icu_DisableEdgeDetection</SHORT-NAME>
               <SERVICE-ID>23</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -605,7 +605,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ad2befa7-4cd5-4c70-966c-2dfa1ae6bbda">
+            <BSW-MODULE-ENTRY UUID="07733f0f-ecec-431c-bae6-d25d57df2c4b">
               <SHORT-NAME>Icu_DisableNotification</SHORT-NAME>
               <SERVICE-ID>6</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -625,7 +625,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="0a2a65d2-0f4d-4507-a251-f3463b7357fd">
+            <BSW-MODULE-ENTRY UUID="19d4dcfd-b927-4275-9f1a-e0bb4bdc4060">
               <SHORT-NAME>Icu_EnableEdgeCount</SHORT-NAME>
               <SERVICE-ID>13</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -635,7 +635,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ced45391-39d8-4fcc-bd87-f4b48777093d">
+            <BSW-MODULE-ENTRY UUID="f78f6d3b-7c4f-4ff7-98f3-2df0d4544baf">
               <SHORT-NAME>Icu_EnableEdgeDetection</SHORT-NAME>
               <SERVICE-ID>22</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -645,7 +645,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="f3f3f4f6-e1df-49c7-972e-6bc58131d085">
+            <BSW-MODULE-ENTRY UUID="902ddad8-ccec-4517-89dd-3ab82db2c750">
               <SHORT-NAME>Icu_EnableNotification</SHORT-NAME>
               <SERVICE-ID>7</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -675,7 +675,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="7f808ba2-63db-46f4-8000-d8d86708c8b8">
+            <BSW-MODULE-ENTRY UUID="f34b62a6-e3dd-4b7a-8d54-57b51ef29292">
               <SHORT-NAME>Icu_GetEdgeNumbers</SHORT-NAME>
               <SERVICE-ID>15</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -685,7 +685,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="9258069e-8316-4443-b01f-1756034d93a8">
+            <BSW-MODULE-ENTRY UUID="0e862ddf-22a2-4973-a4b8-bbc7e0e72466">
               <SHORT-NAME>Icu_GetInputState</SHORT-NAME>
 
               <SERVICE-ID>8</SERVICE-ID>
@@ -696,7 +696,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="84cea310-8e8b-4a9e-a612-85d48095030e">
+            <BSW-MODULE-ENTRY UUID="91e6956f-6818-4ce0-82d1-434465d58e7e">
               <SHORT-NAME>Icu_GetTimeElapsed</SHORT-NAME>
               <SERVICE-ID>16</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -706,7 +706,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="c8020d3c-e09d-4d2f-a9c4-2fa38f8a269b">
+            <BSW-MODULE-ENTRY UUID="11f4564c-6492-4ee3-8f83-d6b92a4190f0">
               <SHORT-NAME>Icu_GetTimestampIndex</SHORT-NAME>
               <SERVICE-ID>11</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -726,7 +726,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="287d4d8e-8a1f-498f-a007-ec6b52d4266a">
+            <BSW-MODULE-ENTRY UUID="a02059b7-b7ad-4869-9bcf-674103d39714">
               <SHORT-NAME>Icu_Init</SHORT-NAME>
               <SERVICE-ID>0</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -754,7 +754,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="74e9925f-06c4-4a36-a512-6ce2f23bbc28">
+            <BSW-MODULE-ENTRY UUID="75e2132d-40f3-4dae-8e6f-f1ce076b2638">
               <SHORT-NAME>Icu_ResetEdgeCount</SHORT-NAME>
               <SERVICE-ID>12</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -764,7 +764,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="56b035f7-f651-452d-89e2-bef5c68bf862">
+            <BSW-MODULE-ENTRY UUID="b3578e6f-8d26-4822-8dae-9c107e9f6211">
               <SHORT-NAME>Icu_SetActivationCondition</SHORT-NAME>
               <SERVICE-ID>5</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -784,7 +784,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="dcd07f7b-51d5-42b6-9dca-909c2aff0bb9">
+            <BSW-MODULE-ENTRY UUID="d7ad242c-b0c1-45a9-a427-22b15a2e85a0">
               <SHORT-NAME>Icu_StartSignalMeasurement</SHORT-NAME>
               <SERVICE-ID>19</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -794,7 +794,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="55d2a1b3-1f0a-4f86-8718-66222601f52c">
+            <BSW-MODULE-ENTRY UUID="55e53db4-542e-4d4a-b17e-1a424e8bc6b8">
               <SHORT-NAME>Icu_StartTimestamp</SHORT-NAME>
               <SERVICE-ID>9</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -804,7 +804,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="a8ca95a7-6880-4e4b-98a5-5d990456a443">
+            <BSW-MODULE-ENTRY UUID="a7be2a05-0df8-4d2e-b1a9-c4e88694acbd">
               <SHORT-NAME>Icu_StopSignalMeasurement</SHORT-NAME>
               <SERVICE-ID>20</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -824,7 +824,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="0c16dfc7-8957-4508-9120-00506f632384">
+            <BSW-MODULE-ENTRY UUID="4ba07318-3d26-41f0-91cf-d3db48ad309e">
               <SHORT-NAME>Icu_ch0Notify</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -833,7 +833,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="1d97bed1-0ab4-4928-82fa-b02fa6d4757a">
+            <BSW-MODULE-ENTRY UUID="de6327eb-1e58-40ed-b1c9-bfa18d845f1e">
               <SHORT-NAME>Icu_ch1Notify</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -842,7 +842,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="0a6277dc-f1ab-456a-b966-dfc2e64a5f3f">
+            <BSW-MODULE-ENTRY UUID="556c0410-4b02-42c2-8f23-4866795d406e">
               <SHORT-NAME>Icu_ch2Notify</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -851,7 +851,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="8cfa77b5-0147-4f7c-84cb-dbba8082a761">
+            <BSW-MODULE-ENTRY UUID="68762b6b-3293-49b1-b77e-54e8b1c49886">
               <SHORT-NAME>Icu_ch3Notify</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -869,7 +869,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="b22ac66f-17f3-474a-b3ef-dbefaa6fe9f1">
+            <BSW-MODULE-ENTRY UUID="969eaad6-eef7-439e-b79d-2c03649c4c87">
               <SHORT-NAME>Icu_ch5Notify</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -887,7 +887,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="9454b9f6-d623-407d-8de4-5a0914484452">
+            <BSW-MODULE-ENTRY UUID="3207f4c5-7565-49d6-8e91-08e044ba28a2">
               <SHORT-NAME>Icu_ch7Notify</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -905,7 +905,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="d14c8160-b8b3-4eae-81ff-f9f37e3bb07e">
+            <BSW-MODULE-ENTRY UUID="bd06dcc4-698e-409a-a9a8-635919dc07c2">
               <SHORT-NAME>Icu_ch9Notify</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>

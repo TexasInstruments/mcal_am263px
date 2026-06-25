@@ -885,6 +885,7 @@ Cdd_Pwm_ChopperCfg(Cdd_Pwm_ChannelType Channel, const CDD_PWM_ChopperCfgType *pC
 FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(Cdd_Pwm_ChannelType Channel, uint32 enableChopper);
 #endif /*#if (STD_ON == CDD_PWM_CHOPPER)*/
 
+/* Design: MCAL-39558 */
 /*===============================================================================================*/
 /** \brief  Function sets the mode of Time base counter
  *
@@ -905,6 +906,7 @@ FUNC(Std_ReturnType, CDD_PWM_CODE) Cdd_Pwm_ChopperEnable(Cdd_Pwm_ChannelType Cha
 FUNC(Std_ReturnType, CDD_PWM_CODE)
 Cdd_Pwm_SetTimeBaseCounterMode(Cdd_Pwm_ChannelType Channel, EPWM_TimeBaseCountMode Mode);
 
+/* Design: MCAL-39561 */
 /*========================================================================================================*/
 /** \brief  Function to set the Phase shift value in runtime.
  *
@@ -923,6 +925,7 @@ Cdd_Pwm_SetTimeBaseCounterMode(Cdd_Pwm_ChannelType Channel, EPWM_TimeBaseCountMo
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(Cdd_Pwm_ChannelType Channel, uint16 PhaseShiftValue);
 
+/* Design: MCAL-39562 */
 /*========================================================================================================*/
 /** \brief  Function to set the time base period in runtime.
  *
@@ -941,6 +944,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetPhaseShift(Cdd_Pwm_ChannelType Channel, uint
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(Cdd_Pwm_ChannelType Channel, uint16 Period);
 
+/* Design: MCAL-39563 */
 /*========================================================================================================*/
 /** \brief  Function to set the Compare value in runtime.
  *
@@ -961,6 +965,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetTimeBasePeriod(Cdd_Pwm_ChannelType Channel, 
 FUNC(void, CDD_PWM_CODE)
 Cdd_Pwm_SetCounterCompareValue(Cdd_Pwm_ChannelType Channel, EPWM_CounterCompareModule CompModule, uint16 DutyValue);
 
+/* Design: MCAL-39566 */
 /*========================================================================================================*/
 /** \brief  Function to set the rising edge delay in runtime.
  *
@@ -979,6 +984,7 @@ Cdd_Pwm_SetCounterCompareValue(Cdd_Pwm_ChannelType Channel, EPWM_CounterCompareM
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 RedCount);
 
+/* Design: MCAL-39565 */
 /*========================================================================================================*/
 /** \brief  Function to set the falling edge delay in runtime.
  *
@@ -997,6 +1003,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetRisingEdgeDelay(Cdd_Pwm_ChannelType Channel,
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 FedCount);
 
+/* Design: MCAL-39564 */
 /*========================================================================================================*/
 /** \brief  Function to set the minimum deadband delay in runtime.
  *
@@ -1016,6 +1023,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetFallingEdgeDelay(Cdd_Pwm_ChannelType Channel
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(Cdd_Pwm_ChannelType Channel, uint32 Block, uint32 Delay);
 
+/* Design: MCAL-39567 */
 /*========================================================================================================*/
 /** \brief  Function to set the XCMP register value in runtime.
  *
@@ -1035,6 +1043,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetMinDeadbandDelay(Cdd_Pwm_ChannelType Channel
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XCMPReg XcmpReg, uint16 XcmpValue);
 
+/* Design: MCAL-39568 */
 /*========================================================================================================*/
 /** \brief  Function to set the XMINMAX register value in runtime.
  *
@@ -1055,6 +1064,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_SetXcmpRegValue(Cdd_Pwm_ChannelType Channel, EP
 FUNC(void, CDD_PWM_CODE)
 Cdd_Pwm_SetXMinMaxRegValue(Cdd_Pwm_ChannelType Channel, EPWM_XMinMaxReg XminmaxReg, uint16 XcmpValue);
 
+/* Design: MCAL-39569 */
 /*========================================================================================================*/
 /** \brief  Function to set the CMP shadow register value in runtime.
  *
@@ -1357,6 +1367,7 @@ FUNC(void, PWM_CODE) Cdd_Pwm_HrSfoCalibration(Cdd_Pwm_channelParametertype Chann
 FUNC(uint32, PWM_CODE) Cdd_Pwm_HrSfoStatus(uint32 ChannelNumber);
 #endif /* #if (STD_ON == CDD_PWM_HR_SFO_STATUS_API) */
 
+/* Design: MCAL-39572 */
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM Phase shift value in runtime.
  *
@@ -1375,6 +1386,7 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_HrSfoStatus(uint32 ChannelNumber);
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(Cdd_Pwm_ChannelType Channel, uint32 PhaseShiftValue);
 
+/* Design: MCAL-39573 */
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM time base period in runtime.
  *
@@ -1393,6 +1405,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetPhaseShift(Cdd_Pwm_ChannelType Channel, ui
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(Cdd_Pwm_ChannelType Channel, uint16 Period);
 
+/* Design: MCAL-39574 */
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM Compare value in runtime.
  *
@@ -1412,6 +1425,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetTimeBasePeriod(Cdd_Pwm_ChannelType Channel
 FUNC(void, CDD_PWM_CODE)
 Cdd_Pwm_HrSetCounterCompareValue(Cdd_Pwm_ChannelType Channel, HRPWM_CounterCompareModule CompModule, uint32 DutyValue);
 
+/* Design: MCAL-39575 */
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM rising edge delay in runtime.
  *
@@ -1430,6 +1444,7 @@ Cdd_Pwm_HrSetCounterCompareValue(Cdd_Pwm_ChannelType Channel, HRPWM_CounterCompa
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 RedCount);
 
+/* Design: MCAL-39576 */
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM falling edge delay in runtime.
  *
@@ -1448,6 +1463,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetRisingEdgeDelay(Cdd_Pwm_ChannelType Channe
  *********************************************************************************************************/
 FUNC(void, CDD_PWM_CODE) Cdd_Pwm_HrSetFallingEdgeDelay(Cdd_Pwm_ChannelType Channel, uint16 FedCount);
 
+/* Design: MCAL-39577 */
 /*========================================================================================================*/
 /** \brief  Function to set the HRPWM XCMP register value in runtime.
  *

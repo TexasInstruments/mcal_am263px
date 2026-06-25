@@ -96,6 +96,7 @@ extern "C" {
 #define FLS_S_WAIT_STAGE (1U)
 #define FLS_S_WRITE_DONE (2U)
 
+/* Design: MCAL-39571 */
 /* FLS Stage of Read(for DMA). */
 #define FLS_S_READ_DMA_INIT_STAGE (0U)
 #define FLS_S_READ_DMA_WAIT_STAGE (1U)

@@ -33,7 +33,7 @@
                 <L-2 L="EN">This container contains the configuration parameters and sub containers of the AUTOSAR Cdd Fsi Rx module.</L-2>
               </DESC>
               <PARAMETERS>
-                <ECUC-FUNCTION-NAME-DEF UUID="ECUC:f43bffda-8d3a-4520-b424-b558fcbe752c">
+                <ECUC-FUNCTION-NAME-DEF UUID="ECUC:c606e15f-84d9-4d57-82e5-4a020677e20a">
                   <SHORT-NAME>CddFsiRxResetNotification</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Callback notification to Application to reset the driver </L-2>
@@ -318,7 +318,7 @@
                     </ECUC-ENUMERATION-PARAM-DEF>
                   </PARAMETERS>
                   <REFERENCES>
-                    <ECUC-REFERENCE-DEF UUID="0bc2d871-1004-44a2-8934-8fb46a095dqc">
+                    <ECUC-REFERENCE-DEF UUID="d1af355d-7815-49e7-b8df-5bf91908338b">
                       <SHORT-NAME>CddFsiRxDmaReference</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Reference to the DMA Group Channel</L-2>
@@ -404,7 +404,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:240a9eb6-7a1b-4f43-bfab-bb6a15457d0d">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:0f763380-aedc-49ed-b5b9-8ace3e80a2a4">
                   <SHORT-NAME>CddFsiRxTypeofInterruptFunction</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Type of ISR function</L-2>
@@ -468,7 +468,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4745b6cf-b46f-4fe4-8bfa-c1a47fdd7412">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:02fbaa53-f4e8-48eb-bb69-ea0f794bbf99">
                   <SHORT-NAME>CddFsiRxDeviceVariant</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Select SOC variant .This parameter shall be used by driver to impose device specific constraints. The user guide shall detail the device specific constraints </L-2>
@@ -495,7 +495,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:ab0f7a27-9247-49c3-a48e-a8409ef7fd65">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:19a9cd74-78e9-4054-bd34-443acdf81302">
                   <SHORT-NAME>CddFsiRxMaxHwUnitCount</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Maximum hw count across all hwunits configured</L-2>
@@ -790,7 +790,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:0217b971-6fd9-4486-bd96-94b91a14fedd">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:66297593-b3f7-412c-a36b-3c5539dc7265">
                   <SHORT-NAME>CddFsiRxDMAEnable</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Enables DMA Access method for CddFsiRx Reception.</L-2>
@@ -830,7 +830,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>false</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6dc462ec-a924-4633-b6ac-2d00ef0d3965">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:d4ffc4fd-b529-4dff-988c-b813c2028bec">
                   <SHORT-NAME>CddFsiRxDefaultOSCounterId</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Default Os Counter Id if node reference to OsCounter ref CddFsiRxOsCounterRef is not set</L-2>
@@ -853,7 +853,7 @@
                 </ECUC-INTEGER-PARAM-DEF>
               </PARAMETERS>
               <REFERENCES>
-                <ECUC-REFERENCE-DEF UUID="ECUC:26c9bdff-38cf-4f0b-8754-7472d0d41cb9">
+                <ECUC-REFERENCE-DEF UUID="ECUC:455089c3-48a6-4757-af27-028ecd3e444a">
                   <SHORT-NAME>CddFsiRxOsCounterRef</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter contains a reference to the OsCounter, which is used by the CddFsiRx driver.</L-2>
@@ -1080,7 +1080,7 @@
                   </VALUE-CONFIG-CLASSES>
                   <DEFAULT-VALUE>4</DEFAULT-VALUE>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:272c9c43-c3dc-45e3-88cd-2ab19c61dfea">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:bdadd82e-59a0-4ccd-bbdd-83a9567d5718">
                   <SHORT-NAME>CddFsiRxMaxHwChannelId</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Number of actual HW channels for each Rx module. This is of type published information and not editable</L-2>

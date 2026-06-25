@@ -10250,7 +10250,7 @@
                             </ECUC-ENUMERATION-LITERAL-DEF>
                           </LITERALS>
                         </ECUC-ENUMERATION-PARAM-DEF>
-                        <ECUC-ENUMERATION-PARAM-DEF UUID="4f815cf1-b16c-4054-bf58-9649ed0040da">
+                        <ECUC-ENUMERATION-PARAM-DEF UUID="da7868e9-536c-497f-ade6-3e651cb531d2">
                           <SHORT-NAME>PortPullTypeSelect</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Type of PULL U/D selection </L-2>
@@ -10541,7 +10541,7 @@
                     </ECUC-PARAM-CONF-CONTAINER-DEF>
                   </SUB-CONTAINERS>
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="986d7ce7-e9f2-4e1b-9a0e-c6a4e9c2a3ed">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="236e6a45-9843-4a75-8c55-7d93d5025a5c">
                   <SHORT-NAME>PortDioConfig</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Structure for GPIO Interrupt configuration</L-2>
@@ -10816,7 +10816,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-INTEGER-PARAM-DEF UUID="13b3abd5-5582-4872-bbc8-55a82e887ce0">
                   <SHORT-NAME>PortDefaultOSCounterId</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Default Os Counter Id if node reference to OsCounter ref PortOsCounterRef is not set</L-2>
@@ -10990,7 +10990,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="0ed19202-7003-4135-bd0b-fb67e49f5991">
+                <ECUC-INTEGER-PARAM-DEF UUID="b2066814-7f6f-4d6c-b980-daf6e2729b4e">
                   <SHORT-NAME>PortGpioHostCoreId</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">R5F CPU ownership of GPIO. 0 - R5FSS0 Core0, 1 - R5FSS0 Core1, 2 - R5FSS1 Core0, 3 - R5FSS1 Core1</L-2>
@@ -11015,7 +11015,7 @@
                 </ECUC-INTEGER-PARAM-DEF>
               </PARAMETERS>
               <REFERENCES>
-                <ECUC-REFERENCE-DEF UUID="26c9bdff-38cf-4f0b-8754-7472d0d41cb9">
+                <ECUC-REFERENCE-DEF UUID="a433a4e6-118d-4970-8589-25e3d170253b">
                   <SHORT-NAME>PortOsCounterRef</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter contains a reference to the OsCounter, which is used by the PORT driver.</L-2>
@@ -11050,7 +11050,7 @@
                 </ECUC-REFERENCE-DEF>
               </REFERENCES>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="27920277-13ba-47db-9bd1-5631cadf9563">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="a3a83634-6fc2-4229-a422-2f87ac185355">
               <SHORT-NAME>PortDemEventParameterRefs</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">Container for the references to DemEventParameter elements which shall be invoked using the API Dem_ReportErrorStatus API in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter&apos;s DemEventId value. The standardized errors are provided in the container and can be extended by vendor specific error references.</L-2>
@@ -11059,7 +11059,7 @@
               <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
               <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
               <REFERENCES>
-                <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="411e6847-ab1d-4d70-9175-f4166fba7fdf">
+                <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="bfd8b343-b245-4ae5-9e3a-c2478d888a91">
                   <SHORT-NAME>PORT_E_HARDWARE_ERROR</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Reference to the DemEventParameter which shall be issued when the error &quot;Timeout on blocking API call occurs &quot; has occurred.</L-2>

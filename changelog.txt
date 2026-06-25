@@ -1,3 +1,302 @@
+commit fa7c21b124ca68ded07a246f1322bd332ae9f3e6
+Author: Akash <a-verma3@ti.com>
+Date:   Thu Jun 25 12:40:09 2026 +0530
+
+    am26xx: CAN: Fix falling test case for CAN.
+    
+    - Added/Removed platform specific gaurd
+    
+    Fixes: MCAL-40404
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/can_test/testInput/canTestCases.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit c281bf57f37d470cdc0cb7e652dd138f0358cdc3
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Jun 25 10:12:26 2026 +0530
+
+    all: all: Updating source code with design JIRAs
+    
+    Fixes: MCAL-38750
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Cdd_Cmpss/include/Cdd_Cmpss.h | 23 +++++++++++++++++++++++
+ mcal/Epwm/include/Cdd_Pwm.h        | 16 ++++++++++++++++
+ mcal/Fls/V2/Fls_Brd_Nor.h          |  1 +
+ mcal/I2c/include/Cdd_I2c.h         | 11 +++++++++++
+ 4 files changed, 51 insertions(+)
+
+commit bdb6b04b6a173b38ab6a70ee122f59ab27d9af0d
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Jun 23 13:31:15 2026 +0530
+
+    all: all: WP repo ssh fix and ccs build fix for am261
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/cicd/test_result_validator.sh  | 3 +--
+ mcal_misc/scripts/windows/mcal_coverage_build.sh | 3 +--
+ mcal_misc/scripts/windows/mcal_installer_test.sh | 3 ++-
+ mcal_misc/scripts/windows/mcal_release_build.sh  | 3 +--
+ 4 files changed, 5 insertions(+), 7 deletions(-)
+
+commit f218c4f239981bbb265e42dfaadacf93b86dc1de
+Author: Akash <a-verma3@ti.com>
+Date:   Wed Jun 24 13:32:35 2026 +0530
+
+    am26xx: all: Resolve duplicate UUID across all platforms.
+    
+    - No module shares UUID within the same platform
+    
+    Fixes: MCAL-39585
+    
+    Signed-off-by: Akash Verma
+
+ .../soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml |     2 +-
+ .../tresos/am263px_lp/output/swcd/Port_Bswmd.arxml |   368 +-
+ .../am263px_sip/output/swcd/Port_Bswmd.arxml       |   368 +-
+ .../soc/am261/r5f0_0/swcd/Can_Bswmd.arxml          |    72 +-
+ .../soc/am263/r5f0_0/swcd/Can_Bswmd.arxml          |    74 +-
+ .../soc/am263px/r5f0_0/swcd/Can_Bswmd.arxml        |    82 +-
+ .../soc/am263/r5f0_0/swcd/Cdd_Pwm_Bswmd.arxml      |    28 +-
+ .../soc/am261/r5f0_0/swcd/EthTrcv_Bswmd.arxml      |     6 +-
+ .../soc/am263/r5f0_0/swcd/EthTrcv_Bswmd.arxml      |     6 +-
+ .../soc/am263px/r5f0_0/swcd/EthTrcv_Bswmd.arxml    |     4 +-
+ .../soc/am263/r5f0_0/swcd/Fls_Bswmd.arxml          |     4 +-
+ .../soc/am261/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml    |    56 +-
+ .../soc/am263/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml    |    54 +-
+ .../soc/am263/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml    |    80 +-
+ .../soc/am261/r5f0_0/swcd/Gpt_Bswmd.arxml          |    50 +-
+ .../soc/am263/r5f0_0/swcd/Gpt_Bswmd.arxml          |    74 +-
+ .../soc/am263px/r5f0_0/swcd/Gpt_Bswmd.arxml        |    46 +-
+ .../soc/am263/r5f0_0/swcd/Icu_Bswmd.arxml          |   104 +-
+ .../soc/am263/r5f0_0/swcd/Lin_Bswmd.arxml          |    78 +-
+ .../soc/am263/r5f0_0/swcd/Mcu_Bswmd.arxml          |     4 +-
+ .../soc/am261/r5f0_0/swcd/Port_Bswmd.arxml         |     2 +-
+ .../soc/am263/r5f0_0/swcd/Pwm_Bswmd.arxml          |    76 +-
+ .../soc/am261/r5f0_0/swcd/Spi_Bswmd.arxml          |     2 +-
+ .../soc/am263/r5f0_0/swcd/Spi_Bswmd.arxml          |     2 +-
+ .../soc/am263px/r5f0_0/swcd/Spi_Bswmd.arxml        |     2 +-
+ .../plugins/AM261x/Can_TI_AM261x/config/Can.arxml  |     4 +-
+ .../plugins/AM261x/Can_TI_AM261x/config/Can.xdm    |  4496 ++---
+ .../generate_swcd/swcd/Can_Bswmd.arxml             |    76 +-
+ .../Cdd_FsiRx_TI_AM261x/config/Cdd_FsiRx.arxml     |    18 +-
+ .../Cdd_FsiRx_TI_AM261x/config/Cdd_FsiRx.xdm       |    18 +-
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       |  1154 +-
+ .../Cdd_FsiTx_TI_AM261x/config/Cdd_FsiTx.arxml     |    46 +-
+ .../Cdd_FsiTx_TI_AM261x/config/Cdd_FsiTx.xdm       |    46 +-
+ .../AM261x/Cdd_Ipc_TI_AM261x/config/Cdd_Ipc.arxml  |    12 +-
+ .../AM261x/Cdd_Ipc_TI_AM261x/config/Cdd_Ipc.xdm    |    12 +-
+ .../AM261x/Cdd_Pwm_TI_AM261x/config/Cdd_Pwm.arxml  |    10 +-
+ .../AM261x/Cdd_Pwm_TI_AM261x/config/Cdd_Pwm.xdm    |    10 +-
+ .../Cdd_Uart_TI_AM261x/config/Cdd_Uart.arxml       |    22 +-
+ .../AM261x/Cdd_Uart_TI_AM261x/config/Cdd_Uart.xdm  |    22 +-
+ .../plugins/AM261x/Dio_TI_AM261x/config/Dio.arxml  |     2 +-
+ .../plugins/AM261x/Dio_TI_AM261x/config/Dio.xdm    |     2 +-
+ .../AM261x/Dio_TI_AM261x/config/Dio_NonEB.xdm      |     2 +-
+ .../AM261x/EthTrcv_TI_AM261x/config/EthTrcv.arxml  |    14 +-
+ .../AM261x/EthTrcv_TI_AM261x/config/EthTrcv.xdm    |    14 +-
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |  1796 +-
+ .../plugins/AM261x/Eth_TI_AM261x/config/Eth.arxml  |    10 +-
+ .../plugins/AM261x/Eth_TI_AM261x/config/Eth.xdm    |    10 +-
+ .../plugins/AM261x/Fls_TI_AM261x/config/Fls.arxml  |     4 +-
+ .../plugins/AM261x/Fls_TI_AM261x/config/Fls.xdm    |     4 +-
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |  1472 +-
+ .../plugins/AM261x/Gpt_TI_AM261x/config/Gpt.arxml  |    12 +-
+ .../plugins/AM261x/Gpt_TI_AM261x/config/Gpt.xdm    |    12 +-
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  2230 +--
+ .../plugins/AM261x/Icu_TI_AM261x/config/Icu.arxml  |     6 +-
+ .../plugins/AM261x/Icu_TI_AM261x/config/Icu.xdm    |  1402 +-
+ .../plugins/AM261x/Mcu_TI_AM261x/config/Mcu.arxml  |    14 +-
+ .../plugins/AM261x/Mcu_TI_AM261x/config/Mcu.xdm    |    14 +-
+ .../Port_TI_AM261x_ZCZ/config/Port_AM261x.arxml    |     8 +-
+ .../Port_TI_AM261x_ZCZ/config/Port_AM261x.xdm      |    14 +-
+ .../config/Port_AM261x_NonEB.xdm                   |     8 +-
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |     2 +-
+ .../plugins/AM261x/Pwm_TI_AM261x/config/Pwm.arxml  |    14 +-
+ .../plugins/AM261x/Pwm_TI_AM261x/config/Pwm.xdm    |    14 +-
+ .../plugins/AM261x/Spi_TI_AM261x/config/Spi.arxml  |    48 +-
+ .../plugins/AM261x/Spi_TI_AM261x/config/Spi.xdm    |    48 +-
+ .../AM261x/Spi_TI_AM261x/config/Spi_NonEB.xdm      |    48 +-
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |  1652 +-
+ .../plugins/AM261x/Wdg_TI_AM261x/config/Wdg.arxml  |     6 +-
+ .../plugins/AM261x/Wdg_TI_AM261x/config/Wdg.xdm    |     6 +-
+ .../AM263Px/Can_TI_AM263Px/config/Can.arxml        |     4 +-
+ .../plugins/AM263Px/Can_TI_AM263Px/config/Can.xdm  |  4524 ++---
+ .../generate_swcd/swcd/Can_Bswmd.arxml             |  2578 +--
+ .../Cdd_FsiRx_TI_AM263Px/config/Cdd_FsiRx.arxml    |    18 +-
+ .../Cdd_FsiRx_TI_AM263Px/config/Cdd_FsiRx.xdm      |    18 +-
+ .../Cdd_FsiTx_TI_AM263Px/config/Cdd_FsiTx.arxml    |    46 +-
+ .../Cdd_FsiTx_TI_AM263Px/config/Cdd_FsiTx.xdm      |    46 +-
+ .../Cdd_Ipc_TI_AM263Px/config/Cdd_Ipc.arxml        |    12 +-
+ .../AM263Px/Cdd_Ipc_TI_AM263Px/config/Cdd_Ipc.xdm  |    12 +-
+ .../Cdd_Pwm_TI_AM263Px/config/Cdd_Pwm.arxml        |    10 +-
+ .../AM263Px/Cdd_Pwm_TI_AM263Px/config/Cdd_Pwm.xdm  |    10 +-
+ .../Cdd_Uart_TI_AM263Px/config/Cdd_Uart.arxml      |    22 +-
+ .../Cdd_Uart_TI_AM263Px/config/Cdd_Uart.xdm        |    22 +-
+ .../AM263Px/Dio_TI_AM263Px/config/Dio.arxml        |     2 +-
+ .../plugins/AM263Px/Dio_TI_AM263Px/config/Dio.xdm  |     2 +-
+ .../AM263Px/Dio_TI_AM263Px/config/Dio_NonEB.xdm    |     2 +-
+ .../EthTrcv_TI_AM263Px/config/EthTrcv.arxml        |    14 +-
+ .../AM263Px/EthTrcv_TI_AM263Px/config/EthTrcv.xdm  |    14 +-
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |     4 +-
+ .../EthTrcv_TI_AM263Px_C/config/EthTrcv_C.arxml    |   134 +-
+ .../EthTrcv_TI_AM263Px_C/config/EthTrcv_C.xdm      |   134 +-
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |   108 +-
+ .../AM263Px/Eth_TI_AM263Px/config/Eth.arxml        |    10 +-
+ .../plugins/AM263Px/Eth_TI_AM263Px/config/Eth.xdm  |    10 +-
+ .../AM263Px/Fls_TI_AM263Px/config/Fls.arxml        |     4 +-
+ .../plugins/AM263Px/Fls_TI_AM263Px/config/Fls.xdm  |     4 +-
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |  1476 +-
+ .../AM263Px/Gpt_TI_AM263Px/config/Gpt.arxml        |    12 +-
+ .../plugins/AM263Px/Gpt_TI_AM263Px/config/Gpt.xdm  |    12 +-
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  3254 ++--
+ .../AM263Px/Icu_TI_AM263Px/config/Icu.arxml        |     6 +-
+ .../plugins/AM263Px/Icu_TI_AM263Px/config/Icu.xdm  |  1380 +-
+ .../AM263Px/Mcu_TI_AM263Px/config/Mcu.arxml        |    14 +-
+ .../plugins/AM263Px/Mcu_TI_AM263Px/config/Mcu.xdm  |    14 +-
+ .../Port_TI_AM263Px/config/Port_AM263Px.arxml      |    14 +-
+ .../Port_TI_AM263Px/config/Port_AM263Px.xdm        |    14 +-
+ .../Port_TI_AM263Px/config/Port_AM263Px_NonEB.xdm  |    14 +-
+ .../Port_TI_AM263Px_C/config/Port_AM263Px_C.arxml  |   102 +-
+ .../Port_TI_AM263Px_C/config/Port_AM263Px_C.xdm    |   104 +-
+ .../config/Port_AM263Px_NonEB.xdm                  |   104 +-
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |   376 +-
+ .../config/Port_AM263Px_NonEB.xdm                  |   104 +-
+ .../config/Port_AM263Px_SIP.arxml                  |   102 +-
+ .../config/Port_AM263Px_SIP.xdm                    |    74 +-
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |   376 +-
+ .../AM263Px/Pwm_TI_AM263Px/config/Pwm.arxml        |    14 +-
+ .../plugins/AM263Px/Pwm_TI_AM263Px/config/Pwm.xdm  |    14 +-
+ .../AM263Px/Spi_TI_AM263Px/config/Spi.arxml        |    48 +-
+ .../plugins/AM263Px/Spi_TI_AM263Px/config/Spi.xdm  |    48 +-
+ .../AM263Px/Spi_TI_AM263Px/config/Spi_NonEB.xdm    |    48 +-
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |     2 +-
+ .../AM263Px/Wdg_TI_AM263Px/config/Wdg.arxml        |     6 +-
+ .../plugins/AM263Px/Wdg_TI_AM263Px/config/Wdg.xdm  |     6 +-
+ .../plugins/AM263x/Can_TI_AM263x/config/Can.arxml  |     4 +-
+ .../plugins/AM263x/Can_TI_AM263x/config/Can.xdm    |     4 +-
+ .../generate_swcd/swcd/Can_Bswmd.arxml             |    76 +-
+ .../Cdd_FsiRx_TI_AM263x/config/Cdd_FsiRx.arxml     |    26 +-
+ .../Cdd_FsiRx_TI_AM263x/config/Cdd_FsiRx.xdm       |    26 +-
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       |  1898 +-
+ .../Cdd_FsiTx_TI_AM263x/config/Cdd_FsiTx.arxml     |    48 +-
+ .../Cdd_FsiTx_TI_AM263x/config/Cdd_FsiTx.xdm       |    48 +-
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |  1590 +-
+ .../AM263x/Cdd_Ipc_TI_AM263x/config/Cdd_Ipc.arxml  |    12 +-
+ .../AM263x/Cdd_Ipc_TI_AM263x/config/Cdd_Ipc.xdm    |    12 +-
+ .../AM263x/Cdd_Pwm_TI_AM263x/config/Cdd_Pwm.arxml  |    10 +-
+ .../AM263x/Cdd_Pwm_TI_AM263x/config/Cdd_Pwm.xdm    |    10 +-
+ .../generate_swcd/swcd/Cdd_Pwm_Bswmd.arxml         | 19380 +++++++++----------
+ .../Cdd_Uart_TI_AM263x/config/Cdd_Uart.arxml       |    22 +-
+ .../AM263x/Cdd_Uart_TI_AM263x/config/Cdd_Uart.xdm  |    22 +-
+ .../plugins/AM263x/Dio_TI_AM263x/config/Dio.arxml  |     2 +-
+ .../plugins/AM263x/Dio_TI_AM263x/config/Dio.xdm    |     2 +-
+ .../AM263x/Dio_TI_AM263x/config/Dio_NonEB.xdm      |     2 +-
+ .../AM263x/EthTrcv_TI_AM263x/config/EthTrcv.arxml  |    14 +-
+ .../AM263x/EthTrcv_TI_AM263x/config/EthTrcv.xdm    |    14 +-
+ .../generate_swcd/swcd/EthTrcv_Bswmd.arxml         |  1796 +-
+ .../plugins/AM263x/Eth_TI_AM263x/config/Eth.arxml  |    10 +-
+ .../plugins/AM263x/Eth_TI_AM263x/config/Eth.xdm    |    10 +-
+ .../plugins/AM263x/Fls_TI_AM263x/config/Fls.arxml  |     4 +-
+ .../plugins/AM263x/Fls_TI_AM263x/config/Fls.xdm    |     4 +-
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |  1364 +-
+ .../plugins/AM263x/Gpt_TI_AM263x/config/Gpt.arxml  |    12 +-
+ .../plugins/AM263x/Gpt_TI_AM263x/config/Gpt.xdm    |    12 +-
+ .../generate_swcd/swcd/Gpt_Bswmd.arxml             |  3254 ++--
+ .../plugins/AM263x/Icu_TI_AM263x/config/Icu.arxml  |     6 +-
+ .../plugins/AM263x/Icu_TI_AM263x/config/Icu.xdm    |  1458 +-
+ .../generate_swcd/swcd/Icu_Bswmd.arxml             |  2792 +--
+ .../generate_swcd/swcd/Lin_Bswmd.arxml             |  1672 +-
+ .../plugins/AM263x/Mcu_TI_AM263x/config/Mcu.arxml  |    42 +-
+ .../plugins/AM263x/Mcu_TI_AM263x/config/Mcu.xdm    |    42 +-
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             |  1090 +-
+ .../AM263x/Port_TI_AM263x/config/Port_AM263x.arxml |    14 +-
+ .../AM263x/Port_TI_AM263x/config/Port_AM263x.xdm   |    14 +-
+ .../Port_TI_AM263x/config/Port_AM263x_NonEB.xdm    |    14 +-
+ .../plugins/AM263x/Pwm_TI_AM263x/config/Pwm.arxml  |    14 +-
+ .../plugins/AM263x/Pwm_TI_AM263x/config/Pwm.xdm    |    14 +-
+ .../generate_swcd/swcd/Pwm_Bswmd.arxml             |  9166 ++++-----
+ .../plugins/AM263x/Spi_TI_AM263x/config/Spi.arxml  |    48 +-
+ .../plugins/AM263x/Spi_TI_AM263x/config/Spi.xdm    |    48 +-
+ .../AM263x/Spi_TI_AM263x/config/Spi_NonEB.xdm      |    48 +-
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |  1718 +-
+ .../plugins/AM263x/Wdg_TI_AM263x/config/Wdg.arxml  |     6 +-
+ .../plugins/AM263x/Wdg_TI_AM263x/config/Wdg.xdm    |     6 +-
+ .../config_1/tresos/output/swcd/Lin_Bswmd.arxml    |    78 +-
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_2/tresos/output/swcd/Lin_Bswmd.arxml    |    74 +-
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_3/tresos/output/swcd/Lin_Bswmd.arxml    |    78 +-
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_4/tresos/output/swcd/Lin_Bswmd.arxml    |    78 +-
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_5/tresos/output/swcd/Lin_Bswmd.arxml    |    78 +-
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_6/tresos/output/swcd/Lin_Bswmd.arxml    |    78 +-
+ .../config_6/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_7/tresos/output/swcd/Lin_Bswmd.arxml    |    78 +-
+ .../config_7/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_8/tresos/output/swcd/Lin_Bswmd.arxml    |    78 +-
+ .../config_8/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_91/tresos/output/swcd/Lin_Bswmd.arxml   |    78 +-
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ .../config_92/tresos/output/swcd/Lin_Bswmd.arxml   |    74 +-
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ .../config_93/tresos/output/swcd/Lin_Bswmd.arxml   |    76 +-
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ .../config_94/tresos/output/swcd/Lin_Bswmd.arxml   |    72 +-
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_6/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_7/tresos/output/swcd/Mcu_Bswmd.arxml    |     4 +-
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |     4 +-
+ 206 files changed, 40446 insertions(+), 40446 deletions(-)
+
+commit d5e7aaf3c2de22b4e4c61acc8078f18c27306c4c
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Jun 23 10:21:39 2026 +0530
+
+    all: all: sbl_path variable updated to correct sdk link
+    
+    -SDK binary link was updated yesterday in PR #2699, but sbl_path variable update was missed
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/docker_epsw/am261-daily-build-docker.sh  | 2 +-
+ mcal_misc/scripts/docker_epsw/am263-daily-build-docker.sh  | 2 +-
+ mcal_misc/scripts/docker_epsw/am263p-daily-build-docker.sh | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+commit 9ae7ec6eed830d693f313021ad04351e68a5f2f9
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Jun 23 09:58:11 2026 +0530
+
+    all: all: Changing git clone to HTTPS for work products repo for faster clone
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/cicd/test_result_validator.sh  | 3 ++-
+ mcal_misc/scripts/windows/mcal_coverage_build.sh | 3 ++-
+ mcal_misc/scripts/windows/mcal_release_build.sh  | 3 ++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+
 commit 2781313dd2c51f72f1f967afda74734bc8cd29ae
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon Jun 22 19:59:48 2026 +0530

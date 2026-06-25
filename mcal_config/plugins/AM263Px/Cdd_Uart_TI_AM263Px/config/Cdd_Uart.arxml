@@ -6,7 +6,7 @@
     <AR-PACKAGE UUID="ECUC:00000000-0000-0000-0000-000000000001">
       <SHORT-NAME>TI_AM263Px</SHORT-NAME>
       <ELEMENTS>
-        <ECUC-MODULE-DEF UUID="3cfdede8-066e-473b-9b4b-40b57a8ca632">
+        <ECUC-MODULE-DEF UUID="38dd91ba-3cc1-4a03-9c3b-d70e5135b1ff">
           <SHORT-NAME>Cdd_Uart</SHORT-NAME>
           <DESC>
             <L-2 L="EN">Configuration of the CDD (Complex Device Driver) UART module.</L-2>
@@ -29,7 +29,7 @@
             <SUPPORTED-CONFIG-VARIANT>VARIANT-PRE-COMPILE</SUPPORTED-CONFIG-VARIANT>
           </SUPPORTED-CONFIG-VARIANTS>
           <CONTAINERS>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="df0680b9-eda7-4110-9598-ce1b432c3066">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="0285ccfb-7c40-4e8b-9118-6c7e7846859f">
               <SHORT-NAME>CddUartDriver</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module.</L-2>
@@ -137,7 +137,7 @@
                       <MAX>12000000</MAX>
                       <MIN>2400</MIN>
                     </ECUC-INTEGER-PARAM-DEF>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="d9021c71-7dbe-48dd-b4fd-efd05a6967d4">
                       <SHORT-NAME>CddUartIOMode</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">This parameter identifies the UART operational mode for the configured IP.</L-2>
@@ -506,7 +506,7 @@
                     </ECUC-FUNCTION-NAME-DEF>
                   </PARAMETERS>
                   <REFERENCES>
-                    <ECUC-REFERENCE-DEF UUID="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac781">
+                    <ECUC-REFERENCE-DEF UUID="10f3061f-905c-49e7-90d5-bd5ca1ec3a55">
                       <SHORT-NAME>CddUartHwUnitCddDmaTxHandler</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">References the CDD DMA handler used for CDD UART transmission</L-2>
@@ -580,13 +580,13 @@
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
               </SUB-CONTAINERS>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="480086b4-53a1-4e67-ae4c-2063087d1dd3">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ad3fbb8a-daab-41c2-b291-2bc37fddf0fd">
               <SHORT-NAME>CddUartGeneral</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">General configuration settings for the Complex Device Driver</L-2>
               </DESC>
               <PARAMETERS>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="6ce5e2f1-1f44-4604-92cc-e154ec893117">
                   <SHORT-NAME>CddVersionInfoApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Cdd_Uart_GetVersionInfo function ON or OFF.</L-2>
@@ -712,7 +712,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="2ddcad53-d035-449d-b4d9-489ef60a51cf">
                   <SHORT-NAME>CddUartGetRemainingWordsApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Cdd_Uart_GetRemainingWords API which returns the remaining words to be transferred from the active device UART instance.</L-2>
@@ -731,7 +731,7 @@
                   </VALUE-CONFIG-CLASSES>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="9afdaaa0-10cb-4fb7-9aa8-d7ba36be9e2c">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="08340df1-5e34-46f1-b678-23515e2e5c79">
                   <SHORT-NAME>CddUartDevErrorDetect</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Development Error Detection and Notification ON or OFF.</L-2>
@@ -825,7 +825,7 @@
                 </ECUC-INTEGER-PARAM-DEF>
               </PARAMETERS>
               <REFERENCES>
-                <ECUC-REFERENCE-DEF UUID="26c9bdff-38cf-4f0b-8754-7472d0d41cb9">
+                <ECUC-REFERENCE-DEF UUID="0ece91c4-571b-42da-ab09-08f4cb23fdd5">
                   <SHORT-NAME>CddOsCounterRef</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter contains a reference to the OsCounter, which is used by the UART driver.</L-2>
@@ -860,13 +860,13 @@
                 </ECUC-REFERENCE-DEF>
               </REFERENCES>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="f8059619-213b-455c-9706-745609dfcae6">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="0564f0fc-ccca-434d-9cb1-7d490ed8d46c">
               <SHORT-NAME>CddUartPublishedInformation</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">Container holding all Complex driver specific published information parameters</L-2>
               </DESC>
               <PARAMETERS>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="7880ed70-3f2c-4330-b688-e84e9e811d66">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="378a0189-2d92-411b-b795-ae6d8ef71fea">
                   <SHORT-NAME>CddUartDeviceVariant</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Device variant AM263PX</L-2>

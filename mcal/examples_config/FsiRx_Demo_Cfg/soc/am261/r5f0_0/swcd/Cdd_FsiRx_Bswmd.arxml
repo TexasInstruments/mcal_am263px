@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
   <AR-PACKAGES>
-    <AR-PACKAGE UUID="2da4a9c6-dcb8-4a7d-91a0-3970a368b2ae">
+    <AR-PACKAGE UUID="8c1594da-21b2-4710-8d40-89db11fba4fd">
       <SHORT-NAME>Cdd_FsiRx_TI_AM261x</SHORT-NAME>
       <ELEMENTS>
-        <BSW-MODULE-DESCRIPTION UUID="f10365d7-7bbc-479a-8d68-b489f92a46d9">
+        <BSW-MODULE-DESCRIPTION UUID="d858ea9d-8d0a-4fa4-9378-7cd85fae5765">
           <SHORT-NAME>Cdd_FsiRx</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
           <IMPLEMENTED-ENTRYS>
@@ -38,7 +38,7 @@
           </IMPLEMENTED-ENTRYS>
           <MODULE-ID>255</MODULE-ID>
           <BSW-MODULE-DEPENDENCYS>
-            <BSW-MODULE-DEPENDENCY UUID="921299a5-07e4-4bc5-a5e0-695e1b1c1ba5">
+            <BSW-MODULE-DEPENDENCY UUID="03a28d1b-1eb5-4b1d-878f-97e8331620aa">
               <SHORT-NAME>Dem</SHORT-NAME>
               <TARGET-MODULE-ID>54</TARGET-MODULE-ID>
               <TARGET-MODULE-REFS>
@@ -58,10 +58,10 @@
             </BSW-MODULE-DEPENDENCY>
           </BSW-MODULE-DEPENDENCYS>
           <INTERNAL-BEHAVIORS>
-            <BSW-INTERNAL-BEHAVIOR UUID="08c7871b-5e99-4611-9a00-06a369df7e86">
+            <BSW-INTERNAL-BEHAVIOR UUID="627769fa-0bbf-48ee-999d-6b2db0d60c95">
               <SHORT-NAME>Cdd_Fsi_Rx_Behavior</SHORT-NAME>
               <EXCLUSIVE-AREAS>
-                <EXCLUSIVE-AREA UUID="4fc38db4-f789-41ad-baac-f5c8fc007188">
+                <EXCLUSIVE-AREA UUID="3f3a3992-f2a7-4676-b112-06d8ea14c253">
                   <SHORT-NAME>FSI_RX_EXCLUSIVE_AREA_0</SHORT-NAME>
                 </EXCLUSIVE-AREA>
               </EXCLUSIVE-AREAS>
@@ -88,7 +88,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="6e81150d-4167-46a0-8ebe-3ae8210e9ba9">
+                <BSW-INTERRUPT-ENTITY UUID="aff21e40-7bd2-42a0-8d41-79cf012f98c1">
                   <SHORT-NAME>CddFsiRx_FSIINT2_IrqUnit0</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -110,13 +110,13 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-CALLED-ENTITY UUID="22b574ad-51da-4567-bfe3-0639a985f25e">
+                <BSW-CALLED-ENTITY UUID="c727cd54-6abf-4cb7-8148-66fe7de379ad">
                   <SHORT-NAME>CddFsiRx_GetStatus</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/CddFsiRx_GetStatus</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="651bbd50-7d63-4d59-965e-17dff3fd0f04">
+                <BSW-CALLED-ENTITY UUID="1f99c12b-ba3b-4e81-827e-dbe094d504db">
                   <SHORT-NAME>Cdd_FsiRx_DeInit</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -128,7 +128,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/Cdd_FsiRx_DeInit</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="12cf18e0-9183-4e55-839b-57fe386a0627">
+                <BSW-CALLED-ENTITY UUID="21d012d5-e034-47b2-a4ae-2969b052faa4">
                   <SHORT-NAME>Cdd_FsiRx_GetVersionInfo</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>SINGLE-CORE-REENTRANT</REENTRANCY-LEVEL>
@@ -140,7 +140,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/Cdd_FsiRx_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="08bd6605-9162-4248-b0c7-bf7ddd98d4ed">
+                <BSW-CALLED-ENTITY UUID="4afc8eee-f4e0-4d92-81db-74cec91ef5aa">
                   <SHORT-NAME>Cdd_FsiRx_Init</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -152,7 +152,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Cdd_FsiRx_TI_AM261x/Cdd_FsiRx_ModuleEntry/Cdd_FsiRx_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="ad08af1d-2dd8-4551-a036-3dd706a08933">
+                <BSW-CALLED-ENTITY UUID="900456dc-78bd-4be2-a319-7b88d717d72d">
                   <SHORT-NAME>Cdd_FsiRx_Reset</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -195,10 +195,10 @@
             </BSW-INTERNAL-BEHAVIOR>
           </INTERNAL-BEHAVIORS>
         </BSW-MODULE-DESCRIPTION>
-        <BSW-IMPLEMENTATION UUID="68fab167-6a0d-4a08-9015-4767e4cc68a5">
+        <BSW-IMPLEMENTATION UUID="c168b74f-4b63-484d-9898-066a1407cbaf">
           <SHORT-NAME>Cdd_FsiRx_Impl</SHORT-NAME>
           <CODE-DESCRIPTORS>
-            <CODE UUID="e4253ecc-4d3a-4d4c-a08b-835c4c19fb3a">
+            <CODE UUID="53537b84-a24f-4fea-8dfb-bdaba63b2129">
               <SHORT-NAME>Files</SHORT-NAME>
               <ARTIFACT-DESCRIPTORS>
                 <AUTOSAR-ENGINEERING-OBJECT>
@@ -257,7 +257,7 @@
             </CODE>
           </CODE-DESCRIPTORS>
           <COMPILERS>
-            <COMPILER UUID="5b252f7d-33c9-466f-9573-9877d7f656ec">
+            <COMPILER UUID="5487ddc9-d3e3-43e3-bf7f-a1c34cbdbce6">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
               <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb   -DAM261X_PLATFORM </OPTIONS>
@@ -266,7 +266,7 @@
             </COMPILER>
           </COMPILERS>
           <LINKERS>
-            <LINKER UUID="2fee982e-243e-4f73-b7df-edf8c9b26e85">
+            <LINKER UUID="c1a24f37-db80-46d8-9394-a14fae2eff3c">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
               <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
@@ -275,22 +275,22 @@
             </LINKER>
           </LINKERS>
           <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
-          <RESOURCE-CONSUMPTION UUID="014cc1bb-df57-4463-ac65-9a6716333457">
+          <RESOURCE-CONSUMPTION UUID="d8b584ba-0c21-43d7-959f-afad48885d78">
             <SHORT-NAME>ResourceConsumption</SHORT-NAME>
             <MEMORY-SECTIONS>
-              <MEMORY-SECTION UUID="46032e93-30dc-4f81-ba38-7f5f4ffabdb5">
+              <MEMORY-SECTION UUID="a7cf16f8-8987-4566-abe0-47be3ad4dc0d">
                 <SHORT-NAME>CDD_FSI_RX_CODE</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
                 <SYMBOL>CODE</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="098b7980-8967-4297-97df-2e4034d02f06">
+              <MEMORY-SECTION UUID="7ea9d9d9-7810-4913-be70-a06028628d63">
                 <SHORT-NAME>CDD_FSI_RX_CONFIG_DATA</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONFIG_DATA</SW-ADDRMETHOD-REF>
                 <SYMBOL>CONFIG_DATA</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="ba479406-8b46-4cb5-b878-bea6b0db925b">
+              <MEMORY-SECTION UUID="59e7c838-8e08-4c58-a6a3-13df1ecfbb87">
                 <SHORT-NAME>CDD_FSI_RX_ISR_CODE</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
@@ -326,10 +326,10 @@
         </BSW-IMPLEMENTATION>
       </ELEMENTS>
       <AR-PACKAGES>
-        <AR-PACKAGE UUID="1566c979-f45e-487c-bc3b-f53f40dd5feb">
+        <AR-PACKAGE UUID="4ac50b8e-cdae-499c-931d-dfc98cabf323">
           <SHORT-NAME>Cdd_FsiRx_ModuleEntry</SHORT-NAME>
           <ELEMENTS>
-            <BSW-MODULE-ENTRY UUID="0c16dfc7-8957-4508-9120-00506f632384">
+            <BSW-MODULE-ENTRY UUID="70f0ad1e-a752-4c44-9531-f866c41496ed">
               <SHORT-NAME>CddFsiRx_FSIINT1_IrqUnit0</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -347,7 +347,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="08839271-b4b5-4df5-9258-1c17684c055f">
+            <BSW-MODULE-ENTRY UUID="2c90c34d-f2f4-4106-a4fb-86dd8d4b2a36">
               <SHORT-NAME>CddFsiRx_GetStatus</SHORT-NAME>
               <SERVICE-ID>5</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -357,7 +357,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ad2befa7-4cd5-4c70-966c-2dfa1ae6bbda">
+            <BSW-MODULE-ENTRY UUID="57369c87-894f-4a8d-b7ba-c9b1bfa96e7d">
               <SHORT-NAME>Cdd_FsiRx_DeInit</SHORT-NAME>
               <SERVICE-ID>4</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -367,7 +367,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ced45391-39d8-4fcc-bd87-f4b48777093d">
+            <BSW-MODULE-ENTRY UUID="af170d98-41be-493e-873b-f89ed8167a02">
               <SHORT-NAME>Cdd_FsiRx_GetVersionInfo</SHORT-NAME>
               <SERVICE-ID>2</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -377,7 +377,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="74e9925f-06c4-4a36-a512-6ce2f23bbc28">
+            <BSW-MODULE-ENTRY UUID="138b4b86-8b62-4e21-83c0-7361fccde46d">
               <SHORT-NAME>Cdd_FsiRx_Init</SHORT-NAME>
               <SERVICE-ID>1</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -387,7 +387,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="d62326a2-76d7-4b5f-a48a-868d01e75cd8">
+            <BSW-MODULE-ENTRY UUID="dafec51b-2861-4458-9088-fda5ec89c96c">
               <SHORT-NAME>Cdd_FsiRx_MainFunction</SHORT-NAME>
               <SERVICE-ID>3</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -397,7 +397,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="7f808ba2-63db-46f4-8000-d8d86708c8b8">
+            <BSW-MODULE-ENTRY UUID="1751e933-df3d-4c11-9df9-9f27b1162723">
               <SHORT-NAME>Cdd_FsiRx_Reset</SHORT-NAME>
               <SERVICE-ID>6</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -407,7 +407,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="dcd07f7b-51d5-42b6-9dca-909c2aff0bb9">
+            <BSW-MODULE-ENTRY UUID="e79f3b0d-e9e1-4e0f-a7f6-9e4b55f9cd99">
               <SHORT-NAME>Cdd_FsiRx_setUpBuffer</SHORT-NAME>
               <SERVICE-ID>7</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>

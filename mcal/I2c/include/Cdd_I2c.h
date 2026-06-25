@@ -265,18 +265,22 @@ extern "C" {
 #define CDD_I2C_400KHZ (400000U)
 /** @} */
 
+/* Design: MCAL-14968 */
 /** \brief This type defines the addresss size */
 typedef uint16 Cdd_I2c_AddressType;
 
 /** \brief This type defines the direction of operation - write or read */
 typedef uint8 Cdd_I2c_DirectionType;
 
+/* Design: MCAL-14979 */
 /** \brief This type defines the data to be transmitted using the CDD_I2C Driver */
 typedef uint8 Cdd_I2c_DataType;
 
+/* Design: MCAL-14970 */
 /** \brief Definition for the pointer type for general buffer handling */
 typedef uint8* Cdd_I2c_DataPtrType;
 
+/* Design: MCAL-14971 */
 /** \brief Definition for the pointer type for TX buffer handling */
 typedef const uint8* Cdd_I2c_DataConstPtrType;
 
@@ -287,9 +291,11 @@ typedef uint8 Cdd_I2c_HwUnitType;
 /** \brief This is the type for a sequence identifier */
 typedef uint8 Cdd_I2c_SequenceType;
 
+/* Design: MCAL-14978 */
 /** \brief This is the type for a Ch identifier */
 typedef uint8 Cdd_I2c_ChannelType;
 
+/* Design: MCAL-14969 */
 /** \brief Type to define the number of data elements to be sent and/or received
  *  during a transmission */
 typedef uint16 Cdd_I2c_DataLengthType;
@@ -306,6 +312,7 @@ typedef enum
     CDD_I2C_HW_UNIT_BUSY
 } Cdd_I2c_HwUnitStatusType;
 
+/* Design: MCAL-14972 */
 /**
  * \brief This is an enum containing the possible driver states.
  * The default driver state is CDD_I2C_UNINIT
@@ -321,6 +328,7 @@ typedef enum
 } Cdd_I2c_ComponentStatusType;
 
 /* Design: MCAL-14886 */
+/* Design: MCAL-14973 */
 /**
  * \brief This is an enum containing the possible variants
  * of arbitration loss timeout handling
@@ -333,6 +341,7 @@ typedef enum
     CDD_I2C_RECURRENT_MODE
 } Cdd_I2c_HandlingType;
 
+/* Design: MCAL-14974 */
 /**
  * \brief  This is an enum containing all the possible channel results
  * The default channel state is CDD_I2C_CH_RESULT_OK.
@@ -355,6 +364,7 @@ typedef enum
     CDD_I2C_CH_RESULT_HW_UNIT_RESET
 } Cdd_I2c_ChannelResultType;
 
+/* Design: MCAL-14975 */
 /**
  * \name I2C Sequence Status
  *
@@ -414,6 +424,7 @@ typedef void (*Cdd_I2c_SequenceErrorNotification)(uint8 errorCode);
 /*                         Structures and Enums                               */
 /* ========================================================================== */
 
+/* Design: MCAL-14977 */
 /**
  * \brief CDD_I2C Hardware unit configuration structure
  */

@@ -6,7 +6,7 @@
     <AR-PACKAGE>
       <SHORT-NAME>TI_AM263Px</SHORT-NAME>
       <ELEMENTS>
-        <ECUC-MODULE-DEF UUID="3cfdede8-066e-473b-9b4b-40b57a8ca632">
+        <ECUC-MODULE-DEF UUID="106ab525-4f9c-4000-bf9d-4c3066966a6e">
           <SHORT-NAME>Cdd_Ipc</SHORT-NAME>
           <DESC>
             <L-2 L="EN">Configuration of the CDD(Complex device driver) IPC module.</L-2>
@@ -71,7 +71,7 @@
                 </ECUC-ENUMERATION-PARAM-DEF>
               </PARAMETERS>
               <SUB-CONTAINERS>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="6a4113e1-75fa-4cac-a818-cce8010ab1e2">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="189d58bf-cc44-481d-a3dd-a17d9fd6e49d">
                   <SHORT-NAME>CddIpcRemoteCoreList</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Refers to the list of coreId that are valid for the particular platform.</L-2>
@@ -80,7 +80,7 @@
                   <UPPER-MULTIPLICITY>3</UPPER-MULTIPLICITY>
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <PARAMETERS>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="0b4c064e-8dde-419a-8b44-42a4407dd983">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="c9f7ee9a-12ac-4de2-9d3b-024e720d14a5">
                       <SHORT-NAME>CddIpcRemoteCoreIdIndex</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">The cores that are participating the IPC message exchange (Exclude the local core from these)</L-2>
@@ -184,7 +184,7 @@
                       <MAX>63</MAX>
                       <MIN>0</MIN>
                     </ECUC-INTEGER-PARAM-DEF>
-                    <ECUC-FUNCTION-NAME-DEF UUID="354621cb-2f1c-4667-9bc1-a72ce7e28a06">
+                    <ECUC-FUNCTION-NAME-DEF UUID="ad525cdf-6684-4c45-b8b6-9e26d5420544">
                       <SHORT-NAME>CddIpcRecvCallBack</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Function pointer to RPMSG callback function</L-2>
@@ -594,7 +594,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                <ECUC-INTEGER-PARAM-DEF UUID="65a8911e-2f81-41e7-8ea3-fc86ea7c3860">
                   <SHORT-NAME>CddIpcTimeout</SHORT-NAME>
                   <DESC>
                     <L-2 L="FOR-ALL">Timeout value for send/receive/wait API&apos;s. Unit is in clock ticks</L-2>
@@ -671,7 +671,7 @@
                 </ECUC-INTEGER-PARAM-DEF>
               </PARAMETERS>
               <REFERENCES>
-                <ECUC-REFERENCE-DEF UUID="26c9bdff-38cf-4f0b-8754-7472d0d41cb9">
+                <ECUC-REFERENCE-DEF UUID="ee47b664-be07-4475-8332-27f95534bdc6">
                   <SHORT-NAME>CddOsCounterRef</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter contains a reference to the OsCounter, which is used by the GPT driver.</L-2>

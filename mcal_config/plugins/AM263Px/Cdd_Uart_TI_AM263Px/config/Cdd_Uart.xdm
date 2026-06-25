@@ -26,7 +26,7 @@
 							<a:a name="POSTBUILDVARIANTSUPPORT" value="false"/>
 							<a:a name="RELEASE" value="asc:4.3.1"/>
 							<a:a name="UPPER-MULTIPLICITY" value="*"/>
-							<a:a name="UUID" value="3cfdede8-066e-473b-9b4b-40b57a8ca632"/>
+							<a:a name="UUID" value="38dd91ba-3cc1-4a03-9c3b-d70e5135b1ff"/>
 							<v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
 								<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 									<icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -44,7 +44,7 @@
 								<a:da name="MAX" value="1"/>
 								<v:ctr name="CddUartDriver" type="MULTIPLE-CONFIGURATION-CONTAINER">
 									<a:a name="DESC" value="EN: This container contains the configuration parameters and sub containers of the AUTOSAR Complex device driver (CDD) module."/>
-									<a:a name="UUID" value="df0680b9-eda7-4110-9598-ce1b432c3066"/>
+									<a:a name="UUID" value="0285ccfb-7c40-4e8b-9118-6c7e7846859f"/>
 									<v:lst name="CddUartChannel" type="MAP">
 										<a:da name="MIN" value="1"/>
 										<a:da name="MAX" value="6"/>
@@ -121,7 +121,7 @@
 												<a:a name="ORIGIN" value="Texas Instruments"/>
 												<a:a name="SCOPE" value="LOCAL"/>
 												<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780"/>
+												<a:a name="UUID" value="d9021c71-7dbe-48dd-b4fd-efd05a6967d4"/>
 												<a:da name="DEFAULT" value="CDD_UART_MODE_INTERRUPT"/>
 												<a:da name="EDITABLE" value="true"/>
 												<a:da name="ENABLE" value="true"/>
@@ -285,7 +285,7 @@
 												</a:a>
 												<a:a name="ORIGIN" value="Texas Instruments"/>
 												<a:a name="SCOPE" value="LOCAL"/>
-												<a:a name="UUID" value="6d7d0d8a-3348-4b9a-ba5a-7a808b2ac781"/>
+												<a:a name="UUID" value="10f3061f-905c-49e7-90d5-bd5ca1ec3a55"/>
 												<a:da name="ENABLE" type="XPath" expr="../CddUartIOMode = 'CDD_UART_MODE_DMA'"/>
 												<a:a name="OPTIONAL" value="false"/>
 												<a:da name="REF" value="ASPathDataOfSchema:/TI_AM263Px/Cdd_Dma/CddDmaDriverHandler"/>
@@ -350,7 +350,7 @@
 							</v:lst>
 							<v:ctr name="CddUartGeneral" type="IDENTIFIABLE">
 								<a:a name="DESC" value="EN: General configuration settings for the Complex Device Driver"/>
-								<a:a name="UUID" value="480086b4-53a1-4e67-ae4c-2063087d1dd3"/>
+								<a:a name="UUID" value="ad3fbb8a-daab-41c2-b291-2bc37fddf0fd"/>
 								<v:var name="CddVersionInfoApi" type="BOOLEAN">
 									<!-- Design: MCAL-22636 -->
 									<a:a name="DESC" value="EN: Switches the Cdd_Uart_GetVersionInfo function ON or OFF."/>
@@ -361,7 +361,7 @@
 									<a:a name="ORIGIN" value="Texas Instruments"/>
 									<a:a name="SCOPE" value="LOCAL"/>
 									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-									<a:a name="UUID" value="33e55d19-67fd-4fdd-8d16-37098753e356"/>
+									<a:a name="UUID" value="6ce5e2f1-1f44-4604-92cc-e154ec893117"/>
 									<a:da name="DEFAULT" value="true"/>
 								</v:var>
 								<v:var name="CddUartRegisterReadbackApi" type="BOOLEAN">
@@ -437,7 +437,7 @@
 										<icc:v class="PreCompile">VariantPreCompile</icc:v>
 									</a:a>
 									<a:a name="ORIGIN" value="Texas Instruments"/>
-									<a:a name="UUID" value="f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+									<a:a name="UUID" value="2ddcad53-d035-449d-b4d9-489ef60a51cf"/>
 									<a:da name="DEFAULT" value="true"/>
 								</v:var>
 								<v:var name="CddUartDevErrorDetect" type="BOOLEAN">
@@ -450,7 +450,7 @@
 									<a:a name="ORIGIN" value="Texas Instruments"/>
 									<a:a name="SCOPE" value="LOCAL"/>
 									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-									<a:a name="UUID" value="9afdaaa0-10cb-4fb7-9aa8-d7ba36be9e2c"/>
+									<a:a name="UUID" value="08340df1-5e34-46f1-b678-23515e2e5c79"/>
 									<a:da name="DEFAULT" value="true"/>
 								</v:var>
 								<v:var name="CddUartIrqType" type="ENUMERATION">
@@ -498,7 +498,7 @@
 									<a:a name="OPTIONAL" value="true"/>
 									<a:a name="ORIGIN" value="Texas Instruments"/>
 									<a:a name="SCOPE" value="LOCAL"/>
-									<a:a name="UUID" value="26c9bdff-38cf-4f0b-8754-7472d0d41cb9"/>
+									<a:a name="UUID" value="0ece91c4-571b-42da-ab09-08f4cb23fdd5"/>
 									<a:da name="REF" value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
 									<a:da name="ENABLE" value="true"/>
 									<a:da name="EDITABLE" value="true"/>
@@ -508,7 +508,7 @@
 							</v:ctr>
 							<v:ctr name="CddUartPublishedInformation" type="IDENTIFIABLE">
 								<a:a name="DESC" value="EN: Container holding all Complex driver specific published information parameters"/>
-								<a:a name="UUID" value="f8059619-213b-455c-9706-745609dfcae6"/>
+								<a:a name="UUID" value="0564f0fc-ccca-434d-9cb1-7d490ed8d46c"/>
 								<v:var name="CddUartDeviceVariant" type="ENUMERATION">
 									<a:a name="DESC" value="EN: Device variant AM263PX"/>
 									<a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
@@ -518,7 +518,7 @@
 									<a:a name="ORIGIN" value="Texas Instruments"/>
 									<a:a name="SCOPE" value="LOCAL"/>
 									<a:a name="SYMBOLICNAMEVALUE" value="false"/>
-									<a:a name="UUID" value="7880ed70-3f2c-4330-b688-e84e9e811d66"/>
+									<a:a name="UUID" value="378a0189-2d92-411b-b795-ae6d8ef71fea"/>
 									<a:da name="DEFAULT" value="AM263PX"/>
 									<a:da name="EDITABLE" value="true"/>
 									<a:da name="ENABLE" value="true"/>

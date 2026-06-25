@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <AUTOSAR xmlns="http://autosar.org/schema/r4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://autosar.org/schema/r4.0 AUTOSAR_00044.xsd">
   <AR-PACKAGES>
-    <AR-PACKAGE UUID="2da4a9c6-dcb8-4a7d-91a0-3970a368b2ae">
+    <AR-PACKAGE UUID="d5ffee75-0f51-4306-a635-699f853bb788">
       <SHORT-NAME>Can_TI_AM263Px</SHORT-NAME>
       <ELEMENTS>
-        <BSW-MODULE-DESCRIPTION UUID="f10365d7-7bbc-479a-8d68-b489f92a46d9">
+        <BSW-MODULE-DESCRIPTION UUID="e51fa7e5-06a8-4a04-8ef1-0589fef9a45e">
           <SHORT-NAME>Can</SHORT-NAME>
           <CATEGORY>BSW_MODULE</CATEGORY>
           <IMPLEMENTED-ENTRYS>
@@ -92,7 +92,7 @@
                 </BSW-MODULE-DESCRIPTION-REF-CONDITIONAL>
               </TARGET-MODULE-REFS>
             </BSW-MODULE-DEPENDENCY>
-            <BSW-MODULE-DEPENDENCY UUID="921299a5-07e4-4bc5-a5e0-695e1b1c1ba5">
+            <BSW-MODULE-DEPENDENCY UUID="3e26e7ad-bceb-45ac-9165-d9c008f0366c">
               <SHORT-NAME>Det</SHORT-NAME>
               <TARGET-MODULE-ID>15</TARGET-MODULE-ID>
               <TARGET-MODULE-REFS>
@@ -103,15 +103,15 @@
             </BSW-MODULE-DEPENDENCY>
           </BSW-MODULE-DEPENDENCYS>
           <INTERNAL-BEHAVIORS>
-            <BSW-INTERNAL-BEHAVIOR UUID="08c7871b-5e99-4611-9a00-06a369df7e86">
+            <BSW-INTERNAL-BEHAVIOR UUID="1c7ecf5e-f976-4dbc-8297-f0db3a0f1d56">
               <SHORT-NAME>Can_Behavior</SHORT-NAME>
               <EXCLUSIVE-AREAS>
-                <EXCLUSIVE-AREA UUID="4fc38db4-f789-41ad-baac-f5c8fc007188">
+                <EXCLUSIVE-AREA UUID="48856710-1bb5-429e-865a-c4d4980beddd">
                   <SHORT-NAME>CAN_EXCLUSIVE_AREA_0</SHORT-NAME>
                 </EXCLUSIVE-AREA>
               </EXCLUSIVE-AREAS>
               <ENTITYS>
-                <BSW-INTERRUPT-ENTITY UUID="6e81150d-4167-46a0-8ebe-3ae8210e9ba9">
+                <BSW-INTERRUPT-ENTITY UUID="260c4fc7-9e29-47f8-9351-09a83137fdac">
                   <SHORT-NAME>Can_0_Int0ISR</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -141,7 +141,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="ac14fa3b-a94f-4fcc-97ce-afe493122c22">
+                <BSW-INTERRUPT-ENTITY UUID="d018ba7d-6f9c-4a86-b4ff-e4438f1ed621">
                   <SHORT-NAME>Can_1_Int0ISR</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -171,7 +171,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="32fdacd4-223c-401d-9c48-02a701a26926">
+                <BSW-INTERRUPT-ENTITY UUID="98c4137e-5c84-4be6-affb-09832c93a6b4">
                   <SHORT-NAME>Can_2_Int0ISR</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -201,7 +201,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-INTERRUPT-ENTITY UUID="6e272686-e112-422a-a1ad-682919b2637b">
+                <BSW-INTERRUPT-ENTITY UUID="5e48fb42-f9d4-4e10-99ec-93d47f739dd1">
                   <SHORT-NAME>Can_3_Int0ISR</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -261,7 +261,7 @@
                   <INTERRUPT-CATEGORY>CAT-1</INTERRUPT-CATEGORY>
                   <INTERRUPT-SOURCE>Hardware</INTERRUPT-SOURCE>
                 </BSW-INTERRUPT-ENTITY>
-                <BSW-CALLED-ENTITY UUID="651bbd50-7d63-4d59-965e-17dff3fd0f04">
+                <BSW-CALLED-ENTITY UUID="d2ec1a94-4e91-46ae-8c55-5e93c28ef142">
                   <SHORT-NAME>Can_DeInit</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -277,7 +277,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263Px/Can_ModuleEntry/Can_DeInit</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="5ecc9ae5-238e-4a6c-bfa1-6ee4bf44b997">
+                <BSW-CALLED-ENTITY UUID="700d74bb-4eb9-42f4-9416-d5ee7ba01375">
                   <SHORT-NAME>Can_DisableControllerInterrupts</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Can_TI_AM263Px/Can/Can_Behavior/CAN_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -292,7 +292,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263Px/Can_ModuleEntry/Can_DisableControllerInterrupts</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="9d8c8d20-eda8-4c53-8ab5-ac8b80c04faa">
+                <BSW-CALLED-ENTITY UUID="5e106245-7dc0-4d87-9251-7a42ff5895ba">
                   <SHORT-NAME>Can_EnableControllerInterrupts</SHORT-NAME>
                   <CAN-ENTER-EXCLUSIVE-AREA-REFS>
                     <CAN-ENTER-EXCLUSIVE-AREA-REF DEST="EXCLUSIVE-AREA">/Can_TI_AM263Px/Can/Can_Behavior/CAN_EXCLUSIVE_AREA_0</CAN-ENTER-EXCLUSIVE-AREA-REF>
@@ -307,7 +307,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263Px/Can_ModuleEntry/Can_EnableControllerInterrupts</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="ad08af1d-2dd8-4551-a036-3dd706a08933">
+                <BSW-CALLED-ENTITY UUID="850106ce-b71f-41a2-a6df-86fdcf7ca0de">
                   <SHORT-NAME>Can_GetControllerErrorState</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -319,7 +319,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263Px/Can_ModuleEntry/Can_GetControllerErrorState</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="ff8af45f-9327-43ec-a2c3-d836793c5dfa">
+                <BSW-CALLED-ENTITY UUID="6bb9184f-e3d9-466f-897b-6320580c70af">
                   <SHORT-NAME>Can_GetControllerMode</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -331,7 +331,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263Px/Can_ModuleEntry/Can_GetControllerMode</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="12cf18e0-9183-4e55-839b-57fe386a0627">
+                <BSW-CALLED-ENTITY UUID="01efa54e-a97e-4f14-821c-89eb2eff5816">
                   <SHORT-NAME>Can_GetVersionInfo</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -343,7 +343,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263Px/Can_ModuleEntry/Can_GetVersionInfo</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-CALLED-ENTITY UUID="08bd6605-9162-4248-b0c7-bf7ddd98d4ed">
+                <BSW-CALLED-ENTITY UUID="c11174c2-72c8-44f1-8c93-c28d60b64588">
                   <SHORT-NAME>Can_Init</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -359,7 +359,7 @@
                   </CALL-POINTS>
                   <IMPLEMENTED-ENTRY-REF DEST="BSW-MODULE-ENTRY">/Can_TI_AM263Px/Can_ModuleEntry/Can_Init</IMPLEMENTED-ENTRY-REF>
                 </BSW-CALLED-ENTITY>
-                <BSW-SCHEDULABLE-ENTITY UUID="56f13e65-9681-41d1-b229-5d431b8ea428">
+                <BSW-SCHEDULABLE-ENTITY UUID="c2bf983a-90af-4ac1-9d6c-6bdda88aaf62">
                   <SHORT-NAME>Can_MainFunction_BusOff</SHORT-NAME>
                   <MINIMUM-START-INTERVAL>0.0</MINIMUM-START-INTERVAL>
                   <REENTRANCY-LEVEL>NON-REENTRANT</REENTRANCY-LEVEL>
@@ -525,10 +525,10 @@
             </BSW-INTERNAL-BEHAVIOR>
           </INTERNAL-BEHAVIORS>
         </BSW-MODULE-DESCRIPTION>
-        <BSW-IMPLEMENTATION UUID="68fab167-6a0d-4a08-9015-4767e4cc68a5">
+        <BSW-IMPLEMENTATION UUID="8209a487-16b7-493f-bbcb-4c9c39875fc7">
           <SHORT-NAME>Can_Impl</SHORT-NAME>
           <CODE-DESCRIPTORS>
-            <CODE UUID="e4253ecc-4d3a-4d4c-a08b-835c4c19fb3a">
+            <CODE UUID="1970cee5-343b-41b4-be59-981c3bf5b264">
               <SHORT-NAME>Files</SHORT-NAME>
               <ARTIFACT-DESCRIPTORS>
                 <AUTOSAR-ENGINEERING-OBJECT>
@@ -583,7 +583,7 @@
             </CODE>
           </CODE-DESCRIPTORS>
           <COMPILERS>
-            <COMPILER UUID="5b252f7d-33c9-466f-9573-9877d7f656ec">
+            <COMPILER UUID="91755b08-4563-4b58-8dbb-40c2c5855901">
               <SHORT-NAME>tiarmclang</SHORT-NAME>
               <NAME>TI ARM Clang</NAME>
               <OPTIONS>-mcpu=cortex-r5  -mfpu=vfpv3-d16  -mfloat-abi=hard  -c  -mlittle-endian  -ffunction-sections  -gdwarf-3  -Werror -Os  -x  -save-temps  -mthumb  -DAM263PX_SIP_PACKAGE  -DAM263PX_PLATFORM -DAM263PX_R_PACKAGE -DAM263PX_C_PACKAGE </OPTIONS>
@@ -592,7 +592,7 @@
             </COMPILER>
           </COMPILERS>
           <LINKERS>
-            <LINKER UUID="2fee982e-243e-4f73-b7df-edf8c9b26e85">
+            <LINKER UUID="c52d3725-56dd-4be8-b2b1-1954593ec371">
               <SHORT-NAME>tiarmlnk</SHORT-NAME>
               <NAME>TI ARM Clang Linker</NAME>
               <OPTIONS>-mcpu=cortex-r5  -Wl,--ram_model  -Wl,--reread_libs  -Wl,--warn_sections  -qq -Wl,--emit_warnings_as_errors --diag_suppress=10068 --diag_suppress=10063 </OPTIONS>
@@ -601,10 +601,10 @@
             </LINKER>
           </LINKERS>
           <PROGRAMMING-LANGUAGE>C</PROGRAMMING-LANGUAGE>
-          <RESOURCE-CONSUMPTION UUID="014cc1bb-df57-4463-ac65-9a6716333457">
+          <RESOURCE-CONSUMPTION UUID="a699352a-33f5-4120-b8bc-8ad500b868da">
             <SHORT-NAME>ResourceConsumption</SHORT-NAME>
             <MEMORY-SECTIONS>
-              <MEMORY-SECTION UUID="46032e93-30dc-4f81-ba38-7f5f4ffabdb5">
+              <MEMORY-SECTION UUID="938cbddf-bb1d-44b6-ae33-c59619ae7f1d">
                 <SHORT-NAME>CAN_CODE</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
@@ -616,7 +616,7 @@
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CONFIG_DATA</SW-ADDRMETHOD-REF>
                 <SYMBOL>CONFIG_DATA</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="ba479406-8b46-4cb5-b878-bea6b0db925b">
+              <MEMORY-SECTION UUID="d1502926-90ca-45e1-9b36-edd0dc5eb3ce">
                 <SHORT-NAME>CAN_ISR_CODE</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/CODE</SW-ADDRMETHOD-REF>
@@ -640,7 +640,7 @@
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_INIT</SW-ADDRMETHOD-REF>
                 <SYMBOL>VAR_INIT_UNSPECIFIED</SYMBOL>
               </MEMORY-SECTION>
-              <MEMORY-SECTION UUID="098b7980-8967-4297-97df-2e4034d02f06">
+              <MEMORY-SECTION UUID="076ace1a-8408-4ba6-af1d-5fcc0154de2e">
                 <SHORT-NAME>CAN_VAR_NO_INIT_UNSPECIFIED</SHORT-NAME>
                 <ALIGNMENT>UNSPECIFIED</ALIGNMENT>
                 <SW-ADDRMETHOD-REF DEST="SW-ADDR-METHOD">/AUTOSAR_MemMap/SwAddrMethods/VAR_NO_INIT</SW-ADDRMETHOD-REF>
@@ -676,7 +676,7 @@
         </BSW-IMPLEMENTATION>
       </ELEMENTS>
       <AR-PACKAGES>
-        <AR-PACKAGE UUID="1566c979-f45e-487c-bc3b-f53f40dd5feb">
+        <AR-PACKAGE UUID="c93d0c7e-de02-4e9c-ae59-74eb76a4e430">
           <SHORT-NAME>Can_ModuleEntry</SHORT-NAME>
           <ELEMENTS>
             <BSW-MODULE-ENTRY UUID="256d92ab-20ff-41f9-841f-2ff30b48a8fa">
@@ -751,7 +751,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="7f808ba2-63db-46f4-8000-d8d86708c8b8">
+            <BSW-MODULE-ENTRY UUID="ca342a81-6197-4a12-af2a-efd010f848a5">
               <SHORT-NAME>Can_CheckWakeup</SHORT-NAME>
               <SERVICE-ID>11</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -761,7 +761,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ad2befa7-4cd5-4c70-966c-2dfa1ae6bbda">
+            <BSW-MODULE-ENTRY UUID="e1244e82-5e22-42a4-b72f-2e0934cb05da">
               <SHORT-NAME>Can_DeInit</SHORT-NAME>
               <SERVICE-ID>16</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -771,7 +771,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="dcd07f7b-51d5-42b6-9dca-909c2aff0bb9">
+            <BSW-MODULE-ENTRY UUID="c06a414f-9fd6-4aaf-a249-97a5073c15a2">
               <SHORT-NAME>Can_DisableControllerInterrupts</SHORT-NAME>
               <SERVICE-ID>4</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -781,7 +781,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="e5aa82bb-2440-41bb-b8a8-79333947d692">
+            <BSW-MODULE-ENTRY UUID="dc93753e-c861-47f3-aa47-044b46b8e43b">
               <SHORT-NAME>Can_EnableControllerInterrupts</SHORT-NAME>
               <SERVICE-ID>5</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -791,7 +791,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="345d7384-bb06-4329-b7bd-0317e342d81f">
+            <BSW-MODULE-ENTRY UUID="b4912907-ff9f-4943-8658-5189da419998">
               <SHORT-NAME>Can_GetControllerErrorState</SHORT-NAME>
               <SERVICE-ID>17</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -801,7 +801,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="08839271-b4b5-4df5-9258-1c17684c055f">
+            <BSW-MODULE-ENTRY UUID="6708ded1-a740-4129-8daf-1c418715fbf2">
               <SHORT-NAME>Can_GetControllerMode</SHORT-NAME>
               <SERVICE-ID>18</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -811,7 +811,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ced45391-39d8-4fcc-bd87-f4b48777093d">
+            <BSW-MODULE-ENTRY UUID="973653f2-3780-4b6a-8bc7-c7c81cbb91f8">
               <SHORT-NAME>Can_GetVersionInfo</SHORT-NAME>
               <SERVICE-ID>7</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -821,7 +821,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="74e9925f-06c4-4a36-a512-6ce2f23bbc28">
+            <BSW-MODULE-ENTRY UUID="4467b659-9bc6-4b68-b6e4-822a50ef99e8">
               <SHORT-NAME>Can_Init</SHORT-NAME>
               <SERVICE-ID>0</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>
@@ -831,7 +831,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="ca89f437-c077-4a7e-bad5-d93046f6ff2c">
+            <BSW-MODULE-ENTRY UUID="61edd8fb-6fa8-4167-9354-a706301ee481">
               <SHORT-NAME>Can_MainFunction_BusOff</SHORT-NAME>
               <SERVICE-ID>9</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -841,7 +841,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="a25a642c-438b-4256-9dbd-2662d2175044">
+            <BSW-MODULE-ENTRY UUID="b0979d84-cb27-432f-b4e5-b10e69f6d5c0">
               <SHORT-NAME>Can_MainFunction_Mode</SHORT-NAME>
               <SERVICE-ID>12</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -851,7 +851,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="d62326a2-76d7-4b5f-a48a-868d01e75cd8">
+            <BSW-MODULE-ENTRY UUID="c4c4e85f-5657-4c1d-8f19-6edde800e85e">
               <SHORT-NAME>Can_MainFunction_Read</SHORT-NAME>
               <SERVICE-ID>8</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -861,7 +861,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="e4f090d2-5452-4579-815a-91814ae787b1">
+            <BSW-MODULE-ENTRY UUID="556a7482-ec17-480a-afb8-e02f23f397e3">
               <SHORT-NAME>Can_MainFunction_Wakeup</SHORT-NAME>
               <SERVICE-ID>10</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -871,7 +871,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="4e4e4b1e-5669-44c3-8985-65cde984c255">
+            <BSW-MODULE-ENTRY UUID="6bd972bc-9450-4465-b40e-cd4e82337428">
               <SHORT-NAME>Can_MainFunction_Write</SHORT-NAME>
               <SERVICE-ID>1</SERVICE-ID>
               <IS-REENTRANT>true</IS-REENTRANT>
@@ -881,7 +881,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="88c4b6d9-89ae-47d1-89e2-7b65de198119">
+            <BSW-MODULE-ENTRY UUID="a3388110-5209-46a1-b9bc-5fb6ad4fde26">
               <SHORT-NAME>Can_RegisterReadback</SHORT-NAME>
               <IS-REENTRANT>false</IS-REENTRANT>
               <IS-SYNCHRONOUS>true</IS-SYNCHRONOUS>
@@ -890,7 +890,7 @@
               <SW-SERVICE-IMPL-POLICY>STANDARD</SW-SERVICE-IMPL-POLICY>
               <BSW-ENTRY-KIND>CONCRETE</BSW-ENTRY-KIND>
             </BSW-MODULE-ENTRY>
-            <BSW-MODULE-ENTRY UUID="0ca9282e-79e2-4d3a-a158-8e6bd8f1f407">
+            <BSW-MODULE-ENTRY UUID="2ca0c90c-6049-461a-993c-8d1ab7470a3a">
               <SHORT-NAME>Can_SetBaudrate</SHORT-NAME>
               <SERVICE-ID>15</SERVICE-ID>
               <IS-REENTRANT>false</IS-REENTRANT>

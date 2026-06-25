@@ -219,7 +219,7 @@
                   <MAX>255</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:6d7d0d8a-3348-4b9a-ba5a-7a808b2ac780">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:502e6418-de2a-4523-a73a-f00c933d984f">
                   <SHORT-NAME>SpiMaxHwUnit</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Maximum number of HW unit.Max range is derived from SpiMaxHwUnit.Please refer SpiPublishedInformation/SpiMaxHwUnit.</L-2>
@@ -275,7 +275,7 @@
                 </ECUC-INTEGER-PARAM-DEF>
               </PARAMETERS>
               <SUB-CONTAINERS>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:ea0b3275-57db-4665-bf46-8baa9a2e3ad5">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:39a9777e-e43a-4540-ae8f-e06c3d484c94">
                   <SHORT-NAME>SpiChannel</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">All data needed to configure one SPI-channel</L-2>
@@ -920,7 +920,7 @@
                         </ECUC-ENUMERATION-LITERAL-DEF>
                       </LITERALS>
                     </ECUC-ENUMERATION-PARAM-DEF>
-                    <ECUC-INTEGER-PARAM-DEF UUID="ECUC:f3e7f7db-54f1-4a4a-9b08-253ec0d863a1">
+                    <ECUC-INTEGER-PARAM-DEF UUID="ECUC:fc99e21f-ec6c-4c18-9c27-31748e6e0e6d">
                       <SHORT-NAME>SpiExtDeviceClockDivider</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Clock divider. This is used to derive the required baudrate from the functional clock.                                                 This value should be 1 less than the actual divider value. So a value of 0 means the divider is 1</L-2>
@@ -947,13 +947,13 @@
                     </ECUC-INTEGER-PARAM-DEF>
                   </PARAMETERS>
                   <SUB-CONTAINERS>
-                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:b1cea778-9884-402b-9535-a819da9e6b7e">
+                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:3c800c6e-2286-44c2-b101-591da431287e">
                       <SHORT-NAME>SpiExternalDeviceConfigMCSPI</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">MCSPI HW specific external device config. Should be populated only if hwUnitId is of type MCSPI</L-2>
                       </DESC>
                       <PARAMETERS>
-                        <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4f815cf1-b16c-4054-bf58-9649ed0040da">
+                        <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:0701382d-f43d-4127-b580-dfa39e0455dc">
                           <SHORT-NAME>SpiExtDeviceMCSPITxRxMode</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">TX and RX mode. Data is transmitted (shifted out serially on SPIDAT[0]) and received (shifted in                                                       serially on SPIDAT[1]) simultaneously on separate data lines.                                                       Tx only mode - Data is only transmiited (shifted out serially on SPIDAT).                                                       Minimizies data movement when only transmission is meaningful.                                                       RX only mode doesn&apos;t make sense in master mode because to receive                                                       data the master has to generate clock, which means it should                                                       transmit first. Hence this mode is not supported.                                                       The user can alternatively set the TX buffer pointer to NULL and set the                                                       default TX value (defaultTxData) to make TX data line at the desired                                                       level. in case of Both EB/IB Buffer Mode.</L-2>
@@ -988,7 +988,7 @@
                             </ECUC-ENUMERATION-LITERAL-DEF>
                           </LITERALS>
                         </ECUC-ENUMERATION-PARAM-DEF>
-                        <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:2cb62012-292d-448f-b6a1-078270658e97">
+                        <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:78af5314-c63d-4c86-a610-a0b2aab0a13d">
                           <SHORT-NAME>SpiExtDeviceMCSPIStartBitEnable</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">Start bit D/CX added before SPI transfer. Polarity is defined by StartBitLevel</L-2>
@@ -1294,7 +1294,7 @@
                     </ECUC-INTEGER-PARAM-DEF>
                   </PARAMETERS>
                   <REFERENCES>
-                    <ECUC-REFERENCE-DEF UUID="ECUC:70464ecc-4fa6-4931-adc5-0acb3604cb15">
+                    <ECUC-REFERENCE-DEF UUID="ECUC:6954e154-8f4a-4a89-9d5d-52de10b88c48">
                       <SHORT-NAME>SpiDeviceAssignment</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">Reference to the external device used by this job</L-2>
@@ -1344,7 +1344,7 @@
                     </ECUC-REFERENCE-DEF>
                   </REFERENCES>
                   <SUB-CONTAINERS>
-                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:6a4113e1-75fa-4cac-a818-cce8010ab1e2">
+                    <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:b76e100a-6e65-42da-8d00-bc40da9551e2">
                       <SHORT-NAME>SpiChannelList</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">References to SPI channels and their order within the Job.</L-2>
@@ -1353,7 +1353,7 @@
                       <UPPER-MULTIPLICITY>32</UPPER-MULTIPLICITY>
                       <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                       <PARAMETERS>
-                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:0b4c064e-8dde-419a-8b44-42a4407dd983">
+                        <ECUC-INTEGER-PARAM-DEF UUID="ECUC:08f9315e-aade-4899-9823-cbdaee9edf34">
                           <SHORT-NAME>SpiChannelIndex</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">This parameter specifies the order of Channels within the Job.</L-2>
@@ -1382,7 +1382,7 @@
                         </ECUC-INTEGER-PARAM-DEF>
                       </PARAMETERS>
                       <REFERENCES>
-                        <ECUC-REFERENCE-DEF UUID="ECUC:3f4ee099-8167-4a80-ba66-038e57359c46">
+                        <ECUC-REFERENCE-DEF UUID="ECUC:98418a03-c445-4d26-802e-00c84714d1ba">
                           <SHORT-NAME>SpiChannelAssignment</SHORT-NAME>
                           <DESC>
                             <L-2 L="EN">A job reference to a SPI channel.</L-2>
@@ -1571,7 +1571,7 @@
                   <UPPER-MULTIPLICITY>8</UPPER-MULTIPLICITY>
                   <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <PARAMETERS>
-                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:3265cb4d-db11-4c59-b3ad-fd0d5aa0040a">
+                    <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4393e1d2-3a30-4444-87a1-b6484bb5c575">
                       <SHORT-NAME>SpiHwUnitType</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">SPI HW unit to use.</L-2>
@@ -1657,7 +1657,7 @@
                     </ECUC-BOOLEAN-PARAM-DEF>
                   </PARAMETERS>
                   <REFERENCES>
-                    <ECUC-REFERENCE-DEF UUID="2d4772b1-18c7-4643-b0eb-9f40bed23de7">
+                    <ECUC-REFERENCE-DEF UUID="e4a68e25-91db-4e8e-bc15-87dfb5304363">
                       <SHORT-NAME>SpiHwUnitCddDmaTxHandler</SHORT-NAME>
                       <DESC>
                         <L-2 L="EN">References the CDD DMA handler used for MCSPI transmission</L-2>
@@ -1719,13 +1719,13 @@
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
               </SUB-CONTAINERS>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:480086b4-53a1-4e67-ae4c-2063087d1dd3">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:90568d22-a795-44e1-82e1-ec904cdf6ea0">
               <SHORT-NAME>SpiGeneral</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">General configuration settings for SPI-Handler</L-2>
               </DESC>
               <PARAMETERS>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:33e55d19-67fd-4fdd-8d16-37098753e356">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:b7e73295-fbfc-4617-8e14-4910739744c5">
                   <SHORT-NAME>SpiCancelApi</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the Spi_Cancel function ON or OFF.</L-2>
@@ -1829,7 +1829,7 @@
                   <MAX>65535</MAX>
                   <MIN>1</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:0ae36278-6ef3-4b83-89ae-02358da5042c">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:aec1d3dd-be82-49cf-8619-5d8fb29fe153">
                   <SHORT-NAME>SpiMaxTimeoutDuration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Maximum time duration for SPI transmission. Unit is in clock ticks. Configure the timeout according to r5f clock frequency(400MHz/200MHz)</L-2>
@@ -2018,7 +2018,7 @@
                   <MAX>2</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:9afdaaa0-10cb-4fb7-9aa8-d7ba36be9e2c">
+                <ECUC-BOOLEAN-PARAM-DEF UUID="ECUC:5fd6cc75-92d2-4e24-8f46-df6c6b89c25d">
                   <SHORT-NAME>SpiDevErrorDetect</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Switches the development error detection and notification on or off.</L-2>
@@ -2238,7 +2238,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4a5a7170-fc8d-49ff-b270-2c2b24b3a21f">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:8d71d0f2-e9a0-4b4e-b3bf-19277d9f7608">
                   <SHORT-NAME>SpiIrqType</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Type of Isr function: void functionname(void)                                             CAT1 : interrupt void func(void)                                             CAT2 : ISR(func)</L-2>
@@ -2276,7 +2276,7 @@
                     </ECUC-ENUMERATION-LITERAL-DEF>
                   </LITERALS>
                 </ECUC-ENUMERATION-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:32c56ea6-2b57-4968-83a2-357d467db908">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:13c0fce2-98ec-44b8-ac94-944445ae7e2a">
                   <SHORT-NAME>SpiDefaultOSCounterId</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Default Os Counter Id if node reference to OsCounter ref SpiOsCounterRef is not set</L-2>
@@ -2306,7 +2306,7 @@
                   <MAX>16</MAX>
                   <MIN>0</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:48e44cb2-35ae-4078-8fed-17e728257ca8">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:c76b503f-d993-49b4-9f87-6b8abe80bdad">
                   <SHORT-NAME>SpiTimeoutDuration</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">SPI timeout - used in SPI busy wait. Unit is in clock ticks. Configure the timeout according to r5f clock frequency(400MHz/200MHz)</L-2>
@@ -2381,7 +2381,7 @@
                   <SYMBOLIC-NAME-VALUE>false</SYMBOLIC-NAME-VALUE>
                   <DEFAULT-VALUE>true</DEFAULT-VALUE>
                 </ECUC-BOOLEAN-PARAM-DEF>
-                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:70edc491-c59b-4376-bc8a-ecac559250c7">
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:7368483f-5c8f-4b63-abd3-7a1a7856818a">
                   <SHORT-NAME>SpiChannelInternalBufferMaxLength</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Internal Buffer length in bytes - applicable for SpiChannelBuffer type - SPI_IB. This is the maximum length that can be allocated by each channel and it is fixed.Can vary buffer length per channel by configuring SpiIbNBuffers and SpiDataWidth. Refer MCAL-1255 and MCAL-1203</L-2>
@@ -2408,7 +2408,7 @@
                   <MAX>4294967295</MAX>
                   <MIN>1</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
-                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:4745b6cf-b46f-4fe4-8bfa-c1a47fdd7412">
+                <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:129e45e3-86d0-482b-8454-c0f6a9238075">
                   <SHORT-NAME>SpiDeviceVariant</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Select SOC variant</L-2>
@@ -2441,7 +2441,7 @@
                 </ECUC-ENUMERATION-PARAM-DEF>
               </PARAMETERS>
               <REFERENCES>
-                <ECUC-REFERENCE-DEF UUID="ECUC:26c9bdff-38cf-4f0b-8754-7472d0d41cb9">
+                <ECUC-REFERENCE-DEF UUID="ECUC:d9ee91d6-0c8a-4cf1-a23b-87c4c6b1c08f">
                   <SHORT-NAME>SpiOsCounterRef</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">This parameter contains a reference to the OsCounter, which is used by the SPI driver.</L-2>
@@ -2470,7 +2470,7 @@
                 </ECUC-REFERENCE-DEF>
               </REFERENCES>
               <SUB-CONTAINERS>
-                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:986d7ce7-e9f2-4e1b-9a0e-c6a4e9c2a3ed">
+                <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:498b4e4c-1eb1-49db-a59b-c1cbfc641b1b">
                   <SHORT-NAME>SpiHwUnitEnabled</SHORT-NAME>
                   <DESC>
                     <L-2 L="EN">Structure for storing enabled SPI HW units</L-2>
@@ -2542,7 +2542,7 @@
                 </ECUC-PARAM-CONF-CONTAINER-DEF>
               </SUB-CONTAINERS>
             </ECUC-PARAM-CONF-CONTAINER-DEF>
-            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:f8059619-213b-455c-9706-745609dfcae6">
+            <ECUC-PARAM-CONF-CONTAINER-DEF UUID="ECUC:9ea82684-9314-4f84-8112-6b1fc6313b84">
               <SHORT-NAME>SpiPublishedInformation</SHORT-NAME>
               <DESC>
                 <L-2 L="EN">Container holding all SPI specific published information parameters</L-2>

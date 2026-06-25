@@ -14,7 +14,7 @@
          xmlns:variant="http://www.tresos.de/_projects/DataModel2/11/variant.xsd">
     <d:lst type="TOP-LEVEL-PACKAGES">
       <d:ctr name="TI_AM263Px" type="AR-PACKAGE">
-        <a:a name="UUID" value="ECUC:ab33ed53-987d-4f9f-b425-e16cd45ac9a8"/>
+        <a:a name="UUID" value="ECUC:42e9ca54-6c51-4adb-82a7-b7b8ca8537e3"/>
         <d:lst type="ELEMENTS">
           <d:chc name="EthTrcv" type="AR-ELEMENT" value="MODULE-DEF">
             <v:ctr type="MODULE-DEF">
@@ -35,7 +35,7 @@
               <a:a name="POSTBUILDVARIANTSUPPORT" value="true"/>
               <a:a name="RELEASE" value="asc:4.3.1"/>
               <a:a name="UPPER-MULTIPLICITY" value="*"/>
-              <a:a name="UUID" value="ECUC:8a2137e1-bc21-4205-904d-0ffa23a64aee"/>
+              <a:a name="UUID" value="ECUC:f20e2228-4ebe-443a-a898-fbff8c768b37"/>
               <v:var name="IMPLEMENTATION_CONFIG_VARIANT" type="ENUMERATION">
                 <a:a name="IMPLEMENTATIONCONFIGCLASS" 
                      type="IMPLEMENTATIONCONFIGCLASS">
@@ -55,14 +55,14 @@
                 <a:a name="DESC" 
                      value="EN: This container contains the configuration parameters and sub containers of the AUTOSAR EthTrcv module."/>
                 <a:a name="UUID" 
-                     value="ECUC:9ae2997a-58f0-41bb-9d5e-0ca61818ef46"/>
+                     value="ECUC:11732ffd-9d5f-4398-a43e-a86942e1cc1a"/>
                 <v:lst name="EthTrcvConfig" type="MAP">
                   <a:da name="MIN" value="1"/>
                   <v:ctr name="EthTrcvConfig" type="IDENTIFIABLE">
                     <a:a name="DESC" 
                          value="EN: Configuration of the individual transceiver"/>
                     <a:a name="UUID" 
-                         value="ECUC:d73b4a97-6573-48c2-9220-27f3cbd1c8b9"/>
+                         value="ECUC:a8f707b1-608f-4b4d-a51a-5ea718ef1a35"/>
                     <v:var name="EthTrcvAutoNegotiationEnabled" type="BOOLEAN">
                       <a:a name="DESC" 
                            value="EN: Specifies if Auto-Negotiation is enabled (TRUE) or disabled (FALSE) for determination of the Ethernet transceiver speed."/>
@@ -77,7 +77,7 @@
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID" 
-                           value="ECUC:90e21e15-d837-4125-9d89-59ecb4250959"/>
+                           value="ECUC:3438a5b5-5433-4296-92b2-d7d2332bcda1"/>
                       <a:da name="DEFAULT" value="true"/>
                     </v:var>
                     <v:var name="EthTrcvConnNeg" type="ENUMERATION">
@@ -94,7 +94,7 @@
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID" 
-                           value="ECUC:9c0b90fa-2691-481b-af25-f3afc1e15cc2"/>
+                           value="ECUC:9d91411b-136b-4d02-9349-4cc3a0663ccc"/>
                       <a:da name="DEFAULT" value="TRCV_CONN_NEG_AUTO"/>
                       <a:da name="RANGE">
                         <a:v>TRCV_CONN_NEG_AUTO</a:v>
@@ -116,7 +116,7 @@
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID" 
-                           value="ECUC:a9f1668e-9b43-4f20-8336-f4620d06cb77"/>
+                           value="ECUC:870d0cd6-f9d2-45cd-9963-3a4b3813a7ca"/>
                       <a:da name="DEFAULT" value="0"/>
                       <a:da name="INVALID" type="Range">
                         <a:tst expr="&lt;=255"/>
@@ -137,7 +137,7 @@
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID" 
-                           value="ECUC:333302ac-659a-4f79-a5c8-db6bbb2be7f6"/>
+                           value="ECUC:5d8c1c9a-9dab-48b6-947b-e1abf4d4ebeb"/>
                       <a:da name="RANGE">
                         <a:v>ETHTRCV_DUPLEX_MODE_FULL</a:v>
                         <a:v>ETHTRCV_DUPLEX_MODE_HALF</a:v>
@@ -157,7 +157,7 @@
                       <a:a name="SCOPE" value="ECU"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="true"/>
                       <a:a name="UUID" 
-                           value="ECUC:263fe8ad-020a-41f7-84a2-83f5c4c9183c"/>
+                           value="ECUC:ab0f21d9-5436-461b-9ca0-78d7de0241be"/>
                       <a:da name="DEFAULT" value="0"/>
                       <a:da name="INVALID" type="Range">
                         <a:tst expr="&lt;=255"/>
@@ -184,7 +184,7 @@
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                         <a:a name="UUID" 
-                             value="ECUC:3a1e81f9-1eeb-4739-b998-b0dbad2cff0a"/>
+                             value="ECUC:81771cad-ba53-4816-b35b-9609a172c5d8"/>
                         <a:da name="DEFAULT" 
                               value="TRCV_PHYS_LAYER_TYPE_100BASE_T1"/>
                         <a:da name="RANGE">
@@ -215,7 +215,7 @@
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                         <a:a name="UUID" 
-                             value="ECUC:2e091169-056c-43ad-9190-230d2cf31c31"/>
+                             value="ECUC:a366ec28-86cb-414c-8930-d922d97314f9"/>
                         <a:da name="DEFAULT" value="ETH_MAC_LAYER_SPEED_100M"/>
                         <a:da name="RANGE">
                           <a:v>ETH_MAC_LAYER_SPEED_100M</a:v>
@@ -246,7 +246,7 @@
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                         <a:a name="UUID" 
-                             value="ECUC:d4a41474-cf67-4cf3-9d2c-45142b325a18"/>
+                             value="ECUC:e934fec3-36f0-47a9-834d-4ff824faadc5"/>
                         <a:da name="DEFAULT" value="REDUCED"/>
                         <a:da name="RANGE">
                           <a:v>REDUCED</a:v>
@@ -277,7 +277,7 @@
                         <a:a name="SCOPE" value="ECU"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                         <a:a name="UUID" 
-                             value="ECUC:e1cac6d9-4648-49c5-b128-e6667db70745"/>
+                             value="ECUC:6ad9f1a8-e9f0-47de-9b90-291c6018047f"/>
                         <a:da name="DEFAULT" value="TRCV_MAC_LAYER_TYPE_XMII"/>
                         <a:da name="RANGE">
                           <a:v>TRCV_MAC_LAYER_TYPE_XGMII</a:v>
@@ -300,7 +300,7 @@
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID" 
-                           value="ECUC:590693dd-4179-4283-b0c4-5ce0e3df301c"/>
+                           value="ECUC:d81bed14-8ea6-4745-a0bd-d00c51e7bf09"/>
                       <a:da name="DEFAULT" value="TRCV_SPEED_100"/>
                       <a:da name="RANGE">
                         <a:v>TRCV_SPEED_10</a:v>
@@ -324,7 +324,7 @@
                         <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                         <a:a name="UUID" 
-                             value="ECUC:3d3741d5-2c53-4f99-bc70-9a545b32597a"/>
+                             value="ECUC:63fb7934-3761-4f0b-868c-63a63a9c76b6"/>
                       </v:var>
                     </v:lst>
                     <v:var name="EthTrcvEnableLoopback" type="BOOLEAN">
@@ -340,7 +340,7 @@
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID" 
-                           value="ECUC:2cb62012-292d-448f-b6a1-078270658e97"/>
+                           value="ECUC:33b28cf0-63e9-4e7f-9834-c9cd4e21c698"/>
                       <a:da name="DEFAULT" value="true"/>
                     </v:var>
                     <v:var name="EthTrcvGigabitCapabilityEnabled" 
@@ -357,7 +357,7 @@
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID" 
-                           value="ECUC:d747f67b-a218-4bab-938a-d86f1bb2fb51"/>
+                           value="ECUC:2561fe49-9e78-43a7-9772-87d2067071d7"/>
                       <a:da name="DEFAULT" value="true"/>
                     </v:var>
                     <v:lst name="EthTrcvIcuChannelRef">
@@ -378,7 +378,7 @@
                         <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="UUID" 
-                             value="ECUC:f5163cbd-523b-4a23-bcf7-76170d3cd0e9"/>
+                             value="ECUC:43f35c11-c0be-41a9-9a33-04b4fc5da344"/>
                         <a:da name="REF" 
                               value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Icu/IcuConfigSet/IcuChannel"/>
                       </v:ref>
@@ -401,7 +401,7 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="UUID" 
-                             value="ECUC:a9759ad2-ac48-437e-8a69-ca0563c55964"/>
+                             value="ECUC:5348af77-3507-4882-b2b8-8e634491dddc"/>
                         <a:da name="REF" 
                               value="ASPathDataOfSchema:/TI_AM263Px/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvCapabType"/>
                       </v:ref>
@@ -424,7 +424,7 @@
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="UUID" 
-                             value="ECUC:a9759ad2-ac48-437e-8a69-ca0563c55964"/>
+                             value="ECUC:4c3cd7dd-7f68-4ef4-a7ff-a07f5f019383"/>
                         <a:da name="REF" 
                               value="ASPathDataOfSchema:/TI_AM263Px/EthTrcv/EthTrcvConfigSet/EthTrcvConfig/EthTrcvCapabType"/>
                       </v:ref>
@@ -436,7 +436,7 @@
                         <a:a name="DESC" 
                              value="EN: Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter&apos;s DemEventId symbolic value. The standardized errors are provided in this container and can be extended by vendor-specific error references."/>
                         <a:a name="UUID" 
-                             value="ECUC:10b3c818-b338-4fd9-a41d-ea351fb84cb1"/>
+                             value="ECUC:2af9bb19-240d-4071-94c5-e501bd0ddd51"/>
                         <v:lst name="ETHTRCV_E_ACCESS">
                           <a:da name="MAX" value="1"/>
                           <v:ref name="ETHTRCV_E_ACCESS" 
@@ -458,7 +458,7 @@
                             <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
                             <a:a name="SCOPE" value="LOCAL"/>
                             <a:a name="UUID" 
-                                 value="ECUC:a5dcc018-60fd-4aeb-9e03-8206f2fc7688"/>
+                                 value="ECUC:cfc7bd30-dacc-4ac7-a620-ee97e1d5d25d"/>
                             <a:da name="REF" 
                                   value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"/>
                           </v:ref>
@@ -481,7 +481,7 @@
                             <a:a name="ORIGIN" value="Texas Instruments"/>
                             <a:a name="SCOPE" value="LOCAL"/>
                             <a:a name="UUID" 
-                                 value="ECUC:411e6847-ab1d-4d70-9175-f4166fba7fdf"/>
+                                 value="ECUC:6901896e-ee3e-4a89-b25a-088d500758dd"/>
                             <a:da name="REF" 
                                   value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dem/DemConfigSet/DemEventParameter"/>
                           </v:ref>
@@ -500,7 +500,7 @@
                           <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
                         </a:a>
                         <a:a name="UUID" 
-                             value="ECUC:342c36f5-eb69-4346-9de8-243298941dad"/>
+                             value="ECUC:964e4ed2-f21c-44dc-a69f-fd0861ec5648"/>
                         <v:ctr name="EthTrcvMiiInterface" type="IDENTIFIABLE">
                           <a:a name="DESC" 
                                value="EN: This container includes the MII interface configuration between an Ethernet Controller and the Ethernet Transceiver. If this container is configured the EthTrcv shall call Eth_WriteMii / Eth_ReadMii API to access the hardware ethernet tranceiver."/>
@@ -511,7 +511,7 @@
                             <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
                           </a:a>
                           <a:a name="UUID" 
-                               value="ECUC:4f50a061-e114-4cb1-837b-acbe8a121302"/>
+                               value="ECUC:a559170d-0852-4e08-81fd-99da9067668f"/>
                           <v:var name="EthTrcvMiiIdx" type="INTEGER">
                             <a:a name="DESC" 
                                  value="EN: Specifies the transceiver index used for MII access to the transceiver"/>
@@ -525,7 +525,7 @@
                             <a:a name="SCOPE" value="LOCAL"/>
                             <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                             <a:a name="UUID" 
-                                 value="ECUC:0283ec9b-9872-4baa-bf65-3957b64f9f8b"/>
+                                 value="ECUC:229f2aff-8fab-48f2-83eb-582f0e4b5b50"/>
                             <a:da name="DEFAULT" value="0"/>
                             <a:da name="INVALID" type="Range">
                               <a:tst expr="&lt;=255"/>
@@ -545,7 +545,7 @@
                             <a:a name="SCOPE" value="LOCAL"/>
                             <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                             <a:a name="UUID" 
-                                 value="ECUC:5848e06e-a8c6-439b-8b50-6ad741a3607c"/>
+                                 value="ECUC:abd88683-8811-44ef-bb43-969219217be8"/>
                             <a:da name="DEFAULT" value="RGMII"/>
                             <a:da name="RANGE">
                               <a:v>LIGHT_MII</a:v>
@@ -565,7 +565,7 @@
                             <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
                           </a:a>
                           <a:a name="UUID" 
-                               value="ECUC:3edd9c81-764e-40f9-bcce-a69d7cfd0e08"/>
+                               value="ECUC:72e67fcd-e7fa-4f66-abdb-15964c0c22cd"/>
                           <v:ref name="EthTrcvSwitchPortRef" 
                                  type="SYMBOLIC-NAME-REFERENCE">
                             <a:a name="DESC" 
@@ -579,7 +579,7 @@
                             <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
                             <a:a name="SCOPE" value="LOCAL"/>
                             <a:a name="UUID" 
-                                 value="ECUC:fbeeec1c-3da2-42ba-bb84-2b1d5f74e25e"/>
+                                 value="ECUC:182a77f6-b092-42a5-83b5-476b057ddc62"/>
                             <a:da name="REF" 
                                   value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig/EthSwtPort"/>
                           </v:ref>
@@ -596,7 +596,7 @@
                             <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
                             <a:a name="SCOPE" value="LOCAL"/>
                             <a:a name="UUID" 
-                                 value="ECUC:57b5093d-bb76-4ddf-b911-4b06d8bf7189"/>
+                                 value="ECUC:35b6b210-4d22-4a84-9d5a-c33306834054"/>
                             <a:da name="REF" 
                                   value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EthSwt/EthSwtConfig"/>
                           </v:ref>
@@ -609,7 +609,7 @@
                         <a:a name="DESC" 
                              value="EN: Container for the mapping of wake up reasons to wake up sources. At least one container is needed if EthTrcvWakeUpSupport is not ETHTRCV_WAKEUP_NOT_SUPPORTED."/>
                         <a:a name="UUID" 
-                             value="ECUC:edf4b11c-e1c0-4623-a2ed-0dd25cfa2b9c"/>
+                             value="ECUC:4e8270b0-8e89-4202-b7af-8ad3d65a51c2"/>
                         <v:var name="EthTrcvWakeupReason" type="ENUMERATION">
                           <a:a name="DESC">
                             <a:v>EN: This parameter defines the transceiver wake up reasons. 
@@ -626,7 +626,7 @@
                           <a:a name="SCOPE" value="LOCAL"/>
                           <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                           <a:a name="UUID" 
-                               value="ECUC:986957f9-4b35-43b9-be69-f99f8e32f724"/>
+                               value="ECUC:f0b36f6d-9597-48df-b310-1ed967f9201b"/>
                           <a:da name="DEFAULT" value="ETHTRCV_WUR_BUS"/>
                           <a:da name="RANGE">
                             <a:v>ETHTRCV_WUR_BUS</a:v>
@@ -652,7 +652,7 @@
                           <a:a name="SCOPE" value="LOCAL"/>
                           <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                           <a:a name="UUID" 
-                               value="ECUC:986957f9-4b35-43b9-be69-f99f8e32f724"/>
+                               value="ECUC:8383611c-9806-4fe4-9082-cac49ddf6a5f"/>
                           <a:da name="DEFAULT" value="ETHTRCV_WUR_MAGIC"/>
                           <a:da name="RANGE">
                             <a:v>ETHTRCV_WUR_MAGIC</a:v>
@@ -674,7 +674,7 @@
                           <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
                           <a:a name="SCOPE" value="LOCAL"/>
                           <a:a name="UUID" 
-                               value="ECUC:d34f9f28-3c41-4dfd-bb66-653c3b84401d"/>
+                               value="ECUC:3783f89b-8c8b-43b8-a6cc-6280200b0c45"/>
                           <a:da name="REF" 
                                 value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/EcuM/EcuMConfiguration/EcuMCommonConfiguration/EcuMWakeupSource"/>
                         </v:ref>
@@ -686,7 +686,7 @@
                         <a:a name="DESC" 
                              value="EN: Structure for MDIO configuration"/>
                         <a:a name="UUID" 
-                             value="ECUC:986d7ce7-e9f2-4e1b-9a0e-c6a4e9c2a3ed"/>
+                             value="ECUC:6ef64ba3-f699-4449-9cde-7263f08dfacc"/>
                         <v:var name="EthTrcvCapabTypeEnum" type="ENUMERATION">
                           <a:a name="DESC" 
                                value="EN: Enumerates Advertisement configurations"/>
@@ -700,7 +700,7 @@
                           <a:a name="SCOPE" value="LOCAL"/>
                           <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                           <a:a name="UUID" 
-                               value="ECUC:4f815cf1-b16c-4054-bf58-9649ed0040da"/>
+                               value="ECUC:ba00c471-e27b-4a35-97a1-7416fba0dba3"/>
                           <a:da name="DEFAULT" 
                                 value="ETHERNET_ADV_CAPAB_100_FULL"/>
                           <a:da name="RANGE">
@@ -721,7 +721,7 @@
                 <a:a name="DESC" 
                      value="EN: General configuration of Ethernet Transceiver Driver module"/>
                 <a:a name="UUID" 
-                     value="ECUC:03f52c10-8440-4280-94f9-f2c30bc12ef9"/>
+                     value="ECUC:2bddd3f0-92b8-4242-9d7e-882c8b5c5242"/>
                 <v:var name="EthTrcvAutoNegotiationWaitCountTicks" 
                        type="INTEGER">
                   <a:a name="DESC">
@@ -740,7 +740,7 @@
                   </a:a>
                   <a:a name="ORIGIN" value="Texas Instruments"/>
                   <a:a name="UUID" 
-                       value="ECUC:f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+                       value="ECUC:e44ba532-e3ed-4281-82d0-58f3fa58bf0f"/>
                   <a:da name="DEFAULT" value="80000"/>
                   <a:da name="INVALID" type="Range">
                     <a:tst expr="&lt;=4294967295"/>
@@ -760,7 +760,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:2b1fefe7-0a85-4d66-b9b0-1967fcf3150d"/>
+                       value="ECUC:7b804b66-735b-4bea-b975-2a28fa59ff71"/>
                   <a:da name="DEFAULT" value="false"/>
                 </v:var>
                 <v:var name="EthTrcvGetBaudRateApi" type="BOOLEAN">
@@ -776,7 +776,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:94c93620-cb83-4164-a9cc-99e7ef6fec09"/>
+                       value="ECUC:3580cd8f-f30d-4c5b-abbd-7d68c1e2cd65"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvGetCableDiagnosticsResultApi" 
@@ -793,7 +793,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:f4c81edf-a19b-4f3e-ac28-88bce2b942c3"/>
+                       value="ECUC:968452fa-23c4-449c-bd76-17e98adbf016"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvGetDuplexModeApi" type="BOOLEAN">
@@ -809,7 +809,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:c507c2fa-9b22-47bc-9dd8-c20bcb67303f"/>
+                       value="ECUC:58d0cc90-41dc-4b82-8c95-072c179d51d2"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvGetLinkStateApi" type="BOOLEAN">
@@ -825,7 +825,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:78915de9-b681-473c-bca0-3a774a77cc61"/>
+                       value="ECUC:0af7c584-2e0f-42ba-b776-d28b46e09f95"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvGetPhyIdentifierApi" type="BOOLEAN">
@@ -841,7 +841,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:8ab41cbc-1a90-45b7-82c7-8090d0594e1f"/>
+                       value="ECUC:54ad86e9-3a20-4c75-a975-fc339b905139"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvGetPhySignalQualityApi" type="BOOLEAN">
@@ -857,7 +857,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:6320e435-8edb-476e-bd11-5b16460a98a1"/>
+                       value="ECUC:2fe27c57-dd61-48a4-b68b-e935ba973a87"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvGetTransceiverModeApi" type="BOOLEAN">
@@ -873,7 +873,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:3ef394b1-05e6-4e5c-8c27-6ff875c95e3f"/>
+                       value="ECUC:c416adf9-3037-4b60-a3e0-8c1c22651524"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvGetTransceiverWakeupModeApi" type="BOOLEAN">
@@ -889,7 +889,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:3ef394b1-05e6-4e5c-8c27-6ff875c95e3f"/>
+                       value="ECUC:33e16be7-15e8-49f1-a746-b2a221160809"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvIndex" type="INTEGER">
@@ -905,7 +905,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:a09d571b-f281-410f-9854-ab60d9e99820"/>
+                       value="ECUC:8d49cf84-c32a-41f6-92a5-bf5135e1969a"/>
                   <a:da name="DEFAULT" value="0"/>
                   <a:da name="INVALID" type="Range">
                     <a:tst expr="&lt;=255"/>
@@ -923,7 +923,7 @@
                   </a:a>
                   <a:a name="ORIGIN" value="Texas Instruments"/>
                   <a:a name="UUID" 
-                       value="ECUC:eb30fe57-1f6a-46c3-b6fd-40a5751ed2e5"/>
+                       value="ECUC:5382a020-fda3-48ef-af47-488204224b28"/>
                   <a:da name="DEFAULT" value="80000"/>
                   <a:da name="INVALID" type="Range">
                     <a:tst expr="&lt;=4294967295"/>
@@ -948,7 +948,7 @@
                     <a:a name="SCOPE" value="LOCAL"/>
                     <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                     <a:a name="UUID" 
-                         value="ECUC:dbc4e5bc-ea84-4872-bfce-9b0939d20433"/>
+                         value="ECUC:d5c81f31-b65e-4256-9bf3-1be0a549e80c"/>
 		    <a:da name="DEFAULT" value="10.0"/>
                     <a:da name="INVALID" type="Range">
                       <a:tst expr="&lt;Infinity"/>
@@ -967,7 +967,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:b87baa0e-5091-4ac2-a446-7829c30a5c03"/>
+                       value="ECUC:0151a196-5ccb-4129-9da7-fda3701147d7"/>
                   <a:da name="DEFAULT" value="1"/>
                   <a:da name="INVALID" type="Range">
                     <a:tst expr="&lt;=2"/>
@@ -987,7 +987,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:834f221b-4399-489d-ba3f-f86ed8806e0b"/>
+                       value="ECUC:d529639f-0114-4386-a6e1-7769f653617a"/>
                   <a:da name="DEFAULT" value="1"/>
                   <a:da name="INVALID" type="Range">
                     <a:tst expr="&lt;=2"/>
@@ -1005,7 +1005,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:f912f21a-b10e-40c9-b18e-1827e6835c2c"/>
+                       value="ECUC:a101ae9b-740c-4d57-b3ea-bca6ba08a7b3"/>
                   <a:da name="DEFAULT" value="1"/>
                   <a:da name="INVALID" type="Range">
                     <a:tst expr="&lt;=255"/>
@@ -1025,7 +1025,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:ec99cd7b-22af-4371-9c36-f8a5794b1ccf"/>
+                       value="ECUC:79372394-71fb-4abc-97db-92e987a24c52"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
 				<v:var name="EthTrcv1000Mbps_speed" type="BOOLEAN">
@@ -1042,7 +1042,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:ec99cd7b-22af-4371-9c36-f8a5794b1ccf"/>
+                       value="ECUC:12c03940-54f3-45e5-b279-14279b248f0c"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvSetPhyTxModeApi" type="BOOLEAN">
@@ -1058,7 +1058,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:c19fa50f-11c4-4249-9bc6-b224c2b5c71c"/>
+                       value="ECUC:9c125f2a-9684-4e94-879e-fbc07b788048"/>
                   <a:da name="DEFAULT" value="false"/>
                 </v:var>
                 <v:var name="EthTrcvSetTransceiverModeApi" type="BOOLEAN">
@@ -1074,7 +1074,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:d3a5ce17-1c57-48b3-bfa6-29ff7ce4b14e"/>
+                       value="ECUC:1b9e6e44-1603-40a8-8196-e1bf471cb581"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvStartAutoNegotiationApi" type="BOOLEAN">
@@ -1090,7 +1090,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:255ab38d-b416-4252-9f2c-74cbc6e19fb1"/>
+                       value="ECUC:93203bb6-582b-46f0-82b0-76cb5a7bc3f5"/>
                   <a:da name="DEFAULT" value="true"/>
                 </v:var>
                 <v:var name="EthTrcvVersionInfoApi" type="BOOLEAN">
@@ -1106,7 +1106,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:b5e403a5-ecce-425e-b641-5f1de9a2b30a"/>
+                       value="ECUC:82390996-d71a-4f2a-9a8b-62d5081d4091"/>
                   <a:da name="DEFAULT" value="false"/>
                 </v:var>
                 <v:var name="EthTrcvVersionInfoApiMacro" type="BOOLEAN">
@@ -1122,7 +1122,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:56d5fcd3-0662-4ee5-bbbc-f15a5edb0f95"/>
+                       value="ECUC:95f9ba72-6c20-4bda-88c0-787269abee1d"/>
                   <a:da name="DEFAULT" value="false"/>
                 </v:var>
                 <v:var name="EthTrcvWakeUpSupport" type="ENUMERATION">
@@ -1138,7 +1138,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:2906b28a-56d2-42e4-b090-35c9cc671503"/>
+                       value="ECUC:3d2e7cb2-251e-4559-ab4d-02736517d99b"/>
                   <a:da name="DEFAULT" value="ETHTRCV_WAKEUP_NOT_SUPPORTED"/>
                   <a:da name="RANGE">
                     <a:v>ETHTRCV_WAKEUP_BY_INTERRUPT</a:v>
@@ -1160,7 +1160,7 @@
                     </a:a>
                     <a:a name="ORIGIN" value="Texas Instruments"/>
                     <a:a name="UUID" 
-                         value="ECUC:f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+                         value="ECUC:feebcd00-5866-41a2-ad43-5f312b87cd6a"/>
                     <a:da name="DEFAULT" value="0"/>
                     <a:da name="INVALID" type="Range">
                       <a:tst expr="&lt;=16"/>
@@ -1178,7 +1178,7 @@
                   </a:a>
                   <a:a name="ORIGIN" value="Texas Instruments"/>
                   <a:a name="UUID" 
-                       value="ECUC:f3e7f7db-54f1-4a4a-9b08-253ec0d863a1"/>
+                       value="ECUC:83fdd627-6844-4da0-83e4-200be391309c"/>
                   <a:da name="DEFAULT" value="160000"/>
                   <a:da name="INVALID" type="Range">
                     <a:tst expr="&lt;=4294967295"/>
@@ -1198,7 +1198,7 @@
                   <a:a name="SCOPE" value="LOCAL"/>
                   <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                   <a:a name="UUID" 
-                       value="ECUC:2906b28a-56d2-42e4-b090-35c9cc671503"/>
+                       value="ECUC:bfb26b61-5ab3-4948-8013-c859970f62d9"/>
                   <a:da name="DEFAULT" 
                         value="ETHTRCV_PHYLOOPBACK_INTERNAL_ANALOG"/>
                   <a:da name="RANGE">
@@ -1221,7 +1221,7 @@
                     <a:a name="ORIGIN" value="Texas Instruments"/>
                     <a:a name="SCOPE" value="LOCAL"/>
                     <a:a name="UUID" 
-                         value="ECUC:26c9bdff-38cf-4f0b-8754-7472d0d41cb9"/>
+                         value="ECUC:07b64136-5134-4215-b3ba-877ba5c95085"/>
                     <a:da name="REF" 
                           value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Os/OsCounter"/>
                   </v:ref>
@@ -1231,7 +1231,7 @@
                     <a:a name="DESC"
                          value="EN: Additional published parameters not covered by &quot;Common&quot; Published Information. Note that these parameters have &quot;PUBLISHED-INFORMATION&quot; configuration class setting, since they are published information."/>
                     <a:a name="UUID"
-                         value="ECUC:03f52c10-8440-4280-94f9-f2c30bc12ef9"/>
+                         value="ECUC:a187c9bb-ed06-4aef-b1d0-6a3a4a2edca3"/>
 					
 					<v:var name="EthTrcvDeviceVariant" type="ENUMERATION">
                         <a:a name="DESC" value="EN: Select SOC variant .This parameter shall be used by driver to impose device specific constraints. The user guide shall detail the device specific constraints "/>
@@ -1240,7 +1240,7 @@
                           <icc:v vclass="PublishedInformation">VariantPostBuild</icc:v>
                         </a:a>
                         <a:a name="OPTIONAL" value="true"/>
-                        <a:a name="UUID" value="ECUC:4745b6cf-b46f-4fe4-8bfa-c1a47fdd7412"/>
+                        <a:a name="UUID" value="ECUC:b2b2294c-701a-454a-94ed-72a0ba44f429"/>
                         <a:a name="ORIGIN" value="Texas Instruments"/>
                         <a:a name="SCOPE" value="LOCAL"/>
                         <a:a name="SYMBOLICNAMEVALUE" value="false"/>

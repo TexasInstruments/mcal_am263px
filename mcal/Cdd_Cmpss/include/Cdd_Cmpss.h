@@ -595,6 +595,7 @@ void Cdd_Cmpss_SetDACValueHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
  */
 void Cdd_Cmpss_SetDACValueLow(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
 
+/* Design: MCAL-40035 */
 /**
  * \brief Initializes the digital filter of the high comparator.
  *
@@ -608,6 +609,7 @@ void Cdd_Cmpss_SetDACValueLow(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
  */
 void Cdd_Cmpss_InitFilterHigh(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40036 */
 /**
  * \brief Initializes the digital filter of the low comparator.
  *
@@ -621,6 +623,7 @@ void Cdd_Cmpss_InitFilterHigh(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_InitFilterLow(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40037 */
 /**
  * \brief Gets the value of the internal DAC of the high comparator.
  *
@@ -634,6 +637,7 @@ void Cdd_Cmpss_InitFilterLow(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 uint16 Cdd_Cmpss_GetDACValueHigh(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40038 */
 /**
  * \brief Gets the value of the internal DAC of the low comparator.
  *
@@ -647,6 +651,7 @@ uint16 Cdd_Cmpss_GetDACValueHigh(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 uint16 Cdd_Cmpss_GetDACValueLow(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40039 */
 /**
  * \brief Causes a software reset of the high comparator digital filter output latch.
  *
@@ -657,6 +662,7 @@ uint16 Cdd_Cmpss_GetDACValueLow(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_ClearFilterLatchHigh(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40040 */
 /**
  * \brief Causes a software reset of the low comparator digital filter output latch.
  *
@@ -667,6 +673,7 @@ void Cdd_Cmpss_ClearFilterLatchHigh(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_ClearFilterLatchLow(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40041 */
 /**
  * \brief Sets the ramp generator maximum reference value.
  *
@@ -678,6 +685,7 @@ void Cdd_Cmpss_ClearFilterLatchLow(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_SetMaxRampValue(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
 
+/* Design: MCAL-40042 */
 /**
  * \brief Gets the ramp generator maximum reference value.
  *
@@ -688,6 +696,7 @@ void Cdd_Cmpss_SetMaxRampValue(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
  */
 uint16 Cdd_Cmpss_GetMaxRampValue(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40043 */
 /**
  * \brief Sets the ramp generator decrement value.
  *
@@ -699,6 +708,7 @@ uint16 Cdd_Cmpss_GetMaxRampValue(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_SetRampDecValue(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
 
+/* Design: MCAL-40044 */
 /**
  * \brief Gets the ramp generator decrement value.
  *
@@ -709,6 +719,7 @@ void Cdd_Cmpss_SetRampDecValue(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
  */
 uint16 Cdd_Cmpss_GetRampDecValue(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40045 */
 /**
  * \brief Sets the ramp generator delay value.
  *
@@ -721,6 +732,7 @@ uint16 Cdd_Cmpss_GetRampDecValue(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_SetRampDelayValue(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
 
+/* Design: MCAL-40046 */
 /**
  * \brief Gets the ramp generator delay value.
  *
@@ -746,6 +758,7 @@ uint16 Cdd_Cmpss_GetRampDelayValue(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_ConfigBlanking(Cdd_Cmpss_HwUnitType HwUnitId, uint16 PwmBlankSrc);
 
+/* Design: MCAL-40047 */
 /**
  * \brief Enables an ePWM blanking signal to hold trip in reset.
  *
@@ -756,6 +769,7 @@ void Cdd_Cmpss_ConfigBlanking(Cdd_Cmpss_HwUnitType HwUnitId, uint16 PwmBlankSrc)
  */
 void Cdd_Cmpss_EnableBlanking(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-40048 */
 /**
  * \brief Disables an ePWM blanking signal from holding trip in reset.
  *
@@ -766,6 +780,7 @@ void Cdd_Cmpss_EnableBlanking(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_DisableBlanking(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-39546 */
 /**
  * \brief Enables the CDD_CMPSS diode emulation mode
  *
@@ -775,6 +790,7 @@ void Cdd_Cmpss_DisableBlanking(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_EnableDEmode(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-39546 */
 /**
  * \brief Disables the CDD_CMPSS diode emulation mode
  *
@@ -784,6 +800,8 @@ void Cdd_Cmpss_EnableDEmode(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_DisableDEmode(Cdd_Cmpss_HwUnitType HwUnitId);
 
+/* Design: MCAL-39546 */
+/* Design: MCAL-40049 */
 /**
  * \brief Select the CDD_CMPSS diode emulation mode DEACTIVE source
  *
@@ -794,6 +812,7 @@ void Cdd_Cmpss_DisableDEmode(Cdd_Cmpss_HwUnitType HwUnitId);
  */
 void Cdd_Cmpss_SelectDEACTIVESource(Cdd_Cmpss_HwUnitType HwUnitId, uint8 DeactiveSel);
 
+/* Design: MCAL-40050 */
 /**
  * \brief Sets the shadow value 2 (used in DE mode) of the internal DAC of the high comparator.
  *
@@ -806,6 +825,7 @@ void Cdd_Cmpss_SelectDEACTIVESource(Cdd_Cmpss_HwUnitType HwUnitId, uint8 Deactiv
  */
 void Cdd_Cmpss_ConfigHighDACShadowValue2(Cdd_Cmpss_HwUnitType HwUnitId, uint16 DacValue);
 
+/* Design: MCAL-40051 */
 /**
  * \brief Sets the shadow value 2 (used in DE mode) of the internal DAC of the low comparator.
  *
@@ -818,6 +838,7 @@ void Cdd_Cmpss_ConfigHighDACShadowValue2(Cdd_Cmpss_HwUnitType HwUnitId, uint16 D
  */
 void Cdd_Cmpss_ConfigLowDACShadowValue2(Cdd_Cmpss_HwUnitType HwUnitId, uint16 DacValue);
 
+/* Design: MCAL-39547 */
 /**
  * \brief Sets the hysteresis value of the high comparator.
  *
@@ -838,6 +859,7 @@ void Cdd_Cmpss_ConfigLowDACShadowValue2(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Da
  */
 void Cdd_Cmpss_SetComparatorHighHysteresis(Cdd_Cmpss_HwUnitType HwUnitId, uint16 Value);
 
+/* Design: MCAL-39547 */
 /**
  * \brief Sets the hysteresis value of the low comparator.
  *
@@ -944,6 +966,7 @@ void Cdd_Cmpss_ConfigFilterHigh(Cdd_Cmpss_HwUnitType HwUnitId, uint16 SamplePres
 void Cdd_Cmpss_ConfigFilterLow(Cdd_Cmpss_HwUnitType HwUnitId, uint16 SamplePrescale, uint16 SampleWindow,
                                uint16 Threshold);
 
+/* Design: MCAL-40052 */
 /**
  * \brief Configures whether or not the digital filter latches are reset by PWMSYNC
  *
