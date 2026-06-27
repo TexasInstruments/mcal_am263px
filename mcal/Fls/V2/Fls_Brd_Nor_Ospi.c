@@ -107,8 +107,6 @@ volatile VAR(uint8, FLS_VAR_INIT) Fls_WriteStage = FLS_S_INIT_STAGE;
 static void           Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
 static void           Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize);
 static Std_ReturnType Fls_norProcessErase(void);
-static void           Flash_norOspiDisxipEnable(void);
-static void           Flash_norOspiDisxipDisable(void);
 #if (STD_OFF == FLS_USE_INTERRUPTS)
 static boolean Fls_IsJobDoneNotifyNeeded(Fls_JobType job);
 #endif
@@ -121,13 +119,13 @@ static boolean Fls_IsJobDoneNotifyNeeded(Fls_JobType job);
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Fls_MemMap.h"
 
-static void Flash_norOspiDisxipEnable(void)
+void Flash_norOspiDisxipEnable(void)
 {
     HW_WR_FIELD32(CSL_FSS_FSAS_GENREGS_REGS_BASE + CSL_FSS_FSAS_GENREGS_SYSCONFIG,
                   CSL_FSS_FSAS_GENREGS_SYSCONFIG_DISXIP, 1U);
 }
 
-static void Flash_norOspiDisxipDisable(void)
+void Flash_norOspiDisxipDisable(void)
 {
     HW_WR_FIELD32(CSL_FSS_FSAS_GENREGS_REGS_BASE + CSL_FSS_FSAS_GENREGS_SYSCONFIG,
                   CSL_FSS_FSAS_GENREGS_SYSCONFIG_DISXIP, 0U);

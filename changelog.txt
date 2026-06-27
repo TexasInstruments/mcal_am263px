@@ -1,3 +1,23 @@
+commit f9f174c8a499353f5dee8cbe88249385da7f6e3f
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Jun 22 22:56:31 2026 +0530
+
+    am263px/am261x: Fls: Fixing attack vector write erase flow in phyInit
+    
+    Fixes: MCAL-39728
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor.h                    |  6 ++++
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c               |  6 ++--
+ mcal/Fls/V2/Fls_Ospi_Phy.c                   | 49 +++++++++++++++++++++++++---
+ mcal/examples/Fls/Flsdiag_ospi/Fls_DiagApp.c |  3 ++
+ mcal/examples/Fls/fls_app/FlsApp.c           |  2 --
+ mcal/examples/Fls/fls_phy_app/FlsApp.c       |  8 +++++
+ mcal/examples/Fls/fls_xip_app/FlsXipApp.c    |  8 +++++
+ release_notes.md                             | 26 +++++++++++++++
+ 8 files changed, 97 insertions(+), 11 deletions(-)
+
 commit fa7c21b124ca68ded07a246f1322bd332ae9f3e6
 Author: Akash <a-verma3@ti.com>
 Date:   Thu Jun 25 12:40:09 2026 +0530

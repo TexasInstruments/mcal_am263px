@@ -431,13 +431,11 @@ void SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0(void)
     {
     }
     Fls_lockUnlock = FLS_LOCK;
-    AppUtils_printf("Flash is now locked!\n\r");
 }
 
 void SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0(void)
 {
     Fls_lockUnlock = FLS_UNLOCK;
-    AppUtils_printf("Flash is now unlocked!\n\r");
 }
 void SchM_Enter_Mcu_MCU_EXCLUSIVE_AREA_0()
 {

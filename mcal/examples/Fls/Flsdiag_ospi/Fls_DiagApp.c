@@ -146,7 +146,10 @@ void ospi_flash_diag(void *args)
         offset = APP_OSPI_FLASH_OFFSET;
         ospi_flash_diag_test_fill_buffers();
         AppUtils_printf("[OSPI Flash Diagnostic Test] Executing Flash Erase on first block...\r\n");
+        Flash_norOspiDisxipDisable();
         status = Fls_norBlockErase(ospiHandle, offset);
+        status = Nor_OspiWaitReady(ospiHandle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
+        Flash_norOspiDisxipDisable();
 
         if (status == E_OK)
         {

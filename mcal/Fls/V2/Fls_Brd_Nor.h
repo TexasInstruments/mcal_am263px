@@ -102,6 +102,9 @@ extern "C" {
 #define FLS_S_READ_DMA_WAIT_STAGE (1U)
 #define FLS_S_READ_DMA_DONE       (2U)
 
+/* Timeout for erase completion polling loops (in polling iterations) */
+#define FLS_ERASE_TIMEOUT (100000U)
+
 #define OSPI_NOR_CMD_RSTEN (0x66U)
 #define OSPI_NOR_CMD_RST   (0x99U)
 
@@ -212,6 +215,7 @@ typedef enum
 } Fls_InternalStateType;
 
 extern Fls_DriverObjType Fls_DrvObj;
+extern volatile uint8    Fls_EraseStage;
 
 Std_ReturnType Nor_OspiCmdWrite(OSPI_Handle handle, uint8 cmd, uint32 cmdAddr, uint8 numAddrBytes, uint8 *txBuf,
                                 uint32 txLen);
@@ -253,6 +257,8 @@ void           Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job);
 void           Fls_ErrorNotification(Fls_JobType job, uint8 retVal);
 void           ReportFlsError(Fls_JobType job);
 boolean        Fls_VerifyBlankCheck_priv(const uint8 *rxData, uint32 length);
+void           Flash_norOspiDisxipEnable(void);
+void           Flash_norOspiDisxipDisable(void);
 
 #ifdef __cplusplus
 }

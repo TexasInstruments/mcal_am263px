@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 26-Jun-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 28-Jun-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -44,6 +44,16 @@ This document details about supported driver, installation, dependencies, build 
     <tr>
       <td>Code Compilation error for EthTrcv driver is fixed.</td>
       <td>EthTrcv</td>
+      <td>Please refer Fixed Defects section for more details.</td>
+    </tr>
+    <tr>
+      <td>Fls PHY erase issue when attack vector is not present</td>
+      <td>FLS</td>
+      <td>Fls erase issue when attack vector is not present was reproduced and test with the fix</td>
+    </tr>
+    <tr>
+      <td>UUID not unique across modules</td>
+      <td>All</td>
       <td>Please refer Fixed Defects section for more details.</td>
     </tr>
     <tr>
@@ -225,6 +235,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
+      <td>MCAL-39585</td>
+      <td>UUIDs should be globally unique in bswmd files</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>UUID is now unique across all modules</td>
+    </tr>
+    <tr>
       <td>MCAL-38205</td>
       <td>Mismatch between BSW-CALLED-ENTITY SHORT-NAME and IMPLEMENTED-ENTRY-REF in Bswmd file</td>
       <td>CDD I2C</td>
@@ -287,6 +305,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Moved "EthTrcv_StateType" structure declaration from "mcal/EthTrcv/include/EthTrcv_Types.h" to "mcal/autosar_include/Eth_GeneralTypes.h"</td>
+    </tr>
+    <tr>
+      <td>MCAL-39728</td>
+      <td>FLS Erase not working if PHY is enabled and Attack vector is not present in flash</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Fls erase when PHY is enabled and attach vector is not present is now fixed to hadnle erase status check.</td>
     </tr>
     <tr>
       <td>MCAL-38305</td>

@@ -105,6 +105,8 @@
 
 #define FLC_APP_HW_ID    (CDD_FLC_RL2_R5SS0_CORE0)
 #define APPLICATION_SIZE (102400)
+#define FLS_UNLOCK       0
+#define FLS_LOCK         1
 /* ========================================================================== */
 /*                         Structures and Enums                               */
 /* ========================================================================== */
@@ -138,6 +140,7 @@ uint32          offset;
 uint32          Total_datasize;
 uint32          type_of_erase;
 extern uint32   sector_or_blocksize;
+volatile uint32 Fls_lockUnlock = FLS_UNLOCK;
 
 /* ========================================================================== */
 /*                            Global Variables                                */
@@ -506,10 +509,15 @@ void eraseFlcDestBuffer(void)
 
 void SchM_Enter_Fls_FLS_EXCLUSIVE_AREA_0(void)
 {
+    while (Fls_lockUnlock == FLS_LOCK)
+    {
+    }
+    Fls_lockUnlock = FLS_LOCK;
 }
 
 void SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0(void)
 {
+    Fls_lockUnlock = FLS_UNLOCK;
 }
 void SchM_Enter_Mcu_MCU_EXCLUSIVE_AREA_0()
 {

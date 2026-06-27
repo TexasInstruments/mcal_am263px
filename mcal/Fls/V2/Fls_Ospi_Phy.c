@@ -1718,11 +1718,12 @@ static Std_ReturnType Fls_Ospi_phySweepReadCaptureDelay(uint32 phyTuningOffset, 
 static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOffset, uint32 initialRdCapDelay,
                                                              uint32 *rdCapDelay)
 {
-    Std_ReturnType attackVectorStatus = E_NOT_OK;
-    const uint8   *phyTuningData      = (uint8 *)NULL_PTR;
-    uint32         phyTuningDataSize  = 0U;
-    Std_ReturnType retVal             = E_NOT_OK;
-    OSPI_Handle    handle             = Fls_DrvObj.spiHandle;
+    Std_ReturnType attackVectorStatus  = E_NOT_OK;
+    const uint8   *phyTuningData       = (uint8 *)NULL_PTR;
+    uint32         phyTuningDataSize   = 0U;
+    Std_ReturnType retVal              = E_NOT_OK;
+    OSPI_Handle    handle              = Fls_DrvObj.spiHandle;
+    uint32         eraseTimeoutCounter = 0U;
 
     Fls_Ospi_phyGetTuningData(&phyTuningData, &phyTuningDataSize);
 
@@ -1731,7 +1732,45 @@ static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOff
      */
     *rdCapDelay = initialRdCapDelay;
     Fls_Ospi_phySetRdDataCaptureDelay(*rdCapDelay);
+    Flash_norOspiDisxipDisable();
     retVal = Fls_norSectorErase(handle, OSPI_PHY_OFFSET);
+
+    /* Poll for erase completion to avoid leaving state machine in IN_PROGRESS state.
+     * This ensures the erase state machine is properly reset before returning.
+     */
+    if (E_OK == retVal)
+    {
+        /* Wait for erase to complete with timeout protection */
+        while ((Fls_EraseStage == FLS_S_IN_PROGRESS) && (eraseTimeoutCounter < FLS_ERASE_TIMEOUT))
+        {
+            retVal = Fls_NorGetEraseStatus(handle);
+            if (retVal != E_OK)
+            {
+                break;
+            }
+            eraseTimeoutCounter++;
+        }
+
+        /* Check if erase timed out or failed */
+        if (Fls_EraseStage == FLS_S_IN_PROGRESS)
+        {
+            retVal = E_NOT_OK;
+            /* Reset state machine on timeout, so next erase is not affected. retVal=E_NOT_OK anyways returns phyinit as
+             * fail*/
+            Fls_EraseStage = FLS_S_DEFAULT;
+        }
+        else if (Fls_EraseStage == FLS_S_FAIL)
+        {
+            retVal         = E_NOT_OK;
+            Fls_EraseStage = FLS_S_DEFAULT; /* Reset state machine on failure */
+        }
+        else
+        {
+            /*Do Nothing*/
+        }
+
+        Flash_norOspiDisxipDisable();
+    }
 
     /* If erase has passed, proceed with write */
     /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
