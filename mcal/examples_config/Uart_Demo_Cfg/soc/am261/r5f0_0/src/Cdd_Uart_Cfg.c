@@ -109,7 +109,7 @@
 #define CDD_UART_START_SEC_VAR_INIT_32
 #include "Cdd_Uart_MemMap.h"
 
-/** \brief CDD UART Channel base addresses on AM263Px */
+/** \brief CDD UART Channel base addresses on AM261x */
 uint32 baseAddresses[CDD_UART_MAXIMUM_CHANNELS] = { 0x52300000U, 0x52301000U, 0x52302000U, 0x52303000U, 0x52304000U, 0x52305000U };
 
 #define CDD_UART_STOP_SEC_VAR_INIT_32

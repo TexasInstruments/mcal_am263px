@@ -1,3 +1,39 @@
+commit 0834f358608cba1f5051047b2aae1f8c029fb364
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sun Jun 28 21:55:39 2026 +0530
+
+    all: all: Updated correct device names and path in arxml
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../am263px/tresos/output/include/Cdd_Dma_Cfg.h    |    2 +-
+ .../am263px/tresos/output/include/Cdd_Dma_Cfg.h    |    2 +-
+ .../am263px/tresos/output/include/Cdd_Dma_Cfg.h    |    2 +-
+ .../soc/am263px/r5f0_0/include/Cdd_Dma_Cfg.h       |    2 +-
+ .../soc/am263px/r5f0_0/include/Cdd_Dma_Cfg.h       |    2 +-
+ .../soc/am261/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml    |    2 +-
+ .../soc/am263/r5f0_0/swcd/Cdd_FsiRx_Bswmd.arxml    |    2 +-
+ .../soc/am261/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml    |    2 +-
+ .../soc/am263/r5f0_0/swcd/Cdd_FsiTx_Bswmd.arxml    |    2 +-
+ .../soc/am263px/r5f0_0/swcd/Spi_Bswmd.arxml        |    2 +-
+ .../soc/am261/r5f0_0/src/Cdd_Uart_Cfg.c            |    2 +-
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       | 1154 ++++++++++----------
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |    2 +-
+ .../Cdd_Uart_TI_AM261x/generate/src/Cdd_Uart_Cfg.c |    2 +-
+ .../generate/src/Cdd_Uart_PBcfg.c                  |    2 +-
+ .../Mcu_TI_AM261x/generate/include/Mcu_Cfg.h       |    2 +-
+ .../generate/include/Cdd_Dma_Cfg.h                 |    2 +-
+ .../generate_swcd/swcd/Spi_Bswmd.arxml             |    2 +-
+ .../generate_swcd/swcd/Cdd_FsiRx_Bswmd.arxml       |    2 +-
+ .../generate_swcd/swcd/Cdd_FsiTx_Bswmd.arxml       |    2 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |    2 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |    2 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |    2 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |    2 +-
+ 24 files changed, 600 insertions(+), 600 deletions(-)
+
 commit f9f174c8a499353f5dee8cbe88249385da7f6e3f
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon Jun 22 22:56:31 2026 +0530

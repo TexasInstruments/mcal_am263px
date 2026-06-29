@@ -144,7 +144,7 @@ extern "C" {
 #define CDD_DMA_DSS_B                                                     4U
 #define CDD_DMA_DSS_C                                                     5U
 
-/** \brief CSL Base Addresses for Sitara AM263x */
+/** \brief CSL Base Addresses for Sitara AM263Px */
 #define MCAL_MSS_CTRL_U_BASE                                              (0x50D00000UL)
 #define MCAL_MSS_TPCC_A_U_BASE                                            (0x52A00000UL)
 
