@@ -468,19 +468,15 @@ static boolean Can_CheckBaudrateCLConfig(const Can_ConfigType *ConfigPtr)
 
     for (cnt = 0U; cnt <= ConfigPtr->MaxBaudConfigID[loopCnt]; cnt++)
     {
-        /* TI_COVERAGE_GAP_START [Branch] NULL BaudRateConfigList pointer check; always valid in test */
         if (NULL_PTR == ConfigPtr->CanControllerList[loopCnt]->BaudRateConfigList[cnt])
         {
             returnstatus = (boolean)FALSE;
         }
-        /* TI_COVERAGE_GAP_STOP */
 
-        /* TI_COVERAGE_GAP_START [Branch] Configuration validation fails before loop continues; never breaks in test */
         if (returnstatus == (boolean)FALSE)
         {
             break;
         }
-        /* TI_COVERAGE_GAP_STOP */
     }
 
     return returnstatus;
@@ -772,12 +768,10 @@ FUNC(void, CAN_CODE) Can_Init(P2CONST(Can_ConfigType, AUTOMATIC, CAN_PBCFG) CfgP
     uint8                 controller_cntr;
     const Can_ConfigType *ConfigPtr = CfgPtr;
 #if (STD_ON == CAN_VARIANT_PRE_COMPILE)
-    /* TI_COVERAGE_GAP_START [Branch] Pre-compile configuration variant; NULL ConfigPtr never passed in test */
     if (NULL_PTR == ConfigPtr)
     {
         ConfigPtr = &CAN_INIT_CONFIG_PC;
     }
-    /* TI_COVERAGE_GAP_STOP */
 #endif /* (STD_ON == CAN_VARIANT_PRE_COMPILE) */
 #if (CAN_DEV_ERROR_DETECT == STD_ON)
     /* TI_COVERAGE_GAP_START [Branch] DET initialization validation fails; never triggered in test */

@@ -839,6 +839,14 @@ void MCU_xbarSelectInterruptXBarInputSourceExtended(uint32 base, uint32 out,
 void MCU_xbarSelectInputXBarInputSource(uint32 base, uint32 out, uint32 group_select, uint32 group0_mask,
                                         uint32 group1_mask);
 
+/**
+ * \brief API to select input source of Gpio XBar
+ *
+ * \param base [in] Input XBar base address
+ * \param out [in] Instance of Input XBar
+ * \param mux_control [in] Mux control to select input
+ *
+ */
 void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out, uint32 mux_control);
 
 #ifdef __cplusplus

@@ -278,20 +278,23 @@ Mcu_PllStatusType Mcu_GetPllLockStatus(void)
 #if (STD_ON == MCU_PERFORM_RESET_API)
 void Mcu_PerformSoftSysReset(uint32 resetVal)
 {
-    Mcu_controlModuleUnlockMMR(0, MCU_TOP_RCM_PARTITION0);
-#ifndef MCAL_DYNAMIC_BUILD
+#ifdef MCAL_DYNAMIC_BUILD
+    /* Donot reset for Dynamic analysis */
+#else
     uint32 regWriteStatus = 0U;
-    regWriteStatus        = regWriteReadback(&toprcmREG->WARM_RESET_REQ, M_TWO, M_ZERO, resetVal);
+
+    Mcu_controlModuleUnlockMMR(0, MCU_TOP_RCM_PARTITION0);
+    regWriteStatus = regWriteReadback(&toprcmREG->WARM_RESET_REQ, M_TWO, M_ZERO, resetVal);
+
     if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef MCU_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)MCU_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
-#endif
 
     Mcu_controlModuleLockMMR(0, MCU_TOP_RCM_PARTITION0);
-
+#endif
     return;
 }
 #endif /* STD_ON == MCU_PERFORM_RESET_API */

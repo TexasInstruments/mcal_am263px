@@ -319,6 +319,8 @@ void Can_mcanProcessECCISR(const Can_ControllerObjType *controllerObj);
 void Can_mcanProcessTx(Can_ControllerObjType *canController, const Can_MailboxObjType *canMailbox,
                        Can_MailboxObjTxType *canTxMessageObj, uint32 Interrupt_Mask);
 
+void Can_mcanInitInterrupt(Can_ControllerObjType *controllerObj);
+
 void Can_mcanProcessISRRx(Can_ControllerObjType *controllerObj, const Can_MailboxObjType *canMailbox, uint32 maxMbCnt);
 
 #if (CAN_DEINIT_API == STD_ON)

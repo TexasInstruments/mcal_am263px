@@ -1,3 +1,147 @@
+commit 72c73be67c279a6820ef9400548ff37c3945630e
+Author: Asha D <asha.d@ti.com>
+Date:   Tue Jun 30 12:16:16 2026 +0530
+
+    am263/63px:MCU: Fixing the Config issues
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ .../am263/r5f0_0/config_4/tresos/output/swcd/Mcu_Bswmd.arxml | 12 ++++++++++++
+ .../am263/r5f0_0/config_5/tresos/output/swcd/Mcu_Bswmd.arxml | 12 ++++++++++++
+ .../am263/r5f0_0/config_6/tresos/output/swcd/Mcu_Bswmd.arxml | 12 ++++++++++++
+ .../am263/r5f0_0/config_7/tresos/output/swcd/Mcu_Bswmd.arxml | 12 ++++++++++++
+ .../am263/r5f0_0/config_8/tresos/output/swcd/Mcu_Bswmd.arxml | 12 ++++++++++++
+ .../r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml       | 12 ++++++++++++
+ .../r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_1/tresos/output/swcd/Mcu_Bswmd.arxml       | 12 ++++++++++++
+ .../r5f0_0/config_10/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_2/tresos/output/swcd/Mcu_Bswmd.arxml       | 12 ++++++++++++
+ .../r5f0_0/config_3/tresos/output/swcd/Mcu_Bswmd.arxml       | 12 ++++++++++++
+ .../r5f0_0/config_4/tresos/output/swcd/Mcu_Bswmd.arxml       | 12 ++++++++++++
+ .../r5f0_0/config_5/tresos/output/swcd/Mcu_Bswmd.arxml       | 12 ++++++++++++
+ .../r5f0_0/config_91/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_92/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_93/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ .../r5f0_0/config_94/tresos/output/swcd/Mcu_Bswmd.arxml      | 12 ++++++++++++
+ 24 files changed, 288 insertions(+)
+
+commit 63c56e5bf27f6aaef22791285ef1a6dc89e71de6
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue May 19 23:08:30 2026 +0530
+
+    am263x/1x: Fls: Adding Fls coverage support for am263/1x
+    
+    Fixes: MCAL-37964
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V0/Fls_Brd_Nor_Qspi.c                     | 124 ++++++++++++++
+ mcal_test/fls_test/build/makefile                  |   4 +-
+ mcal_test/fls_test/testInput/flsTestCases_ospi.h   |   6 +-
+ mcal_test/fls_test/testInput/flsTestCases_qspi.h   |  86 ++++++++++
+ mcal_test/fls_test/testLib/flsTest.h               |   3 +-
+ mcal_test/fls_test/testLib/flsTestMainTestCase.c   |   2 +-
+ .../fls_test/testLib/flsTestNegativeTestCase.c     | 189 ++++++++++++++++++++-
+ mcal_test/makefile                                 |   4 +-
+ 8 files changed, 405 insertions(+), 13 deletions(-)
+
+commit 7bf183469b5cc4f23b8f2a83cee363aef0867baf
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Jun 29 23:35:51 2026 +0530
+
+    am26xx: CAN: CAN Coverage improvement for all platform.
+    
+    - Fix falling testcase for CAN.
+    
+    Fixes: MCAL-37950
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Can/V0/Can_Mcan.c                             |   3 -
+ mcal/Can/V0/Can_Priv.h                             |   2 +
+ mcal/Can/src/Can.c                                 |   6 --
+ mcal_test/can_test/testInput/canTestCases.h        |  35 +++++++
+ mcal_test/can_test/testInput/canTestConfig.h       |  95 +++++++++++-------
+ mcal_test/can_test/testLib/canTest.h               |   1 +
+ mcal_test/can_test/testLib/canTestMainTestCase.c   |   1 +
+ .../can_test/testLib/canTestNegativeTestCase.c     | 109 +++++++++++++++++++++
+ 8 files changed, 207 insertions(+), 45 deletions(-)
+
+commit 0effd486b7cd45f2b55f68e058093108e4cef210
+Author: Asha D <asha.d@ti.com>
+Date:   Mon Jun 8 11:14:54 2026 +0530
+
+    am263/am261:MCU: Converting Static inline function related to Xbar into non-inline implementation
+    
+    New source file is added and updated the Bswd file
+    
+    Fixes: MCAL-35523
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Mcu/V0/Mcu_Priv.c                             |    2 +-
+ mcal/Mcu/V0/Mcu_Xbar.c                             |  255 +++++
+ mcal/Mcu/V0/Mcu_Xbar.h                             |   63 +-
+ mcal/Mcu/V0/Mcu_XbarOutput.h                       |   81 +-
+ mcal/Mcu/V0/Mcu_XbarPwm.h                          |   47 +-
+ mcal/Mcu/V2/Mcu_Priv.c                             |   13 +-
+ mcal/Mcu/V2/Mcu_Xbar.h                             |    8 +
+ mcal/Mcu/V3/Mcu_Priv.c                             |    2 +-
+ mcal/Mcu/V3/Mcu_Xbar.c                             |  253 +++++
+ mcal/Mcu/V3/Mcu_Xbar.h                             |   63 +-
+ mcal/Mcu/V3/Mcu_XbarOutput.h                       |   79 +-
+ mcal/Mcu/V3/Mcu_XbarPwm.h                          |   47 +-
+ mcal/Mcu/srcs.mk                                   |    3 +-
+ .../soc/am261/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../soc/am263/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |   12 +
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |   12 +
+ .../soc/am263px/tresos/output/swcd/Mcu_Bswmd.arxml |   12 +
+ .../soc/am261/r5f0_0/swcd/Mcu_Bswmd.arxml          |   12 +
+ .../soc/am263/r5f0_0/swcd/Mcu_Bswmd.arxml          |   12 +
+ .../soc/am263px/r5f0_0/swcd/Mcu_Bswmd.arxml        |   12 +
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             |   12 +
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             |   12 +
+ .../generate_swcd/swcd/Mcu_Bswmd.arxml             | 1102 ++++++++++----------
+ mcal_test/mcu_test/testInput/mcuTestCases.h        |   38 +-
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_7/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_5/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_6/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_7/tresos/output/swcd/Mcu_Bswmd.arxml    |   12 +
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |   12 +
+ 54 files changed, 1629 insertions(+), 895 deletions(-)
+
 
 
 commit 0834f358608cba1f5051047b2aae1f8c029fb364

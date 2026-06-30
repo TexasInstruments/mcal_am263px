@@ -472,11 +472,7 @@ extern "C" {
  * \return uint32 PWM XBar status - Bitwise OR of all xbar outputs (0 to \ref
  * MCU_PWM_XBAR_NUM_OUTPUT - 1)
  */
-static inline uint32 MCU_xbarGetPWMXBarOutputSignalStatus(void)
-{
-    return (HW_RD_REG32(MCU_PWM_XBAR_BASE + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR_STATUS) &
-            MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR_STATUS_STS_MASK);
-}
+uint32 MCU_xbarGetPWMXBarOutputSignalStatus(void);
 
 /**
  * \brief PWM XBAR: API to configure inversion of output signal status flag (latched) of PWM XBars
@@ -484,11 +480,7 @@ static inline uint32 MCU_xbarGetPWMXBarOutputSignalStatus(void)
  * \param invert_mask [in] Mask defining the PWM XBar output signal flags (latched) to be inverted.
  *                         Bitwise OR of all xbar outputs (0 to \ref MCU_PWM_XBAR_NUM_OUTPUT - 1)
  */
-static inline void MCU_xbarInvertPWMXBarOutputSignalBeforeLatch(uint32 invert_mask)
-{
-    HW_WR_REG32(MCU_PWM_XBAR_BASE + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR_FLAGINVERT,
-                invert_mask & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR_FLAGINVERT_INVERT_MASK);
-}
+void MCU_xbarInvertPWMXBarOutputSignalBeforeLatch(uint32 invert_mask);
 
 /**
  * \brief PWM XBAR: API to read latched output signal status of all PWM XBars
@@ -496,10 +488,7 @@ static inline void MCU_xbarInvertPWMXBarOutputSignalBeforeLatch(uint32 invert_ma
  * \return uint32 PWM XBar latched status flags.
  *                Bitwise OR of all xbar outputs (0 to \ref MCU_PWM_XBAR_NUM_OUTPUT - 1)
  */
-static inline uint32 MCU_xbarGetPWMXBarOutputSignalLatchedFlag(void)
-{
-    return (HW_RD_REG32(MCU_PWM_XBAR_BASE + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR_FLAG));
-}
+uint32 MCU_xbarGetPWMXBarOutputSignalLatchedFlag(void);
 
 /**
  * \brief PWM XBAR: API to clear output signal status flag (latched) of PWM XBars
@@ -507,10 +496,7 @@ static inline uint32 MCU_xbarGetPWMXBarOutputSignalLatchedFlag(void)
  * \param clr [in] Mask defining the PWM XBar output signal flags (latched) to be cleared.
  *                 Bitwise OR of all xbar outputs (0 to \ref MCU_PWM_XBAR_NUM_OUTPUT - 1)
  */
-static inline void MCU_xbarClearPWMXBarOutputSignalLatchedFlag(uint32 clr)
-{
-    HW_WR_REG32(MCU_PWM_XBAR_BASE + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR_FLAG_CLR, clr);
-}
+void MCU_xbarClearPWMXBarOutputSignalLatchedFlag(uint32 clr);
 
 /**
  * \brief PWM XBAR: API to select input sources of PWM XBar
@@ -527,29 +513,8 @@ static inline void MCU_xbarClearPWMXBarOutputSignalLatchedFlag(uint32 clr)
  *                   group_mask[7U]: Bitwise mask of \ref MCU_PWM_XBAR_GROUP7_MASKS
  *                   group_mask[8U]: Bitwise mask of \ref MCU_PWM_XBAR_GROUP8_MASKS
  */
-static inline void MCU_xbarSelectPWMXBarInputSource(uint32 out, const uint32 group_mask[MCU_PWM_XBAR_NUM_GROUPS])
-{
-    uint32 baseAddr = MCU_PWM_XBAR_BASE + (out * MCU_CSL_CONTROLSS_PWMXBAR_STEP);
+void MCU_xbarSelectPWMXBarInputSource(uint32 out, const uint32 group_mask[MCU_PWM_XBAR_NUM_GROUPS]);
 
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G0,
-                group_mask[0U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G0_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G1,
-                group_mask[1U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G1_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G2,
-                group_mask[2U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G2_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G3,
-                group_mask[3U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G3_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G4,
-                group_mask[4U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G4_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G5,
-                group_mask[5U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G5_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G6,
-                group_mask[6U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G6_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G7,
-                group_mask[7U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G7_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G8,
-                group_mask[8U] & MCU_CSL_CONTROLSS_PWMXBAR_PWMXBAR0_G8_SEL_MASK);
-}
 #define MCU_STOP_SEC_CODE
 #include "Mcu_MemMap.h"
 

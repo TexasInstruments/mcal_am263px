@@ -732,20 +732,6 @@ extern "C" {
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
 
-static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out,
-                                                          const uint32 group_mask[MCU_INT_XBAR_NUM_GROUPS]);
-
-static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint32 out, uint32 group_select, uint32 group0_mask,
-                                                      uint32 group1_mask);
-
-static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out, uint32 mux_control);
-
-/* ========================================================================== */
-/*                          Function Definitions                              */
-/* ========================================================================== */
-#define MCU_START_SEC_CODE
-#include "Mcu_MemMap.h"
-
 /**
  * \brief Trip & Sync xbar: API to select input sources of Interrupt XBar
  *
@@ -754,25 +740,7 @@ static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out
  * \param group_mask [in] Pointer to arrray of Mask to OR inputs from group 0 to 6
  *
  */
-static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out,
-                                                          const uint32 group_mask[MCU_INT_XBAR_NUM_GROUPS])
-{
-    // TBD: 32 bit field required?
-    HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G0,
-                group_mask[0] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G0_SEL_MASK);
-    HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G1,
-                group_mask[1] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G1_SEL_MASK);
-    HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G2,
-                group_mask[2] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G2_SEL_MASK);
-    HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G3,
-                group_mask[3] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G3_SEL_MASK);
-    HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G4,
-                group_mask[4] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G4_SEL_MASK);
-    HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G5,
-                group_mask[5] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G5_SEL_MASK);
-    HW_WR_REG32(base + (out * MCU_CSL_CONTROLSS_INTXBAR_STEP) + MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G6,
-                group_mask[6] & MCU_CSL_CONTROLSS_INTXBAR_INTXBAR0_G6_SEL_MASK);
-}
+void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 out, const uint32 group_mask[MCU_INT_XBAR_NUM_GROUPS]);
 
 /**
  * \brief Trip & Sync xbar: API to select input source of Input XBar
@@ -784,25 +752,18 @@ static inline void MCU_xbarSelectInterruptXBarInputSource(uint32 base, uint32 ou
  * \param group_select [in] Mux control to select group 0 or 1
  *
  */
-static inline void MCU_xbarSelectInputXBarInputSource(uint32 base, uint32 out, uint32 group_select, uint32 group0_mask,
-                                                      uint32 group1_mask)
-{
-    HW_WR_REG32(base + MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL + (out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
-                group_select & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_GSEL_GSEL_MASK);
-    HW_WR_REG32(base + MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G0 + (out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
-                group0_mask & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G0_SEL_MASK);
-    HW_WR_REG32(base + MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G1 + (out * MCU_CSL_CONTROLSS_INPUTXBAR_STEP),
-                group1_mask & MCU_CSL_CONTROLSS_INPUTXBAR_INPUTXBAR0_G1_SEL_MASK);
-}
+void MCU_xbarSelectInputXBarInputSource(uint32 base, uint32 out, uint32 group_select, uint32 group0_mask,
+                                        uint32 group1_mask);
 
-static inline void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out, uint32 mux_control)
-{
-    HW_WR_REG32(
-        base + MCU_CSL_GPIO_INTR_XBAR_MUXCNTL(out),
-        (MCU_CSL_GPIO_INTR_XBAR_MUXCNTL_INT_ENABLE_MASK) | (mux_control & MCU_CSL_GPIO_INTR_XBAR_MUXCNTL_ENABLE_MASK));
-}
-#define MCU_STOP_SEC_CODE
-#include "Mcu_MemMap.h"
+/**
+ * \brief API to select input source of Gpio XBar
+ *
+ * \param base [in] Input XBar base address
+ * \param out [in] Instance of Input XBar
+ * \param mux_control [in] Mux control to select input
+ *
+ */
+void MCU_xbarSelectGpioIntrXbarInputSource(uint32 base, uint32 out, uint32 mux_control);
 
 #ifdef __cplusplus
 }

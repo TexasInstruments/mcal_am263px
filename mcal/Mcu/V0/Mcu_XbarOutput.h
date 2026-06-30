@@ -557,11 +557,7 @@ extern "C" {
  * \return uint32 Output XBar status - Bitwise OR of all xbar outputs (0 to \ref
  * MCU_OUTPUT_XBAR_NUM_OUTPUT - 1)
  */
-static inline uint32 MCU_xbarGetOutputXBarOutputSignalStatus(void)
-{
-    return (HW_RD_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_STATUS) &
-            MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_STATUS_STS_MASK);
-}
+uint32 MCU_xbarGetOutputXBarOutputSignalStatus(void);
 
 /**
  * \brief Output XBAR: API to configure inversion of output signal status flag (latched) of Output
@@ -570,11 +566,7 @@ static inline uint32 MCU_xbarGetOutputXBarOutputSignalStatus(void)
  * \param invert [in] Mask defining the Output XBar output signal flags (latched) to be inverted.
  *                    Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT - 1)
  */
-static inline void MCU_xbarInvertOutputXBarOutputSignalBeforeLatch(uint32 invert)
-{
-    HW_WR_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_FLAGINVERT,
-                invert & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_FLAGINVERT_INVERT_MASK);
-}
+void MCU_xbarInvertOutputXBarOutputSignalBeforeLatch(uint32 invert);
 
 /**
  * \brief Output XBAR: API to read latched output signal status of all Output XBars
@@ -582,10 +574,7 @@ static inline void MCU_xbarInvertOutputXBarOutputSignalBeforeLatch(uint32 invert
  * \return uint32 Output XBar latched status flags.
  *                Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT - 1)
  */
-static inline uint32 MCU_xbarGetOutputXBarOutputSignalLatchedFlag(void)
-{
-    return (HW_RD_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_FLAG));
-}
+uint32 MCU_xbarGetOutputXBarOutputSignalLatchedFlag(void);
 
 /**
  * \brief Output XBAR: API to clear output signal status flag (latched) of Output XBars
@@ -593,10 +582,7 @@ static inline uint32 MCU_xbarGetOutputXBarOutputSignalLatchedFlag(void)
  * \param clr [in] Mask defining the Output XBar output signal flags (latched) to be cleared
  *                 Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT - 1)
  */
-static inline void MCU_xbarClearOutputXBarOutputSignalLatchedFlag(uint32 clr)
-{
-    HW_WR_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_FLAG_CLR, clr);
-}
+void MCU_xbarClearOutputXBarOutputSignalLatchedFlag(uint32 clr);
 
 /**
  * \brief Output XBAR: API to force output signal status flag (latched) of Output XBars
@@ -604,11 +590,7 @@ static inline void MCU_xbarClearOutputXBarOutputSignalLatchedFlag(uint32 clr)
  * \param force [in] Mask defining the Output XBar output signal flags (latched) to be forced to
  * set. Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT - 1)
  */
-static inline void MCU_xbarForceOutputXBarOutputSignalLatchedFlag(uint32 force)
-{
-    HW_WR_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_FLAGFORCE,
-                force & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_FLAGFORCE_FRC_MASK);
-}
+void MCU_xbarForceOutputXBarOutputSignalLatchedFlag(uint32 force);
 
 /**
  * \brief Output XBAR: API to select output of Output XBars
@@ -616,11 +598,7 @@ static inline void MCU_xbarForceOutputXBarOutputSignalLatchedFlag(uint32 force)
  * \param latchselect [in] Select latched / non-latched output.
  *                         Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT - 1)
  */
-static inline void MCU_xbarSelectLatchOutputXBarOutputSignal(uint32 latchselect)
-{
-    HW_WR_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTLATCH,
-                latchselect & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTLATCH_LATCHSEL_MASK);
-}
+void MCU_xbarSelectLatchOutputXBarOutputSignal(uint32 latchselect);
 
 /**
  * \brief Output XBAR: API to enable pulse stretching of output of Output XBars
@@ -629,11 +607,7 @@ static inline void MCU_xbarSelectLatchOutputXBarOutputSignal(uint32 latchselect)
  *                           Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT -
  * 1)
  */
-static inline void MCU_xbarSelectStretchedPulseOutputXBarOutputSignal(uint32 stretchselect)
-{
-    HW_WR_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTSTRETCH,
-                stretchselect & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTSTRETCH_STRETCHSEL_MASK);
-}
+void MCU_xbarSelectStretchedPulseOutputXBarOutputSignal(uint32 stretchselect);
 
 /**
  * \brief Output XBAR: API to configure pulse streching length of output of Output XBars
@@ -642,11 +616,7 @@ static inline void MCU_xbarSelectStretchedPulseOutputXBarOutputSignal(uint32 str
  *                          Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT -
  * 1)
  */
-static inline void MCU_xbarSelectStretchedPulseLengthOutputXBarOutputSignal(uint32 lengthselect)
-{
-    HW_WR_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTLENGTH,
-                lengthselect & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTLENGTH_LENGTHSEL_MASK);
-}
+void MCU_xbarSelectStretchedPulseLengthOutputXBarOutputSignal(uint32 lengthselect);
 
 /**
  * \brief Output XBAR: API to configure inversion of output signal of Output XBars
@@ -654,11 +624,7 @@ static inline void MCU_xbarSelectStretchedPulseLengthOutputXBarOutputSignal(uint
  * \param invertout [in] Mask defining the Output XBar output signal to be inverted
  *                       Bitwise OR of all xbar outputs (0 to \ref MCU_OUTPUT_XBAR_NUM_OUTPUT - 1)
  */
-static inline void MCU_xbarInvertOutputXBarOutputSignal(uint32 invertout)
-{
-    HW_WR_REG32(MCU_OUTPUT_XBAR_BASE + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTINVERT,
-                invertout & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR_OUTINVERT_OUTINVERT_MASK);
-}
+void MCU_xbarInvertOutputXBarOutputSignal(uint32 invertout);
 
 /**
  * \brief Output XBAR: API to select input sources of Output XBar
@@ -677,33 +643,8 @@ static inline void MCU_xbarInvertOutputXBarOutputSignal(uint32 invertout)
  *                   group_mask[9U]: Bitwise mask of \ref MCU_OUTPUT_XBAR_GROUP9_MASKS
  *                   group_mask[10U]: Bitwise mask of \ref MCU_OUTPUT_XBAR_GROUP10_MASKS
  */
-static inline void MCU_xbarSelectOutputXBarInputSource(uint32 out, const uint32 group_mask[MCU_OUTPUT_XBAR_NUM_GROUPS])
-{
-    uint32 baseAddr = MCU_OUTPUT_XBAR_BASE + (out * MCU_CSL_CONTROLSS_OUTPUTXBAR_STEP);
+void MCU_xbarSelectOutputXBarInputSource(uint32 out, const uint32 group_mask[MCU_OUTPUT_XBAR_NUM_GROUPS]);
 
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G0,
-                group_mask[0U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G0_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G1,
-                group_mask[1U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G1_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G2,
-                group_mask[2U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G2_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G3,
-                group_mask[3U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G3_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G4,
-                group_mask[4U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G4_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G5,
-                group_mask[5U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G5_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G6,
-                group_mask[6U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G6_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G7,
-                group_mask[7U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G7_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G8,
-                group_mask[8U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G8_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G9,
-                group_mask[9U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G9_SEL_MASK);
-    HW_WR_REG32(baseAddr + MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G10,
-                group_mask[10U] & MCU_CSL_CONTROLSS_OUTPUTXBAR_OUTPUTXBAR0_G10_SEL_MASK);
-}
 #define MCU_STOP_SEC_CODE
 #include "Mcu_MemMap.h"
 

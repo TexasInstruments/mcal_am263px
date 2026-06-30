@@ -408,13 +408,10 @@ Std_ReturnType Can_mcanStop(Can_ControllerObjType *controllerObj, Can_MailboxObj
         if ((CAN_MAILBOX_DIRECTION_TX == mailboxCfg->MBDir) &&
             (mailboxCfg->Controller->ControllerId == controllerObj->canControllerConfig_PC.ControllerId))
         {
-            /* TI_COVERAGE_GAP_START [Branch] HwHandle >= CAN_NUM_TX_MAILBOXES; all configured TX mailboxes have valid
-             * HwHandle in test */
             if (mailboxCfg->HwHandle < (Can_HwHandleType)CAN_NUM_TX_MAILBOXES)
             {
                 canTxMessageObj[mailboxCfg->HwHandle].freeHwObjectCount = mailboxCfg->CanHwObjectCount;
             }
-            /* TI_COVERAGE_GAP_STOP */
         }
     }
     /* Put MCAN in SW initialization mode */
