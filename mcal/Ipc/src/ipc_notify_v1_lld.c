@@ -377,8 +377,7 @@ static sint32 IpcNotify_lld_sendMsg_mailboxWrite(IpcNotify_Handle hIpcNotify, co
     sint32             status       = MCAL_SystemP_SUCCESS;
     uint32             elapsedTicks = 0U, startTicks = 0U, tempTicks = 0U;
 
-    if ((msgParams->remoteCoreId < MCAL_CSL_CORE_ID_MAX) &&
-        ((hIpcNotify->isCoreEnabled[msgParams->remoteCoreId]) != 0U))
+    if ((hIpcNotify->isCoreEnabled[msgParams->remoteCoreId]) != 0U)
     {
         uint32 value = IpcNotify_makeMsg(hIpcNotify, msgParams->remoteClientId, msgParams->messageValue);
 
@@ -470,5 +469,15 @@ static void IpcNotify_lld_isrCrcCheck(sint32 status, uint32 value, IpcNotify_Han
     }
 }
 
+uint32 IpcNotify_mailboxIsPendingIntr(uint32 pendingIntr, uint32 coreId)
+{
+    uint32 isPending = 0U;
+    if (coreId < MCAL_CSL_CORE_ID_MAX)
+    {
+        isPending = pendingIntr & (1U << gIpcNotifyCoreIntrBitPos[coreId]);
+    }
+
+    return isPending;
+}
 #define CDD_IPC_STOP_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"

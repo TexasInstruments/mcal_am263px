@@ -405,6 +405,14 @@ init time configurations.</p>
 <h4><span class="section-number">4.4.8.1.1. </span>DET<a class="headerlink" href="#det" title="Link to this heading"></a></h4>
 <p>The FLC module depends on the DET (by default) to report development errors. The DET can be replaced optionally by an equivalent component which is responsible to recognize development errors, if no DET component is available.</p>
 </section>
+<section id="fls">
+<h4><span class="section-number">4.4.8.1.2. </span>FLS<a class="headerlink" href="#fls" title="Link to this heading"></a></h4>
+<p><strong>API Usage Constraint: FLS must be idle before calling FLC for flash specific usage.</strong></p>
+<p>The FLC driver copies data directly from external flash memory (OSPI) to SRAM using its internal DMA engine. If the FLS driver has an active erase or write job in progress at the time <code class="docutils literal notranslate"><span class="pre">Cdd_Flc_Copy()</span></code> is called, the flash device is occupied and the FLC DMA access will conflict with the ongoing FLS operation, potentially reading garbled or partially-erased data.</p>
+<ul class="simple">
+<li><p>Before calling any <code class="docutils literal notranslate"><span class="pre">Cdd_Flc</span></code> API that initiates a copy from flash, the application must verify that the FLS driver is not busy. This can be checked via <code class="docutils literal notranslate"><span class="pre">Fls_GetStatus()</span></code>, which must return <code class="docutils literal notranslate"><span class="pre">MEMIF_IDLE</span></code>.</p></li>
+</ul>
+</section>
 </section>
 <section id="multi-core-support">
 <h3><span class="section-number">4.4.8.2. </span>Multi-core Support<a class="headerlink" href="#multi-core-support" title="Link to this heading"></a></h3>

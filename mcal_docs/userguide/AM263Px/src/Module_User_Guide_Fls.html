@@ -891,14 +891,10 @@ These parameters are required in example app.</p>
 <h4><span class="section-number">4.15.8.1.12. </span>Fls_setResetPinMode<a class="headerlink" href="#fls-setresetpinmode" title="Link to this heading"></a></h4>
 <p>This function sets the flash RESET# pin to the specified state (high or low) via the OSPI controller register. It is applicable on AM263Px-SIP and AM263Px Rev A boards. To perform a hardware flash reset, the caller must toggle the pin: first set it HIGH then LOW (or LOW then HIGH depending on flash polarity). Note: On a standard AM263Px EVM without SIP packaging, the RESET# pin is not wired to the flash and this function has no effect on the flash device itself.</p>
 </section>
-<section id="fls-phy-tuning-fls-phyenable-fls-phydisable">
-<h4><span class="section-number">4.15.8.1.13. </span>Fls PHY Tuning (Fls_PhyEnable / Fls_PhyDisable)<a class="headerlink" href="#fls-phy-tuning-fls-phyenable-fls-phydisable" title="Link to this heading"></a></h4>
-<p>OSPI PHY tuning is supported on AM263Px (enabled via the <code class="docutils literal notranslate"><span class="pre">FLS_OSPI_PHY_ENABLE</span></code> pre-compile switch). The PHY tuning algorithm searches for optimal TX/RX DLL delay window settings to achieve reliable high-speed 8D-8D-8D flash operation.</p>
-<ul class="simple">
-<li><p><strong>Fls_PhyEnable()</strong>: Runs the PHY tuning algorithm and enables the OSPI PHY. This must be called after <code class="docutils literal notranslate"><span class="pre">Fls_Init()</span></code> and after the flash protocol has been configured. Once enabled, all subsequent read operations use PHY-assisted data capture for improved timing margins at high frequencies.</p></li>
-<li><p><strong>Fls_PhyDisable()</strong>: Disables the OSPI PHY, reverting to non-PHY read operation.</p></li>
-</ul>
-<p>The PHY configuration parameters (tuning window, DLL mode, phase delay) are provided through SysConfig-generated configuration.</p>
+<section id="fls-phy-tuning">
+<h4><span class="section-number">4.15.8.1.13. </span>Fls PHY Tuning<a class="headerlink" href="#fls-phy-tuning" title="Link to this heading"></a></h4>
+<p>OSPI PHY tuning is supported on AM263Px (enabled via the <code class="docutils literal notranslate"><span class="pre">FLS_OSPI_PHY_ENABLE</span></code> pre-compile switch). When enabled, the PHY tuning algorithm runs automatically during <code class="docutils literal notranslate"><span class="pre">Fls_Init()</span></code> to search for optimal TX/RX DLL delay window settings for reliable high-speed 8D-8D-8D flash operation. The tuning result (pass/fail and selected delays) is applied internally; no separate enable/disable API is required in normal operation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">FLS_OSPI_PHY_ENABLE</span></code> is set to <code class="docutils literal notranslate"><span class="pre">STD_ON</span></code>, the user-exposed APIs <code class="docutils literal notranslate"><span class="pre">Fls_PhyEnable()</span></code> and <code class="docutils literal notranslate"><span class="pre">Fls_PhyDisable()</span></code> are available for advanced use cases (e.g.,FLC copy). These APIs should only be called after <code class="docutils literal notranslate"><span class="pre">Fls_Init()</span></code> has returned <code class="docutils literal notranslate"><span class="pre">E_OK</span></code>.</p>
 </section>
 <section id="callback-notification">
 <h4><span class="section-number">4.15.8.1.14. </span>Callback Notification<a class="headerlink" href="#callback-notification" title="Link to this heading"></a></h4>

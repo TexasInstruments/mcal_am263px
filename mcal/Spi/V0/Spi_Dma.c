@@ -119,7 +119,7 @@ static sint32 Spi_dmaChInit_status(Spi_HwUnitObjType *hwUnitObj, Spi_TxRxMode tx
 #define SPI_START_SEC_CODE
 #include "Spi_MemMap.h"
 
-/* Requirements : MCAL-____ */
+/* Design : MCAL-40527 */
 sint32 Spi_dmaChInit(Spi_DriverObjType *drvObj, Spi_HwUnitObjType *hwUnitObj, Spi_TxRxMode txRxMode)
 {
     sint32 status = MCAL_SystemP_FAILURE;

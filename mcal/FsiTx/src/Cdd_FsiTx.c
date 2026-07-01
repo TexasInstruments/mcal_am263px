@@ -124,7 +124,7 @@ VAR(Cdd_FsiTx_StatusType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DriverStatus = CDD_FS
 #define CDD_FSITX_START_SEC_CODE
 #include "Cdd_FsiTx_MemMap.h"
 
-/* Design: MCAL-38733 */
+/* Design: MCAL-38733, MCAL-39552, MCAL-39553 */
 /*******************************************************************************
  * Cdd_FsiTx_Init
  ******************************************************************************/
@@ -470,7 +470,7 @@ Cdd_FsiTx_MainFunction(void)
 }
 #endif /*(STD_ON == CDD_FSI_TX_MAIN_FUNCTION_API)*/
 
-/* Design: MCAL-39725 */
+/* Design: MCAL-39725, MCAL-39551 */
 #if (STD_ON == CDD_FSI_TX_REGISTER_READBACK_API)
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
 Cdd_FsiTx_RegisterReadback(Cdd_FsiTx_HWUnitType HwUnitId,

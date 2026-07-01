@@ -699,7 +699,13 @@ static Std_ReturnType Cdd_Ipc_Notify_RegisterClient_det_check(uint32            
 static boolean Cdd_Ipc_DeInit_detError_Check_CoreNo(const Cdd_IpcConfigType *ConfigPtr)
 {
     boolean exitCondition = FALSE;
+    /* TI_COVERAGE_GAP_START
+     * Reason: for-loop AND condition C2 (core < CDD_IPC_CORE_ID_MAX) independent FALSE
+     * requires ConfigPtr->Cdd_Ipc_numCores > CDD_IPC_CORE_ID_MAX (4). This config
+     * scenario is exercised in test function ipcTestDeInitCoreNoOverflowCoverage.
+     */
     for (uint32 core = 0; (core < ConfigPtr->Cdd_Ipc_numCores) && (core < (uint32)CDD_IPC_CORE_ID_MAX); core++)
+    /* TI_COVERAGE_GAP_STOP */
     {
         if (ConfigPtr->Cdd_Ipc_coreIdList[core] > CDD_IPC_CORE_ID_MAX)
         {

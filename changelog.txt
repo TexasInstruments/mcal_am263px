@@ -1,3 +1,96 @@
+commit 2441327a285407eec2db67d37a8dee4a967de875
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Jun 16 13:25:18 2026 +0530
+
+    all: Cdd_Ipc: Adding coverage for IPC am261/3x platforms
+    
+    Fixes: MCAL-37948
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Ipc/V0/ipc_notify_v1_cfg_lld.c                |   6 -
+ mcal/Ipc/include/ipc_notify_v1_mailbox.h           |  13 +-
+ mcal/Ipc/src/Cdd_Ipc.c                             |   6 +
+ mcal/Ipc/src/ipc_notify_v1_lld.c                   |  13 +-
+ mcal/Ipc/src/ipc_rpmsg_lld_vring.c                 |  27 +-
+ mcal_misc/ccs_test_automation/load_run_ipc_test.js |  86 ++-
+ ...cho_am261x-som_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 294980 bytes
+ ...cho_am261x-som_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 294980 bytes
+ ...cho_am261x-som_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 294940 bytes
+ ...cho_am261x-som_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 377764 bytes
+ ...cho_am261x-som_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 377764 bytes
+ ...cho_am261x-som_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 377764 bytes
+ ...cho_am261x-som_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 377524 bytes
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-0_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-0_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-0_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-0_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-0_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-0_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-0_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss1-1_nortos_ti-arm-clang.out | Bin
+ ...echo_am263x-cc_r5fss0-1_nortos_ti-arm-clang.out | Bin 0 -> 308308 bytes
+ mcal_test/ipc_test/am261/testInput/ipcTestCases.h  | 443 ++++++++++++++
+ mcal_test/ipc_test/am261/testInput/ipcTestConfig.h |  61 ++
+ mcal_test/ipc_test/am261/testLib/ipcTest.h         |  40 ++
+ .../ipc_test/am261/testLib/ipcTestMainTestCase.c   | 602 +++++++++++++++++++
+ .../am261/testLib/ipcTestNegativeTestCase.c        | 656 +++++++++++++++++++++
+ mcal_test/ipc_test/am261/testLib/ipcTestParser.c   |   4 +-
+ mcal_test/ipc_test/am263/testInput/ipcTestCases.h  | 370 +++++++++++-
+ mcal_test/ipc_test/am263/testInput/ipcTestConfig.h | 121 +++-
+ mcal_test/ipc_test/am263/testLib/ipcTest.h         |  82 +++
+ .../ipc_test/am263/testLib/ipcTestMainTestCase.c   | 602 +++++++++++++++++++
+ .../am263/testLib/ipcTestNegativeTestCase.c        | 655 +++++++++++++++++++-
+ mcal_test/ipc_test/am263/testLib/ipcTestParser.c   |   2 +-
+ mcal_test/ipc_test/build/makefile                  |   4 +-
+ mcal_test/makefile                                 |   4 +-
+ .../Ipc/soc/am261/r5f0_0/config_7/Cdd_Ipc_Cfg.h    | 219 +++++++
+ 50 files changed, 3880 insertions(+), 136 deletions(-)
+
+commit 921eff7ce5e28ce26da1ce1098fe2b78d16e72df
+Author: Akash <a-verma3@ti.com>
+Date:   Tue Jun 30 16:16:41 2026 +0530
+
+    am261: ICU: ICU Coverage improvement for am261.
+    
+    Fixes: MCAL-37962
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/icu_test/am261/testInput/icuTestCases.h  |  75 +++++++++++
+ mcal_test/icu_test/am261/testLib/icuTest.h         |   6 +-
+ .../am261/testLib/icuTestNegativeTestCase.c        | 137 +++++++++++++++++++++
+ 3 files changed, 214 insertions(+), 4 deletions(-)
+
+commit 95ba75e7de26a84cef023c818354c973e9a3ce9e
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Jul 1 09:51:12 2026 +0530
+
+    all: all: Adding design JIRAs to source
+    
+    Fixes: MCAL-38750
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/FsiRx/src/Cdd_FsiRx.c | 2 +-
+ mcal/FsiTx/src/Cdd_FsiTx.c | 4 ++--
+ mcal/Spi/V0/Spi_Dma.c      | 2 +-
+ mcal/Wdg/src/Wdg.c         | 2 +-
+ 4 files changed, 5 insertions(+), 5 deletions(-)
+
 commit 72c73be67c279a6820ef9400548ff37c3945630e
 Author: Asha D <asha.d@ti.com>
 Date:   Tue Jun 30 12:16:16 2026 +0530

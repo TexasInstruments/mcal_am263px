@@ -345,7 +345,7 @@ Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
  *  Parameters (inOut)  : None.
  ******************************************************************************/
 
-/* Design: MCAL-38745 */
+/* Design: MCAL-38745, MCAL-39554, MCAL-39555 */
 FUNC(void, CDD_FSIRX_CODE)
 Cdd_FsiRx_DmaDataReceive(Cdd_FsiRx_HWUnitType HwUnitId)
 {

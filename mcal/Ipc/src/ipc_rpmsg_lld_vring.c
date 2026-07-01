@@ -398,15 +398,6 @@ static inline void RPMessage_vringPutFullTxBuf_asm(void)
 #endif
 }
 
-/* TI_COVERAGE_GAP_START
- * Reason: Mutex timeout and failure conditions cannot be reliably recreated in test environment.
- * The timeout/failure path in RPMessage_vringGetEmptyTxBufTimeOut requires the mutex lock
- * operation to fail or timeout, which depends on multi-core timing conditions that cannot
- * be controlled in a single-core unit test environment. The mutex timeout in
- * RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock requires another core to hold the mutex
- * for the entire timeout duration, which is a race condition that cannot be deterministically
- * reproduced without actual multi-core hardware interaction.
- */
 static boolean RPMessage_vringGetEmptyTxBufTimeOut(sint32 *status, boolean done)
 {
     boolean isDone = done;
@@ -414,6 +405,16 @@ static boolean RPMessage_vringGetEmptyTxBufTimeOut(sint32 *status, boolean done)
     {
         isDone = TRUE;
     }
+    /* TI_COVERAGE_GAP_START
+     * Reason: FALSE branch unreachable - this function is only called when
+     * status == MCAL_SystemP_TIMEOUT (mutex acquire timed out). The FAILURE
+     * sub-condition requires multi-core hardware interaction not available in test.
+     */
+    else
+    {
+        /* FALSE branch unreachable in single-core test */
+    }
+    /* TI_COVERAGE_GAP_STOP */
     return isDone;
 }
 
@@ -427,8 +428,15 @@ static uint32 RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(sint32 *status, 
     {
         if (Cdd_Ipc_Mutex_resourceTryLock(&coreObj->newEmptyVringBufSem) == CDD_IPC_MUTEX_ARM_UNLOCKED)
         {
+            /* TI_COVERAGE_GAP_START
+             * Reason: Mutex acquire success path requires multi-core interaction.
+             * A second core must signal the mutex during testing. Exercising this
+             * path in a single-core test causes an infinite loop in the caller
+             * because vring remains empty and the do-while loop never exits.
+             */
             tryLoopLocal = 1U;
             *status      = MCAL_SystemP_SUCCESS;
+            /* TI_COVERAGE_GAP_STOP */
         }
         else
         {
@@ -439,6 +447,5 @@ static uint32 RPMessage_vringGetEmptyTxBuf_mutexResourceTryLock(sint32 *status, 
 
     return tryLoopLocal;
 }
-/* TI_COVERAGE_GAP_STOP */
 #define CDD_IPC_STOP_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"

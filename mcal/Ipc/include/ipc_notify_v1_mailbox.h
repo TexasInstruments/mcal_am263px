@@ -108,7 +108,7 @@ extern sint32        IpcNotify_trigInterrupt(uint32 selfCoreId, uint32 remoteCor
 extern uint32        gIpcNotifyCoreIntrBitPos[4];
 static inline void   IpcNotify_mailbox_asm(void);
 static inline sint32 IpcNotify_mailboxReadSwQ(IpcNotify_SwQueue *swQ, uint32 *value);
-
+uint32               IpcNotify_mailboxIsPendingIntr(uint32 pendingIntr, uint32 coreId);
 /* read from SW fifo within a mailbox  */
 static inline sint32 IpcNotify_mailboxReadSwQ(IpcNotify_SwQueue *swQ, uint32 *value)
 {
@@ -194,17 +194,6 @@ static inline void IpcNotify_mailboxClearPendingIntr(uint32 mailboxBaseAddr, uin
     volatile uint32 *addr = (uint32 *)mailboxBaseAddr;
 
     *addr = pendingIntr;
-}
-
-static inline uint32 IpcNotify_mailboxIsPendingIntr(uint32 pendingIntr, uint32 coreId)
-{
-    uint32 isPending = 0U;
-    if (coreId < MCAL_CSL_CORE_ID_MAX)
-    {
-        isPending = pendingIntr & (1U << gIpcNotifyCoreIntrBitPos[coreId]);
-    }
-
-    return isPending;
 }
 
 static inline void IpcNotify_mailbox_asm(void)

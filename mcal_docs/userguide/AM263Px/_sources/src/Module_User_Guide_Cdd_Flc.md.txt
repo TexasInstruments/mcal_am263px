@@ -152,6 +152,14 @@ None
 
 The FLC module depends on the DET (by default) to report development errors. The DET can be replaced optionally by an equivalent component which is responsible to recognize development errors, if no DET component is available.
 
+##### FLS
+
+**API Usage Constraint: FLS must be idle before calling FLC for flash specific usage.**
+
+The FLC driver copies data directly from external flash memory (OSPI) to SRAM using its internal DMA engine. If the FLS driver has an active erase or write job in progress at the time `Cdd_Flc_Copy()` is called, the flash device is occupied and the FLC DMA access will conflict with the ongoing FLS operation, potentially reading garbled or partially-erased data.
+
+- Before calling any `Cdd_Flc` API that initiates a copy from flash, the application must verify that the FLS driver is not busy. This can be checked via `Fls_GetStatus()`, which must return `MEMIF_IDLE`.
+
 #### Multi-core Support
 
 Not Supported

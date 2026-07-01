@@ -339,7 +339,7 @@ FUNC(Std_ReturnType, WDG_CODE) Wdg_SetMode(WdgIf_ModeType Mode)
  ******************************************************************************/
 /*
  *Design: MCAL-14958, MCAL-14959, MCAL-14960, MCAL-14961, MCAL-14962, MCAL-14963 , MCAL-15027 ,
- *MCAL-15028, MCAL-15030 , MCAL-15031
+ *MCAL-15028, MCAL-15030 , MCAL-15031, MCAL-39580
  */
 FUNC(void, WDG_CODE) Wdg_SetTriggerCondition(uint16 timeout)
 {

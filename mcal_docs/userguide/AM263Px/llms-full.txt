@@ -14661,7 +14661,7 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| ipc   | 5530    | 429    | 1656    |
+| ipc   | 5562    | 429    | 1656    |
  
 ### LIN
 
@@ -14859,6 +14859,14 @@ None
 ##### DET
 
 The FLC module depends on the DET (by default) to report development errors. The DET can be replaced optionally by an equivalent component which is responsible to recognize development errors, if no DET component is available.
+
+##### FLS
+
+**API Usage Constraint: FLS must be idle before calling FLC for flash specific usage.**
+
+The FLC driver copies data directly from external flash memory (OSPI) to SRAM using its internal DMA engine. If the FLS driver has an active erase or write job in progress at the time `Cdd_Flc_Copy()` is called, the flash device is occupied and the FLC DMA access will conflict with the ongoing FLS operation, potentially reading garbled or partially-erased data.
+
+- Before calling any `Cdd_Flc` API that initiates a copy from flash, the application must verify that the FLS driver is not busy. This can be checked via `Fls_GetStatus()`, which must return `MEMIF_IDLE`.
 
 #### Multi-core Support
 
@@ -25714,14 +25722,11 @@ This function switches the OSPI controller and the connected NOR flash device to
 
 This function sets the flash RESET# pin to the specified state (high or low) via the OSPI controller register. It is applicable on AM263Px-SIP and AM263Px Rev A boards. To perform a hardware flash reset, the caller must toggle the pin: first set it HIGH then LOW (or LOW then HIGH depending on flash polarity). Note: On a standard AM263Px EVM without SIP packaging, the RESET# pin is not wired to the flash and this function has no effect on the flash device itself.
 
-##### Fls PHY Tuning (Fls_PhyEnable / Fls_PhyDisable)
+##### Fls PHY Tuning
 
-OSPI PHY tuning is supported on AM263Px (enabled via the `FLS_OSPI_PHY_ENABLE` pre-compile switch). The PHY tuning algorithm searches for optimal TX/RX DLL delay window settings to achieve reliable high-speed 8D-8D-8D flash operation.
+OSPI PHY tuning is supported on AM263Px (enabled via the `FLS_OSPI_PHY_ENABLE` pre-compile switch). When enabled, the PHY tuning algorithm runs automatically during `Fls_Init()` to search for optimal TX/RX DLL delay window settings for reliable high-speed 8D-8D-8D flash operation. The tuning result (pass/fail and selected delays) is applied internally; no separate enable/disable API is required in normal operation.
 
-- **Fls_PhyEnable()**: Runs the PHY tuning algorithm and enables the OSPI PHY. This must be called after `Fls_Init()` and after the flash protocol has been configured. Once enabled, all subsequent read operations use PHY-assisted data capture for improved timing margins at high frequencies.
-- **Fls_PhyDisable()**: Disables the OSPI PHY, reverting to non-PHY read operation.
-
-The PHY configuration parameters (tuning window, DLL mode, phase delay) are provided through SysConfig-generated configuration.
+If `FLS_OSPI_PHY_ENABLE` is set to `STD_ON`, the user-exposed APIs `Fls_PhyEnable()` and `Fls_PhyDisable()` are available for advanced use cases (e.g.,FLC copy). These APIs should only be called after `Fls_Init()` has returned `E_OK`.
 
 ##### Callback Notification
 
