@@ -1,3 +1,32 @@
+commit 34144dd5581f2e3f9b4ce3982c661516c036e3f1
+Author: Akash <a-verma3@ti.com>
+Date:   Thu Jul 2 17:57:22 2026 +0530
+
+    all: all: Change in the window coverage build script.
+    
+    - Changed to have 3 different package location for the coverage.
+    
+    Fixes: MCAL-38563
+    
+    Signed-off-by: Akash Verma
+
+ mcal_misc/scripts/windows/mcal_coverage_build.sh    | 4 ++--
+ mcal_misc/scripts/windows/mcal_coverage_make_all.sh | 4 ++--
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+commit 292e0a97fb0a2f69a34522a45b4b2f06f43ce890
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Jul 2 09:25:25 2026 +0530
+
+    am261: Ipc: Build fix
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/ipc_test/am261/testLib/ipcTest.h | 1 -
+ 1 file changed, 1 deletion(-)
+
 commit 2441327a285407eec2db67d37a8dee4a967de875
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Jun 16 13:25:18 2026 +0530
