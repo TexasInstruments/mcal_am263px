@@ -1,3 +1,72 @@
+commit 491beb5f7c0632aa0ce0ec4c6a738ae21defcd3a
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Jul 3 15:35:00 2026 +0530
+
+    am263px: all: Change in the ccxml file script.
+    
+    Fixes: MCAL-38563
+    
+    Signed-off-by: Akash Verma
+
+ mcal_misc/ccs_test_automation/am263px_xds110.ccxml | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit dc67a380b3edfdc0f57c70384ae1fa08f95fb5ee
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Jul 3 09:38:00 2026 +0530
+
+    all: all: Adding latest SA reports
+    
+    -Updated all MCAL_DR deviations with newly created deviation record JIRAs
+    
+    Fixes: MCAL-40645
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../csp/am261x/mcal_static_analysis_report.html    | 1252 +++++------
+ .../csp/am263px/mcal_static_analysis_report.html   | 2166 ++++++++++----------
+ .../csp/am263x/mcal_static_analysis_report.html    | 1202 +++++------
+ 3 files changed, 2335 insertions(+), 2285 deletions(-)
+
+commit 0d7c18c3bfd2ea716aa3168dbc1bbc99e72268b6
+Author: Asha D <asha.d@ti.com>
+Date:   Fri Jun 26 14:11:27 2026 +0530
+
+    all:EPWM: Coverage Improvement for EPWM module
+    
+    Fixes: MCAL-35527
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Sfo.c                      | 347 ++++++++++--------------
+ mcal_test/epwm_test/build/makefile              |   4 +-
+ mcal_test/epwm_test/testInput/cddPwmTestCases.h |   1 -
+ 3 files changed, 151 insertions(+), 201 deletions(-)
+
+commit 401e84c6cfb435b2ae03c51ea7d13a1861d55e30
+Author: Asha D <asha.d@ti.com>
+Date:   Wed Jul 1 17:11:23 2026 +0530
+
+    all:PWM:Coverage improvement on pwm module
+    
+            restructured the pwm_sfo source file
+            created config9 for the am261 platform
+    
+    Fixes: MCAL-35537
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Pwm/V0/Pwm_Sfo.c                              | 384 +++++++++------------
+ mcal/Pwm/V0/Pwm_Sfo.h                              |   2 +-
+ mcal_test/pwm_test/build/makefile                  |   2 +-
+ mcal_test/pwm_test/testInput/pwmTestCases.h        |  50 +--
+ mcal_test/pwm_test/testLib/pwmTestMainTestCase.c   |  14 +-
+ .../pwm_test/testLib/pwmTestNegativeTestCase.c     |   2 -
+ .../Pwm/soc/am261/r5f0_0/config_9/Pwm_Cfg.c        | 160 +++++++++
+ .../Pwm/soc/am261/r5f0_0/config_9/Pwm_Cfg.h        | 378 ++++++++++++++++++++
+ .../Pwm/soc/am261/r5f0_0/config_9/Pwm_PBcfg.c      |  57 +++
+ 9 files changed, 796 insertions(+), 253 deletions(-)
+
 commit 34144dd5581f2e3f9b4ce3982c661516c036e3f1
 Author: Akash <a-verma3@ti.com>
 Date:   Thu Jul 2 17:57:22 2026 +0530

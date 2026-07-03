@@ -78,7 +78,7 @@ extern "C" {
 #define PWM_START_SEC_CODE
 #include "Pwm_MemMap.h"
 
-FUNC(sint32, PWM_CODE) Pwm_SFO(void); /* SFO Calibration Function */
+FUNC(uint32, PWM_CODE) Pwm_SFO(void); /* SFO Calibration Function */
 
 #define PWM_STOP_SEC_CODE
 #include "Pwm_MemMap.h"

@@ -177,12 +177,12 @@ extern VAR(sint32, PWM_VAR_NO_INIT) Pwm_MEP_ScaleFactor;
 #define PWM_START_SEC_CODE
 #include "Pwm_MemMap.h"
 
-FUNC(sint32, PWM_CODE) Pwm_SFO(void)
+FUNC(uint32, PWM_CODE) Pwm_SFO(void)
 {
     static uint16 hrc1, hrc2; /* holds HRCNT0 count in 65535 HRCNT1 counts */
     static uint16 TaskPtr = 0U;
 
-    sint16  status;
+    uint32  status;
     float32 Denom;
     uint16  Numer;
     uint32  scale_factor;
@@ -191,223 +191,175 @@ FUNC(sint32, PWM_CODE) Pwm_SFO(void)
 
     /* SFO MEP Calibration State Machine */
 
-    switch (TaskPtr)
+    /* General Initialization */
+    if (TaskPtr == 0U)
     {
-        case 0: /* General Initialization */
-
-            /*Clear all bits */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR, 0x0U);
-
-            /* Set the counter period */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPRD, PRDVAL);
-
-            /* Eliminate delay in counter start(CNTSEL = 1), enable lump delay
-            (TESTSEL = 1) & turn on the calibration logic(CALPWRON = 1) */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) |
-                         (PWM_EPWM_HRPWR_CNTSEL | PWM_EPWM_HRPWR_TESTSEL)));
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALPWRON));
-            /*Initialize variables */
-
-            /*Pwm_SFO_Cal = 0;*/
-            hrc1    = 0;
-            hrc2    = 0;
-            TaskPtr = 1;
-            break;
-
-        case 1: /* Initialization for 1st run*/
-
-            /* The logic should be reinitialized before every calibration run. */
-            /* Clear all bits in HRPWR */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR, ((uint16)0X0));
-            /*AM263x: Fix for missing initialization (other than in task 0) of HRPRD for other
-             * OTTOCALs*/
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPRD, PRDVAL);
-
-            /*Configure # MEP steps A (1st point) in DCAL mode. This should be
-              done before powering the CAL logic on */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCAL, MEP1);
-
-            /* Eliminate delay in counter start(CNTSEL = 1), enable lump delay
-            (TESTSEL = 1) & turn on the calibration logic(CALPWRON = 1)*/
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) |
-                         (PWM_EPWM_HRPWR_CNTSEL | PWM_EPWM_HRPWR_TESTSEL)));
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALPWRON));
-            /* Add some delay(23 cycles) after power off. Unrolled the loop
-            to make it interruptable. Use asm(" RPT #20 || NOP");
-             to make it uninterruptable */
-
-            /* Manually clear HRCNT0 & HRCNT1 to be safe */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0, 0x0U);
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT1, 0x0U);
-
-            /* Start calibration*/
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALSTART));
-            /* Update task pointer to next case for next SFO call.*/
-
-            TaskPtr = 2;
-
-            break;
-
-        case 2: /* Wait for 1st run to complete */
-
-            /* If calibration is not complete, exit SFO() and check again
-            in next function call. CALSTS becomes zero when HRCNT1 value
-             equals HRPRD value or 0xFFFFU.*/
-
-            if (((HW_RD_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & PWM_EPWM_HRPWR_CALSTS)) == 0x0U)
-            {
-                /* Stop calibration. This bit is NOT automatically cleared.*/
-
-                HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
-                            ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALSTART));
-
-                /* Get 1st count in HRCNT0 (# of ring osc oscillations) */
-
-                hrc1 = HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0);
-
-                /*Update task pointer to next case for next SFO call.*/
-                TaskPtr = 3;
-
-                /* Power down the calibration logic*/
-
-                HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
-                            ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALPWRON));
-
-                /* Add some delay(23 cycles) after power off. Unrolled the loop
-                 to make it interruptable. Use asm(" RPT #20 || NOP");
-                 to make it uninterruptable.*/
-            }
-
-            break;
-
-        case 3: /* Initialization for 2nd run */
-
-            /* Clear all bits in HRPWR */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR, 0x0U);
-
-            /* Configure # MEP steps B (2nd point) in DCAL mode. This
-             should be done before powering the CAL logic on */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCAL, MEP2);
-
-            /* Eliminate delay in counter start(CNTSEL = 1), enable lump delay
-             (TESTSEL = 1) & turn on the calibration logic(CALPWRON = 1) */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) |
-                         (PWM_EPWM_HRPWR_CNTSEL | PWM_EPWM_HRPWR_TESTSEL)));
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALPWRON));
-            /* Add some delay(23 cycles) after power off. Unrolled the loop
-             to make it interruptable. Use asm(" RPT #20 || NOP");
-             to make it uninterruptable.
-            */
-
-            /* Manually clear HRCNT0 & HRCNT1 to be safe  */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0, 0x0U);
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT1, 0x0U);
-
-            /* Start calibration */
-
-            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
-                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALSTART));
-            /* Move to next case when SFO() is called the next time */
-            TaskPtr = 4;
-            break;
-
-        case 4: /* Wait for 2nd run to complete*/
-
-            /* If calibration is not complete, exit SFO() and check again next
-               function call*/
-
-            if ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR) & PWM_EPWM_HRPWR_CALSTS) == 0x0U)
-
-            {
-                /*Stop calibration. This bit is NOT automatically cleared*/
-
-                HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
-                            ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALSTART));
-
-                /* Get the count from HRCNT0 (# of ring osc oscillations)*/
-
-                hrc2 = HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0);
-
-                /*  Move to next case when SFO() is called the next time*/
-
-                TaskPtr = 5;
-
-                /*Power down the calibration logic*/
-
-                HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
-                            ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALPWRON));
-
-                /* Add some delay(23 cycles) after power-off. Unrolled the loop
-                 to make it interruptable. Use asm(" RPT #20 || NOP");
-                to make it uninterruptable.*/
-            }
-
-            break;
-
-        case 5: /* Process diagnostics data*/
-
-            /* Calculate MEP delay time in 1 SYSCLK cycles*/
-            Denom = (((((float32)1) / (float32)hrc2) - (((float32)1) / (float32)hrc1)) * ((float32)0xFFFF));
-
-            /* Calculate # of MEP steps*/
-
-            Numer = (MEP2 - MEP1) * 2;
-
-            /* Calculate MEP scale factor */
-            scale_factor            = ((((float32)Numer) / Denom) + ((float32)0.5));
-            Pwm_MEP_SF[Pwm_SFO_Cal] = scale_factor;
-            Pwm_MEP_ScaleFactor     = (sint32)Pwm_MEP_SF[0];
-
-            /* Update the task pointer to MEP1 calibration initialization task
-             for next call.*/
-            TaskPtr = 1;
-
-            /* Update status & assign scale factor value to HRMSTEP register */
-            /* TI_COVERAGE_GAP_START - the ScaleFactor gets updated during runtime
-               and the value cannot be greater than 255 */
-            if (Pwm_MEP_ScaleFactor > 255)
-            {
-                status = PWM_SFO_ERROR;
-            }
-            /* TI_COVERAGE_GAP_STOP */
-            else
-            {
-                /* Update HRMSTEP register only with DCAL result*/
-
-                HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRMSTEP, Pwm_MEP_SF[0]);
-                status = PWM_SFO_COMPLETE;
-            }
-
-            break;
-        /* TI_COVERAGE_GAP_START - Taskptr can't be controlled using configuration parameter */
-        default:
-            break;
-            /* TI_COVERAGE_GAP_STOP */
+        /*Clear all bits */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR, 0x0U);
+
+        /* Set the counter period */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPRD, PRDVAL);
+
+        /* Eliminate delay in counter start(CNTSEL = 1), enable lump delay
+        (TESTSEL = 1) & turn on the calibration logic(CALPWRON = 1) */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) |
+                     (PWM_EPWM_HRPWR_CNTSEL | PWM_EPWM_HRPWR_TESTSEL)));
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALPWRON));
+
+        /*Initialize variables */
+        /*Pwm_SFO_Cal = 0;*/
+        hrc1    = 0U;
+        hrc2    = 0U;
+        TaskPtr = 1U;
     }
+    /* Initialization for 1st run */
+    else if (TaskPtr == 1U)
+    {
+        /* The logic should be reinitialized before every calibration run. */
+        /* Clear all bits in HRPWR */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR, ((uint16)0X0));
+
+        /*AM263x: Fix for missing initialization (other than in task 0) of HRPRD for other
+         * OTTOCALs*/
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPRD, PRDVAL);
+
+        /*Configure # MEP steps A (1st point) in DCAL mode. This should be
+          done before powering the CAL logic on */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCAL, MEP1);
+
+        /* Eliminate delay in counter start(CNTSEL = 1), enable lump delay
+        (TESTSEL = 1) & turn on the calibration logic(CALPWRON = 1)*/
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) |
+                     (PWM_EPWM_HRPWR_CNTSEL | PWM_EPWM_HRPWR_TESTSEL)));
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALPWRON));
+
+        /* Manually clear HRCNT0 & HRCNT1 to be safe */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0, 0x0U);
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT1, 0x0U);
+
+        /* Start calibration*/
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALSTART));
+
+        /* Update task pointer to next case for next SFO call.*/
+        TaskPtr = 2U;
+    }
+    /* Wait for 1st run to complete */
+    else if (TaskPtr == 2U)
+    {
+        /* If calibration is not complete, exit SFO() and check again
+        in next function call. CALSTS becomes zero when HRCNT1 value
+         equals HRPRD value or 0xFFFFU.*/
+        if (((HW_RD_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & PWM_EPWM_HRPWR_CALSTS)) == 0x0U)
+        {
+            /* Stop calibration. This bit is NOT automatically cleared.*/
+            HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
+                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALSTART));
+
+            /* Get 1st count in HRCNT0 (# of ring osc oscillations) */
+            hrc1 = HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0);
+
+            /*Update task pointer to next case for next SFO call.*/
+            TaskPtr = 3U;
+
+            /* Power down the calibration logic*/
+            HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
+                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALPWRON));
+        }
+    }
+    /* Initialization for 2nd run */
+    else if (TaskPtr == 3U)
+    {
+        /* Clear all bits in HRPWR */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR, 0x0U);
+
+        /* Configure # MEP steps B (2nd point) in DCAL mode. This
+         should be done before powering the CAL logic on */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCAL, MEP2);
+
+        /* Eliminate delay in counter start(CNTSEL = 1), enable lump delay
+         (TESTSEL = 1) & turn on the calibration logic(CALPWRON = 1) */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) |
+                     (PWM_EPWM_HRPWR_CNTSEL | PWM_EPWM_HRPWR_TESTSEL)));
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALPWRON));
+
+        /* Manually clear HRCNT0 & HRCNT1 to be safe  */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0, 0x0U);
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT1, 0x0U);
+
+        /* Start calibration */
+        HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR,
+                    ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) | PWM_EPWM_HRPWR_CALSTART));
+
+        /* Move to next case when SFO() is called the next time */
+        TaskPtr = 4U;
+    }
+    /* Wait for 2nd run to complete*/
+    else if (TaskPtr == 4U)
+    {
+        /* If calibration is not complete, exit SFO() and check again next
+           function call*/
+        if ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR) & PWM_EPWM_HRPWR_CALSTS) == 0x0U)
+        {
+            /*Stop calibration. This bit is NOT automatically cleared*/
+            HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
+                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALSTART));
+
+            /* Get the count from HRCNT0 (# of ring osc oscillations)*/
+            hrc2 = HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRCNT0);
+
+            /*  Move to next case when SFO() is called the next time*/
+            TaskPtr = 5U;
+
+            /*Power down the calibration logic*/
+            HW_WR_REG16((Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR),
+                        ((HW_RD_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRPWR)) & ~PWM_EPWM_HRPWR_CALPWRON));
+        }
+    }
+    /* Process diagnostics data */
+    else
+    {
+        /* For TaskPtr = 5U */
+        /* Calculate MEP delay time in 1 SYSCLK cycles*/
+        Denom = (((((float32)1) / (float32)hrc2) - (((float32)1) / (float32)hrc1)) * ((float32)0xFFFF));
+
+        /* Calculate # of MEP steps*/
+        Numer = (MEP2 - MEP1) * 2;
+
+        /* Calculate MEP scale factor */
+        scale_factor            = ((((float32)Numer) / Denom) + ((float32)0.5));
+        Pwm_MEP_SF[Pwm_SFO_Cal] = scale_factor;
+        Pwm_MEP_ScaleFactor     = (sint32)Pwm_MEP_SF[0];
+
+        /* Update the task pointer to MEP1 calibration initialization task
+         for next call.*/
+        TaskPtr = 1U;
+
+        /* Status is PWM_SFO_ERROR. So, status will be updated to PWM_SFO_COMPLETE only if the
+         * MEP scale factor is within the range.
+         */
+        status = PWM_SFO_ERROR;
+
+        /* Update status & assign scale factor value to HRMSTEP register */
+        /* TI_COVERAGE_GAP_START [Branch] the ScaleFactor gets updated during runtime
+           and the value cannot be greater than 255 */
+        if (Pwm_MEP_ScaleFactor <= 255)
+        {
+            /* Update HRMSTEP register only with DCAL result*/
+            HW_WR_REG16(Pwm_gOttoCal_base + PWM_CSL_OTTOCAL_HRMSTEP, Pwm_MEP_SF[0]);
+            status = PWM_SFO_COMPLETE;
+        }
+        /* TI_COVERAGE_GAP_STOP */
+    }
+
     return status;
 }
+
 #define PWM_STOP_SEC_CODE
 #include "Pwm_MemMap.h"
