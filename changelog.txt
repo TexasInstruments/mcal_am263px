@@ -1,3 +1,46 @@
+commit 8cab82c8eeef06ea02039585529604466fafb0b5
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Jul 6 16:11:48 2026 +0530
+
+    all: Lin: Excluded manual test from coverage run.
+    
+    Fixes: MCAL-37955
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/lin_test/testInput/linTestCases.h | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+commit 3450071c2a029a7431eba343dd2710fdce0ccb56
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Jul 3 17:53:10 2026 +0530
+
+    am261: port: Port coverage improvement for am261.
+    
+    Fixes: MCAL-37959
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/port_test/testLib/portTest.h             |   3 +
+ .../port_test/testLib/portTestNegativeTestCase.c   |  29 ++-
+ .../Port/soc/am261/r5f0_0/config_91/Port_PBcfg.c   | 222 ++++++++++++++++++++-
+ 3 files changed, 247 insertions(+), 7 deletions(-)
+
+commit 68275e1947874914d21c0621d0e2b6219c088954
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Jul 6 10:05:35 2026 +0530
+
+    all: all: Corrcted Mcal_CacheP_CACHELINE_ALIGNMENT to 32 as per R5F cache line size
+    
+    Fixes: MCAL-38624
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/examples/Utils/CLANG/am261/CacheP.h   | 2 +-
+ mcal/examples/Utils/CLANG/am263/CacheP.h   | 2 +-
+ mcal/examples/Utils/CLANG/am263px/CacheP.h | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
 commit 33dccdc8ee3abc09192da01fed058ddb751e1083
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Fri Jul 3 23:58:57 2026 +0530

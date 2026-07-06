@@ -77,7 +77,7 @@ extern "C" {
  * Actual CPU defined cache line can be smaller that this value, this define
  * is a utility macro to keep application portable across different CPU's.
  */
-#define Mcal_CacheP_CACHELINE_ALIGNMENT (128U)
+#define Mcal_CacheP_CACHELINE_ALIGNMENT (32U)
 
 /**
  * \brief Cache config structure, this used by SysConfig and not to be used by end-users directly
