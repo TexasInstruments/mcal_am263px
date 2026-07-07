@@ -1,3 +1,63 @@
+commit 34aacde0ceb43c52fec46ddf28fa7fe83bd57ff5
+Author: Asha D <asha.d@ti.com>
+Date:   Tue Jul 7 15:49:32 2026 +0530
+
+    all:CDD FSI: Enable FSI coverage on all platforms
+    
+    Updated the makefiles
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/FsiTx/V0/Cdd_FsiTx_Platform.c               |   6 +-
+ mcal_test/fsi_test/Config.mk                     | 140 -------------------
+ mcal_test/fsi_test/Makefile                      | 168 ++++++-----------------
+ mcal_test/fsi_test/build/makefile                |  24 ++--
+ mcal_test/fsi_test/build/makefile_lib            |  21 +++
+ mcal_test/fsi_test/testLib/fsiTestMainTestCase.c |   6 +-
+ mcal_test/makefile                               |   6 +-
+ mcal_test/ut_config/FsiRx/inc.mk                 |   3 +
+ mcal_test/ut_config/FsiRx/srcs.mk                |   5 +
+ mcal_test/ut_config/FsiTx/inc.mk                 |   3 +
+ mcal_test/ut_config/FsiTx/srcs.mk                |   5 +
+ 11 files changed, 102 insertions(+), 285 deletions(-)
+
+commit c92a42fb939d728eaeb1baea42b95d76bae4efc7
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Fri Jul 3 17:42:17 2026 +0530
+
+    am26xx: mcal/uart: enable clang coverage support
+    
+     - Added clang report generation support
+    
+    Fixes: MCAL-38535
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal/Uart/V0/uart.c                                |   67 +-
+ mcal_test/makefile                                 |    6 +-
+ mcal_test/uart_test/Makefile                       |   45 +-
+ mcal_test/uart_test/build/makefile                 |   21 +-
+ mcal_test/uart_test/build/makefile_lib             |   20 +
+ mcal_test/uart_test/testInput/uartTestCases.h      | 1059 ++++++++++----------
+ mcal_test/uart_test/testLib/uartTestMainTestCase.c |   70 +-
+ .../Uart/soc/am261/r5f0_0/config_1/Cdd_Uart_Cfg.h  |    3 +-
+ 8 files changed, 713 insertions(+), 578 deletions(-)
+
+commit e1fd67c82369ee381f6c77661f66f581cda98592
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Jul 7 09:31:07 2026 +0530
+
+    am263px/1x: all: Adding design JIRAs to source for BiDi
+    
+    Fixes: MCAL-38750, MCAL-40645
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Adc/src/Adc.c |  6 +++---
+ mcal/Fls/src/Fls.c | 19 +++++++++++++++++++
+ mcal/Spi/src/Spi.c |  5 +++++
+ 3 files changed, 27 insertions(+), 3 deletions(-)
+
 commit 8cab82c8eeef06ea02039585529604466fafb0b5
 Author: Akash <a-verma3@ti.com>
 Date:   Mon Jul 6 16:11:48 2026 +0530

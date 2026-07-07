@@ -141,6 +141,7 @@ static sint32        UART_readPolling(CddUart_Handle hUart, CddUart_Transaction 
 static uint32        Cdd_Uart_getRxFifoTrigBitVal(uint32 rxTrig);
 static uint32        Cdd_Uart_getTxFifoTrigBitVal(uint32 txTrig);
 static uint32        UART_checkCharsAvailInRXFifo(uint32 baseAddr);
+static boolean       UART_isInitParamInValid(CddUart_Handle hUart);
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */
@@ -1607,10 +1608,61 @@ void UART_disableLoopbackMode(uint32 baseAddr)
     return;
 }
 
+static boolean UART_isInitParamInValid(CddUart_Handle hUart)
+{
+    CddUart_InitHandle hUartInit;
+    boolean            status     = FALSE;
+    uint32             errorCheck = 0U;
+    hUartInit                     = hUart->hUartInit;
+
+    if (hUart->baseAddr == (uint32)0U)
+    {
+        errorCheck++;
+    }
+    if (hUartInit->inputClkFreq == (uint32)0U)
+    {
+        errorCheck++;
+    }
+    if (hUartInit->baudRate == (uint32)0U)
+    {
+        errorCheck++;
+    }
+    if (!(IS_DATA_LENGTH_VALID(hUartInit->dataLength)))
+    {
+        errorCheck++;
+    }
+    if (!(IS_STOP_BITS_VALID(hUartInit->stopBits)))
+    {
+        errorCheck++;
+    }
+    if (!(IS_PARITY_TYPE_VALID(hUartInit->parityType)))
+    {
+        errorCheck++;
+    }
+    if (!(IS_OPER_MODE_VALID(hUartInit->operMode)))
+    {
+        errorCheck++;
+    }
+    if (!(IS_RXTRIG_LVL_VALID(hUartInit->rxTrigLvl)))
+    {
+        errorCheck++;
+    }
+    if (!(IS_TXTRIG_LVL_VALID(hUartInit->txTrigLvl)))
+    {
+        errorCheck++;
+    }
+
+    if (errorCheck > (uint32)0U)
+    {
+        status = TRUE;
+    }
+
+    return status;
+}
+
 sint32 Uart_Cdd_init(CddUart_Handle hUart)
 {
-    sint32             status = MCAL_SystemP_SUCCESS;
-    CddUart_InitHandle hUartInit;
+    sint32 status = MCAL_SystemP_SUCCESS;
 
     if ((hUart == NULL_PTR) || (hUart->hUartInit == NULL_PTR))
     {
@@ -1627,15 +1679,8 @@ sint32 Uart_Cdd_init(CddUart_Handle hUart)
     if (MCAL_SystemP_SUCCESS == status)
     {
         hUart->state = MCAL_STATE_BUSY;
-        hUartInit    = hUart->hUartInit;
 
-        /* All of MCAL_LLD_PARAMS_CHECKs combined to reduce
-         * METRICS.E.HIS_Metrics___Number_of_paths_PATH */
-        if ((hUart->baseAddr == (uint32)0U) || (hUartInit->inputClkFreq == (uint32)0U) ||
-            (hUartInit->baudRate == (uint32)0U) || (!(IS_DATA_LENGTH_VALID(hUartInit->dataLength))) ||
-            (!(IS_STOP_BITS_VALID(hUartInit->stopBits))) || (!(IS_PARITY_TYPE_VALID(hUartInit->parityType))) ||
-            (!(IS_OPER_MODE_VALID(hUartInit->operMode))) || (!(IS_RXTRIG_LVL_VALID(hUartInit->rxTrigLvl))) ||
-            (!(IS_TXTRIG_LVL_VALID(hUartInit->txTrigLvl))))
+        if (UART_isInitParamInValid(hUart))
         {
             status = MCAL_SystemP_INVALID_PARAM;
         }

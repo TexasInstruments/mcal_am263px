@@ -466,10 +466,12 @@ FUNC(Std_ReturnType, CDD_FSITX_CODE)
 CddFsiTx_enableInterrupt(uint32 base, uint8 intTxNum)
 {
     Std_ReturnType retVal = E_OK;
-    uint16         regVal = 0;
+#if ((STD_ON == CDD_FSI_TX_BUFFER_OVERRUN_INTERRUPT) || (STD_ON == CDD_FSI_TX_BUFFER_UNDERRUN_INTERRUPT) || \
+     (STD_ON == CDD_FSI_TX_PING_TIMEOUT_INTERRUPT) || (STD_ON == CDD_FSI_TX_FRAME_DONE_INTERRUPT))
+    uint16 regVal = 0;
     /* Check the arguments */
     regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_INT_CTRL);
-
+#endif
 #if (STD_ON == CDD_FSI_TX_BUFFER_OVERRUN_INTERRUPT)
     if (intTxNum == (uint8)CDD_FSI_TX_INT1)
     {
