@@ -1,3 +1,21 @@
+commit aa73be1f0e54d4a208874f0e2f8dcb528e5410b4
+Author: Asha D <asha.d@ti.com>
+Date:   Wed Jul 8 13:13:33 2026 +0530
+
+    all:CDD FSI:Fix test failure
+    
+            the global variables should be volatile
+            Removed AM273 related code
+    
+    Fixes: MCAL-38537
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal_test/fsi_test/testInput/fsiTestCases.h      |  65 +++++++-------
+ mcal_test/fsi_test/testLib/fsiTest.h             |   4 +-
+ mcal_test/fsi_test/testLib/fsiTestMainTestCase.c | 109 ++++++++++-------------
+ 3 files changed, 83 insertions(+), 95 deletions(-)
+
 commit 34aacde0ceb43c52fec46ddf28fa7fe83bd57ff5
 Author: Asha D <asha.d@ti.com>
 Date:   Tue Jul 7 15:49:32 2026 +0530
