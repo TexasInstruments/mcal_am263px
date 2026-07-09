@@ -1,3 +1,37 @@
+commit 59a2c4e4188a3604bada8ce850f4b98dfa198c06
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Jul 9 12:03:49 2026 +0530
+
+    am263px: Fls: Adding design JIRAs to source code in right format
+    
+    Fixes: MCAL-38750, MCAL-40645
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/src/Fls.c | 43 ++++++++++++++++++++++++-------------------
+ 1 file changed, 24 insertions(+), 19 deletions(-)
+
+commit 27c7df55fee5a4de7dc57cee7a5e9fb40176dd1b
+Author: Asha D <asha.d@ti.com>
+Date:   Fri Jul 3 16:58:37 2026 +0530
+
+    am261:PWM:Coverage improvement
+    
+    Cleanup test files
+    
+    Fixes: MCAL-35537
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal_test/pwm_test/testInput/pwmTestCases.h        |  35 -
+ mcal_test/pwm_test/testLib/pwmTest.h               |   8 -
+ mcal_test/pwm_test/testLib/pwmTestMainTestCase.c   | 940 ++-------------------
+ .../pwm_test/testLib/pwmTestNegativeTestCase.c     | 162 +---
+ .../Pwm/soc/am261/r5f0_0/config_9/Pwm_Cfg.c        | 107 +--
+ .../Pwm/soc/am261/r5f0_0/config_9/Pwm_Cfg.h        |  30 +-
+ .../Pwm/soc/am261/r5f0_0/config_9/Pwm_PBcfg.c      | 171 +++-
+ 7 files changed, 267 insertions(+), 1186 deletions(-)
+
 commit aa73be1f0e54d4a208874f0e2f8dcb528e5410b4
 Author: Asha D <asha.d@ti.com>
 Date:   Wed Jul 8 13:13:33 2026 +0530
