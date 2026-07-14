@@ -359,16 +359,9 @@ static void Cdd_Dma_Csl_ArmR5GetCpuID(Cdd_Dma_Csl_ArmR5CpuInfo *cpuInfo)
 {
     uint32 regVal;
 
-    /* TI_COVERAGE_GAP_START [Branch] Static function always called with valid pointer &Cdd_Dma_virtToPhymap.cpuInfo.
-     * The NULL_PTR false branch is unreachable defensive code.
-     */
-    if (cpuInfo != NULL_PTR)
-    {
-        regVal         = Cdd_Dma_Mcal_ArmR5ReadMpidrReg();
-        cpuInfo->cpuID = (uint32)((regVal & CDD_DMA_CSL_R5_MPIDR_AFF0_MASK) >> CDD_DMA_CSL_R5_MPIDR_AFF0_SHIFT);
-        cpuInfo->grpId = (uint32)((regVal & CDD_DMA_CSL_R5_MPIDR_AFF1_MASK) >> CDD_DMA_CSL_R5_MPIDR_AFF1_SHIFT);
-    }
-    /* TI_COVERAGE_GAP_STOP */
+    regVal         = Cdd_Dma_Mcal_ArmR5ReadMpidrReg();
+    cpuInfo->cpuID = (uint32)((regVal & CDD_DMA_CSL_R5_MPIDR_AFF0_MASK) >> CDD_DMA_CSL_R5_MPIDR_AFF0_SHIFT);
+    cpuInfo->grpId = (uint32)((regVal & CDD_DMA_CSL_R5_MPIDR_AFF1_MASK) >> CDD_DMA_CSL_R5_MPIDR_AFF1_SHIFT);
     return;
 }
 

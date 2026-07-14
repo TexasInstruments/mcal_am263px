@@ -356,20 +356,21 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_SFO(void)
          for next call.*/
         TaskPtr = 1U;
 
+        /* Status is CDD_PWM_SFO_ERROR. So, status will be updated to CDD_PWM_SFO_ERROR only if the
+         * MEP scale factor is within the range.
+         */
+        status = CDD_PWM_SFO_ERROR;
+
         /* Update status & assign scale factor value to HRMSTEP register */
-        /* TI_COVERAGE_GAP_START - the ScaleFactor gets updated during runtime
+        /* TI_COVERAGE_GAP_START - [Branch]the ScaleFactor gets updated during runtime
            and the value cannot be greater than 255 */
-        if (Cdd_Pwm_MEP_ScaleFactor > 255)
-        {
-            status = CDD_PWM_SFO_ERROR;
-        }
-        /* TI_COVERAGE_GAP_STOP */
-        else
+        if (Cdd_Pwm_MEP_ScaleFactor <= 255)
         {
             /* Update HRMSTEP register only with DCAL result*/
             HW_WR_REG16(Cdd_Pwm_gOttoCal_base + CDD_PWM_CSL_OTTOCAL_HRMSTEP, Cdd_Pwm_MEP_SF[0]);
             status = CDD_PWM_SFO_COMPLETE;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return status;

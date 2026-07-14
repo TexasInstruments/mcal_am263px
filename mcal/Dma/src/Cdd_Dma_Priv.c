@@ -173,27 +173,22 @@ static sint32 CDD_EDMA_lld_initialize(Cdd_Dma_Handler *hEdma)
             CDD_EDMA_lld_setPaRAM(baseAddr, param, &paramSet);
         }
     }
-    /* TI_COVERAGE_GAP_START [Region] Unconditional break exits loop after first iteration.
-     * LLVM creates implicit gap regions for unreachable loop-continuation paths (dead code).
+    /* Configure only the first channel's first parameter.
+     * Additional chained channels are configured separately by CDD_EDMA_lld_chainingConfigureChannelRegion().
      */
-    for (ch = 0; ch < ownResource.maxChannel; ch++)
+    if ((ownResource.maxChannel > 0U) && (ownResource.channelGroup[0]->maxParam > 0U))
     {
-        channel  = ownResource.channelGroup[ch]->channelId;
-        maxparam = ownResource.channelGroup[ch]->maxParam;
-        for (count = 0; count < maxparam; count++)
+        channel = ownResource.channelGroup[0]->channelId;
+        param   = ownResource.channelGroup[0]->paramGroup[0]->paramId;
         {
             Cdd_Dma_ChannelConfigType chConfig;
-            param            = ownResource.channelGroup[ch]->paramGroup[count]->paramId;
             chConfig.chNum   = channel;
             chConfig.tccNum  = tcc;
             chConfig.paramId = param;
             chConfig.evtQNum = queNum;
             CDD_EDMA_lld_configureChannelRegion(baseAddr, regionId, &chConfig);
-            break;
         }
-        break;
     }
-    /* TI_COVERAGE_GAP_STOP */
 
     return retVal;
 }

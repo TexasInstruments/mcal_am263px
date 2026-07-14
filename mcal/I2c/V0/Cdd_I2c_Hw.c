@@ -210,11 +210,18 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwTxPollingContinue(Cdd_I2c_ChObjType *chObj)
      */
     if (TRUE == chObj->isCancelInProgress)
     {
+        /* TI_COVERAGE_GAP_START [Branch] Requires cancel to race with state=SETUP
+         * in polled mode: Cdd_I2c_HwTxPolling() sets state=SETUP then immediately calls
+         * Cdd_I2c_HwTxPollingContinue() synchronously, so isCancelInProgress cannot be TRUE at
+         * this point in a normal polled transfer. This path is only reachable if cancel is called
+         * from a concurrent context between the two calls, which cannot be reproduced in the
+         * single-threaded polled test environment. */
         if (chObj->state <= CDD_I2C_STATE_SETUP)
         {
             chResult     = CDD_I2C_CH_RESULT_OK;
             chObj->state = CDD_I2C_STATE_COMPLETE;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     if (CDD_I2C_STATE_WAIT_FOR_BUS_FREE == chObj->state)
@@ -290,11 +297,18 @@ Cdd_I2c_ChannelResultType Cdd_I2c_HwRxPollingContinue(Cdd_I2c_ChObjType *chObj)
      */
     if (TRUE == chObj->isCancelInProgress)
     {
+        /* TI_COVERAGE_GAP_START [Branch] Requires cancel to race with state=SETUP
+         * in polled mode: Cdd_I2c_HwRxPolling() sets state=SETUP then immediately calls
+         * Cdd_I2c_HwRxPollingContinue() synchronously, so isCancelInProgress cannot be TRUE at
+         * this point in a normal polled transfer. This path is only reachable if cancel is called
+         * from a concurrent context between the two calls, which cannot be reproduced in the
+         * single-threaded polled test environment. */
         if (chObj->state <= CDD_I2C_STATE_SETUP)
         {
             chResult     = CDD_I2C_CH_RESULT_OK;
             chObj->state = CDD_I2C_STATE_COMPLETE;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     if (CDD_I2C_STATE_WAIT_FOR_BUS_FREE == chObj->state)
@@ -617,6 +631,9 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferTxIntr(Cdd_I2c_ChObjTy
     /* Check for access ready condition */
     if ((intrStatus & CDD_I2C_ICIMR_ARDY_MASK) != 0U)
     {
+        /* TI_COVERAGE_GAP_START [Branch] ARDY firing before all bytes are transmitted cannot be recreated in test
+         * environment as CDD_I2C_ICSTR_ARDY is set by hardware only after HW data count reaches zero (all
+         * configured bytes transmitted), so curLength always equals length when ARDY fires */
         if (chObj->curLength == chObj->length)
         {
             Cdd_I2c_HwDisableIntr(baseAddr, CDD_I2C_ICIMR_ARDY_MASK);
@@ -635,9 +652,13 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferTxIntr(Cdd_I2c_ChObjTy
                 chObj->state = CDD_I2C_STATE_COMPLETE;
             }
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     /* Check for transmit ready */
+    /* TI_COVERAGE_GAP_START [Branch] TX interrupt without ICXRDY set cannot be recreated in test environment as
+     * ICXRDY is always set when the TX interrupt handler is invoked since the TX data register is empty
+     * after the last byte has been shifted out */
     if ((intrStatus & CDD_I2C_ICSTR_ICXRDY_MASK) != 0U)
     {
         if (chObj->curLength < chObj->length)
@@ -653,6 +674,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferTxIntr(Cdd_I2c_ChObjTy
             Cdd_I2c_HwDisableIntr(baseAddr, CDD_I2C_ICIMR_ICXRDY_MASK);
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return chResult;
 }
@@ -716,8 +738,15 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferRxIntr(Cdd_I2c_ChObjTy
     uint32                    baseAddr  = hwUnitObj->baseAddr;
     Cdd_I2c_ChannelResultType chResult  = CDD_I2C_CH_RESULT_PENDING;
 
+    /* TI_COVERAGE_GAP_START [Branch] RX interrupt without ICRRDY set cannot be recreated in test environment as
+     * ICRRDY is the only enabled RX interrupt source after error (AL/NACK) and SCD conditions are
+     * handled before dispatching to this function */
     if ((intrStatus & CDD_I2C_ICSTR_ICRRDY_MASK) != 0U)
     {
+        /* TI_COVERAGE_GAP_START [Branch] Scenario where RRDY fires with curLength >= length would require the target to
+         * send an extra byte after the expected count, which cannot be reproduced in the
+         * test environment as HW data count prevents extra bytes from being received and ICRRDY interrupt
+         * is disabled after the last expected byte is read */
         if (chObj->curLength < chObj->length)
         {
             /* Read the data */
@@ -725,6 +754,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferRxIntr(Cdd_I2c_ChObjTy
             chObj->curRxBufPtr++;
             chObj->curLength++;
         }
+        /* TI_COVERAGE_GAP_STOP */
 
         if (chObj->curLength == chObj->length)
         {
@@ -744,6 +774,7 @@ static Cdd_I2c_ChannelResultType Cdd_I2c_HwStateDoTransferRxIntr(Cdd_I2c_ChObjTy
             }
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return chResult;
 }

@@ -5924,13 +5924,13 @@ orphan: true
 
 ---
 title: Can_MaskType
-summary: Structure defining the filter mask to be used 
+summary: Structure defining the filter mask to be used. 
 
 ---
 
 # Can_MaskType
 
-Structure defining the filter mask to be used 
+Structure defining the filter mask to be used. 
 
 `#include <Can.h>`
 
@@ -5962,9 +5962,9 @@ Register Readback Structure The Safety API to readback CAN register vales will p
 
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
-|  uint32 | CanReadBackRegPID |  MCANSS PID Register  |
-|  uint32 | CanReadBackRegSTAT |  MCANSS STAT Register  |
-|  uint32 | CanReadBackRegCREL |  Auto Bus On Time Register  |
+|  uint32 | CanReadBackRegPID |  MCANSS PID Register.  |
+|  uint32 | CanReadBackRegSTAT |  MCANSS STAT Register.  |
+|  uint32 | CanReadBackRegCREL |  Auto Bus On Time Register.  |
 |  uint32 | CanReadBackRegENDN |  Endianess MCAN_TEST value Constant "0x8765 4321".  |
 |  uint32 | CanReadBackRegCTRL |  MCAN CTRL Register.  |
 |  uint32 | CanReadBackRegDBTP |  MCAN DBTB Register.  |
@@ -6934,9 +6934,9 @@ CDD FSI TX Hw unit configuration structure.
 
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
-|  [Cdd_FsiTx_HWUnitType](../Files/_cdd___fsi_tx___types_8h.md#typedef-cdd_fsitx_hwunittype) | hwId |  HWUnit associated with this  |
+|  [Cdd_FsiTx_HWUnitType](../Files/_cdd___fsi_tx___types_8h.md#typedef-cdd_fsitx_hwunittype) | hwId |  HWUnit associated with this.  |
 |  uint32 | baseAddr |  base address  |
-|  [Cdd_FsiTx_HWUnitType](../Files/_cdd___fsi_tx___types_8h.md#typedef-cdd_fsitx_hwunittype) | hwUnitId |  Hardware Unit  |
+|  [Cdd_FsiTx_HWUnitType](../Files/_cdd___fsi_tx___types_8h.md#typedef-cdd_fsitx_hwunittype) | hwUnitId |  Hardware Unit.  |
 |  [Cdd_FsiTx_ClkPrescaleType](../Modules/group___f_s_i_t_x.md#enum-cdd_fsitx_clkprescaletype) | Prescalar |  Prescalar value for clock division gives to channel.  |
 |  uint32 | isNotifyOn |  Flag to enable or disable callback notify function.  |
 |  [Cdd_FsiTx_TriggerSourceType](../Modules/group___f_s_i_t_x.md#enum-cdd_fsitx_triggersourcetype) | triggSrc |  Determines the trigger source (hw or sw trigger).  |
@@ -7231,9 +7231,9 @@ CDD FSI RX Hw unit configuration structure.
 
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
-|  [Cdd_FsiRx_HWUnitType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_hwunittype) | hwId |  HWUnit associated with this  |
-|  uint32 | baseAddr |  Base address  |
-|  [Cdd_FsiRx_HWUnitType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_hwunittype) | hwUnitId |  HWUnit associated with this  |
+|  [Cdd_FsiRx_HWUnitType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_hwunittype) | hwId |  HWUnit associated with this.  |
+|  uint32 | baseAddr |  Base address.  |
+|  [Cdd_FsiRx_HWUnitType](../Modules/group___f_s_i_r_x.md#typedef-cdd_fsirx_hwunittype) | hwUnitId |  HWUnit associated with this.  |
 |  uint32 | isNotifyOn |  Flag to enable or disable callback notify function.  |
 |  [Cdd_FsiRx_DataReceiveType](../Modules/group___f_s_i_r_x.md#enum-cdd_fsirx_datareceivetype) | receptionMode |  Determines the frame reception mode.  |
 |  [CddFsiRx_PingWdgTimerType](../Modules/group___f_s_i_r_x.md#typedef-cddfsirx_pingwdgtimertype) | pingWdgTriggerTimeout |  Timeout period of Ping Wdg Timer.  |
@@ -7927,7 +7927,7 @@ global configuration of the driver
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
 |  const [Gpt_ChannelConfigType](../Classes/struct_gpt___channel_config_type.md) * | ChannelConfig_pt |  Pointer to Channel list.  |
-|  uint32 | ChannelCount |  Number of channels configured  |
+|  uint32 | ChannelCount |  Number of channels configured.  |
 
 
 
@@ -7937,13 +7937,13 @@ orphan: true
 
 ---
 title: Gpt_DriverObjType
-summary: Driver object 
+summary: Driver object. 
 
 ---
 
 # Gpt_DriverObjType
 
-Driver object 
+Driver object. 
 
 `#include <Gpt.h>`
 
@@ -7952,7 +7952,7 @@ Driver object
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
 |  [Gpt_ChannelConfigType](../Classes/struct_gpt___channel_config_type.md)[GPT_RTI_MAX] | gChannelConfig_pt |  Driver Object to Channel list.  |
-|  uint32 | ChannelCount |  Number of channels configured  |
+|  uint32 | ChannelCount |  Number of channels configured.  |
 
 
 
@@ -7962,13 +7962,13 @@ orphan: true
 
 ---
 title: GptConfigReg
-summary: GPT register readback structure 
+summary: GPT register readback structure. 
 
 ---
 
 # GptConfigReg
 
-GPT register readback structure 
+GPT register readback structure. 
 
 `#include <Gpt.h>`
 
@@ -8478,13 +8478,13 @@ orphan: true
 
 ---
 title: Lin_ChannelType
-summary: Structure defining the channel type 
+summary: Structure defining the channel type. 
 
 ---
 
 # Lin_ChannelType
 
-Structure defining the channel type 
+Structure defining the channel type. 
 
 `#include <Lin.h>`
 
@@ -8505,13 +8505,13 @@ orphan: true
 
 ---
 title: Lin_ConfigType
-summary: Structure defining the config type 
+summary: Structure defining the config type. 
 
 ---
 
 # Lin_ConfigType
 
-Structure defining the config type 
+Structure defining the config type. 
 
 `#include <Lin.h>`
 
@@ -8544,8 +8544,8 @@ Lin Controller Configuration definition.
 |  Member Type   | Member name    | Brief |
 | -------------- | -------------- | ----- |
 |  uint32 | CntrAddr |  Pointer to LinReg structure.  |
-|  [Lin_InterruptLineNum](../Modules/group___l_i_n.md#enum-lin_interruptlinenum) | IntrLineNum |  Interrupt Line to be selected  |
-|  [Lin_LoopbackModeType](../Modules/group___l_i_n.md#enum-lin_loopbackmodetype) | LoopbackMode |  Loopback Mode for this controller  |
+|  [Lin_InterruptLineNum](../Modules/group___l_i_n.md#enum-lin_interruptlinenum) | IntrLineNum |  Interrupt Line to be selected.  |
+|  [Lin_LoopbackModeType](../Modules/group___l_i_n.md#enum-lin_loopbackmodetype) | LoopbackMode |  Loopback Mode for this controller.  |
 
 
 
@@ -9486,7 +9486,7 @@ Structure for module clock setting.
 | -------------- | -------------- | ----- |
 |  [Mcu_ClkModuleIdType](../Modules/group___m_c_u.md#enum-mcu_clkmoduleidtype) | Mcu_ClockModuleId |  ModuleId for which clock setting to be applied.  |
 |  [Mcu_ClkSourceIdType](../Modules/group___m_c_u.md#enum-mcu_clksourceidtype) | Mcu_ClockSourceId |  Clock source Id for the module.  |
-|  uint32 | Mcu_ClockDiv |  Clock divider value for the module  |
+|  uint32 | Mcu_ClockDiv |  Clock divider value for the module.  |
 |  boolean | Mcu_InitCfg |  Apply this configuration at Mcu_init time.  |
 
 
@@ -38486,7 +38486,7 @@ Can Interrupt Mask type.
 ## Structures
 |   Name         | Brief          |
 | -------------- | -------------- |
-| **[Can_MaskType](../Classes/struct_can___mask_type.md)** | Structure defining the filter mask to be used  |
+| **[Can_MaskType](../Classes/struct_can___mask_type.md)** | Structure defining the filter mask to be used.  |
 | **[Can_HwFilterType](../Classes/struct_can___hw_filter_type.md)** | Structure defining the HW filter to be used.  |
 | **[Can_FdBaudConfigType](../Classes/struct_can___fd_baud_config_type.md)** | Structure defining the CAN FD data phase baud rate configuration.  |
 | **[Can_BaudConfigType](../Classes/struct_can___baud_config_type.md)** | Structure defining the CAN baud rate configuration.  |
@@ -38508,7 +38508,7 @@ Can Interrupt Mask type.
 | CAN_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by CanDriver.  |
 | CAN_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by CanDriver.  |
 | CAN_VENDOR_ID   | Texas Instruments Vendor ID.  |
-| CAN_MODULE_ID   | Can Driver Module ID  |
+| CAN_MODULE_ID   | Can Driver Module ID.  |
 | CAN_INSTANCE_ID   | CAN Driver Instance ID.  |
 | CAN_UNINIT   | CAN Driver is NOT initialized.  |
 | CAN_READY   | CAN Driver is initialized.  |
@@ -40458,7 +40458,7 @@ title: CMPSS API
 | CDD_CMPSS_SID_CONFIG_RAMP   | Cdd_Cmpss_ConfigRamp() API Service ID.  |
 | CDD_CMPSS_SID_REGISTERREADBACK   | Cdd_Cmpss_RegisterReadback() API Service ID.  |
 | CDD_CMPSS_INSRC_DAC   | Input driven by internal DAC.  |
-| CDD_CMPSS_INSRC_PIN   | Input driven by external 'INL' pin  |
+| CDD_CMPSS_INSRC_PIN   | Input driven by external 'INL' pin.  |
 | CDD_CMPSS_INSRC_PIN_INL   | Input driven by external 'INL' pin.  |
 | CDD_CMPSS_INSRC_PIN_INH   | Input driven by external 'INH' pin.  |
 | CDD_CMPSS_INV_INVERTED   | Comparator output is inverted.  |
@@ -43519,7 +43519,7 @@ title: Epwm API GUIDE Header file
 | CDD_PWM_E_BUSY   | API Cdd_Pwm_StartChannel() called on a channel that is in state RUNNING.  |
 | CDD_PWM_E_PARAM_NO_PIN   | Cdd_Pwm_SetPinState() or Cdd_Pwm_SetPinAction() called for a channel that doesn’t have an associated output pin.  |
 | CDD_PWM_E_PARAM_INVALID_VALUE   | Cdd_Pwm_SetAbsoluteThreshold() or Cdd_Pwm_SetRelativeThreshold() called for with a compare match parameter greater than maximum supported counter value for a given channel.  |
-| CDD_PWM_E_PARAM_CHANNEL   | Invalid Channel parameter  |
+| CDD_PWM_E_PARAM_CHANNEL   | Invalid Channel parameter.  |
 | CDD_PWM_SID_INIT   | CDD_PWM driver service ID for Initialization API.  |
 | CDD_PWM_SID_DEINIT   | CDD_PWM driver service ID for De-Initialization API.  |
 | CDD_PWM_SID_STARTCHANNEL   | CDD_PWM driver service ID for Cdd_Pwm_StartChannel API.  |
@@ -45828,7 +45828,7 @@ Callback type.
 | CDD_DMA_LINKCHANNEL_SERVICE_ID   | API Service ID for Param linking.  |
 | CDD_DMA_CHAINCHANNEL_SERVICE_ID   | API Service ID for Channel chaining.  |
 | CDD_DMA_ENABLETRANSFERREGION_SERVICE_ID   | API Service ID for enable a trigger.  |
-| CDD_DMA_GETSTATUS_SERVICE_ID   | API Service ID for reading TCC status  |
+| CDD_DMA_GETSTATUS_SERVICE_ID   | API Service ID for reading TCC status.  |
 | CDD_DMA_GETVERSIONINFO_SERVICE_ID   | API Service ID for get version info.  |
 | Cdd_Dma_GETINITSTATUS_SERVICE_ID   | API Service ID for get INIT status.  |
 | CDD_DMA_GETPARAM_SERVICE_ID   | API Service ID for GetParam.  |
@@ -49926,7 +49926,7 @@ typedef  struct CddUart_Object * CddUart_Handle;
 | UART_UASR_PARITY_TYPE_PARITY_TYPE_U_VALUE_0   |  |
 | UART_UASR_RESERVED_24_SHIFT   |  |
 | UART_UASR_RESERVED_24_MASK   |  |
-| UART_ERROR_COUNT   | Count Value to check error in the recieved byte  |
+| UART_ERROR_COUNT   | Count Value to check error in the recieved byte.  |
 
 ## Functions
 
@@ -52084,16 +52084,16 @@ title: Gpt API GUIDE Header file
 
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
-|enum| **[Gpt_ModeType](../Modules/group___g_p_t.md#enum-gpt_modetype)** | List of process modes  | 
+|enum| **[Gpt_ModeType](../Modules/group___g_p_t.md#enum-gpt_modetype)** | List of process modes.  | 
 |enum| **[Gpt_PredefTimerType](../Modules/group___g_p_t.md#enum-gpt_predeftimertype)** | Type for GPT Predefined(free running) Timers.  | 
 |enum| **[Gpt_ChannelMode](../Modules/group___g_p_t.md#enum-gpt_channelmode)** | GPT channel mode macros.  | 
 |enum| **[Gpt_PrescaleValueType](../Modules/group___g_p_t.md#enum-gpt_prescalevaluetype)** | List of Prescale values for General purpose timer channels The timer counter is prescaled with the value 2^(PTV+1). Example: PTV = 3, counter increases value (if started) after 16 functional clock periods Note: Not applicable to GPT Predef timers.  | 
 |enum| **[Gpt_ChannelStateType](../Modules/group___g_p_t.md#enum-gpt_channelstatetype)** | GPT channel state GPT will be in one of this state during its lifetime.  | 
 |typedef uint32  | **[Gpt_ChannelType](../Modules/group___g_p_t.md#typedef-gpt_channeltype)** | Type describing the Gpt channel.  | 
-|typedef uint32  | **[Gpt_ValueType](../Modules/group___g_p_t.md#typedef-gpt_valuetype)** | Type describing the timeout value  | 
+|typedef uint32  | **[Gpt_ValueType](../Modules/group___g_p_t.md#typedef-gpt_valuetype)** | Type describing the timeout value.  | 
 |typedef uint32  | **[Gpt_CntId](../Modules/group___g_p_t.md#typedef-gpt_cntid)** | Type describing the counter block to use for GPT.  | 
-|typedef void(*)(void)  | **[Gpt_NotifyType](../Modules/group___g_p_t.md#typedef-gpt_notifytype)** | Notification callback function pointer  | 
-|typedef uint32  | **[Gpt_ClockSourceType](../Modules/group___g_p_t.md#typedef-gpt_clocksourcetype)** | Type for specifying source clock selection  | 
+|typedef void(*)(void)  | **[Gpt_NotifyType](../Modules/group___g_p_t.md#typedef-gpt_notifytype)** | Notification callback function pointer.  | 
+|typedef uint32  | **[Gpt_ClockSourceType](../Modules/group___g_p_t.md#typedef-gpt_clocksourcetype)** | Type for specifying source clock selection.  | 
 
 ### enum Gpt_ModeType
 | Enumerator | Value | Description |
@@ -52103,7 +52103,7 @@ title: Gpt API GUIDE Header file
 | GPT_MODE_SLEEP | | Operation for reduced power operation mode. In sleep mode only wakeup capable channels are available.   |
 
 **Brief**: 
-List of process modes 
+List of process modes. 
 
 ### enum Gpt_PredefTimerType
 | Enumerator | Value | Description |
@@ -52162,7 +52162,7 @@ typedef uint32 Gpt_ValueType;
 ```
 
 **Brief**: 
-Type describing the timeout value 
+Type describing the timeout value. 
 
 ### typedef Gpt_CntId
 ```
@@ -52178,7 +52178,7 @@ typedef void(* Gpt_NotifyType) (void);
 ```
 
 **Brief**: 
-Notification callback function pointer 
+Notification callback function pointer. 
 
 ### typedef Gpt_ClockSourceType
 ```
@@ -52186,15 +52186,15 @@ typedef uint32 Gpt_ClockSourceType;
 ```
 
 **Brief**: 
-Type for specifying source clock selection 
+Type for specifying source clock selection. 
 
 ## Structures
 |   Name         | Brief          |
 | -------------- | -------------- |
-| **[GptConfigReg](../Classes/struct_gpt_config_reg.md)** | GPT register readback structure  |
+| **[GptConfigReg](../Classes/struct_gpt_config_reg.md)** | GPT register readback structure.  |
 | **[Gpt_ChannelConfigType](../Classes/struct_gpt___channel_config_type.md)** | Configuration per channel.  |
 | **[Gpt_ConfigType](../Classes/struct_gpt___config_type.md)** | global configuration of the driver  |
-| **[Gpt_DriverObjType](../Classes/struct_gpt___driver_obj_type.md)** | Driver object  |
+| **[Gpt_DriverObjType](../Classes/struct_gpt___driver_obj_type.md)** | Driver object.  |
 
 ## Defines
 
@@ -52244,8 +52244,8 @@ Type for specifying source clock selection
 | GPT_DRIVER_INITIALIZED   | Driver status INITIALIZED.  |
 | CH_COMP_MASK   | Masks the higher order bits to evaluate compare block (lsb0 and lsb1)  |
 | MAX_RESOLUTION   | Maximum resolution for the timer.  |
-| SET (type, var, bit)  | Set a bit  |
-| CLEAR (type, var, bit)  | Clear a bit  |
+| SET (type, var, bit)  | Set a bit.  |
+| CLEAR (type, var, bit)  | Clear a bit.  |
 
 ## Functions
 
@@ -52845,7 +52845,7 @@ title: Icu API GUIDE Header file
 |typedef uint16  | **[Icu_ValueType](../Modules/group___i_c_u.md#typedef-icu_valuetype)** | This type defines Value type.  | 
 |typedef uint32  | **[Icu_IndexType](../Modules/group___i_c_u.md#typedef-icu_indextype)** | This type defines return value Icu_GetTimeStampIndex.  | 
 |typedef uint32  | **[Icu_EdgeNumberType](../Modules/group___i_c_u.md#typedef-icu_edgenumbertype)** | This type defines return value of Icu-Icu_GetEdgeNumbers.  | 
-|typedef void(*)(void)  | **[Icu_NotifyFuncType](../Modules/group___i_c_u.md#typedef-icu_notifyfunctype)** | Notification callback function pointer  | 
+|typedef void(*)(void)  | **[Icu_NotifyFuncType](../Modules/group___i_c_u.md#typedef-icu_notifyfunctype)** | Notification callback function pointer.  | 
 |typedef uint8  | **[Icu_ChannelType](../Modules/group___i_c_u.md#typedef-icu_channeltype)** | This type defines Channel type.  | 
 |typedef uint8  | **[Icu_ChannelPrescalerType](../Modules/group___i_c_u.md#typedef-icu_channelprescalertype)** | This type defines Prescaler type.  | 
 
@@ -53004,7 +53004,7 @@ typedef void(* Icu_NotifyFuncType) (void);
 ```
 
 **Brief**: 
-Notification callback function pointer 
+Notification callback function pointer. 
 
 ### typedef Icu_ChannelType
 ```
@@ -53083,8 +53083,8 @@ This type defines Prescaler type.
 | ICU_E_PARAM_VINFO   | API service Icu_GetVersionInfo called and parameter is invalid.  |
 | ICU_STATUS_UNINIT   | ICU driver Status uninitialized.  |
 | ICU_STATUS_INIT   | ICU driver Status Initialized.  |
-| ICU_FALLING   | Capture regsiter configuration for FALLING edge  |
-| ICU_RISING   | Capture regsiter configuration for RISING edge  |
+| ICU_FALLING   | Capture regsiter configuration for FALLING edge.  |
+| ICU_RISING   | Capture regsiter configuration for RISING edge.  |
 
 ## Functions
 
@@ -53964,8 +53964,8 @@ Loopback mode type.
 ## Structures
 |   Name         | Brief          |
 | -------------- | -------------- |
-| **[Lin_ChannelType](../Classes/struct_lin___channel_type.md)** | Structure defining the channel type  |
-| **[Lin_ConfigType](../Classes/struct_lin___config_type.md)** | Structure defining the config type  |
+| **[Lin_ChannelType](../Classes/struct_lin___channel_type.md)** | Structure defining the channel type.  |
+| **[Lin_ConfigType](../Classes/struct_lin___config_type.md)** | Structure defining the config type.  |
 | **[Lin_ControllerType](../Classes/struct_lin___controller_type.md)** | Lin Controller Configuration definition.  |
 | **[Lin_BaudRateConfigType](../Classes/struct_lin___baud_rate_config_type.md)** | Lin Controller BaudRate Configuration.  |
 | **[Lin_RegisterReadbackType](../Classes/struct_lin___register_readback_type.md)** | LIN register readback structure.  |
@@ -54669,8 +54669,7 @@ Type to define the number of data elements to be sent and/or received during a t
 | Std_ReturnType | **[Cdd_I2c_Cancel](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_cancel)**([Cdd_I2c_SequenceType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#typedef-cdd_i2c_sequencetype) sequenceId)| Cancel a transmission.  |
 | Std_ReturnType | **[Cdd_I2c_ResetHwUnit](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_resethwunit)**([Cdd_I2c_HwUnitType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#typedef-cdd_i2c_hwunittype) hwUnitId)| Service to reset and recover a single I2C HW unit from a bus-off condition.  |
 | void | **[Cdd_I2c_MainFunction](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_mainfunction)**(void )| Makes a target channel available for processing requests (addressing). When called, the target channel becomes available for starting incoming or outgoing transfers.  |
-| void | **[Cdd_I2c_PollingModeProcessing](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_pollingmodeprocessing)**(void )| Ensures proper processing of I2c communication in the case of disabled interrupts.  |
-| [Cdd_I2c_SequenceResultType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#enum-cdd_i2c_sequenceresulttype) | **[Cdd_I2c_GetSequenceResult](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_getsequenceresult)**([Cdd_I2c_SequenceType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#typedef-cdd_i2c_sequencetype) sequenceId)| This service returns the current status of the given SequenceId.  |
+| [Cdd_I2c_SequenceResultType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#enum-cdd_i2c_sequenceresulttype) | **[Cdd_I2c_GetSequenceResult](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_getsequenceresult)**([Cdd_I2c_SequenceType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#typedef-cdd_i2c_sequencetype) sequenceId)| Ensures proper processing of I2c communication in the case of disabled interrupts.  |
 | [Cdd_I2c_ChannelResultType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#enum-cdd_i2c_channelresulttype) | **[Cdd_I2c_GetResult](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_getresult)**([Cdd_I2c_ChannelType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#typedef-cdd_i2c_channeltype) chId)| This service returns the current status of the given channel.  |
 | [Cdd_I2c_ComponentStatusType](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#enum-cdd_i2c_componentstatustype) | **[Cdd_I2c_GetStatus](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_getstatus)**(void )| This service returns the module's status.  |
 | Std_ReturnType | **[Cdd_I2c_RegisterReadback](../Modules/group___m_c_a_l___c_d_d___i2_c___a_p_i.md#function-cdd_i2c_registerreadback)**(uint8 hwUnitId, [Cdd_I2c_RegisterReadbackType](../Classes/struct_cdd___i2c___register_readback_type.md) * regRbPtr)| This service reads the key I2C registers and returns their value.  |
@@ -54877,19 +54876,6 @@ Makes a target channel available for processing requests (addressing). When call
 
 Service ID[hex] - CDD_I2C_SID_MAIN_FUNCTION Sync/Async - Asynchronous Reentrancy - Reentrant 
 
-### function Cdd_I2c_PollingModeProcessing
-
-```
-void Cdd_I2c_PollingModeProcessing(
-    void 
-)
-```
-
-**Brief**: 
-Ensures proper processing of I2c communication in the case of disabled interrupts. 
-
-Service ID[hex] - CDD_I2C_SID_POLLING_MODE_PROCESSING Sync/Async - Asynchronous Reentrancy - Reentrant 
-
 ### function Cdd_I2c_GetSequenceResult
 
 ```
@@ -54899,7 +54885,11 @@ Cdd_I2c_SequenceResultType Cdd_I2c_GetSequenceResult(
 ```
 
 **Brief**: 
-This service returns the current status of the given SequenceId. 
+Ensures proper processing of I2c communication in the case of disabled interrupts. 
+
+Service ID[hex] - CDD_I2C_SID_POLLING_MODE_PROCESSING Sync/Async - Asynchronous Reentrancy - Reentrant
+
+This service returns the current status of the given SequenceId.
 
 Service ID[hex] - CDD_I2C_SID_GET_SEQUENCE_RESULT Sync/Async - Synchronous Reentrancy - Reentrant
 
@@ -55059,8 +55049,8 @@ Enumeration of ranstate queried by Mcu_GetRamState()
 | MCU_WARM_RESET_VMON5_uV | | Warm Reset due to Voltage monitor5_uV.   |
 | MCU_WARM_RESET_VMON7_uV | | Warm Reset due to Voltage monitor7_uV.   |
 | MCU_WARM_RESET_VMON8_uV | | Warm Reset due to Voltage monitor8_uV.   |
-| MCU_WARM_RESET_ESM | | Warm Reset due to ESM   |
-| MCU_WARM_RESET_SYS_CLK_LOSS | | Warm Reset due to Sys clock loss   |
+| MCU_WARM_RESET_ESM | | Warm Reset due to ESM.   |
+| MCU_WARM_RESET_SYS_CLK_LOSS | | Warm Reset due to Sys clock loss.   |
 
 **Brief**: 
 This is the type of the reset enumerator containing the subset of reset types.    It is not required that all reset types are supported by hardware. 
@@ -55289,7 +55279,7 @@ Pointer to Eth CPSW Control configuration.
 | MCU_E_RUNTIME_ASSERT   | ERROR:Runtime assert failure.  |
 | MCU_PERFORM_RESET_MODE_WARM   | Initiate SW WARM RESET sequence.  |
 | MCU_ERRORRST_MASK   | Reset Reason Error Mask.  |
-| RESETREASON_NRESET   | Reset Reason  |
+| RESETREASON_NRESET   | Reset Reason.  |
 | MCU_RCM_MODULE_ID_FIRST   | ModuleId for First.  |
 | MCU_RCM_MODULE_ID_DCAN   | ModuleId for DCAN.  |
 | MCU_RCM_MODULE_ID_MIBSPI1   | ModuleId for MIBSPI1.  |
@@ -55923,8 +55913,8 @@ Enum of Port Pin pull inihibit selection.
 ### enum Port_InputInversion
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
-| PORT_NONINV | | Port Non inversion   |
-| PORT_INV | | Port inversion   |
+| PORT_NONINV | | Port Non inversion.   |
+| PORT_INV | | Port inversion.   |
 | PORT_INVTYPE_DEFAULT | | Port Default.   |
 
 **Brief**: 
@@ -56276,9 +56266,9 @@ PortBankChNum --> GPIO Channel numbers[0 to 138] , If configured as channel inte
 | PORT_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
 | PORT_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
 | PORT_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
-| PORT_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by PORT Driver  |
+| PORT_AR_RELEASE_MAJOR_VERSION   | AUTOSAR Major version specification implemented by PORT Driver.  |
 | PORT_AR_RELEASE_MINOR_VERSION   | AUTOSAR Minor version specification implemented by PORT Driver.  |
-| PORT_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by PORT Driver  |
+| PORT_AR_RELEASE_REVISION_VERSION   | AUTOSAR Patch version specification implemented by PORT Driver.  |
 | PORT_VENDOR_ID   | Texas Instruments Vendor ID.  |
 | PORT_MODULE_ID   | PORT Driver Module ID.  |
 | PORT_INSTANCE_ID   | PORT Driver Instance ID.  |
@@ -56685,21 +56675,21 @@ title: Pwm
 
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
-|enum| **[Pwm_EdgeNotificationType](../Modules/group___p_w_m.md#enum-pwm_edgenotificationtype)** | Possible edge notification  | 
+|enum| **[Pwm_EdgeNotificationType](../Modules/group___p_w_m.md#enum-pwm_edgenotificationtype)** | Possible edge notification.  | 
 |enum| **[Pwm_OutputStateType](../Modules/group___p_w_m.md#enum-pwm_outputstatetype)** | Output state type.  | 
 |enum| **[Pwm_ChannelClassType](../Modules/group___p_w_m.md#enum-pwm_channelclasstype)** | Channel class type.  | 
 |enum| **[Pwm_epwmOutputCh_t](../Modules/group___p_w_m.md#enum-pwm_epwmoutputch_t)** | EPWM outputs in a single epwm channel.  | 
-|typedef void(*)(void)  | **[Pwm_NotifyFuncType](../Modules/group___p_w_m.md#typedef-pwm_notifyfunctype)** | Notification callback function pointer  | 
+|typedef void(*)(void)  | **[Pwm_NotifyFuncType](../Modules/group___p_w_m.md#typedef-pwm_notifyfunctype)** | Notification callback function pointer.  | 
 
 ### enum Pwm_EdgeNotificationType
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
-| PWM_RISING_EDGE | 1U| Rising edges issue notification   |
+| PWM_RISING_EDGE | 1U| Rising edges issue notification.   |
 | PWM_FALLING_EDGE | 2U| Falling edges issue notification.   |
-| PWM_BOTH_EDGES | 3U| Both edges issue notification   |
+| PWM_BOTH_EDGES | 3U| Both edges issue notification.   |
 
 **Brief**: 
-Possible edge notification 
+Possible edge notification. 
 
 ### enum Pwm_OutputStateType
 | Enumerator | Value | Description |
@@ -56713,9 +56703,9 @@ Output state type.
 ### enum Pwm_ChannelClassType
 | Enumerator | Value | Description |
 | ---------- | ----- | ----------- |
-| PWM_FIXED_PERIOD | 0U| Period is immutable   |
-| PWM_FIXED_PERIOD_SHIFTED | | Period is immutable with phase shift   |
-| PWM_VARIABLE_PERIOD | | Period is variable   |
+| PWM_FIXED_PERIOD | 0U| Period is immutable.   |
+| PWM_FIXED_PERIOD_SHIFTED | | Period is immutable with phase shift.   |
+| PWM_VARIABLE_PERIOD | | Period is variable.   |
 
 **Brief**: 
 Channel class type. 
@@ -56736,7 +56726,7 @@ typedef void(* Pwm_NotifyFuncType) (void);
 ```
 
 **Brief**: 
-Notification callback function pointer 
+Notification callback function pointer. 
 
 ## Structures
 |   Name         | Brief          |
@@ -56751,8 +56741,8 @@ Notification callback function pointer
 
 | Name           |  Brief     |
 | -------------- | ---------- |
-| PWM_START_SEC_VAR_INIT_8   | Possible edge notification  |
-| PWM_STOP_SEC_VAR_INIT_8   | Possible edge notification  |
+| PWM_START_SEC_VAR_INIT_8   | Possible edge notification.  |
+| PWM_STOP_SEC_VAR_INIT_8   | Possible edge notification.  |
 | PWM_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
 | PWM_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
 | PWM_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
@@ -58569,7 +58559,7 @@ Typedef for sequence end notification function pointer.
 | SPI_VENDOR_ID   | Texas Instruments Vendor ID.  |
 | SPI_MODULE_ID   | SPI Driver Module ID.  |
 | SPI_INSTANCE_ID   | SPI Driver Instance ID.  |
-| SPI_IB_ALIGNMENGT   | SPI IB  |
+| SPI_IB_ALIGNMENGT   | SPI IB.  |
 | SPI_IB   | Buffer definitions IB - internal buffers.  |
 | SPI_EB   | Buffer definitions EB - external buffers. Only this is supported.  |
 | SPI_IB_EB   | Buffer definitions IB/EB - internal/external buffers.  |

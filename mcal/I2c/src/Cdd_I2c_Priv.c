@@ -188,10 +188,14 @@ Std_ReturnType Cdd_I2c_CancelSeq(Cdd_I2c_DriverObjType *drvObj, Cdd_I2c_SeqObjTy
 
         /* Notify Sequence end */
         errorNotify = seqObj->seqCfg->errorNotify;
+        /* TI_COVERAGE_GAP_START [Branch] NULL errorNotify callback in cancelled sequence cannot be
+         * recreated in test environment as all configured sequences have non-NULL error callbacks.
+         * Defensive code for configuration edge case where errorNotify is not set. */
         if (NULL_PTR != errorNotify)
         {
             errorNotify(seqObj->seqErrorCode);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return retVal;
