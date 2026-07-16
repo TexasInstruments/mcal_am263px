@@ -1,3 +1,42 @@
+commit 1c79a4d6440d7aa2a8a39de4181d5c4c0174d487
+Author: Akash <a-verma3@ti.com>
+Date:   Thu Jul 16 15:46:36 2026 +0530
+
+    all: I2C: Added coverage test case for errorNotify to be NULL.
+    
+    - Cover the gap in Cdd_I2c_CancelSeq when no active channel and seqObj is NULL.
+    
+    Fixes: MCAL-37960
+    
+    Signed-off-by: Akash Verma
+
+ mcal/I2c/src/Cdd_I2c_Priv.c                      |  4 --
+ mcal_test/i2c_test/testLib/i2cTestMiscTestCase.c | 51 ++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+), 4 deletions(-)
+
+commit ef268014e0d2111a30f2dfa89e3d0a70006ee38f
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Fri May 29 12:32:55 2026 +0530
+
+    am26xx: adc: improve dynamic analysis coverage
+    
+     - Added testcase to improve coverage
+    
+    Fixes: MCAL-35531
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal/Adc/V0/Adc_Priv.c                             | 126 +++++++-----------
+ mcal_test/adc_test/testApp/adcTestApp.c            |   2 +-
+ .../testApp/soc/am261/r5f0_0/adcTestApp_Startup.c  |   3 +-
+ .../testApp/soc/am263/r5f0_0/adcTestApp_Startup.c  |   3 +-
+ .../soc/am263px/r5f0_0/adcTestApp_Startup.c        |   3 +-
+ mcal_test/adc_test/testInput/adcTestCases.h        |  18 +++
+ mcal_test/adc_test/testLib/adcTest.h               |   1 +
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c   | 142 ++++++++++++++++++++-
+ .../adc_test/testLib/adcTestNegativeTestCase.c     |   2 +
+ 9 files changed, 214 insertions(+), 86 deletions(-)
+
 commit c163792ebada3633735a7bd1e2be37a189f36be4
 Author: Akash <a-verma3@ti.com>
 Date:   Thu May 14 14:59:56 2026 +0530
