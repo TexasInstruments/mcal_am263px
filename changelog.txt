@@ -1,3 +1,21 @@
+commit d2a6ea26c6fd89379b2f4d339d846fb7c21b5f59
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Jul 17 17:09:33 2026 +0530
+
+    all: Lin: Coverage improvement for Lin for all platform.
+    
+    - Fix the test case : MCAL-21203 falling
+    
+    Fixes: MCAL-37955
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Lin/src/Lin.c                               | 84 +++++++++++-------------
+ mcal_test/lin_test/build/makefile                |  2 +-
+ mcal_test/lin_test/testInput/linTestCases.h      |  2 +-
+ mcal_test/lin_test/testLib/linTestMainTestCase.c |  6 ++
+ 4 files changed, 46 insertions(+), 48 deletions(-)
+
 commit ef862feb2d8ca8102ab88b1eb16ac39b3bb3d360
 Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
 Date:   Fri Jul 17 18:36:41 2026 +0530

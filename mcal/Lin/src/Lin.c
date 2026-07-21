@@ -664,57 +664,49 @@ static FUNC(Lin_StatusType, LIN_CODE)
 {
     Lin_StatusType return_value = LIN_NOT_OK;
 
-    switch (Lin_Channel_Status[Channel].linChannelActivityStatus)
+    if (LIN_CHANNEL_TX_STARTED == Lin_Channel_Status[Channel].linChannelActivityStatus)
     {
-        case LIN_CHANNEL_IDLE:
-            return_value = LIN_OPERATIONAL;
-            break;
+        return_value = Lin_FetchTxStatus(*lin_cnt_base_addr);
 
-        case LIN_CHANNEL_TX_STARTED:
-
-            return_value = Lin_FetchTxStatus(*lin_cnt_base_addr);
-
-            if (LIN_TX_OK == return_value)
-            {
-                Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
-            }
-            else if ((LIN_TX_HEADER_ERROR == return_value) || (LIN_TX_ERROR == return_value))
-            {
-                Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
-            }
-            else
-            {
-                /* Do Nothing */
-            }
-            break;
-
-        case LIN_CHANNEL_RX_STARTED:
-
-            return_value = Lin_FetchRxStatus(*lin_cnt_base_addr);
-
-            if (LIN_RX_OK == return_value)
-            {
-                Lin_GetData(Channel, *lin_cnt_base_addr, Lin_SduPtr);
-                Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
-            }
-            else if ((LIN_RX_NO_RESPONSE == return_value) || (LIN_RX_ERROR == return_value))
-            {
-                Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
-            }
-            else
-            {
-                /* Do Nothing */
-            }
-
-            break;
-
-        /* TI_COVERAGE_GAP_START : Only LIN_CHANNEL_IDLE, LIN_CHANNEL_TX_STARTED, and
-         * LIN_CHANNEL_RX_STARTED are valid activity statuses; the default case is unreachable. */
-        default:
+        if (LIN_TX_OK == return_value)
+        {
+            Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
+        }
+        else if ((LIN_TX_HEADER_ERROR == return_value) || (LIN_TX_ERROR == return_value))
+        {
+            Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
+        }
+        else
+        {
             /* Do Nothing */
-            break;
-            /* TI_COVERAGE_GAP_STOP */
+        }
     }
+    else if (LIN_CHANNEL_RX_STARTED == Lin_Channel_Status[Channel].linChannelActivityStatus)
+    {
+        return_value = Lin_FetchRxStatus(*lin_cnt_base_addr);
+
+        if (LIN_RX_OK == return_value)
+        {
+            Lin_GetData(Channel, *lin_cnt_base_addr, Lin_SduPtr);
+            Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
+        }
+        else if ((LIN_RX_NO_RESPONSE == return_value) || (LIN_RX_ERROR == return_value))
+        {
+            Lin_Channel_Status[Channel].linChannelActivityStatus = LIN_CHANNEL_IDLE;
+        }
+        else
+        {
+            /* Do Nothing */
+        }
+    }
+    else
+    {
+        /* LIN_CHANNEL_IDLE is the only remaining valid activity status.
+         * Lin_Channel_Status is static and only written by Lin module functions
+         * which enforce valid states (MISRA-C:2012 R15.7). */
+        return_value = LIN_OPERATIONAL;
+    }
+
     return return_value;
 }
 
