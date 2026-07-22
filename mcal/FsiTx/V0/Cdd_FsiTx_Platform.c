@@ -535,6 +535,7 @@ CddFsiTx_disablePingTimer(uint32 base)
     return;
 }
 /******************************************************************************/
+
 FUNC(void, CDD_FSITX_CODE)
 CddFsiTx_disableInterrupt(uint32 base, uint8 TxIntNum)
 {
@@ -553,16 +554,7 @@ CddFsiTx_disableInterrupt(uint32 base, uint8 TxIntNum)
     HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_INT_CTRL, regVal);
 }
 /******************************************************************************/
-FUNC(void, CDD_FSITX_CODE)
-CddFsiTx_disableDMA(uint32 base)
-{
-    uint16 regVal;
 
-    regVal  = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_DMA_CTRL);
-    regVal &= (uint16)(~CSL_CDD_FSI_TX_CFG_TX_DMA_CTRL_DMA_EVT_EN_MASK);
-    HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_DMA_CTRL, regVal);
-}
-/******************************************************************************/
 FUNC(void, CDD_FSITX_CODE)
 CddFsiTx_disableClock(uint32 base)
 {

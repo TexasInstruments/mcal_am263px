@@ -239,9 +239,6 @@ CddFsiRx_enableRxFrameWatchdogTimer(uint32 base, uint32 wdRef);
 FUNC(Std_ReturnType, CDD_FSIRX_CODE)
 CddFsiRx_disableRxPingWatchdog(uint32 base);
 
-FUNC(void, CDD_FSIRX_CODE)
-CddFsiRx_disableDMA(uint32 base);
-
 FUNC(Std_ReturnType, CDD_FSIRX_CODE)
 CddFsiRx_setRxDataWidth(uint32 base, CddFsiRxDataLaneType dataWidth);
 

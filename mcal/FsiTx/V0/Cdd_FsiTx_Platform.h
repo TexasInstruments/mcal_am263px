@@ -165,7 +165,6 @@ FUNC(Std_ReturnType, CDD_FSITX_CODE) CddFsiTx_enableHwTrigger(uint32 base, uint1
 FUNC(Std_ReturnType, CDD_FSITX_CODE) CddFsiTx_enableInterrupt(uint32 base, uint8 intTxNum);
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_disablePingTimer(uint32 base);
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_disableInterrupt(uint32 base, uint8 TxIntNum);
-FUNC(void, CDD_FSITX_CODE) CddFsiTx_disableDMA(uint32 base);
 FUNC(void, CDD_FSITX_CODE) CddFsiTx_disableClock(uint32 base);
 FUNC(void, CDD_FSITX_CODE)
 CddFsiTx_setPrescaler(uint32 base, Cdd_FsiTx_ClkPrescaleType preScaleValue);

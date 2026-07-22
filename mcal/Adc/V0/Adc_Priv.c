@@ -2032,12 +2032,6 @@ static void Adc_hwConfig(const Adc_GroupObjType *groupObj, uint32 baseAddr)
         dmaDataAddr = ADC_readResultbaseaddr(adchwUnitObj->resultBaseAddr, groupObj->socAssigned);
 
         /* Check if, CDD is Initialized. */
-        /* TI_COVERAGE_GAP_START [Branch: False] The DMA CDD (Cdd_Dma) is always initialized
-         at system startup before any ADC DMA test runs, so Cdd_Dma_GetInitStatus() always
-         returns ADC_TRUE when Adc_hwConfig is called during Adc_Init. Exercising the FALSE
-         branch would require initializing ADC with a DMA group configuration before DMA
-         initialization, which is an incorrect initialization order not present in any test
-         configuration. */
         if (ADC_TRUE == Cdd_Dma_GetInitStatus())
         {
             if (groupObj->groupCfg.groupDmaChannelId != 0xFFU)
@@ -2048,7 +2042,6 @@ static void Adc_hwConfig(const Adc_GroupObjType *groupObj, uint32 baseAddr)
                                               groupObj->groupCfg.groupDmaChannelId, dmaDataAddr);
             }
         }
-        /* TI_COVERAGE_GAP_STOP */
 
         if (groupCfg->triggSrc == ADC_TRIGG_SRC_SW)
         {

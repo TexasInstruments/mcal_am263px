@@ -373,17 +373,6 @@ CddFsiRx_disableInterrupt(uint32 base, uint8 RxIntNum)
 }
 
 /******************************************************************************/
-FUNC(void, CDD_FSIRX_CODE)
-CddFsiRx_disableDMA(uint32 base)
-{
-    uint16 regVal;
-
-    regVal  = HW_RD_REG16(base + CSL_CDD_FSI_RX_CFG_RX_DMA_CTRL);
-    regVal &= (uint16)(~CSL_CDD_FSI_RX_CFG_RX_DMA_CTRL_DMA_EVT_EN_MASK);
-    HW_WR_REG16(base + CSL_CDD_FSI_RX_CFG_RX_DMA_CTRL, regVal);
-}
-
-/******************************************************************************/
 FUNC(uint16, CDD_FSIRX_CODE)
 CddFsiRx_getRxPingTag(uint32 base)
 {

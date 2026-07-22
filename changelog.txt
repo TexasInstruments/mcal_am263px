@@ -1,3 +1,49 @@
+commit 4c6e0ced7dd036660bf0c3708bb35e0563305806
+Author: Asha D <asha.d@ti.com>
+Date:   Wed Jul 8 18:13:34 2026 +0530
+
+    all:CDD FSI: Coverage improvement for Fsi Module
+    
+    Removed CddFsiRx_disableDMA API as it is identical to CddFsiRx_disableRxDMAEvent.
+    Removed CddFsiTx_disableDMA API as it is identical to CddFsiTx_disableTxDMAEvent.
+    
+    Fixes: MCAL-38537
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/FsiRx/V0/Cdd_FsiRx_Platform.c                 |  11 -
+ mcal/FsiRx/V0/Cdd_FsiRx_Platform.h                 |   3 -
+ mcal/FsiRx/V0/Cdd_FsiRx_Priv.c                     |   4 +-
+ mcal/FsiRx/src/Cdd_FsiRx.c                         |   2 +-
+ mcal/FsiTx/V0/Cdd_FsiTx_Platform.c                 |  10 +-
+ mcal/FsiTx/V0/Cdd_FsiTx_Platform.h                 |   1 -
+ mcal/FsiTx/V0/Cdd_FsiTx_Priv.c                     |  14 +-
+ mcal/FsiTx/src/Cdd_FsiTx.c                         |  58 +++--
+ mcal_test/fsi_test/build/makefile                  |   2 +-
+ mcal_test/fsi_test/testInput/fsiTestCases.h        | 235 +++++++++----------
+ mcal_test/fsi_test/testLib/fsiTest.h               |  14 +-
+ mcal_test/fsi_test/testLib/fsiTestCommon.c         |  10 +
+ mcal_test/fsi_test/testLib/fsiTestMainTestCase.c   | 186 ++++++++++++---
+ .../fsi_test/testLib/fsiTestNegativeTestCase.c     | 261 ++++++++++++++-------
+ 14 files changed, 503 insertions(+), 308 deletions(-)
+
+commit 8d8686bc6876a199656210220b1e2410e824bca1
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Mon Jul 20 15:58:33 2026 +0530
+
+    am26xx: adc: improve dynamic analysis coverage
+    
+     - Added testcase to improve coverage
+    
+    Fixes: MCAL-35531
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal/Adc/V0/Adc_Priv.c                           |  7 -----
+ mcal_test/adc_test/build/makefile                |  4 +--
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c | 34 ++++++++++++++++++++++++
+ 3 files changed, 36 insertions(+), 9 deletions(-)
+
 commit d2a6ea26c6fd89379b2f4d339d846fb7c21b5f59
 Author: Akash <a-verma3@ti.com>
 Date:   Fri Jul 17 17:09:33 2026 +0530

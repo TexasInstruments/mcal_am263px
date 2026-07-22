@@ -148,7 +148,9 @@ void CddFsiRx_hwUnitInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj)
         (void)CddFsiRx_enableInterrupt(baseAddr, (uint8)CDD_FSI_RX_INT_TYPE);
     }
 #endif
-
+#if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
+    CddFsiRx_enableRxDMAEvent(baseAddr);
+#endif
     return;
 }
 /********************************************************************************************************/

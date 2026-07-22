@@ -162,6 +162,9 @@ Std_ReturnType CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
         CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
         CddFsiTx_stopFlushSequence(baseAddr);
     }
+#if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
+    CddFsiTx_enableTxDMAEvent(baseAddr);
+#endif
     return ((Std_ReturnType)retVal);
 }
 
@@ -265,22 +268,19 @@ Std_ReturnType CddFsiTx_BufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
                                    P2VAR(uint16, AUTOMATIC, CDD_FSI_TX_APPL_DATA) databuffer, uint32 userData,
                                    uint32 txDatalength)
 {
-    uint32 baseAddr = 0;
-    uint8  retVal   = 0;
+    uint32         baseAddr = 0;
+    Std_ReturnType retVal   = E_NOT_OK;
     /* Assign base address */
     baseAddr             = hwUnitObj->hwUnitCfg.baseAddr;
     Cdd_FsiTx_wordLength = txDatalength;
     /* The Transmit buffer pointer keeps at initial position*/
     CddFsiTx_ForceTxBufferPtr(baseAddr, 0);
+
     if (CDD_FSI_TX_DMA_MODE == hwUnitObj->hwUnitCfg.transmitMode)
     {
 #if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
 
         retVal = CddFsiTx_DMABufferLoad(hwUnitObj, databuffer, userData, Cdd_FsiTx_wordLength);
-        if (retVal == TRUE)
-        {
-            retVal = E_OK;
-        }
 #endif /* (STD_ON == CDD_FSI_TX_DMA_ENABLE) */
     }
     else
@@ -299,7 +299,7 @@ Std_ReturnType CddFsiTx_DMABufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj, 
                                       uint32 userData, uint32 TxDatalength)
 {
     uint32         baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
-    Std_ReturnType retVal   = 0;
+    Std_ReturnType retVal   = E_OK;
     uint8          bufIdx   = 0;
     bufIdx                  = 0;
     uint32 Data             = userData;

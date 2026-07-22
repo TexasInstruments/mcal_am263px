@@ -318,7 +318,7 @@ Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
     }
     else if ((RxDataLength < CDD_FSI_RX_DATA_1_WORD_LENGTH) || (RxDataLength > CDD_FSI_RX_DATA_16_WORD_LENGTH))
     {
-        CddFsiRx_ReportDetError(CDD_FSI_RX_SETUP_BUFFER_SID, CDD_FSI_RX_E_PARAM_VALUE);
+        CddFsiRx_ReportDetError(CDD_FSI_RX_SETUP_BUFFER_SID, CDD_FSI_RX_E_PARAM_LENGTH);
     }
     else
 #endif
