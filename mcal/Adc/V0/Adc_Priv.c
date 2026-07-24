@@ -1050,43 +1050,26 @@ static void Adc_IrqDmaTxRx(void *groupId)
     groupObj  = &Adc_DrvObj.groupObj[groupCount];
     hwUnitObj = groupObj->hwUnitObj;
 
-    /* TI_COVERAGE_GAP_START [Branch: False] groupObj = &Adc_DrvObj.groupObj[groupCount] is
-     always a non-zero address since it is the address-of a global array element. The else
-     branch and the redundant inner NULL_PTR check can never be reached. */
-    if (NULL_PTR != groupObj)
+    baseAddr = hwUnitObj->baseAddr;
+    adcSoc   = (uint8)(groupObj->lastSocAssigned);
+    ADC_clearInterruptStatus(baseAddr, (uint16)groupObj->groupInterruptSrc);
+    /* Check if overflow has occurred */
+    if (ADC_TRUE == ADC_getInterruptOverflowStatus(baseAddr, groupObj->groupInterruptSrc))
     {
-        baseAddr = hwUnitObj->baseAddr;
-        adcSoc   = (uint8)(groupObj->lastSocAssigned);
-
-        ADC_clearInterruptStatus(baseAddr, (uint16)groupObj->groupInterruptSrc);
-
-        /* Check if overflow has occurred */
-        if (ADC_TRUE == ADC_getInterruptOverflowStatus(baseAddr, groupObj->groupInterruptSrc))
-        {
-            ADC_clearInterruptOverflowStatus(baseAddr, groupObj->groupInterruptSrc);
-        }
-
-        /*
-         * Process the group
-         */
-        if (NULL_PTR != groupObj)
-        {
-            /* Stop the conversion, if required. */
-            convComplete   = (uint32)ADC_TRUE;
-            streamComplete = (uint32)ADC_TRUE;
-
-            /* Set Group Status and Call group end notification */
-            Adc_setGroupStatusPostIsr(hwUnitObj, groupObj, convComplete, streamComplete);
-        }
-
-        /* Stop the ADCs by removing the trigger for SOC0 */
-        ADC_setInterruptSOCTrigger(baseAddr, (uint16)adcSoc, ADC_INT_SOC_TRIGGER_NONE);
+        ADC_clearInterruptOverflowStatus(baseAddr, groupObj->groupInterruptSrc);
     }
-    else
-    {
-        /* No Actions Required. */
-    }
-    /* TI_COVERAGE_GAP_STOP */
+    /*
+     * Process the group
+     */
+    /* Stop the conversion, if required. */
+    convComplete   = (uint32)ADC_TRUE;
+    streamComplete = (uint32)ADC_TRUE;
+    /* Set Group Status and Call group end notification */
+    Adc_setGroupStatusPostIsr(hwUnitObj, groupObj, convComplete, streamComplete);
+
+    /* Stop the ADCs by removing the trigger for SOC0 */
+    ADC_setInterruptSOCTrigger(baseAddr, (uint16)adcSoc, ADC_INT_SOC_TRIGGER_NONE);
+
     return;
 }
 #endif
@@ -1101,18 +1084,6 @@ Adc_HwUnitObjType *Adc_getHwUnitObj(Adc_HWUnitType HWUnit)
 
     /* Get the HW unit.  */
     hwObj = &drvObj->hwUnitObj[HWUnit];
-
-    /* TI_COVERAGE_GAP_START [Branch: True] Adc_DrvObj is a global static object.
-     drvObj = &Adc_DrvObj is always a non-zero address. Since the base is a fixed
-     non-zero global address, the result of the & (address-of) operator on a struct
-     member can never be NULL_PTR (0x0). */
-    if (hwObj == NULL_PTR)
-    {
-#if (STD_ON == ADC_DEV_ERROR_DETECT)
-        Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG);
-#endif /* #if (STD_ON == ADC_DEV_ERROR_DETECT) */
-    }
-    /* TI_COVERAGE_GAP_STOP */
 
     return (hwObj);
 }
@@ -1418,15 +1389,6 @@ static Std_ReturnType Adc_checkGroupParameters(const Adc_GroupConfigType *groupC
         retVal = (Std_ReturnType)E_NOT_OK;
         Adc_reportDetError(ADC_SID_INIT, ADC_E_PARAM_CONFIG);
     }
-    /* TI_COVERAGE_GAP_START [Branch: True] Adc_getHwUnitObj function will not return
-     NULL_PTR as &drvObj->hwUnitObj[HWUnit] drvObj = &Adc_DrvObj is always a non-zero
-     address. */
-    else if (NULL_PTR == Adc_getHwUnitObj(groupCfg->hwUnitId))
-    {
-        /* DET already reported by Adc_getHwUnitObj() */
-        retVal = (Std_ReturnType)E_NOT_OK;
-    }
-    /* TI_COVERAGE_GAP_STOP */
     else
     {
         retVal = Adc_checkGroupCfgRangeParameters(groupCfg);
