@@ -118,8 +118,7 @@ static boolean        Cdd_Ipc_Init_detCheck(const Cdd_IpcConfigType *ConfigPtr);
 static boolean        Cdd_Ipc_Construct_detCheck(const Cdd_IpcConfigType *ConfigPtr);
 static boolean        Cdd_Ipc_Init_detErrorCheck(const Cdd_IpcConfigType *ConfigPtr);
 #endif
-static void        Cdd_Ipc_deInitCores(const Cdd_IpcConfigType *ConfigPtr);
-static inline void Cdd_IpcRuntimeError(uint8 apiId, uint8 errorId);
+static void Cdd_Ipc_deInitCores(const Cdd_IpcConfigType *ConfigPtr);
 
 /* ========================================================================== */
 /*                            Global Variables                                */
@@ -226,6 +225,10 @@ FUNC(void, CDD_IPC_CODE) Cdd_Ipc_Init(P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_
             /*nothing to do*/
         }
     }
+    else
+    {
+        /*Do nothing - DET error path, Init called with invalid params*/
+    }
 
     if (TRUE == exitCondition)
 #endif
@@ -251,23 +254,27 @@ FUNC(void, CDD_IPC_CODE) Cdd_Ipc_Init(P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_
         CddIpc_NotifyUtilsInitObject.hIpcNotify       = CddIpc_NotifyHandle;
         CddIpc_NotifyUtilsHandle->hIpcNotifyUtilsInit = &CddIpc_NotifyUtilsInitObject;
 
-        initStatus = IpcNotify_lld_init(CddIpc_NotifyHandle);
-        initStatus = IpcNotifyUtils_lld_init(CddIpc_NotifyUtilsHandle);
+        initStatus  = IpcNotify_lld_init(CddIpc_NotifyHandle);
+        initStatus += IpcNotifyUtils_lld_init(CddIpc_NotifyUtilsHandle);
 
 #if (CDD_IPC_RPMSG_ENABLE_API == STD_ON) /* Initialize the RpMsg API's only if it is enabled */
-        CddIpc_RPMsgHandle->hRpMsgInit = &CddIpc_RPMessageInitObj;
-        initStatus                     = RPMessage_lld_init(CddIpc_RPMsgHandle);
+        CddIpc_RPMsgHandle->hRpMsgInit  = &CddIpc_RPMessageInitObj;
+        initStatus                     += RPMessage_lld_init(CddIpc_RPMsgHandle);
 #endif
 
         if ((E_OK) == (uint32)initStatus)
         {
             CddIpc_DrvStatus = CDD_IPC_IDLE;
         }
-
+        /* TI_COVERAGE_GAP_START [Line/Branch] failure path is covered in one of the configurations,
+         not all, hence the gap here*/
         else
         {
-            Cdd_IpcRuntimeError(CDD_IPC_INIT_SERVICE_ID, CDD_IPC_E_INIT_FAILED);
+#if (STD_ON == CDD_IPC_DEV_ERROR_DETECT)
+            Cdd_IpcReportDetError(CDD_IPC_INIT_SERVICE_ID, CDD_IPC_E_INIT_FAILED);
+#endif
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     return;
 }
@@ -366,7 +373,10 @@ FUNC(Std_ReturnType, CDD_IPC_CODE) Cdd_Ipc_Notify_UnregisterClient(uint32 Cdd_Ip
 #endif
     {
         status = IpcNotify_lld_unregisterClient(CddIpc_NotifyHandle, (uint16)Cdd_Ipc_localClientId);
+        /* TI_COVERAGE_GAP_START [Line/Branch] The TRUE branch (status != MCAL_SystemP_SUCCESS) is covered in one of the
+        configurations, not all, hence the gap here*/
         if (MCAL_SystemP_SUCCESS != status)
+        /* TI_COVERAGE_GAP_STOP */
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
@@ -407,7 +417,10 @@ Cdd_Ipc_Notify_Write(uint32 Cdd_Ipc_remoteCoreId, uint16 Cdd_Ipc_remoteClientId,
         msgParams.timeout            = CDD_IPC_TIMEOUT;
         status                       = IpcNotify_lld_sendMsg(CddIpc_NotifyHandle, &msgParams);
 
+        /* TI_COVERAGE_GAP_START [Line/Branch] The TRUE branch (status != MCAL_SystemP_SUCCESS) is covered in one or
+        more configurations, not all, hence the gap here*/
         if (MCAL_SystemP_SUCCESS != status)
+        /* TI_COVERAGE_GAP_STOP */
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
@@ -436,13 +449,12 @@ Cdd_Ipc_Construct(P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_IPC_CFG) ConfigPtr)
     {
         Cdd_IpcReportDetError(CDD_IPC_CONSTRUCT_SERVICE_ID, CDD_IPC_E_PARAM_POINTER);
     }
-    else if (CDD_IPC_LOCALEP_COUNT > 0U)
-    {
-        exitCondition = Cdd_Ipc_Construct_detCheck(ConfigPtr);
-    }
     else
     {
-        /*Nothing to do*/
+        if (CDD_IPC_LOCALEP_COUNT > 0U)
+        {
+            exitCondition = Cdd_Ipc_Construct_detCheck(ConfigPtr);
+        }
     }
     if (TRUE == exitCondition)
 #endif
@@ -466,10 +478,14 @@ Cdd_Ipc_Construct(P2CONST(Cdd_IpcConfigType, AUTOMATIC, CDD_IPC_CFG) ConfigPtr)
 #else
             status = RPMessage_lld_construct(CddIpc_RPMsgHandle, &Cdd_AckReplyMsgObject[core], &createParams);
 #endif
-
+            /* TI_COVERAGE_GAP_START [Line/Branch] The TRUE branch (status != E_OK) is covered in one of the
+               configurations, not all, hence the gap here*/
             if (((Std_ReturnType)E_OK) != status)
+            /* TI_COVERAGE_GAP_STOP */
             {
-                Cdd_IpcRuntimeError(CDD_IPC_CONSTRUCT_SERVICE_ID, CDD_IPC_E_CONSTRUCT_FAILED);
+#if (STD_ON == CDD_IPC_DEV_ERROR_DETECT)
+                Cdd_IpcReportDetError(CDD_IPC_CONSTRUCT_SERVICE_ID, CDD_IPC_E_CONSTRUCT_FAILED);
+#endif
             }
         }
     }
@@ -535,7 +551,10 @@ Cdd_Ipc_RpMsg_SendMsg(void *data, uint16 dataLen, uint16 Cdd_Ipc_remoteCoreId, u
 
         status = RPMessage_lld_send(CddIpc_RPMsgHandle, &lldSendParams);
 
+        /* TI_COVERAGE_GAP_START[Branch] False condition is covered in one of the configurations,
+         not all, hence the gap here*/
         if (MCAL_SystemP_SUCCESS != status)
+        /* TI_COVERAGE_GAP_STOP */
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
@@ -625,10 +644,14 @@ static void Cdd_Ipc_deInitCores(const Cdd_IpcConfigType *ConfigPtr)
     {
         deInitStatus = E_OK;
     }
+    /* TI_COVERAGE_GAP_START [Line/Branch] The else branch (IpcNotify_lld_deInit failure) is unreachable in
+     * as the notify LLD deInit always succeeds on hardware when called after a successful Init.
+     * A failure would require a hardware malfunction that cannot be induced with the test infrastructure. */
     else
     {
         deInitStatus = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
 #if (CDD_IPC_RPMSG_ENABLE_API == STD_ON)
     CddIpc_RPMsgHandle->hRpMsgInit = &CddIpc_RPMessageInitObj;
@@ -637,10 +660,14 @@ static void Cdd_Ipc_deInitCores(const Cdd_IpcConfigType *ConfigPtr)
     {
         deInitStatus = E_OK;
     }
+    /* TI_COVERAGE_GAP_START [Line/Branch] The else branch (RPMessage_lld_deInit failure) is unreachable in
+     * as RPMessage LLD deInit always succeeds on hardware when called after a successful Init.
+     * A failure would require a hardware malfunction that cannot be induced with the test infrastructure. */
     else
     {
         deInitStatus = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 #endif
 
     if ((E_OK) == deInitStatus)
@@ -649,7 +676,13 @@ static void Cdd_Ipc_deInitCores(const Cdd_IpcConfigType *ConfigPtr)
     }
     else
     {
-        Cdd_IpcRuntimeError(CDD_IPC_DEINIT_SERVICE_ID, CDD_IPC_E_DEINIT_FAILED);
+        /* TI_COVERAGE_GAP_START [Line/Branch] The else branch (deInitStatus != E_OK, deInit failure) is unreachable
+         * as both IpcNotify_lld_deInit and RPMessage_lld_deInit always succeed on hardware, so deInitStatus
+         * is always E_OK and Cdd_IpcReportDetError is never called. */
+#if (STD_ON == CDD_IPC_DEV_ERROR_DETECT)
+        Cdd_IpcReportDetError(CDD_IPC_DEINIT_SERVICE_ID, CDD_IPC_E_DEINIT_FAILED);
+#endif
+        /* TI_COVERAGE_GAP_STOP */
     }
 }
 
@@ -699,13 +732,8 @@ static Std_ReturnType Cdd_Ipc_Notify_RegisterClient_det_check(uint32            
 static boolean Cdd_Ipc_DeInit_detError_Check_CoreNo(const Cdd_IpcConfigType *ConfigPtr)
 {
     boolean exitCondition = FALSE;
-    /* TI_COVERAGE_GAP_START
-     * Reason: for-loop AND condition C2 (core < CDD_IPC_CORE_ID_MAX) independent FALSE
-     * requires ConfigPtr->Cdd_Ipc_numCores > CDD_IPC_CORE_ID_MAX (4). This config
-     * scenario is exercised in test function ipcTestDeInitCoreNoOverflowCoverage.
-     */
-    for (uint32 core = 0; (core < ConfigPtr->Cdd_Ipc_numCores) && (core < (uint32)CDD_IPC_CORE_ID_MAX); core++)
-    /* TI_COVERAGE_GAP_STOP */
+
+    for (uint32 core = 0; (core < ConfigPtr->Cdd_Ipc_numCores); core++)
     {
         if (ConfigPtr->Cdd_Ipc_coreIdList[core] > CDD_IPC_CORE_ID_MAX)
         {
@@ -779,12 +807,6 @@ static boolean Cdd_Ipc_Init_detErrorCheck(const Cdd_IpcConfigType *ConfigPtr)
     return exitCondition;
 }
 #endif /*(STD_ON == CDD_IPC_DEV_ERROR_DETECT)*/
-
-static inline void Cdd_IpcRuntimeError(uint8 apiId, uint8 errorId)
-{
-    (void)Det_ReportRuntimeError(CDD_IPC_MODULE_ID, CDD_IPC_INSTANCE_ID, apiId, errorId);
-    return;
-}
 
 #define CDD_IPC_STOP_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"

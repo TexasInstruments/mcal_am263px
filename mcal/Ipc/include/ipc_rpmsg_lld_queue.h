@@ -87,61 +87,9 @@ typedef struct RPMessage_Queue_s
 
 } RPMessage_Queue;
 
-/* reset Q data structure to empty state */
-static inline void RPMessage_queueReset(RPMessage_Queue *q)
-{
-    q->head = 0;
-    q->tail = 0;
-}
-
-/* add element into Q, adds to `tail` */
-static inline void RPMessage_queuePut(RPMessage_Queue *q, RPMessage_QueueElem *elem)
-{
-    elem->next = 0;
-    if (q->tail == 0)
-    {
-        /* Q is empty, head and tail point to new element */
-        q->head = elem;
-        q->tail = elem;
-    }
-    else
-    {
-        /* Q is not empty, add to tail */
-        q->tail->next = elem;
-        q->tail       = elem;
-    }
-}
-
-/* get element from Q, extracts from `head` */
-static inline RPMessage_QueueElem *RPMessage_queueGet(RPMessage_Queue *q)
-{
-    RPMessage_QueueElem *elem;
-
-    if (q->head == 0)
-    {
-        /* Q is empty, return 0 */
-        elem = 0;
-    }
-    else
-    {
-        /* Q is not empty, return head */
-        elem = q->head;
-        if (q->head == q->tail)
-        {
-            /* Q becomes empty due to extraction from head */
-            q->head = 0;
-            q->tail = 0;
-        }
-        else
-        {
-            /* Q is not empty due to extraction from head, move head to next element */
-            q->head = q->head->next;
-        }
-        /* init next to 0 before returning */
-        elem->next = 0;
-    }
-    return elem;
-}
+void                 RPMessage_queueReset(RPMessage_Queue *q);
+void                 RPMessage_queuePut(RPMessage_Queue *q, RPMessage_QueueElem *elem);
+RPMessage_QueueElem *RPMessage_queueGet(RPMessage_Queue *q);
 
 #ifdef __cplusplus
 }

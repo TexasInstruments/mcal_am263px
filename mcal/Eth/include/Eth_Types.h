@@ -63,6 +63,16 @@
  *  \ingroup MCAL_ETH_API
  *  @{
  */
+/*
+ * Below are the global requirements which are met by this Eth
+ * driver which can't be mapped to a particular source ID
+ *
+ * Design:
+ * MCAL-26679,
+ * MCAL-26460, MCAL-26474, MCAL-26495, MCAL-26522, MCAL-26526,
+ * MCAL-26547, MCAL-26563, MCAL-26578, MCAL-26586, MCAL-26587,
+ * MCAL-26629, MCAL-26647, MCAL-26691, MCAL-26695, MCAL-26636
+ */
 
 #ifndef ETH_TYPES_H_
 #define ETH_TYPES_H_

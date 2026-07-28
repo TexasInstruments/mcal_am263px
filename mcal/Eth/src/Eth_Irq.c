@@ -167,7 +167,10 @@ static void Eth_miiIndication(uint32 regVal, uint16 dataVal)
  *
  *  \context    ISR
  */
-/* Design :  */
+/*
+ * Design:
+ * MCAL-26628
+ */
 
 /*
  * Requirements : SWS_Eth_00109, SWS_Eth_00110, SWS_Eth_00111, SWS_Eth_00112,
@@ -275,7 +278,10 @@ static void Eth_processTxIrqFlag(uint32 irqFlags)
  *
  *  \context    ISR
  */
-/* Design : */
+/*
+ * Design:
+ * MCAL-26473
+ */
 
 /*
  * Requirements : SWS_Eth_00114, SWS_Eth_00115, SWS_Eth_00116, SWS_Eth_00117,

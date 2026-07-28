@@ -342,7 +342,7 @@ VAR(Eth_DrvObject, ETH_VAR_ZERO_INIT) Eth_DrvObj;
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Eth_MemMap.h"
 
-/* Design     : SITARA_MCU_MCAL-2239 */
+/* Design: MCAL-26564 */
 #define ETH_START_SEC_VAR_NO_INIT_8
 
 /* MISRAC_2012_R.20.1

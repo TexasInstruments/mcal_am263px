@@ -104,11 +104,7 @@ sint32 RPMessage_vringPutEmptyRxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCor
 /* functions for VRING initialization and other utility functions */
 void RPMessage_vringReset(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId, uint16 isTx);
 void RPMessage_vringResetInternal(RPMessage_Vring *vringObj, const RPMessage_VringResetParams *resetParams);
-/* utility function to align a value, `align` MUST be power of 2 */
-static inline uint32 RPMessage_align(uint32 value, uint32 align)
-{
-    return (value + align - 1U) & ~(align - 1U);
-}
+
 #ifdef __cplusplus
 }
 #endif

@@ -133,7 +133,10 @@ static CpswCpts_Event *CpswCpts_getCurrentEventQueue(CpswCpts_StateObj *pCptsSta
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
-
+/*
+ * Design:
+ * MCAL-26678
+ */
 Std_ReturnType CpswCpts_init(uint32 baseAddr, CpswCpts_StateObj *pCptsStateObj, const Eth_CptsConfigType *pCptsConfig,
                              uint8 portIdx)
 {

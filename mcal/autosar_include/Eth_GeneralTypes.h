@@ -68,8 +68,12 @@
 /*
  * Below are the global requirements which are met by this Eth
  * driver which can't be mapped to a particular source ID
+ *
+ * Design:
+ * MCAL-26691, MCAL-26460, MCAL-26647, MCAL-26522, MCAL-26563,
+ * MCAL-26629, MCAL-26526, MCAL-26586, MCAL-26547, MCAL-26474,
+ * MCAL-26578, MCAL-26495, MCAL-26695, 
  */
-/* Requirements : SWS_Eth_00026, SWS_Eth_00149, SWS_EthTrcv_00096*/
 
 #ifndef ETH_GENERALTYPES_H_
 #define ETH_GENERALTYPES_H_

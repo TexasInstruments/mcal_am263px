@@ -61,6 +61,16 @@
  *            Integration AUTOSAR stack.
  */
 
+/*
+ * Below are the global requirements which are met by this Eth
+ * driver which can't be mapped to a particular source ID
+ *
+ * Design:
+ * MCAL-26661, MCAL-26619, MCAL-26603, MCAL-26579, MCAL-26557,
+ * MCAL-26556, MCAL-26513, 
+ * 
+ */
+
 #ifndef DEM_H
 #define DEM_H
 

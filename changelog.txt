@@ -1,3 +1,66 @@
+commit c4426fb4d0ea53aa8534f32e26a4a8b2d74f3e37
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Jul 9 16:38:26 2026 +0530
+
+    all: IPC: IPC coverage improvements for all platforms
+    
+    Fixes: MCAL-40645, MCAL-35528
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Ipc/include/ipc_notify_v1_mailbox.h           |  124 +-
+ mcal/Ipc/include/ipc_rpmsg_lld_priv.h              |    6 +-
+ mcal/Ipc/include/ipc_rpmsg_lld_queue.h             |   58 +-
+ mcal/Ipc/src/Cdd_Ipc.c                             |   80 +-
+ mcal/Ipc/src/ipc_notify_v1_lld.c                   |  147 +-
+ mcal/Ipc/src/ipc_rpmsg_lld.c                       |  205 ++-
+ mcal/Ipc/src/ipc_rpmsg_lld_vring.c                 |   56 +-
+ mcal_test/ipc_test/Makefile                        |    3 +-
+ mcal_test/ipc_test/am261/testInput/ipcTestCases.h  |  276 ++--
+ mcal_test/ipc_test/am261/testInput/ipcTestConfig.h |   29 +
+ .../ipc_test/am261/testLib/ipcFaultInjection.c     |  249 +++-
+ .../ipc_test/am261/testLib/ipcFaultInjection.h     |   73 +-
+ mcal_test/ipc_test/am261/testLib/ipcTest.h         |   21 +-
+ .../ipc_test/am261/testLib/ipcTestMainTestCase.c   | 1430 ++++++++++++++++++-
+ .../am261/testLib/ipcTestNegativeTestCase.c        |  406 +++++-
+ mcal_test/ipc_test/am263/testInput/ipcTestCases.h  |  481 +++++--
+ mcal_test/ipc_test/am263/testInput/ipcTestConfig.h |   55 +-
+ .../ipc_test/am263/testLib/ipcFaultInjection.c     |  287 +++-
+ .../ipc_test/am263/testLib/ipcFaultInjection.h     |   74 +-
+ mcal_test/ipc_test/am263/testLib/ipcTest.h         |   10 +
+ mcal_test/ipc_test/am263/testLib/ipcTestCommon.c   |   15 +
+ .../ipc_test/am263/testLib/ipcTestMainTestCase.c   | 1431 +++++++++++++++++++-
+ .../am263/testLib/ipcTestNegativeTestCase.c        |  332 ++++-
+ .../ipc_test/am263px/testInput/ipcTestCases.h      |  111 +-
+ .../ipc_test/am263px/testLib/ipcFaultInjection.c   |  315 ++++-
+ .../ipc_test/am263px/testLib/ipcFaultInjection.h   |   77 +-
+ mcal_test/ipc_test/am263px/testLib/ipcTest.h       |    6 +
+ .../ipc_test/am263px/testLib/ipcTestMainTestCase.c |   96 +-
+ .../am263px/testLib/ipcTestNegativeTestCase.c      |  357 ++++-
+ .../Ipc/soc/am263/r5f0_0/config_7/Cdd_Ipc_Cfg.h    |   30 +-
+ 30 files changed, 6156 insertions(+), 684 deletions(-)
+
+commit f70b8ffc83b8ec95814d9074e1244a65f1ec0c70
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Wed Jul 15 09:53:44 2026 +0530
+
+    am26xxx: Eth: Add design JIRAs to source files
+    
+    - Add design JIRAs to source files
+    
+    Fixes: MCAL-40643
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ mcal/Eth/include/Eth_Types.h            |  10 +++
+ mcal/Eth/src/Eth.c                      | 122 ++++++++++++++------------------
+ mcal/Eth/src/Eth_Irq.c                  |  10 ++-
+ mcal/Eth/src/cpsw/Cpsw_Cpts.c           |   5 +-
+ mcal/Eth/src/cpsw/Eth_Priv.c            |   2 +-
+ mcal/autosar_include/Dem.h              |  10 +++
+ mcal/autosar_include/Eth_GeneralTypes.h |   6 +-
+ 7 files changed, 92 insertions(+), 73 deletions(-)
+
 commit d03d967459f4eb9fcfa1e4759def7e6649c2531b
 Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
 Date:   Fri Jul 24 12:57:45 2026 +0530

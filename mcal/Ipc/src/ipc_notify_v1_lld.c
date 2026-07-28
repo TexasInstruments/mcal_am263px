@@ -87,6 +87,109 @@ static void   IpcNotify_lld_isrCrcCheck(sint32 status, uint32 value, IpcNotify_H
 
 #define CDD_IPC_START_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
+
+void IpcNotify_mailbox_asm(void)
+{
+/* ensure that all instructions and memory transactions, including cache operations, are completed
+ * this is required to avoid any multi-core coherency issue since shared memory is being written/accessed
+ */
+#if defined(__aarch64__) || defined(__arm__)
+    __asm__ __volatile__(
+        "dsb sy"
+        "\n\t"
+        :
+        :
+        : "memory");
+    __asm__ __volatile__(
+        "isb"
+        "\n\t"
+        :
+        :
+        : "memory");
+#endif
+}
+
+static void IpcNotify_mailboxClearAllInt(uint32 mailboxBaseAddr)
+{
+    volatile uint32 *addr = (uint32 *)mailboxBaseAddr;
+    *addr                 = 0x1111111U;
+}
+
+uint32 IpcNotify_mailboxGetPendingIntr(uint32 mailboxBaseAddr)
+{
+    volatile uint32 *addr = (uint32 *)mailboxBaseAddr;
+
+    return *addr;
+}
+
+static void IpcNotify_mailboxClearPendingIntr(uint32 mailboxBaseAddr, uint32 pendingIntr)
+{
+    volatile uint32 *addr = (uint32 *)mailboxBaseAddr;
+
+    *addr = pendingIntr;
+}
+
+/* read from SW fifo within a mailbox */
+sint32 IpcNotify_mailboxReadSwQ(IpcNotify_SwQueue *swQ, uint32 *value)
+{
+    sint32 status = MCAL_SystemP_FAILURE;
+
+    uint32 rdIdx = swQ->rdIdx;
+    uint32 wrIdx = swQ->wrIdx;
+
+    if ((rdIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO) && (wrIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO))
+    {
+        if (rdIdx != wrIdx)
+        {
+            /* there is something in the FIFO */
+            *value = swQ->fifo[rdIdx];
+
+            rdIdx = (rdIdx + 1U) % MAILBOX_MAX_MSGS_IN_SW_FIFO;
+
+            swQ->rdIdx = rdIdx;
+
+            rdIdx = swQ->rdIdx; /* read back to ensure the update has reached the memory */
+
+            IpcNotify_mailbox_asm();
+            status = MCAL_SystemP_SUCCESS;
+        }
+    }
+
+    return status;
+}
+
+/* write to SW fifo and trigger HW interrupt using HW mailbox */
+sint32 IpcNotify_mailboxWrite(const IpcNotify_MailboxWriteParams *writeParams)
+{
+    sint32 status = MCAL_SystemP_FAILURE;
+
+    uint32 rdIdx = writeParams->swQ->rdIdx;
+    uint32 wrIdx = writeParams->swQ->wrIdx;
+
+    if ((rdIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO) && (wrIdx < MAILBOX_MAX_MSGS_IN_SW_FIFO))
+    {
+        if (((wrIdx + 1U) % MAILBOX_MAX_MSGS_IN_SW_FIFO) != rdIdx)
+        {
+            /* there is some space in the FIFO */
+            writeParams->swQ->fifo[wrIdx] = writeParams->value;
+
+            wrIdx = (wrIdx + 1U) % MAILBOX_MAX_MSGS_IN_SW_FIFO;
+
+            writeParams->swQ->wrIdx = wrIdx;
+
+            wrIdx = writeParams->swQ->wrIdx; /* read back to ensure the update has reached the memory */
+
+            IpcNotify_mailbox_asm();
+
+            /* trigger interrupt to other core */
+            status = IpcNotify_trigInterrupt(writeParams->selfCoreId, writeParams->remoteCoreId,
+                                             writeParams->mailboxBaseAddr, writeParams->intrBitPos);
+        }
+    }
+
+    return status;
+}
+
 static inline void IpcNotify_getWriteMailbox(uint32 selfCoreId, uint32 remoteCoreId, uint32 *mailboxBaseAddr,
                                              uint32 *intrBitPos, IpcNotify_SwQueue **swQ)
 
@@ -125,12 +228,18 @@ sint32 IpcNotify_lld_init(IpcNotify_Handle hIpcNotify)
     uint32               selfCoreId;
     IpcNotify_InitHandle hIpcNotifyInit;
 
-    if ((hIpcNotify != NULL_PTR) && (hIpcNotify->hIpcNotifyInit != NULL_PTR))
+    if (hIpcNotify == NULL_PTR)
+    {
+        status = MCAL_SystemP_INVALID_PARAM;
+    }
+    else if (hIpcNotify->hIpcNotifyInit == NULL_PTR)
+    {
+        status = MCAL_SystemP_INVALID_PARAM;
+    }
+    else
     {
         hIpcNotifyInit = hIpcNotify->hIpcNotifyInit;
         selfCoreId     = hIpcNotifyInit->selfCoreId;
-
-        MCAL_LLD_PARAMS_CHECK(selfCoreId < MCAL_CSL_CORE_ID_MAX);
 
         if (selfCoreId < MCAL_CSL_CORE_ID_MAX)
         {
@@ -143,10 +252,10 @@ sint32 IpcNotify_lld_init(IpcNotify_Handle hIpcNotify)
             }
             IpcNotify_lld_init_clearIntOn(hIpcNotify, selfCoreId);
         }
-    }
-    else
-    {
-        status = MCAL_SystemP_INVALID_PARAM;
+        else
+        {
+            status = MCAL_SystemP_INVALID_PARAM;
+        }
     }
 
     return status;
@@ -223,7 +332,15 @@ sint32 IpcNotify_lld_registerClient(IpcNotify_Handle hIpcNotify, uint16 localCli
 {
     sint32 status = MCAL_SystemP_SUCCESS;
 
-    if ((hIpcNotify != NULL_PTR) && (localClientId < IPC_NOTIFY_CLIENT_ID_MAX))
+    if (hIpcNotify == NULL_PTR)
+    {
+        status = MCAL_SystemP_INVALID_PARAM;
+    }
+    else if (localClientId >= IPC_NOTIFY_CLIENT_ID_MAX)
+    {
+        status = MCAL_SystemP_INVALID_PARAM;
+    }
+    else
     {
         SchM_Enter_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
         if (hIpcNotify->callback[localClientId] == NULL_PTR)
@@ -236,10 +353,6 @@ sint32 IpcNotify_lld_registerClient(IpcNotify_Handle hIpcNotify, uint16 localCli
             status = MCAL_SystemP_INVALID_PARAM;
         }
         SchM_Exit_Cdd_Ipc_IPC_EXCLUSIVE_AREA_0();
-    }
-    else
-    {
-        status = MCAL_SystemP_INVALID_PARAM;
     }
 
     return status;
@@ -469,15 +582,5 @@ static void IpcNotify_lld_isrCrcCheck(sint32 status, uint32 value, IpcNotify_Han
     }
 }
 
-uint32 IpcNotify_mailboxIsPendingIntr(uint32 pendingIntr, uint32 coreId)
-{
-    uint32 isPending = 0U;
-    if (coreId < MCAL_CSL_CORE_ID_MAX)
-    {
-        isPending = pendingIntr & (1U << gIpcNotifyCoreIntrBitPos[coreId]);
-    }
-
-    return isPending;
-}
 #define CDD_IPC_STOP_SEC_CODE
 #include "Cdd_Ipc_MemMap.h"
