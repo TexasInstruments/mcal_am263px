@@ -145,8 +145,11 @@ Std_ReturnType CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     retVal = CddFsiTx_setTxDataLane(baseAddr, (uint16)CDD_FSI_TX_SINGLE_DATA_LANE);
     CddFsiTx_setStartMode(baseAddr, CDD_FSI_TX_SW_START_MODE);
 
+    /* TI_COVERAGE_GAP_START - [Branch] Cannot be achieved as we don't have control
+       over the second parameter of API CddFsiTx_setTxDataLane */
     if (retVal == E_OK)
     {
+        /* TI_COVERAGE_GAP_STOP */
         CddFsiTx_disableInterrupt(hwUnitObj->hwUnitCfg.baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
         CddFsiTx_clearAllTxEvents(baseAddr);
 
@@ -235,6 +238,8 @@ Std_ReturnType CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
 
     CddFsiTx_enableTxPingTimer(baseAddr, hwUnitObj->hwUnitCfg.pingTriggerTimeout, CDD_FSI_TX_PING_TAG0);
 
+    /* TI_COVERAGE_GAP_START - [Branch] CddFsiTx_setFrameType won't fail,
+       as we dont have control over the second parameter frames */
     if (retVal == E_OK)
     {
         if (Cdd_FsiTx_PingStatus != CDD_FSI_TX_PING_ZERO_SENT)
@@ -262,6 +267,7 @@ Std_ReturnType CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
     {
         CddFsiTx_ReportRuntimeError(CDD_FSI_TX_INIT_SID, CDD_FSI_TX_E_INVALID_EVENT);
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 Std_ReturnType CddFsiTx_BufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
@@ -305,7 +311,7 @@ Std_ReturnType CddFsiTx_DMABufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj, 
     uint32 Data             = userData;
     Data                    = (Data << 8U) + Cdd_FsiTx_frametag;
     uint32 *dataPtr         = &Data;
-    (void)CddFsiTx_setFrameType(baseAddr, CDD_FSI_TX_DATA_N_WORD);
+    (void)CddFsiTx_setFrameType(baseAddr, (uint16)CDD_FSI_TX_DATA_N_WORD);
     retVal = CddFsiTx_setTxSoftwareFrameSize(baseAddr, TxDatalength);
 
     if (TRUE == Cdd_Dma_GetInitStatus())

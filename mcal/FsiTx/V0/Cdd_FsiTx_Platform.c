@@ -203,11 +203,12 @@ FUNC(Std_ReturnType, CDD_FSITX_CODE)
 CddFsiTx_setFrameType(uint32 base, uint16 frameType)
 {
     Std_ReturnType retVal = E_OK;
+    uint16         regVal;
     if (frameType > (uint16)0x000FU)
     {
         retVal = E_NOT_OK;
     }
-    uint16 regVal;
+    else
     {
         regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_CTRL);
         regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_FRAME_CTRL_FRAME_TYPE_MASK)) | (uint16)frameType;
@@ -283,23 +284,14 @@ CddFsiTx_setTxFrameTag(uint32 base, uint8 frameTag)
 FUNC(Std_ReturnType, CDD_FSITX_CODE)
 CddFsiTx_setTxUserDefinedData(uint32 base, uint8 userData)
 {
-    uint32 retVal = E_OK;
     uint16 regVal;
 
-    /* Check the arguments */
-    if (userData > CDD_FSI_TX_MAX_VALUE_USERDATA)
-    {
-        retVal = E_NOT_OK;
-    }
-    else
-    {
-        regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA);
-        regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_MASK)) |
-                 (uint16)((uint16)userData << (uint16)CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
-        HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA, regVal);
-    }
+    regVal = HW_RD_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA);
+    regVal = (regVal & (uint16)(~CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_MASK)) |
+             (uint16)((uint16)userData << (uint16)CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA_USER_DATA_SHIFT);
+    HW_WR_REG16(base + CSL_CDD_FSI_TX_CFG_TX_FRAME_TAG_UDATA, regVal);
 
-    return ((Std_ReturnType)retVal);
+    return E_OK;
 }
 /******************************************************************************/
 FUNC(Std_ReturnType, CDD_FSITX_CODE)

@@ -390,22 +390,15 @@ void Spi_DmaRxIsrHandler(void *args)
         if ((NULL_PTR != hwUnitObj->curJobObj) &&
             (hwUnitObj->curJobObj->extDevCfg->mcspi.txRxMode != SPI_TX_RX_MODE_TX_ONLY))
         {
-            /*  Invalidate RX buffer cache to ensure CPU reads fresh DMA data */
-            chId  = hwUnitObj->curJobObj->jobCfg.channelList[hwUnitObj->curJobObj->curChIdx];
-            chObj = Spi_getCurrChannelObj(chId);
+            /* Invalidate RX buffer cache to ensure CPU reads fresh DMA data */
+            chId         = hwUnitObj->curJobObj->jobCfg.channelList[hwUnitObj->curJobObj->curChIdx];
+            chObj        = Spi_getCurrChannelObj(chId);
+            rxBufferSize = (uint32)chObj->numWordsTxRx * (uint32)chObj->bufWidth;
 
-            /* TI_COVERAGE_GAP_START [Branch] Spi_getCurrChannelObj returns &channelObj[chId] — never NULL
-               False branch structurally unreachable */
-            if (NULL_PTR != chObj)
+            if ((rxBufferSize > 0U) && (NULL_PTR != chObj->curRxBufPtr))
             {
-                rxBufferSize = (uint32)chObj->numWordsTxRx * (uint32)chObj->bufWidth;
-
-                if ((rxBufferSize > 0U) && (NULL_PTR != chObj->curRxBufPtr))
-                {
-                    Mcal_CacheP_inv((void *)chObj->curRxBufPtr, rxBufferSize, Mcal_CacheP_TYPE_L1D);
-                }
+                Mcal_CacheP_inv((void *)chObj->curRxBufPtr, rxBufferSize, Mcal_CacheP_TYPE_L1D);
             }
-            /* TI_COVERAGE_GAP_STOP */
             /* This channel transfer is complete */
             hwUnitObj->curJobObj->jobResult = SPI_JOB_OK;
             Spi_processChCompletion(hwUnitObj, SPI_JOB_OK);

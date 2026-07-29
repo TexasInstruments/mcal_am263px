@@ -1000,6 +1000,7 @@ typedef  struct CddUart_Object * CddUart_Handle;
 | void | **[UART_putChar](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_putchar)**(uint32 baseAddr, uint8 byteTx)| This API writes a byte to the Transmitter FIFO without checking for the emptiness of the Transmitter FIFO or the Transmitter Shift Register(TSR).  |
 | uint32 | **[UART_getChar](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_getchar)**(uint32 baseAddr, uint8 * pChar)| This API reads a byte from the Receiver Buffer Register (RBR). It checks once if any character is ready to be read.  |
 | void | **[UART_intrEnable](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_intrenable)**(uint32 baseAddr, uint32 intrFlag)| This API enables the specified interrupts in the UART mode of operation.  |
+| uint32 | **[UART_fifoConfig](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_fifoconfig)**(uint32 baseAddr, uint32 fifoConfig)| This API configures the FIFO settings for the UART instance.  |
 | void | **[UART_intrDisable](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_intrdisable)**(uint32 baseAddr, uint32 intrFlag)| This API disables the specified interrupts in the UART mode of operation.  |
 | void | **[UART_intr2Disable](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_intr2disable)**(uint32 baseAddr, uint32 intrFlag)| This API disables the specified interrupts in the UART mode of operation for IER2.  |
 | uint32 | **[UART_getIntrIdentityStatus](../Modules/group___d_r_v___u_a_r_t___l_l_d___m_o_d_u_l_e.md#function-uart_getintridentitystatus)**(uint32 baseAddr)| This API determines the UART Interrupt Status.  |
@@ -1263,7 +1264,7 @@ This API reads a byte from the Receiver Buffer Register (RBR). It checks once if
 ### function UART_intrEnable
 
 ```
-static inline void UART_intrEnable(
+void UART_intrEnable(
     uint32 baseAddr,
     uint32 intrFlag
 )
@@ -1297,6 +1298,29 @@ This API enables the specified interrupts in the UART mode of operation.
 **See**: UART_open 
 
 **Note**: This API modifies the contents of UART Interrupt Enable Register (IER). Modifying the bits IER[7:4] requires that EFR[4] be set. This API does the needful before it accesses IER. Moreover, this API should be called when UART is operating in UART 16x Mode, UART 13x Mode or UART 16x Auto-baud mode.
+
+### function UART_fifoConfig
+
+```
+uint32 UART_fifoConfig(
+    uint32 baseAddr,
+    uint32 fifoConfig
+)
+```
+
+
+**Brief**: 
+This API configures the FIFO settings for the UART instance. 
+
+**Parameters**: 
+
+  
+* **baseAddr** Memory address of the UART instance being used. 
+  
+* **fifoConfig** FIFO configuration value specifying TX/RX granularity, trigger levels, DMA mode, and related settings.
+
+
+**Return**: Returns the FIFO configuration status. 
 
 ### function UART_intrDisable
 

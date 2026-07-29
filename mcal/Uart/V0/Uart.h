@@ -1570,7 +1570,18 @@ static inline uint32 UART_getChar(uint32 baseAddr, uint8 *pChar);
  *
  * \sa      #UART_open
  */
-static inline void UART_intrEnable(uint32 baseAddr, uint32 intrFlag);
+void UART_intrEnable(uint32 baseAddr, uint32 intrFlag);
+
+/**
+ * \brief   This API configures the FIFO settings for the UART instance.
+ *
+ * \param   baseAddr   Memory address of the UART instance being used.
+ * \param   fifoConfig FIFO configuration value specifying TX/RX granularity,
+ *                     trigger levels, DMA mode, and related settings.
+ *
+ * \return  Returns the FIFO configuration status.
+ */
+uint32 UART_fifoConfig(uint32 baseAddr, uint32 fifoConfig);
 
 /**
  * \brief   This API disables the specified interrupts in the UART mode of

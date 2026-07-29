@@ -125,7 +125,7 @@ static void          UART_enhanFuncBitValRestore(uint32 baseAddr, uint32 enhanFn
 static uint32        UART_divisorLatchWrite(uint32 baseAddr, uint32 divisorValue);
 static void          UART_fifoRegisterWrite(uint32 baseAddr, uint32 fcrValue);
 static void          UART_tcrTlrBitValRestore(uint32 baseAddr, uint32 tcrTlrBitVal);
-static uint32        UART_fifoConfig(uint32 baseAddr, uint32 fifoConfig);
+uint32               UART_fifoConfig(uint32 baseAddr, uint32 fifoConfig);
 static inline uint32 UART_divideRoundCloset(uint32 divident, uint32 divisor);
 static void          UART_lineCharConfig(uint32 baseAddr, uint32 wLenStbFlag, uint32 parityFlag);
 static void          UART_divisorLatchDisable(uint32 baseAddr);
@@ -241,11 +241,6 @@ static inline uint32 UART_readData(CddUart_Handle hUart, uint32 size)
         {
             readSuccess = UART_getChar(hUart->baseAddr, &readIn);
         }
-        if (tempCount <= 0U)
-        {
-            /* timeout occured */
-            break;
-        }
         MCAL_SW_DELAY(tempCount);
     }
 
@@ -310,7 +305,7 @@ static inline uint32 UART_getChar(uint32 baseAddr, uint8 *pChar)
     return retVal;
 }
 
-static inline void UART_intrEnable(uint32 baseAddr, uint32 intrFlag)
+void UART_intrEnable(uint32 baseAddr, uint32 intrFlag)
 {
     uint32 enhanFnBitVal = 0U;
     uint32 lcrRegValue   = 0U;
@@ -1088,7 +1083,7 @@ static void UART_tcrTlrBitValRestore(uint32 baseAddr, uint32 tcrTlrBitVal)
     HW_WR_REG32(baseAddr + UART_LCR, lcrRegValue);
 }
 
-static uint32 UART_fifoConfig(uint32 baseAddr, uint32 fifoConfig)
+uint32 UART_fifoConfig(uint32 baseAddr, uint32 fifoConfig)
 {
     uint32 enhanFnBitVal;
     uint32 tcrTlrBitVal;
@@ -1238,7 +1233,6 @@ static uint32 UART_fifoConfig(uint32 baseAddr, uint32 fifoConfig)
         /* Programming the DMAMODE2 field in SCR. */
         HW_WR_FIELD32(baseAddr + UART_SCR, UART_SCR_DMA_MODE_2, dmaMode);
     }
-
     /* Programming the bits which clear the RX and TX FIFOs. */
     fcrValue |= rxClr << UART_FCR_RX_FIFO_CLEAR_SHIFT;
     fcrValue |= txClr << UART_FCR_TX_FIFO_CLEAR_SHIFT;
@@ -2269,7 +2263,7 @@ static sint32 UART_readPolling(CddUart_Handle hUart, CddUart_Transaction *trans)
         Uart_Cdd_readTransErrorStatus(hUart, UART_readLineStatus(hUart->baseAddr));
         hUart->readTrans = (CddUart_Transaction *)NULL_PTR;
     }
-    else if ((hUart->readSizeRemaining == (uint32)0U) && (hUart->rxTimeoutCnt == (uint32)0U))
+    else if (hUart->readSizeRemaining == (uint32)0U)
     {
         retVal           = MCAL_SystemP_SUCCESS;
         trans->status    = UART_TRANSFER_STATUS_SUCCESS;

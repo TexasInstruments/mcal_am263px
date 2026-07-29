@@ -1,3 +1,187 @@
+commit 10a8b454c0afd5f374b0b5391df58db53104452e
+Author: Asha D <asha.d@ti.com>
+Date:   Wed Jul 22 17:24:50 2026 +0530
+
+    am263px:CDD FSI: Coverage Improvement
+    
+            Removed superfluous in the code
+            Added Test cases for coverage
+    
+    Fixes: MCAL-38537
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/FsiRx/V0/Cdd_FsiRx_Platform.c                 |   4 +-
+ mcal/FsiRx/src/Cdd_FsiRx.c                         |   4 +-
+ mcal/FsiTx/V0/Cdd_FsiTx_Platform.c                 |  22 +--
+ mcal/FsiTx/V0/Cdd_FsiTx_Priv.c                     |   8 +-
+ mcal/FsiTx/src/Cdd_FsiTx.c                         |   6 +-
+ mcal_test/fsi_test/testInput/fsiTestCases.h        | 146 +++++++++++++-
+ mcal_test/fsi_test/testLib/fsiTest.h               |  38 +++-
+ mcal_test/fsi_test/testLib/fsiTestMainTestCase.c   | 203 +++++++++++++++++--
+ .../fsi_test/testLib/fsiTestNegativeTestCase.c     | 215 ++++++++++++++++++---
+ 9 files changed, 579 insertions(+), 67 deletions(-)
+
+commit 277719855e798b5a81aa4be746441a7fb86b997d
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Thu Jul 9 11:53:22 2026 +0530
+
+    am26xx: mcal/uart: improve clang coverage
+    
+     - Added testcases to improve coverage
+    
+    Fixes: MCAL-38535
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>:
+
+ mcal/Uart/V0/Uart.h                                |   13 +-
+ mcal/Uart/V0/uart.c                                |   14 +-
+ mcal_test/uart_test/Makefile                       |  168 +-
+ mcal_test/uart_test/build/makefile                 |    8 +-
+ mcal_test/uart_test/testApp/UART_pyserial_test.py  |  124 +-
+ mcal_test/uart_test/testApp/uartTestApp.c          |    9 +-
+ mcal_test/uart_test/testInput/uartTestCases.h      | 1285 +++++++++++--
+ mcal_test/uart_test/testLib/uartTest.h             |   21 +
+ mcal_test/uart_test/testLib/uartTestCommon.c       |   27 +-
+ mcal_test/uart_test/testLib/uartTestMainTestCase.c |   14 +-
+ .../uart_test/testLib/uartTestNegativeTestCase.c   | 1537 +++++++++++++++-
+ mcal_test/uart_test/testLib/uartTestParser.c       |   43 +-
+ .../Uart/soc/am261/r5f0_0/config_1/Cdd_Dma_Cfg.c   | 1411 ++++++++++++++
+ .../Uart/soc/am261/r5f0_0/config_1/Cdd_Dma_Cfg.h   |  279 +++
+ .../Uart/soc/am261/r5f0_0/config_1/Cdd_Uart_Cfg.c  |  159 ++
+ .../Uart/soc/am261/r5f0_0/config_1/Cdd_Uart_Cfg.h  |  157 +-
+ .../soc/am261/r5f0_0/config_1/Cdd_Uart_PBcfg.c     |   76 +
+ .../Uart/soc/am261/r5f0_0/config_2/Cdd_Dma_Cfg.c   | 1411 ++++++++++++++
+ .../Uart/soc/am261/r5f0_0/config_2/Cdd_Dma_Cfg.h   |  279 +++
+ .../Uart/soc/am261/r5f0_0/config_2/Cdd_Uart_Cfg.c  |  179 ++
+ .../Uart/soc/am261/r5f0_0/config_2/Cdd_Uart_Cfg.h  |  361 ++++
+ .../soc/am261/r5f0_0/config_2/Cdd_Uart_PBcfg.c     |   76 +
+ .../am261/r5f0_0/config_2/include/Cdd_Dma_Cfg.h    |  279 +++
+ .../am261/r5f0_0/config_2/include/Cdd_Uart_Cfg.h   |  361 ++++
+ .../soc/am261/r5f0_0/config_2/src/Cdd_Dma_Cfg.c    | 1411 ++++++++++++++
+ .../soc/am261/r5f0_0/config_2/src/Cdd_Uart_Cfg.c   |  179 ++
+ .../soc/am261/r5f0_0/config_2/src/Cdd_Uart_PBcfg.c |   76 +
+ .../am261/r5f0_0/config_2/swcd/Cdd_Dma_Bswmd.arxml |  538 ++++++
+ .../r5f0_0/config_2/swcd/Cdd_Uart_Bswmd.arxml      |  444 +++++
+ .../Uart/soc/am261/r5f0_0/config_3/Cdd_Dma_Cfg.c   | 1411 ++++++++++++++
+ .../Uart/soc/am261/r5f0_0/config_3/Cdd_Dma_Cfg.h   |  279 +++
+ .../Uart/soc/am261/r5f0_0/config_3/Cdd_Uart_Cfg.c  |  179 ++
+ .../Uart/soc/am261/r5f0_0/config_3/Cdd_Uart_Cfg.h  |  361 ++++
+ .../soc/am261/r5f0_0/config_3/Cdd_Uart_PBcfg.c     |   76 +
+ .../am261/r5f0_0/config_3/include/Cdd_Dma_Cfg.h    |  279 +++
+ .../am261/r5f0_0/config_3/include/Cdd_Uart_Cfg.h   |  361 ++++
+ .../r5f0_0/config_3/include/Cdd_Uart_Cfg.h.bak     |  364 ++++
+ .../soc/am261/r5f0_0/config_3/src/Cdd_Dma_Cfg.c    | 1411 ++++++++++++++
+ .../soc/am261/r5f0_0/config_3/src/Cdd_Uart_Cfg.c   |  179 ++
+ .../soc/am261/r5f0_0/config_3/src/Cdd_Uart_PBcfg.c |   76 +
+ .../am261/r5f0_0/config_3/swcd/Cdd_Dma_Bswmd.arxml |  538 ++++++
+ .../r5f0_0/config_3/swcd/Cdd_Uart_Bswmd.arxml      |  444 +++++
+ .../Uart/soc/am261/r5f0_0/config_91/Cdd_Uart_Cfg.c |  159 ++
+ .../Uart/soc/am261/r5f0_0/config_91/Cdd_Uart_Cfg.h |  159 +-
+ .../soc/am261/r5f0_0/config_91/Cdd_Uart_PBcfg.c    |   76 +
+ .../Uart/soc/am261/r5f0_0/config_92/Cdd_Uart_Cfg.c |  159 ++
+ .../Uart/soc/am261/r5f0_0/config_92/Cdd_Uart_Cfg.h |  169 +-
+ .../soc/am261/r5f0_0/config_92/Cdd_Uart_PBcfg.c    |   76 +
+ .../Uart/soc/am261/r5f0_0/config_93/Cdd_Uart_Cfg.c |  159 ++
+ .../Uart/soc/am261/r5f0_0/config_93/Cdd_Uart_Cfg.h |  164 +-
+ .../soc/am261/r5f0_0/config_93/Cdd_Uart_PBcfg.c    |   76 +
+ .../Uart/soc/am261/r5f0_0/config_94/Cdd_Uart_Cfg.c |  159 ++
+ .../Uart/soc/am261/r5f0_0/config_94/Cdd_Uart_Cfg.h |  174 +-
+ .../soc/am261/r5f0_0/config_94/Cdd_Uart_PBcfg.c    |   76 +
+ .../Uart/soc/am263/r5f0_0/config_1/Cdd_Dma_Cfg.c   | 1933 ++++++++++++++++++++
+ .../Uart/soc/am263/r5f0_0/config_1/Cdd_Dma_Cfg.h   |  299 +++
+ .../Uart/soc/am263/r5f0_0/config_1/Cdd_Uart_Cfg.c  |  160 ++
+ .../Uart/soc/am263/r5f0_0/config_1/Cdd_Uart_Cfg.h  |  172 +-
+ .../soc/am263/r5f0_0/config_1/Cdd_Uart_PBcfg.c     |   60 +
+ .../Uart/soc/am263/r5f0_0/config_2/Cdd_Dma_Cfg.c   | 1933 ++++++++++++++++++++
+ .../Uart/soc/am263/r5f0_0/config_2/Cdd_Dma_Cfg.h   |  299 +++
+ .../Uart/soc/am263/r5f0_0/config_2/Cdd_Uart_Cfg.c  |  180 ++
+ .../Uart/soc/am263/r5f0_0/config_2/Cdd_Uart_Cfg.h  |  364 ++++
+ .../soc/am263/r5f0_0/config_2/Cdd_Uart_PBcfg.c     |   60 +
+ .../am263/r5f0_0/config_2/include/Cdd_Dma_Cfg.h    |  299 +++
+ .../am263/r5f0_0/config_2/include/Cdd_Uart_Cfg.h   |  364 ++++
+ .../soc/am263/r5f0_0/config_2/src/Cdd_Dma_Cfg.c    | 1933 ++++++++++++++++++++
+ .../soc/am263/r5f0_0/config_2/src/Cdd_Uart_Cfg.c   |  180 ++
+ .../soc/am263/r5f0_0/config_2/src/Cdd_Uart_PBcfg.c |   60 +
+ .../am263/r5f0_0/config_2/swcd/Cdd_Dma_Bswmd.arxml |  538 ++++++
+ .../r5f0_0/config_2/swcd/Cdd_Uart_Bswmd.arxml      |  489 +++++
+ .../Uart/soc/am263/r5f0_0/config_3/Cdd_Dma_Cfg.c   | 1933 ++++++++++++++++++++
+ .../Uart/soc/am263/r5f0_0/config_3/Cdd_Dma_Cfg.h   |  299 +++
+ .../Uart/soc/am263/r5f0_0/config_3/Cdd_Uart_Cfg.c  |  180 ++
+ .../Uart/soc/am263/r5f0_0/config_3/Cdd_Uart_Cfg.h  |  364 ++++
+ .../soc/am263/r5f0_0/config_3/Cdd_Uart_PBcfg.c     |   60 +
+ .../am263/r5f0_0/config_3/include/Cdd_Dma_Cfg.h    |  299 +++
+ .../am263/r5f0_0/config_3/include/Cdd_Uart_Cfg.h   |  364 ++++
+ .../soc/am263/r5f0_0/config_3/src/Cdd_Dma_Cfg.c    | 1933 ++++++++++++++++++++
+ .../soc/am263/r5f0_0/config_3/src/Cdd_Uart_Cfg.c   |  180 ++
+ .../soc/am263/r5f0_0/config_3/src/Cdd_Uart_PBcfg.c |   60 +
+ .../am263/r5f0_0/config_3/swcd/Cdd_Dma_Bswmd.arxml |  538 ++++++
+ .../r5f0_0/config_3/swcd/Cdd_Uart_Bswmd.arxml      |  489 +++++
+ .../Uart/soc/am263/r5f0_0/config_91/Cdd_Uart_Cfg.c |  160 ++
+ .../Uart/soc/am263/r5f0_0/config_91/Cdd_Uart_Cfg.h |  197 +-
+ .../soc/am263/r5f0_0/config_91/Cdd_Uart_PBcfg.c    |   60 +
+ .../Uart/soc/am263/r5f0_0/config_92/Cdd_Uart_Cfg.c |  160 ++
+ .../Uart/soc/am263/r5f0_0/config_92/Cdd_Uart_Cfg.h |  211 ++-
+ .../soc/am263/r5f0_0/config_92/Cdd_Uart_PBcfg.c    |   60 +
+ .../Uart/soc/am263/r5f0_0/config_93/Cdd_Uart_Cfg.c |  160 ++
+ .../Uart/soc/am263/r5f0_0/config_93/Cdd_Uart_Cfg.h |  202 +-
+ .../soc/am263/r5f0_0/config_93/Cdd_Uart_PBcfg.c    |   60 +
+ .../Uart/soc/am263/r5f0_0/config_94/Cdd_Uart_Cfg.c |  160 ++
+ .../Uart/soc/am263/r5f0_0/config_94/Cdd_Uart_Cfg.h |  216 ++-
+ .../soc/am263/r5f0_0/config_94/Cdd_Uart_PBcfg.c    |   60 +
+ .../Uart/soc/am263px/r5f0_0/config_1/Cdd_Dma_Cfg.c | 1929 +++++++++++++++++++
+ .../Uart/soc/am263px/r5f0_0/config_1/Cdd_Dma_Cfg.h |  299 +++
+ .../soc/am263px/r5f0_0/config_1/Cdd_Uart_Cfg.c     |  160 ++
+ .../soc/am263px/r5f0_0/config_1/Cdd_Uart_Cfg.h     |  159 +-
+ .../soc/am263px/r5f0_0/config_1/Cdd_Uart_PBcfg.c   |   60 +
+ .../Uart/soc/am263px/r5f0_0/config_2/Cdd_Dma_Cfg.c | 1929 +++++++++++++++++++
+ .../Uart/soc/am263px/r5f0_0/config_2/Cdd_Dma_Cfg.h |  299 +++
+ .../soc/am263px/r5f0_0/config_2/Cdd_Uart_Cfg.c     |  180 ++
+ .../soc/am263px/r5f0_0/config_2/Cdd_Uart_Cfg.h     |  359 ++++
+ .../soc/am263px/r5f0_0/config_2/Cdd_Uart_PBcfg.c   |   60 +
+ .../am263px/r5f0_0/config_2/include/Cdd_Dma_Cfg.h  |  299 +++
+ .../am263px/r5f0_0/config_2/include/Cdd_Uart_Cfg.h |  359 ++++
+ .../soc/am263px/r5f0_0/config_2/src/Cdd_Dma_Cfg.c  | 1929 +++++++++++++++++++
+ .../soc/am263px/r5f0_0/config_2/src/Cdd_Uart_Cfg.c |  180 ++
+ .../am263px/r5f0_0/config_2/src/Cdd_Uart_PBcfg.c   |   60 +
+ .../Uart/soc/am263px/r5f0_0/config_3/Cdd_Dma_Cfg.c | 1929 +++++++++++++++++++
+ .../Uart/soc/am263px/r5f0_0/config_3/Cdd_Dma_Cfg.h |  299 +++
+ .../soc/am263px/r5f0_0/config_3/Cdd_Uart_Cfg.c     |  180 ++
+ .../soc/am263px/r5f0_0/config_3/Cdd_Uart_Cfg.h     |  359 ++++
+ .../soc/am263px/r5f0_0/config_3/Cdd_Uart_PBcfg.c   |   60 +
+ .../am263px/r5f0_0/config_3/include/Cdd_Dma_Cfg.h  |  299 +++
+ .../am263px/r5f0_0/config_3/include/Cdd_Uart_Cfg.h |  359 ++++
+ .../soc/am263px/r5f0_0/config_3/src/Cdd_Dma_Cfg.c  | 1929 +++++++++++++++++++
+ .../soc/am263px/r5f0_0/config_3/src/Cdd_Uart_Cfg.c |  180 ++
+ .../am263px/r5f0_0/config_3/src/Cdd_Uart_PBcfg.c   |   60 +
+ .../soc/am263px/r5f0_0/config_91/Cdd_Uart_Cfg.c    |  160 ++
+ .../soc/am263px/r5f0_0/config_91/Cdd_Uart_Cfg.h    |  160 +-
+ .../soc/am263px/r5f0_0/config_91/Cdd_Uart_PBcfg.c  |   60 +
+ .../soc/am263px/r5f0_0/config_92/Cdd_Uart_Cfg.c    |  160 ++
+ .../soc/am263px/r5f0_0/config_92/Cdd_Uart_Cfg.h    |  177 +-
+ .../soc/am263px/r5f0_0/config_92/Cdd_Uart_PBcfg.c  |   60 +
+ .../soc/am263px/r5f0_0/config_93/Cdd_Uart_Cfg.c    |  160 ++
+ .../soc/am263px/r5f0_0/config_93/Cdd_Uart_Cfg.h    |  165 +-
+ .../soc/am263px/r5f0_0/config_93/Cdd_Uart_PBcfg.c  |   60 +
+ .../soc/am263px/r5f0_0/config_94/Cdd_Uart_Cfg.c    |  160 ++
+ .../soc/am263px/r5f0_0/config_94/Cdd_Uart_Cfg.h    |  181 +-
+ .../soc/am263px/r5f0_0/config_94/Cdd_Uart_PBcfg.c  |   60 +
+ mcal_test/ut_config/Uart/srcs.mk                   |    4 +
+ 133 files changed, 50349 insertions(+), 1364 deletions(-)
+
+commit 5c922eb242c448fd68721a98fb5d2bd02614de28
+Author: Akash <a-verma3@ti.com>
+Date:   Tue Jul 28 23:28:38 2026 +0530
+
+    all: Spi: Remove NULL check, which is not needed in code for coverage.
+    
+    Fixes: MCAL-37951
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Spi/V0/Spi_Dma.c | 19 ++++++-------------
+ 1 file changed, 6 insertions(+), 13 deletions(-)
+
 commit c4426fb4d0ea53aa8534f32e26a4a8b2d74f3e37
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Thu Jul 9 16:38:26 2026 +0530

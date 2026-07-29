@@ -262,7 +262,7 @@ CddFsiRx_setRxDataWidth(uint32 base, CddFsiRxDataLaneType dataWidth)
 FUNC(Std_ReturnType, CDD_FSIRX_CODE)
 CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
 {
-    Std_ReturnType retVal     = E_OK;
+    Std_ReturnType retVal     = E_NOT_OK;
     uint16         regVal     = 0U;
     uint16         flagMask   = 0U;
     uint32         baseAdress = 0U;
@@ -297,6 +297,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
         regVal      = HW_RD_REG16(baseAdress);
         regVal     |= flagMask;
         HW_WR_REG16(baseAdress, regVal);
+        retVal = E_OK;
     }
     /*Enable only INT2 vector*/
     else
@@ -307,6 +308,7 @@ CddFsiRx_enableInterrupt(uint32 base, uint8 intRxNum)
             regVal      = HW_RD_REG16(baseAdress);
             regVal     |= flagMask;
             HW_WR_REG16(baseAdress, regVal);
+            retVal = E_OK;
         }
     }
 

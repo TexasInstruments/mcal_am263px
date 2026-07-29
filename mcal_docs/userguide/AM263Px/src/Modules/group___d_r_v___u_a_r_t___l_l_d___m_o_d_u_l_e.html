@@ -3002,31 +3002,35 @@ A Data Movement Architecture (DMA) handle that is used by UART for DMA mode.</p>
 <td><p><strong><a class="reference internal" href="#function-uart-intrenable"><span class="std std-ref">UART_intrEnable</span></a></strong>(uint32 baseAddr, uint32 intrFlag)</p></td>
 <td><p>This API enables the specified interrupts in the UART mode of operation.</p></td>
 </tr>
-<tr class="row-even"><td><p>void</p></td>
+<tr class="row-even"><td><p>uint32</p></td>
+<td><p><strong><a class="reference internal" href="#function-uart-fifoconfig"><span class="std std-ref">UART_fifoConfig</span></a></strong>(uint32 baseAddr, uint32 fifoConfig)</p></td>
+<td><p>This API configures the FIFO settings for the UART instance.</p></td>
+</tr>
+<tr class="row-odd"><td><p>void</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-intrdisable"><span class="std std-ref">UART_intrDisable</span></a></strong>(uint32 baseAddr, uint32 intrFlag)</p></td>
 <td><p>This API disables the specified interrupts in the UART mode of operation.</p></td>
 </tr>
-<tr class="row-odd"><td><p>void</p></td>
+<tr class="row-even"><td><p>void</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-intr2disable"><span class="std std-ref">UART_intr2Disable</span></a></strong>(uint32 baseAddr, uint32 intrFlag)</p></td>
 <td><p>This API disables the specified interrupts in the UART mode of operation for IER2.</p></td>
 </tr>
-<tr class="row-even"><td><p>uint32</p></td>
+<tr class="row-odd"><td><p>uint32</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-getintridentitystatus"><span class="std std-ref">UART_getIntrIdentityStatus</span></a></strong>(uint32 baseAddr)</p></td>
 <td><p>This API determines the UART Interrupt Status.</p></td>
 </tr>
-<tr class="row-odd"><td><p>uint32</p></td>
+<tr class="row-even"><td><p>uint32</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-checkcharsavailinfifo"><span class="std std-ref">UART_checkCharsAvailInFifo</span></a></strong>(uint32 baseAddr)</p></td>
 <td><p>This API checks if the RX FIFO (or RHR in non-FIFO mode) has atleast one byte of data to be read.</p></td>
 </tr>
-<tr class="row-even"><td><p>uint32</p></td>
+<tr class="row-odd"><td><p>uint32</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-readlinestatus"><span class="std std-ref">UART_readLineStatus</span></a></strong>(uint32 baseAddr)</p></td>
 <td><p>This API reads the line status register value.</p></td>
 </tr>
-<tr class="row-odd"><td><p>sint32</p></td>
+<tr class="row-even"><td><p>sint32</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-cdd-flushtxfifo"><span class="std std-ref">Uart_Cdd_flushTxFifo</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p>Function to flush a TX FIFO of peripheral specified by the UART handle.</p></td>
 </tr>
-<tr class="row-even"><td><p>void</p></td>
+<tr class="row-odd"><td><p>void</p></td>
 <td><p><strong><a class="reference internal" href="#function-uart-proclinestatuserr"><span class="std std-ref">UART_procLineStatusErr</span></a></strong>(<a class="reference internal" href="../Classes/struct_cdd_uart___object.html"><span class="std std-doc">CddUart_Handle</span></a> hUart)</p></td>
 <td><p>Function to check various error conditions in uart.</p></td>
 </tr>
@@ -3243,7 +3247,7 @@ This API reads a byte from the Receiver Buffer Register (RBR). It checks once if
 </section>
 <section id="function-uart-intrenable">
 <h3>function UART_intrEnable<a class="headerlink" href="#function-uart-intrenable" title="Link to this heading"></a></h3>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">UART_intrEnable</span><span class="p">(</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">UART_intrEnable</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">intrFlag</span>
 <span class="p">)</span>
@@ -3269,6 +3273,23 @@ This API enables the specified interrupts in the UART mode of operation.</p>
 </ul>
 <p><strong>See</strong>: UART_open</p>
 <p><strong>Note</strong>: This API modifies the contents of UART Interrupt Enable Register (IER). Modifying the bits IER[7:4] requires that EFR[4] be set. This API does the needful before it accesses IER. Moreover, this API should be called when UART is operating in UART 16x Mode, UART 13x Mode or UART 16x Auto-baud mode.</p>
+</section>
+<section id="function-uart-fifoconfig">
+<h3>function UART_fifoConfig<a class="headerlink" href="#function-uart-fifoconfig" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">UART_fifoConfig</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baseAddr</span><span class="p">,</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">fifoConfig</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+This API configures the FIFO settings for the UART instance.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>baseAddr</strong> Memory address of the UART instance being used.</p></li>
+<li><p><strong>fifoConfig</strong> FIFO configuration value specifying TX/RX granularity, trigger levels, DMA mode, and related settings.</p></li>
+</ul>
+<p><strong>Return</strong>: Returns the FIFO configuration status.</p>
 </section>
 <section id="function-uart-intrdisable">
 <h3>function UART_intrDisable<a class="headerlink" href="#function-uart-intrdisable" title="Link to this heading"></a></h3>

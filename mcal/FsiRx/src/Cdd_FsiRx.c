@@ -117,7 +117,7 @@ Cdd_FsiRx_Init(P2CONST(Cdd_FsiRx_ConfigType, AUTOMATIC, CDD_FsiRx_CFG) Configura
     Cdd_FsiRx_HwUnitObjType    *hwObj;
 
 #if (STD_ON == CDD_FSI_RX_VARIANT_PRE_COMPILE)
-    if (ConfigPtr == NULL_PTR)
+    if (ConfigurationPtr == NULL_PTR)
     {
         ConfigPtr = &CDD_FSI_RX_INIT_CONFIG_PC;
     }
@@ -316,7 +316,7 @@ Cdd_FsiRx_setUpBuffer(Cdd_FsiRx_HWUnitType HwUnitId,
     {
         CddFsiRx_ReportDetError(CDD_FSI_RX_SETUP_BUFFER_SID, CDD_FSI_RX_E_PARAM_VALUE);
     }
-    else if ((RxDataLength < CDD_FSI_RX_DATA_1_WORD_LENGTH) || (RxDataLength > CDD_FSI_RX_DATA_16_WORD_LENGTH))
+    else if (RxDataLength > CDD_FSI_RX_DATA_16_WORD_LENGTH)
     {
         CddFsiRx_ReportDetError(CDD_FSI_RX_SETUP_BUFFER_SID, CDD_FSI_RX_E_PARAM_LENGTH);
     }

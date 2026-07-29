@@ -142,7 +142,7 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
     Cdd_FsiTx_HwUnitObjType    *hwObj;
 
 #if (STD_ON == CDD_FSI_TX_VARIANT_PRE_COMPILE)
-    if (ConfigPtr == NULL_PTR)
+    if (ConfigurationPtr == NULL_PTR)
     {
         ConfigPtr = &CDD_FSI_TX_INIT_CONFIG_PC;
     }
@@ -151,7 +151,7 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
     ConfigPtr = ConfigurationPtr;
 #endif /* (STD_ON == CDD_FSI_TX_VARIANT_POST_BUILD) */
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
-    if (CDD_FSI_TX_INIT == Cdd_FsiTx_DriverStatus)
+    if (CDD_FSI_TX_UNINIT != Cdd_FsiTx_DriverStatus)
     {
         CddFsiTx_ReportDetError(CDD_FSI_TX_INIT_SID, CDD_FSI_TX_E_ALREADY_INITIALIZED);
     }
@@ -305,10 +305,12 @@ Cdd_FsiTx_Ping(Cdd_FsiTx_HWUnitType HwUnitId)
 
         hwObj   = &(Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId]);
         retVal |= CddFsiTx_PingTransmit(hwObj);
+        /* TI_COVERAGE_GAP_START - [Branch] CddFsiTx_PingTransmit API never fails */
         if (retVal != E_OK)
         {
             CddFsiTx_ReportRuntimeError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_INVALID_EVENT);
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     return retVal;
 }
