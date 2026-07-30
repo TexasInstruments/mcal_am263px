@@ -965,17 +965,7 @@ FUNC(Std_ReturnType, CAN_CODE) Can_Write(Can_HwHandleType Hth, const Can_PduType
             /* CanSM has triggered a new write after L1 timeout. Stop the BusOff
              * recovery.
              * CanSM will trigger a new bus off recovery sequence. */
-
-            /* TI_COVERAGE_GAP_START [Branch] Controller ID boundary check; MsgCntrlr always valid in test */
-            if (MsgCntrlr < CAN_NUM_CONTROLLER)
-            {
-                status = Can_Write_Internal(MsgCntrlr, HwHandle, Hth, PduInfo);
-            }
-            else
-            {
-                status = E_NOT_OK;
-            }
-            /* TI_COVERAGE_GAP_STOP */
+            status = Can_Write_Internal(MsgCntrlr, HwHandle, Hth, PduInfo);
         }
     }
     return status;

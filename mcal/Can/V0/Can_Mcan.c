@@ -981,28 +981,21 @@ void Can_mcanSetUpController(uint32 baseAddr)
 
     /* reset MCAN Module */
     MCAN_reset(baseAddr);
-    /* TI_COVERAGE_GAP_START [Branch]
-     * status initialized to E_OK; first condition always True on entry */
-    if (((StatusType)E_OK) == status)
+    /* Wait for FSM to to come out of reset */
+    while ((uint32)TRUE == MCAN_isInReset(baseAddr))
     {
-        /* Wait for FSM to to come out of reset */
-        while ((uint32)TRUE == MCAN_isInReset(baseAddr))
+        /* Below API can change start time, so use temp variable */
+        if (tempCount <= 0U)
         {
-            /* Below API can change start time, so use temp variable */
-            if (tempCount <= 0U)
-            {
-                /* timeout */
+            /* timeout */
 #ifdef CAN_E_HARDWARE_ERROR
-                (void)Dem_SetEventStatus(CAN_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
+            (void)Dem_SetEventStatus(CAN_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
-                status = E_NOT_OK;
-                break;
-            }
-            MCAL_SW_DELAY(tempCount);
+            status = E_NOT_OK;
+            break;
         }
+        MCAL_SW_DELAY(tempCount);
     }
-    /* TI_COVERAGE_GAP_STOP [Branch] */
-
     /* Put MCAN in SW initialization mode */
     MCAN_setOpMode(baseAddr, (uint32)MCAN_OPERATION_MODE_SW_INIT);
 
