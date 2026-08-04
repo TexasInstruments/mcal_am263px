@@ -261,7 +261,7 @@ FUNC(uint32, WDG_CODE) Wdg_getCurrentDownCounter(uint32 baseAddr)
  *
  */
 
-/* TI_COVERAGE_GAP_START This function causes system reset cannot be recreated in test environment */
+/* TI_COVERAGE_GAP_START [Function/Line] This function causes system reset cannot be recreated in test environment */
 FUNC(void, WDG_CODE) Wdg_generateSysReset(uint32 baseAddr)
 {
     ((rtiBASE_t*)baseAddr)->WDKEY = WDG_TRIGGER_FIRST_KEY;
