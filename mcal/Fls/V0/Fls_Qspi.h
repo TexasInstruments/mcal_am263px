@@ -463,13 +463,11 @@ void Fls_Interrupt_Enable(void);
  *           This function also enables the clock for QSPI module.
  *           This can only be done if QSPI module is not busy.
  *
- *  \param   handle           A #QSPI_Handle returned from a #QSPI_open()
- *
  *  \param   clkDividerVal    Clock divider value to be set.
  *
  *  \return  #SystemP_SUCCESS on success, #SystemP_FAILURE otherwise
  */
-Std_ReturnType Fls_Qspi_SetPreScaler(QSPI_Handle handle, uint32 clkDividerVal);
+Std_ReturnType Fls_Qspi_SetPreScaler(uint32 clkDividerVal);
 
 void Fls_hwi(void);
 

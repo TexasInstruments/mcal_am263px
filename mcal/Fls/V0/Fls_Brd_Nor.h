@@ -249,6 +249,8 @@ Std_ReturnType        Fls_norAsyncChipErase(void);
 Std_ReturnType        Nor_QspiSetQeBit(QSPI_Handle handle, uint8 qeType);
 Std_ReturnType        Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType);
 void                  Fls_ResetStateMachines(void);
+Std_ReturnType        Fls_norOpen_sub(QSPI_Handle handle, QSPI_Object *object);
+void                  Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
 /* ========================================================================== */
 /*                            Global Variables                                */
 /* ========================================================================== */

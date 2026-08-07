@@ -76,7 +76,6 @@
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
 static FUNC(void, CDD_FSIRX_CODE) CddFsiRx_delayWait(uint32 delay);
-
 #if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
 static void           CddFsiRx_IrqDmaRx(void *hwUnitObj);
 static Std_ReturnType CddFsiRxDma_ModuleChannelConfigure(Cdd_FsiRx_HwUnitObjType           *hwUnitObj,
@@ -126,9 +125,8 @@ void CddFsiRx_hwUnitInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj)
     CddFsiRx_clearRxModuleReset(baseAddr);
     CddFsiRx_delayWait(10U);
 
-    {
-        (void)CddFsiRx_setRxDataWidth(baseAddr, CDD_FSI_RX_SINGLE_DATA_LANE);
-    }
+    (void)CddFsiRx_setRxDataWidth(baseAddr, CDD_FSI_RX_SINGLE_DATA_LANE);
+
 #if (STD_OFF == CDD_FSI_RX_MAIN_FUNCTION_API)
     if (hwUnitObj->hwUnitCfg.receptionMode == CDD_FSI_RX_INTERRUPT_MODE)
     {
@@ -140,6 +138,7 @@ void CddFsiRx_hwUnitInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj)
     CddFsiRx_ForceRxBufferPtr(baseAddr, 0U);
     CddFsiRx_enableRxPingWatchdogTimer(baseAddr, hwUnitObj->hwUnitCfg.pingWdgTriggerTimeout);
     CddFsiRx_delayWait(10U);
+
     CddFsiRx_enableRxFrameWatchdogTimer(baseAddr, hwUnitObj->hwUnitCfg.frameWdgTriggerTimeout);
     CddFsiRx_delayWait(10U);
 #if (STD_OFF == CDD_FSI_RX_MAIN_FUNCTION_API)
@@ -346,8 +345,9 @@ void CddFsiRx_resetDrvObj(CddFsiRx_DriverObjType *drvObj)
 #if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
 Std_ReturnType CddFsiRx_DMAdataReceive(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
 {
-    uint32 baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
-    uint8  retVal, bufIdx = 0U;
+    Std_ReturnType retVal   = E_NOT_OK;
+    uint32         baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
+    uint8          bufIdx   = 0U;
 
     if (TRUE == Cdd_Dma_GetInitStatus())
     {
@@ -368,12 +368,8 @@ Std_ReturnType CddFsiRx_DMAdataReceive(Cdd_FsiRx_HwUnitObjType *hwUnitObj)
         }
         else
         {
-            retVal = FALSE;
+            retVal = E_NOT_OK;
         }
-    }
-    else
-    {
-        retVal = FALSE;
     }
 
     return retVal;
@@ -519,20 +515,6 @@ Std_ReturnType CddFsiRx_ResetRxSubModules(const Cdd_FsiRx_HwUnitObjType *hwUnitO
     return (retVal);
 }
 
-/******************************************************************************/
-static FUNC(void, CDD_FSIRX_CODE) CddFsiRx_delayWait(uint32 delay)
-{
-    volatile uint32 tempCount = delay;
-    /* each unit of SW_delay equals to 9 clockcycle, so divided by 9U*/
-    if (delay > 9U)
-    {
-        tempCount = delay / 9U;
-    }
-    while (tempCount <= 0U)
-    {
-        MCAL_SW_DELAY(tempCount);
-    }
-}
 /************************************************************************************/
 FUNC(void, CDD_FSIRX_CODE)
 CddFsiRx_SetRxSoftwareFrameSize(uint32 base, CddFsiRx_DataLengthType dataWidth)
@@ -548,6 +530,22 @@ CddFsiRx_SetRxSoftwareFrameSize(uint32 base, CddFsiRx_DataLengthType dataWidth)
 }
 /******************************************************************************/
 
+static FUNC(void, CDD_FSIRX_CODE) CddFsiRx_delayWait(uint32 delay)
+{
+    volatile uint32 tempCount = delay;
+    /* each unit of SW_delay equals to 9 clockcycle, so divided by 9U*/
+    if (delay > 9U)
+    {
+        tempCount = delay / 9U;
+    }
+    while (tempCount <= 0U)
+    {
+        break;
+    }
+    MCAL_SW_DELAY(tempCount);
+}
+
+/******************************************************************************/
 #define CDD_FSIRX_STOP_SEC_CODE
 #include "Cdd_FsiRx_MemMap.h"
 /*******************************************************************************/

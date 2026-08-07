@@ -334,7 +334,7 @@ QSPI Parameters.</p>
 <td><p>This function check the Hardware interrupt status register.</p></td>
 </tr>
 <tr class="row-even"><td><p>Std_ReturnType</p></td>
-<td><p><strong><a class="reference internal" href="#function-fls-qspi-setprescaler"><span class="std std-ref">Fls_Qspi_SetPreScaler</span></a></strong>(<a class="reference internal" href="#typedef-qspi-handle"><span class="std std-ref">QSPI_Handle</span></a> handle, uint32 clkDividerVal)</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-qspi-setprescaler"><span class="std std-ref">Fls_Qspi_SetPreScaler</span></a></strong>(uint32 clkDividerVal)</p></td>
 <td><p>Set the QSPI clock register divider value.</p></td>
 </tr>
 <tr class="row-odd"><td><p>void</p></td>
@@ -629,7 +629,6 @@ This function check the Hardware interrupt status register.</p>
 <section id="function-fls-qspi-setprescaler">
 <h3>function Fls_Qspi_SetPreScaler<a class="headerlink" href="#function-fls-qspi-setprescaler" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Fls_Qspi_SetPreScaler</span><span class="p">(</span>
-<span class="w">    </span><span class="n">QSPI_Handle</span><span class="w"> </span><span class="n">handle</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">clkDividerVal</span>
 <span class="p">)</span>
 </pre></div>
@@ -641,7 +640,6 @@ Set the QSPI clock register divider value.</p>
 <p>Function Set the QSPI clock register divider value</p>
 <p><strong>Parameters</strong>:</p>
 <ul class="simple">
-<li><p><strong>handle</strong> A QSPI_Handle returned from a QSPI_open()</p></li>
 <li><p><strong>clkDividerVal</strong> Clock divider value to be set.</p></li>
 </ul>
 <p><strong>Return</strong>: SystemP_SUCCESS on success, SystemP_FAILURE otherwise</p>

@@ -277,9 +277,14 @@ extern "C" {
 [!ENDLOOP!][!//
 [!LOOP "SpiJob/*"!]
 /** \brief Symbolic Name Chip Select  - [!"num:i($SpiJobIndex)"!] */
-#define SpiConf_SpiExternalDevice_CS[!"num:i($SpiJobIndex)"!] ([!"concat('SPI_',substring-after(node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsIdentifier),'S'))"!])
 [!VAR "SpiCsIdentifier" = "node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsIdentifier)"!]
+[!VAR "SpiCsSelectionVal" = "node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsSelection)"!]
+[!IF "$SpiCsSelectionVal != 'SPI_CS_VIA_GPIO'"!]
+#define SpiConf_SpiExternalDevice_CS[!"num:i($SpiJobIndex)"!] ([!"concat('SPI_',substring-after(node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsIdentifier),'S'))"!])
 [!IF "$SpiCsIdentifier != 'SCS0'"!][!IF "$SpiCsIdentifier != 'SCS1'"!][!IF "$SpiCsIdentifier != 'SCS2'"!][!IF "$SpiCsIdentifier != 'SCS3'"!][!ERROR "Invalid CS identifier selected."!][!ENDIF!][!ENDIF!][!ENDIF!][!ENDIF!]
+[!ELSE!]
+#define SpiConf_SpiExternalDevice_CS[!"num:i($SpiJobIndex)"!] ([!"concat('SPI_',substring-after(node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsIdentifier),'S'))"!])
+[!ENDIF!]
 /** \brief Symbolic Name Job Id - [!"SpiJobId"!] [!"@name"!] */
 #define SpiConf_SpiJob_[!"@name"!]            [!"SpiJobId"!]
 [!VAR "SpiJobIndex" = "$SpiJobIndex+1"!]
@@ -289,8 +294,27 @@ extern "C" {
 #define SpiConf_SpiSequence_[!"@name"!]  [!"SpiSequenceId"!]
 [!ENDLOOP!]
 
+[!VAR "is_gpio_chip_select" = "0"!][!//
+[!LOOP "SpiExternalDevice/*"!][!//
+[!IF "node:exists(SpiCsSelection)"!][!//
+[!IF "node:value(SpiCsSelection) = 'SPI_CS_VIA_GPIO'"!][!//
+[!VAR "is_gpio_chip_select" = "1"!][!//
+[!ENDIF!][!//
+[!ENDIF!][!//
+[!ENDLOOP!][!//
+/** \brief Macro to ON/OFF GPIO CS using DIO module */
+#define SPI_GPIO_CS_ENABLED       [!IF "num:i($is_gpio_chip_select) = '1'"!]STD_ON[!ELSE!]STD_OFF[!ENDIF!]
+
 [!LOOP "SpiExternalDevice/*"!][!//
 #define SpiConf_SpiExternalDevice_[!"@name"!]_CS[!"substring-after(SpiCsIdentifier,'CS')"!] [!"SpiCsIdentifier"!]
+[!IF "node:exists(SpiCsSelection) and node:value(SpiCsSelection) = 'SPI_CS_VIA_GPIO'"!][!//
+[!IF "SpiCsGpioRef = ''"!][!ERROR "SpiCsGpioRef is not set. When SpiCsSelection = SPI_CS_VIA_GPIO, a DIO channel must be selected for SpiCsGpioRef."!][!ENDIF!][!//
+/** \brief Symbolic Name Chip Select GPIO - [!"@name"!] */
+#define SpiConf_SpiExternalDevice_[!"@name"!]_CS (DioConf_DioChannel_[!"node:name(node:path(node:ref(SpiCsGpioRef)))"!])
+[!ELSE!]
+/** \brief Invalid GPIO CS identifier for peripheral engine CS */
+#define SpiConf_SpiExternalDevice_[!"@name"!]_CS (SPI_PERIPHERAL_CS_IDENTIFIER)
+[!ENDIF!]
 [!ENDLOOP!][!//
 [!LOOP "SpiExternalDevice/*"!][!//
 /** \brief Symbolic Name HW Unit - [!"num:i($SpiHwUnitIndex)"!] */
@@ -559,6 +583,24 @@ typedef enum
     SPI_CS3
 } Spi_CsPinType;
 
+/** \brief Identifier used when CS is via peripheral engine (not GPIO) */
+#define SPI_PERIPHERAL_CS_IDENTIFIER  (256U)
+
+/**
+ *  \brief SPI Chip Select Selection - GPIO or peripheral engine.
+ *  Design: MCAL-25157
+ */
+typedef enum
+{
+    /** \brief CS is driven via GPIO (DIO channel) */
+    SPI_CS_VIA_GPIO = 0U,
+    /** \brief CS is driven by MCSPI peripheral engine */
+    SPI_CS_VIA_PERIPHERAL_ENGINE
+} Spi_CsSelectionType;
+
+/** \brief DIO channel type for GPIO chip select. Design: MCAL-25157 */
+typedef uint32 Spi_CsGpioIdType;
+
 /**
  *  \brief SPI Clock Mode - sets the clock polarity and phase.
  *   Note: These values are a direct register mapping.
@@ -759,6 +801,11 @@ typedef struct
     Spi_DataLineReceiveType     receptionLineEnable;
     /** \brief Defines the data lines selected for transmission. */
     Spi_DataLineTransmitType    transmissionLineEnable;
+    /** \brief CS selection - GPIO or peripheral engine. Design: MCAL-25157 */
+    Spi_CsSelectionType      csSelect;
+    /** \brief DIO channel ID for GPIO CS (valid when csSelect == SPI_CS_VIA_GPIO).
+     *   Design: MCAL-25157 */
+    Spi_CsGpioIdType       csGpioId;
 } Spi_McspiExternalDeviceConfigType;
 
 /**

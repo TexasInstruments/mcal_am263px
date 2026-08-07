@@ -109,7 +109,7 @@ QSPI driver object
 | void | **[Fls_QspiIntClear](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspiintclear)**(uint32 intFlag)| This function is used to clear word or frame complete interrupt.  |
 | void | **[Fls_IntClearDisable](../Modules/group___f_l_s___q_s_p_i.md#function-fls_intcleardisable)**(void )| This function Disables and Clear Interrupt Register.  |
 | void | **[Fls_Interrupt_Enable](../Modules/group___f_l_s___q_s_p_i.md#function-fls_interrupt_enable)**(void )| This function check the Hardware interrupt status register.  |
-| Std_ReturnType | **[Fls_Qspi_SetPreScaler](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_setprescaler)**([QSPI_Handle](../Modules/group___f_l_s___q_s_p_i.md#typedef-qspi_handle) handle, uint32 clkDividerVal)| Set the QSPI clock register divider value.  |
+| Std_ReturnType | **[Fls_Qspi_SetPreScaler](../Modules/group___f_l_s___q_s_p_i.md#function-fls_qspi_setprescaler)**(uint32 clkDividerVal)| Set the QSPI clock register divider value.  |
 | void | **[Fls_hwi](../Modules/group___f_l_s___q_s_p_i.md#function-fls_hwi)**(void )|  |
 
 
@@ -548,7 +548,6 @@ This function check the Hardware interrupt status register.
 
 ```
 Std_ReturnType Fls_Qspi_SetPreScaler(
-    QSPI_Handle handle,
     uint32 clkDividerVal
 )
 ```
@@ -567,8 +566,6 @@ Function Set the QSPI clock register divider value
 
 **Parameters**: 
 
-  
-* **handle** A QSPI_Handle returned from a QSPI_open()
   
 * **clkDividerVal** Clock divider value to be set.
 

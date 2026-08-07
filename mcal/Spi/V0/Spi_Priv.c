@@ -292,13 +292,10 @@ Std_ReturnType Spi_startSeqSync(Spi_SeqObjType *seqObj)
          * and hence the sequence result is already set. So
          * don't overwrite the sequence status with OK for the
          * subsequent job */
-        /* TI_COVERAGE_GAP_START [Branch] Spi_mcspiXferJob always returns SPI_JOB_OK so seqResult
-         stays SPI_SEQ_PENDING, FALSE path unreachable */
         if (seqObj->seqResult == SPI_SEQ_PENDING)
         {
             seqObj->seqResult = SPI_SEQ_OK;
         }
-        /* TI_COVERAGE_GAP_STOP */
 
 #ifdef SPI_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus(SPI_E_HARDWARE_ERROR, DEM_EVENT_STATUS_PASSED);
@@ -831,13 +828,10 @@ static void Spi_scheduleJob(Spi_JobObjType *jobObj)
 
     hwUnitObj = jobObj->hwUnitObj;
 
-    /* TI_COVERAGE_GAP_START [Branch] Async jobs run on non-DMA HW units in coverage configs,
-     enableDmaMode TRUE branch never reached in scheduleJob */
     if (hwUnitObj->enableDmaMode == (boolean)TRUE)
     {
         isIntrMode = (uint32)FALSE;
     }
-    /* TI_COVERAGE_GAP_STOP */
     else
     {
         if (SPI_POLLING_MODE == Spi_DrvObj.asyncMode)
@@ -871,9 +865,6 @@ static void Spi_scheduleJob(Spi_JobObjType *jobObj)
     chObj = Spi_getCurrChannelObj(chId);
     Spi_mcspiConfigCh(hwUnitObj, jobObj, chObj);
 
-    /* TI_COVERAGE_GAP_START [Branch] Async jobs run on non-DMA HW units in coverage configs,
-     enableDmaMode FALSE branch (DMA start path) never reached without causing
-     regression in Spi_Mcspi.c via unexpected DMA events during real loopback tests */
     if (hwUnitObj->enableDmaMode != (boolean)TRUE)
     {
         Spi_mcspiStart(hwUnitObj, jobObj, isIntrMode);
@@ -884,7 +875,6 @@ static void Spi_scheduleJob(Spi_JobObjType *jobObj)
         Spi_dmaTransfer(hwUnitObj, jobObj, chObj, chObj->numWordsTxRx);
     }
 #endif
-    /* TI_COVERAGE_GAP_STOP */
 }
 
 static void Spi_scheduleAllJobsSyncTransmit(Spi_SeqObjType *seqObj)
@@ -1117,6 +1107,35 @@ Spi_HWRegisterReadback(Spi_HWUnitType HWUnit, P2VAR(Spi_RegisterReadbackType, AU
     return (retVal);
 }
 #endif /* #if (STD_ON == SPI_REGISTER_READBACK_API) */
+
+#if (SPI_GPIO_CS_ENABLED == STD_ON)
+/*
+ * Design: MCAL-25157
+ * \brief Assert or deassert the GPIO chip select for a job.
+ *        Calls Dio_WriteChannel respecting CS polarity.
+ *
+ * \param jobObj  Pointer to the job object
+ * \param assert  TRUE to assert CS (start of transfer), FALSE to deassert
+ */
+void Spi_ConfigGpioChipSelect(const Spi_JobObjType *jobObj, boolean level)
+{
+    Spi_LevelType csPolarity = jobObj->extDevCfg->mcspi.csPolarity;
+    Dio_LevelType pinLevel;
+
+    /* Active-low polarity  : assert -> STD_LOW,  deassert -> STD_HIGH
+     * Active-high polarity : assert -> STD_HIGH, deassert -> STD_LOW  */
+    if (SPI_LOW == csPolarity)
+    {
+        pinLevel = (level == (boolean)TRUE) ? (Dio_LevelType)STD_LOW : (Dio_LevelType)STD_HIGH;
+    }
+    else
+    {
+        pinLevel = (level == (boolean)TRUE) ? (Dio_LevelType)STD_HIGH : (Dio_LevelType)STD_LOW;
+    }
+
+    Dio_WriteChannel((Dio_ChannelType)jobObj->extDevCfg->mcspi.csGpioId, pinLevel);
+}
+#endif /* #if (SPI_GPIO_CS_ENABLED == STD_ON) */
 
 #define SPI_STOP_SEC_CODE
 #include "Spi_MemMap.h"

@@ -32,5 +32,7 @@ SPI Job configuration structure specific to McSPI peripheral.
 |  [Spi_LevelType](../Modules/group___s_p_i.md#enum-spi_leveltype) | startBitLevel |  Start-bit polarity used when startBitEnable is TRUE.  |
 |  [Spi_DataLineReceiveType](../Modules/group___s_p_i.md#enum-spi_datalinereceivetype) | receptionLineEnable |  Defines the data lines selected for reception.  |
 |  [Spi_DataLineTransmitType](../Modules/group___s_p_i.md#enum-spi_datalinetransmittype) | transmissionLineEnable |  Defines the data lines selected for transmission.  |
+|  [Spi_CsSelectionType](../Modules/group___s_p_i.md#enum-spi_csselectiontype) | csSelect |  CS selection - GPIO or peripheral engine. Design: MCAL-25157.  |
+|  [Spi_CsGpioIdType](../Modules/group___s_p_i.md#typedef-spi_csgpioidtype) | csGpioId |  DIO channel ID for GPIO CS (valid when csSelect == SPI_CS_VIA_GPIO). Design: MCAL-25157.  |
 
 

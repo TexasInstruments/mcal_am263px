@@ -96,11 +96,9 @@ static void           Fls_JobErrorNotificationFxn(Fls_JobType job, Std_ReturnTyp
 static void           Fls_JobErrorNotification1(Fls_JobType job, Std_ReturnType retVal);
 static Std_ReturnType Fls_CallNorErase(uint32 chunkSize);
 static uint32         Fls_setchuncksize(void);
-static Std_ReturnType Fls_norOpen_sub(QSPI_Handle handle, QSPI_Object *object);
 static Std_ReturnType Fls_norQspiAsyncWaitReadyBlock(Fls_InternalStateType retstatus);
 static Std_ReturnType Fls_norQspiAsyncWaitReadyChip(Fls_InternalStateType retstatus);
 static Std_ReturnType Fls_norQspiAsyncWaitReadysector(Fls_InternalStateType retstatus);
-static void           Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
 static uint8          Fls_check_Memmap_Enabled_DMA(void);
 static uint8          Fls_norDmaRead(void);
 void                  ReportFlsError(Fls_JobType job);
@@ -146,43 +144,31 @@ Std_ReturnType Nor_QspiCmdRead(QSPI_Handle handle, uint8 cmd, uint32 cmdAddr, ui
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
     QSPI_CmdParams rdParams;
 
-    if (Fls_Qspi_ParamsInit(&rdParams) == (Std_ReturnType)E_OK)
-    {
-        rdParams.cmd       = cmd;
-        rdParams.cmdAddr   = cmdAddr;
-        rdParams.rxDataBuf = rxBuf;
-        rdParams.txDataBuf = NULL_PTR;
-        rdParams.DataLen   = rxLen;
+    Fls_Qspi_ParamsInit(&rdParams);
+    rdParams.cmd       = cmd;
+    rdParams.cmdAddr   = cmdAddr;
+    rdParams.rxDataBuf = rxBuf;
+    rdParams.txDataBuf = NULL_PTR;
+    rdParams.DataLen   = rxLen;
 
-        if (handle != NULL_PTR)
+    if (handle != NULL_PTR)
+    {
+        if (Fls_Qspi_ReadCmd(handle, &rdParams) == (Std_ReturnType)E_OK)
         {
-            if (Fls_Qspi_ReadCmd(handle, &rdParams) == (Std_ReturnType)E_OK)
-            {
-                retVal = (Std_ReturnType)E_OK;
-            }
-            /* TI_COVERAGE_GAP_START [Branch/Line] QSPI read command failure is a hardware/bus fault; not inducible in
-             * test environment */
-            else
-            {
-                retVal = (Std_ReturnType)E_NOT_OK;
-            }
-            /* TI_COVERAGE_GAP_STOP */
+            retVal = (Std_ReturnType)E_OK;
         }
-        /* TI_COVERAGE_GAP_START [Branch/Line] NULL handle can only occur on QSPI hardware initialization failure; not
-         * inducible in test environment */
+        /* TI_COVERAGE_GAP_START [Branch/Line] QSPI read command failure is a hardware/bus fault; not inducible in
+         * test environment */
         else
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
         /* TI_COVERAGE_GAP_STOP */
     }
-    /* TI_COVERAGE_GAP_START [Branch/Line] Fls_Qspi_ParamsInit failure is a hardware/memory fault; not inducible in test
-     * environment */
     else
     {
-        retVal = E_NOT_OK;
+        retVal = (Std_ReturnType)E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
 
     return retVal;
 }
@@ -199,31 +185,29 @@ Std_ReturnType Nor_QspiCmdWrite(QSPI_Handle handle, uint8 cmd, uint32 cmdAddr, u
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
 
     QSPI_CmdParams wrParams;
-    if (Fls_Qspi_ParamsInit(&wrParams) == (Std_ReturnType)E_OK)
+    Fls_Qspi_ParamsInit(&wrParams);
+    wrParams.cmd       = cmd;
+    wrParams.cmdAddr   = cmdAddr;
+    wrParams.txDataBuf = txBuf;
+    wrParams.rxDataBuf = NULL_PTR;
+    wrParams.DataLen   = txLen;
+    if (handle != NULL_PTR)
     {
-        wrParams.cmd       = cmd;
-        wrParams.cmdAddr   = cmdAddr;
-        wrParams.txDataBuf = txBuf;
-        wrParams.rxDataBuf = NULL_PTR;
-        wrParams.DataLen   = txLen;
-        if (handle != NULL_PTR)
+        if (Fls_Qspi_WriteCmd(handle, &wrParams) == (Std_ReturnType)E_OK)
         {
-            if (Fls_Qspi_WriteCmd(handle, &wrParams) == (Std_ReturnType)E_OK)
-            {
-                retVal = (Std_ReturnType)E_OK;
-            }
-            /* TI_COVERAGE_GAP_START [Branch/Line] QSPI write command failure is a hardware/bus fault; not inducible in
-             * test environment */
-            else
-            {
-                retVal = (Std_ReturnType)E_NOT_OK;
-            }
-            /* TI_COVERAGE_GAP_STOP */
+            retVal = (Std_ReturnType)E_OK;
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] QSPI write command failure is a hardware/bus fault; not inducible in
+         * test environment */
         else
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
+        /* TI_COVERAGE_GAP_STOP */
+    }
+    else
+    {
+        retVal = (Std_ReturnType)E_NOT_OK;
     }
     return retVal;
 }
@@ -244,13 +228,10 @@ Std_ReturnType Nor_QspiWriteEnableLatched(QSPI_Handle handle, uint32 timeOut)
     cmd                            = Fls_Config_SFDP_Ptr->cmdRdsr;
     do
     {
-        /* TI_COVERAGE_GAP_START [Branch/Line] Timeout (tempCount reaching 0) requires flash hardware to never assert
-         * WEL bit; not inducible in test environment */
         if (tempCount <= 0U)
         {
             stepcmd = 1U;
         }
-        /* TI_COVERAGE_GAP_STOP */
         if (stepcmd == 0U)
         {
             retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, readStatus, 1);
@@ -267,15 +248,15 @@ Std_ReturnType Nor_QspiWriteEnableLatched(QSPI_Handle handle, uint32 timeOut)
             break;
         }
         MCAL_SW_DELAY(tempCount);
+        /* TI_COVERAGE_GAP_START [Branch] RDSR command failure is a hardware/bus fault; not inducible in test
+         * environment */
     } while ((readStatus[0U] & FLS_QSPI_NOR_SR_WEL) == 0U);
+    /* TI_COVERAGE_GAP_STOP */
 
-    /* TI_COVERAGE_GAP_START [Branch/Line] Timeout path requires flash WEL bit to never assert within timeout; not
-     * inducible in test environment */
     if (tempCount == (uint32)0U)
     {
         retVal = (Std_ReturnType)E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
 
     if ((readStatus[0U] & FLS_QSPI_NOR_SR_WEL) != (uint8)0U)
     {
@@ -303,6 +284,7 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
 {
     Std_ReturnType  retVal    = (Std_ReturnType)E_OK;
     volatile uint32 tempCount = timeOut;
+
     if (timeOut > 9U)
     {
         tempCount = timeOut / 9U;
@@ -316,23 +298,17 @@ Std_ReturnType Nor_QspiWaitReady(QSPI_Handle handle, uint32 timeOut)
 
     do
     {
-        /* TI_COVERAGE_GAP_START [Branch/Line] Timeout (tempCount reaching 0) requires flash hardware to remain busy
-         * indefinitely; not inducible in test environment */
         if (tempCount <= 0U)
         {
             stepcmd = 1U;
         }
-        /* TI_COVERAGE_GAP_STOP */
         if (stepcmd == 0U)
         {
             retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, readStatus, 1);
-            /* TI_COVERAGE_GAP_START [Branch/Line] RDSR command failure is a hardware/bus fault; not inducible in test
-             * environment */
             if (retVal == (Std_ReturnType)E_NOT_OK)
             {
                 stepcmd = 1U;
             }
-            /* TI_COVERAGE_GAP_STOP */
         }
         if (stepcmd == 1U)
         {
@@ -374,13 +350,10 @@ Fls_InternalStateType Nor_QspiAsyncWaitReady(QSPI_Handle handle, uint32 timeOut)
 
     retVal1 = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, readStatus, 1);
 
-    /* TI_COVERAGE_GAP_START [Branch/Line] RDSR command failure is a hardware/bus fault; not inducible in test
-     * environment */
     if (retVal1 == E_NOT_OK)
     {
         retVal = FLS_INTERNAL_JOB_FAIL;
     }
-    /* TI_COVERAGE_GAP_STOP */
     else
     {
         /* Check for Status. */
@@ -408,12 +381,13 @@ Std_ReturnType Nor_QspiReadId(QSPI_Handle handle)
     uint8          cmd = Fls_Config_SFDP_Ptr->idCfg.cmd;
 
     retVal = Nor_QspiCmdRead(handle, cmd, FLS_QSPI_CMD_INVALID_ADDR, idCode, Fls_Config_SFDP_Ptr->idCfg.numBytes);
-
+    /* TI_COVERAGE_GAP_START [Branch] The else branch coverage requires hardware read failure which cannot be induced*/
     if (retVal == (Std_ReturnType)E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         manufacturerId = (uint32)idCode[0];
         deviceId       = ((uint32)idCode[1] << 8U) | ((uint32)idCode[2]);
-        /* TI_COVERAGE_GAP_START [Branch/MC-DC] Manufacturer ID or device ID mismatch requires flash returning
+        /* TI_COVERAGE_GAP_START [Branch/Line] Manufacturer ID or device ID mismatch requires flash returning
          * unexpected RDID bytes; cannot be validated in test environment */
         if (manufacturerId != Fls_Config_SFDP_Ptr->manfId)
         {
@@ -457,10 +431,15 @@ Std_ReturnType Fls_norOpen(void)
     {
         object = ((QSPI_Config *)handle)->object;
     }
+    /* TI_COVERAGE_GAP_START [Branch] NULL handle from Fls_QspiOpen can only occur on QSPI hardware initialization
+     * failure; not inducible in test environment */
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         retVal = Fls_norOpen_sub1();
+        /* TI_COVERAGE_GAP_START [Branch] retVal != E_OK can be covered only upon hardware failure */
         if (retVal == E_OK)
+        /* TI_COVERAGE_GAP_STOP */
         {
             retVal = Fls_norOpen_sub(handle, object);
         }
@@ -468,7 +447,7 @@ Std_ReturnType Fls_norOpen(void)
     return (retVal);
 }
 
-static Std_ReturnType Fls_norOpen_sub(QSPI_Handle handle, QSPI_Object *object)
+Std_ReturnType Fls_norOpen_sub(QSPI_Handle handle, QSPI_Object *object)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
     switch (Fls_DrvObj.Fls_Mode)
@@ -492,8 +471,6 @@ static Std_ReturnType Fls_norOpen_sub(QSPI_Handle handle, QSPI_Object *object)
             object->numAddrBytes = Fls_Config_SFDP_Ptr->addrnumBytes;
             retVal               = Nor_QspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
-        /* TI_COVERAGE_GAP_START [Branch/Line] Default case is unreachable; Fls_Mode is validated during initialization
-         * and only takes defined enum values */
         default:
             object->writeCmd     = Fls_Config_SFDP_Ptr->protos.cmdWr;
             object->readCmd      = Fls_Config_SFDP_Ptr->protos.cmdRd;
@@ -501,7 +478,6 @@ static Std_ReturnType Fls_norOpen_sub(QSPI_Handle handle, QSPI_Object *object)
             object->numAddrBytes = Fls_Config_SFDP_Ptr->addrnumBytes;
             retVal               = Nor_QspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
-            /* TI_COVERAGE_GAP_STOP */
     }
     if (retVal == E_OK)
     {
@@ -578,30 +554,17 @@ static Std_ReturnType Fls_norOpen_sub1(void)
 Std_ReturnType Fls_hwUnitInit(void)
 {
     Std_ReturnType retVal;
-    QSPI_Handle    handle = NULL_PTR;
 
     (void)Fls_QspiHwInit();
 
     retVal = Fls_norOpen();
 
-    handle = Fls_DrvObj.spiHandle;
-
-    if (handle != NULL_PTR)
+    if (retVal != (Std_ReturnType)E_NOT_OK)
     {
-        if (retVal != (Std_ReturnType)E_NOT_OK)
-        {
-            retVal = (Std_ReturnType)E_OK;
-        }
-        /* TI_COVERAGE_GAP_START [Branch/Line] Fls_norOpen failure with non-NULL handle requires hardware fault during
-         * flash initialization; not inducible in test environment */
-        else
-        {
-            retVal = (Std_ReturnType)E_NOT_OK;
-        }
-        /* TI_COVERAGE_GAP_STOP */
+        retVal = (Std_ReturnType)E_OK;
     }
-    /* TI_COVERAGE_GAP_START [Branch/Line] NULL handle here requires Fls_QspiOpen to return NULL; not inducible in test
-     * environment */
+    /* TI_COVERAGE_GAP_START [Branch/Line] Fls_norOpen failure with non-NULL handle requires hardware fault during
+     * flash initialization; not inducible in test environment */
     else
     {
         retVal = (Std_ReturnType)E_NOT_OK;
@@ -609,7 +572,9 @@ Std_ReturnType Fls_hwUnitInit(void)
     /* TI_COVERAGE_GAP_STOP */
 
 #if (FLS_DMA_ENABLE == STD_ON)
+    /* TI_COVERAGE_GAP_START [Branch/Line] retVal != E_OK is coverage only upon hardware init failure*/
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         retVal = Fls_Qspi_dmaChInit(Fls_DrvObj);
     }
@@ -674,7 +639,10 @@ void processJobs(Fls_JobType job)
 
     switch (job)
     {
+        /* TI_COVERAGE_GAP_START [Branch] FLS_JOB_COMPARE case is already covered but not in all configs, hence the gap
+         * here*/
         case FLS_JOB_COMPARE:
+            /* TI_COVERAGE_GAP_STOP */
             retVal = Fls_norCompare(chunkSize);
             break;
         case FLS_JOB_ERASE:
@@ -707,17 +675,14 @@ void processJobs(Fls_JobType job)
             retVal    = Fls_norDmaRead();
             chunkSize = Fls_DrvObj.length;
 #else
-            if (Fls_DrvObj.flsDmaStage == FLS_S_READ_DMA_INIT_STAGE)
-            {
-                retVal = Fls_norRead(chunkSize);
-            }
+            retVal = Fls_norRead(chunkSize);
 #endif
             break;
         case FLS_JOB_WRITE:
 
 #if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
-            /* TI_COVERAGE_GAP_START [Branch/Line] Pre-write blank check failure requires erase to have left non-blank
-             * data; not inducible in standard test environment */
+            /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] Pre-write blank check failure requires erase to have left
+             * non-blank data; not inducible in standard test environment (includes 2 MC-DC gaps)*/
             if ((FlsWriteStage == FLS_S_WRITE_DONE) && (Fls_norBlankCheck(chunkSize) != E_OK))
             {
                 break;
@@ -728,7 +693,10 @@ void processJobs(Fls_JobType job)
             retVal = Fls_norAsyncWrite(chunkSize);
 
 #if (STD_ON == FLS_WRITE_VERIFICATION_ENABLED)
+            /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal != E_OK can be covered only with hardware write failure,
+             * cannot be induced*/
             if ((FlsWriteStage == FLS_S_WRITE_DONE) && (retVal == E_OK))
+            /* TI_COVERAGE_GAP_STOP */
             {
                 retVal = Fls_norCompare(chunkSize);
             }
@@ -740,12 +708,17 @@ void processJobs(Fls_JobType job)
 
 #endif
             break;
-
+            /* TI_COVERAGE_GAP_START [Branch/Line] FLS_JOB_BLANKCHECK case is already covered but not in all configs,
+             * hence the gap here*/
         case FLS_JOB_BLANKCHECK:
+            /* TI_COVERAGE_GAP_STOP */
             retVal = Fls_norBlankCheck(chunkSize);
             break;
 
+        /* TI_COVERAGE_GAP_START [Branch/Line] default case is already covered but not in all configs, hence the gap
+         * here*/
         default:
+            /* TI_COVERAGE_GAP_STOP */
             retVal = E_NOT_OK;
             break;
     }
@@ -773,7 +746,7 @@ static uint8 Fls_norDmaRead(void)
     return retVal;
 }
 
-static void Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize)
+void Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize)
 {
     if (retVal == E_OK)
     {
@@ -844,12 +817,19 @@ static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize)
                 Fls_JobDoneNotification(job, chunkSize);
             }
             break;
+        /* TI_COVERAGE_GAP_START [Branch] FLS_JOB_COMPARE case is already covered but not in all configs, hence the gap
+         * here*/
         case FLS_JOB_COMPARE:
+            /* TI_COVERAGE_GAP_STOP */
             Fls_JobDoneNotification(job, chunkSize);
             break;
         case FLS_JOB_READ:
 #if (FLS_DMA_ENABLE == STD_ON)
+            /* TI_COVERAGE_GAP_START [Branch/MC-DC] Both sub-conditions are always true on entry: DMA reads complete
+             * before this notification fires (flsDmaStage == FLS_S_READ_DMA_DONE), or DMA was not used
+             * (flsEdmaReadEnabled == FALSE); the FALSE branch (DMA enabled but incomplete) is unreachable */
             if ((Fls_DrvObj.flsDmaStage == FLS_S_READ_DMA_DONE) || (Fls_DrvObj.flsEdmaReadEnabled == FALSE))
+            /* TI_COVERAGE_GAP_STOP */
             {
                 Fls_JobDoneNotification(job, chunkSize);
             }
@@ -858,11 +838,16 @@ static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize)
 #endif
 
             break;
+        /* TI_COVERAGE_GAP_START [Branch] FLS_JOB_BLANKCHECK case is already covered but not in all configs, hence the
+         * gap here*/
         case FLS_JOB_BLANKCHECK:
+            /* TI_COVERAGE_GAP_STOP */
             Fls_JobDoneNotification(job, chunkSize);
             break;
+            /* TI_COVERAGE_GAP_START [Branch/Line] This is a static function and Fls_JobType is also valid here.*/
         default:
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
 }
 static void Fls_JobDoneNotification(Fls_JobType job, uint32 chunkSize)
@@ -890,7 +875,10 @@ static void Fls_JobDoneNotification(Fls_JobType job, uint32 chunkSize)
         Fls_DrvObj.status        = MEMIF_IDLE;
         Fls_DrvObj.jobType       = FLS_JOB_NONE;
         Fls_DrvObj.transferred   = Fls_len;
+        /* TI_COVERAGE_GAP_START [Branch] Fls_JobErrorNotification is always non-NULL; it is a mandatory AUTOSAR
+         * callback assigned from the static configuration during Fls_Init() */
         if (Fls_DrvObj.Fls_JobEndNotification != NULL_PTR)
+        /* TI_COVERAGE_GAP_STOP */
         {
             Fls_DrvObj.Fls_JobEndNotification();
         }
@@ -915,7 +903,10 @@ static void Fls_JobErrorNotificationFxn(Fls_JobType job, Std_ReturnType retVal)
     {
         /*Hardware/driver internal error occured*/
         ReportFlsError(job);
+        /* TI_COVERAGE_GAP_START [Branch] Fls_JobErrorNotification is always non-NULL; it is a mandatory AUTOSAR
+         * callback assigned from the static configuration during Fls_Init() */
         if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)
+        /* TI_COVERAGE_GAP_STOP */
         {
             Fls_DrvObj.Fls_JobErrorNotification();
         }
@@ -1083,13 +1074,10 @@ Std_ReturnType Fls_norCompare(uint32 actualChunkSize)
                 retVal = E_COMPARE_MISMATCH;
             }
         }
-        /* TI_COVERAGE_GAP_START [Branch/Line] QSPI read failure during compare is a hardware/bus fault; not inducible
-         * in test environment */
         else
         {
             /* No Actions Required. */
         }
-        /* TI_COVERAGE_GAP_STOP */
     }
     else
     {
@@ -1122,7 +1110,10 @@ Std_ReturnType Fls_norBlankCheck(uint32 actualChunkSize)
         transaction.count      = len;
         retVal                 = Fls_Qspi_ReadMemMapMode(Fls_DrvObj.spiHandle, &transaction);
 
+        /* TI_COVERAGE_GAP_START [Branch] retVal != E_OK is achieved only upon hardware read failure, cannot be induced
+         */
         if ((uint8)E_OK == retVal)
+        /*TI_COVERAGE_GAP_STOP*/
         {
             if (Fls_VerifyBlankCheck_priv((const uint8 *)transaction.buf, len) == TRUE)
             {
@@ -1134,13 +1125,10 @@ Std_ReturnType Fls_norBlankCheck(uint32 actualChunkSize)
             }
         }
     }
-    /* TI_COVERAGE_GAP_START [Branch/Line] NULL handle can only occur on QSPI hardware initialization failure; not
-     * inducible in test environment */
     else
     {
         retVal = (uint8)E_NOT_OK; /*Handle is NULL_PTR*/
     }
-    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 /**
@@ -1154,29 +1142,23 @@ Std_ReturnType Fls_norRead(uint32 actualChunkSize)
     Std_ReturnType retVal = E_OK;
     uint32         offset = Fls_DrvObj.flashAddr;
     uint8         *buf    = Fls_DrvObj.ramAddr;
-    if (retVal == E_OK)
+    if (actualChunkSize > 0U)
     {
-        if (actualChunkSize > 0U)
-        {
-            QSPI_Transaction transaction;
+        QSPI_Transaction transaction;
 
-            Fls_Qspi_TransactionInit(&transaction);
-            transaction.addrOffset = offset;
-            transaction.buf        = (void *)buf;
-            transaction.count      = actualChunkSize;
+        Fls_Qspi_TransactionInit(&transaction);
+        transaction.addrOffset = offset;
+        transaction.buf        = (void *)buf;
+        transaction.count      = actualChunkSize;
 #if (FLS_MEM_MAP_MODE == (STD_ON))
-            retVal = Fls_Qspi_ReadMemMapMode(Fls_DrvObj.spiHandle, &transaction);
+        retVal = Fls_Qspi_ReadMemMapMode(Fls_DrvObj.spiHandle, &transaction);
 #else
-            retVal = Fls_Qspi_ReadConfigMode(Fls_DrvObj.spiHandle, &transaction);
+        retVal = Fls_Qspi_ReadConfigMode(Fls_DrvObj.spiHandle, &transaction);
 #endif
-        }
-        /* TI_COVERAGE_GAP_START [Branch/Line] Zero chunk size is logically impossible during an active read job;
-         * scheduler always provides a positive chunk size */
-        else
-        {
-            retVal = E_NOT_OK;
-        }
-        /* TI_COVERAGE_GAP_STOP */
+    }
+    else
+    {
+        retVal = E_NOT_OK;
     }
     return retVal;
 }
@@ -1205,21 +1187,15 @@ Std_ReturnType Fls_norAsyncWrite(uint32 actualChunkSize)
             {
                 Fls_norAsyncWrite_sub(actualChunkSize);
             }
-            /* TI_COVERAGE_GAP_START [Branch/Line] WREN/WEL check failure during write init is a hardware fault; not
-             * inducible in test environment */
             else
             {
                 retVal = E_NOT_OK;
             }
-            /* TI_COVERAGE_GAP_STOP */
         }
-        /* TI_COVERAGE_GAP_START [Branch/Line] Zero chunk size is logically impossible during an active write job;
-         * scheduler always provides a positive chunk size */
         else
         {
             retVal = E_NOT_OK;
         }
-        /* TI_COVERAGE_GAP_STOP */
     }
     else
     {
@@ -1272,7 +1248,10 @@ static void Flash_offsetToBlkPage(uint32 offset, uint32 *Length)
     uint32 leftover;
 
     leftover = pageSize - (offset % pageSize);
+    /* TI_COVERAGE_GAP_START [Branch] leftover = pageSize - (offset % pageSize) is always in [1, pageSize], so leftover
+     * == 0U is unreachable, this is defensive check */
     if (leftover != 0U)
+    /* TI_COVERAGE_GAP_STOP */
     {
         if (*Length < leftover)
         {
@@ -1311,7 +1290,9 @@ void Fls_norAsyncWrite_sub(uint32 actualChunkSize)
     transaction.count      = chunkLen;
     retVal                 = Fls_Qspi_WriteConfigMode(Fls_DrvObj.spiHandle, &transaction);
 
+    /* TI_COVERAGE_GAP_START [Branch/Line] retVal != E_OK is coverage only upon hardware write failure*/
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         FlsWriteStage = FLS_S_WAIT_STAGE;
     }
@@ -1361,7 +1342,6 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
     switch (FlsEraseStage)
     {
         case FLS_S_INVALID_ADDRESS:
-        {
             if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) ==
                 E_OK)
             {
@@ -1377,17 +1357,13 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
             }
             /* TI_COVERAGE_GAP_STOP */
             break;
-        }
 
         case FLS_S_DELAY_1_STAGE:
-        {
             retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             retVal    = Fls_norQspiAsyncWaitReadyBlock(retstatus);
             break;
-        }
 
         case FLS_S_BLOCK_CMD_STAGE:
-        {
             if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, cmdAddr, (uint8 *)NULL_PTR, 0U) == E_OK)
             {
                 retVal        = E_OK;
@@ -1402,10 +1378,8 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
             }
             /* TI_COVERAGE_GAP_STOP */
             break;
-        }
 
         case FLS_S_DELAY_2_STAGE:
-        {
             retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->chipEraseTimeout);
             if (retstatus == FLS_INTERNAL_JOB_DONE)
             {
@@ -1425,10 +1399,12 @@ Std_ReturnType Fls_norAsyncBlockErase_sub(void)
                 /* No Actions required. */
             }
             break;
-        }
 
+        /* TI_COVERAGE_GAP_START [Branch/Line] FlsEraseStage only takes the four explicit case values during an active
+         * erase; FLS_S_DEFAULT is the idle value and the driver never invokes this function in that state*/
         default:
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
     return retVal;
 }
@@ -1448,11 +1424,11 @@ static Std_ReturnType Fls_norQspiAsyncWaitReadyBlock(Fls_InternalStateType retst
         retVal        = E_NOT_OK;
         FlsEraseStage = FLS_S_DEFAULT;
     }
-    /* TI_COVERAGE_GAP_STOP */
     else
     {
         /* No Actions required. */
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 /**
@@ -1567,33 +1543,25 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
     switch (FlsEraseStage)
     {
         case FLS_S_INVALID_ADDRESS:
-        {
             if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) ==
                 E_OK)
             {
                 retVal        = E_OK;
                 FlsEraseStage = FLS_S_DELAY_1_STAGE;
             }
-            /* TI_COVERAGE_GAP_START [Branch/Line] WREN command failure is a hardware/bus fault; not inducible in test
-             * environment */
             else
             {
                 retVal        = E_NOT_OK;
                 FlsEraseStage = FLS_S_DEFAULT;
             }
-            /* TI_COVERAGE_GAP_STOP */
             break;
-        }
 
         case FLS_S_DELAY_1_STAGE:
-        {
             retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             retVal    = Fls_norQspiAsyncWaitReadysector(retstatus);
             break;
-        }
 
         case FLS_S_SECTOR_CMD_STAGE:
-        {
             if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, cmdAddr, (uint8 *)NULL_PTR, 0) == E_OK)
             {
                 retVal        = E_OK;
@@ -1608,10 +1576,8 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
             }
             /* TI_COVERAGE_GAP_STOP */
             break;
-        }
 
         case FLS_S_DELAY_2_STAGE:
-        {
             retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             if (retstatus == FLS_INTERNAL_JOB_DONE)
             {
@@ -1631,10 +1597,12 @@ Std_ReturnType Fls_norAsyncSectorErase_sub(void)
                 /* No Actions required. */
             }
             break;
-        }
 
+        /* TI_COVERAGE_GAP_START [Branch/Line]  FlsEraseStage only takes the four explicit case values during an active
+         * erase; FLS_S_DEFAULT is the idle value and the driver never invokes this function in that state*/
         default:
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
     return retVal;
 }
@@ -1654,11 +1622,12 @@ static Std_ReturnType Fls_norQspiAsyncWaitReadysector(Fls_InternalStateType rets
         retVal        = E_NOT_OK;
         FlsEraseStage = FLS_S_DEFAULT;
     }
-    /* TI_COVERAGE_GAP_STOP */
+
     else
     {
         /* No Actions required. */
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 
@@ -1678,7 +1647,6 @@ Std_ReturnType Fls_norAsyncChipErase(void)
     switch (FlsEraseStage)
     {
         case FLS_S_INVALID_ADDRESS:
-        {
             if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmdWren, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0U) ==
                 E_OK)
             {
@@ -1694,17 +1662,13 @@ Std_ReturnType Fls_norAsyncChipErase(void)
             }
             /* TI_COVERAGE_GAP_STOP */
             break;
-        }
 
         case FLS_S_DELAY_1_STAGE:
-        {
             retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->wrrwriteTimeout);
             retVal    = Fls_norQspiAsyncWaitReadyChip(retstatus);
             break;
-        }
 
         case FLS_S_CHIP_CMD_STAGE:
-        {
             if (Nor_QspiCmdWrite(Fls_DrvObj.spiHandle, cmd, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)NULL_PTR, 0) == E_OK)
             {
                 retVal        = E_OK;
@@ -1719,10 +1683,8 @@ Std_ReturnType Fls_norAsyncChipErase(void)
             }
             /* TI_COVERAGE_GAP_STOP */
             break;
-        }
 
         case FLS_S_DELAY_2_STAGE:
-        {
             retstatus = Nor_QspiAsyncWaitReady(Fls_DrvObj.spiHandle, Fls_Config_SFDP_Ptr->chipEraseTimeout);
             if (retstatus == FLS_INTERNAL_JOB_DONE)
             {
@@ -1742,10 +1704,12 @@ Std_ReturnType Fls_norAsyncChipErase(void)
                 /* No Actions required. */
             }
             break;
-        }
 
+        /* TI_COVERAGE_GAP_START [Branch/Line] FlsEraseStage only takes the four explicit case values during an active
+         * erase; FLS_S_DEFAULT is the idle value and the driver never invokes this function in that state*/
         default:
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
 
     return retVal;
@@ -1767,10 +1731,13 @@ static Std_ReturnType Fls_norQspiAsyncWaitReadyChip(Fls_InternalStateType retsta
         FlsEraseStage = FLS_S_DEFAULT;
     }
     /* TI_COVERAGE_GAP_STOP */
+    /* TI_COVERAGE_GAP_START [Branch/Line] RDSR command failure during WEL polling is a hardware/bus fault; not
+     * inducible in test environment */
     else
     {
         /* No Actions required. */
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 
@@ -1778,21 +1745,18 @@ Std_ReturnType Nor_QspiSetQeBit(QSPI_Handle handle, uint8 qeType)
 {
     Std_ReturnType status = E_OK;
 
-    if (E_OK == status)
+    if (qeType > (uint8)7U)
     {
-        if (qeType > (uint8)7U)
-        {
-            (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_PARAM_CONFIG);
-            status = E_NOT_OK;
-        }
-        else
-        {
-            status = Nor_QspiSetQeBit_sub(handle, qeType);
-        }
-        if (status == E_OK)
-        {
-            status = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashWriteTimeout);
-        }
+        (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_INIT, FLS_E_PARAM_CONFIG);
+        status = E_NOT_OK;
+    }
+    else
+    {
+        status = Nor_QspiSetQeBit_sub(handle, qeType);
+    }
+    if (status == E_OK)
+    {
+        status = Nor_QspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashWriteTimeout);
     }
     return status;
 }
@@ -1827,11 +1791,12 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
             sr1    = 0;
             bitPos = (uint8)1U << (uint8)6U;
             status = Nor_QspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, FLS_QSPI_CMD_INVALID_ADDR, &sr1, 1U);
-
+            /* TI_COVERAGE_GAP_START [Branch/Line] Required hardware bus fault, cannot be induced */
             if ((sr1 & bitPos) != (uint8)0U)
             {
                 /* QE is already set */
             }
+            /* TI_COVERAGE_GAP_STOP */
             else
             {
                 status  = Nor_cmdwr_Enable(handle);
@@ -1844,11 +1809,12 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
             sr2    = 0;
             bitPos = (uint8)1 << (uint8)7;
             status = Nor_QspiCmdRead(handle, 0x3F, FLS_QSPI_CMD_INVALID_ADDR, (uint8 *)&sr2, 1U);
-
+            /* TI_COVERAGE_GAP_START [Branch/Line] Required hardware bus fault, cannot be induced */
             if ((sr2 & bitPos) != (uint8)0U)
             {
                 /* QE is already set */
             }
+            /* TI_COVERAGE_GAP_STOP */
             else
             {
                 status  = Nor_cmdwr_Enable(handle);
@@ -1858,9 +1824,15 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
             break;
         case 1:
             /* QE is bit 1 of SR2 */
+            /* TI_COVERAGE_GAP_START [Branch] qeType is probed from the flash SFDP table during Fls_Init(); the flash
+             * device on the target board never reports qeType 4 or 5 in the test configuration */
         case 4:
+            /* TI_COVERAGE_GAP_STOP */
             /* QE is bit 1 of SR2 */
+        /* TI_COVERAGE_GAP_START [Branch] qeType is probed from the flash SFDP table during Fls_Init(); the flash device
+         * on the target board never reports qeType 4 or 5 in the test configuration */
         case 5:
+            /* TI_COVERAGE_GAP_STOP */
             /* QE is bit 1 of SR2 */
             bitPos  = (uint8)1 << (uint8)1;
             status  = Nor_QspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, FLS_QSPI_CMD_INVALID_ADDR, &sr1, 1U);
@@ -1883,11 +1855,12 @@ Std_ReturnType Nor_QspiSetQeBit_sub(QSPI_Handle handle, uint8 qeType)
             /* QE is bit 1 of SR2, using different command */
             bitPos = (uint8)1 << (uint8)1;
             status = Nor_QspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr2, FLS_QSPI_CMD_INVALID_ADDR, &sr2, 1U);
-
+            /* TI_COVERAGE_GAP_START [Branch/Line] Required hardware bus fault, cannot be induced */
             if ((sr2 & bitPos) != (uint8)0U)
             {
                 /* QE bit already set */
             }
+            /* TI_COVERAGE_GAP_STOP */
             else
             {
                 status  = Nor_cmdwr_Enable(handle);

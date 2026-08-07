@@ -170,7 +170,7 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
         for (hwUnitId = 0U; hwUnitId < Cdd_FsiTx_DrvObj.maxHwUnit; hwUnitId++)
         {
             hwObj = &(Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId]);
-            (void)CddFsiTx_hwUnitInit(hwObj);
+            CddFsiTx_hwUnitInit(hwObj);
         }
 #if (STD_ON == CDD_FSI_TX_NOTIFICATION_ENABLE)
         /* Initialize configured Interrupt Index. */
@@ -295,22 +295,8 @@ Cdd_FsiTx_Ping(Cdd_FsiTx_HWUnitType HwUnitId)
     else
 #endif
     {
-#if (STD_ON == CDD_FSI_TX_PRE_COMPILE_VARIANT)
-        const Cdd_FsiTx_ConfigType *ConfigPtr = NULL_PTR;
-        if (ConfigPtr == NULL_PTR)
-        {
-            ConfigPtr = &CDD_FSI_TX_INIT_CONFIG_PC;
-        }
-#endif
-
-        hwObj   = &(Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId]);
-        retVal |= CddFsiTx_PingTransmit(hwObj);
-        /* TI_COVERAGE_GAP_START - [Branch] CddFsiTx_PingTransmit API never fails */
-        if (retVal != E_OK)
-        {
-            CddFsiTx_ReportRuntimeError(CDD_FSI_TX_PING_SID, CDD_FSI_TX_E_INVALID_EVENT);
-        }
-        /* TI_COVERAGE_GAP_STOP */
+        hwObj = &(Cdd_FsiTx_DrvObj.hwUnitObj[HwUnitId]);
+        CddFsiTx_PingTransmit(hwObj);
     }
     return retVal;
 }

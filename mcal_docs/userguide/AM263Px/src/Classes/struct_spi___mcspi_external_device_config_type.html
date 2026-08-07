@@ -153,6 +153,14 @@ summary: SPI Job configuration structure specific to McSPI peripheral.</p>
 <td><p>transmissionLineEnable</p></td>
 <td><p>Defines the data lines selected for transmission.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="../Modules/group___s_p_i.html#enum-spi-csselectiontype"><span class="std std-ref">Spi_CsSelectionType</span></a></p></td>
+<td><p>csSelect</p></td>
+<td><p>CS selection - GPIO or peripheral engine. Design: MCAL-25157.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../Modules/group___s_p_i.html#typedef-spi-csgpioidtype"><span class="std std-ref">Spi_CsGpioIdType</span></a></p></td>
+<td><p>csGpioId</p></td>
+<td><p>DIO channel ID for GPIO CS (valid when csSelect == SPI_CS_VIA_GPIO). Design: MCAL-25157.</p></td>
+</tr>
 </tbody>
 </table>
 </section>

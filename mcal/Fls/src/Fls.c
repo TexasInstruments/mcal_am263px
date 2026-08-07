@@ -156,7 +156,7 @@ static Std_ReturnType Fls_CheckBlockAlignement(Fls_AddressType SourceAddress);
 static void           Fls_TimeoutVerification_sub(void);
 static void           Fls_TimeoutVerification(TickType startCount);
 static void           Fls_MainFunction_sub(void);
-static void           Fls_TimeoutCheck(StatusType status, uint32 time1, TickType elapsedCount);
+static void           Fls_TimeoutCheck(uint32 time1, TickType elapsedCount);
 static void           Fls_MainFunctioncall(void);
 
 /* ========================================================================== */
@@ -189,87 +189,77 @@ VAR(uint32, FLS_VAR_NO_INIT) sector_or_blocksize;
 
 static void Fls_TimeoutVerification(TickType startCount)
 {
-    TickType   tempCount = 0U, elapsedCount = 0U;
-    StatusType status;
+    TickType tempCount = 0U, elapsedCount = 0U;
 
     tempCount = startCount;
 
-    status       = GetElapsedValue(FLS_OS_COUNTER_ID, &tempCount, &elapsedCount);
+    (void)GetElapsedValue(FLS_OS_COUNTER_ID, &tempCount, &elapsedCount);
+
     uint32 time1 = 0U;
 
-    switch (Fls_DrvObj.typeoferase)
+    if (Fls_DrvObj.typeoferase == FLS_CHIP_ERASE)
     {
-        case FLS_SECTOR_ERASE:
-            if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
-            {
-                time1 = Fls_Config_SFDP_Ptr->flsMaxSectorErasetimeConvInUsec;
-            }
-            else
-            {
-                time1 = Fls_Config_SFDP_Ptr->flsMaxSectorReadWritetimeConvInUsec;
-            }
-            Fls_TimeoutCheck(status, time1, elapsedCount);
-            break;
-        case FLS_BLOCK_ERASE:
-            if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
-            {
-                time1 = Fls_Config_SFDP_Ptr->flsMaxBlockErasetimeConvInUsec;
-            }
-            else
-            {
-                time1 = Fls_Config_SFDP_Ptr->flsMaxBlockReadWritetimeConvInUsec;
-            }
-            Fls_TimeoutCheck(status, time1, elapsedCount);
-            break;
-        case FLS_CHIP_ERASE:
-            if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
-            {
-                time1 = Fls_Config_SFDP_Ptr->flsMaxChipErasetimeConvInUsec;
-            }
-            else
-            {
-                time1 = Fls_Config_SFDP_Ptr->flsMaxChipReadWritetimeConvInUsec;
-            }
-            Fls_TimeoutCheck(status, time1, elapsedCount);
-            break;
-        /* TI_COVERAGE_GAP_START [Branch] Defensive default, typeoferase is always SECTOR/BLOCK/CHIP; unreachable in
-         correct operation */
-        default:
-            break;
-            /* TI_COVERAGE_GAP_STOP */
-    }
-}
-
-static void Fls_TimeoutCheck(StatusType status, uint32 time1, TickType elapsedCount)
-{
-    if ((Std_ReturnType)E_OK == status)
-    {
-        if (elapsedCount > (time1 * (uint32)FLS_MAX_WRITE_TIME))
+        if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
         {
-            Fls_TimeoutVerification_sub();
+            time1 = Fls_Config_SFDP_Ptr->flsMaxChipErasetimeConvInUsec;
+        }
+        else
+        {
+            time1 = Fls_Config_SFDP_Ptr->flsMaxChipReadWritetimeConvInUsec;
         }
     }
-    /* TI_COVERAGE_GAP_START [Branch/Line] GetElapsedValue always returns E_OK on this platform; hardware timer failure
-    is not inducible in test */
+    else if (Fls_DrvObj.typeoferase == FLS_BLOCK_ERASE)
+    {
+        if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
+        {
+            time1 = Fls_Config_SFDP_Ptr->flsMaxBlockErasetimeConvInUsec;
+        }
+        else
+        {
+            time1 = Fls_Config_SFDP_Ptr->flsMaxBlockReadWritetimeConvInUsec;
+        }
+    }
     else
     {
-        /* Do Nothing */
+        if (Fls_DrvObj.jobType == FLS_JOB_ERASE)
+        {
+            time1 = Fls_Config_SFDP_Ptr->flsMaxSectorErasetimeConvInUsec;
+        }
+        else
+        {
+            time1 = Fls_Config_SFDP_Ptr->flsMaxSectorReadWritetimeConvInUsec;
+        }
     }
-    /* TI_COVERAGE_GAP_STOP */
+    Fls_TimeoutCheck(time1, elapsedCount);
+}
+
+static void Fls_TimeoutCheck(uint32 time1, TickType elapsedCount)
+{
+    if (elapsedCount > (time1 * (uint32)FLS_MAX_WRITE_TIME))
+    {
+        Fls_TimeoutVerification_sub();
+    }
 }
 
 static void Fls_TimeoutVerification_sub(void)
 {
+#if defined(AM263PX_PLATFORM) || defined(AM261X_PLATFORM)
+    if ((Fls_DrvObj.jobType == FLS_JOB_ERASE) && (Fls_EraseStage == FLS_S_IN_PROGRESS))
+    {
+        /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
+        do not use this hook function for critical section protection, this exit is added
+        for cases where Fls_EraseStage is stuck in progress state, in all other cases exit is handled*/
+        SchM_Exit_Fls_FLS_EXCLUSIVE_AREA_0();
+        Fls_EraseStage = FLS_S_DEFAULT;
+    }
+#endif
     Det_ReportRuntimeError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_MAIN_FUNCTION, FLS_E_TIMEOUT);
 
     if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)
     {
         Fls_DrvObj.Fls_JobErrorNotification();
     }
-    else
-    {
-        /* Do Nothing */
-    }
+
     Fls_DrvObj.jobResultType = MEMIF_JOB_FAILED;
     Fls_DrvObj.status        = MEMIF_IDLE;
 }
@@ -286,19 +276,13 @@ static Std_ReturnType Fls_CheckValidAddress(Fls_AddressType SourceAddress)
 {
     Std_ReturnType retVal    = (Std_ReturnType)E_NOT_OK;
     uint32         startAddr = 0U;
-    /* TI_COVERAGE_GAP_START [Branch] False branch is unreachable; SourceAddress is Fls_AddressType (unsigned) and
-    startAddr is always 0U; an unsigned value is always >= 0U */
-    if (SourceAddress >= startAddr)
-    /* TI_COVERAGE_GAP_STOP */
+    if (SourceAddress <= (startAddr + Fls_Config_SFDP_Ptr->flashSize))
     {
-        if (SourceAddress <= (startAddr + Fls_Config_SFDP_Ptr->flashSize))
-        {
-            retVal = E_OK;
-        }
-        else
-        {
-            retVal = E_NOT_OK;
-        }
+        retVal = E_OK;
+    }
+    else
+    {
+        retVal = E_NOT_OK;
     }
     return retVal;
 }
@@ -389,7 +373,11 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
 #if (STD_ON == FLS_DEV_ERROR_DETECT)
     detFlag = Fls_DetCheckInit(CfgPtr);
 
+    /* TI_COVERAGE_GAP_START [Branch] FALSE branch (detFlag != 0U) skips initialization when
+     * Fls_DetCheckInit detects an error (e.g., NULL or invalid configuration pointer); tests always
+     * supply a valid Fls_ConfigType, so this DET error path is never triggered during normal testing. */
     if (detFlag == 0U)
+    /* TI_COVERAGE_GAP_STOP */
 #endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
     {
         /* Instantiate a Driver Obj to be used by module */
@@ -399,8 +387,12 @@ FUNC(void, FLS_CODE) Fls_Init(P2CONST(Fls_ConfigType, AUTOMATIC, FLS_CONFIG_DATA
         Fls_DrvObj.jobResultType = MEMIF_JOB_PENDING;
 
         ret = Fls_hwUnitInit();
-#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+#if (STD_ON == FLS_OSPI_PHY_ENABLE) /*Applicable for AM263Px and AM261x only*/
+        /* TI_COVERAGE_GAP_START [Branch] FALSE branch (ret != E_OK) skips PHY initialization when
+         * hardware unit initialization has already failed; hardware-level init failure cannot be
+         * induced in the normal test environment, so this path is never exercised. */
         if (ret == E_OK)
+        /* TI_COVERAGE_GAP_STOP */
         {
             Fls_PhyStatus = Fls_Ospi_phyInit();
             /* TI_COVERAGE_GAP_START [Branch/Line] The below if is never entered as this condition is only met on a
@@ -575,7 +567,10 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Erase(Fls_AddressType TargetAddress, Fls_Leng
     }
 
 #endif /* #if (STD_ON == FLS_DEV_ERROR_DETECT) */
+    /* TI_COVERAGE_GAP_START [Line/Branch/MC-DC] The else case is covered in test, but not in all configs, hence the gap
+     * here  */
     if ((retVal == (Std_ReturnType)E_OK) && (Fls_DrvObj.status == MEMIF_IDLE))
+    /* TI_COVERAGE_GAP_STOP */
     {
         Fls_DrvObj.status        = MEMIF_BUSY;
         Fls_DrvObj.jobResultType = MEMIF_JOB_PENDING;
@@ -587,11 +582,17 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_Erase(Fls_AddressType TargetAddress, Fls_Leng
         Fls_DrvObj.length      = Length;
         Fls_DrvObj.transferred = (Fls_LengthType)0;
 
+        /* TI_COVERAGE_GAP_START [Branch] The below erase types are covered in test, but not in all configs, hence
+         * the gap here */
         if (Fls_DrvObj.typeoferase == FLS_SECTOR_ERASE)
+        /* TI_COVERAGE_GAP_STOP */
         {
             Fls_DrvObj.jobChunkSize = Fls_Config_SFDP_Ptr->eraseCfg.sectorSize;
         }
+        /* TI_COVERAGE_GAP_START [Branch] The below erase types are covered in test, but not in all configs, hence
+         * the gap here */
         else if (Fls_DrvObj.typeoferase == FLS_BLOCK_ERASE)
+        /* TI_COVERAGE_GAP_STOP */
         {
             Fls_DrvObj.jobChunkSize = Fls_Config_SFDP_Ptr->eraseCfg.blockSize;
         }
@@ -661,7 +662,10 @@ Fls_Read(Fls_AddressType SourceAddress, P2VAR(uint8, AUTOMATIC, FLS_APPL_DATA) T
             Fls_Interrupt_Enable();
 #endif
         }
+        /* TI_COVERAGE_GAP_START [Branch] The else branch is covered in one or more configs, not all, hence the gap
+         * here */
         else
+        /* TI_COVERAGE_GAP_STOP */
         {
             (retVal = (Std_ReturnType)E_NOT_OK);
         }
@@ -1147,7 +1151,15 @@ static void Fls_MainFunction_sub(void)
 
         case FLS_JOB_ERASE:
 #if (FLS_TIMEOUT_SUPERVISION_ENABLED == STD_ON)
+#if defined(AM263PX_PLATFORM) || defined(AM261X_PLATFORM)
+            if (Fls_EraseStage == FLS_S_DEFAULT)
+            {
+                (void)GetCounterValue(FLS_OS_COUNTER_ID, &Fls_DrvObj.eraseStartCount);
+            }
+            startCount = Fls_DrvObj.eraseStartCount;
+#else
             (void)GetCounterValue(FLS_OS_COUNTER_ID, &startCount);
+#endif
 #endif
 
             processJobs(FLS_JOB_ERASE);
@@ -1227,7 +1239,10 @@ FUNC(void, FLS_CODE) Fls_Cancel(void)
         }
         /* Reset state machine variables to ensure clean state for next job */
         Fls_ResetStateMachines();
+        /* TI_COVERAGE_GAP_START [Branch] The else case is covered in test, but not in all configs, hence the gap here
+         */
         if (Fls_DrvObj.Fls_JobErrorNotification != NULL_PTR)
+        /* TI_COVERAGE_GAP_STOP */
         {
             Fls_DrvObj.Fls_JobErrorNotification();
         }
@@ -1378,8 +1393,8 @@ FUNC(Std_ReturnType, FLS_CODE) Fls_PhyEnable(void)
 
 FUNC(void, FLS_CODE) Fls_PhyDisable(void)
 {
-    Std_ReturnType retVal = E_OK;
 #if (STD_ON == FLS_DEV_ERROR_DETECT)
+    Std_ReturnType retVal = E_OK;
     if (Fls_DrvObj.status == MEMIF_UNINIT)
     {
         (void)Det_ReportError(FLS_MODULE_ID, FLS_INSTANCE_ID, FLS_SID_REGISTERREADBACK, FLS_E_UNINIT);

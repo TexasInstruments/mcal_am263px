@@ -163,9 +163,9 @@ FUNC(void, SPI_CODE) Spi_Init(P2CONST(Spi_ConfigType, AUTOMATIC, SPI_CONFIG_DATA
     uint32                index     = 0U;
     const Spi_ConfigType *ConfigPtr = (Spi_ConfigType *)NULL_PTR;
 
+    Std_ReturnType retVal = E_OK;
 #if (STD_ON == SPI_DEV_ERROR_DETECT)
-    Std_ReturnType retVal         = E_OK;
-    uint8          ConditionCheck = 0U;
+    uint8 ConditionCheck = 0U;
 #endif
 
 #if (STD_ON == SPI_PRE_COMPILE_VARIANT)
@@ -184,48 +184,46 @@ FUNC(void, SPI_CODE) Spi_Init(P2CONST(Spi_ConfigType, AUTOMATIC, SPI_CONFIG_DATA
           (STD_ON == SPI_LINK_TIME_VARIANT) */
 #if (STD_ON == SPI_DEV_ERROR_DETECT)
     ConditionCheck = SPI_init_CheckDetError(ConfigPtr);
-    /* TI_COVERAGE_GAP_START [Branch] DET validation error (ConditionCheck != 0U).
-       All test configurations pass SPI_init_CheckDetError validation. */
-    if (ConditionCheck == 0U)
+    if ((ConditionCheck == 0U) && (ConfigPtr->maxExtDevCfg > SPI_MAX_EXT_DEV))
     {
-        if (ConfigPtr->maxExtDevCfg > SPI_MAX_EXT_DEV)
+        ConditionCheck = 1U;
+        Spi_reportDetError(SPI_SID_INIT, SPI_E_PARAM_JOB);
+    }
+    if (ConditionCheck == 0U)
+#endif /* #if (STD_ON == SPI_DEV_ERROR_DETECT) */
+    {
+#if (STD_ON == SPI_DEV_ERROR_DETECT)
+        /* Check the configuration */
+        retVal = Spi_checkConfig(ConfigPtr);
+        if (((Std_ReturnType)E_OK) == retVal)
+#endif /* #if (STD_ON == SPI_DEV_ERROR_DETECT) */
         {
-            Spi_reportDetError(SPI_SID_INIT, SPI_E_PARAM_JOB);
-        }
-        else
-        {
-            /* Check the configuration */
-            retVal = Spi_checkConfig(ConfigPtr);
-            if (((Std_ReturnType)E_OK) == retVal)
-            {
-                Spi_resetDrvObj(&Spi_DrvObj);
-                Spi_copyConfig(&Spi_DrvObj, ConfigPtr);
+            Spi_resetDrvObj(&Spi_DrvObj);
+            Spi_copyConfig(&Spi_DrvObj, ConfigPtr);
 
-                /* Init HW once all config is copied */
-                for (index = 0U; index < ConfigPtr->maxHwUnit; index++)
+            /* Init HW once all config is copied */
+            for (index = 0U; index < ConfigPtr->maxHwUnit; index++)
+            {
+                Spi_hwUnitInit(&Spi_DrvObj.hwUnitObj[index]);
+            }
+#if (SPI_GPIO_CS_ENABLED == STD_ON)
+            /* Deassert all GPIO CS pins at initialization. Design: MCAL-28299 */
+            uint32 jobindex;
+            for (jobindex = 0U; jobindex < Spi_DrvObj.maxJobs; jobindex++)
+            {
+                if (SPI_CS_VIA_GPIO == Spi_DrvObj.extDevCfg->mcspi.csSelect)
                 {
-                    Spi_hwUnitInit(&Spi_DrvObj.hwUnitObj[index]);
+                    Spi_ConfigGpioChipSelect(&Spi_DrvObj.jobObj[jobindex], (boolean)FALSE);
                 }
             }
-            if (E_OK == retVal)
-            {
-                /* Initialize driver status and object */
-                Spi_DrvStatus = SPI_IDLE;
-            }
+#endif
+        }
+        if (E_OK == retVal)
+        {
+            /* Initialize driver status and object */
+            Spi_DrvStatus = SPI_IDLE;
         }
     }
-    /* TI_COVERAGE_GAP_STOP */
-#else
-    Spi_resetDrvObj(&Spi_DrvObj);
-    Spi_copyConfig(&Spi_DrvObj, ConfigPtr);
-
-    /* Init HW once all config is copied */
-    for (index = 0U; index < ConfigPtr->maxHwUnit; index++)
-    {
-        Spi_hwUnitInit(&Spi_DrvObj.hwUnitObj[index]);
-    }
-    Spi_DrvStatus = SPI_IDLE;
-#endif /* (STD_ON == SPI_DEV_ERROR_DETECT) */
 }
 
 /*

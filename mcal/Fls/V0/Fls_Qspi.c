@@ -110,7 +110,7 @@ typedef struct
 /*                          Function Declarations                             */
 /* ========================================================================== */
 /* Internal functions */
-static Std_ReturnType Fls_Qspi_WaitIdle(QSPI_Handle handle);
+static Std_ReturnType Fls_Qspi_WaitIdle();
 static Std_ReturnType Fls_Qspi_MemMapRead(QSPI_Handle handle);
 static void           Fls_Qspi_MemMapRead_sub(void);
 static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess *cfgAccess);
@@ -166,7 +166,10 @@ void Fls_hwi(void)
     intrStatus        = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + INTR_STATUS_RAW_SET);
     if ((uint32)QSPI_INTR_STATUS_MASK == (uint32)(intrStatus & QSPI_INTR_STATUS_MASK))
     {
+        /* TI_COVERAGE_GAP_START [Branch/Line] This function is called from ISR which is triggered with valid jobType,
+         * this is defensive check*/
         if (Fls_DrvObj.jobType != FLS_JOB_NONE)
+        /* TI_COVERAGE_GAP_STOP */
         {
             /* Process the job. */
             processJobs(Fls_DrvObj.jobType);
@@ -230,11 +233,6 @@ QSPI_Handle Fls_QspiOpen(uint32 index)
     if (E_OK == retVal)
     {
         obj = config->object;
-        if (TRUE == obj->isOpen)
-        {
-            /* Handle already opened */
-            retVal = E_NOT_OK;
-        }
     }
 
     if (E_OK == retVal)
@@ -248,13 +246,7 @@ QSPI_Handle Fls_QspiOpen(uint32 index)
         obj->isOpen = TRUE;
         handle      = (QSPI_Handle)config;
     }
-    if (E_OK != retVal)
-    {
-        if (NULL_PTR != config)
-        {
-            Fls_QspiClose((QSPI_Handle)config);
-        }
-    }
+
     return handle;
 }
 /**
@@ -285,7 +277,6 @@ static Std_ReturnType Fls_Qspi_ProgramInstance(QSPI_Config *config)
 {
     Std_ReturnType retVal = E_OK;
     QSPI_Object   *obj    = config->object;
-    QSPI_Handle    handle = (QSPI_Handle)config;
     uint32         regVal;
 
     obj->rxLines = Fls_DrvObj.Fls_Mode;
@@ -305,14 +296,14 @@ static Std_ReturnType Fls_Qspi_ProgramInstance(QSPI_Config *config)
     regVal &= (uint32)(~((FLS_QSPI_DATA_DELAY_3) << (QSPI_SPI_DC_REG_DD0_SHIFT + (8U * FLS_QSPI_CS0))));
     regVal |= (FLS_QSPI_DATA_DELAY_0 << (QSPI_SPI_DC_REG_DD0_SHIFT + (8U * FLS_QSPI_CS0)));
 
-    retVal = Fls_Qspi_WaitIdle(handle);
+    retVal = Fls_Qspi_WaitIdle();
 
     if (retVal == E_OK)
     {
         HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DC_REG, regVal);
 
         /* Enable clock and set divider value */
-        if (Fls_Qspi_SetPreScaler(handle, Fls_DrvObj.flsBaudRateDiv) == E_OK)
+        if (Fls_Qspi_SetPreScaler(Fls_DrvObj.flsBaudRateDiv) == E_OK)
         {
             /* Clear the interrupts and interrupt status */
             Fls_QspiIntDisable(
@@ -320,18 +311,23 @@ static Std_ReturnType Fls_Qspi_ProgramInstance(QSPI_Config *config)
 
             Fls_QspiIntClear((QSPI_INTR_ENABLE_SET_REG_FIRQ_ENA_SET_MASK | QSPI_INTR_ENABLE_SET_REG_WIRQ_ENA_SET_MASK));
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] The else coverage requires timeout from Fls_Qspi_SetPreScaler function
+        which can occur only due to hardware failure */
         else
         {
             retVal = E_NOT_OK;
         }
+        /* TI_COVERAGE_GAP_STOP */
 
         HW_WR_FIELD32(FLS_QSPI_CTRL_BASE_ADDR + SPI_SWITCH_REG, QSPI_SPI_SWITCH_REG_MMPT_S,
                       QSPI_MEM_MAP_PORT_SEL_MEM_MAP_PORT);
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] The else branch can be covered only upon a hardware failure */
     else
     {
         retVal = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return retVal;
 }
@@ -341,39 +337,33 @@ static Std_ReturnType Fls_Qspi_ProgramInstance(QSPI_Config *config)
  *   Function Set the QSPI clock register divider value
  *
  */
-Std_ReturnType Fls_Qspi_SetPreScaler(QSPI_Handle handle, uint32 clkDividerVal)
+Std_ReturnType Fls_Qspi_SetPreScaler(uint32 clkDividerVal)
 {
     Std_ReturnType status = E_OK;
 
-    if (handle != NULL_PTR)
-    {
-        uint32 regVal;
+    uint32 regVal;
 
-        /* Read the value of Clock control register */
-        regVal = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG);
+    /* Read the value of Clock control register */
+    regVal = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG);
 
-        /* wait for QSPI to be idle */
-        status = Fls_Qspi_WaitIdle(handle);
+    /* wait for QSPI to be idle */
+    status = Fls_Qspi_WaitIdle();
 
-        /* turn off QSPI data clock */
-        HW_SET_FIELD32(regVal, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN_DCLOCK_OFF);
-        /* Set the value of QSPI clock control register */
-        HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG, regVal);
+    /* turn off QSPI data clock */
+    HW_SET_FIELD32(regVal, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN_DCLOCK_OFF);
+    /* Set the value of QSPI clock control register */
+    HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG, regVal);
 
-        /* Set the QSPI clock divider bit field value*/
-        HW_SET_FIELD32(regVal, QSPI_SPI_CLOCK_CNTRL_REG_DCLK_DIV, clkDividerVal);
-        /* Set the value of QSPI clock control register */
-        HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG, regVal);
+    /* Set the QSPI clock divider bit field value*/
+    HW_SET_FIELD32(regVal, QSPI_SPI_CLOCK_CNTRL_REG_DCLK_DIV, clkDividerVal);
+    /* Set the value of QSPI clock control register */
+    HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG, regVal);
 
-        /* Enable the QSPI data clock */
-        HW_SET_FIELD32(regVal, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN_DCLOCK_ON);
-        /* Set the value of QSPI clock control register */
-        HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG, regVal);
-    }
-    else
-    {
-        status = E_NOT_OK;
-    }
+    /* Enable the QSPI data clock */
+    HW_SET_FIELD32(regVal, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN, QSPI_SPI_CLOCK_CNTRL_REG_CLKEN_DCLOCK_ON);
+    /* Set the value of QSPI clock control register */
+    HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CLOCK_CNTRL_REG, regVal);
+
     return status;
 }
 /**
@@ -382,32 +372,31 @@ Std_ReturnType Fls_Qspi_SetPreScaler(QSPI_Handle handle, uint32 clkDividerVal)
  *   Wait while QSPI is busy
  *
  */
-static Std_ReturnType Fls_Qspi_WaitIdle(QSPI_Handle handle)
+static Std_ReturnType Fls_Qspi_WaitIdle()
 {
     Std_ReturnType status  = E_OK;
     uint32         timeout = FLS_MAX_WRITE_TIME;
-    if (handle != NULL_PTR)
+    /* wait while QSPI is busy */
+    do
     {
-        /* wait while QSPI is busy */
-        do
+        if (((HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_STATUS_REG) & QSPI_SPI_STATUS_REG_BUSY_MASK) !=
+             QSPI_SPI_STATUS_REG_BUSY_BUSY))
         {
-            if (((HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_STATUS_REG) & QSPI_SPI_STATUS_REG_BUSY_MASK) !=
-                 QSPI_SPI_STATUS_REG_BUSY_BUSY))
-            {
-                break;
-            }
-            timeout--;
-
-        } while (timeout != 0U);
-        if (timeout == 0U)
-        {
-            status = E_NOT_OK;
+            break;
         }
-    }
-    else
+        /* TI_COVERAGE_GAP_START [Branch/Line] This line can be covered only upon a hardware failure */
+        timeout--;
+        /* TI_COVERAGE_GAP_STOP */
+        /* TI_COVERAGE_GAP_START [Branch/Line] Both true and false conditions can be covered only upon retry which can
+         * occur upon a hardware failure only*/
+    } while (timeout != 0U);
+    /* TI_COVERAGE_GAP_STOP */
+    /* TI_COVERAGE_GAP_START [Branch/Line] This branch can be covered only upon a hardware failure */
+    if (timeout == 0U)
     {
         status = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return status;
 }
@@ -468,21 +457,8 @@ static Std_ReturnType Fls_Qspi_WriteData(QSPI_Handle handle, const uint32 *data,
     const uint32  *pData;
     pData = data;
 
-    if (handle != NULL_PTR)
-    {
-        if (pData != ((void *)NULL_PTR))
-        {
-            HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG, (uint32)*pData);
-        }
-        else
-        {
-            status = E_NOT_OK;
-        }
-    }
-    else
-    {
-        status = E_NOT_OK;
-    }
+    HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG, (uint32)*pData);
+
     return status;
 }
 /**
@@ -497,21 +473,8 @@ static Std_ReturnType Fls_Qspi_ReadData(QSPI_Handle handle, uint32 *data, uint32
     uint32        *pData  = (uint32 *)NULL_PTR;
     pData                 = data;
 
-    if (handle != NULL_PTR)
-    {
-        if (pData != ((void *)NULL_PTR))
-        {
-            *pData = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG);
-        }
-        else
-        {
-            status = E_NOT_OK;
-        }
-    }
-    else
-    {
-        status = E_NOT_OK;
-    }
+    *pData = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG);
+
     return status;
 }
 /**
@@ -539,20 +502,14 @@ void Fls_Qspi_TransactionInit(QSPI_Transaction *trans)
 Std_ReturnType Fls_Qspi_ParamsInit(QSPI_CmdParams *QSPI_Params)
 {
     Std_ReturnType retVal = E_OK;
-    if (QSPI_Params != NULL_PTR)
-    {
-        QSPI_Params->cmd          = FLS_QSPI_CMD_INVALID_OPCODE;
-        QSPI_Params->cmdAddr      = FLS_QSPI_CMD_INVALID_ADDR;
-        QSPI_Params->numAddrBytes = 3U;
-        QSPI_Params->txDataBuf    = NULL_PTR;
-        QSPI_Params->rxDataBuf    = NULL_PTR;
-        QSPI_Params->DataLen      = 0U;
-        retVal                    = E_OK;
-    }
-    else
-    {
-        retVal = E_NOT_OK;
-    }
+
+    QSPI_Params->cmd          = FLS_QSPI_CMD_INVALID_OPCODE;
+    QSPI_Params->cmdAddr      = FLS_QSPI_CMD_INVALID_ADDR;
+    QSPI_Params->numAddrBytes = 3U;
+    QSPI_Params->txDataBuf    = NULL_PTR;
+    QSPI_Params->rxDataBuf    = NULL_PTR;
+    QSPI_Params->DataLen      = 0U;
+    retVal                    = E_OK;
 
     return retVal;
 }
@@ -604,11 +561,13 @@ static Std_ReturnType Fls_Qspi_ConfigWrite(QSPI_Handle handle, QSPI_ConfigAccess
             Fls_Qspi_ConfigWrite_sub(handle, cfgAccess, wordLenBytes);
             /* Write data to data registers */
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] This branch can be covered only upon a hardware write failure */
         else
         {
             status = E_NOT_OK;
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     /* Write the data into shift registers */
     return status;
@@ -617,7 +576,9 @@ static Std_ReturnType Fls_Qspi_ConfigWrite(QSPI_Handle handle, QSPI_ConfigAccess
 static void Fls_Qspi_ConfigWrite_sub(QSPI_Handle handle, QSPI_ConfigAccess *cfgAccess, uint32 wordLenBytes)
 {
     /* Wait for the QSPI busy status */
-    if (Fls_Qspi_WaitIdle(handle) == E_OK)
+    /* TI_COVERAGE_GAP_START [Branch/Line] This branch can be covered only upon a hardware failure */
+    if (Fls_Qspi_WaitIdle() == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         QSPI_delay(FLS_QSPI_CMD_DELAY);
         /* Write tx command to command register */
@@ -625,7 +586,9 @@ static void Fls_Qspi_ConfigWrite_sub(QSPI_Handle handle, QSPI_ConfigAccess *cfgA
 
         QSPI_delay(FLS_QSPI_CMD_DELAY);
         /* Wait for the QSPI busy status */
-        if (Fls_Qspi_WaitIdle(handle) == E_OK)
+        /* TI_COVERAGE_GAP_START [Branch/Line] This branch can be covered only upon a hardware write failure */
+        if (Fls_Qspi_WaitIdle() == E_OK)
+        /* TI_COVERAGE_GAP_STOP */
         {
             /* update the cmd Val reg by reading it again for next word. */
             cfgAccess->cmdRegVal = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CMD_REG);
@@ -657,11 +620,14 @@ static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess 
         dstAddr8     = (uint8 *)(cfgAccess->buf);
         wordLenBytes = 1U;
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] 16-bit/32-bit word length path only covered by specific hardware
+     * configurations */
     else
     {
         dstAddr32    = (uint32 *)(cfgAccess->buf);
         wordLenBytes = 4U;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     /* Write the data into shift registers */
     while ((cfgAccess->count) != (sint32)0U)
@@ -670,7 +636,7 @@ static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess 
         HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CMD_REG, cfgAccess->cmdRegVal);
         QSPI_delay(FLS_QSPI_CMD_DELAY);
         /* Wait for the QSPI busy status */
-        status = Fls_Qspi_WaitIdle(handle);
+        status = Fls_Qspi_WaitIdle();
         (void)status;
 
         /* Store the number of data registers needed to read data */
@@ -682,11 +648,14 @@ static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess 
                 *dstAddr8 = (uint8)dataVal[0];
                 dstAddr8++;
             }
+            /* TI_COVERAGE_GAP_START [Branch/Line] 16-bit/32-bit word length path only covered by specific hardware
+             * configurations */
             else
             {
                 *dstAddr32 = (uint32)dataVal[0];
                 dstAddr32++;
             }
+            /* TI_COVERAGE_GAP_STOP */
 
             /* update the cmd Val reg by reading it again for next word. */
             cfgAccess->cmdRegVal = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_CMD_REG);
@@ -694,10 +663,14 @@ static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess 
             /* Update the number of bytes to be transmitted */
             cfgAccess->count -= (sint32)wordLenBytes;
         }
+        /* TI_COVERAGE_GAP_START [Branch/Line] Hardware read failure is a bus/QSPI fault; not inducible in test
+         * environment
+         */
         else
         {
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
     return status;
 }
@@ -727,43 +700,62 @@ static Std_ReturnType Fls_Qspi_MemMapRead(QSPI_Handle handle)
     uint8 *pDmaSrc = (uint8 *)NULL_PTR;
     uint32 dmaLen;
 #endif
-    if (handle != NULL_PTR)
-    {
-        QSPI_Object      *object      = ((QSPI_Config *)handle)->object;
-        QSPI_Transaction *transaction = object->transaction;
+    QSPI_Object      *object      = ((QSPI_Config *)handle)->object;
+    QSPI_Transaction *transaction = object->transaction;
 
-        /* Extract memory map mode read command */
-        mmapReadCmd = (uint32)object->readCmd;
+    /* Extract memory map mode read command */
+    mmapReadCmd = (uint32)object->readCmd;
 
-        /* Set the number of address bytes  */
-        HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U),
-                      QSPI_SPI_SETUP0_REG_NUM_A_BYTES, (object->numAddrBytes - (uint32)1));
+    /* Set the number of address bytes  */
+    HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_NUM_A_BYTES,
+                  (object->numAddrBytes - (uint32)1));
 
-        dummyBytes = (object->numDummyBits / (uint32)8);
-        dummyBits  = (object->numDummyBits % (uint32)8);
+    dummyBytes = (object->numDummyBits / (uint32)8);
+    dummyBits  = (object->numDummyBits % (uint32)8);
 
-        HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U),
-                      QSPI_SPI_SETUP0_REG_NUM_D_BITS, dummyBits);
-        HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U),
-                      QSPI_SPI_SETUP0_REG_NUM_D_BYTES, dummyBytes);
-        HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_RCMD,
-                      mmapReadCmd);
+    HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_NUM_D_BITS,
+                  dummyBits);
+    HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_NUM_D_BYTES,
+                  dummyBytes);
+    HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_RCMD,
+                  mmapReadCmd);
 
-        Fls_Qspi_MemMapRead_sub();
-        temp_addr = (FLS_BASE_ADDRESS + (uintptr_t)transaction->addrOffset);
-        pSrc      = (uint8 *)(temp_addr);
-        pDst      = (uint8 *)transaction->buf;
-        count     = transaction->count;
+    Fls_Qspi_MemMapRead_sub();
+    temp_addr = (FLS_BASE_ADDRESS + (uintptr_t)transaction->addrOffset);
+    pSrc      = (uint8 *)(temp_addr);
+    pDst      = (uint8 *)transaction->buf;
+    count     = transaction->count;
 #if (FLS_DMA_ENABLE == STD_ON)
-        if (Fls_DrvObj.flsEdmaReadEnabled == TRUE)
+    if (Fls_DrvObj.flsEdmaReadEnabled == TRUE)
+    {
+        /* Check if the qspi memory address is 4 byte aligned. */
+        dmaOffset       = (transaction->addrOffset + 0x3U) & (~0x3U);
+        nonAlignedBytes = dmaOffset - transaction->addrOffset;
+        pDmaDst         = (uint8 *)(pDst + nonAlignedBytes);
+        pDmaSrc         = (uint8 *)(pSrc + nonAlignedBytes);
+        dmaLen          = count - nonAlignedBytes;
+        /* Do the normal memory to memory transfer of nonAligned bytes at the start. */
+        while (nonAlignedBytes != (uint32)0U)
         {
-            /* Check if the qspi memory address is 4 byte aligned. */
-            dmaOffset       = (transaction->addrOffset + 0x3U) & (~0x3U);
-            nonAlignedBytes = dmaOffset - transaction->addrOffset;
-            pDmaDst         = (uint8 *)(pDst + nonAlignedBytes);
-            pDmaSrc         = (uint8 *)(pSrc + nonAlignedBytes);
-            dmaLen          = count - nonAlignedBytes;
-            /* Do the normal memory to memory transfer of nonAligned bytes at the start. */
+            *pDst = *pSrc;
+            pDst++;
+            pSrc++;
+            nonAlignedBytes--;
+        }
+
+        /* TI_COVERAGE_GAP_START [Branch] dmaLen is always greater than 0 here */
+        if (dmaLen != (uint32)0U)
+        /* TI_COVERAGE_GAP_STOP */
+        {
+            /* calculate the nonAligned bytes at the end */
+            nonAlignedBytes = dmaLen - ((dmaLen) & (~0x3U));
+
+            /* Get the previous multiple of 4 of dmaLen as edma transfer can only be done with
+             * length in multiple of 4*/
+            dmaLen = (dmaLen) & (~0x3U);
+            /* Do the normal memory to memory transfer of nonAligned bytes at the end. */
+            pDst = pDst + dmaLen;
+            pSrc = pSrc + dmaLen;
             while (nonAlignedBytes != (uint32)0U)
             {
                 *pDst = *pSrc;
@@ -771,55 +763,31 @@ static Std_ReturnType Fls_Qspi_MemMapRead(QSPI_Handle handle)
                 pSrc++;
                 nonAlignedBytes--;
             }
-
             if (dmaLen != (uint32)0U)
             {
-                /* calculate the nonAligned bytes at the end */
-                nonAlignedBytes = dmaLen - ((dmaLen) & (~0x3U));
-
-                /* Get the previous multiple of 4 of dmaLen as edma transfer can only be done with
-                 * length in multiple of 4*/
-                dmaLen = (dmaLen) & (~0x3U);
-                /* Do the normal memory to memory transfer of nonAligned bytes at the end. */
-                pDst = pDst + dmaLen;
-                pSrc = pSrc + dmaLen;
-                while (nonAlignedBytes != (uint32)0U)
-                {
-                    *pDst = *pSrc;
-                    pDst++;
-                    pSrc++;
-                    nonAlignedBytes--;
-                }
-                if (dmaLen != (uint32)0U)
-                {
-                    Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_WAIT_STAGE;
-                    FLS_edmaTransfer(pDmaDst, pDmaSrc, dmaLen, handle);
-                }
-                else
-                {
-                    // dma is not triggered for lengths lesser than 4 bytes
-                    Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_DONE;
-                }
+                Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_WAIT_STAGE;
+                FLS_edmaTransfer(pDmaDst, pDmaSrc, dmaLen, handle);
             }
-        }
-        else
-        {
-#endif
-            while ((count) != (uint32)0U)
+            else
             {
-                *pDst = *pSrc;
-                pDst++;
-                pSrc++;
-                count--;
+                // dma is not triggered for lengths lesser than 4 bytes
+                Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_DONE;
             }
-#if (FLS_DMA_ENABLE == STD_ON)
         }
-#endif
     }
     else
     {
-        status = E_NOT_OK;
+#endif
+        while ((count) != (uint32)0U)
+        {
+            *pDst = *pSrc;
+            pDst++;
+            pSrc++;
+            count--;
+        }
+#if (FLS_DMA_ENABLE == STD_ON)
     }
+#endif
     return status;
 }
 
@@ -830,19 +798,16 @@ static void Fls_Qspi_MemMapRead_sub(void)
         HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_READ_TYPE,
                       QSPI_MEM_MAP_READ_TYPE_QUAD);
     }
-    else if (Fls_DrvObj.Fls_Mode == (uint32)FLS_QSPI_RX_LINES_SINGLE)
-    {
-        HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_READ_TYPE,
-                      QSPI_MEM_MAP_READ_TYPE_NORMAL);
-    }
     else if (Fls_DrvObj.Fls_Mode == (uint32)FLS_QSPI_RX_LINES_DUAL)
     {
         HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_READ_TYPE,
                       QSPI_MEM_MAP_READ_TYPE_DUAL);
     }
+    /*FLS_QSPI_RX_LINES_SINGLE mode by default*/
     else
     {
-        /*Do nothing*/
+        HW_WR_FIELD32((FLS_QSPI_CTRL_BASE_ADDR + SPI_SETUP0_REG) + (FLS_QSPI_CS0 * 0x4U), QSPI_SPI_SETUP0_REG_READ_TYPE,
+                      QSPI_MEM_MAP_READ_TYPE_NORMAL);
     }
 }
 /**
@@ -862,10 +827,12 @@ Std_ReturnType Fls_Qspi_ReadMemMapMode(QSPI_Handle handle, QSPI_Transaction *tra
             QSPI_Object *object = ((QSPI_Config *)handle)->object;
             object->transaction = trans;
             status              = Fls_Qspi_MemMapRead(handle);
+            /* TI_COVERAGE_GAP_START [Branch/Line] This branch can be covered only upon a hardware write failure */
             if (status != E_OK)
             {
                 trans->status = SPI_TRANSFER_FAILED;
             }
+            /* TI_COVERAGE_GAP_STOP */
             else
             {
                 trans->status = SPI_TRANSFER_COMPLETED;
@@ -1025,7 +992,9 @@ Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, const QSPI_CmdParams *r
         }
 
         /* Send dummy bytes associated with the read command */
+        /* TI_COVERAGE_GAP_START [Branch] dummyBytes is greater than zero for the flash used for coverage */
         if (dummyBytes > (uint8)0U)
+        /* TI_COVERAGE_GAP_STOP */
         {
             cfgAccess.buf   = (void *)&rdParams->cmd;
             cfgAccess.count = dummyBytes;
@@ -1035,7 +1004,10 @@ Std_ReturnType Fls_Qspi_QuadReadData(QSPI_Handle handle, const QSPI_CmdParams *r
         }
 
         /* Send data associated with command, if any */
+        /* TI_COVERAGE_GAP_START [Branch] rdData_Len is initialised to 0U and
+         * never modified within this function, so the false condition is never reached, this is defensive check */
         if (rdParams->DataLen > rdData_Len)
+        /* TI_COVERAGE_GAP_STOP */
         {
             cfgAccess.buf   = (uint8 *)rdParams->rxDataBuf;
             cfgAccess.count = rdParams->DataLen / ((uint32)8 >> (uint32)3U);
@@ -1196,20 +1168,25 @@ Std_ReturnType Fls_Qspi_ReadConfigMode(QSPI_Handle handle, QSPI_Transaction *tra
             {
                 retVal = E_OK;
             }
+            /* TI_COVERAGE_GAP_START [Branch/Line] else branch coverage can be only upon hardware read failure*/
             else
             {
                 retVal = E_NOT_OK;
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
         else
         {
             retVal = E_NOT_OK;
         }
     }
+    /* TI_COVERAGE_GAP_START [Branch/Line] The else coverage requires the argument to be NULL, wrParams is never NULL
+    unless there is any data corruption. This is a defensive check */
     else
     {
         retVal = E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
     return retVal;
 }
 

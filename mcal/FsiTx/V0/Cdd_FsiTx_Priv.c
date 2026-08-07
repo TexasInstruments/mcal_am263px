@@ -126,49 +126,41 @@ extern VAR(Cdd_FsiTx_DriverObjType, CDD_FSITX_VAR_CLEARED) Cdd_FsiTx_DrvObj;
 /*
  * Design:
  */
-Std_ReturnType CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
+void CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
 {
     uint32 baseAddr = 0;
-    uint32 retVal   = E_OK;
     /* Assign base address */
 
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
     CddFsiTx_selectTxPLLClock(baseAddr, CSL_CDD_FSI_TX_CLK_SELECT);
     CddFsiTx_resetTxModule(baseAddr);
-    /* include 5 clock pulse delay*/
+    /* include 5 clock pulse delay */
     CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
     CddFsiTx_clearTxModuleReset(baseAddr);
     /* include 5 clock pulse delay*/
     CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
     CddFsiTx_setPrescaler(baseAddr, hwUnitObj->hwUnitCfg.Prescalar);
     CddFsiTx_enableClock(baseAddr);
-    retVal = CddFsiTx_setTxDataLane(baseAddr, (uint16)CDD_FSI_TX_SINGLE_DATA_LANE);
+    (void)CddFsiTx_setTxDataLane(baseAddr, (uint16)CDD_FSI_TX_SINGLE_DATA_LANE);
     CddFsiTx_setStartMode(baseAddr, CDD_FSI_TX_SW_START_MODE);
 
-    /* TI_COVERAGE_GAP_START - [Branch] Cannot be achieved as we don't have control
-       over the second parameter of API CddFsiTx_setTxDataLane */
-    if (retVal == E_OK)
+    CddFsiTx_disableInterrupt(hwUnitObj->hwUnitCfg.baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
+    CddFsiTx_clearAllTxEvents(baseAddr);
+
+    if (hwUnitObj->hwUnitCfg.transmitMode == CDD_FSI_TX_INTERRUPT_MODE)
     {
-        /* TI_COVERAGE_GAP_STOP */
-        CddFsiTx_disableInterrupt(hwUnitObj->hwUnitCfg.baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
-        CddFsiTx_clearAllTxEvents(baseAddr);
-
-        if (hwUnitObj->hwUnitCfg.transmitMode == CDD_FSI_TX_INTERRUPT_MODE)
-        {
-            (void)CddFsiTx_enableInterrupt(baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
-        }
-
-        /* The Transmit buffer pointer keeps at initial position*/
-        CddFsiTx_ForceTxBufferPtr(baseAddr, 0);
-        CddFsiTx_sendFlushSequence(baseAddr);
-        /* include 5 clock pulse delay*/
-        CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
-        CddFsiTx_stopFlushSequence(baseAddr);
+        (void)CddFsiTx_enableInterrupt(baseAddr, (uint8)CDD_FSI_TX_INT_TYPE);
     }
+
+    /* The Transmit buffer pointer keeps at initial position*/
+    CddFsiTx_ForceTxBufferPtr(baseAddr, 0);
+    CddFsiTx_sendFlushSequence(baseAddr);
+    /* include 5 clock pulse delay*/
+    CddFsiTx_delayWait((uint32)10U * (uint32)(hwUnitObj->hwUnitCfg.Prescalar));
+    CddFsiTx_stopFlushSequence(baseAddr);
 #if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
     CddFsiTx_enableTxDMAEvent(baseAddr);
 #endif
-    return ((Std_ReturnType)retVal);
 }
 
 /*
@@ -228,47 +220,36 @@ Std_ReturnType CddFsiTx_copyConfig(Cdd_FsiTx_DriverObjType *drvObj, const Cdd_Fs
 
 /*  Design:
  *  Requirement(s): SITARAMCU_MCAL-___    */
-Std_ReturnType CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
+void CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj)
 {
-    uint32         baseAddr;
-    Std_ReturnType retVal = E_NOT_OK;
+    uint32 baseAddr;
+
     /* Assign base address */
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
-    retVal   = CddFsiTx_setFrameType(baseAddr, (uint16)CDD_FSI_TX_DATA_PING_FRAME);
+    (void)CddFsiTx_setFrameType(baseAddr, (uint16)CDD_FSI_TX_DATA_PING_FRAME);
 
     CddFsiTx_enableTxPingTimer(baseAddr, hwUnitObj->hwUnitCfg.pingTriggerTimeout, CDD_FSI_TX_PING_TAG0);
 
-    /* TI_COVERAGE_GAP_START - [Branch] CddFsiTx_setFrameType won't fail,
-       as we dont have control over the second parameter frames */
-    if (retVal == E_OK)
+    if (Cdd_FsiTx_PingStatus != CDD_FSI_TX_PING_ZERO_SENT)
     {
-        if (Cdd_FsiTx_PingStatus != CDD_FSI_TX_PING_ZERO_SENT)
+        /* Set the Pingtag as Tag0 for CDD_FSI_TX HW unit. */
+        CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG0);
+        if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
         {
-            /* Set the Pingtag as Tag0 for CDD_FSI_TX HW unit. */
-            CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG0);
-            if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
-            {
-                CddFsiTx_startTxTransmit(baseAddr);
-            }
-            Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ZERO_SENT;
+            CddFsiTx_startTxTransmit(baseAddr);
         }
-        else
-        {
-            /* Cdd_FsiTx_PingStatus is CDD_FSI_TX_PING_ZERO_SENT (guaranteed by else branch) */
-            CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG1);
-            if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
-            {
-                CddFsiTx_startTxTransmit(baseAddr);
-            }
-            Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ONE_SENT;
-        }
+        Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ZERO_SENT;
     }
     else
     {
-        CddFsiTx_ReportRuntimeError(CDD_FSI_TX_INIT_SID, CDD_FSI_TX_E_INVALID_EVENT);
+        /* Cdd_FsiTx_PingStatus is CDD_FSI_TX_PING_ZERO_SENT (guaranteed by else branch) */
+        CddFsiTx_setPingTag(baseAddr, CDD_FSI_TX_PING_TAG1);
+        if (hwUnitObj->hwUnitCfg.triggSrc == CDD_FSI_TX_TRIGG_SRC_SW)
+        {
+            CddFsiTx_startTxTransmit(baseAddr);
+        }
+        Cdd_FsiTx_PingStatus = CDD_FSI_TX_PING_ONE_SENT;
     }
-    /* TI_COVERAGE_GAP_STOP */
-    return retVal;
 }
 Std_ReturnType CddFsiTx_BufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
                                    P2VAR(uint16, AUTOMATIC, CDD_FSI_TX_APPL_DATA) databuffer, uint32 userData,
@@ -376,9 +357,9 @@ void CddFsiTx_IrqTx(Cdd_FsiTx_HwUnitObjType *hwUnitObj, CddFsiTx_McalIntNumberTy
     (void)InterruptNum;
     uint32 baseAddr;
     baseAddr = hwUnitObj->hwUnitCfg.baseAddr;
-    {
-        (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_PING_TRIGGERED);
-    }
+
+    (void)CddFsiTx_clearTxEvents(baseAddr, CDD_FSI_TX_PING_TRIGGERED);
+
     if ((EvtFlag & CDD_FSI_TX_FRAME_DONE_MASK) == 1U)
     {
         Cdd_FsiTx_DrvObj.CddFsiTxNotificationPtr(hwUnitObj->hwUnitCfg.hwId);
@@ -643,8 +624,9 @@ static void CddFsiTx_delayWait(uint32 delaycount)
     }
     while (tempCount <= 0U)
     {
-        MCAL_SW_DELAY(tempCount);
+        break;
     }
+    MCAL_SW_DELAY(tempCount);
 }
 
 #define CDD_FSITX_STOP_SEC_CODE

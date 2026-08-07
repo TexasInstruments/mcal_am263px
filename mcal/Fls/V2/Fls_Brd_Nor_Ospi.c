@@ -104,7 +104,7 @@ volatile VAR(uint8, FLS_VAR_INIT) Fls_WriteStage = FLS_S_INIT_STAGE;
 #include "Fls_Ospi_Edma.h"
 #include "cslr_fss.h"
 
-static void           Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
+void                  Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
 static void           Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize);
 static Std_ReturnType Fls_norProcessErase(void);
 #if (STD_OFF == FLS_USE_INTERRUPTS)
@@ -198,7 +198,9 @@ Std_ReturnType Nor_OspiWaitDAC(OSPI_Handle handle, uint32 timeOut)
     while (timeOutVal != 0U)
     {
         retVal = Nor_OspiCmdRead(handle, Fls_Config_SFDP_Ptr->cmdRdsr, OSPI_CMD_INVALID_ADDR, 3, 8, &rdstatus[0U], 2);
+        /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal != E_OK can be covered only with hardware read failure */
         if ((retVal == E_OK) && ((rdstatus[0U] & 1U) == 0U))
+        /* TI_COVERAGE_GAP_STOP */
         {
             retVal = E_OK;
             break;
@@ -248,7 +250,9 @@ Std_ReturnType Nor_OspiWaitReady(OSPI_Handle handle, uint32 timeOut)
     while (localtimeOut > 0U)
     {
         retVal = Nor_OspiCmdRead(handle, cmd, cmdAddr, numAddrBytes, dummyBits, readStatus, numBytesToRead);
+        /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal != E_OK can be covered only with hardware read failure*/
         if ((retVal == (Std_ReturnType)E_OK) && ((readStatus[0] & (uint8)bitMask) == 0U))
+        /* TI_COVERAGE_GAP_STOP */
         {
             break;
         }
@@ -371,28 +375,34 @@ Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
 Std_ReturnType Nor_OspiRead(OSPI_Handle handle, uint32 offset, uint8 *buf, uint32 len)
 {
     Std_ReturnType retVal = E_OK;
-    /* TI_COVERAGE_GAP_START [Branch/Line] Defensive NULL handle check; handle is always valid after successful
-    Fls_Init; NULL handle scenario not inducible without hardware/driver initialization failure */
+    /* TI_COVERAGE_GAP_START [Branch/Line] All conditions are covered in one or more configurations, not
+     * all, hence the gap here */
     if (handle == NULL_PTR)
     {
         retVal = E_NOT_OK;
     }
     /* TI_COVERAGE_GAP_STOP */
     /* Validate address input */
-    /* TI_COVERAGE_GAP_START [Branch/Line] Defensive bounds check; address range is validated by DET checks in
-    Fls.c before Nor_OspiRead is called; out-of-range scenario not inducible in normal test operation */
+    /* TI_COVERAGE_GAP_START [Branch/Line] All conditions are covered in one or more configurations,
+     * not all, hence the gap here */
     if ((offset + len) > (Fls_Config_SFDP_Ptr->flashSize))
     {
         retVal = E_NOT_OK;
     }
     /* TI_COVERAGE_GAP_STOP */
 #if (STD_ON == FLS_OSPI_PHY_ENABLE)
+    /* TI_COVERAGE_GAP_START [Branch] FALSE direction is never taken: prior read setup always succeeds; PHY enable
+     * failure not inducible in test. */
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         retVal = Fls_PhyEnable();
     }
 #endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
+    /* TI_COVERAGE_GAP_START [Branch] All conditions are covered in one or more configurations, not all, hence the gap
+     * here*/
     if (retVal == E_OK)
+    /* TI_COVERAGE_GAP_STOP */
     {
         OSPI_Transaction transaction;
 
@@ -425,8 +435,8 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
 {
     Std_ReturnType retVal      = E_OK;
     uint32         localoffset = offset;
-    /* TI_COVERAGE_GAP_START [Branch/Line] Defensive NULL handle check; handle is always valid after successful
-    Fls_Init; NULL handle scenario not inducible without hardware/driver initialization failure */
+    /* TI_COVERAGE_GAP_START [Branch/Line] All conditions are covered in one or more configurations, not all, hence the
+     * gap here*/
     if (handle == NULL_PTR)
     {
         retVal = E_NOT_OK;
@@ -434,11 +444,17 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
     /* TI_COVERAGE_GAP_STOP */
 
     boolean isFlsWriteInitStage = FALSE;
+    /* TI_COVERAGE_GAP_START [Branch] All conditions are covered in one or more configurations, not all, hence the gap
+     * here */
     if (Fls_WriteStage == FLS_S_INIT_STAGE)
+    /* TI_COVERAGE_GAP_STOP */
     {
         isFlsWriteInitStage = TRUE;
     }
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] All conditions are covered in one or more configurations, not all, hence the
+     * gap here FLS_S_INIT_STAGE on entry; NULL handle or non-init stage not reachable in test. */
     if ((E_OK == retVal) && (isFlsWriteInitStage == TRUE))
+    /* TI_COVERAGE_GAP_STOP */
     {
         uint32           pageSize, chunkLen, actual;
         OSPI_Transaction transaction;
@@ -493,7 +509,10 @@ Std_ReturnType Nor_OspiWrite(OSPI_Handle handle, uint32 offset, uint8 *buf, uint
                 retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashWriteTimeout);
             }
 
+            /* TI_COVERAGE_GAP_START [Branch] FALSE direction leads to the already-tagged else error path; flash page
+             * write always succeeds in test, hardware failure not inducible. */
             if (retVal == E_OK)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 localoffset += chunkLen;
                 actual      += chunkLen;
@@ -812,8 +831,8 @@ Std_ReturnType Nor_OspiSetOeBit(OSPI_Handle handle, uint8 oeType)
         case 0:
             /* No octal enable bit */
             break;
-        /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] OE bit setting only required for 1-1-8S/8S-8S-8S protocols; not
-         supported by the flash currently used */
+        /* TI_COVERAGE_GAP_START [Branch/Line] OE bit setting only required for 1-1-8S/8S-8S-8S protocols; OE bit as 1
+         protocols not supported by the flash currently used */
         case 1:
             /* Octal enable is the bit 3 of SR2 */
             bitPos = (uint8)(1U << 3U);
@@ -862,7 +881,7 @@ static uint8 Fls_norDmaRead(void)
     return retVal;
 }
 
-static void Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize)
+void Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize)
 {
     if (retVal == E_OK)
     {
@@ -879,37 +898,43 @@ static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize)
     switch (job)
     {
         case FLS_JOB_WRITE:
+            /* TI_COVERAGE_GAP_START [Branch] FALSE direction is never taken: Fls_JobDoneNotification1 is only called
+             * via ISR when write is complete (FLS_S_WRITE_DONE); partial-write state not reachable in tests. */
             if (FLS_S_WRITE_DONE == Fls_WriteStage)
-            {
-                Fls_JobDoneNotification(chunkSize, job);
-            }
-            break;
-        case FLS_JOB_ERASE:
-            /* TI_COVERAGE_GAP_START [Branch] Defensive check, Fls_processJobErase only calls Fls_JobNotification when
-            Fls_EraseStage==FLS_S_DEFAULT; false branch architecturally unreachable */
-            if (FLS_S_DEFAULT == Fls_EraseStage)
             /* TI_COVERAGE_GAP_STOP */
             {
                 Fls_JobDoneNotification(chunkSize, job);
             }
             break;
+        case FLS_JOB_ERASE:
+            Fls_JobDoneNotification(chunkSize, job);
+            break;
+        /* TI_COVERAGE_GAP_START [Branch] FLS_JOB_COMPARE is covered in one or more configurations, not all, hence the
+         * gap here*/
         case FLS_JOB_COMPARE:
             Fls_JobDoneNotification(chunkSize, job);
             break;
+        /* TI_COVERAGE_GAP_STOP */
         case FLS_JOB_READ:
 #if (FLS_DMA_ENABLE == STD_ON)
+            /* TI_COVERAGE_GAP_START [Branch/MC-DC] TRUE direction for flsEdmaReadEnabled
+             * reach FLS_S_READ_DMA_DONE stage during READ ISR; READ job completion notification uses the else path. */
             if ((Fls_DrvObj.flsDmaStage == FLS_S_READ_DMA_DONE) || (Fls_DrvObj.flsEdmaReadEnabled == FALSE))
             {
                 Fls_JobDoneNotification(chunkSize, job);
             }
+            /* TI_COVERAGE_GAP_STOP */
 #else
             Fls_JobDoneNotification(chunkSize, job);
 #endif
 
             break;
+        /* TI_COVERAGE_GAP_START [Branch/Line] Blank check job is covered in one or more configurations, not all, hence
+         * the gap here*/
         case FLS_JOB_BLANKCHECK:
             Fls_JobDoneNotification(chunkSize, job);
             break;
+        /* TI_COVERAGE_GAP_STOP */
         /* TI_COVERAGE_GAP_START [Branch] Defensive default, jobType is always one of the defined enum values;
          unreachable in correct operation */
         default:
@@ -940,7 +965,10 @@ static Std_ReturnType Fls_norProcessErase(void)
             retVal = Fls_norChipErase(Fls_DrvObj.spiHandle, Fls_DrvObj.flashAddr);
         }
     }
+    /* TI_COVERAGE_GAP_START [Branch] FALSE direction leads to the already-tagged FLS_S_FAIL else path; RDSR bus
+     * read failure required to reach FLS_S_FAIL, which is not inducible in test. */
     else if (Fls_EraseStage == FLS_S_IN_PROGRESS)
+    /* TI_COVERAGE_GAP_STOP */
     {
         /* Poll for erase completion - Fls_NorGetEraseStatus updates flsEraseState */
         retVal = Fls_NorGetEraseStatus(Fls_DrvObj.spiHandle);
@@ -975,10 +1003,13 @@ static void Fls_processJobErase(uint32 chunkSize)
     postBlankCheckFlashaddr            = Fls_DrvObj.postBlankCheckFlashaddr;
 #endif
 
+    /* TI_COVERAGE_GAP_START [Branch] All conditions are covered in one or more configurations, not all, hence the gap
+     * here */
     if (chunkSize == 0U)
     {
         Fls_JobNotification(FLS_JOB_ERASE, E_NOT_OK, chunkSize);
     }
+    /* TI_COVERAGE_GAP_STOP */
     else
     {
         /*This function takes care of SchM_Entry_Fls based on erase stage*/
@@ -1099,7 +1130,10 @@ void processJobs(Fls_JobType job)
 #endif
             break;
         case FLS_JOB_WRITE:
+            /* TI_COVERAGE_GAP_START [Branch] All conditions are covered in one or more configurations, not all, hence
+             * the gap here */
             if (Fls_WriteStage == FLS_S_INIT_STAGE)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
                 do not use this hook function for critical section protection*/
@@ -1126,10 +1160,7 @@ void processJobs(Fls_JobType job)
 #if (STD_ON == FLS_WRITE_VERIFICATION_ENABLED)
             if (Fls_WriteStage == FLS_S_WRITE_DONE)
             {
-                /* TI_COVERAGE_GAP_START [Branch] result == E_NOT_OK cannot be validated unless a hardware read failure
-                 */
                 if (retVal == E_OK)
-                /* TI_COVERAGE_GAP_STOP */
                 {
                     retVal = Fls_norCompare(chunkSize);
                 }
@@ -1165,8 +1196,11 @@ void processJobs(Fls_JobType job)
             Fls_JobNotification(job, retVal, chunkSize);
 #endif
             break;
+        /* TI_COVERAGE_GAP_START [Branch] All conditions are covered in one or more configurations, not all, hence the
+         * gap here */
         default:
             break;
+            /* TI_COVERAGE_GAP_STOP */
     }
 
     (void)retVal;
@@ -1190,15 +1224,24 @@ static boolean Fls_IsJobDoneNotifyNeeded(Fls_JobType job)
     {
         isFlsWriteStageDone = TRUE;
     }
+    /* TI_COVERAGE_GAP_START [Branch] FALSE direction is never taken: erase stage is always FLS_S_DEFAULT when
+     * Fls_JobDoneNotification is called (either no active erase, or erase just completed). */
     if (Fls_EraseStage == FLS_S_DEFAULT)
+    /* TI_COVERAGE_GAP_STOP */
     {
         isFlsEraseStage = TRUE;
     }
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] FALSE direction is never taken: in the coverage build this function is only
+     * called for completed WRITE operations (job == FLS_JOB_WRITE and write stage is FLS_S_WRITE_DONE). */
     if ((job == FLS_JOB_WRITE) && (isFlsWriteStageDone == TRUE))
+    /* TI_COVERAGE_GAP_STOP */
     {
         isNotify = TRUE;
     }
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] FALSE direction is never taken: when called for ERASE completion, erase
+     * stage is always FLS_S_DEFAULT (job always matches and isFlsEraseStage is always TRUE). */
     if ((job == FLS_JOB_ERASE) && (isFlsEraseStage == TRUE))
+    /* TI_COVERAGE_GAP_STOP */
     {
         isNotify = TRUE;
     }
@@ -1235,7 +1278,10 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
             Fls_DrvObj.transferred += chunkSize;
             Fls_WriteStage          = FLS_S_INIT_STAGE;
 
+            /* TI_COVERAGE_GAP_START [Branch] All conditions are covered in one or more configurations, not all, hence
+             * the gap here */
             if ((Fls_LengthType)0U == Fls_DrvObj.length)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 Fls_DrvObj.jobResultType = MEMIF_JOB_OK;
                 Fls_DrvObj.status        = MEMIF_IDLE;
@@ -1243,7 +1289,10 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
                 Fls_DrvObj.transferred   = 0U;
             }
 
+            /* TI_COVERAGE_GAP_START [Branch/MC-DC] All conditions are covered in one or more configurations, not all,
+             * hence the gap here */
             if (((Fls_LengthType)0U == Fls_DrvObj.length) && (Fls_DrvObj.Fls_JobEndNotification != NULL_PTR))
+            /* TI_COVERAGE_GAP_STOP */
             {
                 Fls_DrvObj.Fls_JobEndNotification();
             }
@@ -1285,8 +1334,8 @@ void Fls_ErrorNotification(Fls_JobType job, uint8 retVal)
                                          FLS_E_VERIFY_ERASE_FAILED);
 #endif
         }
-        /* TI_COVERAGE_GAP_START [Branch] Pre-write blank check mismatch only occurs when writing to non-erased flash;
-         test always erases before writing */
+        /* TI_COVERAGE_GAP_START [Branch/MC-DC] Pre-write blank check mismatch only occurs when writing to non-erased
+         flash; test always erases before writing */
         else if ((FLS_JOB_WRITE == job) && (E_BLANKCHECK_MISMATCH == retVal))
         {
             /* Pre-write blank check fail DET */
@@ -1375,7 +1424,10 @@ uint8 Fls_norBlankCheck(uint32 actualChunkSize)
 {
     uint8 retVal = (uint8)E_OK;
 #if (FLS_USE_INTERRUPTS == STD_ON)
+    /* TI_COVERAGE_GAP_START [Branch] FALSE direction (subsequent chunk, transferred != 0) is never taken: all
+     * blank check test jobs are single-chunk so transferred is always 0 at entry. */
     if (Fls_DrvObj.transferred == (Fls_LengthType)0U)
+    /* TI_COVERAGE_GAP_STOP */
     {
         Fls_DrvObj.compareAddr = Fls_BlankCheckRxDataBuf;
     }
@@ -1385,7 +1437,10 @@ uint8 Fls_norBlankCheck(uint32 actualChunkSize)
     uint32 len     = actualChunkSize;
     uint32 max_len = (uint32)(sizeof(Fls_BlankCheckRxDataBuf) / sizeof(Fls_BlankCheckRxDataBuf[0]));
 
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] FALSE direction leads to already-tagged else error path; spiHandle is
+     * always valid and chunk size always fits within the buffer in tests. */
     if ((Fls_DrvObj.spiHandle != NULL_PTR) && (len <= max_len))
+    /* TI_COVERAGE_GAP_STOP */
     {
         retVal = Nor_OspiRead(Fls_DrvObj.spiHandle, addr, &Fls_BlankCheckRxDataBuf[0], len);
         if ((uint8)E_OK == retVal)
@@ -1435,6 +1490,9 @@ void Fls_resetDrvObj(Fls_DriverObjType *drvObj)
         drvObj->transferred              = (Fls_LengthType)0U;
         drvObj->baudRateDiv              = (uint32)0U;
         drvObj->currentprotocolMode      = (uint32)0U;
+#if (FLS_TIMEOUT_SUPERVISION_ENABLED == STD_ON)
+        drvObj->eraseStartCount = 0U;
+#endif
     }
     return;
 }
@@ -1539,8 +1597,7 @@ Std_ReturnType Nor_OspiSet4ByteAddrMode(OSPI_Handle handle)
         /* Issue instruction 0xB7 without WREN */
         retVal = Nor_OspiCmdWrite(handle, 0xB7, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     }
-    /* TI_COVERAGE_GAP_START [Branch/Line] 4-byte address enable bits 1-4 are not set in test flash SFDP configuration;
-     only bit 0 path is exercised */
+    /* TI_COVERAGE_GAP_START [Branch/Line] 4-byte address enable bits 1-4 are not supported by flash used */
     if ((Fls_Config_SFDP_Ptr->fourByteAddrEnSeq & (uint8)(1U << 1U)) != (uint8)0U)
     {
         /* Issue instruction 0xB7 with WREN */
@@ -1585,7 +1642,10 @@ Std_ReturnType Ospi_SetRegCfg(OSPI_Handle handle, const Fls_RegEnConfig *rCfg)
     Std_ReturnType retVal = E_OK;
 
     /* Check if parameter is configured with addressed registers */
+    /* TI_COVERAGE_GAP_START [Branch] FALSE direction (else/nothing-to-do path) is never taken: all register
+     * configuration entries used in test always have non-zero read/write command opcodes. */
     if ((rCfg->cmdRegRd != 0U) || (rCfg->cmdRegWr != 0U))
+    /* TI_COVERAGE_GAP_STOP */
     {
         uint8 cfgReg = 0;
         /* TI_COVERAGE_GAP_START [Branch] This value is always true for the flash used, hence false condition cannot be
@@ -1612,10 +1672,9 @@ Std_ReturnType Ospi_SetRegCfg(OSPI_Handle handle, const Fls_RegEnConfig *rCfg)
             /* Bitwise OR the bit pattern for setting the dummyCycle selected */
             cfgReg |= (rCfg->cfgRegBitP << rCfg->shift);
             /* There is register config, address might not be needed */
-            /* TI_COVERAGE_GAP_START [Branch] This value is always true for the flash used, hence false condition cannot
-            be validated */
+
             if (rCfg->isAddrReg == TRUE)
-            /* TI_COVERAGE_GAP_STOP */
+
             {
                 retVal += Nor_OspiRegWrite(handle, rCfg->cmdRegWr, rCfg->cfgReg, cfgReg);
             }
@@ -1766,7 +1825,10 @@ Std_ReturnType Fls_norCompare(uint32 actualChunkSize)
 {
     Std_ReturnType retVal = E_OK;
 #if (FLS_USE_INTERRUPTS == STD_ON)
+    /* TI_COVERAGE_GAP_START [Branch] FALSE direction (subsequent chunk, transferred != 0) is never taken: all compare
+     * test jobs are single-chunk so transferred is always 0 at entry. */
     if (Fls_DrvObj.transferred == (Fls_LengthType)0U)
+    /* TI_COVERAGE_GAP_STOP */
     {
         Fls_DrvObj.compareAddr = Fls_CompareRxDataBuf;
     }

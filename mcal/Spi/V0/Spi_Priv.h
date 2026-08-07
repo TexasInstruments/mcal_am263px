@@ -77,6 +77,10 @@
 #define SPI_STOP_SEC_CODE
 #include "Spi_MemMap.h"
 #include "hw_mcspi.h"
+#if (SPI_GPIO_CS_ENABLED == STD_ON)
+/* Design: MCAL-25157 */
+#include "Dio.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -364,6 +368,10 @@ void Spi_mcspiRegReadback(const Spi_HwUnitObjType *hwUnitObj, Spi_RegisterReadba
 Spi_ChannelObjPtrType Spi_getCurrChannelObj(Spi_ChannelType chId);
 void                  Spi_processChCompletion(Spi_HwUnitObjType *hwUnitObj, Spi_JobResultType jobResult);
 uint32                Spi_mcspiGetCsIntrMask(uint32 csNum, Spi_TxRxMode txRxMode);
+#if (SPI_GPIO_CS_ENABLED == STD_ON)
+/* Design: MCAL-25157 */
+void Spi_ConfigGpioChipSelect(const Spi_JobObjType *jobObj, boolean level);
+#endif
 #if (SPI_DMA_ENABLE == STD_ON)
 sint32         Spi_dmaChInit(Spi_DriverObjType *drvObj, Spi_HwUnitObjType *hwUnitObj, Spi_TxRxMode txRxMode);
 Std_ReturnType Spi_dmaTransfer(const Spi_HwUnitObjType *HwUnitObj, Spi_JobObjType *jobObj, Spi_ChannelObjPtrType chObj,

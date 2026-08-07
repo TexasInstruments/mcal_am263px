@@ -242,10 +242,6 @@ Std_ReturnType Fls_Ospi_ReadCmd(OSPI_Handle handle, const OSPI_ReadCmdParams *rd
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_OPCODE_EXT_LOWER_REG,
                       OSPI_OPCODE_EXT_LOWER_REG_EXT_STIG_OPCODE_FLD, cmdExt);
     }
-    else
-    {
-        /* do nothing */
-    }
 
     if ((rdParams->cmdAddr != OSPI_CMD_INVALID_ADDR) && (rdParams->numAddrBytes > 0U))
     {
@@ -594,10 +590,6 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, const OSPI_WriteCmdParams *
         /* Update the flash cmd address register */
         HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_CMD_ADDR_REG, wrParams->cmdAddr);
     }
-    else
-    {
-        /* do nothing */
-    }
 
     uint32 dualOpCode =
         HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_DUAL_BYTE_OPCODE_EN_FLD);
@@ -625,10 +617,6 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, const OSPI_WriteCmdParams *
         /* Set extended STIG opcode */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_OPCODE_EXT_LOWER_REG,
                       OSPI_OPCODE_EXT_LOWER_REG_EXT_STIG_OPCODE_FLD, cmdExt);
-    }
-    else
-    {
-        /* do nothing */
     }
 
     if (txLen != 0U)
@@ -659,10 +647,6 @@ Std_ReturnType Fls_Ospi_WriteCmd(OSPI_Handle handle, const OSPI_WriteCmdParams *
             HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_FLASH_WR_DATA_UPPER_REG, wrData);
         }
         /* TI_COVERAGE_GAP_STOP */
-    }
-    else
-    {
-        /* do nothing */
     }
     retVal = (Std_ReturnType)Fls_Ospi_ExecCmd();
 
@@ -773,16 +757,21 @@ Std_ReturnType Fls_Ospi_writeIndirect(OSPI_Handle handle, OSPI_Transaction *tran
         while (remainingSize > 0U)
         {
             /* Write SRAM level*/
+            /* TI_COVERAGE_GAP_START [Branch] retry == 0 is hit only when there is a flash read failure in hardware,
+            hence below while loop and follow if is partially covered */
             while (retry != 0U)
+            /* TI_COVERAGE_GAP_STOP */
             {
                 sramLevel = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_SRAM_FILL_REG) >>
                             OSPI_SRAM_FILL_REG_SRAM_FILL_INDAC_WRITE_FLD_SHIFT;
+                /* TI_COVERAGE_GAP_START [Branch] sramLevel is always valid unless a hardware failure */
                 if (sramLevel <= OSPI_SRAM_WATERMARK_WR_LVL)
+                /* TI_COVERAGE_GAP_STOP */
                 {
                     break;
                 }
-                /* TI_COVERAGE_GAP_START [Branch] SRAM watermark stall never occurs in test; hardware-level FIFO stall
-            not inducible */
+                /* TI_COVERAGE_GAP_START [Branch/Line] SRAM watermark stall never occurs in test; hardware-level FIFO
+            stall not inducible */
                 uint32 delay = OSPI_POLL_IDLE_DELAY;
                 while (delay != 0U)
                 {
@@ -791,8 +780,8 @@ Std_ReturnType Fls_Ospi_writeIndirect(OSPI_Handle handle, OSPI_Transaction *tran
                 retry--;
             }
             /* TI_COVERAGE_GAP_STOP */
-            /* TI_COVERAGE_GAP_START [Branch] SRAM watermark stall never occurs in test; hardware-level FIFO stall not
-            inducible */
+            /* TI_COVERAGE_GAP_START [Branch/Line] SRAM watermark stall never occurs in test; hardware-level FIFO stall
+            not inducible */
             if (retry == 0U)
             {
                 wrFlag = 1U;
@@ -853,7 +842,7 @@ Std_ReturnType Fls_Ospi_writeIndirect(OSPI_Handle handle, OSPI_Transaction *tran
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_INDIRECT_WRITE_XFER_CTRL_REG,
                           OSPI_INDIRECT_WRITE_XFER_CTRL_REG_IND_OPS_DONE_STATUS_FLD, 1);
         }
-        /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
+        /* TI_COVERAGE_GAP_START [Branch/Line] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
         else
         {
             if (wrFlag == 0U)
@@ -918,9 +907,7 @@ OSPI_Handle Fls_Ospi_Open(void)
  */
 void Fls_Ospi_Close(OSPI_Handle handle)
 {
-    /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
     if (handle != NULL_PTR)
-    /* TI_COVERAGE_GAP_STOP */
     {
         OSPI_Object *obj = ((OSPI_Config *)handle)->object;
         /* Disable interrupts by read-modify-write to IRQ mask register */
@@ -1430,6 +1417,9 @@ void Fls_Ospi_SetProtocolCmds(OSPI_Handle handle, uint32 cmd, uint32 addr, uint3
         {
             /* Enable DDR Mode */
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_ENABLE_DTR_PROTOCOL_FLD, TRUE);
+            /* Enable DDR EN commands */
+            HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG,
+                          OSPI_DEV_INSTR_RD_CONFIG_REG_DDR_EN_FLD, 1);
             /* Enable dual byte opcode */
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_DUAL_BYTE_OPCODE_EN_FLD, TRUE);
         }
@@ -1498,10 +1488,6 @@ void Fls_Ospi_setXferOpCodes(OSPI_Handle handle, uint8 readCmd, uint8 pageProgCm
             HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_OPCODE_EXT_LOWER_REG,
                           OSPI_OPCODE_EXT_LOWER_REG_EXT_WRITE_OPCODE_FLD, cmdExtWrite);
         }
-    }
-    else
-    {
-        /* do nothing */
     }
 }
 /**
@@ -1821,7 +1807,8 @@ void Fls_hwi(void)
                     }
 
                     intrStatus = HW_RD_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_IRQ_STATUS_REG);
-                    /* TI_COVERAGE_GAP_START [Branch] false condition cannot be validated unless a hardware failure */
+                    /* TI_COVERAGE_GAP_START [Branch/MC-DC] false condition cannot be validated unless a hardware
+                     * failure */
                     if ((Fls_DrvObj.length == 0U) ||
                         ((intrStatus & OSPI_IRQ_STATUS_REG_INDIRECT_OP_DONE_FLD_MASK) != 0U))
                     /* TI_COVERAGE_GAP_STOP */
@@ -2033,8 +2020,8 @@ static Std_ReturnType Fls_set888mode_regCfg(OSPI_Handle handle, OSPI_Object *obj
     Fls_RegEnConfig *dCfg   = &(Fls_Config_SFDP_Ptr->protos.strDtrCfg);
 
     /* Check for register addressed 8-8-8 mode */
-    /* TI_COVERAGE_GAP_START [Branch] The below if-else is partially covered as only 8D-8D-8D is supported by the flash
-    used */
+    /* TI_COVERAGE_GAP_START [Branch/MC-DC] The below if-else is partially covered as only 8D-8D-8D is supported by the
+    flash used */
     if ((octCfg->isAddrReg != 0U) && (dCfg->isAddrReg != 0U) && (dCfg->cfgReg == octCfg->cfgReg))
     /* TI_COVERAGE_GAP_STOP */
     {

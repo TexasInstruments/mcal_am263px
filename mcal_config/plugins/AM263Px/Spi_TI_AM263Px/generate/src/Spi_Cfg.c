@@ -276,6 +276,8 @@ CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) Spi_Config =
 [!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!].startBitLevel  = [!"SpiExternalDeviceConfigMCSPI/SpiExtDeviceMCSPIStartBitLevel"!],
 [!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!].receptionLineEnable  = [!"SpiExternalDeviceConfigMCSPI/SpiExtDeviceMCSPIDataLineSelectReception"!],
 [!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!].transmissionLineEnable  = [!"SpiExternalDeviceConfigMCSPI/SpiExtDeviceMCSPIDataLineSelectTransmission"!],
+[!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!].csSelect = [!IF "node:exists(SpiCsSelection)"!][!"SpiCsSelection"!][!ELSE!]SPI_CS_VIA_PERIPHERAL_ENGINE[!ENDIF!],
+[!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!].csGpioId = SpiConf_SpiExternalDevice_[!"@name"!]_CS,
 [!WS "4"!][!WS "4"!][!WS "4"!][!WS "4"!]},
 [!WS "4"!][!WS "4"!][!WS "4"!]},
 [!WS "4"!][!ENDLOOP!]

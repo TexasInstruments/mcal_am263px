@@ -20,6 +20,7 @@ title: Spi API GUIDE Header file
 |enum| **[Spi_TransferType](../Modules/group___s_p_i.md#enum-spi_transfertype)** | Word transfer order - MSB first or LSB first.  | 
 |enum| **[Spi_LevelType](../Modules/group___s_p_i.md#enum-spi_leveltype)** | Type for SPI Chip Select Polarity and Clock Idle Level.  | 
 |enum| **[Spi_CsPinType](../Modules/group___s_p_i.md#enum-spi_cspintype)** | SPI Chip Select Pin.  | 
+|enum| **[Spi_CsSelectionType](../Modules/group___s_p_i.md#enum-spi_csselectiontype)** | SPI Chip Select Selection - GPIO or peripheral engine. Design: MCAL-25157.  | 
 |enum| **[Spi_ClkMode](../Modules/group___s_p_i.md#enum-spi_clkmode)** | SPI Clock Mode - sets the clock polarity and phase. Note: These values are a direct register mapping. So don't change value.  | 
 |enum| **[Spi_TxRxMode](../Modules/group___s_p_i.md#enum-spi_txrxmode)** | SPI TX/RX Mode.  | 
 |enum| **[Spi_JobPriorityType](../Modules/group___s_p_i.md#enum-spi_jobprioritytype)** | SPI Job Priority.  | 
@@ -30,6 +31,7 @@ title: Spi API GUIDE Header file
 |enum| **[Mcspi_IrqStatusType](../Modules/group___s_p_i.md#enum-mcspi_irqstatustype)** | Irq status and std return type.  | 
 |typedef void(*)(void)  | **[Spi_JobEndNotifyType](../Modules/group___s_p_i.md#typedef-spi_jobendnotifytype)** | Typedef for job end notification function pointer.  | 
 |typedef void(*)(void)  | **[Spi_SeqEndNotifyType](../Modules/group___s_p_i.md#typedef-spi_seqendnotifytype)** | Typedef for sequence end notification function pointer.  | 
+|typedef uint32  | **[Spi_CsGpioIdType](../Modules/group___s_p_i.md#typedef-spi_csgpioidtype)** | DIO channel type for GPIO chip select. Design: MCAL-25157.  | 
 
 
 
@@ -167,6 +169,20 @@ Type for SPI Chip Select Polarity and Clock Idle Level.
 
 **Brief**: 
 SPI Chip Select Pin. 
+
+
+
+### enum Spi_CsSelectionType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| SPI_CS_VIA_GPIO | 0U| CS is driven via GPIO (DIO channel)   |
+| SPI_CS_VIA_PERIPHERAL_ENGINE | | CS is driven by MCSPI peripheral engine.   |
+
+
+
+
+**Brief**: 
+SPI Chip Select Selection - GPIO or peripheral engine. Design: MCAL-25157. 
 
 
 
@@ -319,6 +335,17 @@ Typedef for sequence end notification function pointer.
 
 
 
+### typedef Spi_CsGpioIdType
+```
+typedef uint32 Spi_CsGpioIdType;
+```
+
+
+**Brief**: 
+DIO channel type for GPIO chip select. Design: MCAL-25157. 
+
+
+
 
 ## Structures
 |   Name         | Brief          |
@@ -385,6 +412,7 @@ Typedef for sequence end notification function pointer.
 | SPI_SID_SET_ASYNC_MODE   | Spi_SetAsyncMode() API Service ID.  |
 | SPI_SID_MAINFUNCTION_HANDLING   | Spi_MainFunction_Handling() API Service ID.  |
 | SPI_MCSPI_FCLK   | MCSPI functional clock input in Hz. This clock is used to generate the serial clock output after the divider. Note: This is given here for reference and can't be changed.  |
+| SPI_PERIPHERAL_CS_IDENTIFIER   | Identifier used when CS is via peripheral engine (not GPIO)  |
 
 ## Functions
 

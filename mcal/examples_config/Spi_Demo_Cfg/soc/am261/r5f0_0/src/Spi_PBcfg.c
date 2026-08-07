@@ -341,6 +341,8 @@ CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) Spi_Config =
                     .startBitLevel  = SPI_LOW,
                     .receptionLineEnable  = DATA_LINE_1_RECEPTION,
                     .transmissionLineEnable  = DATA_LINE_1_TRANSMISSION,
+                    .csSelect = SPI_CS_VIA_PERIPHERAL_ENGINE,
+                    .csGpioId = SpiConf_SpiExternalDevice_SpiExternalDevice_0_CS,
                 },
             },
             [1] =
@@ -358,6 +360,8 @@ CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) Spi_Config =
                     .startBitLevel  = SPI_LOW,
                     .receptionLineEnable  = DATA_LINE_1_RECEPTION,
                     .transmissionLineEnable  = DATA_LINE_1_TRANSMISSION,
+                    .csSelect = SPI_CS_VIA_PERIPHERAL_ENGINE,
+                    .csGpioId = SpiConf_SpiExternalDevice_SpiExternalDevice_1_CS,
                 },
             },
             [2] =
@@ -375,6 +379,8 @@ CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) Spi_Config =
                     .startBitLevel  = SPI_LOW,
                     .receptionLineEnable  = DATA_LINE_1_RECEPTION,
                     .transmissionLineEnable  = DATA_LINE_1_TRANSMISSION,
+                    .csSelect = SPI_CS_VIA_PERIPHERAL_ENGINE,
+                    .csGpioId = SpiConf_SpiExternalDevice_SpiExternalDevice_2_CS,
                 },
             },
             [3] =
@@ -392,6 +398,8 @@ CONST(struct Spi_ConfigType_s, SPI_CONFIG_DATA) Spi_Config =
                     .startBitLevel  = SPI_LOW,
                     .receptionLineEnable  = DATA_LINE_1_RECEPTION,
                     .transmissionLineEnable  = DATA_LINE_1_TRANSMISSION,
+                    .csSelect = SPI_CS_VIA_PERIPHERAL_ENGINE,
+                    .csGpioId = SpiConf_SpiExternalDevice_SpiExternalDevice_3_CS,
                 },
             },
         },

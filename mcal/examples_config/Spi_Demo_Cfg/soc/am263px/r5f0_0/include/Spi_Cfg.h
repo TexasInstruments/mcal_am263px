@@ -255,6 +255,9 @@ extern "C" {
 #define SpiConf_SpiChannel_SpiChannel_9   9
 
 /** \brief Symbolic Name Chip Select  - 0 */
+
+
+
 #define SpiConf_SpiExternalDevice_CS0 (SPI_CS0)
 
 
@@ -263,6 +266,9 @@ extern "C" {
 
 
 /** \brief Symbolic Name Chip Select  - 1 */
+
+
+
 #define SpiConf_SpiExternalDevice_CS1 (SPI_CS0)
 
 
@@ -271,6 +277,9 @@ extern "C" {
 
 
 /** \brief Symbolic Name Chip Select  - 2 */
+
+
+
 #define SpiConf_SpiExternalDevice_CS2 (SPI_CS0)
 
 
@@ -279,6 +288,9 @@ extern "C" {
 
 
 /** \brief Symbolic Name Chip Select  - 3 */
+
+
+
 #define SpiConf_SpiExternalDevice_CS3 (SPI_CS0)
 
 
@@ -293,11 +305,34 @@ extern "C" {
 #define SpiConf_SpiSequence_SpiSequence_2  2
 
 
+/** \brief Macro to ON/OFF GPIO CS using DIO module */
+#define SPI_GPIO_CS_ENABLED       STD_OFF
+
 #define SpiConf_SpiExternalDevice_SpiExternalDevice_0_CS0 SCS0
+
+/** \brief Invalid GPIO CS identifier for peripheral engine CS */
+#define SpiConf_SpiExternalDevice_SpiExternalDevice_0_CS (SPI_PERIPHERAL_CS_IDENTIFIER)
+
 #define SpiConf_SpiExternalDevice_SpiExternalDevice_1_CS0 SCS0
+
+/** \brief Invalid GPIO CS identifier for peripheral engine CS */
+#define SpiConf_SpiExternalDevice_SpiExternalDevice_1_CS (SPI_PERIPHERAL_CS_IDENTIFIER)
+
 #define SpiConf_SpiExternalDevice_SpiExternalDevice_2_CS0 SCS0
+
+/** \brief Invalid GPIO CS identifier for peripheral engine CS */
+#define SpiConf_SpiExternalDevice_SpiExternalDevice_2_CS (SPI_PERIPHERAL_CS_IDENTIFIER)
+
 #define SpiConf_SpiExternalDevice_SpiExternalDevice_3_CS0 SCS0
+
+/** \brief Invalid GPIO CS identifier for peripheral engine CS */
+#define SpiConf_SpiExternalDevice_SpiExternalDevice_3_CS (SPI_PERIPHERAL_CS_IDENTIFIER)
+
 #define SpiConf_SpiExternalDevice_SpiExternalDevice_4_CS1 SCS1
+
+/** \brief Invalid GPIO CS identifier for peripheral engine CS */
+#define SpiConf_SpiExternalDevice_SpiExternalDevice_4_CS (SPI_PERIPHERAL_CS_IDENTIFIER)
+
 /** \brief Symbolic Name HW Unit - 0 */
 #define SpiConf_SpiExternalDevice_SpiExternalDevice_0_HwUnitId0 CSIB0
 /** \brief Symbolic Name HW Unit - 0 */
@@ -564,6 +599,24 @@ typedef enum
     SPI_CS3
 } Spi_CsPinType;
 
+/** \brief Identifier used when CS is via peripheral engine (not GPIO) */
+#define SPI_PERIPHERAL_CS_IDENTIFIER  (256U)
+
+/**
+ *  \brief SPI Chip Select Selection - GPIO or peripheral engine.
+ *  Design: MCAL-25157
+ */
+typedef enum
+{
+    /** \brief CS is driven via GPIO (DIO channel) */
+    SPI_CS_VIA_GPIO = 0U,
+    /** \brief CS is driven by MCSPI peripheral engine */
+    SPI_CS_VIA_PERIPHERAL_ENGINE
+} Spi_CsSelectionType;
+
+/** \brief DIO channel type for GPIO chip select. Design: MCAL-25157 */
+typedef uint32 Spi_CsGpioIdType;
+
 /**
  *  \brief SPI Clock Mode - sets the clock polarity and phase.
  *   Note: These values are a direct register mapping.
@@ -764,6 +817,11 @@ typedef struct
     Spi_DataLineReceiveType     receptionLineEnable;
     /** \brief Defines the data lines selected for transmission. */
     Spi_DataLineTransmitType    transmissionLineEnable;
+    /** \brief CS selection - GPIO or peripheral engine. Design: MCAL-25157 */
+    Spi_CsSelectionType      csSelect;
+    /** \brief DIO channel ID for GPIO CS (valid when csSelect == SPI_CS_VIA_GPIO).
+     *   Design: MCAL-25157 */
+    Spi_CsGpioIdType       csGpioId;
 } Spi_McspiExternalDeviceConfigType;
 
 /**

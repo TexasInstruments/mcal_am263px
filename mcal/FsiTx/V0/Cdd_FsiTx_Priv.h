@@ -177,7 +177,7 @@ typedef struct
 /*                          Function Declarations                             */
 /* ========================================================================== */
 
-Std_ReturnType CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj);
+void CddFsiTx_hwUnitInit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj);
 #if (STD_ON == CDD_FSI_TX_DEV_ERROR_DETECT)
 void CddFsiTx_ReportDetError(uint8 moduleId, uint8 instanceId);
 #endif
@@ -188,7 +188,7 @@ Std_ReturnType CddFsiTx_copyConfig(Cdd_FsiTx_DriverObjType *drvObj, const Cdd_Fs
 Std_ReturnType CddFsiTx_BufferLoad(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
                                    P2VAR(uint16, AUTOMATIC, CDD_FSI_TX_APPL_DATA) databuffer, uint32 userData,
                                    uint32 txDatalength);
-Std_ReturnType CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj);
+void           CddFsiTx_PingTransmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj);
 Std_ReturnType CddFsiTx_Transmit(const Cdd_FsiTx_HwUnitObjType *hwUnitObj, uint8 UserData,
                                  Cdd_FsiTx_DataLengthType txDataLength);
 void CddFsiTx_IrqTx(Cdd_FsiTx_HwUnitObjType *hwUnitObj, CddFsiTx_McalIntNumberType InterruptNum, uint16 EvtFlag);

@@ -216,7 +216,13 @@ void Spi_mcspiConfigJob(const Spi_HwUnitObjType *hwUnitObj, Spi_JobObjType *jobO
      * Set all CS related functionality
      */
     /* Set 3-pin mode (CS disable) or 4-pin mode CS enable */
+#if (SPI_GPIO_CS_ENABLED == STD_ON)
+    /* GPIO CS: always use 3-pin mode so MCSPI does not drive the CS pin.
+     * Design: MCAL-25157 */
+    if ((SPI_CS_VIA_GPIO == extDevCfg->csSelect) || (((uint32)FALSE) == extDevCfg->csEnable))
+#else
     if (((uint32)FALSE) == extDevCfg->csEnable)
+#endif
     {
         HW_WR_FIELD32(baseAddr + MCSPI_MODULCTRL, MCSPI_MODULCTRL_PIN34, MCSPI_MODULCTRL_PIN34_3PINMODE);
     }
@@ -419,6 +425,14 @@ void Spi_mcspiStart(const Spi_HwUnitObjType *hwUnitObj, const Spi_JobObjType *jo
         HW_WR_FIELD32(baseAddr + MCSPI_CHCONF(csNum), MCSPI_CH0CONF_FORCE, MCSPI_CH0CONF_FORCE_ASSERT);
     }
 
+#if (SPI_GPIO_CS_ENABLED == STD_ON)
+    /* Assert GPIO CS before enabling MCSPI channel. Design: MCAL-25157 */
+    if (SPI_CS_VIA_GPIO == extDevCfg->csSelect)
+    {
+        Spi_ConfigGpioChipSelect(jobObj, (boolean)TRUE);
+    }
+#endif
+
     /* Enable channel */
     HW_WR_FIELD32(baseAddr + MCSPI_CHCTRL(csNum), MCSPI_CH0CTRL_EN, MCSPI_CH0CTRL_EN_ACT);
 
@@ -615,6 +629,14 @@ void Spi_mcspiStop(const Spi_HwUnitObjType *hwUnitObj, const Spi_JobObjType *job
     {
         HW_WR_FIELD32(baseAddr + MCSPI_CHCONF(csNum), MCSPI_CH0CONF_FORCE, MCSPI_CH0CONF_FORCE_DEASSERT);
     }
+
+#if (SPI_GPIO_CS_ENABLED == STD_ON)
+    /* Deassert GPIO CS after disabling MCSPI channel. Design: MCAL-25157 */
+    if (SPI_CS_VIA_GPIO == extDevCfg->csSelect)
+    {
+        Spi_ConfigGpioChipSelect(jobObj, (boolean)FALSE);
+    }
+#endif
 
     /* Disable channel */
     HW_WR_FIELD32(baseAddr + MCSPI_CHCTRL(csNum), MCSPI_CH0CTRL_EN, MCSPI_CH0CTRL_EN_NACT);

@@ -454,6 +454,27 @@
                         <a:tst expr="&gt;=0.0"/>
                       </a:da>
                     </v:var>
+                    <!-- Design: MCAL-25157 -->
+                    <v:ref name="SpiCsGpioRef" type="REFERENCE">
+                      <a:a name="DESC"
+                           value="EN: Reference to the Dio channel configuration to get symbolic name from Dio, which is set in the DIO driver configuration"/>
+                      <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                           type="IMPLEMENTATIONCONFIGCLASS">
+                        <icc:v vclass="PreCompile">VariantLinkTime</icc:v>
+                        <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                        <icc:v mclass="Link">VariantLinkTime</icc:v>
+                        <icc:v mclass="PostBuild">VariantPostBuild</icc:v>
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
+                      </a:a>
+                      <a:da name="ENABLE" type="XPath" expr="../SpiCsSelection = 'SPI_CS_VIA_GPIO'"/>
+                      <a:a name="ORIGIN" value="Texas Instruments"/>
+                      <a:a name="SCOPE" value="LOCAL"/>
+                      <a:a name="UUID"
+                           value="3b4fb1e8-84fa-4c14-b213-724b8caed35e"/>
+                      <a:da name="REF"
+                           value="ASPathDataOfSchema:/AUTOSAR/EcucDefs/Dio/DioConfig/DioPort/DioChannel"/>
+                    </v:ref>
                     <v:var name="SpiCsIdentifier" type="STRING">
                       <a:a name="DESC"
                            value="EN: This parameter is the symbolic name to identify the Chip Select (CS) allocated to this Job."/>
@@ -494,23 +515,28 @@
                     <v:var name="SpiCsSelection" type="ENUMERATION">
                       <a:a name="DESC"
                            value="EN: When the Chip select handling is enabled (see SpiEnableCs), then this parameter specifies if the chip select is handled automatically by Peripheral HW engine or via general purpose IO by Spi driver."/>
-                      <a:a name="EXISTING" value="false"/>
                       <a:a name="IMPLEMENTATIONCONFIGCLASS"
                            type="IMPLEMENTATIONCONFIGCLASS">
                         <icc:v vclass="Link">VariantLinkTime</icc:v>
                         <icc:v vclass="PostBuild">VariantPostBuild</icc:v>
                         <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                        <icc:v mclass="Link">VariantLinkTime</icc:v>
+                        <icc:v mclass="PostBuild">VariantPostBuild</icc:v>
+                        <icc:v mclass="PreCompile">VariantPreCompile</icc:v>
                       </a:a>
+                      <a:a name="OPTIONAL" value="false"/>
                       <a:a name="ORIGIN" value="AUTOSAR_ECUC"/>
+                      <a:a name="POSTBUILDVARIANTMULTIPLICITY" value="true"/>
                       <a:a name="POSTBUILDVARIANTVALUE" value="true"/>
                       <a:a name="SCOPE" value="LOCAL"/>
                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                       <a:a name="UUID"
                            value="ECUC:6654d212-8ab8-41d7-8479-520af776eb1c"/>
-                      <a:da name="DEFAULT" value="CS_VIA_PERIPHERAL_ENGINE"/>
+                      <a:da name="DEFAULT" value="SPI_CS_VIA_PERIPHERAL_ENGINE"/>
+                      <a:da name="ENABLE" type="XPath" expr="node:value(../SpiEnableCs)"/>
                       <a:da name="RANGE">
-                        <a:v>CS_VIA_GPIO</a:v>
-                        <a:v>CS_VIA_PERIPHERAL_ENGINE</a:v>
+                        <a:v>SPI_CS_VIA_GPIO</a:v>
+                        <a:v>SPI_CS_VIA_PERIPHERAL_ENGINE</a:v>
                       </a:da>
                     </v:var>
                     <v:var name="SpiDataShiftEdge" type="ENUMERATION">

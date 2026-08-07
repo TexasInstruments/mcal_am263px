@@ -95,16 +95,18 @@
 <li class="toctree-l4"><a class="reference internal" href="#enum-spi-transfertype">5.19.1.7. enum Spi_TransferType</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#enum-spi-leveltype">5.19.1.8. enum Spi_LevelType</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#enum-spi-cspintype">5.19.1.9. enum Spi_CsPinType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-spi-clkmode">5.19.1.10. enum Spi_ClkMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-spi-txrxmode">5.19.1.11. enum Spi_TxRxMode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-spi-jobprioritytype">5.19.1.12. enum Spi_JobPriorityType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-spi-csmodetype">5.19.1.13. enum Spi_CsModeType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-spi-datadelaytype">5.19.1.14. enum Spi_DataDelayType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-spi-datalinereceivetype">5.19.1.15. enum Spi_DataLineReceiveType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-spi-datalinetransmittype">5.19.1.16. enum Spi_DataLineTransmitType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#enum-mcspi-irqstatustype">5.19.1.17. enum Mcspi_IrqStatusType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-spi-jobendnotifytype">5.19.1.18. typedef Spi_JobEndNotifyType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-spi-seqendnotifytype">5.19.1.19. typedef Spi_SeqEndNotifyType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-csselectiontype">5.19.1.10. enum Spi_CsSelectionType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-clkmode">5.19.1.11. enum Spi_ClkMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-txrxmode">5.19.1.12. enum Spi_TxRxMode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-jobprioritytype">5.19.1.13. enum Spi_JobPriorityType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-csmodetype">5.19.1.14. enum Spi_CsModeType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-datadelaytype">5.19.1.15. enum Spi_DataDelayType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-datalinereceivetype">5.19.1.16. enum Spi_DataLineReceiveType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-spi-datalinetransmittype">5.19.1.17. enum Spi_DataLineTransmitType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-mcspi-irqstatustype">5.19.1.18. enum Mcspi_IrqStatusType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-spi-jobendnotifytype">5.19.1.19. typedef Spi_JobEndNotifyType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-spi-seqendnotifytype">5.19.1.20. typedef Spi_SeqEndNotifyType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-spi-csgpioidtype">5.19.1.21. typedef Spi_CsGpioIdType</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#structures">5.19.2. Structures</a></li>
@@ -213,44 +215,52 @@
 <td><p>SPI Chip Select Pin.</p></td>
 </tr>
 <tr class="row-odd"><td><p>enum</p></td>
+<td><p><strong><a class="reference internal" href="#enum-spi-csselectiontype"><span class="std std-ref">Spi_CsSelectionType</span></a></strong></p></td>
+<td><p>SPI Chip Select Selection - GPIO or peripheral engine. Design: MCAL-25157.</p></td>
+</tr>
+<tr class="row-even"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-spi-clkmode"><span class="std std-ref">Spi_ClkMode</span></a></strong></p></td>
 <td><p>SPI Clock Mode - sets the clock polarity and phase. Note: These values are a direct register mapping. So don’t change value.</p></td>
 </tr>
-<tr class="row-even"><td><p>enum</p></td>
+<tr class="row-odd"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-spi-txrxmode"><span class="std std-ref">Spi_TxRxMode</span></a></strong></p></td>
 <td><p>SPI TX/RX Mode.</p></td>
 </tr>
-<tr class="row-odd"><td><p>enum</p></td>
+<tr class="row-even"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-spi-jobprioritytype"><span class="std std-ref">Spi_JobPriorityType</span></a></strong></p></td>
 <td><p>SPI Job Priority.</p></td>
 </tr>
-<tr class="row-even"><td><p>enum</p></td>
+<tr class="row-odd"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-spi-csmodetype"><span class="std std-ref">Spi_CsModeType</span></a></strong></p></td>
 <td><p>SPI Chip Select Mode.</p></td>
 </tr>
-<tr class="row-odd"><td><p>enum</p></td>
+<tr class="row-even"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-spi-datadelaytype"><span class="std std-ref">Spi_DataDelayType</span></a></strong></p></td>
 <td><p>Spi_DataDelayType defines the number of interface clock cycles between CS toggling and first or last edge of MCSPI clock.</p></td>
 </tr>
-<tr class="row-even"><td><p>enum</p></td>
+<tr class="row-odd"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-spi-datalinereceivetype"><span class="std std-ref">Spi_DataLineReceiveType</span></a></strong></p></td>
 <td><p>Spi_DataLineReceiveType defines the lines selected for reception.</p></td>
 </tr>
-<tr class="row-odd"><td><p>enum</p></td>
+<tr class="row-even"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-spi-datalinetransmittype"><span class="std std-ref">Spi_DataLineTransmitType</span></a></strong></p></td>
 <td><p>Spi_DataLineTransmitType defines the lines selected for transmission.</p></td>
 </tr>
-<tr class="row-even"><td><p>enum</p></td>
+<tr class="row-odd"><td><p>enum</p></td>
 <td><p><strong><a class="reference internal" href="#enum-mcspi-irqstatustype"><span class="std std-ref">Mcspi_IrqStatusType</span></a></strong></p></td>
 <td><p>Irq status and std return type.</p></td>
 </tr>
-<tr class="row-odd"><td><p>typedef void(*)(void)</p></td>
+<tr class="row-even"><td><p>typedef void(*)(void)</p></td>
 <td><p><strong><a class="reference internal" href="#typedef-spi-jobendnotifytype"><span class="std std-ref">Spi_JobEndNotifyType</span></a></strong></p></td>
 <td><p>Typedef for job end notification function pointer.</p></td>
 </tr>
-<tr class="row-even"><td><p>typedef void(*)(void)</p></td>
+<tr class="row-odd"><td><p>typedef void(*)(void)</p></td>
 <td><p><strong><a class="reference internal" href="#typedef-spi-seqendnotifytype"><span class="std std-ref">Spi_SeqEndNotifyType</span></a></strong></p></td>
 <td><p>Typedef for sequence end notification function pointer.</p></td>
+</tr>
+<tr class="row-even"><td><p>typedef uint32</p></td>
+<td><p><strong><a class="reference internal" href="#typedef-spi-csgpioidtype"><span class="std std-ref">Spi_CsGpioIdType</span></a></strong></p></td>
+<td><p>DIO channel type for GPIO chip select. Design: MCAL-25157.</p></td>
 </tr>
 </tbody>
 </table>
@@ -515,8 +525,31 @@ Type for SPI Chip Select Polarity and Clock Idle Level.</p>
 <p><strong>Brief</strong>:
 SPI Chip Select Pin.</p>
 </section>
+<section id="enum-spi-csselectiontype">
+<h3><span class="section-number">5.19.1.10. </span>enum Spi_CsSelectionType<a class="headerlink" href="#enum-spi-csselectiontype" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Enumerator</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SPI_CS_VIA_GPIO</p></td>
+<td><p>0U</p></td>
+<td><p>CS is driven via GPIO (DIO channel)</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI_CS_VIA_PERIPHERAL_ENGINE</p></td>
+<td><p></p></td>
+<td><p>CS is driven by MCSPI peripheral engine.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Brief</strong>:
+SPI Chip Select Selection - GPIO or peripheral engine. Design: MCAL-25157.</p>
+</section>
 <section id="enum-spi-clkmode">
-<h3><span class="section-number">5.19.1.10. </span>enum Spi_ClkMode<a class="headerlink" href="#enum-spi-clkmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.11. </span>enum Spi_ClkMode<a class="headerlink" href="#enum-spi-clkmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -547,7 +580,7 @@ SPI Chip Select Pin.</p>
 SPI Clock Mode - sets the clock polarity and phase. Note: These values are a direct register mapping. So don’t change value.</p>
 </section>
 <section id="enum-spi-txrxmode">
-<h3><span class="section-number">5.19.1.11. </span>enum Spi_TxRxMode<a class="headerlink" href="#enum-spi-txrxmode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.12. </span>enum Spi_TxRxMode<a class="headerlink" href="#enum-spi-txrxmode" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -575,7 +608,7 @@ SPI TX/RX Mode.</p>
 </ol>
 </section>
 <section id="enum-spi-jobprioritytype">
-<h3><span class="section-number">5.19.1.12. </span>enum Spi_JobPriorityType<a class="headerlink" href="#enum-spi-jobprioritytype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.13. </span>enum Spi_JobPriorityType<a class="headerlink" href="#enum-spi-jobprioritytype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -606,7 +639,7 @@ SPI TX/RX Mode.</p>
 SPI Job Priority.</p>
 </section>
 <section id="enum-spi-csmodetype">
-<h3><span class="section-number">5.19.1.13. </span>enum Spi_CsModeType<a class="headerlink" href="#enum-spi-csmodetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.14. </span>enum Spi_CsModeType<a class="headerlink" href="#enum-spi-csmodetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -629,7 +662,7 @@ SPI Job Priority.</p>
 SPI Chip Select Mode.</p>
 </section>
 <section id="enum-spi-datadelaytype">
-<h3><span class="section-number">5.19.1.14. </span>enum Spi_DataDelayType<a class="headerlink" href="#enum-spi-datadelaytype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.15. </span>enum Spi_DataDelayType<a class="headerlink" href="#enum-spi-datadelaytype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -660,7 +693,7 @@ SPI Chip Select Mode.</p>
 Spi_DataDelayType defines the number of interface clock cycles between CS toggling and first or last edge of MCSPI clock.</p>
 </section>
 <section id="enum-spi-datalinereceivetype">
-<h3><span class="section-number">5.19.1.15. </span>enum Spi_DataLineReceiveType<a class="headerlink" href="#enum-spi-datalinereceivetype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.16. </span>enum Spi_DataLineReceiveType<a class="headerlink" href="#enum-spi-datalinereceivetype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -683,7 +716,7 @@ Spi_DataDelayType defines the number of interface clock cycles between CS toggli
 Spi_DataLineReceiveType defines the lines selected for reception.</p>
 </section>
 <section id="enum-spi-datalinetransmittype">
-<h3><span class="section-number">5.19.1.16. </span>enum Spi_DataLineTransmitType<a class="headerlink" href="#enum-spi-datalinetransmittype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.17. </span>enum Spi_DataLineTransmitType<a class="headerlink" href="#enum-spi-datalinetransmittype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -714,7 +747,7 @@ Spi_DataLineReceiveType defines the lines selected for reception.</p>
 Spi_DataLineTransmitType defines the lines selected for transmission.</p>
 </section>
 <section id="enum-mcspi-irqstatustype">
-<h3><span class="section-number">5.19.1.17. </span>enum Mcspi_IrqStatusType<a class="headerlink" href="#enum-mcspi-irqstatustype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.18. </span>enum Mcspi_IrqStatusType<a class="headerlink" href="#enum-mcspi-irqstatustype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -741,7 +774,7 @@ Spi_DataLineTransmitType defines the lines selected for transmission.</p>
 Irq status and std return type.</p>
 </section>
 <section id="typedef-spi-jobendnotifytype">
-<h3><span class="section-number">5.19.1.18. </span>typedef Spi_JobEndNotifyType<a class="headerlink" href="#typedef-spi-jobendnotifytype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.19. </span>typedef Spi_JobEndNotifyType<a class="headerlink" href="#typedef-spi-jobendnotifytype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Spi_JobEndNotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -749,12 +782,20 @@ Irq status and std return type.</p>
 Typedef for job end notification function pointer.</p>
 </section>
 <section id="typedef-spi-seqendnotifytype">
-<h3><span class="section-number">5.19.1.19. </span>typedef Spi_SeqEndNotifyType<a class="headerlink" href="#typedef-spi-seqendnotifytype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">5.19.1.20. </span>typedef Spi_SeqEndNotifyType<a class="headerlink" href="#typedef-spi-seqendnotifytype" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Spi_SeqEndNotifyType</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
 </pre></div>
 </div>
 <p><strong>Brief</strong>:
 Typedef for sequence end notification function pointer.</p>
+</section>
+<section id="typedef-spi-csgpioidtype">
+<h3><span class="section-number">5.19.1.21. </span>typedef Spi_CsGpioIdType<a class="headerlink" href="#typedef-spi-csgpioidtype" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">uint32</span><span class="w"> </span><span class="n">Spi_CsGpioIdType</span><span class="p">;</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+DIO channel type for GPIO chip select. Design: MCAL-25157.</p>
 </section>
 </section>
 <section id="structures">
@@ -939,6 +980,9 @@ Typedef for sequence end notification function pointer.</p>
 </tr>
 <tr class="row-even"><td><p>SPI_MCSPI_FCLK</p></td>
 <td><p>MCSPI functional clock input in Hz. This clock is used to generate the serial clock output after the divider. Note: This is given here for reference and can’t be changed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SPI_PERIPHERAL_CS_IDENTIFIER</p></td>
+<td><p>Identifier used when CS is via peripheral engine (not GPIO)</p></td>
 </tr>
 </tbody>
 </table>

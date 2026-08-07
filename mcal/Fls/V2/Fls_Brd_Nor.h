@@ -204,6 +204,10 @@ typedef struct
     volatile uint32        flsDmaLength;
     /**<    Dma Destination Bufer */
     volatile uint8        *flsDmaDstBuf;
+#if (FLS_TIMEOUT_SUPERVISION_ENABLED == STD_ON)
+    TickType eraseStartCount;
+    /**< Counter value captured at erase job start, persisted across MainFunction calls for timeout supervision */
+#endif
 } Fls_DriverObjType;
 
 /**< ENUM for Internal State type names */
@@ -232,6 +236,7 @@ Std_ReturnType Fls_norChipErase(OSPI_Handle handle, uint32 offset);
 Std_ReturnType Fls_NorGetEraseStatus(OSPI_Handle handle);
 Std_ReturnType Nor_OspiSetQeBit(OSPI_Handle handle, uint8 qeType);
 Std_ReturnType Nor_OspiSetOeBit(OSPI_Handle handle, uint8 oeType);
+void           Fls_JobNotification(Fls_JobType job, Std_ReturnType retVal, uint32 chunkSize);
 
 void  processJobs(Fls_JobType job);
 uint8 Fls_norBlankCheck(uint32 actualChunkSize);

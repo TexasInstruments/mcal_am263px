@@ -146,7 +146,7 @@ void qspi_flash_diag(void *args)
 
 #ifdef AM263X_PLATFORM
     Fls_DrvObj.flsBaudRateDiv = 1;
-    status                    = Fls_Qspi_SetPreScaler(qspiHandle, Fls_DrvObj.flsBaudRateDiv);
+    status                    = Fls_Qspi_SetPreScaler(Fls_DrvObj.flsBaudRateDiv);
 #else
     Fls_DrvObj.flsBaudRateDiv = 0;
 #endif
