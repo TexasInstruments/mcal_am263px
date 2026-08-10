@@ -14627,7 +14627,7 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| fls   | 12890    | 486    | 8240    |
+| fls   | 13076    | 486    | 8240    |
  
 ### FSIRX
 
@@ -14663,7 +14663,7 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| ipc   | 5562    | 429    | 1656    |
+| ipc   | 5570    | 429    | 1656    |
  
 ### LIN
 
@@ -27342,7 +27342,7 @@ Container for general parameters of the flash driver. These parameters are alway
 | Item ||
 |--------|---------------|
 | **Name** | FlsTimeoutSupervisionEnabled |
-| **Description** | Compile switch to enable timeout supervision. Currently, not supported. |
+| **Description** | Compile switch to enable timeout supervision. |
 | **Origin** | AUTOSAR_ECUC |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
@@ -34223,6 +34223,10 @@ The module MCU powers up the microcontroller’s peripherals at startup time and
 ##### PORT
 
 The module PORT enables the SPI lines at startup time. To operate the SPI properly, the PORT driver must be configured. The PORT driver sets the PINs to the required mux values for the SPI to operate.
+
+##### DIO
+
+DIO Module is required when GPIO is configured to use as chip select.
 
 ##### OSEK / AUTOSAR OS (Optional)
 
@@ -51212,6 +51216,9 @@ title: FLS OSPI PHY Driver Interface
 | Std_ReturnType | **[Fls_Ospi_phyInit](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phyinit)**(void )|  |
 | void | **[Fls_Ospi_phy_enable](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phy_enable)**(void )|  |
 | void | **[Fls_Ospi_phy_disable](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phy_disable)**(void )|  |
+| void | **[Fls_Ospi_phyMergeRxHighResults](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phymergerxhighresults)**(Fls_Ospi_phyConfig * rxHigh, const Fls_Ospi_phyConfig * sec_rxHigh, boolean * continueSearch)| Merge RxHigh results from primary and secondary searches.  |
+| Std_ReturnType | **[Fls_Ospi_phyConfigBaudrate](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phyconfigbaudrate)**(uint32 baud)|  |
+| Std_ReturnType | **[Fls_Ospi_phyGetBaudRateDivFromObj](../Modules/group___f_l_s___o_s_p_i___p_h_y.md#function-fls_ospi_phygetbaudratedivfromobj)**(uint32 * baudDiv)|  |
 
 ### function Fls_Ospi_phyInit
 
@@ -51234,6 +51241,44 @@ void Fls_Ospi_phy_enable(
 ```
 void Fls_Ospi_phy_disable(
     void 
+)
+```
+
+### function Fls_Ospi_phyMergeRxHighResults
+
+```
+void Fls_Ospi_phyMergeRxHighResults(
+    Fls_Ospi_phyConfig * rxHigh,
+    const Fls_Ospi_phyConfig * sec_rxHigh,
+    boolean * continueSearch
+)
+```
+
+**Brief**: 
+Merge RxHigh results from primary and secondary searches. 
+
+**Parameters**: 
+
+  
+* **rxHigh** Primary RxHigh result (updated if secondary is better) 
+  
+* **sec_rxHigh** Secondary RxHigh result 
+  
+* **continueSearch** Search continuation flag (set to FALSE if both failed) 
+
+### function Fls_Ospi_phyConfigBaudrate
+
+```
+Std_ReturnType Fls_Ospi_phyConfigBaudrate(
+    uint32 baud
+)
+```
+
+### function Fls_Ospi_phyGetBaudRateDivFromObj
+
+```
+Std_ReturnType Fls_Ospi_phyGetBaudRateDivFromObj(
+    uint32 * baudDiv
 )
 ```
 

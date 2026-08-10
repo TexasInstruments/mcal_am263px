@@ -844,17 +844,21 @@ The interrupt service routines shall be mapped to the interrupt sources of the r
 <h4><span class="section-number">4.22.8.1.2. </span>PORT<a class="headerlink" href="#port" title="Link to this heading"></a></h4>
 <p>The module PORT enables the SPI lines at startup time. To operate the SPI properly, the PORT driver must be configured. The PORT driver sets the PINs to the required mux values for the SPI to operate.</p>
 </section>
+<section id="dio">
+<h4><span class="section-number">4.22.8.1.3. </span>DIO<a class="headerlink" href="#dio" title="Link to this heading"></a></h4>
+<p>DIO Module is required when GPIO is configured to use as chip select.</p>
+</section>
 <section id="osek-autosar-os-optional">
-<h4><span class="section-number">4.22.8.1.3. </span>OSEK / AUTOSAR OS (Optional)<a class="headerlink" href="#osek-autosar-os-optional" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.22.8.1.4. </span>OSEK / AUTOSAR OS (Optional)<a class="headerlink" href="#osek-autosar-os-optional" title="Link to this heading"></a></h4>
 <p>An operating system can be used for task scheduling, interrupt handling, global suspend and restore of interrupts and creating of the Interrupt Vector Table.
 The SPI module may use OSEK/AUTOSAR OS to suspend and restore global interrupts.</p>
 </section>
 <section id="det">
-<h4><span class="section-number">4.22.8.1.4. </span>DET<a class="headerlink" href="#det" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.22.8.1.5. </span>DET<a class="headerlink" href="#det" title="Link to this heading"></a></h4>
 <p>This implementation depends on the DET in order to report development errors. The detection of development errors is configurable (ON / OFF).</p>
 </section>
 <section id="dem">
-<h4><span class="section-number">4.22.8.1.5. </span>DEM<a class="headerlink" href="#dem" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.22.8.1.6. </span>DEM<a class="headerlink" href="#dem" title="Link to this heading"></a></h4>
 <p>By default, production code related errors are reported to the DEM using the service
 DEM_ReportErrorStatus ().</p>
 <div class="admonition note">
@@ -863,7 +867,7 @@ DEM_ReportErrorStatus ().</p>
 </div>
 </section>
 <section id="schm">
-<h4><span class="section-number">4.22.8.1.6. </span>SchM<a class="headerlink" href="#schm" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.22.8.1.7. </span>SchM<a class="headerlink" href="#schm" title="Link to this heading"></a></h4>
 <p>If multiple AUTOSAR runnables have access to the same Data Store Memory block, the exported AUTOSAR specification enforces data consistency by using an AUTOSAR exclusive area. With this specification, the runnables have mutually exclusive access to the per-instance memory global data, which prevents data corruption. Beside the OS, the BSW Scheduler provides functions that SPI module calls at begin and end of critical sections. This implementation requires 1 level of exclusive access to guard critical sections.</p>
 <p>The data consistency mechanism that has to be applied to an ExclusiveArea might be domain, ECU or even project specific. The decision which mechanism has to be applied by RTE / Basic Software Scheduler is taken during ECU integration by setting the Exclusive Area configuration parameter RteExclusiveAreaImplMechanism. This parameter is an input for RTE generator.</p>
 <p>For SPI Module, data consistency and exclusive access to critical sections are required for the following sections as shown in the table below:</p>
@@ -885,11 +889,11 @@ DEM_ReportErrorStatus ().</p>
 </table>
 </section>
 <section id="callback-functions">
-<h4><span class="section-number">4.22.8.1.7. </span>Callback Functions<a class="headerlink" href="#callback-functions" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.22.8.1.8. </span>Callback Functions<a class="headerlink" href="#callback-functions" title="Link to this heading"></a></h4>
 <p>The SPI driver does not provide any call back functions.</p>
 </section>
 <section id="callback-notification">
-<h4><span class="section-number">4.22.8.1.8. </span>Callback Notification<a class="headerlink" href="#callback-notification" title="Link to this heading"></a></h4>
+<h4><span class="section-number">4.22.8.1.9. </span>Callback Notification<a class="headerlink" href="#callback-notification" title="Link to this heading"></a></h4>
 <p>At its configurable interfaces, the SPI defines notifications that can be mapped to callback functions provided by other modules. The mapping is not statically defined by the SPI but can be performed at configuration time. The function prototypes that can be used for the configuration have to match the appropriate function prototype signatures, which are described in the following.</p>
 <p>Example:Spi_JobEndNotification</p>
 </section>

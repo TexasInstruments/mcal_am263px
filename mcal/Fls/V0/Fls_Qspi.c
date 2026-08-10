@@ -110,7 +110,7 @@ typedef struct
 /*                          Function Declarations                             */
 /* ========================================================================== */
 /* Internal functions */
-static Std_ReturnType Fls_Qspi_WaitIdle();
+static Std_ReturnType Fls_Qspi_WaitIdle(void);
 static Std_ReturnType Fls_Qspi_MemMapRead(QSPI_Handle handle);
 static void           Fls_Qspi_MemMapRead_sub(void);
 static Std_ReturnType Fls_Qspi_ConfigRead(QSPI_Handle handle, QSPI_ConfigAccess *cfgAccess);
@@ -372,7 +372,7 @@ Std_ReturnType Fls_Qspi_SetPreScaler(uint32 clkDividerVal)
  *   Wait while QSPI is busy
  *
  */
-static Std_ReturnType Fls_Qspi_WaitIdle()
+static Std_ReturnType Fls_Qspi_WaitIdle(void)
 {
     Std_ReturnType status  = E_OK;
     uint32         timeout = FLS_MAX_WRITE_TIME;
@@ -456,6 +456,7 @@ static Std_ReturnType Fls_Qspi_WriteData(QSPI_Handle handle, const uint32 *data,
     Std_ReturnType status = E_OK;
     const uint32  *pData;
     pData = data;
+    (void)handle;
 
     HW_WR_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG, (uint32)*pData);
 
@@ -472,6 +473,7 @@ static Std_ReturnType Fls_Qspi_ReadData(QSPI_Handle handle, uint32 *data, uint32
     Std_ReturnType status = E_OK;
     uint32        *pData  = (uint32 *)NULL_PTR;
     pData                 = data;
+    (void)handle;
 
     *pData = HW_RD_REG32(FLS_QSPI_CTRL_BASE_ADDR + SPI_DATA_REG);
 
@@ -575,6 +577,7 @@ static Std_ReturnType Fls_Qspi_ConfigWrite(QSPI_Handle handle, QSPI_ConfigAccess
 
 static void Fls_Qspi_ConfigWrite_sub(QSPI_Handle handle, QSPI_ConfigAccess *cfgAccess, uint32 wordLenBytes)
 {
+    (void)handle;
     /* Wait for the QSPI busy status */
     /* TI_COVERAGE_GAP_START [Branch/Line] This branch can be covered only upon a hardware failure */
     if (Fls_Qspi_WaitIdle() == E_OK)

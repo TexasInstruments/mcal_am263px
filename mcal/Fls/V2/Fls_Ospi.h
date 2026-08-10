@@ -502,7 +502,7 @@ void                  Fls_Ospi_Close(OSPI_Handle handle);
  *  \return #SystemP_SUCCESS if all configuration are successfully done
  */
 static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config);
-static uint32         OSPI_utilLog2(uint32 num);
+uint32                OSPI_utilLog2(uint32 num);
 /**
  *   \brief  This function sets the protocol for single/quad/octal read/write
  *   according to user config

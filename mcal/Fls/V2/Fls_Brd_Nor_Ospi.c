@@ -355,10 +355,11 @@ Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
 
         manfID = (uint32)idCode[0];
         devID  = ((uint32)idCode[1] << 8) | ((uint32)idCode[2]);
-        /* TI_COVERAGE_GAP_START [Branch/MC-DC] failure here can be achieved only in case of wrong manID and devID,
-         * cannot be validated */
-        if ((manfID != Fls_Config_SFDP_Ptr->manfId) || (devID != Fls_Config_SFDP_Ptr->deviceId))
-        /* TI_COVERAGE_GAP_STOP */
+        if (manfID != Fls_Config_SFDP_Ptr->manfId)
+        {
+            retVal = (Std_ReturnType)E_NOT_OK;
+        }
+        if (devID != Fls_Config_SFDP_Ptr->deviceId)
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
@@ -1266,8 +1267,8 @@ void Fls_JobDoneNotification(uint32 chunkSize, Fls_JobType job)
     {
         {
             Fls_DrvObj.ramAddr = &Fls_DrvObj.ramAddr[chunkSize];
-            /* TI_COVERAGE_GAP_START [Branch] Second sub-condition is compile-time false when erase verification is
-            enabled, coverable only with FLS_ERASE_VERIFICATION_ENABLED=STD_OFF */
+            /* TI_COVERAGE_GAP_START [Branch/MC-DC] Second sub-condition is compile-time false when erase verification
+            is enabled, coverable only with FLS_ERASE_VERIFICATION_ENABLED=STD_OFF */
             if ((job != FLS_JOB_ERASE) || ((job == FLS_JOB_ERASE) && (STD_OFF == FLS_ERASE_VERIFICATION_ENABLED)))
             /* TI_COVERAGE_GAP_STOP */
             {
@@ -1642,8 +1643,8 @@ Std_ReturnType Ospi_SetRegCfg(OSPI_Handle handle, const Fls_RegEnConfig *rCfg)
     Std_ReturnType retVal = E_OK;
 
     /* Check if parameter is configured with addressed registers */
-    /* TI_COVERAGE_GAP_START [Branch] FALSE direction (else/nothing-to-do path) is never taken: all register
-     * configuration entries used in test always have non-zero read/write command opcodes. */
+    /* TI_COVERAGE_GAP_START [Branch] TRUE for rCfg->cmdRegWr check (else/nothing-to-do path) is never taken: all
+     * register configuration entries have valid read/write command opcodes as per flash configurations */
     if ((rCfg->cmdRegRd != 0U) || (rCfg->cmdRegWr != 0U))
     /* TI_COVERAGE_GAP_STOP */
     {
@@ -1711,7 +1712,7 @@ Std_ReturnType Nor_OspiRegWrite(OSPI_Handle handle, uint8 cmd, uint32 addr, uint
     retVal = Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
 
     /* Wait a finite interval after WREN */
-    /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware read failure */
+    /* TI_COVERAGE_GAP_START [Branch] result = E_NOT_OK cannot be validated unless a hardware write failure */
     if (retVal == E_OK)
     /* TI_COVERAGE_GAP_STOP */
     {

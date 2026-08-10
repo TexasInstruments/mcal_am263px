@@ -296,31 +296,48 @@ void Fls_Ospi_Dma_Read(OSPI_Handle handle, const OSPI_Transaction *trans)
     uint8 *pSrc = (uint8 *)NULL_PTR;
     /* Transaction length */
     uint32 count = 0;
-    /* TI_COVERAGE_GAP_START [Branch] retry == 0 is hit only when there is a flash read failure in hardware, hence below
-    while loop and follow if is partially covered */
-    if (handle != NULL_PTR)
-    /* TI_COVERAGE_GAP_STOP */
+
+    const OSPI_Transaction *transaction = trans;
+
+    /* Enable Direct Access Mode */
+    HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_ENB_DIR_ACC_CTLR_FLD, 1);
+    HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_IND_AHB_ADDR_TRIGGER_REG, 0x04000000);
+
+    temp_addr = (FLS_BASE_ADDRESS + (uintptr_t)transaction->addrOffset);
+    pSrc      = (uint8 *)(temp_addr);
+    pDst      = (uint8 *)transaction->buf;
+    count     = transaction->count;
+
+    if (Fls_DrvObj.flsEdmaReadEnabled == TRUE)
     {
-        const OSPI_Transaction *transaction = trans;
-
-        /* Enable Direct Access Mode */
-        HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_ENB_DIR_ACC_CTLR_FLD, 1);
-        HW_WR_REG32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_IND_AHB_ADDR_TRIGGER_REG, 0x04000000);
-
-        temp_addr = (FLS_BASE_ADDRESS + (uintptr_t)transaction->addrOffset);
-        pSrc      = (uint8 *)(temp_addr);
-        pDst      = (uint8 *)transaction->buf;
-        count     = transaction->count;
-
-        if (Fls_DrvObj.flsEdmaReadEnabled == TRUE)
+        /* Check if the ospi memory address is 4 byte aligned. */
+        dmaOffset       = (transaction->addrOffset + 0x3U) & (~0x3U);
+        nonAlignedBytes = dmaOffset - transaction->addrOffset;
+        pDmaDst         = (uint8 *)(pDst + nonAlignedBytes);
+        pDmaSrc         = (uint8 *)(pSrc + nonAlignedBytes);
+        dmaLen          = count - nonAlignedBytes;
+        /* Do the normal memory to memory transfer of nonAligned bytes at the start. */
+        while (nonAlignedBytes != (uint32)0U)
         {
-            /* Check if the ospi memory address is 4 byte aligned. */
-            dmaOffset       = (transaction->addrOffset + 0x3U) & (~0x3U);
-            nonAlignedBytes = dmaOffset - transaction->addrOffset;
-            pDmaDst         = (uint8 *)(pDst + nonAlignedBytes);
-            pDmaSrc         = (uint8 *)(pSrc + nonAlignedBytes);
-            dmaLen          = count - nonAlignedBytes;
-            /* Do the normal memory to memory transfer of nonAligned bytes at the start. */
+            *pDst = *pSrc;
+            pDst++;
+            pSrc++;
+            nonAlignedBytes--;
+        }
+        /* TI_COVERAGE_GAP_START [Branch] retry == 0 is hit only when there is a flash read failure in hardware,
+        hence below while loop and follow if is partially covered */
+        if (dmaLen != (uint32)0U)
+        /* TI_COVERAGE_GAP_STOP */
+        {
+            /* calculate the nonAligned bytes at the end */
+            nonAlignedBytes = dmaLen - ((dmaLen) & (~0x3U));
+
+            /* Get the previous multiple of 4 of dmaLen as edma transfer can only be done with
+             * length in multiple of 4*/
+            dmaLen = (dmaLen) & (~0x3U);
+            /* Do the normal memory to memory transfer of nonAligned bytes at the end. */
+            pDst = pDst + dmaLen;
+            pSrc = pSrc + dmaLen;
             while (nonAlignedBytes != (uint32)0U)
             {
                 *pDst = *pSrc;
@@ -328,48 +345,26 @@ void Fls_Ospi_Dma_Read(OSPI_Handle handle, const OSPI_Transaction *trans)
                 pSrc++;
                 nonAlignedBytes--;
             }
-            /* TI_COVERAGE_GAP_START [Branch] retry == 0 is hit only when there is a flash read failure in hardware,
-            hence below while loop and follow if is partially covered */
             if (dmaLen != (uint32)0U)
-            /* TI_COVERAGE_GAP_STOP */
             {
-                /* calculate the nonAligned bytes at the end */
-                nonAlignedBytes = dmaLen - ((dmaLen) & (~0x3U));
-
-                /* Get the previous multiple of 4 of dmaLen as edma transfer can only be done with
-                 * length in multiple of 4*/
-                dmaLen = (dmaLen) & (~0x3U);
-                /* Do the normal memory to memory transfer of nonAligned bytes at the end. */
-                pDst = pDst + dmaLen;
-                pSrc = pSrc + dmaLen;
-                while (nonAlignedBytes != (uint32)0U)
-                {
-                    *pDst = *pSrc;
-                    pDst++;
-                    pSrc++;
-                    nonAlignedBytes--;
-                }
-                if (dmaLen != (uint32)0U)
-                {
-                    Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_WAIT_STAGE;
-                    FLS_edmaTransfer(pDmaDst, pDmaSrc, dmaLen, handle);
-                }
-                else
-                {
-                    // dma is not triggered for lengths lesser than 4 bytes
-                    Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_DONE;
-                }
+                Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_WAIT_STAGE;
+                FLS_edmaTransfer(pDmaDst, pDmaSrc, dmaLen, handle);
+            }
+            else
+            {
+                // dma is not triggered for lengths lesser than 4 bytes
+                Fls_DrvObj.flsDmaStage = FLS_S_READ_DMA_DONE;
             }
         }
-        else
+    }
+    else
+    {
+        while ((count) != (uint32)0U)
         {
-            while ((count) != (uint32)0U)
-            {
-                *pDst = *pSrc;
-                pDst++;
-                pSrc++;
-                count--;
-            }
+            *pDst = *pSrc;
+            pDst++;
+            pSrc++;
+            count--;
         }
     }
 }
@@ -1126,7 +1121,7 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
                       readDataCapDelay);
 
         retVal += Nor_OspiReadId(handle);
-        /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
+        /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
         while ((retVal != E_OK) && (readDataCapDelay > 0U))
         /* TI_COVERAGE_GAP_STOP */
         {
@@ -1139,14 +1134,13 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
     return retVal;
 }
 
-static uint32 OSPI_utilLog2(uint32 num)
+uint32 OSPI_utilLog2(uint32 num)
 {
     /* LUT based bit scan method using deBruijn(2, 5) sequence to avoid the loop */
     uint32 ret  = 0U;
     uint32 temp = num;
-    /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
+
     if (num != 0U)
-    /* TI_COVERAGE_GAP_STOP */
     {
         /* Assume num is not power of 2, fill 1's after the most significant 1 */
         temp |= (temp >> 1U);
@@ -1271,7 +1265,6 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             Fls_Ospi_setXferOpCodes(handle, Fls_Config_SFDP_Ptr->protos.cmdRd, Fls_Config_SFDP_Ptr->protos.cmdWr);
             break;
 
-        /* TI_COVERAGE_GAP_START [Branch/Line] The 1-1-2 flash mode not supported by the flash currently used */
         case (uint32)FLS_OSPI_RX_1S_1S_2S:
             /*Set cmd, address, data and dtr*/
             cmd                            = 0;
@@ -1279,8 +1272,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             data                           = 1;
             Fls_DrvObj.currentprotocolMode = OSPI_NOR_PROTOCOL(1, 1, 2, dtr);
             break;
-            /* TI_COVERAGE_GAP_STOP */
-        /* TI_COVERAGE_GAP_START [Branch/Line] The 1-1-4 flash mode not supported by the flash currently used */
+
         case (uint32)FLS_OSPI_RX_1S_1S_4S:
             /* Set Quad Enable Bit. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
@@ -1291,7 +1283,7 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             /* Set QE bit */
             retVal += Nor_OspiSetQeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
-        /* TI_COVERAGE_GAP_STOP */
+
         case (uint32)FLS_OSPI_RX_1S_1S_8S:
             /* Set Octal Enable Bit. Set commands, mode and dummy cycle if needed */
             /*Set cmd, address, data and dtr*/
@@ -1303,7 +1295,6 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             retVal += Nor_OspiSetOeBit(handle, Fls_Config_SFDP_Ptr->protos.enableType);
             break;
 
-        /* TI_COVERAGE_GAP_START [Branch/Line] The 4-4-4 flash mode not supported by the flash currently used */
         case (uint32)FLS_OSPI_RX_4S_4S_4S:
             /* Set Quad Enable Bit. Set 444 mode. Set commands, mode and dummy cycle if needed.
              * In case of DTR, enable that too*/
@@ -1317,6 +1308,8 @@ Std_ReturnType Fls_Ospi_setProtocol(OSPI_Handle handle, uint32 protocol)
             /* Set 444 mode */
             retVal += Fls_set444mode(handle, Fls_Config_SFDP_Ptr->protos.enableSeq);
             break;
+
+        /* TI_COVERAGE_GAP_START [Branch/Line] The 4-4-4 flash mode not supported by the flash currently used */
         case (uint32)FLS_OSPI_RX_4S_4D_4D:
             /* Set Quad Enable Bit. Set 444 mode. Set commands, mode and dummy cycle if needed.
              * In case of DTR, enable that too*/
@@ -1684,8 +1677,8 @@ void Fls_hwi(void)
                         uint32 idx   = 0U;
                         uint32 match = TRUE;
                         len          = len - Fls_DrvObj.length;
-                        /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read
-                         failure */
+                        /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal == E_NOT_OK cannot be validated unless a hardware
+                         read failure */
                         for (idx = (uint32)0; ((idx < len) && (match != FALSE)); idx++)
                         /* TI_COVERAGE_GAP_STOP */
                         {
@@ -1716,8 +1709,8 @@ void Fls_hwi(void)
                         uint32 idx   = 0U;
                         uint32 match = TRUE;
                         len          = len - Fls_DrvObj.length;
-                        /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read
-                         failure */
+                        /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal == E_NOT_OK cannot be validated unless a hardware
+                         read failure */
                         for (idx = (uint32)0; ((idx < len) && (match != FALSE)); idx++)
                         /* TI_COVERAGE_GAP_STOP */
                         {
@@ -1742,7 +1735,8 @@ void Fls_hwi(void)
                         }
                     }
                 }
-                /* TI_COVERAGE_GAP_START [Branch] retVal == E_NOT_OK cannot be validated unless a hardware read failure
+                /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal == E_NOT_OK cannot be validated unless a hardware read
+                 * failure
                  */
                 if (((Fls_LengthType)0U == Fls_DrvObj.length) && (retVal == E_OK))
                 /* TI_COVERAGE_GAP_STOP */
@@ -1972,14 +1966,13 @@ static Std_ReturnType Fls_set888mode_doAddrReg(OSPI_Handle handle, Fls_RegEnConf
     uint8          reg    = 0U;
     Std_ReturnType retVal = Nor_OspiRegRead(handle, octCfg->cmdRegRd, octCfg->cfgReg, &reg);
 
-    /* TI_COVERAGE_GAP_START [Branch] The below if-else is partially covered as only 8D-8D-8D is supported by the flash
-    used */
+    /* TI_COVERAGE_GAP_START [Branch] retVal = E_NOT_OK can be covered only upon hardware read failure*/
     if (E_OK == retVal)
     /* TI_COVERAGE_GAP_STOP */
     {
         /* Octal DDR is special. Check if it is already enabled */
-        /* TI_COVERAGE_GAP_START [Branch/Line] The below if-else is partially covered as only 8D-8D-8D is supported by
-        the flash used */
+        /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] The below if-else is partially covered as only 8D-8D-8D is
+        supported by the flash used */
         if ((((reg >> octCfg->shift) & 0x01U) == (uint8)1U) && (((reg >> dCfg->shift) & 0x01U) == (uint8)1U))
         {
             /* Already 8D */
@@ -2079,10 +2072,13 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
         retVal += Fls_set888mode_seq2(handle, obj);
     }
     /* TI_COVERAGE_GAP_STOP */
-    retVal += Fls_set888mode_regCfg(handle, obj);
     if (retVal == E_OK)
     {
-        obj->currentprotocol = Fls_DrvObj.Fls_Mode;
+        retVal = Fls_set888mode_regCfg(handle, obj);
+        if (retVal == E_OK)
+        {
+            obj->currentprotocol = Fls_DrvObj.Fls_Mode;
+        }
     }
 
     return retVal;
@@ -2094,14 +2090,15 @@ Std_ReturnType Fls_set888mode(OSPI_Handle handle, uint8 seq)
  *   This function is used to set register read and write commands for 444 mode.
  *
  */
-/* TI_COVERAGE_GAP_START [Function/Branch/Line] The 4-4-4 (Quad-All) protocol mode not supported by the flash currently
-used */
 Std_ReturnType Fls_set444mode(OSPI_Handle handle, uint8 seq)
 {
     OSPI_Object   *obj      = ((OSPI_Config *)handle)->object;
     Std_ReturnType retVal   = E_OK;
     uint32         seqFound = 0U;
 
+    /* TI_COVERAGE_GAP_START [Branch/Line] All below if conditions are partially/fully uncovered as the 4-4-4 (Quad-All)
+    protocol mode not supported by the flash currently used, this function is called from Fls_Ospi_setProtocol for
+    function call coverage */
     if ((seq & (uint8)(1U << 0U)) != 0U)
     {
         /* Issue instruction 0x38 */
@@ -2166,11 +2163,11 @@ Std_ReturnType Fls_set444mode(OSPI_Handle handle, uint8 seq)
         }
         obj->currentprotocol = Fls_DrvObj.Fls_Mode;
     }
+    /* TI_COVERAGE_GAP_STOP */
     retVal += Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
 
     return retVal;
 }
-/* TI_COVERAGE_GAP_STOP */
 /**
  *  \Function Name: Fls_set111mode
  *

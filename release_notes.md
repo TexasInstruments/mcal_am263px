@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 08-Aug-2026.
+This is the release notes for MCAL AM26xx 26.01.00.02 done on 10-Aug-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -50,6 +50,16 @@ This document details about supported driver, installation, dependencies, build 
       <td>Fls PHY erase issue when attack vector is not present</td>
       <td>FLS</td>
       <td>Fls erase issue when attack vector is not present was reproduced and test with the fix</td>
+    </tr>
+    <tr>
+      <td>Added registerreadback functions added to CMPSS and FLC</td>
+      <td>CMPSS, FLC</td>
+      <td>Safety diagnostics register readback APIs added</td>
+    </tr>
+    <tr>
+      <td>Code Coverage Improvements</td>
+      <td>All</td>
+      <td>Code coverage improvements done across multiple modules</td>
     </tr>
     <tr>
       <td>UUID not unique across modules</td>
@@ -315,6 +325,46 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Fls erase when PHY is enabled and attach vector is not present is now fixed to hadnle erase status check.</td>
     </tr>
     <tr>
+      <td>MCAL-40870</td>
+      <td>Issue with FLS Erase timeout counter</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Erase start count is now based on Fls erase stage.</td>
+    </tr>
+    <tr>
+      <td>MCAL-41085</td>
+      <td>Unable to release spinlock in case of FLS Timeout Error</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>SchM_Exit is now added in TimeoutVerification before DetRunTime based on FlsEraseStage</td>
+    </tr>
+    <tr>
+      <td>MCAL-41110</td>
+      <td>Difference in implementation between SDK and MCAL</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Fixed, added DDR EN and corrected dummyclkRd from dummyclkcmd</td>
+    </tr>
+    <tr>
+      <td>MCAL-40885</td>
+      <td>Fls_PhyDisable function declares the varibale retVal unconditionally</td>
+      <td>FLS</td>
+      <td>Minor</td>
+      <td>AM263Px, AM261x</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>MCAL-40896</td>
+      <td>Details on FlsTimeoutSupervisionEnabled is incorrect in user guide</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Userguide is now updated</td>
+    </tr>
+    <tr>
       <td>MCAL-38305</td>
       <td>LIN issues with Sleep command</td>
       <td>LIN</td>
@@ -323,12 +373,28 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>SetId is now done before setting data</td>
     </tr>
     <tr>
+      <td>MCAL-38564</td>
+      <td>SW CS is not configurable in SPI</td>
+      <td>Spi</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SPI CS via GPIO is now available for selection through EB tresos and the driver is updated to support the same</td>
+    </tr>
+    <tr>
       <td>MCAL-38578</td>
       <td>Spi_MainFunction_Handling shouldn't be available for SpiLevelDelivered 0</td>
       <td>Spi</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Conditional check for SpiLevelDelivered is added in Spi_bswmd.arxml</td>
+    </tr>
+    <tr>
+      <td>MCAL-38624</td>
+      <td>MCAL_CacheP_CACHELINE_ALIGNMENT is incorrectly set to 128</td>
+      <td>Utils</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Size is now corrected and set to 32</td>
     </tr>
   </tbody>
 </table>

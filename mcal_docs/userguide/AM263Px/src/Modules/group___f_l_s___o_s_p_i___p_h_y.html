@@ -256,6 +256,18 @@
 <td><p><strong><a class="reference internal" href="#function-fls-ospi-phy-disable"><span class="std std-ref">Fls_Ospi_phy_disable</span></a></strong>(void )</p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-odd"><td><p>void</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-ospi-phymergerxhighresults"><span class="std std-ref">Fls_Ospi_phyMergeRxHighResults</span></a></strong>(Fls_Ospi_phyConfig * rxHigh, const Fls_Ospi_phyConfig * sec_rxHigh, boolean * continueSearch)</p></td>
+<td><p>Merge RxHigh results from primary and secondary searches.</p></td>
+</tr>
+<tr class="row-even"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-ospi-phyconfigbaudrate"><span class="std std-ref">Fls_Ospi_phyConfigBaudrate</span></a></strong>(uint32 baud)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Std_ReturnType</p></td>
+<td><p><strong><a class="reference internal" href="#function-fls-ospi-phygetbaudratedivfromobj"><span class="std std-ref">Fls_Ospi_phyGetBaudRateDivFromObj</span></a></strong>(uint32 * baudDiv)</p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 <section id="function-fls-ospi-phyinit">
@@ -278,6 +290,40 @@
 <h3>function Fls_Ospi_phy_disable<a class="headerlink" href="#function-fls-ospi-phy-disable" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Fls_Ospi_phy_disable</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-fls-ospi-phymergerxhighresults">
+<h3>function Fls_Ospi_phyMergeRxHighResults<a class="headerlink" href="#function-fls-ospi-phymergerxhighresults" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Fls_Ospi_phyMergeRxHighResults</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Fls_Ospi_phyConfig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">rxHigh</span><span class="p">,</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Fls_Ospi_phyConfig</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sec_rxHigh</span><span class="p">,</span>
+<span class="w">    </span><span class="n">boolean</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">continueSearch</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Brief</strong>:
+Merge RxHigh results from primary and secondary searches.</p>
+<p><strong>Parameters</strong>:</p>
+<ul class="simple">
+<li><p><strong>rxHigh</strong> Primary RxHigh result (updated if secondary is better)</p></li>
+<li><p><strong>sec_rxHigh</strong> Secondary RxHigh result</p></li>
+<li><p><strong>continueSearch</strong> Search continuation flag (set to FALSE if both failed)</p></li>
+</ul>
+</section>
+<section id="function-fls-ospi-phyconfigbaudrate">
+<h3>function Fls_Ospi_phyConfigBaudrate<a class="headerlink" href="#function-fls-ospi-phyconfigbaudrate" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Fls_Ospi_phyConfigBaudrate</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">baud</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="function-fls-ospi-phygetbaudratedivfromobj">
+<h3>function Fls_Ospi_phyGetBaudRateDivFromObj<a class="headerlink" href="#function-fls-ospi-phygetbaudratedivfromobj" title="Link to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Fls_Ospi_phyGetBaudRateDivFromObj</span><span class="p">(</span>
+<span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">baudDiv</span>
 <span class="p">)</span>
 </pre></div>
 </div>

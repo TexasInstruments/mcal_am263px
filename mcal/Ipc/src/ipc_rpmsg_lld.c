@@ -339,10 +339,10 @@ sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObje
             (epObj->recvCallback == NULL_PTR)) /* i.e non-callback mode */
 
         {
-            RPMessage_LocalMsg *pMsg;
+            RPMessage_LocalMsg *pMsg = (RPMessage_LocalMsg *)NULL_PTR;
 
             status = RPMessage_getEndPtMsg(epObj, &pMsg, recvParams->timeout);
-            if (status == MCAL_SystemP_SUCCESS)
+            if ((status == MCAL_SystemP_SUCCESS) && (pMsg != NULL_PTR))
             {
                 status = RPMessage_lld_recv_processMsg(hRpMsg, epObj, recvParams, pMsg);
             }

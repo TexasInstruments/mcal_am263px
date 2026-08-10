@@ -1674,7 +1674,7 @@ sint32 Uart_Cdd_init(CddUart_Handle hUart)
     {
         hUart->state = MCAL_STATE_BUSY;
 
-        if (UART_isInitParamInValid(hUart))
+        if (UART_isInitParamInValid(hUart) == TRUE)
         {
             status = MCAL_SystemP_INVALID_PARAM;
         }

@@ -244,7 +244,8 @@ static void Fls_TimeoutCheck(uint32 time1, TickType elapsedCount)
 static void Fls_TimeoutVerification_sub(void)
 {
 #if defined(AM263PX_PLATFORM) || defined(AM261X_PLATFORM)
-    if ((Fls_DrvObj.jobType == FLS_JOB_ERASE) && (Fls_EraseStage == FLS_S_IN_PROGRESS))
+    const uint8 eraseStage = Fls_EraseStage;
+    if ((Fls_DrvObj.jobType == FLS_JOB_ERASE) && (eraseStage == FLS_S_IN_PROGRESS))
     {
         /*Below SchM call is intended for synchronisation mechanisms(Eg: spinlock/unlock),
         do not use this hook function for critical section protection, this exit is added

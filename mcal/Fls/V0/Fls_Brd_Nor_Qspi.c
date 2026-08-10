@@ -144,7 +144,7 @@ Std_ReturnType Nor_QspiCmdRead(QSPI_Handle handle, uint8 cmd, uint32 cmdAddr, ui
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
     QSPI_CmdParams rdParams;
 
-    Fls_Qspi_ParamsInit(&rdParams);
+    (void)Fls_Qspi_ParamsInit(&rdParams);
     rdParams.cmd       = cmd;
     rdParams.cmdAddr   = cmdAddr;
     rdParams.rxDataBuf = rxBuf;
@@ -185,7 +185,7 @@ Std_ReturnType Nor_QspiCmdWrite(QSPI_Handle handle, uint8 cmd, uint32 cmdAddr, u
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
 
     QSPI_CmdParams wrParams;
-    Fls_Qspi_ParamsInit(&wrParams);
+    (void)Fls_Qspi_ParamsInit(&wrParams);
     wrParams.cmd       = cmd;
     wrParams.cmdAddr   = cmdAddr;
     wrParams.txDataBuf = txBuf;
@@ -387,20 +387,13 @@ Std_ReturnType Nor_QspiReadId(QSPI_Handle handle)
     {
         manufacturerId = (uint32)idCode[0];
         deviceId       = ((uint32)idCode[1] << 8U) | ((uint32)idCode[2]);
-        /* TI_COVERAGE_GAP_START [Branch/Line] Manufacturer ID or device ID mismatch requires flash returning
-         * unexpected RDID bytes; cannot be validated in test environment */
         if (manufacturerId != Fls_Config_SFDP_Ptr->manfId)
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
-        else if (deviceId != Fls_Config_SFDP_Ptr->deviceId)
+        if (deviceId != Fls_Config_SFDP_Ptr->deviceId)
         {
             retVal = (Std_ReturnType)E_NOT_OK;
-        }
-        /* TI_COVERAGE_GAP_STOP */
-        else
-        {
-            retVal = (Std_ReturnType)E_OK;
         }
     }
     return retVal;
@@ -553,23 +546,11 @@ static Std_ReturnType Fls_norOpen_sub1(void)
  */
 Std_ReturnType Fls_hwUnitInit(void)
 {
-    Std_ReturnType retVal;
+    Std_ReturnType retVal = E_NOT_OK;
 
     (void)Fls_QspiHwInit();
 
     retVal = Fls_norOpen();
-
-    if (retVal != (Std_ReturnType)E_NOT_OK)
-    {
-        retVal = (Std_ReturnType)E_OK;
-    }
-    /* TI_COVERAGE_GAP_START [Branch/Line] Fls_norOpen failure with non-NULL handle requires hardware fault during
-     * flash initialization; not inducible in test environment */
-    else
-    {
-        retVal = (Std_ReturnType)E_NOT_OK;
-    }
-    /* TI_COVERAGE_GAP_STOP */
 
 #if (FLS_DMA_ENABLE == STD_ON)
     /* TI_COVERAGE_GAP_START [Branch/Line] retVal != E_OK is coverage only upon hardware init failure*/
@@ -679,17 +660,21 @@ void processJobs(Fls_JobType job)
 #endif
             break;
         case FLS_JOB_WRITE:
-
 #if (STD_ON == FLS_ERASE_VERIFICATION_ENABLED)
-            /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] Pre-write blank check failure requires erase to have left
-             * non-blank data; not inducible in standard test environment (includes 2 MC-DC gaps)*/
-            if ((FlsWriteStage == FLS_S_WRITE_DONE) && (Fls_norBlankCheck(chunkSize) != E_OK))
+            if ((FlsWriteStage == FLS_S_INIT_STAGE) && (Fls_DrvObj.actual == 0U))
             {
-                break;
-            }
-            /* TI_COVERAGE_GAP_STOP */
-#endif
+                /* TI_COVERAGE_GAP_START [Branch/Line/MC-DC] Pre-write blank check failure requires erase to have left
+                 * non-blank data; not inducible in standard test environment (includes 2 MC-DC gaps)*/
 
+                /* TI_COVERAGE_GAP_STOP */
+                retVal = Fls_norBlankCheck(chunkSize);
+                if (retVal != E_OK)
+                {
+                    Fls_JobNotification(job, retVal, chunkSize);
+                    break;
+                }
+            }
+#endif
             retVal = Fls_norAsyncWrite(chunkSize);
 
 #if (STD_ON == FLS_WRITE_VERIFICATION_ENABLED)

@@ -82,9 +82,7 @@ typedef struct
     uint32    isTx;          /**< 1 if TX ring, 0 if RX ring */
 } RPMessage_VringResetParams;
 
-static inline uint32 RPMessage_align(uint32 value, uint32 align);
-/* utility function to find if core ID runs linux */
-uint32               RPMessage_isLinuxCore(RPMessageLLD_Handle hRpMsg, uint16 coreId);
+static uint32 RPMessage_align(uint32 value, uint32 align);
 
 /* functions for VRING TX handling and initialization */
 void   RPMessage_vringCheckEmptyTxBuf(RPMessageLLD_Handle hRpMsg, uint16 remoteCoreId);

@@ -1,3 +1,88 @@
+commit 24d55a91aa4d308c40db955e3855f2f306e8b223
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Aug 10 13:51:28 2026 +0530
+
+    all: Fls/Ipc: Static analysis fixes
+    
+    Fixes: MCAL-40645
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V0/Fls_Brd_Nor_Qspi.c        | 4 ++--
+ mcal/Fls/V0/Fls_Qspi.c                | 7 +++++--
+ mcal/Fls/src/Fls.c                    | 3 ++-
+ mcal/Ipc/include/ipc_rpmsg_lld_priv.h | 4 +---
+ mcal/Ipc/src/ipc_rpmsg_lld.c          | 4 ++--
+ 5 files changed, 12 insertions(+), 10 deletions(-)
+
+commit a93233f1eb5c984ba6ba63430b9da384fdef4d9d
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Aug 10 14:56:48 2026 +0530
+
+    all: uart: Uart KW fix ID : 16230
+    
+    - The controlling expression of an if statement or loop statement has type 'unsigned char' instead of 'Essentially Boolean' type
+    
+    Fixes: MCAL-38535
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Uart/V0/uart.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 8828441f952a27fb903daa74cd462aa7be01a8e9
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Aug 5 12:25:02 2026 +0530
+
+    am263px/1x: Fls: Improvements and updated comments
+    
+    Fixes: MCAL-41105
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V0/Fls_Brd_Nor_Qspi.c                     |  41 ++----
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c                     |  19 +--
+ mcal/Fls/V2/Fls_Ospi.c                             | 159 ++++++++++-----------
+ mcal/Fls/V2/Fls_Ospi.h                             |   2 +-
+ mcal/Fls/V2/Fls_Ospi_Phy.c                         |  46 +++---
+ mcal/Fls/V2/Fls_Ospi_Phy.h                         |   4 +
+ mcal_test/fls_test/testInput/flsTestCases_ospi.h   |   1 +
+ .../fls_test/testLib/flsTestNegativeTestCase.c     |  63 +++++++-
+ .../Fls/soc/am261/r5f0_0/config_12/Fls_Cfg.h       |   3 +
+ 9 files changed, 188 insertions(+), 150 deletions(-)
+
+commit 5ffe3248a488426020ef88495be9a0f1cd27031b
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Aug 10 11:18:41 2026 +0530
+
+    all: all: Minor correction in release notes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit f8acbd66675bd590b13487fee7eef050a2fe5016
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Aug 7 11:42:42 2026 +0530
+
+    all: all: Updated release notes, FlsTimeoutSupervisionEnabled info in plugins, build fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../plugins/AM261x/Fls_TI_AM261x/config/Fls.arxml  |  2 +-
+ .../plugins/AM261x/Fls_TI_AM261x/config/Fls.xdm    |  2 +-
+ .../AM263Px/Fls_TI_AM263Px/config/Fls.arxml        |  2 +-
+ .../plugins/AM263Px/Fls_TI_AM263Px/config/Fls.xdm  |  2 +-
+ .../plugins/AM263x/Fls_TI_AM263x/config/Fls.arxml  |  2 +-
+ .../plugins/AM263x/Fls_TI_AM263x/config/Fls.xdm    |  2 +-
+ release_notes.md                                   | 66 ++++++++++++++++++++++
+ 7 files changed, 72 insertions(+), 6 deletions(-)
+
 commit 6afd337045865a35d578d71493aeba2448740d77
 Author: Asha D <asha.d@ti.com>
 Date:   Fri Aug 7 17:05:28 2026 +0530

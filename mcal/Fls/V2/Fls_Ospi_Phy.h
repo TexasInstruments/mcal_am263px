@@ -212,6 +212,10 @@ extern uint32 readDataCaptureDelay;
 Std_ReturnType Fls_Ospi_phyInit(void);
 void           Fls_Ospi_phy_enable(void);
 void           Fls_Ospi_phy_disable(void);
+void           Fls_Ospi_phyMergeRxHighResults(Fls_Ospi_phyConfig *rxHigh, const Fls_Ospi_phyConfig *sec_rxHigh,
+                                              boolean *continueSearch);
+Std_ReturnType Fls_Ospi_phyConfigBaudrate(uint32 baud);
+Std_ReturnType Fls_Ospi_phyGetBaudRateDivFromObj(uint32 *baudDiv);
 
 #ifdef __cplusplus
 }

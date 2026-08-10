@@ -352,6 +352,10 @@ The module MCU powers up the microcontroller’s peripherals at startup time and
 
 The module PORT enables the SPI lines at startup time. To operate the SPI properly, the PORT driver must be configured. The PORT driver sets the PINs to the required mux values for the SPI to operate.
 
+##### DIO
+
+DIO Module is required when GPIO is configured to use as chip select.
+
 ##### OSEK / AUTOSAR OS (Optional)
 
 An operating system can be used for task scheduling, interrupt handling, global suspend and restore of interrupts and creating of the Interrupt Vector Table.
