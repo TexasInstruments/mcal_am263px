@@ -1,7 +1,7 @@
 /*
  * TEXAS INSTRUMENTS TEXT FILE LICENSE
  *
- * Copyright (c) 2023-2025 Texas Instruments Incorporated
+ * Copyright (c) 2023-2026 Texas Instruments Incorporated
  *
  * All rights reserved not granted herein.
  *
@@ -348,9 +348,9 @@ VAR(Eth_DrvObject, ETH_VAR_ZERO_INIT) Eth_DrvObj;
 /* MISRAC_2012_R.20.1
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Eth_MemMap.h"
-static uint8 Eth_TxPacketMemoryPool[ETH_MAX_FRAME_LEN * ETH_NUM_TX_BUFFERS];
+static uint8 Eth_TxPacketMemoryPool[ETH_MAX_FRAME_LEN * ETH_NUM_TX_BUFFERS] __attribute__((aligned(32)));
 
-static uint8 Eth_RxPacketMemoryPool[ETH_MAX_FRAME_LEN * ETH_NUM_RX_BUFFERS];
+static uint8 Eth_RxPacketMemoryPool[ETH_MAX_FRAME_LEN * ETH_NUM_RX_BUFFERS] __attribute__((aligned(32)));
 #define ETH_STOP_SEC_VAR_NO_INIT_8
 
 /* MISRAC_2012_R.20.1

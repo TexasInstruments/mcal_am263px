@@ -77,7 +77,7 @@
         -I${MCAL_MCAL_Eth_Cfg}
         -I${MCAL_MCAL_EthTrcv_Cfg}
 
-        -I${MCAL_MCAL_Mcu_V0}
+        -I${MCAL_MCAL_Mcu_V3}
         -I${MCAL_MCAL_Port_V0}
         -I${MCAL_MCAL_Eth_V0}
         -I${MCAL_MCAL_EthTrcv_V0}
@@ -127,7 +127,7 @@
         <pathVariable name="MCAL_MCAL_Mcal_Lib" path="${MCAL_MCAL}/Mcal_Lib" scope="project"/>
 
 
-        <pathVariable name="MCAL_MCAL_Mcu_V0" path="${MCAL_MCAL}/Mcu/V0" scope="project"/>
+        <pathVariable name="MCAL_MCAL_Mcu_V3" path="${MCAL_MCAL}/Mcu/V3" scope="project"/>
         <pathVariable name="MCAL_MCAL_Port_V0" path="${MCAL_MCAL}/Port/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_Eth_V0" path="${MCAL_MCAL}/Eth/V0" scope="project"/>
         <pathVariable name="MCAL_MCAL_EthTrcv_V0" path="${MCAL_MCAL}/EthTrcv/V0" scope="project"/>
@@ -142,7 +142,7 @@
         <file path="${MCAL_MCAL}/EthTrcv/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/EthTrcv"></file>
         <file path="${MCAL_MCAL}/EthTrcv/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/EthTrcv"></file>
         <file path="${MCAL_MCAL}/EthTrcv/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/EthTrcv"></file>
-        <file path="${MCAL_MCAL}/Mcu/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
+        <file path="${MCAL_MCAL}/Mcu/V3" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
         <file path="${MCAL_MCAL}/Mcu/include" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
         <file path="${MCAL_MCAL}/Mcu/src" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Mcu"></file>
         <file path="${MCAL_MCAL}/Port/V0" openOnCreation="false" excludeFromBuild="false" action="link" targetDirectory="Drivers/Port"></file>
@@ -151,7 +151,7 @@
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am261/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Mcu_Demo_Cfg/soc/am261/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Mcu_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am261/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
-        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am261/r5f0_0/src/Port_PBcfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
+        <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am261/r5f0_0/src/Port_PBcfg_Eth.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Port_Demo_Cfg/soc/am261/r5f0_0/src/Port_Cfg.c" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Port_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Eth_Demo_Cfg/soc/am261/r5f0_0/include" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Eth_Demo_Cfg"></file>
         <file path="${MCAL_MCAL}/examples_config/Eth_Demo_Cfg/soc/am261/r5f0_0/src" openOnCreation="false" excludeFromBuild="false" action="copy" targetDirectory="examples_config/Eth_Demo_Cfg"></file>

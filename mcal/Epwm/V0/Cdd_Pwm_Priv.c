@@ -1508,9 +1508,7 @@ Cdd_Pwm_PrivSetAbsoluteThreshold(const Cdd_Pwm_ChObjType *chObj, Cdd_Pwm_ValueTy
     if (ReferenceValue <= AbsoluteValue)
     {
         /*check if counter value is inside the compare match interval*/
-        /* TI_COVERAGE_GAP_START: This condition depends on runtime counter values */
         if ((ReferenceValue <= ocuCounter) && (ocuCounter < AbsoluteValue))
-        /* TI_COVERAGE_GAP_STOP */
         {
             statusValue = CDD_PWM_CM_IN_REF_INTERVAL;
         }
@@ -1574,9 +1572,7 @@ Cdd_Pwm_PrivSetReleativeThreshold(const Cdd_Pwm_ChObjType *chObj, Cdd_Pwm_ValueT
     else
     {
         /*check if counter value is outside the compare match interval*/
-        /* TI_COVERAGE_GAP_START: This condition depends on runtime counter values */
-        if ((ocuAfterCounter < ocuPrevCounter) && (ocuAfterCounter > cmpVal))
-        /* TI_COVERAGE_GAP_STOP */
+        if (ocuAfterCounter < ocuPrevCounter)
         {
             statusValue = CDD_PWM_CM_OUT_REF_INTERVAL;
         }

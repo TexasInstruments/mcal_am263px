@@ -1,3 +1,66 @@
+commit 8f36814dca9eed393956365c6120718870a4634f
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Tue Aug 4 17:44:51 2026 +0530
+
+    am261x:Eth: Eth app example fix
+    
+    Correct eth_test_app.projectspec
+    
+    Fixes: MCAL-41098
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ .../soc/am261/r5f0_0/ti-arm-clang/eth_test_app.projectspec          | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 96555f762831f7e9feb845104a067776f0d051f7
+Author: aswin <a-puthenpurackaldileep@ti.com>
+Date:   Tue Aug 4 16:46:58 2026 +0530
+
+    am261x:Eth: Eth app example fix
+    
+    Corrected eth_app.projectspec
+    
+    Fixes: MCAL-41095, MCAL-41094
+    
+    Signed-off-by: a-puthenpurackaldileep@ti.com
+
+ .../Eth/eth_app/soc/am261/r5f0_0/ti-arm-clang/eth_app.projectspec | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit f840ecf0af53d3223a10abd7eb18075fb5a89a02
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Fri Jul 31 15:24:40 2026 +0530
+
+    all: Eth: Fix memory pools alignment
+    
+    - TX and Rx packet memory pools should
+      be aligned by 32-bytes. Update Eth_TxPacketMemoryPool
+      and Eth_RxPacketMemoryPool variable to be 32-bytes aligned
+    
+    Fixes: MCAL-40853
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ mcal/Eth/src/cpsw/Eth_Priv.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit de67ce9ca09a25c9222b4aee295cfc30bd5f6627
+Author: Asha D <asha.d@ti.com>
+Date:   Mon Aug 10 14:06:29 2026 +0530
+
+    all:CDD PWM: Coverage Improvement
+    
+    Removed redundant checks and added testcases for coverage
+    
+    Fixes:MCAL-35527
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c                          | 6 +-----
+ mcal_test/epwm_test/testLib/cddPwmTestMainTestCase.c | 8 ++++++++
+ 2 files changed, 9 insertions(+), 5 deletions(-)
+
 commit 24d55a91aa4d308c40db955e3855f2f306e8b223
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Mon Aug 10 13:51:28 2026 +0530
