@@ -143,6 +143,18 @@ void             Mcu_DisableEpwmTbClk(void);
 Mcu_ResetType    Mcu_GetPlatformResetReason(void);
 Mcu_RawResetType Mcu_GetPlatformRawResetReason(void);
 FUNC(void, MCU_CODE) Mcu_SetupClock(void);
+Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                      boolean enable);
+Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                     boolean enable);
+Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                     boolean enable);
+Std_ReturnType Mcu_ClockSetSourceMCSPI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                       boolean enable);
+Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                     boolean enable);
+Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                       boolean enable);
 FUNC(Std_ReturnType, MCU_CODE)
 Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId, boolean enable);
 uint32              Mcu_getMultibitValue(uint32 clk_srcId);

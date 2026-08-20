@@ -181,6 +181,7 @@ FUNC(void, MCU_CODE) Mcu_GetVersionInfo(Std_VersionInfoType *versioninfo)
 FUNC(void, MCU_CODE) Mcu_Init(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_PBCFG) ConfigPtr)
 {
     const Mcu_ConfigType *CfgPtr = (Mcu_ConfigType *)NULL_PTR; /* Config pointer initialised with NULL_PTR */
+
 #if (STD_ON == MCU_VARIANT_PRE_COMPILE)
     if (NULL_PTR == ConfigPtr)
     {
@@ -188,6 +189,7 @@ FUNC(void, MCU_CODE) Mcu_Init(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_PBCFG) Conf
         CfgPtr = &MCU_INIT_CONFIG_PC;
     }
 #endif /* (STD_ON == MCU_VARIANT_PRE_COMPILE) */
+
 #if (STD_ON == MCU_VARIANT_POST_BUILD)
     if (NULL_PTR != ConfigPtr)
     {
@@ -195,6 +197,7 @@ FUNC(void, MCU_CODE) Mcu_Init(P2CONST(Mcu_ConfigType, AUTOMATIC, MCU_PBCFG) Conf
         CfgPtr = ConfigPtr;
     }
 #endif /* (STD_ON == MCU_VARIANT_POST_BUILD) */
+
 #if (STD_ON == MCU_DEV_ERROR_DETECT)
     if (NULL_PTR == CfgPtr)
     {
@@ -260,13 +263,16 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(void)
         InitClock_Return = E_NOT_OK;
     }
     else
+#endif /* STD_ON == MCU_DEV_ERROR_DETECT */
     {
         /* TI_COVERAGE_GAP_START [Branch] PLL lock failure is a hardware timeout/failure condition that cannot be easily
            recreated in test environment without hardware malfunction */
         if (MCU_PLL_LOCKED != Mcu_GetPllStatus())
         {
             /* API is being called before PLL is locked */
+#if (STD_ON == MCU_DEV_ERROR_DETECT)
             (void)Det_ReportError(MCU_MODULE_ID, MCU_INSTANCE_ID, MCU_SID_DISTRIBUTE_PLL_CLOCK, MCU_E_PLL_NOT_LOCKED);
+#endif /* STD_ON == MCU_DEV_ERROR_DETECT */
             InitClock_Return = E_NOT_OK;
         }
         /* TI_COVERAGE_GAP_STOP */
@@ -283,7 +289,6 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(void)
             /* TI_COVERAGE_GAP_STOP */
         }
     }
-#endif /* STD_ON == MCU_DEV_ERROR_DETECT */
     return (InitClock_Return);
 
 } /*end of the Mcu_DistributePllClock()*/

@@ -142,6 +142,18 @@ void             Mcu_DisableEpwmTbClk(void);
 Mcu_ResetType    Mcu_GetPlatformResetReason(void);
 Mcu_RawResetType Mcu_GetPlatformRawResetReason(void);
 FUNC(void, MCU_CODE) Mcu_SetupClock(void);
+Std_ReturnType Mcu_ClockSetSourceMCAN(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                      boolean enable);
+Std_ReturnType Mcu_ClockSetSourceRTI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                     boolean enable);
+Std_ReturnType Mcu_ClockSetSourceWDT(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                     boolean enable);
+Std_ReturnType Mcu_ClockSetSourceSPI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                     boolean enable);
+Std_ReturnType Mcu_ClockSetSourceSCI(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                     boolean enable);
+Std_ReturnType Mcu_ClockSetSourceOther(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId,
+                                       boolean enable);
 FUNC(Std_ReturnType, MCU_CODE)
 Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, uint32 clkDivId, boolean enable);
 uint32              Mcu_getMultibitValue(uint32 clk_srcId);
@@ -174,8 +186,7 @@ Std_ReturnType      Mcu_ClockSetSourceMcuClkout1(Mcu_ClkSourceIdType clk_srcId, 
 Std_ReturnType      Mcu_ClockSetSourceMII100Clk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
 Std_ReturnType      Mcu_ClockSetSourceMII10Clk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
 Std_ReturnType      Mcu_ClockSetSourceRGMIClk(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
-
-Std_ReturnType Mcu_ClockSetSourceCONTROLSS(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
+Std_ReturnType      Mcu_ClockSetSourceCONTROLSS(Mcu_ClkSourceIdType clk_srcId, uint32 clk_divId);
 
 FUNC(void, MCU_CODE) Mcu_SystemInit(void);
 
