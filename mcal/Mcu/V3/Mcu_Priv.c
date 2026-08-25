@@ -1697,6 +1697,7 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
         defRetVal = E_OK;
     }
 
+    /* TI_COVERAGE_GAP_START - [Branch] cannot acheive the false condition as moduleId is MAXID */
     if (defRetVal == E_OK)
     {
         if ((RetVal != E_OK))
@@ -1706,6 +1707,8 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
 #endif
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
+
     return RetVal;
 }
 
@@ -1777,14 +1780,12 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
 
     /* Restore clock source to DPLL (MCU_CLKSRC_2 is DPLL_CORE_HSDIV0_CLKOUT0)*/
     (void)Mcu_ClockSetSourceCR5(r5ClkSrc_restore);
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus never returns not ok */
     if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef MCU_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)MCU_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
-    /* TI_COVERAGE_GAP_STOP */
 
     return init_pll_return;
 }

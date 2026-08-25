@@ -1,3 +1,118 @@
+commit b22b1d74510206170c207540756ab7562b9bda06
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Aug 21 20:37:42 2026 +0530
+
+    am26xx: CAN: Can config 5 fail fix.
+    
+    Fixes: MCAL-35319
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/can_test/testLib/canTestMainTestCase.c | 25 ++++++++++++++++--------
+ 1 file changed, 17 insertions(+), 8 deletions(-)
+
+commit b37ba4528719e737e47ad30d3c0211f64150f85e
+Author: Asha D <asha.d@ti.com>
+Date:   Wed Aug 19 13:15:33 2026 +0530
+
+    all:MCU:Updating the coverage gap comment
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/Epwm/V0/Cdd_Pwm_Priv.c                          |  4 ++--
+ mcal/Mcu/V0/Mcu_Priv.c                               |  9 +++++++--
+ mcal/Mcu/V2/Mcu_Priv.c                               | 11 +++++++----
+ mcal/Mcu/V3/Mcu_Priv.c                               |  5 +++--
+ mcal/Pwm/V0/Pwm_Priv.c                               | 12 +++++-------
+ mcal/Pwm/V0/Pwm_Sfo.c                                |  2 +-
+ mcal_test/mcu_test/testInput/mcuTestCases.h          |  2 ++
+ mcal_test/mcu_test/testLib/mcuTestNegativeTestCase.c | 19 +++++++++++++++++++
+ 8 files changed, 46 insertions(+), 18 deletions(-)
+
+commit be34c87ceece2e95af95958a0823d78a7992c9e6
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Aug 24 15:36:42 2026 +0530
+
+    am26xx: ADC: Testcase fail fix for ADC.
+    
+    Fixes: MCAL-41326
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/adc_test/testLib/adcTestMainTestCase.c | 109 +++++++++++++++++------
+ 1 file changed, 82 insertions(+), 27 deletions(-)
+
+commit ef95918369737a69cac3f916a298266d087aa23e
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Aug 17 09:29:24 2026 +0530
+
+    all: Ipc: Addressed NULL_PTR gaps and test case failures
+    
+    Fixes: MCAL-41168
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Ipc/src/ipc_rpmsg_lld.c                       |  2 +
+ mcal_test/fls_test/testInput/flsTestCases_qspi.h   |  6 +-
+ mcal_test/ipc_test/am261/testInput/ipcTestCases.h  | 92 +++++++++++-----------
+ .../ipc_test/am261/testLib/ipcFaultInjection.c     | 24 +++++-
+ mcal_test/ipc_test/am263/testInput/ipcTestCases.h  | 92 +++++++++++-----------
+ .../ipc_test/am263/testLib/ipcFaultInjection.c     | 24 +++++-
+ .../ipc_test/am263px/testInput/ipcTestCases.h      | 92 +++++++++++-----------
+ .../ipc_test/am263px/testLib/ipcFaultInjection.c   | 35 +++++++-
+ mcal_test/makefile_common.mk                       |  2 +-
+ 9 files changed, 218 insertions(+), 151 deletions(-)
+
+commit 1548bcfec4a6b94fbe4de51b1e7ba1ce4dce85c0
+Author: Akash <a-verma3@ti.com>
+Date:   Sun Aug 23 11:17:33 2026 +0530
+
+    am26xx: CAN: Fixing CAN testcase 21661.
+    
+    Fixes: MCAL-41326
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/ut_config/Can/soc/am261/r5f0_0/config_1/Can_Cfg.h   | 2 ++
+ mcal_test/ut_config/Can/soc/am263px/r5f0_0/config_1/Can_Cfg.h | 2 ++
+ 2 files changed, 4 insertions(+)
+
+commit f2773afc7475e17b3addf08acf016f521bda8d7a
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Sat Aug 22 16:48:56 2026 +0530
+
+    all: scripts: add SBOM build and generation via fossa
+    
+    Add SBOM build integration to the Windows release build pipeline using the
+    fossa-based sbom_generate.sh tool from the sbom repo.
+    
+    Changes in mcal_release_build.sh:
+    - Add --enable_sbom_build, --fossa_api_key, and --sbom_report_only
+      parameters (all default to disabled/empty so existing jobs are
+      unaffected)
+    - Add sbom_log / sbom_error_log variables for per-step logging
+    - Define sbom_repo pointing to ssh://git@bitbucket.itg.ti.com/mcu-sdk/sbom.git
+    - Add run_sbom_build() function that:
+      - Clones the sbom repo (or reuses an existing clone to save time)
+      - Reuses the already-cloned mcal product repo from push_package_to_git
+        (--source=dir) when available, falling back to --source=git with the
+        correct mcal_github_branch otherwise
+      - Supports --report-only mode via sbom_report_only flag to skip
+        fossa analyze and only fetch reports from the server
+      - Zips reports as <release_folder>_sbom.zip into the artifacts dir
+        and registers it as a build target
+    - Call run_sbom_build() after push_package_to_git when enable_sbom_build=true
+    
+    Changes in mcal_make_all.sh:
+    - Add --enable_sbom_build, --fossa_api_key, and --sbom_report_only
+      parameters and pass them through to mcal_release_build.sh per-platform
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_misc/scripts/windows/mcal_make_all.sh      |  18 +++-
+ mcal_misc/scripts/windows/mcal_release_build.sh | 108 ++++++++++++++++++++++++
+ 2 files changed, 125 insertions(+), 1 deletion(-)
+
 commit 016c9e07e726d3f23ebc5832441026c0a253eda0
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Thu Aug 20 10:24:32 2026 +0530

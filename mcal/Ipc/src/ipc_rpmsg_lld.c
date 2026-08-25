@@ -342,7 +342,9 @@ sint32 RPMessage_lld_recv(RPMessageLLD_Handle hRpMsg, RPMessage_EpObject *epObje
             RPMessage_LocalMsg *pMsg = (RPMessage_LocalMsg *)NULL_PTR;
 
             status = RPMessage_getEndPtMsg(epObj, &pMsg, recvParams->timeout);
+            /* TI_COVERAGE_GAP_START [Branch/MC-DC] pMsg is never NULL_PTR at this point, this is a defensive check */
             if ((status == MCAL_SystemP_SUCCESS) && (pMsg != NULL_PTR))
+            /* TI_COVERAGE_GAP_STOP */
             {
                 status = RPMessage_lld_recv_processMsg(hRpMsg, epObj, recvParams, pMsg);
             }

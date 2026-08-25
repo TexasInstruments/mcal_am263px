@@ -1048,12 +1048,10 @@ FUNC(void, PWM_CODE) Pwm_SystemInit(P2CONST(Pwm_ConfigType, AUTOMATIC, PWM_PBCFG
             (void)Pwm_reportDetError(PWM_SID_INIT, PWM_E_PARAM_CHANNEL);
         }
 #endif
-        /* TI_COVERAGE_GAP_START
-         * Branch coverage gap - The for loop always finds a matching
-         * channelId and breaks. The natural loop termination condition
-         * (chIdx >= PWM_MAX_NUM_CHANNELS) is never reached in valid configurations
-         * since channelId is always within the configured channel range.
-         */
+        /* TI_COVERAGE_GAP_START - [Branch] The for loop always finds a matching
+           channelId and breaks. The natural loop termination condition
+           (chIdx >= PWM_MAX_NUM_CHANNELS) is never reached in valid configurations
+           since channelId is always within the configured channel range. */
         for (chIdx = 0U; chIdx < PWM_MAX_NUM_CHANNELS; chIdx++)
         {
             if (chIdx == ((&Pwm_Config_PC)->chCfg[chnum].channelId))
@@ -1160,7 +1158,7 @@ Pwm_SystemSetDutyCycle_Internal(Pwm_ChannelType ChannelNumber, uint16 DutyCycle)
     Pwm_ChObjType *chObj = &Pwm_ChObj[ChannelNumber];
     Pwm_SetDutyCycle_Internal(chObj, DutyCycle);
 }
-#endif /*#if (PWM_SET_PERIOD_AND_DUTY_API==STD_ON) || \ \
+#endif /*#if (PWM_SET_PERIOD_AND_DUTY_API==STD_ON) || \ \ \
     (PWM_SET_DUTY_CYCLE_API == STD_ON)*/
 
 #if (STD_ON == PWM_REGISTER_READBACK_API)

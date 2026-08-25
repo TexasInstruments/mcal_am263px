@@ -410,7 +410,6 @@ Std_ReturnType Mcu_pllTimeoutevent(volatile const uint32 *regaddr)
         tempCount = MCU_PLL_TIMEOUT_DURATION / 9U;
     }
     /* Wait for FSM to to come out of reset */
-
     while (0x400U != (HW_RD_REG32(regaddr) & 0x400U))
     {
         /* Below API can change start time, so use temp variable */
@@ -479,7 +478,6 @@ Mcu_ClkSourceIdType Mcu_ClockSetSourceCR5(Mcu_ClkSourceIdType clk_srcId)
         (void)Dem_SetEventStatus((Dem_EventIdType)MCU_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
-
     Mcu_Timeoutevent(&toprcmREG->R5SS_CLK_SRC_SEL, clkSrcVal);
 
     return multibitValue;
@@ -2289,6 +2287,7 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
         defRetVal = E_OK;
     }
 
+    /* TI_COVERAGE_GAP_START - [Branch] cannot acheive the false condition as moduleId is MAXID */
     if (defRetVal == E_OK)
     {
         if (RetVal != E_OK)
@@ -2298,6 +2297,7 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
 #endif
         }
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return RetVal;
 }
@@ -2335,6 +2335,7 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
             /*Timeout function call for MCU_E_CLOCK_FAILURE */
             init_pll_return = Mcu_pllTimeoutevent(&toprcmREG->PLL_CORE_STATUS);
 
+            /* TI_COVERAGE_GAP_START - [Branch]: Core status value is never invalid, Hence never returns fail */
             if (init_pll_return == E_OK)
             {
                 /*Collect status of Core PLL CLKOUT registers */
@@ -2344,6 +2345,7 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
 
                 regWriteStatus |= Mcu_corePllHsdivStat(pllClk1);
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
 
         if (pllClk2.MCU_PLL_CLKOUT != 0U) /* DPLL_PER */
@@ -2357,6 +2359,8 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
 
             /*Timeout function call for MCU_E_CLOCK_FAILURE */
             init_pll_return = Mcu_pllTimeoutevent(&toprcmREG->PLL_PER_STATUS);
+
+            /* TI_COVERAGE_GAP_START - [Branch]: Per status value is never invalid, Hence never returns fail */
             if (init_pll_return == E_OK)
             {
                 /*Collect status of Per PLL CLKOUT registers */
@@ -2365,12 +2369,12 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
                 regWriteStatus |= Mcu_Pll_PerHSDIV();
                 regWriteStatus |= Mcu_perPllHsdivStat(pllClk2);
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
     }
 
     /* Restore clock source to DPLL (MCU_CLKSRC_2 is DPLL_CORE_HSDIV0_CLKOUT0)*/
     (void)Mcu_ClockSetSourceCR5(r5ClkSrc_restore);
-    /* TI_COVERAGE_GAP_START [Branch] regWriteStatus never returns not ok */
     if (regWriteStatus != (uint32)E_OK)
     {
 #ifdef MCU_E_HARDWARE_ERROR
@@ -2378,7 +2382,6 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
 #endif
         init_pll_return = E_NOT_OK;
     }
-    /* TI_COVERAGE_GAP_STOP */
 
     return init_pll_return;
 }
