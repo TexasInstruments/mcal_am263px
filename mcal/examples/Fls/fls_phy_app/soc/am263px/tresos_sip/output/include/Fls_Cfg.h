@@ -175,6 +175,9 @@ typedef enum modes
 /** \brief Base Address of OSPI */
 #define FLS_OSPI_CTRL_BASE_ADDR (1400930304UL)
 
+/** \brief Flash phy offset */
+#define FLS_OSPI_PHY_OFFSET (0x80000U)
+
 /** \brief Flash Base Address */
 #define FLS_BASE_ADDRESS (1610612736UL)
 

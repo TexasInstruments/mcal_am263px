@@ -2803,6 +2803,27 @@
                   <MAX>4294967295</MAX>
                   <MIN>1</MIN>
                 </ECUC-INTEGER-PARAM-DEF>
+                <ECUC-INTEGER-PARAM-DEF UUID="ECUC:e066a92a-900b-4d05-a14c-9790c7b9ff54">
+                  <SHORT-NAME>FlsOspiPhyOffset</SHORT-NAME>
+                  <DESC>
+                    <L-2 L="EN">This parameter used to fill the PHY attack vector offset</L-2>
+                  </DESC>
+                  <ORIGIN>Texas Instruments</ORIGIN>
+                  <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
+                  <VALUE-CONFIG-CLASSES>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-POST-BUILD</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                    <ECUC-VALUE-CONFIGURATION-CLASS>
+                      <CONFIG-CLASS>PRE-COMPILE</CONFIG-CLASS>
+                      <CONFIG-VARIANT>VARIANT-PRE-COMPILE</CONFIG-VARIANT>
+                    </ECUC-VALUE-CONFIGURATION-CLASS>
+                  </VALUE-CONFIG-CLASSES>
+                  <DEFAULT-VALUE>524288</DEFAULT-VALUE>
+                  <MAX>4294967295</MAX>
+                  <MIN>0</MIN>
+                </ECUC-INTEGER-PARAM-DEF>
                 <ECUC-ENUMERATION-PARAM-DEF UUID="ECUC:7703f8ba-0770-40cd-b08a-ab4a8bbde097">
                   <SHORT-NAME>FlsIrqType</SHORT-NAME>
                   <DESC>

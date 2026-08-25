@@ -183,6 +183,9 @@ typedef enum modes{
 /** \brief Base Address of OSPI */
 #define FLS_OSPI_CTRL_BASE_ADDR        ([!"as:modconf('Fls')[1]/FlsGeneral/FlsOspiCtrlBaseAddr "!]UL)
 
+/** \brief Flash phy offset */
+#define FLS_OSPI_PHY_OFFSET               ([!"num:inttohex(as:modconf('Fls')[1]/FlsGeneral/FlsOspiPhyOffset)"!]U)
+
 /** \brief Flash Base Address */
 #define FLS_BASE_ADDRESS                ([!"as:modconf('Fls')[1]/FlsGeneral/FlsBaseAddress "!]UL)
 

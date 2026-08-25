@@ -66,7 +66,7 @@
     Do not modify this file, otherwise the software may behave in unexpected way.
  ******************************************************************************/
 
- 
+
 
 #ifndef FLS_CFG_H_
 #define FLS_CFG_H_
@@ -178,6 +178,9 @@ typedef enum modes{
 /** \brief Base Address of OSPI */
 #define FLS_OSPI_CTRL_BASE_ADDR        (1400930304UL)
 
+/** \brief Flash phy offset */
+#define FLS_OSPI_PHY_OFFSET               (0x80000U)
+
 /** \brief Flash Base Address */
 #define FLS_BASE_ADDRESS                (1610612736UL)
 
@@ -188,7 +191,7 @@ typedef enum modes{
 #define FLS_MAX_WRITE_TIME                (1000.0)
 
 /** \brief Number of Sectorlist configured */
-        
+
 #define FLS_NUMBER_OF_SECTOR_CFG             (1U)
 
 /* @} */

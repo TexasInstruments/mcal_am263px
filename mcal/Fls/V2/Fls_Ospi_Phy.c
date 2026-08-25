@@ -71,6 +71,7 @@
  * "Reason - This is the format to use for specifying memory sections " */
 #include "Fls_MemMap.h"
 uint32         readDataCaptureDelay                                  = 0U;
+static uint32  initialReadDataCaptureDelay                           = 0U;
 Std_ReturnType phyInitStatus                                         = E_NOT_OK;
 static uint8   gOspiFlashAttackVector[OSPI_FLASH_ATTACK_VECTOR_SIZE] = {
     0xFEU,  // 0b11111110 @ 0x00000400 1024 bytes
@@ -1642,9 +1643,9 @@ void Fls_Ospi_phy_disable(void)
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG,
                       OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD, dummyClks);
 
-        /* Set the non-PHY read delay */
+        /* Restore the initial (non-tuned) read delay */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD,
-                      readDataCaptureDelay);
+                      initialReadDataCaptureDelay);
 
         /* Disable PHY mode */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_PHY_MODE_ENABLE_FLD, FALSE);
@@ -1736,7 +1737,7 @@ static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOff
     *rdCapDelay = initialRdCapDelay;
     Fls_Ospi_phySetRdDataCaptureDelay(*rdCapDelay);
     Flash_norOspiDisxipDisable();
-    retVal = Fls_norSectorErase(handle, OSPI_PHY_OFFSET);
+    retVal = Fls_norSectorErase(handle, FLS_OSPI_PHY_OFFSET);
 
     /* Poll for erase completion to avoid leaving state machine in IN_PROGRESS state.
      * This ensures the erase state machine is properly reset before returning.
@@ -1795,7 +1796,7 @@ static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOff
     /* TI_COVERAGE_GAP_STOP */
     {
         /* MISRA deviation: Cast away const for write operation - data is not modified */
-        retVal = Nor_OspiWrite(handle, OSPI_PHY_OFFSET, (uint8 *)(uintptr_t)phyTuningData, phyTuningDataSize);
+        retVal = Nor_OspiWrite(handle, FLS_OSPI_PHY_OFFSET, (uint8 *)(uintptr_t)phyTuningData, phyTuningDataSize);
     }
 
     /* If write has passed, verify by reading */
@@ -1823,9 +1824,8 @@ Std_ReturnType Fls_Ospi_phyInit(void)
     Std_ReturnType status             = E_OK;
     Std_ReturnType attackVectorStatus = E_NOT_OK;
 
-    uint32 phyTuningOffset             = OSPI_PHY_OFFSET;
-    uint32 origBaudRateDiv             = 0U;
-    uint32 initialReadDataCaptureDelay = 0U;
+    uint32 phyTuningOffset = FLS_OSPI_PHY_OFFSET;
+    uint32 origBaudRateDiv = 0U;
 
     (void)Fls_Ospi_phyGetBaudRateDivFromObj(&origBaudRateDiv);
 
@@ -1833,7 +1833,8 @@ Std_ReturnType Fls_Ospi_phyInit(void)
     (void)Fls_Ospi_phyConfigBaudrate(MAX_BAUDRATE_DIVIDER);
 
     /* Reading the readcapture delay set by Fls Driver */
-    readDataCaptureDelay        = Fls_Ospi_phyGetRdDataCaptureDelay();
+    readDataCaptureDelay = Fls_Ospi_phyGetRdDataCaptureDelay();
+    /* Save initial value to module-level variable for restoration after PHY tuning */
     initialReadDataCaptureDelay = readDataCaptureDelay;
 
     attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);

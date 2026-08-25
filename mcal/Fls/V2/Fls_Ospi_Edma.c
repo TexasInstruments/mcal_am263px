@@ -149,6 +149,9 @@ void FLS_edmaTransfer(uint8 *dst, uint8 *src, uint32 length, OSPI_Handle ospiHan
     size               = size - size_adjustment;
     remaining_size     = length - size;
     uint32 chainOption = (CDD_EDMA_OPT_ITCCHEN_MASK | CDD_EDMA_OPT_TCCHEN_MASK);
+    /* Writeback source and destination cache lines for cache coherency */
+    Mcal_CacheP_wb((void *)src, length, Mcal_CacheP_TYPE_ALLD);
+    Mcal_CacheP_wb((void *)dst, length, Mcal_CacheP_TYPE_ALLD);
     /* edmaParam0 configuration */
     edmaParam0.srcPtr  = src;
     edmaParam0.destPtr = dst;

@@ -92,8 +92,6 @@ extern "C" {
 
 #define OSPI_PHY_TUNING_FREQ_RANGE (133333333U)
 
-#define OSPI_PHY_OFFSET 0x80000U
-
 /* PHY-config */
 typedef enum
 {

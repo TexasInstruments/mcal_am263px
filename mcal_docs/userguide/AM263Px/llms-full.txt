@@ -14630,7 +14630,7 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| fls   | 13076    | 486    | 8240    |
+| fls   | 13106    | 490    | 8240    |
  
 ### FSIRX
 
@@ -27421,6 +27421,21 @@ Container for general parameters of the flash driver. These parameters are alway
 | **Default-value** | 1400930304 |
 | **Max-value** | 4294967295 |
 | **Min-value** | 1 |
+
+###### FlsOspiPhyOffset
+
+| Item ||
+|--------|---------------|
+| **Name** | FlsOspiPhyOffset |
+| **Description** | This parameter used to fill the PHY attack vector offset |
+| **Origin** | Texas Instruments |
+| **Post-Build-Variant-Value** | false |
+| **Value-Configuration-Class** | -- |
+| Post-Build-Time | VARIANT-POST-BUILD |
+| Pre-Compile-Time | VARIANT-PRE-COMPILE |
+| **Default-value** | 524288 |
+| **Max-value** | 4294967295 |
+| **Min-value** | 0 |
 
 ###### FlsIrqType
 
@@ -51203,7 +51218,6 @@ title: FLS OSPI PHY Driver Interface
 | FLS_STOP_SEC_CODE   |  |
 | OSPI_FLASH_ATTACK_VECTOR_SIZE   |  |
 | OSPI_PHY_TUNING_FREQ_RANGE   |  |
-| OSPI_PHY_OFFSET   |  |
 | CSL_OSPI_BAUD_RATE_DIVISOR (x)  |  |
 | MAX_BAUDRATE_DIVIDER   |  |
 | CSL_OSPI_BAUD_RATE_DIVISOR_DEFAULT   |  |

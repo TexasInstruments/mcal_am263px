@@ -444,11 +444,11 @@
                 </d:var>
                 <d:var name="FlsProtocol" type="ENUMERATION"
                        value="FLS_8D_8D_8D"/>
-                <d:var name="FlsPhyControlMode" type="ENUMERATION" 
+                <d:var name="FlsPhyControlMode" type="ENUMERATION"
                        value="FLS_PHY_MASTER_MODE">
                   <a:a name="IMPORTER_INFO" value="@DEF"/>
                 </d:var>
-                <d:var name="FlsPhyDllLockMode" type="ENUMERATION" 
+                <d:var name="FlsPhyDllLockMode" type="ENUMERATION"
                        value="FLS_PHY_DLL_HALF_CYCLE">
                   <a:a name="IMPORTER_INFO" value="@DEF"/>
                 </d:var>
@@ -508,6 +508,10 @@
                 </d:var>
                 <d:var name="FlsOspiCtrlBaseAddr" type="INTEGER"
                        value="1400930304">
+                  <a:a name="IMPORTER_INFO" value="@REC"/>
+                </d:var>
+                <d:var name="FlsOspiPhyOffset" type="INTEGER"
+                       value="524288">
                   <a:a name="IMPORTER_INFO" value="@REC"/>
                 </d:var>
                 <d:ref name="FlsOsCounterRef" type="REFERENCE"

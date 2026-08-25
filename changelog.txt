@@ -1,3 +1,133 @@
+commit 788d30c90da9203ca24ed61e1730ba57f32b1cfe
+Author: Akash <a-verma3@ti.com>
+Date:   Tue Aug 25 16:22:37 2026 +0530
+
+    am26xx: CAN: Testcase fail fix for CAN for Platform am261 - 11619 and 11640.
+    
+    Fixes: MCAL-41326
+    
+    Signed-off-by: Akash Verma
+
+ mcal_test/can_test/testInput/canTestCases.h  | 14 ++++++++++++--
+ mcal_test/can_test/testInput/canTestConfig.h | 17 ++++++++++++++---
+ 2 files changed, 26 insertions(+), 5 deletions(-)
+
+commit aff96c9575bec71d889dd7c06bcee6842b5ff5c6
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Aug 25 16:45:34 2026 +0530
+
+    all: Fls: KW fixes
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Ospi_Phy.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+commit 999c6968ec81c25cd2724eb9657b97655cec5d15
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Aug 24 23:52:40 2026 +0530
+
+    am263px/1x: Fls: Adding PHY_OFFSET as configurable parameter
+    
+    Fixes: MCAL-38213
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Ospi_Phy.c                         |   6 +-
+ mcal/Fls/V2/Fls_Ospi_Phy.h                         |   2 -
+ .../fls_boot_app/soc/am263px/tresos/config/Fls.xdm |   4 +
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |   3 +
+ .../Flsdiag_ospi/soc/am261/tresos/config/Fls.xdm   | 142 ++++++------
+ .../soc/am261/tresos/output/include/Fls_Cfg.h      |   3 +
+ .../Flsdiag_ospi/soc/am263px/tresos/config/Fls.xdm |   4 +
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |   3 +
+ .../fls_phy_app/soc/am261/tresos/config/Fls.xdm    |   4 +
+ .../soc/am261/tresos/output/include/Fls_Cfg.h      |   3 +
+ .../fls_phy_app/soc/am263px/tresos/config/Fls.xdm  |   4 +
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |   3 +
+ .../soc/am263px/tresos_sip/config/Fls.xdm          | 244 +++++++++++----------
+ .../am263px/tresos_sip/output/include/Fls_Cfg.h    |   3 +
+ .../fls_xip_app/soc/am261/tresos/config/Fls.xdm    | 144 ++++++------
+ .../soc/am261/tresos/output/include/Fls_Cfg.h      |   7 +-
+ .../fls_xip_app/soc/am263px/tresos/config/Fls.xdm  | 144 ++++++------
+ .../soc/am263px/tresos/output/include/Fls_Cfg.h    |   3 +
+ .../soc/am261/r5f0_0/include/Fls_Cfg.h             |   3 +
+ .../Fls_Demo_Cfg/soc/am261/tresos/config/Fls.xdm   |   8 +-
+ .../soc/am263px/r5f0_0/include/Fls_Cfg.h           |   3 +
+ .../Fls_Demo_Cfg/soc/am263px/tresos/config/Fls.xdm |   8 +-
+ .../soc/am263px_sip/r5f0_0/include/Fls_Cfg.h       |   7 +-
+ .../Fls_Demo_Cfg/soc/am263px_sip/tresos/Fls.xdm    | 244 +++++++++++----------
+ .../soc/am261/r5f0_0/include/Fls_Cfg.h             |   3 +
+ .../soc/am261/tresos/config/Fls.xdm                | 146 ++++++------
+ .../soc/am263px/r5f0_0/include/Fls_Cfg.h           |   3 +
+ .../soc/am263px/tresos/config/Fls.xdm              |   8 +-
+ .../plugins/AM261x/Fls_TI_AM261x/config/Fls.arxml  |  21 ++
+ .../plugins/AM261x/Fls_TI_AM261x/config/Fls.xdm    |  18 ++
+ .../AM261x/Fls_TI_AM261x/config_ext/Fls_Rec.xdm    |   4 +
+ .../Fls_TI_AM261x/generate/include/Fls_Cfg.h       |   3 +
+ .../AM263Px/Fls_TI_AM263Px/config/Fls.arxml        |  21 ++
+ .../plugins/AM263Px/Fls_TI_AM263Px/config/Fls.xdm  |  18 ++
+ .../AM263Px/Fls_TI_AM263Px/config_ext/Fls_Rec.xdm  |   4 +
+ .../Fls_TI_AM263Px/generate/include/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am261/r5f0_0/config_1/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_10/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_12/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_14/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_15/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_16/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_2/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_20/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_3/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_4/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_5/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_6/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_7/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_8/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_9/Fls_Cfg.h        |   3 +
+ .../Fls/soc/am261/r5f0_0/config_91/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_92/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_93/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am261/r5f0_0/config_94/Fls_Cfg.h       |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_1/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_10/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_12/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_14/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_15/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_16/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_17/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_2/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_20/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_3/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_4/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_5/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_6/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_7/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_8/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_9/Fls_Cfg.h      |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_91/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_92/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_93/Fls_Cfg.h     |   3 +
+ .../Fls/soc/am263px/r5f0_0/config_94/Fls_Cfg.h     |   3 +
+ 75 files changed, 833 insertions(+), 535 deletions(-)
+
+commit 2010d9ed200b216b97a23401e72025ac2de08c09
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Aug 24 15:04:43 2026 +0530
+
+    all: all: Fls: Cache invalidate, phy readdatacapture restore
+    
+    Fixes: MCAL-38312, MCAL-38217
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V0/Fls_Qspi_Edma.c | 3 +++
+ mcal/Fls/V0/Fls_Qspi_Edma.h | 1 +
+ mcal/Fls/V2/Fls_Ospi_Edma.c | 3 +++
+ mcal/Fls/V2/Fls_Ospi_Phy.c  | 8 +++++---
+ 4 files changed, 12 insertions(+), 3 deletions(-)
+
 commit b22b1d74510206170c207540756ab7562b9bda06
 Author: Akash <a-verma3@ti.com>
 Date:   Fri Aug 21 20:37:42 2026 +0530

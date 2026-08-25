@@ -2378,6 +2378,24 @@
                     <a:tst expr="&gt;=1"/>
                   </a:da>
                 </v:var>
+                <v:var name="FlsOspiPhyOffset" type="INTEGER">
+                  <a:a name="DESC"
+                       value="EN: This parameter used to fill the PHY attack vector offset"/>
+                  <a:a name="IMPLEMENTATIONCONFIGCLASS"
+                       type="IMPLEMENTATIONCONFIGCLASS">
+                    <icc:v vclass="PreCompile">VariantPostBuild</icc:v>
+                    <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
+                  </a:a>
+                  <a:a name="ORIGIN" value="Texas Instruments"/>
+                  <a:a name="UUID"
+                       value="ECUC:e066a92a-900b-4d05-a14c-9790c7b9ff54"/>
+                  <a:da name="DEFAULT" value="524288"/>
+                  <a:a name="DEFAULT_RADIX" value="HEX"/>
+                  <a:da name="INVALID" type="Range">
+                    <a:tst expr="&lt;=4294967295"/>
+                    <a:tst expr="&gt;=0"/>
+                  </a:da>
+                </v:var>
 		        <v:ref name="FlsOsCounterRef" type="REFERENCE">
 		          <a:a name="DESC"
 	                  value="EN: This parameter contains a reference to the OsCounter, which is used by the FLS driver."/>
