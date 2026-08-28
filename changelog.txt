@@ -1,3 +1,41 @@
+commit 61c3e03d87b3e8c7a6dd74046a8c9c8a97fc0569
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Aug 28 16:19:49 2026 +0530
+
+    all: Fls: Added all relevant files and removed Fls_Nor_Config references from bswmd
+    
+    Fixes: MCAL-41425
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../soc/am263px/tresos/output/swcd/Fls_Bswmd.arxml | 18 ++++++---
+ .../soc/am261/r5f0_0/swcd/Fls_Bswmd.arxml          | 18 ++++++---
+ .../soc/am263/r5f0_0/swcd/Fls_Bswmd.arxml          |  8 ----
+ .../soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml        | 18 ++++++---
+ mcal/examples_config/Fls_Demo_Cfg/srcs.mk          |  5 +++
+ .../soc/am261/r5f0_0/swcd/Fls_Bswmd.arxml          | 18 ++++++---
+ .../soc/am263px/r5f0_0/swcd/Fls_Bswmd.arxml        | 18 ++++++---
+ .../soc/am261/r5f0_0/src/Port_PBcfg_Ospi.c         | 45 +++++++++++-----------
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             | 18 ++++++---
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             | 18 ++++++---
+ .../generate_swcd/swcd/Fls_Bswmd.arxml             |  8 ----
+ 11 files changed, 118 insertions(+), 74 deletions(-)
+
+commit dec02a31e7ba6bffd505cb6fe8a4d35c64ae8bad
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Aug 28 09:59:29 2026 +0530
+
+    am263px/1x: Fls: Updated readid, seq2 and numAddrByte to support macronix flash
+    
+    Fixes: MCAL-41111
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c | 53 ++++++++++++++++++++++++--------
+ mcal/Fls/V2/Fls_Ospi.c         | 70 ++++++++++++++++++++++++++++++++----------
+ mcal/Fls/V2/Fls_Ospi_Phy.c     | 17 ++++++----
+ 3 files changed, 104 insertions(+), 36 deletions(-)
+
 commit 6067711a3440cdfa071c539dffb3704460748b77
 Author: Akash <a-verma3@ti.com>
 Date:   Tue Aug 25 15:12:29 2026 +0530

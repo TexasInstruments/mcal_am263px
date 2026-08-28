@@ -241,10 +241,19 @@ Std_ReturnType Nor_OspiWaitReady(OSPI_Handle handle, uint32 timeOut)
         /* Check XSPI WIP configuration */
         cmd            = Fls_Config_SFDP_Ptr->xspiWipRdCmd;
         cmdAddr        = Fls_Config_SFDP_Ptr->xspiWipReg;
-        numAddrBytes   = Fls_Config_SFDP_Ptr->addrnumBytes;
+        numAddrBytes   = 4;
         bitMask        = Fls_Config_SFDP_Ptr->xspiWipBit;
         numBytesToRead = 2; /* Can't read odd bytes in Octal DDR mode */
         dummyBits      = (uint8)Fls_Config_SFDP_Ptr->protos.dummyClksCmd;
+    }
+    else if (obj->currentprotocol == (uint32)FLS_OSPI_RX_8D_8D_8D)
+    {
+        numBytesToRead = 2; /* Can't read odd bytes in Octal DDR mode */
+        dummyBits      = (uint8)Fls_Config_SFDP_Ptr->protos.dummyClksCmd;
+    }
+    else
+    {
+        /*Do nothing*/
     }
 
     while (localtimeOut > 0U)
@@ -330,7 +339,7 @@ Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
     OSPI_Object   *obj     = pHandle->object;
     Std_ReturnType retVal  = (Std_ReturnType)E_OK;
 
-    uint8  idCode[3]    = {0};
+    uint8  idCode[8]    = {0};
     uint32 cmdAddr      = OSPI_CMD_INVALID_ADDR;
     uint8  dummyBits    = 0;
     uint32 idNumBytes   = 3;
@@ -353,8 +362,24 @@ Std_ReturnType Nor_OspiReadId(OSPI_Handle handle)
     {
         uint32 manfID, devID;
 
-        manfID = (uint32)idCode[0];
-        devID  = ((uint32)idCode[1] << 8) | ((uint32)idCode[2]);
+        if ((obj->currentprotocol == (uint32)FLS_OSPI_RX_8D_8D_8D) &&
+            ((Fls_Config_SFDP_Ptr->protos.enableSeq & (1U << 2U)) != 0U))
+        {
+            manfID = (uint32)idCode[3];
+            devID  = ((uint32)idCode[0] << 8) | ((uint32)idCode[1]);
+        }
+        else
+        {
+            manfID = (uint32)idCode[0];
+            devID  = ((uint32)idCode[1] << 8) | ((uint32)idCode[2]);
+            if (!((manfID == Fls_Config_SFDP_Ptr->manfId) && (devID == Fls_Config_SFDP_Ptr->deviceId)))
+            {
+                /* Try the other 3 bytes */
+                manfID = (uint32)idCode[3];
+                devID  = ((uint32)idCode[4] << 8) | ((uint32)idCode[5]);
+            }
+        }
+
         if (manfID != Fls_Config_SFDP_Ptr->manfId)
         {
             retVal = (Std_ReturnType)E_NOT_OK;
@@ -1733,19 +1758,21 @@ Std_ReturnType Nor_OspiRegWrite(OSPI_Handle handle, uint8 cmd, uint32 addr, uint
  */
 Std_ReturnType Nor_OspiRegRead(OSPI_Handle handle, uint8 cmd, uint32 addr, uint8 *data)
 {
-    OSPI_Config   *pHandle   = (OSPI_Config *)handle;
-    OSPI_Object   *obj       = pHandle->object;
-    Std_ReturnType retVal    = E_OK;
-    uint8          reg[2]    = {0};
-    uint8          numBytes  = 1;
-    uint8          dummyBits = OSPI_CMD_INVALID_DUMMY;
+    OSPI_Config   *pHandle      = (OSPI_Config *)handle;
+    OSPI_Object   *obj          = pHandle->object;
+    Std_ReturnType retVal       = E_OK;
+    uint8          reg[2]       = {0};
+    uint8          numBytes     = 1;
+    uint8          dummyBits    = OSPI_CMD_INVALID_DUMMY;
+    uint8          numAddrBytes = Fls_Config_SFDP_Ptr->addrnumBytes;
 
     if (obj->currentprotocol == (uint32)FLS_OSPI_RX_8D_8D_8D)
     {
-        numBytes  = 2; /* Octal DDR can't read odd number of bytes */
-        dummyBits = (uint8)Fls_Config_SFDP_Ptr->protos.dummyClksCmd;
+        numBytes     = 2; /* Octal DDR can't read odd number of bytes */
+        dummyBits    = (uint8)Fls_Config_SFDP_Ptr->protos.dummyClksCmd;
+        numAddrBytes = 4U; /* 8D mode requires 4 address bytes */
     }
-    retVal = Nor_OspiCmdRead(handle, cmd, addr, Fls_Config_SFDP_Ptr->addrnumBytes, dummyBits, reg, numBytes);
+    retVal = Nor_OspiCmdRead(handle, cmd, addr, numAddrBytes, dummyBits, reg, numBytes);
 
     *data = reg[0];
 

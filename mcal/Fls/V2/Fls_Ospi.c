@@ -915,6 +915,42 @@ void Fls_Ospi_Close(OSPI_Handle handle)
     }
     return;
 }
+static Std_ReturnType Fls_Ospi_ReadId(OSPI_Handle handle)
+{
+    Std_ReturnType retVal = E_NOT_OK;
+    /* Set RD Capture Delay by reading ID */
+    uint32         origBaudRateDiv     = 15U;
+    uint32         readDataCapDelay    = origBaudRateDiv;
+    uint32         maxReadDataCapDelay = 0U, minReadDataCapDelay = 0U;
+    while (readDataCapDelay > 0U)
+    {
+        HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD,
+                      readDataCapDelay);
+        retVal = Nor_OspiReadId(handle);
+        if (retVal == E_OK)
+        {
+            if (maxReadDataCapDelay == 0U)
+            {
+                maxReadDataCapDelay = readDataCapDelay;
+            }
+            minReadDataCapDelay = readDataCapDelay;
+        }
+        readDataCapDelay--;
+    }
+    if (maxReadDataCapDelay == 0U)
+    {
+        retVal = E_NOT_OK;
+    }
+    else
+    {
+        /* Picking the middle value from a region of passing read data capture delay */
+        readDataCapDelay = (minReadDataCapDelay + maxReadDataCapDelay) / 2U;
+        HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD,
+                      readDataCapDelay);
+        retVal = E_OK;
+    }
+    return retVal;
+}
 /**
  *  \Function Name: Fls_Ospi_ProgramInstance
  *
@@ -1114,22 +1150,21 @@ static Std_ReturnType Fls_Ospi_ProgramInstance(OSPI_Config *config)
 
         /* Set Mode Clocks and Dummy Clocks in Controller and Flash Memory */
         retVal += Fls_Ospi_SetModeDummy(handle);
+        retVal += Fls_Ospi_ReadId(handle);
 
-        /* Set RD Capture Delay by reading ID */
-        uint32 readDataCapDelay = 4U;
-        HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD,
-                      readDataCapDelay);
+        // HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD,
+        //               readDataCapDelay);
 
-        retVal += Nor_OspiReadId(handle);
-        /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal == E_NOT_OK cannot be validated unless a hardware read failure */
-        while ((retVal != E_OK) && (readDataCapDelay > 0U))
-        /* TI_COVERAGE_GAP_STOP */
-        {
-            readDataCapDelay--;
-            HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD,
-                          readDataCapDelay);
-            retVal = Nor_OspiReadId(handle);
-        }
+        // retVal += Nor_OspiReadId(handle);
+        // /* TI_COVERAGE_GAP_START [Branch/MC-DC] retVal == E_NOT_OK cannot be validated unless a hardware read failure
+        // */ while ((retVal != E_OK) && (readDataCapDelay > 0U))
+        // /* TI_COVERAGE_GAP_STOP */
+        // {
+        //     readDataCapDelay--;
+        //     HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_RD_DATA_CAPTURE_REG_DELAY_FLD,
+        //                   readDataCapDelay);
+        //     retVal = Nor_OspiReadId(handle);
+        // }
     }
     return retVal;
 }
@@ -1931,13 +1966,14 @@ static Std_ReturnType Fls_set888mode_seq1(OSPI_Handle handle, OSPI_Object *obj)
    is not exercised in any test configuration. */
 static Std_ReturnType Fls_set888mode_seq2(OSPI_Handle handle, OSPI_Object *obj)
 {
+    uint8          regVal = 0x2;
     Std_ReturnType retVal =
         Nor_OspiCmdWrite(handle, Fls_Config_SFDP_Ptr->cmdWren, OSPI_CMD_INVALID_ADDR, 0, (uint8 *)NULL_PTR, 0);
     if (retVal == E_OK)
     {
         retVal = Nor_OspiWaitReady(handle, Fls_Config_SFDP_Ptr->flashBusyTimeout);
     }
-    retVal += Nor_OspiCmdWrite(handle, 0x72, 0, 0, (uint8 *)NULL_PTR, 0);
+    retVal += Nor_OspiCmdWrite(handle, 0x72, 0, 0, &regVal, 1);
     if (Fls_DrvObj.Fls_Mode == (uint32)FLS_OSPI_RX_8D_8D_8D)
     {
         Fls_Ospi_SetProtocolCmds(handle, 3, 3, 3, 1);

@@ -413,8 +413,7 @@ static void Fls_Ospi_phyGetTuningData(const uint8 **tuningData, uint32 *tuningDa
 
 void Fls_Ospi_phy_enable(void)
 {
-    uint32 phyEnable =
-        HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_RD_DATA_CAPTURE_REG, OSPI_CONFIG_REG_PHY_MODE_ENABLE_FLD);
+    uint32 phyEnable = HW_RD_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_CONFIG_REG, OSPI_CONFIG_REG_PHY_MODE_ENABLE_FLD);
     /* TI_COVERAGE_GAP_START [Branch/Line] this condition is always TRUE when this function is called; FALSE branch is
      * never taken in test */
     if (phyEnable == FALSE)
@@ -1638,7 +1637,8 @@ void Fls_Ospi_phy_disable(void)
     if (phyEnable == TRUE)
     /* TI_COVERAGE_GAP_STOP */
     {
-        uint32 dummyClks = (uint32)Fls_Config_SFDP_Ptr->protos.dummyClksRd - 1U;
+        /* Restore original read dummy cycles (not -1, since PHY mode is being disabled) */
+        uint32 dummyClks = (uint32)Fls_Config_SFDP_Ptr->protos.dummyClksRd;
         /* Set new dummyClk */
         HW_WR_FIELD32(FLS_OSPI_CTRL_BASE_ADDR + OSPI_DEV_INSTR_RD_CONFIG_REG,
                       OSPI_DEV_INSTR_RD_CONFIG_REG_DUMMY_RD_CLK_CYCLES_FLD, dummyClks);
@@ -1737,7 +1737,8 @@ static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOff
     *rdCapDelay = initialRdCapDelay;
     Fls_Ospi_phySetRdDataCaptureDelay(*rdCapDelay);
     Flash_norOspiDisxipDisable();
-    retVal = Fls_norSectorErase(handle, FLS_OSPI_PHY_OFFSET);
+    /* Clear any persistent DAC register state from prior attack vector reads before erase */
+    retVal = Fls_norSectorErase(handle, phyTuningOffset);
 
     /* Poll for erase completion to avoid leaving state machine in IN_PROGRESS state.
      * This ensures the erase state machine is properly reset before returning.
@@ -1796,7 +1797,7 @@ static Std_ReturnType Fls_Ospi_phyWriteAndVerifyAttackVector(uint32 phyTuningOff
     /* TI_COVERAGE_GAP_STOP */
     {
         /* MISRA deviation: Cast away const for write operation - data is not modified */
-        retVal = Nor_OspiWrite(handle, FLS_OSPI_PHY_OFFSET, (uint8 *)(uintptr_t)phyTuningData, phyTuningDataSize);
+        retVal = Nor_OspiWrite(handle, phyTuningOffset, (uint8 *)(uintptr_t)phyTuningData, phyTuningDataSize);
     }
 
     /* If write has passed, verify by reading */
@@ -1826,11 +1827,14 @@ Std_ReturnType Fls_Ospi_phyInit(void)
 
     uint32 phyTuningOffset = FLS_OSPI_PHY_OFFSET;
     uint32 origBaudRateDiv = 0U;
+    phyInitStatus          = E_NOT_OK;
 
     (void)Fls_Ospi_phyGetBaudRateDivFromObj(&origBaudRateDiv);
 
     /* Configure to max baudrate to read attack vector */
+#if defined(AM263PX_PLATFORM)
     (void)Fls_Ospi_phyConfigBaudrate(MAX_BAUDRATE_DIVIDER);
+#endif
 
     /* Reading the readcapture delay set by Fls Driver */
     readDataCaptureDelay = Fls_Ospi_phyGetRdDataCaptureDelay();
@@ -1838,8 +1842,9 @@ Std_ReturnType Fls_Ospi_phyInit(void)
     initialReadDataCaptureDelay = readDataCaptureDelay;
 
     attackVectorStatus = Fls_Ospi_phyReadAttackVector(phyTuningOffset);
-
+#if defined(AM263PX_PLATFORM)
     (void)Fls_Ospi_phyConfigBaudrate(origBaudRateDiv);
+#endif
 
     /* Check if attack vector status is successful over the readCaptureDelay sweep */
     if (attackVectorStatus != E_OK)
