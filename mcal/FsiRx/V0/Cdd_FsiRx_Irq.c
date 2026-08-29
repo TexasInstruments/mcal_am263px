@@ -301,11 +301,13 @@ static Cdd_FsiRx_HwUnitObjType *CddFsiRx_GetHwUnitObj(Cdd_FsiRx_HWUnitType HwUni
 
     for (uint8 HwUnitIdx = 0U; HwUnitIdx < Cdd_FsiRx_DrvObj.maxHwUnit; HwUnitIdx++)
     {
+        /* TI_COVERAGE_GAP_START (AM261)[Branch]: The possible value of hwUnitId is 1 and else cannot be covered */
         if (Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitIdx].hwUnitCfg.hwUnitId == HwUnitId)
         {
             hwUnitObj = &Cdd_FsiRx_DrvObj.hwUnitObj[HwUnitIdx];
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
     }
 
     return hwUnitObj;

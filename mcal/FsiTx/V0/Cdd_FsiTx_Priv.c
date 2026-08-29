@@ -85,7 +85,7 @@
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
 /* =========================================================================== */
-static void CddFsiTx_delayWait(uint32 delaycount);
+
 #if (STD_ON == CDD_FSI_TX_DMA_ENABLE)
 static void           CddFsiTx_IrqDmaTx(void *hwUnitObj);
 static Std_ReturnType CddFsiTxDma_ModuleChannelConfigure(const Cdd_FsiTx_HwUnitObjType *hwUnitObj,
@@ -614,7 +614,7 @@ Std_ReturnType CddFsiTx_ResetTxSubModules(const Cdd_FsiTx_HwUnitObjType *hwUnitO
 }
 
 /******************************************************************************/
-static void CddFsiTx_delayWait(uint32 delaycount)
+void CddFsiTx_delayWait(uint32 delaycount)
 {
     volatile uint32 tempCount = delaycount;
     /* each unit of SW_delay equals to 9 clockcycle, so divided by 9U*/

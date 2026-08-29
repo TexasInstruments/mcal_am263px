@@ -1,3 +1,47 @@
+commit 4e79c4ed77351b10b12ef28a7a9d4244c3b026aa
+Author: Asha D <asha.d@ti.com>
+Date:   Tue Aug 25 15:54:44 2026 +0530
+
+    all:CDD FSI: Coverage improvement
+    
+    Fixes: MCAL-38537
+    
+    Signed-off-by: Asha D <asha.d@ti.com>
+
+ mcal/FsiRx/V0/Cdd_FsiRx_Irq.c                      |    2 +
+ mcal/FsiRx/V0/Cdd_FsiRx_Priv.c                     |    4 +-
+ mcal/FsiRx/V0/Cdd_FsiRx_Priv.h                     |    1 +
+ mcal/FsiTx/V0/Cdd_FsiTx_Irq.c                      |    6 +
+ mcal/FsiTx/V0/Cdd_FsiTx_Priv.c                     |    4 +-
+ mcal/FsiTx/V0/Cdd_FsiTx_Priv.h                     |    1 +
+ mcal/FsiTx/src/Cdd_FsiTx.c                         |    2 +
+ mcal_test/fsi_test/Makefile                        |  112 +-
+ mcal_test/fsi_test/build/makefile                  |    6 +-
+ mcal_test/fsi_test/testInput/fsiTestCases.h        |  141 +-
+ mcal_test/fsi_test/testLib/fsiTest.h               |   14 +-
+ mcal_test/fsi_test/testLib/fsiTestMainTestCase.c   |   66 +-
+ .../fsi_test/testLib/fsiTestNegativeTestCase.c     |    6 +-
+ .../soc/am261/r5f0_0/config_2/Cdd_FsiRx_Cfg.c      |   58 +
+ .../soc/am261/r5f0_0/config_2/Cdd_FsiRx_Cfg.h      |  288 +++
+ .../soc/am261/r5f0_0/config_2/Cdd_FsiRx_PBcfg.c    |  134 ++
+ .../soc/am261/r5f0_0/config_2/Cdd_FsiTx_Cfg.c      |   58 +
+ .../soc/am261/r5f0_0/config_2/Cdd_FsiTx_Cfg.h      |  275 +++
+ .../soc/am261/r5f0_0/config_2/Cdd_FsiTx_PBcfg.c    |  128 ++
+ .../FsiRx/soc/am261/r5f0_0/config_3/Cdd_Dma_Cfg.c  | 1743 ++++++++++++++
+ .../FsiRx/soc/am261/r5f0_0/config_3/Cdd_Dma_Cfg.h  |  280 +++
+ .../FsiRx/soc/am261/r5f0_0/config_8/Cdd_Dma_Cfg.c  | 1743 ++++++++++++++
+ .../FsiRx/soc/am261/r5f0_0/config_8/Cdd_Dma_Cfg.h  |  280 +++
+ .../FsiRx/soc/am263/r5f0_0/config_3/Cdd_Dma_Cfg.c  | 2395 ++++++++++++++++++++
+ .../FsiRx/soc/am263/r5f0_0/config_3/Cdd_Dma_Cfg.h  |  300 +++
+ .../FsiRx/soc/am263/r5f0_0/config_8/Cdd_Dma_Cfg.c  | 2395 ++++++++++++++++++++
+ .../FsiRx/soc/am263/r5f0_0/config_8/Cdd_Dma_Cfg.h  |  300 +++
+ .../soc/am263px/r5f0_0/config_3/Cdd_Dma_Cfg.c      | 2391 +++++++++++++++++++
+ .../soc/am263px/r5f0_0/config_3/Cdd_Dma_Cfg.h      |  300 +++
+ .../soc/am263px/r5f0_0/config_8/Cdd_Dma_Cfg.c      | 2391 +++++++++++++++++++
+ .../soc/am263px/r5f0_0/config_8/Cdd_Dma_Cfg.h      |  300 +++
+ mcal_test/ut_config/FsiRx/srcs.mk                  |   14 +-
+ 32 files changed, 16024 insertions(+), 114 deletions(-)
+
 commit 61c3e03d87b3e8c7a6dd74046a8c9c8a97fc0569
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Fri Aug 28 16:19:49 2026 +0530

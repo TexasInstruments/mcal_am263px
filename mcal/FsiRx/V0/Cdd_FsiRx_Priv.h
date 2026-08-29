@@ -148,6 +148,7 @@ typedef struct
 /*                          Function Declarations                             */
 /* ========================================================================== */
 
+FUNC(void, CDD_FSIRX_CODE) CddFsiRx_delayWait(uint32 delay);
 void CddFsiRx_hwUnitInit(const Cdd_FsiRx_HwUnitObjType *hwUnitObj);
 #if (STD_ON == CDD_FSI_RX_DEV_ERROR_DETECT)
 void CddFsiRx_ReportDetError(uint8 moduleId, uint8 instanceId);

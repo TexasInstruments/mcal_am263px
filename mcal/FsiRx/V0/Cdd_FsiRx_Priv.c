@@ -75,7 +75,7 @@
 /* ========================================================================== */
 /*                 Internal Function Declarations                             */
 /* ========================================================================== */
-static FUNC(void, CDD_FSIRX_CODE) CddFsiRx_delayWait(uint32 delay);
+
 #if (STD_ON == CDD_FSI_RX_DMA_ENABLE)
 static void           CddFsiRx_IrqDmaRx(void *hwUnitObj);
 static Std_ReturnType CddFsiRxDma_ModuleChannelConfigure(Cdd_FsiRx_HwUnitObjType           *hwUnitObj,
@@ -530,7 +530,7 @@ CddFsiRx_SetRxSoftwareFrameSize(uint32 base, CddFsiRx_DataLengthType dataWidth)
 }
 /******************************************************************************/
 
-static FUNC(void, CDD_FSIRX_CODE) CddFsiRx_delayWait(uint32 delay)
+FUNC(void, CDD_FSIRX_CODE) CddFsiRx_delayWait(uint32 delay)
 {
     volatile uint32 tempCount = delay;
     /* each unit of SW_delay equals to 9 clockcycle, so divided by 9U*/

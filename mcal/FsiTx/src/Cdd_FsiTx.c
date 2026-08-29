@@ -176,10 +176,12 @@ Cdd_FsiTx_Init(P2CONST(Cdd_FsiTx_ConfigType, AUTOMATIC, CDD_FsiTx_CFG) Configura
         /* Initialize configured Interrupt Index. */
         for (hwUnitId = 0U; hwUnitId < Cdd_FsiTx_DrvObj.maxHwUnit; hwUnitId++)
         {
+            /* TI_COVERAGE_GAP_START [Branch]: maxHwUnit is the Max Unit count and cannot be covered */
             if (hwUnitId == Cdd_FsiTx_DrvObj.hwUnitObj[hwUnitId].hwUnitCfg.hwId)
             {
                 Cdd_FsiTx_IsrIndex[hwUnitId] = hwUnitId;
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
 #endif
         Cdd_FsiTx_DriverStatus = CDD_FSI_TX_INIT;

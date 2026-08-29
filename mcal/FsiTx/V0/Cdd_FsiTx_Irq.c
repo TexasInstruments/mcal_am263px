@@ -116,6 +116,8 @@ ISR(CddFsiTx_FSIINT1_IrqUnit0)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
+    /* TI_COVERAGE_GAP_START (AM261)[Branch]: The possible value of CDD_FSI_TX_HW_UNIT_CNT is 1 and else cannot be
+     * covered */
     if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0]];
@@ -123,6 +125,7 @@ ISR(CddFsiTx_FSIINT1_IrqUnit0)
         cddFsiTxIntFlagNum = ((HW_RD_REG16(intStatusRegAddr) & CDD_FSI_TX_INT_STATUS_MASK));
         CddFsiTx_IrqTx(hwUnitObj, CDD_FSI_TX_INT1, cddFsiTxIntFlagNum);
     }
+    /* TI_COVERAGE_GAP_STOP */
 }
 #endif /* #if defined (CDD_FSI_TX_INSTANCE_0) */
 /*******************************************************************************************************/
@@ -142,6 +145,8 @@ ISR(CddFsiTx_FSIINT2_IrqUnit0)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
+    /* TI_COVERAGE_GAP_START (AM261)[Branch]: The possible value of CDD_FSI_TX_HW_UNIT_CNT is 1 and else cannot be
+     * covered */
     if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0]];
@@ -149,6 +154,7 @@ ISR(CddFsiTx_FSIINT2_IrqUnit0)
         cddFsiTxIntFlagNum = ((HW_RD_REG16(intStatusRegAddr) & CDD_FSI_TX_INT_STATUS_MASK));
         CddFsiTx_IrqTx(hwUnitObj, CDD_FSI_TX_INT2, cddFsiTxIntFlagNum);
     }
+    /* TI_COVERAGE_GAP_STOP */
 }
 #endif /* #if defined (CDD_FSI_TX_INSTANCE_0) */
 /******************************************************************************************************/
