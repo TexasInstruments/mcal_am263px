@@ -1,3 +1,20 @@
+commit 3b1df68ecf1be8bca333fd5d7cb44118039e194c
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Sat Aug 29 00:46:14 2026 +0530
+
+    all: all: Updated RN and gap comments for Fls
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Ospi.c                             |  17 +--
+ mcal/Fls/V2/Fls_Ospi.h                             |   1 +
+ .../fls_test/testLib/flsTestNegativeTestCase.c     | 146 ++++++++++++++++++++-
+ mcal_test/lin_test/testInput/linTestCases.h        |   6 +-
+ release_notes.md                                   |  80 ++++++-----
+ 5 files changed, 195 insertions(+), 55 deletions(-)
+
 commit 4e79c4ed77351b10b12ef28a7a9d4244c3b026aa
 Author: Asha D <asha.d@ti.com>
 Date:   Tue Aug 25 15:54:44 2026 +0530

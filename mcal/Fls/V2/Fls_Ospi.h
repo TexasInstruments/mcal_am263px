@@ -582,6 +582,7 @@ Std_ReturnType Fls_set111mode(OSPI_Handle handle, uint8 rdCmd, uint8 wrCmd, uint
  *
  */
 Std_ReturnType Nor_FlsReadSfdp(OSPI_Handle handle, uint32 offset, uint8 *buf, uint32 len);
+Std_ReturnType Fls_Ospi_ReadId(OSPI_Handle handle);
 
 #ifdef __cplusplus
 }

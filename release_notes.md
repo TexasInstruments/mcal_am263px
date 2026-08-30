@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 30-Aug-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 31-Aug-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -40,6 +40,11 @@ This document details about supported driver, installation, dependencies, build 
       <td>Lin_SendGoToSleepSignal header issue fixed</td>
       <td>LIN</td>
       <td>The unexpected behaviour observed in Lin_SendGoToSleepSignal was reproduced and tested with the fix</td>
+    </tr>
+    <tr>
+      <td>LIN performance values added in user-guide</td>
+      <td>LIN</td>
+      <td>Refer User-guide for details</td>
     </tr>
     <tr>
       <td>Code Compilation error for EthTrcv driver is fixed.</td>
@@ -85,32 +90,6 @@ This document details about supported driver, installation, dependencies, build 
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Common</td>
-      <td>hal_stdtypes.h file and all macros defined in it are removed</td>
-      <td>Application shall remove any usage of this header file and related macros. See description of defect MCAL-35744</td>
-    </tr>
-    <tr>
-      <td>CDD PWM</td>
-      <td>Channel parameter type changed from uint32 to Cdd_Pwm_ChannelType in multiple APIs</td>
-      <td>Application shall use Cdd_Pwm_ChannelType for channel parameters instead of uint32. This is done as part of the MISRAC fixes</td>
-    </tr>
-    <tr>
-      <td>FLS</td>
-      <td>Flash erase operations are now non-blocking</td>
-      <td>The application must periodically schedule <code>Fls_MainFunction</code>
-          to process erase completion and update the job result.</td>
-    </tr>
-    <tr>
-      <td>FLS</td>
-      <td>All Fls operations have SchM_Entry_Fls/SchM_Exit_Fls provided as hooks to spinlock/unlock</td>
-      <td>These calls are provided as integration hooks for synchronisation mechanisms, applications shall not enforce critical     section protection by default. </td>
-    </tr>
-    <tr>
-      <td>WDG</td>
-      <td>Wdg_SetMode API returns DET run time error "WDG_E_INVALID_EXEC_MODE" when executed in usermode</td>
-      <td>Application shall handle WDG_E_INVALID_EXEC_MODE error code.</td><br>
-    </tr>
   </tbody>
 </table>
 
@@ -269,6 +248,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
     </tr>
     <tr>
+      <td>MCAL-38679</td>
+      <td>Cdd_I2c_PollingModeProcessing and Cdd_I2c_MainFunction have incorrect arxml tags</td>
+      <td>CDD I2C</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
+    </tr>
+    <tr>
       <td>MCAL-38207</td>
       <td>Options tag is missing in Bswmd arxml files</td>
       <td>CDD PWM, Eth, EthTrcv</td>
@@ -283,6 +270,31 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Userguide is now updated</td>
+    </tr>
+    <tr>
+      <td>MCAL-40853</td>
+      <td>The Rx and Tx Memory Pool Buffer is not 32B aligned</td>
+      <td>Eth</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Added 32 bytes alignment to below variable in Eth_Priv.c Eth_TxPacketMemoryPool
+      Eth_RxPacketMemoryPool</td>
+    </tr>
+    <tr>
+      <td>MCAL-41094</td>
+      <td>AM261 Eth App build is not correct</td>
+      <td>Eth</td>
+      <td>Major</td>
+      <td>AM261x</td>
+      <td>Pin mux selection corrected and build verified</td>
+    </tr>
+    <tr>
+      <td>MCAL-41095</td>
+      <td>AM261 Eth App Pin muxing issue</td>
+      <td>Eth</td>
+      <td>Major</td>
+      <td>AM261x</td>
+      <td>Pin mux selection corrected</td>
     </tr>
     <tr>
       <td>MCAL-38218</td>
@@ -349,6 +361,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Fixed, added DDR EN and corrected dummyclkRd from dummyclkcmd</td>
     </tr>
     <tr>
+      <td>MCAL-41111</td>
+      <td>Difference in implementation between SDK and MCAL for macronix flash</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Fixed, readId and numAddrBytes fixed to enable macronix flash in 8D-8D-8D PHY+DAC mode</td>
+    </tr>
+    <tr>
       <td>MCAL-40885</td>
       <td>Fls_PhyDisable function declares the varibale retVal unconditionally</td>
       <td>FLS</td>
@@ -413,14 +433,6 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
     </tr>
   </thead>
   <tbody>
-     <tr>
-      <td>MCAL-32474</td>
-      <td>LIN Performance values are not updated in MCAL user manual</td>
-      <td>LIN</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>To be fixed in future release</td>
-    </tr>
   </tbody>
 </table>
 
