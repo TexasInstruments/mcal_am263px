@@ -126,8 +126,7 @@ static boolean Port_ValidateSetPinDirection(const Port_PinConfigType *pinConfig,
 
 #if ((STD_ON == PORT_SET_PIN_DIRECTION_API) || (STD_ON == PORT_REFRESH_PORT_DIRECTION_API))
 static Port_PinModeType Port_GetCurrentPinMode(P2CONST(Port_PinConfigType, AUTO, PORT_APPL_DATA) padCfg);
-#endif /* #if ((STD_ON == PORT_SET_PIN_DIRECTION_API) || (STD_ON == \
-          PORT_REFRESH_PORT_DIRECTION_API))   */
+#endif /* #if ((STD_ON == PORT_SET_PIN_DIRECTION_API) || (STD_ON == PORT_REFRESH_PORT_DIRECTION_API)) */
 
 #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API))
 static const Port_PinConfigType *Port_MapPinIdToPinConfig(Port_PinType PinId, const Port_PinConfigType modeCfg[],
@@ -568,8 +567,7 @@ static Port_PinModeType Port_GetCurrentPinMode(P2CONST(Port_PinConfigType, AUTO,
     return pinMode;
 }
 
-#endif /* #if ((STD_ON == PORT_SET_PIN_DIRECTION_API) || (STD_ON == \
-          PORT_REFRESH_PORT_DIRECTION_API)) */
+#endif /* #if ((STD_ON == PORT_SET_PIN_DIRECTION_API) || (STD_ON == PORT_REFRESH_PORT_DIRECTION_API)) */
 
 /*
  *Design: MCAL-22271

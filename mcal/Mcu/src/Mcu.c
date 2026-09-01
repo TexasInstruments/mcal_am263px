@@ -280,7 +280,7 @@ FUNC(Std_ReturnType, MCU_CODE) Mcu_DistributePllClock(void)
         {
             /* TI_COVERAGE_GAP_START [Branch] Mcu_PllStatus is always MCU_STATE_INIT after Mcu_Init() call which is
                a prerequisite for Mcu_DistributePllClock(). The TRUE branch is logically unreachable
-               in normal operation when MCU_NO_PLL == STD_OFF */
+               in normal operation when MCU_NO_PLL = STD_OFF */
             if (Mcu_PllStatus != MCU_STATE_INIT) /* Checking whether PLL is already initialised or not */
             {
                 (void)Mcu_PLLInitAll(Mcu_DrvObj); /* Invoking PLL init API */

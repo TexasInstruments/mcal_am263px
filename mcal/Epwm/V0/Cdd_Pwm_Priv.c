@@ -2334,8 +2334,9 @@ boolean Cdd_Pwm_counterComparatorCfg(uint32 baseAddr, Cdd_Pwm_OutputChType cmpTy
 
     if ((CDD_PWM_OUTPUT_CH_B == cmpType) || (CDD_PWM_OUTPUT_CH_BOTH_A_AND_B == cmpType))
     {
-        /* TI_COVERAGE_GAP_START - [Branch] FALSE condition cannot be hit by test execution
-         * due to state management constraints, not logic error. Marked as MC/DC unreachable. */
+        /* TI_COVERAGE_GAP_START [Branch/MC-DC] False branch (FALSE == EPWM_getCounterCompareShadowStatus(baseAddr,
+         * EPWM_COUNTER_COMPARE_B) cannot be hit by test execution due to state management constraints, not logic error
+         */
         if ((TRUE == overwriteShadow) ||
             (FALSE == EPWM_getCounterCompareShadowStatus(baseAddr, EPWM_COUNTER_COMPARE_B)))
         /* TI_COVERAGE_GAP_STOP */
@@ -2844,7 +2845,7 @@ FUNC(void, CDD_PWM_CODE) Cdd_Pwm_ChannelNotificationTzISR(Cdd_Pwm_ChannelType Ch
     {
         EPWM_clearCycleByCycleTripZoneFlag(baseAddr, statusCBC);
 
-        /* TI_COVERAGE_GAP_START - [Branch] statusCBC is read from TZCBCFLG and statusINT from TZFLG.
+        /* TI_COVERAGE_GAP_START [Branch] statusCBC is read from TZCBCFLG and statusINT from TZFLG.
          When TZCBCFLG != 0 (statusCBC != 0), the hardware automatically sets TZFLG.CBC
          (bit 1), so TZFLG & 0xFF is always non-zero. The FALSE branch of this check is
          architecturally unreachable when inside if (statusCBC != 0U). */

@@ -116,7 +116,7 @@ ISR(CddFsiTx_FSIINT1_IrqUnit0)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    /* TI_COVERAGE_GAP_START (AM261)[Branch]: The possible value of CDD_FSI_TX_HW_UNIT_CNT is 1 and else cannot be
+    /* TI_COVERAGE_GAP_START (AM261)[Branch] The possible value of CDD_FSI_TX_HW_UNIT_CNT is 1 and else cannot be
      * covered */
     if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
@@ -145,8 +145,8 @@ ISR(CddFsiTx_FSIINT2_IrqUnit0)
     uint32                   intStatusRegAddr;
 
     /* Check if, Index is invalid */
-    /* TI_COVERAGE_GAP_START (AM261)[Branch]: The possible value of CDD_FSI_TX_HW_UNIT_CNT is 1 and else cannot be
-     * covered */
+    /* TI_COVERAGE_GAP_START (AM261)[Branch] The possible value of CDD_FSI_TX_HW_UNIT_CNT is 1,
+     * hence else condition cannot be covered */
     if (Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0] < (uint8)CDD_FSI_TX_HW_UNIT_CNT)
     {
         hwUnitObj          = &Cdd_FsiTx_DrvObj.hwUnitObj[Cdd_FsiTx_IsrIndex[CDD_FSI_TX_HWUNIT_0]];

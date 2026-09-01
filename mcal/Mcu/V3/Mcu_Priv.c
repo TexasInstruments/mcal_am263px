@@ -1697,7 +1697,7 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
         defRetVal = E_OK;
     }
 
-    /* TI_COVERAGE_GAP_START - [Branch] cannot acheive the false condition as moduleId is MAXID */
+    /* TI_COVERAGE_GAP_START [Branch] cannot acheive the false condition as moduleId is MAXID */
     if (defRetVal == E_OK)
     {
         if ((RetVal != E_OK))

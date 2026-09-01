@@ -819,9 +819,8 @@ boolean Port_IsDioMode(Port_PinModeType mode)
     return isDioMode;
 }
 
-#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) ||     \ \
-         (STD_ON == PORT_REFRESH_PORT_DIRECTION_API) || \ \
-         (STD_ON == PORT_SET_PIN_DIRECTION_API))        */
+#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_REFRESH_PORT_DIRECTION_API) || (STD_ON == \
+          PORT_SET_PIN_DIRECTION_API)) */
 
 static uint32 Port_GetMuxMode(Port_PinModeType Port_PinMode, const Port_PinModeConfigType *modeCfg,
                               uint32 Port_NumPortModes)
@@ -906,9 +905,8 @@ void Port_ConfigDioPinDirection(const uint32 gpioPortAddr, uint32 dioChannelId, 
         Port_SetDirection((gpioPORT_t *)gpioPortAddr, dioChannelId, 1);
     }
 }
-#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) ||      \ \
-          (STD_ON == PORT_REFRESH_PORT_DIRECTION_API) || \ \
-          (STD_ON == PORT_SET_PIN_DIRECTION_API))        */
+#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_REFRESH_PORT_DIRECTION_API) || (STD_ON == \
+          PORT_SET_PIN_DIRECTION_API)) */
 
 #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API))
 void Port_ConfigDioPin(const uint32 gpioPortAddr, uint32 dioChannelId, Port_PinDirectionType direction,
@@ -928,8 +926,7 @@ void Port_ConfigDioPin(const uint32 gpioPortAddr, uint32 dioChannelId, Port_PinD
     }
     Port_ConfigDioPinDirection(gpioPortAddr, dioChannelId, direction);
 }
-#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) || \ \
-          (STD_ON == PORT_SET_PIN_DIRECTION_API))   */
+#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API)) */
 
 #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API))
 void Port_ConfigPadAndDioPin(const Port_PinConfigType *pinConfig, Port_PinModeType curMode,
@@ -985,8 +982,7 @@ void Port_DioConfigDir(void)
         }
     }
 }
-#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) || \ \
-          (STD_ON == PORT_SET_PIN_DIRECTION_API))   */
+#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API)) */
 
 void Port_DioInit(void)
 {
@@ -1033,8 +1029,7 @@ void Port_DioInit(void)
 
 #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API))
     Port_DioConfigDir();
-#endif /*#if ((STD_ON == PORT_SET_PIN_MODE_API) || \ \
-          (STD_ON == PORT_SET_PIN_DIRECTION_API)) */
+#endif /* #if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_SET_PIN_DIRECTION_API)) */
 }
 #if (STD_ON == PORT_SET_PIN_MODE_API)
 void Port_SetPinConfigPadAndDioPin(const Port_PinConfigType *pinConfig, Port_PinModeType Mode)
@@ -1067,9 +1062,8 @@ void Port_HWConfigDioPinDirection(const uint32 gpioPortAddr, const Port_PinConfi
 {
     Port_ConfigDioPinDirection(gpioPortAddr, pinConfig->Port_PinDioChannelId, pinConfig->Port_PinDirection);
 }
-#endif /*#if ((STD_ON == PORT_SET_PIN_MODE_API) ||          \ \
-        (STD_ON == PORT_REFRESH_PORT_DIRECTION_API) || \      \
-        (STD_ON == PORT_SET_PIN_DIRECTION_API))*/
+#endif /*#if ((STD_ON == PORT_SET_PIN_MODE_API) || (STD_ON == PORT_REFRESH_PORT_DIRECTION_API) || (STD_ON == \
+          PORT_SET_PIN_DIRECTION_API)) */
 
 #if (STD_ON == PORT_ENABLE_INTR_API)
 /*

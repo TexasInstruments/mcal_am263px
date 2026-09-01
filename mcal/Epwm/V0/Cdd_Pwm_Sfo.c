@@ -362,7 +362,7 @@ FUNC(uint32, PWM_CODE) Cdd_Pwm_SFO(void)
         status = CDD_PWM_SFO_ERROR;
 
         /* Update status & assign scale factor value to HRMSTEP register */
-        /* TI_COVERAGE_GAP_START - [Branch]the ScaleFactor gets updated during runtime
+        /* TI_COVERAGE_GAP_START [Branch] ScaleFactor gets updated during runtime
            and the value cannot be greater than 255 */
         if (Cdd_Pwm_MEP_ScaleFactor <= 255)
         {

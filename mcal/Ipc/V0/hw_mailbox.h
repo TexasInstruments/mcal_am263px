@@ -154,9 +154,8 @@ extern "C" {
 
 #define CSL_MSS_INTR_MSS_CR5A_MBOX_READ_REQ \
     77 /* Aggregated interrupt to MSS CR5A from other processor asking it to read */
-#define CSL_MSS_INTR_MSS_CR5A_MBOX_READ_ACK                                                   \
-    78 /* Aggregated interrupt to MSS CR5A from other processor saying the reading from their \
-          mailbox is done. */
+#define CSL_MSS_INTR_MSS_CR5A_MBOX_READ_ACK \
+    78 /* Aggregated interrupt to MSS CR5A from other processor saying the reading from their mailbox is done. */
 
 #define CSL_DSS_CTRL_U_BASE       (0x6020000U)
 #define CSL_DSS_CTRL_HW_SPARE_RW0 (0x00000FD0U)

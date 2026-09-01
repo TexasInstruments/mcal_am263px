@@ -2287,7 +2287,7 @@ Mcu_ClockSetSource(Mcu_ClkModuleIdType moduleId, Mcu_ClkSourceIdType clkSrcId, u
         defRetVal = E_OK;
     }
 
-    /* TI_COVERAGE_GAP_START - [Branch] cannot acheive the false condition as moduleId is MAXID */
+    /* TI_COVERAGE_GAP_START [Branch] cannot acheive the false condition as moduleId is MAXID */
     if (defRetVal == E_OK)
     {
         if (RetVal != E_OK)
@@ -2335,7 +2335,7 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
             /*Timeout function call for MCU_E_CLOCK_FAILURE */
             init_pll_return = Mcu_pllTimeoutevent(&toprcmREG->PLL_CORE_STATUS);
 
-            /* TI_COVERAGE_GAP_START - [Branch]: Core status value is never invalid, Hence never returns fail */
+            /* TI_COVERAGE_GAP_START [Branch] Core status value is never invalid, Hence never returns fail */
             if (init_pll_return == E_OK)
             {
                 /*Collect status of Core PLL CLKOUT registers */
@@ -2360,7 +2360,7 @@ Std_ReturnType Mcu_PLLInitAll(const Mcu_ConfigType *Mcu_PllDrvObj)
             /*Timeout function call for MCU_E_CLOCK_FAILURE */
             init_pll_return = Mcu_pllTimeoutevent(&toprcmREG->PLL_PER_STATUS);
 
-            /* TI_COVERAGE_GAP_START - [Branch]: Per status value is never invalid, Hence never returns fail */
+            /* TI_COVERAGE_GAP_START [Branch] Per status value is never invalid, Hence never returns fail */
             if (init_pll_return == E_OK)
             {
                 /*Collect status of Per PLL CLKOUT registers */
@@ -2567,7 +2567,7 @@ uint32 Mcu_perPllHsdivStat(Mcu_PllClkDivType pllClk2)
  */
 static void Mcu_setEpwmTbClk(uint32 epwmInstance, uint32 enable)
 {
-    /* TI_COVERAGE_GAP_START - [Branch]: The maximum count for MCU_CSL_ETPWM_PER_CNT is 32U and Intance can be 0-31U */
+    /* TI_COVERAGE_GAP_START [Branch] The maximum count for MCU_CSL_ETPWM_PER_CNT is 32U and Intance can be 0-31U */
     if (epwmInstance < MCU_CSL_ETPWM_PER_CNT)
     {
         /* Time base clock enable register belongs to partition 1 of the CTRL MMR */

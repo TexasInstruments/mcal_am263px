@@ -141,6 +141,9 @@ static sint32        UART_readPolling(CddUart_Handle hUart, CddUart_Transaction 
 static uint32        Cdd_Uart_getRxFifoTrigBitVal(uint32 rxTrig);
 static uint32        Cdd_Uart_getTxFifoTrigBitVal(uint32 txTrig);
 static uint32        UART_checkCharsAvailInRXFifo(uint32 baseAddr);
+static boolean       UART_isHwConfigInValid(CddUart_Handle hUart);
+static boolean       UART_isLineConfigInValid(CddUart_InitHandle hUartInit);
+static boolean       UART_isModeConfigInValid(CddUart_InitHandle hUartInit);
 static boolean       UART_isInitParamInValid(CddUart_Handle hUart);
 /* ========================================================================== */
 /*                            Global Variables                                */
@@ -1602,46 +1605,119 @@ void UART_disableLoopbackMode(uint32 baseAddr)
     return;
 }
 
-static boolean UART_isInitParamInValid(CddUart_Handle hUart)
+static boolean UART_isHwConfigInValid(CddUart_Handle hUart)
 {
-    CddUart_InitHandle hUartInit;
-    boolean            status     = FALSE;
+    CddUart_InitHandle hUartInit  = hUart->hUartInit;
     uint32             errorCheck = 0U;
-    hUartInit                     = hUart->hUartInit;
+    boolean            status     = FALSE;
 
+    /* Check base address */
     if (hUart->baseAddr == (uint32)0U)
     {
         errorCheck++;
     }
+
+    /* Check input clock frequency */
     if (hUartInit->inputClkFreq == (uint32)0U)
     {
         errorCheck++;
     }
+
+    /* Check baud rate */
     if (hUartInit->baudRate == (uint32)0U)
     {
         errorCheck++;
     }
+
+    if (errorCheck > (uint32)0U)
+    {
+        status = TRUE;
+    }
+
+    return status;
+}
+
+static boolean UART_isLineConfigInValid(CddUart_InitHandle hUartInit)
+{
+    uint32  errorCheck = 0U;
+    boolean status     = FALSE;
+
+    /* Check data length */
     if (!(IS_DATA_LENGTH_VALID(hUartInit->dataLength)))
     {
         errorCheck++;
     }
+
+    /* Check stop bits */
     if (!(IS_STOP_BITS_VALID(hUartInit->stopBits)))
     {
         errorCheck++;
     }
+
+    /* Check parity type */
     if (!(IS_PARITY_TYPE_VALID(hUartInit->parityType)))
     {
         errorCheck++;
     }
+
+    if (errorCheck > (uint32)0U)
+    {
+        status = TRUE;
+    }
+
+    return status;
+}
+
+static boolean UART_isModeConfigInValid(CddUart_InitHandle hUartInit)
+{
+    uint32  errorCheck = 0U;
+    boolean status     = FALSE;
+
+    /* Check operation mode */
     if (!(IS_OPER_MODE_VALID(hUartInit->operMode)))
     {
         errorCheck++;
     }
+
+    /* Check RX trigger level */
     if (!(IS_RXTRIG_LVL_VALID(hUartInit->rxTrigLvl)))
     {
         errorCheck++;
     }
+
+    /* Check TX trigger level */
     if (!(IS_TXTRIG_LVL_VALID(hUartInit->txTrigLvl)))
+    {
+        errorCheck++;
+    }
+
+    if (errorCheck > (uint32)0U)
+    {
+        status = TRUE;
+    }
+
+    return status;
+}
+
+static boolean UART_isInitParamInValid(CddUart_Handle hUart)
+{
+    uint32  errorCheck = 0U;
+    boolean status     = FALSE;
+
+    /* Check hardware configuration */
+    if (UART_isHwConfigInValid(hUart) == TRUE)
+    {
+        errorCheck++;
+    }
+
+    /* Check line configuration */
+    if (UART_isLineConfigInValid(hUart->hUartInit) == TRUE)
+    {
+        errorCheck++;
+    }
+
+    /* Check mode configuration */
+    if (UART_isModeConfigInValid(hUart->hUartInit) == TRUE)
     {
         errorCheck++;
     }

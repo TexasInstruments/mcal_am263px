@@ -1048,7 +1048,7 @@ FUNC(void, PWM_CODE) Pwm_SystemInit(P2CONST(Pwm_ConfigType, AUTOMATIC, PWM_PBCFG
             (void)Pwm_reportDetError(PWM_SID_INIT, PWM_E_PARAM_CHANNEL);
         }
 #endif
-        /* TI_COVERAGE_GAP_START - [Branch] The for loop always finds a matching
+        /* TI_COVERAGE_GAP_START [Branch/MC-DC] The for loop always finds a matching
            channelId and breaks. The natural loop termination condition
            (chIdx >= PWM_MAX_NUM_CHANNELS) is never reached in valid configurations
            since channelId is always within the configured channel range. */
