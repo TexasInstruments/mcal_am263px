@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 03-Sep-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 05-Sep-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -430,6 +430,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <th style="text-align: left;">Severity</th>
       <th style="text-align: left;">Applicable Platforms</th>
       <th style="text-align: left;">Workaround</th>
+    </tr>
+    <tr>
+      <td>MCAL-32422</td>
+      <td>Cdd_Ipc: Safe IPC not working</td>
+      <td>CDD IPC</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Safe IPC is supported but not tested.</td>
     </tr>
   </thead>
   <tbody>

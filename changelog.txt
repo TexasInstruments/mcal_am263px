@@ -1,3 +1,68 @@
+commit e7fe19b753a8e01b3ab4d8af26478aaa74046f90
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Sep 4 14:58:33 2026 +0530
+
+    all: all: Updated KW reports, added Ethtrcv under BQ reports
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../csp/am261x/mcal_static_analysis_report.html    |  228 +---
+ .../mcal_static_analysis_report_EthTrcv.html       | 1324 ++++++++++++++++++++
+ .../csp/am263px/mcal_static_analysis_report.html   |  228 +---
+ ...nalysis_report_hsm_fss_bootloader_EthTrcv.html} |   56 +-
+ .../csp/am263x/mcal_static_analysis_report.html    |  227 +---
+ .../mcal_static_analysis_report_EthTrcv.html       | 1324 ++++++++++++++++++++
+ 6 files changed, 2837 insertions(+), 550 deletions(-)
+
+commit 2991166278918e27453b5226c105f6cc27ddd1c2
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Sep 4 12:21:37 2026 +0530
+
+    all: all: Updated files to resolve proprietary license issues
+    
+    Fixes: MCAL-41170
+    
+    Signed-off-by: Swathi G Bhat
+
+ build/makerules/build_config.mk          |  98 ++++++++---------
+ build/makerules/build_config_CLANG.mk    |  92 ++++++++--------
+ build/makerules/common.mk                |   2 +-
+ build/makerules/component.mk             |   2 +-
+ build/makerules/env.mk                   | 182 +++++++++++++++----------------
+ build/makerules/platform.mk              |   2 +-
+ build/makerules/rules_r5f.mk             |   2 +-
+ build/makerules/rules_r5f_CLANG.mk       |   2 +-
+ build/makerules/rules_r5f_TI_COMPILER.mk |   2 +-
+ 9 files changed, 192 insertions(+), 192 deletions(-)
+
+commit bdc7816312b320b2339d92c0ad254d882dd5d085
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Sep 3 14:36:35 2026 +0530
+
+    all: all: RN updated to mention info on SafeIPC support and testing
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit d5d72e9a43f100195ef9a9cdc0caca09c128bc29
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Sep 4 21:12:20 2026 +0530
+
+    all: all: Updated manifest
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_manifest.html | 68 ++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 64 insertions(+), 4 deletions(-)
+
 commit 552d205019ffd67fbb0ed5c4b4a42d45f7f4d385
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Wed Sep 2 15:15:14 2026 +0530

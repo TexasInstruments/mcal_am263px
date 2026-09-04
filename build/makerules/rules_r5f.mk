@@ -1,6 +1,6 @@
 #*******************************************************************************
 #                                                                              *
-# Copyright (c) 2022 Texas Instruments Incorporated - http://www.ti.com/       *
+# Copyright (c) 2022 Texas Instruments Incorporated                            *
 #                        ALL RIGHTS RESERVED                                   *
 #                                                                              *
 #*******************************************************************************
