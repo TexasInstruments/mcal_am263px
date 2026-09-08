@@ -81,7 +81,9 @@
 #if (STD_ON == MCU_DEV_ERROR_DETECT)
 #include "Det.h"
 #endif
+#if (MCU_CFG_DEM_ENABLE == STD_ON)
 #include "Dem.h"
+#endif
 #include "Os.h"
 #include "Mcu_Priv.h"
 

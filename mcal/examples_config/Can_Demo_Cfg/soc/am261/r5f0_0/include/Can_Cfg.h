@@ -77,8 +77,6 @@
  * @{
  */
 
-#include "Dem.h"
-
 #include "Os.h"
 #ifdef __cplusplus
 extern "C" {
@@ -88,6 +86,11 @@ extern "C" {
 
 /** \brief CAN Config ID */
 #define CAN_CFG_ID          (CAN_CFG_ID_0)
+
+/*********************************************************************************************************************
+ * \brief Enable/Disable DEM for Hardware failure.
+ *********************************************************************************************************************/
+#define CAN_CFG_DEM_ENABLE  (STD_ON)
 
 /**
 *  \brief CAN Build Variant.
@@ -233,14 +236,10 @@ extern "C" {
 
 
 /* DEM Error Definitions */
-/* DEM Error Codes */
-/** \brief No event error code */
 
-/* DEM Error Definitions */
-#ifndef CAN_E_HARDWARE_ERROR
+
 /** \brief Hardware failed */
-#define CAN_E_HARDWARE_ERROR          (DemConf_DemEventParameter_CAN_E_HARDWARE_ERROR)
-#endif
+#define CAN_E_HARDWARE_ERROR  (DemConf_DemEventParameter_CAN_E_HARDWARE_ERROR)
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 

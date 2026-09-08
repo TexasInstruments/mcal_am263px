@@ -63,8 +63,11 @@
 /* ===========================================================================*/
 
 #include "Os.h"
-#include "Dem.h"
 #include "Mcu.h"
+
+#if (MCU_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
 #include "Mcu_Xbar.h"
 #include "Mcu_XbarPwm.h"
 #include "Mcu_XbarOutput.h"
@@ -1429,8 +1432,8 @@ Std_ReturnType Mcu_ClockSetSourcePmicClkout(Mcu_ClkSourceIdType clk_srcId, uint3
     {
 #ifdef MCU_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus((Dem_EventIdType)MCU_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
-        retVal = E_NOT_OK;
 #endif
+        retVal = E_NOT_OK;
     }
     return retVal;
 }

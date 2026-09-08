@@ -67,7 +67,9 @@
 #include "Spi.h"
 #include "Spi_Priv.h"
 /* Requirements : MCAL-1332 */
+#if (SPI_CFG_DEM_ENABLE == STD_ON)
 #include "Dem.h"
+#endif
 #include "Os.h"
 
 #define SPI_START_SEC_CODE

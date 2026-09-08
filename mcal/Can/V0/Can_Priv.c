@@ -68,6 +68,10 @@
 #include "Det.h"
 #endif
 
+#if (CAN_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
+
 #include "soc.h"
 #define CAN_START_SEC_CODE
 #include "Can_MemMap.h"

@@ -86,7 +86,6 @@
 /*********************************************************************************************************************
  * Other Header Files
  *********************************************************************************************************************/
-#include "Dem.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -314,20 +313,20 @@ Reset Reason Config
 /** \brief MCU PLL timeout.*/
 #define MCU_PLL_TIMEOUT_DURATION            (6600U)
 
+#define MCU_CFG_DEM_ENABLE  (STD_ON)
+
 
 
 
 
 /* MCU DEM Event Configuration*/
-#ifndef MCU_E_CLOCK_FAILURE
-/** \brief MCU Clock failed - AUTOSAR ECUC Driver SWS Item - ECUC_Mcu_00188*/
-#define MCU_E_CLOCK_FAILURE (DemConf_DemEventParameter_MCU_E_CLOCK_FAILURE)
-#endif
 
-#ifndef MCU_E_HARDWARE_ERROR
+/** \brief MCU Clock failed - AUTOSAR ECUC Driver SWS Item - ECUC_Mcu_00188*/
+#define MCU_E_CLOCK_FAILURE  (DemConf_DemEventParameter_MCU_E_CLOCK_FAILURE)
+
+
 /** \brief Hardware failed */
-#define MCU_E_HARDWARE_ERROR          (DemConf_DemEventParameter_MCU_E_HARDWARE_ERROR)
-#endif
+#define MCU_E_HARDWARE_ERROR  (DemConf_DemEventParameter_MCU_E_HARDWARE_ERROR)
 
 /* @} */
 /* MCU Clock Config Size */

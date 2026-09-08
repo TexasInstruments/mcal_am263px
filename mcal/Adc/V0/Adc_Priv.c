@@ -68,7 +68,6 @@
 #include "Adc_Dbg.h"
 #include "Adc_Priv.h"
 #include "Adc_Irq.h"
-#include "Dem.h"
 #include "Adc_RegResult.h"
 
 #if (STD_ON == ADC_DMA_MODE)

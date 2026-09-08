@@ -63,8 +63,11 @@
 /* ===========================================================================*/
 #include "Std_Types.h"
 #include "Os.h"
-#include "Dem.h"
 #include "Mcu.h"
+
+#if (MCU_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
 #include "Mcu_Xbar.h"
 #include "Mcu_XbarPwm.h"
 #include "Mcu_XbarOutput.h"
@@ -372,7 +375,7 @@ static void Mcu_Timeoutevent(volatile uint32 *addr, uint32 Value)
         /* Below API can change start time, so use temp variable */
         if (tempCount <= 0U)
         {
-#ifdef MCU_E_HARDWARE_ERROR
+#ifdef MCU_E_CLOCK_FAILURE
             /* timeout */
             (void)Dem_SetEventStatus(MCU_E_CLOCK_FAILURE, DEM_EVENT_STATUS_FAILED);
 #endif
@@ -399,7 +402,7 @@ Std_ReturnType Mcu_pllTimeoutevent(volatile const uint32 *regaddr)
         /* Below API can change start time, so use temp variable */
         if (tempCount <= 0U)
         {
-#ifdef MCU_E_HARDWARE_ERROR
+#ifdef MCU_E_CLOCK_FAILURE
             /* timeout */
             (void)Dem_SetEventStatus(MCU_E_CLOCK_FAILURE, DEM_EVENT_STATUS_FAILED);
 #endif

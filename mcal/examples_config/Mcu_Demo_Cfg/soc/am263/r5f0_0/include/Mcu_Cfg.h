@@ -86,7 +86,6 @@
 /*********************************************************************************************************************
  * Other Header Files
  *********************************************************************************************************************/
-#include "Dem.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -291,6 +290,9 @@ enum
 
 /** \brief MCU PLL timeout.*/
 #define MCU_PLL_TIMEOUT_DURATION            (13200U)
+
+#define MCU_CFG_DEM_ENABLE  (STD_ON)
+
 /* @} */
 /*
 *Design: MCAL-14296, MCAL-14294, MCAL-14291
@@ -300,18 +302,16 @@ enum
  * @{
  */
 
+/* MCU DEM Event Configuration*/
 
 /* Design: MCAL-15239, MCAL-15240 */
-/* MCU DEM Event Configuration*/
-#ifndef MCU_E_CLOCK_FAILURE
-/** \brief MCU Clock failed - AUTOSAR ECUC Driver SWS Item - ECUC_Mcu_00188*/
-#define MCU_E_CLOCK_FAILURE (DemConf_DemEventParameter_MCU_E_CLOCK_FAILURE)
-#endif
 
-#ifndef MCU_E_HARDWARE_ERROR
+/** \brief MCU Clock failed - AUTOSAR ECUC Driver SWS Item - ECUC_Mcu_00188*/
+#define MCU_E_CLOCK_FAILURE  (DemConf_DemEventParameter_MCU_E_CLOCK_FAILURE)
+
+
 /** \brief Hardware failed */
-#define MCU_E_HARDWARE_ERROR          (DemConf_DemEventParameter_MCU_E_HARDWARE_ERROR)
-#endif
+#define MCU_E_HARDWARE_ERROR  (DemConf_DemEventParameter_MCU_E_HARDWARE_ERROR)
 /* @} */
 /* MCU Clock Config Size */
 #define MCU_CLOCK_CONFIG (30U)

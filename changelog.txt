@@ -1,3 +1,225 @@
+commit e6769a3064675c457f17def3c928ff38a6f85484
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Sep 8 14:54:18 2026 +0530
+
+    all: Cdd_I2c: Adding design JIRAs to source
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by:Swathi G Bhat
+
+ mcal/I2c/src/Cdd_I2c.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 693fad2ebd8e4256481e1a2ae81879720ec10d0b
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Sep 4 18:23:24 2026 +0530
+
+    all: Can/Adc/Mcu/Spi: Added dem.h conditinally.
+    
+    - Added dem.h include based on dem event defined in config.
+    
+    Fixes: MCAL-41764
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Adc/V0/Adc_Priv.c                             |    1 -
+ mcal/Can/V0/Can_Mcan.c                             |    3 +
+ mcal/Can/V0/Can_Priv.c                             |    4 +
+ mcal/Can/V0/mcan.c                                 |    3 +
+ mcal/Mcu/V0/Mcu_Priv.c                             |    9 +-
+ mcal/Mcu/V2/Mcu_Priv.c                             |    7 +-
+ mcal/Mcu/V3/Mcu_Priv.c                             |    5 +-
+ mcal/Mcu/src/Mcu.c                                 |    2 +
+ mcal/Spi/V0/Spi_Mcspi.c                            |    2 +
+ mcal/Spi/V0/Spi_Priv.c                             |    5 +
+ .../soc/am263px/tresos/output/include/Mcu_Cfg.h    |    4 +-
+ .../soc/am263px/tresos/output/include/Mcu_Cfg.h    |    4 +-
+ .../soc/am263px/tresos/output/include/Mcu_Cfg.h    |    4 +-
+ .../soc/am261/r5f0_0/include/Can_Cfg.h             |   15 +-
+ .../soc/am263/r5f0_0/include/Can_Cfg.h             |   12 +-
+ .../soc/am263px/r5f0_0/include/Can_Cfg.h           |   13 +-
+ .../soc/am261/r5f0_0/include/Mcu_Cfg.h             |   13 +-
+ .../soc/am263/r5f0_0/include/Mcu_Cfg.h             |   16 +-
+ .../soc/am263px/r5f0_0/include/Mcu_Cfg.h           |   14 +-
+ .../soc/am261/r5f0_0/include/Spi_Cfg.h             |   11 +-
+ .../soc/am263/r5f0_0/include/Spi_Cfg.h             |   13 +-
+ .../soc/am263px/r5f0_0/include/Spi_Cfg.h           |   10 +-
+ .../Can_TI_AM261x/generate/include/Can_Cfg.h       |   23 +-
+ .../Mcu_TI_AM261x/generate/include/Mcu_Cfg.h       |   24 +-
+ .../Spi_TI_AM261x/generate/include/Spi_Cfg.h       |   20 +-
+ .../Can_TI_AM263Px/generate/include/Can_Cfg.h      |   21 +-
+ .../Mcu_TI_AM263Px/generate/include/Mcu_Cfg.h      |   25 +-
+ .../Spi_TI_AM263Px/generate/include/Spi_Cfg.h      |   19 +-
+ .../Can_TI_AM263x/generate/include/Can_Cfg.h       |   20 +-
+ .../Mcu_TI_AM263x/generate/include/Mcu_Cfg.h       |   25 +-
+ .../Spi_TI_AM263x/generate/include/Spi_Cfg.h       |   22 +-
+ .../Can/soc/am261/r5f0_0/config_1/Can_Cfg.h        |    5 +
+ .../Can/soc/am261/r5f0_0/config_2/Can_Cfg.h        |    5 +
+ .../Can/soc/am261/r5f0_0/config_3/Can_Cfg.h        |    5 +
+ .../Can/soc/am261/r5f0_0/config_4/Can_Cfg.h        |    7 +-
+ .../Can/soc/am261/r5f0_0/config_5/Can_Cfg.h        |    7 +-
+ .../Can/soc/am261/r5f0_0/config_7/Can_Cfg.h        |    5 +
+ .../Can/soc/am261/r5f0_0/config_8/Can_Cfg.h        |    5 +
+ .../Can/soc/am261/r5f0_0/config_91/Can_Cfg.h       |    7 +-
+ .../Can/soc/am261/r5f0_0/config_92/Can_Cfg.h       |    5 +
+ .../Can/soc/am261/r5f0_0/config_93/Can_Cfg.h       |    5 +
+ .../Can/soc/am261/r5f0_0/config_94/Can_Cfg.h       |    5 +
+ .../Can/soc/am263/r5f0_0/config_1/Can_Cfg.h        |    7 +-
+ .../Can/soc/am263/r5f0_0/config_2/Can_Cfg.h        |    5 +
+ .../Can/soc/am263/r5f0_0/config_3/Can_Cfg.h        |    5 +
+ .../Can/soc/am263/r5f0_0/config_4/Can_Cfg.h        |    7 +-
+ .../Can/soc/am263/r5f0_0/config_5/Can_Cfg.h        |    7 +-
+ .../Can/soc/am263/r5f0_0/config_6/Can_Cfg.h        |    5 +
+ .../Can/soc/am263/r5f0_0/config_7/Can_Cfg.h        |    5 +
+ .../Can/soc/am263/r5f0_0/config_8/Can_Cfg.h        |    5 +
+ .../Can/soc/am263/r5f0_0/config_91/Can_Cfg.h       |    7 +-
+ .../Can/soc/am263/r5f0_0/config_92/Can_Cfg.h       |    5 +
+ .../Can/soc/am263/r5f0_0/config_93/Can_Cfg.h       |    5 +
+ .../Can/soc/am263/r5f0_0/config_94/Can_Cfg.h       |    5 +
+ .../Can/soc/am263px/r5f0_0/config_1/Can_Cfg.h      |    5 +
+ .../Can/soc/am263px/r5f0_0/config_2/Can_Cfg.h      |    5 +
+ .../Can/soc/am263px/r5f0_0/config_3/Can_Cfg.h      |    5 +
+ .../Can/soc/am263px/r5f0_0/config_4/Can_Cfg.h      |    7 +-
+ .../Can/soc/am263px/r5f0_0/config_5/Can_Cfg.h      |    7 +-
+ .../Can/soc/am263px/r5f0_0/config_7/Can_Cfg.h      |    5 +
+ .../Can/soc/am263px/r5f0_0/config_8/Can_Cfg.h      |    5 +
+ .../Can/soc/am263px/r5f0_0/config_91/Can_Cfg.h     |    7 +-
+ .../Can/soc/am263px/r5f0_0/config_92/Can_Cfg.h     |    5 +
+ .../Can/soc/am263px/r5f0_0/config_93/Can_Cfg.h     |    5 +
+ .../Can/soc/am263px/r5f0_0/config_94/Can_Cfg.h     |    5 +
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_9/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_6/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_7/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_8/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_9/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_9/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_10/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_8/tresos/output/include/Mcu_Cfg.h       |   13 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |   13 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_10/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_6/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_8/tresos/output/include/Mcu_Cfg.h       |   16 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |   16 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_10/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_5/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_8/tresos/output/include/Mcu_Cfg.h       |   14 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |   14 +-
+ .../Spi/soc/am261/r5f0_0/config_1/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_11/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_12/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_13/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_15/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_16/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_2/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_3/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_4/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_5/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_6/Spi_Cfg.h        |   11 +-
+ .../Spi/soc/am261/r5f0_0/config_7/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_8/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_9/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_91/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_92/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am261/r5f0_0/config_93/Spi_Cfg.h       |   11 +
+ .../Spi/soc/am261/r5f0_0/config_94/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_1/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_10/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_15/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_16/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_2/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_3/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_4/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_5/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_51/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_52/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_6/Spi_Cfg.h        |   11 +-
+ .../Spi/soc/am263/r5f0_0/config_7/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_8/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_9/Spi_Cfg.h        |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_91/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_92/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263/r5f0_0/config_93/Spi_Cfg.h       |   11 +
+ .../Spi/soc/am263/r5f0_0/config_94/Spi_Cfg.h       |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_1/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_11/Spi_Cfg.h     |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_12/Spi_Cfg.h     |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_13/Spi_Cfg.h     |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_15/Spi_Cfg.h     |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_16/Spi_Cfg.h     | 2051 ++++++++++----------
+ .../Spi/soc/am263px/r5f0_0/config_2/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_3/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_4/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_5/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_6/Spi_Cfg.h      |   11 +
+ .../Spi/soc/am263px/r5f0_0/config_7/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_8/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_9/Spi_Cfg.h      |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_91/Spi_Cfg.h     |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_92/Spi_Cfg.h     |    7 +-
+ .../Spi/soc/am263px/r5f0_0/config_93/Spi_Cfg.h     |   11 +
+ .../Spi/soc/am263px/r5f0_0/config_94/Spi_Cfg.h     |    7 +-
+ 178 files changed, 2128 insertions(+), 1736 deletions(-)
+
+commit f960431197734b4cbbddd3568b046e91718bccef
+Author: Gouri Siva M <g-t1@ti.com>
+Date:   Wed Sep 2 11:53:56 2026 +0530
+
+    am261x: Mcal: Pinmux config correction
+    
+     - Pinmux config structures used by eth_test_config was updated
+    
+    Fixes: MCAL-41712
+    
+    Signed-off-by: Gouri Siva M <g-m1@ti.com>
+
+ mcal_test/eth_test/Makefile                        |   2 +-
+ .../soc/am261/r5f0_0/config_14/Port_PBcfg_Eth.c    | 151 +++++++++++----------
+ .../Eth/soc/am261/r5f0_0/config_9/Port_PBcfg_Eth.c | 151 +++++++++++----------
+ 3 files changed, 153 insertions(+), 151 deletions(-)
+
 commit e7fe19b753a8e01b3ab4d8af26478aaa74046f90
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Fri Sep 4 14:58:33 2026 +0530

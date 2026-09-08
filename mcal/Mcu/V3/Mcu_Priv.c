@@ -63,8 +63,11 @@
 /* ===========================================================================*/
 
 #include "Os.h"
-#include "Dem.h"
 #include "Mcu.h"
+
+#if (MCU_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
 #include "Mcu_Xbar.h"
 #include "Mcu_XbarPwm.h"
 #include "Mcu_XbarOutput.h"

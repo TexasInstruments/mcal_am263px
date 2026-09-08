@@ -68,6 +68,9 @@
 #include "Can_Priv.h"
 #include "EcuM_Cbk.h"
 #include "Can_Cfg.h"
+#if (CAN_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
 
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */

@@ -79,9 +79,6 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Os.h"
-[!IF "(node:exists(as:modconf('Spi')[1]/SpiDemEventParameterRefs/*))"!][!//
-#include "Dem.h"
-[!ENDIF!][!//
 [!IF "as:modconf('Spi')[1]/SpiGeneral/SpiDevErrorDetect = 'true'"!]#include "Det.h"[!ENDIF!]
 
 #ifdef __cplusplus
@@ -118,6 +115,10 @@ extern "C" {
 /** \brief SPI Config ID */
 #define SPI_CFG_ID          (0x1U)
 
+/*********************************************************************************************************************
+ * \brief Enable/Disable DEM for Hardware failure.
+ *********************************************************************************************************************/
+#define SPI_CFG_DEM_ENABLE  [!IF "not(node:empty(as:modconf('Spi')[1]/SpiDemEventParameterRefs/SPI_E_HARDWARE_ERROR))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 [!IF "as:modconf('Spi')[1]/IMPLEMENTATION_CONFIG_VARIANT = 'VariantPreCompile'"!]
 [!LOOP "as:modconf('Spi')[1]/SpiDriver"!]
@@ -328,17 +329,11 @@ extern "C" {
  *  Pre-compile switches for enabling/disabling DEM events
  *  @{
  */
-[!NOCODE!][!//
-[!IF "node:exists(as:modconf('Spi')[1]/SpiDemEventParameterRefs)"!][!//
-[!IF "not(node:exists(as:modconf('Spi')[1]/SpiDemEventParameterRefs/*/SPI_E_HARDWARE_ERROR/*))"!][!WARNING "DEM enabled but no DEM error configured"!][!ENDIF!]
-[!ENDIF!][!//
-[!ENDNOCODE!][!//
+/* DEM Error Definitions */
 
-[!IF "node:exists(as:modconf('Spi')[1]/SpiDemEventParameterRefs/*)"!][!//
-#ifndef SPI_E_HARDWARE_ERROR
+[!IF "not(node:empty(as:modconf('Spi')[1]/SpiDemEventParameterRefs/SPI_E_HARDWARE_ERROR))"!]
 /** \brief Hardware failed */
-#define SPI_E_HARDWARE_ERROR        ([!IF "node:refexists(as:modconf('Spi')[1]/SpiDemEventParameterRefs/*/SPI_E_HARDWARE_ERROR/*)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Spi')[1]/SpiDemEventParameterRefs/*/SPI_E_HARDWARE_ERROR/*))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured "!][!ENDIF!])
-#endif
+#define SPI_E_HARDWARE_ERROR  (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Spi')[1]/SpiDemEventParameterRefs/SPI_E_HARDWARE_ERROR))"!])
 [!ENDIF!][!//
 
 

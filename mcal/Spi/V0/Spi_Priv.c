@@ -67,6 +67,11 @@
 #include "Spi.h"
 #include "Spi_Dbg.h"
 #include "Spi_Priv.h"
+
+#if (SPI_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
+
 #include "soc.h"
 
 #ifdef __cplusplus

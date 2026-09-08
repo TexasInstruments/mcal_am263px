@@ -88,7 +88,6 @@
  * Other Header Files
  *********************************************************************************************************************/
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -294,8 +293,11 @@ Reset Reason Config
 /** \brief MCU PLL timeout.*/
 #define MCU_PLL_TIMEOUT_DURATION            (13200U)
 
+#define MCU_CFG_DEM_ENABLE  (STD_OFF)
 
 
+
+/* MCU DEM Event Configuration*/
 
 /* @} */
 /* MCU Clock Config Size */

@@ -78,8 +78,6 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Os.h"
-#include "Dem.h"
-
 #include "Det.h"
 
 #ifdef __cplusplus
@@ -116,6 +114,10 @@ extern "C" {
 /** \brief SPI Config ID */
 #define SPI_CFG_ID          (0x1U)
 
+/*********************************************************************************************************************
+ * \brief Enable/Disable DEM for Hardware failure.
+ *********************************************************************************************************************/
+#define SPI_CFG_DEM_ENABLE  (STD_OFF)
 
 
 /** \brief Buffer mode - Internal or External or Both */
@@ -340,11 +342,8 @@ extern "C" {
  *  Pre-compile switches for enabling/disabling DEM events
  *  @{
  */
+/* DEM Error Definitions */
 
-#ifndef SPI_E_HARDWARE_ERROR
-/** \brief Hardware failed */
-#define SPI_E_HARDWARE_ERROR        (DemConf_DemEventParameter_SPI_E_HARDWARE_ERROR)
-#endif
 
 
 

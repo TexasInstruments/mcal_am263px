@@ -79,9 +79,6 @@
  * @{
  */
 
-[!IF "not(node:empty(as:modconf('Can')[1]/CanDemEventParameterRefs/*))"!][!//
-#include "Dem.h"
-[!ENDIF!][!//
 [!IF "not(node:empty(as:modconf('Can')[1]/CanGeneral/CanOsCounterRef))"!][!//
 #include "Os.h"
 [!ENDIF!][!//
@@ -93,6 +90,11 @@ extern "C" {
 
 /** \brief CAN Config ID */
 #define CAN_CFG_ID          (CAN_CFG_ID_0)
+
+/*********************************************************************************************************************
+ * \brief Enable/Disable DEM for Hardware failure.
+ *********************************************************************************************************************/
+#define CAN_CFG_DEM_ENABLE  [!IF "not(node:empty(as:modconf('Can')[1]/CanDemEventParameterRefs/CAN_E_HARDWARE_ERROR))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 /**
 *  \brief CAN Build Variant.
@@ -317,18 +319,11 @@ extern boolean [!"as:modconf('Can')[1]/CanGeneral/CanLPduReceiveCalloutFunction/
 													const uint8* CanSduPtr);
 [!ENDIF!]
 
-[!NOCODE!][!//
-[!IF "node:exists(as:modconf('Can')[1]/CanDemEventParameterRefs)"!] [!//
-[!IF "not(node:exists(as:modconf('Can')[1]/CanDemEventParameterRefs/CAN_E_HARDWARE_ERROR))"!][!WARNING "DEM enabled but no DEM error configured"!][!ENDIF!]
-[!ENDIF!][!//
-[!ENDNOCODE!][!//
-
-[!IF "node:exists(as:modconf('Can')[1]/CanDemEventParameterRefs/*)"!][!//
 /* DEM Error Definitions */
-#ifndef CAN_E_HARDWARE_ERROR
+
+[!IF "not(node:empty(as:modconf('Can')[1]/CanDemEventParameterRefs/CAN_E_HARDWARE_ERROR))"!]
 /** \brief Hardware failed */
-#define CAN_E_HARDWARE_ERROR          ([!IF "not(node:empty(as:modconf('Can')[1]/CanDemEventParameterRefs/CAN_E_HARDWARE_ERROR))"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Can')[1]/CanDemEventParameterRefs/CAN_E_HARDWARE_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
+#define CAN_E_HARDWARE_ERROR  (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Can')[1]/CanDemEventParameterRefs/CAN_E_HARDWARE_ERROR))"!])
 [!ENDIF!][!//
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
