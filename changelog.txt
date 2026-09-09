@@ -1,3 +1,68 @@
+commit 29b94edf9e9254ba2e790b5b25e14c0af6d8874f
+Author: Kalyan, Vagvala <a0489746@ti.com>
+Date:   Wed Sep 9 13:19:22 2026 +0530
+
+    all: all: Update Eth bug details in RN
+    
+    - Capture Eth bug details in RN
+    
+    Fixes: MCAL-41779
+    
+    Signed-off-by: Kalyan, Vagvala <k-vagvala@ti.com>
+
+ release_notes.md | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit 7dd704234de4b84ad093ab861228a2a131eb54ca
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Sep 9 09:55:05 2026 +0530
+
+    am261x: all: Test reports for 26.01.00 release
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_docs/csp/am261x/mcal_test_report.html | 2678 ++++++++++++++++++++++++++++
+ mcal_docs/csp/am261x/mcal_test_report.xlsx |  Bin 191346 -> 0 bytes
+ 2 files changed, 2678 insertions(+)
+
+commit cbad3e664f1f4277a7f051665f1630e81725e337
+Author: Surbhi Kapoor <s-kapoor1@ti.com>
+Date:   Fri Sep 4 14:31:51 2026 +0530
+
+    am263x, am263px, am261x: Eth: Update SchM calls
+    
+    Subdivide SchM critical sections into granular locks
+    Replace single large SchM_Enter/Exit locks with multiple granular critical
+    sections in RX and TX packet processing functions. This approach:
+    
+    Fixes: MCAL-41779
+    
+    Signed-off-by: Surbhi Kapoor <s-kapoor1@ti.com>
+
+ mcal/Eth/src/cpsw/Eth_Priv.c | 93 ++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 72 insertions(+), 21 deletions(-)
+
+commit c2d690e6b1702164109e1567a6ed2b632c5d5c41
+Author: Gouri Siva M <g-t1@ti.com>
+Date:   Tue Sep 8 21:17:41 2026 +0530
+
+    am261x: MCAL: MII2 Enablement in ut_config
+    
+     - config13 and config15 MII2 is not been enabled
+    
+    Fixes: MCAL-41778
+    
+    Signed-off-by: Gouri Siva M <g-m1@ti.com>
+
+ .../Eth/soc/am261/r5f0_0/config_13/Mcu_PBcfg.c     |   6 +-
+ .../soc/am261/r5f0_0/config_13/Port_PBcfg_Eth.c    | 151 +++++++++++----------
+ .../Eth/soc/am261/r5f0_0/config_15/EthTrcv_PBcfg.c |   9 +-
+ .../Eth/soc/am261/r5f0_0/config_15/Mcu_PBcfg.c     |   6 +-
+ .../soc/am261/r5f0_0/config_15/Port_PBcfg_Eth.c    | 151 +++++++++++----------
+ 5 files changed, 162 insertions(+), 161 deletions(-)
+
 commit e6769a3064675c457f17def3c928ff38a6f85484
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Sep 8 14:54:18 2026 +0530

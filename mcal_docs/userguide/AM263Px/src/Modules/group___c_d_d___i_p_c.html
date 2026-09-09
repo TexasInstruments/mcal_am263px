@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.8. CDD_IPC &mdash; Documentation for AM263Px</title>
+  <title>6.8. CDD_IPC &mdash; Documentation for AM263Px</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.9. CDD_PWM" href="group___c_d_d___p_w_m.html" />
-    <link rel="prev" title="5.7. CDD_I2C" href="group___c_d_d___i2_c.html" /> 
+    <link rel="next" title="6.9. CDD_PWM" href="group___c_d_d___p_w_m.html" />
+    <link rel="prev" title="6.7. CDD_I2C" href="group___c_d_d___i2_c.html" /> 
 </head>
 
 <body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
@@ -65,69 +65,70 @@
 <li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.8. CDD_IPC</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#modules">5.8.1. Modules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#types">5.8.2. Types</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#enum-cdd-ipcstatustype">5.8.2.1. enum Cdd_IpcStatusType</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-ipcnotifyutils-inithandle">5.8.2.2. typedef IpcNotifyUtils_InitHandle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-ipcnotifyutils-handle">5.8.2.3. typedef IpcNotifyUtils_Handle</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvcallback">5.8.2.4. typedef Cdd_Ipc_RPMessage_lld_recvCallback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvnotifycallback">5.8.2.5. typedef Cdd_Ipc_RPMessage_lld_recvNotifyCallback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-crchookcallback">5.8.2.6. typedef Cdd_Ipc_CrcHookCallback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Module_Errata.html">5. Silicon Errata - MCAL Support and Workarounds</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">6. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">6.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">6.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">6.3. CDD_CMPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">6.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">6.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">6.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">6.7. CDD_I2C</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.8. CDD_IPC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#modules">6.8.1. Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types">6.8.2. Types</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#enum-cdd-ipcstatustype">6.8.2.1. enum Cdd_IpcStatusType</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-ipcnotifyutils-inithandle">6.8.2.2. typedef IpcNotifyUtils_InitHandle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-ipcnotifyutils-handle">6.8.2.3. typedef IpcNotifyUtils_Handle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvcallback">6.8.2.4. typedef Cdd_Ipc_RPMessage_lld_recvCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-rpmessage-lld-recvnotifycallback">6.8.2.5. typedef Cdd_Ipc_RPMessage_lld_recvNotifyCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typedef-cdd-ipc-crchookcallback">6.8.2.6. typedef Cdd_Ipc_CrcHookCallback</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#structures">5.8.3. Structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defines">5.8.4. Defines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions">5.8.5. Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-mutex-resourcetrylock">5.8.5.1. function Cdd_Ipc_Mutex_resourceTryLock</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-mutex-resourceunlock">5.8.5.2. function Cdd_Ipc_Mutex_resourceUnlock</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-msghandler">5.8.5.3. function Cdd_Ipc_notify_MsgHandler</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-getversioninfo">5.8.5.4. function Cdd_Ipc_GetVersionInfo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-init">5.8.5.5. function Cdd_Ipc_Init</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-deinit">5.8.5.6. function Cdd_Ipc_DeInit</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-registerclient">5.8.5.7. function Cdd_Ipc_Notify_RegisterClient</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-write">5.8.5.8. function Cdd_Ipc_Notify_Write</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-unregisterclient">5.8.5.9. function Cdd_Ipc_Notify_UnregisterClient</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-construct">5.8.5.10. function Cdd_Ipc_Construct</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-rpmsg-sendmsg">5.8.5.11. function Cdd_Ipc_RpMsg_SendMsg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-rpmsg-recvmsg">5.8.5.12. function Cdd_Ipc_RpMsg_RecvMsg</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-destruct">5.8.5.13. function Cdd_Ipc_Destruct</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-sync-all">5.8.5.14. function Cdd_Ipc_Notify_Sync_All</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-init">5.8.5.15. function IpcNotifyUtils_lld_init</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-sendsync">5.8.5.16. function IpcNotifyUtils_lld_sendSync</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-waitsync">5.8.5.17. function IpcNotifyUtils_lld_waitSync</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-syncall">5.8.5.18. function IpcNotifyUtils_lld_syncAll</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-synccallback">5.8.5.19. function IpcNotifyUtils_lld_syncCallback</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-vringmemallocation">5.8.5.20. function Cdd_Ipc_VringMemAllocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#structures">6.8.3. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">6.8.4. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">6.8.5. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-mutex-resourcetrylock">6.8.5.1. function Cdd_Ipc_Mutex_resourceTryLock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-mutex-resourceunlock">6.8.5.2. function Cdd_Ipc_Mutex_resourceUnlock</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-msghandler">6.8.5.3. function Cdd_Ipc_notify_MsgHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-getversioninfo">6.8.5.4. function Cdd_Ipc_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-init">6.8.5.5. function Cdd_Ipc_Init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-deinit">6.8.5.6. function Cdd_Ipc_DeInit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-registerclient">6.8.5.7. function Cdd_Ipc_Notify_RegisterClient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-write">6.8.5.8. function Cdd_Ipc_Notify_Write</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-unregisterclient">6.8.5.9. function Cdd_Ipc_Notify_UnregisterClient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-construct">6.8.5.10. function Cdd_Ipc_Construct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-rpmsg-sendmsg">6.8.5.11. function Cdd_Ipc_RpMsg_SendMsg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-rpmsg-recvmsg">6.8.5.12. function Cdd_Ipc_RpMsg_RecvMsg</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-destruct">6.8.5.13. function Cdd_Ipc_Destruct</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-notify-sync-all">6.8.5.14. function Cdd_Ipc_Notify_Sync_All</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-init">6.8.5.15. function IpcNotifyUtils_lld_init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-sendsync">6.8.5.16. function IpcNotifyUtils_lld_sendSync</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-waitsync">6.8.5.17. function IpcNotifyUtils_lld_waitSync</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-syncall">6.8.5.18. function IpcNotifyUtils_lld_syncAll</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-ipcnotifyutils-lld-synccallback">6.8.5.19. function IpcNotifyUtils_lld_syncCallback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-ipc-vringmemallocation">6.8.5.20. function Cdd_Ipc_VringMemAllocation</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">6.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">6.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">6.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">6.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">6.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">6.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">6.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">6.16. MCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">6.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">6.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">6.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">6.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">6.21. WDG</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">7. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">8. AUTOSAR Integration Guide</a></li>
 </ul>
 
         </div>
@@ -144,8 +145,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
-      <li><span class="section-number">5.8. </span>CDD_IPC</li>
+          <li><a href="../api_guide.html"><span class="section-number">6. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">6.8. </span>CDD_IPC</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -155,9 +156,9 @@
            <div itemprop="articleBody">
              
   <section id="cdd-ipc">
-<h1><span class="section-number">5.8. </span>CDD_IPC<a class="headerlink" href="#cdd-ipc" title="Link to this heading"></a></h1>
+<h1><span class="section-number">6.8. </span>CDD_IPC<a class="headerlink" href="#cdd-ipc" title="Link to this heading"></a></h1>
 <section id="modules">
-<h2><span class="section-number">5.8.1. </span>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.8.1. </span>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -174,7 +175,7 @@
 </table>
 </section>
 <section id="types">
-<h2><span class="section-number">5.8.2. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.8.2. </span>Types<a class="headerlink" href="#types" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Base type</p></th>
@@ -210,7 +211,7 @@
 </tbody>
 </table>
 <section id="enum-cdd-ipcstatustype">
-<h3><span class="section-number">5.8.2.1. </span>enum Cdd_IpcStatusType<a class="headerlink" href="#enum-cdd-ipcstatustype" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.2.1. </span>enum Cdd_IpcStatusType<a class="headerlink" href="#enum-cdd-ipcstatustype" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Enumerator</p></th>
@@ -246,38 +247,38 @@ This type defines a range of specific status for Complex driver.</p>
 <p>Requirements : AUTORADAR_MCAL-70</p>
 </section>
 <section id="typedef-ipcnotifyutils-inithandle">
-<h3><span class="section-number">5.8.2.2. </span>typedef IpcNotifyUtils_InitHandle<a class="headerlink" href="#typedef-ipcnotifyutils-inithandle" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.2.2. </span>typedef IpcNotifyUtils_InitHandle<a class="headerlink" href="#typedef-ipcnotifyutils-inithandle" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">IpcNotifyUtils_InitObject</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">IpcNotifyUtils_InitHandle</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>
 <section id="typedef-ipcnotifyutils-handle">
-<h3><span class="section-number">5.8.2.3. </span>typedef IpcNotifyUtils_Handle<a class="headerlink" href="#typedef-ipcnotifyutils-handle" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.2.3. </span>typedef IpcNotifyUtils_Handle<a class="headerlink" href="#typedef-ipcnotifyutils-handle" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">IpcNotifyUtils_Object</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">IpcNotifyUtils_Handle</span><span class="p">;</span>
 </pre></div>
 </div>
 </section>
 <section id="typedef-cdd-ipc-rpmessage-lld-recvcallback">
-<h3><span class="section-number">5.8.2.4. </span>typedef Cdd_Ipc_RPMessage_lld_recvCallback<a class="headerlink" href="#typedef-cdd-ipc-rpmessage-lld-recvcallback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.2.4. </span>typedef Cdd_Ipc_RPMessage_lld_recvCallback<a class="headerlink" href="#typedef-cdd-ipc-rpmessage-lld-recvcallback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_lld_recvCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span><span class="w"> </span><span class="n">sint32</span><span class="w"> </span><span class="n">crcStatus</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">remoteEndPt</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="typedef-cdd-ipc-rpmessage-lld-recvnotifycallback">
-<h3><span class="section-number">5.8.2.5. </span>typedef Cdd_Ipc_RPMessage_lld_recvNotifyCallback<a class="headerlink" href="#typedef-cdd-ipc-rpmessage-lld-recvnotifycallback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.2.5. </span>typedef Cdd_Ipc_RPMessage_lld_recvNotifyCallback<a class="headerlink" href="#typedef-cdd-ipc-rpmessage-lld-recvnotifycallback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_lld_recvNotifyCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="n">Cdd_Ipc_RPMessage_EpObject</span><span class="w"> </span><span class="o">*</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">arg</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 <section id="typedef-cdd-ipc-crchookcallback">
-<h3><span class="section-number">5.8.2.6. </span>typedef Cdd_Ipc_CrcHookCallback<a class="headerlink" href="#typedef-cdd-ipc-crchookcallback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.2.6. </span>typedef Cdd_Ipc_CrcHookCallback<a class="headerlink" href="#typedef-cdd-ipc-crchookcallback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="n">sint32</span><span class="p">(</span><span class="o">*</span><span class="w"> </span><span class="n">Cdd_Ipc_CrcHookCallback</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">uint8</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span><span class="w"> </span><span class="n">uint8</span><span class="w"> </span><span class="n">crcSize</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">crc</span><span class="p">);</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="structures">
-<h2><span class="section-number">5.8.3. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.8.3. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -304,7 +305,7 @@ This type defines a range of specific status for Complex driver.</p>
 </table>
 </section>
 <section id="defines">
-<h2><span class="section-number">5.8.4. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.8.4. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -469,7 +470,7 @@ This type defines a range of specific status for Complex driver.</p>
 </table>
 </section>
 <section id="functions">
-<h2><span class="section-number">5.8.5. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.8.5. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Return type</p></th>
@@ -561,7 +562,7 @@ This type defines a range of specific status for Complex driver.</p>
 </tbody>
 </table>
 <section id="function-cdd-ipc-mutex-resourcetrylock">
-<h3><span class="section-number">5.8.5.1. </span>function Cdd_Ipc_Mutex_resourceTryLock<a class="headerlink" href="#function-cdd-ipc-mutex-resourcetrylock" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.1. </span>function Cdd_Ipc_Mutex_resourceTryLock<a class="headerlink" href="#function-cdd-ipc-mutex-resourcetrylock" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_Mutex_resourceTryLock</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lock</span>
 <span class="p">)</span>
@@ -569,7 +570,7 @@ This type defines a range of specific status for Complex driver.</p>
 </div>
 </section>
 <section id="function-cdd-ipc-mutex-resourceunlock">
-<h3><span class="section-number">5.8.5.2. </span>function Cdd_Ipc_Mutex_resourceUnlock<a class="headerlink" href="#function-cdd-ipc-mutex-resourceunlock" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.2. </span>function Cdd_Ipc_Mutex_resourceUnlock<a class="headerlink" href="#function-cdd-ipc-mutex-resourceunlock" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Mutex_resourceUnlock</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">lock</span>
 <span class="p">)</span>
@@ -577,7 +578,7 @@ This type defines a range of specific status for Complex driver.</p>
 </div>
 </section>
 <section id="function-cdd-ipc-notify-msghandler">
-<h3><span class="section-number">5.8.5.3. </span>function Cdd_Ipc_notify_MsgHandler<a class="headerlink" href="#function-cdd-ipc-notify-msghandler" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.3. </span>function Cdd_Ipc_notify_MsgHandler<a class="headerlink" href="#function-cdd-ipc-notify-msghandler" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_notify_MsgHandler</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ipcNotifyHandle</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteCoreId</span><span class="p">,</span>
@@ -591,7 +592,7 @@ This type defines a range of specific status for Complex driver.</p>
 </div>
 </section>
 <section id="function-cdd-ipc-getversioninfo">
-<h3><span class="section-number">5.8.5.4. </span>function Cdd_Ipc_GetVersionInfo<a class="headerlink" href="#function-cdd-ipc-getversioninfo" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.4. </span>function Cdd_Ipc_GetVersionInfo<a class="headerlink" href="#function-cdd-ipc-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_GetVersionInfo</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">VersionInfoPtr</span>
 <span class="p">)</span>
@@ -613,7 +614,7 @@ Service for getting CDD version.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-cdd-ipc-init">
-<h3><span class="section-number">5.8.5.5. </span>function Cdd_Ipc_Init<a class="headerlink" href="#function-cdd-ipc-init" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.5. </span>function Cdd_Ipc_Init<a class="headerlink" href="#function-cdd-ipc-init" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Init</span><span class="p">(</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_IpcConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
 <span class="p">)</span>
@@ -635,7 +636,7 @@ Service for CDD IPC Initialization.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-cdd-ipc-deinit">
-<h3><span class="section-number">5.8.5.6. </span>function Cdd_Ipc_DeInit<a class="headerlink" href="#function-cdd-ipc-deinit" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.6. </span>function Cdd_Ipc_DeInit<a class="headerlink" href="#function-cdd-ipc-deinit" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_DeInit</span><span class="p">(</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_IpcConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
 <span class="p">)</span>
@@ -658,7 +659,7 @@ Service for deinitializing CDD IPC.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-cdd-ipc-notify-registerclient">
-<h3><span class="section-number">5.8.5.7. </span>function Cdd_Ipc_Notify_RegisterClient<a class="headerlink" href="#function-cdd-ipc-notify-registerclient" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.7. </span>function Cdd_Ipc_Notify_RegisterClient<a class="headerlink" href="#function-cdd-ipc-notify-registerclient" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_RegisterClient</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_localClientId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">IpcNotify_FxnCallback</span><span class="w"> </span><span class="n">Cdd_Ipc_notify_msgHandler</span><span class="p">,</span>
@@ -686,7 +687,7 @@ Service to register a client for IPC.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-cdd-ipc-notify-write">
-<h3><span class="section-number">5.8.5.8. </span>function Cdd_Ipc_Notify_Write<a class="headerlink" href="#function-cdd-ipc-notify-write" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.8. </span>function Cdd_Ipc_Notify_Write<a class="headerlink" href="#function-cdd-ipc-notify-write" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_Write</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteCoreId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_remoteClientId</span><span class="p">,</span>
@@ -717,7 +718,7 @@ Service to write ipc notify message.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-cdd-ipc-notify-unregisterclient">
-<h3><span class="section-number">5.8.5.9. </span>function Cdd_Ipc_Notify_UnregisterClient<a class="headerlink" href="#function-cdd-ipc-notify-unregisterclient" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.9. </span>function Cdd_Ipc_Notify_UnregisterClient<a class="headerlink" href="#function-cdd-ipc-notify-unregisterclient" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_UnregisterClient</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">Cdd_Ipc_localClientId</span>
 <span class="p">)</span>
@@ -742,7 +743,7 @@ Service to un-register a client for IPC.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-cdd-ipc-construct">
-<h3><span class="section-number">5.8.5.10. </span>function Cdd_Ipc_Construct<a class="headerlink" href="#function-cdd-ipc-construct" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.10. </span>function Cdd_Ipc_Construct<a class="headerlink" href="#function-cdd-ipc-construct" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Construct</span><span class="p">(</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_IpcConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ConfigPtr</span>
 <span class="p">)</span>
@@ -765,7 +766,7 @@ Service for CDD Ipc RpMsg Construct.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-cdd-ipc-rpmsg-sendmsg">
-<h3><span class="section-number">5.8.5.11. </span>function Cdd_Ipc_RpMsg_SendMsg<a class="headerlink" href="#function-cdd-ipc-rpmsg-sendmsg" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.11. </span>function Cdd_Ipc_RpMsg_SendMsg<a class="headerlink" href="#function-cdd-ipc-rpmsg-sendmsg" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_RpMsg_SendMsg</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span>
@@ -800,7 +801,7 @@ Service for CDD Ipc RpMsg GetLoclEndPoint.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-cdd-ipc-rpmsg-recvmsg">
-<h3><span class="section-number">5.8.5.12. </span>function Cdd_Ipc_RpMsg_RecvMsg<a class="headerlink" href="#function-cdd-ipc-rpmsg-recvmsg" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.12. </span>function Cdd_Ipc_RpMsg_RecvMsg<a class="headerlink" href="#function-cdd-ipc-rpmsg-recvmsg" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Ipc_RpMsg_RecvMsg</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">data</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dataLen</span><span class="p">,</span>
@@ -835,7 +836,7 @@ Service for CDD Ipc RpMsg GetLoclEndPoint.</p>
 <p><strong>Return</strong>: Std_ReturnType</p>
 </section>
 <section id="function-cdd-ipc-destruct">
-<h3><span class="section-number">5.8.5.13. </span>function Cdd_Ipc_Destruct<a class="headerlink" href="#function-cdd-ipc-destruct" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.13. </span>function Cdd_Ipc_Destruct<a class="headerlink" href="#function-cdd-ipc-destruct" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Destruct</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Ipc_localEndPtId</span>
 <span class="p">)</span>
@@ -853,7 +854,7 @@ Service to delete a previously created RPMessage object.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-cdd-ipc-notify-sync-all">
-<h3><span class="section-number">5.8.5.14. </span>function Cdd_Ipc_Notify_Sync_All<a class="headerlink" href="#function-cdd-ipc-notify-sync-all" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.14. </span>function Cdd_Ipc_Notify_Sync_All<a class="headerlink" href="#function-cdd-ipc-notify-sync-all" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_Notify_Sync_All</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -872,7 +873,7 @@ Service for CDD Ipc Notify SyncAll.</p>
 <p><strong>Return</strong>: None</p>
 </section>
 <section id="function-ipcnotifyutils-lld-init">
-<h3><span class="section-number">5.8.5.15. </span>function IpcNotifyUtils_lld_init<a class="headerlink" href="#function-ipcnotifyutils-lld-init" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.15. </span>function IpcNotifyUtils_lld_init<a class="headerlink" href="#function-ipcnotifyutils-lld-init" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_init</span><span class="p">(</span>
 <span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span>
 <span class="p">)</span>
@@ -893,7 +894,7 @@ Initialize IPC Notify Utils module.</p>
 <p><strong>Return</strong>: sint32</p>
 </section>
 <section id="function-ipcnotifyutils-lld-sendsync">
-<h3><span class="section-number">5.8.5.16. </span>function IpcNotifyUtils_lld_sendSync<a class="headerlink" href="#function-ipcnotifyutils-lld-sendsync" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.16. </span>function IpcNotifyUtils_lld_sendSync<a class="headerlink" href="#function-ipcnotifyutils-lld-sendsync" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_sendSync</span><span class="p">(</span>
 <span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">remoteCoreId</span>
@@ -915,7 +916,7 @@ Send a sync message to specific core.</p>
 <p><strong>Return</strong>: sint32</p>
 </section>
 <section id="function-ipcnotifyutils-lld-waitsync">
-<h3><span class="section-number">5.8.5.17. </span>function IpcNotifyUtils_lld_waitSync<a class="headerlink" href="#function-ipcnotifyutils-lld-waitsync" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.17. </span>function IpcNotifyUtils_lld_waitSync<a class="headerlink" href="#function-ipcnotifyutils-lld-waitsync" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_waitSync</span><span class="p">(</span>
 <span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span>
@@ -943,7 +944,7 @@ Wait for a sync message to be received from the specified core.</p>
 <p><strong>Return</strong>: sint32</p>
 </section>
 <section id="function-ipcnotifyutils-lld-syncall">
-<h3><span class="section-number">5.8.5.18. </span>function IpcNotifyUtils_lld_syncAll<a class="headerlink" href="#function-ipcnotifyutils-lld-syncall" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.18. </span>function IpcNotifyUtils_lld_syncAll<a class="headerlink" href="#function-ipcnotifyutils-lld-syncall" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">sint32</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_syncAll</span><span class="p">(</span>
 <span class="w">    </span><span class="n">IpcNotifyUtils_Handle</span><span class="w"> </span><span class="n">hIpcNotifyUtils</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">timeout</span>
@@ -970,7 +971,7 @@ Send a message to all enabled cores and wait for sync message from all enabled c
 <p><strong>Return</strong>: sint32</p>
 </section>
 <section id="function-ipcnotifyutils-lld-synccallback">
-<h3><span class="section-number">5.8.5.19. </span>function IpcNotifyUtils_lld_syncCallback<a class="headerlink" href="#function-ipcnotifyutils-lld-synccallback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.19. </span>function IpcNotifyUtils_lld_syncCallback<a class="headerlink" href="#function-ipcnotifyutils-lld-synccallback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">IpcNotifyUtils_lld_syncCallback</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">hIpcNotify</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint32</span><span class="w"> </span><span class="n">remoteCoreId</span><span class="p">,</span>
@@ -984,7 +985,7 @@ Send a message to all enabled cores and wait for sync message from all enabled c
 </div>
 </section>
 <section id="function-cdd-ipc-vringmemallocation">
-<h3><span class="section-number">5.8.5.20. </span>function Cdd_Ipc_VringMemAllocation<a class="headerlink" href="#function-cdd-ipc-vringmemallocation" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.8.5.20. </span>function Cdd_Ipc_VringMemAllocation<a class="headerlink" href="#function-cdd-ipc-vringmemallocation" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Ipc_VringMemAllocation</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -998,8 +999,8 @@ Send a message to all enabled cores and wait for sync message from all enabled c
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="group___c_d_d___i2_c.html" class="btn btn-neutral float-left" title="5.7. CDD_I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="group___c_d_d___p_w_m.html" class="btn btn-neutral float-right" title="5.9. CDD_PWM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="group___c_d_d___i2_c.html" class="btn btn-neutral float-left" title="6.7. CDD_I2C" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___c_d_d___p_w_m.html" class="btn btn-neutral float-right" title="6.9. CDD_PWM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.7. CDD_I2C &mdash; Documentation for AM263Px</title>
+  <title>6.7. CDD_I2C &mdash; Documentation for AM263Px</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.8. CDD_IPC" href="group___c_d_d___i_p_c.html" />
-    <link rel="prev" title="5.6. CDD_FSITX" href="group___c_d_d___f_s_i_t_x.html" /> 
+    <link rel="next" title="6.8. CDD_IPC" href="group___c_d_d___i_p_c.html" />
+    <link rel="prev" title="6.6. CDD_FSITX" href="group___c_d_d___f_s_i_t_x.html" /> 
 </head>
 
 <body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
@@ -65,71 +65,72 @@
 <li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.7. CDD_I2C</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#defines">5.7.1. Defines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions">5.7.2. Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq0complete">5.7.2.1. function I2c_utilsSeq0Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq1complete">5.7.2.2. function I2c_utilsSeq1Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq2complete">5.7.2.3. function I2c_utilsSeq2Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq3complete">5.7.2.4. function I2c_utilsSeq3Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq4complete">5.7.2.5. function I2c_utilsSeq4Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq5complete">5.7.2.6. function I2c_utilsSeq5Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq6complete">5.7.2.7. function I2c_utilsSeq6Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq7complete">5.7.2.8. function I2c_utilsSeq7Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq8complete">5.7.2.9. function I2c_utilsSeq8Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq9complete">5.7.2.10. function I2c_utilsSeq9Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq10complete">5.7.2.11. function I2c_utilsSeq10Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq11complete">5.7.2.12. function I2c_utilsSeq11Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq12complete">5.7.2.13. function I2c_utilsSeq12Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq13complete">5.7.2.14. function I2c_utilsSeq13Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq14complete">5.7.2.15. function I2c_utilsSeq14Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq15complete">5.7.2.16. function I2c_utilsSeq15Complete</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq0fail">5.7.2.17. function I2c_utilsSeq0Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq1fail">5.7.2.18. function I2c_utilsSeq1Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq2fail">5.7.2.19. function I2c_utilsSeq2Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq3fail">5.7.2.20. function I2c_utilsSeq3Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq4fail">5.7.2.21. function I2c_utilsSeq4Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq5fail">5.7.2.22. function I2c_utilsSeq5Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq6fail">5.7.2.23. function I2c_utilsSeq6Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq7fail">5.7.2.24. function I2c_utilsSeq7Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq8fail">5.7.2.25. function I2c_utilsSeq8Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq9fail">5.7.2.26. function I2c_utilsSeq9Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq10fail">5.7.2.27. function I2c_utilsSeq10Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq11fail">5.7.2.28. function I2c_utilsSeq11Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq12fail">5.7.2.29. function I2c_utilsSeq12Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq13fail">5.7.2.30. function I2c_utilsSeq13Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq14fail">5.7.2.31. function I2c_utilsSeq14Fail</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq15fail">5.7.2.32. function I2c_utilsSeq15Fail</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Module_Errata.html">5. Silicon Errata - MCAL Support and Workarounds</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">6. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">6.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">6.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">6.3. CDD_CMPSS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">6.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">6.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">6.6. CDD_FSITX</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.7. CDD_I2C</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#defines">6.7.1. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">6.7.2. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq0complete">6.7.2.1. function I2c_utilsSeq0Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq1complete">6.7.2.2. function I2c_utilsSeq1Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq2complete">6.7.2.3. function I2c_utilsSeq2Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq3complete">6.7.2.4. function I2c_utilsSeq3Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq4complete">6.7.2.5. function I2c_utilsSeq4Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq5complete">6.7.2.6. function I2c_utilsSeq5Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq6complete">6.7.2.7. function I2c_utilsSeq6Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq7complete">6.7.2.8. function I2c_utilsSeq7Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq8complete">6.7.2.9. function I2c_utilsSeq8Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq9complete">6.7.2.10. function I2c_utilsSeq9Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq10complete">6.7.2.11. function I2c_utilsSeq10Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq11complete">6.7.2.12. function I2c_utilsSeq11Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq12complete">6.7.2.13. function I2c_utilsSeq12Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq13complete">6.7.2.14. function I2c_utilsSeq13Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq14complete">6.7.2.15. function I2c_utilsSeq14Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq15complete">6.7.2.16. function I2c_utilsSeq15Complete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq0fail">6.7.2.17. function I2c_utilsSeq0Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq1fail">6.7.2.18. function I2c_utilsSeq1Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq2fail">6.7.2.19. function I2c_utilsSeq2Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq3fail">6.7.2.20. function I2c_utilsSeq3Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq4fail">6.7.2.21. function I2c_utilsSeq4Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq5fail">6.7.2.22. function I2c_utilsSeq5Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq6fail">6.7.2.23. function I2c_utilsSeq6Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq7fail">6.7.2.24. function I2c_utilsSeq7Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq8fail">6.7.2.25. function I2c_utilsSeq8Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq9fail">6.7.2.26. function I2c_utilsSeq9Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq10fail">6.7.2.27. function I2c_utilsSeq10Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq11fail">6.7.2.28. function I2c_utilsSeq11Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq12fail">6.7.2.29. function I2c_utilsSeq12Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq13fail">6.7.2.30. function I2c_utilsSeq13Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq14fail">6.7.2.31. function I2c_utilsSeq14Fail</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-i2c-utilsseq15fail">6.7.2.32. function I2c_utilsSeq15Fail</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#detailed-description">5.7.3. Detailed Description</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detailed-description">6.7.3. Detailed Description</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">5.8. CDD_IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">6.8. CDD_IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">6.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">6.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">6.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">6.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">6.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">6.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">6.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">6.16. MCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">6.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">6.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">6.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">6.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">6.21. WDG</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">7. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">8. AUTOSAR Integration Guide</a></li>
 </ul>
 
         </div>
@@ -146,8 +147,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
-      <li><span class="section-number">5.7. </span>CDD_I2C</li>
+          <li><a href="../api_guide.html"><span class="section-number">6. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">6.7. </span>CDD_I2C</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -157,10 +158,10 @@
            <div itemprop="articleBody">
              
   <section id="cdd-i2c">
-<h1><span class="section-number">5.7. </span>CDD_I2C<a class="headerlink" href="#cdd-i2c" title="Link to this heading"></a></h1>
+<h1><span class="section-number">6.7. </span>CDD_I2C<a class="headerlink" href="#cdd-i2c" title="Link to this heading"></a></h1>
 <p><a class="reference internal" href="#detailed-description">More…</a></p>
 <section id="defines">
-<h2><span class="section-number">5.7.1. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.7.1. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -367,7 +368,7 @@
 </table>
 </section>
 <section id="functions">
-<h2><span class="section-number">5.7.2. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.7.2. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Return type</p></th>
@@ -507,7 +508,7 @@
 </tbody>
 </table>
 <section id="function-i2c-utilsseq0complete">
-<h3><span class="section-number">5.7.2.1. </span>function I2c_utilsSeq0Complete<a class="headerlink" href="#function-i2c-utilsseq0complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.1. </span>function I2c_utilsSeq0Complete<a class="headerlink" href="#function-i2c-utilsseq0complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq0Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -515,7 +516,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq1complete">
-<h3><span class="section-number">5.7.2.2. </span>function I2c_utilsSeq1Complete<a class="headerlink" href="#function-i2c-utilsseq1complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.2. </span>function I2c_utilsSeq1Complete<a class="headerlink" href="#function-i2c-utilsseq1complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq1Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -523,7 +524,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq2complete">
-<h3><span class="section-number">5.7.2.3. </span>function I2c_utilsSeq2Complete<a class="headerlink" href="#function-i2c-utilsseq2complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.3. </span>function I2c_utilsSeq2Complete<a class="headerlink" href="#function-i2c-utilsseq2complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq2Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -531,7 +532,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq3complete">
-<h3><span class="section-number">5.7.2.4. </span>function I2c_utilsSeq3Complete<a class="headerlink" href="#function-i2c-utilsseq3complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.4. </span>function I2c_utilsSeq3Complete<a class="headerlink" href="#function-i2c-utilsseq3complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq3Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -539,7 +540,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq4complete">
-<h3><span class="section-number">5.7.2.5. </span>function I2c_utilsSeq4Complete<a class="headerlink" href="#function-i2c-utilsseq4complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.5. </span>function I2c_utilsSeq4Complete<a class="headerlink" href="#function-i2c-utilsseq4complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq4Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -547,7 +548,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq5complete">
-<h3><span class="section-number">5.7.2.6. </span>function I2c_utilsSeq5Complete<a class="headerlink" href="#function-i2c-utilsseq5complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.6. </span>function I2c_utilsSeq5Complete<a class="headerlink" href="#function-i2c-utilsseq5complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq5Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -555,7 +556,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq6complete">
-<h3><span class="section-number">5.7.2.7. </span>function I2c_utilsSeq6Complete<a class="headerlink" href="#function-i2c-utilsseq6complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.7. </span>function I2c_utilsSeq6Complete<a class="headerlink" href="#function-i2c-utilsseq6complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq6Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -563,7 +564,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq7complete">
-<h3><span class="section-number">5.7.2.8. </span>function I2c_utilsSeq7Complete<a class="headerlink" href="#function-i2c-utilsseq7complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.8. </span>function I2c_utilsSeq7Complete<a class="headerlink" href="#function-i2c-utilsseq7complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq7Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -571,7 +572,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq8complete">
-<h3><span class="section-number">5.7.2.9. </span>function I2c_utilsSeq8Complete<a class="headerlink" href="#function-i2c-utilsseq8complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.9. </span>function I2c_utilsSeq8Complete<a class="headerlink" href="#function-i2c-utilsseq8complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq8Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -579,7 +580,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq9complete">
-<h3><span class="section-number">5.7.2.10. </span>function I2c_utilsSeq9Complete<a class="headerlink" href="#function-i2c-utilsseq9complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.10. </span>function I2c_utilsSeq9Complete<a class="headerlink" href="#function-i2c-utilsseq9complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq9Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -587,7 +588,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq10complete">
-<h3><span class="section-number">5.7.2.11. </span>function I2c_utilsSeq10Complete<a class="headerlink" href="#function-i2c-utilsseq10complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.11. </span>function I2c_utilsSeq10Complete<a class="headerlink" href="#function-i2c-utilsseq10complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq10Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -595,7 +596,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq11complete">
-<h3><span class="section-number">5.7.2.12. </span>function I2c_utilsSeq11Complete<a class="headerlink" href="#function-i2c-utilsseq11complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.12. </span>function I2c_utilsSeq11Complete<a class="headerlink" href="#function-i2c-utilsseq11complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq11Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -603,7 +604,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq12complete">
-<h3><span class="section-number">5.7.2.13. </span>function I2c_utilsSeq12Complete<a class="headerlink" href="#function-i2c-utilsseq12complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.13. </span>function I2c_utilsSeq12Complete<a class="headerlink" href="#function-i2c-utilsseq12complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq12Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -611,7 +612,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq13complete">
-<h3><span class="section-number">5.7.2.14. </span>function I2c_utilsSeq13Complete<a class="headerlink" href="#function-i2c-utilsseq13complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.14. </span>function I2c_utilsSeq13Complete<a class="headerlink" href="#function-i2c-utilsseq13complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq13Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -619,7 +620,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq14complete">
-<h3><span class="section-number">5.7.2.15. </span>function I2c_utilsSeq14Complete<a class="headerlink" href="#function-i2c-utilsseq14complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.15. </span>function I2c_utilsSeq14Complete<a class="headerlink" href="#function-i2c-utilsseq14complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq14Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -627,7 +628,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq15complete">
-<h3><span class="section-number">5.7.2.16. </span>function I2c_utilsSeq15Complete<a class="headerlink" href="#function-i2c-utilsseq15complete" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.16. </span>function I2c_utilsSeq15Complete<a class="headerlink" href="#function-i2c-utilsseq15complete" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq15Complete</span><span class="p">(</span>
 <span class="w">    </span><span class="kt">void</span><span class="w"> </span>
 <span class="p">)</span>
@@ -635,7 +636,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq0fail">
-<h3><span class="section-number">5.7.2.17. </span>function I2c_utilsSeq0Fail<a class="headerlink" href="#function-i2c-utilsseq0fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.17. </span>function I2c_utilsSeq0Fail<a class="headerlink" href="#function-i2c-utilsseq0fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq0Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -643,7 +644,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq1fail">
-<h3><span class="section-number">5.7.2.18. </span>function I2c_utilsSeq1Fail<a class="headerlink" href="#function-i2c-utilsseq1fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.18. </span>function I2c_utilsSeq1Fail<a class="headerlink" href="#function-i2c-utilsseq1fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq1Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -651,7 +652,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq2fail">
-<h3><span class="section-number">5.7.2.19. </span>function I2c_utilsSeq2Fail<a class="headerlink" href="#function-i2c-utilsseq2fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.19. </span>function I2c_utilsSeq2Fail<a class="headerlink" href="#function-i2c-utilsseq2fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq2Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -659,7 +660,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq3fail">
-<h3><span class="section-number">5.7.2.20. </span>function I2c_utilsSeq3Fail<a class="headerlink" href="#function-i2c-utilsseq3fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.20. </span>function I2c_utilsSeq3Fail<a class="headerlink" href="#function-i2c-utilsseq3fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq3Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -667,7 +668,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq4fail">
-<h3><span class="section-number">5.7.2.21. </span>function I2c_utilsSeq4Fail<a class="headerlink" href="#function-i2c-utilsseq4fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.21. </span>function I2c_utilsSeq4Fail<a class="headerlink" href="#function-i2c-utilsseq4fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq4Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -675,7 +676,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq5fail">
-<h3><span class="section-number">5.7.2.22. </span>function I2c_utilsSeq5Fail<a class="headerlink" href="#function-i2c-utilsseq5fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.22. </span>function I2c_utilsSeq5Fail<a class="headerlink" href="#function-i2c-utilsseq5fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq5Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -683,7 +684,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq6fail">
-<h3><span class="section-number">5.7.2.23. </span>function I2c_utilsSeq6Fail<a class="headerlink" href="#function-i2c-utilsseq6fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.23. </span>function I2c_utilsSeq6Fail<a class="headerlink" href="#function-i2c-utilsseq6fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq6Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -691,7 +692,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq7fail">
-<h3><span class="section-number">5.7.2.24. </span>function I2c_utilsSeq7Fail<a class="headerlink" href="#function-i2c-utilsseq7fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.24. </span>function I2c_utilsSeq7Fail<a class="headerlink" href="#function-i2c-utilsseq7fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq7Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -699,7 +700,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq8fail">
-<h3><span class="section-number">5.7.2.25. </span>function I2c_utilsSeq8Fail<a class="headerlink" href="#function-i2c-utilsseq8fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.25. </span>function I2c_utilsSeq8Fail<a class="headerlink" href="#function-i2c-utilsseq8fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq8Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -707,7 +708,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq9fail">
-<h3><span class="section-number">5.7.2.26. </span>function I2c_utilsSeq9Fail<a class="headerlink" href="#function-i2c-utilsseq9fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.26. </span>function I2c_utilsSeq9Fail<a class="headerlink" href="#function-i2c-utilsseq9fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq9Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -715,7 +716,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq10fail">
-<h3><span class="section-number">5.7.2.27. </span>function I2c_utilsSeq10Fail<a class="headerlink" href="#function-i2c-utilsseq10fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.27. </span>function I2c_utilsSeq10Fail<a class="headerlink" href="#function-i2c-utilsseq10fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq10Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -723,7 +724,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq11fail">
-<h3><span class="section-number">5.7.2.28. </span>function I2c_utilsSeq11Fail<a class="headerlink" href="#function-i2c-utilsseq11fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.28. </span>function I2c_utilsSeq11Fail<a class="headerlink" href="#function-i2c-utilsseq11fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq11Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -731,7 +732,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq12fail">
-<h3><span class="section-number">5.7.2.29. </span>function I2c_utilsSeq12Fail<a class="headerlink" href="#function-i2c-utilsseq12fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.29. </span>function I2c_utilsSeq12Fail<a class="headerlink" href="#function-i2c-utilsseq12fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq12Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -739,7 +740,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq13fail">
-<h3><span class="section-number">5.7.2.30. </span>function I2c_utilsSeq13Fail<a class="headerlink" href="#function-i2c-utilsseq13fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.30. </span>function I2c_utilsSeq13Fail<a class="headerlink" href="#function-i2c-utilsseq13fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq13Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -747,7 +748,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq14fail">
-<h3><span class="section-number">5.7.2.31. </span>function I2c_utilsSeq14Fail<a class="headerlink" href="#function-i2c-utilsseq14fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.31. </span>function I2c_utilsSeq14Fail<a class="headerlink" href="#function-i2c-utilsseq14fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq14Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -755,7 +756,7 @@
 </div>
 </section>
 <section id="function-i2c-utilsseq15fail">
-<h3><span class="section-number">5.7.2.32. </span>function I2c_utilsSeq15Fail<a class="headerlink" href="#function-i2c-utilsseq15fail" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.7.2.32. </span>function I2c_utilsSeq15Fail<a class="headerlink" href="#function-i2c-utilsseq15fail" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">I2c_utilsSeq15Fail</span><span class="p">(</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">errorCode</span>
 <span class="p">)</span>
@@ -764,7 +765,7 @@
 </section>
 </section>
 <section id="detailed-description">
-<h2><span class="section-number">5.7.3. </span>Detailed Description<a class="headerlink" href="#detailed-description" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.7.3. </span>Detailed Description<a class="headerlink" href="#detailed-description" title="Link to this heading"></a></h2>
 <p>This files defines I2C configuration structures</p>
 </section>
 </section>
@@ -773,8 +774,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="group___c_d_d___f_s_i_t_x.html" class="btn btn-neutral float-left" title="5.6. CDD_FSITX" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="group___c_d_d___i_p_c.html" class="btn btn-neutral float-right" title="5.8. CDD_IPC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="group___c_d_d___f_s_i_t_x.html" class="btn btn-neutral float-left" title="6.6. CDD_FSITX" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___c_d_d___i_p_c.html" class="btn btn-neutral float-right" title="6.8. CDD_IPC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

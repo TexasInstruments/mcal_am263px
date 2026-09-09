@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. Silicon Errata - MCAL Support and Workarounds &mdash; Documentation for AM263Px</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/theme_overrides.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sphinx-design.min.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=4a3566fb"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. API guide" href="api_guide.html" />
+    <link rel="prev" title="4.23. WDG Module" href="Module_User_Guide_Wdg.html" /> 
+</head>
+
+<body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
+<div class="DocSite-globalNav tiNav">
+    <ul>
+    </ul>
+</div>
+
+<a class="DocSite-nav" href="https://www.ti.com" style="padding-bottom: 85px;">
+  <img class="DocSiteNav-logo"
+    src="../_static/img/ti_logo.png"
+    alt="TI Logo">
+  <div class="DocSiteNav-title"></div>
+</a>
+  
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> AM263Px MCAL User Guide
+          </a>
+              <div class="version">
+                26.01.00
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Overview_of_MCAL.html">1. Overview of MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ModuleUserGuide_list.html">4. Module User Guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Silicon Errata - MCAL Support and Workarounds</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">5.1. Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#reference-documentation">5.1.1. Reference Documentation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#errata-summary">5.2. Errata Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#support-status-legend">5.3. Support Status Legend</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_guide.html">6. API guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Key_Performance_and_Memory_Consumption_Data.html">7. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Integration.html">8. AUTOSAR Integration Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AM263Px MCAL User Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><span class="section-number">5. </span>Silicon Errata - MCAL Support and Workarounds</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="silicon-errata-mcal-support-and-workarounds">
+<h1><span class="section-number">5. </span>Silicon Errata - MCAL Support and Workarounds<a class="headerlink" href="#silicon-errata-mcal-support-and-workarounds" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2><span class="section-number">5.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<p>This document tracks Silicon Errata coverage for AM263Px Sitara MCU within the MCAL (Microcontroller Abstraction Layer) implementation. Each errata is identified by an errata ID and mapped to its MCAL support status.</p>
+<p><strong>Silicon Revision Analyzed:</strong> 1.0</p>
+<section id="reference-documentation">
+<h3><span class="section-number">5.1.1. </span>Reference Documentation<a class="headerlink" href="#reference-documentation" title="Link to this heading"></a></h3>
+<p>For complete details on each errata, including workaround procedures and technical background, refer to the official device errata document:</p>
+<p><strong><a class="reference external" href="https://www.ti.com/lit/er/sprz570d/sprz570d.pdf">AM263Px Silicon Errata (SPRZ570D)</a></strong></p>
+<p>This document contains the complete errata specifications, including severity levels, workaround details, and implementation guidance for each silicon errata.</p>
+</section>
+</section>
+<section id="errata-summary">
+<h2><span class="section-number">5.2. </span>Errata Summary<a class="headerlink" href="#errata-summary" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Errata ID</p></th>
+<th class="head"><p>Module</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>MCAL Supported</p></th>
+<th class="head"><p>Silicon Revisions Affected</p></th>
+<th class="head"><p>Comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>i2189</p></td>
+<td><p>OSPI</p></td>
+<td><p>Controller PHY Tuning Algorithm</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>PHY tuning algorithm implemented in Fls_Ospi_Phy.c. Control via user APIs: Fls_PhyEnable() and Fls_PhyDisable() (declared in Fls.h)</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2310</p></td>
+<td><p>UART</p></td>
+<td><p>Erroneous triggering of timeout interrupt</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>UART_i2310WA function implemented</p></td>
+</tr>
+<tr class="row-even"><td><p>i2311</p></td>
+<td><p>UART</p></td>
+<td><p>Spurious DMA Interrupts</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>The MCAL restricts RX/TX trigger levels to pre-defined power-of-2 compliant values, effectively preventing the spurious DMA interrupt condition described in i2311</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2324</p></td>
+<td><p>CLOCKS</p></td>
+<td><p>No synchronizer present between GCM and GCD status signals</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>Mcu_Timeoutevent() — Polling loop with timeout; regWriteReadback() — Write verification</p></td>
+</tr>
+<tr class="row-even"><td><p>i2345</p></td>
+<td><p>CPSW</p></td>
+<td><p>Ethernet Packet corruption if CPDMA fetches packet spanning memory banks</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>The driver doesn’t enforce memory bank boundary alignment. Application must handle buffer allocation to prevent packets from spanning banks</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2351</p></td>
+<td><p>OSPI</p></td>
+<td><p>Direct Access Controller (DAC) - no Continuous Read with NAND</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>Current MCAL supports only NOR flash</p></td>
+</tr>
+<tr class="row-even"><td><p>i2352</p></td>
+<td><p>CONTROLSS-SDFM</p></td>
+<td><p>Dynamically Changing Threshold Settings triggers Spurious Comparator Events</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>SDFM module not supported in current MCAL version</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2353</p></td>
+<td><p>CONTROLSS-SDFM</p></td>
+<td><p>Dynamically Changing Data Filter Settings triggers Spurious Data Events</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>SDFM module not supported in current MCAL version</p></td>
+</tr>
+<tr class="row-even"><td><p>i2354</p></td>
+<td><p>CONTROLSS-SDFM</p></td>
+<td><p>Back-to-Back Writes corrupt SDFM State Machine</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>SDFM module not supported in current MCAL version</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2356</p></td>
+<td><p>CONTROLSS-ADC</p></td>
+<td><p>Interrupts may Stop if INTxCONT not Set</p></td>
+<td><p>PARTIAL</p></td>
+<td><p>1.0</p></td>
+<td><p>The continuous mode is NOT enabled by default during ADC_Init(). Application must explicitly call Adc_SetInterruptContinuousMode() for each group to enable the workaround</p></td>
+</tr>
+<tr class="row-even"><td><p>i2357</p></td>
+<td><p>CONTROLSS-ePWM</p></td>
+<td><p>ePWM Glitch if Trip Remains Active at End of Blanking Window</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>MCAL does not provide blanking window register control</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2358</p></td>
+<td><p>CONTROLSS-ePWM</p></td>
+<td><p>Trip Events Not Filtered by Blanking Window for First 3 Cycles</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>MCAL does not provide blanking window register control</p></td>
+</tr>
+<tr class="row-even"><td><p>i2359</p></td>
+<td><p>CONTROLSS-CMPSS</p></td>
+<td><p>Prescaler counter behavior different when DACSOURCE reconfigured</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>If dynamic DAC source reconfiguration required during operation, application must perform soft reset between reconfigurations per device errata workaround</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2374</p></td>
+<td><p>PBIST</p></td>
+<td><p>PBIST fails if clock frequency mismatch</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>PBIST testing outside MCAL scope. Handled by device initialization firmware or bootloader</p></td>
+</tr>
+<tr class="row-even"><td><p>i2383</p></td>
+<td><p>OSPI</p></td>
+<td><p>2-byte address not supported in PHY DDR mode</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>Use 3-byte or 4-byte addressing modes instead of 2-byte in PHY DDR mode</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2392</p></td>
+<td><p>SOC CONTROL</p></td>
+<td><p>Race condition in mem-init capture registers</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>After mem_init, application must implement polling on done bit as per device errata workaround</p></td>
+</tr>
+<tr class="row-even"><td><p>i2393</p></td>
+<td><p>BUS SAFETY</p></td>
+<td><p>Granular error status not logged correctly</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>Bus safety error logging outside current MCAL support</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2394</p></td>
+<td><p>SOC CONTROL</p></td>
+<td><p>Race condition in interrupt aggregator capture registers</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>Application must implement workaround in all aggregator-based ISRs. Primarily required in DMA ISR and CAN ECC error ISR per device errata specification</p></td>
+</tr>
+<tr class="row-even"><td><p>i2395</p></td>
+<td><p>DCC</p></td>
+<td><p>DCC Module Frequency Comparison reports erroneous results</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>DCC module functionality outside current MCAL support</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2401</p></td>
+<td><p>CPSW</p></td>
+<td><p>Host Timestamps Cause CPSW Port to Lock up</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>Workaround: Disable host TX timestamps (TS_TX_HOST_TS_EN=0U).</p></td>
+</tr>
+<tr class="row-even"><td><p>i2402</p></td>
+<td><p>CPSW</p></td>
+<td><p>Ethernet to Host Checksum Offload does not work</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>Hardware offload disabled. Software fallback: Pseudo checksum functions (Eth_genPseudoCheckSumIPv4/IPv6) compute TCP/UDP checksums in Eth_Priv.c</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2403</p></td>
+<td><p>M4 ROM</p></td>
+<td><p>SBL redundant boot image not supported on HSSE devices</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>Redundant boot image support outside MCAL scope (ROM/bootloader responsibility)</p></td>
+</tr>
+<tr class="row-even"><td><p>i2404</p></td>
+<td><p>MBOX</p></td>
+<td><p>Race condition in mailbox registers</p></td>
+<td><p>PARTIAL</p></td>
+<td><p>1.0</p></td>
+<td><p>Implemented in MCAL V0/V2 for AM261x only. AM263Px implementation status differs - workaround not applied</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2405</p></td>
+<td><p>CONTROLSS</p></td>
+<td><p>Race condition OUTPUT_XBAR and PWM_XBAR</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>Not implemented</p></td>
+</tr>
+<tr class="row-even"><td><p>i2427</p></td>
+<td><p>RAM SEC</p></td>
+<td><p>RAM SEC can cause Spurious RAM writes</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>RAM SEC error handling outside current MCAL support</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2428</p></td>
+<td><p>AES</p></td>
+<td><p>AES generates extra DMA request for data_in at GCM encrypt end</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>AES module outside current MCAL support</p></td>
+</tr>
+<tr class="row-even"><td><p>i2433</p></td>
+<td><p>ICSS</p></td>
+<td><p>Reading 64-bit IEP timer lacks lock MSW logic</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>IEP timer functionality outside current MCAL support</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2438</p></td>
+<td><p>CPSW</p></td>
+<td><p>Host to Ethernet Timestamp Accuracy Issue</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>Workaround: Host TX timestamps disabled (TS_TX_HOST_TS_EN=0).</p></td>
+</tr>
+<tr class="row-even"><td><p>i2439</p></td>
+<td><p>CPSW</p></td>
+<td><p>Host to Ethernet Timestamp Sequence ID issue</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>Related to i2438 - same workaround applied. (TS_TX_HOST_TS_EN=0)</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2488</p></td>
+<td><p>CLOCKS</p></td>
+<td><p>PLL Configuration for precise 50-50 Duty cycle clocks</p></td>
+<td><p>PARTIAL</p></td>
+<td><p>1.0</p></td>
+<td><p>Configuration depends on MCU_PLL_CLKOUT, MCU_PLL_HSDIV0, MCU_PLL_HSDIV1 values</p></td>
+</tr>
+<tr class="row-even"><td><p>i2499</p></td>
+<td><p>RAM</p></td>
+<td><p>Incorrect data on single error detection during burst read</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>RAM error detection outside current MCAL support</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2500</p></td>
+<td><p>LIN</p></td>
+<td><p>LIN Module Fails to Wake Up with 0xF0 as Wake-Up Key</p></td>
+<td><p>YES</p></td>
+<td><p>1.0</p></td>
+<td><p>Use LIN header with ID 0x3C instead of raw 0xF0 byte. Lin_SetIdByte(lin_base_cntr_addr, LIN_WAKEUP_ID) — Uses 0x3C (ID 60) — Avoids deadlock caused by raw 0xF0 interpretation</p></td>
+</tr>
+<tr class="row-even"><td><p>i2502</p></td>
+<td><p>PBIST</p></td>
+<td><p>Incorrect mapping of PBIST Memory Groups</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>PBIST memory mapping outside current MCAL support</p></td>
+</tr>
+<tr class="row-odd"><td><p>i2503</p></td>
+<td><p>FLASH</p></td>
+<td><p>Boot from redundant flash location does not work</p></td>
+<td><p>NO</p></td>
+<td><p>1.0</p></td>
+<td><p>No workaround available. Use single flash location for boot</p></td>
+</tr>
+<tr class="row-even"><td><p>i2508</p></td>
+<td><p>SAFETY</p></td>
+<td><p>OSC Usage in Safety System</p></td>
+<td><p>NA</p></td>
+<td><p>1.0</p></td>
+<td><p>Safety system oscillator functionality outside current MCAL support</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="support-status-legend">
+<h2><span class="section-number">5.3. </span>Support Status Legend<a class="headerlink" href="#support-status-legend" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>YES</strong>: Errata is fully supported and implemented in MCAL</p></li>
+<li><p><strong>NO</strong>: Errata is not supported in MCAL; application or workaround required</p></li>
+<li><p><strong>PARTIAL</strong>: Errata support is available but not enabled by default; API available for application to enable</p></li>
+<li><p><strong>NA</strong>: Errata is not applicable to MCAL (module not supported, ROM/bootloader only, etc.)</p></li>
+</ul>
+<hr class="docutils" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Module_User_Guide_Wdg.html" class="btn btn-neutral float-left" title="4.23. WDG Module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api_guide.html" class="btn btn-neutral float-right" title="6. API guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; <a href="https://www.ti.com/corp/docs/legal/copyright.shtml">Copyright</a>  2026, Texas Instruments Incorporated.
+        <br>
+        <a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml">Privacy policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page">Terms of sale</a> <br>
+
+    </p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="Versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span class="fa fa-book"></span>
+       Current Version: 26.01.00
+      <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+      <dl id="version-list">
+        <dt>Versions</dt>
+        <!-- Dynamic content will be inserted here -->
+      </dl>
+    </div>
+  </div>
+  
+  <style>
+    #version-list dd {
+        display: block; 
+    }
+  </style>
+  
+  <script>
+    // Function to fetch the JSON file from GitHub and populate the version links
+    async function loadVersions() {
+      try {
+    const versionsUrl = 'https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263P/AM263Px_versions.json';
+        const response = await fetch(versionsUrl); // Replace with your raw URL
+        const versions = await response.json();
+        const versionList = document.getElementById('version-list');
+  
+        // Iterate over the versions and create list items
+        for (const [version, url] of Object.entries(versions)) {
+          const listItem = document.createElement('dd');
+          const link = document.createElement('a');
+          link.href = url;
+          link.textContent = version;
+          listItem.appendChild(link);
+          versionList.appendChild(listItem);
+        }
+      } catch (error) {
+        console.error('Error loading versions:', error);
+      }
+    }
+    loadVersions();
+  </script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

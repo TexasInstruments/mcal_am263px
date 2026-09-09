@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.3. CDD_CMPSS &mdash; Documentation for AM263Px</title>
+  <title>6.3. CDD_CMPSS &mdash; Documentation for AM263Px</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.4. CDD_FLC" href="group___c_d_d___f_l_c.html" />
-    <link rel="prev" title="5.2. CAN" href="group___c_a_n.html" /> 
+    <link rel="next" title="6.4. CDD_FLC" href="group___c_d_d___f_l_c.html" />
+    <link rel="prev" title="6.2. CAN" href="group___c_a_n.html" /> 
 </head>
 
 <body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
@@ -65,77 +65,78 @@
 <li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.3. CDD_CMPSS</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#structures">5.3.1. Structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defines">5.3.2. Defines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions">5.3.3. Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getversioninfo">5.3.3.1. function Cdd_Cmpss_GetVersionInfo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-enablemodule">5.3.3.2. function Cdd_Cmpss_EnableModule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-disablemodule">5.3.3.3. function Cdd_Cmpss_DisableModule</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-confighighcomparator">5.3.3.4. function Cdd_Cmpss_ConfigHighComparator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configlowcomparator">5.3.3.5. function Cdd_Cmpss_ConfigLowComparator</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configoutputshigh">5.3.3.6. function Cdd_Cmpss_ConfigOutputsHigh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configoutputslow">5.3.3.7. function Cdd_Cmpss_ConfigOutputsLow</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getstatus">5.3.3.8. function Cdd_Cmpss_GetStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configdac">5.3.3.9. function Cdd_Cmpss_ConfigDAC</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setdacvaluehigh">5.3.3.10. function Cdd_Cmpss_SetDACValueHigh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setdacvaluelow">5.3.3.11. function Cdd_Cmpss_SetDACValueLow</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-initfilterhigh">5.3.3.12. function Cdd_Cmpss_InitFilterHigh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-initfilterlow">5.3.3.13. function Cdd_Cmpss_InitFilterLow</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getdacvaluehigh">5.3.3.14. function Cdd_Cmpss_GetDACValueHigh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getdacvaluelow">5.3.3.15. function Cdd_Cmpss_GetDACValueLow</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-clearfilterlatchhigh">5.3.3.16. function Cdd_Cmpss_ClearFilterLatchHigh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-clearfilterlatchlow">5.3.3.17. function Cdd_Cmpss_ClearFilterLatchLow</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setmaxrampvalue">5.3.3.18. function Cdd_Cmpss_SetMaxRampValue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getmaxrampvalue">5.3.3.19. function Cdd_Cmpss_GetMaxRampValue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setrampdecvalue">5.3.3.20. function Cdd_Cmpss_SetRampDecValue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getrampdecvalue">5.3.3.21. function Cdd_Cmpss_GetRampDecValue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setrampdelayvalue">5.3.3.22. function Cdd_Cmpss_SetRampDelayValue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getrampdelayvalue">5.3.3.23. function Cdd_Cmpss_GetRampDelayValue</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configblanking">5.3.3.24. function Cdd_Cmpss_ConfigBlanking</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-enableblanking">5.3.3.25. function Cdd_Cmpss_EnableBlanking</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-disableblanking">5.3.3.26. function Cdd_Cmpss_DisableBlanking</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-enabledemode">5.3.3.27. function Cdd_Cmpss_EnableDEmode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-disabledemode">5.3.3.28. function Cdd_Cmpss_DisableDEmode</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-selectdeactivesource">5.3.3.29. function Cdd_Cmpss_SelectDEACTIVESource</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-confighighdacshadowvalue2">5.3.3.30. function Cdd_Cmpss_ConfigHighDACShadowValue2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configlowdacshadowvalue2">5.3.3.31. function Cdd_Cmpss_ConfigLowDACShadowValue2</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setcomparatorhighhysteresis">5.3.3.32. function Cdd_Cmpss_SetComparatorHighHysteresis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setcomparatorlowhysteresis">5.3.3.33. function Cdd_Cmpss_SetComparatorLowHysteresis</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configfilterhigh">5.3.3.34. function Cdd_Cmpss_ConfigFilterHigh</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configfilterlow">5.3.3.35. function Cdd_Cmpss_ConfigFilterLow</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configlatchonpwmsync">5.3.3.36. function Cdd_Cmpss_ConfigLatchOnPWMSYNC</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configramp">5.3.3.37. function Cdd_Cmpss_ConfigRamp</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-registerreadback">5.3.3.38. function Cdd_Cmpss_RegisterReadback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Module_Errata.html">5. Silicon Errata - MCAL Support and Workarounds</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">6. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">6.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">6.2. CAN</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.3. CDD_CMPSS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#structures">6.3.1. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">6.3.2. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">6.3.3. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getversioninfo">6.3.3.1. function Cdd_Cmpss_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-enablemodule">6.3.3.2. function Cdd_Cmpss_EnableModule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-disablemodule">6.3.3.3. function Cdd_Cmpss_DisableModule</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-confighighcomparator">6.3.3.4. function Cdd_Cmpss_ConfigHighComparator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configlowcomparator">6.3.3.5. function Cdd_Cmpss_ConfigLowComparator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configoutputshigh">6.3.3.6. function Cdd_Cmpss_ConfigOutputsHigh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configoutputslow">6.3.3.7. function Cdd_Cmpss_ConfigOutputsLow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getstatus">6.3.3.8. function Cdd_Cmpss_GetStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configdac">6.3.3.9. function Cdd_Cmpss_ConfigDAC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setdacvaluehigh">6.3.3.10. function Cdd_Cmpss_SetDACValueHigh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setdacvaluelow">6.3.3.11. function Cdd_Cmpss_SetDACValueLow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-initfilterhigh">6.3.3.12. function Cdd_Cmpss_InitFilterHigh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-initfilterlow">6.3.3.13. function Cdd_Cmpss_InitFilterLow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getdacvaluehigh">6.3.3.14. function Cdd_Cmpss_GetDACValueHigh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getdacvaluelow">6.3.3.15. function Cdd_Cmpss_GetDACValueLow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-clearfilterlatchhigh">6.3.3.16. function Cdd_Cmpss_ClearFilterLatchHigh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-clearfilterlatchlow">6.3.3.17. function Cdd_Cmpss_ClearFilterLatchLow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setmaxrampvalue">6.3.3.18. function Cdd_Cmpss_SetMaxRampValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getmaxrampvalue">6.3.3.19. function Cdd_Cmpss_GetMaxRampValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setrampdecvalue">6.3.3.20. function Cdd_Cmpss_SetRampDecValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getrampdecvalue">6.3.3.21. function Cdd_Cmpss_GetRampDecValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setrampdelayvalue">6.3.3.22. function Cdd_Cmpss_SetRampDelayValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-getrampdelayvalue">6.3.3.23. function Cdd_Cmpss_GetRampDelayValue</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configblanking">6.3.3.24. function Cdd_Cmpss_ConfigBlanking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-enableblanking">6.3.3.25. function Cdd_Cmpss_EnableBlanking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-disableblanking">6.3.3.26. function Cdd_Cmpss_DisableBlanking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-enabledemode">6.3.3.27. function Cdd_Cmpss_EnableDEmode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-disabledemode">6.3.3.28. function Cdd_Cmpss_DisableDEmode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-selectdeactivesource">6.3.3.29. function Cdd_Cmpss_SelectDEACTIVESource</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-confighighdacshadowvalue2">6.3.3.30. function Cdd_Cmpss_ConfigHighDACShadowValue2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configlowdacshadowvalue2">6.3.3.31. function Cdd_Cmpss_ConfigLowDACShadowValue2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setcomparatorhighhysteresis">6.3.3.32. function Cdd_Cmpss_SetComparatorHighHysteresis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-setcomparatorlowhysteresis">6.3.3.33. function Cdd_Cmpss_SetComparatorLowHysteresis</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configfilterhigh">6.3.3.34. function Cdd_Cmpss_ConfigFilterHigh</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configfilterlow">6.3.3.35. function Cdd_Cmpss_ConfigFilterLow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configlatchonpwmsync">6.3.3.36. function Cdd_Cmpss_ConfigLatchOnPWMSYNC</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-configramp">6.3.3.37. function Cdd_Cmpss_ConfigRamp</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-cmpss-registerreadback">6.3.3.38. function Cdd_Cmpss_RegisterReadback</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">5.4. CDD_FLC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">5.8. CDD_IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_l_c.html">6.4. CDD_FLC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">6.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">6.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">6.7. CDD_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">6.8. CDD_IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">6.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">6.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">6.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">6.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">6.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">6.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">6.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">6.16. MCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">6.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">6.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">6.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">6.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">6.21. WDG</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">7. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">8. AUTOSAR Integration Guide</a></li>
 </ul>
 
         </div>
@@ -152,8 +153,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
-      <li><span class="section-number">5.3. </span>CDD_CMPSS</li>
+          <li><a href="../api_guide.html"><span class="section-number">6. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">6.3. </span>CDD_CMPSS</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -163,9 +164,9 @@
            <div itemprop="articleBody">
              
   <section id="cdd-cmpss">
-<h1><span class="section-number">5.3. </span>CDD_CMPSS<a class="headerlink" href="#cdd-cmpss" title="Link to this heading"></a></h1>
+<h1><span class="section-number">6.3. </span>CDD_CMPSS<a class="headerlink" href="#cdd-cmpss" title="Link to this heading"></a></h1>
 <section id="structures">
-<h2><span class="section-number">5.3.1. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.3.1. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -183,7 +184,7 @@
 </table>
 </section>
 <section id="defines">
-<h2><span class="section-number">5.3.2. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.3.2. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -417,7 +418,7 @@
 </table>
 </section>
 <section id="functions">
-<h2><span class="section-number">5.3.3. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.3.3. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Return type</p></th>
@@ -581,7 +582,7 @@
 </tbody>
 </table>
 <section id="function-cdd-cmpss-getversioninfo">
-<h3><span class="section-number">5.3.3.1. </span>function Cdd_Cmpss_GetVersionInfo<a class="headerlink" href="#function-cdd-cmpss-getversioninfo" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.1. </span>function Cdd_Cmpss_GetVersionInfo<a class="headerlink" href="#function-cdd-cmpss-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_GetVersionInfo</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">VersionInfo</span>
 <span class="p">)</span>
@@ -595,7 +596,7 @@ Service that returns the version information of the module.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-enablemodule">
-<h3><span class="section-number">5.3.3.2. </span>function Cdd_Cmpss_EnableModule<a class="headerlink" href="#function-cdd-cmpss-enablemodule" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.2. </span>function Cdd_Cmpss_EnableModule<a class="headerlink" href="#function-cdd-cmpss-enablemodule" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_EnableModule</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -609,7 +610,7 @@ Enables the CMPSS module.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-disablemodule">
-<h3><span class="section-number">5.3.3.3. </span>function Cdd_Cmpss_DisableModule<a class="headerlink" href="#function-cdd-cmpss-disablemodule" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.3. </span>function Cdd_Cmpss_DisableModule<a class="headerlink" href="#function-cdd-cmpss-disablemodule" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_DisableModule</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -623,7 +624,7 @@ Disables the CMPSS module.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-confighighcomparator">
-<h3><span class="section-number">5.3.3.4. </span>function Cdd_Cmpss_ConfigHighComparator<a class="headerlink" href="#function-cdd-cmpss-confighighcomparator" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.4. </span>function Cdd_Cmpss_ConfigHighComparator<a class="headerlink" href="#function-cdd-cmpss-confighighcomparator" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigHighComparator</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Config</span>
@@ -647,7 +648,7 @@ Sets the configuration for the high comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configlowcomparator">
-<h3><span class="section-number">5.3.3.5. </span>function Cdd_Cmpss_ConfigLowComparator<a class="headerlink" href="#function-cdd-cmpss-configlowcomparator" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.5. </span>function Cdd_Cmpss_ConfigLowComparator<a class="headerlink" href="#function-cdd-cmpss-configlowcomparator" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigLowComparator</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Config</span>
@@ -671,7 +672,7 @@ Sets the configuration for the low comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configoutputshigh">
-<h3><span class="section-number">5.3.3.6. </span>function Cdd_Cmpss_ConfigOutputsHigh<a class="headerlink" href="#function-cdd-cmpss-configoutputshigh" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.6. </span>function Cdd_Cmpss_ConfigOutputsHigh<a class="headerlink" href="#function-cdd-cmpss-configoutputshigh" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigOutputsHigh</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Config</span>
@@ -702,7 +703,7 @@ Sets the output signal configuration for the high comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configoutputslow">
-<h3><span class="section-number">5.3.3.7. </span>function Cdd_Cmpss_ConfigOutputsLow<a class="headerlink" href="#function-cdd-cmpss-configoutputslow" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.7. </span>function Cdd_Cmpss_ConfigOutputsLow<a class="headerlink" href="#function-cdd-cmpss-configoutputslow" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigOutputsLow</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Config</span>
@@ -733,7 +734,7 @@ Sets the output signal configuration for the low comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-getstatus">
-<h3><span class="section-number">5.3.3.8. </span>function Cdd_Cmpss_GetStatus<a class="headerlink" href="#function-cdd-cmpss-getstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.8. </span>function Cdd_Cmpss_GetStatus<a class="headerlink" href="#function-cdd-cmpss-getstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Cmpss_GetStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -755,7 +756,7 @@ Gets the current comparator status.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configdac">
-<h3><span class="section-number">5.3.3.9. </span>function Cdd_Cmpss_ConfigDAC<a class="headerlink" href="#function-cdd-cmpss-configdac" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.9. </span>function Cdd_Cmpss_ConfigDAC<a class="headerlink" href="#function-cdd-cmpss-configdac" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigDAC</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Config</span>
@@ -788,7 +789,7 @@ Sets the configuration for the internal comparator DACs.</p>
 <p><strong>Note</strong>: The <strong>CDD_CMPSS_DACVAL_xxx</strong> and <strong>CDD_CMPSS_DACREF_xxx</strong> terms apply to both the high and low comparators. <strong>CDD_CMPSS_DACSRC_xxx</strong> will only affect the high comparator’s internal DAC.</p>
 </section>
 <section id="function-cdd-cmpss-setdacvaluehigh">
-<h3><span class="section-number">5.3.3.10. </span>function Cdd_Cmpss_SetDACValueHigh<a class="headerlink" href="#function-cdd-cmpss-setdacvaluehigh" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.10. </span>function Cdd_Cmpss_SetDACValueHigh<a class="headerlink" href="#function-cdd-cmpss-setdacvaluehigh" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SetDACValueHigh</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Value</span>
@@ -805,7 +806,7 @@ Sets the value of the internal DAC of the high comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-setdacvaluelow">
-<h3><span class="section-number">5.3.3.11. </span>function Cdd_Cmpss_SetDACValueLow<a class="headerlink" href="#function-cdd-cmpss-setdacvaluelow" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.11. </span>function Cdd_Cmpss_SetDACValueLow<a class="headerlink" href="#function-cdd-cmpss-setdacvaluelow" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SetDACValueLow</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Value</span>
@@ -822,7 +823,7 @@ Sets the value of the internal DAC of the low comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-initfilterhigh">
-<h3><span class="section-number">5.3.3.12. </span>function Cdd_Cmpss_InitFilterHigh<a class="headerlink" href="#function-cdd-cmpss-initfilterhigh" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.12. </span>function Cdd_Cmpss_InitFilterHigh<a class="headerlink" href="#function-cdd-cmpss-initfilterhigh" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_InitFilterHigh</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -838,7 +839,7 @@ Initializes the digital filter of the high comparator.</p>
 <p><strong>Note</strong>: See <a class="reference internal" href="#function-cdd-cmpss-configfilterhigh"><span class="std std-ref">Cdd_Cmpss_ConfigFilterHigh()</span></a> for the proper initialization sequence to avoid glitches.</p>
 </section>
 <section id="function-cdd-cmpss-initfilterlow">
-<h3><span class="section-number">5.3.3.13. </span>function Cdd_Cmpss_InitFilterLow<a class="headerlink" href="#function-cdd-cmpss-initfilterlow" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.13. </span>function Cdd_Cmpss_InitFilterLow<a class="headerlink" href="#function-cdd-cmpss-initfilterlow" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_InitFilterLow</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -854,7 +855,7 @@ Initializes the digital filter of the low comparator.</p>
 <p><strong>Note</strong>: See Cdd_Cmpss_ConfigFilterLow() for the proper initialization sequence to avoid glitches.</p>
 </section>
 <section id="function-cdd-cmpss-getdacvaluehigh">
-<h3><span class="section-number">5.3.3.14. </span>function Cdd_Cmpss_GetDACValueHigh<a class="headerlink" href="#function-cdd-cmpss-getdacvaluehigh" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.14. </span>function Cdd_Cmpss_GetDACValueHigh<a class="headerlink" href="#function-cdd-cmpss-getdacvaluehigh" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Cmpss_GetDACValueHigh</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -870,7 +871,7 @@ Gets the value of the internal DAC of the high comparator.</p>
 <p><strong>Return</strong>: Returns the value driven by the internal DAC of the high comparator.</p>
 </section>
 <section id="function-cdd-cmpss-getdacvaluelow">
-<h3><span class="section-number">5.3.3.15. </span>function Cdd_Cmpss_GetDACValueLow<a class="headerlink" href="#function-cdd-cmpss-getdacvaluelow" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.15. </span>function Cdd_Cmpss_GetDACValueLow<a class="headerlink" href="#function-cdd-cmpss-getdacvaluelow" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Cmpss_GetDACValueLow</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -886,7 +887,7 @@ Gets the value of the internal DAC of the low comparator.</p>
 <p><strong>Return</strong>: Returns the value driven by the internal DAC of the low comparator.</p>
 </section>
 <section id="function-cdd-cmpss-clearfilterlatchhigh">
-<h3><span class="section-number">5.3.3.16. </span>function Cdd_Cmpss_ClearFilterLatchHigh<a class="headerlink" href="#function-cdd-cmpss-clearfilterlatchhigh" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.16. </span>function Cdd_Cmpss_ClearFilterLatchHigh<a class="headerlink" href="#function-cdd-cmpss-clearfilterlatchhigh" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ClearFilterLatchHigh</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -901,7 +902,7 @@ Causes a software reset of the high comparator digital filter output latch.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-clearfilterlatchlow">
-<h3><span class="section-number">5.3.3.17. </span>function Cdd_Cmpss_ClearFilterLatchLow<a class="headerlink" href="#function-cdd-cmpss-clearfilterlatchlow" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.17. </span>function Cdd_Cmpss_ClearFilterLatchLow<a class="headerlink" href="#function-cdd-cmpss-clearfilterlatchlow" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ClearFilterLatchLow</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -916,7 +917,7 @@ Causes a software reset of the low comparator digital filter output latch.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-setmaxrampvalue">
-<h3><span class="section-number">5.3.3.18. </span>function Cdd_Cmpss_SetMaxRampValue<a class="headerlink" href="#function-cdd-cmpss-setmaxrampvalue" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.18. </span>function Cdd_Cmpss_SetMaxRampValue<a class="headerlink" href="#function-cdd-cmpss-setmaxrampvalue" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SetMaxRampValue</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Value</span>
@@ -933,7 +934,7 @@ Sets the ramp generator maximum reference value.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-getmaxrampvalue">
-<h3><span class="section-number">5.3.3.19. </span>function Cdd_Cmpss_GetMaxRampValue<a class="headerlink" href="#function-cdd-cmpss-getmaxrampvalue" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.19. </span>function Cdd_Cmpss_GetMaxRampValue<a class="headerlink" href="#function-cdd-cmpss-getmaxrampvalue" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Cmpss_GetMaxRampValue</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -948,7 +949,7 @@ Gets the ramp generator maximum reference value.</p>
 <p><strong>Return</strong>: Returns the latched ramp maximum reference value that will be loaded into the ramp generator.</p>
 </section>
 <section id="function-cdd-cmpss-setrampdecvalue">
-<h3><span class="section-number">5.3.3.20. </span>function Cdd_Cmpss_SetRampDecValue<a class="headerlink" href="#function-cdd-cmpss-setrampdecvalue" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.20. </span>function Cdd_Cmpss_SetRampDecValue<a class="headerlink" href="#function-cdd-cmpss-setrampdecvalue" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SetRampDecValue</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Value</span>
@@ -965,7 +966,7 @@ Sets the ramp generator decrement value.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-getrampdecvalue">
-<h3><span class="section-number">5.3.3.21. </span>function Cdd_Cmpss_GetRampDecValue<a class="headerlink" href="#function-cdd-cmpss-getrampdecvalue" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.21. </span>function Cdd_Cmpss_GetRampDecValue<a class="headerlink" href="#function-cdd-cmpss-getrampdecvalue" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Cmpss_GetRampDecValue</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -980,7 +981,7 @@ Gets the ramp generator decrement value.</p>
 <p><strong>Return</strong>: Returns the latched ramp decrement value that is subtracted from the ramp value on every system clock cycle.</p>
 </section>
 <section id="function-cdd-cmpss-setrampdelayvalue">
-<h3><span class="section-number">5.3.3.22. </span>function Cdd_Cmpss_SetRampDelayValue<a class="headerlink" href="#function-cdd-cmpss-setrampdelayvalue" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.22. </span>function Cdd_Cmpss_SetRampDelayValue<a class="headerlink" href="#function-cdd-cmpss-setrampdelayvalue" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SetRampDelayValue</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Value</span>
@@ -997,7 +998,7 @@ Sets the ramp generator delay value.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-getrampdelayvalue">
-<h3><span class="section-number">5.3.3.23. </span>function Cdd_Cmpss_GetRampDelayValue<a class="headerlink" href="#function-cdd-cmpss-getrampdelayvalue" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.23. </span>function Cdd_Cmpss_GetRampDelayValue<a class="headerlink" href="#function-cdd-cmpss-getrampdelayvalue" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">uint16</span><span class="w"> </span><span class="n">Cdd_Cmpss_GetRampDelayValue</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -1012,7 +1013,7 @@ Gets the ramp generator delay value.</p>
 <p><strong>Return</strong>: Returns the latched ramp delay value that is subtracted from the ramp value on every system clock cycle.</p>
 </section>
 <section id="function-cdd-cmpss-configblanking">
-<h3><span class="section-number">5.3.3.24. </span>function Cdd_Cmpss_ConfigBlanking<a class="headerlink" href="#function-cdd-cmpss-configblanking" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.24. </span>function Cdd_Cmpss_ConfigBlanking<a class="headerlink" href="#function-cdd-cmpss-configblanking" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigBlanking</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">PwmBlankSrc</span>
@@ -1030,7 +1031,7 @@ Sets the ePWM module blanking signal that holds trip in reset.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-enableblanking">
-<h3><span class="section-number">5.3.3.25. </span>function Cdd_Cmpss_EnableBlanking<a class="headerlink" href="#function-cdd-cmpss-enableblanking" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.25. </span>function Cdd_Cmpss_EnableBlanking<a class="headerlink" href="#function-cdd-cmpss-enableblanking" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_EnableBlanking</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -1045,7 +1046,7 @@ Enables an ePWM blanking signal to hold trip in reset.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-disableblanking">
-<h3><span class="section-number">5.3.3.26. </span>function Cdd_Cmpss_DisableBlanking<a class="headerlink" href="#function-cdd-cmpss-disableblanking" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.26. </span>function Cdd_Cmpss_DisableBlanking<a class="headerlink" href="#function-cdd-cmpss-disableblanking" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_DisableBlanking</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -1060,7 +1061,7 @@ Disables an ePWM blanking signal from holding trip in reset.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-enabledemode">
-<h3><span class="section-number">5.3.3.27. </span>function Cdd_Cmpss_EnableDEmode<a class="headerlink" href="#function-cdd-cmpss-enabledemode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.27. </span>function Cdd_Cmpss_EnableDEmode<a class="headerlink" href="#function-cdd-cmpss-enabledemode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_EnableDEmode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -1075,7 +1076,7 @@ Enables the CDD_CMPSS diode emulation mode.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-disabledemode">
-<h3><span class="section-number">5.3.3.28. </span>function Cdd_Cmpss_DisableDEmode<a class="headerlink" href="#function-cdd-cmpss-disabledemode" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.28. </span>function Cdd_Cmpss_DisableDEmode<a class="headerlink" href="#function-cdd-cmpss-disabledemode" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_DisableDEmode</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -1090,7 +1091,7 @@ Disables the CDD_CMPSS diode emulation mode.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-selectdeactivesource">
-<h3><span class="section-number">5.3.3.29. </span>function Cdd_Cmpss_SelectDEACTIVESource<a class="headerlink" href="#function-cdd-cmpss-selectdeactivesource" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.29. </span>function Cdd_Cmpss_SelectDEACTIVESource<a class="headerlink" href="#function-cdd-cmpss-selectdeactivesource" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SelectDEACTIVESource</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint8</span><span class="w"> </span><span class="n">DeactiveSel</span>
@@ -1107,7 +1108,7 @@ Select the CDD_CMPSS diode emulation mode DEACTIVE source.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-confighighdacshadowvalue2">
-<h3><span class="section-number">5.3.3.30. </span>function Cdd_Cmpss_ConfigHighDACShadowValue2<a class="headerlink" href="#function-cdd-cmpss-confighighdacshadowvalue2" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.30. </span>function Cdd_Cmpss_ConfigHighDACShadowValue2<a class="headerlink" href="#function-cdd-cmpss-confighighdacshadowvalue2" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigHighDACShadowValue2</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DacValue</span>
@@ -1124,7 +1125,7 @@ Sets the shadow value 2 (used in DE mode) of the internal DAC of the high compar
 </ul>
 </section>
 <section id="function-cdd-cmpss-configlowdacshadowvalue2">
-<h3><span class="section-number">5.3.3.31. </span>function Cdd_Cmpss_ConfigLowDACShadowValue2<a class="headerlink" href="#function-cdd-cmpss-configlowdacshadowvalue2" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.31. </span>function Cdd_Cmpss_ConfigLowDACShadowValue2<a class="headerlink" href="#function-cdd-cmpss-configlowdacshadowvalue2" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigLowDACShadowValue2</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">DacValue</span>
@@ -1141,7 +1142,7 @@ Sets the shadow value 2 (used in DE mode) of the internal DAC of the low compara
 </ul>
 </section>
 <section id="function-cdd-cmpss-setcomparatorhighhysteresis">
-<h3><span class="section-number">5.3.3.32. </span>function Cdd_Cmpss_SetComparatorHighHysteresis<a class="headerlink" href="#function-cdd-cmpss-setcomparatorhighhysteresis" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.32. </span>function Cdd_Cmpss_SetComparatorHighHysteresis<a class="headerlink" href="#function-cdd-cmpss-setcomparatorhighhysteresis" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SetComparatorHighHysteresis</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Value</span>
@@ -1158,7 +1159,7 @@ Sets the hysteresis value of the high comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-setcomparatorlowhysteresis">
-<h3><span class="section-number">5.3.3.33. </span>function Cdd_Cmpss_SetComparatorLowHysteresis<a class="headerlink" href="#function-cdd-cmpss-setcomparatorlowhysteresis" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.33. </span>function Cdd_Cmpss_SetComparatorLowHysteresis<a class="headerlink" href="#function-cdd-cmpss-setcomparatorlowhysteresis" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_SetComparatorLowHysteresis</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">Value</span>
@@ -1175,7 +1176,7 @@ Sets the hysteresis value of the low comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configfilterhigh">
-<h3><span class="section-number">5.3.3.34. </span>function Cdd_Cmpss_ConfigFilterHigh<a class="headerlink" href="#function-cdd-cmpss-configfilterhigh" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.34. </span>function Cdd_Cmpss_ConfigFilterHigh<a class="headerlink" href="#function-cdd-cmpss-configfilterhigh" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigFilterHigh</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">SamplePrescale</span><span class="p">,</span>
@@ -1207,7 +1208,7 @@ Configures the digital filter of the high comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configfilterlow">
-<h3><span class="section-number">5.3.3.35. </span>function Cdd_Cmpss_ConfigFilterLow<a class="headerlink" href="#function-cdd-cmpss-configfilterlow" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.35. </span>function Cdd_Cmpss_ConfigFilterLow<a class="headerlink" href="#function-cdd-cmpss-configfilterlow" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigFilterLow</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">uint16</span><span class="w"> </span><span class="n">SamplePrescale</span><span class="p">,</span>
@@ -1239,7 +1240,7 @@ Configures the digital filter of the low comparator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configlatchonpwmsync">
-<h3><span class="section-number">5.3.3.36. </span>function Cdd_Cmpss_ConfigLatchOnPWMSYNC<a class="headerlink" href="#function-cdd-cmpss-configlatchonpwmsync" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.36. </span>function Cdd_Cmpss_ConfigLatchOnPWMSYNC<a class="headerlink" href="#function-cdd-cmpss-configlatchonpwmsync" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigLatchOnPWMSYNC</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">boolean</span><span class="w"> </span><span class="n">HighEnable</span><span class="p">,</span>
@@ -1258,7 +1259,7 @@ Configures whether or not the digital filter latches are reset by PWMSYNC.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-configramp">
-<h3><span class="section-number">5.3.3.37. </span>function Cdd_Cmpss_ConfigRamp<a class="headerlink" href="#function-cdd-cmpss-configramp" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.37. </span>function Cdd_Cmpss_ConfigRamp<a class="headerlink" href="#function-cdd-cmpss-configramp" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Cmpss_ConfigRamp</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">Cdd_Cmpss_RampConfigType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RampConfigPtr</span>
@@ -1278,7 +1279,7 @@ Configures the comparator subsystem’s ramp generator.</p>
 </ul>
 </section>
 <section id="function-cdd-cmpss-registerreadback">
-<h3><span class="section-number">5.3.3.38. </span>function Cdd_Cmpss_RegisterReadback<a class="headerlink" href="#function-cdd-cmpss-registerreadback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.3.3.38. </span>function Cdd_Cmpss_RegisterReadback<a class="headerlink" href="#function-cdd-cmpss-registerreadback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Cmpss_RegisterReadback</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Cmpss_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
@@ -1301,8 +1302,8 @@ Reads back key hardware registers for functional safety verification.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="group___c_a_n.html" class="btn btn-neutral float-left" title="5.2. CAN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="group___c_d_d___f_l_c.html" class="btn btn-neutral float-right" title="5.4. CDD_FLC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="group___c_a_n.html" class="btn btn-neutral float-left" title="6.2. CAN" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___c_d_d___f_l_c.html" class="btn btn-neutral float-right" title="6.4. CDD_FLC" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

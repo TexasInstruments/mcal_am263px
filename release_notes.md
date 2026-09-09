@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 09-Sep-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 10-Sep-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -319,6 +319,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Corresponding bswmd files are now updated</td>
+    </tr>
+    <tr>
+      <td>MCAL-41779</td>
+      <td>Incorrect SchM exclusive-area handling in Tx, Rx processing</td>
+      <td>Eth</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Replaced single large SchM_Enter/Exit locks with multiple granular critical sections in RX and TX packet processing functions</td>
     </tr>
     <tr>
       <td>MCAL-38221</td>

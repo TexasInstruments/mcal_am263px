@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>5.4. CDD_FLC &mdash; Documentation for AM263Px</title>
+  <title>6.4. CDD_FLC &mdash; Documentation for AM263Px</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
@@ -24,8 +24,8 @@
     <script src="https://www.ti.com/assets/js/headerfooter/analytics.js" type="text/javascript" charset="utf-8"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="5.5. CDD_FSIRX" href="group___c_d_d___f_s_i_r_x.html" />
-    <link rel="prev" title="5.3. CDD_CMPSS" href="group___c_d_d___c_m_p_s_s.html" /> 
+    <link rel="next" title="6.5. CDD_FSIRX" href="group___c_d_d___f_s_i_r_x.html" />
+    <link rel="prev" title="6.3. CDD_CMPSS" href="group___c_d_d___c_m_p_s_s.html" /> 
 </head>
 
 <body class="wy-body-for-nav"><!---- extra body elements for TI beyond RTD Sphinx Theme --->
@@ -65,47 +65,48 @@
 <li class="toctree-l1"><a class="reference internal" href="../MCAL_Configuration_and_EB_Tresos.html">2. MCAL Configurator And EB Tresos User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Getting_started.html">3. Getting Started With AM263Px MCAL</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../ModuleUserGuide_list.html">4. Module User Guide</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">5. API guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">5.1. ADC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">5.2. CAN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">5.3. CDD_CMPSS</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">5.4. CDD_FLC</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#structures">5.4.1. Structures</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defines">5.4.2. Defines</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#functions">5.4.3. Functions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-getversioninfo">5.4.3.1. function Cdd_Flc_GetVersionInfo</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-configureregion">5.4.3.2. function Cdd_Flc_ConfigureRegion</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-enableregion">5.4.3.3. function Cdd_Flc_EnableRegion</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-isregioncopydone">5.4.3.4. function Cdd_Flc_IsRegionCopyDone</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-disableregion">5.4.3.5. function Cdd_Flc_DisableRegion</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-getstatus">5.4.3.6. function Cdd_Flc_GetStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-clearallstatus">5.4.3.7. function Cdd_Flc_ClearAllStatus</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-registerreadback">5.4.3.8. function Cdd_Flc_RegisterReadback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Module_Errata.html">5. Silicon Errata - MCAL Support and Workarounds</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api_guide.html">6. API guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="group___a_d_c.html">6.1. ADC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_a_n.html">6.2. CAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___c_m_p_s_s.html">6.3. CDD_CMPSS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">6.4. CDD_FLC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#structures">6.4.1. Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defines">6.4.2. Defines</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">6.4.3. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-getversioninfo">6.4.3.1. function Cdd_Flc_GetVersionInfo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-configureregion">6.4.3.2. function Cdd_Flc_ConfigureRegion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-enableregion">6.4.3.3. function Cdd_Flc_EnableRegion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-isregioncopydone">6.4.3.4. function Cdd_Flc_IsRegionCopyDone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-disableregion">6.4.3.5. function Cdd_Flc_DisableRegion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-getstatus">6.4.3.6. function Cdd_Flc_GetStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-clearallstatus">6.4.3.7. function Cdd_Flc_ClearAllStatus</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#function-cdd-flc-registerreadback">6.4.3.8. function Cdd_Flc_RegisterReadback</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">5.5. CDD_FSIRX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">5.6. CDD_FSITX</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">5.7. CDD_I2C</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">5.8. CDD_IPC</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">5.9. CDD_PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">5.10. DIO</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">5.11. DMA</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">5.12. FLS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">5.13. GPT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">5.14. ICU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">5.15. LIN</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">5.16. MCU</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">5.17. PORT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">5.18. PWM</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">5.19. SPI</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">5.20. UART</a></li>
-<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">5.21. WDG</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_r_x.html">6.5. CDD_FSIRX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___f_s_i_t_x.html">6.6. CDD_FSITX</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i2_c.html">6.7. CDD_I2C</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___i_p_c.html">6.8. CDD_IPC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___c_d_d___p_w_m.html">6.9. CDD_PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_i_o.html">6.10. DIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___d_m_a.html">6.11. DMA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___f_l_s.html">6.12. FLS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___g_p_t.html">6.13. GPT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___i_c_u.html">6.14. ICU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___l_i_n.html">6.15. LIN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___m_c_u.html">6.16. MCU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_o_r_t.html">6.17. PORT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___p_w_m.html">6.18. PWM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___s_p_i.html">6.19. SPI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___u_a_r_t.html">6.20. UART</a></li>
+<li class="toctree-l2"><a class="reference internal" href="group___w_d_g.html">6.21. WDG</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">6. Key Performance and Memory Consumption Data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Integration.html">7. AUTOSAR Integration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Key_Performance_and_Memory_Consumption_Data.html">7. Key Performance and Memory Consumption Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Integration.html">8. AUTOSAR Integration Guide</a></li>
 </ul>
 
         </div>
@@ -122,8 +123,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../api_guide.html"><span class="section-number">5. </span>API guide</a> &raquo;</li>
-      <li><span class="section-number">5.4. </span>CDD_FLC</li>
+          <li><a href="../api_guide.html"><span class="section-number">6. </span>API guide</a> &raquo;</li>
+      <li><span class="section-number">6.4. </span>CDD_FLC</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -133,9 +134,9 @@
            <div itemprop="articleBody">
              
   <section id="cdd-flc">
-<h1><span class="section-number">5.4. </span>CDD_FLC<a class="headerlink" href="#cdd-flc" title="Link to this heading"></a></h1>
+<h1><span class="section-number">6.4. </span>CDD_FLC<a class="headerlink" href="#cdd-flc" title="Link to this heading"></a></h1>
 <section id="structures">
-<h2><span class="section-number">5.4.1. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.4.1. </span>Structures<a class="headerlink" href="#structures" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -156,7 +157,7 @@
 </table>
 </section>
 <section id="defines">
-<h2><span class="section-number">5.4.2. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.4.2. </span>Defines<a class="headerlink" href="#defines" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Name</p></th>
@@ -237,7 +238,7 @@
 </table>
 </section>
 <section id="functions">
-<h2><span class="section-number">5.4.3. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<h2><span class="section-number">6.4.3. </span>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Return type</p></th>
@@ -281,7 +282,7 @@
 </tbody>
 </table>
 <section id="function-cdd-flc-getversioninfo">
-<h3><span class="section-number">5.4.3.1. </span>function Cdd_Flc_GetVersionInfo<a class="headerlink" href="#function-cdd-flc-getversioninfo" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.1. </span>function Cdd_Flc_GetVersionInfo<a class="headerlink" href="#function-cdd-flc-getversioninfo" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Flc_GetVersionInfo</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Std_VersionInfoType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">VersionInfo</span>
 <span class="p">)</span>
@@ -295,7 +296,7 @@ Service that returns the version information of the module.</p>
 </ul>
 </section>
 <section id="function-cdd-flc-configureregion">
-<h3><span class="section-number">5.4.3.2. </span>function Cdd_Flc_ConfigureRegion<a class="headerlink" href="#function-cdd-flc-configureregion" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.2. </span>function Cdd_Flc_ConfigureRegion<a class="headerlink" href="#function-cdd-flc-configureregion" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Flc_ConfigureRegion</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Flc_RegionId</span><span class="w"> </span><span class="n">RegionId</span><span class="p">,</span>
@@ -315,7 +316,7 @@ Service to configure a FLC region.</p>
 <p><strong>Note</strong>: If the requested region is already in enabled state, the API returns E_NOT_OK. It is expected that the caller first calls Cdd_Flc_DisableRegion() API before calling this API in this scenario.</p>
 </section>
 <section id="function-cdd-flc-enableregion">
-<h3><span class="section-number">5.4.3.3. </span>function Cdd_Flc_EnableRegion<a class="headerlink" href="#function-cdd-flc-enableregion" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.3. </span>function Cdd_Flc_EnableRegion<a class="headerlink" href="#function-cdd-flc-enableregion" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Flc_EnableRegion</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Flc_RegionId</span><span class="w"> </span><span class="n">RegionId</span><span class="p">,</span>
@@ -333,7 +334,7 @@ Service to enable and start the FLC copy from source to destination.</p>
 </ul>
 </section>
 <section id="function-cdd-flc-isregioncopydone">
-<h3><span class="section-number">5.4.3.4. </span>function Cdd_Flc_IsRegionCopyDone<a class="headerlink" href="#function-cdd-flc-isregioncopydone" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.4. </span>function Cdd_Flc_IsRegionCopyDone<a class="headerlink" href="#function-cdd-flc-isregioncopydone" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">boolean</span><span class="w"> </span><span class="n">Cdd_Flc_IsRegionCopyDone</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Flc_RegionId</span><span class="w"> </span><span class="n">RegionId</span>
@@ -350,7 +351,7 @@ Service to check if the initiated FLC copy is completed.</p>
 <p><strong>Return</strong>: TRUE if copy is completed. FALSE otherwise.</p>
 </section>
 <section id="function-cdd-flc-disableregion">
-<h3><span class="section-number">5.4.3.5. </span>function Cdd_Flc_DisableRegion<a class="headerlink" href="#function-cdd-flc-disableregion" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.5. </span>function Cdd_Flc_DisableRegion<a class="headerlink" href="#function-cdd-flc-disableregion" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Flc_DisableRegion</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Flc_RegionId</span><span class="w"> </span><span class="n">RegionId</span>
@@ -366,7 +367,7 @@ Service to disable the FLC region.</p>
 </ul>
 </section>
 <section id="function-cdd-flc-getstatus">
-<h3><span class="section-number">5.4.3.6. </span>function Cdd_Flc_GetStatus<a class="headerlink" href="#function-cdd-flc-getstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.6. </span>function Cdd_Flc_GetStatus<a class="headerlink" href="#function-cdd-flc-getstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Flc_GetStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Flc_StatusType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">StatusPtr</span>
@@ -382,7 +383,7 @@ Service to get the status of the FLC.</p>
 </ul>
 </section>
 <section id="function-cdd-flc-clearallstatus">
-<h3><span class="section-number">5.4.3.7. </span>function Cdd_Flc_ClearAllStatus<a class="headerlink" href="#function-cdd-flc-clearallstatus" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.7. </span>function Cdd_Flc_ClearAllStatus<a class="headerlink" href="#function-cdd-flc-clearallstatus" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="n">Cdd_Flc_ClearAllStatus</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span>
 <span class="p">)</span>
@@ -396,7 +397,7 @@ Service to clear all status of the FLC.</p>
 </ul>
 </section>
 <section id="function-cdd-flc-registerreadback">
-<h3><span class="section-number">5.4.3.8. </span>function Cdd_Flc_RegisterReadback<a class="headerlink" href="#function-cdd-flc-registerreadback" title="Link to this heading"></a></h3>
+<h3><span class="section-number">6.4.3.8. </span>function Cdd_Flc_RegisterReadback<a class="headerlink" href="#function-cdd-flc-registerreadback" title="Link to this heading"></a></h3>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">Std_ReturnType</span><span class="w"> </span><span class="n">Cdd_Flc_RegisterReadback</span><span class="p">(</span>
 <span class="w">    </span><span class="n">Cdd_Flc_HwUnitType</span><span class="w"> </span><span class="n">HwUnitId</span><span class="p">,</span>
 <span class="w">    </span><span class="n">Cdd_Flc_RegisterReadbackType</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">RegRbPtr</span>
@@ -419,8 +420,8 @@ Reads back key hardware registers for functional safety verification.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="group___c_d_d___c_m_p_s_s.html" class="btn btn-neutral float-left" title="5.3. CDD_CMPSS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="group___c_d_d___f_s_i_r_x.html" class="btn btn-neutral float-right" title="5.5. CDD_FSIRX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="group___c_d_d___c_m_p_s_s.html" class="btn btn-neutral float-left" title="6.3. CDD_CMPSS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="group___c_d_d___f_s_i_r_x.html" class="btn btn-neutral float-right" title="6.5. CDD_FSIRX" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
