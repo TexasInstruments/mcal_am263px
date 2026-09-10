@@ -17,7 +17,7 @@ ifeq ($(PLATFORM), $(filter $(PLATFORM), am263px am261))
    include $(mcal_PATH)/Dma/srcs.mk
 endif
 include $(mcal_PATH)/examples_config/Mcu_Demo_Cfg/srcs.mk
-include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs.mk
+include $(mcal_PATH)/examples_config/Port_Demo_Cfg/srcs_fls.mk
 include $(mcal_PATH)/examples_config/Wdg_Demo_Cfg/srcs.mk
 include soc/srcs.mk
 

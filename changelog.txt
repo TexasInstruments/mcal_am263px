@@ -1,3 +1,53 @@
+commit 105f7503aae59ac4dc8833e7c57142be7615d1a8
+Author: Gouri Siva M <g-t1@ti.com>
+Date:   Thu Sep 10 13:56:03 2026 +0530
+
+    am263px: MCAL: RGMII2 Enablement for ut_config6
+    
+     - MSS_CONTROL register configured for RGMII2
+    
+    Fixes: MCAL-41860
+    
+    Signed-off-by: Gouri Siva M <g-m1@ti.com>
+
+ mcal_test/ut_config/Eth/soc/am263px/r5f0_0/config_6/Mcu_PBcfg.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 20670b40aa804c65584d769c800092b5fe5d262c
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Sep 10 12:57:58 2026 +0530
+
+    all: all: Updated test reports
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_docs/csp/am261x/mcal_test_report.html  | 4165 +++++++++++++++-------
+ mcal_docs/csp/am263px/mcal_test_report.html | 4569 +++++++++++++++++-------
+ mcal_docs/csp/am263x/mcal_test_report.html  | 5132 +++++++++++++++++++--------
+ 3 files changed, 9705 insertions(+), 4161 deletions(-)
+
+commit dd57101e49fff4bf75e4b8eb67e13e5799b22d6f
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Sep 10 10:58:59 2026 +0530
+
+    am263px/1x: Wdg: Wdg app fixes
+    
+    -App was previously using wrong Port_PBCfg file which caused issue with Fls_init
+    
+    -Since our SBL puts flash in 8D8D8D modes, and warm reset requires flash to be in 3-byte addressing mode, flash soft reset is required to put the flash in 3-byte addressing mode using 1s-1s-8s mode
+    
+    Fixes: MCAL-41859
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/examples/Wdg/wdg_app/Makefile                           |  2 +-
+ mcal/examples/Wdg/wdg_app/WdgApp.c                           | 12 ++++++++++++
+ .../soc/am261/r5f0_0/ti-arm-clang/wdg_app.projectspec        |  2 +-
+ .../r5f0_0/ti-arm-clang/am263px_cc/wdg_app.projectspec       |  2 +-
+ 4 files changed, 15 insertions(+), 3 deletions(-)
+
 commit 29b94edf9e9254ba2e790b5b25e14c0af6d8874f
 Author: Kalyan, Vagvala <a0489746@ti.com>
 Date:   Wed Sep 9 13:19:22 2026 +0530

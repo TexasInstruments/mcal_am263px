@@ -69,6 +69,9 @@
 #include "WdgIf_Types.h"
 #include "sys_pmu.h"
 #include "app_utils.h"
+#if defined AM263PX_PLATFORM || defined AM261X_PLATFORM
+#include "Fls_Ospi.h"
+#endif
 /* ========================================================================== */
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
@@ -618,12 +621,21 @@ void Fee_JobEndNotification(void)
 void Fee_JobErrorNotification(void)
 {
 }
+/* Prepares the OSPI/flash for WDG warm reset support on AM261x/AM263Px (SBL boot only).
+ * Not required for CCS direct-load runs where flash is not in 8D-8D-8D mode.
+ * - Fls_set111mode: soft-resets IS25LX256 (RSTEN+RST in 8D format) since SBL leaves flash in
+ *   8D-8D-8D; without this Fls_Init fails with FLS_E_UNEXPECTED_FLASH_ID.
+ * - Fls_Init: sets OSPI RESET_CFG=TRUE so that OSPI_RST is driven during the MCU warm reset,
+ *   resetting IS25LX256 back to 1S mode for SBL to re-boot successfully.
+ * - Fls_Set3ByteAddressMode: sets 3-byte addressing required by SBL after warm reset. */
 #if defined AM263PX_PLATFORM || defined AM261X_PLATFORM
 void        Wdg_App_configFlsForReset(void)
 {
     Std_ReturnType status = E_OK;
 
     AppUtils_delay(4U);
+    /* Soft-reset IS25LX256 while OSPI controller is still in SBL's 8D-8D-8D state. */
+    (void)Fls_set111mode(NULL_PTR, 0x03U, 0x02U, 0xD8U);
 #if (STD_ON == FLS_PRE_COMPILE_VARIANT)
     Fls_Init((const Fls_ConfigType *)NULL_PTR);
 #else
