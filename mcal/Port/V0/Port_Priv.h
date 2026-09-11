@@ -84,6 +84,10 @@
 #include "Det.h"
 #endif /* #if (PORT_DEV_ERROR_DETECT == STD_ON) */
 
+#if (PORT_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif /* #ifdef __cplusplus */

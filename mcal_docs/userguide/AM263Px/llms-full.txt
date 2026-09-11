@@ -9921,15 +9921,6 @@ PORT Module ROOT configuration.
 
 `#include <Port_Cfg.h>`
 
-## Structure Members
-
-|  Member Type   | Member name    | Brief |
-| -------------- | -------------- | ----- |
-|  uint16 | NumberOfPortPins |  Number of pins individually configure. Should not conflict with pins enabled by selecting module enable.  |
-|  const [Port_PinConfigType](../Classes/struct_port___pin_config_type.md) * | PinConfig_pt |  Pointer to pin configuration structure.  |
-|  uint32 | NumberOfGPIORegs |  Number of GPIO registers to configure.  |
-|  const [Port_DioRegConfigType](../Classes/struct_port___dio_reg_config_type.md) * | DioConfig_pt |  DIO config structure.  |
-
 
 
 ---
@@ -9948,15 +9939,6 @@ Port GPIO initialization configuration.
 
 `#include <Port_Cfg.h>`
 
-## Structure Members
-
-|  Member Type   | Member name    | Brief |
-| -------------- | -------------- | ----- |
-|  uint8 | Port_DioPinNumber |  GPIO Pin number.  |
-|  [Port_EdgeTrig](../Modules/group___p_o_r_t.md#enum-port_edgetrig) | Port_PinSelectEdgeTrigger |  GPIO Edge Trigger Interrupt (Rising/Falling)  |
-|  [Port_IntrType](../Modules/group___p_o_r_t.md#enum-port_intrtype) | Port_PinSelectInterruptType |  Select GPIO Interrupt Type.  |
-|  [Port_IsrNotificationType](../Modules/group___p_o_r_t.md#typedef-port_isrnotificationtype) | Port_DioInterruptNotification |  ISR callback function pointer.  |
-
 
 
 ---
@@ -9974,12 +9956,6 @@ summary: GPIO Pin Intruppt Registers Status.
 GPIO Pin Intruppt Registers Status. 
 
 `#include <Port_Cfg.h>`
-
-## Structure Members
-
-|  Member Type   | Member name    | Brief |
-| -------------- | -------------- | ----- |
-|  volatile uint8[PORT_INTR_BUF_SIZE] | IntrIdxNum |  |
 
 
 
@@ -10036,32 +10012,6 @@ Pin Configuration structure.
 
 `#include <Port_Cfg.h>`
 
-## Structure Members
-
-|  Member Type   | Member name    | Brief |
-| -------------- | -------------- | ----- |
-|  [Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype) | Port_PinId |  Port Pin Id.  |
-|  boolean | Port_DirectionChangeable |  Flag indicating if pin direction is changeable.  |
-|  boolean | Port_PinModeChangeable |  Flag indicating if Pin mode is changeable.  |
-|  [Port_PinLevelValueType](../Modules/group___p_o_r_t.md#enum-port_pinlevelvaluetype) | Port_PinLevelValue |  Pin level value.  |
-|  [Port_PinDirectionType](../Modules/group___p_o_r_t.md#enum-port_pindirectiontype) | Port_PinDirection |  Pin direction.  |
-|  uint32 | Port_NumPortModes |  Number of modes supported for this pin.  |
-|  [Port_PinModeConfigType](../Classes/struct_port___pin_mode_config_type.md)[PORT_MAX_MUXMODE] | Port_PinMode |  Pin mode.  |
-|  [Port_PinModeType](../Modules/group___p_o_r_t.md#enum-port_pinmodetype) | Port_PinInitialMode |  Pin initial mode.  |
-|  [Port_PinPullSelectType](../Modules/group___p_o_r_t.md#enum-port_pinpullselecttype) | Port_PullTypeSelect |  Type of PULL U/D selection.  |
-|  [Port_PinSlewControlType](../Modules/group___p_o_r_t.md#enum-port_pinslewcontroltype) | Port_SlewControl |  Slew control configuration.  |
-|  uint8 | Port_GpioOwnerCore |  GPIO owner core.  |
-|  [Port_PinPullInhibitEnableType](../Modules/group___p_o_r_t.md#enum-port_pinpullinhibitenabletype) | Port_PullInhibitEnable |  Pull inhibit control configuration.  |
-|  [Port_PinInputOverrideCtrl](../Modules/group___p_o_r_t.md#enum-port_pininputoverridectrl) | Port_InputOverride_Ctrl |  Active Low input override control.  |
-|  [Port_PinOutputOverrideCtrl](../Modules/group___p_o_r_t.md#enum-port_pinoutputoverridectrl) | Port_OutputOverride_Ctrl |  Active Low output override control.  |
-|  uint32 | Port_RegOffsetAddr |  Register base address for configuring this pin.  |
-|  uint32 | Port_PinDioRegId |  GPIO register id corresponding to this pin.  |
-|  uint32 | Port_PinDioChannelId |  GPIO channel corresponding to this pin in GPIO register.  |
-|  boolean | Port_PinHSmasterEnable |  HSMASTER bit value.  |
-|  boolean | Port_PinHSmodeEnable |  HSMODE bit value.  |
-|  [Port_InputInversion](../Modules/group___p_o_r_t.md#enum-port_inputinversion) | Port_InversionSelect |  select value for choosing inverted version of PAD input for chip  |
-|  [Port_InputQualType](../Modules/group___p_o_r_t.md#enum-port_inputqualtype) | Port_QualifierTypeSelect |  select value for choosing input qualifer type for PAD.  |
-
 
 
 ---
@@ -10079,13 +10029,6 @@ summary: Pin Mode map structure.
 Pin Mode map structure.  [More...](#detailed-description)
 
 `#include <Port_Cfg.h>`
-
-## Structure Members
-
-|  Member Type   | Member name    | Brief |
-| -------------- | -------------- | ----- |
-|  [Port_PinModeType](../Modules/group___p_o_r_t.md#enum-port_pinmodetype) | mode |  |
-|  uint32 | muxmode |  Selected pin mode.  |
 
 ## Detailed Description
 
@@ -14672,7 +14615,7 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| lin   | 2250    | 9    | 10    |
+| lin   | 2264    | 9    | 10    |
  
 ### MCU
 
@@ -30349,6 +30292,7 @@ Not supported
 |--------|---------------|
 | **Name** | LinDemEventParameterRefs |
 | **Description** | Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter's DemEventId symbolic value. The standardized errors are provided in this container and can be extended by vendor-specific error references. |
+| **Post-build-variant-multiplicity** | false |
 | **Origin** | AUTOSAR_ECUC |
 | **Post-Build-Variant-Value** | false |
 | **Value-Configuration-Class** | -- |
@@ -41870,6 +41814,7 @@ title: FsiRx API GUIDE Header file
 | CDD_FSI_RX_ISR_CAT2   | Category 2 ISR type.  |
 | CDD_FSIRX_START_SEC_CODE   |  |
 | CDD_FSIRX_STOP_SEC_CODE   |  |
+| CDD_FSI_RX_CFG_DEM_ENABLE   | CDD FSI RX DEM Enable - STD_ON if any DEM event is configured.  |
 
 ## Functions
 
@@ -42130,6 +42075,7 @@ title: FsiTx API GUIDE Header file
 
 | Name           |  Brief     |
 | -------------- | ---------- |
+| CDD_FSI_TX_CFG_DEM_ENABLE   | CDD FSI TX DEM Enable - STD_ON if any DEM event is configured.  |
 | CDD_FSI_TX_MODULE_ID   | CDD Module ID.  |
 | CDD_FSI_TX_VENDOR_ID   | Texas Instruments Vendor ID.  |
 | CDD_FSI_TX_INSTANCE_ID   | Texas Instruments Vendor ID.  |
@@ -45517,6 +45463,7 @@ type definition for referencing channel group structures
 
 | Name           |  Brief     |
 | -------------- | ---------- |
+| DIO_CFG_DEM_ENABLE   | DIO DEM Enable - STD_ON if any DEM event is configured.  |
 | DIO_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
 | DIO_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
 | DIO_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |
@@ -55877,15 +55824,6 @@ title: Port API GUIDE Header file
 
 |  Base type   | Type Name  | Brief |
 | -------------| -----------| ----- |
-|enum| **[Port_DioDataDir](../Modules/group___p_o_r_t.md#enum-port_diodatadir)** | Enum of Dio module data direction control.  | 
-|enum| **[Port_DioDataIn](../Modules/group___p_o_r_t.md#enum-port_diodatain)** | Enum of DIO module Data Input register that reflects the current state of the pins.  | 
-|enum| **[Port_DioDataOut](../Modules/group___p_o_r_t.md#enum-port_diodataout)** | Enum of DIO module Data Output register that specify the output state of the pins when configured as output.  | 
-|enum| **[Port_DioOpenDrain_Mode](../Modules/group___p_o_r_t.md#enum-port_dioopendrain_mode)** | Enum of DIO module Open drain capability.  | 
-|enum| **[Port_DioIntrDET](../Modules/group___p_o_r_t.md#enum-port_diointrdet)** | Enum of DIO module SINGLE/BOTH Edge trigger interrupt.  | 
-|enum| **[Port_DioIntrPol](../Modules/group___p_o_r_t.md#enum-port_diointrpol)** | Enum of DIO module Rising/Falling edge interrupt.  | 
-|enum| **[Port_DioIntrLvl](../Modules/group___p_o_r_t.md#enum-port_diointrlvl)** | Enum of DIO module high/low level interrupt.  | 
-|enum| **[Port_DioIdleModeType](../Modules/group___p_o_r_t.md#enum-port_dioidlemodetype)** | Enum of DIO module idle mode configuration.  | 
-|enum| **[Port_DioClockGatingRatioType](../Modules/group___p_o_r_t.md#enum-port_dioclockgatingratiotype)** | Enum of DIO module Clock gating ratio for event detection.  | 
 |enum| **[Port_PinDirectionType](../Modules/group___p_o_r_t.md#enum-port_pindirectiontype)** | Enum of Port Direction used in Port_SetPinDirection()  | 
 |enum| **[Port_PinLevelValueType](../Modules/group___p_o_r_t.md#enum-port_pinlevelvaluetype)** | Enum of Port Level.  | 
 |enum| **[Port_PinSlewControlType](../Modules/group___p_o_r_t.md#enum-port_pinslewcontroltype)** | Enum of Port Slew Control.  | 
@@ -55902,92 +55840,15 @@ title: Port API GUIDE Header file
 |enum| **[Port_IntrType](../Modules/group___p_o_r_t.md#enum-port_intrtype)** | GPIO Interrupt Type.  | 
 |typedef uint16  | **[Port_PinType](../Modules/group___p_o_r_t.md#typedef-port_pintype)** | Type for symbolic name of Port pins.  | 
 |typedef void(*)(uint8 PortBankNum, uint8 PortBankChNum, Port_EdgeTrig Edge)  | **[Port_IsrNotificationType](../Modules/group___p_o_r_t.md#typedef-port_isrnotificationtype)** | Notification callback function pointer.  | 
-
-### enum Port_DioDataDir
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_DATA_DIRECTION_INPUT | | Input direction.   |
-| PORT_DIO_DATA_DIRECTION_OUTPUT | | Output direction.   |
-| PORT_DIO_DATA_DIRECTION_DEFAULT | | Default direction.   |
-
-**Brief**: 
-Enum of Dio module data direction control. 
-
-### enum Port_DioDataIn
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_DATA_INPUT_LOW | | Input Low state.   |
-| PORT_DIO_DATA_INPUT_HIGH | | Input High state.   |
-| PORT_DIO_DATA_INPUT_DEFAULT | | Input default state.   |
-
-**Brief**: 
-Enum of DIO module Data Input register that reflects the current state of the pins. 
-
-### enum Port_DioDataOut
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_DATA_OUTPUT_LOW | | Output Low state.   |
-| PORT_DIO_DATA_OUTPUT_HIGH | | Output Low state.   |
-| PORT_DIO_DATA_OUTPUT_DEFAULT | | Output Low state.   |
-
-**Brief**: 
-Enum of DIO module Data Output register that specify the output state of the pins when configured as output. 
-
-### enum Port_DioOpenDrain_Mode
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_PDR_PUSHPULL_MODE | | Push Pull Mode.   |
-| PORT_DIO_PDR_OPEN_DRAIN_MODE | | Open drain Mode.   |
-| PORT_DIO_PDR_DEFAULT | | Default Mode.   |
-
-**Brief**: 
-Enum of DIO module Open drain capability. 
-
-### enum Port_DioIntrDET
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_SINGLE_EDGE_INTERRUPT | | Single edge trigger interrupt.   |
-| PORT_DIO_BOTH_EDGE_INTERRUPT | | Both edge trigger interrupt.   |
-| PORT_DIO_DEFAULT_INTERRUPT | | Default interrupt.   |
-
-**Brief**: 
-Enum of DIO module SINGLE/BOTH Edge trigger interrupt. 
-
-### enum Port_DioIntrPol
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_FALLING_EDGE_INTERRUPT | | Falling edge interrupt.   |
-| PORT_DIO_RISING_EDGE_INTERRUPT | | Rising edge interrupt.   |
-| PORT_DIO_DEFAULT_EDGE_INTERRUPT | | Default edge interrupt.   |
-
-**Brief**: 
-Enum of DIO module Rising/Falling edge interrupt. 
-
-### enum Port_DioIntrLvl
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_LOW_LEVEL_INTERRUPT | | Low level interrupt.   |
-| PORT_DIO_HIGH_LEVEL_INTERRUPT | | High level interrupt.   |
-| PORT_DIO_DEFAULT_LEVEL_INTERRUPT | | Default level interrupt.   |
-
-**Brief**: 
-Enum of DIO module high/low level interrupt. 
-
-### enum Port_DioIdleModeType
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_IDLEMODE_DEFAULT | | IdleMode : Do not configure IDLEMODE. Retains default configuration.   |
-
-**Brief**: 
-Enum of DIO module idle mode configuration. 
-
-### enum Port_DioClockGatingRatioType
-| Enumerator | Value | Description |
-| ---------- | ----- | ----------- |
-| PORT_DIO_UNGATE | 0xFFFF| Clock gating ratio for event detection.   |
-
-**Brief**: 
-Enum of DIO module Clock gating ratio for event detection. 
+|enum| **[Port_DioDataDir](../Modules/group___p_o_r_t.md#enum-port_diodatadir)** | Enum of Dio module data direction control.  | 
+|enum| **[Port_DioDataIn](../Modules/group___p_o_r_t.md#enum-port_diodatain)** | Enum of DIO module Data Input register that reflects the current state of the pins.  | 
+|enum| **[Port_DioDataOut](../Modules/group___p_o_r_t.md#enum-port_diodataout)** | Enum of DIO module Data Output register that specify the output state of the pins when configured as output.  | 
+|enum| **[Port_DioOpenDrain_Mode](../Modules/group___p_o_r_t.md#enum-port_dioopendrain_mode)** | Enum of DIO module Open drain capability.  | 
+|enum| **[Port_DioIntrDET](../Modules/group___p_o_r_t.md#enum-port_diointrdet)** | Enum of DIO module SINGLE/BOTH Edge trigger interrupt.  | 
+|enum| **[Port_DioIntrPol](../Modules/group___p_o_r_t.md#enum-port_diointrpol)** | Enum of DIO module Rising/Falling edge interrupt.  | 
+|enum| **[Port_DioIntrLvl](../Modules/group___p_o_r_t.md#enum-port_diointrlvl)** | Enum of DIO module high/low level interrupt.  | 
+|enum| **[Port_DioIdleModeType](../Modules/group___p_o_r_t.md#enum-port_dioidlemodetype)** | Enum of DIO module idle mode configuration.  | 
+|enum| **[Port_DioClockGatingRatioType](../Modules/group___p_o_r_t.md#enum-port_dioclockgatingratiotype)** | Enum of DIO module Clock gating ratio for event detection.  | 
 
 ### enum Port_PinDirectionType
 | Enumerator | Value | Description |
@@ -56397,6 +56258,92 @@ PortBankNum --> GPIO bank numbers[A(0) to I(8)] , If configured as bank interrup
 
 PortBankChNum --> GPIO Channel numbers[0 to 138] , If configured as channel interrupt else value PORT_INTR_ERROR_ID 
 
+### enum Port_DioDataDir
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_DATA_DIRECTION_INPUT | | Input direction.   |
+| PORT_DIO_DATA_DIRECTION_OUTPUT | | Output direction.   |
+| PORT_DIO_DATA_DIRECTION_DEFAULT | | Default direction.   |
+
+**Brief**: 
+Enum of Dio module data direction control. 
+
+### enum Port_DioDataIn
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_DATA_INPUT_LOW | | Input Low state.   |
+| PORT_DIO_DATA_INPUT_HIGH | | Input High state.   |
+| PORT_DIO_DATA_INPUT_DEFAULT | | Input default state.   |
+
+**Brief**: 
+Enum of DIO module Data Input register that reflects the current state of the pins. 
+
+### enum Port_DioDataOut
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_DATA_OUTPUT_LOW | | Output Low state.   |
+| PORT_DIO_DATA_OUTPUT_HIGH | | Output Low state.   |
+| PORT_DIO_DATA_OUTPUT_DEFAULT | | Output Low state.   |
+
+**Brief**: 
+Enum of DIO module Data Output register that specify the output state of the pins when configured as output. 
+
+### enum Port_DioOpenDrain_Mode
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_PDR_PUSHPULL_MODE | | Push Pull Mode.   |
+| PORT_DIO_PDR_OPEN_DRAIN_MODE | | Open drain Mode.   |
+| PORT_DIO_PDR_DEFAULT | | Default Mode.   |
+
+**Brief**: 
+Enum of DIO module Open drain capability. 
+
+### enum Port_DioIntrDET
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_SINGLE_EDGE_INTERRUPT | | Single edge trigger interrupt.   |
+| PORT_DIO_BOTH_EDGE_INTERRUPT | | Both edge trigger interrupt.   |
+| PORT_DIO_DEFAULT_INTERRUPT | | Default interrupt.   |
+
+**Brief**: 
+Enum of DIO module SINGLE/BOTH Edge trigger interrupt. 
+
+### enum Port_DioIntrPol
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_FALLING_EDGE_INTERRUPT | | Falling edge interrupt.   |
+| PORT_DIO_RISING_EDGE_INTERRUPT | | Rising edge interrupt.   |
+| PORT_DIO_DEFAULT_EDGE_INTERRUPT | | Default edge interrupt.   |
+
+**Brief**: 
+Enum of DIO module Rising/Falling edge interrupt. 
+
+### enum Port_DioIntrLvl
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_LOW_LEVEL_INTERRUPT | | Low level interrupt.   |
+| PORT_DIO_HIGH_LEVEL_INTERRUPT | | High level interrupt.   |
+| PORT_DIO_DEFAULT_LEVEL_INTERRUPT | | Default level interrupt.   |
+
+**Brief**: 
+Enum of DIO module high/low level interrupt. 
+
+### enum Port_DioIdleModeType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_IDLEMODE_DEFAULT | | IdleMode : Do not configure IDLEMODE. Retains default configuration.   |
+
+**Brief**: 
+Enum of DIO module idle mode configuration. 
+
+### enum Port_DioClockGatingRatioType
+| Enumerator | Value | Description |
+| ---------- | ----- | ----------- |
+| PORT_DIO_UNGATE | 0xFFFF| Clock gating ratio for event detection.   |
+
+**Brief**: 
+Enum of DIO module Clock gating ratio for event detection. 
+
 ## Structures
 |   Name         | Brief          |
 | -------------- | -------------- |
@@ -56411,6 +56358,7 @@ PortBankChNum --> GPIO Channel numbers[0 to 138] , If configured as channel inte
 
 | Name           |  Brief     |
 | -------------- | ---------- |
+| PORT_CFG_DEM_ENABLE   | PORT DEM Enable - STD_ON if any DEM event is configured.  |
 | PORT_SW_MAJOR_VERSION   | Driver Implementation Major Version.  |
 | PORT_SW_MINOR_VERSION   | Driver Implementation Minor Version.  |
 | PORT_SW_PATCH_VERSION   | Driver Implementation Patch Version.  |

@@ -69,6 +69,9 @@
 #include "Wdg.h"
 #include "Mcal_Libs_Utils.h"
 #include "Det.h"
+#if (STD_ON == WDG_CFG_DEM_ENABLE)
+#include "Dem.h"
+#endif
 #include "hw_ctrl_core.h"
 
 #ifdef __cplusplus
@@ -134,7 +137,7 @@ FUNC(uint32, WDG_CODE) Wdg_getWdgResetAddr(uint16 regNum);
 void Wdg_reportDetError(uint8 apiId, uint8 errorId);
 #endif /* #if (STD_ON == WDG_DEV_ERROR_DETECT) */
 void Wdg_reportDetRuntimeError(uint8 apiId, uint8 errorId);
-#if defined(WDG_E_MODE_FAILED) || defined(WDG_E_DISABLE_REJECTED) || defined(WDG_E_HARDWARE_ERROR)
+#if (WDG_CFG_DEM_ENABLE == STD_ON)
 void Wdg_reportDemError(Dem_EventIdType eventId, Dem_EventStatusType eventStatus);
 #endif
 #if (STD_ON == WDG_REGISTER_READBACK_API)

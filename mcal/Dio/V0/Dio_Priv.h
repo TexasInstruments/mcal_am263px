@@ -80,6 +80,9 @@
 #include "Det.h"
 #endif
 
+#if (DIO_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
 #ifdef __cplusplus
 extern "C" {
 #endif

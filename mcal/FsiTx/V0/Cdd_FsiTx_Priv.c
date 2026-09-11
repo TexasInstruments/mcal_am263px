@@ -67,7 +67,6 @@
 #include "Cdd_FsiTx.h"
 #include "Cdd_FsiTx_Priv.h"
 #include "Cdd_FsiTx_Irq.h"
-#include "Dem.h"
 #if (CDD_FSI_TX_DMA_ENABLE == STD_ON)
 #include "Cdd_Dma.h"
 #endif

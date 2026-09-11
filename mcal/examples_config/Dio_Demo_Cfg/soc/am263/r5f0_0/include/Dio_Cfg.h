@@ -83,7 +83,13 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 
-#include "Dem.h"
+/**
+ *  \name DIO DEM Configuration
+ *  @{
+ */
+/** \brief DIO DEM Enable - STD_ON if any DEM event is configured */
+#define DIO_CFG_DEM_ENABLE    (STD_ON)
+/* @} */
 
 #ifdef __cplusplus
 extern "C" {
@@ -523,16 +529,12 @@ extern "C" {
  *  Pre-compile switches for enabling/disabling DEM events
  *  @{
  */
+/** \brief DEM Error Definitions */
 
 
-/* DIO IO check Dem IDs */
 
-#ifndef DIO_E_HARDWARE_ERROR
 /** \brief Hardware failed */
 #define DIO_E_HARDWARE_ERROR          (DemConf_DemEventParameter_DIO_E_HARDWARE_ERROR)
-#endif
-
-
 /* @} */
 
 /* Static tests for configuration integrity can be conducted here */

@@ -303,6 +303,12 @@ extern volatile VAR(Dem_EventStatusType, DEM_VAR_CLEARED) Dem_EventStatus;
  */
 #define DemConf_DemEventParameter_CDD_FSI_TX_E_BUFFER_OVERRUN     (65530U)
 
+/**
+ *  This Extended Production Error shall be issued when CDD encounters
+ *  internal error
+ */
+#define DemConf_DemEventParameter_LIN_E_TIMEOUT                  (65531U)
+
 #if defined (AUTOSAR_431)
 void Dem_ReportErrorStatus(Dem_EventIdType     EventId,
                            Dem_EventStatusType EventStatus);

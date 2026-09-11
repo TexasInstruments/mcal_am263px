@@ -82,9 +82,14 @@
  *********************************************************************************************************************/
 #include "Std_Types.h"
 
-[!IF "not(node:empty(as:modconf('Port')[1]/PortDemEventParameterRefs/*))"!][!//
-#include "Dem.h"
-[!ENDIF!][!//
+/**
+ *  \name PORT DEM Configuration
+ *  @{
+ */
+/** \brief PORT DEM Enable - STD_ON if any DEM event is configured */
+#define PORT_CFG_DEM_ENABLE    [!IF "not(node:empty(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+/* @} */
+
 [!IF "node:refexists(as:modconf('Port')[1]/PortGeneral/PortOsCounterRef)"!][!//
 #include "Os.h"
 [!ENDIF!][!//
@@ -234,16 +239,18 @@ extern "C" {
 
 [!NOCODE!][!//
 [!IF "node:exists(as:modconf('Port')[1]/PortDemEventParameterRefs)"!][!//
-[!IF "not(node:exists(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR))"!][!WARNING "DEM enabled but no DEM error configured"!][!ENDIF!]
+[!IF "not(node:refexists(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR))"!]
+[!WARNING "DEM enabled but no DEM error configured"!]
+[!ENDIF!]
 [!ENDIF!][!//
 [!ENDNOCODE!][!//
+/** \brief DEM Error Definitions */
 
-[!IF "node:exists(as:modconf('Port')[1]/PortDemEventParameterRefs/*)"!][!//
-/* DEM Error Definitions */
-#ifndef PORT_E_HARDWARE_ERROR
+[!IF "not(node:empty(as:modconf('Port')[1]/PortDemEventParameterRefs/*))"!][!//
+[!IF "not(node:empty(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR))"!][!//
 /** \brief Hardware failed */
-#define PORT_E_HARDWARE_ERROR          ([!IF "node:refexists(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled "!][!ENDIF!])
-#endif
+#define PORT_E_HARDWARE_ERROR          (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Port')[1]/PortDemEventParameterRefs/PORT_E_HARDWARE_ERROR))"!])
+[!ENDIF!][!//
 [!ENDIF!][!//
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

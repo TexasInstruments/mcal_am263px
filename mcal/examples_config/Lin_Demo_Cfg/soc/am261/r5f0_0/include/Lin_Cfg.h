@@ -147,6 +147,19 @@ extern "C" {
 //
 //*****************************************************************************
 #define LIN_REGISTER_READBACK_API         (STD_ON)
+
+//*****************************************************************************
+//
+//! \brief Enable/Disable LIN DEM support.
+//
+//*****************************************************************************
+#define LIN_CFG_DEM_ENABLE                (STD_ON)
+
+/* LIN DEM Event Configuration*/
+
+/** \brief LIN_E_TIMEOUT DEM Event ID */
+#define LIN_E_TIMEOUT                     (DemConf_DemEventParameter_LIN_E_TIMEOUT)
+
 /* @} */
 
 //*****************************************************************************

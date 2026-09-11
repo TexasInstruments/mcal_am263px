@@ -57,7 +57,7 @@ td.num { text-align: right; }
   max-height: 75vh;
   position: relative;
 }
-.tbl-wrap table { width: 100%; table-layout: auto; border-collapse: collapse; }
+.tbl-wrap table { min-width: 100%; width: auto; table-layout: auto; border-collapse: collapse; }
 
 /* Sticky sort-row */
 .tbl-wrap thead th {
@@ -79,7 +79,7 @@ td.num { text-align: right; }
 /* Wrapping columns — w is the short alias used in the detail table */
 .tbl-wrap th.wrap-col, .tbl-wrap td.wrap-col,
 .tbl-wrap th.wc, .tbl-wrap td.wc,
-.tbl-wrap th.w,  .tbl-wrap td.w  { white-space: normal; word-break: break-word; min-width: 220px; }
+.tbl-wrap th.w,  .tbl-wrap td.w  { white-space: normal; word-break: break-word; min-width: 140px; }
 
 /* ── Frozen (sticky) columns ── */
 /* fc = frozen-col frozen-col-0 (short alias for the single sticky column) */
@@ -234,7 +234,7 @@ tr.kw-no-results td {
 }
 
 /* ── Summary statistics table ── */
-.summary-table { width: auto; min-width: 600px; }
+.summary-table { width: auto; }
 .summary-table th { white-space: nowrap; }
 .summary-table td { min-width: 80px; }
 .stat-ok-text  { color: #98c379; font-weight: 700; }
@@ -452,26 +452,28 @@ function kwToggleTheme() {
 <ol style="margin:0;padding-left:20px;line-height:1.8;">
   <li><a href="#config-summary">Report Parameters</a></li>
   <li><a href="#summary-pct">Test Summary</a></li>
+  <li><a href="#test-type-dist">Test Type Distribution</a></li>
   <li><a href="#comp-rc-summary">Test Cycle Summary</a></li>
   <li><a href="#run-overview">Test Run Overview</a></li>
-  <li><a href="#detail-report">Test Plan | Detailed Execution Report</a><ul style="margin:2px 0 0 16px;padding:0;list-style:none;line-height:1.8;"><li style="list-style:none;margin-left:4px;color:#6060a0;">&#8627; <a href="#detail-action" style="color:#7878b0;">Pending Action</a></li><li style="list-style:none;margin-left:4px;color:#6060a0;">&#8627; <a href="#detail-tracked" style="color:#7878b0;">Tracked Issues</a></li><li style="list-style:none;margin-left:4px;color:#6060a0;">&#8627; <a href="#detail-by-component" style="color:#7878b0;">By Component</a></li></ul></li>
+  <li><a href="#detail-report">Test Plan | Detailed Execution Report</a><ul style="margin:2px 0 0 16px;padding:0;list-style:none;line-height:1.8;"><li style="list-style:none;margin-left:4px;color:#6060a0;">&#8627; <a href="#detail-by-component" style="color:#7878b0;">By Component</a></li><li style="list-style:none;margin-left:4px;color:#6060a0;">&#8627; <a href="#detail-action" style="color:#7878b0;">Pending Action</a></li><li style="list-style:none;margin-left:4px;color:#6060a0;">&#8627; <a href="#detail-tracked" style="color:#7878b0;">Tracked Issues</a></li></ul></li>
   <li><a href="#template-revisions">Template Revision History</a></li>
 </ol>
 </nav>
 <h2 id="config-summary">Report Parameters</h2>
 <table class="config-table">
 <tbody>
-<tr><th>Test Run Key(s)</th><td>MCAL-41172</td></tr><tr><th>Fix Version</th><td>MCAL_AM263xx_26.01.00</td></tr><tr><th>Platforms</th><td>am263p-cc</td></tr><tr><th>Generated On</th><td>10-Sep-2026 12:09 UTC</td></tr><tr><th>Total Test Cases</th><td>1201</td></tr>
+<tr><th>Test Run Key(s)</th><td>MCAL-41172</td></tr><tr><th>Fix Version</th><td>MCAL_AM263xx_26.01.00</td></tr><tr><th>Platforms</th><td>am263p-cc</td></tr><tr><th>Generated On</th><td>11-Sep-2026 22:30 UTC</td></tr><tr><th>Total Test Cases</th><td>1201</td></tr>
 </tbody>
 </table>
-<details class="htr-details"><summary class="htr-summary">&#9432; How to Read This Report</summary><div class="htr-body"><h3 style="margin:0 0 6px 0;font-size:1em;color:#c0caf5;">Execution Status</h3><ul style="margin:0 0 10px 0;padding-left:20px;"><li><span class="bp">Pass</span> &nbsp;— test case executed and passed all success criteria.</li><li><span class="bf">Fail</span> &nbsp;— test case executed but one or more success criteria were not met.</li><li><span class="bn">Not Executed</span> &nbsp;— test case has not been run yet.</li><li><span class="bb">Blocked</span> &nbsp;— test case cannot be executed due to a dependency or environment issue.</li></ul><h3 style="margin:0 0 6px 0;font-size:1em;color:#c0caf5;">Row Highlighting in the Detail Table</h3><ul style="margin:0 0 10px 0;padding-left:20px;"><li><span class="legend-red">Red row</span> &nbsp;— <strong>Fail</strong> or <strong>Blocked</strong> test case with <em>no defect mapped</em>. Action required: link a defect ticket.</li><li><span class="legend-yellow">Yellow row</span> &nbsp;— <strong>Not Executed</strong> test case (pending execution).</li><li>No highlighting — <strong>Pass</strong>, or Fail/Blocked <em>with</em> a defect already mapped.</li></ul></div></details>
+<details class="htr-details"><summary class="htr-summary">&#9432; How to Read This Report</summary><div class="htr-body"><h3 style="margin:0 0 6px 0;font-size:1em;color:#c0caf5;">Execution Status</h3><ul style="margin:0 0 10px 0;padding-left:20px;"><li><span class="bp">Pass</span> &nbsp;— test case executed and passed all success criteria.</li><li><span class="bf">Fail</span> &nbsp;— test case executed but one or more success criteria were not met.</li><li><span class="bn">Not Executed</span> &nbsp;— test case has not been run yet.</li><li><span class="bb">Blocked</span> &nbsp;— test case cannot be executed due to a dependency or environment issue.</li></ul><h3 style="margin:0 0 6px 0;font-size:1em;color:#c0caf5;">Row Highlighting in the Detail Table</h3><ul style="margin:0 0 10px 0;padding-left:20px;"><li><span class="legend-red">Red row</span> &nbsp;— <strong>Fail</strong> or <strong>Blocked</strong> test case with <em>no defect mapped</em>. Action required: link a defect ticket.</li><li><span class="legend-yellow">Yellow row</span> &nbsp;— <strong>Not Executed</strong> test case (pending execution).</li><li>No highlighting — <strong>Pass</strong>, or Fail/Blocked <em>with</em> a defect already mapped.</li></ul><h3 style="margin:10px 0 6px 0;font-size:1em;color:#c0caf5;">Fix Version / Release Tag</h3><p style="margin:0 0 6px 0;font-size:0.9em;color:#a0a0c0;">The <strong>Fix Version</strong> shown in the Report Parameters table and the Test Run Overview is taken from the <em>fixVersions</em> JIRA field of each Test Run issue. It identifies the <strong>product release label</strong> (e.g.&nbsp;<code>AM2CG_26.01.00</code>) against which the test run was executed. When multiple test runs are provided, all unique fix versions are shown comma-separated.</p></div></details>
 <h2 id="summary-pct">Test Summary</h2>
+<p style="margin:4px 0 8px 0;font-size:0.85em;color:#a0a0c0;">Percentages are computed from the <strong>collated final results</strong> (each unique test case key counted once, latest real execution result wins across all test runs). Pass%&nbsp;=&nbsp;Pass&nbsp;&divide;&nbsp;(Pass&nbsp;+&nbsp;Fail&nbsp;+&nbsp;Not&nbsp;Executed&nbsp;+&nbsp;Blocked)&nbsp;&times;&nbsp;100. Not&nbsp;Executed test cases reduce the overall pass rate. Pass criteria: &ge;&nbsp;<strong>95%</strong>. The <strong>Overall row is highlighted red</strong> when pass% is below the threshold, meaning the <strong>test pass criteria has not been met</strong>.</p>
 <div class="tbl-content">
 <table class="summary-table">
 
 <thead>
 <tr>
-  <th>Test Level</th><th>Pass %</th><th>Fail %</th><th>Not Executed %</th><th>Blocked %</th>
+  <th>Test Level</th><th>Pass %</th><th>Fail %</th><th>Not Executed %</th><th>Blocked %</th><th>Total</th>
 </tr>
 </thead>
 <tbody>
@@ -482,6 +484,7 @@ function kwToggleTheme() {
   <td><span class="pct-bar pct-bar-fail"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-ne"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-blocked"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
+  <td class="num">1174</td>
 </tr>
 <tr>
   <td>Integration</td>
@@ -489,6 +492,7 @@ function kwToggleTheme() {
   <td><span class="pct-bar pct-bar-fail"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-ne"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-blocked"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
+  <td class="num">12</td>
 </tr>
 <tr>
   <td>Qualification</td>
@@ -496,6 +500,7 @@ function kwToggleTheme() {
   <td><span class="pct-bar pct-bar-fail"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-ne"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-blocked"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
+  <td class="num">14</td>
 </tr>
 <tr>
   <td>Validation</td>
@@ -503,6 +508,7 @@ function kwToggleTheme() {
   <td><span class="pct-bar pct-bar-fail"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-ne"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-blocked"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
+  <td class="num">1</td>
 </tr>
 <tr class="tbl-total">
   <td><strong>Overall</strong></td>
@@ -510,6 +516,68 @@ function kwToggleTheme() {
   <td><span class="pct-bar pct-bar-fail"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-ne"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
   <td><span class="pct-bar pct-bar-blocked"><span class="pct-bar-track"><span class="pct-bar-fill" style="width:0%"></span></span><span class="pct-bar-label">0 (0%)</span></span></td>
+  <td class="num">1201</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h2 id="test-type-dist">Test Type Distribution</h2>
+<p class="desc">Distribution of test cases by Test Type (Test Method field). Count and percentage share of the total collated test cases.</p>
+<div class="tbl-content">
+<table class="summary-table">
+
+<thead>
+<tr>
+  <th>Test Type</th><th>Count</th><th>% of Total</th>
+</tr>
+</thead>
+<tbody>
+
+<tr>
+  <td>Functional</td>
+  <td class="num">842</td>
+  <td class="num">70%</td>
+</tr>
+<tr>
+  <td>Fault Injection</td>
+  <td class="num">266</td>
+  <td class="num">22%</td>
+</tr>
+<tr>
+  <td>Interface</td>
+  <td class="num">62</td>
+  <td class="num">5%</td>
+</tr>
+<tr>
+  <td>Performance</td>
+  <td class="num">19</td>
+  <td class="num">2%</td>
+</tr>
+<tr>
+  <td>Maintainability</td>
+  <td class="num">4</td>
+  <td class="num">0%</td>
+</tr>
+<tr>
+  <td>Stress</td>
+  <td class="num">3</td>
+  <td class="num">0%</td>
+</tr>
+<tr>
+  <td>Usability</td>
+  <td class="num">3</td>
+  <td class="num">0%</td>
+</tr>
+<tr>
+  <td>Compatibility</td>
+  <td class="num">2</td>
+  <td class="num">0%</td>
+</tr>
+<tr class="tbl-total">
+  <td><strong>Total</strong></td>
+  <td class="num"><strong>1201</strong></td>
+  <td class="num"><strong>100%</strong></td>
 </tr>
 </tbody>
 </table>
@@ -573,25 +641,6 @@ function kwToggleTheme() {
 <h2 id="detail-report">Test Plan | Detailed Execution Report</h2>
 <p style="margin:0 0 12px 0;font-size:0.9em;color:#a0a0c0;"><span class="legend-red">Red</span> = Fail/Blocked with no defect mapped. <span class="legend-yellow">Yellow</span> = Not Executed.</p>
 <p style="margin:0 0 16px 0;font-size:0.85em;color:#6060a0;">1201 total TC(s) — <span class="sum-pending">0 pending action</span>, <span class="sum-tracked">0 tracked issue(s)</span> across 23 component group(s).</p>
-
-
-<h3 id="detail-action" class="h3-action">
-  &#9888; Pending Action
-  <span class="h3-sub">
-    — 0 item(s): Fail/Blocked without defect &amp; Not Executed (untracked)
-  </span>
-</h3>
-<p class="empty-msg">&#10003; No pending actions</p>
-
-
-<h3 id="detail-tracked" class="h3-tracked">
-  &#128030; Tracked Issues
-  <span class="h3-sub">
-    — 0 open defect(s) with associated test cases
-  </span>
-</h3>
-<p class="empty-msg">&#10003; No tracked issues</p>
-
 <h3 id="detail-by-component" class="h3-bycomp">
   By Component
   <span class="h3-sub">
@@ -4226,10 +4275,33 @@ After this sets the trigger condition to 0 ms. Since the skip force reset flag i
 </div>
 </details>
 
+
+<details class="comp-section" id="detail-action">
+<summary class="comp-summary" style="color:#ff9090;">
+&#9888; Pending Action <span class="comp-badge"><span class="comp-badge-fail">0 item(s)</span></span>
+<span class="h3-sub"> — Fail/Blocked without defect &amp; Not Executed (untracked)</span>
+</summary>
+<div class="comp-body">
+<p class="empty-msg">&#10003; No pending actions</p>
+
+</div>
+</details>
+<details class="comp-section" id="detail-tracked">
+<summary class="comp-summary" style="color:#d19a66;">
+&#128030; Tracked Issues <span class="comp-badge"><span class="comp-badge-warn">0 defect(s)</span></span>
+<span class="h3-sub"> — open defects with associated test cases</span>
+</summary>
+<div class="comp-body">
+<p class="empty-msg">&#10003; No tracked issues</p>
+
+</div>
+</details>
+
 <h2 id="template-revisions">Template Revision History</h2>
-<details><summary class="comp-summary">&#9654; Show revision history<span class="comp-badge">12 revision(s), latest: v2.3</span></summary><div class="comp-body"><table class="config-table" style="table-layout:fixed;width:100%;">
+<details><summary class="comp-summary">&#9654; Show revision history<span class="comp-badge">13 revision(s), latest: v2.4</span></summary><div class="comp-body"><table class="config-table" style="table-layout:fixed;width:100%;">
 <thead><tr><th style="width:7%;">Version</th><th style="width:9%;">Date</th><th style="width:18%;">Author</th><th style="width:11%;">Document Status</th><th style="width:55%;">Description</th></tr></thead>
 <tbody>
+<tr><td style="white-space:nowrap;">2.4</td><td style="white-space:nowrap;">10-Sep-2026</td><td style="white-space:nowrap;">Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Added Fix Version guidance in &#x27;How to Read&#x27; section.<br>2. Table columns now size to content width instead of stretching to full page.<br>3. Added explanatory note to Test Summary table clarifying how pass% is calculated and what a red Overall row means.<br>4. Added new Test Type Distribution table showing count and % share of each test type.<br>5. Pending Action and Tracked Issues sections are now collapsible and placed after the By Component tables.</td></tr>
 <tr><td style="white-space:nowrap;">2.3</td><td style="white-space:nowrap;">09-Sep-2026</td><td style="white-space:nowrap;">Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>Template Revision History section is now minimized by default with a badge showing the latest version, matching the KW report pattern.</td></tr>
 <tr><td style="white-space:nowrap;">2.2</td><td style="white-space:nowrap;">09-Sep-2026</td><td style="white-space:nowrap;">Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>By Component tables: added Test Description column, removed redundant Component column (shown in section heading), and reduced table font size to 0.80em to improve fit.</td></tr>
 <tr><td style="white-space:nowrap;">2.1</td><td style="white-space:nowrap;">31-Aug-2026</td><td style="white-space:nowrap;">Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Improved link/accent colour contrast on dark background (#7aa2f7 → #a8c8ff).<br>2. Added dark/light theme toggle button (preference persisted in localStorage).</td></tr>
@@ -4245,7 +4317,7 @@ After this sets the trigger condition to 0 ms. Since the skip force reset flag i
 </tbody>
 </table>
 </div></details>
-<div id="kw-ftr" style="margin-top:40px;padding:12px 16px;background:#1a1a2e;border-top:1px solid #333355;font-size:0.82em;color:#6060a0;display:flex;justify-content:space-between;align-items:center;"><span>Copyright &copy; 2026 Texas Instruments Incorporated &nbsp;|&nbsp; TI Information &mdash; Selective Disclosure</span><span>Report generated: 2026-09-10 12:09:00&nbsp;&nbsp;<span style="color:#4a4a6a;">atlassian-modules3.0 @ 1dc2e03a725d</span></span></div>
+<div id="kw-ftr" style="margin-top:40px;padding:12px 16px;background:#1a1a2e;border-top:1px solid #333355;font-size:0.82em;color:#6060a0;display:flex;justify-content:space-between;align-items:center;"><span>Copyright &copy; 2026 Texas Instruments Incorporated &nbsp;|&nbsp; TI Information &mdash; Selective Disclosure</span><span>Report generated: 2026-09-11 22:30:54&nbsp;&nbsp;<span style="color:#4a4a6a;">atlassian-modules3.0 @ 139f625797ec</span></span></div>
 <script>
 /* ── Expand JIRA links: <a class="jl" data-k="KEY"> → href + target ── */
 (function () {

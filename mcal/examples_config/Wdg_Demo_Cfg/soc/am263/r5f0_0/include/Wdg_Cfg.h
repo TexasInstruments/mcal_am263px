@@ -86,7 +86,14 @@
 /*******************************************************************************
  * Other Header Files
  ******************************************************************************/
-#include "Dem.h"
+
+/**
+ *  \name WDG DEM Configuration
+ *  @{
+ */
+/** \brief WDG DEM Enable - STD_ON if any DEM event is configured */
+#define WDG_CFG_DEM_ENABLE    (STD_ON)
+/* @} */
 
 #ifdef __cplusplus
 extern "C" {
@@ -170,21 +177,16 @@ extern "C" {
  *  Pre-compile switches for enabling/disabling DEM events
  *  @{
  */
+/** \brief DEM Error Definitions */
 
-/** \brief  WDG failed */
-#ifndef WDG_E_MODE_FAILED
+/** \brief  WDG Mode failed */
 #define WDG_E_MODE_FAILED           (DemConf_DemEventParameter_WDG_E_MODE_FAILED)
-#endif
 
 /** \brief  WDG disable rejected */
-#ifndef WDG_E_DISABLE_REJECTED
-#define WDG_E_DISABLE_REJECTED     (DemConf_DemEventParameter_WDG_E_DISABLE_REJECTED)
-#endif
+#define WDG_E_DISABLE_REJECTED      (DemConf_DemEventParameter_WDG_E_DISABLE_REJECTED)
 
-#ifndef WDG_E_HARDWARE_ERROR
 /** \brief Hardware failed */
-#define WDG_E_HARDWARE_ERROR          (DemConf_DemEventParameter_WDG_E_HARDWARE_ERROR)
-#endif
+#define WDG_E_HARDWARE_ERROR        (DemConf_DemEventParameter_WDG_E_HARDWARE_ERROR)
 /* @} */
 /*******************************************************************************
  * Exported Preprocessor #define Macros

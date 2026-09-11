@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 11-Sep-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 12-Sep-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -817,7 +817,7 @@ Official releases are published under the Releases section of the GitHub reposit
 For technical support and additional assistance, visit E2E or contact local TI Field Application Engineer.
 
 # Versioning
-Each package version is composed of 4 period-delimited numbers - represented here by the letters M, m, p and b [MM.mm.pp.bb].
+Each package version is composed of 4 period-delimited numbers - represented here by the fields MM, mm, pp and bb [MM.mm.pp.bb].
 The table below provides a descriptive reference regarding package version numbering.
 
 <table>
@@ -832,7 +832,7 @@ The table below provides a descriptive reference regarding package version numbe
     <tr>
       <td>MM</td>
       <td>Major revision</td>
-      <td>Incremented when the new version is substantially different from the previous. For example, a new module added or an existing modules algorithm significantly altered</td>
+      <td>Indicates the last two digits of the annual year of the release (e.g., 2026 → 26). Incremented each year with the first release of that year.</td>
     </tr>
     <tr>
       <td>mm</td>

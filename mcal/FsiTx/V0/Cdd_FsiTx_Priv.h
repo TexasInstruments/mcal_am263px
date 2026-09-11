@@ -71,6 +71,9 @@
 #include "SchM_Cdd_FsiTx.h"
 #include "Cdd_FsiTx_Platform.h"
 #include "Det.h"
+#if (CDD_FSI_TX_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {

@@ -81,7 +81,7 @@ MCAL-15072
 
 #include "Wdg.h"
 #include "Wdg_Cbk.h"
-#include "Dem.h"
+
 #include "Wdg_Priv.h"
 #include "SchM_Wdg.h"
 /* ========================================================================== */

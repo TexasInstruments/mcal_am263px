@@ -33,6 +33,9 @@
               <DESC>
                 <L-2 L="EN">Container for the references to DemEventParameter elements which shall be invoked using the API Dem_SetEventStatus in case the corresponding error occurs. The EventId is taken from the referenced DemEventParameter&apos;s DemEventId symbolic value. The standardized errors are provided in this container and can be extended by vendor-specific error references.</L-2>
               </DESC>
+              <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
+              <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
+              <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
               <REFERENCES>
                 <ECUC-SYMBOLIC-NAME-REFERENCE-DEF UUID="ECUC:446e5fcc-d6f0-4bde-ad8f-8cf86f88f501">
                   <SHORT-NAME>LIN_E_TIMEOUT</SHORT-NAME>
@@ -40,9 +43,10 @@
                     <L-2 L="EN">Reference to the DemEventParameter which shall be issued when the error &quot;Timeout caused by hardware error&quot; has occurred. If the reference is not configured the error shall be reported as DET error.</L-2>
                   </DESC>
                   <LOWER-MULTIPLICITY>0</LOWER-MULTIPLICITY>
-                  <UPPER-MULTIPLICITY>0</UPPER-MULTIPLICITY>
+                  <UPPER-MULTIPLICITY>1</UPPER-MULTIPLICITY>
                   <SCOPE>LOCAL</SCOPE>
                   <ORIGIN>AUTOSAR_ECUC</ORIGIN>
+                  <POST-BUILD-VARIANT-MULTIPLICITY>false</POST-BUILD-VARIANT-MULTIPLICITY>
                   <POST-BUILD-VARIANT-VALUE>false</POST-BUILD-VARIANT-VALUE>
                   <VALUE-CONFIG-CLASSES>
                     <ECUC-VALUE-CONFIGURATION-CLASS>

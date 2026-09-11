@@ -89,9 +89,14 @@
 /*******************************************************************************
  * Other Header Files
  ******************************************************************************/
-[!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*))"!][!//
-#include "Dem.h"
-[!ENDIF!][!//
+
+/**
+ *  \name WDG DEM Configuration
+ *  @{
+ */
+/** \brief WDG DEM Enable - STD_ON if any DEM event is configured */
+#define WDG_CFG_DEM_ENABLE    [!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)) or not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)) or not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+/* @} */
 
 #ifdef __cplusplus
 extern "C" {
@@ -172,28 +177,22 @@ extern "C" {
 [!ENDIF!]
 [!ENDIF!][!//
 [!ENDNOCODE!][!//
-
-[!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*)"!][!//
 /** \brief DEM Error Definitions */
- [!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)"!][!//
-/** \brief  WDG failed */
-#ifndef WDG_E_MODE_FAILED
-#define WDG_E_MODE_FAILED           ([!IF "node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
-#endif
+
+[!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/*))"!][!//
+[!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED))"!][!//
+/** \brief  WDG Mode failed */
+#define WDG_E_MODE_FAILED           (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_MODE_FAILED))"!])
 [!ENDIF!][!//
 
-[!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)"!][!//
+[!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))"!][!//
 /** \brief  WDG disable rejected */
-#ifndef WDG_E_DISABLE_REJECTED
-#define WDG_E_DISABLE_REJECTED     ([!IF "node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
-#endif
+#define WDG_E_DISABLE_REJECTED      (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_DISABLE_REJECTED))"!])
 [!ENDIF!][!//
 
-[!IF "node:exists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)"!][!//
-#ifndef WDG_E_HARDWARE_ERROR
+[!IF "not(node:empty(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR))"!][!//
 /** \brief Hardware failed */
-#define WDG_E_HARDWARE_ERROR          ([!IF "node:refexists(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled"!][!ENDIF!])
-#endif
+#define WDG_E_HARDWARE_ERROR        (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Wdg')[as:path(node:dtos(.))='/TI_AM263Px/Wdg']/WdgDemEventParameterRefs/WDG_E_HARDWARE_ERROR))"!])
 [!ENDIF!][!//
 [!ENDIF!][!//
 /*******************************************************************************

@@ -83,9 +83,13 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 
-[!IF "not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/*))"!][!//
-#include "Dem.h"
-[!ENDIF!][!//
+/**
+ *  \name DIO DEM Configuration
+ *  @{
+ */
+/** \brief DIO DEM Enable - STD_ON if any DEM event is configured */
+#define DIO_CFG_DEM_ENABLE    [!IF "not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID)) or not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID)) or not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+/* @} */
 
 #ifdef __cplusplus
 extern "C" {
@@ -259,35 +263,29 @@ extern "C" {
  */
 [!NOCODE!][!//
 [!IF "node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef)"!][!//
-[!IF "not(node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID)) and not(node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID)) and not(node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR))"!] 
+[!IF "not(node:refexists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID)) and not(node:refexists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID)) and not(node:refexists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR))"!]
 [!WARNING "DEM enabled but no DEM error configured"!]
 [!ENDIF!]
 [!ENDIF!][!//
 [!ENDNOCODE!][!//
+/** \brief DEM Error Definitions */
 
-[!IF "node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef/*)"!][!//
-/* DIO IO check Dem IDs */
-[!IF "(node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID))"!]
-/** \brief Dio write channel event ID*/
-#ifndef DIO_WRITE_CHANNEL_EVENT_ID
-    #define DIO_WRITE_CHANNEL_EVENT_ID  ([!IF "node:refexists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
-[!ENDIF!][!//
-[!IF "(node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID))"!][!//
-/** \brief Dio write Port event ID*/
-#ifndef DIO_WRITE_PORT_EVENT_ID
-    #define DIO_WRITE_PORT_EVENT_ID     ([!IF "node:refexists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
+[!IF "not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/*))"!][!//
+[!IF "not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID))"!][!//
+/** \brief Dio write channel event ID */
+#define DIO_WRITE_CHANNEL_EVENT_ID  (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_CHANNEL_EVENT_ID))"!])
 [!ENDIF!][!//
 
-[!IF "(node:exists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR))"!][!//
-#ifndef DIO_E_HARDWARE_ERROR
+[!IF "not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID))"!][!//
+/** \brief Dio write Port event ID */
+#define DIO_WRITE_PORT_EVENT_ID     (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_WRITE_PORT_EVENT_ID))"!])
+[!ENDIF!][!//
+
+[!IF "not(node:empty(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR))"!][!//
 /** \brief Hardware failed */
-#define DIO_E_HARDWARE_ERROR          ([!IF "node:refexists(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
-[!ENDIF!]
+#define DIO_E_HARDWARE_ERROR          (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Dio')[1]/DioDemEventParameterRef/DIO_E_HARDWARE_ERROR))"!])
 [!ENDIF!][!//
-
+[!ENDIF!][!//
 /* @} */
 
 /* Static tests for configuration integrity can be conducted here */

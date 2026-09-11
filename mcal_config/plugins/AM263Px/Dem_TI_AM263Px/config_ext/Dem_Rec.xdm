@@ -1355,6 +1355,69 @@
                     </d:chc>
                     <d:lst name="DemIndicatorAttribute" type="MAP"/>
                   </d:ctr>
+                  <d:ctr name="LIN_E_TIMEOUT" type="IDENTIFIABLE">
+                    <a:a name="IMPORTER_INFO" value="@REC"/>
+                    <d:lst name="DemCausalityDelayTime"/>
+                    <d:lst name="DemComponentPriority"/>
+                    <d:var name="DemEventAvailable" type="BOOLEAN" value="true">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="DemEventConfirmationThreshold" type="INTEGER"
+                           value="1">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="DemEventFailureCycleCounterThresholdAdaptable"/>
+                    <d:var name="DemEventId" type="INTEGER" value="113">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:var name="DemEventKind" type="ENUMERATION"
+                           value="DEM_EVENT_KIND_BSW">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="DemEventRecoverableInSameOperationCycle"/>
+                    <d:var name="DemFFPrestorageSupported" type="BOOLEAN"
+                           value="true">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:var>
+                    <d:lst name="DemReportBehavior"/>
+                    <d:lst name="DemComponentClassRef"/>
+                    <d:lst name="DemDTCRef"/>
+                    <d:lst name="DemEnableConditionGroupRef"/>
+                    <d:lst name="DemOBDGroupingAssociativeEventsRef"/>
+                    <d:ref name="DemOperationCycleRef" type="REFERENCE"
+                           value="ASPath:/Dem/Dem/DemGeneral/DemOperationCycle_0">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                    </d:ref>
+                    <d:lst name="DemStorageConditionGroupRef"/>
+                    <d:lst name="DemCallbackClearEventAllowed" type="MAP"/>
+                    <d:lst name="DemCallbackEventDataChanged" type="MAP"/>
+                    <d:lst name="DemCallbackEventUdsStatusChanged" type="MAP"/>
+                    <d:lst name="DemCallbackInitMForE" type="MAP"/>
+                    <d:lst name="DemCallbackMonitorStatusChanged" type="MAP"/>
+                    <d:chc name="DemDebounceAlgorithmClass" type="IDENTIFIABLE"
+                           value="DemDebounceMonitorInternal">
+                      <a:a name="IMPORTER_INFO" value="@REC"/>
+                      <d:ctr name="DemDebounceCounterBased" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="DemDebounceCounterBasedClassRef"
+                               type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                      <d:ctr name="DemDebounceMonitorInternal"
+                             type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:lst name="DemCallbackGetFDC" type="MAP"/>
+                      </d:ctr>
+                      <d:ctr name="DemDebounceTimeBase" type="IDENTIFIABLE">
+                        <a:a name="IMPORTER_INFO" value="@REC"/>
+                        <d:ref name="DemDebounceTimeBaseRef" type="REFERENCE" >
+                          <a:a name="IMPORTER_INFO" value="@REC"/>
+                        </d:ref>
+                      </d:ctr>
+                    </d:chc>
+                    <d:lst name="DemIndicatorAttribute" type="MAP"/>
+                  </d:ctr>
                   <d:ctr name="PORT_E_HARDWARE_ERROR" type="IDENTIFIABLE">
                     <a:a name="IMPORTER_INFO" value="@REC"/>
                     <d:lst name="DemCausalityDelayTime"/>

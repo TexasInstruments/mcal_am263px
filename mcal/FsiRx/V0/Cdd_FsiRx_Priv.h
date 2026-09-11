@@ -75,6 +75,9 @@
 #if (CDD_FSI_RX_DMA_ENABLE == STD_ON)
 #include "Cdd_Dma.h"
 #endif
+#if (CDD_FSI_RX_CFG_DEM_ENABLE == STD_ON)
+#include "Dem.h"
+#endif
 
 #ifdef __cplusplus
 extern "C" {

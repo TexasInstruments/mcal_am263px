@@ -83,8 +83,10 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Std_Types.h"
-#include "Dem.h"
 
+
+/** \brief CDD FSI RX DEM Enable - STD_ON if any DEM event is configured */
+#define CDD_FSI_RX_CFG_DEM_ENABLE    (STD_ON)
 
 #ifdef __cplusplus
 extern "C" {
@@ -235,35 +237,24 @@ extern "C" {
  */
 
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR
 /** \brief Error code indicating  Buffer underrun occured */
 #define CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR (DemConf_DemEventParameter_CDD_FSI_RX_E_BUFF_UNDERRUN)
-#endif
 
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR
 /** \brief Error code indicating  Buffer overrun occured */
 #define CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR (DemConf_DemEventParameter_CDD_FSI_RX_E_BUFF_OVERRUN)
-#endif
 
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_CRC_ERROR
 /** \brief Error code indicating  CRC Error occured */
 #define CDD_FSI_RX_E_CRC_ERROR (DemConf_DemEventParameter_CDD_FSI_RX_E_CRC_ERROR)
-#endif
 
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_FRAME_TYPE_ERROR
 /** \brief Error code indicating  FRAME TYPE Error occured */
 #define CDD_FSI_RX_E_FRAME_TYPE_ERROR (DemConf_DemEventParameter_CDD_FSI_RX_E_TYPE_ERROR)
-#endif
-
 
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_EOF_ERROR
 /** \brief Error code indicating EOF Error occured */
 #define CDD_FSI_RX_E_EOF_ERROR (DemConf_DemEventParameter_CDD_FSI_RX_E_EOF_ERROR)
-#endif
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 

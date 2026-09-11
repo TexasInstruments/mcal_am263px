@@ -82,9 +82,6 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Std_Types.h"
-[!IF "node:exists(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs)"!][!//
-#include "Dem.h"
-[!ENDIF!][!//
 [!IF "not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxGeneral/CddFsiTxOsCounterRef))"!][!//
 #include "Os.h"
 [!ENDIF!][!//
@@ -94,6 +91,14 @@
 #include "Cdd_Dma_Cfg.h"
 [!ENDIF!][!//
 [!ENDIF!][!//
+
+/**
+ *  \name CDD FSI TX DEM Configuration
+ *  @{
+ */
+/** \brief CDD FSI TX DEM Enable - STD_ON if any DEM event is configured */
+#define CDD_FSI_TX_CFG_DEM_ENABLE    [!IF "not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_UNDERRUN)) or not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_OVERRUN))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+/* @} */
 
 #ifdef __cplusplus
 extern "C" {
@@ -300,18 +305,16 @@ extern "C" {
 [!IF "not(node:exists(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_UNDERRUN))"!][!WARNING "DEM enabled but no DEM error configured"!][!ENDIF!]
 [!ENDIF!][!//
 [!ENDNOCODE!][!//
-[!IF "node:exists(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/*)"!][!//
-/* Cdd_FsiTx DEM Event Configuration*/
-#ifndef CDD_FSI_TX_E_BUFFER_UNDERRUN
+[!IF "not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/*))"!][!//
+[!IF "not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_UNDERRUN))"!][!//
 /** \brief Error code indicating  Buffer underrun occured */
-#define CDD_FSI_TX_E_BUFFER_UNDERRUN          ([!IF "not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_UNDERRUN))"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_UNDERRUN))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled "!][!ENDIF!])
-#endif
+#define CDD_FSI_TX_E_BUFFER_UNDERRUN          (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_UNDERRUN))"!])
+[!ENDIF!][!//
 
-/* Cdd_FsiTx DEM Event Configuration*/
-#ifndef CDD_FSI_TX_E_BUFFER_OVERRUN
-/** \brief Error code indicating  Buffer underrun occured */
-#define CDD_FSI_TX_E_BUFFER_OVERRUN          ([!IF "not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_OVERRUN))"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_OVERRUN))"!][!ELSE!][!ERROR "No Hardawre refernece is provided but DEM is enabled "!][!ENDIF!])
-#endif
+[!IF "not(node:empty(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_OVERRUN))"!][!//
+/** \brief Error code indicating  Buffer overrun occured */
+#define CDD_FSI_TX_E_BUFFER_OVERRUN          (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiTx')[1]/CddFsiTxDemEventParameterRefs/CDD_FSI_TX_E_BUFFER_OVERRUN))"!])
+[!ENDIF!][!//
 [!ENDIF!][!//
 /* @} */
 

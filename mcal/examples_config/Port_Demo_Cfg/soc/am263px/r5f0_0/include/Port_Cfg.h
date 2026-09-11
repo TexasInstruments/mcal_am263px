@@ -82,7 +82,14 @@
  *********************************************************************************************************************/
 #include "Std_Types.h"
 
-#include "Dem.h"
+/**
+ *  \name PORT DEM Configuration
+ *  @{
+ */
+/** \brief PORT DEM Enable - STD_ON if any DEM event is configured */
+#define PORT_CFG_DEM_ENABLE    (STD_ON)
+/* @} */
+
 #include "Os.h"
 
 #ifdef __cplusplus
@@ -438,12 +445,10 @@ extern "C" {
 */
 #define PORT_TIMEOUT_DURATION            (32000U)
 
+/** \brief DEM Error Definitions */
 
-/* DEM Error Definitions */
-#ifndef PORT_E_HARDWARE_ERROR
 /** \brief Hardware failed */
 #define PORT_E_HARDWARE_ERROR          (DemConf_DemEventParameter_PORT_E_HARDWARE_ERROR)
-#endif
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
 

@@ -82,8 +82,15 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Std_Types.h"
-#include "Dem.h"
 
+
+/**
+ *  \name CDD FSI TX DEM Configuration
+ *  @{
+ */
+/** \brief CDD FSI TX DEM Enable - STD_ON if any DEM event is configured */
+#define CDD_FSI_TX_CFG_DEM_ENABLE    (STD_ON)
+/* @} */
 
 #ifdef __cplusplus
 extern "C" {
@@ -242,17 +249,11 @@ extern "C" {
  *  Pre-compile switches for enabling/disabling DEM events
  *  @{
  */
-/* Cdd_FsiTx DEM Event Configuration*/
-#ifndef CDD_FSI_TX_E_BUFFER_UNDERRUN
 /** \brief Error code indicating  Buffer underrun occured */
 #define CDD_FSI_TX_E_BUFFER_UNDERRUN          (DemConf_DemEventParameter_CDD_FSI_TX_E_BUFFER_UNDERRUN)
-#endif
 
-/* Cdd_FsiTx DEM Event Configuration*/
-#ifndef CDD_FSI_TX_E_BUFFER_OVERRUN
-/** \brief Error code indicating  Buffer underrun occured */
+/** \brief Error code indicating  Buffer overrun occured */
 #define CDD_FSI_TX_E_BUFFER_OVERRUN          (DemConf_DemEventParameter_CDD_FSI_TX_E_BUFFER_OVERRUN)
-#endif
 /* @} */
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */

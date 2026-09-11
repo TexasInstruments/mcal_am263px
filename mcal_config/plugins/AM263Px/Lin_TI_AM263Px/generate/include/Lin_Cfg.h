@@ -157,6 +157,19 @@ extern "C" {
 //
 //*****************************************************************************
 #define LIN_REGISTER_READBACK_API         [!IF "as:modconf('Lin')[1]/LinGeneral/LinEnableRegisterReadbackApi = 'true'"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+
+//*****************************************************************************
+//
+//! \brief Enable/Disable LIN DEM support.
+//
+//*****************************************************************************
+#define LIN_CFG_DEM_ENABLE                [!IF "not(node:empty(as:modconf('Lin')[1]/LinDemEventParameterRefs/LIN_E_TIMEOUT))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
+
+/* LIN DEM Event Configuration*/
+[!IF "not(node:empty(as:modconf('Lin')[1]/LinDemEventParameterRefs/LIN_E_TIMEOUT))"!]
+/** \brief LIN_E_TIMEOUT DEM Event ID */
+#define LIN_E_TIMEOUT                     (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Lin')[1]/LinDemEventParameterRefs/LIN_E_TIMEOUT))"!])
+[!ENDIF!]
 /* @} */
 
 //*****************************************************************************

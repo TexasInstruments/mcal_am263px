@@ -83,6 +83,14 @@
  *********************************************************************************************************************/
 #include "Std_Types.h"
 
+/**
+ *  \name PORT DEM Configuration
+ *  @{
+ */
+/** \brief PORT DEM Enable - STD_ON if any DEM event is configured */
+#define PORT_CFG_DEM_ENABLE    (STD_OFF)
+/* @} */
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -439,6 +447,7 @@ extern "C" {
 */
 #define PORT_TIMEOUT_DURATION            (32000U)
 
+/** \brief DEM Error Definitions */
 
 /* ========================================================================== */
 /*                         Structures and Enums                               */

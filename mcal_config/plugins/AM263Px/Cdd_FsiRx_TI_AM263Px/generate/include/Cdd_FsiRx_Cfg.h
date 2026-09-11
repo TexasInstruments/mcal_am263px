@@ -83,9 +83,6 @@
 /*                             Include Files                                  */
 /* ========================================================================== */
 #include "Std_Types.h"
-[!IF "node:exists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs)"!][!//
-#include "Dem.h"
-[!ENDIF!][!//
 [!IF "not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxGeneral/CddFsiRxOsCounterRef))"!][!//
 #include "Os.h"
 [!ENDIF!][!//
@@ -95,6 +92,9 @@
 #include "Cdd_Dma_Cfg.h"
 [!ENDIF!][!//
 [!ENDIF!][!//
+
+/** \brief CDD FSI RX DEM Enable - STD_ON if any DEM event is configured */
+#define CDD_FSI_RX_CFG_DEM_ENABLE    [!IF "not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN)) or not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_OVERRUN)) or not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR)) or not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR)) or not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR))"!](STD_ON)[!ELSE!](STD_OFF)[!ENDIF!]
 
 #ifdef __cplusplus
 extern "C" {
@@ -294,45 +294,34 @@ extern "C" {
 [!ENDIF!][!//
 [!ENDNOCODE!][!//
 
-[!IF "node:exists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN)"!][!//
+[!IF "not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN))"!][!//
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR
 /** \brief Error code indicating  Buffer underrun occured */
-#define CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR ([!IF "node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
+#define CDD_FSI_RX_E_BUFFER_UNDERRUN_ERROR (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_UNDERRUN))"!])
 [!ENDIF!][!//
 
-[!IF "node:exists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_OVERRUN)"!][!//
+[!IF "not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_OVERRUN))"!][!//
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR
 /** \brief Error code indicating  Buffer overrun occured */
-#define CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR ([!IF "node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_OVERRUN)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_OVERRUN))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
+#define CDD_FSI_RX_E_BUFFER_OVERRUN_ERROR (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_BUFF_OVERRUN))"!])
 [!ENDIF!][!//
 
-[!IF "node:exists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR)"!][!//
+[!IF "not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR))"!][!//
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_CRC_ERROR
 /** \brief Error code indicating  CRC Error occured */
-#define CDD_FSI_RX_E_CRC_ERROR ([!IF "node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
+#define CDD_FSI_RX_E_CRC_ERROR (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_CRC_ERROR))"!])
 [!ENDIF!][!//
 
-[!IF "node:exists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR)"!][!//
+[!IF "not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR))"!][!//
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_FRAME_TYPE_ERROR
 /** \brief Error code indicating  FRAME TYPE Error occured */
-#define CDD_FSI_RX_E_FRAME_TYPE_ERROR ([!IF "node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
+#define CDD_FSI_RX_E_FRAME_TYPE_ERROR (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_TYPE_ERROR))"!])
 [!ENDIF!][!//
 
-
-[!IF "node:exists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR)"!][!//
+[!IF "not(node:empty(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR))"!][!//
 /* Cdd_FsiRx DEM Event Configuration*/
-#ifndef CDD_FSI_RX_E_EOF_ERROR
 /** \brief Error code indicating EOF Error occured */
-#define CDD_FSI_RX_E_EOF_ERROR ([!IF "node:refexists(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR)"!]DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR))"!][!ELSE!][!ERROR "No Hardawre refernece is provided to the DEM error configured"!][!ENDIF!])
-#endif
+#define CDD_FSI_RX_E_EOF_ERROR (DemConf_DemEventParameter_[!"node:name(node:ref(as:modconf('Cdd_FsiRx')[1]/CddFsiRxDemEventParameterRefs/CDD_FSI_RX_E_EOF_ERROR))"!])
 [!ENDIF!][!//
 
 #endif /* DOXYGEN_SHOULD_SKIP_THIS */
