@@ -119,7 +119,7 @@ extern "C" {
 /** \brief Eth configuration Minor Version */
 #define ETH_CFG_MINOR_VERSION           (3U)
 /** \brief Eth configuration Patch Version */
-#define ETH_CFG_PATCH_VERSION           (1U)
+#define ETH_CFG_PATCH_VERSION           (2U)
 /* @} */
 
 

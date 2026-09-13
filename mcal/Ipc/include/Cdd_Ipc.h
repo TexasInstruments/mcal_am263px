@@ -140,7 +140,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define CDD_IPC_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation patch Version */
-#define CDD_IPC_SW_PATCH_VERSION (2U)
+#define CDD_IPC_SW_PATCH_VERSION (3U)
 /**   @} */
 /**
  *  \name CDD IPC Driver Module AUTOSAR Version Info

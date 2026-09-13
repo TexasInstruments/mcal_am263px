@@ -96,7 +96,7 @@ extern "C" {
 /** \brief CDD FLC configuration Minor Version */
 #define CDD_FLC_CFG_MINOR_VERSION       (0U)
 /** \brief CDD FLC configuration Patch Version */
-#define CDD_FLC_CFG_PATCH_VERSION       (3U)
+#define CDD_FLC_CFG_PATCH_VERSION       (4U)
 /** @} */
 
 /* ========================================================================== */

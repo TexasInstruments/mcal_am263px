@@ -152,7 +152,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define CDD_UART_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation patch Version */
-#define CDD_UART_SW_PATCH_VERSION (2U)
+#define CDD_UART_SW_PATCH_VERSION (3U)
 /** @} */
 /**
  *  \name CDD UART Driver Module AUTOSAR Version Info

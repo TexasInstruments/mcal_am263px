@@ -72,7 +72,7 @@
  *  VERSION CHECK
  ******************************************************************************/
 #if ( (CDD_FSI_TX_CFG_MAJOR_VERSION != (10U)) \
-    ||(CDD_FSI_TX_CFG_MINOR_VERSION != (2U)))
+    ||(CDD_FSI_TX_CFG_MINOR_VERSION != (3U)))
   #error "Version numbers of Cdd_FsiTx_PBcfg.c and Cdd_FsiTx_Cfg.h are inconsistent!"
 #endif
 

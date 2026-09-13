@@ -88,11 +88,11 @@
  *********************************************************************************************************************/
 
 /*  Version checking  */
-#if ((PORT_SW_MAJOR_VERSION != (10U))||(PORT_SW_MINOR_VERSION != (2U)))
+#if ((PORT_SW_MAJOR_VERSION != (10U))||(PORT_SW_MINOR_VERSION != (3U)))
    #error "Version numbers of Port_PBcfg.c and Port.h are inconsistent!"
 #endif
 
-#if ((PORT_CFG_MAJOR_VERSION != (10U))||(PORT_CFG_MINOR_VERSION != (2U)))
+#if ((PORT_CFG_MAJOR_VERSION != (10U))||(PORT_CFG_MINOR_VERSION != (3U)))
   #error "Version numbers of Port_PBcfg.c and Port_Cfg.h are inconsistent!"
 #endif
 

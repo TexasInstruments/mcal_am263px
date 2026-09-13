@@ -135,7 +135,7 @@
 /*
  * Design: MCAL-26597
  */
-#if ((ETH_SW_MAJOR_VERSION != (10U)) || (ETH_SW_MINOR_VERSION != (3U)) || (ETH_SW_PATCH_VERSION != (1U)))
+#if ((ETH_SW_MAJOR_VERSION != (10U)) || (ETH_SW_MINOR_VERSION != (3U)) || (ETH_SW_PATCH_VERSION != (2U)))
 #error "Eth: Software Version Numbers are inconsistent!!"
 #endif
 

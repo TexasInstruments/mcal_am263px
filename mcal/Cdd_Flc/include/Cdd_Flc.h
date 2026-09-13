@@ -96,7 +96,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define CDD_FLC_SW_MINOR_VERSION (0U)
 /** \brief Driver Implementation Patch Version */
-#define CDD_FLC_SW_PATCH_VERSION (3U)
+#define CDD_FLC_SW_PATCH_VERSION (4U)
 /** @} */
 
 /**

@@ -112,7 +112,7 @@ extern "C" {
 /** \brief Driver Implementation Minor Version */
 #define GPT_SW_MINOR_VERSION (2U)
 /** \brief Driver Implementation Patch Version */
-#define GPT_SW_PATCH_VERSION (2U)
+#define GPT_SW_PATCH_VERSION (3U)
 /**   @} */
 
 /**

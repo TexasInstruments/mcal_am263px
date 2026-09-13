@@ -64,7 +64,7 @@
 
  /*********************************************************************************************************************
     Project: Mcal_Demo_Cfg
-    10.2.2
+    10.2.3
     4.6.0
     AUTOSAR 4.3.1 0
 
@@ -77,7 +77,7 @@
 
 #define GPT_PBCFG_C_MAJOR_VERSION    (10U)
 #define GPT_PBCFG_C_MINOR_VERSION    (2U)
-#define GPT_PBCFG_C_PATCH_VERSION    (2U)
+#define GPT_PBCFG_C_PATCH_VERSION    (3U)
 
 /* ---- Perform version checking  ----------------------------------------- */
 

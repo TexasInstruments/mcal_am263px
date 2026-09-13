@@ -116,7 +116,7 @@ extern "C" {
 /** \brief Pwm configuration Minor Version */
 #define PWM_CFG_MINOR_VERSION           (2U)
 /** \brief Pwm configuration Patch Version */
-#define PWM_CFG_PATCH_VERSION           (1U)
+#define PWM_CFG_PATCH_VERSION           (2U)
 /* @} */
 
 

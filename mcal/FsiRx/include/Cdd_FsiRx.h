@@ -123,7 +123,7 @@ extern "C" {
 /** \brief Driver Implementation Major Version */
 #define CDD_FSI_RX_SW_MAJOR_VERSION (10U)
 /** \brief Driver Implementation Minor Version */
-#define CDD_FSI_RX_SW_MINOR_VERSION (2U)
+#define CDD_FSI_RX_SW_MINOR_VERSION (3U)
 /** \brief Driver Implementation patch Version */
 #define CDD_FSI_RX_SW_PATCH_VERSION (2U)
 /**   @} */

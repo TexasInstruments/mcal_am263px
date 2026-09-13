@@ -112,7 +112,7 @@ extern "C" {
 /** \brief Port configuration Major Version */
 #define PORT_CFG_MAJOR_VERSION           (10U)
 /** \brief Port configuration Minor Version */
-#define PORT_CFG_MINOR_VERSION           (2U)
+#define PORT_CFG_MINOR_VERSION           (3U)
 /** \brief Port configuration Patch Version */
 #define PORT_CFG_PATCH_VERSION           (3U)
 /* @} */

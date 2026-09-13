@@ -93,7 +93,7 @@ extern "C" {
  *  @{
  */
 #define LIN_CFG_MAJOR_VERSION    (10U) //!< Lin configuration Major Version.
-#define LIN_CFG_MINOR_VERSION    (4U) //!< Lin configuration Minor Version.
+#define LIN_CFG_MINOR_VERSION    (5U) //!< Lin configuration Minor Version.
 #define LIN_CFG_PATCH_VERSION    (0U) //!< Lin configuration Patch Version.
 /* @} */
 

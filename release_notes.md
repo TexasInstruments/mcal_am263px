@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 12-Sep-2026.
+This is the release notes for MCAL AM26xx 26.01.00 done on 14-Sep-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 
 ## Licensing
@@ -132,29 +132,29 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
 +------------+----------+
 | Module     | Version  |
 +------------+----------+
-| ADC        | 10.02.02 |
-| CAN        | 10.02.02 |
-| CDD_CMPSS  | 01.00.03 |
-| CDD_FLC    | 01.00.03 |
+| ADC        | 10.02.03 |
+| CAN        | 10.03.02 |
+| CDD_CMPSS  | 01.00.04 |
+| CDD_FLC    | 01.00.04 |
 | CDD_DMA    | 10.02.02 |
-| CDD_FSIRX  | 10.02.02 |
-| CDD_FSITX  | 10.02.02 |
-| CDD_I2C    | 11.00.02 |
-| CDD_IPC    | 10.02.02 |
-| CDD_PWM    | 10.02.01 |
-| CDD_UART   | 10.02.02 |
-| DIO        | 10.02.02 |
-| ETH        | 10.03.01 |
+| CDD_FSIRX  | 10.03.02 |
+| CDD_FSITX  | 10.03.02 |
+| CDD_I2C    | 11.00.03 |
+| CDD_IPC    | 10.02.03 |
+| CDD_PWM    | 10.02.02 |
+| CDD_UART   | 10.02.03 |
+| DIO        | 10.03.02 |
+| ETH        | 10.03.02 |
 | ETHTRCV    | 10.04.00 |
-| FLS        | 11.00.00 |
-| GPT        | 10.02.02 |
-| ICU        | 10.02.02 |
-| LIN        | 10.04.00 |
-| MCU        | 10.02.02 |
-| PORT       | 10.02.03 |
-| PWM        | 10.02.01 |
-| SPI        | 10.02.02 |
-| WDG        | 11.00.00 |
+| FLS        | 11.01.00 |
+| GPT        | 10.02.03 |
+| ICU        | 10.02.03 |
+| LIN        | 10.05.00 |
+| MCU        | 10.03.02 |
+| PORT       | 10.03.03 |
+| PWM        | 10.02.02 |
+| SPI        | 10.03.02 |
+| WDG        | 11.01.00 |
 +------------+----------+
 ```
 
@@ -319,14 +319,6 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Corresponding bswmd files are now updated</td>
-    </tr>
-    <tr>
-      <td>MCAL-41779</td>
-      <td>Incorrect SchM exclusive-area handling in Tx, Rx processing</td>
-      <td>Eth</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Replaced single large SchM_Enter/Exit locks with multiple granular critical sections in RX and TX packet processing functions</td>
     </tr>
     <tr>
       <td>MCAL-38221</td>

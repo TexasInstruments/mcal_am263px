@@ -111,11 +111,11 @@
 #error "AUTOSAR Version Numbers of Dio are different"
 #endif
 
-#if ((DIO_SW_MAJOR_VERSION != (10U)) || (DIO_SW_MINOR_VERSION != (2U)))
+#if ((DIO_SW_MAJOR_VERSION != (10U)) || (DIO_SW_MINOR_VERSION != (3U)))
 #error "Version numbers of Dio.c and Dio.h are inconsistent!"
 #endif
 
-#if ((DIO_CFG_MAJOR_VERSION != (10U)) || (DIO_CFG_MINOR_VERSION != (2U)))
+#if ((DIO_CFG_MAJOR_VERSION != (10U)) || (DIO_CFG_MINOR_VERSION != (3U)))
 #error "Version numbers of Dio.c and Dio_Cfg.h are inconsistent!"
 #endif
 

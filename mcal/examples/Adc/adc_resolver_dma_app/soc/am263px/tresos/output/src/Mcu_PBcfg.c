@@ -87,11 +87,11 @@
  *********************************************************************************************************************/
 
 /*  Version checking  */
-#if ((MCU_SW_MAJOR_VERSION != (10U))||(MCU_SW_MINOR_VERSION != (2U)))
+#if ((MCU_SW_MAJOR_VERSION != (10U))||(MCU_SW_MINOR_VERSION != (3U)))
    #error "Version numbers of Mcu_PBcfg.c and Mcu.h are inconsistent!"
 #endif
 
-#if ((MCU_CFG_MAJOR_VERSION != (10U))||(MCU_CFG_MINOR_VERSION != (2U)))
+#if ((MCU_CFG_MAJOR_VERSION != (10U))||(MCU_CFG_MINOR_VERSION != (3U)))
   #error "Version numbers of Mcu_PBcfg.c and Mcu_Cfg.h are inconsistent!"
 #endif
 /**********************************************************************************************************************

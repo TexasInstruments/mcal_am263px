@@ -1485,30 +1485,22 @@ Eth_provideHwTxBuffer(P2VAR(Eth_BufIdxType, AUTOMATIC, ETH_APPL_DATA) BufIdxPtr,
 #if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
     if ((uint32)0U == Eth_DrvObj.txDescRing[Priority].freeBuffDesc)
     {
+        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         /* Below process TX will exit then re-enter exclusive with EthIf tx confirm callback,
            disable TX interrupt here to avoid race condition with process TX in IRQ handler */
-        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, Priority, CPSW_CH_INTR_TX);
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-
         Eth_processTxBuffDesc(Eth_DrvObj.ctrlIdx, Priority);
-
-        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, Priority, CPSW_CH_INTR_TX);
         SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
 #else
     if ((uint32)0U == Eth_DrvObj.txDescRing.freeBuffDesc)
     {
+        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         /* Below process TX will exit then re-enter exclusive with EthIf tx confirm callback,
            disable TX interrupt here to avoid race condition with process TX in IRQ handler */
-        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM, CPSW_CH_INTR_TX);
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-
         Eth_processTxBuffDesc(Eth_DrvObj.ctrlIdx, ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM);
-
-        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM, CPSW_CH_INTR_TX);
         SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
@@ -1868,7 +1860,10 @@ Eth_receiveHw(VAR(uint8, AUTOMATIC) FifoIdx, P2VAR(Eth_RxStatusType, AUTOMATIC, 
 #endif
     if ((uint32)0U != (uint32)(rxIntFlags & channelMask))
     {
+        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
+
         *RxStatusPtr = EthRxBuffDescProcessSingle(Eth_DrvObj.ctrlIdx, channelNum);
+        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
 
 #if (STD_OFF == ETH_QOS_MULTI_QUEUE_SUPPORT)
@@ -1919,10 +1914,7 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
     uint32           cp             = 0U;
     Eth_RxStatusType rxStatus       = ETH_NOT_RECEIVED;
     uint32           endOfQueueFlag = 0U;
-    boolean          descReady      = (boolean)FALSE;
 
-    /* Protect HW read for completion pointer */
-    SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
     cp = CpswCpdma_readRxChCp(Eth_DrvObj.baseAddr, chNum);
 
     /* Only do stuff if not a teardown request for this channel */
@@ -1935,20 +1927,14 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
          * Process the receive buffer descriptors. When the DMA completes
          * reception, OWNERSHIP flag will be cleared.
          */
-        /* Protect descriptor flag read - exit then re-enter exclusive around callback */
-        descReady = (CPSW_CPDMA_WRD3_OWN_DISABLE ==
-                     (uint32)HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_OWN));
-        if ((boolean)TRUE == descReady)
+        if (CPSW_CPDMA_WRD3_OWN_DISABLE ==
+            (uint32)HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_OWN))
         {
-            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-
 #if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
             EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc, chNum);
 #else
                 EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc);
 #endif
-            /* Protect descriptor update and HW writes */
-            SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
             /* Get endOfQueueFlag before update desc */
             endOfQueueFlag = HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_EOQ);
 
@@ -1988,13 +1974,11 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
             }
 
             EthRxBuffDescRxStatus(pCurrRxBuffDesc->pNextBuffDesc, &rxStatus);
-            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
         }
         else
         {
             /**< frame not received, no further frames available */
             rxStatus = ETH_NOT_RECEIVED;
-            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
         }
     }
     else
@@ -2002,7 +1986,6 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
         EthRxChTearDown(chNum);
         /**< frame not received, no further frames available */
         rxStatus = ETH_NOT_RECEIVED;
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
 
     return rxStatus;
@@ -2027,8 +2010,6 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCu
 #endif
     /* Get the total length of the packet */
 
-    /* Protect descriptor field read */
-    SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
     /*
      * Buffer length field is 11 bit so typecasting to uint16
      * will not lose data.
@@ -2108,6 +2089,7 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCu
     if (TRUE == isChkSumValid)
 #endif
     {
+        /* Release SchM before notify upper layer */
         /* Both RX IRQ and RX Threshold IRQ handler may call EthIf_Rxindication(),
          * disable both RX IRQs here to avoid race condition */
 #if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
@@ -2117,16 +2099,13 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCu
             CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, chNum, CPSW_CH_INTR_RX_THR);
         }
         SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-        /* Release SchM before notifying upper layer */
         EthIf_RxIndication(ctrlIdx, frameType, isBroadcast, &srcMacAddr[0U], (Eth_DataType *)frameDataPtr, dataLen);
-        /* Re-enter SchM to protect interrupt enable */
         SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, chNum, CPSW_CH_INTR_RX);
         if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[chNum] != (uint32)0U)
         {
             CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, chNum, CPSW_CH_INTR_RX_THR);
         }
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
 #else
             CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
             if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM] != (uint32)0U)
@@ -2134,16 +2113,13 @@ static void EthRxProcessPacket(uint8 ctrlIdx, const Eth_CpdmaRxBuffDescType *pCu
                 CpswCpdma_disableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
             }
             SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-            /* Release SchM before notifying upper layer */
             EthIf_RxIndication(ctrlIdx, frameType, isBroadcast, &srcMacAddr[0U], (Eth_DataType *)frameDataPtr, dataLen);
-            /* Re-enter SchM to protect interrupt enable */
             SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
             CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX);
             if (Eth_DrvObj.ethConfig.cpdmaCfg.rxThreshCount[ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM] != (uint32)0U)
             {
                 CpswCpdma_enableChIntr(Eth_DrvObj.baseAddr, ETH_CPDMA_DEFAULT_RX_CHANNEL_NUM, CPSW_CH_INTR_RX_THR);
             }
-            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
 #endif
     }
 }
@@ -2206,8 +2182,6 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
     uint32 cp = 0U, packetCount = 0U;
     uint32 endOfQueueFlag = 0U;
 
-    /* Protect HW read for completion pointer */
-    SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
     cp = CpswCpdma_readRxChCp(Eth_DrvObj.baseAddr, chNum);
 
     /* Only do stuff if not a teardown request for this channel */
@@ -2215,7 +2189,7 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
     {
         /* Get the bd which contains the earliest filled data */
         pCurrRxBuffDesc = pRxDescRing->pHead;
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
+
         /*
          * Process the receive buffer descriptors. When the DMA completes
          * reception, OWNERSHIP flag will be cleared.
@@ -2228,8 +2202,6 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
 #else
                 EthRxProcessPacket(ctrlIdx, pCurrRxBuffDesc);
 #endif
-            /* Protect descriptor access and modification */
-            SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
             /* Get endOfQueueFlag before update desc */
             endOfQueueFlag = HW_GET_FIELD(pCurrRxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_EOQ);
 
@@ -2241,11 +2213,8 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
             pLastBuffDesc   = pCurrRxBuffDesc;
             pCurrRxBuffDesc = pCurrRxBuffDesc->pNextBuffDesc;
             packetCount++;
-            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
         }
 
-        /* Protect HW updates for buffer management */
-        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         /* Update buff desc if having processed packet */
         if ((uint32)0U != packetCount)
         {
@@ -2280,12 +2249,10 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
                 /* nothing */
             }
         }
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
     else
     {
         EthRxChTearDown(chNum);
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
 }
 
@@ -2327,11 +2294,14 @@ static void EthTxBuffProcess(uint8 ctrlIdx, Eth_TxBufObjType *pBufObj)
 #endif
     if (((boolean)TRUE) == pBufObj->txConfirmation)
     {
+        /* Release SchM before notify upper layer */
+        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
         /*
          * Tx Buffer descriptor(FHOST) doesn't have any field to check transmit error, so
          * EthIf_TxConfirmation always indicates Transmit status with E_OK.
          */
         EthIf_TxConfirmation((uint8)ctrlIdx, (Eth_BufIdxType)pBufObj->bufIdx, E_OK);
+        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
 
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
 
@@ -2355,44 +2325,24 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
     Eth_CpdmaTxBuffDescType *pCurrTxBuffDesc = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
     Eth_CpdmaTxBuffDescType *pLastBuffDesc   = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
     uint32                   endOfQueueFlag  = 0U;
-    boolean                  hasQueueHead    = (boolean)FALSE;
-    boolean                  descReady       = (boolean)FALSE;
 #if (STD_ON == ETH_QOS_MULTI_QUEUE_SUPPORT)
     Eth_CpdmaTxBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing[chNum]);
 #else
         Eth_CpdmaTxBuffDescQueue *pTxDescRing = &(Eth_DrvObj.txDescRing);
 #endif
 
-    /* Protect queue head read and initialization */
-    hasQueueHead = (NULL_PTR != pTxDescRing->pQueueHead);
-    if (hasQueueHead)
+    if (NULL_PTR != pTxDescRing->pQueueHead) /*only check if TX in progress */
     {
         pCurrTxBuffDesc = pTxDescRing->pQueueHead;
-    }
-
-    if (hasQueueHead) /*only check if TX in progress */
-    {
         /* loop to process each packet in queue, queue end with pCurrTxBuffDesc->pNextBuffDesc ==
          * NULL */
         /* Skip check OWNER with SOP because all TX desc have SOP and EOP flag */
-        while ((boolean)TRUE)
+        while (CPSW_CPDMA_WRD3_OWN_ENABLE !=
+               (uint32)HW_GET_FIELD(pCurrTxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_OWN))
         {
-            /* Protect OWN flag check - exit then re-enter exclusive around callback */
-            SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
-            descReady = (CPSW_CPDMA_WRD3_OWN_ENABLE !=
-                         (uint32)HW_GET_FIELD(pCurrTxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_OWN));
-            if ((boolean)FALSE == descReady)
-            {
-                SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-                break;
-            }
-            SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-
-            /* Process current packet buffer - callback runs unprotected */
+            /* Process current packet buffer */
             EthTxBuffProcess(ctrlIdx, pCurrTxBuffDesc->pBufObj);
 
-            /* Protect descriptor update and HW writes */
-            SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
             /* Need save endOfQueueFlag before clear */
             endOfQueueFlag = (uint32)HW_GET_FIELD(pCurrTxBuffDesc->flagsAndPacketLength, CPSW_CPDMA_WRD3_EOQ);
 
@@ -2411,7 +2361,6 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
                 pTxDescRing->pQueueHead =
                     (Eth_CpdmaTxBuffDescType *)NULL_PTR; /* Reset queue after DMA queue complete */
                 pTxDescRing->pQueueTail = (Eth_CpdmaTxBuffDescType *)NULL_PTR;
-                SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
                 break;
             }
             else
@@ -2419,12 +2368,9 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
                 /* switch to check next bd */
                 pCurrTxBuffDesc         = pCurrTxBuffDesc->pNextBuffDesc;
                 pTxDescRing->pQueueHead = pCurrTxBuffDesc;
-                SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
             }
-        }
+        };
 
-        /* Protect HW writes for completion and queue management */
-        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
         /* Acknowledge CPSW and free the corresponding ethFrame */
         if (NULL_PTR != pLastBuffDesc)
         {
@@ -2443,7 +2389,10 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
             pTxDescRing->pQueueTail->globalNextDescPointer = 0U;
             CpswCpdma_writeTxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)pTxDescRing->pQueueHead), chNum);
         }
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
+    }
+    else
+    {
+        /* nothing */
     }
 }
 
