@@ -200,12 +200,6 @@ extern volatile VAR(Dem_EventStatusType, DEM_VAR_CLEARED) Dem_EventStatus;
 #define DemConf_DemEventParameter_CAN_E_HARDWARE_ERROR         (65517U)
 
 /**
- *  This Extended Production Error shall be issued when GPT
- *  Timer register reset fails.
- */
-#define DemConf_DemEventParameter_GPT_E_HARDWARE_ERROR         (65516U)
-
-/**
  *  This Extended Production Error shall be issued when WDG
  *  initialization or mode switch failed because it would disable the watchdog.
  */
@@ -216,18 +210,6 @@ extern volatile VAR(Dem_EventStatusType, DEM_VAR_CLEARED) Dem_EventStatus;
  *  setting a watchdog mode failed (during initialization or mode switch).
  */
 #define DemConf_DemEventParameter_WDG_E_MODE_FAILED            (65514U)
-
-/**
- *  This Extended Production Error shall be issued when ADC
- *  register setting timeout occurs
- */
-#define DemConf_DemEventParameter_ADC_E_HARDWARE_ERROR         (65513U)
-
-/**
- *  This Extended Production Error shall be issued when CDD encounters
- *  internal error
- */
-#define DemConf_DemEventParameter_CDD_IPC_E_HARDWARE_ERROR     (65512U)
 
 /**
  *  This Extended Production Error shall be issued when PORT encounters

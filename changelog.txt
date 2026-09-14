@@ -1,3 +1,83 @@
+commit 238c1834399ee65c02443c7b45eb147a4a2d6e13
+Author: Akash <a-verma3@ti.com>
+Date:   Fri Sep 11 15:35:23 2026 +0530
+
+    all: ADC/GPT/IPC: Removed the unused dem event from the Rec.xdm file .
+    
+    - Dem is not configured for these module so removed it for the Rec.xdm file, example config and Ut_config
+    
+    Fixes: MCAL-41764
+    
+    Signed-off-by: Akash Verma
+
+ mcal/autosar_include/Dem.h                         |  18 --
+ .../Mcal_Demo_Cfg/soc/am261/tresos/config/Dem.xdm  | 189 ---------------------
+ .../Mcal_Demo_Cfg/soc/am263/tresos/config/Dem.xdm  | 189 ---------------------
+ .../soc/am263px/tresos/config/Dem.xdm              | 189 ---------------------
+ .../AM261x/Dem_TI_AM261x/config_ext/Dem_Rec.xdm    | 189 ---------------------
+ .../AM263Px/Dem_TI_AM263Px/config_ext/Dem_Rec.xdm  | 189 ---------------------
+ .../AM263x/Dem_TI_AM263x/config_ext/Dem_Rec.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_1/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_9/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_91/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am261/r5f0_0/config_92/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am261/r5f0_0/config_93/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am261/r5f0_0/config_94/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_1/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_2/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_3/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_4/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_5/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_6/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_7/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_8/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_9/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_91/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_92/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_93/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_94/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263px/r5f0_0/config_1/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_9/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_91/tresos/config/Dem.xdm | 189 ---------------------
+ .../am263px/r5f0_0/config_92/tresos/config/Dem.xdm | 189 ---------------------
+ .../am263px/r5f0_0/config_93/tresos/config/Dem.xdm | 189 ---------------------
+ .../am263px/r5f0_0/config_94/tresos/config/Dem.xdm | 189 ---------------------
+ .../am261/r5f0_0/config_1/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_10/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am261/r5f0_0/config_2/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_3/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_4/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_5/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_8/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am261/r5f0_0/config_91/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am261/r5f0_0/config_92/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am261/r5f0_0/config_93/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am261/r5f0_0/config_94/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_1/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_10/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_2/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_3/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_4/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_5/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_6/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_8/tresos/config/Dem.xdm    | 189 ---------------------
+ .../am263/r5f0_0/config_91/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_92/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_93/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263/r5f0_0/config_94/tresos/config/Dem.xdm   | 189 ---------------------
+ .../am263px/r5f0_0/config_1/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_10/tresos/config/Dem.xdm | 189 ---------------------
+ .../am263px/r5f0_0/config_2/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_3/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_4/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_5/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_8/tresos/config/Dem.xdm  | 189 ---------------------
+ .../am263px/r5f0_0/config_91/tresos/config/Dem.xdm | 189 ---------------------
+ .../am263px/r5f0_0/config_92/tresos/config/Dem.xdm | 189 ---------------------
+ .../am263px/r5f0_0/config_93/tresos/config/Dem.xdm | 189 ---------------------
+ .../am263px/r5f0_0/config_94/tresos/config/Dem.xdm | 189 ---------------------
+ 66 files changed, 12303 deletions(-)
+
 commit dc3b279196be4611b5b0befcf365034ddc43dd53
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Fri Sep 11 22:26:47 2026 +0530
