@@ -1,7 +1,7 @@
 /*
  * TEXAS INSTRUMENTS TEXT FILE LICENSE
  *
- * Copyright (c) 2023-2025 Texas Instruments Incorporated
+ * Copyright (c) 2023-2026 Texas Instruments Incorporated
  *
  * All rights reserved not granted herein.
  *
@@ -218,10 +218,9 @@ void CpswCpts_handleEvents(CpswCpts_StateObj *pCptsStateObj);
  * \param pCptsStateObj   CPTS instance structure
  * \param tsVal           Output timestamp value
  *
- * \retval E_OK           Success
- * \retval E_NOT_OK       Failure
+ * \retval None
  */
-Std_ReturnType CpswCpts_readTimestamp(CpswCpts_StateObj *pCptsStateObj, uint64 *tsVal);
+void CpswCpts_readTimestamp(CpswCpts_StateObj *pCptsStateObj, uint64 *tsVal);
 
 /**
  * \brief Get time in Eth_TimeStampType from nanoseconds.

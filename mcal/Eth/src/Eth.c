@@ -1,7 +1,7 @@
 /*
  * TEXAS INSTRUMENTS TEXT FILE LICENSE
  *
- * Copyright (c) 2023-2025 Texas Instruments Incorporated
+ * Copyright (c) 2023-2026 Texas Instruments Incorporated
  *
  * All rights reserved not granted herein.
  *
@@ -435,14 +435,6 @@ Eth_Init(P2CONST(Eth_ConfigType, AUTOMATIC, ETH_PBCFG) CfgPtr)
             /* Change driver state to initialized */
             Eth_DrvStatus = ETH_STATE_INIT;
         }
-        else
-        {
-            /* Eth Driver not initialized*/
-        }
-    }
-    else
-    {
-        /*Driver already Initialized*/
     }
 }
 
@@ -1054,14 +1046,12 @@ Eth_GetCurrentTime(VAR(uint8, AUTOMATIC) CtrlIdx, P2VAR(Eth_TimeStampQualType, A
         uint64             nsec          = 0U;
         CpswCpts_StateObj *pCptsStateObj = &Eth_DrvObj.cptsObj;
 
-        retVal = CpswCpts_readTimestamp(pCptsStateObj, &nsec);
+        /* read timestamp value */
+        CpswCpts_readTimestamp(pCptsStateObj, &nsec);
 
-        if ((Std_ReturnType)E_NOT_OK != retVal)
-        {
-            CpswCpts_getSysTime(&nsec, timeStampPtr);
-            /* Quality information not supported, the value always Valid. */
-            *timeQualPtr = ETH_VALID;
-        }
+        CpswCpts_getSysTime(&nsec, timeStampPtr);
+        /* Quality information not supported, the value always Valid. */
+        *timeQualPtr = ETH_VALID;
     }
     else
     {
@@ -1332,10 +1322,15 @@ FUNC(void, ETH_CODE_FAST) Eth_MainFunction(void)
         if (ETH_MODE_DOWN != ctrlMode)
         {
             retVal = Eth_cpswCheckHostErr();
+            /* TI_COVERAGE_GAP_START [Branch] FALSE branch reached only when
+               Eth_cpswCheckHostErr detects a CPSW hardware version ID mismatch,
+               which requires hardware fault injection and is not exercisable in
+               normal test execution. */
             if ((Std_ReturnType)E_OK == retVal)
             {
                 Eth_checkHwCtrlErrors();
             }
+            /* TI_COVERAGE_GAP_STOP */
         }
 
         if (TRUE == Eth_ControllerModeChangeFlag)

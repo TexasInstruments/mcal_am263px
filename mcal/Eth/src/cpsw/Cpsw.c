@@ -1,7 +1,7 @@
 /*
  * TEXAS INSTRUMENTS TEXT FILE LICENSE
  *
- * Copyright (c) 2023-2025 Texas Instruments Incorporated
+ * Copyright (c) 2023-2026 Texas Instruments Incorporated
  *
  * All rights reserved not granted herein.
  *
@@ -114,6 +114,9 @@ FUNC(void, ETH_CODE) Cpsw_resetEnet(uint32 baseAddr, uint8 slavePortNum)
     ETH_PN_WR_PORT_FIELD(MAC_SOFT_RESET, slavePortNum, SOFT_RESET, 1U);
     while (1U == ETH_PN_RD_PORT_FIELD(MAC_SOFT_RESET, slavePortNum, SOFT_RESET))
     {
+        /* TI_COVERAGE_GAP_START [Branch] Reached only when MAC soft reset does not complete
+           within ETH_TIMEOUT_DURATION iterations, indicating a hardware fault. This requires
+           hardware fault injection and is not exercisable in normal test execution. */
         if (0U == tempCount)
         {
 #ifdef ETH_E_HARDWARE_ERROR
@@ -121,6 +124,7 @@ FUNC(void, ETH_CODE) Cpsw_resetEnet(uint32 baseAddr, uint8 slavePortNum)
 #endif
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             tempCount = tempCount - 1U;
@@ -149,14 +153,15 @@ uint32 Cpsw_checkHostErr(uint32 baseAddr)
     volatile uint32 regVal = 0U;
 
     regVal = CPSW_RD_FIELD(CPSW_ID_VER, IDENT);
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when the CPSW hardware version register
+       does not match the expected version ID, indicating a hardware fault or wrong silicon
+       revision. This requires hardware fault injection and is not exercisable in normal
+       test execution. */
     if (regVal != Eth_GetVersionID())
     {
         retVal = (uint32)TRUE;
     }
-    else
-    {
-        retVal = (uint32)FALSE;
-    }
+    /* TI_COVERAGE_GAP_STOP */
 
     return retVal;
 }

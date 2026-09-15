@@ -1,3 +1,110 @@
+commit a44d717dbfcceadc3e25ec248c700611e955f319
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Tue Sep 15 21:25:00 2026 +0530
+
+    a26xxx: ETH: fix link issues
+    
+    - Fix lint issues.
+    
+    Fixes: MCAL-41785
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ mcal/Eth/src/cpsw/Cpsw_Ale.c                         |  2 +-
+ mcal/Eth/src/cpsw/Eth_Priv.c                         |  1 -
+ mcal_test/eth_test/testInput/ethTestCases.h          | 12 ++++++------
+ mcal_test/eth_test/testLib/ethTestCoverageTestCase.c | 14 +++++++-------
+ mcal_test/makefile_common.mk                         |  2 --
+ 5 files changed, 14 insertions(+), 17 deletions(-)
+
+commit cafc3e53f0750417134dbadbbf61cf32f73a35b9
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Tue Sep 15 12:33:22 2026 +0530
+
+    am26xxx: ETH: Add test coverage gaps
+    
+    - Update ETH code with test coverage gaps
+    
+    Fixes: MCAL-41785
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ build/Rules.make               | 10 ++------
+ mcal/Eth/src/Eth.c             |  5 ++++
+ mcal/Eth/src/Eth_Irq.c         | 24 ++++++++++++++++++-
+ mcal/Eth/src/cpsw/Cpsw.c       |  9 +++++++
+ mcal/Eth/src/cpsw/Cpsw_Ale.c   |  5 ++++
+ mcal/Eth/src/cpsw/Cpsw_Cpdma.c |  7 +++++-
+ mcal/Eth/src/cpsw/Cpsw_Mdio.c  | 15 ++++++++++++
+ mcal/Eth/src/cpsw/Eth_Priv.c   | 53 ++++++++++++++++++++++++++++++++++++++++++
+ mcal_test/makefile             |  6 ++---
+ mcal_test/makefile_common.mk   |  6 +----
+ 10 files changed, 122 insertions(+), 18 deletions(-)
+
+commit 013a321f8d1ae73b0497e66ca99acbd906fbab0c
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Tue Sep 15 10:00:15 2026 +0530
+
+    am26xxx: ETH: Code cleanup
+    
+    
+    - Refactor MCAL driver to remove
+      redundant else blocks for better code coverage
+    - CPTS - update CpswCpts_readTimestamp API to return void
+      and avoid unnecessary function call and branch condition
+      that cannot be covered in test coverage
+    
+    Fixes: MCAL-41785
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ mcal/Eth/src/Eth.c                    | 22 +++-----
+ mcal/Eth/src/cpsw/Cpsw.c              |  6 +--
+ mcal/Eth/src/cpsw/Cpsw_Cpts.c         | 98 +++++++++++++++--------------------
+ mcal/Eth/src/cpsw/Cpsw_Mdio.c         | 10 ++--
+ mcal/Eth/src/cpsw/Eth_Priv.c          | 36 -------------
+ mcal/Eth/src/cpsw/include/Cpsw_Cpts.h |  7 ++-
+ 6 files changed, 56 insertions(+), 123 deletions(-)
+
+commit 349d0c8e154c895daee1c7f8e8b3e5f95cda7577
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Tue Sep 15 09:44:39 2026 +0530
+
+    am26xxx: ETH: Improve test coverage
+    
+    - Add Port#1 MAC PHY loopback test case
+    - Improve function coverage test cases for:
+       - CpswStats_clearHostPortStats
+       - CpswMdio_init with outFreq=0
+       - MDIO user group 1 offset path (phyAddr != 0)
+    
+    Fixes: MCAL-41785
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ mcal_test/eth_test/testInput/ethTestCases.h        | 57 ++++++++++++++++++++
+ mcal_test/eth_test/testLib/ethTest.h               |  2 +
+ .../eth_test/testLib/ethTestCoverageTestCase.c     | 63 ++++++++++++++++++++++
+ 3 files changed, 122 insertions(+)
+
+commit b0ad0a4dc77106d3de12a3fa964a6b462eb9a9f3
+Author: Kalyan Vagvala <k-vagvala@ti.com>
+Date:   Tue Sep 15 08:54:24 2026 +0530
+
+    am26xxx: ETH: Enable clang based dynamic analysis
+    
+    - Enable clang based dynamic analysis build environemnt
+    
+    Fixes: MCAL-41785
+    
+    Signed-off-by: Kalyan Vagvala <k-vagvala@ti.com>
+
+ build/Rules.make                  | 10 ++++++++--
+ mcal_test/eth_test/build/makefile |  2 +-
+ mcal_test/makefile                |  6 +++---
+ mcal_test/makefile_common.mk      |  8 +++++++-
+ 4 files changed, 19 insertions(+), 7 deletions(-)
+
 commit 238c1834399ee65c02443c7b45eb147a4a2d6e13
 Author: Akash <a-verma3@ti.com>
 Date:   Fri Sep 11 15:35:23 2026 +0530

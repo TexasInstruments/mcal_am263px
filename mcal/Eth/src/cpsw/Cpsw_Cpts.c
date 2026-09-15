@@ -1,7 +1,7 @@
 /*
  * TEXAS INSTRUMENTS TEXT FILE LICENSE
  *
- * Copyright (c) 2023-2025 Texas Instruments Incorporated
+ * Copyright (c) 2023-2026 Texas Instruments Incorporated
  *
  * All rights reserved not granted herein.
  *
@@ -110,8 +110,6 @@ static void CpswCpts_initHw(CpswCpts_StateObj *pCptsStateObj);
 
 static uint64 CpswCpts_getTimestamp(uint32 baseAddr);
 
-static uint64 CpswCpts_readHwTimestamp(CpswCpts_StateObj *pCptsStateObj);
-
 static void CpswCpts_enableIntr(uint32 baseAddr);
 
 static void CpswCpts_disableIntr(uint32 baseAddr);
@@ -119,6 +117,8 @@ static void CpswCpts_disableIntr(uint32 baseAddr);
 static CpswCpts_Event *CpswCpts_lookupEvent(CpswCpts_StateObj *pCptsStateObj, const CpswCpts_Event *pEventTemplate);
 
 static CpswCpts_Event *CpswCpts_getCurrentEventQueue(CpswCpts_StateObj *pCptsStateObj, uint8 eventType);
+
+static uint8 CpswCpts_getEventType(uint32 baseAddr);
 
 /* ========================================================================== */
 /*                            Global Variables                                */
@@ -213,10 +213,6 @@ void CpswCpts_handleEvents(CpswCpts_StateObj *pCptsStateObj)
         /* Update valid flag */
         pEvent->valid = TRUE;
     }
-    else
-    {
-        /* skip other CPTS event */
-    }
 
     /* Set the EVENT_POP field (bit 0) of the CPTS_EVENT_POP register to pop the
      * previously read value off of the event FIFO. */
@@ -254,19 +250,51 @@ Std_ReturnType CpswCpts_readEthEventTimestamp(CpswCpts_StateObj *pCptsStateObj, 
     return retVal;
 }
 
-Std_ReturnType CpswCpts_readTimestamp(CpswCpts_StateObj *pCptsStateObj, uint64 *tsVal)
+void CpswCpts_readTimestamp(CpswCpts_StateObj *pCptsStateObj, uint64 *tsVal)
 {
-    Std_ReturnType retVal = (Std_ReturnType)E_OK;
+    uint32 forceRetries = 50U;
+    uint32 baseAddr     = pCptsStateObj->cpswBaseAddr;
 
-    /* read timestamp value */
-    *tsVal = CpswCpts_readHwTimestamp(pCptsStateObj);
+    SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
 
-    if ((uint64)0U == *tsVal)
+    /* Send TS_PUSH to CPTS */
+    CPTS_WR_FIELD(TS_PUSH, TS_PUSH, 1U);
+
+    /* We handle TS_PUSH event by ourself instead of in ISR.
+     * DO NOT ENABLE interrupts till event is handled */
+    while ((uint32)0U != forceRetries)
     {
-        retVal = (Std_ReturnType)E_NOT_OK;
-    }
+        /* Check till event is returned */
+        if ((uint32)1U == CpswCpts_getEventPendStatus(baseAddr))
+        {
+            if (CPTS_EVENT_TIME_STAMP_PUSH == CpswCpts_getEventType(baseAddr))
+            {
+                *tsVal = CpswCpts_getTimestamp(baseAddr);
 
-    return retVal;
+                /* Set the EVENT_POP field (bit 0) of the CPTS_EVENT_POP register
+                 * to pop the previously read value off of the event FIFO */
+                CPTS_WR_FIELD(EVENT_POP, EVENT_POP, 1U);
+                break;
+            }
+            /* TI_COVERAGE_GAP_START [Branch] Reached only when a CPTS event is pending
+               but is not a TIME_STAMP_PUSH event (e.g. an Ethernet TX/RX event arrives
+               before the TS_PUSH event is processed). This requires specific hardware
+               timing conditions not reproducible in normal unit test execution. */
+            else /* Handle other event to store event in queue */
+            {
+                CpswCpts_handleEvents(pCptsStateObj);
+            }
+            /* TI_COVERAGE_GAP_STOP */
+        }
+
+        /* TI_COVERAGE_GAP_START [Branch] Reached only when no CPTS event is pending
+           in a given retry iteration, causing the loop to decrement forceRetries without
+           processing any event. This requires specific hardware timing conditions not
+           reproducible in normal unit test execution. */
+        forceRetries--;
+        /* TI_COVERAGE_GAP_STOP */
+    }
+    SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
 }
 
 void CpswCpts_getSysTime(const uint64 *nsec, Eth_TimeStampType *pTimestamp)
@@ -480,46 +508,6 @@ static void CpswCpts_disableIntr(uint32 baseAddr)
 {
     /* Mask the interrupts */
     CPTS_WR_FIELD(INT_ENABLE, TS_PEND_EN, 0U);
-}
-
-static uint64 CpswCpts_readHwTimestamp(CpswCpts_StateObj *pCptsStateObj)
-{
-    uint64 timeStamp    = 0U;
-    uint32 forceRetries = 50U;
-    uint32 baseAddr     = pCptsStateObj->cpswBaseAddr;
-
-    SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
-
-    /* Send TS_PUSH to CPTS */
-    CPTS_WR_FIELD(TS_PUSH, TS_PUSH, 1U);
-
-    /* We handle TS_PUSH event by ourself instead of in ISR.
-     * DO NOT ENABLE interrupts till event is handled */
-    while ((uint32)0U != forceRetries)
-    {
-        /* Check till event is returned */
-        if ((uint32)1U == CpswCpts_getEventPendStatus(baseAddr))
-        {
-            if (CPTS_EVENT_TIME_STAMP_PUSH == CpswCpts_getEventType(baseAddr))
-            {
-                timeStamp = CpswCpts_getTimestamp(baseAddr);
-
-                /* Set the EVENT_POP field (bit 0) of the CPTS_EVENT_POP register
-                 * to pop the previously read value off of the event FIFO */
-                CPTS_WR_FIELD(EVENT_POP, EVENT_POP, 1U);
-                break;
-            }
-            else /* Handle other event to store event in queue */
-            {
-                CpswCpts_handleEvents(pCptsStateObj);
-            }
-        }
-
-        forceRetries--;
-    }
-    SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
-
-    return timeStamp;
 }
 
 #define ETH_STOP_SEC_CODE

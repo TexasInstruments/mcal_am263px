@@ -330,6 +330,10 @@ void CpswAle_clearTable(uint32 baseAddr)
      * have completed */
     while (1U == ALE_RD_FIELD(CONTROL, CLEAR_TABLE))
     {
+        /* TI_COVERAGE_GAP_START [Branch] Reached only when lookup engine table is not cleared
+           within the timeout, indicating a hardware fault.
+           This requires hardware fault injection and is not exercisable in normal test
+           execution. */
         if (0U == tempCount)
         {
 #ifdef ETH_E_HARDWARE_ERROR
@@ -337,6 +341,7 @@ void CpswAle_clearTable(uint32 baseAddr)
 #endif
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             tempCount = tempCount - 1U;

@@ -822,6 +822,11 @@ static void Eth_updateMacControlVal(const Eth_MacConfigType *pMACConfig, uint32 
 Std_ReturnType Eth_cpswCheckHostErr(void)
 {
     Std_ReturnType retVal = (Std_ReturnType)E_OK;
+
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when the CPSW hardware version register
+       does not match the expected version ID, indicating a hardware fault or wrong silicon
+       revision. This requires hardware fault injection and is not exercisable in normal
+       test execution. */
     if ((uint32)TRUE == Cpsw_checkHostErr(SOC_MSS_CPSW_BASE))
     {
         /* Requirements: SWS_Eth_00039 */
@@ -835,6 +840,7 @@ Std_ReturnType Eth_cpswCheckHostErr(void)
 #endif
         retVal = (Std_ReturnType)E_NOT_OK;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return retVal;
 }
@@ -846,6 +852,10 @@ static void Eth_CpdmaTxChTearDownAck(uint32 baseAddr, uint32 chNum)
 
     while (CPSW_CPDMA_TEAR_DWN_ACK != CpswCpdma_readTxChCp(baseAddr, chNum))
     {
+        /* TI_COVERAGE_GAP_START [Branch] Reached only when TX channel teardown
+           acknowledgement does not arrive within ETH_TIMEOUT_DURATION iterations,
+           indicating a hardware fault. This requires hardware fault injection and is
+           not exercisable in normal test execution. */
         if (0U == tempCount)
         {
 #ifdef ETH_E_HARDWARE_ERROR
@@ -853,6 +863,7 @@ static void Eth_CpdmaTxChTearDownAck(uint32 baseAddr, uint32 chNum)
 #endif
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             tempCount = tempCount - 1U;
@@ -867,6 +878,10 @@ static void Eth_CpdmaRxChTearDownAck(uint32 baseAddr, uint32 chNum)
 
     while (CPSW_CPDMA_TEAR_DWN_ACK != CpswCpdma_readRxChCp(baseAddr, chNum))
     {
+        /* TI_COVERAGE_GAP_START [Branch] Reached only when RX channel teardown
+           acknowledgement does not arrive within ETH_TIMEOUT_DURATION iterations,
+           indicating a hardware fault. This requires hardware fault injection and is
+           not exercisable in normal test execution. */
         if (0U == tempCount)
         {
 #ifdef ETH_E_HARDWARE_ERROR
@@ -874,6 +889,7 @@ static void Eth_CpdmaRxChTearDownAck(uint32 baseAddr, uint32 chNum)
 #endif
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             tempCount = tempCount - 1U;
@@ -1011,10 +1027,6 @@ Eth_setHwControllerMode(uint8 CtrlIdx, Eth_ModeType CtrlMode)
 
             retVal = E_OK;
         }
-    }
-    else /* if (Eth_DrvObj.ctrlMode != CtrlMode) */
-    {
-        /* nothing */
     }
 
     return retVal;
@@ -1183,10 +1195,6 @@ static Std_ReturnType Eth_allowReception(uint8 currPort, P2CONST(uint8, AUTOMATI
         {
             retVal = (Std_ReturnType)E_NOT_OK;
         }
-        else
-        {
-            /* nothing */
-        }
     }
 
     return retVal;
@@ -1313,10 +1321,6 @@ static void EthTxBuffDescInit(uint8 ctrlIdx, Eth_CpdmaTxBuffDescQueue *pRing, ui
         /* Link last desc to head to create ring */
         pLastBuffDesc->pNextBuffDesc         = pRing->pFreeHead;
         pLastBuffDesc->globalNextDescPointer = Eth_locToGlobAddr((uintptr_t)(pRing->pFreeHead));
-    }
-    else
-    {
-        /* nothing */
     }
 }
 
@@ -1457,10 +1461,6 @@ static BufReq_ReturnType Eth_HwProvideTxBufferIdx(P2VAR(Eth_BufIdxType, AUTOMATI
          */
         *LenBytePtr = (allocBuffLen - ETH_HLEN);
         retVal      = BUFREQ_E_OVFL;
-    }
-    else
-    {
-        /* nothing */
     }
 
     return retVal;
@@ -1814,10 +1814,6 @@ Eth_transmitHw(VAR(Eth_BufIdxType, AUTOMATIC) BufIdx, VAR(Eth_FrameType, AUTOMAT
                                    ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM);
 #endif
         }
-        else
-        {
-            /* nothing */
-        }
 
         if (((boolean)FALSE) == pTempBufObj->txConfirmation)
         {
@@ -1968,10 +1964,6 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
             {
                 CpswCpdma_writeRxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)(pRxDescRing->pHead)), chNum);
             }
-            else
-            {
-                /* nothing */
-            }
 
             EthRxBuffDescRxStatus(pCurrRxBuffDesc->pNextBuffDesc, &rxStatus);
         }
@@ -1981,12 +1973,16 @@ static Eth_RxStatusType EthRxBuffDescProcessSingle(uint8 ctrlIdx, uint32 chNum)
             rxStatus = ETH_NOT_RECEIVED;
         }
     }
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when a RX teardown request in received
+        during processing and is not exercisable in normal test execution. This requires
+        hardware fault injection. */
     else
     {
         EthRxChTearDown(chNum);
         /**< frame not received, no further frames available */
         rxStatus = ETH_NOT_RECEIVED;
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     return rxStatus;
 }
@@ -2164,10 +2160,6 @@ static void EthRxBuffDescEnqueue(Eth_CpdmaRxBuffDescQueue *pRxDescRing, Eth_Cpdm
         pRxDescRing->pHead = pNewTail->pNextBuffDesc;
         pRxDescRing->pTail = (Eth_CpdmaRxBuffDescType *)pNewTail;
     }
-    else
-    {
-        /* nothing */
-    }
 }
 
 void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
@@ -2243,10 +2235,6 @@ void Eth_processRxBuffDesc(uint8 ctrlIdx, uint32 chNum)
             if (0U != endOfQueueFlag)
             {
                 CpswCpdma_writeRxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)(pRxDescRing->pHead)), chNum);
-            }
-            else
-            {
-                /* nothing */
             }
         }
     }
@@ -2389,10 +2377,6 @@ void Eth_processTxBuffDesc(uint8 ctrlIdx, uint32 chNum)
             pTxDescRing->pQueueTail->globalNextDescPointer = 0U;
             CpswCpdma_writeTxChHdp(Eth_DrvObj.baseAddr, Eth_locToGlobAddr((uintptr_t)pTxDescRing->pQueueHead), chNum);
         }
-    }
-    else
-    {
-        /* nothing */
     }
 }
 
@@ -2647,33 +2631,49 @@ void Eth_checkHwCtrlErrors(void)
      * Check for controller errors (e.g. CRC errors). If the check
      * fails the function shall raise the extended production error.
      */
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when CRC errors are detected on
+       received frames. This requires injecting malformed frames with bad CRC onto
+       the network, which is not possible in normal unit test execution. */
     if ((uint32)0U != ethStats.RXCRCERRORS)
     {
 #ifdef ETH_E_CRC
         (void)Dem_SetEventStatus(ETH_E_CRC, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when RX FIFO overflow causes
+       frames to be dropped. This requires sustained high-rate packet injection to
+       overflow the RX FIFO, which is not exercisable in normal unit test execution. */
     if ((uint32)0U != ethStats.RX_BOTTOM_OF_FIFO_DROP)
     {
 #ifdef ETH_E_RX_FRAMES_LOST
         (void)Dem_SetEventStatus(ETH_E_RX_FRAMES_LOST, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when undersized frames (< 64 bytes)
+       are received. Requires injecting undersized frames onto the network, which is
+       not possible in normal unit test execution. */
     if ((uint32)0U != ethStats.RXUNDERSIZEDFRAMES)
     {
 #ifdef ETH_E_UNDERSIZEFRAME
         (void)Dem_SetEventStatus(ETH_E_UNDERSIZEFRAME, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when oversized frames (> max frame
+       size) are received. Requires injecting oversized frames onto the network, which
+       is not possible in normal unit test execution. */
     if ((uint32)0U != ethStats.RXOVERSIZEDFRAMES)
     {
 #ifdef ETH_E_OVERSIZEFRAME
         (void)Dem_SetEventStatus(ETH_E_OVERSIZEFRAME, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
     Eth_HwcheckCtrlrErrors1(&ethStats);
 
@@ -2682,33 +2682,49 @@ void Eth_checkHwCtrlErrors(void)
 
 static void Eth_HwcheckCtrlrErrors1(const Eth_StatsType *ethStats)
 {
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when alignment/code errors are
+       detected on received frames. Requires injecting frames with alignment errors
+       onto the network, which is not possible in normal unit test execution. */
     if ((uint32)0U != ethStats->RXALIGNCODEERRORS)
     {
 #ifdef ETH_E_ALIGNMENT
         (void)Dem_SetEventStatus(ETH_E_ALIGNMENT, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when single-collision TX frames
+       are detected. Requires a half-duplex network with collision conditions, which
+       is not possible in normal unit test execution (full-duplex loopback). */
     if ((uint32)0U != ethStats->TXSINGLECOLLFRAMES)
     {
 #ifdef ETH_E_SINGLECOLLISION
         (void)Dem_SetEventStatus(ETH_E_SINGLECOLLISION, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when multiple-collision TX frames
+       are detected. Requires a half-duplex network with collision conditions, which
+       is not possible in normal unit test execution (full-duplex loopback). */
     if ((uint32)0U != ethStats->TXMULTCOLLFRAMES)
     {
 #ifdef ETH_E_MULTIPLECOLLISION
         (void)Dem_SetEventStatus(ETH_E_MULTIPLECOLLISION, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when late-collision TX frames are
+       detected. Requires a half-duplex network with collision conditions, which is
+       not possible in normal unit test execution (full-duplex loopback). */
     if ((uint32)0U != ethStats->TXLATECOLLISIONS)
     {
 #ifdef ETH_E_LATECOLLISION
         (void)Dem_SetEventStatus(ETH_E_LATECOLLISION, DEM_EVENT_STATUS_PREFAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
 }
 
 static boolean Eth_isBcastMacAddr(const uint8 *addr)

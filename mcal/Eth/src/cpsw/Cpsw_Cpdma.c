@@ -1,7 +1,7 @@
 /*
  * TEXAS INSTRUMENTS TEXT FILE LICENSE
  *
- * Copyright (c) 2024-2025 Texas Instruments Incorporated
+ * Copyright (c) 2024-2026 Texas Instruments Incorporated
  *
  * All rights reserved not granted herein.
  *
@@ -116,6 +116,10 @@ FUNC(void, ETH_CODE) CpswCpdma_reset(uint32 baseAddr)
     CPDMA_WR_FIELD(SOFT_RESET, SOFT_RESET, 1U);
     while (1U == CPDMA_RD_FIELD(SOFT_RESET, SOFT_RESET))
     {
+        /* TI_COVERAGE_GAP_START [Branch] Reached only when CPDMA soft reset does not
+           complete within ETH_TIMEOUT_DURATION iterations, indicating a hardware fault.
+           This requires hardware fault injection and is not exercisable in normal test
+           execution. */
         if (0U == tempCount)
         {
 #ifdef ETH_E_HARDWARE_ERROR
@@ -123,6 +127,7 @@ FUNC(void, ETH_CODE) CpswCpdma_reset(uint32 baseAddr)
 #endif
             break;
         }
+        /* TI_COVERAGE_GAP_STOP */
         else
         {
             tempCount = tempCount - 1U;

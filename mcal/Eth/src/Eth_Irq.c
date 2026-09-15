@@ -1,7 +1,7 @@
 /*
  * TEXAS INSTRUMENTS TEXT FILE LICENSE
  *
- * Copyright (c) 2023-2025 Texas Instruments Incorporated
+ * Copyright (c) 2023-2026 Texas Instruments Incorporated
  *
  * All rights reserved not granted herein.
  *
@@ -348,6 +348,10 @@ ISR(Eth_MiscIrqHdlr_0)
     intFlags = Cpsw_getMiscIntrStatus(baseAddr);
 
     /* Look for Statistics Interrupt */
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when CPSW statistics counter overflow
+       interrupt fires (ETH_STATS_INTERRUPT == STD_ON). This requires sustained packet
+       traffic to overflow hardware counters, which is not exercised in normal unit test
+       execution. */
     if (0U != CPSW_SS_GET_FIELD(intFlags, MISC_STATUS, STAT_PEND))
     {
 #if (ETH_STATS_INTERRUPT == STD_ON)
@@ -356,7 +360,11 @@ ISR(Eth_MiscIrqHdlr_0)
         CpswStats_clearHostPortStats(baseAddr);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
     /* Look for CPTS Event Interrupt */
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when a CPTS event interrupt is pending
+       without a preceding statistics interrupt. Requires specific CPTS timestamp event
+       sequencing not exercised in normal unit test execution. */
     else if (0U != CPSW_SS_GET_FIELD(intFlags, MISC_STATUS, EVNT_PEND))
     {
 #if (ETH_GLOBALTIMESUPPORT_API == STD_ON)
@@ -368,13 +376,18 @@ ISR(Eth_MiscIrqHdlr_0)
         }
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
     /* Look for CPDMA Host Error Interrupt */
+    /* TI_COVERAGE_GAP_START [Branch] Reached only when CPDMA host error interrupt fires,
+       indicating a hardware DMA fault. This requires hardware fault injection and is not
+       exercisable in normal test execution. */
     else if (0U != CPSW_SS_GET_FIELD(intFlags, MISC_STATUS, HOST_PEND))
     {
 #ifdef ETH_E_HARDWARE_ERROR
         (void)Dem_SetEventStatus(ETH_E_HARDWARE_ERROR, DEM_EVENT_STATUS_FAILED);
 #endif
     }
+    /* TI_COVERAGE_GAP_STOP */
     else
     {
         retVal = 1U;
@@ -392,13 +405,21 @@ ISR(Eth_MiscIrqHdlr_0)
             uint32 phy     = 0U;
             uint32 offset  = 0U;
             phy            = MDIO_RD_REG(USER_INT_MASKED);
+            /* TI_COVERAGE_GAP_START [Branch] Reached only when both MDIO user groups
+               (0 and 1) have pending interrupts simultaneously. In normal test execution
+               only PHY address 0 (user group 0) is used, so this offset path for user
+               group 1 is never exercised. */
             if ((phy & MDIO_USER_INT_MASKED_REG_MAX) == MDIO_USER_INT_MASKED_REG_MAX)
             {
                 offset = MDIO_USER_GROUP_USER_OFFSET;
             }
+            /* TI_COVERAGE_GAP_STOP */
 
             regVal = MDIO_RD_OFFSET_REG(USER_GROUP_USER_ACCESS, offset);
 
+            /* TI_COVERAGE_GAP_START [Branch] Reached only when MDIO access completes
+               without ACK (access error). This indicates a PHY communication failure
+               and requires hardware fault injection to exercise in test. */
             if (MDIO_USER_GROUP_USER_ACCESS_REG_ACK_PASS == (uint32)MDIO_GET_FIELD(regVal, USER_GROUP_USER_ACCESS, ACK))
             {
                 dataVal = (uint16)MDIO_GET_FIELD(regVal, USER_GROUP_USER_ACCESS, DATA);
@@ -411,6 +432,7 @@ ISR(Eth_MiscIrqHdlr_0)
                  */
                 dataVal = 0U;
             }
+            /* TI_COVERAGE_GAP_STOP */
 
             /* Indicate command read/write completion to TRCV */
             Eth_miiIndication(regVal, dataVal);
