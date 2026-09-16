@@ -21607,6 +21607,7 @@ Will be updated in next release
 * Synchronous 10/100/1000 Mbit operation with Flexible logical FIFO-based packet buffer structure
     1. Full duplex mode supported in 10/100/1000 Mbps modes
     2. Half-duplex mode supported in 10/100 Mbps modes only
+* Eight priority level Quality Of Service (QOS) support (802.1p)
 
 #### AUTOSAR Supported Features
 
@@ -21648,7 +21649,6 @@ Will be updated in next release
 
 ##### Supported in Hardware but not supported by Software
 
-* Eight priority level Quality Of Service (QOS) support (802.1p)
 * Support for Audio/Video Bridging (P802.1Qav/D6.0)
 * DSCP Priority Mapping (IPv4 and IPv6)
 * Energy Efficient Ethernet (EEE) support (802.3az)
@@ -23037,7 +23037,7 @@ Number of TX buffers     : 24
 Number of RX buffers     : 48
 
 EthPort      : ETH_PORT2
-  
+
 EthMacConnectionType  : ETH_MAC_CONN_TYPE_RGMII_DETECT_INBAND
 
 **ETHTRCV Configuration:**
@@ -23064,27 +23064,27 @@ EthTrcvEnableLoopback    : (boolean)FALSE
 
 ```
 
-    INFO: Bootloader_socLoadHsmRtFw:82: Device Type : HSFS  
-    INFO: Bootloader_socLoadHsmRtFw:84: HSMRT Size in Bytes : 23875 
-    INFO: Bootloader_socLoadHsmRtFw:97: hsm runtime firmware load complete ... 
-    Starting NULL Bootloader ... 
+    INFO: Bootloader_socLoadHsmRtFw:82: Device Type : HSFS
+    INFO: Bootloader_socLoadHsmRtFw:84: HSMRT Size in Bytes : 23875
+    INFO: Bootloader_socLoadHsmRtFw:97: hsm runtime firmware load complete ...
+    Starting NULL Bootloader ...
     INFO: Bootloader_runCpu:155: CPU r5f1-1 is initialized to 400000000 Hz !!!
     INFO: Bootloader_runCpu:155: CPU r5f1-0 is initialized to 400000000 Hz !!!
     INFO: Bootloader_runCpu:155: CPU r5f0-1 is initialized to 400000000 Hz !!!
-    [BOOTLOADER_PROFILE] Boot Media       : undefined 
-    KPI_DATA: [BOOTLOADER_PROFILE] Boot Image Size  : 0 KB 
-    [BOOTLOADER_PROFILE] Cores present    : 
-    KPI_DATA: [BOOTLOADER PROFILE] System_init                      :        372us 
-    KPI_DATA: [BOOTLOADER PROFILE] Drivers_open                     :         50us 
-    KPI_DATA: [BOOTLOADER PROFILE] LoadHsmRtFw                      :      27955us 
-    KPI_DATA: [BOOTLOADER_PROFILE] SBL Total Time Taken             :      53513us 
-    
-    NULL Bootloader Execution Complete... 
+    [BOOTLOADER_PROFILE] Boot Media       : undefined
+    KPI_DATA: [BOOTLOADER_PROFILE] Boot Image Size  : 0 KB
+    [BOOTLOADER_PROFILE] Cores present    :
+    KPI_DATA: [BOOTLOADER PROFILE] System_init                      :        372us
+    KPI_DATA: [BOOTLOADER PROFILE] Drivers_open                     :         50us
+    KPI_DATA: [BOOTLOADER PROFILE] LoadHsmRtFw                      :      27955us
+    KPI_DATA: [BOOTLOADER_PROFILE] SBL Total Time Taken             :      53513us
+
+    NULL Bootloader Execution Complete...
     INFO: Bootloader_loadSelfCpu:207: CPU r5f0-0 is initialized to 400000000 Hz !!!
     INFO: Bootloader_runSelfCpu:217: All done, reseting self ...
-    
-    ETH_APP: Sample Application - STARTS !!! 
-                                        
+
+    ETH_APP: Sample Application - STARTS !!!
+
     ETH MCAL Version Info
     ---------------------
     Vendor ID           : 44
@@ -23092,8 +23092,7 @@ EthTrcvEnableLoopback    : (boolean)FALSE
     SW Major Version    : 9
     SW Minor Version    : 2
     SW Patch Version    : 0
-                        
-                        
+
     ETH TRCV MCAL Version Info
     ---------------------
     Vendor ID           : 44
@@ -23101,7 +23100,7 @@ EthTrcvEnableLoopback    : (boolean)FALSE
     SW Major Version    : 9
     SW Minor Version    : 2
     SW Patch Version    : 0
-                        
+
     ETH_APP: EthTrcv Controller mode change - ETHTRCV_MODE_ACTIVE
     ETH_APP:ETHTRCV Link up
     ETH_APP:ETHTRCV baud rate = 1000Mbps
@@ -23132,7 +23131,7 @@ EthTrcvEnableLoopback    : (boolean)FALSE
     Removing MAC Address from filter:
     0a:0b:0c:0d:0e:0f
 
-    Multicast address filter test 
+    Multicast address filter test
 
     Adding multicast MAC Address to filter:
     01:00:5e:0d:0e:0f
@@ -23153,11 +23152,11 @@ EthTrcvEnableLoopback    : (boolean)FALSE
 
     ALE Bypass Transmit Test
 
-    Transmitting 50000 packets 
+    Transmitting 50000 packets
     Expect PC Wireshark to receive 50000 packets..
-    Max Tx Packet Size Test passed 
+    Max Tx Packet Size Test passed
 
-    Disabling filter bypass & adding host address back to filter 
+    Disabling filter bypass & adding host address back to filter
 
     Waiting to receive 1000 packets from PC packet player..
 
@@ -23220,7 +23219,7 @@ EthTrcvEnableLoopback    : (boolean)FALSE
         Curr_Time: [ 0 .  93 sec.  792362496 ns]        TimeSync_Diff: [ 0 .   1 sec.    9295360 ns](32K Cntr Diff 31484)
         Curr_Time: [ 0 .  94 sec.  801649664 ns]        TimeSync_Diff: [ 0 .   1 sec.    9287168 ns](32K Cntr Diff 31483)
 
-    Time Sync Packet Egress Test 
+    Time Sync Packet Egress Test
     --------------------------------
         Packet Egress TS:[ 0 .  94 sec.  816935936 ns][  ETH_VALID]
         Packet Egress TS:[ 0 .  94 sec.  832320512 ns][  ETH_VALID]
@@ -23423,9 +23422,9 @@ EthTrcvEnableLoopback    : (boolean)FALSE
         Packet Egress TS:[ 0 .  97 sec.  834360832 ns][  ETH_VALID]
         Packet Egress TS:[ 0 .  97 sec.  849597952 ns][  ETH_VALID]
 
-    Time Sync Packet Ingress Test 
+    Time Sync Packet Ingress Test
     ---------------------------------
-        Send timestamp (0x88F7) packets (100) from PC 
+        Send timestamp (0x88F7) packets (100) from PC
 
         Packet Ingress MessagType-CPTS_MESSAGE_ANNOUNCE, SeqID-43947 [ 0 . 104 sec.   73183232 ns][  ETH_VALID]
 
@@ -23626,10 +23625,10 @@ EthTrcvEnableLoopback    : (boolean)FALSE
         Packet Ingress MessagType-CPTS_MESSAGE_ANNOUNCE, SeqID-43947 [ 0 . 153 sec.   73205248 ns][  ETH_VALID]
 
         Packet Ingress MessagType-CPTS_MESSAGE_ANNOUNCE, SeqID-43947 [ 0 . 153 sec.  573212160 ns][  ETH_VALID]
-      
+
     ----------------------------
 
-    Time Stamping Test Completed 
+    Time Stamping Test Completed
 
     ----------------------------
 
@@ -23640,7 +23639,7 @@ EthTrcvEnableLoopback    : (boolean)FALSE
     Waiting to receive 50000 packets from CANoe/PC packet player
 
     Receive packet statistics:
-    EXPECTEDETHERTYPE_IPV4 (0x800) = 54000 
+    EXPECTEDETHERTYPE_IPV4 (0x800) = 54000
     EXPECTEDETHERTYPE_VLAN (0x8100) = 0
     UNEXPECTEDETHERTYPE = 0
 
@@ -23648,11 +23647,11 @@ EthTrcvEnableLoopback    : (boolean)FALSE
     ***********ETH TRANSMIT TEST*******************
     -----------------------------------------------
 
-    Transmitting 50000 packets, 
+    Transmitting 50000 packets,
     Expect CANoe / PC Wireshark to receive 50000 packets..
     Stats: Sent=50000,
 
-    Transmitted 50000 packets 
+    Transmitted 50000 packets
     ----------------------------
     Controller 0 Counters
     ----------------------------
@@ -23684,13 +23683,13 @@ EthTrcvEnableLoopback    : (boolean)FALSE
     Rx Jabbers           : 0
     Rx Unicast Packets            : 52100
     ----------------------------
-    Controller 0 Tx Statistics 
+    Controller 0 Tx Statistics
     ----------------------------
     Tx Num octets          : 151817800
     Tx No Unicast Packets  : 100200
     Tx Unicast Packets     : 0
     --------------------------------
-    Controller 0 Tx Error Counters 
+    Controller 0 Tx Error Counters
     --------------------------------
     Tx Deferred transm      : 0
     Tx Single collisions    : 0
@@ -23698,7 +23697,7 @@ EthTrcvEnableLoopback    : (boolean)FALSE
     Tx Late collisions      : 0
     Tx Excessive collisions : 0
 
-    ETH Test Passed!!!   
+    ETH Test Passed!!!
 
 ```
 
@@ -23767,7 +23766,7 @@ Run host load app with the eth interface in the host directory
     MAC Port 1 Address:
 
     aa:bb:cc:dd:ee:ff
-    
+
     ETH MCAL Version Info
     ---------------------
     Vendor ID           : 44
@@ -23775,8 +23774,7 @@ Run host load app with the eth interface in the host directory
     SW Major Version    : 9
     SW Minor Version    : 2
     SW Patch Version    : 0
-                            
-                            
+
     ETH TRCV MCAL Version Info
     ---------------------
     Vendor ID           : 44
@@ -23784,7 +23782,7 @@ Run host load app with the eth interface in the host directory
     SW Major Version    : 9
     SW Minor Version    : 2
     SW Patch Version    : 0
-                            
+
                             Waiting for Host..
     No Response from Host, remaining retry = 100
     Host App detected! Sending Read ACK CMD...
@@ -24096,13 +24094,13 @@ Run host load app with the eth interface in the host directory
     Rx 1024 to 1518 bytes Packets : -1
     Rx Unicast Packets            : 1051000
     ----------------------------
-    Controller 0 Tx Statistics 
+    Controller 0 Tx Statistics
     ----------------------------
     Tx Num octets          : 387075068
     Tx No Unicast Packets  : 753102
     Tx Unicast Packets     : 0
     --------------------------------
-    Controller 0 Tx Error Counters 
+    Controller 0 Tx Error Counters
     --------------------------------
     Tx Deferred transm      : 0
     Tx Single collisions    : 0

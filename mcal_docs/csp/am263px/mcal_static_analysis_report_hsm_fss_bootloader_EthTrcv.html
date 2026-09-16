@@ -64,7 +64,7 @@ td.num { text-align: right; }
   max-height: 75vh;          /* show scrollbar before reaching page bottom */
   position: relative;        /* stacking context for sticky children */
 }
-.tbl-wrap table { width: 100%; table-layout: auto; border-collapse: collapse; }
+.tbl-wrap table { min-width: 100%; width: auto; table-layout: auto; border-collapse: collapse; }
 
 /* Sticky sort-row — stays visible during vertical scroll */
 .tbl-wrap thead th {
@@ -87,7 +87,7 @@ td.num { text-align: right; }
    allow text to wrap, but keep a minimum width so the heading is never squashed. */
 .tbl-wrap th.wrap-col,
 .tbl-wrap td.wrap-col,
-.tbl-wrap th.w, .tbl-wrap td.w { white-space: normal; word-break: break-word; min-width: 220px; }
+.tbl-wrap th.w, .tbl-wrap td.w { white-space: normal; word-break: break-word; min-width: 140px; }
 
 /* ── Frozen (sticky) columns ──
      Up to 3 columns can be frozen on the left.  Each frozen column needs a
@@ -1001,9 +1001,9 @@ function kwToggleTheme() {
 <thead><tr><th>Selection</th><th>Information</th></tr></thead>
 <tbody>
 <tr><td style="white-space:nowrap">Project</td><td style="white-space:nowrap">AM263PMCAL_DEV</td></tr>
-<tr><td style="white-space:nowrap">Generated On</td><td style="white-space:nowrap">04-Sep-2026 10:57 UTC</td></tr>
+<tr><td style="white-space:nowrap">Generated On</td><td style="white-space:nowrap">16-Sep-2026 02:19 UTC</td></tr>
 <tr><td style="white-space:nowrap">Project Type</td><td style="white-space:nowrap">Static Analysis, CWE 2024 Top 25</td></tr>
-<tr><td style="white-space:nowrap">Build</td><td style="white-space:nowrap">REL.MCAL.AM26XX.26.01.00.05_2026-09-03_23-40-29</td></tr>
+<tr><td style="white-space:nowrap">Build</td><td style="white-space:nowrap">next_2026-09-15_13-58-00</td></tr>
 <tr><td style="white-space:nowrap">Klocwork Query</td><td style="white-space:nowrap">-module:Adc,Can,Cmpss,Dio,Dma,Epwm,Eth,Flc,Fls,Fsi,Gpt,Hw_include,I2c,Icu,Ipc,Lin,Mcu,Memmap,Port,Pwm,Spi,Uart,Utils,Wdg,AUTOSAR_Include</td></tr>
 <tr><td style="white-space:nowrap">Klocwork Configuration Check</td><td style="white-space:nowrap"><span style="background:#1a4a1a;color:#90ee90;padding:2px 10px;border-radius:4px;white-space:nowrap;font-weight:bold;font-size:0.92em;">Compliant</span></td></tr>
 </tbody>
@@ -1047,6 +1047,7 @@ function kwToggleTheme() {
 </div>
 <div>
 <h2 id="module-compliance-summary" style="margin-top:0;">Module Compliance Summary</h2>
+<details><summary class="comp-summary">&#9654; Show Module Compliance Summary<span class="comp-badge"><span style="background:#1a4a1a;color:#90ee90;padding:2px 10px;border-radius:4px;white-space:nowrap;font-weight:bold;font-size:0.92em;">Compliant</span></span></summary><div class="comp-body">
 <table>
 <thead>
 <tr>
@@ -1070,9 +1071,11 @@ function kwToggleTheme() {
 </tbody>
 <tfoot><tr class="tbl-total"><td>Total</td><td><span style="background:#1a4a1a;color:#90ee90;padding:2px 10px;border-radius:4px;white-space:nowrap;font-weight:bold;font-size:0.92em;">Compliant</span></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr></tfoot>
 </table>
+</div></details>
 </div>
 </div>
 <h2 id="mod-status">Module Status Summary</h2>
+<details><summary class="comp-summary">&#9654; Show Module Status Summary<span class="comp-badge">4 module(s), 0 total issue(s)</span></summary><div class="comp-body">
 <p class="desc">Cross-tabulation of all issues by module and status. Modules are determined by matching issue file paths against configured module glob patterns. Click any column header to sort. Cells highlighted in <span style="color:#ff6060;">red</span> indicate non-zero issues in Analyze or Fix Planned state (action required).</p>
 <div class="filter-bar" id="tbl-mod-status-bar">
   <button onclick="tbl_mod_statusClearFilters()">Clear filters</button>
@@ -1108,9 +1111,12 @@ function kwToggleTheme() {
 <tfoot><tr class="tbl-total" id="tbl-mod-status-total-row"><td>Total</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr></tfoot>
 </table></div>
 <script>kwTbl({id:"tbl-mod-status",dropdownCols:[0, 1, 2, 3, 4, 5, 6],noFilterCols:[],numericCols:[1, 2, 3, 4, 5, 6],numCols:7,rowCountLabel:"modules",globalSearchId:"",totalRowId:"tbl-mod-status-total-row"});</script>
+</div></details>
 <h2 id="mod-sev">Module Severity Summary – Open Issues</h2>
+<details><summary class="comp-summary">&#9654; Show Module Severity Summary – Open Issues<span class="comp-badge"><span class="comp-badge-pass">0 open issue(s)</span></span></summary><div class="comp-body">
 <p class="desc">Open issues (Analyze + Fix Planned) by module and severity. Filtered for BQ project type. Severities ordered by criticality (most severe first). Click any column header to sort. Non-zero counts are highlighted in <span style="color:#ff6060;">red</span>; the module name is also shown in red when it has any open issues.</p>
 <p style="margin:4px 0 16px 16px;color:#6060a0;font-size:0.9em;">&#10003; No open issues — the project is fully compliant.</p>
+</div></details>
 <h2 id="mod-sev-waived">Module Severity Summary – Waivered Issues</h2>
 <details><summary class="comp-summary">&#9654; Show waivered issues table<span class="comp-badge">0 waivered issue(s) across 4 module(s)</span></summary><div class="comp-body">
 <p class="desc">Waivered issues (Defer + Ignore + Not a Problem) by module and severity. Filtered for BQ project type. Severities ordered by criticality (most severe first). Click any column header to sort.</p>
@@ -1148,7 +1154,7 @@ function kwToggleTheme() {
 <script>kwTbl({id:"tbl-mod-sev-waived",dropdownCols:[0, 1, 2, 3, 4, 5],noFilterCols:[],numericCols:[1, 2, 3, 4, 5],numCols:6,rowCountLabel:"modules",globalSearchId:"",totalRowId:"tbl-mod-sev-waived-total-row"});</script>
 </div></details>
 <h2 id="gep-table-cwe">CWE 2024 Top 25 GEP</h2>
-<details><summary class="comp-summary">&#9654; Show CWE 2024 Top 25 GEP table<span class="comp-badge">Compliant — 0 open, 0 waivered</span></summary><div class="comp-body">
+<details><summary class="comp-summary">&#9654; Show CWE 2024 Top 25 GEP table<span class="comp-badge">0 issue(s) — <span class="comp-badge-pass">0 open</span>, <span class="comp-badge-pass">0 inactive</span>, <span class="comp-badge-pass">0 invalid</span></span></summary><div class="comp-body">
 <p class="desc">CWE 2024 Top 25 Guideline Enforcement Plan — mapping of CWE IDs to applicable Klocwork checker codes with per-CWE compliance status. Compliance counts are aggregated across all applicable checker codes for each CWE ID. Rows marked <em>No Tool Support</em> indicate CWEs with no equivalent Klocwork checker; compliance columns are not applicable for those rows. Compliance status uses the same colour coding as the Compliance Summary table.</p>
 <style>#tbl-gep-table-cwe td:nth-child(1){white-space:nowrap;word-break:normal}#tbl-gep-table-cwe td:nth-child(2){white-space:nowrap;word-break:normal;text-align:right}#tbl-gep-table-cwe td:nth-child(3){white-space:normal;word-break:break-word;min-width:220px}#tbl-gep-table-cwe td:nth-child(4){white-space:normal;word-break:break-word;min-width:220px}#tbl-gep-table-cwe td:nth-child(5){white-space:nowrap;word-break:normal}#tbl-gep-table-cwe td:nth-child(6){white-space:nowrap;word-break:normal;text-align:right}#tbl-gep-table-cwe td:nth-child(7){white-space:nowrap;word-break:normal;text-align:right}#tbl-gep-table-cwe td:nth-child(8){white-space:nowrap;word-break:normal;text-align:right}#tbl-gep-table-cwe td:nth-child(9){white-space:nowrap;word-break:normal;text-align:right}#tbl-gep-table-cwe td:nth-child(10){white-space:nowrap;word-break:normal;text-align:right}</style>
 <div class="filter-bar" id="tbl-gep-table-cwe-bar">
@@ -1215,7 +1221,7 @@ function kwToggleTheme() {
 <script>kwTbl({id:"tbl-gep-table-cwe",dropdownCols:[0, 1, 2, 3, 4, 5, 6, 7, 8, 9],noFilterCols:[],numericCols:[1, 5, 6, 7, 8, 9],numCols:10,rowCountLabel:"CWEs",globalSearchId:"tbl-gep-table-cwe-global-search",totalRowId:"tbl-gep-table-cwe-total-row"});</script>
 </div></details>
 <h2 id="checker-code-open">Checker Code Summary</h2>
-<details><summary class="comp-summary">&#9654; Show checker code summary table<span class="comp-badge">0 checker(s) — 0 open, 0 waivered</span></summary><div class="comp-body">
+<details><summary class="comp-summary">&#9654; Show checker code summary table<span class="comp-badge">0 checker(s) — <span class="comp-badge-pass">0 open</span>, <span class="comp-badge-pass">0 waivered</span></span></summary><div class="comp-body">
 <p class="desc">Issues grouped by checker code. Filtered for BQ project type. Checkers with non-zero open count are shown first, sorted by severity (most severe first) then open count descending. Checkers with zero open count follow, sorted by severity then waived count descending. Non-zero counts are highlighted in <span style="color:#ff6060;">red</span>.</p>
 <div class="filter-bar" id="tbl-checker-open-bar">
   <button onclick="tbl_checker_openClearFilters()">Clear filters</button>
@@ -1268,21 +1274,23 @@ function kwToggleTheme() {
 </table>
 </div></details>
 <h2 id="template-revisions">Template Revision History</h2>
-<details><summary class="comp-summary">&#9654; Show revision history<span class="comp-badge">6 revision(s), latest: v2.2</span></summary><div class="comp-body">
+<details><summary class="comp-summary">&#9654; Show revision history<span class="comp-badge">8 revision(s), latest: v2.4</span></summary><div class="comp-body">
 <table class="config-table" style="table-layout:fixed;width:100%;">
 <thead><tr><th style="width:7%;">Version</th><th style="width:9%;">Date</th><th style="width:18%;">Author</th><th style="width:11%;">Document Status</th><th style="width:55%;">Description</th></tr></thead>
 <tbody>
-<tr><td style="white-space:nowrap;">2.2</td><td style="white-space:nowrap;">02-Sep-2026</td><td style="white-space:nowrap;">Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Module Severity Summary – Waivered Issues, GEP tables (MISRA C 2025, CWE 2024 Top 25), Checker Code Summary, Waiver ID Summary, Module Info, and Template Revision History are now minimized (collapsed) by default with a summary badge.<br>2. Module Severity Summary – Open Issues shows a simple text message instead of a table when there are no open issues.<br>3. Module Info and Template Revision History also collapsed by default.</td></tr>
-<tr><td style="white-space:nowrap;">2.1</td><td style="white-space:nowrap;">31-Aug-2026</td><td style="white-space:nowrap;">Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Module Severity Summary – Open Issues now appears before Waivered Issues.<br>2. Improved link/accent colour contrast on dark background (#7aa2f7 → #a8c8ff).<br>3. Added dark/light theme toggle button (preference persisted in localStorage).</td></tr>
-<tr><td style="white-space:nowrap;">2.0</td><td style="white-space:nowrap;">28-Aug-2026</td><td style="white-space:nowrap;">Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Automated HTML report from KW server API / pre-saved JSON (replaces manual Excel SCAR).<br>2. BQ/FSQ/CSQ support with pconf filtering, severity remapping, MISRA C version auto-detect.<br>3. GEP tables (MISRA C, HIS, CERT C, SA) + automated waiver validation.<br>4. Interactive sort/filter tables with KW issue/waiver links and colour-coded compliance summary.<br>5. kw-config-check: validates pconf/tconf/mconf against org-wide baseline.</td></tr>
-<tr><td style="white-space:nowrap;">1.2</td><td style="white-space:nowrap;">15-Mar-2024</td><td style="white-space:nowrap;">Dhruv Dixit, Gayathri Ajith and Shrikrushna Bhagwat</td><td style="white-space:nowrap;">Published</td><td>1. Added 'CERT C Summary by Severity' &amp; 'CERT C Summary by Modules' sheets.<br>2. Added 'CERT_GEP', 'HIS_GEP', 'SA_GEP' sheets.<br>3. Updated 'MISRA_GEP' with latest Checker Codes.<br>4. Added Deviation columns in MISRA, HIS, SA summary sheets.<br>5. Added a new column 'levels' &amp; renamed 'MISRA Rule' column to 'Rule' in 'Raw Issue Details' sheet.</td></tr>
-<tr><td style="white-space:nowrap;">1.1</td><td style="white-space:nowrap;">03-Jan-2023</td><td style="white-space:nowrap;">Dhruv Dixit</td><td style="white-space:nowrap;">Published</td><td>Modified with changes within summary sheets, also added CIP marking.</td></tr>
-<tr><td style="white-space:nowrap;">1.0</td><td style="white-space:nowrap;">26-Jul-2022</td><td style="white-space:nowrap;">Dhruv Dixit and Gayathri Ajith</td><td style="white-space:nowrap;">Published</td><td>Combined as single reporting sheet for Static analysis reporting.</td></tr>
+<tr><td style="white-space:nowrap;">2.4</td><td style="white-space:nowrap;">10-Sep-2026</td><td>Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Module Compliance Summary is now collapsible (shows overall verdict in header).<br>2. Module Status Summary and Module Severity Summary – Open Issues are now collapsed by default with a summary badge.<br>3. Revision history Author column now wraps long names instead of overflowing.</td></tr>
+<tr><td style="white-space:nowrap;">2.3</td><td style="white-space:nowrap;">09-Sep-2026</td><td>Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>Colour-coded count badges on minimized section headers: GEP tables (MISRA C, CERT C, CWE 2024 Top 25), Checker Code Summary, and Waiver ID Summary now follow the same red/amber/green colour scheme used by Raw Issues – Open sections.<br>- GEP badges show open (red if &gt;0), inactive (amber if &gt;0), and invalid (red if &gt;0) counts.<br>- Checker Code Summary badge shows open count in red when non-zero.<br>- Waiver ID Summary badge shows active (green), inactive (amber if &gt;0), and invalid (red if &gt;0) waiver counts.</td></tr>
+<tr><td style="white-space:nowrap;">2.2</td><td style="white-space:nowrap;">02-Sep-2026</td><td>Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Module Severity Summary – Waivered Issues, GEP tables (MISRA C 2025, CWE 2024 Top 25), Checker Code Summary, Waiver ID Summary, Module Info, and Template Revision History are now minimized (collapsed) by default with a summary badge.<br>2. Module Severity Summary – Open Issues shows a simple text message instead of a table when there are no open issues.<br>3. Module Info and Template Revision History also collapsed by default.</td></tr>
+<tr><td style="white-space:nowrap;">2.1</td><td style="white-space:nowrap;">31-Aug-2026</td><td>Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Module Severity Summary – Open Issues now appears before Waivered Issues.<br>2. Improved link/accent colour contrast on dark background (#7aa2f7 → #a8c8ff).<br>3. Added dark/light theme toggle button (preference persisted in localStorage).</td></tr>
+<tr><td style="white-space:nowrap;">2.0</td><td style="white-space:nowrap;">28-Aug-2026</td><td>Sivaraj R</td><td style="white-space:nowrap;">Published</td><td>1. Automated HTML report from KW server API / pre-saved JSON (replaces manual Excel SCAR).<br>2. BQ/FSQ/CSQ support with pconf filtering, severity remapping, MISRA C version auto-detect.<br>3. GEP tables (MISRA C, HIS, CERT C, SA) + automated waiver validation.<br>4. Interactive sort/filter tables with KW issue/waiver links and colour-coded compliance summary.<br>5. kw-config-check: validates pconf/tconf/mconf against org-wide baseline.</td></tr>
+<tr><td style="white-space:nowrap;">1.2</td><td style="white-space:nowrap;">15-Mar-2024</td><td>Dhruv Dixit, Gayathri Ajith and Shrikrushna Bhagwat</td><td style="white-space:nowrap;">Published</td><td>1. Added 'CERT C Summary by Severity' &amp; 'CERT C Summary by Modules' sheets.<br>2. Added 'CERT_GEP', 'HIS_GEP', 'SA_GEP' sheets.<br>3. Updated 'MISRA_GEP' with latest Checker Codes.<br>4. Added Deviation columns in MISRA, HIS, SA summary sheets.<br>5. Added a new column 'levels' &amp; renamed 'MISRA Rule' column to 'Rule' in 'Raw Issue Details' sheet.</td></tr>
+<tr><td style="white-space:nowrap;">1.1</td><td style="white-space:nowrap;">03-Jan-2023</td><td>Dhruv Dixit</td><td style="white-space:nowrap;">Published</td><td>Modified with changes within summary sheets, also added CIP marking.</td></tr>
+<tr><td style="white-space:nowrap;">1.0</td><td style="white-space:nowrap;">26-Jul-2022</td><td>Dhruv Dixit and Gayathri Ajith</td><td style="white-space:nowrap;">Published</td><td>Combined as single reporting sheet for Static analysis reporting.</td></tr>
 </tbody>
 </table>
 
 </div></details>
-<div id="kw-ftr" style="margin-top:40px;padding:12px 16px;background:#1a1a2e;border-top:1px solid #333355;font-size:0.82em;color:#6060a0;display:flex;justify-content:space-between;align-items:center;"><span>Copyright &copy; 2026 Texas Instruments Incorporated &nbsp;|&nbsp; TI Information &mdash; Selective Disclosure</span><span>Report generated: 2026-09-04 10:57:01&nbsp;&nbsp;<span style="color:#4a4a6a;">atlassian-modules3.0 @ 20086ecdf930</span></span></div>
+<div id="kw-ftr" style="margin-top:40px;padding:12px 16px;background:#1a1a2e;border-top:1px solid #333355;font-size:0.82em;color:#6060a0;display:flex;justify-content:space-between;align-items:center;"><span>Copyright &copy; 2026 Texas Instruments Incorporated &nbsp;|&nbsp; TI Information &mdash; Selective Disclosure</span><span>Report generated: 2026-09-16 02:19:46&nbsp;&nbsp;<span style="color:#4a4a6a;">atlassian-modules3.0 @ 139f625797ec</span></span></div>
 
 <script>
 /* ── Fix sticky filter-row top offset ──────────────────────────────────────

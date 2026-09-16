@@ -1,3 +1,49 @@
+commit 5d61241fb561430680fd33ac11698bf6f0242545
+Author: Kalyan, Vagvala <a0489746@ti.com>
+Date:   Wed Sep 16 10:55:25 2026 +0530
+
+    am26xxx: ETH: Add open defect to release notes
+    
+    - Update release notes with open defect
+    
+    Fixes: MCAL-41779
+    
+    Signed-off-by: Kalyan, Vagvala <k-vagvala@ti.com>
+
+ release_notes.md | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit e073cde1cdd9d3d0ee2619b771776fd27f115d30
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Sep 16 07:23:01 2026 +0530
+
+    all: all: Updated static analysis reports for 26.01.00
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../csp/am261x/mcal_static_analysis_report.html    | 1221 +++++++++--------
+ .../mcal_static_analysis_report_EthTrcv.html       |   36 +-
+ .../csp/am263px/mcal_static_analysis_report.html   | 1429 ++++++++++----------
+ ...analysis_report_hsm_fss_bootloader_EthTrcv.html |   36 +-
+ .../csp/am263x/mcal_static_analysis_report.html    | 1281 +++++++++---------
+ .../mcal_static_analysis_report_EthTrcv.html       |   36 +-
+ 6 files changed, 2138 insertions(+), 1901 deletions(-)
+
+commit f77a55469404b3492048a94b461d4be2c07024b7
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Sep 15 11:56:04 2026 +0530
+
+    all: all: Updating scripts to generate checksum file
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/windows/mcal_release_build.sh | 52 +++++++++++++++++++++++++
+ 1 file changed, 52 insertions(+)
+
 commit a44d717dbfcceadc3e25ec248c700611e955f319
 Author: Kalyan Vagvala <k-vagvala@ti.com>
 Date:   Tue Sep 15 21:25:00 2026 +0530
