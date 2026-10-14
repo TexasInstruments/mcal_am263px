@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 26.01.00 done on 18-Sep-2026.
+<p>This is the release notes for MCAL AM26xx 26.02.00 done on 15-Oct-2026.
 The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.md">license.md</a> present in installation base path</p>
@@ -39,46 +39,6 @@ This document details about supported driver, installation, dependencies, build 
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>Lin_SendGoToSleepSignal header issue fixed</td>
-      <td>LIN</td>
-      <td>The unexpected behaviour observed in Lin_SendGoToSleepSignal was reproduced and tested with the fix</td>
-    </tr>
-    <tr>
-      <td>LIN performance values added in user-guide</td>
-      <td>LIN</td>
-      <td>Refer User-guide for details</td>
-    </tr>
-    <tr>
-      <td>Code Compilation error for EthTrcv driver is fixed.</td>
-      <td>EthTrcv</td>
-      <td>Please refer Fixed Defects section for more details.</td>
-    </tr>
-    <tr>
-      <td>Fls PHY erase issue when attack vector is not present</td>
-      <td>FLS</td>
-      <td>Fls erase issue when attack vector is not present was reproduced and test with the fix</td>
-    </tr>
-    <tr>
-      <td>Added registerreadback functions added to CMPSS and FLC</td>
-      <td>CMPSS, FLC</td>
-      <td>Safety diagnostics register readback APIs added</td>
-    </tr>
-    <tr>
-      <td>Code Coverage Improvements</td>
-      <td>All</td>
-      <td>Code coverage improvements done across multiple modules</td>
-    </tr>
-    <tr>
-      <td>UUID not unique across modules</td>
-      <td>All</td>
-      <td>Please refer Fixed Defects section for more details.</td>
-    </tr>
-    <tr>
-      <td>All reported bswmd fixes done.</td>
-      <td>All</td>
-      <td>Please refer Fixed Defects section for more details.</td>
-    </tr>
   </tbody>
 </table>
 <h2 id="compatibility">Compatibility</h2>
@@ -211,197 +171,12 @@ This document details about supported driver, installation, dependencies, build 
   </thead>
   <tbody>
     <tr>
-      <td>MCAL-39585</td>
-      <td>UUIDs should be globally unique in bswmd files</td>
-      <td>All</td>
+      <td>MCAL-42269</td>
+      <td>Port parameter PULL INHIBIT doesn't update register correctly</td>
+      <td>Port</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>UUID is now unique across all modules</td>
-    </tr>
-    <tr>
-      <td>MCAL-38205</td>
-      <td>Mismatch between BSW-CALLED-ENTITY SHORT-NAME and IMPLEMENTED-ENTRY-REF in Bswmd file</td>
-      <td>CDD I2C</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
-    </tr>
-    <tr>
-      <td>MCAL-38206</td>
-      <td>Incorrect relative path used in CddIrqType condition for ISR entries</td>
-      <td>CDD I2C</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
-    </tr>
-    <tr>
-      <td>MCAL-38679</td>
-      <td>Cdd_I2c_PollingModeProcessing and Cdd_I2c_MainFunction have incorrect arxml tags</td>
-      <td>CDD I2C</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
-    </tr>
-    <tr>
-      <td>MCAL-38207</td>
-      <td>Options tag is missing in Bswmd arxml files</td>
-      <td>CDD PWM, Eth, EthTrcv</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Corresponding bswmd files are now updated with Options tag</td>
-    </tr>
-    <tr>
-      <td>MCAL-38103</td>
-      <td>[DOC] Userguide has wrong compiler version mentioned.</td>
-      <td>Documentation</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Userguide is now updated</td>
-    </tr>
-    <tr>
-      <td>MCAL-40853</td>
-      <td>The Rx and Tx Memory Pool Buffer is not 32B aligned</td>
-      <td>Eth</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Added 32 bytes alignment to below variable in Eth_Priv.c Eth_TxPacketMemoryPool
-      Eth_RxPacketMemoryPool</td>
-    </tr>
-    <tr>
-      <td>MCAL-41094</td>
-      <td>AM261 Eth App build is not correct</td>
-      <td>Eth</td>
-      <td>Major</td>
-      <td>AM261x</td>
-      <td>Pin mux selection corrected and build verified</td>
-    </tr>
-    <tr>
-      <td>MCAL-41095</td>
-      <td>AM261 Eth App Pin muxing issue</td>
-      <td>Eth</td>
-      <td>Major</td>
-      <td>AM261x</td>
-      <td>Pin mux selection corrected</td>
-    </tr>
-    <tr>
-      <td>MCAL-38218</td>
-      <td>MCAL Eth Driver INTERRUPT-SOURCE tag missing</td>
-      <td>Eth</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Eth_bswmd.arxml is now updated with INTERRUPT-SOURCE tag</td>
-    </tr>
-    <tr>
-      <td>MCAL-38219</td>
-      <td>MINIMUM-START-INTERVAL Tag Mismatch in Eth& EthT</td>
-      <td>Eth, EthTrcv</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Corresponding bswmd files are now updated</td>
-    </tr>
-    <tr>
-      <td>MCAL-38220</td>
-      <td>Mismatch of MODULE-ID Tag in Eth& EthTrcv</td>
-      <td>Eth, EthTrcv</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Corresponding bswmd files are now updated</td>
-    </tr>
-    <tr>
-      <td>MCAL-38221</td>
-      <td>Code Compilation error for EthTrcv driver</td>
-      <td>EthTrcv</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Moved "EthTrcv_StateType" structure declaration from "mcal/EthTrcv/include/EthTrcv_Types.h" to "mcal/autosar_include/Eth_GeneralTypes.h"</td>
-    </tr>
-    <tr>
-      <td>MCAL-39728</td>
-      <td>FLS Erase not working if PHY is enabled and Attack vector is not present in flash</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>Fls erase when PHY is enabled and attach vector is not present is now fixed to hadnle erase status check.</td>
-    </tr>
-    <tr>
-      <td>MCAL-40870</td>
-      <td>Issue with FLS Erase timeout counter</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>Erase start count is now based on Fls erase stage.</td>
-    </tr>
-    <tr>
-      <td>MCAL-41085</td>
-      <td>Unable to release spinlock in case of FLS Timeout Error</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>SchM_Exit is now added in TimeoutVerification before DetRunTime based on FlsEraseStage</td>
-    </tr>
-    <tr>
-      <td>MCAL-41110</td>
-      <td>Difference in implementation between SDK and MCAL</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>Fixed, added DDR EN and corrected dummyclkRd from dummyclkcmd</td>
-    </tr>
-    <tr>
-      <td>MCAL-41111</td>
-      <td>Difference in implementation between SDK and MCAL for macronix flash</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>Fixed, readId and numAddrBytes fixed to enable macronix flash in 8D-8D-8D PHY+DAC mode</td>
-    </tr>
-    <tr>
-      <td>MCAL-40885</td>
-      <td>Fls_PhyDisable function declares the varibale retVal unconditionally</td>
-      <td>FLS</td>
-      <td>Minor</td>
-      <td>AM263Px, AM261x</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>MCAL-40896</td>
-      <td>Details on FlsTimeoutSupervisionEnabled is incorrect in user guide</td>
-      <td>FLS</td>
-      <td>Major</td>
-      <td>AM263Px, AM261x</td>
-      <td>Userguide is now updated</td>
-    </tr>
-    <tr>
-      <td>MCAL-38305</td>
-      <td>LIN issues with Sleep command</td>
-      <td>LIN</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>SetId is now done before setting data</td>
-    </tr>
-    <tr>
-      <td>MCAL-38564</td>
-      <td>SW CS is not configurable in SPI</td>
-      <td>Spi</td>
-      <td>Major</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>SPI CS via GPIO is now available for selection through EB tresos and the driver is updated to support the same</td>
-    </tr>
-    <tr>
-      <td>MCAL-38578</td>
-      <td>Spi_MainFunction_Handling shouldn't be available for SpiLevelDelivered 0</td>
-      <td>Spi</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Conditional check for SpiLevelDelivered is added in Spi_bswmd.arxml</td>
-    </tr>
-    <tr>
-      <td>MCAL-38624</td>
-      <td>MCAL_CacheP_CACHELINE_ALIGNMENT is incorrectly set to 128</td>
-      <td>Utils</td>
-      <td>Minor</td>
-      <td>AM263x, AM263Px, AM261x</td>
-      <td>Size is now corrected and set to 32</td>
+      <td>Macro values are now inverted to write the correct value to the regoster bit</td>
     </tr>
   </tbody>
 </table>
