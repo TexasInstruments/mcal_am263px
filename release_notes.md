@@ -1,7 +1,8 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.02.00 done on 15-Oct-2026.
+This is the release notes for MCAL AM26xx 26.02.00 done on 16-Oct-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
+Note: This release note describes the changes from previously released version. For details on previous release notes, refer ${MCAL_INSTALL_PATH}/relnotes_archive folder.
 
 ## Licensing
 Refer to manifest file [mcal_manifest.html](./mcal_manifest.html) and [license.md](./license.md) present in installation base path
@@ -189,7 +190,15 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Port</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Macro values are now inverted to write the correct value to the regoster bit</td>
+      <td>Macro values are now inverted to write the correct value to the register bit</td>
+    </tr>
+    <tr>
+      <td>MCAL-42394</td>
+      <td>Build error when SpiEnableCs is off</td>
+      <td>Spi</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Build issue is fixed now if SpiEnableCs is not selected in EB it will assign with SPI_CS_VIA_PERIPHERAL_ENGINE</td>
     </tr>
   </tbody>
 </table>
@@ -221,6 +230,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>None</td>
+    </tr>
+    <tr>
+      <td>MCAL-42417</td>
+      <td>Pre_integration: Add DEM check macro for WDG</td>
+      <td>WDG</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Added guard around Wdg_reportDemError() function</td>
     </tr>
   </thead>
   <tbody>

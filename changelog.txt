@@ -1,3 +1,104 @@
+commit 8f190e614fd2a831c28b38d595c5de0567384a3e
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Oct 12 23:39:43 2026 +0530
+
+    all: Spi: Fix EB generation error when SpiEnableCs is disabled .
+    
+    - Spi_Cfg.h read SpiCsSelection without checking it has a value, which fails when SpiEnableCs is unchecked.
+    
+    - Now it defaults to SPI_CS_VIA_PERIPHERAL_ENGINE and reads the value only if present.
+    
+    - Added a new EB generated test config 95 and testcase spiTestEbCsDisableTc for the verification.
+    
+    Fixes: MCAL-42394
+    
+    Signed-off-by: Akash Verma
+
+ .../soc/am261/r5f0_0/include/Spi_Cfg.h             |   12 +
+ .../soc/am263/r5f0_0/include/Spi_Cfg.h             |   12 +
+ .../soc/am263px/r5f0_0/include/Spi_Cfg.h           |   12 +
+ .../Spi_TI_AM261x/generate/include/Spi_Cfg.h       |    3 +
+ .../Spi_TI_AM263Px/generate/include/Spi_Cfg.h      |    3 +
+ .../Spi_TI_AM263x/generate/include/Spi_Cfg.h       |    3 +
+ mcal_test/spi_test/ReadMe_ConfigDetail.txt         |    6 +
+ mcal_test/spi_test/build/makefile                  |   12 +-
+ mcal_test/spi_test/testInput/spiTestCases.h        |   34 +
+ mcal_test/spi_test/testLib/spiTest.h               |    6 +-
+ mcal_test/spi_test/testLib/spiTestMcspiTestCase.c  |   79 +-
+ mcal_test/ut_config/Spi/makefile                   |    8 +-
+ .../config_17/tresos/.prefs/pref_general.xdm       |   89 ++
+ .../Spi/soc/am261/r5f0_0/config_17/tresos/.project |   13 +
+ .../am261/r5f0_0/config_17/tresos/config/Spi.xdm   |  982 ++++++++++++++++++
+ .../config_17/tresos/output/include/Spi_Cfg.h      | 1006 ++++++++++++++++++
+ .../r5f0_0/config_17/tresos/output/src/Spi_Cfg.c   |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_Lcfg.c  |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_PBcfg.c |  522 ++++++++++
+ .../config_17/tresos/output/swcd/Spi_Bswmd.arxml   |  624 +++++++++++
+ .../config_17/tresos/.prefs/pref_general.xdm       |   89 ++
+ .../Spi/soc/am263/r5f0_0/config_17/tresos/.project |   13 +
+ .../am263/r5f0_0/config_17/tresos/config/Spi.xdm   |  982 ++++++++++++++++++
+ .../config_17/tresos/output/include/Spi_Cfg.h      | 1084 ++++++++++++++++++++
+ .../r5f0_0/config_17/tresos/output/src/Spi_Cfg.c   |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_Lcfg.c  |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_PBcfg.c |  533 ++++++++++
+ .../config_17/tresos/output/swcd/Spi_Bswmd.arxml   |  706 +++++++++++++
+ .../config_17/tresos/.prefs/pref_general.xdm       |   89 ++
+ .../soc/am263px/r5f0_0/config_17/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_17/tresos/config/Spi.xdm |  982 ++++++++++++++++++
+ .../config_17/tresos/output/include/Spi_Cfg.h      | 1019 ++++++++++++++++++
+ .../r5f0_0/config_17/tresos/output/src/Spi_Cfg.c   |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_Lcfg.c  |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_PBcfg.c |  526 ++++++++++
+ .../config_17/tresos/output/swcd/Spi_Bswmd.arxml   |  772 ++++++++++++++
+ release_notes.md                                   |   10 +-
+ 37 files changed, 10249 insertions(+), 13 deletions(-)
+
+commit 70eb7d32b5384cfdd6d5c63ba6aa347ceb26fa35
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Oct 15 00:27:56 2026 +0530
+
+    all: Wdg: Adding DEM_ENABLE if def around Wdg_reportDemError definition
+    
+    Fixes: MCAL-42417
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Wdg/src/Wdg.c | 2 ++
+ release_notes.md   | 9 +++++++++
+ 2 files changed, 11 insertions(+)
+
+commit c84bdf9b64e3fbaf64075385c64d6d460c9e8397
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Oct 14 21:55:32 2026 +0530
+
+    all: all: Updating coverage scripts
+    
+    Fixes: MCAL-42374
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/windows/mcal_coverage_build.sh    | 21 ++++++++++++++++++---
+ mcal_misc/scripts/windows/mcal_coverage_make_all.sh |  4 ++--
+ 2 files changed, 20 insertions(+), 5 deletions(-)
+
+commit 4cd56f1361ac081532b89e3940322eefa44c0f81
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Oct 14 22:13:21 2026 +0530
+
+    all: all: Updated static analysis reports on 26.01.00.07 with updated waiver ID
+    
+    Fixes: MCAL-42374
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../csp/am261x/mcal_static_analysis_report.html    | 167 +++++----
+ .../mcal_static_analysis_report_EthTrcv.html       |   6 +-
+ .../csp/am263px/mcal_static_analysis_report.html   | 383 ++++++++++---------
+ ...analysis_report_hsm_fss_bootloader_EthTrcv.html |   6 +-
+ .../csp/am263x/mcal_static_analysis_report.html    | 415 ++++++++++-----------
+ .../mcal_static_analysis_report_EthTrcv.html       |   8 +-
+ 6 files changed, 491 insertions(+), 494 deletions(-)
+
 commit fc5269fc77f59dc75dd1e771a0b9de10903efbe3
 Author: Sivaraj R <sivaraj@ti.com>
 Date:   Wed Oct 14 20:36:56 2026 +0530

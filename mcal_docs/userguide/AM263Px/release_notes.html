@@ -8,8 +8,9 @@
 </head>
 <body>
     <h1 id="introduction">Introduction</h1>
-<p>This is the release notes for MCAL AM26xx 26.02.00 done on 15-Oct-2026.
-The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
+<p>This is the release notes for MCAL AM26xx 26.02.00 done on 16-Oct-2026.
+The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.
+Note: This release note describes the changes from previously released version. For details on previous release notes, refer ${MCAL<em>INSTALL</em>PATH}/relnotes_archive folder.</p>
 <h2 id="licensing">Licensing</h2>
 <p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.md">license.md</a> present in installation base path</p>
 <h2 id="gettingstarted">Getting Started</h2>
@@ -176,7 +177,15 @@ This document details about supported driver, installation, dependencies, build 
       <td>Port</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Macro values are now inverted to write the correct value to the regoster bit</td>
+      <td>Macro values are now inverted to write the correct value to the register bit</td>
+    </tr>
+    <tr>
+      <td>MCAL-42394</td>
+      <td>Build error when SpiEnableCs is off</td>
+      <td>Spi</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Build issue is fixed now if SpiEnableCs is not selected in EB it will assign with SPI_CS_VIA_PERIPHERAL_ENGINE</td>
     </tr>
   </tbody>
 </table>
@@ -206,6 +215,14 @@ This document details about supported driver, installation, dependencies, build 
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>None</td>
+    </tr>
+    <tr>
+      <td>MCAL-42417</td>
+      <td>Pre_integration: Add DEM check macro for WDG</td>
+      <td>WDG</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Added guard around Wdg_reportDemError() function</td>
     </tr>
   </thead>
   <tbody>
