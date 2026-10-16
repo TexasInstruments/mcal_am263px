@@ -1,3 +1,79 @@
+commit ed5cdd16cd248eada068f9ed25c4f641efdb88d9
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Oct 16 11:53:50 2026 +0530
+
+    all: all: Updated and sorted release note
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 25 ++++++++++++-------------
+ 1 file changed, 12 insertions(+), 13 deletions(-)
+
+commit d81e28b3ee50b0ba5788537ac8f53fad17455e48
+Author: Surbhi Kapoor <s-kapoor1@ti.com>
+Date:   Fri Oct 16 10:59:42 2026 +0530
+
+    am63x, am263px, am261x: Update RN for SchM bug
+    
+    Split the large SchM exclusive areas in the Eth RX/TX descriptor
+    processing paths into short, granular critical sections, so
+    EthIf_RxIndication/EthIf_TxConfirmation run with interrupts
+    unmasked and RX descriptors are recycled one at a time, which
+    removes the RX ISR storm. Per-channel re-entrancy guards protect
+    the rings while the lock is released
+    
+    Fixes: MCAL-41779
+    Signed-off-by: Surbhi Kapoor <s-kapoor1@ti.com>
+
+ release_notes.md | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
+commit 7201a4b14f613700edd8c75968b6e1b2b66c40f3
+Author: Surbhi Kapoor <s-kapoor1@ti.com>
+Date:   Fri Sep 4 14:31:51 2026 +0530
+
+    am263x, am263px, am261x: Eth: Subdivide SchM critical sections into granular locks
+    
+      Replace the single large SchM_Enter/Exit_Eth_ETH_EXCLUSIVE_AREA_0 sections
+      in the RX/TX descriptor processing paths with several short critical
+      sections. This keeps interrupts unmasked while upper-layer callbacks
+      (EthIf_RxIndication / EthIf_TxConfirmation) run, and protects only the
+      HW register and descriptor accesses.
+    
+      RX (Eth_processRxBuffDesc, EthRxBuffDescProcessSingle, Eth_receiveHw):
+      - Take the exclusive area only around the completion pointer read and
+        descriptor flag reads, and release it around EthRxProcessPacket().
+      - Process descriptors one at a time. Each descriptor is recycled, the
+        free buffer count is credited, and CP/HDP are updated before the area
+        is released. Previously these were batched after the loop, which left
+        the RX threshold interrupt asserted and caused an ISR storm.
+      - Remove the SchM wrapper in Eth_receiveHw(); the callee now handles it.
+    
+      TX (Eth_processTxBuffDesc, Eth_provideHwTxBuffer, Eth_TxConfirmation):
+      - Protect the queue head read, OWN flag check, descriptor update and
+        CP/HDP writes separately, and run EthTxBuffProcess() unprotected.
+      - Split the disable-IRQ / process / enable-IRQ sequence in
+        Eth_provideHwTxBuffer() into separate critical sections.
+      - Drop the outer SchM wrapper in Eth_TxConfirmation() and the
+        re-enter in EthTxBuffProcess().
+    
+      Add per-channel re-entrancy guards (gEthRxProcBusy, gEthTxProcBusy) so a
+      nested ISR or polling call cannot walk the same descriptor ring while
+      the exclusive area is released. If the RX ring is busy, the nested
+      caller masks the channel RX/RX-threshold interrupts
+      (EthRxProcDeferIntr) and the ring owner re-enables them on exit
+      (EthRxProcRelease).
+    
+    Fixes: MCAL-41779
+    
+    Signed-off-by: Surbhi Kapoor <s-kapoor1@ti.com>
+
+ mcal/Eth/src/Eth.c           |   4 -
+ mcal/Eth/src/cpsw/Eth_Priv.c | 331 +++++++++++++++++++++++++++++++++----------
+ 2 files changed, 256 insertions(+), 79 deletions(-)
+
 commit 8f190e614fd2a831c28b38d595c5de0567384a3e
 Author: Akash <a-verma3@ti.com>
 Date:   Mon Oct 12 23:39:43 2026 +0530

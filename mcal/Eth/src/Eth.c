@@ -1200,12 +1200,8 @@ FUNC(void, ETH_CODE) Eth_TxConfirmation(VAR(uint8, AUTOMATIC) CtrlIdx)
 
     if ((Std_ReturnType)E_OK == retVal)
     {
-        SchM_Enter_Eth_ETH_EXCLUSIVE_AREA_0();
-
         /* check all filled transmit buffers for successful transmission */
         Eth_processTxBuffDesc(Eth_DrvObj.ctrlIdx, ETH_CPDMA_DEFAULT_TX_CHANNEL_NUM);
-
-        SchM_Exit_Eth_ETH_EXCLUSIVE_AREA_0();
     }
 }
 
