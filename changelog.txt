@@ -1,3 +1,2784 @@
+commit ed5cdd16cd248eada068f9ed25c4f641efdb88d9
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Oct 16 11:53:50 2026 +0530
+
+    all: all: Updated and sorted release note
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 25 ++++++++++++-------------
+ 1 file changed, 12 insertions(+), 13 deletions(-)
+
+commit d81e28b3ee50b0ba5788537ac8f53fad17455e48
+Author: Surbhi Kapoor <s-kapoor1@ti.com>
+Date:   Fri Oct 16 10:59:42 2026 +0530
+
+    am63x, am263px, am261x: Update RN for SchM bug
+    
+    Split the large SchM exclusive areas in the Eth RX/TX descriptor
+    processing paths into short, granular critical sections, so
+    EthIf_RxIndication/EthIf_TxConfirmation run with interrupts
+    unmasked and RX descriptors are recycled one at a time, which
+    removes the RX ISR storm. Per-channel re-entrancy guards protect
+    the rings while the lock is released
+    
+    Fixes: MCAL-41779
+    Signed-off-by: Surbhi Kapoor <s-kapoor1@ti.com>
+
+ release_notes.md | 17 +++++++++--------
+ 1 file changed, 9 insertions(+), 8 deletions(-)
+
+commit 7201a4b14f613700edd8c75968b6e1b2b66c40f3
+Author: Surbhi Kapoor <s-kapoor1@ti.com>
+Date:   Fri Sep 4 14:31:51 2026 +0530
+
+    am263x, am263px, am261x: Eth: Subdivide SchM critical sections into granular locks
+    
+      Replace the single large SchM_Enter/Exit_Eth_ETH_EXCLUSIVE_AREA_0 sections
+      in the RX/TX descriptor processing paths with several short critical
+      sections. This keeps interrupts unmasked while upper-layer callbacks
+      (EthIf_RxIndication / EthIf_TxConfirmation) run, and protects only the
+      HW register and descriptor accesses.
+    
+      RX (Eth_processRxBuffDesc, EthRxBuffDescProcessSingle, Eth_receiveHw):
+      - Take the exclusive area only around the completion pointer read and
+        descriptor flag reads, and release it around EthRxProcessPacket().
+      - Process descriptors one at a time. Each descriptor is recycled, the
+        free buffer count is credited, and CP/HDP are updated before the area
+        is released. Previously these were batched after the loop, which left
+        the RX threshold interrupt asserted and caused an ISR storm.
+      - Remove the SchM wrapper in Eth_receiveHw(); the callee now handles it.
+    
+      TX (Eth_processTxBuffDesc, Eth_provideHwTxBuffer, Eth_TxConfirmation):
+      - Protect the queue head read, OWN flag check, descriptor update and
+        CP/HDP writes separately, and run EthTxBuffProcess() unprotected.
+      - Split the disable-IRQ / process / enable-IRQ sequence in
+        Eth_provideHwTxBuffer() into separate critical sections.
+      - Drop the outer SchM wrapper in Eth_TxConfirmation() and the
+        re-enter in EthTxBuffProcess().
+    
+      Add per-channel re-entrancy guards (gEthRxProcBusy, gEthTxProcBusy) so a
+      nested ISR or polling call cannot walk the same descriptor ring while
+      the exclusive area is released. If the RX ring is busy, the nested
+      caller masks the channel RX/RX-threshold interrupts
+      (EthRxProcDeferIntr) and the ring owner re-enables them on exit
+      (EthRxProcRelease).
+    
+    Fixes: MCAL-41779
+    
+    Signed-off-by: Surbhi Kapoor <s-kapoor1@ti.com>
+
+ mcal/Eth/src/Eth.c           |   4 -
+ mcal/Eth/src/cpsw/Eth_Priv.c | 331 +++++++++++++++++++++++++++++++++----------
+ 2 files changed, 256 insertions(+), 79 deletions(-)
+
+commit 8f190e614fd2a831c28b38d595c5de0567384a3e
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Oct 12 23:39:43 2026 +0530
+
+    all: Spi: Fix EB generation error when SpiEnableCs is disabled .
+    
+    - Spi_Cfg.h read SpiCsSelection without checking it has a value, which fails when SpiEnableCs is unchecked.
+    
+    - Now it defaults to SPI_CS_VIA_PERIPHERAL_ENGINE and reads the value only if present.
+    
+    - Added a new EB generated test config 95 and testcase spiTestEbCsDisableTc for the verification.
+    
+    Fixes: MCAL-42394
+    
+    Signed-off-by: Akash Verma
+
+ .../soc/am261/r5f0_0/include/Spi_Cfg.h             |   12 +
+ .../soc/am263/r5f0_0/include/Spi_Cfg.h             |   12 +
+ .../soc/am263px/r5f0_0/include/Spi_Cfg.h           |   12 +
+ .../Spi_TI_AM261x/generate/include/Spi_Cfg.h       |    3 +
+ .../Spi_TI_AM263Px/generate/include/Spi_Cfg.h      |    3 +
+ .../Spi_TI_AM263x/generate/include/Spi_Cfg.h       |    3 +
+ mcal_test/spi_test/ReadMe_ConfigDetail.txt         |    6 +
+ mcal_test/spi_test/build/makefile                  |   12 +-
+ mcal_test/spi_test/testInput/spiTestCases.h        |   34 +
+ mcal_test/spi_test/testLib/spiTest.h               |    6 +-
+ mcal_test/spi_test/testLib/spiTestMcspiTestCase.c  |   79 +-
+ mcal_test/ut_config/Spi/makefile                   |    8 +-
+ .../config_17/tresos/.prefs/pref_general.xdm       |   89 ++
+ .../Spi/soc/am261/r5f0_0/config_17/tresos/.project |   13 +
+ .../am261/r5f0_0/config_17/tresos/config/Spi.xdm   |  982 ++++++++++++++++++
+ .../config_17/tresos/output/include/Spi_Cfg.h      | 1006 ++++++++++++++++++
+ .../r5f0_0/config_17/tresos/output/src/Spi_Cfg.c   |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_Lcfg.c  |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_PBcfg.c |  522 ++++++++++
+ .../config_17/tresos/output/swcd/Spi_Bswmd.arxml   |  624 +++++++++++
+ .../config_17/tresos/.prefs/pref_general.xdm       |   89 ++
+ .../Spi/soc/am263/r5f0_0/config_17/tresos/.project |   13 +
+ .../am263/r5f0_0/config_17/tresos/config/Spi.xdm   |  982 ++++++++++++++++++
+ .../config_17/tresos/output/include/Spi_Cfg.h      | 1084 ++++++++++++++++++++
+ .../r5f0_0/config_17/tresos/output/src/Spi_Cfg.c   |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_Lcfg.c  |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_PBcfg.c |  533 ++++++++++
+ .../config_17/tresos/output/swcd/Spi_Bswmd.arxml   |  706 +++++++++++++
+ .../config_17/tresos/.prefs/pref_general.xdm       |   89 ++
+ .../soc/am263px/r5f0_0/config_17/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_17/tresos/config/Spi.xdm |  982 ++++++++++++++++++
+ .../config_17/tresos/output/include/Spi_Cfg.h      | 1019 ++++++++++++++++++
+ .../r5f0_0/config_17/tresos/output/src/Spi_Cfg.c   |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_Lcfg.c  |    3 +
+ .../r5f0_0/config_17/tresos/output/src/Spi_PBcfg.c |  526 ++++++++++
+ .../config_17/tresos/output/swcd/Spi_Bswmd.arxml   |  772 ++++++++++++++
+ release_notes.md                                   |   10 +-
+ 37 files changed, 10249 insertions(+), 13 deletions(-)
+
+commit 70eb7d32b5384cfdd6d5c63ba6aa347ceb26fa35
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Oct 15 00:27:56 2026 +0530
+
+    all: Wdg: Adding DEM_ENABLE if def around Wdg_reportDemError definition
+    
+    Fixes: MCAL-42417
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Wdg/src/Wdg.c | 2 ++
+ release_notes.md   | 9 +++++++++
+ 2 files changed, 11 insertions(+)
+
+commit c84bdf9b64e3fbaf64075385c64d6d460c9e8397
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Oct 14 21:55:32 2026 +0530
+
+    all: all: Updating coverage scripts
+    
+    Fixes: MCAL-42374
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_misc/scripts/windows/mcal_coverage_build.sh    | 21 ++++++++++++++++++---
+ mcal_misc/scripts/windows/mcal_coverage_make_all.sh |  4 ++--
+ 2 files changed, 20 insertions(+), 5 deletions(-)
+
+commit 4cd56f1361ac081532b89e3940322eefa44c0f81
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Oct 14 22:13:21 2026 +0530
+
+    all: all: Updated static analysis reports on 26.01.00.07 with updated waiver ID
+    
+    Fixes: MCAL-42374
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../csp/am261x/mcal_static_analysis_report.html    | 167 +++++----
+ .../mcal_static_analysis_report_EthTrcv.html       |   6 +-
+ .../csp/am263px/mcal_static_analysis_report.html   | 383 ++++++++++---------
+ ...analysis_report_hsm_fss_bootloader_EthTrcv.html |   6 +-
+ .../csp/am263x/mcal_static_analysis_report.html    | 415 ++++++++++-----------
+ .../mcal_static_analysis_report_EthTrcv.html       |   8 +-
+ 6 files changed, 491 insertions(+), 494 deletions(-)
+
+commit fc5269fc77f59dc75dd1e771a0b9de10903efbe3
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Wed Oct 14 20:36:56 2026 +0530
+
+    all: all: ut_config makefiles for all modules
+    
+    - override with todo which can be removed when we add exact build
+      support of xdm files
+    
+    Fixes: MCAL-42394
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_test/ut_config/Adc/makefile       | 30 ++++++++++++++++++++++++++++++
+ mcal_test/ut_config/Can/makefile       | 30 ++++++++++++++++++++++++++++++
+ mcal_test/ut_config/Cdd_Cmpss/makefile | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Cdd_Flc/makefile   | 27 +++++++++++++++++++++++++++
+ mcal_test/ut_config/Dio/makefile       | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Dma/makefile       | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Epwm/makefile      | 12 +++++++++++-
+ mcal_test/ut_config/Eth/makefile       | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/EthTrcv/makefile   | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Fls/makefile       | 30 ++++++++++++++++++++++++++++++
+ mcal_test/ut_config/FsiRx/makefile     | 30 ++++++++++++++++++++++++++++++
+ mcal_test/ut_config/FsiTx/makefile     | 27 +++++++++++++++++++++++++++
+ mcal_test/ut_config/Gpt/makefile       | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Icu/makefile       | 30 ++++++++++++++++++++++++++++++
+ mcal_test/ut_config/Ipc/makefile       | 30 ++++++++++++++++++++++++++++++
+ mcal_test/ut_config/Port/makefile      | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Pwm/makefile       | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Spi/makefile       | 30 ++++++++++++++++++++++++++++++
+ mcal_test/ut_config/Uart/makefile      | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/Wdg/makefile       | 22 ++++++++++++++++++++++
+ mcal_test/ut_config/makefile           |  2 +-
+ 21 files changed, 496 insertions(+), 2 deletions(-)
+
+commit 1ff01f8ff6a9dd895c7f6adf679bab8a33f9cc77
+Author: Sivaraj R <sivaraj@ti.com>
+Date:   Wed Oct 14 18:39:15 2026 +0530
+
+    all: config: move config files to tresos/output
+    
+    - this is first step towards generating the config files from xdm file
+    - move all module config headers and sources from flat config_N/ directory
+      to config_N/tresos/output/include/ and config_N/tresos/output/src/
+      structure, matching the Cdd_I2c reference pattern.
+    - modules updated (file migration + inc.mk/srcs.mk paths):
+      - Adc, Can, Dio, Epwm, Eth, Fls, FsiRx, FsiTx, Port, Pwm, Spi, Uart, Wdg
+      - Cdd_Cmpss, Cdd_Flc, Dma, Gpt, Icu, Ipc (header-only)
+    - modules skipped (already correct): Lin, Mcu, Cdd_I2c
+    - modules skipped (no .mk): EthTrcv
+    
+    Fixes: MCAL-42394
+    
+    Signed-off-by: Sivaraj R <sivaraj@ti.com>
+
+ mcal_test/ut_config/Adc/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_21/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_21/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_22/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_22/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_23/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_23/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_24/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_24/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_26/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_26/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_34/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_34/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_38/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_38/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../config_39/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_39/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/src}/Cdd_Dma_Cfg.c          |   0
+ .../config_4/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../config_40/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_40/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/src}/Cdd_Dma_Cfg.c          |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_43/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_43/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_44/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_44/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_45/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_45/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_46/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_46/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_5/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_50/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_50/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_51/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_51/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_52/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_52/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_6/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_61/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_61/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_7/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_21/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_21/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_22/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_22/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_23/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_23/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_24/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_24/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_26/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_26/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_34/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_34/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_38/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_38/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_39/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_39/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_4/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_40/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_40/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_43/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_43/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_44/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_44/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_45/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_45/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_46/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_46/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_5/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_50/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_50/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_51/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_51/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_52/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_52/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_53/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_53/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_57/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_57/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_58/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_58/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_6/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_61/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_61/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_62/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_62/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_7/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_21/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_21/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_22/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_22/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_23/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_23/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_24/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_24/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_26/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_26/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_34/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_34/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_38/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_38/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_39/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_39/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_4/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_40/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_40/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_43/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_43/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_44/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_44/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_45/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_45/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_46/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_46/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_5/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_50/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_50/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_51/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_51/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_52/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_52/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_6/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_61/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_61/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../config_7/{ => tresos/output/include}/Adc_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Adc_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Adc_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Adc_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Adc_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Adc_PBcfg.c  |   0
+ mcal_test/ut_config/Adc/srcs.mk                    |  16 +-
+ mcal_test/ut_config/Can/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Can_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Can_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_5/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_7/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_8/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_8/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Can_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Can_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_5/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_6/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_7/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_8/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_8/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_2/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Can_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Can_PBcfg.c   |   0
+ .../config_3/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_4/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_4/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_5/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_5/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_7/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_7/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_7/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_8/{ => tresos/output/include}/Can_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_8/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Can_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_PBcfg.c |   0
+ mcal_test/ut_config/Can/srcs.mk                    |   6 +-
+ mcal_test/ut_config/Cdd_Cmpss/inc.mk               |   4 +-
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_Cmpss_Cfg.h    |   0
+ mcal_test/ut_config/Cdd_Cmpss/srcs.mk              |   4 +-
+ mcal_test/ut_config/Cdd_Flc/inc.mk                 |   4 +-
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Flc_Cfg.h      |   0
+ mcal_test/ut_config/Cdd_Flc/srcs.mk                |   4 +-
+ mcal_test/ut_config/Dio/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_1/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_2/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_3/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_4/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_4/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_5/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_5/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_91/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_92/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_93/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_94/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../config_1/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_1/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_2/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_3/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_4/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_4/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_5/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_5/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_91/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_92/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_93/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_94/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../config_1/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_1/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_2/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_3/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_4/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_4/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_5/{ => tresos/output/include}/Dio_Cfg.h |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_5/{ => tresos/output/src}/Dio_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Dio_Lcfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_91/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_92/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_93/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_94/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_PBcfg.c |   0
+ mcal_test/ut_config/Dio/srcs.mk                    |   6 +-
+ mcal_test/ut_config/Dma/inc.mk                     |   4 +-
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ mcal_test/ut_config/Dma/srcs.mk                    |   5 +-
+ mcal_test/ut_config/Epwm/inc.mk                    |   4 +-
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../config_1/{ => tresos/output/src}/Cdd_Pwm_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../config_2/{ => tresos/output/src}/Cdd_Pwm_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../Epwm/soc/am261/r5f0_0/config_22/Cdd_Pwm_Cfg.h  | 281 ---------
+ .../soc/am261/r5f0_0/config_22/Cdd_Pwm_PBcfg.c     | 684 ---------------------
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../config_1/tresos/output/src}/Cdd_Pwm_Cfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../Epwm/soc/am263/r5f0_0/config_22/Cdd_Pwm_Cfg.h  | 305 ---------
+ .../soc/am263/r5f0_0/config_22/Cdd_Pwm_PBcfg.c     | 684 ---------------------
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_Cfg.c          |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../config_1/tresos/output/src}/Cdd_Pwm_Cfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../config_11/tresos/output/src}/Cdd_Pwm_Cfg.c     |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../soc/am263px/r5f0_0/config_22/Cdd_Pwm_Cfg.h     | 306 ---------
+ .../soc/am263px/r5f0_0/config_22/Cdd_Pwm_PBcfg.c   | 684 ---------------------
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../soc/am263px/r5f0_0/config_92/Cdd_Pwm_Cfg.c     |   3 -
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../soc/am263px/r5f0_0/config_93/Cdd_Pwm_Cfg.c     |   3 -
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ .../soc/am263px/r5f0_0/config_94/Cdd_Pwm_Cfg.c     |   3 -
+ .../{ => tresos/output/include}/Cdd_Pwm_Cfg.h      |   0
+ .../tresos/output/src}/Cdd_Pwm_Cfg.c               |   0
+ .../{ => tresos/output/src}/Cdd_Pwm_PBcfg.c        |   0
+ mcal_test/ut_config/Epwm/srcs.mk                   |   6 +-
+ mcal_test/ut_config/Eth/inc.mk                     |   6 +-
+ .../config_1/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_10/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_10/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_13/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_13/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../{ => tresos/output/src}/Port_PBcfg_Eth.c       |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/src}/EthTrcv_Cfg.c          |   0
+ .../{ => tresos/output/src}/EthTrcv_Lcfg.c         |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg.c        |   0
+ .../config_14/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_14/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../{ => tresos/output/src}/Port_PBcfg_Eth.c       |   0
+ .../{ => tresos/output/include}/EthTrcv_Cfg.h      |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../{ => tresos/output/src}/EthTrcv_Cfg.c          |   0
+ .../{ => tresos/output/src}/EthTrcv_Lcfg.c         |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg.c        |   0
+ .../config_15/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_15/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../{ => tresos/output/src}/Port_PBcfg_Eth.c       |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_4/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_5/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_6/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../{ => tresos/output/src}/Port_PBcfg_Eth.c       |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_10/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_10/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_13/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_13/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_13/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/src}/EthTrcv_Cfg.c          |   0
+ .../{ => tresos/output/src}/EthTrcv_Lcfg.c         |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg.c        |   0
+ .../config_14/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_14/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_14/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/EthTrcv_Cfg.h      |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/src}/EthTrcv_Cfg.c          |   0
+ .../{ => tresos/output/src}/EthTrcv_Lcfg.c         |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg.c        |   0
+ .../config_15/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_15/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_15/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_4/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_5/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_6/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_9/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg_C.c      |   0
+ .../config_10/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_10/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg_C.c      |   0
+ .../config_13/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_13/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_13/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/src}/Port_PBcfg_C.c         |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/src}/EthTrcv_Cfg.c          |   0
+ .../{ => tresos/output/src}/EthTrcv_Lcfg.c         |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg.c        |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg_C.c      |   0
+ .../config_14/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_14/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_14/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/src}/Port_PBcfg_C.c         |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/src}/EthTrcv_Cfg.c          |   0
+ .../{ => tresos/output/src}/EthTrcv_Lcfg.c         |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg.c        |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg_C.c      |   0
+ .../config_15/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_15/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_15/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/src}/Port_PBcfg_C.c         |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_4/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_5/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_6/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg_C.c      |   0
+ .../config_6/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg_C.c      |   0
+ .../config_7/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../{ => tresos/output/src}/EthTrcv_PBcfg_C.c      |   0
+ .../config_8/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Eth_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Mcu_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Mcu_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_9/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/src}/Port_PBcfg_C.c         |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ .../{ => tresos/output/include}/Eth_Cfg.h          |   0
+ mcal_test/ut_config/Eth/srcs.mk                    |   8 +-
+ mcal_test/ut_config/Fls/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_10/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_10/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_12/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_12/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_14/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_15/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_20/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_20/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_10/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_10/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_11/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_11/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_14/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_15/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_20/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_20/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_21/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_21/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_10/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_10/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_12/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_12/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_14/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_15/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_17/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_17/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_20/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_20/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../config_3/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Fls_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Fls_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Fls_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Fls_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Fls_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Fls_PBcfg.c  |   0
+ mcal_test/ut_config/Fls/srcs.mk                    |   6 +-
+ mcal_test/ut_config/FsiRx/inc.mk                   |   4 +-
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../config_3/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../config_8/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../config_3/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../config_8/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../config_3/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../config_8/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ mcal_test/ut_config/FsiRx/srcs.mk                  |  18 +-
+ mcal_test/ut_config/FsiTx/inc.mk                   |   4 +-
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ .../{ => tresos/output/include}/Cdd_FsiRx_Cfg.h    |   0
+ .../{ => tresos/output/include}/Cdd_FsiTx_Cfg.h    |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiRx_PBcfg.c      |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_Cfg.c        |   0
+ .../{ => tresos/output/src}/Cdd_FsiTx_PBcfg.c      |   0
+ mcal_test/ut_config/FsiTx/srcs.mk                  |   6 +-
+ mcal_test/ut_config/Gpt/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_4/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_4/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../config_4/{ => tresos/output/include}/Gpt_Cfg.h |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ .../{ => tresos/output/include}/Gpt_Cfg.h          |   0
+ mcal_test/ut_config/Gpt/srcs.mk                    |   5 +-
+ mcal_test/ut_config/Icu/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../config_4/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../config_2/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../config_3/{ => tresos/output/include}/Icu_Cfg.h |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Icu_Cfg.h          |   0
+ mcal_test/ut_config/Icu/srcs.mk                    |   5 +-
+ mcal_test/ut_config/Ipc/inc.mk                     |   4 +-
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Ipc_Cfg.h      |   0
+ mcal_test/ut_config/Ipc/srcs.mk                    |   5 +-
+ mcal_test/ut_config/Port/inc.mk                    |   4 +-
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_11/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_11/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_11/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_11/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_12/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_12/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_12/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_12/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_13/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_13/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_13/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_14/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_14/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_14/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_2/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_3/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_4/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_5/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_91/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_92/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_93/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_94/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/src}/Port_PBcfg_Intr.c      |   0
+ .../{ => tresos/output/src}/Port_PBcfg_UART0.c     |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_11/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_11/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_11/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_11/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_12/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_12/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_12/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_12/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_13/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_13/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_13/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_14/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_14/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_14/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_2/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_3/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_4/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_5/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_91/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_92/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_93/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_94/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_11/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_11/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_11/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_11/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_12/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_12/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_12/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_12/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_13/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_13/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_13/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Mcu_Cfg.h          |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_14/{ => tresos/output/src}/Mcu_Cfg.c    |   0
+ .../config_14/{ => tresos/output/src}/Mcu_PBcfg.c  |   0
+ .../config_14/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_14/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_2/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_3/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_4/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_5/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_91/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_92/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_93/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Port_PBcfg.c |   0
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_94/{ => tresos/output/src}/Port_Cfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Port_PBcfg.c |   0
+ mcal_test/ut_config/Port/srcs.mk                   |   6 +-
+ mcal_test/ut_config/Pwm/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_3/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_3/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_3/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Pwm_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Pwm_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Pwm_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Pwm_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Pwm_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Pwm_PBcfg.c  |   0
+ mcal_test/ut_config/Pwm/srcs.mk                    |   6 +-
+ mcal_test/ut_config/Spi/inc.mk                     |   4 +-
+ .../{ => tresos/output/include}/Port_Cfg.h         |   0
+ .../config_1/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Port_Cfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Port_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_11/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_11/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_11/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_12/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_12/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_12/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_13/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_13/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_15/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_15/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_16/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_16/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_3/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_6/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_7/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_8/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_9/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_10/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_10/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_10/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_15/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_15/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_16/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_16/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_3/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_51/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_51/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_51/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_52/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_52/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_52/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../config_6/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_6/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_7/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_8/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_9/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../config_1/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_1/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_1/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_11/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_11/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_11/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_12/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_12/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_12/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_13/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_13/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_13/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_15/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_15/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_15/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Dio_Cfg.h          |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_16/{ => tresos/output/src}/Dio_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Dio_Lcfg.c   |   0
+ .../config_16/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_16/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_16/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../config_2/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_2/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_2/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_3/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_3/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_3/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_4/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_4/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_5/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_5/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_6/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_6/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_7/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_7/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_8/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_8/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_8/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_8/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../config_9/{ => tresos/output/include}/Spi_Cfg.h |   0
+ .../config_9/{ => tresos/output/src}/Spi_Cfg.c     |   0
+ .../config_9/{ => tresos/output/src}/Spi_Lcfg.c    |   0
+ .../config_9/{ => tresos/output/src}/Spi_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_91/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_91/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_91/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_92/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_92/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_92/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_93/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_93/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_93/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ .../{ => tresos/output/include}/Spi_Cfg.h          |   0
+ .../config_94/{ => tresos/output/src}/Spi_Cfg.c    |   0
+ .../config_94/{ => tresos/output/src}/Spi_Lcfg.c   |   0
+ .../config_94/{ => tresos/output/src}/Spi_PBcfg.c  |   0
+ mcal_test/ut_config/Spi/srcs.mk                    |   6 +-
+ mcal_test/ut_config/Uart/inc.mk                    |   4 +-
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_1/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_2/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_3/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_1/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_2/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_3/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_1/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_2/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Dma_Cfg.h      |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../config_3/{ => tresos/output/src}/Cdd_Dma_Cfg.c |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ .../{ => tresos/output/include}/Cdd_Uart_Cfg.h     |   0
+ .../{ => tresos/output/src}/Cdd_Uart_Cfg.c         |   0
+ .../{ => tresos/output/src}/Cdd_Uart_PBcfg.c       |   0
+ mcal_test/ut_config/Uart/srcs.mk                   |   6 +-
+ mcal_test/ut_config/Wdg/inc.mk                     |   4 +-
+ .../config_1/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Wdg_Cfg.c     |   0
+ .../config_3/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Wdg_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Wdg_Cfg.c     |   0
+ .../config_3/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Wdg_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../config_1/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_1/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_2/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_2/{ => tresos/output/src}/Wdg_Cfg.c     |   0
+ .../config_3/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_3/{ => tresos/output/src}/Wdg_Lcfg.c    |   0
+ .../config_4/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_4/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_5/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_5/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_6/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_6/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../config_7/{ => tresos/output/include}/Wdg_Cfg.h |   0
+ .../config_7/{ => tresos/output/src}/Wdg_PBcfg.c   |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ .../{ => tresos/output/include}/Wdg_Cfg.h          |   0
+ mcal_test/ut_config/Wdg/srcs.mk                    |   6 +-
+ 2487 files changed, 102 insertions(+), 3059 deletions(-)
+
+commit c82ef7fcab2e680f329ce5b776767e551ccc477f
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Oct 13 15:05:01 2026 +0530
+
+    am263px: all: Updated AM263Px static analysis report on tag
+    
+    Fixes: MCAL-42374
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../csp/am263px/mcal_static_analysis_report.html   | 366 ++++++++++-----------
+ ...analysis_report_hsm_fss_bootloader_EthTrcv.html |   6 +-
+ 2 files changed, 186 insertions(+), 186 deletions(-)
+
+commit 1ca03cc70c80f3b47eff35937ce99575ff7580e4
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Oct 5 11:30:24 2026 +0530
+
+    all: Port: Fixing Port pull inhibit enable/disable
+    
+    -Pull Inhibit enable should ideally set PE/PI bit to pull disable, and inhibit disable to pull enable
+    
+    -Updated driver code, handles pull enable/disable accordingly
+    
+    Fixes: MCAL-42269
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Port/V0/Port_Priv.h |   4 +-
+ release_notes.md         | 233 +----------------------------------------------
+ 2 files changed, 6 insertions(+), 231 deletions(-)
+
+commit f3d849ad420e19495061d39f099ffdb48737b965
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Fri Oct 9 12:49:19 2026 +0530
+
+    all: all: Adding coverage json file and updated scripts to add 'Effect on this UNIT' column in generated excel sheet
+    
+    Fixes: MCAL-42374
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/coverage/covGapEffects.json | 3531 +++++++++++++++++++++++++++++++++
+ mcal_test/coverage/covReportGen.py    |   83 +-
+ 2 files changed, 3610 insertions(+), 4 deletions(-)
+
+commit a57dfa64db67fbb54dae865d4e4374a6b1a2d71a
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Sep 17 10:29:37 2026 +0530
+
+    all: all: 26.01.00 release note archive
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ relnotes_archive/mcal_release_notes_26.01.00.html | 818 ++++++++++++++++++++++
+ 1 file changed, 818 insertions(+)
+
 commit 5d61241fb561430680fd33ac11698bf6f0242545
 Author: Kalyan, Vagvala <a0489746@ti.com>
 Date:   Wed Sep 16 10:55:25 2026 +0530

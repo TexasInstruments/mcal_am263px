@@ -472,6 +472,7 @@ Wdg_RegisterReadback(P2VAR(Wdg_RegisterReadbackType, AUTOMATIC, WDG_APPL_DATA) R
 }
 #endif /*STD_ON == WDG_REGISTER_READBACK_API*/
 
+#if (WDG_CFG_DEM_ENABLE == STD_ON)
 void Wdg_reportDemError(Dem_EventIdType eventId, Dem_EventStatusType eventStatus)
 {
 #ifdef MCAL_DYNAMIC_BUILD
@@ -495,6 +496,7 @@ void Wdg_reportDemError(Dem_EventIdType eventId, Dem_EventStatusType eventStatus
 
     return;
 }
+#endif /*STD_ON == WDG_CFG_DEM_ENABLE*/
 
 #define WDG_STOP_SEC_CODE
 #include "Wdg_MemMap.h"

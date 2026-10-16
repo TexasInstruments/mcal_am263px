@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>release_notes</title>
+</head>
+<body>
+    <h1 id="introduction">Introduction</h1>
+<p>This is the release notes for MCAL AM26xx 26.01.00.07 done on 16-Sep-2026.
+The MCAL package consists of MCAL Driver &amp; Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned <strong>4.3.1</strong>.</p>
+<h2 id="licensing">Licensing</h2>
+<p>Refer to manifest file <a href="./mcal_manifest.html">mcal_manifest.html</a> and <a href="./license.md">license.md</a> present in installation base path</p>
+<h2 id="gettingstarted">Getting Started</h2>
+<p>The AM263x <a href="https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263x/latest/index.html" title="AM263x User Guide">HTML</a> /AM263Px <a href="https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM263P/latest/index.html" title="AM263Px User Guide">HTML</a> /AM261x <a href="https://software-dl.ti.com/mcu-plus-sdk/esd/PLATFORM_SW_MCAL/AM261x/latest/index.html" title="AM261x User Guide">HTML</a> User Guide provides the documentation and references necessary to begin development on TI's platforms using AM263x/AM263Px/AM261x.
+This document details about supported driver, installation, dependencies, build instructions, steps to run example applications. This release package also includes module specific User Guides, test reports, configurator User Guide and memory footprint details.</p>
+<h2 id="dependencies">Dependencies</h2>
+<h3 id="toolsandcompilers">Tools and Compilers</h3>
+<ul>
+<li>Code Composer Studio: 20.4.0 or later</li>
+<li>TI ARM CLANG Compiler Version: 4.0.4</li>
+<li>Elektrobit Tresos Studio: 29.3 (EB_Tresos_ACG8.8.12_Installer.zip). Please use link to request access to EB Tresos Studio and License: <a href="https://www.ti.com/secureresources/PROCESSOR-SDK-MCAL-EB-TRESOS" title="EB Tresos Download">Click Here</a></li>
+</ul>
+<h1 id="whatsnew">What’s New</h1>
+<h2 id="newinthisrelease">New in this Release</h2>
+<style>
+  table, th, td {
+    border: 1px solid black; /* Adds a 1px solid black border to the table, headers, and data cells */
+    border-collapse: collapse; /* Collapses adjacent borders into a single line */
+  }
+</style>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Feature</th>
+      <th style="text-align: left;">Module</th>
+      <th style="text-align: left;">Supported Platforms</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Lin_SendGoToSleepSignal header issue fixed</td>
+      <td>LIN</td>
+      <td>The unexpected behaviour observed in Lin_SendGoToSleepSignal was reproduced and tested with the fix</td>
+    </tr>
+    <tr>
+      <td>LIN performance values added in user-guide</td>
+      <td>LIN</td>
+      <td>Refer User-guide for details</td>
+    </tr>
+    <tr>
+      <td>Code Compilation error for EthTrcv driver is fixed.</td>
+      <td>EthTrcv</td>
+      <td>Please refer Fixed Defects section for more details.</td>
+    </tr>
+    <tr>
+      <td>Fls PHY erase issue when attack vector is not present</td>
+      <td>FLS</td>
+      <td>Fls erase issue when attack vector is not present was reproduced and test with the fix</td>
+    </tr>
+    <tr>
+      <td>Added registerreadback functions added to CMPSS and FLC</td>
+      <td>CMPSS, FLC</td>
+      <td>Safety diagnostics register readback APIs added</td>
+    </tr>
+    <tr>
+      <td>Code Coverage Improvements</td>
+      <td>All</td>
+      <td>Code coverage improvements done across multiple modules</td>
+    </tr>
+    <tr>
+      <td>UUID not unique across modules</td>
+      <td>All</td>
+      <td>Please refer Fixed Defects section for more details.</td>
+    </tr>
+    <tr>
+      <td>All reported bswmd fixes done.</td>
+      <td>All</td>
+      <td>Please refer Fixed Defects section for more details.</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="compatibility">Compatibility</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Module</th>
+      <th style="text-align: left;">Compatibility Information</th>
+      <th style="text-align: left;">Recommended/Expected Updates in Customer Application</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<h2 id="platformspecificsourcefolderinformation">Platform Specific Source Folder Information</h2>
+<p>Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists the associated V0/V1/V2/V3 files to be used as per device.</p>
+<pre><code class="{eval-rst} language-{eval-rst}">+------------+--------+---------+--------+
+| Module     | AM263x | AM263Px | AM261x |
++------------+--------+---------+--------+
+| ADC        | V0     | V0      | V0     |
+| CAN        | V0     | V0      | V0     |
+| CDD CMPSS  | am263  | am263px | am261  |
+| CDD FLC    | NA     | am263px | am261  |
+| CDD DMA    | V0     | V0      | V0     |
+| CDD EPWM   | V0     | V0      | V0     |
+| CDD I2C    | V0     | V0      | V0     |
+| CDD IPC    | V0     | V0      | V2     |
+| CDD UART   | V0     | V0      | V0     |
+| DIO        | V0     | V0      | V0     |
+| ETH        | V0     | V0      | V0     |
+| ETHTRCV    | V0     | V0      | V0     |
+| FLS        | V0     | V2      | V2     |
+| FSIRX/TX   | V0     | V0      | V0     |
+| GPT        | V0     | V0      | V0     |
+| ICU        | V0     | V0      | V0     |
+| LIN        | V0     | V0      | V0     |
+| MCU        | V0     | V2      | V3     |
+| PORT       | V0     | V0      | V0     |
+| PWM        | V0     | V0      | V0     |
+| SPI        | V0     | V0      | V0     |
+| WDG        | V0     | V0      | V0     |
++------------+--------+---------+--------+
+</code></pre>
+<h2 id="moduleversion">Module Version</h2>
+<pre><code class="{eval-rst} language-{eval-rst}">+------------+----------+
+| Module     | Version  |
++------------+----------+
+| ADC        | 10.02.03 |
+| CAN        | 10.03.02 |
+| CDD_CMPSS  | 01.00.04 |
+| CDD_FLC    | 01.00.04 |
+| CDD_DMA    | 10.02.02 |
+| CDD_FSIRX  | 10.03.02 |
+| CDD_FSITX  | 10.03.02 |
+| CDD_I2C    | 11.00.03 |
+| CDD_IPC    | 10.02.03 |
+| CDD_PWM    | 10.02.02 |
+| CDD_UART   | 10.02.03 |
+| DIO        | 10.03.02 |
+| ETH        | 10.03.02 |
+| ETHTRCV    | 10.04.00 |
+| FLS        | 11.01.00 |
+| GPT        | 10.02.03 |
+| ICU        | 10.02.03 |
+| LIN        | 10.05.00 |
+| MCU        | 10.03.02 |
+| PORT       | 10.03.03 |
+| PWM        | 10.02.02 |
+| SPI        | 10.03.02 |
+| WDG        | 11.01.00 |
++------------+----------+
+</code></pre>
+<h2 id="driverssupported">Drivers Supported</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Drivers</th>
+      <th style="text-align: left;">Modules</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Micro controller Drivers</td>
+      <td>GPT, WDG, MCU (with PWM XBAR, Output XBAR)</td>
+    </tr>
+    <tr>
+      <td>Memory Driver</td>
+      <td>FLS</td>
+    </tr>
+    <tr>
+      <td>Communication Driver</td>
+      <td>CAN, ETH, ETHTRCV, LIN, SPI</td>
+    </tr>
+    <tr>
+      <td>I/O Drivers</td>
+      <td>ADC, DIO, ICU, PORT, PWM</td>
+    </tr>
+    <tr>
+      <td>CDD</td>
+      <td>CMPSS, DMA, FLC, FSI, I2C, IPC, EPWM, UART</td>
+    </tr>
+  </tbody>
+</table>
+<h2 id="platformssupported">Platforms Supported</h2>
+<pre><code class="{eval-rst} language-{eval-rst}">+---------+-----------------------------------+-------------------------+-------------+---------------+
+|   SOC   |         Test Platform             | HOST (OS)               | Target (OS) | Supported CPU |
++---------+-----------------------------------+-------------------------+-------------+---------------+
+| AM263x  | AM263x (am263x-cc)                | Build: Windows / Linux  | Baremetal   | R5F           |
++---------+-----------------------------------+ EB Configurator: Windows|             |               |
+| AM263Px | AM263Px Control Card (am263px-cc) |                         |             |               |
+|         +-----------------------------------+                         |             |               |
+|         | AM263Px Launchpad (am263px-lp)    |                         |             |               |
+|         +-----------------------------------+                         |             |               |
+|         | AM263Px SIP Package (am263px-sip) |                         |             |               |
++---------+-----------------------------------+                         |             |               |
+| AM261x  | AM261x (am261x-som)               |                         |             |               |
++---------+-----------------------------------+-------------------------+-------------+---------------+
+</code></pre>
+<h1 id="fixeddefects">Fixed Defects</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">ID</th>
+      <th style="text-align: left;">Summary</th>
+      <th style="text-align: left;">Module</th>
+      <th style="text-align: left;">Severity</th>
+      <th style="text-align: left;">Applicable Platforms</th>
+      <th style="text-align: left;">Description of Fix</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MCAL-39585</td>
+      <td>UUIDs should be globally unique in bswmd files</td>
+      <td>All</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>UUID is now unique across all modules</td>
+    </tr>
+    <tr>
+      <td>MCAL-38205</td>
+      <td>Mismatch between BSW-CALLED-ENTITY SHORT-NAME and IMPLEMENTED-ENTRY-REF in Bswmd file</td>
+      <td>CDD I2C</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
+    </tr>
+    <tr>
+      <td>MCAL-38206</td>
+      <td>Incorrect relative path used in CddIrqType condition for ISR entries</td>
+      <td>CDD I2C</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
+    </tr>
+    <tr>
+      <td>MCAL-38679</td>
+      <td>Cdd_I2c_PollingModeProcessing and Cdd_I2c_MainFunction have incorrect arxml tags</td>
+      <td>CDD I2C</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Cdd_I2c_bswmd.arxml file is now corrected</td>
+    </tr>
+    <tr>
+      <td>MCAL-38207</td>
+      <td>Options tag is missing in Bswmd arxml files</td>
+      <td>CDD PWM, Eth, EthTrcv</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Corresponding bswmd files are now updated with Options tag</td>
+    </tr>
+    <tr>
+      <td>MCAL-38103</td>
+      <td>[DOC] Userguide has wrong compiler version mentioned.</td>
+      <td>Documentation</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Userguide is now updated</td>
+    </tr>
+    <tr>
+      <td>MCAL-40853</td>
+      <td>The Rx and Tx Memory Pool Buffer is not 32B aligned</td>
+      <td>Eth</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Added 32 bytes alignment to below variable in Eth_Priv.c Eth_TxPacketMemoryPool
+      Eth_RxPacketMemoryPool</td>
+    </tr>
+    <tr>
+      <td>MCAL-41094</td>
+      <td>AM261 Eth App build is not correct</td>
+      <td>Eth</td>
+      <td>Major</td>
+      <td>AM261x</td>
+      <td>Pin mux selection corrected and build verified</td>
+    </tr>
+    <tr>
+      <td>MCAL-41095</td>
+      <td>AM261 Eth App Pin muxing issue</td>
+      <td>Eth</td>
+      <td>Major</td>
+      <td>AM261x</td>
+      <td>Pin mux selection corrected</td>
+    </tr>
+    <tr>
+      <td>MCAL-38218</td>
+      <td>MCAL Eth Driver INTERRUPT-SOURCE tag missing</td>
+      <td>Eth</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Eth_bswmd.arxml is now updated with INTERRUPT-SOURCE tag</td>
+    </tr>
+    <tr>
+      <td>MCAL-38219</td>
+      <td>MINIMUM-START-INTERVAL Tag Mismatch in Eth& EthT</td>
+      <td>Eth, EthTrcv</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Corresponding bswmd files are now updated</td>
+    </tr>
+    <tr>
+      <td>MCAL-38220</td>
+      <td>Mismatch of MODULE-ID Tag in Eth& EthTrcv</td>
+      <td>Eth, EthTrcv</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Corresponding bswmd files are now updated</td>
+    </tr>
+    <tr>
+      <td>MCAL-38221</td>
+      <td>Code Compilation error for EthTrcv driver</td>
+      <td>EthTrcv</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Moved "EthTrcv_StateType" structure declaration from "mcal/EthTrcv/include/EthTrcv_Types.h" to "mcal/autosar_include/Eth_GeneralTypes.h"</td>
+    </tr>
+    <tr>
+      <td>MCAL-39728</td>
+      <td>FLS Erase not working if PHY is enabled and Attack vector is not present in flash</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Fls erase when PHY is enabled and attach vector is not present is now fixed to hadnle erase status check.</td>
+    </tr>
+    <tr>
+      <td>MCAL-40870</td>
+      <td>Issue with FLS Erase timeout counter</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Erase start count is now based on Fls erase stage.</td>
+    </tr>
+    <tr>
+      <td>MCAL-41085</td>
+      <td>Unable to release spinlock in case of FLS Timeout Error</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>SchM_Exit is now added in TimeoutVerification before DetRunTime based on FlsEraseStage</td>
+    </tr>
+    <tr>
+      <td>MCAL-41110</td>
+      <td>Difference in implementation between SDK and MCAL</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Fixed, added DDR EN and corrected dummyclkRd from dummyclkcmd</td>
+    </tr>
+    <tr>
+      <td>MCAL-41111</td>
+      <td>Difference in implementation between SDK and MCAL for macronix flash</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Fixed, readId and numAddrBytes fixed to enable macronix flash in 8D-8D-8D PHY+DAC mode</td>
+    </tr>
+    <tr>
+      <td>MCAL-40885</td>
+      <td>Fls_PhyDisable function declares the varibale retVal unconditionally</td>
+      <td>FLS</td>
+      <td>Minor</td>
+      <td>AM263Px, AM261x</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>MCAL-40896</td>
+      <td>Details on FlsTimeoutSupervisionEnabled is incorrect in user guide</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>Userguide is now updated</td>
+    </tr>
+    <tr>
+      <td>MCAL-38305</td>
+      <td>LIN issues with Sleep command</td>
+      <td>LIN</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SetId is now done before setting data</td>
+    </tr>
+    <tr>
+      <td>MCAL-38564</td>
+      <td>SW CS is not configurable in SPI</td>
+      <td>Spi</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SPI CS via GPIO is now available for selection through EB tresos and the driver is updated to support the same</td>
+    </tr>
+    <tr>
+      <td>MCAL-38578</td>
+      <td>Spi_MainFunction_Handling shouldn't be available for SpiLevelDelivered 0</td>
+      <td>Spi</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Conditional check for SpiLevelDelivered is added in Spi_bswmd.arxml</td>
+    </tr>
+    <tr>
+      <td>MCAL-38624</td>
+      <td>MCAL_CacheP_CACHELINE_ALIGNMENT is incorrectly set to 128</td>
+      <td>Utils</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Size is now corrected and set to 32</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="opendefects">Open Defects</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">ID</th>
+      <th style="text-align: left;">Summary</th>
+      <th style="text-align: left;">Module</th>
+      <th style="text-align: left;">Severity</th>
+      <th style="text-align: left;">Applicable Platforms</th>
+      <th style="text-align: left;">Workaround</th>
+    </tr>
+    <tr>
+      <td>MCAL-32422</td>
+      <td>Cdd_Ipc: Safe IPC not working</td>
+      <td>CDD IPC</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Safe IPC is supported but not tested.</td>
+    </tr>
+    <tr>
+      <td>MCAL-41779</td>
+      <td>ETH: unbalanced critical section implementation in TX and RX packet processing</td>
+      <td>ETH</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>None</td>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<h1 id="knownlimitations">Known Limitations</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Summary</th>
+      <th style="text-align: left;">Description</th>
+      <th style="text-align: left;">Module</th>
+      <th style="text-align: left;">Applicable Platforms</th>
+      <th style="text-align: left;">Workaround</th>
+      <th style="text-align: left;">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Unmapped memory sections with link time optimization</td>
+      <td>
+          With compiler link time optimization enabled, rodata like switch block lookup table goes to section like .rodata..Lswitch.table.Mcu_SystemInit.<br>
+          This mapping cannot be controlled by section attributes.
+      </td>
+      <td>Memmap</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>NA</td>
+      <td>This is a known compiler limitation</td>
+    </tr>
+    <tr>
+      <td>ADC-R specific checks in configurator</td>
+      <td>
+          ADC-R instance in AM263Px supports only 4 channels (other instances supports 6 channels).<br>
+          These checks are not performed in the EB configurator. User need to ensure they select the right configuration based on the AM263Px TRM
+      </td>
+      <td>ADC</td>
+      <td>AM263Px</td>
+      <td>NA</td>
+      <td>NA</td>
+    </tr>
+    <tr>
+      <td>Multiple Interrupt sources to single Interrupt Xbar line not supported</td>
+      <td>Connecting Multiple Interrupt sources to single Interrupt Xbar line is not supported</td>
+      <td>MCU</td>
+      <td>Minor(Limitation)</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Use single interrupt source to a XBar</td>
+      <td>NA</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="validation">Validation</h1>
+<p>Examples are validated with SBL Prebuilt binary of MCU+SDK available at ti.com.
+For details refer test reports available in mcal_docs/csp/<platform> folder.</p>
+<h2 id="functionalsafetyartifactscspstatus">Functional Safety Artifacts (CSP) Status</h2>
+<p>CSP - Compliance Support Package</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Sr. No.</th>
+      <th style="text-align: left;">Work Product</th>
+      <th style="text-align: left;">Availability</th>
+      <th style="text-align: left;">Where to Find Artifacts</th>
+      <th style="text-align: left;">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Customer Docs: User Guide</td>
+      <td>Yes</td>
+      <td>Installer:mcal_docs\userguide\*platform*\index.html</td>
+      <td>
+          User Guide is present in installer as well as below TI software-dl locations
+          <ol>
+            <li>[AM263x Userguide][am263x_user_guide_label]</li>
+            <li>[AM263Px Userguide][am263px_user_guide_label]</li>
+            <li>[AM261x Userguide][am261x_user_guide_label]</li>
+          </ol>
+      </td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>SW Manifest</td>
+      <td>Yes</td>
+      <td>Installer:mcal_manifest.html</td>
+      <td>SW manifest is present in installer</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>
+        Static Analysis Report
+        <ol>
+          <li>Static</li>
+          <li>HIS</li>
+          <li>MISRA-C</li>
+        </ol>
+      </td>
+      <td>Yes</td>
+      <td>Installer:mcal_docs\csp\*platform*\mcal_static_analysis_report.html</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Test Reports: Test Cases and Test Results</td>
+      <td>Yes</td>
+      <td>Installer:mcal_docs\csp\*platform*\mcal_test_report.xlsx</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>
+        Dynamic Analysis Report
+        <ol>
+          <li>MCDC</li>
+          <li>Branch</li>
+          <li>Region</li>
+          <li>Line</li>
+          <li>Function</li>
+        </ol>
+      </td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>
+        Bi-directional Traceability Report
+        <ol>
+          <li>MRD→SPS</li>
+          <li>SPS→SW Arch →SW Design Doc→SW Units (Code)</li>
+          <li>MRD→SPS→Test Case</li>
+          <li>Test Case→Arch Test Case→Design</li>
+        </ol>
+      </td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>SW FMEA</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>Detailed Design Document</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>Software Product Specification: List of functional, safety requirements for SW components</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>Architecture Document</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>SW Safety Manual</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>Safety Assessment</td>
+      <td>No</td>
+      <td>CSP</td>
+      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="releasetypes">Release Types</h1>
+<p>AM26xx MCAL releases follow a tiered support model with three release types: Early Adopter (EA), Short Term Support (STS), and Long Term Support (LTS). Each release type serves different customer needs and provides varying levels of support, quality assurance, and maintenance.</p>
+<h2 id="howtoidentifyreleasetype">How to Identify Release Type</h2>
+<p>The release type for each AM26xx MCAL release can be identified through the following methods:</p>
+<p>Release Notes Introduction Section: Every release note’s Introduction section will specify the release type (EA, STS, or LTS) for that particular release.</p>
+<h2 id="eaearlyadopter">EA (Early Adopter)</h2>
+<p>Early Adopter releases are intended for customers who want early access to new features and capabilities before they are fully validated. These releases allow customers to evaluate new functionality and provide feedback during the development cycle.</p>
+<p>Example Use Cases:</p>
+<ul>
+<li>Early evaluation of new features</li>
+<li>Proof-of-concept development</li>
+<li>Providing feedback to the development team</li>
+<li>Planning for future integration</li>
+</ul>
+<h2 id="stsshorttermsupport">STS (Short Term Support)</h2>
+<p>Short Term Support releases provide a stable platform with validated features suitable for development and integration activities. These releases offer improved quality assurance compared to EA releases but are not intended for production deployment.</p>
+<p>Example Use Cases:</p>
+<ul>
+<li>Development and integration activities</li>
+<li>System validation and testing</li>
+<li>Pre-production evaluation</li>
+<li>Feature completeness verification</li>
+</ul>
+<h2 id="ltslongtermsupport">LTS (Long Term Support)</h2>
+<p>Long Term Support releases are production-ready releases that provide the highest level of quality assurance, safety certification support, and long-term maintenance. These releases are recommended for production deployment in automotive and safety-critical applications.</p>
+<p>Example Use Cases:</p>
+<ul>
+<li>Production deployment</li>
+<li>Safety-critical applications</li>
+<li>Automotive production systems</li>
+<li>Applications requiring long-term stability and support</li>
+</ul>
+<h2 id="releasetypecomparison">Release Type Comparison</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Topic</th>
+      <th style="text-align: left;">EA (Early Adopter)</th>
+      <th style="text-align: left;">STS (Short Term Support)</th>
+      <th style="text-align: left;">LTS (Long Term Support)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Quality</td>
+      <td>Baseline Quality</td>
+      <td>Baseline Quality (new features)</td>
+      <td>Functional Safety (if applicable)</td>
+    </tr>
+    <tr>
+      <td>Testing</td>
+      <td>Best Effort</td>
+      <td>>95% pass</td>
+      <td>>95% pass</td>
+    </tr>
+    <tr>
+      <td>Safety CSP</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>Yes (if FSQ)</td>
+    </tr>
+    <tr>
+      <td>Safety Certification</td>
+      <td>NA</td>
+      <td>NA</td>
+      <td>Yes (Internal / External)</td>
+    </tr>
+    <tr>
+      <td>Maintenance</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Will maintain until next LTS release</td>
+    </tr>
+    <tr>
+      <td>Bug Fix / Patch Release</td>
+      <td>No</td>
+      <td>Bugs that are prioritized will be fixed in the next release; no backporting to STS releases</td>
+      <td>Bug fixes on the LTS maintenance branch will be prioritized based on the severity of the bug</td>
+    </tr>
+    <tr>
+      <td>Feature Addition</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>New features will be added in an LTS release, but post LTS release, new features will not be backported to the LTS maintenance branch</td>
+    </tr>
+    <tr>
+      <td>Production Ready</td>
+      <td>No</td>
+      <td>Not recommended for Production</td>
+      <td>Recommended for Production</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="cicdstrategy">CI/CD Strategy</h1>
+<p>AM26xx MCAL is also available on GitHub.</p>
+<ul>
+<li>AM263X - https://github.com/TexasInstruments/mcal_am263x</li>
+<li>AM263PX - https://github.com/TexasInstruments/mcal_am263px</li>
+<li>AM261X - https://github.com/TexasInstruments/mcal_am261x
+These GitHub repositories always reflects the leading and bleeding edge of MCAL development, providing early access to the latest features, fixes, and improvements as they are developed.</li>
+</ul>
+<p>Disclaimer: The GitHub repositories contains software that is not fully tested and may include bugs, errors, or defects that could cause system instability or unexpected behavior. Always review and validate code before use in any application.</p>
+<p>Official releases are published under the Releases section of the GitHub repository. These correspond to the versioned releases documented in these release notes and have undergone the quality and testing criteria.</p>
+<h1 id="softwarebillofmaterials">Software Bill of Materials</h1>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Component Type</th>
+      <th style="text-align: left;">Component Name</th>
+      <th style="text-align: left;">Production or Reference</th>
+      <th style="text-align: left;">Process Compliance</th>
+      <th style="text-align: left;">Certification</th>
+      <th style="text-align: left;">Distribution</th>
+      <th style="text-align: left;">Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Tools</td>
+      <td>${MCAL_INSTALL_PATH}/build/*</td>
+      <td>Reference</td>
+      <td>Demo Quality</td>
+      <td>No</td>
+      <td>github</td>
+      <td></td>
+    <tr>
+      <td>Documentation</td>
+      <td>${MCAL_INSTALL_PATH}/mcal_docs/*</td>
+      <td>Reference</td>
+      <td>Baseline Quality</td>
+      <td>Yes</td>
+      <td>github</td>
+      <td></td>
+    <tr>
+      <td>Drivers</td>
+      <td>${MCAL_INSTALL_PATH}/mcal/*</td>
+      <td>Production</td>
+      <td>Baseline Quality</td>
+      <td>Yes</td>
+      <td>github</td>
+      <td>Functional Safety Quality and Certification will be available in future releases. Please refer to device roadmap for details.</td>
+    <tr>
+      <td>Examples</td>
+      <td>${MCAL_INSTALL_PATH}/mcal/examples/*</td>
+      <td>Reference</td>
+      <td>Demo Quality</td>
+      <td>No</td>
+      <td>github</td>
+      <td></td>
+    <tr>
+      <td>Tools</td>
+      <td>${MCAL_INSTALL_PATH}/mcal_config/plugins/*</td>
+      <td>Production</td>
+      <td>Baseline Quality</td>
+      <td>Yes</td>
+      <td>github</td>
+      <td>Functional Safety Quality and Certification will be available in future releases. Please refer to device roadmap for details.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="support">Support</h1>
+<p>For technical support and additional assistance, visit E2E or contact local TI Field Application Engineer.</p>
+<h1 id="versioning">Versioning</h1>
+<p>Each package version is composed of 4 period-delimited numbers - represented here by the fields MM, mm, pp and bb [MM.mm.pp.bb].
+The table below provides a descriptive reference regarding package version numbering.</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Digit</th>
+      <th style="text-align: left;">Meaning</th>
+      <th style="text-align: left;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MM</td>
+      <td>Major revision</td>
+      <td>Indicates the last two digits of the annual year of the release (e.g., 2026 → 26). Incremented each year with the first release of that year.</td>
+    </tr>
+    <tr>
+      <td>mm</td>
+      <td>Minor revision</td>
+      <td>Incremented when the new version has changed but not in a major way. For example, some minor changes in the API or feature set or bug fixes. Reset to 00 for any change to MM revision</td>
+    </tr>
+    <tr>
+      <td>pp</td>
+      <td>Patch revision</td>
+      <td>Incremented for patch/bug fix releases from any Major or Minor releases. Reset to 00 for any change to MM or mm revisions</td>
+    </tr>
+    <tr>
+      <td>bb</td>
+      <td>Build revision</td>
+      <td>Incremented for each release delivery build. Reset to 01 for any change to MM, mm or pp revisions</td>
+    </tr>
+  </tbody>
+</table>
+<p>TI is a global semiconductor design and manufacturing company. Innovate with 100,000+ analog ICs and embedded processors, along with software, tools and the industry‘s largest sales/support staff.
+<a href="https://www.ti.com/corp/docs/legal/copyright.shtml" title="TI Copyright">© Copyright 1995-2025</a>, Texas Instruments Incorporated. All rights reserved.</p>
+<p><a href="https://www.ti.com/corp/docs/legal/trademark/trademrk.htm" title="Trademarks">Trademarks</a> | <a href="https://www.ti.com/corp/docs/legal/privacy.shtml" title="Privacy Policy">Privacy Policy</a> | <a href="https://www.ti.com/corp/docs/legal/termsofuse.shtml" title="Terms of use">Terms of use</a> | <a href="https://www.ti.com/lsds/ti/legal/termsofsale.page" title="Terms of sale">Terms of sale</a></p>
+</body>
+</html>

@@ -279,7 +279,10 @@ extern "C" {
 [!LOOP "SpiJob/*"!]
 /** \brief Symbolic Name Chip Select  - [!"num:i($SpiJobIndex)"!] */
 [!VAR "SpiCsIdentifier" = "node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsIdentifier)"!]
+[!VAR "SpiCsSelectionVal" = "'SPI_CS_VIA_PERIPHERAL_ENGINE'"!]
+[!IF "node:exists(node:ref(node:current()/SpiDeviceAssignment)/SpiCsSelection)"!]
 [!VAR "SpiCsSelectionVal" = "node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsSelection)"!]
+[!ENDIF!]
 [!IF "$SpiCsSelectionVal != 'SPI_CS_VIA_GPIO'"!]
 #define SpiConf_SpiExternalDevice_CS[!"num:i($SpiJobIndex)"!] ([!"concat('SPI_',substring-after(node:value(node:ref(node:current()/SpiDeviceAssignment)/SpiCsIdentifier),'S'))"!])
 [!IF "$SpiCsIdentifier != 'SCS0'"!][!IF "$SpiCsIdentifier != 'SCS1'"!][!IF "$SpiCsIdentifier != 'SCS2'"!][!IF "$SpiCsIdentifier != 'SCS3'"!][!ERROR "Invalid CS identifier selected."!][!ENDIF!][!ENDIF!][!ENDIF!][!ENDIF!]

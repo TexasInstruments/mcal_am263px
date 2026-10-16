@@ -279,6 +279,9 @@ extern "C" {
 
 
 
+
+
+
 #define SpiConf_SpiExternalDevice_CS0 (SPI_CS0)
 
 
@@ -287,6 +290,9 @@ extern "C" {
 
 
 /** \brief Symbolic Name Chip Select  - 1 */
+
+
+
 
 
 
@@ -301,6 +307,9 @@ extern "C" {
 
 
 
+
+
+
 #define SpiConf_SpiExternalDevice_CS2 (SPI_CS0)
 
 
@@ -309,6 +318,9 @@ extern "C" {
 
 
 /** \brief Symbolic Name Chip Select  - 3 */
+
+
+
 
 
 
