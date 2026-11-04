@@ -1,3 +1,241 @@
+commit 35cf68e3a50af185c138802f287d737eddb32952
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Nov 4 13:49:47 2026 +0530
+
+    all: Icu: Fixing example tresos build issues
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../Icu_Demo_Cfg/soc/am263/r5f0_0/include/Icu_Cfg.h        | 14 ++++++++++++++
+ .../Icu_Demo_Cfg/soc/am263/r5f0_0/src/Icu_Cfg.c            |  8 +++++++-
+ .../Icu_Demo_Cfg/soc/am263/r5f0_0/src/Icu_PBcfg.c          |  8 +++++++-
+ .../Icu_Demo_Cfg/soc/am263px/r5f0_0/include/Icu_Cfg.h      | 14 ++++++++++++++
+ .../Icu_Demo_Cfg/soc/am263px/r5f0_0/src/Icu_Cfg.c          |  8 +++++++-
+ .../Icu_Demo_Cfg/soc/am263px/r5f0_0/src/Icu_PBcfg.c        |  8 +++++++-
+ 6 files changed, 56 insertions(+), 4 deletions(-)
+
+commit 9a377adf9b68dbca02fa7005b1b8710cb918c60c
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Tue Oct 27 14:56:23 2026 +0530
+
+    am263x/am263px: icu: add version macro
+    
+     - Added version macro in plugin template
+    
+    Fixes: MCAL-42668
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ .../AM263Px/Icu_TI_AM263Px/generate/include/Icu_Cfg.h      | 14 ++++++++++++++
+ .../plugins/AM263Px/Icu_TI_AM263Px/generate/src/Icu_Cfg.c  |  8 +++++++-
+ .../AM263Px/Icu_TI_AM263Px/generate/src/Icu_PBcfg.c        |  8 +++++++-
+ .../AM263x/Icu_TI_AM263x/generate/include/Icu_Cfg.h        | 14 ++++++++++++++
+ .../plugins/AM263x/Icu_TI_AM263x/generate/src/Icu_Cfg.c    |  8 +++++++-
+ .../plugins/AM263x/Icu_TI_AM263x/generate/src/Icu_PBcfg.c  |  8 +++++++-
+ 6 files changed, 56 insertions(+), 4 deletions(-)
+
+commit 64f236bbe7f1a78df1154e61c377235a07bd89e2
+Author: Surbhi Kapoor <s-kapoor1@ti.com>
+Date:   Wed Oct 21 11:25:02 2026 +0530
+
+    allsoc: KW fix
+    
+    KW fix
+    
+    Fixes: MCAL-41779
+    
+    Signed-off-by: Surbhi Kapoor <s-kapoor1@ti.com>
+
+ mcal/Eth/src/cpsw/Eth_Priv.c | 447 ++++++++++++++++++++++---------------------
+ 1 file changed, 227 insertions(+), 220 deletions(-)
+
+commit 53183a37d118513dbff031bef145faac21fabdac
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Thu Oct 15 18:05:34 2026 +0530
+
+    am26xx: gpt: add ut eb_tresos
+    
+     - Added EB tresos generation files
+    
+    Fixes: MCAL-42394
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal_test/gpt_test/Makefile                        |    1 -
+ mcal_test/ut_config/Gpt/makefile                   |    2 -
+ .../r5f0_0/config_1/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_1/tresos/.project  |   13 +
+ .../am261/r5f0_0/config_1/tresos/config/Gpt.xdm    |  635 ++++++++++
+ .../config_1/tresos/output/include/Gpt_Cfg.h       |  103 +-
+ .../r5f0_0/config_1/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_1/tresos/output/src/Gpt_PBcfg.c  |  255 ++++
+ .../config_1/tresos/output/swcd/Gpt_Bswmd.arxml    |  763 +++++++++++
+ .../r5f0_0/config_2/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_2/tresos/.project  |   13 +
+ .../am261/r5f0_0/config_2/tresos/config/Gpt.xdm    |  230 ++++
+ .../config_2/tresos/output/include/Gpt_Cfg.h       |  103 +-
+ .../r5f0_0/config_2/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_2/tresos/output/src/Gpt_PBcfg.c  |  155 +++
+ .../config_2/tresos/output/swcd/Gpt_Bswmd.arxml    |  653 ++++++++++
+ .../r5f0_0/config_3/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_3/tresos/.project  |   13 +
+ .../am261/r5f0_0/config_3/tresos/config/Gpt.xdm    |  633 ++++++++++
+ .../config_3/tresos/output/include/Gpt_Cfg.h       |  108 +-
+ .../r5f0_0/config_3/tresos/output/src/Gpt_Cfg.c    |  256 ++++
+ .../r5f0_0/config_3/tresos/output/src/Gpt_PBcfg.c  |    4 +
+ .../config_3/tresos/output/swcd/Gpt_Bswmd.arxml    |  763 +++++++++++
+ .../r5f0_0/config_4/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_4/tresos/.project  |   13 +
+ .../am261/r5f0_0/config_4/tresos/config/Gpt.xdm    |  633 ++++++++++
+ .../config_4/tresos/output/include/Gpt_Cfg.h       |   93 +-
+ .../r5f0_0/config_4/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_4/tresos/output/src/Gpt_PBcfg.c  |  255 ++++
+ .../config_4/tresos/output/swcd/Gpt_Bswmd.arxml    |  763 +++++++++++
+ .../config_91/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_91/tresos/.project |   13 +
+ .../am261/r5f0_0/config_91/tresos/config/Gpt.xdm   |  627 +++++++++
+ .../config_91/tresos/output/include/Gpt_Cfg.h      |  103 +-
+ .../r5f0_0/config_91/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_91/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_91/tresos/output/swcd/Gpt_Bswmd.arxml   |  808 ++++++++++++
+ .../config_92/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_92/tresos/.project |   13 +
+ .../am261/r5f0_0/config_92/tresos/config/Gpt.xdm   |  623 +++++++++
+ .../config_92/tresos/output/include/Gpt_Cfg.h      |  103 +-
+ .../r5f0_0/config_92/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_92/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_92/tresos/output/swcd/Gpt_Bswmd.arxml   |  663 ++++++++++
+ .../config_93/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_93/tresos/.project |   13 +
+ .../am261/r5f0_0/config_93/tresos/config/Gpt.xdm   |  625 +++++++++
+ .../config_93/tresos/output/include/Gpt_Cfg.h      |  103 +-
+ .../r5f0_0/config_93/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_93/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_93/tresos/output/swcd/Gpt_Bswmd.arxml   |  772 ++++++++++++
+ .../config_94/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am261/r5f0_0/config_94/tresos/.project |   13 +
+ .../am261/r5f0_0/config_94/tresos/config/Gpt.xdm   |  621 +++++++++
+ .../config_94/tresos/output/include/Gpt_Cfg.h      |  103 +-
+ .../r5f0_0/config_94/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_94/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_94/tresos/output/swcd/Gpt_Bswmd.arxml   |  651 ++++++++++
+ .../r5f0_0/config_1/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_1/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_1/tresos/config/Gpt.xdm    |  635 ++++++++++
+ .../config_1/tresos/output/include/Gpt_Cfg.h       |  138 +-
+ .../r5f0_0/config_1/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_1/tresos/output/src/Gpt_PBcfg.c  |  255 ++++
+ .../config_1/tresos/output/swcd/Gpt_Bswmd.arxml    |  907 ++++++++++++++
+ .../r5f0_0/config_2/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_2/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_2/tresos/config/Gpt.xdm    |  230 ++++
+ .../config_2/tresos/output/include/Gpt_Cfg.h       |  140 ++-
+ .../r5f0_0/config_2/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_2/tresos/output/src/Gpt_PBcfg.c  |  155 +++
+ .../config_2/tresos/output/swcd/Gpt_Bswmd.arxml    |  797 ++++++++++++
+ .../r5f0_0/config_3/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_3/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_3/tresos/config/Gpt.xdm    |  633 ++++++++++
+ .../config_3/tresos/output/include/Gpt_Cfg.h       |  142 ++-
+ .../r5f0_0/config_3/tresos/output/src/Gpt_Cfg.c    |  256 ++++
+ .../r5f0_0/config_3/tresos/output/src/Gpt_PBcfg.c  |    4 +
+ .../config_3/tresos/output/swcd/Gpt_Bswmd.arxml    |  907 ++++++++++++++
+ .../r5f0_0/config_4/tresos/.prefs/pref_general.xdm |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_4/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_4/tresos/config/Gpt.xdm    |  633 ++++++++++
+ .../config_4/tresos/output/include/Gpt_Cfg.h       |  140 ++-
+ .../r5f0_0/config_4/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_4/tresos/output/src/Gpt_PBcfg.c  |  255 ++++
+ .../config_4/tresos/output/swcd/Gpt_Bswmd.arxml    |  907 ++++++++++++++
+ .../config_91/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_91/tresos/.project |   13 +
+ .../am263/r5f0_0/config_91/tresos/config/Gpt.xdm   |  627 +++++++++
+ .../config_91/tresos/output/include/Gpt_Cfg.h      |  140 ++-
+ .../r5f0_0/config_91/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_91/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_91/tresos/output/swcd/Gpt_Bswmd.arxml   |  952 ++++++++++++++
+ .../config_92/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_92/tresos/.project |   13 +
+ .../am263/r5f0_0/config_92/tresos/config/Gpt.xdm   |  623 +++++++++
+ .../config_92/tresos/output/include/Gpt_Cfg.h      |  140 ++-
+ .../r5f0_0/config_92/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_92/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_92/tresos/output/swcd/Gpt_Bswmd.arxml   |  807 ++++++++++++
+ .../config_93/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_93/tresos/.project |   13 +
+ .../am263/r5f0_0/config_93/tresos/config/Gpt.xdm   |  625 +++++++++
+ .../config_93/tresos/output/include/Gpt_Cfg.h      |  138 +-
+ .../r5f0_0/config_93/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_93/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_93/tresos/output/swcd/Gpt_Bswmd.arxml   |  916 ++++++++++++++
+ .../config_94/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../Gpt/soc/am263/r5f0_0/config_94/tresos/.project |   13 +
+ .../am263/r5f0_0/config_94/tresos/config/Gpt.xdm   |  621 +++++++++
+ .../config_94/tresos/output/include/Gpt_Cfg.h      |  140 ++-
+ .../r5f0_0/config_94/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_94/tresos/output/src/Gpt_PBcfg.c |  255 ++++
+ .../config_94/tresos/output/swcd/Gpt_Bswmd.arxml   |  795 ++++++++++++
+ .../r5f0_0/config_1/tresos/.prefs/pref_general.xdm |   87 ++
+ .../soc/am263px/r5f0_0/config_1/tresos/.project    |   13 +
+ .../am263px/r5f0_0/config_1/tresos/config/Gpt.xdm  | 1325 ++++++++++++++++++++
+ .../config_1/tresos/output/include/Gpt_Cfg.h       |  103 +-
+ .../r5f0_0/config_1/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_1/tresos/output/src/Gpt_PBcfg.c  |  419 +++++++
+ .../config_1/tresos/output/swcd/Gpt_Bswmd.arxml    | 1083 ++++++++++++++++
+ .../r5f0_0/config_2/tresos/.prefs/pref_general.xdm |   87 ++
+ .../soc/am263px/r5f0_0/config_2/tresos/.project    |   13 +
+ .../am263px/r5f0_0/config_2/tresos/config/Gpt.xdm  |  263 ++++
+ .../config_2/tresos/output/include/Gpt_Cfg.h       |  103 +-
+ .../r5f0_0/config_2/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_2/tresos/output/src/Gpt_PBcfg.c  |  159 +++
+ .../config_2/tresos/output/swcd/Gpt_Bswmd.arxml    |  797 ++++++++++++
+ .../r5f0_0/config_3/tresos/.prefs/pref_general.xdm |   87 ++
+ .../soc/am263px/r5f0_0/config_3/tresos/.project    |   13 +
+ .../am263px/r5f0_0/config_3/tresos/config/Gpt.xdm  | 1323 +++++++++++++++++++
+ .../config_3/tresos/output/include/Gpt_Cfg.h       |  107 +-
+ .../r5f0_0/config_3/tresos/output/src/Gpt_Cfg.c    |  420 +++++++
+ .../r5f0_0/config_3/tresos/output/src/Gpt_PBcfg.c  |    4 +
+ .../config_3/tresos/output/swcd/Gpt_Bswmd.arxml    | 1083 ++++++++++++++++
+ .../r5f0_0/config_4/tresos/.prefs/pref_general.xdm |   87 ++
+ .../soc/am263px/r5f0_0/config_4/tresos/.project    |   13 +
+ .../am263px/r5f0_0/config_4/tresos/config/Gpt.xdm  | 1323 +++++++++++++++++++
+ .../config_4/tresos/output/include/Gpt_Cfg.h       |  103 +-
+ .../r5f0_0/config_4/tresos/output/src/Gpt_Cfg.c    |    4 +
+ .../r5f0_0/config_4/tresos/output/src/Gpt_PBcfg.c  |  419 +++++++
+ .../config_4/tresos/output/swcd/Gpt_Bswmd.arxml    | 1083 ++++++++++++++++
+ .../config_91/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../soc/am263px/r5f0_0/config_91/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_91/tresos/config/Gpt.xdm | 1319 +++++++++++++++++++
+ .../config_91/tresos/output/include/Gpt_Cfg.h      |  104 +-
+ .../r5f0_0/config_91/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_91/tresos/output/src/Gpt_PBcfg.c |  419 +++++++
+ .../config_91/tresos/output/swcd/Gpt_Bswmd.arxml   | 1128 +++++++++++++++++
+ .../config_92/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../soc/am263px/r5f0_0/config_92/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_92/tresos/config/Gpt.xdm | 1309 +++++++++++++++++++
+ .../config_92/tresos/output/include/Gpt_Cfg.h      |  104 +-
+ .../r5f0_0/config_92/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_92/tresos/output/src/Gpt_PBcfg.c |  419 +++++++
+ .../config_92/tresos/output/swcd/Gpt_Bswmd.arxml   |  983 +++++++++++++++
+ .../config_93/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../soc/am263px/r5f0_0/config_93/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_93/tresos/config/Gpt.xdm | 1315 +++++++++++++++++++
+ .../config_93/tresos/output/include/Gpt_Cfg.h      |  104 +-
+ .../r5f0_0/config_93/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_93/tresos/output/src/Gpt_PBcfg.c |  419 +++++++
+ .../config_93/tresos/output/swcd/Gpt_Bswmd.arxml   | 1092 ++++++++++++++++
+ .../config_94/tresos/.prefs/pref_general.xdm       |   87 ++
+ .../soc/am263px/r5f0_0/config_94/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_94/tresos/config/Gpt.xdm | 1311 +++++++++++++++++++
+ .../config_94/tresos/output/include/Gpt_Cfg.h      |  104 +-
+ .../r5f0_0/config_94/tresos/output/src/Gpt_Cfg.c   |    4 +
+ .../r5f0_0/config_94/tresos/output/src/Gpt_PBcfg.c |  419 +++++++
+ .../config_94/tresos/output/swcd/Gpt_Bswmd.arxml   |  971 ++++++++++++++
+ mcal_test/ut_config/Gpt/srcs.mk                    |    2 +
+ 171 files changed, 51212 insertions(+), 819 deletions(-)
+
 
 
 commit ed5cdd16cd248eada068f9ed25c4f641efdb88d9

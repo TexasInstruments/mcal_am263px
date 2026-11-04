@@ -92,6 +92,20 @@ extern "C" {
 /*                           Macros & Typedefs                                */
 /* ========================================================================== */
 /**
+ *  \name Icu Driver Configuration SW Version Info
+ *
+ *  Defines for Icu Driver configuration version
+ *  @{
+ */
+/** \brief Icu configuration Major Version */
+#define ICU_CFG_MAJOR_VERSION           (10U)
+/** \brief Icu configuration Minor Version */
+#define ICU_CFG_MINOR_VERSION           (2U)
+/** \brief Icu configuration Patch Version */
+#define ICU_CFG_PATCH_VERSION           (3U)
+/* @} */
+
+/**
  *  \brief ICU Build Variant.
  *   Build variants.(i.e Pre-compile,Post-build or Link time)
  */
