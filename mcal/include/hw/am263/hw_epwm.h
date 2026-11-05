@@ -4475,7 +4475,7 @@ EPWM_setDeadBandControlShadowLoadMode(uint32 base,
     HW_WR_REG16(base + PWM_EPWM_DBCTL2,
         ((HW_RD_REG16(base + PWM_EPWM_DBCTL2) &
         ~PWM_EPWM_DBCTL2_LOADDBCTLMODE_MASK) |
-        (PWM_EPWM_DBCTL2_LOADDBCTLMODE_MASK | (uint16)loadMode)));
+        (PWM_EPWM_DBCTL2_SHDWDBCTLMODE_MASK | (uint16)loadMode)));
 }
 
 /******************************************************************************

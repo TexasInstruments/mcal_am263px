@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.02.00 done on 05-Nov-2026.
+This is the release notes for MCAL AM26xx 26.02.00 done on 06-Nov-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 Note: This release note describes the changes from previously released version. For details on previous release notes, refer ${MCAL_INSTALL_PATH}/relnotes_archive folder.
 

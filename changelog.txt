@@ -1,3 +1,19 @@
+commit 8b8523b9c50e7a0cd4c3275832080dc320a5a9b6
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Oct 22 14:31:38 2026 +0530
+
+    all: EPWM: Corrected mask value to load correct loadmode value in EPWM_setDeadBandControlShadowLoadMode function
+    
+    Fixes: MCAL-42510
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/include/hw/am261/hw_epwm.h            | 2 +-
+ mcal/include/hw/am263/hw_epwm.h            | 2 +-
+ mcal/include/hw/am263px/hw_epwm.h          | 2 +-
+ mcal_test/adc_test/testLib/Epwm_Platform.h | 2 +-
+ 4 files changed, 4 insertions(+), 4 deletions(-)
+
 commit 35cf68e3a50af185c138802f287d737eddb32952
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Wed Nov 4 13:49:47 2026 +0530
