@@ -1,3 +1,48 @@
+commit 5067e7b7d72ed1dd6bb6610e165f79a63eb4efda
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Nov 10 10:09:31 2026 +0530
+
+    am263px/am261x: Fls: Added DMA guard for phy disable during read
+    
+    -This changes fixes the issue for PHY DAC and DMA ON configuration, where phy was disabled during read when DMA was just triggered but not completed
+    
+    Fixes: MCAL-42563
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Fls/V2/Fls_Brd_Nor_Ospi.c                     |   19 +-
+ mcal/Fls/V2/Fls_Ospi_Edma.c                        |    7 +-
+ mcal_test/fls_test/Readme_ConfigDetails.txt        |   11 +
+ mcal_test/fls_test/build/makefile                  |    4 +-
+ mcal_test/fls_test/testInput/FlsTest_Config.h      |    4 +
+ mcal_test/fls_test/testInput/flsTestCases_ospi.h   |   60 +-
+ mcal_test/fls_test/testLib/flsTest.h               |    1 +
+ mcal_test/fls_test/testLib/flsTestMainTestCase.c   |   20 +-
+ .../fls_test/testLib/flsTestNegativeTestCase.c     |    6 +-
+ .../config_22/tresos/.prefs/pref_general.xdm       |  125 +
+ .../Fls/soc/am261/r5f0_0/config_22/tresos/.project |   13 +
+ .../am261/r5f0_0/config_22/tresos/config/Fls.xdm   |  578 +++++
+ .../am261/r5f0_0/config_22/tresos/config/Os.xdm    |  112 +
+ .../config_22/tresos/output/include/Cdd_Dma_Cfg.h  |  280 +++
+ .../config_22/tresos/output/include/Fls_Cfg.h      |  260 +++
+ .../config_22/tresos/output/src/Cdd_Dma_Cfg.c      | 1743 ++++++++++++++
+ .../r5f0_0/config_22/tresos/output/src/Fls_Cfg.c   |  242 ++
+ .../r5f0_0/config_22/tresos/output/src/Fls_PBcfg.c |    4 +
+ .../tresos/output/swcd/Cdd_Dma_Bswmd.arxml         |  538 +++++
+ .../config_22/tresos/output/swcd/Fls_Bswmd.arxml   |  674 ++++++
+ .../config_22/tresos/.prefs/pref_general.xdm       |  125 +
+ .../soc/am263px/r5f0_0/config_22/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_22/tresos/config/Fls.xdm |  578 +++++
+ .../am263px/r5f0_0/config_22/tresos/config/Os.xdm  |  112 +
+ .../config_22/tresos/output/include/Cdd_Dma_Cfg.h  |  300 +++
+ .../config_22/tresos/output/include/Fls_Cfg.h      |  260 +++
+ .../config_22/tresos/output/src/Cdd_Dma_Cfg.c      | 2391 ++++++++++++++++++++
+ .../r5f0_0/config_22/tresos/output/src/Fls_Cfg.c   |  243 ++
+ .../r5f0_0/config_22/tresos/output/src/Fls_PBcfg.c |    4 +
+ .../tresos/output/swcd/Cdd_Dma_Bswmd.arxml         |  538 +++++
+ .../config_22/tresos/output/swcd/Fls_Bswmd.arxml   |  675 ++++++
+ 31 files changed, 9894 insertions(+), 46 deletions(-)
+
 commit 8b8523b9c50e7a0cd4c3275832080dc320a5a9b6
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Thu Oct 22 14:31:38 2026 +0530
