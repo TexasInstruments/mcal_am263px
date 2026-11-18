@@ -881,14 +881,14 @@ void Can_mcanInitInterrupt(Can_ControllerObjType *controllerObj)
 
     /* Enable RX Interrupt for FIFO new message and message lost
             when it is configured */
-    if ((canFDMsgRamConfig->rxFIFO0Num) != CAN_ZERO)
+    if ((canFDMsgRamConfig->configParams.rxFIFO0size) != CAN_ZERO)
     {
         *canInterruptMask |= MCAN_IR_RF0N_MASK;
         *canInterruptMask |= MCAN_IR_RF0L_MASK;
     }
 
     /* Enable RX Interrupt for FIFO message lost for FIFO polling messages */
-    if ((canFDMsgRamConfig->rxFIFO1Num) != CAN_ZERO)
+    if ((canFDMsgRamConfig->configParams.rxFIFO1size) != CAN_ZERO)
     {
         *canInterruptMask |= MCAN_IR_RF1L_MASK;
     }
@@ -943,11 +943,9 @@ void Can_mcanMsgRAMConfigInit(Can_FdMsgRAMConfigObjType *canFDMsgRamConfig)
     canFDMsgRamConfig->rxLowInterruptMask  = (uint32)0U;
     canFDMsgRamConfig->rxHighInterruptMask = (uint32)0U;
 
-    canFDMsgRamConfig->txBuffNum  = (uint16)0U;
-    canFDMsgRamConfig->txFIFONum  = (uint16)0U;
-    canFDMsgRamConfig->rxBuffNum  = (uint16)0U;
-    canFDMsgRamConfig->rxFIFO0Num = (uint16)0U;
-    canFDMsgRamConfig->rxFIFO1Num = (uint16)0U;
+    canFDMsgRamConfig->txBuffNum = (uint16)0U;
+    canFDMsgRamConfig->txFIFONum = (uint16)0U;
+    canFDMsgRamConfig->rxBuffNum = (uint16)0U;
 
     for (loopCnt = 0U; loopCnt < MCAN_STD_FILTER_MAX_NUM; loopCnt++)
     {
@@ -1178,11 +1176,11 @@ static void Can_mcanSetUpRxMailbox(Can_FdMsgRAMConfigObjType *msgRamConfig, cons
             ((rxProcessingType == CAN_TX_RX_PROCESSING_MIXED) &&
              (mailboxCfg->CanHardwareObjectUsesPolling == (boolean)FALSE)))
         {
-            msgRamConfig->rxFIFO0Num += 1U;
+            msgRamConfig->configParams.rxFIFO0size += (uint32)mailboxCfg->CanHwObjectCount;
         }
         else
         {
-            msgRamConfig->rxFIFO1Num += 1U;
+            msgRamConfig->configParams.rxFIFO1size += (uint32)mailboxCfg->CanHwObjectCount;
         }
     }
 }
@@ -1248,13 +1246,11 @@ static void Can_mcanSetUpRxMailboxStdIdFifo(Can_FdMsgRAMConfigObjType *msgRamCon
         ((rxProcessingType == CAN_TX_RX_PROCESSING_MIXED) &&
          (mailboxCfg->CanHardwareObjectUsesPolling == (boolean)FALSE)))
     {
-        msgRamConfig->stdMsgIDFilterList[idx].sfec  = 0x1U;
-        msgRamConfig->configParams.rxFIFO0size     += (uint32)mailboxCfg->CanHwObjectCount;
+        msgRamConfig->stdMsgIDFilterList[idx].sfec = 0x1U;
     }
     else
     {
-        msgRamConfig->stdMsgIDFilterList[idx].sfec  = 0x2U;
-        msgRamConfig->configParams.rxFIFO1size     += (uint32)mailboxCfg->CanHwObjectCount;
+        msgRamConfig->stdMsgIDFilterList[idx].sfec = 0x2U;
     }
     msgRamConfig->stdMbMapping[idx] = (Can_HwHandleType)htrh;
     msgRamConfig->stdFilterNum++;
@@ -1292,13 +1288,11 @@ static void Can_mcanSetUpRxMailboxExtIdFifo(Can_FdMsgRAMConfigObjType *msgRamCon
         ((rxProcessingType == CAN_TX_RX_PROCESSING_MIXED) &&
          (mailboxCfg->CanHardwareObjectUsesPolling == (boolean)FALSE)))
     {
-        msgRamConfig->extMsgIDFilterList[idx].efec  = 0x1U;
-        msgRamConfig->configParams.rxFIFO0size     += (uint32)mailboxCfg->CanHwObjectCount;
+        msgRamConfig->extMsgIDFilterList[idx].efec = 0x1U;
     }
     else
     {
-        msgRamConfig->extMsgIDFilterList[idx].efec  = 0x2U;
-        msgRamConfig->configParams.rxFIFO1size     += (uint32)mailboxCfg->CanHwObjectCount;
+        msgRamConfig->extMsgIDFilterList[idx].efec = 0x2U;
     }
     msgRamConfig->extMbMapping[idx] = (Can_HwHandleType)htrh;
     msgRamConfig->extFilterNum++;

@@ -1,3 +1,491 @@
+commit 5dcf345d79aaed7e45f1f9c6a8f3bef740b55cfe
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Tue Nov 17 19:41:29 2026 +0530
+
+    all: Spi: Job end notification now called before start of next job
+    
+    -Also reverted dmaEnableHwIndx to post increment to resolve DET error
+    
+    -Updated release notes
+    
+    Fixes: MCAL-42660
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal/Spi/V0/Spi_Priv.c | 41 +++++++++++++++++++++++++----------------
+ release_notes.md       | 48 ++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 73 insertions(+), 16 deletions(-)
+
+commit 31c9e8a816d85975d32bc5fb30c0e2792978c745
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Wed Nov 18 15:15:35 2026 +0530
+
+    all:Icu: Fixing ICU UT build issues
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ .../config_1/tresos/output/include/Mcu_Cfg.h       | 1528 +++++++-------
+ .../r5f0_0/config_1/tresos/output/src/Icu_Cfg.c    |  118 +-
+ .../r5f0_0/config_1/tresos/output/src/Icu_PBcfg.c  |  286 +--
+ .../r5f0_0/config_1/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  846 ++++----
+ .../config_1/tresos/output/swcd/Icu_Bswmd.arxml    | 1776 ++++++++--------
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_2/tresos/output/include/Mcu_Cfg.h       | 1528 +++++++-------
+ .../r5f0_0/config_2/tresos/output/src/Icu_Cfg.c    |  118 +-
+ .../r5f0_0/config_2/tresos/output/src/Icu_PBcfg.c  |  286 +--
+ .../r5f0_0/config_2/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  846 ++++----
+ .../config_2/tresos/output/swcd/Icu_Bswmd.arxml    | 1776 ++++++++--------
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_3/tresos/output/include/Mcu_Cfg.h       | 1528 +++++++-------
+ .../r5f0_0/config_3/tresos/output/src/Icu_Cfg.c    |  118 +-
+ .../r5f0_0/config_3/tresos/output/src/Icu_PBcfg.c  |  286 +--
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_3/tresos/output/src/Mcu_PBcfg.c  |  846 ++++----
+ .../config_3/tresos/output/swcd/Icu_Bswmd.arxml    | 1776 ++++++++--------
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_91/tresos/output/include/Mcu_Cfg.h      | 1528 +++++++-------
+ .../r5f0_0/config_91/tresos/output/src/Icu_Cfg.c   |  118 +-
+ .../r5f0_0/config_91/tresos/output/src/Icu_PBcfg.c |  286 +--
+ .../r5f0_0/config_91/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  846 ++++----
+ .../config_91/tresos/output/swcd/Icu_Bswmd.arxml   | 1848 ++++++++---------
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_92/tresos/output/include/Mcu_Cfg.h      | 1528 +++++++-------
+ .../r5f0_0/config_92/tresos/output/src/Icu_Cfg.c   |  118 +-
+ .../r5f0_0/config_92/tresos/output/src/Icu_PBcfg.c |  286 +--
+ .../r5f0_0/config_92/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  846 ++++----
+ .../config_92/tresos/output/swcd/Icu_Bswmd.arxml   | 1198 +++++------
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_93/tresos/output/include/Mcu_Cfg.h      | 1528 +++++++-------
+ .../r5f0_0/config_93/tresos/output/src/Icu_Cfg.c   |  118 +-
+ .../r5f0_0/config_93/tresos/output/src/Icu_PBcfg.c |  286 +--
+ .../r5f0_0/config_93/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  846 ++++----
+ .../config_93/tresos/output/swcd/Icu_Bswmd.arxml   | 1672 +++++++--------
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_94/tresos/output/include/Mcu_Cfg.h      | 1528 +++++++-------
+ .../r5f0_0/config_94/tresos/output/src/Icu_Cfg.c   |  118 +-
+ .../r5f0_0/config_94/tresos/output/src/Icu_PBcfg.c |  286 +--
+ .../r5f0_0/config_94/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  846 ++++----
+ .../config_94/tresos/output/swcd/Icu_Bswmd.arxml   | 1150 +++++------
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_1/tresos/output/include/Mcu_Cfg.h       | 1508 +++++++-------
+ .../r5f0_0/config_1/tresos/output/src/Icu_Cfg.c    |  264 +--
+ .../r5f0_0/config_1/tresos/output/src/Icu_PBcfg.c  |  244 +--
+ .../r5f0_0/config_1/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  954 ++++-----
+ .../config_1/tresos/output/swcd/Icu_Bswmd.arxml    | 1844 ++++++++---------
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_2/tresos/output/include/Mcu_Cfg.h       | 1508 +++++++-------
+ .../r5f0_0/config_2/tresos/output/src/Icu_Cfg.c    |  264 +--
+ .../r5f0_0/config_2/tresos/output/src/Icu_PBcfg.c  |  244 +--
+ .../r5f0_0/config_2/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  954 ++++-----
+ .../config_2/tresos/output/swcd/Icu_Bswmd.arxml    | 1844 ++++++++---------
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_3/tresos/output/include/Mcu_Cfg.h       | 1508 +++++++-------
+ .../r5f0_0/config_3/tresos/output/src/Icu_Cfg.c    |  264 +--
+ .../r5f0_0/config_3/tresos/output/src/Icu_PBcfg.c  |  244 +--
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_3/tresos/output/src/Mcu_PBcfg.c  |  954 ++++-----
+ .../config_3/tresos/output/swcd/Icu_Bswmd.arxml    | 1844 ++++++++---------
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_4/tresos/output/include/Mcu_Cfg.h       | 1508 +++++++-------
+ .../r5f0_0/config_4/tresos/output/src/Icu_Cfg.c    |  336 +--
+ .../r5f0_0/config_4/tresos/output/src/Icu_PBcfg.c  |  496 ++---
+ .../r5f0_0/config_4/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_4/tresos/output/src/Mcu_PBcfg.c  |  954 ++++-----
+ .../config_4/tresos/output/swcd/Icu_Bswmd.arxml    | 2150 ++++++++++----------
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_91/tresos/output/include/Mcu_Cfg.h      | 1508 +++++++-------
+ .../r5f0_0/config_91/tresos/output/src/Icu_Cfg.c   |  264 +--
+ .../r5f0_0/config_91/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_91/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  954 ++++-----
+ .../config_91/tresos/output/swcd/Icu_Bswmd.arxml   | 1916 ++++++++---------
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_92/tresos/output/include/Mcu_Cfg.h      | 1508 +++++++-------
+ .../r5f0_0/config_92/tresos/output/src/Icu_Cfg.c   |  264 +--
+ .../r5f0_0/config_92/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_92/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  954 ++++-----
+ .../config_92/tresos/output/swcd/Icu_Bswmd.arxml   | 1236 +++++------
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_93/tresos/output/include/Mcu_Cfg.h      | 1508 +++++++-------
+ .../r5f0_0/config_93/tresos/output/src/Icu_Cfg.c   |  264 +--
+ .../r5f0_0/config_93/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_93/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  954 ++++-----
+ .../config_93/tresos/output/swcd/Icu_Bswmd.arxml   | 1732 ++++++++--------
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_94/tresos/output/include/Mcu_Cfg.h      | 1508 +++++++-------
+ .../r5f0_0/config_94/tresos/output/src/Icu_Cfg.c   |  264 +--
+ .../r5f0_0/config_94/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_94/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  954 ++++-----
+ .../config_94/tresos/output/swcd/Icu_Bswmd.arxml   | 1188 +++++------
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_1/tresos/output/include/Mcu_Cfg.h       | 1660 +++++++--------
+ .../r5f0_0/config_1/tresos/output/src/Icu_Cfg.c    |  272 +--
+ .../r5f0_0/config_1/tresos/output/src/Icu_PBcfg.c  |  244 +--
+ .../r5f0_0/config_1/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  | 1102 +++++-----
+ .../config_1/tresos/output/swcd/Icu_Bswmd.arxml    | 1920 ++++++++---------
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_2/tresos/output/include/Mcu_Cfg.h       | 1660 +++++++--------
+ .../r5f0_0/config_2/tresos/output/src/Icu_Cfg.c    |  272 +--
+ .../r5f0_0/config_2/tresos/output/src/Icu_PBcfg.c  |  244 +--
+ .../r5f0_0/config_2/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  | 1102 +++++-----
+ .../config_2/tresos/output/swcd/Icu_Bswmd.arxml    | 1920 ++++++++---------
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_3/tresos/output/include/Mcu_Cfg.h       | 1660 +++++++--------
+ .../r5f0_0/config_3/tresos/output/src/Icu_Cfg.c    |  272 +--
+ .../r5f0_0/config_3/tresos/output/src/Icu_PBcfg.c  |  244 +--
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |    8 +-
+ .../r5f0_0/config_3/tresos/output/src/Mcu_PBcfg.c  | 1102 +++++-----
+ .../config_3/tresos/output/swcd/Icu_Bswmd.arxml    | 1920 ++++++++---------
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  966 ++++-----
+ .../config_91/tresos/output/include/Mcu_Cfg.h      | 1660 +++++++--------
+ .../r5f0_0/config_91/tresos/output/src/Icu_Cfg.c   |  272 +--
+ .../r5f0_0/config_91/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_91/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c | 1102 +++++-----
+ .../config_91/tresos/output/swcd/Icu_Bswmd.arxml   | 1992 +++++++++---------
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_92/tresos/output/include/Mcu_Cfg.h      | 1660 +++++++--------
+ .../r5f0_0/config_92/tresos/output/src/Icu_Cfg.c   |  272 +--
+ .../r5f0_0/config_92/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_92/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c | 1102 +++++-----
+ .../config_92/tresos/output/swcd/Icu_Bswmd.arxml   | 1342 ++++++------
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_93/tresos/output/include/Mcu_Cfg.h      | 1660 +++++++--------
+ .../r5f0_0/config_93/tresos/output/src/Icu_Cfg.c   |  272 +--
+ .../r5f0_0/config_93/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_93/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c | 1102 +++++-----
+ .../config_93/tresos/output/swcd/Icu_Bswmd.arxml   | 1816 ++++++++---------
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ .../config_94/tresos/output/include/Mcu_Cfg.h      | 1660 +++++++--------
+ .../r5f0_0/config_94/tresos/output/src/Icu_Cfg.c   |  272 +--
+ .../r5f0_0/config_94/tresos/output/src/Icu_PBcfg.c |  244 +--
+ .../r5f0_0/config_94/tresos/output/src/Mcu_Cfg.c   |    8 +-
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c | 1102 +++++-----
+ .../config_94/tresos/output/swcd/Icu_Bswmd.arxml   | 1294 ++++++------
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  966 ++++-----
+ 154 files changed, 62529 insertions(+), 62529 deletions(-)
+
+commit 8031d294a52fa12ab9b7789219df33bac5b00670
+Author: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+Date:   Tue Oct 27 17:41:00 2026 +0530
+
+    am26xx: icu: add ut conifg with ebtresos structure
+    
+     - Created and EB project and matched with existing header file
+       parameters.
+     - Removed commented lines.
+     - Removed uart .bak file
+    
+    Fixes: MCAL-42699
+    
+    Signed-off-by: Rajesh Chinnasamy <rajesh.chinnasamy@ti.com>
+
+ mcal_test/icu_test/Makefile                        |    2 -
+ mcal_test/icu_test/am261/testLib/icuTest.h         |   41 +-
+ .../icu_test/am261/testLib/icuTestMainTestCase.c   |   11 +-
+ .../am261/testLib/icuTestNegativeTestCase.c        |    8 +-
+ mcal_test/icu_test/am261/testLib/icuTestParser.c   |   14 +-
+ mcal_test/icu_test/am263/testLib/icuTest.h         |   42 +-
+ .../icu_test/am263/testLib/icuTestMainTestCase.c   |   10 +-
+ .../am263/testLib/icuTestNegativeTestCase.c        |    7 -
+ mcal_test/icu_test/am263/testLib/icuTestParser.c   |   14 +-
+ mcal_test/icu_test/am263px/testLib/icuTest.h       |   45 +-
+ mcal_test/icu_test/am263px/testLib/icuTestCommon.c |   15 -
+ .../icu_test/am263px/testLib/icuTestMainTestCase.c |   11 +-
+ .../am263px/testLib/icuTestNegativeTestCase.c      |    3 -
+ mcal_test/icu_test/am263px/testLib/icuTestParser.c |   14 +-
+ .../Common/soc/am261/r5f0_0/tresos/config/Dem.xdm  | 2203 ++++++++++++++++++++
+ .../Common/soc/am263/r5f0_0/tresos/config/Dem.xdm  | 2203 ++++++++++++++++++++
+ .../soc/am263px/r5f0_0/tresos/config/Dem.xdm       | 2203 ++++++++++++++++++++
+ mcal_test/ut_config/Icu/makefile                   |    2 -
+ .../r5f0_0/config_1/tresos/.prefs/pref_general.xdm |  125 ++
+ .../Icu/soc/am261/r5f0_0/config_1/tresos/.project  |   13 +
+ .../am261/r5f0_0/config_1/tresos/config/Icu.xdm    |  146 ++
+ .../config_1/tresos/output/include/Icu_Cfg.h       |  153 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |  764 +++++++
+ .../r5f0_0/config_1/tresos/output/src/Icu_Cfg.c    |   59 +
+ .../r5f0_0/config_1/tresos/output/src/Icu_PBcfg.c  |  143 ++
+ .../r5f0_0/config_1/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  423 ++++
+ .../config_1/tresos/output/swcd/Icu_Bswmd.arxml    |  888 ++++++++
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../r5f0_0/config_2/tresos/.prefs/pref_general.xdm |  125 ++
+ .../Icu/soc/am261/r5f0_0/config_2/tresos/.project  |   13 +
+ .../am261/r5f0_0/config_2/tresos/config/Icu.xdm    |  146 ++
+ .../config_2/tresos/output/include/Icu_Cfg.h       |  153 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |  764 +++++++
+ .../r5f0_0/config_2/tresos/output/src/Icu_Cfg.c    |   59 +
+ .../r5f0_0/config_2/tresos/output/src/Icu_PBcfg.c  |  143 ++
+ .../r5f0_0/config_2/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  423 ++++
+ .../config_2/tresos/output/swcd/Icu_Bswmd.arxml    |  888 ++++++++
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../r5f0_0/config_3/tresos/.prefs/pref_general.xdm |  125 ++
+ .../Icu/soc/am261/r5f0_0/config_3/tresos/.project  |   13 +
+ .../am261/r5f0_0/config_3/tresos/config/Icu.xdm    |  144 ++
+ .../config_3/tresos/output/include/Icu_Cfg.h       |  154 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |  764 +++++++
+ .../r5f0_0/config_3/tresos/output/src/Icu_Cfg.c    |   59 +
+ .../r5f0_0/config_3/tresos/output/src/Icu_PBcfg.c  |  143 ++
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_3/tresos/output/src/Mcu_PBcfg.c  |  423 ++++
+ .../config_3/tresos/output/swcd/Icu_Bswmd.arxml    |  888 ++++++++
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../config_91/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am261/r5f0_0/config_91/tresos/.project |   13 +
+ .../am261/r5f0_0/config_91/tresos/config/Icu.xdm   |  136 ++
+ .../config_91/tresos/output/include/Icu_Cfg.h      |  153 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |  764 +++++++
+ .../r5f0_0/config_91/tresos/output/src/Icu_Cfg.c   |   59 +
+ .../r5f0_0/config_91/tresos/output/src/Icu_PBcfg.c |  143 ++
+ .../r5f0_0/config_91/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  423 ++++
+ .../config_91/tresos/output/swcd/Icu_Bswmd.arxml   |  924 ++++++++
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_92/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am261/r5f0_0/config_92/tresos/.project |   13 +
+ .../am261/r5f0_0/config_92/tresos/config/Icu.xdm   |  126 ++
+ .../config_92/tresos/output/include/Icu_Cfg.h      |  153 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |  764 +++++++
+ .../r5f0_0/config_92/tresos/output/src/Icu_Cfg.c   |   59 +
+ .../r5f0_0/config_92/tresos/output/src/Icu_PBcfg.c |  143 ++
+ .../r5f0_0/config_92/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  423 ++++
+ .../config_92/tresos/output/swcd/Icu_Bswmd.arxml   |  599 ++++++
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_93/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am261/r5f0_0/config_93/tresos/.project |   13 +
+ .../am261/r5f0_0/config_93/tresos/config/Icu.xdm   |  136 ++
+ .../config_93/tresos/output/include/Icu_Cfg.h      |  153 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |  764 +++++++
+ .../r5f0_0/config_93/tresos/output/src/Icu_Cfg.c   |   59 +
+ .../r5f0_0/config_93/tresos/output/src/Icu_PBcfg.c |  143 ++
+ .../r5f0_0/config_93/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  423 ++++
+ .../config_93/tresos/output/swcd/Icu_Bswmd.arxml   |  836 ++++++++
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_94/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am261/r5f0_0/config_94/tresos/.project |   13 +
+ .../am261/r5f0_0/config_94/tresos/config/Icu.xdm   |  126 ++
+ .../config_94/tresos/output/include/Icu_Cfg.h      |  153 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |  764 +++++++
+ .../r5f0_0/config_94/tresos/output/src/Icu_Cfg.c   |   59 +
+ .../r5f0_0/config_94/tresos/output/src/Icu_PBcfg.c |  143 ++
+ .../r5f0_0/config_94/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  423 ++++
+ .../config_94/tresos/output/swcd/Icu_Bswmd.arxml   |  575 +++++
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../r5f0_0/config_1/tresos/.prefs/pref_general.xdm |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_1/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_1/tresos/config/Icu.xdm    |  147 ++
+ .../config_1/tresos/output/include/Icu_Cfg.h       |  166 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |  754 +++++++
+ .../r5f0_0/config_1/tresos/output/src/Icu_Cfg.c    |  132 ++
+ .../r5f0_0/config_1/tresos/output/src/Icu_PBcfg.c  |  122 ++
+ .../r5f0_0/config_1/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  477 +++++
+ .../config_1/tresos/output/swcd/Icu_Bswmd.arxml    |  922 ++++++++
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../r5f0_0/config_2/tresos/.prefs/pref_general.xdm |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_2/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_2/tresos/config/Icu.xdm    |  147 ++
+ .../config_2/tresos/output/include/Icu_Cfg.h       |  166 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |  754 +++++++
+ .../r5f0_0/config_2/tresos/output/src/Icu_Cfg.c    |  132 ++
+ .../r5f0_0/config_2/tresos/output/src/Icu_PBcfg.c  |  122 ++
+ .../r5f0_0/config_2/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  477 +++++
+ .../config_2/tresos/output/swcd/Icu_Bswmd.arxml    |  922 ++++++++
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../r5f0_0/config_3/tresos/.prefs/pref_general.xdm |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_3/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_3/tresos/config/Icu.xdm    |  147 ++
+ .../config_3/tresos/output/include/Icu_Cfg.h       |  166 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |  754 +++++++
+ .../r5f0_0/config_3/tresos/output/src/Icu_Cfg.c    |  132 ++
+ .../r5f0_0/config_3/tresos/output/src/Icu_PBcfg.c  |  122 ++
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_3/tresos/output/src/Mcu_PBcfg.c  |  477 +++++
+ .../config_3/tresos/output/swcd/Icu_Bswmd.arxml    |  922 ++++++++
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../r5f0_0/config_4/tresos/.prefs/pref_general.xdm |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_4/tresos/.project  |   13 +
+ .../am263/r5f0_0/config_4/tresos/config/Icu.xdm    |  503 +++++
+ .../config_4/tresos/output/include/Icu_Cfg.h       |  257 +--
+ .../config_4/tresos/output/include/Mcu_Cfg.h       |  754 +++++++
+ .../r5f0_0/config_4/tresos/output/src/Icu_Cfg.c    |  168 ++
+ .../r5f0_0/config_4/tresos/output/src/Icu_PBcfg.c  |  248 +++
+ .../r5f0_0/config_4/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_4/tresos/output/src/Mcu_PBcfg.c  |  477 +++++
+ .../config_4/tresos/output/swcd/Icu_Bswmd.arxml    | 1075 ++++++++++
+ .../config_4/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../config_91/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_91/tresos/.project |   13 +
+ .../am263/r5f0_0/config_91/tresos/config/Icu.xdm   |  139 ++
+ .../config_91/tresos/output/include/Icu_Cfg.h      |  168 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |  754 +++++++
+ .../r5f0_0/config_91/tresos/output/src/Icu_Cfg.c   |  132 ++
+ .../r5f0_0/config_91/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_91/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  477 +++++
+ .../config_91/tresos/output/swcd/Icu_Bswmd.arxml   |  958 +++++++++
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_92/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_92/tresos/.project |   13 +
+ .../am263/r5f0_0/config_92/tresos/config/Icu.xdm   |  127 ++
+ .../config_92/tresos/output/include/Icu_Cfg.h      |  168 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |  754 +++++++
+ .../r5f0_0/config_92/tresos/output/src/Icu_Cfg.c   |  132 ++
+ .../r5f0_0/config_92/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_92/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  477 +++++
+ .../config_92/tresos/output/swcd/Icu_Bswmd.arxml   |  618 ++++++
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_93/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_93/tresos/.project |   13 +
+ .../am263/r5f0_0/config_93/tresos/config/Icu.xdm   |  139 ++
+ .../config_93/tresos/output/include/Icu_Cfg.h      |  168 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |  754 +++++++
+ .../r5f0_0/config_93/tresos/output/src/Icu_Cfg.c   |  132 ++
+ .../r5f0_0/config_93/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_93/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  477 +++++
+ .../config_93/tresos/output/swcd/Icu_Bswmd.arxml   |  866 ++++++++
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_94/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../Icu/soc/am263/r5f0_0/config_94/tresos/.project |   13 +
+ .../am263/r5f0_0/config_94/tresos/config/Icu.xdm   |  127 ++
+ .../config_94/tresos/output/include/Icu_Cfg.h      |  168 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |  754 +++++++
+ .../r5f0_0/config_94/tresos/output/src/Icu_Cfg.c   |  132 ++
+ .../r5f0_0/config_94/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_94/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  477 +++++
+ .../config_94/tresos/output/swcd/Icu_Bswmd.arxml   |  594 ++++++
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../r5f0_0/config_1/tresos/.prefs/pref_general.xdm |  121 ++
+ .../soc/am263px/r5f0_0/config_1/tresos/.project    |   13 +
+ .../am263px/r5f0_0/config_1/tresos/config/Icu.xdm  |  146 ++
+ .../config_1/tresos/output/include/Icu_Cfg.h       |  146 +-
+ .../config_1/tresos/output/include/Mcu_Cfg.h       |  830 ++++++++
+ .../r5f0_0/config_1/tresos/output/src/Icu_Cfg.c    |  136 ++
+ .../r5f0_0/config_1/tresos/output/src/Icu_PBcfg.c  |  122 ++
+ .../r5f0_0/config_1/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_1/tresos/output/src/Mcu_PBcfg.c  |  551 +++++
+ .../config_1/tresos/output/swcd/Icu_Bswmd.arxml    |  960 +++++++++
+ .../config_1/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../r5f0_0/config_2/tresos/.prefs/pref_general.xdm |  121 ++
+ .../soc/am263px/r5f0_0/config_2/tresos/.project    |   13 +
+ .../am263px/r5f0_0/config_2/tresos/config/Icu.xdm  |  146 ++
+ .../config_2/tresos/output/include/Icu_Cfg.h       |  146 +-
+ .../config_2/tresos/output/include/Mcu_Cfg.h       |  830 ++++++++
+ .../r5f0_0/config_2/tresos/output/src/Icu_Cfg.c    |  136 ++
+ .../r5f0_0/config_2/tresos/output/src/Icu_PBcfg.c  |  122 ++
+ .../r5f0_0/config_2/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_2/tresos/output/src/Mcu_PBcfg.c  |  551 +++++
+ .../config_2/tresos/output/swcd/Icu_Bswmd.arxml    |  960 +++++++++
+ .../config_2/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../r5f0_0/config_3/tresos/.prefs/pref_general.xdm |  121 ++
+ .../soc/am263px/r5f0_0/config_3/tresos/.project    |   13 +
+ .../am263px/r5f0_0/config_3/tresos/config/Icu.xdm  |  146 ++
+ .../config_3/tresos/output/include/Icu_Cfg.h       |  146 +-
+ .../config_3/tresos/output/include/Mcu_Cfg.h       |  830 ++++++++
+ .../r5f0_0/config_3/tresos/output/src/Icu_Cfg.c    |  136 ++
+ .../r5f0_0/config_3/tresos/output/src/Icu_PBcfg.c  |  122 ++
+ .../r5f0_0/config_3/tresos/output/src/Mcu_Cfg.c    |    4 +
+ .../r5f0_0/config_3/tresos/output/src/Mcu_PBcfg.c  |  551 +++++
+ .../config_3/tresos/output/swcd/Icu_Bswmd.arxml    |  960 +++++++++
+ .../config_3/tresos/output/swcd/Mcu_Bswmd.arxml    |  483 +++++
+ .../config_91/tresos/.prefs/pref_general.xdm       |  125 ++
+ .../soc/am263px/r5f0_0/config_91/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_91/tresos/config/Icu.xdm |  138 ++
+ .../config_91/tresos/output/include/Icu_Cfg.h      |  146 +-
+ .../config_91/tresos/output/include/Mcu_Cfg.h      |  830 ++++++++
+ .../r5f0_0/config_91/tresos/output/src/Icu_Cfg.c   |  136 ++
+ .../r5f0_0/config_91/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_91/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_91/tresos/output/src/Mcu_PBcfg.c |  551 +++++
+ .../config_91/tresos/output/swcd/Icu_Bswmd.arxml   |  996 +++++++++
+ .../config_91/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_92/tresos/.prefs/pref_general.xdm       |  121 ++
+ .../soc/am263px/r5f0_0/config_92/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_92/tresos/config/Icu.xdm |  120 ++
+ .../config_92/tresos/output/include/Icu_Cfg.h      |  146 +-
+ .../config_92/tresos/output/include/Mcu_Cfg.h      |  830 ++++++++
+ .../r5f0_0/config_92/tresos/output/src/Icu_Cfg.c   |  136 ++
+ .../r5f0_0/config_92/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_92/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_92/tresos/output/src/Mcu_PBcfg.c |  551 +++++
+ .../config_92/tresos/output/swcd/Icu_Bswmd.arxml   |  671 ++++++
+ .../config_92/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_93/tresos/.prefs/pref_general.xdm       |  121 ++
+ .../soc/am263px/r5f0_0/config_93/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_93/tresos/config/Icu.xdm |  136 ++
+ .../config_93/tresos/output/include/Icu_Cfg.h      |  146 +-
+ .../config_93/tresos/output/include/Mcu_Cfg.h      |  830 ++++++++
+ .../r5f0_0/config_93/tresos/output/src/Icu_Cfg.c   |  136 ++
+ .../r5f0_0/config_93/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_93/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_93/tresos/output/src/Mcu_PBcfg.c |  551 +++++
+ .../config_93/tresos/output/swcd/Icu_Bswmd.arxml   |  908 ++++++++
+ .../config_93/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ .../config_94/tresos/.prefs/pref_general.xdm       |  119 ++
+ .../soc/am263px/r5f0_0/config_94/tresos/.project   |   13 +
+ .../am263px/r5f0_0/config_94/tresos/config/Icu.xdm |  126 ++
+ .../config_94/tresos/output/include/Icu_Cfg.h      |  146 +-
+ .../config_94/tresos/output/include/Mcu_Cfg.h      |  830 ++++++++
+ .../r5f0_0/config_94/tresos/output/src/Icu_Cfg.c   |  136 ++
+ .../r5f0_0/config_94/tresos/output/src/Icu_PBcfg.c |  122 ++
+ .../r5f0_0/config_94/tresos/output/src/Mcu_Cfg.c   |    4 +
+ .../r5f0_0/config_94/tresos/output/src/Mcu_PBcfg.c |  551 +++++
+ .../config_94/tresos/output/swcd/Icu_Bswmd.arxml   |  647 ++++++
+ .../config_94/tresos/output/swcd/Mcu_Bswmd.arxml   |  483 +++++
+ mcal_test/ut_config/Icu/srcs.mk                    |    2 +
+ .../r5f0_0/config_3/include/Cdd_Uart_Cfg.h.bak     |  364 ----
+ 262 files changed, 77312 insertions(+), 2356 deletions(-)
+
+commit 7d6ba75c02ccd406bbb1e015f6e25b4098711e17
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Oct 26 13:49:33 2026 +0530
+
+    all: Can: Fix Rx FIFO size counted per filter.
+    
+    - Rx FIFO size was increased by CanHwObjectCount once per CanHwFilter, so a mailbox with several filters exceeded the 64 element limit and Can_Init failed (MCAL-42502).
+    
+    - Add CanHwObjectCount once per Rx FIFO mailbox instead.
+    
+    - Added testcase to verify the Rxfifo size based on per mailbox size .
+    
+    Fixes: MCAL-42502
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Can/V0/Can_Mcan.c                             |  28 ++--
+ mcal/Can/V0/Can_Priv.h                             |   4 -
+ mcal_test/can_test/testInput/canTestCases.h        |  51 ++++++-
+ mcal_test/can_test/testInput/canTestConfig.h       | 146 ++++++++++++++++++
+ mcal_test/can_test/testLib/canTest.h               |   3 +
+ mcal_test/can_test/testLib/canTestMainTestCase.c   | 165 +++++++++++++++++++++
+ .../can_test/testLib/canTestNegativeTestCase.c     |  25 ++--
+ 7 files changed, 389 insertions(+), 33 deletions(-)
+
 commit 5067e7b7d72ed1dd6bb6610e165f79a63eb4efda
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Nov 10 10:09:31 2026 +0530

@@ -175,7 +175,7 @@ void Spi_hwUnitInit(Spi_HwUnitObjType *hwUnitObj)
         if (Spi_dmaChInit(&Spi_DrvObj, hwUnitObj, txrxMode) == MCAL_SystemP_SUCCESS)
         {
             /* Check if DMA Enabled HwUnit reaches bounds and increment */
-            if ((Spi_DrvObj.dmaEnableHwIndx + 1U) == SPI_MAX_HW_DMA_UNIT)
+            if (Spi_DrvObj.dmaEnableHwIndx >= SPI_MAX_HW_DMA_UNIT)
             {
 #if (STD_ON == SPI_DEV_ERROR_DETECT)
                 Spi_reportDetError(SPI_SID_INIT, SPI_E_PARAM_CHANNEL);
@@ -699,6 +699,19 @@ void Spi_processChCompletion(Spi_HwUnitObjType *hwUnitObj, Spi_JobResultType job
     }
 }
 
+static void Spi_notifyJobAndSeqCompletion(Spi_JobEndNotifyType jobEndNotification,
+                                          Spi_SeqEndNotifyType seqEndNotification)
+{
+    if (NULL_PTR != jobEndNotification)
+    {
+        jobEndNotification();
+    }
+    if (NULL_PTR != seqEndNotification)
+    {
+        seqEndNotification();
+    }
+}
+
 static void Spi_processJobCompletion(Spi_JobObjType *jobObj, Spi_HwUnitObjType *hwUnitObj, Spi_JobResultType jobResult)
 {
     Spi_UtilsNode       *headNodeObj        = (Spi_UtilsNode *)NULL_PTR;
@@ -726,11 +739,20 @@ static void Spi_processJobCompletion(Spi_JobObjType *jobObj, Spi_HwUnitObjType *
         seqEndNotification = seqObj->seqCfg.Spi_SequenceEndNotification;
     }
 
+#ifdef SPI_E_HARDWARE_ERROR
+    (void)Dem_SetEventStatus(SPI_E_HARDWARE_ERROR, DEM_EVENT_STATUS_PASSED);
+#endif
+
     /* Check if any new job is pending */
     headNodeObj = Spi_utilsGetHeadNode(&hwUnitObj->jobList);
     if (headNodeObj != NULL_PTR)
     {
         Spi_JobObjType *nextJobObj;
+
+        /* Notify Job/Sequence end before scheduling next job to allow
+         * for proper delay handling between jobs (e.g., CS low delay) */
+        Spi_notifyJobAndSeqCompletion(jobEndNotification, seqEndNotification);
+
         /* Some job pending - schedule it */
         nextJobObj = (Spi_JobObjType *)headNodeObj->params.data;
         Spi_utilsUnLinkNodePri((&(hwUnitObj->jobList)), headNodeObj);
@@ -749,22 +771,9 @@ static void Spi_processJobCompletion(Spi_JobObjType *jobObj, Spi_HwUnitObjType *
          * put in idle state
          */
         Spi_checkAndSetDrvState();
-    }
 
-#ifdef SPI_E_HARDWARE_ERROR
-    (void)Dem_SetEventStatus(SPI_E_HARDWARE_ERROR, DEM_EVENT_STATUS_PASSED);
-#endif
-
-    /* Notify Job end - should be done after scheduling */
-    if (NULL_PTR != jobEndNotification)
-    {
-        jobEndNotification();
-    }
-
-    /* Notify Sequence end - should be done after scheduling */
-    if (NULL_PTR != seqEndNotification)
-    {
-        seqEndNotification();
+        /* Notify Job/Sequence end after driver/HW idle state is finalized */
+        Spi_notifyJobAndSeqCompletion(jobEndNotification, seqEndNotification);
     }
 }
 

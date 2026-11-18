@@ -1,6 +1,6 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.02.00 done on 13-Nov-2026.
+This is the release notes for MCAL AM26xx 26.02.00 done on 19-Nov-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
 Note: This release note describes the changes from previously released version. For details on previous release notes, refer ${MCAL_INSTALL_PATH}/relnotes_archive folder.
 
@@ -185,12 +185,52 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
+      <td>MCAL-42502</td>
+      <td>CAN mailbox size is incremented incorrectly</td>
+      <td>CAN</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Rx FIFO size is now incremented once per mailbox instead of once per HW filter</td>
+    </tr>
+    <tr>
+      <td>MCAL-42510</td>
+      <td>Incorrect Implementation of EPWM_setDeadBandControlShadowLoadMode() function</td>
+      <td>CDD PWM</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Corrected the register bit mask to enable the intended functionality</td>
+    </tr>
+    <tr>
+      <td>MCAL-41777</td>
+      <td>Software getting stuck in Eth_processTxBuffDesc</td>
+      <td>ETH</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SchM entry and exit was divided in 2 different function which led to exit call before entry for custom usecases</td>
+    </tr>
+    <tr>
       <td>MCAL-41779</td>
       <td>ETH: unbalanced critical section implementation in TX and RX packet processing</td>
       <td>ETH</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Split the large SchM exclusive areas in the Eth RX/TX descriptor processing paths into short, granular critical sections</td>
+    </tr>
+    <tr>
+      <td>MCAL-42563</td>
+      <td>FLS PHY APP SIP Fails is DMA and PHY is turned on</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>PHY was disabled before DMA read completion, this is now corrected.</td>
+    </tr>
+    <tr>
+      <td>MCAL-42668</td>
+      <td>AM263x/AM263Px: ICU version missing in Plugin template</td>
+      <td>ICU</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px</td>
+      <td>The plugin config template files are now fixed for both am263x and am263px platforms</td>
     </tr>
     <tr>
       <td>MCAL-42269</td>
@@ -207,6 +247,14 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Build issue is fixed now if SpiEnableCs is not selected in EB it will assign with SPI_CS_VIA_PERIPHERAL_ENGINE</td>
+    </tr>
+    <tr>
+      <td>MCAL-42660</td>
+      <td>Job notification to be sent before Start of next job</td>
+      <td>Spi</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Job end notication was sent after scheduling/start of next job, its fixed to have it before start of next job</td>
     </tr>
     <tr>
       <td>MCAL-42417</td>
