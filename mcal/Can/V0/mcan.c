@@ -761,7 +761,7 @@ sint32 MCAN_writeRxFIFOAck(uint32 baseAddr, MCAN_RxFIFONum fifoNum, uint32 idx)
     {
         case MCAN_RX_FIFO_NUM_0:
             size = HW_RD_FIELD32(baseAddr + MCAN_RXF0C, MCAN_RXF0C_F0S);
-            if (size >= idx)
+            if (size > idx)
             {
                 HW_WR_FIELD32(baseAddr + MCAN_RXF0A, MCAN_RXF0A_F0AI, idx);
                 status = STW_SOK;
@@ -773,7 +773,7 @@ sint32 MCAN_writeRxFIFOAck(uint32 baseAddr, MCAN_RxFIFONum fifoNum, uint32 idx)
             break;
         case MCAN_RX_FIFO_NUM_1:
             size = HW_RD_FIELD32(baseAddr + MCAN_RXF1C, MCAN_RXF1C_F1S);
-            if (size >= idx)
+            if (size > idx)
             {
                 HW_WR_FIELD32(baseAddr + MCAN_RXF1A, MCAN_RXF1A_F1AI, idx);
                 status = STW_SOK;

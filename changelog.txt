@@ -1,3 +1,23 @@
+commit 0ba11471e087627a720938b2a50f3e3cd9b306ea
+Author: Akash <a-verma3@ti.com>
+Date:   Thu Nov 19 14:40:23 2026 +0530
+
+    all: Can: Fix off-by-one in Rx FIFO acknowledge index check.
+    
+    - MCAN_writeRxFIFOAck() accepted an ack index equal to the FIFO size (size >= idx), although valid indexes are 0 to size-1. Changed the  check to size > idx for Rx FIFO0 and FIFO1.
+    
+    - Added testcase 42664 to verify that an ack index equal to the FIFO size is rejected and RXFxS is not changed.
+    
+    Fixes: MCAL-43326
+    
+    Signed-off-by: Akash Verma
+
+ mcal/Can/V0/mcan.c                               |   4 +-
+ mcal_test/can_test/testInput/canTestCases.h      |  24 ++++++
+ mcal_test/can_test/testLib/canTest.h             |   1 +
+ mcal_test/can_test/testLib/canTestMainTestCase.c | 103 +++++++++++++++++++++++
+ 4 files changed, 130 insertions(+), 2 deletions(-)
+
 commit 5dcf345d79aaed7e45f1f9c6a8f3bef740b55cfe
 Author: Swathi G Bhat <s-bhat2@ti.com>
 Date:   Tue Nov 17 19:41:29 2026 +0530
