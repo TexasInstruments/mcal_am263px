@@ -76,7 +76,11 @@
 /* ========================================================================== */
 
 #define GPIO_PIN_NUMBER 96 /* GPIOGH_120 */
-#define GPIO_PIN_ID     181
+#ifdef AM261X_ZNC_PACKAGE
+#define GPIO_PIN_ID 235 /* Pin ID of GPIO96 (PIN_L17) in the ZNC package config */
+#else
+#define GPIO_PIN_ID 181 /* Pin ID of GPIO96 (PIN_J17) in the ZCZ package config */
+#endif
 
 #define PORT_TEST_GPIO_INTR STD_OFF /* Switch to enable/disable testing of GPIO Intr feature */
 #define PORT_INTR_TEST_PASS 200     /* GPIO Interrupt Verify */

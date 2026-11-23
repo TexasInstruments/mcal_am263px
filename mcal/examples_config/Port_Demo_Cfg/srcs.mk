@@ -1,7 +1,12 @@
 PORT_DEMO_CFG_PATH=$(mcal_PATH)/examples_config/Port_Demo_Cfg
 
-SRCDIR += $(PORT_DEMO_CFG_PATH)/soc/$(SOC)/$(CORE)/src
-INCDIR += $(PORT_DEMO_CFG_PATH)/soc/$(SOC)/$(CORE)/include
+PORT_CFG_BASE=$(PORT_DEMO_CFG_PATH)/soc/$(SOC)/$(CORE)
+ifeq ($(SOC)/$(PACKAGE),am261/ZNC)
+  PORT_CFG_BASE=$(PORT_DEMO_CFG_PATH)/soc/am261/tresos_znc/output
+endif
+
+SRCDIR += $(PORT_CFG_BASE)/src
+INCDIR += $(PORT_CFG_BASE)/include
 SRCS_COMMON += Port_Cfg.c
 
 # SOC specific files

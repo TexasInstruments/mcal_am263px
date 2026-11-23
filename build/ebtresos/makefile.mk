@@ -31,8 +31,13 @@ ifeq ($(PACKAGE),$(filter $(PACKAGE), SIP))
 	$(COPY) -rf $(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)/Port_TI_$(EB_PLATFORM)_SIP $(EB_PATH)/tresos/plugins/
 endif
 ifeq ($(EB_PLATFORM),$(filter $(EB_PLATFORM), AM261x))
+ifeq ($(PACKAGE),$(filter $(PACKAGE), ZNC))
+	$(ECHO) Copying Port_TI_$(EB_PLATFORM)_ZNC Plugins to EB Tresos plugins folder for $(EB_PLATFORM) ...
+	$(COPY) -rf $(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)/Port_TI_$(EB_PLATFORM)_ZNC $(EB_PATH)/tresos/plugins/
+else
 	$(ECHO) Copying Port_TI_$(EB_PLATFORM)_ZCZ Plugins to EB Tresos plugins folder for $(EB_PLATFORM) ...
 	$(COPY) -rf $(MCAL_PATH)/mcal_config/plugins/$(EB_PLATFORM)/Port_TI_$(EB_PLATFORM)_ZCZ $(EB_PATH)/tresos/plugins/
+endif
 endif
 
 delete_plugins:

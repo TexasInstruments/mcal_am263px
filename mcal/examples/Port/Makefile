@@ -1,4 +1,8 @@
+ifeq ($(PLATFORM)/$(PACKAGE),am261/ZNC)
+APP_NAME = port_app_znc
+else
 APP_NAME = port_app
+endif
 
 # Get the list of src dir, include dir and source files to compile using module mk files
 include $(mcal_PATH)/include/hw/inc.mk

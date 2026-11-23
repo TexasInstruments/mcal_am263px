@@ -68,6 +68,9 @@ $(EXAMPLES):
 		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_cc                   -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
 		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_lp                   -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
 		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_sip                  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
+	elif [ "$(PLATFORM)" = "am261" ] && [ "$@" = "Port" ]; then \
+		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_zcz                  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
+		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_znc                  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
 	else \
 		$(MAKE) -C $(EXAMPLES_DIR)/$@/soc/$(PLATFORM)/r5f0_0/ti-arm-clang                                  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) ccs_project; \
 	fi \
@@ -77,6 +80,9 @@ $(EXAMPLES_CLEAN):
 		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_cc  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
 		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_lp  -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
 		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_sip -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
+	elif [ "$(PLATFORM)" = "am261" ] && [ "$(subst _clean,,$@)" = "Port" ]; then \
+		$(MAKE) -C $(EXAMPLES_DIR)/Port/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_zcz                -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
+		$(MAKE) -C $(EXAMPLES_DIR)/Port/soc/$(PLATFORM)/r5f0_0/ti-arm-clang/$(PLATFORM)_znc                -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
 	else \
 		$(MAKE) -C $(EXAMPLES_DIR)/$(subst _clean,,$@)/soc/$(PLATFORM)/r5f0_0/ti-arm-clang                 -f makefile_projectspec CCS_ECLIPSE=$(CCS_ECLIPSE) PROFILE=$(PROFILE) clean; \
 	fi \

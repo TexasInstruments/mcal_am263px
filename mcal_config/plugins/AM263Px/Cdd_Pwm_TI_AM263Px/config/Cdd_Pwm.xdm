@@ -450,7 +450,7 @@
                                     <a:a name="SCOPE" value="LOCAL"/>
                                     <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                     <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000025"/>
-                                    <a:da name="DEFAULT" value="200000000"/>                                                
+                                    <a:da name="DEFAULT" value="200000000"/>
                                     <a:da name="INVALID" type="Range">
                                         <a:tst expr="&gt;=0"/>
                                         <a:tst expr="&lt;=200000000"/>
@@ -468,7 +468,7 @@
                                       <a:a name="SCOPE" value="LOCAL"/>
                                       <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                       <a:a name="UUID" value="ECUC:c54e4154-fcc9-4745-845c-4e6fe45d0570"/>
-                                      <a:da name="DEFAULT" value="65536"/>                                                
+                                      <a:da name="DEFAULT" value="65536"/>
                                       <a:da name="INVALID" type="Range">
                                         <a:tst expr="&gt;=0"/>
                                         <a:tst expr="&lt;=65536"/>
@@ -521,19 +521,19 @@
                                 <a:da name="MAX" value="1"/>
                                 <v:ctr name="CddPwmConfigSet" type="MULTIPLE-CONFIGURATION-CONTAINER">
                                     <a:a name="DESC" value="EN: This container is the base of a Configuration Set, which contains the configured Cdd Pwm channels. This way, different configuration sets can be defined for post-build process."/>
-                                    <a:a name="UUID" value="00000000-0000-0000-0000-000000000031"/> 
+                                    <a:a name="UUID" value="00000000-0000-0000-0000-000000000031"/>
 									<v:lst name="CddPwmChannel" type="MAP">
                                         <a:da name="MIN" value="1"/>
                                         <a:da name="MAX" value="128"/>
 
                                         <v:ctr name="CddPwmChannel" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000032"/>
-                                            
+
                                             <!--Design: MCAL-23567-->
                                             <v:var name="CddPwmChannelId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The physical hardware channel that is assigned to this logical channel."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -552,7 +552,7 @@
 
                                             <!--Design: MCAL-23568-->
                                             <v:var name="CddPwmHwChannel" type="ENUMERATION">
-                                              
+
                                                 <a:a name="DESC" value="EN: The physical hardware channel that is assigned to this logical channel."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -601,7 +601,7 @@
 
                                             <!--Design: MCAL-23569-->
                                             <v:var name="CddPwmGroupUnit" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: The parameter is used to select the EPWM Group unit: G0, G1, G2 and G3."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -626,7 +626,7 @@
 
                                             <!--Design: MCAL-23570-->
                                              <v:var name="CddPwmOutPutChannelSelection" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: The parameter is used to select the EPWM Channel EPWMA or EPWMB or Both."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -650,7 +650,7 @@
 
                                             <!--Design: MCAL-23571-->
                                             <v:var name="CddPwmPolarity" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: The parameter is used to select the EPWM Channel Polarity HIGH or LOW."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -673,7 +673,7 @@
 
                                             <!--Design: MCAL-23572-->
                                             <v:var name="CddPwmNotification" type="FUNCTION-NAME">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: Callback function for each Channel"/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -694,7 +694,7 @@
 
                                             <!--Design: MCAL-23573-->
                                             <v:var name="CddPwmTzNotification" type="FUNCTION-NAME">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: Trip Zone Event Callback function for each Channel"/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
@@ -713,7 +713,7 @@
                                             </v:var>
 
                                             <v:ref name="CddPwmChannelTimerBaseRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the Timer Base parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -729,7 +729,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmChannelTimerBaseSyncRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the Timer Base Sync parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -745,7 +745,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmCounterCompareRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the Counter Compare parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -761,7 +761,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmActionQualifierRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the Action Qualifier parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -777,7 +777,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmEventTriggerRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the event trigger parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -793,7 +793,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmAdcEventTriggerRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the event trigger parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -809,7 +809,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmTripZoneRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the Trip Zone parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -825,7 +825,7 @@
                                             </v:ref>
 											<!--Design: MCAL-24146-->
 											<v:ref name="CddPwmDigitalCompareRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the Digital Compare parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -841,7 +841,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmDeadBandRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the dead band parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -857,7 +857,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmChopperRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the chopper parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -873,7 +873,7 @@
                                             </v:ref>
 
                                             <v:ref name="CddPwmHighResolutionPwmRef" type="REFERENCE">
-                                              
+
                                                 <a:a name="DESC"
                                                 value="EN: This parameter contains a reference to the HRPWM parameters, which is used by the CDD PWM Driver."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -896,13 +896,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmTimerBase" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000050"/>
-                                            
+
                                             <!--Design: MCAL-23574-->
                                             <v:var name="CddPwmTimerBaseId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The Timer Base unit ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -921,7 +921,7 @@
 
                                             <!--Design: MCAL-23575-->
                                             <v:var name="CddPwmTimerBaseGlobalLoad" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN:Use global load configuration for PRD."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -936,7 +936,7 @@
 
                                             <!--Design: MCAL-23576-->
                                             <v:var name="CddPwmTimerBaseShadowMode" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: The physical hardware channel that is assigned to this logical channel."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -951,7 +951,7 @@
 
                                             <!--Design: MCAL-23577-->
                                             <v:var name="CddPwmEmulationMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN:Behavior of the ePWM time-base counter during emulation events:
                                                     Stop after next Time Base counter increment or decrement,
@@ -978,7 +978,7 @@
 
                                             <!--Design: MCAL-23578-->
                                             <v:var name="CddPwmClockDivider" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN:Time Base Clock Divider:CLKDIV
                                                     CLKDIV:
@@ -1010,7 +1010,7 @@
 
                                             <!--Design: MCAL-23579-->
                                             <v:var name="CddPwmHSClockDivider" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN:High Speed Clock Divider:CLKDIV
                                                     HSPCLKDIV:
@@ -1042,7 +1042,7 @@
 
                                             <!--Design: MCAL-23580-->
                                             <v:var name="CddPwmTbPeriod" type="FLOAT">
-                                              
+
                                                   <a:a name="DESC"
                                                        value="EN: Value of period used for Initialization.(in seconds)."/>
                                                   <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1065,7 +1065,7 @@
 
                                             <!--Design: MCAL-23581-->
                                             <v:var name="CddPwmTbPeriodInitValue" type="FLOAT">
-                                              
+
                                                   <a:a name="DESC"
                                                        value="EN: Value of period used for Initialization.(in seconds). Initial Counter value for the Time Base Counter Submodule"/>
                                                   <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1088,7 +1088,7 @@
 
                                             <!--Design: MCAL-23582-->
                                             <v:var name="CddPwmCounterMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN:Counter Mode:Mode of the Counter value for the Time Base Counter Submodule."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1113,7 +1113,7 @@
 
                                             <!--Design: MCAL-23583-->
                                             <v:var name="CddPwmEnablePhaseShift" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN:Enable Phase Shift Load:Enable phase shift load for the Time Base Counter Submodule"/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1128,7 +1128,7 @@
 
                                             <!--Design: MCAL-23584-->
                                             <v:var name="CddPwmEnablePhaseShiftValue" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN:Phase Shift Value:Phase Shift Value for the Time Base Counter Submodule."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1147,7 +1147,7 @@
 
                                             <!--Design: MCAL-23585-->
                                             <v:var name="CddPwmPeriodLoadMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN:Time Base Period Load Mode:Period load mode for the Time Base Counter Submodule."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1170,7 +1170,7 @@
 
                                             <!--Design: MCAL-23586-->
                                             <v:var name="CddPwmTbprdlink" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN:Time Base Period Link:Simultaneous write to the current ePWM module PRD register."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1224,7 +1224,7 @@
 
                                             <!--Design: MCAL-23587-->
                                             <v:var name="CddPwmPeriodShadowLoadMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: ."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1254,13 +1254,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmTimerBaseSync" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-1004-0000-000000000013"/>
 
                                             <!--Design: MCAL-23588-->
                                             <v:var name="CddPwmTimerBaseSyncId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The Timer Base Sync unit ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1279,7 +1279,7 @@
 
                                             <!--Design: MCAL-23589-->
                                             <v:var name="CddPwmOneShotSyncOutTrigger" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: One-Shot Sync Out Trigger:One-Shot Sync Out Trigger for the Time Base Counter Submodule."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1302,7 +1302,7 @@
 
                                             <!--Design: MCAL-23590-->
                                             <v:var name="CddPwmForceSync" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Force A Sync Pulse:Force a sync pulse for the Time Base Counter Submodule."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1316,7 +1316,7 @@
                                             </v:var>
 
                                             <v:var name="CddPwmTbprdlink" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: ."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1369,13 +1369,13 @@
                                             </v:var>
 
                                             <v:ctr name="CddPwmSyncOutPulseOn" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual Sync Out Pulse On."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000070"/>
-                                            
+
                                             <!--Design: MCAL-23591-->
                                             <v:var name="CddPwmSyncOutPulseOnSoftware" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Software force generated EPWM sync-out pulse."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1390,7 +1390,7 @@
 
                                             <!--Design: MCAL-23592-->
                                             <v:var name="CddPwmSyncOutPulseOnCntrZero" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter zero event generates EPWM sync-out pulse."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1405,7 +1405,7 @@
 
                                             <!--Design: MCAL-23593-->
                                             <v:var name="CddPwmSyncOutPulseOnCntCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter equal to CMPB event generates EPWM sync-out pulse."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1420,7 +1420,7 @@
 
                                             <!--Design: MCAL-23594-->
                                             <v:var name="CddPwmSyncOutPulseOnCntCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter equal to CMPC event generates EPWM sync-out pulse."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1435,7 +1435,7 @@
 
                                             <!--Design: MCAL-23595-->
                                             <v:var name="CddPwmSyncOutPulseOnCntCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter equal to CMPD event generates EPWM sync-out pulse."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1450,7 +1450,7 @@
 
                                             <!--Design: MCAL-23596-->
                                             <v:var name="CddPwmSyncOutPulseOnDCAEVT1SYNC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: DCA Event 1 Sync signal generates EPWM sync-out pulse."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1465,7 +1465,7 @@
 
                                             <!--Design: MCAL-23597-->
                                             <v:var name="CddPwmSyncOutPulseOnDCBEVT1SYNC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: DCB Event 1 Sync signal generates EPWM sync-out pulse."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1480,7 +1480,7 @@
 
                                             <!--Design: MCAL-23598-->
                                             <v:var name="CddPwmSyncOutPulseOnALL" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: The physical hardware channel that is assigned to this logical channel."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -1497,7 +1497,7 @@
 
                                             <!--Design: MCAL-23599-->
                                             <v:var name="CddPwmSyncOutPulseSource" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: Sync In Pulse Source:Sync in Pulse for the Time Base Counter Submodule."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1579,13 +1579,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmCounterCompare" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000080"/>
-                                            
+
                                             <!--Design: MCAL-23600-->
                                             <v:var name="CddPwmCounterCompareId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The Counter Compare unit ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1603,13 +1603,13 @@
                                             </v:var>
 
                                             <v:ctr name="CddPwmCounterCompareA" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000082"/>
-                                            
+
                                             <!--Design: MCAL-23601-->
                                             <v:var name="CddPwmCounterBlockCmpA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Compare A (CMPA) Block."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -1630,7 +1630,7 @@
 
                                             <!--Design: MCAL-23602-->
                                             <v:var name="CddPwmCompareValueCmpA" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter Compare A (CMPA) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1649,7 +1649,7 @@
 
                                             <!--Design: MCAL-23603-->
                                             <v:var name="CddPwmCounterCompareGlobalLoadCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Counter Compare A Global Load Use global load configuration for CMPA."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1664,7 +1664,7 @@
 
                                             <!--Design: MCAL-23604-->
                                             <v:var name="CddPwmCounterCompareShadowModeCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Shadow Counter Compare A Enable Shadow Counter Compare A (CMPA) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1679,7 +1679,7 @@
 
                                             <!--Design: MCAL-23605-->
                                             <v:var name="CddPwmCounterCompareShadowEventCmpA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Counter Compare A Shadow Load Event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -1707,7 +1707,7 @@
 
                                             <!--Design: MCAL-23606-->
                                             <v:var name="CddPwmTbprdlinkCmpA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: Time Base Period Link:Simultaneous write to the current ePWM module CMP A register."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1763,12 +1763,12 @@
 
                                             <!--Design: MCAL-23607-->
                                             <v:ctr name="CddPwmCounterCompareB" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000089"/>
 
                                             <v:var name="CddPwmCounterBlockCmpB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Compare B (CMPB) Block."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -1789,7 +1789,7 @@
 
                                             <!--Design: MCAL-23608-->
                                             <v:var name="CddPwmCompareValueCmpB" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter Compare B (CMPB) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1808,7 +1808,7 @@
 
                                             <!--Design: MCAL-23609-->
                                             <v:var name="CddPwmCounterCompareGlobalLoadCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Counter Compare B Global Load Use global load configuration for CMPB."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1823,7 +1823,7 @@
 
                                             <!--Design: MCAL-23610-->
                                             <v:var name="CddPwmCounterCompareShadowModeCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Shadow Counter Compare B Enable Shadow Counter Compare B (CMPB) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1838,7 +1838,7 @@
 
                                             <!--Design: MCAL-23611-->
                                             <v:var name="CddPwmCounterCompareShadowEventCmpB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Counter Compare B Shadow Load Event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -1866,7 +1866,7 @@
 
                                             <!--Design: MCAL-23612-->
                                             <v:var name="CddPwmTbprdlinkCmpB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: Time Base Period Link:Simultaneous write to the current ePWM module CMP B register."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -1920,13 +1920,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmCounterCompareC" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000096"/>
 
                                             <!--Design: MCAL-23613-->
                                             <v:var name="CddPwmCounterBlockCmpC" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Compare C (CMPC) Block."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -1947,7 +1947,7 @@
 
                                             <!--Design: MCAL-23614-->
                                             <v:var name="CddPwmCompareValueCmpC" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter Compare C (CMPC) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1966,7 +1966,7 @@
 
                                             <!--Design: MCAL-23615-->
                                             <v:var name="CddPwmCounterCompareGlobalLoadCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Counter Compare C Global Load Use global load configuration for CMPC."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1981,7 +1981,7 @@
 
                                             <!--Design: MCAL-23616-->
                                             <v:var name="CddPwmCounterCompareShadowModeCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Shadow Counter Compare C Enable Shadow Counter Compare C (CMPC) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -1996,7 +1996,7 @@
 
                                             <!--Design: MCAL-23617-->
                                             <v:var name="CddPwmCounterCompareShadowEventCmpC" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Counter Compare C Shadow Load Event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2024,7 +2024,7 @@
 
                                             <!--Design: MCAL-23618-->
                                             <v:var name="CddPwmTbprdlinkCmpC" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: Time Base Period Link:Simultaneous write to the current ePWM module CMP C register."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -2078,13 +2078,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmCounterCompareD" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000103"/>
-                                            
+
                                             <!--Design: MCAL-23619-->
                                             <v:var name="CddPwmCounterBlockCmpD" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Compare D (CMPD) Block."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2105,7 +2105,7 @@
 
                                             <!--Design: MCAL-23620-->
                                             <v:var name="CddPwmCompareValueCmpD" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Counter Compare D (CMPD) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2124,7 +2124,7 @@
 
                                             <!--Design: MCAL-23621-->
                                             <v:var name="CddPwmCounterCompareGlobalLoadCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Counter Compare D Global Load Use global load configuration for CMPD."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2139,7 +2139,7 @@
 
                                             <!--Design: MCAL-23622-->
                                             <v:var name="CddPwmCounterCompareShadowModeCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Shadow Counter Compare D Enable Shadow Counter Compare D (CMPD) value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2154,7 +2154,7 @@
 
                                             <!--Design: MCAL-23623-->
                                             <v:var name="CddPwmCounterCompareShadowEventCmpD" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Counter Compare D Shadow Load Event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2182,7 +2182,7 @@
 
                                             <!--Design: MCAL-23624-->
                                             <v:var name="CddPwmTbprdlinkCmpD" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC"
                                                    value="EN: Time Base Period Link:Simultaneous write to the current ePWM module CMP D register."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
@@ -2243,13 +2243,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmActionQualifier" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000110"/>
-                                            
+
                                             <!--Design: MCAL-23625-->
                                             <v:var name="CddPwmActionQualifierId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The Action Qualifier unit ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2267,13 +2267,13 @@
                                             </v:var>
 
                                             <v:ctr name="CddPwmActionQualifierA" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000112"/>
-                                            <!--Design: MCAL-23626-->                                            
+                                            <!--Design: MCAL-23626-->
                                             <v:var name="CddPwmOutptEPWMA" type="ENUMERATION">
-                                              
-                                              <a:a name="DESC" value="EN: ."/> 
+
+                                              <a:a name="DESC" value="EN: ."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -2293,7 +2293,7 @@
 
                                             <!--Design: MCAL-23627-->
                                             <v:var name="CddPwmActionGlobalLoadEPWMA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Action qualifier Global Load A Use global load configuration."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2308,7 +2308,7 @@
 
                                             <!--Design: MCAL-23628-->
                                             <v:var name="CddPwmActionShadowModeEPWMA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Shadow Action Qualifier A Enable Shadow for action qualifier"/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2323,7 +2323,7 @@
 
                                             <!--Design: MCAL-23629-->
                                             <v:var name="CddPwmActionShadowEventEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action Qualifer EPWM A Shadow Load Event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2351,7 +2351,7 @@
 
                                             <!--Design: MCAL-23630-->
                                             <v:var name="CddPwmT1TriggerSourceEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trigger 1 event sources."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2380,8 +2380,8 @@
 
                                             <!--Design: MCAL-23631-->
                                             <v:var name="CddPwmT2TriggerSourceEPWMA" type="ENUMERATION">
-                                              
-                                              <a:a name="DESC" value="EN: Trigger 2 event sources."/> 
+
+                                              <a:a name="DESC" value="EN: Trigger 2 event sources."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -2409,7 +2409,7 @@
 
                                             <!--Design: MCAL-23632-->
                                             <v:var name="CddPwmActionQualifierOneTimeSwOutputEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: One time software forced event, output state based."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2433,7 +2433,7 @@
 
                                             <!--Design: MCAL-23633-->
                                             <v:var name="CddPwmActionQualifierContinuousSwOutputEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Continuous software forced event, output state based."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2456,7 +2456,7 @@
 
                                             <!--Design: MCAL-23634-->
                                             <v:var name="CddPwmAqOutputOnTimebaseZEROEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals Zero."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2480,7 +2480,7 @@
 
                                             <!--Design: MCAL-23635-->
                                             <v:var name="CddPwmAqOutputOnTimebasePERIODEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals period."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2504,8 +2504,8 @@
 
                                             <!--Design: MCAL-23636-->
                                             <v:var name="CddPwmAqOutputOnTimebaseUPCMPAEPWMA" type="ENUMERATION">
-                                              
-                                              <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPA in Up counter mode."/> 
+
+                                              <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPA in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
                                                 <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -2528,7 +2528,7 @@
 
                                             <!--Design: MCAL-23637-->
                                             <v:var name="CddPwmAqOutputOnTimebaseDOWNCMPAEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPA in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2552,7 +2552,7 @@
 
                                             <!--Design: MCAL-23638-->
                                             <v:var name="CddPwmAqOutputOnTimebaseUPCMPBEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPB in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2576,7 +2576,7 @@
 
                                             <!--Design: MCAL-23639-->
                                             <v:var name="CddPwmAqOutputOnTimebaseDOWNCMPBEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPB in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2600,7 +2600,7 @@
 
                                             <!--Design: MCAL-23640-->
                                             <v:var name="CddPwmAqOutputOnT1COUNTUPEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T1 event occures in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2624,7 +2624,7 @@
 
                                             <!--Design: MCAL-23641-->
                                             <v:var name="CddPwmAqOutputOnT1COUNTDOWNEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T1 event occures in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2648,7 +2648,7 @@
 
                                             <!--Design: MCAL-23642-->
                                             <v:var name="CddPwmAqOutputOnT2COUNTUPEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T2 event occures in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2672,7 +2672,7 @@
 
                                             <!--Design: MCAL-23643-->
                                             <v:var name="CddPwmAqOutputOnT2COUNTDOWNEPWMA" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T2 event occures in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2696,13 +2696,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmActionQualifierB" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000130"/>
-                                            
+
                                             <!--Design: MCAL-23644-->
                                             <v:var name="CddPwmOutptEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: ."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2723,7 +2723,7 @@
 
                                             <!--Design: MCAL-23645-->
                                             <v:var name="CddPwmActionGlobalLoadEPWMB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Action qualifier Global Load B Use global load configuration."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2738,7 +2738,7 @@
 
                                             <!--Design: MCAL-23646-->
                                             <v:var name="CddPwmActionShadowModeEPWMB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Shadow Action Qualifier B Enable Shadow for action qualifier"/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -2753,7 +2753,7 @@
 
                                             <!--Design: MCAL-23647-->
                                             <v:var name="CddPwmActionShadowEventEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action Qualifer EPWM B Shadow Load Event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2781,7 +2781,7 @@
 
                                             <!--Design: MCAL-23648-->
                                             <v:var name="CddPwmT1TriggerSourceEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trigger 1 event sources."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2810,7 +2810,7 @@
 
                                             <!--Design: MCAL-23649-->
                                             <v:var name="CddPwmT2TriggerSourceEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trigger 2 event sources."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2839,7 +2839,7 @@
 
                                             <!--Design: MCAL-23650-->
                                             <v:var name="CddPwmActionQualifierOneTimeSwOutputEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: One time software forced event, output state based."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2863,7 +2863,7 @@
 
                                             <!--Design: MCAL-23651-->
                                             <v:var name="CddPwmActionQualifierContinuousSwOutputEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Continuous software forced event, output state based."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2886,7 +2886,7 @@
 
                                             <!--Design: MCAL-23652-->
                                             <v:var name="CddPwmAqOutputOnTimebaseZEROEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals Zero."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2910,7 +2910,7 @@
 
                                             <!--Design: MCAL-23653-->
                                             <v:var name="CddPwmAqOutputOnTimebasePERIODEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals period."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2934,7 +2934,7 @@
 
                                             <!--Design: MCAL-23654-->
                                             <v:var name="CddPwmAqOutputOnTimebaseUPCMPAEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPA in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2958,7 +2958,7 @@
 
                                             <!--Design: MCAL-23655-->
                                             <v:var name="CddPwmAqOutputOnTimebaseDOWNCMPAEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPA in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -2982,7 +2982,7 @@
 
                                             <!--Design: MCAL-23656-->
                                             <v:var name="CddPwmAqOutputOnTimebaseUPCMPBEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPB in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3006,7 +3006,7 @@
 
                                             <!--Design: MCAL-23657-->
                                             <v:var name="CddPwmAqOutputOnTimebaseDOWNCMPBEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when TBCTR Equals CMPB in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3030,7 +3030,7 @@
 
                                             <!--Design: MCAL-23658-->
                                             <v:var name="CddPwmAqOutputOnT1COUNTUPEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T1 event occures in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3054,7 +3054,7 @@
 
                                             <!--Design: MCAL-23659-->
                                             <v:var name="CddPwmAqOutputOnT1COUNTDOWNEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T1 event occures in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3078,7 +3078,7 @@
 
                                             <!--Design: MCAL-23660-->
                                             <v:var name="CddPwmAqOutputOnT2COUNTUPEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T2 event occures in Up counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3102,7 +3102,7 @@
 
                                             <!--Design: MCAL-23661-->
                                             <v:var name="CddPwmAqOutputOnT2COUNTDOWNEPWMB" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Action when event generate, when T2 event occures in Down counter mode."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3133,13 +3133,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmEventTrigger" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000313"/>
-                                            
+
                                             <!--Design: MCAL-23662-->
                                             <v:var name="CddPwmEventTriggerId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The Action Qualifier unit ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3158,7 +3158,7 @@
 
                                             <!--Design: MCAL-23663-->
                                             <v:var name="CddPwmForceEventValue" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Forces the ePWM interrupt counter to be pre-interrupt loaded with the init count value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3173,7 +3173,7 @@
 
                                             <!--Design: MCAL-23664-->
                                             <v:var name="CddPwmEnableEventCountInitialValue" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enables the ePWM SOC trigger counter to be pre-event loaded with a count value after a software force"/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3188,7 +3188,7 @@
 
                                             <!--Design: MCAL-23665-->
                                             <v:var name="CddPwmEventCountInitialValue" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Value of the pre-event value that is to be loaded into the SOC trigger event counter."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3205,9 +3205,9 @@
                                                 </a:da>
                                             </v:var>
 
-                                            <!--Design: MCAL-23666-->	
+                                            <!--Design: MCAL-23666-->
                                             <v:var name="CddPwmInterruptCount" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The number of events that have to occur before an interrupt is issued."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3226,7 +3226,7 @@
 
                                             <!--Design: MCAL-23667-->
                                             <v:var name="CddPwmInterruptEventSources" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Events that must be enabled to generate an EPWM interrupt."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3256,13 +3256,13 @@
                                             </v:var>
 
                                             <v:ctr name="CddPwmInterruptMixedSources" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an Interrupt Mixed Sources."/>
                                             <a:a name="UUID" value="ECUC:00000000-1004-1989-0000-000000000313"/>
 
                                             <!--Design: MCAL-23668-->
                                             <v:var name="CddPwmIntMixTbctrZero" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3277,7 +3277,7 @@
 
                                             <!--Design: MCAL-23669-->
                                             <v:var name="CddPwmIntMixTbctrPeriod" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3292,7 +3292,7 @@
 
                                             <!--Design: MCAL-23670-->
                                             <v:var name="CddPwmIntMixTbctrUCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3307,7 +3307,7 @@
 
                                             <!--Design: MCAL-23671-->
                                             <v:var name="CddPwmIntMixTbctrDCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3322,7 +3322,7 @@
 
                                             <!--Design: MCAL-23672-->
                                             <v:var name="CddPwmIntMixTbctrUCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3337,7 +3337,7 @@
 
                                             <!--Design: MCAL-23673-->
                                             <v:var name="CddPwmIntMixTbctrDCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3352,7 +3352,7 @@
 
                                             <!--Design: MCAL-23674-->
                                             <v:var name="CddPwmIntMixTbctrUCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3367,7 +3367,7 @@
 
                                             <!--Design: MCAL-23675-->
                                             <v:var name="CddPwmIntMixTbctrDCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3382,7 +3382,7 @@
 
                                             <!--Design: MCAL-23676-->
                                             <v:var name="CddPwmIntMixTbctrUCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3397,7 +3397,7 @@
 
                                             <!--Design: MCAL-23677-->
                                             <v:var name="CddPwmIntMixTbctrDCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3412,7 +3412,7 @@
 
                                             <!--Design: MCAL-23678-->
                                             <v:var name="CddPwmIntMixDCAEvt1" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3435,13 +3435,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmAdcEventTrigger" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000165"/>
-                                            
+
                                             <!--Design: MCAL-23679-->
                                             <v:var name="CddPwmAdcEventTriggerId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The ADC event triggered ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3459,13 +3459,13 @@
                                             </v:var>
 
                                             <v:ctr name="CddPwmAdcEventTriggerSocA" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000167"/>
-                                            
+
                                             <!--Design: MCAL-23680-->
                                             <v:var name="CddPwmSocAEpwmEvent" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable the SOC trigger generated by the ET submodule."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3480,7 +3480,7 @@
 
                                             <!--Design: MCAL-23681-->
                                             <v:var name="CddPwmSocAForceEventValue" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Forces the ePWM SOC trigger counter to be pre-event loaded with the init count value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3495,7 +3495,7 @@
 
                                             <!--Design: MCAL-23682-->
                                             <v:var name="CddPwmSocAEventCountInitialValueEnable" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enables the ePWM SOC trigger counter to be pre-event loaded with a count value after a software force."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3510,7 +3510,7 @@
 
                                             <!--Design: MCAL-23683-->
                                             <v:var name="CddPwmSocAEventCountInitialValue" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Value of the pre-event value that is to be loaded into the SOC trigger event counter."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3529,7 +3529,7 @@
 
                                             <!--Design: MCAL-23684-->
                                             <v:var name="CddPwmSocAInterruptCount" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The number of events that have to occur before an SOC is issued."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3548,7 +3548,7 @@
 
                                             <!--Design: MCAL-23685-->
                                             <v:var name="CddPwmSocAInterruptEventSources" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Select the SOC trigger source for SOCA."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3580,13 +3580,13 @@
 
 
                                             <v:ctr name="CddPwmSocAMixedSources" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an ADC SOC-A Mixed Sources."/>
                                             <a:a name="UUID" value="ECUC:00000000-1004-1989-0000-000000000314"/>
 
                                             <!--Design: MCAL-23686-->
                                             <v:var name="CddPwmIntSocAMixTbctrZero" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3601,7 +3601,7 @@
 
                                             <!--Design: MCAL-23687-->
                                             <v:var name="CddPwmIntSocAMixTbctrPeriod" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3616,7 +3616,7 @@
 
                                             <!--Design: MCAL-23688-->
                                             <v:var name="CddPwmIntSocAMixTbctrUCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3631,7 +3631,7 @@
 
                                             <!--Design: MCAL-23689-->
                                             <v:var name="CddPwmIntSocAMixTbctrDCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3646,7 +3646,7 @@
 
                                             <!--Design: MCAL-23690-->
                                             <v:var name="CddPwmIntSocAMixTbctrUCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3661,7 +3661,7 @@
 
                                             <!--Design: MCAL-23691-->
                                             <v:var name="CddPwmIntSocAMixTbctrDCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3676,7 +3676,7 @@
 
                                             <!--Design: MCAL-23692-->
                                             <v:var name="CddPwmIntSocAMixTbctrUCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3691,7 +3691,7 @@
 
                                             <!--Design: MCAL-23693-->
                                             <v:var name="CddPwmIntSocAMixTbctrDCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3706,7 +3706,7 @@
 
                                             <!--Design: MCAL-23694-->
                                             <v:var name="CddPwmIntSocAMixTbctrUCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3721,7 +3721,7 @@
 
                                             <!--Design: MCAL-23695-->
                                             <v:var name="CddPwmIntSocAMixTbctrDCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3736,7 +3736,7 @@
 
                                             <!--Design: MCAL-23696-->
                                             <v:var name="CddPwmSocAIntMixDCAEvt1" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3753,12 +3753,12 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmAdcEventTriggerSocB" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000184"/>
                                             <!--Design: MCAL-23697-->
                                             <v:var name="CddPwmSocBEpwmEvent" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable the SOC B trigger generated by the ET submodule."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3773,7 +3773,7 @@
 
                                             <!--Design: MCAL-23698-->
                                             <v:var name="CddPwmSocBForceEventValue" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Forces the ePWM SOC B trigger counter to be pre-event loaded with the init count value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3788,7 +3788,7 @@
 
                                             <!--Design: MCAL-23699-->
                                             <v:var name="CddPwmSocBEventCountInitialValueEnable" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enables the ePWM SOC B trigger counter to be pre-event loaded with a count value after a software force."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3803,7 +3803,7 @@
 
                                             <!--Design: MCAL-23700-->
                                             <v:var name="CddPwmSocBEventCountInitialValue" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Value of the pre-event value that is to be loaded into the SOC B trigger event counter."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3822,7 +3822,7 @@
 
                                             <!--Design: MCAL-23701-->
                                             <v:var name="CddPwmSocBInterruptCount" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: The number of events that have to occur before an SOC B is issued."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3841,7 +3841,7 @@
 
                                             <!--Design: MCAL-23702-->
                                             <v:var name="CddPwmSocBInterruptEventSources" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Select the SOC trigger source for SOCB."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -3872,13 +3872,13 @@
                                             </v:var>
 
                                             <v:ctr name="CddPwmSocBMixedSources" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an ADC SOC-B Mixed Sources."/>
                                             <a:a name="UUID" value="ECUC:00000000-1004-1989-0000-000000000315"/>
 
                                             <!--Design: MCAL-23703-->
                                             <v:var name="CddPwmIntSocBMixTbctrZero" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3893,7 +3893,7 @@
 
                                             <!--Design: MCAL-23704-->
                                             <v:var name="CddPwmIntSocBMixTbctrPeriod" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3908,7 +3908,7 @@
 
                                             <!--Design: MCAL-23705-->
                                             <v:var name="CddPwmIntSocBMixTbctrUCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3923,7 +3923,7 @@
 
                                             <!--Design: MCAL-23706-->
                                             <v:var name="CddPwmIntSocBMixTbctrDCmpA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3938,7 +3938,7 @@
 
                                             <!--Design: MCAL-23707-->
                                             <v:var name="CddPwmIntSocBMixTbctrUCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3953,7 +3953,7 @@
 
                                             <!--Design: MCAL-23708-->
                                             <v:var name="CddPwmIntSocBMixTbctrDCmpB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3968,7 +3968,7 @@
 
                                             <!--Design: MCAL-23709-->
                                             <v:var name="CddPwmIntSocBMixTbctrUCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3983,7 +3983,7 @@
 
                                             <!--Design: MCAL-23710-->
                                             <v:var name="CddPwmIntSocBMixTbctrDCmpC" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -3998,7 +3998,7 @@
 
                                             <!--Design: MCAL-23711-->
                                             <v:var name="CddPwmIntSocBMixTbctrUCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4013,7 +4013,7 @@
 
                                             <!--Design: MCAL-23712-->
                                             <v:var name="CddPwmIntSocBMixTbctrDCmpD" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4028,7 +4028,7 @@
 
                                             <!--Design: MCAL-23713-->
                                             <v:var name="CddPwmSocBIntMixDCAEvt1" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Switches the PWM dead band functionality ON or OFF."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4052,13 +4052,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmTripZone" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000202"/>
-                                            
+
                                             <!--Design: MCAL-23714-->
                                             <v:var name="CddPwmTripZoneId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Pwm Trip Zone unit ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4077,7 +4077,7 @@
 
                                             <!--Design: MCAL-23715-->
                                             <v:var name="CddPwmAdvancedTripZoneAction" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable the trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4091,13 +4091,13 @@
                                             </v:var>
 
                                             <v:ctr name="CddPwmTZA" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual Trip Zone A."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000205"/>
-                                            
+
                                             <!--Design: MCAL-23716-->
                                             <v:var name="CddPwmTZAEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Actions:
                                                                 CDD_PWM_HZ_STATE       ==>>  High impedance output
                                                                 CDD_PWM_HIGH_STATE     ==>>  High voltage state
@@ -4125,7 +4125,7 @@
 
                                             <!--Design: MCAL-23717-->
                                             <v:var name="CddPwmTZAAdvUEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4156,7 +4156,7 @@
 
                                             <!--Design: MCAL-23718-->
                                             <v:var name="CddPwmTZAAdvDEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4187,13 +4187,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmTZB" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual Trip Zone B."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000209"/>
-                                            
+
                                             <!--Design: MCAL-23719-->
                                             <v:var name="CddPwmTZBEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Actions:
                                                                 CDD_PWM_HZ_STATE       ==>>  High impedance output
                                                                 CDD_PWM_HIGH_STATE     ==>>  High voltage state
@@ -4222,7 +4222,7 @@
 
                                             <!--Design: MCAL-23720-->
                                             <v:var name="CddPwmTZBAdvUEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4253,7 +4253,7 @@
 
                                             <!--Design: MCAL-23721-->
                                             <v:var name="CddPwmTZBAdvDEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4284,13 +4284,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmDCA" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual Trip Zone DCA."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000213"/>
-                                            
+
                                             <!--Design: MCAL-23722-->
                                             <v:var name="CddPwmDCAEVT1Event" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Actions:
                                                                 CDD_PWM_HZ_STATE       ==>>  High impedance output
                                                                 CDD_PWM_HIGH_STATE     ==>>  High voltage state
@@ -4319,7 +4319,7 @@
 
                                             <!--Design: MCAL-23723-->
                                             <v:var name="CddPwmDCAEVT1AdvUEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4350,7 +4350,7 @@
 
                                             <!--Design: MCAL-23724-->
                                             <v:var name="CddPwmDCAEVT1AdvDEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4409,7 +4409,7 @@
 
                                             <!--Design: MCAL-23726-->
                                             <v:var name="CddPwmDCAEVT2AdvUEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4440,7 +4440,7 @@
 
                                             <!--Design: MCAL-23727-->
                                             <v:var name="CddPwmDCAEVT2AdvDEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4471,13 +4471,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmDCB" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual Trip Zone DCB."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000220"/>
-                                            
+
                                             <!--Design: MCAL-23728-->
                                             <v:var name="CddPwmDCBEVT1Event" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Actions:
                                                                 CDD_PWM_HZ_STATE       ==>>  High impedance output
                                                                 CDD_PWM_HIGH_STATE     ==>>  High voltage state
@@ -4506,7 +4506,7 @@
 
                                             <!--Design: MCAL-23729-->
                                             <v:var name="CddPwmDCBEVT1AdvUEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4537,7 +4537,7 @@
 
                                             <!--Design: MCAL-23730-->
                                             <v:var name="CddPwmDCBEVT1AdvDEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4568,7 +4568,7 @@
 
                                             <!--Design: MCAL-23731-->
                                             <v:var name="CddPwmDCBEVT2Event" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Actions:
                                                                 CDD_PWM_HZ_STATE       ==>>  High impedance output
                                                                 CDD_PWM_HIGH_STATE     ==>>  High voltage state
@@ -4597,7 +4597,7 @@
 
                                             <!--Design: MCAL-23732-->
                                             <v:var name="CddPwmDCBEVT2AdvUEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4628,7 +4628,7 @@
 
                                             <!--Design: MCAL-23733-->
                                             <v:var name="CddPwmDCBEVT2AdvDEvent" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Trip Zone Advanced Actions:
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH_Z       ==>>  High impedance output
                                                                 CDD_PWM_TZ_ADV_ACTION_HIGH     ==>>  High voltage state
@@ -4659,13 +4659,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmOneShotTZ" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual One Shot Trip Zone."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000227"/>
-                                            
+
                                             <!--Design: MCAL-23734-->
                                             <v:var name="CddPwmOneShotTZ1" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4680,7 +4680,7 @@
 
                                             <!--Design: MCAL-23735-->
                                             <v:var name="CddPwmOneShotTZ2" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4695,7 +4695,7 @@
 
                                             <!--Design: MCAL-23736-->
                                             <v:var name="CddPwmOneShotTZ3" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4710,7 +4710,7 @@
 
                                             <!--Design: MCAL-23737-->
                                             <v:var name="CddPwmOneShotTZ4" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4725,7 +4725,7 @@
 
                                             <!--Design: MCAL-23738-->
                                             <v:var name="CddPwmOneShotTZ5" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4740,7 +4740,7 @@
 
                                             <!--Design: MCAL-23739-->
                                             <v:var name="CddPwmOneShotTZ6" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4755,7 +4755,7 @@
 
                                             <!--Design: MCAL-23740-->
                                             <v:var name="CddPwmOneShotDCAEVT1" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot Digital comapre A event."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4770,7 +4770,7 @@
 
                                             <!--Design: MCAL-23741-->
                                             <v:var name="CddPwmOneShotDCBEVT1" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot Digital comapre B event."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4785,13 +4785,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmCBCTZ" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CBC Trip Zone."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000236"/>
-                                            
+
                                             <!--Design: MCAL-23742-->
                                             <v:var name="CddPwmCBCTZ1" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4806,7 +4806,7 @@
 
                                             <!--Design: MCAL-23743-->
                                             <v:var name="CddPwmCBCTZ2" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4821,7 +4821,7 @@
 
                                             <!--Design: MCAL-23744-->
                                             <v:var name="CddPwmCBCTZ3" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4836,7 +4836,7 @@
 
                                             <!--Design: MCAL-23745-->
                                             <v:var name="CddPwmCBCTZ4" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4851,7 +4851,7 @@
 
                                             <!--Design: MCAL-23746-->
                                             <v:var name="CddPwmCBCTZ5" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4866,7 +4866,7 @@
 
                                             <!--Design: MCAL-23747-->
                                             <v:var name="CddPwmCBCTZ6" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle trip zone."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4880,7 +4880,7 @@
                                             </v:var>
 											<!--Design: MCAL-24147-->
 											<v:var name="CddPwmCBCDCAEVT2" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle Digital comapre A event."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4894,7 +4894,7 @@
                                             </v:var>
 											<!--Design: MCAL-24148-->
                                             <v:var name="CddPwmCBCDCBEVT2" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle Digital comapre B event."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4909,13 +4909,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmInterrupt" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual Trip Zone Interrupt."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000243"/>
-                                            
+
                                             <!--Design: MCAL-23748-->
                                             <v:var name="CddPwmTZCBCInterrupt" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable cycle by cycle trip zone interupt."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4930,7 +4930,7 @@
 
                                             <!--Design: MCAL-23749-->
                                             <v:var name="CddPwmTZOneShotInterrupt" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable one shot trip zone interupt."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4945,7 +4945,7 @@
 
                                             <!--Design: MCAL-23750-->
                                             <v:var name="CddPwmDCAEVT1Interrupt" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable digital compare A event 1 interupt."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4960,7 +4960,7 @@
 
                                             <!--Design: MCAL-23751-->
                                             <v:var name="CddPwmDCAEVT2Interrupt" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable digital compare A event 2 interupt."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4975,7 +4975,7 @@
 
                                             <!--Design: MCAL-23752-->
                                             <v:var name="CddPwmDCBEVT1Interrupt" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable digital compare B event 1 interupt."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -4990,7 +4990,7 @@
 
                                             <!--Design: MCAL-23753-->
                                             <v:var name="CddPwmDCBEVT2Interrupt" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable / disable digital compare B event 2 interupt."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5006,7 +5006,7 @@
 
                                             <!--Design: MCAL-23754-->
                                             <v:var name="CddPwmCycleByCycleTripZoneClearMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: CBC trip zone latch clear signal."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5037,13 +5037,13 @@
                                         <a:da name="MAX" value="32"/>
 
                                         <v:ctr name="CddPwmDeadBand" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000253"/>
-                                            
+
                                             <!--Design: MCAL-23757-->
                                             <v:var name="CddPwmDeadBandId" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Dead band unit ID."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5062,7 +5062,7 @@
 
                                             <!--Design: MCAL-23758-->
                                             <v:var name="CddPwmDeadBandClockMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Dead band clock rate."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5084,7 +5084,7 @@
 
                                             <!--Design: MCAL-23759-->
                                             <v:var name="CddPwmDeadBandGlobalLoad" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Deadband global load configuration."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5099,7 +5099,7 @@
 
                                             <!--Design: MCAL-23760-->
                                             <v:var name="CddPwmDeadBandShadowMode" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable Deadband shandowing."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5114,7 +5114,7 @@
 
                                             <!--Design: MCAL-23761-->
                                             <v:var name="CddPwmDeadBandSwapOutputA" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable swap the output, Channel A path to Out B."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5129,7 +5129,7 @@
 
                                             <!--Design: MCAL-23762-->
                                             <v:var name="CddPwmDeadBandSwapOutputB" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable swap the output, Channel B path to Out A."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5144,7 +5144,7 @@
 
                                             <!--Design: MCAL-23763-->
                                             <v:var name="CddPwmDeadBandDelayLoadMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Shadow to active load event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5157,23 +5157,23 @@
                                               <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                               <a:a name="UUID"
                                                    value="ECUC:00000000-0000-0000-0000-000000000260"/>
-                                              <a:da name="DEFAULT" value="CDD_PWM_RED_LOAD_ON_CNTR_ZERO"/>
+                                              <a:da name="DEFAULT" value="CDD_PWM_DB_LOAD_ON_CNTR_ZERO"/>
                                               <a:da name="RANGE">
-                                                <a:v>CDD_PWM_RED_LOAD_ON_CNTR_ZERO</a:v>
-                                                <a:v>CDD_PWM_RED_LOAD_ON_CNTR_PERIOD</a:v>
-                                                <a:v>CDD_PWM_RED_LOAD_ON_CNTR_ZERO_PERIOD</a:v>
-                                                <a:v>CDD_PWM_RED_LOAD_FREEZE</a:v>
+                                                <a:v>CDD_PWM_DB_LOAD_ON_CNTR_ZERO</a:v>
+                                                <a:v>CDD_PWM_DB_LOAD_ON_CNTR_PERIOD</a:v>
+                                                <a:v>CDD_PWM_DB_LOAD_ON_CNTR_ZERO_PERIOD</a:v>
+                                                <a:v>CDD_PWM_DB_LOAD_FREEZE</a:v>
                                               </a:da>
                                             </v:var>
 
                                             <v:ctr name="CddPwmRedSetting" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000261"/>
-                                            
+
                                             <!--Design: MCAL-23764-->
                                             <v:var name="CddPwmRedGlobalLoad" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable global load for RED."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5188,7 +5188,7 @@
 
                                             <!--Design: MCAL-23765-->
                                             <v:var name="CddPwmRedShadowMode" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable RED shandowing."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5203,7 +5203,7 @@
 
                                             <!--Design: MCAL-23766-->
                                             <v:var name="CddPwmREDEnable" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable the Raising edge delay(RED)."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5218,7 +5218,7 @@
 
                                             <!--Design: MCAL-23767-->
                                             <v:var name="CddPwmREDDelayValue" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Raising edge delay value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5237,7 +5237,7 @@
 
                                             <!--Design: MCAL-23768-->
                                             <v:var name="CddPwmRedDelayLoadMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Shadow to active load RED event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5261,7 +5261,7 @@
 
                                             <!--Design: MCAL-23769-->
                                             <v:var name="CddPwmRedBandPolarity" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: RED polarity: To invert the signal."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5283,7 +5283,7 @@
 
                                             <!--Design: MCAL-23770-->
                                             <v:var name="CddPwmREDDelayInput" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Source for RED."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5305,13 +5305,13 @@
                                             </v:ctr>
 
                                             <v:ctr name="CddPwmFedSetting" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM FED Setting."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000269"/>
-                                            
+
                                             <!--Design: MCAL-23771-->
                                             <v:var name="CddPwmFedGlobalLoad" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable global load for FED."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5326,7 +5326,7 @@
 
                                             <!--Design: MCAL-23772-->
                                             <v:var name="CddPwmFedShadowMode" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable FED shandowing."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5342,7 +5342,7 @@
 
                                             <!--Design: MCAL-23773-->
                                             <v:var name="CddPwmFEDEnable" type="BOOLEAN">
-                                              
+
                                                 <a:a name="DESC" value="EN: Enable the falling edge delay(FED)."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5357,7 +5357,7 @@
 
                                             <!--Design: MCAL-23774-->
                                             <v:var name="CddPwmFEDDelayValue" type="INTEGER">
-                                              
+
                                                 <a:a name="DESC" value="EN: Falling edge delay value."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -5376,7 +5376,7 @@
 
                                             <!--Design: MCAL-23775-->
                                             <v:var name="CddPwmFedDelayLoadMode" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Shadow to active load FED event."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5389,18 +5389,18 @@
                                               <a:a name="SYMBOLICNAMEVALUE" value="false"/>
                                               <a:a name="UUID"
                                                    value="ECUC:00000000-0000-0000-0000-000000000274"/>
-                                              <a:da name="DEFAULT" value="CDD_PWM_RED_LOAD_ON_CNTR_ZERO"/>
+                                              <a:da name="DEFAULT" value="CDD_PWM_FED_LOAD_ON_CNTR_ZERO"/>
                                               <a:da name="RANGE">
-                                                <a:v>CDD_PWM_RED_LOAD_ON_CNTR_ZERO</a:v>
-                                                <a:v>CDD_PWM_RED_LOAD_ON_CNTR_PERIOD</a:v>
-                                                <a:v>CDD_PWM_RED_LOAD_ON_CNTR_ZERO_PERIOD</a:v>
-                                                <a:v>CDD_PWM_RED_LOAD_FREEZE</a:v>
+                                                <a:v>CDD_PWM_FED_LOAD_ON_CNTR_ZERO</a:v>
+                                                <a:v>CDD_PWM_FED_LOAD_ON_CNTR_PERIOD</a:v>
+                                                <a:v>CDD_PWM_FED_LOAD_ON_CNTR_ZERO_PERIOD</a:v>
+                                                <a:v>CDD_PWM_FED_LOAD_FREEZE</a:v>
                                               </a:da>
                                             </v:var>
 
                                             <!--Design: MCAL-23776-->
                                             <v:var name="CddPwmFedBandPolarity" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: FED polarity: To invert the signal."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5422,7 +5422,7 @@
 
                                             <!--Design: MCAL-23777-->
                                             <v:var name="CddPwmFEDDelayInput" type="ENUMERATION">
-                                              
+
                                               <a:a name="DESC" value="EN: Source for FED."/>
                                               <a:a name="IMPLEMENTATIONCONFIGCLASS"
                                                    type="IMPLEMENTATIONCONFIGCLASS">
@@ -5449,7 +5449,7 @@
                                         <a:da name="MIN" value="1"/>
                                         <a:da name="MAX" value="32"/>
                                         <v:ctr name="CddPwmDigitalCompare" type="IDENTIFIABLE">
-                                              
+
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM Digital Compare."/>
                                             <a:a name="UUID" value="ECUC:00000000-1000-0000-0000-000000000277"/>
 											<v:var name="CddPwmDigitalCompareId" type="INTEGER">
@@ -5622,7 +5622,7 @@
                                                      <a:v>EPWM_TZ_EVENT_DCXH_HIGH</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_LOW</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_HIGH</a:v>
-                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>  
+                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>
                                                   </a:da>
 												</v:var>
 												 <!--Design: MCAL-24154-->
@@ -5643,12 +5643,12 @@
                                                      <a:v>EPWM_TZ_EVENT_DCXH_HIGH</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_LOW</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_HIGH</a:v>
-                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>  
+                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>
                                                   </a:da>
 												</v:var>
 												<!--Design: MCAL-24155-->
 												<v:var name="CddPwmAdcSocEventA" type="BOOLEAN">
-												  <a:a name="DESC" value="EN: Enables/Disables the ADC SOC Event for Digital 
+												  <a:a name="DESC" value="EN: Enables/Disables the ADC SOC Event for Digital
 												  compare module A digital compare number 1."/>
 												  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 												  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -5662,7 +5662,7 @@
 												</v:var>
 												 <!--Design: MCAL-24157-->
 												<v:var name="CddPwmSyncOutEventA" type="BOOLEAN">
-												  <a:a name="DESC" value="EN: Enables/Disables the ADC Syncout Event for Digital 
+												  <a:a name="DESC" value="EN: Enables/Disables the ADC Syncout Event for Digital
 												  compare module A digital compare number 1."/>
 												  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 												  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -5964,7 +5964,7 @@
                                                      <a:v>EPWM_TZ_EVENT_DCXH_HIGH</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_LOW</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_HIGH</a:v>
-                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>  
+                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>
                                                   </a:da>
 												</v:var>
 												<!--Design: MCAL-24171-->
@@ -5985,12 +5985,12 @@
                                                      <a:v>EPWM_TZ_EVENT_DCXH_HIGH</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_LOW</a:v>
                                                      <a:v>EPWM_TZ_EVENT_DCXL_HIGH</a:v>
-                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>  
+                                                     <a:v>EPWM_TZ_EVENT_DCXL_HIGH_DCXH_LOW</a:v>
                                                   </a:da>
 												</v:var>
 												<!--Design: MCAL-24172-->
 												<v:var name="CddPwmAdcSocEventB" type="BOOLEAN">
-												  <a:a name="DESC" value="EN: Enables/Disables the ADC SOC Event for Digital 
+												  <a:a name="DESC" value="EN: Enables/Disables the ADC SOC Event for Digital
 												  compare module B digital compare number 1."/>
 												  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 												  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -6004,7 +6004,7 @@
 												</v:var>
 												<!--Design: MCAL-24173-->
 												<v:var name="CddPwmSyncOutEventB" type="BOOLEAN">
-												  <a:a name="DESC" value="EN: Enables/Disables the ADC Syncout Event for Digital 
+												  <a:a name="DESC" value="EN: Enables/Disables the ADC Syncout Event for Digital
 												  compare module B digital compare number 1."/>
 												  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 												  <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -6156,7 +6156,7 @@
 											<v:ctr name="CddPwmUseBlankingWindow" type="IDENTIFIABLE">
                                                 <a:a name="DESC" value="EN: CDD PWM Use Blanking window."/>
                                                 <a:a name="UUID" value="ECUC:00700000-1040-0000-0000-000000000277"/>
-                                                <!--Design: MCAL-24178-->												
+                                                <!--Design: MCAL-24178-->
 												<v:var name="BlankingWindowStartMixedEvent" type="ENUMERATION">
 												  <a:a name="DESC" value="EN: Select the mixed event source that starts the blanking window counter (And resets the counter)" />
 												  <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
@@ -6214,7 +6214,7 @@
 												  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
 												  <a:a name="UUID" value="ECUC:00047000-0000-0000-0000-000000000026"/>
 												  <a:da name="ENABLE" type="XPath" expr="(node:value(../CddPwmUseBlankingWindow) ='true')" />
-												  <a:da name="DEFAULT" value="0"/>                                                
+												  <a:da name="DEFAULT" value="0"/>
 												  <a:da name="INVALID" type="Range">
 												    <a:tst expr="&lt;=65535"/>
 												    <a:tst expr="&gt;=0"/>
@@ -6232,7 +6232,7 @@
 												  <a:a name="SYMBOLICNAMEVALUE" value="false"/>
 												  <a:a name="UUID" value="ECUC:00004500-0000-0000-0000-000000000026"/>
 												  <a:da name="ENABLE" type="XPath" expr="(node:value(../CddPwmUseBlankingWindow) ='true')" />
-												  <a:da name="DEFAULT" value="0"/>                                                
+												  <a:da name="DEFAULT" value="0"/>
 												  <a:da name="INVALID" type="Range">
 												    <a:tst expr="&lt;=65535"/>
 												    <a:tst expr="&gt;=0"/>
@@ -6314,7 +6314,7 @@
 												    <a:v>Events_11</a:v>
 												    <a:v>Events_12</a:v>
 												  </a:da>
-												</v:var>	
+												</v:var>
 												<!--Design: MCAL-24186-->
 												<v:var name="CddPwmStartValleyCapture" type="ENUMERATION">
 												  <a:a name="DESC" value="EN: The number of trigger events required to start the valley capture count" />
@@ -6446,7 +6446,7 @@
 											      <a:a name="SYMBOLICNAMEVALUE" value="false"/>
 											      <a:a name="UUID" value="ECUC:00000000-0000-0000-0480-000000000026"/>
                                                  <a:da name="ENABLE" type="XPath" expr="(node:value(../CddPwmDelayedOutputEdgeFilter) ='true')" />
-											      <a:da name="DEFAULT" value="0"/>                                                
+											      <a:da name="DEFAULT" value="0"/>
 											      <a:da name="INVALID" type="Range">
 											      <a:tst expr="&lt;=65535"/>
 											      <a:tst expr="&gt;=0"/>
@@ -6493,7 +6493,7 @@
 											      <a:da name="DEFAULT" value="false"/>
 											    </v:var>
 												<!--Design: MCAL-24193-->
-											    <v:var name="CddPwmUseEdgeFilter" type="BOOLEAN">											      
+											    <v:var name="CddPwmUseEdgeFilter" type="BOOLEAN">
 											      <a:a name="DESC" value="EN: The DCEVTFILT signal and DCCAP (counter capture) will use the output of the edge filter"/>
 											      <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
 											      <icc:v vclass="PreCompile">VariantPreCompile</icc:v>
@@ -6535,7 +6535,7 @@
                                         <v:ctr name="CddPwmChopper" type="IDENTIFIABLE">
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000277"/>
-                                            
+
                                             <!--Design: MCAL-23778-->
                                             <v:var name="CddPwmChopperId" type="INTEGER">
                                                 <a:a name="DESC" value="EN: PWM Chopper unit ID."/>
@@ -6555,7 +6555,7 @@
                                             </v:var>
 
                                             <!--Design: MCAL-23779-->
-                                            <v:var name="CddPwmChopperEnable" type="BOOLEAN">   
+                                            <v:var name="CddPwmChopperEnable" type="BOOLEAN">
                                                 <a:a name="DESC" value="EN: Enable the Chopper."/>
                                                 <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
                                                     <icc:v class="PreCompile">VariantPreCompile</icc:v>
@@ -6633,7 +6633,7 @@
                                     <v:ctr name="CddPwmHighResolutionPwm" type="IDENTIFIABLE">
                                             <a:a name="DESC" value="EN: Configuration of an individual CDD PWM channel."/>
                                             <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000283"/>
-                                            
+
                                             <!--Design: MCAL-23783-->
                                             <v:var name="CddPwmHRPwmId" type="INTEGER">
                                                 <a:a name="DESC" value="EN: HR Pwm unit ID."/>
@@ -6686,8 +6686,8 @@
                                         <v:ctr name="CddPwmDutyPeriodPhaseCtrl" type="IDENTIFIABLE">
                                                 <a:a name="DESC" value="EN: Configuration of a HR duty and period control for individual CDD PWM channel."/>
                                                 <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000287"/>
-                                            
-                                            <!--Design: MCAL-23786-->	
+
+                                            <!--Design: MCAL-23786-->
                                             <v:var name="CddPwmCtrlModeHRPWMA" type="ENUMERATION">
                                                 <a:a name="DESC" value="EN: Control Mode For Channel A"/>
                                                     <a:a name="IMPLEMENTATIONCONFIGCLASS" type="IMPLEMENTATIONCONFIGCLASS">
@@ -6937,7 +6937,7 @@
                                         <v:ctr name="CddPwmDeadbandCtrl" type="IDENTIFIABLE">
                                                 <a:a name="DESC" value="EN: Configuration of a HR deadband control"/>
                                                 <a:a name="UUID" value="ECUC:00000000-0000-0000-0000-000000000301"/>
-                                                
+
                                             <!--Design: MCAL-23799-->
                                             <v:var name="CddPwmDeadbandEdgeMode" type="ENUMERATION">
                                                 <a:a name="DESC" value="EN: HR PWM Deadband MEP Edge Mode Selection"/>

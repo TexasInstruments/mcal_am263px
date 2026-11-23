@@ -1923,26 +1923,26 @@ typedef struct Cdd_Pwm_DigitalCompareType_s
  */
 typedef struct Cdd_Pwm_DeadBandType_s
 {
-    EPWM_DeadBandClockMode       channelDeadBandClockMode;
-    boolean                      channelDeadBandGlobalLoad;
-    boolean                      channelDeadBandShadowMode;
-    boolean                      channelRedGlobalLoad;
-    boolean                      channelRedShadowMode;
-    boolean                      channelFedGlobalLoad;
-    boolean                      channelFedShadowMode;
-    boolean                      channelREDEnable;
-    boolean                      channelFEDEnable;
-    boolean                      channelDeadBandSwapOutputA;
-    boolean                      channelDeadBandSwapOutputB;
-    uint16                       channelREDDelayValue;
-    uint16                       channelFEDDelayValue;
-    EPWM_RisingEdgeDelayLoadMode channelDeadBandDelayLoadMode;
-    EPWM_RisingEdgeDelayLoadMode channelPwmRedDelayLoadMode;
-    EPWM_RisingEdgeDelayLoadMode channelPwmFedDelayLoadMode;
-    EPWM_DeadBandPolarity        channelPwmRedBandPolarity;
-    EPWM_DeadBandPolarity        channelPwmFedBandPolarity;
-    uint16                       channelPwmREDDelayInput;
-    uint16                       channelPwmFEDDelayInput;
+    EPWM_DeadBandClockMode        channelDeadBandClockMode;
+    boolean                       channelDeadBandGlobalLoad;
+    boolean                       channelDeadBandShadowMode;
+    boolean                       channelRedGlobalLoad;
+    boolean                       channelRedShadowMode;
+    boolean                       channelFedGlobalLoad;
+    boolean                       channelFedShadowMode;
+    boolean                       channelREDEnable;
+    boolean                       channelFEDEnable;
+    boolean                       channelDeadBandSwapOutputA;
+    boolean                       channelDeadBandSwapOutputB;
+    uint16                        channelREDDelayValue;
+    uint16                        channelFEDDelayValue;
+    EPWM_DeadBandControlLoadMode  channelDeadBandDelayLoadMode;
+    EPWM_RisingEdgeDelayLoadMode  channelPwmRedDelayLoadMode;
+    EPWM_FallingEdgeDelayLoadMode channelPwmFedDelayLoadMode;
+    EPWM_DeadBandPolarity         channelPwmRedBandPolarity;
+    EPWM_DeadBandPolarity         channelPwmFedBandPolarity;
+    uint16                        channelPwmREDDelayInput;
+    uint16                        channelPwmFEDDelayInput;
 } Cdd_Pwm_deadBandType;
 
 /*!<   Chopper of Structure.  */

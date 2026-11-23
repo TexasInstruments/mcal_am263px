@@ -34,6 +34,11 @@ endif
 ifeq ($(PLATFORM),$(filter $(PLATFORM), am261))
   SOC = am261
   export EB_PLATFORM?=AM261x
+  ifeq ($(PACKAGE),ZNC)
+    PACKAGE = ZNC
+  else
+    PACKAGE = ZCZ
+  endif
 endif
 
 export CORE?=r5f0_0

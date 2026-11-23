@@ -313,10 +313,13 @@ Reset Reason Config
 /** \brief MCU PLL timeout.*/
 #define MCU_PLL_TIMEOUT_DURATION            (6600U)
 
+#define MCU_CFG_DEM_ENABLE  (STD_OFF)
 
 
 
 
+
+/* MCU DEM Event Configuration*/
 
 
 /* @} */

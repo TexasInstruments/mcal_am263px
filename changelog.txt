@@ -1,3 +1,227 @@
+commit 359b71497f130772f3767e27eea2b3b67642f9f5
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Thu Nov 12 10:40:32 2026 +0530
+
+    all: CDD PWM: Updated mode specific macros in plugin
+    
+    -The a,cros used for Fed, red and deadband delay load modes were all the same, though the enum values are same, but diffrent macros are defined in header, but plugin used one set of macros for all modes, this is now updated
+    
+    Fixes: MCAL-43184
+    
+    Signed-off-by: Swathi G Bhat
+
+ build/ebtresos/makefile                            |    2 +
+ mcal/Epwm/V0/Cdd_Pwm_Types.h                       |   40 +-
+ .../soc/am261/tresos/.prefs/pref_general.xdm       |  266 +-
+ .../soc/am261/tresos/config/Cdd_Pwm.xdm            |  760 +-
+ .../soc/am261/tresos/output/include/Adc_Cfg.h      |  706 +-
+ .../soc/am261/tresos/output/include/Cdd_Dma_Cfg.h  |  470 +-
+ .../soc/am261/tresos/output/include/Cdd_Pwm_Cfg.h  |  630 +-
+ .../soc/am261/tresos/output/include/Mcu_Cfg.h      | 1513 ++--
+ .../soc/am261/tresos/output/src/Adc_Cfg.c          |  116 +-
+ .../soc/am261/tresos/output/src/Adc_PBcfg.c        |  416 +-
+ .../soc/am261/tresos/output/src/Cdd_Dma_Cfg.c      |  634 +-
+ .../soc/am261/tresos/output/src/Cdd_Pwm_Cfg.c      |    6 +-
+ .../soc/am261/tresos/output/src/Cdd_Pwm_PBcfg.c    |  994 +--
+ .../soc/am261/tresos/output/src/Mcu_Cfg.c          |    8 +-
+ .../soc/am261/tresos/output/src/Mcu_PBcfg.c        |  846 +--
+ .../soc/am261/tresos/output/swcd/Adc_Bswmd.arxml   | 1591 ++---
+ .../am261/tresos/output/swcd/Cdd_Dma_Bswmd.arxml   | 1062 +--
+ .../am261/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml   | 4146 +++++------
+ .../soc/am261/tresos/output/swcd/Mcu_Bswmd.arxml   |  954 +--
+ .../soc/am263/tresos/.prefs/pref_general.xdm       |  266 +-
+ .../soc/am263/tresos/config/Cdd_Pwm.xdm            |  760 +-
+ .../soc/am263/tresos/output/include/Adc_Cfg.h      |  714 +-
+ .../soc/am263/tresos/output/include/Cdd_Dma_Cfg.h  |  478 +-
+ .../soc/am263/tresos/output/include/Cdd_Pwm_Cfg.h  |  676 +-
+ .../soc/am263/tresos/output/include/Mcu_Cfg.h      | 1491 ++--
+ .../soc/am263/tresos/output/src/Adc_Cfg.c          |  116 +-
+ .../soc/am263/tresos/output/src/Adc_PBcfg.c        |  416 +-
+ .../soc/am263/tresos/output/src/Cdd_Dma_Cfg.c      |  844 +--
+ .../soc/am263/tresos/output/src/Cdd_Pwm_Cfg.c      |    6 +-
+ .../soc/am263/tresos/output/src/Cdd_Pwm_PBcfg.c    |  960 +--
+ .../soc/am263/tresos/output/src/Mcu_Cfg.c          |    8 +-
+ .../soc/am263/tresos/output/src/Mcu_PBcfg.c        |  906 +--
+ .../soc/am263/tresos/output/swcd/Adc_Bswmd.arxml   | 1737 ++---
+ .../am263/tresos/output/swcd/Cdd_Dma_Bswmd.arxml   | 1033 +--
+ .../am263/tresos/output/swcd/Cdd_Pwm_Bswmd.arxml   | 7313 ++++++++++----------
+ .../soc/am263/tresos/output/swcd/Mcu_Bswmd.arxml   |  954 +--
+ .../soc/am263px/tresos/config/Cdd_Pwm.xdm          |  762 +-
+ .../soc/am263px/tresos/output/src/Cdd_Pwm_PBcfg.c  |    4 +-
+ mcal/examples/Cdd_Cmpss/Cdd_Pwm_PBcfg.c            |    8 +-
+ .../soc/am261/r5f0_0/src/Cdd_Pwm_PBcfg.c           |    8 +-
+ .../soc/am261/tresos/config/Cdd_Pwm.xdm            |    8 +-
+ .../soc/am263/r5f0_0/src/Cdd_Pwm_PBcfg.c           |    8 +-
+ .../soc/am263/r5f0_0/src/Cdd_Pwm_PBcfg_Tz.c        |    8 +-
+ .../soc/am263/tresos/config/Cdd_Pwm.xdm            |    8 +-
+ .../soc/am263px/r5f0_0/src/Cdd_Pwm_PBcfg.c         |    8 +-
+ .../soc/am263px/r5f0_0/src/Cdd_Pwm_PBcfg_Tz.c      |    8 +-
+ .../soc/am263px/tresos/config/Cdd_Pwm.xdm          |    8 +-
+ .../AM261x/Cdd_Pwm_TI_AM261x/config/Cdd_Pwm.arxml  |   28 +-
+ .../AM261x/Cdd_Pwm_TI_AM261x/config/Cdd_Pwm.xdm    |  626 +-
+ .../Cdd_Pwm_TI_AM261x/config_ext/Cdd_Pwm_Rec.xdm   | 1284 ++--
+ .../Cdd_Pwm_TI_AM263Px/config/Cdd_Pwm.arxml        |   28 +-
+ .../AM263Px/Cdd_Pwm_TI_AM263Px/config/Cdd_Pwm.xdm  |  626 +-
+ .../Cdd_Pwm_TI_AM263Px/config_ext/Cdd_Pwm_Rec.xdm  | 1284 ++--
+ .../AM263x/Cdd_Pwm_TI_AM263x/config/Cdd_Pwm.arxml  |   28 +-
+ .../AM263x/Cdd_Pwm_TI_AM263x/config/Cdd_Pwm.xdm    |  630 +-
+ .../Cdd_Pwm_TI_AM263x/config_ext/Cdd_Pwm_Rec.xdm   | 1284 ++--
+ mcal_test/cmpss_test/testLib/Cdd_Pwm_PBcfg.c       |    8 +-
+ .../config_1/tresos/output/src/Cdd_Pwm_PBcfg.c     |  150 +-
+ .../config_11/tresos/output/src/Cdd_Pwm_PBcfg.c    |  118 +-
+ .../config_12/tresos/output/src/Cdd_Pwm_PBcfg.c    |  116 +-
+ .../config_13/tresos/output/src/Cdd_Pwm_PBcfg.c    |  116 +-
+ .../config_14/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_15/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_16/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_17/tresos/output/src/Cdd_Pwm_PBcfg.c    |  154 +-
+ .../config_18/tresos/output/src/Cdd_Pwm_PBcfg.c    |  400 +-
+ .../config_19/tresos/output/src/Cdd_Pwm_PBcfg.c    |  400 +-
+ .../config_2/tresos/output/src/Cdd_Pwm_PBcfg.c     |  222 +-
+ .../r5f0_0/config_22/tresos/config/Cdd_Pwm.xdm     | 1330 ++--
+ .../config_22/tresos/output/src/Cdd_Pwm_PBcfg.c    |  196 +-
+ .../config_3/tresos/output/src/Cdd_Pwm_PBcfg.c     |  124 +-
+ .../config_4/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_5/tresos/output/src/Cdd_Pwm_PBcfg.c     |  128 +-
+ .../config_6/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_7/tresos/output/src/Cdd_Pwm_PBcfg.c     |  124 +-
+ .../config_8/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_91/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_92/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_93/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_94/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_1/tresos/output/src/Cdd_Pwm_PBcfg.c     |  220 +-
+ .../config_11/tresos/output/src/Cdd_Pwm_PBcfg.c    |  118 +-
+ .../config_12/tresos/output/src/Cdd_Pwm_PBcfg.c    |  116 +-
+ .../config_13/tresos/output/src/Cdd_Pwm_PBcfg.c    |  116 +-
+ .../config_14/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_15/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_16/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_17/tresos/output/src/Cdd_Pwm_PBcfg.c    |  154 +-
+ .../config_18/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../config_19/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../config_2/tresos/output/src/Cdd_Pwm_PBcfg.c     |  222 +-
+ .../config_20/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../config_21/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../config_22/tresos/output/src/Cdd_Pwm_PBcfg.c    |  196 +-
+ .../config_3/tresos/output/src/Cdd_Pwm_PBcfg.c     |  124 +-
+ .../config_4/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_5/tresos/output/src/Cdd_Pwm_PBcfg.c     |  128 +-
+ .../config_6/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_7/tresos/output/src/Cdd_Pwm_PBcfg.c     |  124 +-
+ .../config_8/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_91/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_92/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_93/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_94/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_1/tresos/output/src/Cdd_Pwm_PBcfg.c     |  220 +-
+ .../config_11/tresos/output/src/Cdd_Pwm_PBcfg.c    |  118 +-
+ .../config_12/tresos/output/src/Cdd_Pwm_PBcfg.c    |  116 +-
+ .../config_13/tresos/output/src/Cdd_Pwm_PBcfg.c    |  116 +-
+ .../config_14/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_15/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_16/tresos/output/src/Cdd_Pwm_PBcfg.c    |  120 +-
+ .../config_17/tresos/output/src/Cdd_Pwm_PBcfg.c    |  154 +-
+ .../config_18/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../config_19/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../config_2/tresos/output/src/Cdd_Pwm_PBcfg.c     |  222 +-
+ .../config_20/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../config_21/tresos/output/src/Cdd_Pwm_PBcfg.c    | 1060 +--
+ .../r5f0_0/config_22/tresos/config/Cdd_Pwm.xdm     | 1330 ++--
+ .../config_22/tresos/output/src/Cdd_Pwm_PBcfg.c    |  196 +-
+ .../config_3/tresos/output/src/Cdd_Pwm_PBcfg.c     |  124 +-
+ .../config_4/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_5/tresos/output/src/Cdd_Pwm_PBcfg.c     |  130 +-
+ .../config_6/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_7/tresos/output/src/Cdd_Pwm_PBcfg.c     |  124 +-
+ .../config_8/tresos/output/src/Cdd_Pwm_PBcfg.c     |   92 +-
+ .../config_91/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_92/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_93/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ .../config_94/tresos/output/src/Cdd_Pwm_PBcfg.c    |  164 +-
+ 129 files changed, 30513 insertions(+), 30291 deletions(-)
+
+commit 3c910b8106125d3545e4f0c814540f08e828a6bc
+Author: Akash <a-verma3@ti.com>
+Date:   Mon Oct 5 17:58:58 2026 +0530
+
+    am261x: port: Added port plugin for platform = am261, package = ZNC .
+    
+    Fixes: MCAL-42004
+    
+    Signed-off-by: Akash Verma
+
+ build/Rules.make                                   |     5 +
+ build/amdc/makefile                                |     2 +
+ build/arxml_gen/makefile                           |     2 +
+ build/ccs_makefile                                 |     6 +
+ build/ebtresos/makefile                            |    10 +-
+ build/ebtresos/makefile.mk                         |     5 +
+ build/makerules/rules_r5f.mk                       |     3 +
+ build/signing/makefile                             |     8 +
+ mcal/examples/Port/Makefile                        |     4 +
+ .../Port/soc/am261/r5f0_0/PortApp_Startup.h        |     6 +-
+ .../{ => am261_zcz}/makefile_ccs_bootimage_gen     |     0
+ .../{ => am261_zcz}/makefile_projectspec           |     0
+ .../{ => am261_zcz}/port_app.projectspec           |     4 +-
+ .../am261_znc/makefile_ccs_bootimage_gen           |   130 +
+ .../ti-arm-clang/am261_znc/makefile_projectspec    |    42 +
+ .../am261_znc/port_app_znc.projectspec             |   185 +
+ .../soc/am261/tresos_znc/.prefs/pref_general.xdm   |    91 +
+ .../Port_Demo_Cfg/soc/am261/tresos_znc/.project    |    13 +
+ .../soc/am261/tresos_znc/config/Port.xdm           |  2483 ++++
+ .../soc/am261/tresos_znc/output/include/Port_Cfg.h |   902 ++
+ .../soc/am261/tresos_znc/output/src/Port_Cfg.c     |     4 +
+ .../soc/am261/tresos_znc/output/src/Port_PBcfg.c   |   930 ++
+ .../am261/tresos_znc/output/swcd/Port_Bswmd.arxml  |  1755 +++
+ mcal/examples_config/Port_Demo_Cfg/srcs.mk         |     9 +-
+ mcal/examples_config/Port_Demo_Cfg/srcs_port.mk    |     9 +-
+ mcal/include/hw/am261/hw_ctrl_core.h               |   490 +-
+ .../AM261x/Port_TI_AM261x_ZNC/META-INF/MANIFEST.MF |    14 +
+ .../config/Port_AM261x_NonEB.xdm                   |  3612 ++++++
+ .../config/Port_AM261x_ZNC.arxml                   | 12290 +++++++++++++++++++
+ .../Port_TI_AM261x_ZNC/config/Port_AM261x_ZNC.xdm  |   848 ++
+ .../Port_TI_AM261x_ZNC/config_ext/Port_Rec.xdm     |  2483 ++++
+ .../Port_TI_AM261x_ZNC/generate/include/Port_Cfg.h |   972 ++
+ .../Port_TI_AM261x_ZNC/generate/src/Port_Cfg.c     |   330 +
+ .../Port_TI_AM261x_ZNC/generate/src/Port_PBcfg.c   |   330 +
+ .../generate_swcd/swcd/Port_Bswmd.arxml            |  1926 +++
+ .../plugins/AM261x/Port_TI_AM261x_ZNC/plugin.xml   |   133 +
+ .../resources/AM261x_Port_ZNC.properties           |  1069 ++
+ release_notes.md                                   |     9 +-
+ 38 files changed, 30968 insertions(+), 146 deletions(-)
+
+commit 912099dcc51e6e7073ad2edfc9a12c2c966855e1
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Nov 23 11:40:47 2026 +0530
+
+    all: all: Release note update - updated fixed defects and added CSP
+    details
+    
+    -Spell/grammer check run on releasenote
+    
+    -Updated CSP details
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ release_notes.md | 101 ++++++++++++++++++++++++++++---------------------------
+ 1 file changed, 51 insertions(+), 50 deletions(-)
+
+commit d25f5735ac24973fb96684659bf0e63d84fd64c9
+Author: Swathi G Bhat <s-bhat2@ti.com>
+Date:   Mon Nov 23 10:43:40 2026 +0530
+
+    am263x: all: Updated resouce file for astra CCS test runs
+    
+    Fixes: MCAL-35550
+    
+    Signed-off-by: Swathi G Bhat
+
+ mcal_test/astra_robot_files/am263x/am263x_ccs.resource | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
 commit 0ba11471e087627a720938b2a50f3e3cd9b306ea
 Author: Akash <a-verma3@ti.com>
 Date:   Thu Nov 19 14:40:23 2026 +0530

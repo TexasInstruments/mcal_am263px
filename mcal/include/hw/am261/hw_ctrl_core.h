@@ -2767,399 +2767,587 @@ typedef struct {
 
 /* PIN P1, OSPI0_CSN0 functionality */
 #define PINP1_GPIO0                            0X000U
-
+/*For ZNC Package*/
+#define PINR1_GPIO0                            0X000U
 
 /* PIN R3, OSPI0_CSN1  functionality */
 #define PINR3_GPIO1                            0X004U
-
+/*For ZNC Package*/
+#define PINR2_GPIO1                            0X004U
 
 /* PIN N2, OSPI0_CLK functionality */
 #define PINN2_GPIO2                            0X008U
-
+/*For ZNC Package*/
+#define PINM2_GPIO2                            0X008U
 
 /* PIN N1, OSPI0_D0 functionality */
-#define PINN1_GPIO3                            0X0CU
+#define PINN1_GPIO3                            0X00CU
+/*For ZNC Package*/
+#define PINN2_GPIO3                            0X00CU
 
 /* PIN N4,OSPI0_D1 functionality */
-#define PINN4_GPIO4                             0X010U
-
+#define PINN4_GPIO4                            0X010U
+/*For ZNC Package*/
+#define PINN1_GPIO4                            0X010U
 
 /* PIN M4, OSPI0_D2 functionality */
-#define PINM4_GPIO5                             0X14U
-
+#define PINM4_GPIO5                            0X014U
+/*For ZNC Package*/
+#define PINP2_GPIO5                            0X014U
 
 /* PIN P3, OSPI0_D3 functionality */
-#define PINP3_GPIO6                             0X18U
-
+#define PINP3_GPIO6                            0X018U
+/*For ZNC Package*/
+#define PINP1_GPIO6                            0X018U
 
 /* PIN M1, MCAN0_RX functionality */
-#define PINM1_GPIO7                          0X1CU
+#define PINM1_GPIO7                            0X01CU
+/*For ZNC Package*/
+#define PINK2_GPIO7                            0X01CU
 
-/* PIN L1, MCAN0_TX functionality */
-#define PINL1_GPIO8                          0X20U
-
+/* PIN L1, MCAN0_TX functionality. ZCZ and ZNC package */
+#define PINL1_GPIO8                            0X020U
 
 /* PIN L2, MCAN1_RX functionality */
-#define PINL2_GPIO9                          0X24U
+#define PINL2_GPIO9                            0X024U
+/*For ZNC Package*/
+#define PINJ2_GPIO9                            0X024U
 
-
-/* PIN K1, MCAN1_TX functionality */
-#define PINK1_GPIO10                          0X28U
-
+/* PIN K1, MCAN1_TX functionality. ZCZ and ZNC package */
+#define PINK1_GPIO10                           0X028U
 
 /* PIN C11, SPI0_CS0 functionality */
-#define PINC11_GPIO11                       0X02CU
+#define PINC11_GPIO11                          0X02CU
+/*For ZNC Package*/
+#define PINC13_GPIO11                          0X02CU
 
 /* PIN A11, SPI0_CLK functionality */
 #define PINA11_GPIO12                          0X030U
+/*For ZNC Package*/
+#define PINA12_GPIO12                          0X030U
 
-/*PIN C10, SPI0_D0 functionality */
-#define PINC10_GPIO13                           0X034U
+/* PIN C10, SPI0_D0 functionality */
+#define PINC10_GPIO13                          0X034U
+/*For ZNC Package*/
+#define PINB12_GPIO13                          0X034U
 
-/* PIN B11, SPI0_D1 functionality */
-#define PINB11_GPIO14                           0X38U
+/* PIN B11, SPI0_D1 functionality. ZCZ and ZNC package */
+#define PINB11_GPIO14                          0X038U
 
 /* PIN C9, SPI1_CS0 functionality */
 #define PINC9_GPIO15                           0X03CU
 
 /* PIN A10, SPI1_CLK functionality */
-#define PINA10_GPIO16                          0X40U
+#define PINA10_GPIO16                          0X040U
 
 /* PIN B10, SPI1_D0 functionality */
-#define PINB10_GPIO17                          0X44U
+#define PINB10_GPIO17                          0X044U
 
 /* PIN D9, SPI1_D1 functionality */
-#define PIND9_GPIO18                           0X48U
+#define PIND9_GPIO18                           0X048U
+
 
 /* PIN A9, LIN1_RXD functionality */
-#define PINA9_GPIO19                          0X4CU
-
+#define PINA9_GPIO19                           0X04CU
+/*For ZNC Package*/
+#define PINA11_GPIO19                          0X04CU
 
 /* PIN B9, LIN1_TXD functionality */
-#define PINB9_GPIO20                         0X50U
-
+#define PINB9_GPIO20                           0X050U
+/*For ZNC Package*/
+#define PINB10_GPIO20                          0X050U
 
 /* PIN B8, LIN2_RXD functionality */
-#define PINB8_GPIO21                       0X54U
+#define PINB8_GPIO21                           0X054U
+/*For ZNC Package*/
+#define PINA10_GPIO21                          0X054U
 
 /* PIN A8, LIN2_TXD functionality */
-#define PINA8_GPIO22                          0X58U
+#define PINA8_GPIO22                           0X058U
+/*For ZNC Package*/
+#define PINB9_GPIO22                           0X058U
 
 /* PIN D7, I2C1_SCL functionality */
-#define PIND7_GPIO23                          0X5CU
+#define PIND7_GPIO23                           0X05CU
 
 /* PIN C8, I2C1_SDA functionality */
-#define PINC8_GPIO24                          0X060U
+#define PINC8_GPIO24                           0X060U
 
 /* PIN C7, UART0_RTSN functionality */
-#define PINC7_GPIO25                          0X064U
+#define PINC7_GPIO25                           0X064U
+/*For ZNC Package*/
+#define PINC9_GPIO25                           0X064U
 
 /* PIN B7, UART0_CTSN functionality */
-#define PINB7_GPIO26                          0X068U
+#define PINB7_GPIO26                           0X068U
+/*For ZNC Package*/
+#define PINA9_GPIO26                           0X068U
 
 /* PIN A7, UART0_RXD functionality */
-#define PINA7_GPIO27                          0X06CU
+#define PINA7_GPIO27                           0X06CU
+/*For ZNC Package*/
+#define PINA8_GPIO27                           0X06CU
 
 /* PIN A6, UART0_TXD functionality */
-#define PINA6_GPIO28                          0X070U
+#define PINA6_GPIO28                           0X070U
+/*For ZNC Package*/
+#define PINB8_GPIO28                           0X070U
 
 /* PIN R17, RGMII1_RXC functionality */
 #define PINR17_GPIO29                          0X074U
+/*For ZNC Package*/
+#define PINV19_GPIO29                          0X074U
 
 /* PIN R18, RGMII1_RX_CTL functionality */
-#define PINR18_GPIO30                          0X78U
+#define PINR18_GPIO30                          0X078U
+/*For ZNC Package*/
+#define PINU17_GPIO30                          0X078U
 
 /* PIN U17, RGMII1_RD0 functionality */
-#define PINU17_GPIO31                           0X07CU
+#define PINU17_GPIO31                          0X07CU
+/*For ZNC Package*/
+#define PINW17_GPIO31                          0X07CU
 
 /* PIN T17, RGMII1_RD1 functionality */
-#define PINT17_GPIO32                           0X80U
+#define PINT17_GPIO32                          0X080U
+/*For ZNC Package*/
+#define PINV17_GPIO32                          0X080U
 
 /* PIN U18, RGMII1_RD2 functionality */
 #define PINU18_GPIO33                          0X084U
+/*For ZNC Package*/
+#define PINW18_GPIO33                          0X084U
 
 /* PIN T18, RGMII1_RD3 functionality */
-#define PINT18_GPIO34                          0X88U
+#define PINT18_GPIO34                          0X088U
+/*For ZNC Package*/
+#define PINV18_GPIO34                          0X088U
 
 /* PIN N18, RGMII1_TXC functionality */
-#define PINN18_GPIO35                           0X08CU
+#define PINN18_GPIO35                          0X08CU
+/*For ZNC Package*/
+#define PINR18_GPIO35                          0X08CU
 
 /* PIN M18, RGMII1_TX_CTL functionality */
-#define PINM18_GPIO36                           0X90U
+#define PINM18_GPIO36                          0X090U
+/*For ZNC Package*/
+#define PINT19_GPIO36                          0X090U
 
 /* PIN P16, RGMII1_TD0 functionality */
 #define PINP16_GPIO37                          0X094U
+/*For ZNC Package*/
+#define PINU18_GPIO37                          0X094U
 
 /* PIN P17, RGMII1_TD1 functionality */
 #define PINP17_GPIO38                          0X098U
+/*For ZNC Package*/
+#define PINU19_GPIO38                          0X098U
 
 /* PIN P18, RGMII1_TD2 functionality */
-#define PINP18_GPIO39                           0X9CU
+#define PINP18_GPIO39                          0X09CU
+/*For ZNC Package*/
+#define PINR17_GPIO39                          0X09CU
 
 /* PIN N17, RGMII1_TD3 functionality */
-#define PINN17_GPIO40                         0XA0U
+#define PINN17_GPIO40                          0X0A0U
+/*For ZNC Package*/
+#define PINT18_GPIO40                          0X0A0U
 
 /* PIN N16, MDIO_MDIO functionality */
-#define PINN16_GPIO41                         0XA4U
+#define PINN16_GPIO41                          0X0A4U
+/*For ZNC Package*/
+#define PINP18_GPIO41                          0X0A4U
 
 /* PIN M17, MDIO_MDC functionality */
-#define PINM17_GPIO42                          0XA8U
+#define PINM17_GPIO42                          0X0A8U
+/*For ZNC Package*/
+#define PINR19_GPIO42                          0X0A8U
 
 /* PIN B2, EPWM0_A functionality */
-#define PINB2_GPIO43                           0XACU
+#define PINB2_GPIO43                           0X0ACU
+/*For ZNC Package*/
+#define PINB5_GPIO43                           0X0ACU
 
 /* PIN B1, EPWM0_B functionality */
-#define PINB1_GPIO44                           0XB0U
+#define PINB1_GPIO44                           0X0B0U
+/*For ZNC Package*/
+#define PINA6_GPIO44                           0X0B0U
 
 /* PIN D3, EPWM1_A functionality */
-#define PIND3_GPIO45                           0XB4U
+#define PIND3_GPIO45                           0X0B4U
+/*For ZNC Package*/
+#define PINA5_GPIO45                           0X0B4U
 
 /* PIN D2, EPWM1_B functionality */
-#define PIND2_GPIO46                           0XB8U
+#define PIND2_GPIO46                           0X0B8U
+/*For ZNC Package*/
+#define PINA4_GPIO46                           0X0B8U
 
 /* PIN C2, EPWM2_A  functionality */
-#define PINC2_GPIO47                            0XBCU
+#define PINC2_GPIO47                           0X0BCU
+/*For ZNC Package*/
+#define PINA3_GPIO47                           0X0BCU
 
 /* PIN C1, EPWM2_B functionality */
-#define PINC1_GPIO48                           0XC0U
+#define PINC1_GPIO48                           0X0C0U
+/*For ZNC Package*/
+#define PINB4_GPIO48                           0X0C0U
 
 /* PIN E2, EPWM3_A functionality */
-#define PINE2_GPIO49                          0XC4U
+#define PINE2_GPIO49                           0X0C4U
+/*For ZNC Package*/
+#define PINA2_GPIO49                           0X0C4U
 
 /* PIN E3, PADAI functionality */
-#define PINE3_GPIO50                          0XC8U
+#define PINE3_GPIO50                           0X0C8U
+/*For ZNC Package*/
+#define PINB2_GPIO50                           0X0C8U
 
 /* PIN D1, EPWM4_A functionality */
-#define PIND1_GPIO51                           0XCCU
+#define PIND1_GPIO51                           0X0CCU
+/*For ZNC Package*/
+#define PINB1_GPIO51                           0X0CCU
 
 /* PIN E4, EPWM4_B functionality */
-#define PINE4_GPIO52                           0XD0U
+#define PINE4_GPIO52                           0X0D0U
+/*For ZNC Package*/
+#define PINB3_GPIO52                           0X0D0U
 
 /* PIN F2, EPWM5_A functionality */
-#define PINF2_GPIO53                           0XD4U
+#define PINF2_GPIO53                           0X0D4U
+/*For ZNC Package*/
+#define PINC2_GPIO53                           0X0D4U
 
 /* PIN G2, EPWM5_B functionality */
-#define PING2_GPIO54                           0XD8U
+#define PING2_GPIO54                           0X0D8U
+/*For ZNC Package*/
+#define PINC1_GPIO54                           0X0D8U
 
 /* PIN E1, EPWM6_A functionality */
-#define PINE1_GPIO55                           0XDCU
+#define PINE1_GPIO55                           0X0DCU
+/*For ZNC Package*/
+#define PINE3_GPIO55                           0X0DCU
 
 /* PIN F3, PADAO functionality */
-#define PINF3_GPIO56                           0XE0U
+#define PINF3_GPIO56                           0X0E0U
+/*For ZNC Package*/
+#define PINE2_GPIO56                           0X0E0U
 
 /* PIN F4, PADAP functionality */
-#define PINF4_GPIO57                           0XE4U
+#define PINF4_GPIO57                           0X0E4U
+/*For ZNC Package*/
+#define PIND2_GPIO57                           0X0E4U
 
 /* PIN F1, PADAQ functionality */
-#define PINF1_GPIO58                           0XE8U
+#define PINF1_GPIO58                           0X0E8U
+/*For ZNC Package*/
+#define PIND1_GPIO58                           0X0E8U
 
 /* PIN G3, EPWM8_A functionality */
-#define PING3_GPIO59                           0XECU
+#define PING3_GPIO59                           0X0ECU
+/*For ZNC Package*/
+#define PINE1_GPIO59                           0X0ECU
 
 /* PIN H2, EPWM8_B functionality */
-#define PINH2_GPIO60                           0XF0U
+#define PINH2_GPIO60                           0X0F0U
+/*For ZNC Package*/
+#define PINF1_GPIO60                           0X0F0U
 
 /* PIN G1, PADAT functionality */
-#define PING1_GPIO61                           0XF4U
+#define PING1_GPIO61                           0X0F4U
+/*For ZNC Package*/
+#define PINF2_GPIO61                           0X0F4U
 
 /* PIN J2,EPWM9_B functionality */
-#define PINJ2_GPIO62                           0XF8U
+#define PINJ2_GPIO62                           0X0F8U
+/*For ZNC Package*/
+#define PING1_GPIO62                           0X0F8U
+
 
 /* PIN G4,GPIO63 functionality */
-#define PING4_GPIO63                                  0XFCU
+#define PING4_GPIO63                           0X0FCU
 
 /* PIN J3,GPIO64 functionality */
-#define PINJ3_GPIO64                                  0X100U
+#define PINJ3_GPIO64                           0X100U
 
 /* PIN H1,GPIO65 functionality */
-#define PINH1_GPIO65                                  0X104U
+#define PINH1_GPIO65                           0X104U
 
 /* PIN J1,GPIO66 functionality */
-#define PINJ1_GPIO66                                  0X108U
+#define PINJ1_GPIO66                           0X108U
 
 /* PIN K2,PR1_PRU0_GPIO0 functionality */
-#define   PINK2_GPIO67                        0X10CU
+#define PINK2_GPIO67                           0X10CU
+/*For ZNC Package*/
+#define PING2_GPIO67                           0X10CU
 
 /* PIN J4,PR1_PRU0_GPIO1 functionality */
-#define   PINJ4_GPIO68                        0X110U
+#define PINJ4_GPIO68                           0X110U
+/*For ZNC Package*/
+#define PINH1_GPIO68                           0X110U
 
 /* PIN K4,PR1_PRU0_GPIO2 functionality */
-#define   PINK4_GPIO69                        0X114U
+#define PINK4_GPIO69                           0X114U
+/*For ZNC Package*/
+#define PINH2_GPIO69                           0X114U
 
 /* PIN K3,PR1_PRU0_GPIO9 functionality */
-#define   PINK3_GPIO70                        0X118U
+#define PINK3_GPIO70                           0X118U
+/*For ZNC Package*/
+#define PINJ1_GPIO70                           0X118U
 
 /* PIN V17,PR1_PRU1_GPIO0 functionality */
-#define   PINV17_GPIO71                        0X11CU
+#define PINV17_GPIO71                          0X11CU
+/*For ZNC Package*/
+#define PINV15_GPIO71                          0X11CU
 
 /* PIN T16,PR1_PRU1_GPIO1 functionality */
-#define   PINT16_GPIO72                        0X120U
+#define PINT16_GPIO72                          0X120U
+/*For ZNC Package*/
+#define PINW15_GPIO72                          0X120U
 
 /* PIN P15,PR1_PRU1_GPIO2 functionality */
-#define   PINP15_GPIO73                        0X124U
+#define PINP15_GPIO73                          0X124U
+/*For ZNC Package*/
+#define PINW16_GPIO73                          0X124U
 
 /* PIN R16,PR1_PRU1_GPIO9 functionality */
-#define   PINR16_GPIO74                        0X128U
-/* PIN L3, UART1_RXD functionality */
-#define PINL3_GPIO75                          0X12CU
+#define PINR16_GPIO74                          0X128U
+/*For ZNC Package*/
+#define PINV16_GPIO74                          0X128U
 
+/* PIN L3, UART1_RXD functionality */
+#define PINL3_GPIO75                           0X12CU
+/*For ZNC Package*/
+#define PINL2_GPIO75                           0X12CU
 
 /* PIN M3, UART1_TXD functionality */
-#define PINM3_GPIO76                          0X0130U
-
+#define PINM3_GPIO76                           0X130U
+/*For ZNC Package*/
+#define PINM1_GPIO76                           0X130U
 
 /* PIN B6, MMC_CLK functionality */
-#define PINB6_GPIO77                          0X134U
+#define PINB6_GPIO77                           0X134U
 
 /* PIN A4, MMC_CMD functionality */
-#define PINA4_GPIO78                          0X138U
+#define PINA4_GPIO78                           0X138U
 
 /* PIN B5, MMC_DAT0 functionality */
-#define PINB5_GPIO79                          0X13CU
+#define PINB5_GPIO79                           0X13CU
 
 /* PIN B4, MMC_DAT1 functionality */
-#define PINB4_GPIO80                          0X140U
+#define PINB4_GPIO80                           0X140U
 
 /* PIN A3, MMC_DAT2 functionality */
-#define PINA3_GPIO81                          0X144U
+#define PINA3_GPIO81                           0X144U
 
 /* PIN A2, MMC_DAT3 functionality */
-#define PINA2_GPIO82                          0X148U
+#define PINA2_GPIO82                           0X148U
 
 /* PIN C6, MMC_SDWP functionality */
-#define PINC6_GPIO83                          0X14CU
+#define PINC6_GPIO83                           0X14CU
 
 /* PIN A5, MMC_SDCD functionality */
-#define PINA5_GPIO84                          0X150U
+#define PINA5_GPIO84                           0X150U
 
 /* PIN L17, PR0_MDIO_MDIO functionality */
 #define PINL17_GPIO85                          0X154U
+/*For ZNC Package*/
+#define PINN17_GPIO85                          0X154U
 
 /* PIN L18, PR0_MDIO_MDC functionality */
 #define PINL18_GPIO86                          0X158U
+/*For ZNC Package*/
+#define PINP19_GPIO86                          0X158U
 
-/* PIN G17, PADCR functionality */
+/* PIN G17, PADCR functionality. ZCZ and ZNC package */
 #define PING17_GPIO87                          0X15CU
 
 /* PIN F17, PADCU functionality */
 #define PINF17_GPIO88                          0X160U
 
+
 /* PIN G18, PADCV functionality */
 #define PING18_GPIO89                          0X164U
+/*For ZNC Package*/
+#define PINJ18_GPIO89                          0X164U
 
 /* PIN G15, PADCT functionality */
 #define PING15_GPIO90                          0X168U
+/*For ZNC Package*/
+#define PING19_GPIO90                          0X168U
 
 /* PIN K15, PADCS functionality */
 #define PINK15_GPIO91                          0X16CU
+/*For ZNC Package*/
+#define PINL18_GPIO91                          0X16CU
 
 /* PIN K16, PADCQ functionality */
 #define PINK16_GPIO92                          0X170U
+/*For ZNC Package*/
+#define PINJ19_GPIO92                          0X170U
 
 /* PIN K17, PADCM functionality */
 #define PINK17_GPIO93                          0X174U
+/*For ZNC Package*/
+#define PINM18_GPIO93                          0X174U
 
 /* PIN K18, PADCN functionality */
 #define PINK18_GPIO94                          0X178U
+/*For ZNC Package*/
+#define PINL19_GPIO94                          0X178U
 
 /* PIN J18, PADCO functionality */
 #define PINJ18_GPIO95                          0X17CU
+/*For ZNC Package*/
+#define PINK19_GPIO95                          0X17CU
 
 /* PIN J17, PADCP functionality */
 #define PINJ17_GPIO96                          0X180U
+/*For ZNC Package*/
+#define PINL17_GPIO96                          0X180U
 
 /* PIN H18, PADDB functionality */
-#define PINH18_GPIO97                           0X184U
+#define PINH18_GPIO97                          0X184U
+/*For ZNC Package*/
+#define PINK18_GPIO97                          0X184U
 
 /* PIN L16, PADDA functionality */
-#define PINL16_GPIO98                           0X188U
+#define PINL16_GPIO98                          0X188U
+/*For ZNC Package*/
+#define PINM19_GPIO98                          0X188U
 
 /* PIN M16, PRU1_GPIO11 functionality */
 #define PINM16_GPIO99                          0X18CU
+/*For ZNC Package*/
+#define PINN18_GPIO99                          0X18CU
 
 /* PIN M15, PADCX functionality */
-#define PINM15_GPIO100                          0X190U
+#define PINM15_GPIO100                         0X190U
+/*For ZNC Package*/
+#define PINN19_GPIO100                         0X190U
 
 /* PIN H17, PADCY functionality */
-#define PINH17_GPIO101                          0X194U
+#define PINH17_GPIO101                         0X194U
+/*For ZNC Package*/
+#define PINH19_GPIO101                         0X194U
 
 /* PIN H16, PADCZ functionality */
-#define PINH16_GPIO102                          0X198U
+#define PINH16_GPIO102                         0X198U
+/*For ZNC Package*/
+#define PING14_GPIO102                         0X198U
 
 /* PIN F15, PADDH functionality */
-#define PINF15_GPIO103                          0X19CU
+#define PINF15_GPIO103                         0X19CU
+/*For ZNC Package*/
+#define PINE18_GPIO103                         0X19CU
+
 
 /* PIN C18, PADDK functionality */
-#define PINC18_GPIO104                          0X1A0U
+#define PINC18_GPIO104                         0X1A0U
 
 /* PIN D17, PADDL functionality */
-#define PIND17_GPIO105                          0X1A4U
+#define PIND17_GPIO105                         0X1A4U
 
 /* PIN D18, PADDJ functionality */
-#define PIND18_GPIO106                          0X1A8U
+#define PIND18_GPIO106                         0X1A8U
+/*For ZNC Package*/
+#define PINC19_GPIO106                         0X1A8U
 
 /* PIN E16, PADDI functionality */
-#define PINE16_GPIO107                          0X1ACU
+#define PINE16_GPIO107                         0X1ACU
+/*For ZNC Package*/
+#define PIND19_GPIO107                         0X1ACU
 
 /* PIN F16, PADDG functionality */
-#define PINF16_GPIO108                           0X1B0U
+#define PINF16_GPIO108                         0X1B0U
+/*For ZNC Package*/
+#define PINE19_GPIO108                         0X1B0U
 
 /* PIN F18, PADDC functionality */
-#define PINF18_GPIO109                          0X1B4U
+#define PINF18_GPIO109                         0X1B4U
+/*For ZNC Package*/
+#define PING18_GPIO109                         0X1B4U
 
 /* PIN G16, PADDD functionality */
-#define PING16_GPIO110                          0X1B8U
+#define PING16_GPIO110                         0X1B8U
+/*For ZNC Package*/
+#define PINF18_GPIO110                         0X1B8U
 
-/* PIN E17, PADDE functionality */
-#define PINE17_GPIO111                           0X1BCU
+/* PIN E17, PADDE functionality. ZCZ and ZNC package */
+#define PINE17_GPIO111                         0X1BCU
 
 /* PIN E18, PADDF functionality */
-#define PINE18_GPIO112                           0X1C0U
+#define PINE18_GPIO112                         0X1C0U
+/*For ZNC Package*/
+#define PINF19_GPIO112                         0X1C0U
 
 /* PIN C16, PADDR functionality */
-#define PINC16_GPIO113                          0X1C4U
+#define PINC16_GPIO113                         0X1C4U
+/*For ZNC Package*/
+#define PINB18_GPIO113                         0X1C4U
 
 /* PIN A17, PADDQ functionality */
-#define PINA17_GPIO114                          0X1C8U
+#define PINA17_GPIO114                         0X1C8U
+/*For ZNC Package*/
+#define PINA18_GPIO114                         0X1C8U
 
 /* PIN B18, PADDM functionality */
-#define PINB18_GPIO115                           0X1CCU
+#define PINB18_GPIO115                         0X1CCU
+/*For ZNC Package*/
+#define PIND18_GPIO115                         0X1CCU
 
 /* PIN B17, PADDN functionality */
-#define PINB17_GPIO116                          0X1D0U
+#define PINB17_GPIO116                         0X1D0U
+/*For ZNC Package*/
+#define PINC18_GPIO116                         0X1D0U
 
 /* PIN D16, PADDO functionality */
-#define PIND16_GPIO117                          0X1D4U
+#define PIND16_GPIO117                         0X1D4U
+/*For ZNC Package*/
+#define PINB19_GPIO117                         0X1D4U
 
-/* PIN C17, PADDP functionality */
-#define PINC17_GPIO118                          0X1D8U
+/* PIN C17, PADDP functionality. ZCZ and ZNC package */
+#define PINC17_GPIO118                         0X1D8U
 
 /* PIN D15, PADDT functionality */
-#define PIND15_GPIO119                          0X1DCU
+#define PIND15_GPIO119                         0X1DCU
+/*For ZNC Package*/
+#define PINB16_GPIO119                         0X1DCU
 
 /* PIN C15, PADDS functionality */
 #define PINC15_GPIO120                         0X1E0U
+/*For ZNC Package*/
+#define PINB17_GPIO120                         0X1E0U
 
 /* PIN P2, PADBL functionality */
-#define PINP2_GPIO121                         0X1E4U
+#define PINP2_GPIO121                          0X1E4U
+/*For ZNC Package*/
+#define PINT1_GPIO121                          0X1E4U
+
 
 /* PIN B16, PADEP functionality */
-#define PINB16_GPIO122                          0X01E8U
+#define PINB16_GPIO122                         0X01E8U
 
 /* PIN D14, PADET functionality */
-#define PIND14_GPIO123                           0X1ECU
+#define PIND14_GPIO123                          0X1ECU
 
 /* PIN A16, PADEQ functionality */
 #define PINA16_GPIO124                          0X01F0U
 
 /* PIN D13, PADEU functionality */
-#define PIND13_GPIO125                             0X1F4U
+#define PIND13_GPIO125                          0X1F4U
 
 /* PIN B15, PADER functionality */
-#define PINB15_GPIO126                          0X1F8U
+#define PINB15_GPIO126                         0X1F8U
+/*For ZNC Package*/
+#define PINA17_GPIO126                         0X1F8U
 
 /* PIN C13, PADEV functionality */
-#define PINC13_GPIO127                            0X01FCU
+#define PINC13_GPIO127                         0X1FCU
+/*For ZNC Package*/
+#define PINA16_GPIO127                         0X1FCU
+
 
 /* PIN A15, PADES functionality */
 #define PINA15_GPIO128                          0X200U
@@ -3168,50 +3356,78 @@ typedef struct {
 #define PINC14_GPIO129                          0X0204U
 
 /* PIN B14, PADBH functionality */
-#define PINB14_GPIO130                           0X208U
+#define PINB14_GPIO130                         0X208U
+/*For ZNC Package*/
+#define PINB15_GPIO130                         0X208U
 
 /* PIN A14, PADBI functionality */
-#define PINA14_GPIO131                           0X20CU
+#define PINA14_GPIO131                         0X20CU
+/*For ZNC Package*/
+#define PINA15_GPIO131                         0X20CU
 
 /* PIN C12, PADBK functionality */
-#define PINC12_GPIO132                          0X210U
+#define PINC12_GPIO132                         0X210U
+/*For ZNC Package*/
+#define PINA14_GPIO132                         0X210U
 
 /* PIN D11, PADBJ functionality */
-#define PIND11_GPIO133                          0X214U
+#define PIND11_GPIO133                         0X214U
+/*For ZNC Package*/
+#define PINB14_GPIO133                         0X214U
 
-/* PIN B13, PADBN functionality */
-#define PINB13_GPIO134                          0X218U
+/* PIN B13, PADBN functionality. ZCZ and ZNC package */
+#define PINB13_GPIO134                         0X218U
 
-/* PIN A13 PADBM functionality */
-#define PINA13_GPIO135                          0X21CU
+/* PIN A13 PADBM functionality. ZCZ and ZNC package */
+#define PINA13_GPIO135                         0X21CU
+
 /* PIN B12 GPIO136 functionality */
 #define   PINB12_GPIO136                                0X220U
 /* PIN A12 GPIO137 functionality */
 #define   PINA12_GPIO137                                0X224U
+
 /* PIN M2 CLKOUT0 functionality */
-#define   PINM2_GPIO138                                0X228U
+#define PINM2_GPIO138                          0X228U
+/*For ZNC Package*/
+#define PINJ3_GPIO138                          0X228U
+
 /* PIN V2 USB0_DP functionality */
-#define   PINV2_GPIO139                                0X22CU
+#define PINV2_GPIO139                          0X22CU
+/*For ZNC Package*/
+#define PINV1_GPIO139                          0X22CU
+
 /* PIN U3 USB0_DM functionality */
-#define   PINU3_GPIO140                                0X230U
+#define PINU3_GPIO140                          0X230U
+/*For ZNC Package*/
+#define PINU1_GPIO140                          0X230U
 
 /* PIN C3, PADFP functionality */
-#define PINC3_WARMRSTn                          0X0234U
+#define PINC3_WARMRSTn                         0X0234U
 
 /* PIN D4, PADEO functionality */
-#define PIND4_SAFETY_ERRORn                        0X238U
+#define PIND4_SAFETY_ERRORn                     0X238U
+/*For ZNC Package*/
+#define PINC5_SAFETY_ERRORn                     0X238U
 
 /* PIN C5, PADFG functionality */
 #define PINC5_TDI                             0X23CU
+/*For ZNC Package*/
+#define PINC7_TDI                             0X23CU
 
 /* PIN C4, PADFE functionality */
 #define PINC4_TDO                             0X240U
+/*For ZNC Package*/
+#define PINA7_TDO                             0X240U
 
 /* PIN B3, PADFF functionality */
 #define PINB3_TCK                              0X248U
+/*For ZNC Package*/
+#define PINB6_TCK                              0X248U
 
 /* PIN D5, PADFI functionality */
 #define PIND5_TMS                             0X244U
+/*For ZNC Package*/
+#define PINB7_TMS                             0X244U
 
 
 /* WARM_RST_CAUSE_CLR */

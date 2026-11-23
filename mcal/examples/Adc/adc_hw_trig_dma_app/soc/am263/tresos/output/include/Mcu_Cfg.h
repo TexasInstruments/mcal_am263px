@@ -290,6 +290,9 @@ enum
 
 /** \brief MCU PLL timeout.*/
 #define MCU_PLL_TIMEOUT_DURATION            (13200U)
+
+#define MCU_CFG_DEM_ENABLE  (STD_OFF)
+
 /* @} */
 /*
 *Design: MCAL-14296, MCAL-14294, MCAL-14291
@@ -299,7 +302,9 @@ enum
  * @{
  */
 
+/* MCU DEM Event Configuration*/
 
+/* Design: MCAL-15239, MCAL-15240 */
 
 /* @} */
 /* MCU Clock Config Size */
