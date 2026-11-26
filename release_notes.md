@@ -1,15 +1,15 @@
 # Introduction
 
-This is the release notes for MCAL AM26xx 26.01.00 done on 17-Oct-2026.
+This is the release note for MCAL AM26xx 26.01.00 done on 26-Nov-2026.
 The MCAL package consists of MCAL Driver & Applications for AM26xx family of devices. The MCAL modules are compliant to AUTOSAR specification versioned **4.3.1**.
-Note: This release note describes the changes from previously released version. For details on previous release notes, refer ${MCAL_INSTALL_PATH}/relnotes_archive folder.
+Note: This release note describes the changes from previously released version. For details on previous release notes, refer `${MCAL_INSTALL_PATH}/relnotes_archive` folder.
 
 ## Licensing
 Refer to manifest file [mcal_manifest.html](./mcal_manifest.html) and [license.md](./license.md) present in installation base path
 
 ## Getting Started
 The AM263x [HTML][am263x_user_guide_label] /AM263Px [HTML][am263px_user_guide_label] /AM261x [HTML][am261x_user_guide_label] User Guide provides the documentation and references necessary to begin development on TI's platforms using AM263x/AM263Px/AM261x.
-This document details about supported driver, installation, dependencies, build instructions, steps to run example applications. This release package also includes module specific User Guides, test reports, configurator User Guide and memory footprint details.
+This document details about the supported driver, installation, dependencies, build instructions, steps to run example applications. This release package also includes module specific User Guides, test reports, configurator User Guide and memory footprint details.
 
 ## Dependencies
 
@@ -185,12 +185,60 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
   </thead>
   <tbody>
     <tr>
+      <td>MCAL-42502</td>
+      <td>CAN mailbox size is incremented incorrectly</td>
+      <td>CAN</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Rx FIFO size is now incremented once per mailbox instead of once per HW filter</td>
+    </tr>
+    <tr>
+      <td>MCAL-43326</td>
+      <td>Rx FIFO acknowledge index not wrapped in Can_mcanReadRxFIFO</td>
+      <td>CAN</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>MCAN_writeRxFIFOAck() now rejects an acknowledge index equal to the Rx FIFO size. Valid indexes are 0 to size-1</td>
+    </tr>
+    <tr>
+      <td>MCAL-42510</td>
+      <td>Incorrect Implementation of EPWM_setDeadBandControlShadowLoadMode() function</td>
+      <td>CDD PWM</td>
+      <td>Major</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Corrected the register bit mask to enable the intended functionality</td>
+    </tr>
+    <tr>
+      <td>MCAL-41777</td>
+      <td>Software getting stuck in Eth_processTxBuffDesc</td>
+      <td>ETH</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>SchM entry and exit was divided into 2 different function which led to exit call before entry for custom usecases</td>
+    </tr>
+    <tr>
       <td>MCAL-41779</td>
       <td>ETH: unbalanced critical section implementation in TX and RX packet processing</td>
       <td>ETH</td>
       <td>Minor</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Split the large SchM exclusive areas in the Eth RX/TX descriptor processing paths into short, granular critical sections</td>
+    </tr>
+    <tr>
+      <td>MCAL-42563</td>
+      <td>FLS PHY APP SIP Fails if DMA and PHY is turned on</td>
+      <td>FLS</td>
+      <td>Major</td>
+      <td>AM263Px, AM261x</td>
+      <td>PHY was disabled before DMA read completion, this is now corrected.</td>
+    </tr>
+    <tr>
+      <td>MCAL-42668</td>
+      <td>AM263x/AM263Px: ICU version missing in Plugin template</td>
+      <td>ICU</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px</td>
+      <td>The plugin config template files are now fixed for both am263x and am263px platforms</td>
     </tr>
     <tr>
       <td>MCAL-42269</td>
@@ -206,7 +254,15 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Spi</td>
       <td>Major</td>
       <td>AM263x, AM263Px, AM261x</td>
-      <td>Build issue is fixed now if SpiEnableCs is not selected in EB it will assign with SPI_CS_VIA_PERIPHERAL_ENGINE</td>
+      <td>Fixed the build issue when SpiEnableCs is not selected in EB; it now defaults to SPI_CS_VIA_PERIPHERAL_ENGINE</td>
+    </tr>
+    <tr>
+      <td>MCAL-42660</td>
+      <td>Job notification to be sent before Start of next job</td>
+      <td>Spi</td>
+      <td>Minor</td>
+      <td>AM263x, AM263Px, AM261x</td>
+      <td>Job end notification was sent after scheduling/start of next job, its fixed to have it before start of next job</td>
     </tr>
     <tr>
       <td>MCAL-42417</td>
@@ -272,8 +328,8 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
     <tr>
       <td>ADC-R specific checks in configurator</td>
       <td>
-          ADC-R instance in AM263Px supports only 4 channels (other instances supports 6 channels).<br>
-          These checks are not performed in the EB configurator. User need to ensure they select the right configuration based on the AM263Px TRM
+          ADC-R instance in AM263Px supports only 4 channels (other instances support 6 channels).<br>
+          These checks are not performed in the EB configurator. Users need to ensure they select the right configuration based on the AM263Px TRM
       </td>
       <td>ADC</td>
       <td>AM263Px</td>
@@ -284,10 +340,9 @@ Internal Files are organized in V0, V1, V2 and V3 folders. The below table lists
       <td>Multiple Interrupt sources to single Interrupt Xbar line not supported</td>
       <td>Connecting Multiple Interrupt sources to single Interrupt Xbar line is not supported</td>
       <td>MCU</td>
-      <td>Minor(Limitation)</td>
       <td>AM263x, AM263Px, AM261x</td>
       <td>Use single interrupt source to a XBar</td>
-      <td>NA</td>
+      <td>Minor(Limitation)</td>
     </tr>
   </tbody>
 </table>
@@ -316,7 +371,7 @@ CSP - Compliance Support Package
       <td>1</td>
       <td>Customer Docs: User Guide</td>
       <td>Yes</td>
-      <td>Installer:mcal_docs\userguide\*platform*\index.html</td>
+      <td>Installer: mcal_docs\userguide\*platform*\index.html</td>
       <td>
           User Guide is present in installer as well as below TI software-dl locations
           <ol>
@@ -344,14 +399,14 @@ CSP - Compliance Support Package
         </ol>
       </td>
       <td>Yes</td>
-      <td>Installer:mcal_docs\csp\*platform*\mcal_static_analysis_report.html</td>
+      <td>Installer: mcal_docs\csp\*platform*\mcal_static_analysis_report.html</td>
       <td></td>
     </tr>
     <tr>
       <td>4</td>
       <td>Test Reports: Test Cases and Test Results</td>
       <td>Yes</td>
-      <td>Installer:mcal_docs\csp\*platform*\mcal_test_report.xlsx</td>
+      <td>Installer: mcal_docs\csp\*platform*\mcal_test_report.html</td>
       <td></td>
     </tr>
     <tr>
@@ -366,9 +421,9 @@ CSP - Compliance Support Package
           <li>Function</li>
         </ol>
       </td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+      <td>Yes</td>
+      <td>CSP: Dynamic_Analysis_Report\</td>
+      <td>This is applicable only for 26.01.00.07 certified release.</td>
     </tr>
     <tr>
       <td>6</td>
@@ -381,51 +436,44 @@ CSP - Compliance Support Package
           <li>Test Case→Arch Test Case→Design</li>
         </ol>
       </td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+      <td>Yes</td>
+      <td>CSP: Traceability_Report\</td>
+      <td>This is applicable only for 26.01.00.07 certified release.</td>
     </tr>
     <tr>
       <td>7</td>
       <td>SW FMEA</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+      <td>Yes</td>
+      <td>CSP: AM26xx_MCAL_Software_FMEA.xlsx</td>
+      <td>This is applicable only for 26.01.00.07 certified release.</td>
     </tr>
     <tr>
       <td>8</td>
       <td>Detailed Design Document</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+      <td>Yes</td>
+      <td>CSP: Software Detailed Design Documents\</td>
+      <td>This is applicable only for 26.01.00.07 certified release.</td>
     </tr>
     <tr>
       <td>9</td>
       <td>Software Product Specification: List of functional, safety requirements for SW components</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+      <td>Yes</td>
+      <td>CSP: AM26xx MCAL Software Product Specification-v86-20261016_013257.pdf</td>
+      <td>This is applicable only for 26.01.00.07 certified release.</td>
     </tr>
     <tr>
       <td>10</td>
-      <td>Architecture Document</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+      <td>SW Safety Manual</td>
+      <td>Yes</td>
+      <td>CSP: AM26xx MCAL Functional Safety Manual-v52-20261022_003707.pdf</td>
+      <td>This is applicable only for 26.01.00.07 certified release.</td>
     </tr>
     <tr>
       <td>11</td>
-      <td>SW Safety Manual</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
-    </tr>
-    <tr>
-      <td>12</td>
-      <td>Safety Assessment</td>
-      <td>No</td>
-      <td>CSP</td>
-      <td>Will be available in future releases. Please refer to device roadmap for details.</td>
+      <td>SW Checksum</td>
+      <td>Yes</td>
+      <td>CSP: mcal_am263x_checksums.md</td>
+      <td>This is applicable only for 26.01.00.07 certified release.</td>
     </tr>
   </tbody>
 </table>
@@ -536,12 +584,13 @@ Example Use Cases:
 # CI/CD Strategy
 
 AM26xx MCAL is also available on GitHub.
-- AM263X - https://github.com/TexasInstruments/mcal_am263x
-- AM263PX - https://github.com/TexasInstruments/mcal_am263px
-- AM261X - https://github.com/TexasInstruments/mcal_am261x
-These GitHub repositories always reflects the leading and bleeding edge of MCAL development, providing early access to the latest features, fixes, and improvements as they are developed.
+- AM263X - [https://github.com/TexasInstruments/mcal_am263x](https://github.com/TexasInstruments/mcal_am263x)
+- AM263PX - [https://github.com/TexasInstruments/mcal_am263px](https://github.com/TexasInstruments/mcal_am263px)
+- AM261X - [https://github.com/TexasInstruments/mcal_am261x](https://github.com/TexasInstruments/mcal_am261x)
 
-Disclaimer: The GitHub repositories contains software that is not fully tested and may include bugs, errors, or defects that could cause system instability or unexpected behavior. Always review and validate code before use in any application.
+These GitHub repositories always reflect the leading and bleeding edge of MCAL development, providing early access to the latest features, fixes, and improvements as they are developed.
+
+Disclaimer: The GitHub repositories contain software that is not fully tested and may include bugs, errors, or defects that could cause system instability or unexpected behavior. Always review and validate code before use in any application.
 
 Official releases are published under the Releases section of the GitHub repository. These correspond to the versioned releases documented in these release notes and have undergone the quality and testing criteria.
 
@@ -645,7 +694,7 @@ The table below provides a descriptive reference regarding package version numbe
 </table>
 
 TI is a global semiconductor design and manufacturing company. Innovate with 100,000+ analog ICs and embedded processors, along with software, tools and the industry‘s largest sales/support staff.
-[© Copyright 1995-2025][copyright_label], Texas Instruments Incorporated. All rights reserved.
+[© Copyright 1995-2026][copyright_label], Texas Instruments Incorporated. All rights reserved.
 
 [Trademarks][trademark_label] | [Privacy Policy][policy_label] | [Terms of use][terms_use_label] | [Terms of sale][terms_sale_label]
 

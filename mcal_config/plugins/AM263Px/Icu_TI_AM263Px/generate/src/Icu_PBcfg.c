@@ -70,7 +70,13 @@ extern "C" {
 [!AUTOSPACING!]
 
 /* ---- Perform version checking  ----------------------------------------- */
- #if ((ICU_SW_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U))||(ICU_SW_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
+#if ((ICU_SW_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U)) || \
+ (ICU_SW_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
+  #error "Version numbers of Icu_Cfg.c and Icu.h are inconsistent!"
+#endif
+
+#if ((ICU_CFG_MAJOR_VERSION != ([!"substring-before($moduleSoftwareVer,'.')"!]U)) || \
+    (ICU_CFG_MINOR_VERSION != ([!"substring-before(substring-after($moduleSoftwareVer,'.'),'.')"!]U)))
   #error "Version numbers of Icu_PBcfg.c and Icu_Cfg.h are inconsistent!"
 #endif
 

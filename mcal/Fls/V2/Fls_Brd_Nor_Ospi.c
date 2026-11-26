@@ -445,8 +445,16 @@ Std_ReturnType Nor_OspiRead(OSPI_Handle handle, uint32 offset, uint8 *buf, uint3
             retVal = Fls_Ospi_readIndirect(handle, &transaction);
         }
 #if (STD_ON == FLS_OSPI_PHY_ENABLE)
-        Fls_PhyDisable();
-#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
+#if (STD_ON == FLS_DMA_ENABLE)
+        /* If DMA transfer is queued, then PHY must stay enabled until the transfer completes; FLS_DmaRxIsrHandler
+         * disables it then. Disable the PHY here for every other read - a CPU read (flsEdmaReadEnabled is FALSE)
+         * or a DMA read that did not start a transfer (stage is not WAIT */
+        if ((Fls_DrvObj.flsEdmaReadEnabled == FALSE) || (Fls_DrvObj.flsDmaStage != FLS_S_READ_DMA_WAIT_STAGE))
+#endif
+        {
+            Fls_PhyDisable();
+        }
+#endif
     }
 
     return retVal;
@@ -947,6 +955,13 @@ static void Fls_JobDoneNotification1(Fls_JobType job, uint32 chunkSize)
              * reach FLS_S_READ_DMA_DONE stage during READ ISR; READ job completion notification uses the else path. */
             if ((Fls_DrvObj.flsDmaStage == FLS_S_READ_DMA_DONE) || (Fls_DrvObj.flsEdmaReadEnabled == FALSE))
             {
+#if (STD_ON == FLS_OSPI_PHY_ENABLE)
+                /* Disable phy here for DMA reads */
+                if (Fls_DrvObj.flsDmaStage == FLS_S_READ_DMA_DONE)
+                {
+                    Fls_PhyDisable();
+                }
+#endif /* #if (STD_ON == FLS_OSPI_PHY_ENABLE) */
                 Fls_JobDoneNotification(chunkSize, job);
             }
             /* TI_COVERAGE_GAP_STOP */

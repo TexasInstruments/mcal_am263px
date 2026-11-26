@@ -146,10 +146,6 @@ typedef struct Can_FdMsgRAMConfigObjType_s
     /*!< Tx number of FIFO elements */
     uint16                     rxBuffNum;
     /*!< Rx number of Buffer elements */
-    uint16                     rxFIFO0Num;
-    /*!< Rx number of FIFO0 elements */
-    uint16                     rxFIFO1Num;
-    /*!< Rx number of FIFO1 elements */
 } Can_FdMsgRAMConfigObjType;
 
 /**

@@ -5779,8 +5779,6 @@ Can FD controller Message RAM Configuration object structure. This structure wil
 |  uint16 | txBuffNum |  |
 |  uint16 | txFIFONum |  |
 |  uint16 | rxBuffNum |  |
-|  uint16 | rxFIFO0Num |  |
-|  uint16 | rxFIFO1Num |  |
 
 
 
@@ -14510,7 +14508,7 @@ Will be updated in future release
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| can   | 9644    | 1    | 20020    |
+| can   | 9560    | 1    | 20000    |
  
 ### CMPSS
 
@@ -14534,7 +14532,7 @@ Will be updated in future release
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| epwm   | 15325    | 7    | 49048    |
+| epwm   | 15333    | 7    | 49048    |
  
 ### ETH
 
@@ -14639,7 +14637,7 @@ Below table is memory footprint with minimum buffer number (RX=2, TX=2).
 
 | Modules   | .text  |  .data  |  .bss  |
 | ------------ | ----------| -------- | ---------- |
-| spi   | 6678    | 1    | 2924    |
+| spi   | 6692    | 1    | 2924    |
  
 ### UART
 

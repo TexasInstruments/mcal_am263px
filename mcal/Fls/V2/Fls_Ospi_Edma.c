@@ -117,9 +117,10 @@ void FLS_edmaTransfer(uint8 *dst, uint8 *src, uint32 length, OSPI_Handle ospiHan
     Cdd_Dma_ParamEntry edmaParam0, edmaParam1;
     uint32             remaining_size, size, size_adjustment;
 
-    /* Dma buffers and length */
-    Fls_DrvObj.flsDmaLength = (((((OSPI_Config *)Fls_DrvObj.spiHandle)->object)->transaction)->count);
-    Fls_DrvObj.flsDmaDstBuf = (uint8 *)(((((OSPI_Config *)Fls_DrvObj.spiHandle)->object)->transaction)->buf);
+    /* Dma buffers and length — use the function arguments directly.
+     * object->transaction is NULL in this driver so reading it would dereference a null pointer. */
+    Fls_DrvObj.flsDmaLength = length;
+    Fls_DrvObj.flsDmaDstBuf = dst;
     size_adjustment         = 0U;
     /* Chaining is done here fo DMA transfer so length is divided into logical two sizes */
     size = length / FLS_MAX_EDMA_COUNT;
